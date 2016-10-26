@@ -1,0 +1,383 @@
+$main-color: #f58d2c;
+$main-background: white;
+$darkened-background: whitesmoke;
+
+body {
+    background-color: $main-color;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: 0 50px;
+}
+
+h4 {
+    margin: 0;
+}
+
+#content {
+    padding-top: 60px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: $main-color;
+}
+
+.container {
+    display: flex;
+    margin: 0;
+    padding: 0 10px 0 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+}
+
+.gaps {
+    margin: -1em 0 0 -1em;
+}
+
+.item {
+    flex: 1;
+}
+
+.gaps > .item {
+    padding: 1em 0 0 1em;
+}
+
+.auto-size {
+    flex: 1
+}
+
+nav {
+    background: black;
+    width: 100%;
+    align-items: center;
+    position: fixed;
+    height: 50px;
+
+}
+
+sidebar {
+    width: 33.333% !important;
+}
+
+main-router {
+    flex: 1;
+}
+
+.status:hover {
+    background-color: $darkened-background;
+}
+
+/* The starting CSS styles for the enter animation */
+status.ng-enter {
+    transition:0.5s linear all;
+    opacity:0;
+}
+
+/* The finishing CSS styles for the enter animation */
+status.ng-enter.ng-enter-active {
+    opacity:1;
+}
+
+.new-status-notification {
+    font-size: 1.1em;
+    background-color: $darkened-background;
+    border-bottom-color: darken($darkened-background, 5%);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+
+    &:hover {
+        background-color: darken($darkened-background, 5%);
+    }
+
+    p {
+        margin: 0px;
+        padding: 10px;
+    }
+}
+
+.status.compact {
+    color: rgba(0, 0, 0, 0.42);
+    font-weight: 300;
+
+    p {
+        margin: 0;
+        font-size: 0.8em
+    }
+}
+
+/* Panel */
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    background-color: $main-background;
+    margin: 0.5em;
+
+    border-radius: 0.5em;
+}
+
+.panel-heading {
+    border-radius: 0.5em 0.5em 0 0;
+    background-size: cover;
+    background-color: bisque;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.panel-footer {
+    background-color: bisque;
+    border-radius: 0 0 0.5em 0.5em;
+}
+
+.panel-body > p {
+    margin: 1em;
+}
+
+.attachments {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.attachment, attachment {
+    flex: 1 0 30%;
+    display: flex;
+    margin: 0.2em;
+    align-self: flex-start;
+
+    img {
+        border: 1px solid;
+        border-radius: 0.5em;
+        width: 100%;
+    }
+
+    video {
+        border: 1px solid;
+        border-radius: 0.5em;
+        width: 100%;
+    }
+
+    .oembed {
+        border: 1px solid rgba(0, 0, 0, 0.14);
+        width: 100%;
+
+        display: flex;
+        .image {
+            flex: 1;
+            display: flex;
+            img {
+                border: 0px;
+                border-radius: 0;
+            }
+        }
+
+        .text {
+            flex: 2;
+            margin: 8px;
+            h1 {
+                font-size: 14px;
+                margin: 0px;
+
+                a {
+                    color: black;
+                }
+            }
+        }
+    }
+}
+
+.media-body {
+    flex: 1
+}
+
+#content {
+    margin: auto;
+    max-width: 920px;
+}
+
+.media-left {
+    width: 10% !important;
+}
+
+.media-body {
+    flex: 1;
+    padding-left: 0.3em;
+}
+
+.status .avatar {
+    width: 48px;
+}
+
+.status.compact .avatar {
+    width: 32px;
+}
+
+.status {
+    padding: 0.5em;
+    padding-right: 1em;
+    border-bottom: 1px solid silver;
+}
+
+.status-el:last-child .status {
+    border: none
+}
+
+[ng-click] {
+    cursor: pointer;
+}
+
+nav-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav-panel li {
+    border-bottom: 1px solid silver;
+    padding: 0.5em;
+    padding-left: 1em;
+}
+
+nav-panel li:last-child {
+    border: none;
+}
+
+nav-panel a {
+    display: block;
+    width: 100%;
+}
+
+.status-el p {
+    margin: 0;
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+}
+
+.user-info {
+    padding: 1em;
+    img {
+        border: 3px solid;
+        border-radius: 0.5em
+    }
+
+    .user-screen-name {
+        font-weight: lighter;
+    }
+}
+
+.user-counts {
+    display: flex;
+    padding: 1em 1em 0em 1em;
+}
+
+.user-count {
+    flex: 1;
+
+    h5 {
+        font-weight: lighter;
+        margin: 0;
+    }
+
+    span {
+        color: $main-color;
+    }
+}
+
+.fa {
+    color: $main-color;
+}
+
+.status-actions {
+    width: 50%;
+    display: flex;
+
+    div, favorite-button {
+        flex: 1;
+    }
+}
+
+status-text-container {
+    display: block;
+}
+
+attention {
+    color: $main-color;
+}
+
+.form-bottom {
+    display: flex;
+    padding: 0.5em;
+
+    media-upload {
+        font-size: 26px;
+        flex: 1;
+    }
+
+    button {
+        flex: 2;
+    }
+}
+
+.status-el {
+    line-height: 18px;
+
+    .notify {
+        .avatar {
+            border-width: 3px;
+            border-color: $main-color;
+            border-style: solid;
+        }
+    }
+
+    .media-left {
+        img {
+            margin-top: 0.2em;
+            float: right;
+            margin-right: 0.3em;
+            border-radius: 20%;
+        }
+    }
+
+    .retweet-info {
+        padding: 0.3em;
+
+        .media-left {
+            display: flex;
+
+            i {
+                align-self: center;
+                text-align: right;
+                flex: 1;
+                padding-right: 0.3em;
+            }
+        }
+    }
+
+    .media-heading {
+        small {
+            font-weight: lighter;
+        }
+    }
+}

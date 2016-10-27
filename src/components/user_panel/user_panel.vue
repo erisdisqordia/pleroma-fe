@@ -1,0 +1,39 @@
+<template>
+  <div class="user-panel">
+    <div v-if='user' class="panel panel-default" v-bind:style="style">
+      <!-- Default panel contents -->
+      <div class="panel-heading text-center">
+        <div class='user-info'>
+          <img :src="user.profile_image_url">
+          <span class="glyphicon glyphicon-user"></span>
+          <div class='user-name'>{{user.name}}</div>
+          <div class='user-screen-name'>@{{user.screen_name}}</div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="user-counts">
+          <div class="user-count">
+            <h5>Statuses</h5>
+            <span>{{user.statuses_count}}</span>
+          </div>
+          <div class="user-count">
+            <h5>Following</h5>
+            <span>{{user.friends_count}}</span>
+          </div>
+          <div class="user-count">
+            <h5>Followers</h5>
+            <span>{{user.followers_count}}</span>
+          </div>
+        </div>
+        <p>{{user.description}}</p>
+      </div>
+
+      <div class="panel-footer">
+        <post-status-form></post-status-form>
+      </div>
+    </div>
+    <login-form v-if='!user'></login-form>
+  </div>
+</template>
+
+<script src="./user_panel.js"></script>

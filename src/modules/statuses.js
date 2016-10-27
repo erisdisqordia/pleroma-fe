@@ -82,7 +82,7 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
     visibleStatuses: newVisibleStatuses,
     newStatusCount: newNewStatusCount,
     maxId: newStatuses[0].id,
-    minVisibleId: last(newVisibleStatuses).id,
+    minVisibleId: (last(newVisibleStatuses) || { id: undefined }).id,
     faves: unionBy(faves, addedFaves, 'id')
   }
 }

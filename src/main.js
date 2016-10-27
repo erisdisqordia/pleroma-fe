@@ -4,14 +4,16 @@ import Vuex from 'vuex'
 import App from './App.vue'
 import PublicTimeline from './components/public_timeline/public_timeline.vue'
 
-import statuses from './modules/statuses.js'
+import statusesModule from './modules/statuses.js'
+import usersModule from './modules/users.js'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
 
 const store = new Vuex.Store({
   modules: {
-    statuses
+    statuses: statusesModule,
+    users: usersModule
   }
 })
 
@@ -30,3 +32,9 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+const statusesEx = require('../test/fixtures/statuses.json')
+
+setTimeout(() => {
+  store.commit('addNewStatuses', { statuses: statusesEx, timeline: 'public', showImmediately: false })
+}, 3000)

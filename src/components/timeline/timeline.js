@@ -2,10 +2,16 @@ import Status from '../status/status.vue'
 
 const Timeline = {
   props: [
-    'timeline'
+    'timeline',
+    'timelineName'
   ],
   components: {
     Status
+  },
+  methods: {
+    showNewStatuses () {
+      this.$store.commit('showNewStatuses', { timeline: this.timelineName })
+    }
   }
 }
 

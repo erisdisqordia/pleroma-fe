@@ -1,4 +1,4 @@
-import { last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
+import { slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
 // import moment from 'moment'
 
 const defaultState = {
@@ -93,6 +93,12 @@ const statuses = {
     addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
       state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
       state.allStatuses = unionBy(state.timelines[timeline].statuses, state.allStatuses.id)
+    },
+    showNewStatuses (state, { timeline }) {
+      const oldTimeline = (state.timelines[timeline])
+
+      oldTimeline.newStatusCount = 0
+      oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
     }
   }
 }

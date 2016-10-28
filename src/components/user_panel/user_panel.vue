@@ -1,8 +1,8 @@
 <template>
   <div class="user-panel">
-    <div v-if='user' class="panel panel-default" v-bind:style="style">
+    <div v-if='user' class="panel panel-default">
       <!-- Default panel contents -->
-      <div class="panel-heading text-center">
+      <div class="panel-heading text-center" v-bind:style="style">
         <div class='user-info'>
           <img :src="user.profile_image_url">
           <span class="glyphicon glyphicon-user"></span>

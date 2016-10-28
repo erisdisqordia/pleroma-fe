@@ -1,5 +1,5 @@
-import { slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
-// import moment from 'moment'
+import { map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
+import moment from 'moment'
 
 const defaultState = {
   allStatuses: [],
@@ -87,6 +87,14 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
   }
 }
 
+const updateTimestampsInStatuses = (statuses) => {
+  return map(statuses, (status) => {
+    // Parse date
+    status.created_at_parsed = moment(status.created_at).fromNow()
+    return status
+  })
+}
+
 const statuses = {
   state: defaultState,
   mutations: {
@@ -99,6 +107,9 @@ const statuses = {
 
       oldTimeline.newStatusCount = 0
       oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
+    },
+    updateTimestamps (state) {
+      updateTimestampsInStatuses(state.allStatuses)
     }
   }
 }

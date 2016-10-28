@@ -11,7 +11,7 @@ const update = ({store, statuses, timeline, showImmediately}) => {
     showImmediately
   })
 
-  // $ngRedux.dispatch({type: 'UPDATE_TIMESTAMPS'});
+  store.commit('updateTimestamps')
 }
 
 const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false, showImmediately = false}) => {

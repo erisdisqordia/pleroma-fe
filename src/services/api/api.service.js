@@ -1,8 +1,8 @@
 /* eslint-env browser */
 const LOGIN_URL = '/api/account/verify_credentials.json'
-// const FRIENDS_TIMELINE_URL='/api/statuses/friends_timeline.json';
-// const PUBLIC_TIMELINE_URL='/api/statuses/public_timeline.json';
-// const PUBLIC_AND_EXTERNAL_TIMELINE_URL='/api/statuses/public_and_external_timeline.json';
+const FRIENDS_TIMELINE_URL = '/api/statuses/friends_timeline.json'
+const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
+const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
 // const CONVERSATION_URL = '/api/statusnet/conversation/';
 // const STATUS_UPDATE_URL = '/api/statuses/update.json';
 // const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload';
@@ -14,16 +14,38 @@ const LOGIN_URL = '/api/account/verify_credentials.json'
 // import { param, ajax } from 'jquery';
 // import { merge } from 'lodash';
 
-const apiService = {
-  verifyCredentials: (user) => {
-    const base64 = btoa(`${user.username}:${user.password}`)
-    const authHeaders = { 'Authorization': `Basic ${base64}` }
-    return fetch(LOGIN_URL, {
-      method: 'POST',
-      headers: authHeaders
-    })
-    // return $http.post(LOGIN_URL, null, { headers: authHeaders });
+const authHeaders = (user) => ({ 'Authorization': `Basic ${btoa(`${user.username}:${user.password}`)}` })
+
+const fetchTimeline = ({timeline, credentials, since = false, until = false}) => {
+  const timelineUrls = {
+    public: PUBLIC_TIMELINE_URL,
+    friends: FRIENDS_TIMELINE_URL,
+    'public-and-external': PUBLIC_AND_EXTERNAL_TIMELINE_URL
   }
+
+  let url = timelineUrls[timeline]
+
+  if (since) {
+    url += `?since_id=${since}`
+  }
+
+  if (until) {
+    url += `?max_id=${until}`
+  }
+
+  return fetch(url, { headers: authHeaders(credentials) }).then((data) => data.json())
+}
+
+const verifyCredentials = (user) => {
+  return fetch(LOGIN_URL, {
+    method: 'POST',
+    headers: authHeaders(user)
+  })
+}
+
+const apiService = {
+  verifyCredentials,
+  fetchTimeline
 }
 
 export default apiService

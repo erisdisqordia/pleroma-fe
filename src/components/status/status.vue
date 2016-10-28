@@ -26,7 +26,7 @@
         <div v-html="status.statusnet_html"></div>
 
         <div v-if='status.attachments' class='attachments'>
-          <attachment :nsfw="nsfw" :attachment="attachment" v-for="attachment in status.attachments">
+          <attachment :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments">
           </attachment>
         </div>
 
@@ -49,3 +49,13 @@
 </template>
 
 <script src="./status.js" ></script>
+
+<style lang="scss">
+ .status-el {
+     word-wrap: break-word;
+
+     a {
+         word-break: break-all;
+     }
+ }
+</style>

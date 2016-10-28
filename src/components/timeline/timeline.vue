@@ -11,3 +11,9 @@
   </div>
 </template>
 <script src="./timeline.js"></script>
+
+<style>
+ .timeline.panel {
+     flex: 1;
+ }
+</style>

@@ -51,12 +51,17 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
 
   addedStatuses = statusesAndFaves['status'] || []
 
-  // Add some html to the statuses.
+  // Add some html and nsfw to the statuses.
   each(addedStatuses, (status) => {
     const statusoid = status.retweeted_status || status
     if (statusoid.parsedText === undefined) {
      // statusoid.parsedText =  statusParserService.parse(statusoid)
       statusoid.parsedText = statusoid.text
+    }
+
+    if (statusoid.nsfw === undefined) {
+      const nsfwRegex = /#nsfw/i
+      statusoid.nsfw = statusoid.text.match(nsfwRegex)
     }
   })
 
@@ -88,7 +93,9 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
 }
 
 const updateTimestampsInStatuses = (statuses) => {
-  return map(statuses, (status) => {
+  return map(statuses, (statusoid) => {
+    const status = statusoid.retweeted_status || statusoid
+
     // Parse date
     status.created_at_parsed = moment(status.created_at).fromNow()
     return status
@@ -110,6 +117,16 @@ const statuses = {
     },
     updateTimestamps (state) {
       updateTimestampsInStatuses(state.allStatuses)
+    },
+    setNsfw (state, { id, nsfw }) {
+      // For now, walk through all the statuses because the stuff might be in the replied_to_status
+      // TODO: Save the replied_tos as references.
+      each(state.allStatuses, (statusoid) => {
+        const status = statusoid.retweeted_status || statusoid
+        if (status.id === id) {
+          status.nsfw = nsfw
+        }
+      })
     }
   }
 }

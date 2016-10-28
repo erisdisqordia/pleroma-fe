@@ -3,17 +3,32 @@ import nsfwImage from '../../assets/nsfw.jpg'
 const Attachment = {
   props: [
     'attachment',
-    'nsfw'
+    'nsfw',
+    'statusId'
   ],
   data: () => ({ nsfwImage }),
   computed: {
     type () {
-      return 'image'
+      let type = 'unknown'
+
+      if(this.attachment.mimetype.match(/text\/html/)) {
+        type = 'html';
+      }
+
+      if(this.attachment.mimetype.match(/image/)) {
+        type = 'image';
+      }
+
+      if(this.attachment.mimetype.match(/video\/webm/)) {
+        type = 'webm';
+      };
+
+      return type
     }
   },
   methods: {
     showNsfw () {
-      this.nsfw = false
+      this.$store.commit('setNsfw', { id: this.statusId, nsfw: false })
     }
   }
 }

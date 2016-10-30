@@ -21,7 +21,7 @@ const users = {
     loginUser (store, userCredentials) {
       const commit = store.commit
       commit('beginLogin')
-      apiService.verifyCredentials(userCredentials)
+      return apiService.verifyCredentials(userCredentials)
         .then((response) => {
           if (response.ok) {
             response.json()

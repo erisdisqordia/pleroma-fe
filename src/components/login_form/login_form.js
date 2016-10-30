@@ -7,7 +7,9 @@ const LoginForm = {
   },
   methods: {
     submit () {
-      this.$store.dispatch('loginUser', this.user)
+      this.$store.dispatch('loginUser', this.user).then(() => {
+        this.$router.push('/main/friends')
+      })
     }
   }
 }

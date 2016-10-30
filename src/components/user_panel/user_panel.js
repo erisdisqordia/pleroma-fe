@@ -1,4 +1,5 @@
 import LoginForm from '../login_form/login_form.vue'
+import PostStatusForm from '../post_status_form/post_status_form.vue'
 
 const UserPanel = {
   computed: {
@@ -11,7 +12,8 @@ const UserPanel = {
     }
   },
   components: {
-    LoginForm
+    LoginForm,
+    PostStatusForm
   }
 }
 

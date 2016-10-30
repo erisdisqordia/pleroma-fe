@@ -29,7 +29,7 @@
       </div>
 
       <div class="panel-footer">
-        <post-status-form></post-status-form>
+        <post-status-form v-if='user'></post-status-form>
       </div>
     </div>
     <login-form v-if='!user'></login-form>

@@ -5,8 +5,8 @@ const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
 const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
 const FAVORITE_URL = '/api/favorites/create'
 const UNFAVORITE_URL = '/api/favorites/destroy'
+const STATUS_UPDATE_URL = '/api/statuses/update.json'
 // const CONVERSATION_URL = '/api/statusnet/conversation/';
-// const STATUS_UPDATE_URL = '/api/statuses/update.json';
 // const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload';
 
 // const FORM_CONTENT_TYPE = {'Content-Type': 'application/x-www-form-urlencoded'};
@@ -57,11 +57,30 @@ const unfavorite = ({ id, credentials }) => {
   })
 }
 
+const postStatus = ({credentials, status, mediaIds, inReplyToStatusId}) => {
+  const idsText = mediaIds.join(',')
+  const form = new FormData()
+
+  form.append('status', status)
+  form.append('source', 'Pleroma FE')
+  form.append('media_ids', idsText)
+  if (inReplyToStatusId) {
+    form.append('in_reply_to_status_id', inReplyToStatusId)
+  }
+
+  return fetch(STATUS_UPDATE_URL, {
+    body: form,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
   favorite,
-  unfavorite
+  unfavorite,
+  postStatus
 }
 
 export default apiService
@@ -100,24 +119,6 @@ export default apiService
 //     const base64 = btoa(`${user.username}:${user.password}`);
 //     authHeaders = { "Authorization": `Basic ${base64}` };
 //     return $http.post(LOGIN_URL, null, { headers: authHeaders });
-//   };
-
-//   const postStatus = ({status, mediaIds, in_reply_to_status_id}) => {
-//     const idsText = mediaIds.join(',');
-//     const form = new FormData();
-
-//     form.append('status', status);
-//     form.append('source', 'The Wired FE');
-//     form.append('media_ids', idsText);
-//     if(in_reply_to_status_id) {
-//       form.append('in_reply_to_status_id', in_reply_to_status_id);
-//     };
-
-//     return fetch(STATUS_UPDATE_URL, {
-//       body: form,
-//       method: 'POST',
-//       headers: authHeaders
-//     });
 //   };
 
 //   const unfavorite = (id) => $http.post(`${UNFAVORITE_URL}/${id}.json`, null, {headers: authHeaders});

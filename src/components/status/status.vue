@@ -23,7 +23,9 @@
           <small>{{status.created_at_parsed}}</small>
         </h4>
 
-        <div v-html="status.statusnet_html"></div>
+        <p>
+          <div v-html="status.statusnet_html"></div>
+        </p>
 
         <div v-if='status.attachments' class='attachments'>
           <attachment :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments">
@@ -33,12 +35,12 @@
         <div>
           <div class='status-actions'>
             <div ng-click="toggleReplying()">
-              <i class='fa fa-reply'></i>
+              <i class='fa icon-reply'></i>
             </div>
             <div>
-              <i class='fa fa-retweet'></i>
+              <i class='fa icon-retweet'></i>
             </div>
-            <favorite-button status=status></favorite-button>
+            <favorite-button :status=status></favorite-button>
           </div>
 
           <!-- <post-status-form ng-if="replying" toggle="toggleReplying" reply-to-status="status" reply-to="{{status.id}}"></post-status-form> -->

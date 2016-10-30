@@ -3,11 +3,11 @@ const LOGIN_URL = '/api/account/verify_credentials.json'
 const FRIENDS_TIMELINE_URL = '/api/statuses/friends_timeline.json'
 const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
 const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
+const FAVORITE_URL = '/api/favorites/create'
+const UNFAVORITE_URL = '/api/favorites/destroy'
 // const CONVERSATION_URL = '/api/statusnet/conversation/';
 // const STATUS_UPDATE_URL = '/api/statuses/update.json';
 // const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload';
-// const FAVORITE_URL = '/api/favorites/create';
-// const UNFAVORITE_URL = '/api/favorites/destroy';
 
 // const FORM_CONTENT_TYPE = {'Content-Type': 'application/x-www-form-urlencoded'};
 
@@ -43,9 +43,25 @@ const verifyCredentials = (user) => {
   })
 }
 
+const favorite = ({ id, credentials }) => {
+  return fetch(`${FAVORITE_URL}/${id}.json`, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  })
+}
+
+const unfavorite = ({ id, credentials }) => {
+  return fetch(`${UNFAVORITE_URL}/${id}.json`, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  })
+}
+
 const apiService = {
   verifyCredentials,
-  fetchTimeline
+  fetchTimeline,
+  favorite,
+  unfavorite
 }
 
 export default apiService
@@ -104,7 +120,6 @@ export default apiService
 //     });
 //   };
 
-//   const favorite = (id) => $http.post(`${FAVORITE_URL}/${id}.json`, null, {headers: authHeaders});
 //   const unfavorite = (id) => $http.post(`${UNFAVORITE_URL}/${id}.json`, null, {headers: authHeaders});
 
 //   // This was impossible to get to work with $http. You're supposed to set Content-Type

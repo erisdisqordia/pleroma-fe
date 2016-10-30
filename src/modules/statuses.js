@@ -1,5 +1,6 @@
 import { map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
 import moment from 'moment'
+import apiService from '../services/api/api.service.js'
 
 const defaultState = {
   allStatuses: [],
@@ -104,6 +105,18 @@ const updateTimestampsInStatuses = (statuses) => {
 
 const statuses = {
   state: defaultState,
+  actions: {
+    favorite ({ rootState, commit }, status) {
+      // Optimistic favoriting...
+      commit('setFavorited', { status, value: true })
+      apiService.favorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
+    },
+    unfavorite ({ rootState, commit }, status) {
+      // Optimistic favoriting...
+      commit('setFavorited', { status, value: false })
+      apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
+    }
+  },
   mutations: {
     addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
       state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
@@ -117,6 +130,10 @@ const statuses = {
     },
     updateTimestamps (state) {
       updateTimestampsInStatuses(state.allStatuses)
+    },
+    setFavorited (state, { status, value }) {
+      const newStatus = find(state.allStatuses, status)
+      newStatus.favorited = value
     },
     setNsfw (state, { id, nsfw }) {
       // For now, walk through all the statuses because the stuff might be in the replied_to_status

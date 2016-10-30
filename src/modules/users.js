@@ -25,7 +25,10 @@ const users = {
         .then((response) => {
           if (response.ok) {
             response.json()
-              .then((user) => commit('setCurrentUser', user))
+              .then((user) => {
+                user.credentials = userCredentials
+                commit('setCurrentUser', user)
+              })
               .then(() => timelineFetcher.startFetching({store, credentials: userCredentials}))
           }
           commit('endLogin')

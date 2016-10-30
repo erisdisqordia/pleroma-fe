@@ -1,4 +1,5 @@
 import Attachment from '../attachment/attachment.vue'
+import FavoriteButton from '../favorite_button/favorite_button.vue'
 
 const Status = {
   props: [ 'statusoid' ],
@@ -14,9 +15,9 @@ const Status = {
     }
   },
   components: {
-    Attachment
+    Attachment,
+    FavoriteButton
   }
 }
 
 export default Status
-

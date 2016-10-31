@@ -55,6 +55,9 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
   // Add some html and nsfw to the statuses.
   each(addedStatuses, (status) => {
     const statusoid = status.retweeted_status || status
+
+    statusoid.created_at_parsed = statusoid.created_at
+
     if (statusoid.parsedText === undefined) {
      // statusoid.parsedText =  statusParserService.parse(statusoid)
       statusoid.parsedText = statusoid.text

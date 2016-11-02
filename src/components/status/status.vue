@@ -60,4 +60,8 @@
          word-break: break-all;
      }
  }
+
+ .status-actions {
+     padding-top: 5px;
+ }
 </style>

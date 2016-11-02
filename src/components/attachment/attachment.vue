@@ -4,7 +4,7 @@
       <img :src="nsfwImage"></img>
     </a>
 
-    <a v-if="type === 'image' && !nsfw" :href="attachment.url" target="_blank"><img :src="attachment.url"></img></a>
+    <a class="image-attachment" v-if="type === 'image' && !nsfw" :href="attachment.url" target="_blank"><img :src="attachment.url"></img></a>
 
     <video v-if="type === 'webm' && !nsfw" :src="attachment.url" controls></video>
 
@@ -28,6 +28,17 @@
  .attachment {
      video {
          height: 100%;
+     }
+
+     a.image-attachment {
+         display: flex;
+         flex: 1;
+
+         img {
+             width: 100%;
+             height: 100%;
+             flex: 1;
+         }
      }
  }
 </style>

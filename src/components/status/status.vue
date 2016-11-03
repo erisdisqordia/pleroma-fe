@@ -35,7 +35,7 @@
         <div>
           <div class='status-actions'>
             <div>
-              <a href="#" v-on:click.prevent="toggleReplying()">
+              <a href="#" v-on:click.prevent="toggleReplying">
                 <i class='fa icon-reply'></i>
               </a>
             </div>
@@ -45,7 +45,7 @@
             <favorite-button :status=status></favorite-button>
           </div>
 
-          <post-status-form v-if="replying" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user"></post-status-form>
+          <post-status-form v-if="replying" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying"></post-status-form>
         </div>
       </div>
     </div>

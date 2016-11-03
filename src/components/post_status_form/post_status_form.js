@@ -45,6 +45,7 @@ const PostStatusForm = {
         inReplyToStatusId: this.replyTo
       })
       this.newStatus = { }
+      this.$emit('posted')
     }
   }
 }

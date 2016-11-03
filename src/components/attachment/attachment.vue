@@ -30,6 +30,40 @@
          height: 100%;
      }
 
+     .oembed {
+         img {
+             width: 100%;
+             height: 100%;
+         }
+     }
+
+    .oembed {
+        border: 1px solid rgba(0, 0, 0, 0.14);
+        width: 100%;
+
+        display: flex;
+        .image {
+            flex: 1;
+            img {
+                border: 0px;
+                border-radius: 0;
+            }
+        }
+
+        .text {
+            flex: 2;
+            margin: 8px;
+            h1 {
+                font-size: 14px;
+                margin: 0px;
+
+                a {
+                    color: black;
+                }
+            }
+        }
+    }
+
      a.image-attachment {
          display: flex;
          flex: 1;

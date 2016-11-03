@@ -45,7 +45,7 @@
             <favorite-button :status=status></favorite-button>
           </div>
 
-          <post-status-form v-if="replying" :reply-to="status.id"></post-status-form>
+          <post-status-form v-if="replying" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user"></post-status-form>
         </div>
       </div>
     </div>

@@ -25,54 +25,70 @@
 <script src="./attachment.js"></script>
 
 <style lang="scss">
- .attachment {
-     video {
-         height: 100%;
-     }
+  .attachments {
+      display: flex;
+      flex-wrap: wrap;
+      .attachment {
 
-     .oembed {
-         img {
-             width: 100%;
-             height: 100%;
-         }
-     }
+          flex: 1 0 30%;
+          display: flex;
+          margin: 0.2em;
+          align-self: flex-start;
 
-    .oembed {
-        border: 1px solid rgba(0, 0, 0, 0.14);
-        width: 100%;
+          video {
+              height: 100%;
+              border: 1px solid;
+              border-radius: 0.5em;
+              width: 100%;
+          }
 
-        display: flex;
-        .image {
-            flex: 1;
-            img {
-                border: 0px;
-                border-radius: 0;
-            }
-        }
+          .oembed {
+              img {
+                  width: 100%;
+                  height: 100%;
+              }
+          }
 
-        .text {
-            flex: 2;
-            margin: 8px;
-            h1 {
-                font-size: 14px;
-                margin: 0px;
+          .oembed {
+              border: 1px solid rgba(0, 0, 0, 0.14);
+              width: 100%;
 
-                a {
-                    color: black;
-                }
-            }
-        }
-    }
+              display: flex;
+              .image {
+                  flex: 1;
+                  img {
+                      border: 0px;
+                      border-radius: 0;
+                  }
+              }
 
-     a.image-attachment {
-         display: flex;
-         flex: 1;
+              .text {
+                  flex: 2;
+                  margin: 8px;
+                  h1 {
+                      font-size: 14px;
+                      margin: 0px;
 
-         img {
-             width: 100%;
-             height: 100%;
-             flex: 1;
-         }
-     }
+                      a {
+                          color: black;
+                      }
+                  }
+              }
+          }
+
+          a.image-attachment {
+              display: flex;
+              flex: 1;
+
+              img {
+                  width: 100%;
+                  height: 100%;
+                  flex: 1;
+                  border: 1px solid;
+                  border-radius: 0.5em;
+                  width: 100%;
+              }
+          }
+      }
  }
 </style>

@@ -156,30 +156,6 @@ status.ng-enter.ng-enter-active {
     margin: 1em;
 }
 
-.attachments {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.attachment, attachment {
-    flex: 1 0 30%;
-    display: flex;
-    margin: 0.2em;
-    align-self: flex-start;
-
-    img {
-        border: 1px solid;
-        border-radius: 0.5em;
-        width: 100%;
-    }
-
-    video {
-        border: 1px solid;
-        border-radius: 0.5em;
-        width: 100%;
-    }
-
-}
 
 .media-body {
     flex: 1

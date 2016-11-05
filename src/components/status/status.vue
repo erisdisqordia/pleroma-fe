@@ -2,7 +2,7 @@
   <div class="status-el">
     <div v-if="retweet" class="media container retweet-info">
       <div class="media-left">
-        <i class='fa fa-retweet'></i>
+        <i class='fa icon-retweet'></i>
       </div>
       <div class="media-body">
         Retweeted by {{retweeter}}
@@ -34,8 +34,10 @@
 
         <div>
           <div class='status-actions'>
-            <div ng-click="toggleReplying()">
-              <i class='fa icon-reply'></i>
+            <div>
+              <a href="#" v-on:click.prevent="toggleReplying">
+                <i class='fa icon-reply'></i>
+              </a>
             </div>
             <div>
               <i class='fa icon-retweet'></i>
@@ -43,7 +45,7 @@
             <favorite-button :status=status></favorite-button>
           </div>
 
-          <!-- <post-status-form ng-if="replying" toggle="toggleReplying" reply-to-status="status" reply-to="{{status.id}}"></post-status-form> -->
+          <post-status-form v-if="replying" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying"></post-status-form>
         </div>
       </div>
     </div>
@@ -55,9 +57,14 @@
 <style lang="scss">
  .status-el {
      word-wrap: break-word;
+     word-break: break-word;
 
      a {
          word-break: break-all;
      }
+ }
+
+ .status-actions {
+     padding-top: 5px;
  }
 </style>

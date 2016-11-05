@@ -179,33 +179,6 @@ status.ng-enter.ng-enter-active {
         width: 100%;
     }
 
-    .oembed {
-        border: 1px solid rgba(0, 0, 0, 0.14);
-        width: 100%;
-
-        display: flex;
-        .image {
-            flex: 1;
-            display: flex;
-            img {
-                border: 0px;
-                border-radius: 0;
-            }
-        }
-
-        .text {
-            flex: 2;
-            margin: 8px;
-            h1 {
-                font-size: 14px;
-                margin: 0px;
-
-                a {
-                    color: black;
-                }
-            }
-        }
-    }
 }
 
 .media-body {
@@ -380,4 +353,7 @@ attention {
             font-weight: lighter;
         }
     }
+}
+nav {
+    z-index: 1000;
 }

@@ -7,7 +7,7 @@
         </p>
       </div>
     </a>
-    <status v-for="status in timeline.visibleStatuses" v-bind:statusoid="status"></status>
+    <status v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status"></status>
   </div>
 </template>
 <script src="./timeline.js"></script>

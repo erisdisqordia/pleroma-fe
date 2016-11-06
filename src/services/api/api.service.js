@@ -26,7 +26,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false}) =>
   const timelineUrls = {
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
-    'public-and-external': PUBLIC_AND_EXTERNAL_TIMELINE_URL
+    'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL
   }
 
   let url = timelineUrls[timeline]

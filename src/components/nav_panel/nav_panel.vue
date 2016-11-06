@@ -12,11 +12,11 @@
             Public Timeline
           </router-link>
         </li>
-        <!-- <li>
-             <router-link to='/main/all'>
-             The Whole Known Network
-             </router-link>
-             </li> -->
+        <li>
+          <router-link to='/main/all'>
+            The Whole Known Network
+          </router-link>
+        </li>
       </ul>
     </div>
   </div>

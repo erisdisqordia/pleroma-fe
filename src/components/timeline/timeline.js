@@ -9,6 +9,17 @@ const Timeline = {
   components: {
     Status
   },
+  created () {
+    const store = this.$store
+    const credentials = store.state.users.currentUser.credentials
+
+    timelineFetcher.fetchAndUpdate({
+      store,
+      credentials,
+      timeline: this.timelineName,
+      showImmediately: true
+    })
+  },
   methods: {
     showNewStatuses () {
       this.$store.commit('showNewStatuses', { timeline: this.timelineName })

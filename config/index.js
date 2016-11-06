@@ -26,11 +26,6 @@ module.exports = {
         target: 'https://social.heldscal.la/',
         changeOrigin: true,
         cookieDomainRewrite: 'localhost'
-      },
-      '/main': {
-        target: 'https://social.heldscal.la/',
-        changeOrigin: true,
-        cookieDomainRewrite: 'localhost'
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

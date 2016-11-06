@@ -14,7 +14,13 @@ const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 // import { param, ajax } from 'jquery';
 // import { merge } from 'lodash';
 
-const authHeaders = (user) => ({ 'Authorization': `Basic ${btoa(`${user.username}:${user.password}`)}` })
+const authHeaders = (user) => {
+  if (user) {
+    return { 'Authorization': `Basic ${btoa(`${user.username}:${user.password}`)}` }
+  } else {
+    return { }
+  }
+}
 
 const fetchTimeline = ({timeline, credentials, since = false, until = false}) => {
   const timelineUrls = {

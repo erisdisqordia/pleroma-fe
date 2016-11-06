@@ -12,8 +12,21 @@ const postStatus = ({ store, status, media = [], inReplyToStatusId = undefined }
     })
 }
 
+const uploadMedia = ({ store, formData }) => {
+  const credentials = store.state.users.currentUser.credentials
+
+  return apiService.uploadMedia({ credentials, formData }).then((xml) => {
+    return {
+      id: xml.getElementsByTagName('media_id')[0].textContent,
+      url: xml.getElementsByTagName('media_url')[0].textContent,
+      image: xml.getElementsByTagName('atom:link')[0].getAttribute('href')
+    }
+  })
+}
+
 const statusPosterService = {
-  postStatus
+  postStatus,
+  uploadMedia
 }
 
 export default statusPosterService

@@ -32,7 +32,7 @@
           </attachment>
         </div>
 
-        <div>
+        <div v-if="loggedIn">
           <div class='status-actions'>
             <div>
               <a href="#" v-on:click.prevent="toggleReplying">

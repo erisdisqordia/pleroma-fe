@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class='form-bottom'>
-        <media-upload files="newStatus.files"></media-upload>
+        <media-upload v-on:uploaded="addMediaFile"></media-upload>
         <button type="submit" class="btn btn-default" >Submit</button>
       </div>
     </form>

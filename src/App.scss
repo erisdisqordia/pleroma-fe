@@ -222,27 +222,6 @@ status.ng-enter.ng-enter-active {
     cursor: pointer;
 }
 
-nav-panel ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav-panel li {
-    border-bottom: 1px solid silver;
-    padding: 0.5em;
-    padding-left: 1em;
-}
-
-nav-panel li:last-child {
-    border: none;
-}
-
-nav-panel a {
-    display: block;
-    width: 100%;
-}
-
 .status-el p {
     margin: 0;
     margin-top: 0.2em;

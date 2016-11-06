@@ -29,6 +29,12 @@
       "css": "star-empty",
       "code": 59394,
       "src": "fontawesome"
+    },
+    {
+      "uid": "eeec3208c90b7b48e804919d0d2d4a41",
+      "css": "upload",
+      "code": 59395,
+      "src": "fontawesome"
     }
   ]
 }

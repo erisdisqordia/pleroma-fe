@@ -34,9 +34,3 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
-
-const statusesEx = require('../test/fixtures/statuses.json')
-
-setTimeout(() => {
-  store.commit('addNewStatuses', { statuses: statusesEx, timeline: 'public', showImmediately: false })
-}, 3000)

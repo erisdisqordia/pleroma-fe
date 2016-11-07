@@ -16,7 +16,8 @@ const update = ({store, statuses, timeline, showImmediately}) => {
 
 const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false, showImmediately = false}) => {
   const args = { timeline, credentials }
-  const timelineData = store.rootState.statuses.timelines[camelCase(timeline)]
+  const rootState = store.rootState || store.state
+  const timelineData = rootState.statuses.timelines[camelCase(timeline)]
 
   if (older) {
     args['until'] = timelineData.minVisibleId
@@ -24,7 +25,7 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
     args['since'] = timelineData.maxId
   }
 
-  apiService.fetchTimeline(args)
+  return apiService.fetchTimeline(args)
     .then((statuses) => update({store, statuses, timeline, showImmediately}))
 }
 
@@ -35,6 +36,7 @@ const startFetching = ({ timeline = 'friends', credentials, store }) => {
   setInterval(boundFetchAndUpdate, 10000)
 }
 const timelineFetcher = {
+  fetchAndUpdate,
   startFetching
 }
 

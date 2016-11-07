@@ -6,21 +6,27 @@ const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_time
 const FAVORITE_URL = '/api/favorites/create'
 const UNFAVORITE_URL = '/api/favorites/destroy'
 const STATUS_UPDATE_URL = '/api/statuses/update.json'
+const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 // const CONVERSATION_URL = '/api/statusnet/conversation/';
-// const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload';
 
 // const FORM_CONTENT_TYPE = {'Content-Type': 'application/x-www-form-urlencoded'};
 
 // import { param, ajax } from 'jquery';
 // import { merge } from 'lodash';
 
-const authHeaders = (user) => ({ 'Authorization': `Basic ${btoa(`${user.username}:${user.password}`)}` })
+const authHeaders = (user) => {
+  if (user) {
+    return { 'Authorization': `Basic ${btoa(`${user.username}:${user.password}`)}` }
+  } else {
+    return { }
+  }
+}
 
 const fetchTimeline = ({timeline, credentials, since = false, until = false}) => {
   const timelineUrls = {
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
-    'public-and-external': PUBLIC_AND_EXTERNAL_TIMELINE_URL
+    'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL
   }
 
   let url = timelineUrls[timeline]
@@ -75,12 +81,23 @@ const postStatus = ({credentials, status, mediaIds, inReplyToStatusId}) => {
   })
 }
 
+const uploadMedia = ({formData, credentials}) => {
+  return fetch(MEDIA_UPLOAD_URL, {
+    body: formData,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.text())
+    .then((text) => (new DOMParser()).parseFromString(text, 'application/xml'))
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
   favorite,
   unfavorite,
-  postStatus
+  postStatus,
+  uploadMedia
 }
 
 export default apiService

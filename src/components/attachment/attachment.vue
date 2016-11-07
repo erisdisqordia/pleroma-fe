@@ -6,7 +6,7 @@
 
     <a class="image-attachment" v-if="type === 'image' && !nsfw" :href="attachment.url" target="_blank"><img :src="attachment.url"></img></a>
 
-    <video v-if="type === 'webm' && !nsfw" :src="attachment.url" controls></video>
+    <video v-if="type === 'video' && !nsfw" :src="attachment.url" controls></video>
 
     <span v-if="type === 'unknown'">Don't know how to display this...</span>
 

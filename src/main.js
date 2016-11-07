@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import App from './App.vue'
 import PublicTimeline from './components/public_timeline/public_timeline.vue'
+import PublicAndExternalTimeline from './components/public_and_external_timeline/public_and_external_timeline.vue'
 import FriendsTimeline from './components/friends_timeline/friends_timeline.vue'
 
 import statusesModule from './modules/statuses.js'
@@ -19,12 +20,16 @@ const store = new Vuex.Store({
 })
 
 const routes = [
-  { path: '/', redirect: '/main/public' },
+  { path: '/', redirect: '/main/all' },
+  { path: '/main/all', component: PublicAndExternalTimeline },
   { path: '/main/public', component: PublicTimeline },
   { path: '/main/friends', component: FriendsTimeline }
 ]
 
-const router = new VueRouter({routes})
+const router = new VueRouter({
+  mode: 'history',
+  routes
+})
 
 /* eslint-disable no-new */
 new Vue({
@@ -34,9 +39,3 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
-
-const statusesEx = require('../test/fixtures/statuses.json')
-
-setTimeout(() => {
-  store.commit('addNewStatuses', { statuses: statusesEx, timeline: 'public', showImmediately: false })
-}, 3000)

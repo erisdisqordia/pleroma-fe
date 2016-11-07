@@ -19,8 +19,8 @@ const Attachment = {
         type = 'image';
       }
 
-      if(this.attachment.mimetype.match(/video\/webm/)) {
-        type = 'webm';
+      if(this.attachment.mimetype.match(/video\/(webm|mp4)/)) {
+        type = 'video';
       };
 
       return type

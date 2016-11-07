@@ -12,7 +12,8 @@ const defaultState = {
       visibleStatuses: [],
       newStatusCount: 0,
       maxId: 0,
-      minVisibleId: 0
+      minVisibleId: 0,
+      loading: false
     },
     publicAndExternal: {
       statuses: [],
@@ -20,7 +21,8 @@ const defaultState = {
       visibleStatuses: [],
       newStatusCount: 0,
       maxId: 0,
-      minVisibleId: 0
+      minVisibleId: 0,
+      loading: false
     },
     friends: {
       statuses: [],
@@ -28,7 +30,8 @@ const defaultState = {
       visibleStatuses: [],
       newStatusCount: 0,
       maxId: 0,
-      minVisibleId: 0
+      minVisibleId: 0,
+      loading: false
     }
   }
 }
@@ -37,7 +40,7 @@ const statusType = (status) => {
   return !status.is_post_verb && status.uri.match(/fave/) ? 'fave' : 'status'
 }
 
-const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visibleStatuses, newStatusCount, faves }) => {
+const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visibleStatuses, newStatusCount, faves, loading }) => {
   const statusesAndFaves = groupBy(addedStatuses, statusType)
   const addedFaves = statusesAndFaves['fave'] || []
   const unseenFaves = differenceBy(addedFaves, faves, 'id')
@@ -55,6 +58,9 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
   // Add some html and nsfw to the statuses.
   each(addedStatuses, (status) => {
     const statusoid = status.retweeted_status || status
+
+    statusoid.created_at_parsed = statusoid.created_at
+
     if (statusoid.parsedText === undefined) {
      // statusoid.parsedText =  statusParserService.parse(statusoid)
       statusoid.parsedText = statusoid.text
@@ -89,7 +95,8 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
     newStatusCount: newNewStatusCount,
     maxId: newStatuses[0].id,
     minVisibleId: (last(newVisibleStatuses) || { id: undefined }).id,
-    faves: unionBy(faves, addedFaves, 'id')
+    faves: unionBy(faves, addedFaves, 'id'),
+    loading
   }
 }
 
@@ -134,6 +141,9 @@ const statuses = {
     setFavorited (state, { status, value }) {
       const newStatus = find(state.allStatuses, status)
       newStatus.favorited = value
+    },
+    setLoading (state, { timeline, value }) {
+      state.timelines[timeline].loading = value
     },
     setNsfw (state, { id, nsfw }) {
       // For now, walk through all the statuses because the stuff might be in the replied_to_status

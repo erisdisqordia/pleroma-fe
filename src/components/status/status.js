@@ -16,6 +16,9 @@ const Status = {
       } else {
         return this.statusoid
       }
+    },
+    loggedIn () {
+      return !!this.$store.state.users.currentUser
     }
   },
   components: {

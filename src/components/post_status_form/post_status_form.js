@@ -1,4 +1,6 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
+import MediaUpload from '../media_upload/media_upload.vue'
+
 import { reject, map, uniqBy } from 'lodash';
 
 const buildMentionsString = ({user, attentions}, currentUser) => {
@@ -23,6 +25,9 @@ const PostStatusForm = {
     'repliedUser',
     'attentions'
   ],
+  components: {
+    MediaUpload
+  },
   data () {
     let statusText = ''
 
@@ -33,7 +38,8 @@ const PostStatusForm = {
 
     return {
       newStatus: {
-        status: statusText
+        status: statusText,
+        files: []
       }
     }
   },
@@ -41,11 +47,18 @@ const PostStatusForm = {
     postStatus (newStatus) {
       statusPoster.postStatus({
         status: newStatus.status,
+        media: newStatus.files,
         store: this.$store,
         inReplyToStatusId: this.replyTo
       })
-      this.newStatus = { }
+      this.newStatus = {
+        status: '',
+        files: []
+      }
       this.$emit('posted')
+    },
+    addMediaFile (fileInfo) {
+      this.newStatus.files.push(fileInfo)
     }
   }
 }

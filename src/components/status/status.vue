@@ -10,15 +10,15 @@
     </div>
     <div class="media status container" ng-class="{compact: compact, notify: notify}">
       <div class="media-left">
-        <a href="#">
+        <a :href="status.user.statusnet_profile_url">
           <img class='avatar' :src="status.user.profile_image_url_original">
         </a>
       </div>
       <div class="media-body">
         <h4 class="media-heading">
           <strong>{{status.user.name}}</strong>
-          <small>{{status.user.screen_name}}</small>
-          <small v-if="status.in_reply_to_screen_name"> &gt; {{status.in_reply_to_screen_name}}</small>
+          <small><a :href="status.user.statusnet_profile_url">{{status.user.screen_name}}</a></small>
+          <small v-if="status.in_reply_to_screen_name"> &gt; <a :href="status.in_reply_to_profileurl">{{status.in_reply_to_screen_name}}</a></small>
           -
           <small>{{status.created_at_parsed}}</small>
         </h4>

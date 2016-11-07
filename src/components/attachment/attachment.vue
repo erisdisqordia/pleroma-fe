@@ -1,6 +1,6 @@
 <template>
   <div class="attachment">
-    <a v-if="nsfw" v-on:click.prevent="showNsfw()">
+    <a class="image-attachment" v-if="nsfw" v-on:click.prevent="showNsfw()">
       <img :src="nsfwImage"></img>
     </a>
 

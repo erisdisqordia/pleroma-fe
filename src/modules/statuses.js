@@ -1,4 +1,4 @@
-import { flatten, map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
+import { reduce, map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
 import moment from 'moment'
 import apiService from '../services/api/api.service.js'
 
@@ -55,14 +55,6 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
 
   addedStatuses = statusesAndFaves['status'] || []
 
-  const splitRetweets = (status) => {
-    if (status.retweeted_status) {
-      return [status, status.retweeted_status]
-    } else {
-      return status
-    }
-  }
-
   // Add some html and nsfw to the statuses.
   addedStatuses = map(addedStatuses, (status) => {
     const statusoid = status.retweeted_status || status
@@ -79,10 +71,8 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
       statusoid.nsfw = statusoid.text.match(nsfwRegex)
     }
 
-    return splitRetweets(status)
+    return status
   })
-
-  addedStatuses = flatten(addedStatuses)
 
   const newStatuses = sortBy(
     unionBy(addedStatuses, statuses, 'id'),
@@ -125,9 +115,19 @@ const updateTimestampsInStatuses = (statuses) => {
 export const mutations = {
   addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
     state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
-    state.allStatuses = unionBy(state.timelines[timeline].statuses, state.allStatuses.id)
+    state.allStatuses = unionBy(state.timelines[timeline].statuses, state.allStatuses, 'id')
 
     // Set up retweets with most current status
+    const getRetweets = (result, status) => {
+      if (status.retweeted_status) {
+        result.push(status.retweeted_status)
+      }
+      return result
+    }
+
+    const retweets = reduce(statuses, getRetweets, [])
+
+    state.allStatuses = unionBy(retweets, state.allStatuses, 'id')
 
     each(state.allStatuses, (status) => {
       if (status.retweeted_status) {

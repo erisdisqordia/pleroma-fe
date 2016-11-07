@@ -42,9 +42,10 @@ describe('The Statuses module', () => {
 
     retweet.retweeted_status = status
 
-    // It adds both statuses
-    mutations.addNewStatuses(state, { statuses: [retweet], timeline: 'public' })
-    expect(state.allStatuses).to.eql([retweet, status])
+    // It adds both statuses, but only the retweet to visible.
+    mutations.addNewStatuses(state, { statuses: [retweet], timeline: 'public', showImmediately: true })
+    expect(state.timelines.public.visibleStatuses).to.have.length(1)
+    expect(state.allStatuses).to.eql([status, retweet])
 
     // It refers to the modified status.
     mutations.addNewStatuses(state, { statuses: [modStatus], timeline: 'public' })

@@ -2,7 +2,7 @@ import { map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, 
 import moment from 'moment'
 import apiService from '../services/api/api.service.js'
 
-const defaultState = {
+export const defaultState = {
   allStatuses: [],
   maxId: 0,
   timelines: {
@@ -110,6 +110,39 @@ const updateTimestampsInStatuses = (statuses) => {
   })
 }
 
+export const mutations = {
+  addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
+    state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
+    state.allStatuses = unionBy(state.timelines[timeline].statuses, state.allStatuses.id)
+  },
+  showNewStatuses (state, { timeline }) {
+    const oldTimeline = (state.timelines[timeline])
+
+    oldTimeline.newStatusCount = 0
+    oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
+  },
+  updateTimestamps (state) {
+    updateTimestampsInStatuses(state.allStatuses)
+  },
+  setFavorited (state, { status, value }) {
+    const newStatus = find(state.allStatuses, status)
+    newStatus.favorited = value
+  },
+  setLoading (state, { timeline, value }) {
+    state.timelines[timeline].loading = value
+  },
+  setNsfw (state, { id, nsfw }) {
+    // For now, walk through all the statuses because the stuff might be in the replied_to_status
+    // TODO: Save the replied_tos as references.
+    each(state.allStatuses, (statusoid) => {
+      const status = statusoid.retweeted_status || statusoid
+      if (status.id === id) {
+        status.nsfw = nsfw
+      }
+    })
+  }
+}
+
 const statuses = {
   state: defaultState,
   actions: {
@@ -124,38 +157,7 @@ const statuses = {
       apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
     }
   },
-  mutations: {
-    addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
-      state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
-      state.allStatuses = unionBy(state.timelines[timeline].statuses, state.allStatuses.id)
-    },
-    showNewStatuses (state, { timeline }) {
-      const oldTimeline = (state.timelines[timeline])
-
-      oldTimeline.newStatusCount = 0
-      oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
-    },
-    updateTimestamps (state) {
-      updateTimestampsInStatuses(state.allStatuses)
-    },
-    setFavorited (state, { status, value }) {
-      const newStatus = find(state.allStatuses, status)
-      newStatus.favorited = value
-    },
-    setLoading (state, { timeline, value }) {
-      state.timelines[timeline].loading = value
-    },
-    setNsfw (state, { id, nsfw }) {
-      // For now, walk through all the statuses because the stuff might be in the replied_to_status
-      // TODO: Save the replied_tos as references.
-      each(state.allStatuses, (statusoid) => {
-        const status = statusoid.retweeted_status || statusoid
-        if (status.id === id) {
-          status.nsfw = nsfw
-        }
-      })
-    }
-  }
+  mutations
 }
 
 export default statuses

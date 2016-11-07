@@ -11,16 +11,16 @@ const Attachment = {
     type () {
       let type = 'unknown'
 
-      if(this.attachment.mimetype.match(/text\/html/)) {
-        type = 'html';
+      if (this.attachment.mimetype.match(/text\/html/)) {
+        type = 'html'
       }
 
-      if(this.attachment.mimetype.match(/image/)) {
-        type = 'image';
+      if (this.attachment.mimetype.match(/image/)) {
+        type = 'image'
       }
 
-      if(this.attachment.mimetype.match(/video\/(webm|mp4)/)) {
-        type = 'video';
+      if (this.attachment.mimetype.match(/video\/(webm|mp4)/)) {
+        type = 'video'
       };
 
       return type

@@ -27,7 +27,7 @@ const Timeline = {
     fetchOlderStatuses () {
       const store = this.$store
       const credentials = store.state.users.currentUser.credentials
-      store.commit('setLoading', { timeline: this.timelineName, value: true });
+      store.commit('setLoading', { timeline: this.timelineName, value: true })
       timelineFetcher.fetchAndUpdate({
         store,
         credentials,

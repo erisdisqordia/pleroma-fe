@@ -8,9 +8,9 @@ const mediaUpload = {
     const self = this
 
     input.addEventListener('change', ({target}) => {
-      const file = target.files[0];
-      const formData = new FormData();
-      formData.append('media', file);
+      const file = target.files[0]
+      const formData = new FormData()
+      formData.append('media', file)
       statusPosterService.uploadMedia({ store, formData })
         .then((fileData) => {
           self.$emit('uploaded', fileData)

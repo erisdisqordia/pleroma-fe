@@ -1,10 +1,9 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 
-import { reject, map, uniqBy } from 'lodash';
+import { reject, map, uniqBy } from 'lodash'
 
 const buildMentionsString = ({user, attentions}, currentUser) => {
-
   let allAttentions = [...attentions]
 
   allAttentions.unshift(user)

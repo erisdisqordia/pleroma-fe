@@ -153,14 +153,8 @@ export const mutations = {
     state.timelines[timeline].loading = value
   },
   setNsfw (state, { id, nsfw }) {
-    // For now, walk through all the statuses because the stuff might be in the replied_to_status
-    // TODO: Save the replied_tos as references.
-    each(state.allStatuses, (statusoid) => {
-      const status = statusoid.retweeted_status || statusoid
-      if (status.id === id) {
-        status.nsfw = nsfw
-      }
-    })
+    const newStatus = find(state.allStatuses, { id })
+    newStatus.nsfw = nsfw
   }
 }
 

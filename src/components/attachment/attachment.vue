@@ -1,7 +1,7 @@
 <template>
   <div class="attachment">
     <a class="image-attachment" v-if="nsfw" v-on:click.prevent="showNsfw()">
-      <img :src="nsfwImage"></img>
+      <img :key="nsfwImage" :src="nsfwImage"></img>
     </a>
 
     <a class="image-attachment" v-if="type === 'image' && !nsfw" :href="attachment.url" target="_blank"><img :src="attachment.url"></img></a>

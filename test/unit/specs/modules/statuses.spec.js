@@ -1,11 +1,11 @@
 import { cloneDeep } from 'lodash'
 import { defaultState, mutations } from '../../../../src/modules/statuses.js'
 
-const makeMockStatus = ({id}) => {
+const makeMockStatus = ({id, text}) => {
   return {
     id,
     name: 'status',
-    text: `Text number ${id}`,
+    text: text || `Text number ${id}`,
     fave_num: 0,
     uri: ''
   }
@@ -32,6 +32,24 @@ describe('The Statuses module', () => {
     expect(state.allStatuses).to.eql([status])
     expect(state.timelines.public.statuses).to.eql([status])
     expect(state.timelines.public.visibleStatuses).to.eql([status])
+  })
+
+  it('splits retweets from their status and links them', () => {
+    const state = cloneDeep(defaultState)
+    const status = makeMockStatus({id: 1})
+    const retweet = makeMockStatus({id: 2})
+    const modStatus = makeMockStatus({id: 1, text: 'something else'})
+
+    retweet.retweeted_status = status
+
+    // It adds both statuses
+    mutations.addNewStatuses(state, { statuses: [retweet], timeline: 'public' })
+    expect(state.allStatuses).to.eql([retweet, status])
+
+    // It refers to the modified status.
+    mutations.addNewStatuses(state, { statuses: [modStatus], timeline: 'public' })
+    expect(state.allStatuses).to.eql([retweet, modStatus])
+    expect(retweet.retweeted_status).to.eql(modStatus)
   })
 
   it('replaces existing statuses with the same id', () => {

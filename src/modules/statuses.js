@@ -1,4 +1,4 @@
-import { map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
+import { flatten, map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
 import moment from 'moment'
 import apiService from '../services/api/api.service.js'
 
@@ -55,8 +55,16 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
 
   addedStatuses = statusesAndFaves['status'] || []
 
+  const splitRetweets = (status) => {
+    if (status.retweeted_status) {
+      return [status, status.retweeted_status]
+    } else {
+      return status
+    }
+  }
+
   // Add some html and nsfw to the statuses.
-  each(addedStatuses, (status) => {
+  addedStatuses = map(addedStatuses, (status) => {
     const statusoid = status.retweeted_status || status
 
     statusoid.created_at_parsed = statusoid.created_at
@@ -70,7 +78,11 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
       const nsfwRegex = /#nsfw/i
       statusoid.nsfw = statusoid.text.match(nsfwRegex)
     }
+
+    return splitRetweets(status)
   })
+
+  addedStatuses = flatten(addedStatuses)
 
   const newStatuses = sortBy(
     unionBy(addedStatuses, statuses, 'id'),
@@ -114,6 +126,15 @@ export const mutations = {
   addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
     state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
     state.allStatuses = unionBy(state.timelines[timeline].statuses, state.allStatuses.id)
+
+    // Set up retweets with most current status
+
+    each(state.allStatuses, (status) => {
+      if (status.retweeted_status) {
+        const retweetedStatus = find(state.allStatuses, { id: status.retweeted_status.id })
+        status.retweeted_status = retweetedStatus
+      }
+    })
   },
   showNewStatuses (state, { timeline }) {
     const oldTimeline = (state.timelines[timeline])

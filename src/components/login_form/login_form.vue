@@ -1,5 +1,5 @@
 <template>
-  <div class="panel panel-default">
+  <div class="login panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading">
       Log in

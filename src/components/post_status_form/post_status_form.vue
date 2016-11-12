@@ -20,7 +20,7 @@
 <script src="./post_status_form.js"></script>
 
 <style lang="scss">
- .post-status-form {
+ .post-status-form, .login {
      .form-bottom {
          display: flex;
          padding: 0.5em;

@@ -23,9 +23,7 @@
           <small>{{status.created_at_parsed}}</small>
         </h4>
 
-        <p>
-          <div v-html="status.statusnet_html"></div>
-        </p>
+        <div class="status-content" v-html="status.statusnet_html"></div>
 
         <div v-if='status.attachments' class='attachments'>
           <attachment :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments">
@@ -64,6 +62,11 @@
      a {
          display: inline-block;
          word-break: break-all;
+     }
+
+     .status-content {
+         margin-top: 3px;
+         margin-bottom: 3px;
      }
  }
 

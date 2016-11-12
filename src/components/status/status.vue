@@ -56,10 +56,13 @@
 
 <style lang="scss">
  .status-el {
+     hyphens: auto;
+     overflow-wrap: break-word;
      word-wrap: break-word;
      word-break: break-word;
 
      a {
+         display: inline-block;
          word-break: break-all;
      }
  }

@@ -21,6 +21,7 @@
 
 <style>
  .timeline.panel {
-     flex: 1;
+     flex: 2;
+     flex-basis: 500px;
  }
 </style>

@@ -41,18 +41,6 @@ a {
     padding: 0 10px 0 10px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5em;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5em;
-}
-
 .gaps {
     margin: -1em 0 0 -1em;
 }
@@ -255,15 +243,6 @@ status-text-container {
 
 attention {
     color: $main-color;
-}
-
-.form-bottom {
-    display: flex;
-    padding: 0.5em;
-
-    button {
-        flex: 2;
-    }
 }
 
 .status-el {

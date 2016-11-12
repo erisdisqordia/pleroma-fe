@@ -18,3 +18,33 @@
 </template>
 
 <script src="./post_status_form.js"></script>
+
+<style lang="scss">
+ .post-status-form {
+     .form-bottom {
+         display: flex;
+         padding: 0.5em;
+
+         button {
+             flex: 2;
+         }
+     }
+
+     .attachments {
+         padding: 0.5em;
+     }
+
+     form {
+         display: flex;
+         flex-direction: column;
+         padding: 0.5em;
+     }
+
+     .form-group {
+         display: flex;
+         flex-direction: column;
+         padding: 0.5em;
+     }
+ }
+
+</style>

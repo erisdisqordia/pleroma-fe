@@ -4,7 +4,7 @@ export const removeAttachmentLinks = (html) => {
   return sanitize(html, {
     allowedTags: false,
     allowedAttributes: false,
-    exclusiveFilter: ({ tag, attribs }) => tag === 'a' && attribs.class.match(/attachment/)
+    exclusiveFilter: ({ tag, attribs }) => tag === 'a' && typeof attribs.class === 'string' && attribs.class.match(/attachment/)
   })
 }
 

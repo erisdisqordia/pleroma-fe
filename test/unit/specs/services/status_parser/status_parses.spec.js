@@ -4,8 +4,14 @@ import { removeAttachmentLinks } from '../../../../../src/services/status_parser
 
 describe('statusParser.removeAttachmentLinks', () => {
   const exampleWithoutAttachmentLinks = '<div class="status-content">@<a href="https://sealion.club/user/4" class="h-card mention" title="dewoo">dwmatiz</a> </div>'
+
   it('removes attachment links', () => {
     const parsed = removeAttachmentLinks(example)
     expect(parsed).to.eql(exampleWithoutAttachmentLinks)
+  })
+
+  it('works when the class is empty', () => {
+    const parsed = removeAttachmentLinks('<a></a>')
+    expect(parsed).to.eql('<a></a>')
   })
 })

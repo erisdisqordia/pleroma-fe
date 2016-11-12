@@ -1,6 +1,7 @@
 import { reduce, map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
 import moment from 'moment'
 import apiService from '../services/api/api.service.js'
+import parse from '../services/status_parser/status_parser.js'
 
 export const defaultState = {
   allStatuses: [],
@@ -60,11 +61,7 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
     const statusoid = status.retweeted_status || status
 
     statusoid.created_at_parsed = statusoid.created_at
-
-    if (statusoid.parsedText === undefined) {
-     // statusoid.parsedText =  statusParserService.parse(statusoid)
-      statusoid.parsedText = statusoid.text
-    }
+    statusoid.statusnet_html = parse(statusoid.statusnet_html)
 
     if (statusoid.nsfw === undefined) {
       const nsfwRegex = /#nsfw/i

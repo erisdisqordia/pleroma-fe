@@ -15,6 +15,7 @@
   "dependencies": {
     "moment": "^2.15.2",
     "node-sass": "^3.10.1",
+    "sanitize-html": "^1.13.0",
     "sass-loader": "^4.0.2",
     "vue": "^2.0.1",
     "vue-router": "^2.0.1",

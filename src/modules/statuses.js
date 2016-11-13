@@ -115,10 +115,14 @@ export const findMaxId = (...args) => {
 }
 
 export const prepareStatus = (status) => {
+  // Parse nsfw tags
   if (status.nsfw === undefined) {
     const nsfwRegex = /#nsfw/i
     status.nsfw = !!status.text.match(nsfwRegex)
   }
+
+  // Set created_at_parsed to initial value
+  status.created_at_parsed = status.created_at
 
   return status
 }

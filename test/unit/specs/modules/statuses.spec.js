@@ -70,6 +70,25 @@ describe('The Statuses module', () => {
     expect(state.allStatuses[0]).to.equal(modStatus)
   })
 
+  it('replaces existing statuses with the same id, coming from a retweet', () => {
+    const state = cloneDeep(defaultState)
+    const status = makeMockStatus({id: 1})
+    const modStatus = makeMockStatus({id: 1, text: 'something else'})
+    const retweet = makeMockStatus({id: 2})
+    retweet.retweeted_status = modStatus
+
+    // Add original status
+    mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
+    expect(state.timelines.public.visibleStatuses).to.have.length(1)
+    expect(state.allStatuses).to.have.length(1)
+
+    // Add new version of status
+    mutations.addNewStatuses(state, { statuses: [retweet], showImmediately: false, timeline: 'public' })
+    expect(state.timelines.public.visibleStatuses).to.have.length(1)
+    expect(state.allStatuses).to.have.length(2)
+    expect(state.allStatuses[0]).to.equal(modStatus)
+  })
+
   it('handles favorite actions', () => {
     const state = cloneDeep(defaultState)
     const status = makeMockStatus({id: 1})

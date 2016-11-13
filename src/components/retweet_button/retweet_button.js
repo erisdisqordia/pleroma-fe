@@ -2,6 +2,9 @@ const RetweetButton = {
   props: [ 'status' ],
   methods: {
     retweet () {
+      if (!this.status.repeated) {
+        this.$store.dispatch('retweet', {id: this.status.id})
+      }
     }
   },
   computed: {

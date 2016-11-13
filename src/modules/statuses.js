@@ -1,4 +1,4 @@
-import { reduce, map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find } from 'lodash'
+import { reduce, map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find, flatten, maxBy } from 'lodash'
 import moment from 'moment'
 import apiService from '../services/api/api.service.js'
 import parse from '../services/status_parser/status_parser.js'
@@ -41,7 +41,7 @@ const statusType = (status) => {
   return !status.is_post_verb && status.uri.match(/fave/) ? 'fave' : 'status'
 }
 
-const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visibleStatuses, newStatusCount, faves, loading }) => {
+const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visibleStatuses, newStatusCount, faves, loading, maxId }) => {
   const statusesAndFaves = groupBy(addedStatuses, statusType)
   const addedFaves = statusesAndFaves['fave'] || []
   const unseenFaves = differenceBy(addedFaves, faves, 'id')
@@ -92,9 +92,9 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
     statuses: newStatuses,
     visibleStatuses: newVisibleStatuses,
     newStatusCount: newNewStatusCount,
-    maxId: newStatuses[0].id,
     minVisibleId: (last(newVisibleStatuses) || { id: undefined }).id,
     faves: unionBy(faves, addedFaves, 'id'),
+    maxId,
     loading
   }
 }
@@ -109,8 +109,18 @@ const updateTimestampsInStatuses = (statuses) => {
   })
 }
 
+
+export const findMaxId = (...args) => {
+  return (maxBy(flatten(args), 'id') || {}).id
+}
+
 export const mutations = {
   addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
+    const timelineObject = state.timelines[timeline]
+
+    // Set new maxId
+    const maxId = findMaxId(statuses, timelineObject.statuses)
+    timelineObject.maxId = maxId
     state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
     state.allStatuses = unionBy(state.timelines[timeline].statuses, state.allStatuses, 'id')
 

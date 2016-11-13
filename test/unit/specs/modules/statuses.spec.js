@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash'
-import { defaultState, mutations } from '../../../../src/modules/statuses.js'
+import { defaultState, mutations, findMaxId } from '../../../../src/modules/statuses.js'
 
 const makeMockStatus = ({id, text}) => {
   return {
@@ -10,6 +10,21 @@ const makeMockStatus = ({id, text}) => {
     uri: ''
   }
 }
+
+describe('findMaxId', () => {
+  it('returns the largest id in any of the given arrays', () => {
+    const statusesOne = [{ id: 100 }, { id: 2 }]
+    const statusesTwo = [{ id: 3 }]
+
+    const maxId = findMaxId(statusesOne, statusesTwo)
+    expect(maxId).to.eq(100)
+  })
+
+  it('returns undefined for empty arrays', () => {
+    const maxId = findMaxId([], [])
+    expect(maxId).to.eq(undefined)
+  })
+})
 
 describe('The Statuses module', () => {
   it('adds the status to allStatuses and to the given timeline', () => {
@@ -96,7 +111,7 @@ describe('The Statuses module', () => {
     const favorite = {
       id: 2,
       is_post_verb: false,
-      in_reply_to_status_id: 1, // The API uses strings here...
+      in_reply_to_status_id: '1', // The API uses strings here...
       uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
       text: 'a favorited something by b'
     }
@@ -106,6 +121,7 @@ describe('The Statuses module', () => {
 
     expect(state.timelines.public.visibleStatuses.length).to.eql(1)
     expect(state.timelines.public.visibleStatuses[0].fave_num).to.eql(1)
+    expect(state.timelines.public.maxId).to.eq(favorite.id)
 
     // Adding again shouldn't change anything
     mutations.addNewStatuses(state, { statuses: [favorite], showImmediately: true, timeline: 'public' })

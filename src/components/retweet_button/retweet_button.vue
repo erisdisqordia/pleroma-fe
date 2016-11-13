@@ -7,12 +7,16 @@
 
 <script src="./retweet_button.js" ></script>
 
-<style>
- .icon-retweet {
-     cursor: pointer
- }
- .retweeted {
+<style lang='scss'>
+  @import '../../_variables.scss';
+  .icon-retweet {
+     cursor: pointer;
+     &:hover {
+      color: $green;
+     }
+  }
+  .retweeted {
      cursor: auto;
-     color: green;
- }
+     color: $green;
+  }
 </style>

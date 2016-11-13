@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash'
-import { defaultState, mutations, findMaxId } from '../../../../src/modules/statuses.js'
+import { defaultState, mutations, findMaxId, prepareStatus } from '../../../../src/modules/statuses.js'
 
 const makeMockStatus = ({id, text}) => {
   return {
@@ -11,7 +11,24 @@ const makeMockStatus = ({id, text}) => {
   }
 }
 
-describe('findMaxId', () => {
+describe('Statuses.prepareStatus', () => {
+  it('sets nsfw for statuses with the #nsfw tag', () => {
+    const safe = makeMockStatus({id: 1, text: 'Hello oniichan'})
+    const nsfw = makeMockStatus({id: 1, text: 'Hello oniichan #nsfw'})
+
+    expect(prepareStatus(safe).nsfw).to.eq(false)
+    expect(prepareStatus(nsfw).nsfw).to.eq(true)
+  })
+
+  it('leaves existing nsfw settings alone', () => {
+    const nsfw = makeMockStatus({id: 1, text: 'Hello oniichan #nsfw'})
+    nsfw.nsfw = false
+
+    expect(prepareStatus(nsfw).nsfw).to.eq(false)
+  })
+})
+
+describe('Statuses.findMaxId', () => {
   it('returns the largest id in any of the given arrays', () => {
     const statusesOne = [{ id: 100 }, { id: 2 }]
     const statusesTwo = [{ id: 3 }]

@@ -114,6 +114,15 @@ export const findMaxId = (...args) => {
   return (maxBy(flatten(args), 'id') || {}).id
 }
 
+export const prepareStatus = (status) => {
+  if (status.nsfw === undefined) {
+    const nsfwRegex = /#nsfw/i
+    status.nsfw = !!status.text.match(nsfwRegex)
+  }
+
+  return status
+}
+
 export const mutations = {
   addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
     const timelineObject = state.timelines[timeline]

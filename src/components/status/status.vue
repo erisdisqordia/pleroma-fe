@@ -37,9 +37,7 @@
                 <i class='fa icon-reply'></i>
               </a>
             </div>
-            <div>
-              <i class='fa icon-retweet'></i>
-            </div>
+            <retweet-button :status=status></retweet-button>
             <favorite-button :status=status></favorite-button>
           </div>
 

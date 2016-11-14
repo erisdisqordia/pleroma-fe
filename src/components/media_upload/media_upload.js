@@ -11,11 +11,24 @@ const mediaUpload = {
       const file = target.files[0]
       const formData = new FormData()
       formData.append('media', file)
+
+      self.$emit('uploading')
+      self.uploading = true
+
       statusPosterService.uploadMedia({ store, formData })
         .then((fileData) => {
           self.$emit('uploaded', fileData)
+          self.uploading = false
+        }, (error) => {
+          self.$emit('upload-failed')
+          self.uploading = false
         })
     })
+  },
+  data () {
+    return {
+      uploading: false
+    }
   }
 }
 

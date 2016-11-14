@@ -146,6 +146,10 @@ export const mutations = {
     const newStatus = find(state.allStatuses, status)
     newStatus.favorited = value
   },
+  setRetweeted (state, { status, value }) {
+    const newStatus = find(state.allStatuses, status)
+    newStatus.repeated = value
+  },
   setLoading (state, { timeline, value }) {
     state.timelines[timeline].loading = value
   },
@@ -167,6 +171,11 @@ const statuses = {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: false })
       apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
+    },
+    retweet ({ rootState, commit }, status) {
+      // Optimistic retweeting...
+      commit('setRetweeted', { status, value: true })
+      apiService.retweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
     }
   },
   mutations

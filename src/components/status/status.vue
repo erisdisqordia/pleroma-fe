@@ -37,9 +37,7 @@
                 <i class='fa icon-reply'></i>
               </a>
             </div>
-            <div>
-              <i class='fa icon-retweet'></i>
-            </div>
+            <retweet-button :status=status></retweet-button>
             <favorite-button :status=status></favorite-button>
           </div>
 
@@ -53,7 +51,8 @@
 <script src="./status.js" ></script>
 
 <style lang="scss">
- .status-el {
+  @import '../../_variables.scss';
+  .status-el {
      hyphens: auto;
      overflow-wrap: break-word;
      word-wrap: break-word;
@@ -68,9 +67,13 @@
          margin-top: 3px;
          margin-bottom: 3px;
      }
- }
+  }
 
- .status-actions {
+  .status-actions {
      padding-top: 5px;
- }
+  }
+
+  .icon-reply:hover {
+     color: $blue;
+  }
 </style>

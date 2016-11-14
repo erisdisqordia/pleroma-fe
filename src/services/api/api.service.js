@@ -5,6 +5,7 @@ const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
 const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
 const FAVORITE_URL = '/api/favorites/create'
 const UNFAVORITE_URL = '/api/favorites/destroy'
+const RETWEET_URL = '/api/statuses/retweet'
 const STATUS_UPDATE_URL = '/api/statuses/update.json'
 const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 // const CONVERSATION_URL = '/api/statusnet/conversation/';
@@ -63,6 +64,13 @@ const unfavorite = ({ id, credentials }) => {
   })
 }
 
+const retweet = ({ id, credentials }) => {
+  return fetch(`${RETWEET_URL}/${id}.json`, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  })
+}
+
 const postStatus = ({credentials, status, mediaIds, inReplyToStatusId}) => {
   const idsText = mediaIds.join(',')
   const form = new FormData()
@@ -96,6 +104,7 @@ const apiService = {
   fetchTimeline,
   favorite,
   unfavorite,
+  retweet,
   postStatus,
   uploadMedia
 }

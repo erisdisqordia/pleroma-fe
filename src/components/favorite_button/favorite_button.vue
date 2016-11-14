@@ -7,8 +7,15 @@
 
 <script src="./favorite_button.js" ></script>
 
-<style>
- .favorite-button {
-     cursor: pointer
- }
+<style lang='scss'>
+  @import '../../_variables.scss';
+  .favorite-button {
+      cursor: pointer;
+      &:hover {
+        color: $main-color;
+      }
+  }
+  .icon-star {
+      color: $main-color;
+  }
 </style>

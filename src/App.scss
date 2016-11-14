@@ -1,7 +1,4 @@
-$main-color: #f58d2c;
-$main-background: white;
-$darkened-background: whitesmoke;
-
+@import './_variables.scss';
 #app {
     background-color: $main-color;
     background-size: cover;
@@ -225,8 +222,9 @@ status.ng-enter.ng-enter-active {
 }
 
 .fa {
-    color: $main-color;
+    color: grey;
 }
+
 
 .status-actions {
     width: 50%;

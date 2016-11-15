@@ -1,7 +1,7 @@
 import { reduce, map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find, flatten, maxBy } from 'lodash'
 import moment from 'moment'
 import apiService from '../services/api/api.service.js'
-import parse from '../services/status_parser/status_parser.js'
+// import parse from '../services/status_parser/status_parser.js'
 
 export const defaultState = {
   allStatuses: [],
@@ -41,6 +41,19 @@ const statusType = (status) => {
   return !status.is_post_verb && status.uri.match(/fave/) ? 'fave' : 'status'
 }
 
+export const prepareStatus = (status) => {
+  // Parse nsfw tags
+  if (status.nsfw === undefined) {
+    const nsfwRegex = /#nsfw/i
+    status.nsfw = !!status.text.match(nsfwRegex)
+  }
+
+  // Set created_at_parsed to initial value
+  status.created_at_parsed = status.created_at
+
+  return status
+}
+
 const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visibleStatuses, newStatusCount, faves, loading, maxId }) => {
   const statusesAndFaves = groupBy(addedStatuses, statusType)
   const addedFaves = statusesAndFaves['fave'] || []
@@ -60,13 +73,7 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
   addedStatuses = map(addedStatuses, (status) => {
     const statusoid = status.retweeted_status || status
 
-    statusoid.created_at_parsed = statusoid.created_at
-    statusoid.statusnet_html = parse(statusoid.statusnet_html)
-
-    if (statusoid.nsfw === undefined) {
-      const nsfwRegex = /#nsfw/i
-      statusoid.nsfw = statusoid.text.match(nsfwRegex)
-    }
+    prepareStatus(statusoid)
 
     return status
   })
@@ -109,22 +116,26 @@ const updateTimestampsInStatuses = (statuses) => {
   })
 }
 
+// const groupStatusesByType = (statuses) => {
+//   return groupBy(statuses, (status) => {
+//     if (status.is_post_verb) {
+//       return 'status'
+//     }
+
+//     if (status.retweeted_status) {
+//       return 'retweet'
+//     }
+
+//     if (typeof status.uri === 'string' && status.uri.match(/fave/)) {
+//       return 'favorite'
+//     }
+
+//     return 'unknown'
+//   })
+// }
 
 export const findMaxId = (...args) => {
   return (maxBy(flatten(args), 'id') || {}).id
-}
-
-export const prepareStatus = (status) => {
-  // Parse nsfw tags
-  if (status.nsfw === undefined) {
-    const nsfwRegex = /#nsfw/i
-    status.nsfw = !!status.text.match(nsfwRegex)
-  }
-
-  // Set created_at_parsed to initial value
-  status.created_at_parsed = status.created_at
-
-  return status
 }
 
 export const mutations = {
@@ -134,6 +145,10 @@ export const mutations = {
     // Set new maxId
     const maxId = findMaxId(statuses, timelineObject.statuses)
     timelineObject.maxId = maxId
+
+    // Split statuses by type
+    // const statusesByType = groupStatusesByType(statuses)
+
     state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
     state.allStatuses = unionBy(state.timelines[timeline].statuses, state.allStatuses, 'id')
 

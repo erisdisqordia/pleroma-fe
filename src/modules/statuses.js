@@ -1,4 +1,4 @@
-import { reduce, map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find, flatten, maxBy } from 'lodash'
+import { reduce, map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find, flatten, maxBy, merge } from 'lodash'
 import moment from 'moment'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
@@ -52,6 +52,19 @@ export const prepareStatus = (status) => {
   status.created_at_parsed = status.created_at
 
   return status
+}
+
+// Merges old and new status collections.
+const mergeStatuses = (oldStatuses, newStatuses) => {
+  each(newStatuses, (status) => {
+    let oldStatus = find(oldStatuses, { id: status.id })
+    if (oldStatus) {
+      merge(oldStatus, status)
+    } else {
+      oldStatuses.push(status)
+    }
+  })
+  return oldStatuses
 }
 
 const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visibleStatuses, newStatusCount, faves, loading, maxId }) => {
@@ -150,7 +163,7 @@ export const mutations = {
     // const statusesByType = groupStatusesByType(statuses)
 
     state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
-    state.allStatuses = unionBy(state.timelines[timeline].statuses, state.allStatuses, 'id')
+    mergeStatuses(state.allStatuses, state.timelines[timeline].statuses)
 
     // Set up retweets with most current status
     const getRetweets = (result, status) => {

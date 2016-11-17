@@ -90,7 +90,7 @@ describe('The Statuses module', () => {
 
     // It refers to the modified status.
     mutations.addNewStatuses(state, { statuses: [modStatus], timeline: 'public' })
-    expect(state.allStatuses).to.eql([retweet, modStatus])
+    expect(state.allStatuses).to.eql([modStatus, retweet])
     expect(retweet.retweeted_status).to.eql(modStatus)
   })
 
@@ -108,7 +108,7 @@ describe('The Statuses module', () => {
     mutations.addNewStatuses(state, { statuses: [modStatus], showImmediately: true, timeline: 'public' })
     expect(state.timelines.public.visibleStatuses).to.have.length(1)
     expect(state.allStatuses).to.have.length(1)
-    expect(state.allStatuses[0]).to.equal(modStatus)
+    expect(state.allStatuses[0]).to.eql(modStatus)
   })
 
   it('replaces existing statuses with the same id, coming from a retweet', () => {

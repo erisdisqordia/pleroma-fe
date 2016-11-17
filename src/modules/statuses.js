@@ -61,7 +61,7 @@ const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visib
     const statusoid = status.retweeted_status || status
 
     statusoid.created_at_parsed = statusoid.created_at
-    statusoid.statusnet_html = parse(statusoid.statusnet_html)
+    // statusoid.statusnet_html = parse(statusoid.statusnet_html)
 
     if (statusoid.nsfw === undefined) {
       const nsfwRegex = /#nsfw/i

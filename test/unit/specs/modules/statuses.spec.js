@@ -78,6 +78,22 @@ describe('The Statuses module', () => {
     expect(state.timelines.public.newStatusCount).to.equal(0)
   })
 
+  it('removes statuses by tag on deletion', () => {
+    const state = cloneDeep(defaultState)
+    const status = makeMockStatus({id: 1})
+    status.tag = 'xxx'
+    const deletion = makeMockStatus({id: 2, is_post_verb: false})
+    deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
+    deletion.uri = 'xxx'
+
+    mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
+    mutations.addNewStatuses(state, { statuses: [deletion], showImmediately: true, timeline: 'public' })
+
+    expect(state.allStatuses).to.eql([])
+    expect(state.timelines.public.statuses).to.eql([])
+    expect(state.timelines.public.visibleStatuses).to.eql([])
+  })
+
   it('keeps a descending by id order in timeline.visibleStatuses and timeline.statuses', () => {
     const state = cloneDeep(defaultState)
     const status = makeMockStatus({id: 2})
@@ -152,6 +168,8 @@ describe('The Statuses module', () => {
     // Add new version of status
     mutations.addNewStatuses(state, { statuses: [retweet], showImmediately: false, timeline: 'public' })
     expect(state.timelines.public.visibleStatuses).to.have.length(1)
+    // Don't add the retweet itself if the tweet is visible
+    expect(state.timelines.public.statuses).to.have.length(1)
     expect(state.allStatuses).to.have.length(2)
     expect(state.allStatuses[0].text).to.eql(modStatus.text)
   })

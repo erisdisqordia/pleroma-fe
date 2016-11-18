@@ -1,4 +1,4 @@
-import { map, slice, sortBy, toInteger, each, find, flatten, maxBy, last, merge, max } from 'lodash'
+import { remove, map, slice, sortBy, toInteger, each, find, flatten, maxBy, last, merge, max } from 'lodash'
 import moment from 'moment'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
@@ -73,6 +73,10 @@ const statusType = (status) => {
     return 'favorite'
   }
 
+  if (status.text.match(/deleted notice {{tag/)) {
+    return 'deletion'
+  }
+
   return 'unknown'
 }
 
@@ -145,18 +149,37 @@ export const mutations = {
       'retweet': (status) => {
         // RetweetedStatuses are never shown immediately
         const retweetedStatus = addStatus(status.retweeted_status, false, false)
-        const retweet = addStatus(status, showImmediately)
+
+        let retweet
+        // If the retweeted status is already there, don't add the retweet
+        // to the timeline.
+        if (find(timelineObject.visibleStatuses, {id: retweetedStatus.id})) {
+          // Already have it visible, don't add to timeline, don't show.
+          retweet = addStatus(status, false, false)
+        } else {
+          retweet = addStatus(status, showImmediately)
+        }
+
         retweet.retweeted_status = retweetedStatus
       },
-      'favorite': (status) => {
-        updateMaxId(status)
-        favoriteStatus(status)
+      'favorite': (favorite) => {
+        updateMaxId(favorite)
+        favoriteStatus(favorite)
+      },
+      'deletion': ({uri}) => {
+        remove(allStatuses, { tag: uri })
+        remove(timelineObject.statuses, { tag: uri })
+        remove(timelineObject.visibleStatuses, { tag: uri })
+      },
+      'default': (unknown) => {
+        console.log(unknown)
       }
     }
 
     each(statuses, (status) => {
       const type = statusType(status)
-      processors[type](status)
+      const processor = processors[type] || processors['default']
+      processor(status)
     })
 
     // Keep the visible statuses sorted

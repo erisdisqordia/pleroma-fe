@@ -86,11 +86,11 @@ describe('The Statuses module', () => {
     // It adds both statuses, but only the retweet to visible.
     mutations.addNewStatuses(state, { statuses: [retweet], timeline: 'public', showImmediately: true })
     expect(state.timelines.public.visibleStatuses).to.have.length(1)
-    expect(state.allStatuses).to.eql([status, retweet])
+    expect(state.allStatuses).to.eql([retweet, status])
 
     // It refers to the modified status.
     mutations.addNewStatuses(state, { statuses: [modStatus], timeline: 'public' })
-    expect(state.allStatuses).to.eql([modStatus, retweet])
+    expect(state.allStatuses).to.eql([retweet, modStatus])
     expect(retweet.retweeted_status).to.eql(modStatus)
   })
 
@@ -127,7 +127,7 @@ describe('The Statuses module', () => {
     mutations.addNewStatuses(state, { statuses: [retweet], showImmediately: false, timeline: 'public' })
     expect(state.timelines.public.visibleStatuses).to.have.length(1)
     expect(state.allStatuses).to.have.length(2)
-    expect(state.allStatuses[0]).to.equal(modStatus)
+    expect(state.allStatuses[0]).to.eql(modStatus)
   })
 
   it('handles favorite actions', () => {

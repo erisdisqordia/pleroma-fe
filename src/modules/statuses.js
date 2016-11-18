@@ -153,6 +153,11 @@ export const findMaxId = (...args) => {
 
 export const mutations = {
   addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
+
+    // Merge in the new status into the old ones.
+    mergeStatuses(state.allStatuses, statuses)
+
+    // Get relevant timeline
     const timelineObject = state.timelines[timeline]
 
     // Set new maxId
@@ -163,7 +168,6 @@ export const mutations = {
     // const statusesByType = groupStatusesByType(statuses)
 
     state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
-    mergeStatuses(state.allStatuses, state.timelines[timeline].statuses)
 
     // Set up retweets with most current status
     const getRetweets = (result, status) => {
@@ -175,7 +179,9 @@ export const mutations = {
 
     const retweets = reduce(statuses, getRetweets, [])
 
-    state.allStatuses = unionBy(retweets, state.allStatuses, 'id')
+    // state.allStatuses = unionBy(retweets, state.allStatuses, 'id')
+
+    mergeStatuses(state.allStatuses, retweets)
 
     each(state.allStatuses, (status) => {
       if (status.retweeted_status) {

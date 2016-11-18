@@ -1,4 +1,4 @@
-import { reduce, map, slice, last, intersectionBy, sortBy, unionBy, toInteger, groupBy, differenceBy, each, find, flatten, maxBy, merge } from 'lodash'
+import { map, slice, sortBy, toInteger, each, find, flatten, maxBy, last, merge, max } from 'lodash'
 import moment from 'moment'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
@@ -37,10 +37,6 @@ export const defaultState = {
   }
 }
 
-const statusType = (status) => {
-  return !status.is_post_verb && status.uri.match(/fave/) ? 'fave' : 'status'
-}
-
 export const prepareStatus = (status) => {
   // Parse nsfw tags
   if (status.nsfw === undefined) {
@@ -54,71 +50,6 @@ export const prepareStatus = (status) => {
   return status
 }
 
-// Merges old and new status collections.
-const mergeStatuses = (oldStatuses, newStatuses) => {
-  each(newStatuses, (status) => {
-    let oldStatus = find(oldStatuses, { id: status.id })
-    if (oldStatus) {
-      merge(oldStatus, status)
-    } else {
-      oldStatuses.push(status)
-    }
-  })
-  return oldStatuses
-}
-
-const addStatusesToTimeline = (addedStatuses, showImmediately, { statuses, visibleStatuses, newStatusCount, faves, loading, maxId }) => {
-  const statusesAndFaves = groupBy(addedStatuses, statusType)
-  const addedFaves = statusesAndFaves['fave'] || []
-  const unseenFaves = differenceBy(addedFaves, faves, 'id')
-
-  // Update fave count
-  each(unseenFaves, ({in_reply_to_status_id}) => {
-    const status = find(statuses, { id: toInteger(in_reply_to_status_id) })
-    if (status) {
-      status.fave_num += 1
-    }
-  })
-
-  addedStatuses = statusesAndFaves['status'] || []
-
-  // Add some html and nsfw to the statuses.
-  addedStatuses = map(addedStatuses, (status) => {
-    const statusoid = status.retweeted_status || status
-
-    prepareStatus(statusoid)
-
-    return status
-  })
-
-  const newStatuses = sortBy(
-    unionBy(addedStatuses, statuses, 'id'),
-    ({id}) => -id
-  )
-
-  let newNewStatusCount = newStatusCount + (newStatuses.length - statuses.length)
-
-  let newVisibleStatuses = visibleStatuses
-
-  if (showImmediately) {
-    newVisibleStatuses = unionBy(addedStatuses, newVisibleStatuses, 'id')
-    newVisibleStatuses = sortBy(newVisibleStatuses, ({id}) => -id)
-    newNewStatusCount = newStatusCount
-  };
-
-  newVisibleStatuses = intersectionBy(newStatuses, newVisibleStatuses, 'id')
-
-  return {
-    statuses: newStatuses,
-    visibleStatuses: newVisibleStatuses,
-    newStatusCount: newNewStatusCount,
-    minVisibleId: (last(newVisibleStatuses) || { id: undefined }).id,
-    faves: unionBy(faves, addedFaves, 'id'),
-    maxId,
-    loading
-  }
-}
-
 const updateTimestampsInStatuses = (statuses) => {
   return map(statuses, (statusoid) => {
     const status = statusoid.retweeted_status || statusoid
@@ -129,66 +60,109 @@ const updateTimestampsInStatuses = (statuses) => {
   })
 }
 
-// const groupStatusesByType = (statuses) => {
-//   return groupBy(statuses, (status) => {
-//     if (status.is_post_verb) {
-//       return 'status'
-//     }
+const statusType = (status) => {
+  if (status.is_post_verb) {
+    return 'status'
+  }
 
-//     if (status.retweeted_status) {
-//       return 'retweet'
-//     }
+  if (status.retweeted_status) {
+    return 'retweet'
+  }
 
-//     if (typeof status.uri === 'string' && status.uri.match(/fave/)) {
-//       return 'favorite'
-//     }
+  if (typeof status.uri === 'string' && status.uri.match(/fave/)) {
+    return 'favorite'
+  }
 
-//     return 'unknown'
-//   })
-// }
+  return 'unknown'
+}
 
 export const findMaxId = (...args) => {
   return (maxBy(flatten(args), 'id') || {}).id
 }
 
+const mergeOrAdd = (arr, item) => {
+  const oldItem = find(arr, {id: item.id})
+  if (oldItem) {
+    // We already have this, so only merge the new info.
+    merge(oldItem, item)
+    return oldItem
+  } else {
+    // This is a new item, prepare it
+    prepareStatus(item)
+    arr.push(item)
+    return item
+  }
+}
+
 export const mutations = {
   addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
-
-    // Merge in the new status into the old ones.
-    mergeStatuses(state.allStatuses, statuses)
-
-    // Get relevant timeline
+    const allStatuses = state.allStatuses
     const timelineObject = state.timelines[timeline]
 
-    // Set new maxId
-    const maxId = findMaxId(statuses, timelineObject.statuses)
-    timelineObject.maxId = maxId
-
-    // Split statuses by type
-    // const statusesByType = groupStatusesByType(statuses)
-
-    state.timelines[timeline] = addStatusesToTimeline(statuses, showImmediately, state.timelines[timeline])
-
-    // Set up retweets with most current status
-    const getRetweets = (result, status) => {
-      if (status.retweeted_status) {
-        result.push(status.retweeted_status)
-      }
-      return result
+    // Set the maxId to the new id if it's larger.
+    const updateMaxId = ({id}) => {
+      timelineObject.maxId = max([id, timelineObject.maxId])
     }
 
-    const retweets = reduce(statuses, getRetweets, [])
+    const addStatus = (status, showImmediately, addToTimeline = true) => {
+      // Remember the current amount of statuses
+      // We need that to calculate new status count.
+      const prevLength = timelineObject.statuses.length
 
-    // state.allStatuses = unionBy(retweets, state.allStatuses, 'id')
+      updateMaxId(status)
 
-    mergeStatuses(state.allStatuses, retweets)
+      status = mergeOrAdd(allStatuses, status)
 
-    each(state.allStatuses, (status) => {
-      if (status.retweeted_status) {
-        const retweetedStatus = find(state.allStatuses, { id: status.retweeted_status.id })
-        status.retweeted_status = retweetedStatus
+      // Some statuses should only be added to the global status repository.
+      if (addToTimeline) {
+        mergeOrAdd(timelineObject.statuses, status)
       }
+
+      if (showImmediately) {
+        // Add it directly to the visibleStatuses, don't change
+        // newStatusCount
+        mergeOrAdd(timelineObject.visibleStatuses, status)
+      } else {
+        // Just change newStatuscount
+        timelineObject.newStatusCount += (timelineObject.statuses.length - prevLength)
+      }
+
+      return status
+    }
+
+    const favoriteStatus = (favorite) => {
+      const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
+      if (status) {
+        status.fave_num += 1
+      }
+      return status
+    }
+
+    const processors = {
+      'status': (status) => {
+        addStatus(status, showImmediately)
+      },
+      'retweet': (status) => {
+        // RetweetedStatuses are never shown immediately
+        const retweetedStatus = addStatus(status.retweeted_status, false, false)
+        const retweet = addStatus(status, showImmediately)
+        retweet.retweeted_status = retweetedStatus
+      },
+      'favorite': (status) => {
+        updateMaxId(status)
+        favoriteStatus(status)
+      }
+    }
+
+    each(statuses, (status) => {
+      const type = statusType(status)
+      processors[type](status)
     })
+
+    // Keep the visible statuses sorted
+    timelineObject.visibleStatuses = sortBy(timelineObject.visibleStatuses, ({id}) => -id)
+    timelineObject.statuses = sortBy(timelineObject.statuses, ({id}) => -id)
+    timelineObject.minVisibleId = (last(timelineObject.statuses) || {}).id
   },
   showNewStatuses (state, { timeline }) {
     const oldTimeline = (state.timelines[timeline])

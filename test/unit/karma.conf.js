@@ -55,7 +55,7 @@ module.exports = function (config) {
     // 2. add it to the `browsers` array below.
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'sinon-chai'],
-    reporters: ['spec'],
+    reporters: ['mocha'],
     files: ['./index.js'],
     preprocessors: {
       './index.js': ['webpack', 'sourcemap']
@@ -63,6 +63,9 @@ module.exports = function (config) {
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true
+    },
+    mochaReporter: {
+      showDiff: true
     },
     coverageReporter: {
       dir: './coverage',

@@ -6,6 +6,7 @@ import apiService from '../services/api/api.service.js'
 export const defaultState = {
   allStatuses: [],
   maxId: 0,
+  notifications: [],
   timelines: {
     public: {
       statuses: [],
@@ -99,7 +100,7 @@ const mergeOrAdd = (arr, item) => {
 }
 
 export const mutations = {
-  addNewStatuses (state, { statuses, showImmediately = false, timeline }) {
+  addNewStatuses (state, { statuses, showImmediately = false, timeline, user = {} }) {
     const allStatuses = state.allStatuses
     const timelineObject = state.timelines[timeline]
 
@@ -134,10 +135,17 @@ export const mutations = {
       return status
     }
 
-    const favoriteStatus = (favorite) => {
+    const addNotification = (type, status) => {
+      state.notifications.push({type, status})
+    }
+
+    const favoriteStatus = (favorite, user) => {
       const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
       if (status) {
         status.fave_num += 1
+        if (status.user.id === user.id) {
+          addNotification('favorite', status)
+        }
       }
       return status
     }
@@ -164,7 +172,7 @@ export const mutations = {
       },
       'favorite': (favorite) => {
         updateMaxId(favorite)
-        favoriteStatus(favorite)
+        favoriteStatus(favorite, user)
       },
       'deletion': ({uri}) => {
         remove(allStatuses, { tag: uri })
@@ -216,6 +224,9 @@ export const mutations = {
 const statuses = {
   state: defaultState,
   actions: {
+    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline }) {
+      commit('addNewStatuses', { statuses, showImmediately, timeline, user: rootState.users.currentUser })
+    },
     favorite ({ rootState, commit }, status) {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })

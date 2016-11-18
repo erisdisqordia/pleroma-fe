@@ -4,6 +4,7 @@ import { defaultState, mutations, findMaxId, prepareStatus } from '../../../../s
 const makeMockStatus = ({id, text, is_post_verb = true}) => {
   return {
     id,
+    user: {id: 0},
     name: 'status',
     text: text || `Text number ${id}`,
     fave_num: 0,
@@ -192,5 +193,27 @@ describe('The Statuses module', () => {
     expect(state.timelines.public.visibleStatuses.length).to.eql(1)
     expect(state.timelines.public.visibleStatuses[0].fave_num).to.eql(1)
     expect(state.timelines.public.maxId).to.eq(favorite.id)
+  })
+
+  describe('notifications', () => {
+    it('adds a notfication when one of the user\'s status is favorited', () => {
+      const state = cloneDeep(defaultState)
+      const status = makeMockStatus({id: 1})
+      const user = {id: 1}
+      status.user = user
+
+      const favorite = {
+        id: 2,
+        is_post_verb: false,
+        in_reply_to_status_id: '1', // The API uses strings here...
+        uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
+        text: 'a favorited something by b'
+      }
+
+      mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public', user })
+      mutations.addNewStatuses(state, { statuses: [favorite], showImmediately: true, timeline: 'public', user })
+
+      expect(state.notifications).to.have.length(1)
+    })
   })
 })

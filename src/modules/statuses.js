@@ -90,12 +90,12 @@ const mergeOrAdd = (arr, item) => {
   if (oldItem) {
     // We already have this, so only merge the new info.
     merge(oldItem, item)
-    return oldItem
+    return {item: oldItem, new: false}
   } else {
     // This is a new item, prepare it
     prepareStatus(item)
     arr.push(item)
-    return item
+    return {item, new: true}
   }
 }
 
@@ -110,13 +110,12 @@ export const mutations = {
     }
 
     const addStatus = (status, showImmediately, addToTimeline = true) => {
-      // Remember the current amount of statuses
-      // We need that to calculate new status count.
-      const prevLength = timelineObject.statuses.length
+      const result = mergeOrAdd(allStatuses, status)
+      status = result.item
 
-      updateMaxId(status)
-
-      status = mergeOrAdd(allStatuses, status)
+      if (result.new) {
+        updateMaxId(status)
+      }
 
       // Some statuses should only be added to the global status repository.
       if (addToTimeline) {
@@ -127,24 +126,24 @@ export const mutations = {
         // Add it directly to the visibleStatuses, don't change
         // newStatusCount
         mergeOrAdd(timelineObject.visibleStatuses, status)
-      } else {
+      } else if (addToTimeline && result.new) {
         // Just change newStatuscount
-        timelineObject.newStatusCount += (timelineObject.statuses.length - prevLength)
+        timelineObject.newStatusCount += 1
       }
 
       return status
     }
 
-    const addNotification = (type, status) => {
-      state.notifications.push({type, status})
+    const addNotification = ({type, status, action}) => {
+      state.notifications.push({type, status, action})
     }
 
-    const favoriteStatus = (favorite, user) => {
+    const favoriteStatus = (favorite) => {
       const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
       if (status) {
         status.fave_num += 1
         if (status.user.id === user.id) {
-          addNotification('favorite', status)
+          addNotification({type: 'favorite', status, action: favorite})
         }
       }
       return status
@@ -172,7 +171,7 @@ export const mutations = {
       },
       'favorite': (favorite) => {
         updateMaxId(favorite)
-        favoriteStatus(favorite, user)
+        favoriteStatus(favorite)
       },
       'deletion': ({uri}) => {
         remove(allStatuses, { tag: uri })

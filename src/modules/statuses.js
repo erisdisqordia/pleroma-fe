@@ -99,101 +99,103 @@ const mergeOrAdd = (arr, item) => {
   }
 }
 
+const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {} }) => {
+  const allStatuses = state.allStatuses
+  const timelineObject = state.timelines[timeline]
+
+  // Set the maxId to the new id if it's larger.
+  const updateMaxId = ({id}) => {
+    timelineObject.maxId = max([id, timelineObject.maxId])
+  }
+
+  const addStatus = (status, showImmediately, addToTimeline = true) => {
+    const result = mergeOrAdd(allStatuses, status)
+    status = result.item
+
+    if (result.new) {
+      updateMaxId(status)
+    }
+
+    // Some statuses should only be added to the global status repository.
+    if (addToTimeline) {
+      mergeOrAdd(timelineObject.statuses, status)
+    }
+
+    if (showImmediately) {
+      // Add it directly to the visibleStatuses, don't change
+      // newStatusCount
+      mergeOrAdd(timelineObject.visibleStatuses, status)
+    } else if (addToTimeline && result.new) {
+      // Just change newStatuscount
+      timelineObject.newStatusCount += 1
+    }
+
+    return status
+  }
+
+  const addNotification = ({type, status, action}) => {
+    state.notifications.push({type, status, action})
+  }
+
+  const favoriteStatus = (favorite) => {
+    const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
+    if (status) {
+      status.fave_num += 1
+      if (status.user.id === user.id) {
+        addNotification({type: 'favorite', status, action: favorite})
+      }
+    }
+    return status
+  }
+
+  const processors = {
+    'status': (status) => {
+      addStatus(status, showImmediately)
+    },
+    'retweet': (status) => {
+      // RetweetedStatuses are never shown immediately
+      const retweetedStatus = addStatus(status.retweeted_status, false, false)
+
+      let retweet
+      // If the retweeted status is already there, don't add the retweet
+      // to the timeline.
+      if (find(timelineObject.visibleStatuses, {id: retweetedStatus.id})) {
+        // Already have it visible, don't add to timeline, don't show.
+        retweet = addStatus(status, false, false)
+      } else {
+        retweet = addStatus(status, showImmediately)
+      }
+
+      retweet.retweeted_status = retweetedStatus
+    },
+    'favorite': (favorite) => {
+      updateMaxId(favorite)
+      favoriteStatus(favorite)
+    },
+    'deletion': ({uri}) => {
+      remove(allStatuses, { tag: uri })
+      remove(timelineObject.statuses, { tag: uri })
+      remove(timelineObject.visibleStatuses, { tag: uri })
+    },
+    'default': (unknown) => {
+      console.log(unknown)
+    }
+  }
+
+  each(statuses, (status) => {
+    const type = statusType(status)
+    const processor = processors[type] || processors['default']
+    processor(status)
+  })
+
+  // Keep the visible statuses sorted
+  timelineObject.visibleStatuses = sortBy(timelineObject.visibleStatuses, ({id}) => -id)
+  timelineObject.statuses = sortBy(timelineObject.statuses, ({id}) => -id)
+  timelineObject.minVisibleId = (last(timelineObject.statuses) || {}).id
+}
+
 export const mutations = {
-  addNewStatuses (state, { statuses, showImmediately = false, timeline, user = {} }) {
-    const allStatuses = state.allStatuses
-    const timelineObject = state.timelines[timeline]
-
-    // Set the maxId to the new id if it's larger.
-    const updateMaxId = ({id}) => {
-      timelineObject.maxId = max([id, timelineObject.maxId])
-    }
-
-    const addStatus = (status, showImmediately, addToTimeline = true) => {
-      const result = mergeOrAdd(allStatuses, status)
-      status = result.item
-
-      if (result.new) {
-        updateMaxId(status)
-      }
-
-      // Some statuses should only be added to the global status repository.
-      if (addToTimeline) {
-        mergeOrAdd(timelineObject.statuses, status)
-      }
-
-      if (showImmediately) {
-        // Add it directly to the visibleStatuses, don't change
-        // newStatusCount
-        mergeOrAdd(timelineObject.visibleStatuses, status)
-      } else if (addToTimeline && result.new) {
-        // Just change newStatuscount
-        timelineObject.newStatusCount += 1
-      }
-
-      return status
-    }
-
-    const addNotification = ({type, status, action}) => {
-      state.notifications.push({type, status, action})
-    }
-
-    const favoriteStatus = (favorite) => {
-      const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
-      if (status) {
-        status.fave_num += 1
-        if (status.user.id === user.id) {
-          addNotification({type: 'favorite', status, action: favorite})
-        }
-      }
-      return status
-    }
-
-    const processors = {
-      'status': (status) => {
-        addStatus(status, showImmediately)
-      },
-      'retweet': (status) => {
-        // RetweetedStatuses are never shown immediately
-        const retweetedStatus = addStatus(status.retweeted_status, false, false)
-
-        let retweet
-        // If the retweeted status is already there, don't add the retweet
-        // to the timeline.
-        if (find(timelineObject.visibleStatuses, {id: retweetedStatus.id})) {
-          // Already have it visible, don't add to timeline, don't show.
-          retweet = addStatus(status, false, false)
-        } else {
-          retweet = addStatus(status, showImmediately)
-        }
-
-        retweet.retweeted_status = retweetedStatus
-      },
-      'favorite': (favorite) => {
-        updateMaxId(favorite)
-        favoriteStatus(favorite)
-      },
-      'deletion': ({uri}) => {
-        remove(allStatuses, { tag: uri })
-        remove(timelineObject.statuses, { tag: uri })
-        remove(timelineObject.visibleStatuses, { tag: uri })
-      },
-      'default': (unknown) => {
-        console.log(unknown)
-      }
-    }
-
-    each(statuses, (status) => {
-      const type = statusType(status)
-      const processor = processors[type] || processors['default']
-      processor(status)
-    })
-
-    // Keep the visible statuses sorted
-    timelineObject.visibleStatuses = sortBy(timelineObject.visibleStatuses, ({id}) => -id)
-    timelineObject.statuses = sortBy(timelineObject.statuses, ({id}) => -id)
-    timelineObject.minVisibleId = (last(timelineObject.statuses) || {}).id
-  },
+  addNewStatuses,
   showNewStatuses (state, { timeline }) {
     const oldTimeline = (state.timelines[timeline])
 

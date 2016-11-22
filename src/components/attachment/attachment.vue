@@ -8,6 +8,8 @@
 
     <video v-if="type === 'video' && !nsfw" :src="attachment.url" controls></video>
 
+    <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
+
     <span v-if="type === 'unknown'">Don't know how to display this...</span>
 
     <div v-if="type === 'html' && attachment.oembed" class="oembed">
@@ -39,6 +41,10 @@
               height: 100%;
               border: 1px solid;
               border-radius: 0.5em;
+              width: 100%;
+          }
+
+          audio {
               width: 100%;
           }
 

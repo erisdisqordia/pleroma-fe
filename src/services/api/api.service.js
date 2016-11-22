@@ -15,6 +15,12 @@ const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 // import { param, ajax } from 'jquery';
 // import { merge } from 'lodash';
 
+let fetch = (url, options) => {
+  const baseUrl = ''
+  const fullUrl = baseUrl + url
+  return window.fetch(fullUrl, options)
+}
+
 const authHeaders = (user) => {
   if (user) {
     return { 'Authorization': `Basic ${btoa(`${user.username}:${user.password}`)}` }

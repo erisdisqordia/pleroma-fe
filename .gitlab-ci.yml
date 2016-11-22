@@ -17,4 +17,4 @@ test:
 build:
   script:
     - npm install
-    - node_modules/webpack/bin/webpack.js
+    - npm run build

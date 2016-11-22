@@ -45,6 +45,10 @@
          flex-direction: column;
          padding: 0.5em;
      }
+
+     .btn {
+         cursor: pointer;
+     }
  }
 
 </style>

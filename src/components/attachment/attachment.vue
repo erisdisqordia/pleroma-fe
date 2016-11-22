@@ -95,6 +95,7 @@
                   border: 1px solid;
                   border-radius: 0.5em;
                   width: 100%;
+                  height: 100%; /* If this isn't here, chrome will stretch the images */
               }
           }
       }

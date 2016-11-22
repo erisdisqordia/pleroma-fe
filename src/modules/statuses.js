@@ -172,10 +172,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       updateMaxId(favorite)
       favoriteStatus(favorite)
     },
-    'deletion': ({uri}) => {
-      remove(allStatuses, { tag: uri })
-      remove(timelineObject.statuses, { tag: uri })
-      remove(timelineObject.visibleStatuses, { tag: uri })
+    'deletion': (deletion) => {
+      const uri = deletion.uri
+      updateMaxId(deletion)
+
+      remove(allStatuses, { uri })
+      remove(timelineObject.statuses, { uri })
+      remove(timelineObject.visibleStatuses, { uri })
     },
     'default': (unknown) => {
       console.log(unknown)

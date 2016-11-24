@@ -67,6 +67,18 @@ describe('The Statuses module', () => {
     expect(state.timelines.public.newStatusCount).to.equal(1)
   })
 
+  it('add the statuses to allStatuses if no timeline is given', () => {
+    const state = cloneDeep(defaultState)
+    const status = makeMockStatus({id: 1})
+
+    mutations.addNewStatuses(state, { statuses: [status] })
+
+    expect(state.allStatuses).to.eql([status])
+    expect(state.timelines.public.statuses).to.eql([])
+    expect(state.timelines.public.visibleStatuses).to.eql([])
+    expect(state.timelines.public.newStatusCount).to.equal(0)
+  })
+
   it('adds the status to allStatuses and to the given timeline, directly visible', () => {
     const state = cloneDeep(defaultState)
     const status = makeMockStatus({id: 1})

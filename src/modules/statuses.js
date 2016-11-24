@@ -1,4 +1,4 @@
-import { remove, map, slice, sortBy, toInteger, each, find, flatten, maxBy, last, merge, max } from 'lodash'
+import { remove, map, slice, sortBy, toInteger, each, find, flatten, maxBy, last, merge, max, isArray } from 'lodash'
 import moment from 'moment'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
@@ -100,11 +100,17 @@ const mergeOrAdd = (arr, item) => {
 }
 
 const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {} }) => {
+  // Sanity check
+  if (!isArray(statuses)) {
+    return false
+  }
+
   const allStatuses = state.allStatuses
   const timelineObject = state.timelines[timeline]
 
   // Set the maxId to the new id if it's larger.
   const updateMaxId = ({id}) => {
+    if (!timeline) { return false }
     timelineObject.maxId = max([id, timelineObject.maxId])
   }
 
@@ -117,15 +123,15 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     }
 
     // Some statuses should only be added to the global status repository.
-    if (addToTimeline) {
+    if (timeline && addToTimeline) {
       mergeOrAdd(timelineObject.statuses, status)
     }
 
-    if (showImmediately) {
+    if (timeline && showImmediately) {
       // Add it directly to the visibleStatuses, don't change
       // newStatusCount
       mergeOrAdd(timelineObject.visibleStatuses, status)
-    } else if (addToTimeline && result.new) {
+    } else if (timeline && addToTimeline && result.new) {
       // Just change newStatuscount
       timelineObject.newStatusCount += 1
     }
@@ -159,7 +165,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       let retweet
       // If the retweeted status is already there, don't add the retweet
       // to the timeline.
-      if (find(timelineObject.visibleStatuses, {id: retweetedStatus.id})) {
+      if (timeline && find(timelineObject.visibleStatuses, {id: retweetedStatus.id})) {
         // Already have it visible, don't add to timeline, don't show.
         retweet = addStatus(status, false, false)
       } else {
@@ -177,8 +183,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       updateMaxId(deletion)
 
       remove(allStatuses, { uri })
-      remove(timelineObject.statuses, { uri })
-      remove(timelineObject.visibleStatuses, { uri })
+      if (timeline) {
+        remove(timelineObject.statuses, { uri })
+        remove(timelineObject.visibleStatuses, { uri })
+      }
     },
     'default': (unknown) => {
       console.log(unknown)
@@ -192,9 +200,11 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   })
 
   // Keep the visible statuses sorted
-  timelineObject.visibleStatuses = sortBy(timelineObject.visibleStatuses, ({id}) => -id)
-  timelineObject.statuses = sortBy(timelineObject.statuses, ({id}) => -id)
-  timelineObject.minVisibleId = (last(timelineObject.statuses) || {}).id
+  if (timeline) {
+    timelineObject.visibleStatuses = sortBy(timelineObject.visibleStatuses, ({id}) => -id)
+    timelineObject.statuses = sortBy(timelineObject.statuses, ({id}) => -id)
+    timelineObject.minVisibleId = (last(timelineObject.statuses) || {}).id
+  }
 }
 
 export const mutations = {
@@ -228,7 +238,7 @@ export const mutations = {
 const statuses = {
   state: defaultState,
   actions: {
-    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline }) {
+    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, user: rootState.users.currentUser })
     },
     favorite ({ rootState, commit }, status) {

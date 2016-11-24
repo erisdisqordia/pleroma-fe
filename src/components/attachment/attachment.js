@@ -23,6 +23,10 @@ const Attachment = {
         type = 'video'
       };
 
+      if (this.attachment.mimetype.match(/ogg|audio/)) {
+        type = 'audio'
+      }
+
       return type
     }
   },

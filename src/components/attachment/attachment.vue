@@ -97,7 +97,6 @@
 
               img {
                   width: 100%;
-                  flex: 1;
                   border: 1px solid;
                   border-radius: 0.5em;
                   width: 100%;

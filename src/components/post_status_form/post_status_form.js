@@ -22,12 +22,14 @@ const PostStatusForm = {
   props: [
     'replyTo',
     'repliedUser',
-    'attentions'
+    'attentions',
+    'submitDisabled'
   ],
   components: {
     MediaUpload
   },
   data () {
+    this.submitDisabled = false
     let statusText = ''
 
     if (this.replyTo) {
@@ -58,6 +60,13 @@ const PostStatusForm = {
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
+      this.enableSubmit()
+    },
+    disableSubmit () {
+      this.submitDisabled = true
+    },
+    enableSubmit () {
+      this.submitDisabled = false
     }
   }
 }

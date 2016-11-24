@@ -1,6 +1,6 @@
 <template>
   <div class="post-status-form">
-    <form v-on:submit.prevent="postStatus(newStatus)">
+    <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group" >
         <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control"></textarea>
       </div>
@@ -10,8 +10,8 @@
         </div>
       </div>
       <div class='form-bottom'>
-        <media-upload v-on:uploaded="addMediaFile"></media-upload>
-        <button type="submit" class="btn btn-default" >Submit</button>
+        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit"></media-upload>
+        <button :disabled="submitDisabled" type="submit" class="btn btn-default">Submit</button>
       </div>
     </form>
   </div>
@@ -48,6 +48,10 @@
 
      .btn {
          cursor: pointer;
+     }
+
+     .btn[disabled] {
+         cursor: not-allowed;
      }
  }
 

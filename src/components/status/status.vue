@@ -20,7 +20,11 @@
           <small><a :href="status.user.statusnet_profile_url">{{status.user.screen_name}}</a></small>
           <small v-if="status.in_reply_to_screen_name"> &gt; <a :href="status.in_reply_to_profileurl">{{status.in_reply_to_screen_name}}</a></small>
           -
-          <small>{{status.created_at_parsed}}</small>
+          <small>
+            <router-link :to="{ name: 'conversation', params: { id: status.id } }">
+              {{status.created_at_parsed}}
+            </router-link>
+          </small>
         </h4>
 
         <div class="status-content" v-html="status.statusnet_html"></div>

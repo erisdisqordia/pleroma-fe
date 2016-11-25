@@ -197,7 +197,8 @@ describe('The Statuses module', () => {
       is_post_verb: false,
       in_reply_to_status_id: '1', // The API uses strings here...
       uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
-      text: 'a favorited something by b'
+      text: 'a favorited something by b',
+      user: {}
     }
 
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
@@ -206,6 +207,33 @@ describe('The Statuses module', () => {
     expect(state.timelines.public.visibleStatuses.length).to.eql(1)
     expect(state.timelines.public.visibleStatuses[0].fave_num).to.eql(1)
     expect(state.timelines.public.maxId).to.eq(favorite.id)
+
+    // Adding it again does nothing
+    mutations.addNewStatuses(state, { statuses: [favorite], showImmediately: true, timeline: 'public' })
+
+    expect(state.timelines.public.visibleStatuses.length).to.eql(1)
+    expect(state.timelines.public.visibleStatuses[0].fave_num).to.eql(1)
+    expect(state.timelines.public.maxId).to.eq(favorite.id)
+
+    // If something is favorited by the current user, it also sets the 'favorited' property
+    const user = {
+      id: 1
+    }
+
+    const ownFavorite = {
+      id: 3,
+      is_post_verb: false,
+      in_reply_to_status_id: '1', // The API uses strings here...
+      uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
+      text: 'a favorited something by b',
+      user
+    }
+
+    mutations.addNewStatuses(state, { statuses: [ownFavorite], showImmediately: true, timeline: 'public', user })
+
+    expect(state.timelines.public.visibleStatuses.length).to.eql(1)
+    expect(state.timelines.public.visibleStatuses[0].fave_num).to.eql(2)
+    expect(state.timelines.public.visibleStatuses[0].favorited).to.eql(true)
   })
 
   describe('notifications', () => {
@@ -220,7 +248,8 @@ describe('The Statuses module', () => {
         is_post_verb: false,
         in_reply_to_status_id: '1', // The API uses strings here...
         uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
-        text: 'a favorited something by b'
+        text: 'a favorited something by b',
+        user: {}
       }
 
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public', user })

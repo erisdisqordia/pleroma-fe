@@ -7,6 +7,7 @@ export const defaultState = {
   allStatuses: [],
   maxId: 0,
   notifications: [],
+  favorites: new Set(),
   timelines: {
     public: {
       statuses: [],
@@ -147,6 +148,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
     if (status) {
       status.fave_num += 1
+
+      // This is our favorite, so the relevant bit.
+      if (favorite.user.id === user.id) {
+        status.favorited = true
+      }
+
+      // Add a notification if the user's status is favorited
       if (status.user.id === user.id) {
         addNotification({type: 'favorite', status, action: favorite})
       }
@@ -175,8 +183,12 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       retweet.retweeted_status = retweetedStatus
     },
     'favorite': (favorite) => {
-      updateMaxId(favorite)
-      favoriteStatus(favorite)
+      // Only update if this is a new favorite.
+      if (!state.favorites.has(favorite.id)) {
+        state.favorites.add(favorite.id)
+        updateMaxId(favorite)
+        favoriteStatus(favorite)
+      }
     },
     'deletion': (deletion) => {
       const uri = deletion.uri

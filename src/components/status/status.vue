@@ -25,6 +25,9 @@
               {{status.created_at_parsed}}
             </router-link>
           </small>
+          <small v-if="!status.is_local" class="source_url">
+            <a :href="status.external_url" >Source</a>
+          </small>
         </h4>
 
         <div class="status-content" v-html="status.statusnet_html"></div>
@@ -61,6 +64,10 @@
      overflow-wrap: break-word;
      word-wrap: break-word;
      word-break: break-word;
+
+     .source_url {
+       float: right;
+     }
 
      a {
          display: inline-block;

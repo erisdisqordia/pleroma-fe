@@ -71,6 +71,12 @@
          margin-top: 3px;
          margin-bottom: 3px;
      }
+
+     p {
+       margin: 0;
+       margin-top: 0.2em;
+       margin-bottom: 0.5em;
+     }
   }
 
   .status-actions {
@@ -79,5 +85,23 @@
 
   .icon-reply:hover {
      color: $blue;
+  }
+
+  .status .avatar {
+    width: 48px;
+  }
+
+  .status.compact .avatar {
+    width: 32px;
+  }
+
+  .status {
+    padding: 0.5em;
+    padding-right: 1em;
+    border-bottom: 1px solid silver;
+  }
+
+  .status-el:last-child .status {
+    border: none
   }
 </style>

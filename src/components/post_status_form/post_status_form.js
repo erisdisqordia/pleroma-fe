@@ -1,5 +1,6 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
+import fileTypeService from '../../services/file_type/file_type.service.js'
 
 import { reject, map, uniqBy } from 'lodash'
 
@@ -67,6 +68,9 @@ const PostStatusForm = {
     },
     enableSubmit () {
       this.submitDisabled = false
+    },
+    type (fileInfo) {
+      return fileTypeService.fileType(fileInfo.mimetype)
     }
   }
 }

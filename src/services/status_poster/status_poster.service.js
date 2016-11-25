@@ -19,7 +19,8 @@ const uploadMedia = ({ store, formData }) => {
     return {
       id: xml.getElementsByTagName('media_id')[0].textContent,
       url: xml.getElementsByTagName('media_url')[0].textContent,
-      image: xml.getElementsByTagName('atom:link')[0].getAttribute('href')
+      image: xml.getElementsByTagName('atom:link')[0].getAttribute('href'),
+      mimetype: xml.getElementsByTagName('atom:link')[0].getAttribute('type')
     }
   })
 }

@@ -6,7 +6,7 @@
       </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
-          <img class="thumbnail media-upload" :src="file.image"></img>
+          <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
         </div>
       </div>
       <div class='form-bottom'>

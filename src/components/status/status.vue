@@ -69,6 +69,10 @@
        float: right;
      }
 
+     .greentext {
+         color: green;
+     }
+
      a {
          display: inline-block;
          word-break: break-all;

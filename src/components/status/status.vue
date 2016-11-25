@@ -55,8 +55,8 @@
 <script src="./status.js" ></script>
 
 <style lang="scss">
-  @import '../../_variables.scss';
-  .status-el {
+ @import '../../_variables.scss';
+ .status-el {
      hyphens: auto;
      overflow-wrap: break-word;
      word-wrap: break-word;
@@ -73,35 +73,35 @@
      }
 
      p {
-       margin: 0;
-       margin-top: 0.2em;
-       margin-bottom: 0.5em;
+         margin: 0;
+         margin-top: 0.2em;
+         margin-bottom: 0.5em;
      }
-  }
+ }
 
-  .status-actions {
+ .status-actions {
      padding-top: 5px;
-  }
+ }
 
-  .icon-reply:hover {
+ .icon-reply:hover {
      color: $blue;
-  }
+ }
 
-  .status .avatar {
-    width: 48px;
-  }
+ .status .avatar {
+     width: 48px;
+ }
 
-  .status.compact .avatar {
-    width: 32px;
-  }
+ .status.compact .avatar {
+     width: 32px;
+ }
 
-  .status {
-    padding: 0.5em;
-    padding-right: 1em;
-    border-bottom: 1px solid silver;
-  }
+ .status {
+     padding: 0.5em;
+     padding-right: 1em;
+     border-bottom: 1px solid silver;
+ }
 
-  .status-el:last-child .status {
-    border: none
-  }
+ .status-el:last-child .status {
+     border: none
+ }
 </style>

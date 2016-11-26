@@ -10,6 +10,7 @@
           <video v-if="type(file) === 'video'" :src="file.image" controls></video>
           <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
           <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
+          <i class="fa icon-cancel" @click="removeMediaFile(file)"></i>
         </div>
       </div>
       <div class='form-bottom'>
@@ -55,6 +56,10 @@
 
      .btn[disabled] {
          cursor: not-allowed;
+     }
+
+     .icon-cancel {
+         cursor: pointer;
      }
  }
 

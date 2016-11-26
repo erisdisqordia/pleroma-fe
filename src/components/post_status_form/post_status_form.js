@@ -63,6 +63,10 @@ const PostStatusForm = {
       this.newStatus.files.push(fileInfo)
       this.enableSubmit()
     },
+    removeMediaFile (fileInfo) {
+      let index = this.newStatus.files.indexOf(fileInfo)
+      this.newStatus.files.splice(index, 1)
+    },
     disableSubmit () {
       this.submitDisabled = true
     },

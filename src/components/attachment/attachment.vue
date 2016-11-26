@@ -4,7 +4,10 @@
       <img :key="nsfwImage" :src="nsfwImage"></img>
     </a>
 
-    <a class="image-attachment" v-if="type === 'image' && !nsfw" :href="attachment.url" target="_blank"><img :src="attachment.url"></img></a>
+    <a class="image-attachment" v-if="type === 'image' && !nsfw"
+      :href="attachment.url" target="_blank">
+      <img :src="attachment.url"></img>
+    </a>
 
     <video v-if="type === 'video' && !nsfw" :src="attachment.url" controls></video>
 

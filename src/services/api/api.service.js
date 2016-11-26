@@ -7,18 +7,16 @@ const FAVORITE_URL = '/api/favorites/create'
 const UNFAVORITE_URL = '/api/favorites/destroy'
 const RETWEET_URL = '/api/statuses/retweet'
 const STATUS_UPDATE_URL = '/api/statuses/update.json'
+const STATUS_URL = '/api/statuses/show'
 const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
-// const CONVERSATION_URL = '/api/statusnet/conversation/';
+const CONVERSATION_URL = '/api/statusnet/conversation'
 
-// const FORM_CONTENT_TYPE = {'Content-Type': 'application/x-www-form-urlencoded'};
-
-// import { param, ajax } from 'jquery';
-// import { merge } from 'lodash';
+const oldfetch = window.fetch
 
 let fetch = (url, options) => {
   const baseUrl = ''
   const fullUrl = baseUrl + url
-  return window.fetch(fullUrl, options)
+  return oldfetch(fullUrl, options)
 }
 
 const authHeaders = (user) => {
@@ -27,6 +25,16 @@ const authHeaders = (user) => {
   } else {
     return { }
   }
+}
+
+const fetchConversation = ({id}) => {
+  let url = `${CONVERSATION_URL}/${id}.json?count=100`
+  return fetch(url).then((data) => data.json())
+}
+
+const fetchStatus = ({id}) => {
+  let url = `${STATUS_URL}/${id}.json`
+  return fetch(url).then((data) => data.json())
 }
 
 const fetchTimeline = ({timeline, credentials, since = false, until = false}) => {
@@ -108,6 +116,8 @@ const uploadMedia = ({formData, credentials}) => {
 const apiService = {
   verifyCredentials,
   fetchTimeline,
+  fetchConversation,
+  fetchStatus,
   favorite,
   unfavorite,
   retweet,

@@ -12,12 +12,13 @@ const Timeline = {
   created () {
     const store = this.$store
     const credentials = store.state.users.currentUser.credentials
+    const showImmediately = this.timeline.visibleStatuses.length === 0
 
     timelineFetcher.fetchAndUpdate({
       store,
       credentials,
       timeline: this.timelineName,
-      showImmediately: true
+      showImmediately
     })
   },
   methods: {

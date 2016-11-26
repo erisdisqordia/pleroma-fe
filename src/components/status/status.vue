@@ -20,7 +20,14 @@
           <small><a :href="status.user.statusnet_profile_url">{{status.user.screen_name}}</a></small>
           <small v-if="status.in_reply_to_screen_name"> &gt; <a :href="status.in_reply_to_profileurl">{{status.in_reply_to_screen_name}}</a></small>
           -
-          <small>{{status.created_at_parsed}}</small>
+          <small>
+            <router-link :to="{ name: 'conversation', params: { id: status.id } }">
+              {{status.created_at_parsed}}
+            </router-link>
+          </small>
+          <small v-if="!status.is_local" class="source_url">
+            <a :href="status.external_url" >Source</a>
+          </small>
         </h4>
 
         <div class="status-content" v-html="status.statusnet_html"></div>
@@ -51,12 +58,20 @@
 <script src="./status.js" ></script>
 
 <style lang="scss">
-  @import '../../_variables.scss';
-  .status-el {
+ @import '../../_variables.scss';
+ .status-el {
      hyphens: auto;
      overflow-wrap: break-word;
      word-wrap: break-word;
      word-break: break-word;
+
+     .source_url {
+       float: right;
+     }
+
+     .greentext {
+         color: green;
+     }
 
      a {
          display: inline-block;
@@ -67,13 +82,37 @@
          margin-top: 3px;
          margin-bottom: 3px;
      }
-  }
 
-  .status-actions {
+     p {
+         margin: 0;
+         margin-top: 0.2em;
+         margin-bottom: 0.5em;
+     }
+ }
+
+ .status-actions {
      padding-top: 5px;
-  }
+ }
 
-  .icon-reply:hover {
+ .icon-reply:hover {
      color: $blue;
-  }
+ }
+
+ .status .avatar {
+     width: 48px;
+ }
+
+ .status.compact .avatar {
+     width: 32px;
+ }
+
+ .status {
+     padding: 0.5em;
+     padding-right: 1em;
+     border-bottom: 1px solid silver;
+ }
+
+ .status-el:last-child .status {
+     border: none
+ }
 </style>

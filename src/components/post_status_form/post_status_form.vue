@@ -1,17 +1,21 @@
 <template>
   <div class="post-status-form">
-    <form v-on:submit.prevent="postStatus(newStatus)">
+    <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group" >
         <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control"></textarea>
       </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
-          <img class="thumbnail media-upload" :src="file.image"></img>
+          <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
+          <video v-if="type(file) === 'video'" :src="file.image" controls></video>
+          <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
+          <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
+          <i class="fa icon-cancel" @click="removeMediaFile(file)"></i>
         </div>
       </div>
       <div class='form-bottom'>
-        <media-upload v-on:uploaded="addMediaFile"></media-upload>
-        <button type="submit" class="btn btn-default" >Submit</button>
+        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit"></media-upload>
+        <button :disabled="submitDisabled" type="submit" class="btn btn-default">Submit</button>
       </div>
     </form>
   </div>
@@ -44,6 +48,18 @@
          display: flex;
          flex-direction: column;
          padding: 0.5em;
+     }
+
+     .btn {
+         cursor: pointer;
+     }
+
+     .btn[disabled] {
+         cursor: not-allowed;
+     }
+
+     .icon-cancel {
+         cursor: pointer;
      }
  }
 

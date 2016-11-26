@@ -1,5 +1,6 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
+import fileTypeService from '../../services/file_type/file_type.service.js'
 
 import { reject, map, uniqBy } from 'lodash'
 
@@ -36,6 +37,7 @@ const PostStatusForm = {
     }
 
     return {
+      submitDisabled: false,
       newStatus: {
         status: statusText,
         files: []
@@ -58,6 +60,20 @@ const PostStatusForm = {
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
+      this.enableSubmit()
+    },
+    removeMediaFile (fileInfo) {
+      let index = this.newStatus.files.indexOf(fileInfo)
+      this.newStatus.files.splice(index, 1)
+    },
+    disableSubmit () {
+      this.submitDisabled = true
+    },
+    enableSubmit () {
+      this.submitDisabled = false
+    },
+    type (fileInfo) {
+      return fileTypeService.fileType(fileInfo.mimetype)
     }
   }
 }

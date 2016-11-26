@@ -1,4 +1,5 @@
 import nsfwImage from '../../assets/nsfw.jpg'
+import fileTypeService from '../../services/file_type/file_type.service.js'
 
 const Attachment = {
   props: [
@@ -9,25 +10,7 @@ const Attachment = {
   data: () => ({ nsfwImage }),
   computed: {
     type () {
-      let type = 'unknown'
-
-      if (this.attachment.mimetype.match(/text\/html/)) {
-        type = 'html'
-      }
-
-      if (this.attachment.mimetype.match(/image/)) {
-        type = 'image'
-      }
-
-      if (this.attachment.mimetype.match(/video\/(webm|mp4)/)) {
-        type = 'video'
-      };
-
-      if (this.attachment.mimetype.match(/ogg|audio/)) {
-        type = 'audio'
-      }
-
-      return type
+      return fileTypeService.fileType(this.attachment.mimetype)
     }
   },
   methods: {

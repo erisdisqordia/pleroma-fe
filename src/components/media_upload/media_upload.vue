@@ -15,4 +15,8 @@
      font-size: 26px;
      flex: 1;
  }
+
+ .icon-upload {
+     cursor: pointer;
+ }
 </style>

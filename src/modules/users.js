@@ -1,4 +1,3 @@
-import apiService from '../services/api/api.service.js'
 import timelineFetcher from '../services/timeline_fetcher/timeline_fetcher.service.js'
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 
@@ -22,7 +21,7 @@ const users = {
     loginUser (store, userCredentials) {
       const commit = store.commit
       commit('beginLogin')
-      return apiService.verifyCredentials(userCredentials)
+      return store.rootState.api.backendInteractor.verifyCredentials(userCredentials)
         .then((response) => {
           if (response.ok) {
             response.json()

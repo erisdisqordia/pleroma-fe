@@ -11,7 +11,8 @@ const backendInteractorService = (credentials) => {
 
   const backendInteractorServiceInstance = {
     fetchStatus,
-    fetchConversation
+    fetchConversation,
+    verifyCredentials: apiService.verifyCredentials
   }
 
   return backendInteractorServiceInstance

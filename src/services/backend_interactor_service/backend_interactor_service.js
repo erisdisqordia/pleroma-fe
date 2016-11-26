@@ -9,9 +9,14 @@ const backendInteractorService = (credentials) => {
     return apiService.fetchConversation({id, credentials})
   }
 
+  const fetchMentions = ({sinceId, username}) => {
+    return apiService.fetchMentions({sinceId, username, credentials})
+  }
+
   const backendInteractorServiceInstance = {
     fetchStatus,
     fetchConversation,
+    fetchMentions,
     verifyCredentials: apiService.verifyCredentials
   }
 

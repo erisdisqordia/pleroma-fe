@@ -10,6 +10,7 @@ const STATUS_UPDATE_URL = '/api/statuses/update.json'
 const STATUS_URL = '/api/statuses/show'
 const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 const CONVERSATION_URL = '/api/statusnet/conversation'
+const MENTIONS_URL = '/api/statuses/mentions.json'
 
 const oldfetch = window.fetch
 
@@ -25,6 +26,12 @@ const authHeaders = (user) => {
   } else {
     return { }
   }
+}
+
+const fetchMentions = ({username, sinceId = 0, credentials}) => {
+  let url = `${MENTIONS_URL}?since_id=${sinceId}&screen_name=${username}`
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
 }
 
 const fetchConversation = ({id, credentials}) => {
@@ -120,6 +127,7 @@ const apiService = {
   fetchTimeline,
   fetchConversation,
   fetchStatus,
+  fetchMentions,
   favorite,
   unfavorite,
   retweet,

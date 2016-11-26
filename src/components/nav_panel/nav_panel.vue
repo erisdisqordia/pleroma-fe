@@ -2,9 +2,14 @@
   <div class="nav-panel">
     <div class="panel panel-default">
       <ul>
-        <li v-if='loggedIn'>
+        <li v-if='currentUser'>
           <router-link to='/main/friends'>
             Timeline
+          </router-link>
+        </li>
+        <li v-if='currentUser'>
+          <router-link :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
+            Mentions
           </router-link>
         </li>
         <li>

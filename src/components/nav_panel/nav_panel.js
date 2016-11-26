@@ -1,6 +1,6 @@
 const NavPanel = {
   computed: {
-    loggedIn () {
+    currentUser () {
       return this.$store.state.users.currentUser
     }
   }

@@ -52,7 +52,7 @@ export const prepareStatus = (status) => {
   return status
 }
 
-const updateTimestampsInStatuses = (statuses) => {
+export const updateTimestampsInStatuses = (statuses) => {
   return map(statuses, (statusoid) => {
     const status = statusoid.retweeted_status || statusoid
 

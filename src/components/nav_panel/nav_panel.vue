@@ -2,7 +2,7 @@
   <div class="nav-panel">
     <div class="panel panel-default">
       <ul>
-        <li ng-if='currentUser'>
+        <li v-if='loggedIn'>
           <router-link to='/main/friends'>
             Timeline
           </router-link>

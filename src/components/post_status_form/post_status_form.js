@@ -23,14 +23,12 @@ const PostStatusForm = {
   props: [
     'replyTo',
     'repliedUser',
-    'attentions',
-    'submitDisabled'
+    'attentions'
   ],
   components: {
     MediaUpload
   },
   data () {
-    this.submitDisabled = false
     let statusText = ''
 
     if (this.replyTo) {
@@ -39,6 +37,7 @@ const PostStatusForm = {
     }
 
     return {
+      submitDisabled: false,
       newStatus: {
         status: statusText,
         files: []

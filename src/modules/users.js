@@ -1,5 +1,6 @@
 import apiService from '../services/api/api.service.js'
 import timelineFetcher from '../services/timeline_fetcher/timeline_fetcher.service.js'
+import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 
 const users = {
   state: {
@@ -29,7 +30,10 @@ const users = {
                 user.credentials = userCredentials
                 commit('setCurrentUser', user)
               })
+              // Start getting fresh tweets.
               .then(() => timelineFetcher.startFetching({store, credentials: userCredentials}))
+              // Set our new backend interactor
+              .then(() => commit('setBackendInteractor', backendInteractorService(userCredentials)))
           }
           commit('endLogin')
         })

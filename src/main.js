@@ -9,6 +9,7 @@ import Conversation from './components/conversation/conversation.vue'
 
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
+import apiModule from './modules/api.js'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
@@ -16,7 +17,8 @@ Vue.use(VueRouter)
 const store = new Vuex.Store({
   modules: {
     statuses: statusesModule,
-    users: usersModule
+    users: usersModule,
+    api: apiModule
   }
 })
 

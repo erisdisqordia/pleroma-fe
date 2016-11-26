@@ -20,21 +20,23 @@ let fetch = (url, options) => {
 }
 
 const authHeaders = (user) => {
-  if (user) {
+  if (user && user.username && user.password) {
     return { 'Authorization': `Basic ${btoa(`${user.username}:${user.password}`)}` }
   } else {
     return { }
   }
 }
 
-const fetchConversation = ({id}) => {
+const fetchConversation = ({id, credentials}) => {
   let url = `${CONVERSATION_URL}/${id}.json?count=100`
-  return fetch(url).then((data) => data.json())
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
 }
 
-const fetchStatus = ({id}) => {
+const fetchStatus = ({id, credentials}) => {
   let url = `${STATUS_URL}/${id}.json`
-  return fetch(url).then((data) => data.json())
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
 }
 
 const fetchTimeline = ({timeline, credentials, since = false, until = false}) => {

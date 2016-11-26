@@ -1,6 +1,5 @@
 import { find, filter, sortBy, toInteger } from 'lodash'
 import Status from '../status/status.vue'
-import apiService from '../../services/api/api.service.js'
 
 const conversation = {
   computed: {
@@ -32,12 +31,12 @@ const conversation = {
     fetchConversation () {
       if (this.status) {
         const conversationId = this.status.statusnet_conversation_id
-        apiService.fetchConversation({id: conversationId})
+        this.$store.state.api.backendInteractor.fetchConversation({id: conversationId})
           .then((statuses) => this.$store.dispatch('addNewStatuses', { statuses }))
           .then(() => this.$store.commit('updateTimestamps'))
       } else {
         const id = this.$route.params.id
-        apiService.fetchStatus({id})
+        this.$store.state.api.backendInteractor.fetchStatus({id})
           .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
           .then(() => this.fetchConversation())
       }

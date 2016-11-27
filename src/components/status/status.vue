@@ -16,7 +16,7 @@
       </div>
       <div class="media-body">
         <h4 class="media-heading">
-          <strong>{{status.user.name}}</strong>
+          {{status.user.name}}
           <small><a :href="status.user.statusnet_profile_url">{{status.user.screen_name}}</a></small>
           <small v-if="status.in_reply_to_screen_name"> &gt; <a :href="status.in_reply_to_profileurl">{{status.in_reply_to_screen_name}}</a></small>
           -

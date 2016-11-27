@@ -121,6 +121,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
     if (result.new) {
       updateMaxId(status)
+
+      if (statusType(status) === 'retweet' && status.retweeted_status.user.id === user.id) {
+        addNotification({ type: 'repeat', status: status.retweeted_status, action: status })
+      }
     }
 
     // Some statuses should only be added to the global status repository.
@@ -201,6 +205,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       }
     },
     'default': (unknown) => {
+      console.log('unknown status type')
       console.log(unknown)
     }
   }

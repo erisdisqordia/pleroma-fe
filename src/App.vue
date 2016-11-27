@@ -9,6 +9,7 @@
       <sidebar>
         <user-panel></user-panel>
         <nav-panel></nav-panel>
+        <notifications v-if="currentUser"></notifications>
       </sidebar>
       <router-view></router-view>
     </div>

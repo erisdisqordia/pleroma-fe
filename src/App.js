@@ -1,14 +1,16 @@
 import UserPanel from './components/user_panel/user_panel.vue'
 import NavPanel from './components/nav_panel/nav_panel.vue'
+import Notifications from './components/notifications/notifications.vue'
 
 export default {
   name: 'app',
   components: {
     UserPanel,
-    NavPanel
+    NavPanel,
+    Notifications
   },
   computed: {
-    user () { return this.$store.state.users.currentUser || {} },
-    style () { return { 'background-image': `url(${this.user.background_image})` } }
+    currentUser () { return this.$store.state.users.currentUser },
+    style () { return { 'background-image': `url(${this.currentUser.background_image})` } }
   }
 }

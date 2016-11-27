@@ -26,7 +26,7 @@
             </router-link>
           </small>
           <small v-if="!status.is_local" class="source_url">
-            <a :href="status.external_url" >Source</a>
+            <a :href="status.external_url" target="_blank" >Source</a>
           </small>
         </h4>
 

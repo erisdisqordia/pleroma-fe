@@ -62,7 +62,7 @@ export const updateTimestampsInStatuses = (statuses) => {
   })
 }
 
-const statusType = (status) => {
+export const statusType = (status) => {
   if (status.is_post_verb) {
     return 'status'
   }
@@ -71,7 +71,7 @@ const statusType = (status) => {
     return 'retweet'
   }
 
-  if (typeof status.uri === 'string' && status.uri.match(/fave/)) {
+  if (typeof status.uri === 'string' && status.uri.match(/(fave|objectType=Favourite)/)) {
     return 'favorite'
   }
 

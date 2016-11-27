@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash'
-import { defaultState, mutations, findMaxId, prepareStatus } from '../../../../src/modules/statuses.js'
+import { defaultState, mutations, findMaxId, prepareStatus, statusType } from '../../../../src/modules/statuses.js'
 
 const makeMockStatus = ({id, text, is_post_verb = true}) => {
   return {
@@ -12,6 +12,21 @@ const makeMockStatus = ({id, text, is_post_verb = true}) => {
     is_post_verb
   }
 }
+
+describe('Statuses.statusType', () => {
+  it('identifies favorites', () => {
+    const fav = {
+      uri: 'tag:soykaf.com,2016-08-21:fave:2558:note:339495:2016-08-21T16:54:04+00:00'
+    }
+
+    const mastoFav = {
+      uri: 'tag:mastodon.social,2016-11-27:objectId=73903:objectType=Favourite'
+    }
+
+    expect(statusType(fav)).to.eql('favorite')
+    expect(statusType(mastoFav)).to.eql('favorite')
+  })
+})
 
 describe('Statuses.prepareStatus', () => {
   it('sets nsfw for statuses with the #nsfw tag', () => {

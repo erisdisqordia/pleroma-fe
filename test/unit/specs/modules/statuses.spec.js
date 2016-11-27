@@ -9,7 +9,8 @@ const makeMockStatus = ({id, text, is_post_verb = true}) => {
     text: text || `Text number ${id}`,
     fave_num: 0,
     uri: '',
-    is_post_verb
+    is_post_verb,
+    attentions: []
   }
 }
 
@@ -179,6 +180,24 @@ describe('The Statuses module', () => {
     expect(state.notifications[0].status).to.eql(status)
     expect(state.notifications[0].action).to.eql(retweet)
     expect(state.notifications[0].type).to.eql('repeat')
+  })
+
+  it('adds a notification when you are mentioned', () => {
+    const user = { id: 1 }
+    const state = cloneDeep(defaultState)
+    const status = makeMockStatus({id: 1})
+    const mentionedStatus = makeMockStatus({id: 2})
+    mentionedStatus.attentions = [user]
+
+    mutations.addNewStatuses(state, { statuses: [status], user })
+
+    expect(state.notifications.length).to.eql(0)
+
+    mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })
+    expect(state.notifications.length).to.eql(1)
+    expect(state.notifications[0].status).to.eql(mentionedStatus)
+    expect(state.notifications[0].action).to.eql(mentionedStatus)
+    expect(state.notifications[0].type).to.eql('mention')
   })
 
   it('replaces existing statuses with the same id', () => {

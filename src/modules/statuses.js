@@ -125,6 +125,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       if (statusType(status) === 'retweet' && status.retweeted_status.user.id === user.id) {
         addNotification({ type: 'repeat', status: status.retweeted_status, action: status })
       }
+
+      if (statusType(status) === 'status' && find(status.attentions, { id: user.id })) {
+        addNotification({ type: 'mention', status, action: status })
+      }
     }
 
     // Some statuses should only be added to the global status repository.

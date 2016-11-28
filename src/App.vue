@@ -11,7 +11,9 @@
         <nav-panel></nav-panel>
         <notifications v-if="currentUser"></notifications>
       </sidebar>
-      <router-view></router-view>
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>

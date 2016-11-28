@@ -1,5 +1,11 @@
 import { find, filter, sortBy, toInteger } from 'lodash'
+import { statusType } from '../../modules/statuses.js'
 import Status from '../status/status.vue'
+
+const sortAndFilterConversation = (conversation) => {
+  conversation = filter(conversation, (status) => statusType(status) !== 'retweet')
+  return sortBy(conversation, 'id')
+}
 
 const conversation = {
   computed: {
@@ -18,7 +24,8 @@ const conversation = {
       const conversationId = this.status.statusnet_conversation_id
       const statuses = this.$store.state.statuses.allStatuses
       const conversation = filter(statuses, { statusnet_conversation_id: conversationId })
-      return sortBy(conversation, 'id')
+
+      return sortAndFilterConversation(conversation)
     }
   },
   components: {

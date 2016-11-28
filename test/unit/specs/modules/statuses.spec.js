@@ -104,7 +104,7 @@ describe('The Statuses module', () => {
     status.uri = 'xxx'
     const deletion = makeMockStatus({id: 2, is_post_verb: false})
     deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
-    deletion.uri= 'xxx'
+    deletion.uri = 'xxx'
 
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
     mutations.addNewStatuses(state, { statuses: [deletion], showImmediately: true, timeline: 'public' })
@@ -113,6 +113,20 @@ describe('The Statuses module', () => {
     expect(state.timelines.public.statuses).to.eql([])
     expect(state.timelines.public.visibleStatuses).to.eql([])
     expect(state.timelines.public.maxId).to.eql(2)
+  })
+
+  it('does not update the maxId when the noIdUpdate flag is set', () => {
+    const state = cloneDeep(defaultState)
+    const status = makeMockStatus({id: 1})
+    const secondStatus = makeMockStatus({id: 2})
+
+    mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
+    expect(state.timelines.public.maxId).to.eql(1)
+
+    mutations.addNewStatuses(state, { statuses: [secondStatus], showImmediately: true, timeline: 'public', noIdUpdate: true })
+    expect(state.timelines.public.statuses).to.eql([secondStatus, status])
+    expect(state.timelines.public.visibleStatuses).to.eql([secondStatus, status])
+    expect(state.timelines.public.maxId).to.eql(1)
   })
 
   it('keeps a descending by id order in timeline.visibleStatuses and timeline.statuses', () => {

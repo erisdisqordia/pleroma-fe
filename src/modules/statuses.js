@@ -86,7 +86,7 @@ const mergeOrAdd = (arr, item) => {
   }
 }
 
-const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {} }) => {
+const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false }) => {
   // Sanity check
   if (!isArray(statuses)) {
     return false
@@ -97,7 +97,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
   // Set the maxId to the new id if it's larger.
   const updateMaxId = ({id}) => {
-    if (!timeline) { return false }
+    if (!timeline || noIdUpdate) { return false }
     timelineObject.maxId = max([id, timelineObject.maxId])
   }
 
@@ -242,8 +242,8 @@ export const mutations = {
 const statuses = {
   state: defaultState,
   actions: {
-    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false }) {
-      commit('addNewStatuses', { statuses, showImmediately, timeline, user: rootState.users.currentUser })
+    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false }) {
+      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser })
     },
     favorite ({ rootState, commit }, status) {
       // Optimistic favoriting...

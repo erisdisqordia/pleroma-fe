@@ -23,7 +23,7 @@
             -
             <small>
               <router-link :to="{ name: 'conversation', params: { id: status.id } }">
-                {{status.created_at_parsed}}
+                <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
             </small>
             <small v-if="!status.is_local" class="source_url">

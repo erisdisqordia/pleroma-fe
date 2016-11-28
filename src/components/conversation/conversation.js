@@ -36,7 +36,6 @@ const conversation = {
         const conversationId = this.status.statusnet_conversation_id
         this.$store.state.api.backendInteractor.fetchConversation({id: conversationId})
           .then((statuses) => this.$store.dispatch('addNewStatuses', { statuses }))
-          .then(() => this.$store.commit('updateTimestamps'))
       } else {
         const id = this.$route.params.id
         this.$store.state.api.backendInteractor.fetchStatus({id})

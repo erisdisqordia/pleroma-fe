@@ -12,8 +12,16 @@ import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
 
+import VueTimeago from 'vue-timeago'
+
 Vue.use(Vuex)
 Vue.use(VueRouter)
+Vue.use(VueTimeago, {
+  locale: 'en-US',
+  locales: {
+    'en-US': require('vue-timeago/locales/en-US.json')
+  }
+})
 
 const store = new Vuex.Store({
   modules: {

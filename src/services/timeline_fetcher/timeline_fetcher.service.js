@@ -10,8 +10,6 @@ const update = ({store, statuses, timeline, showImmediately}) => {
     statuses,
     showImmediately
   })
-
-  store.commit('updateTimestamps')
 }
 
 const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false, showImmediately = false}) => {

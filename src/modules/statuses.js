@@ -1,5 +1,4 @@
-import { remove, map, slice, sortBy, toInteger, each, find, flatten, maxBy, last, merge, max, isArray } from 'lodash'
-import moment from 'moment'
+import { remove, slice, sortBy, toInteger, each, find, flatten, maxBy, last, merge, max, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -46,20 +45,7 @@ export const prepareStatus = (status) => {
     status.nsfw = !!status.text.match(nsfwRegex)
   }
 
-  // Set created_at_parsed to initial value
-  status.created_at_parsed = status.created_at
-
   return status
-}
-
-export const updateTimestampsInStatuses = (statuses) => {
-  return map(statuses, (statusoid) => {
-    const status = statusoid.retweeted_status || statusoid
-
-    // Parse date
-    status.created_at_parsed = moment(status.created_at).fromNow()
-    return status
-  })
 }
 
 export const statusType = (status) => {
@@ -235,9 +221,6 @@ export const mutations = {
 
     oldTimeline.newStatusCount = 0
     oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
-  },
-  updateTimestamps (state) {
-    updateTimestampsInStatuses(state.allStatuses)
   },
   setFavorited (state, { status, value }) {
     const newStatus = find(state.allStatuses, status)

@@ -1,6 +1,6 @@
 import Status from '../status/status.vue'
 // Temporary
-import { prepareStatus, updateTimestampsInStatuses } from '../../modules/statuses.js'
+import { prepareStatus } from '../../modules/statuses.js'
 import { map } from 'lodash'
 
 const Mentions = {
@@ -20,7 +20,7 @@ const Mentions = {
   created () {
     this.$store.state.api.backendInteractor.fetchMentions({username: this.username})
       .then((mentions) => {
-        this.mentions = updateTimestampsInStatuses(map(mentions, prepareStatus))
+        this.mentions = map(mentions, prepareStatus)
       })
   }
 }

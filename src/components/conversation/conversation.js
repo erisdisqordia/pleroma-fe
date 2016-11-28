@@ -27,6 +27,9 @@ const conversation = {
   created () {
     this.fetchConversation()
   },
+  watch: {
+    '$route': 'fetchConversation'
+  },
   methods: {
     fetchConversation () {
       if (this.status) {

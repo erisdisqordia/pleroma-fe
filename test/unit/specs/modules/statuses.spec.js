@@ -166,40 +166,6 @@ describe('The Statuses module', () => {
     expect(retweet.retweeted_status.text).to.eql(modStatus.text)
   })
 
-  it('adds a notfications for retweets if you are the retweetet', () => {
-    const user = { id: 1 }
-    const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
-    status.user = user
-    const retweet = makeMockStatus({id: 2, is_post_verb: false})
-    retweet.retweeted_status = status
-
-    mutations.addNewStatuses(state, { statuses: [retweet], user })
-
-    expect(state.notifications.length).to.eql(1)
-    expect(state.notifications[0].status).to.eql(status)
-    expect(state.notifications[0].action).to.eql(retweet)
-    expect(state.notifications[0].type).to.eql('repeat')
-  })
-
-  it('adds a notification when you are mentioned', () => {
-    const user = { id: 1 }
-    const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
-    const mentionedStatus = makeMockStatus({id: 2})
-    mentionedStatus.attentions = [user]
-
-    mutations.addNewStatuses(state, { statuses: [status], user })
-
-    expect(state.notifications.length).to.eql(0)
-
-    mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })
-    expect(state.notifications.length).to.eql(1)
-    expect(state.notifications[0].status).to.eql(mentionedStatus)
-    expect(state.notifications[0].action).to.eql(mentionedStatus)
-    expect(state.notifications[0].type).to.eql('mention')
-  })
-
   it('replaces existing statuses with the same id', () => {
     const state = cloneDeep(defaultState)
     const status = makeMockStatus({id: 1})
@@ -287,6 +253,40 @@ describe('The Statuses module', () => {
   })
 
   describe('notifications', () => {
+    it('adds a notfications for retweets if you are the retweetet', () => {
+      const user = { id: 1 }
+      const state = cloneDeep(defaultState)
+      const status = makeMockStatus({id: 1})
+      status.user = user
+      const retweet = makeMockStatus({id: 2, is_post_verb: false})
+      retweet.retweeted_status = status
+
+      mutations.addNewStatuses(state, { statuses: [retweet], user })
+
+      expect(state.notifications.length).to.eql(1)
+      expect(state.notifications[0].status).to.eql(status)
+      expect(state.notifications[0].action).to.eql(retweet)
+      expect(state.notifications[0].type).to.eql('repeat')
+    })
+
+    it('adds a notification when you are mentioned', () => {
+      const user = { id: 1 }
+      const state = cloneDeep(defaultState)
+      const status = makeMockStatus({id: 1})
+      const mentionedStatus = makeMockStatus({id: 2})
+      mentionedStatus.attentions = [user]
+
+      mutations.addNewStatuses(state, { statuses: [status], user })
+
+      expect(state.notifications.length).to.eql(0)
+
+      mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })
+      expect(state.notifications.length).to.eql(1)
+      expect(state.notifications[0].status).to.eql(mentionedStatus)
+      expect(state.notifications[0].action).to.eql(mentionedStatus)
+      expect(state.notifications[0].type).to.eql('mention')
+    })
+
     it('adds a notfication when one of the user\'s status is favorited', () => {
       const state = cloneDeep(defaultState)
       const status = makeMockStatus({id: 1})

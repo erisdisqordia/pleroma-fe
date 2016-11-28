@@ -44,15 +44,6 @@ describe('Statuses.prepareStatus', () => {
 
     expect(prepareStatus(nsfw).nsfw).to.eq(false)
   })
-
-  it('sets the created_at_parsed property', () => {
-    const status = makeMockStatus({id: 1})
-    status.created_at = ''
-    expect(status.created_at_parsed).to.eq(undefined)
-
-    const prepared = prepareStatus(status)
-    expect(prepared.created_at_parsed).to.not.eq(undefined)
-  })
 })
 
 describe('Statuses.findMaxId', () => {

@@ -15,26 +15,28 @@
         </a>
       </div>
       <div class="media-body">
-        <h4 class="media-heading">
-          {{status.user.name}}
-          <small><a :href="status.user.statusnet_profile_url">{{status.user.screen_name}}</a></small>
-          <small v-if="status.in_reply_to_screen_name"> &gt; <a :href="status.in_reply_to_profileurl">{{status.in_reply_to_screen_name}}</a></small>
-          -
-          <small>
-            <router-link :to="{ name: 'conversation', params: { id: status.id } }">
-              {{status.created_at_parsed}}
-            </router-link>
-          </small>
-          <small v-if="!status.is_local" class="source_url">
-            <a :href="status.external_url" target="_blank" >Source</a>
-          </small>
-        </h4>
+        <div class="user-content">
+          <h4 class="media-heading">
+            {{status.user.name}}
+            <small><a :href="status.user.statusnet_profile_url">{{status.user.screen_name}}</a></small>
+            <small v-if="status.in_reply_to_screen_name"> &gt; <a :href="status.in_reply_to_profileurl">{{status.in_reply_to_screen_name}}</a></small>
+            -
+            <small>
+              <router-link :to="{ name: 'conversation', params: { id: status.id } }">
+                {{status.created_at_parsed}}
+              </router-link>
+            </small>
+            <small v-if="!status.is_local" class="source_url">
+              <a :href="status.external_url" target="_blank" >Source</a>
+            </small>
+          </h4>
 
-        <div class="status-content" v-html="status.statusnet_html"></div>
+          <div class="status-content" v-html="status.statusnet_html"></div>
 
-        <div v-if='status.attachments' class='attachments'>
-          <attachment :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments">
-          </attachment>
+          <div v-if='status.attachments' class='attachments'>
+            <attachment :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments">
+            </attachment>
+          </div>
         </div>
 
         <div v-if="loggedIn">
@@ -64,6 +66,10 @@
      overflow-wrap: break-word;
      word-wrap: break-word;
      word-break: break-word;
+
+     .user-content {
+       min-height: 52px;
+     }
 
      .source_url {
        float: right;

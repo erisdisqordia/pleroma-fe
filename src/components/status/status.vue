@@ -8,7 +8,7 @@
         Retweeted by {{retweeter}}
       </div>
     </div>
-    <div class="media status container" ng-class="{compact: compact, notify: notify}">
+    <div class="media status container">
       <div class="media-left">
         <a :href="status.user.statusnet_profile_url">
           <img class='avatar' :src="status.user.profile_image_url_original">

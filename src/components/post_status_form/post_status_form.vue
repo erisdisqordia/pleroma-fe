@@ -24,6 +24,22 @@
 <script src="./post_status_form.js"></script>
 
 <style lang="scss">
+ .tribute-container {
+   ul {
+     padding: 0px;
+     li {
+       display: flex;
+       align-items: center;
+     }
+   }
+   img {
+     padding: 3px;
+     width: 16px;
+     height: 16px;
+     border-radius: 50%;
+   }
+ }
+
  .post-status-form, .login {
      .form-bottom {
          display: flex;

@@ -13,11 +13,13 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "babel-plugin-add-module-exports": "^0.2.1",
     "diff": "^3.0.1",
     "karma-mocha-reporter": "^2.2.1",
     "node-sass": "^3.10.1",
     "sanitize-html": "^1.13.0",
     "sass-loader": "^4.0.2",
+    "tributejs": "^2.1.0",
     "vue": "^2.0.1",
     "vue-router": "^2.0.1",
     "vue-timeago": "^3.1.2",

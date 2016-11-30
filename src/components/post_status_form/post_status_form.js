@@ -92,9 +92,11 @@ const PostStatusForm = {
     }
   },
   computed: {
+    users () {
+      return this.$store.state.users.users
+    },
     completions () {
-      let users = map(this.$store.state.statuses.allStatuses, 'user')
-      users = uniqBy(users, 'id')
+      let users = this.users
       users = merge({values: users}, defaultCollection)
       return [users]
     }

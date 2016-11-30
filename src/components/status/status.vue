@@ -18,8 +18,10 @@
         <div class="user-content">
           <h4 class="media-heading">
             {{status.user.name}}
-            <small><a :href="status.user.statusnet_profile_url">{{status.user.screen_name}}</a></small>
-            <small v-if="status.in_reply_to_screen_name"> &gt; <a :href="status.in_reply_to_profileurl">{{status.in_reply_to_screen_name}}</a></small>
+            <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
+            <small v-if="status.in_reply_to_screen_name"> &gt;
+              <a :href="status.in_reply_to_profileurl">{{status.in_reply_to_screen_name}}</a>
+            </small>
             -
             <small>
               <router-link :to="{ name: 'conversation', params: { id: status.id } }">

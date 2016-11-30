@@ -4,6 +4,7 @@ import { map, each, find, merge } from 'lodash'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, item) => {
+  if (!item) { return false }
   const oldItem = find(arr, {id: item.id})
   if (oldItem) {
     // We already have this, so only merge the new info.

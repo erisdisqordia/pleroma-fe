@@ -48,18 +48,25 @@ const users = {
     loginUser (store, userCredentials) {
       const commit = store.commit
       commit('beginLogin')
-      return store.rootState.api.backendInteractor.verifyCredentials(userCredentials)
+      store.rootState.api.backendInteractor.verifyCredentials(userCredentials)
         .then((response) => {
           if (response.ok) {
             response.json()
               .then((user) => {
                 user.credentials = userCredentials
                 commit('setCurrentUser', user)
+                commit('addNewUsers', [user])
+
+                // Start getting fresh tweets.
+                timelineFetcher.startFetching({store, credentials: userCredentials})
+
+                // Set our new backend interactor
+                commit('setBackendInteractor', backendInteractorService(userCredentials))
+
+                // Fetch our friends
+                store.rootState.api.backendInteractor.fetchFriends()
+                  .then((friends) => commit('addNewUsers', friends))
               })
-              // Start getting fresh tweets.
-              .then(() => timelineFetcher.startFetching({store, credentials: userCredentials}))
-              // Set our new backend interactor
-              .then(() => commit('setBackendInteractor', backendInteractorService(userCredentials)))
           }
           commit('endLogin')
         })

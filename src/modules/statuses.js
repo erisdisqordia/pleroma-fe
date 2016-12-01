@@ -45,6 +45,9 @@ export const prepareStatus = (status) => {
     status.nsfw = !!status.text.match(nsfwRegex)
   }
 
+  // To make the array reactive
+  status.attachments = status.attachments || []
+
   return status
 }
 
@@ -77,6 +80,8 @@ const mergeOrAdd = (arr, item) => {
   if (oldItem) {
     // We already have this, so only merge the new info.
     merge(oldItem, item)
+    // Reactivity fix.
+    oldItem.attachments.splice(oldItem.attachments.length)
     return {item: oldItem, new: false}
   } else {
     // This is a new item, prepare it

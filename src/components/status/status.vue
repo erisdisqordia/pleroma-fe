@@ -20,7 +20,9 @@
             {{status.user.name}}
             <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
             <small v-if="status.in_reply_to_screen_name"> &gt;
-              <a :href="status.in_reply_to_profileurl">{{status.in_reply_to_screen_name}}</a>
+              <router-link :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
+                {{status.in_reply_to_screen_name}}
+              </router-link>
             </small>
             -
             <small>

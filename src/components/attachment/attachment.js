@@ -1,4 +1,4 @@
-import nsfwImage from '../../assets/nsfw.jpg'
+import nsfwImage from '../../assets/nsfw.png'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 
 const Attachment = {

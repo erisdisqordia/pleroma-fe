@@ -18,10 +18,3 @@
   </div>
 </template>
 <script src="./timeline.js"></script>
-
-<style>
- .timeline.panel {
-     flex: 2;
-     flex-basis: 500px;
- }
-</style>

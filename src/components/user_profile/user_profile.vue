@@ -5,10 +5,3 @@
 </template>
 
 <script src="./user_profile.js"></script>
-
-<style>
- .user-profile {
-   flex: 2;
-   flex-basis: 500px;
- }
-</style>

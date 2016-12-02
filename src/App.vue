@@ -6,14 +6,16 @@
       </div>
     </nav>
     <div class="container" id="content">
-      <sidebar>
+      <div class="sidebar">
         <user-panel></user-panel>
         <nav-panel></nav-panel>
         <notifications v-if="currentUser"></notifications>
-      </sidebar>
-      <transition name="fade">
-        <router-view></router-view>
-      </transition>
+      </div>
+      <div class="main">
+        <transition name="fade">
+          <router-view></router-view>
+        </transition>
+      </div>
     </div>
   </div>
 </template>

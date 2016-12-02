@@ -1,15 +1,18 @@
 <template>
   <div class="attachment">
-    <a class="image-attachment" v-if="nsfw" v-on:click.prevent="showNsfw()">
+    <a class="image-attachment" v-if="hidden" v-on:click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"></img>
     </a>
+    <div class="hider" v-if="nsfw && !hidden">
+      <a href="#" @click.prevent="toggleHidden()">Hide</a>
+    </div>
 
-    <a class="image-attachment" v-if="type === 'image' && !nsfw"
+    <a class="image-attachment" v-if="type === 'image' && !hidden"
       :href="attachment.url" target="_blank">
       <img :src="attachment.url"></img>
     </a>
 
-    <video v-if="type === 'video' && !nsfw" :src="attachment.url" controls></video>
+    <video v-if="type === 'video' && !hidden" :src="attachment.url" controls></video>
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 
@@ -34,11 +37,19 @@
       display: flex;
       flex-wrap: wrap;
       .attachment {
-
           flex: 1 0 30%;
           display: flex;
           margin: 0.2em;
           align-self: flex-start;
+
+          .hider {
+              position: absolute;
+              margin: 10px;
+              padding: 5px;
+              background: rgba(230,230,230,0.6);
+              border-radius: 0.5em;
+              font-weight: bold;
+          }
 
           video {
               height: 100%;

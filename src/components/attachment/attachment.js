@@ -7,15 +7,21 @@ const Attachment = {
     'nsfw',
     'statusId'
   ],
-  data: () => ({ nsfwImage }),
+  data: () => ({
+    nsfwImage,
+    showHidden: false
+  }),
   computed: {
     type () {
       return fileTypeService.fileType(this.attachment.mimetype)
+    },
+    hidden () {
+      return this.nsfw && !this.showHidden
     }
   },
   methods: {
-    showNsfw () {
-      this.$store.commit('setNsfw', { id: this.statusId, nsfw: false })
+    toggleHidden () {
+      this.showHidden = !this.showHidden
     }
   }
 }

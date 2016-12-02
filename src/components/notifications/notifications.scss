@@ -6,6 +6,8 @@
   border-bottom: 1px solid silver;
 
   .text {
+    min-width: 0px;
+    word-wrap: break-word;
 
     .icon-retweet {
       color: $green;

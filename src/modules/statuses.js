@@ -138,10 +138,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       if (statusType(status) === 'status' && find(status.attentions, { id: user.id })) {
         const mentions = state.timelines.mentions
 
-        mergeOrAdd(mentions.statuses, status)
-        mentions.newStatusCount += 1
+        // Add the mention to the mentions timeline
+        if (timelineObject !== mentions) {
+          mergeOrAdd(mentions.statuses, status)
+          mentions.newStatusCount += 1
 
-        sortTimeline(mentions)
+          sortTimeline(mentions)
+        }
 
         addNotification({ type: 'mention', status, action: status })
       }

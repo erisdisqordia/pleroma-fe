@@ -8,6 +8,15 @@ export const defaultState = {
   notifications: [],
   favorites: new Set(),
   timelines: {
+    mentions: {
+      statuses: [],
+      faves: [],
+      visibleStatuses: [],
+      newStatusCount: 0,
+      maxId: 0,
+      minVisibleId: 0,
+      loading: false
+    },
     public: {
       statuses: [],
       faves: [],
@@ -91,6 +100,14 @@ const mergeOrAdd = (arr, item) => {
   }
 }
 
+const sortTimeline = (timeline) => {
+  timeline.visibleStatuses = sortBy(timeline.visibleStatuses, ({id}) => -id)
+  timeline.statuses = sortBy(timeline.statuses, ({id}) => -id)
+  timeline.minVisibleId = (last(timeline.statuses) || {}).id
+
+  return timeline
+}
+
 const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false }) => {
   // Sanity check
   if (!isArray(statuses)) {
@@ -117,7 +134,15 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
         addNotification({ type: 'repeat', status: status.retweeted_status, action: status })
       }
 
+      // We are mentioned in a post
       if (statusType(status) === 'status' && find(status.attentions, { id: user.id })) {
+        const mentions = state.timelines.mentions
+
+        mergeOrAdd(mentions.statuses, status)
+        mentions.newStatusCount += 1
+
+        sortTimeline(mentions)
+
         addNotification({ type: 'mention', status, action: status })
       }
     }
@@ -213,9 +238,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
   // Keep the visible statuses sorted
   if (timeline) {
-    timelineObject.visibleStatuses = sortBy(timelineObject.visibleStatuses, ({id}) => -id)
-    timelineObject.statuses = sortBy(timelineObject.statuses, ({id}) => -id)
-    timelineObject.minVisibleId = (last(timelineObject.statuses) || {}).id
+    sortTimeline(timelineObject)
   }
 }
 

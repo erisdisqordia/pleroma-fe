@@ -7,6 +7,7 @@ const FAVORITE_URL = '/api/favorites/create'
 const UNFAVORITE_URL = '/api/favorites/destroy'
 const RETWEET_URL = '/api/statuses/retweet'
 const STATUS_UPDATE_URL = '/api/statuses/update.json'
+const STATUS_DELETE_URL = '/api/statuses/destroy'
 const STATUS_URL = '/api/statuses/show'
 const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 const CONVERSATION_URL = '/api/statusnet/conversation'
@@ -118,6 +119,13 @@ const postStatus = ({credentials, status, mediaIds, inReplyToStatusId}) => {
   })
 }
 
+const deleteStatus = ({ id, credentials }) => {
+  return fetch(`${STATUS_DELETE_URL}/${id}.json`, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  })
+}
+
 const uploadMedia = ({formData, credentials}) => {
   return fetch(MEDIA_UPLOAD_URL, {
     body: formData,
@@ -139,6 +147,7 @@ const apiService = {
   unfavorite,
   retweet,
   postStatus,
+  deleteStatus,
   uploadMedia
 }
 

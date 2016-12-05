@@ -44,6 +44,11 @@ describe('Statuses.prepareStatus', () => {
 
     expect(prepareStatus(nsfw).nsfw).to.eq(false)
   })
+
+  it('sets deleted flag to false', () => {
+    const aStatus = makeMockStatus({id: 1, text: 'Hello oniichan'})
+    expect(prepareStatus(aStatus).deleted).to.eq(false)
+  })
 })
 
 describe('Statuses.findMaxId', () => {

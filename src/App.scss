@@ -63,7 +63,7 @@ nav {
 
 }
 
-sidebar {
+.sidebar {
     flex: 1;
     flex-basis: 300px;
 }
@@ -254,4 +254,9 @@ nav {
 }
 .fade-enter, .fade-leave-active {
   opacity: 0
+}
+
+.main {
+    flex: 2;
+    flex-basis: 500px;
 }

@@ -54,6 +54,9 @@ export const prepareStatus = (status) => {
     status.nsfw = !!status.text.match(nsfwRegex)
   }
 
+  // Set deleted flag
+  status.deleted = false
+
   // To make the array reactive
   status.attachments = status.attachments || []
 
@@ -261,6 +264,10 @@ export const mutations = {
     const newStatus = find(state.allStatuses, status)
     newStatus.repeated = value
   },
+  setDeleted (state, { status }) {
+    const newStatus = find(state.allStatuses, status)
+    newStatus.deleted = true
+  },
   setLoading (state, { timeline, value }) {
     state.timelines[timeline].loading = value
   },
@@ -275,6 +282,10 @@ const statuses = {
   actions: {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser })
+    },
+    deleteStatus ({ rootState, commit }, status) {
+      commit('setDeleted', { status })
+      apiService.deleteStatus({ id: status.id, credentials: rootState.users.currentUser.credentials })
     },
     favorite ({ rootState, commit }, status) {
       // Optimistic favoriting...

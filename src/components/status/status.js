@@ -20,7 +20,9 @@ const Status = {
     },
     loggedIn () {
       return !!this.$store.state.users.currentUser
-    }
+    },
+    deleted () { return this.statusoid.deleted },
+    canDelete () { return this.statusoid.user.rights.delete_others_notice || this.statusoid.user.id == this.$store.state.users.currentUser.id }
   },
   components: {
     Attachment,
@@ -31,6 +33,12 @@ const Status = {
   methods: {
     toggleReplying () {
       this.replying = !this.replying
+    },
+    deleteStatus () {
+      const confirmed = confirm('Do you really want to delete this status?')
+      if (confirmed) {
+        this.$store.dispatch('deleteStatus', { id: this.status.id })
+      }
     }
   }
 }

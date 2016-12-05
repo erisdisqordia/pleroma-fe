@@ -2,7 +2,7 @@
   <div class="status-el">
     <div v-if="retweet" class="media container retweet-info">
       <div class="media-left">
-        <i class='fa icon-retweet'></i>
+        <i class='fa icon-retweet retweeted'></i>
       </div>
       <div class="media-body">
         Retweeted by {{retweeter}}

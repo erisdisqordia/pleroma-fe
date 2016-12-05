@@ -297,6 +297,22 @@ describe('The Statuses module', () => {
       expect(state.notifications[0].type).to.eql('mention')
     })
 
+    it('adds the message to mentions when you are mentioned', () => {
+      const user = { id: 1 }
+      const state = cloneDeep(defaultState)
+      const status = makeMockStatus({id: 1})
+      const mentionedStatus = makeMockStatus({id: 2})
+      mentionedStatus.attentions = [user]
+
+      mutations.addNewStatuses(state, { statuses: [status], user })
+
+      expect(state.timelines.mentions.statuses).to.have.length(0)
+
+      mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })
+      expect(state.timelines.mentions.statuses).to.have.length(1)
+      expect(state.timelines.mentions.statuses).to.eql([mentionedStatus])
+    })
+
     it('adds a notfication when one of the user\'s status is favorited', () => {
       const state = cloneDeep(defaultState)
       const status = makeMockStatus({id: 1})

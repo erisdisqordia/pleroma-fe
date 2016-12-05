@@ -22,7 +22,7 @@ const Status = {
       return !!this.$store.state.users.currentUser
     },
     deleted () { return this.statusoid.deleted },
-    canDelete () { return this.statusoid.user.rights.delete_others_notice || this.statusoid.user.id == this.$store.state.users.currentUser.id }
+    canDelete () { return this.statusoid.user.id === this.$store.state.users.currentUser.id }
   },
   components: {
     Attachment,

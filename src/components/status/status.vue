@@ -52,11 +52,7 @@
             </div>
             <retweet-button :status=status></retweet-button>
             <favorite-button :status=status></favorite-button>
-            <div v-if="canDelete">
-              <a href="#" v-on:click.prevent="deleteStatus">
-                <i class='fa icon-cancel delete-status'></i>
-              </a>
-            </div>
+            <delete-button :status=status></delete-button>
           </div>
 
           <post-status-form v-if="replying" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying"></post-status-form>
@@ -129,12 +125,5 @@
 
  .status-el:last-child .status {
      border: none
- }
-
- .icon-cancel,.delete-status {
-   cursor: pointer;
-   &:hover {
-    color: $red;
-   }
  }
 </style>

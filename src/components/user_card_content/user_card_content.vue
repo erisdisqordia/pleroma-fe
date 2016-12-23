@@ -59,8 +59,9 @@
     },
     methods: {
       followUser () {
-        this.$store.state.api.backendInteractor.followUser(this.user.id)
-          .then((x) => console.log)
+        const store = this.$store
+        store.state.api.backendInteractor.followUser(this.user.id)
+          .then((followedUser) => store.commit('addNewUsers', [followedUser]))
       }
     }
   }

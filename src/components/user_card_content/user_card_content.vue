@@ -13,6 +13,9 @@
           <div class="followed">
             <span v-if="user.following">
               Following them!
+              <button @click="unfollowUser">
+                Unfollow!
+              </button>
             </span>
             <span v-if="!user.following" >
               <button @click="followUser">
@@ -62,6 +65,11 @@
         const store = this.$store
         store.state.api.backendInteractor.followUser(this.user.id)
           .then((followedUser) => store.commit('addNewUsers', [followedUser]))
+      },
+      unfollowUser () {
+        const store = this.$store
+        store.state.api.backendInteractor.unfollowUser(this.user.id)
+          .then((unfollowedUser) => store.commit('addNewUsers', [unfollowedUser]))
       }
     }
   }

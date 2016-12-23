@@ -21,12 +21,17 @@ const backendInteractorService = (credentials) => {
     return apiService.followUser({credentials, id})
   }
 
+  const unfollowUser = (id) => {
+    return apiService.unfollowUser({credentials, id})
+  }
+
   const backendInteractorServiceInstance = {
     fetchStatus,
     fetchConversation,
     fetchMentions,
     fetchFriends,
     followUser,
+    unfollowUser,
     verifyCredentials: apiService.verifyCredentials
   }
 

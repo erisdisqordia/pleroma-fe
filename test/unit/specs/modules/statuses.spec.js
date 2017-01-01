@@ -136,18 +136,21 @@ describe('The Statuses module', () => {
 
   it('keeps a descending by id order in timeline.visibleStatuses and timeline.statuses', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 2})
-    const statusTwo = makeMockStatus({id: 1})
-    const statusThree = makeMockStatus({id: 3})
+    const nonVisibleStatus = makeMockStatus({id: 1})
+    const status = makeMockStatus({id: 3})
+    const statusTwo = makeMockStatus({id: 2})
+    const statusThree = makeMockStatus({id: 4})
+
+    mutations.addNewStatuses(state, { statuses: [nonVisibleStatus], showImmediately: false, timeline: 'public' })
 
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
     mutations.addNewStatuses(state, { statuses: [statusTwo], showImmediately: true, timeline: 'public' })
 
-    expect(state.timelines.public.minVisibleId).to.equal(1)
+    expect(state.timelines.public.minVisibleId).to.equal(2)
 
     mutations.addNewStatuses(state, { statuses: [statusThree], showImmediately: true, timeline: 'public' })
 
-    expect(state.timelines.public.statuses).to.eql([statusThree, status, statusTwo])
+    expect(state.timelines.public.statuses).to.eql([statusThree, status, statusTwo, nonVisibleStatus])
     expect(state.timelines.public.visibleStatuses).to.eql([statusThree, status, statusTwo])
   })
 

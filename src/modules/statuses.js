@@ -106,7 +106,7 @@ const mergeOrAdd = (arr, item) => {
 const sortTimeline = (timeline) => {
   timeline.visibleStatuses = sortBy(timeline.visibleStatuses, ({id}) => -id)
   timeline.statuses = sortBy(timeline.statuses, ({id}) => -id)
-  timeline.minVisibleId = (last(timeline.statuses) || {}).id
+  timeline.minVisibleId = (last(timeline.visibleStatuses) || {}).id
 
   return timeline
 }

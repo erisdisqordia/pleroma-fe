@@ -13,6 +13,9 @@ const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 const CONVERSATION_URL = '/api/statusnet/conversation'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
+const FOLLOWING_URL = '/api/friendships/create.json'
+const UNFOLLOWING_URL = '/api/friendships/destroy.json'
+// const USER_URL = '/api/users/show.json'
 
 const oldfetch = window.fetch
 
@@ -28,6 +31,22 @@ const authHeaders = (user) => {
   } else {
     return { }
   }
+}
+
+const followUser = ({id, credentials}) => {
+  let url = `${FOLLOWING_URL}?user_id=${id}`
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => data.json())
+}
+
+const unfollowUser = ({id, credentials}) => {
+  let url = `${UNFOLLOWING_URL}?user_id=${id}`
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => data.json())
 }
 
 const fetchFriends = ({credentials}) => {
@@ -143,6 +162,8 @@ const apiService = {
   fetchStatus,
   fetchMentions,
   fetchFriends,
+  followUser,
+  unfollowUser,
   favorite,
   unfavorite,
   retweet,

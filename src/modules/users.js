@@ -1,6 +1,6 @@
 import timelineFetcher from '../services/timeline_fetcher/timeline_fetcher.service.js'
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import { map, each, find, merge } from 'lodash'
+import { compact, map, each, find, merge } from 'lodash'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, item) => {
@@ -44,7 +44,9 @@ const users = {
   actions: {
     addNewStatuses (store, { statuses }) {
       const users = map(statuses, 'user')
+      const retweetedUsers = compact(map(statuses, 'retweeted_status.user'))
       store.commit('addNewUsers', users)
+      store.commit('addNewUsers', retweetedUsers)
     },
     loginUser (store, userCredentials) {
       const commit = store.commit

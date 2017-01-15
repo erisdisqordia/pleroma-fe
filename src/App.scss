@@ -111,6 +111,9 @@ main-router {
 #content {
     margin: auto;
     max-width: 920px;
+    border-radius: 1em;
+    padding-bottom: 1em;
+    background-color: rgba(0,0,0,0.1);
 }
 
 .media-left {

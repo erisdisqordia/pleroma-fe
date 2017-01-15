@@ -1,7 +1,7 @@
 <template>
   <div class="notifications">
-    <div class="panel panel-default">
-      <div class="panel-heading">Notifications ({{visibleNotifications.length}})</div>
+    <div class="panel panel-default base00-background">
+      <div class="panel-heading base01-background base04">Notifications ({{visibleNotifications.length}})</div>
       <div class="panel-body">
         <div v-for="notification in visibleNotifications" class="notification">
           <a :href="notification.action.user.statusnet_profile_url">

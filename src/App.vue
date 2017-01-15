@@ -1,6 +1,6 @@
 <template>
-  <div id="app" v-bind:style="style">
-    <nav class='container'>
+  <div id="app" v-bind:style="style" class="base02-background">
+    <nav class='container base01-background base04'>
       <div class='item'>
         <a route-to='friends-timeline' href="#">Pleroma FE</a>
       </div>

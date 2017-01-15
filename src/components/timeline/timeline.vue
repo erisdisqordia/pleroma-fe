@@ -1,7 +1,7 @@
 <template>
   <div class="timeline">
     <a href="#" v-on:click.prevent='showNewStatuses()' v-if="timeline.newStatusCount > 0">
-      <div class="new-status-notification">
+      <div class="base01-background base05-border new-status-notification">
         <p class="text-center" >
           {{timeline.newStatusCount}} new statuses
         </p>
@@ -9,7 +9,7 @@
     </a>
     <status v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status"></status>
     <a href="#" v-on:click.prevent='fetchOlderStatuses()' v-if="!timeline.loading">
-      <div class="new-status-notification">
+      <div class="base01-background base05-border new-status-notification">
         <p class="text-center" >
           Load older statuses.
         </p>
@@ -18,3 +18,16 @@
   </div>
 </template>
 <script src="./timeline.js"></script>
+
+<style lang="scss">
+ .new-status-notification {
+   border-style: solid;
+   border-width: 1px;
+   font-size: 1.1em;
+
+   p {
+     margin: 0px;
+     padding: 10px;
+   }
+ }
+</style>

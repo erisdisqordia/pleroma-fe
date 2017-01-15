@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="panel-body">
+    <div class="panel-body base00-background">
       <div class="user-counts">
         <div class="user-count">
           <h5>Statuses</h5>

@@ -1,5 +1,5 @@
 <template>
-  <div class="user-profile panel panel-default">
+  <div class="user-profile panel panel-default base00-background">
     <user-card-content :user="user"></user-card-content>
   </div>
 </template>

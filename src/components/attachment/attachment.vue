@@ -9,7 +9,7 @@
 
     <a class="image-attachment" v-if="type === 'image' && !hidden"
       :href="attachment.url" target="_blank">
-      <img referrerpolicy="no-referrer" :src="attachment.url"></img>
+      <img class="base05-border" referrerpolicy="no-referrer" :src="attachment.url"></img>
     </a>
 
     <video v-if="type === 'video' && !hidden" :src="attachment.url" controls></video>
@@ -97,10 +97,6 @@
                   h1 {
                       font-size: 14px;
                       margin: 0px;
-
-                      a {
-                          color: black;
-                      }
                   }
               }
           }
@@ -111,7 +107,8 @@
 
               img {
                   width: 100%;
-                  border: 1px solid;
+                  border-style: solid;
+                  border-width: 1px;
                   border-radius: 0.5em;
                   width: 100%;
                   height: 100%; /* If this isn't here, chrome will stretch the images */

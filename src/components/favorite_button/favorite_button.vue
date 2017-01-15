@@ -8,14 +8,13 @@
 <script src="./favorite_button.js" ></script>
 
 <style lang='scss'>
-  @import '../../_variables.scss';
   .favorite-button {
       cursor: pointer;
       &:hover {
-        color: $main-color;
+        color: orange;
       }
   }
   .icon-star {
-      color: $main-color;
+      color: orange;
   }
 </style>

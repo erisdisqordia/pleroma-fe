@@ -1,6 +1,6 @@
 <template>
   <div class="nav-panel">
-    <div class="panel panel-default">
+    <div class="panel panel-default base01-background">
       <ul>
         <li v-if='currentUser'>
           <router-link to='/main/friends'>
@@ -38,7 +38,7 @@
  }
 
  .nav-panel li {
-     border-bottom: 1px solid silver;
+     border-bottom: 1px solid;
      padding: 0.5em;
      padding-left: 1em;
  }

@@ -120,10 +120,10 @@
  .status {
      padding: 0.5em;
      padding-right: 1em;
-     border-bottom: 1px solid silver;
+     border-bottom: 1px solid;
  }
 
  .status-el:last-child .status {
-     border: none
+     border-bottom: none
  }
 </style>

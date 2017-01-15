@@ -1,6 +1,5 @@
 @import './_variables.scss';
 #app {
-    background-color: $main-color;
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -28,7 +27,6 @@ body {
 
 a {
     text-decoration: none;
-    color: $main-color;
 }
 
 .container {
@@ -55,7 +53,6 @@ a {
 }
 
 nav {
-    background: black;
     width: 100%;
     align-items: center;
     position: fixed;
@@ -70,27 +67,6 @@ nav {
 
 main-router {
     flex: 1;
-}
-
-.status:hover {
-    background-color: $darkened-background;
-}
-
-.new-status-notification {
-    font-size: 1.1em;
-    background-color: $darkened-background;
-    border-bottom-color: darken($darkened-background, 5%);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-
-    &:hover {
-        background-color: darken($darkened-background, 5%);
-    }
-
-    p {
-        margin: 0px;
-        padding: 10px;
-    }
 }
 
 .status.compact {
@@ -108,7 +84,6 @@ main-router {
 .panel {
     display: flex;
     flex-direction: column;
-    background-color: $main-background;
     margin: 0.5em;
 
     border-radius: 0.5em;
@@ -117,7 +92,6 @@ main-router {
 .panel-heading {
     border-radius: 0.5em 0.5em 0 0;
     background-size: cover;
-    background-color: bisque;
     padding-top: 0.3em;
     padding-bottom: 0.3em;
     text-align: center;
@@ -125,12 +99,12 @@ main-router {
 }
 
 .panel-footer {
-    background-color: bisque;
     border-radius: 0 0 0.5em 0.5em;
 }
 
 .panel-body > p {
-    margin: 1em;
+    padding: 1em;
+    margin: 0;
 }
 
 
@@ -176,10 +150,6 @@ main-router {
         font-weight: lighter;
         margin: 0;
     }
-
-    span {
-        color: $main-color;
-    }
 }
 
 .fa {
@@ -200,17 +170,12 @@ status-text-container {
     display: block;
 }
 
-attention {
-    color: $main-color;
-}
-
 .status-el {
     line-height: 18px;
 
     .notify {
         .avatar {
             border-width: 3px;
-            border-color: $main-color;
             border-style: solid;
         }
     }

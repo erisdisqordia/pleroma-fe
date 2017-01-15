@@ -22,7 +22,7 @@
 <style lang="scss">
  .new-status-notification {
    border-style: solid;
-   border-width: 1px;
+   border-width: 1px 0 1px 0;
    font-size: 1.1em;
 
    p {

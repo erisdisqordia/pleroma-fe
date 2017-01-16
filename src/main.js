@@ -61,4 +61,4 @@ new Vue({
   components: { App }
 })
 
-StyleSetter.setStyle('/static/css/solarized-light.css')
+StyleSetter.setStyle('/static/css/base16-solarized-light.css')

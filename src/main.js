@@ -15,6 +15,8 @@ import apiModule from './modules/api.js'
 
 import VueTimeago from 'vue-timeago'
 
+import StyleSetter from './services/style_setter/style_setter.js'
+
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueTimeago, {
@@ -58,3 +60,5 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+StyleSetter.setStyle('/static/css/solarized-light.css')

@@ -58,11 +58,12 @@ nav {
     position: fixed;
     height: 50px;
 
-}
-
-.sidebar {
-    flex: 1;
-    flex-basis: 300px;
+    .inner-nav {
+        display: flex;
+        align-items: center;
+        flex-basis: 920px;
+        margin: auto;
+    }
 }
 
 main-router {
@@ -111,10 +112,9 @@ main-router {
 #content {
     margin: auto;
     max-width: 920px;
-}
-
-.media-left {
-    width: 10% !important;
+    border-radius: 1em;
+    padding-bottom: 1em;
+    background-color: rgba(0,0,0,0.1);
 }
 
 .media-body {
@@ -224,4 +224,35 @@ nav {
 .main {
     flex: 2;
     flex-basis: 500px;
+}
+
+.sidebar {
+    flex: 1;
+    flex-basis: 300px;
+}
+
+.mobile-shown {
+    display: none;
+}
+
+.panel-switcher {
+    display: none;
+    width: 100%;
+
+    button {
+        display: block;
+        flex: 1;
+        margin: 0.5em;
+        padding: 0.5em;
+    }
+}
+
+@media all and (max-width: 959px) {
+    .mobile-hidden {
+        display: none;
+    }
+
+    .panel-switcher {
+        display: flex;
+    }
 }

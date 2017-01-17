@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="panel-heading text-center" v-bind:style="style">
+    <div class="base00-background panel-heading text-center" v-bind:style="style">
       <div class='user-info'>
         <img :src="user.profile_image_url">
         <span class="glyphicon glyphicon-user"></span>

@@ -11,8 +11,16 @@ export default {
     Notifications,
     StyleSwitcher
   },
+  data: () => ({
+    mobileActivePanel: 'timeline'
+  }),
   computed: {
     currentUser () { return this.$store.state.users.currentUser },
     style () { return { 'background-image': `url(${this.currentUser.background_image})` } }
+  },
+  methods: {
+    activatePanel (panelName) {
+      this.mobileActivePanel = panelName
+    }
   }
 }

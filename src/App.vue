@@ -9,12 +9,16 @@
       </div>
     </nav>
     <div class="container" id="content">
-      <div class="sidebar">
+      <div class="panel-switcher">
+        <button @click="activatePanel('sidebar')">Sidebar</button>
+        <button @click="activatePanel('timeline')">Timeline</button>
+      </div>
+      <div class="sidebar" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar' }">
         <user-panel></user-panel>
         <nav-panel></nav-panel>
         <notifications v-if="currentUser"></notifications>
       </div>
-      <div class="main">
+      <div class="main" :class="{ 'mobile-hidden': mobileActivePanel != 'timeline' }">
         <transition name="fade">
           <router-view></router-view>
         </transition>

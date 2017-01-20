@@ -22,6 +22,7 @@ const setStyle = (href) => {
 
   const setDynamic = () => {
     const baseEl = document.createElement('div')
+    body.appendChild(baseEl)
     baseEl.setAttribute('class', 'base05')
     const base05Color = window.getComputedStyle(baseEl).getPropertyValue('color')
     baseEl.setAttribute('class', 'base08')
@@ -29,6 +30,7 @@ const setStyle = (href) => {
     const styleEl = document.createElement('style')
     head.appendChild(styleEl)
     const styleSheet = styleEl.sheet
+    body.removeChild(baseEl)
 
     styleSheet.insertRule(`a { color: ${base08Color}`, 'index-max')
     styleSheet.insertRule(`body { color: ${base05Color}`, 'index-max')

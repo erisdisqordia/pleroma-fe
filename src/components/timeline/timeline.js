@@ -1,5 +1,6 @@
 import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
+import StatusOrConversation from '../status_or_conversation/status_or_conversation.vue'
 
 const Timeline = {
   props: [
@@ -7,7 +8,8 @@ const Timeline = {
     'timelineName'
   ],
   components: {
-    Status
+    Status,
+    StatusOrConversation
   },
   created () {
     const store = this.$store

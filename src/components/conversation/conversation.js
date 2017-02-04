@@ -1,4 +1,4 @@
-import { find, filter, sortBy, toInteger } from 'lodash'
+import { filter, sortBy } from 'lodash'
 import { statusType } from '../../modules/statuses.js'
 import Status from '../status/status.vue'
 
@@ -8,14 +8,12 @@ const sortAndFilterConversation = (conversation) => {
 }
 
 const conversation = {
+  props: [
+    'statusoid',
+    'collapsable'
+  ],
   computed: {
-    status () {
-      const id = toInteger(this.$route.params.id)
-      const statuses = this.$store.state.statuses.allStatuses
-      const status = find(statuses, {id})
-
-      return status
-    },
+    status () { return this.statusoid },
     conversation () {
       if (!this.status) {
         return false

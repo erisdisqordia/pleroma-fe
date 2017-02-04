@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el" v-if="!status.deleted">
+  <div class="status-el base00-background" v-if="!status.deleted">
     <div v-if="retweet" class="media container retweet-info">
       <div class="media-left">
         <i class='fa icon-retweet retweeted'></i>

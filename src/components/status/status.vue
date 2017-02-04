@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el" v-if="!status.deleted">
+  <div class="status-el base00-background" v-if="!status.deleted">
     <div v-if="retweet" class="media container retweet-info">
       <div class="media-left">
         <i class='fa icon-retweet retweeted'></i>
@@ -30,6 +30,12 @@
                 <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
             </small>
+            <template v-if="expandable">
+              -
+              <small>
+                <a href="#" @click.prevent="toggleExpanded" >Expand</a>
+              </small>
+            </template>
             <small v-if="!status.is_local" class="source_url">
               <a :href="status.external_url" target="_blank" >Source</a>
             </small>
@@ -121,9 +127,5 @@
      padding: 0.5em;
      padding-right: 1em;
      border-bottom: 1px solid;
- }
-
- .status-el:last-child .status {
-     border-bottom: none
  }
 </style>

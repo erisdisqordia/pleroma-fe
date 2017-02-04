@@ -7,7 +7,7 @@
         </p>
       </div>
     </a>
-    <status v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status"></status>
+    <status-or-conversation v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status"></status-or-conversation>
     <a href="#" v-on:click.prevent='fetchOlderStatuses()' v-if="!timeline.loading">
       <div class="base01-background base05-border new-status-notification">
         <p class="text-center" >

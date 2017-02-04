@@ -5,7 +5,7 @@ import App from './App.vue'
 import PublicTimeline from './components/public_timeline/public_timeline.vue'
 import PublicAndExternalTimeline from './components/public_and_external_timeline/public_and_external_timeline.vue'
 import FriendsTimeline from './components/friends_timeline/friends_timeline.vue'
-import Conversation from './components/conversation/conversation.vue'
+import ConversationPage from './components/conversation-page/conversation-page.vue'
 import Mentions from './components/mentions/mentions.vue'
 import UserProfile from './components/user_profile/user_profile.vue'
 
@@ -39,7 +39,7 @@ const routes = [
   { path: '/main/all', component: PublicAndExternalTimeline },
   { path: '/main/public', component: PublicTimeline },
   { path: '/main/friends', component: FriendsTimeline },
-  { name: 'conversation', path: '/notice/:id', component: Conversation },
+  { name: 'conversation', path: '/notice/:id', component: ConversationPage },
   { name: 'user-profile', path: '/users/:id', component: UserProfile },
   { name: 'mentions', path: '/:username/mentions', component: Mentions }
 ]

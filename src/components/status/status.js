@@ -5,9 +5,13 @@ import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 
 const Status = {
-  props: [ 'statusoid' ],
+  props: [
+    'statusoid',
+    'expandable'
+  ],
   data: () => ({
-    replying: false
+    replying: false,
+    expanded: false
   }),
   computed: {
     retweet () { return !!this.statusoid.retweeted_status },
@@ -33,6 +37,9 @@ const Status = {
   methods: {
     toggleReplying () {
       this.replying = !this.replying
+    },
+    toggleExpanded () {
+      this.$emit('toggleExpanded')
     }
   }
 }

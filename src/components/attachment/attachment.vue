@@ -9,7 +9,7 @@
 
     <a class="image-attachment" v-if="type === 'image' && !hidden"
       :href="attachment.url" target="_blank">
-      <img class="base05-border" referrerpolicy="no-referrer" :src="attachment.url"></img>
+      <img class="base05-border" referrerpolicy="no-referrer" :src="attachment.large_thumb_url || attachment.url"></img>
     </a>
 
     <video v-if="type === 'video' && !hidden" :src="attachment.url" controls></video>

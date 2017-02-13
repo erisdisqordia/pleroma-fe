@@ -1,6 +1,7 @@
 import timelineFetcher from '../services/timeline_fetcher/timeline_fetcher.service.js'
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, find, merge } from 'lodash'
+import { set } from 'vue'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, item) => {
@@ -18,6 +19,10 @@ export const mergeOrAdd = (arr, item) => {
 }
 
 export const mutations = {
+  setMuted (state, { user: {id}, muted }) {
+    const user = find(state.users, {id})
+    set(user, 'muted', muted)
+  },
   setCurrentUser (state, user) {
     state.currentUser = user
   },

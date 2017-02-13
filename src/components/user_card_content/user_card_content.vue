@@ -3,6 +3,10 @@
     <div class="base00-background panel-heading text-center" v-bind:style="style">
       <div class='user-info'>
         <img :src="user.profile_image_url">
+        <div v-if='user.muted' class='muteinfo'>Muted</div>
+        <div class='muteinfo'>
+          <button @click="toggleMute">Mute/Unmute</button>
+        </div>
         <span class="glyphicon glyphicon-user"></span>
         <div class='user-name'>{{user.name}}</div>
         <div class='user-screen-name'>@{{user.screen_name}}</div>
@@ -70,6 +74,10 @@
         const store = this.$store
         store.state.api.backendInteractor.unfollowUser(this.user.id)
           .then((unfollowedUser) => store.commit('addNewUsers', [unfollowedUser]))
+      },
+      toggleMute () {
+        const store = this.$store
+        store.commit('setMuted', {user: this.user, muted: !this.user.muted})
       }
     }
   }

@@ -52,6 +52,15 @@ const users = {
       const retweetedUsers = compact(map(statuses, 'retweeted_status.user'))
       store.commit('addNewUsers', users)
       store.commit('addNewUsers', retweetedUsers)
+
+      // Reconnect users to statuses
+      each(statuses, (status) => {
+        status.user = find(store.state.users, status.user)
+      })
+      // Reconnect users to retweets
+      each(compact(map(statuses, 'retweeted_status')), (status) => {
+        status.user = find(store.state.users, status.user)
+      })
     },
     loginUser (store, userCredentials) {
       const commit = store.commit

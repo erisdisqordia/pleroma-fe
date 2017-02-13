@@ -1,70 +1,78 @@
 <template>
   <div class="status-el base00-background" v-if="!status.deleted">
-    <div v-if="retweet" class="media container retweet-info">
-      <div class="media-left">
-        <i class='fa icon-retweet retweeted'></i>
+    <template v-if="muted">
+      <div class="media status container muted">
+        <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
+        <button @click="toggleMute">show</button>
       </div>
-      <div class="media-body">
-        Retweeted by {{retweeter}}
+    </template>
+    <template v-if="!muted">
+      <div v-if="retweet" class="media container retweet-info">
+        <div class="media-left">
+          <i class='fa icon-retweet retweeted'></i>
+        </div>
+        <div class="media-body">
+          Retweeted by {{retweeter}}
+        </div>
       </div>
-    </div>
-    <div class="media status container">
-      <div class="media-left">
-        <a :href="status.user.statusnet_profile_url">
-          <img class='avatar' :src="status.user.profile_image_url_original">
-        </a>
-      </div>
-      <div class="media-body">
-        <div class="user-content">
-          <h4 class="media-heading">
-            {{status.user.name}}
-            <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
-            <small v-if="status.in_reply_to_screen_name"> &gt;
-              <router-link :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
-                {{status.in_reply_to_screen_name}}
-              </router-link>
-            </small>
-            -
-            <small>
-              <router-link :to="{ name: 'conversation', params: { id: status.id } }">
-                <timeago :since="status.created_at" :auto-update="60"></timeago>
-              </router-link>
-            </small>
-            <template v-if="expandable">
+      <div class="media status container">
+        <div class="media-left">
+          <a :href="status.user.statusnet_profile_url">
+            <img class='avatar' :src="status.user.profile_image_url_original">
+          </a>
+        </div>
+        <div class="media-body">
+          <div class="user-content">
+            <h4 class="media-heading">
+              {{status.user.name}}
+              <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
+              <small v-if="status.in_reply_to_screen_name"> &gt;
+                <router-link :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
+                  {{status.in_reply_to_screen_name}}
+                </router-link>
+              </small>
               -
               <small>
-                <a href="#" @click.prevent="toggleExpanded" >Expand</a>
+                <router-link :to="{ name: 'conversation', params: { id: status.id } }">
+                  <timeago :since="status.created_at" :auto-update="60"></timeago>
+                </router-link>
               </small>
-            </template>
-            <small v-if="!status.is_local" class="source_url">
-              <a :href="status.external_url" target="_blank" >Source</a>
-            </small>
-          </h4>
+              <template v-if="expandable">
+                -
+                <small>
+                  <a href="#" @click.prevent="toggleExpanded" >Expand</a>
+                </small>
+              </template>
+              <small v-if="!status.is_local" class="source_url">
+                <a :href="status.external_url" target="_blank" >Source</a>
+              </small>
+            </h4>
 
-          <div class="status-content" v-html="status.statusnet_html"></div>
+            <div class="status-content" v-html="status.statusnet_html"></div>
 
-          <div v-if='status.attachments' class='attachments'>
-            <attachment :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments">
-            </attachment>
-          </div>
-        </div>
-
-        <div v-if="loggedIn">
-          <div class='status-actions'>
-            <div>
-              <a href="#" v-on:click.prevent="toggleReplying">
-                <i class='fa icon-reply'></i>
-              </a>
+            <div v-if='status.attachments' class='attachments'>
+              <attachment :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments">
+              </attachment>
             </div>
-            <retweet-button :status=status></retweet-button>
-            <favorite-button :status=status></favorite-button>
-            <delete-button :status=status></delete-button>
           </div>
 
-          <post-status-form v-if="replying" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying"></post-status-form>
+          <div v-if="loggedIn">
+            <div class='status-actions'>
+              <div>
+                <a href="#" v-on:click.prevent="toggleReplying">
+                  <i class='fa icon-reply'></i>
+                </a>
+              </div>
+              <retweet-button :status=status></retweet-button>
+              <favorite-button :status=status></favorite-button>
+              <delete-button :status=status></delete-button>
+            </div>
+
+            <post-status-form v-if="replying" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying"></post-status-form>
+          </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -127,5 +135,8 @@
      padding: 0.5em;
      padding-right: 1em;
      border-bottom: 1px solid;
+ }
+ .muted button {
+   margin-left: auto;
  }
 </style>

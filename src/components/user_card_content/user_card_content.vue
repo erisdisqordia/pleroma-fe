@@ -4,7 +4,7 @@
       <div class='user-info'>
         <img :src="user.profile_image_url">
         <div v-if='user.muted' class='muteinfo'>Muted</div>
-        <div class='muteinfo'>
+        <div class='muteinfo' v-if='isOtherUser'>
           <button @click="toggleMute">Mute/Unmute</button>
         </div>
         <span class="glyphicon glyphicon-user"></span>

@@ -11,7 +11,8 @@ const Status = {
   ],
   data: () => ({
     replying: false,
-    expanded: false
+    expanded: false,
+    unmuted: false
   }),
   computed: {
     retweet () { return !!this.statusoid.retweeted_status },
@@ -25,7 +26,8 @@ const Status = {
     },
     loggedIn () {
       return !!this.$store.state.users.currentUser
-    }
+    },
+    muted () { return !this.unmuted && this.status.user.muted }
   },
   components: {
     Attachment,
@@ -40,6 +42,9 @@ const Status = {
     },
     toggleExpanded () {
       this.$emit('toggleExpanded')
+    },
+    toggleMute () {
+      this.unmuted = !this.unmuted
     }
   }
 }

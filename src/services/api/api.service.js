@@ -1,6 +1,7 @@
 /* eslint-env browser */
 const LOGIN_URL = '/api/account/verify_credentials.json'
 const FRIENDS_TIMELINE_URL = '/api/statuses/friends_timeline.json'
+const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
 const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
 const FAVORITE_URL = '/api/favorites/create'
@@ -52,6 +53,12 @@ const unfollowUser = ({id, credentials}) => {
 const fetchFriends = ({credentials}) => {
   return fetch(FRIENDS_URL, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+}
+
+const fetchAllFollowing = ({username, credentials}) => {
+  const url = `${ALL_FOLLOWING_URL}/${username}.json`
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json().users)
 }
 
 const fetchMentions = ({username, sinceId = 0, credentials}) => {
@@ -169,7 +176,8 @@ const apiService = {
   retweet,
   postStatus,
   deleteStatus,
-  uploadMedia
+  uploadMedia,
+  fetchAllFollowing
 }
 
 export default apiService

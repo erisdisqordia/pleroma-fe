@@ -3,7 +3,7 @@
     <template v-if="muted">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
-        <button @click="toggleMute">show</button>
+        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="icon-eye-off"></i></a>
       </div>
     </template>
     <template v-if="!muted">
@@ -40,11 +40,14 @@
               <template v-if="expandable">
                 -
                 <small>
-                  <a href="#" @click.prevent="toggleExpanded" >Expand</a>
+                  <a href="#" @click.prevent="toggleExpanded" ><i class="icon-plus-squared"></i></a>
+                </small>
+                <small v-if="status.user.muted">
+                  <a href="#" @click.prevent="toggleMute" ><i class="icon-eye-off"></i></a>
                 </small>
               </template>
               <small v-if="!status.is_local" class="source_url">
-                <a :href="status.external_url" target="_blank" >Source</a>
+                <a :href="status.external_url" target="_blank" ><i class="icon-binoculars"></i></a>
               </small>
             </h4>
 
@@ -137,6 +140,11 @@
      border-bottom: 1px solid;
  }
  .muted button {
+   margin-left: auto;
+ }
+
+ a.unmute {
+   display: block;
    margin-left: auto;
  }
 </style>

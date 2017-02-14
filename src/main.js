@@ -16,6 +16,8 @@ import configModule from './modules/config.js'
 
 import VueTimeago from 'vue-timeago'
 
+import createPersistedState from 'vuex-persistedstate'
+
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueTimeago, {
@@ -25,13 +27,18 @@ Vue.use(VueTimeago, {
   }
 })
 
+const persistedStateOptions = {
+  paths: ['users.users']
+}
+
 const store = new Vuex.Store({
   modules: {
     statuses: statusesModule,
     users: usersModule,
     api: apiModule,
     config: configModule
-  }
+  },
+  plugins: [createPersistedState(persistedStateOptions)]
 })
 
 const routes = [

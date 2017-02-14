@@ -1,5 +1,3 @@
-import StyleSetter from '../../services/style_setter/style_setter.js'
-
 export default {
   data: () => ({
     availableStyles: [],
@@ -13,8 +11,7 @@ export default {
   },
   watch: {
     selected () {
-      const fullPath = `/static/css/${this.selected}`
-      StyleSetter.setStyle(fullPath)
+      this.$store.dispatch('setOption', { name: 'theme', value: this.selected })
     }
   }
 }

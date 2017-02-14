@@ -12,10 +12,9 @@ import UserProfile from './components/user_profile/user_profile.vue'
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
+import configModule from './modules/config.js'
 
 import VueTimeago from 'vue-timeago'
-
-import StyleSetter from './services/style_setter/style_setter.js'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
@@ -30,7 +29,8 @@ const store = new Vuex.Store({
   modules: {
     statuses: statusesModule,
     users: usersModule,
-    api: apiModule
+    api: apiModule,
+    config: configModule
   }
 })
 
@@ -61,4 +61,9 @@ new Vue({
   components: { App }
 })
 
-StyleSetter.setStyle('/static/css/base16-solarized-light.css')
+window.fetch('/static/config.json')
+  .then((res) => res.json())
+  .then(({name, theme}) => {
+    store.dispatch('setOption', { name: 'name', value: name })
+    store.dispatch('setOption', { name: 'theme', value: theme })
+  })

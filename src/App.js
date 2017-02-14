@@ -16,7 +16,8 @@ export default {
   }),
   computed: {
     currentUser () { return this.$store.state.users.currentUser },
-    style () { return { 'background-image': `url(${this.currentUser.background_image})` } }
+    style () { return { 'background-image': `url(${this.currentUser.background_image})` } },
+    sitename () { return this.$store.state.config.name }
   },
   methods: {
     activatePanel (panelName) {

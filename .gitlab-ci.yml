@@ -47,4 +47,4 @@ deploy:
   script:
     - npm install
     - npm run build
-    - scp -r dist/* pleromaci@heldscal.la:~/pleroma
+    - scp -r dist/* pleroma@tenshi.heldscal.la:~/pleroma

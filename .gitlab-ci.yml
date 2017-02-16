@@ -29,12 +29,14 @@ cache:
 
 test:
   script:
-    - npm install
+    - npm install -g yarn
+    - yarn
     - npm run unit
    
 build:
   script:
-    - npm install
+    - npm install -g yarn
+    - yarn
     - npm run build
   artifacts:
     paths:

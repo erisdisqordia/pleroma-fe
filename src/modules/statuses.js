@@ -153,16 +153,18 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       }
     }
 
+    // Decide if we should treat the status as new for this timeline.
+    let resultForCurrentTimeline
     // Some statuses should only be added to the global status repository.
     if (timeline && addToTimeline) {
-      mergeOrAdd(timelineObject.statuses, status)
+      resultForCurrentTimeline = mergeOrAdd(timelineObject.statuses, status)
     }
 
     if (timeline && showImmediately) {
       // Add it directly to the visibleStatuses, don't change
       // newStatusCount
       mergeOrAdd(timelineObject.visibleStatuses, status)
-    } else if (timeline && addToTimeline && result.new) {
+    } else if (timeline && addToTimeline && resultForCurrentTimeline.new) {
       // Just change newStatuscount
       timelineObject.newStatusCount += 1
     }

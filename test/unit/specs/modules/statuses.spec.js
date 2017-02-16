@@ -79,6 +79,24 @@ describe('The Statuses module', () => {
     expect(state.timelines.public.newStatusCount).to.equal(1)
   })
 
+  it('counts the status as new if it has not been seen on this timeline', () => {
+    const state = cloneDeep(defaultState)
+    const status = makeMockStatus({id: 1})
+
+    mutations.addNewStatuses(state, { statuses: [status], timeline: 'public' })
+    mutations.addNewStatuses(state, { statuses: [status], timeline: 'friends' })
+
+    expect(state.allStatuses).to.eql([status])
+    expect(state.timelines.public.statuses).to.eql([status])
+    expect(state.timelines.public.visibleStatuses).to.eql([])
+    expect(state.timelines.public.newStatusCount).to.equal(1)
+
+    expect(state.allStatuses).to.eql([status])
+    expect(state.timelines.friends.statuses).to.eql([status])
+    expect(state.timelines.friends.visibleStatuses).to.eql([])
+    expect(state.timelines.friends.newStatusCount).to.equal(1)
+  })
+
   it('add the statuses to allStatuses if no timeline is given', () => {
     const state = cloneDeep(defaultState)
     const status = makeMockStatus({id: 1})

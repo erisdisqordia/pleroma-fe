@@ -39,7 +39,8 @@ const store = new Vuex.Store({
     api: apiModule,
     config: configModule
   },
-  plugins: [createPersistedState(persistedStateOptions)]
+  plugins: [createPersistedState(persistedStateOptions)],
+  strict: process.env.NODE_ENV !== 'production'
 })
 
 const routes = [
@@ -72,7 +73,9 @@ new Vue({
 
 window.fetch('/static/config.json')
   .then((res) => res.json())
-  .then(({name, theme}) => {
+  .then(({name, theme, background, logo}) => {
     store.dispatch('setOption', { name: 'name', value: name })
     store.dispatch('setOption', { name: 'theme', value: theme })
+    store.dispatch('setOption', { name: 'background', value: background })
+    store.dispatch('setOption', { name: 'logo', value: logo })
   })

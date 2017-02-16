@@ -16,7 +16,10 @@ export default {
   }),
   computed: {
     currentUser () { return this.$store.state.users.currentUser },
-    style () { return { 'background-image': `url(${this.currentUser.background_image})` } },
+    background () {
+      return this.currentUser.background_image || this.$store.state.config.background
+    },
+    style () { return { 'background-image': `url(${this.background})` } },
     sitename () { return this.$store.state.config.name }
   },
   methods: {

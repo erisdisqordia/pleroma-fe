@@ -71,7 +71,8 @@ new Vue({
 
 window.fetch('/static/config.json')
   .then((res) => res.json())
-  .then(({name, theme}) => {
+  .then(({name, theme, background}) => {
     store.dispatch('setOption', { name: 'name', value: name })
     store.dispatch('setOption', { name: 'theme', value: theme })
+    store.dispatch('setOption', { name: 'background', value: background })
   })

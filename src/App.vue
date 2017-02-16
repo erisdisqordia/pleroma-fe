@@ -1,9 +1,9 @@
 <template>
   <div id="app" v-bind:style="style" class="base02-background">
     <nav class='container base01-background base04'>
-      <div class='inner-nav'>
+      <div class='inner-nav' :style="logoStyle">
         <div class='item'>
-          <a route-to='friends-timeline' href="#">Pleroma FE</a>
+          <a route-to='friends-timeline' href="#">{{sitename}}</a>
         </div>
         <style-switcher></style-switcher>
       </div>

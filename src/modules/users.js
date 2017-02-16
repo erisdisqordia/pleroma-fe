@@ -1,6 +1,6 @@
-import timelineFetcher from '../services/timeline_fetcher/timeline_fetcher.service.js'
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, find, merge } from 'lodash'
+import { set } from 'vue'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, item) => {
@@ -18,6 +18,10 @@ export const mergeOrAdd = (arr, item) => {
 }
 
 export const mutations = {
+  setMuted (state, { user: {id}, muted }) {
+    const user = find(state.users, {id})
+    set(user, 'muted', muted)
+  },
   setCurrentUser (state, user) {
     state.currentUser = user
   },
@@ -29,6 +33,9 @@ export const mutations = {
   },
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, user))
+  },
+  setUserForStatus (state, status) {
+    status.user = find(state.users, status.user)
   }
 }
 
@@ -47,6 +54,15 @@ const users = {
       const retweetedUsers = compact(map(statuses, 'retweeted_status.user'))
       store.commit('addNewUsers', users)
       store.commit('addNewUsers', retweetedUsers)
+
+      // Reconnect users to statuses
+      each(statuses, (status) => {
+        store.commit('setUserForStatus', status)
+      })
+      // Reconnect users to retweets
+      each(compact(map(statuses, 'retweeted_status')), (status) => {
+        store.commit('setUserForStatus', status)
+      })
     },
     loginUser (store, userCredentials) {
       const commit = store.commit
@@ -60,11 +76,11 @@ const users = {
                 commit('setCurrentUser', user)
                 commit('addNewUsers', [user])
 
-                // Start getting fresh tweets.
-                timelineFetcher.startFetching({store, credentials: userCredentials})
-
                 // Set our new backend interactor
                 commit('setBackendInteractor', backendInteractorService(userCredentials))
+
+                // Start getting fresh tweets.
+                store.dispatch('startFetching', 'friends')
 
                 // Fetch our friends
                 store.rootState.api.backendInteractor.fetchFriends()

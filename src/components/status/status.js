@@ -3,6 +3,7 @@ import FavoriteButton from '../favorite_button/favorite_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
+import UserCardContent from '../user_card_content/user_card_content.vue'
 
 const Status = {
   props: [
@@ -11,7 +12,9 @@ const Status = {
   ],
   data: () => ({
     replying: false,
-    expanded: false
+    expanded: false,
+    unmuted: false,
+    userExpanded: false
   }),
   computed: {
     retweet () { return !!this.statusoid.retweeted_status },
@@ -25,14 +28,16 @@ const Status = {
     },
     loggedIn () {
       return !!this.$store.state.users.currentUser
-    }
+    },
+    muted () { return !this.unmuted && this.status.user.muted }
   },
   components: {
     Attachment,
     FavoriteButton,
     RetweetButton,
     DeleteButton,
-    PostStatusForm
+    PostStatusForm,
+    UserCardContent
   },
   methods: {
     toggleReplying () {
@@ -40,6 +45,12 @@ const Status = {
     },
     toggleExpanded () {
       this.$emit('toggleExpanded')
+    },
+    toggleMute () {
+      this.unmuted = !this.unmuted
+    },
+    toggleUserExpanded () {
+      this.userExpanded = !this.userExpanded
     }
   }
 }

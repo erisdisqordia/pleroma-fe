@@ -1,4 +1,5 @@
 import apiService from '../api/api.service.js'
+import timelineFetcherService from '../timeline_fetcher/timeline_fetcher.service.js'
 
 const backendInteractorService = (credentials) => {
   const fetchStatus = ({id}) => {
@@ -17,12 +18,20 @@ const backendInteractorService = (credentials) => {
     return apiService.fetchFriends({credentials})
   }
 
+  const fetchAllFollowing = ({username}) => {
+    return apiService.fetchAllFollowing({username, credentials})
+  }
+
   const followUser = (id) => {
     return apiService.followUser({credentials, id})
   }
 
   const unfollowUser = (id) => {
     return apiService.unfollowUser({credentials, id})
+  }
+
+  const startFetching = ({timeline, store}) => {
+    return timelineFetcherService.startFetching({timeline, store, credentials})
   }
 
   const backendInteractorServiceInstance = {
@@ -32,7 +41,9 @@ const backendInteractorService = (credentials) => {
     fetchFriends,
     followUser,
     unfollowUser,
-    verifyCredentials: apiService.verifyCredentials
+    fetchAllFollowing,
+    verifyCredentials: apiService.verifyCredentials,
+    startFetching
   }
 
   return backendInteractorServiceInstance

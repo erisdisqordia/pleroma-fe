@@ -18,10 +18,13 @@
       <div class="media status container">
         <div class="media-left">
           <a :href="status.user.statusnet_profile_url">
-            <img class='avatar' :src="status.user.profile_image_url_original">
+            <img @click.prevent="toggleUserExpanded" class='avatar' :src="status.user.profile_image_url_original">
           </a>
         </div>
         <div class="media-body">
+          <div class="base05 base05=border usercard" v-if="userExpanded">
+            <user-card-content :user="status.user"></user-card-content>
+          </div>
           <div class="user-content">
             <h4 class="media-heading">
               {{status.user.name}}
@@ -146,5 +149,12 @@
  a.unmute {
    display: block;
    margin-left: auto;
+ }
+
+ .usercard {
+   border-style: solid;
+   border-width: 1px;
+   border-radius: 1em;
+   margin-bottom: 1em;
  }
 </style>

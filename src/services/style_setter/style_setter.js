@@ -34,7 +34,7 @@ const setStyle = (href) => {
 
     styleSheet.insertRule(`a { color: ${base08Color}`, 'index-max')
     styleSheet.insertRule(`body { color: ${base05Color}`, 'index-max')
-    styleSheet.insertRule(`.base05-border { color: ${base05Color}`, 'index-max')
+    styleSheet.insertRule(`.base05-border { border-color: ${base05Color}`, 'index-max')
     body.style.display = 'initial'
   }
   cssEl.addEventListener('load', setDynamic)

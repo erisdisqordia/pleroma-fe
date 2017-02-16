@@ -19,6 +19,7 @@ export default {
     background () {
       return this.currentUser.background_image || this.$store.state.config.background
     },
+    logoStyle () { return { 'background-image': `url(${this.$store.state.config.logo})` } },
     style () { return { 'background-image': `url(${this.background})` } },
     sitename () { return this.$store.state.config.name }
   },

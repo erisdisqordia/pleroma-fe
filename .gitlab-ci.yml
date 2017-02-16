@@ -1,7 +1,7 @@
 # This file is a template, and might need editing before it works on your project.
 # Official framework image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/node/tags/
-image: node:6
+image: node:7
 
 before_script:
   # Install ssh-agent if not already installed, it is required by Docker.
@@ -45,6 +45,7 @@ deploy:
   only:
     - develop
   script:
-    - npm install
+    - npm install -g yarn
+    - yarn
     - npm run build
     - scp -r dist/* pleroma@tenshi.heldscal.la:~/pleroma

@@ -1,4 +1,3 @@
-import timelineFetcher from '../services/timeline_fetcher/timeline_fetcher.service.js'
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, find, merge } from 'lodash'
 import { set } from 'vue'
@@ -74,11 +73,11 @@ const users = {
                 commit('setCurrentUser', user)
                 commit('addNewUsers', [user])
 
-                // Start getting fresh tweets.
-                timelineFetcher.startFetching({store, credentials: userCredentials})
-
                 // Set our new backend interactor
                 commit('setBackendInteractor', backendInteractorService(userCredentials))
+
+                // Start getting fresh tweets.
+                store.dispatch('startFetching', 'friends')
 
                 // Fetch our friends
                 store.rootState.api.backendInteractor.fetchFriends()

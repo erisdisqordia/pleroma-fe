@@ -38,7 +38,8 @@ const store = new Vuex.Store({
     api: apiModule,
     config: configModule
   },
-  plugins: [createPersistedState(persistedStateOptions)]
+  plugins: [createPersistedState(persistedStateOptions)],
+  strict: process.env.NODE_ENV !== 'production'
 })
 
 const routes = [

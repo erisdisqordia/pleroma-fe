@@ -33,6 +33,9 @@ export const mutations = {
   },
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, user))
+  },
+  setUserForStatus (state, status) {
+    status.user = find(state.users, status.user)
   }
 }
 
@@ -54,11 +57,11 @@ const users = {
 
       // Reconnect users to statuses
       each(statuses, (status) => {
-        status.user = find(store.state.users, status.user)
+        store.commit('setUserForStatus', status)
       })
       // Reconnect users to retweets
       each(compact(map(statuses, 'retweeted_status')), (status) => {
-        status.user = find(store.state.users, status.user)
+        store.commit('setUserForStatus', status)
       })
     },
     loginUser (store, userCredentials) {

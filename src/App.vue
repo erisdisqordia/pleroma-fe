@@ -5,7 +5,9 @@
         <div class='item'>
           <a route-to='friends-timeline' href="#">{{sitename}}</a>
         </div>
-        <style-switcher></style-switcher>
+        <div class='item right'>
+          <router-link :to="{ name: 'settings'}"><i class="icon-cog"></i></router-link>
+        </div>
       </div>
     </nav>
     <div class="container" id="content">

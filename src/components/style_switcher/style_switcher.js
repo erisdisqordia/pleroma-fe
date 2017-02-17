@@ -1,8 +1,10 @@
 export default {
-  data: () => ({
-    availableStyles: [],
-    selected: false
-  }),
+  data () {
+    return {
+      availableStyles: [],
+      selected: this.$store.state.config.theme
+    }
+  },
   created () {
     const self = this
     window.fetch('/static/css/themes.json')

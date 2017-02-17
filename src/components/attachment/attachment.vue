@@ -43,7 +43,6 @@
           align-self: flex-start;
 
           &.html {
-            border: 1px solid;
             flex-basis: 100%;
           }
 
@@ -83,7 +82,7 @@
           }
 
           .oembed {
-              border: 1px solid rgba(0, 0, 0, 0.14);
+              border: 1px solid;
               width: 100%;
 
               display: flex;

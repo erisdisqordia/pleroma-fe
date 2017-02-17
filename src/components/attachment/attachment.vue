@@ -43,6 +43,7 @@
           align-self: flex-start;
 
           &.html {
+            border: 1px solid;
             flex-basis: 100%;
           }
 

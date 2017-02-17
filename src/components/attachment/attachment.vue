@@ -1,5 +1,5 @@
 <template>
-  <div class="attachment">
+  <div class="attachment" :class="type">
     <a class="image-attachment" v-if="hidden" v-on:click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"></img>
     </a>
@@ -42,6 +42,10 @@
           margin: 0.2em;
           align-self: flex-start;
 
+          &.html {
+            flex-basis: 100%;
+          }
+
           .hider {
               position: absolute;
               margin: 10px;
@@ -74,7 +78,6 @@
           .oembed {
               img {
                   width: 100%;
-                  height: 100%;
               }
           }
 

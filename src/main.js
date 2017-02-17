@@ -44,7 +44,7 @@ const store = new Vuex.Store({
 })
 
 const routes = [
-  { path: '/', redirect: '/main/all' },
+  { name: 'root', path: '/', redirect: '/main/all' },
   { path: '/main/all', component: PublicAndExternalTimeline },
   { path: '/main/public', component: PublicTimeline },
   { path: '/main/friends', component: FriendsTimeline },

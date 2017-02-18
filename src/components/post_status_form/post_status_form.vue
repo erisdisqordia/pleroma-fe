@@ -57,13 +57,21 @@
      form {
          display: flex;
          flex-direction: column;
-         padding: 0.5em;
+         padding: 0.6em;
      }
 
      .form-group {
          display: flex;
          flex-direction: column;
+         padding: 0.3em 0.5em 0.6em;
+         line-height:24px;
+     }
+     
+     form textarea {
+         border: none;
+         border-radius: 2px;
          padding: 0.5em;
+         resize: vertical;
      }
 
      .btn {

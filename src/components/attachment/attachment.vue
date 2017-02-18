@@ -39,7 +39,7 @@
       .attachment {
           flex: 1 0 30%;
           display: flex;
-          margin: 0.2em;
+          margin: 0.5em 0.8em 0.6em 0.1em;
           align-self: flex-start;
 
           &.html {
@@ -79,6 +79,7 @@
               img {
                   width: 100%;
               }
+              margin-right: 15px;
           }
 
           .oembed {

@@ -16,6 +16,7 @@
      .user-interactions {
          display: flex;
          flex-flow: row wrap;
+         justify-content: center;
 
          div {
              flex: 1;
@@ -30,11 +31,11 @@
          }
 
          .mute {
-             margin-right: 4em;
+             max-width: 200px;
          }
 
          .follow {
-             margin-left: 4em;
+             max-width: 200px;
          }
 
          button {

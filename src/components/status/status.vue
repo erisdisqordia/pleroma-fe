@@ -94,6 +94,7 @@
 
      .user-content {
        min-height: 52px;
+       padding-top: 1px;
      }
 
      .source_url {
@@ -106,12 +107,10 @@
 
      a {
          display: inline-block;
-         word-break: break-all;
      }
 
      .status-content {
-         margin-top: 3px;
-         margin-bottom: 3px;
+         margin: 3px 15px 4px 0;
      }
 
      p {
@@ -138,8 +137,7 @@
  }
 
  .status {
-     padding: 0.5em;
-     padding-right: 1em;
+     padding: 0.65em 0.7em 0.8em 0.8em;
      border-bottom: 1px solid;
  }
  .muted button {

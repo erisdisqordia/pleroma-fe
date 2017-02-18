@@ -39,8 +39,7 @@
 
  .nav-panel li {
      border-bottom: 1px solid;
-     padding: 0.5em;
-     padding-left: 1em;
+     padding: 0.75em 0.85em 0.6em;
  }
 
  .nav-panel li:last-child {

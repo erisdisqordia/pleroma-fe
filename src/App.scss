@@ -29,6 +29,11 @@ a {
     text-decoration: none;
 }
 
+button{
+    border: none;
+    border-radius: 5px;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -63,7 +68,7 @@ nav {
         padding-right: 20px;
         display: flex;
         align-items: center;
-        flex-basis: 920px;
+        flex-basis: 970px;
         margin: auto;
         height: 50px;
         background-repeat: no-repeat;
@@ -99,8 +104,7 @@ main-router {
 .panel-heading {
     border-radius: 0.5em 0.5em 0 0;
     background-size: cover;
-    padding-top: 0.3em;
-    padding-bottom: 0.3em;
+    padding: 0.6em 0 0.5em;
     text-align: center;
     font-size: 1.3em;
 }
@@ -110,6 +114,7 @@ main-router {
 }
 
 .panel-body > p {
+	line-height: 18px;
     padding: 1em;
     margin: 0;
 }
@@ -117,7 +122,7 @@ main-router {
 
 #content {
     margin: auto;
-    max-width: 920px;
+    max-width: 980px;
     border-radius: 1em;
     padding-bottom: 1em;
     background-color: rgba(0,0,0,0.1);
@@ -125,7 +130,7 @@ main-router {
 
 .media-body {
     flex: 1;
-    padding-left: 0.3em;
+    padding-left: 0.5em;
 }
 
 .container > * {
@@ -133,28 +138,37 @@ main-router {
 }
 
 .user-info {
+	color: white;
     padding: 1em;
     img {
-        border: 3px solid;
+        border: 2px solid;
         border-radius: 0.5em
     }
-
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	.user-name{
+		margin-top: 0.2em;
+	}
     .user-screen-name {
+        margin-top: 0.3em;
         font-weight: lighter;
+        padding-right: 0.1em;
     }
 }
 
 .user-counts {
     display: flex;
-    padding: 1em 1em 0em 1em;
+    line-height:16px;
+    padding: 1em 1.5em 0em 1em;
+    text-align: center;
 }
 
 .user-count {
     flex: 1;
 
     h5 {
-        font-weight: lighter;
-        margin: 0;
+    	font-size:1em;
+        font-weight: bolder;
+        margin: 0 0 0.25em;
     }
 }
 
@@ -196,7 +210,7 @@ status-text-container {
     }
 
     .retweet-info {
-        padding: 0.3em;
+        padding: 0.7em 0 0 0.6em;
 
         .media-left {
             display: flex;
@@ -214,6 +228,7 @@ status-text-container {
         small {
             font-weight: lighter;
         }
+        margin-bottom: 0.3em;
     }
 }
 nav {

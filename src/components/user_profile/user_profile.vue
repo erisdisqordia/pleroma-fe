@@ -19,6 +19,14 @@
          div {
              flex: 1;
          }
+         margin-top: 1em;
+         margin-bottom: -1.2em;
+     }
+     .muteinfo{
+     	margin: 0.5em 0;
+     }
+     .user-screen-name {
+     	margin-top: 0.4em;
      }
  }
 </style>

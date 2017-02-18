@@ -6,3 +6,4 @@ Contributors of this project.
 - dtluna (dtluna@social.heldscal.la): Code
 - sonyam (sonyam@social.heldscal.la): Default background image
 - hakui (hakui@freezepeach.xyz): CSS and styling
+- shpuld (shpuld@shitposter.club): CSS and styling

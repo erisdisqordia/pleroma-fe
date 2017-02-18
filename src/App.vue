@@ -3,9 +3,11 @@
     <nav class='container base01-background base04'>
       <div class='inner-nav' :style="logoStyle">
         <div class='item'>
-          <a route-to='friends-timeline' href="#">{{sitename}}</a>
+          <router-link :to="{ name: 'root'}">{{sitename}}</router-link>
         </div>
-        <style-switcher></style-switcher>
+        <div class='item right'>
+          <router-link :to="{ name: 'settings'}"><i class="icon-cog"></i></router-link>
+        </div>
       </div>
     </nav>
     <div class="container" id="content">

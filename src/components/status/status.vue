@@ -107,7 +107,6 @@
 
      a {
          display: inline-block;
-         word-break: break-all;
      }
 
      .status-content {

@@ -13,20 +13,38 @@
  }
 
  .user-info {
-     .following-info {
+     .user-interactions {
          display: flex;
+         flex-flow: row wrap;
 
          div {
              flex: 1;
          }
-         margin-top: 1em;
+         margin-top: 0.5em;
          margin-bottom: -1.2em;
+
+         .following {
+            font-size: 14px;
+            flex: 0 0 100%;
+            margin-bottom: 0.5em;
+         }
      }
-     .muteinfo{
-     	margin: 0.5em 0;
+
+     .mute {
+     	margin-right: 4em;
+     }
+
+     .follow {
+        margin-left: 4em;
      }
      .user-screen-name {
      	margin-top: 0.4em;
+     }
+
+     button {
+         width: 80%;
+         height: 100%;
+         border: 1px solid;
      }
  }
 </style>

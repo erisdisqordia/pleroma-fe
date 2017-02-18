@@ -70,6 +70,7 @@
      form textarea {
          border: none;
          border-radius: 2px;
+         line-height:16px;
          padding: 0.5em;
          resize: vertical;
      }

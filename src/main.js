@@ -29,7 +29,7 @@ Vue.use(VueTimeago, {
 })
 
 const persistedStateOptions = {
-  paths: ['users.users']
+  paths: ['users.users', 'statuses.notifications']
 }
 
 const store = new Vuex.Store({

@@ -14,7 +14,7 @@ const config = {
   },
   actions: {
     setPageTitle ({state}, option = '') {
-      document.title = `${state.name} ${option}`
+      document.title = `${option} ${state.name}`
     },
     setOption ({ commit, dispatch }, { name, value }) {
       commit('setOption', {name, value})

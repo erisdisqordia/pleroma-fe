@@ -92,6 +92,8 @@
                   img {
                       border: 0px;
                       border-radius: 0;
+                      height: 100%;
+                      object-fit: cover;
                   }
               }
 

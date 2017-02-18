@@ -173,7 +173,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const addNotification = ({type, status, action}) => {
-    state.notifications.push({type, status, action, seen: false})
+    // Only add a new notification if we don't have one for the same action
+    if (!find(state.notifications, (oldNotification) => oldNotification.action.id === action.id)) {
+      state.notifications.push({type, status, action, seen: false})
+    }
   }
 
   const favoriteStatus = (favorite) => {

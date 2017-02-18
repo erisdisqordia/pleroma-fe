@@ -2,7 +2,7 @@
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group" >
-        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control"></textarea>
+        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control"  @keyup.ctrl.enter="postStatus(newStatus)"></textarea>
       </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
@@ -66,7 +66,7 @@
          padding: 0.3em 0.5em 0.6em;
          line-height:24px;
      }
-     
+
      form textarea {
          border: none;
          border-radius: 2px;

@@ -41,6 +41,9 @@ const Status = {
   },
   methods: {
     linkClicked ({target}) {
+      if (target.tagName === 'SPAN') {
+        target = target.parentNode
+      }
       if (target.tagName === 'A') {
         window.open(target.href, '_blank')
       }

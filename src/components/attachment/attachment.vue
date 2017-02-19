@@ -18,7 +18,7 @@
 
     <span v-if="type === 'unknown'">Don't know how to display this...</span>
 
-    <div v-if="type === 'html' && attachment.oembed" class="oembed">
+    <div @click.prevent="linkClicked" v-if="type === 'html' && attachment.oembed" class="oembed">
       <div v-if="attachment.thumb_url" class="image">
         <img :src="attachment.thumb_url"></img>
       </div>

@@ -54,7 +54,7 @@
               </small>
             </h4>
 
-            <div class="status-content" v-html="status.statusnet_html"></div>
+            <div @click.prevent="linkClicked" class="status-content" v-html="status.statusnet_html"></div>
 
             <div v-if='status.attachments' class='attachments'>
               <attachment :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments">

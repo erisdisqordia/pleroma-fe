@@ -20,6 +20,11 @@ const Attachment = {
     }
   },
   methods: {
+    linkClicked ({target}) {
+      if (target.tagName === 'A') {
+        window.open(target.href, '_blank')
+      }
+    },
     toggleHidden () {
       this.showHidden = !this.showHidden
     }

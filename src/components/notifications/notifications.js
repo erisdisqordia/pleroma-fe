@@ -25,7 +25,11 @@ const Notifications = {
   },
   watch: {
     unseenCount (count) {
-      this.$store.dispatch('setPageTitle', `(${count})`)
+      if (count > 0) {
+        this.$store.dispatch('setPageTitle', `(${count})`)
+      } else {
+        this.$store.dispatch('setPageTitle', '')
+      }
     }
   },
   methods: {

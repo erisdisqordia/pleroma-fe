@@ -3,7 +3,7 @@ import { sortBy, take, filter } from 'lodash'
 const Notifications = {
   data () {
     return {
-      visibleNotificationCount: 20
+      visibleNotificationCount: 10
     }
   },
   computed: {

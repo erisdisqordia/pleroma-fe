@@ -1,0 +1,35 @@
+## 2017-02-20
+
+- Overall CSS styling fixes
+- Current theme is displayed in theme selector
+- Theme selector is moved to the settings page
+- Oembed attachments will now display correctly
+- Styling changes to the user info cards
+- Notification count in title
+- Better Notification handling (persistance, mark as read)
+- Post statuses with ctrl+enter
+- Links in statuses open in a new tab
+- Optimized mobile view
+- Fix crash on persistance failure
+- Compress persisted state
+- Sync mutes with backend (SEE NOTE BELOW)
+
+Pleroma will now try to get the current mutes from the backend. Sadly, a bug in
+Qvitter will not allow getting the mutes from the endpoint, because it will
+ignore HTTP Basic authentication. Mutes will still persist in Pleroma through
+localstorage, but the mutes from Qvitter won't be picked up if the call fails.
+
+The patch for Qvitter:
+
+--- a/actions/apiqvittermutes.php
++++ b/actions/apiqvittermutes.php
+@@ -74,7 +74,7 @@ class ApiQvitterMutesAction extends ApiPrivateAuthAction
+     {
+         parent::handle();
+
+-        $this->target = Profile::current();
++        $this->target = $this->scoped;
+
+                if(!$this->target instanceof Profile) {
+                        $this->clientError(_('You have to be logged in to view your mutes.'), 403);
+

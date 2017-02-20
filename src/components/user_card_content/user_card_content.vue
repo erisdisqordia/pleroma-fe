@@ -82,6 +82,7 @@
       toggleMute () {
         const store = this.$store
         store.commit('setMuted', {user: this.user, muted: !this.user.muted})
+        store.state.api.backendInteractor.setUserMute(this.user)
       }
     }
   }

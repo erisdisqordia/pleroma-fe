@@ -82,6 +82,12 @@ const users = {
                 // Start getting fresh tweets.
                 store.dispatch('startFetching', 'friends')
 
+                // Get user mutes and follower info
+                store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {
+                  each(mutedUsers, (user) => { user.muted = true })
+                  store.commit('addNewUsers', mutedUsers)
+                })
+
                 // Fetch our friends
                 store.rootState.api.backendInteractor.fetchFriends()
                   .then((friends) => commit('addNewUsers', friends))

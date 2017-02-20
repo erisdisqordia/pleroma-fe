@@ -17,7 +17,7 @@ import configModule from './modules/config.js'
 
 import VueTimeago from 'vue-timeago'
 
-import createPersistedState from 'vuex-persistedstate'
+import createPersistedState from './lib/persisted_state.js'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)

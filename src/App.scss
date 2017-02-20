@@ -281,6 +281,14 @@ nav {
     .panel-switcher {
         display: flex;
     }
+
+    .container {
+        padding: 0 0 0 0;
+    }
+
+    .panel {
+        margin: 0.5em 0 0.5em 0;
+    }
 }
 
 .item.right {

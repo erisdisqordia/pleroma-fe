@@ -1,5 +1,6 @@
 import merge from 'lodash.merge'
 import objectPath from 'object-path'
+import { throttle } from 'lodash'
 
 const defaultReducer = (state, paths) => (
   paths.length === 0 ? state : paths.reduce((substate, path) => {
@@ -33,6 +34,10 @@ const defaultStorage = (() => {
   return new InternalStorage()
 })()
 
+const defaultSetState = (key, state, storage) => {
+  return storage.setItem(key, JSON.stringify(state))
+}
+
 export default function createPersistedState ({
   key = 'vuex',
   paths = [],
@@ -40,7 +45,7 @@ export default function createPersistedState ({
     const value = storage.getItem(key)
     return value && value !== 'undefined' ? JSON.parse(value) : undefined
   },
-  setState = (key, state, storage) => storage.setItem(key, JSON.stringify(state)),
+  setState = throttle(defaultSetState, 5000),
   reducer = defaultReducer,
   storage = defaultStorage,
   subscriber = store => handler => store.subscribe(handler)

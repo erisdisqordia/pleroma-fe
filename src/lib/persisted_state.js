@@ -1,6 +1,7 @@
 import merge from 'lodash.merge'
 import objectPath from 'object-path'
 import { throttle } from 'lodash'
+import { inflate, deflate } from 'pako'
 
 const defaultReducer = (state, paths) => (
   paths.length === 0 ? state : paths.reduce((substate, path) => {
@@ -35,14 +36,19 @@ const defaultStorage = (() => {
 })()
 
 const defaultSetState = (key, state, storage) => {
-  return storage.setItem(key, JSON.stringify(state))
+  return storage.setItem(key, deflate(JSON.stringify(state), { to: 'string' }))
 }
 
 export default function createPersistedState ({
   key = 'vuex',
   paths = [],
   getState = (key, storage) => {
-    const value = storage.getItem(key)
+    let value = storage.getItem(key)
+    try {
+      value = inflate(value, { to: 'string' })
+    } catch (e) {
+      console.log("Couldn't inflate value... Maybe upgrading")
+    }
     return value && value !== 'undefined' ? JSON.parse(value) : undefined
   },
   setState = throttle(defaultSetState, 5000),

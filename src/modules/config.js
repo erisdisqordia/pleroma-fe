@@ -13,11 +13,14 @@ const config = {
     }
   },
   actions: {
-    setOption ({ commit }, { name, value }) {
+    setPageTitle ({state}, option = '') {
+      document.title = `${option} ${state.name}`
+    },
+    setOption ({ commit, dispatch }, { name, value }) {
       commit('setOption', {name, value})
       switch (name) {
         case 'name':
-          document.title = value
+          dispatch('setPageTitle')
           break
         case 'theme':
           const fullPath = `/static/css/${value}`

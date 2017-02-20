@@ -18,7 +18,7 @@
 
     <span v-if="type === 'unknown'">Don't know how to display this...</span>
 
-    <div v-if="type === 'html' && attachment.oembed" class="oembed">
+    <div @click.prevent="linkClicked" v-if="type === 'html' && attachment.oembed" class="oembed">
       <div v-if="attachment.thumb_url" class="image">
         <img :src="attachment.thumb_url"></img>
       </div>
@@ -39,7 +39,7 @@
       .attachment {
           flex: 1 0 30%;
           display: flex;
-          margin: 0.2em;
+          margin: 0.5em 0.8em 0.6em 0.1em;
           align-self: flex-start;
 
           &.html {
@@ -79,6 +79,7 @@
               img {
                   width: 100%;
               }
+              margin-right: 15px;
           }
 
           .oembed {
@@ -91,6 +92,8 @@
                   img {
                       border: 0px;
                       border-radius: 0;
+                      height: 100%;
+                      object-fit: cover;
                   }
               }
 

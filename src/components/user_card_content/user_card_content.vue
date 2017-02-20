@@ -3,28 +3,32 @@
     <div class="base00-background panel-heading text-center" v-bind:style="style">
       <div class='user-info'>
         <img :src="user.profile_image_url">
-        <div v-if='user.muted' class='muteinfo'>Muted</div>
-        <div class='muteinfo' v-if='isOtherUser'>
-          <button @click="toggleMute">Mute/Unmute</button>
-        </div>
         <span class="glyphicon glyphicon-user"></span>
         <div class='user-name'>{{user.name}}</div>
         <div class='user-screen-name'>@{{user.screen_name}}</div>
-        <div v-if="isOtherUser" class="following-info">
-          <div v-if="user.follows_you" class="following">
+        <div v-if="isOtherUser" class="user-interactions">
+          <div v-if="user.follows_you" class="following base06">
             Follows you!
           </div>
-          <div class="followed">
+          <div class="follow">
             <span v-if="user.following">
-              Following them!
-              <button @click="unfollowUser">
-                Unfollow!
+              <!--Following them!-->
+              <button @click="unfollowUser" class="base06 base01-background base06-border">
+                Unfollow
               </button>
             </span>
-            <span v-if="!user.following" >
-              <button @click="followUser">
-                Follow!
+            <span v-if="!user.following">
+              <button @click="followUser" class="base01 base04-background base01-border">
+                Follow
               </button>
+            </span>
+          </div>
+          <div class='mute' v-if='isOtherUser'>
+            <span v-if='user.muted'>
+              <button @click="toggleMute" class="base04 base01-background base06-border">Unmute</button>
+            </span>
+            <span v-if='!user.muted'>
+              <button @click="toggleMute" class="base01 base04-background base01-border">Mute</button>
             </span>
           </div>
         </div>
@@ -78,6 +82,7 @@
       toggleMute () {
         const store = this.$store
         store.commit('setMuted', {user: this.user, muted: !this.user.muted})
+        store.state.api.backendInteractor.setUserMute(this.user)
       }
     }
   }

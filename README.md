@@ -2,6 +2,8 @@
 
 > A Qvitter-style frontend for certain GS servers.
 
+![screenshot](http://i.imgur.com/3q30Zxt.jpg)
+
 # FOR ADMINS
 
 You don't need to build Pleroma yourself. Check out https://gitgud.io/lambadalambda/pleroma-fe/wikis/dual-boot-with-qvitter to see how to run Pleroma and Qvitter at the same time.
@@ -10,7 +12,8 @@ You don't need to build Pleroma yourself. Check out https://gitgud.io/lambadalam
 
 ``` bash
 # install dependencies
-npm install
+npm install -g yarn
+yarn
 
 # serve with hot reload at localhost:8080
 npm run dev

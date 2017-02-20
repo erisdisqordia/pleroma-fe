@@ -34,6 +34,12 @@ const backendInteractorService = (credentials) => {
     return timelineFetcherService.startFetching({timeline, store, credentials})
   }
 
+  const setUserMute = ({id, muted = true}) => {
+    return apiService.setUserMute({id, muted, credentials})
+  }
+
+  const fetchMutes = () => apiService.fetchMutes({credentials})
+
   const backendInteractorServiceInstance = {
     fetchStatus,
     fetchConversation,
@@ -43,7 +49,9 @@ const backendInteractorService = (credentials) => {
     unfollowUser,
     fetchAllFollowing,
     verifyCredentials: apiService.verifyCredentials,
-    startFetching
+    startFetching,
+    setUserMute,
+    fetchMutes
   }
 
   return backendInteractorServiceInstance

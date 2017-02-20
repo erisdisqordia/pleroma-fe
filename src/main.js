@@ -17,7 +17,7 @@ import configModule from './modules/config.js'
 
 import VueTimeago from 'vue-timeago'
 
-import createPersistedState from 'vuex-persistedstate'
+import createPersistedState from './lib/persisted_state.js'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
@@ -29,7 +29,7 @@ Vue.use(VueTimeago, {
 })
 
 const persistedStateOptions = {
-  paths: ['users.users']
+  paths: ['users.users', 'statuses.notifications']
 }
 
 const store = new Vuex.Store({

@@ -17,6 +17,6 @@
 
 <style>
  .setting-item {
-   margin: 1em
+   margin: 1em 1em 1.4em;
  }
 </style>

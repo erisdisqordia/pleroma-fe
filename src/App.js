@@ -24,6 +24,9 @@ export default {
   methods: {
     activatePanel (panelName) {
       this.mobileActivePanel = panelName
+    },
+    scrollToTop () {
+      window.scrollTo(0, 0)
     }
   }
 }

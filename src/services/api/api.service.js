@@ -16,6 +16,7 @@ const MENTIONS_URL = '/api/statuses/mentions.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
+const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
 // const USER_URL = '/api/users/show.json'
 
 const oldfetch = window.fetch
@@ -58,7 +59,7 @@ const fetchFriends = ({credentials}) => {
 const fetchAllFollowing = ({username, credentials}) => {
   const url = `${ALL_FOLLOWING_URL}/${username}.json`
   return fetch(url, { headers: authHeaders(credentials) })
-    .then((data) => data.json().users)
+    .then((data) => data.json())
 }
 
 const fetchMentions = ({username, sinceId = 0, credentials}) => {
@@ -77,6 +78,22 @@ const fetchStatus = ({id, credentials}) => {
   let url = `${STATUS_URL}/${id}.json`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+}
+
+const setUserMute = ({id, credentials, muted = true}) => {
+  const form = new FormData()
+
+  const muteInteger = muted ? 1 : 0
+
+  form.append('namespace', 'qvitter')
+  form.append('data', muteInteger)
+  form.append('topic', `mute:${id}`)
+
+  return fetch(QVITTER_USER_PREF_URL, {
+    method: 'POST',
+    headers: authHeaders(credentials),
+    body: form
+  })
 }
 
 const fetchTimeline = ({timeline, credentials, since = false, until = false}) => {
@@ -162,6 +179,14 @@ const uploadMedia = ({formData, credentials}) => {
     .then((text) => (new DOMParser()).parseFromString(text, 'application/xml'))
 }
 
+const fetchMutes = ({credentials}) => {
+  const url = '/api/qvitter/mutes.json'
+
+  return fetch(url, {
+    headers: authHeaders(credentials)
+  }).then((data) => data.json())
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -177,7 +202,9 @@ const apiService = {
   postStatus,
   deleteStatus,
   uploadMedia,
-  fetchAllFollowing
+  fetchAllFollowing,
+  setUserMute,
+  fetchMutes
 }
 
 export default apiService

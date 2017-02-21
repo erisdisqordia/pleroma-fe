@@ -25,6 +25,7 @@
     "tributejs": "^2.1.0",
     "vue": "^2.1.0",
     "vue-router": "^2.2.0",
+    "vue-template-compiler": "^2.1.10",
     "vue-timeago": "^3.1.2",
     "vuex": "^2.1.0"
   },
@@ -82,8 +83,8 @@
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
-    "vue-loader": "^9.4.0",
-    "vue-style-loader": "^1.0.0",
+    "vue-loader": "^11.1.0",
+    "vue-style-loader": "^2.0.0",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2",

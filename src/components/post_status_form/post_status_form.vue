@@ -2,7 +2,7 @@
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group" >
-        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control"  @keyup.ctrl.enter="postStatus(newStatus)"></textarea>
+        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control" @keyup.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop"></textarea>
       </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class='form-bottom'>
-        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit"></media-upload>
+        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
         <button :disabled="submitDisabled" type="submit" class="btn btn-default">Submit</button>
       </div>
     </form>

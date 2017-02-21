@@ -84,6 +84,7 @@ const PostStatusForm = {
     }
 
     return {
+      dropFiles: [],
       submitDisabled: false,
       newStatus: {
         status: statusText,
@@ -141,6 +142,12 @@ const PostStatusForm = {
     },
     type (fileInfo) {
       return fileTypeService.fileType(fileInfo.mimetype)
+    },
+    fileDrop (e) {
+      if (e.dataTransfer.files.length > 0) {
+        e.preventDefault()  // allow dropping text like before
+        this.dropFiles = e.dataTransfer.files
+      }
     }
   }
 }

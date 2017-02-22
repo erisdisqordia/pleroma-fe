@@ -1,5 +1,5 @@
 <template>
-  <div id="heading" class="profile-panel-background base00-background" :style="headingStyle">
+  <div id="heading" class="profile-panel-background" :style="headingStyle">
     <div class="panel-heading text-center">
       <div class='user-info'>
         <div class='container'>
@@ -66,10 +66,10 @@
         }
       },
       bodyStyle () {
-        let color = '#1C2023'
+        let color = this.$store.state.config.colors['base00']
         console.log(this.color)
         return {
-          background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), ' + color + ' 70%)'
+          background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), ' + color + ' 80%)'
         }
       },
       isOtherUser () {
@@ -102,6 +102,7 @@
 <style lang="scss">
 
 .profile-panel-background {
+  background-color: #121517;
   background-size: cover;
   border-radius: 0.5em 0.5em 0 0;
 }
@@ -114,7 +115,7 @@
 
 .user-info {
 	color: white;
-  padding: 1em 1em 1em 1em;
+  padding: 16px 16px 16px 16px;
   margin-bottom: -4em;
 
   .container{
@@ -134,7 +135,7 @@
       max-height: 48px;
   }
 
-	text-shadow: 0 2px 2px rgba(0, 0, 0, 1.0);
+	text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
 
 	.user-name{
 		margin-top: 0.0em;
@@ -152,34 +153,39 @@
       flex: 0 0 auto;
       align-self: flex-start;
   }
-  
+
   .user-interactions {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-between;
 
     div {
       flex: 1;
     }
-    margin-top: 0.5em;
-    margin-bottom: -1.2em;
+    margin-top: 0.7em;
+    margin-bottom: -1.0em;
 
     .following {
+      color: white;
       font-size: 14px;
       flex: 0 0 100%;
-      margin-bottom: 0.5em;
+      margin: -0.7em 0.0em 0.3em 0.0em;
+      padding-left: 16px;
+      text-align: left;
     }
 
     .mute {
-      max-width: 200px;
+      max-width: 220px;
+      min-height: 28px;
     }
 
     .follow {
-      max-width: 200px;
+      max-width: 220px;
+      min-height: 28px;
     }
 
     button {
-      width: 80%;
+      width: 92%;
       height: 100%;
       border: 1px solid;
     }

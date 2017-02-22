@@ -7,18 +7,18 @@
         <div class='user-name'>{{user.name}}</div>
         <div class='user-screen-name'>@{{user.screen_name}}</div>
         <div v-if="isOtherUser" class="user-interactions">
-          <div v-if="user.follows_you" class="following base06">
+          <div v-if="user.follows_you && loggedIn" class="following base06">
             Follows you!
           </div>
-          <div class="follow">
+          <div class="follow" v-if="loggedIn">
             <span v-if="user.following">
               <!--Following them!-->
-              <button @click="unfollowUser" class="base06 base01-background base06-border">
+              <button @click="unfollowUser" class="base06 base01-background">
                 Unfollow
               </button>
             </span>
             <span v-if="!user.following">
-              <button @click="followUser" class="base01 base04-background base01-border">
+              <button @click="followUser" class="base01 base04-background">
                 Follow
               </button>
             </span>
@@ -66,6 +66,9 @@
       },
       isOtherUser () {
         return this.user !== this.$store.state.users.currentUser
+      },
+      loggedIn () {
+        return this.$store.state.users.currentUser
       }
     },
     methods: {

@@ -3,12 +3,22 @@ import statusPosterService from '../../services/status_poster/status_poster.serv
 
 const mediaUpload = {
   mounted () {
-    const store = this.$store
     const input = this.$el.querySelector('input')
-    const self = this
 
     input.addEventListener('change', ({target}) => {
       const file = target.files[0]
+      this.uploadFile(file)
+    })
+  },
+  data () {
+    return {
+      uploading: false
+    }
+  },
+  methods: {
+    uploadFile (file) {
+      const self = this
+      const store = this.$store
       const formData = new FormData()
       formData.append('media', file)
 
@@ -23,11 +33,16 @@ const mediaUpload = {
           self.$emit('upload-failed')
           self.uploading = false
         })
-    })
+    }
   },
-  data () {
-    return {
-      uploading: false
+  props: [
+    'dropFiles'
+  ],
+  watch: {
+    'dropFiles': function (fileInfos) {
+      if (!this.uploading) {
+        this.uploadFile(fileInfos[0])
+      }
     }
   }
 }

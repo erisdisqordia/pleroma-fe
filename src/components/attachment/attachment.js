@@ -9,7 +9,8 @@ const Attachment = {
   ],
   data: () => ({
     nsfwImage,
-    showHidden: false
+    hideNsfwLocal: this.$store.state.config.hideNsfw,
+    showHidden: !this.hideNsfwLocal
   }),
   computed: {
     type () {

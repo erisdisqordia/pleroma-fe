@@ -8,6 +8,11 @@
         <h2>Theme</h2>
         <style-switcher></style-switcher>
       </div>
+      <div class="setting-item">
+        <h2>Attachments</h2>
+        <input type="checkbox" id="hideAttachments" v-model="hideAttachmentsLocal">
+        <label for="hideAttachments">Hide Attachments</label>
+      </div>
     </div>
   </div>
 </template>

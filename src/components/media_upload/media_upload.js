@@ -16,7 +16,7 @@ const mediaUpload = {
     }
   },
   methods: {
-    uploadFile(file) {
+    uploadFile (file) {
       const self = this
       const store = this.$store
       const formData = new FormData()
@@ -54,8 +54,9 @@ const mediaUpload = {
   ],
   watch: {
     'dropFiles': function (fileInfos) {
-      if (!this.uploading)
+      if (!this.uploading) {
         this.uploadFile(fileInfos[0])
+      }
     }
   }
 }

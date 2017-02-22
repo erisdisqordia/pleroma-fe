@@ -51,7 +51,7 @@ export default function createPersistedState ({
     }
     return value && value !== 'undefined' ? JSON.parse(value) : undefined
   },
-  setState = throttle(defaultSetState, 5000),
+  setState = throttle(defaultSetState, 60000),
   reducer = defaultReducer,
   storage = defaultStorage,
   subscriber = store => handler => store.subscribe(handler)

@@ -16,8 +16,6 @@
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 
-    <span v-if="type === 'unknown'">Don't know how to display this...</span>
-
     <div @click.prevent="linkClicked" v-if="type === 'html' && attachment.oembed" class="oembed">
       <div v-if="attachment.thumb_url" class="image">
         <img :src="attachment.thumb_url"></img>
@@ -38,12 +36,12 @@
       flex-wrap: wrap;
       .attachment {
           flex: 1 0 30%;
-          display: flex;
           margin: 0.5em 0.8em 0.6em 0.1em;
           align-self: flex-start;
 
           &.html {
             flex-basis: 100%;
+            display: flex;
           }
 
           .hider {

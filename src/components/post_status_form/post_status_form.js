@@ -144,7 +144,7 @@ const PostStatusForm = {
       return fileTypeService.fileType(fileInfo.mimetype)
     },
     fileDrop (e) {
-      if(e.dataTransfer.files.length > 0) {
+      if (e.dataTransfer.files.length > 0) {
         e.preventDefault()  // allow dropping text like before
         this.dropFiles = e.dataTransfer.files
       }

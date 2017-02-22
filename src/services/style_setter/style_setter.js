@@ -1,4 +1,6 @@
-const setStyle = (href) => {
+import { times } from 'lodash'
+
+const setStyle = (href, commit) => {
   /***
       What's going on here?
       I want to make it easy for admins to style this application. To have
@@ -23,18 +25,26 @@ const setStyle = (href) => {
   const setDynamic = () => {
     const baseEl = document.createElement('div')
     body.appendChild(baseEl)
-    baseEl.setAttribute('class', 'base05')
-    const base05Color = window.getComputedStyle(baseEl).getPropertyValue('color')
-    baseEl.setAttribute('class', 'base08')
-    const base08Color = window.getComputedStyle(baseEl).getPropertyValue('color')
+
+    let colors = {}
+    times(16, (n) => {
+      const name = `base0${n.toString(16).toUpperCase()}`
+      baseEl.setAttribute('class', name)
+      const color = window.getComputedStyle(baseEl).getPropertyValue('color')
+      colors[name] = color
+    })
+
+    commit('setOption', { name: 'colors', value: colors })
+
+    body.removeChild(baseEl)
+
     const styleEl = document.createElement('style')
     head.appendChild(styleEl)
     const styleSheet = styleEl.sheet
-    body.removeChild(baseEl)
 
-    styleSheet.insertRule(`a { color: ${base08Color}`, 'index-max')
-    styleSheet.insertRule(`body { color: ${base05Color}`, 'index-max')
-    styleSheet.insertRule(`.base05-border { border-color: ${base05Color}`, 'index-max')
+    styleSheet.insertRule(`a { color: ${colors['base08']}`, 'index-max')
+    styleSheet.insertRule(`body { color: ${colors['base05']}`, 'index-max')
+    styleSheet.insertRule(`.base05-border { border-color: ${colors['base05']}`, 'index-max')
     body.style.display = 'initial'
   }
   cssEl.addEventListener('load', setDynamic)

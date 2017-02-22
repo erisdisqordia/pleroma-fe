@@ -33,6 +33,20 @@ const mediaUpload = {
           self.$emit('upload-failed')
           self.uploading = false
         })
+    },
+    fileDrop (e) {
+      if(e.dataTransfer.files.length > 0) {
+        e.preventDefault()  // allow dropping text like before
+        this.uploadFile(e.dataTransfer.files[0])
+      }
+    },
+    fileDrag (e) {
+      let types = e.dataTransfer.types
+      if(types.contains('Files')) {
+        e.dataTransfer.dropEffect = 'copy'
+      } else {
+        e.dataTransfer.dropEffect = 'none'
+      }
     }
   },
   props: [

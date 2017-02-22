@@ -148,6 +148,9 @@ const PostStatusForm = {
         e.preventDefault()  // allow dropping text like before
         this.dropFiles = e.dataTransfer.files
       }
+    },
+    fileDrag (e) {
+      e.dataTransfer.dropEffect = 'copy';
     }
   }
 }

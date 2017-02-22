@@ -1,10 +1,14 @@
 import { sortBy, take, filter } from 'lodash'
+import Status from '../status/status.vue'
 
 const Notifications = {
   data () {
     return {
       visibleNotificationCount: 10
     }
+  },
+  components: {
+    Status
   },
   computed: {
     notifications () {

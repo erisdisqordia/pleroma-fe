@@ -150,7 +150,7 @@ const PostStatusForm = {
       }
     },
     fileDrag (e) {
-      e.dataTransfer.dropEffect = 'copy';
+      e.dataTransfer.dropEffect = 'copy'
     }
   }
 }

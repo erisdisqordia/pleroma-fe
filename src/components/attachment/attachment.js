@@ -7,17 +7,19 @@ const Attachment = {
     'nsfw',
     'statusId'
   ],
-  data: () => ({
-    nsfwImage,
-    hideNsfwLocal: this.$store.state.config.hideNsfw,
-    showHidden: !this.hideNsfwLocal
-  }),
+  data () {
+    return {
+      nsfwImage,
+      hideNsfwLocal: this.$store.state.config.hideNsfw,
+      showHidden: false
+    }
+  },
   computed: {
     type () {
       return fileTypeService.fileType(this.attachment.mimetype)
     },
     hidden () {
-      return this.nsfw && !this.showHidden
+      return this.nsfw && this.hideNsfwLocal && !this.showHidden
     }
   },
   methods: {

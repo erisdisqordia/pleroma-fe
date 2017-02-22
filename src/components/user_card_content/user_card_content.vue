@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <div class="base00-background panel-heading text-center" v-bind:style="style">
+  <div id="heading" class="profile-panel-background" :style="headingStyle">
+    <div class="panel-heading text-center">
       <div class='user-info'>
-        <img :src="user.profile_image_url">
-        <span class="glyphicon glyphicon-user"></span>
-        <div class='user-name'>{{user.name}}</div>
-        <div class='user-screen-name'>@{{user.screen_name}}</div>
+        <div class='container'>
+          <img :src="user.profile_image_url">
+          <span class="glyphicon glyphicon-user"></span>
+          <div class='user-name'>{{user.name}}</div>
+          <div class='user-screen-name'>@{{user.screen_name}}</div>
+        </div>
         <div v-if="isOtherUser" class="user-interactions">
           <div v-if="user.follows_you && loggedIn" class="following base06">
             Follows you!
@@ -34,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="panel-body base00-background">
+    <div class="panel-body profile-panel-body" :style="bodyStyle">
       <div class="user-counts">
         <div class="user-count">
           <h5>Statuses</h5>
@@ -58,10 +60,14 @@
   export default {
     props: [ 'user' ],
     computed: {
-      style () {
+      headingStyle () {
         return {
-          color: `#${this.user.profile_link_color}`,
           'background-image': `url(${this.user.cover_photo})`
+        }
+      },
+      bodyStyle () {
+        return {
+          background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), ' + this.$store.state.config.colors['base00'] + ' 80%)'
         }
       },
       isOtherUser () {
@@ -90,3 +96,114 @@
     }
   }
 </script>
+
+<style lang="scss">
+
+.profile-panel-background {
+  background-color: #121517;
+  background-size: cover;
+  border-radius: 0.5em 0.5em 0 0;
+}
+
+.profile-panel-body {
+  padding-top: 0em;
+  top: -0em;
+  padding-top: 4em;
+}
+
+.user-info {
+	color: white;
+  padding: 16px 16px 16px 16px;
+  margin-bottom: -4em;
+
+  .container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+    max-height: 60px;
+  }
+
+  img {
+      border: 2px solid;
+      border-radius: 0.5em;
+      flex: 1 0 100%;
+      max-width: 48px;
+      max-height: 48px;
+  }
+
+	text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
+
+	.user-name{
+		margin-top: 0.0em;
+    margin-left: 0.6em;
+    flex: 0 0 auto;
+    align-self: flex-start;
+	}
+
+  .user-screen-name {
+      margin-top: 0.0em;
+      margin-left: 0.6em;
+      font-weight: lighter;
+      font-size: 15px;
+      padding-right: 0.1em;
+      flex: 0 0 auto;
+      align-self: flex-start;
+  }
+
+  .user-interactions {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    div {
+      flex: 1;
+    }
+    margin-top: 0.7em;
+    margin-bottom: -1.0em;
+
+    .following {
+      color: white;
+      font-size: 14px;
+      flex: 0 0 100%;
+      margin: -0.7em 0.0em 0.3em 0.0em;
+      padding-left: 16px;
+      text-align: left;
+    }
+
+    .mute {
+      max-width: 220px;
+      min-height: 28px;
+    }
+
+    .follow {
+      max-width: 220px;
+      min-height: 28px;
+    }
+
+    button {
+      width: 92%;
+      height: 100%;
+      border: 1px solid;
+    }
+  }
+}
+
+.user-counts {
+    display: flex;
+    line-height:16px;
+    padding: 1em 1.5em 0em 1em;
+    text-align: center;
+}
+
+.user-count {
+    flex: 1;
+
+    h5 {
+    	font-size:1em;
+        font-weight: bolder;
+        margin: 0 0 0.25em;
+    }
+}
+</style>

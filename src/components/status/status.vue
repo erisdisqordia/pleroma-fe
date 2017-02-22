@@ -153,7 +153,7 @@
  .usercard {
    border-style: solid;
    border-width: 1px;
-   border-radius: 1em;
+   border-radius: 0.5em;
    margin-bottom: 1em;
  }
 

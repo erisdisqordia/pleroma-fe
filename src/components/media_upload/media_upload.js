@@ -29,7 +29,7 @@ const mediaUpload = {
         .then((fileData) => {
           self.$emit('uploaded', fileData)
           self.uploading = false
-        }, (error) => {
+        }, (error) => { // eslint-disable-line handle-callback-err
           self.$emit('upload-failed')
           self.uploading = false
         })

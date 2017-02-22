@@ -49,7 +49,7 @@ const defaultCollection = {
   menuContainer: document.body,
 
   // column to search against in the object (accepts function or string)
-  lookup: ({name, screen_name}) => `${name} (@${screen_name})`,
+  lookup: ({name, screen_name}) => `${name} (@${screen_name})`, // eslint-disable-line camelcase
 
   // column that contains the content to insert by default
   fillAttr: 'screen_name',

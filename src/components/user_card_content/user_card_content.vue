@@ -66,10 +66,8 @@
         }
       },
       bodyStyle () {
-        let color = this.$store.state.config.colors['base00']
-        console.log(this.color)
         return {
-          background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), ' + color + ' 80%)'
+          background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), ' + this.$store.state.config.colors['base00'] + ' 80%)'
         }
       },
       isOtherUser () {

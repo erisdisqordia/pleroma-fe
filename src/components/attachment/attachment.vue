@@ -3,7 +3,7 @@
     <a class="image-attachment" v-if="hidden" v-on:click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"></img>
     </a>
-    <div class="hider" v-if="nsfw && !hidden">
+    <div class="hider" v-if="nsfw && hideNsfwLocal && !hidden">
       <a href="#" @click.prevent="toggleHidden()">Hide</a>
     </div>
 

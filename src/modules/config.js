@@ -4,7 +4,8 @@ import StyleSetter from '../services/style_setter/style_setter.js'
 const defaultState = {
   name: 'Pleroma FE',
   colors: {},
-  hideAttachments: false
+  hideAttachments: false,
+  hideNsfw: true
 }
 
 const config = {

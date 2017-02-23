@@ -1,7 +1,7 @@
 import merge from 'lodash.merge'
 import objectPath from 'object-path'
 import { throttle } from 'lodash'
-import { inflate, deflate } from 'pako'
+import lzstring from 'lz-string'
 
 const defaultReducer = (state, paths) => (
   paths.length === 0 ? state : paths.reduce((substate, path) => {
@@ -36,16 +36,16 @@ const defaultStorage = (() => {
 })()
 
 const defaultSetState = (key, state, storage) => {
-  return storage.setItem(key, deflate(JSON.stringify(state), { to: 'string' }))
+  return storage.setItem(key, lzstring.compressToUTF16(JSON.stringify(state)))
 }
 
 export default function createPersistedState ({
-  key = 'vuex',
+  key = 'vuex-lz',
   paths = [],
   getState = (key, storage) => {
     let value = storage.getItem(key)
     try {
-      value = inflate(value, { to: 'string' })
+      value = lzstring.decompressFromUTF16(value) // inflate(value, { to: 'string' })
     } catch (e) {
       console.log("Couldn't inflate value... Maybe upgrading")
     }

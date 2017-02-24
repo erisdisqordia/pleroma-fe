@@ -15,22 +15,22 @@
           <div class="follow" v-if="loggedIn">
             <span v-if="user.following">
               <!--Following them!-->
-              <button @click="unfollowUser" class="base01 base04-background">
-                Unfollow
+              <button @click="unfollowUser" class="base04 base00-background pressed">
+                Following!
               </button>
             </span>
             <span v-if="!user.following">
-              <button @click="followUser" class="base05 base01-background">
+              <button @click="followUser" class="base05 base02-background">
                 Follow
               </button>
             </span>
           </div>
           <div class='mute' v-if='isOtherUser'>
             <span v-if='user.muted'>
-              <button @click="toggleMute" class="base01 base04-background">Unmute</button>
+              <button @click="toggleMute" class="base04 base00-background pressed">Muted</button>
             </span>
             <span v-if='!user.muted'>
-              <button @click="toggleMute" class="base05 base01-background">Mute</button>
+              <button @click="toggleMute" class="base05 base02-background">Mute</button>
             </span>
           </div>
         </div>
@@ -183,8 +183,14 @@
     }
 
     button {
+      border: solid;
+      border-width: 1px;
       width: 92%;
       height: 100%;
+    }
+    .pressed {
+      border: solid;
+      border-width: 1px;
     }
   }
 }

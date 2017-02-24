@@ -1,7 +1,7 @@
 <template>
   <div class="login panel panel-default base00-background">
     <!-- Default panel contents -->
-    <div class="panel-heading base01-background base04">
+    <div class="panel-heading base01-background">
       Log in
     </div>
     <div class="panel-body">
@@ -30,12 +30,13 @@
   input {
     border-width: 1px;
     border-style: solid;
+    border-color: silver;
     border-radius: 5px;
-    padding: 0.2em;
+    padding: 0.1em 0.2em 0.2em 0.2em;
   }
 
   .btn {
-    margin-top: 0.5em;
+    margin-top: 1.0em;
     min-height: 28px;
   }
 }

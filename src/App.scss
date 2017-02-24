@@ -32,6 +32,7 @@ a {
 button{
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 
     &:hover {
         background-color: white;
@@ -102,11 +103,11 @@ main-router {
     flex-direction: column;
     margin: 0.5em;
 
-    border-radius: 0.5em;
+    border-radius: 10px;
 }
 
 .panel-heading {
-    border-radius: 0.5em 0.5em 0 0;
+    border-radius: 10px 10px 0 0;
     background-size: cover;
     padding: 0.6em 0;
     text-align: center;
@@ -115,7 +116,7 @@ main-router {
 }
 
 .panel-footer {
-    border-radius: 0 0 0.5em 0.5em;
+    border-radius: 0 0 10px 10px;
 }
 
 .panel-body > p {
@@ -128,7 +129,7 @@ main-router {
 #content {
     margin: auto;
     max-width: 980px;
-    border-radius: 1em;
+    border-radius: 10px;
     padding-bottom: 1em;
     background-color: rgba(0,0,0,0.1);
 }

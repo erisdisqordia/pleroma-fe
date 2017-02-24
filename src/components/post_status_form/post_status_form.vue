@@ -2,7 +2,7 @@
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group" >
-        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control" @keyup.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag"></textarea>
+        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control base05-border" @keyup.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag"></textarea>
       </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
@@ -15,7 +15,7 @@
       </div>
       <div class='form-bottom'>
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
-        <button :disabled="submitDisabled" type="submit" class="btn btn-default">Submit</button>
+        <button :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
       </div>
     </form>
   </div>
@@ -58,7 +58,7 @@
             margin: 10px;
             padding: 5px;
             background: rgba(230,230,230,0.6);
-            border-radius: 0.5em;
+            border-radius: 5px;
             font-weight: bold;
          }
      }
@@ -77,10 +77,11 @@
      }
 
      form textarea {
-         border: none;
-         border-radius: 2px;
+         border: solid;
+         border-width: 1px;
+         border-radius: 5px;
          line-height:16px;
-         padding: 0.5em;
+         padding: 5px;
          resize: vertical;
      }
 

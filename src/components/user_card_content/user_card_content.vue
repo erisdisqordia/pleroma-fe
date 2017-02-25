@@ -104,7 +104,6 @@
 <style lang="scss">
 
 .profile-panel-background {
-
   background-size: cover;
   border-radius: 0.5em 0.5em 0 0;
 }

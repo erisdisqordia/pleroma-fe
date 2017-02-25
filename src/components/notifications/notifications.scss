@@ -1,45 +1,65 @@
 @import '../../_variables.scss';
-.notification {
-  padding: 0.4em 0 0 0.7em;
-  display: flex;
-  border-bottom: 1px solid silver;
 
-  .text {
-    min-width: 0px;
-    word-wrap: break-word;
-    line-height:18px;
+.notifications {
 
-    .icon-retweet {
-      color: $green;
-    }
-
-    .icon-reply {
-      color: $blue;
-    }
-
-    h1 {
-      margin: 0 0 0.3em;
-      padding: 0;
-      font-size: 1em;
-      line-height:20px;
-    }
-
-    padding: 0.3em 0.8em 0.5em;
-    p {
-      margin: 0;
-      margin-top: 0;
-      margin-bottom: 0.3em;
+  .panel-heading {
+    // force the text to stay centered, while keeping
+    // the button in the right side of the panel heading
+    position: relative;
+    button {
+      position: absolute;
+      padding: 0.1em 0.3em 0.25em 0.3em;
+      right: 0.6em;
     }
   }
 
-  .avatar {
-    padding-top: 0.3em;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+  .unseen {
+    border-left: 4px solid rgba(255, 48, 16, 0.65);
   }
 
-  &:last-child {
-    border: none
+  .notification {
+    padding: 0.4em 0 0 0.7em;
+    display: flex;
+    border-bottom: 1px solid silver;
+
+
+    .text {
+      min-width: 0px;
+      word-wrap: break-word;
+      line-height:18px;
+
+      .icon-retweet {
+        color: $green;
+      }
+
+      .icon-reply {
+        color: $blue;
+      }
+
+      h1 {
+        margin: 0 0 0.3em;
+        padding: 0;
+        font-size: 1em;
+        line-height:20px;
+      }
+
+      padding: 0.3em 0.8em 0.5em;
+      p {
+        margin: 0;
+        margin-top: 0;
+        margin-bottom: 0.3em;
+      }
+    }
+
+    .avatar {
+      padding-top: 0.3em;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    &:last-child {
+      border: none
+    }
   }
 }

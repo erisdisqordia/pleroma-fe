@@ -157,7 +157,8 @@
  .usercard {
    border-style: solid;
    border-width: 1px;
-   border-radius: 0.5em;
+   border-radius: 10px;
    margin-bottom: 1em;
+   margin-top: 0.2em;
  }
 </style>

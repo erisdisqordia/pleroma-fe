@@ -15,7 +15,7 @@
       </div>
       <div class='form-bottom'>
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
-        <button :disabled="submitDisabled" type="submit" class="btn btn-default">Submit</button>
+        <button :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
       </div>
     </form>
   </div>
@@ -58,7 +58,7 @@
             margin: 10px;
             padding: 5px;
             background: rgba(230,230,230,0.6);
-            border-radius: 0.5em;
+            border-radius: 5px;
             font-weight: bold;
          }
      }
@@ -77,10 +77,12 @@
      }
 
      form textarea {
-         border: none;
-         border-radius: 2px;
+         border: solid;
+         border-width: 1px;
+         border-color: silver;
+         border-radius: 5px;
          line-height:16px;
-         padding: 0.5em;
+         padding: 5px;
          resize: vertical;
      }
 

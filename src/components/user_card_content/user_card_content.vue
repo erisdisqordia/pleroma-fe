@@ -15,22 +15,22 @@
           <div class="follow" v-if="loggedIn">
             <span v-if="user.following">
               <!--Following them!-->
-              <button @click="unfollowUser" class="base06 base01-background">
-                Unfollow
+              <button @click="unfollowUser" class="base04 base00-background pressed">
+                Following!
               </button>
             </span>
             <span v-if="!user.following">
-              <button @click="followUser" class="base01 base04-background">
+              <button @click="followUser" class="base05 base02-background">
                 Follow
               </button>
             </span>
           </div>
           <div class='mute' v-if='isOtherUser'>
             <span v-if='user.muted'>
-              <button @click="toggleMute" class="base04 base01-background base06-border">Unmute</button>
+              <button @click="toggleMute" class="base04 base00-background pressed">Muted</button>
             </span>
             <span v-if='!user.muted'>
-              <button @click="toggleMute" class="base01 base04-background base01-border">Mute</button>
+              <button @click="toggleMute" class="base05 base02-background">Mute</button>
             </span>
           </div>
         </div>
@@ -102,7 +102,7 @@
 .profile-panel-background {
   background-color: #121517;
   background-size: cover;
-  border-radius: 0.5em 0.5em 0 0;
+  border-radius: 10px;
 }
 
 .profile-panel-body {
@@ -127,7 +127,7 @@
 
   img {
       border: 2px solid;
-      border-radius: 0.5em;
+      border-radius: 5px;
       flex: 1 0 100%;
       max-width: 48px;
       max-height: 48px;
@@ -183,9 +183,14 @@
     }
 
     button {
+      border: solid;
+      border-width: 1px;
       width: 92%;
       height: 100%;
-      border: 1px solid;
+    }
+    .pressed {
+      border: solid;
+      border-width: 1px;
     }
   }
 }

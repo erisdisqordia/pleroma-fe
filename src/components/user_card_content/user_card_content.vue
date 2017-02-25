@@ -61,8 +61,12 @@
     props: [ 'user' ],
     computed: {
       headingStyle () {
+        let rgb = this.$store.state.config.colors['base00'].match(/\d+/g)
         return {
-          'background-image': `url(${this.user.cover_photo})`
+          backgroundColor: 'rgb(' + Math.floor(rgb[0] * 0.53) + ', ' +
+                                    Math.floor(rgb[1] * 0.56) + ', ' +
+                                    Math.floor(rgb[2] * 0.59) + ')',
+          backgroundImage: `url(${this.user.cover_photo})`
         }
       },
       bodyStyle () {
@@ -100,7 +104,7 @@
 <style lang="scss">
 
 .profile-panel-background {
-  background-color: #121517;
+
   background-size: cover;
   border-radius: 0.5em 0.5em 0 0;
 }

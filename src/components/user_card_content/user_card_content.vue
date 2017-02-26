@@ -63,9 +63,7 @@
       headingStyle () {
         let rgb = this.$store.state.config.colors['base00'].match(/\d+/g)
         return {
-          backgroundColor: `rgb(${Math.floor(rgb[0] * 0.53)},
-                                ${Math.floor(rgb[1] * 0.56)},
-                                ${Math.floor(rgb[2] * 0.59)})`,
+          backgroundColor: `rgb(${Math.floor(rgb[0] * 0.53)}, ${Math.floor(rgb[1] * 0.56)}, ${Math.floor(rgb[2] * 0.59)})`,
           backgroundImage: `url(${this.user.cover_photo})`
         }
       },

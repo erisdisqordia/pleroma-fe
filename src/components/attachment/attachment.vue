@@ -3,7 +3,7 @@
     <a class="image-attachment" v-if="hidden" v-on:click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"></img>
     </a>
-    <div class="hider" v-if="nsfw && !hidden">
+    <div class="hider" v-if="nsfw && hideNsfwLocal && !hidden">
       <a href="#" @click.prevent="toggleHidden()">Hide</a>
     </div>
 
@@ -15,8 +15,6 @@
     <video v-if="type === 'video' && !hidden" :src="attachment.url" controls></video>
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
-
-    <span v-if="type === 'unknown'">Don't know how to display this...</span>
 
     <div @click.prevent="linkClicked" v-if="type === 'html' && attachment.oembed" class="oembed">
       <div v-if="attachment.thumb_url" class="image">
@@ -36,14 +34,15 @@
   .attachments {
       display: flex;
       flex-wrap: wrap;
+      margin-right: -0.8em;
       .attachment {
           flex: 1 0 30%;
-          display: flex;
-          margin: 0.5em 0.8em 0.6em 0.1em;
+          margin: 0.5em 0.8em 0.6em 0.0em;
           align-self: flex-start;
 
           &.html {
             flex-basis: 100%;
+            display: flex;
           }
 
           .hider {
@@ -51,14 +50,14 @@
               margin: 10px;
               padding: 5px;
               background: rgba(230,230,230,0.6);
-              border-radius: 0.5em;
+              border-radius: 5px;
               font-weight: bold;
           }
 
           video {
               height: 100%;
               border: 1px solid;
-              border-radius: 0.5em;
+              border-radius: 5px;
               width: 100%;
           }
 
@@ -71,7 +70,7 @@
               height: 100%;
               flex: 1;
               border: 1px solid;
-              border-radius: 0.5em;
+              border-radius: 5px;
           }
 
 
@@ -91,7 +90,7 @@
                   flex: 1;
                   img {
                       border: 0px;
-                      border-radius: 0;
+                      border-radius: 5px;
                       height: 100%;
                       object-fit: cover;
                   }
@@ -115,7 +114,7 @@
                   width: 100%;
                   border-style: solid;
                   border-width: 1px;
-                  border-radius: 0.5em;
+                  border-radius: 5px;
                   width: 100%;
                   height: 100%; /* If this isn't here, chrome will stretch the images */
               }

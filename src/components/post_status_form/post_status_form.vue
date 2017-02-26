@@ -2,20 +2,20 @@
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group" >
-        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control"  @keyup.ctrl.enter="postStatus(newStatus)"></textarea>
+        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control" @keyup.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag"></textarea>
       </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
+          <i class="fa icon-cancel" @click="removeMediaFile(file)"></i>
           <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
           <video v-if="type(file) === 'video'" :src="file.image" controls></video>
           <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
           <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
-          <i class="fa icon-cancel" @click="removeMediaFile(file)"></i>
         </div>
       </div>
       <div class='form-bottom'>
-        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit"></media-upload>
-        <button :disabled="submitDisabled" type="submit" class="btn btn-default">Submit</button>
+        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
+        <button :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
       </div>
     </form>
   </div>
@@ -52,6 +52,15 @@
 
      .attachments {
          padding: 0.5em;
+
+         i {
+            position: absolute;
+            margin: 10px;
+            padding: 5px;
+            background: rgba(230,230,230,0.6);
+            border-radius: 5px;
+            font-weight: bold;
+         }
      }
 
      form {
@@ -68,10 +77,12 @@
      }
 
      form textarea {
-         border: none;
-         border-radius: 2px;
+         border: solid;
+         border-width: 1px;
+         border-color: silver;
+         border-radius: 5px;
          line-height:16px;
-         padding: 0.5em;
+         padding: 5px;
          resize: vertical;
      }
 

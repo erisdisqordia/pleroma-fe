@@ -3,12 +3,22 @@ import statusPosterService from '../../services/status_poster/status_poster.serv
 
 const mediaUpload = {
   mounted () {
-    const store = this.$store
     const input = this.$el.querySelector('input')
-    const self = this
 
     input.addEventListener('change', ({target}) => {
       const file = target.files[0]
+      this.uploadFile(file)
+    })
+  },
+  data () {
+    return {
+      uploading: false
+    }
+  },
+  methods: {
+    uploadFile (file) {
+      const self = this
+      const store = this.$store
       const formData = new FormData()
       formData.append('media', file)
 
@@ -19,15 +29,34 @@ const mediaUpload = {
         .then((fileData) => {
           self.$emit('uploaded', fileData)
           self.uploading = false
-        }, (error) => {
+        }, (error) => { // eslint-disable-line handle-callback-err
           self.$emit('upload-failed')
           self.uploading = false
         })
-    })
+    },
+    fileDrop (e) {
+      if (e.dataTransfer.files.length > 0) {
+        e.preventDefault()  // allow dropping text like before
+        this.uploadFile(e.dataTransfer.files[0])
+      }
+    },
+    fileDrag (e) {
+      let types = e.dataTransfer.types
+      if (types.contains('Files')) {
+        e.dataTransfer.dropEffect = 'copy'
+      } else {
+        e.dataTransfer.dropEffect = 'none'
+      }
+    }
   },
-  data () {
-    return {
-      uploading: false
+  props: [
+    'dropFiles'
+  ],
+  watch: {
+    'dropFiles': function (fileInfos) {
+      if (!this.uploading) {
+        this.uploadFile(fileInfos[0])
+      }
     }
   }
 }

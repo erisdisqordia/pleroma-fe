@@ -49,7 +49,7 @@ const defaultCollection = {
   menuContainer: document.body,
 
   // column to search against in the object (accepts function or string)
-  lookup: ({name, screen_name}) => `${name} (@${screen_name})`,
+  lookup: ({name, screen_name}) => `${name} (@${screen_name})`, // eslint-disable-line camelcase
 
   // column that contains the content to insert by default
   fillAttr: 'screen_name',
@@ -84,6 +84,7 @@ const PostStatusForm = {
     }
 
     return {
+      dropFiles: [],
       submitDisabled: false,
       newStatus: {
         status: statusText,
@@ -141,6 +142,15 @@ const PostStatusForm = {
     },
     type (fileInfo) {
       return fileTypeService.fileType(fileInfo.mimetype)
+    },
+    fileDrop (e) {
+      if (e.dataTransfer.files.length > 0) {
+        e.preventDefault()  // allow dropping text like before
+        this.dropFiles = e.dataTransfer.files
+      }
+    },
+    fileDrag (e) {
+      e.dataTransfer.dropEffect = 'copy'
     }
   }
 }

@@ -2,7 +2,10 @@ import { set } from 'vue'
 import StyleSetter from '../services/style_setter/style_setter.js'
 
 const defaultState = {
-  name: 'Pleroma FE'
+  name: 'Pleroma FE',
+  colors: {},
+  hideAttachments: false,
+  hideNsfw: true
 }
 
 const config = {
@@ -24,7 +27,7 @@ const config = {
           break
         case 'theme':
           const fullPath = `/static/css/${value}`
-          StyleSetter.setStyle(fullPath)
+          StyleSetter.setStyle(fullPath, commit)
       }
     }
   }

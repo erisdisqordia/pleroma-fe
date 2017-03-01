@@ -13,12 +13,12 @@
     }
   }
 
-  .unseen {
-    border-left: 4px solid rgba(255, 48, 16, 0.65);
-  }
-
   .notification {
-    padding: 0.4em 0 0 0.7em;
+    // Will have to use pixels here to ensure consistent distance with
+    // pad alone and pad + border, browsers bad at rounding this with em,
+    // they love to give a 1 pixel ghost offset with 0.7em vs 0.3em + 0.4em,
+    // which does not happen with 10px vs 4px + 6px.
+    padding: 0.4em 0 0 10px;
     display: flex;
     border-bottom: 1px solid silver;
 
@@ -61,5 +61,10 @@
     &:last-child {
       border: none
     }
+  }
+
+  .unseen {
+    border-left: 4px solid rgba(255, 48, 16, 0.65);
+    padding-left: 6px;
   }
 }

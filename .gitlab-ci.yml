@@ -33,11 +33,13 @@ stages:
   - deploy
 
 test:
+  stage: test
   script:
     - yarn
     - npm run unit
 
 build:
+  stage: build
   script:
     - yarn
     - npm run build
@@ -46,6 +48,7 @@ build:
     - dist/
 
 deploy:
+  stage: deploy
   environment: dev
   only:
     - develop

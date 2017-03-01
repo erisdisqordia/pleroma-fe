@@ -27,15 +27,18 @@ before_script:
 #  paths:
 #  - node_modules/
 
+stages:
+  - build
+  - test
+  - deploy
+
 test:
   script:
-    - npm install -g yarn
     - yarn
     - npm run unit
 
 build:
   script:
-    - npm install -g yarn
     - yarn
     - npm run build
   artifacts:
@@ -47,7 +50,6 @@ deploy:
   only:
     - develop
   script:
-    - npm install -g yarn
     - yarn
     - npm run build
     - scp -r dist/* pleroma@tenshi.heldscal.la:~/pleroma

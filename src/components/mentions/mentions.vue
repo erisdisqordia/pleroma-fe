@@ -1,10 +1,5 @@
 <template>
-  <div class="timeline panel panel-default">
-    <div class="panel-heading base01-background base04">Mentions</div>
-    <div class="panel-body">
-      <Timeline v-bind:timeline="timeline" v-bind:timeline-name="'mentions'"/>
-    </div>
-  </div>
+  <Timeline :title="'Mentions'" v-bind:timeline="timeline" v-bind:timeline-name="'mentions'"/>
 </template>
 
 <script src="./mentions.js"></script>

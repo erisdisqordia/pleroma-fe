@@ -29,7 +29,11 @@ const Attachment = {
       }
     },
     toggleHidden () {
-      this.showHidden = !this.showHidden
+      let img = document.createElement('img')
+      img.src = this.attachment.url
+      img.onload = () => {
+        this.showHidden = !this.showHidden
+      }
     }
   }
 }

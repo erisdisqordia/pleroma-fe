@@ -17,7 +17,10 @@ const Status = {
     userExpanded: false
   }),
   computed: {
-    hideAttachments () { return this.$store.state.config.hideAttachments },
+    hideAttachments () {
+      return (this.$store.state.config.hideAttachments && this.expandable) ||
+        (this.$store.state.config.hideAttachmentsInConv && !this.expandable)
+    },
     retweet () { return !!this.statusoid.retweeted_status },
     retweeter () { return this.statusoid.user.name },
     status () {

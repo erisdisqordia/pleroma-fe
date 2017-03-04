@@ -31,6 +31,7 @@ Vue.use(VueTimeago, {
 const persistedStateOptions = {
   paths: [
     'config.hideAttachments',
+    'config.hideAttachmentsInConv',
     'config.hideNsfw',
     'statuses.notifications',
     'users.users'

@@ -1,6 +1,6 @@
 <template>
   <div class="timeline panel panel-default base00-background">
-    <div class="panel-heading base01-background base04">
+    <div class="panel-heading base01-background base04" style="justify-content:space-between;">
       Conversation
       <div v-if="collapsable">
         <small><a href="#" @click.prevent="$emit('toggleExpanded')">Collapse</a></small>

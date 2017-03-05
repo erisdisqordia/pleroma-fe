@@ -4,7 +4,6 @@ import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
-import { toInteger } from 'lodash'
 
 const Status = {
   props: [

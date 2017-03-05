@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el base00-background" v-if="!status.deleted" v-bind:class="{ 'expanded-status': !expandable }">
+  <div class="status-el base00-background" v-if="!status.deleted" v-bind:class="[{ 'expanded-status': !expandable }, { 'base01-background': focused }]">
     <template v-if="muted">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
@@ -34,6 +34,13 @@
                   {{status.in_reply_to_screen_name}}
                 </router-link>
               </small>
+              <template v-if="isReply">
+                  <small>
+                      <router-link :to="{ name: 'conversation', params: { id: status.in_reply_to_status_id } }">
+                          <i class="icon-reply"></i>
+                      </router-link>
+                  </small>
+              </template>
               -
               <small>
                 <router-link :to="{ name: 'conversation', params: { id: status.id } }">

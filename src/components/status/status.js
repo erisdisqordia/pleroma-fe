@@ -4,6 +4,7 @@ import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
+import { toInteger } from 'lodash'
 
 const Status = {
   props: [
@@ -30,7 +31,12 @@ const Status = {
     loggedIn () {
       return !!this.$store.state.users.currentUser
     },
-    muted () { return !this.unmuted && this.status.user.muted }
+    muted () { return !this.unmuted && this.status.user.muted },
+    focused () {
+      const id = toInteger(this.$route.params.id)
+      return (this.statusoid.id == id)
+    },
+    isReply () { return !!this.statusoid.in_reply_to_status_id }
   },
   components: {
     Attachment,

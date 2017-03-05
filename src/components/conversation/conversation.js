@@ -48,8 +48,8 @@ const conversation = {
           .then(() => this.fetchConversation())
       }
     },
-    focused: function(id) {
-      return (id == this.statusoid.id)
+    focused: function (id) {
+      return (id === this.statusoid.id)
     }
   }
 }

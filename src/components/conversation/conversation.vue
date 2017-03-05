@@ -8,7 +8,7 @@
     </div>
     <div class="panel-body">
       <div class="timeline">
-        <status v-for="status in conversation" :key="status.id" v-bind:statusoid="status":expandable='false'></status>
+        <status v-for="status in conversation" :key="status.id" v-bind:statusoid="status":expandable='false':inConversation='true'></status>
       </div>
     </div>
   </div>

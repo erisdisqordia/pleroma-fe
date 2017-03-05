@@ -8,7 +8,8 @@ import UserCardContent from '../user_card_content/user_card_content.vue'
 const Status = {
   props: [
     'statusoid',
-    'expandable'
+    'expandable',
+    'inConversation'
   ],
   data: () => ({
     replying: false,
@@ -18,8 +19,8 @@ const Status = {
   }),
   computed: {
     hideAttachments () {
-      return (this.$store.state.config.hideAttachments && this.expandable) ||
-        (this.$store.state.config.hideAttachmentsInConv && !this.expandable)
+      return (this.$store.state.config.hideAttachments && !this.inConversation) ||
+        (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
     },
     retweet () { return !!this.statusoid.retweeted_status },
     retweeter () { return this.statusoid.user.name },

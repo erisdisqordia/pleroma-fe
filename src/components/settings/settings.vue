@@ -13,7 +13,7 @@
         <ul class="setting-list">
             <li>
                 <input type="checkbox" id="hideAttachments" v-model="hideAttachmentsLocal">
-                <label for="hideAttachments">Hide attachments on timeline</label>
+                <label for="hideAttachments">Hide attachments in timeline</label>
             </li>
             <li>
                 <input type="checkbox" id="hideAttachmentsInConv" v-model="hideAttachmentsInConvLocal">

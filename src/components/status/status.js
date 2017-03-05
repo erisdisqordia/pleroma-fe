@@ -9,7 +9,8 @@ import { toInteger } from 'lodash'
 const Status = {
   props: [
     'statusoid',
-    'expandable'
+    'expandable',
+    'focused'
   ],
   data: () => ({
     replying: false,
@@ -32,10 +33,6 @@ const Status = {
       return !!this.$store.state.users.currentUser
     },
     muted () { return !this.unmuted && this.status.user.muted },
-    focused () {
-      const id = toInteger(this.$route.params.id)
-      return (this.statusoid.id == id)
-    },
     isReply () { return !!this.statusoid.in_reply_to_status_id }
   },
   components: {

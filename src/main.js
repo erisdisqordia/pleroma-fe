@@ -17,8 +17,6 @@ import configModule from './modules/config.js'
 
 import VueTimeago from 'vue-timeago'
 
-import createPersistedState from './lib/persisted_state.js'
-
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueTimeago, {
@@ -28,15 +26,6 @@ Vue.use(VueTimeago, {
   }
 })
 
-const persistedStateOptions = {
-  paths: [
-    'config.hideAttachments',
-    'config.hideNsfw',
-    'statuses.notifications',
-    'users.users'
-  ]
-}
-
 const store = new Vuex.Store({
   modules: {
     statuses: statusesModule,
@@ -44,7 +33,6 @@ const store = new Vuex.Store({
     api: apiModule,
     config: configModule
   },
-  plugins: [createPersistedState(persistedStateOptions)],
   strict: process.env.NODE_ENV !== 'production'
 })
 

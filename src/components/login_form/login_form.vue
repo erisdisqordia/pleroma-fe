@@ -1,7 +1,7 @@
 <template>
   <div class="login panel panel-default base00-background">
     <!-- Default panel contents -->
-    <div class="panel-heading base01-background">
+    <div class="panel-heading base01-background base04">
       Log in
     </div>
     <div class="panel-body">

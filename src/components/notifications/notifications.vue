@@ -3,7 +3,7 @@
     <div class="panel panel-default base00-background">
       <div class="panel-heading base01-background base04">
         Notifications ({{unseenCount}})
-        <button @click.prevent="markAsSeen" class="base05 base02-background">Read!</button>
+        <button @click.prevent="markAsSeen" class="base06 base02-background">Read!</button>
       </div>
       <div class="panel-body">
         <div v-for="notification in visibleNotifications" class="notification" :class='{"unseen": !notification.seen}'>

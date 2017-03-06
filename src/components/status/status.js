@@ -32,7 +32,7 @@ const Status = {
       return !!this.$store.state.users.currentUser
     },
     muted () { return !this.unmuted && this.status.user.muted },
-    isReply () { return !!this.statusoid.in_reply_to_status_id }
+    isReply () { return !!this.status.in_reply_to_status_id }
   },
   components: {
     Attachment,

@@ -47,6 +47,9 @@ const conversation = {
           .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
           .then(() => this.fetchConversation())
       }
+    },
+    focused: function (id) {
+      return (id === this.statusoid.id)
     }
   }
 }

@@ -1,13 +1,13 @@
 <template>
   <div class="timeline panel panel-default">
-    <div class="panel-heading base01-background base04">
+    <div class="panel-heading timeline-heading base01-background base04">
       <div class="title">
         {{title}}
       </div>
-      <button @click.prevent="showNewStatuses" class="base06 base02-background" v-if="timeline.newStatusCount > 0">
+      <button @click.prevent="showNewStatuses" class="base06 base02-background loadmore-button" v-if="timeline.newStatusCount > 0">
         Show new ({{timeline.newStatusCount}})
       </button>
-      <button @click.prevent class="base04 base01-background no-press" v-if="!timeline.newStatusCount > 0">
+      <button @click.prevent class="base04 base01-background no-press loadmore-button" v-if="!timeline.newStatusCount > 0">
         Up-to-date
       </button>
     </div>
@@ -26,17 +26,18 @@
 
 <style lang="scss">
 
-  .timeline .panel-heading {
-    position: relative;
-    display: flex;
-
+  .timeline {
+    .timeline-heading {
+      position: relative;
+      display: flex;
+    }
     .title {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 70%;
     }
-    button {
+    .loadmore-button {
       position: absolute;
       right: 0.6em;
       padding: 0.1em 0.3em 0.25em 0.3em;

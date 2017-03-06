@@ -6,7 +6,7 @@
     // force the text to stay centered, while keeping
     // the button in the right side of the panel heading
     position: relative;
-    button {
+    .read-button {
       position: absolute;
       padding: 0.1em 0.3em 0.25em 0.3em;
       right: 0.7em;

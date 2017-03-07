@@ -13,6 +13,19 @@
     }
   }
 
+  .unseen-count {
+    display: inline-block;
+    background-color: rgba(255, 16, 8, 0.8);
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+    min-width: 1.3em;
+    border-radius: 1.3em;
+    margin: 0 0.2em 0 -0.4em;
+    color: white;
+    font-size: 0.9em;
+    text-align: center;
+    line-height: 1.3em;
+  }
+
   .notification {
     // Will have to use pixels here to ensure consistent distance with
     // pad alone and pad + border, browsers bad at rounding this with em,
@@ -64,7 +77,7 @@
   }
 
   .unseen {
-    border-left: 4px solid rgba(255, 48, 16, 0.65);
+    border-left: 4px solid rgba(255, 16, 8, 0.75);
     padding-left: 6px;
   }
 }

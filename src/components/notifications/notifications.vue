@@ -2,7 +2,8 @@
   <div class="notifications">
     <div class="panel panel-default base00-background">
       <div class="panel-heading base01-background base04">
-        Notifications ({{unseenCount}})
+        <span class="unseen-count" v-if="unseenCount">{{unseenCount}}</span>
+        Notifications
         <button @click.prevent="markAsSeen" class="base06 base02-background read-button">Read!</button>
       </div>
       <div class="panel-body">

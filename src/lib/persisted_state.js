@@ -1,7 +1,7 @@
 import merge from 'lodash.merge'
 import objectPath from 'object-path'
+import localforage from 'localforage'
 import { throttle } from 'lodash'
-import lzstring from 'lz-string'
 
 const defaultReducer = (state, paths) => (
   paths.length === 0 ? state : paths.reduce((substate, path) => {
@@ -11,32 +11,11 @@ const defaultReducer = (state, paths) => (
 )
 
 const defaultStorage = (() => {
-  const hasLocalStorage = typeof window !== 'undefined' && window.localStorage
-  if (hasLocalStorage) {
-    return window.localStorage
-  }
-
-  class InternalStorage {
-    setItem (key, item) {
-      this[key] = item
-      return item
-    }
-    getItem (key) {
-      return this[key]
-    }
-    removeItem (key) {
-      delete this[key]
-    }
-    clear () {
-      Object.keys(this).forEach(key => delete this[key])
-    }
-  }
-
-  return new InternalStorage()
+  return localforage
 })()
 
 const defaultSetState = (key, state, storage) => {
-  return storage.setItem(key, lzstring.compressToUTF16(JSON.stringify(state)))
+  return storage.setItem(key, state)
 }
 
 export default function createPersistedState ({
@@ -44,12 +23,7 @@ export default function createPersistedState ({
   paths = [],
   getState = (key, storage) => {
     let value = storage.getItem(key)
-    try {
-      value = lzstring.decompressFromUTF16(value) // inflate(value, { to: 'string' })
-    } catch (e) {
-      console.log("Couldn't inflate value... Maybe upgrading")
-    }
-    return value && value !== 'undefined' ? JSON.parse(value) : undefined
+    return value
   },
   setState = throttle(defaultSetState, 60000),
   reducer = defaultReducer,
@@ -57,12 +31,13 @@ export default function createPersistedState ({
   subscriber = store => handler => store.subscribe(handler)
 } = {}) {
   return store => {
-    const savedState = getState(key, storage)
-    if (typeof savedState === 'object') {
-      store.replaceState(
-        merge({}, store.state, savedState)
-      )
-    }
+    getState(key, storage).then((savedState) => {
+      if (typeof savedState === 'object') {
+        store.replaceState(
+          merge({}, store.state, savedState)
+        )
+      }
+    })
 
     subscriber(store)((mutation, state) => {
       try {

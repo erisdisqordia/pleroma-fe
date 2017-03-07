@@ -15,7 +15,8 @@ export const defaultState = {
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
-      loading: false
+      loading: false,
+      error: false
     },
     public: {
       statuses: [],
@@ -24,7 +25,8 @@ export const defaultState = {
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
-      loading: false
+      loading: false,
+      error: false
     },
     publicAndExternal: {
       statuses: [],
@@ -33,7 +35,8 @@ export const defaultState = {
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
-      loading: false
+      loading: false,
+      error: false
     },
     friends: {
       statuses: [],
@@ -42,7 +45,8 @@ export const defaultState = {
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
-      loading: false
+      loading: false,
+      error: false
     }
   }
 }
@@ -280,6 +284,9 @@ export const mutations = {
     const newStatus = find(state.allStatuses, { id })
     newStatus.nsfw = nsfw
   },
+  setError (state, { timeline, value }) {
+    state.timelines[timeline].error = value
+  },
   markNotificationsAsSeen (state, notifications) {
     each(notifications, (notification) => {
       notification.seen = true
@@ -292,6 +299,9 @@ const statuses = {
   actions: {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser })
+    },
+    setError ({ rootState, commit }, { timeline, value }) {
+      commit('setError', { timeline, value })
     },
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })

@@ -12,6 +12,15 @@ const update = ({store, statuses, timeline, showImmediately}) => {
   })
 }
 
+const setError = ({store, timeline, value}) => {
+  const ccTimeline = camelCase(timeline)
+
+  store.dispatch('setError', {
+    timeline: ccTimeline,
+    value
+  })
+}
+
 const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false, showImmediately = false}) => {
   const args = { timeline, credentials }
   const rootState = store.rootState || store.state
@@ -25,6 +34,8 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
 
   return apiService.fetchTimeline(args)
     .then((statuses) => update({store, statuses, timeline, showImmediately}))
+    .then(() => setError({store, timeline, value: false}))
+    .catch(() => setError({store, timeline, value: true}))
 }
 
 const startFetching = ({ timeline = 'friends', credentials, store }) => {

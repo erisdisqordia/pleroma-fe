@@ -4,10 +4,13 @@
       <div class="title">
         {{title}}
       </div>
-      <button @click.prevent="showNewStatuses" class="base06 base02-background loadmore-button" v-if="timeline.newStatusCount > 0">
+      <button @click.prevent="showNewStatuses" class="base06 base02-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timeline.error">
         Show new ({{timeline.newStatusCount}})
       </button>
-      <button @click.prevent class="base04 base01-background no-press loadmore-button" v-if="!timeline.newStatusCount > 0">
+      <button @click.prevent class="base06 error no-press loadmore-button" v-if="timeline.error">
+          Error fetching updates
+      </button>
+      <button @click.prevent class="base04 base01-background no-press loadmore-button" v-if="!timeline.newStatusCount > 0 && !timeline.error">
         Up-to-date
       </button>
     </div>
@@ -42,6 +45,9 @@
       right: 0.6em;
       padding: 0.1em 0.3em 0.25em 0.3em;
       min-width: 6em;
+    }
+    .error {
+      background-color: rgba(255, 48, 16, 0.65);
     }
     .no-press {
       opacity: 0.8;

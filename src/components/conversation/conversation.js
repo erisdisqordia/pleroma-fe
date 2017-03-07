@@ -49,7 +49,11 @@ const conversation = {
       }
     },
     focused: function (id) {
-      return (id === this.statusoid.id)
+      if (!!this.statusoid.retweeted_status) {
+        return (id === this.statusoid.retweeted_status.id)
+      } else {
+        return (id === this.statusoid.id)
+      }
     }
   }
 }

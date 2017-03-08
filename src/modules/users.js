@@ -1,5 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import { compact, map, each, find, merge } from 'lodash'
+import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
 
 // TODO: Unify with mergeOrAdd in statuses.js
@@ -20,7 +20,7 @@ export const mergeOrAdd = (arr, obj, item) => {
 
 export const mutations = {
   setMuted (state, { user: {id}, muted }) {
-    const user = find(state.users, {id})
+    const user = state.usersObject[id]
     set(user, 'muted', muted)
   },
   setCurrentUser (state, user) {
@@ -36,7 +36,7 @@ export const mutations = {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
   setUserForStatus (state, status) {
-    status.user = find(state.users, status.user)
+    status.user = state.usersObject[status.user.id]
   }
 }
 

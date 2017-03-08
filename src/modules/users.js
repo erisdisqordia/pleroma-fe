@@ -3,9 +3,9 @@ import { compact, map, each, find, merge } from 'lodash'
 import { set } from 'vue'
 
 // TODO: Unify with mergeOrAdd in statuses.js
-export const mergeOrAdd = (arr, item) => {
+export const mergeOrAdd = (arr, obj, item) => {
   if (!item) { return false }
-  const oldItem = find(arr, {id: item.id})
+  const oldItem = obj[item.id]
   if (oldItem) {
     // We already have this, so only merge the new info.
     merge(oldItem, item)
@@ -13,6 +13,7 @@ export const mergeOrAdd = (arr, item) => {
   } else {
     // This is a new item, prepare it
     arr.push(item)
+    obj[item.id] = item
     return {item, new: true}
   }
 }
@@ -32,7 +33,7 @@ export const mutations = {
     state.loggingIn = false
   },
   addNewUsers (state, users) {
-    each(users, (user) => mergeOrAdd(state.users, user))
+    each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
   setUserForStatus (state, status) {
     status.user = find(state.users, status.user)
@@ -42,7 +43,8 @@ export const mutations = {
 export const defaultState = {
   currentUser: false,
   loggingIn: false,
-  users: []
+  users: [],
+  usersObject: {}
 }
 
 const users = {

@@ -65,40 +65,48 @@ const users = {
       })
     },
     loginUser (store, userCredentials) {
-      const commit = store.commit
-      commit('beginLogin')
-      store.rootState.api.backendInteractor.verifyCredentials(userCredentials)
-        .then((response) => {
-          if (response.ok) {
-            response.json()
-              .then((user) => {
-                user.credentials = userCredentials
-                commit('setCurrentUser', user)
-                commit('addNewUsers', [user])
+      return new Promise((resolve, reject) => {
+        const commit = store.commit
+        commit('beginLogin')
+        store.rootState.api.backendInteractor.verifyCredentials(userCredentials)
+          .then((response) => {
+            if (response.ok) {
+              response.json()
+                .then((user) => {
+                  user.credentials = userCredentials
+                  commit('setCurrentUser', user)
+                  commit('addNewUsers', [user])
 
-                // Set our new backend interactor
-                commit('setBackendInteractor', backendInteractorService(userCredentials))
+                  // Set our new backend interactor
+                  commit('setBackendInteractor', backendInteractorService(userCredentials))
 
-                // Start getting fresh tweets.
-                store.dispatch('startFetching', 'friends')
+                  // Start getting fresh tweets.
+                  store.dispatch('startFetching', 'friends')
 
-                // Get user mutes and follower info
-                store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {
-                  each(mutedUsers, (user) => { user.muted = true })
-                  store.commit('addNewUsers', mutedUsers)
+                  // Get user mutes and follower info
+                  store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {
+                    each(mutedUsers, (user) => { user.muted = true })
+                    store.commit('addNewUsers', mutedUsers)
+                  })
+
+                  // Fetch our friends
+                  store.rootState.api.backendInteractor.fetchFriends()
+                    .then((friends) => commit('addNewUsers', friends))
                 })
-
-                // Fetch our friends
-                store.rootState.api.backendInteractor.fetchFriends()
-                  .then((friends) => commit('addNewUsers', friends))
-              })
-          }
-          commit('endLogin')
-        })
-        .catch((error) => {
-          console.log(error)
-          commit('endLogin')
-        })
+            } else {
+              // Authentication failed
+              commit('endLogin')
+              reject()
+            }
+            commit('endLogin')
+            resolve()
+          })
+          .catch((error) => {
+            console.log(error)
+            commit('endLogin')
+            reject()
+          })
+      })
     }
   }
 }

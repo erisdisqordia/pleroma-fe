@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el base00-background" v-if="!status.deleted" v-bind:class="[{ 'expanded-status': !expandable }, { 'base01-background': focused }]">
+  <div class="status-el base00-background base03-border" v-if="!status.deleted" v-bind:class="[{ 'expanded-status': !expandable }, { 'base01-background': focused }]" >
     <template v-if="muted">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
@@ -98,6 +98,7 @@
      overflow-wrap: break-word;
      word-wrap: break-word;
      word-break: break-word;
+     border-left-width: 0px;
 
      .user-content {
        min-height: 52px;
@@ -129,7 +130,7 @@
  }
 
  .expanded-status {
-   border-left: 4px solid rgba(255, 48, 16, 0.65);
+   border-left-style: solid;
  }
 
  .status-actions {
@@ -151,6 +152,9 @@
  .status {
      padding: 0.65em 0.7em 0.8em 0.8em;
      border-bottom: 1px solid;
+     border-bottom-color: inherit;
+     border-left: 4px rgba(255, 48, 16, 0.65);
+     border-left-style: inherit;
  }
  .muted button {
    margin-left: auto;

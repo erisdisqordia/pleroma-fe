@@ -18,7 +18,7 @@
           <button :disabled="loggingIn" type='submit' class='btn btn-default base05 base01-background'>Submit</button>
         </div>
         <div v-if="authError" class='form-group'>
-          <button disabled='true' class='btn btn-default base05 error'>Error logging in, try again</button>
+          <button disabled='true' class='btn btn-default base05 error'>{{authError}}</button>
         </div>
       </form>
     </div>

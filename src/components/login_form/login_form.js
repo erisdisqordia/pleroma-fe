@@ -10,8 +10,8 @@ const LoginForm = {
     submit () {
       this.$store.dispatch('loginUser', this.user).then(
         () => { this.$router.push('/main/friends')}, 
-        () => {
-          this.authError = true
+        (error) => {
+          this.authError = error
           this.user.username = ''
           this.user.password = ''
         }

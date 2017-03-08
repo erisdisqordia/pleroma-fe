@@ -96,7 +96,11 @@ const users = {
             } else {
               // Authentication failed
               commit('endLogin')
-              reject()
+              if (response.status === 401) {
+                reject('Wrong username or password')
+              } else {
+                reject('An error occured, please try again')
+              }
             }
             commit('endLogin')
             resolve()
@@ -104,7 +108,7 @@ const users = {
           .catch((error) => {
             console.log(error)
             commit('endLogin')
-            reject()
+            reject('Failed to connect to server, try again')
           })
       })
     }

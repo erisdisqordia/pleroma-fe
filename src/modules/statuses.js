@@ -4,14 +4,17 @@ import apiService from '../services/api/api.service.js'
 
 export const defaultState = {
   allStatuses: [],
+  allStatusesObject: {},
   maxId: 0,
   notifications: [],
   favorites: new Set(),
   timelines: {
     mentions: {
       statuses: [],
+      statusesObject: {},
       faves: [],
       visibleStatuses: [],
+      visibleStatusesObject: {},
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
@@ -20,8 +23,10 @@ export const defaultState = {
     },
     public: {
       statuses: [],
+      statusesObject: {},
       faves: [],
       visibleStatuses: [],
+      visibleStatusesObject: {},
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
@@ -30,8 +35,10 @@ export const defaultState = {
     },
     publicAndExternal: {
       statuses: [],
+      statusesObject: {},
       faves: [],
       visibleStatuses: [],
+      visibleStatusesObject: {},
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
@@ -40,8 +47,10 @@ export const defaultState = {
     },
     friends: {
       statuses: [],
+      statusesObject: {},
       faves: [],
       visibleStatuses: [],
+      visibleStatusesObject: {},
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
@@ -91,8 +100,9 @@ export const findMaxId = (...args) => {
   return (maxBy(flatten(args), 'id') || {}).id
 }
 
-const mergeOrAdd = (arr, item) => {
-  const oldItem = find(arr, {id: item.id})
+const mergeOrAdd = (arr, obj, item) => {
+  const oldItem = obj[item.id]
+
   if (oldItem) {
     // We already have this, so only merge the new info.
     merge(oldItem, item)
@@ -103,6 +113,7 @@ const mergeOrAdd = (arr, item) => {
     // This is a new item, prepare it
     prepareStatus(item)
     arr.push(item)
+    obj[item.id] = item
     return {item, new: true}
   }
 }
@@ -122,6 +133,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const allStatuses = state.allStatuses
+  const allStatusesObject = state.allStatusesObject
   const timelineObject = state.timelines[timeline]
 
   // Set the maxId to the new id if it's larger.
@@ -131,7 +143,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const addStatus = (status, showImmediately, addToTimeline = true) => {
-    const result = mergeOrAdd(allStatuses, status)
+    const result = mergeOrAdd(allStatuses, allStatusesObject, status)
     status = result.item
 
     if (result.new) {
@@ -147,7 +159,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
         // Add the mention to the mentions timeline
         if (timelineObject !== mentions) {
-          mergeOrAdd(mentions.statuses, status)
+          mergeOrAdd(mentions.statuses, mentions.statusesObject, status)
           mentions.newStatusCount += 1
 
           sortTimeline(mentions)
@@ -161,13 +173,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     let resultForCurrentTimeline
     // Some statuses should only be added to the global status repository.
     if (timeline && addToTimeline) {
-      resultForCurrentTimeline = mergeOrAdd(timelineObject.statuses, status)
+      resultForCurrentTimeline = mergeOrAdd(timelineObject.statuses, timelineObject.statusesObject, status)
     }
 
     if (timeline && showImmediately) {
       // Add it directly to the visibleStatuses, don't change
       // newStatusCount
-      mergeOrAdd(timelineObject.visibleStatuses, status)
+      mergeOrAdd(timelineObject.visibleStatuses, timelineObject.visibleStatusesObject, status)
     } else if (timeline && addToTimeline && resultForCurrentTimeline.new) {
       // Just change newStatuscount
       timelineObject.newStatusCount += 1
@@ -264,24 +276,26 @@ export const mutations = {
 
     oldTimeline.newStatusCount = 0
     oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
+    oldTimeline.visibleStatusesObject = {}
+    each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
   setFavorited (state, { status, value }) {
-    const newStatus = find(state.allStatuses, status)
+    const newStatus = state.allStatusesObject[status.id]
     newStatus.favorited = value
   },
   setRetweeted (state, { status, value }) {
-    const newStatus = find(state.allStatuses, status)
+    const newStatus = state.allStatusesObject[status.id]
     newStatus.repeated = value
   },
   setDeleted (state, { status }) {
-    const newStatus = find(state.allStatuses, status)
+    const newStatus = state.allStatusesObject[status.id]
     newStatus.deleted = true
   },
   setLoading (state, { timeline, value }) {
     state.timelines[timeline].loading = value
   },
   setNsfw (state, { id, nsfw }) {
-    const newStatus = find(state.allStatuses, { id })
+    const newStatus = state.allStatusesObject[id]
     newStatus.nsfw = nsfw
   },
   setError (state, { timeline, value }) {

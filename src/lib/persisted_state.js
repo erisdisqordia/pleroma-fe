@@ -1,7 +1,7 @@
 import merge from 'lodash.merge'
 import objectPath from 'object-path'
 import localforage from 'localforage'
-import { throttle } from 'lodash'
+import { throttle, each } from 'lodash'
 
 const defaultReducer = (state, paths) => (
   paths.length === 0 ? state : paths.reduce((substate, path) => {
@@ -33,6 +33,13 @@ export default function createPersistedState ({
   return store => {
     getState(key, storage).then((savedState) => {
       if (typeof savedState === 'object') {
+        // build user cache
+        const usersState = savedState.users || {}
+        usersState.usersObject = {}
+        const users = usersState.users || []
+        each(users, (user) => { usersState.usersObject[user.id] = user })
+        savedState.users = usersState
+
         store.replaceState(
           merge({}, store.state, savedState)
         )

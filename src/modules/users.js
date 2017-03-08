@@ -99,7 +99,7 @@ const users = {
               if (response.status === 401) {
                 reject('Wrong username or password')
               } else {
-                reject('An error occured, please try again')
+                reject('An error occurred, please try again')
               }
             }
             commit('endLogin')

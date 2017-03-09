@@ -8,6 +8,9 @@ const Timeline = {
     'timelineName',
     'title'
   ],
+  computed: {
+    timelineError () { return this.$store.state.statuses.error }
+  },
   components: {
     Status,
     StatusOrConversation

@@ -1,6 +1,7 @@
 import { cloneDeep } from 'lodash'
 import { defaultState, mutations, findMaxId, prepareStatus, statusType } from '../../../../src/modules/statuses.js'
 
+// eslint-disable-next-line camelcase
 const makeMockStatus = ({id, text, is_post_verb = true}) => {
   return {
     id,

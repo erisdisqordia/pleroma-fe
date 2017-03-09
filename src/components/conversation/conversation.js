@@ -47,6 +47,13 @@ const conversation = {
           .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
           .then(() => this.fetchConversation())
       }
+    },
+    focused: function (id) {
+      if (this.statusoid.retweeted_status) {
+        return (id === this.statusoid.retweeted_status.id)
+      } else {
+        return (id === this.statusoid.id)
+      }
     }
   }
 }

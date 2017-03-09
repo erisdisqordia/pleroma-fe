@@ -1,7 +1,7 @@
 <template>
   <div class="login panel panel-default base00-background">
     <!-- Default panel contents -->
-    <div class="panel-heading base01-background">
+    <div class="panel-heading base01-background base04">
       Log in
     </div>
     <div class="panel-body">
@@ -16,6 +16,9 @@
         </div>
         <div class='form-group'>
           <button :disabled="loggingIn" type='submit' class='btn btn-default base05 base01-background'>Submit</button>
+        </div>
+        <div v-if="authError" class='form-group'>
+          <div class='error base05'>{{authError}}</div>
         </div>
       </form>
     </div>
@@ -38,6 +41,14 @@
   .btn {
     margin-top: 1.0em;
     min-height: 28px;
+  }
+
+  .error {
+    border-radius: 5px;
+    text-align: center;
+    background-color: rgba(255, 48, 16, 0.65);
+    min-height: 28px;
+    line-height: 28px;
   }
 }
 

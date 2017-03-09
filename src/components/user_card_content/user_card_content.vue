@@ -104,6 +104,11 @@
 .profile-panel-background {
   background-size: cover;
   border-radius: 10px;
+
+  .panel-heading {
+    padding: 0.6em 0em;
+    text-align: center;
+  }
 }
 
 .profile-panel-body {

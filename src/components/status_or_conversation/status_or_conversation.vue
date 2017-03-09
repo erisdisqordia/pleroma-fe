@@ -1,7 +1,7 @@
 <template>
   <div>
     <conversation v-if="expanded" @toggleExpanded="toggleExpanded" :collapsable="true" :statusoid="statusoid"></conversation>
-    <status v-if="!expanded" @toggleExpanded="toggleExpanded" :expandable="true" :statusoid="statusoid"></status>
+    <status v-if="!expanded" @toggleExpanded="toggleExpanded" :expandable="true" :statusoid="statusoid" :focused="false"></status>
   </div>
 </template>
 

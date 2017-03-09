@@ -73,8 +73,7 @@
             <div class='status-actions'>
               <div>
                 <a href="#" v-on:click.prevent="toggleReplying">
-                  <i class="fa icon-reply icon-reply-active" v-if="replying"></i>
-                  <i class="fa icon-reply" v-else></i>
+                  <i class="fa icon-reply" :class="{'icon-reply-active': replying}"></i>
                 </a>
               </div>
               <retweet-button :status=status></retweet-button>

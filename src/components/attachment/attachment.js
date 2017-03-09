@@ -11,7 +11,9 @@ const Attachment = {
     return {
       nsfwImage,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
-      showHidden: false
+      showHidden: false,
+      loading: false,
+      img: document.createElement('img')
     }
   },
   computed: {
@@ -20,6 +22,13 @@ const Attachment = {
     },
     hidden () {
       return this.nsfw && this.hideNsfwLocal && !this.showHidden
+    },
+    autoHeight () {
+      if (this.type === 'image' && this.nsfw) {
+        return {
+          'min-height': '311px'
+        }
+      }
     }
   },
   methods: {
@@ -29,7 +38,16 @@ const Attachment = {
       }
     },
     toggleHidden () {
-      this.showHidden = !this.showHidden
+      if (this.img.onload) {
+        this.img.onload()
+      } else {
+        this.loading = true
+        this.img.src = this.attachment.url
+        this.img.onload = () => {
+          this.loading = false
+          this.showHidden = !this.showHidden
+        }
+      }
     }
   }
 }

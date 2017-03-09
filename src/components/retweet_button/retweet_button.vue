@@ -11,12 +11,12 @@
   @import '../../_variables.scss';
   .icon-retweet {
      cursor: pointer;
+     animation-duration: 0.6s;
      &:hover {
       color: $green;
      }
   }
   .retweeted {
-     cursor: auto;
      color: $green;
   }
 </style>

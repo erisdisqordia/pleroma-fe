@@ -27,15 +27,27 @@ before_script:
 #  paths:
 #  - node_modules/
 
-test:
+stages:
+  - lint
+  - build
+  - test
+  - deploy
+
+lint:
+  stage: lint
   script:
-    - npm install -g yarn
+    - yarn
+    - npm run lint
+
+test:
+  stage: test
+  script:
     - yarn
     - npm run unit
 
 build:
+  stage: build
   script:
-    - npm install -g yarn
     - yarn
     - npm run build
   artifacts:
@@ -43,11 +55,11 @@ build:
     - dist/
 
 deploy:
+  stage: deploy
   environment: dev
   only:
     - develop
   script:
-    - npm install -g yarn
     - yarn
     - npm run build
     - scp -r dist/* pleroma@tenshi.heldscal.la:~/pleroma

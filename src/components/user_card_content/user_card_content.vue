@@ -63,15 +63,13 @@
       headingStyle () {
         let rgb = this.$store.state.config.colors['base00'].match(/\d+/g)
         return {
-          backgroundColor: 'rgb(' + Math.floor(rgb[0] * 0.53) + ', ' +
-                                    Math.floor(rgb[1] * 0.56) + ', ' +
-                                    Math.floor(rgb[2] * 0.59) + ')',
+          backgroundColor: `rgb(${Math.floor(rgb[0] * 0.53)}, ${Math.floor(rgb[1] * 0.56)}, ${Math.floor(rgb[2] * 0.59)})`,
           backgroundImage: `url(${this.user.cover_photo})`
         }
       },
       bodyStyle () {
         return {
-          background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), ' + this.$store.state.config.colors['base00'] + ' 80%)'
+          background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors['base00']} 80%)`
         }
       },
       isOtherUser () {
@@ -106,6 +104,11 @@
 .profile-panel-background {
   background-size: cover;
   border-radius: 10px;
+
+  .panel-heading {
+    padding: 0.6em 0em;
+    text-align: center;
+  }
 }
 
 .profile-panel-body {

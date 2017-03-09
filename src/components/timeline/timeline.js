@@ -5,7 +5,8 @@ import StatusOrConversation from '../status_or_conversation/status_or_conversati
 const Timeline = {
   props: [
     'timeline',
-    'timelineName'
+    'timelineName',
+    'title'
   ],
   components: {
     Status,

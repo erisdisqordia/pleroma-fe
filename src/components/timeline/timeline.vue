@@ -4,13 +4,13 @@
       <div class="title">
         {{title}}
       </div>
-      <button @click.prevent="showNewStatuses" class="base06 base02-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timeline.error">
+      <button @click.prevent="showNewStatuses" class="base06 base02-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
         Show new ({{timeline.newStatusCount}})
       </button>
-      <button @click.prevent class="base06 error no-press loadmore-button" v-if="timeline.error">
+      <button @click.prevent class="base06 error no-press loadmore-button" v-if="timelineError">
           Error fetching updates
       </button>
-      <button @click.prevent class="base04 base01-background no-press loadmore-button" v-if="!timeline.newStatusCount > 0 && !timeline.error">
+      <button @click.prevent class="base04 base01-background no-press loadmore-button" v-if="!timeline.newStatusCount > 0 && !timelineError">
         Up-to-date
       </button>
     </div>

@@ -18,9 +18,9 @@
       <div class="timeline">
         <status-or-conversation v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status"></status-or-conversation>
         <a href="#" v-on:click.prevent='fetchOlderStatuses()' v-if="!timeline.loading">
-          <div class="base01-background base05-border new-status-notification text-center">Load older statuses.</div>
+          <div class="base01-background base03-border new-status-notification text-center">Load older statuses.</div>
         </a>
-          <div class="base01-background base05-border new-status-notification text-center" v-else>...</div>
+          <div class="base01-background base03-border new-status-notification text-center" v-else>...</div>
       </div>
     </div>
   </div>

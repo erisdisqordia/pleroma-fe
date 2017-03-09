@@ -17,7 +17,6 @@
      }
   }
   .retweeted {
-     cursor: auto;
      color: $green;
   }
 </style>

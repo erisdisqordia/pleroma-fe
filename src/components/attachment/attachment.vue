@@ -1,15 +1,14 @@
 <template>
-  <div class="attachment" :class="type">
-    <a class="image-attachment" v-if="hidden" v-on:click.prevent="toggleHidden()">
-      <img :key="nsfwImage" :src="nsfwImage"></img>
+  <div class="attachment" :class="{[type]: true, loading}" :style="autoHeight">
+    <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">
+      <img :key="nsfwImage" :src="nsfwImage"/>
     </a>
     <div class="hider" v-if="nsfw && hideNsfwLocal && !hidden">
       <a href="#" @click.prevent="toggleHidden()">Hide</a>
     </div>
 
-    <a class="image-attachment" v-if="type === 'image' && !hidden"
-      :href="attachment.url" target="_blank">
-      <img class="base05-border" referrerpolicy="no-referrer" :src="attachment.large_thumb_url || attachment.url"></img>
+    <a v-if="type === 'image' && !hidden" class="image-attachment" :href="attachment.url" target="_blank">
+      <img class="base05-border" referrerpolicy="no-referrer" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
     <video v-if="type === 'video' && !hidden" :src="attachment.url" controls></video>
@@ -18,7 +17,7 @@
 
     <div @click.prevent="linkClicked" v-if="type === 'html' && attachment.oembed" class="oembed">
       <div v-if="attachment.thumb_url" class="image">
-        <img :src="attachment.thumb_url"></img>
+        <img :src="attachment.thumb_url"/>
       </div>
       <div class="text">
         <h1><a :href="attachment.url">{{attachment.oembed.title}}</a></h1>
@@ -43,6 +42,10 @@
           &.html {
             flex-basis: 100%;
             display: flex;
+          }
+
+          &.loading {
+            cursor: progress;
           }
 
           .hider {
@@ -111,7 +114,6 @@
               flex: 1;
 
               img {
-                  width: 100%;
                   border-style: solid;
                   border-width: 1px;
                   border-radius: 5px;

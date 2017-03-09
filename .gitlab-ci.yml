@@ -28,9 +28,16 @@ before_script:
 #  - node_modules/
 
 stages:
+  - lint
   - build
   - test
   - deploy
+
+lint:
+  stage: lint
+  script:
+    - yarn
+    - npm run lint
 
 test:
   stage: test

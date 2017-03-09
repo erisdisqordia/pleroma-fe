@@ -35,7 +35,7 @@ const Status = {
     isReply () { return !!this.status.in_reply_to_status_id },
     borderColor () {
       return {
-        borderBottomColor: this.$store.state.config.colors['base02'],
+        borderBottomColor: this.$store.state.config.colors['base02']
       }
     }
   },

@@ -62,12 +62,6 @@ const fetchAllFollowing = ({username, credentials}) => {
     .then((data) => data.json())
 }
 
-const fetchMentions = ({username, sinceId = 0, credentials}) => {
-  let url = `${MENTIONS_URL}?since_id=${sinceId}&screen_name=${username}`
-  return fetch(url, { headers: authHeaders(credentials) })
-    .then((data) => data.json())
-}
-
 const fetchConversation = ({id, credentials}) => {
   let url = `${CONVERSATION_URL}/${id}.json?count=100`
   return fetch(url, { headers: authHeaders(credentials) })
@@ -193,7 +187,6 @@ const apiService = {
   fetchTimeline,
   fetchConversation,
   fetchStatus,
-  fetchMentions,
   fetchFriends,
   followUser,
   unfollowUser,

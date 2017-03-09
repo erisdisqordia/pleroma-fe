@@ -9,7 +9,8 @@ const Status = {
   props: [
     'statusoid',
     'expandable',
-    'inConversation'
+    'inConversation',
+    'focused'
   ],
   data: () => ({
     replying: false,
@@ -34,7 +35,8 @@ const Status = {
     loggedIn () {
       return !!this.$store.state.users.currentUser
     },
-    muted () { return !this.unmuted && this.status.user.muted }
+    muted () { return !this.unmuted && this.status.user.muted },
+    isReply () { return !!this.status.in_reply_to_status_id }
   },
   components: {
     Attachment,

@@ -1,11 +1,11 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import { compact, map, each, find, merge } from 'lodash'
+import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
 
 // TODO: Unify with mergeOrAdd in statuses.js
-export const mergeOrAdd = (arr, item) => {
+export const mergeOrAdd = (arr, obj, item) => {
   if (!item) { return false }
-  const oldItem = find(arr, {id: item.id})
+  const oldItem = obj[item.id]
   if (oldItem) {
     // We already have this, so only merge the new info.
     merge(oldItem, item)
@@ -13,13 +13,14 @@ export const mergeOrAdd = (arr, item) => {
   } else {
     // This is a new item, prepare it
     arr.push(item)
+    obj[item.id] = item
     return {item, new: true}
   }
 }
 
 export const mutations = {
   setMuted (state, { user: {id}, muted }) {
-    const user = find(state.users, {id})
+    const user = state.usersObject[id]
     set(user, 'muted', muted)
   },
   setCurrentUser (state, user) {
@@ -32,17 +33,18 @@ export const mutations = {
     state.loggingIn = false
   },
   addNewUsers (state, users) {
-    each(users, (user) => mergeOrAdd(state.users, user))
+    each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
   setUserForStatus (state, status) {
-    status.user = find(state.users, status.user)
+    status.user = state.usersObject[status.user.id]
   }
 }
 
 export const defaultState = {
   currentUser: false,
   loggingIn: false,
-  users: []
+  users: [],
+  usersObject: {}
 }
 
 const users = {
@@ -65,40 +67,52 @@ const users = {
       })
     },
     loginUser (store, userCredentials) {
-      const commit = store.commit
-      commit('beginLogin')
-      store.rootState.api.backendInteractor.verifyCredentials(userCredentials)
-        .then((response) => {
-          if (response.ok) {
-            response.json()
-              .then((user) => {
-                user.credentials = userCredentials
-                commit('setCurrentUser', user)
-                commit('addNewUsers', [user])
+      return new Promise((resolve, reject) => {
+        const commit = store.commit
+        commit('beginLogin')
+        store.rootState.api.backendInteractor.verifyCredentials(userCredentials)
+          .then((response) => {
+            if (response.ok) {
+              response.json()
+                .then((user) => {
+                  user.credentials = userCredentials
+                  commit('setCurrentUser', user)
+                  commit('addNewUsers', [user])
 
-                // Set our new backend interactor
-                commit('setBackendInteractor', backendInteractorService(userCredentials))
+                  // Set our new backend interactor
+                  commit('setBackendInteractor', backendInteractorService(userCredentials))
 
-                // Start getting fresh tweets.
-                store.dispatch('startFetching', 'friends')
+                  // Start getting fresh tweets.
+                  store.dispatch('startFetching', 'friends')
 
-                // Get user mutes and follower info
-                store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {
-                  each(mutedUsers, (user) => { user.muted = true })
-                  store.commit('addNewUsers', mutedUsers)
+                  // Get user mutes and follower info
+                  store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {
+                    each(mutedUsers, (user) => { user.muted = true })
+                    store.commit('addNewUsers', mutedUsers)
+                  })
+
+                  // Fetch our friends
+                  store.rootState.api.backendInteractor.fetchFriends()
+                    .then((friends) => commit('addNewUsers', friends))
                 })
-
-                // Fetch our friends
-                store.rootState.api.backendInteractor.fetchFriends()
-                  .then((friends) => commit('addNewUsers', friends))
-              })
-          }
-          commit('endLogin')
-        })
-        .catch((error) => {
-          console.log(error)
-          commit('endLogin')
-        })
+            } else {
+              // Authentication failed
+              commit('endLogin')
+              if (response.status === 401) {
+                reject('Wrong username or password')
+              } else {
+                reject('An error occurred, please try again')
+              }
+            }
+            commit('endLogin')
+            resolve()
+          })
+          .catch((error) => {
+            console.log(error)
+            commit('endLogin')
+            reject('Failed to connect to server, try again')
+          })
+      })
     }
   }
 }

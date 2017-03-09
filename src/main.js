@@ -54,7 +54,7 @@ const routes = [
   { path: '/main/all', component: PublicAndExternalTimeline },
   { path: '/main/public', component: PublicTimeline },
   { path: '/main/friends', component: FriendsTimeline },
-  { name: 'conversation', path: '/notice/:id', component: ConversationPage },
+  { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
   { name: 'user-profile', path: '/users/:id', component: UserProfile },
   { name: 'mentions', path: '/:username/mentions', component: Mentions },
   { name: 'settings', path: '/settings', component: Settings }
@@ -64,6 +64,9 @@ const router = new VueRouter({
   mode: 'history',
   routes,
   scrollBehavior: (to, from, savedPosition) => {
+    if (to.matched.some(m => m.meta.dontScroll)) {
+      return false
+    }
     return savedPosition || { x: 0, y: 0 }
   }
 })

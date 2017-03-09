@@ -17,6 +17,9 @@
         <div class='form-group'>
           <button :disabled="loggingIn" type='submit' class='btn btn-default base05 base01-background'>Submit</button>
         </div>
+        <div v-if="authError" class='form-group'>
+          <div class='error base05'>{{authError}}</div>
+        </div>
       </form>
     </div>
   </div>
@@ -38,6 +41,14 @@
   .btn {
     margin-top: 1.0em;
     min-height: 28px;
+  }
+
+  .error {
+    border-radius: 5px;
+    text-align: center;
+    background-color: rgba(255, 48, 16, 0.65);
+    min-height: 28px;
+    line-height: 28px;
   }
 }
 

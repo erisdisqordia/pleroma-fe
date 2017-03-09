@@ -1,24 +1,24 @@
 <template>
   <div class="nav-panel">
-    <div class="panel panel-default base01-background">
+    <div class="panel panel-default base02-background">
       <ul class="base03-border">
         <li v-if='currentUser'>
-          <router-link to='/main/friends'>
+          <router-link class="base01-background" to='/main/friends'>
             Timeline
           </router-link>
         </li>
         <li v-if='currentUser'>
-          <router-link :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
+          <router-link class="base01-background" :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
             Mentions
           </router-link>
         </li>
         <li>
-          <router-link to='/main/public'>
+          <router-link class="base01-background" to='/main/public'>
             Public Timeline
           </router-link>
         </li>
         <li>
-          <router-link to='/main/all'>
+          <router-link class="base01-background" to='/main/all'>
             The Whole Known Network
           </router-link>
         </li>
@@ -30,7 +30,6 @@
 <script src="./nav_panel.js" ></script>
 
 <style lang="scss">
-
  .nav-panel ul {
      list-style: none;
      margin: 0;
@@ -40,7 +39,15 @@
  .nav-panel li {
      border-bottom: 1px solid;
      border-color: inherit;
-     padding: 0.8em 0.85em;
+     padding: 0;
+     &:first-child a {
+       border-top-right-radius: 10px;
+       border-top-left-radius: 10px;
+     }
+     &:last-child a {
+       border-bottom-right-radius: 10px;
+       border-bottom-left-radius: 10px;
+     }
  }
 
  .nav-panel li:last-child {
@@ -49,10 +56,16 @@
 
  .nav-panel a {
      display: block;
-     width: 100%;
-
+     padding: 0.8em 0.85em;
+     &:hover {
+       background-color: transparent;
+     }
      &.router-link-active {
-         font-weight: bold
+       font-weight: bolder;
+       background-color: transparent;
+       &:hover {
+         text-decoration: underline;
+       }
      }
  }
 

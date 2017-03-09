@@ -5,6 +5,8 @@ import apiService from '../api/api.service.js'
 const update = ({store, statuses, timeline, showImmediately}) => {
   const ccTimeline = camelCase(timeline)
 
+  setError({store, timeline, value: false})
+
   store.dispatch('addNewStatuses', {
     timeline: ccTimeline,
     statuses,
@@ -33,9 +35,8 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
   }
 
   return apiService.fetchTimeline(args)
-    .then((statuses) => update({store, statuses, timeline, showImmediately}))
-    .then(() => setError({store, timeline, value: false}))
-    .catch(() => setError({store, timeline, value: true}))
+    .then((statuses) => update({store, statuses, timeline, showImmediately}),
+      () => setError({store, timeline, value: true}))
 }
 
 const startFetching = ({ timeline = 'friends', credentials, store }) => {

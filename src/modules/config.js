@@ -5,6 +5,7 @@ const defaultState = {
   name: 'Pleroma FE',
   colors: {},
   hideAttachments: false,
+  hideAttachmentsInConv: false,
   hideNsfw: true
 }
 

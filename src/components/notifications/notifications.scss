@@ -33,7 +33,8 @@
     // which does not happen with 10px vs 4px + 6px.
     padding: 0.4em 0 0 10px;
     display: flex;
-    border-bottom: 1px solid silver;
+    border-bottom: 1px solid;
+    border-bottom-color: inherit;
 
 
     .text {
@@ -72,7 +73,8 @@
     }
 
     &:last-child {
-      border: none
+      border-bottom: none;
+      border-radius: 0 0 10px 10px;
     }
   }
 

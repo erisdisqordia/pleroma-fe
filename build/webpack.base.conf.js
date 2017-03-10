@@ -33,6 +33,7 @@ module.exports = {
     fallback: [path.join(__dirname, '../node_modules')]
   },
   module: {
+    noParse: /node_modules\/localforage\/dist\/localforage.js/,
     preLoaders: [
       {
         test: /\.vue$/,

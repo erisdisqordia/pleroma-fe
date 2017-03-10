@@ -1,7 +1,7 @@
 <template>
   <div class="nav-panel">
     <div class="panel panel-default base02-background">
-      <ul>
+      <ul class="base03-border">
         <li v-if='currentUser'>
           <router-link class="base01-background" to='/main/friends'>
             Timeline
@@ -38,6 +38,7 @@
 
  .nav-panel li {
      border-bottom: 1px solid;
+     border-color: inherit;
      padding: 0;
      &:first-child a {
        border-top-right-radius: 10px;

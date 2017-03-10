@@ -45,6 +45,7 @@ const setStyle = (href, commit) => {
     styleSheet.insertRule(`a { color: ${colors['base08']}`, 'index-max')
     styleSheet.insertRule(`body { color: ${colors['base05']}`, 'index-max')
     styleSheet.insertRule(`.base05-border { border-color: ${colors['base05']}`, 'index-max')
+    styleSheet.insertRule(`.base03-border { border-color: ${colors['base03']}`, 'index-max')
     body.style.display = 'initial'
   }
   cssEl.addEventListener('load', setDynamic)

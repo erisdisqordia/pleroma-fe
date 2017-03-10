@@ -4,13 +4,13 @@
       <div class="title">
         {{title}}
       </div>
-      <button @click.prevent="showNewStatuses" class="base06 base02-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timeline.error">
+      <button @click.prevent="showNewStatuses" class="base06 base02-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
         Show new ({{timeline.newStatusCount}})
       </button>
-      <button @click.prevent class="base06 error no-press loadmore-button" v-if="timeline.error">
+      <button @click.prevent class="base06 error no-press loadmore-button" v-if="timelineError">
           Error fetching updates
       </button>
-      <button @click.prevent class="base04 base01-background no-press loadmore-button" v-if="!timeline.newStatusCount > 0 && !timeline.error">
+      <button @click.prevent class="base04 base01-background no-press loadmore-button" v-if="!timeline.newStatusCount > 0 && !timelineError">
         Up-to-date
       </button>
     </div>
@@ -18,9 +18,9 @@
       <div class="timeline">
         <status-or-conversation v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status"></status-or-conversation>
         <a href="#" v-on:click.prevent='fetchOlderStatuses()' v-if="!timeline.loading">
-          <div class="base01-background base05-border new-status-notification text-center">Load older statuses.</div>
+          <div class="base01-background base03-border new-status-notification text-center">Load older statuses.</div>
         </a>
-          <div class="base01-background base05-border new-status-notification text-center" v-else>...</div>
+          <div class="base01-background base03-border new-status-notification text-center" v-else>...</div>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el base00-background" v-if="!status.deleted" v-bind:class="[{ 'expanded-status': !expandable }, { 'base01-background': focused }, { 'status-conversation': inConversation }]">
+  <div class="status-el base00-background base03-border" v-if="!status.deleted" v-bind:class="[{ 'base01-background': focused }, { 'status-conversation': inConversation }]" >
     <template v-if="muted">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
@@ -73,17 +73,19 @@
             <div class='status-actions'>
               <div>
                 <a href="#" v-on:click.prevent="toggleReplying">
-                  <i class='fa icon-reply'></i>
+                  <i class="fa icon-reply" :class="{'icon-reply-active': replying}"></i>
                 </a>
               </div>
               <retweet-button :status=status></retweet-button>
               <favorite-button :status=status></favorite-button>
               <delete-button :status=status></delete-button>
             </div>
-
-            <post-status-form v-if="replying" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying"></post-status-form>
           </div>
         </div>
+      </div>
+      <div class="status base00-background container" v-if="replying">
+        <div class="reply-left"/>
+        <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying"/>
       </div>
     </template>
   </div>
@@ -98,6 +100,7 @@
      overflow-wrap: break-word;
      word-wrap: break-word;
      word-break: break-word;
+     border-left-width: 0px;
 
      .user-content {
        min-height: 52px;
@@ -129,7 +132,7 @@
  }
 
  .status-conversation {
-   border-left: 4px solid rgba(255, 48, 16, 0.65);
+   border-left-style: solid;
  }
 
  .status-actions {
@@ -137,6 +140,10 @@
  }
 
  .icon-reply:hover {
+     color: $blue;
+ }
+
+ .icon-reply-active {
      color: $blue;
  }
 
@@ -151,6 +158,9 @@
  .status {
      padding: 0.65em 0.7em 0.8em 0.8em;
      border-bottom: 1px solid;
+     border-bottom-color: inherit;
+     border-left: 4px rgba(255, 48, 16, 0.65);
+     border-left-style: inherit;
  }
  .muted button {
    margin-left: auto;
@@ -168,4 +178,14 @@
    margin-bottom: 1em;
    margin-top: 0.2em;
  }
+
+ .reply-left {
+   flex: 0;
+   min-width: 48px;
+ }
+
+ .reply-body {
+   flex: 1;
+ }
+
 </style>

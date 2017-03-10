@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el base00-background base03-border" v-if="!status.deleted" v-bind:class="[{ 'expanded-status': !expandable }, { 'base01-background': focused }]" >
+  <div class="status-el base00-background base03-border" v-if="!status.deleted" v-bind:class="[{ 'base01-background': focused }, { 'status-conversation': inConversation }]" >
     <template v-if="muted">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
@@ -131,7 +131,7 @@
      }
  }
 
- .expanded-status {
+ .status-conversation {
    border-left-style: solid;
  }
 

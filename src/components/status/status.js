@@ -9,6 +9,7 @@ const Status = {
   props: [
     'statusoid',
     'expandable',
+    'inConversation',
     'focused'
   ],
   data: () => ({
@@ -18,7 +19,10 @@ const Status = {
     userExpanded: false
   }),
   computed: {
-    hideAttachments () { return this.$store.state.config.hideAttachments },
+    hideAttachments () {
+      return (this.$store.state.config.hideAttachments && !this.inConversation) ||
+        (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
+    },
     retweet () { return !!this.statusoid.retweeted_status },
     retweeter () { return this.statusoid.user.name },
     status () {

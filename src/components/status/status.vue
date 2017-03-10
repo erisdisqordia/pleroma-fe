@@ -73,17 +73,19 @@
             <div class='status-actions'>
               <div>
                 <a href="#" v-on:click.prevent="toggleReplying">
-                  <i class='fa icon-reply'></i>
+                  <i class="fa icon-reply" :class="{'icon-reply-active': replying}"></i>
                 </a>
               </div>
               <retweet-button :status=status></retweet-button>
               <favorite-button :status=status></favorite-button>
               <delete-button :status=status></delete-button>
             </div>
-
-            <post-status-form v-if="replying" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying"></post-status-form>
           </div>
         </div>
+      </div>
+      <div class="status base00-background container" v-if="replying">
+        <div class="reply-left"/>
+        <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying"/>
       </div>
     </template>
   </div>
@@ -141,6 +143,10 @@
      color: $blue;
  }
 
+ .icon-reply-active {
+     color: $blue;
+ }
+
  .status .avatar {
      width: 48px;
  }
@@ -172,4 +178,14 @@
    margin-bottom: 1em;
    margin-top: 0.2em;
  }
+
+ .reply-left {
+   flex: 0;
+   min-width: 48px;
+ }
+
+ .reply-body {
+   flex: 1;
+ }
+
 </style>

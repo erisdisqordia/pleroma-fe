@@ -62,12 +62,6 @@ const fetchAllFollowing = ({username, credentials}) => {
     .then((data) => data.json())
 }
 
-const fetchMentions = ({username, sinceId = 0, credentials}) => {
-  let url = `${MENTIONS_URL}?since_id=${sinceId}&screen_name=${username}`
-  return fetch(url, { headers: authHeaders(credentials) })
-    .then((data) => data.json())
-}
-
 const fetchConversation = ({id, credentials}) => {
   let url = `${CONVERSATION_URL}/${id}.json?count=100`
   return fetch(url, { headers: authHeaders(credentials) })
@@ -100,6 +94,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false}) =>
   const timelineUrls = {
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
+    mentions: MENTIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL
   }
 
@@ -192,7 +187,6 @@ const apiService = {
   fetchTimeline,
   fetchConversation,
   fetchStatus,
-  fetchMentions,
   fetchFriends,
   followUser,
   unfollowUser,

@@ -43,8 +43,10 @@
     .loadmore-button {
       position: absolute;
       right: 0.6em;
-      padding: 0.1em 0.3em 0.25em 0.3em;
+
       min-width: 6em;
+      height: 1.8em;
+      line-height: 100%;
     }
     .error {
       background-color: rgba(255, 48, 16, 0.65);

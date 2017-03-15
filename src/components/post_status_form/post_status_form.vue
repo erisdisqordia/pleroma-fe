@@ -2,7 +2,7 @@
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group" >
-        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control" @keyup.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag"></textarea>
+        <textarea @click="setCaret" @keyup="setCaret" v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control" @keyup.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag"></textarea>
       </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
@@ -12,6 +12,13 @@
           <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
           <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
         </div>
+      </div>
+      <div>
+        <h1>Word</h1>
+        <h2>{{textAtCaret}}</h2>
+        <h1>Candidates</h1>
+
+        <h3 v-for="candidate in candidates" @click="replace('@' + candidate)">{{candidate}}</h3>
       </div>
       <div class='form-bottom'>
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>

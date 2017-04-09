@@ -3,6 +3,8 @@ import objectPath from 'object-path'
 import localforage from 'localforage'
 import { throttle, each } from 'lodash'
 
+let loaded = false
+
 const defaultReducer = (state, paths) => (
   paths.length === 0 ? state : paths.reduce((substate, path) => {
     objectPath.set(substate, path, objectPath.get(state, path))
@@ -15,7 +17,11 @@ const defaultStorage = (() => {
 })()
 
 const defaultSetState = (key, state, storage) => {
-  return storage.setItem(key, state)
+  if (!loaded) {
+    console.log('waiting for old state to be loaded...')
+  } else {
+    return storage.setItem(key, state)
+  }
 }
 
 export default function createPersistedState ({
@@ -44,6 +50,7 @@ export default function createPersistedState ({
           merge({}, store.state, savedState)
         )
       }
+      loaded = true
     })
 
     subscriber(store)((mutation, state) => {

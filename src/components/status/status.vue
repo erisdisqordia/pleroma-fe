@@ -162,8 +162,11 @@
      border-left: 4px rgba(255, 48, 16, 0.65);
      border-left-style: inherit;
  }
- .muted button {
-   margin-left: auto;
+ .muted {
+   padding: 0.1em 0.7em 0.1em 0.8em;
+   button {
+     margin-left: auto;
+   }
  }
 
  a.unmute {

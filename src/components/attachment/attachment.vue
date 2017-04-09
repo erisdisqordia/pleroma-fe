@@ -116,8 +116,10 @@
                   border-style: solid;
                   border-width: 1px;
                   border-radius: 5px;
+                  object-fit: contain;
                   width: 100%;
-                  height: 100%; /* If this isn't here, chrome will stretch the images */
+                  //height: 100%; /* If this isn't here, chrome will stretch the images */
+                  max-height: 500px;
               }
           }
       }

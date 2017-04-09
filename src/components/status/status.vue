@@ -53,10 +53,10 @@
                 <small>
                   <a href="#" @click.prevent="toggleExpanded" ><i class="icon-plus-squared"></i></a>
                 </small>
-                <small v-if="unmuted">
-                  <a href="#" @click.prevent="toggleMute" ><i class="icon-eye-off"></i></a>
-                </small>
               </template>
+              <small v-if="unmuted">
+                <a href="#" @click.prevent="toggleMute" ><i class="icon-eye-off"></i></a>
+              </small>
               <small v-if="!status.is_local" class="source_url">
                 <a :href="status.external_url" target="_blank" ><i class="icon-binoculars"></i></a>
               </small>

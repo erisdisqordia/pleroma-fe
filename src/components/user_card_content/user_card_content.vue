@@ -40,7 +40,7 @@
       <div class="user-counts">
         <div class="user-count">
           <h5>Statuses</h5>
-          <span>{{user.statuses_count}}</span>
+          <span>{{user.statuses_count}} <br><span class="dailyAvg">{{dailyAvg}} per day</span></span>
         </div>
         <div class="user-count">
           <h5>Following</h5>
@@ -77,6 +77,11 @@
       },
       loggedIn () {
         return this.$store.state.users.currentUser
+      },
+      dailyAvg () {
+        return Math.round(
+          this.user.statuses_count / ((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
+        )
       }
     },
     methods: {
@@ -216,5 +221,10 @@
         font-weight: bolder;
         margin: 0 0 0.25em;
     }
+}
+
+.dailyAvg {
+  font-size: 0.8em;
+  opacity: 0.5;
 }
 </style>

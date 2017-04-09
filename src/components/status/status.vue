@@ -3,6 +3,7 @@
     <template v-if="muted">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
+        <small class="muteWords">{{muteWordHits.join(', ')}}</small>
         <a href="#" class="unmute" @click.prevent="toggleMute"><i class="icon-eye-off"></i></a>
       </div>
     </template>
@@ -52,10 +53,10 @@
                 <small>
                   <a href="#" @click.prevent="toggleExpanded" ><i class="icon-plus-squared"></i></a>
                 </small>
-                <small v-if="status.user.muted">
-                  <a href="#" @click.prevent="toggleMute" ><i class="icon-eye-off"></i></a>
-                </small>
               </template>
+              <small v-if="unmuted">
+                <a href="#" @click.prevent="toggleMute" ><i class="icon-eye-off"></i></a>
+              </small>
               <small v-if="!status.is_local" class="source_url">
                 <a :href="status.external_url" target="_blank" ><i class="icon-binoculars"></i></a>
               </small>
@@ -162,8 +163,15 @@
      border-left: 4px rgba(255, 48, 16, 0.65);
      border-left-style: inherit;
  }
- .muted button {
-   margin-left: auto;
+ .muted {
+   padding: 0.1em 0.7em 0.1em 0.8em;
+   button {
+     margin-left: auto;
+   }
+
+   .muteWords {
+     margin-left: 10px;
+   }
  }
 
  a.unmute {

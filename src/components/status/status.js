@@ -4,6 +4,7 @@ import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
+import { filter } from 'lodash'
 
 const Status = {
   props: [
@@ -19,6 +20,9 @@ const Status = {
     userExpanded: false
   }),
   computed: {
+    muteWords () {
+      return this.$store.state.config.muteWords
+    },
     hideAttachments () {
       return (this.$store.state.config.hideAttachments && !this.inConversation) ||
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
@@ -35,7 +39,15 @@ const Status = {
     loggedIn () {
       return !!this.$store.state.users.currentUser
     },
-    muted () { return !this.unmuted && this.status.user.muted },
+    muteWordHits () {
+      const statusText = this.status.text.toLowerCase()
+      const hits = filter(this.muteWords, (muteWord) => {
+        return statusText.includes(muteWord.toLowerCase())
+      })
+
+      return hits
+    },
+    muted () { return !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
     isReply () { return !!this.status.in_reply_to_status_id },
     borderColor () {
       return {

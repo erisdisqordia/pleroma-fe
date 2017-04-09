@@ -1,24 +1,24 @@
 <template>
   <div class="nav-panel">
-    <div class="panel panel-default base02-background">
+    <div class="panel panel-default base01-background">
       <ul class="base03-border">
         <li v-if='currentUser'>
-          <router-link class="base01-background" to='/main/friends'>
+          <router-link class="base00-background" to='/main/friends'>
             Timeline
           </router-link>
         </li>
         <li v-if='currentUser'>
-          <router-link class="base01-background" :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
+          <router-link class="base00-background" :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
             Mentions
           </router-link>
         </li>
         <li>
-          <router-link class="base01-background" to='/main/public'>
+          <router-link class="base00-background" to='/main/public'>
             Public Timeline
           </router-link>
         </li>
         <li>
-          <router-link class="base01-background" to='/main/all'>
+          <router-link class="base00-background" to='/main/all'>
             The Whole Known Network
           </router-link>
         </li>

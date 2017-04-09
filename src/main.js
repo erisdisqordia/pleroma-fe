@@ -33,6 +33,7 @@ const persistedStateOptions = {
     'config.hideAttachments',
     'config.hideAttachmentsInConv',
     'config.hideNsfw',
+    'config.muteWords',
     'statuses.notifications',
     'users.users'
   ]

@@ -1,5 +1,5 @@
 <template>
-  <div class="attachment" :class="{[type]: true, loading}" :style="autoHeight">
+  <div class="attachment base03-border" :class="{[type]: true, loading}" :style="autoHeight">
     <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"/>
     </a>
@@ -8,7 +8,7 @@
     </div>
 
     <a v-if="type === 'image' && !hidden" class="image-attachment" :href="attachment.url" target="_blank">
-      <img class="base05-border" referrerpolicy="no-referrer" :src="attachment.large_thumb_url || attachment.url"/>
+      <img class="base03-border" referrerpolicy="no-referrer" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
     <video v-if="type === 'video' && !hidden" :src="attachment.url" controls></video>
@@ -76,19 +76,18 @@
               border-radius: 5px;
           }
 
-
           .oembed {
+              border: 1px solid;
+              border-radius: 5px;
+              border-color: inherit;
+              width: 100%;
+              margin-right: 15px;
+              display: flex;
+
               img {
                   width: 100%;
               }
-              margin-right: 15px;
-          }
 
-          .oembed {
-              border: 1px solid;
-              width: 100%;
-
-              display: flex;
               .image {
                   flex: 1;
                   img {
@@ -117,8 +116,10 @@
                   border-style: solid;
                   border-width: 1px;
                   border-radius: 5px;
+                  object-fit: contain;
                   width: 100%;
                   height: 100%; /* If this isn't here, chrome will stretch the images */
+                  max-height: 500px;
               }
           }
       }

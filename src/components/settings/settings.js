@@ -5,7 +5,8 @@ const settings = {
     return {
       hideAttachmentsLocal: this.$store.state.config.hideAttachments,
       hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
-      hideNsfwLocal: this.$store.state.config.hideNsfw
+      hideNsfwLocal: this.$store.state.config.hideNsfw,
+      muteWordsString: this.$store.state.config.muteWords.join('\n')
     }
   },
   components: {
@@ -20,6 +21,9 @@ const settings = {
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
+    },
+    muteWordsString (value) {
+      this.$store.dispatch('setOption', { name: 'muteWords', value: value.split('\n') })
     }
   }
 }

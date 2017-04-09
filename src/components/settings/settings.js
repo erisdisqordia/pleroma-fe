@@ -1,4 +1,5 @@
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
+import { filter, trim } from 'lodash'
 
 const settings = {
   data () {
@@ -23,7 +24,8 @@ const settings = {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
     },
     muteWordsString (value) {
-      this.$store.dispatch('setOption', { name: 'muteWords', value: value.split('\n') })
+      value = filter(value.split('\n'), (word) => trim(word).length > 0)
+      this.$store.dispatch('setOption', { name: 'muteWords', value })
     }
   }
 }

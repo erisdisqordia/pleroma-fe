@@ -38,19 +38,24 @@ export default function createPersistedState ({
 } = {}) {
   return store => {
     getState(key, storage).then((savedState) => {
-      if (typeof savedState === 'object') {
-        // build user cache
-        const usersState = savedState.users || {}
-        usersState.usersObject = {}
-        const users = usersState.users || []
-        each(users, (user) => { usersState.usersObject[user.id] = user })
-        savedState.users = usersState
+      try {
+        if (typeof savedState === 'object') {
+          // build user cache
+          const usersState = savedState.users || {}
+          usersState.usersObject = {}
+          const users = usersState.users || []
+          each(users, (user) => { usersState.usersObject[user.id] = user })
+          savedState.users = usersState
 
-        store.replaceState(
-          merge({}, store.state, savedState)
-        )
+          store.replaceState(
+            merge({}, store.state, savedState)
+          )
+        }
+        loaded = true
+      } catch (e) {
+        console.log("Couldn't load state")
+        loaded = true
       }
-      loaded = true
     })
 
     subscriber(store)((mutation, state) => {

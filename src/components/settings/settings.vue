@@ -9,6 +9,11 @@
         <style-switcher></style-switcher>
       </div>
       <div class="setting-item">
+        <h2>Filtering</h2>
+        <p>All notices containing these words will be muted, one per line</p>
+        <textarea id="muteWords" v-model="muteWordsString"></textarea>
+      </div>
+      <div class="setting-item">
         <h2>Attachments</h2>
         <ul class="setting-list">
             <li>
@@ -32,9 +37,13 @@
 <script src="./settings.js">
 </script>
 
-<style>
+<style lang="scss">
  .setting-item {
    margin: 1em 1em 1.4em;
+   textarea {
+     width: 100%;
+     height: 100px;
+   }
  }
  .setting-list {
    list-style-type: none;

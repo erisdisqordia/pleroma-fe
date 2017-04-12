@@ -8,7 +8,7 @@ const sortAndFilterConversation = (conversation) => {
 }
 
 const conversation = {
-  data() {
+  data () {
     return {
       highlight: this.statusoid.id
     }
@@ -60,8 +60,8 @@ const conversation = {
         return (id === this.statusoid.id)
       }
     },
-    setHighlight(id) {
-      this.highlight = id
+    setHighlight (id) {
+      this.highlight = Number(id)
     }
   }
 }

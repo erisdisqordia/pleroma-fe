@@ -11,7 +11,8 @@ const Status = {
     'statusoid',
     'expandable',
     'inConversation',
-    'focused'
+    'focused',
+    'highlight'
   ],
   data: () => ({
     replying: false,
@@ -53,6 +54,15 @@ const Status = {
       return {
         borderBottomColor: this.$store.state.config.colors['base02']
       }
+    },
+    isFocused () {
+      // retweet or root of an expanded conversation
+      if(this.focused)
+        return true
+      // use conversation highlight only when in conversation
+      else if(!this.inConversation)
+        return false
+      return this.highlight == this.status.id
     }
   },
   components: {
@@ -75,6 +85,10 @@ const Status = {
     toggleReplying () {
       this.replying = !this.replying
     },
+    gotoOriginal () {
+      // only handled by conversation, not status_or_conversation
+      this.$emit('goto', this.status.in_reply_to_status_id)
+    },
     toggleExpanded () {
       this.$emit('toggleExpanded')
     },
@@ -83,6 +97,26 @@ const Status = {
     },
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
+    }
+  },
+  watch: {
+    'highlight': function (newfocus) {
+      if(this.status.id == newfocus) {
+        let rect = this.$el.getBoundingClientRect()
+        if(rect.top < 100)
+          window.scrollBy({
+            left: 0,
+            top: rect.top - 200,
+            behavior: 'smooth'
+          })
+        // will be useful when scrolling down to replies or root posts is in
+        else if(rect.bottom > window.innerHeight - 100)
+          window.scrollBy({
+            left: 0,
+            top: rect.bottom + 200,
+            behavior: 'smooth'
+          })
+      }
     }
   }
 }

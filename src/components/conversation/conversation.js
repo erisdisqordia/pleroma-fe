@@ -8,6 +8,11 @@ const sortAndFilterConversation = (conversation) => {
 }
 
 const conversation = {
+  data () {
+    return {
+      highlight: this.statusoid.id
+    }
+  },
   props: [
     'statusoid',
     'collapsable'
@@ -54,6 +59,9 @@ const conversation = {
       } else {
         return (id === this.statusoid.id)
       }
+    },
+    setHighlight (id) {
+      this.highlight = Number(id)
     }
   }
 }

@@ -104,18 +104,10 @@ const Status = {
       if(this.status.id == newfocus) {
         let rect = this.$el.getBoundingClientRect()
         if(rect.top < 100)
-          window.scrollBy({
-            left: 0,
-            top: rect.top - 200,
-            behavior: 'smooth'
-          })
+          window.scrollBy(0, rect.top - 200)
         // will be useful when scrolling down to replies or root posts is in
         else if(rect.bottom > window.innerHeight - 100)
-          window.scrollBy({
-            left: 0,
-            top: rect.bottom + 200,
-            behavior: 'smooth'
-          })
+          window.scrollBy(0, rect.bottom + 200)
       }
     }
   }

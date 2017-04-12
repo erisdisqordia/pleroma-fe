@@ -107,7 +107,7 @@ const Status = {
         let rect = this.$el.getBoundingClientRect()
         if (rect.top < 100) {
           window.scrollBy(0, rect.top - 200)
-        } else if(rect.bottom > window.innerHeight - 100) {
+        } else if (rect.bottom > window.innerHeight - 100) {
           // will be useful when scrolling down to replies or root posts is in
           window.scrollBy(0, rect.bottom + 200)
         }

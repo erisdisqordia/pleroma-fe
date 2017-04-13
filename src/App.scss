@@ -249,16 +249,15 @@ nav {
   .sidebar {
     overflow: hidden;
     max-height: 100vh;
-    width: 345px;
+    width: 350px;
     position: fixed;
     margin-top: -10px;
 
     .sidebar-container {
       height: 96vh;
-      width: 360px;
+      width: 362px;
       padding-top: 10px;
-      margin-right: -40px;
-      padding-right: 25px;
+      padding-right: 20px;
       overflow-x: hidden;
       overflow-y: scroll;
     }

@@ -222,6 +222,12 @@ nav {
     flex-basis: 35%;
 }
 
+.sidebar-flexer {
+  flex: 1;
+  flex-basis: 35%;
+  width: 365px;
+}
+
 .mobile-shown {
     display: none;
 }
@@ -236,6 +242,28 @@ nav {
         margin: 0.5em;
         padding: 0.5em;
     }
+}
+
+@media all and (min-width: 960px) {
+  .sidebar {
+    overflow: hidden;
+    max-height: 100vh;
+    max-width: 345px;
+    position: fixed;
+    margin-top: -10px;
+
+    .sidebar-container {
+      height: 96vh;
+      padding-top: 10px;
+      margin-right: -40px;
+      padding-right: 25px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+  .sidebar-flexer {
+    max-height: 96vh;
+  }
 }
 
 @media all and (max-width: 959px) {

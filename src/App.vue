@@ -15,10 +15,14 @@
         <button @click="activatePanel('sidebar')">Sidebar</button>
         <button @click="activatePanel('timeline')">Timeline</button>
       </div>
-      <div class="sidebar" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar' }">
-        <user-panel></user-panel>
-        <nav-panel></nav-panel>
-        <notifications v-if="currentUser"></notifications>
+      <div class="sidebar-flexer" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar'}">
+        <div class="sidebar" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar' }">
+          <div class="sidebar-container">
+            <user-panel></user-panel>
+            <nav-panel></nav-panel>
+            <notifications v-if="currentUser"></notifications>
+          </div>
+        </div>
       </div>
       <div class="main" :class="{ 'mobile-hidden': mobileActivePanel != 'timeline' }">
         <transition name="fade">

@@ -116,7 +116,6 @@
 }
 
 .profile-panel-body {
-  padding-top: 0em;
   top: -0em;
   padding-top: 4em;
 }

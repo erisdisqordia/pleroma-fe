@@ -219,7 +219,7 @@ nav {
 }
 
 .sidebar {
-  flex: 1;
+  flex: 0;
   flex-basis: 35%;
 }
 
@@ -249,17 +249,18 @@ nav {
   .sidebar {
     overflow: hidden;
     max-height: 100vh;
-    max-width: 345px;
+    width: 345px;
     position: fixed;
     margin-top: -10px;
 
     .sidebar-container {
       height: 96vh;
+      width: 360px;
       padding-top: 10px;
       margin-right: -40px;
       padding-right: 25px;
       overflow-x: hidden;
-      overflow-y: auto;
+      overflow-y: scroll;
     }
   }
   .sidebar-flexer {

@@ -14,11 +14,11 @@
           <div class='text'>
             <timeago :since="notification.action.created_at" :auto-update="240"></timeago>
             <div v-if="notification.type === 'favorite'">
-              <h1>{{ notification.action.user.name }}<br><i class="fa icon-star"></i> favorited your <router-link :to="{ name: 'conversation', params: { id: notification.status.id } }">status</h1>
+              <h1>{{ notification.action.user.name }}<br><i class="fa icon-star"></i> favorited your <router-link :to="{ name: 'conversation', params: { id: notification.status.id } }">status</router-link></h1>
               <p>{{ notification.status.text }}</p>
             </div>
             <div v-if="notification.type === 'repeat'">
-              <h1>{{ notification.action.user.name }}<br><i class="fa icon-retweet"></i> repeated your <router-link :to="{ name: 'conversation', params: { id: notification.status.id } }">status</h1>
+              <h1>{{ notification.action.user.name }}<br><i class="fa icon-retweet"></i> repeated your <router-link :to="{ name: 'conversation', params: { id: notification.status.id } }">status</router-link></h1>
               <p>{{ notification.status.text }}</p>
             </div>
             <div v-if="notification.type === 'mention'">

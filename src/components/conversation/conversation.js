@@ -10,7 +10,7 @@ const sortAndFilterConversation = (conversation) => {
 const conversation = {
   data () {
     return {
-      highlight: this.statusoid.id
+      highlight: null
     }
   },
   props: [

@@ -213,13 +213,20 @@ nav {
 }
 
 .main {
-    flex: 1;
-    flex-basis: 65%;
+    flex-basis: 60%;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 .sidebar {
-    flex: 1;
-    flex-basis: 35%;
+  flex: 0;
+  flex-basis: 35%;
+}
+
+.sidebar-flexer {
+  flex: 1;
+  flex-basis: 345px;
+  width: 365px;
 }
 
 .mobile-shown {
@@ -236,6 +243,30 @@ nav {
         margin: 0.5em;
         padding: 0.5em;
     }
+}
+
+@media all and (min-width: 960px) {
+  .sidebar {
+    overflow: hidden;
+    max-height: 100vh;
+    width: 350px;
+    position: fixed;
+    margin-top: -10px;
+
+    .sidebar-container {
+      height: 96vh;
+      width: 362px;
+      padding-top: 10px;
+      padding-right: 20px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+  }
+  .sidebar-flexer {
+    max-height: 96vh;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
 }
 
 @media all and (max-width: 959px) {

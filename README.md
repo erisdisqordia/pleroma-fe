@@ -2,7 +2,7 @@
 
 > A Qvitter-style frontend for certain GS servers.
 
-![screenshot](http://i.imgur.com/3q30Zxt.jpg)
+![screenshot](https://my.mixtape.moe/kjzioz.PNG)
 
 # FOR ADMINS
 

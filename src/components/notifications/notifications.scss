@@ -1,6 +1,8 @@
 @import '../../_variables.scss';
 
 .notifications {
+  // a bit of a hack to allow scrolling below notifications
+  padding-bottom: 15em;
 
   .panel-heading {
     // force the text to stay centered, while keeping

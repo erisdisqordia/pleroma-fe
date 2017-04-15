@@ -20,6 +20,9 @@
         <div v-if="authError" class='form-group'>
           <div class='error base05'>{{authError}}</div>
         </div>
+        <div class='form-group'>
+          <router-link :to="{name: 'registration'}">Register new account</router-link>
+        </div>
       </form>
     </div>
   </div>

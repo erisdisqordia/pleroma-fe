@@ -10,14 +10,17 @@ const RETWEET_URL = '/api/statuses/retweet'
 const STATUS_UPDATE_URL = '/api/statuses/update.json'
 const STATUS_DELETE_URL = '/api/statuses/destroy'
 const STATUS_URL = '/api/statuses/show'
-const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
+const MEDIA_UPLOAD_URL = '/api/media/upload.json'
 const CONVERSATION_URL = '/api/statusnet/conversation'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
+const REGISTRATION_URL = '/api/account/register.json'
 // const USER_URL = '/api/users/show.json'
+
+import { each } from 'lodash'
 
 const oldfetch = window.fetch
 
@@ -25,6 +28,32 @@ let fetch = (url, options) => {
   const baseUrl = ''
   const fullUrl = baseUrl + url
   return oldfetch(fullUrl, options)
+}
+
+// Params needed:
+// nickname
+// email
+// fullname
+// password
+// password_confirm
+//
+// Optional
+// bio
+// homepage
+// location
+const register = (params) => {
+  const form = new FormData()
+
+  each(params, (value, key) => {
+    if (value) {
+      form.append(key, value)
+    }
+  })
+
+  return fetch(REGISTRATION_URL, {
+    method: 'POST',
+    body: form
+  })
 }
 
 const authHeaders = (user) => {
@@ -198,7 +227,8 @@ const apiService = {
   uploadMedia,
   fetchAllFollowing,
   setUserMute,
-  fetchMutes
+  fetchMutes,
+  register
 }
 
 export default apiService

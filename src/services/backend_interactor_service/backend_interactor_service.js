@@ -36,6 +36,8 @@ const backendInteractorService = (credentials) => {
 
   const fetchMutes = () => apiService.fetchMutes({credentials})
 
+  const register = (params) => apiService.register(params)
+
   const backendInteractorServiceInstance = {
     fetchStatus,
     fetchConversation,
@@ -46,7 +48,8 @@ const backendInteractorService = (credentials) => {
     verifyCredentials: apiService.verifyCredentials,
     startFetching,
     setUserMute,
-    fetchMutes
+    fetchMutes,
+    register
   }
 
   return backendInteractorServiceInstance

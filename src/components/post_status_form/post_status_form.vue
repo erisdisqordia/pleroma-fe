@@ -63,6 +63,18 @@
          }
      }
 
+
+     .btn {
+         cursor: pointer;
+     }
+
+     .btn[disabled] {
+         cursor: not-allowed;
+     }
+
+     .icon-cancel {
+         cursor: pointer;
+     }
      form {
          display: flex;
          flex-direction: column;
@@ -84,18 +96,6 @@
          line-height:16px;
          padding: 5px;
          resize: vertical;
-     }
-
-     .btn {
-         cursor: pointer;
-     }
-
-     .btn[disabled] {
-         cursor: not-allowed;
-     }
-
-     .icon-cancel {
-         cursor: pointer;
      }
  }
 

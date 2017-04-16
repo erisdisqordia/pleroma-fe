@@ -13,6 +13,28 @@ const settings = {
   components: {
     StyleSwitcher
   },
+  computed: {
+    user () {
+      return this.$store.state.users.currentUser
+    }
+  },
+  methods: {
+    uploadAvatar ({target}) {
+      const file = target.files[0]
+      const reader = new FileReader()
+      reader.onload = ({target}) => {
+        const img = target.result
+
+        this.$store.state.api.backendInteractor.updateAvatar({params: {img}}).then((user) => {
+          if (!user.error) {
+            this.$store.commit('addNewUsers', [user])
+            this.$store.commit('setCurrentUser', user)
+          }
+        })
+      }
+      reader.readAsDataURL(file)
+    }
+  },
   watch: {
     hideAttachmentsLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideAttachments', value })

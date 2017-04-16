@@ -9,6 +9,13 @@
         <style-switcher></style-switcher>
       </div>
       <div class="setting-item">
+        <h2>Avatar</h2>
+        <img :src="user.profile_image_url_original"></img>
+        <div>
+          <input name="avatar-upload" id="avatar-upload" type="file" @change="uploadAvatar" ></input>
+        </div>
+      </div>
+      <div class="setting-item">
         <h2>Filtering</h2>
         <p>All notices containing these words will be muted, one per line</p>
         <textarea id="muteWords" v-model="muteWordsString"></textarea>

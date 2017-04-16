@@ -18,6 +18,7 @@ const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
 const REGISTRATION_URL = '/api/account/register.json'
+const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
 // const USER_URL = '/api/users/show.json'
 
 import { each } from 'lodash'
@@ -28,6 +29,29 @@ let fetch = (url, options) => {
   const baseUrl = ''
   const fullUrl = baseUrl + url
   return oldfetch(fullUrl, options)
+}
+
+// Params
+// cropH
+// cropW
+// cropX
+// cropY
+// img (base 64 encodend data url)
+const updateAvatar = ({credentials, params}) => {
+  let url = AVATAR_UPDATE_URL
+
+  const form = new FormData()
+
+  each(params, (value, key) => {
+    if (value) {
+      form.append(key, value)
+    }
+  })
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST',
+    body: form
+  }).then((data) => data.json())
 }
 
 // Params needed:
@@ -228,7 +252,8 @@ const apiService = {
   fetchAllFollowing,
   setUserMute,
   fetchMutes,
-  register
+  register,
+  updateAvatar
 }
 
 export default apiService

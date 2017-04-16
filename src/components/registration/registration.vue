@@ -14,6 +14,10 @@
           <input :disabled="registering" v-model='user.fullname' class='form-control' id='fullname' placeholder='e.g. Lain Iwakura'>
         </div>
         <div class='form-group'>
+          <label for='email'>Email</label>
+          <input :disabled="registering" v-model='user.email' class='form-control' id='email' type="email">
+        </div>
+        <div class='form-group'>
           <label for='bio'>Bio</label>
           <input :disabled="registering" v-model='user.bio' class='form-control' id='bio'>
         </div>

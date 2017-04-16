@@ -24,7 +24,7 @@ export const mutations = {
     set(user, 'muted', muted)
   },
   setCurrentUser (state, user) {
-    state.currentUser = user
+    state.currentUser = merge(state.currentUser || {}, user)
   },
   beginLogin (state) {
     state.loggingIn = true

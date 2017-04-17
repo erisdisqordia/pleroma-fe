@@ -21,6 +21,7 @@ const settings = {
   methods: {
     uploadAvatar ({target}) {
       const file = target.files[0]
+      // eslint-disable-next-line no-undef
       const reader = new FileReader()
       reader.onload = ({target}) => {
         const img = target.result

@@ -4,6 +4,10 @@
       <div class="form-group" >
         <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control" @keyup.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag"></textarea>
       </div>
+      <div class='form-bottom'>
+        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
+        <button :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
+      </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
           <i class="fa icon-cancel" @click="removeMediaFile(file)"></i>
@@ -12,10 +16,6 @@
           <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
           <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
         </div>
-      </div>
-      <div class='form-bottom'>
-        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
-        <button :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
       </div>
     </form>
   </div>
@@ -44,14 +44,15 @@
      .form-bottom {
          display: flex;
          padding: 0.5em;
+         height: 32px;
 
          button {
-             flex: 2;
+             width: 10em;
          }
      }
 
      .attachments {
-         padding: 0.5em;
+         padding: 0 0.5em;
 
          i {
             position: absolute;

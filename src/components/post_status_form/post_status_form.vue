@@ -54,6 +54,10 @@
      .attachments {
          padding: 0 0.5em;
 
+         .attachment {
+           position: relative;
+         }
+
          i {
             position: absolute;
             margin: 10px;

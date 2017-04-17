@@ -56,6 +56,7 @@
 
          .attachment {
            position: relative;
+           margin: 0.5em 0.8em 0.2em 0;
          }
 
          i {

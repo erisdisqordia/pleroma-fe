@@ -7,7 +7,8 @@ const settings = {
       hideAttachmentsLocal: this.$store.state.config.hideAttachments,
       hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
-      muteWordsString: this.$store.state.config.muteWords.join('\n')
+      muteWordsString: this.$store.state.config.muteWords.join('\n'),
+      previewfile: null
     }
   },
   components: {
@@ -25,15 +26,26 @@ const settings = {
       const reader = new FileReader()
       reader.onload = ({target}) => {
         const img = target.result
-
-        this.$store.state.api.backendInteractor.updateAvatar({params: {img}}).then((user) => {
+        this.previewfile = img
+        /*this.$store.state.api.backendInteractor.updateAvatar({params: {img}}).then((user) => {
           if (!user.error) {
             this.$store.commit('addNewUsers', [user])
             this.$store.commit('setCurrentUser', user)
           }
-        })
+        })*/
       }
       reader.readAsDataURL(file)
+    },
+    submitAvatar () {
+      if (!this.previewfile)
+        return
+      const img = this.previewfile
+      this.$store.state.api.backendInteractor.updateAvatar({params: {img}}).then((user) => {
+        if (!user.error) {
+          this.$store.commit('addNewUsers', [user])
+          this.$store.commit('setCurrentUser', user)
+        }
+      })
     }
   },
   watch: {

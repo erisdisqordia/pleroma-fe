@@ -8,12 +8,17 @@
         <h2>Theme</h2>
         <style-switcher></style-switcher>
       </div>
-      <div class="setting-item">
+      <div class="setting-item" v-if="user">
         <h2>Avatar</h2>
-        <img :src="user.profile_image_url_original"></img>
+        <p>Your current avatar:</p>
+        <img :src="user.profile_image_url_original" class="old-avatar"></img>
+        <p>Set new avatar:</p>
+        <img class="new-avatar" v-bind:src="previewfile">
+        </img>
         <div>
           <input name="avatar-upload" id="avatar-upload" type="file" @change="uploadAvatar" ></input>
         </div>
+        <button class="btn btn-default base05 base01-background" v-if="previewfile" @click="submitAvatar">Submit</button>
       </div>
       <div class="setting-item">
         <h2>Filtering</h2>
@@ -50,6 +55,37 @@
    textarea {
      width: 100%;
      height: 100px;
+   }
+
+   .old-avatar {
+     width: 128px;
+     border-radius: 5px;
+   }
+
+   .new-avatar {
+     max-width: 100%;
+     border-radius: 5px;
+   }
+
+   .btn {
+     margin-top: 1em;
+     min-height: 28px;
+     width: 10em;
+   }
+
+   .cropper {
+     //position: absolute;
+     cursor: move;
+     width: 128px;
+     height: 128px;
+     border:1px solid #fff;
+     background-color: #000000;
+     .sub {
+       width: 100%;
+       height: 100%;
+       margin: -1px -1px -1px -1px ;
+       border:1px dashed #000;
+     }
    }
  }
  .setting-list {

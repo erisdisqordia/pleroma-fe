@@ -31,6 +31,13 @@
               <label for='password_confirmation'>Password confirmation</label>
               <input :disabled="registering" v-model='user.confirm' class='form-control' id='password_confirmation' type='password'>
             </div>
+            <!--
+            <div class='form-group'>
+              <label for='captcha'>Captcha</label>
+              <img src='/qvittersimplesecurity/captcha.jpg' alt='captcha' class='captcha'>
+              <input :disabled="registering" v-model='user.captcha' placeholder='Enter captcha' type='test' class='form-control' id='captcha'>
+            </div>
+            -->
             <div class='form-group'>
               <button :disabled="registering" type='submit' class='btn btn-default base05 base01-background'>Submit</button>
             </div>
@@ -63,7 +70,7 @@
   }
 
   .terms-of-service {
-    flex: 0 1 55%;
+    flex: 0 1 50%;
     margin: 0.8em;
   }
 
@@ -97,6 +104,11 @@
     border-color: silver;
     border-radius: 5px;
     padding: 0.1em 0.2em 0.2em 0.2em;
+  }
+
+  .captcha {
+    max-width: 350px;
+    margin-bottom: 0.4em;
   }
 
   .btn {

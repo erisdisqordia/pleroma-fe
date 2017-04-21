@@ -33,10 +33,10 @@
   .attachments {
       display: flex;
       flex-wrap: wrap;
-      margin-right: -0.8em;
+      margin-right: -0.7em;
       .attachment {
           flex: 1 0 30%;
-          margin: 0.5em 0.8em 0.6em 0.0em;
+          margin: 0.5em 0.7em 0.6em 0.0em;
           align-self: flex-start;
 
           &.html {

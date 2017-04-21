@@ -79,9 +79,8 @@
         return this.$store.state.users.currentUser
       },
       dailyAvg () {
-        return Math.round(
-          this.user.statuses_count / ((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
-        )
+        const days = Math.ceil((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
+        return Math.round(this.user.statuses_count / days)
       }
     },
     methods: {
@@ -117,7 +116,6 @@
 }
 
 .profile-panel-body {
-  padding-top: 0em;
   top: -0em;
   padding-top: 4em;
 }

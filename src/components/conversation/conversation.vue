@@ -8,7 +8,7 @@
     </div>
     <div class="panel-body">
       <div class="timeline">
-        <status v-for="status in conversation" :key="status.id" :statusoid="status" :expandable='false' :focused="focused(status.id)" :inConversation='true'></status>
+        <status v-for="status in conversation" @goto="setHighlight" :key="status.id" :statusoid="status" :expandable='false' :focused="focused(status.id)" :inConversation='true' :highlight="highlight"></status>
       </div>
     </div>
   </div>

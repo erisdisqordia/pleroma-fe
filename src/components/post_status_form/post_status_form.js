@@ -2,7 +2,7 @@ import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 
-import { merge, reject, map, uniqBy } from 'lodash'
+import { reject, map, uniqBy } from 'lodash'
 
 const buildMentionsString = ({user, attentions}, currentUser) => {
   let allAttentions = [...attentions]
@@ -18,7 +18,6 @@ const buildMentionsString = ({user, attentions}, currentUser) => {
 
   return mentions.join(' ') + ' '
 }
-
 
 const PostStatusForm = {
   props: [

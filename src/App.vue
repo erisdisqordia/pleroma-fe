@@ -19,6 +19,7 @@
         <div class="sidebar" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar' }">
           <div class="sidebar-container">
             <user-panel></user-panel>
+            <user-finder></user-finder>
             <nav-panel></nav-panel>
             <notifications v-if="currentUser"></notifications>
           </div>

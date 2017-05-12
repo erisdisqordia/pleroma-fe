@@ -17,6 +17,7 @@ const FRIENDS_URL = '/api/statuses/friends.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
+const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 // const USER_URL = '/api/users/show.json'
 
 const oldfetch = window.fetch
@@ -33,6 +34,13 @@ const authHeaders = (user) => {
   } else {
     return { }
   }
+}
+
+const externalProfile = (profileUrl) => {
+  let url = `${EXTERNAL_PROFILE_URL}?profileurl=${profileUrl}`
+  return fetch(url, {
+    method: 'GET'
+  }).then((data) => data.json())
 }
 
 const followUser = ({id, credentials}) => {
@@ -198,7 +206,8 @@ const apiService = {
   uploadMedia,
   fetchAllFollowing,
   setUserMute,
-  fetchMutes
+  fetchMutes,
+  externalProfile
 }
 
 export default apiService

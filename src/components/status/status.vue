@@ -19,7 +19,8 @@
       <div class="media status container">
         <div class="media-left">
           <a :href="status.user.statusnet_profile_url">
-            <img @click.prevent="toggleUserExpanded" class='avatar' :src="status.user.profile_image_url_original">
+            <img @click.prevent="toggleUserExpanded" :class="{retweeted: retweet}" class='avatar' :src="status.user.profile_image_url_original">
+            <img v-if="retweet" class='avatar-retweeter' :src="statusoid.user.profile_image_url_original"></img>
           </a>
         </div>
         <div class="media-body">
@@ -147,7 +148,23 @@
  }
 
  .status .avatar {
-     width: 48px;
+   width: 48px;
+   height: 48px;
+
+   &.retweeted {
+     width: 40px;
+     height: 40px;
+     margin-right: 8px;
+     margin-bottom: 8px;
+   }
+ }
+
+ .status img.avatar-retweeter {
+   width: 24px;
+   height: 24px;
+   position: absolute;
+   margin-left: 24px;
+   margin-top: 24px;
  }
 
  .status.compact .avatar {

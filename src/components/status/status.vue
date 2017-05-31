@@ -1,5 +1,20 @@
 <template>
-  <div class="status-el base00-background base03-border" v-if="!status.deleted" v-bind:class="[{ 'base01-background': isFocused }, { 'status-conversation': inConversation }]" >
+  <div class="status-el base00-background" v-if="compact">
+    <div @click.prevent="linkClicked" class="status-content" v-html="status.statusnet_html"></div>
+    <div v-if="loggedIn">
+      <div class='status-actions'>
+        <div>
+          <a href="#" v-on:click.prevent="toggleReplying">
+            <i class="fa icon-reply" :class="{'icon-reply-active': replying}"></i>
+          </a>
+        </div>
+        <retweet-button :status=status></retweet-button>
+        <favorite-button :status=status></favorite-button>
+      </div>
+    </div>
+    <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying" v-if="replying"/>
+  </div>
+  <div class="status-el base00-background base03-border" v-else-if="!status.deleted" v-bind:class="[{ 'base01-background': isFocused }, { 'status-conversation': inConversation }]" >
     <template v-if="muted">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>

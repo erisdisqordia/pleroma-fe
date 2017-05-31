@@ -12,7 +12,8 @@ const Status = {
     'expandable',
     'inConversation',
     'focused',
-    'highlight'
+    'highlight',
+    'compact'
   ],
   data: () => ({
     replying: false,

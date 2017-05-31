@@ -1,8 +1,8 @@
 <template>
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
-      <div class="form-group" >
-        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control" @keyup.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag"></textarea>
+      <div class="form-group base03-border" >
+        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="1" class="form-control" @keyup.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize"></textarea>
       </div>
       <div class='form-bottom'>
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
@@ -85,11 +85,12 @@
      form textarea {
          border: solid;
          border-width: 1px;
-         border-color: silver;
+         border-color: inherit;
          border-radius: 5px;
          line-height:16px;
          padding: 5px;
-         resize: vertical;
+         resize: none;
+         overflow: hidden;
      }
 
      .btn {

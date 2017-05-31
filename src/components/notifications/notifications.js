@@ -1,3 +1,5 @@
+import Status from '../status/status.vue'
+
 import { sortBy, take, filter } from 'lodash'
 
 const Notifications = {
@@ -22,6 +24,9 @@ const Notifications = {
     unseenCount () {
       return this.unseenNotifications.length
     }
+  },
+  components: {
+    Status
   },
   watch: {
     unseenCount (count) {

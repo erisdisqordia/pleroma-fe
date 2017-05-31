@@ -11,19 +11,30 @@
           <a :href="notification.action.user.statusnet_profile_url">
             <img class='avatar' :src="notification.action.user.profile_image_url_original">
           </a>
-          <div class='text'>
-            <timeago :since="notification.action.created_at" :auto-update="240"></timeago>
+          <div class='text' style="width: 100%;">
             <div v-if="notification.type === 'favorite'">
-              <h1>{{ notification.action.user.name }}<br><i class="fa icon-star"></i> favorited your <router-link :to="{ name: 'conversation', params: { id: notification.status.id } }">status</router-link></h1>
-              <p>{{ notification.status.text }}</p>
+              <h1>
+                {{ notification.action.user.name }}
+                <i class="fa icon-star"></i>
+                <small><router-link :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
+              </h1>
+            <div v-html="notification.status.statusnet_html"></div>
             </div>
             <div v-if="notification.type === 'repeat'">
-              <h1>{{ notification.action.user.name }}<br><i class="fa icon-retweet"></i> repeated your <router-link :to="{ name: 'conversation', params: { id: notification.status.id } }">status</router-link></h1>
-              <p>{{ notification.status.text }}</p>
+              <h1>
+                {{ notification.action.user.name }}
+                <i class="fa icon-retweet lit"></i>
+                <small><router-link :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
+              </h1>
+            <div v-html="notification.status.statusnet_html"></div>
             </div>
             <div v-if="notification.type === 'mention'">
-              <h1>{{ notification.action.user.name }}<br><i class="fa icon-reply"></i> <router-link :to="{ name: 'conversation', params: { id: notification.status.id } }">mentioned</router-link> you</h1>
-              <p>{{ notification.status.text }}</p>
+              <h1>
+                {{ notification.action.user.name }}
+                <i class="fa icon-reply lit"></i>
+                <small><router-link :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
+              </h1>
+              <status :compact="true" :statusoid="notification.status"></status>
             </div>
           </div>
         </div>

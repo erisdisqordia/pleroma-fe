@@ -62,6 +62,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes,
   scrollBehavior: (to, from, savedPosition) => {
     if (to.matched.some(m => m.meta.dontScroll)) {

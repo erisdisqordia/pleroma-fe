@@ -62,16 +62,14 @@
                   -
                   <small>
                     <router-link :to="{ name: 'conversation', params: { id: status.id } }">
-                      <timeago :since="status.created_at" :auto-update="60" style="opacity:0.8;"></timeago>
+                      <timeago :since="status.created_at" :auto-update="60"></timeago>
                     </router-link>
                   </small>
                   </h4>
                 </div>
               </div>
               <div class="heading-icons">
-                <small v-if="unmuted">
-                  <a href="#" @click.prevent="toggleMute" ><i class="icon-eye-off"></i></a>
-                </small>
+                <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="fa icon-eye-off"></i></a>
                 <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="fa icon-binoculars"></i></a>
                 <template v-if="expandable">
                   <a href="#" @click.prevent="toggleExpanded" class="expand"><i class="fa icon-plus-squared"></i></a>
@@ -167,12 +165,11 @@
      }
 
      .source_url {
-       margin-right: -0.25em;
+
      }
 
      .expand {
-       margin-left: 0.5em;
-       margin-right: -0.25em;
+       margin-right: -0.3em;
      }
 
      .greentext {

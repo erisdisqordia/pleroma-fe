@@ -89,6 +89,10 @@ const PostStatusForm = {
     },
     fileDrag (e) {
       e.dataTransfer.dropEffect = 'copy'
+    },
+    resize (e) {
+      e.target.style.height = 'auto'
+      e.target.style.height = `${e.target.scrollHeight - 10}px`
     }
   }
 }

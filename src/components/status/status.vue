@@ -308,19 +308,6 @@
    .status-el {
      .name-and-links {
        margin-left: -0.25em;
-
-       .user-name {
-         flex: 100%;
-       }
-     }
-
-     .status-content {
-       margin-top: 0.5em;
-       margin-left: -3.7em;
-       margin-right: 0;
-     }
-     .status-actions {
-       margin-left: -3.7em;
      }
    }
    .status {

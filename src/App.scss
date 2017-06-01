@@ -134,11 +134,6 @@ main-router {
     background-color: rgba(0,0,0,0.1);
 }
 
-.media-body {
-    flex: 1;
-    padding-left: 0.5em;
-}
-
 .container > * {
     min-width: 0px;
 }
@@ -147,60 +142,6 @@ main-router {
     color: grey;
 }
 
-.status-actions {
-    width: 50%;
-    display: flex;
-
-    div, favorite-button {
-        flex: 1;
-    }
-}
-
-status-text-container {
-    display: block;
-}
-
-.status-el {
-    line-height: 18px;
-
-    .notify {
-        .avatar {
-            border-width: 3px;
-            border-style: solid;
-        }
-    }
-
-    .media-left {
-        img {
-            margin-top: 0.2em;
-            float: right;
-            margin-right: 0.3em;
-            border-radius: 5px;
-        }
-    }
-
-    .retweet-info {
-        padding: 0.7em 0 0 0.6em;
-
-        .media-left {
-            display: flex;
-
-            i {
-                align-self: center;
-                text-align: right;
-                flex: 1;
-                padding-right: 0.3em;
-            }
-        }
-    }
-
-    .media-heading {
-        small {
-            font-weight: lighter;
-        }
-        margin-bottom: 0.3em;
-    }
-}
 nav {
     z-index: 1000;
 }

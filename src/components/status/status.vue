@@ -43,38 +43,39 @@
             <user-card-content :user="status.user"></user-card-content>
           </div>
           <div class="user-content">
-            <h4 class="media-heading">
-              {{status.user.name}}
-              <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
-              <small v-if="status.in_reply_to_screen_name"> &gt;
-                <router-link :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
-                  {{status.in_reply_to_screen_name}}
-                </router-link>
-              </small>
-              <template v-if="isReply && !expandable">
-                <small>
-                  <a href="#" @click.prevent="gotoOriginal" ><i class="icon-reply"></i></a>
-                </small>
-              </template>
-              -
-              <small>
-                <router-link :to="{ name: 'conversation', params: { id: status.id } }">
-                  <timeago :since="status.created_at" :auto-update="60"></timeago>
-                </router-link>
-              </small>
-              <template v-if="expandable">
-                -
-                <small>
-                  <a href="#" @click.prevent="toggleExpanded" ><i class="icon-plus-squared"></i></a>
-                </small>
-              </template>
-              <small v-if="unmuted">
-                <a href="#" @click.prevent="toggleMute" ><i class="icon-eye-off"></i></a>
-              </small>
-              <small v-if="!status.is_local" class="source_url">
-                <a :href="status.external_url" target="_blank" ><i class="icon-binoculars"></i></a>
-              </small>
-            </h4>
+            <div class="media-heading">
+              <div class="name-and-links">
+                <h4 class="user-name">{{status.user.name}}</h4>
+                <div class="links">
+                  <h4>
+                  <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
+                  <small v-if="status.in_reply_to_screen_name"> &gt;
+                    <router-link :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
+                      {{status.in_reply_to_screen_name}}
+                    </router-link>
+                  </small>
+                  <template v-if="isReply && !expandable">
+                    <small>
+                      <a href="#" @click.prevent="gotoOriginal" ><i class="icon-reply"></i></a>
+                    </small>
+                  </template>
+                  -
+                  <small>
+                    <router-link :to="{ name: 'conversation', params: { id: status.id } }">
+                      <timeago :since="status.created_at" :auto-update="60"></timeago>
+                    </router-link>
+                  </small>
+                  </h4>
+                </div>
+              </div>
+              <div class="heading-icons">
+                <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="fa icon-eye-off"></i></a>
+                <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="fa icon-binoculars"></i></a>
+                <template v-if="expandable">
+                  <a href="#" @click.prevent="toggleExpanded" class="expand"><i class="fa icon-plus-squared"></i></a>
+                </template>
+              </div>
+            </div>
 
             <div @click.prevent="linkClicked" class="status-content" v-html="status.statusnet_html"></div>
 
@@ -110,20 +111,62 @@
 
 <style lang="scss">
  @import '../../_variables.scss';
+
+ status-text-container {
+    display: block;
+}
+
  .status-el {
      hyphens: auto;
      overflow-wrap: break-word;
      word-wrap: break-word;
      word-break: break-word;
      border-left-width: 0px;
+     line-height: 18px;
+
+     .notify {
+         .avatar {
+             border-width: 3px;
+             border-style: solid;
+         }
+     }
+
+     .media-body {
+       flex: 1;
+       padding-left: 0.5em;
+     }
+
 
      .user-content {
+
        min-height: 52px;
        padding-top: 1px;
      }
 
+     .media-heading {
+       display: flex;
+       min-height: 1.4em;
+       margin-bottom: 0.3em;
+
+       small {
+           font-weight: lighter;
+       }
+       h4 {
+         margin-right: 0.4em;
+       }
+       .name-and-links {
+         flex: 1 0;
+         display: flex;
+         flex-wrap: wrap;
+       }
+     }
+
      .source_url {
-       float: right;
+
+     }
+
+     .expand {
+       margin-right: -0.3em;
      }
 
      .greentext {
@@ -144,6 +187,30 @@
          margin-top: 0.2em;
          margin-bottom: 0.5em;
      }
+
+     .media-left {
+         img {
+             margin-top: 0.2em;
+             float: right;
+             margin-right: 0.3em;
+             border-radius: 5px;
+         }
+     }
+
+     .retweet-info {
+         padding: 0.7em 0 0 0.6em;
+
+         .media-left {
+             display: flex;
+
+             i {
+                 align-self: center;
+                 text-align: right;
+                 flex: 1;
+                 padding-right: 0.3em;
+             }
+         }
+     }
  }
 
  .status-conversation {
@@ -151,7 +218,14 @@
  }
 
  .status-actions {
-     padding-top: 5px;
+     padding-top: 0.15em;
+     width: 100%;
+     display: flex;
+
+     div, favorite-button {
+        max-width: 6em;
+        flex: 1;
+     }
  }
 
  .icon-reply:hover {
@@ -187,12 +261,13 @@
  }
 
  .status {
-     padding: 0.65em 0.7em 0.8em 0.8em;
+     padding: 0.4em 0.7em 0.45em 0.7em;
      border-bottom: 1px solid;
      border-bottom-color: inherit;
      border-left: 4px rgba(255, 48, 16, 0.65);
      border-left-style: inherit;
  }
+
  .muted {
    padding: 0.1em 0.7em 0.1em 0.8em;
    button {
@@ -224,6 +299,37 @@
 
  .reply-body {
    flex: 1;
+ }
+
+ @media all and (max-width: 960px) {
+   .status-el {
+     .name-and-links {
+       margin-left: -0.25em;
+     }
+   }
+   .status {
+     max-width: 100%;
+   }
+
+   .status .avatar {
+     width: 40px;
+     height: 40px;
+
+     &.retweeted {
+       width: 34px;
+       height: 34px;
+       margin-right: 8px;
+       margin-bottom: 8px;
+     }
+   }
+
+   .status img.avatar-retweeter {
+     width: 22px;
+     height: 22px;
+     position: absolute;
+     margin-left: 18px;
+     margin-top: 18px;
+   }
  }
 
 </style>

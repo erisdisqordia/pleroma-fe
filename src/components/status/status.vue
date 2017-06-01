@@ -45,7 +45,7 @@
           <div class="user-content">
             <div class="media-heading">
               <div class="name-and-links">
-                <h4>{{status.user.name}}</h4>
+                <h4 class="user-name">{{status.user.name}}</h4>
                 <div class="links">
                   <h4>
                   <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
@@ -159,7 +159,7 @@
          display: flex;
          flex-wrap: wrap;
          .links {
-
+           margin-right: -4em;
          }
        }
      }
@@ -226,7 +226,7 @@
      display: flex;
 
      div, favorite-button {
-        max-width: 5.5em;
+        max-width: 6em;
         flex: 1;
      }
  }
@@ -302,6 +302,50 @@
 
  .reply-body {
    flex: 1;
+ }
+
+ @media all and (max-width: 960px) {
+   .status-el {
+     .name-and-links {
+       margin-left: -0.25em;
+
+       .user-name {
+         flex: 100%;
+       }
+     }
+
+     .status-content {
+       margin-top: 0.5em;
+       margin-left: -3.7em;
+       margin-right: 0;
+     }
+     .status-actions {
+       margin-left: -3.7em;
+     }
+   }
+   .status {
+     max-width: 100%;
+   }
+
+   .status .avatar {
+     width: 40px;
+     height: 40px;
+
+     &.retweeted {
+       width: 34px;
+       height: 34px;
+       margin-right: 8px;
+       margin-bottom: 8px;
+     }
+   }
+
+   .status img.avatar-retweeter {
+     width: 22px;
+     height: 22px;
+     position: absolute;
+     margin-left: 18px;
+     margin-top: 18px;
+   }
  }
 
 </style>

@@ -63,6 +63,8 @@ const PostStatusForm = {
         files: []
       }
       this.$emit('posted')
+      let el = this.$el.querySelector('textarea')
+      el.style.height = '16px'
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
@@ -93,6 +95,9 @@ const PostStatusForm = {
     resize (e) {
       e.target.style.height = 'auto'
       e.target.style.height = `${e.target.scrollHeight - 10}px`
+      if (e.target.value === '') {
+        e.target.style.height = '16px'
+      }
     }
   }
 }

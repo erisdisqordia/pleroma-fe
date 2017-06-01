@@ -158,9 +158,6 @@
          flex: 1 0;
          display: flex;
          flex-wrap: wrap;
-         .links {
-           margin-right: -4em;
-         }
        }
      }
 

@@ -14,7 +14,7 @@
           <div class='text' style="width: 100%;">
             <div v-if="notification.type === 'favorite'">
               <h1>
-                {{ notification.action.user.name }}
+                <span :title="'@'+notification.action.user.screen_name">{{ notification.action.user.name }}</span>
                 <i class="fa icon-star"></i>
                 <small><router-link :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
               </h1>
@@ -22,7 +22,7 @@
             </div>
             <div v-if="notification.type === 'repeat'">
               <h1>
-                {{ notification.action.user.name }}
+                <span :title="'@'+notification.action.user.screen_name">{{ notification.action.user.name }}</span>
                 <i class="fa icon-retweet lit"></i>
                 <small><router-link :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
               </h1>
@@ -30,7 +30,7 @@
             </div>
             <div v-if="notification.type === 'mention'">
               <h1>
-                {{ notification.action.user.name }}
+                <span :title="'@'+notification.action.user.screen_name">{{ notification.action.user.name }}</span>
                 <i class="fa icon-reply lit"></i>
                 <small><router-link :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
               </h1>

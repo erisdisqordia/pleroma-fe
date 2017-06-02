@@ -28,7 +28,7 @@
           <i class='fa icon-retweet retweeted'></i>
         </div>
         <div class="media-body">
-          Retweeted by {{retweeter}}
+          Repeated by <a :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
         </div>
       </div>
       <div class="media status container">

@@ -7,7 +7,7 @@
         <button @click.prevent="markAsSeen" class="base06 base02-background read-button">Read!</button>
       </div>
       <div class="panel-body base03-border">
-        <div v-for="notification in visibleNotifications" class="notification" :class='{"unseen": !notification.seen}'>
+        <div v-for="notification in visibleNotifications" :key="notification" class="notification" :class='{"unseen": !notification.seen}'>
           <a :href="notification.action.user.statusnet_profile_url">
             <img class='avatar' :src="notification.action.user.profile_image_url_original">
           </a>

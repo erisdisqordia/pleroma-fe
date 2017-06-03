@@ -46,7 +46,8 @@ const Timeline = {
       }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
     },
     scrollLoad (e) {
-      if (this.timeline.loading === false && this.$store.state.config.autoLoad && (window.innerHeight + window.pageYOffset) >= (document.body.scrollHeight - 750)) {
+      let height = Math.max(document.body.offsetHeight, document.body.scrollHeight)
+      if (this.timeline.loading === false && this.$store.state.config.autoLoad && (window.innerHeight + window.pageYOffset) >= (height - 750)) {
         this.fetchOlderStatuses()
       }
     }

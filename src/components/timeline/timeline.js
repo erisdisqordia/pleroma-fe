@@ -20,6 +20,8 @@ const Timeline = {
     const credentials = store.state.users.currentUser.credentials
     const showImmediately = this.timeline.visibleStatuses.length === 0
 
+    window.onscroll = this.scrollLoad
+
     timelineFetcher.fetchAndUpdate({
       store,
       credentials,
@@ -42,6 +44,11 @@ const Timeline = {
         older: true,
         showImmediately: true
       }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
+    },
+    scrollLoad (e) {
+      if (this.timeline.loading === false && this.$store.state.config.autoLoad && (window.innerHeight + window.pageYOffset) >= (document.body.scrollHeight - 750)) {
+        this.fetchOlderStatuses()
+      }
     }
   }
 }

@@ -7,6 +7,7 @@ const settings = {
       hideAttachmentsLocal: this.$store.state.config.hideAttachments,
       hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
+      autoLoadLocal: this.$store.state.config.autoLoad,
       muteWordsString: this.$store.state.config.muteWords.join('\n')
     }
   },
@@ -22,6 +23,9 @@ const settings = {
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
+    },
+    autoLoadLocal (value) {
+      this.$store.dispatch('setOption', { name: 'autoLoad', value })
     },
     muteWordsString (value) {
       value = filter(value.split('\n'), (word) => trim(word).length > 0)

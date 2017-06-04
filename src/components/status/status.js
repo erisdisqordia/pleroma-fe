@@ -90,12 +90,10 @@ const Status = {
     },
     gotoOriginal (id) {
       // only handled by conversation, not status_or_conversation
-      //this.$emit('goto', this.status.in_reply_to_status_id)
       this.$emit('goto', id)
     },
     toggleExpanded () {
       this.$emit('toggleExpanded')
-      //console.log(this.replies)
     },
     toggleMute () {
       this.unmuted = !this.unmuted

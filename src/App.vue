@@ -6,6 +6,7 @@
           <router-link :to="{ name: 'root'}">{{sitename}}</router-link>
         </div>
         <div class='item right'>
+          <user-finder></user-finder>
           <router-link :to="{ name: 'settings'}"><i class="icon-cog"></i></router-link>
         </div>
       </div>
@@ -19,7 +20,6 @@
         <div class="sidebar" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar' }">
           <div class="sidebar-container">
             <user-panel></user-panel>
-            <user-finder></user-finder>
             <nav-panel></nav-panel>
             <notifications v-if="currentUser"></notifications>
           </div>

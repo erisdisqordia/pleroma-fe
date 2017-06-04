@@ -1,6 +1,7 @@
 const UserFinder = {
   data: () => ({
-    username: undefined
+    username: undefined,
+    hidden: true
   }),
   methods: {
     findUser (username) {
@@ -11,6 +12,9 @@ const UserFinder = {
             this.$router.push({name: 'user-profile', params: {id: user.id}})
           }
         })
+    },
+    toggleHidden () {
+      this.hidden = !this.hidden
     }
   }
 }

@@ -10,8 +10,7 @@ const sortAndFilterConversation = (conversation) => {
 const conversation = {
   data () {
     return {
-      highlight: null,
-      statuses: []
+      highlight: null
     }
   },
   props: [
@@ -28,8 +27,7 @@ const conversation = {
       const conversationId = this.status.statusnet_conversation_id
       const statuses = this.$store.state.statuses.allStatuses
       const conversation = filter(statuses, { statusnet_conversation_id: conversationId })
-      this.statuses = sortAndFilterConversation(conversation)
-      return this.statuses
+      return sortAndFilterConversation(conversation)
     }
   },
   components: {
@@ -59,11 +57,11 @@ const conversation = {
       let res = []
       id = Number(id)
       let i
-      for (i = 0; i < this.statuses.length; i++) {
-        if (Number(this.statuses[i].in_reply_to_status_id) === id) {
+      for (i = 0; i < this.conversation.length; i++) {
+        if (Number(this.conversation[i].in_reply_to_status_id) === id) {
           res.push({
             name: `#${i}`,
-            id: this.statuses[i].id
+            id: this.conversation[i].id
           })
         }
       }

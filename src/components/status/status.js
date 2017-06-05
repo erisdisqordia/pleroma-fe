@@ -13,7 +13,8 @@ const Status = {
     'inConversation',
     'focused',
     'highlight',
-    'compact'
+    'compact',
+    'replies'
   ],
   data: () => ({
     replying: false,
@@ -87,9 +88,9 @@ const Status = {
     toggleReplying () {
       this.replying = !this.replying
     },
-    gotoOriginal () {
+    gotoOriginal (id) {
       // only handled by conversation, not status_or_conversation
-      this.$emit('goto', this.status.in_reply_to_status_id)
+      this.$emit('goto', id)
     },
     toggleExpanded () {
       this.$emit('toggleExpanded')
@@ -108,9 +109,8 @@ const Status = {
         let rect = this.$el.getBoundingClientRect()
         if (rect.top < 100) {
           window.scrollBy(0, rect.top - 200)
-        } else if (rect.bottom > window.innerHeight - 100) {
-          // will be useful when scrolling down to replies or root posts is in
-          window.scrollBy(0, rect.bottom + 200)
+        } else if (rect.bottom > window.innerHeight - 50) {
+          window.scrollBy(0, rect.bottom - window.innerHeight + 50)
         }
       }
     }

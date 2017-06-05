@@ -56,7 +56,7 @@
                   </small>
                   <template v-if="isReply && !expandable">
                     <small>
-                      <a href="#" @click.prevent="gotoOriginal" ><i class="icon-reply"></i></a>
+                      <a href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)" ><i class="icon-reply"></i></a>
                     </small>
                   </template>
                   -
@@ -67,6 +67,12 @@
                   </small>
                   </h4>
                 </div>
+                <h4 class="replies" v-if="inConversation">
+                  <small v-if="replies.length">Replies:</small>
+                  <small v-for="reply in replies">
+                    <a href="#" @click.prevent="gotoOriginal(reply.id)">{{reply.name}}&nbsp;</a>
+                  </small>
+                </h4>
               </div>
               <div class="heading-icons">
                 <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="fa icon-eye-off"></i></a>
@@ -158,6 +164,9 @@
          flex: 1 0;
          display: flex;
          flex-wrap: wrap;
+       }
+       .replies {
+         flex-basis: 100%;
        }
      }
 

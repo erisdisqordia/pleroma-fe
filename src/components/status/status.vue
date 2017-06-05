@@ -166,7 +166,7 @@
          flex-wrap: wrap;
        }
        .replies {
-         flex-basis: 80%;
+         flex-basis: 100%;
        }
      }
 

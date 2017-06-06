@@ -242,6 +242,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       const uri = deletion.uri
       updateMaxId(deletion)
 
+      // Remove possible notification
+      const status = find(allStatuses, {uri})
+      remove(state.notifications, ({action: {id}}) => status.id)
+
       remove(allStatuses, { uri })
       if (timeline) {
         remove(timelineObject.statuses, { uri })

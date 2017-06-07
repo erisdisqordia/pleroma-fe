@@ -1,4 +1,4 @@
-import { filter, sortBy } from 'lodash'
+import { find, filter, sortBy } from 'lodash'
 import { statusType } from '../../modules/statuses.js'
 import Status from '../status/status.vue'
 
@@ -10,7 +10,12 @@ const sortAndFilterConversation = (conversation) => {
 const conversation = {
   data () {
     return {
-      highlight: null
+      highlight: null,
+      preview: {
+        x: 0,
+        y: 0,
+        status: null
+      }
     }
   },
   props: [
@@ -76,6 +81,15 @@ const conversation = {
     },
     setHighlight (id) {
       this.highlight = Number(id)
+    },
+    setPreview (id, x, y) {
+      if (id) {
+        this.preview.x = x
+        this.preview.y = y
+        this.preview.status = find(this.conversation, { id: id })
+      } else {
+        this.preview.status = null
+      }
     }
   }
 }

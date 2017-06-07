@@ -8,6 +8,7 @@ const settings = {
       hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
       autoLoadLocal: this.$store.state.config.autoLoad,
+      hoverPreviewLocal: this.$store.state.config.hoverPreview,
       muteWordsString: this.$store.state.config.muteWords.join('\n')
     }
   },
@@ -26,6 +27,9 @@ const settings = {
     },
     autoLoadLocal (value) {
       this.$store.dispatch('setOption', { name: 'autoLoad', value })
+    },
+    hoverPreviewLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hoverPreview', value })
     },
     muteWordsString (value) {
       value = filter(value.split('\n'), (word) => trim(word).length > 0)

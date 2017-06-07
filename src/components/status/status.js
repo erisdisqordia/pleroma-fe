@@ -100,6 +100,15 @@ const Status = {
     },
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
+    },
+    replyEnter (id, event) {
+      if (this.$store.state.config.hoverPreview) {
+        let rect = event.target.getBoundingClientRect()
+        this.$emit('preview', Number(id), rect.left + 20, rect.top + 20 + window.pageYOffset)
+      }
+    },
+    replyLeave () {
+      this.$emit('preview', 0, 0, 0)
     }
   },
   watch: {

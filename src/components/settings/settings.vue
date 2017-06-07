@@ -32,6 +32,10 @@
                 <input type="checkbox" id="autoLoad" v-model="autoLoadLocal">
                 <label for="autoLoad">Enable automatic loading when scrolled to the bottom</label>
             </li>
+            <li>
+                <input type="checkbox" id="hoverPreview" v-model="hoverPreviewLocal">
+                <label for="hoverPreview">Enable reply-link preview on mouse hover</label>
+            </li>
         </ul>
       </div>
     </div>

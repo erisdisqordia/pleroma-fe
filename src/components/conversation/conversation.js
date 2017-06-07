@@ -10,7 +10,12 @@ const sortAndFilterConversation = (conversation) => {
 const conversation = {
   data () {
     return {
-      highlight: null
+      highlight: null,
+      preview: {
+        x: 0,
+        y: 0,
+        status
+      }
     }
   },
   props: [
@@ -76,6 +81,16 @@ const conversation = {
     },
     setHighlight (id) {
       this.highlight = Number(id)
+    },
+    setPreview (id, x, y) {
+      if (id) {
+        this.preview.x = x
+        this.preview.y = y
+        this.preview.status = filter(this.conversation, { id: id })[0]
+        console.log(this.preview.status)
+      } else {
+        this.preview.status = null
+      }
     }
   }
 }

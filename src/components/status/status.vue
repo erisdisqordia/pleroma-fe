@@ -19,7 +19,7 @@
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
         <small class="muteWords">{{muteWordHits.join(', ')}}</small>
-        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="icon-eye-off"></i></a>
+        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="fa icon-eye-off"></i></a>
       </div>
     </template>
     <template v-if="!muted">
@@ -56,7 +56,7 @@
                   </small>
                   <template v-if="isReply && !expandable">
                     <small>
-                      <a href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)" ><i class="icon-reply"></i></a>
+                      <a href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)"><i class="icon-reply" @mouseenter="replyEnter(status.in_reply_to_status_id, $event)" @mouseout="replyLeave()"></i></a>
                     </small>
                   </template>
                   -
@@ -70,7 +70,7 @@
                 <h4 class="replies" v-if="inConversation">
                   <small v-if="replies.length">Replies:</small>
                   <small v-for="reply in replies">
-                    <a href="#" @click.prevent="gotoOriginal(reply.id)">{{reply.name}}&nbsp;</a>
+                    <a href="#" @click.prevent="gotoOriginal(reply.id)" @mouseenter="replyEnter(reply.id, $event)" @mouseout="replyLeave()">{{reply.name}}&nbsp;</a>
                   </small>
                 </h4>
               </div>
@@ -178,10 +178,6 @@
        margin-right: -0.3em;
      }
 
-     .greentext {
-         color: green;
-     }
-
      a {
          display: inline-block;
          word-break: break-all;
@@ -220,6 +216,10 @@
              }
          }
      }
+ }
+
+ .greentext {
+     color: green;
  }
 
  .status-conversation {
@@ -278,7 +278,7 @@
  }
 
  .muted {
-   padding: 0.1em 0.7em 0.1em 0.8em;
+   padding: 0.1em 0.4em 0.1em 0.8em;
    button {
      margin-left: auto;
    }

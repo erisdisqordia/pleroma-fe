@@ -244,6 +244,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
       // Remove possible notification
       const status = find(allStatuses, {uri})
+      if (!status) {
+        return
+      }
+
       remove(state.notifications, ({action: {id}}) => status.id)
 
       remove(allStatuses, { uri })

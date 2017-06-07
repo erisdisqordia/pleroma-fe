@@ -1,4 +1,4 @@
-import { filter, sortBy } from 'lodash'
+import { find, filter, sortBy } from 'lodash'
 import { statusType } from '../../modules/statuses.js'
 import Status from '../status/status.vue'
 
@@ -86,8 +86,7 @@ const conversation = {
       if (id) {
         this.preview.x = x
         this.preview.y = y
-        this.preview.status = filter(this.conversation, { id: id })[0]
-        console.log(this.preview.status)
+        this.preview.status = find(this.conversation, { id: id })
       } else {
         this.preview.status = null
       }

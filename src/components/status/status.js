@@ -104,7 +104,7 @@ const Status = {
     replyEnter (id, event) {
       if (this.$store.state.config.hoverPreview) {
         let rect = event.target.getBoundingClientRect()
-        this.$emit('preview', Number(id), rect.left + 20, rect.top + 20 + window.pageYOffset);
+        this.$emit('preview', Number(id), rect.left + 20, rect.top + 20 + window.pageYOffset)
       }
     },
     replyLeave () {

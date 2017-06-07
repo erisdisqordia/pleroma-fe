@@ -14,7 +14,7 @@ const conversation = {
       preview: {
         x: 0,
         y: 0,
-        status
+        status: null
       }
     }
   },

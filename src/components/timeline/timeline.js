@@ -6,7 +6,8 @@ const Timeline = {
   props: [
     'timeline',
     'timelineName',
-    'title'
+    'title',
+    'userId'
   ],
   computed: {
     timelineError () { return this.$store.state.statuses.error }
@@ -26,7 +27,8 @@ const Timeline = {
       store,
       credentials,
       timeline: this.timelineName,
-      showImmediately
+      showImmediately,
+      userId: this.userId
     })
   },
   methods: {
@@ -42,7 +44,8 @@ const Timeline = {
         credentials,
         timeline: this.timelineName,
         older: true,
-        showImmediately: true
+        showImmediately: true,
+        userId: this.userId
       }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
     },
     scrollLoad (e) {

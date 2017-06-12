@@ -1,4 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
+import {isArray} from 'lodash'
 
 const api = {
   state: {
@@ -18,9 +19,17 @@ const api = {
   },
   actions: {
     startFetching (store, timeline) {
+      let userId = false
+
+      // This is for user timelines
+      if (isArray(timeline)) {
+        userId = timeline[1]
+        timeline = timeline[0]
+      }
+
       // Don't start fetching if we already are.
       if (!store.state.fetchers[timeline]) {
-        const fetcher = store.state.backendInteractor.startFetching({timeline, store})
+        const fetcher = store.state.backendInteractor.startFetching({timeline, store, userId})
         store.commit('addFetcher', {timeline, fetcher})
       }
     },

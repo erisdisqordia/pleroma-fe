@@ -32,6 +32,17 @@ export const defaultState = {
       minVisibleId: 0,
       loading: false
     },
+    user: {
+      statuses: [],
+      statusesObject: {},
+      faves: [],
+      visibleStatuses: [],
+      visibleStatusesObject: {},
+      newStatusCount: 0,
+      maxId: 0,
+      minVisibleId: 0,
+      loading: false
+    },
     publicAndExternal: {
       statuses: [],
       statusesObject: {},

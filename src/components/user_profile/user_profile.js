@@ -1,12 +1,18 @@
 import UserCardContent from '../user_card_content/user_card_content.vue'
-import { find } from 'lodash'
 
 const UserProfile = {
+  created () {
+    this.$store.dispatch('startFetching', ['user', this.userId])
+  },
+  destroyed () {
+    this.$store.dispatch('stopFetching', ['user', this.userId])
+  },
   computed: {
+    userId () {
+      return this.$route.params.id
+    },
     user () {
-      const id = this.$route.params.id
-      const user = find(this.$store.state.users.users, {id})
-      return user
+      return this.$store.state.users.usersObject[this.userId]
     }
   },
   components: {

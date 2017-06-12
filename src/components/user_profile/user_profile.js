@@ -3,6 +3,7 @@ import Timeline from '../timeline/timeline.vue'
 
 const UserProfile = {
   created () {
+    this.$store.commit('clearTimeline', { timeline: 'user' })
     this.$store.dispatch('startFetching', ['user', this.userId])
   },
   destroyed () {

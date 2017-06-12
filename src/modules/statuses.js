@@ -295,6 +295,21 @@ export const mutations = {
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
+  clearTimeline (state, { timeline }) {
+    const emptyTimeline = {
+      statuses: [],
+      statusesObject: {},
+      faves: [],
+      visibleStatuses: [],
+      visibleStatusesObject: {},
+      newStatusCount: 0,
+      maxId: 0,
+      minVisibleId: 0,
+      loading: false
+    }
+
+    state.timelines[timeline] = emptyTimeline
+  },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.favorited = value

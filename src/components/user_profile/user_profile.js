@@ -1,13 +1,15 @@
 import UserCardContent from '../user_card_content/user_card_content.vue'
+import Timeline from '../timeline/timeline.vue'
 
 const UserProfile = {
   created () {
     this.$store.dispatch('startFetching', ['user', this.userId])
   },
   destroyed () {
-    this.$store.dispatch('stopFetching', ['user', this.userId])
+    this.$store.dispatch('stopFetching', 'user')
   },
   computed: {
+    timeline () { return this.$store.state.statuses.timelines.user },
     userId () {
       return this.$route.params.id
     },
@@ -16,7 +18,8 @@ const UserProfile = {
     }
   },
   components: {
-    UserCardContent
+    UserCardContent,
+    Timeline
   }
 }
 

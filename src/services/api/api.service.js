@@ -113,11 +113,11 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   let params = []
 
   if (since) {
-    params.push('since_id', since)
+    params.push(['since_id', since])
   }
 
   if (until) {
-    params.push('max_id', until)
+    params.push(['max_id', until])
   }
 
   if (userId) {

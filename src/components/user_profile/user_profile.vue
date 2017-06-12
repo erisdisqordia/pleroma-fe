@@ -1,6 +1,9 @@
 <template>
-  <div v-if="user" class="user-profile panel panel-default base00-background">
-    <user-card-content :user="user"></user-card-content>
+  <div>
+    <div v-if="user" class="user-profile panel panel-default base00-background">
+      <user-card-content :user="user"></user-card-content>
+    </div>
+    <Timeline :title="'User Timeline'" v-bind:timeline="timeline" v-bind:timeline-name="'user'"/>
   </div>
 </template>
 

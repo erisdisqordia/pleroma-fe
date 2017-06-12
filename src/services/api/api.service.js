@@ -23,6 +23,8 @@ const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 
 const oldfetch = window.fetch
 
+import { map } from 'lodash'
+
 let fetch = (url, options) => {
   const baseUrl = ''
   const fullUrl = baseUrl + url
@@ -124,7 +126,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     params.push(['user_id', userId])
   }
 
-  const queryString = new URLSearchParams(params).toString()
+  const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`
 
   return fetch(url, { headers: authHeaders(credentials) }).then((data) => data.json())

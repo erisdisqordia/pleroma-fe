@@ -15,7 +15,11 @@ const UserProfile = {
       return this.$route.params.id
     },
     user () {
-      return this.$store.state.users.usersObject[this.userId]
+      if (this.timeline.statuses[0]) {
+        return this.timeline.statuses[0].user
+      } else {
+        return false
+      }
     }
   },
   components: {

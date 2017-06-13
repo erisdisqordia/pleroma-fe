@@ -259,7 +259,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
         return
       }
 
-      remove(state.notifications, ({action: {id}}) => status.id)
+      remove(state.notifications, ({action: {id}}) => id === status.id)
 
       remove(allStatuses, { uri })
       if (timeline) {

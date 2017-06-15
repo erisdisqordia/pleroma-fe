@@ -50,10 +50,17 @@ const PostStatusForm = {
     candidates () {
       if (this.textAtCaret.charAt(0) === '@') {
         const matchedUsers = filter(this.users, (user) => (user.name + user.screen_name).match(this.textAtCaret.slice(1)))
+        if (matchedUsers.length <= 0) {
+          return false
+        }
         // eslint-disable-next-line camelcase
-        return map(take(matchedUsers, 5), ({screen_name, name}) => screen_name)
+        return map(take(matchedUsers, 5), ({screen_name, name, profile_image_url_original}) => ({
+          screen_name: screen_name,
+          name: name,
+          img: profile_image_url_original
+        }))
       } else {
-        return ['nothing']
+        return false
       }
     },
     textAtCaret () {

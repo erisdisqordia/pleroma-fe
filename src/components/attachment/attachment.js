@@ -26,7 +26,7 @@ const Attachment = {
     autoHeight () {
       if (this.type === 'image' && this.nsfw) {
         return {
-          'min-height': '311px'
+          'min-height': '109px'
         }
       }
     }

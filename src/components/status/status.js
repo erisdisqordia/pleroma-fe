@@ -4,13 +4,17 @@ import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
+import { filter } from 'lodash'
 
 const Status = {
   props: [
     'statusoid',
     'expandable',
     'inConversation',
-    'focused'
+    'focused',
+    'highlight',
+    'compact',
+    'replies'
   ],
   data: () => ({
     replying: false,
@@ -19,6 +23,9 @@ const Status = {
     userExpanded: false
   }),
   computed: {
+    muteWords () {
+      return this.$store.state.config.muteWords
+    },
     hideAttachments () {
       return (this.$store.state.config.hideAttachments && !this.inConversation) ||
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
@@ -35,12 +42,30 @@ const Status = {
     loggedIn () {
       return !!this.$store.state.users.currentUser
     },
-    muted () { return !this.unmuted && this.status.user.muted },
+    muteWordHits () {
+      const statusText = this.status.text.toLowerCase()
+      const hits = filter(this.muteWords, (muteWord) => {
+        return statusText.includes(muteWord.toLowerCase())
+      })
+
+      return hits
+    },
+    muted () { return !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
     isReply () { return !!this.status.in_reply_to_status_id },
     borderColor () {
       return {
         borderBottomColor: this.$store.state.config.colors['base02']
       }
+    },
+    isFocused () {
+      // retweet or root of an expanded conversation
+      if (this.focused) {
+        return true
+      } else if (!this.inConversation) {
+        return false
+      }
+      // use conversation highlight only when in conversation
+      return this.status.id === this.highlight
     }
   },
   components: {
@@ -63,6 +88,10 @@ const Status = {
     toggleReplying () {
       this.replying = !this.replying
     },
+    gotoOriginal (id) {
+      // only handled by conversation, not status_or_conversation
+      this.$emit('goto', id)
+    },
     toggleExpanded () {
       this.$emit('toggleExpanded')
     },
@@ -71,6 +100,28 @@ const Status = {
     },
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
+    },
+    replyEnter (id, event) {
+      if (this.$store.state.config.hoverPreview) {
+        let rect = event.target.getBoundingClientRect()
+        this.$emit('preview', Number(id), rect.left + 20, rect.top + 20 + window.pageYOffset)
+      }
+    },
+    replyLeave () {
+      this.$emit('preview', 0, 0, 0)
+    }
+  },
+  watch: {
+    'highlight': function (id) {
+      id = Number(id)
+      if (this.status.id === id) {
+        let rect = this.$el.getBoundingClientRect()
+        if (rect.top < 100) {
+          window.scrollBy(0, rect.top - 200)
+        } else if (rect.bottom > window.innerHeight - 50) {
+          window.scrollBy(0, rect.bottom - window.innerHeight + 50)
+        }
+      }
     }
   }
 }

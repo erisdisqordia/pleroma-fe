@@ -6,7 +6,10 @@ const defaultState = {
   colors: {},
   hideAttachments: false,
   hideAttachmentsInConv: false,
-  hideNsfw: true
+  hideNsfw: true,
+  autoLoad: true,
+  hoverPreview: true,
+  muteWords: []
 }
 
 const config = {

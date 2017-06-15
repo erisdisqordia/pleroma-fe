@@ -26,8 +26,8 @@ const backendInteractorService = (credentials) => {
     return apiService.unfollowUser({credentials, id})
   }
 
-  const startFetching = ({timeline, store}) => {
-    return timelineFetcherService.startFetching({timeline, store, credentials})
+  const startFetching = ({timeline, store, userId = false}) => {
+    return timelineFetcherService.startFetching({timeline, store, credentials, userId})
   }
 
   const setUserMute = ({id, muted = true}) => {
@@ -35,6 +35,8 @@ const backendInteractorService = (credentials) => {
   }
 
   const fetchMutes = () => apiService.fetchMutes({credentials})
+
+  const externalProfile = (profileUrl) => apiService.externalProfile(profileUrl)
 
   const backendInteractorServiceInstance = {
     fetchStatus,
@@ -46,7 +48,8 @@ const backendInteractorService = (credentials) => {
     verifyCredentials: apiService.verifyCredentials,
     startFetching,
     setUserMute,
-    fetchMutes
+    fetchMutes,
+    externalProfile
   }
 
   return backendInteractorServiceInstance

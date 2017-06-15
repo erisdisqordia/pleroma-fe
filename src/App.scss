@@ -52,6 +52,8 @@ button{
 
 .item {
     flex: 1;
+    line-height: 21px;
+    height: 21px;
 }
 
 .gaps > .item {
@@ -134,11 +136,6 @@ main-router {
     background-color: rgba(0,0,0,0.1);
 }
 
-.media-body {
-    flex: 1;
-    padding-left: 0.5em;
-}
-
 .container > * {
     min-width: 0px;
 }
@@ -147,60 +144,6 @@ main-router {
     color: grey;
 }
 
-.status-actions {
-    width: 50%;
-    display: flex;
-
-    div, favorite-button {
-        flex: 1;
-    }
-}
-
-status-text-container {
-    display: block;
-}
-
-.status-el {
-    line-height: 18px;
-
-    .notify {
-        .avatar {
-            border-width: 3px;
-            border-style: solid;
-        }
-    }
-
-    .media-left {
-        img {
-            margin-top: 0.2em;
-            float: right;
-            margin-right: 0.3em;
-            border-radius: 5px;
-        }
-    }
-
-    .retweet-info {
-        padding: 0.7em 0 0 0.6em;
-
-        .media-left {
-            display: flex;
-
-            i {
-                align-self: center;
-                text-align: right;
-                flex: 1;
-                padding-right: 0.3em;
-            }
-        }
-    }
-
-    .media-heading {
-        small {
-            font-weight: lighter;
-        }
-        margin-bottom: 0.3em;
-    }
-}
 nav {
     z-index: 1000;
 }
@@ -213,13 +156,20 @@ nav {
 }
 
 .main {
-    flex: 1;
-    flex-basis: 65%;
+    flex-basis: 60%;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 .sidebar {
-    flex: 1;
-    flex-basis: 35%;
+  flex: 0;
+  flex-basis: 35%;
+}
+
+.sidebar-flexer {
+  flex: 1;
+  flex-basis: 345px;
+  width: 365px;
 }
 
 .mobile-shown {
@@ -236,6 +186,30 @@ nav {
         margin: 0.5em;
         padding: 0.5em;
     }
+}
+
+@media all and (min-width: 960px) {
+  .sidebar {
+    overflow: hidden;
+    max-height: 100vh;
+    width: 350px;
+    position: fixed;
+    margin-top: -10px;
+
+    .sidebar-container {
+      height: 96vh;
+      width: 362px;
+      padding-top: 10px;
+      padding-right: 20px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+  }
+  .sidebar-flexer {
+    max-height: 96vh;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
 }
 
 @media all and (max-width: 959px) {

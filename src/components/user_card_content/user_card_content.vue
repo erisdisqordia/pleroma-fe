@@ -61,10 +61,13 @@
     props: [ 'user' ],
     computed: {
       headingStyle () {
-        let rgb = this.$store.state.config.colors['base00'].match(/\d+/g)
-        return {
-          backgroundColor: `rgb(${Math.floor(rgb[0] * 0.53)}, ${Math.floor(rgb[1] * 0.56)}, ${Math.floor(rgb[2] * 0.59)})`,
-          backgroundImage: `url(${this.user.cover_photo})`
+        let color = this.$store.state.config.colors['base00']
+        if (color) {
+          let rgb = this.$store.state.config.colors['base00'].match(/\d+/g)
+          return {
+            backgroundColor: `rgb(${Math.floor(rgb[0] * 0.53)}, ${Math.floor(rgb[1] * 0.56)}, ${Math.floor(rgb[2] * 0.59)})`,
+            backgroundImage: `url(${this.user.cover_photo})`
+          }
         }
       },
       bodyStyle () {
@@ -79,9 +82,8 @@
         return this.$store.state.users.currentUser
       },
       dailyAvg () {
-        return Math.round(
-          this.user.statuses_count / ((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
-        )
+        const days = Math.ceil((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
+        return Math.round(this.user.statuses_count / days)
       }
     },
     methods: {
@@ -117,7 +119,6 @@
 }
 
 .profile-panel-body {
-  padding-top: 0em;
   top: -0em;
   padding-top: 4em;
 }

@@ -9,6 +9,11 @@
         <style-switcher></style-switcher>
       </div>
       <div class="setting-item">
+        <h2>Filtering</h2>
+        <p>All notices containing these words will be muted, one per line</p>
+        <textarea id="muteWords" v-model="muteWordsString"></textarea>
+      </div>
+      <div class="setting-item">
         <h2>Attachments</h2>
         <ul class="setting-list">
             <li>
@@ -23,6 +28,14 @@
                 <input type="checkbox" id="hideNsfw" v-model="hideNsfwLocal">
                 <label for="hideNsfw">Enable clickthrough NSFW attachment hiding</label>
             </li>
+            <li>
+                <input type="checkbox" id="autoLoad" v-model="autoLoadLocal">
+                <label for="autoLoad">Enable automatic loading when scrolled to the bottom</label>
+            </li>
+            <li>
+                <input type="checkbox" id="hoverPreview" v-model="hoverPreviewLocal">
+                <label for="hoverPreview">Enable reply-link preview on mouse hover</label>
+            </li>
         </ul>
       </div>
     </div>
@@ -32,9 +45,13 @@
 <script src="./settings.js">
 </script>
 
-<style>
+<style lang="scss">
  .setting-item {
    margin: 1em 1em 1.4em;
+   textarea {
+     width: 100%;
+     height: 100px;
+   }
  }
  .setting-list {
    list-style-type: none;

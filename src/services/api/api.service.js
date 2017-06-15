@@ -17,9 +17,13 @@ const FRIENDS_URL = '/api/statuses/friends.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
+const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
+const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 // const USER_URL = '/api/users/show.json'
 
 const oldfetch = window.fetch
+
+import { map } from 'lodash'
 
 let fetch = (url, options) => {
   const baseUrl = ''
@@ -33,6 +37,13 @@ const authHeaders = (user) => {
   } else {
     return { }
   }
+}
+
+const externalProfile = (profileUrl) => {
+  let url = `${EXTERNAL_PROFILE_URL}?profileurl=${profileUrl}`
+  return fetch(url, {
+    method: 'GET'
+  }).then((data) => data.json())
 }
 
 const followUser = ({id, credentials}) => {
@@ -90,23 +101,33 @@ const setUserMute = ({id, credentials, muted = true}) => {
   })
 }
 
-const fetchTimeline = ({timeline, credentials, since = false, until = false}) => {
+const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false}) => {
   const timelineUrls = {
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
     mentions: MENTIONS_URL,
-    'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL
+    'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
+    user: QVITTER_USER_TIMELINE_URL
   }
 
   let url = timelineUrls[timeline]
 
+  let params = []
+
   if (since) {
-    url += `?since_id=${since}`
+    params.push(['since_id', since])
   }
 
   if (until) {
-    url += `?max_id=${until}`
+    params.push(['max_id', until])
   }
+
+  if (userId) {
+    params.push(['user_id', userId])
+  }
+
+  const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
+  url += `?${queryString}`
 
   return fetch(url, { headers: authHeaders(credentials) }).then((data) => data.json())
 }
@@ -198,7 +219,8 @@ const apiService = {
   uploadMedia,
   fetchAllFollowing,
   setUserMute,
-  fetchMutes
+  fetchMutes,
+  externalProfile
 }
 
 export default apiService

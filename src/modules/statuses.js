@@ -32,6 +32,17 @@ export const defaultState = {
       minVisibleId: 0,
       loading: false
     },
+    user: {
+      statuses: [],
+      statusesObject: {},
+      faves: [],
+      visibleStatuses: [],
+      visibleStatusesObject: {},
+      newStatusCount: 0,
+      maxId: 0,
+      minVisibleId: 0,
+      loading: false
+    },
     publicAndExternal: {
       statuses: [],
       statusesObject: {},
@@ -242,6 +253,14 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       const uri = deletion.uri
       updateMaxId(deletion)
 
+      // Remove possible notification
+      const status = find(allStatuses, {uri})
+      if (!status) {
+        return
+      }
+
+      remove(state.notifications, ({action: {id}}) => id === status.id)
+
       remove(allStatuses, { uri })
       if (timeline) {
         remove(timelineObject.statuses, { uri })
@@ -275,6 +294,21 @@ export const mutations = {
     oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
+  },
+  clearTimeline (state, { timeline }) {
+    const emptyTimeline = {
+      statuses: [],
+      statusesObject: {},
+      faves: [],
+      visibleStatuses: [],
+      visibleStatusesObject: {},
+      newStatusCount: 0,
+      maxId: 0,
+      minVisibleId: 0,
+      loading: false
+    }
+
+    state.timelines[timeline] = emptyTimeline
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]

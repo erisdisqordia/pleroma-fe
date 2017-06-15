@@ -33,10 +33,10 @@
   .attachments {
       display: flex;
       flex-wrap: wrap;
-      margin-right: -0.8em;
+      margin-right: -0.7em;
       .attachment {
           flex: 1 0 30%;
-          margin: 0.5em 0.8em 0.6em 0.0em;
+          margin: 0.5em 0.7em 0.6em 0.0em;
           align-self: flex-start;
 
           &.html {
@@ -116,8 +116,10 @@
                   border-style: solid;
                   border-width: 1px;
                   border-radius: 5px;
+                  object-fit: contain;
                   width: 100%;
                   height: 100%; /* If this isn't here, chrome will stretch the images */
+                  max-height: 500px;
               }
           }
       }

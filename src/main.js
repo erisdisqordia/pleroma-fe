@@ -24,7 +24,7 @@ Vue.use(VueRouter)
 Vue.use(VueTimeago, {
   locale: 'en-US',
   locales: {
-    'en-US': require('vue-timeago/locales/en-US.json')
+    'en-US': require('../static/timeago.json')
   }
 })
 
@@ -33,6 +33,9 @@ const persistedStateOptions = {
     'config.hideAttachments',
     'config.hideAttachmentsInConv',
     'config.hideNsfw',
+    'config.autoLoad',
+    'config.hoverPreview',
+    'config.muteWords',
     'statuses.notifications',
     'users.users'
   ]

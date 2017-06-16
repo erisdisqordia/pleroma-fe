@@ -1,8 +1,8 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
-
-import { reject, map, uniqBy } from 'lodash'
+import Completion from '../../services/completion/completion.js'
+import { take, filter, reject, map, uniqBy } from 'lodash'
 
 const buildMentionsString = ({user, attentions}, currentUser) => {
   let allAttentions = [...attentions]
@@ -42,15 +42,48 @@ const PostStatusForm = {
       newStatus: {
         status: statusText,
         files: []
-      }
+      },
+      caret: 0
     }
   },
   computed: {
+    candidates () {
+      if (this.textAtCaret.charAt(0) === '@') {
+        const matchedUsers = filter(this.users, (user) => (user.name + user.screen_name).match(this.textAtCaret.slice(1)))
+        if (matchedUsers.length <= 0) {
+          return false
+        }
+        // eslint-disable-next-line camelcase
+        return map(take(matchedUsers, 5), ({screen_name, name, profile_image_url_original}) => ({
+          screen_name: screen_name,
+          name: name,
+          img: profile_image_url_original
+        }))
+      } else {
+        return false
+      }
+    },
+    textAtCaret () {
+      return (this.wordAtCaret || {}).word || ''
+    },
+    wordAtCaret () {
+      const word = Completion.wordAtPosition(this.newStatus.status, this.caret - 1) || {}
+      return word
+    },
     users () {
       return this.$store.state.users.users
     }
   },
   methods: {
+    replace (replacement) {
+      this.newStatus.status = Completion.replaceWord(this.newStatus.status, this.wordAtCaret, replacement)
+      const el = this.$el.querySelector('textarea')
+      el.focus()
+      this.caret = 0
+    },
+    setCaret ({target: {selectionStart}}) {
+      this.caret = selectionStart
+    },
     postStatus (newStatus) {
       statusPoster.postStatus({
         status: newStatus.status,

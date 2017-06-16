@@ -2,7 +2,18 @@
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group base03-border" >
-        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="1" class="form-control" @keydown.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize"></textarea>
+        <textarea @click="setCaret" @keyup="setCaret" v-model="newStatus.status" placeholder="Just landed in L.A." rows="1" class="form-control" @keydown.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize"></textarea>
+      </div>
+      <div style="position:relative;" v-if="candidates">
+        <div class="autocomplete-panel base05-background">
+          <div v-for="candidate in candidates" @click="replace('@' + candidate.screen_name + ' ')" class="autocomplete base01">
+            <img :src="candidate.img"></img>
+            <span>
+              @{{candidate.screen_name}}
+              <small class="base02">{{candidate.name}}</small>
+            </span>
+          </div>
+        </div>
       </div>
       <div class='form-bottom'>
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
@@ -107,6 +118,34 @@
 
      .icon-cancel {
          cursor: pointer;
+     }
+
+     .autocomplete-panel {
+       margin: 0 0.5em 0 0.5em;
+       border-radius: 5px;
+       position: absolute;
+       z-index: 1;
+       box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+       min-width: 75%;
+     }
+
+     .autocomplete {
+       cursor: pointer;
+       padding: 0.2em 0.4em 0.2em 0.4em;
+       border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+       display: flex;
+       img {
+         width: 24px;
+         height: 24px;
+         border-radius: 2px;
+       }
+       span {
+         line-height: 24px;
+         margin: 0 0.1em 0 0.2em;
+       }
+       small {
+         font-style: italic;
+       }
      }
  }
 

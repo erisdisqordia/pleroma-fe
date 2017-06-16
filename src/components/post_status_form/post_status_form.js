@@ -77,6 +77,9 @@ const PostStatusForm = {
   methods: {
     replace (replacement) {
       this.newStatus.status = Completion.replaceWord(this.newStatus.status, this.wordAtCaret, replacement)
+      const el = this.$el.querySelector('textarea')
+      el.focus()
+      this.caret = 0
     },
     setCaret ({target: {selectionStart}}) {
       this.caret = selectionStart

@@ -122,7 +122,6 @@
 
      .autocomplete-panel {
        margin: 0 0.5em 0 0.5em;
-       padding: 0.25em 0.45em 0 0.45em;
        border-radius: 5px;
        position: absolute;
        z-index: 1;
@@ -132,17 +131,16 @@
 
      .autocomplete {
        cursor: pointer;
-       padding: 0.2em 0 0.2em 0;
-       margin: 0.1em 0 0.1em 0;
+       padding: 0.2em 0.4em 0.2em 0.4em;
        border-bottom: 1px solid rgba(0, 0, 0, 0.4);
        display: flex;
        img {
-         width: 22px;
-         height: 22px;
+         width: 24px;
+         height: 24px;
          border-radius: 2px;
        }
        span {
-         line-height: 20px;
+         line-height: 24px;
          margin: 0 0.1em 0 0.2em;
        }
        small {

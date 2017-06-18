@@ -1,4 +1,4 @@
-import { remove, slice, sortBy, toInteger, each, find, flatten, maxBy, last, merge, max, isArray } from 'lodash'
+import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, last, merge, max, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -68,11 +68,15 @@ export const defaultState = {
   }
 }
 
+const isNsfw = (status) => {
+  const nsfwRegex = /#nsfw/i
+  return includes(status.tags, 'nsfw') || !!status.text.match(nsfwRegex)
+}
+
 export const prepareStatus = (status) => {
   // Parse nsfw tags
   if (status.nsfw === undefined) {
-    const nsfwRegex = /#nsfw/i
-    status.nsfw = !!status.text.match(nsfwRegex)
+    status.nsfw = isNsfw(status)
   }
 
   // Set deleted flag

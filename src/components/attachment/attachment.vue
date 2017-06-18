@@ -11,7 +11,7 @@
       <img class="base03-border" referrerpolicy="no-referrer" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
-    <video v-if="type === 'video' && !hidden" :src="attachment.url" controls></video>
+    <video v-if="type === 'video' && !hidden" :src="attachment.url" controls loop></video>
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 

@@ -8,10 +8,9 @@ const settings = {
       hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
       muteWordsString: this.$store.state.config.muteWords.join('\n'),
-      previewfile: null,
       autoLoadLocal: this.$store.state.config.autoLoad,
       hoverPreviewLocal: this.$store.state.config.hoverPreview,
-      muteWordsString: this.$store.state.config.muteWords.join('\n')
+      previewfile: null
     }
   },
   components: {
@@ -30,20 +29,29 @@ const settings = {
       reader.onload = ({target}) => {
         const img = target.result
         this.previewfile = img
-        /*this.$store.state.api.backendInteractor.updateAvatar({params: {img}}).then((user) => {
-          if (!user.error) {
-            this.$store.commit('addNewUsers', [user])
-            this.$store.commit('setCurrentUser', user)
-          }
-        })*/
       }
       reader.readAsDataURL(file)
     },
     submitAvatar () {
-      if (!this.previewfile)
-        return
+      if (!this.previewfile) { return }
+
       const img = this.previewfile
-      this.$store.state.api.backendInteractor.updateAvatar({params: {img}}).then((user) => {
+      // eslint-disable-next-line no-undef
+      let imginfo = new Image()
+      let cropX, cropY, cropW, cropH
+      imginfo.src = this.previewfile
+      if (imginfo.height > imginfo.width) {
+        cropX = 0
+        cropW = imginfo.width
+        cropY = Math.floor((imginfo.height - imginfo.width) / 2)
+        cropH = imginfo.width
+      } else {
+        cropY = 0
+        cropH = imginfo.height
+        cropX = Math.floor((imginfo.width - imginfo.height) / 2)
+        cropW = imginfo.height
+      }
+      this.$store.state.api.backendInteractor.updateAvatar({params: {img, cropX, cropY, cropW, cropH}}).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)

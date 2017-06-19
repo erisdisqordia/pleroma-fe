@@ -8,7 +8,10 @@ const settings = {
       hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
       muteWordsString: this.$store.state.config.muteWords.join('\n'),
-      previewfile: null
+      previewfile: null,
+      autoLoadLocal: this.$store.state.config.autoLoad,
+      hoverPreviewLocal: this.$store.state.config.hoverPreview,
+      muteWordsString: this.$store.state.config.muteWords.join('\n')
     }
   },
   components: {
@@ -57,6 +60,12 @@ const settings = {
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
+    },
+    autoLoadLocal (value) {
+      this.$store.dispatch('setOption', { name: 'autoLoad', value })
+    },
+    hoverPreviewLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hoverPreview', value })
     },
     muteWordsString (value) {
       value = filter(value.split('\n'), (word) => trim(word).length > 0)

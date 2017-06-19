@@ -125,18 +125,19 @@ describe('The Statuses module', () => {
   it('removes statuses by tag on deletion', () => {
     const state = cloneDeep(defaultState)
     const status = makeMockStatus({id: 1})
+    const otherStatus = makeMockStatus({id: 3})
     status.uri = 'xxx'
     const deletion = makeMockStatus({id: 2, is_post_verb: false})
     deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
     deletion.uri = 'xxx'
 
-    mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
+    mutations.addNewStatuses(state, { statuses: [status, otherStatus], showImmediately: true, timeline: 'public' })
     mutations.addNewStatuses(state, { statuses: [deletion], showImmediately: true, timeline: 'public' })
 
-    expect(state.allStatuses).to.eql([])
-    expect(state.timelines.public.statuses).to.eql([])
-    expect(state.timelines.public.visibleStatuses).to.eql([])
-    expect(state.timelines.public.maxId).to.eql(2)
+    expect(state.allStatuses).to.eql([otherStatus])
+    expect(state.timelines.public.statuses).to.eql([otherStatus])
+    expect(state.timelines.public.visibleStatuses).to.eql([otherStatus])
+    expect(state.timelines.public.maxId).to.eql(3)
   })
 
   it('does not update the maxId when the noIdUpdate flag is set', () => {
@@ -317,6 +318,36 @@ describe('The Statuses module', () => {
       expect(state.notifications[0].status).to.eql(mentionedStatus)
       expect(state.notifications[0].action).to.eql(mentionedStatus)
       expect(state.notifications[0].type).to.eql('mention')
+    })
+
+    it('removes a notification when the notice gets removed', () => {
+      const user = { id: 1 }
+      const state = cloneDeep(defaultState)
+      const status = makeMockStatus({id: 1})
+      const otherStatus = makeMockStatus({id: 3})
+      const mentionedStatus = makeMockStatus({id: 2})
+      mentionedStatus.attentions = [user]
+      mentionedStatus.uri = 'xxx'
+      otherStatus.attentions = [user]
+
+      const deletion = makeMockStatus({id: 4, is_post_verb: false})
+      deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
+      deletion.uri = 'xxx'
+
+      mutations.addNewStatuses(state, { statuses: [status, otherStatus], user })
+
+      expect(state.notifications.length).to.eql(1)
+
+      mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })
+      expect(state.allStatuses.length).to.eql(3)
+      expect(state.notifications.length).to.eql(2)
+      expect(state.notifications[1].status).to.eql(mentionedStatus)
+      expect(state.notifications[1].action).to.eql(mentionedStatus)
+      expect(state.notifications[1].type).to.eql('mention')
+
+      mutations.addNewStatuses(state, { statuses: [deletion], user })
+      expect(state.allStatuses.length).to.eql(2)
+      expect(state.notifications.length).to.eql(1)
     })
 
     it('adds the message to mentions when you are mentioned', () => {

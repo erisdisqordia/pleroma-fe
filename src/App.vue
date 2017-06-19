@@ -6,6 +6,7 @@
           <router-link :to="{ name: 'root'}">{{sitename}}</router-link>
         </div>
         <div class='item right'>
+          <user-finder></user-finder>
           <router-link :to="{ name: 'settings'}"><i class="icon-cog"></i></router-link>
         </div>
       </div>

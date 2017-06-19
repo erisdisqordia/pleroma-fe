@@ -6,7 +6,8 @@ const Timeline = {
   props: [
     'timeline',
     'timelineName',
-    'title'
+    'title',
+    'userId'
   ],
   computed: {
     timelineError () { return this.$store.state.statuses.error }
@@ -20,11 +21,14 @@ const Timeline = {
     const credentials = store.state.users.currentUser.credentials
     const showImmediately = this.timeline.visibleStatuses.length === 0
 
+    window.onscroll = this.scrollLoad
+
     timelineFetcher.fetchAndUpdate({
       store,
       credentials,
       timeline: this.timelineName,
-      showImmediately
+      showImmediately,
+      userId: this.userId
     })
   },
   methods: {
@@ -40,8 +44,15 @@ const Timeline = {
         credentials,
         timeline: this.timelineName,
         older: true,
-        showImmediately: true
+        showImmediately: true,
+        userId: this.userId
       }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
+    },
+    scrollLoad (e) {
+      let height = Math.max(document.body.offsetHeight, document.body.scrollHeight)
+      if (this.timeline.loading === false && this.$store.state.config.autoLoad && (window.innerHeight + window.pageYOffset) >= (height - 750)) {
+        this.fetchOlderStatuses()
+      }
     }
   }
 }

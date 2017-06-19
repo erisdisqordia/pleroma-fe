@@ -1,8 +1,23 @@
 <template>
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
-      <div class="form-group" >
-        <textarea v-model="newStatus.status" placeholder="Just landed in L.A." rows="3" class="form-control" @keyup.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag"></textarea>
+      <div class="form-group base03-border" >
+        <textarea @click="setCaret" @keyup="setCaret" v-model="newStatus.status" placeholder="Just landed in L.A." rows="1" class="form-control" @keydown.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize"></textarea>
+      </div>
+      <div style="position:relative;" v-if="candidates">
+        <div class="autocomplete-panel base05-background">
+          <div v-for="candidate in candidates" @click="replace('@' + candidate.screen_name + ' ')" class="autocomplete base01">
+            <img :src="candidate.img"></img>
+            <span>
+              @{{candidate.screen_name}}
+              <small class="base02">{{candidate.name}}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class='form-bottom'>
+        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
+        <button :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
       </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
@@ -12,10 +27,6 @@
           <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
           <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
         </div>
-      </div>
-      <div class='form-bottom'>
-        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
-        <button :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
       </div>
     </form>
   </div>
@@ -44,14 +55,20 @@
      .form-bottom {
          display: flex;
          padding: 0.5em;
+         height: 32px;
 
          button {
-             flex: 2;
+             width: 10em;
          }
      }
 
      .attachments {
-         padding: 0.5em;
+         padding: 0 0.5em;
+
+         .attachment {
+           position: relative;
+           margin: 0.5em 0.8em 0.2em 0;
+         }
 
          i {
             position: absolute;
@@ -91,11 +108,56 @@
      form textarea {
          border: solid;
          border-width: 1px;
-         border-color: silver;
+         border-color: inherit;
          border-radius: 5px;
          line-height:16px;
          padding: 5px;
-         resize: vertical;
+         resize: none;
+         overflow: hidden;
+     }
+
+     form textarea:focus {
+       min-height: 48px;
+     }
+
+     .btn {
+         cursor: pointer;
+     }
+
+     .btn[disabled] {
+         cursor: not-allowed;
+     }
+
+     .icon-cancel {
+         cursor: pointer;
+     }
+
+     .autocomplete-panel {
+       margin: 0 0.5em 0 0.5em;
+       border-radius: 5px;
+       position: absolute;
+       z-index: 1;
+       box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+       min-width: 75%;
+     }
+
+     .autocomplete {
+       cursor: pointer;
+       padding: 0.2em 0.4em 0.2em 0.4em;
+       border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+       display: flex;
+       img {
+         width: 24px;
+         height: 24px;
+         border-radius: 2px;
+       }
+       span {
+         line-height: 24px;
+         margin: 0 0.1em 0 0.2em;
+       }
+       small {
+         font-style: italic;
+       }
      }
  }
 

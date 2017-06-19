@@ -1,10 +1,8 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
-import Tribute from '../../../node_modules/tributejs/src/Tribute.js'
-require('../../../node_modules/tributejs/scss/tribute.scss')
-
-import { merge, reject, map, uniqBy } from 'lodash'
+import Completion from '../../services/completion/completion.js'
+import { take, filter, reject, map, uniqBy } from 'lodash'
 
 const buildMentionsString = ({user, attentions}, currentUser) => {
   let allAttentions = [...attentions]
@@ -20,51 +18,6 @@ const buildMentionsString = ({user, attentions}, currentUser) => {
 
   return mentions.join(' ') + ' '
 }
-
-const defaultCollection = {
-  // symbol that starts the lookup
-  trigger: '@',
-
-  // element to target for @mentions
-  iframe: null,
-
-  // class added in the flyout menu for active item
-  selectClass: 'highlight',
-
-  // function called on select that returns the content to insert
-  selectTemplate: function (item) {
-    return '@' + item.original.screen_name
-  },
-
-  // template for displaying item in menu
-  menuItemTemplate: function (item) {
-    return `<img src="${item.original.profile_image_url}"></img> <div class='name'>${item.string}</div>`
-  },
-
-  // template for when no match is found (optional),
-  // If no template is provided, menu is hidden.
-  noMatchTemplate: null,
-
-  // specify an alternative parent container for the menu
-  menuContainer: document.body,
-
-  // column to search against in the object (accepts function or string)
-  lookup: ({name, screen_name}) => `${name} (@${screen_name})`, // eslint-disable-line camelcase
-
-  // column that contains the content to insert by default
-  fillAttr: 'screen_name',
-
-  // REQUIRED: array of objects to match
-  values: [],
-
-  // specify whether a space is required before the trigger character
-  requireLeadingSpace: true,
-
-  // specify whether a space is allowed in the middle of mentions
-  allowSpaces: false
-}
-
-const tribute = new Tribute({ collection: [] })
 
 const PostStatusForm = {
   props: [
@@ -89,30 +42,48 @@ const PostStatusForm = {
       newStatus: {
         status: statusText,
         files: []
-      }
+      },
+      caret: 0
     }
   },
   computed: {
+    candidates () {
+      if (this.textAtCaret.charAt(0) === '@') {
+        const matchedUsers = filter(this.users, (user) => (user.name + user.screen_name).match(this.textAtCaret.slice(1)))
+        if (matchedUsers.length <= 0) {
+          return false
+        }
+        // eslint-disable-next-line camelcase
+        return map(take(matchedUsers, 5), ({screen_name, name, profile_image_url_original}) => ({
+          screen_name: screen_name,
+          name: name,
+          img: profile_image_url_original
+        }))
+      } else {
+        return false
+      }
+    },
+    textAtCaret () {
+      return (this.wordAtCaret || {}).word || ''
+    },
+    wordAtCaret () {
+      const word = Completion.wordAtPosition(this.newStatus.status, this.caret - 1) || {}
+      return word
+    },
     users () {
       return this.$store.state.users.users
-    },
-    completions () {
-      let users = this.users
-      users = merge({values: users}, defaultCollection)
-      return [users]
     }
-  },
-  watch: {
-    completions () {
-      tribute.collection = this.completions
-    }
-  },
-  mounted () {
-    const textarea = this.$el.querySelector('textarea')
-    tribute.collection = this.completions
-    tribute.attach(textarea)
   },
   methods: {
+    replace (replacement) {
+      this.newStatus.status = Completion.replaceWord(this.newStatus.status, this.wordAtCaret, replacement)
+      const el = this.$el.querySelector('textarea')
+      el.focus()
+      this.caret = 0
+    },
+    setCaret ({target: {selectionStart}}) {
+      this.caret = selectionStart
+    },
     postStatus (newStatus) {
       statusPoster.postStatus({
         status: newStatus.status,
@@ -125,6 +96,8 @@ const PostStatusForm = {
         files: []
       }
       this.$emit('posted')
+      let el = this.$el.querySelector('textarea')
+      el.style.height = '16px'
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
@@ -151,6 +124,13 @@ const PostStatusForm = {
     },
     fileDrag (e) {
       e.dataTransfer.dropEffect = 'copy'
+    },
+    resize (e) {
+      e.target.style.height = 'auto'
+      e.target.style.height = `${e.target.scrollHeight - 10}px`
+      if (e.target.value === '') {
+        e.target.style.height = '16px'
+      }
     }
   }
 }

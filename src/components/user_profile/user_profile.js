@@ -1,16 +1,30 @@
 import UserCardContent from '../user_card_content/user_card_content.vue'
-import { find } from 'lodash'
+import Timeline from '../timeline/timeline.vue'
 
 const UserProfile = {
+  created () {
+    this.$store.commit('clearTimeline', { timeline: 'user' })
+    this.$store.dispatch('startFetching', ['user', this.userId])
+  },
+  destroyed () {
+    this.$store.dispatch('stopFetching', 'user')
+  },
   computed: {
+    timeline () { return this.$store.state.statuses.timelines.user },
+    userId () {
+      return this.$route.params.id
+    },
     user () {
-      const id = this.$route.params.id
-      const user = find(this.$store.state.users.users, {id})
-      return user
+      if (this.timeline.statuses[0]) {
+        return this.timeline.statuses[0].user
+      } else {
+        return false
+      }
     }
   },
   components: {
-    UserCardContent
+    UserCardContent,
+    Timeline
   }
 }
 

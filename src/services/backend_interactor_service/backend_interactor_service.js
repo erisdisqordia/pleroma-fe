@@ -26,8 +26,8 @@ const backendInteractorService = (credentials) => {
     return apiService.unfollowUser({credentials, id})
   }
 
-  const startFetching = ({timeline, store}) => {
-    return timelineFetcherService.startFetching({timeline, store, credentials})
+  const startFetching = ({timeline, store, userId = false}) => {
+    return timelineFetcherService.startFetching({timeline, store, credentials, userId})
   }
 
   const setUserMute = ({id, muted = true}) => {
@@ -38,6 +38,7 @@ const backendInteractorService = (credentials) => {
 
   const register = (params) => apiService.register(params)
   const updateAvatar = ({params}) => apiService.updateAvatar({credentials, params})
+  const externalProfile = (profileUrl) => apiService.externalProfile(profileUrl)
 
   const backendInteractorServiceInstance = {
     fetchStatus,
@@ -51,7 +52,8 @@ const backendInteractorService = (credentials) => {
     setUserMute,
     fetchMutes,
     register,
-    updateAvatar
+    updateAvatar,
+    externalProfile
   }
 
   return backendInteractorServiceInstance

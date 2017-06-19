@@ -86,9 +86,15 @@ new Vue({
 
 window.fetch('/static/config.json')
   .then((res) => res.json())
-  .then(({name, theme, background, logo}) => {
+  .then(({name, theme, background, logo, tos}) => {
     store.dispatch('setOption', { name: 'name', value: name })
     store.dispatch('setOption', { name: 'theme', value: theme })
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
+  })
+
+window.fetch('/static/terms-of-service.html')
+  .then((res) => res.text())
+  .then((html) => {
+    store.dispatch('setOption', { name: 'tos', value: html })
   })

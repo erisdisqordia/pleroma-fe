@@ -4,6 +4,9 @@ const registration = {
     error: false,
     registering: false
   }),
+  computed: {
+    termsofservice () { return this.$store.state.config.tos }
+  },
   methods: {
     submit () {
       this.registering = true

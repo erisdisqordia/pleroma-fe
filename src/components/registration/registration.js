@@ -4,6 +4,11 @@ const registration = {
     error: false,
     registering: false
   }),
+  created () {
+    if (!this.$store.state.config.registrationOpen || !!this.$store.state.users.currentUser) {
+      this.$router.push('/main/all')
+    }
+  },
   computed: {
     termsofservice () { return this.$store.state.config.tos }
   },

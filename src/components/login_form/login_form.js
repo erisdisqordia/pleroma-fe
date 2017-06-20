@@ -4,7 +4,8 @@ const LoginForm = {
     authError: false
   }),
   computed: {
-    loggingIn () { return this.$store.state.users.loggingIn }
+    loggingIn () { return this.$store.state.users.loggingIn },
+    registrationOpen () { return this.$store.state.config.registrationOpen }
   },
   methods: {
     submit () {

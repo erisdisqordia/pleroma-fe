@@ -16,7 +16,7 @@
         </div>
         <div class='form-group'>
           <div class='login-bottom'>
-            <div><router-link :to="{name: 'registration'}" class='register'>Register</router-link></div>
+            <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>Register</router-link></div>
             <button :disabled="loggingIn" type='submit' class='btn btn-default base05 base01-background'>Log in</button>
           </div>
         </div>

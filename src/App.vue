@@ -13,8 +13,8 @@
     </nav>
     <div class="container" id="content">
       <div class="panel-switcher">
-        <button @click="activatePanel('sidebar')">Sidebar</button>
-        <button @click="activatePanel('timeline')">Timeline</button>
+        <button @click="activatePanel('sidebar')" class="base01-background base04">Sidebar</button>
+        <button @click="activatePanel('timeline')" class="base01-background base04">Timeline</button>
       </div>
       <div class="sidebar-flexer" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar'}">
         <div class="sidebar" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar' }">

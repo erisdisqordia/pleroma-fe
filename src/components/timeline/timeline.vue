@@ -55,7 +55,7 @@
       font-size: 14px;
       min-width: 6em;
       border-radius: 5px;
-      font-family: arial;
+      font-family: sans;
       text-align: center;
       padding: 0 0.5em 0 0.5em;
       opacity: 0.8;

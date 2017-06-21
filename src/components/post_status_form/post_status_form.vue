@@ -80,6 +80,18 @@
          }
      }
 
+
+     .btn {
+         cursor: pointer;
+     }
+
+     .btn[disabled] {
+         cursor: not-allowed;
+     }
+
+     .icon-cancel {
+         cursor: pointer;
+     }
      form {
          display: flex;
          flex-direction: column;

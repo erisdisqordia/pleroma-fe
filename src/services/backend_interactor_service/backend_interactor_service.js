@@ -36,6 +36,8 @@ const backendInteractorService = (credentials) => {
 
   const fetchMutes = () => apiService.fetchMutes({credentials})
 
+  const register = (params) => apiService.register(params)
+  const updateAvatar = ({params}) => apiService.updateAvatar({credentials, params})
   const externalProfile = (profileUrl) => apiService.externalProfile(profileUrl)
 
   const backendInteractorServiceInstance = {
@@ -49,6 +51,8 @@ const backendInteractorService = (credentials) => {
     startFetching,
     setUserMute,
     fetchMutes,
+    register,
+    updateAvatar,
     externalProfile
   }
 

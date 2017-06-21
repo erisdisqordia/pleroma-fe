@@ -2,5 +2,6 @@
   "name": "Pleroma FE",
   "theme": "base16-pleroma-dark.css",
   "background": "/static/bg.jpg",
-  "logo": "/static/logo.png"
+  "logo": "/static/logo.png",
+  "registrationOpen": false
 }

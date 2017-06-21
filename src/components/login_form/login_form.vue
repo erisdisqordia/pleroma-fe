@@ -15,7 +15,10 @@
           <input :disabled="loggingIn" v-model='user.password' class='form-control' id='password' type='password'>
         </div>
         <div class='form-group'>
-          <button :disabled="loggingIn" type='submit' class='btn btn-default base05 base01-background'>Submit</button>
+          <div class='login-bottom'>
+            <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>Register</router-link></div>
+            <button :disabled="loggingIn" type='submit' class='btn btn-default base05 base01-background'>Log in</button>
+          </div>
         </div>
         <div v-if="authError" class='form-group'>
           <div class='error base05'>{{authError}}</div>
@@ -39,8 +42,8 @@
   }
 
   .btn {
-    margin-top: 1.0em;
     min-height: 28px;
+    width: 10em;
   }
 
   .error {
@@ -49,6 +52,18 @@
     background-color: rgba(255, 48, 16, 0.65);
     min-height: 28px;
     line-height: 28px;
+  }
+
+  .register {
+    flex: 1 1;
+  }
+
+  .login-bottom {
+    margin-top: 1.0em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 

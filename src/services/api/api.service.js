@@ -17,18 +17,69 @@ const FRIENDS_URL = '/api/statuses/friends.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
+const REGISTRATION_URL = '/api/account/register.json'
+const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 // const USER_URL = '/api/users/show.json'
 
-const oldfetch = window.fetch
+import { each, map } from 'lodash'
 
-import { map } from 'lodash'
+const oldfetch = window.fetch
 
 let fetch = (url, options) => {
   const baseUrl = ''
   const fullUrl = baseUrl + url
   return oldfetch(fullUrl, options)
+}
+
+// Params
+// cropH
+// cropW
+// cropX
+// cropY
+// img (base 64 encodend data url)
+const updateAvatar = ({credentials, params}) => {
+  let url = AVATAR_UPDATE_URL
+
+  const form = new FormData()
+
+  each(params, (value, key) => {
+    if (value) {
+      form.append(key, value)
+    }
+  })
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST',
+    body: form
+  }).then((data) => data.json())
+}
+
+// Params needed:
+// nickname
+// email
+// fullname
+// password
+// password_confirm
+//
+// Optional
+// bio
+// homepage
+// location
+const register = (params) => {
+  const form = new FormData()
+
+  each(params, (value, key) => {
+    if (value) {
+      form.append(key, value)
+    }
+  })
+
+  return fetch(REGISTRATION_URL, {
+    method: 'POST',
+    body: form
+  })
 }
 
 const authHeaders = (user) => {
@@ -220,6 +271,8 @@ const apiService = {
   fetchAllFollowing,
   setUserMute,
   fetchMutes,
+  register,
+  updateAvatar,
   externalProfile
 }
 

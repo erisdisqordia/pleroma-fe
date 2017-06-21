@@ -9,6 +9,7 @@ import ConversationPage from './components/conversation-page/conversation-page.v
 import Mentions from './components/mentions/mentions.vue'
 import UserProfile from './components/user_profile/user_profile.vue'
 import Settings from './components/settings/settings.vue'
+import Registration from './components/registration/registration.vue'
 
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
@@ -60,7 +61,8 @@ const routes = [
   { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
   { name: 'user-profile', path: '/users/:id', component: UserProfile },
   { name: 'mentions', path: '/:username/mentions', component: Mentions },
-  { name: 'settings', path: '/settings', component: Settings }
+  { name: 'settings', path: '/settings', component: Settings },
+  { name: 'registration', path: '/registration', component: Registration }
 ]
 
 const router = new VueRouter({
@@ -84,9 +86,16 @@ new Vue({
 
 window.fetch('/static/config.json')
   .then((res) => res.json())
-  .then(({name, theme, background, logo}) => {
+  .then(({name, theme, background, logo, registrationOpen}) => {
     store.dispatch('setOption', { name: 'name', value: name })
     store.dispatch('setOption', { name: 'theme', value: theme })
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
+    store.dispatch('setOption', { name: 'registrationOpen', value: registrationOpen })
+  })
+
+window.fetch('/static/terms-of-service.html')
+  .then((res) => res.text())
+  .then((html) => {
+    store.dispatch('setOption', { name: 'tos', value: html })
   })

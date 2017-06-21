@@ -4,15 +4,15 @@
       <div class="title">
         {{title}}
       </div>
-      <button @click.prevent="showNewStatuses" class="base06 base02-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
+      <button @click.prevent="showNewStatuses" class="base05 base01-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
         Show new ({{timeline.newStatusCount}})
       </button>
-      <button @click.prevent class="base06 error no-press loadmore-button" v-if="timelineError">
+      <div @click.prevent class="base06 error  loadmore-text" v-if="timelineError">
           Error fetching updates
-      </button>
-      <button @click.prevent class="base04 base01-background no-press loadmore-button" v-if="!timeline.newStatusCount > 0 && !timelineError">
+      </div>
+      <div @click.prevent class="base04 base01-background loadmore-text" v-if="!timeline.newStatusCount > 0 && !timelineError">
         Up-to-date
-      </button>
+      </div>
     </div>
     <div class="panel-body">
       <div class="timeline">
@@ -43,17 +43,25 @@
     .loadmore-button {
       position: absolute;
       right: 0.6em;
+      font-size: 14px;
 
       min-width: 6em;
       height: 1.8em;
       line-height: 100%;
     }
+    .loadmore-text {
+      position: absolute;
+      right: 0.6em;
+      font-size: 14px;
+      min-width: 6em;
+      border-radius: 5px;
+      font-family: arial;
+      text-align: center;
+      padding: 0 0.5em 0 0.5em;
+      opacity: 0.8;
+    }
     .error {
       background-color: rgba(255, 48, 16, 0.65);
-    }
-    .no-press {
-      opacity: 0.8;
-      cursor: default;
     }
   }
 

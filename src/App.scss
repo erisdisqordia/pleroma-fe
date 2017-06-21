@@ -33,9 +33,13 @@ button{
     border: none;
     border-radius: 5px;
     cursor: pointer;
-
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 2px black;
+    font-size: 14px;
+    
     &:hover {
-        opacity: 0.8;
+        box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.3);
     }
 }
 

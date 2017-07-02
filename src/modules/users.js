@@ -24,10 +24,12 @@ export const mutations = {
     set(user, 'muted', muted)
   },
   setCurrentUser (state, user) {
+    state.lastLoginName = user.screen_name
     state.currentUser = merge(state.currentUser || {}, user)
   },
   clearCurrentUser (state) {
     state.currentUser = false
+    state.lastLoginName = false
   },
   beginLogin (state) {
     state.loggingIn = true
@@ -44,6 +46,7 @@ export const mutations = {
 }
 
 export const defaultState = {
+  lastLoginName: false,
   currentUser: false,
   loggingIn: false,
   users: [],

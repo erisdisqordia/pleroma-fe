@@ -1,10 +1,25 @@
-import { find, filter, sortBy } from 'lodash'
+import { find, filter, sortBy, throttle } from 'lodash'
 import { statusType } from '../../modules/statuses.js'
 import Status from '../status/status.vue'
 
 const sortAndFilterConversation = (conversation) => {
   conversation = filter(conversation, (status) => statusType(status) !== 'retweet')
   return sortBy(conversation, 'id')
+}
+
+const getReplies = function (id) {
+  let res = []
+  id = Number(id)
+  let i
+  for (i = 0; i < this.conversation.length; i++) {
+    if (Number(this.conversation[i].in_reply_to_status_id) === id) {
+      res.push({
+        name: `#${i}`,
+        id: this.conversation[i].id
+      })
+    }
+  }
+  return res
 }
 
 const conversation = {
@@ -58,20 +73,7 @@ const conversation = {
           .then(() => this.fetchConversation())
       }
     },
-    getReplies (id) {
-      let res = []
-      id = Number(id)
-      let i
-      for (i = 0; i < this.conversation.length; i++) {
-        if (Number(this.conversation[i].in_reply_to_status_id) === id) {
-          res.push({
-            name: `#${i}`,
-            id: this.conversation[i].id
-          })
-        }
-      }
-      return res
-    },
+    getReplies: throttle(getReplies, 1000),
     focused (id) {
       if (this.statusoid.retweeted_status) {
         return (id === this.statusoid.retweeted_status.id)

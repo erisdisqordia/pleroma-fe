@@ -35,15 +35,17 @@ const conversation = {
       return sortAndFilterConversation(conversation)
     },
     replies () {
+      let i = 1
       return reduce(this.conversation, (result, {id, in_reply_to_status_id}) => {
         const irid = Number(in_reply_to_status_id)
         if (irid) {
           result[irid] = result[irid] || []
           result[irid].push({
-            name: `#${id}`,
+            name: `#${i}`,
             id: id
           })
         }
+        i++
         return result
       }, {})
     }

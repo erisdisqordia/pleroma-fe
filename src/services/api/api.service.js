@@ -24,6 +24,7 @@ const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 // const USER_URL = '/api/users/show.json'
 
 import { each, map } from 'lodash'
+import 'whatwg-fetch'
 
 const oldfetch = window.fetch
 

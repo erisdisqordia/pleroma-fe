@@ -27,7 +27,8 @@
     "vue-router": "^2.5.3",
     "vue-template-compiler": "^2.3.4",
     "vue-timeago": "^3.1.2",
-    "vuex": "^2.3.1"
+    "vuex": "^2.3.1",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

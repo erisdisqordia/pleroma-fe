@@ -10,6 +10,7 @@ import Mentions from './components/mentions/mentions.vue'
 import UserProfile from './components/user_profile/user_profile.vue'
 import Settings from './components/settings/settings.vue'
 import Registration from './components/registration/registration.vue'
+import UserSettings from './components/user_settings/user_settings.vue'
 
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
@@ -62,7 +63,8 @@ const routes = [
   { name: 'user-profile', path: '/users/:id', component: UserProfile },
   { name: 'mentions', path: '/:username/mentions', component: Mentions },
   { name: 'settings', path: '/settings', component: Settings },
-  { name: 'registration', path: '/registration', component: Registration }
+  { name: 'registration', path: '/registration', component: Registration },
+  { name: 'user-settings', path: '/user-settings', component: UserSettings }
 ]
 
 const router = new VueRouter({

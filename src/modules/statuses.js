@@ -105,6 +105,10 @@ export const statusType = (status) => {
     return 'deletion'
   }
 
+  if (status.text.match(/started following/)) {
+    return 'follow'
+  }
+
   return 'unknown'
 }
 
@@ -252,6 +256,9 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
         updateMaxId(favorite)
         favoriteStatus(favorite)
       }
+    },
+    'follow': (status) => {
+      addNotification({ type: 'follow', status: status, action: status })
     },
     'deletion': (deletion) => {
       const uri = deletion.uri

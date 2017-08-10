@@ -5,8 +5,10 @@
         <div class='container'>
           <img :src="user.profile_image_url">
           <span class="glyphicon glyphicon-user"></span>
-          <div class='user-name'>{{user.name}}</div>
-          <div class='user-screen-name'>@{{user.screen_name}}</div>
+          <div class="name-and-screen-name">
+            <div class='user-name'>{{user.name}}</div>
+            <div class='user-screen-name'>@{{user.screen_name}}</div>
+          </div>
         </div>
         <div v-if="isOtherUser" class="user-interactions">
           <div v-if="user.follows_you && loggedIn" class="following base06">
@@ -137,33 +139,37 @@
     align-content: flex-start;
     justify-content: center;
     max-height: 60px;
+    overflow: hidden;
   }
 
   img {
-      border: 2px solid;
-      border-radius: 5px;
-      flex: 1 0 100%;
-      max-width: 48px;
-      max-height: 48px;
+    border: 2px solid;
+    border-radius: 5px;
+    flex: 1 0 100%;
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
   }
 
 	text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
 
-	.user-name{
-		margin-top: 0.0em;
+  .name-and-screen-name {
+    display: block;
+    margin-top: 0.0em;
     margin-left: 0.6em;
-    flex: 0 0 auto;
-    align-self: flex-start;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+	.user-name{
 	}
 
   .user-screen-name {
-      margin-top: 0.0em;
-      margin-left: 0.6em;
       font-weight: lighter;
       font-size: 15px;
       padding-right: 0.1em;
       flex: 0 0 auto;
-      align-self: flex-start;
   }
 
   .user-interactions {

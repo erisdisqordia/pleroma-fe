@@ -78,10 +78,6 @@
     border-radius: 5px;
   }
 
-  .bg {
-    max-width: 400px;
-    border-radius: 5px;
-  }
   .uploading {
     font-size: 1.5em;
     margin: 0.25em;

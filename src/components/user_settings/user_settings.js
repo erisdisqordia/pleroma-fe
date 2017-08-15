@@ -1,5 +1,4 @@
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
-import { filter, trim } from 'lodash'
 
 const UserSettings = {
   data () {
@@ -27,7 +26,7 @@ const UserSettings = {
       const name = this.newname
       const description = this.newbio
       this.$store.state.api.backendInteractor.updateProfile({params: {name, description}}).then((user) => {
-        if(!user.error) {
+        if (!user.error) {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
         }
@@ -95,8 +94,10 @@ const UserSettings = {
     submitBanner () {
       if (!this.previewbanner) { return }
 
-      let banner  = this.previewbanner
+      let banner = this.previewbanner
+      // eslint-disable-next-line no-undef
       let imginfo = new Image()
+      /* eslint-disable camelcase */
       let offset_top, offset_left, width, height
       imginfo.src = banner
       width = imginfo.width
@@ -114,10 +115,12 @@ const UserSettings = {
         }
         this.uploadingbanner = false
       })
+      /* eslint-enable camelcase */
     },
     submitBg () {
       if (!this.previewbg) { return }
       let img = this.previewbg
+      // eslint-disable-next-line no-undef
       let imginfo = new Image()
       let cropX, cropY, cropW, cropH
       imginfo.src = img

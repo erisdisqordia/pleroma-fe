@@ -8,6 +8,7 @@
         <div class='item right'>
           <user-finder></user-finder>
           <router-link :to="{ name: 'settings'}"><i class="icon-cog"></i></router-link>
+          <a href="#" v-if="currentUser" @click.prevent="logout"><i class="icon-logout" title="Logout" ></i></a>
         </div>
       </div>
     </nav>

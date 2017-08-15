@@ -26,6 +26,9 @@ export const mutations = {
   setCurrentUser (state, user) {
     state.currentUser = merge(state.currentUser || {}, user)
   },
+  clearCurrentUser (state) {
+    state.currentUser = false
+  },
   beginLogin (state) {
     state.loggingIn = true
   },
@@ -65,6 +68,11 @@ const users = {
       each(compact(map(statuses, 'retweeted_status')), (status) => {
         store.commit('setUserForStatus', status)
       })
+    },
+    logout (store) {
+      store.commit('clearCurrentUser')
+      store.dispatch('stopFetching', 'friends')
+      store.commit('setBackendInteractor', backendInteractorService())
     },
     loginUser (store, userCredentials) {
       return new Promise((resolve, reject) => {

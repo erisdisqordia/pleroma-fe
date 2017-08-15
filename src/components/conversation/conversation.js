@@ -1,4 +1,4 @@
-import { find, filter, sortBy } from 'lodash'
+import { reduce, find, filter, sortBy } from 'lodash'
 import { statusType } from '../../modules/statuses.js'
 import Status from '../status/status.vue'
 
@@ -33,6 +33,21 @@ const conversation = {
       const statuses = this.$store.state.statuses.allStatuses
       const conversation = filter(statuses, { statusnet_conversation_id: conversationId })
       return sortAndFilterConversation(conversation)
+    },
+    replies () {
+      let i = 1
+      return reduce(this.conversation, (result, {id, in_reply_to_status_id}) => {
+        const irid = Number(in_reply_to_status_id)
+        if (irid) {
+          result[irid] = result[irid] || []
+          result[irid].push({
+            name: `#${i}`,
+            id: id
+          })
+        }
+        i++
+        return result
+      }, {})
     }
   },
   components: {
@@ -59,18 +74,8 @@ const conversation = {
       }
     },
     getReplies (id) {
-      let res = []
       id = Number(id)
-      let i
-      for (i = 0; i < this.conversation.length; i++) {
-        if (Number(this.conversation[i].in_reply_to_status_id) === id) {
-          res.push({
-            name: `#${i}`,
-            id: this.conversation[i].id
-          })
-        }
-      }
-      return res
+      return this.replies[id] || []
     },
     focused (id) {
       if (this.statusoid.retweeted_status) {

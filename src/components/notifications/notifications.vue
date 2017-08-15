@@ -36,6 +36,15 @@
               </h1>
               <status :compact="true" :statusoid="notification.status"></status>
             </div>
+            <div v-if="notification.type === 'follow'">
+              <h1>
+                <span :title="'@'+notification.action.user.screen_name">{{ notification.action.user.name }}</span>
+                <i class="fa icon-user-plus lit"></i>
+              </h1>
+              <div>
+                <router-link :to="{ name: 'user-profile', params: { id: notification.action.user.id } }">@{{ notification.action.user.screen_name }}</router-link> followed you
+              </div>
+            </div>
           </div>
         </div>
       </div>

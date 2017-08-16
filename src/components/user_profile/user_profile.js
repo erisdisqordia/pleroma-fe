@@ -22,6 +22,12 @@ const UserProfile = {
       }
     }
   },
+  watch: {
+    userId () {
+      this.$store.commit('clearTimeline', { timeline: 'user' })
+      this.$store.dispatch('startFetching', ['user', this.userId])
+    }
+  },
   components: {
     UserCardContent,
     Timeline

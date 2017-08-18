@@ -8,18 +8,6 @@
         <h2>Theme</h2>
         <style-switcher></style-switcher>
       </div>
-      <div class="setting-item" v-if="user">
-        <h2>Avatar</h2>
-        <p>Your current avatar:</p>
-        <img :src="user.profile_image_url_original" class="old-avatar"></img>
-        <p>Set new avatar:</p>
-        <img class="new-avatar" v-bind:src="previewfile" v-if="previewfile">
-        </img>
-        <div>
-          <input name="avatar-upload" id="avatar-upload" type="file" @change="uploadAvatar" ></input>
-        </div>
-        <button class="btn btn-default base05 base01-background" v-if="previewfile" @click="submitAvatar">Submit</button>
-      </div>
       <div class="setting-item">
         <h2>Filtering</h2>
         <p>All notices containing these words will be muted, one per line</p>

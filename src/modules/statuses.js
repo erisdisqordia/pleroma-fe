@@ -97,7 +97,7 @@ export const statusType = (status) => {
     return 'retweet'
   }
 
-  if (typeof status.uri === 'string' && status.uri.match(/(fave|objectType=Favourite)/)) {
+  if ((typeof status.uri === 'string' && status.uri.match(/(fave|objectType=Favourite)/)) || status.text.match(/favorited/)) {
     return 'favorite'
   }
 

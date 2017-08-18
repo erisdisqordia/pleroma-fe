@@ -5,12 +5,8 @@ const UserSettings = {
     return {
       newname: this.$store.state.users.currentUser.name,
       newbio: this.$store.state.users.currentUser.description,
-      previewavatar: null,
-      previewbanner: null,
-      previewbg: null,
-      uploadingavatar: false,
-      uploadingbanner: false,
-      uploadingbg: false
+      uploading: [ false, false, false ],
+      previews: [ null, null, null ]
     }
   },
   components: {
@@ -32,40 +28,22 @@ const UserSettings = {
         }
       })
     },
-    uploadAvatar ({target}) {
-      const file = target.files[0]
+    uploadFile (slot, e) {
+      const file = e.target.files[0]
+      if (!file) { return }
       // eslint-disable-next-line no-undef
       const reader = new FileReader()
       reader.onload = ({target}) => {
         const img = target.result
-        this.previewavatar = img
-      }
-      reader.readAsDataURL(file)
-    },
-    uploadBanner ({target}) {
-      const file = target.files[0]
-      // eslint-disable-next-line no-undef
-      const reader = new FileReader()
-      reader.onload = ({target}) => {
-        const img = target.result
-        this.previewbanner = img
-      }
-      reader.readAsDataURL(file)
-    },
-    uploadBg ({target}) {
-      const file = target.files[0]
-      // eslint-disable-next-line no-undef
-      const reader = new FileReader()
-      reader.onload = ({target}) => {
-        const img = target.result
-        this.previewbg = img
+        this.previews[slot] = img
+        this.$forceUpdate() // just changing the array with the index doesn't update the view
       }
       reader.readAsDataURL(file)
     },
     submitAvatar () {
-      if (!this.previewavatar) { return }
+      if (!this.previews[0]) { return }
 
-      let img = this.previewavatar
+      let img = this.previews[0]
       // eslint-disable-next-line no-undef
       let imginfo = new Image()
       let cropX, cropY, cropW, cropH
@@ -81,20 +59,20 @@ const UserSettings = {
         cropX = Math.floor((imginfo.width - imginfo.height) / 2)
         cropW = imginfo.height
       }
-      this.uploadingavatar = true
+      this.uploading[0] = true
       this.$store.state.api.backendInteractor.updateAvatar({params: {img, cropX, cropY, cropW, cropH}}).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
-          this.previewavatar = null
+          this.previews[0] = null
         }
-        this.uploadingavatar = false
+        this.uploading[0] = false
       })
     },
     submitBanner () {
-      if (!this.previewbanner) { return }
+      if (!this.previews[1]) { return }
 
-      let banner = this.previewbanner
+      let banner = this.previews[1]
       // eslint-disable-next-line no-undef
       let imginfo = new Image()
       /* eslint-disable camelcase */
@@ -104,22 +82,22 @@ const UserSettings = {
       height = imginfo.height
       offset_top = 0
       offset_left = 0
-      this.uploadingbanner = true
+      this.uploading[1] = true
       this.$store.state.api.backendInteractor.updateBanner({params: {banner, offset_top, offset_left, width, height}}).then((data) => {
         if (!data.error) {
           let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
           clone.cover_photo = data.url
           this.$store.commit('addNewUsers', [clone])
           this.$store.commit('setCurrentUser', clone)
-          this.previewbanner = null
+          this.previews[1] = null
         }
-        this.uploadingbanner = false
+        this.uploading[1] = false
       })
       /* eslint-enable camelcase */
     },
     submitBg () {
-      if (!this.previewbg) { return }
-      let img = this.previewbg
+      if (!this.previews[2]) { return }
+      let img = this.previews[2]
       // eslint-disable-next-line no-undef
       let imginfo = new Image()
       let cropX, cropY, cropW, cropH
@@ -128,20 +106,18 @@ const UserSettings = {
       cropY = 0
       cropW = imginfo.width
       cropH = imginfo.width
-      this.uploadingbg = true
+      this.uploading[2] = true
       this.$store.state.api.backendInteractor.updateBg({params: {img, cropX, cropY, cropW, cropH}}).then((data) => {
         if (!data.error) {
           let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
           clone.background_image = data.url
           this.$store.commit('addNewUsers', [clone])
           this.$store.commit('setCurrentUser', clone)
-          this.previewbg = null
+          this.previews[2] = null
         }
-        this.uploadingbg = false
+        this.uploading[2] = false
       })
     }
-  },
-  watch: {
   }
 }
 

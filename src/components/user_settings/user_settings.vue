@@ -17,37 +17,37 @@
         <p>Your current avatar:</p>
         <img :src="user.profile_image_url_original" class="old-avatar"></img>
         <p>Set new avatar:</p>
-        <img class="new-avatar" v-bind:src="previewavatar" v-if="previewavatar">
+        <img class="new-avatar" v-bind:src="previews[0]" v-if="previews[0]">
         </img>
         <div>
-          <input type="file" @change="uploadAvatar" ></input>
+          <input type="file" @change="uploadFile(0, $event)" ></input>
         </div>
-        <i class="fa icon-spin4 animate-spin" v-if="uploadingavatar"></i>
-        <button class="btn btn-default base05 base01-background" v-else-if="previewavatar" @click="submitAvatar">Submit</button>
+        <i class="fa icon-spin4 animate-spin" v-if="uploading[0]"></i>
+        <button class="btn btn-default base05 base01-background" v-else-if="previews[0]" @click="submitAvatar">Submit</button>
       </div>
       <div class="setting-item">
         <h3>Profile Banner</h3>
         <p>Your current profile banner:</p>
         <img :src="user.cover_photo" class="banner"></img>
         <p>Set new profile banner:</p>
-        <img class="banner" v-bind:src="previewbanner" v-if="previewbanner">
+        <img class="banner" v-bind:src="previews[1]" v-if="previews[1]">
         </img>
         <div>
-          <input type="file" @change="uploadBanner" ></input>
+          <input type="file" @change="uploadFile(1, $event)" ></input>
         </div>
-        <i class="fa icon-spin4 animate-spin uploading" v-if="uploadingbanner"></i>
-        <button class="btn btn-default base05 base01-background" v-else-if="previewbanner" @click="submitBanner">Submit</button>
+        <i class="fa icon-spin4 animate-spin uploading" v-if="uploading[1]"></i>
+        <button class="btn btn-default base05 base01-background" v-else-if="previews[1]" @click="submitBanner">Submit</button>
       </div>
       <div class="setting-item">
         <h3>Profile Background</h3>
         <p>Set new profile background:</p>
-        <img class="bg" v-bind:src="previewbg" v-if="previewbg">
+        <img class="bg" v-bind:src="previews[2]" v-if="previews[2]">
         </img>
         <div>
-          <input type="file" @change="uploadBg" ></input>
+          <input type="file" @change="uploadFile(2, $event)" ></input>
         </div>
-        <i class="fa icon-spin4 animate-spin uploading" v-if="uploadingbg"></i>
-        <button class="btn btn-default base05 base01-background" v-else-if="previewbg" @click="submitBg">Submit</button>
+        <i class="fa icon-spin4 animate-spin uploading" v-if="uploading[2]"></i>
+        <button class="btn btn-default base05 base01-background" v-else-if="previews[2]" @click="submitBg">Submit</button>
       </div>
     </div>
   </div>

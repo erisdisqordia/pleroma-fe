@@ -38,6 +38,10 @@ const backendInteractorService = (credentials) => {
 
   const register = (params) => apiService.register(params)
   const updateAvatar = ({params}) => apiService.updateAvatar({credentials, params})
+  const updateBg = ({params}) => apiService.updateBg({credentials, params})
+  const updateBanner = ({params}) => apiService.updateBanner({credentials, params})
+  const updateProfile = ({params}) => apiService.updateProfile({credentials, params})
+
   const externalProfile = (profileUrl) => apiService.externalProfile(profileUrl)
 
   const backendInteractorServiceInstance = {
@@ -53,6 +57,9 @@ const backendInteractorService = (credentials) => {
     fetchMutes,
     register,
     updateAvatar,
+    updateBg,
+    updateBanner,
+    updateProfile,
     externalProfile
   }
 

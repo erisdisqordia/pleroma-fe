@@ -19,6 +19,9 @@ const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
 const REGISTRATION_URL = '/api/account/register.json'
 const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
+const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
+const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
+const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 // const USER_URL = '/api/users/show.json'
@@ -42,6 +45,68 @@ let fetch = (url, options) => {
 // img (base 64 encodend data url)
 const updateAvatar = ({credentials, params}) => {
   let url = AVATAR_UPDATE_URL
+
+  const form = new FormData()
+
+  each(params, (value, key) => {
+    if (value) {
+      form.append(key, value)
+    }
+  })
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST',
+    body: form
+  }).then((data) => data.json())
+}
+
+const updateBg = ({credentials, params}) => {
+  let url = BG_UPDATE_URL
+
+  const form = new FormData()
+
+  each(params, (value, key) => {
+    if (value) {
+      form.append(key, value)
+    }
+  })
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST',
+    body: form
+  }).then((data) => data.json())
+}
+
+// Params
+// height
+// width
+// offset_left
+// offset_top
+// banner (base 64 encodend data url)
+const updateBanner = ({credentials, params}) => {
+  let url = BANNER_UPDATE_URL
+
+  const form = new FormData()
+
+  each(params, (value, key) => {
+    if (value) {
+      form.append(key, value)
+    }
+  })
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST',
+    body: form
+  }).then((data) => data.json())
+}
+
+// Params
+// name
+// url
+// location
+// description
+const updateProfile = ({credentials, params}) => {
+  let url = PROFILE_UPDATE_URL
 
   const form = new FormData()
 
@@ -274,6 +339,9 @@ const apiService = {
   fetchMutes,
   register,
   updateAvatar,
+  updateBg,
+  updateProfile,
+  updateBanner,
   externalProfile
 }
 

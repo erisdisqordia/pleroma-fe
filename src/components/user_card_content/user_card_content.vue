@@ -2,6 +2,9 @@
   <div id="heading" class="profile-panel-background" :style="headingStyle">
     <div class="panel-heading text-center">
       <div class='user-info'>
+        <router-link to='/user-settings' style="float: right;">
+          <i class="icon-cog usersettings"></i>
+        </router-link>
         <div class='container'>
           <img :src="user.profile_image_url">
           <span class="glyphicon glyphicon-user"></span>
@@ -131,6 +134,11 @@
 	color: white;
   padding: 16px 16px 16px 16px;
   margin-bottom: -4em;
+
+  .usersettings {
+    color: white;
+    opacity: 0.8;
+  }
 
   .container{
     display: flex;

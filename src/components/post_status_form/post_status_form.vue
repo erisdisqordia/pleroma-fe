@@ -19,6 +19,9 @@
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
         <button :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
       </div>
+      <div class='error' v-if="error">
+        Error: {{ error }}
+      </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
           <i class="fa icon-cancel" @click="removeMediaFile(file)"></i>
@@ -60,6 +63,13 @@
          button {
              width: 10em;
          }
+     }
+     .error {
+       border-radius: 5px;
+       text-align: center;
+       background-color: rgba(255, 48, 16, 0.65);
+       padding: 0.25em;
+       margin: 0.35em;
      }
 
      .attachments {

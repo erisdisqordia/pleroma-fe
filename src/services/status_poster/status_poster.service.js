@@ -7,12 +7,15 @@ const postStatus = ({ store, status, media = [], inReplyToStatusId = undefined }
   return apiService.postStatus({credentials: store.state.users.currentUser.credentials, status, mediaIds, inReplyToStatusId})
     .then((data) => data.json())
     .then((data) => {
-      store.dispatch('addNewStatuses', {
-        statuses: [data],
-        timeline: 'friends',
-        showImmediately: true,
-        noIdUpdate: true // To prevent missing notices on next pull.
-      })
+      if (!data.error) {
+        store.dispatch('addNewStatuses', {
+          statuses: [data],
+          timeline: 'friends',
+          showImmediately: true,
+          noIdUpdate: true // To prevent missing notices on next pull.
+        })
+      }
+      return data
     })
 }
 

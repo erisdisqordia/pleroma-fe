@@ -39,6 +39,7 @@ const PostStatusForm = {
     return {
       dropFiles: [],
       submitDisabled: false,
+      error: null,
       newStatus: {
         status: statusText,
         files: []
@@ -90,14 +91,20 @@ const PostStatusForm = {
         media: newStatus.files,
         store: this.$store,
         inReplyToStatusId: this.replyTo
+      }).then((data) => {
+        if (!data.error) {
+          this.newStatus = {
+            status: '',
+            files: []
+          }
+          this.$emit('posted')
+          let el = this.$el.querySelector('textarea')
+          el.style.height = '16px'
+          this.error = null
+        } else {
+          this.error = data.error
+        }
       })
-      this.newStatus = {
-        status: '',
-        files: []
-      }
-      this.$emit('posted')
-      let el = this.$el.querySelector('textarea')
-      el.style.height = '16px'
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)

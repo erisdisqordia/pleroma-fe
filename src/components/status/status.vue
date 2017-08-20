@@ -194,12 +194,11 @@
      }
 
      .media-left {
-         img {
-             margin-top: 0.2em;
-             float: right;
-             margin-right: 0.3em;
-             border-radius: 5px;
-         }
+        margin: 0.2em 0.3em 0 0;
+        img {
+          float: right;
+          border-radius: 5px;
+        }
      }
 
      .retweet-info {

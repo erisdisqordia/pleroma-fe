@@ -6,7 +6,7 @@
           <i class="icon-cog usersettings"></i>
         </router-link>
         <div class='container'>
-          <img :src="user.profile_image_url">
+          <img :src="user.profile_image_url_original">
           <span class="glyphicon glyphicon-user"></span>
           <div class="name-and-screen-name">
             <div class='user-name'>{{user.name}}</div>

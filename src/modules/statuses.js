@@ -259,7 +259,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       }
     },
     'follow': (status) => {
-      addNotification({ type: 'follow', status: status, action: status })
+      let re = new RegExp(`started following ${user.name} \\(${user.statusnet_profile_url}\\)`)
+      if (status.text.match(re)) {
+        addNotification({ type: 'follow', status: status, action: status })
+      }
     },
     'deletion': (deletion) => {
       const uri = deletion.uri

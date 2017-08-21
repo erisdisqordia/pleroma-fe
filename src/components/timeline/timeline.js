@@ -1,20 +1,32 @@
 import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import StatusOrConversation from '../status_or_conversation/status_or_conversation.vue'
+import UserCard from '../user_card/user_card.vue'
 
 const Timeline = {
   props: [
     'timeline',
     'timelineName',
     'title',
+    'showingStatuses',
     'userId'
   ],
   computed: {
-    timelineError () { return this.$store.state.statuses.error }
+    timelineError () { return this.$store.state.statuses.error },
+    followers () {
+      return this.timeline.followers
+    },
+    friends () {
+      return this.timeline.friends
+    },
+    viewing () {
+      return this.timeline.viewing
+    }
   },
   components: {
     Status,
-    StatusOrConversation
+    StatusOrConversation,
+    UserCard
   },
   created () {
     const store = this.$store
@@ -30,6 +42,12 @@ const Timeline = {
       showImmediately,
       userId: this.userId
     })
+
+    // don't fetch followers for public, friend, twkn
+    if (this.timelineName === 'user') {
+      this.fetchFriends()
+      this.fetchFollowers()
+    }
   },
   methods: {
     showNewStatuses () {
@@ -47,6 +65,16 @@ const Timeline = {
         showImmediately: true,
         userId: this.userId
       }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
+    },
+    fetchFollowers() {
+      const id = this.userId
+      this.$store.state.api.backendInteractor.fetchFollowers({ id })
+        .then((followers) => this.$store.dispatch('addFollowers', { followers }))
+    },
+    fetchFriends() {
+      const id = this.userId
+      this.$store.state.api.backendInteractor.fetchFriends({ id })
+        .then((friends) => this.$store.dispatch('addFriends', { friends }))
     },
     scrollLoad (e) {
       let height = Math.max(document.body.offsetHeight, document.body.scrollHeight)

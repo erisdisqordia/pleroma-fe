@@ -13,6 +13,7 @@ const STATUS_URL = '/api/statuses/show'
 const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 const CONVERSATION_URL = '/api/statusnet/conversation'
 const MENTIONS_URL = '/api/statuses/mentions.json'
+const FOLLOWERS_URL = '/api/statuses/followers.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
@@ -114,8 +115,15 @@ const unfollowUser = ({id, credentials}) => {
   }).then((data) => data.json())
 }
 
-const fetchFriends = ({credentials}) => {
-  return fetch(FRIENDS_URL, { headers: authHeaders(credentials) })
+const fetchFriends = ({id, credentials}) => {
+  let url = `${FRIENDS_URL}?user_id=${id}`
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
+}
+
+const fetchFollowers = ({id, credentials}) => {
+  let url = `${FOLLOWERS_URL}?user_id=${id}`
+  return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
 }
 
@@ -169,7 +177,6 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   if (since) {
     params.push(['since_id', since])
   }
-
   if (until) {
     params.push(['max_id', until])
   }
@@ -261,6 +268,7 @@ const apiService = {
   fetchConversation,
   fetchStatus,
   fetchFriends,
+  fetchFollowers,
   followUser,
   unfollowUser,
   favorite,

@@ -40,17 +40,20 @@
     </div>
     <div class="panel-body profile-panel-body" :style="bodyStyle">
       <div class="user-counts">
-        <div class="user-count">
-          <h5>Statuses</h5>
-          <span>{{user.statuses_count}} <br><span class="dailyAvg">{{dailyAvg}} per day</span></span>
+        <div class="user-count base04">
+          <a href="#" v-on:click.prevent="setProfileView('statuses')" v-if="switcher"><h5 class="base05">Statuses</h5></a>
+          <h5 v-else>Statuses</h5>
+          <span class="base05">{{user.statuses_count}} <br><span class="dailyAvg">{{dailyAvg}} per day</span></span>
         </div>
         <div class="user-count">
-          <h5>Following</h5>
-          <span>{{user.friends_count}}</span>
+          <a href="#" v-on:click.prevent="setProfileView('friends')" v-if="switcher"><h5 class="base05">Following</h5></a>
+          <h5 v-else>Following</h5>
+          <span class="base05">{{user.friends_count}}</span>
         </div>
         <div class="user-count">
-          <h5>Followers</h5>
-          <span>{{user.followers_count}}</span>
+          <a href="#" v-on:click.prevent="setProfileView('followers')" v-if="switcher"><h5 class="base05">Followers</h5></a>
+          <h5 v-else>Followers</h5>
+          <span class="base05">{{user.followers_count}}</span>
         </div>
       </div>
       <p>{{user.description}}</p>
@@ -60,7 +63,7 @@
 
 <script>
   export default {
-    props: [ 'user' ],
+    props: [ 'user', 'switcher' ],
     computed: {
       headingStyle () {
         let color = this.$store.state.config.colors['base00']
@@ -103,13 +106,18 @@
         const store = this.$store
         store.commit('setMuted', {user: this.user, muted: !this.user.muted})
         store.state.api.backendInteractor.setUserMute(this.user)
+      },
+      setProfileView (v) {
+        const store = this.$store
+        store.commit('setProfileView', { v })
       }
     }
   }
 </script>
 
 <style lang="scss">
-
+@import '../../_variables.scss';
+  
 .profile-panel-background {
   background-size: cover;
   border-radius: 10px;
@@ -229,6 +237,9 @@
     	font-size:1em;
         font-weight: bolder;
         margin: 0 0 0.25em;
+    }
+    a {
+        text-decoration: none;
     }
 }
 

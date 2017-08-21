@@ -17,6 +17,11 @@ const postStatus = ({ store, status, media = [], inReplyToStatusId = undefined }
       }
       return data
     })
+    .catch((err) => {
+      return {
+        error: err.message
+      }
+    })
 }
 
 const uploadMedia = ({ store, formData }) => {

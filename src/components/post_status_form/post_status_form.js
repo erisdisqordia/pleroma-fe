@@ -40,6 +40,7 @@ const PostStatusForm = {
       dropFiles: [],
       submitDisabled: false,
       error: null,
+      posting: false,
       newStatus: {
         status: statusText,
         files: []
@@ -86,6 +87,7 @@ const PostStatusForm = {
       this.caret = selectionStart
     },
     postStatus (newStatus) {
+      this.posting = true
       statusPoster.postStatus({
         status: newStatus.status,
         media: newStatus.files,
@@ -104,6 +106,7 @@ const PostStatusForm = {
         } else {
           this.error = data.error
         }
+        this.posting = false
       })
     },
     addMediaFile (fileInfo) {

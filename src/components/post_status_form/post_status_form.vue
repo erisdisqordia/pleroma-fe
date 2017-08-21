@@ -17,7 +17,8 @@
       </div>
       <div class='form-bottom'>
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
-        <button :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
+        <button v-if="posting" disabled class="btn btn-default base05 base01-background">Posting</button>
+        <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
       </div>
       <div class='error' v-if="error">
         Error: {{ error }}

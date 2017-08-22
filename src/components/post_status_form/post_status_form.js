@@ -87,6 +87,7 @@ const PostStatusForm = {
       this.caret = selectionStart
     },
     postStatus (newStatus) {
+      if (this.posting) { return }
       this.posting = true
       statusPoster.postStatus({
         status: newStatus.status,

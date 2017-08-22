@@ -6,11 +6,15 @@
           <i class="icon-cog usersettings"></i>
         </router-link>
         <div class='container'>
-          <img :src="user.profile_image_url_original">
+          <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
+            <img :src="user.profile_image_url_original">
+          </router-link>
           <span class="glyphicon glyphicon-user"></span>
           <div class="name-and-screen-name">
             <div class='user-name'>{{user.name}}</div>
-            <div class='user-screen-name'>@{{user.screen_name}}</div>
+            <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
+              <div class='user-screen-name'>@{{user.screen_name}}</div>
+            </router-link>
           </div>
         </div>
         <div v-if="isOtherUser" class="user-interactions">

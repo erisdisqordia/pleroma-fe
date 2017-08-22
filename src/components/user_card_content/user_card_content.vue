@@ -2,7 +2,7 @@
   <div id="heading" class="profile-panel-background" :style="headingStyle">
     <div class="panel-heading text-center">
       <div class='user-info'>
-        <router-link to='/user-settings' style="float: right;">
+        <router-link to='/user-settings' style="float: right;" v-if="!isOtherUser">
           <i class="icon-cog usersettings"></i>
         </router-link>
         <div class='container'>
@@ -136,7 +136,7 @@
 
 .user-info {
 	color: white;
-  padding: 16px 16px 16px 16px;
+  padding: 0 16px 16px 16px;
   margin-bottom: -4em;
 
   .usersettings {
@@ -145,21 +145,22 @@
   }
 
   .container{
+    padding: 16px 10px 4px 10px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-content: flex-start;
     justify-content: center;
-    max-height: 60px;
+    max-height: 56px;
     overflow: hidden;
   }
 
   img {
-    border: 2px solid;
     border-radius: 5px;
     flex: 1 0 100%;
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
+    box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
     object-fit: cover;
   }
 
@@ -167,7 +168,6 @@
 
   .name-and-screen-name {
     display: block;
-    margin-top: 0.0em;
     margin-left: 0.6em;
     text-align: left;
     text-overflow: ellipsis;
@@ -175,9 +175,11 @@
   }
 
 	.user-name{
+      color: white;
 	}
 
   .user-screen-name {
+      color: white;
       font-weight: lighter;
       font-size: 15px;
       padding-right: 0.1em;
@@ -215,14 +217,12 @@
     }
 
     button {
-      border: solid;
-      border-width: 1px;
       width: 92%;
       height: 100%;
     }
     .pressed {
-      border: solid;
-      border-width: 1px;
+      border-bottom-color: rgba(255, 255, 255, 0.2);
+      border-top-color: rgba(0, 0, 0, 0.2);
     }
   }
 }

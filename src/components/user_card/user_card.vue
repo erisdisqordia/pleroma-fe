@@ -7,14 +7,14 @@
       <user-card-content :user="user" :switcher="false"></user-card-content>
     </div>
     <div class="name-and-screen-name" v-else>
-      <div class="user-name">{{ user.name }}</div>
-      <a href="user.statusnet_profile_url"><div class="user-screen-name">@{{ user.screen_name }}</div></a>
-    </div>
-    <span class="follows-you" v-if="!userExpanded && showFollows">
-      <div class="follows" v-if="user.follows_you">
-        Follows you!
+      <div class="user-name">
+        {{ user.name }}
+        <span class="follows-you" v-if="!userExpanded && showFollows && user.follows_you">
+            Follows you!
+        </span>
       </div>
-    </span>
+      <a :href="user.statusnet_profile_url" target="blank"><div class="user-screen-name">@{{ user.screen_name }}</div></a>
+    </div>
   </div>
 </template>
 
@@ -23,21 +23,19 @@
 <style lang="scss">
   .name-and-screen-name {
     margin-left: 0.7em;
-    min-width: 16em;
-    display:block;
     margin-top:0.0em;
     margin-right: 2em;
     text-align: left;
+    width: 100%;
   }
 
   .follows-you {
     margin-left: 2em;
-    width:-webkit-fill-available;
-    width: -moz-webkit-fill-available;
+    float: right;
   }
 
   .follows {
-    float: right;
+
   }
 
   .card {
@@ -50,6 +48,14 @@
     border-bottom: 1px solid;
     margin: 0;
     border-bottom-color: inherit;
+
+
+    .avatar {
+      margin-top: 0.2em;
+      width:32px;
+      height: 32px;
+      border-radius: 50%;
+    }
   }
 
   .usercard {

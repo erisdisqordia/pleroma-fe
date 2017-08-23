@@ -89,14 +89,6 @@
     }
   }
 
-  .avatar {
-  padding-top: 0.3em;
-  width:32px;
-  height: 32px;
-  border-radius: 50%;
-  }
-
-
   .new-status-notification {
     position:relative;
     margin-top: -1px;

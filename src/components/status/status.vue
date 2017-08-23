@@ -40,7 +40,7 @@
         </div>
         <div class="media-body">
           <div class="base05 base05=border usercard" v-if="userExpanded">
-            <user-card-content :user="status.user"></user-card-content>
+            <user-card-content :user="status.user" :switcher="false"></user-card-content>
           </div>
           <div class="user-content">
             <div class="media-heading">

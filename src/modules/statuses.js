@@ -19,7 +19,10 @@ export const defaultState = {
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
-      loading: false
+      loading: false,
+      followers: [],
+      friends: [],
+      viewing: 'statuses'
     },
     public: {
       statuses: [],
@@ -30,7 +33,10 @@ export const defaultState = {
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
-      loading: false
+      loading: false,
+      followers: [],
+      friends: [],
+      viewing: 'statuses'
     },
     user: {
       statuses: [],
@@ -41,7 +47,10 @@ export const defaultState = {
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
-      loading: false
+      loading: false,
+      followers: [],
+      friends: [],
+      viewing: 'statuses'
     },
     publicAndExternal: {
       statuses: [],
@@ -52,7 +61,10 @@ export const defaultState = {
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
-      loading: false
+      loading: false,
+      followers: [],
+      friends: [],
+      viewing: 'statuses'
     },
     friends: {
       statuses: [],
@@ -63,7 +75,10 @@ export const defaultState = {
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
-      loading: false
+      loading: false,
+      followers: [],
+      friends: [],
+      viewing: 'statuses'
     }
   }
 }
@@ -320,7 +335,10 @@ export const mutations = {
       newStatusCount: 0,
       maxId: 0,
       minVisibleId: 0,
-      loading: false
+      loading: false,
+      followers: [],
+      friends: [],
+      viewing: 'statuses'
     }
 
     state.timelines[timeline] = emptyTimeline
@@ -347,6 +365,16 @@ export const mutations = {
   setError (state, { value }) {
     state.error = value
   },
+  setProfileView (state, { v }) {
+    // load followers / friends only when needed
+    state.timelines['user'].viewing = v
+  },
+  addFriends (state, { friends }) {
+    state.timelines['user'].friends = friends
+  },
+  addFollowers (state, { followers }) {
+    state.timelines['user'].followers = followers
+  },
   markNotificationsAsSeen (state, notifications) {
     each(notifications, (notification) => {
       notification.seen = true
@@ -362,6 +390,12 @@ const statuses = {
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })
+    },
+    addFriends ({ rootState, commit }, { friends }) {
+      commit('addFriends', { friends })
+    },
+    addFollowers ({ rootState, commit }, { followers }) {
+      commit('addFollowers', { followers })
     },
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })

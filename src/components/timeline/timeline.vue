@@ -1,5 +1,5 @@
 <template>
-  <div class="timeline panel panel-default">
+  <div class="timeline panel panel-default" v-if="viewing == 'statuses'">
     <div class="panel-heading timeline-heading base01-background base04">
       <div class="title">
         {{title}}
@@ -21,6 +21,30 @@
           <div class="base01-background base03-border new-status-notification text-center">Load older statuses.</div>
         </a>
           <div class="base01-background base03-border new-status-notification text-center" v-else>...</div>
+      </div>
+    </div>
+  </div>
+  <div class="timeline panel panel-default" v-else-if="viewing == 'followers'">
+    <div class="panel-heading timeline-heading base01-background base04">
+      <div class="title">
+        Followers
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="timeline">
+        <user-card v-for="follower in followers" :user="follower" :showFollows="false"></user-card>
+      </div>
+    </div>
+  </div>
+  <div class="timeline panel panel-default" v-else-if="viewing == 'friends'">
+    <div class="panel-heading timeline-heading base01-background base04">
+      <div class="title">
+        Following
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="timeline">
+        <user-card v-for="friend in friends" :user="friend" :showFollows="true"></user-card>
       </div>
     </div>
   </div>
@@ -63,6 +87,13 @@
     .error {
       background-color: rgba(255, 48, 16, 0.65);
     }
+  }
+
+  .avatar {
+  padding-top: 0.3em;
+  width:32px;
+  height: 32px;
+  border-radius: 50%;
   }
 
 

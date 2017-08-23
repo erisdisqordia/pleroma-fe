@@ -8,7 +8,6 @@ const Timeline = {
     'timeline',
     'timelineName',
     'title',
-    'showingStatuses',
     'userId'
   ],
   computed: {
@@ -66,12 +65,12 @@ const Timeline = {
         userId: this.userId
       }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
     },
-    fetchFollowers() {
+    fetchFollowers () {
       const id = this.userId
       this.$store.state.api.backendInteractor.fetchFollowers({ id })
         .then((followers) => this.$store.dispatch('addFollowers', { followers }))
     },
-    fetchFriends() {
+    fetchFriends () {
       const id = this.userId
       this.$store.state.api.backendInteractor.fetchFriends({ id })
         .then((friends) => this.$store.dispatch('addFriends', { friends }))

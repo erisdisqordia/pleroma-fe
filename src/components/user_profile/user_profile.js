@@ -20,11 +20,11 @@ const UserProfile = {
       } else {
         return false
       }
-    },
+    }
   },
   components: {
     UserCardContent,
-    Timeline,
+    Timeline
   }
 }
 

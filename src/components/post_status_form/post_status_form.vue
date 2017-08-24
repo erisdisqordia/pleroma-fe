@@ -22,6 +22,7 @@
       </div>
       <div class='error' v-if="error">
         Error: {{ error }}
+        <i class="icon-cancel" @click="clearError"></i>
       </div>
       <div class="attachments">
         <div class="attachment" v-for="file in newStatus.files">
@@ -71,6 +72,7 @@
        background-color: rgba(255, 48, 16, 0.65);
        padding: 0.25em;
        margin: 0.35em;
+       display: flex;
      }
 
      .attachments {

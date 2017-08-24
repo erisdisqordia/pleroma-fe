@@ -94,7 +94,7 @@ const PostStatusForm = {
           this.newStatus.status = '\u200b' // hack
         } else {
           this.error = 'Cannot post an empty status with no files'
-          return;
+          return
         }
       }
 

@@ -121,6 +121,7 @@ export const statusType = (status) => {
     return 'deletion'
   }
 
+  // TODO change to status.activity_type === 'follow' when gs supports it
   if (status.text.match(/started following/)) {
     return 'follow'
   }
@@ -275,7 +276,8 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     },
     'follow': (status) => {
       let re = new RegExp(`started following ${user.name} \\(${user.statusnet_profile_url}\\)`)
-      if (status.text.match(re)) {
+      let repleroma = new RegExp(`started following ${user.screen_name}$`)
+      if (status.text.match(re) || status.text.match(repleroma)) {
         addNotification({ type: 'follow', status: status, action: status })
       }
     },

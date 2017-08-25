@@ -386,5 +386,41 @@ describe('The Statuses module', () => {
 
       expect(state.notifications).to.have.length(1)
     })
+
+    it('adds a notification when the user is followed', () => {
+      const state = cloneDeep(defaultState)
+      const user = {id: 1, screen_name: 'b'}
+      const follower = {id: 2, screen_name: 'a'}
+
+      const follow = {
+        id: 3,
+        is_post_verb: false,
+        activity_type: 'follow',
+        text: 'a started following b',
+        user: follower
+      }
+
+      mutations.addNewStatuses(state, { statuses: [follow], showImmediately: true, timeline: 'public', user })
+
+      expect(state.notifications).to.have.length(1)
+    })
+
+    it('does not add a notification when an other user is followed', () => {
+      const state = cloneDeep(defaultState)
+      const user = {id: 1, screen_name: 'b'}
+      const follower = {id: 2, screen_name: 'a'}
+
+      const follow = {
+        id: 3,
+        is_post_verb: false,
+        activity_type: 'follow',
+        text: 'a started following b@shitposter.club',
+        user: follower
+      }
+
+      mutations.addNewStatuses(state, { statuses: [follow], showImmediately: true, timeline: 'public', user })
+
+      expect(state.notifications).to.have.length(0)
+    })
   })
 })

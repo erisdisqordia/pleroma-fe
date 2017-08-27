@@ -47,7 +47,7 @@
     </div>
     <div class="panel-body profile-panel-body" :style="bodyStyle">
       <div class="user-counts">
-        <div class="user-count base04">
+        <div class="user-count">
           <a href="#" v-on:click.prevent="setProfileView('statuses')" v-if="switcher"><h5 class="base05">Statuses</h5></a>
           <h5 v-else>Statuses</h5>
           <span class="base05">{{user.statuses_count}} <br><span class="dailyAvg">{{dailyAvg}} per day</span></span>

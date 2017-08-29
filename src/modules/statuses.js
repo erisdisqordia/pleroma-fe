@@ -239,6 +239,18 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     // Only add a new notification if we don't have one for the same action
     if (!find(state.notifications, (oldNotification) => oldNotification.action.id === action.id)) {
       state.notifications.push({type, status, action, seen: false})
+
+      if ('Notification' in window && window.Notification.permission === 'granted') {
+        let title = action.user.name
+        let icon = action.user.profile_image_url
+        let body = action.text
+
+        let notification = new window.Notification(title, {body, icon})
+
+        // Chrome is known for not closing notifications automatically
+        // according to MDN, anyway.
+        setTimeout(notification.close.bind(notification), 5000)
+      }
     }
   }
 

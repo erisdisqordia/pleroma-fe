@@ -36,7 +36,7 @@ let fetch = (url, options) => {
   options = options || {}
   const baseUrl = ''
   const fullUrl = baseUrl + url
-  options.credentials = 'include'
+  options.credentials = 'same-origin'
   return oldfetch(fullUrl, options)
 }
 

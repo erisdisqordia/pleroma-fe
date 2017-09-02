@@ -33,6 +33,7 @@ import 'whatwg-fetch'
 const oldfetch = window.fetch
 
 let fetch = (url, options) => {
+  options = options || {}
   const baseUrl = ''
   const fullUrl = baseUrl + url
   options.credentials = 'same-origin'

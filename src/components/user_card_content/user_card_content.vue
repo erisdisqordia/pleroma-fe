@@ -2,7 +2,7 @@
   <div id="heading" class="profile-panel-background" :style="headingStyle">
     <div class="panel-heading text-center">
       <div class='user-info'>
-        <router-link to='/user-settings' style="float: right;" v-if="!isOtherUser">
+        <router-link to='/user-settings' style="float: right; margin-top:16px;" v-if="!isOtherUser">
           <i class="icon-cog usersettings"></i>
         </router-link>
         <div class='container'>
@@ -47,7 +47,7 @@
     </div>
     <div class="panel-body profile-panel-body" :style="bodyStyle">
       <div class="user-counts">
-        <div class="user-count base04">
+        <div class="user-count">
           <a href="#" v-on:click.prevent="setProfileView('statuses')" v-if="switcher"><h5 class="base05">Statuses</h5></a>
           <h5 v-else>Statuses</h5>
           <span class="base05">{{user.statuses_count}} <br><span class="dailyAvg">{{dailyAvg}} per day</span></span>

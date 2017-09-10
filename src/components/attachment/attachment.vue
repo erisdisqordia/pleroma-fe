@@ -55,6 +55,7 @@
               background: rgba(230,230,230,0.6);
               border-radius: 5px;
               font-weight: bold;
+              z-index: 4;
           }
 
           video {
@@ -62,6 +63,7 @@
               border: 1px solid;
               border-radius: 5px;
               width: 100%;
+              z-index: 0;
           }
 
           audio {

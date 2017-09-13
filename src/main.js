@@ -38,8 +38,7 @@ const persistedStateOptions = {
     'config.autoLoad',
     'config.hoverPreview',
     'config.muteWords',
-    'statuses.notifications',
-    'users.users'
+    'users.lastLoginName'
   ]
 }
 

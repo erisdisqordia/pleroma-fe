@@ -51,6 +51,9 @@ export default function createPersistedState ({
             merge({}, store.state, savedState)
           )
         }
+        if (store.state.users.lastLoginName) {
+          store.dispatch('loginUser', {username: store.state.users.lastLoginName, password: 'xxx'})
+        }
         loaded = true
       } catch (e) {
         console.log("Couldn't load state")

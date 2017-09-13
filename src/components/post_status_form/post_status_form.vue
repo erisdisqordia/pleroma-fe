@@ -143,6 +143,7 @@
 
      .icon-cancel {
          cursor: pointer;
+         z-index: 4;
      }
 
      .autocomplete-panel {

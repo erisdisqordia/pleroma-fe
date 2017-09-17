@@ -79,6 +79,20 @@ export const defaultState = {
       followers: [],
       friends: [],
       viewing: 'statuses'
+    },
+    tag: {
+      statuses: [],
+      statusesObject: {},
+      faves: [],
+      visibleStatuses: [],
+      visibleStatusesObject: {},
+      newStatusCount: 0,
+      maxId: 0,
+      minVisibleId: 0,
+      loading: false,
+      followers: [],
+      friends: [],
+      viewing: 'statuses'
     }
   }
 }

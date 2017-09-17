@@ -1,0 +1,5 @@
+<template>
+  <div> timleinei </div>
+</template>
+
+<script src='./tag_timeline.js'></script>

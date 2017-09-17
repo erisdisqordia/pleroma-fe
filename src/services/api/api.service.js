@@ -4,6 +4,7 @@ const FRIENDS_TIMELINE_URL = '/api/statuses/friends_timeline.json'
 const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
 const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
+const TAG_TIMELINE_URL = '/api/statusnet/tags/timeline'
 const FAVORITE_URL = '/api/favorites/create'
 const UNFAVORITE_URL = '/api/favorites/destroy'
 const RETWEET_URL = '/api/statuses/retweet'
@@ -228,13 +229,14 @@ const setUserMute = ({id, credentials, muted = true}) => {
   })
 }
 
-const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false}) => {
+const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false}) => {
   const timelineUrls = {
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
     mentions: MENTIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
-    user: QVITTER_USER_TIMELINE_URL
+    user: QVITTER_USER_TIMELINE_URL,
+    tag: TAG_TIMELINE_URL
   }
 
   let url = timelineUrls[timeline]
@@ -247,9 +249,11 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   if (until) {
     params.push(['max_id', until])
   }
-
   if (userId) {
     params.push(['user_id', userId])
+  }
+  if (tag) {
+    url += `/${tag}.json`
   }
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')

@@ -8,7 +8,8 @@ const Timeline = {
     'timeline',
     'timelineName',
     'title',
-    'userId'
+    'userId',
+    'tag'
   ],
   computed: {
     timelineError () { return this.$store.state.statuses.error },
@@ -39,7 +40,8 @@ const Timeline = {
       credentials,
       timeline: this.timelineName,
       showImmediately,
-      userId: this.userId
+      userId: this.userId,
+      tag: this.tag
     })
 
     // don't fetch followers for public, friend, twkn
@@ -62,7 +64,8 @@ const Timeline = {
         timeline: this.timelineName,
         older: true,
         showImmediately: true,
-        userId: this.userId
+        userId: this.userId,
+        tag: this.tag
       }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
     },
     fetchFollowers () {

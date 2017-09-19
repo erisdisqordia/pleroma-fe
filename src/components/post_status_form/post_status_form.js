@@ -72,7 +72,7 @@ const PostStatusForm = {
           // eslint-disable-next-line camelcase
           screen_name: `:${shortcode}:`,
           name: '',
-          img: image_url
+          img: url
         }))
       } else {
         return false

@@ -50,16 +50,29 @@ const PostStatusForm = {
   },
   computed: {
     candidates () {
-      if (this.textAtCaret.charAt(0) === '@') {
+      const firstchar = this.textAtCaret.charAt(0)
+      if (firstchar === '@') {
         const matchedUsers = filter(this.users, (user) => (String(user.name + user.screen_name)).match(this.textAtCaret.slice(1)))
         if (matchedUsers.length <= 0) {
           return false
         }
         // eslint-disable-next-line camelcase
         return map(take(matchedUsers, 5), ({screen_name, name, profile_image_url_original}) => ({
-          screen_name: screen_name,
+          // eslint-disable-next-line camelcase
+          screen_name: `@${screen_name}`,
           name: name,
           img: profile_image_url_original
+        }))
+      } else if (firstchar === ':') {
+        const matchedEmoji = filter(this.emoji, (emoji) => emoji.shortcode.match(this.textAtCaret.slice(1)))
+        if (matchedEmoji.length <= 0) {
+          return false
+        }
+        return map(take(matchedEmoji, 5), ({shortcode, image_url}) => ({
+          // eslint-disable-next-line camelcase
+          screen_name: `:${shortcode}:`,
+          name: '',
+          img: image_url
         }))
       } else {
         return false
@@ -74,6 +87,9 @@ const PostStatusForm = {
     },
     users () {
       return this.$store.state.users.users
+    },
+    emoji () {
+      return this.$store.state.config.emoji || []
     }
   },
   methods: {

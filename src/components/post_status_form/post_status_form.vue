@@ -6,10 +6,10 @@
       </div>
       <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel base05-background">
-          <div v-for="candidate in candidates" @click="replace('@' + candidate.screen_name + ' ')" class="autocomplete base01">
+          <div v-for="candidate in candidates" @click="replace(candidate.screen_name + ' ')" class="autocomplete base01">
             <img :src="candidate.img"></img>
             <span>
-              @{{candidate.screen_name}}
+              {{candidate.screen_name}}
               <small class="base02">{{candidate.name}}</small>
             </span>
           </div>

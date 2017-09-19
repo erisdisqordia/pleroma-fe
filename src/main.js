@@ -102,3 +102,13 @@ window.fetch('/static/terms-of-service.html')
   .then((html) => {
     store.dispatch('setOption', { name: 'tos', value: html })
   })
+
+window.fetch('/static/emoji.txt')
+  .then((res) => res.text())
+  .then((csv) => {
+    const emoji = csv.split('\n').map((row) => {
+      const values = row.split(', ')
+      return { shortcode: values[0], url: values[1] }
+    })
+    store.dispatch('setOption', { name: 'emoji', value: emoji })
+  })

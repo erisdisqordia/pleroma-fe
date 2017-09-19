@@ -108,7 +108,7 @@ window.fetch('/static/emoji.txt')
   .then((csv) => {
     const emoji = csv.split('\n').map((row) => {
       const values = row.split(', ')
-      return { shortcode: values[0], image-url: values[1] }
+      return { shortcode: values[0], image_url: values[1] }
     })
     store.dispatch('setOption', { name: 'emoji', value: emoji })
   })

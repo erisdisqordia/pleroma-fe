@@ -37,7 +37,7 @@ export const addPositionToWords = (words) => {
 export const splitIntoWords = (str) => {
   // Split at word boundaries
   const regex = /\b/
-  const triggers = /[@#]+$/
+  const triggers = /[@#:]+$/
 
   let split = str.split(regex)
 

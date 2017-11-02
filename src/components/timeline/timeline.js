@@ -33,7 +33,7 @@ const Timeline = {
     const credentials = store.state.users.currentUser.credentials
     const showImmediately = this.timeline.visibleStatuses.length === 0
 
-    window.onscroll = this.scrollLoad
+    window.addEventListener('scroll', this.scrollLoad)
 
     timelineFetcher.fetchAndUpdate({
       store,
@@ -49,6 +49,9 @@ const Timeline = {
       this.fetchFriends()
       this.fetchFollowers()
     }
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.scrollLoad)
   },
   methods: {
     showNewStatuses () {
@@ -80,7 +83,10 @@ const Timeline = {
     },
     scrollLoad (e) {
       let height = Math.max(document.body.offsetHeight, document.body.scrollHeight)
-      if (this.timeline.loading === false && this.$store.state.config.autoLoad && (window.innerHeight + window.pageYOffset) >= (height - 750)) {
+      if (this.timeline.loading === false &&
+          this.$store.state.config.autoLoad &&
+          this.$el.offsetHeight > 0 &&
+          (window.innerHeight + window.pageYOffset) >= (height - 750)) {
         this.fetchOlderStatuses()
       }
     }

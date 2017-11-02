@@ -1,12 +1,12 @@
 # pleroma_fe
 
-> A Qvitter-style frontend for certain GS servers.
+> A single column frontend for both Pleroma and GS servers.
 
 ![screenshot](https://my.mixtape.moe/kjzioz.PNG)
 
 # FOR ADMINS
 
-You don't need to build Pleroma yourself. Check out https://gitgud.io/lambadalambda/pleroma-fe/wikis/dual-boot-with-qvitter to see how to run Pleroma and Qvitter at the same time.
+You don't need to build Pleroma yourself. Check out https://git.pleroma.social/pleroma/pleroma-fe/wikis/dual-boot-with-qvitter to see how to run Pleroma and Qvitter at the same time.
 
 ## Build Setup
 

@@ -7,6 +7,10 @@
     min-height: 100vh;
 }
 
+i {
+  user-select: none;
+}
+
 h4 {
     margin: 0;
 }
@@ -30,6 +34,7 @@ a {
 }
 
 button{
+    user-select: none;
     border: none;
     border-radius: 5px;
     cursor: pointer;

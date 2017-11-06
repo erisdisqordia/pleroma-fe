@@ -160,9 +160,10 @@ const authHeaders = (user) => {
   }
 }
 
-const externalProfile = (profileUrl) => {
+const externalProfile = ({profileUrl, credentials}) => {
   let url = `${EXTERNAL_PROFILE_URL}?profileurl=${profileUrl}`
   return fetch(url, {
+    headers: authHeaders(credentials),
     method: 'GET'
   }).then((data) => data.json())
 }

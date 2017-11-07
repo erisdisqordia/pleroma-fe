@@ -120,10 +120,69 @@ const en = {
   }
 }
 
+const jp = {
+  nav: {
+    timeline: 'タイムライン',
+    mentions: '通知',
+    public_tl: '公開タイムライン',
+    twkn: '接続しているすべてのネットワーク'
+  },
+  user_card: {
+    follows_you: 'フォローされました！',
+    following: 'フォロー中！',
+    follow: 'フォロー',
+    statuses: 'ステータス',
+    mute: 'ミュート',
+    muted: 'ミュート済み',
+    followers: 'フォロワー',
+    followees: 'フォロー',
+    per_day: '/日'
+  },
+  timeline: {
+    show_new: '新しいものを表示',
+    error_fetching: '更新の取得中にエラーが発生しました',
+    up_to_date: '最新',
+    load_older: '古いステータスを読み込む'
+  },
+  settings: {
+    user_settings: 'ユーザー設定',
+    name_bio: '名前 & プロフィール',
+    name: '名前',
+    bio: 'プロフィール',
+    avatar: 'アバター',
+    current_avatar: 'あなたの現在のアバター',
+    set_new_avatar: '新しいアバターを設定する',
+    profile_banner: 'プロフィールバナー',
+    current_profile_banner: '現在のプロフィールバナー',
+    set_new_profile_banner: '新しいプロフィールバナーを設定する',
+    profile_background: 'プロフィールの背景',
+    set_new_profile_background: '新しいプロフィールの背景を設定する',
+    settings: '設定',
+    theme: 'テーマ',
+    filtering: 'フィルタリング',
+    filtering_explanation: 'これらの単語を含むすべての通知はミュートされます、1行に1つのワードを入力してください',
+    attachments: '添付ファイル',
+    hide_attachments_in_tl: 'タイムラインの添付ファイルを隠す',
+    hide_attachments_in_convo: '会話の中の添付ファイルを隠す',
+    nsfw_clickthrough: 'NSFWファイルの非表示を有効にする',
+    autoload: '下にスクロールした時に自動で読み込むようにする',
+    reply_link_preview: 'マウスカーソルを重ねたときに返信リンクプレビューを表示するようにする'
+  },
+  notifications: {
+    notifications: '通知',
+    read: '読んだ！',
+    followed_you: 'フォローされました'
+  },
+  general: {
+    submit: '送信'
+  }
+}
+
 const messages = {
   de,
   fi,
-  en
+  en,
+  jp
 }
 
 export default messages

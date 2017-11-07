@@ -1,6 +1,6 @@
 const de = {
   nav: {
-    timeline: 'Zeitleiste'
+    timeline: 'Zeitleiste',
     mentions: 'Erwähnungen',
     public_tl: 'Lokale Zeitleiste',
     twkn: 'Das gesamte Netzwerk'

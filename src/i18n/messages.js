@@ -120,7 +120,7 @@ const en = {
   }
 }
 
-const jp = {
+const ja = {
   nav: {
     timeline: 'タイムライン',
     mentions: '通知',
@@ -182,7 +182,7 @@ const messages = {
   de,
   fi,
   en,
-  jp
+  ja
 }
 
 export default messages

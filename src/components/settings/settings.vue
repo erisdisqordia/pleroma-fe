@@ -1,40 +1,40 @@
 <template>
   <div class="settings panel panel-default base00-background">
     <div class="panel-heading base01-background base04">
-      Settings
+      {{$t('settings.settings')}}
     </div>
     <div class="panel-body">
       <div class="setting-item">
-        <h2>Theme</h2>
+        <h2>{{$t('settings.theme')}}</h2>
         <style-switcher></style-switcher>
       </div>
       <div class="setting-item">
-        <h2>Filtering</h2>
-        <p>All notices containing these words will be muted, one per line</p>
+        <h2>{{$t('settings.filtering')}}</h2>
+        <p>{{$t('settings.filtering_explanation')}}</p>
         <textarea id="muteWords" v-model="muteWordsString"></textarea>
       </div>
       <div class="setting-item">
-        <h2>Attachments</h2>
+        <h2>{{$t('settings.attachments')}}</h2>
         <ul class="setting-list">
             <li>
                 <input type="checkbox" id="hideAttachments" v-model="hideAttachmentsLocal">
-                <label for="hideAttachments">Hide attachments in timeline</label>
+                <label for="hideAttachments">{{$t('settings.hide_attachments_in_tl')}}</label>
             </li>
             <li>
                 <input type="checkbox" id="hideAttachmentsInConv" v-model="hideAttachmentsInConvLocal">
-                <label for="hideAttachmentsInConv">Hide attachments in conversations</label>
+                <label for="hideAttachmentsInConv">{{$t('settings.hide_attachments_in_convo')}}</label>
             </li>
             <li>
                 <input type="checkbox" id="hideNsfw" v-model="hideNsfwLocal">
-                <label for="hideNsfw">Enable clickthrough NSFW attachment hiding</label>
+                <label for="hideNsfw">{{$t('settings.nsfw_clickthrough')}}</label>
             </li>
             <li>
                 <input type="checkbox" id="autoLoad" v-model="autoLoadLocal">
-                <label for="autoLoad">Enable automatic loading when scrolled to the bottom</label>
+                <label for="autoLoad">{{$t('settings.autoload')}}</label>
             </li>
             <li>
                 <input type="checkbox" id="hoverPreview" v-model="hoverPreviewLocal">
-                <label for="hoverPreview">Enable reply-link preview on mouse hover</label>
+                <label for="hoverPreview">{{$t('settings.reply_link_preview')}}</label>
             </li>
         </ul>
       </div>

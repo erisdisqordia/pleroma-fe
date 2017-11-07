@@ -4,22 +4,22 @@
       <ul class="base03-border">
         <li v-if='currentUser'>
           <router-link class="base00-background" to='/main/friends'>
-            Timeline
+            {{ $t("nav.timeline") }}
           </router-link>
         </li>
         <li v-if='currentUser'>
           <router-link class="base00-background" :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
-            Mentions
+            {{ $t("nav.mentions") }}
           </router-link>
         </li>
         <li>
           <router-link class="base00-background" to='/main/public'>
-            Public Timeline
+            {{ $t("nav.public_tl") }}
           </router-link>
         </li>
         <li>
           <router-link class="base00-background" to='/main/all'>
-            The Whole Known Network
+            {{ $t("nav.twkn") }}
           </router-link>
         </li>
       </ul>

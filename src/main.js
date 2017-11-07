@@ -19,8 +19,11 @@ import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
 
 import VueTimeago from 'vue-timeago'
+import VueI18n from 'vue-i18n'
 
 import createPersistedState from './lib/persisted_state.js'
+
+import messages from './i18n/messages.js'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
@@ -30,6 +33,7 @@ Vue.use(VueTimeago, {
     'en-US': require('../static/timeago.json')
   }
 })
+Vue.use(VueI18n)
 
 const persistedStateOptions = {
   paths: [
@@ -79,10 +83,17 @@ const router = new VueRouter({
   }
 })
 
+const i18n = new VueI18n({
+  locale: 'en',
+  fallbackLocale: 'en',
+  messages
+})
+
 /* eslint-disable no-new */
 new Vue({
   router,
   store,
+  i18n,
   el: '#app',
   render: h => h(App)
 })

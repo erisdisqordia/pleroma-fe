@@ -83,8 +83,10 @@ const router = new VueRouter({
   }
 })
 
+const currentLocale = (window.navigator.language || 'en').split('-')[0]
+
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: currentLocale,
   fallbackLocale: 'en',
   messages
 })

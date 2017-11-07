@@ -125,6 +125,8 @@ const en = {
     follows_you: 'Follows you!',
     following: 'Following!',
     follow: 'Follow',
+    blocked: 'Blocked!',
+    block: 'Block',
     statuses: 'Statuses',
     mute: 'Mute',
     muted: 'Muted',

@@ -160,7 +160,7 @@ const ja = {
     settings: '設定',
     theme: 'テーマ',
     filtering: 'フィルタリング',
-    filtering_explanation: 'これらの単語を含むすべての通知はミュートされます、1行に1つのワードを入力してください',
+    filtering_explanation: 'これらの単語を含むすべてのものはミュートされます、1行に1つのワードを入力してください',
     attachments: '添付ファイル',
     hide_attachments_in_tl: 'タイムラインの添付ファイルを隠す',
     hide_attachments_in_convo: '会話の中の添付ファイルを隠す',

@@ -4,6 +4,10 @@
 
 ![screenshot](https://my.mixtape.moe/kjzioz.PNG)
 
+# For Translators
+
+To translate Pleroma, add your language to i18n/messages.js. Pleroma will set your language by your browser locale, but you can temporarily force it in the code by changing the locale in main.js.
+
 # FOR ADMINS
 
 You don't need to build Pleroma yourself. Check out https://git.pleroma.social/pleroma/pleroma-fe/wikis/dual-boot-with-qvitter to see how to run Pleroma and Qvitter at the same time.

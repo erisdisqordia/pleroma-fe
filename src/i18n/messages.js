@@ -4,6 +4,64 @@ const de = {
   }
 }
 
+const fi = {
+  nav: {
+    timeline: 'Aikajana',
+    mentions: 'Maininnat',
+    public_tl: 'Julkinen Aikajana',
+    twkn: 'Koko Tunnettu Verkosto'
+  },
+  user_card: {
+    follows_you: 'Seuraa sinua!',
+    following: 'Seuraat!',
+    follow: 'Seuraa',
+    statuses: 'Viestit',
+    mute: 'Hiljennä',
+    muted: 'Hiljennetty',
+    followers: 'Seuraajat',
+    followees: 'Seuraa',
+    per_day: 'päivässä'
+  },
+  timeline: {
+    show_new: 'Näytä uudet',
+    error_fetching: 'Virhe ladatessa viestejä',
+    up_to_date: 'Ajantasalla',
+    load_older: 'Lataa vanhempia viestejä'
+  },
+  settings: {
+    user_settings: 'Käyttäjän asetukset',
+    name_bio: 'Nimi ja kuvaus',
+    name: 'Nimi',
+    bio: 'Kuvaus',
+    avatar: 'Profiilikuva',
+    current_avatar: 'Nykyinen profiilikuvasi',
+    set_new_avatar: 'Aseta uusi profiilikuva',
+    profile_banner: 'Juliste',
+    current_profile_banner: 'Nykyinen julisteesi',
+    set_new_profile_banner: 'Aseta uusi juliste',
+    profile_background: 'Taustakuva',
+    set_new_profile_background: 'Aseta uusi taustakuva',
+    settings: 'Asetukset',
+    theme: 'Teema',
+    filtering: 'Suodatus',
+    filtering_explanation: 'Kaikki viestit, jotka sisältävät näitä sanoja, suodatetaan. Yksi sana per rivi.',
+    attachments: 'Liitteet',
+    hide_attachments_in_tl: 'Piilota liitteet aikajanalla',
+    hide_attachments_in_convo: 'Piilota liitteet keskusteluissa',
+    nsfw_clickthrough: 'Piilota NSFW liitteet klikkauksen taakse.',
+    autoload: 'Lataa vanhempia viestejä automaattisesti ruudun pohjalla',
+    reply_link_preview: 'Keskusteluiden vastauslinkkien esikatselu'
+  },
+  notifications: {
+    notifications: 'Ilmoitukset',
+    read: 'Lue!',
+    followed_you: 'seuraa sinua'
+  },
+  general: {
+    submit: 'Lähetä'
+  }
+}
+
 const en = {
   nav: {
     timeline: 'Timeline',
@@ -64,6 +122,7 @@ const en = {
 
 const messages = {
   de,
+  fi,
   en
 }
 

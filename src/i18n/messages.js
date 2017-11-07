@@ -1,6 +1,58 @@
 const de = {
   nav: {
     timeline: 'Zeitleiste'
+    mentions: 'Erwähnungen',
+    public_tl: 'Lokale Zeitleiste',
+    twkn: 'Das gesamte Netzwerk'
+  },
+  user_card: {
+    follows_you: 'Folgt dir!',
+    following: 'Folgst du!',
+    follow: 'Folgen',
+    statuses: 'Beiträge',
+    mute: 'Stummschalten',
+    muted: 'Stummgeschaltet',
+    followers: 'Folgende',
+    followees: 'Folgt',
+    per_day: 'pro Tag'
+  },
+  timeline: {
+    show_new: 'Zeige Neuere',
+    error_fetching: 'Error beim Laden',
+    up_to_date: 'Aktuell',
+    load_older: 'Lade ältere Beiträge'
+  },
+  settings: {
+    user_settings: 'Benutzereinstellungen',
+    name_bio: 'Name & Bio',
+    name: 'Name',
+    bio: 'Bio',
+    avatar: 'Avatar',
+    current_avatar: 'Dein derzeitiger Avatar',
+    set_new_avatar: 'Setze neuen Avatar',
+    profile_banner: 'Profil Banner',
+    current_profile_banner: 'Dein derzeitiger Profil Banner',
+    set_new_profile_banner: 'Setze neuen Profil Banner',
+    profile_background: 'Profil Hintergrund',
+    set_new_profile_background: 'Setze neuen Profil Hintergrund',
+    settings: 'Einstellungen',
+    theme: 'Theme',
+    filtering: 'Filter',
+    filtering_explanation: 'Alle Beiträge die diese Wörter enthalten werden ausgeblendet. Ein Wort pro Zeile.',
+    attachments: 'Anhänge',
+    hide_attachments_in_tl: 'Anhänge in der Timeline ausblenden',
+    hide_attachments_in_convo: 'Anhänge in Unterhaltungen ausblenden',
+    nsfw_clickthrough: 'Aktiviere ausblendbares Overlay für als NSFW markierte Anhänge',
+    autoload: 'Aktiviere automatisches Laden von Beiträgen beim scrollen',
+    reply_link_preview: 'Aktiviere reply-link Vorschau bei Maus-Hover'
+  },
+  notifications: {
+    notifications: 'Benachrichtigungen',
+    read: 'Gelesen!',
+    followed_you: 'folgt dir'
+  },
+  general: {
+    submit: 'Absenden'
   }
 }
 

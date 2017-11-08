@@ -156,7 +156,7 @@ const en = {
     settings: 'Settings',
     theme: 'Theme',
     filtering: 'Filtering',
-    filtering_explanation: 'All notices containing these words will be muted, one per line',
+    filtering_explanation: 'All statuses containing these words will be muted, one per line',
     attachments: 'Attachments',
     hide_attachments_in_tl: 'Hide attachments in timeline',
     hide_attachments_in_convo: 'Hide attachments in conversations',

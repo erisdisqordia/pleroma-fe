@@ -314,6 +314,8 @@ const hu = {
     follows_you: 'Követ téged!',
     following: 'Követve!',
     follow: 'Követ',
+    blocked: 'Letiltva!',
+    block: 'Letilt',
     statuses: 'Állapotok',
     mute: 'Némít',
     muted: 'Némított',
@@ -325,7 +327,8 @@ const hu = {
     show_new: 'Újak mutatása',
     error_fetching: 'Hiba a frissítések beszerzésénél',
     up_to_date: 'Naprakész',
-    load_older: 'Régebbi állapotok betöltése'
+    load_older: 'Régebbi állapotok betöltése',
+    conversation: 'Társalgás'
   },
   settings: {
     user_settings: 'Felhasználói beállítások',
@@ -355,6 +358,28 @@ const hu = {
     notifications: 'Értesítések',
     read: 'Olvasva!',
     followed_you: 'követ téged'
+  },
+  login: {
+    login: 'Bejelentkezés',
+    username: 'Felhasználó név',
+    password: 'Jelszó',
+    register: 'Feliratkozás',
+    logout: 'Kijelentkezés'
+  },
+  registration: {
+    registration: 'Feliratkozás',
+    fullname: 'Teljes név',
+    email: 'Email',
+    bio: 'Bio',
+    password_confirm: 'Jelszó megerősítése'
+  },
+  post_status: {
+    posting: 'Küldés folyamatban',
+    default: 'Most érkeztem L.A.-be'
+  },
+  finder: {
+    find_user: 'Felhasználó keresése',
+    error_fetching_user: 'Hiba felhasználó beszerzésével'
   },
   general: {
     submit: 'Elküld'

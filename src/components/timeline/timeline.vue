@@ -5,20 +5,20 @@
         {{title}}
       </div>
       <button @click.prevent="showNewStatuses" class="base05 base01-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
-        Show new ({{timeline.newStatusCount}})
+        {{$t('timeline.show_new')}} ({{timeline.newStatusCount}})
       </button>
       <div @click.prevent class="base06 error  loadmore-text" v-if="timelineError">
-          Error fetching updates
+        {{$t('timeline.error_fetching')}}
       </div>
       <div @click.prevent class="base04 base01-background loadmore-text" v-if="!timeline.newStatusCount > 0 && !timelineError">
-        Up-to-date
+        {{$t('timeline.up_to_date')}}
       </div>
     </div>
     <div class="panel-body">
       <div class="timeline">
         <status-or-conversation v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status"></status-or-conversation>
         <a href="#" v-on:click.prevent='fetchOlderStatuses()' v-if="!timeline.loading">
-          <div class="base01-background base03-border new-status-notification text-center">Load older statuses.</div>
+          <div class="base01-background base03-border new-status-notification text-center">{{$t('timeline.load_older')}}</div>
         </a>
           <div class="base01-background base03-border new-status-notification text-center" v-else>...</div>
       </div>
@@ -27,7 +27,7 @@
   <div class="timeline panel panel-default" v-else-if="viewing == 'followers'">
     <div class="panel-heading timeline-heading base01-background base04">
       <div class="title">
-        Followers
+        {{$t('user_card.followers')}}
       </div>
     </div>
     <div class="panel-body">
@@ -39,7 +39,7 @@
   <div class="timeline panel panel-default" v-else-if="viewing == 'friends'">
     <div class="panel-heading timeline-heading base01-background base04">
       <div class="title">
-        Following
+        {{$t('user_card.followees')}}
       </div>
     </div>
     <div class="panel-body">

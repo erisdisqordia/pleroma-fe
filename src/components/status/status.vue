@@ -185,6 +185,15 @@
 
      .status-content {
          margin: 3px 15px 4px 0;
+         img, video {
+           max-width: 100%;
+           max-height: 400px;
+         }
+
+         blockquote {
+           margin: 0.2em 0 0.2em 2em;
+           font-style: italic;
+         }
      }
 
      p {

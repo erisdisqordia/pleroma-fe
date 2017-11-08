@@ -10,7 +10,7 @@
       <div class="user-name">
         {{ user.name }}
         <span class="follows-you" v-if="!userExpanded && showFollows && user.follows_you">
-            Follows you!
+            {{ $t('user_card.follows_you') }}
         </span>
       </div>
       <a :href="user.statusnet_profile_url" target="blank"><div class="user-screen-name">@{{ user.screen_name }}</div></a>

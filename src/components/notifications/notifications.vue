@@ -3,8 +3,8 @@
     <div class="panel panel-default base00-background">
       <div class="panel-heading base01-background base04">
         <span class="unseen-count" v-if="unseenCount">{{unseenCount}}</span>
-        Notifications
-        <button @click.prevent="markAsSeen" class="base05 base01-background read-button">Read!</button>
+        {{$t('notifications.notifications')}}
+        <button @click.prevent="markAsSeen" class="base05 base01-background read-button">{{$t('notifications.read')}}</button>
       </div>
       <div class="panel-body base03-border">
         <div v-for="notification in visibleNotifications" :key="notification" class="notification" :class='{"unseen": !notification.seen}'>
@@ -44,7 +44,7 @@
                 <i class="fa icon-user-plus lit"></i>
               </h1>
               <div>
-                <router-link :to="{ name: 'user-profile', params: { id: notification.action.user.id } }">@{{ notification.action.user.screen_name }}</router-link> followed you
+                <router-link :to="{ name: 'user-profile', params: { id: notification.action.user.id } }">@{{ notification.action.user.screen_name }}</router-link> {{$t('notifications.followed_you')}}
               </div>
             </div>
           </div>

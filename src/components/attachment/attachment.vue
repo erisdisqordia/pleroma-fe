@@ -11,7 +11,7 @@
       <img class="base03-border" referrerpolicy="no-referrer" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
-    <video v-if="type === 'video' && !hidden" :src="attachment.url" controls loop></video>
+    <video class="base03" v-if="type === 'video' && !hidden" :src="attachment.url" controls loop></video>
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 
@@ -59,6 +59,7 @@
           }
 
           video {
+              max-height: 500px;
               height: 100%;
               border: 1px solid;
               border-radius: 5px;
@@ -103,6 +104,7 @@
               .text {
                   flex: 2;
                   margin: 8px;
+                  word-break: break-all;
                   h1 {
                       font-size: 14px;
                       margin: 0px;

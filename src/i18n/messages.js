@@ -172,6 +172,64 @@ const en = {
   }
 }
 
+const en = {
+  nav: {
+    timeline: 'Idővonal',
+    mentions: 'Említéseim',
+    public_tl: 'Publikus Idővonal',
+    twkn: 'Az Egész Ismert Hálózat'
+  },
+  user_card: {
+    follows_you: 'Követ téged!',
+    following: 'Követve!',
+    follow: 'Követ',
+    statuses: 'Állapotok',
+    mute: 'Némít',
+    muted: 'Némított',
+    followers: 'Követők',
+    followees: 'Követettek',
+    per_day: 'naponta'
+  },
+  timeline: {
+    show_new: 'Újak mutatása',
+    error_fetching: 'Hiba a frissítések beszerzésénél',
+    up_to_date: 'Naprakész',
+    load_older: 'Régebbi állapotok betöltése'
+  },
+  settings: {
+    user_settings: 'Felhasználói beállítások',
+    name_bio: 'Név és Bio',
+    name: 'Név',
+    bio: 'Bio',
+    avatar: 'Avatár',
+    current_avatar: 'Jelenlegi avatár',
+    set_new_avatar: 'Új avatár',
+    profile_banner: 'Profil Banner',
+    current_profile_banner: 'Jelenlegi profil banner',
+    set_new_profile_banner: 'Új profil banner',
+    profile_background: 'Profil háttérkép',
+    set_new_profile_background: 'Új profil háttér beállítása',
+    settings: 'Beállítások',
+    theme: 'Téma',
+    filtering: 'Szűrés',
+    filtering_explanation: 'Minden tartalom mely ezen szavakat tartalmazza némítva lesz, soronként egy',
+    attachments: 'Csatolmányok',
+    hide_attachments_in_tl: 'Csatolmányok elrejtése az idővonalon',
+    hide_attachments_in_convo: 'Csatolmányok elrejtése a társalgásokban',
+    nsfw_clickthrough: 'NSFW átkattintási tartalom elrejtésének engedélyezése',
+    autoload: 'Autoatikus betöltés engedélyezése lap aljára görgetéskor',
+    reply_link_preview: 'Válasz-link előzetes mutatása egér rátételkor'
+  },
+  notifications: {
+    notifications: 'Értesítések',
+    read: 'Olvasva!',
+    followed_you: 'követ téged'
+  },
+  general: {
+    submit: 'Elküld'
+  }
+}
+
 const ja = {
   nav: {
     timeline: 'タイムライン',
@@ -234,6 +292,7 @@ const messages = {
   de,
   fi,
   en,
+  hu,
   ja
 }
 

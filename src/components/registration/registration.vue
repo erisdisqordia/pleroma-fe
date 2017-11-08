@@ -1,34 +1,34 @@
 <template>
   <div class="settings panel panel-default base00-background">
     <div class="panel-heading base01-background base04">
-      Registration
+      {{$t('registration.registration')}}
     </div>
     <div class="panel-body">
       <form v-on:submit.prevent='submit(user)' class='registration-form'>
         <div class='container'>
           <div class='text-fields'>
             <div class='form-group'>
-              <label for='username'>Username</label>
+              <label for='username'>{{$t('login.username')}}</label>
               <input :disabled="registering" v-model='user.username' class='form-control' id='username' placeholder='e.g. lain'>
             </div>
             <div class='form-group'>
-              <label for='fullname'>Fullname</label>
+              <label for='fullname'>{{$t('registration.fullname')}}</label>
               <input :disabled="registering" v-model='user.fullname' class='form-control' id='fullname' placeholder='e.g. Lain Iwakura'>
             </div>
             <div class='form-group'>
-              <label for='email'>Email</label>
+              <label for='email'>{{$t('registration.email')}}</label>
               <input :disabled="registering" v-model='user.email' class='form-control' id='email' type="email">
             </div>
             <div class='form-group'>
-              <label for='bio'>Bio</label>
+              <label for='bio'>{{$t('registration.bio')}}</label>
               <input :disabled="registering" v-model='user.bio' class='form-control' id='bio'>
             </div>
             <div class='form-group'>
-              <label for='password'>Password</label>
+              <label for='password'>{{$t('login.password')}}</label>
               <input :disabled="registering" v-model='user.password' class='form-control' id='password' type='password'>
             </div>
             <div class='form-group'>
-              <label for='password_confirmation'>Password confirmation</label>
+              <label for='password_confirmation'>{{$t('registration.password_confirm')}}</label>
               <input :disabled="registering" v-model='user.confirm' class='form-control' id='password_confirmation' type='password'>
             </div>
             <!--
@@ -39,7 +39,7 @@
             </div>
             -->
             <div class='form-group'>
-              <button :disabled="registering" type='submit' class='btn btn-default base05 base01-background'>Submit</button>
+              <button :disabled="registering" type='submit' class='btn btn-default base05 base01-background'>{{$t('general.submit')}}</button>
             </div>
           </div>
           <div class='terms-of-service' v-html="termsofservice">

@@ -78,7 +78,8 @@ const fi = {
     show_new: 'Näytä uudet',
     error_fetching: 'Virhe ladatessa viestejä',
     up_to_date: 'Ajantasalla',
-    load_older: 'Lataa vanhempia viestejä'
+    load_older: 'Lataa vanhempia viestejä',
+    conversation: 'Keskustelu'
   },
   settings: {
     user_settings: 'Käyttäjän asetukset',
@@ -109,6 +110,28 @@ const fi = {
     read: 'Lue!',
     followed_you: 'seuraa sinua'
   },
+  login: {
+    login: 'Kirjaudu sisään',
+    username: 'Käyttäjänimi',
+    password: 'Salasana',
+    register: 'Rekisteröidy',
+    logout: 'Kirjaudu ulos'
+  },
+  registration: {
+    registration: 'Rekisteröityminen',
+    fullname: 'Koko nimi',
+    email: 'Sähköposti',
+    bio: 'Kuvaus',
+    password_confirm: 'Salasanan vahvistaminen'
+  },
+  post_status: {
+    posting: 'Lähetetään',
+    default: 'Tulin juuri saunasta.'
+  },
+  finder: {
+    find_user: 'Hae käyttäjä',
+    error_fetching_user: 'Virhe hakiessa käyttäjää'
+  },
   general: {
     submit: 'Lähetä'
   }
@@ -138,7 +161,8 @@ const en = {
     show_new: 'Show new',
     error_fetching: 'Error fetching updates',
     up_to_date: 'Up-to-date',
-    load_older: 'Load older statuses'
+    load_older: 'Load older statuses',
+    conversation: 'Conversation'
   },
   settings: {
     user_settings: 'User Settings',
@@ -168,6 +192,28 @@ const en = {
     notifications: 'Notifications',
     read: 'Read!',
     followed_you: 'followed you'
+  },
+  login: {
+    login: 'Log in',
+    username: 'Username',
+    password: 'Password',
+    register: 'Register',
+    logout: 'Log out'
+  },
+  registration: {
+    registration: 'Registration',
+    fullname: 'Display name',
+    email: 'Email',
+    bio: 'Bio',
+    password_confirm: 'Password confirmation'
+  },
+  post_status: {
+    posting: 'Posting',
+    default: 'Just landed in L.A.'
+  },
+  finder: {
+    find_user: 'Find user',
+    error_fetching_user: 'Error fetching user'
   },
   general: {
     submit: 'Submit'

@@ -2,12 +2,12 @@
   <span>
     <span class="finder-error base05" v-if="error">
       <i class="icon-cancel user-finder-icon" @click="dismissError"/>
-      Error fetching user
+      {{$t('finder.error_fetching_user')}}
     </span>
     <i class="icon-spin4 user-finder-icon animate-spin-slow" v-if="loading" />
     <a href="#" v-if="hidden"><i class="icon-user-plus user-finder-icon" @click.prevent="toggleHidden"/></a>
     <span v-else>
-      <input class="user-finder-input base03-border" @keyup.enter="findUser(username)" v-model="username" placeholder="Find user" id="user-finder-input" type="text"/>
+      <input class="user-finder-input base03-border" @keyup.enter="findUser(username)" v-model="username" :placeholder="$t('finder.find_user')" id="user-finder-input" type="text"/>
     <i class="icon-cancel user-finder-icon" @click="toggleHidden"/>
     </span>
   </span>

@@ -69,6 +69,12 @@ button{
     flex: 1;
     line-height: 21px;
     height: 21px;
+    overflow: hidden;
+
+    .nav-icon {
+      font-size: 1.1em;
+      margin-left: 0.4em;
+    }
 }
 
 .gaps > .item {

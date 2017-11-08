@@ -232,11 +232,70 @@ const ja = {
   }
 }
 
+const fr = {
+  nav: {
+    timeline: 'Journal',
+    mentions: 'Notifications',
+    public_tl: 'Statuts Locaux',
+    twkn: 'Le Réseau Tout Entier'
+  },
+  user_card: {
+    follows_you: 'Vous Suit!',
+    following: 'Suivis!',
+    follow: 'Suivi',
+    statuses: 'Statuts',
+    mute: 'En Sourdine',
+    muted: 'Mis En Sourdine',
+    followers: 'Vous Suivent',
+    followees: 'Suivis',
+    per_day: 'par jour'
+  },
+  timeline: {
+    show_new: 'Afficher plus',
+    error_fetching: 'Erreur en cherchant des mises à jours',
+    up_to_date: 'A jour',
+    load_older: 'Afficher plus'
+  },
+  settings: {
+    user_settings: 'Paramètres Utilisateur',
+    name_bio: 'Nom & Bio',
+    name: 'Nom',
+    bio: 'Bio',
+    avatar: 'Avatar',
+    current_avatar: 'Votre avatar',
+    set_new_avatar: 'Changer d\'avatar',
+    profile_banner: 'Couverture du Profil',
+    current_profile_banner: 'Couverture du Profil',
+    set_new_profile_banner: 'Nouvelle couverture',
+    profile_background: 'Image de fond',
+    set_new_profile_background: 'Nouvelle image de fond',
+    settings: 'Paramètres',
+    theme: 'Thème',
+    filtering: 'Filtre',
+    filtering_explanation: 'Tout les statuts contenant ces mots vont être mis sous silence, un mot par ligne.',
+    attachments: 'Pièces jointes',
+    hide_attachments_in_tl: 'Cacher les pièces jointes dans le journal',
+    hide_attachments_in_convo: 'Cacher les pièces jointes dans les conversations',
+    nsfw_clickthrough: 'Activer le clic pour afficher les images taggées NSFW',
+    autoload: 'Activer le chargement automatique une fois le bas de la page atteint',
+    reply_link_preview: 'Activer un preview sur passage de la souris'
+  },
+  notifications: {
+    notifications: 'Notfications',
+    read: 'Lu!',
+    followed_you: 'vous a suivi'
+  },
+  general: {
+    submit: 'Envoyer'
+  }
+}
+
 const messages = {
   de,
   fi,
   en,
-  ja
+  ja,
+  fr
 }
 
 export default messages

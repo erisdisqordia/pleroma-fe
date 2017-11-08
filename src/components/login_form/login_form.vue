@@ -2,22 +2,22 @@
   <div class="login panel panel-default base00-background">
     <!-- Default panel contents -->
     <div class="panel-heading base01-background base04">
-      Log in
+      {{$t('login.login')}}
     </div>
     <div class="panel-body">
       <form v-on:submit.prevent='submit(user)' class='login-form'>
         <div class='form-group'>
-          <label for='username'>Username</label>
+          <label for='username'>{{$t('login.username')}}</label>
           <input :disabled="loggingIn" v-model='user.username' class='form-control' id='username' placeholder='e.g. lain'>
         </div>
         <div class='form-group'>
-          <label for='password'>Password</label>
+          <label for='password'>{{$t('login.password')}}</label>
           <input :disabled="loggingIn" v-model='user.password' class='form-control' id='password' type='password'>
         </div>
         <div class='form-group'>
           <div class='login-bottom'>
-            <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>Register</router-link></div>
-            <button :disabled="loggingIn" type='submit' class='btn btn-default base05 base01-background'>Log in</button>
+            <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>{{$t('login.register')}}</router-link></div>
+            <button :disabled="loggingIn" type='submit' class='btn btn-default base05 base01-background'>{{$t('login.login')}}</button>
           </div>
         </div>
         <div v-if="authError" class='form-group'>

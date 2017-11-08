@@ -2,7 +2,7 @@
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group base03-border" >
-        <textarea @click="setCaret" @keyup="setCaret" v-model="newStatus.status" placeholder="Just landed in L.A." rows="1" class="form-control" @keydown.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize"></textarea>
+        <textarea @click="setCaret" @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control" @keydown.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize"></textarea>
       </div>
       <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel base05-background">
@@ -17,8 +17,8 @@
       </div>
       <div class='form-bottom'>
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
-        <button v-if="posting" disabled class="btn btn-default base05 base01-background">Posting</button>
-        <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">Submit</button>
+        <button v-if="posting" disabled class="btn btn-default base05 base01-background">{{$t('post_status.posting')}}</button>
+        <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">{{$t('general.submit')}}</button>
       </div>
       <div class='error' v-if="error">
         Error: {{ error }}

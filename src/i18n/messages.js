@@ -172,7 +172,7 @@ const en = {
   }
 }
 
-const en = {
+const hu = {
   nav: {
     timeline: 'Idővonal',
     mentions: 'Említéseim',

@@ -25,12 +25,21 @@ import createPersistedState from './lib/persisted_state.js'
 
 import messages from './i18n/messages.js'
 
+const currentLocale = (window.navigator.language || 'en').split('-')[0]
+
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueTimeago, {
-  locale: 'en-US',
+  locale: currentLocale,
   locales: {
-    'en-US': require('../static/timeago.json')
+    'en': require('../static/timeago-en.json'),
+    'fi': require('../static/timeago-fi.json'),
+    'de': require('../static/timeago-de.json'),
+    'et': require('../static/timeago-et.json'),
+    'hu': require('../static/timeago-hu.json'),
+    'it': require('../static/timeago-it.json'),
+    'fr': require('../static/timeago-fr.json'),
+    'ja': require('../static/timeago-ja.json')
   }
 })
 Vue.use(VueI18n)
@@ -82,8 +91,6 @@ const router = new VueRouter({
     return savedPosition || { x: 0, y: 0 }
   }
 })
-
-const currentLocale = (window.navigator.language || 'en').split('-')[0]
 
 const i18n = new VueI18n({
   locale: currentLocale,

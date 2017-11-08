@@ -165,7 +165,7 @@ const en = {
     reply_link_preview: 'Enable reply-link preview on mouse hover'
   },
   notifications: {
-    notifications: 'Notfications',
+    notifications: 'Notifications',
     read: 'Read!',
     followed_you: 'followed you'
   },

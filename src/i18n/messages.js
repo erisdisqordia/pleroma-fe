@@ -536,7 +536,8 @@ const pl = {
     show_new: 'Pokaż nowe',
     error_fetching: 'Błąd pobierania',
     up_to_date: 'Na bieżąco',
-    load_older: 'Załaduj starsze statusy'
+    load_older: 'Załaduj starsze statusy',
+    conversation: 'Rozmowa'
   },
   settings: {
     user_settings: 'Ustawienia użytkownika',
@@ -566,6 +567,28 @@ const pl = {
     notifications: 'Powiadomienia',
     read: 'Przeczytane!',
     followed_you: 'obserwuje cię'
+  },
+  login: {
+    login: 'Zaloguj',
+    username: 'Użytkownik',
+    password: 'Hasło',
+    register: 'Zarejestruj',
+    logout: 'Wyloguj'
+  },
+  registration: {
+    registration: 'Rejestracja',
+    fullname: 'Wyświetlane imię',
+    email: 'Email',
+    bio: 'Bio',
+    password_confirm: 'Potwierdzenie hasła'
+  },
+  post_status: {
+    posting: 'Wysyłanie',
+    default: 'Właśnie wróciłem z kościoła'
+  },
+  finder: {
+    find_user: 'Znajdź użytkownika',
+    error_fetching_user: 'Błąd przy pobieraniu profilu'
   },
   general: {
     submit: 'Wyślij'

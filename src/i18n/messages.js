@@ -290,12 +290,71 @@ const fr = {
   }
 }
 
+const it = {
+  nav: {
+    timeline: 'Sequenza temporale',
+    mentions: 'Menzioni',
+    public_tl: 'Sequenza temporale pubblica',
+    twkn: 'L\'intiera rete conosciuta'
+  },
+  user_card: {
+    follows_you: 'Ti segue!',
+    following: 'Lo stai seguendo!',
+    follow: 'Segui',
+    statuses: 'Messaggi',
+    mute: 'Ammutolisci',
+    muted: 'Ammutoliti',
+    followers: 'Chi ti segue',
+    followees: 'Chi stai seguendo',
+    per_day: 'al giorno'
+  },
+  timeline: {
+    show_new: 'Mostra nuovi',
+    error_fetching: 'Errori nel prelievo aggiornamenti',
+    up_to_date: 'Aggiornato',
+    load_older: 'Carica messaggi più vecchi'
+  },
+  settings: {
+    user_settings: 'Configurazione dell\'utente',
+    name_bio: 'Nome & Introduzione',
+    name: 'Nome',
+    bio: 'Introduzione',
+    avatar: 'Avatar',
+    current_avatar: 'Il tuo attuale avatar',
+    set_new_avatar: 'Scegli un nuovo avatar',
+    profile_banner: 'Sfondo del tuo profilo',
+    current_profile_banner: 'Sfondo attuale',
+    set_new_profile_banner: 'Scegli un nuovo sfondo per il tuo profilo',
+    profile_background: 'Sfondo della tua pagina',
+    set_new_profile_background: 'Scegli un nuovo sfondo per la tua pagina',
+    settings: 'Settaggi',
+    theme: 'Tema',
+    filtering: 'Filtri',
+    filtering_explanation: 'Filtra via le notifiche che contengono le seguenti parole (inserisci rigo per rigo le parole di innesco)',
+    attachments: 'Allegati',
+    hide_attachments_in_tl: 'Nascondi gli allegati presenti nella sequenza temporale',
+    hide_attachments_in_convo: 'Nascondi gli allegati presenti nelle conversazioni',
+    nsfw_clickthrough: 'Abilita la trasparenza degli allegati NSFW',
+    autoload: 'Abilita caricamento automatico quando si raggiunge il fondo schermo',
+    reply_link_preview: 'Ability il reply-link preview al passaggio del mouse'
+  },
+  notifications: {
+    notifications: 'Notifiche',
+    read: 'Leggi!',
+    followed_you: 'ti ha seguito'
+  },
+  general: {
+    submit: 'Invia'
+  }
+}
+
 const messages = {
   de,
   fi,
   en,
   ja,
-  fr
+  fr,
+  it
 }
 
 export default messages

@@ -244,7 +244,8 @@ const et = {
     show_new: 'Näita uusi',
     error_fetching: 'Viga uuenduste laadimisel',
     up_to_date: 'Uuendatud',
-    load_older: 'Kuva vanemaid staatuseid'
+    load_older: 'Kuva vanemaid staatuseid',
+    conversation: 'Vestlus'
   },
   settings: {
     user_settings: 'Kasutaja sätted',
@@ -274,6 +275,28 @@ const et = {
     notifications: 'Teavitused',
     read: 'Loe!',
     followed_you: 'alustas sinu jälgimist'
+  },
+  login: {
+    login: 'Logi sisse',
+    username: 'Kasutajanimi',
+    password: 'Parool',
+    register: 'Registreeru',
+    logout: 'Logi välja'
+  },
+  registration: {
+    registration: 'Registreerimine',
+    fullname: 'Kuvatav nimi',
+    email: 'E-post',
+    bio: 'Bio',
+    password_confirm: 'Parooli kinnitamine'
+  },
+  post_status: {
+    posting: 'Postitan',
+    default: 'Just sõitsin elektrirongiga Tallinnast Pääskülla.'
+  },
+  finder: {
+    find_user: 'Otsi kasutajaid',
+    error_fetching_user: 'Viga kasutaja leidmisel'
   },
   general: {
     submit: 'Postita'

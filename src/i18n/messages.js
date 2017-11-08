@@ -174,6 +174,66 @@ const en = {
   }
 }
 
+const et = {
+  nav: {
+    timeline: 'Ajajoon',
+    mentions: 'Mainimised',
+    public_tl: 'Avalik Ajajoon',
+    twkn: 'Kogu Teadaolev Võrgustik'
+  },
+  user_card: {
+    follows_you: 'Jälgib sind!',
+    following: 'Jälgin!',
+    follow: 'Jälgi',
+    blocked: 'Blokeeritud!',
+    block: 'Blokeeri',
+    statuses: 'Staatuseid',
+    mute: 'Vaigista',
+    muted: 'Vaigistatud',
+    followers: 'Jälgijaid',
+    followees: 'Jälgitavaid',
+    per_day: 'päevas'
+  },
+  timeline: {
+    show_new: 'Näita uusi',
+    error_fetching: 'Viga uuenduste laadimisel',
+    up_to_date: 'Uuendatud',
+    load_older: 'Kuva vanemaid staatuseid'
+  },
+  settings: {
+    user_settings: 'Kasutaja sätted',
+    name_bio: 'Nimi ja Bio',
+    name: 'Nimi',
+    bio: 'Bio',
+    avatar: 'Profiilipilt',
+    current_avatar: 'Sinu praegune profiilipilt',
+    set_new_avatar: 'Vali uus profiilipilt',
+    profile_banner: 'Profiilibänner',
+    current_profile_banner: 'Praegune profiilibänner',
+    set_new_profile_banner: 'Vali uus profiilibänner',
+    profile_background: 'Profiilitaust',
+    set_new_profile_background: 'Vali uus profiilitaust',
+    settings: 'Sätted',
+    theme: 'Teema',
+    filtering: 'Sisu filtreerimine',
+    filtering_explanation: 'Kõiki staatuseid, mis sisaldavad neid sõnu, ei kuvata. Üks sõna reale.',
+    attachments: 'Manused',
+    hide_attachments_in_tl: 'Peida manused ajajoonel',
+    hide_attachments_in_convo: 'Peida manused vastlustes',
+    nsfw_clickthrough: 'Peida tööks-mittesobivad(NSFW) manuste hiireklõpsu taha',
+    autoload: 'Luba ajajoone automaatne uuendamine kui ajajoon on põhja keritud',
+    reply_link_preview: 'Luba algpostituse kuvamine vastustes'
+  },
+  notifications: {
+    notifications: 'Teavitused',
+    read: 'Loe!',
+    followed_you: 'alustas sinu jälgimist'
+  },
+  general: {
+    submit: 'Postita'
+  }
+}
+
 const hu = {
   nav: {
     timeline: 'Idővonal',
@@ -470,6 +530,7 @@ const messages = {
   de,
   fi,
   en,
+  et,
   hu,
   ja,
   fr,

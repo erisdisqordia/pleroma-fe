@@ -30,6 +30,14 @@ const backendInteractorService = (credentials) => {
     return apiService.unfollowUser({credentials, id})
   }
 
+  const blockUser = (id) => {
+    return apiService.blockUser({credentials, id})
+  }
+
+  const unblockUser = (id) => {
+    return apiService.unblockUser({credentials, id})
+  }
+
   const startFetching = ({timeline, store, userId = false}) => {
     return timelineFetcherService.startFetching({timeline, store, credentials, userId})
   }
@@ -55,6 +63,8 @@ const backendInteractorService = (credentials) => {
     fetchFollowers,
     followUser,
     unfollowUser,
+    blockUser,
+    unblockUser,
     fetchAllFollowing,
     verifyCredentials: apiService.verifyCredentials,
     startFetching,

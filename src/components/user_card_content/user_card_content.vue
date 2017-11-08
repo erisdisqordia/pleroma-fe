@@ -46,6 +46,18 @@
               </button>
             </span>
           </div>
+          <div class='block' v-if='isOtherUser'>
+            <span v-if='user.statusnet_blocking'>
+              <button @click="unblockUser" class="base04 base00-background pressed">
+                {{ $t('user_card.blocked') }}
+              </button>
+            </span>
+            <span v-if='!user.statusnet_blocking'>
+              <button @click="blockUser" class="base05 base02-background">
+                {{ $t('user_card.block') }}
+              </button>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -112,6 +124,16 @@
         const store = this.$store
         store.state.api.backendInteractor.unfollowUser(this.user.id)
           .then((unfollowedUser) => store.commit('addNewUsers', [unfollowedUser]))
+      },
+      blockUser () {
+        const store = this.$store
+        store.state.api.backendInteractor.blockUser(this.user.id)
+          .then((blockedUser) => store.commit('addNewUsers', [blockedUser]))
+      },
+      unblockUser () {
+        const store = this.$store
+        store.state.api.backendInteractor.unblockUser(this.user.id)
+          .then((unblockedUser) => store.commit('addNewUsers', [unblockedUser]))
       },
       toggleMute () {
         const store = this.$store

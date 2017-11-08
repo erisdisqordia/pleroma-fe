@@ -391,6 +391,28 @@ const ja = {
     read: '読んだ！',
     followed_you: 'フォローされました'
   },
+  login: {
+    login: 'ログイン',
+    username: 'ユーザーネーム',
+    password: 'パスワード',
+    register: '登録',
+    logout: 'ログアウト'
+  },
+  registration: {
+    registration: '登録',
+    fullname: '表示名',
+    email: 'Eメール',
+    bio: 'プロフィール',
+    password_confirm: 'パスワードの確認'
+  },
+  post_status: {
+    posting: '投稿',
+    default: 'ちょうど羽田に着陸しました'
+  },
+  finder: {
+    find_user: 'ユーザー検索',
+    error_fetching_user: 'ユーザー検索でエラーが発生しました'
+  },
   general: {
     submit: '送信'
   }

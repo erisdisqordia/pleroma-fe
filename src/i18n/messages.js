@@ -406,6 +406,66 @@ const it = {
   }
 }
 
+const pl = {
+  nav: {
+    timeline: 'Oś czasu',
+    mentions: 'Wzmianki',
+    public_tl: 'Publiczna oś czasu',
+    twkn: 'Cała znana sieć'
+  },
+  user_card: {
+    follows_you: 'Obserwuje cię!',
+    following: 'Obserwowany!',
+    follow: 'Obserwuj',
+    blocked: 'Zablokowany!',
+    block: 'Zablokuj',
+    statuses: 'Statusy',
+    mute: 'Wycisz',
+    muted: 'Wyciszony',
+    followers: 'Obserwujący',
+    followees: 'Obserwowani',
+    per_day: 'dziennie'
+  },
+  timeline: {
+    show_new: 'Pokaż nowe',
+    error_fetching: 'Błąd pobierania',
+    up_to_date: 'Na bieżąco',
+    load_older: 'Załaduj starsze statusy'
+  },
+  settings: {
+    user_settings: 'Ustawienia użytkownika',
+    name_bio: 'Imię i bio',
+    name: 'Imię',
+    bio: 'Bio',
+    avatar: 'Awatar',
+    current_avatar: 'Twój obecny awatar',
+    set_new_avatar: 'Ustaw nowy awatar',
+    profile_banner: 'Banner profilui',
+    current_profile_banner: 'Twój obecny banner profilu',
+    set_new_profile_banner: 'Ustaw nowy banner profilu',
+    profile_background: 'Tło profilu',
+    set_new_profile_background: 'Ustaw nowe tło profilu',
+    settings: 'Ustawienia',
+    theme: 'Motyw',
+    filtering: 'Filtrowanie',
+    filtering_explanation: 'Wszystkie statusy zawierające te słowa będą wyciszone. Jedno słowo na linijkę',
+    attachments: 'Załączniki',
+    hide_attachments_in_tl: 'Ukryj załączniki w osi czasu',
+    hide_attachments_in_convo: 'Ukryj załączniki w rozmowach',
+    nsfw_clickthrough: 'Włącz domyślne ukrywanie załączników o treści nieprzyzwoitej (NSFW)',
+    autoload: 'Włącz automatyczne ładowanie po przewinięciu do końca strony',
+    reply_link_preview: 'Włącz dymek z podglądem postu po najechaniu na znak odpowiedzi'
+  },
+  notifications: {
+    notifications: 'Powiadomienia',
+    read: 'Przeczytane!',
+    followed_you: 'obserwuje cię'
+  },
+  general: {
+    submit: 'Wyślij'
+  }
+}
+
 const messages = {
   de,
   fi,
@@ -413,7 +473,8 @@ const messages = {
   hu,
   ja,
   fr,
-  it
+  it,
+  pl
 }
 
 export default messages

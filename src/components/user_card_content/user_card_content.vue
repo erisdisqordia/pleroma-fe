@@ -104,7 +104,7 @@
         }
       },
       isOtherUser () {
-        return this.user !== this.$store.state.users.currentUser
+        return this.user.id !== this.$store.state.users.currentUser.id
       },
       loggedIn () {
         return this.$store.state.users.currentUser

@@ -30,15 +30,9 @@ const currentLocale = (window.navigator.language || 'en').split('-')[0]
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueTimeago, {
-  locale: currentLocale,
+  locale: currentLocale === 'ja' ? 'ja' : 'en',
   locales: {
     'en': require('../static/timeago-en.json'),
-    'fi': require('../static/timeago-fi.json'),
-    'de': require('../static/timeago-de.json'),
-    'et': require('../static/timeago-et.json'),
-    'hu': require('../static/timeago-hu.json'),
-    'it': require('../static/timeago-it.json'),
-    'fr': require('../static/timeago-fr.json'),
     'ja': require('../static/timeago-ja.json')
   }
 })

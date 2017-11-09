@@ -386,6 +386,90 @@ const hu = {
   }
 }
 
+
+const en = {
+  nav: {
+    timeline: 'Cronologie',
+    mentions: 'Menționări',
+    public_tl: 'Cronologie Publică',
+    twkn: 'Toată Reșeaua Cunoscută'
+  },
+  user_card: {
+    follows_you: 'Te urmărește!',
+    following: 'Urmărit!',
+    follow: 'Urmărește',
+    blocked: 'Blocat!',
+    block: 'Blochează',
+    statuses: 'Stări',
+    mute: 'Pune pe mut',
+    muted: 'Pus pe mut',
+    followers: 'Următori',
+    followees: 'Urmărește',
+    per_day: 'pe zi'
+  },
+  timeline: {
+    show_new: 'Arată cele noi',
+    error_fetching: 'Erare la preluarea actualizărilor',
+    up_to_date: 'La zi',
+    load_older: 'Încarcă stări mai vechi',
+    conversation: 'Conversație'
+  },
+  settings: {
+    user_settings: 'Setările utilizatorului',
+    name_bio: 'Nume și Bio',
+    name: 'Nume',
+    bio: 'Bio',
+    avatar: 'Avatar',
+    current_avatar: 'Avatarul curent',
+    set_new_avatar: 'Setează avatar nou',
+    profile_banner: 'Banner de profil',
+    current_profile_banner: 'Bannerul curent al profilului',
+    set_new_profile_banner: 'Setează banner nou la profil',
+    profile_background: 'Fundalul de profil',
+    set_new_profile_background: 'Setează fundal nou',
+    settings: 'Setări',
+    theme: 'Temă',
+    filtering: 'Filtru',
+    filtering_explanation: 'Toate stările care conțin aceste cuvinte vor fi puse pe mut, una pe linie',
+    attachments: 'Atașamente',
+    hide_attachments_in_tl: 'Ascunde atașamentele în cronologie',
+    hide_attachments_in_convo: 'Ascunde atașamentele în conversații',
+    nsfw_clickthrough: 'Permite ascunderea al atașamentelor NSFW',
+    autoload: 'Permite încărcarea automată când scrolat la capăt',
+    reply_link_preview: 'Permite previzualizarea linkului de răspuns la planarea de mouse'
+  },
+  notifications: {
+    notifications: 'Notificări',
+    read: 'Citit!',
+    followed_you: 'te-a urmărit'
+  },
+  login: {
+    login: 'Loghează',
+    username: 'Nume utilizator',
+    password: 'Parolă',
+    register: 'Înregistrare',
+    logout: 'Deloghează'
+  },
+  registration: {
+    registration: 'Îregistrare',
+    fullname: 'Numele întreg',
+    email: 'Email',
+    bio: 'Bio',
+    password_confirm: 'Cofirmă parola'
+  },
+  post_status: {
+    posting: 'Postează',
+    default: 'Nu de mult am aterizat în L.A.'
+  },
+  finder: {
+    find_user: 'Găsește utilizator',
+    error_fetching_user: 'Eroare la preluarea utilizatorului'
+  },
+  general: {
+    submit: 'trimite'
+  }
+}
+
 const ja = {
   nav: {
     timeline: 'タイムライン',
@@ -671,6 +755,7 @@ const messages = {
   en,
   et,
   hu,
+  ro,
   ja,
   fr,
   it,

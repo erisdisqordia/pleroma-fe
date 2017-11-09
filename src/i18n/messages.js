@@ -386,8 +386,7 @@ const hu = {
   }
 }
 
-
-const en = {
+const ro = {
   nav: {
     timeline: 'Cronologie',
     mentions: 'Menționări',

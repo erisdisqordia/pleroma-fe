@@ -640,6 +640,89 @@ const pl = {
   }
 }
 
+const es = {
+  nav: {
+    timeline: 'Línea Temporal',
+    mentions: 'Menciones',
+    public_tl: 'Línea Temporal Pública',
+    twkn: 'Toda La Red Conocida'
+  },
+  user_card: {
+    follows_you: '¡Te sigue!',
+    following: '¡Siguiendo!',
+    follow: 'Seguir',
+    blocked: '¡Bloqueado!',
+    block: 'Bloquear',
+    statuses: 'Estados',
+    mute: 'Silenciar',
+    muted: 'Silenciado',
+    followers: 'Seguidores',
+    followees: 'Siguiendo',
+    per_day: 'por día'
+  },
+  timeline: {
+    show_new: 'Mostrar lo nuevo',
+    error_fetching: 'Error al cargar las actualizaciones',
+    up_to_date: 'Actualizado',
+    load_older: 'Cargar actualizaciones anteriores',
+    conversation: 'Conversación'
+  },
+  settings: {
+    user_settings: 'Ajustes de Usuario',
+    name_bio: 'Nombre y Biografía',
+    name: 'Nombre',
+    bio: 'Biografía',
+    avatar: 'Avatar',
+    current_avatar: 'Tu avatar actual',
+    set_new_avatar: 'Cambiar avatar',
+    profile_banner: 'Cabecera del perfil',
+    current_profile_banner: 'Cabecera actual',
+    set_new_profile_banner: 'Cambiar cabecera',
+    profile_background: 'Fondo del Perfil',
+    set_new_profile_background: 'Cambiar fondo del perfil',
+    settings: 'Ajustes',
+    theme: 'Tema',
+    filtering: 'Filtros',
+    filtering_explanation: 'Todos los estados que contengan estas palabras serán silenciados, una por línea',
+    attachments: 'Adjuntos',
+    hide_attachments_in_tl: 'Ocultar adjuntos en la línea temporal',
+    hide_attachments_in_convo: 'Ocultar adjuntos en las conversaciones',
+    nsfw_clickthrough: 'Activar el clic para ocultar los adjuntos NSFW',
+    autoload: 'Activar carga automática al llegar al final de la página',
+    reply_link_preview: 'Activar la previsualización del enlace de responder al pasar el ratón por encima'
+  },
+  notifications: {
+    notifications: 'Notificaciones',
+    read: '¡Leído!',
+    followed_you: 'empezó a seguirte'
+  },
+  login: {
+    login: 'Identificación',
+    username: 'Usuario',
+    password: 'Contraseña',
+    register: 'Registrar',
+    logout: 'Salir'
+  },
+  registration: {
+    registration: 'Registro',
+    fullname: 'Nombre a mostrar',
+    email: 'Correo electrónico',
+    bio: 'Biografía',
+    password_confirm: 'Confirmación de contraseña'
+  },
+  post_status: {
+    posting: 'Publicando',
+    default: 'Acabo de aterrizar en L.A.'
+  },
+  finder: {
+    find_user: 'Encontrar usuario',
+    error_fetching_user: 'Error al buscar usuario'
+  },
+  general: {
+    submit: 'Enviar'
+  }
+}
+
 const messages = {
   de,
   fi,
@@ -649,7 +732,8 @@ const messages = {
   ja,
   fr,
   it,
-  pl
+  pl,
+  es
 }
 
 export default messages

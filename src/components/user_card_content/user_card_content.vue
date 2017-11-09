@@ -46,7 +46,7 @@
               </button>
             </span>
           </div>
-          <div class='block' v-if='isOtherUser'>
+          <div class='block' v-if='isOtherUser && loggedIn'>
             <span v-if='user.statusnet_blocking'>
               <button @click="unblockUser" class="base04 base00-background pressed">
                 {{ $t('user_card.blocked') }}
@@ -150,7 +150,7 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
-  
+
 .profile-panel-background {
   background-size: cover;
   border-radius: 10px;

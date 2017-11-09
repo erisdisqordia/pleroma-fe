@@ -271,8 +271,14 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       let retweet
       // If the retweeted status is already there, don't add the retweet
       // to the timeline.
-      if (timeline && find(timelineObject.statuses, {id: retweetedStatus.id})) {
-        // Already have it visible, don't add to timeline, don't show.
+      if (timeline && find(timelineObject.statuses, (s) => {
+        if (s.retweeted_status) {
+          return s.id === retweetedStatus.id || s.retweeted_status.id === retweetedStatus.id
+        } else {
+          return s.id === retweetedStatus.id
+        }
+      })) {
+        // Already have it visible (either as the original or another RT), don't add to timeline, don't show.
         retweet = addStatus(status, false, false)
       } else {
         retweet = addStatus(status, showImmediately)

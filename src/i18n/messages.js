@@ -553,39 +553,42 @@ const fr = {
   nav: {
     timeline: 'Journal',
     mentions: 'Notifications',
-    public_tl: 'Statuts Locaux',
-    twkn: 'Le Réseau Tout Entier'
+    public_tl: 'Statuts locaux',
+    twkn: 'Le réseau connu'
   },
   user_card: {
-    follows_you: 'Vous Suit!',
-    following: 'Suivis!',
-    follow: 'Suivi',
+    follows_you: 'Vous suit!',
+    following: 'Suivi!',
+    follow: 'Suivre',
+    blocked: 'Bloqué',
+    block: 'Bloquer',
     statuses: 'Statuts',
-    mute: 'En Sourdine',
-    muted: 'Mis En Sourdine',
-    followers: 'Vous Suivent',
+    mute: 'En sourdine',
+    muted: 'Mis en sourdine',
+    followers: 'Vous suivent',
     followees: 'Suivis',
     per_day: 'par jour'
   },
   timeline: {
     show_new: 'Afficher plus',
     error_fetching: 'Erreur en cherchant des mises à jours',
-    up_to_date: 'A jour',
-    load_older: 'Afficher plus'
+    up_to_date: 'À jour',
+    load_older: 'Afficher plus',
+    conversation: 'Conversation'
   },
   settings: {
-    user_settings: 'Paramètres Utilisateur',
+    user_settings: 'Paramètres utilisateur',
     name_bio: 'Nom & Bio',
     name: 'Nom',
-    bio: 'Bio',
+    bio: 'Bioraphie',
     avatar: 'Avatar',
     current_avatar: 'Votre avatar',
     set_new_avatar: 'Changer d\'avatar',
-    profile_banner: 'Couverture du Profil',
-    current_profile_banner: 'Couverture du Profil',
-    set_new_profile_banner: 'Nouvelle couverture',
+    profile_banner: 'Bannière du Profil',
+    current_profile_banner: 'Bannière du profil',
+    set_new_profile_banner: 'Changer de bannière',
     profile_background: 'Image de fond',
-    set_new_profile_background: 'Nouvelle image de fond',
+    set_new_profile_background: 'Changer l\'image de fond',
     settings: 'Paramètres',
     theme: 'Thème',
     filtering: 'Filtre',
@@ -593,14 +596,36 @@ const fr = {
     attachments: 'Pièces jointes',
     hide_attachments_in_tl: 'Cacher les pièces jointes dans le journal',
     hide_attachments_in_convo: 'Cacher les pièces jointes dans les conversations',
-    nsfw_clickthrough: 'Activer le clic pour afficher les images taggées NSFW',
+    nsfw_clickthrough: 'Activer le clic pour afficher les images marquées comme contenu adulte ou sensible',
     autoload: 'Activer le chargement automatique une fois le bas de la page atteint',
-    reply_link_preview: 'Activer un preview sur passage de la souris'
+    reply_link_preview: 'Activer un aperçu sur passage de la souris'
   },
   notifications: {
     notifications: 'Notfications',
     read: 'Lu!',
     followed_you: 'vous a suivi'
+  },
+  login: {
+    login: 'Conenxion',
+    username: 'Nom d\'utilisateur',
+    password: 'Mot de passe',
+    register: 'S\'inscrire',
+    logout: 'Déconnexion'
+  },
+  registration: {
+    registration: 'Inscription',
+    fullname: 'Nom complet',
+    email: 'Adresse courriel',
+    bio: 'Biographie',
+    password_confirm: 'Confirmer le mot de passe'
+  },
+  post_status: {
+    posting: 'Envoi en cours',
+    default: 'Écrivez ici votre prochain statut.'
+  },
+  finder: {
+    find_user: 'Chercher un utilisateur',
+    error_fetching_user: 'Une erreur est survenue pendant la recherche d\'un utilisateur'
   },
   general: {
     submit: 'Envoyer'

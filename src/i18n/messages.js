@@ -831,6 +831,89 @@ const es = {
   }
 }
 
+const pt = {
+  nav: {
+    timeline: 'Linha do tempo',
+    mentions: 'Menções',
+    public_tl: 'Linha do tempo pública',
+    twkn: 'Toda a rede conhecida'
+  },
+  user_card: {
+    follows_you: 'Segue você!',
+    following: 'Seguindo!',
+    follow: 'Seguir',
+    blocked: 'Bloqueado!',
+    block: 'Bloquear',
+    statuses: 'Postagens',
+    mute: 'Mutar',
+    muted: 'Mudo',
+    followers: 'Seguidores',
+    followees: 'Seguindo',
+    per_day: 'por dia'
+  },
+  timeline: {
+    show_new: 'Mostrar novas',
+    error_fetching: 'Erro buscando atualizações',
+    up_to_date: 'Atualizado',
+    load_older: 'Carregar postagens antigas',
+    conversation: 'Conversa'
+  },
+  settings: {
+    user_settings: 'Configurações de Usuário',
+    name_bio: 'Nome & Biografia',
+    name: 'Nome',
+    bio: 'Biografia',
+    avatar: 'Avatar',
+    current_avatar: 'Seu avatar atual',
+    set_new_avatar: 'Mudar avatar',
+    profile_banner: 'Capa de perfil',
+    current_profile_banner: 'Sua capa de perfil atual',
+    set_new_profile_banner: 'Mudar capa de perfil',
+    profile_background: 'Plano de fundo de perfil',
+    set_new_profile_background: 'Mudar o plano de fundo de perfil',
+    settings: 'Configurações',
+    theme: 'Tema',
+    filtering: 'Filtragem',
+    filtering_explanation: 'Todas as postagens contendo estas palavras serão silenciadas, uma por linha.',
+    attachments: 'Anexos',
+    hide_attachments_in_tl: 'Ocultar anexos na linha do tempo.',
+    hide_attachments_in_convo: 'Ocultar anexos em conversas',
+    nsfw_clickthrough: 'Habilitar clique para ocultar anexos NSFW',
+    autoload: 'Habilitar carregamento automático quando a rolagem chegar ao fim.',
+    reply_link_preview: 'Habilitar a pré-visualização de link de respostas ao passar o mouse.'
+  },
+  notifications: {
+    notifications: 'Notificações',
+    read: 'Ler!',
+    followed_you: 'seguiu você'
+  },
+  login: {
+    login: 'Entrar',
+    username: 'Usuário',
+    password: 'Senha',
+    register: 'Registrar',
+    logout: 'Sair'
+  },
+  registration: {
+    registration: 'Registro',
+    fullname: 'Nome para exibição',
+    email: 'Correio eletônico',
+    bio: 'Biografia',
+    password_confirm: 'Confirmação de senha'
+  },
+  post_status: {
+    posting: 'Publicando',
+    default: 'Acabo de aterrizar em L.A.'
+  },
+  finder: {
+    find_user: 'Buscar usuário',
+    error_fetching_user: 'Erro procurando usuário'
+  },
+  general: {
+    submit: 'Enviar'
+  }
+}
+
 const messages = {
   de,
   fi,
@@ -842,7 +925,8 @@ const messages = {
   fr,
   it,
   pl,
-  es
+  es,
+  pt
 }
 
 export default messages

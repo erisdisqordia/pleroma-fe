@@ -188,6 +188,7 @@
          img, video {
            max-width: 100%;
            max-height: 400px;
+           object-fit: contain;
          }
 
          blockquote {

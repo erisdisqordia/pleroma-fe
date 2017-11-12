@@ -27,11 +27,6 @@
 <script src="./conversation.js"></script>
 
 <style lang="scss">
-  .conversation-heading {
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-  }
-
   .status-preview {
     position: absolute;
     max-width: 35em;

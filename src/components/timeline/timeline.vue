@@ -14,7 +14,7 @@
         {{$t('timeline.up_to_date')}}
       </div>
     </div>
-    <div class="panel-body">
+    <div class="panel-body base02-background">
       <div class="timeline">
         <status-or-conversation v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status"></status-or-conversation>
         <a href="#" v-on:click.prevent='fetchOlderStatuses()' v-if="!timeline.loading">
@@ -30,7 +30,7 @@
         {{$t('user_card.followers')}}
       </div>
     </div>
-    <div class="panel-body">
+    <div class="panel-body base02-background">
       <div class="timeline">
         <user-card v-for="follower in followers" :user="follower" :showFollows="false"></user-card>
       </div>
@@ -42,7 +42,7 @@
         {{$t('user_card.followees')}}
       </div>
     </div>
-    <div class="panel-body">
+    <div class="panel-body base02-background">
       <div class="timeline">
         <user-card v-for="friend in friends" :user="friend" :showFollows="true"></user-card>
       </div>

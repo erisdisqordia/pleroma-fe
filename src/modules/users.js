@@ -102,6 +102,10 @@ const users = {
                     store.commit('addNewUsers', mutedUsers)
                   })
 
+                  if ('Notification' in window && window.Notification.permission === 'default') {
+                    window.Notification.requestPermission()
+                  }
+
                   // Fetch our friends
                   store.rootState.api.backendInteractor.fetchFriends()
                     .then((friends) => commit('addNewUsers', friends))

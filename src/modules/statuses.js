@@ -239,6 +239,25 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     // Only add a new notification if we don't have one for the same action
     if (!find(state.notifications, (oldNotification) => oldNotification.action.id === action.id)) {
       state.notifications.push({type, status, action, seen: false})
+
+      if ('Notification' in window && window.Notification.permission === 'granted') {
+        const title = action.user.name
+        const result = {}
+        result.icon = action.user.profile_image_url
+        result.body = action.text // there's a problem that it doesn't put a space before links tho
+
+        // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
+        if (action.attachments.length > 0 && !action.nsfw &&
+            action.attachments[0].mimetype.startsWith('image/')) {
+          result.image = action.attachments[0].url
+        }
+
+        let notification = new window.Notification(title, result)
+
+        // Chrome is known for not closing notifications automatically
+        // according to MDN, anyway.
+        setTimeout(notification.close.bind(notification), 5000)
+      }
     }
   }
 

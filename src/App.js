@@ -30,7 +30,7 @@ export default {
   mounted () {
     // for some reason, at least in dev mode, dom is not ready enough at this point
     // in theory calling the function directly here should be enough, but it's not
-    setTimeout( () => { this.fixSidebarWidth() }, 500)
+    setTimeout(() => { this.fixSidebarWidth() }, 500)
   },
   destroyed () {
     window.removeEventListener('resize', this.fixSidebarWidth)
@@ -53,8 +53,8 @@ export default {
         barwidth = window.innerWidth - document.body.scrollWidth
       }
       // adjust the sidebar size to fit the scrollbar width to keep the gap consistently sized
-      document.getElementById("sidebar-container").style.width = `${345 + barwidth}px`
-      document.getElementById("sidebar-container").style.paddingRight = `${barwidth}px`
+      document.getElementById('sidebar-container').style.width = `${345 + barwidth}px`
+      document.getElementById('sidebar-container').style.paddingRight = `${barwidth}px`
     }
   }
 }

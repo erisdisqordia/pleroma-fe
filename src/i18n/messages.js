@@ -103,6 +103,7 @@ const fi = {
     hide_attachments_in_convo: 'Piilota liitteet keskusteluissa',
     nsfw_clickthrough: 'Piilota NSFW liitteet klikkauksen taakse.',
     autoload: 'Lataa vanhempia viestejä automaattisesti ruudun pohjalla',
+    streaming: 'Näytä uudet viestit automaattisesti ollessasi ruudun huipulla',
     reply_link_preview: 'Keskusteluiden vastauslinkkien esikatselu'
   },
   notifications: {
@@ -186,6 +187,7 @@ const en = {
     hide_attachments_in_convo: 'Hide attachments in conversations',
     nsfw_clickthrough: 'Enable clickthrough NSFW attachment hiding',
     autoload: 'Enable automatic loading when scrolled to the bottom',
+    streaming: 'Enable automatic streaming of new posts when scrolled to the top',
     reply_link_preview: 'Enable reply-link preview on mouse hover'
   },
   notifications: {

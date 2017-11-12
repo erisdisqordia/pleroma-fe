@@ -14,7 +14,7 @@
     </div>
     <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying" v-if="replying"/>
   </div>
-  <div class="status-el base00-background base03-border" v-else-if="!status.deleted" v-bind:class="[{ 'base01-background': isFocused }, { 'status-conversation': inConversation }]" >
+  <div class="status-el base00-background base03-border status-fadein" v-else-if="!status.deleted" v-bind:class="[{ 'base01-background': isFocused }, { 'status-conversation': inConversation }]" >
     <template v-if="muted">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
@@ -224,6 +224,20 @@
              }
          }
      }
+ }
+
+ .status-fadein {
+   animation-duration: 0.5s;
+   animation-name: fadein;
+ }
+
+ @keyframes fadein {
+   from {
+     opacity: 0;
+   }
+   to {
+     opacity: 1;
+   }
  }
 
  .greentext {

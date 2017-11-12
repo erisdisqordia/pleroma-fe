@@ -33,6 +33,10 @@
                 <label for="autoLoad">{{$t('settings.autoload')}}</label>
             </li>
             <li>
+                <input type="checkbox" id="streaming" v-model="streamingLocal">
+                <label for="streaming">{{$t('settings.streaming')}}</label>
+            </li>
+            <li>
                 <input type="checkbox" id="hoverPreview" v-model="hoverPreviewLocal">
                 <label for="hoverPreview">{{$t('settings.reply_link_preview')}}</label>
             </li>

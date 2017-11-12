@@ -9,6 +9,7 @@ const settings = {
       hideNsfwLocal: this.$store.state.config.hideNsfw,
       muteWordsString: this.$store.state.config.muteWords.join('\n'),
       autoLoadLocal: this.$store.state.config.autoLoad,
+      streamingLocal: this.$store.state.config.streaming,
       hoverPreviewLocal: this.$store.state.config.hoverPreview
     }
   },
@@ -32,6 +33,9 @@ const settings = {
     },
     autoLoadLocal (value) {
       this.$store.dispatch('setOption', { name: 'autoLoad', value })
+    },
+    streamingLocal (value) {
+      this.$store.dispatch('setOption', { name: 'streaming', value })
     },
     hoverPreviewLocal (value) {
       this.$store.dispatch('setOption', { name: 'hoverPreview', value })

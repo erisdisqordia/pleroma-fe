@@ -39,6 +39,16 @@
           margin: 0.5em 0.7em 0.6em 0.0em;
           align-self: flex-start;
 
+          border-style: solid;
+          border-width: 1px;
+          border-radius: 5px;
+          overflow: hidden;
+
+          // fixes small gap below video
+          &.video {
+            line-height: 0;
+          }
+
           &.html {
             flex-basis: 100%;
             display: flex;
@@ -53,7 +63,6 @@
               margin: 10px;
               padding: 5px;
               background: rgba(230,230,230,0.6);
-              border-radius: 5px;
               font-weight: bold;
               z-index: 4;
           }
@@ -61,8 +70,6 @@
           video {
               max-height: 500px;
               height: 100%;
-              border: 1px solid;
-              border-radius: 5px;
               width: 100%;
               z-index: 0;
           }
@@ -75,14 +82,9 @@
               width: 100%;
               height: 100%;
               flex: 1;
-              border: 1px solid;
-              border-radius: 5px;
           }
 
           .oembed {
-              border: 1px solid;
-              border-radius: 5px;
-              border-color: inherit;
               width: 100%;
               margin-right: 15px;
               display: flex;
@@ -117,9 +119,6 @@
               flex: 1;
 
               img {
-                  border-style: solid;
-                  border-width: 1px;
-                  border-radius: 5px;
                   object-fit: contain;
                   width: 100%;
                   height: 100%; /* If this isn't here, chrome will stretch the images */

@@ -164,6 +164,7 @@
          width: 24px;
          height: 24px;
          border-radius: 2px;
+         object-fit: contain;
        }
        span {
          line-height: 24px;

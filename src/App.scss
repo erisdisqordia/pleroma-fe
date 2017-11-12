@@ -127,6 +127,14 @@ main-router {
     margin: 0.5em;
 
     border-radius: 10px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.5);
+}
+
+.panel-body:empty::before {
+    content: "¯\\_(ツ)_/¯"; // Could use words but it'd require translations
+    display: block;
+    margin: 20px;
+    text-align: center;
 }
 
 .panel-heading {

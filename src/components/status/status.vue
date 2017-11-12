@@ -129,6 +129,8 @@
      word-break: break-word;
      border-left-width: 0px;
      line-height: 18px;
+     border-bottom: 1px solid;
+     border-bottom-color: inherit;
 
      .notify {
          .avatar {
@@ -188,6 +190,7 @@
          img, video {
            max-width: 100%;
            max-height: 400px;
+           object-fit: contain;
          }
 
          blockquote {
@@ -279,10 +282,17 @@
 
  .status {
      padding: 0.4em 0.7em 0.45em 0.7em;
-     border-bottom: 1px solid;
-     border-bottom-color: inherit;
      border-left: 4px rgba(255, 48, 16, 0.65);
      border-left-style: inherit;
+ }
+
+ .status-conversation:last-child {
+    border-bottom: none;
+ }
+
+ .timeline .panel.timeline {
+    border-radius: 10px;
+    overflow: hidden;
  }
 
  .muted {

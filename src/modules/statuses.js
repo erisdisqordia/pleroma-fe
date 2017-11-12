@@ -131,7 +131,7 @@ export const statusType = (status) => {
     return 'favorite'
   }
 
-  if (status.text.match(/deleted notice {{tag/)) {
+  if (status.text.match(/deleted notice {{tag/) || status.qvitter_delete_notice) {
     return 'deletion'
   }
 
@@ -211,8 +211,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
           sortTimeline(mentions)
         }
-
-        addNotification({ type: 'mention', status, action: status })
+        // Don't add notification for self-mention
+        if (status.user.id !== user.id) {
+          addNotification({ type: 'mention', status, action: status })
+        }
       }
     }
 

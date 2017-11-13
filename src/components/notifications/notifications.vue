@@ -20,7 +20,8 @@
                 <i class="fa icon-star"></i>
                 <small><router-link :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
               </h1>
-            <div v-html="notification.status.statusnet_html"></div>
+              <div class="notification-gradient" :style="hiderStyle"></div>
+              <div class="notification-content" v-html="notification.status.statusnet_html"></div>
             </div>
             <div v-if="notification.type === 'repeat'">
               <h1>
@@ -28,7 +29,8 @@
                 <i class="fa icon-retweet lit"></i>
                 <small><router-link :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
               </h1>
-            <div v-html="notification.status.statusnet_html"></div>
+              <div class="notification-gradient" :style="hiderStyle"></div>
+              <div class="notification-content" v-html="notification.status.statusnet_html"></div>
             </div>
             <div v-if="notification.type === 'mention'">
               <h1>

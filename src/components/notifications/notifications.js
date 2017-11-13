@@ -23,6 +23,11 @@ const Notifications = {
     },
     unseenCount () {
       return this.unseenNotifications.length
+    },
+    hiderStyle () {
+      return {
+        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors['base00']} 80%)`
+      }
     }
   },
   components: {

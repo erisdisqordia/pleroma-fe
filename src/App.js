@@ -23,6 +23,18 @@ export default {
     style () { return { 'background-image': `url(${this.background})` } },
     sitename () { return this.$store.state.config.name }
   },
+  created () {
+    // this is to detect user zooming mostly
+    window.addEventListener('resize', this.fixSidebarWidth)
+  },
+  mounted () {
+    // for some reason, at least in dev mode, dom is not ready enough at this point
+    // in theory calling the function directly here should be enough, but it's not
+    setTimeout(() => { this.fixSidebarWidth() }, 500)
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.fixSidebarWidth)
+  },
   methods: {
     activatePanel (panelName) {
       this.mobileActivePanel = panelName
@@ -32,6 +44,17 @@ export default {
     },
     logout () {
       this.$store.dispatch('logout')
+    },
+    fixSidebarWidth () {
+      // firefox
+      let barwidth = window.innerWidth - document.body.offsetWidth
+      if (document.body.offsetWidth <= 0) {
+        // chromium
+        barwidth = window.innerWidth - document.body.scrollWidth
+      }
+      // adjust the sidebar size to fit the scrollbar width to keep the gap consistently sized
+      document.getElementById('sidebar-container').style.width = `${345 + barwidth}px`
+      document.getElementById('sidebar-container').style.paddingRight = `${barwidth}px`
     }
   }
 }

@@ -218,16 +218,19 @@ nav {
 }
 
 @media all and (min-width: 960px) {
+  body {
+    overflow-y: scroll;
+  }
   .sidebar {
     overflow: hidden;
     max-height: 100vh;
-    width: 350px;
+    width: 345px;
     position: fixed;
     margin-top: -10px;
 
     .sidebar-container {
       height: 96vh;
-      width: 362px;
+      width: 365px;
       padding-top: 10px;
       padding-right: 20px;
       overflow-x: hidden;

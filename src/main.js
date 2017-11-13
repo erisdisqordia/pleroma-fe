@@ -45,6 +45,7 @@ const persistedStateOptions = {
     'config.hideNsfw',
     'config.autoLoad',
     'config.hoverPreview',
+    'config.streaming',
     'config.muteWords',
     'users.lastLoginName'
   ]

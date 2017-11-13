@@ -1,6 +1,6 @@
 <template>
   <div id="app" v-bind:style="style" class="base02-background">
-    <nav class='container base01-background base04' @click="scrollToTop()">
+    <nav class='container base01-background base04' @click="scrollToTop()" id="nav">
       <div class='inner-nav' :style="logoStyle">
         <div class='item'>
           <router-link :to="{ name: 'root'}">{{sitename}}</router-link>
@@ -18,11 +18,13 @@
         <button @click="activatePanel('timeline')" class="base01-background base04">Timeline</button>
       </div>
       <div class="sidebar-flexer" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar'}">
-        <div class="sidebar" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar' }">
-          <div class="sidebar-container" id="sidebar-container">
-            <user-panel></user-panel>
-            <nav-panel></nav-panel>
-            <notifications v-if="currentUser"></notifications>
+        <div class="sidebar-bounds">
+          <div class="sidebar-scroller">
+            <div class="sidebar">
+              <user-panel></user-panel>
+              <nav-panel></nav-panel>
+              <notifications v-if="currentUser"></notifications>
+            </div>
           </div>
         </div>
       </div>

@@ -241,6 +241,10 @@
 
      .status-content {
          margin: 3px 15px 4px 0;
+         max-height: 400px;
+         overflow-y: auto;
+         overflow-x: hidden;
+         
          img, video {
            max-width: 100%;
            max-height: 400px;

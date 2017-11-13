@@ -190,7 +190,7 @@ nav {
     flex-shrink: 1;
 }
 
-.sidebar {
+.sidebar-bounds {
   flex: 0;
   flex-basis: 35%;
 }
@@ -221,20 +221,24 @@ nav {
   body {
     overflow-y: scroll;
   }
-  .sidebar {
+  .sidebar-bounds {
     overflow: hidden;
     max-height: 100vh;
     width: 345px;
     position: fixed;
     margin-top: -10px;
 
-    .sidebar-container {
+    .sidebar-scroller {
       height: 96vh;
       width: 365px;
       padding-top: 10px;
-      padding-right: 20px;
+      padding-right: 50px;
       overflow-x: hidden;
       overflow-y: scroll;
+    }
+
+    .sidebar {
+      width: 345px;
     }
   }
   .sidebar-flexer {

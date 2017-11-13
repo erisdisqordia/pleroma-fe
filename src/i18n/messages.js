@@ -606,7 +606,7 @@ const fr = {
     followed_you: 'vous a suivi'
   },
   login: {
-    login: 'Conenxion',
+    login: 'Connexion',
     username: 'Nom d\'utilisateur',
     password: 'Mot de passe',
     register: 'S\'inscrire',

@@ -9,6 +9,14 @@
         <style-switcher></style-switcher>
       </div>
       <div class="setting-item">
+        <h3>Custom theme</h3>
+        <p>Enter hex color codes (#aabbcc) into the text fields.</p>
+        <input type="text" placeholder="Background" v-model="bgColorLocal">
+        <input type="text" placeholder="Foreground" v-model="fgColorLocal">
+        <input type="text" placeholder="Highlight" v-model="linkColorLocal">
+        <button @click="setCustomTheme">Submit</button>
+      </div>
+      <div class="setting-item">
         <h2>{{$t('settings.filtering')}}</h2>
         <p>{{$t('settings.filtering_explanation')}}</p>
         <textarea id="muteWords" v-model="muteWordsString"></textarea>

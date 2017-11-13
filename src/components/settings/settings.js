@@ -10,7 +10,10 @@ const settings = {
       muteWordsString: this.$store.state.config.muteWords.join('\n'),
       autoLoadLocal: this.$store.state.config.autoLoad,
       streamingLocal: this.$store.state.config.streaming,
-      hoverPreviewLocal: this.$store.state.config.hoverPreview
+      hoverPreviewLocal: this.$store.state.config.hoverPreview,
+      bgColorLocal: '',
+      fgColorLocal: '',
+      linkColorLocal: ''
     }
   },
   components: {
@@ -19,6 +22,32 @@ const settings = {
   computed: {
     user () {
       return this.$store.state.users.currentUser
+    }
+  },
+  methods: {
+    setCustomTheme () {
+      if (!this.bgColorLocal && !this.fgColorLocal && !this.linkColorLocal) {
+        // reset to picked themes
+      }
+      const rgb = (hex) => {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null
+      }
+      const bgRgb = rgb(this.bgColorLocal)
+      const fgRgb = rgb(this.fgColorLocal)
+      const linkRgb = rgb(this.linkColorLocal)
+      if (bgRgb && fgRgb && linkRgb) {
+        console.log('all colors ok')
+        this.$store.dispatch('setOption', { name: 'customTheme', value: {
+          fg: fgRgb,
+          bg: bgRgb,
+          link: linkRgb
+        }})
+      }
     }
   },
   watch: {

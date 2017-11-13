@@ -32,7 +32,10 @@ const config = {
           break
         case 'theme':
           const fullPath = `/static/css/${value}`
-          StyleSetter.setStyle(fullPath, commit)
+          StyleSetter.setStyle(fullPath, null, commit)
+          break
+        case 'customTheme':
+          StyleSetter.setStyle(null, value, commit)
       }
     }
   }

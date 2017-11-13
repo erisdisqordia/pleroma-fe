@@ -1,6 +1,6 @@
 import { times } from 'lodash'
 
-const setStyle = (href, commit) => {
+const setStyle = (href, col, commit) => {
   /***
       What's going on here?
       I want to make it easy for admins to style this application. To have
@@ -48,7 +48,49 @@ const setStyle = (href, commit) => {
     styleSheet.insertRule(`.base03-border { border-color: ${colors['base03']}`, 'index-max')
     body.style.display = 'initial'
   }
-  cssEl.addEventListener('load', setDynamic)
+
+  const rgb2hex = (r, g, b) => {
+    return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`
+  }
+
+  const setColors = () => {
+    const styleEl = document.createElement('style')
+    head.appendChild(styleEl)
+    const styleSheet = styleEl.sheet
+
+    const isDark = (col.fg.r + col.fg.g + col.fg.b) > (col.bg.r + col.bg.g + col.bg.b)
+    let colors = {}
+
+    times(4, (n) => {
+      const nameLow = `base0${n.toString(16).toUpperCase()}`
+      const nameHigh = `base0${(n + 4).toString(16).toUpperCase()}`
+      if (isDark) {
+        colors[nameLow] = rgb2hex(col.bg.r + 10 * n, col.bg.g + 10 * n, col.bg.b + 10 * n)
+        colors[nameHigh] = rgb2hex(col.fg.r - 10 * n, col.fg.g - 10 * n, col.fg.b - 10 * n)
+      } else {
+        colors[nameLow] = rgb2hex(col.bg.r - 10 * n, col.bg.g - 10 * n, col.bg.b - 10 * n)
+        colors[nameHigh] = rgb2hex(col.fg.r + 10 * n, col.fg.g + 10 * n, col.fg.b + 10 * n)
+      }
+      styleSheet.insertRule(`.${nameLow} { color: ${colors[nameLow]}`, 'index-max')
+      styleSheet.insertRule(`.${nameHigh} { color: ${colors[nameHigh]}`, 'index-max')
+      styleSheet.insertRule(`.${nameLow}-background { background-color: ${colors[nameLow]}`, 'index-max')
+      styleSheet.insertRule(`.${nameHigh}-background { background-color: ${colors[nameHigh]}`, 'index-max')
+    })
+    colors['base08'] = rgb2hex(col.link.r, col.link.g, col.link.b)
+    commit('setOption', { name: 'colors', value: colors })
+    console.log(colors)
+
+    styleSheet.insertRule(`a { color: ${colors['base08']}`, 'index-max')
+    styleSheet.insertRule(`body { color: ${colors['base05']}`, 'index-max')
+    styleSheet.insertRule(`.base05-border { border-color: ${colors['base05']}`, 'index-max')
+    styleSheet.insertRule(`.base03-border { border-color: ${colors['base03']}`, 'index-max')
+    body.style.display = 'initial'
+  }
+  if (col) {
+    setColors()
+  } else {
+    cssEl.addEventListener('load', setDynamic)
+  }
 }
 
 const StyleSetter = {

@@ -23,12 +23,8 @@ const Attachment = {
     hidden () {
       return this.nsfw && this.hideNsfwLocal && !this.showHidden
     },
-    autoHeight () {
-      if (this.type === 'image' && this.nsfw) {
-        return {
-          'min-height': '109px'
-        }
-      }
+    isEmpty () {
+      return this.type === 'html' && !this.attachment.oembed
     }
   },
   methods: {

@@ -11,6 +11,11 @@ const Timeline = {
     'userId',
     'tag'
   ],
+  data () {
+    return {
+      paused: false
+    }
+  },
   computed: {
     timelineError () { return this.$store.state.statuses.error },
     followers () {
@@ -21,6 +26,9 @@ const Timeline = {
     },
     viewing () {
       return this.timeline.viewing
+    },
+    newStatusCount () {
+      return this.timeline.newStatusCount
     }
   },
   components: {
@@ -56,6 +64,7 @@ const Timeline = {
   methods: {
     showNewStatuses () {
       this.$store.commit('showNewStatuses', { timeline: this.timelineName })
+      this.paused = false
     },
     fetchOlderStatuses () {
       const store = this.$store
@@ -88,6 +97,21 @@ const Timeline = {
           this.$el.offsetHeight > 0 &&
           (window.innerHeight + window.pageYOffset) >= (height - 750)) {
         this.fetchOlderStatuses()
+      }
+    }
+  },
+  watch: {
+    newStatusCount (count) {
+      if (!this.$store.state.config.streaming) {
+        return
+      }
+      if (count > 0) {
+        // only 'stream' them when you're scrolled to the top
+        if (window.pageYOffset < 15 && !this.paused) {
+          this.showNewStatuses()
+        } else {
+          this.paused = true
+        }
       }
     }
   }

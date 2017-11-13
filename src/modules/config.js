@@ -8,6 +8,7 @@ const defaultState = {
   hideAttachmentsInConv: false,
   hideNsfw: true,
   autoLoad: true,
+  streaming: false,
   hoverPreview: true,
   muteWords: []
 }

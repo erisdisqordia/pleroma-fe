@@ -129,8 +129,11 @@
      word-break: break-word;
      border-left-width: 0px;
      line-height: 18px;
-     border-bottom: 1px solid;
-     border-bottom-color: inherit;
+
+     .timeline & {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+     }
 
      .notify {
          .avatar {

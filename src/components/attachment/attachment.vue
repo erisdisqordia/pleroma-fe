@@ -1,5 +1,5 @@
 <template>
-  <div class="attachment base03-border" :class="{[type]: true, loading}" :style="autoHeight">
+  <div class="attachment base03-border" :class="{[type]: true, loading}" v-show="!isEmpty">
     <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"/>
     </a>
@@ -50,7 +50,8 @@
           }
 
           &.html {
-            flex-basis: 100%;
+            flex-basis: 90%;
+            width: 100%;
             display: flex;
           }
 

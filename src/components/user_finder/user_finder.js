@@ -7,6 +7,7 @@ const UserFinder = {
   }),
   methods: {
     findUser (username) {
+      username = username[0] === '@' ? username.slice(1) : username
       this.loading = true
       this.$store.state.api.backendInteractor.externalProfile(username)
         .then((user) => {

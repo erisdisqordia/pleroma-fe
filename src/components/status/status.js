@@ -92,7 +92,7 @@ const Status = {
     },
     gotoOriginal (id) {
       // only handled by conversation, not status_or_conversation
-      if (this.expanded) {
+      if (this.inConversation) {
         this.$emit('goto', id)
       }
     },
@@ -122,18 +122,9 @@ const Status = {
       } else if (this.preview.id !== targetId) {
         this.preview = find(statuses, { 'id': targetId })
       }
-      /*
-      if (this.$store.state.config.hoverPreview) {
-        let rect = event.target.getBoundingClientRect()
-        this.$emit('preview', Number(id), rect.left + 20, rect.top + 20 + window.pageYOffset)
-      }
-      */
     },
     replyLeave () {
       this.showPreview = false
-      /*
-      this.$emit('preview', 0, 0, 0)
-      */
     }
   },
   watch: {

@@ -28,7 +28,7 @@ const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 const BLOCKING_URL = '/api/blocks/create.json'
 const UNBLOCKING_URL = '/api/blocks/destroy.json'
-// const USER_URL = '/api/users/show.json'
+const USER_URL = '/api/users/show.json'
 
 import { each, map } from 'lodash'
 import 'whatwg-fetch'
@@ -202,6 +202,12 @@ const unblockUser = ({id, credentials}) => {
   }).then((data) => data.json())
 }
 
+const fetchUser = ({id, credentials}) => {
+  let url = `${USER_URL}?user_id=${id}`
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
+}
+
 const fetchFriends = ({id, credentials}) => {
   let url = `${FRIENDS_URL}?user_id=${id}`
   return fetch(url, { headers: authHeaders(credentials) })
@@ -363,6 +369,7 @@ const apiService = {
   unfollowUser,
   blockUser,
   unblockUser,
+  fetchUser,
   favorite,
   unfavorite,
   retweet,

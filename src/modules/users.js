@@ -57,6 +57,10 @@ const users = {
   state: defaultState,
   mutations,
   actions: {
+    fetchUser (store, id) {
+      store.rootState.api.backendInteractor.fetchUser({id})
+        .then((user) => store.commit('addNewUsers', user))
+    },
     addNewStatuses (store, { statuses }) {
       const users = map(statuses, 'user')
       const retweetedUsers = compact(map(statuses, 'retweeted_status.user'))

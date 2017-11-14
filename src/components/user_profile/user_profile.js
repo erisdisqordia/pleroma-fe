@@ -5,6 +5,9 @@ const UserProfile = {
   created () {
     this.$store.commit('clearTimeline', { timeline: 'user' })
     this.$store.dispatch('startFetching', ['user', this.userId])
+    if (!this.$store.state.users.usersObject[this.userId]) {
+      this.$store.dispatch('fetchUser', this.userId)
+    }
   },
   destroyed () {
     this.$store.dispatch('stopFetching', 'user')
@@ -18,7 +21,7 @@ const UserProfile = {
       if (this.timeline.statuses[0]) {
         return this.timeline.statuses[0].user
       } else {
-        return false
+        return this.$store.state.users.usersObject[this.userId] || false
       }
     }
   },

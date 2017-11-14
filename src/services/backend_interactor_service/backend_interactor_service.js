@@ -22,6 +22,10 @@ const backendInteractorService = (credentials) => {
     return apiService.fetchAllFollowing({username, credentials})
   }
 
+  const fetchUser = ({id}) => {
+    return apiService.fetchUser({id, credentials})
+  }
+
   const followUser = (id) => {
     return apiService.followUser({credentials, id})
   }
@@ -65,6 +69,7 @@ const backendInteractorService = (credentials) => {
     unfollowUser,
     blockUser,
     unblockUser,
+    fetchUser,
     fetchAllFollowing,
     verifyCredentials: apiService.verifyCredentials,
     startFetching,

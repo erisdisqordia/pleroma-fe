@@ -9,6 +9,8 @@ const de = {
     follows_you: 'Folgt dir!',
     following: 'Folgst du!',
     follow: 'Folgen',
+    blocked: 'Blockiert!',
+    block: 'Blockieren',
     statuses: 'Beiträge',
     mute: 'Stummschalten',
     muted: 'Stummgeschaltet',
@@ -20,7 +22,8 @@ const de = {
     show_new: 'Zeige Neuere',
     error_fetching: 'Error beim Laden',
     up_to_date: 'Aktuell',
-    load_older: 'Lade ältere Beiträge'
+    load_older: 'Lade ältere Beiträge',
+    conversation: 'Unterhaltung'
   },
   settings: {
     user_settings: 'Benutzereinstellungen',
@@ -36,20 +39,43 @@ const de = {
     profile_background: 'Profil Hintergrund',
     set_new_profile_background: 'Setze neuen Profil Hintergrund',
     settings: 'Einstellungen',
-    theme: 'Theme',
+    theme: 'Farbschema',
     filtering: 'Filter',
     filtering_explanation: 'Alle Beiträge die diese Wörter enthalten werden ausgeblendet. Ein Wort pro Zeile.',
     attachments: 'Anhänge',
     hide_attachments_in_tl: 'Anhänge in der Timeline ausblenden',
     hide_attachments_in_convo: 'Anhänge in Unterhaltungen ausblenden',
     nsfw_clickthrough: 'Aktiviere ausblendbares Overlay für als NSFW markierte Anhänge',
-    autoload: 'Aktiviere automatisches Laden von Beiträgen beim scrollen',
+    autoload: 'Aktiviere automatisches Laden von älteren Beiträgen beim scrollen',
+    streaming: 'Aktiviere automatisches Laden (Streaming) von neuen Beiträgen',
     reply_link_preview: 'Aktiviere reply-link Vorschau bei Maus-Hover'
   },
   notifications: {
     notifications: 'Benachrichtigungen',
     read: 'Gelesen!',
     followed_you: 'folgt dir'
+  },
+  login: {
+    login: 'Anmelden',
+    username: 'Benutzername',
+    password: 'Passwort',
+    register: 'Registrieren',
+    logout: 'Abmelden'
+  },
+  registration: {
+    registration: 'Registrierung',
+    fullname: 'Angezeigter Name',
+    email: 'Email',
+    bio: 'Bio',
+    password_confirm: 'Passwort bestätigen'
+  },
+  post_status: {
+    posting: 'Veröffentlichen',
+    default: 'Sitze gerade im Hofbräuhaus.'
+  },
+  finder: {
+    find_user: 'Finde Benutzer',
+    error_fetching_user: 'Fehler beim Suchen des Benutzers'
   },
   general: {
     submit: 'Absenden'

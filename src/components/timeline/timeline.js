@@ -60,6 +60,7 @@ const Timeline = {
   },
   destroyed () {
     window.removeEventListener('scroll', this.scrollLoad)
+    this.$store.commit('setLoading', { timeline: this.timelineName, value: false })
   },
   methods: {
     showNewStatuses () {

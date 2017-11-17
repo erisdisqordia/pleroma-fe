@@ -54,7 +54,7 @@
                       {{status.in_reply_to_screen_name}}
                     </router-link>
                   </small>
-                  <template v-if="isReply && !expandable">
+                  <template v-if="isReply">
                     <small>
                       <a href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)"><i class="icon-reply" @mouseenter="replyEnter(status.in_reply_to_status_id, $event)" @mouseout="replyLeave()"></i></a>
                     </small>
@@ -81,6 +81,20 @@
                   <a href="#" @click.prevent="toggleExpanded" class="expand"><i class="fa icon-plus-squared"></i></a>
                 </template>
               </div>
+            </div>
+
+            <div class="status-preview base00-background base03-border" v-if="showPreview && preview">
+              <img class="avatar" :src="preview.user.profile_image_url_original">
+              <div class="text">
+                <h4>
+                  {{ preview.user.name }}
+                  <small><a>{{ preview.user.screen_name}}</a></small>
+                </h4>
+                <div @click.prevent="linkClicked" class="status-content" v-html="preview.statusnet_html"></div>
+              </div>
+            </div>
+            <div class="status-preview status-preview-loading base00-background base03-border" v-else-if="showPreview">
+              <i class="fa icon-spin4 animate-spin"></i>
             </div>
 
             <div @click.prevent="linkClicked" class="status-content" v-html="status.statusnet_html"></div>
@@ -120,7 +134,44 @@
 
  status-text-container {
     display: block;
-}
+  }
+
+  .status-preview {
+    position: absolute;
+    max-width: 34em;
+    padding: 0.5em;
+    display: flex;
+    border-color: inherit;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 0.5em;
+    margin-left: 1em;
+
+    .avatar {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+    .text {
+      h4 {
+        margin-bottom: 0.4em;
+        small {
+          font-weight: lighter;
+        }
+      }
+      padding: 0 0.5em 0.5em 0.5em;
+    }
+  }
+
+  .status-preview-loading {
+    display: block;
+    font-size: 2em;
+    min-width: 8em;
+    text-align: center;
+  }
 
  .status-el {
      hyphens: auto;

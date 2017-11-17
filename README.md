@@ -2,7 +2,7 @@
 
 > A single column frontend for both Pleroma and GS servers.
 
-![screenshot](https://my.mixtape.moe/kjzioz.PNG)
+![screenshot](https://i.imgur.com/DJVqSJ0.png)
 
 # For Translators
 

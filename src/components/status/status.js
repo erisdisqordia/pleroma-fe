@@ -4,7 +4,7 @@ import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
-import { filter } from 'lodash'
+import { filter, find } from 'lodash'
 
 const Status = {
   props: [
@@ -20,7 +20,9 @@ const Status = {
     replying: false,
     expanded: false,
     unmuted: false,
-    userExpanded: false
+    userExpanded: false,
+    preview: null,
+    showPreview: false
   }),
   computed: {
     muteWords () {
@@ -90,7 +92,9 @@ const Status = {
     },
     gotoOriginal (id) {
       // only handled by conversation, not status_or_conversation
-      this.$emit('goto', id)
+      if (this.inConversation) {
+        this.$emit('goto', id)
+      }
     },
     toggleExpanded () {
       this.$emit('toggleExpanded')
@@ -102,13 +106,25 @@ const Status = {
       this.userExpanded = !this.userExpanded
     },
     replyEnter (id, event) {
-      if (this.$store.state.config.hoverPreview) {
-        let rect = event.target.getBoundingClientRect()
-        this.$emit('preview', Number(id), rect.left + 20, rect.top + 20 + window.pageYOffset)
+      this.showPreview = true
+      const targetId = Number(id)
+      const statuses = this.$store.state.statuses.allStatuses
+
+      if (!this.preview) {
+        // if we have the status somewhere already
+        this.preview = find(statuses, { 'id': targetId })
+        // or if we have to fetch it
+        if (!this.preview) {
+          this.$store.state.api.backendInteractor.fetchStatus({id}).then((status) => {
+            this.preview = status
+          })
+        }
+      } else if (this.preview.id !== targetId) {
+        this.preview = find(statuses, { 'id': targetId })
       }
     },
     replyLeave () {
-      this.$emit('preview', 0, 0, 0)
+      this.showPreview = false
     }
   },
   watch: {

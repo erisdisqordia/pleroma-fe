@@ -1,7 +1,7 @@
 <template>
   <div class="login panel panel-default base00-background">
     <!-- Default panel contents -->
-    <div class="panel-heading base01-background base04">
+    <div class="panel-heading base02-background base04">
       {{$t('login.login')}}
     </div>
     <div class="panel-body">
@@ -17,7 +17,7 @@
         <div class='form-group'>
           <div class='login-bottom'>
             <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>{{$t('login.register')}}</router-link></div>
-            <button :disabled="loggingIn" type='submit' class='btn btn-default base05 base01-background'>{{$t('login.login')}}</button>
+            <button :disabled="loggingIn" type='submit' class='btn btn-default base04 base02-background'>{{$t('login.login')}}</button>
           </div>
         </div>
         <div v-if="authError" class='form-group'>

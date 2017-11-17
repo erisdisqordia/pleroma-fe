@@ -1,4 +1,4 @@
-import { times } from 'lodash'
+import { times, map } from 'lodash'
 
 const setStyle = (href, col, commit) => {
   /***
@@ -50,6 +50,11 @@ const setStyle = (href, col, commit) => {
   }
 
   const rgb2hex = (r, g, b) => {
+    [r, g, b] = map([r, g, b], (val) => {
+      val = val < 0 ? 0 : val
+      val = val > 255 ? 255 : val
+      return val
+    })
     return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`
   }
 
@@ -58,32 +63,36 @@ const setStyle = (href, col, commit) => {
     head.appendChild(styleEl)
     const styleSheet = styleEl.sheet
 
-    const isDark = (col.fg.r + col.fg.g + col.fg.b) > (col.bg.r + col.bg.g + col.bg.b)
+    const isDark = (col.text.r + col.text.g + col.text.b) > (col.bg.r + col.bg.g + col.bg.b)
     let colors = {}
 
-    times(4, (n) => {
-      const nameLow = `base0${n.toString(16).toUpperCase()}`
-      const nameHigh = `base0${(n + 4).toString(16).toUpperCase()}`
-      if (isDark) {
-        colors[nameLow] = rgb2hex(col.bg.r + 10 * n, col.bg.g + 10 * n, col.bg.b + 10 * n)
-        colors[nameHigh] = rgb2hex(col.fg.r - 10 * n, col.fg.g - 10 * n, col.fg.b - 10 * n)
-      } else {
-        colors[nameLow] = rgb2hex(col.bg.r - 10 * n, col.bg.g - 10 * n, col.bg.b - 10 * n)
-        colors[nameHigh] = rgb2hex(col.fg.r + 10 * n, col.fg.g + 10 * n, col.fg.b + 10 * n)
-      }
-      styleSheet.insertRule(`.${nameLow} { color: ${colors[nameLow]}`, 'index-max')
-      styleSheet.insertRule(`.${nameHigh} { color: ${colors[nameHigh]}`, 'index-max')
-      styleSheet.insertRule(`.${nameLow}-background { background-color: ${colors[nameLow]}`, 'index-max')
-      styleSheet.insertRule(`.${nameHigh}-background { background-color: ${colors[nameHigh]}`, 'index-max')
+    let mod = 10
+    if (isDark) {
+      mod = mod * -1
+    }
+    colors['base00'] = rgb2hex(col.bg.r, col.bg.g, col.bg.b)                         // background
+    colors['base01'] = rgb2hex(col.bg.r - mod, col.bg.g - mod, col.bg.b - mod)       // hilighted bg
+    colors['base02'] = rgb2hex(col.fg.r, col.fg.g, col.fg.b)                         // panels & buttons
+    colors['base03'] = rgb2hex(col.fg.r - mod, col.fg.g - mod, col.fg.b - mod)       // borders
+    colors['base04'] = rgb2hex(col.text.r + mod, col.text.g + mod, col.text.b + mod) // faint text
+    colors['base05'] = rgb2hex(col.text.r, col.text.g, col.text.b)                   // text
+    colors['base06'] = rgb2hex(col.text.r - mod, col.text.g - mod, col.text.b - mod) // strong text
+    colors['base07'] = rgb2hex(col.text.r - mod * 2, col.text.g - mod * 2, col.text.b - mod * 2)
+    colors['base08'] = rgb2hex(col.link.r, col.link.g, col.link.b)                   // links
+
+    times(9, (n) => {
+      const color = colors[`base0${n}`]
+      styleSheet.insertRule(`.base0${n} { color: ${color}`, 'index-max')
+      styleSheet.insertRule(`.base0${n}-background { background-color: ${color}`, 'index-max')
     })
-    colors['base08'] = rgb2hex(col.link.r, col.link.g, col.link.b)
+
     commit('setOption', { name: 'colors', value: colors })
-    console.log(colors)
 
     styleSheet.insertRule(`a { color: ${colors['base08']}`, 'index-max')
     styleSheet.insertRule(`body { color: ${colors['base05']}`, 'index-max')
     styleSheet.insertRule(`.base05-border { border-color: ${colors['base05']}`, 'index-max')
     styleSheet.insertRule(`.base03-border { border-color: ${colors['base03']}`, 'index-max')
+    console.log(styleSheet)
     body.style.display = 'initial'
   }
   if (col) {

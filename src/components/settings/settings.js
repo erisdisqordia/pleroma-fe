@@ -13,6 +13,7 @@ const settings = {
       hoverPreviewLocal: this.$store.state.config.hoverPreview,
       bgColorLocal: '',
       fgColorLocal: '',
+      textColorLocal: '',
       linkColorLocal: ''
     }
   },
@@ -23,6 +24,18 @@ const settings = {
     user () {
       return this.$store.state.users.currentUser
     }
+  },
+  mounted() {
+    const rgbstr2hex = (rgb) => {
+      if (rgb[0] === '#')
+        return rgb
+      rgb = rgb.match(/\d+/g)
+      return `#${((Number(rgb[0]) << 16) + (Number(rgb[1]) << 8) + Number(rgb[2])).toString(16)}`
+    }
+    this.bgColorLocal = rgbstr2hex(this.$store.state.config.colors['base00'])
+    this.fgColorLocal = rgbstr2hex(this.$store.state.config.colors['base02'])
+    this.textColorLocal = rgbstr2hex(this.$store.state.config.colors['base05'])
+    this.linkColorLocal = rgbstr2hex(this.$store.state.config.colors['base08'])
   },
   methods: {
     setCustomTheme () {
@@ -39,12 +52,14 @@ const settings = {
       }
       const bgRgb = rgb(this.bgColorLocal)
       const fgRgb = rgb(this.fgColorLocal)
+      const textRgb = rgb(this.textColorLocal)
       const linkRgb = rgb(this.linkColorLocal)
       if (bgRgb && fgRgb && linkRgb) {
         console.log('all colors ok')
         this.$store.dispatch('setOption', { name: 'customTheme', value: {
           fg: fgRgb,
           bg: bgRgb,
+          text: textRgb,
           link: linkRgb
         }})
       }

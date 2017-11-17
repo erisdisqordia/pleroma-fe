@@ -31,11 +31,10 @@ const config = {
           dispatch('setPageTitle')
           break
         case 'theme':
-          const fullPath = `/static/css/${value}`
-          StyleSetter.setStyle(fullPath, null, commit)
+          StyleSetter.setPreset(value, commit)
           break
         case 'customTheme':
-          StyleSetter.setStyle(null, value, commit)
+          StyleSetter.setColors(value, commit)
       }
     }
   }

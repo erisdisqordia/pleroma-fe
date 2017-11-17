@@ -1,0 +1,4 @@
+{
+  "pleroma-dark": [ "Pleroma Dark", "#121a24", "#182230", "#b9b9ba", "#d8a070" ],
+  "pleroma-light": [ "Pleroma Light", "#f2f4f6", "#d0d6db", "#304055", "#e46f0f" ]
+}

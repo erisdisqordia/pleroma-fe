@@ -49,16 +49,17 @@
 
  .color-container {
    display: flex;
+   flex-wrap: wrap;
  }
 
  .color-item {
-   max-width: 7em;
+   max-width: 9em;
    display:flex;
    flex-wrap:wrap;
  }
 
  .theme-color-in {
-   max-width: 6em;
+   max-width: 8em;
    border-radius: 2px;
    border: 0;
    padding: 5px;

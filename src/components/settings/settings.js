@@ -10,7 +10,7 @@ const settings = {
       muteWordsString: this.$store.state.config.muteWords.join('\n'),
       autoLoadLocal: this.$store.state.config.autoLoad,
       streamingLocal: this.$store.state.config.streaming,
-      hoverPreviewLocal: this.$store.state.config.hoverPreview,
+      hoverPreviewLocal: this.$store.state.config.hoverPreview
     }
   },
   components: {
@@ -21,8 +21,6 @@ const settings = {
       return this.$store.state.users.currentUser
     }
   },
-
-
   watch: {
     hideAttachmentsLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideAttachments', value })

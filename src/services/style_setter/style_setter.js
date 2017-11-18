@@ -98,13 +98,14 @@ const setColors = (col, commit) => {
     styleSheet.insertRule(`.base0${8 - n}-background { background-color: ${color}`, 'index-max')
   })
 
-  commit('setOption', { name: 'colors', value: colors })
-
   styleSheet.insertRule(`a { color: ${colors['base08']}`, 'index-max')
   styleSheet.insertRule(`body { color: ${colors['base05']}`, 'index-max')
   styleSheet.insertRule(`.base05-border { border-color: ${colors['base05']}`, 'index-max')
   styleSheet.insertRule(`.base03-border { border-color: ${colors['base03']}`, 'index-max')
   body.style.display = 'initial'
+
+  commit('setOption', { name: 'colors', value: colors })
+  commit('setOption', { name: 'customTheme', value: col })
 }
 
 const hex2rgb = (hex) => {
@@ -131,8 +132,15 @@ const setPreset = (val, commit) => {
         text: textRgb,
         link: linkRgb
       }
-      console.log(col)
-      setColors(col, commit)
+      // This is a hack, this function is only called during initial load.
+      // We want to cancel loading the theme from config.json if we're already
+      // loading a theme from the persisted state.
+      // Needed some way of dealing with the async way of things.
+      // load config -> set preset -> wait for styles.json to load ->
+      // load persisted state -> set colors -> styles.json loaded -> set colors
+      if (!window.themeLoaded) {
+        setColors(col, commit)
+      }
     })
 }
 

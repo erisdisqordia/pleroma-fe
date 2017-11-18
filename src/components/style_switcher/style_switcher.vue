@@ -1,25 +1,25 @@
 <template>
   <div>
+    <p>{{$t('settings.presets')}}</p>
     <select v-model="selected" class="style-switcher">
       <option v-for="style in availableStyles" :value="style">{{style[0]}}</option>
     </select>
-    <h3>Custom theme</h3>
-    <p>Enter hex color codes (#aabbcc) into the text fields.</p>
+    <p>{{$t('settings.theme_help')}}</p>
     <div class="color-container">
       <div class="color-item">
-        <label for="bgcolor" class="base04">Background</label>
+        <label for="bgcolor" class="base04">{{$t('settings.background')}}</label>
         <input id="bgcolor" class="theme-color-in" type="text" v-model="bgColorLocal">
       </div>
       <div class="color-item">
-        <label for="fgcolor" class="base04">Foreground</label>
+        <label for="fgcolor" class="base04">{{$t('settings.foreground')}}</label>
         <input id="fgcolor" class="theme-color-in" type="text" v-model="fgColorLocal">
       </div>
       <div class="color-item">
-        <label for="textcolor" class="base04">Text</label>
+        <label for="textcolor" class="base04">{{$t('settings.text')}}</label>
         <input id="textcolor" class="theme-color-in" type="text" v-model="textColorLocal">
       </div>
       <div class="color-item">
-        <label for="linkcolor" class="base04">Links</label>
+        <label for="linkcolor" class="base04">{{$t('settings.links')}}</label>
         <input id="linkcolor" class="theme-color-in" type="text" v-model="linkColorLocal">
       </div>
     </div>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <button class="btn base02-background base04" @click="setCustomTheme">Submit</button>
+    <button class="btn base02-background base04" @click="setCustomTheme">{{$t('general.apply')}}</button>
   </div>
 </template>
 

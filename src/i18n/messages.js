@@ -122,6 +122,12 @@ const fi = {
     set_new_profile_background: 'Aseta uusi taustakuva',
     settings: 'Asetukset',
     theme: 'Teema',
+    presets: 'Valmiit teemat',
+    theme_help: 'Käytä heksadesimaalivärejä muokataksesi väriteemaasi.',
+    background: 'Tausta',
+    foreground: 'Korostus',
+    text: 'Teksti',
+    links: 'Linkit',
     filtering: 'Suodatus',
     filtering_explanation: 'Kaikki viestit, jotka sisältävät näitä sanoja, suodatetaan. Yksi sana per rivi.',
     attachments: 'Liitteet',
@@ -160,7 +166,8 @@ const fi = {
     error_fetching_user: 'Virhe hakiessa käyttäjää'
   },
   general: {
-    submit: 'Lähetä'
+    submit: 'Lähetä',
+    apply: 'Aseta'
   }
 }
 
@@ -206,6 +213,12 @@ const en = {
     set_new_profile_background: 'Set new profile background',
     settings: 'Settings',
     theme: 'Theme',
+    presets: 'Presets',
+    theme_help: 'Use hex color codes (#aabbcc) to customize your color theme.',
+    background: 'Background',
+    foreground: 'Foreground',
+    text: 'Text',
+    links: 'Links',
     filtering: 'Filtering',
     filtering_explanation: 'All statuses containing these words will be muted, one per line',
     attachments: 'Attachments',
@@ -244,7 +257,8 @@ const en = {
     error_fetching_user: 'Error fetching user'
   },
   general: {
-    submit: 'Submit'
+    submit: 'Submit',
+    apply: 'Apply'
   }
 }
 

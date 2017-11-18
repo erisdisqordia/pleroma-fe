@@ -1,5 +1,3 @@
-import { map, compose } from 'lodash'
-
 export default {
   data () {
     return {
@@ -21,10 +19,11 @@ export default {
         self.availableStyles = themes
       })
   },
-  mounted() {
+  mounted () {
     const rgbstr2hex = (rgb) => {
-      if (rgb[0] === '#')
+      if (rgb[0] === '#') {
         return rgb
+      }
       rgb = rgb.match(/\d+/g)
       return `#${((Number(rgb[0]) << 16) + (Number(rgb[1]) << 8) + Number(rgb[2])).toString(16)}`
     }
@@ -41,11 +40,11 @@ export default {
         // reset to picked themes
       }
       const rgb = (hex) => {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
         return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
         } : null
       }
       const bgRgb = rgb(this.bgColorLocal)
@@ -54,23 +53,23 @@ export default {
       const linkRgb = rgb(this.linkColorLocal)
       if (bgRgb && fgRgb && linkRgb) {
         console.log('all colors ok')
-        this.$store.dispatch('setOption', { name: 'customTheme', value: {
-          fg: fgRgb,
-          bg: bgRgb,
-          text: textRgb,
-          link: linkRgb
-        }})
+        this.$store.dispatch('setOption', {
+          name: 'customTheme',
+          value: {
+            fg: fgRgb,
+            bg: bgRgb,
+            text: textRgb,
+            link: linkRgb
+          }})
       }
     }
   },
   watch: {
     selected () {
-      console.log(this.selected)
       this.bgColorLocal = this.selected[1]
       this.fgColorLocal = this.selected[2]
       this.textColorLocal = this.selected[3]
       this.linkColorLocal = this.selected[4]
-      //this.$store.dispatch('setOption', { name: 'theme', value: this.selected })
     }
   }
 }

@@ -121,7 +121,7 @@ const setPreset = (val, commit) => {
   window.fetch('/static/styles.json')
     .then((data) => data.json())
     .then((themes) => {
-      const theme = themes[val] ? themes[val] : themes[0]
+      const theme = themes[val] ? themes[val] : themes['pleroma-dark']
       const bgRgb = hex2rgb(theme[1])
       const fgRgb = hex2rgb(theme[2])
       const textRgb = hex2rgb(theme[3])

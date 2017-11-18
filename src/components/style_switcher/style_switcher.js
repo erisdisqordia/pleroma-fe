@@ -15,7 +15,6 @@ export default {
     window.fetch('/static/styles.json')
       .then((data) => data.json())
       .then((themes) => {
-        console.log(themes)
         self.availableStyles = themes
       })
   },
@@ -29,8 +28,6 @@ export default {
     }
     this.bgColorLocal = rgbstr2hex(this.$store.state.config.colors['base00'])
     this.fgColorLocal = rgbstr2hex(this.$store.state.config.colors['base02'])
-    console.log(this.$store.state.config.colors['base02'])
-    console.log(this.fgColorLocal)
     this.textColorLocal = rgbstr2hex(this.$store.state.config.colors['base05'])
     this.linkColorLocal = rgbstr2hex(this.$store.state.config.colors['base08'])
   },
@@ -52,7 +49,6 @@ export default {
       const textRgb = rgb(this.textColorLocal)
       const linkRgb = rgb(this.linkColorLocal)
       if (bgRgb && fgRgb && linkRgb) {
-        console.log('all colors ok')
         this.$store.dispatch('setOption', {
           name: 'customTheme',
           value: {

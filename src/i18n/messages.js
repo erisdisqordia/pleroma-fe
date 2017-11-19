@@ -20,7 +20,7 @@ const de = {
   },
   timeline: {
     show_new: 'Zeige Neuere',
-    error_fetching: 'Error beim Laden',
+    error_fetching: 'Fehler beim Laden',
     up_to_date: 'Aktuell',
     load_older: 'Lade ältere Beiträge',
     conversation: 'Unterhaltung'
@@ -40,6 +40,12 @@ const de = {
     set_new_profile_background: 'Setze neuen Profil Hintergrund',
     settings: 'Einstellungen',
     theme: 'Farbschema',
+    presets: 'Voreinstellungen',
+    theme_help: 'Benutze HTML Farbcodes (#aabbcc) um dein Farbschema anzupassen.',
+    background: 'Hintergrund',
+    foreground: 'Vordergrund',
+    text: 'Text',
+    links: 'Links',
     filtering: 'Filter',
     filtering_explanation: 'Alle Beiträge die diese Wörter enthalten werden ausgeblendet. Ein Wort pro Zeile.',
     attachments: 'Anhänge',
@@ -78,7 +84,8 @@ const de = {
     error_fetching_user: 'Fehler beim Suchen des Benutzers'
   },
   general: {
-    submit: 'Absenden'
+    submit: 'Absenden',
+    apply: 'Anwenden'
   }
 }
 

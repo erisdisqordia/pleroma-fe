@@ -6,7 +6,7 @@
       </div>
       <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel base05-background">
-          <div v-for="candidate in candidates" @click="replace(candidate.screen_name + ' ')" class="autocomplete base01">
+          <div v-for="candidate in candidates" @click="replace(candidate.screen_name + ' ')" class="autocomplete base02">
             <img :src="candidate.img"></img>
             <span>
               {{candidate.screen_name}}
@@ -17,8 +17,8 @@
       </div>
       <div class='form-bottom'>
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
-        <button v-if="posting" disabled class="btn btn-default base05 base01-background">{{$t('post_status.posting')}}</button>
-        <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default base05 base01-background">{{$t('general.submit')}}</button>
+        <button v-if="posting" disabled class="btn btn-default base05 base02-background">{{$t('post_status.posting')}}</button>
+        <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default base05 base02-background">{{$t('general.submit')}}</button>
       </div>
       <div class='error' v-if="error">
         Error: {{ error }}

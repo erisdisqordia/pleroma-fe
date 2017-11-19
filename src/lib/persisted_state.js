@@ -51,6 +51,15 @@ export default function createPersistedState ({
             merge({}, store.state, savedState)
           )
         }
+        if (store.state.config.customTheme) {
+          // This is a hack to deal with async loading of config.json and themes
+          // See: style_setter.js, setPreset()
+          window.themeLoaded = true
+          store.dispatch('setOption', {
+            name: 'customTheme',
+            value: store.state.config.customTheme
+          })
+        }
         if (store.state.users.lastLoginName) {
           store.dispatch('loginUser', {username: store.state.users.lastLoginName, password: 'xxx'})
         }

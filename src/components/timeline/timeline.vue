@@ -1,48 +1,48 @@
 <template>
   <div class="timeline panel panel-default" v-if="viewing == 'statuses'">
-    <div class="panel-heading timeline-heading base01-background base04">
+    <div class="panel-heading timeline-heading base02-background base04">
       <div class="title">
         {{title}}
       </div>
-      <button @click.prevent="showNewStatuses" class="base05 base01-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
+      <button @click.prevent="showNewStatuses" class="base05 base02-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
         {{$t('timeline.show_new')}} ({{timeline.newStatusCount}})
       </button>
       <div @click.prevent class="base06 error  loadmore-text" v-if="timelineError">
         {{$t('timeline.error_fetching')}}
       </div>
-      <div @click.prevent class="base04 base01-background loadmore-text" v-if="!timeline.newStatusCount > 0 && !timelineError">
+      <div @click.prevent class="base04 base02-background loadmore-text" v-if="!timeline.newStatusCount > 0 && !timelineError">
         {{$t('timeline.up_to_date')}}
       </div>
     </div>
-    <div class="panel-body base02-background">
+    <div class="panel-body base01-background">
       <div class="timeline">
         <status-or-conversation v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status"></status-or-conversation>
         <a href="#" v-on:click.prevent='fetchOlderStatuses()' v-if="!timeline.loading">
-          <div class="base01-background base03-border new-status-notification text-center">{{$t('timeline.load_older')}}</div>
+          <div class="base02-background base03-border new-status-notification text-center">{{$t('timeline.load_older')}}</div>
         </a>
-          <div class="base01-background base03-border new-status-notification text-center" v-else>...</div>
+          <div class="base02-background base03-border new-status-notification text-center" v-else>...</div>
       </div>
     </div>
   </div>
   <div class="timeline panel panel-default" v-else-if="viewing == 'followers'">
-    <div class="panel-heading timeline-heading base01-background base04">
+    <div class="panel-heading timeline-heading base02-background base04">
       <div class="title">
         {{$t('user_card.followers')}}
       </div>
     </div>
-    <div class="panel-body base02-background">
+    <div class="panel-body base01-background">
       <div class="timeline">
         <user-card v-for="follower in followers" :user="follower" :showFollows="false"></user-card>
       </div>
     </div>
   </div>
   <div class="timeline panel panel-default" v-else-if="viewing == 'friends'">
-    <div class="panel-heading timeline-heading base01-background base04">
+    <div class="panel-heading timeline-heading base02-background base04">
       <div class="title">
         {{$t('user_card.followees')}}
       </div>
     </div>
-    <div class="panel-body base02-background">
+    <div class="panel-body base01-background">
       <div class="timeline">
         <user-card v-for="friend in friends" :user="friend" :showFollows="true"></user-card>
       </div>

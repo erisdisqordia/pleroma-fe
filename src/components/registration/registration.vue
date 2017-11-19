@@ -1,6 +1,6 @@
 <template>
   <div class="settings panel panel-default base00-background">
-    <div class="panel-heading base01-background base04">
+    <div class="panel-heading base02-background base04">
       {{$t('registration.registration')}}
     </div>
     <div class="panel-body">
@@ -39,7 +39,7 @@
             </div>
             -->
             <div class='form-group'>
-              <button :disabled="registering" type='submit' class='btn btn-default base05 base01-background'>{{$t('general.submit')}}</button>
+              <button :disabled="registering" type='submit' class='btn btn-default base05 base02-background'>{{$t('general.submit')}}</button>
             </div>
           </div>
           <div class='terms-of-service' v-html="termsofservice">

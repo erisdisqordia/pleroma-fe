@@ -1,6 +1,6 @@
 <template>
   <div class="settings panel panel-default base00-background">
-    <div class="panel-heading base01-background base04">
+    <div class="panel-heading base02-background base04">
       {{$t('settings.settings')}}
     </div>
     <div class="panel-body">

@@ -1,6 +1,6 @@
 <template>
   <div class="settings panel panel-default base00-background">
-    <div class="panel-heading base01-background base04">
+    <div class="panel-heading base02-background base04">
       {{$t('settings.user_settings')}}
     </div>
     <div class="panel-body profile-edit">
@@ -10,7 +10,7 @@
         <input class='name-changer base03-border' id='username' v-model="newname" :value="user.screen_name"></input>
         <p>{{$t('settings.bio')}}</p>
         <textarea class="bio base03-border" v-model="newbio"></textarea>
-        <button :disabled='newname.length <= 0' class="btn btn-default base05 base01-background" @click="updateProfile">{{$t('general.submit')}}</button>
+        <button :disabled='newname.length <= 0' class="btn btn-default base05 base02-background" @click="updateProfile">{{$t('general.submit')}}</button>
       </div>
       <div class="setting-item">
         <h3>{{$t('settings.avatar')}}</h3>
@@ -23,7 +23,7 @@
           <input type="file" @change="uploadFile(0, $event)" ></input>
         </div>
         <i class="fa icon-spin4 animate-spin" v-if="uploading[0]"></i>
-        <button class="btn btn-default base05 base01-background" v-else-if="previews[0]" @click="submitAvatar">{{$t('general.submit')}}</button>
+        <button class="btn btn-default base05 base02-background" v-else-if="previews[0]" @click="submitAvatar">{{$t('general.submit')}}</button>
       </div>
       <div class="setting-item">
         <h3>{{$t('settings.profile_banner')}}</h3>
@@ -36,7 +36,7 @@
           <input type="file" @change="uploadFile(1, $event)" ></input>
         </div>
         <i class="fa icon-spin4 animate-spin uploading" v-if="uploading[1]"></i>
-        <button class="btn btn-default base05 base01-background" v-else-if="previews[1]" @click="submitBanner">{{$t('general.submit')}}</button>
+        <button class="btn btn-default base05 base02-background" v-else-if="previews[1]" @click="submitBanner">{{$t('general.submit')}}</button>
       </div>
       <div class="setting-item">
         <h3>{{$t('settings.profile_background')}}</h3>
@@ -47,7 +47,7 @@
           <input type="file" @change="uploadFile(2, $event)" ></input>
         </div>
         <i class="fa icon-spin4 animate-spin uploading" v-if="uploading[2]"></i>
-        <button class="btn btn-default base05 base01-background" v-else-if="previews[2]" @click="submitBg">{{$t('general.submit')}}</button>
+        <button class="btn btn-default base05 base02-background" v-else-if="previews[2]" @click="submitBg">{{$t('general.submit')}}</button>
       </div>
     </div>
   </div>

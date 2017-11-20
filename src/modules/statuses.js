@@ -249,7 +249,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
         result.body = action.text // there's a problem that it doesn't put a space before links tho
 
         // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
-        if (action.attachments.length > 0 && !action.nsfw &&
+        if (action.attachments && action.attachments.length > 0 && !action.nsfw &&
             action.attachments[0].mimetype.startsWith('image/')) {
           result.image = action.attachments[0].url
         }

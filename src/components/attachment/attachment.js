@@ -24,7 +24,7 @@ const Attachment = {
       return this.nsfw && this.hideNsfwLocal && !this.showHidden
     },
     isEmpty () {
-      return this.type === 'html' && !this.attachment.oembed
+      return (this.type === 'html' && !this.attachment.oembed) || this.type === 'unknown'
     }
   },
   methods: {

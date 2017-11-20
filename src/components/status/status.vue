@@ -39,7 +39,7 @@
           </a>
         </div>
         <div class="media-body">
-          <div class="base05 base05=border usercard" v-if="userExpanded">
+          <div class="base03-border usercard" v-if="userExpanded">
             <user-card-content :user="status.user" :switcher="false"></user-card-content>
           </div>
           <div class="user-content">
@@ -244,7 +244,7 @@
          max-height: 400px;
          overflow-y: auto;
          overflow-x: hidden;
-         
+
          img, video {
            max-width: 100%;
            max-height: 400px;
@@ -381,14 +381,6 @@
  a.unmute {
    display: block;
    margin-left: auto;
- }
-
- .usercard {
-   border-style: solid;
-   border-width: 1px;
-   border-radius: 10px;
-   margin-bottom: 1em;
-   margin-top: 0.2em;
  }
 
  .reply-left {

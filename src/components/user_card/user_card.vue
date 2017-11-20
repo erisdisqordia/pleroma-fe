@@ -1,9 +1,9 @@
 <template>
-  <div class="card base00-background base03-border">
+  <div class="card base00-background">
     <a href="#">
       <img @click.prevent="toggleUserExpanded" class="avatar" :src="user.profile_image_url">
     </a>
-    <div class="base05 base05=border usercard" v-if="userExpanded">
+    <div class="usercard" v-if="userExpanded">
       <user-card-content :user="user" :switcher="false"></user-card-content>
     </div>
     <div class="name-and-screen-name" v-else>
@@ -62,6 +62,10 @@
     width: -webkit-fill-available;
     width: -moz-webkit-fill-available;
     stretch: fill;
-    margin-left: 0.7em;
+    margin: 0.2em 0 0.7em 0;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: inherit;
+    border-width: 1px;
   }
 </style>

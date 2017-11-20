@@ -6,8 +6,9 @@
       </div>
       <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel base05-background">
-          <div v-for="candidate in candidates" @click="replace(candidate.screen_name + ' ')" class="autocomplete base02">
-            <img :src="candidate.img"></img>
+          <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))" class="autocomplete base02">
+            <span v-if="candidate.img"><img :src="candidate.img"></img></span>
+            <span v-else>{{candidate.utf}}</span>
             <span>
               {{candidate.screen_name}}
               <small class="base02">{{candidate.name}}</small>

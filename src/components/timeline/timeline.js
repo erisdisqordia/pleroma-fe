@@ -31,7 +31,7 @@ const Timeline = {
       return this.timeline.newStatusCount
     },
     newStatusCountStr () {
-      if (this.timeline.flushMarker) {
+      if (this.timeline.flushMarker > 0) {
         return ''
       } else {
         return ` (${this.newStatusCount})`

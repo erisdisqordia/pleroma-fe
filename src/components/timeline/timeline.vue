@@ -5,7 +5,7 @@
         {{title}}
       </div>
       <button @click.prevent="showNewStatuses" class="base05 base02-background loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
-        {{$t('timeline.show_new')}}{{timeline.newStatusMsg}}
+        {{$t('timeline.show_new')}}{{newStatusCountStr}}
       </button>
       <div @click.prevent class="base06 error  loadmore-text" v-if="timelineError">
         {{$t('timeline.error_fetching')}}

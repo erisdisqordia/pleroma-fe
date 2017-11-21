@@ -102,7 +102,6 @@
 .profile-panel-body {
   top: -0em;
   padding-top: 4em;
-
   word-wrap: break-word;
 }
 

@@ -25,7 +25,7 @@
         <i class="icon-cancel" @click="clearError"></i>
       </div>
       <div class="attachments">
-        <div class="attachment base03-border" v-for="file in newStatus.files">
+        <div class="attachment base03-border media-upload-container" v-for="file in newStatus.files">
           <i class="fa icon-cancel" @click="removeMediaFile(file)"></i>
           <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
           <video v-if="type(file) === 'video'" :src="file.image" controls></video>
@@ -40,6 +40,12 @@
 <script src="./post_status_form.js"></script>
 
 <style lang="scss">
+  .media-upload-container {
+    flex: 0 0 auto !important;
+    max-height: 300px;
+    max-width: 100%;
+  }
+
  .tribute-container {
    ul {
      padding: 0px;

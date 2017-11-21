@@ -8,19 +8,19 @@
     <div class="color-container">
       <div class="color-item">
         <label for="bgcolor" class="base04">{{$t('settings.background')}}</label>
-        <input id="bgcolor" class="theme-color-in" type="text" v-model="bgColorLocal">
+        <input id="bgcolor" class="theme-color-in" type="color" v-model="bgColorLocal">
       </div>
       <div class="color-item">
         <label for="fgcolor" class="base04">{{$t('settings.foreground')}}</label>
-        <input id="fgcolor" class="theme-color-in" type="text" v-model="fgColorLocal">
+        <input id="fgcolor" class="theme-color-in" type="color" v-model="fgColorLocal">
       </div>
       <div class="color-item">
         <label for="textcolor" class="base04">{{$t('settings.text')}}</label>
-        <input id="textcolor" class="theme-color-in" type="text" v-model="textColorLocal">
+        <input id="textcolor" class="theme-color-in" type="color" v-model="textColorLocal">
       </div>
       <div class="color-item">
         <label for="linkcolor" class="base04">{{$t('settings.links')}}</label>
-        <input id="linkcolor" class="theme-color-in" type="text" v-model="linkColorLocal">
+        <input id="linkcolor" class="theme-color-in" type="color" v-model="linkColorLocal">
       </div>
     </div>
     <div>

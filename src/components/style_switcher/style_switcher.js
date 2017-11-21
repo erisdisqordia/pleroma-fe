@@ -1,3 +1,5 @@
+import { rgbstr2hex } from '../../services/color_convert/color_convert.js'
+
 export default {
   data () {
     return {
@@ -19,13 +21,6 @@ export default {
       })
   },
   mounted () {
-    const rgbstr2hex = (rgb) => {
-      if (rgb[0] === '#') {
-        return rgb
-      }
-      rgb = rgb.match(/\d+/g)
-      return `#${((Number(rgb[0]) << 16) + (Number(rgb[1]) << 8) + Number(rgb[2])).toString(16)}`
-    }
     this.bgColorLocal = rgbstr2hex(this.$store.state.config.colors['base00'])
     this.fgColorLocal = rgbstr2hex(this.$store.state.config.colors['base02'])
     this.textColorLocal = rgbstr2hex(this.$store.state.config.colors['base05'])

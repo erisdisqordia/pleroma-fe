@@ -1,6 +1,6 @@
 <template>
   <div>
-    <i :class='classes' class='icon-retweet fa' v-on:click.prevent='retweet()'></i>
+    <i :class='classes' class='icon-retweet base09' v-on:click.prevent='retweet()'></i>
     <span v-if='status.repeat_num > 0'>{{status.repeat_num}}</span>
   </div>
 </template>

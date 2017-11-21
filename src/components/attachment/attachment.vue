@@ -34,6 +34,13 @@
       display: flex;
       flex-wrap: wrap;
       margin-right: -0.7em;
+
+      .attachment.media-upload-container {
+        flex: 0 0 auto;
+        max-height: 300px;
+        max-width: 100%;
+      }
+      
       .attachment {
           flex: 1 0 30%;
           margin: 0.5em 0.7em 0.6em 0.0em;

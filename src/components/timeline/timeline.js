@@ -29,6 +29,13 @@ const Timeline = {
     },
     newStatusCount () {
       return this.timeline.newStatusCount
+    },
+    newStatusCountStr () {
+      if (this.timeline.flushMarker) {
+        return ''
+      } else {
+        return ` (${this.newStatusCount})`
+      }
     }
   },
   components: {
@@ -64,8 +71,14 @@ const Timeline = {
   },
   methods: {
     showNewStatuses () {
-      this.$store.commit('showNewStatuses', { timeline: this.timelineName })
-      this.paused = false
+      if (this.timeline.flushMarker) {
+        this.$store.commit('clearTimeline', { timeline: this.timelineName })
+        this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
+        this.fetchOlderStatuses()
+      } else {
+        this.$store.commit('showNewStatuses', { timeline: this.timelineName })
+        this.paused = false
+      }
     },
     fetchOlderStatuses () {
       const store = this.$store

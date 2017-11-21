@@ -281,6 +281,8 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     url += `/${tag}.json`
   }
 
+  params.push(['count', 20])
+
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`
 

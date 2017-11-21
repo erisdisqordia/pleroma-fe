@@ -9,6 +9,7 @@ export const defaultState = {
   notifications: [],
   favorites: new Set(),
   error: false,
+  flushMarker: 0,
   timelines: {
     mentions: {
       statuses: [],
@@ -422,6 +423,9 @@ export const mutations = {
     each(notifications, (notification) => {
       notification.seen = true
     })
+  },
+  queueFlush (state, { timeline, id }) {
+    state.timelines[timeline].flushMarker = id
   }
 }
 
@@ -458,6 +462,9 @@ const statuses = {
       // Optimistic retweeting...
       commit('setRetweeted', { status, value: true })
       apiService.retweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
+    },
+    queueFlush ({ rootState, commit }, { timeline, id }) {
+      commit('queueFlush', { timeline, id })
     }
   },
   mutations

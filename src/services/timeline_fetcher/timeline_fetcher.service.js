@@ -29,8 +29,12 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
   args['tag'] = tag
 
   return apiService.fetchTimeline(args)
-    .then((statuses) => update({store, statuses, timeline, showImmediately}),
-      () => store.dispatch('setError', { value: true }))
+    .then((statuses) => {
+      if (!older && statuses.length >= 20) {
+        store.dispatch('queueFlush', { timeline: timeline, id: timelineData.maxId })
+      }
+      update({store, statuses, timeline, showImmediately})
+    }, () => store.dispatch('setError', { value: true }))
 }
 
 const startFetching = ({timeline = 'friends', credentials, store, userId = false, tag = false}) => {

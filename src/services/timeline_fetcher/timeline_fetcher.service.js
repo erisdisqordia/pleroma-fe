@@ -38,7 +38,10 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
 }
 
 const startFetching = ({timeline = 'friends', credentials, store, userId = false, tag = false}) => {
-  fetchAndUpdate({timeline, credentials, store, showImmediately: true, userId, tag})
+  const rootState = store.rootState || store.state
+  const timelineData = rootState.statuses.timelines[camelCase(timeline)]
+  const showImmediately = timelineData.visibleStatuses.length === 0
+  fetchAndUpdate({timeline, credentials, store, showImmediately, userId, tag})
   const boundFetchAndUpdate = () => fetchAndUpdate({ timeline, credentials, store, userId, tag })
   return setInterval(boundFetchAndUpdate, 10000)
 }

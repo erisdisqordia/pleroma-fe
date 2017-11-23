@@ -31,7 +31,7 @@ const Timeline = {
       return this.timeline.newStatusCount
     },
     newStatusCountStr () {
-      if (this.timeline.flushMarker > 0) {
+      if (this.timeline.flushMarker !== 0) {
         return ''
       } else {
         return ` (${this.newStatusCount})`
@@ -71,7 +71,7 @@ const Timeline = {
   },
   methods: {
     showNewStatuses () {
-      if (this.timeline.flushMarker) {
+      if (this.timeline.flushMarker !== 0) {
         this.$store.commit('clearTimeline', { timeline: this.timelineName })
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
         this.fetchOlderStatuses()

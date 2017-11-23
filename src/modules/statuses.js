@@ -9,7 +9,6 @@ export const defaultState = {
   notifications: [],
   favorites: new Set(),
   error: false,
-  flushMarker: 0,
   timelines: {
     mentions: {
       statuses: [],
@@ -23,7 +22,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     },
     public: {
       statuses: [],
@@ -37,7 +37,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     },
     user: {
       statuses: [],
@@ -51,7 +52,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     },
     publicAndExternal: {
       statuses: [],
@@ -65,7 +67,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     },
     friends: {
       statuses: [],
@@ -79,7 +82,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     },
     tag: {
       statuses: [],
@@ -93,7 +97,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     }
   }
 }
@@ -382,7 +387,8 @@ export const mutations = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     }
 
     state.timelines[timeline] = emptyTimeline

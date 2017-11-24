@@ -16,7 +16,12 @@ h4 {
 }
 
 #content {
-    padding-top: 60px;
+  box-sizing: border-box;
+  padding-top: 60px;
+  margin: auto;
+  min-height: 100vh;
+  max-width: 980px;
+  background-color: rgba(0,0,0,0.15);
 }
 
 .text-center {
@@ -157,15 +162,6 @@ main-router {
     margin: 0;
 }
 
-
-#content {
-    margin: auto;
-    min-height: 100vh;
-    max-width: 980px;
-    padding-bottom: 1em;
-    background-color: rgba(0,0,0,0.1);
-}
-
 .container > * {
     min-width: 0px;
 }
@@ -210,10 +206,11 @@ nav {
 .panel-switcher {
     display: none;
     width: 100%;
-
+    height: 46px;
     button {
         display: block;
         flex: 1;
+        max-height: 32px;
         margin: 0.5em;
         padding: 0.5em;
     }

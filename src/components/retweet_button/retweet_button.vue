@@ -16,7 +16,7 @@
       color: $green;
      }
   }
-  .retweeted {
+  .icon-retweet.retweeted {
      color: $green;
   }
 </style>

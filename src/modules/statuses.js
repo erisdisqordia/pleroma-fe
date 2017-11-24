@@ -22,7 +22,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     },
     public: {
       statuses: [],
@@ -36,7 +37,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     },
     user: {
       statuses: [],
@@ -50,7 +52,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     },
     publicAndExternal: {
       statuses: [],
@@ -64,7 +67,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     },
     friends: {
       statuses: [],
@@ -78,7 +82,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     },
     tag: {
       statuses: [],
@@ -92,7 +97,8 @@ export const defaultState = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     }
   }
 }
@@ -381,7 +387,8 @@ export const mutations = {
       loading: false,
       followers: [],
       friends: [],
-      viewing: 'statuses'
+      viewing: 'statuses',
+      flushMarker: 0
     }
 
     state.timelines[timeline] = emptyTimeline
@@ -422,6 +429,9 @@ export const mutations = {
     each(notifications, (notification) => {
       notification.seen = true
     })
+  },
+  queueFlush (state, { timeline, id }) {
+    state.timelines[timeline].flushMarker = id
   }
 }
 
@@ -458,6 +468,9 @@ const statuses = {
       // Optimistic retweeting...
       commit('setRetweeted', { status, value: true })
       apiService.retweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
+    },
+    queueFlush ({ rootState, commit }, { timeline, id }) {
+      commit('queueFlush', { timeline, id })
     }
   },
   mutations

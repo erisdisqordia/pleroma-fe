@@ -22,7 +22,7 @@
         <div>
           <input type="file" @change="uploadFile(0, $event)" ></input>
         </div>
-        <i class="fa icon-spin4 animate-spin" v-if="uploading[0]"></i>
+        <i class="base09 icon-spin4 animate-spin" v-if="uploading[0]"></i>
         <button class="btn btn-default base05 base02-background" v-else-if="previews[0]" @click="submitAvatar">{{$t('general.submit')}}</button>
       </div>
       <div class="setting-item">
@@ -35,7 +35,7 @@
         <div>
           <input type="file" @change="uploadFile(1, $event)" ></input>
         </div>
-        <i class="fa icon-spin4 animate-spin uploading" v-if="uploading[1]"></i>
+        <i class="base09 icon-spin4 animate-spin uploading" v-if="uploading[1]"></i>
         <button class="btn btn-default base05 base02-background" v-else-if="previews[1]" @click="submitBanner">{{$t('general.submit')}}</button>
       </div>
       <div class="setting-item">
@@ -46,7 +46,7 @@
         <div>
           <input type="file" @change="uploadFile(2, $event)" ></input>
         </div>
-        <i class="fa icon-spin4 animate-spin uploading" v-if="uploading[2]"></i>
+        <i class="base09 icon-spin4 animate-spin uploading" v-if="uploading[2]"></i>
         <button class="btn btn-default base05 base02-background" v-else-if="previews[2]" @click="submitBg">{{$t('general.submit')}}</button>
       </div>
     </div>

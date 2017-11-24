@@ -5,7 +5,7 @@
       <div class='status-actions'>
         <div>
           <a href="#" v-on:click.prevent="toggleReplying">
-            <i class="fa icon-reply" :class="{'icon-reply-active': replying}"></i>
+            <i class="base09 icon-reply" :class="{'icon-reply-active': replying}"></i>
           </a>
         </div>
         <retweet-button :status=status></retweet-button>
@@ -19,7 +19,7 @@
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
         <small class="muteWords">{{muteWordHits.join(', ')}}</small>
-        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="fa icon-eye-off"></i></a>
+        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="base09 icon-eye-off"></i></a>
       </div>
     </template>
     <template v-if="!muted">
@@ -75,10 +75,10 @@
                 </h4>
               </div>
               <div class="heading-icons">
-                <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="fa icon-eye-off"></i></a>
-                <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="fa icon-binoculars"></i></a>
+                <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="base09 icon-eye-off"></i></a>
+                <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="base09 icon-binoculars"></i></a>
                 <template v-if="expandable">
-                  <a href="#" @click.prevent="toggleExpanded" class="expand"><i class="fa icon-plus-squared"></i></a>
+                  <a href="#" @click.prevent="toggleExpanded" class="expand"><i class="base09 icon-plus-squared"></i></a>
                 </template>
               </div>
             </div>
@@ -94,7 +94,7 @@
               </div>
             </div>
             <div class="status-preview status-preview-loading base00-background base03-border" v-else-if="showPreview">
-              <i class="fa icon-spin4 animate-spin"></i>
+              <i class="base09 icon-spin4 animate-spin"></i>
             </div>
 
             <div @click.prevent="linkClicked" class="status-content" v-html="status.statusnet_html"></div>
@@ -109,7 +109,7 @@
             <div class='status-actions'>
               <div>
                 <a href="#" v-on:click.prevent="toggleReplying">
-                  <i class="fa icon-reply" :class="{'icon-reply-active': replying}"></i>
+                  <i class="base09 icon-reply" :class="{'icon-reply-active': replying}"></i>
                 </a>
               </div>
               <retweet-button :status=status></retweet-button>

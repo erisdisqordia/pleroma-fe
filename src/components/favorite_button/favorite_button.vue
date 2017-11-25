@@ -15,7 +15,7 @@
         color: orange;
       }
   }
-  .icon-star {
+  .favorite-button.icon-star {
       color: orange;
   }
 

@@ -324,7 +324,7 @@
      color: $blue;
  }
 
- .icon-reply-active {
+ .icon-reply.icon-reply-active {
      color: $blue;
  }
 

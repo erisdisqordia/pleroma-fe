@@ -17,7 +17,7 @@
             <div v-if="notification.type === 'favorite'">
               <h1>
                 <span :title="'@'+notification.action.user.screen_name">{{ notification.action.user.name }}</span>
-                <i class="fa icon-star"></i>
+                <i class="fa icon-star lit"></i>
                 <small><router-link :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
               </h1>
               <div class="notification-gradient" :style="hiderStyle"></div>

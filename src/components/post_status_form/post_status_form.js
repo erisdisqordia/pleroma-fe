@@ -153,6 +153,14 @@ const PostStatusForm = {
     type (fileInfo) {
       return fileTypeService.fileType(fileInfo.mimetype)
     },
+    paste (e) {
+      if (e.clipboardData.files.length > 0) {
+        // Strangely, files property gets emptied after event propagation
+        // Trying to wrap it in array doesn't work. Plus I doubt it's possible
+        // to hold more than one file in clipboard.
+        this.dropFiles = [e.clipboardData.files[0]]
+      }
+    },
     fileDrop (e) {
       if (e.dataTransfer.files.length > 0) {
         e.preventDefault()  // allow dropping text like before

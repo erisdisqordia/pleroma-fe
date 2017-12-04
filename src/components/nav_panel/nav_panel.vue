@@ -8,6 +8,11 @@
           </router-link>
         </li>
         <li v-if='currentUser'>
+          <router-link class="base00-background" to='/chat'>
+            {{ $t("nav.chat") }}
+          </router-link>
+        </li>
+        <li v-if='currentUser'>
           <router-link class="base00-background" :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
             {{ $t("nav.mentions") }}
           </router-link>

@@ -179,7 +179,11 @@ const fi = {
 }
 
 const en = {
+  chat: {
+    title: 'Chat'
+  },
   nav: {
+    chat: 'Local Chat',
     timeline: 'Timeline',
     mentions: 'Mentions',
     public_tl: 'Public Timeline',

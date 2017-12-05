@@ -18,6 +18,7 @@ import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
+import chatModule from './modules/chat.js'
 
 import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
@@ -58,7 +59,8 @@ const store = new Vuex.Store({
     statuses: statusesModule,
     users: usersModule,
     api: apiModule,
-    config: configModule
+    config: configModule,
+    chat: chatModule
   },
   plugins: [createPersistedState(persistedStateOptions)],
   strict: false // Socket modifies itself, let's ignore this for now.

@@ -1,7 +1,6 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
-import { Socket } from 'phoenix'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
@@ -20,9 +19,6 @@ export const mergeOrAdd = (arr, obj, item) => {
 }
 
 export const mutations = {
-  setSocket (state, socket) {
-    state.socket = socket
-  },
   setMuted (state, { user: {id}, muted }) {
     const user = state.usersObject[id]
     set(user, 'muted', muted)
@@ -54,8 +50,7 @@ export const defaultState = {
   currentUser: false,
   loggingIn: false,
   users: [],
-  usersObject: {},
-  socket: null
+  usersObject: {}
 }
 
 const users = {
@@ -103,10 +98,7 @@ const users = {
                   commit('setBackendInteractor', backendInteractorService(userCredentials))
 
                   if (user.token) {
-                    // Set up websocket connection
-                    let socket = new Socket('/socket', {params: {token: user.token}})
-                    socket.connect()
-                    store.commit('setSocket', socket)
+                    store.dispatch('initializeSocket', user.token)
                   }
 
                   // Start getting fresh tweets.

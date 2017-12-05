@@ -7,7 +7,7 @@
     </div>
     <div class="panel-body base01-background">
       <div class="chat-window">
-        <div class="chat-message" v-for="message in messages">
+        <div class="chat-message" v-for="message in messages" :key="message.id">
           <span class="chat-avatar">
             <img :src="message.author.avatar" />
             {{message.author.username}}:

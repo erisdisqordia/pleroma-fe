@@ -7,7 +7,7 @@
             {{ $t("nav.timeline") }}
           </router-link>
         </li>
-        <li v-if='currentUser'>
+        <li v-if='chat && currentUser'>
           <router-link class="base00-background" to='/chat'>
             {{ $t("nav.chat") }}
           </router-link>

@@ -18,7 +18,9 @@
         </div>
       </div>
       <div class="chat-input">
-        <input v-model="currentMessage" type="text" @keyup.enter="submit(currentMessage)">
+        <form @submit.prevent="submit(currentMessage)">
+          <input v-model="currentMessage" type="text" >
+        </form>
       </div>
     </div>
   </div>
@@ -41,9 +43,12 @@
  }
  .chat-input {
      display: flex;
-     input {
+     form {
          flex: auto;
-         margin: 0.5em;
+         input {
+             margin: 0.5em;
+             width: 100%;
+         }
      }
  }
 </style>

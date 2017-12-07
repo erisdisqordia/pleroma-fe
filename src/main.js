@@ -12,11 +12,13 @@ import UserProfile from './components/user_profile/user_profile.vue'
 import Settings from './components/settings/settings.vue'
 import Registration from './components/registration/registration.vue'
 import UserSettings from './components/user_settings/user_settings.vue'
+import Chat from './components/chat/chat.vue'
 
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
+import chatModule from './modules/chat.js'
 
 import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
@@ -57,10 +59,12 @@ const store = new Vuex.Store({
     statuses: statusesModule,
     users: usersModule,
     api: apiModule,
-    config: configModule
+    config: configModule,
+    chat: chatModule
   },
   plugins: [createPersistedState(persistedStateOptions)],
-  strict: process.env.NODE_ENV !== 'production'
+  strict: false // Socket modifies itself, let's ignore this for now.
+  // strict: process.env.NODE_ENV !== 'production'
 })
 
 const i18n = new VueI18n({
@@ -78,6 +82,9 @@ window.fetch('/static/config.json')
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
     store.dispatch('setOption', { name: 'registrationOpen', value: registrationOpen })
+    if (data['chatDisabled']) {
+      store.dispatch('disableChat')
+    }
 
     const routes = [
       { name: 'root', path: '/', redirect: data['defaultPath'] || '/main/all' },
@@ -90,7 +97,8 @@ window.fetch('/static/config.json')
       { name: 'mentions', path: '/:username/mentions', component: Mentions },
       { name: 'settings', path: '/settings', component: Settings },
       { name: 'registration', path: '/registration', component: Registration },
-      { name: 'user-settings', path: '/user-settings', component: UserSettings }
+      { name: 'user-settings', path: '/user-settings', component: UserSettings },
+      { name: 'chat', path: '/chat', component: Chat }
     ]
 
     const router = new VueRouter({

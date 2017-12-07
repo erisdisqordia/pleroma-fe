@@ -23,9 +23,15 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'https://social.heldscal.la/',
+        target: 'htts://localhost:4000/',
         changeOrigin: true,
         cookieDomainRewrite: 'localhost'
+      },
+      '/socket': {
+        target: 'htts://localhost:4000/',
+        changeOrigin: true,
+        cookieDomainRewrite: 'localhost',
+        ws: true
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

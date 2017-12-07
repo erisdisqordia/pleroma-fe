@@ -4,5 +4,6 @@
   "background": "/static/bg.jpg",
   "logo": "/static/logo.png",
   "registrationOpen": false,
-  "defaultPath": "/main/all"
+  "defaultPath": "/main/all",
+  "chatDisabled": false
 }

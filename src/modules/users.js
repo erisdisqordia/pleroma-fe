@@ -97,6 +97,10 @@ const users = {
                   // Set our new backend interactor
                   commit('setBackendInteractor', backendInteractorService(userCredentials))
 
+                  if (user.token) {
+                    store.dispatch('initializeSocket', user.token)
+                  }
+
                   // Start getting fresh tweets.
                   store.dispatch('startFetching', 'friends')
 

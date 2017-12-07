@@ -1,10 +1,13 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import {isArray} from 'lodash'
+import { Socket } from 'phoenix'
 
 const api = {
   state: {
     backendInteractor: backendInteractorService(),
-    fetchers: {}
+    fetchers: {},
+    socket: null,
+    chatDisabled: false
   },
   mutations: {
     setBackendInteractor (state, backendInteractor) {
@@ -15,6 +18,12 @@ const api = {
     },
     removeFetcher (state, {timeline}) {
       delete state.fetchers[timeline]
+    },
+    setSocket (state, socket) {
+      state.socket = socket
+    },
+    setChatDisabled (state, value) {
+      state.chatDisabled = value
     }
   },
   actions: {
@@ -37,6 +46,17 @@ const api = {
       const fetcher = store.state.fetchers[timeline]
       window.clearInterval(fetcher)
       store.commit('removeFetcher', {timeline})
+    },
+    initializeSocket (store, token) {
+      // Set up websocket connection
+      if (!store.state.chatDisabled) {
+        let socket = new Socket('/socket', {params: {token: token}})
+        socket.connect()
+        store.dispatch('initializeChat', socket)
+      }
+    },
+    disableChat (store) {
+      store.commit('setChatDisabled', true)
     }
   }
 }

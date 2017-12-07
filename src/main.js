@@ -82,6 +82,9 @@ window.fetch('/static/config.json')
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
     store.dispatch('setOption', { name: 'registrationOpen', value: registrationOpen })
+    if (data['chatDisabled']) {
+      store.dispatch('disableChat')
+    }
 
     const routes = [
       { name: 'root', path: '/', redirect: data['defaultPath'] || '/main/all' },

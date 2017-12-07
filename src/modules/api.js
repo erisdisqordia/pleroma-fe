@@ -6,7 +6,8 @@ const api = {
   state: {
     backendInteractor: backendInteractorService(),
     fetchers: {},
-    socket: null
+    socket: null,
+    chatDisabled: false
   },
   mutations: {
     setBackendInteractor (state, backendInteractor) {
@@ -20,6 +21,9 @@ const api = {
     },
     setSocket (state, socket) {
       state.socket = socket
+    },
+    setChatDisabled (state, value) {
+      state.chatDisabled = value
     }
   },
   actions: {
@@ -45,9 +49,14 @@ const api = {
     },
     initializeSocket (store, token) {
       // Set up websocket connection
-      let socket = new Socket('/socket', {params: {token: token}})
-      socket.connect()
-      store.dispatch('initializeChat', socket)
+      if (!store.state.chatDisabled) {
+        let socket = new Socket('/socket', {params: {token: token}})
+        socket.connect()
+        store.dispatch('initializeChat', socket)
+      }
+    },
+    disableChat (store) {
+      store.commit('setChatDisabled', true)
     }
   }
 }

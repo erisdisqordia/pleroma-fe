@@ -30,6 +30,11 @@
 
 
 <style lang="scss">
+ .chat-window {
+   max-height: 80vh;
+   overflow-y: auto;
+   overflow-x: hidden;
+ }
  .chat-message {
    padding: 0.2em 0.5em
  }
@@ -47,7 +52,7 @@
          flex: auto;
          input {
              margin: 0.5em;
-             width: 100%;
+             width: fill-available;
          }
      }
  }

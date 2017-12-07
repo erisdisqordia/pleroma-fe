@@ -129,10 +129,16 @@ window.fetch('/static/terms-of-service.html')
   })
 
 window.fetch('/api/pleroma/emoji.json')
-  .then((res) => res.json())
-  .then((values) => {
-    const emoji = Object.keys(values).map((key) => {
-      return { shortcode: key, image_url: values[key] }
-    })
-    store.dispatch('setOption', { name: 'emoji', value: emoji })
-  })
+  .then(
+    (res) => res.json()
+      .then(
+        (values) => {
+          const emoji = Object.keys(values).map((key) => {
+            return { shortcode: key, image_url: values[key] }
+          })
+          store.dispatch('setOption', { name: 'emoji', value: emoji })
+        },
+        (failure) => {}
+      ),
+    (error) => console.log(error)
+  )

@@ -1,6 +1,6 @@
 const de = {
   chat: {
-      title: 'Chat'
+    title: 'Chat'
   },
   nav: {
     chat: 'Lokaler Chat',

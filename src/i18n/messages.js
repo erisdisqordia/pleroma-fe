@@ -1,5 +1,9 @@
 const de = {
+  chat: {
+      title: 'Chat'
+  }
   nav: {
+    chat: 'Lokaler Chat',
     timeline: 'Zeitleiste',
     mentions: 'Erwähnungen',
     public_tl: 'Lokale Zeitleiste',

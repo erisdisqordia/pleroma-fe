@@ -1,7 +1,7 @@
 const de = {
   chat: {
       title: 'Chat'
-  }
+  },
   nav: {
     chat: 'Lokaler Chat',
     timeline: 'Zeitleiste',

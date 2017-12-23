@@ -34,6 +34,13 @@
       display: flex;
       flex-wrap: wrap;
       margin-right: -0.7em;
+
+      .attachment.media-upload-container {
+        flex: 0 0 auto;
+        max-height: 300px;
+        max-width: 100%;
+      }
+      
       .attachment {
           flex: 1 0 30%;
           margin: 0.5em 0.7em 0.6em 0.0em;
@@ -82,9 +89,7 @@
           img.media-upload {
               margin-bottom: -2px;
               max-height: 300px;
-              width: 100%;
-              height: 100%;
-              flex: 1;
+              max-width: 100%;
           }
 
           .oembed {
@@ -126,6 +131,7 @@
                   width: 100%;
                   height: 100%; /* If this isn't here, chrome will stretch the images */
                   max-height: 500px;
+                  image-orientation: from-image;
               }
           }
       }

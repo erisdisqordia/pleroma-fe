@@ -2,7 +2,7 @@
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group base03-border" >
-        <textarea @click="setCaret" @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control" @keydown.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize"></textarea>
+        <textarea @click="setCaret" @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control" @keydown.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize" @paste="paste"></textarea>
       </div>
       <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel base05-background">
@@ -26,7 +26,7 @@
         <i class="icon-cancel" @click="clearError"></i>
       </div>
       <div class="attachments">
-        <div class="attachment base03-border" v-for="file in newStatus.files">
+        <div class="media-upload-container attachment base03-border" v-for="file in newStatus.files">
           <i class="fa icon-cancel" @click="removeMediaFile(file)"></i>
           <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
           <video v-if="type(file) === 'video'" :src="file.image" controls></video>
@@ -41,6 +41,7 @@
 <script src="./post_status_form.js"></script>
 
 <style lang="scss">
+
  .tribute-container {
    ul {
      padding: 0px;

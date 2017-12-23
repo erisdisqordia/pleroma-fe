@@ -1,4 +1,5 @@
-import { times, map } from 'lodash'
+import { times } from 'lodash'
+import { rgb2hex, hex2rgb } from '../color_convert/color_convert.js'
 
 // While this is not used anymore right now, I left it in if we want to do custom
 // styles that aren't just colors, so user can pick from a few different distinct
@@ -56,16 +57,6 @@ const setStyle = (href, commit) => {
   cssEl.addEventListener('load', setDynamic)
 }
 
-const rgb2hex = (r, g, b) => {
-  [r, g, b] = map([r, g, b], (val) => {
-    val = Math.ceil(val)
-    val = val < 0 ? 0 : val
-    val = val > 255 ? 255 : val
-    return val
-  })
-  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`
-}
-
 const setColors = (col, commit) => {
   const head = document.head
   const body = document.body
@@ -82,6 +73,7 @@ const setColors = (col, commit) => {
   if (isDark) {
     mod = mod * -1
   }
+
   colors['base00'] = rgb2hex(col.bg.r, col.bg.g, col.bg.b)                         // background
   colors['base01'] = rgb2hex((col.bg.r + col.fg.r) / 2, (col.bg.g + col.fg.g) / 2, (col.bg.b + col.fg.b) / 2) // hilighted bg
   colors['base02'] = rgb2hex(col.fg.r, col.fg.g, col.fg.b)                         // panels & buttons
@@ -91,11 +83,13 @@ const setColors = (col, commit) => {
   colors['base06'] = rgb2hex(col.text.r - mod, col.text.g - mod, col.text.b - mod) // strong text
   colors['base07'] = rgb2hex(col.text.r - mod * 2, col.text.g - mod * 2, col.text.b - mod * 2)
   colors['base08'] = rgb2hex(col.link.r, col.link.g, col.link.b)                   // links
+  colors['base09'] = rgb2hex((col.bg.r + col.text.r) / 2, (col.bg.g + col.text.g) / 2, (col.bg.b + col.text.b) / 2) // icons
 
-  times(9, (n) => {
-    const color = colors[`base0${8 - n}`]
-    styleSheet.insertRule(`.base0${8 - n} { color: ${color}`, 'index-max')
-    styleSheet.insertRule(`.base0${8 - n}-background { background-color: ${color}`, 'index-max')
+  const num = 10
+  times(num, (n) => {
+    const color = colors[`base0${num - 1 - n}`]
+    styleSheet.insertRule(`.base0${num - 1 - n} { color: ${color}`, 'index-max')
+    styleSheet.insertRule(`.base0${num - 1 - n}-background { background-color: ${color}`, 'index-max')
   })
 
   styleSheet.insertRule(`a { color: ${colors['base08']}`, 'index-max')
@@ -106,15 +100,6 @@ const setColors = (col, commit) => {
 
   commit('setOption', { name: 'colors', value: colors })
   commit('setOption', { name: 'customTheme', value: col })
-}
-
-const hex2rgb = (hex) => {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null
 }
 
 const setPreset = (val, commit) => {

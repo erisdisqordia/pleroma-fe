@@ -12,11 +12,13 @@ import UserProfile from './components/user_profile/user_profile.vue'
 import Settings from './components/settings/settings.vue'
 import Registration from './components/registration/registration.vue'
 import UserSettings from './components/user_settings/user_settings.vue'
+import Chat from './components/chat/chat.vue'
 
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
+import chatModule from './modules/chat.js'
 
 import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
@@ -57,35 +59,12 @@ const store = new Vuex.Store({
     statuses: statusesModule,
     users: usersModule,
     api: apiModule,
-    config: configModule
+    config: configModule,
+    chat: chatModule
   },
   plugins: [createPersistedState(persistedStateOptions)],
-  strict: process.env.NODE_ENV !== 'production'
-})
-
-const routes = [
-  { name: 'root', path: '/', redirect: '/main/all' },
-  { path: '/main/all', component: PublicAndExternalTimeline },
-  { path: '/main/public', component: PublicTimeline },
-  { path: '/main/friends', component: FriendsTimeline },
-  { path: '/tag/:tag', component: TagTimeline },
-  { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
-  { name: 'user-profile', path: '/users/:id', component: UserProfile },
-  { name: 'mentions', path: '/:username/mentions', component: Mentions },
-  { name: 'settings', path: '/settings', component: Settings },
-  { name: 'registration', path: '/registration', component: Registration },
-  { name: 'user-settings', path: '/user-settings', component: UserSettings }
-]
-
-const router = new VueRouter({
-  mode: 'history',
-  routes,
-  scrollBehavior: (to, from, savedPosition) => {
-    if (to.matched.some(m => m.meta.dontScroll)) {
-      return false
-    }
-    return savedPosition || { x: 0, y: 0 }
-  }
+  strict: false // Socket modifies itself, let's ignore this for now.
+  // strict: process.env.NODE_ENV !== 'production'
 })
 
 const i18n = new VueI18n({
@@ -94,23 +73,53 @@ const i18n = new VueI18n({
   messages
 })
 
-/* eslint-disable no-new */
-new Vue({
-  router,
-  store,
-  i18n,
-  el: '#app',
-  render: h => h(App)
-})
-
 window.fetch('/static/config.json')
   .then((res) => res.json())
-  .then(({name, theme, background, logo, registrationOpen}) => {
+  .then((data) => {
+    const {name, theme, background, logo, registrationOpen} = data
     store.dispatch('setOption', { name: 'name', value: name })
     store.dispatch('setOption', { name: 'theme', value: theme })
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
     store.dispatch('setOption', { name: 'registrationOpen', value: registrationOpen })
+    if (data['chatDisabled']) {
+      store.dispatch('disableChat')
+    }
+
+    const routes = [
+      { name: 'root', path: '/', redirect: data['defaultPath'] || '/main/all' },
+      { path: '/main/all', component: PublicAndExternalTimeline },
+      { path: '/main/public', component: PublicTimeline },
+      { path: '/main/friends', component: FriendsTimeline },
+      { path: '/tag/:tag', component: TagTimeline },
+      { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
+      { name: 'user-profile', path: '/users/:id', component: UserProfile },
+      { name: 'mentions', path: '/:username/mentions', component: Mentions },
+      { name: 'settings', path: '/settings', component: Settings },
+      { name: 'registration', path: '/registration', component: Registration },
+      { name: 'user-settings', path: '/user-settings', component: UserSettings },
+      { name: 'chat', path: '/chat', component: Chat }
+    ]
+
+    const router = new VueRouter({
+      mode: 'history',
+      routes,
+      scrollBehavior: (to, from, savedPosition) => {
+        if (to.matched.some(m => m.meta.dontScroll)) {
+          return false
+        }
+        return savedPosition || { x: 0, y: 0 }
+      }
+    })
+
+    /* eslint-disable no-new */
+    new Vue({
+      router,
+      store,
+      i18n,
+      el: '#app',
+      render: h => h(App)
+    })
   })
 
 window.fetch('/static/terms-of-service.html')
@@ -120,13 +129,19 @@ window.fetch('/static/terms-of-service.html')
   })
 
 window.fetch('/api/pleroma/emoji.json')
-  .then((res) => res.json())
-  .then((values) => {
-    const emoji = Object.keys(values).map((key) => {
-      return { shortcode: key, image_url: values[key] }
-    })
-    store.dispatch('setOption', { name: 'customEmoji', value: emoji })
-  })
+  .then(
+    (res) => res.json()
+      .then(
+        (values) => {
+          const emoji = Object.keys(values).map((key) => {
+            return { shortcode: key, image_url: values[key] }
+          })
+          store.dispatch('setOption', { name: 'emoji', value: emoji })
+        },
+        (failure) => {}
+      ),
+    (error) => console.log(error)
+  )
 
 window.fetch('/static/emoji.json')
   .then((res) => res.json())

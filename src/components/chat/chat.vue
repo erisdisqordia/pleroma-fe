@@ -1,0 +1,59 @@
+<template>
+  <div class="chat-panel panel panel-default">
+    <div class="panel-heading timeline-heading base02-background base04">
+      <div class="title">
+        {{$t('chat.title')}}
+      </div>
+    </div>
+    <div class="panel-body base01-background">
+      <div class="chat-window">
+        <div class="chat-message" v-for="message in messages" :key="message.id">
+          <span class="chat-avatar">
+            <img :src="message.author.avatar" />
+            {{message.author.username}}:
+          </span>
+          <span class="chat-text">
+            {{message.text}}
+          </span>
+        </div>
+      </div>
+      <div class="chat-input">
+        <form @submit.prevent="submit(currentMessage)">
+          <input v-model="currentMessage" type="text" >
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script src="./chat.js"></script>
+
+
+<style lang="scss">
+ .chat-window {
+   max-height: 80vh;
+   overflow-y: auto;
+   overflow-x: hidden;
+ }
+ .chat-message {
+   padding: 0.2em 0.5em
+ }
+ .chat-avatar {
+     img {
+         height: 32px;
+         width: 32px;
+         border-radius: 5px;
+         margin-right: 0.5em;
+     }
+ }
+ .chat-input {
+     display: flex;
+     form {
+         flex: auto;
+         input {
+             margin: 0.5em;
+             width: fill-available;
+         }
+     }
+ }
+</style>

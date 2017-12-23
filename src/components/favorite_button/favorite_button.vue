@@ -1,6 +1,6 @@
 <template>
   <div>
-    <i :class='classes' class='favorite-button fa' @click.prevent='favorite()'/>
+    <i :class='classes' class='favorite-button base09' @click.prevent='favorite()'/>
     <span v-if='status.fave_num > 0'>{{status.fave_num}}</span>
   </div>
 </template>
@@ -15,7 +15,7 @@
         color: orange;
       }
   }
-  .icon-star {
+  .favorite-button.icon-star {
       color: orange;
   }
 

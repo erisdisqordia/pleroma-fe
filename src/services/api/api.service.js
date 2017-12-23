@@ -43,6 +43,16 @@ let fetch = (url, options) => {
   return oldfetch(fullUrl, options)
 }
 
+// from https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
+let utoa = (str) => {
+  // first we use encodeURIComponent to get percent-encoded UTF-8,
+  // then we convert the percent encodings into raw bytes which
+  // can be fed into btoa.
+  return btoa(encodeURIComponent(str)
+              .replace(/%([0-9A-F]{2})/g,
+                       (match, p1) => { return String.fromCharCode('0x' + p1) }))
+}
+
 // Params
 // cropH
 // cropW
@@ -156,7 +166,7 @@ const register = (params) => {
 
 const authHeaders = (user) => {
   if (user && user.username && user.password) {
-    return { 'Authorization': `Basic ${btoa(`${user.username}:${user.password}`)}` }
+    return { 'Authorization': `Basic ${utoa(`${user.username}:${user.password}`)}` }
   } else {
     return { }
   }
@@ -280,6 +290,8 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   if (tag) {
     url += `/${tag}.json`
   }
+
+  params.push(['count', 20])
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`

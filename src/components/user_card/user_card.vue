@@ -59,13 +59,16 @@
   }
 
   .usercard {
-    width: -webkit-fill-available;
-    width: -moz-webkit-fill-available;
-    stretch: fill;
+    width: fill-available;
     margin: 0.2em 0 0.7em 0;
-    border-radius: 5px;
+    border-radius: 10px;
     border-style: solid;
     border-color: inherit;
     border-width: 1px;
+    overflow: hidden;
+
+    p {
+      margin-bottom: 0;
+    }
   }
 </style>

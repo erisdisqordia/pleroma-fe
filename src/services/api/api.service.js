@@ -29,6 +29,7 @@ const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 const BLOCKING_URL = '/api/blocks/create.json'
 const UNBLOCKING_URL = '/api/blocks/destroy.json'
 const USER_URL = '/api/users/show.json'
+const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 
 import { each, map } from 'lodash'
 import 'whatwg-fetch'
@@ -362,6 +363,15 @@ const uploadMedia = ({formData, credentials}) => {
     .then((text) => (new DOMParser()).parseFromString(text, 'application/xml'))
 }
 
+const followImport = ({params, credentials}) => {
+  return fetch(FOLLOW_IMPORT_URL, {
+    body: params,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.ok)
+}
+
 const fetchMutes = ({credentials}) => {
   const url = '/api/qvitter/mutes.json'
 
@@ -396,7 +406,8 @@ const apiService = {
   updateBg,
   updateProfile,
   updateBanner,
-  externalProfile
+  externalProfile,
+  followImport
 }
 
 export default apiService

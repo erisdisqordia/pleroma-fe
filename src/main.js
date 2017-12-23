@@ -137,8 +137,11 @@ window.fetch('/api/pleroma/emoji.json')
             return { shortcode: key, image_url: values[key] }
           })
           store.dispatch('setOption', { name: 'emoji', value: emoji })
+          store.dispatch('setOption', { name: 'pleromaBackend', value: true })
         },
-        (failure) => {}
+        (failure) => {
+          store.dispatch('setOption', { name: 'pleromaBackend', value: false })
+        }
       ),
     (error) => console.log(error)
   )

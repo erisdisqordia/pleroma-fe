@@ -5,7 +5,10 @@ const UserSettings = {
     return {
       newname: this.$store.state.users.currentUser.name,
       newbio: this.$store.state.users.currentUser.description,
-      uploading: [ false, false, false ],
+      followList: null,
+      followImportError: false,
+      followsImported: false,
+      uploading: [ false, false, false, false ],
       previews: [ null, null, null ]
     }
   },
@@ -15,6 +18,9 @@ const UserSettings = {
   computed: {
     user () {
       return this.$store.state.users.currentUser
+    },
+    pleromaBackend () {
+      return this.$store.state.config.pleromaBackend
     }
   },
   methods: {
@@ -117,6 +123,29 @@ const UserSettings = {
         }
         this.uploading[2] = false
       })
+    },
+    importFollows () {
+      this.uploading[3] = true
+      const followList = this.followList
+      this.$store.state.api.backendInteractor.followImport({params: followList})
+        .then((status) => {
+          if (status) {
+            this.followsImported = true
+          } else {
+            this.followImportError = true
+          }
+          this.uploading[3] = false
+        })
+    },
+    followListChange () {
+      // eslint-disable-next-line no-undef
+      let formData = new FormData()
+      formData.append('list', this.$refs.followlist.files[0])
+      this.followList = formData
+    },
+    dismissImported () {
+      this.followsImported = false
+      this.followImportError = false
     }
   }
 }

@@ -58,7 +58,11 @@ const de = {
     nsfw_clickthrough: 'Aktiviere ausblendbares Overlay für als NSFW markierte Anhänge',
     autoload: 'Aktiviere automatisches Laden von älteren Beiträgen beim scrollen',
     streaming: 'Aktiviere automatisches Laden (Streaming) von neuen Beiträgen',
-    reply_link_preview: 'Aktiviere reply-link Vorschau bei Maus-Hover'
+    reply_link_preview: 'Aktiviere reply-link Vorschau bei Maus-Hover',
+    follow_import: 'Folgeliste importieren',
+    import_followers_from_a_csv_file: 'Importiere Kontakte, denen du folgen möchtest, aus einer CSV-Datei',
+    follows_imported: 'Folgeliste importiert! Die Bearbeitung kann eine Zeit lang dauern.',
+    follow_import_error: 'Fehler beim importieren der Folgeliste'
   },
   notifications: {
     notifications: 'Benachrichtigungen',

@@ -5696,6 +5696,12 @@ void-elements@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
+vue-chat-scroll@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/vue-chat-scroll/-/vue-chat-scroll-1.2.1.tgz#54f123004b887d91f2f7fb69b9bebdf6f61ea9b4"
+  dependencies:
+    vue "^2.1.10"
+
 vue-hot-reload-api@^2.0.1:
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.0.9.tgz#2e8cfbfc8e531eea57d8c1f0bd761047c7e11b56"
@@ -5747,7 +5753,7 @@ vue-timeago@^3.1.2:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/vue-timeago/-/vue-timeago-3.2.0.tgz#73fd0635de6ea4ecfbbce035b2e44035d806fba1"
 
-vue@^2.3.4:
+vue@^2.1.10, vue@^2.3.4:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.3.4.tgz#5ec3b87a191da8090bbef56b7cfabd4158038171"
 

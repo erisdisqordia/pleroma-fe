@@ -1,12 +1,12 @@
 <template>
-  <div class="chat-panel panel panel-default">
-    <div class="panel-heading timeline-heading base02-background base04">
-      <div class="title">
-        {{$t('chat.title')}}
+  <div class="chat-panel">
+    <div class="panel panel-default base01-background">
+      <div class="panel-heading timeline-heading base02-background base04">
+        <div class="title">
+          {{$t('chat.title')}}
+        </div>
       </div>
-    </div>
-    <div class="panel-body base01-background">
-      <div class="chat-window">
+      <div class="chat-window" v-chat-scroll>
         <div class="chat-message" v-for="message in messages" :key="message.id">
           <span class="chat-avatar">
             <img :src="message.author.avatar" />
@@ -26,12 +26,11 @@
   </div>
 </template>
 
-<script src="./chat.js"></script>
-
+<script src="./chat_panel.js"></script>
 
 <style lang="scss">
  .chat-window {
-   max-height: 80vh;
+   max-height: 200px;
    overflow-y: auto;
    overflow-x: hidden;
  }

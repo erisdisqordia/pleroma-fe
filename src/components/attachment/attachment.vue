@@ -8,7 +8,7 @@
     </div>
 
     <a v-if="type === 'image' && !hidden" class="image-attachment" :href="attachment.url" target="_blank">
-      <img class="base03-border" referrerpolicy="no-referrer" :src="attachment.large_thumb_url || attachment.url"/>
+      <StillImage class="base03-border" referrerpolicy="no-referrer" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
     <video class="base03" v-if="type === 'video' && !hidden" :src="attachment.url" controls loop></video>

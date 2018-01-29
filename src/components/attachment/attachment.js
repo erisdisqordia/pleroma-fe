@@ -1,3 +1,4 @@
+import StillImage from '../still-image/still-image.vue'
 import nsfwImage from '../../assets/nsfw.png'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 
@@ -15,6 +16,9 @@ const Attachment = {
       loading: false,
       img: document.createElement('img')
     }
+  },
+  components: {
+    StillImage
   },
   computed: {
     type () {

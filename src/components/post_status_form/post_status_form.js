@@ -104,6 +104,7 @@ const PostStatusForm = {
     },
     postStatus (newStatus) {
       if (this.posting) { return }
+      if (this.submitDisabled) { return }
 
       if (this.newStatus.status === '') {
         if (this.newStatus.files.length > 0) {

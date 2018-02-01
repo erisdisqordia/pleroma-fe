@@ -64,14 +64,15 @@ const PostStatusForm = {
           img: profile_image_url_original
         }))
       } else if (firstchar === ':') {
-        const matchedEmoji = filter(this.emoji, (emoji) => emoji.shortcode.match(this.textAtCaret.slice(1)))
+        const matchedEmoji = filter(this.emoji.concat(this.customEmoji), (emoji) => emoji.shortcode.match(this.textAtCaret.slice(1)))
         if (matchedEmoji.length <= 0) {
           return false
         }
-        return map(take(matchedEmoji, 5), ({shortcode, image_url}) => ({
+        return map(take(matchedEmoji, 5), ({shortcode, image_url, utf}) => ({
           // eslint-disable-next-line camelcase
           screen_name: `:${shortcode}:`,
           name: '',
+          utf: utf || '',
           img: image_url
         }))
       } else {
@@ -90,6 +91,9 @@ const PostStatusForm = {
     },
     emoji () {
       return this.$store.state.config.emoji || []
+    },
+    customEmoji () {
+      return this.$store.state.config.customEmoji || []
     }
   },
   methods: {

@@ -23,6 +23,7 @@
             <div class="sidebar">
               <user-panel></user-panel>
               <nav-panel></nav-panel>
+              <chat-panel v-if="currentUser && chat"></chat-panel>
               <notifications v-if="currentUser"></notifications>
             </div>
           </div>

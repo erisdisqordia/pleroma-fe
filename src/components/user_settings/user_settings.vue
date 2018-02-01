@@ -49,6 +49,23 @@
         <i class="base09 icon-spin4 animate-spin uploading" v-if="uploading[2]"></i>
         <button class="btn btn-default base05 base02-background" v-else-if="previews[2]" @click="submitBg">{{$t('general.submit')}}</button>
       </div>
+      <div class="setting-item" v-if="pleromaBackend">
+        <h3>{{$t('settings.follow_import')}}</h3>
+        <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
+        <form v-model="followImportForm">
+          <input type="file" ref="followlist" v-on:change="followListChange"></input>
+        </form>
+        <i class="base09 icon-spin4 animate-spin uploading" v-if="uploading[3]"></i>
+        <button class="btn btn-default base05 base02-background" v-else @click="importFollows">{{$t('general.submit')}}</button>
+        <div v-if="followsImported">
+          <i class="icon-cross" @click="dismissImported"></i>
+          <p>{{$t('settings.follows_imported')}}</p>
+        </div>
+        <div v-else-if="followImportError">
+          <i class="icon-cross" @click="dismissImported"</i>
+          <p>{{$t('settings.follow_import_error')}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>

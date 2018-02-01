@@ -12,7 +12,6 @@ import UserProfile from './components/user_profile/user_profile.vue'
 import Settings from './components/settings/settings.vue'
 import Registration from './components/registration/registration.vue'
 import UserSettings from './components/user_settings/user_settings.vue'
-import Chat from './components/chat/chat.vue'
 
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
@@ -27,6 +26,8 @@ import createPersistedState from './lib/persisted_state.js'
 
 import messages from './i18n/messages.js'
 
+import VueChatScroll from 'vue-chat-scroll'
+
 const currentLocale = (window.navigator.language || 'en').split('-')[0]
 
 Vue.use(Vuex)
@@ -39,6 +40,7 @@ Vue.use(VueTimeago, {
   }
 })
 Vue.use(VueI18n)
+Vue.use(VueChatScroll)
 
 const persistedStateOptions = {
   paths: [
@@ -97,8 +99,7 @@ window.fetch('/static/config.json')
       { name: 'mentions', path: '/:username/mentions', component: Mentions },
       { name: 'settings', path: '/settings', component: Settings },
       { name: 'registration', path: '/registration', component: Registration },
-      { name: 'user-settings', path: '/user-settings', component: UserSettings },
-      { name: 'chat', path: '/chat', component: Chat }
+      { name: 'user-settings', path: '/user-settings', component: UserSettings }
     ]
 
     const router = new VueRouter({
@@ -137,8 +138,11 @@ window.fetch('/api/pleroma/emoji.json')
             return { shortcode: key, image_url: values[key] }
           })
           store.dispatch('setOption', { name: 'customEmoji', value: emoji })
+          store.dispatch('setOption', { name: 'pleromaBackend', value: true })
         },
-        (failure) => {}
+        (failure) => {
+          store.dispatch('setOption', { name: 'pleromaBackend', value: false })
+        }
       ),
     (error) => console.log(error)
   )

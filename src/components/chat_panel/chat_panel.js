@@ -1,4 +1,4 @@
-const chat = {
+const chatPanel = {
   data () {
     return {
       currentMessage: '',
@@ -18,4 +18,4 @@ const chat = {
   }
 }
 
-export default chat
+export default chatPanel

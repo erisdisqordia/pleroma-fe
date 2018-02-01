@@ -46,6 +46,15 @@
               </button>
             </span>
           </div>
+          <div class="remote-follow" v-if='!loggedIn && user.is_local'>
+            <form method="POST" :action='subscribeUrl'>
+              <input type="hidden" name="nickname" :value="user.screen_name">
+              <input type="hidden" name="profile" value="">
+              <button click="submit" class="remote-button base05 base02-background">
+                {{ $t('user_card.remote_follow') }}
+              </button>
+            </form>
+          </div>
           <div class='block' v-if='isOtherUser && loggedIn'>
             <span v-if='user.statusnet_blocking'>
               <button @click="unblockUser" class="base04 base00-background pressed">
@@ -182,6 +191,11 @@
       min-height: 28px;
     }
 
+    .remote-follow {
+      max-width: 220px;
+      min-height: 28px;
+    }
+
     .follow {
       max-width: 220px;
       min-height: 28px;
@@ -191,6 +205,12 @@
       width: 92%;
       height: 100%;
     }
+
+    .remote-button {
+      height: 28px !important;
+      width: 92%;
+    }
+
     .pressed {
       border-bottom-color: rgba(255, 255, 255, 0.2);
       border-top-color: rgba(0, 0, 0, 0.2);

@@ -208,7 +208,8 @@ const en = {
     muted: 'Muted',
     followers: 'Followers',
     followees: 'Following',
-    per_day: 'per day'
+    per_day: 'per day',
+    remote_follow: 'Remote follow'
   },
   timeline: {
     show_new: 'Show new',

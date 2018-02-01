@@ -248,6 +248,7 @@
          img, video {
            max-width: 100%;
            max-height: 400px;
+           vertical-align: middle;
            object-fit: contain;
          }
 

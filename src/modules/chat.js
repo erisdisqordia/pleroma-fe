@@ -1,7 +1,7 @@
 const chat = {
   state: {
     messages: [],
-    channel: null
+    channel: {state: ''}
   },
   mutations: {
     setChannel (state, channel) {

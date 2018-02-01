@@ -136,7 +136,7 @@ window.fetch('/api/pleroma/emoji.json')
           const emoji = Object.keys(values).map((key) => {
             return { shortcode: key, image_url: values[key] }
           })
-          store.dispatch('setOption', { name: 'emoji', value: emoji })
+          store.dispatch('setOption', { name: 'customEmoji', value: emoji })
         },
         (failure) => {}
       ),

@@ -24,7 +24,7 @@ export default {
     logoStyle () { return { 'background-image': `url(${this.$store.state.config.logo})` } },
     style () { return { 'background-image': `url(${this.background})` } },
     sitename () { return this.$store.state.config.name },
-    chat () { return this.$store.state.chat.channel }
+    chat () { return this.$store.state.chat.channel.state === 'joined' }
   },
   methods: {
     activatePanel (panelName) {

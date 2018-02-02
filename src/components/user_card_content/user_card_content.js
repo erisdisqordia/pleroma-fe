@@ -22,6 +22,11 @@ export default {
     isOtherUser () {
       return this.user.id !== this.$store.state.users.currentUser.id
     },
+    subscribeUrl () {
+      // eslint-disable-next-line no-undef
+      const serverUrl = new URL(this.user.statusnet_profile_url)
+      return `${serverUrl.protocol}//${serverUrl.host}/main/ostatus`
+    },
     loggedIn () {
       return this.$store.state.users.currentUser
     },

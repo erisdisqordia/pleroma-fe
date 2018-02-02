@@ -105,17 +105,15 @@
             </div>
           </div>
 
-          <div v-if="loggedIn">
-            <div class='status-actions'>
-              <div>
-                <a href="#" v-on:click.prevent="toggleReplying">
-                  <i class="base09 icon-reply" :class="{'icon-reply-active': replying}"></i>
-                </a>
-              </div>
-              <retweet-button :status=status></retweet-button>
-              <favorite-button :status=status></favorite-button>
-              <delete-button :status=status></delete-button>
+          <div class='status-actions'>
+            <div v-if="loggedIn">
+              <a href="#" v-on:click.prevent="toggleReplying">
+                <i class="base09 icon-reply" :class="{'icon-reply-active': replying}"></i>
+              </a>
             </div>
+            <retweet-button :loggedIn="loggedIn" :status=status></retweet-button>
+            <favorite-button :loggedIn="loggedIn" :status=status></favorite-button>
+            <delete-button :status=status></delete-button>
           </div>
         </div>
       </div>

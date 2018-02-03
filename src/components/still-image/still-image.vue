@@ -1,7 +1,7 @@
 <template>
   <div class='still-image' :class='{ animated: animated }' >
     <canvas ref="canvas" v-if="animated"></canvas>
-    <img ref="src" :src="src" :referrerpolicy="referrerpolicy" v-on:load="drawCanvas"/>
+    <img ref="src" :src="src" :referrerpolicy="referrerpolicy" v-on:load="onLoad"/>
   </div>
 </template>
 
@@ -31,9 +31,10 @@
             position: absolute;
             top: 5px;
             left: 5px;
-            background: rgba(255,255,255,.5);
+            background: rgba(127,127,127,.7);
             display: block;
             padding: 2px;
+            border-radius: 3px;
             z-index: 2;
         }
     }

@@ -12,16 +12,27 @@ const StillImage = {
     }
   },
   computed: {
-    animated () {
-      return this.mimetype === 'image/gif'
+    animated: {
+      get () {
+        // If mimetype is gif then it is certainly animated, if it's undefined - we don't know YET
+        return this.mimetype === 'image/gif' ? true : this.mimetype == null ? 'maybe' : false
+      },
+      set (val) {
+        this.mimetype = val
+      }
     }
   },
   methods: {
-    drawCanvas() {
+    onLoad () {
       const canvas = this.$refs.canvas
       if (!canvas) return
-      const ctx = canvas.getContext('2d')
-      ctx.drawImage(this.$refs.src, 1, 1, canvas.width, canvas.height)
+      canvas.getContext('2d').drawImage(this.$refs.src, 1, 1, canvas.width, canvas.height)
+      if (this.animated === 'maybe') {
+        fetch(this.src).then((data) => {
+          console.log(data)
+          this.animated = data.type
+        })
+      }
     }
   }
 }

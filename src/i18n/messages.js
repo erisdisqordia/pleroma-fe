@@ -208,7 +208,8 @@ const en = {
     muted: 'Muted',
     followers: 'Followers',
     followees: 'Following',
-    per_day: 'per day'
+    per_day: 'per day',
+    remote_follow: 'Remote follow'
   },
   timeline: {
     show_new: 'Show new',
@@ -922,7 +923,11 @@ const es = {
 }
 
 const pt = {
+  chat: {
+    title: 'Chat'
+  },
   nav: {
+    chat: 'Chat Local',
     timeline: 'Linha do tempo',
     mentions: 'Menções',
     public_tl: 'Linha do tempo pública',
@@ -963,6 +968,12 @@ const pt = {
     set_new_profile_background: 'Mudar o plano de fundo de perfil',
     settings: 'Configurações',
     theme: 'Tema',
+    presets: 'Predefinições',
+    theme_help: 'Use cores em códigos hexadecimais (#aabbcc) para personalizar seu esquema de cores.',
+    background: 'Plano de Fundo',
+    foreground: 'Primeiro Plano',
+    text: 'Texto',
+    links: 'Links',
     filtering: 'Filtragem',
     filtering_explanation: 'Todas as postagens contendo estas palavras serão silenciadas, uma por linha.',
     attachments: 'Anexos',
@@ -970,7 +981,12 @@ const pt = {
     hide_attachments_in_convo: 'Ocultar anexos em conversas',
     nsfw_clickthrough: 'Habilitar clique para ocultar anexos NSFW',
     autoload: 'Habilitar carregamento automático quando a rolagem chegar ao fim.',
-    reply_link_preview: 'Habilitar a pré-visualização de link de respostas ao passar o mouse.'
+    streaming: 'Habilitar o fluxo automático de postagens quando ao topo da página',
+    reply_link_preview: 'Habilitar a pré-visualização de link de respostas ao passar o mouse.',
+    follow_import: 'Importar seguidas',
+    import_followers_from_a_csv_file: 'Importe os perfis que tu segues apartir de um arquivo CSV',
+    follows_imported: 'Seguidas importadas! O processamento das mesmas pode demorar um pouco.',
+    follow_import_error: 'Erro ao importar seguidas'
   },
   notifications: {
     notifications: 'Notificações',
@@ -1000,7 +1016,8 @@ const pt = {
     error_fetching_user: 'Erro procurando usuário'
   },
   general: {
-    submit: 'Enviar'
+    submit: 'Enviar',
+    apply: 'Aplicar'
   }
 }
 

@@ -1,5 +1,5 @@
 const RetweetButton = {
-  props: ['status'],
+  props: ['status', 'loggedIn'],
   data () {
     return {
       animated: false

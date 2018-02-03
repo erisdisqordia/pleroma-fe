@@ -126,7 +126,13 @@
               display: flex;
               flex: 1;
 
+              .still-image {
+                  width: 100%;
+                  height: 100%;
+              }
+
               img {
+                  object-fit: contain;
                   width: 100%;
                   height: 100%; /* If this isn't here, chrome will stretch the images */
                   max-height: 500px;

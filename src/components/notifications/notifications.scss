@@ -104,6 +104,10 @@
     max-height: 12em;
     overflow-y: hidden;
     //text-overflow: ellipsis;
+
+    img {
+        object-fit: contain;
+    }
   }
 
   .notification-gradient {

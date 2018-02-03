@@ -11,6 +11,7 @@
 @import '../../_variables.scss';
 .still-image {
     position: relative;
+    line-height: 0;
     
     &:hover canvas {
         display: none;

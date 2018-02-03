@@ -9,7 +9,7 @@
           </a>
         </div>
         <retweet-button :loggedIn="loggedIn" :status=status></retweet-button>
-        <favorite-button :loggedIn="loggedin" :status=status></favorite-button>
+        <favorite-button :loggedIn="loggedIn" :status=status></favorite-button>
       </div>
     </div>
     <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying" v-if="replying"/>

@@ -2,17 +2,21 @@
   <div class="post-status-form">
     <form @submit.prevent="postStatus(newStatus)">
       <div class="form-group base03-border" >
-        <textarea @click="setCaret" @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control" @keydown.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize" @paste="paste"></textarea>
+        <textarea @click="setCaret" @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control" @keydown.down="cycleForward" @keydown.up="cycleBackward" @keydown.shift.tab="cycleBackward" @keydown.tab="cycleForward" @keydown.enter="replaceCandidate" @keydown.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize" @paste="paste"></textarea>
       </div>
       <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel base05-background">
-          <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))" class="autocomplete base02">
-            <span v-if="candidate.img"><img :src="candidate.img"></img></span>
-            <span v-else>{{candidate.utf}}</span>
-            <span>
-              {{candidate.screen_name}}
-              <small class="base02">{{candidate.name}}</small>
-            </span>
+          <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">
+            <div v-if="candidate.highlighted" class="autocomplete base02">
+              <span v-if="candidate.img"><img :src="candidate.img"></span>
+              <span v-else>{{candidate.utf}}</span>
+              <span>{{candidate.screen_name}}<small class="base02">{{candidate.name}}</small></span>
+            </div>
+            <div v-else class="autocomplete base04">
+              <span v-if="candidate.img"><img :src="candidate.img"></img></span>
+              <span v-else>{{candidate.utf}}</span>
+              <span>{{candidate.screen_name}}<small class="base02">{{candidate.name}}</small></span>
+            </div>
           </div>
         </div>
       </div>

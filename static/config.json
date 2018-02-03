@@ -3,7 +3,8 @@
   "theme": "pleroma-dark",
   "background": "/static/bg.jpg",
   "logo": "/static/logo.png",
-  "registrationOpen": false,
+  "registrationOpen": true,
   "defaultPath": "/main/all",
-  "chatDisabled": false
+  "chatDisabled": false,
+  "showInstanceSpecificPanel": false
 }

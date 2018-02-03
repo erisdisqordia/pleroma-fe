@@ -78,12 +78,13 @@ const i18n = new VueI18n({
 window.fetch('/static/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {name, theme, background, logo, registrationOpen} = data
+    const {name, theme, background, logo, registrationOpen, showInstanceSpecificPanel} = data
     store.dispatch('setOption', { name: 'name', value: name })
     store.dispatch('setOption', { name: 'theme', value: theme })
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
     store.dispatch('setOption', { name: 'registrationOpen', value: registrationOpen })
+    store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
     if (data['chatDisabled']) {
       store.dispatch('disableChat')
     }
@@ -146,3 +147,10 @@ window.fetch('/api/pleroma/emoji.json')
       ),
     (error) => console.log(error)
   )
+
+window.fetch('/instance/panel.html')
+  .then((res) => res.text())
+  .then((html) => {
+    store.dispatch('setOption', { name: 'instanceSpecificPanelContent', value: html })
+  })
+

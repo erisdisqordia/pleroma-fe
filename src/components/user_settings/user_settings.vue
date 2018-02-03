@@ -7,7 +7,7 @@
       <div class="setting-item">
         <h3>{{$t('settings.name_bio')}}</h3>
         <p>{{$t('settings.name')}}</p>
-        <input class='name-changer base03-border' id='username' v-model="newname" :value="user.screen_name"></input>
+        <input class='name-changer base03-border' id='username' v-model="newname"></input>
         <p>{{$t('settings.bio')}}</p>
         <textarea class="bio base03-border" v-model="newbio"></textarea>
         <button :disabled='newname.length <= 0' class="btn btn-default base05 base02-background" @click="updateProfile">{{$t('general.submit')}}</button>

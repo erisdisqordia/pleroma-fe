@@ -1,16 +1,9 @@
-import fileTypeService from '../../services/file_type/file_type.service.js'
-
 const StillImage = {
   props: [
     'src',
     'referrerpolicy',
     'mimetype'
   ],
-  data () {
-    return {
-      hideNsfwLocal: this.$store.state.config.hideNsfw,
-    }
-  },
   computed: {
     animated () {
       return this.mimetype === 'image/gif' || this.src.endsWith('.gif')

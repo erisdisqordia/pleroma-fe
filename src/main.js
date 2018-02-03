@@ -163,4 +163,3 @@ window.fetch('/instance/panel.html')
     store.dispatch('setOption', { name: 'instanceSpecificPanelContent', value: html })
   })
 
-

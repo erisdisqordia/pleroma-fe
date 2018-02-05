@@ -32,7 +32,7 @@
     </div>
     <div class="panel-body base01-background">
       <div class="timeline">
-        <user-card v-for="follower in followers" :user="follower" :showFollows="false"></user-card>
+        <user-card v-for="follower in followers" :key="follower.id" :user="follower" :showFollows="false"></user-card>
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
     </div>
     <div class="panel-body base01-background">
       <div class="timeline">
-        <user-card v-for="friend in friends" :user="friend" :showFollows="true"></user-card>
+        <user-card v-for="friend in friends" :key="friend.id" :user="friend" :showFollows="true"></user-card>
       </div>
     </div>
   </div>

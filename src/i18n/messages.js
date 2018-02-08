@@ -861,7 +861,7 @@ const es = {
     muted: 'Silenciado',
     followers: 'Seguidores',
     followees: 'Siguiendo',
-    per_day: 'por día'
+    per_day: 'por día',
     remote_follow: 'Seguir'
   },
   timeline: {
@@ -900,7 +900,7 @@ const es = {
     nsfw_clickthrough: 'Activar el clic para ocultar los adjuntos NSFW',
     autoload: 'Activar carga automática al llegar al final de la página',
     streaming: 'Habilite la transmisión automática de nuevas publicaciones cuando se desplaza hacia la parte superior',
-    reply_link_preview: 'Activar la previsualización del enlace de responder al pasar el ratón por encima'
+    reply_link_preview: 'Activar la previsualización del enlace de responder al pasar el ratón por encima',
     follow_import: 'Importar personas que tú sigues',
     import_followers_from_a_csv_file: 'Importar personas que tú sigues apartir de un archivo csv',
     follows_imported: '¡Importado! Procesarlos llevará tiempo.',
@@ -934,7 +934,7 @@ const es = {
     error_fetching_user: 'Error al buscar usuario'
   },
   general: {
-    submit: 'Enviar'
+    submit: 'Enviar',
     apply: 'Aplicar'
   }
 }

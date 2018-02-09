@@ -78,9 +78,10 @@ const i18n = new VueI18n({
 window.fetch('/api/statusnet/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {name, closed: registrationClosed, textlimit} = data
+    const {name, closed: registrationClosed, textlimit} = data.site
+
     store.dispatch('setOption', { name: 'name', value: name })
-    store.dispatch('setOption', { name: 'registrationOpen', value: !registrationClosed })
+    store.dispatch('setOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
     store.dispatch('setOption', { name: 'textlimit', value: parseInt(textlimit) })
   })
 

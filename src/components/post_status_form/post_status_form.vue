@@ -18,6 +18,9 @@
       </div>
       <div class='form-bottom'>
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
+
+        <p v-if="hasStatusLengthLimit" class="base04">{{ charactersLeft }}</p>
+
         <button v-if="posting" disabled class="btn btn-default base05 base02-background">{{$t('post_status.posting')}}</button>
         <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default base05 base02-background">{{$t('general.submit')}}</button>
       </div>
@@ -66,6 +69,12 @@
 
          button {
              width: 10em;
+         }
+
+         p {
+           margin: 0.35em;
+           padding: 0.35em;
+           display: flex;
          }
      }
      .error {

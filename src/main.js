@@ -75,15 +75,23 @@ const i18n = new VueI18n({
   messages
 })
 
+window.fetch('/api/statusnet/config.json')
+  .then((res) => res.json())
+  .then((data) => {
+    const {name, closed: registrationClosed, textlimit} = data.site
+
+    store.dispatch('setOption', { name: 'name', value: name })
+    store.dispatch('setOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
+    store.dispatch('setOption', { name: 'textlimit', value: parseInt(textlimit) })
+  })
+
 window.fetch('/static/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {name, theme, background, logo, registrationOpen} = data
-    store.dispatch('setOption', { name: 'name', value: name })
+    const {theme, background, logo} = data
     store.dispatch('setOption', { name: 'theme', value: theme })
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
-    store.dispatch('setOption', { name: 'registrationOpen', value: registrationOpen })
     if (data['chatDisabled']) {
       store.dispatch('disableChat')
     }

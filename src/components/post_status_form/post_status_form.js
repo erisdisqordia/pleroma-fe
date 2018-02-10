@@ -94,6 +94,18 @@ const PostStatusForm = {
     },
     customEmoji () {
       return this.$store.state.config.customEmoji || []
+    },
+    statusLength () {
+      return this.newStatus.status.length
+    },
+    statusLengthLimit () {
+      return this.$store.state.config.textlimit
+    },
+    hasStatusLengthLimit () {
+      return this.statusLengthLimit > 0
+    },
+    charactersLeft () {
+      return this.statusLengthLimit - this.statusLength
     }
   },
   methods: {

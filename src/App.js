@@ -27,7 +27,7 @@ export default {
     style () { return { 'background-image': `url(${this.background})` } },
     sitename () { return this.$store.state.config.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
-    showInstanceSpecificPanel () { return this.$store.state.config.showInstanceSpecificPanel}
+    showInstanceSpecificPanel () { return this.$store.state.config.showInstanceSpecificPanel }
   },
   methods: {
     activatePanel (panelName) {

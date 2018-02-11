@@ -24,6 +24,7 @@
               <user-panel></user-panel>
               <nav-panel></nav-panel>
               <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
+              <who-to-follow-panel v-if="currentUser && showWhoToFollowPanel"></who-to-follow-panel>
               <chat-panel v-if="currentUser && chat"></chat-panel>
               <notifications v-if="currentUser"></notifications>
             </div>

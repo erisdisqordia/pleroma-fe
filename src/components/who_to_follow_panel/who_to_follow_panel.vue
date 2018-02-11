@@ -1,0 +1,37 @@
+<template>
+  <div class="who-to-follow-panel">
+    <div class="panel panel-default base01-background">
+      <div class="panel-heading timeline-heading base02-background base04">
+        <div class="title">
+          Who to follow
+        </div>
+      </div>
+      <div class="panel-body who-to-follow">
+        <p>
+          <img v-bind:src="img1"/> <a v-bind:href="link1" target="_blank">{{ name1 }}</a><br>
+          <img v-bind:src="img2"/> <a v-bind:href="link2" target="_blank">{{ name2 }}</a><br>
+          <img v-bind:src="img3"/> <a v-bind:href="link3" target="_blank">{{ name3 }}</a><br>
+          <img v-bind:src="$store.state.config.logo"> <a v-bind:href="moreUrl" target="_blank">More</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script src="./who_to_follow_panel.js" ></script>
+
+<style lang="scss">
+  .who-to-follow * {
+    vertical-align: middle;
+  }
+  .who-to-follow img {
+    width: 32px;
+    height: 32px;
+  }
+  .who-to-follow p {
+    line-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

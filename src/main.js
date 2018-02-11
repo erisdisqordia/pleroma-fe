@@ -88,10 +88,11 @@ window.fetch('/api/statusnet/config.json')
 window.fetch('/static/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {theme, background, logo, showInstanceSpecificPanel} = data
+    const {theme, background, logo, showWhoToFollowPanel, showInstanceSpecificPanel} = data
     store.dispatch('setOption', { name: 'theme', value: theme })
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
+    store.dispatch('setOption', { name: 'showWhoToFollowPanel', value: showWhoToFollowPanel })
     store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
     if (data['chatDisabled']) {
       store.dispatch('disableChat')

@@ -1038,6 +1038,106 @@ const pt = {
   }
 }
 
+const ru = {
+  chat: {
+    title: 'Чат'
+  },
+  nav: {
+    chat: 'Локальный чат',
+    timeline: 'Лента',
+    mentions: 'Упоминания',
+    public_tl: 'Публичная лента',
+    twkn: 'Федеративная лента'
+  },
+  user_card: {
+    follows_you: 'Читает вас',
+    following: 'Читаю',
+    follow: 'Читать',
+    blocked: 'Заблокирован',
+    block: 'Заблокировать',
+    statuses: 'Статусы',
+    mute: 'Игнорировать',
+    muted: 'Игнорирую',
+    followers: 'Читатели',
+    followees: 'Читаемые',
+    per_day: 'в день',
+    remote_follow: 'Читать удалённо'
+  },
+  timeline: {
+    show_new: 'Показать новые',
+    error_fetching: 'Ошибка при обновлении',
+    up_to_date: 'Обновлено',
+    load_older: 'Загрузить старые статусы',
+    conversation: 'Разговор'
+  },
+  settings: {
+    user_settings: 'Настройки пользователя',
+    name_bio: 'Имя и описание',
+    name: 'Имя',
+    bio: 'Описание',
+    avatar: 'Аватар',
+    current_avatar: 'Текущий аватар',
+    set_new_avatar: 'Загрузить новый аватар',
+    profile_banner: 'Баннер профиля',
+    current_profile_banner: 'Текущий баннер профиля',
+    set_new_profile_banner: 'Загрузить новый баннер профиля',
+    profile_background: 'Фон профиля',
+    set_new_profile_background: 'Загрузить новый фон профиля',
+    settings: 'Настройки',
+    theme: 'Тема',
+    presets: 'Пресеты',
+    theme_help: 'Используйте шестнадцатеричные коды цветов (#aabbcc) для настройки темы.',
+    background: 'Фон',
+    foreground: 'Передний план',
+    text: 'Текст',
+    links: 'Ссылки',
+    filtering: 'Фильтрация',
+    filtering_explanation: 'Все статусы, содержащие данные слова, будут игнорироваться, по одному в строке',
+    attachments: 'Вложения',
+    hide_attachments_in_tl: 'Прятать вложения в ленте',
+    hide_attachments_in_convo: 'Прятать вложения в разговорах',
+    nsfw_clickthrough: 'Включить скрытие NSFW вложений',
+    autoload: 'Включить автоматическую загрузку при прокрутке вниз',
+    streaming: 'Включить автоматическую загрузку новых сообщений при прокрутке вверх',
+    reply_link_preview: 'Включить предварительный просмотр ответа при наведении мыши',
+    follow_import: 'Импортировать читаемых',
+    import_followers_from_a_csv_file: 'Импортировать читаемых из файла .csv',
+    follows_imported: 'Список читаемых импортирован. Обработка займёт некоторое время..',
+    follow_import_error: 'Ошибка при импортировании читаемых.'
+  },
+  notifications: {
+    notifications: 'Уведомления',
+    read: 'Прочесть',
+    followed_you: 'начал читать вас'
+  },
+  login: {
+    login: 'Войти',
+    username: 'Имя пользователя',
+    password: 'Пароль',
+    register: 'Зарегистрироваться',
+    logout: 'Выйти'
+  },
+  registration: {
+    registration: 'Регистрация',
+    fullname: 'Отображаемое имя',
+    email: 'Email',
+    bio: 'Описание',
+    password_confirm: 'Подтверждение пароля'
+  },
+  post_status: {
+    posting: 'Отправляется',
+    default: 'Что нового?'
+  },
+  finder: {
+    find_user: 'Найти пользователя',
+    error_fetching_user: 'Пользователь не найден'
+  },
+  general: {
+    submit: 'Отправить',
+    apply: 'Применить'
+  }
+}
+
 const messages = {
   de,
   fi,
@@ -1050,7 +1150,8 @@ const messages = {
   it,
   pl,
   es,
-  pt
+  pt,
+  ru
 }
 
 export default messages

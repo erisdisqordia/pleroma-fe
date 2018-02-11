@@ -2,6 +2,7 @@ import UserPanel from './components/user_panel/user_panel.vue'
 import NavPanel from './components/nav_panel/nav_panel.vue'
 import Notifications from './components/notifications/notifications.vue'
 import UserFinder from './components/user_finder/user_finder.vue'
+import InstanceSpecificPanel from './components/instance_specific_panel/instance_specific_panel.vue'
 import ChatPanel from './components/chat_panel/chat_panel.vue'
 
 export default {
@@ -11,7 +12,8 @@ export default {
     NavPanel,
     Notifications,
     UserFinder,
-    ChatPanel
+    ChatPanel,
+    InstanceSpecificPanel
   },
   data: () => ({
     mobileActivePanel: 'timeline'
@@ -24,7 +26,8 @@ export default {
     logoStyle () { return { 'background-image': `url(${this.$store.state.config.logo})` } },
     style () { return { 'background-image': `url(${this.background})` } },
     sitename () { return this.$store.state.config.name },
-    chat () { return this.$store.state.chat.channel.state === 'joined' }
+    chat () { return this.$store.state.chat.channel.state === 'joined' },
+    showInstanceSpecificPanel () { return this.$store.state.config.showInstanceSpecificPanel }
   },
   methods: {
     activatePanel (panelName) {

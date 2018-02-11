@@ -88,10 +88,11 @@ window.fetch('/api/statusnet/config.json')
 window.fetch('/static/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {theme, background, logo} = data
+    const {theme, background, logo, showInstanceSpecificPanel} = data
     store.dispatch('setOption', { name: 'theme', value: theme })
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
+    store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
     if (data['chatDisabled']) {
       store.dispatch('disableChat')
     }
@@ -163,3 +164,10 @@ window.fetch('/static/emoji.json')
     })
     store.dispatch('setOption', { name: 'emoji', value: emoji })
   })
+
+window.fetch('/instance/panel.html')
+  .then((res) => res.text())
+  .then((html) => {
+    store.dispatch('setOption', { name: 'instanceSpecificPanelContent', value: html })
+  })
+

@@ -106,6 +106,9 @@ const PostStatusForm = {
     },
     charactersLeft () {
       return this.statusLengthLimit - this.statusLength
+    },
+    isOverLengthLimit () {
+      return this.hasStatusLengthLimit && (this.statusLength > this.statusLengthLimit)
     }
   },
   methods: {

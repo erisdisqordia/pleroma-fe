@@ -41,6 +41,7 @@ const PostStatusForm = {
       submitDisabled: false,
       error: null,
       posting: false,
+      highlighted: 0,
       newStatus: {
         status: statusText,
         files: []
@@ -57,23 +58,26 @@ const PostStatusForm = {
           return false
         }
         // eslint-disable-next-line camelcase
-        return map(take(matchedUsers, 5), ({screen_name, name, profile_image_url_original}) => ({
+        return map(take(matchedUsers, 5), ({screen_name, name, profile_image_url_original}, index) => ({
           // eslint-disable-next-line camelcase
           screen_name: `@${screen_name}`,
           name: name,
-          img: profile_image_url_original
+          img: profile_image_url_original,
+          highlighted: index === this.highlighted
         }))
       } else if (firstchar === ':') {
+        if (this.textAtCaret === ':') { return }
         const matchedEmoji = filter(this.emoji.concat(this.customEmoji), (emoji) => emoji.shortcode.match(this.textAtCaret.slice(1)))
         if (matchedEmoji.length <= 0) {
           return false
         }
-        return map(take(matchedEmoji, 5), ({shortcode, image_url, utf}) => ({
+        return map(take(matchedEmoji, 5), ({shortcode, image_url, utf}, index) => ({
           // eslint-disable-next-line camelcase
           screen_name: `:${shortcode}:`,
           name: '',
           utf: utf || '',
-          img: image_url
+          img: image_url,
+          highlighted: index === this.highlighted
         }))
       } else {
         return false
@@ -117,6 +121,45 @@ const PostStatusForm = {
       const el = this.$el.querySelector('textarea')
       el.focus()
       this.caret = 0
+    },
+    replaceCandidate (e) {
+      const len = this.candidates.length || 0
+      if (this.textAtCaret === ':' || e.ctrlKey) { return }
+      if (len > 0) {
+        e.preventDefault()
+        const candidate = this.candidates[this.highlighted]
+        const replacement = candidate.utf || (candidate.screen_name + ' ')
+        this.newStatus.status = Completion.replaceWord(this.newStatus.status, this.wordAtCaret, replacement)
+        const el = this.$el.querySelector('textarea')
+        el.focus()
+        this.caret = 0
+        this.highlighted = 0
+      }
+    },
+    cycleBackward (e) {
+      const len = this.candidates.length || 0
+      if (len > 0) {
+        e.preventDefault()
+        this.highlighted -= 1
+        if (this.highlighted < 0) {
+          this.highlighted = this.candidates.length - 1
+        }
+      } else {
+        this.highlighted = 0
+      }
+    },
+    cycleForward (e) {
+      const len = this.candidates.length || 0
+      if (len > 0) {
+        if (e.shiftKey) { return }
+        e.preventDefault()
+        this.highlighted += 1
+        if (this.highlighted >= len) {
+          this.highlighted = 0
+        }
+      } else {
+        this.highlighted = 0
+      }
     },
     setCaret ({target: {selectionStart}}) {
       this.caret = selectionStart

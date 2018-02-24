@@ -128,7 +128,8 @@ const updateProfile = ({credentials, params}) => {
   const form = new FormData()
 
   each(params, (value, key) => {
-    if (value) {
+    if (key === 'description' || /* Always include description, because it might be empty */
+        value) {
       form.append(key, value)
     }
   })

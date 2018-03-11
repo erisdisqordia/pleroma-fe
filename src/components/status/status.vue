@@ -35,7 +35,7 @@
         <div class="media-left">
           <a :href="status.user.statusnet_profile_url">
             <StillImage @click.native.prevent="toggleUserExpanded" :class="{retweeted: retweet}" class='avatar' :src="status.user.profile_image_url_original"/>
-            <img v-if="retweet" class='avatar-retweeter' :src="statusoid.user.profile_image_url_original"></img>
+            <StillImage v-if="retweet" class='avatar avatar-retweeter' :src="statusoid.user.profile_image_url_original"/>
           </a>
         </div>
         <div class="media-body">
@@ -265,7 +265,7 @@
 
      .media-left {
         margin: 0.2em 0.3em 0 0;
-        img {
+        .avatar {
           float: right;
         }
      }
@@ -359,7 +359,7 @@
      }
  }
 
- .status img.avatar-retweeter {
+ .status .avatar-retweeter {
    width: 24px;
    height: 24px;
    position: absolute;
@@ -433,7 +433,7 @@
      }
    }
 
-   .status img.avatar-retweeter {
+   .status .avatar-retweeter {
      width: 22px;
      height: 22px;
      position: absolute;

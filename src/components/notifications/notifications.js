@@ -1,4 +1,5 @@
 import Status from '../status/status.vue'
+import StillImage from '../still-image/still-image.vue'
 
 import { sortBy, take, filter } from 'lodash'
 
@@ -31,7 +32,7 @@ const Notifications = {
     }
   },
   components: {
-    Status
+    Status, StillImage
   },
   watch: {
     unseenCount (count) {

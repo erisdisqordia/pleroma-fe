@@ -29,8 +29,8 @@
                 <label for="hideNsfw">{{$t('settings.nsfw_clickthrough')}}</label>
             </li>
             <li>
-                <input type="checkbox" id="autoLoad" v-model="autoLoadLocal">
-                <label for="autoLoad">{{$t('settings.autoload')}}</label>
+                <input type="checkbox" id="autoload" v-model="autoloadlocal">
+                <label for="autoload">{{$t('settings.autoload')}}</label>
             </li>
             <li>
                 <input type="checkbox" id="streaming" v-model="streamingLocal">
@@ -39,6 +39,10 @@
             <li>
                 <input type="checkbox" id="hoverPreview" v-model="hoverPreviewLocal">
                 <label for="hoverPreview">{{$t('settings.reply_link_preview')}}</label>
+            </li>
+            <li>
+                <input type="checkbox" id="stopGifs" v-model="stopGifs">
+                <label for="stopGifs">{{$t('settings.stop_gifs')}}</label>
             </li>
         </ul>
       </div>

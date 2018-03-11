@@ -12,17 +12,23 @@
 .still-image {
     position: relative;
     line-height: 0;
-    
+    overflow: hidden;
+
     &:hover canvas {
         display: none;
     }
-    
+
+    img {
+        width: 100%;
+        height: 100%
+    }
+
     &.animated {
         &:hover::before,
         img {
-            visibility: hidden
+            visibility: hidden;
         }
-        
+
         &:hover img {
             visibility: visible
         }

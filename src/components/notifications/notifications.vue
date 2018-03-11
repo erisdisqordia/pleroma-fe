@@ -10,7 +10,7 @@
         <div v-for="notification in visibleNotifications" :key="notification" class="notification" :class='{"unseen": !notification.seen}'>
           <div>
             <a :href="notification.action.user.statusnet_profile_url" target="_blank">
-              <img class='avatar' :src="notification.action.user.profile_image_url_original">
+              <StillImage class='avatar' :src="notification.action.user.profile_image_url_original"/>
             </a>
           </div>
           <div class='text' style="width: 100%;">

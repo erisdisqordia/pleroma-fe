@@ -4,9 +4,14 @@ const StillImage = {
     'referrerpolicy',
     'mimetype'
   ],
+  data () {
+    return {
+      stopGifs: this.$store.state.config.stopGifs
+    }
+  },
   computed: {
     animated () {
-      return this.mimetype === 'image/gif' || this.src.endsWith('.gif')
+      return this.stopGifs && (this.mimetype === 'image/gif' || this.src.endsWith('.gif'))
     }
   },
   methods: {

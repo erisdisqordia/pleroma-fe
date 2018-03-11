@@ -88,10 +88,26 @@
     }
 
     .avatar {
-      padding-top: 0.3em;
+      margin-top: 0.3em;
       width: 32px;
       height: 32px;
       border-radius: 50%;
+      overflow: hidden;
+      line-height: 0;
+
+      &.animated::before {
+        display: none;
+      }
+
+    }
+
+    &:hover .animated.avatar {
+      canvas {
+        display: none;
+      }
+      img {
+        visibility: visible;
+      }
     }
 
     &:last-child {

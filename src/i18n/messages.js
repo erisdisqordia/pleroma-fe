@@ -283,6 +283,9 @@ const en = {
   general: {
     submit: 'Submit',
     apply: 'Apply'
+  },
+  user_profile: {
+    timeline_title: 'User Timeline'
   }
 }
 
@@ -1135,6 +1138,9 @@ const ru = {
   general: {
     submit: 'Отправить',
     apply: 'Применить'
+  },
+  user_profile: {
+    timeline_title: 'Лента пользователя'
   }
 }
 

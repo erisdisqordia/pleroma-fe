@@ -6,7 +6,7 @@
 
 # For Translators
 
-To translate Pleroma, add your language to i18n/messages.js. Pleroma will set your language by your browser locale, but you can temporarily force it in the code by changing the locale in main.js.
+To translate Pleroma, add your language to [src/i18n/messages.js](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/src/i18n/messages.js). Pleroma will set your language by your browser locale, but you can temporarily force it in the code by changing the locale in main.js.
 
 # FOR ADMINS
 

@@ -20,7 +20,8 @@ const de = {
     muted: 'Stummgeschaltet',
     followers: 'Folgende',
     followees: 'Folgt',
-    per_day: 'pro Tag'
+    per_day: 'pro Tag',
+    remote_follow: 'Remote Follow'
   },
   timeline: {
     show_new: 'Zeige Neuere',
@@ -53,9 +54,9 @@ const de = {
     filtering: 'Filter',
     filtering_explanation: 'Alle Beiträge die diese Wörter enthalten werden ausgeblendet. Ein Wort pro Zeile.',
     attachments: 'Anhänge',
-    hide_attachments_in_tl: 'Anhänge in der Timeline ausblenden',
+    hide_attachments_in_tl: 'Anhänge in der Zeitleiste ausblenden',
     hide_attachments_in_convo: 'Anhänge in Unterhaltungen ausblenden',
-    nsfw_clickthrough: 'Aktiviere ausblendbares Overlay für als NSFW markierte Anhänge',
+    nsfw_clickthrough: 'Aktiviere ausblendbares Overlay für Anhänge, die als NSFW markiert sind',
     autoload: 'Aktiviere automatisches Laden von älteren Beiträgen beim scrollen',
     streaming: 'Aktiviere automatisches Laden (Streaming) von neuen Beiträgen',
     reply_link_preview: 'Aktiviere reply-link Vorschau bei Maus-Hover',
@@ -94,6 +95,9 @@ const de = {
   general: {
     submit: 'Absenden',
     apply: 'Anwenden'
+  },
+  user_profile: {
+    timeline_title: 'Beiträge'
   }
 }
 

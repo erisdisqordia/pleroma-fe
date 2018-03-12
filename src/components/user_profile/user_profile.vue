@@ -3,7 +3,7 @@
     <div v-if="user" class="user-profile panel panel-default base00-background">
       <user-card-content :user="user" :switcher="true"></user-card-content>
     </div>
-    <Timeline :title="'User Timeline'" v-bind:timeline="timeline" v-bind:timeline-name="'user'" :user-id="userId"/>
+    <Timeline :title="$t('user_profile.timeline_title')" :timeline="timeline" :timeline-name="'user'" :user-id="userId"/>
   </div>
 </template>
 

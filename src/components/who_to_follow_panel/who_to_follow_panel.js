@@ -30,7 +30,7 @@ function showWhoToFollow (panel, users, aHost, aUser) {
           .then((externalUser) => {
             if (!externalUser.error) {
               panel.$store.commit('addNewUsers', [externalUser])
-              panel.link1 = '/users/' + externalUser.id
+              panel.id1 = externalUser.id
             }
           })
       } else if (index === 1) {
@@ -40,7 +40,7 @@ function showWhoToFollow (panel, users, aHost, aUser) {
           .then((externalUser) => {
             if (!externalUser.error) {
               panel.$store.commit('addNewUsers', [externalUser])
-              panel.link2 = '/users/' + externalUser.id
+              panel.id2 = externalUser.id
             }
           })
       } else if (index === 2) {
@@ -50,7 +50,7 @@ function showWhoToFollow (panel, users, aHost, aUser) {
           .then((externalUser) => {
             if (!externalUser.error) {
               panel.$store.commit('addNewUsers', [externalUser])
-              panel.link3 = '/users/' + externalUser.id
+              panel.id3 = externalUser.id
             }
           })
       }
@@ -88,14 +88,14 @@ function getWhoToFollow (panel) {
 const WhoToFollowPanel = {
   data: () => ({
     img1: '/images/avi.png',
-    link1: null,
     name1: '',
+    id1: 0,
     img2: '/images/avi.png',
-    link2: null,
     name2: '',
+    id2: 0,
     img3: '/images/avi.png',
-    link3: null,
-    name3: ''
+    name3: '',
+    id3: 0
   }),
   computed: {
     user: function () {

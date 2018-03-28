@@ -19,44 +19,40 @@ function showWhoToFollow (panel, users, aHost, aUser) {
     } else {
       img = '/images/avi.png'
     }
-    var link = 'https://' + host + '/users/' + username
     var name = username + '@' + host
     if ((!user.following) &&
       (!user.blacklisted) &&
       (!(host === aHost && username === aUser))) {
       if (index === 0) {
         panel.img1 = img
-        panel.link1 = link
         panel.name1 = name
-        this.$store.state.api.backendInteractor.externalProfile(name)
+        panel.$store.state.api.backendInteractor.externalProfile(name)
           .then((externalUser) => {
             if (!externalUser.error) {
-              this.$store.commit('addNewUsers', [externalUser])
-              panel.link1 = 'https://' + host + '/users/' + externalUser.id
-             }
-           })
+              panel.$store.commit('addNewUsers', [externalUser])
+              panel.link1 = '/users/' + externalUser.id
+            }
+          })
       } else if (index === 1) {
         panel.img2 = img
-        panel.link2 = link
         panel.name2 = name
-        this.$store.state.api.backendInteractor.externalProfile(name)
+        panel.$store.state.api.backendInteractor.externalProfile(name)
           .then((externalUser) => {
             if (!externalUser.error) {
-              this.$store.commit('addNewUsers', [externalUser])
-              panel.link2 = 'https://' + host + '/users/' + externalUser.id
-             }
-           })
+              panel.$store.commit('addNewUsers', [externalUser])
+              panel.link2 = '/users/' + externalUser.id
+            }
+          })
       } else if (index === 2) {
         panel.img3 = img
-        panel.link3 = link
         panel.name3 = name
-        this.$store.state.api.backendInteractor.externalProfile(name)
+        panel.$store.state.api.backendInteractor.externalProfile(name)
           .then((externalUser) => {
             if (!externalUser.error) {
-              this.$store.commit('addNewUsers', [externalUser])
-              panel.link3 = 'https://' + host + '/users/' + externalUser.id
-             }
-           })
+              panel.$store.commit('addNewUsers', [externalUser])
+              panel.link3 = '/users/' + externalUser.id
+            }
+          })
       }
       index = index + 1
       if (index > 2) {

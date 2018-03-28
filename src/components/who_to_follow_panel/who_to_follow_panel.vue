@@ -8,9 +8,9 @@
       </div>
       <div class="panel-body who-to-follow">
         <p>
-          <img v-bind:src="img1"/> <a v-bind:href="link1" target="_blank">{{ name1 }}</a><br>
-          <img v-bind:src="img2"/> <a v-bind:href="link2" target="_blank">{{ name2 }}</a><br>
-          <img v-bind:src="img3"/> <a v-bind:href="link3" target="_blank">{{ name3 }}</a><br>
+          <img v-bind:src="img1"/> <a v-bind:href="link1">{{ name1 }}</a><br>
+          <img v-bind:src="img2"/> <a v-bind:href="link2">{{ name2 }}</a><br>
+          <img v-bind:src="img3"/> <a v-bind:href="link3">{{ name3 }}</a><br>
           <img v-bind:src="$store.state.config.logo"> <a v-bind:href="moreUrl" target="_blank">More</a>
         </p>
       </div>

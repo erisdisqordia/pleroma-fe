@@ -55,11 +55,6 @@ const Status = {
     },
     muted () { return !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
     isReply () { return !!this.status.in_reply_to_status_id },
-    borderColor () {
-      return {
-        borderBottomColor: this.$store.state.config.colors['base02']
-      }
-    },
     isFocused () {
       // retweet or root of an expanded conversation
       if (this.focused) {

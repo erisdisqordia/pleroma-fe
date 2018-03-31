@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="user" class="user-profile panel panel-default base00-background">
+    <div v-if="user" class="user-profile panel panel-default">
       <user-card-content :user="user" :switcher="true"></user-card-content>
     </div>
     <Timeline :title="$t('user_profile.timeline_title')" :timeline="timeline" :timeline-name="'user'" :user-id="userId"/>
@@ -16,6 +16,9 @@
   flex-basis: 500px;
   padding-bottom: 10px;
   border-radius: 10px;
+  .panel-heading {
+      background: transparent;
+  }
 }
 
 </style>

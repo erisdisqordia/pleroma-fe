@@ -1,11 +1,11 @@
 <template>
-  <div class="status-el base00-background" v-if="compact">
+  <div class="status-el" v-if="compact">
     <div @click.prevent="linkClicked" class="status-content" v-html="status.statusnet_html"></div>
     <div v-if="loggedIn">
       <div class='status-actions'>
         <div>
           <a href="#" v-on:click.prevent="toggleReplying">
-            <i class="base09 icon-reply" :class="{'icon-reply-active': replying}"></i>
+            <i class="icon-reply" :class="{'icon-reply-active': replying}"></i>
           </a>
         </div>
         <retweet-button :loggedIn="loggedIn" :status=status></retweet-button>
@@ -14,12 +14,12 @@
     </div>
     <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying" v-if="replying"/>
   </div>
-  <div class="status-el base00-background base03-border status-fadein" v-else-if="!status.deleted" v-bind:class="[{ 'base01-background': isFocused }, { 'status-conversation': inConversation }]" >
+  <div class="status-el status-fadein" v-else-if="!status.deleted" v-bind:class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inConversation }]" >
     <template v-if="muted">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
         <small class="muteWords">{{muteWordHits.join(', ')}}</small>
-        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="base09 icon-eye-off"></i></a>
+        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="icon-eye-off"></i></a>
       </div>
     </template>
     <template v-if="!muted">
@@ -39,7 +39,7 @@
           </a>
         </div>
         <div class="media-body">
-          <div class="base03-border usercard" v-if="userExpanded">
+          <div class="usercard" v-if="userExpanded">
             <user-card-content :user="status.user" :switcher="false"></user-card-content>
           </div>
           <div class="user-content">
@@ -75,15 +75,15 @@
                 </h4>
               </div>
               <div class="heading-icons">
-                <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="base09 icon-eye-off"></i></a>
-                <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="base09 icon-binoculars"></i></a>
+                <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="icon-eye-off"></i></a>
+                <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="icon-binoculars"></i></a>
                 <template v-if="expandable">
-                  <a href="#" @click.prevent="toggleExpanded" class="expand"><i class="base09 icon-plus-squared"></i></a>
+                  <a href="#" @click.prevent="toggleExpanded" class="expand"><i class="icon-plus-squared"></i></a>
                 </template>
               </div>
             </div>
 
-            <div class="status-preview base00-background base03-border" v-if="showPreview && preview">
+            <div class="status-preview" v-if="showPreview && preview">
               <StillImage class="avatar" :src="preview.user.profile_image_url_original"/>
               <div class="text">
                 <h4>
@@ -93,8 +93,8 @@
                 <div @click.prevent="linkClicked" class="status-content" v-html="preview.statusnet_html"></div>
               </div>
             </div>
-            <div class="status-preview status-preview-loading base00-background base03-border" v-else-if="showPreview">
-              <i class="base09 icon-spin4 animate-spin"></i>
+            <div class="status-preview status-preview-loading" v-else-if="showPreview">
+              <i class="icon-spin4 animate-spin"></i>
             </div>
 
             <div @click.prevent="linkClicked" class="status-content" v-html="status.statusnet_html"></div>
@@ -108,7 +108,7 @@
           <div class='status-actions'>
             <div v-if="loggedIn">
               <a href="#" v-on:click.prevent="toggleReplying">
-                <i class="base09 icon-reply" :class="{'icon-reply-active': replying}"></i>
+                <i class="icon-reply" :class="{'icon-reply-active': replying}"></i>
               </a>
             </div>
             <retweet-button :loggedIn="loggedIn" :status=status></retweet-button>
@@ -117,7 +117,7 @@
           </div>
         </div>
       </div>
-      <div class="status base00-background container" v-if="replying">
+      <div class="status container" v-if="replying">
         <div class="reply-left"/>
         <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" v-on:posted="toggleReplying"/>
       </div>
@@ -128,18 +128,19 @@
 <script src="./status.js" ></script>
 
 <style lang="scss">
- @import '../../_variables.scss';
+@import '../../_variables.scss';
 
- status-text-container {
+status-text-container {
     display: block;
-  }
+}
 
-  .status-preview {
+.status-preview {
     position: absolute;
     max-width: 34em;
     padding: 0.5em;
     display: flex;
-    border-color: inherit;
+    background-color: var(--bg);
+    border-color: var(--border);
     border-style: solid;
     border-width: 1px;
     border-radius: 4px;
@@ -149,182 +150,198 @@
     z-index: 50;
 
     .avatar {
-      flex-shrink: 0;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
     }
-    .text {
-      h4 {
-        margin-bottom: 0.4em;
-        small {
-          font-weight: lighter;
-        }
-      }
-      padding: 0 0.5em 0.5em 0.5em;
-    }
-  }
 
-  .status-preview-loading {
+    .text {
+        h4 {
+            margin-bottom: 0.4em;
+            small {
+                font-weight: lighter;
+            }
+        }
+        padding: 0 0.5em 0.5em 0.5em;
+    }
+}
+
+.status-preview-loading {
     display: block;
     font-size: 2em;
     min-width: 8em;
     text-align: center;
-  }
+}
 
- .status-el {
-     hyphens: auto;
-     overflow-wrap: break-word;
-     word-wrap: break-word;
-     word-break: break-word;
-     border-left-width: 0px;
-     line-height: 18px;
+.status-el {
+    hyphens: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    border-left-width: 0px;
+    line-height: 18px;
+    background-color: var(--bg);
+    border-color: var(--border);
 
-     .timeline & {
+    &_focused {
+        background-color: var(--lightBg);
+    }
+
+    .usercard {
+        border-color: var(--border);
+    }
+
+    .timeline & {
         border-bottom-width: 1px;
         border-bottom-style: solid;
-     }
+    }
 
-     .notify {
-         .avatar {
-             border-width: 3px;
-             border-style: solid;
-         }
-     }
+    .notify {
+        .avatar {
+            border-width: 3px;
+            border-style: solid;
+        }
+    }
 
-     .media-body {
-       flex: 1;
-       padding-left: 0.5em;
-     }
+    .media-body {
+        flex: 1;
+        padding-left: 0.5em;
+    }
 
 
-     .user-content {
+    .user-content {
 
-       min-height: 52px;
-       padding-top: 1px;
-     }
+        min-height: 52px;
+        padding-top: 1px;
+    }
 
-     .media-heading {
-       display: flex;
-       min-height: 1.4em;
-       margin-bottom: 0.3em;
+    .media-heading {
+        display: flex;
+        min-height: 1.4em;
+        margin-bottom: 0.3em;
 
-       small {
-           font-weight: lighter;
-       }
-       h4 {
-         margin-right: 0.4em;
-       }
-       .name-and-links {
-         flex: 1 0;
-         display: flex;
-         flex-wrap: wrap;
-       }
-       .replies {
-         flex-basis: 100%;
-       }
-     }
+        small {
+            font-weight: lighter;
+        }
+        h4 {
+            margin-right: 0.4em;
+        }
+        .name-and-links {
+            flex: 1 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .replies {
+            flex-basis: 100%;
+        }
+    }
 
-     .source_url {
+    .source_url {
 
-     }
+    }
 
-     .expand {
-       margin-right: -0.3em;
-     }
+    .expand {
+        margin-right: -0.3em;
+    }
 
-     a {
-         display: inline-block;
-         word-break: break-all;
-     }
+    a {
+        display: inline-block;
+        word-break: break-all;
+    }
 
-     .status-content {
-         margin: 3px 15px 4px 0;
-         max-height: 400px;
-         overflow-y: auto;
-         overflow-x: hidden;
+    .status-content {
+        margin: 3px 15px 4px 0;
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;
 
-         img, video {
-           max-width: 100%;
-           max-height: 400px;
-           vertical-align: middle;
-           object-fit: contain;
-         }
+        img, video {
+            max-width: 100%;
+            max-height: 400px;
+            vertical-align: middle;
+            object-fit: contain;
+        }
 
-         blockquote {
-           margin: 0.2em 0 0.2em 2em;
-           font-style: italic;
-         }
-     }
+        blockquote {
+            margin: 0.2em 0 0.2em 2em;
+            font-style: italic;
+        }
+    }
 
-     p {
-         margin: 0;
-         margin-top: 0.2em;
-         margin-bottom: 0.5em;
-     }
+    p {
+        margin: 0;
+        margin-top: 0.2em;
+        margin-bottom: 0.5em;
+    }
 
-     .media-left {
+    .media-left {
         margin: 0.2em 0.3em 0 0;
         .avatar {
-          float: right;
+            float: right;
+            border-radius: 5px;
         }
-     }
+    }
 
-     .retweet-info {
-         padding: 0.7em 0 0 0.6em;
+    .retweet-info {
+        padding: 0.7em 0 0 0.6em;
 
-         .media-left {
-             display: flex;
+        .media-left {
+            display: flex;
 
-             i {
-                 align-self: center;
-                 text-align: right;
-                 flex: 1;
-                 padding-right: 0.3em;
-             }
-         }
-     }
- }
+            i {
+                align-self: center;
+                text-align: right;
+                flex: 1;
+                padding-right: 0.3em;
+            }
+        }
+    }
 
- .status-fadein {
-   animation-duration: 0.5s;
-   animation-name: fadein;
- }
 
- @keyframes fadein {
-   from {
-     opacity: 0;
-   }
-   to {
-     opacity: 1;
-   }
- }
+}
 
- .greentext {
-     color: green;
- }
+.status-fadein {
+    animation-duration: 0.5s;
+    animation-name: fadein;
+}
 
- .status-conversation {
-   border-left-style: solid;
- }
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
- .status-actions {
-     padding-top: 0.15em;
-     width: 100%;
-     display: flex;
+.greentext {
+    color: green;
+}
 
-     div, favorite-button {
+.status-conversation {
+    border-left-style: solid;
+}
+
+.status-actions {
+    padding-top: 0.15em;
+    width: 100%;
+    display: flex;
+
+    div, favorite-button {
         max-width: 6em;
         flex: 1;
-     }
- }
+    }
+}
 
- .icon-reply:hover {
-     color: $blue;
+.icon-reply:hover {
+    color: $blue_;
+    color: var(--cBlue);
  }
 
  .icon-reply.icon-reply-active {
-     color: $blue;
+     color: $blue_;
+     color: var(--cBlue);
  }
 
  .status .avatar {
@@ -373,7 +390,7 @@
 
  .status {
      padding: 0.4em 0.7em 0.45em 0.7em;
-     border-left: 4px rgba(255, 48, 16, 0.65);
+     border-left: 4px var(--cRed);
      border-left-style: inherit;
  }
 

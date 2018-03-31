@@ -1,6 +1,6 @@
 <template>
   <div class="instance-specific-panel">
-    <div class="panel panel-default base01-background">
+    <div class="panel panel-default">
       <div class="panel-body">
         <div v-html="instanceSpecificPanelContent">
         </div>

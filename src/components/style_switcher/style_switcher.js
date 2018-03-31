@@ -21,10 +21,10 @@ export default {
       })
   },
   mounted () {
-    this.bgColorLocal = rgbstr2hex(this.$store.state.config.colors['base00'])
-    this.fgColorLocal = rgbstr2hex(this.$store.state.config.colors['base02'])
-    this.textColorLocal = rgbstr2hex(this.$store.state.config.colors['base05'])
-    this.linkColorLocal = rgbstr2hex(this.$store.state.config.colors['base08'])
+    this.bgColorLocal = rgbstr2hex(this.$store.state.config.colors.bg)
+    this.fgColorLocal = rgbstr2hex(this.$store.state.config.colors.lightBg)
+    this.textColorLocal = rgbstr2hex(this.$store.state.config.colors.fg)
+    this.linkColorLocal = rgbstr2hex(this.$store.state.config.colors.link)
   },
   methods: {
     setCustomTheme () {

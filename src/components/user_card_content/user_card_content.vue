@@ -18,30 +18,30 @@
           </div>
         </div>
         <div v-if="isOtherUser" class="user-interactions">
-          <div v-if="user.follows_you && loggedIn" class="following base06">
+          <div v-if="user.follows_you && loggedIn" class="following">
             {{ $t('user_card.follows_you') }}
           </div>
           <div class="follow" v-if="loggedIn">
             <span v-if="user.following">
               <!--Following them!-->
-              <button @click="unfollowUser" class="base04 base00-background pressed">
+              <button @click="unfollowUser" class="pressed">
                 {{ $t('user_card.following') }}
               </button>
             </span>
             <span v-if="!user.following">
-              <button @click="followUser" class="base05 base02-background">
+              <button @click="followUser">
                 {{ $t('user_card.follow') }}
               </button>
             </span>
           </div>
           <div class='mute' v-if='isOtherUser'>
             <span v-if='user.muted'>
-              <button @click="toggleMute" class="base04 base00-background pressed">
+              <button @click="toggleMute" class="pressed">
                 {{ $t('user_card.muted') }}
               </button>
             </span>
             <span v-if='!user.muted'>
-              <button @click="toggleMute" class="base05 base02-background">
+              <button @click="toggleMute">
                 {{ $t('user_card.mute') }}
               </button>
             </span>
@@ -50,19 +50,19 @@
             <form method="POST" :action='subscribeUrl'>
               <input type="hidden" name="nickname" :value="user.screen_name">
               <input type="hidden" name="profile" value="">
-              <button click="submit" class="remote-button base05 base02-background">
+              <button click="submit" class="remote-button">
                 {{ $t('user_card.remote_follow') }}
               </button>
             </form>
           </div>
           <div class='block' v-if='isOtherUser && loggedIn'>
             <span v-if='user.statusnet_blocking'>
-              <button @click="unblockUser" class="base04 base00-background pressed">
+              <button @click="unblockUser" class="pressed">
                 {{ $t('user_card.blocked') }}
               </button>
             </span>
             <span v-if='!user.statusnet_blocking'>
-              <button @click="blockUser" class="base05 base02-background">
+              <button @click="blockUser">
                 {{ $t('user_card.block') }}
               </button>
             </span>
@@ -73,19 +73,19 @@
     <div class="panel-body profile-panel-body" :style="bodyStyle">
       <div class="user-counts">
         <div class="user-count">
-          <a href="#" v-on:click.prevent="setProfileView('statuses')" v-if="switcher"><h5 class="base05">{{ $t('user_card.statuses') }}</h5></a>
+          <a href="#" v-on:click.prevent="setProfileView('statuses')" v-if="switcher"><h5>{{ $t('user_card.statuses') }}</h5></a>
           <h5 v-else>{{ $t('user_card.statuses') }}</h5>
-          <span class="base05">{{user.statuses_count}} <br><span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span></span>
+          <span>{{user.statuses_count}} <br><span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span></span>
         </div>
         <div class="user-count">
-          <a href="#" v-on:click.prevent="setProfileView('friends')" v-if="switcher"><h5 class="base05">{{ $t('user_card.followees') }}</h5></a>
+          <a href="#" v-on:click.prevent="setProfileView('friends')" v-if="switcher"><h5>{{ $t('user_card.followees') }}</h5></a>
           <h5 v-else>{{ $t('user_card.followees') }}</h5>
-          <span class="base05">{{user.friends_count}}</span>
+          <span>{{user.friends_count}}</span>
         </div>
         <div class="user-count">
-          <a href="#" v-on:click.prevent="setProfileView('followers')" v-if="switcher"><h5 class="base05">{{ $t('user_card.followers') }}</h5></a>
+          <a href="#" v-on:click.prevent="setProfileView('followers')" v-if="switcher"><h5>{{ $t('user_card.followers') }}</h5></a>
           <h5 v-else>{{ $t('user_card.followers') }}</h5>
-          <span class="base05">{{user.followers_count}}</span>
+          <span>{{user.followers_count}}</span>
         </div>
       </div>
       <p>{{user.description}}</p>

@@ -1,7 +1,7 @@
 <template>
-  <div class="login panel panel-default base00-background">
+  <div class="login panel panel-default">
     <!-- Default panel contents -->
-    <div class="panel-heading base02-background base04">
+    <div class="panel-heading">
       {{$t('login.login')}}
     </div>
     <div class="panel-body">
@@ -17,11 +17,11 @@
         <div class='form-group'>
           <div class='login-bottom'>
             <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>{{$t('login.register')}}</router-link></div>
-            <button :disabled="loggingIn" type='submit' class='btn btn-default base04 base02-background'>{{$t('login.login')}}</button>
+            <button :disabled="loggingIn" type='submit' class='btn btn-default'>{{$t('login.login')}}</button>
           </div>
         </div>
         <div v-if="authError" class='form-group'>
-          <div class='error base05'>{{authError}}</div>
+          <div class='error'>{{authError}}</div>
         </div>
       </form>
     </div>
@@ -33,38 +33,36 @@
 <style lang="scss">
 
 .login-form {
-  input {
-    border-width: 1px;
-    border-style: solid;
-    border-color: silver;
-    border-radius: 5px;
-    padding: 0.1em 0.2em 0.2em 0.2em;
-  }
+    input {
+        border-radius: 5px;
+        padding: 0.1em 0.2em 0.2em 0.2em;
+    }
 
-  .btn {
-    min-height: 28px;
-    width: 10em;
-  }
+    .btn {
+        min-height: 28px;
+        width: 10em;
+    }
 
-  .error {
-    border-radius: 5px;
-    text-align: center;
-    background-color: rgba(255, 48, 16, 0.65);
-    min-height: 28px;
-    line-height: 28px;
-  }
+    .error {
+        border-radius: 5px;
+        text-align: center;
+        background-color: rgba(255, 48, 16, 0.65);
+        background-color: var(--cRed);
+        min-height: 28px;
+        line-height: 28px;
+    }
 
-  .register {
-    flex: 1 1;
-  }
+    .register {
+        flex: 1 1;
+    }
 
-  .login-bottom {
-    margin-top: 1.0em;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
+    .login-bottom {
+        margin-top: 1.0em;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
 </style>

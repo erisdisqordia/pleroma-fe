@@ -7,22 +7,22 @@
     <p>{{$t('settings.theme_help')}}</p>
     <div class="color-container">
       <div class="color-item">
-        <label for="bgcolor" class="base04 theme-color-lb">{{$t('settings.background')}}</label>
+        <label for="bgcolor" class="theme-color-lb">{{$t('settings.background')}}</label>
         <input id="bgcolor" class="theme-color-cl" type="color" v-model="bgColorLocal">
         <input id="bgcolor-t" class="theme-color-in" type="text" v-model="bgColorLocal">
       </div>
       <div class="color-item">
-        <label for="fgcolor" class="base04 theme-color-lb">{{$t('settings.foreground')}}</label>
+        <label for="fgcolor" class="theme-color-lb">{{$t('settings.foreground')}}</label>
         <input id="fgcolor" class="theme-color-cl" type="color" v-model="fgColorLocal">
         <input id="fgcolor-t" class="theme-color-in" type="text" v-model="fgColorLocal">
       </div>
       <div class="color-item">
-        <label for="textcolor" class="base04 theme-color-lb">{{$t('settings.text')}}</label>
+        <label for="textcolor" class="theme-color-lb">{{$t('settings.text')}}</label>
         <input id="textcolor" class="theme-color-cl" type="color" v-model="textColorLocal">
         <input id="textcolor-t" class="theme-color-in" type="text" v-model="textColorLocal">
       </div>
       <div class="color-item">
-        <label for="linkcolor" class="base04 theme-color-lb">{{$t('settings.links')}}</label>
+        <label for="linkcolor" class="theme-color-lb">{{$t('settings.links')}}</label>
         <input id="linkcolor" class="theme-color-cl" type="color" v-model="linkColorLocal">
         <input id="linkcolor-t" class="theme-color-in" type="text" v-model="linkColorLocal">
       </div>
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <button class="btn base02-background base04" @click="setCustomTheme">{{$t('general.apply')}}</button>
+    <button class="btn" @click="setCustomTheme">{{$t('general.apply')}}</button>
   </div>
 </template>
 
@@ -63,6 +63,10 @@
     flex: 1 1 0;
     align-items: baseline;
     margin: 5px 6px 5px 0;
+
+    label {
+        color: var(--faint);
+    }
 }
 .theme-color-cl,
 .theme-color-in {

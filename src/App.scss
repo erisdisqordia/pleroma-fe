@@ -33,14 +33,18 @@ body {
     font-family: sans-serif;
     font-size: 14px;
     margin: 0;
+    color: var(--fg);
 }
 
 a {
     text-decoration: none;
+    color: var(--link);
 }
 
 button{
     user-select: none;
+    color: var(--faint);
+    background-color: var(--btn);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -50,6 +54,8 @@ button{
     font-size: 14px;
     font-family: sans-serif;
 
+
+
     &:hover {
         box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.3);
     }
@@ -58,7 +64,71 @@ button{
       cursor: not-allowed;
       opacity: 0.5;
     }
+
+    &.pressed {
+      color: var(--faint);
+      background-color: var(--bg)
+    }
 }
+
+
+input, textarea, select {
+  border: none;
+  border-radius: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 2px black inset;
+  background-color: var(--lightBg);
+  color: var(--lightFg);
+  font-family: sans-serif;
+  font-size: 14px;
+  padding: 5px;
+
+  // TODO: Restyle <select> in a decent way. Needs different markup
+  // -webkit-appearance:none;
+  // -moz-appearance:none;
+  // appearance:none;
+
+  &[type=radio],
+  &[type=checkbox] {
+    display: none;
+    &:checked + label::before {
+      color: var(--fg);
+    }
+    + label::before {
+      display: inline-block;
+      content: '✔';
+      transition: color 200ms;
+      width: 1.1em;
+      height: 1.1em;
+      border-radius: 2px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 2px black inset;
+      margin-right: .5em;
+      background-color: var(--btn);
+      vertical-align: baseline;
+      text-align: center;
+      line-height: 1.1em;
+      font-size: 1.1em;
+      box-sizing: border-box;
+      color: transparent;
+      overflow: hidden;
+    }
+  }
+}
+
+.icon-cancel,
+.icon-reply,
+.icon-retweet,
+.icon-star-empty,
+.icon-eye-off,
+.icon-binoculars,
+.icon-plus-squared,
+.icon-spin4 {
+  color: var(--icon)
+}
+
 
 .container {
     display: flex;
@@ -73,8 +143,8 @@ button{
 
 .item {
     flex: 1;
-    line-height: 21px;
-    height: 21px;
+    line-height: 25px;
+    height: 25px;
     overflow: hidden;
 
     .nav-icon {
@@ -132,6 +202,8 @@ main-router {
     flex-direction: column;
     margin: 0.5em;
 
+    background-color: var(--bg);
+
     border-radius: 10px;
     box-shadow: 1px 1px 4px rgba(0,0,0,.6);
     overflow: hidden;
@@ -151,6 +223,7 @@ main-router {
     text-align: left;
     font-size: 1.3em;
     line-height: 24px;
+    background-color: var(--btn);
 }
 
 .panel-footer {
@@ -173,6 +246,8 @@ main-router {
 
 nav {
     z-index: 1000;
+    background-color: var(--bg);
+    color: var(--faint);
     box-shadow: 0px 0px 4px rgba(0,0,0,.6);
 }
 

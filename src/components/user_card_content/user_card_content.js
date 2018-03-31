@@ -5,7 +5,7 @@ export default {
   props: [ 'user', 'switcher' ],
   computed: {
     headingStyle () {
-      const color = this.$store.state.config.colors['base00']
+      const color = this.$store.state.config.colors.bg
       if (color) {
         const rgb = hex2rgb(color)
         console.log(rgb)
@@ -17,7 +17,7 @@ export default {
     },
     bodyStyle () {
       return {
-        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors['base00']} 80%)`
+        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors.bg} 80%)`
       }
     },
     isOtherUser () {

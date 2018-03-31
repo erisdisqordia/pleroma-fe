@@ -1,7 +1,7 @@
 <template>
   <div v-if="canDelete">
     <a href="#" v-on:click.prevent="deleteStatus()">
-      <i class='base09 icon-cancel delete-status'></i>
+      <i class='icon-cancel delete-status'></i>
     </a>
   </div>
 </template>
@@ -14,7 +14,8 @@
   .icon-cancel,.delete-status {
     cursor: pointer;
     &:hover {
-      color: $red;
+      color: $red_;
+      color: var(--red);
     }
   }
 </style>

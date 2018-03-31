@@ -1,10 +1,10 @@
 <template>
   <div v-if="loggedIn">
-    <i :class='classes' class='icon-retweet rt-active base09' v-on:click.prevent='retweet()'></i>
+    <i :class='classes' class='icon-retweet rt-active' v-on:click.prevent='retweet()'></i>
     <span v-if='status.repeat_num > 0'>{{status.repeat_num}}</span>
   </div>
   <div v-else>
-    <i :class='classes' class='icon-retweet base09'></i>
+    <i :class='classes' class='icon-retweet'></i>
     <span v-if='status.repeat_num > 0'>{{status.repeat_num}}</span>
   </div>
 </template>
@@ -17,10 +17,12 @@
      cursor: pointer;
      animation-duration: 0.6s;
      &:hover {
-      color: $green;
+      color: $green_;
+      color: var(--cGreen);
      }
   }
   .icon-retweet.retweeted {
-     color: $green;
+     color: $green_;
+     color: var(--cGreen);
   }
 </style>

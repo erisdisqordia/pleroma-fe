@@ -1,6 +1,6 @@
 <template>
-  <div class="settings panel panel-default base00-background">
-    <div class="panel-heading base02-background base04">
+  <div class="settings panel panel-default">
+    <div class="panel-heading">
       {{$t('registration.registration')}}
     </div>
     <div class="panel-body">
@@ -39,14 +39,14 @@
             </div>
             -->
             <div class='form-group'>
-              <button :disabled="registering" type='submit' class='btn btn-default base05 base02-background'>{{$t('general.submit')}}</button>
+              <button :disabled="registering" type='submit' class='btn btn-default'>{{$t('general.submit')}}</button>
             </div>
           </div>
           <div class='terms-of-service' v-html="termsofservice">
           </div>
         </div>
         <div v-if="error" class='form-group'>
-          <div class='error base05'>{{error}}</div>
+          <div class='error'>{{error}}</div>
         </div>
       </form>
     </div>
@@ -57,63 +57,60 @@
 <style lang="scss">
 
 .registration-form {
-  display: flex;
-  flex-direction: column;
-  margin: 0.6em;
-
-  .container {
-    display: flex;
-    flex-direction: row;
-    //margin-bottom: 1em;
-  }
-
-  .terms-of-service {
-    flex: 0 1 50%;
-    margin: 0.8em;
-  }
-
-  .text-fields {
-    margin-top: 0.6em;
-    flex: 1 0;
     display: flex;
     flex-direction: column;
-  }
+    margin: 0.6em;
 
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    padding: 0.3em 0.0em 0.3em;
-    line-height:24px;
-  }
+    .container {
+        display: flex;
+        flex-direction: row;
+        //margin-bottom: 1em;
+    }
 
-  form textarea {
-    border: solid;
-    border-width: 1px;
-    border-color: silver;
-    border-radius: 5px;
-    line-height:16px;
-    padding: 5px;
-    resize: vertical;
-  }
+    .terms-of-service {
+        flex: 0 1 50%;
+        margin: 0.8em;
+    }
 
-  input {
-    border-width: 1px;
-    border-style: solid;
-    border-color: silver;
-    border-radius: 5px;
-    padding: 0.1em 0.2em 0.2em 0.2em;
-  }
+    .text-fields {
+        margin-top: 0.6em;
+        flex: 1 0;
+        display: flex;
+        flex-direction: column;
+    }
 
-  .captcha {
-    max-width: 350px;
-    margin-bottom: 0.4em;
-  }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        padding: 0.3em 0.0em 0.3em;
+        line-height:24px;
+    }
 
-  .btn {
-    //align-self: flex-start;
-    //width: 10em;
-    margin-top: 0.6em;
-    height: 28px;
+    form textarea {
+        border: solid;
+        border-width: 1px;
+        border-color: silver;
+        border-radius: 5px;
+        line-height:16px;
+        padding: 5px;
+        resize: vertical;
+    }
+
+    input {
+        border-radius: 5px;
+        padding: 0.1em 0.2em 0.2em 0.2em;
+    }
+
+    .captcha {
+        max-width: 350px;
+        margin-bottom: 0.4em;
+    }
+
+    .btn {
+        //align-self: flex-start;
+        //width: 10em;
+        margin-top: 0.6em;
+        height: 28px;
   }
 
   .error {
@@ -121,6 +118,7 @@
     text-align: center;
     margin: 0.5em 0.6em 0;
     background-color: rgba(255, 48, 16, 0.65);
+    background-color: var(--cRed);
     min-height: 28px;
     line-height: 28px;
   }

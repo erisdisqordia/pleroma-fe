@@ -1,7 +1,7 @@
 <template>
   <div class="chat-panel">
-    <div class="panel panel-default base01-background">
-      <div class="panel-heading timeline-heading base02-background base04">
+    <div class="panel panel-default">
+      <div class="panel-heading timeline-heading">
         <div class="title">
           {{$t('chat.title')}}
         </div>

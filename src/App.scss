@@ -1,10 +1,11 @@
 @import './_variables.scss';
+
 #app {
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: 0 50px;
-    min-height: 100vh;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: 0 50px;
+  min-height: 100vh;
 }
 
 i {
@@ -12,7 +13,7 @@ i {
 }
 
 h4 {
-    margin: 0;
+  margin: 0;
 }
 
 #content {
@@ -26,49 +27,53 @@ h4 {
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 body {
-    font-family: sans-serif;
-    font-size: 14px;
-    margin: 0;
-    color: var(--fg);
+  font-family: sans-serif;
+  font-size: 14px;
+  margin: 0;
+  color: $fallback--fg;
+  color: var(--fg, $fallback--fg);
 }
 
 a {
-    text-decoration: none;
-    color: var(--link);
+  text-decoration: none;
+  color: $fallback--link;
+  color: var(--link, $fallback--link);
 }
 
 button{
-    user-select: none;
-    color: var(--faint);
-    background-color: var(--btn);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 0px 2px black;
-    font-size: 14px;
-    font-family: sans-serif;
+  user-select: none;
+  color: $fallback--faint;
+  color: var(--faint, $fallback--faint);
+  background-color: $fallback--btn;
+  background-color: var(--btn, $fallback--btn);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 2px black;
+  font-size: 14px;
+  font-family: sans-serif;
 
+  &:hover {
+    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.3);
+  }
 
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 
-    &:hover {
-        box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.3);
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
-
-    &.pressed {
-      color: var(--faint);
-      background-color: var(--bg)
-    }
+  &.pressed {
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+    background-color: $fallback--bg;
+    background-color: var(--bg, $fallback--bg)
+  }
 }
 
 
@@ -78,11 +83,13 @@ input, textarea, select {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 2px black inset;
-  background-color: var(--lightBg);
-  color: var(--lightFg);
+  background-color: $fallback--lightBg;
+  background-color: var(--lightBg, $fallback--lightBg);
+  color: $fallback--lightFg;
+  color: var(--lightFg, $fallback--lightFg);
   font-family: sans-serif;
   font-size: 14px;
-  padding: 5px;
+  padding: 8px 7px 4px;
 
   // TODO: Restyle <select> in a decent way. Needs different markup
   // -webkit-appearance:none;
@@ -93,7 +100,8 @@ input, textarea, select {
   &[type=checkbox] {
     display: none;
     &:checked + label::before {
-      color: var(--fg);
+      color: $fallback--fg;
+      color: var(--fg, $fallback--fg);
     }
     + label::before {
       display: inline-block;
@@ -106,7 +114,8 @@ input, textarea, select {
       border-top: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: 0px 0px 2px black inset;
       margin-right: .5em;
-      background-color: var(--btn);
+      background-color: $fallback--btn;
+      background-color: var(--btn, $fallback--btn);
       vertical-align: baseline;
       text-align: center;
       line-height: 1.1em;
@@ -126,129 +135,136 @@ input, textarea, select {
 .icon-binoculars,
 .icon-plus-squared,
 .icon-spin4 {
-  color: var(--icon)
+  color: $fallback--icon;
+  color: var(--icon, $fallback--icon)
 }
 
 
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    padding: 0 10px 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0 10px 0 10px;
 }
 
 .gaps {
-    margin: -1em 0 0 -1em;
+  margin: -1em 0 0 -1em;
 }
 
 .item {
-    flex: 1;
-    line-height: 25px;
-    height: 25px;
-    overflow: hidden;
+  flex: 1;
+  line-height: 25px;
+  height: 25px;
+  overflow: hidden;
 
-    .nav-icon {
-      font-size: 1.1em;
-      margin-left: 0.4em;
-    }
+  .nav-icon {
+    font-size: 1.1em;
+    margin-left: 0.4em;
+  }
 }
 
 .gaps > .item {
-    padding: 1em 0 0 1em;
+  padding: 1em 0 0 1em;
 }
 
 .auto-size {
-    flex: 1
+  flex: 1
 }
 
 nav {
-    width: 100%;
-    align-items: center;
-    position: fixed;
-    height: 50px;
+  width: 100%;
+  align-items: center;
+  position: fixed;
+  height: 50px;
 
-    .inner-nav {
-        padding-left: 20px;
-        padding-right: 20px;
-        display: flex;
-        align-items: center;
-        flex-basis: 970px;
-        margin: auto;
-        height: 50px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-    }
+  .inner-nav {
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    flex-basis: 970px;
+    margin: auto;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
 }
 
 main-router {
-    flex: 1;
+  flex: 1;
 }
 
 .status.compact {
-    color: rgba(0, 0, 0, 0.42);
-    font-weight: 300;
+  color: rgba(0, 0, 0, 0.42);
+  font-weight: 300;
 
-    p {
-        margin: 0;
-        font-size: 0.8em
-    }
+  p {
+    margin: 0;
+    font-size: 0.8em
+  }
 }
 
 /* Panel */
 
 .panel {
-    display: flex;
-    flex-direction: column;
-    margin: 0.5em;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
 
-    background-color: var(--bg);
+  background-color: $fallback--bg;
+  background-color: var(--bg, $fallback--bg);
 
-    border-radius: 10px;
-    box-shadow: 1px 1px 4px rgba(0,0,0,.6);
-    overflow: hidden;
+  border-radius: 10px;
+  border-radius: $fallback--panelRadius;
+  border-radius: var(--panelRadius, 10px);
+  box-shadow: 1px 1px 4px rgba(0,0,0,.6);
+  overflow: hidden;
 }
 
 .panel-body:empty::before {
-    content: "¯\\_(ツ)_/¯"; // Could use words but it'd require translations
-    display: block;
-    margin: 1em;
-    text-align: center;
+  content: "¯\\_(ツ)_/¯"; // Could use words but it'd require translations
+  display: block;
+  margin: 1em;
+  text-align: center;
 }
 
 .panel-heading {
-    border-radius: 10px 10px 0 0;
-    background-size: cover;
-    padding: 0.6em 1.0em;
-    text-align: left;
-    font-size: 1.3em;
-    line-height: 24px;
-    background-color: var(--btn);
+  border-radius: 10px 10px 0 0;
+  background-size: cover;
+  padding: 0.6em 1.0em;
+  text-align: left;
+  font-size: 1.3em;
+  line-height: 24px;
+  background-color: $fallback--btn;
+  background-color: var(--btn, $fallback--btn);
 }
 
 .panel-footer {
-    border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
 }
 
 .panel-body > p {
-	line-height: 18px;
-    padding: 1em;
-    margin: 0;
+  line-height: 18px;
+  padding: 1em;
+  margin: 0;
 }
 
 .container > * {
-    min-width: 0px;
+  min-width: 0px;
 }
 
 .fa {
-    color: grey;
+  color: grey;
 }
 
 nav {
-    z-index: 1000;
-    background-color: var(--bg);
-    color: var(--faint);
-    box-shadow: 0px 0px 4px rgba(0,0,0,.6);
+  z-index: 1000;
+  background-color: $fallback--btn;
+  background-color: var(--btn, $fallback--btn);
+  color: $fallback--faint;
+  color: var(--faint, $fallback--faint);
+  box-shadow: 0px 0px 4px rgba(0,0,0,.6);
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -259,9 +275,9 @@ nav {
 }
 
 .main {
-    flex-basis: 60%;
-    flex-grow: 1;
-    flex-shrink: 1;
+  flex-basis: 60%;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
 .sidebar-bounds {
@@ -276,20 +292,20 @@ nav {
 }
 
 .mobile-shown {
-    display: none;
+  display: none;
 }
 
 .panel-switcher {
-    display: none;
-    width: 100%;
-    height: 46px;
-    button {
-        display: block;
-        flex: 1;
-        max-height: 32px;
-        margin: 0.5em;
-        padding: 0.5em;
-    }
+  display: none;
+  width: 100%;
+  height: 46px;
+  button {
+    display: block;
+    flex: 1;
+    max-height: 32px;
+    margin: 0.5em;
+    padding: 0.5em;
+  }
 }
 
 @media all and (min-width: 960px) {
@@ -324,24 +340,24 @@ nav {
 }
 
 @media all and (max-width: 959px) {
-    .mobile-hidden {
-        display: none;
-    }
+  .mobile-hidden {
+    display: none;
+  }
 
-    .panel-switcher {
-        display: flex;
-    }
+  .panel-switcher {
+    display: flex;
+  }
 
-    .container {
-        padding: 0 0 0 0;
-    }
+  .container {
+    padding: 0 0 0 0;
+  }
 
-    .panel {
-        margin: 0.5em 0 0.5em 0;
-    }
+  .panel {
+    margin: 0.5em 0 0.5em 0;
+  }
 }
 
 .item.right {
-    text-align: right;
-    padding-right: 20px;
+  text-align: right;
+  padding-right: 20px;
 }

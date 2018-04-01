@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-    <div class="panel-body profile-panel-body" :style="bodyStyle">
+    <div class="panel-body profile-panel-body">
       <div class="user-counts">
         <div class="user-count">
           <a href="#" v-on:click.prevent="setProfileView('statuses')" v-if="switcher"><h5>{{ $t('user_card.statuses') }}</h5></a>
@@ -99,19 +99,21 @@
 @import '../../_variables.scss';
 
 .profile-panel-background {
-  background-size: cover;
-  border-radius: 10px;
+    background-size: cover;
+    border-radius: 10px;
 
-  .panel-heading {
-    padding: 0.6em 0em;
-    text-align: center;
-  }
+    .panel-heading {
+        padding: 0.6em 0em;
+        text-align: center;
+    }
 }
 
 .profile-panel-body {
-  top: -0em;
-  padding-top: 4em;
-  word-wrap: break-word;
+    top: -0em;
+    padding-top: 4em;
+    word-wrap: break-word;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%)
 }
 
 .user-info {

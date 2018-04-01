@@ -21,6 +21,8 @@
 <script src="./user_card.js"></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
+
 .name-and-screen-name {
     margin-left: 0.7em;
     margin-top:0.0em;
@@ -34,10 +36,6 @@
     float: right;
 }
 
-.follows {
-
-}
-
 .card {
     display: flex;
     flex: 1 0;
@@ -47,7 +45,8 @@
     padding-left: 1em;
     border-bottom: 1px solid;
     margin: 0;
-    border-bottom-color: var(--border);
+    border-bottom-color: $fallback--border;
+		border-bottom-color: var(--border, $fallback--border);
 
     .avatar {
         margin-top: 0.2em;
@@ -69,8 +68,9 @@
     .panel-heading {
         background: transparent;
     }
+
     p {
-      margin-bottom: 0;
+        margin-bottom: 0;
     }
-  }
+}
 </style>

@@ -16,25 +16,25 @@
 <script src="./user_finder.js"></script>
 
 <style lang="scss">
- .user-finder-container {
-   height: 21px;
-   max-width: 100%;
- }
+@import '../../_variables.scss';
 
- .user-finder-icon {
- }
+.user-finder-container {
+    height: 21px;
+    max-width: 100%;
+}
 
- .user-finder-input {
-   border-radius: 5px;
-   max-width: 80%;
-   padding: 0.1em 0.2em 0.2em 0.2em;
- }
+.user-finder-input {
+    border-radius: 5px;
+    max-width: 80%;
+    padding: 0.1em 0.2em 0.2em 0.2em;
+}
 
- .finder-error {
-   background-color: rgba(255, 48, 16, 0.65);
-   margin: 0.35em;
-   border-radius: 5px;
-   padding: 0.25em;
-   color: var(--faint);
- }
+.finder-error {
+    background-color: rgba(255, 48, 16, 0.65);
+    margin: 0.35em;
+    border-radius: 5px;
+    padding: 0.25em;
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+}
 </style>

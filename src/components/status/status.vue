@@ -139,8 +139,10 @@ status-text-container {
     max-width: 34em;
     padding: 0.5em;
     display: flex;
-    background-color: var(--bg);
-    border-color: var(--border);
+    background-color: $fallback--bg;
+    background-color: var(--bg, $fallback--bg);
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
     border-style: solid;
     border-width: 1px;
     border-radius: 4px;
@@ -181,15 +183,19 @@ status-text-container {
     word-break: break-word;
     border-left-width: 0px;
     line-height: 18px;
-    background-color: var(--bg);
-    border-color: var(--border);
+    background-color: $fallback--bg;
+    background-color: var(--bg, $fallback--bg);
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
 
     &_focused {
-        background-color: var(--lightBg);
+        background-color: $fallback--lightBg;
+        background-color: var(--lightBg, $fallback--lightBg);
     }
 
     .usercard {
-        border-color: var(--border);
+        border-color: $fallback--border;
+        border-color: var(--border, $fallback--border);
     }
 
     .timeline & {
@@ -211,7 +217,6 @@ status-text-container {
 
 
     .user-content {
-
         min-height: 52px;
         padding-top: 1px;
     }
@@ -224,14 +229,17 @@ status-text-container {
         small {
             font-weight: lighter;
         }
+
         h4 {
             margin-right: 0.4em;
         }
+
         .name-and-links {
             flex: 1 0;
             display: flex;
             flex-wrap: wrap;
         }
+
         .replies {
             flex-basis: 100%;
         }
@@ -310,6 +318,7 @@ status-text-container {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -335,14 +344,14 @@ status-text-container {
 }
 
 .icon-reply:hover {
-    color: $blue_;
-    color: var(--cBlue);
- }
+    color: $fallback--cBlue;
+    color: var(--cBlue, $fallback--cBlue);
+}
 
- .icon-reply.icon-reply-active {
-     color: $blue_;
-     color: var(--cBlue);
- }
+.icon-reply.icon-reply-active {
+    color: $fallback--cBlue;
+    color: var(--cBlue, $fallback--cBlue);
+}
 
  .status .avatar {
    width: 48px;
@@ -359,13 +368,13 @@ status-text-container {
        display: none;
    }
 
-   &.retweeted {
-     width: 40px;
-     height: 40px;
-     margin-right: 8px;
-     margin-bottom: 8px;
-   }
- }
+    &.retweeted {
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+        margin-bottom: 8px;
+    }
+}
 
  .status:hover .animated.avatar {
      canvas {
@@ -376,79 +385,81 @@ status-text-container {
      }
  }
 
- .status .avatar-retweeter {
-   width: 24px;
-   height: 24px;
-   position: absolute;
-   margin-left: 24px;
-   margin-top: 24px;
- }
+.status img.avatar-retweeter {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    margin-left: 24px;
+    margin-top: 24px;
+}
 
- .status.compact .avatar {
-     width: 32px;
- }
+.status.compact .avatar {
+    width: 32px;
+}
 
- .status {
-     padding: 0.4em 0.7em 0.45em 0.7em;
-     border-left: 4px var(--cRed);
-     border-left-style: inherit;
- }
+.status {
+    padding: 0.4em 0.7em 0.45em 0.7em;
+    border-left: 4px $fallback--cRed;
+    border-left: 4px var(--cRed, $fallback--cRed);
+    border-left-style: inherit;
+}
 
- .status-conversation:last-child {
+.status-conversation:last-child {
     border-bottom: none;
- }
+}
 
- .timeline .panel.timeline {
+.timeline .panel.timeline {
     border-radius: 10px;
     overflow: hidden;
- }
+}
 
- .muted {
-   padding: 0.1em 0.4em 0.1em 0.8em;
-   button {
-     margin-left: auto;
-   }
+.muted {
+    padding: 0.1em 0.4em 0.1em 0.8em;
+    button {
+        margin-left: auto;
+    }
 
-   .muteWords {
-     margin-left: 10px;
-   }
- }
+    .muteWords {
+        margin-left: 10px;
+    }
+}
 
- a.unmute {
-   display: block;
-   margin-left: auto;
- }
+a.unmute {
+    display: block;
+    margin-left: auto;
+}
 
- .reply-left {
-   flex: 0;
-   min-width: 48px;
- }
+.reply-left {
+    flex: 0;
+    min-width: 48px;
+}
 
- .reply-body {
-   flex: 1;
- }
+.reply-body {
+    flex: 1;
+}
 
- @media all and (max-width: 960px) {
-   .status-el {
-     .name-and-links {
-       margin-left: -0.25em;
-     }
-   }
-   .status {
-     max-width: 100%;
-   }
+@media all and (max-width: 960px) {
+    .status-el {
+        .name-and-links {
+            margin-left: -0.25em;
+        }
+    }
 
-   .status .avatar {
-     width: 40px;
-     height: 40px;
+    .status {
+        max-width: 100%;
+    }
 
-     &.retweeted {
-       width: 34px;
-       height: 34px;
-       margin-right: 8px;
-       margin-bottom: 8px;
-     }
-   }
+    .status .avatar {
+        width: 40px;
+        height: 40px;
+
+        &.retweeted {
+            width: 34px;
+            height: 34px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+    }
 
    .status .avatar-retweeter {
      width: 22px;

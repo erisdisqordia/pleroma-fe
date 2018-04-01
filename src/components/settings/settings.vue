@@ -56,6 +56,7 @@
 <style lang="scss">
  .setting-item {
    margin: 1em 1em 1.4em;
+
    textarea {
      width: 100%;
      height: 100px;

@@ -14,8 +14,8 @@
   .icon-cancel,.delete-status {
     cursor: pointer;
     &:hover {
-      color: $red_;
-      color: var(--red);
+      color: var(--cRed, $fallback--cRed);
+      color: $fallback--cRed;
     }
   }
 </style>

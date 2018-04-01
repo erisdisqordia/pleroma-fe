@@ -15,11 +15,6 @@ export default {
         }
       }
     },
-    bodyStyle () {
-      return {
-        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors.bg} 80%)`
-      }
-    },
     isOtherUser () {
       return this.user.id !== this.$store.state.users.currentUser.id
     },

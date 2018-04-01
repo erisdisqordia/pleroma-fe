@@ -30,6 +30,8 @@
 <script src="./attachment.js"></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
+
 .attachments {
     display: flex;
     flex-wrap: wrap;
@@ -45,7 +47,8 @@
         flex: 1 0 30%;
         margin: 0.5em 0.7em 0.6em 0.0em;
         align-self: flex-start;
-        border-color: var(--border);
+        border-color: $fallback--border;
+        border-color: var(--border, $fallback--border);
 
         border-style: solid;
         border-width: 1px;

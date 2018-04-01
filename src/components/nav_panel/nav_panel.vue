@@ -30,6 +30,8 @@
 <script src="./nav_panel.js" ></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
+
 .nav-panel ul {
     list-style: none;
     margin: 0;
@@ -38,13 +40,17 @@
 
 .nav-panel li {
     border-bottom: 1px solid;
-    border-color: var(--border);
-    background-color: var(--bg);
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
+    background-color: $fallback--bg;
+    background-color: var(--bg, $fallback--bg);
     padding: 0;
+
     &:first-child a {
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
     }
+
     &:last-child a {
         border-bottom-right-radius: 10px;
         border-bottom-left-radius: 10px;
@@ -58,16 +64,20 @@
 .nav-panel a {
     display: block;
     padding: 0.8em 0.85em;
+
     &:hover {
-        background-color: var(--lightBg);
+        background-color: $fallback--lightBg;
+        background-color: var(--lightBg, $fallback--lightBg);
     }
+
     &.router-link-active {
         font-weight: bolder;
-        background-color: var(--lightBg);
+        background-color: $fallback--lightBg;
+        background-color: var(--lightBg, $fallback--lightBg);
+
         &:hover {
             text-decoration: underline;
         }
     }
  }
-
 </style>

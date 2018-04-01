@@ -1,6 +1,20 @@
 $main-color: #f58d2c;
 $main-background: white;
 $darkened-background: whitesmoke;
-$green_: #0fa00f;
-$blue_: #0095ff;
-$red_: #ff0000;
+
+$fallback--bg: #121a24;
+$fallback--btn: #182230;
+$fallback--faint: #999;
+$fallback--fg: #b9b9ba;
+$fallback--link: #d8a070;
+$fallback--icon: #666;
+$fallback--lightBg: rgb(21, 30, 42);
+$fallback--lightFg: #b9b9ba;
+$fallback--border: #222;
+$fallback--cRed: #ff0000;
+$fallback--cBlue: #0095ff;
+$fallback--cGreen: #0fa00f;
+$fallback--cOrange: orange;
+$fallback--cYellow: yellow;
+
+$fallback--panelRadius: 10px;

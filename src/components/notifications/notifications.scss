@@ -5,32 +5,39 @@
   padding-bottom: 15em;
 
   .panel {
-    background: var(--bg)
+    background: $fallback--bg;
+    background: var(--bg, $fallback--bg)
   }
 
   .panel-body {
-    border-color: var(--border)
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border)
   }
 
   .panel-heading {
     // force the text to stay centered, while keeping
     // the button in the right side of the panel heading
     position: relative;
-    background: var(--btn);
-    color: var(--faint);
+    background: $fallback--btn;
+    background: var(--btn, $fallback--btn);
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
     .read-button {
       position: absolute;
       right: 0.7em;
       height: 1.8em;
       line-height: 100%;
-      background-color: var(--btn);
-      color: var(--faint);
+      background-color: $fallback--btn;
+      background-color: var(--btn, $fallback--btn);
+      color: $fallback--faint;
+      color: var(--faint, $fallback--faint);
     }
   }
 
   .unseen-count {
     display: inline-block;
-    background-color: var(--cRed);
+    background-color: $fallback--cRed;
+    background-color: var(--cRed, $fallback--cRed);
     text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
     min-width: 1.3em;
     border-radius: 1.3em;
@@ -52,6 +59,10 @@
     border-bottom: 1px solid;
     border-bottom-color: inherit;
 
+    .notification-gradient {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%)
+    }
 
     .text {
       min-width: 0px;
@@ -61,23 +72,24 @@
       overflow: hidden;
 
       .icon-retweet.lit {
-        color: $green_;
-        color: var(--cGreen);
+        color: $fallback--cGreen;
+        color: var(--cGreen, $fallback--cGreen);
       }
 
       .icon-user-plus.lit {
-        color: $blue_;
-        color: var(--cBlue);
+        color: $fallback--cBlue;
+        color: var(--cBlue, $fallback--cBlue);
       }
 
       .icon-reply.lit {
-        color: $blue_;
-        color: var(--cBlue);
+        color: $fallback--cBlue;
+        color: var(--cBlue, $fallback--cBlue);
       }
 
       .icon-star.lit {
         color: orange;
-        color: var(--cOrange);
+        color: $fallback--cOrange;
+        color: var(--cOrange, $fallback--cOrange);
       }
 
       .status-content {
@@ -151,7 +163,8 @@
   }
 
   .unseen {
-    border-left: 4px solid var(--cRed);
+    border-left: 4px solid $fallback--cRed;
+    border-left: 4px solid var(--cRed, $fallback--cRed);
     padding-left: 6px;
   }
 }

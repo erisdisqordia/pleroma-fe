@@ -55,6 +55,7 @@
 
 <script src="./registration.js"></script>
 <style lang="scss">
+@import '../../_variables.scss';
 
 .registration-form {
     display: flex;
@@ -87,18 +88,13 @@
     }
 
     form textarea {
-        border: solid;
-        border-width: 1px;
-        border-color: silver;
         border-radius: 5px;
         line-height:16px;
-        padding: 5px;
         resize: vertical;
     }
 
     input {
         border-radius: 5px;
-        padding: 0.1em 0.2em 0.2em 0.2em;
     }
 
     .captcha {
@@ -111,21 +107,21 @@
         //width: 10em;
         margin-top: 0.6em;
         height: 28px;
-  }
+    }
 
-  .error {
-    border-radius: 5px;
-    text-align: center;
-    margin: 0.5em 0.6em 0;
-    background-color: rgba(255, 48, 16, 0.65);
-    background-color: var(--cRed);
-    min-height: 28px;
-    line-height: 28px;
-  }
+    .error {
+        border-radius: 5px;
+        text-align: center;
+        margin: 0.5em 0.6em 0;
+        background-color: $fallback--cRed;
+        background-color: var(--cRed, $fallback--cRed);
+        min-height: 28px;
+        line-height: 28px;
+    }
 }
 
 @media all and (max-width: 959px) {
-  .registration-form .container {
+    .registration-form .container {
     flex-direction: column-reverse;
   }
 }

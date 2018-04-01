@@ -52,54 +52,63 @@
 <script src="./timeline.js"></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
 
-  .timeline {
+.timeline {
     .timeline-heading {
-      position: relative;
-      display: flex;
+        position: relative;
+        display: flex;
     }
+
     .title {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 70%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 70%;
     }
+
     .loadmore-button {
-      position: absolute;
-      right: 0.6em;
-      font-size: 14px;
+        position: absolute;
+        right: 0.6em;
+        font-size: 14px;
 
-      min-width: 6em;
-      height: 1.8em;
-      line-height: 100%;
+        min-width: 6em;
+        height: 1.8em;
+        line-height: 100%;
     }
+
     .loadmore-text {
-      position: absolute;
-      right: 0.6em;
-      font-size: 14px;
-      min-width: 6em;
-      border-radius: 5px;
-      background-color: transparent;
-      color: var(--faint);
-      font-family: sans-serif;
-      text-align: center;
-      padding: 0 0.5em 0 0.5em;
-      opacity: 0.8;
+        position: absolute;
+        right: 0.6em;
+        font-size: 14px;
+        min-width: 6em;
+        border-radius: 5px;
+        background-color: transparent;
+        color: $fallback--faint;
+        color: var(--faint, $fallback--faint);
+        font-family: sans-serif;
+        text-align: center;
+        padding: 0 0.5em 0 0.5em;
+        opacity: 0.8;
     }
-    .error {
-      color: var(--lightFg);
-      background-color: var(--cRed);
-    }
-  }
 
-  .new-status-notification {
+    .error {
+        color: $fallback--lightFg;
+        color: var(--lightFg, $fallback--lightFg);
+        background-color: $fallback--cRed;
+        background-color: var(--cRed, $fallback--cRed);
+    }
+}
+
+.new-status-notification {
     position:relative;
     margin-top: -1px;
     font-size: 1.1em;
     border-width: 1px 0 0 0;
     border-style: solid;
     border-radius: 0 0 10px 10px;
-    border-color: var(--border);
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
     padding: 10px;
     z-index: 1;
   }

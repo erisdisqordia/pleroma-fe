@@ -31,6 +31,7 @@
 <script src="./login_form.js" ></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
 
 .login-form {
     input {
@@ -47,7 +48,7 @@
         border-radius: 5px;
         text-align: center;
         background-color: rgba(255, 48, 16, 0.65);
-        background-color: var(--cRed);
+       background-color: $fallback--cRed;
         min-height: 28px;
         line-height: 28px;
     }

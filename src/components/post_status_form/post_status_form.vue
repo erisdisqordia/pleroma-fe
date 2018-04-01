@@ -50,6 +50,7 @@
 <script src="./post_status_form.js"></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
 
 .tribute-container {
     ul {
@@ -83,11 +84,13 @@
             display: flex;
         }
     }
+
     .error {
         border-radius: 5px;
         text-align: center;
         background-color: rgba(255, 48, 16, 0.65);
-        background-color: var(--cRed);
+        background-color: $fallback--cRed;
+        background-color: var(--cRed, $fallback--cRed);
         padding: 0.25em;
         margin: 0.35em;
         display: flex;
@@ -98,7 +101,8 @@
 
         .attachment {
             position: relative;
-            border: var(--border);
+            border: $fallback--border;
+            border: var(--border, $fallback--border);
             margin: 0.5em 0.8em 0.2em 0;
         }
 
@@ -139,11 +143,11 @@
     }
 
     form textarea {
-        border-radius: 5px;
         line-height:16px;
-        padding: 5px;
         resize: none;
         overflow: hidden;
+        transition: min-height 200ms;
+        min-height: 1px;
     }
 
     form textarea:focus {
@@ -170,8 +174,10 @@
         z-index: 1;
         box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
         min-width: 75%;
-        background: var(--btn);
-        color: var(--lightFg);
+        background: $fallback--btn;
+        background: var(--btn, $fallback--btn);
+        color: $fallback--lightFg;
+        color: var(--lightFg, $fallback--lightFg);
     }
 
     .autocomplete {
@@ -179,19 +185,23 @@
         padding: 0.2em 0.4em 0.2em 0.4em;
         border-bottom: 1px solid rgba(0, 0, 0, 0.4);
         display: flex;
+
         img {
             width: 24px;
             height: 24px;
             border-radius: 2px;
             object-fit: contain;
         }
+
         span {
             line-height: 24px;
             margin: 0 0.1em 0 0.2em;
         }
+
         small {
             margin-left: .5em;
-            color: var(--faint);
+            color: $fallback--faint;
+            color: var(--faint, $fallback--faint);
         }
     }
 }

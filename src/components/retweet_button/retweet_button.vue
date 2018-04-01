@@ -11,18 +11,18 @@
 
 <script src="./retweet_button.js" ></script>
 
-<style lang='scss'>
-  @import '../../_variables.scss';
-  .rt-active {
-     cursor: pointer;
-     animation-duration: 0.6s;
-     &:hover {
-      color: $green_;
-      color: var(--cGreen);
-     }
-  }
-  .icon-retweet.retweeted {
-     color: $green_;
-     color: var(--cGreen);
-  }
+<style lang="scss">
+@import '../../_variables.scss';
+.rt-active {
+    cursor: pointer;
+    animation-duration: 0.6s;
+    &:hover {
+        color: $fallback--cGreen;
+        color: var(--cGreen, $fallback--cGreen);
+    }
+}
+.icon-retweet.retweeted {
+    color: $fallback--cGreen;
+    color: var(--cGreen, $fallback--cGreen);
+}
 </style>

@@ -47,6 +47,7 @@
 <script src="./style_switcher.js"></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
 .style-switcher {
     margin-right: 1em;
 }
@@ -65,14 +66,20 @@
     margin: 5px 6px 5px 0;
 
     label {
-        color: var(--faint);
+        color: var(--faint, $fallback--faint);
     }
 }
+
+.theme-color-cl {
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
 .theme-color-cl,
 .theme-color-in {
     margin-left: 4px;
     border-radius: 2px;
-    border: 0;
 }
 
 .theme-color-in {

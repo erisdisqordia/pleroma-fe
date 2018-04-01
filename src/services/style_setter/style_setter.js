@@ -47,8 +47,6 @@ const setStyle = (href, commit) => {
     head.appendChild(styleEl)
     // const styleSheet = styleEl.sheet
 
-    // styleSheet.insertRule(`a { color: ${colors['base08']}`, 'index-max')
-    // styleSheet.insertRule(`body { color: ${colors['base05']}`, 'index-max')
     body.style.display = 'initial'
   }
 
@@ -82,20 +80,14 @@ const setColors = (col, commit) => {
   colors['base07'] = rgb2hex(col.text.r - mod * 2, col.text.g - mod * 2, col.text.b - mod * 2)
   colors.link = rgb2hex(col.link.r, col.link.g, col.link.b)                   // links
   colors.icon = rgb2hex((col.bg.r + col.text.r) / 2, (col.bg.g + col.text.g) / 2, (col.bg.b + col.text.b) / 2) // icons
-  colors.cBlue = 'blue'
+  colors.cBlue = '#0095ff'
   colors.cRed = 'red'
-  colors.cGreen = 'green'
+  colors.cGreen = '#0fa00f'
   colors.cYellow = 'yellow'
   colors.cOrange = 'orange'
 
-  const colorVars = Object.entries(colors).map(([k, v]) => {
-    return `--${k}: ${v}`
-  })
-  console.log(colorVars)
-
-  styleSheet.insertRule(`body { ${colorVars.join(';')} }`, 'index-max')
-  // styleSheet.insertRule(`.base05-border { border-color: ${colors['base05']}`, 'index-max')
-  // styleSheet.insertRule(`.base03-border { border-color: ${colors['base03']}`, 'index-max')
+  styleSheet.toString()
+  styleSheet.insertRule(`body { ${Object.entries(colors).map(([k, v]) => `--${k}: ${v}`).join(';')} }`, 'index-max')
   body.style.display = 'initial'
 
   commit('setOption', { name: 'colors', value: colors })

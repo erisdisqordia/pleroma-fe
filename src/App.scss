@@ -51,7 +51,8 @@ button{
   background-color: $fallback--btn;
   background-color: var(--btn, $fallback--btn);
   border: none;
-  border-radius: 5px;
+  border-radius: $fallback--btnRadius;
+  border-radius: var(--btnRadius, $fallback--btnRadius);
   cursor: pointer;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -79,7 +80,8 @@ button{
 
 input, textarea, select {
   border: none;
-  border-radius: 5px;
+  border-radius: $fallback--btnRadius;
+  border-radius: var(--btnRadius, $fallback--btnRadius);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 2px black inset;
@@ -90,6 +92,7 @@ input, textarea, select {
   font-family: sans-serif;
   font-size: 14px;
   padding: 8px 7px 4px;
+  box-sizing: border-box;
 
   // TODO: Restyle <select> in a decent way. Needs different markup
   // -webkit-appearance:none;
@@ -109,32 +112,27 @@ input, textarea, select {
       transition: color 200ms;
       width: 1.1em;
       height: 1.1em;
-      border-radius: 2px;
+      border-radius: $fallback--checkBoxRadius;
+      border-radius: var(--checkBoxRadius, $fallback--checkBoxRadius);
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       border-top: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: 0px 0px 2px black inset;
       margin-right: .5em;
       background-color: $fallback--btn;
       background-color: var(--btn, $fallback--btn);
-      vertical-align: baseline;
+      vertical-align: top;
       text-align: center;
       line-height: 1.1em;
       font-size: 1.1em;
       box-sizing: border-box;
       color: transparent;
       overflow: hidden;
+      box-sizing: border-box;
     }
   }
 }
 
-.icon-cancel,
-.icon-reply,
-.icon-retweet,
-.icon-star-empty,
-.icon-eye-off,
-.icon-binoculars,
-.icon-plus-squared,
-.icon-spin4 {
+i[class^=icon-] {
   color: $fallback--icon;
   color: var(--icon, $fallback--icon)
 }
@@ -188,6 +186,11 @@ nav {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+
+    a i {
+      color: $fallback--link;
+      color: var(--link, $fallback--link);
+    }
   }
 }
 
@@ -215,9 +218,8 @@ main-router {
   background-color: $fallback--bg;
   background-color: var(--bg, $fallback--bg);
 
-  border-radius: 10px;
   border-radius: $fallback--panelRadius;
-  border-radius: var(--panelRadius, 10px);
+  border-radius: var(--panelRadius, $fallback--panelRadius);
   box-shadow: 1px 1px 4px rgba(0,0,0,.6);
   overflow: hidden;
 }
@@ -230,7 +232,8 @@ main-router {
 }
 
 .panel-heading {
-  border-radius: 10px 10px 0 0;
+  border-radius: $fallback--panelRadius $fallback--panelRadius 0 0;
+  border-radius: var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius) 0 0;
   background-size: cover;
   padding: 0.6em 1.0em;
   text-align: left;
@@ -241,7 +244,8 @@ main-router {
 }
 
 .panel-footer {
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
+  border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
 }
 
 .panel-body > p {

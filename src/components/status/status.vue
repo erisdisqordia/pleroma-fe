@@ -145,7 +145,8 @@ status-text-container {
     border-color: var(--border, $fallback--border);
     border-style: solid;
     border-width: 1px;
-    border-radius: 4px;
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
     margin-top: 0.5em;
     margin-left: 1em;
@@ -155,7 +156,8 @@ status-text-container {
         flex-shrink: 0;
         width: 32px;
         height: 32px;
-        border-radius: 50%;
+        border-radius: $fallback--avatarAltRadius;
+        border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
     }
 
     .text {
@@ -287,7 +289,8 @@ status-text-container {
         margin: 0.2em 0.3em 0 0;
         .avatar {
             float: right;
-            border-radius: 5px;
+            border-radius: $fallback--avatarRadius;
+            border-radius: var(--avatarRadius, $fallback--avatarRadius);
         }
     }
 
@@ -409,7 +412,6 @@ status-text-container {
 }
 
 .timeline .panel.timeline {
-    border-radius: 10px;
     overflow: hidden;
 }
 

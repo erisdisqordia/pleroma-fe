@@ -34,21 +34,17 @@
 @import '../../_variables.scss';
 
 .login-form {
-    input {
-        border-radius: 5px;
-        padding: 0.1em 0.2em 0.2em 0.2em;
-    }
-
     .btn {
         min-height: 28px;
         width: 10em;
     }
 
     .error {
-        border-radius: 5px;
+        border-radius: $fallback--tooltipRadius;
+        border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
         text-align: center;
         background-color: rgba(255, 48, 16, 0.65);
-       background-color: $fallback--cRed;
+        background-color: $fallback--cRed;
         min-height: 28px;
         line-height: 28px;
     }

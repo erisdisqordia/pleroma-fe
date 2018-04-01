@@ -27,6 +27,28 @@
         <input id="linkcolor-t" class="theme-color-in" type="text" v-model="linkColorLocal">
       </div>
     </div>
+    <div class="color-container additional colors">
+      <div class="color-item">
+        <label for="redcolor" class="theme-color-lb">{{$t('settings.cRed')}}</label>
+        <input id="redcolor" class="theme-color-cl" type="color" v-model="redColorLocal">
+        <input id="redcolor-t" class="theme-color-in" type="text" v-model="redColorLocal">
+      </div>
+      <div class="color-item">
+        <label for="bluecolor" class="theme-color-lb">{{$t('settings.cBlue')}}</label>
+        <input id="bluecolor" class="theme-color-cl" type="color" v-model="blueColorLocal">
+        <input id="bluecolor-t" class="theme-color-in" type="text" v-model="blueColorLocal">
+      </div>
+      <div class="color-item">
+        <label for="greencolor" class="theme-color-lb">{{$t('settings.cGreen')}}</label>
+        <input id="greencolor" class="theme-color-cl" type="color" v-model="greenColorLocal">
+        <input id="greencolor-t" class="theme-color-in" type="green" v-model="greenColorLocal">
+      </div>
+      <div class="color-item">
+        <label for="orangecolor" class="theme-color-lb">{{$t('settings.cOrange')}}</label>
+        <input id="orangecolor" class="theme-color-cl" type="color" v-model="orangeColorLocal">
+        <input id="orangecolor-t" class="theme-color-in" type="text" v-model="orangeColorLocal">
+      </div>
+    </div>
     <div>
       <div class="panel">
         <div class="panel-heading" :style="{ 'background-color': fgColorLocal, 'color': textColorLocal }">Preview</div>
@@ -79,7 +101,6 @@
 .theme-color-cl,
 .theme-color-in {
     margin-left: 4px;
-    border-radius: 2px;
 }
 
 .theme-color-in {

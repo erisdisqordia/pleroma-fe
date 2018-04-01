@@ -52,7 +52,8 @@
 
         border-style: solid;
         border-width: 1px;
-        border-radius: 5px;
+        border-radius: $fallback--attachmentRadius;
+        border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
         overflow: hidden;
 
         // fixes small gap below video
@@ -109,7 +110,8 @@
                 flex: 1;
                 img {
                     border: 0px;
-                    border-radius: 5px;
+                    border-radius: $fallback--attachmentRadius;
+                    border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
                     height: 100%;
                     object-fit: cover;
                 }

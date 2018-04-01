@@ -88,13 +88,8 @@
     }
 
     form textarea {
-        border-radius: 5px;
         line-height:16px;
         resize: vertical;
-    }
-
-    input {
-        border-radius: 5px;
     }
 
     .captcha {
@@ -110,7 +105,8 @@
     }
 
     .error {
-        border-radius: 5px;
+        border-radius: $fallback--tooltipRadius;
+        border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
         text-align: center;
         margin: 0.5em 0.6em 0;
         background-color: $fallback--cRed;

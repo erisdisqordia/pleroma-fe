@@ -64,7 +64,8 @@
         padding: 3px;
         width: 16px;
         height: 16px;
-        border-radius: 50%;
+        border-radius: $fallback--avatarAltRadius;
+        border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
     }
 }
 
@@ -86,7 +87,8 @@
     }
 
     .error {
-        border-radius: 5px;
+        border-radius: $fallback--tooltipRadius;
+        border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
         text-align: center;
         background-color: rgba(255, 48, 16, 0.65);
         background-color: $fallback--cRed;
@@ -111,7 +113,8 @@
             margin: 10px;
             padding: 5px;
             background: rgba(230,230,230,0.6);
-            border-radius: 5px;
+            border-radius: $fallback--attachmentRadius;
+            border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
             font-weight: bold;
         }
     }
@@ -148,6 +151,7 @@
         overflow: hidden;
         transition: min-height 200ms;
         min-height: 1px;
+        box-sizing: content-box;
     }
 
     form textarea:focus {
@@ -169,7 +173,8 @@
 
     .autocomplete-panel {
         margin: 0 0.5em 0 0.5em;
-        border-radius: 5px;
+        border-radius: $fallback--tooltipRadius;
+        border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
         position: absolute;
         z-index: 1;
         box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
@@ -189,7 +194,8 @@
         img {
             width: 24px;
             height: 24px;
-            border-radius: 2px;
+            border-radius: $fallback--avatarRadius;
+            border-radius: var(--avatarRadius, $fallback--avatarRadius);
             object-fit: contain;
         }
 

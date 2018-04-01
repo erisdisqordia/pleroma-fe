@@ -13,9 +13,9 @@
 <script src="./user_panel.js"></script>
 
 <style lang="scss">
-  .user-panel {
-    .panel-heading {
-      background: transparent;
+.user-panel {
+    .profile-panel-background .panel-heading {
+        background: transparent;
     }
-  }
+}
 </style>

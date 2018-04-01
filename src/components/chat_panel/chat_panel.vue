@@ -29,30 +29,36 @@
 <script src="./chat_panel.js"></script>
 
 <style lang="scss">
- .chat-window {
-   max-height: 200px;
-   overflow-y: auto;
-   overflow-x: hidden;
- }
- .chat-message {
-   padding: 0.2em 0.5em
- }
- .chat-avatar {
-     img {
-         height: 32px;
-         width: 32px;
-         border-radius: 5px;
-         margin-right: 0.5em;
-     }
- }
- .chat-input {
-     display: flex;
-     form {
-         flex: auto;
-         input {
-             margin: 0.5em;
-             width: fill-available;
-         }
-     }
- }
+@import '../../_variables.scss';
+
+.chat-window {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.chat-message {
+    padding: 0.2em 0.5em
+}
+
+.chat-avatar {
+    img {
+        height: 32px;
+        width: 32px;
+        border-radius: $fallback--avatarRadius;
+        border-radius: var(--avatarRadius, $fallback--avatarRadius);
+        margin-right: 0.5em;
+    }
+}
+
+.chat-input {
+    display: flex;
+    form {
+        flex: auto;
+        input {
+            margin: 0.5em;
+            width: fill-available;
+        }
+    }
+}
 </style>

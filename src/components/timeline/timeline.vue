@@ -82,7 +82,6 @@
         right: 0.6em;
         font-size: 14px;
         min-width: 6em;
-        border-radius: 5px;
         background-color: transparent;
         color: $fallback--faint;
         color: var(--faint, $fallback--faint);
@@ -106,8 +105,6 @@
     font-size: 1.1em;
     border-width: 1px 0 0 0;
     border-style: solid;
-    border-radius: 0 0 10px 10px;
-    border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
     padding: 10px;
     z-index: 1;

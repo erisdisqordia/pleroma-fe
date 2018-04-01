@@ -75,31 +75,21 @@
 
 <style lang="scss">
 .profile-edit {
-  .name-changer {
-    border-radius: 5px;
-    padding: 0.2em 0.2em 0.2em 0.2em;
-  }
-  .name-submit {
-    padding: 0.2em 0.5em 0.2em 0.5em;
-  }
-  .bio {
-    border-radius: 5px;
-    margin: 0;
-  }
+    .bio {
+        margin: 0;
+    }
 
-  input[type=file] {
-      padding: 5px;
-      border-radius: 5px;
-  }
+    input[type=file] {
+        padding: 5px;
+    }
 
-  .banner {
-    max-width: 400px;
-    border-radius: 5px;
-  }
+    .banner {
+        max-width: 400px;
+    }
 
-  .uploading {
-    font-size: 1.5em;
-    margin: 0.25em;
-  }
+    .uploading {
+        font-size: 1.5em;
+        margin: 0.25em;
+    }
 }
 </style>

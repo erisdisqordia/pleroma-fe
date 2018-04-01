@@ -69,6 +69,7 @@ const setColors = (col, commit) => {
   if (isDark) {
     mod = mod * -1
   }
+  console.log(JSON.stringify(col, null, ' '))
 
   colors.bg = rgb2hex(col.bg.r, col.bg.g, col.bg.b)                         // background
   colors.lightBg = rgb2hex((col.bg.r + col.fg.r) / 2, (col.bg.g + col.fg.g) / 2, (col.bg.b + col.fg.b) / 2) // hilighted bg
@@ -77,14 +78,16 @@ const setColors = (col, commit) => {
   colors.faint = rgb2hex(col.text.r + mod * 2, col.text.g + mod * 2, col.text.b + mod * 2) // faint text
   colors.fg = rgb2hex(col.text.r, col.text.g, col.text.b)                   // text
   colors.lightFg = rgb2hex(col.text.r - mod, col.text.g - mod, col.text.b - mod) // strong text
+
   colors['base07'] = rgb2hex(col.text.r - mod * 2, col.text.g - mod * 2, col.text.b - mod * 2)
+
   colors.link = rgb2hex(col.link.r, col.link.g, col.link.b)                   // links
   colors.icon = rgb2hex((col.bg.r + col.text.r) / 2, (col.bg.g + col.text.g) / 2, (col.bg.b + col.text.b) / 2) // icons
-  colors.cBlue = '#0095ff'
-  colors.cRed = 'red'
-  colors.cGreen = '#0fa00f'
-  colors.cYellow = 'yellow'
-  colors.cOrange = 'orange'
+
+  colors.cBlue = col.cBlue && rgb2hex(col.cBlue.r, col.cBlue.g, col.cBlue.b)
+  colors.cRed = col.cRed && rgb2hex(col.cRed.r, col.cRed.g, col.cRed.b)
+  colors.cGreen = col.cGreen && rgb2hex(col.cGreen.r, col.cGreen.g, col.cGreen.b)
+  colors.cOrange = col.cOrange && rgb2hex(col.cOrange.r, col.cOrange.g, col.cOrange.b)
 
   styleSheet.toString()
   styleSheet.insertRule(`body { ${Object.entries(colors).map(([k, v]) => `--${k}: ${v}`).join(';')} }`, 'index-max')
@@ -103,12 +106,23 @@ const setPreset = (val, commit) => {
       const fgRgb = hex2rgb(theme[2])
       const textRgb = hex2rgb(theme[3])
       const linkRgb = hex2rgb(theme[4])
+
+      const cRedRgb = hex2rgb(theme[5] || '#FF0000')
+      const cBlueRgb = hex2rgb(theme[6] || '#0000FF')
+      const cGreenRgb = hex2rgb(theme[7] || '#00FF00')
+      const cOrangeRgb = hex2rgb(theme[8] || '#E3FF00')
+
       const col = {
         bg: bgRgb,
         fg: fgRgb,
         text: textRgb,
-        link: linkRgb
+        link: linkRgb,
+        cRed: cRedRgb,
+        cBlue: cBlueRgb,
+        cGreen: cGreenRgb,
+        cOrange: cOrangeRgb
       }
+
       // This is a hack, this function is only called during initial load.
       // We want to cancel loading the theme from config.json if we're already
       // loading a theme from the persisted state.

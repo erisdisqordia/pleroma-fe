@@ -100,7 +100,8 @@
 
 .profile-panel-background {
     background-size: cover;
-    border-radius: 10px;
+    border-radius: $fallback--panelRadius;
+    border-radius: var(--panelRadius, $fallback--panelRadius);
 
     .panel-heading {
         padding: 0.6em 0em;
@@ -117,14 +118,9 @@
 }
 
 .user-info {
-	color: white;
-  padding: 0 16px 16px 16px;
-  margin-bottom: -4em;
-
-  .usersettings {
     color: white;
-    opacity: 0.8;
-  }
+    padding: 0 16px 16px 16px;
+    margin-bottom: -4em;
 
   .container{
     padding: 16px 10px 4px 10px;
@@ -186,51 +182,104 @@
     flex-flow: row wrap;
     justify-content: space-between;
 
-    div {
-      flex: 1;
-    }
-    margin-top: 0.7em;
-    margin-bottom: -1.0em;
-
-    .following {
-      color: white;
-      font-size: 14px;
-      flex: 0 0 100%;
-      margin: -0.7em 0.0em 0.3em 0.0em;
-      padding-left: 16px;
-      text-align: left;
+    .usersettings {
+        color: white;
+        opacity: 0.8;
     }
 
-    .mute {
-      max-width: 220px;
-      min-height: 28px;
+    .container{
+        padding: 16px 10px 4px 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: flex-start;
+        justify-content: center;
+        max-height: 56px;
+        overflow: hidden;
     }
 
-    .remote-follow {
-      max-width: 220px;
-      min-height: 28px;
+    img {
+        border-radius: $fallback--avatarRadius;
+        border-radius: var(--avatarRadius, $fallback--avatarRadius);
+        flex: 1 0 100%;
+        width: 56px;
+        height: 56px;
+        box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
+        object-fit: cover;
     }
 
-    .follow {
-      max-width: 220px;
-      min-height: 28px;
+    text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
+
+    .name-and-screen-name {
+        display: block;
+        margin-left: 0.6em;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
-    button {
-      width: 92%;
-      height: 100%;
+    .user-name{
+        color: white;
     }
 
-    .remote-button {
-      height: 28px !important;
-      width: 92%;
+    .user-screen-name {
+        color: white;
+        font-weight: lighter;
+        font-size: 15px;
+        padding-right: 0.1em;
+        flex: 0 0 auto;
     }
 
-    .pressed {
-      border-bottom-color: rgba(255, 255, 255, 0.2);
-      border-top-color: rgba(0, 0, 0, 0.2);
+    .user-interactions {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        div {
+            flex: 1;
+        }
+        margin-top: 0.7em;
+        margin-bottom: -1.0em;
+
+        .following {
+            color: white;
+            font-size: 14px;
+            flex: 0 0 100%;
+            margin: -0.7em 0.0em 0.3em 0.0em;
+            padding-left: 16px;
+            text-align: left;
+        }
+
+        .mute {
+            max-width: 220px;
+            min-height: 28px;
+        }
+
+        .remote-follow {
+            max-width: 220px;
+            min-height: 28px;
+        }
+
+        .follow {
+            max-width: 220px;
+            min-height: 28px;
+        }
+
+        button {
+            width: 92%;
+            height: 100%;
+        }
+
+        .remote-button {
+            height: 28px !important;
+            width: 92%;
+        }
+
+        .pressed {
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+            border-top-color: rgba(0, 0, 0, 0.2);
+        }
     }
-  }
 }
 
 .user-counts {
@@ -244,7 +293,8 @@
     flex: 1;
 
     h5 {
-    	font-size:1em;
+        color: white;
+        font-size:1em;
         font-weight: bolder;
         margin: 0 0 0.25em;
     }
@@ -254,7 +304,7 @@
 }
 
 .dailyAvg {
-  font-size: 0.8em;
-  opacity: 0.5;
+    font-size: 0.8em;
+    opacity: 0.5;
 }
 </style>

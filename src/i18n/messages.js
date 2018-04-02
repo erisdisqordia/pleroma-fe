@@ -760,8 +760,12 @@ const it = {
 }
 
 const oc = {
+    chat: {
+    title: 'Chat'
+  },
   nav: {
-    timeline: 'Jornal',
+    chat: 'Chat local',
+    timeline: 'Flux d’actualitat',
     mentions: 'Notificacions',
     public_tl: 'Estatuts locals',
     twkn: 'Lo malhum conegut'
@@ -777,7 +781,8 @@ const oc = {
     muted: 'Mes en silenci',
     followers: 'Seguidors',
     followees: 'Abonaments',
-    per_day: 'per jorn'
+    per_day: 'per jorn',
+    remote_follow: 'Seguir a distància'
   },
   timeline: {
     show_new: 'Ne veire mai',
@@ -792,15 +797,21 @@ const oc = {
     name: 'Nom',
     bio: 'Biografia',
     avatar: 'Avatar',
-    current_avatar: 'Vòstre avatar',
+    current_avatar: 'Vòstre avatar actual',
     set_new_avatar: 'Cambiar l’avatar',
     profile_banner: 'Bandièra del perfil',
-    current_profile_banner: 'Bandièra del perfil',
+    current_profile_banner: 'Bandièra actula del perfil',
     set_new_profile_banner: 'Cambiar de bandièra',
     profile_background: 'Imatge de fons',
     set_new_profile_background: 'Cambiar l’imatge de fons',
     settings: 'Paramètres',
     theme: 'Tèma',
+    presets: 'Pre-enregistrats',
+    theme_help: 'Use hex color codes (#aabbcc) to customize your color theme.',
+    background: 'Rèire plan',
+    foreground: 'Endavant',
+    text: 'Tèxte',
+    links: 'Ligams',
     filtering: 'Filtre',
     filtering_explanation: 'Totes los estatuts amb aqueles mots seràn en silenci, un mot per linha.',
     attachments: 'Pèças juntas',
@@ -808,7 +819,12 @@ const oc = {
     hide_attachments_in_convo: 'Rescondre las pèças juntas dins las conversacions',
     nsfw_clickthrough: 'Activar lo clic per mostrar los imatges marcats coma pels adults o sensibles',
     autoload: 'Activar lo cargament automatic un còp arribat al cap de la pagina',
-    reply_link_preview: 'Activar l’apercebut en passar la mirga'
+    streaming: 'Activar lo cargament automatic dels novèls estatus en anar amont',
+    reply_link_preview: 'Activar l’apercebut en passar la mirga',
+    follow_import: 'Importar los abonaments',
+    import_followers_from_a_csv_file: 'Importar los seguidors d’un fichièr csv',
+    follows_imported: 'Seguidors importats. Lo tractament pòt trigar una estona.',
+    follow_import_error: 'Error en important los seguidors'
   },
   notifications: {
     notifications: 'Notficacions',
@@ -838,7 +854,11 @@ const oc = {
     error_fetching_user: 'Error pendent la recèrca d’un utilizaire'
   },
   general: {
-    submit: 'Mandar'
+    submit: 'Mandar',
+    apply: 'Aplicar'
+  },
+    user_profile: {
+    timeline_title: 'Flux a l’utilizaire'
   }
 }
 

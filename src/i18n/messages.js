@@ -800,7 +800,7 @@ const oc = {
     current_avatar: 'Vòstre avatar actual',
     set_new_avatar: 'Cambiar l’avatar',
     profile_banner: 'Bandièra del perfil',
-    current_profile_banner: 'Bandièra actula del perfil',
+    current_profile_banner: 'Bandièra actuala del perfil',
     set_new_profile_banner: 'Cambiar de bandièra',
     profile_background: 'Imatge de fons',
     set_new_profile_background: 'Cambiar l’imatge de fons',

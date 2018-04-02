@@ -626,8 +626,8 @@ const fr = {
     twkn: 'Le réseau connu'
   },
   user_card: {
-    follows_you: 'Vous suit!',
-    following: 'Suivi!',
+    follows_you: 'Vous suit !',
+    following: 'Suivi !',
     follow: 'Suivre',
     blocked: 'Bloqué',
     block: 'Bloquer',
@@ -671,7 +671,7 @@ const fr = {
   },
   notifications: {
     notifications: 'Notfications',
-    read: 'Lu!',
+    read: 'Lu !',
     followed_you: 'vous a suivi'
   },
   login: {
@@ -756,6 +756,89 @@ const it = {
   },
   general: {
     submit: 'Invia'
+  }
+}
+
+const oc = {
+  nav: {
+    timeline: 'Jornal',
+    mentions: 'Notificacions',
+    public_tl: 'Estatuts locals',
+    twkn: 'Lo malhum conegut'
+  },
+  user_card: {
+    follows_you: 'Vos sèc !',
+    following: 'Seguit !',
+    follow: 'Seguir',
+    blocked: 'Blocat',
+    block: 'Blocar',
+    statuses: 'Estatuts',
+    mute: 'En silenci',
+    muted: 'Mes en silenci',
+    followers: 'Seguidors',
+    followees: 'Abonaments',
+    per_day: 'per jorn'
+  },
+  timeline: {
+    show_new: 'Ne veire mai',
+    error_fetching: 'Error en cercant de mesas a jorn',
+    up_to_date: 'Actualizat',
+    load_older: 'Ne veire mai',
+    conversation: 'Conversacion'
+  },
+  settings: {
+    user_settings: 'Paramètres utilizaire',
+    name_bio: 'Nom & Bio',
+    name: 'Nom',
+    bio: 'Biografia',
+    avatar: 'Avatar',
+    current_avatar: 'Vòstre avatar',
+    set_new_avatar: 'Cambiar l’avatar',
+    profile_banner: 'Bandièra del perfil',
+    current_profile_banner: 'Bandièra del perfil',
+    set_new_profile_banner: 'Cambiar de bandièra',
+    profile_background: 'Imatge de fons',
+    set_new_profile_background: 'Cambiar l’imatge de fons',
+    settings: 'Paramètres',
+    theme: 'Tèma',
+    filtering: 'Filtre',
+    filtering_explanation: 'Totes los estatuts amb aqueles mots seràn en silenci, un mot per linha.',
+    attachments: 'Pèças juntas',
+    hide_attachments_in_tl: 'Rescondre las pèças juntas',
+    hide_attachments_in_convo: 'Rescondre las pèças juntas dins las conversacions',
+    nsfw_clickthrough: 'Activar lo clic per mostrar los imatges marcats coma pels adults o sensibles',
+    autoload: 'Activar lo cargament automatic un còp arribat al cap de la pagina',
+    reply_link_preview: 'Activar l’apercebut en passar la mirga'
+  },
+  notifications: {
+    notifications: 'Notficacions',
+    read: 'Legit !',
+    followed_you: 'vos a seguit'
+  },
+  login: {
+    login: 'Connexion',
+    username: 'Nom d’utilizaire',
+    password: 'Senhal',
+    register: 'Se marcar',
+    logout: 'Desconnexion'
+  },
+  registration: {
+    registration: 'Inscripcion',
+    fullname: 'Nom complèt',
+    email: 'Adreça de corrièl',
+    bio: 'Biografia',
+    password_confirm: 'Confirmar lo senhal'
+  },
+  post_status: {
+    posting: 'Mandadís',
+    default: 'Escrivètz aquí vòstre estatut.'
+  },
+  finder: {
+    find_user: 'Cercar un utilizaire',
+    error_fetching_user: 'Error pendent la recèrca d’un utilizaire'
+  },
+  general: {
+    submit: 'Mandar'
   }
 }
 

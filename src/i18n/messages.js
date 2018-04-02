@@ -807,7 +807,7 @@ const oc = {
     settings: 'Paramètres',
     theme: 'Tèma',
     presets: 'Pre-enregistrats',
-    theme_help: 'Use hex color codes (#aabbcc) to customize your color theme.',
+    theme_help: 'Emplegatz los còdis de color hex (#aabbcc) per personalizar vòstre tèma de color.',
     background: 'Rèire plan',
     foreground: 'Endavant',
     text: 'Tèxte',

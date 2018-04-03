@@ -1257,6 +1257,7 @@ const messages = {
   ja,
   fr,
   it,
+  oc,
   pl,
   es,
   pt,

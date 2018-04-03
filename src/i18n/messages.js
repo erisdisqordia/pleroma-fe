@@ -760,7 +760,7 @@ const it = {
 }
 
 const oc = {
-    chat: {
+  chat: {
     title: 'Chat'
   },
   nav: {
@@ -857,7 +857,7 @@ const oc = {
     submit: 'Mandar',
     apply: 'Aplicar'
   },
-    user_profile: {
+  user_profile: {
     timeline_title: 'Flux a l’utilizaire'
   }
 }

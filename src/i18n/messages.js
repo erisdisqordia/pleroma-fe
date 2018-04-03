@@ -965,11 +965,12 @@ const pt = {
     blocked: 'Bloqueado!',
     block: 'Bloquear',
     statuses: 'Postagens',
-    mute: 'Mutar',
-    muted: 'Mudo',
+    mute: 'Silenciar',
+    muted: 'Silenciado',
     followers: 'Seguidores',
     followees: 'Seguindo',
-    per_day: 'por dia'
+    per_day: 'por dia',
+    remote_follow: 'Seguidor Remoto'
   },
   timeline: {
     show_new: 'Mostrar novas',
@@ -985,16 +986,16 @@ const pt = {
     bio: 'Biografia',
     avatar: 'Avatar',
     current_avatar: 'Seu avatar atual',
-    set_new_avatar: 'Mudar avatar',
+    set_new_avatar: 'Alterar avatar',
     profile_banner: 'Capa de perfil',
     current_profile_banner: 'Sua capa de perfil atual',
-    set_new_profile_banner: 'Mudar capa de perfil',
+    set_new_profile_banner: 'Alterar capa de perfil',
     profile_background: 'Plano de fundo de perfil',
-    set_new_profile_background: 'Mudar o plano de fundo de perfil',
+    set_new_profile_background: 'Alterar o plano de fundo de perfil',
     settings: 'Configurações',
     theme: 'Tema',
     presets: 'Predefinições',
-    theme_help: 'Use cores em códigos hexadecimais (#aabbcc) para personalizar seu esquema de cores.',
+    theme_help: 'Use cores em código hexadecimal (#aabbcc) para personalizar seu esquema de cores.',
     background: 'Plano de Fundo',
     foreground: 'Primeiro Plano',
     text: 'Texto',
@@ -1009,9 +1010,9 @@ const pt = {
     streaming: 'Habilitar o fluxo automático de postagens quando ao topo da página',
     reply_link_preview: 'Habilitar a pré-visualização de link de respostas ao passar o mouse.',
     follow_import: 'Importar seguidas',
-    import_followers_from_a_csv_file: 'Importe os perfis que tu segues apartir de um arquivo CSV',
-    follows_imported: 'Seguidas importadas! O processamento das mesmas pode demorar um pouco.',
-    follow_import_error: 'Erro ao importar seguidas'
+    import_followers_from_a_csv_file: 'Importe seguidores a partir de um arquivo CSV',
+    follows_imported: 'Seguidores importados! O processamento pode demorar um pouco.',
+    follow_import_error: 'Erro ao importar seguidores'
   },
   notifications: {
     notifications: 'Notificações',
@@ -1028,7 +1029,7 @@ const pt = {
   registration: {
     registration: 'Registro',
     fullname: 'Nome para exibição',
-    email: 'Correio eletônico',
+    email: 'Correio eletrônico',
     bio: 'Biografia',
     password_confirm: 'Confirmação de senha'
   },

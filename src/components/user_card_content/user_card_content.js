@@ -1,3 +1,4 @@
+import StillImage from '../still-image/still-image.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
 export default {
@@ -34,6 +35,9 @@ export default {
       const days = Math.ceil((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
       return Math.round(this.user.statuses_count / days)
     }
+  },
+  components: {
+    StillImage
   },
   methods: {
     followUser () {

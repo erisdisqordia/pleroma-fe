@@ -7,7 +7,7 @@
         </router-link>
         <div class='container'>
           <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
-            <img :src="user.profile_image_url_original">
+            <StillImage class="avatar" :src="user.profile_image_url_original"/>
           </router-link>
           <span class="glyphicon glyphicon-user"></span>
           <div class="name-and-screen-name">
@@ -135,13 +135,26 @@
     overflow: hidden;
   }
 
-  img {
+  .avatar {
     border-radius: 5px;
     flex: 1 0 100%;
     width: 56px;
     height: 56px;
     box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
     object-fit: cover;
+
+    &.animated::before {
+      display: none;
+    }
+  }
+
+  &:hover .animated.avatar {
+    canvas {
+      display: none;
+    }
+    img {
+      visibility: visible;
+    }
   }
 
 	text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);

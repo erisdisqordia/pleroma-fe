@@ -34,8 +34,8 @@
       <div class="media status container">
         <div class="media-left">
           <a :href="status.user.statusnet_profile_url">
-            <img @click.prevent="toggleUserExpanded" :class="{retweeted: retweet}" class='avatar' :src="status.user.profile_image_url_original">
-            <img v-if="retweet" class='avatar-retweeter' :src="statusoid.user.profile_image_url_original"></img>
+            <StillImage @click.native.prevent="toggleUserExpanded" :class="{retweeted: retweet}" class='avatar' :src="status.user.profile_image_url_original"/>
+            <StillImage v-if="retweet" class='avatar avatar-retweeter' :src="statusoid.user.profile_image_url_original"/>
           </a>
         </div>
         <div class="media-body">
@@ -84,7 +84,7 @@
             </div>
 
             <div class="status-preview base00-background base03-border" v-if="showPreview && preview">
-              <img class="avatar" :src="preview.user.profile_image_url_original">
+              <StillImage class="avatar" :src="preview.user.profile_image_url_original"/>
               <div class="text">
                 <h4>
                   {{ preview.user.name }}
@@ -146,6 +146,7 @@
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
     margin-top: 0.5em;
     margin-left: 1em;
+    z-index: 50;
 
     .avatar {
       flex-shrink: 0;
@@ -264,9 +265,8 @@
 
      .media-left {
         margin: 0.2em 0.3em 0 0;
-        img {
+        .avatar {
           float: right;
-          border-radius: 5px;
         }
      }
 
@@ -330,6 +330,17 @@
  .status .avatar {
    width: 48px;
    height: 48px;
+   border-radius: 5px;
+   overflow: hidden;
+
+   img {
+       width: 100%;
+       height: 100%;
+   }
+
+   &.animated::before {
+       display: none;
+   }
 
    &.retweeted {
      width: 40px;
@@ -339,7 +350,16 @@
    }
  }
 
- .status img.avatar-retweeter {
+ .status:hover .animated.avatar {
+     canvas {
+         display: none;
+     }
+     img {
+         visibility: visible;
+     }
+ }
+
+ .status .avatar-retweeter {
    width: 24px;
    height: 24px;
    position: absolute;
@@ -413,7 +433,7 @@
      }
    }
 
-   .status img.avatar-retweeter {
+   .status .avatar-retweeter {
      width: 22px;
      height: 22px;
      position: absolute;

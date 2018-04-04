@@ -5,6 +5,9 @@
         <router-link to='/user-settings' style="float: right; margin-top:16px;" v-if="!isOtherUser">
           <i class="icon-cog usersettings"></i>
         </router-link>
+        <a :href="user.statusnet_profile_url" target="_blank" style="float: right; margin-top:16px;" v-if="isOtherUser">
+          <i class="icon-binoculars"></i>
+        </a>
         <div class='container'>
           <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
             <StillImage class="avatar" :src="user.profile_image_url_original"/>

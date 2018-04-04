@@ -6,7 +6,7 @@
           <i class="icon-cog usersettings"></i>
         </router-link>
         <a :href="user.statusnet_profile_url" target="_blank" style="float: right; margin-top:16px;" v-if="isOtherUser">
-          <i class="icon-binoculars"></i>
+          <i class="icon-binoculars usersettings"></i>
         </a>
         <div class='container'>
           <router-link :to="{ name: 'user-profile', params: { id: user.id } }">

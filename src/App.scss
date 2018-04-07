@@ -132,7 +132,7 @@ input, textarea, select {
   }
 }
 
-i[class^=icon-] {
+i[class*=icon-] {
   color: $fallback--icon;
   color: var(--icon, $fallback--icon)
 }

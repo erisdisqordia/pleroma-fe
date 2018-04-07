@@ -149,7 +149,7 @@
         line-height:16px;
         resize: none;
         overflow: hidden;
-        transition: min-height 200ms;
+        transition: min-height 200ms 100ms;
         min-height: 1px;
         box-sizing: content-box;
     }

@@ -228,6 +228,12 @@ status-text-container {
         min-height: 1.4em;
         margin-bottom: 0.3em;
 
+        .links a i {
+            color: $fallback--link;
+            color: var(--link, $fallback--link);
+        }
+
+
         small {
             font-weight: lighter;
         }

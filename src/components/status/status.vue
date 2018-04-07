@@ -394,7 +394,7 @@ status-text-container {
      }
  }
 
-.status img.avatar-retweeter {
+.status .avatar-retweeter {
     width: 24px;
     height: 24px;
     position: absolute;

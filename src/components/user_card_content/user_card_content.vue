@@ -122,72 +122,7 @@
     padding: 0 16px 16px 16px;
     margin-bottom: -4em;
 
-  .container{
-    padding: 16px 10px 4px 10px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-content: flex-start;
-    justify-content: center;
-    max-height: 56px;
-    overflow: hidden;
-  }
-
-  .avatar {
-    border-radius: 5px;
-    flex: 1 0 100%;
-    width: 56px;
-    height: 56px;
-    box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
-    object-fit: cover;
-
-    &.animated::before {
-      display: none;
-    }
-  }
-
-  &:hover .animated.avatar {
-    canvas {
-      display: none;
-    }
-    img {
-      visibility: visible;
-    }
-  }
-
-	text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
-
-  .name-and-screen-name {
-    display: block;
-    margin-left: 0.6em;
-    text-align: left;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-	.user-name{
-      color: white;
-	}
-
-  .user-screen-name {
-      color: white;
-      font-weight: lighter;
-      font-size: 15px;
-      padding-right: 0.1em;
-      flex: 0 0 auto;
-  }
-
-  .user-interactions {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-
-    .usersettings {
-        color: white;
-        opacity: 0.8;
-    }
-
-    .container{
+    .container {
         padding: 16px 10px 4px 10px;
         display: flex;
         flex-wrap: wrap;
@@ -198,14 +133,26 @@
         overflow: hidden;
     }
 
-    img {
-        border-radius: $fallback--avatarRadius;
-        border-radius: var(--avatarRadius, $fallback--avatarRadius);
+    .avatar {
+        border-radius: 5px;
         flex: 1 0 100%;
         width: 56px;
         height: 56px;
         box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
         object-fit: cover;
+
+        &.animated::before {
+            display: none;
+        }
+    }
+
+    &:hover .animated.avatar {
+        canvas {
+            display: none;
+        }
+        img {
+            visibility: visible;
+        }
     }
 
     text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);

@@ -34,32 +34,31 @@
 @import '../../_variables.scss';
 
 .login-form {
-    .btn {
-        min-height: 28px;
-        width: 10em;
-    }
+  .btn {
+    min-height: 28px;
+    width: 10em;
+  }
 
-    .error {
-        border-radius: $fallback--tooltipRadius;
-        border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-        text-align: center;
-        background-color: rgba(255, 48, 16, 0.65);
-        background-color: $fallback--cRed;
-        min-height: 28px;
-        line-height: 28px;
-    }
+  .error {
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    text-align: center;
+    background-color: rgba(255, 48, 16, 0.65);
+    background-color: $fallback--cRed;
+    min-height: 28px;
+    line-height: 28px;
+  }
 
-    .register {
-        flex: 1 1;
-    }
+  .register {
+    flex: 1 1;
+  }
 
-    .login-bottom {
-        margin-top: 1.0em;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
+  .login-bottom {
+    margin-top: 1.0em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
-
 </style>

@@ -58,66 +58,66 @@
 @import '../../_variables.scss';
 
 .registration-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0.6em;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    //margin-bottom: 1em;
+  }
+
+  .terms-of-service {
+    flex: 0 1 50%;
+    margin: 0.8em;
+  }
+
+  .text-fields {
+    margin-top: 0.6em;
+    flex: 1 0;
     display: flex;
     flex-direction: column;
-    margin: 0.6em;
+  }
 
-    .container {
-        display: flex;
-        flex-direction: row;
-        //margin-bottom: 1em;
-    }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 0.3em 0.0em 0.3em;
+    line-height:24px;
+  }
 
-    .terms-of-service {
-        flex: 0 1 50%;
-        margin: 0.8em;
-    }
+  form textarea {
+    line-height:16px;
+    resize: vertical;
+  }
 
-    .text-fields {
-        margin-top: 0.6em;
-        flex: 1 0;
-        display: flex;
-        flex-direction: column;
-    }
+  .captcha {
+    max-width: 350px;
+    margin-bottom: 0.4em;
+  }
 
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        padding: 0.3em 0.0em 0.3em;
-        line-height:24px;
-    }
+  .btn {
+    //align-self: flex-start;
+    //width: 10em;
+    margin-top: 0.6em;
+    height: 28px;
+  }
 
-    form textarea {
-        line-height:16px;
-        resize: vertical;
-    }
-
-    .captcha {
-        max-width: 350px;
-        margin-bottom: 0.4em;
-    }
-
-    .btn {
-        //align-self: flex-start;
-        //width: 10em;
-        margin-top: 0.6em;
-        height: 28px;
-    }
-
-    .error {
-        border-radius: $fallback--tooltipRadius;
-        border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-        text-align: center;
-        margin: 0.5em 0.6em 0;
-        background-color: $fallback--cRed;
-        background-color: var(--cRed, $fallback--cRed);
-        min-height: 28px;
-        line-height: 28px;
-    }
+  .error {
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    text-align: center;
+    margin: 0.5em 0.6em 0;
+    background-color: $fallback--cRed;
+    background-color: var(--cRed, $fallback--cRed);
+    min-height: 28px;
+    line-height: 28px;
+  }
 }
 
 @media all and (max-width: 959px) {
-    .registration-form .container {
+  .registration-form .container {
     flex-direction: column-reverse;
   }
 }

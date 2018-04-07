@@ -19,22 +19,22 @@
 @import '../../_variables.scss';
 
 .user-finder-container {
-    height: 21px;
-    max-width: 100%;
+  height: 21px;
+  max-width: 100%;
 }
 
 .user-finder-input {
-    max-width: 80%;
-    padding: 0.1em 0.2em 0.2em 0.2em;
+  max-width: 80%;
+  padding: 0.1em 0.2em 0.2em 0.2em;
 }
 
 .finder-error {
-    background-color: rgba(255, 48, 16, 0.65);
-    margin: 0.35em;
-    border-radius: $fallback--tooltipRadius;
-    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-    padding: 0.25em;
-    color: $fallback--faint;
-    color: var(--faint, $fallback--faint);
+  background-color: rgba(255, 48, 16, 0.65);
+  margin: 0.35em;
+  border-radius: $fallback--tooltipRadius;
+  border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+  padding: 0.25em;
+  color: $fallback--faint;
+  color: var(--faint, $fallback--faint);
 }
 </style>

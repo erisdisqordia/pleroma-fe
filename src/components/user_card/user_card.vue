@@ -24,56 +24,56 @@
 @import '../../_variables.scss';
 
 .name-and-screen-name {
-    margin-left: 0.7em;
-    margin-top:0.0em;
-    margin-right: 2em;
-    text-align: left;
-    width: 100%;
+  margin-left: 0.7em;
+  margin-top:0.0em;
+  margin-right: 2em;
+  text-align: left;
+  width: 100%;
 }
 
 .follows-you {
-    margin-left: 2em;
-    float: right;
+  margin-left: 2em;
+  float: right;
 }
 
 .card {
-    display: flex;
-    flex: 1 0;
-    padding-top: 0.6em;
-    padding-right: 1em;
-    padding-bottom: 0.6em;
-    padding-left: 1em;
-    border-bottom: 1px solid;
-    margin: 0;
-    border-bottom-color: $fallback--border;
-		border-bottom-color: var(--border, $fallback--border);
+  display: flex;
+  flex: 1 0;
+  padding-top: 0.6em;
+  padding-right: 1em;
+  padding-bottom: 0.6em;
+  padding-left: 1em;
+  border-bottom: 1px solid;
+  margin: 0;
+  border-bottom-color: $fallback--border;
+	border-bottom-color: var(--border, $fallback--border);
 
-    .avatar {
-        margin-top: 0.2em;
-        width:32px;
-        height: 32px;
-        border-radius: $fallback--avatarAltRadius;
-        border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
-    }
+  .avatar {
+    margin-top: 0.2em;
+    width:32px;
+    height: 32px;
+    border-radius: $fallback--avatarAltRadius;
+    border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+  }
 }
 
 .usercard {
-    width: fill-available;
-    margin: 0.2em 0 0.7em 0;
-    border-radius: $fallback--panelRadius;
-    border-radius: var(--panelRadius, $fallback--panelRadius);
-    border-style: solid;
-    border-color: $fallback--border;
-		border-color: var(--border, $fallback--border);
-    border-width: 1px;
-    overflow: hidden;
+  width: fill-available;
+  margin: 0.2em 0 0.7em 0;
+  border-radius: $fallback--panelRadius;
+  border-radius: var(--panelRadius, $fallback--panelRadius);
+  border-style: solid;
+  border-color: $fallback--border;
+	border-color: var(--border, $fallback--border);
+  border-width: 1px;
+  overflow: hidden;
 
-    .panel-heading {
-        background: transparent;
-    }
+  .panel-heading {
+    background: transparent;
+  }
 
-    p {
-        margin-bottom: 0;
-    }
+  p {
+    margin-bottom: 0;
+  }
 }
 </style>

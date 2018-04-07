@@ -15,18 +15,17 @@
 @import '../../_variables.scss';
 
 .fav-active {
-    cursor: pointer;
-    animation-duration: 0.6s;
+  cursor: pointer;
+  animation-duration: 0.6s;
 
-    &:hover {
-        color: $fallback--cOrange;
-        color: var(--cOrange, $fallback--cOrange);
-    }
+  &:hover {
+    color: $fallback--cOrange;
+    color: var(--cOrange, $fallback--cOrange);
+  }
 }
 
 .favorite-button.icon-star {
-    color: $fallback--cOrange;
-    color: var(--cOrange, $fallback--cOrange);
+  color: $fallback--cOrange;
+  color: var(--cOrange, $fallback--cOrange);
 }
-
 </style>

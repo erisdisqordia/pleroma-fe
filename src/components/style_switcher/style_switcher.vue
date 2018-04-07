@@ -71,61 +71,61 @@
 <style lang="scss">
 @import '../../_variables.scss';
 .style-switcher {
-    margin-right: 1em;
+  margin-right: 1em;
 }
 
 .color-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .color-item {
-    min-width: 20em;
-    display:flex;
-    flex: 1 1 0;
-    align-items: baseline;
-    margin: 5px 6px 5px 0;
+  min-width: 20em;
+  display:flex;
+  flex: 1 1 0;
+  align-items: baseline;
+  margin: 5px 6px 5px 0;
 
-    label {
-        color: var(--faint, $fallback--faint);
-    }
+  label {
+    color: var(--faint, $fallback--faint);
+  }
 }
 
 .theme-color-cl {
-    border: 0;
-    box-shadow: none;
-    background: transparent;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
 }
 
 .theme-color-cl,
 .theme-color-in {
-    margin-left: 4px;
+  margin-left: 4px;
 }
 
 .theme-color-in {
-    padding: 5px;
-    min-width: 4em;
-    max-width: 7em;
-    flex: 1;
+  padding: 5px;
+  min-width: 4em;
+  max-width: 7em;
+  flex: 1;
 }
 .theme-color-lb {
-    flex: 2;
-    min-width: 7em;
-    max-width: 10em;
+  flex: 2;
+  min-width: 7em;
+  max-width: 10em;
 }
 
 .theme-color-cl {
-    padding: 1px;
-    max-width: 8em;
-    align-self: stretch;
-    height: 100%;
-    flex: 0;
-    min-width: 2em;
-    cursor: pointer;
- }
+  padding: 1px;
+  max-width: 8em;
+  align-self: stretch;
+  height: 100%;
+  flex: 0;
+  min-width: 2em;
+  cursor: pointer;
+}
 
- .theme-preview-content {
-   padding: 20px;
- }
+.theme-preview-content {
+  padding: 20px;
+}
 </style>

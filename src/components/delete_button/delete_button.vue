@@ -8,14 +8,14 @@
 
 <script src="./delete_button.js" ></script>
 
-<style lang='scss'>
-  @import '../../_variables.scss';
+<style lang="scss">
+@import '../../_variables.scss';
 
-  .icon-cancel,.delete-status {
-    cursor: pointer;
-    &:hover {
-      color: var(--cRed, $fallback--cRed);
-      color: $fallback--cRed;
-    }
+.icon-cancel,.delete-status {
+  cursor: pointer;
+  &:hover {
+    color: var(--cRed, $fallback--cRed);
+    color: $fallback--cRed;
   }
+}
 </style>

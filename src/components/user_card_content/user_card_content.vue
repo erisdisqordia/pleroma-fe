@@ -99,159 +99,159 @@
 @import '../../_variables.scss';
 
 .profile-panel-background {
-    background-size: cover;
-    border-radius: $fallback--panelRadius;
-    border-radius: var(--panelRadius, $fallback--panelRadius);
+  background-size: cover;
+  border-radius: $fallback--panelRadius;
+  border-radius: var(--panelRadius, $fallback--panelRadius);
 
-    .panel-heading {
-        padding: 0.6em 0em;
-        text-align: center;
-    }
+  .panel-heading {
+    padding: 0.6em 0em;
+    text-align: center;
+  }
 }
 
 .profile-panel-body {
-    top: -0em;
-    padding-top: 4em;
-    word-wrap: break-word;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%)
+  top: -0em;
+  padding-top: 4em;
+  word-wrap: break-word;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%)
 }
 
 .user-info {
+  color: white;
+  padding: 0 16px 16px 16px;
+  margin-bottom: -4em;
+
+  .container {
+    padding: 16px 10px 4px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+    max-height: 56px;
+    overflow: hidden;
+  }
+
+  .avatar {
+    border-radius: 5px;
+    flex: 1 0 100%;
+    width: 56px;
+    height: 56px;
+    box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
+    object-fit: cover;
+
+    &.animated::before {
+      display: none;
+    }
+  }
+
+  &:hover .animated.avatar {
+    canvas {
+      display: none;
+    }
+    img {
+      visibility: visible;
+    }
+  }
+
+  text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
+
+  .name-and-screen-name {
+    display: block;
+    margin-left: 0.6em;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .user-name{
     color: white;
-    padding: 0 16px 16px 16px;
-    margin-bottom: -4em;
+  }
 
-    .container {
-        padding: 16px 10px 4px 10px;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        align-content: flex-start;
-        justify-content: center;
-        max-height: 56px;
-        overflow: hidden;
+  .user-screen-name {
+    color: white;
+    font-weight: lighter;
+    font-size: 15px;
+    padding-right: 0.1em;
+    flex: 0 0 auto;
+  }
+
+  .user-interactions {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    div {
+      flex: 1;
+    }
+    margin-top: 0.7em;
+    margin-bottom: -1.0em;
+
+    .following {
+      color: white;
+      font-size: 14px;
+      flex: 0 0 100%;
+      margin: -0.7em 0.0em 0.3em 0.0em;
+      padding-left: 16px;
+      text-align: left;
     }
 
-    .avatar {
-        border-radius: 5px;
-        flex: 1 0 100%;
-        width: 56px;
-        height: 56px;
-        box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
-        object-fit: cover;
-
-        &.animated::before {
-            display: none;
-        }
+    .mute {
+      max-width: 220px;
+      min-height: 28px;
     }
 
-    &:hover .animated.avatar {
-        canvas {
-            display: none;
-        }
-        img {
-            visibility: visible;
-        }
+    .remote-follow {
+      max-width: 220px;
+      min-height: 28px;
     }
 
-    text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
-
-    .name-and-screen-name {
-        display: block;
-        margin-left: 0.6em;
-        text-align: left;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    .follow {
+      max-width: 220px;
+      min-height: 28px;
     }
 
-    .user-name{
-        color: white;
+    button {
+      width: 92%;
+      height: 100%;
     }
 
-    .user-screen-name {
-        color: white;
-        font-weight: lighter;
-        font-size: 15px;
-        padding-right: 0.1em;
-        flex: 0 0 auto;
+    .remote-button {
+      height: 28px !important;
+      width: 92%;
     }
 
-    .user-interactions {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-
-        div {
-            flex: 1;
-        }
-        margin-top: 0.7em;
-        margin-bottom: -1.0em;
-
-        .following {
-            color: white;
-            font-size: 14px;
-            flex: 0 0 100%;
-            margin: -0.7em 0.0em 0.3em 0.0em;
-            padding-left: 16px;
-            text-align: left;
-        }
-
-        .mute {
-            max-width: 220px;
-            min-height: 28px;
-        }
-
-        .remote-follow {
-            max-width: 220px;
-            min-height: 28px;
-        }
-
-        .follow {
-            max-width: 220px;
-            min-height: 28px;
-        }
-
-        button {
-            width: 92%;
-            height: 100%;
-        }
-
-        .remote-button {
-            height: 28px !important;
-            width: 92%;
-        }
-
-        .pressed {
-            border-bottom-color: rgba(255, 255, 255, 0.2);
-            border-top-color: rgba(0, 0, 0, 0.2);
-        }
+    .pressed {
+      border-bottom-color: rgba(255, 255, 255, 0.2);
+      border-top-color: rgba(0, 0, 0, 0.2);
     }
+  }
 }
 
 .user-counts {
-    display: flex;
-    line-height:16px;
-    padding: 1em 1.5em 0em 1em;
-    text-align: center;
+  display: flex;
+  line-height:16px;
+  padding: 1em 1.5em 0em 1em;
+  text-align: center;
 }
 
 .user-count {
-    flex: 1;
+  flex: 1;
 
-    h5 {
-        color: white;
-        font-size:1em;
-        font-weight: bolder;
-        margin: 0 0 0.25em;
-    }
-    a {
-        text-decoration: none;
-    }
+  h5 {
+    color: white;
+    font-size:1em;
+    font-weight: bolder;
+    margin: 0 0 0.25em;
+  }
+  a {
+    text-decoration: none;
+  }
 }
 
 .dailyAvg {
-    font-size: 0.8em;
-    opacity: 0.5;
+  font-size: 0.8em;
+  opacity: 0.5;
 }
 </style>

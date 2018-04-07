@@ -131,351 +131,351 @@
 @import '../../_variables.scss';
 
 status-text-container {
-    display: block;
+  display: block;
 }
 
 .status-preview {
-    position: absolute;
-    max-width: 34em;
-    padding: 0.5em;
-    display: flex;
-    background-color: $fallback--bg;
-    background-color: var(--bg, $fallback--bg);
-    border-color: $fallback--border;
-    border-color: var(--border, $fallback--border);
-    border-style: solid;
-    border-width: 1px;
-    border-radius: $fallback--tooltipRadius;
-    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-    margin-top: 0.5em;
-    margin-left: 1em;
-    z-index: 50;
+  position: absolute;
+  max-width: 34em;
+  padding: 0.5em;
+  display: flex;
+  background-color: $fallback--bg;
+  background-color: var(--bg, $fallback--bg);
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: $fallback--tooltipRadius;
+  border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  margin-top: 0.5em;
+  margin-left: 1em;
+  z-index: 50;
 
-    .avatar {
-        flex-shrink: 0;
-        width: 32px;
-        height: 32px;
-        border-radius: $fallback--avatarAltRadius;
-        border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
-    }
+  .avatar {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: $fallback--avatarAltRadius;
+    border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+  }
 
-    .text {
-        h4 {
-            margin-bottom: 0.4em;
-            small {
-                font-weight: lighter;
-            }
-        }
-        padding: 0 0.5em 0.5em 0.5em;
+  .text {
+    h4 {
+      margin-bottom: 0.4em;
+      small {
+        font-weight: lighter;
+      }
     }
+    padding: 0 0.5em 0.5em 0.5em;
+  }
 }
 
 .status-preview-loading {
-    display: block;
-    font-size: 2em;
-    min-width: 8em;
-    text-align: center;
+  display: block;
+  font-size: 2em;
+  min-width: 8em;
+  text-align: center;
 }
 
 .status-el {
-    hyphens: auto;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    border-left-width: 0px;
-    line-height: 18px;
-    background-color: $fallback--bg;
-    background-color: var(--bg, $fallback--bg);
+  hyphens: auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  border-left-width: 0px;
+  line-height: 18px;
+  background-color: $fallback--bg;
+  background-color: var(--bg, $fallback--bg);
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
+
+  &_focused {
+    background-color: $fallback--lightBg;
+    background-color: var(--lightBg, $fallback--lightBg);
+  }
+
+  .usercard {
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
+  }
 
-    &_focused {
-        background-color: $fallback--lightBg;
-        background-color: var(--lightBg, $fallback--lightBg);
+  .timeline & {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+
+  .notify {
+    .avatar {
+      border-width: 3px;
+      border-style: solid;
+    }
+  }
+
+  .media-body {
+    flex: 1;
+    padding-left: 0.5em;
+  }
+
+
+  .user-content {
+    min-height: 52px;
+    padding-top: 1px;
+  }
+
+  .media-heading {
+    display: flex;
+    min-height: 1.4em;
+    margin-bottom: 0.3em;
+
+    .links a i {
+      color: $fallback--link;
+      color: var(--link, $fallback--link);
     }
 
-    .usercard {
-        border-color: $fallback--border;
-        border-color: var(--border, $fallback--border);
+
+    small {
+      font-weight: lighter;
     }
 
-    .timeline & {
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
+    h4 {
+      margin-right: 0.4em;
     }
 
-    .notify {
-        .avatar {
-            border-width: 3px;
-            border-style: solid;
-        }
+    .name-and-links {
+      flex: 1 0;
+      display: flex;
+      flex-wrap: wrap;
     }
 
-    .media-body {
-        flex: 1;
-        padding-left: 0.5em;
+    .replies {
+      flex-basis: 100%;
+    }
+  }
+
+  .source_url {
+
+  }
+
+  .expand {
+    margin-right: -0.3em;
+  }
+
+  a {
+    display: inline-block;
+    word-break: break-all;
+  }
+
+  .status-content {
+    margin: 3px 15px 4px 0;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    img, video {
+      max-width: 100%;
+      max-height: 400px;
+      vertical-align: middle;
+      object-fit: contain;
     }
 
-
-    .user-content {
-        min-height: 52px;
-        padding-top: 1px;
+    blockquote {
+      margin: 0.2em 0 0.2em 2em;
+      font-style: italic;
     }
+  }
 
-    .media-heading {
-        display: flex;
-        min-height: 1.4em;
-        margin-bottom: 0.3em;
+  p {
+    margin: 0;
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+  }
 
-        .links a i {
-            color: $fallback--link;
-            color: var(--link, $fallback--link);
-        }
-
-
-        small {
-            font-weight: lighter;
-        }
-
-        h4 {
-            margin-right: 0.4em;
-        }
-
-        .name-and-links {
-            flex: 1 0;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .replies {
-            flex-basis: 100%;
-        }
+  .media-left {
+    margin: 0.2em 0.3em 0 0;
+    .avatar {
+      float: right;
+      border-radius: $fallback--avatarRadius;
+      border-radius: var(--avatarRadius, $fallback--avatarRadius);
     }
+  }
 
-    .source_url {
-
-    }
-
-    .expand {
-        margin-right: -0.3em;
-    }
-
-    a {
-        display: inline-block;
-        word-break: break-all;
-    }
-
-    .status-content {
-        margin: 3px 15px 4px 0;
-        max-height: 400px;
-        overflow-y: auto;
-        overflow-x: hidden;
-
-        img, video {
-            max-width: 100%;
-            max-height: 400px;
-            vertical-align: middle;
-            object-fit: contain;
-        }
-
-        blockquote {
-            margin: 0.2em 0 0.2em 2em;
-            font-style: italic;
-        }
-    }
-
-    p {
-        margin: 0;
-        margin-top: 0.2em;
-        margin-bottom: 0.5em;
-    }
+  .retweet-info {
+    padding: 0.7em 0 0 0.6em;
 
     .media-left {
-        margin: 0.2em 0.3em 0 0;
-        .avatar {
-            float: right;
-            border-radius: $fallback--avatarRadius;
-            border-radius: var(--avatarRadius, $fallback--avatarRadius);
-        }
+      display: flex;
+
+      i {
+        align-self: center;
+        text-align: right;
+        flex: 1;
+        padding-right: 0.3em;
+      }
     }
-
-    .retweet-info {
-        padding: 0.7em 0 0 0.6em;
-
-        .media-left {
-            display: flex;
-
-            i {
-                align-self: center;
-                text-align: right;
-                flex: 1;
-                padding-right: 0.3em;
-            }
-        }
-    }
+  }
 
 
 }
 
 .status-fadein {
-    animation-duration: 0.5s;
-    animation-name: fadein;
+  animation-duration: 0.5s;
+  animation-name: fadein;
 }
 
 @keyframes fadein {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 .greentext {
-    color: green;
+  color: green;
 }
 
 .status-conversation {
-    border-left-style: solid;
+  border-left-style: solid;
 }
 
 .status-actions {
-    padding-top: 0.15em;
-    width: 100%;
-    display: flex;
+  padding-top: 0.15em;
+  width: 100%;
+  display: flex;
 
-    div, favorite-button {
-        max-width: 6em;
-        flex: 1;
-    }
+  div, favorite-button {
+    max-width: 6em;
+    flex: 1;
+  }
 }
 
 .icon-reply:hover {
-    color: $fallback--cBlue;
-    color: var(--cBlue, $fallback--cBlue);
+  color: $fallback--cBlue;
+  color: var(--cBlue, $fallback--cBlue);
 }
 
 .icon-reply.icon-reply-active {
-    color: $fallback--cBlue;
-    color: var(--cBlue, $fallback--cBlue);
+  color: $fallback--cBlue;
+  color: var(--cBlue, $fallback--cBlue);
 }
 
- .status .avatar {
-   width: 48px;
-   height: 48px;
-   border-radius: 5px;
-   overflow: hidden;
+.status .avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 5px;
+  overflow: hidden;
 
-   img {
-       width: 100%;
-       height: 100%;
-   }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 
-   &.animated::before {
-       display: none;
-   }
+  &.animated::before {
+    display: none;
+  }
 
-    &.retweeted {
-        width: 40px;
-        height: 40px;
-        margin-right: 8px;
-        margin-bottom: 8px;
-    }
+  &.retweeted {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
 }
 
- .status:hover .animated.avatar {
-     canvas {
-         display: none;
-     }
-     img {
-         visibility: visible;
-     }
- }
+.status:hover .animated.avatar {
+  canvas {
+    display: none;
+  }
+  img {
+    visibility: visible;
+  }
+}
 
 .status .avatar-retweeter {
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    margin-left: 24px;
-    margin-top: 24px;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  margin-left: 24px;
+  margin-top: 24px;
 }
 
 .status.compact .avatar {
-    width: 32px;
+  width: 32px;
 }
 
 .status {
-    padding: 0.4em 0.7em 0.45em 0.7em;
-    border-left: 4px $fallback--cRed;
-    border-left: 4px var(--cRed, $fallback--cRed);
-    border-left-style: inherit;
+  padding: 0.4em 0.7em 0.45em 0.7em;
+  border-left: 4px $fallback--cRed;
+  border-left: 4px var(--cRed, $fallback--cRed);
+  border-left-style: inherit;
 }
 
 .status-conversation:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .timeline .panel.timeline {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .muted {
-    padding: 0.1em 0.4em 0.1em 0.8em;
-    button {
-        margin-left: auto;
-    }
+  padding: 0.1em 0.4em 0.1em 0.8em;
+  button {
+    margin-left: auto;
+  }
 
-    .muteWords {
-        margin-left: 10px;
-    }
+  .muteWords {
+    margin-left: 10px;
+  }
 }
 
 a.unmute {
-    display: block;
-    margin-left: auto;
+  display: block;
+  margin-left: auto;
 }
 
 .reply-left {
-    flex: 0;
-    min-width: 48px;
+  flex: 0;
+  min-width: 48px;
 }
 
 .reply-body {
-    flex: 1;
+  flex: 1;
 }
 
 @media all and (max-width: 960px) {
-    .status-el {
-        .name-and-links {
-            margin-left: -0.25em;
-        }
+  .status-el {
+    .name-and-links {
+      margin-left: -0.25em;
     }
+  }
 
-    .status {
-        max-width: 100%;
+  .status {
+    max-width: 100%;
+  }
+
+  .status .avatar {
+    width: 40px;
+    height: 40px;
+
+    &.retweeted {
+      width: 34px;
+      height: 34px;
+      margin-right: 8px;
+      margin-bottom: 8px;
     }
+  }
 
-    .status .avatar {
-        width: 40px;
-        height: 40px;
-
-        &.retweeted {
-            width: 34px;
-            height: 34px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-    }
-
-   .status .avatar-retweeter {
-     width: 22px;
-     height: 22px;
-     position: absolute;
-     margin-left: 18px;
-     margin-top: 18px;
-   }
- }
+  .status .avatar-retweeter {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    margin-left: 18px;
+    margin-top: 18px;
+  }
+}
 
 </style>

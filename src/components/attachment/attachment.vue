@@ -33,113 +33,113 @@
 @import '../../_variables.scss';
 
 .attachments {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -0.7em;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -0.7em;
 
-    .attachment.media-upload-container {
-        flex: 0 0 auto;
-        max-height: 300px;
-        max-width: 100%;
+  .attachment.media-upload-container {
+    flex: 0 0 auto;
+    max-height: 300px;
+    max-width: 100%;
+  }
+
+  .attachment {
+    flex: 1 0 30%;
+    margin: 0.5em 0.7em 0.6em 0.0em;
+    align-self: flex-start;
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: $fallback--attachmentRadius;
+    border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
+    overflow: hidden;
+
+    // fixes small gap below video
+    &.video {
+      line-height: 0;
     }
 
-    .attachment {
-        flex: 1 0 30%;
-        margin: 0.5em 0.7em 0.6em 0.0em;
-        align-self: flex-start;
-        border-color: $fallback--border;
-        border-color: var(--border, $fallback--border);
-
-        border-style: solid;
-        border-width: 1px;
-        border-radius: $fallback--attachmentRadius;
-        border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
-        overflow: hidden;
-
-        // fixes small gap below video
-        &.video {
-            line-height: 0;
-        }
-
-        &.html {
-            flex-basis: 90%;
-            width: 100%;
-            display: flex;
-        }
-
-        &.loading {
-            cursor: progress;
-        }
-
-        .hider {
-            position: absolute;
-            margin: 10px;
-            padding: 5px;
-            background: rgba(230,230,230,0.6);
-            font-weight: bold;
-            z-index: 4;
-        }
-
-        video {
-            max-height: 500px;
-            height: 100%;
-            width: 100%;
-            z-index: 0;
-        }
-
-        audio {
-            width: 100%;
-        }
-
-        img.media-upload {
-            margin-bottom: -2px;
-            max-height: 300px;
-            max-width: 100%;
-        }
-
-        .oembed {
-            width: 100%;
-            margin-right: 15px;
-            display: flex;
-
-            img {
-                width: 100%;
-            }
-
-            .image {
-                flex: 1;
-                img {
-                    border: 0px;
-                    border-radius: $fallback--attachmentRadius;
-                    border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-
-            .text {
-                flex: 2;
-                margin: 8px;
-                word-break: break-all;
-                h1 {
-                    font-size: 14px;
-                    margin: 0px;
-                }
-            }
-        }
-
-        a.image-attachment {
-            display: flex;
-            flex: 1;
-
-            img {
-                object-fit: contain;
-                width: 100%;
-                height: 100%; /* If this isn't here, chrome will stretch the images */
-                max-height: 500px;
-                image-orientation: from-image;
-            }
-        }
+    &.html {
+      flex-basis: 90%;
+      width: 100%;
+      display: flex;
     }
- }
+
+    &.loading {
+      cursor: progress;
+    }
+
+    .hider {
+      position: absolute;
+      margin: 10px;
+      padding: 5px;
+      background: rgba(230,230,230,0.6);
+      font-weight: bold;
+      z-index: 4;
+    }
+
+    video {
+      max-height: 500px;
+      height: 100%;
+      width: 100%;
+      z-index: 0;
+    }
+
+    audio {
+      width: 100%;
+    }
+
+    img.media-upload {
+      margin-bottom: -2px;
+      max-height: 300px;
+      max-width: 100%;
+    }
+
+    .oembed {
+      width: 100%;
+      margin-right: 15px;
+      display: flex;
+
+      img {
+        width: 100%;
+      }
+
+      .image {
+        flex: 1;
+        img {
+          border: 0px;
+          border-radius: $fallback--attachmentRadius;
+          border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .text {
+        flex: 2;
+        margin: 8px;
+        word-break: break-all;
+        h1 {
+          font-size: 14px;
+          margin: 0px;
+        }
+      }
+    }
+
+    a.image-attachment {
+      display: flex;
+      flex: 1;
+
+      img {
+        object-fit: contain;
+        width: 100%;
+        height: 100%; /* If this isn't here, chrome will stretch the images */
+        max-height: 500px;
+        image-orientation: from-image;
+      }
+    }
+  }
+}
 </style>

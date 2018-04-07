@@ -12,12 +12,11 @@
 <style lang="scss">
 
 .user-profile {
-    flex: 2;
-    flex-basis: 500px;
-    padding-bottom: 10px;
-    .panel-heading {
-        background: transparent;
-    }
+  flex: 2;
+  flex-basis: 500px;
+  padding-bottom: 10px;
+  .panel-heading {
+    background: transparent;
+  }
 }
-
 </style>

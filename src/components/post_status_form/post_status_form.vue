@@ -53,163 +53,162 @@
 @import '../../_variables.scss';
 
 .tribute-container {
-    ul {
-        padding: 0px;
-        li {
-            display: flex;
-            align-items: center;
-        }
+  ul {
+    padding: 0px;
+    li {
+      display: flex;
+      align-items: center;
     }
-    img {
-        padding: 3px;
-        width: 16px;
-        height: 16px;
-        border-radius: $fallback--avatarAltRadius;
-        border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
-    }
+  }
+  img {
+    padding: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: $fallback--avatarAltRadius;
+    border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+  }
 }
 
 .post-status-form, .login {
-    .form-bottom {
-        display: flex;
-        padding: 0.5em;
-        height: 32px;
+  .form-bottom {
+    display: flex;
+    padding: 0.5em;
+    height: 32px;
 
-        button {
-            width: 10em;
-        }
-
-        p {
-            margin: 0.35em;
-            padding: 0.35em;
-            display: flex;
-        }
+    button {
+      width: 10em;
     }
 
-    .error {
-        border-radius: $fallback--tooltipRadius;
-        border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-        text-align: center;
-        background-color: rgba(255, 48, 16, 0.65);
-        background-color: $fallback--cRed;
-        background-color: var(--cRed, $fallback--cRed);
-        padding: 0.25em;
-        margin: 0.35em;
-        display: flex;
+    p {
+      margin: 0.35em;
+      padding: 0.35em;
+      display: flex;
+    }
+  }
+
+  .error {
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    text-align: center;
+    background-color: rgba(255, 48, 16, 0.65);
+    background-color: $fallback--cRed;
+    background-color: var(--cRed, $fallback--cRed);
+    padding: 0.25em;
+    margin: 0.35em;
+    display: flex;
+  }
+
+  .attachments {
+    padding: 0 0.5em;
+
+    .attachment {
+      position: relative;
+      border: $fallback--border;
+      border: var(--border, $fallback--border);
+      margin: 0.5em 0.8em 0.2em 0;
     }
 
-    .attachments {
-        padding: 0 0.5em;
+    i {
+      position: absolute;
+      margin: 10px;
+      padding: 5px;
+      background: rgba(230,230,230,0.6);
+      border-radius: $fallback--attachmentRadius;
+      border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
+      font-weight: bold;
+    }
+  }
 
-        .attachment {
-            position: relative;
-            border: $fallback--border;
-            border: var(--border, $fallback--border);
-            margin: 0.5em 0.8em 0.2em 0;
-        }
 
-        i {
-            position: absolute;
-            margin: 10px;
-            padding: 5px;
-            background: rgba(230,230,230,0.6);
-            border-radius: $fallback--attachmentRadius;
-            border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
-            font-weight: bold;
-        }
+  .btn {
+    cursor: pointer;
+  }
+
+  .btn[disabled] {
+    cursor: not-allowed;
+  }
+
+  .icon-cancel {
+    cursor: pointer;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 0.6em;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 0.3em 0.5em 0.6em;
+    line-height:24px;
+  }
+
+  form textarea {
+    line-height:16px;
+    resize: none;
+    overflow: hidden;
+    transition: min-height 200ms 100ms;
+    min-height: 1px;
+    box-sizing: content-box;
+  }
+
+  form textarea:focus {
+    min-height: 48px;
+  }
+
+  .btn {
+    cursor: pointer;
+  }
+
+  .btn[disabled] {
+    cursor: not-allowed;
+  }
+
+  .icon-cancel {
+    cursor: pointer;
+    z-index: 4;
+  }
+
+  .autocomplete-panel {
+    margin: 0 0.5em 0 0.5em;
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    position: absolute;
+    z-index: 1;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+    min-width: 75%;
+    background: $fallback--btn;
+    background: var(--btn, $fallback--btn);
+    color: $fallback--lightFg;
+    color: var(--lightFg, $fallback--lightFg);
+  }
+
+  .autocomplete {
+    cursor: pointer;
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    display: flex;
+
+    img {
+      width: 24px;
+      height: 24px;
+      border-radius: $fallback--avatarRadius;
+      border-radius: var(--avatarRadius, $fallback--avatarRadius);
+      object-fit: contain;
     }
 
-
-    .btn {
-        cursor: pointer;
+    span {
+      line-height: 24px;
+      margin: 0 0.1em 0 0.2em;
     }
 
-    .btn[disabled] {
-        cursor: not-allowed;
+    small {
+      margin-left: .5em;
+      color: $fallback--faint;
+      color: var(--faint, $fallback--faint);
     }
-
-    .icon-cancel {
-        cursor: pointer;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        padding: 0.6em;
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        padding: 0.3em 0.5em 0.6em;
-        line-height:24px;
-    }
-
-    form textarea {
-        line-height:16px;
-        resize: none;
-        overflow: hidden;
-        transition: min-height 200ms 100ms;
-        min-height: 1px;
-        box-sizing: content-box;
-    }
-
-    form textarea:focus {
-        min-height: 48px;
-    }
-
-    .btn {
-        cursor: pointer;
-    }
-
-    .btn[disabled] {
-        cursor: not-allowed;
-    }
-
-    .icon-cancel {
-        cursor: pointer;
-        z-index: 4;
-    }
-
-    .autocomplete-panel {
-        margin: 0 0.5em 0 0.5em;
-        border-radius: $fallback--tooltipRadius;
-        border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-        position: absolute;
-        z-index: 1;
-        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-        min-width: 75%;
-        background: $fallback--btn;
-        background: var(--btn, $fallback--btn);
-        color: $fallback--lightFg;
-        color: var(--lightFg, $fallback--lightFg);
-    }
-
-    .autocomplete {
-        cursor: pointer;
-        padding: 0.2em 0.4em 0.2em 0.4em;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-        display: flex;
-
-        img {
-            width: 24px;
-            height: 24px;
-            border-radius: $fallback--avatarRadius;
-            border-radius: var(--avatarRadius, $fallback--avatarRadius);
-            object-fit: contain;
-        }
-
-        span {
-            line-height: 24px;
-            margin: 0 0.1em 0 0.2em;
-        }
-
-        small {
-            margin-left: .5em;
-            color: $fallback--faint;
-            color: var(--faint, $fallback--faint);
-        }
-    }
+  }
 }
-
 </style>

@@ -75,21 +75,21 @@
 
 <style lang="scss">
 .profile-edit {
-    .bio {
-        margin: 0;
-    }
+  .bio {
+    margin: 0;
+  }
 
-    input[type=file] {
-        padding: 5px;
-    }
+  input[type=file] {
+    padding: 5px;
+  }
 
-    .banner {
-        max-width: 400px;
-    }
+  .banner {
+    max-width: 400px;
+  }
 
-    .uploading {
-        font-size: 1.5em;
-        margin: 0.25em;
-    }
+  .uploading {
+    font-size: 1.5em;
+    margin: 0.25em;
+  }
 }
 </style>

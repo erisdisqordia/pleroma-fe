@@ -55,58 +55,58 @@
 @import '../../_variables.scss';
 
 .timeline {
-    .timeline-heading {
-        position: relative;
-        display: flex;
-    }
+  .timeline-heading {
+    position: relative;
+    display: flex;
+  }
 
-    .title {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 70%;
-    }
+  .title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%;
+  }
 
-    .loadmore-button {
-        position: absolute;
-        right: 0.6em;
-        font-size: 14px;
+  .loadmore-button {
+    position: absolute;
+    right: 0.6em;
+    font-size: 14px;
 
-        min-width: 6em;
-        height: 1.8em;
-        line-height: 100%;
-    }
+    min-width: 6em;
+    height: 1.8em;
+    line-height: 100%;
+  }
 
-    .loadmore-text {
-        position: absolute;
-        right: 0.6em;
-        font-size: 14px;
-        min-width: 6em;
-        background-color: transparent;
-        color: $fallback--faint;
-        color: var(--faint, $fallback--faint);
-        font-family: sans-serif;
-        text-align: center;
-        padding: 0 0.5em 0 0.5em;
-        opacity: 0.8;
-    }
+  .loadmore-text {
+    position: absolute;
+    right: 0.6em;
+    font-size: 14px;
+    min-width: 6em;
+    background-color: transparent;
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+    font-family: sans-serif;
+    text-align: center;
+    padding: 0 0.5em 0 0.5em;
+    opacity: 0.8;
+  }
 
-    .error {
-        color: $fallback--lightFg;
-        color: var(--lightFg, $fallback--lightFg);
-        background-color: $fallback--cRed;
-        background-color: var(--cRed, $fallback--cRed);
-    }
+  .error {
+    color: $fallback--lightFg;
+    color: var(--lightFg, $fallback--lightFg);
+    background-color: $fallback--cRed;
+    background-color: var(--cRed, $fallback--cRed);
+  }
 }
 
 .new-status-notification {
-    position:relative;
-    margin-top: -1px;
-    font-size: 1.1em;
-    border-width: 1px 0 0 0;
-    border-style: solid;
-    border-color: var(--border, $fallback--border);
-    padding: 10px;
-    z-index: 1;
-  }
+  position:relative;
+  margin-top: -1px;
+  font-size: 1.1em;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-color: var(--border, $fallback--border);
+  padding: 10px;
+  z-index: 1;
+}
 </style>

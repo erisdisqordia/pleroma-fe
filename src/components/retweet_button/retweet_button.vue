@@ -14,15 +14,15 @@
 <style lang="scss">
 @import '../../_variables.scss';
 .rt-active {
-    cursor: pointer;
-    animation-duration: 0.6s;
-    &:hover {
-        color: $fallback--cGreen;
-        color: var(--cGreen, $fallback--cGreen);
-    }
-}
-.icon-retweet.retweeted {
+  cursor: pointer;
+  animation-duration: 0.6s;
+  &:hover {
     color: $fallback--cGreen;
     color: var(--cGreen, $fallback--cGreen);
+  }
+}
+.icon-retweet.retweeted {
+  color: $fallback--cGreen;
+  color: var(--cGreen, $fallback--cGreen);
 }
 </style>

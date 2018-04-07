@@ -57,37 +57,37 @@
 @import '../../_variables.scss';
 
 .setting-item {
-    margin: 1em 1em 1.4em;
+  margin: 1em 1em 1.4em;
 
-    textarea {
-        width: 100%;
-        height: 100px;
-    }
+  textarea {
+    width: 100%;
+    height: 100px;
+  }
 
-    .old-avatar {
-        width: 128px;
-        border-radius: $fallback--avatarRadius;
-        border-radius: var(--avatarRadius, $fallback--avatarRadius);
-    }
+  .old-avatar {
+    width: 128px;
+    border-radius: $fallback--avatarRadius;
+    border-radius: var(--avatarRadius, $fallback--avatarRadius);
+  }
 
-    .new-avatar {
-        object-fit: cover;
-        width: 128px;
-        height: 128px;
-        border-radius: $fallback--avatarRadius;
-        border-radius: var(--avatarRadius, $fallback--avatarRadius);
-    }
+  .new-avatar {
+    object-fit: cover;
+    width: 128px;
+    height: 128px;
+    border-radius: $fallback--avatarRadius;
+    border-radius: var(--avatarRadius, $fallback--avatarRadius);
+  }
 
-    .btn {
-        margin-top: 1em;
-        min-height: 28px;
-        width: 10em;
-    }
+  .btn {
+    margin-top: 1em;
+    min-height: 28px;
+    width: 10em;
+  }
 }
 .setting-list {
-    list-style-type: none;
-    li {
-        margin-bottom: 0.5em;
-    }
+  list-style-type: none;
+  li {
+    margin-bottom: 0.5em;
+  }
 }
 </style>

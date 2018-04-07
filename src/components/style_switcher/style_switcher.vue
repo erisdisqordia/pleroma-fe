@@ -52,6 +52,7 @@
       </div>
     </div>
     <div class="radius-container">
+      <p>{{$t('settings.radii_help')}}</p>
       <div class="radius-item">
         <label for="btnradius" class="theme-radius-lb">{{$t('settings.btnRadius')}}</label>
         <input id="btnradius" class="theme-radius-rn" type="range" v-model="btnRadiusLocal">
@@ -121,8 +122,20 @@
   margin-right: 1em;
 }
 
+.radius-container,
 .color-container {
   display: flex;
+
+  p {
+    margin-top: 2em;
+    margin-bottom: .5em;
+  }
+}
+.radius-container {
+  flex-direction: column;
+}
+
+.color-container {
   flex-wrap: wrap;
   justify-content: space-between;
 }

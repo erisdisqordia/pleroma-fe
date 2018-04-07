@@ -134,7 +134,8 @@
   }
 
   .avatar {
-    border-radius: 5px;
+    border-radius: $fallback--avatarRadius;
+    border-radius: var(--avatarRadius, $fallback--avatarRadius);
     flex: 1 0 100%;
     width: 56px;
     height: 56px;

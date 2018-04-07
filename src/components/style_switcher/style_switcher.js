@@ -9,10 +9,16 @@ export default {
       btnColorLocal: '',
       textColorLocal: '',
       linkColorLocal: '',
-      redColorLocal: '#ff0000',
-      blueColorLocal: '#0095ff',
-      greenColorLocal: '#0fa00f',
-      orangeColorLocal: '#E3FF00'
+      redColorLocal: '',
+      blueColorLocal: '',
+      greenColorLocal: '',
+      orangeColorLocal: '',
+      btnRadiusLocal: '',
+      panelRadiusLocal: '',
+      avatarRadiusLocal: '',
+      avatarAltRadiusLocal: '',
+      attachmentRadiusLocal: '',
+      tooltipRadiusLocal: ''
     }
   },
   created () {
@@ -26,20 +32,28 @@ export default {
   },
   mounted () {
     this.bgColorLocal = rgbstr2hex(this.$store.state.config.colors.bg)
-    this.btnColorLocal = rgbstr2hex(this.$store.state.config.colors.lightBg)
+    this.btnColorLocal = rgbstr2hex(this.$store.state.config.colors.btn)
     this.textColorLocal = rgbstr2hex(this.$store.state.config.colors.fg)
     this.linkColorLocal = rgbstr2hex(this.$store.state.config.colors.link)
 
-    this.redColorLocal = rgbstr2hex(this.$store.state.config.colors.cRed || this.redColorLocal)
-    this.blueColorLocal = rgbstr2hex(this.$store.state.config.colors.cBlue || this.blueColorLocal)
-    this.greenColorLocal = rgbstr2hex(this.$store.state.config.colors.cGreen || this.greenColorLocal)
-    this.orangeColorLocal = rgbstr2hex(this.$store.state.config.colors.cOrange || this.orangeColorLocal)
+    this.redColorLocal = rgbstr2hex(this.$store.state.config.colors.cRed)
+    this.blueColorLocal = rgbstr2hex(this.$store.state.config.colors.cBlue)
+    this.greenColorLocal = rgbstr2hex(this.$store.state.config.colors.cGreen)
+    this.orangeColorLocal = rgbstr2hex(this.$store.state.config.colors.cOrange)
+
+    this.btnRadiusLocal = this.$store.state.config.radii.btnRadius || 4
+    this.panelRadiusLocal = this.$store.state.config.radii.panelRadius || 10
+    this.avatarRadiusLocal = this.$store.state.config.radii.avatarRadius || 5
+    this.avatarAltRadiusLocal = this.$store.state.config.radii.avatarAltRadius || 50
+    this.tooltipRadiusLocal = this.$store.state.config.radii.tooltipRadius || 2
+    this.attachmentRadiusLocal = this.$store.state.config.radii.attachmentRadius || 5
   },
   methods: {
     setCustomTheme () {
       if (!this.bgColorLocal && !this.btnColorLocal && !this.linkColorLocal) {
         // reset to picked themes
       }
+
       const rgb = (hex) => {
         const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
         return result ? {
@@ -69,7 +83,13 @@ export default {
             cRed: redRgb,
             cBlue: blueRgb,
             cGreen: greenRgb,
-            cOrange: orangeRgb
+            cOrange: orangeRgb,
+            btnRadius: this.btnRadiusLocal,
+            panelRadius: this.panelRadiusLocal,
+            avatarRadius: this.avatarRadiusLocal,
+            avatarAltRadius: this.avatarAltRadiusLocal,
+            tooltipRadius: this.tooltipRadiusLocal,
+            attachmentRadius: this.attachmentRadiusLocal
           }})
       }
     }

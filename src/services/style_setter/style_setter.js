@@ -64,6 +64,7 @@ const setColors = (col, commit) => {
 
   const isDark = (col.text.r + col.text.g + col.text.b) > (col.bg.r + col.bg.g + col.bg.b)
   let colors = {}
+  let radii = {}
 
   let mod = 10
   if (isDark) {
@@ -89,11 +90,22 @@ const setColors = (col, commit) => {
   colors.cGreen = col.cGreen && rgb2hex(col.cGreen.r, col.cGreen.g, col.cGreen.b)
   colors.cOrange = col.cOrange && rgb2hex(col.cOrange.r, col.cOrange.g, col.cOrange.b)
 
+  console.log('OMGGGG')
+  console.log(JSON.stringify(col))
+  radii.btnRadius = col.btnRadius
+  radii.panelRadius = col.panelRadius
+  radii.avatarRadius = col.avatarRadius
+  radii.avatarAltRadius = col.avatarAltRadius
+  radii.tooltipRadius = col.tooltipRadius
+  radii.attachmentRadius = col.attachmentRadius
+
   styleSheet.toString()
-  styleSheet.insertRule(`body { ${Object.entries(colors).map(([k, v]) => `--${k}: ${v}`).join(';')} }`, 'index-max')
+  styleSheet.insertRule(`body { ${Object.entries(colors).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}`).join(';')} }`, 'index-max')
+  styleSheet.insertRule(`body { ${Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';')} }`, 'index-max')
   body.style.display = 'initial'
 
   commit('setOption', { name: 'colors', value: colors })
+  commit('setOption', { name: 'radii', value: radii })
   commit('setOption', { name: 'customTheme', value: col })
 }
 

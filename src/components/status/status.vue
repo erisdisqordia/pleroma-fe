@@ -365,7 +365,8 @@ status-text-container {
 .status .avatar {
   width: 48px;
   height: 48px;
-  border-radius: 5px;
+  border-radius: $fallback--avatarRadius;
+  border-radius: var(--avatarRadius, $fallback--avatarRadius);
   overflow: hidden;
 
   img {

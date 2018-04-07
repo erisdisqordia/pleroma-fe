@@ -51,7 +51,46 @@
         <input id="orangecolor-t" class="theme-color-in" type="text" v-model="orangeColorLocal">
       </div>
     </div>
-    <div>
+    <div class="radius-container">
+      <div class="radius-item">
+        <label for="btnradius" class="theme-radius-lb">{{$t('settings.btnRadius')}}</label>
+        <input id="btnradius" class="theme-radius-rn" type="range" v-model="btnRadiusLocal">
+        <input id="btnradius-t" class="theme-radius-in" type="text" v-model="btnRadiusLocal">
+      </div>
+      <div class="radius-item">
+        <label for="panelradius" class="theme-radius-lb">{{$t('settings.panelRadius')}}</label>
+        <input id="panelradius" class="theme-radius-rn" type="range" v-model="panelRadiusLocal">
+        <input id="panelradius-t" class="theme-radius-in" type="text" v-model="panelRadiusLocal">
+      </div>
+      <div class="radius-item">
+        <label for="avatarradius" class="theme-radius-lb">{{$t('settings.avatarRadius')}}</label>
+        <input id="avatarradius" class="theme-radius-rn" type="range" v-model="avatarRadiusLocal">
+        <input id="avatarradius-t" class="theme-radius-in" type="green" v-model="avatarRadiusLocal">
+      </div>
+      <div class="radius-item">
+        <label for="avataraltradius" class="theme-radius-lb">{{$t('settings.avatarAltRadius')}}</label>
+        <input id="avataraltradius" class="theme-radius-rn" type="range" v-model="avatarAltRadiusLocal">
+        <input id="avataraltradius-t" class="theme-radius-in" type="text" v-model="avatarAltRadiusLocal">
+      </div>
+      <div class="radius-item">
+        <label for="attachmentradius" class="theme-radius-lb">{{$t('settings.attachmentRadius')}}</label>
+        <input id="attachmentrradius" class="theme-radius-rn" type="range" v-model="attachmentRadiusLocal">
+        <input id="attachmentradius-t" class="theme-radius-in" type="text" v-model="attachmentRadiusLocal">
+      </div>
+      <div class="radius-item">
+        <label for="tooltipradius" class="theme-radius-lb">{{$t('settings.tooltipRadius')}}</label>
+        <input id="tooltipradius" class="theme-radius-rn" type="range" v-model="tooltipRadiusLocal">
+        <input id="tooltipradius-t" class="theme-radius-in" type="text" v-model="tooltipRadiusLocal">
+      </div>
+    </div>
+    <div :style="{
+                 '--btnRadius': btnRadiusLocal + 'px',
+                 '--panelRadius': panelRadiusLocal + 'px',
+                 '--avatarRadius': avatarRadiusLocal + 'px',
+                 '--avatarAltRadius': avatarAltRadiusLocal + 'px',
+                 '--tooltipRadius': tooltipRadiusLocal + 'px',
+                 '--attachmentRadius': attachmentRadiusLocal + 'px'
+                 }">
       <div class="panel">
         <div class="panel-heading" :style="{ 'background-color': btnColorLocal, 'color': textColorLocal }">Preview</div>
         <div class="panel-body theme-preview-content" :style="{ 'background-color': bgColorLocal, 'color': textColorLocal }">
@@ -88,6 +127,7 @@
   justify-content: space-between;
 }
 
+.radius-item,
 .color-item {
   min-width: 20em;
   display:flex;
@@ -100,13 +140,16 @@
   }
 }
 
+.theme-radius-rn,
 .theme-color-cl {
   border: 0;
   box-shadow: none;
   background: transparent;
+  color: var(--faint, $fallback--faint);
 }
 
 .theme-color-cl,
+.theme-radius-in,
 .theme-color-in {
   margin-left: 4px;
 }
@@ -114,12 +157,29 @@
 .theme-color-in {
   padding: 5px;
   min-width: 4em;
+}
+
+.theme-radius-in {
+  min-width: 1em;
+}
+
+.theme-radius-in,
+.theme-color-in {
   max-width: 7em;
   flex: 1;
 }
+
+.theme-radius-lb,
 .theme-color-lb {
   flex: 2;
   min-width: 7em;
+}
+
+.theme-radius-lb{
+  max-width: 50em;
+}
+
+.theme-color-lb {
   max-width: 10em;
 }
 

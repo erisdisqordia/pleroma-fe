@@ -103,8 +103,8 @@
 
     .attachment {
       position: relative;
-      border: $fallback--border;
-      border: var(--border, $fallback--border);
+      border: 1px solid $fallback--border;
+      border: 1px solid var(--border, $fallback--border);
       margin: 0.5em 0.8em 0.2em 0;
     }
 

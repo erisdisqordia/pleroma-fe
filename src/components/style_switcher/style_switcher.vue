@@ -1,11 +1,15 @@
 <template>
   <div>
-    <p>{{$t('settings.presets')}}</p>
-    <select v-model="selected" class="style-switcher">
-      <option v-for="style in availableStyles" :value="style">{{style[0]}}</option>
-    </select>
-    <p>{{$t('settings.theme_help')}}</p>
+    <div>{{$t('settings.presets')}}
+      <label for="style-switcher" class='select'>
+        <select id="style-switcher" v-model="selected" class="style-switcher">
+          <option v-for="style in availableStyles" :value="style">{{style[0]}}</option>
+        </select>
+        <i class="icon-down-open"/>
+      </label>
+    </div>
     <div class="color-container">
+      <p>{{$t('settings.theme_help')}}</p>
       <div class="color-item">
         <label for="bgcolor" class="theme-color-lb">{{$t('settings.background')}}</label>
         <input id="bgcolor" class="theme-color-cl" type="color" v-model="bgColorLocal">
@@ -13,8 +17,8 @@
       </div>
       <div class="color-item">
         <label for="fgcolor" class="theme-color-lb">{{$t('settings.foreground')}}</label>
-        <input id="fgcolor" class="theme-color-cl" type="color" v-model="fgColorLocal">
-        <input id="fgcolor-t" class="theme-color-in" type="text" v-model="fgColorLocal">
+        <input id="fgcolor" class="theme-color-cl" type="color" v-model="btnColorLocal">
+        <input id="fgcolor-t" class="theme-color-in" type="text" v-model="btnColorLocal">
       </div>
       <div class="color-item">
         <label for="textcolor" class="theme-color-lb">{{$t('settings.text')}}</label>
@@ -26,8 +30,6 @@
         <input id="linkcolor" class="theme-color-cl" type="color" v-model="linkColorLocal">
         <input id="linkcolor-t" class="theme-color-in" type="text" v-model="linkColorLocal">
       </div>
-    </div>
-    <div class="color-container additional colors">
       <div class="color-item">
         <label for="redcolor" class="theme-color-lb">{{$t('settings.cRed')}}</label>
         <input id="redcolor" class="theme-color-cl" type="color" v-model="redColorLocal">
@@ -51,14 +53,20 @@
     </div>
     <div>
       <div class="panel">
-        <div class="panel-heading" :style="{ 'background-color': fgColorLocal, 'color': textColorLocal }">Preview</div>
+        <div class="panel-heading" :style="{ 'background-color': btnColorLocal, 'color': textColorLocal }">Preview</div>
         <div class="panel-body theme-preview-content" :style="{ 'background-color': bgColorLocal, 'color': textColorLocal }">
           <h4>Content</h4>
           <br>
           A bunch of more content and
           <a :style="{ 'color': linkColorLocal }">a nice lil' link</a>
+          <i :style="{ 'color': blueColorLocal }" class="icon-reply"/>
+          <i :style="{ 'color': greenColorLocal }" class="icon-retweet"/>
+          <i :style="{ 'color': redColorLocal }" class="icon-cancel"/>
+          <i :style="{ 'color': orangeColorLocal }" class="icon-star"/>
           <br>
-          <button class="btn" :style="{ 'background-color': fgColorLocal, 'color': textColorLocal }">Button</button>
+          <br>
+          <div class="finder-error" :style="{ 'background-color': redColorLocal }">And a scary alert</div>
+          <button class="btn" :style="{ 'background-color': btnColorLocal, 'color': textColorLocal }">Button</button>
         </div>
       </div>
     </div>

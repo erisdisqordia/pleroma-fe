@@ -77,8 +77,12 @@ button{
   }
 }
 
+label.select {
+  padding: 0;
 
-input, textarea, select {
+}
+
+input, textarea, .select {
   border: none;
   border-radius: $fallback--btnRadius;
   border-radius: var(--btnRadius, $fallback--btnRadius);
@@ -93,11 +97,35 @@ input, textarea, select {
   font-size: 14px;
   padding: 8px 7px 4px;
   box-sizing: border-box;
+  display: inline-block;
+  position: relative;
 
-  // TODO: Restyle <select> in a decent way. Needs different markup
-  // -webkit-appearance:none;
-  // -moz-appearance:none;
-  // appearance:none;
+  .icon-down-open {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 5px;
+    height: 100%;
+    color: $fallback--fg;
+    color: var(--fg, $fallback--fg);
+    line-height: 29px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    margin: 0;
+    color: $fallback--fg;
+    color: var(--fg, $fallback--fg);
+    padding: 4px 3ch 3px 3px;
+    width: 100%;
+    z-index: 1;
+  }
 
   &[type=radio],
   &[type=checkbox] {
@@ -185,7 +213,7 @@ nav {
     height: 50px;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
+    background-size: auto 80%;
 
     a i {
       color: $fallback--link;

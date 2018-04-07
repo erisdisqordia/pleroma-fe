@@ -6,7 +6,7 @@ export default {
       availableStyles: [],
       selected: this.$store.state.config.theme,
       bgColorLocal: '',
-      fgColorLocal: '',
+      btnColorLocal: '',
       textColorLocal: '',
       linkColorLocal: '',
       redColorLocal: '#ff0000',
@@ -26,7 +26,7 @@ export default {
   },
   mounted () {
     this.bgColorLocal = rgbstr2hex(this.$store.state.config.colors.bg)
-    this.fgColorLocal = rgbstr2hex(this.$store.state.config.colors.lightBg)
+    this.btnColorLocal = rgbstr2hex(this.$store.state.config.colors.lightBg)
     this.textColorLocal = rgbstr2hex(this.$store.state.config.colors.fg)
     this.linkColorLocal = rgbstr2hex(this.$store.state.config.colors.link)
 
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     setCustomTheme () {
-      if (!this.bgColorLocal && !this.fgColorLocal && !this.linkColorLocal) {
+      if (!this.bgColorLocal && !this.btnColorLocal && !this.linkColorLocal) {
         // reset to picked themes
       }
       const rgb = (hex) => {
@@ -49,7 +49,7 @@ export default {
         } : null
       }
       const bgRgb = rgb(this.bgColorLocal)
-      const fgRgb = rgb(this.fgColorLocal)
+      const btnRgb = rgb(this.btnColorLocal)
       const textRgb = rgb(this.textColorLocal)
       const linkRgb = rgb(this.linkColorLocal)
 
@@ -58,11 +58,11 @@ export default {
       const greenRgb = rgb(this.greenColorLocal)
       const orangeRgb = rgb(this.orangeColorLocal)
 
-      if (bgRgb && fgRgb && linkRgb) {
+      if (bgRgb && btnRgb && linkRgb) {
         this.$store.dispatch('setOption', {
           name: 'customTheme',
           value: {
-            fg: fgRgb,
+            fg: btnRgb,
             bg: bgRgb,
             text: textRgb,
             link: linkRgb,
@@ -77,12 +77,12 @@ export default {
   watch: {
     selected () {
       this.bgColorLocal = this.selected[1]
-      this.fgColorLocal = this.selected[2]
+      this.btnColorLocal = this.selected[2]
       this.textColorLocal = this.selected[3]
       this.linkColorLocal = this.selected[4]
       this.redColorLocal = this.selected[5]
-      this.blueColorLocal = this.selected[6]
-      this.greenColorLocal = this.selected[7]
+      this.greenColorLocal = this.selected[6]
+      this.blueColorLocal = this.selected[7]
       this.orangeColorLocal = this.selected[8]
     }
   }

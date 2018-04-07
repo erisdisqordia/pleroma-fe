@@ -41,6 +41,11 @@
     flex: 0 0 auto;
     max-height: 300px;
     max-width: 100%;
+    line-height: 0;
+
+    video {
+      max-height: 300px;
+    }
   }
 
   .attachment {

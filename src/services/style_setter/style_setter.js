@@ -108,8 +108,8 @@ const setPreset = (val, commit) => {
       const linkRgb = hex2rgb(theme[4])
 
       const cRedRgb = hex2rgb(theme[5] || '#FF0000')
-      const cBlueRgb = hex2rgb(theme[6] || '#0000FF')
-      const cGreenRgb = hex2rgb(theme[7] || '#00FF00')
+      const cGreenRgb = hex2rgb(theme[6] || '#00FF00')
+      const cBlueRgb = hex2rgb(theme[7] || '#0000FF')
       const cOrangeRgb = hex2rgb(theme[8] || '#E3FF00')
 
       const col = {

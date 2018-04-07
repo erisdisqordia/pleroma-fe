@@ -10,53 +10,55 @@
 <style lang="scss">
 @import '../../_variables.scss';
 .still-image {
-    position: relative;
-    line-height: 0;
-    overflow: hidden;
+  position: relative;
+  line-height: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%
 
-    &:hover canvas {
-        display: none;
-    }
+  &:hover canvas {
+    display: none;
+  }
 
+  img {
+    width: 100%;
+    height: 100%
+  }
+
+  &.animated {
+    &:hover::before,
     img {
-        width: 100%;
-        height: 100%
+      visibility: hidden;
     }
 
-    &.animated {
-        &:hover::before,
-        img {
-            visibility: hidden;
-        }
-
-        &:hover img {
-            visibility: visible
-        }
-
-        &::before {
-            content: 'gif';
-            position: absolute;
-            line-height: 10px;
-            font-size: 10px;
-            top: 5px;
-            left: 5px;
-            background: rgba(127,127,127,.5);
-            color: #FFF;
-            display: block;
-            padding: 2px 4px;
-            border-radius: 3px;
-            z-index: 2;
-        }
+    &:hover img {
+      visibility: visible
     }
 
-    canvas {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
+    &::before {
+      content: 'gif';
+      position: absolute;
+      line-height: 10px;
+      font-size: 10px;
+      top: 5px;
+      left: 5px;
+      background: rgba(127,127,127,.5);
+      color: #FFF;
+      display: block;
+      padding: 2px 4px;
+      border-radius: 3px;
+      z-index: 2;
     }
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

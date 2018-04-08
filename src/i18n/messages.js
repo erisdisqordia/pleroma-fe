@@ -605,7 +605,7 @@ const ja = {
     stop_gifs: 'カーソルを重ねた時にGIFを再生する。',
     autoload: '下にスクロールした時に自動で読み込むようにする。',
     streaming: '上までスクロールした時に自動でストリーミングされるようにする。',
-    reply_link_preview: 'マウスカーソルを重ねた時に返信リンクプレビューを表示するようにする。',
+    reply_link_preview: 'マウスカーソルを重ねた時に返信のプレビューを表示するようにする。',
     import_followers_from_a_csv_file: 'CSVファイルからフォローをインポートする。',
     follows_imported: 'フォローがインポートされました！処理に少し時間がかかるかもしれません。',
     follow_import_error: 'フォロワーのインポート中にエラーが発生しました。'

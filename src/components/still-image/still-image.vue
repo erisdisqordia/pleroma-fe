@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%
 
-  &:hover canvas {
+            &:hover canvas {
     display: none;
   }
 
@@ -46,7 +46,8 @@
       color: #FFF;
       display: block;
       padding: 2px 4px;
-      border-radius: 3px;
+      border-radius: $fallback--tooltipRadius;
+      border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
       z-index: 2;
     }
   }

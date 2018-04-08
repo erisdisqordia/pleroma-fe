@@ -47,13 +47,17 @@
   padding: 0;
 
   &:first-child a {
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-top-right-radius: $fallback--panelRadius;
+    border-top-right-radius: var(--panelRadius, $fallback--panelRadius);
+    border-top-left-radius: $fallback--panelRadius;
+    border-top-left-radius: var(--panelRadius, $fallback--panelRadius);
   }
 
   &:last-child a {
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: $fallback--panelRadius;
+    border-bottom-right-radius: var(--panelRadius, $fallback--panelRadius);
+    border-bottom-left-radius: $fallback--panelRadius;
+    border-bottom-left-radius: var(--panelRadius, $fallback--panelRadius);
   }
 }
 

@@ -90,13 +90,6 @@
     padding: 0 0.5em 0 0.5em;
     opacity: 0.8;
   }
-
-  .error {
-    color: $fallback--lightFg;
-    color: var(--lightFg, $fallback--lightFg);
-    background-color: $fallback--cRed;
-    background-color: var(--cRed, $fallback--cRed);
-  }
 }
 
 .new-status-notification {

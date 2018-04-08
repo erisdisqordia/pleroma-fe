@@ -1,6 +1,6 @@
 <template>
   <span class="user-finder-container">
-    <span class="finder-error" v-if="error">
+    <span class="alert error" v-if="error">
       <i class="icon-cancel user-finder-icon" @click="dismissError"/>
       {{$t('finder.error_fetching_user')}}
     </span>
@@ -28,13 +28,4 @@
   padding: 0.1em 0.2em 0.2em 0.2em;
 }
 
-.finder-error {
-  background-color: rgba(255, 48, 16, 0.65);
-  margin: 0.35em;
-  border-radius: $fallback--tooltipRadius;
-  border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-  padding: 0.25em;
-  color: $fallback--faint;
-  color: var(--faint, $fallback--faint);
-}
 </style>

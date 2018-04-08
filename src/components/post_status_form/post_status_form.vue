@@ -30,7 +30,7 @@
         <button v-else-if="isOverLengthLimit" disabled class="btn btn-default">{{$t('general.submit')}}</button>
         <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default">{{$t('general.submit')}}</button>
       </div>
-      <div class='error' v-if="error">
+      <div class='alert error' v-if="error">
         Error: {{ error }}
         <i class="icon-cancel" @click="clearError"></i>
       </div>
@@ -87,15 +87,7 @@
   }
 
   .error {
-    border-radius: $fallback--tooltipRadius;
-    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
     text-align: center;
-    background-color: rgba(255, 48, 16, 0.65);
-    background-color: $fallback--cRed;
-    background-color: var(--cRed, $fallback--cRed);
-    padding: 0.25em;
-    margin: 0.35em;
-    display: flex;
   }
 
   .attachments {

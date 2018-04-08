@@ -90,6 +90,8 @@ const setColors = (col, commit) => {
   colors.cGreen = col.cGreen && rgb2hex(col.cGreen.r, col.cGreen.g, col.cGreen.b)
   colors.cOrange = col.cOrange && rgb2hex(col.cOrange.r, col.cOrange.g, col.cOrange.b)
 
+  colors.cAlertRed = col.cRed && `rgba(${col.cRed.r}, ${col.cRed.g}, ${col.cRed.b}, .5)`
+
   console.log('OMGGGG')
   console.log(JSON.stringify(col))
   radii.btnRadius = col.btnRadius

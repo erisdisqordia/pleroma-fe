@@ -46,7 +46,7 @@
           </div>
         </div>
         <div v-if="error" class='form-group'>
-          <div class='error'>{{error}}</div>
+          <div class='alert error'>{{error}}</div>
         </div>
       </form>
     </div>
@@ -105,14 +105,7 @@
   }
 
   .error {
-    border-radius: $fallback--tooltipRadius;
-    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
     text-align: center;
-    margin: 0.5em 0.6em 0;
-    background-color: $fallback--cRed;
-    background-color: var(--cRed, $fallback--cRed);
-    min-height: 28px;
-    line-height: 28px;
   }
 }
 

@@ -21,7 +21,7 @@
           </div>
         </div>
         <div v-if="authError" class='form-group'>
-          <div class='error'>{{authError}}</div>
+          <div class='alert error'>{{authError}}</div>
         </div>
       </form>
     </div>
@@ -40,13 +40,7 @@
   }
 
   .error {
-    border-radius: $fallback--tooltipRadius;
-    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
     text-align: center;
-    background-color: rgba(255, 48, 16, 0.65);
-    background-color: $fallback--cRed;
-    min-height: 28px;
-    line-height: 28px;
   }
 
   .register {

@@ -92,20 +92,23 @@
                  '--tooltipRadius': tooltipRadiusLocal + 'px',
                  '--attachmentRadius': attachmentRadiusLocal + 'px'
                  }">
-      <div class="panel">
+      <div class="panel dummy">
         <div class="panel-heading" :style="{ 'background-color': btnColorLocal, 'color': textColorLocal }">Preview</div>
         <div class="panel-body theme-preview-content" :style="{ 'background-color': bgColorLocal, 'color': textColorLocal }">
+          <div class="avatar" :style="{
+                                      'border-radius': avatarRadiusLocal + 'px'
+                                      }">
+            ( ͡° ͜ʖ ͡°)
+          </div>
           <h4>Content</h4>
           <br>
           A bunch of more content and
-          <a :style="{ 'color': linkColorLocal }">a nice lil' link</a>
-          <i :style="{ 'color': blueColorLocal }" class="icon-reply"/>
-          <i :style="{ 'color': greenColorLocal }" class="icon-retweet"/>
-          <i :style="{ 'color': redColorLocal }" class="icon-cancel"/>
-          <i :style="{ 'color': orangeColorLocal }" class="icon-star"/>
+          <a :style="{ color: linkColorLocal }">a nice lil' link</a>
+          <i :style="{ color: blueColorLocal }" class="icon-reply"/>
+          <i :style="{ color: greenColorLocal }" class="icon-retweet"/>
+          <i :style="{ color: redColorLocal }" class="icon-cancel"/>
+          <i :style="{ color: orangeColorLocal }" class="icon-star"/>
           <br>
-          <br>
-          <div class="finder-error" :style="{ 'background-color': redColorLocal }">And a scary alert</div>
           <button class="btn" :style="{ 'background-color': btnColorLocal, 'color': textColorLocal }">Button</button>
         </div>
       </div>
@@ -151,6 +154,10 @@
   label {
     color: var(--faint, $fallback--faint);
   }
+}
+
+.radius-item {
+  flex-basis: auto;
 }
 
 .theme-radius-rn,
@@ -208,5 +215,18 @@
 
 .theme-preview-content {
   padding: 20px;
+}
+
+.dummy {
+  .avatar {
+    background: linear-gradient(135deg, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%);
+    color: black;
+    text-align: center;
+    height: 48px;
+    line-height: 48px;
+    width: 48px;
+    float: left;
+    margin-right: 1em;
+  }
 }
 </style>

@@ -99,6 +99,8 @@ input, textarea, .select {
   box-sizing: border-box;
   display: inline-block;
   position: relative;
+  height: 29px;
+  line-height: 16px;
 
   .icon-down-open {
     position: absolute;
@@ -122,9 +124,11 @@ input, textarea, .select {
     margin: 0;
     color: $fallback--fg;
     color: var(--fg, $fallback--fg);
-    padding: 4px 3ch 3px 3px;
+    padding: 4px 2em 3px 3px;
     width: 100%;
     z-index: 1;
+    height: 29px;
+    line-height: 16px;
   }
 
   &[type=radio],
@@ -368,6 +372,22 @@ nav {
     max-height: 96vh;
     flex-shrink: 0;
     flex-grow: 0;
+  }
+}
+
+.alert {
+  margin: 0.35em;
+  padding: 0.25em;
+  border-radius: $fallback--tooltipRadius;
+  border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+  color: $fallback--faint;
+  color: var(--faint, $fallback--faint);
+  min-height: 28px;
+  line-height: 28px;
+
+  &.error {
+    background-color: $fallback--cAlertRed;
+    background-color: var(--cAlertRed, $fallback--cAlertRed);
   }
 }
 

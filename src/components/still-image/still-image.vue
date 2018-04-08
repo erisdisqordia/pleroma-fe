@@ -14,7 +14,7 @@
   line-height: 0;
   overflow: hidden;
   width: 100%;
-  height: 100%
+  height: 100%;
 
   &:hover canvas {
     display: none;
@@ -22,7 +22,7 @@
 
   img {
     width: 100%;
-    height: 100%
+    height: 100%;
   }
 
   &.animated {

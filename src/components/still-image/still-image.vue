@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%
 
-            &:hover canvas {
+  &:hover canvas {
     display: none;
   }
 

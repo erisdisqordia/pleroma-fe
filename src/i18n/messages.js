@@ -591,21 +591,21 @@ const ja = {
     settings: '設定',
     theme: 'テーマ',
     presets: 'プリセット',
-    theme_help: '16進数カラーコードを使用してカラーテーマをカスタマイズ出来ます。',
+    theme_help: '16進数カラーコード (#aabbcc) を使用してカラーテーマをカスタマイズ出来ます。',
     background: '背景',
     foreground: '前景',
     text: '文字',
     links: 'リンク',
     filtering: 'フィルタリング',
-    filtering_explanation: 'これらの単語を含むすべてのものはミュートされます、1行に1つのワードを入力してください。',
-    attachments: '添付ファイル',
-    hide_attachments_in_tl: 'タイムラインの添付ファイルを隠す。',
-    hide_attachments_in_convo: '会話の中の添付ファイルを隠す。',
+    filtering_explanation: 'これらの単語を含むすべてのものがミュートされます、1行に1つの単語を入力してください。',
+    attachments: 'ファイル',
+    hide_attachments_in_tl: 'タイムラインのファイルを隠す。',
+    hide_attachments_in_convo: '会話の中のファイルを隠す。',
     nsfw_clickthrough: 'NSFWファイルの非表示を有効にする。',
     stop_gifs: 'カーソルを重ねた時にGIFを再生する。',
     autoload: '下にスクロールした時に自動で読み込むようにする。',
     streaming: '上までスクロールした時に自動でストリーミングされるようにする。',
-    reply_link_preview: 'マウスカーソルを重ねたときに返信リンクプレビューを表示するようにする。',
+    reply_link_preview: 'マウスカーソルを重ねた時に返信リンクプレビューを表示するようにする。',
     import_followers_from_a_csv_file: 'CSVファイルからフォローをインポートする。',
     follows_imported: 'フォローがインポートされました！処理に少し時間がかかるかもしれません。',
     follow_import_error: 'フォロワーのインポート中にエラーが発生しました。'
@@ -631,7 +631,7 @@ const ja = {
   },
   post_status: {
     posting: '投稿',
-    default: 'ちょうどL.A.に着陸しました'
+    default: 'ちょうどL.A.に着陸した'
   },
   finder: {
     find_user: 'ユーザー検索',

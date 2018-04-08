@@ -101,5 +101,7 @@
   border-color: var(--border, $fallback--border);
   padding: 10px;
   z-index: 1;
+  background-color: $fallback--btn;
+  background-color: var(--btn, $fallback--btn);
 }
 </style>

@@ -19,13 +19,13 @@
 @import '../../_variables.scss';
 
 .user-finder-container {
-  height: 21px;
+  height: 29px;
   max-width: 100%;
 }
 
 .user-finder-input {
   max-width: 80%;
-  padding: 0.1em 0.2em 0.2em 0.2em;
+  vertical-align: middle;
 }
 
 </style>

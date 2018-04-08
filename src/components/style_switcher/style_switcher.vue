@@ -55,32 +55,32 @@
       <p>{{$t('settings.radii_help')}}</p>
       <div class="radius-item">
         <label for="btnradius" class="theme-radius-lb">{{$t('settings.btnRadius')}}</label>
-        <input id="btnradius" class="theme-radius-rn" type="range" v-model="btnRadiusLocal">
+        <input id="btnradius" class="theme-radius-rn" type="range" v-model="btnRadiusLocal" max="16">
         <input id="btnradius-t" class="theme-radius-in" type="text" v-model="btnRadiusLocal">
       </div>
       <div class="radius-item">
         <label for="panelradius" class="theme-radius-lb">{{$t('settings.panelRadius')}}</label>
-        <input id="panelradius" class="theme-radius-rn" type="range" v-model="panelRadiusLocal">
+        <input id="panelradius" class="theme-radius-rn" type="range" v-model="panelRadiusLocal" max="50">
         <input id="panelradius-t" class="theme-radius-in" type="text" v-model="panelRadiusLocal">
       </div>
       <div class="radius-item">
         <label for="avatarradius" class="theme-radius-lb">{{$t('settings.avatarRadius')}}</label>
-        <input id="avatarradius" class="theme-radius-rn" type="range" v-model="avatarRadiusLocal">
+        <input id="avatarradius" class="theme-radius-rn" type="range" v-model="avatarRadiusLocal" max="28">
         <input id="avatarradius-t" class="theme-radius-in" type="green" v-model="avatarRadiusLocal">
       </div>
       <div class="radius-item">
         <label for="avataraltradius" class="theme-radius-lb">{{$t('settings.avatarAltRadius')}}</label>
-        <input id="avataraltradius" class="theme-radius-rn" type="range" v-model="avatarAltRadiusLocal">
+        <input id="avataraltradius" class="theme-radius-rn" type="range" v-model="avatarAltRadiusLocal" max="28">
         <input id="avataraltradius-t" class="theme-radius-in" type="text" v-model="avatarAltRadiusLocal">
       </div>
       <div class="radius-item">
         <label for="attachmentradius" class="theme-radius-lb">{{$t('settings.attachmentRadius')}}</label>
-        <input id="attachmentrradius" class="theme-radius-rn" type="range" v-model="attachmentRadiusLocal">
+        <input id="attachmentrradius" class="theme-radius-rn" type="range" v-model="attachmentRadiusLocal" max="50">
         <input id="attachmentradius-t" class="theme-radius-in" type="text" v-model="attachmentRadiusLocal">
       </div>
       <div class="radius-item">
         <label for="tooltipradius" class="theme-radius-lb">{{$t('settings.tooltipRadius')}}</label>
-        <input id="tooltipradius" class="theme-radius-rn" type="range" v-model="tooltipRadiusLocal">
+        <input id="tooltipradius" class="theme-radius-rn" type="range" v-model="tooltipRadiusLocal" max="20">
         <input id="tooltipradius-t" class="theme-radius-in" type="text" v-model="tooltipRadiusLocal">
       </div>
     </div>
@@ -166,6 +166,7 @@
   box-shadow: none;
   background: transparent;
   color: var(--faint, $fallback--faint);
+  align-self: stretch;
 }
 
 .theme-color-cl,
@@ -175,7 +176,6 @@
 }
 
 .theme-color-in {
-  padding: 5px;
   min-width: 4em;
 }
 
@@ -206,7 +206,6 @@
 .theme-color-cl {
   padding: 1px;
   max-width: 8em;
-  align-self: stretch;
   height: 100%;
   flex: 0;
   min-width: 2em;

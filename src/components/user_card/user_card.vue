@@ -7,7 +7,7 @@
       <user-card-content :user="user" :switcher="false"></user-card-content>
     </div>
     <div class="name-and-screen-name" v-else>
-      <div class="user-name">
+      <div :title="user.name" class="user-name">
         {{ user.name }}
         <span class="follows-you" v-if="!userExpanded && showFollows && user.follows_you">
             {{ $t('user_card.follows_you') }}
@@ -26,7 +26,6 @@
 .name-and-screen-name {
   margin-left: 0.7em;
   margin-top:0.0em;
-  margin-right: 2em;
   text-align: left;
   width: 100%;
 }

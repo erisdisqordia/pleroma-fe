@@ -9,9 +9,8 @@
           <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
             <StillImage class="avatar" :src="user.profile_image_url_original"/>
           </router-link>
-          <span class="glyphicon glyphicon-user"></span>
           <div class="name-and-screen-name">
-            <div class='user-name'>{{user.name}}</div>
+            <div :title="user.name" class='user-name'>{{user.name}}</div>
             <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
               <div class='user-screen-name'>@{{user.screen_name}}</div>
             </router-link>
@@ -125,25 +124,21 @@
   .container {
     padding: 16px 10px 4px 10px;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-content: flex-start;
-    justify-content: center;
     max-height: 56px;
     overflow: hidden;
-  }
 
-  .avatar {
-    border-radius: $fallback--avatarRadius;
-    border-radius: var(--avatarRadius, $fallback--avatarRadius);
-    flex: 1 0 100%;
-    width: 56px;
-    height: 56px;
-    box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
-    object-fit: cover;
+    .avatar {
+      border-radius: $fallback--avatarRadius;
+      border-radius: var(--avatarRadius, $fallback--avatarRadius);
+      flex: 1 0 100%;
+      width: 56px;
+      height: 56px;
+      box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
+      object-fit: cover;
 
-    &.animated::before {
-      display: none;
+      &.animated::before {
+        display: none;
+      }
     }
   }
 
@@ -158,16 +153,24 @@
 
   text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
 
+  .usersettings {
+    color: #fff;
+    opacity: .8;
+  }
+
   .name-and-screen-name {
     display: block;
     margin-left: 0.6em;
     text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
+    flex: 1 1 0;
   }
 
   .user-name{
     color: white;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .user-screen-name {
@@ -175,7 +178,6 @@
     font-weight: lighter;
     font-size: 15px;
     padding-right: 0.1em;
-    flex: 0 0 auto;
   }
 
   .user-interactions {

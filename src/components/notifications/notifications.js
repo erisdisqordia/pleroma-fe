@@ -1,14 +1,11 @@
-import Status from '../status/status.vue'
-import StillImage from '../still-image/still-image.vue'
-import UserCardContent from '../user_card_content/user_card_content.vue'
+import Notification from '../notification/notification.vue'
 
 import { sortBy, take, filter } from 'lodash'
 
 const Notifications = {
   data () {
     return {
-      visibleNotificationCount: 10,
-      userExpanded: false
+      visibleNotificationCount: 20
     }
   },
   computed: {
@@ -29,7 +26,7 @@ const Notifications = {
     }
   },
   components: {
-    Status, StillImage, UserCardContent
+    Notification
   },
   watch: {
     unseenCount (count) {
@@ -43,9 +40,6 @@ const Notifications = {
   methods: {
     markAsSeen () {
       this.$store.commit('markNotificationsAsSeen', this.visibleNotifications)
-    },
-    toggleUserExpanded () {
-      this.userExpanded = !this.userExpanded
     }
   }
 }

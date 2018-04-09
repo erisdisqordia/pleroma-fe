@@ -41,12 +41,20 @@
       flex: 1;
       flex-wrap: nowrap;
       padding: 0.6em;
+      min-width: 0;
       .status-el {
+        .status {
+          padding: 0.25em 0;
+        }
         padding: 0;
         .status-content.media-body {
           margin: 0;
         }
       }
+    }
+
+    .follow-text {
+      padding: 0.5em 0;
     }
 
     .status-el {
@@ -55,7 +63,8 @@
 
     .notification-right {
       flex: 1;
-      margin-left: 0.8em;
+      padding-left: 0.8em;
+      min-width: 0;
     }
 
     .notification-details {
@@ -65,7 +74,6 @@
       position: relative;
       overflow: hidden;
       width: 100%;
-      padding: 0.5em;
       flex: 1;
       flex-wrap: nowrap;
 

@@ -6,7 +6,8 @@ const Attachment = {
   props: [
     'attachment',
     'nsfw',
-    'statusId'
+    'statusId',
+    'size'
   ],
   data () {
     return {
@@ -29,6 +30,9 @@ const Attachment = {
     },
     isEmpty () {
       return (this.type === 'html' && !this.attachment.oembed) || this.type === 'unknown'
+    },
+    isSmall () {
+      return this.size === 'small'
     }
   },
   methods: {

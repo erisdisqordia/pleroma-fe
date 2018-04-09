@@ -8,6 +8,7 @@ import StillImage from '../still-image/still-image.vue'
 import { filter, find } from 'lodash'
 
 const Status = {
+  name: 'Status',
   props: [
     'statusoid',
     'expandable',
@@ -15,7 +16,10 @@ const Status = {
     'focused',
     'highlight',
     'compact',
-    'replies'
+    'replies',
+    'noReplyLinks',
+    'noHeading',
+    'inlineExpanded'
   ],
   data: () => ({
     replying: false,
@@ -23,7 +27,8 @@ const Status = {
     unmuted: false,
     userExpanded: false,
     preview: null,
-    showPreview: false
+    showPreview: false,
+    showingTall: false
   }),
   computed: {
     muteWords () {
@@ -69,6 +74,35 @@ const Status = {
       }
       // use conversation highlight only when in conversation
       return this.status.id === this.highlight
+    },
+    // This is a bit hacky, but we want to approximate post height before rendering
+    // so we count newlines (masto uses <p> for paragraphs, GS uses <br> between them)
+    // as well as approximate line count by counting characters and approximating ~80
+    // per line.
+    //
+    // Using max-height + overflow: auto for status components resulted in false positives
+    // very often with japanese characters, and it was very annoying.
+    hideTallStatus () {
+      if (this.showingTall) {
+        return false
+      }
+      const lengthScore = this.status.statusnet_html.split(/<p|<br/).length + this.status.text.length / 80
+      return lengthScore > 20
+    },
+    hiderStyle () {
+      const index = this.focused || this.inConversation || this.status.id === this.highlight ? 'base01' : 'base00'
+      return {
+        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors[index]} 60%)`
+      }
+    },
+    attachmentSize () {
+      if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
+        (this.$store.state.config.hideAttachmentsInConv && this.inConversation)) {
+        return 'hide'
+      } else if (this.compact) {
+        return 'small'
+      }
+      return 'normal'
     }
   },
   components: {
@@ -106,6 +140,9 @@ const Status = {
     },
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
+    },
+    toggleShowTall () {
+      this.showingTall = !this.showingTall
     },
     replyEnter (id, event) {
       this.showPreview = true

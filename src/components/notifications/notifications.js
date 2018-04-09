@@ -1,12 +1,14 @@
 import Status from '../status/status.vue'
 import StillImage from '../still-image/still-image.vue'
+import UserCardContent from '../user_card_content/user_card_content.vue'
 
 import { sortBy, take, filter } from 'lodash'
 
 const Notifications = {
   data () {
     return {
-      visibleNotificationCount: 10
+      visibleNotificationCount: 10,
+      userExpanded: false
     }
   },
   computed: {
@@ -24,15 +26,10 @@ const Notifications = {
     },
     unseenCount () {
       return this.unseenNotifications.length
-    },
-    hiderStyle () {
-      return {
-        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors['base00']} 80%)`
-      }
     }
   },
   components: {
-    Status, StillImage
+    Status, StillImage, UserCardContent
   },
   watch: {
     unseenCount (count) {
@@ -46,6 +43,9 @@ const Notifications = {
   methods: {
     markAsSeen () {
       this.$store.commit('markNotificationsAsSeen', this.visibleNotifications)
+    },
+    toggleUserExpanded () {
+      this.userExpanded = !this.userExpanded
     }
   }
 }

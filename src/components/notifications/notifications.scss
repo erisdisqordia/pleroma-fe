@@ -30,22 +30,52 @@
   }
 
   .notification {
-    // Will have to use pixels here to ensure consistent distance with
-    // pad alone and pad + border, browsers bad at rounding this with em,
-    // they love to give a 1 pixel ghost offset with 0.7em vs 0.3em + 0.4em,
-    // which does not happen with 10px vs 4px + 6px.
-    padding: 0.4em 0 0 10px;
+    padding-left: 4px;
+    box-sizing: border-box;
     display: flex;
     border-bottom: 1px solid;
     border-bottom-color: inherit;
 
+    .non-mention {
+      display: flex;
+      flex: 1;
+      flex-wrap: nowrap;
+      padding: 0.6em;
+      .status-el {
+        padding: 0;
+        .status-content.media-body {
+          margin: 0;
+        }
+      }
+    }
 
-    .text {
+    .status-el {
+      flex: 1;
+    }
+
+    .notification-right {
+      flex: 1;
+      margin-left: 0.8em;
+    }
+
+    .notification-details {
       min-width: 0px;
       word-wrap: break-word;
       line-height:18px;
       position: relative;
       overflow: hidden;
+      width: 100%;
+      padding: 0.5em;
+      flex: 1;
+      flex-wrap: nowrap;
+
+      .username {
+        font-weight: bolder;
+      }
+      .timeago {
+        float: right;
+        font-size: 12px;
+      }
 
       .icon-retweet.lit {
         color: $green;
@@ -79,34 +109,10 @@
         }
       }
 
-      padding: 0.3em 0.8em 0.5em;
       p {
         margin: 0;
         margin-top: 0;
         margin-bottom: 0.3em;
-      }
-    }
-
-    .avatar {
-      margin-top: 0.3em;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      overflow: hidden;
-      line-height: 0;
-
-      &.animated::before {
-        display: none;
-      }
-
-    }
-
-    &:hover .animated.avatar {
-      canvas {
-        display: none;
-      }
-      img {
-        visibility: visible;
       }
     }
 
@@ -135,6 +141,35 @@
 
   .unseen {
     border-left: 4px solid rgba(255, 16, 8, 0.75);
-    padding-left: 6px;
+    padding-left: 0px;
+  }
+}
+
+.notification {
+  .avatar-compact {
+    margin-top: 0.3em;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    line-height: 0;
+
+    &.animated::before {
+      display: none;
+    }
+
+  }
+
+  &:hover .animated.avatar {
+    canvas {
+      display: none;
+    }
+    img {
+      visibility: visible;
+    }
+  }
+
+  .notification-usercard {
+    margin-left: 0.8em;
   }
 }

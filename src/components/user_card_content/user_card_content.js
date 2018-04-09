@@ -5,7 +5,7 @@ export default {
   props: [ 'user', 'switcher' ],
   computed: {
     headingStyle () {
-      const color = this.$store.state.config.colors['base00']
+      const color = this.$store.state.config.colors.bg
       if (color) {
         const rgb = hex2rgb(color)
         console.log(rgb)
@@ -13,11 +13,6 @@ export default {
           backgroundColor: `rgb(${Math.floor(rgb[0] * 0.53)}, ${Math.floor(rgb[1] * 0.56)}, ${Math.floor(rgb[2] * 0.59)})`,
           backgroundImage: `url(${this.user.cover_photo})`
         }
-      }
-    },
-    bodyStyle () {
-      return {
-        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors['base00']} 80%)`
       }
     },
     isOtherUser () {

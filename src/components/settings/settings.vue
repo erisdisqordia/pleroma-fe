@@ -1,6 +1,6 @@
 <template>
-  <div class="settings panel panel-default base00-background">
-    <div class="panel-heading base02-background base04">
+  <div class="settings panel panel-default">
+    <div class="panel-heading">
       {{$t('settings.settings')}}
     </div>
     <div class="panel-body">
@@ -54,32 +54,40 @@
 </script>
 
 <style lang="scss">
- .setting-item {
-   margin: 1em 1em 1.4em;
-   textarea {
-     width: 100%;
-     height: 100px;
-   }
+@import '../../_variables.scss';
 
-   .old-avatar {
-     width: 128px;
-     border-radius: 5px;
-   }
+.setting-item {
+  margin: 1em 1em 1.4em;
 
-   .new-avatar {
-     object-fit: cover;
-     width: 128px;
-     height: 128px;
-     border-radius: 5px;
-   }
+  textarea {
+    width: 100%;
+    height: 100px;
+  }
 
-   .btn {
-     margin-top: 1em;
-     min-height: 28px;
-     width: 10em;
-   }
- }
- .setting-list {
-   list-style-type: none;
- }
+  .old-avatar {
+    width: 128px;
+    border-radius: $fallback--avatarRadius;
+    border-radius: var(--avatarRadius, $fallback--avatarRadius);
+  }
+
+  .new-avatar {
+    object-fit: cover;
+    width: 128px;
+    height: 128px;
+    border-radius: $fallback--avatarRadius;
+    border-radius: var(--avatarRadius, $fallback--avatarRadius);
+  }
+
+  .btn {
+    margin-top: 1em;
+    min-height: 28px;
+    width: 10em;
+  }
+}
+.setting-list {
+  list-style-type: none;
+  li {
+    margin-bottom: 0.5em;
+  }
+}
 </style>

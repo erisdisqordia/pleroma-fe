@@ -2,7 +2,7 @@
   <div class="user-panel">
     <div v-if='user' class="panel panel-default" style="overflow: visible;">
       <user-card-content :user="user" :switcher="false"></user-card-content>
-      <div class="panel-footer base00-background">
+      <div class="panel-footer">
         <post-status-form v-if='user'></post-status-form>
       </div>
     </div>
@@ -11,3 +11,11 @@
 </template>
 
 <script src="./user_panel.js"></script>
+
+<style lang="scss">
+.user-panel {
+    .profile-panel-background .panel-heading {
+        background: transparent;
+    }
+}
+</style>

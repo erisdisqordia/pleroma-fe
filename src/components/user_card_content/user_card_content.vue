@@ -9,39 +9,38 @@
           <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
             <StillImage class="avatar" :src="user.profile_image_url_original"/>
           </router-link>
-          <span class="glyphicon glyphicon-user"></span>
           <div class="name-and-screen-name">
-            <div class='user-name'>{{user.name}}</div>
+            <div :title="user.name" class='user-name'>{{user.name}}</div>
             <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
               <div class='user-screen-name'>@{{user.screen_name}}</div>
             </router-link>
           </div>
         </div>
         <div v-if="isOtherUser" class="user-interactions">
-          <div v-if="user.follows_you && loggedIn" class="following base06">
+          <div v-if="user.follows_you && loggedIn" class="following">
             {{ $t('user_card.follows_you') }}
           </div>
           <div class="follow" v-if="loggedIn">
             <span v-if="user.following">
               <!--Following them!-->
-              <button @click="unfollowUser" class="base04 base00-background pressed">
+              <button @click="unfollowUser" class="pressed">
                 {{ $t('user_card.following') }}
               </button>
             </span>
             <span v-if="!user.following">
-              <button @click="followUser" class="base05 base02-background">
+              <button @click="followUser">
                 {{ $t('user_card.follow') }}
               </button>
             </span>
           </div>
           <div class='mute' v-if='isOtherUser'>
             <span v-if='user.muted'>
-              <button @click="toggleMute" class="base04 base00-background pressed">
+              <button @click="toggleMute" class="pressed">
                 {{ $t('user_card.muted') }}
               </button>
             </span>
             <span v-if='!user.muted'>
-              <button @click="toggleMute" class="base05 base02-background">
+              <button @click="toggleMute">
                 {{ $t('user_card.mute') }}
               </button>
             </span>
@@ -50,19 +49,19 @@
             <form method="POST" :action='subscribeUrl'>
               <input type="hidden" name="nickname" :value="user.screen_name">
               <input type="hidden" name="profile" value="">
-              <button click="submit" class="remote-button base05 base02-background">
+              <button click="submit" class="remote-button">
                 {{ $t('user_card.remote_follow') }}
               </button>
             </form>
           </div>
           <div class='block' v-if='isOtherUser && loggedIn'>
             <span v-if='user.statusnet_blocking'>
-              <button @click="unblockUser" class="base04 base00-background pressed">
+              <button @click="unblockUser" class="pressed">
                 {{ $t('user_card.blocked') }}
               </button>
             </span>
             <span v-if='!user.statusnet_blocking'>
-              <button @click="blockUser" class="base05 base02-background">
+              <button @click="blockUser">
                 {{ $t('user_card.block') }}
               </button>
             </span>
@@ -70,22 +69,22 @@
         </div>
       </div>
     </div>
-    <div class="panel-body profile-panel-body" :style="bodyStyle">
+    <div class="panel-body profile-panel-body">
       <div class="user-counts">
         <div class="user-count">
-          <a href="#" v-on:click.prevent="setProfileView('statuses')" v-if="switcher"><h5 class="base05">{{ $t('user_card.statuses') }}</h5></a>
+          <a href="#" v-on:click.prevent="setProfileView('statuses')" v-if="switcher"><h5>{{ $t('user_card.statuses') }}</h5></a>
           <h5 v-else>{{ $t('user_card.statuses') }}</h5>
-          <span class="base05">{{user.statuses_count}} <br><span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span></span>
+          <span>{{user.statuses_count}} <br><span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span></span>
         </div>
         <div class="user-count">
-          <a href="#" v-on:click.prevent="setProfileView('friends')" v-if="switcher"><h5 class="base05">{{ $t('user_card.followees') }}</h5></a>
+          <a href="#" v-on:click.prevent="setProfileView('friends')" v-if="switcher"><h5>{{ $t('user_card.followees') }}</h5></a>
           <h5 v-else>{{ $t('user_card.followees') }}</h5>
-          <span class="base05">{{user.friends_count}}</span>
+          <span>{{user.friends_count}}</span>
         </div>
         <div class="user-count">
-          <a href="#" v-on:click.prevent="setProfileView('followers')" v-if="switcher"><h5 class="base05">{{ $t('user_card.followers') }}</h5></a>
+          <a href="#" v-on:click.prevent="setProfileView('followers')" v-if="switcher"><h5>{{ $t('user_card.followers') }}</h5></a>
           <h5 v-else>{{ $t('user_card.followers') }}</h5>
-          <span class="base05">{{user.followers_count}}</span>
+          <span>{{user.followers_count}}</span>
         </div>
       </div>
       <p>{{user.description}}</p>
@@ -100,7 +99,8 @@
 
 .profile-panel-background {
   background-size: cover;
-  border-radius: 10px;
+  border-radius: $fallback--panelRadius;
+  border-radius: var(--panelRadius, $fallback--panelRadius);
 
   .panel-heading {
     padding: 0.6em 0em;
@@ -112,39 +112,33 @@
   top: -0em;
   padding-top: 4em;
   word-wrap: break-word;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%)
 }
 
 .user-info {
-	color: white;
+  color: white;
   padding: 0 16px 16px 16px;
   margin-bottom: -4em;
 
-  .usersettings {
-    color: white;
-    opacity: 0.8;
-  }
-
-  .container{
+  .container {
     padding: 16px 10px 4px 10px;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-content: flex-start;
-    justify-content: center;
     max-height: 56px;
     overflow: hidden;
-  }
 
-  .avatar {
-    border-radius: 5px;
-    flex: 1 0 100%;
-    width: 56px;
-    height: 56px;
-    box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
-    object-fit: cover;
+    .avatar {
+      border-radius: $fallback--avatarRadius;
+      border-radius: var(--avatarRadius, $fallback--avatarRadius);
+      flex: 1 0 100%;
+      width: 56px;
+      height: 56px;
+      box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
+      object-fit: cover;
 
-    &.animated::before {
-      display: none;
+      &.animated::before {
+        display: none;
+      }
     }
   }
 
@@ -157,7 +151,12 @@
     }
   }
 
-	text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
+  text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
+
+  .usersettings {
+    color: #fff;
+    opacity: .8;
+  }
 
   .name-and-screen-name {
     display: block;
@@ -165,18 +164,20 @@
     text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
+    flex: 1 1 0;
   }
 
-	.user-name{
-      color: white;
-	}
+  .user-name{
+    color: white;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 
   .user-screen-name {
-      color: white;
-      font-weight: lighter;
-      font-size: 15px;
-      padding-right: 0.1em;
-      flex: 0 0 auto;
+    color: white;
+    font-weight: lighter;
+    font-size: 15px;
+    padding-right: 0.1em;
   }
 
   .user-interactions {
@@ -232,23 +233,24 @@
 }
 
 .user-counts {
-    display: flex;
-    line-height:16px;
-    padding: 1em 1.5em 0em 1em;
-    text-align: center;
+  display: flex;
+  line-height:16px;
+  padding: 1em 1.5em 0em 1em;
+  text-align: center;
 }
 
 .user-count {
-    flex: 1;
+  flex: 1;
 
-    h5 {
-    	font-size:1em;
-        font-weight: bolder;
-        margin: 0 0 0.25em;
-    }
-    a {
-        text-decoration: none;
-    }
+  h5 {
+    color: white;
+    font-size:1em;
+    font-weight: bolder;
+    margin: 0 0 0.25em;
+  }
+  a {
+    text-decoration: none;
+  }
 }
 
 .dailyAvg {

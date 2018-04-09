@@ -33,134 +33,139 @@
 <script src="./attachment.js"></script>
 
 <style lang="scss">
-  .attachments {
-      display: flex;
-      flex-wrap: wrap;
-      margin-right: -0.7em;
+@import '../../_variables.scss';
 
-      .attachment.media-upload-container {
-        flex: 0 0 auto;
-        max-height: 300px;
-        max-width: 100%;
-      }
+.attachments {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -0.7em;
 
-      .placeholder {
-        margin-right: 0.5em;
-      }
+  .attachment.media-upload-container {
+    flex: 0 0 auto;
+    max-height: 300px;
+    max-width: 100%;
+  }
 
-      .small-attachment {
-        &.image, &.video {
-          max-width: 35%;
-        }
-        max-height: 100px;
-      }
+  .placeholder {
+    margin-right: 0.5em;
+  }
 
-      .attachment {
-        flex: 1 0 30%;
-        margin: 0.5em 0.7em 0.6em 0.0em;
-        align-self: flex-start;
+  .small-attachment {
+    &.image, &.video {
+      max-width: 35%;
+    }
+    max-height: 100px;
+  }
 
-        border-style: solid;
-        border-width: 1px;
+  .attachment {
+    flex: 1 0 30%;
+    margin: 0.5em 0.7em 0.6em 0.0em;
+    align-self: flex-start;
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: $fallback--attachmentRadius;
+    border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
+    overflow: hidden;
+  }
+  // fixes small gap below video
+  &.video {
+    line-height: 0;
+  }
+
+  &.html {
+    flex-basis: 90%;
+    width: 100%;
+    display: flex;
+  }
+
+  &.loading {
+    cursor: progress;
+  }
+
+  .hider {
+    position: absolute;
+    margin: 10px;
+    padding: 5px;
+    background: rgba(230,230,230,0.6);
+    font-weight: bold;
+    z-index: 4;
+  }
+
+  .small {
+    max-height: 100px;
+  }
+  video {
+    max-height: 500px;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+  }
+
+  audio {
+    width: 100%;
+  }
+
+  img.media-upload {
+    margin-bottom: -2px;
+    max-height: 300px;
+    max-width: 100%;
+  }
+
+  .oembed {
+    width: 100%;
+    margin-right: 15px;
+    display: flex;
+
+    img {
+      width: 100%;
+    }
+
+    .image {
+      flex: 1;
+      img {
+        border: 0px;
         border-radius: 5px;
-        overflow: hidden;
+        height: 100%;
+        object-fit: cover;
       }
-      // fixes small gap below video
-      &.video {
-        line-height: 0;
-      }
+    }
 
-      &.html {
-        flex-basis: 90%;
-        width: 100%;
-        display: flex;
+    .text {
+      flex: 2;
+      margin: 8px;
+      word-break: break-all;
+      h1 {
+        font-size: 14px;
+        margin: 0px;
       }
+    }
+  }
 
-      &.loading {
-        cursor: progress;
-      }
+  .image-attachment {
+    display: flex;
+    flex: 1;
 
-      .hider {
-          position: absolute;
-          margin: 10px;
-          padding: 5px;
-          background: rgba(230,230,230,0.6);
-          font-weight: bold;
-          z-index: 4;
-      }
+    .still-image {
+      width: 100%;
+      height: 100%;
+    }
 
-      .small {
+    .small {
+      img {
         max-height: 100px;
       }
-      video {
-          max-height: 500px;
-          height: 100%;
-          width: 100%;
-          z-index: 0;
-      }
+    }
 
-      audio {
-          width: 100%;
-      }
-
-      img.media-upload {
-          margin-bottom: -2px;
-          max-height: 300px;
-          max-width: 100%;
-      }
-
-      .oembed {
-          width: 100%;
-          margin-right: 15px;
-          display: flex;
-
-          img {
-              width: 100%;
-          }
-
-          .image {
-              flex: 1;
-              img {
-                  border: 0px;
-                  border-radius: 5px;
-                  height: 100%;
-                  object-fit: cover;
-              }
-          }
-
-          .text {
-              flex: 2;
-              margin: 8px;
-              word-break: break-all;
-              h1 {
-                  font-size: 14px;
-                  margin: 0px;
-              }
-          }
-      }
-
-      .image-attachment {
-          display: flex;
-          flex: 1;
-
-          .still-image {
-              width: 100%;
-              height: 100%;
-          }
-
-          .small {
-            img {
-              max-height: 100px;
-            }
-          }
-
-          img {
-              object-fit: contain;
-              width: 100%;
-              height: 100%; /* If this isn't here, chrome will stretch the images */
-              max-height: 500px;
-              image-orientation: from-image;
-          }
-      }
- }
+    img {
+      object-fit: contain;
+      width: 100%;
+      height: 100%; /* If this isn't here, chrome will stretch the images */
+      max-height: 500px;
+      image-orientation: from-image;
+    }
+  }
+}
 </style>

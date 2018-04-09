@@ -1,6 +1,6 @@
 <template>
-  <div class="settings panel panel-default base00-background">
-    <div class="panel-heading base02-background base04">
+  <div class="settings panel panel-default">
+    <div class="panel-heading">
       {{$t('registration.registration')}}
     </div>
     <div class="panel-body">
@@ -39,14 +39,14 @@
             </div>
             -->
             <div class='form-group'>
-              <button :disabled="registering" type='submit' class='btn btn-default base05 base02-background'>{{$t('general.submit')}}</button>
+              <button :disabled="registering" type='submit' class='btn btn-default'>{{$t('general.submit')}}</button>
             </div>
           </div>
           <div class='terms-of-service' v-html="termsofservice">
           </div>
         </div>
         <div v-if="error" class='form-group'>
-          <div class='error base05'>{{error}}</div>
+          <div class='alert error'>{{error}}</div>
         </div>
       </form>
     </div>
@@ -55,6 +55,7 @@
 
 <script src="./registration.js"></script>
 <style lang="scss">
+@import '../../_variables.scss';
 
 .registration-form {
   display: flex;
@@ -87,21 +88,8 @@
   }
 
   form textarea {
-    border: solid;
-    border-width: 1px;
-    border-color: silver;
-    border-radius: 5px;
     line-height:16px;
-    padding: 5px;
     resize: vertical;
-  }
-
-  input {
-    border-width: 1px;
-    border-style: solid;
-    border-color: silver;
-    border-radius: 5px;
-    padding: 0.1em 0.2em 0.2em 0.2em;
   }
 
   .captcha {
@@ -117,12 +105,7 @@
   }
 
   .error {
-    border-radius: 5px;
     text-align: center;
-    margin: 0.5em 0.6em 0;
-    background-color: rgba(255, 48, 16, 0.65);
-    min-height: 28px;
-    line-height: 28px;
   }
 }
 

@@ -60,11 +60,6 @@ const Status = {
     },
     muted () { return !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
     isReply () { return !!this.status.in_reply_to_status_id },
-    borderColor () {
-      return {
-        borderBottomColor: this.$store.state.config.colors['base02']
-      }
-    },
     isFocused () {
       // retweet or root of an expanded conversation
       if (this.focused) {
@@ -88,12 +83,6 @@ const Status = {
       }
       const lengthScore = this.status.statusnet_html.split(/<p|<br/).length + this.status.text.length / 80
       return lengthScore > 20
-    },
-    hiderStyle () {
-      const index = this.focused || this.inConversation || this.status.id === this.highlight ? 'base01' : 'base00'
-      return {
-        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors[index]} 60%)`
-      }
     },
     attachmentSize () {
       if ((this.$store.state.config.hideAttachments && !this.inConversation) ||

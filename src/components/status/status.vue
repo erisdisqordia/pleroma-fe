@@ -1,16 +1,16 @@
 <template>
-  <div class="status-el base00-background base03-border" :class="[{ 'base01-background': isFocused }, { 'status-conversation': inlineExpanded }]">
+  <div class="status-el" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
     <template v-if="muted && !noReplyLinks">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
         <small class="muteWords">{{muteWordHits.join(', ')}}</small>
-        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="base09 icon-eye-off"></i></a>
+        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="icon-eye-off"></i></a>
       </div>
     </template>
     <template v-else>
       <div v-if="retweet && !noHeading" class="media container retweet-info">
         <StillImage v-if="retweet" class='avatar' :src="statusoid.user.profile_image_url_original"/>
-        <div class="media-body base04">
+        <div class="media-body">
           <a :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
           <i class='fa icon-retweet retweeted'></i>
           {{$t('timeline.repeated')}}
@@ -24,7 +24,7 @@
           </a>
         </div>
         <div class="status-body">
-          <div class="base03-border usercard media-body" v-if="userExpanded">
+          <div class="usercard media-body" v-if="userExpanded">
             <user-card-content :user="status.user" :switcher="false"></user-card-content>
           </div>
           <div v-if="!noHeading" class="media-body container">
@@ -39,7 +39,7 @@
                     </router-link>
                   </span>
                   <a v-if="isReply && !noReplyLinks" href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)">
-                    <i class="icon-reply base09" @mouseenter="replyEnter(status.in_reply_to_status_id, $event)" @mouseout="replyLeave()"></i>
+                    <i class="icon-reply" @mouseenter="replyEnter(status.in_reply_to_status_id, $event)" @mouseout="replyLeave()"></i>
                   </a>
                 </span>
               </div>
@@ -54,23 +54,23 @@
               <router-link class="timeago" :to="{ name: 'conversation', params: { id: status.id } }">
                 <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
-              <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="base09 icon-binoculars"></i></a>
+              <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="icon-binoculars"></i></a>
               <template v-if="expandable">
-                <a href="#" @click.prevent="toggleExpanded"><i class="base09 icon-plus-squared"></i></a>
+                <a href="#" @click.prevent="toggleExpanded"><i class="icon-plus-squared"></i></a>
               </template>
-              <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="base09 icon-eye-off"></i></a>
+              <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="icon-eye-off"></i></a>
             </div>
           </div>
 
           <div v-if="showPreview" class="status-preview-container">
             <status class="status-preview" v-if="preview" :noReplyLinks="true" :statusoid="preview" :compact=true></status>
             <div class="status-preview status-preview-loading base00-background base03-border" v-else>
-              <i class="base09 icon-spin4 animate-spin"></i>
+              <i class="icon-spin4 animate-spin"></i>
             </div>
           </div>
 
           <div :class="{'tall-status': hideTallStatus}" class="status-content-wrapper">
-            <a class="tall-status-hider" :style="hiderStyle" v-if="hideTallStatus" href="#" @click.prevent="toggleShowTall">Show more</a>
+            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowTall">Show more</a>
             <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
             <a v-if="showingTall" href="#" class="tall-status-unhider" @click.prevent="toggleShowTall">Show less</a>
           </div>
@@ -83,7 +83,7 @@
           <div v-if="!noHeading && !noReplyLinks" class='status-actions media-body'>
             <div v-if="loggedIn">
               <a href="#" v-on:click.prevent="toggleReplying">
-                <i class="base09 icon-reply" :class="{'icon-reply-active': replying}"></i>
+                <i class="icon-reply" :class="{'icon-reply-active': replying}"></i>
               </a>
             </div>
             <retweet-button :loggedIn='loggedIn' :status='status'></retweet-button>
@@ -101,7 +101,6 @@
 </template>
 
 <script src="./status.js" ></script>
-
 <style lang="scss">
 @import '../../_variables.scss';
 
@@ -113,6 +112,8 @@
 .status-preview.status-el {
   border-style: solid;
   border-width: 1px;
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
 }
 
 .status-preview-container {
@@ -124,7 +125,14 @@
   position: absolute;
   max-width: 95%;
   display: flex;
-  border-radius: 4px;
+  background-color: $fallback--bg;
+  background-color: var(--bg, $fallback--bg);
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: $fallback--tooltipRadius;
+  border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
   margin-top: 0.5em;
   margin-left: 1em;
@@ -153,6 +161,15 @@
   border-left-width: 0px;
   line-height: 18px;
   min-width: 0;
+  background-color: $fallback--bg;
+  background-color: var(--bg, $fallback--bg);
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
+
+  &_focused {
+    background-color: $fallback--lightBg;
+    background-color: var(--lightBg, $fallback--lightBg);
+  }
 
   .timeline & {
     border-bottom-width: 1px;
@@ -184,9 +201,11 @@
       display: flex;
       flex-wrap: wrap;
     }
-    .links {
+    .links a {
       padding-top: 1px;
       font-size: 12px;
+      color: $fallback--link;
+      color: var(--link, $fallback--link);
     }
     .replies {
       line-height: 16px;
@@ -231,6 +250,12 @@
     width: 100%;
     text-align: center;
     line-height: 110px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%);
+    &_focused {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--lightBg 80%);
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--lightBg, $fallback--lightBg) 80%);
+    }
   }
 
   .tall-status-unhider {
@@ -263,10 +288,11 @@
     padding: 0.3em 0.6em 0 0.6em;
     margin: 0 0 -0.3em 0;
     .avatar {
+      border-radius: $fallback--avatarAltRadius;
+      border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
       margin-left: 28px;
       width: 20px;
       height: 20px;
-      border-radius: 5px;
     }
 
     .media-body {
@@ -310,23 +336,27 @@
 }
 
 .icon-reply:hover {
-  color: $blue;
+  color: $fallback--cBlue;
+  color: var(--cBlue, $fallback--cBlue);
 }
 
 .icon-reply.icon-reply-active {
-  color: $blue;
+  color: $fallback--cBlue;
+  color: var(--cBlue, $fallback--cBlue);
 }
 
 .status .avatar-compact {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: $fallback--avatarAltRadius;
+  border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
 }
 
 .avatar {
   width: 48px;
   height: 48px;
-  border-radius: 5px;
+  border-radius: $fallback--avatarRadius;
+  border-radius: var(--avatarRadius, $fallback--avatarRadius);
   overflow: hidden;
   position: relative;
 
@@ -352,18 +382,11 @@
   }
 }
 
-.status .avatar-retweeter {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  margin-left: 24px;
-  margin-top: 24px;
-}
-
 .status {
   display: flex;
   padding: 0.6em;
-  border-left: 4px rgba(255, 48, 16, 0.65);
+  border-left: 4px $fallback--cRed;
+  border-left: 4px var(--cRed, $fallback--cRed);
   border-left-style: inherit;
 }
 
@@ -372,7 +395,6 @@
 }
 
 .timeline .panel.timeline {
-  border-radius: 10px;
   overflow: hidden;
 }
 

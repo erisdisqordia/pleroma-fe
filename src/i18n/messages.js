@@ -46,7 +46,7 @@ const de = {
     settings: 'Einstellungen',
     theme: 'Farbschema',
     presets: 'Voreinstellungen',
-    theme_help: 'Benutze HTML Farbcodes (#aabbcc) um dein Farbschema anzupassen.',
+    theme_help: 'Benutze HTML Farbcodes (#rrggbb) um dein Farbschema anzupassen.',
     background: 'Hintergrund',
     foreground: 'Vordergrund',
     text: 'Text',
@@ -244,11 +244,22 @@ const en = {
     settings: 'Settings',
     theme: 'Theme',
     presets: 'Presets',
-    theme_help: 'Use hex color codes (#aabbcc) to customize your color theme.',
+    theme_help: 'Use hex color codes (#rrggbb) to customize your color theme.',
+    radii_help: 'Set up interface edge rounding (in pixels)',
     background: 'Background',
     foreground: 'Foreground',
     text: 'Text',
     links: 'Links',
+    cBlue: 'Blue (Reply, follow)',
+    cRed: 'Red (Cancel)',
+    cOrange: 'Orange (Favorite)',
+    cGreen: 'Green (Retweet)',
+    btnRadius: 'Buttons',
+    panelRadius: 'Panels',
+    avatarRadius: 'Avatars',
+    avatarAltRadius: 'Avatars (Notifications)',
+    tooltipRadius: 'Tooltips/alerts',
+    attachmentRadius: 'Attachments',
     filtering: 'Filtering',
     filtering_explanation: 'All statuses containing these words will be muted, one per line',
     attachments: 'Attachments',
@@ -552,9 +563,13 @@ const ro = {
 }
 
 const ja = {
+  chat: {
+    title: 'チャット'
+  },
   nav: {
+    chat: 'ローカルチャット',
     timeline: 'タイムライン',
-    mentions: '通知',
+    mentions: 'メンション',
     public_tl: '公開タイムライン',
     twkn: '接続しているすべてのネットワーク'
   },
@@ -562,22 +577,26 @@ const ja = {
     follows_you: 'フォローされました！',
     following: 'フォロー中！',
     follow: 'フォロー',
+    blocked: 'ブロック済み！',
+    block: 'ブロック',
     statuses: 'ステータス',
     mute: 'ミュート',
     muted: 'ミュート済み',
     followers: 'フォロワー',
     followees: 'フォロー',
-    per_day: '/日'
+    per_day: '/日',
+    remote_follow: 'リモートフォロー'
   },
   timeline: {
     show_new: '新しいものを表示',
-    error_fetching: '更新の取得中にエラーが発生しました',
+    error_fetching: '更新の取得中にエラーが発生しました。',
     up_to_date: '最新',
-    load_older: '古いステータスを読み込む'
+    load_older: '古いステータスを読み込む',
+    conversation: '会話'
   },
   settings: {
     user_settings: 'ユーザー設定',
-    name_bio: '名前 & プロフィール',
+    name_bio: '名前とプロフィール',
     name: '名前',
     bio: 'プロフィール',
     avatar: 'アバター',
@@ -590,14 +609,25 @@ const ja = {
     set_new_profile_background: '新しいプロフィールの背景を設定する',
     settings: '設定',
     theme: 'テーマ',
+    presets: 'プリセット',
+    theme_help: '16進数カラーコード (#aabbcc) を使用してカラーテーマをカスタマイズ出来ます。',
+    background: '背景',
+    foreground: '前景',
+    text: '文字',
+    links: 'リンク',
     filtering: 'フィルタリング',
-    filtering_explanation: 'これらの単語を含むすべてのものはミュートされます、1行に1つのワードを入力してください',
-    attachments: '添付ファイル',
-    hide_attachments_in_tl: 'タイムラインの添付ファイルを隠す',
-    hide_attachments_in_convo: '会話の中の添付ファイルを隠す',
-    nsfw_clickthrough: 'NSFWファイルの非表示を有効にする',
-    autoload: '下にスクロールした時に自動で読み込むようにする',
-    reply_link_preview: 'マウスカーソルを重ねたときに返信リンクプレビューを表示するようにする'
+    filtering_explanation: 'これらの単語を含むすべてのものがミュートされます、1行に1つの単語を入力してください。',
+    attachments: 'ファイル',
+    hide_attachments_in_tl: 'タイムラインのファイルを隠す。',
+    hide_attachments_in_convo: '会話の中のファイルを隠す。',
+    nsfw_clickthrough: 'NSFWファイルの非表示を有効にする。',
+    stop_gifs: 'カーソルを重ねた時にGIFを再生する。',
+    autoload: '下にスクロールした時に自動で読み込むようにする。',
+    streaming: '上までスクロールした時に自動でストリーミングされるようにする。',
+    reply_link_preview: 'マウスカーソルを重ねた時に返信のプレビューを表示するようにする。',
+    import_followers_from_a_csv_file: 'CSVファイルからフォローをインポートする。',
+    follows_imported: 'フォローがインポートされました！処理に少し時間がかかるかもしれません。',
+    follow_import_error: 'フォロワーのインポート中にエラーが発生しました。'
   },
   notifications: {
     notifications: '通知',
@@ -606,7 +636,7 @@ const ja = {
   },
   login: {
     login: 'ログイン',
-    username: 'ユーザーネーム',
+    username: 'ユーザー名',
     password: 'パスワード',
     register: '登録',
     logout: 'ログアウト'
@@ -620,14 +650,18 @@ const ja = {
   },
   post_status: {
     posting: '投稿',
-    default: 'ちょうど羽田に着陸しました'
+    default: 'ちょうどL.A.に着陸した'
   },
   finder: {
     find_user: 'ユーザー検索',
     error_fetching_user: 'ユーザー検索でエラーが発生しました'
   },
   general: {
-    submit: '送信'
+    submit: '送信',
+    apply: '適用'
+  },
+  user_profile: {
+    timeline_title: 'ユーザータイムライン'
   }
 }
 
@@ -820,7 +854,7 @@ const oc = {
     settings: 'Paramètres',
     theme: 'Tèma',
     presets: 'Pre-enregistrats',
-    theme_help: 'Emplegatz los còdis de color hex (#aabbcc) per personalizar vòstre tèma de color.',
+    theme_help: 'Emplegatz los còdis de color hex (#rrggbb) per personalizar vòstre tèma de color.',
     background: 'Rèire plan',
     foreground: 'Endavant',
     text: 'Tèxte',
@@ -1006,7 +1040,7 @@ const es = {
     settings: 'Ajustes',
     theme: 'Tema',
     presets: 'Por defecto',
-    theme_help: 'Use códigos de color hexadecimales (#aabbcc) para personalizar su tema de colores.',
+    theme_help: 'Use códigos de color hexadecimales (#rrggbb) para personalizar su tema de colores.',
     background: 'Segundo plano',
     foreground: 'Primer plano',
     text: 'Texto',
@@ -1106,7 +1140,7 @@ const pt = {
     settings: 'Configurações',
     theme: 'Tema',
     presets: 'Predefinições',
-    theme_help: 'Use cores em código hexadecimal (#aabbcc) para personalizar seu esquema de cores.',
+    theme_help: 'Use cores em código hexadecimal (#rrggbb) para personalizar seu esquema de cores.',
     background: 'Plano de Fundo',
     foreground: 'Primeiro Plano',
     text: 'Texto',
@@ -1206,7 +1240,7 @@ const ru = {
     settings: 'Настройки',
     theme: 'Тема',
     presets: 'Пресеты',
-    theme_help: 'Используйте шестнадцатеричные коды цветов (#aabbcc) для настройки темы.',
+    theme_help: 'Используйте шестнадцатеричные коды цветов (#rrggbb) для настройки темы.',
     background: 'Фон',
     foreground: 'Передний план',
     text: 'Текст',

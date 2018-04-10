@@ -1,6 +1,6 @@
 <template>
   <div v-if="size==='hide'">
-    <a class="placeholder" v-if="type !== 'html'" :href="attachment.url">[{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]</a>
+    <a class="placeholder" v-if="type !== 'html'" target="_blank" :href="attachment.url">[{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]</a>
   </div>
   <div v-else class="attachment base03-border" :class="{[type]: true, loading, 'small-attachment': isSmall}" v-show="!isEmpty">
     <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">

@@ -10,7 +10,7 @@
     <template v-else>
       <div v-if="retweet && !noHeading" class="media container retweet-info">
         <StillImage v-if="retweet" class='avatar' :src="statusoid.user.profile_image_url_original"/>
-        <div class="media-body">
+        <div class="media-body faint">
           <a :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
           <i class='fa icon-retweet retweeted'></i>
           {{$t('timeline.repeated')}}
@@ -134,12 +134,13 @@
   border-radius: $fallback--tooltipRadius;
   border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-  margin-top: 0.5em;
-  margin-left: 1em;
+  margin-top: 0.25em;
+  margin-left: 0.5em;
   z-index: 50;
   .status {
     flex: 1;
     border: 0;
+    min-width: 15em;
   }
 }
 
@@ -438,6 +439,11 @@ a.unmute {
   .status .avatar {
     width: 40px;
     height: 40px;
+  }
+
+  .status .avatar-compact {
+    width: 32px;
+    height: 32px;
   }
 }
 

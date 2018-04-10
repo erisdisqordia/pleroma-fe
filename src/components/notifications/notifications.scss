@@ -46,138 +46,23 @@
     font-size: 0.9em;
     text-align: center;
     line-height: 1.3em;
-    padding: 1px;
-  }
-
-  .notification {
-    padding-left: 4px;
-    box-sizing: border-box;
-    display: flex;
-    border-bottom: 1px solid;
-    border-bottom-color: inherit;
-
-    .non-mention {
-      display: flex;
-      flex: 1;
-      flex-wrap: nowrap;
-      padding: 0.6em;
-      min-width: 0;
-      .status-el {
-        .status {
-          padding: 0.25em 0;
-        }
-        padding: 0;
-        .status-content.media-body {
-          margin: 0;
-        }
-      }
-    }
-
-    .follow-text {
-      padding: 0.5em 0;
-    }
-
-    .status-el {
-      flex: 1;
-    }
-
-    time {
-      white-space: nowrap;
-    }
-
-    .notification-right {
-      flex: 1;
-      padding-left: 0.8em;
-      min-width: 0;
-    }
-
-    .notification-details {
-      min-width: 0px;
-      word-wrap: break-word;
-      line-height:18px;
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-      flex: 1;
-      flex-wrap: nowrap;
-
-      .username {
-        font-weight: bolder;
-      }
-      .timeago {
-        float: right;
-        font-size: 12px;
-      }
-
-      .icon-retweet.lit {
-        color: $fallback--cGreen;
-        color: var(--cGreen, $fallback--cGreen);
-      }
-
-      .icon-user-plus.lit {
-        color: $fallback--cBlue;
-        color: var(--cBlue, $fallback--cBlue);
-      }
-
-      .icon-reply.lit {
-        color: $fallback--cBlue;
-        color: var(--cBlue, $fallback--cBlue);
-      }
-
-      .icon-star.lit {
-        color: orange;
-        color: $fallback--cOrange;
-        color: var(--cOrange, $fallback--cOrange);
-      }
-
-      .status-content {
-        margin: 0;
-        max-height: 300px;
-      }
-
-      h1 {
-        word-break: break-all;
-        margin: 0 0 0.3em;
-        padding: 0;
-        font-size: 1em;
-        line-height:20px;
-        small {
-          font-weight: lighter;
-        }
-      }
-
-      p {
-        margin: 0;
-        margin-top: 0;
-        margin-bottom: 0.3em;
-      }
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .notification-content {
-    max-height: 12em;
-    overflow-y: hidden;
-    //text-overflow: ellipsis;
-
-    img {
-        object-fit: contain;
-    }
   }
 
   .unseen {
     border-left: 4px solid $fallback--cRed;
     border-left: 4px solid var(--cRed, $fallback--cRed);
-    padding-left: 6px;
+    padding-left: 0;
   }
 }
 
 .notification {
+  box-sizing: border-box;
+  display: flex;
+  border-bottom: 1px solid;
+  border-bottom-color: inherit;
+  padding-left: 4px;
+
   .avatar-compact {
-    margin-top: 0.3em;
     width: 32px;
     height: 32px;
     border-radius: $fallback--avatarAltRadius;
@@ -188,7 +73,6 @@
     &.animated::before {
       display: none;
     }
-
   }
 
   &:hover .animated.avatar {
@@ -201,6 +85,128 @@
   }
 
   .notification-usercard {
-    margin-left: 0.8em;
+    margin: 0;
+  }
+
+  .non-mention {
+    display: flex;
+    flex: 1;
+    flex-wrap: nowrap;
+    padding: 0.6em;
+    min-width: 0;
+    .avatar-container {
+      width: 32px;
+      height: 32px;
+    }
+    .status-el {
+      .status {
+        padding: 0.25em 0;
+        color: $fallback--faint;
+        color: var($fallback--faint, --faint);
+      }
+      padding: 0;
+      .status-content.media-body {
+        margin: 0;
+      }
+    }
+  }
+
+  .follow-text {
+    padding: 0.5em 0;
+  }
+
+  .status-el {
+    flex: 1;
+  }
+
+  time {
+    white-space: nowrap;
+  }
+
+  .notification-right {
+    flex: 1;
+    padding-left: 0.8em;
+    min-width: 0;
+  }
+
+  .notification-details {
+    min-width: 0px;
+    word-wrap: break-word;
+    line-height:18px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-wrap: nowrap;
+
+    .name-and-action {
+      flex: 1;
+    }
+
+    .username {
+      font-weight: bolder;
+    }
+    .timeago {
+      float: right;
+      font-size: 12px;
+    }
+
+    .icon-retweet.lit {
+      color: $fallback--cGreen;
+      color: var(--cGreen, $fallback--cGreen);
+    }
+
+    .icon-user-plus.lit {
+      color: $fallback--cBlue;
+      color: var(--cBlue, $fallback--cBlue);
+    }
+
+    .icon-reply.lit {
+      color: $fallback--cBlue;
+      color: var(--cBlue, $fallback--cBlue);
+    }
+
+    .icon-star.lit {
+      color: orange;
+      color: $fallback--cOrange;
+      color: var(--cOrange, $fallback--cOrange);
+    }
+
+    .status-content {
+      margin: 0;
+      max-height: 300px;
+    }
+
+    h1 {
+      word-break: break-all;
+      margin: 0 0 0.3em;
+      padding: 0;
+      font-size: 1em;
+      line-height:20px;
+      small {
+        font-weight: lighter;
+      }
+    }
+
+    p {
+      margin: 0;
+      margin-top: 0;
+      margin-bottom: 0.3em;
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.notification-content {
+  max-height: 12em;
+  overflow-y: hidden;
+  //text-overflow: ellipsis;
+
+  img {
+      object-fit: contain;
   }
 }

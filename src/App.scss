@@ -391,6 +391,11 @@ nav {
   }
 }
 
+.faint {
+  color: $fallback--faint;
+  color: var($fallback--faint, --faint);
+}
+
 @media all and (max-width: 959px) {
   .mobile-hidden {
     display: none;

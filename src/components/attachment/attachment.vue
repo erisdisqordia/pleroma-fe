@@ -2,7 +2,7 @@
   <div v-if="size==='hide'">
     <a class="placeholder" v-if="type !== 'html'" target="_blank" :href="attachment.url">[{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]</a>
   </div>
-  <div v-else class="attachment base03-border" :class="{[type]: true, loading, 'small-attachment': isSmall}" v-show="!isEmpty">
+  <div v-else class="attachment" :class="{[type]: true, loading, 'small-attachment': isSmall}" v-show="!isEmpty">
     <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"/>
     </a>
@@ -11,10 +11,10 @@
     </div>
 
     <a v-if="type === 'image' && !hidden" class="image-attachment" :href="attachment.url" target="_blank">
-      <StillImage :class="{'small': isSmall}" class="base03-border" referrerpolicy="no-referrer" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
+      <StillImage :class="{'small': isSmall}" referrerpolicy="no-referrer" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
-    <video :class="{'small': isSmall}" class="base03" v-if="type === 'video' && !hidden" :src="attachment.url" controls loop></video>
+    <video :class="{'small': isSmall}" v-if="type === 'video' && !hidden" :src="attachment.url" controls loop></video>
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 
@@ -61,6 +61,7 @@
     flex: 1 0 30%;
     margin: 0.5em 0.7em 0.6em 0.0em;
     align-self: flex-start;
+    line-height: 0;
 
     border-style: solid;
     border-width: 1px;
@@ -109,7 +110,7 @@
   }
 
   img.media-upload {
-    margin-bottom: -2px;
+    line-height: 0;
     max-height: 300px;
     max-width: 100%;
   }

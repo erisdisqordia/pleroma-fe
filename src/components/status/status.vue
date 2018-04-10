@@ -27,7 +27,7 @@
           <div class="usercard media-body" v-if="userExpanded">
             <user-card-content :user="status.user" :switcher="false"></user-card-content>
           </div>
-          <div v-if="!noHeading" class="media-body container">
+          <div v-if="!noHeading" class="media-body container media-heading">
             <div class="media-heading-left">
               <div class="name-and-links">
                 <h4 class="user-name">{{status.user.name}}</h4>
@@ -181,6 +181,9 @@
     flex: 1;
     padding: 0;
     margin: 0 0 0.25em 0.8em;
+  }
+
+  .media-heading {
     flex-wrap: nowrap;
   }
 

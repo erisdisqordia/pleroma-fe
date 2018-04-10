@@ -393,7 +393,7 @@ nav {
 
 .faint {
   color: $fallback--faint;
-  color: var($fallback--faint, --faint);
+  color: var(--faint, $fallback--faint);
 }
 
 @media all and (max-width: 959px) {

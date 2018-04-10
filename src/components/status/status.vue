@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
+  <div class="status-el status-fadein" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
     <template v-if="muted && !noReplyLinks">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
@@ -304,7 +304,7 @@
 }
 
 .status-fadein {
-  animation-duration: 0.5s;
+  animation-duration: 0.3s;
   animation-name: fadein;
 }
 

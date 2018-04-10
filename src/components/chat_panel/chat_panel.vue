@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-panel" v-if="this.collapsed">
+  <div class="chat-panel" v-if="!this.collapsed">
     <div class="panel panel-default">
       <div class="panel-heading timeline-heading chat-heading" @click.stop.prevent="togglePanel">
         <div class="title">

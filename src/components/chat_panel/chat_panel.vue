@@ -24,9 +24,7 @@
         </div>
       </div>
       <div class="chat-input">
-        <form @submit.prevent="submit(currentMessage)">
-          <textarea @keyup.enter="submit(currentMessage)" v-model="currentMessage" class="chat-input-textarea" rows="1"></textarea>
-        </form>
+        <textarea @keyup.enter="submit(currentMessage)" v-model="currentMessage" class="chat-input-textarea" rows="1"></textarea>
       </div>
     </div>
   </div>
@@ -77,19 +75,11 @@
 
 .chat-input {
   display: flex;
-  form {
-    flex: auto;
-    display: flex;
-    input {
-      margin: 0.5em;
-      width: fill-available;
-    }
-    textarea {
-      flex: 1;
-      margin: 0.6em;
-      min-height: 3.5em;
-      resize: none;
-    }
+  textarea {
+    flex: 1;
+    margin: 0.6em;
+    min-height: 3.5em;
+    resize: none;
   }
 }
 </style>

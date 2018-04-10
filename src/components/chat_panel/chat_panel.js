@@ -13,7 +13,6 @@ const chatPanel = {
   },
   methods: {
     submit (message) {
-      console.log(this.currentMessage)
       this.$store.state.chat.channel.push('new_msg', {text: message}, 10000)
       this.currentMessage = ''
     },

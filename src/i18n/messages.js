@@ -124,7 +124,9 @@ const fi = {
     error_fetching: 'Virhe ladatessa viestejä',
     up_to_date: 'Ajantasalla',
     load_older: 'Lataa vanhempia viestejä',
-    conversation: 'Keskustelu'
+    conversation: 'Keskustelu',
+    collapse: 'Sulje',
+    repeated: 'toisti'
   },
   settings: {
     user_settings: 'Käyttäjän asetukset',
@@ -160,7 +162,9 @@ const fi = {
   notifications: {
     notifications: 'Ilmoitukset',
     read: 'Lue!',
-    followed_you: 'seuraa sinua'
+    followed_you: 'seuraa sinua',
+    favorited_you: 'tykkäsi viestistäsi',
+    repeated_you: 'toisti viestisi'
   },
   login: {
     login: 'Kirjaudu sisään',
@@ -220,7 +224,9 @@ const en = {
     error_fetching: 'Error fetching updates',
     up_to_date: 'Up-to-date',
     load_older: 'Load older statuses',
-    conversation: 'Conversation'
+    conversation: 'Conversation',
+    collapse: 'Collapse',
+    repeated: 'repeated'
   },
   settings: {
     user_settings: 'User Settings',
@@ -272,7 +278,9 @@ const en = {
   notifications: {
     notifications: 'Notifications',
     read: 'Read!',
-    followed_you: 'followed you'
+    followed_you: 'followed you',
+    favorited_you: 'favorited your status',
+    repeated_you: 'repeated your status'
   },
   login: {
     login: 'Log in',

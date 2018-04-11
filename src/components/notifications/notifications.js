@@ -1,12 +1,11 @@
-import Status from '../status/status.vue'
-import StillImage from '../still-image/still-image.vue'
+import Notification from '../notification/notification.vue'
 
 import { sortBy, take, filter } from 'lodash'
 
 const Notifications = {
   data () {
     return {
-      visibleNotificationCount: 10
+      visibleNotificationCount: 20
     }
   },
   computed: {
@@ -27,7 +26,7 @@ const Notifications = {
     }
   },
   components: {
-    Status, StillImage
+    Notification
   },
   watch: {
     unseenCount (count) {

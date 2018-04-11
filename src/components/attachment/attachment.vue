@@ -116,6 +116,7 @@
   }
 
   .oembed {
+    line-height: 1.2em;
     width: 100%;
     margin-right: 15px;
     display: flex;

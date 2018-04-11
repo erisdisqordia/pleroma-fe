@@ -398,10 +398,6 @@
   border-bottom: none;
 }
 
-.timeline .panel.timeline {
-  //overflow: hidden;
-}
-
 .muted {
   padding: 0.25em 0.5em;
   button {

@@ -91,7 +91,6 @@ const setColors = (col, commit) => {
 
   colors.cAlertRed = col.cRed && `rgba(${col.cRed.r}, ${col.cRed.g}, ${col.cRed.b}, .5)`
 
-  console.log(JSON.stringify(col))
   radii.btnRadius = col.btnRadius
   radii.panelRadius = col.panelRadius
   radii.avatarRadius = col.avatarRadius

@@ -20,8 +20,8 @@
     position: relative;
     background: $fallback--btn;
     background: var(--btn, $fallback--btn);
-    color: $fallback--faint;
-    color: var(--faint, $fallback--faint);
+    color: $fallback--fg;
+    color: var(--fg, $fallback--fg);
     .read-button {
       position: absolute;
       right: 0.7em;
@@ -105,7 +105,7 @@
         color: var($fallback--faint, --faint);
       }
       padding: 0;
-      .status-content.media-body {
+      .media-body {
         margin: 0;
       }
     }
@@ -198,15 +198,5 @@
 
   &:last-child {
     border-bottom: none;
-  }
-}
-
-.notification-content {
-  max-height: 12em;
-  overflow-y: hidden;
-  //text-overflow: ellipsis;
-
-  img {
-      object-fit: contain;
   }
 }

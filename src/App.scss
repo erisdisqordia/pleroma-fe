@@ -46,8 +46,8 @@ a {
 
 button{
   user-select: none;
-  color: $fallback--faint;
-  color: var(--faint, $fallback--faint);
+  color: $fallback--fg;
+  color: var(--fg, $fallback--fg);
   background-color: $fallback--btn;
   background-color: var(--btn, $fallback--btn);
   border: none;
@@ -253,7 +253,7 @@ main-router {
   border-radius: $fallback--panelRadius;
   border-radius: var(--panelRadius, $fallback--panelRadius);
   box-shadow: 1px 1px 4px rgba(0,0,0,.6);
-  overflow: hidden;
+  //overflow: hidden;
 }
 
 .panel-body:empty::before {

@@ -16,12 +16,14 @@
     </div>
     <div class="panel-body">
       <div class="timeline">
-        <status-or-conversation v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status"></status-or-conversation>
-        <a href="#" v-on:click.prevent='fetchOlderStatuses()' v-if="!timeline.loading">
-          <div class="new-status-notification text-center">{{$t('timeline.load_older')}}</div>
-        </a>
-          <div class="new-status-notification text-center" v-else>...</div>
+        <status-or-conversation v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status" class="status-fadein"></status-or-conversation>
       </div>
+    </div>
+    <div class="panel-footer">
+      <a href="#" v-on:click.prevent='fetchOlderStatuses()' v-if="!timeline.loading">
+        <div class="new-status-notification text-center panel-footer">{{$t('timeline.load_older')}}</div>
+      </a>
+      <div class="new-status-notification text-center panel-footer" v-else>...</div>
     </div>
   </div>
   <div class="timeline panel panel-default" v-else-if="viewing == 'followers'">

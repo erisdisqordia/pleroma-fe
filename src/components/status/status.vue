@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el status-fadein" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
+  <div class="status-el" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
     <template v-if="muted && !noReplyLinks">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
@@ -33,7 +33,7 @@
                 <h4 class="user-name">{{status.user.name}}</h4>
                 <span class="links">
                   <router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link>
-                  <span v-if="status.in_reply_to_screen_name"> &gt;
+                  <span v-if="status.in_reply_to_screen_name" class="faint"> &gt;
                     <router-link :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
                       {{status.in_reply_to_screen_name}}
                     </router-link>
@@ -166,6 +166,9 @@
   background-color: var(--bg, $fallback--bg);
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
+
+  border-left: 4px $fallback--cRed;
+  border-left: 4px var(--cRed, $fallback--cRed);
 
   &_focused {
     background-color: $fallback--lightBg;
@@ -307,7 +310,7 @@
 }
 
 .status-fadein {
-  animation-duration: 0.3s;
+  animation-duration: 0.4s;
   animation-name: fadein;
 }
 
@@ -389,9 +392,6 @@
 .status {
   display: flex;
   padding: 0.6em;
-  border-left: 4px $fallback--cRed;
-  border-left: 4px var(--cRed, $fallback--cRed);
-  border-left-style: inherit;
 }
 
 .status-conversation:last-child {
@@ -399,7 +399,7 @@
 }
 
 .timeline .panel.timeline {
-  overflow: hidden;
+  //overflow: hidden;
 }
 
 .muted {
@@ -425,6 +425,13 @@ a.unmute {
 
 .reply-body {
   flex: 1;
+}
+
+.timeline > {
+  .status-el:last-child {
+    border-bottom-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;;
+    border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
+  }
 }
 
 @media all and (max-width: 960px) {

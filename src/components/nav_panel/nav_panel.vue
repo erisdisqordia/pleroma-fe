@@ -32,6 +32,9 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
+.nav-panel .panel {
+  overflow: hidden;
+}
 .nav-panel ul {
   list-style: none;
   margin: 0;

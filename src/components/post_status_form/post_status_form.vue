@@ -24,7 +24,7 @@
         <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
 
         <p v-if="isOverLengthLimit" class="error">{{ charactersLeft }}</p>
-        <p v-else-if="hasStatusLengthLimit">{{ charactersLeft }}</p>
+        <p class="faint" v-else-if="hasStatusLengthLimit">{{ charactersLeft }}</p>
 
         <button v-if="posting" disabled class="btn btn-default">{{$t('post_status.posting')}}</button>
         <button v-else-if="isOverLengthLimit" disabled class="btn btn-default">{{$t('general.submit')}}</button>

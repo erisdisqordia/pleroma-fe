@@ -29,7 +29,7 @@
                 <label for="hideNsfw">{{$t('settings.nsfw_clickthrough')}}</label>
             </li>
             <li>
-                <input type="checkbox" id="autoload" v-model="autoloadlocal">
+                <input type="checkbox" id="autoload" v-model="autoLoadLocal">
                 <label for="autoload">{{$t('settings.autoload')}}</label>
             </li>
             <li>

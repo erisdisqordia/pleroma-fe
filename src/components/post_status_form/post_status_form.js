@@ -53,7 +53,8 @@ const PostStatusForm = {
     candidates () {
       const firstchar = this.textAtCaret.charAt(0)
       if (firstchar === '@') {
-        const matchedUsers = filter(this.users, (user) => (String(user.name + user.screen_name)).match(this.textAtCaret.slice(1)))
+        const matchedUsers = filter(this.users, (user) => (String(user.name + user.screen_name)).toUpperCase()
+            .match(this.textAtCaret.slice(1).toUpperCase()))
         if (matchedUsers.length <= 0) {
           return false
         }

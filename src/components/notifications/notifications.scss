@@ -27,10 +27,6 @@
       right: 0.7em;
       height: 1.8em;
       line-height: 100%;
-      background-color: $fallback--btn;
-      background-color: var(--btn, $fallback--btn);
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
     }
   }
 
@@ -196,7 +192,14 @@
     }
   }
 
+  // ugly as heck
   &:last-child {
     border-bottom: none;
+    border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
+    border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
+    .status-el {
+      border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
+      border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
+    }
   }
 }

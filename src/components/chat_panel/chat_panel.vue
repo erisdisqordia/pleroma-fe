@@ -30,7 +30,7 @@
   </div>
   <div v-else class="chat-panel">
     <div class="panel panel-default">
-      <div class="panel-heading panel-footer timeline-heading chat-heading" @click.stop.prevent="togglePanel">
+      <div class="panel-heading stub timeline-heading chat-heading" @click.stop.prevent="togglePanel">
         <div class="title">
           {{$t('chat.title')}}
           <i class="icon-plus-squared" style="float: right;"></i>

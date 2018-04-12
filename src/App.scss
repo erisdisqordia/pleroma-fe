@@ -274,6 +274,11 @@ main-router {
   background-color: var(--btn, $fallback--btn);
 }
 
+.panel-heading.stub {
+  border-radius: $fallback--panelRadius;
+  border-radius: var(--panelRadius, $fallback--panelRadius);
+}
+
 .panel-footer {
   border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
   border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);

@@ -64,7 +64,7 @@
 
           <div v-if="showPreview" class="status-preview-container">
             <status class="status-preview" v-if="preview" :noReplyLinks="true" :statusoid="preview" :compact=true></status>
-            <div class="status-preview status-preview-loading base00-background base03-border" v-else>
+            <div class="status-preview status-preview-loading" v-else>
               <i class="icon-spin4 animate-spin"></i>
             </div>
           </div>
@@ -146,12 +146,14 @@
 
 .status-preview-loading {
   display: block;
-  font-size: 2em;
-  min-width: 8em;
-  padding: 0.5em;
+  min-width: 15em;
+  padding: 1em;
   text-align: center;
   border-width: 1px;
   border-style: solid;
+  i {
+    font-size: 2em;
+  }
 }
 
 .status-el {

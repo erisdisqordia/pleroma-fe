@@ -28,7 +28,9 @@ const de = {
     error_fetching: 'Fehler beim Laden',
     up_to_date: 'Aktuell',
     load_older: 'Lade ältere Beiträge',
-    conversation: 'Unterhaltung'
+    conversation: 'Unterhaltung',
+    collapse: 'Einklappen',
+    repeated: 'wiederholte'
   },
   settings: {
     user_settings: 'Benutzereinstellungen',
@@ -51,12 +53,23 @@ const de = {
     foreground: 'Vordergrund',
     text: 'Text',
     links: 'Links',
+    cBlue: 'Blau (Antworten, Folgt dir)',
+    cRed: 'Rot (Abbrechen)',
+    cOrange: 'Orange (Favorisieren)',
+    cGreen: 'Grün (Retweet)',
+    btnRadius: 'Buttons',
+    panelRadius: 'Panel',
+    avatarRadius: 'Avatare',
+    avatarAltRadius: 'Avatare (Benachrichtigungen)',
+    tooltipRadius: 'Tooltips/Warnungen',
+    attachmentRadius: 'Anhänge',
     filtering: 'Filter',
     filtering_explanation: 'Alle Beiträge die diese Wörter enthalten werden ausgeblendet. Ein Wort pro Zeile.',
     attachments: 'Anhänge',
     hide_attachments_in_tl: 'Anhänge in der Zeitleiste ausblenden',
     hide_attachments_in_convo: 'Anhänge in Unterhaltungen ausblenden',
     nsfw_clickthrough: 'Aktiviere ausblendbares Overlay für Anhänge, die als NSFW markiert sind',
+    stop_gifs: 'Play-on-hover GIFs',
     autoload: 'Aktiviere automatisches Laden von älteren Beiträgen beim scrollen',
     streaming: 'Aktiviere automatisches Laden (Streaming) von neuen Beiträgen',
     reply_link_preview: 'Aktiviere reply-link Vorschau bei Maus-Hover',
@@ -68,7 +81,9 @@ const de = {
   notifications: {
     notifications: 'Benachrichtigungen',
     read: 'Gelesen!',
-    followed_you: 'folgt dir'
+    followed_you: 'folgt dir',
+    favorited_you: 'favorisierte deine Nachricht',
+    repeated_you: 'wiederholte deine Nachricht'
   },
   login: {
     login: 'Anmelden',

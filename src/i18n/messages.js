@@ -579,7 +579,7 @@ const ja = {
     follow: 'フォロー',
     blocked: 'ブロック済み！',
     block: 'ブロック',
-    statuses: 'ステータス',
+    statuses: '投稿',
     mute: 'ミュート',
     muted: 'ミュート済み',
     followers: 'フォロワー',
@@ -588,11 +588,13 @@ const ja = {
     remote_follow: 'リモートフォロー'
   },
   timeline: {
-    show_new: '新しいものを表示',
+    show_new: '更新',
     error_fetching: '更新の取得中にエラーが発生しました。',
     up_to_date: '最新',
-    load_older: '古いステータスを読み込む',
-    conversation: '会話'
+    load_older: '古い投稿を読み込む',
+    conversation: '会話',
+    collapse: '折り畳む',
+    repeated: 'リピート'
   },
   settings: {
     user_settings: 'ユーザー設定',
@@ -611,12 +613,23 @@ const ja = {
     theme: 'テーマ',
     presets: 'プリセット',
     theme_help: '16進数カラーコード (#aabbcc) を使用してカラーテーマをカスタマイズ出来ます。',
+    radii_help: 'インターフェースの縁の丸さを設定する。',
     background: '背景',
     foreground: '前景',
     text: '文字',
     links: 'リンク',
+    cBlue: '青 (返信, フォロー)',
+    cRed: '赤 (キャンセル)',
+    cOrange: 'オレンジ (お気に入り)',
+    cGreen: '緑 (リツイート)',
+    btnRadius: 'ボタン',
+    panelRadius: 'パネル',
+    avatarRadius: 'アバター',
+    avatarAltRadius: 'アバター (通知)',
+    tooltipRadius: 'ツールチップ/アラート',
+    attachmentRadius: 'ファイル',
     filtering: 'フィルタリング',
-    filtering_explanation: 'これらの単語を含むすべてのものがミュートされます、1行に1つの単語を入力してください。',
+    filtering_explanation: 'これらの単語を含むすべてのものがミュートされます。1行に1つの単語を入力してください。',
     attachments: 'ファイル',
     hide_attachments_in_tl: 'タイムラインのファイルを隠す。',
     hide_attachments_in_convo: '会話の中のファイルを隠す。',
@@ -625,6 +638,7 @@ const ja = {
     autoload: '下にスクロールした時に自動で読み込むようにする。',
     streaming: '上までスクロールした時に自動でストリーミングされるようにする。',
     reply_link_preview: 'マウスカーソルを重ねた時に返信のプレビューを表示するようにする。',
+    follow_import: 'フォローインポート',
     import_followers_from_a_csv_file: 'CSVファイルからフォローをインポートする。',
     follows_imported: 'フォローがインポートされました！処理に少し時間がかかるかもしれません。',
     follow_import_error: 'フォロワーのインポート中にエラーが発生しました。'
@@ -632,7 +646,9 @@ const ja = {
   notifications: {
     notifications: '通知',
     read: '読んだ！',
-    followed_you: 'フォローされました'
+    followed_you: 'フォローされました',
+    favorited_you: 'あなたの投稿がお気に入りされました',
+    repeated_you: 'あなたの投稿がリピートされました'
   },
   login: {
     login: 'ログイン',
@@ -650,7 +666,7 @@ const ja = {
   },
   post_status: {
     posting: '投稿',
-    default: 'ちょうどL.A.に着陸した'
+    default: 'ちょうどL.A.に着陸しました。'
   },
   finder: {
     find_user: 'ユーザー検索',

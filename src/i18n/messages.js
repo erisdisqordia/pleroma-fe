@@ -860,7 +860,7 @@ const oc = {
     foreground: 'Endavant',
     text: 'Tèxte',
     links: 'Ligams',
-    cBlue: 'Blau (Responndre, seguir)',
+    cBlue: 'Blau (Respondre, seguir)',
     cRed: 'Roge (Anullar)',
     cOrange: 'Irange (Metre en favorit)',
     cGreen: 'Verd (Repartajar)',

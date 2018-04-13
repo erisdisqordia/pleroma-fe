@@ -957,7 +957,11 @@ const oc = {
 }
 
 const pl = {
+  chat: {
+    title: 'Czat'
+  },
   nav: {
+    chat: 'Lokalny czat',
     timeline: 'Oś czasu',
     mentions: 'Wzmianki',
     public_tl: 'Publiczna oś czasu',
@@ -974,14 +978,17 @@ const pl = {
     muted: 'Wyciszony',
     followers: 'Obserwujący',
     followees: 'Obserwowani',
-    per_day: 'dziennie'
+    per_day: 'dziennie',
+    remote_follow: 'Zdalna obserwacja'
   },
   timeline: {
     show_new: 'Pokaż nowe',
     error_fetching: 'Błąd pobierania',
     up_to_date: 'Na bieżąco',
     load_older: 'Załaduj starsze statusy',
-    conversation: 'Rozmowa'
+    conversation: 'Rozmowa',
+    collapse: 'Zwiń',
+    repeated: 'powtórzono'
   },
   settings: {
     user_settings: 'Ustawienia użytkownika',
@@ -991,26 +998,51 @@ const pl = {
     avatar: 'Awatar',
     current_avatar: 'Twój obecny awatar',
     set_new_avatar: 'Ustaw nowy awatar',
-    profile_banner: 'Banner profilui',
+    profile_banner: 'Banner profilu',
     current_profile_banner: 'Twój obecny banner profilu',
     set_new_profile_banner: 'Ustaw nowy banner profilu',
     profile_background: 'Tło profilu',
     set_new_profile_background: 'Ustaw nowe tło profilu',
     settings: 'Ustawienia',
     theme: 'Motyw',
+    presets: 'Gotowe motywy',
+    theme_help: 'Użyj kolorów w notacji szesnastkowej (#rrggbb), by stworzyć swój motyw.',
+    radii_help: 'Ustaw zaokrąglenie krawędzi interfejsu (w pikselach)',
+    background: 'Tło',
+    foreground: 'Pierwszy plan',
+    text: 'Tekst',
+    links: 'Łącza',
+    cBlue: 'Niebieski (odpowiedz, obserwuj)',
+    cRed: 'Czerwony (anuluj)',
+    cOrange: 'Pomarańczowy (ulubione)',
+    cGreen: 'Zielony (powtórzenia)',
+    btnRadius: 'Przyciski',
+    panelRadius: 'Panele',
+    avatarRadius: 'Awatary',
+    avatarAltRadius: 'Awatary (powiadomienia)',
+    tooltipRadius: 'Etykiety/alerty',
+    attachmentRadius: 'Załączniki',
     filtering: 'Filtrowanie',
     filtering_explanation: 'Wszystkie statusy zawierające te słowa będą wyciszone. Jedno słowo na linijkę',
     attachments: 'Załączniki',
     hide_attachments_in_tl: 'Ukryj załączniki w osi czasu',
     hide_attachments_in_convo: 'Ukryj załączniki w rozmowach',
     nsfw_clickthrough: 'Włącz domyślne ukrywanie załączników o treści nieprzyzwoitej (NSFW)',
+    stop_gifs: 'Odtwarzaj GIFy po najechaniu kursorem',
     autoload: 'Włącz automatyczne ładowanie po przewinięciu do końca strony',
-    reply_link_preview: 'Włącz dymek z podglądem postu po najechaniu na znak odpowiedzi'
+    streaming: 'Włącz automatycznie strumieniowanie nowych postów gdy na początku strony',
+    reply_link_preview: 'Włącz dymek z podglądem postu po najechaniu na znak odpowiedzi',
+    follow_import: 'Import obserwowanych',
+    import_followers_from_a_csv_file: 'Importuj obserwowanych z pliku CSV',
+    follows_imported: 'Obserwowani zaimportowani! Przetwarzanie może trochę potrwać.',
+    follow_import_error: 'Błąd przy importowaniu obserwowanych'
   },
   notifications: {
     notifications: 'Powiadomienia',
     read: 'Przeczytane!',
-    followed_you: 'obserwuje cię'
+    followed_you: 'obserwuje cię',
+    favorited_you: 'dodał twój status do ulubionych',
+    repeated_you: 'powtórzył twój status'
   },
   login: {
     login: 'Zaloguj',
@@ -1021,7 +1053,7 @@ const pl = {
   },
   registration: {
     registration: 'Rejestracja',
-    fullname: 'Wyświetlane imię',
+    fullname: 'Wyświetlana nazwa profilu',
     email: 'Email',
     bio: 'Bio',
     password_confirm: 'Potwierdzenie hasła'
@@ -1035,7 +1067,11 @@ const pl = {
     error_fetching_user: 'Błąd przy pobieraniu profilu'
   },
   general: {
-    submit: 'Wyślij'
+    submit: 'Wyślij',
+    apply: 'Zastosuj'
+  },
+  user_profile: {
+    timeline_title: 'Oś czasu użytkownika'
   }
 }
 

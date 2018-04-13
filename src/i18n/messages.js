@@ -867,7 +867,9 @@ const oc = {
     error_fetching: 'Error en cercant de mesas a jorn',
     up_to_date: 'Actualizat',
     load_older: 'Ne veire mai',
-    conversation: 'Conversacion'
+    conversation: 'Conversacion',
+    collapse: 'Plegar',
+    repeated: 'repetit'
   },
   settings: {
     user_settings: 'Paramètres utilizaire',
@@ -885,8 +887,8 @@ const oc = {
     settings: 'Paramètres',
     theme: 'Tèma',
     presets: 'Pre-enregistrats',
-    radii_help: 'Configurar los caires arredondits de l’interfàcia (en pixèls)',
     theme_help: 'Emplegatz los còdis de color hex (#rrggbb) per personalizar vòstre tèma de color.',
+    radii_help: 'Configurar los caires arredondits de l’interfàcia (en pixèls)',
     background: 'Rèire plan',
     foreground: 'Endavant',
     text: 'Tèxte',
@@ -907,6 +909,7 @@ const oc = {
     hide_attachments_in_tl: 'Rescondre las pèças juntas',
     hide_attachments_in_convo: 'Rescondre las pèças juntas dins las conversacions',
     nsfw_clickthrough: 'Activar lo clic per mostrar los imatges marcats coma pels adults o sensibles',
+    stop_gifs: 'Lançar los GIFs al subrevòl',
     autoload: 'Activar lo cargament automatic un còp arribat al cap de la pagina',
     streaming: 'Activar lo cargament automatic dels novèls estatus en anar amont',
     reply_link_preview: 'Activar l’apercebut en passar la mirga',
@@ -918,7 +921,9 @@ const oc = {
   notifications: {
     notifications: 'Notficacions',
     read: 'Legit !',
-    followed_you: 'vos a seguit'
+    followed_you: 'vos a seguit',
+    favorited_you: 'a mes vòstre estatut en favorit',
+    repeated_you: 'a repetit your vòstre estatut'
   },
   login: {
     login: 'Connexion',

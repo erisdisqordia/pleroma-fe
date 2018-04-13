@@ -1305,7 +1305,9 @@ const ru = {
     error_fetching: 'Ошибка при обновлении',
     up_to_date: 'Обновлено',
     load_older: 'Загрузить старые статусы',
-    conversation: 'Разговор'
+    conversation: 'Разговор',
+    collapse: 'Свернуть',
+    repeated: 'повторил(а)'
   },
   settings: {
     user_settings: 'Настройки пользователя',
@@ -1324,10 +1326,21 @@ const ru = {
     theme: 'Тема',
     presets: 'Пресеты',
     theme_help: 'Используйте шестнадцатеричные коды цветов (#rrggbb) для настройки темы.',
+    radii_help: 'Округление краёв элементов интерфейса (в пикселях)',
     background: 'Фон',
     foreground: 'Передний план',
     text: 'Текст',
     links: 'Ссылки',
+    cBlue: 'Синий (Ответить, читать)',
+    cRed: 'Красный (Отменить)',
+    cOrange: 'Оранжевый (Добавить в избранное)',
+    cGreen: 'Зелёный (Повторить)',
+    btnRadius: 'Кнопки',
+    panelRadius: 'Панели',
+    avatarRadius: 'Аватары',
+    avatarAltRadius: 'Аватары в уведомлениях',
+    tooltipRadius: 'Всплывающие подсказки/уведомления',
+    attachmentRadius: 'Прикреплённые файлы',
     filtering: 'Фильтрация',
     filtering_explanation: 'Все статусы, содержащие данные слова, будут игнорироваться, по одному в строке',
     attachments: 'Вложения',
@@ -1346,7 +1359,9 @@ const ru = {
   notifications: {
     notifications: 'Уведомления',
     read: 'Прочесть',
-    followed_you: 'начал читать вас'
+    followed_you: 'начал(а) читать вас',
+    favorited_you: 'нравится ваш статус',
+    repeated_you: 'повторил(а) ваш статус'
   },
   login: {
     login: 'Войти',

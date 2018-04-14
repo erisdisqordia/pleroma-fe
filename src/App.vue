@@ -24,7 +24,6 @@
               <user-panel></user-panel>
               <nav-panel></nav-panel>
               <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
-              <chat-panel v-if="currentUser && chat"></chat-panel>
               <notifications v-if="currentUser"></notifications>
             </div>
           </div>
@@ -36,6 +35,7 @@
         </transition>
       </div>
     </div>
+    <chat-panel v-if="currentUser && chat" class="floating-chat mobile-hidden"></chat-panel>
   </div>
 </template>
 

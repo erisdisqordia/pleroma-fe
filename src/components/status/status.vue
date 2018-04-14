@@ -54,7 +54,7 @@
               <router-link class="timeago" :to="{ name: 'conversation', params: { id: status.id } }">
                 <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
-              <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="icon-binoculars"></i></a>
+              <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="icon-link-ext"></i></a>
               <template v-if="expandable">
                 <a href="#" @click.prevent="toggleExpanded"><i class="icon-plus-squared"></i></a>
               </template>

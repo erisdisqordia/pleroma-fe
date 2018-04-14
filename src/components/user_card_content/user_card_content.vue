@@ -6,7 +6,7 @@
           <i class="icon-cog usersettings"></i>
         </router-link>
         <a :href="user.statusnet_profile_url" target="_blank" style="float: right; margin-top:16px;" v-if="isOtherUser">
-          <i class="icon-binoculars usersettings"></i>
+          <i class="icon-link-ext usersettings"></i>
         </a>
         <div class='container'>
           <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
@@ -90,7 +90,7 @@
           <span>{{user.followers_count}}</span>
         </div>
       </div>
-      <p>{{user.description}}</p>
+      <p v-if="!hideBio">{{user.description}}</p>
     </div>
   </div>
 </template>

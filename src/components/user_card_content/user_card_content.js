@@ -2,7 +2,7 @@ import StillImage from '../still-image/still-image.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
 export default {
-  props: [ 'user', 'switcher' ],
+  props: [ 'user', 'switcher', 'hideBio' ],
   computed: {
     headingStyle () {
       const color = this.$store.state.config.colors.bg

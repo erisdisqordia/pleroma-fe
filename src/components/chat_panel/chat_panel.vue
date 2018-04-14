@@ -32,8 +32,8 @@
     <div class="panel panel-default">
       <div class="panel-heading stub timeline-heading chat-heading" @click.stop.prevent="togglePanel">
         <div class="title">
+          <i class="icon-comment-empty"></i>
           {{$t('chat.title')}}
-          <i class="icon-plus-squared" style="float: right;"></i>
         </div>
       </div>
     </div>
@@ -44,12 +44,25 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
+
+.floating-chat {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  z-index: 1000;
+}
+
 .chat-heading {
   cursor: pointer;
+  .icon-comment-empty {
+    color: $fallback--fg;
+    color: var(--fg, $fallback--fg);
+  }
 }
 
 .chat-window {
-  max-height: 200px;
+  width: 345px;
+  max-height: 40vh;
   overflow-y: auto;
   overflow-x: hidden;
 }

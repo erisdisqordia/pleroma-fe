@@ -311,8 +311,8 @@
   }
 
   .retweet-info {
-    padding: 0.3em 0.6em 0 0.6em;
-    margin: 0 0 -0.3em 0;
+    padding: 0.4em 0.6em 0 0.6em;
+    margin: 0 0 -0.5em 0;
     .avatar {
       border-radius: $fallback--avatarAltRadius;
       border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);

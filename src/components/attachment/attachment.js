@@ -33,6 +33,9 @@ const Attachment = {
     },
     isSmall () {
       return this.size === 'small'
+    },
+    fullwidth () {
+      return fileTypeService.fileType(this.attachment.mimetype) === 'html'
     }
   },
   methods: {

@@ -2,7 +2,7 @@
   <div v-if="size==='hide'">
     <a class="placeholder" v-if="type !== 'html'" target="_blank" :href="attachment.url">[{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]</a>
   </div>
-  <div v-else class="attachment" :class="{[type]: true, loading, 'small-attachment': isSmall}" v-show="!isEmpty">
+  <div v-else class="attachment" :class="{[type]: true, loading, 'small-attachment': isSmall, 'fullwidth': fullwidth}" v-show="!isEmpty">
     <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"/>
     </a>
@@ -71,6 +71,9 @@
     border-color: var(--border, $fallback--border);
     overflow: hidden;
   }
+  .fullwidth {
+    flex-basis: 100%;
+  }
   // fixes small gap below video
   &.video {
     line-height: 0;
@@ -117,6 +120,7 @@
 
   .oembed {
     line-height: 1.2em;
+    flex: 1 0 100%;
     width: 100%;
     margin-right: 15px;
     display: flex;

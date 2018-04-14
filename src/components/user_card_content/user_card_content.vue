@@ -246,7 +246,6 @@
   flex: 1;
 
   h5 {
-    color: white;
     font-size:1em;
     font-weight: bolder;
     margin: 0 0 0.25em;

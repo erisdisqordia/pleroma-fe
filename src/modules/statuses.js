@@ -121,7 +121,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const timelineObject = state.timelines[timeline]
 
   const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
-  const older = maxNew < timelineObject.maxId
+  const older = timeline && maxNew < timelineObject.maxId
 
   if (timeline && !noIdUpdate && statuses.length > 0 && !older) {
     timelineObject.maxId = maxNew

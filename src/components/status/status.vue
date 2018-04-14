@@ -201,8 +201,11 @@
       font-weight: lighter;
     }
     h4 {
+      white-space: nowrap;
       font-size: 14px;
       margin-right: 0.25em;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .name-and-links {
       padding: 0;
@@ -210,11 +213,18 @@
       display: flex;
       flex-wrap: wrap;
     }
-    .links a {
+    .links {
       padding-top: 1px;
       font-size: 12px;
       color: $fallback--link;
       color: var(--link, $fallback--link);
+      max-width: 100%;
+      a {
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
     }
     .replies {
       line-height: 16px;
@@ -307,6 +317,12 @@
     .media-body {
       font-size: 1em;
       line-height: 22px;
+      a {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, max, min, isArray } from 'lodash'
+import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -106,6 +106,7 @@ const mergeOrAdd = (arr, obj, item) => {
 const sortTimeline = (timeline) => {
   timeline.visibleStatuses = sortBy(timeline.visibleStatuses, ({id}) => -id)
   timeline.statuses = sortBy(timeline.statuses, ({id}) => -id)
+  timeline.minVisibleId = (last(timeline.visibleStatuses) || {}).id
   return timeline
 }
 
@@ -119,12 +120,11 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const allStatusesObject = state.allStatusesObject
   const timelineObject = state.timelines[timeline]
 
-  if (timeline && !noIdUpdate && statuses.length > 0) {
-    timelineObject.maxId = max([maxBy(statuses, 'id').id, timelineObject.maxId])
-    timelineObject.minVisibleId = min([minBy(statuses, 'id').id, timelineObject.minVisibleId])
-    if (timelineObject.minVisibleId <= 0) {
-      timelineObject.minVisibleId = minBy(statuses, 'id').id
-    }
+  const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
+  const older = maxNew < timelineObject.maxId
+
+  if (timeline && !noIdUpdate && statuses.length > 0 && !older) {
+    timelineObject.maxId = maxNew
   }
 
   const addStatus = (status, showImmediately, addToTimeline = true) => {
@@ -289,6 +289,9 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   // Keep the visible statuses sorted
   if (timeline) {
     sortTimeline(timelineObject)
+    if ((older || timelineObject.minVisibleId <= 0) && statuses.length > 0) {
+      timelineObject.minVisibleId = minBy(statuses, 'id').id
+    }
   }
 }
 
@@ -299,6 +302,7 @@ export const mutations = {
 
     oldTimeline.newStatusCount = 0
     oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
+    oldTimeline.minVisibleId = last(oldTimeline.visibleStatuses).id
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },

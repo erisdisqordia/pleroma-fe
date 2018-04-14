@@ -119,9 +119,12 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const allStatusesObject = state.allStatusesObject
   const timelineObject = state.timelines[timeline]
 
-  if (timeline && !noIdUpdate) {
+  if (timeline && !noIdUpdate && statuses.length > 0) {
     timelineObject.maxId = max([maxBy(statuses, 'id').id, timelineObject.maxId])
     timelineObject.minVisibleId = min([minBy(statuses, 'id').id, timelineObject.minVisibleId])
+    if (timelineObject.minVisibleId <= 0) {
+      timelineObject.minVisibleId = minBy(statuses, 'id').id
+    }
   }
 
   const addStatus = (status, showImmediately, addToTimeline = true) => {

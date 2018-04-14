@@ -33,7 +33,8 @@
                 <h4 class="user-name">{{status.user.name}}</h4>
                 <span class="links">
                   <router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link>
-                  <span v-if="status.in_reply_to_screen_name" class="faint"> &gt;
+                  <span v-if="status.in_reply_to_screen_name" class="faint reply-info">
+                    <i class="icon-right-open"></i>
                     <router-link :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
                       {{status.in_reply_to_screen_name}}
                     </router-link>
@@ -212,9 +213,12 @@
       flex: 1 0;
       display: flex;
       flex-wrap: wrap;
+      align-content: center;
     }
     .links {
+      display: flex;
       padding-top: 1px;
+      margin-left: 0.2em;
       font-size: 12px;
       color: $fallback--link;
       color: var(--link, $fallback--link);
@@ -225,6 +229,9 @@
         overflow: hidden;
         white-space: nowrap;
       }
+    }
+    .reply-info {
+      display: flex;
     }
     .replies {
       line-height: 16px;
@@ -317,6 +324,13 @@
     .media-body {
       font-size: 1em;
       line-height: 22px;
+
+      display: flex;
+      align-content: center;
+      flex-wrap: wrap;
+      i {
+        padding: 0 0.2em;
+      }
       a {
         max-width: 100%;
         overflow: hidden;

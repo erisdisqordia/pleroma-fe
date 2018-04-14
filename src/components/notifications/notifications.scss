@@ -138,10 +138,15 @@
 
     .name-and-action {
       flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .username {
       font-weight: bolder;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .timeago {
       float: right;

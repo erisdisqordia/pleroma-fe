@@ -236,6 +236,7 @@
   text-align: center;
   justify-content: space-between;
   text-shadow: $usercard-text-shadow;
+  color: #fff;
 
   &.clickable {
     .user-count {

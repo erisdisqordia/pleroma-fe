@@ -29,7 +29,6 @@ const PostStatusForm = {
     MediaUpload
   },
   mounted () {
-    console.log(this.$refs)
     this.resize(this.$refs.textarea)
   },
   data () {

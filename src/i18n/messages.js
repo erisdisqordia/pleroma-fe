@@ -710,8 +710,8 @@ const fr = {
     blocked: 'Bloqué',
     block: 'Bloquer',
     statuses: 'Statuts',
-    mute: 'En sourdine',
-    muted: 'Mis en sourdine',
+    mute: 'Mettre en muet',
+    muted: 'Mis en muet',
     followers: 'Vous suivent',
     followees: 'Suivis',
     per_day: 'par jour'
@@ -731,22 +731,32 @@ const fr = {
     avatar: 'Avatar',
     current_avatar: 'Votre avatar',
     set_new_avatar: 'Changer d\'avatar',
-    profile_banner: 'Bannière du Profil',
+    profile_banner: 'Bannière du profil',
     current_profile_banner: 'Bannière du profil',
     set_new_profile_banner: 'Changer de bannière',
     profile_background: 'Image de fond',
-    set_new_profile_background: 'Changer l\'image de fond',
+    set_new_profile_background: 'Changer d\'image de fond',
     settings: 'Paramètres',
     theme: 'Thème',
     filtering: 'Filtre',
-    filtering_explanation: 'Tout les statuts contenant ces mots vont être mis sous silence, un mot par ligne.',
+    filtering_explanation: 'Tout les statuts contenant ces mots vont être cachés, un mot par ligne.',
     attachments: 'Pièces jointes',
     hide_attachments_in_tl: 'Cacher les pièces jointes dans le journal',
     hide_attachments_in_convo: 'Cacher les pièces jointes dans les conversations',
     nsfw_clickthrough: 'Activer le clic pour afficher les images marquées comme contenu adulte ou sensible',
     autoload: 'Activer le chargement automatique une fois le bas de la page atteint',
-    streaming: 'Activer le chargement automatique de nouveau statuts une fois le haut de la page atteint',
-    reply_link_preview: 'Activer un aperçu sur passage de la souris'
+    reply_link_preview: 'Activer un aperçu sur passage de la souris',
+    presets: 'Thèmes prédéfinis',
+    theme_help: 'Utilisez les codes de couleur hexadécimaux (#aabbcc) pour customiser les couleurs de votre thème.',
+    background: 'Arrière plan',
+    foreground: 'Premier plan',
+    text: 'Texte',
+    links: 'Liens',
+    streaming: 'Active le défilement automatique de nouveaux statuts lorsqu\'on est au haut de la page',
+    follow_import: 'Importer ses abonnements',
+    import_followers_from_a_csv_file: 'Importer ses abonnements depuis un fichier csv',
+    follows_imported: 'Abonnements importés ! Le traitement peut prendre un moment.',
+    follow_import_error: 'Erreur lors de l\'importation des abonnements.'
   },
   notifications: {
     notifications: 'Notifications',
@@ -765,7 +775,7 @@ const fr = {
     fullname: 'Nom complet',
     email: 'Adresse courriel',
     bio: 'Biographie',
-    password_confirm: 'Confirmer le mot de passe'
+    password_confirm: 'Confirmez le mot de passe'
   },
   post_status: {
     posting: 'Envoi en cours',
@@ -773,10 +783,11 @@ const fr = {
   },
   finder: {
     find_user: 'Chercher un utilisateur',
-    error_fetching_user: 'Une erreur est survenue pendant la recherche d\'un utilisateur'
+    error_fetching_user: 'Une erreur est survenue pendant la recherche de l\'utilisateur'
   },
   general: {
-    submit: 'Envoyer'
+    submit: 'Envoyer',
+    apply: 'Appliquer'
   }
 }
 

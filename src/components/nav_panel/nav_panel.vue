@@ -45,8 +45,6 @@
   border-bottom: 1px solid;
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
-  background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
   padding: 0;
 
   &:first-child a {

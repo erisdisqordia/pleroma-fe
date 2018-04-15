@@ -165,8 +165,6 @@
   border-left-width: 0px;
   line-height: 18px;
   min-width: 0;
-  background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
 

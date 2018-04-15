@@ -93,8 +93,8 @@ input, textarea, .select {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 2px black inset;
-  background-color: $fallback--lightBg;
-  background-color: var(--lightBg, $fallback--lightBg);
+  background-color: $fallback--input;
+  background-color: var(--input, $fallback--input);
   color: $fallback--lightFg;
   color: var(--lightFg, $fallback--lightFg);
   font-family: sans-serif;
@@ -154,8 +154,8 @@ input, textarea, .select {
       border-top: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: 0px 0px 2px black inset;
       margin-right: .5em;
-      background-color: $fallback--btn;
-      background-color: var(--btn, $fallback--btn);
+      background-color: $fallback--input;
+      background-color: var(--input $fallback--input);
       vertical-align: top;
       text-align: center;
       line-height: 1.1em;

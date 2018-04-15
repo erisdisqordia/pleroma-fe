@@ -71,6 +71,7 @@ const setColors = (col, commit) => {
   colors.bg = rgb2hex(col.bg.r, col.bg.g, col.bg.b)                         // background
   colors.lightBg = rgb2hex((col.bg.r + col.fg.r) / 2, (col.bg.g + col.fg.g) / 2, (col.bg.b + col.fg.b) / 2) // hilighted bg
   colors.btn = rgb2hex(col.fg.r, col.fg.g, col.fg.b)                         // panels & buttons
+  colors.input = `rgba(${col.fg.r}, ${col.fg.g}, ${col.fg.b}, .5)`
   colors.border = rgb2hex(col.fg.r - mod, col.fg.g - mod, col.fg.b - mod)       // borders
   colors.faint = `rgba(${col.text.r}, ${col.text.g}, ${col.text.b}, .5)`
   colors.fg = rgb2hex(col.text.r, col.text.g, col.text.b)                   // text

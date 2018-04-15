@@ -698,6 +698,7 @@ const ja = {
 
 const fr = {
   nav: {
+	chat: 'Chat local',
     timeline: 'Journal',
     mentions: 'Notifications',
     public_tl: 'Statuts locaux',
@@ -714,14 +715,17 @@ const fr = {
     muted: 'Mis en muet',
     followers: 'Vous suivent',
     followees: 'Suivis',
-    per_day: 'par jour'
+    per_day: 'par jour',
+	remote_follow: 'Suivre d\'une autre instance'
   },
   timeline: {
     show_new: 'Afficher plus',
     error_fetching: 'Erreur en cherchant des mises à jours',
     up_to_date: 'À jour',
     load_older: 'Afficher plus',
-    conversation: 'Conversation'
+    conversation: 'Conversation',
+    collapse: 'Fermer',
+    repeated: 'a partagé'
   },
   settings: {
     user_settings: 'Paramètres utilisateur',
@@ -745,7 +749,7 @@ const fr = {
     hide_attachments_in_convo: 'Cacher les pièces jointes dans les conversations',
     nsfw_clickthrough: 'Activer le clic pour afficher les images marquées comme contenu adulte ou sensible',
     autoload: 'Activer le chargement automatique une fois le bas de la page atteint',
-    reply_link_preview: 'Activer un aperçu sur passage de la souris',
+    reply_link_preview: 'Activer un aperçu d\'une réponse sur passage de la souris',
     presets: 'Thèmes prédéfinis',
     theme_help: 'Utilisez les codes de couleur hexadécimaux (#aabbcc) pour customiser les couleurs de votre thème.',
     background: 'Arrière plan',
@@ -756,12 +760,26 @@ const fr = {
     follow_import: 'Importer ses abonnements',
     import_followers_from_a_csv_file: 'Importer ses abonnements depuis un fichier csv',
     follows_imported: 'Abonnements importés ! Le traitement peut prendre un moment.',
-    follow_import_error: 'Erreur lors de l\'importation des abonnements.'
+    follow_import_error: 'Erreur lors de l\'importation des abonnements.',
+	cBlue: 'Bleu (Répondre, suivre)',
+    cRed: 'Rouge (Annuler)',
+    cOrange: 'Orange (Aimer)',
+    cGreen: 'Vert (Partager)',
+    btnRadius: 'Boutons',
+    panelRadius: 'Fenêtres',
+    avatarRadius: 'Avatars',
+    avatarAltRadius: 'Avatars (Notifications)',
+    tooltipRadius: 'Info-bulles/alertes ',
+    attachmentRadius: 'Pièces jointes',
+	radii_help: 'Mettre en place l\'arondissement des coins de l\'interface (en pixels)',
+	stop_gifs: 'Passer la souris sur un GIF pour l\'animer'
   },
   notifications: {
     notifications: 'Notifications',
     read: 'Lu !',
-    followed_you: 'vous a suivi'
+    followed_you: 'vous a suivi',
+	favorited_you: 'a aimé votre statut',
+    repeated_you: 'a partagé votre statut'
   },
   login: {
     login: 'Connexion',
@@ -772,8 +790,8 @@ const fr = {
   },
   registration: {
     registration: 'Inscription',
-    fullname: 'Nom complet',
-    email: 'Adresse courriel',
+    fullname: 'Nom affiché',
+    email: 'Adresse email',
     bio: 'Biographie',
     password_confirm: 'Confirmez le mot de passe'
   },
@@ -783,11 +801,14 @@ const fr = {
   },
   finder: {
     find_user: 'Chercher un utilisateur',
-    error_fetching_user: 'Une erreur est survenue pendant la recherche de l\'utilisateur'
+    error_fetching_user: 'Une erreur est survenue lors de la recherche de l\'utilisateur'
   },
   general: {
     submit: 'Envoyer',
     apply: 'Appliquer'
+  },
+  user_profile: {
+    timeline_title: 'Journal de l\'utilisateur'
   }
 }
 

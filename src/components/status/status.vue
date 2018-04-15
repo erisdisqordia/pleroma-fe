@@ -187,6 +187,10 @@
     margin: 0 0 0.25em 0.8em;
   }
 
+  .usercard {
+    margin-bottom: .7em
+  }
+
   .media-heading {
     flex-wrap: nowrap;
   }

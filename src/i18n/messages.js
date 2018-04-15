@@ -698,7 +698,7 @@ const ja = {
 
 const fr = {
   nav: {
-	chat: 'Chat local',
+    chat: 'Chat local',
     timeline: 'Journal',
     mentions: 'Notifications',
     public_tl: 'Statuts locaux',
@@ -716,7 +716,7 @@ const fr = {
     followers: 'Vous suivent',
     followees: 'Suivis',
     per_day: 'par jour',
-	remote_follow: 'Suivre d\'une autre instance'
+    remote_follow: 'Suivre d\'une autre instance'
   },
   timeline: {
     show_new: 'Afficher plus',
@@ -761,7 +761,7 @@ const fr = {
     import_followers_from_a_csv_file: 'Importer ses abonnements depuis un fichier csv',
     follows_imported: 'Abonnements importés ! Le traitement peut prendre un moment.',
     follow_import_error: 'Erreur lors de l\'importation des abonnements.',
-	cBlue: 'Bleu (Répondre, suivre)',
+    cBlue: 'Bleu (Répondre, suivre)',
     cRed: 'Rouge (Annuler)',
     cOrange: 'Orange (Aimer)',
     cGreen: 'Vert (Partager)',
@@ -771,14 +771,14 @@ const fr = {
     avatarAltRadius: 'Avatars (Notifications)',
     tooltipRadius: 'Info-bulles/alertes ',
     attachmentRadius: 'Pièces jointes',
-	radii_help: 'Mettre en place l\'arondissement des coins de l\'interface (en pixels)',
-	stop_gifs: 'Passer la souris sur un GIF pour l\'animer'
+    radii_help: 'Mettre en place l\'arondissement des coins de l\'interface (en pixels)',
+    stop_gifs: 'Passer la souris sur un GIF pour l\'animer'
   },
   notifications: {
     notifications: 'Notifications',
     read: 'Lu !',
     followed_you: 'vous a suivi',
-	favorited_you: 'a aimé votre statut',
+    favorited_you: 'a aimé votre statut',
     repeated_you: 'a partagé votre statut'
   },
   login: {

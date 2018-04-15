@@ -74,20 +74,17 @@
       </div>
     </div>
     <div class="panel-body profile-panel-body">
-      <div class="user-counts">
-        <div class="user-count" :class="{selected: selected === 'statuses'}">
-          <a href="#" v-on:click.prevent="setProfileView('statuses')" v-if="switcher"><h5>{{ $t('user_card.statuses') }}</h5></a>
-          <h5 v-else>{{ $t('user_card.statuses') }}</h5>
+      <div class="user-counts" :class="{clickable: switcher}">
+        <div class="user-count" v-on:click.prevent="setProfileView('statuses')" :class="{selected: selected === 'statuses'}">
+          <h5>{{ $t('user_card.statuses') }}</h5>
           <span>{{user.statuses_count}} <br></span>
         </div>
-        <div class="user-count" :class="{selected: selected === 'friends'}">
-          <a href="#" v-on:click.prevent="setProfileView('friends')" v-if="switcher"><h5>{{ $t('user_card.followees') }}</h5></a>
-          <h5 v-else>{{ $t('user_card.followees') }}</h5>
+        <div class="user-count" v-on:click.prevent="setProfileView('friends')" :class="{selected: selected === 'friends'}">
+          <h5>{{ $t('user_card.followees') }}</h5>
           <span>{{user.friends_count}}</span>
         </div>
-        <div class="user-count" :class="{selected: selected === 'followers'}">
-          <a href="#" v-on:click.prevent="setProfileView('followers')" v-if="switcher"><h5>{{ $t('user_card.followers') }}</h5></a>
-          <h5 v-else>{{ $t('user_card.followers') }}</h5>
+        <div class="user-count" v-on:click.prevent="setProfileView('followers')" :class="{selected: selected === 'followers'}">
+          <h5>{{ $t('user_card.followers') }}</h5>
           <span>{{user.followers_count}}</span>
         </div>
       </div>
@@ -239,6 +236,16 @@
   text-align: center;
   justify-content: space-between;
   text-shadow: $usercard-text-shadow;
+
+  &.clickable {
+    .user-count {
+      cursor: pointer;
+
+      &:hover:not(.selected) {
+        background-color: rgba(0,0,0,.1);
+      }
+    }
+  }
 }
 
 .user-count {

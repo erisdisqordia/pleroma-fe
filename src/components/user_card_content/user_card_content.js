@@ -61,8 +61,10 @@ export default {
       store.state.api.backendInteractor.setUserMute(this.user)
     },
     setProfileView (v) {
-      const store = this.$store
-      store.commit('setProfileView', { v })
+      if (this.switcher) {
+        const store = this.$store
+        store.commit('setProfileView', { v })
+      }
     }
   }
 }

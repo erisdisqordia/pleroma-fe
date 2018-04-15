@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="user" class="user-profile panel panel-default">
-      <user-card-content :user="user" :switcher="true"></user-card-content>
+      <user-card-content :user="user" :switcher="true" :selected="timeline.viewing"></user-card-content>
     </div>
     <Timeline :title="$t('user_profile.timeline_title')" :timeline="timeline" :timeline-name="'user'" :user-id="userId"/>
   </div>

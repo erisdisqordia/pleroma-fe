@@ -704,8 +704,8 @@ const fr = {
     twkn: 'Le réseau connu'
   },
   user_card: {
-    follows_you: 'Vous suit !',
-    following: 'Suivi !',
+    follows_you: 'Vous suit !',
+    following: 'Suivi !',
     follow: 'Suivre',
     blocked: 'Bloqué',
     block: 'Bloquer',
@@ -745,11 +745,12 @@ const fr = {
     hide_attachments_in_convo: 'Cacher les pièces jointes dans les conversations',
     nsfw_clickthrough: 'Activer le clic pour afficher les images marquées comme contenu adulte ou sensible',
     autoload: 'Activer le chargement automatique une fois le bas de la page atteint',
+    streaming: 'Activer le chargement automatique de nouveau statuts une fois le haut de la page atteint',
     reply_link_preview: 'Activer un aperçu sur passage de la souris'
   },
   notifications: {
-    notifications: 'Notfications',
-    read: 'Lu !',
+    notifications: 'Notifications',
+    read: 'Lu !',
     followed_you: 'vous a suivi'
   },
   login: {

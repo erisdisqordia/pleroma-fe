@@ -112,17 +112,14 @@
 }
 
 .profile-panel-body {
-  top: -0em;
-  padding-top: 4em;
   word-wrap: break-word;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%)
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80px);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80px)
 }
 
 .user-info {
   color: white;
   padding: 0 16px 16px 16px;
-  margin-bottom: -4em;
 
   .container {
     padding: 16px 10px 4px 10px;
@@ -154,7 +151,11 @@
     }
   }
 
-  text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
+  text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0),
+  1px 1px 0px rgba(0, 0, 0, .2),
+  -1px 1px 0px rgba(0, 0, 0, .2),
+  1px -1px 0px rgba(0, 0, 0, .2),
+  -1px -1px 0px rgba(0, 0, 0, .2);
 
   .usersettings {
     color: #fff;
@@ -240,6 +241,12 @@
   line-height:16px;
   padding: 1em 1.5em 0em 1em;
   text-align: center;
+
+  text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0),
+  1px 1px 0px rgba(0, 0, 0, .2),
+  -1px 1px 0px rgba(0, 0, 0, .2),
+  1px -1px 0px rgba(0, 0, 0, .2),
+  -1px -1px 0px rgba(0, 0, 0, .2);
 }
 
 .user-count {

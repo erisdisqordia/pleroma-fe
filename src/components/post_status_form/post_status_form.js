@@ -28,6 +28,9 @@ const PostStatusForm = {
   components: {
     MediaUpload
   },
+  mounted () {
+    this.resize(this.$refs.textarea)
+  },
   data () {
     let statusText = ''
 
@@ -235,10 +238,11 @@ const PostStatusForm = {
       e.dataTransfer.dropEffect = 'copy'
     },
     resize (e) {
-      e.target.style.height = 'auto'
-      e.target.style.height = `${e.target.scrollHeight - 10}px`
-      if (e.target.value === '') {
-        e.target.style.height = '16px'
+      const target = e.target || e
+      target.style.height = 'auto'
+      target.style.height = `${target.scrollHeight - 10}px`
+      if (target.value === '') {
+        target.style.height = '16px'
       }
     },
     clearError () {

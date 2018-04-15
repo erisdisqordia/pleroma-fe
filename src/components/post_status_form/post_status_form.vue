@@ -1,10 +1,25 @@
 <template>
-  <div class="post-status-form">
-    <form @submit.prevent="postStatus(newStatus)">
-      <div class="form-group" >
-        <textarea @click="setCaret" @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control" @keydown.down="cycleForward" @keydown.up="cycleBackward" @keydown.shift.tab="cycleBackward" @keydown.tab="cycleForward" @keydown.enter="replaceCandidate" @keydown.meta.enter="postStatus(newStatus)" @keyup.ctrl.enter="postStatus(newStatus)" @drop="fileDrop" @dragover.prevent="fileDrag" @input="resize" @paste="paste"></textarea>
-      </div>
-      <div style="position:relative;" v-if="candidates">
+<div class="post-status-form">
+  <form @submit.prevent="postStatus(newStatus)">
+    <div class="form-group" >
+      <textarea
+        ref="textarea"
+        @click="setCaret"
+        @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control"
+        @keydown.down="cycleForward"
+        @keydown.up="cycleBackward"
+        @keydown.shift.tab="cycleBackward"
+        @keydown.tab="cycleForward"
+        @keydown.enter="replaceCandidate"
+        @keydown.meta.enter="postStatus(newStatus)"
+        @keyup.ctrl.enter="postStatus(newStatus)"
+        @drop="fileDrop"
+        @dragover.prevent="fileDrag"
+        @input="resize"
+        @paste="paste">
+      </textarea>
+    </div>
+    <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel">
           <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">
             <div v-if="candidate.highlighted" class="autocomplete">

@@ -239,8 +239,8 @@ const PostStatusForm = {
       e.dataTransfer.dropEffect = 'copy'
     },
     resize (e) {
-      const vertPadding = window.getComputedStyle(e.target)['padding-top'] +
-            window.getComputedStyle(e.target)['padding-bottom']
+      const vertPadding = Number(window.getComputedStyle(e.target)['padding-top'].substr(0, 1)) +
+            Number(window.getComputedStyle(e.target)['padding-bottom'].substr(0, 1))
       e.target.style.height = 'auto'
       e.target.style.height = `${e.target.scrollHeight - vertPadding}px`
       if (e.target.value === '') {

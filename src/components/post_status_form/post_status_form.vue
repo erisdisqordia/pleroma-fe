@@ -3,6 +3,7 @@
   <form @submit.prevent="postStatus(newStatus)">
     <div class="form-group" >
       <textarea
+        ref="textarea"
         @click="setCaret"
         @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control"
         @keydown.down="cycleForward"
@@ -15,7 +16,6 @@
         @drop="fileDrop"
         @dragover.prevent="fileDrag"
         @input="resize"
-        @focus="resize"
         @paste="paste">
       </textarea>
     </div>

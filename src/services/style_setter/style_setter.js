@@ -90,6 +90,7 @@ const setColors = (col, commit) => {
   colors.cAlertRed = col.cRed && `rgba(${col.cRed.r}, ${col.cRed.g}, ${col.cRed.b}, .5)`
 
   radii.btnRadius = col.btnRadius
+  radii.inputRadius = col.inputRadius
   radii.panelRadius = col.panelRadius
   radii.avatarRadius = col.avatarRadius
   radii.avatarAltRadius = col.avatarAltRadius

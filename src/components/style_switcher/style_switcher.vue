@@ -59,6 +59,11 @@
         <input id="btnradius-t" class="theme-radius-in" type="text" v-model="btnRadiusLocal">
       </div>
       <div class="radius-item">
+        <label for="inputradius" class="theme-radius-lb">{{$t('settings.inputRadius')}}</label>
+        <input id="inputradius" class="theme-radius-rn" type="range" v-model="inputRadiusLocal" max="16">
+        <input id="inputradius-t" class="theme-radius-in" type="text" v-model="inputRadiusLocal">
+      </div>
+      <div class="radius-item">
         <label for="panelradius" class="theme-radius-lb">{{$t('settings.panelRadius')}}</label>
         <input id="panelradius" class="theme-radius-rn" type="range" v-model="panelRadiusLocal" max="50">
         <input id="panelradius-t" class="theme-radius-in" type="text" v-model="panelRadiusLocal">
@@ -86,6 +91,7 @@
     </div>
     <div :style="{
                  '--btnRadius': btnRadiusLocal + 'px',
+                 '--inputRadius': inputRadiusLocal + 'px',
                  '--panelRadius': panelRadiusLocal + 'px',
                  '--avatarRadius': avatarRadiusLocal + 'px',
                  '--avatarAltRadius': avatarAltRadiusLocal + 'px',

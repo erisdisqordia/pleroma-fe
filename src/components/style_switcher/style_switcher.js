@@ -14,6 +14,7 @@ export default {
       greenColorLocal: '',
       orangeColorLocal: '',
       btnRadiusLocal: '',
+      inputRadiusLocal: '',
       panelRadiusLocal: '',
       avatarRadiusLocal: '',
       avatarAltRadiusLocal: '',
@@ -42,6 +43,7 @@ export default {
     this.orangeColorLocal = rgbstr2hex(this.$store.state.config.colors.cOrange)
 
     this.btnRadiusLocal = this.$store.state.config.radii.btnRadius || 4
+    this.inputRadiusLocal = this.$store.state.config.radii.inputRadius || 4
     this.panelRadiusLocal = this.$store.state.config.radii.panelRadius || 10
     this.avatarRadiusLocal = this.$store.state.config.radii.avatarRadius || 5
     this.avatarAltRadiusLocal = this.$store.state.config.radii.avatarAltRadius || 50
@@ -85,6 +87,7 @@ export default {
             cGreen: greenRgb,
             cOrange: orangeRgb,
             btnRadius: this.btnRadiusLocal,
+            inputRadius: this.inputRadiusLocal,
             panelRadius: this.panelRadiusLocal,
             avatarRadius: this.avatarRadiusLocal,
             avatarAltRadius: this.avatarAltRadiusLocal,

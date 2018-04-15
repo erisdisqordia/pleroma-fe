@@ -88,8 +88,8 @@ label.select {
 
 input, textarea, .select {
   border: none;
-  border-radius: $fallback--btnRadius;
-  border-radius: var(--btnRadius, $fallback--btnRadius);
+  border-radius: $fallback--inputRadius;
+  border-radius: var(--inputRadius, $fallback--inputRadius);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 2px black inset;

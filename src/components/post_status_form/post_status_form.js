@@ -240,7 +240,10 @@ const PostStatusForm = {
     resize (e) {
       const target = e.target || e
       target.style.height = 'auto'
-      target.style.height = `${target.scrollHeight - 10}px`
+      const heightPx = target.scrollHeight - 10
+      if (heightPx > 54) {
+        target.style.height = `${target.scrollHeight - 10}px`
+      }
       if (target.value === '') {
         target.style.height = '16px'
       }

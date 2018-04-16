@@ -44,6 +44,9 @@ export const prepareStatus = (status) => {
   // Parse nsfw tags
   if (status.nsfw === undefined) {
     status.nsfw = isNsfw(status)
+    if (status.retweeted_status) {
+      status.retweeted_status.nsfw = status.nsfw
+    }
   }
 
   // Set deleted flag

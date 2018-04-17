@@ -286,7 +286,7 @@ const en = {
     streaming: 'Enable automatic streaming of new posts when scrolled to the top',
     reply_link_preview: 'Enable reply-link preview on mouse hover',
     follow_import: 'Follow import',
-    import_followers_from_a_csv_file: 'Import followers from a csv file',
+    import_followers_from_a_csv_file: 'Import follows from a csv file',
     follows_imported: 'Follows imported! Processing them will take a while.',
     follow_import_error: 'Error importing followers'
   },

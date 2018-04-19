@@ -872,7 +872,7 @@ const it = {
 
 const oc = {
   chat: {
-    title: 'Chat'
+    title: 'Messatjariá'
   },
   nav: {
     chat: 'Chat local',
@@ -888,8 +888,8 @@ const oc = {
     blocked: 'Blocat',
     block: 'Blocar',
     statuses: 'Estatuts',
-    mute: 'En silenci',
-    muted: 'Mes en silenci',
+    mute: 'Amagar',
+    muted: 'Amagat',
     followers: 'Seguidors',
     followees: 'Abonaments',
     per_day: 'per jorn',
@@ -901,7 +901,7 @@ const oc = {
     up_to_date: 'Actualizat',
     load_older: 'Ne veire mai',
     conversation: 'Conversacion',
-    collapse: 'Plegar',
+    collapse: 'Tampar',
     repeated: 'repetit'
   },
   settings: {
@@ -955,7 +955,7 @@ const oc = {
     notifications: 'Notficacions',
     read: 'Legit !',
     followed_you: 'vos a seguit',
-    favorited_you: 'a mes vòstre estatut en favorit',
+    favorited_you: 'a aimat vòstre estatut',
     repeated_you: 'a repetit your vòstre estatut'
   },
   login: {

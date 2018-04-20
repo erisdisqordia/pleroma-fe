@@ -1550,6 +1550,7 @@ const messages = {
   de,
   fi,
   en,
+  eo,
   et,
   hu,
   ro,

@@ -1,11 +1,11 @@
-import Status from '../status/status.vue'
+import Notification from '../notification/notification.vue'
 
 import { sortBy, take, filter } from 'lodash'
 
 const Notifications = {
   data () {
     return {
-      visibleNotificationCount: 10
+      visibleNotificationCount: 20
     }
   },
   computed: {
@@ -23,15 +23,10 @@ const Notifications = {
     },
     unseenCount () {
       return this.unseenNotifications.length
-    },
-    hiderStyle () {
-      return {
-        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors['base00']} 80%)`
-      }
     }
   },
   components: {
-    Status
+    Notification
   },
   watch: {
     unseenCount (count) {

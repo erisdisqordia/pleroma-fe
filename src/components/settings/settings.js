@@ -10,7 +10,8 @@ const settings = {
       muteWordsString: this.$store.state.config.muteWords.join('\n'),
       autoLoadLocal: this.$store.state.config.autoLoad,
       streamingLocal: this.$store.state.config.streaming,
-      hoverPreviewLocal: this.$store.state.config.hoverPreview
+      hoverPreviewLocal: this.$store.state.config.hoverPreview,
+      stopGifs: this.$store.state.config.stopGifs
     }
   },
   components: {
@@ -43,6 +44,9 @@ const settings = {
     muteWordsString (value) {
       value = filter(value.split('\n'), (word) => trim(word).length > 0)
       this.$store.dispatch('setOption', { name: 'muteWords', value })
+    },
+    stopGifs (value) {
+      this.$store.dispatch('setOption', { name: 'stopGifs', value })
     }
   }
 }

@@ -1,6 +1,22 @@
-import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, last, merge, max, isArray } from 'lodash'
+import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
+
+const emptyTl = () => ({
+  statuses: [],
+  statusesObject: {},
+  faves: [],
+  visibleStatuses: [],
+  visibleStatusesObject: {},
+  newStatusCount: 0,
+  maxId: 0,
+  minVisibleId: 0,
+  loading: false,
+  followers: [],
+  friends: [],
+  viewing: 'statuses',
+  flushMarker: 0
+})
 
 export const defaultState = {
   allStatuses: [],
@@ -10,96 +26,12 @@ export const defaultState = {
   favorites: new Set(),
   error: false,
   timelines: {
-    mentions: {
-      statuses: [],
-      statusesObject: {},
-      faves: [],
-      visibleStatuses: [],
-      visibleStatusesObject: {},
-      newStatusCount: 0,
-      maxId: 0,
-      minVisibleId: 0,
-      loading: false,
-      followers: [],
-      friends: [],
-      viewing: 'statuses',
-      flushMarker: 0
-    },
-    public: {
-      statuses: [],
-      statusesObject: {},
-      faves: [],
-      visibleStatuses: [],
-      visibleStatusesObject: {},
-      newStatusCount: 0,
-      maxId: 0,
-      minVisibleId: 0,
-      loading: false,
-      followers: [],
-      friends: [],
-      viewing: 'statuses',
-      flushMarker: 0
-    },
-    user: {
-      statuses: [],
-      statusesObject: {},
-      faves: [],
-      visibleStatuses: [],
-      visibleStatusesObject: {},
-      newStatusCount: 0,
-      maxId: 0,
-      minVisibleId: 0,
-      loading: false,
-      followers: [],
-      friends: [],
-      viewing: 'statuses',
-      flushMarker: 0
-    },
-    publicAndExternal: {
-      statuses: [],
-      statusesObject: {},
-      faves: [],
-      visibleStatuses: [],
-      visibleStatusesObject: {},
-      newStatusCount: 0,
-      maxId: 0,
-      minVisibleId: 0,
-      loading: false,
-      followers: [],
-      friends: [],
-      viewing: 'statuses',
-      flushMarker: 0
-    },
-    friends: {
-      statuses: [],
-      statusesObject: {},
-      faves: [],
-      visibleStatuses: [],
-      visibleStatusesObject: {},
-      newStatusCount: 0,
-      maxId: 0,
-      minVisibleId: 0,
-      loading: false,
-      followers: [],
-      friends: [],
-      viewing: 'statuses',
-      flushMarker: 0
-    },
-    tag: {
-      statuses: [],
-      statusesObject: {},
-      faves: [],
-      visibleStatuses: [],
-      visibleStatusesObject: {},
-      newStatusCount: 0,
-      maxId: 0,
-      minVisibleId: 0,
-      loading: false,
-      followers: [],
-      friends: [],
-      viewing: 'statuses',
-      flushMarker: 0
-    }
+    mentions: emptyTl(),
+    public: emptyTl(),
+    user: emptyTl(),
+    publicAndExternal: emptyTl(),
+    friends: emptyTl(),
+    tag: emptyTl()
   }
 }
 
@@ -112,6 +44,9 @@ export const prepareStatus = (status) => {
   // Parse nsfw tags
   if (status.nsfw === undefined) {
     status.nsfw = isNsfw(status)
+    if (status.retweeted_status) {
+      status.retweeted_status.nsfw = status.nsfw
+    }
   }
 
   // Set deleted flag
@@ -175,7 +110,6 @@ const sortTimeline = (timeline) => {
   timeline.visibleStatuses = sortBy(timeline.visibleStatuses, ({id}) => -id)
   timeline.statuses = sortBy(timeline.statuses, ({id}) => -id)
   timeline.minVisibleId = (last(timeline.visibleStatuses) || {}).id
-
   return timeline
 }
 
@@ -189,10 +123,11 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const allStatusesObject = state.allStatusesObject
   const timelineObject = state.timelines[timeline]
 
-  // Set the maxId to the new id if it's larger.
-  const updateMaxId = ({id}) => {
-    if (!timeline || noIdUpdate) { return false }
-    timelineObject.maxId = max([id, timelineObject.maxId])
+  const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
+  const older = timeline && maxNew < timelineObject.maxId
+
+  if (timeline && !noIdUpdate && statuses.length > 0 && !older) {
+    timelineObject.maxId = maxNew
   }
 
   const addStatus = (status, showImmediately, addToTimeline = true) => {
@@ -200,8 +135,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     status = result.item
 
     if (result.new) {
-      updateMaxId(status)
-
       if (statusType(status) === 'retweet' && status.retweeted_status.user.id === user.id) {
         addNotification({ type: 'repeat', status: status.retweeted_status, action: status })
       }
@@ -246,7 +179,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const addNotification = ({type, status, action}) => {
     // Only add a new notification if we don't have one for the same action
     if (!find(state.notifications, (oldNotification) => oldNotification.action.id === action.id)) {
-      state.notifications.push({type, status, action, seen: false})
+      state.notifications.push({ type, status, action, seen: false })
 
       if ('Notification' in window && window.Notification.permission === 'granted') {
         const title = action.user.name
@@ -317,7 +250,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       // Only update if this is a new favorite.
       if (!state.favorites.has(favorite.id)) {
         state.favorites.add(favorite.id)
-        updateMaxId(favorite)
         favoriteStatus(favorite)
       }
     },
@@ -330,7 +262,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     },
     'deletion': (deletion) => {
       const uri = deletion.uri
-      updateMaxId(deletion)
 
       // Remove possible notification
       const status = find(allStatuses, {uri})
@@ -361,6 +292,9 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   // Keep the visible statuses sorted
   if (timeline) {
     sortTimeline(timelineObject)
+    if ((older || timelineObject.minVisibleId <= 0) && statuses.length > 0) {
+      timelineObject.minVisibleId = minBy(statuses, 'id').id
+    }
   }
 }
 
@@ -371,27 +305,12 @@ export const mutations = {
 
     oldTimeline.newStatusCount = 0
     oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
+    oldTimeline.minVisibleId = last(oldTimeline.visibleStatuses).id
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
   clearTimeline (state, { timeline }) {
-    const emptyTimeline = {
-      statuses: [],
-      statusesObject: {},
-      faves: [],
-      visibleStatuses: [],
-      visibleStatusesObject: {},
-      newStatusCount: 0,
-      maxId: 0,
-      minVisibleId: 0,
-      loading: false,
-      followers: [],
-      friends: [],
-      viewing: 'statuses',
-      flushMarker: 0
-    }
-
-    state.timelines[timeline] = emptyTimeline
+    state.timelines[timeline] = emptyTl()
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]

@@ -4,9 +4,11 @@ import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
+import StillImage from '../still-image/still-image.vue'
 import { filter, find } from 'lodash'
 
 const Status = {
+  name: 'Status',
   props: [
     'statusoid',
     'expandable',
@@ -14,7 +16,10 @@ const Status = {
     'focused',
     'highlight',
     'compact',
-    'replies'
+    'replies',
+    'noReplyLinks',
+    'noHeading',
+    'inlineExpanded'
   ],
   data: () => ({
     replying: false,
@@ -22,7 +27,8 @@ const Status = {
     unmuted: false,
     userExpanded: false,
     preview: null,
-    showPreview: false
+    showPreview: false,
+    showingTall: false
   }),
   computed: {
     muteWords () {
@@ -54,11 +60,6 @@ const Status = {
     },
     muted () { return !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
     isReply () { return !!this.status.in_reply_to_status_id },
-    borderColor () {
-      return {
-        borderBottomColor: this.$store.state.config.colors['base02']
-      }
-    },
     isFocused () {
       // retweet or root of an expanded conversation
       if (this.focused) {
@@ -68,6 +69,29 @@ const Status = {
       }
       // use conversation highlight only when in conversation
       return this.status.id === this.highlight
+    },
+    // This is a bit hacky, but we want to approximate post height before rendering
+    // so we count newlines (masto uses <p> for paragraphs, GS uses <br> between them)
+    // as well as approximate line count by counting characters and approximating ~80
+    // per line.
+    //
+    // Using max-height + overflow: auto for status components resulted in false positives
+    // very often with japanese characters, and it was very annoying.
+    hideTallStatus () {
+      if (this.showingTall) {
+        return false
+      }
+      const lengthScore = this.status.statusnet_html.split(/<p|<br/).length + this.status.text.length / 80
+      return lengthScore > 20
+    },
+    attachmentSize () {
+      if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
+        (this.$store.state.config.hideAttachmentsInConv && this.inConversation)) {
+        return 'hide'
+      } else if (this.compact) {
+        return 'small'
+      }
+      return 'normal'
     }
   },
   components: {
@@ -76,7 +100,8 @@ const Status = {
     RetweetButton,
     DeleteButton,
     PostStatusForm,
-    UserCardContent
+    UserCardContent,
+    StillImage
   },
   methods: {
     linkClicked ({target}) {
@@ -104,6 +129,9 @@ const Status = {
     },
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
+    },
+    toggleShowTall () {
+      this.showingTall = !this.showingTall
     },
     replyEnter (id, event) {
       this.showPreview = true

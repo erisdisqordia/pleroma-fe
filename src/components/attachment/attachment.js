@@ -1,3 +1,4 @@
+import StillImage from '../still-image/still-image.vue'
 import nsfwImage from '../../assets/nsfw.png'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 
@@ -5,7 +6,8 @@ const Attachment = {
   props: [
     'attachment',
     'nsfw',
-    'statusId'
+    'statusId',
+    'size'
   ],
   data () {
     return {
@@ -16,6 +18,9 @@ const Attachment = {
       img: document.createElement('img')
     }
   },
+  components: {
+    StillImage
+  },
   computed: {
     type () {
       return fileTypeService.fileType(this.attachment.mimetype)
@@ -25,6 +30,12 @@ const Attachment = {
     },
     isEmpty () {
       return (this.type === 'html' && !this.attachment.oembed) || this.type === 'unknown'
+    },
+    isSmall () {
+      return this.size === 'small'
+    },
+    fullwidth () {
+      return fileTypeService.fileType(this.attachment.mimetype) === 'html'
     }
   },
   methods: {

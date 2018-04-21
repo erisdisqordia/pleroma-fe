@@ -1,10 +1,11 @@
+import StillImage from '../still-image/still-image.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
 export default {
-  props: [ 'user', 'switcher' ],
+  props: [ 'user', 'switcher', 'hideBio' ],
   computed: {
     headingStyle () {
-      const color = this.$store.state.config.colors['base00']
+      const color = this.$store.state.config.colors.bg
       if (color) {
         const rgb = hex2rgb(color)
         console.log(rgb)
@@ -12,11 +13,6 @@ export default {
           backgroundColor: `rgb(${Math.floor(rgb[0] * 0.53)}, ${Math.floor(rgb[1] * 0.56)}, ${Math.floor(rgb[2] * 0.59)})`,
           backgroundImage: `url(${this.user.cover_photo})`
         }
-      }
-    },
-    bodyStyle () {
-      return {
-        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), ${this.$store.state.config.colors['base00']} 80%)`
       }
     },
     isOtherUser () {
@@ -34,6 +30,9 @@ export default {
       const days = Math.ceil((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
       return Math.round(this.user.statuses_count / days)
     }
+  },
+  components: {
+    StillImage
   },
   methods: {
     followUser () {

@@ -28,6 +28,9 @@ const PostStatusForm = {
   components: {
     MediaUpload
   },
+  mounted () {
+    this.resize(this.$refs.textarea)
+  },
   data () {
     let statusText = ''
 
@@ -53,7 +56,8 @@ const PostStatusForm = {
     candidates () {
       const firstchar = this.textAtCaret.charAt(0)
       if (firstchar === '@') {
-        const matchedUsers = filter(this.users, (user) => (String(user.name + user.screen_name)).match(this.textAtCaret.slice(1)))
+        const matchedUsers = filter(this.users, (user) => (String(user.name + user.screen_name)).toUpperCase()
+            .match(this.textAtCaret.slice(1).toUpperCase()))
         if (matchedUsers.length <= 0) {
           return false
         }
@@ -234,10 +238,14 @@ const PostStatusForm = {
       e.dataTransfer.dropEffect = 'copy'
     },
     resize (e) {
-      e.target.style.height = 'auto'
-      e.target.style.height = `${e.target.scrollHeight - 10}px`
-      if (e.target.value === '') {
-        e.target.style.height = '16px'
+      const target = e.target || e
+      target.style.height = 'auto'
+      const heightPx = target.scrollHeight - 10
+      if (heightPx > 54) {
+        target.style.height = `${target.scrollHeight - 10}px`
+      }
+      if (target.value === '') {
+        target.style.height = '16px'
       }
     },
     clearError () {

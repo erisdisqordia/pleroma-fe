@@ -45,12 +45,8 @@ const setStyle = (href, commit) => {
 
     const styleEl = document.createElement('style')
     head.appendChild(styleEl)
-    const styleSheet = styleEl.sheet
+    // const styleSheet = styleEl.sheet
 
-    styleSheet.insertRule(`a { color: ${colors['base08']}`, 'index-max')
-    styleSheet.insertRule(`body { color: ${colors['base05']}`, 'index-max')
-    styleSheet.insertRule(`.base05-border { border-color: ${colors['base05']}`, 'index-max')
-    styleSheet.insertRule(`.base03-border { border-color: ${colors['base03']}`, 'index-max')
     body.style.display = 'initial'
   }
 
@@ -68,37 +64,47 @@ const setColors = (col, commit) => {
 
   const isDark = (col.text.r + col.text.g + col.text.b) > (col.bg.r + col.bg.g + col.bg.b)
   let colors = {}
+  let radii = {}
 
-  let mod = 10
-  if (isDark) {
-    mod = mod * -1
-  }
+  const mod = isDark ? -10 : 10
 
-  colors['base00'] = rgb2hex(col.bg.r, col.bg.g, col.bg.b)                         // background
-  colors['base01'] = rgb2hex((col.bg.r + col.fg.r) / 2, (col.bg.g + col.fg.g) / 2, (col.bg.b + col.fg.b) / 2) // hilighted bg
-  colors['base02'] = rgb2hex(col.fg.r, col.fg.g, col.fg.b)                         // panels & buttons
-  colors['base03'] = rgb2hex(col.fg.r - mod, col.fg.g - mod, col.fg.b - mod)       // borders
-  colors['base04'] = rgb2hex(col.text.r + mod * 2, col.text.g + mod * 2, col.text.b + mod * 2) // faint text
-  colors['base05'] = rgb2hex(col.text.r, col.text.g, col.text.b)                   // text
-  colors['base06'] = rgb2hex(col.text.r - mod, col.text.g - mod, col.text.b - mod) // strong text
+  colors.bg = rgb2hex(col.bg.r, col.bg.g, col.bg.b)                         // background
+  colors.lightBg = rgb2hex((col.bg.r + col.fg.r) / 2, (col.bg.g + col.fg.g) / 2, (col.bg.b + col.fg.b) / 2) // hilighted bg
+  colors.btn = rgb2hex(col.fg.r, col.fg.g, col.fg.b)                         // panels & buttons
+  colors.border = rgb2hex(col.fg.r - mod, col.fg.g - mod, col.fg.b - mod)       // borders
+  colors.faint = rgb2hex(
+    col.text.r * 0.45 + col.fg.r * 0.55,
+    col.text.g * 0.45 + col.fg.g * 0.55,
+    col.text.b * 0.45 + col.fg.b * 0.55) // faint text
+  colors.fg = rgb2hex(col.text.r, col.text.g, col.text.b)                   // text
+  colors.lightFg = rgb2hex(col.text.r - mod, col.text.g - mod, col.text.b - mod) // strong text
+
   colors['base07'] = rgb2hex(col.text.r - mod * 2, col.text.g - mod * 2, col.text.b - mod * 2)
-  colors['base08'] = rgb2hex(col.link.r, col.link.g, col.link.b)                   // links
-  colors['base09'] = rgb2hex((col.bg.r + col.text.r) / 2, (col.bg.g + col.text.g) / 2, (col.bg.b + col.text.b) / 2) // icons
 
-  const num = 10
-  times(num, (n) => {
-    const color = colors[`base0${num - 1 - n}`]
-    styleSheet.insertRule(`.base0${num - 1 - n} { color: ${color}`, 'index-max')
-    styleSheet.insertRule(`.base0${num - 1 - n}-background { background-color: ${color}`, 'index-max')
-  })
+  colors.link = rgb2hex(col.link.r, col.link.g, col.link.b)                   // links
+  colors.icon = rgb2hex((col.bg.r + col.text.r) / 2, (col.bg.g + col.text.g) / 2, (col.bg.b + col.text.b) / 2) // icons
 
-  styleSheet.insertRule(`a { color: ${colors['base08']}`, 'index-max')
-  styleSheet.insertRule(`body { color: ${colors['base05']}`, 'index-max')
-  styleSheet.insertRule(`.base05-border { border-color: ${colors['base05']}`, 'index-max')
-  styleSheet.insertRule(`.base03-border { border-color: ${colors['base03']}`, 'index-max')
+  colors.cBlue = col.cBlue && rgb2hex(col.cBlue.r, col.cBlue.g, col.cBlue.b)
+  colors.cRed = col.cRed && rgb2hex(col.cRed.r, col.cRed.g, col.cRed.b)
+  colors.cGreen = col.cGreen && rgb2hex(col.cGreen.r, col.cGreen.g, col.cGreen.b)
+  colors.cOrange = col.cOrange && rgb2hex(col.cOrange.r, col.cOrange.g, col.cOrange.b)
+
+  colors.cAlertRed = col.cRed && `rgba(${col.cRed.r}, ${col.cRed.g}, ${col.cRed.b}, .5)`
+
+  radii.btnRadius = col.btnRadius
+  radii.panelRadius = col.panelRadius
+  radii.avatarRadius = col.avatarRadius
+  radii.avatarAltRadius = col.avatarAltRadius
+  radii.tooltipRadius = col.tooltipRadius
+  radii.attachmentRadius = col.attachmentRadius
+
+  styleSheet.toString()
+  styleSheet.insertRule(`body { ${Object.entries(colors).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}`).join(';')} }`, 'index-max')
+  styleSheet.insertRule(`body { ${Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';')} }`, 'index-max')
   body.style.display = 'initial'
 
   commit('setOption', { name: 'colors', value: colors })
+  commit('setOption', { name: 'radii', value: radii })
   commit('setOption', { name: 'customTheme', value: col })
 }
 
@@ -111,12 +117,23 @@ const setPreset = (val, commit) => {
       const fgRgb = hex2rgb(theme[2])
       const textRgb = hex2rgb(theme[3])
       const linkRgb = hex2rgb(theme[4])
+
+      const cRedRgb = hex2rgb(theme[5] || '#FF0000')
+      const cGreenRgb = hex2rgb(theme[6] || '#00FF00')
+      const cBlueRgb = hex2rgb(theme[7] || '#0000FF')
+      const cOrangeRgb = hex2rgb(theme[8] || '#E3FF00')
+
       const col = {
         bg: bgRgb,
         fg: fgRgb,
         text: textRgb,
-        link: linkRgb
+        link: linkRgb,
+        cRed: cRedRgb,
+        cBlue: cBlueRgb,
+        cGreen: cGreenRgb,
+        cOrange: cOrangeRgb
       }
+
       // This is a hack, this function is only called during initial load.
       // We want to cancel loading the theme from config.json if we're already
       // loading a theme from the persisted state.

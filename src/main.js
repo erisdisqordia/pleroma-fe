@@ -96,6 +96,9 @@ window.fetch('/static/config.json')
     if (data['chatDisabled']) {
       store.dispatch('disableChat')
     }
+    if (data['nsfwCensorImage']) {
+      store.dispatch('setOption', { name: 'nsfwCensorImage', value: data['nsfwCensorImage'] })
+    }
 
     const routes = [
       { name: 'root', path: '/', redirect: data['defaultPath'] || '/main/all' },

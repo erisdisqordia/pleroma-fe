@@ -105,7 +105,8 @@ const Timeline = {
         .then((friends) => this.$store.dispatch('addFriends', { friends }))
     },
     scrollLoad (e) {
-      const height = Math.max(document.body.offsetHeight, document.body.scrollHeight)
+      const bodyBRect = document.body.getBoundingClientRect();
+      const height = Math.max(bodyBRect.height, -(bodyBRect.y))
       if (this.timeline.loading === false &&
           this.$store.state.config.autoLoad &&
           this.$el.offsetHeight > 0 &&

@@ -45,7 +45,7 @@ export const prepareStatus = (status) => {
   if (status.nsfw === undefined) {
     status.nsfw = isNsfw(status)
     if (status.retweeted_status) {
-      status.retweeted_status.nsfw = status.nsfw
+      status.nsfw = status.retweeted_status.nsfw
     }
   }
 

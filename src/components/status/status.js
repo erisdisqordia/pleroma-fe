@@ -34,6 +34,13 @@ const Status = {
     muteWords () {
       return this.$store.state.config.muteWords
     },
+    userClass () {
+      console.log(this.statusoid.user)
+      console.log(this.statusoid.user.screen_name)
+      return 'USER____' + this.statusoid.user.screen_name
+        .replace(/\./g,'_')
+        .replace(/\@/g,'_AT_')
+    },
     hideAttachments () {
       return (this.$store.state.config.hideAttachments && !this.inConversation) ||
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation)

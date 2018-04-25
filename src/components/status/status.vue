@@ -8,7 +8,7 @@
       </div>
     </template>
     <template v-else>
-      <div v-if="retweet && !noHeading" class="media container retweet-info">
+      <div v-if="retweet && !noHeading" :class="[userClass]" class="media container retweet-info">
         <StillImage v-if="retweet" class='avatar' :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <a :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="media status">
+      <div :class="[userClass]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <a :href="status.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
             <StillImage class='avatar' :class="{'avatar-compact': compact}"  :src="status.user.profile_image_url_original"/>

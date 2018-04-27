@@ -45,7 +45,7 @@ export const prepareStatus = (status) => {
   if (status.nsfw === undefined) {
     status.nsfw = isNsfw(status)
     if (status.retweeted_status) {
-      status.retweeted_status.nsfw = status.nsfw
+      status.nsfw = status.retweeted_status.nsfw
     }
   }
 
@@ -136,7 +136,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
     if (result.new) {
       if (statusType(status) === 'retweet' && status.retweeted_status.user.id === user.id) {
-        addNotification({ type: 'repeat', status: status.retweeted_status, action: status })
+        addNotification({ type: 'repeat', status: status, action: status })
       }
 
       // We are mentioned in a post

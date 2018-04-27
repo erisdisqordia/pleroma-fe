@@ -297,7 +297,7 @@ describe('The Statuses module', () => {
       mutations.addNewStatuses(state, { statuses: [retweet], user })
 
       expect(state.notifications.length).to.eql(1)
-      expect(state.notifications[0].status).to.eql(status)
+      expect(state.notifications[0].status).to.eql(retweet)
       expect(state.notifications[0].action).to.eql(retweet)
       expect(state.notifications[0].type).to.eql('repeat')
     })

@@ -3,7 +3,7 @@ const chatPanel = {
     return {
       currentMessage: '',
       channel: null,
-      collapsed: false
+      collapsed: true
     }
   },
   computed: {

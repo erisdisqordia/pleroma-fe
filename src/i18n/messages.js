@@ -1426,6 +1426,124 @@ const ru = {
     timeline_title: 'Лента пользователя'
   }
 }
+const nb = {
+  chat: {
+    title: 'Chat'
+  },
+  nav: {
+    chat: 'Lokal Chat',
+    timeline: 'Tidslinje',
+    mentions: 'Nevnt',
+    public_tl: 'Offentlig Tidslinje',
+    twkn: 'Det hele kjente nettverket'
+  },
+  user_card: {
+    follows_you: 'Følger deg!',
+    following: 'Følger!',
+    follow: 'Følg',
+    blocked: 'Blokkert!',
+    block: 'Blokker',
+    statuses: 'Statuser',
+    mute: 'Demp',
+    muted: 'Dempet',
+    followers: 'Følgere',
+    followees: 'Følger',
+    per_day: 'per dag',
+    remote_follow: 'Følg eksternt'
+  },
+  timeline: {
+    show_new: 'Vis nye',
+    error_fetching: 'Feil ved henting av oppdateringer',
+    up_to_date: 'Oppdatert',
+    load_older: 'Last eldre statuser',
+    conversation: 'Samtale',
+    collapse: 'Sammenfold',
+    repeated: 'gjentok'
+  },
+  settings: {
+    user_settings: 'Brukerinstillinger',
+    name_bio: 'Navn & Biografi',
+    name: 'Navn',
+    bio: 'Biografi',
+    avatar: 'Profilbilde',
+    current_avatar: 'Ditt nåværende profilbilde',
+    set_new_avatar: 'Rediger profilbilde',
+    profile_banner: 'Profil-banner',
+    current_profile_banner: 'Din nåværende profil-banner',
+    set_new_profile_banner: 'Sett ny profil-banner',
+    profile_background: 'Profil-bakgrunn',
+    set_new_profile_background: 'Rediger profil-bakgrunn',
+    settings: 'Innstillinger',
+    theme: 'Tema',
+    presets: 'Forhåndsdefinerte fargekoder',
+    theme_help: 'Bruk heksadesimale fargekoder (#rrggbb) til å endre farge-temaet ditt.',
+    radii_help: 'Bestem hvor runde hjørnene i brukergrensesnittet skal være (i piksler)',
+    background: 'Bakgrunn',
+    foreground: 'Framgrunn',
+    text: 'Tekst',
+    links: 'Linker',
+    cBlue: 'Blå (Svar, følg)',
+    cRed: 'Rød (Avbryt)',
+    cOrange: 'Oransje (Lik)',
+    cGreen: 'Grønn (Gjenta)',
+    btnRadius: 'Knapper',
+    panelRadius: 'Panel',
+    avatarRadius: 'Profilbilde',
+    avatarAltRadius: 'Profilbilde (Varslinger)',
+    tooltipRadius: 'Verktøytips/advarsler',
+    attachmentRadius: 'Vedlegg',
+    filtering: 'Filtrering',
+    filtering_explanation: 'Alle statuser som inneholder disse ordene vil bli dempet, en kombinasjon av tegn per linje',
+    attachments: 'Vedlegg',
+    hide_attachments_in_tl: 'Gjem vedlegg på tidslinje',
+    hide_attachments_in_convo: 'Gjem vedlegg i samtaler',
+    nsfw_clickthrough: 'Krev trykk for å vise statuser som kan være upassende',
+    stop_gifs: 'Spill av GIFs når du holder over dem',
+    autoload: 'Automatisk lasting når du blar ned til bunnen',
+    streaming: 'Automatisk strømming av nye statuser når du har bladd til toppen',
+    reply_link_preview: 'Vis en forhåndsvisning når du holder musen over svar til en status',
+    follow_import: 'Importer følginger',
+    import_followers_from_a_csv_file: 'Importer følginger fra en csv fil',
+    follows_imported: 'Følginger imported! Det vil ta litt tid å behandle de.',
+    follow_import_error: 'Feil ved importering av følginger.'
+  },
+  notifications: {
+    notifications: 'Varslinger',
+    read: 'Les!',
+    followed_you: 'fulgte deg',
+    favorited_you: 'likte din status',
+    repeated_you: 'Gjentok din status'
+  },
+  login: {
+    login: 'Logg inn',
+    username: 'Brukernavn',
+    password: 'Passord',
+    register: 'Registrer',
+    logout: 'Logg ut'
+  },
+  registration: {
+    registration: 'Registrering',
+    fullname: 'Visningsnavn',
+    email: 'Epost-adresse',
+    bio: 'Biografi',
+    password_confirm: 'Bekreft passord'
+  },
+  post_status: {
+    posting: 'Publiserer',
+    default: 'Landet akkurat i L.A.'
+  },
+  finder: {
+    find_user: 'Finn bruker',
+    error_fetching_user: 'Feil ved henting av bruker'
+  },
+  general: {
+    submit: 'Legg ut',
+    apply: 'Bruk'
+  },
+  user_profile: {
+    timeline_title: 'Bruker-tidslinje'
+  }
+}
 
 const messages = {
   de,
@@ -1441,7 +1559,8 @@ const messages = {
   pl,
   es,
   pt,
-  ru
+  ru,
+  nb
 }
 
 export default messages

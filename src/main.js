@@ -104,7 +104,7 @@ window.fetch('/static/config.json')
           var redirectRootLogin = data['redirectRootLogin']
           var redirectRootNoLogin = data['redirectRootNoLogin']
           return (store.state.users.currentUser ? redirectRootLogin : redirectRootNoLogin) || '/main/all'
-      }},
+        }},
       { path: '/main/all', component: PublicAndExternalTimeline },
       { path: '/main/public', component: PublicTimeline },
       { path: '/main/friends', component: FriendsTimeline },

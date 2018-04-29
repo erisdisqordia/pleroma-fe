@@ -32,7 +32,8 @@ const PostStatusForm = {
     this.resize(this.$refs.textarea)
   },
   data () {
-    let statusText = ''
+    const preset = this.$route.query.message
+    let statusText = preset || ''
 
     if (this.replyTo) {
       const currentUser = this.$store.state.users.currentUser

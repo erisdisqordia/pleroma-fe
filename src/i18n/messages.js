@@ -328,6 +328,125 @@ const en = {
   }
 }
 
+const eo = {
+  chat: {
+    title: 'Babilo'
+  },
+  nav: {
+    chat: 'Loka babilo',
+    timeline: 'Tempovido',
+    mentions: 'Mencioj',
+    public_tl: 'Publika tempovido',
+    twkn: 'Tuta konata reto'
+  },
+  user_card: {
+    follows_you: 'Abonas vin!',
+    following: 'Abonanta!',
+    follow: 'Aboni',
+    blocked: 'Barita!',
+    block: 'Bari',
+    statuses: 'Statoj',
+    mute: 'Silentigi',
+    muted: 'Silentigita',
+    followers: 'Abonantoj',
+    followees: 'Abonatoj',
+    per_day: 'tage',
+    remote_follow: 'Fora abono'
+  },
+  timeline: {
+    show_new: 'Montri novajn',
+    error_fetching: 'Eraro ĝisdatigante',
+    up_to_date: 'Ĝisdata',
+    load_older: 'Enlegi pli malnovajn statojn',
+    conversation: 'Interparolo',
+    collapse: 'Maletendi',
+    repeated: 'ripetata'
+  },
+  settings: {
+    user_settings: 'Uzulaj agordoj',
+    name_bio: 'Nomo kaj prio',
+    name: 'Nomo',
+    bio: 'Prio',
+    avatar: 'Profilbildo',
+    current_avatar: 'Via nuna profilbildo',
+    set_new_avatar: 'Agordi novan profilbildon',
+    profile_banner: 'Profila rubando',
+    current_profile_banner: 'Via nuna profila rubando',
+    set_new_profile_banner: 'Agordi novan profilan rubandon',
+    profile_background: 'Profila fono',
+    set_new_profile_background: 'Agordi novan profilan fonon',
+    settings: 'Agordoj',
+    theme: 'Haŭto',
+    presets: 'Antaŭmetaĵoj',
+    theme_help: 'Uzu deksesumajn kolorkodojn (#rrvvbb) por adapti vian koloran haŭton.',
+    radii_help: 'Agordi fasadan rondigon de randoj (rastrumere)',
+    background: 'Fono',
+    foreground: 'Malfono',
+    text: 'Teksto',
+    links: 'Ligiloj',
+    cBlue: 'Blua (Respondo, abono)',
+    cRed: 'Ruĝa (Nuligo)',
+    cOrange: 'Orange (Ŝato)',
+    cGreen: 'Verda (Kunhavigo)',
+    btnRadius: 'Butonoj',
+    panelRadius: 'Paneloj',
+    avatarRadius: 'Profilbildoj',
+    avatarAltRadius: 'Profilbildoj (Sciigoj)',
+    tooltipRadius: 'Ŝpruchelpiloj/avertoj',
+    attachmentRadius: 'Kunsendaĵoj',
+    filtering: 'Filtrado',
+    filtering_explanation: 'Ĉiuj statoj kun tiuj ĉi vortoj silentiĝos, po unu linie',
+    attachments: 'Kunsendaĵoj',
+    hide_attachments_in_tl: 'Kaŝi kunsendaĵojn en tempovido',
+    hide_attachments_in_convo: 'Kaŝi kunsendaĵojn en interparoloj',
+    nsfw_clickthrough: 'Ŝalti traklakan kaŝon de konsternaj kunsendaĵoj',
+    stop_gifs: 'Movi GIF-bildojn dum ŝvebo',
+    autoload: 'Ŝalti memfaran enlegadon ĉe subo de paĝo',
+    streaming: 'Ŝalti memfaran fluigon de novaj afiŝoj ĉe supro de paĝo',
+    reply_link_preview: 'Ŝalti respond-ligilan antaŭvidon dum ŝvebo',
+    follow_import: 'Abona enporto',
+    import_followers_from_a_csv_file: 'Enporti abonojn de CSV-dosiero',
+    follows_imported: 'Abonoj enportiĝis! Traktado daŭros iom.',
+    follow_import_error: 'Eraro enportante abonojn'
+  },
+  notifications: {
+    notifications: 'Sciigoj',
+    read: 'Legita!',
+    followed_you: 'ekabonis vin',
+    favorited_you: 'ŝatis vian staton',
+    repeated_you: 'ripetis vian staton'
+  },
+  login: {
+    login: 'Saluti',
+    username: 'Salutnomo',
+    password: 'Pasvorto',
+    register: 'Registriĝi',
+    logout: 'Adiaŭi'
+  },
+  registration: {
+    registration: 'Registriĝo',
+    fullname: 'Vidiga nomo',
+    email: 'Retpoŝtadreso',
+    bio: 'Prio',
+    password_confirm: 'Konfirmo de pasvorto'
+  },
+  post_status: {
+    posting: 'Afiŝanta',
+    default: 'Ĵus alvenis la universalan kongreson!'
+  },
+  finder: {
+    find_user: 'Trovi uzulon',
+    error_fetching_user: 'Eraro alportante uzulon'
+  },
+  general: {
+    submit: 'Sendi',
+    apply: 'Apliki'
+  },
+  user_profile: {
+    timeline_title: 'Uzula tempovido'
+  }
+}
+
 const et = {
   nav: {
     timeline: 'Ajajoon',
@@ -1549,6 +1668,7 @@ const messages = {
   de,
   fi,
   en,
+  eo,
   et,
   hu,
   ro,

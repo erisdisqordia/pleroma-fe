@@ -69,8 +69,10 @@ function getWhoToFollow (panel) {
     panel.name2 = 'Loading...'
     panel.name3 = 'Loading...'
     var host = window.location.hostname
-    var url = 'https://vinayaka.distsn.org/cgi-bin/vinayaka-user-match-simple-api.cgi?' +
-      encodeURIComponent(host) + '+' + encodeURIComponent(user)
+    var whoToFollowProvider = this.$store.state.config.whoToFollowProvider
+    var url
+    url = whoToFollowProvider.replace(/{{host}}/g, encodeURIComponent(host))
+    url = url.replace(/{{user}}/g, encodeURIComponent(user))
     window.fetch(url, {mode: 'cors'}).then(function (response) {
       if (response.ok) {
         return response.json()
@@ -104,8 +106,10 @@ const WhoToFollowPanel = {
     moreUrl: function () {
       var host = window.location.hostname
       var user = this.user
-      var url = 'https://vinayaka.distsn.org/?' +
-            encodeURIComponent(host) + '+' + encodeURIComponent(user)
+      var whoToFollowLink = this.$store.state.config.whoToFollowLink
+      var url
+      url = whoToFollowLink.replace(/{{host}}/g, encodeURIComponent(host))
+      url = url.replace(/{{user}}/g, encodeURIComponent(user))
       return url
     },
     showWhoToFollowPanel () {

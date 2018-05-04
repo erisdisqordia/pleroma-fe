@@ -1,59 +1,48 @@
-function showWhoToFollow (panel, users, aHost, aUser) {
+function showWhoToFollow (panel, reply, aHost, aUser) {
+  var users = reply.ids
   var cn
   var index = 0
   var random = Math.floor(Math.random() * 10)
   for (cn = random; cn < users.length; cn = cn + 10) {
     var user
     user = users[cn]
-    var host
-    host = user.host
-    var username
-    if (user.username) {
-      username = user.username
-    } else {
-      username = user.user
-    }
     var img
-    if (user.avatar) {
-      img = user.avatar
+    if (user.icon) {
+      img = user.icon
     } else {
       img = '/images/avi.png'
     }
-    var name = username + '@' + host
-    if ((!user.following) &&
-      (!user.blacklisted) &&
-      (!(host === aHost && username === aUser))) {
-      if (index === 0) {
-        panel.img1 = img
-        panel.name1 = name
-        panel.$store.state.api.backendInteractor.externalProfile(name)
-          .then((externalUser) => {
-            if (!externalUser.error) {
-              panel.$store.commit('addNewUsers', [externalUser])
-              panel.id1 = externalUser.id
-            }
-          })
-      } else if (index === 1) {
-        panel.img2 = img
-        panel.name2 = name
-        panel.$store.state.api.backendInteractor.externalProfile(name)
-          .then((externalUser) => {
-            if (!externalUser.error) {
-              panel.$store.commit('addNewUsers', [externalUser])
-              panel.id2 = externalUser.id
-            }
-          })
-      } else if (index === 2) {
-        panel.img3 = img
-        panel.name3 = name
-        panel.$store.state.api.backendInteractor.externalProfile(name)
-          .then((externalUser) => {
-            if (!externalUser.error) {
-              panel.$store.commit('addNewUsers', [externalUser])
-              panel.id3 = externalUser.id
-            }
-          })
-      }
+    var name = user.to_id
+    if (index === 0) {
+      panel.img1 = img
+      panel.name1 = name
+      panel.$store.state.api.backendInteractor.externalProfile(name)
+        .then((externalUser) => {
+          if (!externalUser.error) {
+            panel.$store.commit('addNewUsers', [externalUser])
+            panel.id1 = externalUser.id
+          }
+        })
+    } else if (index === 1) {
+      panel.img2 = img
+      panel.name2 = name
+      panel.$store.state.api.backendInteractor.externalProfile(name)
+        .then((externalUser) => {
+          if (!externalUser.error) {
+            panel.$store.commit('addNewUsers', [externalUser])
+            panel.id2 = externalUser.id
+          }
+        })
+    } else if (index === 2) {
+      panel.img3 = img
+      panel.name3 = name
+      panel.$store.state.api.backendInteractor.externalProfile(name)
+        .then((externalUser) => {
+          if (!externalUser.error) {
+            panel.$store.commit('addNewUsers', [externalUser])
+            panel.id3 = externalUser.id
+          }
+        })
       index = index + 1
       if (index > 2) {
         break
@@ -81,8 +70,8 @@ function getWhoToFollow (panel) {
         panel.name2 = ''
         panel.name3 = ''
       }
-    }).then(function (users) {
-      showWhoToFollow(panel, users, host, user)
+    }).then(function (reply) {
+      showWhoToFollow(panel, reply, host, user)
     })
   }
 }

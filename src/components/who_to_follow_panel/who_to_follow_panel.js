@@ -69,7 +69,7 @@ function getWhoToFollow (panel) {
     panel.name2 = 'Loading...'
     panel.name3 = 'Loading...'
     var host = window.location.hostname
-    var whoToFollowProvider = this.$store.state.config.whoToFollowProvider
+    var whoToFollowProvider = panel.$store.state.config.whoToFollowProvider
     var url
     url = whoToFollowProvider.replace(/{{host}}/g, encodeURIComponent(host))
     url = url.replace(/{{user}}/g, encodeURIComponent(user))

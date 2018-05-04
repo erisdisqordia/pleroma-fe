@@ -43,10 +43,10 @@ function showWhoToFollow (panel, reply, aHost, aUser) {
             panel.id3 = externalUser.id
           }
         })
-      index = index + 1
-      if (index > 2) {
-        break
-      }
+    }
+    index = index + 1
+    if (index > 2) {
+      break
     }
   }
 }

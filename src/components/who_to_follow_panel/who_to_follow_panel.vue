@@ -8,9 +8,9 @@
       </div>
       <div class="panel-body who-to-follow">
         <p>
-          <img v-bind:src="img1"/><router-link :to="{ name: 'user-profile', params: { id: id1 } }">{{ name1 }}</router-link><br>
-          <img v-bind:src="img2"/><router-link :to="{ name: 'user-profile', params: { id: id2 } }">{{ name2 }}</router-link><br>
-          <img v-bind:src="img3"/><router-link :to="{ name: 'user-profile', params: { id: id3 } }">{{ name3 }}</router-link><br>
+          <img v-bind:src="img1"/> <router-link :to="{ name: 'user-profile', params: { id: id1 } }">{{ name1 }}</router-link><br>
+          <img v-bind:src="img2"/> <router-link :to="{ name: 'user-profile', params: { id: id2 } }">{{ name2 }}</router-link><br>
+          <img v-bind:src="img3"/> <router-link :to="{ name: 'user-profile', params: { id: id3 } }">{{ name3 }}</router-link><br>
           <img v-bind:src="$store.state.config.logo"> <a v-bind:href="moreUrl" target="_blank">More</a>
         </p>
       </div>

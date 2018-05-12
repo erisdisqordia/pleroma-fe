@@ -75,7 +75,7 @@ const setColors = (col, commit) => {
   colors.border = rgb2hex(col.fg.r - mod, col.fg.g - mod, col.fg.b - mod)       // borders
   colors.faint = `rgba(${col.text.r}, ${col.text.g}, ${col.text.b}, .5)`
   colors.fg = rgb2hex(col.text.r, col.text.g, col.text.b)                   // text
-  colors.lightFg = rgb2hex(col.text.r - mod, col.text.g - mod, col.text.b - mod) // strong text
+  colors.lightFg = rgb2hex(col.text.r - mod * 5, col.text.g - mod * 5, col.text.b - mod * 5) // strong text
 
   colors['base07'] = rgb2hex(col.text.r - mod * 2, col.text.g - mod * 2, col.text.b - mod * 2)
 

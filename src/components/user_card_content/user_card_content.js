@@ -8,10 +8,18 @@ export default {
       const color = this.$store.state.config.colors.bg
       if (color) {
         const rgb = hex2rgb(color)
+        const tintColor = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .5)`
         console.log(rgb)
+        console.log([
+          `url(${this.user.cover_photo})`,
+          `linear-gradient(to bottom, ${tintColor}, ${tintColor})`
+        ].join(', '))
         return {
-          backgroundColor: `rgb(${Math.floor(rgb[0] * 0.53)}, ${Math.floor(rgb[1] * 0.56)}, ${Math.floor(rgb[2] * 0.59)})`,
-          backgroundImage: `url(${this.user.cover_photo})`
+          backgroundColor: `rgb(${Math.floor(rgb.r * 0.53)}, ${Math.floor(rgb.g * 0.56)}, ${Math.floor(rgb.b * 0.59)})`,
+          backgroundImage: [
+            `linear-gradient(to bottom, ${tintColor}, ${tintColor})`,
+            `url(${this.user.cover_photo})`
+          ].join(', ')
         }
       }
     },

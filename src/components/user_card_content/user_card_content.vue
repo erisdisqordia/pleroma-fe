@@ -116,7 +116,8 @@
 }
 
 .user-info {
-  color: white;
+  color: $fallback--lightFg;
+  color: var(--lightFg, $fallback--lightFg);
   padding: 0 16px;
 
   .container {
@@ -149,10 +150,9 @@
     }
   }
 
-  text-shadow: $usercard-text-shadow;
-
   .usersettings {
-    color: #fff;
+    color: $fallback--lightFg;
+    color: var(--lightFg, $fallback--lightFg);
     opacity: .8;
   }
 
@@ -166,13 +166,13 @@
   }
 
   .user-name{
-    color: white;
     text-overflow: ellipsis;
     overflow: hidden;
   }
 
   .user-screen-name {
-    color: white;
+    color: $fallback--lightFg;
+    color: var(--lightFg, $fallback--lightFg);
     display: inline-block;
     font-weight: light;
     font-size: 15px;
@@ -189,7 +189,6 @@
     }
 
     .following {
-      color: white;
       font-size: 14px;
       flex: 0 0 100%;
       margin: 0 0 .4em 0;
@@ -235,15 +234,17 @@
   padding: .5em 1.5em 0em 1.5em;
   text-align: center;
   justify-content: space-between;
-  text-shadow: $usercard-text-shadow;
-  color: #fff;
+  color: $fallback--lightFg;
+  color: var(--lightFg, $fallback--lightFg);
 
   &.clickable {
     .user-count {
       cursor: pointer;
 
       &:hover:not(.selected) {
-        background-color: rgba(0,0,0,.1);
+        transition: border-bottom 100ms;
+        border-bottom: 3px solid $fallback--link;
+        border-bottom: 3px solid var(--link, $fallback--link);
       }
     }
   }
@@ -255,7 +256,9 @@
   margin: 0 .5em;
 
   &.selected {
-    background-color: rgba(0,0,0,.35);
+    transition: none;
+    border-bottom: 5px solid $fallback--link;
+    border-bottom: 5px solid var(--link, $fallback--link);
     border-radius: $fallback--btnRadius;
     border-radius: var(--btnRadius, $fallback--btnRadius);
   }

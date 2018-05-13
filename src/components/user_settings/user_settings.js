@@ -9,7 +9,10 @@ const UserSettings = {
       followImportError: false,
       followsImported: false,
       uploading: [ false, false, false, false ],
-      previews: [ null, null, null ]
+      previews: [ null, null, null ],
+      deletingAccount: false,
+      deleteAccountConfirmPasswordInput: '',
+      deleteAccountError: false
     }
   },
   components: {
@@ -146,6 +149,21 @@ const UserSettings = {
     dismissImported () {
       this.followsImported = false
       this.followImportError = false
+    },
+    confirmDelete () {
+      this.deletingAccount = true
+    },
+    deleteAccount () {
+      this.$store.state.api.backendInteractor.deleteAccount({password: this.deleteAccountConfirmPasswordInput})
+        .then((res) => {
+          console.log(res)
+          if (res.status === 'success') {
+            this.$store.dispatch('logout')
+            window.location.href = '/main/all'
+          } else {
+            this.deleteAccountError = res.error
+          }
+        })
     }
   }
 }

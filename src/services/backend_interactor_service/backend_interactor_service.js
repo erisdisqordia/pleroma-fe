@@ -61,6 +61,8 @@ const backendInteractorService = (credentials) => {
   const externalProfile = (profileUrl) => apiService.externalProfile({profileUrl, credentials})
   const followImport = ({params}) => apiService.followImport({params, credentials})
 
+  const deleteAccount = ({password}) => apiService.deleteAccount({credentials, password})
+
   const backendInteractorServiceInstance = {
     fetchStatus,
     fetchConversation,
@@ -82,7 +84,8 @@ const backendInteractorService = (credentials) => {
     updateBanner,
     updateProfile,
     externalProfile,
-    followImport
+    followImport,
+    deleteAccount
   }
 
   return backendInteractorServiceInstance

@@ -289,7 +289,11 @@ const en = {
     follow_import: 'Follow import',
     import_followers_from_a_csv_file: 'Import follows from a csv file',
     follows_imported: 'Follows imported! Processing them will take a while.',
-    follow_import_error: 'Error importing followers'
+    follow_import_error: 'Error importing followers',
+    delete_account: 'Delete Account',
+    delete_account_description: 'Permanantly delete your account and all your messages.',
+    delete_account_instructions: 'Type your password in the input below to confirm account deletion.',
+    delete_account_error: 'There was an issue deleting your account. If this persists please contact your instance administrator.'
   },
   notifications: {
     notifications: 'Notifications',

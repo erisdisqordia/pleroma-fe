@@ -66,6 +66,20 @@
           <p>{{$t('settings.follow_import_error')}}</p>
         </div>
       </div>
+      <hr>
+      <div class="setting-item">
+        <h3>{{$t('settings.delete_account')}}</h3>
+        <p v-if="!deletingAccount">{{$t('settings.delete_account_description')}}</p>
+        <div v-if="deletingAccount">
+          <p>{{$t('settings.delete_account_instructions')}}</p>
+          <p>{{$t('login.password')}}</p>
+          <input type="password" v-model="deleteAccountConfirmPasswordInput">
+          <button class="btn btn-default" @click="deleteAccount">{{$t('settings.delete_account')}}</button>
+        </div>
+        <p v-if="deleteAccountError !== false">{{$t('settings.delete_account_error')}}</p>
+        <p v-if="deleteAccountError">{{deleteAccountError}}</p>
+        <button class="btn btn-default" v-if="!deletingAccount" @click="confirmDelete">{{$t('general.submit')}}</button>
+      </div>
     </div>
   </div>
 </template>

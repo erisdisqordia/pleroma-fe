@@ -14,8 +14,9 @@
           </router-link>
           <div class="name-and-screen-name">
             <div :title="user.name" class='user-name'>{{user.name}}</div>
-            <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
-              <div class='user-screen-name'>@{{user.screen_name}}</div>
+            <router-link class='user-screen-name':to="{ name: 'user-profile', params: { id: user.id } }">
+              <span>@{{user.screen_name}}</span>
+              <span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
             </router-link>
           </div>
         </div>
@@ -73,20 +74,17 @@
       </div>
     </div>
     <div class="panel-body profile-panel-body">
-      <div class="user-counts">
-        <div class="user-count">
-          <a href="#" v-on:click.prevent="setProfileView('statuses')" v-if="switcher"><h5>{{ $t('user_card.statuses') }}</h5></a>
-          <h5 v-else>{{ $t('user_card.statuses') }}</h5>
-          <span>{{user.statuses_count}} <br><span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span></span>
+      <div class="user-counts" :class="{clickable: switcher}">
+        <div class="user-count" v-on:click.prevent="setProfileView('statuses')" :class="{selected: selected === 'statuses'}">
+          <h5>{{ $t('user_card.statuses') }}</h5>
+          <span>{{user.statuses_count}} <br></span>
         </div>
-        <div class="user-count">
-          <a href="#" v-on:click.prevent="setProfileView('friends')" v-if="switcher"><h5>{{ $t('user_card.followees') }}</h5></a>
-          <h5 v-else>{{ $t('user_card.followees') }}</h5>
+        <div class="user-count" v-on:click.prevent="setProfileView('friends')" :class="{selected: selected === 'friends'}">
+          <h5>{{ $t('user_card.followees') }}</h5>
           <span>{{user.friends_count}}</span>
         </div>
-        <div class="user-count">
-          <a href="#" v-on:click.prevent="setProfileView('followers')" v-if="switcher"><h5>{{ $t('user_card.followers') }}</h5></a>
-          <h5 v-else>{{ $t('user_card.followers') }}</h5>
+        <div class="user-count" v-on:click.prevent="setProfileView('followers')" :class="{selected: selected === 'followers'}">
+          <h5>{{ $t('user_card.followers') }}</h5>
           <span>{{user.followers_count}}</span>
         </div>
       </div>
@@ -112,20 +110,18 @@
 }
 
 .profile-panel-body {
-  top: -0em;
-  padding-top: 4em;
   word-wrap: break-word;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%)
 }
 
 .user-info {
-  color: white;
-  padding: 0 16px 16px 16px;
-  margin-bottom: -4em;
+  color: $fallback--lightFg;
+  color: var(--lightFg, $fallback--lightFg);
+  padding: 0 16px;
 
   .container {
-    padding: 16px 10px 4px 10px;
+    padding: 16px 10px 6px 10px;
     display: flex;
     max-height: 56px;
     overflow: hidden;
@@ -154,10 +150,9 @@
     }
   }
 
-  text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 1.0);
-
   .usersettings {
-    color: #fff;
+    color: $fallback--lightFg;
+    color: var(--lightFg, $fallback--lightFg);
     opacity: .8;
   }
 
@@ -171,14 +166,15 @@
   }
 
   .user-name{
-    color: white;
     text-overflow: ellipsis;
     overflow: hidden;
   }
 
   .user-screen-name {
-    color: white;
-    font-weight: lighter;
+    color: $fallback--lightFg;
+    color: var(--lightFg, $fallback--lightFg);
+    display: inline-block;
+    font-weight: light;
     font-size: 15px;
     padding-right: 0.1em;
   }
@@ -191,14 +187,11 @@
     div {
       flex: 1;
     }
-    margin-top: 0.7em;
-    margin-bottom: -1.0em;
 
     .following {
-      color: white;
       font-size: 14px;
       flex: 0 0 100%;
-      margin: -0.7em 0.0em 0.3em 0.0em;
+      margin: 0 0 .4em 0;
       padding-left: 16px;
       text-align: left;
     }
@@ -238,12 +231,37 @@
 .user-counts {
   display: flex;
   line-height:16px;
-  padding: 1em 1.5em 0em 1em;
+  padding: .5em 1.5em 0em 1.5em;
   text-align: center;
+  justify-content: space-between;
+  color: $fallback--lightFg;
+  color: var(--lightFg, $fallback--lightFg);
+
+  &.clickable {
+    .user-count {
+      cursor: pointer;
+
+      &:hover:not(.selected) {
+        transition: border-bottom 100ms;
+        border-bottom: 3px solid $fallback--link;
+        border-bottom: 3px solid var(--link, $fallback--link);
+      }
+    }
+  }
 }
 
 .user-count {
   flex: 1;
+  padding: .5em 0 .5em 0;
+  margin: 0 .5em;
+
+  &.selected {
+    transition: none;
+    border-bottom: 5px solid $fallback--link;
+    border-bottom: 5px solid var(--link, $fallback--link);
+    border-radius: $fallback--btnRadius;
+    border-radius: var(--btnRadius, $fallback--btnRadius);
+  }
 
   h5 {
     font-size:1em;
@@ -256,7 +274,8 @@
 }
 
 .dailyAvg {
-  font-size: 0.8em;
-  opacity: 0.5;
+  margin-left: 1em;
+  font-size: 0.7em;
+  color: #CCC;
 }
 </style>

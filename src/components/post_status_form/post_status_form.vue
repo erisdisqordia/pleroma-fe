@@ -22,12 +22,7 @@
     <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel">
           <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">
-            <div v-if="candidate.highlighted" class="autocomplete">
-              <span v-if="candidate.img"><img :src="candidate.img"></span>
-              <span v-else>{{candidate.utf}}</span>
-              <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
-            </div>
-            <div v-else class="autocomplete">
+            <div class="autocomplete" :class="{ highlighted: candidate.highlighted }">
               <span v-if="candidate.img"><img :src="candidate.img"></img></span>
               <span v-else>{{candidate.utf}}</span>
               <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
@@ -135,10 +130,6 @@
     cursor: not-allowed;
   }
 
-  .icon-cancel {
-    cursor: pointer;
-  }
-
   form {
     display: flex;
     flex-direction: column;
@@ -186,8 +177,8 @@
     z-index: 1;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
     min-width: 75%;
-    background: $fallback--btn;
-    background: var(--btn, $fallback--btn);
+    background: $fallback--bg;
+    background: var(--bg, $fallback--bg);
     color: $fallback--lightFg;
     color: var(--lightFg, $fallback--lightFg);
   }
@@ -215,6 +206,11 @@
       margin-left: .5em;
       color: $fallback--faint;
       color: var(--faint, $fallback--faint);
+    }
+
+    &.highlighted {
+      background-color: $fallback--btn;
+      background-color: var(--btn, $fallback--btn);
     }
   }
 }

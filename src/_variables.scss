@@ -4,7 +4,8 @@ $darkened-background: whitesmoke;
 
 $fallback--bg: #121a24;
 $fallback--btn: #182230;
-$fallback--faint: #999;
+$fallback--input: #182230;
+$fallback--faint: rgba(185, 185, 186, .5);
 $fallback--fg: #b9b9ba;
 $fallback--link: #d8a070;
 $fallback--icon: #666;
@@ -21,6 +22,7 @@ $fallback--cAlertRed: rgba(211,16,20,.5);
 $fallback--panelRadius: 10px;
 $fallback--checkBoxRadius: 2px;
 $fallback--btnRadius: 4px;
+$fallback--inputRadius: 4px;
 $fallback--tooltipRadius: 5px;
 $fallback--avatarRadius: 4px;
 $fallback--avatarAltRadius: 10px;

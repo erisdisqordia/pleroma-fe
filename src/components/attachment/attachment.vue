@@ -96,6 +96,9 @@
     background: rgba(230,230,230,0.6);
     font-weight: bold;
     z-index: 4;
+    line-height: 1;
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
   }
 
   .small {

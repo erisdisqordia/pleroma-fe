@@ -165,8 +165,6 @@
   border-left-width: 0px;
   line-height: 18px;
   min-width: 0;
-  background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
 
@@ -187,6 +185,10 @@
     flex: 1;
     padding: 0;
     margin: 0 0 0.25em 0.8em;
+  }
+
+  .usercard {
+    margin-bottom: .7em
   }
 
   .media-heading {

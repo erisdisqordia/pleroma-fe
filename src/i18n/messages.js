@@ -288,7 +288,10 @@ const en = {
     follow_import: 'Follow import',
     import_followers_from_a_csv_file: 'Import follows from a csv file',
     follows_imported: 'Follows imported! Processing them will take a while.',
-    follow_import_error: 'Error importing followers'
+    follow_import_error: 'Error importing followers',
+    follow_export: 'Follow export',
+    follow_export_processing: 'Processing, you\'ll soon be aked to download your file',
+    follow_export_button: 'Export your follows to a csv file'
   },
   notifications: {
     notifications: 'Notifications',

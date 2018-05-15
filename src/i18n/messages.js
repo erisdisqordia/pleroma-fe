@@ -1018,7 +1018,7 @@ const oc = {
   timeline: {
     show_new: 'Ne veire mai',
     error_fetching: 'Error en cercant de mesas a jorn',
-    up_to_date: 'Actualizat',
+    up_to_date: 'A jorn',
     load_older: 'Ne veire mai',
     conversation: 'Conversacion',
     collapse: 'Tampar',
@@ -1050,6 +1050,7 @@ const oc = {
     cRed: 'Roge (Anullar)',
     cOrange: 'Irange (Metre en favorit)',
     cGreen: 'Verd (Repartajar)',
+    inputRadius: 'Camps tèxte',
     btnRadius: 'Botons',
     panelRadius: 'Panèls',
     avatarRadius: 'Avatars',
@@ -1074,7 +1075,7 @@ const oc = {
   notifications: {
     notifications: 'Notficacions',
     read: 'Legit !',
-    followed_you: 'vos a seguit',
+    followed_you: 'vos sèc',
     favorited_you: 'a aimat vòstre estatut',
     repeated_you: 'a repetit your vòstre estatut'
   },
@@ -1105,7 +1106,7 @@ const oc = {
     apply: 'Aplicar'
   },
   user_profile: {
-    timeline_title: 'Flux a l’utilizaire'
+    timeline_title: 'Flux utilizaire'
   }
 }
 

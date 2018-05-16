@@ -1409,7 +1409,7 @@ const pt = {
   notifications: {
     notifications: 'Notificações',
     read: 'Lido!',
-    followed_you: 'seguiu você'
+    followed_you: 'seguiu você',
     favorited_you: 'favoritou sua postagem',
     repeated_you: 'repetiu sua postagem'    
   },

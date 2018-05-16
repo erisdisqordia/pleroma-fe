@@ -141,30 +141,33 @@ const UserSettings = {
     /* This function takes an Array of Users
      * and outputs a file with all the addresses for the user to download
      */
-    exportPeople(Users) {
+    exportPeople (users, filename) {
       // Get all the friends addresses
-      var UserAddresses = Users.map(function(user) {
-	// check is it's a local user
-	if(user && user.is_local) {
-	  // append the instance address
-	  user.screen_name += '@' + location.hostname;
-	}
-	return user.screen_name;
-      }).join('\n');
+      var UserAddresses = users.map(function (user) {
+        // check is it's a local user
+        if (user && user.is_local) {
+          // append the instance address
+          // eslint-disable-next-line no-undef
+          user.screen_name += '@' + location.hostname
+        }
+        return user.screen_name
+      }).join('\n')
       // Make the user download the file
-      var fileToDownload = document.createElement('a');
-      fileToDownload.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(UserAddresses));
-      fileToDownload.setAttribute('download', 'friends.csv');
-      fileToDownload.style.display = 'none';
-      document.body.appendChild(fileToDownload);
-      fileToDownload.click();
-      document.body.removeChild(fileToDownload);
+      var fileToDownload = document.createElement('a')
+      fileToDownload.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(UserAddresses))
+      fileToDownload.setAttribute('download', filename)
+      fileToDownload.style.display = 'none'
+      document.body.appendChild(fileToDownload)
+      fileToDownload.click()
+      document.body.removeChild(fileToDownload)
     },
-    exportFollows() {
-      this.enableFollowsExport = false;
+    exportFollows () {
+      this.enableFollowsExport = false
       this.$store.state.api.backendInteractor
-	.fetchFriends({id: this.$store.state.users.currentUser.id})
-	.then(this.exportPeople);
+        .fetchFriends({id: this.$store.state.users.currentUser.id})
+        .then(function (friendList) {
+          this.exportPeople(friendList, 'friends.csv')
+        }.bind(this))
     },
     followListChange () {
       // eslint-disable-next-line no-undef

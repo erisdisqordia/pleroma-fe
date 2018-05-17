@@ -1001,8 +1001,8 @@ const oc = {
     twkn: 'Lo malhum conegut'
   },
   user_card: {
-    follows_you: 'Vos sèc !',
-    following: 'Seguit !',
+    follows_you: 'Vos sèc!',
+    following: 'Seguit!',
     follow: 'Seguir',
     blocked: 'Blocat',
     block: 'Blocar',
@@ -1072,7 +1072,7 @@ const oc = {
   },
   notifications: {
     notifications: 'Notficacions',
-    read: 'Legit !',
+    read: 'Legit!',
     followed_you: 'vos a seguit',
     favorited_you: 'a aimat vòstre estatut',
     repeated_you: 'a repetit your vòstre estatut'

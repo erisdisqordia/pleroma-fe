@@ -165,9 +165,9 @@ const UserSettings = {
       this.enableFollowsExport = false
       this.$store.state.api.backendInteractor
         .fetchFriends({id: this.$store.state.users.currentUser.id})
-        .then(function (friendList) {
+        .then((friendList) => {
           this.exportPeople(friendList, 'friends.csv')
-        }.bind(this))
+        })
     },
     followListChange () {
       // eslint-disable-next-line no-undef

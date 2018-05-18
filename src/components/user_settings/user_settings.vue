@@ -66,6 +66,13 @@
           <p>{{$t('settings.follow_import_error')}}</p>
         </div>
       </div>
+      <div class="setting-item" v-if="enableFollowsExport">
+       <h3>{{$t('settings.follow_export')}}</h3>
+       <button class="btn btn-default" @click="exportFollows">{{$t('settings.follow_export_button')}}</button>
+     </div>
+     <div class="setting-item" v-else>
+       <h3>{{$t('settings.follow_export_processing')}}</h3>
+       </div>
     </div>
   </div>
 </template>

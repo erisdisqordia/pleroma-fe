@@ -917,7 +917,7 @@ const fr = {
     fullname: 'Pseudonyme',
     email: 'Adresse email',
     bio: 'Biographie',
-    password_confirm: 'Confirmation le mot de passe'
+    password_confirm: 'Confirmation du mot de passe'
   },
   post_status: {
     posting: 'Envoi en cours',

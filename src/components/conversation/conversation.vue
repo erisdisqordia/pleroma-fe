@@ -3,7 +3,7 @@
     <div class="panel-heading conversation-heading">
       {{ $t('timeline.conversation') }}
       <span v-if="collapsable" style="float:right;">
-        <small><a href="#" @click.prevent="$emit('toggleExpanded')">Collapse</a></small>
+        <small><a href="#" @click.prevent="$emit('toggleExpanded')">{{ $t('timeline.collapse') }}</a></small>
       </span>
     </div>
     <div class="panel-body">

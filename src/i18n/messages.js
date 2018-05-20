@@ -293,7 +293,10 @@ const en = {
     delete_account: 'Delete Account',
     delete_account_description: 'Permanantly delete your account and all your messages.',
     delete_account_instructions: 'Type your password in the input below to confirm account deletion.',
-    delete_account_error: 'There was an issue deleting your account. If this persists please contact your instance administrator.'
+    delete_account_error: 'There was an issue deleting your account. If this persists please contact your instance administrator.',
+    follow_export: 'Follow export',
+    follow_export_processing: 'Processing, you\'ll soon be asked to download your file',
+    follow_export_button: 'Export your follows to a csv file'
   },
   notifications: {
     notifications: 'Notifications',
@@ -835,8 +838,8 @@ const fr = {
     blocked: 'Bloqué',
     block: 'Bloquer',
     statuses: 'Statuts',
-    mute: 'Mettre en muet',
-    muted: 'Mis en muet',
+    mute: 'Masquer',
+    muted: 'Masqué',
     followers: 'Vous suivent',
     followees: 'Suivis',
     per_day: 'par jour',
@@ -844,7 +847,7 @@ const fr = {
   },
   timeline: {
     show_new: 'Afficher plus',
-    error_fetching: 'Erreur en cherchant des mises à jours',
+    error_fetching: 'Erreur en cherchant les mises à jour',
     up_to_date: 'À jour',
     load_older: 'Afficher plus',
     conversation: 'Conversation',
@@ -855,32 +858,32 @@ const fr = {
     user_settings: 'Paramètres utilisateur',
     name_bio: 'Nom & Bio',
     name: 'Nom',
-    bio: 'Bioraphie',
+    bio: 'Biographie',
     avatar: 'Avatar',
-    current_avatar: 'Votre avatar',
+    current_avatar: 'Avatar actuel',
     set_new_avatar: 'Changer d\'avatar',
-    profile_banner: 'Bannière du profil',
-    current_profile_banner: 'Bannière du profil',
+    profile_banner: 'Bannière de profil',
+    current_profile_banner: 'Bannière de profil actuelle',
     set_new_profile_banner: 'Changer de bannière',
     profile_background: 'Image de fond',
     set_new_profile_background: 'Changer d\'image de fond',
     settings: 'Paramètres',
     theme: 'Thème',
     filtering: 'Filtre',
-    filtering_explanation: 'Tout les statuts contenant ces mots vont être cachés, un mot par ligne.',
+    filtering_explanation: 'Tout les statuts contenant ces mots seront masqués. Un mot par ligne.',
     attachments: 'Pièces jointes',
-    hide_attachments_in_tl: 'Cacher les pièces jointes dans le journal',
-    hide_attachments_in_convo: 'Cacher les pièces jointes dans les conversations',
-    nsfw_clickthrough: 'Activer le clic pour afficher les images marquées comme contenu adulte ou sensible',
-    autoload: 'Activer le chargement automatique une fois le bas de la page atteint',
-    reply_link_preview: 'Activer un aperçu d\'une réponse sur passage de la souris',
+    hide_attachments_in_tl: 'Masquer les pièces jointes dans le journal',
+    hide_attachments_in_convo: 'Masquer les pièces jointes dans les conversations',
+    nsfw_clickthrough: 'Masquer les images marquées comme contenu adulte ou sensible',
+    autoload: 'Charger la suite automatiquement une fois le bas de la page atteint',
+    reply_link_preview: 'Afficher un aperçu lors du survol de liens vers une réponse',
     presets: 'Thèmes prédéfinis',
-    theme_help: 'Utilisez les codes de couleur hexadécimaux (#aabbcc) pour customiser les couleurs de votre thème.',
+    theme_help: 'Spécifiez des codes couleur hexadécimaux (#aabbcc) pour personnaliser les couleurs du thème',
     background: 'Arrière plan',
     foreground: 'Premier plan',
     text: 'Texte',
     links: 'Liens',
-    streaming: 'Active le défilement automatique de nouveaux statuts lorsqu\'on est au haut de la page',
+    streaming: 'Charger automatiquement les nouveaux statuts lorsque vous êtes au haut de la page',
     follow_import: 'Importer ses abonnements',
     import_followers_from_a_csv_file: 'Importer ses abonnements depuis un fichier csv',
     follows_imported: 'Abonnements importés ! Le traitement peut prendre un moment.',
@@ -891,33 +894,34 @@ const fr = {
     cGreen: 'Vert (Partager)',
     btnRadius: 'Boutons',
     panelRadius: 'Fenêtres',
+    inputRadius: 'Champs de texte',
     avatarRadius: 'Avatars',
     avatarAltRadius: 'Avatars (Notifications)',
     tooltipRadius: 'Info-bulles/alertes ',
     attachmentRadius: 'Pièces jointes',
-    radii_help: 'Mettre en place l\'arondissement des coins de l\'interface (en pixels)',
-    stop_gifs: 'Passer la souris sur un GIF pour l\'animer'
+    radii_help: 'Vous pouvez ici choisir le niveau d\'arrondi des angles de l\'interface (en pixels)',
+    stop_gifs: 'N\'animer les GIFS que lors du survol du curseur de la souris'
   },
   notifications: {
     notifications: 'Notifications',
     read: 'Lu !',
-    followed_you: 'vous a suivi',
+    followed_you: 'a commencé à vous suivre',
     favorited_you: 'a aimé votre statut',
     repeated_you: 'a partagé votre statut'
   },
   login: {
     login: 'Connexion',
-    username: 'Nom d\'utilisateur',
+    username: 'Identifiant',
     password: 'Mot de passe',
     register: 'S\'inscrire',
     logout: 'Déconnexion'
   },
   registration: {
     registration: 'Inscription',
-    fullname: 'Nom affiché',
+    fullname: 'Pseudonyme',
     email: 'Adresse email',
     bio: 'Biographie',
-    password_confirm: 'Confirmez le mot de passe'
+    password_confirm: 'Confirmation du mot de passe'
   },
   post_status: {
     posting: 'Envoi en cours',
@@ -925,7 +929,7 @@ const fr = {
   },
   finder: {
     find_user: 'Chercher un utilisateur',
-    error_fetching_user: 'Une erreur est survenue lors de la recherche de l\'utilisateur'
+    error_fetching_user: 'Erreur lors de la recherche de l\'utilisateur'
   },
   general: {
     submit: 'Envoyer',
@@ -1022,7 +1026,7 @@ const oc = {
   timeline: {
     show_new: 'Ne veire mai',
     error_fetching: 'Error en cercant de mesas a jorn',
-    up_to_date: 'Actualizat',
+    up_to_date: 'A jorn',
     load_older: 'Ne veire mai',
     conversation: 'Conversacion',
     collapse: 'Tampar',
@@ -1054,6 +1058,7 @@ const oc = {
     cRed: 'Roge (Anullar)',
     cOrange: 'Irange (Metre en favorit)',
     cGreen: 'Verd (Repartajar)',
+    inputRadius: 'Camps tèxte',
     btnRadius: 'Botons',
     panelRadius: 'Panèls',
     avatarRadius: 'Avatars',
@@ -1078,7 +1083,7 @@ const oc = {
   notifications: {
     notifications: 'Notficacions',
     read: 'Legit !',
-    followed_you: 'vos a seguit',
+    followed_you: 'vos sèc',
     favorited_you: 'a aimat vòstre estatut',
     repeated_you: 'a repetit your vòstre estatut'
   },
@@ -1109,7 +1114,7 @@ const oc = {
     apply: 'Aplicar'
   },
   user_profile: {
-    timeline_title: 'Flux a l’utilizaire'
+    timeline_title: 'Flux utilizaire'
   }
 }
 

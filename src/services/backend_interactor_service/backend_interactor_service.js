@@ -62,6 +62,7 @@ const backendInteractorService = (credentials) => {
   const followImport = ({params}) => apiService.followImport({params, credentials})
 
   const deleteAccount = ({password}) => apiService.deleteAccount({credentials, password})
+  const changePassword = ({password, newPassword, newPasswordConfirmation}) => apiService.changePassword({credentials, password, newPassword, newPasswordConfirmation})
 
   const backendInteractorServiceInstance = {
     fetchStatus,
@@ -85,7 +86,8 @@ const backendInteractorService = (credentials) => {
     updateProfile,
     externalProfile,
     followImport,
-    deleteAccount
+    deleteAccount,
+    changePassword
   }
 
   return backendInteractorServiceInstance

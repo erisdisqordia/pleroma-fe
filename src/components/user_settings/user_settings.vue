@@ -49,6 +49,25 @@
         <i class=" icon-spin4 animate-spin uploading" v-if="uploading[2]"></i>
         <button class="btn btn-default" v-else-if="previews[2]" @click="submitBg">{{$t('general.submit')}}</button>
       </div>
+      <div class="setting-item">
+        <h3>{{$t('settings.change_password')}}</h3>
+        <div>
+          <p>{{$t('settings.current_password')}}</p>
+          <input type="password" v-model="changePasswordInputs[0]">
+        </div>
+        <div>
+          <p>{{$t('settings.new_password')}}</p>
+          <input type="password" v-model="changePasswordInputs[1]">
+        </div>
+        <div>
+          <p>{{$t('settings.confirm_new_password')}}</p>
+          <input type="password" v-model="changePasswordInputs[2]">
+        </div>
+        <button class="btn btn-default" @click="changePassword">{{$t('general.submit')}}</button>
+        <p v-if="changedPassword">{{$t('settings.changed_password')}}</p>
+        <p v-else-if="changePasswordError !== false">{{$t('settings.change_password_error')}}</p>
+        <p v-if="changePasswordError">{{changePasswordError}}</p>
+      </div>
       <div class="setting-item" v-if="pleromaBackend">
         <h3>{{$t('settings.follow_import')}}</h3>
         <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
@@ -62,7 +81,7 @@
           <p>{{$t('settings.follows_imported')}}</p>
         </div>
         <div v-else-if="followImportError">
-          <i class="icon-cross" @click="dismissImported"</i>
+          <i class="icon-cross" @click="dismissImported"></i>
           <p>{{$t('settings.follow_import_error')}}</p>
         </div>
       </div>

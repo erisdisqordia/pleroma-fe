@@ -291,12 +291,18 @@ const en = {
     follows_imported: 'Follows imported! Processing them will take a while.',
     follow_import_error: 'Error importing followers',
     delete_account: 'Delete Account',
-    delete_account_description: 'Permanantly delete your account and all your messages.',
+    delete_account_description: 'Permanently delete your account and all your messages.',
     delete_account_instructions: 'Type your password in the input below to confirm account deletion.',
     delete_account_error: 'There was an issue deleting your account. If this persists please contact your instance administrator.',
     follow_export: 'Follow export',
     follow_export_processing: 'Processing, you\'ll soon be asked to download your file',
-    follow_export_button: 'Export your follows to a csv file'
+    follow_export_button: 'Export your follows to a csv file',
+    change_password: 'Change Password',
+    current_password: 'Current password',
+    new_password: 'New password',
+    confirm_new_password: 'Confirm new password',
+    changed_password: 'Password changed successfully!',
+    change_password_error: 'There was an issue changing your password.'
   },
   notifications: {
     notifications: 'Notifications',

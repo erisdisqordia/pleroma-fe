@@ -104,16 +104,16 @@ const Status = {
     StillImage
   },
   methods: {
-    visibilityIcon(visibility) {
-      switch(visibility) {
-      case "private":
-        return "icon-lock"
-      case "unlisted":
-        return "icon-lock-open-alt"
-      case "direct":
-        return "icon-mail-alt"
-      default:
-        return "icon-globe"
+    visibilityIcon (visibility) {
+      switch (visibility) {
+        case 'private':
+          return 'icon-lock'
+        case 'unlisted':
+          return 'icon-lock-open-alt'
+        case 'direct':
+          return 'icon-mail-alt'
+        default:
+          return 'icon-globe'
       }
     },
     linkClicked ({target}) {

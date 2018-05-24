@@ -13,7 +13,10 @@ const UserSettings = {
       previews: [ null, null, null ],
       deletingAccount: false,
       deleteAccountConfirmPasswordInput: '',
-      deleteAccountError: false
+      deleteAccountError: false,
+      changePasswordInputs: [ '', '', '' ],
+      changedPassword: false,
+      changePasswordError: false
     }
   },
   components: {
@@ -193,6 +196,23 @@ const UserSettings = {
             this.$router.push('/main/all')
           } else {
             this.deleteAccountError = res.error
+          }
+        })
+    },
+    changePassword () {
+      const params = {
+        password: this.changePasswordInputs[0],
+        newPassword: this.changePasswordInputs[1],
+        newPasswordConfirmation: this.changePasswordInputs[2]
+      }
+      this.$store.state.api.backendInteractor.changePassword(params)
+        .then((res) => {
+          if (res.status === 'success') {
+            this.changedPassword = true
+            this.changePasswordError = false
+          } else {
+            this.changedPassword = false
+            this.changePasswordError = res.error
           }
         })
     }

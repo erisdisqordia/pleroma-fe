@@ -31,6 +31,7 @@ const UNBLOCKING_URL = '/api/blocks/destroy.json'
 const USER_URL = '/api/users/show.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
+const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
 
 import { each, map } from 'lodash'
 import 'whatwg-fetch'
@@ -387,6 +388,21 @@ const deleteAccount = ({credentials, password}) => {
     .then((response) => response.json())
 }
 
+const changePassword = ({credentials, password, newPassword, newPasswordConfirmation}) => {
+  const form = new FormData()
+
+  form.append('password', password)
+  form.append('new_password', newPassword)
+  form.append('new_password_confirmation', newPasswordConfirmation)
+
+  return fetch(CHANGE_PASSWORD_URL, {
+    body: form,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.json())
+}
+
 const fetchMutes = ({credentials}) => {
   const url = '/api/qvitter/mutes.json'
 
@@ -423,7 +439,8 @@ const apiService = {
   updateBanner,
   externalProfile,
   followImport,
-  deleteAccount
+  deleteAccount,
+  changePassword
 }
 
 export default apiService

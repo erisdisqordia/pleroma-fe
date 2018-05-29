@@ -121,6 +121,7 @@
 
   input[type=file] {
     padding: 5px;
+    height: auto;
   }
 
   .banner {

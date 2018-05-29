@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body profile-edit">
       <div class="setting-item">
-        <h3>{{$t('settings.name_bio')}}</h3>
+        <h2>{{$t('settings.name_bio')}}</h2>
         <p>{{$t('settings.name')}}</p>
         <input class='name-changer' id='username' v-model="newname"></input>
         <p>{{$t('settings.bio')}}</p>
@@ -13,7 +13,7 @@
         <button :disabled='newname.length <= 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
       </div>
       <div class="setting-item">
-        <h3>{{$t('settings.avatar')}}</h3>
+        <h2>{{$t('settings.avatar')}}</h2>
         <p>{{$t('settings.current_avatar')}}</p>
         <img :src="user.profile_image_url_original" class="old-avatar"></img>
         <p>{{$t('settings.set_new_avatar')}}</p>
@@ -26,7 +26,7 @@
         <button class="btn btn-default" v-else-if="previews[0]" @click="submitAvatar">{{$t('general.submit')}}</button>
       </div>
       <div class="setting-item">
-        <h3>{{$t('settings.profile_banner')}}</h3>
+        <h2>{{$t('settings.profile_banner')}}</h2>
         <p>{{$t('settings.current_profile_banner')}}</p>
         <img :src="user.cover_photo" class="banner"></img>
         <p>{{$t('settings.set_new_profile_banner')}}</p>
@@ -39,7 +39,7 @@
         <button class="btn btn-default" v-else-if="previews[1]" @click="submitBanner">{{$t('general.submit')}}</button>
       </div>
       <div class="setting-item">
-        <h3>{{$t('settings.profile_background')}}</h3>
+        <h2>{{$t('settings.profile_background')}}</h2>
         <p>{{$t('settings.set_new_profile_background')}}</p>
         <img class="bg" v-bind:src="previews[2]" v-if="previews[2]">
         </img>
@@ -50,7 +50,7 @@
         <button class="btn btn-default" v-else-if="previews[2]" @click="submitBg">{{$t('general.submit')}}</button>
       </div>
       <div class="setting-item">
-        <h3>{{$t('settings.change_password')}}</h3>
+        <h2>{{$t('settings.change_password')}}</h2>
         <div>
           <p>{{$t('settings.current_password')}}</p>
           <input type="password" v-model="changePasswordInputs[0]">
@@ -69,7 +69,7 @@
         <p v-if="changePasswordError">{{changePasswordError}}</p>
       </div>
       <div class="setting-item" v-if="pleromaBackend">
-        <h3>{{$t('settings.follow_import')}}</h3>
+        <h2>{{$t('settings.follow_import')}}</h2>
         <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
         <form v-model="followImportForm">
           <input type="file" ref="followlist" v-on:change="followListChange"></input>
@@ -86,15 +86,15 @@
         </div>
       </div>
       <div class="setting-item" v-if="enableFollowsExport">
-        <h3>{{$t('settings.follow_export')}}</h3>
+        <h2>{{$t('settings.follow_export')}}</h2>
         <button class="btn btn-default" @click="exportFollows">{{$t('settings.follow_export_button')}}</button>
       </div>
       <div class="setting-item" v-else>
-        <h3>{{$t('settings.follow_export_processing')}}</h3>
+        <h2>{{$t('settings.follow_export_processing')}}</h2>
       </div>
       <hr>
       <div class="setting-item">
-        <h3>{{$t('settings.delete_account')}}</h3>
+        <h2>{{$t('settings.delete_account')}}</h2>
         <p v-if="!deletingAccount">{{$t('settings.delete_account_description')}}</p>
         <div v-if="deletingAccount">
           <p>{{$t('settings.delete_account_instructions')}}</p>

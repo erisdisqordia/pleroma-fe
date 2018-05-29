@@ -5,6 +5,7 @@ const UserSettings = {
     return {
       newname: this.$store.state.users.currentUser.name,
       newbio: this.$store.state.users.currentUser.description,
+      newlocked: this.$store.state.users.currentUser.locked,
       followList: null,
       followImportError: false,
       followsImported: false,
@@ -34,7 +35,8 @@ const UserSettings = {
     updateProfile () {
       const name = this.newname
       const description = this.newbio
-      this.$store.state.api.backendInteractor.updateProfile({params: {name, description}}).then((user) => {
+      const locked = this.newlocked
+      this.$store.state.api.backendInteractor.updateProfile({params: {name, description, locked}}).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)

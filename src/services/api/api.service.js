@@ -127,11 +127,13 @@ const updateBanner = ({credentials, params}) => {
 const updateProfile = ({credentials, params}) => {
   let url = PROFILE_UPDATE_URL
 
+  console.log(params)
+
   const form = new FormData()
 
   each(params, (value, key) => {
-    if (key === 'description' || /* Always include description, because it might be empty */
-        value) {
+    /* Always include description and locked, because it might be empty or false */
+    if (key === 'description' || key === 'locked' || value) {
       form.append(key, value)
     }
   })

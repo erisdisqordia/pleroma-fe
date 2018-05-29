@@ -10,6 +10,10 @@
         <input class='name-changer' id='username' v-model="newname"></input>
         <p>{{$t('settings.bio')}}</p>
         <textarea class="bio" v-model="newbio"></textarea>
+        <div class="setting-item">
+          <input type="checkbox" v-model="newlocked" id="account-locked">
+          <label for="account-locked">{{$t('settings.lock_account_description')}}</label>
+        </div>
         <button :disabled='newname.length <= 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
       </div>
       <div class="setting-item">

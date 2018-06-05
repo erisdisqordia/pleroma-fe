@@ -1681,6 +1681,139 @@ const nb = {
   }
 }
 
+const he = {
+  chat: {
+    title: 'צ\'אט'
+  },
+  nav: {
+    chat: 'צ\'אט מקומי',
+    timeline: 'ציר הזמן',
+    mentions: 'אזכורים',
+    public_tl: 'ציר הזמן הציבורי',
+    twkn: 'כל הרשת הידועה'
+  },
+  user_card: {
+    follows_you: 'עוקב אחריך!',
+    following: 'עוקב!',
+    follow: 'עקוב',
+    blocked: 'חסום!',
+    block: 'חסימה',
+    statuses: 'סטטוסים',
+    mute: 'השתק',
+    muted: 'מושתק',
+    followers: 'עוקבים',
+    followees: 'נעקבים',
+    per_day: 'ליום',
+    remote_follow: 'עקיבה מרחוק'
+  },
+  timeline: {
+    show_new: 'הראה חדש',
+    error_fetching: 'שגיאה בהבאת הודעות',
+    up_to_date: 'עדכני',
+    load_older: 'טען סטטוסים חדשים',
+    conversation: 'שיחה',
+    collapse: 'מוטט',
+    repeated: 'חזר'
+  },
+  settings: {
+    user_settings: 'הגדרות משתמש',
+    name_bio: 'שם ואודות',
+    name: 'שם',
+    bio: 'אודות',
+    avatar: 'תמונת פרופיל',
+    current_avatar: 'תמונת הפרופיל הנוכחית שלך',
+    set_new_avatar: 'Set new avatar',
+    profile_banner: 'Profile Banner',
+    current_profile_banner: 'Your current profile banner',
+    set_new_profile_banner: 'Set new profile banner',
+    profile_background: 'Profile Background',
+    set_new_profile_background: 'Set new profile background',
+    settings: 'הגדרות',
+    theme: 'Theme',
+    presets: 'Presets',
+    theme_help: 'Use hex color codes (#rrggbb) to customize your color theme.',
+    radii_help: 'Set up interface edge rounding (in pixels)',
+    background: 'רקע',
+    foreground: 'חזית',
+    text: 'טקסט',
+    links: 'לינקים',
+    cBlue: 'Blue (Reply, follow)',
+    cRed: 'Red (Cancel)',
+    cOrange: 'Orange (Favorite)',
+    cGreen: 'Green (Retweet)',
+    btnRadius: 'Buttons',
+    inputRadius: 'Input fields',
+    panelRadius: 'Panels',
+    avatarRadius: 'Avatars',
+    avatarAltRadius: 'Avatars (Notifications)',
+    tooltipRadius: 'Tooltips/alerts',
+    attachmentRadius: 'Attachments',
+    filtering: 'Filtering',
+    filtering_explanation: 'All statuses containing these words will be muted, one per line',
+    attachments: 'Attachments',
+    hide_attachments_in_tl: 'Hide attachments in timeline',
+    hide_attachments_in_convo: 'Hide attachments in conversations',
+    nsfw_clickthrough: 'Enable clickthrough NSFW attachment hiding',
+    stop_gifs: 'Play-on-hover GIFs',
+    autoload: 'Enable automatic loading when scrolled to the bottom',
+    streaming: 'Enable automatic streaming of new posts when scrolled to the top',
+    reply_link_preview: 'Enable reply-link preview on mouse hover',
+    follow_import: 'יבוא עקיבות',
+    import_followers_from_a_csv_file: 'Import follows from a csv file',
+    follows_imported: 'Follows imported! Processing them will take a while.',
+    follow_import_error: 'Error importing followers',
+    delete_account: 'מחק משתמש',
+    delete_account_description: 'Permanently delete your account and all your messages.',
+    delete_account_instructions: 'Type your password in the input below to confirm account deletion.',
+    delete_account_error: 'There was an issue deleting your account. If this persists please contact your instance administrator.',
+    follow_export: 'יצוא עקיבות',
+    follow_export_processing: 'Processing, you\'ll soon be asked to download your file',
+    follow_export_button: 'Export your follows to a csv file',
+    change_password: 'שנה סיסמה',
+    current_password: 'סיסמה נוכחית',
+    new_password: 'סיסמה חדשה',
+    confirm_new_password: 'אשר סיסמה',
+    changed_password: 'סיסמה שונתה בהצלחה!',
+    change_password_error: 'הייתה בעיה בשינוי סיסמתך.'
+  },
+  notifications: {
+    notifications: 'התראות',
+    read: 'קרא!',
+    followed_you: 'עקב אחריך!',
+    favorited_you: 'אהב את הסטטוס שלך',
+    repeated_you: 'חזר על הסטטוס שלך'
+  },
+  login: {
+    login: 'התחבר',
+    username: 'שם המשתמש',
+    password: 'סיסמה',
+    register: 'הירשם',
+    logout: 'התנתק'
+  },
+  registration: {
+    registration: 'הרשמה',
+    fullname: 'שם תצוגה',
+    email: 'אימייל',
+    bio: 'אודות',
+    password_confirm: 'אישור סיסמה'
+  },
+  post_status: {
+    posting: 'מפרסם',
+    default: 'הרגע נחת ב-ל.א.'
+  },
+  finder: {
+    find_user: 'מציאת משתמש',
+    error_fetching_user: 'שגיאה במציאת משתמש'
+  },
+  general: {
+    submit: 'שלח',
+    apply: 'החל'
+  },
+  user_profile: {
+    timeline_title: 'ציר זמן המשתמש'
+  }
+}
+
 const messages = {
   de,
   fi,
@@ -1697,7 +1830,8 @@ const messages = {
   es,
   pt,
   ru,
-  nb
+  nb,
+  he
 }
 
 export default messages

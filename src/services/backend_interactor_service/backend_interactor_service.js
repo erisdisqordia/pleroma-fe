@@ -51,6 +51,7 @@ const backendInteractorService = (credentials) => {
   }
 
   const fetchMutes = () => apiService.fetchMutes({credentials})
+  const fetchFollowRequests = () => apiService.fetchFollowRequests({credentials})
 
   const register = (params) => apiService.register(params)
   const updateAvatar = ({params}) => apiService.updateAvatar({credentials, params})
@@ -87,7 +88,8 @@ const backendInteractorService = (credentials) => {
     externalProfile,
     followImport,
     deleteAccount,
-    changePassword
+    changePassword,
+    fetchFollowRequests
   }
 
   return backendInteractorServiceInstance

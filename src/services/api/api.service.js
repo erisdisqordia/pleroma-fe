@@ -32,6 +32,7 @@ const USER_URL = '/api/users/show.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
+const FOLLOW_REQUESTS_URL = '/api/pleroma/friend_requests'
 
 import { each, map } from 'lodash'
 import 'whatwg-fetch'
@@ -242,6 +243,12 @@ const fetchAllFollowing = ({username, credentials}) => {
     .then((data) => data.json())
 }
 
+const fetchFollowRequests = ({credentials}) => {
+  const url = FOLLOW_REQUESTS_URL
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
+}
+
 const fetchConversation = ({id, credentials}) => {
   let url = `${CONVERSATION_URL}/${id}.json?count=100`
   return fetch(url, { headers: authHeaders(credentials) })
@@ -442,7 +449,8 @@ const apiService = {
   externalProfile,
   followImport,
   deleteAccount,
-  changePassword
+  changePassword,
+  fetchFollowRequests
 }
 
 export default apiService

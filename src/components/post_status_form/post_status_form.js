@@ -176,7 +176,6 @@ const PostStatusForm = {
       this.caret = selectionStart
     },
     postStatus (newStatus) {
-      console.log(newStatus);
       if (this.posting) { return }
       if (this.submitDisabled) { return }
 
@@ -207,8 +206,8 @@ const PostStatusForm = {
           let el = this.$el.querySelector('textarea')
           el.style.height = '16px'
           this.error = null
-          
-          Object.keys(this.vis).forEach(x => this.vis[x].selected = false)
+
+          Object.keys(this.vis).forEach(function (x) { this.vis[x].selected = false })
           this.vis.public.selected = true
         } else {
           this.error = data.error
@@ -264,7 +263,7 @@ const PostStatusForm = {
     },
     changeVis (visibility) {
       console.log(visibility)
-      Object.keys(this.vis).forEach(x => this.vis[x].selected = x == visibility)
+      Object.keys(this.vis).forEach(function (x) { this.vis[x].selected = x === visibility})
       this.newStatus.visibility = visibility
     }
   }

@@ -218,7 +218,8 @@ const en = {
     timeline: 'Timeline',
     mentions: 'Mentions',
     public_tl: 'Public Timeline',
-    twkn: 'The Whole Known Network'
+    twkn: 'The Whole Known Network',
+    friend_requests: 'Follow Requests'
   },
   user_card: {
     follows_you: 'Follows you!',
@@ -232,7 +233,9 @@ const en = {
     followers: 'Followers',
     followees: 'Following',
     per_day: 'per day',
-    remote_follow: 'Remote follow'
+    remote_follow: 'Remote follow',
+    approve: 'Approve',
+    deny: 'Deny'
   },
   timeline: {
     show_new: 'Show new',

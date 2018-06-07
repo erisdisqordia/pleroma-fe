@@ -15,6 +15,10 @@
       </div>
       <a :href="user.statusnet_profile_url" target="blank"><div class="user-screen-name">@{{ user.screen_name }}</div></a>
     </div>
+    <div class="approval" v-if="showApproval">
+      <button class="btn btn-default" @click="approveUser">{{ $t('user_card.approve') }}</button>
+      <button class="btn btn-default" @click="denyUser">{{ $t('user_card.deny') }}</button>
+    </div>
   </div>
 </template>
 
@@ -73,6 +77,13 @@
 
   p {
     margin-bottom: 0;
+  }
+}
+
+.approval {
+  button {
+    width: 100%;
+    margin-bottom: 0.5em;
   }
 }
 </style>

@@ -20,9 +20,11 @@ const UserCard = {
     },
     approveUser () {
       this.$store.state.api.backendInteractor.approveUser(this.user.id)
+      this.$store.dispatch('removeFollowRequest', this.user)
     },
     denyUser () {
       this.$store.state.api.backendInteractor.denyUser(this.user.id)
+      this.$store.dispatch('removeFollowRequest', this.user)
     }
   }
 }

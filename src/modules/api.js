@@ -7,7 +7,8 @@ const api = {
     backendInteractor: backendInteractorService(),
     fetchers: {},
     socket: null,
-    chatDisabled: false
+    chatDisabled: false,
+    followRequests: []
   },
   mutations: {
     setBackendInteractor (state, backendInteractor) {
@@ -24,6 +25,9 @@ const api = {
     },
     setChatDisabled (state, value) {
       state.chatDisabled = value
+    },
+    setFollowRequests (state, value) {
+      state.followRequests = value
     }
   },
   actions: {
@@ -57,6 +61,10 @@ const api = {
     },
     disableChat (store) {
       store.commit('setChatDisabled', true)
+    },
+    removeFollowRequest (store, request) {
+      let requests = store.state.followRequests.filter((it) => it !== request)
+      store.commit('setFollowRequests', requests)
     }
   }
 }

@@ -42,6 +42,14 @@ const backendInteractorService = (credentials) => {
     return apiService.unblockUser({credentials, id})
   }
 
+  const approveUser = (id) => {
+    return apiService.approveUser({credentials, id})
+  }
+
+  const denyUser = (id) => {
+    return apiService.denyUser({credentials, id})
+  }
+
   const startFetching = ({timeline, store, userId = false}) => {
     return timelineFetcherService.startFetching({timeline, store, credentials, userId})
   }
@@ -89,7 +97,9 @@ const backendInteractorService = (credentials) => {
     followImport,
     deleteAccount,
     changePassword,
-    fetchFollowRequests
+    fetchFollowRequests,
+    approveUser,
+    denyUser
   }
 
   return backendInteractorServiceInstance

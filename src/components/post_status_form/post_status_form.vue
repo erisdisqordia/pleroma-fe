@@ -4,7 +4,7 @@
     <div class="form-group" >
       <input
         type="text"
-        placeholder="Content warning (optional)"
+        :placeholder="$t('post_status.content_warning')"
         v-model="newStatus.spoilerText"
         class="form-cw">
       <textarea

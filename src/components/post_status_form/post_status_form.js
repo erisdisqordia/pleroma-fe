@@ -191,7 +191,7 @@ const PostStatusForm = {
       this.posting = true
       statusPoster.postStatus({
         status: newStatus.status,
-        spoilerText: newStatus.spoilerText || undefined,
+        spoilerText: newStatus.spoilerText || null,
         visibility: newStatus.visibility,
         media: newStatus.files,
         store: this.$store,
@@ -207,7 +207,7 @@ const PostStatusForm = {
           el.style.height = '16px'
           this.error = null
 
-          Object.keys(this.vis).forEach(function (x) { this.vis[x].selected = false })
+          for (key in Object.keys(this.vis)) { this.vis[key].selected = false }
           this.vis.public.selected = true
         } else {
           this.error = data.error

@@ -1746,7 +1746,7 @@ const he = {
     panelRadius: 'פאנלים',
     avatarRadius: 'תמונות פרופיל',
     avatarAltRadius: 'תמונות פרופיל (התראות)',
-    tooltipRadius: 'טולטיפ / התראות',
+    tooltipRadius: 'טולטיפ \\ התראות',
     attachmentRadius: 'צירופים',
     filtering: 'סינון',
     filtering_explanation: 'כל הסטטוסים הכוללים את המילים הללו יושתקו, אחד לשורה',

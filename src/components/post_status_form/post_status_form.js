@@ -47,10 +47,10 @@ const PostStatusForm = {
       posting: false,
       highlighted: 0,
       vis: {
-        public: { 'icon-globe': true, big: true, selected: true },
-        unlisted: { 'icon-lock-open-alt': true, big: true, selected: false },
-        private: { 'icon-lock': true, big: true, selected: false },
-        direct: { 'icon-mail-alt': true, big: true, selected: false }
+        public: { icon: 'icon-globe', big: true, selected: true },
+        unlisted: { icon: 'icon-lock-open-alt', big: true, selected: false },
+        private: { icon: 'icon-lock', big: true, selected: false },
+        direct: { icon: 'icon-mail-alt', big: true, selected: false }
       },
       newStatus: {
         status: statusText,
@@ -191,7 +191,7 @@ const PostStatusForm = {
       this.posting = true
       statusPoster.postStatus({
         status: newStatus.status,
-        spoilerText: newStatus.spoilerText || undefined,
+        spoilerText: newStatus.spoilerText || null,
         visibility: newStatus.visibility,
         media: newStatus.files,
         store: this.$store,
@@ -207,7 +207,7 @@ const PostStatusForm = {
           el.style.height = '16px'
           this.error = null
 
-          Object.keys(this.vis).forEach(function (x) { this.vis[x].selected = false })
+          for (key in Object.keys(this.vis)) { this.vis[key].selected = false }
           this.vis.public.selected = true
         } else {
           this.error = data.error

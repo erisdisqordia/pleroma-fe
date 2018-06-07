@@ -46,6 +46,12 @@ const PostStatusForm = {
       error: null,
       posting: false,
       highlighted: 0,
+      vis: {
+        public: { 'icon-globe': true, big: true, selected: true },
+        unlisted: { 'icon-lock-open-alt': true, big: true, selected: false },
+        private: { 'icon-lock': true, big: true, selected: false },
+        direct: { 'icon-mail-alt': true, big: true, selected: false }
+      },
       newStatus: {
         status: statusText,
         files: []
@@ -170,6 +176,7 @@ const PostStatusForm = {
       this.caret = selectionStart
     },
     postStatus (newStatus) {
+      console.log(newStatus);
       if (this.posting) { return }
       if (this.submitDisabled) { return }
 
@@ -185,6 +192,8 @@ const PostStatusForm = {
       this.posting = true
       statusPoster.postStatus({
         status: newStatus.status,
+        spoilerText: newStatus.spoilerText || undefined,
+        visibility: newStatus.visibility,
         media: newStatus.files,
         store: this.$store,
         inReplyToStatusId: this.replyTo
@@ -198,6 +207,9 @@ const PostStatusForm = {
           let el = this.$el.querySelector('textarea')
           el.style.height = '16px'
           this.error = null
+          
+          Object.keys(this.vis).forEach(x => this.vis[x].selected = false)
+          this.vis.public.selected = true
         } else {
           this.error = data.error
         }
@@ -249,6 +261,11 @@ const PostStatusForm = {
     },
     clearError () {
       this.error = null
+    },
+    changeVis (visibility) {
+      console.log(visibility)
+      Object.keys(this.vis).forEach(x => this.vis[x].selected = x == visibility)
+      this.newStatus.visibility = visibility
     }
   }
 }

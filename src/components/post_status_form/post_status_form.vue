@@ -2,6 +2,11 @@
 <div class="post-status-form">
   <form @submit.prevent="postStatus(newStatus)">
     <div class="form-group" >
+      <input
+        type="text"
+        placeholder="Content warning (optional)"
+        v-model="newStatus.spoilerText"
+        class="form-cw">
       <textarea
         ref="textarea"
         @click="setCaret"
@@ -18,6 +23,12 @@
         @input="resize"
         @paste="paste">
       </textarea>
+      <div class="visibility-tray">
+        <i v-on:click="changeVis('direct')" v-bind:class="vis.direct"></i>
+        <i v-on:click="changeVis('private')" v-bind:class="vis.private"></i>
+        <i v-on:click="changeVis('unlisted')" v-bind:class="vis.unlisted"></i>
+        <i v-on:click="changeVis('public')" v-bind:class="vis.public"></i>
+      </div>
     </div>
     <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel">
@@ -143,7 +154,15 @@
     line-height:24px;
   }
 
-  form textarea {
+  form textarea.form-cw {
+    line-height:16px;
+    resize: none;
+    overflow: hidden;
+    transition: min-height 200ms 100ms;
+    min-height: 1px;
+  }
+
+  form textarea.form-control {
     line-height:16px;
     resize: none;
     overflow: hidden;
@@ -152,7 +171,7 @@
     box-sizing: content-box;
   }
 
-  form textarea:focus {
+  form textarea.form-control:focus {
     min-height: 48px;
   }
 

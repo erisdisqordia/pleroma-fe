@@ -33,6 +33,8 @@ const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
 const FOLLOW_REQUESTS_URL = '/api/pleroma/friend_requests'
+const APPROVE_USER_URL = '/api/pleroma/friendships/approve'
+const DENY_USER_URL = '/api/pleroma/friendships/deny'
 
 import { each, map } from 'lodash'
 import 'whatwg-fetch'
@@ -213,6 +215,22 @@ const blockUser = ({id, credentials}) => {
 
 const unblockUser = ({id, credentials}) => {
   let url = `${UNBLOCKING_URL}?user_id=${id}`
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => data.json())
+}
+
+const approveUser = ({id, credentials}) => {
+  let url = `${APPROVE_USER_URL}?user_id=${id}`
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => data.json())
+}
+
+const denyUser = ({id, credentials}) => {
+  let url = `${DENY_USER_URL}?user_id=${id}`
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -450,7 +468,9 @@ const apiService = {
   followImport,
   deleteAccount,
   changePassword,
-  fetchFollowRequests
+  fetchFollowRequests,
+  approveUser,
+  denyUser
 }
 
 export default apiService

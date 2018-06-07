@@ -263,7 +263,7 @@ const PostStatusForm = {
     },
     changeVis (visibility) {
       console.log(visibility)
-      Object.keys(this.vis).forEach(function (x) { this.vis[x].selected = x === visibility})
+      Object.keys(this.vis).forEach(function (x) { this.vis[x].selected = x === visibility })
       this.newStatus.visibility = visibility
     }
   }

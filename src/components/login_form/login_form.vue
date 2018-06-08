@@ -8,7 +8,7 @@
       <form v-on:submit.prevent='submit(user)' class='login-form'>
         <div class='form-group'>
           <label for='username'>{{$t('login.username')}}</label>
-          <input :disabled="loggingIn" v-model='user.username' class='form-control' id='username' placeholder='e.g. lain'>
+          <input :disabled="loggingIn" v-model='user.username' class='form-control' id='username' v-bind:placeholder="$t('login.placeholder')">
         </div>
         <div class='form-group'>
           <label for='password'>{{$t('login.password')}}</label>

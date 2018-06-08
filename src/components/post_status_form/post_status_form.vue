@@ -3,6 +3,7 @@
   <form @submit.prevent="postStatus(newStatus)">
     <div class="form-group" >
       <input
+        v-if="scopeOptionsEnabled"
         type="text"
         :placeholder="$t('post_status.content_warning')"
         v-model="newStatus.spoilerText"
@@ -23,11 +24,11 @@
         @input="resize"
         @paste="paste">
       </textarea>
-      <div class="visibility-tray">
-        <i v-on:click="changeVis('direct')" v-bind:class="vis.direct"></i>
-        <i v-on:click="changeVis('private')" v-bind:class="vis.private"></i>
-        <i v-on:click="changeVis('unlisted')" v-bind:class="vis.unlisted"></i>
-        <i v-on:click="changeVis('public')" v-bind:class="vis.public"></i>
+      <div v-if="scopeOptionsEnabled" class="visibility-tray">
+        <i v-on:click="changeVis('direct')" class="icon-mail-alt" :class="vis.direct"></i>
+        <i v-on:click="changeVis('private')" class="icon-lock" :class="vis.private"></i>
+        <i v-on:click="changeVis('unlisted')" class="icon-lock-open-alt" :class="vis.unlisted"></i>
+        <i v-on:click="changeVis('public')" class="icon-globe" :class="vis.public"></i>
       </div>
     </div>
     <div style="position:relative;" v-if="candidates">
@@ -87,6 +88,17 @@
     height: 16px;
     border-radius: $fallback--avatarAltRadius;
     border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+  }
+}
+
+.post-status-form .visibility-tray {
+  font-size: 1.2em;
+  padding: 3px;
+  cursor: pointer;
+
+  .selected {
+    color: $fallback--lightFg;
+    color: var(--lightFg, $fallback--lightFg);
   }
 }
 

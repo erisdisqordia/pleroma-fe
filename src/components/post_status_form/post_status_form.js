@@ -46,20 +46,23 @@ const PostStatusForm = {
       error: null,
       posting: false,
       highlighted: 0,
-      vis: {
-        public: { icon: 'icon-globe', big: true, selected: true },
-        unlisted: { icon: 'icon-lock-open-alt', big: true, selected: false },
-        private: { icon: 'icon-lock', big: true, selected: false },
-        direct: { icon: 'icon-mail-alt', big: true, selected: false }
-      },
       newStatus: {
         status: statusText,
-        files: []
+        files: [],
+        visibility: 'public'
       },
       caret: 0
     }
   },
   computed: {
+    vis () {
+      return {
+        public: { selected: this.newStatus.visibility === 'public' },
+        unlisted: { selected: this.newStatus.visibility === 'unlisted' },
+        private: { selected: this.newStatus.visibility === 'private' },
+        direct: { selected: this.newStatus.visibility === 'direct' }
+      }
+    },
     candidates () {
       const firstchar = this.textAtCaret.charAt(0)
       if (firstchar === '@') {
@@ -124,6 +127,9 @@ const PostStatusForm = {
     },
     isOverLengthLimit () {
       return this.hasStatusLengthLimit && (this.statusLength > this.statusLengthLimit)
+    },
+    scopeOptionsEnabled () {
+      return this.$store.state.config.scopeOptionsEnabled
     }
   },
   methods: {
@@ -200,15 +206,13 @@ const PostStatusForm = {
         if (!data.error) {
           this.newStatus = {
             status: '',
-            files: []
+            files: [],
+            visibility: newStatus.visibility
           }
           this.$emit('posted')
           let el = this.$el.querySelector('textarea')
           el.style.height = '16px'
           this.error = null
-
-          for (key in Object.keys(this.vis)) { this.vis[key].selected = false }
-          this.vis.public.selected = true
         } else {
           this.error = data.error
         }
@@ -250,6 +254,7 @@ const PostStatusForm = {
       e.dataTransfer.dropEffect = 'copy'
     },
     resize (e) {
+      if (!e.target) { return }
       const vertPadding = Number(window.getComputedStyle(e.target)['padding-top'].substr(0, 1)) +
             Number(window.getComputedStyle(e.target)['padding-bottom'].substr(0, 1))
       e.target.style.height = 'auto'
@@ -262,8 +267,6 @@ const PostStatusForm = {
       this.error = null
     },
     changeVis (visibility) {
-      console.log(visibility)
-      Object.keys(this.vis).forEach(function (x) { this.vis[x].selected = x === visibility })
       this.newStatus.visibility = visibility
     }
   }

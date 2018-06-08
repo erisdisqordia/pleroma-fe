@@ -8,8 +8,15 @@ const UserSettings = {
       followList: null,
       followImportError: false,
       followsImported: false,
+      enableFollowsExport: true,
       uploading: [ false, false, false, false ],
-      previews: [ null, null, null ]
+      previews: [ null, null, null ],
+      deletingAccount: false,
+      deleteAccountConfirmPasswordInput: '',
+      deleteAccountError: false,
+      changePasswordInputs: [ '', '', '' ],
+      changedPassword: false,
+      changePasswordError: false
     }
   },
   components: {
@@ -137,6 +144,37 @@ const UserSettings = {
           this.uploading[3] = false
         })
     },
+    /* This function takes an Array of Users
+     * and outputs a file with all the addresses for the user to download
+     */
+    exportPeople (users, filename) {
+      // Get all the friends addresses
+      var UserAddresses = users.map(function (user) {
+        // check is it's a local user
+        if (user && user.is_local) {
+          // append the instance address
+          // eslint-disable-next-line no-undef
+          user.screen_name += '@' + location.hostname
+        }
+        return user.screen_name
+      }).join('\n')
+      // Make the user download the file
+      var fileToDownload = document.createElement('a')
+      fileToDownload.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(UserAddresses))
+      fileToDownload.setAttribute('download', filename)
+      fileToDownload.style.display = 'none'
+      document.body.appendChild(fileToDownload)
+      fileToDownload.click()
+      document.body.removeChild(fileToDownload)
+    },
+    exportFollows () {
+      this.enableFollowsExport = false
+      this.$store.state.api.backendInteractor
+        .fetchFriends({id: this.$store.state.users.currentUser.id})
+        .then((friendList) => {
+          this.exportPeople(friendList, 'friends.csv')
+        })
+    },
     followListChange () {
       // eslint-disable-next-line no-undef
       let formData = new FormData()
@@ -146,6 +184,37 @@ const UserSettings = {
     dismissImported () {
       this.followsImported = false
       this.followImportError = false
+    },
+    confirmDelete () {
+      this.deletingAccount = true
+    },
+    deleteAccount () {
+      this.$store.state.api.backendInteractor.deleteAccount({password: this.deleteAccountConfirmPasswordInput})
+        .then((res) => {
+          if (res.status === 'success') {
+            this.$store.dispatch('logout')
+            this.$router.push('/main/all')
+          } else {
+            this.deleteAccountError = res.error
+          }
+        })
+    },
+    changePassword () {
+      const params = {
+        password: this.changePasswordInputs[0],
+        newPassword: this.changePasswordInputs[1],
+        newPasswordConfirmation: this.changePasswordInputs[2]
+      }
+      this.$store.state.api.backendInteractor.changePassword(params)
+        .then((res) => {
+          if (res.status === 'success') {
+            this.changedPassword = true
+            this.changePasswordError = false
+          } else {
+            this.changedPassword = false
+            this.changePasswordError = res.error
+          }
+        })
     }
   }
 }

@@ -55,6 +55,7 @@
               <router-link class="timeago" :to="{ name: 'conversation', params: { id: status.id } }">
                 <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
+              <span v-if="status.visibility"><i :class="visibilityIcon(status.visibility)"></i> </span>
               <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="icon-link-ext"></i></a>
               <template v-if="expandable">
                 <a href="#" @click.prevent="toggleExpanded"><i class="icon-plus-squared"></i></a>
@@ -165,8 +166,6 @@
   border-left-width: 0px;
   line-height: 18px;
   min-width: 0;
-  background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
 
@@ -187,6 +186,10 @@
     flex: 1;
     padding: 0;
     margin: 0 0 0.25em 0.8em;
+  }
+
+  .usercard {
+    margin-bottom: .7em
   }
 
   .media-heading {

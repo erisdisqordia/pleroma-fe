@@ -98,7 +98,7 @@
       .status {
         padding: 0.25em 0;
         color: $fallback--faint;
-        color: var($fallback--faint, --faint);
+        color: var(--faint, $fallback--faint);
       }
       padding: 0;
       .media-body {

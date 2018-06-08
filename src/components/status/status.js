@@ -104,6 +104,18 @@ const Status = {
     StillImage
   },
   methods: {
+    visibilityIcon (visibility) {
+      switch (visibility) {
+        case 'private':
+          return 'icon-lock'
+        case 'unlisted':
+          return 'icon-lock-open-alt'
+        case 'direct':
+          return 'icon-mail-alt'
+        default:
+          return 'icon-globe'
+      }
+    },
     linkClicked ({target}) {
       if (target.tagName === 'SPAN') {
         target = target.parentNode

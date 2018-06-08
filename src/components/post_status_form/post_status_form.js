@@ -48,12 +48,21 @@ const PostStatusForm = {
       highlighted: 0,
       newStatus: {
         status: statusText,
-        files: []
+        files: [],
+        visibility: 'public'
       },
       caret: 0
     }
   },
   computed: {
+    vis () {
+      return {
+        public: { selected: this.newStatus.visibility === 'public' },
+        unlisted: { selected: this.newStatus.visibility === 'unlisted' },
+        private: { selected: this.newStatus.visibility === 'private' },
+        direct: { selected: this.newStatus.visibility === 'direct' }
+      }
+    },
     candidates () {
       const firstchar = this.textAtCaret.charAt(0)
       if (firstchar === '@') {
@@ -118,6 +127,9 @@ const PostStatusForm = {
     },
     isOverLengthLimit () {
       return this.hasStatusLengthLimit && (this.statusLength > this.statusLengthLimit)
+    },
+    scopeOptionsEnabled () {
+      return this.$store.state.config.scopeOptionsEnabled
     }
   },
   methods: {
@@ -185,6 +197,8 @@ const PostStatusForm = {
       this.posting = true
       statusPoster.postStatus({
         status: newStatus.status,
+        spoilerText: newStatus.spoilerText || null,
+        visibility: newStatus.visibility,
         media: newStatus.files,
         store: this.$store,
         inReplyToStatusId: this.replyTo
@@ -192,7 +206,8 @@ const PostStatusForm = {
         if (!data.error) {
           this.newStatus = {
             status: '',
-            files: []
+            files: [],
+            visibility: newStatus.visibility
           }
           this.$emit('posted')
           let el = this.$el.querySelector('textarea')
@@ -239,18 +254,20 @@ const PostStatusForm = {
       e.dataTransfer.dropEffect = 'copy'
     },
     resize (e) {
-      const target = e.target || e
-      target.style.height = 'auto'
-      const heightPx = target.scrollHeight - 10
-      if (heightPx > 54) {
-        target.style.height = `${target.scrollHeight - 10}px`
-      }
-      if (target.value === '') {
-        target.style.height = '16px'
+      if (!e.target) { return }
+      const vertPadding = Number(window.getComputedStyle(e.target)['padding-top'].substr(0, 1)) +
+            Number(window.getComputedStyle(e.target)['padding-bottom'].substr(0, 1))
+      e.target.style.height = 'auto'
+      e.target.style.height = `${e.target.scrollHeight - vertPadding}px`
+      if (e.target.value === '') {
+        e.target.style.height = '16px'
       }
     },
     clearError () {
       this.error = null
+    },
+    changeVis (visibility) {
+      this.newStatus.visibility = visibility
     }
   }
 }

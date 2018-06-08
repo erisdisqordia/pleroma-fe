@@ -2,6 +2,12 @@
 <div class="post-status-form">
   <form @submit.prevent="postStatus(newStatus)">
     <div class="form-group" >
+      <input
+        v-if="scopeOptionsEnabled"
+        type="text"
+        :placeholder="$t('post_status.content_warning')"
+        v-model="newStatus.spoilerText"
+        class="form-cw">
       <textarea
         ref="textarea"
         @click="setCaret"
@@ -18,16 +24,17 @@
         @input="resize"
         @paste="paste">
       </textarea>
+      <div v-if="scopeOptionsEnabled" class="visibility-tray">
+        <i v-on:click="changeVis('direct')" class="icon-mail-alt" :class="vis.direct"></i>
+        <i v-on:click="changeVis('private')" class="icon-lock" :class="vis.private"></i>
+        <i v-on:click="changeVis('unlisted')" class="icon-lock-open-alt" :class="vis.unlisted"></i>
+        <i v-on:click="changeVis('public')" class="icon-globe" :class="vis.public"></i>
+      </div>
     </div>
     <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel">
           <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">
-            <div v-if="candidate.highlighted" class="autocomplete">
-              <span v-if="candidate.img"><img :src="candidate.img"></span>
-              <span v-else>{{candidate.utf}}</span>
-              <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
-            </div>
-            <div v-else class="autocomplete">
+            <div class="autocomplete" :class="{ highlighted: candidate.highlighted }">
               <span v-if="candidate.img"><img :src="candidate.img"></img></span>
               <span v-else>{{candidate.utf}}</span>
               <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
@@ -84,6 +91,17 @@
   }
 }
 
+.post-status-form .visibility-tray {
+  font-size: 1.2em;
+  padding: 3px;
+  cursor: pointer;
+
+  .selected {
+    color: $fallback--lightFg;
+    color: var(--lightFg, $fallback--lightFg);
+  }
+}
+
 .post-status-form, .login {
   .form-bottom {
     display: flex;
@@ -135,10 +153,6 @@
     cursor: not-allowed;
   }
 
-  .icon-cancel {
-    cursor: pointer;
-  }
-
   form {
     display: flex;
     flex-direction: column;
@@ -152,7 +166,15 @@
     line-height:24px;
   }
 
-  form textarea {
+  form textarea.form-cw {
+    line-height:16px;
+    resize: none;
+    overflow: hidden;
+    transition: min-height 200ms 100ms;
+    min-height: 1px;
+  }
+
+  form textarea.form-control {
     line-height:16px;
     resize: none;
     overflow: hidden;
@@ -161,7 +183,7 @@
     box-sizing: content-box;
   }
 
-  form textarea:focus {
+  form textarea.form-control:focus {
     min-height: 48px;
   }
 
@@ -186,8 +208,8 @@
     z-index: 1;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
     min-width: 75%;
-    background: $fallback--btn;
-    background: var(--btn, $fallback--btn);
+    background: $fallback--bg;
+    background: var(--bg, $fallback--bg);
     color: $fallback--lightFg;
     color: var(--lightFg, $fallback--lightFg);
   }
@@ -215,6 +237,11 @@
       margin-left: .5em;
       color: $fallback--faint;
       color: var(--faint, $fallback--faint);
+    }
+
+    &.highlighted {
+      background-color: $fallback--btn;
+      background-color: var(--btn, $fallback--btn);
     }
   }
 }

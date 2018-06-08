@@ -30,6 +30,8 @@ const BLOCKING_URL = '/api/blocks/create.json'
 const UNBLOCKING_URL = '/api/blocks/destroy.json'
 const USER_URL = '/api/users/show.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
+const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
+const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
 
 import { each, map } from 'lodash'
 import 'whatwg-fetch'
@@ -329,12 +331,14 @@ const retweet = ({ id, credentials }) => {
   })
 }
 
-const postStatus = ({credentials, status, mediaIds, inReplyToStatusId}) => {
+const postStatus = ({credentials, status, spoilerText, visibility, mediaIds, inReplyToStatusId}) => {
   const idsText = mediaIds.join(',')
   const form = new FormData()
 
   form.append('status', status)
   form.append('source', 'Pleroma FE')
+  if (spoilerText) form.append('spoiler_text', spoilerText)
+  if (visibility) form.append('visibility', visibility)
   form.append('media_ids', idsText)
   if (inReplyToStatusId) {
     form.append('in_reply_to_status_id', inReplyToStatusId)
@@ -373,6 +377,34 @@ const followImport = ({params, credentials}) => {
     .then((response) => response.ok)
 }
 
+const deleteAccount = ({credentials, password}) => {
+  const form = new FormData()
+
+  form.append('password', password)
+
+  return fetch(DELETE_ACCOUNT_URL, {
+    body: form,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.json())
+}
+
+const changePassword = ({credentials, password, newPassword, newPasswordConfirmation}) => {
+  const form = new FormData()
+
+  form.append('password', password)
+  form.append('new_password', newPassword)
+  form.append('new_password_confirmation', newPasswordConfirmation)
+
+  return fetch(CHANGE_PASSWORD_URL, {
+    body: form,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.json())
+}
+
 const fetchMutes = ({credentials}) => {
   const url = '/api/qvitter/mutes.json'
 
@@ -408,7 +440,9 @@ const apiService = {
   updateProfile,
   updateBanner,
   externalProfile,
-  followImport
+  followImport,
+  deleteAccount,
+  changePassword
 }
 
 export default apiService

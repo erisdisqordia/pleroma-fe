@@ -270,6 +270,7 @@ const en = {
     cOrange: 'Orange (Favorite)',
     cGreen: 'Green (Retweet)',
     btnRadius: 'Buttons',
+    inputRadius: 'Input fields',
     panelRadius: 'Panels',
     avatarRadius: 'Avatars',
     avatarAltRadius: 'Avatars (Notifications)',
@@ -288,7 +289,20 @@ const en = {
     follow_import: 'Follow import',
     import_followers_from_a_csv_file: 'Import follows from a csv file',
     follows_imported: 'Follows imported! Processing them will take a while.',
-    follow_import_error: 'Error importing followers'
+    follow_import_error: 'Error importing followers',
+    delete_account: 'Delete Account',
+    delete_account_description: 'Permanently delete your account and all your messages.',
+    delete_account_instructions: 'Type your password in the input below to confirm account deletion.',
+    delete_account_error: 'There was an issue deleting your account. If this persists please contact your instance administrator.',
+    follow_export: 'Follow export',
+    follow_export_processing: 'Processing, you\'ll soon be asked to download your file',
+    follow_export_button: 'Export your follows to a csv file',
+    change_password: 'Change Password',
+    current_password: 'Current password',
+    new_password: 'New password',
+    confirm_new_password: 'Confirm new password',
+    changed_password: 'Password changed successfully!',
+    change_password_error: 'There was an issue changing your password.'
   },
   notifications: {
     notifications: 'Notifications',
@@ -313,6 +327,7 @@ const en = {
   },
   post_status: {
     posting: 'Posting',
+    content_warning: 'Content warning (optional)',
     default: 'Just landed in L.A.'
   },
   finder: {
@@ -830,8 +845,8 @@ const fr = {
     blocked: 'Bloqué',
     block: 'Bloquer',
     statuses: 'Statuts',
-    mute: 'Mettre en muet',
-    muted: 'Mis en muet',
+    mute: 'Masquer',
+    muted: 'Masqué',
     followers: 'Vous suivent',
     followees: 'Suivis',
     per_day: 'par jour',
@@ -839,7 +854,7 @@ const fr = {
   },
   timeline: {
     show_new: 'Afficher plus',
-    error_fetching: 'Erreur en cherchant des mises à jours',
+    error_fetching: 'Erreur en cherchant les mises à jour',
     up_to_date: 'À jour',
     load_older: 'Afficher plus',
     conversation: 'Conversation',
@@ -850,32 +865,32 @@ const fr = {
     user_settings: 'Paramètres utilisateur',
     name_bio: 'Nom & Bio',
     name: 'Nom',
-    bio: 'Bioraphie',
+    bio: 'Biographie',
     avatar: 'Avatar',
-    current_avatar: 'Votre avatar',
+    current_avatar: 'Avatar actuel',
     set_new_avatar: 'Changer d\'avatar',
-    profile_banner: 'Bannière du profil',
-    current_profile_banner: 'Bannière du profil',
+    profile_banner: 'Bannière de profil',
+    current_profile_banner: 'Bannière de profil actuelle',
     set_new_profile_banner: 'Changer de bannière',
     profile_background: 'Image de fond',
     set_new_profile_background: 'Changer d\'image de fond',
     settings: 'Paramètres',
     theme: 'Thème',
     filtering: 'Filtre',
-    filtering_explanation: 'Tout les statuts contenant ces mots vont être cachés, un mot par ligne.',
+    filtering_explanation: 'Tout les statuts contenant ces mots seront masqués. Un mot par ligne.',
     attachments: 'Pièces jointes',
-    hide_attachments_in_tl: 'Cacher les pièces jointes dans le journal',
-    hide_attachments_in_convo: 'Cacher les pièces jointes dans les conversations',
-    nsfw_clickthrough: 'Activer le clic pour afficher les images marquées comme contenu adulte ou sensible',
-    autoload: 'Activer le chargement automatique une fois le bas de la page atteint',
-    reply_link_preview: 'Activer un aperçu d\'une réponse sur passage de la souris',
+    hide_attachments_in_tl: 'Masquer les pièces jointes dans le journal',
+    hide_attachments_in_convo: 'Masquer les pièces jointes dans les conversations',
+    nsfw_clickthrough: 'Masquer les images marquées comme contenu adulte ou sensible',
+    autoload: 'Charger la suite automatiquement une fois le bas de la page atteint',
+    reply_link_preview: 'Afficher un aperçu lors du survol de liens vers une réponse',
     presets: 'Thèmes prédéfinis',
-    theme_help: 'Utilisez les codes de couleur hexadécimaux (#aabbcc) pour customiser les couleurs de votre thème.',
+    theme_help: 'Spécifiez des codes couleur hexadécimaux (#aabbcc) pour personnaliser les couleurs du thème',
     background: 'Arrière plan',
     foreground: 'Premier plan',
     text: 'Texte',
     links: 'Liens',
-    streaming: 'Active le défilement automatique de nouveaux statuts lorsqu\'on est au haut de la page',
+    streaming: 'Charger automatiquement les nouveaux statuts lorsque vous êtes au haut de la page',
     follow_import: 'Importer ses abonnements',
     import_followers_from_a_csv_file: 'Importer ses abonnements depuis un fichier csv',
     follows_imported: 'Abonnements importés ! Le traitement peut prendre un moment.',
@@ -886,33 +901,34 @@ const fr = {
     cGreen: 'Vert (Partager)',
     btnRadius: 'Boutons',
     panelRadius: 'Fenêtres',
+    inputRadius: 'Champs de texte',
     avatarRadius: 'Avatars',
     avatarAltRadius: 'Avatars (Notifications)',
     tooltipRadius: 'Info-bulles/alertes ',
     attachmentRadius: 'Pièces jointes',
-    radii_help: 'Mettre en place l\'arondissement des coins de l\'interface (en pixels)',
-    stop_gifs: 'Passer la souris sur un GIF pour l\'animer'
+    radii_help: 'Vous pouvez ici choisir le niveau d\'arrondi des angles de l\'interface (en pixels)',
+    stop_gifs: 'N\'animer les GIFS que lors du survol du curseur de la souris'
   },
   notifications: {
     notifications: 'Notifications',
     read: 'Lu !',
-    followed_you: 'vous a suivi',
+    followed_you: 'a commencé à vous suivre',
     favorited_you: 'a aimé votre statut',
     repeated_you: 'a partagé votre statut'
   },
   login: {
     login: 'Connexion',
-    username: 'Nom d\'utilisateur',
+    username: 'Identifiant',
     password: 'Mot de passe',
     register: 'S\'inscrire',
     logout: 'Déconnexion'
   },
   registration: {
     registration: 'Inscription',
-    fullname: 'Nom affiché',
+    fullname: 'Pseudonyme',
     email: 'Adresse email',
     bio: 'Biographie',
-    password_confirm: 'Confirmez le mot de passe'
+    password_confirm: 'Confirmation du mot de passe'
   },
   post_status: {
     posting: 'Envoi en cours',
@@ -920,7 +936,7 @@ const fr = {
   },
   finder: {
     find_user: 'Chercher un utilisateur',
-    error_fetching_user: 'Une erreur est survenue lors de la recherche de l\'utilisateur'
+    error_fetching_user: 'Erreur lors de la recherche de l\'utilisateur'
   },
   general: {
     submit: 'Envoyer',
@@ -1017,7 +1033,7 @@ const oc = {
   timeline: {
     show_new: 'Ne veire mai',
     error_fetching: 'Error en cercant de mesas a jorn',
-    up_to_date: 'Actualizat',
+    up_to_date: 'A jorn',
     load_older: 'Ne veire mai',
     conversation: 'Conversacion',
     collapse: 'Tampar',
@@ -1049,6 +1065,7 @@ const oc = {
     cRed: 'Roge (Anullar)',
     cOrange: 'Irange (Metre en favorit)',
     cGreen: 'Verd (Repartajar)',
+    inputRadius: 'Camps tèxte',
     btnRadius: 'Botons',
     panelRadius: 'Panèls',
     avatarRadius: 'Avatars',
@@ -1104,7 +1121,7 @@ const oc = {
     apply: 'Aplicar'
   },
   user_profile: {
-    timeline_title: 'Flux a l’utilizaire'
+    timeline_title: 'Flux utilizaire'
   }
 }
 
@@ -1169,13 +1186,14 @@ const pl = {
     cOrange: 'Pomarańczowy (ulubione)',
     cGreen: 'Zielony (powtórzenia)',
     btnRadius: 'Przyciski',
+    inputRadius: 'Pola tekstowe',
     panelRadius: 'Panele',
     avatarRadius: 'Awatary',
     avatarAltRadius: 'Awatary (powiadomienia)',
     tooltipRadius: 'Etykiety/alerty',
     attachmentRadius: 'Załączniki',
     filtering: 'Filtrowanie',
-    filtering_explanation: 'Wszystkie statusy zawierające te słowa będą wyciszone. Jedno słowo na linijkę',
+    filtering_explanation: 'Wszystkie statusy zawierające te słowa będą wyciszone. Jedno słowo na linijkę.',
     attachments: 'Załączniki',
     hide_attachments_in_tl: 'Ukryj załączniki w osi czasu',
     hide_attachments_in_convo: 'Ukryj załączniki w rozmowach',
@@ -1187,7 +1205,20 @@ const pl = {
     follow_import: 'Import obserwowanych',
     import_followers_from_a_csv_file: 'Importuj obserwowanych z pliku CSV',
     follows_imported: 'Obserwowani zaimportowani! Przetwarzanie może trochę potrwać.',
-    follow_import_error: 'Błąd przy importowaniu obserwowanych'
+    follow_import_error: 'Błąd przy importowaniu obserwowanych',
+    delete_account: 'Usuń konto',
+    delete_account_description: 'Trwale usuń konto i wszystkie posty.',
+    delete_account_instructions: 'Wprowadź swoje hasło w poniższe pole aby potwierdzić usunięcie konta.',
+    delete_account_error: 'Wystąpił problem z usuwaniem twojego konta. Jeżeli problem powtarza się, poinformuj administratora swojej instancji.',
+    follow_export: 'Eksport obserwowanych',
+    follow_export_processing: 'Przetwarzanie, wkrótce twój plik zacznie się ściągać.',
+    follow_export_button: 'Eksportuj swoją listę obserwowanych do pliku CSV',
+    change_password: 'Zmień hasło',
+    current_password: 'Obecne hasło',
+    new_password: 'Nowe hasło',
+    confirm_new_password: 'Potwierdź nowe hasło',
+    changed_password: 'Hasło zmienione poprawnie!',
+    change_password_error: 'Podczas zmiany hasła wystąpił problem.'
   },
   notifications: {
     notifications: 'Powiadomienia',
@@ -1505,6 +1536,7 @@ const ru = {
     cOrange: 'Нравится',
     cGreen: 'Повторить',
     btnRadius: 'Кнопки',
+    inputRadius: 'Поля ввода',
     panelRadius: 'Панели',
     avatarRadius: 'Аватары',
     avatarAltRadius: 'Аватары в уведомлениях',
@@ -1681,6 +1713,139 @@ const nb = {
   }
 }
 
+const he = {
+  chat: {
+    title: 'צ\'אט'
+  },
+  nav: {
+    chat: 'צ\'אט מקומי',
+    timeline: 'ציר הזמן',
+    mentions: 'אזכורים',
+    public_tl: 'ציר הזמן הציבורי',
+    twkn: 'כל הרשת הידועה'
+  },
+  user_card: {
+    follows_you: 'עוקב אחריך!',
+    following: 'עוקב!',
+    follow: 'עקוב',
+    blocked: 'חסום!',
+    block: 'חסימה',
+    statuses: 'סטטוסים',
+    mute: 'השתק',
+    muted: 'מושתק',
+    followers: 'עוקבים',
+    followees: 'נעקבים',
+    per_day: 'ליום',
+    remote_follow: 'עקיבה מרחוק'
+  },
+  timeline: {
+    show_new: 'הראה חדש',
+    error_fetching: 'שגיאה בהבאת הודעות',
+    up_to_date: 'עדכני',
+    load_older: 'טען סטטוסים חדשים',
+    conversation: 'שיחה',
+    collapse: 'מוטט',
+    repeated: 'חזר'
+  },
+  settings: {
+    user_settings: 'הגדרות משתמש',
+    name_bio: 'שם ואודות',
+    name: 'שם',
+    bio: 'אודות',
+    avatar: 'תמונת פרופיל',
+    current_avatar: 'תמונת הפרופיל הנוכחית שלך',
+    set_new_avatar: 'קבע תמונת פרופיל חדשה',
+    profile_banner: 'כרזת הפרופיל',
+    current_profile_banner: 'כרזת הפרופיל הנוכחית שלך',
+    set_new_profile_banner: 'קבע כרזת פרופיל חדשה',
+    profile_background: 'רקע הפרופיל',
+    set_new_profile_background: 'קבע רקע פרופיל חדש',
+    settings: 'הגדרות',
+    theme: 'תמה',
+    presets: 'ערכים קבועים מראש',
+    theme_help: 'השתמש בקודי צבע הקס (#אדום-אדום-ירוק-ירוק-כחול-כחול) על מנת להתאים אישית את תמת הצבע שלך.',
+    radii_help: 'קבע מראש עיגול פינות לממשק (בפיקסלים)',
+    background: 'רקע',
+    foreground: 'חזית',
+    text: 'טקסט',
+    links: 'לינקים',
+    cBlue: 'כחול (תגובה, עקיבה)',
+    cRed: 'אדום (ביטול)',
+    cOrange: 'כתום (לייק)',
+    cGreen: 'ירוק (חזרה)',
+    btnRadius: 'כפתורים',
+    inputRadius: 'שדות קלט',
+    panelRadius: 'פאנלים',
+    avatarRadius: 'תמונות פרופיל',
+    avatarAltRadius: 'תמונות פרופיל (התראות)',
+    tooltipRadius: 'טולטיפ \\ התראות',
+    attachmentRadius: 'צירופים',
+    filtering: 'סינון',
+    filtering_explanation: 'כל הסטטוסים הכוללים את המילים הללו יושתקו, אחד לשורה',
+    attachments: 'צירופים',
+    hide_attachments_in_tl: 'החבא צירופים בציר הזמן',
+    hide_attachments_in_convo: 'החבא צירופים בשיחות',
+    nsfw_clickthrough: 'החל החבאת צירופים לא בטוחים לצפיה בעת עבודה בעזרת לחיצת עכבר',
+    stop_gifs: 'נגן-בעת-ריחוף GIFs',
+    autoload: 'החל טעינה אוטומטית בגלילה לתחתית הדף',
+    streaming: 'החל זרימת הודעות אוטומטית בעת גלילה למעלה הדף',
+    reply_link_preview: 'החל תצוגה מקדימה של לינק-תגובה בעת ריחוף עם העכבר',
+    follow_import: 'יבוא עקיבות',
+    import_followers_from_a_csv_file: 'ייבא את הנעקבים שלך מקובץ csv',
+    follows_imported: 'נעקבים יובאו! ייקח זמן מה לעבד אותם.',
+    follow_import_error: 'שגיאה בייבוא נעקבים.',
+    delete_account: 'מחק משתמש',
+    delete_account_description: 'מחק לצמיתות את המשתמש שלך ואת כל הודעותיך.',
+    delete_account_instructions: 'הכנס את סיסמתך בקלט למטה על מנת לאשר מחיקת משתמש.',
+    delete_account_error: 'הייתה בעיה במחיקת המשתמש. אם זה ממשיך, אנא עדכן את מנהל השרת שלך.',
+    follow_export: 'יצוא עקיבות',
+    follow_export_processing: 'טוען. בקרוב תתבקש להוריד את הקובץ את הקובץ שלך',
+    follow_export_button: 'ייצא את הנעקבים שלך לקובץ csv',
+    change_password: 'שנה סיסמה',
+    current_password: 'סיסמה נוכחית',
+    new_password: 'סיסמה חדשה',
+    confirm_new_password: 'אשר סיסמה',
+    changed_password: 'סיסמה שונתה בהצלחה!',
+    change_password_error: 'הייתה בעיה בשינוי סיסמתך.'
+  },
+  notifications: {
+    notifications: 'התראות',
+    read: 'קרא!',
+    followed_you: 'עקב אחריך!',
+    favorited_you: 'אהב את הסטטוס שלך',
+    repeated_you: 'חזר על הסטטוס שלך'
+  },
+  login: {
+    login: 'התחבר',
+    username: 'שם המשתמש',
+    password: 'סיסמה',
+    register: 'הירשם',
+    logout: 'התנתק'
+  },
+  registration: {
+    registration: 'הרשמה',
+    fullname: 'שם תצוגה',
+    email: 'אימייל',
+    bio: 'אודות',
+    password_confirm: 'אישור סיסמה'
+  },
+  post_status: {
+    posting: 'מפרסם',
+    default: 'הרגע נחת ב-ל.א.'
+  },
+  finder: {
+    find_user: 'מציאת משתמש',
+    error_fetching_user: 'שגיאה במציאת משתמש'
+  },
+  general: {
+    submit: 'שלח',
+    apply: 'החל'
+  },
+  user_profile: {
+    timeline_title: 'ציר זמן המשתמש'
+  }
+}
+
 const messages = {
   de,
   fi,
@@ -1697,7 +1862,8 @@ const messages = {
   es,
   pt,
   ru,
-  nb
+  nb,
+  he
 }
 
 export default messages

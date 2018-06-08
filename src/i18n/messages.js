@@ -330,7 +330,7 @@ const en = {
   },
   post_status: {
     posting: 'Posting',
-    content_warning: 'Content warning (optional)',
+    content_warning: 'Subject (optional)',
     default: 'Just landed in L.A.'
   },
   finder: {

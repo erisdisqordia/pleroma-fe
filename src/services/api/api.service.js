@@ -331,12 +331,14 @@ const retweet = ({ id, credentials }) => {
   })
 }
 
-const postStatus = ({credentials, status, mediaIds, inReplyToStatusId}) => {
+const postStatus = ({credentials, status, spoilerText, visibility, mediaIds, inReplyToStatusId}) => {
   const idsText = mediaIds.join(',')
   const form = new FormData()
 
   form.append('status', status)
   form.append('source', 'Pleroma FE')
+  if (spoilerText) form.append('spoiler_text', spoilerText)
+  if (visibility) form.append('visibility', visibility)
   form.append('media_ids', idsText)
   if (inReplyToStatusId) {
     form.append('in_reply_to_status_id', inReplyToStatusId)

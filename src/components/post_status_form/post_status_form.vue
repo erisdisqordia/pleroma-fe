@@ -2,6 +2,12 @@
 <div class="post-status-form">
   <form @submit.prevent="postStatus(newStatus)">
     <div class="form-group" >
+      <input
+        v-if="scopeOptionsEnabled"
+        type="text"
+        :placeholder="$t('post_status.content_warning')"
+        v-model="newStatus.spoilerText"
+        class="form-cw">
       <textarea
         ref="textarea"
         @click="setCaret"
@@ -18,6 +24,12 @@
         @input="resize"
         @paste="paste">
       </textarea>
+      <div v-if="scopeOptionsEnabled" class="visibility-tray">
+        <i v-on:click="changeVis('direct')" class="icon-mail-alt" :class="vis.direct"></i>
+        <i v-on:click="changeVis('private')" class="icon-lock" :class="vis.private"></i>
+        <i v-on:click="changeVis('unlisted')" class="icon-lock-open-alt" :class="vis.unlisted"></i>
+        <i v-on:click="changeVis('public')" class="icon-globe" :class="vis.public"></i>
+      </div>
     </div>
     <div style="position:relative;" v-if="candidates">
         <div class="autocomplete-panel">
@@ -76,6 +88,17 @@
     height: 16px;
     border-radius: $fallback--avatarAltRadius;
     border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+  }
+}
+
+.post-status-form .visibility-tray {
+  font-size: 1.2em;
+  padding: 3px;
+  cursor: pointer;
+
+  .selected {
+    color: $fallback--lightFg;
+    color: var(--lightFg, $fallback--lightFg);
   }
 }
 
@@ -143,7 +166,15 @@
     line-height:24px;
   }
 
-  form textarea {
+  form textarea.form-cw {
+    line-height:16px;
+    resize: none;
+    overflow: hidden;
+    transition: min-height 200ms 100ms;
+    min-height: 1px;
+  }
+
+  form textarea.form-control {
     line-height:16px;
     resize: none;
     overflow: hidden;
@@ -152,7 +183,7 @@
     box-sizing: content-box;
   }
 
-  form textarea:focus {
+  form textarea.form-control:focus {
     min-height: 48px;
   }
 

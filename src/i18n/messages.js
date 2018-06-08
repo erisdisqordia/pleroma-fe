@@ -1827,6 +1827,7 @@ const he = {
   login: {
     login: 'התחבר',
     username: 'שם המשתמש',
+    placeholder: 'למשל lain',
     password: 'סיסמה',
     register: 'הירשם',
     logout: 'התנתק'

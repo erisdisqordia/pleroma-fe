@@ -1696,6 +1696,139 @@ const nb = {
   }
 }
 
+const he = {
+  chat: {
+    title: 'צ\'אט'
+  },
+  nav: {
+    chat: 'צ\'אט מקומי',
+    timeline: 'ציר הזמן',
+    mentions: 'אזכורים',
+    public_tl: 'ציר הזמן הציבורי',
+    twkn: 'כל הרשת הידועה'
+  },
+  user_card: {
+    follows_you: 'עוקב אחריך!',
+    following: 'עוקב!',
+    follow: 'עקוב',
+    blocked: 'חסום!',
+    block: 'חסימה',
+    statuses: 'סטטוסים',
+    mute: 'השתק',
+    muted: 'מושתק',
+    followers: 'עוקבים',
+    followees: 'נעקבים',
+    per_day: 'ליום',
+    remote_follow: 'עקיבה מרחוק'
+  },
+  timeline: {
+    show_new: 'הראה חדש',
+    error_fetching: 'שגיאה בהבאת הודעות',
+    up_to_date: 'עדכני',
+    load_older: 'טען סטטוסים חדשים',
+    conversation: 'שיחה',
+    collapse: 'מוטט',
+    repeated: 'חזר'
+  },
+  settings: {
+    user_settings: 'הגדרות משתמש',
+    name_bio: 'שם ואודות',
+    name: 'שם',
+    bio: 'אודות',
+    avatar: 'תמונת פרופיל',
+    current_avatar: 'תמונת הפרופיל הנוכחית שלך',
+    set_new_avatar: 'קבע תמונת פרופיל חדשה',
+    profile_banner: 'כרזת הפרופיל',
+    current_profile_banner: 'כרזת הפרופיל הנוכחית שלך',
+    set_new_profile_banner: 'קבע כרזת פרופיל חדשה',
+    profile_background: 'רקע הפרופיל',
+    set_new_profile_background: 'קבע רקע פרופיל חדש',
+    settings: 'הגדרות',
+    theme: 'תמה',
+    presets: 'ערכים קבועים מראש',
+    theme_help: 'השתמש בקודי צבע הקס (#אדום-אדום-ירוק-ירוק-כחול-כחול) על מנת להתאים אישית את תמת הצבע שלך.',
+    radii_help: 'קבע מראש עיגול פינות לממשק (בפיקסלים)',
+    background: 'רקע',
+    foreground: 'חזית',
+    text: 'טקסט',
+    links: 'לינקים',
+    cBlue: 'כחול (תגובה, עקיבה)',
+    cRed: 'אדום (ביטול)',
+    cOrange: 'כתום (לייק)',
+    cGreen: 'ירוק (חזרה)',
+    btnRadius: 'כפתורים',
+    inputRadius: 'שדות קלט',
+    panelRadius: 'פאנלים',
+    avatarRadius: 'תמונות פרופיל',
+    avatarAltRadius: 'תמונות פרופיל (התראות)',
+    tooltipRadius: 'טולטיפ \\ התראות',
+    attachmentRadius: 'צירופים',
+    filtering: 'סינון',
+    filtering_explanation: 'כל הסטטוסים הכוללים את המילים הללו יושתקו, אחד לשורה',
+    attachments: 'צירופים',
+    hide_attachments_in_tl: 'החבא צירופים בציר הזמן',
+    hide_attachments_in_convo: 'החבא צירופים בשיחות',
+    nsfw_clickthrough: 'החל החבאת צירופים לא בטוחים לצפיה בעת עבודה בעזרת לחיצת עכבר',
+    stop_gifs: 'נגן-בעת-ריחוף GIFs',
+    autoload: 'החל טעינה אוטומטית בגלילה לתחתית הדף',
+    streaming: 'החל זרימת הודעות אוטומטית בעת גלילה למעלה הדף',
+    reply_link_preview: 'החל תצוגה מקדימה של לינק-תגובה בעת ריחוף עם העכבר',
+    follow_import: 'יבוא עקיבות',
+    import_followers_from_a_csv_file: 'ייבא את הנעקבים שלך מקובץ csv',
+    follows_imported: 'נעקבים יובאו! ייקח זמן מה לעבד אותם.',
+    follow_import_error: 'שגיאה בייבוא נעקבים.',
+    delete_account: 'מחק משתמש',
+    delete_account_description: 'מחק לצמיתות את המשתמש שלך ואת כל הודעותיך.',
+    delete_account_instructions: 'הכנס את סיסמתך בקלט למטה על מנת לאשר מחיקת משתמש.',
+    delete_account_error: 'הייתה בעיה במחיקת המשתמש. אם זה ממשיך, אנא עדכן את מנהל השרת שלך.',
+    follow_export: 'יצוא עקיבות',
+    follow_export_processing: 'טוען. בקרוב תתבקש להוריד את הקובץ את הקובץ שלך',
+    follow_export_button: 'ייצא את הנעקבים שלך לקובץ csv',
+    change_password: 'שנה סיסמה',
+    current_password: 'סיסמה נוכחית',
+    new_password: 'סיסמה חדשה',
+    confirm_new_password: 'אשר סיסמה',
+    changed_password: 'סיסמה שונתה בהצלחה!',
+    change_password_error: 'הייתה בעיה בשינוי סיסמתך.'
+  },
+  notifications: {
+    notifications: 'התראות',
+    read: 'קרא!',
+    followed_you: 'עקב אחריך!',
+    favorited_you: 'אהב את הסטטוס שלך',
+    repeated_you: 'חזר על הסטטוס שלך'
+  },
+  login: {
+    login: 'התחבר',
+    username: 'שם המשתמש',
+    password: 'סיסמה',
+    register: 'הירשם',
+    logout: 'התנתק'
+  },
+  registration: {
+    registration: 'הרשמה',
+    fullname: 'שם תצוגה',
+    email: 'אימייל',
+    bio: 'אודות',
+    password_confirm: 'אישור סיסמה'
+  },
+  post_status: {
+    posting: 'מפרסם',
+    default: 'הרגע נחת ב-ל.א.'
+  },
+  finder: {
+    find_user: 'מציאת משתמש',
+    error_fetching_user: 'שגיאה במציאת משתמש'
+  },
+  general: {
+    submit: 'שלח',
+    apply: 'החל'
+  },
+  user_profile: {
+    timeline_title: 'ציר זמן המשתמש'
+  }
+}
+
 const messages = {
   de,
   fi,
@@ -1712,7 +1845,8 @@ const messages = {
   es,
   pt,
   ru,
-  nb
+  nb,
+  he
 }
 
 export default messages

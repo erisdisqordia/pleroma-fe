@@ -23,7 +23,8 @@ const PostStatusForm = {
   props: [
     'replyTo',
     'repliedUser',
-    'attentions'
+    'attentions',
+    'messageScope'
   ],
   components: {
     MediaUpload
@@ -49,7 +50,7 @@ const PostStatusForm = {
       newStatus: {
         status: statusText,
         files: [],
-        visibility: 'public'
+        visibility: this.messageScope || 'public'
       },
       caret: 0
     }

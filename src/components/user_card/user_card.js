@@ -3,7 +3,8 @@ import UserCardContent from '../user_card_content/user_card_content.vue'
 const UserCard = {
   props: [
     'user',
-    'showFollows'
+    'showFollows',
+    'showApproval'
   ],
   data () {
     return {
@@ -16,6 +17,14 @@ const UserCard = {
   methods: {
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
+    },
+    approveUser () {
+      this.$store.state.api.backendInteractor.approveUser(this.user.id)
+      this.$store.dispatch('removeFollowRequest', this.user)
+    },
+    denyUser () {
+      this.$store.state.api.backendInteractor.denyUser(this.user.id)
+      this.$store.dispatch('removeFollowRequest', this.user)
     }
   }
 }

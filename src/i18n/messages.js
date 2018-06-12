@@ -220,7 +220,8 @@ const en = {
     timeline: 'Timeline',
     mentions: 'Mentions',
     public_tl: 'Public Timeline',
-    twkn: 'The Whole Known Network'
+    twkn: 'The Whole Known Network',
+    friend_requests: 'Follow Requests'
   },
   user_card: {
     follows_you: 'Follows you!',
@@ -234,7 +235,9 @@ const en = {
     followers: 'Followers',
     followees: 'Following',
     per_day: 'per day',
-    remote_follow: 'Remote follow'
+    remote_follow: 'Remote follow',
+    approve: 'Approve',
+    deny: 'Deny'
   },
   timeline: {
     show_new: 'Show new',
@@ -304,7 +307,8 @@ const en = {
     new_password: 'New password',
     confirm_new_password: 'Confirm new password',
     changed_password: 'Password changed successfully!',
-    change_password_error: 'There was an issue changing your password.'
+    change_password_error: 'There was an issue changing your password.',
+    lock_account_description: 'Restrict your account to approved followers only'
   },
   notifications: {
     notifications: 'Notifications',

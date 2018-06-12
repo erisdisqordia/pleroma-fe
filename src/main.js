@@ -12,6 +12,7 @@ import UserProfile from './components/user_profile/user_profile.vue'
 import Settings from './components/settings/settings.vue'
 import Registration from './components/registration/registration.vue'
 import UserSettings from './components/user_settings/user_settings.vue'
+import FollowRequests from './components/follow_requests/follow_requests.vue'
 
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
@@ -118,6 +119,7 @@ window.fetch('/static/config.json')
       { name: 'mentions', path: '/:username/mentions', component: Mentions },
       { name: 'settings', path: '/settings', component: Settings },
       { name: 'registration', path: '/registration', component: Registration },
+      { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
       { name: 'user-settings', path: '/user-settings', component: UserSettings }
     ]
 

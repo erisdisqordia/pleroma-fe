@@ -23,12 +23,12 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'htts://localhost:4000/',
+        target: 'http://localhost:4000/',
         changeOrigin: true,
         cookieDomainRewrite: 'localhost'
       },
       '/socket': {
-        target: 'htts://localhost:4000/',
+        target: 'http://localhost:4000/',
         changeOrigin: true,
         cookieDomainRewrite: 'localhost',
         ws: true

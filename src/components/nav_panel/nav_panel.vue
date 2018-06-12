@@ -12,6 +12,11 @@
             {{ $t("nav.mentions") }}
           </router-link>
         </li>
+        <li v-if='currentUser && currentUser.locked'>
+          <router-link to='/friend-requests'>
+            {{ $t("nav.friend_requests") }}
+          </router-link>
+        </li>
         <li>
           <router-link to='/main/public'>
             {{ $t("nav.public_tl") }}

@@ -42,6 +42,14 @@ const backendInteractorService = (credentials) => {
     return apiService.unblockUser({credentials, id})
   }
 
+  const approveUser = (id) => {
+    return apiService.approveUser({credentials, id})
+  }
+
+  const denyUser = (id) => {
+    return apiService.denyUser({credentials, id})
+  }
+
   const startFetching = ({timeline, store, userId = false}) => {
     return timelineFetcherService.startFetching({timeline, store, credentials, userId})
   }
@@ -51,6 +59,7 @@ const backendInteractorService = (credentials) => {
   }
 
   const fetchMutes = () => apiService.fetchMutes({credentials})
+  const fetchFollowRequests = () => apiService.fetchFollowRequests({credentials})
 
   const register = (params) => apiService.register(params)
   const updateAvatar = ({params}) => apiService.updateAvatar({credentials, params})
@@ -87,7 +96,10 @@ const backendInteractorService = (credentials) => {
     externalProfile,
     followImport,
     deleteAccount,
-    changePassword
+    changePassword,
+    fetchFollowRequests,
+    approveUser,
+    denyUser
   }
 
   return backendInteractorServiceInstance

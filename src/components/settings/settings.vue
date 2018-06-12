@@ -57,7 +57,10 @@
 @import '../../_variables.scss';
 
 .setting-item {
+  border-bottom: 2px solid var(--btn, $fallback--btn);
   margin: 1em 1em 1.4em;
+  padding-bottom: 1.4em;
+
 
   textarea {
     width: 100%;

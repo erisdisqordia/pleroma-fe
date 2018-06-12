@@ -1566,7 +1566,20 @@ const ru = {
     follow_import: 'Импортировать читаемых',
     import_followers_from_a_csv_file: 'Импортировать читаемых из файла .csv',
     follows_imported: 'Список читаемых импортирован. Обработка займёт некоторое время..',
-    follow_import_error: 'Ошибка при импортировании читаемых.'
+    follow_import_error: 'Ошибка при импортировании читаемых.',
+    delete_account: 'Удалить аккаунт',
+    delete_account_description: 'Удалить ваш аккаунт и все ваши сообщения.',
+    delete_account_instructions: 'Введите ваш пароль в поле ниже для подтверждения удаления.',
+    delete_account_error: 'Возникла ошибка в процессе удаления вашего аккаунта. Если это повторяется, свяжитесь с администратором вашего сервера.',
+    follow_export: 'Экспортировать читаемых',
+    follow_export_processing: 'Ведётся обработка, скоро вам будет предложено загрузить файл',
+    follow_export_button: 'Экспортировать читаемых в файл .csv',
+    change_password: 'Сменить пароль',
+    current_password: 'Текущий пароль',
+    new_password: 'Новый пароль',
+    confirm_new_password: 'Подтверждение нового пароля',
+    changed_password: 'Пароль изменён успешно.',
+    change_password_error: 'Произошла ошибка при попытке изменить пароль.'
   },
   notifications: {
     notifications: 'Уведомления',

@@ -22,6 +22,7 @@ const RetweetButton = {
     classes () {
       return {
         'retweeted': this.status.repeated,
+        'retweeted-empty': !this.status.repeated,
         'animate-spin': this.animated
       }
     }

@@ -5,9 +5,14 @@
         <router-link to='/user-settings' style="float: right; margin-top:16px;" v-if="!isOtherUser">
           <i class="icon-cog usersettings"></i>
         </router-link>
-        <a :href="user.statusnet_profile_url" target="_blank" style="float: right; margin-top:16px;" v-if="isOtherUser">
+        <a :href="user.statusnet_profile_url" target="_blank" class="floater" v-if="isOtherUser">
           <i class="icon-link-ext usersettings"></i>
         </a>
+        <div class="floater" v-if="switcher || isOtherUser">
+          <input type="checkbox" id="userHighlightCheck" v-model="userHighlightEnabled">
+          <label :title="$t('settings.highlight')" for="userHighlightCheck"></label>
+          <input type="color" id="userHighlightColor" v-if="userHighlightLocal" v-model="userHighlightColor"/>
+        </div>
         <div class='container'>
           <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
             <StillImage class="avatar" :src="user.profile_image_url_original"/>
@@ -277,5 +282,9 @@
   margin-left: 1em;
   font-size: 0.7em;
   color: #CCC;
+}
+.floater {
+  float: right;
+  margin-top: 16px;
 }
 </style>

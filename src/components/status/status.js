@@ -7,6 +7,7 @@ import UserCardContent from '../user_card_content/user_card_content.vue'
 import StillImage from '../still-image/still-image.vue'
 import { filter, find } from 'lodash'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
+import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 
 const Status = {
   name: 'Status',
@@ -37,19 +38,19 @@ const Status = {
     },
     repeaterClass () {
       const user = this.statusoid.user
-      return this.highlightClass(user)
+      return highlightClass(user, this.$store)
     },
     userClass () {
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
-      return this.highlightClass(user)
+      return highlightClass(user, this.$store)
     },
     repeaterStyle () {
       const user = this.statusoid.user
-      return this.highlightStyle(user)
+      return highlightStyle(user, this.$store)
     },
     userStyle () {
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
-      return this.highlightStyle(user)
+      return highlightStyle(user, this.$store)
     },
     hideAttachments () {
       return (this.$store.state.config.hideAttachments && !this.inConversation) ||
@@ -183,28 +184,6 @@ const Status = {
     replyLeave () {
       this.showPreview = false
     },
-    highlightStyle (user) {
-      const color = this.$store.state.config.highlight[user.screen_name]
-      if (!color) return
-      const rgb = hex2rgb(color)
-      const tintColor = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .1)`
-      const tintColor2 = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .2)`
-      return {
-        backgroundImage: [
-          'repeating-linear-gradient(-45deg,',
-          tintColor, ',',
-          tintColor, '20px,',
-          tintColor2, '20px,',
-          tintColor2, '40px',
-        ].join(' '),
-        backgroundPosition: '0 0'
-      }
-    },
-    highlightClass (user) {
-      return 'USER____' + user.screen_name
-        .replace(/\./g,'_')
-        .replace(/\@/g,'_AT_')
-    }
   },
   watch: {
     'highlight': function (id) {

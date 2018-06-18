@@ -1,6 +1,7 @@
 import Status from '../status/status.vue'
 import StillImage from '../still-image/still-image.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
+import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 
 const Notification = {
   data () {
@@ -18,6 +19,14 @@ const Notification = {
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
     }
+  },
+  computed: {
+    userClass () {
+      return highlightClass(this.notification.action.user, this.$store)
+    },
+    userStyle () {
+      return highlightStyle(this.notification.action.user, this.$store)
+    },
   }
 }
 

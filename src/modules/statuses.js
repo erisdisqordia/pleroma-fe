@@ -388,6 +388,10 @@ const statuses = {
       commit('setRetweeted', { status, value: true })
       apiService.retweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
     },
+    unretweet ({ rootState, commit }, status) {
+      commit('setRetweeted', { status, value: false })
+      apiService.unretweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
+    },
     queueFlush ({ rootState, commit }, { timeline, id }) {
       commit('queueFlush', { timeline, id })
     }

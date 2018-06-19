@@ -8,6 +8,7 @@ const TAG_TIMELINE_URL = '/api/statusnet/tags/timeline'
 const FAVORITE_URL = '/api/favorites/create'
 const UNFAVORITE_URL = '/api/favorites/destroy'
 const RETWEET_URL = '/api/statuses/retweet'
+const UNRETWEET_URL = '/api/statuses/unretweet'
 const STATUS_UPDATE_URL = '/api/statuses/update.json'
 const STATUS_DELETE_URL = '/api/statuses/destroy'
 const STATUS_URL = '/api/statuses/show'
@@ -358,6 +359,13 @@ const retweet = ({ id, credentials }) => {
   })
 }
 
+const unretweet = ({ id, credentials }) => {
+  return fetch(`${UNRETWEET_URL}/${id}.json`, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  })
+}
+
 const postStatus = ({credentials, status, spoilerText, visibility, mediaIds, inReplyToStatusId}) => {
   const idsText = mediaIds.join(',')
   const form = new FormData()
@@ -455,6 +463,7 @@ const apiService = {
   favorite,
   unfavorite,
   retweet,
+  unretweet,
   postStatus,
   deleteStatus,
   uploadMedia,

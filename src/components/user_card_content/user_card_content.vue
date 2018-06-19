@@ -1,13 +1,29 @@
 <template>
-  <div id="heading" class="profile-panel-background" :style="headingStyle">
-    <div class="panel-heading text-center">
-      <div class='user-info'>
-        <router-link to='/user-settings' style="float: right; margin-top:16px;" v-if="!isOtherUser">
-          <i class="icon-cog usersettings"></i>
+<div id="heading" class="profile-panel-background" :style="headingStyle">
+  <div class="panel-heading text-center">
+    <div class='user-info'>
+      <router-link to='/user-settings' style="float: right; margin-top:16px;" v-if="!isOtherUser">
+        <i class="icon-cog usersettings"></i>
+      </router-link>
+      <a :href="user.statusnet_profile_url" target="_blank" class="floater" v-if="isOtherUser">
+        <i class="icon-link-ext usersettings"></i>
+      </a>
+      <div class='container'>
+        <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
+          <StillImage class="avatar" :src="user.profile_image_url_original"/>
         </router-link>
-        <a :href="user.statusnet_profile_url" target="_blank" class="floater" v-if="isOtherUser">
-          <i class="icon-link-ext usersettings"></i>
-        </a>
+        <div class="name-and-screen-name">
+          <div :title="user.name" class='user-name'>{{user.name}}</div>
+          <router-link class='user-screen-name':to="{ name: 'user-profile', params: { id: user.id } }">
+            <span>@{{user.screen_name}}</span>
+            <span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
+          </router-link>
+        </div>
+      </div>
+      <div class="user-meta">
+        <div v-if="user.follows_you && loggedIn && isOtherUser" class="following">
+          {{ $t('user_card.follows_you') }}
+        </div>
         <div class="floater" v-if="switcher || isOtherUser">
           <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
           <input class="userHighlightCl" type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightEnabled" v-model="userHighlightColor"/>
@@ -16,22 +32,8 @@
             <i class="icon-brush"></i>
           </label>
         </div>
-        <div class='container'>
-          <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
-            <StillImage class="avatar" :src="user.profile_image_url_original"/>
-          </router-link>
-          <div class="name-and-screen-name">
-            <div :title="user.name" class='user-name'>{{user.name}}</div>
-            <router-link class='user-screen-name':to="{ name: 'user-profile', params: { id: user.id } }">
-              <span>@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
-              <span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
-            </router-link>
-          </div>
-        </div>
-        <div v-if="isOtherUser" class="user-interactions">
-          <div v-if="user.follows_you && loggedIn" class="following">
-            {{ $t('user_card.follows_you') }}
-          </div>
+      </div>
+      <div v-if="isOtherUser" class="user-interactions">
           <div class="follow" v-if="loggedIn">
             <span v-if="user.following">
               <!--Following them!-->
@@ -187,6 +189,27 @@
     padding-right: 0.1em;
   }
 
+  .user-meta {
+    margin-bottom: .4em;
+
+    .following {
+      font-size: 14px;
+      flex: 0 0 100%;
+      margin: 0;
+      padding-left: 16px;
+      text-align: left;
+      float: left;
+    }
+    .floater {
+      margin: 0;
+    }
+
+    &::after {
+      display: block;
+      content: '';
+      clear: both;
+    }
+  }
   .user-interactions {
     display: flex;
     flex-flow: row wrap;
@@ -194,14 +217,6 @@
 
     div {
       flex: 1;
-    }
-
-    .following {
-      font-size: 14px;
-      flex: 0 0 100%;
-      margin: 0 0 .4em 0;
-      padding-left: 16px;
-      text-align: left;
     }
 
     .mute {

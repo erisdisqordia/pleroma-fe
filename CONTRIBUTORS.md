@@ -8,3 +8,4 @@ Contributors of this project.
 - hakui (hakui@freezepeach.xyz): CSS and styling
 - shpuld (shpuld@shitposter.club): CSS and styling
 - Vincent Guth (https://unsplash.com/photos/XrwVIFy6rTw): Background images.
+- hj (hj@shigusegubu.club): Code

@@ -10,9 +10,11 @@
         </a>
         <div class="floater" v-if="switcher || isOtherUser">
           <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
-          <input type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightEnabled" v-model="userHighlightColor"/>
-          <input type="checkbox" class="button" :id="'userHighlightCheck'+user.id" v-model="userHighlightEnabled">
-          <label :title="$t('settings.highlight')" :for="'userHighlightCheck'+user.id"></label>
+          <input class="userHighlightCl" type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightEnabled" v-model="userHighlightColor"/>
+          <input type="checkbox" class="userHighlightChk" :id="'userHighlightCheck'+user.id" v-model="userHighlightEnabled">
+          <label :title="$t('settings.highlight')" :for="'userHighlightCheck'+user.id">
+            <i class="icon-brush"></i>
+          </label>
         </div>
         <div class='container'>
           <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
@@ -287,5 +289,17 @@
 .floater {
   float: right;
   margin-top: 16px;
+
+  .userHighlightCl {
+    padding: 2px 10px;
+    height: 22px;
+    vertical-align: top;
+    margin-right: 0
+  }
+
+  .userHighlightChk + label::before {
+    vertical-align: top;
+    margin-right: 0
+  }
 }
 </style>

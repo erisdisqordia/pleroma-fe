@@ -22,11 +22,14 @@ const Notification = {
   },
   computed: {
     userClass () {
-      return highlightClass(this.notification.action.user, this.$store)
+      return highlightClass(this.notification.action.user)
     },
     userStyle () {
-      return highlightStyle(this.notification.action.user, this.$store)
-    },
+      const highlight = this.$store.state.config.highlight
+      const user = this.notification.action.user
+      const color = highlight[user.screen_name]
+      return highlightStyle(color)
+    }
   }
 }
 

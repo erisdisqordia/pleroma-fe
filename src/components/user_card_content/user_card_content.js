@@ -3,16 +3,6 @@ import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
 export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio' ],
-  data() {
-    return {
-      userHighlightLocal: ''
-    }
-  },
-  mounted () {
-    const config = this.$store.state.config
-    config.highlight = config.highlight || {}
-    this.userHighlightLocal = config.highlight[this.user.screen_name]
-  },
   computed: {
     headingStyle () {
       const color = this.$store.state.config.colors.bg
@@ -45,29 +35,22 @@ export default {
     },
     userHighlightEnabled: {
       get () {
-        return this.userHighlightLocal
+        return this.$store.state.config.highlight[this.user.screen_name]
       },
-      set (value) {
-        const config = this.$store.state.config
-        config.highlight = config.highlight || {}
-        if (value) {
-          this.userHighlightLocal = config.highlight[this.user.screen_name] = '#FFFFFF'
+      set (enabled) {
+        if (enabled) {
+          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: '#FFFFFF' })
         } else {
-          this.userHighlightLocal = undefined
-          delete config.highlight[this.user.screen_name]
+          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: undefined })
         }
       }
     },
     userHighlightColor: {
       get () {
-        const config = this.$store.state.config
-        config.highlight = config.highlight || {}
-        return config.highlight[this.user.screen_name]
+        return this.$store.state.config.highlight[this.user.screen_name]
       },
-      set (value) {
-        const config = this.$store.state.config
-        config.highlight = config.highlight || {}
-        config.highlight[this.user.screen_name] = value
+      set (color) {
+        this.$store.dispatch('setHighlight', { user: this.user.screen_name, color })
       }
     }
   },

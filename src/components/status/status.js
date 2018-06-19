@@ -38,19 +38,23 @@ const Status = {
     },
     repeaterClass () {
       const user = this.statusoid.user
-      return highlightClass(user, this.$store)
+      return highlightClass(user)
     },
     userClass () {
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
-      return highlightClass(user, this.$store)
+      return highlightClass(user)
     },
     repeaterStyle () {
       const user = this.statusoid.user
-      return highlightStyle(user, this.$store)
+      const highlight = this.$store.state.config.highlight
+      const color = highlight[user.screen_name]
+      return highlightStyle(color)
     },
     userStyle () {
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
-      return highlightStyle(user, this.$store)
+      const highlight = this.$store.state.config.highlight
+      const color = highlight[user.screen_name]
+      return highlightStyle(color)
     },
     hideAttachments () {
       return (this.$store.state.config.hideAttachments && !this.inConversation) ||

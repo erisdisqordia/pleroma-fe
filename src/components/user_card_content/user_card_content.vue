@@ -9,9 +9,10 @@
           <i class="icon-link-ext usersettings"></i>
         </a>
         <div class="floater" v-if="switcher || isOtherUser">
-          <input type="checkbox" id="userHighlightCheck" v-model="userHighlightEnabled">
-          <label :title="$t('settings.highlight')" for="userHighlightCheck"></label>
-          <input type="color" id="userHighlightColor" v-if="userHighlightLocal" v-model="userHighlightColor"/>
+          <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
+          <input type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightEnabled" v-model="userHighlightColor"/>
+          <input type="checkbox" class="button" :id="'userHighlightCheck'+user.id" v-model="userHighlightEnabled">
+          <label :title="$t('settings.highlight')" :for="'userHighlightCheck'+user.id"></label>
         </div>
         <div class='container'>
           <router-link :to="{ name: 'user-profile', params: { id: user.id } }">

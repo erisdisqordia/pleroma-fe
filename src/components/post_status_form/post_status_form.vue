@@ -2,6 +2,14 @@
 <div class="post-status-form">
   <form @submit.prevent="postStatus(newStatus)">
     <div class="form-group" >
+      <i18n
+        v-if="!this.$store.state.users.currentUser.locked && this.newStatus.visibility == 'private'"
+        path="post_status.account_not_locked_warning"
+        tag="p"
+        class="visibility-notice">
+        <router-link to="/user-settings">{{ $t('post_status.account_not_locked_warning_link') }}</router-link>
+      </i18n>
+      <p v-if="this.newStatus.visibility == 'direct'" class="visibility-notice">{{ $t('post_status.direct_warning') }}</p>
       <input
         v-if="scopeOptionsEnabled"
         type="text"
@@ -100,6 +108,14 @@
     color: $fallback--lightFg;
     color: var(--lightFg, $fallback--lightFg);
   }
+}
+
+.visibility-notice {
+  padding: .5em;
+  border: 1px solid $fallback--faint;
+  border: 1px solid var(--faint, $fallback--faint);
+  border-radius: $fallback--inputRadius;
+  border-radius: var(--inputRadius, $fallback--inputRadius);
 }
 
 .post-status-form, .login {

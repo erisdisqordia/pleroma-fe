@@ -118,6 +118,9 @@ const de = {
   post_status: {
     posting: 'Veröffentlichen',
     default: 'Sitze gerade im Hofbräuhaus.',
+    account_not_locked_warning: 'Dein Profil ist nicht {0}. Wer dir folgen will, kann das jederzeit tun und dann auch deine privaten Beiträge sehen.',
+    account_not_locked_warning_link: 'gesperrt',
+    direct_warning: 'Dieser Beitrag wird nur für die erwähnten Nutzer sichtbar sein.',
     scope: {
       public: 'Öffentlich - Beitrag an öffentliche Zeitleisten',
       unlisted: 'Nicht gelistet - Nicht in öffentlichen Zeitleisten anzeigen',
@@ -357,6 +360,9 @@ const en = {
     posting: 'Posting',
     content_warning: 'Subject (optional)',
     default: 'Just landed in L.A.',
+    account_not_locked_warning: 'Your account is not {0}. Anyone can follow you to view your follower-only posts.',
+    account_not_locked_warning_link: 'locked',
+    direct_warning: 'This post will only be visible to all the mentioned users.',
     scope: {
       public: 'Public - Post to public timelines',
       unlisted: 'Unlisted - Do not post to public timelines',

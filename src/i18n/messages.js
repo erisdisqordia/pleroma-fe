@@ -117,7 +117,13 @@ const de = {
   },
   post_status: {
     posting: 'Veröffentlichen',
-    default: 'Sitze gerade im Hofbräuhaus.'
+    default: 'Sitze gerade im Hofbräuhaus.',
+    scope: {
+      public: 'Öffentlich - Beitrag an öffentliche Zeitleisten',
+      unlisted: 'Nicht gelistet - Nicht in öffentlichen Zeitleisten anzeigen',
+      private: 'Nur Folgende - Beitrag nur an Folgende',
+      direct: 'Direkt - Beitrag nur an erwähnte Profile'
+    }
   },
   finder: {
     find_user: 'Finde Benutzer',
@@ -350,7 +356,13 @@ const en = {
   post_status: {
     posting: 'Posting',
     content_warning: 'Subject (optional)',
-    default: 'Just landed in L.A.'
+    default: 'Just landed in L.A.',
+    scope: {
+      public: 'Public - Post to public timelines',
+      unlisted: 'Unlisted - Do not post to public timelines',
+      private: 'Followers-only - Post to followers only',
+      direct: 'Direct - Post to mentioned users only'
+    }
   },
   finder: {
     find_user: 'Find user',

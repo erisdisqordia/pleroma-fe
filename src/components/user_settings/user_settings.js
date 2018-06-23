@@ -6,6 +6,7 @@ const UserSettings = {
       newname: this.$store.state.users.currentUser.name,
       newbio: this.$store.state.users.currentUser.description,
       newlocked: this.$store.state.users.currentUser.locked,
+      newdefaultScope: this.$store.state.users.currentUser.default_scope,
       followList: null,
       followImportError: false,
       followsImported: false,
@@ -29,19 +30,34 @@ const UserSettings = {
     },
     pleromaBackend () {
       return this.$store.state.config.pleromaBackend
-    }
+    },
+    scopeOptionsEnabled () {
+      return this.$store.state.config.scopeOptionsEnabled
+    },
+    vis () {
+      return {
+        public: { selected: this.newdefaultScope === 'public' },
+        unlisted: { selected: this.newdefaultScope === 'unlisted' },
+        private: { selected: this.newdefaultScope === 'private' },
+        direct: { selected: this.newdefaultScope === 'direct' }
+      }
+    },
   },
   methods: {
     updateProfile () {
       const name = this.newname
       const description = this.newbio
       const locked = this.newlocked
-      this.$store.state.api.backendInteractor.updateProfile({params: {name, description, locked}}).then((user) => {
+      const default_scope = this.newdefaultScope
+      this.$store.state.api.backendInteractor.updateProfile({params: {name, description, locked, default_scope}}).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
         }
       })
+    },
+    changeVis (visibility) {
+      this.newdefaultScope = visibility
     },
     uploadFile (slot, e) {
       const file = e.target.files[0]

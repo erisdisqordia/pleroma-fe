@@ -989,7 +989,16 @@ const fr = {
   },
   post_status: {
     posting: 'Envoi en cours',
-    default: 'Écrivez ici votre prochain statut.'
+    default: 'Écrivez ici votre prochain statut.',
+    account_not_locked_warning: 'Votre compte n’est pas {0}. N’importe qui peut vous suivre pour voir vos billets en Abonné·e·s uniquement.',
+    account_not_locked_warning_link: 'verrouillé',
+    direct_warning: 'Ce message sera visible à toutes les personnes mentionnées.',
+    scope: {
+      public: 'Publique - Afficher dans les fils publics',
+      unlisted: 'Non-Listé - Ne pas afficher dans les fils publics',
+      private: 'Abonné·e·s uniquement - Seul·e·s vos abonné·e·s verront vos billets',
+      direct: 'Direct - N’envoyer qu’aux personnes mentionnées'
+    }
   },
   finder: {
     find_user: 'Chercher un utilisateur',

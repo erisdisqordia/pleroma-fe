@@ -41,13 +41,14 @@ const UserSettings = {
         private: { selected: this.newdefaultScope === 'private' },
         direct: { selected: this.newdefaultScope === 'direct' }
       }
-    },
+    }
   },
   methods: {
     updateProfile () {
       const name = this.newname
       const description = this.newbio
       const locked = this.newlocked
+      /* eslint-disable camelcase */
       const default_scope = this.newdefaultScope
       this.$store.state.api.backendInteractor.updateProfile({params: {name, description, locked, default_scope}}).then((user) => {
         if (!user.error) {
@@ -55,6 +56,7 @@ const UserSettings = {
           this.$store.commit('setCurrentUser', user)
         }
       })
+      /* eslint-enable camelcase */
     },
     changeVis (visibility) {
       this.newdefaultScope = visibility

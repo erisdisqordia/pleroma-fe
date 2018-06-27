@@ -51,6 +51,23 @@ export default {
     this.attachmentRadiusLocal = this.$store.state.config.radii.attachmentRadius || 5
   },
   methods: {
+    exportCurrentTheme () {
+      const stringified = JSON.stringify({
+        colors: this.$store.state.config.colors,
+        radii: this.$store.state.config.radii
+      }, null, 2) // Pretty-print and indent with 2 spaces
+
+      // Create an invisible link with a data url and simulate a click
+      const e = document.createElement('a')
+      e.setAttribute('download', 'pleroma_theme.json')
+      e.setAttribute('href', 'data:application/json;base64,' + window.btoa(stringified))
+      e.style.display = 'none'
+
+      document.body.appendChild(e)
+      e.click()
+      document.body.removeChild(e)
+    },
+
     setCustomTheme () {
       if (!this.bgColorLocal && !this.btnColorLocal && !this.linkColorLocal) {
         // reset to picked themes

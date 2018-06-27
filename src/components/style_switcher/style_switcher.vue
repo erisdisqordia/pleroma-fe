@@ -8,6 +8,9 @@
         <i class="icon-down-open"/>
       </label>
     </div>
+    <div>
+      <button class="btn" @click="exportCurrentTheme">{{ $t('settings.export_theme') }}</button>
+    </div>
     <div class="color-container">
       <p>{{$t('settings.theme_help')}}</p>
       <div class="color-item">

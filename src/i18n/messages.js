@@ -288,6 +288,7 @@ const en = {
     settings: 'Settings',
     theme: 'Theme',
     presets: 'Presets',
+    export_theme: 'Export current theme',
     theme_help: 'Use hex color codes (#rrggbb) to customize your color theme.',
     radii_help: 'Set up interface edge rounding (in pixels)',
     background: 'Background',

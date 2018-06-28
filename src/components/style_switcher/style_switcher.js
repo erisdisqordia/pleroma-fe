@@ -32,23 +32,7 @@ export default {
       })
   },
   mounted () {
-    this.bgColorLocal = rgbstr2hex(this.$store.state.config.colors.bg)
-    this.btnColorLocal = rgbstr2hex(this.$store.state.config.colors.btn)
-    this.textColorLocal = rgbstr2hex(this.$store.state.config.colors.fg)
-    this.linkColorLocal = rgbstr2hex(this.$store.state.config.colors.link)
-
-    this.redColorLocal = rgbstr2hex(this.$store.state.config.colors.cRed)
-    this.blueColorLocal = rgbstr2hex(this.$store.state.config.colors.cBlue)
-    this.greenColorLocal = rgbstr2hex(this.$store.state.config.colors.cGreen)
-    this.orangeColorLocal = rgbstr2hex(this.$store.state.config.colors.cOrange)
-
-    this.btnRadiusLocal = this.$store.state.config.radii.btnRadius || 4
-    this.inputRadiusLocal = this.$store.state.config.radii.inputRadius || 4
-    this.panelRadiusLocal = this.$store.state.config.radii.panelRadius || 10
-    this.avatarRadiusLocal = this.$store.state.config.radii.avatarRadius || 5
-    this.avatarAltRadiusLocal = this.$store.state.config.radii.avatarAltRadius || 50
-    this.tooltipRadiusLocal = this.$store.state.config.radii.tooltipRadius || 2
-    this.attachmentRadiusLocal = this.$store.state.config.radii.attachmentRadius || 5
+    this.normalizeLocalState(this.$store.state.config.colors, this.$store.state.config.radii)
   },
   methods: {
     exportCurrentTheme () {
@@ -112,6 +96,26 @@ export default {
             attachmentRadius: this.attachmentRadiusLocal
           }})
       }
+    },
+
+    normalizeLocalState (colors, radii) {
+      this.bgColorLocal = rgbstr2hex(colors.bg)
+      this.btnColorLocal = rgbstr2hex(colors.btn)
+      this.textColorLocal = rgbstr2hex(colors.fg)
+      this.linkColorLocal = rgbstr2hex(colors.link)
+
+      this.redColorLocal = rgbstr2hex(colors.cRed)
+      this.blueColorLocal = rgbstr2hex(colors.cBlue)
+      this.greenColorLocal = rgbstr2hex(colors.cGreen)
+      this.orangeColorLocal = rgbstr2hex(colors.cOrange)
+
+      this.btnRadiusLocal = radii.btnRadius || 4
+      this.inputRadiusLocal = radii.inputRadius || 4
+      this.panelRadiusLocal = radii.panelRadius || 10
+      this.avatarRadiusLocal = radii.avatarRadius || 5
+      this.avatarAltRadiusLocal = radii.avatarAltRadius || 50
+      this.tooltipRadiusLocal = radii.tooltipRadius || 2
+      this.attachmentRadiusLocal = radii.attachmentRadius || 5
     }
   },
   watch: {

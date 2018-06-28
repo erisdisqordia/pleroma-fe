@@ -73,7 +73,16 @@
 
           <div :class="{'tall-status': hideTallStatus}" class="status-content-wrapper">
             <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowTall">Show more</a>
-            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
+            <div v-if="status.summary" @click.prevent="linkClicked" class="status-content media-body">
+              <div class="contentWarningLabel">
+                <span v-html="status.summary"></span>
+                <button v-if="showingContentWarningContent" @click.prevent="toggleContentWarningContent">Hide</button>
+                <button v-else @click.prevent="toggleContentWarningContent">Show</button>
+              </div>
+              <div v-if="showingContentWarningContent" v-html="status.content" class="contentWarnedContent"></div>
+              <div v-else class="hiddenContent" @click.prevent="toggleContentWarningContent">Click to view this post.</div>
+            </div>
+            <div v-else @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
             <a v-if="showingTall" href="#" class="tall-status-unhider" @click.prevent="toggleShowTall">Show less</a>
           </div>
 
@@ -486,6 +495,17 @@ a.unmute {
     width: 32px;
     height: 32px;
   }
+}
+
+.hiddenContent {
+  margin: 8px;
+  padding: 32px;
+    background: var(--lightBg, $fallback--lightBg);
+  color: #CCCCCC;
+    border-radius: var(--panelRadius, $fallback--panelRadius);
+}
+.contentWarnedContent {
+  margin: 8px;
 }
 
 </style>

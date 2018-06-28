@@ -52,6 +52,28 @@ export default {
       document.body.removeChild(e)
     },
 
+    importTheme () {
+      const filePicker = document.createElement('input')
+      filePicker.setAttribute('type', 'file')
+      filePicker.setAttribute('accept', '.json')
+
+      filePicker.addEventListener('change', event => {
+        if (event.target.files[0]) {
+          // eslint-disable-next-line no-undef
+          const reader = new FileReader()
+          reader.onload = ({target}) => {
+            const parsed = JSON.parse(target.result)
+            this.normalizeLocalState(parsed.colors, parsed.radii)
+          }
+          reader.readAsText(event.target.files[0])
+        }
+      })
+
+      document.body.appendChild(filePicker)
+      filePicker.click()
+      document.body.removeChild(filePicker)
+    },
+
     setCustomTheme () {
       if (!this.bgColorLocal && !this.btnColorLocal && !this.linkColorLocal) {
         // reset to picked themes

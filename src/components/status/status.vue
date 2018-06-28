@@ -506,9 +506,11 @@ a.unmute {
 .hiddenContent {
   margin: 8px;
   padding: 32px;
-    background: var(--lightBg, $fallback--lightBg);
-  color: #CCCCCC;
-    border-radius: var(--panelRadius, $fallback--panelRadius);
+  background: var(--lightBg, $fallback--lightBg);
+  border-radius: var(--panelRadius, $fallback--panelRadius);
+}
+.status-el_focused * .hiddenContent {
+  background: var(--bg, $fallback--bg);
 }
 .contentWarnedContent {
   margin: 8px;

@@ -48,6 +48,8 @@ const de = {
     settings: 'Einstellungen',
     theme: 'Farbschema',
     presets: 'Voreinstellungen',
+    export_theme: 'Aktuelles Theme exportieren',
+    import_theme: 'Gespeichertes Theme laden',
     theme_help: 'Benutze HTML Farbcodes (#rrggbb) um dein Farbschema anzupassen',
     radii_help: 'Kantenrundung (in Pixel) der Oberfläche anpassen',
     background: 'Hintergrund',

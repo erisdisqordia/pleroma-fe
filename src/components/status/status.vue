@@ -80,13 +80,13 @@
                 <button v-else @click.prevent="toggleContentWarningContent">Show</button>
               </div>
               <div v-if="showingContentWarningContent" v-html="status.content" class="contentWarnedContent"></div>
-              <div v-else class="hiddenContent" @click.prevent="toggleContentWarningContent">Click to view this post.</div>
+              <div v-else class="hiddenContent" @click.prevent="toggleContentWarningContent">Click to view this post.<span v-if="status.attachments && status.attachments.length > 0"> (has attachments)</span></div>
             </div>
             <div v-else @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
             <a v-if="showingTall" href="#" class="tall-status-unhider" @click.prevent="toggleShowTall">Show less</a>
           </div>
 
-          <div v-if='status.attachments' class='attachments media-body'>
+          <div v-if='status.attachments && (!status.summary || showingContentWarningContent)' class='attachments media-body'>
             <attachment :size="attachmentSize" :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments" :key="attachment.id">
             </attachment>
           </div>

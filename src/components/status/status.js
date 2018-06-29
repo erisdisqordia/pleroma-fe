@@ -29,7 +29,7 @@ const Status = {
     preview: null,
     showPreview: false,
     showingTall: false,
-    showingContentWarningContent: false
+    showingContentWarningContent: false 
   }),
   computed: {
     muteWords () {
@@ -93,7 +93,10 @@ const Status = {
         return 'small'
       }
       return 'normal'
-    }
+    },
+    clickThroughContentWarningsEnabled () {
+      return this.$store.state.config.clickThroughContentWarningsEnabled
+    },
   },
   components: {
     Attachment,

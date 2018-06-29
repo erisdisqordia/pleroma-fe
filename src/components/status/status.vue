@@ -76,17 +76,19 @@
             <div v-if="status.summary" @click.prevent="linkClicked" class="status-content media-body">
               <div class="contentWarningLabel">
                 <span v-html="status.summary"></span>
-                <button v-if="showingContentWarningContent" @click.prevent="toggleContentWarningContent">Hide</button>
-                <button v-else @click.prevent="toggleContentWarningContent">Show</button>
+                <span v-if="clickThroughContentWarningsEnabled">
+                  <button v-if="showingContentWarningContent" @click.prevent="toggleContentWarningContent">Hide</button>
+                  <button v-else @click.prevent="toggleContentWarningContent">Show</button>
+                </span>
               </div>
-              <div v-if="showingContentWarningContent" v-html="status.content" class="contentWarnedContent"></div>
+              <div v-if="showingContentWarningContent || !clickThroughContentWarningsEnabled" v-html="status.content" class="contentWarnedContent"></div>
               <div v-else class="hiddenContent" @click.prevent="toggleContentWarningContent">Click to view this post.<span v-if="status.attachments && status.attachments.length > 0"> (has attachments)</span></div>
             </div>
             <div v-else @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
             <a v-if="showingTall" href="#" class="tall-status-unhider" @click.prevent="toggleShowTall">Show less</a>
           </div>
 
-          <div v-if='status.attachments && (!status.summary || showingContentWarningContent)' class='attachments media-body'>
+          <div v-if='status.attachments && (!status.summary || showingContentWarningContent || !clickThroughContentWarningsEnabled)' class='attachments media-body'>
             <attachment :size="attachmentSize" :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments" :key="attachment.id">
             </attachment>
           </div>

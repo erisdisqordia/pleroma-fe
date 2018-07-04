@@ -5,6 +5,7 @@ export default {
     return {
       availableStyles: [],
       selected: this.$store.state.config.theme,
+      invalidThemeImported: false,
       bgColorLocal: '',
       btnColorLocal: '',
       textColorLocal: '',
@@ -37,6 +38,8 @@ export default {
   methods: {
     exportCurrentTheme () {
       const stringified = JSON.stringify({
+        // To separate from other random JSON files and possible future theme formats
+        _pleroma_theme_version: 1,
         colors: this.$store.state.config.colors,
         radii: this.$store.state.config.radii
       }, null, 2) // Pretty-print and indent with 2 spaces
@@ -53,6 +56,7 @@ export default {
     },
 
     importTheme () {
+      this.invalidThemeImported = false
       const filePicker = document.createElement('input')
       filePicker.setAttribute('type', 'file')
       filePicker.setAttribute('accept', '.json')
@@ -62,8 +66,18 @@ export default {
           // eslint-disable-next-line no-undef
           const reader = new FileReader()
           reader.onload = ({target}) => {
-            const parsed = JSON.parse(target.result)
-            this.normalizeLocalState(parsed.colors, parsed.radii)
+            try {
+              const parsed = JSON.parse(target.result)
+              if (parsed._pleroma_theme_version === 1) {
+                this.normalizeLocalState(parsed.colors, parsed.radii)
+              } else {
+                // A theme from the future, spooky
+                this.invalidThemeImported = true
+              }
+            } catch (e) {
+              // This will happen both if there is a JSON syntax error or the theme is missing components
+              this.invalidThemeImported = true
+            }
           }
           reader.readAsText(event.target.files[0])
         }

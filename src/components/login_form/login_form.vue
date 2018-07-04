@@ -34,11 +34,6 @@
 @import '../../_variables.scss';
 
 .login-form {
-  .btn {
-    min-height: 28px;
-    width: 10em;
-  }
-
   .error {
     text-align: center;
   }

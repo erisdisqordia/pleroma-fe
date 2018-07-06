@@ -45,8 +45,7 @@
   }
 
   .unseen {
-    border-left: 4px solid $fallback--cRed;
-    border-left: 4px solid var(--cRed, $fallback--cRed);
+    box-shadow: inset 4px 0 0 var(--cRed, $fallback--cRed);
     padding-left: 0;
   }
 }
@@ -56,7 +55,6 @@
   display: flex;
   border-bottom: 1px solid;
   border-bottom-color: inherit;
-  padding-left: 4px;
 
   .avatar-compact {
     width: 32px;

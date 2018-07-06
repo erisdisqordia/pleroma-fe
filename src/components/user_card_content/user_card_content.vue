@@ -15,7 +15,7 @@
         <div class="name-and-screen-name">
           <div :title="user.name" class='user-name'>{{user.name}}</div>
           <router-link class='user-screen-name':to="{ name: 'user-profile', params: { id: user.id } }">
-            <span>@{{user.screen_name}}</span>
+            <span>@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>
         </div>

@@ -89,7 +89,7 @@ window.fetch('/api/statusnet/config.json')
 window.fetch('/static/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {theme, background, logo, showWhoToFollowPanel, whoToFollowProvider, whoToFollowLink, showInstanceSpecificPanel, scopeOptionsEnabled} = data
+    const {theme, background, logo, showWhoToFollowPanel, whoToFollowProvider, whoToFollowLink, showInstanceSpecificPanel, scopeOptionsEnabled, clickThroughContentWarningsEnabled} = data
     store.dispatch('setOption', { name: 'theme', value: theme })
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
@@ -98,6 +98,8 @@ window.fetch('/static/config.json')
     store.dispatch('setOption', { name: 'whoToFollowLink', value: whoToFollowLink })
     store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
     store.dispatch('setOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
+    store.dispatch('setOption', { name: 'clickThroughContentWarningsEnabled', value: clickThroughContentWarningsEnabled })
+
     if (data['chatDisabled']) {
       store.dispatch('disableChat')
     }

@@ -28,7 +28,8 @@ const Status = {
     userExpanded: false,
     preview: null,
     showPreview: false,
-    showingTall: false
+    showingTall: false,
+    showingContentWarningContent: false
   }),
   computed: {
     muteWords () {
@@ -92,6 +93,9 @@ const Status = {
         return 'small'
       }
       return 'normal'
+    },
+    clickThroughContentWarningsEnabled () {
+      return this.$store.state.config.clickThroughContentWarningsEnabled
     }
   },
   components: {
@@ -144,6 +148,9 @@ const Status = {
     },
     toggleShowTall () {
       this.showingTall = !this.showingTall
+    },
+    toggleContentWarningContent () {
+      this.showingContentWarningContent = !this.showingContentWarningContent
     },
     replyEnter (id, event) {
       this.showPreview = true

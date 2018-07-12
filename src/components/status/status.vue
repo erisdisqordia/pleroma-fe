@@ -73,11 +73,22 @@
 
           <div :class="{'tall-status': hideTallStatus}" class="status-content-wrapper">
             <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowTall">Show more</a>
-            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
+            <div v-if="status.summary" @click.prevent="linkClicked" class="status-content media-body">
+              <div class="contentWarningLabel">
+                <span v-html="status.summary"></span>
+                <span v-if="clickThroughContentWarningsEnabled">
+                  <button v-if="showingContentWarningContent" @click.prevent="toggleContentWarningContent">Hide</button>
+                  <button v-else @click.prevent="toggleContentWarningContent">Show</button>
+                </span>
+              </div>
+              <div v-if="showingContentWarningContent || !clickThroughContentWarningsEnabled" v-html="status.content" class="contentWarnedContent"></div>
+              <div v-else class="hiddenContent" @click.prevent="toggleContentWarningContent">Click to view this post.<span v-if="status.attachments && status.attachments.length > 0"> (has attachments)</span></div>
+            </div>
+            <div v-else @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
             <a v-if="showingTall" href="#" class="tall-status-unhider" @click.prevent="toggleShowTall">Show less</a>
           </div>
 
-          <div v-if='status.attachments' class='attachments media-body'>
+          <div v-if='status.attachments && (!status.summary || showingContentWarningContent || !clickThroughContentWarningsEnabled)' class='attachments media-body'>
             <attachment :size="attachmentSize" :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments" :key="attachment.id">
             </attachment>
           </div>
@@ -96,7 +107,13 @@
       </div>
       <div class="container" v-if="replying">
         <div class="reply-left"/>
-        <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" :message-scope="status.visibility" v-on:posted="toggleReplying"/>
+        <post-status-form class="reply-body"
+          :reply-to="status.id"
+          :attentions="status.attentions" 
+          :repliedUser="status.user" 
+          :message-scope="status.visibility" 
+          :parentSpoilerText="status.summary"
+          v-on:posted="toggleReplying"/>
       </div>
     </template>
   </div>
@@ -486,6 +503,19 @@ a.unmute {
     width: 32px;
     height: 32px;
   }
+}
+
+.hiddenContent {
+  margin: 8px;
+  padding: 32px;
+  background: var(--lightBg, $fallback--lightBg);
+  border-radius: var(--panelRadius, $fallback--panelRadius);
+}
+.status-el_focused * .hiddenContent {
+  background: var(--bg, $fallback--bg);
+}
+.contentWarnedContent {
+  margin: 8px;
 }
 
 </style>

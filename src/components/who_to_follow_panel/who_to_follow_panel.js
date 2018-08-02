@@ -1,7 +1,7 @@
 import apiService from '../../services/api/api.service.js'
 
 function showWhoToFollow (panel, reply) {
-  var users = reply.ids
+  var users = reply
   var cn
   var index = 0
   var random = Math.floor(Math.random() * 10)
@@ -10,7 +10,7 @@ function showWhoToFollow (panel, reply) {
     user = users[cn]
     var img
     if (user.avatar) {
-      img = user.icon
+      img = user.avatar
     } else {
       img = '/images/avi.png'
     }

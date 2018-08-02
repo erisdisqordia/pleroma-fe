@@ -59,9 +59,8 @@ function getWhoToFollow (panel) {
     panel.name1 = 'Loading...'
     panel.name2 = 'Loading...'
     panel.name3 = 'Loading...'
-    var url = '/api/v1/suggestions'
-    apiService.suggestions ({credentials: credentials})
-      .then ((reply) => {
+    apiService.suggestions({credentials: credentials})
+      .then((reply) => {
         showWhoToFollow(panel, reply)
       })
   }

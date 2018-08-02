@@ -7,12 +7,12 @@ function showWhoToFollow (panel, reply, aHost, aUser) {
     var user
     user = users[cn]
     var img
-    if (user.icon) {
+    if (user.avatar) {
       img = user.icon
     } else {
       img = '/images/avi.png'
     }
-    var name = user.to_id
+    var name = user.acct
     if (index === 0) {
       panel.img1 = img
       panel.name1 = name
@@ -52,17 +52,13 @@ function showWhoToFollow (panel, reply, aHost, aUser) {
 }
 
 function getWhoToFollow (panel) {
-  var user = panel.$store.state.users.currentUser.screen_name
-  if (user) {
+  var credentials = panel.$store.state.users.currentUser.credentials
+  if (credentials) {
     panel.name1 = 'Loading...'
     panel.name2 = 'Loading...'
     panel.name3 = 'Loading...'
-    var host = window.location.hostname
-    var whoToFollowProvider = panel.$store.state.config.whoToFollowProvider
-    var url
-    url = whoToFollowProvider.replace(/{{host}}/g, encodeURIComponent(host))
-    url = url.replace(/{{user}}/g, encodeURIComponent(user))
-    window.fetch(url, {mode: 'cors'}).then(function (response) {
+    var url = '/api/v1/suggestions'
+    window.fetch(url, {headers: authHeaders(credentials)}).then(function (response) {
       if (response.ok) {
         return response.json()
       } else {

@@ -89,13 +89,10 @@ window.fetch('/api/statusnet/config.json')
 window.fetch('/static/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {theme, background, logo, showWhoToFollowPanel, whoToFollowProvider, whoToFollowLink, showInstanceSpecificPanel, scopeOptionsEnabled} = data
+    const {theme, background, logo, showInstanceSpecificPanel, scopeOptionsEnabled} = data
     store.dispatch('setOption', { name: 'theme', value: theme })
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
-    store.dispatch('setOption', { name: 'showWhoToFollowPanel', value: showWhoToFollowPanel })
-    store.dispatch('setOption', { name: 'whoToFollowProvider', value: whoToFollowProvider })
-    store.dispatch('setOption', { name: 'whoToFollowLink', value: whoToFollowLink })
     store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
     store.dispatch('setOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
     if (data['chatDisabled']) {
@@ -142,6 +139,14 @@ window.fetch('/static/config.json')
       el: '#app',
       render: h => h(App)
     })
+  })
+
+window.fetch('/nodeinfo/2.0.json')
+  .then((res) => res.json())
+  .then((data) => {
+    const suggestions = data.metadata.suggestions
+    store.dispatch('setOption', { name: 'showWhoToFollowPanel', value: suggestions.enabled })
+    store.dispatch('setOption', { name: 'whoToFollowLink', value: suggestions.web })
   })
 
 window.fetch('/static/terms-of-service.html')

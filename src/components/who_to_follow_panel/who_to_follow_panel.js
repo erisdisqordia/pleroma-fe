@@ -1,4 +1,6 @@
-function showWhoToFollow (panel, reply, aHost, aUser) {
+import apiService from '../../services/api/api.service.js'
+
+function showWhoToFollow (panel, reply) {
   var users = reply.ids
   var cn
   var index = 0
@@ -58,17 +60,10 @@ function getWhoToFollow (panel) {
     panel.name2 = 'Loading...'
     panel.name3 = 'Loading...'
     var url = '/api/v1/suggestions'
-    window.fetch(url, {headers: authHeaders(credentials)}).then(function (response) {
-      if (response.ok) {
-        return response.json()
-      } else {
-        panel.name1 = ''
-        panel.name2 = ''
-        panel.name3 = ''
-      }
-    }).then(function (reply) {
-      showWhoToFollow(panel, reply, host, user)
-    })
+    apiService.suggestions ({credentials: credentials})
+      .then ((reply) => {
+        showWhoToFollow(panel, reply)
+      })
   }
 }
 

@@ -6,7 +6,6 @@ import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
 import StillImage from '../still-image/still-image.vue'
 import { filter, find } from 'lodash'
-import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 
 const Status = {
@@ -186,7 +185,7 @@ const Status = {
     },
     replyLeave () {
       this.showPreview = false
-    },
+    }
   },
   watch: {
     'highlight': function (id) {

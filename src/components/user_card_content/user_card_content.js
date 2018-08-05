@@ -33,13 +33,15 @@ export default {
       const days = Math.ceil((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
       return Math.round(this.user.statuses_count / days)
     },
-    userHighlightEnabled: {
+    userHighlightType: {
       get () {
-        return this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.state.config.highlight[this.user.screen_name]
+        return data && data.type || 'disabled'
       },
-      set (enabled) {
-        if (enabled) {
-          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: '#FFFFFF' })
+      set (type) {
+        const data = this.$store.state.config.highlight[this.user.screen_name]
+        if (type !== 'disabled') {
+          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: data && data.color || '#FFFFFF', type })
         } else {
           this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: undefined })
         }
@@ -47,7 +49,8 @@ export default {
     },
     userHighlightColor: {
       get () {
-        return this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.state.config.highlight[this.user.screen_name]
+        return data && data.color
       },
       set (color) {
         this.$store.dispatch('setHighlight', { user: this.user.screen_name, color })

@@ -47,14 +47,12 @@ const Status = {
     repeaterStyle () {
       const user = this.statusoid.user
       const highlight = this.$store.state.config.highlight
-      const color = highlight[user.screen_name]
-      return highlightStyle(color)
+      return highlightStyle(highlight[user.screen_name])
     },
     userStyle () {
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
       const highlight = this.$store.state.config.highlight
-      const color = highlight[user.screen_name]
-      return highlightStyle(color)
+      return highlightStyle(highlight[user.screen_name])
     },
     hideAttachments () {
       return (this.$store.state.config.hideAttachments && !this.inConversation) ||

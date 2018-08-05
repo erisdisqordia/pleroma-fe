@@ -26,10 +26,16 @@
         </div>
         <div class="floater" v-if="switcher || isOtherUser">
           <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
-          <input class="userHighlightCl" type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightEnabled" v-model="userHighlightColor"/>
-          <input type="checkbox" class="userHighlightChk" :id="'userHighlightCheck'+user.id" v-model="userHighlightEnabled">
-          <label :title="$t('settings.highlight')" :for="'userHighlightCheck'+user.id">
-            <i class="icon-brush"></i>
+          <input class="userHighlightText" type="text" :id="'userHighlightColorTx'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
+          <input class="userHighlightCl" type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
+          <label for="style-switcher" class='userHighlightSel select'>
+            <select class="userHighlightSel" :id="'userHighlightSel'+user.id" v-model="userHighlightType">
+              <option value="disabled">No highlight</option>
+              <option value="solid">Solid bg</option>
+              <option value="striped">Striped bg</option>
+              <option value="side">Side stripe</option>
+            </select>
+            <i class="icon-down-open"/>
           </label>
         </div>
       </div>
@@ -307,12 +313,25 @@
 
   .userHighlightCl {
     padding: 2px 10px;
-    height: 22px;
-    vertical-align: top;
-    margin-right: 0
+  }
+  .userHighlightSel,
+  .userHighlightSel.select {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .userHighlightSel.select i {
+    line-height: 22px;
   }
 
-  .userHighlightChk + label::before {
+  .userHighlightText {
+    width: 70px;
+  }
+
+  .userHighlightCl,
+  .userHighlightText,
+  .userHighlightSel,
+  .userHighlightSel.select {
+    height: 22px;
     vertical-align: top;
     margin-right: 0
   }

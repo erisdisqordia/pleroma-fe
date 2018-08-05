@@ -27,8 +27,7 @@ const Notification = {
     userStyle () {
       const highlight = this.$store.state.config.highlight
       const user = this.notification.action.user
-      const color = highlight[user.screen_name]
-      return highlightStyle(color)
+      return highlightStyle(highlight[user.screen_name])
     }
   }
 }

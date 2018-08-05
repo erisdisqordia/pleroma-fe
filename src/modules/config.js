@@ -20,9 +20,12 @@ const config = {
     setOption (state, { name, value }) {
       set(state, name, value)
     },
-    setHighlight (state, { user, color }) {
-      if (color) {
-        set(state.highlight, user, color)
+    setHighlight (state, { user, color, type }) {
+      const data = this.state.config.highlight[user]
+      console.log(user, color, type, data)
+
+      if (color || type) {
+        set(state.highlight, user, { color: color || data.color, type: type || data.type })
       } else {
         del(state.highlight, user)
       }
@@ -32,8 +35,8 @@ const config = {
     setPageTitle ({state}, option = '') {
       document.title = `${option} ${state.name}`
     },
-    setHighlight ({ commit, dispatch }, { user, color }) {
-      commit('setHighlight', {user, color})
+    setHighlight ({ commit, dispatch }, { user, color, type }) {
+      commit('setHighlight', {user, color, type})
     },
     setOption ({ commit, dispatch }, { name, value }) {
       commit('setOption', {name, value})

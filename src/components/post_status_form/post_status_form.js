@@ -31,7 +31,7 @@ const PostStatusForm = {
   },
   mounted () {
     this.resize(this.$refs.textarea)
-    
+
     if (this.replyTo) {
       this.$refs.textarea.focus()
     }

@@ -31,6 +31,10 @@ const PostStatusForm = {
   },
   mounted () {
     this.resize(this.$refs.textarea)
+    
+    if (this.replyTo) {
+      this.$refs.textarea.focus()
+    }
   },
   data () {
     const preset = this.$route.query.message

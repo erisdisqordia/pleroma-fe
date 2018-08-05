@@ -354,7 +354,8 @@ const en = {
     fullname: 'Display name',
     email: 'Email',
     bio: 'Bio',
-    password_confirm: 'Password confirmation'
+    password_confirm: 'Password confirmation',
+    token: 'Invite token'
   },
   post_status: {
     posting: 'Posting',
@@ -1643,7 +1644,8 @@ const ru = {
     fullname: 'Отображаемое имя',
     email: 'Email',
     bio: 'Описание',
-    password_confirm: 'Подтверждение пароля'
+    password_confirm: 'Подтверждение пароля',
+    token: 'Код приглашения'
   },
   post_status: {
     posting: 'Отправляется',

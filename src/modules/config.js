@@ -22,8 +22,6 @@ const config = {
     },
     setHighlight (state, { user, color, type }) {
       const data = this.state.config.highlight[user]
-      console.log(user, color, type, data)
-
       if (color || type) {
         set(state.highlight, user, { color: color || data.color, type: type || data.type })
       } else {

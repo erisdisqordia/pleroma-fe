@@ -50,6 +50,7 @@ const Status = {
       return highlightStyle(highlight[user.screen_name])
     },
     userStyle () {
+      if (this.noHeading) return
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
       const highlight = this.$store.state.config.highlight
       return highlightStyle(highlight[user.screen_name])

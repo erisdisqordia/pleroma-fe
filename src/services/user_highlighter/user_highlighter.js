@@ -1,12 +1,10 @@
 import { hex2rgb } from '../color_convert/color_convert.js'
 const highlightStyle = (prefs) => {
-  if (prefs === undefined) {
-    return
-  }
+  if (prefs === undefined) return
   const {color, type} = prefs
-  console.log(arguments)
   if (typeof color !== 'string') return
   const rgb = hex2rgb(color)
+  if (rgb == null) return
   const solidColor = `rgb(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)})`
   const tintColor = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .1)`
   const tintColor2 = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .2)`

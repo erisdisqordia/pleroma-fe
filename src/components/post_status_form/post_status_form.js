@@ -87,10 +87,10 @@ const PostStatusForm = {
           return false
         }
         return map(take(matchedEmoji, 5), ({shortcode, image_url, utf}, index) => ({
-          // eslint-disable-next-line camelcase
           screen_name: `:${shortcode}:`,
           name: '',
           utf: utf || '',
+          // eslint-disable-next-line camelcase
           img: utf ? '' : this.$store.state.config.server + image_url,
           highlighted: index === this.highlighted
         }))

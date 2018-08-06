@@ -82,8 +82,8 @@
             </attachment>
           </div>
 
-          <div v-if="!noHeading && !noReplyLinks" class='status-actions media-body'>
-            <div v-if="loggedIn">
+          <div v-if="loggedIn && !noHeading && !noReplyLinks" class='status-actions media-body'>
+            <div>
               <a href="#" v-on:click.prevent="toggleReplying">
                 <i class="icon-reply" :class="{'icon-reply-active': replying}"></i>
               </a>

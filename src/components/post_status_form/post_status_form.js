@@ -91,7 +91,7 @@ const PostStatusForm = {
           screen_name: `:${shortcode}:`,
           name: '',
           utf: utf || '',
-          img: image_url,
+          img: utf ? '' : this.$store.state.config.server + image_url,
           highlighted: index === this.highlighted
         }))
       } else {

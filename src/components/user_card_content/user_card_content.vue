@@ -13,7 +13,8 @@
             <StillImage class="avatar" :src="user.profile_image_url_original"/>
           </router-link>
           <div class="name-and-screen-name">
-            <div :title="user.name" class='user-name'>{{user.name}}</div>
+            <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
+            <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
             <router-link class='user-screen-name':to="{ name: 'user-profile', params: { id: user.id } }">
               <span>@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
               <span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
@@ -88,7 +89,8 @@
           <span>{{user.followers_count}}</span>
         </div>
       </div>
-      <p v-if="!hideBio">{{user.description}}</p>
+      <p v-if="!hideBio && user.description_html" v-html="user.description_html"></p>
+      <p v-else-if="!hideBio">{{ user.description }}</p>
     </div>
   </div>
 </template>

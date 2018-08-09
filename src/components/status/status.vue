@@ -11,7 +11,8 @@
       <div v-if="retweet && !noHeading" class="media container retweet-info">
         <StillImage v-if="retweet" class='avatar' :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
-          <a :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
+          <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
+          <a v-else :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
           <i class='fa icon-retweet retweeted'></i>
           {{$t('timeline.repeated')}}
         </div>
@@ -30,7 +31,8 @@
           <div v-if="!noHeading" class="media-body container media-heading">
             <div class="media-heading-left">
               <div class="name-and-links">
-                <h4 class="user-name">{{status.user.name}}</h4>
+                <h4 class="user-name" v-if="status.user.name_html" v-html="status.user.name_html"></h4>
+                <h4 class="user-name" v-else>{{status.user.name}}</h4>
                 <span class="links">
                   <router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link>
                   <span v-if="status.in_reply_to_screen_name" class="faint reply-info">

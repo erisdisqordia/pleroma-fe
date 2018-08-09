@@ -7,10 +7,16 @@
       <user-card-content :user="user" :switcher="false"></user-card-content>
     </div>
     <div class="name-and-screen-name" v-else>
-      <div :title="user.name" class="user-name">
+      <div :title="user.name" v-if="user.name_html" class="user-name">
+        <span v-html="user.name_html"></span>
+        <span class="follows-you" v-if="!userExpanded && showFollows && user.follows_you">
+          {{ $t('user_card.follows_you') }}
+        </span>
+      </div>
+      <div :title="user.name" v-else class="user-name">
         {{ user.name }}
         <span class="follows-you" v-if="!userExpanded && showFollows && user.follows_you">
-            {{ $t('user_card.follows_you') }}
+          {{ $t('user_card.follows_you') }}
         </span>
       </div>
       <a :href="user.statusnet_profile_url" target="blank"><div class="user-screen-name">@{{ user.screen_name }}</div></a>

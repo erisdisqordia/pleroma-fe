@@ -763,30 +763,30 @@ const ja = {
     chat: 'ローカルチャット',
     timeline: 'タイムライン',
     mentions: 'メンション',
-    public_tl: '公開タイムライン',
-    twkn: '接続しているすべてのネットワーク'
+    public_tl: 'パブリックタイムライン',
+    twkn: 'つながっているすべてのネットワーク'
   },
   user_card: {
     follows_you: 'フォローされました！',
-    following: 'フォロー中！',
+    following: 'フォローしています！',
     follow: 'フォロー',
-    blocked: 'ブロック済み！',
+    blocked: 'ブロックしています！',
     block: 'ブロック',
-    statuses: '投稿',
+    statuses: 'ステータス',
     mute: 'ミュート',
-    muted: 'ミュート済み',
+    muted: 'ミュートしています！',
     followers: 'フォロワー',
     followees: 'フォロー',
     per_day: '/日',
     remote_follow: 'リモートフォロー'
   },
   timeline: {
-    show_new: '更新',
-    error_fetching: '更新の取得中にエラーが発生しました。',
-    up_to_date: '最新',
-    load_older: '古い投稿を読み込む',
-    conversation: '会話',
-    collapse: '折り畳む',
+    show_new: 'よみこみ',
+    error_fetching: 'よみこみがエラーになりました。',
+    up_to_date: 'さいしん',
+    load_older: 'ふるいステータス',
+    conversation: 'スレッド',
+    collapse: 'たたむ',
     repeated: 'リピート'
   },
   settings: {

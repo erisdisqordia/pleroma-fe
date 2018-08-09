@@ -834,7 +834,7 @@ const ja = {
     follow_import: 'フォローインポート',
     import_followers_from_a_csv_file: 'CSVファイルからフォローをインポートする。',
     follows_imported: 'フォローがインポートされました！ すこしじかんがかかるかもしれません。',
-    follow_import_error: 'フォロワーのインポートがエラーになりました。'
+    follow_import_error: 'フォローのインポートがエラーになりました。'
   },
   notifications: {
     notifications: '通知',

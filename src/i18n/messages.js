@@ -837,38 +837,38 @@ const ja = {
     follow_import_error: 'フォローのインポートがエラーになりました。'
   },
   notifications: {
-    notifications: '通知',
-    read: '読んだ！',
+    notifications: 'つうち',
+    read: 'よんだ！',
     followed_you: 'フォローされました',
-    favorited_you: 'あなたの投稿がお気に入りされました',
-    repeated_you: 'あなたの投稿がリピートされました'
+    favorited_you: 'あなたのステータスがおきにいりされました',
+    repeated_you: 'あなたのステータスがリピートされました'
   },
   login: {
     login: 'ログイン',
-    username: 'ユーザー名',
-    placeholder: '例えば lain',
+    username: 'ユーザーめい',
+    placeholder: 'れい: lain',
     password: 'パスワード',
-    register: '登録',
+    register: 'はじめる',
     logout: 'ログアウト'
   },
   registration: {
-    registration: '登録',
-    fullname: '表示名',
+    registration: 'はじめる',
+    fullname: 'スクリーンネーム',
     email: 'Eメール',
     bio: 'プロフィール',
-    password_confirm: 'パスワードの確認'
+    password_confirm: 'パスワードのかくにん'
   },
   post_status: {
-    posting: '投稿',
-    default: 'ちょうどL.A.に着陸しました。'
+    posting: 'とうこう',
+    default: 'はねだくうこうに、つきました。'
   },
   finder: {
-    find_user: 'ユーザー検索',
-    error_fetching_user: 'ユーザー検索でエラーが発生しました'
+    find_user: 'ユーザーをさがす',
+    error_fetching_user: 'ユーザーけんさくがエラーになりました。'
   },
   general: {
-    submit: '送信',
-    apply: '適用'
+    submit: 'そうしん',
+    apply: 'てきよう'
   },
   user_profile: {
     timeline_title: 'ユーザータイムライン'

@@ -380,6 +380,10 @@ const en = {
   },
   user_profile: {
     timeline_title: 'User Timeline'
+  },
+  who_to_follow: {
+    who_to_follow: 'Who to follow',
+    more: 'More'
   }
 }
 
@@ -900,6 +904,10 @@ const ja = {
   },
   user_profile: {
     timeline_title: 'ユーザータイムライン'
+  },
+  who_to_follow: {
+    who_to_follow: 'おすすめユーザー',
+    more: 'くわしく'
   }
 }
 

@@ -764,7 +764,8 @@ const ja = {
     timeline: 'タイムライン',
     mentions: 'メンション',
     public_tl: 'パブリックタイムライン',
-    twkn: 'つながっているすべてのネットワーク'
+    twkn: 'つながっているすべてのネットワーク',
+    friend_requests: 'Follow Requests'
   },
   user_card: {
     follows_you: 'フォローされました！',
@@ -778,7 +779,9 @@ const ja = {
     followers: 'フォロワー',
     followees: 'フォロー',
     per_day: '/日',
-    remote_follow: 'リモートフォロー'
+    remote_follow: 'リモートフォロー',
+    approve: 'Approve',
+    deny: 'Deny'
   },
   timeline: {
     show_new: 'よみこみ',
@@ -816,6 +819,7 @@ const ja = {
     cOrange: 'オレンジ (おきにいり)',
     cGreen: 'みどり (リピート)',
     btnRadius: 'ボタン',
+    inputRadius: 'Input fields',
     panelRadius: 'パネル',
     avatarRadius: 'アバター',
     avatarAltRadius: 'アバター (つうち)',
@@ -834,7 +838,21 @@ const ja = {
     follow_import: 'フォローインポート',
     import_followers_from_a_csv_file: 'CSVファイルからフォローをインポートする。',
     follows_imported: 'フォローがインポートされました！ すこしじかんがかかるかもしれません。',
-    follow_import_error: 'フォローのインポートがエラーになりました。'
+    follow_import_error: 'フォローのインポートがエラーになりました。',
+    delete_account: 'アカウントをけす',
+    delete_account_description: 'あなたのアカウントとメッセージが、きえます。',
+    delete_account_instructions: 'ほんとうにアカウントをけしてもいいなら、パスワードをかいてください。',
+    delete_account_error: 'アカウントをけすことが、できなかったかもしれません。インスタンスのかんりしゃに、れんらくしてください。',
+    follow_export: 'フォローのエクスポート',
+    follow_export_processing: 'おまちください。まもなくファイルをダウンロードできます。',
+    follow_export_button: 'エクスポート',
+    change_password: 'パスワードをかえる',
+    current_password: 'いまのパスワード',
+    new_password: 'あたらしいパスワード',
+    confirm_new_password: 'あたらしいパスワードのかくにん',
+    changed_password: 'パスワードが、かわりました！',
+    change_password_error: 'パスワードをかえることが、できなかったかもしれません。',
+    lock_account_description: 'あなたがみとめたひとだけ、あなたのアカウントをフォローできます。'
   },
   notifications: {
     notifications: 'つうち',
@@ -860,7 +878,17 @@ const ja = {
   },
   post_status: {
     posting: 'とうこう',
-    default: 'はねだくうこうに、つきました。'
+    content_warning: 'せつめい (かかなくてもよい)',
+    default: 'はねだくうこうに、つきました。',
+    account_not_locked_warning: 'あなたのアカウントは {0} ではありません。あなたをフォローすれば、だれでも、フォロワーげんていのステータスをよむことができます。',
+    account_not_locked_warning_link: 'ロックされたアカウント',
+    direct_warning: 'このステータスは、メンションされたユーザーだけが、よむことができます。',
+    scope: {
+      public: 'パブリック - パブリックタイムラインにとどきます。',
+      unlisted: 'アンリステッド - パブリックタイムラインにとどきません。',
+      private: 'フォロワーげんてい - フォロワーのみにとどきます。',
+      direct: 'ダイレクト - メンションされたユーザーのみにとどきます。'
+    }
   },
   finder: {
     find_user: 'ユーザーをさがす',

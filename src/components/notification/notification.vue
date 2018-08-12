@@ -10,7 +10,8 @@
       </div>
       <span class="notification-details">
         <div class="name-and-action">
-          <span class="username" :title="'@'+notification.action.user.screen_name">{{ notification.action.user.name }}</span>
+          <span class="username" v-if="!!notification.action.user.name_html" :title="'@'+notification.action.user.screen_name" v-html="notification.action.user.name_html"></span>
+          <span class="username" v-else :title="'@'+notification.action.user.screen_name">{{ notification.action.user.name }}</span>
           <span v-if="notification.type === 'favorite'">
             <i class="fa icon-star lit"></i>
             <small>{{$t('notifications.favorited_you')}}</small>

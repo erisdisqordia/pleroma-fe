@@ -296,10 +296,10 @@ describe('The Statuses module', () => {
 
       mutations.addNewStatuses(state, { statuses: [retweet], user })
 
-      expect(state.notifications.length).to.eql(1)
-      expect(state.notifications[0].status).to.eql(retweet)
-      expect(state.notifications[0].action).to.eql(retweet)
-      expect(state.notifications[0].type).to.eql('repeat')
+      expect(state.notifications.data.length).to.eql(1)
+      expect(state.notifications.data[0].status).to.eql(retweet)
+      expect(state.notifications.data[0].action).to.eql(retweet)
+      expect(state.notifications.data[0].type).to.eql('repeat')
     })
 
     it('adds a notification when you are mentioned', () => {
@@ -311,13 +311,13 @@ describe('The Statuses module', () => {
 
       mutations.addNewStatuses(state, { statuses: [status], user })
 
-      expect(state.notifications.length).to.eql(0)
+      expect(state.notifications.data.length).to.eql(0)
 
       mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })
-      expect(state.notifications.length).to.eql(1)
-      expect(state.notifications[0].status).to.eql(mentionedStatus)
-      expect(state.notifications[0].action).to.eql(mentionedStatus)
-      expect(state.notifications[0].type).to.eql('mention')
+      expect(state.notifications.data.length).to.eql(1)
+      expect(state.notifications.data[0].status).to.eql(mentionedStatus)
+      expect(state.notifications.data[0].action).to.eql(mentionedStatus)
+      expect(state.notifications.data[0].type).to.eql('mention')
     })
 
     it('removes a notification when the notice gets removed', () => {
@@ -336,18 +336,18 @@ describe('The Statuses module', () => {
 
       mutations.addNewStatuses(state, { statuses: [status, otherStatus], user })
 
-      expect(state.notifications.length).to.eql(1)
+      expect(state.notifications.data.length).to.eql(1)
 
       mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })
       expect(state.allStatuses.length).to.eql(3)
-      expect(state.notifications.length).to.eql(2)
-      expect(state.notifications[1].status).to.eql(mentionedStatus)
-      expect(state.notifications[1].action).to.eql(mentionedStatus)
-      expect(state.notifications[1].type).to.eql('mention')
+      expect(state.notifications.data.length).to.eql(2)
+      expect(state.notifications.data[1].status).to.eql(mentionedStatus)
+      expect(state.notifications.data[1].action).to.eql(mentionedStatus)
+      expect(state.notifications.data[1].type).to.eql('mention')
 
       mutations.addNewStatuses(state, { statuses: [deletion], user })
       expect(state.allStatuses.length).to.eql(2)
-      expect(state.notifications.length).to.eql(1)
+      expect(state.notifications.data.length).to.eql(1)
     })
 
     it('adds the message to mentions when you are mentioned', () => {
@@ -384,7 +384,7 @@ describe('The Statuses module', () => {
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public', user })
       mutations.addNewStatuses(state, { statuses: [favorite], showImmediately: true, timeline: 'public', user })
 
-      expect(state.notifications).to.have.length(1)
+      expect(state.notifications.data).to.have.length(1)
     })
 
     it('adds a notification when the user is followed', () => {
@@ -402,7 +402,7 @@ describe('The Statuses module', () => {
 
       mutations.addNewStatuses(state, { statuses: [follow], showImmediately: true, timeline: 'public', user })
 
-      expect(state.notifications).to.have.length(1)
+      expect(state.notifications.data).to.have.length(1)
     })
 
     it('does not add a notification when an other user is followed', () => {
@@ -420,7 +420,7 @@ describe('The Statuses module', () => {
 
       mutations.addNewStatuses(state, { statuses: [follow], showImmediately: true, timeline: 'public', user })
 
-      expect(state.notifications).to.have.length(0)
+      expect(state.notifications.data).to.have.length(0)
     })
   })
 })

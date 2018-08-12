@@ -53,7 +53,8 @@ const persistedStateOptions = {
     'config.streaming',
     'config.muteWords',
     'config.customTheme',
-    'users.lastLoginName'
+    'users.lastLoginName',
+    'statuses.notifications.maxSavedId'
   ]
 }
 

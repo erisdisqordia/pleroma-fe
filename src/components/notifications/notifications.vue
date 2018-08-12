@@ -11,6 +11,12 @@
           <notification :notification="notification"></notification>
         </div>
       </div>
+      <div class="panel-footer">
+        <a href="#" v-on:click.prevent='fetchOlderNotifications()' v-if="!notifications.loading">
+          <div class="new-status-notification text-center panel-footer">{{$t('notifications.load_older')}}</div>
+        </a>
+        <div class="new-status-notification text-center panel-footer" v-else>...</div>
+      </div>
     </div>
   </div>
 </template>

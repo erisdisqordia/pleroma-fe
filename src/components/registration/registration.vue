@@ -38,6 +38,10 @@
               <input :disabled="registering" v-model='user.captcha' placeholder='Enter captcha' type='test' class='form-control' id='captcha'>
             </div>
             -->
+            <div class='form-group' v-if='token' >
+              <label for='token'>{{$t('registration.token')}}</label>
+              <input disabled='true' v-model='token' class='form-control' id='token' type='text'>
+            </div>
             <div class='form-group'>
               <button :disabled="registering" type='submit' class='btn btn-default'>{{$t('general.submit')}}</button>
             </div>

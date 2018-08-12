@@ -159,6 +159,7 @@ const updateProfile = ({credentials, params}) => {
 // bio
 // homepage
 // location
+// token
 const register = (params) => {
   const form = new FormData()
 

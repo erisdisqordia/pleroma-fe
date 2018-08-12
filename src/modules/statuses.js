@@ -268,7 +268,7 @@ const addNewNotifications = (state, { notifications, older }) => {
       state.notifications.minId = Math.min(notification.id, state.notifications.minId)
 
       console.log(notification)
-      const fresh = !older && !notification.is_seen && notification.id >= state.notifications.maxSavedId
+      const fresh = !older && !notification.is_seen && notification.id > state.notifications.maxSavedId
       const status = notification.ntype === 'like'
             ? find(allStatuses, { id: action.in_reply_to_status_id })
             : action

@@ -8,7 +8,7 @@
       </div>
     </template>
     <template v-else>
-      <div v-if="retweet && !noHeading" class="media container retweet-info">
+      <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
         <StillImage v-if="retweet" class='avatar' :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div class="media status">
+      <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <a :href="status.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
             <StillImage class='avatar' :class="{'avatar-compact': compact}"  :src="status.user.profile_image_url_original"/>
@@ -317,7 +317,7 @@
 
   .retweet-info {
     padding: 0.4em 0.6em 0 0.6em;
-    margin: 0 0 -0.5em 0;
+    margin: 0;
     .avatar {
       border-radius: $fallback--avatarAltRadius;
       border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
@@ -429,6 +429,9 @@
 .status {
   display: flex;
   padding: 0.6em;
+  &.is-retweet {
+    padding-top: 0.1em;
+  }
 }
 
 .status-conversation:last-child {

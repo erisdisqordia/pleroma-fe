@@ -53,6 +53,7 @@ const persistedStateOptions = {
     'config.streaming',
     'config.muteWords',
     'config.customTheme',
+    'config.highlight',
     'users.lastLoginName'
   ]
 }

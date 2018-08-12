@@ -1,4 +1,4 @@
-import { set } from 'vue'
+import { set, delete as del } from 'vue'
 import StyleSetter from '../services/style_setter/style_setter.js'
 
 const defaultState = {
@@ -10,7 +10,8 @@ const defaultState = {
   autoLoad: true,
   streaming: false,
   hoverPreview: true,
-  muteWords: []
+  muteWords: [],
+  highlight: {}
 }
 
 const config = {
@@ -18,11 +19,22 @@ const config = {
   mutations: {
     setOption (state, { name, value }) {
       set(state, name, value)
+    },
+    setHighlight (state, { user, color, type }) {
+      const data = this.state.config.highlight[user]
+      if (color || type) {
+        set(state.highlight, user, { color: color || data.color, type: type || data.type })
+      } else {
+        del(state.highlight, user)
+      }
     }
   },
   actions: {
     setPageTitle ({state}, option = '') {
       document.title = `${option} ${state.name}`
+    },
+    setHighlight ({ commit, dispatch }, { user, color, type }) {
+      commit('setHighlight', {user, color, type})
     },
     setOption ({ commit, dispatch }, { name, value }) {
       commit('setOption', {name, value})

@@ -1,9 +1,9 @@
 <template>
-  <div v-if="loggedIn">
+  <div v-if="loggedIn && visibility !== 'private' && visibility !== 'direct'">
     <i :class='classes' class='icon-retweet rt-active' v-on:click.prevent='retweet()'></i>
     <span v-if='status.repeat_num > 0'>{{status.repeat_num}}</span>
   </div>
-  <div v-else>
+  <div v-else-if="!loggedIn">
     <i :class='classes' class='icon-retweet'></i>
     <span v-if='status.repeat_num > 0'>{{status.repeat_num}}</span>
   </div>

@@ -227,10 +227,12 @@
 
       .user-name {
         margin-right: 0.2em;
+
         img {
           width: 14px;
           height: 14px;
-          vertical-align: middle
+          vertical-align: middle;
+          object-fit: contain
         }
       }
     }
@@ -351,10 +353,12 @@
 
       .user-name {
         font-weight: bold;
+
         img {
           width: 14px;
           height: 14px;
           vertical-align: middle;
+          object-fit: contain
         }
       }
 

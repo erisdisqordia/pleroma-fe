@@ -10,6 +10,7 @@ const settings = {
       muteWordsString: this.$store.state.config.muteWords.join('\n'),
       autoLoadLocal: this.$store.state.config.autoLoad,
       streamingLocal: this.$store.state.config.streaming,
+      pauseOnUnfocused: this.$store.state.config.pauseOnUnfocused,
       hoverPreviewLocal: this.$store.state.config.hoverPreview,
       stopGifs: this.$store.state.config.stopGifs
     }
@@ -37,6 +38,9 @@ const settings = {
     },
     streamingLocal (value) {
       this.$store.dispatch('setOption', { name: 'streaming', value })
+    },
+    pauseOnUnfocusedLocal (value) {
+      this.$store.dispatch('setOption', { name: 'pauseOnUnfocused', value })
     },
     hoverPreviewLocal (value) {
       this.$store.dispatch('setOption', { name: 'hoverPreview', value })

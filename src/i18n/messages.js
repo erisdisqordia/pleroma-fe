@@ -314,6 +314,7 @@ const en = {
     stop_gifs: 'Play-on-hover GIFs',
     autoload: 'Enable automatic loading when scrolled to the bottom',
     streaming: 'Enable automatic streaming of new posts when scrolled to the top',
+    pauseOnUnfocused: 'Pause streaming when tab is not focused',
     reply_link_preview: 'Enable reply-link preview on mouse hover',
     follow_import: 'Follow import',
     import_followers_from_a_csv_file: 'Import follows from a csv file',

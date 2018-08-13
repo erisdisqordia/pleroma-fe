@@ -45,15 +45,7 @@ Vue.use(VueChatScroll)
 
 const persistedStateOptions = {
   paths: [
-    'config.hideAttachments',
-    'config.hideAttachmentsInConv',
-    'config.hideNsfw',
-    'config.autoLoad',
-    'config.hoverPreview',
-    'config.streaming',
-    'config.muteWords',
-    'config.customTheme',
-    'config.highlight',
+    'config',
     'users.lastLoginName'
   ]
 }

@@ -2,7 +2,7 @@
   <div v-if="size==='hide'">
     <a class="placeholder" v-if="type !== 'html'" target="_blank" :href="attachment.url">[{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]</a>
   </div>
-  <div v-else class="attachment" :class="{[type]: true, loading, 'small-attachment': isSmall, 'fullwidth': fullwidth}" v-show="!isEmpty">
+  <div v-else class="attachment" :class="{[type]: true, loading, 'small-attachment': isSmall, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}" v-show="!isEmpty">
     <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"/>
     </a>
@@ -48,6 +48,10 @@
 
   .placeholder {
     margin-right: 0.5em;
+  }
+
+  .nsfw-placeholder {
+    cursor: pointer;
   }
 
   .small-attachment {

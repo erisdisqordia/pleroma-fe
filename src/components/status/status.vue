@@ -200,7 +200,7 @@
 
   .media-heading {
     flex-wrap: nowrap;
-    line-height: 16px;
+    line-height: 18px;
   }
 
   .media-heading-left {
@@ -226,7 +226,7 @@
       align-items: baseline;
 
       .user-name {
-        margin-right: 0.2em;
+        margin-right: .45em;
 
         img {
           width: 14px;
@@ -266,6 +266,7 @@
     flex-shrink: 0;
     flex-wrap: nowrap;
     margin-left: .25em;
+    align-self: baseline;
 
     .timeago {
       margin-right: 0.2em;
@@ -275,6 +276,10 @@
 
     > * {
       margin-left: 0.2em;
+    }
+    a:hover i {
+      color: $fallback--fg;
+      color: var(--fg, $fallback--fg);
     }
   }
 

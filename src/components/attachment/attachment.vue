@@ -38,7 +38,6 @@
 .attachments {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -0.7em;
 
   .attachment.media-upload-container {
     flex: 0 0 auto;

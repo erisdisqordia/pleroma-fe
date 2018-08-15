@@ -22,7 +22,7 @@
           <ul class="setting-list suboptions" :class="[{disabled: !streamingLocal}]">
             <li>
               <input :disabled="!streamingLocal" type="checkbox" id="pauseOnUnfocused" v-model="pauseOnUnfocusedLocal">
-              <label for="pauseOnUnfocused">{{$t('settings.pauseOnUnfocused')}}</label>
+              <label for="pauseOnUnfocused">{{$t('settings.pause_on_unfocused')}}</label>
             </li>
           </ul>
         </li>
@@ -55,6 +55,19 @@
           <input type="checkbox" id="stopGifs" v-model="stopGifs">
           <label for="stopGifs">{{$t('settings.stop_gifs')}}</label>
         </li>
+        <li>
+          <input type="checkbox" id="loopVideo" v-model="loopVideoLocal">
+          <label for="loopVideo">{{$t('settings.loop_video')}}</label>
+          <ul class="setting-list suboptions" :class="[{disabled: !streamingLocal}]">
+            <li>
+              <input :disabled="!loopVideoLocal || !loopSilentAvailable" type="checkbox" id="loopVideoSilentOnly" v-model="loopVideoSilentOnlyLocal">
+              <label for="loopVideoSilentOnly">{{$t('settings.loop_video_silent_only')}}</label>
+              <div v-if="!loopSilentAvailable" class="unavailable">
+                <i class="icon-globe"/>! {{$t('settings.limited_availability')}}
+              </div>
+            </li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
@@ -76,6 +89,12 @@
   textarea {
     width: 100%;
     height: 100px;
+  }
+
+  .unavailable,
+  .unavailable i {
+    color: var(--cRed, $fallback--cRed);
+    color: $fallback--cRed;
   }
 
   .old-avatar {

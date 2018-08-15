@@ -314,7 +314,9 @@ const en = {
     stop_gifs: 'Play-on-hover GIFs',
     autoload: 'Enable automatic loading when scrolled to the bottom',
     streaming: 'Enable automatic streaming of new posts when scrolled to the top',
-    pauseOnUnfocused: 'Pause streaming when tab is not focused',
+    pause_on_unfocused: 'Pause streaming when tab is not focused',
+    loop_video: 'Loop videos',
+    loop_video_silent_only: 'Loop only videos without sound (i.e. Mastodon\'s "gifs")',
     reply_link_preview: 'Enable reply-link preview on mouse hover',
     follow_import: 'Follow import',
     import_followers_from_a_csv_file: 'Import follows from a csv file',
@@ -333,7 +335,8 @@ const en = {
     confirm_new_password: 'Confirm new password',
     changed_password: 'Password changed successfully!',
     change_password_error: 'There was an issue changing your password.',
-    lock_account_description: 'Restrict your account to approved followers only'
+    lock_account_description: 'Restrict your account to approved followers only',
+    limited_availability: 'Unavailable in your browser'
   },
   notifications: {
     notifications: 'Notifications',
@@ -1606,6 +1609,9 @@ const ru = {
     nsfw_clickthrough: 'Включить скрытие NSFW вложений',
     autoload: 'Включить автоматическую загрузку при прокрутке вниз',
     streaming: 'Включить автоматическую загрузку новых сообщений при прокрутке вверх',
+    pause_on_unfocused: 'Приостановить загрузку когда вкладка не в фокусе',
+    loop_video: 'Зациливать видео',
+    loop_video_silent_only: 'Зацикливать только беззвучные видео (т.е. "гифки" с Mastodon)',
     reply_link_preview: 'Включить предварительный просмотр ответа при наведении мыши',
     follow_import: 'Импортировать читаемых',
     import_followers_from_a_csv_file: 'Импортировать читаемых из файла .csv',
@@ -1623,7 +1629,8 @@ const ru = {
     new_password: 'Новый пароль',
     confirm_new_password: 'Подтверждение нового пароля',
     changed_password: 'Пароль изменён успешно.',
-    change_password_error: 'Произошла ошибка при попытке изменить пароль.'
+    change_password_error: 'Произошла ошибка при попытке изменить пароль.',
+    limited_availability: 'Не доступно в вашем браузере'
   },
   notifications: {
     notifications: 'Уведомления',

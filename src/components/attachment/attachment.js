@@ -13,6 +13,7 @@ const Attachment = {
     return {
       nsfwImage,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
+      loopVideo: this.$store.state.config.loopVideo,
       showHidden: false,
       loading: false,
       img: this.type === 'image' && document.createElement('img')
@@ -58,6 +59,23 @@ const Attachment = {
         }
       } else {
         this.showHidden = !this.showHidden
+      }
+    },
+    onVideoDataLoad (e) {
+      if (typeof e.srcElement.webkitAudioDecodedByteCount !== 'undefined') {
+        // non-zero if video has audio track
+        if (e.srcElement.webkitAudioDecodedByteCount > 0) {
+          this.loopVideo = this.loopVideo && !this.$store.state.config.loopVideoSilentOnly
+        }
+      } else if (typeof e.srcElement.mozHasAudio !== 'undefined') {
+        // true if video has audio track
+        if (e.srcElement.mozHasAudio) {
+          this.loopVideo = this.loopVideo && !this.$store.state.config.loopVideoSilentOnly
+        }
+      } else if (typeof e.srcElement.audioTracks !== 'undefined') {
+        if (e.srcElement.audioTracks.length > 0) {
+          this.loopVideo = this.loopVideo && !this.$store.state.config.loopVideoSilentOnly
+        }
       }
     }
   }

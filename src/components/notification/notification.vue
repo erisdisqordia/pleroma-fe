@@ -29,10 +29,12 @@
       <div class="follow-text" v-if="notification.type === 'follow'">
         <router-link :to="{ name: 'user-profile', params: { id: notification.action.user.id } }">@{{notification.action.user.screen_name}}</router-link>
       </div>
-      <status v-if="notification.status" v-else class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>
-      <div v-if="!notification.status">
-        Favorite for missing post
-      </div>
+      <template v-else>
+        <status v-if="notification.status"  class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>
+        <div class="broken-favorite" v-else>
+          {{$t('notifications.broken_favorite')}}
+        </div>
+      </template>
     </div>
   </div>
 </template>

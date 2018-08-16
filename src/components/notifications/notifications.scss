@@ -58,6 +58,16 @@
   border-bottom-color: inherit;
   padding-left: 4px;
 
+  .broken-favorite {
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+    background-color: $fallback--cAlertRed;
+    background-color: var(--cAlertRed, $fallback--cAlertRed);
+    padding: 2px .5em
+  }
+
   .avatar-compact {
     width: 32px;
     height: 32px;

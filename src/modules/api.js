@@ -47,7 +47,6 @@ const api = {
       }
     },
     fetchOldPost (store, { postId }) {
-      console.log(store)
       store.state.backendInteractor.fetchOldPost({ store, postId })
     },
     stopFetching (store, timeline) {

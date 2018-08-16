@@ -301,8 +301,28 @@ describe('The Statuses module', () => {
       deletion.uri = 'xxx'
 
       mutations.addNewStatuses(state, { statuses: [status, otherStatus], user })
+      mutations.addNewNotifications(
+        state,
+        {
+          notifications: [{
+            ntype: 'mention',
+            status: otherStatus,
+            notice: otherStatus,
+            is_seen: false
+          }]
+        })
 
       expect(state.notifications.data.length).to.eql(1)
+      mutations.addNewNotifications(
+        state,
+        {
+          notifications: [{
+            ntype: 'mention',
+            status: mentionedStatus,
+            notice: mentionedStatus,
+            is_seen: false
+          }]
+        })
 
       mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })
       expect(state.allStatuses.length).to.eql(3)

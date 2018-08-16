@@ -60,7 +60,7 @@ const backendInteractorService = (credentials) => {
       credentials,
       timeline: 'own',
       older: true,
-      until: postId
+      until: postId + 1
     })
   }
 

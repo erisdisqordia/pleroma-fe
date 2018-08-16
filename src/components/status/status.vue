@@ -8,16 +8,17 @@
       </div>
     </template>
     <template v-else>
-      <div v-if="retweet && !noHeading" class="media container retweet-info">
+      <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
         <StillImage v-if="retweet" class='avatar' :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
-          <a :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
+          <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
+          <a v-else :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
           <i class='fa icon-retweet retweeted'></i>
           {{$t('timeline.repeated')}}
         </div>
       </div>
 
-      <div class="media status">
+      <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <a :href="status.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
             <StillImage class='avatar' :class="{'avatar-compact': compact}"  :src="status.user.profile_image_url_original"/>
@@ -30,7 +31,8 @@
           <div v-if="!noHeading" class="media-body container media-heading">
             <div class="media-heading-left">
               <div class="name-and-links">
-                <h4 class="user-name">{{status.user.name}}</h4>
+                <h4 class="user-name" v-if="status.user.name_html" v-html="status.user.name_html"></h4>
+                <h4 class="user-name" v-else>{{status.user.name}}</h4>
                 <span class="links">
                   <router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link>
                   <span v-if="status.in_reply_to_screen_name" class="faint reply-info">
@@ -88,7 +90,7 @@
                 <i class="icon-reply" :class="{'icon-reply-active': replying}"></i>
               </a>
             </div>
-            <retweet-button :loggedIn='loggedIn' :status='status'></retweet-button>
+            <retweet-button :visibility='status.visibility' :loggedIn='loggedIn' :status='status'></retweet-button>
             <favorite-button :loggedIn='loggedIn' :status='status'></favorite-button>
             <delete-button :status='status'></delete-button>
           </div>
@@ -315,7 +317,7 @@
 
   .retweet-info {
     padding: 0.4em 0.6em 0 0.6em;
-    margin: 0 0 -0.5em 0;
+    margin: 0;
     .avatar {
       border-radius: $fallback--avatarAltRadius;
       border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
@@ -427,6 +429,9 @@
 .status {
   display: flex;
   padding: 0.6em;
+  &.is-retweet {
+    padding-top: 0.1em;
+  }
 }
 
 .status-conversation:last-child {

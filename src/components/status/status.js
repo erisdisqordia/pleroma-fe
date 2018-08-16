@@ -6,6 +6,7 @@ import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
 import StillImage from '../still-image/still-image.vue'
 import { filter, find } from 'lodash'
+import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 
 const Status = {
   name: 'Status',
@@ -34,12 +35,32 @@ const Status = {
     muteWords () {
       return this.$store.state.config.muteWords
     },
+    repeaterClass () {
+      const user = this.statusoid.user
+      return highlightClass(user)
+    },
+    userClass () {
+      const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
+      return highlightClass(user)
+    },
+    repeaterStyle () {
+      const user = this.statusoid.user
+      const highlight = this.$store.state.config.highlight
+      return highlightStyle(highlight[user.screen_name])
+    },
+    userStyle () {
+      if (this.noHeading) return
+      const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
+      const highlight = this.$store.state.config.highlight
+      return highlightStyle(highlight[user.screen_name])
+    },
     hideAttachments () {
       return (this.$store.state.config.hideAttachments && !this.inConversation) ||
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
     },
     retweet () { return !!this.statusoid.retweeted_status },
     retweeter () { return this.statusoid.user.name },
+    retweeterHtml () { return this.statusoid.user.name_html },
     status () {
       if (this.retweet) {
         return this.statusoid.retweeted_status

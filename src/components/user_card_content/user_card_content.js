@@ -9,11 +9,6 @@ export default {
       if (color) {
         const rgb = hex2rgb(color)
         const tintColor = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .5)`
-        console.log(rgb)
-        console.log([
-          `url(${this.user.cover_photo})`,
-          `linear-gradient(to bottom, ${tintColor}, ${tintColor})`
-        ].join(', '))
         return {
           backgroundColor: `rgb(${Math.floor(rgb.r * 0.53)}, ${Math.floor(rgb.g * 0.56)}, ${Math.floor(rgb.b * 0.59)})`,
           backgroundImage: [
@@ -37,6 +32,29 @@ export default {
     dailyAvg () {
       const days = Math.ceil((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
       return Math.round(this.user.statuses_count / days)
+    },
+    userHighlightType: {
+      get () {
+        const data = this.$store.state.config.highlight[this.user.screen_name]
+        return data && data.type || 'disabled'
+      },
+      set (type) {
+        const data = this.$store.state.config.highlight[this.user.screen_name]
+        if (type !== 'disabled') {
+          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: data && data.color || '#FFFFFF', type })
+        } else {
+          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: undefined })
+        }
+      }
+    },
+    userHighlightColor: {
+      get () {
+        const data = this.$store.state.config.highlight[this.user.screen_name]
+        return data && data.color
+      },
+      set (color) {
+        this.$store.dispatch('setHighlight', { user: this.user.screen_name, color })
+      }
     }
   },
   components: {

@@ -53,6 +53,7 @@ const persistedStateOptions = {
     'config.streaming',
     'config.muteWords',
     'config.customTheme',
+    'config.highlight',
     'users.lastLoginName',
     'statuses.notifications.maxSavedId'
   ]
@@ -80,11 +81,12 @@ const i18n = new VueI18n({
 window.fetch('/api/statusnet/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {name, closed: registrationClosed, textlimit} = data.site
+    const {name, closed: registrationClosed, textlimit, server} = data.site
 
     store.dispatch('setOption', { name: 'name', value: name })
     store.dispatch('setOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
     store.dispatch('setOption', { name: 'textlimit', value: parseInt(textlimit) })
+    store.dispatch('setOption', { name: 'server', value: server })
   })
 
 window.fetch('/static/config.json')
@@ -120,6 +122,7 @@ window.fetch('/static/config.json')
       { name: 'mentions', path: '/:username/mentions', component: Mentions },
       { name: 'settings', path: '/settings', component: Settings },
       { name: 'registration', path: '/registration', component: Registration },
+      { name: 'registration', path: '/registration/:token', component: Registration },
       { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
       { name: 'user-settings', path: '/user-settings', component: UserSettings }
     ]
@@ -183,4 +186,3 @@ window.fetch('/instance/panel.html')
   .then((html) => {
     store.dispatch('setOption', { name: 'instanceSpecificPanelContent', value: html })
   })
-

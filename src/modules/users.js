@@ -42,6 +42,10 @@ export const mutations = {
   },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
+  },
+  setColor (state, { user: {id}, highlighted }) {
+    const user = state.usersObject[id]
+    set(user, 'highlight', highlighted)
   }
 }
 

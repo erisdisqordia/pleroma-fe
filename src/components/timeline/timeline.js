@@ -13,7 +13,8 @@ const Timeline = {
   ],
   data () {
     return {
-      paused: false
+      paused: false,
+      unfocused: false
     }
   },
   computed: {
@@ -65,8 +66,15 @@ const Timeline = {
       this.fetchFollowers()
     }
   },
+  mounted () {
+    if (typeof document.hidden !== 'undefined') {
+      document.addEventListener('visibilitychange', this.handleVisibilityChange, false)
+      this.unfocused = document.hidden
+    }
+  },
   destroyed () {
     window.removeEventListener('scroll', this.scrollLoad)
+    if (typeof document.hidden !== 'undefined') document.removeEventListener('visibilitychange', this.handleVisibilityChange, false)
     this.$store.commit('setLoading', { timeline: this.timelineName, value: false })
   },
   methods: {
@@ -113,6 +121,9 @@ const Timeline = {
           (window.innerHeight + window.pageYOffset) >= (height - 750)) {
         this.fetchOlderStatuses()
       }
+    },
+    handleVisibilityChange () {
+      this.unfocused = document.hidden
     }
   },
   watch: {
@@ -122,7 +133,7 @@ const Timeline = {
       }
       if (count > 0) {
         // only 'stream' them when you're scrolled to the top
-        if (window.pageYOffset < 15 && !this.paused) {
+        if (window.pageYOffset < 15 && !this.paused && !this.unfocused) {
           this.showNewStatuses()
         } else {
           this.paused = true

@@ -1,29 +1,46 @@
 <template>
-  <div id="heading" class="profile-panel-background" :style="headingStyle">
-    <div class="panel-heading text-center">
-      <div class='user-info'>
-        <router-link to='/user-settings' style="float: right; margin-top:16px;" v-if="!isOtherUser">
-          <i class="icon-cog usersettings"></i>
+<div id="heading" class="profile-panel-background" :style="headingStyle">
+  <div class="panel-heading text-center">
+    <div class='user-info'>
+      <router-link to='/user-settings' style="float: right; margin-top:16px;" v-if="!isOtherUser">
+        <i class="icon-cog usersettings"></i>
+      </router-link>
+      <a :href="user.statusnet_profile_url" target="_blank" class="floater" v-if="isOtherUser">
+        <i class="icon-link-ext usersettings"></i>
+      </a>
+      <div class='container'>
+        <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
+          <StillImage class="avatar" :src="user.profile_image_url_original"/>
         </router-link>
-        <a :href="user.statusnet_profile_url" target="_blank" style="float: right; margin-top:16px;" v-if="isOtherUser">
-          <i class="icon-link-ext usersettings"></i>
-        </a>
-        <div class='container'>
-          <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
-            <StillImage class="avatar" :src="user.profile_image_url_original"/>
+        <div class="name-and-screen-name">
+          <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
+          <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
+          <router-link class='user-screen-name':to="{ name: 'user-profile', params: { id: user.id } }">
+            <span>@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
+            <span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>
-          <div class="name-and-screen-name">
-            <div :title="user.name" class='user-name'>{{user.name}}</div>
-            <router-link class='user-screen-name':to="{ name: 'user-profile', params: { id: user.id } }">
-              <span>@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
-              <span class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
-            </router-link>
-          </div>
         </div>
-        <div v-if="isOtherUser" class="user-interactions">
-          <div v-if="user.follows_you && loggedIn" class="following">
-            {{ $t('user_card.follows_you') }}
-          </div>
+      </div>
+      <div class="user-meta">
+        <div v-if="user.follows_you && loggedIn && isOtherUser" class="following">
+          {{ $t('user_card.follows_you') }}
+        </div>
+        <div class="floater" v-if="switcher || isOtherUser">
+          <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
+          <input class="userHighlightText" type="text" :id="'userHighlightColorTx'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
+          <input class="userHighlightCl" type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
+          <label for="style-switcher" class='userHighlightSel select'>
+            <select class="userHighlightSel" :id="'userHighlightSel'+user.id" v-model="userHighlightType">
+              <option value="disabled">No highlight</option>
+              <option value="solid">Solid bg</option>
+              <option value="striped">Striped bg</option>
+              <option value="side">Side stripe</option>
+            </select>
+            <i class="icon-down-open"/>
+          </label>
+        </div>
+      </div>
+      <div v-if="isOtherUser" class="user-interactions">
           <div class="follow" v-if="loggedIn">
             <span v-if="user.following">
               <!--Following them!-->
@@ -88,7 +105,8 @@
           <span>{{user.followers_count}}</span>
         </div>
       </div>
-      <p v-if="!hideBio">{{user.description}}</p>
+      <p v-if="!hideBio && user.description_html" v-html="user.description_html"></p>
+      <p v-else-if="!hideBio">{{ user.description }}</p>
     </div>
   </div>
 </template>
@@ -179,6 +197,27 @@
     padding-right: 0.1em;
   }
 
+  .user-meta {
+    margin-bottom: .4em;
+
+    .following {
+      font-size: 14px;
+      flex: 0 0 100%;
+      margin: 0;
+      padding-left: 16px;
+      text-align: left;
+      float: left;
+    }
+    .floater {
+      margin: 0;
+    }
+
+    &::after {
+      display: block;
+      content: '';
+      clear: both;
+    }
+  }
   .user-interactions {
     display: flex;
     flex-flow: row wrap;
@@ -186,14 +225,6 @@
 
     div {
       flex: 1;
-    }
-
-    .following {
-      font-size: 14px;
-      flex: 0 0 100%;
-      margin: 0 0 .4em 0;
-      padding-left: 16px;
-      text-align: left;
     }
 
     .mute {
@@ -277,5 +308,34 @@
   margin-left: 1em;
   font-size: 0.7em;
   color: #CCC;
+}
+.floater {
+  float: right;
+  margin-top: 16px;
+
+  .userHighlightCl {
+    padding: 2px 10px;
+  }
+  .userHighlightSel,
+  .userHighlightSel.select {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .userHighlightSel.select i {
+    line-height: 22px;
+  }
+
+  .userHighlightText {
+    width: 70px;
+  }
+
+  .userHighlightCl,
+  .userHighlightText,
+  .userHighlightSel,
+  .userHighlightSel.select {
+    height: 22px;
+    vertical-align: top;
+    margin-right: 0
+  }
 }
 </style>

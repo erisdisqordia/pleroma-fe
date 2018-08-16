@@ -31,6 +31,10 @@ const PostStatusForm = {
   },
   mounted () {
     this.resize(this.$refs.textarea)
+
+    if (this.replyTo) {
+      this.$refs.textarea.focus()
+    }
   },
   data () {
     const preset = this.$route.query.message
@@ -87,11 +91,11 @@ const PostStatusForm = {
           return false
         }
         return map(take(matchedEmoji, 5), ({shortcode, image_url, utf}, index) => ({
-          // eslint-disable-next-line camelcase
           screen_name: `:${shortcode}:`,
           name: '',
           utf: utf || '',
-          img: image_url,
+          // eslint-disable-next-line camelcase
+          img: utf ? '' : this.$store.state.config.server + image_url,
           highlighted: index === this.highlighted
         }))
       } else {

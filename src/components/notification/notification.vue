@@ -1,6 +1,6 @@
 <template>
   <status v-if="notification.type === 'mention'" :compact="true" :statusoid="notification.status"></status>
-  <div class="non-mention" v-else>
+  <div class="non-mention" :class="[userClass, { highlighted: userStyle }]" :style="[ userStyle ]"v-else>
     <a class='avatar-container' :href="notification.action.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
       <StillImage class='avatar-compact' :src="notification.action.user.profile_image_url_original"/>
     </a>
@@ -10,7 +10,8 @@
       </div>
       <span class="notification-details">
         <div class="name-and-action">
-          <span class="username" :title="'@'+notification.action.user.screen_name">{{ notification.action.user.name }}</span>
+          <span class="username" v-if="!!notification.action.user.name_html" :title="'@'+notification.action.user.screen_name" v-html="notification.action.user.name_html"></span>
+          <span class="username" v-else :title="'@'+notification.action.user.screen_name">{{ notification.action.user.name }}</span>
           <span v-if="notification.type === 'like'">
             <i class="fa icon-star lit"></i>
             <small>{{$t('notifications.favorited_you')}}</small>

@@ -168,6 +168,13 @@ input, textarea, .select {
   }
 }
 
+option {
+  color: $fallback--fg;
+  color: var(--fg, $fallback--fg);
+  background-color: $fallback--bg;
+  background-color: var(--bg, $fallback--bg);
+}
+
 i[class*=icon-] {
   color: $fallback--icon;
   color: var(--icon, $fallback--icon)

@@ -3,7 +3,10 @@
     <div>{{$t('settings.presets')}}
       <label for="style-switcher" class='select'>
         <select id="style-switcher" v-model="selected" class="style-switcher">
-          <option v-for="style in availableStyles" :value="style">{{style[0]}}</option>
+          <option v-for="style in availableStyles" :value="style" :style="{
+                  backgroundColor: style[1],
+                  color: style[3]
+                  }">{{style[0]}}</option>
         </select>
         <i class="icon-down-open"/>
       </label>

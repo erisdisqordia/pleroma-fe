@@ -14,13 +14,13 @@ const update = ({store, statuses, timeline, showImmediately}) => {
   })
 }
 
-const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false, showImmediately = false, userId = false, tag = false}) => {
+const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false, showImmediately = false, userId = false, tag = false, until}) => {
   const args = { timeline, credentials }
   const rootState = store.rootState || store.state
   const timelineData = rootState.statuses.timelines[camelCase(timeline)]
 
   if (older) {
-    args['until'] = timelineData.minVisibleId
+    args['until'] = until || timelineData.minVisibleId
   } else {
     args['since'] = timelineData.maxId
   }

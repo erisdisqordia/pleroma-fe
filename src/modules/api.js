@@ -46,6 +46,10 @@ const api = {
         store.commit('addFetcher', {timeline, fetcher})
       }
     },
+    fetchOldPost (store, { postId }) {
+      console.log(store)
+      store.state.backendInteractor.fetchOldPost({ store, postId })
+    },
     stopFetching (store, timeline) {
       const fetcher = store.state.fetchers[timeline]
       window.clearInterval(fetcher)

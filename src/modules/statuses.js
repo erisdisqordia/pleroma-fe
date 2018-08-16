@@ -27,7 +27,8 @@ export const defaultState = {
     maxId: 0,
     maxSavedId: 0,
     minId: Number.POSITIVE_INFINITY,
-    data: []
+    data: [],
+    brokenFavorites: {}
   },
   favorites: new Set(),
   error: false,
@@ -35,6 +36,7 @@ export const defaultState = {
     mentions: emptyTl(),
     public: emptyTl(),
     user: emptyTl(),
+    own: emptyTl(),
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
     tag: emptyTl()
@@ -140,6 +142,12 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     const result = mergeOrAdd(allStatuses, allStatusesObject, status)
     status = result.item
 
+    const brokenFavorites = state.notifications.brokenFavorites[status.id] || []
+    brokenFavorites.forEach((fav) => {
+      fav.status = status
+    })
+    delete state.notifications.brokenFavorites[status.id]
+
     if (result.new) {
       // We are mentioned in a post
       if (statusType(status) === 'status' && find(status.attentions, { id: user.id })) {
@@ -174,7 +182,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     return status
   }
 
-  const favoriteStatus = (favorite) => {
+  const favoriteStatus = (favorite, counter) => {
     const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
     if (status) {
       status.fave_num += 1
@@ -258,7 +266,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 }
 
-const addNewNotifications = (state, { notifications, older }) => {
+const addNewNotifications = (state, { dispatch, notifications, older }) => {
   const allStatuses = state.allStatuses
   each(notifications, (notification) => {
     const action = notification.notice
@@ -267,18 +275,31 @@ const addNewNotifications = (state, { notifications, older }) => {
       state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)
       state.notifications.minId = Math.min(notification.id, state.notifications.minId)
 
-      console.log(notification)
       const fresh = !older && !notification.is_seen && notification.id > state.notifications.maxSavedId
       const status = notification.ntype === 'like'
             ? find(allStatuses, { id: action.in_reply_to_status_id })
             : action
-      state.notifications.data.push({
+
+      const result = {
         type: notification.ntype,
         status,
         action,
         // Always assume older notifications as seen
         seen: !fresh
-      })
+      }
+
+      if (notification.ntype === 'like' && !status) {
+        let broken = state.notifications.brokenFavorites[action.in_reply_to_status_id]
+        if (broken) {
+          broken.push(result)
+        } else {
+          dispatch('fetchOldPost', { postId: action.in_reply_to_status_id })
+          broken = [ result ]
+          state.notifications.brokenFavorites[action.in_reply_to_status_id] = broken
+        }
+      }
+
+      state.notifications.data.push(result)
 
       if ('Notification' in window && window.Notification.permission === 'granted') {
         const title = action.user.name
@@ -370,8 +391,8 @@ const statuses = {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser })
     },
-    addNewNotifications ({ rootState, commit }, { notifications, older }) {
-      commit('addNewNotifications', { notifications, older })
+    addNewNotifications ({ rootState, commit, dispatch }, { notifications, older }) {
+      commit('addNewNotifications', { dispatch, notifications, older })
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })

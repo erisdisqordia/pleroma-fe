@@ -286,40 +286,6 @@ describe('The Statuses module', () => {
   })
 
   describe('notifications', () => {
-    it('adds a notfications for retweets if you are the retweetet', () => {
-      const user = { id: 1 }
-      const state = cloneDeep(defaultState)
-      const status = makeMockStatus({id: 1})
-      status.user = user
-      const retweet = makeMockStatus({id: 2, is_post_verb: false})
-      retweet.retweeted_status = status
-
-      mutations.addNewStatuses(state, { statuses: [retweet], user })
-
-      expect(state.notifications.data.length).to.eql(1)
-      expect(state.notifications.data[0].status).to.eql(retweet)
-      expect(state.notifications.data[0].action).to.eql(retweet)
-      expect(state.notifications.data[0].type).to.eql('repeat')
-    })
-
-    it('adds a notification when you are mentioned', () => {
-      const user = { id: 1 }
-      const state = cloneDeep(defaultState)
-      const status = makeMockStatus({id: 1})
-      const mentionedStatus = makeMockStatus({id: 2})
-      mentionedStatus.attentions = [user]
-
-      mutations.addNewStatuses(state, { statuses: [status], user })
-
-      expect(state.notifications.data.length).to.eql(0)
-
-      mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })
-      expect(state.notifications.data.length).to.eql(1)
-      expect(state.notifications.data[0].status).to.eql(mentionedStatus)
-      expect(state.notifications.data[0].action).to.eql(mentionedStatus)
-      expect(state.notifications.data[0].type).to.eql('mention')
-    })
-
     it('removes a notification when the notice gets removed', () => {
       const user = { id: 1 }
       const state = cloneDeep(defaultState)
@@ -348,79 +314,6 @@ describe('The Statuses module', () => {
       mutations.addNewStatuses(state, { statuses: [deletion], user })
       expect(state.allStatuses.length).to.eql(2)
       expect(state.notifications.data.length).to.eql(1)
-    })
-
-    it('adds the message to mentions when you are mentioned', () => {
-      const user = { id: 1 }
-      const state = cloneDeep(defaultState)
-      const status = makeMockStatus({id: 1})
-      const mentionedStatus = makeMockStatus({id: 2})
-      mentionedStatus.attentions = [user]
-
-      mutations.addNewStatuses(state, { statuses: [status], user })
-
-      expect(state.timelines.mentions.statuses).to.have.length(0)
-
-      mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })
-      expect(state.timelines.mentions.statuses).to.have.length(1)
-      expect(state.timelines.mentions.statuses).to.eql([mentionedStatus])
-    })
-
-    it('adds a notfication when one of the user\'s status is favorited', () => {
-      const state = cloneDeep(defaultState)
-      const status = makeMockStatus({id: 1})
-      const user = {id: 1}
-      status.user = user
-
-      const favorite = {
-        id: 2,
-        is_post_verb: false,
-        in_reply_to_status_id: '1', // The API uses strings here...
-        uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
-        text: 'a favorited something by b',
-        user: {}
-      }
-
-      mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public', user })
-      mutations.addNewStatuses(state, { statuses: [favorite], showImmediately: true, timeline: 'public', user })
-
-      expect(state.notifications.data).to.have.length(1)
-    })
-
-    it('adds a notification when the user is followed', () => {
-      const state = cloneDeep(defaultState)
-      const user = {id: 1, screen_name: 'b'}
-      const follower = {id: 2, screen_name: 'a'}
-
-      const follow = {
-        id: 3,
-        is_post_verb: false,
-        activity_type: 'follow',
-        text: 'a started following b',
-        user: follower
-      }
-
-      mutations.addNewStatuses(state, { statuses: [follow], showImmediately: true, timeline: 'public', user })
-
-      expect(state.notifications.data).to.have.length(1)
-    })
-
-    it('does not add a notification when an other user is followed', () => {
-      const state = cloneDeep(defaultState)
-      const user = {id: 1, screen_name: 'b'}
-      const follower = {id: 2, screen_name: 'a'}
-
-      const follow = {
-        id: 3,
-        is_post_verb: false,
-        activity_type: 'follow',
-        text: 'a started following b@shitposter.club',
-        user: follower
-      }
-
-      mutations.addNewStatuses(state, { statuses: [follow], showImmediately: true, timeline: 'public', user })
-
-      expect(state.notifications.data).to.have.length(0)
     })
   })
 })

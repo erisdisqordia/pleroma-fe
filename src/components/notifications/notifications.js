@@ -1,7 +1,7 @@
 import Notification from '../notification/notification.vue'
 import notificationsFetcher from '../../services/notifications_fetcher/notifications_fetcher.service.js'
 
-import { sortBy, take, filter } from 'lodash'
+import { sortBy, filter } from 'lodash'
 
 const Notifications = {
   created () {

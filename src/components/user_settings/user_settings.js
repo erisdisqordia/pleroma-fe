@@ -18,7 +18,8 @@ const UserSettings = {
       deleteAccountError: false,
       changePasswordInputs: [ '', '', '' ],
       changedPassword: false,
-      changePasswordError: false
+      changePasswordError: false,
+      activeTab: 'profile'
     }
   },
   components: {
@@ -235,6 +236,9 @@ const UserSettings = {
             this.changePasswordError = res.error
           }
         })
+    },
+    activateTab (tabName) {
+      this.activeTab = tabName
     }
   }
 }

@@ -4,7 +4,12 @@
       {{$t('settings.user_settings')}}
     </div>
     <div class="panel-body profile-edit">
-      <div class="setting-item">
+      <div class="tab-switcher">
+        <button class="btn btn-default" @click="activateTab('profile')">{{$t('settings.profile_tab')}}</button>
+        <button class="btn btn-default" @click="activateTab('security')">{{$t('settings.security_tab')}}</button>
+        <button class="btn btn-default" @click="activateTab('data_import_export')" v-if="pleromaBackend">{{$t('settings.data_import_export_tab')}}</button>
+      </div>
+      <div class="setting-item" v-if="activeTab == 'profile'">
         <h2>{{$t('settings.name_bio')}}</h2>
         <p>{{$t('settings.name')}}</p>
         <input class='name-changer' id='username' v-model="newname"></input>
@@ -25,7 +30,7 @@
         </div>
         <button :disabled='newname.length <= 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
       </div>
-      <div class="setting-item">
+      <div class="setting-item" v-if="activeTab == 'profile'">
         <h2>{{$t('settings.avatar')}}</h2>
         <p>{{$t('settings.current_avatar')}}</p>
         <img :src="user.profile_image_url_original" class="old-avatar"></img>
@@ -38,7 +43,7 @@
         <i class="icon-spin4 animate-spin" v-if="uploading[0]"></i>
         <button class="btn btn-default" v-else-if="previews[0]" @click="submitAvatar">{{$t('general.submit')}}</button>
       </div>
-      <div class="setting-item">
+      <div class="setting-item" v-if="activeTab == 'profile'">
         <h2>{{$t('settings.profile_banner')}}</h2>
         <p>{{$t('settings.current_profile_banner')}}</p>
         <img :src="user.cover_photo" class="banner"></img>
@@ -51,7 +56,7 @@
         <i class=" icon-spin4 animate-spin uploading" v-if="uploading[1]"></i>
         <button class="btn btn-default" v-else-if="previews[1]" @click="submitBanner">{{$t('general.submit')}}</button>
       </div>
-      <div class="setting-item">
+      <div class="setting-item" v-if="activeTab == 'profile'">
         <h2>{{$t('settings.profile_background')}}</h2>
         <p>{{$t('settings.set_new_profile_background')}}</p>
         <img class="bg" v-bind:src="previews[2]" v-if="previews[2]">
@@ -62,7 +67,7 @@
         <i class=" icon-spin4 animate-spin uploading" v-if="uploading[2]"></i>
         <button class="btn btn-default" v-else-if="previews[2]" @click="submitBg">{{$t('general.submit')}}</button>
       </div>
-      <div class="setting-item">
+      <div class="setting-item" v-if="activeTab == 'security'">
         <h2>{{$t('settings.change_password')}}</h2>
         <div>
           <p>{{$t('settings.current_password')}}</p>
@@ -81,7 +86,7 @@
         <p v-else-if="changePasswordError !== false">{{$t('settings.change_password_error')}}</p>
         <p v-if="changePasswordError">{{changePasswordError}}</p>
       </div>
-      <div class="setting-item" v-if="pleromaBackend">
+      <div class="setting-item" v-if="pleromaBackend && activeTab == 'data_import_export'">
         <h2>{{$t('settings.follow_import')}}</h2>
         <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
         <form v-model="followImportForm">
@@ -98,15 +103,15 @@
           <p>{{$t('settings.follow_import_error')}}</p>
         </div>
       </div>
-      <div class="setting-item" v-if="enableFollowsExport">
+      <div class="setting-item" v-if="enableFollowsExport && activeTab == 'data_import_export'">
         <h2>{{$t('settings.follow_export')}}</h2>
         <button class="btn btn-default" @click="exportFollows">{{$t('settings.follow_export_button')}}</button>
       </div>
-      <div class="setting-item" v-else>
+      <div class="setting-item" v-else-if="activeTab == 'data_import_export'">
         <h2>{{$t('settings.follow_export_processing')}}</h2>
       </div>
       <hr>
-      <div class="setting-item">
+      <div class="setting-item" v-if="activeTab == 'security'">
         <h2>{{$t('settings.delete_account')}}</h2>
         <p v-if="!deletingAccount">{{$t('settings.delete_account_description')}}</p>
         <div v-if="deletingAccount">
@@ -144,6 +149,15 @@
   .uploading {
     font-size: 1.5em;
     margin: 0.25em;
+  }
+}
+
+.tab-switcher {
+  margin: 7px 7px;
+  display: inline-block;
+
+  button {
+    height: 30px;
   }
 }
 </style>

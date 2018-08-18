@@ -13,6 +13,7 @@ const defaultState = {
   streaming: false,
   hoverPreview: true,
   pauseOnUnfocused: true,
+  stopGifs: false,
   muteWords: [],
   highlight: {}
 }

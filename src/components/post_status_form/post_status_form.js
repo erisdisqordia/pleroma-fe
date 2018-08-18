@@ -54,7 +54,7 @@ const PostStatusForm = {
       newStatus: {
         status: statusText,
         files: [],
-        visibility: this.messageScope || 'public'
+        visibility: this.messageScope || this.$store.state.users.currentUser.default_scope
       },
       caret: 0
     }

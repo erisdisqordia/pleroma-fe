@@ -10,9 +10,18 @@
         <input class='name-changer' id='username' v-model="newname"></input>
         <p>{{$t('settings.bio')}}</p>
         <textarea class="bio" v-model="newbio"></textarea>
-        <div class="setting-item">
+        <p>
           <input type="checkbox" v-model="newlocked" id="account-locked">
           <label for="account-locked">{{$t('settings.lock_account_description')}}</label>
+        </p>
+        <div v-if="scopeOptionsEnabled">
+          <label for="default-vis">{{$t('settings.default_vis')}}</label>
+          <div id="default-vis" class="visibility-tray">
+             <i v-on:click="changeVis('direct')" class="icon-mail-alt" :class="vis.direct"></i>
+             <i v-on:click="changeVis('private')" class="icon-lock" :class="vis.private"></i>
+             <i v-on:click="changeVis('unlisted')" class="icon-lock-open-alt" :class="vis.unlisted"></i>
+             <i v-on:click="changeVis('public')" class="icon-globe" :class="vis.public"></i>
+          </div>
         </div>
         <button :disabled='newname.length <= 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
       </div>

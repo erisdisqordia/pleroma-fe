@@ -99,25 +99,6 @@
   }
 }
 
-.post-status-form .visibility-tray {
-  font-size: 1.2em;
-  padding: 3px;
-  cursor: pointer;
-
-  .selected {
-    color: $fallback--lightFg;
-    color: var(--lightFg, $fallback--lightFg);
-  }
-}
-
-.visibility-notice {
-  padding: .5em;
-  border: 1px solid $fallback--faint;
-  border: 1px solid var(--faint, $fallback--faint);
-  border-radius: $fallback--inputRadius;
-  border-radius: var(--inputRadius, $fallback--inputRadius);
-}
-
 .post-status-form, .login {
   .form-bottom {
     display: flex;

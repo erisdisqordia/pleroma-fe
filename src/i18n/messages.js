@@ -332,7 +332,8 @@ const en = {
     confirm_new_password: 'Confirm new password',
     changed_password: 'Password changed successfully!',
     change_password_error: 'There was an issue changing your password.',
-    lock_account_description: 'Restrict your account to approved followers only'
+    lock_account_description: 'Restrict your account to approved followers only',
+    default_vis: 'Default visibility scope'
   },
   notifications: {
     notifications: 'Notifications',

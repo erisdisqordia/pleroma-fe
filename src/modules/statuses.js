@@ -270,8 +270,8 @@ const addNewNotifications = (state, { dispatch, notifications, older }) => {
   const allStatuses = state.allStatuses
   const allStatusesObject = state.allStatusesObject
   each(notifications, (notification) => {
-    const action = notification.notice
-    mergeOrAdd(allStatuses, allStatusesObject, action)
+    const result = mergeOrAdd(allStatuses, allStatusesObject, notification.notice)
+    const action = result.item
     // Only add a new notification if we don't have one for the same action
     if (!find(state.notifications.data, (oldNotification) => oldNotification.action.id === action.id)) {
       state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)

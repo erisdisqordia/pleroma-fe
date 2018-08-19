@@ -336,7 +336,11 @@ const en = {
     changed_password: 'Password changed successfully!',
     change_password_error: 'There was an issue changing your password.',
     lock_account_description: 'Restrict your account to approved followers only',
-    limited_availability: 'Unavailable in your browser'
+    limited_availability: 'Unavailable in your browser',
+    default_vis: 'Default visibility scope',
+    profile_tab: 'Profile',
+    security_tab: 'Security',
+    data_import_export_tab: 'Data Import / Export'
   },
   notifications: {
     notifications: 'Notifications',

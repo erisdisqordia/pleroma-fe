@@ -113,8 +113,6 @@
 
   .btn {
     margin-top: 1em;
-    min-height: 28px;
-    width: 10em;
   }
 }
 .setting-list {

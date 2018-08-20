@@ -11,6 +11,11 @@
         <i class="icon-down-open"/>
       </label>
     </div>
+    <div>
+      <button class="btn" @click="exportCurrentTheme">{{ $t('settings.export_theme') }}</button>
+      <button class="btn" @click="importTheme">{{ $t('settings.import_theme') }}</button>
+      <p v-if="invalidThemeImported" class="import-warning">{{ $t('settings.invalid_theme_imported') }}</p>
+    </div>
     <div class="color-container">
       <p>{{$t('settings.theme_help')}}</p>
       <div class="color-item">
@@ -132,6 +137,11 @@
 @import '../../_variables.scss';
 .style-switcher {
   margin-right: 1em;
+}
+
+.import-warning {
+  color: $fallback--cRed;
+  color: var(--cRed, $fallback--cRed);
 }
 
 .radius-container,

@@ -317,7 +317,7 @@ const en = {
     hide_attachments_in_tl: 'Hide attachments in timeline',
     hide_attachments_in_convo: 'Hide attachments in conversations',
     nsfw_clickthrough: 'Enable clickthrough NSFW attachment hiding',
-    expand_cw: 'Expand posts with subjects by default',
+    collapse_subject: 'Collapse posts with subjects',
     stop_gifs: 'Play-on-hover GIFs',
     autoload: 'Enable automatic loading when scrolled to the bottom',
     streaming: 'Enable automatic streaming of new posts when scrolled to the top',

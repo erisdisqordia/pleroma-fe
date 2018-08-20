@@ -17,6 +17,10 @@
       <h2>{{$t('nav.timeline')}}</h2>
       <ul class="setting-list">
         <li>
+          <input type="checkbox" id="collapseMessageWithSubject" v-model="collapseMessageWithSubjectLocal">
+          <label for="collapseMessageWithSubject">{{$t('settings.collapse_subject')}}</label>
+        </li>
+        <li>
           <input type="checkbox" id="streaming" v-model="streamingLocal">
           <label for="streaming">{{$t('settings.streaming')}}</label>
           <ul class="setting-list suboptions" :class="[{disabled: !streamingLocal}]">
@@ -33,10 +37,6 @@
         <li>
           <input type="checkbox" id="hoverPreview" v-model="hoverPreviewLocal">
           <label for="hoverPreview">{{$t('settings.reply_link_preview')}}</label>
-        </li>
-        <li>
-          <input type="checkbox" id="expandCW" v-model="expandCWLocal">
-          <label for="expandCW">{{$t('settings.expand_cw')}}</label>
         </li>
       </ul>
     </div>

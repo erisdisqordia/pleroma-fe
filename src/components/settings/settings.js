@@ -15,7 +15,7 @@ const settings = {
       streamingLocal: this.$store.state.config.streaming,
       pauseOnUnfocusedLocal: this.$store.state.config.pauseOnUnfocused,
       hoverPreviewLocal: this.$store.state.config.hoverPreview,
-      expandCWLocal: this.$store.state.config.expandCW,
+      collapseMessageWithSubjectLocal: this.$store.state.config.collapseMessageWithSubject,
       stopGifs: this.$store.state.config.stopGifs,
       loopSilentAvailable:
         // Firefox
@@ -66,8 +66,8 @@ const settings = {
       value = filter(value.split('\n'), (word) => trim(word).length > 0)
       this.$store.dispatch('setOption', { name: 'muteWords', value })
     },
-    expandCWLocal (value) {
-      this.$store.dispatch('setOption', { name: 'expandCW', value })
+    collapseMessageWithSubjectLocal (value) {
+      this.$store.dispatch('setOption', { name: 'collapseMessageWithSubject', value })
     },
     stopGifs (value) {
       this.$store.dispatch('setOption', { name: 'stopGifs', value })

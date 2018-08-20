@@ -31,7 +31,7 @@ const Status = {
       preview: null,
       showPreview: false,
       showingTall: false,
-      expandingCW: this.$store.state.config.expandCW
+      expandingSubject: !this.$store.state.config.collapseMessageWithSubject
     }
   },
   computed: {
@@ -105,14 +105,14 @@ const Status = {
       const lengthScore = this.status.statusnet_html.split(/<p|<br/).length + this.status.text.length / 80
       return lengthScore > 20
     },
-    hideCWStatus () {
-      if (this.tallStatus && this.$store.state.config.expandCW) {
+    hideSubjectStatus () {
+      if (this.tallStatus && !this.$store.state.config.collapseMessageWithSubject) {
         return false
       }
-      return !this.expandingCW && this.status.summary
+      return !this.expandingSubject && this.status.summary
     },
     hideTallStatus () {
-      if (this.status.summary && !this.$store.state.config.expandCW) {
+      if (this.status.summary && this.$store.state.config.collapseMessageWithSubject) {
         return false
       }
       if (this.showingTall) {
@@ -121,7 +121,7 @@ const Status = {
       return this.tallStatus
     },
     showingMore () {
-      return this.showingTall || (this.status.summary && this.expandingCW)
+      return this.showingTall || (this.status.summary && this.expandingSubject)
     },
     attachmentSize () {
       if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
@@ -184,12 +184,12 @@ const Status = {
     toggleShowMore () {
       if (this.showingTall) {
         this.showingTall = false
-      } else if (this.expandingCW) {
-        this.expandingCW = false
+      } else if (this.expandingSubject) {
+        this.expandingSubject = false
       } else if (this.hideTallStatus) {
         this.showingTall = true
-      } else if (this.hideCWStatus) {
-        this.expandingCW = true
+      } else if (this.hideSubjectStatus) {
+        this.expandingSubject = true
       }
     },
     replyEnter (id, event) {

@@ -54,11 +54,11 @@ const backendInteractorService = (credentials) => {
     return timelineFetcherService.startFetching({timeline, store, credentials, userId})
   }
 
-  const fetchOldPost = ({store, postId}) => {
+  const fetchOldPost = ({store, postId, timeline = 'friends'}) => {
     return timelineFetcherService.fetchAndUpdate({
       store,
       credentials,
-      timeline: 'own',
+      timeline,
       older: true,
       until: postId + 1
     })

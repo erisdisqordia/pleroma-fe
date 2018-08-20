@@ -306,6 +306,9 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
     user: QVITTER_USER_TIMELINE_URL,
+    // separate timeline for own posts, so it won't break due to user timeline bugs
+    // really needed only for broken favorites
+    own: QVITTER_USER_TIMELINE_URL,
     tag: TAG_TIMELINE_URL
   }
 

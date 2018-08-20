@@ -107,6 +107,8 @@ const users = {
 
                   // Start getting fresh tweets.
                   store.dispatch('startFetching', 'friends')
+                  // Start getting our own posts, only really needed for mitigating broken favorites
+                  store.dispatch('startFetching', ['own', user.id])
 
                   // Get user mutes and follower info
                   store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {

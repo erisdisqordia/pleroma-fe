@@ -38,6 +38,7 @@ export const defaultState = {
     mentions: emptyTl(),
     public: emptyTl(),
     user: emptyTl(),
+    own: emptyTl(),
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
     tag: emptyTl()

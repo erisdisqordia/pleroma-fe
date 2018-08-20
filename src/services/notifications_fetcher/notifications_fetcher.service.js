@@ -30,6 +30,10 @@ const fetchAndUpdate = ({store, credentials, older = false}) => {
 const startFetching = ({credentials, store}) => {
   fetchAndUpdate({ credentials, store })
   const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store })
+  // Initially there's set flag to silence all desktop notifications so
+  // that there won't spam of them when user just opened up the FE we
+  // reset that flag after a while to show new notifications once again.
+  setTimeout(() => store.dispatch('setNotificationsSilence', false), 10000)
   return setInterval(boundFetchAndUpdate, 10000)
 }
 

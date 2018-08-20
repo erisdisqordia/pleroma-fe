@@ -24,6 +24,7 @@ export const defaultState = {
   allStatusesObject: {},
   maxId: 0,
   notifications: {
+    desktopNotificationSilence: true,
     maxId: 0,
     maxSavedId: 0,
     minId: Number.POSITIVE_INFINITY,
@@ -314,7 +315,7 @@ const addNewNotifications = (state, { dispatch, notifications, older }) => {
           result.image = action.attachments[0].url
         }
 
-        if (fresh) {
+        if (fresh && !state.notifications.desktopNotificationSilence) {
           let notification = new window.Notification(title, result)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.
@@ -365,6 +366,9 @@ export const mutations = {
   setNotificationsError (state, { value }) {
     state.notificationsError = value
   },
+  setNotificationsSilence (state, { value }) {
+    state.notifications.desktopNotificationSilence = value
+  },
   setProfileView (state, { v }) {
     // load followers / friends only when needed
     state.timelines['user'].viewing = v
@@ -400,6 +404,9 @@ const statuses = {
     },
     setNotificationsError ({ rootState, commit }, { value }) {
       commit('setNotificationsError', { value })
+    },
+    setNotificationsSilence ({ rootState, commit }, { value }) {
+      commit('setNotificationsSilence', { value })
     },
     addFriends ({ rootState, commit }, { friends }) {
       commit('addFriends', { friends })

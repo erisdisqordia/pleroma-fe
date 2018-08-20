@@ -29,6 +29,7 @@ export const defaultState = {
     maxSavedId: 0,
     minId: Number.POSITIVE_INFINITY,
     data: [],
+    error: false,
     brokenFavorites: {}
   },
   favorites: new Set(),
@@ -364,7 +365,7 @@ export const mutations = {
     state.error = value
   },
   setNotificationsError (state, { value }) {
-    state.notificationsError = value
+    state.notifications.error = value
   },
   setNotificationsSilence (state, { value }) {
     state.notifications.desktopNotificationSilence = value

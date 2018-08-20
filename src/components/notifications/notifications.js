@@ -14,6 +14,9 @@ const Notifications = {
     notifications () {
       return this.$store.state.statuses.notifications.data
     },
+    error () {
+      return this.$store.state.statuses.notifications.error
+    },
     unseenNotifications () {
       return filter(this.notifications, ({seen}) => !seen)
     },

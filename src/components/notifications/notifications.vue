@@ -3,7 +3,10 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <span class="unseen-count" v-if="unseenCount">{{unseenCount}}</span>
-        {{$t('notifications.notifications')}}
+        <div class="title"> {{$t('notifications.notifications')}}</div>
+        <div @click.prevent class="loadmore-error alert error" v-if="error">
+          {{$t('timeline.error_fetching')}}
+        </div>
         <button v-if="unseenCount" @click.prevent="markAsSeen" class="read-button">{{$t('notifications.read')}}</button>
       </div>
       <div class="panel-body">

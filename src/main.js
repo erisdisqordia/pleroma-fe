@@ -54,6 +54,10 @@ const persistedStateOptions = {
     'config.muteWords',
     'config.customTheme',
     'config.highlight',
+    'config.loopVideo',
+    'config.loopVideoSilentOnly',
+    'config.pauseOnUnfocused',
+    'config.stopGifs',
     'users.lastLoginName'
   ]
 }

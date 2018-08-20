@@ -7,9 +7,13 @@ const defaultState = {
   hideAttachments: false,
   hideAttachmentsInConv: false,
   hideNsfw: true,
+  loopVideo: true,
+  loopVideoSilentOnly: true,
   autoLoad: true,
   streaming: false,
   hoverPreview: true,
+  pauseOnUnfocused: true,
+  stopGifs: false,
   muteWords: [],
   highlight: {}
 }

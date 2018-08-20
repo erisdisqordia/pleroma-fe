@@ -2,7 +2,7 @@
   <div v-if="size==='hide'">
     <a class="placeholder" v-if="type !== 'html'" target="_blank" :href="attachment.url">[{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]</a>
   </div>
-  <div v-else class="attachment" :class="{[type]: true, loading, 'small-attachment': isSmall, 'fullwidth': fullwidth}" v-show="!isEmpty">
+  <div v-else class="attachment" :class="{[type]: true, loading, 'small-attachment': isSmall, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}" v-show="!isEmpty">
     <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"/>
     </a>
@@ -14,7 +14,7 @@
       <StillImage :class="{'small': isSmall}" referrerpolicy="no-referrer" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
-    <video :class="{'small': isSmall}" v-if="type === 'video' && !hidden" :src="attachment.url" controls loop></video>
+    <video :class="{'small': isSmall}" v-if="type === 'video' && !hidden" @loadeddata="onVideoDataLoad" :src="attachment.url" controls :loop="loopVideo"></video>
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 
@@ -38,7 +38,6 @@
 .attachments {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -0.7em;
 
   .attachment.media-upload-container {
     flex: 0 0 auto;
@@ -48,6 +47,10 @@
 
   .placeholder {
     margin-right: 0.5em;
+  }
+
+  .nsfw-placeholder {
+    cursor: pointer;
   }
 
   .small-attachment {

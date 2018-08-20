@@ -340,7 +340,8 @@ const en = {
     followed_you: 'followed you',
     favorited_you: 'favorited your status',
     repeated_you: 'repeated your status',
-    broken_favorite: 'Unknown status, searching for it...'
+    broken_favorite: 'Unknown status, searching for it...',
+    load_older: 'Load older notifications'
   },
   login: {
     login: 'Log in',
@@ -1631,7 +1632,8 @@ const ru = {
     followed_you: 'начал(а) читать вас',
     favorited_you: 'нравится ваш статус',
     repeated_you: 'повторил(а) ваш статус',
-    broken_favorite: 'Неизвестный статус, ищем...'
+    broken_favorite: 'Неизвестный статус, ищем...',
+    load_older: 'Загрузить старые уведомления'
   },
   login: {
     login: 'Войти',

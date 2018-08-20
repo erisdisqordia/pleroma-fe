@@ -106,10 +106,10 @@ const Status = {
       return lengthScore > 20
     },
     hideCWStatus () {
-        if (this.tallStatus && this.$store.state.config.expandCW) {
-          return false
-        }
-        return !this.expandingCW && this.status.summary
+      if (this.tallStatus && this.$store.state.config.expandCW) {
+        return false
+      }
+      return !this.expandingCW && this.status.summary
     },
     hideTallStatus () {
       if (this.status.summary && !this.$store.state.config.expandCW) {

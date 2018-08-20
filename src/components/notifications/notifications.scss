@@ -211,15 +211,4 @@
       margin-bottom: 0.3em;
     }
   }
-
-  // ugly as heck
-  &:last-child {
-    border-bottom: none;
-    border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
-    border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
-    .status-el {
-      border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
-      border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
-    }
-  }
 }

@@ -133,7 +133,10 @@ const Timeline = {
       }
       if (count > 0) {
         // only 'stream' them when you're scrolled to the top
-        if (window.pageYOffset < 15 && !this.paused && !this.unfocused) {
+        if (window.pageYOffset < 15 &&
+            !this.paused &&
+            !(this.unfocused && this.$store.state.config.pauseOnUnfocused)
+           ) {
           this.showNewStatuses()
         } else {
           this.paused = true

@@ -4,12 +4,17 @@ import StyleSetter from '../services/style_setter/style_setter.js'
 const defaultState = {
   name: 'Pleroma FE',
   colors: {},
+  collapseMessageWithSubject: false,
   hideAttachments: false,
   hideAttachmentsInConv: false,
   hideNsfw: true,
+  loopVideo: true,
+  loopVideoSilentOnly: true,
   autoLoad: true,
   streaming: false,
   hoverPreview: true,
+  pauseOnUnfocused: true,
+  stopGifs: false,
   muteWords: [],
   highlight: {}
 }

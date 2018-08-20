@@ -65,12 +65,14 @@
         <i class="icon-cancel" @click="clearError"></i>
       </div>
       <div class="attachments">
-        <div class="media-upload-container attachment" v-for="file in newStatus.files">
+        <div class="media-upload-wrapper" v-for="file in newStatus.files">
           <i class="fa icon-cancel" @click="removeMediaFile(file)"></i>
-          <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
-          <video v-if="type(file) === 'video'" :src="file.image" controls></video>
-          <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
-          <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
+          <div class="media-upload-container attachment">
+            <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
+            <video v-if="type(file) === 'video'" :src="file.image" controls></video>
+            <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
+            <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
+          </div>
         </div>
       </div>
     </form>
@@ -99,34 +101,11 @@
   }
 }
 
-.post-status-form .visibility-tray {
-  font-size: 1.2em;
-  padding: 3px;
-  cursor: pointer;
-
-  .selected {
-    color: $fallback--lightFg;
-    color: var(--lightFg, $fallback--lightFg);
-  }
-}
-
-.visibility-notice {
-  padding: .5em;
-  border: 1px solid $fallback--faint;
-  border: 1px solid var(--faint, $fallback--faint);
-  border-radius: $fallback--inputRadius;
-  border-radius: var(--inputRadius, $fallback--inputRadius);
-}
-
 .post-status-form, .login {
   .form-bottom {
     display: flex;
     padding: 0.5em;
     height: 32px;
-
-    button {
-      width: 10em;
-    }
 
     p {
       margin: 0.35em;
@@ -139,14 +118,49 @@
     text-align: center;
   }
 
+  .media-upload-wrapper {
+    flex: 0 0 auto;
+    max-width: 100%;
+    min-width: 50px;
+    margin-right: .2em;
+    margin-bottom: .5em;
+
+    .icon-cancel {
+      display: inline-block;
+      position: static;
+      margin: 0;
+      padding-bottom: 0;
+      margin-left: $fallback--attachmentRadius;
+      margin-left: var(--attachmentRadius, $fallback--attachmentRadius);
+      background-color: $fallback--btn;
+      background-color: var(--btn, $fallback--btn);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
   .attachments {
     padding: 0 0.5em;
 
     .attachment {
+      margin: 0;
       position: relative;
+      flex: 0 0 auto;
       border: 1px solid $fallback--border;
       border: 1px solid var(--border, $fallback--border);
-      margin: 0.5em 0.8em 0.2em 0;
+      text-align: center;
+
+      audio {
+        min-width: 300px;
+        flex: 1 0 auto;
+      }
+
+      a {
+        display: block;
+        text-align: left;
+        line-height: 1.2;
+        padding: .5em;
+      }
     }
 
     i {

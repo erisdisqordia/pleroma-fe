@@ -11,8 +11,8 @@
       <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
         <StillImage v-if="retweet" class='avatar' :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
-          <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
-          <a v-else :href="statusoid.user.statusnet_profile_url" style="font-weight: bold;" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
+          <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
+          <a v-else :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
           <i class='fa icon-retweet retweeted'></i>
           {{$t('timeline.repeated')}}
         </div>
@@ -57,8 +57,10 @@
               <router-link class="timeago" :to="{ name: 'conversation', params: { id: status.id } }">
                 <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
-              <span v-if="status.visibility"><i :class="visibilityIcon(status.visibility)"></i> </span>
-              <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="icon-link-ext"></i></a>
+              <div class="visibility-icon" v-if="status.visibility">
+                <i :class="visibilityIcon(status.visibility)"></i>
+              </div>
+              <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="icon-link-ext-alt"></i></a>
               <template v-if="expandable">
                 <a href="#" @click.prevent="toggleExpanded"><i class="icon-plus-squared"></i></a>
               </template>
@@ -74,9 +76,11 @@
           </div>
 
           <div :class="{'tall-status': hideTallStatus}" class="status-content-wrapper">
-            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowTall">Show more</a>
-            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
-            <a v-if="showingTall" href="#" class="tall-status-unhider" @click.prevent="toggleShowTall">Show less</a>
+            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowMore">Show more</a>
+            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html" v-if="!hideSubjectStatus"></div>
+            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.summary" v-else></div>
+            <a v-if="hideSubjectStatus" href="#" class="cw-status-hider" @click.prevent="toggleShowMore">Show more</a>
+            <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">Show less</a>
           </div>
 
           <div v-if='status.attachments' class='attachments media-body'>
@@ -141,6 +145,7 @@
   margin-top: 0.25em;
   margin-left: 0.5em;
   z-index: 50;
+
   .status {
     flex: 1;
     border: 0;
@@ -155,6 +160,7 @@
   text-align: center;
   border-width: 1px;
   border-style: solid;
+
   i {
     font-size: 2em;
   }
@@ -196,6 +202,7 @@
 
   .media-heading {
     flex-wrap: nowrap;
+    line-height: 18px;
   }
 
   .media-heading-left {
@@ -218,12 +225,22 @@
       flex: 1 0;
       display: flex;
       flex-wrap: wrap;
-      align-content: center;
+      align-items: baseline;
+
+      .user-name {
+        margin-right: .45em;
+
+        img {
+          width: 14px;
+          height: 14px;
+          vertical-align: middle;
+          object-fit: contain
+        }
+      }
     }
+
     .links {
       display: flex;
-      padding-top: 1px;
-      margin-left: 0.2em;
       font-size: 12px;
       color: $fallback--link;
       color: var(--link, $fallback--link);
@@ -247,18 +264,24 @@
   }
 
   .media-heading-right {
+    display: inline-flex;
     flex-shrink: 0;
-    display: flex;
     flex-wrap: nowrap;
-    max-height: 1.5em;
-    margin-left: 0.25em;
+    margin-left: .25em;
+    align-self: baseline;
+
     .timeago {
       margin-right: 0.2em;
       font-size: 12px;
-      padding-top: 1px;
+      align-self: last baseline;
     }
-    i {
+
+    > * {
       margin-left: 0.2em;
+    }
+    a:hover i {
+      color: $fallback--fg;
+      color: var(--fg, $fallback--fg);
     }
   }
 
@@ -289,7 +312,7 @@
     }
   }
 
-  .tall-status-unhider {
+  .status-unhider, .cw-status-hider {
     width: 100%;
     text-align: center;
   }
@@ -318,6 +341,7 @@
   .retweet-info {
     padding: 0.4em 0.6em 0 0.6em;
     margin: 0;
+
     .avatar {
       border-radius: $fallback--avatarAltRadius;
       border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
@@ -333,9 +357,22 @@
       display: flex;
       align-content: center;
       flex-wrap: wrap;
+
+      .user-name {
+        font-weight: bold;
+
+        img {
+          width: 14px;
+          height: 14px;
+          vertical-align: middle;
+          object-fit: contain
+        }
+      }
+
       i {
         padding: 0 0.2em;
       }
+
       a {
         max-width: 100%;
         overflow: hidden;

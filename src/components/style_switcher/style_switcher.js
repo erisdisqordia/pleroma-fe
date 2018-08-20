@@ -5,6 +5,7 @@ export default {
     return {
       availableStyles: [],
       selected: this.$store.state.config.theme,
+      invalidThemeImported: false,
       bgColorLocal: '',
       btnColorLocal: '',
       textColorLocal: '',
@@ -32,25 +33,61 @@ export default {
       })
   },
   mounted () {
-    this.bgColorLocal = rgbstr2hex(this.$store.state.config.colors.bg)
-    this.btnColorLocal = rgbstr2hex(this.$store.state.config.colors.btn)
-    this.textColorLocal = rgbstr2hex(this.$store.state.config.colors.fg)
-    this.linkColorLocal = rgbstr2hex(this.$store.state.config.colors.link)
-
-    this.redColorLocal = rgbstr2hex(this.$store.state.config.colors.cRed)
-    this.blueColorLocal = rgbstr2hex(this.$store.state.config.colors.cBlue)
-    this.greenColorLocal = rgbstr2hex(this.$store.state.config.colors.cGreen)
-    this.orangeColorLocal = rgbstr2hex(this.$store.state.config.colors.cOrange)
-
-    this.btnRadiusLocal = this.$store.state.config.radii.btnRadius || 4
-    this.inputRadiusLocal = this.$store.state.config.radii.inputRadius || 4
-    this.panelRadiusLocal = this.$store.state.config.radii.panelRadius || 10
-    this.avatarRadiusLocal = this.$store.state.config.radii.avatarRadius || 5
-    this.avatarAltRadiusLocal = this.$store.state.config.radii.avatarAltRadius || 50
-    this.tooltipRadiusLocal = this.$store.state.config.radii.tooltipRadius || 2
-    this.attachmentRadiusLocal = this.$store.state.config.radii.attachmentRadius || 5
+    this.normalizeLocalState(this.$store.state.config.colors, this.$store.state.config.radii)
   },
   methods: {
+    exportCurrentTheme () {
+      const stringified = JSON.stringify({
+        // To separate from other random JSON files and possible future theme formats
+        _pleroma_theme_version: 1,
+        colors: this.$store.state.config.colors,
+        radii: this.$store.state.config.radii
+      }, null, 2) // Pretty-print and indent with 2 spaces
+
+      // Create an invisible link with a data url and simulate a click
+      const e = document.createElement('a')
+      e.setAttribute('download', 'pleroma_theme.json')
+      e.setAttribute('href', 'data:application/json;base64,' + window.btoa(stringified))
+      e.style.display = 'none'
+
+      document.body.appendChild(e)
+      e.click()
+      document.body.removeChild(e)
+    },
+
+    importTheme () {
+      this.invalidThemeImported = false
+      const filePicker = document.createElement('input')
+      filePicker.setAttribute('type', 'file')
+      filePicker.setAttribute('accept', '.json')
+
+      filePicker.addEventListener('change', event => {
+        if (event.target.files[0]) {
+          // eslint-disable-next-line no-undef
+          const reader = new FileReader()
+          reader.onload = ({target}) => {
+            try {
+              const parsed = JSON.parse(target.result)
+              if (parsed._pleroma_theme_version === 1) {
+                this.normalizeLocalState(parsed.colors, parsed.radii)
+              } else {
+                // A theme from the future, spooky
+                this.invalidThemeImported = true
+              }
+            } catch (e) {
+              // This will happen both if there is a JSON syntax error or the theme is missing components
+              this.invalidThemeImported = true
+            }
+          }
+          reader.readAsText(event.target.files[0])
+        }
+      })
+
+      document.body.appendChild(filePicker)
+      filePicker.click()
+      document.body.removeChild(filePicker)
+    },
+
     setCustomTheme () {
       if (!this.bgColorLocal && !this.btnColorLocal && !this.linkColorLocal) {
         // reset to picked themes
@@ -95,6 +132,26 @@ export default {
             attachmentRadius: this.attachmentRadiusLocal
           }})
       }
+    },
+
+    normalizeLocalState (colors, radii) {
+      this.bgColorLocal = rgbstr2hex(colors.bg)
+      this.btnColorLocal = rgbstr2hex(colors.btn)
+      this.textColorLocal = rgbstr2hex(colors.fg)
+      this.linkColorLocal = rgbstr2hex(colors.link)
+
+      this.redColorLocal = rgbstr2hex(colors.cRed)
+      this.blueColorLocal = rgbstr2hex(colors.cBlue)
+      this.greenColorLocal = rgbstr2hex(colors.cGreen)
+      this.orangeColorLocal = rgbstr2hex(colors.cOrange)
+
+      this.btnRadiusLocal = radii.btnRadius || 4
+      this.inputRadiusLocal = radii.inputRadius || 4
+      this.panelRadiusLocal = radii.panelRadius || 10
+      this.avatarRadiusLocal = radii.avatarRadius || 5
+      this.avatarAltRadiusLocal = radii.avatarAltRadius || 50
+      this.tooltipRadiusLocal = radii.tooltipRadius || 2
+      this.attachmentRadiusLocal = radii.attachmentRadius || 5
     }
   },
   watch: {

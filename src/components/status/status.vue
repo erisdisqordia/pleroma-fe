@@ -76,9 +76,11 @@
           </div>
 
           <div :class="{'tall-status': hideTallStatus}" class="status-content-wrapper">
-            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowTall">Show more</a>
-            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
-            <a v-if="showingTall" href="#" class="tall-status-unhider" @click.prevent="toggleShowTall">Show less</a>
+            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowMore">Show more</a>
+            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html" v-if="!hideCWStatus"></div>
+            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.summary" v-else></div>
+            <a v-if="hideCWStatus" href="#" class="cw-status-hider" @click.prevent="toggleShowMore">Show more</a>
+            <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">Show less</a>
           </div>
 
           <div v-if='status.attachments' class='attachments media-body'>
@@ -310,7 +312,7 @@
     }
   }
 
-  .tall-status-unhider {
+  .status-unhider, .cw-status-hider {
     width: 100%;
     text-align: center;
   }

@@ -22,15 +22,18 @@ const Status = {
     'noHeading',
     'inlineExpanded'
   ],
-  data: () => ({
-    replying: false,
-    expanded: false,
-    unmuted: false,
-    userExpanded: false,
-    preview: null,
-    showPreview: false,
-    showingTall: false
-  }),
+  data () {
+    return {
+      replying: false,
+      expanded: false,
+      unmuted: false,
+      userExpanded: false,
+      preview: null,
+      showPreview: false,
+      showingTall: false,
+      expandingCW: this.$store.state.config.expandCW
+    }
+  },
   computed: {
     muteWords () {
       return this.$store.state.config.muteWords
@@ -98,12 +101,27 @@ const Status = {
     //
     // Using max-height + overflow: auto for status components resulted in false positives
     // very often with japanese characters, and it was very annoying.
+    tallStatus () {
+      const lengthScore = this.status.statusnet_html.split(/<p|<br/).length + this.status.text.length / 80
+      return lengthScore > 20
+    },
+    hideCWStatus () {
+        if (this.tallStatus && this.$store.state.config.expandCW) {
+          return false
+        }
+        return !this.expandingCW && this.status.summary
+    },
     hideTallStatus () {
+      if (this.status.summary && !this.$store.state.config.expandCW) {
+        return false
+      }
       if (this.showingTall) {
         return false
       }
-      const lengthScore = this.status.statusnet_html.split(/<p|<br/).length + this.status.text.length / 80
-      return lengthScore > 20
+      return this.tallStatus
+    },
+    showingMore () {
+      return this.showingTall || (this.status.summary && this.expandingCW)
     },
     attachmentSize () {
       if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
@@ -163,8 +181,16 @@ const Status = {
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
     },
-    toggleShowTall () {
-      this.showingTall = !this.showingTall
+    toggleShowMore () {
+      if (this.showingTall) {
+        this.showingTall = false
+      } else if (this.expandingCW) {
+        this.expandingCW = false
+      } else if (this.hideTallStatus) {
+        this.showingTall = true
+      } else if (this.hideCWStatus) {
+        this.expandingCW = true
+      }
     },
     replyEnter (id, event) {
       this.showPreview = true

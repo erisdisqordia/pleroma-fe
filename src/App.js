@@ -29,7 +29,7 @@ export default {
     style () { return { 'background-image': `url(${this.background})` } },
     sitename () { return this.$store.state.config.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
-    showWhoToFollowPanel () { return this.$store.state.config.showWhoToFollowPanel },
+    suggestionsEnabled () { return this.$store.state.config.suggestionsEnabled },
     showInstanceSpecificPanel () { return this.$store.state.config.showInstanceSpecificPanel }
   },
   methods: {

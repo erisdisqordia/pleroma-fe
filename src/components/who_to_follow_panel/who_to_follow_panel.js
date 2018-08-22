@@ -91,20 +91,20 @@ const WhoToFollowPanel = {
       url = url.replace(/{{user}}/g, encodeURIComponent(user))
       return url
     },
-    showWhoToFollowPanel () {
-      return this.$store.state.config.showWhoToFollowPanel
+    suggestionsEnabled () {
+      return this.$store.state.config.suggestionsEnabled
     }
   },
   watch: {
     user: function (user, oldUser) {
-      if (this.showWhoToFollowPanel) {
+      if (this.suggestionsEnabled) {
         getWhoToFollow(this)
       }
     }
   },
   mounted:
     function () {
-      if (this.showWhoToFollowPanel) {
+      if (this.suggestionsEnabled) {
         getWhoToFollow(this)
       }
     }

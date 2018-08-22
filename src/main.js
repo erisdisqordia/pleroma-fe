@@ -45,6 +45,7 @@ Vue.use(VueChatScroll)
 
 const persistedStateOptions = {
   paths: [
+    'config.collapseMessageWithSubject',
     'config.hideAttachments',
     'config.hideAttachmentsInConv',
     'config.hideNsfw',
@@ -53,6 +54,11 @@ const persistedStateOptions = {
     'config.streaming',
     'config.muteWords',
     'config.customTheme',
+    'config.highlight',
+    'config.loopVideo',
+    'config.loopVideoSilentOnly',
+    'config.pauseOnUnfocused',
+    'config.stopGifs',
     'users.lastLoginName'
   ]
 }
@@ -79,22 +85,27 @@ const i18n = new VueI18n({
 window.fetch('/api/statusnet/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {name, closed: registrationClosed, textlimit} = data.site
+    const {name, closed: registrationClosed, textlimit, server} = data.site
 
     store.dispatch('setOption', { name: 'name', value: name })
     store.dispatch('setOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
     store.dispatch('setOption', { name: 'textlimit', value: parseInt(textlimit) })
+    store.dispatch('setOption', { name: 'server', value: server })
   })
 
 window.fetch('/static/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {theme, background, logo, showInstanceSpecificPanel, scopeOptionsEnabled} = data
+    const {theme, background, logo, showWhoToFollowPanel, whoToFollowProvider, whoToFollowLink, showInstanceSpecificPanel, scopeOptionsEnabled, collapseMessageWithSubject} = data
     store.dispatch('setOption', { name: 'theme', value: theme })
     store.dispatch('setOption', { name: 'background', value: background })
     store.dispatch('setOption', { name: 'logo', value: logo })
+    store.dispatch('setOption', { name: 'showWhoToFollowPanel', value: showWhoToFollowPanel })
+    store.dispatch('setOption', { name: 'whoToFollowProvider', value: whoToFollowProvider })
+    store.dispatch('setOption', { name: 'whoToFollowLink', value: whoToFollowLink })
     store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
     store.dispatch('setOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
+    store.dispatch('setOption', { name: 'collapseMessageWithSubject', value: collapseMessageWithSubject })
     if (data['chatDisabled']) {
       store.dispatch('disableChat')
     }
@@ -116,6 +127,7 @@ window.fetch('/static/config.json')
       { name: 'mentions', path: '/:username/mentions', component: Mentions },
       { name: 'settings', path: '/settings', component: Settings },
       { name: 'registration', path: '/registration', component: Registration },
+      { name: 'registration', path: '/registration/:token', component: Registration },
       { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
       { name: 'user-settings', path: '/user-settings', component: UserSettings }
     ]
@@ -139,14 +151,6 @@ window.fetch('/static/config.json')
       el: '#app',
       render: h => h(App)
     })
-  })
-
-window.fetch('/nodeinfo/2.0.json')
-  .then((res) => res.json())
-  .then((data) => {
-    const suggestions = data.metadata.suggestions
-    store.dispatch('setOption', { name: 'showWhoToFollowPanel', value: suggestions.enabled })
-    store.dispatch('setOption', { name: 'whoToFollowLink', value: suggestions.web })
   })
 
 window.fetch('/static/terms-of-service.html')

@@ -25,6 +25,7 @@ const fetchAndUpdate = ({store, credentials, older = false}) => {
     .then((notifications) => {
       update({store, notifications, older})
     }, () => store.dispatch('setNotificationsError', { value: true }))
+    .catch(() => store.dispatch('setNotificationsError', { value: true }))
 }
 
 const startFetching = ({credentials, store}) => {

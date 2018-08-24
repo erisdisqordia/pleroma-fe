@@ -113,7 +113,7 @@ const Status = {
       if (this.status.visibility === 'private') {
         var textBody = this.status.text
         if (this.status.summary !== null) {
-            textBody = textBody.substring(this.status.summary.length, textBody.length)
+          textBody = textBody.substring(this.status.summary.length, textBody.length)
         }
         return textBody.startsWith('@')
       }

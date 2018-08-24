@@ -60,7 +60,8 @@ const persistedStateOptions = {
     'config.loopVideoSilentOnly',
     'config.pauseOnUnfocused',
     'config.stopGifs',
-    'users.lastLoginName'
+    'users.lastLoginName',
+    'statuses.notifications.maxSavedId'
   ]
 }
 

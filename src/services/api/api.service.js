@@ -27,6 +27,7 @@ const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
 const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
+const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json'
 const BLOCKING_URL = '/api/blocks/create.json'
 const UNBLOCKING_URL = '/api/blocks/destroy.json'
 const USER_URL = '/api/users/show.json'
@@ -303,8 +304,12 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
     mentions: MENTIONS_URL,
+    notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
     user: QVITTER_USER_TIMELINE_URL,
+    // separate timeline for own posts, so it won't break due to user timeline bugs
+    // really needed only for broken favorites
+    own: QVITTER_USER_TIMELINE_URL,
     tag: TAG_TIMELINE_URL
   }
 

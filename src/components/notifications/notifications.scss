@@ -4,6 +4,10 @@
   // a bit of a hack to allow scrolling below notifications
   padding-bottom: 15em;
 
+  .title {
+    display: inline-block;
+  }
+
   .panel {
     background: $fallback--bg;
     background: var(--bg, $fallback--bg)
@@ -22,6 +26,8 @@
     background: var(--btn, $fallback--btn);
     color: $fallback--fg;
     color: var(--fg, $fallback--fg);
+    display: flex;
+    align-items: baseline;
     .read-button {
       position: absolute;
       right: 0.7em;
@@ -44,6 +50,19 @@
     line-height: 1.3em;
   }
 
+  .loadmore-error {
+    position: absolute;
+    right: 0.6em;
+    font-size: 14px;
+    min-width: 6em;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 0 0.25em 0 0.25em;
+    margin: 0;
+    color: $fallback--fg;
+    color: var(--fg, $fallback--fg);
+  }
+
   .unseen {
     box-shadow: inset 4px 0 0 var(--cRed, $fallback--cRed);
     padding-left: 0;
@@ -55,6 +74,16 @@
   display: flex;
   border-bottom: 1px solid;
   border-bottom-color: inherit;
+
+  .broken-favorite {
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+    background-color: $fallback--cAlertRed;
+    background-color: var(--cAlertRed, $fallback--cAlertRed);
+    padding: 2px .5em
+  }
 
   .avatar-compact {
     width: 32px;
@@ -69,7 +98,7 @@
     }
   }
 
-  &:hover .animated.avatar {
+  &:hover .animated.avatar-compact {
     canvas {
       display: none;
     }
@@ -145,6 +174,13 @@
       max-width: 100%;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      img {
+        width: 14px;
+        height: 14px;
+        vertical-align: middle;
+        object-fit: contain
+      }
     }
     .timeago {
       float: right;
@@ -192,17 +228,6 @@
       margin: 0;
       margin-top: 0;
       margin-bottom: 0.3em;
-    }
-  }
-
-  // ugly as heck
-  &:last-child {
-    border-bottom: none;
-    border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
-    border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
-    .status-el {
-      border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
-      border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
     }
   }
 }

@@ -1,4 +1,5 @@
 import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
+import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -22,13 +23,22 @@ export const defaultState = {
   allStatuses: [],
   allStatusesObject: {},
   maxId: 0,
-  notifications: [],
+  notifications: {
+    desktopNotificationSilence: true,
+    maxId: 0,
+    maxSavedId: 0,
+    minId: Number.POSITIVE_INFINITY,
+    data: [],
+    error: false,
+    brokenFavorites: {}
+  },
   favorites: new Set(),
   error: false,
   timelines: {
     mentions: emptyTl(),
     public: emptyTl(),
     user: emptyTl(),
+    own: emptyTl(),
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
     tag: emptyTl()
@@ -134,11 +144,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     const result = mergeOrAdd(allStatuses, allStatusesObject, status)
     status = result.item
 
-    if (result.new) {
-      if (statusType(status) === 'retweet' && status.retweeted_status.user.id === user.id) {
-        addNotification({ type: 'repeat', status: status, action: status })
-      }
+    const brokenFavorites = state.notifications.brokenFavorites[status.id] || []
+    brokenFavorites.forEach((fav) => {
+      fav.status = status
+    })
+    delete state.notifications.brokenFavorites[status.id]
 
+    if (result.new) {
       // We are mentioned in a post
       if (statusType(status) === 'status' && find(status.attentions, { id: user.id })) {
         const mentions = state.timelines.mentions
@@ -149,10 +161,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
           mentions.newStatusCount += 1
 
           sortTimeline(mentions)
-        }
-        // Don't add notification for self-mention
-        if (status.user.id !== user.id) {
-          addNotification({ type: 'mention', status, action: status })
         }
       }
     }
@@ -176,33 +184,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     return status
   }
 
-  const addNotification = ({type, status, action}) => {
-    // Only add a new notification if we don't have one for the same action
-    if (!find(state.notifications, (oldNotification) => oldNotification.action.id === action.id)) {
-      state.notifications.push({ type, status, action, seen: false })
-
-      if ('Notification' in window && window.Notification.permission === 'granted') {
-        const title = action.user.name
-        const result = {}
-        result.icon = action.user.profile_image_url
-        result.body = action.text // there's a problem that it doesn't put a space before links tho
-
-        // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
-        if (action.attachments && action.attachments.length > 0 && !action.nsfw &&
-            action.attachments[0].mimetype.startsWith('image/')) {
-          result.image = action.attachments[0].url
-        }
-
-        let notification = new window.Notification(title, result)
-
-        // Chrome is known for not closing notifications automatically
-        // according to MDN, anyway.
-        setTimeout(notification.close.bind(notification), 5000)
-      }
-    }
-  }
-
-  const favoriteStatus = (favorite) => {
+  const favoriteStatus = (favorite, counter) => {
     const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
     if (status) {
       status.fave_num += 1
@@ -210,11 +192,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       // This is our favorite, so the relevant bit.
       if (favorite.user.id === user.id) {
         status.favorited = true
-      }
-
-      // Add a notification if the user's status is favorited
-      if (status.user.id === user.id) {
-        addNotification({type: 'favorite', status, action: favorite})
       }
     }
     return status
@@ -253,13 +230,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
         favoriteStatus(favorite)
       }
     },
-    'follow': (status) => {
-      let re = new RegExp(`started following ${user.name} \\(${user.statusnet_profile_url}\\)`)
-      let repleroma = new RegExp(`started following ${user.screen_name}$`)
-      if (status.text.match(re) || status.text.match(repleroma)) {
-        addNotification({ type: 'follow', status: status, action: status })
-      }
-    },
     'deletion': (deletion) => {
       const uri = deletion.uri
 
@@ -269,7 +239,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
         return
       }
 
-      remove(state.notifications, ({action: {id}}) => id === status.id)
+      remove(state.notifications.data, ({action: {id}}) => id === status.id)
 
       remove(allStatuses, { uri })
       if (timeline) {
@@ -298,8 +268,69 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 }
 
+const addNewNotifications = (state, { dispatch, notifications, older }) => {
+  const allStatuses = state.allStatuses
+  const allStatusesObject = state.allStatusesObject
+  each(notifications, (notification) => {
+    const result = mergeOrAdd(allStatuses, allStatusesObject, notification.notice)
+    const action = result.item
+    // Only add a new notification if we don't have one for the same action
+    if (!find(state.notifications.data, (oldNotification) => oldNotification.action.id === action.id)) {
+      state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)
+      state.notifications.minId = Math.min(notification.id, state.notifications.minId)
+
+      const fresh = !older && !notification.is_seen && notification.id > state.notifications.maxSavedId
+      const status = notification.ntype === 'like'
+            ? find(allStatuses, { id: action.in_reply_to_status_id })
+            : action
+
+      const result = {
+        type: notification.ntype,
+        status,
+        action,
+        // Always assume older notifications as seen
+        seen: !fresh
+      }
+
+      if (notification.ntype === 'like' && !status) {
+        let broken = state.notifications.brokenFavorites[action.in_reply_to_status_id]
+        if (broken) {
+          broken.push(result)
+        } else {
+          dispatch('fetchOldPost', { postId: action.in_reply_to_status_id })
+          broken = [ result ]
+          state.notifications.brokenFavorites[action.in_reply_to_status_id] = broken
+        }
+      }
+
+      state.notifications.data.push(result)
+
+      if ('Notification' in window && window.Notification.permission === 'granted') {
+        const title = action.user.name
+        const result = {}
+        result.icon = action.user.profile_image_url
+        result.body = action.text // there's a problem that it doesn't put a space before links tho
+
+        // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
+        if (action.attachments && action.attachments.length > 0 && !action.nsfw &&
+            action.attachments[0].mimetype.startsWith('image/')) {
+          result.image = action.attachments[0].url
+        }
+
+        if (fresh && !state.notifications.desktopNotificationSilence) {
+          let notification = new window.Notification(title, result)
+          // Chrome is known for not closing notifications automatically
+          // according to MDN, anyway.
+          setTimeout(notification.close.bind(notification), 5000)
+        }
+      }
+    }
+  })
+}
+
 export const mutations = {
   addNewStatuses,
+  addNewNotifications,
   showNewStatuses (state, { timeline }) {
     const oldTimeline = (state.timelines[timeline])
 
@@ -334,6 +365,12 @@ export const mutations = {
   setError (state, { value }) {
     state.error = value
   },
+  setNotificationsError (state, { value }) {
+    state.notifications.error = value
+  },
+  setNotificationsSilence (state, { value }) {
+    state.notifications.desktopNotificationSilence = value
+  },
   setProfileView (state, { v }) {
     // load followers / friends only when needed
     state.timelines['user'].viewing = v
@@ -345,6 +382,7 @@ export const mutations = {
     state.timelines['user'].followers = followers
   },
   markNotificationsAsSeen (state, notifications) {
+    set(state.notifications, 'maxSavedId', state.notifications.maxId)
     each(notifications, (notification) => {
       notification.seen = true
     })
@@ -360,8 +398,17 @@ const statuses = {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser })
     },
+    addNewNotifications ({ rootState, commit, dispatch }, { notifications, older }) {
+      commit('addNewNotifications', { dispatch, notifications, older })
+    },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })
+    },
+    setNotificationsError ({ rootState, commit }, { value }) {
+      commit('setNotificationsError', { value })
+    },
+    setNotificationsSilence ({ rootState, commit }, { value }) {
+      commit('setNotificationsSilence', { value })
     },
     addFriends ({ rootState, commit }, { friends }) {
       commit('addFriends', { friends })

@@ -12,7 +12,7 @@
         <div class="name-and-action">
           <span class="username" v-if="!!notification.action.user.name_html" :title="'@'+notification.action.user.screen_name" v-html="notification.action.user.name_html"></span>
           <span class="username" v-else :title="'@'+notification.action.user.screen_name">{{ notification.action.user.name }}</span>
-          <span v-if="notification.type === 'favorite'">
+          <span v-if="notification.type === 'like'">
             <i class="fa icon-star lit"></i>
             <small>{{$t('notifications.favorited_you')}}</small>
           </span>
@@ -25,12 +25,17 @@
             <small>{{$t('notifications.followed_you')}}</small>
           </span>
         </div>
-        <small class="timeago"><router-link :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
+        <small class="timeago"><router-link v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
       </span>
       <div class="follow-text" v-if="notification.type === 'follow'">
         <router-link :to="{ name: 'user-profile', params: { id: notification.action.user.id } }">@{{notification.action.user.screen_name}}</router-link>
       </div>
-      <status v-else class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>
+      <template v-else>
+        <status v-if="notification.status"  class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>
+        <div class="broken-favorite" v-else>
+          {{$t('notifications.broken_favorite')}}
+        </div>
+      </template>
     </div>
   </div>
 </template>

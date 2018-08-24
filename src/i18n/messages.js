@@ -1593,6 +1593,8 @@ const ru = {
     set_new_profile_background: 'Загрузить новый фон профиля',
     settings: 'Настройки',
     theme: 'Тема',
+    export_theme: 'Экспортировать текущую тему',
+    import_theme: 'Загрузить сохранённую тему',
     presets: 'Пресеты',
     theme_help: 'Используйте шестнадцатеричные коды цветов (#rrggbb) для настройки темы.',
     radii_help: 'Округление краёв элементов интерфейса (в пикселях)',
@@ -1641,7 +1643,12 @@ const ru = {
     confirm_new_password: 'Подтверждение нового пароля',
     changed_password: 'Пароль изменён успешно.',
     change_password_error: 'Произошла ошибка при попытке изменить пароль.',
-    limited_availability: 'Не доступно в вашем браузере'
+    lock_account_description: 'Аккаунт доступен только подтверждённым подписчикам',
+    limited_availability: 'Не доступно в вашем браузере',
+    profile_tab: 'Профиль',
+    security_tab: 'Безопасность',
+    data_import_export_tab: 'Импорт / Экспорт данных',
+    collapse_subject: 'Сворачивать посты с темой'
   },
   notifications: {
     notifications: 'Уведомления',

@@ -83,7 +83,6 @@ const Status = {
       return hits
     },
     muted () { return !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
-    isReply () { return !!this.status.in_reply_to_status_id },
     isFocused () {
       // retweet or root of an expanded conversation
       if (this.focused) {

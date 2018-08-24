@@ -93,63 +93,79 @@ window.fetch('/api/statusnet/config.json')
     store.dispatch('setOption', { name: 'server', value: server })
   })
 
-window.fetch('/static/config.json')
+window.fetch('/api/statusnet/config.json')
   .then((res) => res.json())
   .then((data) => {
-    const {theme, background, logo, showWhoToFollowPanel, whoToFollowProvider, whoToFollowLink, showInstanceSpecificPanel, scopeOptionsEnabled, collapseMessageWithSubject} = data
-    store.dispatch('setOption', { name: 'theme', value: theme })
-    store.dispatch('setOption', { name: 'background', value: background })
-    store.dispatch('setOption', { name: 'logo', value: logo })
-    store.dispatch('setOption', { name: 'showWhoToFollowPanel', value: showWhoToFollowPanel })
-    store.dispatch('setOption', { name: 'whoToFollowProvider', value: whoToFollowProvider })
-    store.dispatch('setOption', { name: 'whoToFollowLink', value: whoToFollowLink })
-    store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
-    store.dispatch('setOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
-    store.dispatch('setOption', { name: 'collapseMessageWithSubject', value: collapseMessageWithSubject })
-    if (data['chatDisabled']) {
-      store.dispatch('disableChat')
-    }
+    var apiStatusnetConfigSitePleromafe = data.site.pleromafe
+    window.fetch('/static/sonfig.json')
+    .then((data) => {
+      var staticConfig = data
 
-    const routes = [
-      { name: 'root',
-        path: '/',
-        redirect: to => {
-          var redirectRootLogin = data['redirectRootLogin']
-          var redirectRootNoLogin = data['redirectRootNoLogin']
-          return (store.state.users.currentUser ? redirectRootLogin : redirectRootNoLogin) || '/main/all'
-        }},
-      { path: '/main/all', component: PublicAndExternalTimeline },
-      { path: '/main/public', component: PublicTimeline },
-      { path: '/main/friends', component: FriendsTimeline },
-      { path: '/tag/:tag', component: TagTimeline },
-      { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
-      { name: 'user-profile', path: '/users/:id', component: UserProfile },
-      { name: 'mentions', path: '/:username/mentions', component: Mentions },
-      { name: 'settings', path: '/settings', component: Settings },
-      { name: 'registration', path: '/registration', component: Registration },
-      { name: 'registration', path: '/registration/:token', component: Registration },
-      { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
-      { name: 'user-settings', path: '/user-settings', component: UserSettings }
-    ]
+      var theme = (apiStatusnetConfigSitePleromafe.theme || staticConfig.theme)
+      var background = (apiStatusnetConfigSitePleromafe.background || staticConfig.background)
+      var logo = (apiStatusnetConfigSitePleromafe.logo || staticConfig.logo)
+      var redirectRootNoLogin = (apiStatusnetConfigSitePleromafe.redirectRootNoLogin || staticConfig.redirectRootNoLogin)
+      var redirectRootLogin = (apiStatusnetConfigSitePleromafe.redirectRootLogin || staticConfig.redirectRootLogin)
+      var chatDisabled = (apiStatusnetConfigSitePleromafe.chatDisabled || staticConfig.chatDisabled)
+      var showWhoToFollowPanel = (apiStatusnetConfigSitePleromafe.showWhoToFollowPanel || staticConfig.showWhoToFollowPanel)
+      var whoToFollowProvider = (apiStatusnetConfigSitePleromafe.whoToFollowProvider || staticConfig.whoToFollowProvider)
+      var whoToFollowLink = (apiStatusnetConfigSitePleromafe.whoToFollowLink || staticConfig.whoToFollowLink)
+      var showInstanceSpecificPanel = (apiStatusnetConfigSitePleromafe.showInstanceSpecificPanel || staticConfig.showInstanceSpecificPanel)
+      var scopeOptionsEnabled = (apiStatusnetConfigSitePleromafe.scopeOptionsEnabled || staticConfig.scopeOptionsEnabled)
+      var collapseMessageWithSubject = (apiStatusnetConfigSitePleromafe.collapseMessageWithSubject || staticConfig.collapseMessageWithSubject)
 
-    const router = new VueRouter({
-      mode: 'history',
-      routes,
-      scrollBehavior: (to, from, savedPosition) => {
-        if (to.matched.some(m => m.meta.dontScroll)) {
-          return false
-        }
-        return savedPosition || { x: 0, y: 0 }
+      store.dispatch('setOption', { name: 'theme', value: theme })
+      store.dispatch('setOption', { name: 'background', value: background })
+      store.dispatch('setOption', { name: 'logo', value: logo })
+      store.dispatch('setOption', { name: 'showWhoToFollowPanel', value: showWhoToFollowPanel })
+      store.dispatch('setOption', { name: 'whoToFollowProvider', value: whoToFollowProvider })
+      store.dispatch('setOption', { name: 'whoToFollowLink', value: whoToFollowLink })
+      store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
+      store.dispatch('setOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
+      store.dispatch('setOption', { name: 'collapseMessageWithSubject', value: collapseMessageWithSubject })
+      if (chatDisabled) {
+        store.dispatch('disableChat')
       }
-    })
 
-    /* eslint-disable no-new */
-    new Vue({
-      router,
-      store,
-      i18n,
-      el: '#app',
-      render: h => h(App)
+      const routes = [
+        { name: 'root',
+          path: '/',
+          redirect: to => {
+            return (store.state.users.currentUser ? redirectRootLogin : redirectRootNoLogin) || '/main/all'
+          }},
+        { path: '/main/all', component: PublicAndExternalTimeline },
+        { path: '/main/public', component: PublicTimeline },
+        { path: '/main/friends', component: FriendsTimeline },
+        { path: '/tag/:tag', component: TagTimeline },
+        { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
+        { name: 'user-profile', path: '/users/:id', component: UserProfile },
+        { name: 'mentions', path: '/:username/mentions', component: Mentions },
+        { name: 'settings', path: '/settings', component: Settings },
+        { name: 'registration', path: '/registration', component: Registration },
+        { name: 'registration', path: '/registration/:token', component: Registration },
+        { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
+        { name: 'user-settings', path: '/user-settings', component: UserSettings }
+      ]
+
+      const router = new VueRouter({
+        mode: 'history',
+        routes,
+        scrollBehavior: (to, from, savedPosition) => {
+          if (to.matched.some(m => m.meta.dontScroll)) {
+            return false
+          }
+          return savedPosition || { x: 0, y: 0 }
+        }
+      })
+
+      /* eslint-disable no-new */
+      new Vue({
+        router,
+        store,
+        i18n,
+        el: '#app',
+        render: h => h(App)
+      })
     })
   })
 

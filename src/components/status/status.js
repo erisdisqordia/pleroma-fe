@@ -83,7 +83,6 @@ const Status = {
       return hits
     },
     muted () { return !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
-    isReply () { return !!this.status.in_reply_to_status_id },
     isFocused () {
       // retweet or root of an expanded conversation
       if (this.focused) {
@@ -104,6 +103,48 @@ const Status = {
     tallStatus () {
       const lengthScore = this.status.statusnet_html.split(/<p|<br/).length + this.status.text.length / 80
       return lengthScore > 20
+    },
+    isReply () {
+      if (this.status.in_reply_to_status_id) {
+        return true
+      }
+      // For private replies where we can't see the OP, in_reply_to_status_id will be null.
+      // So instead, check that the post starts with a @mention.
+      if (this.status.visibility === 'private') {
+        var textBody = this.status.text
+        if (this.status.summary !== null) {
+          textBody = textBody.substring(this.status.summary.length, textBody.length)
+        }
+        return textBody.startsWith('@')
+      }
+      return false
+    },
+    hideReply () {
+      if (this.$store.state.config.replyVisibility === 'all') {
+        return false
+      }
+      if (this.inlineExpanded || this.expanded || this.inConversation || !this.isReply) {
+        return false
+      }
+      if (this.status.user.id === this.$store.state.users.currentUser.id) {
+        return false
+      }
+      if (this.status.activity_type === 'repeat') {
+        return false
+      }
+      var checkFollowing = this.$store.state.config.replyVisibility === 'following'
+      for (var i = 0; i < this.status.attentions.length; ++i) {
+        if (this.status.user.id === this.status.attentions[i].id) {
+          continue
+        }
+        if (checkFollowing && this.status.attentions[i].following) {
+          return false
+        }
+        if (this.status.attentions[i].id === this.$store.state.users.currentUser.id) {
+          return false
+        }
+      }
+      return this.status.attentions.length > 0
     },
     hideSubjectStatus () {
       if (this.tallStatus && !this.$store.state.config.collapseMessageWithSubject) {

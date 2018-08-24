@@ -15,6 +15,7 @@ const defaultState = {
   hoverPreview: true,
   pauseOnUnfocused: true,
   stopGifs: false,
+  replyVisibility: 'all',
   muteWords: [],
   highlight: {}
 }

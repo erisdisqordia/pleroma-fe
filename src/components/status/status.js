@@ -123,7 +123,7 @@ const Status = {
       if (this.$store.state.config.replyVisibility === 'all') {
         return false
       }
-      if (this.inlineExpanded || this.expanded || !this.isReply) {
+      if (this.inlineExpanded || this.expanded || this.inConversation || !this.isReply) {
         return false
       }
       if (this.status.user.id === this.$store.state.users.currentUser.id) {

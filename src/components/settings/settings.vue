@@ -38,6 +38,16 @@
           <input type="checkbox" id="hoverPreview" v-model="hoverPreviewLocal">
           <label for="hoverPreview">{{$t('settings.reply_link_preview')}}</label>
         </li>
+        <li>
+          <label for="replyVisibility" class="select">
+            <select id="replyVisibility" v-model="replyVisibilityLocal">
+              <option value="all" selected>{{$t('settings.reply_visibility_all')}}</option>
+              <option value="following">{{$t('settings.reply_visibility_following')}}</option>
+              <option value="self">{{$t('settings.reply_visibility_self')}}</option>
+            </select>
+            <i class="icon-down-open"/>
+          </label>
+        </li>
       </ul>
     </div>
     <div class="setting-item">

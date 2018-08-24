@@ -8,6 +8,7 @@ const settings = {
       hideAttachmentsLocal: this.$store.state.config.hideAttachments,
       hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
+      replyVisibilityLocal: this.$store.state.config.replyVisibility,
       loopVideoLocal: this.$store.state.config.loopVideo,
       loopVideoSilentOnlyLocal: this.$store.state.config.loopVideoSilentOnly,
       muteWordsString: this.$store.state.config.muteWords.join('\n'),
@@ -43,6 +44,9 @@ const settings = {
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
+    },
+    replyVisibilityLocal (value) {
+      this.$store.dispatch('setOption', { name: 'replyVisibility', value })
     },
     loopVideoLocal (value) {
       this.$store.dispatch('setOption', { name: 'loopVideo', value })

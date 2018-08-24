@@ -325,6 +325,9 @@ const en = {
     loop_video: 'Loop videos',
     loop_video_silent_only: 'Loop only videos without sound (i.e. Mastodon\'s "gifs")',
     reply_link_preview: 'Enable reply-link preview on mouse hover',
+    reply_visibility_all: 'Show all replies',
+    reply_visibility_following: 'Only show replies directed at me or users I\'m following',
+    reply_visibility_self: 'Only show replies directed at me',
     follow_import: 'Follow import',
     import_followers_from_a_csv_file: 'Import follows from a csv file',
     follows_imported: 'Follows imported! Processing them will take a while.',
@@ -398,6 +401,10 @@ const en = {
   },
   user_profile: {
     timeline_title: 'User Timeline'
+  },
+  who_to_follow: {
+    who_to_follow: 'Who to follow',
+    more: 'More'
   }
 }
 
@@ -781,115 +788,147 @@ const ja = {
     chat: 'ローカルチャット',
     timeline: 'タイムライン',
     mentions: 'メンション',
-    public_tl: '公開タイムライン',
-    twkn: '接続しているすべてのネットワーク'
+    public_tl: 'パブリックタイムライン',
+    twkn: 'つながっているすべてのネットワーク',
+    friend_requests: 'Follow Requests'
   },
   user_card: {
     follows_you: 'フォローされました！',
-    following: 'フォロー中！',
+    following: 'フォローしています！',
     follow: 'フォロー',
-    blocked: 'ブロック済み！',
+    blocked: 'ブロックしています！',
     block: 'ブロック',
-    statuses: '投稿',
+    statuses: 'ステータス',
     mute: 'ミュート',
-    muted: 'ミュート済み',
+    muted: 'ミュートしています！',
     followers: 'フォロワー',
     followees: 'フォロー',
     per_day: '/日',
-    remote_follow: 'リモートフォロー'
+    remote_follow: 'リモートフォロー',
+    approve: 'Approve',
+    deny: 'Deny'
   },
   timeline: {
-    show_new: '更新',
-    error_fetching: '更新の取得中にエラーが発生しました。',
-    up_to_date: '最新',
-    load_older: '古い投稿を読み込む',
-    conversation: '会話',
-    collapse: '折り畳む',
+    show_new: 'よみこみ',
+    error_fetching: 'よみこみがエラーになりました。',
+    up_to_date: 'さいしん',
+    load_older: 'ふるいステータス',
+    conversation: 'スレッド',
+    collapse: 'たたむ',
     repeated: 'リピート'
   },
   settings: {
-    user_settings: 'ユーザー設定',
-    name_bio: '名前とプロフィール',
-    name: '名前',
+    user_settings: 'ユーザーせってい',
+    name_bio: 'なまえとプロフィール',
+    name: 'なまえ',
     bio: 'プロフィール',
     avatar: 'アバター',
-    current_avatar: 'あなたの現在のアバター',
-    set_new_avatar: '新しいアバターを設定する',
+    current_avatar: 'いまのアバター',
+    set_new_avatar: 'あたらしいアバターをせっていする',
     profile_banner: 'プロフィールバナー',
-    current_profile_banner: '現在のプロフィールバナー',
-    set_new_profile_banner: '新しいプロフィールバナーを設定する',
-    profile_background: 'プロフィールの背景',
-    set_new_profile_background: '新しいプロフィールの背景を設定する',
-    settings: '設定',
+    current_profile_banner: 'いまのプロフィールバナー',
+    set_new_profile_banner: 'あたらしいプロフィールバナーを設定する',
+    profile_background: 'プロフィールのバックグラウンド',
+    set_new_profile_background: 'あたらしいプロフィールのバックグラウンドをせっていする',
+    settings: 'せってい',
     theme: 'テーマ',
     presets: 'プリセット',
-    theme_help: '16進数カラーコード (#aabbcc) を使用してカラーテーマをカスタマイズ出来ます。',
-    radii_help: 'インターフェースの縁の丸さを設定する。',
-    background: '背景',
-    foreground: '前景',
-    text: '文字',
+    theme_help: 'カラーテーマをカスタマイズできます。',
+    radii_help: 'インターフェースのまるさをせっていする。',
+    background: 'バックグラウンド',
+    foreground: 'フォアグラウンド',
+    text: 'もじ',
     links: 'リンク',
-    cBlue: '青 (返信, フォロー)',
-    cRed: '赤 (キャンセル)',
-    cOrange: 'オレンジ (お気に入り)',
-    cGreen: '緑 (リツイート)',
+    cBlue: 'あお (リプライ, フォロー)',
+    cRed: 'あか (キャンセル)',
+    cOrange: 'オレンジ (おきにいり)',
+    cGreen: 'みどり (リピート)',
     btnRadius: 'ボタン',
+    inputRadius: 'Input fields',
     panelRadius: 'パネル',
     avatarRadius: 'アバター',
-    avatarAltRadius: 'アバター (通知)',
+    avatarAltRadius: 'アバター (つうち)',
     tooltipRadius: 'ツールチップ/アラート',
     attachmentRadius: 'ファイル',
     filtering: 'フィルタリング',
-    filtering_explanation: 'これらの単語を含むすべてのものがミュートされます。1行に1つの単語を入力してください。',
+    filtering_explanation: 'これらのことばをふくむすべてのものがミュートされます。1行に1つのことばをかいてください。',
     attachments: 'ファイル',
-    hide_attachments_in_tl: 'タイムラインのファイルを隠す。',
-    hide_attachments_in_convo: '会話の中のファイルを隠す。',
-    nsfw_clickthrough: 'NSFWファイルの非表示を有効にする。',
-    stop_gifs: 'カーソルを重ねた時にGIFを再生する。',
-    autoload: '下にスクロールした時に自動で読み込むようにする。',
-    streaming: '上までスクロールした時に自動でストリーミングされるようにする。',
-    reply_link_preview: 'マウスカーソルを重ねた時に返信のプレビューを表示するようにする。',
+    hide_attachments_in_tl: 'タイムラインのファイルをかくす。',
+    hide_attachments_in_convo: 'スレッドのファイルをかくす。',
+    nsfw_clickthrough: 'NSFWなファイルをかくす。',
+    stop_gifs: 'カーソルをかさねたとき、GIFをうごかす。',
+    autoload: 'したにスクロールしたとき、じどうてきによみこむ。',
+    streaming: 'うえまでスクロールしたとき、じどうてきにストリーミングする。',
+    reply_link_preview: 'カーソルをかさねたとき、リプライのプレビューをみる。',
     follow_import: 'フォローインポート',
     import_followers_from_a_csv_file: 'CSVファイルからフォローをインポートする。',
-    follows_imported: 'フォローがインポートされました！処理に少し時間がかかるかもしれません。',
-    follow_import_error: 'フォロワーのインポート中にエラーが発生しました。'
+    follows_imported: 'フォローがインポートされました！ すこしじかんがかかるかもしれません。',
+    follow_import_error: 'フォローのインポートがエラーになりました。',
+    delete_account: 'アカウントをけす',
+    delete_account_description: 'あなたのアカウントとメッセージが、きえます。',
+    delete_account_instructions: 'ほんとうにアカウントをけしてもいいなら、パスワードをかいてください。',
+    delete_account_error: 'アカウントをけすことが、できなかったかもしれません。インスタンスのかんりしゃに、れんらくしてください。',
+    follow_export: 'フォローのエクスポート',
+    follow_export_processing: 'おまちください。まもなくファイルをダウンロードできます。',
+    follow_export_button: 'エクスポート',
+    change_password: 'パスワードをかえる',
+    current_password: 'いまのパスワード',
+    new_password: 'あたらしいパスワード',
+    confirm_new_password: 'あたらしいパスワードのかくにん',
+    changed_password: 'パスワードが、かわりました！',
+    change_password_error: 'パスワードをかえることが、できなかったかもしれません。',
+    lock_account_description: 'あなたがみとめたひとだけ、あなたのアカウントをフォローできます。'
   },
   notifications: {
-    notifications: '通知',
-    read: '読んだ！',
+    notifications: 'つうち',
+    read: 'よんだ！',
     followed_you: 'フォローされました',
-    favorited_you: 'あなたの投稿がお気に入りされました',
-    repeated_you: 'あなたの投稿がリピートされました'
+    favorited_you: 'あなたのステータスがおきにいりされました',
+    repeated_you: 'あなたのステータスがリピートされました'
   },
   login: {
     login: 'ログイン',
-    username: 'ユーザー名',
-    placeholder: '例えば lain',
+    username: 'ユーザーめい',
+    placeholder: 'れい: lain',
     password: 'パスワード',
-    register: '登録',
+    register: 'はじめる',
     logout: 'ログアウト'
   },
   registration: {
-    registration: '登録',
-    fullname: '表示名',
+    registration: 'はじめる',
+    fullname: 'スクリーンネーム',
     email: 'Eメール',
     bio: 'プロフィール',
-    password_confirm: 'パスワードの確認'
+    password_confirm: 'パスワードのかくにん'
   },
   post_status: {
-    posting: '投稿',
-    default: 'ちょうどL.A.に着陸しました。'
+    posting: 'とうこう',
+    content_warning: 'せつめい (かかなくてもよい)',
+    default: 'はねだくうこうに、つきました。',
+    account_not_locked_warning: 'あなたのアカウントは {0} ではありません。あなたをフォローすれば、だれでも、フォロワーげんていのステータスをよむことができます。',
+    account_not_locked_warning_link: 'ロックされたアカウント',
+    direct_warning: 'このステータスは、メンションされたユーザーだけが、よむことができます。',
+    scope: {
+      public: 'パブリック - パブリックタイムラインにとどきます。',
+      unlisted: 'アンリステッド - パブリックタイムラインにとどきません。',
+      private: 'フォロワーげんてい - フォロワーのみにとどきます。',
+      direct: 'ダイレクト - メンションされたユーザーのみにとどきます。'
+    }
   },
   finder: {
-    find_user: 'ユーザー検索',
-    error_fetching_user: 'ユーザー検索でエラーが発生しました'
+    find_user: 'ユーザーをさがす',
+    error_fetching_user: 'ユーザーけんさくがエラーになりました。'
   },
   general: {
-    submit: '送信',
-    apply: '適用'
+    submit: 'そうしん',
+    apply: 'てきよう'
   },
   user_profile: {
     timeline_title: 'ユーザータイムライン'
+  },
+  who_to_follow: {
+    who_to_follow: 'おすすめユーザー',
+    more: 'くわしく'
   }
 }
 
@@ -1595,6 +1634,8 @@ const ru = {
     set_new_profile_background: 'Загрузить новый фон профиля',
     settings: 'Настройки',
     theme: 'Тема',
+    export_theme: 'Экспортировать текущую тему',
+    import_theme: 'Загрузить сохранённую тему',
     presets: 'Пресеты',
     theme_help: 'Используйте шестнадцатеричные коды цветов (#rrggbb) для настройки темы.',
     radii_help: 'Округление краёв элементов интерфейса (в пикселях)',
@@ -1643,7 +1684,12 @@ const ru = {
     confirm_new_password: 'Подтверждение нового пароля',
     changed_password: 'Пароль изменён успешно.',
     change_password_error: 'Произошла ошибка при попытке изменить пароль.',
-    limited_availability: 'Не доступно в вашем браузере'
+    lock_account_description: 'Аккаунт доступен только подтверждённым подписчикам',
+    limited_availability: 'Не доступно в вашем браузере',
+    profile_tab: 'Профиль',
+    security_tab: 'Безопасность',
+    data_import_export_tab: 'Импорт / Экспорт данных',
+    collapse_subject: 'Сворачивать посты с темой'
   },
   notifications: {
     notifications: 'Уведомления',

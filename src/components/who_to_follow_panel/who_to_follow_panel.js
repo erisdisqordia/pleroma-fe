@@ -1,5 +1,7 @@
-function showWhoToFollow (panel, reply, aHost, aUser) {
-  var users = reply.ids
+import apiService from '../../services/api/api.service.js'
+
+function showWhoToFollow (panel, reply) {
+  var users = reply
   var cn
   var index = 0
   var random = Math.floor(Math.random() * 10)
@@ -7,12 +9,12 @@ function showWhoToFollow (panel, reply, aHost, aUser) {
     var user
     user = users[cn]
     var img
-    if (user.icon) {
-      img = user.icon
+    if (user.avatar) {
+      img = user.avatar
     } else {
       img = '/images/avi.png'
     }
-    var name = user.to_id
+    var name = user.acct
     if (index === 0) {
       panel.img1 = img
       panel.name1 = name
@@ -52,27 +54,15 @@ function showWhoToFollow (panel, reply, aHost, aUser) {
 }
 
 function getWhoToFollow (panel) {
-  var user = panel.$store.state.users.currentUser.screen_name
-  if (user) {
+  var credentials = panel.$store.state.users.currentUser.credentials
+  if (credentials) {
     panel.name1 = 'Loading...'
     panel.name2 = 'Loading...'
     panel.name3 = 'Loading...'
-    var host = window.location.hostname
-    var whoToFollowProvider = panel.$store.state.config.whoToFollowProvider
-    var url
-    url = whoToFollowProvider.replace(/{{host}}/g, encodeURIComponent(host))
-    url = url.replace(/{{user}}/g, encodeURIComponent(user))
-    window.fetch(url, {mode: 'cors'}).then(function (response) {
-      if (response.ok) {
-        return response.json()
-      } else {
-        panel.name1 = ''
-        panel.name2 = ''
-        panel.name3 = ''
-      }
-    }).then(function (reply) {
-      showWhoToFollow(panel, reply, host, user)
-    })
+    apiService.suggestions({credentials: credentials})
+      .then((reply) => {
+        showWhoToFollow(panel, reply)
+      })
   }
 }
 
@@ -95,26 +85,26 @@ const WhoToFollowPanel = {
     moreUrl: function () {
       var host = window.location.hostname
       var user = this.user
-      var whoToFollowLink = this.$store.state.config.whoToFollowLink
+      var suggestionsWeb = this.$store.state.config.suggestionsWeb
       var url
-      url = whoToFollowLink.replace(/{{host}}/g, encodeURIComponent(host))
+      url = suggestionsWeb.replace(/{{host}}/g, encodeURIComponent(host))
       url = url.replace(/{{user}}/g, encodeURIComponent(user))
       return url
     },
-    showWhoToFollowPanel () {
-      return this.$store.state.config.showWhoToFollowPanel
+    suggestionsEnabled () {
+      return this.$store.state.config.suggestionsEnabled
     }
   },
   watch: {
     user: function (user, oldUser) {
-      if (this.showWhoToFollowPanel) {
+      if (this.suggestionsEnabled) {
         getWhoToFollow(this)
       }
     }
   },
   mounted:
     function () {
-      if (this.showWhoToFollowPanel) {
+      if (this.suggestionsEnabled) {
         getWhoToFollow(this)
       }
     }

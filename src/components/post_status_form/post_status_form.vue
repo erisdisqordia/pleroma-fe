@@ -107,6 +107,10 @@
     padding: 0.5em;
     height: 32px;
 
+    button {
+      width: 10em;
+    }
+
     p {
       margin: 0.35em;
       padding: 0.35em;

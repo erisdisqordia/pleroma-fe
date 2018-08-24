@@ -105,8 +105,8 @@
           <span>{{user.followers_count}}</span>
         </div>
       </div>
-      <p v-if="!hideBio && user.description_html" v-html="user.description_html"></p>
-      <p v-else-if="!hideBio">{{ user.description }}</p>
+      <p v-if="!hideBio && user.description_html" class="profile-bio" v-html="user.description_html"></p>
+      <p v-else-if="!hideBio" class="profile-bio">{{ user.description }}</p>
     </div>
   </div>
 </template>
@@ -130,7 +130,11 @@
 .profile-panel-body {
   word-wrap: break-word;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%)
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%);
+
+  .profile-bio {
+    text-align: center;
+  }
 }
 
 .user-info {

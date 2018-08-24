@@ -36,6 +36,7 @@ const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
 const FOLLOW_REQUESTS_URL = '/api/pleroma/friend_requests'
 const APPROVE_USER_URL = '/api/pleroma/friendships/approve'
 const DENY_USER_URL = '/api/pleroma/friendships/deny'
+const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 import { each, map } from 'lodash'
 import 'whatwg-fetch'
@@ -449,6 +450,12 @@ const fetchMutes = ({credentials}) => {
   }).then((data) => data.json())
 }
 
+const suggestions = ({credentials}) => {
+  return fetch(SUGGESTIONS_URL, {
+    headers: authHeaders(credentials)
+  }).then((data) => data.json())
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -482,7 +489,8 @@ const apiService = {
   changePassword,
   fetchFollowRequests,
   approveUser,
-  denyUser
+  denyUser,
+  suggestions
 }
 
 export default apiService

@@ -192,3 +192,11 @@ window.fetch('/instance/panel.html')
     store.dispatch('setOption', { name: 'instanceSpecificPanelContent', value: html })
   })
 
+window.fetch('/nodeinfo/2.0.json')
+  .then((res) => res.json())
+  .then((data) => {
+    const suggestions = data.metadata.suggestions
+    store.dispatch('setOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
+    store.dispatch('setOption', { name: 'suggestionsWeb', value: suggestions.web })
+  })
+

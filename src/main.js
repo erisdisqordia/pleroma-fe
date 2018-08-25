@@ -97,7 +97,7 @@ window.fetch('/api/statusnet/config.json')
   .then((res) => res.json())
   .then((data) => {
     var apiStatusnetConfigSitePleromafe = data.site.pleromafe
-    window.fetch('/static/sonfig.json')
+    window.fetch('/static/config.json')
     .then((data) => {
       var staticConfig = data
 

@@ -1,6 +1,8 @@
 import { set, delete as del } from 'vue'
 import StyleSetter from '../services/style_setter/style_setter.js'
 
+const browserLocale = (window.navigator.language || 'en').split('-')[0]
+
 const defaultState = {
   name: 'Pleroma FE',
   colors: {},
@@ -17,7 +19,8 @@ const defaultState = {
   stopGifs: false,
   replyVisibility: 'all',
   muteWords: [],
-  highlight: {}
+  highlight: {},
+  interfaceLanguage: browserLocale
 }
 
 const config = {

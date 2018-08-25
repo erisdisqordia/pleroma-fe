@@ -84,7 +84,7 @@
           </div>
 
           <div v-if='status.attachments && !hideSubjectStatus' class='attachments media-body'>
-            <attachment :size="attachmentSize" :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments" :key="attachment.id">
+            <attachment :size="attachmentSize" :status-id="status.id" :nsfw="nsfwClickthrough" :attachment="attachment" v-for="attachment in status.attachments" :key="attachment.id">
             </attachment>
           </div>
 

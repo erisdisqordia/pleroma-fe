@@ -10,7 +10,7 @@
       <a href="#" @click.prevent="toggleHidden()">Hide</a>
     </div>
 
-    <a v-if="type === 'image' && !hidden" class="image-attachment" :href="attachment.url" target="_blank">
+    <a v-if="type === 'image' && !hidden" class="image-attachment" :href="attachment.url" target="_blank" :title="attachment.description">
       <StillImage :class="{'small': isSmall}" referrerpolicy="no-referrer" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 

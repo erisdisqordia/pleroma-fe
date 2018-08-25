@@ -53,6 +53,7 @@ const PostStatusForm = {
       highlighted: 0,
       newStatus: {
         status: statusText,
+        nsfw: false,
         files: [],
         visibility: this.messageScope || this.$store.state.users.currentUser.default_scope
       },
@@ -204,6 +205,7 @@ const PostStatusForm = {
         status: newStatus.status,
         spoilerText: newStatus.spoilerText || null,
         visibility: newStatus.visibility,
+        sensitive: newStatus.nsfw,
         media: newStatus.files,
         store: this.$store,
         inReplyToStatusId: this.replyTo

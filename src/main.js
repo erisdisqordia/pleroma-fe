@@ -93,7 +93,9 @@ window.fetch('/api/statusnet/config.json')
     store.dispatch('setOption', { name: 'server', value: server })
 
     var apiConfig = data.site.pleromafe
+
     window.fetch('/static/config.json')
+    .then((res) => res.json())
     .then((data) => {
       var staticConfig = data
 

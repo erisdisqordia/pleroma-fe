@@ -91,11 +91,7 @@ window.fetch('/api/statusnet/config.json')
     store.dispatch('setOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
     store.dispatch('setOption', { name: 'textlimit', value: parseInt(textlimit) })
     store.dispatch('setOption', { name: 'server', value: server })
-  })
 
-window.fetch('/api/statusnet/config.json')
-  .then((res) => res.json())
-  .then((data) => {
     var apiConfig = data.site.pleromafe
     window.fetch('/static/config.json')
     .then((data) => {

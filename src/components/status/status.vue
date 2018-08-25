@@ -83,7 +83,7 @@
             <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">Show less</a>
           </div>
 
-          <div v-if='status.attachments' class='attachments media-body'>
+          <div v-if='status.attachments && !hideSubjectStatus' class='attachments media-body'>
             <attachment :size="attachmentSize" :status-id="status.id" :nsfw="status.nsfw" :attachment="attachment" v-for="attachment in status.attachments" :key="attachment.id">
             </attachment>
           </div>

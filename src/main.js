@@ -96,23 +96,23 @@ window.fetch('/api/statusnet/config.json')
 window.fetch('/api/statusnet/config.json')
   .then((res) => res.json())
   .then((data) => {
-    var apiStatusnetConfigSitePleromafe = data.site.pleromafe
+    var apiConfig = data.site.pleromafe
     window.fetch('/static/config.json')
     .then((data) => {
       var staticConfig = data
 
-      var theme = (apiStatusnetConfigSitePleromafe.theme || staticConfig.theme)
-      var background = (apiStatusnetConfigSitePleromafe.background || staticConfig.background)
-      var logo = (apiStatusnetConfigSitePleromafe.logo || staticConfig.logo)
-      var redirectRootNoLogin = (apiStatusnetConfigSitePleromafe.redirectRootNoLogin || staticConfig.redirectRootNoLogin)
-      var redirectRootLogin = (apiStatusnetConfigSitePleromafe.redirectRootLogin || staticConfig.redirectRootLogin)
-      var chatDisabled = (apiStatusnetConfigSitePleromafe.chatDisabled || staticConfig.chatDisabled)
-      var showWhoToFollowPanel = (apiStatusnetConfigSitePleromafe.showWhoToFollowPanel || staticConfig.showWhoToFollowPanel)
-      var whoToFollowProvider = (apiStatusnetConfigSitePleromafe.whoToFollowProvider || staticConfig.whoToFollowProvider)
-      var whoToFollowLink = (apiStatusnetConfigSitePleromafe.whoToFollowLink || staticConfig.whoToFollowLink)
-      var showInstanceSpecificPanel = (apiStatusnetConfigSitePleromafe.showInstanceSpecificPanel || staticConfig.showInstanceSpecificPanel)
-      var scopeOptionsEnabled = (apiStatusnetConfigSitePleromafe.scopeOptionsEnabled || staticConfig.scopeOptionsEnabled)
-      var collapseMessageWithSubject = (apiStatusnetConfigSitePleromafe.collapseMessageWithSubject || staticConfig.collapseMessageWithSubject)
+      var theme = (apiConfig.theme || staticConfig.theme)
+      var background = (apiConfig.background || staticConfig.background)
+      var logo = (apiConfig.logo || staticConfig.logo)
+      var redirectRootNoLogin = (apiConfig.redirectRootNoLogin || staticConfig.redirectRootNoLogin)
+      var redirectRootLogin = (apiConfig.redirectRootLogin || staticConfig.redirectRootLogin)
+      var chatDisabled = (apiConfig.chatDisabled || staticConfig.chatDisabled)
+      var showWhoToFollowPanel = (apiConfig.showWhoToFollowPanel || staticConfig.showWhoToFollowPanel)
+      var whoToFollowProvider = (apiConfig.whoToFollowProvider || staticConfig.whoToFollowProvider)
+      var whoToFollowLink = (apiConfig.whoToFollowLink || staticConfig.whoToFollowLink)
+      var showInstanceSpecificPanel = (apiConfig.showInstanceSpecificPanel || staticConfig.showInstanceSpecificPanel)
+      var scopeOptionsEnabled = (apiConfig.scopeOptionsEnabled || staticConfig.scopeOptionsEnabled)
+      var collapseMessageWithSubject = (apiConfig.collapseMessageWithSubject || staticConfig.collapseMessageWithSubject)
 
       store.dispatch('setOption', { name: 'theme', value: theme })
       store.dispatch('setOption', { name: 'background', value: background })

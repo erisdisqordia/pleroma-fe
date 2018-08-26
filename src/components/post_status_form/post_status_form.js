@@ -89,7 +89,7 @@ const PostStatusForm = {
         }))
       } else if (firstchar === ':') {
         if (this.textAtCaret === ':') { return }
-        const matchedEmoji = filter(this.emoji.concat(this.customEmoji), (emoji) => emoji.shortcode.match(this.textAtCaret.slice(1)))
+        const matchedEmoji = filter(this.emoji.concat(this.customEmoji), (emoji) => emoji.shortcode.startsWith(this.textAtCaret.slice(1)))
         if (matchedEmoji.length <= 0) {
           return false
         }

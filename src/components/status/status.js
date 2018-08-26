@@ -173,6 +173,12 @@ const Status = {
       }
       return true
     },
+    replySubject () {
+      if (this.status.summary && !this.status.summary.match(/^re[: ]/i)) {
+        return 're: '.concat(this.status.summary)
+      }
+      return this.status.summary
+    },
     attachmentSize () {
       if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation)) {

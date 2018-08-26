@@ -24,7 +24,8 @@ const PostStatusForm = {
     'replyTo',
     'repliedUser',
     'attentions',
-    'messageScope'
+    'messageScope',
+    'subject'
   ],
   components: {
     MediaUpload
@@ -52,6 +53,7 @@ const PostStatusForm = {
       posting: false,
       highlighted: 0,
       newStatus: {
+        spoilerText: this.subject,
         status: statusText,
         nsfw: false,
         files: [],

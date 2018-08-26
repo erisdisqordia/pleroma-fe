@@ -164,6 +164,15 @@ const Status = {
     showingMore () {
       return this.showingTall || (this.status.summary && this.expandingSubject)
     },
+    nsfwClickthrough () {
+      if (!this.status.nsfw) {
+        return false
+      }
+      if (this.status.summary && this.$store.state.config.collapseMessageWithSubject) {
+        return false
+      }
+      return true
+    },
     attachmentSize () {
       if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation)) {

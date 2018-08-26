@@ -20,6 +20,10 @@ export default {
   data: () => ({
     mobileActivePanel: 'timeline'
   }),
+  created () {
+    // Load the locale from the storage
+    this.$i18n.locale = this.$store.state.config.interfaceLanguage
+  },
   computed: {
     currentUser () { return this.$store.state.users.currentUser },
     background () {

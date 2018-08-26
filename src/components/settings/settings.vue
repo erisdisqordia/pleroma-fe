@@ -84,6 +84,10 @@
         </li>
       </ul>
     </div>
+    <div class="setting-item">
+      <h2>{{ $t('settings.interfaceLanguage') }}</h2>
+      <interface-language-switcher />
+    </div>
   </div>
 </div>
 </template>

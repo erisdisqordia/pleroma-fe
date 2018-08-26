@@ -60,6 +60,7 @@ const persistedStateOptions = {
     'config.loopVideoSilentOnly',
     'config.pauseOnUnfocused',
     'config.stopGifs',
+    'config.interfaceLanguage',
     'users.lastLoginName',
     'statuses.notifications.maxSavedId'
   ]
@@ -79,6 +80,7 @@ const store = new Vuex.Store({
 })
 
 const i18n = new VueI18n({
+  // By default, use the browser locale, we will update it if neccessary
   locale: currentLocale,
   fallbackLocale: 'en',
   messages
@@ -201,4 +203,3 @@ window.fetch('/nodeinfo/2.0.json')
     store.dispatch('setOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
     store.dispatch('setOption', { name: 'suggestionsWeb', value: suggestions.web })
   })
-

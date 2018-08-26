@@ -350,7 +350,8 @@ const en = {
     default_vis: 'Default visibility scope',
     profile_tab: 'Profile',
     security_tab: 'Security',
-    data_import_export_tab: 'Data Import / Export'
+    data_import_export_tab: 'Data Import / Export',
+    interfaceLanguage: 'Interface language'
   },
   notifications: {
     notifications: 'Notifications',
@@ -1691,7 +1692,8 @@ const ru = {
     profile_tab: 'Профиль',
     security_tab: 'Безопасность',
     data_import_export_tab: 'Импорт / Экспорт данных',
-    collapse_subject: 'Сворачивать посты с темой'
+    collapse_subject: 'Сворачивать посты с темой',
+    interfaceLanguage: 'Язык интерфейса'
   },
   notifications: {
     notifications: 'Уведомления',

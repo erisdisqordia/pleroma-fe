@@ -225,7 +225,8 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     },
     'favorite': (favorite) => {
       // Only update if this is a new favorite.
-      if (!state.favorites.has(favorite.id)) {
+      // Ignore our own favorites because we get info about likes as response to like request
+      if (!state.favorites.has(favorite.id) && user.id !== favorite.user.id) {
         state.favorites.add(favorite.id)
         favoriteStatus(favorite)
       }
@@ -347,6 +348,11 @@ export const mutations = {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.favorited = value
   },
+  setFavoritedConfirm (state, { status }) {
+    const newStatus = state.allStatusesObject[status.id]
+    newStatus.favorited = status.favorited
+    newStatus.fave_num = status.fave_num
+  },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.repeated = value
@@ -424,11 +430,31 @@ const statuses = {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })
       apiService.favorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            return {}
+          }
+        })
+        .then(status => {
+          commit('setFavoritedConfirm', { status })
+        })
     },
     unfavorite ({ rootState, commit }, status) {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: false })
       apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            return {}
+          }
+        })
+        .then(status => {
+          commit('setFavoritedConfirm', { status })
+        })
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...

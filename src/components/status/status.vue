@@ -58,7 +58,7 @@
                 <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
               <div class="visibility-icon" v-if="status.visibility">
-                <i :class="visibilityIcon(status.visibility)"></i>
+                <i :class="visibilityIcon(status.visibility)" :title="status.visibility | capitalize"></i>
               </div>
               <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url"><i class="icon-link-ext-alt"></i></a>
               <template v-if="expandable">

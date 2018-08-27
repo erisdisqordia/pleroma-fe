@@ -1,3 +1,4 @@
+import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 
 const UserSettings = {
@@ -23,7 +24,8 @@ const UserSettings = {
     }
   },
   components: {
-    StyleSwitcher
+    StyleSwitcher,
+    TabSwitcher
   },
   computed: {
     user () {

@@ -18,7 +18,11 @@ const StillImage = {
     onLoad () {
       const canvas = this.$refs.canvas
       if (!canvas) return
-      canvas.getContext('2d').drawImage(this.$refs.src, 1, 1, canvas.width, canvas.height)
+      const width = this.$refs.src.naturalWidth
+      const height = this.$refs.src.naturalHeight
+      canvas.width = width
+      canvas.height = height
+      canvas.getContext('2d').drawImage(this.$refs.src, 0, 0, width, height)
     }
   }
 }

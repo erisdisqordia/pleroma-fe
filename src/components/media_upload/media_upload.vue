@@ -3,7 +3,7 @@
     <label class="btn btn-default">
       <i class="icon-spin4 animate-spin" v-if="uploading"></i>
       <i class="icon-upload" v-if="!uploading"></i>
-      <input type=file style="position: fixed; top: -100em"></input>
+      <input type="file" style="position: fixed; top: -100em" multiple="true"></input>
     </label>
   </div>
 </template>

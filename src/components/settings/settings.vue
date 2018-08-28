@@ -114,6 +114,12 @@
 
   &:last-child {
     border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 1em;
+  }
+
+  select {
+    min-width: 10em;
   }
 
 
@@ -143,8 +149,12 @@
   }
 
   .btn {
-    margin-top: 1em;
     min-height: 28px;
+  }
+
+  .submit {
+    margin-top: 1em;
+    min-height: 30px;
     width: 10em;
   }
 }

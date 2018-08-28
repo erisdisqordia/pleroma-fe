@@ -68,6 +68,15 @@ export const prepareStatus = (status) => {
   return status
 }
 
+const visibleNotificationTypes = (rootState) => {
+  return [
+    rootState.config.notificationVisibility.likes && 'like',
+    rootState.config.notificationVisibility.mentions && 'mention',
+    rootState.config.notificationVisibility.repeats && 'repeat',
+    rootState.config.notificationVisibility.follows && 'follow'
+  ].filter(_ => _)
+}
+
 export const statusType = (status) => {
   if (status.is_post_verb) {
     return 'status'
@@ -86,8 +95,7 @@ export const statusType = (status) => {
     return 'deletion'
   }
 
-  // TODO change to status.activity_type === 'follow' when gs supports it
-  if (status.text.match(/started following/)) {
+  if (status.text.match(/started following/) || status.activity_type === 'follow') {
     return 'follow'
   }
 
@@ -269,7 +277,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 }
 
-const addNewNotifications = (state, { dispatch, notifications, older }) => {
+const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes }) => {
   const allStatuses = state.allStatuses
   const allStatusesObject = state.allStatusesObject
   each(notifications, (notification) => {
@@ -318,7 +326,7 @@ const addNewNotifications = (state, { dispatch, notifications, older }) => {
           result.image = action.attachments[0].url
         }
 
-        if (fresh && !state.notifications.desktopNotificationSilence) {
+        if (fresh && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.ntype)) {
           let notification = new window.Notification(title, result)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.
@@ -405,7 +413,7 @@ const statuses = {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser })
     },
     addNewNotifications ({ rootState, commit, dispatch }, { notifications, older }) {
-      commit('addNewNotifications', { dispatch, notifications, older })
+      commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older })
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })

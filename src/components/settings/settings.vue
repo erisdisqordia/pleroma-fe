@@ -81,15 +81,47 @@
 
       <div :label="$t('settings.filtering')" >
         <div class="setting-item">
-          {{$t('settings.replies_in_timeline')}}
-          <label for="replyVisibility" class="select">
-            <select id="replyVisibility" v-model="replyVisibilityLocal">
-              <option value="all" selected>{{$t('settings.reply_visibility_all')}}</option>
-              <option value="following">{{$t('settings.reply_visibility_following')}}</option>
-              <option value="self">{{$t('settings.reply_visibility_self')}}</option>
-            </select>
-            <i class="icon-down-open"/>
-          </label>
+          <div class="select-multiple">
+            <span class="label">{{$t('settings.notification_visibility')}}</span>
+            <ul class="option-list">
+              <li>
+                <input type="checkbox" id="notification-visibility-likes" v-model="notificationVisibilityLocal.likes">
+                <label for="notification-visibility-likes">
+                  {{$t('settings.notification_visibility_likes')}}
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="notification-visibility-repeats" v-model="notificationVisibilityLocal.repeats">
+                <label for="notification-visibility-repeats">
+                {{$t('settings.notification_visibility_repeats')}}
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="notification-visibility-follows" v-model="notificationVisibilityLocal.follows">
+                <label for="notification-visibility-follows">
+                {{$t('settings.notification_visibility_follows')}}
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="notification-visibility-mentions" v-model="notificationVisibilityLocal.mentions">
+                <label for="notification-visibility-mentions">
+                {{$t('settings.notification_visibility_mentions')}}
+                </label>
+              </li>
+            </ul>
+            </label>
+          </div>
+          <div>
+            {{$t('settings.replies_in_timeline')}}
+            <label for="replyVisibility" class="select">
+              <select id="replyVisibility" v-model="replyVisibilityLocal">
+                <option value="all" selected>{{$t('settings.reply_visibility_all')}}</option>
+                <option value="following">{{$t('settings.reply_visibility_following')}}</option>
+                <option value="self">{{$t('settings.reply_visibility_self')}}</option>
+              </select>
+              <i class="icon-down-open"/>
+            </label>
+          </div>
         </div>
         <div class="setting-item">
           <p>{{$t('settings.filtering_explanation')}}</p>
@@ -112,6 +144,13 @@
   border-bottom: 2px solid var(--btn, $fallback--btn);
   margin: 1em 1em 1.4em;
   padding-bottom: 1.4em;
+
+  div {
+    margin-bottom: .5em;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 
   &:last-child {
     border-bottom: none;
@@ -159,7 +198,15 @@
     width: 10em;
   }
 }
-.setting-list {
+.select-multiple {
+  display: flex;
+  .option-list {
+    margin: 0;
+    padding-left: .5em;
+  }
+}
+.setting-list,
+.option-list{
   list-style-type: none;
   padding-left: 2em;
   li {

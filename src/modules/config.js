@@ -18,6 +18,12 @@ const defaultState = {
   pauseOnUnfocused: true,
   stopGifs: false,
   replyVisibility: 'all',
+  notificationVisibility: {
+    follows: true,
+    mentions: true,
+    likes: true,
+    repeats: true
+  },
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale

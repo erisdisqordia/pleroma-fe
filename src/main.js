@@ -50,6 +50,7 @@ const persistedStateOptions = {
     'config.hideAttachmentsInConv',
     'config.hideNsfw',
     'config.replyVisibility',
+    'config.notificationVisibility',
     'config.autoLoad',
     'config.hoverPreview',
     'config.streaming',

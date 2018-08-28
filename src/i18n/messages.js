@@ -273,7 +273,8 @@ const en = {
     load_older: 'Load older statuses',
     conversation: 'Conversation',
     collapse: 'Collapse',
-    repeated: 'repeated'
+    repeated: 'repeated',
+    no_retweet_hint: 'Post is marked as followers-only or direct and cannot be repeated'
   },
   settings: {
     user_settings: 'User Settings',
@@ -1620,7 +1621,8 @@ const ru = {
     load_older: 'Загрузить старые статусы',
     conversation: 'Разговор',
     collapse: 'Свернуть',
-    repeated: 'повторил(а)'
+    repeated: 'повторил(а)',
+    no_retweet_hint: 'Пост помечен как "только для подписчиков" или "личное" и поэтому не может быть повторён'
   },
   settings: {
     user_settings: 'Настройки пользователя',

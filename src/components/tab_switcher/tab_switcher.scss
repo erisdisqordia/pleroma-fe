@@ -26,10 +26,6 @@
       border-bottom-right-radius: 0;
       padding: .3em 1em;
 
-      &::-moz-focus-inner {
-        border: none;
-      }
-
       &:not(.active) {
         border-bottom: 1px solid;
         border-bottom-color: $fallback--btn;

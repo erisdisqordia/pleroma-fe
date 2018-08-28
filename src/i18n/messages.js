@@ -277,6 +277,7 @@ const en = {
     no_retweet_hint: 'Post is marked as followers-only or direct and cannot be repeated'
   },
   settings: {
+    general: 'General',
     user_settings: 'User Settings',
     name_bio: 'Name & Bio',
     name: 'Name',
@@ -1625,6 +1626,7 @@ const ru = {
     no_retweet_hint: 'Пост помечен как "только для подписчиков" или "личное" и поэтому не может быть повторён'
   },
   settings: {
+    general: 'Общие',
     user_settings: 'Настройки пользователя',
     name_bio: 'Имя и описание',
     name: 'Имя',

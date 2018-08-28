@@ -1,4 +1,5 @@
 /* eslint-env browser */
+import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import InterfaceLanguageSwitcher from '../interface_language_switcher/interface_language_switcher.vue'
 import { filter, trim } from 'lodash'
@@ -29,6 +30,7 @@ const settings = {
     }
   },
   components: {
+    TabSwitcher,
     StyleSwitcher,
     InterfaceLanguageSwitcher
   },

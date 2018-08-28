@@ -48,7 +48,7 @@ a {
   color: var(--link, $fallback--link);
 }
 
-button{
+button {
   user-select: none;
   color: $fallback--fg;
   color: var(--fg, $fallback--fg);
@@ -282,15 +282,25 @@ main-router {
 }
 
 .panel-heading {
+  display: flex;
   border-radius: $fallback--panelRadius $fallback--panelRadius 0 0;
   border-radius: var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius) 0 0;
   background-size: cover;
-  padding: 0.6em 1.0em;
+  padding: .6em .6em;
   text-align: left;
   font-size: 1.3em;
   line-height: 24px;
   background-color: $fallback--btn;
   background-color: var(--btn, $fallback--btn);
+  align-items: baseline;
+
+  .title {
+    flex: 1 0 auto;
+  }
+
+  button {
+    height: 100%;
+  }
 }
 
 .panel-heading.stub {
@@ -460,4 +470,3 @@ nav {
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
 }
-

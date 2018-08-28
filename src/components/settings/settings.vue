@@ -35,16 +35,6 @@
               <input type="checkbox" id="hoverPreview" v-model="hoverPreviewLocal">
               <label for="hoverPreview">{{$t('settings.reply_link_preview')}}</label>
             </li>
-            <li>
-              <label for="replyVisibility" class="select">
-                <select id="replyVisibility" v-model="replyVisibilityLocal">
-                  <option value="all" selected>{{$t('settings.reply_visibility_all')}}</option>
-                  <option value="following">{{$t('settings.reply_visibility_following')}}</option>
-                  <option value="self">{{$t('settings.reply_visibility_self')}}</option>
-                </select>
-                <i class="icon-down-open"/>
-              </label>
-            </li>
           </ul>
         </div>
         <div class="setting-item">
@@ -90,6 +80,17 @@
       </div>
 
       <div :title="$t('settings.filtering')" >
+        <div class="setting-item">
+          {{$t('settings.replies_in_timeline')}}
+          <label for="replyVisibility" class="select">
+            <select id="replyVisibility" v-model="replyVisibilityLocal">
+              <option value="all" selected>{{$t('settings.reply_visibility_all')}}</option>
+              <option value="following">{{$t('settings.reply_visibility_following')}}</option>
+              <option value="self">{{$t('settings.reply_visibility_self')}}</option>
+            </select>
+            <i class="icon-down-open"/>
+          </label>
+        </div>
         <div class="setting-item">
           <p>{{$t('settings.filtering_explanation')}}</p>
           <textarea id="muteWords" v-model="muteWordsString"></textarea>

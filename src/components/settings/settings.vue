@@ -5,7 +5,7 @@
   </div>
   <div class="panel-body">
     <tab-switcher>
-      <div :title="$t('settings.general')" >
+      <div :label="$t('settings.general')" >
         <div class="setting-item">
           <h2>{{ $t('settings.interfaceLanguage') }}</h2>
           <interface-language-switcher />
@@ -73,13 +73,13 @@
         </div>
       </div>
 
-      <div :title="$t('settings.theme')" >
+      <div :label="$t('settings.theme')" >
         <div class="setting-item">
           <style-switcher></style-switcher>
         </div>
       </div>
 
-      <div :title="$t('settings.filtering')" >
+      <div :label="$t('settings.filtering')" >
         <div class="setting-item">
           {{$t('settings.replies_in_timeline')}}
           <label for="replyVisibility" class="select">

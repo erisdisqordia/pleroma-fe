@@ -23,7 +23,7 @@ export default Vue.component('tab-switcher', {
             if (index === this.active) {
               classes.push('active')
             }
-            return (<button onClick={this.activateTab(index)} class={ classes.join(' ') }>{slot.data.attrs.title}</button>)
+            return (<button onClick={this.activateTab(index)} class={ classes.join(' ') }>{slot.data.attrs.label}</button>)
           });
     const contents = (
       <div>

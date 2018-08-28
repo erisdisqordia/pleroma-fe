@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body profile-edit">
       <tab-switcher>
-        <div :title="$t('settings.profile_tab')">
+        <div :label="$t('settings.profile_tab')">
           <div class="setting-item" >
             <h2>{{$t('settings.name_bio')}}</h2>
             <p>{{$t('settings.name')}}</p>
@@ -66,7 +66,7 @@
           </div>
         </div>
 
-        <div :title="$t('settings.security_tab')">
+        <div :label="$t('settings.security_tab')">
           <div class="setting-item">
             <h2>{{$t('settings.change_password')}}</h2>
             <div>
@@ -102,7 +102,7 @@
           </div>
         </div>
 
-        <div :title="$t('settings.data_import_export_tab')" v-if="pleromaBackend">
+        <div :label="$t('settings.data_import_export_tab')" v-if="pleromaBackend">
           <div class="setting-item">
             <h2>{{$t('settings.follow_import')}}</h2>
             <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>

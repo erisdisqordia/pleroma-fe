@@ -145,7 +145,7 @@
   margin: 1em 1em 1.4em;
   padding-bottom: 1.4em;
 
-  div {
+  > div {
     margin-bottom: .5em;
     &:last-child {
       margin-bottom: 0;

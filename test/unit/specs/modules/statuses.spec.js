@@ -247,7 +247,7 @@ describe('The Statuses module', () => {
       in_reply_to_status_id: '1', // The API uses strings here...
       uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
       text: 'a favorited something by b',
-      user: {}
+      user: { id: 99 }
     }
 
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })

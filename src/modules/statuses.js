@@ -195,11 +195,11 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const favoriteStatus = (favorite, counter) => {
     const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
     if (status) {
-      status.fave_num += 1
-
       // This is our favorite, so the relevant bit.
       if (favorite.user.id === user.id) {
         status.favorited = true
+      } else {
+        status.fave_num += 1
       }
     }
     return status
@@ -234,7 +234,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     'favorite': (favorite) => {
       // Only update if this is a new favorite.
       // Ignore our own favorites because we get info about likes as response to like request
-      if (!state.favorites.has(favorite.id) && user.id !== favorite.user.id) {
+      if (!state.favorites.has(favorite.id)) {
         state.favorites.add(favorite.id)
         favoriteStatus(favorite)
       }

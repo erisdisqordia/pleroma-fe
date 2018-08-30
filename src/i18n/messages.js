@@ -393,8 +393,7 @@ const en = {
     account_not_locked_warning: 'Your account is not {0}. Anyone can follow you to view your follower-only posts.',
     account_not_locked_warning_link: 'locked',
     direct_warning: 'This post will only be visible to all the mentioned users.',
-    attachments_sensitive: 'Attachments marked sensitive',
-    attachments_not_sensitive: 'Attachments <strong>not</strong> marked sensitive',
+    attachments_sensitive: 'Mark attachments as sensitive',
     scope: {
       public: 'Public - Post to public timelines',
       unlisted: 'Unlisted - Do not post to public timelines',

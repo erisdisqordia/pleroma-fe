@@ -51,6 +51,10 @@
 
   .nsfw-placeholder {
     cursor: pointer;
+
+    &.loading {
+      cursor: progress;
+    }
   }
 
   .small-attachment {
@@ -86,10 +90,6 @@
     flex-basis: 90%;
     width: 100%;
     display: flex;
-  }
-
-  &.loading {
-    cursor: progress;
   }
 
   .hider {

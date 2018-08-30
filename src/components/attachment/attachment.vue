@@ -65,6 +65,7 @@
   }
 
   .attachment {
+    position: relative;
     flex: 1 0 30%;
     margin: 0.5em 0.7em 0.6em 0.0em;
     align-self: flex-start;

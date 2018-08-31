@@ -139,6 +139,9 @@ const PostStatusForm = {
     },
     scopeOptionsEnabled () {
       return this.$store.state.config.scopeOptionsEnabled
+    },
+    formattingOptionsEnabled () {
+      return this.$store.state.config.formattingOptionsEnabled
     }
   },
   methods: {

@@ -33,7 +33,7 @@
         @paste="paste">
       </textarea>
       <div class="visibility-tray">
-        <span class="text-format">
+        <span class="text-format" v-if="formattingOptionsEnabled">
           <label for="post-content-type" class="select">
             <select id="post-content-type" v-model="newStatus.contentType" class="form-control">
               <option value="text/plain">{{$t('post_status.content_type.plain_text')}}</option>

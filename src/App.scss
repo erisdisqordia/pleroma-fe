@@ -498,6 +498,10 @@ nav {
     color: $fallback--lightFg;
     color: var(--lightFg, $fallback--lightFg);
   }
+
+  .text-format {
+    float: right;
+  }
 }
 
 .visibility-notice {

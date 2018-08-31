@@ -400,6 +400,9 @@ const en = {
       unlisted: 'Unlisted - Do not post to public timelines',
       private: 'Followers-only - Post to followers only',
       direct: 'Direct - Post to mentioned users only'
+    },
+    content_type: {
+      plain_text: 'Plain text'
     }
   },
   finder: {

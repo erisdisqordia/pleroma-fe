@@ -55,6 +55,7 @@ const PostStatusForm = {
       newStatus: {
         spoilerText: this.subject,
         status: statusText,
+        contentType: 'text/plain',
         nsfw: false,
         files: [],
         visibility: this.messageScope || this.$store.state.users.currentUser.default_scope
@@ -210,13 +211,15 @@ const PostStatusForm = {
         sensitive: newStatus.nsfw,
         media: newStatus.files,
         store: this.$store,
-        inReplyToStatusId: this.replyTo
+        inReplyToStatusId: this.replyTo,
+        contentType: newStatus.contentType
       }).then((data) => {
         if (!data.error) {
           this.newStatus = {
             status: '',
             files: [],
-            visibility: newStatus.visibility
+            visibility: newStatus.visibility,
+            contentType: newStatus.contentType
           }
           this.$emit('posted')
           let el = this.$el.querySelector('textarea')

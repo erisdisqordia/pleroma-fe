@@ -121,7 +121,7 @@ const users = {
                   }
 
                   // Fetch our friends
-                  store.rootState.api.backendInteractor.fetchFriends()
+                  store.rootState.api.backendInteractor.fetchFriends(user.id)
                     .then((friends) => commit('addNewUsers', friends))
                 })
             } else {

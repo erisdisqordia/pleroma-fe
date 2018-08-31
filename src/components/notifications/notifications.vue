@@ -2,8 +2,10 @@
   <div class="notifications">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <span class="unseen-count" v-if="unseenCount">{{unseenCount}}</span>
-        <div class="title"> {{$t('notifications.notifications')}}</div>
+        <div class="title">
+          {{$t('notifications.notifications')}}
+          <span class="unseen-count" v-if="unseenCount">{{unseenCount}}</span>
+        </div>
         <div @click.prevent class="loadmore-error alert error" v-if="error">
           {{$t('timeline.error_fetching')}}
         </div>

@@ -1,4 +1,5 @@
 /* eslint-env browser */
+import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import InterfaceLanguageSwitcher from '../interface_language_switcher/interface_language_switcher.vue'
 import { filter, trim } from 'lodash'
@@ -9,6 +10,7 @@ const settings = {
       hideAttachmentsLocal: this.$store.state.config.hideAttachments,
       hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
+      notificationVisibilityLocal: this.$store.state.config.notificationVisibility,
       replyVisibilityLocal: this.$store.state.config.replyVisibility,
       loopVideoLocal: this.$store.state.config.loopVideo,
       loopVideoSilentOnlyLocal: this.$store.state.config.loopVideoSilentOnly,
@@ -29,6 +31,7 @@ const settings = {
     }
   },
   components: {
+    TabSwitcher,
     StyleSwitcher,
     InterfaceLanguageSwitcher
   },
@@ -46,6 +49,18 @@ const settings = {
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
+    },
+    'notificationVisibilityLocal.likes' (value) {
+      this.$store.dispatch('setOption', { name: 'notificationVisibility', value: this.$store.state.config.notificationVisibility })
+    },
+    'notificationVisibilityLocal.follows' (value) {
+      this.$store.dispatch('setOption', { name: 'notificationVisibility', value: this.$store.state.config.notificationVisibility })
+    },
+    'notificationVisibilityLocal.repeats' (value) {
+      this.$store.dispatch('setOption', { name: 'notificationVisibility', value: this.$store.state.config.notificationVisibility })
+    },
+    'notificationVisibilityLocal.mentions' (value) {
+      this.$store.dispatch('setOption', { name: 'notificationVisibility', value: this.$store.state.config.notificationVisibility })
     },
     replyVisibilityLocal (value) {
       this.$store.dispatch('setOption', { name: 'replyVisibility', value })

@@ -1,7 +1,11 @@
 <template>
   <div id="app" v-bind:style="style">
     <nav class='container' @click="scrollToTop()" id="nav">
-      <div class='inner-nav' :style="logoStyle">
+      <div class='logo' :style='logoBgStyle'>
+        <div class='mask' :style='logoMaskStyle'></div>
+        <img :src='logo' :style='logoStyle'>
+      </div>
+      <div class='inner-nav'>
         <div class='item'>
           <router-link :to="{ name: 'root'}">{{sitename}}</router-link>
         </div>

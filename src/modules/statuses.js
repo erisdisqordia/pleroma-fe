@@ -68,6 +68,15 @@ export const prepareStatus = (status) => {
   return status
 }
 
+const visibleNotificationTypes = (rootState) => {
+  return [
+    rootState.config.notificationVisibility.likes && 'like',
+    rootState.config.notificationVisibility.mentions && 'mention',
+    rootState.config.notificationVisibility.repeats && 'repeat',
+    rootState.config.notificationVisibility.follows && 'follow'
+  ].filter(_ => _)
+}
+
 export const statusType = (status) => {
   if (status.is_post_verb) {
     return 'status'
@@ -86,8 +95,7 @@ export const statusType = (status) => {
     return 'deletion'
   }
 
-  // TODO change to status.activity_type === 'follow' when gs supports it
-  if (status.text.match(/started following/)) {
+  if (status.text.match(/started following/) || status.activity_type === 'follow') {
     return 'follow'
   }
 
@@ -187,11 +195,11 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const favoriteStatus = (favorite, counter) => {
     const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
     if (status) {
-      status.fave_num += 1
-
       // This is our favorite, so the relevant bit.
       if (favorite.user.id === user.id) {
         status.favorited = true
+      } else {
+        status.fave_num += 1
       }
     }
     return status
@@ -225,6 +233,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     },
     'favorite': (favorite) => {
       // Only update if this is a new favorite.
+      // Ignore our own favorites because we get info about likes as response to like request
       if (!state.favorites.has(favorite.id)) {
         state.favorites.add(favorite.id)
         favoriteStatus(favorite)
@@ -268,7 +277,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 }
 
-const addNewNotifications = (state, { dispatch, notifications, older }) => {
+const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes }) => {
   const allStatuses = state.allStatuses
   const allStatusesObject = state.allStatusesObject
   each(notifications, (notification) => {
@@ -317,7 +326,7 @@ const addNewNotifications = (state, { dispatch, notifications, older }) => {
           result.image = action.attachments[0].url
         }
 
-        if (fresh && !state.notifications.desktopNotificationSilence) {
+        if (fresh && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.ntype)) {
           let notification = new window.Notification(title, result)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.
@@ -346,6 +355,11 @@ export const mutations = {
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.favorited = value
+  },
+  setFavoritedConfirm (state, { status }) {
+    const newStatus = state.allStatusesObject[status.id]
+    newStatus.favorited = status.favorited
+    newStatus.fave_num = status.fave_num
   },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
@@ -399,7 +413,7 @@ const statuses = {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser })
     },
     addNewNotifications ({ rootState, commit, dispatch }, { notifications, older }) {
-      commit('addNewNotifications', { dispatch, notifications, older })
+      commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older })
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })
@@ -424,11 +438,31 @@ const statuses = {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })
       apiService.favorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            return {}
+          }
+        })
+        .then(status => {
+          commit('setFavoritedConfirm', { status })
+        })
     },
     unfavorite ({ rootState, commit }, status) {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: false })
       apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            return {}
+          }
+        })
+        .then(status => {
+          commit('setFavoritedConfirm', { status })
+        })
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...

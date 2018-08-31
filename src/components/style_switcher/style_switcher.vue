@@ -1,102 +1,30 @@
 <template>
-  <div>
-    <div>{{$t('settings.presets')}}
+<div>
+  <div class="presets-container">
+    <div>
+      {{$t('settings.presets')}}
       <label for="style-switcher" class='select'>
         <select id="style-switcher" v-model="selected" class="style-switcher">
-          <option v-for="style in availableStyles" :value="style" :style="{
-                  backgroundColor: style[1],
-                  color: style[3]
-                  }">{{style[0]}}</option>
+          <option v-for="style in availableStyles"
+                  :value="style"
+                  :style="{
+                          backgroundColor: style[1],
+                          color: style[3]
+                          }">
+            {{style[0]}}
+          </option>
         </select>
         <i class="icon-down-open"/>
       </label>
     </div>
-    <div>
+    <div class="import-export">
       <button class="btn" @click="exportCurrentTheme">{{ $t('settings.export_theme') }}</button>
       <button class="btn" @click="importTheme">{{ $t('settings.import_theme') }}</button>
       <p v-if="invalidThemeImported" class="import-warning">{{ $t('settings.invalid_theme_imported') }}</p>
     </div>
-    <div class="color-container">
-      <p>{{$t('settings.theme_help')}}</p>
-      <div class="color-item">
-        <label for="bgcolor" class="theme-color-lb">{{$t('settings.background')}}</label>
-        <input id="bgcolor" class="theme-color-cl" type="color" v-model="bgColorLocal">
-        <input id="bgcolor-t" class="theme-color-in" type="text" v-model="bgColorLocal">
-      </div>
-      <div class="color-item">
-        <label for="fgcolor" class="theme-color-lb">{{$t('settings.foreground')}}</label>
-        <input id="fgcolor" class="theme-color-cl" type="color" v-model="btnColorLocal">
-        <input id="fgcolor-t" class="theme-color-in" type="text" v-model="btnColorLocal">
-      </div>
-      <div class="color-item">
-        <label for="textcolor" class="theme-color-lb">{{$t('settings.text')}}</label>
-        <input id="textcolor" class="theme-color-cl" type="color" v-model="textColorLocal">
-        <input id="textcolor-t" class="theme-color-in" type="text" v-model="textColorLocal">
-      </div>
-      <div class="color-item">
-        <label for="linkcolor" class="theme-color-lb">{{$t('settings.links')}}</label>
-        <input id="linkcolor" class="theme-color-cl" type="color" v-model="linkColorLocal">
-        <input id="linkcolor-t" class="theme-color-in" type="text" v-model="linkColorLocal">
-      </div>
-      <div class="color-item">
-        <label for="redcolor" class="theme-color-lb">{{$t('settings.cRed')}}</label>
-        <input id="redcolor" class="theme-color-cl" type="color" v-model="redColorLocal">
-        <input id="redcolor-t" class="theme-color-in" type="text" v-model="redColorLocal">
-      </div>
-      <div class="color-item">
-        <label for="bluecolor" class="theme-color-lb">{{$t('settings.cBlue')}}</label>
-        <input id="bluecolor" class="theme-color-cl" type="color" v-model="blueColorLocal">
-        <input id="bluecolor-t" class="theme-color-in" type="text" v-model="blueColorLocal">
-      </div>
-      <div class="color-item">
-        <label for="greencolor" class="theme-color-lb">{{$t('settings.cGreen')}}</label>
-        <input id="greencolor" class="theme-color-cl" type="color" v-model="greenColorLocal">
-        <input id="greencolor-t" class="theme-color-in" type="green" v-model="greenColorLocal">
-      </div>
-      <div class="color-item">
-        <label for="orangecolor" class="theme-color-lb">{{$t('settings.cOrange')}}</label>
-        <input id="orangecolor" class="theme-color-cl" type="color" v-model="orangeColorLocal">
-        <input id="orangecolor-t" class="theme-color-in" type="text" v-model="orangeColorLocal">
-      </div>
-    </div>
-    <div class="radius-container">
-      <p>{{$t('settings.radii_help')}}</p>
-      <div class="radius-item">
-        <label for="btnradius" class="theme-radius-lb">{{$t('settings.btnRadius')}}</label>
-        <input id="btnradius" class="theme-radius-rn" type="range" v-model="btnRadiusLocal" max="16">
-        <input id="btnradius-t" class="theme-radius-in" type="text" v-model="btnRadiusLocal">
-      </div>
-      <div class="radius-item">
-        <label for="inputradius" class="theme-radius-lb">{{$t('settings.inputRadius')}}</label>
-        <input id="inputradius" class="theme-radius-rn" type="range" v-model="inputRadiusLocal" max="16">
-        <input id="inputradius-t" class="theme-radius-in" type="text" v-model="inputRadiusLocal">
-      </div>
-      <div class="radius-item">
-        <label for="panelradius" class="theme-radius-lb">{{$t('settings.panelRadius')}}</label>
-        <input id="panelradius" class="theme-radius-rn" type="range" v-model="panelRadiusLocal" max="50">
-        <input id="panelradius-t" class="theme-radius-in" type="text" v-model="panelRadiusLocal">
-      </div>
-      <div class="radius-item">
-        <label for="avatarradius" class="theme-radius-lb">{{$t('settings.avatarRadius')}}</label>
-        <input id="avatarradius" class="theme-radius-rn" type="range" v-model="avatarRadiusLocal" max="28">
-        <input id="avatarradius-t" class="theme-radius-in" type="green" v-model="avatarRadiusLocal">
-      </div>
-      <div class="radius-item">
-        <label for="avataraltradius" class="theme-radius-lb">{{$t('settings.avatarAltRadius')}}</label>
-        <input id="avataraltradius" class="theme-radius-rn" type="range" v-model="avatarAltRadiusLocal" max="28">
-        <input id="avataraltradius-t" class="theme-radius-in" type="text" v-model="avatarAltRadiusLocal">
-      </div>
-      <div class="radius-item">
-        <label for="attachmentradius" class="theme-radius-lb">{{$t('settings.attachmentRadius')}}</label>
-        <input id="attachmentrradius" class="theme-radius-rn" type="range" v-model="attachmentRadiusLocal" max="50">
-        <input id="attachmentradius-t" class="theme-radius-in" type="text" v-model="attachmentRadiusLocal">
-      </div>
-      <div class="radius-item">
-        <label for="tooltipradius" class="theme-radius-lb">{{$t('settings.tooltipRadius')}}</label>
-        <input id="tooltipradius" class="theme-radius-rn" type="range" v-model="tooltipRadiusLocal" max="20">
-        <input id="tooltipradius-t" class="theme-radius-in" type="text" v-model="tooltipRadiusLocal">
-      </div>
-    </div>
+  </div>
+
+  <div class="preview-container">
     <div :style="{
                  '--btnRadius': btnRadiusLocal + 'px',
                  '--inputRadius': inputRadiusLocal + 'px',
@@ -127,8 +55,95 @@
         </div>
       </div>
     </div>
-    <button class="btn" @click="setCustomTheme">{{$t('general.apply')}}</button>
   </div>
+
+  <div class="color-container">
+    <p>{{$t('settings.theme_help')}}</p>
+    <div class="color-item">
+      <label for="bgcolor" class="theme-color-lb">{{$t('settings.background')}}</label>
+      <input id="bgcolor" class="theme-color-cl" type="color" v-model="bgColorLocal">
+      <input id="bgcolor-t" class="theme-color-in" type="text" v-model="bgColorLocal">
+    </div>
+    <div class="color-item">
+      <label for="fgcolor" class="theme-color-lb">{{$t('settings.foreground')}}</label>
+      <input id="fgcolor" class="theme-color-cl" type="color" v-model="btnColorLocal">
+      <input id="fgcolor-t" class="theme-color-in" type="text" v-model="btnColorLocal">
+    </div>
+    <div class="color-item">
+      <label for="textcolor" class="theme-color-lb">{{$t('settings.text')}}</label>
+      <input id="textcolor" class="theme-color-cl" type="color" v-model="textColorLocal">
+      <input id="textcolor-t" class="theme-color-in" type="text" v-model="textColorLocal">
+    </div>
+    <div class="color-item">
+      <label for="linkcolor" class="theme-color-lb">{{$t('settings.links')}}</label>
+      <input id="linkcolor" class="theme-color-cl" type="color" v-model="linkColorLocal">
+      <input id="linkcolor-t" class="theme-color-in" type="text" v-model="linkColorLocal">
+    </div>
+    <div class="color-item">
+      <label for="redcolor" class="theme-color-lb">{{$t('settings.cRed')}}</label>
+      <input id="redcolor" class="theme-color-cl" type="color" v-model="redColorLocal">
+      <input id="redcolor-t" class="theme-color-in" type="text" v-model="redColorLocal">
+    </div>
+    <div class="color-item">
+      <label for="bluecolor" class="theme-color-lb">{{$t('settings.cBlue')}}</label>
+      <input id="bluecolor" class="theme-color-cl" type="color" v-model="blueColorLocal">
+      <input id="bluecolor-t" class="theme-color-in" type="text" v-model="blueColorLocal">
+    </div>
+    <div class="color-item">
+      <label for="greencolor" class="theme-color-lb">{{$t('settings.cGreen')}}</label>
+      <input id="greencolor" class="theme-color-cl" type="color" v-model="greenColorLocal">
+      <input id="greencolor-t" class="theme-color-in" type="green" v-model="greenColorLocal">
+    </div>
+    <div class="color-item">
+      <label for="orangecolor" class="theme-color-lb">{{$t('settings.cOrange')}}</label>
+      <input id="orangecolor" class="theme-color-cl" type="color" v-model="orangeColorLocal">
+      <input id="orangecolor-t" class="theme-color-in" type="text" v-model="orangeColorLocal">
+    </div>
+  </div>
+
+  <div class="radius-container">
+    <p>{{$t('settings.radii_help')}}</p>
+    <div class="radius-item">
+      <label for="btnradius" class="theme-radius-lb">{{$t('settings.btnRadius')}}</label>
+      <input id="btnradius" class="theme-radius-rn" type="range" v-model="btnRadiusLocal" max="16">
+      <input id="btnradius-t" class="theme-radius-in" type="text" v-model="btnRadiusLocal">
+    </div>
+    <div class="radius-item">
+      <label for="inputradius" class="theme-radius-lb">{{$t('settings.inputRadius')}}</label>
+      <input id="inputradius" class="theme-radius-rn" type="range" v-model="inputRadiusLocal" max="16">
+      <input id="inputradius-t" class="theme-radius-in" type="text" v-model="inputRadiusLocal">
+    </div>
+    <div class="radius-item">
+      <label for="panelradius" class="theme-radius-lb">{{$t('settings.panelRadius')}}</label>
+      <input id="panelradius" class="theme-radius-rn" type="range" v-model="panelRadiusLocal" max="50">
+      <input id="panelradius-t" class="theme-radius-in" type="text" v-model="panelRadiusLocal">
+    </div>
+    <div class="radius-item">
+      <label for="avatarradius" class="theme-radius-lb">{{$t('settings.avatarRadius')}}</label>
+      <input id="avatarradius" class="theme-radius-rn" type="range" v-model="avatarRadiusLocal" max="28">
+      <input id="avatarradius-t" class="theme-radius-in" type="green" v-model="avatarRadiusLocal">
+    </div>
+    <div class="radius-item">
+      <label for="avataraltradius" class="theme-radius-lb">{{$t('settings.avatarAltRadius')}}</label>
+      <input id="avataraltradius" class="theme-radius-rn" type="range" v-model="avatarAltRadiusLocal" max="28">
+      <input id="avataraltradius-t" class="theme-radius-in" type="text" v-model="avatarAltRadiusLocal">
+    </div>
+    <div class="radius-item">
+      <label for="attachmentradius" class="theme-radius-lb">{{$t('settings.attachmentRadius')}}</label>
+      <input id="attachmentrradius" class="theme-radius-rn" type="range" v-model="attachmentRadiusLocal" max="50">
+      <input id="attachmentradius-t" class="theme-radius-in" type="text" v-model="attachmentRadiusLocal">
+    </div>
+    <div class="radius-item">
+      <label for="tooltipradius" class="theme-radius-lb">{{$t('settings.tooltipRadius')}}</label>
+      <input id="tooltipradius" class="theme-radius-rn" type="range" v-model="tooltipRadiusLocal" max="20">
+      <input id="tooltipradius-t" class="theme-radius-in" type="text" v-model="tooltipRadiusLocal">
+    </div>
+  </div>
+
+  <div class="apply-container">
+    <button class="btn submit" @click="setCustomTheme">{{$t('general.apply')}}</button>
+  </div>
+</div>
 </template>
 
 <script src="./style_switcher.js"></script>
@@ -144,15 +159,19 @@
   color: var(--cRed, $fallback--cRed);
 }
 
+.apply-container,
 .radius-container,
-.color-container {
+.color-container,
+.presets-container {
   display: flex;
 
   p {
+    flex: 2 0 100%;
     margin-top: 2em;
     margin-bottom: .5em;
   }
 }
+
 .radius-container {
   flex-direction: column;
 }
@@ -160,6 +179,36 @@
 .color-container {
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.presets-container {
+  justify-content: center;
+  .import-export {
+    display: flex;
+
+    .btn {
+      margin-left: .5em;
+    }
+  }
+}
+
+.preview-container {
+  border-top: 1px dashed;
+  border-bottom: 1px dashed;
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
+  margin: 1em -1em 0;
+  padding: 1em;
+
+  .btn {
+    margin-top: 1em;
+    min-height: 30px;
+    width: 10em;
+  }
+}
+
+.apply-container {
+  justify-content: center;
 }
 
 .radius-item,
@@ -229,6 +278,7 @@
   flex: 0;
   min-width: 2em;
   cursor: pointer;
+  max-height: 29px;
 }
 
 .theme-preview-content {

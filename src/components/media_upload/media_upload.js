@@ -6,8 +6,10 @@ const mediaUpload = {
     const input = this.$el.querySelector('input')
 
     input.addEventListener('change', ({target}) => {
-      const file = target.files[0]
-      this.uploadFile(file)
+      for (var i = 0; i < target.files.length; i++) {
+        let file = target.files[i]
+        this.uploadFile(file)
+      }
     })
   },
   data () {

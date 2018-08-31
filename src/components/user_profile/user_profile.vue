@@ -17,6 +17,8 @@
   padding-bottom: 10px;
   .panel-heading {
     background: transparent;
+    flex-direction: column;
+    align-items: stretch;
   }
 }
 </style>

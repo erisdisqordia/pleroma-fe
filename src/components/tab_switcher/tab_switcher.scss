@@ -1,0 +1,43 @@
+@import '../../_variables.scss';
+
+.tab-switcher {
+  .tabs {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 5px;
+
+    &::after, &::before {
+      display: block;
+      content: '';
+      flex: 1 1 auto;
+    }
+
+    .tab, &::after, &::before {
+      border-bottom: 1px solid;
+      border-bottom-color: $fallback--btn;
+      border-bottom-color: var(--btn, $fallback--btn);
+    }
+
+    .tab {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      padding: .3em 1em;
+
+      &:not(.active) {
+        border-bottom: 1px solid;
+        border-bottom-color: $fallback--btn;
+        border-bottom-color: var(--btn, $fallback--btn);
+        z-index: 4;
+      }
+
+      &.active {
+        background: transparent;
+        border-bottom: none;
+        z-index: 5;
+      }
+    }
+  }
+}

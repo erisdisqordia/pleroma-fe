@@ -48,7 +48,7 @@ a {
   color: var(--link, $fallback--link);
 }
 
-button{
+button {
   user-select: none;
   color: $fallback--fg;
   color: var(--fg, $fallback--fg);
@@ -64,8 +64,17 @@ button{
   font-size: 14px;
   font-family: sans-serif;
 
+  &::-moz-focus-inner {
+    border: none;
+  }
+
   &:hover {
     box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.3);
+  }
+
+  &:active {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
   }
 
   &:disabled {
@@ -105,6 +114,7 @@ input, textarea, .select {
   position: relative;
   height: 29px;
   line-height: 16px;
+  hyphens: none;
 
   .icon-down-open {
     position: absolute;
@@ -226,6 +236,36 @@ nav {
   position: fixed;
   height: 50px;
 
+  .logo {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    align-items: stretch;
+    justify-content: center;
+    flex: 0 0 auto;
+    z-index: -1;
+    .mask {
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+      background-color: $fallback--fg;
+      background-color: var(--fg, $fallback--fg);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    img {
+      display: block;
+      flex: 0;
+    }
+  }
+
   .inner-nav {
     padding-left: 20px;
     padding-right: 20px;
@@ -234,9 +274,6 @@ nav {
     flex-basis: 970px;
     margin: auto;
     height: 50px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto 80%;
 
     a i {
       color: $fallback--link;
@@ -282,15 +319,25 @@ main-router {
 }
 
 .panel-heading {
+  display: flex;
   border-radius: $fallback--panelRadius $fallback--panelRadius 0 0;
   border-radius: var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius) 0 0;
   background-size: cover;
-  padding: 0.6em 1.0em;
+  padding: .6em .6em;
   text-align: left;
   font-size: 1.3em;
   line-height: 24px;
   background-color: $fallback--btn;
   background-color: var(--btn, $fallback--btn);
+  align-items: baseline;
+
+  .title {
+    flex: 1 0 auto;
+  }
+
+  button {
+    height: 100%;
+  }
 }
 
 .panel-heading.stub {
@@ -464,4 +511,3 @@ nav {
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
 }
-

@@ -50,6 +50,7 @@ const persistedStateOptions = {
     'config.hideAttachmentsInConv',
     'config.hideNsfw',
     'config.replyVisibility',
+    'config.notificationVisibility',
     'config.autoLoad',
     'config.hoverPreview',
     'config.streaming',
@@ -102,23 +103,29 @@ window.fetch('/api/statusnet/config.json')
     .then((res) => res.json())
     .then((data) => {
       var staticConfig = data
+      // This takes static config and overrides properties that are present in apiConfig
+      var config = Object.assign({}, staticConfig, apiConfig)
 
-      var theme = (apiConfig.theme || staticConfig.theme)
-      var background = (apiConfig.background || staticConfig.background)
-      var logo = (apiConfig.logo || staticConfig.logo)
-      var redirectRootNoLogin = (apiConfig.redirectRootNoLogin || staticConfig.redirectRootNoLogin)
-      var redirectRootLogin = (apiConfig.redirectRootLogin || staticConfig.redirectRootLogin)
-      var chatDisabled = (apiConfig.chatDisabled || staticConfig.chatDisabled)
-      var showWhoToFollowPanel = (apiConfig.showWhoToFollowPanel || staticConfig.showWhoToFollowPanel)
-      var whoToFollowProvider = (apiConfig.whoToFollowProvider || staticConfig.whoToFollowProvider)
-      var whoToFollowLink = (apiConfig.whoToFollowLink || staticConfig.whoToFollowLink)
-      var showInstanceSpecificPanel = (apiConfig.showInstanceSpecificPanel || staticConfig.showInstanceSpecificPanel)
-      var scopeOptionsEnabled = (apiConfig.scopeOptionsEnabled || staticConfig.scopeOptionsEnabled)
-      var collapseMessageWithSubject = (apiConfig.collapseMessageWithSubject || staticConfig.collapseMessageWithSubject)
+      var theme = (config.theme)
+      var background = (config.background)
+      var logo = (config.logo)
+      var logoMask = (typeof config.logoMask === 'undefined' ? true : config.logoMask)
+      var logoMargin = (typeof config.logoMargin === 'undefined' ? 0 : config.logoMargin)
+      var redirectRootNoLogin = (config.redirectRootNoLogin)
+      var redirectRootLogin = (config.redirectRootLogin)
+      var chatDisabled = (config.chatDisabled)
+      var showWhoToFollowPanel = (config.showWhoToFollowPanel)
+      var whoToFollowProvider = (config.whoToFollowProvider)
+      var whoToFollowLink = (config.whoToFollowLink)
+      var showInstanceSpecificPanel = (config.showInstanceSpecificPanel)
+      var scopeOptionsEnabled = (config.scopeOptionsEnabled)
+      var collapseMessageWithSubject = (config.collapseMessageWithSubject)
 
       store.dispatch('setOption', { name: 'theme', value: theme })
       store.dispatch('setOption', { name: 'background', value: background })
       store.dispatch('setOption', { name: 'logo', value: logo })
+      store.dispatch('setOption', { name: 'logoMask', value: logoMask })
+      store.dispatch('setOption', { name: 'logoMargin', value: logoMargin })
       store.dispatch('setOption', { name: 'showWhoToFollowPanel', value: showWhoToFollowPanel })
       store.dispatch('setOption', { name: 'whoToFollowProvider', value: whoToFollowProvider })
       store.dispatch('setOption', { name: 'whoToFollowLink', value: whoToFollowLink })

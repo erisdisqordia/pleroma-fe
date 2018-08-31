@@ -11,6 +11,14 @@ const Notifications = {
     notificationsFetcher.startFetching({ store, credentials })
   },
   computed: {
+    visibleTypes () {
+      return [
+        this.$store.state.config.notificationVisibility.likes && 'like',
+        this.$store.state.config.notificationVisibility.mentions && 'mention',
+        this.$store.state.config.notificationVisibility.repeats && 'repeat',
+        this.$store.state.config.notificationVisibility.follows && 'follow'
+      ].filter(_ => _)
+    },
     notifications () {
       return this.$store.state.statuses.notifications.data
     },
@@ -18,13 +26,13 @@ const Notifications = {
       return this.$store.state.statuses.notifications.error
     },
     unseenNotifications () {
-      return filter(this.notifications, ({seen}) => !seen)
+      return filter(this.visibleNotifications, ({seen}) => !seen)
     },
     visibleNotifications () {
       // Don't know why, but sortBy([seen, -action.id]) doesn't work.
       let sortedNotifications = sortBy(this.notifications, ({action}) => -action.id)
       sortedNotifications = sortBy(sortedNotifications, 'seen')
-      return sortedNotifications
+      return sortedNotifications.filter((notification) => this.visibleTypes.includes(notification.type))
     },
     unseenCount () {
       return this.unseenNotifications.length

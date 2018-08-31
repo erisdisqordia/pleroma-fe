@@ -54,7 +54,7 @@ module.exports = {
         loader: 'vue'
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loader: 'babel',
         include: projectRoot,
         exclude: /node_modules\/(?!tributejs)/

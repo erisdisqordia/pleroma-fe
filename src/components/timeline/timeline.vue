@@ -57,36 +57,8 @@
 @import '../../_variables.scss';
 
 .timeline {
-  .timeline-heading {
-    position: relative;
-    display: flex;
-  }
-
-  .title {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 70%;
-  }
-
-  .loadmore-button {
-    position: absolute;
-    right: 0.6em;
-    font-size: 14px;
-
-    min-width: 6em;
-    height: 1.8em;
-    line-height: 100%;
-  }
-
   .loadmore-text {
-    position: absolute;
-    right: 0.6em;
     font-size: 14px;
-    min-width: 6em;
-    font-family: sans-serif;
-    text-align: center;
-    padding: 0 0.5em 0 0.5em;
     opacity: 0.8;
     background-color: transparent;
     color: $fallback--faint;
@@ -94,11 +66,8 @@
   }
 
   .loadmore-error {
-    position: absolute;
-    right: 0.6em;
     font-size: 14px;
     min-width: 6em;
-    font-family: sans-serif;
     text-align: center;
     padding: 0 0.25em 0 0.25em;
     margin: 0;

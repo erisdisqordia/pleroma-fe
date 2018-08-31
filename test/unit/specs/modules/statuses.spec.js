@@ -247,7 +247,7 @@ describe('The Statuses module', () => {
       in_reply_to_status_id: '1', // The API uses strings here...
       uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
       text: 'a favorited something by b',
-      user: {}
+      user: { id: 99 }
     }
 
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
@@ -264,7 +264,7 @@ describe('The Statuses module', () => {
     expect(state.timelines.public.visibleStatuses[0].fave_num).to.eql(1)
     expect(state.timelines.public.maxId).to.eq(favorite.id)
 
-    // If something is favorited by the current user, it also sets the 'favorited' property
+    // If something is favorited by the current user, it also sets the 'favorited' property but does not increment counter to avoid over-counting. Counter is incremented (updated, really) via response to the favorite request.
     const user = {
       id: 1
     }
@@ -281,7 +281,7 @@ describe('The Statuses module', () => {
     mutations.addNewStatuses(state, { statuses: [ownFavorite], showImmediately: true, timeline: 'public', user })
 
     expect(state.timelines.public.visibleStatuses.length).to.eql(1)
-    expect(state.timelines.public.visibleStatuses[0].fave_num).to.eql(2)
+    expect(state.timelines.public.visibleStatuses[0].fave_num).to.eql(1)
     expect(state.timelines.public.visibleStatuses[0].favorited).to.eql(true)
   })
 

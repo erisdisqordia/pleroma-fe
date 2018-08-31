@@ -16,7 +16,7 @@ const Attachment = {
       loopVideo: this.$store.state.config.loopVideo,
       showHidden: false,
       loading: false,
-      img: this.type === 'image' && document.createElement('img')
+      img: fileTypeService.fileType(this.attachment.mimetype) === 'image' && document.createElement('img')
     }
   },
   components: {

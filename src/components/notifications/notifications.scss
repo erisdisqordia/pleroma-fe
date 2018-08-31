@@ -4,58 +4,25 @@
   // a bit of a hack to allow scrolling below notifications
   padding-bottom: 15em;
 
-  .title {
-    display: inline-block;
-  }
-
-  .panel {
-    background: $fallback--bg;
-    background: var(--bg, $fallback--bg)
-  }
-
-  .panel-body {
-    border-color: $fallback--border;
-    border-color: var(--border, $fallback--border)
-  }
-
-  .panel-heading {
-    // force the text to stay centered, while keeping
-    // the button in the right side of the panel heading
-    position: relative;
-    background: $fallback--btn;
-    background: var(--btn, $fallback--btn);
-    color: $fallback--fg;
-    color: var(--fg, $fallback--fg);
-    display: flex;
-    align-items: baseline;
-    .read-button {
-      position: absolute;
-      right: 0.7em;
-      height: 1.8em;
-      line-height: 100%;
-    }
-  }
-
   .unseen-count {
     display: inline-block;
     background-color: $fallback--cRed;
     background-color: var(--cRed, $fallback--cRed);
     text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
-    min-width: 1.3em;
-    border-radius: 1.3em;
-    margin: 0 0.2em 0 -0.4em;
+    border-radius: 99px;
+    min-width: 22px;
+    max-width: 22px;
+    min-height: 22px;
+    max-height: 22px;
     color: white;
-    font-size: 0.9em;
+    font-size: 15px;
+    line-height: 22px;
     text-align: center;
-    line-height: 1.3em;
+    vertical-align: middle
   }
 
   .loadmore-error {
-    position: absolute;
-    right: 0.6em;
-    font-size: 14px;
     min-width: 6em;
-    font-family: sans-serif;
     text-align: center;
     padding: 0 0.25em 0 0.25em;
     margin: 0;
@@ -73,7 +40,8 @@
   box-sizing: border-box;
   display: flex;
   border-bottom: 1px solid;
-  border-bottom-color: inherit;
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
 
   .broken-favorite {
     border-radius: $fallback--tooltipRadius;

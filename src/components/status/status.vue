@@ -348,22 +348,21 @@
     h1 {
       font-size: 1.1em;
       line-height: 1.2em;
-      margin: 1.6em 0;
+      margin: 1.4em 0;
     }
 
     h2 {
-      line-height: 1.2em;
-      font-size: 1.2em;
-      margin: 1.4em 0;
+      font-size: 1.1em;
+      margin: 1.0em 0;
     }
 
     h3 {
       font-size: 1em;
-      margin: 1.3em 0;
+      margin: 1.2em 0;
     }
 
     h4 {
-      margin: 1.2em 0;
+      margin: 1.1em 0;
     }
   }
 

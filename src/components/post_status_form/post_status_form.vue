@@ -34,11 +34,14 @@
       </textarea>
       <div class="visibility-tray">
         <span class="text-format">
-          <select v-model="newStatus.contentType" class="form-control">
-            <option value="text/plain">{{$t('post_status.content_type.plain_text')}}</option>
-            <option value="text/html">HTML</option>
-            <option value="text/markdown">Markdown</option>
-          </select>
+          <label for="post-content-type" class="select">
+            <select id="post-content-type" v-model="newStatus.contentType" class="form-control">
+              <option value="text/plain">{{$t('post_status.content_type.plain_text')}}</option>
+              <option value="text/html">HTML</option>
+              <option value="text/markdown">Markdown</option>
+            </select>
+            <i class="icon-down-open"></i>
+          </label>
         </span>
 
         <div v-if="scopeOptionsEnabled">

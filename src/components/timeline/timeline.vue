@@ -66,8 +66,6 @@
   }
 
   .loadmore-error {
-    position: absolute;
-    right: 0.6em;
     font-size: 14px;
     min-width: 6em;
     text-align: center;

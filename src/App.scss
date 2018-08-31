@@ -236,6 +236,36 @@ nav {
   position: fixed;
   height: 50px;
 
+  .logo {
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    align-items: stretch;
+    justify-content: center;
+    flex: 0 0 auto;
+    z-index: -1;
+    .mask {
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+      background-color: $fallback--fg;
+      background-color: var(--fg, $fallback--fg);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    img {
+      display: block;
+      flex: 0;
+    }
+  }
+
   .inner-nav {
     padding-left: 20px;
     padding-right: 20px;
@@ -244,9 +274,6 @@ nav {
     flex-basis: 970px;
     margin: auto;
     height: 50px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: auto 80%;
 
     a i {
       color: $fallback--link;

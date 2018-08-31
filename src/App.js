@@ -18,7 +18,14 @@ export default {
     ChatPanel
   },
   data: () => ({
-    mobileActivePanel: 'timeline'
+    mobileActivePanel: 'timeline',
+    supportsMask: window.CSS && window.CSS.supports && (
+      window.CSS.supports('mask-size', 'contain') ||
+        window.CSS.supports('-webkit-mask-size', 'contain') ||
+        window.CSS.supports('-moz-mask-size', 'contain') ||
+        window.CSS.supports('-ms-mask-size', 'contain') ||
+        window.CSS.supports('-o-mask-size', 'contain')
+    )
   }),
   created () {
     // Load the locale from the storage
@@ -29,7 +36,27 @@ export default {
     background () {
       return this.currentUser.background_image || this.$store.state.config.background
     },
-    logoStyle () { return { 'background-image': `url(${this.$store.state.config.logo})` } },
+    enableMask () { return this.supportsMask && this.$store.state.config.logoMask },
+    logoStyle () {
+      return {
+        'visibility': this.enableMask ? 'hidden' : 'visible'
+      }
+    },
+    logoMaskStyle () {
+      return this.enableMask ? {
+        'mask-image': `url(${this.$store.state.config.logo})`
+      } : {
+        'background-color': this.enableMask ? '' : 'transparent'
+      }
+    },
+    logoBgStyle () {
+      return Object.assign({
+        'margin': `${this.$store.state.config.logoMargin} 0`
+      }, this.enableMask ? {} : {
+        'background-color': this.enableMask ? '' : 'transparent'
+      })
+    },
+    logo () { return this.$store.state.config.logo },
     style () { return { 'background-image': `url(${this.background})` } },
     sitename () { return this.$store.state.config.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },

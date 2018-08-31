@@ -340,6 +340,30 @@
       margin-top: 0.2em;
       margin-bottom: 0.5em;
     }
+
+    h1 {
+      font-size: 1.1em;
+      line-height: 1.5em;
+      margin-left: 0em;
+    }
+
+    h2 {
+      line-height: 1.2em;
+      font-size: 1.1em;
+      margin-left: 1em;
+    }
+
+    h3 {
+      font-size: 1em;
+    }
+
+    h4 {
+      font-size: 1em;
+    }
+
+    h5 {
+      font-size: 1em;
+    }
   }
 
   .retweet-info {

@@ -373,7 +373,7 @@ const unretweet = ({ id, credentials }) => {
   })
 }
 
-const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId}) => {
+const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType}) => {
   const idsText = mediaIds.join(',')
   const form = new FormData()
 
@@ -382,6 +382,7 @@ const postStatus = ({credentials, status, spoilerText, visibility, sensitive, me
   if (spoilerText) form.append('spoiler_text', spoilerText)
   if (visibility) form.append('visibility', visibility)
   if (sensitive) form.append('sensitive', sensitive)
+  if (contentType) form.append('content_type', contentType)
   form.append('media_ids', idsText)
   if (inReplyToStatusId) {
     form.append('in_reply_to_status_id', inReplyToStatusId)

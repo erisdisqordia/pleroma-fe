@@ -73,12 +73,14 @@
   border-radius: var(--panelRadius, $fallback--panelRadius);
   border-style: solid;
   border-color: $fallback--border;
-	border-color: var(--border, $fallback--border);
+  border-color: var(--border, $fallback--border);
   border-width: 1px;
   overflow: hidden;
 
   .panel-heading {
     background: transparent;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   p {

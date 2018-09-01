@@ -335,10 +335,34 @@
       font-style: italic;
     }
 
+    pre {
+      overflow: auto;
+    }
+
     p {
       margin: 0;
       margin-top: 0.2em;
       margin-bottom: 0.5em;
+    }
+
+    h1 {
+      font-size: 1.1em;
+      line-height: 1.2em;
+      margin: 1.4em 0;
+    }
+
+    h2 {
+      font-size: 1.1em;
+      margin: 1.0em 0;
+    }
+
+    h3 {
+      font-size: 1em;
+      margin: 1.2em 0;
+    }
+
+    h4 {
+      margin: 1.1em 0;
     }
   }
 

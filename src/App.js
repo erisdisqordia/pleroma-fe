@@ -14,8 +14,9 @@ export default {
     NavPanel,
     Notifications,
     UserFinder,
-    WhoToFollowPanel,
+    FeaturesPanel,
     InstanceSpecificPanel,
+    WhoToFollowPanel,
     ChatPanel
   },
   data: () => ({

@@ -48,6 +48,7 @@ const persistedStateOptions = {
     'config.collapseMessageWithSubject',
     'config.hideAttachments',
     'config.hideAttachmentsInConv',
+    'config.hideUserStats',
     'config.hideNsfw',
     'config.replyVisibility',
     'config.notificationVisibility',

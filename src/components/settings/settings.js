@@ -10,6 +10,7 @@ const settings = {
       hideAttachmentsLocal: this.$store.state.config.hideAttachments,
       hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
+      hideUserStatsLocal: this.$store.state.config.hideUserStats,
       notificationVisibilityLocal: this.$store.state.config.notificationVisibility,
       replyVisibilityLocal: this.$store.state.config.replyVisibility,
       loopVideoLocal: this.$store.state.config.loopVideo,
@@ -46,6 +47,9 @@ const settings = {
     },
     hideAttachmentsInConvLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideAttachmentsInConv', value })
+    },
+    hideUserStatsLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hideUserStats', value })
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })

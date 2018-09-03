@@ -122,6 +122,10 @@
               <i class="icon-down-open"/>
             </label>
           </div>
+          <div>
+            <input type="checkbox" id="hideUserStats" v-model="hideUserStatsLocal">
+            <label for="hideUserStats">{{$t('settings.hide_user_stats')}}</label>
+          </div>
         </div>
         <div class="setting-item">
           <p>{{$t('settings.filtering_explanation')}}</p>

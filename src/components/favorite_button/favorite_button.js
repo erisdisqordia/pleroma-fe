@@ -2,6 +2,7 @@ const FavoriteButton = {
   props: ['status', 'loggedIn'],
   data () {
     return {
+      hidePostStatsLocal: this.$store.state.config.hidePostStats,
       animated: false
     }
   },

@@ -9,6 +9,7 @@ const defaultState = {
   collapseMessageWithSubject: false,
   hideAttachments: false,
   hideAttachmentsInConv: false,
+  hidePostStats: false,
   hideUserStats: false,
   hideNsfw: true,
   loopVideo: true,

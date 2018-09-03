@@ -123,6 +123,10 @@
             </label>
           </div>
           <div>
+            <input type="checkbox" id="hidePostStats" v-model="hidePostStatsLocal">
+            <label for="hidePostStats">{{$t('settings.hide_post_stats')}}</label>
+          </div>
+          <div>
             <input type="checkbox" id="hideUserStats" v-model="hideUserStatsLocal">
             <label for="hideUserStats">{{$t('settings.hide_user_stats')}}</label>
           </div>

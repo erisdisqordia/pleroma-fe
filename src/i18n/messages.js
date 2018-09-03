@@ -328,6 +328,7 @@ const en = {
     loop_video_silent_only: 'Loop only videos without sound (i.e. Mastodon\'s "gifs")',
     reply_link_preview: 'Enable reply-link preview on mouse hover',
     replies_in_timeline: 'Replies in timeline',
+    hide_post_stats: 'Hide post statistics (e.g. repeat and favorite counts)',
     hide_user_stats: 'Hide user statistics (e.g. status and follower counts)',
     reply_visibility_all: 'Show all replies',
     reply_visibility_following: 'Only show replies directed at me or users I\'m following',

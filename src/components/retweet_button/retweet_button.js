@@ -2,6 +2,7 @@ const RetweetButton = {
   props: ['status', 'loggedIn', 'visibility'],
   data () {
     return {
+      hidePostStatsLocal: this.$store.state.config.hidePostStats,
       animated: false
     }
   },

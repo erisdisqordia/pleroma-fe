@@ -4,12 +4,12 @@
       <div class="title">
         {{title}}
       </div>
-      <button @click.prevent="showNewStatuses" class="loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
-        {{$t('timeline.show_new')}}{{newStatusCountStr}}
-      </button>
       <div @click.prevent class="loadmore-error alert error" v-if="timelineError">
         {{$t('timeline.error_fetching')}}
       </div>
+      <button @click.prevent="showNewStatuses" class="loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
+        {{$t('timeline.show_new')}}{{newStatusCountStr}}
+      </button>
       <div @click.prevent class="loadmore-text" v-if="!timeline.newStatusCount > 0 && !timelineError">
         {{$t('timeline.up_to_date')}}
       </div>
@@ -58,7 +58,6 @@
 
 .timeline {
   .loadmore-text {
-    font-size: 14px;
     opacity: 0.8;
     background-color: transparent;
     color: $fallback--faint;
@@ -66,11 +65,6 @@
   }
 
   .loadmore-error {
-    font-size: 14px;
-    min-width: 6em;
-    text-align: center;
-    padding: 0 0.25em 0 0.25em;
-    margin: 0;
     color: $fallback--fg;
     color: var(--fg, $fallback--fg);
   }

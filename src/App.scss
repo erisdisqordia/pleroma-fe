@@ -248,6 +248,7 @@ nav {
     justify-content: center;
     flex: 0 0 auto;
     z-index: -1;
+
     .mask {
       mask-repeat: no-repeat;
       mask-position: center;
@@ -260,7 +261,10 @@ nav {
       left: 0;
       right: 0;
     }
+
     img {
+      height: 100%;
+      object-fit: contain;
       display: block;
       flex: 0;
     }

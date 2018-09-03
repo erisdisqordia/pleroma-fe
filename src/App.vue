@@ -27,8 +27,8 @@
             <div class="sidebar">
               <user-panel></user-panel>
               <nav-panel></nav-panel>
-              <features-panel></features-panel>
               <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
+              <features-panel></features-panel>
               <who-to-follow-panel v-if="currentUser && suggestionsEnabled"></who-to-follow-panel>
               <notifications v-if="currentUser"></notifications>
             </div>

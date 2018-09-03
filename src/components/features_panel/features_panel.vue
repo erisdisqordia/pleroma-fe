@@ -8,12 +8,11 @@
       </div>
       <div class="panel-body features">
         <ul>
-          <li>Media proxy</li>
-          <li>Local chat</li>
-          <li>Who to follow</li>
-          <li>Scope options</li>
-          <li>Formatting options</li>
-          <li>Text limit=</li>
+          <li v-if="mediaProxy">Media proxy</li>
+          <li v-if="whoToFollow">Who to follow</li>
+          <li v-if="scopeOptions">Scope options</li>
+          <li v-if="formattingOptions">Formatting options</li>
+          <li>Text limit={{textlimit}}</li>
         </ul>
       </div>
     </div>

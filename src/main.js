@@ -225,4 +225,6 @@ window.fetch('/nodeinfo/2.0.json')
     const suggestions = data.metadata.suggestions
     store.dispatch('setOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
     store.dispatch('setOption', { name: 'suggestionsWeb', value: suggestions.web })
+
+    store.dispatch('setOption', { name: 'mediaProxyAvailable', value: data.metadata.mediaProxy })
   })

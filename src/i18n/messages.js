@@ -419,6 +419,16 @@ const en = {
   who_to_follow: {
     who_to_follow: 'Who to follow',
     more: 'More'
+  },
+  features_panel: {
+    title: 'Features',
+    chat: 'Chat',
+    gopher: 'Gopher',
+    who_to_follow: 'Who to follow',
+    media_proxy: 'Media proxy',
+    scope_options: 'Scope options',
+    formatting_options: 'Formatting options',
+    text_limit: 'Text limit'
   }
 }
 
@@ -943,6 +953,16 @@ const ja = {
   who_to_follow: {
     who_to_follow: 'おすすめユーザー',
     more: 'くわしく'
+  },
+  features_panel: {
+    title: 'ゆうこうなきのう',
+    chat: 'チャット',
+    gopher: 'Gopher',
+    who_to_follow: 'おすすめユーザー',
+    media_proxy: 'メディアプロクシ',
+    scope_options: 'こうかいはんい',
+    formatting_options: 'リッチテキスト',
+    text_limit: 'もじのかず'
   }
 }
 

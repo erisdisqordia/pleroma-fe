@@ -8,8 +8,10 @@
       </div>
       <div class="panel-body features-panel">
         <ul>
-          <li v-if="mediaProxy">Media proxy</li>
+          <li v-if="chat">Chat</li>
+          <li v-if="gopher">Gopher</li>
           <li v-if="whoToFollow">Who to follow</li>
+          <li v-if="mediaProxy">Media proxy</li>
           <li v-if="scopeOptions">Scope options</li>
           <li v-if="formattingOptions">Formatting options</li>
           <li>Text limit = {{textlimit}}</li>

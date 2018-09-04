@@ -94,7 +94,7 @@
       <div v-if="!hideUserStatsLocal || switcher" class="user-counts" :class="{clickable: switcher}">
         <div class="user-count" v-on:click.prevent="setProfileView('statuses')" :class="{selected: selected === 'statuses'}">
           <h5>{{ $t('user_card.statuses') }}</h5>
-          <span v-if="!hideUserStatsLocal">{{user.statuses_count}}</span>
+          <span v-if="!hideUserStatsLocal">{{user.statuses_count}} <br></span>
         </div>
         <div class="user-count" v-on:click.prevent="setProfileView('friends')" :class="{selected: selected === 'friends'}">
           <h5>{{ $t('user_card.followees') }}</h5>
@@ -105,7 +105,6 @@
           <span v-if="!hideUserStatsLocal">{{user.followers_count}}</span>
         </div>
       </div>
-      <br>
       <p v-if="!hideBio && user.description_html" class="profile-bio" v-html="user.description_html"></p>
       <p v-else-if="!hideBio" class="profile-bio">{{ user.description }}</p>
     </div>

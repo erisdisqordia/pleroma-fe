@@ -7,7 +7,6 @@ const FeaturesPanel = {
     whoToFollow: function () { return this.$store.state.config.suggestionsEnabled },
     mediaProxy: function () { return this.$store.state.config.mediaProxyAvailable },
     scopeOptions: function () { return this.$store.state.config.scopeOptionsEnabled },
-    formattingOptions: function () { return this.$store.state.config.formattingOptionsEnabled },
     textlimit: function () { return this.$store.state.config.textlimit }
   }
 }

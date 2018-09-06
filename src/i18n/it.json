@@ -1,0 +1,57 @@
+{
+  "general": {
+    "submit": "Invia"
+  },
+  "nav": {
+    "mentions": "Menzioni",
+    "public_tl": "Sequenza temporale pubblica",
+    "timeline": "Sequenza temporale",
+    "twkn": "L'intiera rete conosciuta"
+  },
+  "notifications": {
+    "followed_you": "ti ha seguito",
+    "notifications": "Notifiche",
+    "read": "Leggi!"
+  },
+  "settings": {
+    "attachments": "Allegati",
+    "autoload": "Abilita caricamento automatico quando si raggiunge il fondo schermo",
+    "avatar": "Avatar",
+    "bio": "Introduzione",
+    "current_avatar": "Il tuo attuale avatar",
+    "current_profile_banner": "Sfondo attuale",
+    "filtering": "Filtri",
+    "filtering_explanation": "Filtra via le notifiche che contengono le seguenti parole (inserisci rigo per rigo le parole di innesco)",
+    "hide_attachments_in_convo": "Nascondi gli allegati presenti nelle conversazioni",
+    "hide_attachments_in_tl": "Nascondi gli allegati presenti nella sequenza temporale",
+    "name": "Nome",
+    "name_bio": "Nome & Introduzione",
+    "nsfw_clickthrough": "Abilita la trasparenza degli allegati NSFW",
+    "profile_background": "Sfondo della tua pagina",
+    "profile_banner": "Sfondo del tuo profilo",
+    "reply_link_preview": "Ability il reply-link preview al passaggio del mouse",
+    "set_new_avatar": "Scegli un nuovo avatar",
+    "set_new_profile_background": "Scegli un nuovo sfondo per la tua pagina",
+    "set_new_profile_banner": "Scegli un nuovo sfondo per il tuo profilo",
+    "settings": "Settaggi",
+    "theme": "Tema",
+    "user_settings": "Configurazione dell'utente"
+  },
+  "timeline": {
+    "error_fetching": "Errori nel prelievo aggiornamenti",
+    "load_older": "Carica messaggi più vecchi",
+    "show_new": "Mostra nuovi",
+    "up_to_date": "Aggiornato"
+  },
+  "user_card": {
+    "follow": "Segui",
+    "followees": "Chi stai seguendo",
+    "followers": "Chi ti segue",
+    "following": "Lo stai seguendo!",
+    "follows_you": "Ti segue!",
+    "mute": "Ammutolisci",
+    "muted": "Ammutoliti",
+    "per_day": "al giorno",
+    "statuses": "Messaggi"
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "chat": {
+    "title": "צ'אט"
+  },
+  "finder": {
+    "error_fetching_user": "שגיאה במציאת משתמש",
+    "find_user": "מציאת משתמש"
+  },
+  "general": {
+    "apply": "החל",
+    "submit": "שלח"
+  },
+  "login": {
+    "login": "התחבר",
+    "logout": "התנתק",
+    "password": "סיסמה",
+    "placeholder": "למשל lain",
+    "register": "הירשם",
+    "username": "שם המשתמש"
+  },
+  "nav": {
+    "chat": "צ'אט מקומי",
+    "mentions": "אזכורים",
+    "public_tl": "ציר הזמן הציבורי",
+    "timeline": "ציר הזמן",
+    "twkn": "כל הרשת הידועה"
+  },
+  "notifications": {
+    "favorited_you": "אהב את הסטטוס שלך",
+    "followed_you": "עקב אחריך!",
+    "notifications": "התראות",
+    "read": "קרא!",
+    "repeated_you": "חזר על הסטטוס שלך"
+  },
+  "post_status": {
+    "default": "הרגע נחת ב-ל.א.",
+    "posting": "מפרסם"
+  },
+  "registration": {
+    "bio": "אודות",
+    "email": "אימייל",
+    "fullname": "שם תצוגה",
+    "password_confirm": "אישור סיסמה",
+    "registration": "הרשמה"
+  },
+  "settings": {
+    "attachmentRadius": "צירופים",
+    "attachments": "צירופים",
+    "autoload": "החל טעינה אוטומטית בגלילה לתחתית הדף",
+    "avatar": "תמונת פרופיל",
+    "avatarAltRadius": "תמונות פרופיל (התראות)",
+    "avatarRadius": "תמונות פרופיל",
+    "background": "רקע",
+    "bio": "אודות",
+    "btnRadius": "כפתורים",
+    "cBlue": "כחול (תגובה, עקיבה)",
+    "cGreen": "ירוק (חזרה)",
+    "cOrange": "כתום (לייק)",
+    "cRed": "אדום (ביטול)",
+    "change_password": "שנה סיסמה",
+    "change_password_error": "הייתה בעיה בשינוי סיסמתך.",
+    "changed_password": "סיסמה שונתה בהצלחה!",
+    "confirm_new_password": "אשר סיסמה",
+    "current_avatar": "תמונת הפרופיל הנוכחית שלך",
+    "current_password": "סיסמה נוכחית",
+    "current_profile_banner": "כרזת הפרופיל הנוכחית שלך",
+    "delete_account": "מחק משתמש",
+    "delete_account_description": "מחק לצמיתות את המשתמש שלך ואת כל הודעותיך.",
+    "delete_account_error": "הייתה בעיה במחיקת המשתמש. אם זה ממשיך, אנא עדכן את מנהל השרת שלך.",
+    "delete_account_instructions": "הכנס את סיסמתך בקלט למטה על מנת לאשר מחיקת משתמש.",
+    "filtering": "סינון",
+    "filtering_explanation": "כל הסטטוסים הכוללים את המילים הללו יושתקו, אחד לשורה",
+    "follow_export": "יצוא עקיבות",
+    "follow_export_button": "ייצא את הנעקבים שלך לקובץ csv",
+    "follow_export_processing": "טוען. בקרוב תתבקש להוריד את הקובץ את הקובץ שלך",
+    "follow_import": "יבוא עקיבות",
+    "follow_import_error": "שגיאה בייבוא נעקבים.",
+    "follows_imported": "נעקבים יובאו! ייקח זמן מה לעבד אותם.",
+    "foreground": "חזית",
+    "hide_attachments_in_convo": "החבא צירופים בשיחות",
+    "hide_attachments_in_tl": "החבא צירופים בציר הזמן",
+    "import_followers_from_a_csv_file": "ייבא את הנעקבים שלך מקובץ csv",
+    "inputRadius": "שדות קלט",
+    "links": "לינקים",
+    "name": "שם",
+    "name_bio": "שם ואודות",
+    "new_password": "סיסמה חדשה",
+    "nsfw_clickthrough": "החל החבאת צירופים לא בטוחים לצפיה בעת עבודה בעזרת לחיצת עכבר",
+    "panelRadius": "פאנלים",
+    "presets": "ערכים קבועים מראש",
+    "profile_background": "רקע הפרופיל",
+    "profile_banner": "כרזת הפרופיל",
+    "radii_help": "קבע מראש עיגול פינות לממשק (בפיקסלים)",
+    "reply_link_preview": "החל תצוגה מקדימה של לינק-תגובה בעת ריחוף עם העכבר",
+    "set_new_avatar": "קבע תמונת פרופיל חדשה",
+    "set_new_profile_background": "קבע רקע פרופיל חדש",
+    "set_new_profile_banner": "קבע כרזת פרופיל חדשה",
+    "settings": "הגדרות",
+    "stop_gifs": "נגן-בעת-ריחוף GIFs",
+    "streaming": "החל זרימת הודעות אוטומטית בעת גלילה למעלה הדף",
+    "text": "טקסט",
+    "theme": "תמה",
+    "theme_help": "השתמש בקודי צבע הקס (#אדום-אדום-ירוק-ירוק-כחול-כחול) על מנת להתאים אישית את תמת הצבע שלך.",
+    "tooltipRadius": "טולטיפ \\ התראות",
+    "user_settings": "הגדרות משתמש"
+  },
+  "timeline": {
+    "collapse": "מוטט",
+    "conversation": "שיחה",
+    "error_fetching": "שגיאה בהבאת הודעות",
+    "load_older": "טען סטטוסים חדשים",
+    "repeated": "חזר",
+    "show_new": "הראה חדש",
+    "up_to_date": "עדכני"
+  },
+  "user_card": {
+    "block": "חסימה",
+    "blocked": "חסום!",
+    "follow": "עקוב",
+    "followees": "נעקבים",
+    "followers": "עוקבים",
+    "following": "עוקב!",
+    "follows_you": "עוקב אחריך!",
+    "mute": "השתק",
+    "muted": "מושתק",
+    "per_day": "ליום",
+    "remote_follow": "עקיבה מרחוק",
+    "statuses": "סטטוסים"
+  },
+  "user_profile": {
+    "timeline_title": "ציר זמן המשתמש"
+  }
+}

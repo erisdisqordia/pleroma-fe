@@ -42,6 +42,10 @@ const settings = {
   computed: {
     user () {
       return this.$store.state.users.currentUser
+    },
+    currentSaveStateNotice () {
+      console.log(this.$store.state.config._internal.currentSaveStateNotice && this.$store.state.config._internal.currentSaveStateNotice.error)
+      return this.$store.state.config._internal.currentSaveStateNotice
     }
   },
   watch: {

@@ -1,7 +1,19 @@
 <template>
 <div class="settings panel panel-default">
   <div class="panel-heading">
-    {{$t('settings.settings')}}
+    <div class="title">
+      {{$t('settings.settings')}}
+    </div>
+
+    <template v-if="currentSaveStateNotice">
+      <div @click.prevent class="alert error" v-if="currentSaveStateNotice.error">
+        Errr
+      </div>
+
+      <div @click.prevent class="alert success" v-if="!currentSaveStateNotice.error">
+        Succ
+      </div>
+    </template>
   </div>
   <div class="panel-body">
     <tab-switcher>

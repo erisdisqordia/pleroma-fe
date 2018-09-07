@@ -26,7 +26,11 @@ const defaultState = {
   },
   muteWords: [],
   highlight: {},
-  interfaceLanguage: browserLocale
+  interfaceLanguage: browserLocale,
+  _internal: {
+    currentSaveStateNotice: {},
+    noticeClearTimeout: null
+  }
 }
 
 const config = {
@@ -42,6 +46,18 @@ const config = {
       } else {
         del(state.highlight, user)
       }
+    },
+    settingsSaved (state, { success, error }) {
+      if (success) {
+        if (state.noticeClearTimeout) {
+          clearTimeout(state.noticeClearTimeout)
+        }
+        set(state._internal, 'currentSaveStateNotice', { error: false, data: success })
+        set(state._internal, 'noticeClearTimeout',
+            setTimeout(() => del(state._internal, 'currentSaveStateNotice'), 2000))
+      } else {
+        set(state._internal, 'currentSaveStateNotice', { error: true, errorData: error })
+      }
     }
   },
   actions: {
@@ -50,6 +66,9 @@ const config = {
     },
     setHighlight ({ commit, dispatch }, { user, color, type }) {
       commit('setHighlight', {user, color, type})
+    },
+    settingsSaved ({ commit, dispatch }, { success, error }) {
+      commit('settingsSaved', { success, error })
     },
     setOption ({ commit, dispatch }, { name, value }) {
       commit('setOption', {name, value})

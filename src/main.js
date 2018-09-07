@@ -222,7 +222,12 @@ window.fetch('/instance/panel.html')
 window.fetch('/nodeinfo/2.0.json')
   .then((res) => res.json())
   .then((data) => {
-    const suggestions = data.metadata.suggestions
+    const metadata = data.metadata
+    store.dispatch('setOption', { name: 'mediaProxyAvailable', value: data.metadata.mediaProxy })
+    store.dispatch('setOption', { name: 'chatAvailable', value: data.metadata.chat })
+    store.dispatch('setOption', { name: 'gopherAvailable', value: data.metadata.gopher })
+
+    const suggestions = metadata.suggestions
     store.dispatch('setOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
     store.dispatch('setOption', { name: 'suggestionsWeb', value: suggestions.web })
   })

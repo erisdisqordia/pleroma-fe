@@ -432,14 +432,14 @@ const en = {
 
 const eo = {
   chat: {
-    title: 'Babilo'
+    title: 'Babilejo'
   },
   nav: {
-    chat: 'Loka babilo',
-    timeline: 'Tempovido',
+    chat: 'Loka babilejo',
+    timeline: 'Tempolinio',
     mentions: 'Mencioj',
-    public_tl: 'Publika tempovido',
-    twkn: 'Tuta konata reto'
+    public_tl: 'Publika tempolinio',
+    twkn: 'La tuta konata reto'
   },
   user_card: {
     follows_you: 'Abonas vin!',
@@ -449,26 +449,26 @@ const eo = {
     block: 'Bari',
     statuses: 'Statoj',
     mute: 'Silentigi',
-    muted: 'Silentigita',
+    muted: 'Silentigitaj',
     followers: 'Abonantoj',
     followees: 'Abonatoj',
     per_day: 'tage',
-    remote_follow: 'Fora abono'
+    remote_follow: 'Fore aboni'
   },
   timeline: {
     show_new: 'Montri novajn',
-    error_fetching: 'Eraro ĝisdatigante',
+    error_fetching: 'Eraro dum ĝisdatigo',
     up_to_date: 'Ĝisdata',
-    load_older: 'Enlegi pli malnovajn statojn',
+    load_older: 'Montri pli malnovajn statojn',
     conversation: 'Interparolo',
     collapse: 'Maletendi',
     repeated: 'ripetata'
   },
   settings: {
-    user_settings: 'Uzulaj agordoj',
-    name_bio: 'Nomo kaj prio',
+    user_settings: 'Uzantaj agordoj',
+    name_bio: 'Nomo kaj priskribo',
     name: 'Nomo',
-    bio: 'Prio',
+    bio: 'Priskribo',
     avatar: 'Profilbildo',
     current_avatar: 'Via nuna profilbildo',
     set_new_avatar: 'Agordi novan profilbildon',
@@ -478,9 +478,9 @@ const eo = {
     profile_background: 'Profila fono',
     set_new_profile_background: 'Agordi novan profilan fonon',
     settings: 'Agordoj',
-    theme: 'Haŭto',
-    presets: 'Antaŭmetaĵoj',
-    theme_help: 'Uzu deksesumajn kolorkodojn (#rrvvbb) por adapti vian koloran haŭton.',
+    theme: 'Etoso',
+    presets: 'Antaŭagordoj',
+    theme_help: 'Uzu deksesumajn kolorkodojn (#rrvvbb) por adapti vian koloran etoson.',
     radii_help: 'Agordi fasadan rondigon de randoj (rastrumere)',
     background: 'Fono',
     foreground: 'Malfono',
@@ -488,65 +488,65 @@ const eo = {
     links: 'Ligiloj',
     cBlue: 'Blua (Respondo, abono)',
     cRed: 'Ruĝa (Nuligo)',
-    cOrange: 'Orange (Ŝato)',
+    cOrange: 'Oranĝa (Ŝato)',
     cGreen: 'Verda (Kunhavigo)',
     btnRadius: 'Butonoj',
     panelRadius: 'Paneloj',
     avatarRadius: 'Profilbildoj',
-    avatarAltRadius: 'Profilbildoj (Sciigoj)',
+    avatarAltRadius: 'Profilbildoj (sciigoj)',
     tooltipRadius: 'Ŝpruchelpiloj/avertoj',
     attachmentRadius: 'Kunsendaĵoj',
     filtering: 'Filtrado',
     filtering_explanation: 'Ĉiuj statoj kun tiuj ĉi vortoj silentiĝos, po unu linie',
     attachments: 'Kunsendaĵoj',
-    hide_attachments_in_tl: 'Kaŝi kunsendaĵojn en tempovido',
+    hide_attachments_in_tl: 'Kaŝi kunsendaĵojn en tempolinio',
     hide_attachments_in_convo: 'Kaŝi kunsendaĵojn en interparoloj',
     nsfw_clickthrough: 'Ŝalti traklakan kaŝon de konsternaj kunsendaĵoj',
     stop_gifs: 'Movi GIF-bildojn dum ŝvebo',
-    autoload: 'Ŝalti memfaran enlegadon ĉe subo de paĝo',
-    streaming: 'Ŝalti memfaran fluigon de novaj afiŝoj ĉe supro de paĝo',
+    autoload: 'Ŝalti memfaran ŝarĝadon ĉe subo de paĝo',
+    streaming: 'Ŝalti memfaran fluigon de novaj afiŝoj ĉe la supro de la paĝo',
     reply_link_preview: 'Ŝalti respond-ligilan antaŭvidon dum ŝvebo',
     follow_import: 'Abona enporto',
-    import_followers_from_a_csv_file: 'Enporti abonojn de CSV-dosiero',
+    import_followers_from_a_csv_file: 'Enporti abonojn el CSV-dosiero',
     follows_imported: 'Abonoj enportiĝis! Traktado daŭros iom.',
     follow_import_error: 'Eraro enportante abonojn'
   },
   notifications: {
     notifications: 'Sciigoj',
-    read: 'Legita!',
+    read: 'Legite!',
     followed_you: 'ekabonis vin',
     favorited_you: 'ŝatis vian staton',
     repeated_you: 'ripetis vian staton'
   },
   login: {
-    login: 'Saluti',
+    login: 'Ensaluti',
     username: 'Salutnomo',
     placeholder: 'ekz. lain',
     password: 'Pasvorto',
     register: 'Registriĝi',
-    logout: 'Adiaŭi'
+    logout: 'Elsaluti'
   },
   registration: {
     registration: 'Registriĝo',
     fullname: 'Vidiga nomo',
     email: 'Retpoŝtadreso',
-    bio: 'Prio',
+    bio: 'Priskribo',
     password_confirm: 'Konfirmo de pasvorto'
   },
   post_status: {
-    posting: 'Afiŝanta',
-    default: 'Ĵus alvenis la universalan kongreson!'
+    posting: 'Afiŝante',
+    default: 'Ĵus alvenis al la Universala Kongreso!'
   },
   finder: {
-    find_user: 'Trovi uzulon',
-    error_fetching_user: 'Eraro alportante uzulon'
+    find_user: 'Trovi uzanton',
+    error_fetching_user: 'Eraro alportante uzanton'
   },
   general: {
     submit: 'Sendi',
     apply: 'Apliki'
   },
   user_profile: {
-    timeline_title: 'Uzula tempovido'
+    timeline_title: 'Uzanta tempolinio'
   }
 }
 
@@ -1171,8 +1171,8 @@ const oc = {
     twkn: 'Lo malhum conegut'
   },
   user_card: {
-    follows_you: 'Vos sèc !',
-    following: 'Seguit !',
+    follows_you: 'Vos sèc!',
+    following: 'Seguit!',
     follow: 'Seguir',
     blocked: 'Blocat',
     block: 'Blocar',
@@ -1256,8 +1256,8 @@ const oc = {
   },
   notifications: {
     notifications: 'Notficacions',
-    read: 'Legit !',
-    followed_you: 'vos sèc',
+    read: 'Legit!',
+    followed_you: 'vos a seguit',
     favorited_you: 'a aimat vòstre estatut',
     repeated_you: 'a repetit your vòstre estatut'
   },
@@ -1534,7 +1534,7 @@ const pt = {
     title: 'Chat'
   },
   nav: {
-    chat: 'Chat Local',
+    chat: 'Chat local',
     timeline: 'Linha do tempo',
     mentions: 'Menções',
     public_tl: 'Linha do tempo pública',
@@ -1578,16 +1578,28 @@ const pt = {
     theme: 'Tema',
     presets: 'Predefinições',
     theme_help: 'Use cores em código hexadecimal (#rrggbb) para personalizar seu esquema de cores.',
+    radii_help: 'Arredondar arestas da interface (em píxeis)',
     background: 'Plano de Fundo',
     foreground: 'Primeiro Plano',
     text: 'Texto',
     links: 'Links',
+    cBlue: 'Azul (Responder, seguir)',
+    cRed: 'Vermelho (Cancelar)',
+    cOrange: 'Laranja (Favoritar)',
+    cGreen: 'Verde (Repetir)',
+    btnRadius: 'Botões',
+    panelRadius: 'Paineis',
+    avatarRadius: 'Avatares',
+    avatarAltRadius: 'Avatares (Notificações)',
+    tooltipRadius: 'Dicass/alertas',
+    attachmentRadius: 'Anexos',
     filtering: 'Filtragem',
     filtering_explanation: 'Todas as postagens contendo estas palavras serão silenciadas, uma por linha.',
     attachments: 'Anexos',
     hide_attachments_in_tl: 'Ocultar anexos na linha do tempo.',
     hide_attachments_in_convo: 'Ocultar anexos em conversas',
     nsfw_clickthrough: 'Habilitar clique para ocultar anexos NSFW',
+    stop_gifs: 'Reproduzir GIFs ao passar o cursor em cima',
     autoload: 'Habilitar carregamento automático quando a rolagem chegar ao fim.',
     streaming: 'Habilitar o fluxo automático de postagens quando ao topo da página',
     reply_link_preview: 'Habilitar a pré-visualização de link de respostas ao passar o mouse.',
@@ -1598,8 +1610,10 @@ const pt = {
   },
   notifications: {
     notifications: 'Notificações',
-    read: 'Ler!',
-    followed_you: 'seguiu você'
+    read: 'Lido!',
+    followed_you: 'seguiu você',
+    favorited_you: 'favoritou sua postagem',
+    repeated_you: 'repetiu sua postagem'
   },
   login: {
     login: 'Entrar',
@@ -1618,7 +1632,7 @@ const pt = {
   },
   post_status: {
     posting: 'Publicando',
-    default: 'Acabo de aterrizar em L.A.'
+    default: 'Acabei de chegar no Rio!'
   },
   finder: {
     find_user: 'Buscar usuário',
@@ -1627,6 +1641,9 @@ const pt = {
   general: {
     submit: 'Enviar',
     apply: 'Aplicar'
+  },
+  user_profile: {
+    timeline_title: 'Linha do tempo do usuário'
   }
 }
 

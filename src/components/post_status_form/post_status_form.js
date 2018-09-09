@@ -102,7 +102,7 @@ const PostStatusForm = {
           name: '',
           utf: utf || '',
           // eslint-disable-next-line camelcase
-          img: utf ? '' : this.$store.state.config.server + image_url,
+          img: utf ? '' : this.$store.state.instance.server + image_url,
           highlighted: index === this.highlighted
         }))
       } else {
@@ -129,7 +129,7 @@ const PostStatusForm = {
       return this.newStatus.status.length
     },
     statusLengthLimit () {
-      return this.$store.state.config.textlimit
+      return this.$store.state.instance.textlimit
     },
     hasStatusLengthLimit () {
       return this.statusLengthLimit > 0

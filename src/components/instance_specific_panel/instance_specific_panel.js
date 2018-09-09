@@ -1,7 +1,7 @@
 const InstanceSpecificPanel = {
   computed: {
     instanceSpecificPanelContent () {
-      return this.$store.state.config.instanceSpecificPanelContent
+      return this.$store.state.instance.instanceSpecificPanelContent
     }
   }
 }

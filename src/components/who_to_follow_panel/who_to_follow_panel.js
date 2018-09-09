@@ -83,14 +83,14 @@ const WhoToFollowPanel = {
     moreUrl: function () {
       var host = window.location.hostname
       var user = this.user
-      var suggestionsWeb = this.$store.state.config.suggestionsWeb
+      var suggestionsWeb = this.$store.state.instance.suggestionsWeb
       var url
       url = suggestionsWeb.replace(/{{host}}/g, encodeURIComponent(host))
       url = url.replace(/{{user}}/g, encodeURIComponent(user))
       return url
     },
     suggestionsEnabled () {
-      return this.$store.state.config.suggestionsEnabled
+      return this.$store.state.instance.suggestionsEnabled
     }
   },
   watch: {

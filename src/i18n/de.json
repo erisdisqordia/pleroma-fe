@@ -1,0 +1,150 @@
+{
+  "chat": {
+    "title": "Chat"
+  },
+  "finder": {
+    "error_fetching_user": "Fehler beim Suchen des Benutzers",
+    "find_user": "Finde Benutzer"
+  },
+  "general": {
+    "apply": "Anwenden",
+    "submit": "Absenden"
+  },
+  "login": {
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "password": "Passwort",
+    "placeholder": "z.B. lain",
+    "register": "Registrieren",
+    "username": "Benutzername"
+  },
+  "nav": {
+    "chat": "Lokaler Chat",
+    "friend_requests": "Followanfragen",
+    "mentions": "Erwähnungen",
+    "public_tl": "Lokale Zeitleiste",
+    "timeline": "Zeitleiste",
+    "twkn": "Das gesamte Netzwerk"
+  },
+  "notifications": {
+    "favorited_you": "favorisierte deine Nachricht",
+    "followed_you": "folgt dir",
+    "notifications": "Benachrichtigungen",
+    "read": "Gelesen!",
+    "repeated_you": "wiederholte deine Nachricht"
+  },
+  "post_status": {
+    "account_not_locked_warning": "Dein Profil ist nicht {0}. Wer dir folgen will, kann das jederzeit tun und dann auch deine privaten Beiträge sehen.",
+    "account_not_locked_warning_link": "gesperrt",
+    "default": "Sitze gerade im Hofbräuhaus.",
+    "direct_warning": "Dieser Beitrag wird nur für die erwähnten Nutzer sichtbar sein.",
+    "posting": "Veröffentlichen",
+    "scope": {
+      "direct": "Direkt - Beitrag nur an erwähnte Profile",
+      "private": "Nur Follower - Beitrag nur für Follower sichtbar",
+      "public": "Öffentlich - Beitrag an öffentliche Zeitleisten",
+      "unlisted": "Nicht gelistet - Nicht in öffentlichen Zeitleisten anzeigen"
+    }
+  },
+  "registration": {
+    "bio": "Bio",
+    "email": "Email",
+    "fullname": "Angezeigter Name",
+    "password_confirm": "Passwort bestätigen",
+    "registration": "Registrierung",
+    "token": "Einladungsschlüssel"
+  },
+  "settings": {
+    "attachmentRadius": "Anhänge",
+    "attachments": "Anhänge",
+    "autoload": "Aktiviere automatisches Laden von älteren Beiträgen beim scrollen",
+    "avatar": "Avatar",
+    "avatarAltRadius": "Avatare (Benachrichtigungen)",
+    "avatarRadius": "Avatare",
+    "background": "Hintergrund",
+    "bio": "Bio",
+    "btnRadius": "Buttons",
+    "cBlue": "Blau (Antworten, Folgt dir)",
+    "cGreen": "Grün (Retweet)",
+    "cOrange": "Orange (Favorisieren)",
+    "cRed": "Rot (Abbrechen)",
+    "change_password": "Passwort ändern",
+    "change_password_error": "Es gab ein Problem bei der Änderung des Passworts.",
+    "changed_password": "Passwort erfolgreich geändert!",
+    "confirm_new_password": "Neues Passwort bestätigen",
+    "current_avatar": "Dein derzeitiger Avatar",
+    "current_password": "Aktuelles Passwort",
+    "current_profile_banner": "Der derzeitige Banner deines Profils",
+    "delete_account": "Account löschen",
+    "delete_account_description": "Lösche deinen Account und alle deine Nachrichten unwiderruflich.",
+    "delete_account_error": "Es ist ein Fehler beim löschen deines Accounts aufgetreten. Tritt dies weiterhin auf, wende dich an den Administrator der Instanz.",
+    "delete_account_instructions": "Tippe dein Passwort unten in das Feld ein, um die Löschung deines Accounts zu bestätigen.",
+    "export_theme": "Farbschema speichern",
+    "filtering": "Filter",
+    "filtering_explanation": "Alle Beiträge die diese Wörter enthalten werden ausgeblendet. Ein Wort pro Zeile.",
+    "follow_export": "Follower exportieren",
+    "follow_export_button": "Liste (.csv) erstellen",
+    "follow_export_processing": "In Bearbeitung. Die Liste steht gleich zum herunterladen bereit.",
+    "follow_import": "Followers importieren",
+    "follow_import_error": "Fehler beim importieren der Follower",
+    "follows_imported": "Followers importiert! Die Bearbeitung kann eine Zeit lang dauern.",
+    "foreground": "Vordergrund",
+    "hide_attachments_in_convo": "Anhänge in Unterhaltungen ausblenden",
+    "hide_attachments_in_tl": "Anhänge in der Zeitleiste ausblenden",
+    "import_followers_from_a_csv_file": "Importiere Follower, denen du folgen möchtest, aus einer CSV-Datei",
+    "import_theme": "Farbschema laden",
+    "inputRadius": "Eingabefelder",
+    "invalid_theme_imported": "Die ausgewählte Datei ist kein unterstütztes Pleroma-Theme. Keine Änderungen wurden vorgenommen.",
+    "links": "Links",
+    "lock_account_description": "Sperre deinen Account, um neue Follower zu genehmigen oder abzulehnen",
+    "name": "Name",
+    "name_bio": "Name & Bio",
+    "new_password": "Neues Passwort",
+    "nsfw_clickthrough": "Aktiviere ausblendbares Overlay für Anhänge, die als NSFW markiert sind",
+    "panelRadius": "Panel",
+    "presets": "Voreinstellungen",
+    "profile_background": "Profil Hintergrund",
+    "profile_banner": "Profil Banner",
+    "radii_help": "Kantenrundung (in Pixel) der Oberfläche anpassen",
+    "reply_link_preview": "Aktiviere reply-link Vorschau bei Maus-Hover",
+    "set_new_avatar": "Setze einen neuen Avatar",
+    "set_new_profile_background": "Setze einen neuen Hintergrund für dein Profil",
+    "set_new_profile_banner": "Setze einen neuen Banner für dein Profil",
+    "settings": "Einstellungen",
+    "stop_gifs": "Play-on-hover GIFs",
+    "streaming": "Aktiviere automatisches Laden (Streaming) von neuen Beiträgen",
+    "text": "Text",
+    "theme": "Farbschema",
+    "theme_help": "Benutze HTML Farbcodes (#rrggbb) um dein Farbschema anzupassen",
+    "tooltipRadius": "Tooltips/Warnungen",
+    "user_settings": "Benutzereinstellungen"
+  },
+  "timeline": {
+    "collapse": "Einklappen",
+    "conversation": "Unterhaltung",
+    "error_fetching": "Fehler beim Laden",
+    "load_older": "Lade ältere Beiträge",
+    "repeated": "wiederholte",
+    "show_new": "Zeige Neuere",
+    "up_to_date": "Aktuell"
+  },
+  "user_card": {
+    "approve": "Genehmigen",
+    "block": "Blockieren",
+    "blocked": "Blockiert!",
+    "deny": "Ablehnen",
+    "follow": "Folgen",
+    "followees": "Folgt",
+    "followers": "Followers",
+    "following": "Folgst du!",
+    "follows_you": "Folgt dir!",
+    "mute": "Stummschalten",
+    "muted": "Stummgeschaltet",
+    "per_day": "pro Tag",
+    "remote_follow": "Folgen",
+    "statuses": "Beiträge"
+  },
+  "user_profile": {
+    "timeline_title": "Beiträge"
+  }
+}

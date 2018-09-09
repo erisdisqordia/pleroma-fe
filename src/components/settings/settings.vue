@@ -8,11 +8,11 @@
     <transition name="fade">
       <template v-if="currentSaveStateNotice">
         <div @click.prevent class="alert error" v-if="currentSaveStateNotice.error">
-          Errr
+          {{ $t('settings.saving_err') }}
         </div>
 
-        <div @click.prevent class="alert success" v-if="!currentSaveStateNotice.error">
-          Succ
+        <div @click.prevent class="alert transparent" v-if="!currentSaveStateNotice.error">
+          {{ $t('settings.saving_ok') }}
         </div>
     </template>
     </transition>

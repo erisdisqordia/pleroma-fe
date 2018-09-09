@@ -282,6 +282,8 @@ const en = {
     no_retweet_hint: 'Post is marked as followers-only or direct and cannot be repeated'
   },
   settings: {
+    saving_ok: 'Settings saved',
+    saving_err: 'Error saving settings',
     general: 'General',
     user_settings: 'User Settings',
     name_bio: 'Name & Bio',

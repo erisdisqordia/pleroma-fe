@@ -7,7 +7,7 @@
 
     <transition name="fade">
       <template v-if="currentSaveStateNotice">
-        <div @click.prevent class="alert error" v-if="!currentSaveStateNotice.error">
+        <div @click.prevent class="alert error" v-if="currentSaveStateNotice.error">
           Errr
         </div>
 

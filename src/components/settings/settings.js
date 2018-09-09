@@ -6,25 +6,26 @@ import { filter, trim } from 'lodash'
 
 const settings = {
   data () {
-    const config = this.$store.state.config
+    const user = this.$store.state.config
+    const instance = this.$store.state.instance
 
     return {
-      hideAttachmentsLocal: config.hideAttachments,
-      hideAttachmentsInConvLocal: config.hideAttachmentsInConv,
-      hideNsfwLocal: config.hideNsfw,
-      notificationVisibilityLocal: config.notificationVisibility,
-      replyVisibilityLocal: config.replyVisibility,
-      loopVideoLocal: config.loopVideo,
-      loopVideoSilentOnlyLocal: config.loopVideoSilentOnly,
-      muteWordsString: config.muteWords.join('\n'),
-      autoLoadLocal: config.autoLoad,
-      streamingLocal: config.streaming,
-      pauseOnUnfocusedLocal: config.pauseOnUnfocused,
-      hoverPreviewLocal: config.hoverPreview,
-      collapseMessageWithSubjectLocal: typeof config.collapseMessageWithSubject === 'undefined'
-        ? config.defaultCollapseMessageWithSubject
-        : config.collapseMessageWithSubject,
-      stopGifs: config.stopGifs,
+      hideAttachmentsLocal: user.hideAttachments,
+      hideAttachmentsInConvLocal: user.hideAttachmentsInConv,
+      hideNsfwLocal: user.hideNsfw,
+      notificationVisibilityLocal: user.notificationVisibility,
+      replyVisibilityLocal: user.replyVisibility,
+      loopVideoLocal: user.loopVideo,
+      loopVideoSilentOnlyLocal: user.loopVideoSilentOnly,
+      muteWordsString: user.muteWords.join('\n'),
+      autoLoadLocal: user.autoLoad,
+      streamingLocal: user.streaming,
+      pauseOnUnfocusedLocal: user.pauseOnUnfocused,
+      hoverPreviewLocal: user.hoverPreview,
+      collapseMessageWithSubjectLocal: typeof user.collapseMessageWithSubject === 'undefined'
+        ? instance.collapseMessageWithSubject
+        : user.collapseMessageWithSubject,
+      stopGifs: user.stopGifs,
       loopSilentAvailable:
         // Firefox
         Object.getOwnPropertyDescriptor(HTMLVideoElement.prototype, 'mozHasAudio') ||

@@ -15,6 +15,7 @@ import UserSettings from './components/user_settings/user_settings.vue'
 import FollowRequests from './components/follow_requests/follow_requests.vue'
 
 import interfaceModule from './modules/interface.js'
+import instanceModule from './modules/instance.js'
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
@@ -68,9 +69,10 @@ const persistedStateOptions = {
   ]
 }
 
-const store = console.log('interfaceModule') || new Vuex.Store({
+const store = new Vuex.Store({
   modules: {
     interface: interfaceModule,
+    instance: instanceModule,
     statuses: statusesModule,
     users: usersModule,
     api: apiModule,
@@ -122,15 +124,15 @@ window.fetch('/api/statusnet/config.json')
       var formattingOptionsEnabled = (config.formattingOptionsEnabled)
       var defaultCollapseMessageWithSubject = (config.collapseMessageWithSubject)
 
-      store.dispatch('setOption', { name: 'theme', value: theme })
-      store.dispatch('setOption', { name: 'background', value: background })
-      store.dispatch('setOption', { name: 'logo', value: logo })
-      store.dispatch('setOption', { name: 'logoMask', value: logoMask })
-      store.dispatch('setOption', { name: 'logoMargin', value: logoMargin })
-      store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
-      store.dispatch('setOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
-      store.dispatch('setOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
-      store.dispatch('setOption', { name: 'defaultCollapseMessageWithSubject', value: defaultCollapseMessageWithSubject })
+      store.dispatch('setInstanceOption', { name: 'theme', value: theme })
+      store.dispatch('setInstanceOption', { name: 'background', value: background })
+      store.dispatch('setInstanceOption', { name: 'logo', value: logo })
+      store.dispatch('setInstanceOption', { name: 'logoMask', value: logoMask })
+      store.dispatch('setInstanceOption', { name: 'logoMargin', value: logoMargin })
+      store.dispatch('setInstanceOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
+      store.dispatch('setInstanceOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
+      store.dispatch('setInstanceOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
+      store.dispatch('setInstanceOption', { name: 'collapseMessageWithSubject', value: defaultCollapseMessageWithSubject })
       if (chatDisabled) {
         store.dispatch('disableChat')
       }
@@ -180,7 +182,7 @@ window.fetch('/api/statusnet/config.json')
 window.fetch('/static/terms-of-service.html')
   .then((res) => res.text())
   .then((html) => {
-    store.dispatch('setOption', { name: 'tos', value: html })
+    store.dispatch('setInstanceOption', { name: 'tos', value: html })
   })
 
 window.fetch('/api/pleroma/emoji.json')
@@ -191,11 +193,11 @@ window.fetch('/api/pleroma/emoji.json')
           const emoji = Object.keys(values).map((key) => {
             return { shortcode: key, image_url: values[key] }
           })
-          store.dispatch('setOption', { name: 'customEmoji', value: emoji })
-          store.dispatch('setOption', { name: 'pleromaBackend', value: true })
+          store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
+          store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })
         },
         (failure) => {
-          store.dispatch('setOption', { name: 'pleromaBackend', value: false })
+          store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: false })
         }
       ),
     (error) => console.log(error)
@@ -207,24 +209,24 @@ window.fetch('/static/emoji.json')
     const emoji = Object.keys(values).map((key) => {
       return { shortcode: key, image_url: false, 'utf': values[key] }
     })
-    store.dispatch('setOption', { name: 'emoji', value: emoji })
+    store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
   })
 
 window.fetch('/instance/panel.html')
   .then((res) => res.text())
   .then((html) => {
-    store.dispatch('setOption', { name: 'instanceSpecificPanelContent', value: html })
+    store.dispatch('setInstanceOption', { name: 'instanceSpecificPanelContent', value: html })
   })
 
 window.fetch('/nodeinfo/2.0.json')
   .then((res) => res.json())
   .then((data) => {
     const metadata = data.metadata
-    store.dispatch('setOption', { name: 'mediaProxyAvailable', value: data.metadata.mediaProxy })
-    store.dispatch('setOption', { name: 'chatAvailable', value: data.metadata.chat })
-    store.dispatch('setOption', { name: 'gopherAvailable', value: data.metadata.gopher })
+    store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: data.metadata.mediaProxy })
+    store.dispatch('setInstanceOption', { name: 'chatAvailable', value: data.metadata.chat })
+    store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: data.metadata.gopher })
 
     const suggestions = metadata.suggestions
-    store.dispatch('setOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
-    store.dispatch('setOption', { name: 'suggestionsWeb', value: suggestions.web })
+    store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
+    store.dispatch('setInstanceOption', { name: 'suggestionsWeb', value: suggestions.web })
   })

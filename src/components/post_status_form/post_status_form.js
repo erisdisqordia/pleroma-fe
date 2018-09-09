@@ -120,10 +120,10 @@ const PostStatusForm = {
       return this.$store.state.users.users
     },
     emoji () {
-      return this.$store.state.config.emoji || []
+      return this.$store.state.instance.emoji || []
     },
     customEmoji () {
-      return this.$store.state.config.customEmoji || []
+      return this.$store.state.instance.customEmoji || []
     },
     statusLength () {
       return this.newStatus.status.length
@@ -141,10 +141,10 @@ const PostStatusForm = {
       return this.hasStatusLengthLimit && (this.statusLength > this.statusLengthLimit)
     },
     scopeOptionsEnabled () {
-      return this.$store.state.config.scopeOptionsEnabled
+      return this.$store.state.instance.scopeOptionsEnabled
     },
     formattingOptionsEnabled () {
-      return this.$store.state.config.formattingOptionsEnabled
+      return this.$store.state.instance.formattingOptionsEnabled
     }
   },
   methods: {

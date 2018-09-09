@@ -1442,7 +1442,7 @@ const pt = {
     read: 'Lido!',
     followed_you: 'seguiu você',
     favorited_you: 'favoritou sua postagem',
-    repeated_you: 'repetiu sua postagem'    
+    repeated_you: 'repetiu sua postagem'
   },
   login: {
     login: 'Entrar',

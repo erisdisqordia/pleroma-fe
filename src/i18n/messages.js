@@ -7,7 +7,8 @@ const de = {
     timeline: 'Zeitleiste',
     mentions: 'Erwähnungen',
     public_tl: 'Lokale Zeitleiste',
-    twkn: 'Das gesamte Netzwerk'
+    twkn: 'Das gesamte Netzwerk',
+    friend_requests: 'Followanfragen'
   },
   user_card: {
     follows_you: 'Folgt dir!',
@@ -18,10 +19,12 @@ const de = {
     statuses: 'Beiträge',
     mute: 'Stummschalten',
     muted: 'Stummgeschaltet',
-    followers: 'Folgende',
+    followers: 'Followers',
     followees: 'Folgt',
     per_day: 'pro Tag',
-    remote_follow: 'Remote Follow'
+    remote_follow: 'Folgen',
+    approve: 'Genehmigen',
+    deny: 'Ablehnen'
   },
   timeline: {
     show_new: 'Zeige Neuere',
@@ -39,12 +42,12 @@ const de = {
     bio: 'Bio',
     avatar: 'Avatar',
     current_avatar: 'Dein derzeitiger Avatar',
-    set_new_avatar: 'Setze neuen Avatar',
+    set_new_avatar: 'Setze einen neuen Avatar',
     profile_banner: 'Profil Banner',
-    current_profile_banner: 'Dein derzeitiger Profil Banner',
-    set_new_profile_banner: 'Setze neuen Profil Banner',
+    current_profile_banner: 'Der derzeitige Banner deines Profils',
+    set_new_profile_banner: 'Setze einen neuen Banner für dein Profil',
     profile_background: 'Profil Hintergrund',
-    set_new_profile_background: 'Setze neuen Profil Hintergrund',
+    set_new_profile_background: 'Setze einen neuen Hintergrund für dein Profil',
     settings: 'Einstellungen',
     theme: 'Farbschema',
     presets: 'Voreinstellungen',
@@ -78,15 +81,15 @@ const de = {
     autoload: 'Aktiviere automatisches Laden von älteren Beiträgen beim scrollen',
     streaming: 'Aktiviere automatisches Laden (Streaming) von neuen Beiträgen',
     reply_link_preview: 'Aktiviere reply-link Vorschau bei Maus-Hover',
-    follow_import: 'Folgeliste importieren',
-    import_followers_from_a_csv_file: 'Importiere Kontakte, denen du folgen möchtest, aus einer CSV-Datei',
-    follows_imported: 'Folgeliste importiert! Die Bearbeitung kann eine Zeit lang dauern.',
-    follow_import_error: 'Fehler beim importieren der Folgeliste',
+    follow_import: 'Followers importieren',
+    import_followers_from_a_csv_file: 'Importiere Follower, denen du folgen möchtest, aus einer CSV-Datei',
+    follows_imported: 'Followers importiert! Die Bearbeitung kann eine Zeit lang dauern.',
+    follow_import_error: 'Fehler beim importieren der Follower',
     delete_account: 'Account löschen',
-    delete_account_description: 'Lösche deinen Account und alle deine Nachrichten dauerhaft.',
-    delete_account_instructions: 'Tippe dein Passwort unten in das Feld ein um die Löschung deines Accounts zu bestätigen.',
+    delete_account_description: 'Lösche deinen Account und alle deine Nachrichten unwiderruflich.',
+    delete_account_instructions: 'Tippe dein Passwort unten in das Feld ein, um die Löschung deines Accounts zu bestätigen.',
     delete_account_error: 'Es ist ein Fehler beim löschen deines Accounts aufgetreten. Tritt dies weiterhin auf, wende dich an den Administrator der Instanz.',
-    follow_export: 'Folgeliste exportieren',
+    follow_export: 'Follower exportieren',
     follow_export_processing: 'In Bearbeitung. Die Liste steht gleich zum herunterladen bereit.',
     follow_export_button: 'Liste (.csv) erstellen',
     change_password: 'Passwort ändern',
@@ -94,7 +97,8 @@ const de = {
     new_password: 'Neues Passwort',
     confirm_new_password: 'Neues Passwort bestätigen',
     changed_password: 'Passwort erfolgreich geändert!',
-    change_password_error: 'Es gab ein Problem bei der Änderung des Passworts.'
+    change_password_error: 'Es gab ein Problem bei der Änderung des Passworts.',
+    lock_account_description: 'Sperre deinen Account, um neue Follower zu genehmigen oder abzulehnen'
   },
   notifications: {
     notifications: 'Benachrichtigungen',
@@ -116,7 +120,8 @@ const de = {
     fullname: 'Angezeigter Name',
     email: 'Email',
     bio: 'Bio',
-    password_confirm: 'Passwort bestätigen'
+    password_confirm: 'Passwort bestätigen',
+    token: 'Einladungsschlüssel'
   },
   post_status: {
     posting: 'Veröffentlichen',
@@ -127,7 +132,7 @@ const de = {
     scope: {
       public: 'Öffentlich - Beitrag an öffentliche Zeitleisten',
       unlisted: 'Nicht gelistet - Nicht in öffentlichen Zeitleisten anzeigen',
-      private: 'Nur Folgende - Beitrag nur an Folgende',
+      private: 'Nur Follower - Beitrag nur für Follower sichtbar',
       direct: 'Direkt - Beitrag nur an erwähnte Profile'
     }
   },

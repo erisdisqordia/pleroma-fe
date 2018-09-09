@@ -3,9 +3,10 @@ import apiService from '../../services/api/api.service.js'
 function showWhoToFollow (panel, reply) {
   var users = reply
   var cn
-  var index = 0
-  var random = Math.floor(Math.random() * 10)
-  for (cn = random; cn < users.length; cn = cn + 10) {
+  var index
+  var step = 7
+  cn = Math.floor(Math.random() * step)
+  for (index = 0; index < 3; index++) {
     var user
     user = users[cn]
     var img
@@ -46,11 +47,8 @@ function showWhoToFollow (panel, reply) {
           }
         })
     }
-    index = index + 1
-    if (index > 2) {
-      break
-    }
   }
+  cn = (cn + step) % users.length
 }
 
 function getWhoToFollow (panel) {

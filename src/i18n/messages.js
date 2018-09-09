@@ -1217,10 +1217,10 @@ const oc = {
     links: 'Ligams',
     cBlue: 'Blau (Respondre, seguir)',
     cRed: 'Roge (Anullar)',
-    cOrange: 'Irange (Metre en favorit)',
+    cOrange: 'Irange (Aimar)',
     cGreen: 'Verd (Repartajar)',
-    inputRadius: 'Camps tèxte',
     btnRadius: 'Botons',
+    inputRadius: 'Camps tèxte',
     panelRadius: 'Panèls',
     avatarRadius: 'Avatars',
     avatarAltRadius: 'Avatars (Notificacions)',
@@ -1239,7 +1239,20 @@ const oc = {
     follow_import: 'Importar los abonaments',
     import_followers_from_a_csv_file: 'Importar los seguidors d’un fichièr csv',
     follows_imported: 'Seguidors importats. Lo tractament pòt trigar una estona.',
-    follow_import_error: 'Error en important los seguidors'
+    follow_import_error: 'Error en important los seguidors',
+    delete_account: 'Suprimir lo compte',
+    delete_account_description: 'Suprimir vòstre compte e los messatges per sempre.',
+    delete_account_instructions: 'Picatz vòstre senhal dins lo camp tèxte çai-jos per confirmar la supression del compte.',
+    delete_account_error: 'Una error s’es producha en suprimir lo compte. S’aquò ten d’arribar mercés de contactar vòstre administrador d’instància.',
+    follow_export: 'Exportar los abonaments',
+    follow_export_processing: 'Tractament, vos demandarem lèu de telecargar lo fichièr',
+    follow_export_button: 'Exportar vòstres abonaments dins un fichièr csv',
+    change_password: 'Cambiar lo senhal',
+    current_password: 'Senhal actual',
+    new_password: 'Nòu senhal',
+    confirm_new_password: 'Confirmatz lo nòu senhal',
+    changed_password: 'Senhal corrèctament cambiat',
+    change_password_error: 'Una error s’es producha en cambiant lo senhal.'
   },
   notifications: {
     notifications: 'Notficacions',
@@ -1265,6 +1278,7 @@ const oc = {
   },
   post_status: {
     posting: 'Mandadís',
+    content_warning: 'Avís de contengut (opcional)',
     default: 'Escrivètz aquí vòstre estatut.'
   },
   finder: {

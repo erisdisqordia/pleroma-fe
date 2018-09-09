@@ -2,6 +2,15 @@
   "chat": {
     "title": "Chat"
   },
+  "features_panel": {
+    "chat": "Chat",
+    "gopher": "Gopher",
+    "media_proxy": "Media proxy",
+    "scope_options": "Scope options",
+    "text_limit": "Text limit",
+    "title": "Features",
+    "who_to_follow": "Who to follow"
+  },
   "finder": {
     "error_fetching_user": "Error fetching user",
     "find_user": "Find user"
@@ -38,8 +47,7 @@
   "post_status": {
     "account_not_locked_warning": "Your account is not {0}. Anyone can follow you to view your follower-only posts.",
     "account_not_locked_warning_link": "locked",
-    "attachments_not_sensitive": "Attachments <strong>not</strong> marked sensitive",
-    "attachments_sensitive": "Attachments marked sensitive",
+    "attachments_sensitive": "Mark attachments as sensitive",
     "content_type": {
       "plain_text": "Plain text"
     },

@@ -114,26 +114,20 @@ window.fetch('/api/statusnet/config.json')
       var redirectRootNoLogin = (config.redirectRootNoLogin)
       var redirectRootLogin = (config.redirectRootLogin)
       var chatDisabled = (config.chatDisabled)
-      var showWhoToFollowPanel = (config.showWhoToFollowPanel)
-      var whoToFollowProvider = (config.whoToFollowProvider)
-      var whoToFollowLink = (config.whoToFollowLink)
       var showInstanceSpecificPanel = (config.showInstanceSpecificPanel)
       var scopeOptionsEnabled = (config.scopeOptionsEnabled)
       var formattingOptionsEnabled = (config.formattingOptionsEnabled)
-      var collapseMessageWithSubject = (config.collapseMessageWithSubject)
+      var defaultCollapseMessageWithSubject = (config.collapseMessageWithSubject)
 
       store.dispatch('setOption', { name: 'theme', value: theme })
       store.dispatch('setOption', { name: 'background', value: background })
       store.dispatch('setOption', { name: 'logo', value: logo })
       store.dispatch('setOption', { name: 'logoMask', value: logoMask })
       store.dispatch('setOption', { name: 'logoMargin', value: logoMargin })
-      store.dispatch('setOption', { name: 'showWhoToFollowPanel', value: showWhoToFollowPanel })
-      store.dispatch('setOption', { name: 'whoToFollowProvider', value: whoToFollowProvider })
-      store.dispatch('setOption', { name: 'whoToFollowLink', value: whoToFollowLink })
       store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
       store.dispatch('setOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
       store.dispatch('setOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
-      store.dispatch('setOption', { name: 'collapseMessageWithSubject', value: collapseMessageWithSubject })
+      store.dispatch('setOption', { name: 'defaultCollapseMessageWithSubject', value: defaultCollapseMessageWithSubject })
       if (chatDisabled) {
         store.dispatch('disableChat')
       }
@@ -222,7 +216,12 @@ window.fetch('/instance/panel.html')
 window.fetch('/nodeinfo/2.0.json')
   .then((res) => res.json())
   .then((data) => {
-    const suggestions = data.metadata.suggestions
+    const metadata = data.metadata
+    store.dispatch('setOption', { name: 'mediaProxyAvailable', value: data.metadata.mediaProxy })
+    store.dispatch('setOption', { name: 'chatAvailable', value: data.metadata.chat })
+    store.dispatch('setOption', { name: 'gopherAvailable', value: data.metadata.gopher })
+
+    const suggestions = metadata.suggestions
     store.dispatch('setOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
     store.dispatch('setOption', { name: 'suggestionsWeb', value: suggestions.web })
   })

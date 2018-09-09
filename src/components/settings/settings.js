@@ -6,21 +6,25 @@ import { filter, trim } from 'lodash'
 
 const settings = {
   data () {
+    const config = this.$store.state.config
+
     return {
-      hideAttachmentsLocal: this.$store.state.config.hideAttachments,
-      hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
-      hideNsfwLocal: this.$store.state.config.hideNsfw,
-      notificationVisibilityLocal: this.$store.state.config.notificationVisibility,
-      replyVisibilityLocal: this.$store.state.config.replyVisibility,
-      loopVideoLocal: this.$store.state.config.loopVideo,
-      loopVideoSilentOnlyLocal: this.$store.state.config.loopVideoSilentOnly,
-      muteWordsString: this.$store.state.config.muteWords.join('\n'),
-      autoLoadLocal: this.$store.state.config.autoLoad,
-      streamingLocal: this.$store.state.config.streaming,
-      pauseOnUnfocusedLocal: this.$store.state.config.pauseOnUnfocused,
-      hoverPreviewLocal: this.$store.state.config.hoverPreview,
-      collapseMessageWithSubjectLocal: this.$store.state.config.collapseMessageWithSubject,
-      stopGifs: this.$store.state.config.stopGifs,
+      hideAttachmentsLocal: config.hideAttachments,
+      hideAttachmentsInConvLocal: config.hideAttachmentsInConv,
+      hideNsfwLocal: config.hideNsfw,
+      notificationVisibilityLocal: config.notificationVisibility,
+      replyVisibilityLocal: config.replyVisibility,
+      loopVideoLocal: config.loopVideo,
+      loopVideoSilentOnlyLocal: config.loopVideoSilentOnly,
+      muteWordsString: config.muteWords.join('\n'),
+      autoLoadLocal: config.autoLoad,
+      streamingLocal: config.streaming,
+      pauseOnUnfocusedLocal: config.pauseOnUnfocused,
+      hoverPreviewLocal: config.hoverPreview,
+      collapseMessageWithSubjectLocal: typeof config.collapseMessageWithSubject === 'undefined'
+        ? config.defaultCollapseMessageWithSubject
+        : config.collapseMessageWithSubject,
+      stopGifs: config.stopGifs,
       loopSilentAvailable:
         // Firefox
         Object.getOwnPropertyDescriptor(HTMLVideoElement.prototype, 'mozHasAudio') ||

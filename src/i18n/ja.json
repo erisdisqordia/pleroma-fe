@@ -2,6 +2,15 @@
   "chat": {
     "title": "チャット"
   },
+  "features_panel": {
+    "chat": "チャット",
+    "gopher": "Gopher",
+    "media_proxy": "メディアプロクシ",
+    "scope_options": "こうかいはんい",
+    "text_limit": "もじのかず",
+    "title": "ゆうこうなきのう",
+    "who_to_follow": "おすすめユーザー"
+  },
   "finder": {
     "error_fetching_user": "ユーザーけんさくがエラーになりました。",
     "find_user": "ユーザーをさがす"

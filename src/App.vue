@@ -28,6 +28,7 @@
               <user-panel></user-panel>
               <nav-panel></nav-panel>
               <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
+              <features-panel v-if="!currentUser"></features-panel>
               <who-to-follow-panel v-if="currentUser && suggestionsEnabled"></who-to-follow-panel>
               <notifications v-if="currentUser"></notifications>
             </div>

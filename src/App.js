@@ -2,8 +2,9 @@ import UserPanel from './components/user_panel/user_panel.vue'
 import NavPanel from './components/nav_panel/nav_panel.vue'
 import Notifications from './components/notifications/notifications.vue'
 import UserFinder from './components/user_finder/user_finder.vue'
-import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_panel.vue'
 import InstanceSpecificPanel from './components/instance_specific_panel/instance_specific_panel.vue'
+import FeaturesPanel from './components/features_panel/features_panel.vue'
+import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_panel.vue'
 import ChatPanel from './components/chat_panel/chat_panel.vue'
 
 export default {
@@ -13,8 +14,9 @@ export default {
     NavPanel,
     Notifications,
     UserFinder,
-    WhoToFollowPanel,
     InstanceSpecificPanel,
+    FeaturesPanel,
+    WhoToFollowPanel,
     ChatPanel
   },
   data: () => ({

@@ -14,8 +14,10 @@
 
 <style lang="scss">
 .user-panel {
-    .profile-panel-background .panel-heading {
-        background: transparent;
-    }
+  .profile-panel-background .panel-heading {
+    background: transparent;
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 </style>

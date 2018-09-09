@@ -1,6 +1,7 @@
 import { set } from 'vue'
 
 const defaultState = {
+  // Stuff from static/config.json and apiConfig
   name: 'Pleroma FE',
   registrationOpen: true,
   textlimit: 5000,
@@ -17,9 +18,19 @@ const defaultState = {
   formattingOptionsEnabled: false,
   collapseMessageWithSubject: false,
   disableChat: false,
+
   // Nasty stuff
   pleromaBackend: true,
+  emoji: [],
   customEmoji: [],
+
+  // Feature-set, apparently, not everything here is reported...
+  mediaProxyAvailable: false,
+  chatAvailable: false,
+  gopherAvailable: false,
+  suggestionsEnabled: false,
+  suggestionsWeb: '',
+
   // Html stuff
   instanceSpecificPanelContent: '',
   tos: ''

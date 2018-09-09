@@ -16,6 +16,7 @@ const saveImmedeatelyActions = [
   'markNotificationsAsSeen',
   'clearCurrentUser',
   'setCurrentUser',
+  'setHighlight',
   'setOption'
 ]
 

@@ -47,23 +47,7 @@ Vue.use(VueChatScroll)
 
 const persistedStateOptions = {
   paths: [
-    'config.collapseMessageWithSubject',
-    'config.hideAttachments',
-    'config.hideAttachmentsInConv',
-    'config.hideNsfw',
-    'config.replyVisibility',
-    'config.notificationVisibility',
-    'config.autoLoad',
-    'config.hoverPreview',
-    'config.streaming',
-    'config.muteWords',
-    'config.customTheme',
-    'config.highlight',
-    'config.loopVideo',
-    'config.loopVideoSilentOnly',
-    'config.pauseOnUnfocused',
-    'config.stopGifs',
-    'config.interfaceLanguage',
+    'config',
     'users.lastLoginName',
     'statuses.notifications.maxSavedId'
   ]
@@ -129,6 +113,8 @@ window.fetch('/api/statusnet/config.json')
       store.dispatch('setInstanceOption', { name: 'logo', value: logo })
       store.dispatch('setInstanceOption', { name: 'logoMask', value: logoMask })
       store.dispatch('setInstanceOption', { name: 'logoMargin', value: logoMargin })
+      store.dispatch('setInstanceOption', { name: 'redirectRootNoLogin', value: redirectRootNoLogin })
+      store.dispatch('setInstanceOption', { name: 'redirectRootLogin', value: redirectRootLogin })
       store.dispatch('setInstanceOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
       store.dispatch('setInstanceOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
       store.dispatch('setInstanceOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })

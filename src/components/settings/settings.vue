@@ -5,15 +5,17 @@
       {{$t('settings.settings')}}
     </div>
 
-    <template v-if="currentSaveStateNotice">
-      <div @click.prevent class="alert error" v-if="currentSaveStateNotice.error">
-        Errr
-      </div>
+    <transition name="fade">
+      <template v-if="currentSaveStateNotice">
+        <div @click.prevent class="alert error" v-if="!currentSaveStateNotice.error">
+          Errr
+        </div>
 
-      <div @click.prevent class="alert success" v-if="!currentSaveStateNotice.error">
-        Succ
-      </div>
+        <div @click.prevent class="alert success" v-if="!currentSaveStateNotice.error">
+          Succ
+        </div>
     </template>
+    </transition>
   </div>
   <div class="panel-body">
     <tab-switcher>

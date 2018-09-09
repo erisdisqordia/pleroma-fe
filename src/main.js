@@ -14,6 +14,7 @@ import Registration from './components/registration/registration.vue'
 import UserSettings from './components/user_settings/user_settings.vue'
 import FollowRequests from './components/follow_requests/follow_requests.vue'
 
+import interfaceModule from './modules/interface.js'
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
@@ -67,8 +68,9 @@ const persistedStateOptions = {
   ]
 }
 
-const store = new Vuex.Store({
+const store = console.log('interfaceModule') || new Vuex.Store({
   modules: {
+    interface: interfaceModule,
     statuses: statusesModule,
     users: usersModule,
     api: apiModule,
@@ -92,10 +94,11 @@ window.fetch('/api/statusnet/config.json')
   .then((data) => {
     const {name, closed: registrationClosed, textlimit, server} = data.site
 
-    store.dispatch('setOption', { name: 'name', value: name })
-    store.dispatch('setOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
-    store.dispatch('setOption', { name: 'textlimit', value: parseInt(textlimit) })
-    store.dispatch('setOption', { name: 'server', value: server })
+    console.log(store)
+    store.dispatch('setInstanceOption', { name: 'name', value: name })
+    store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
+    store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
+    store.dispatch('setInstanceOption', { name: 'server', value: server })
 
     var apiConfig = data.site.pleromafe
 

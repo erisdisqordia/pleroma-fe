@@ -1946,8 +1946,18 @@ const he = {
   chat: {
     title: 'צ\'אט'
   },
+  features_panel: {
+    chat: 'צ\'אט',
+    gopher: 'גופר',
+    media_proxy: 'מדיה פרוקסי',
+    scope_options: 'אפשרויות טווח',
+    text_limit: 'מגבלת טקסט',
+    title: 'מאפיינים',
+    who_to_follow: 'אחרי מי לעקוב'
+  },
   nav: {
     chat: 'צ\'אט מקומי',
+    friend_requests: 'בקשות עקיבה',
     timeline: 'ציר הזמן',
     mentions: 'אזכורים',
     public_tl: 'ציר הזמן הציבורי',
@@ -1965,7 +1975,9 @@ const he = {
     followers: 'עוקבים',
     followees: 'נעקבים',
     per_day: 'ליום',
-    remote_follow: 'עקיבה מרחוק'
+    remote_follow: 'עקיבה מרחוק',
+    approve: 'אשר',
+    deny: 'דחה'
   },
   timeline: {
     show_new: 'הראה חדש',
@@ -1974,7 +1986,8 @@ const he = {
     load_older: 'טען סטטוסים חדשים',
     conversation: 'שיחה',
     collapse: 'מוטט',
-    repeated: 'חזר'
+    repeated: 'חזר',
+    no_retweet_hint: 'ההודעה מסומנת כ"לעוקבים-בלבד" ולא ניתן לחזור עליה'
   },
   settings: {
     user_settings: 'הגדרות משתמש',
@@ -1992,7 +2005,10 @@ const he = {
     settings: 'הגדרות',
     theme: 'תמה',
     presets: 'ערכים קבועים מראש',
+    export_theme: 'שמור ערכים',
+    import_theme: 'טען ערכים',
     theme_help: 'השתמש בקודי צבע הקס (#אדום-אדום-ירוק-ירוק-כחול-כחול) על מנת להתאים אישית את תמת הצבע שלך.',
+    invalid_theme_imported: 'הקובץ הנבחר אינו תמה הנתמכת ע"י פלרומה. שום שינויים לא נעשו לתמה שלך.',
     radii_help: 'קבע מראש עיגול פינות לממשק (בפיקסלים)',
     background: 'רקע',
     foreground: 'חזית',
@@ -2015,10 +2031,23 @@ const he = {
     hide_attachments_in_tl: 'החבא צירופים בציר הזמן',
     hide_attachments_in_convo: 'החבא צירופים בשיחות',
     nsfw_clickthrough: 'החל החבאת צירופים לא בטוחים לצפיה בעת עבודה בעזרת לחיצת עכבר',
+    collapse_subject: 'מזער הודעות עם נושאים',
     stop_gifs: 'נגן-בעת-ריחוף GIFs',
     autoload: 'החל טעינה אוטומטית בגלילה לתחתית הדף',
     streaming: 'החל זרימת הודעות אוטומטית בעת גלילה למעלה הדף',
+    pause_on_unfocused: 'השהה זרימת הודעות כשהחלון לא בפוקוס',
+    loop_video: 'נגן סרטונים ללא הפסקה',
+    loop_video_silent_only: 'נגן רק סרטונים חסרי קול ללא הפסקה',
     reply_link_preview: 'החל תצוגה מקדימה של לינק-תגובה בעת ריחוף עם העכבר',
+    replies_in_timeline: 'תגובות בציר הזמן',
+    reply_visibility_all: 'הראה את כל התגובות',
+    reply_visibility_following: 'הראה תגובות שמופנות אליי או לעקובים שלי בלבד',
+    reply_visibility_self: 'הראה תגובות שמופנות אליי בלבד',
+    notification_visibility: 'סוג ההתראות שתרצו לראות',
+    notification_visibility_likes: 'לייקים',
+    notification_visibility_mentions: 'אזכורים',
+    notification_visibility_repeats: 'חזרות',
+    notification_visibility_follows: 'עקיבות',
     follow_import: 'יבוא עקיבות',
     import_followers_from_a_csv_file: 'ייבא את הנעקבים שלך מקובץ csv',
     follows_imported: 'נעקבים יובאו! ייקח זמן מה לעבד אותם.',
@@ -2035,9 +2064,18 @@ const he = {
     new_password: 'סיסמה חדשה',
     confirm_new_password: 'אשר סיסמה',
     changed_password: 'סיסמה שונתה בהצלחה!',
-    change_password_error: 'הייתה בעיה בשינוי סיסמתך.'
+    change_password_error: 'הייתה בעיה בשינוי סיסמתך.',
+    lock_account_description: 'הגבל את המשתמש לעוקבים מאושרים בלבד',
+    limited_availability: 'לא זמין בדפדפן שלך',
+    default_vis: 'ברירת מחדל לטווח הנראות',
+    profile_tab: 'פרופיל',
+    security_tab: 'ביטחון',
+    data_import_export_tab: 'ייבוא או ייצוא מידע',
+    interfaceLanguage: 'שפת הממשק'
   },
   notifications: {
+    broken_favorite: 'סטאטוס לא ידוע, מחפש...',
+    load_older: 'טען התראות ישנות',
     notifications: 'התראות',
     read: 'קרא!',
     followed_you: 'עקב אחריך!',
@@ -2057,9 +2095,24 @@ const he = {
     fullname: 'שם תצוגה',
     email: 'אימייל',
     bio: 'אודות',
-    password_confirm: 'אישור סיסמה'
+    password_confirm: 'אישור סיסמה',
+    token: 'טוקן הזמנה'
   },
   post_status: {
+    account_not_locked_warning: 'המשתמש שלך אינו {0}. כל אחד יכול לעקוב אחריך ולראות את ההודעות לעוקבים-בלבד שלך.',
+    account_not_locked_warning_link: 'נעול',
+    attachments_sensitive: 'סמן מסמכים מצורפים כלא בטוחים לצפייה',
+    content_type: {
+      plain_text: 'טקסט פשוט'
+    },
+    content_warning: 'נושא (נתון לבחירה)',
+    direct_warning: 'הודעה זו תהיה זמינה רק לאנשים המוזכרים.',
+    scope: {
+      direct: 'ישיר - שלח לאנשים המוזכרים בלבד',
+      private: 'עוקבים-בלבד - שלח לעוקבים בלבד',
+      public: 'ציבורי - שלח לציר הזמן הציבורי',
+      unlisted: 'מחוץ לרשימה - אל תשלח לציר הזמן הציבורי'
+    },
     posting: 'מפרסם',
     default: 'הרגע נחת ב-ל.א.'
   },
@@ -2073,6 +2126,10 @@ const he = {
   },
   user_profile: {
     timeline_title: 'ציר זמן המשתמש'
+  },
+  who_to_follow: {
+    who_to_follow: 'אחרי מי לעקוב',
+    more: 'עוד'
   }
 }
 

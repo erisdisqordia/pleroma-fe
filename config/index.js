@@ -27,6 +27,11 @@ module.exports = {
         changeOrigin: true,
         cookieDomainRewrite: 'localhost'
       },
+      '/nodeinfo': {
+        target: 'http://localhost:4000/',
+        changeOrigin: true,
+        cookieDomainRewrite: 'localhost'
+      },
       '/socket': {
         target: 'http://localhost:4000/',
         changeOrigin: true,

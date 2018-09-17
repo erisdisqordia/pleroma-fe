@@ -92,8 +92,6 @@ export default function createPersistedState ({
                 store.dispatch('settingsSaved', { error })
               }
             })
-        } else {
-          console.warn(`Not saving to localStorage for: ${mutation.type}`)
         }
       } catch (e) {
         console.log("Couldn't persist state:")

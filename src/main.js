@@ -89,80 +89,85 @@ window.fetch('/api/statusnet/config.json')
     var apiConfig = data.site.pleromafe
 
     window.fetch('/static/config.json')
-    .then((res) => res.json())
-    .then((data) => {
-      var staticConfig = data
-      // This takes static config and overrides properties that are present in apiConfig
-      var config = Object.assign({}, staticConfig, apiConfig)
+      .then((res) => res.json())
+      .catch((err) => {
+        console.warn('Failed to load static/config.json, continuing without it.')
+        console.warn('Error was: ')
+        console.warn(err)
+        return {}
+      })
+      .then((staticConfig) => {
+        // This takes static config and overrides properties that are present in apiConfig
+        var config = Object.assign({}, staticConfig, apiConfig)
 
-      var theme = (config.theme)
-      var background = (config.background)
-      var logo = (config.logo)
-      var logoMask = (typeof config.logoMask === 'undefined' ? true : config.logoMask)
-      var logoMargin = (typeof config.logoMargin === 'undefined' ? 0 : config.logoMargin)
-      var redirectRootNoLogin = (config.redirectRootNoLogin)
-      var redirectRootLogin = (config.redirectRootLogin)
-      var chatDisabled = (config.chatDisabled)
-      var showInstanceSpecificPanel = (config.showInstanceSpecificPanel)
-      var scopeOptionsEnabled = (config.scopeOptionsEnabled)
-      var formattingOptionsEnabled = (config.formattingOptionsEnabled)
-      var defaultCollapseMessageWithSubject = (config.collapseMessageWithSubject)
+        var theme = (config.theme)
+        var background = (config.background)
+        var logo = (config.logo)
+        var logoMask = (typeof config.logoMask === 'undefined' ? true : config.logoMask)
+        var logoMargin = (typeof config.logoMargin === 'undefined' ? 0 : config.logoMargin)
+        var redirectRootNoLogin = (config.redirectRootNoLogin)
+        var redirectRootLogin = (config.redirectRootLogin)
+        var chatDisabled = (config.chatDisabled)
+        var showInstanceSpecificPanel = (config.showInstanceSpecificPanel)
+        var scopeOptionsEnabled = (config.scopeOptionsEnabled)
+        var formattingOptionsEnabled = (config.formattingOptionsEnabled)
+        var defaultCollapseMessageWithSubject = (config.collapseMessageWithSubject)
 
-      store.dispatch('setInstanceOption', { name: 'theme', value: theme })
-      store.dispatch('setInstanceOption', { name: 'background', value: background })
-      store.dispatch('setInstanceOption', { name: 'logo', value: logo })
-      store.dispatch('setInstanceOption', { name: 'logoMask', value: logoMask })
-      store.dispatch('setInstanceOption', { name: 'logoMargin', value: logoMargin })
-      store.dispatch('setInstanceOption', { name: 'redirectRootNoLogin', value: redirectRootNoLogin })
-      store.dispatch('setInstanceOption', { name: 'redirectRootLogin', value: redirectRootLogin })
-      store.dispatch('setInstanceOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
-      store.dispatch('setInstanceOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
-      store.dispatch('setInstanceOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
-      store.dispatch('setInstanceOption', { name: 'collapseMessageWithSubject', value: defaultCollapseMessageWithSubject })
-      if (chatDisabled) {
-        store.dispatch('disableChat')
-      }
-
-      const routes = [
-        { name: 'root',
-          path: '/',
-          redirect: to => {
-            return (store.state.users.currentUser ? redirectRootLogin : redirectRootNoLogin) || '/main/all'
-          }},
-        { path: '/main/all', component: PublicAndExternalTimeline },
-        { path: '/main/public', component: PublicTimeline },
-        { path: '/main/friends', component: FriendsTimeline },
-        { path: '/tag/:tag', component: TagTimeline },
-        { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
-        { name: 'user-profile', path: '/users/:id', component: UserProfile },
-        { name: 'mentions', path: '/:username/mentions', component: Mentions },
-        { name: 'settings', path: '/settings', component: Settings },
-        { name: 'registration', path: '/registration', component: Registration },
-        { name: 'registration', path: '/registration/:token', component: Registration },
-        { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
-        { name: 'user-settings', path: '/user-settings', component: UserSettings }
-      ]
-
-      const router = new VueRouter({
-        mode: 'history',
-        routes,
-        scrollBehavior: (to, from, savedPosition) => {
-          if (to.matched.some(m => m.meta.dontScroll)) {
-            return false
-          }
-          return savedPosition || { x: 0, y: 0 }
+        store.dispatch('setInstanceOption', { name: 'theme', value: theme })
+        store.dispatch('setInstanceOption', { name: 'background', value: background })
+        store.dispatch('setInstanceOption', { name: 'logo', value: logo })
+        store.dispatch('setInstanceOption', { name: 'logoMask', value: logoMask })
+        store.dispatch('setInstanceOption', { name: 'logoMargin', value: logoMargin })
+        store.dispatch('setInstanceOption', { name: 'redirectRootNoLogin', value: redirectRootNoLogin })
+        store.dispatch('setInstanceOption', { name: 'redirectRootLogin', value: redirectRootLogin })
+        store.dispatch('setInstanceOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
+        store.dispatch('setInstanceOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
+        store.dispatch('setInstanceOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
+        store.dispatch('setInstanceOption', { name: 'collapseMessageWithSubject', value: defaultCollapseMessageWithSubject })
+        if (chatDisabled) {
+          store.dispatch('disableChat')
         }
-      })
 
-      /* eslint-disable no-new */
-      new Vue({
-        router,
-        store,
-        i18n,
-        el: '#app',
-        render: h => h(App)
+        const routes = [
+          { name: 'root',
+            path: '/',
+            redirect: to => {
+              return (store.state.users.currentUser ? redirectRootLogin : redirectRootNoLogin) || '/main/all'
+            }},
+          { path: '/main/all', component: PublicAndExternalTimeline },
+          { path: '/main/public', component: PublicTimeline },
+          { path: '/main/friends', component: FriendsTimeline },
+          { path: '/tag/:tag', component: TagTimeline },
+          { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
+          { name: 'user-profile', path: '/users/:id', component: UserProfile },
+          { name: 'mentions', path: '/:username/mentions', component: Mentions },
+          { name: 'settings', path: '/settings', component: Settings },
+          { name: 'registration', path: '/registration', component: Registration },
+          { name: 'registration', path: '/registration/:token', component: Registration },
+          { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
+          { name: 'user-settings', path: '/user-settings', component: UserSettings }
+        ]
+
+        const router = new VueRouter({
+          mode: 'history',
+          routes,
+          scrollBehavior: (to, from, savedPosition) => {
+            if (to.matched.some(m => m.meta.dontScroll)) {
+              return false
+            }
+            return savedPosition || { x: 0, y: 0 }
+          }
+        })
+
+        /* eslint-disable no-new */
+        new Vue({
+          router,
+          store,
+          i18n,
+          el: '#app',
+          render: h => h(App)
+        })
       })
-    })
   })
 
 window.fetch('/static/terms-of-service.html')

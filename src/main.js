@@ -111,7 +111,7 @@ window.fetch('/api/statusnet/config.json')
         var showInstanceSpecificPanel = (config.showInstanceSpecificPanel)
         var scopeOptionsEnabled = (config.scopeOptionsEnabled)
         var formattingOptionsEnabled = (config.formattingOptionsEnabled)
-        var defaultCollapseMessageWithSubject = (config.collapseMessageWithSubject)
+        var collapseMessageWithSubject = (config.collapseMessageWithSubject)
 
         store.dispatch('setInstanceOption', { name: 'theme', value: theme })
         store.dispatch('setInstanceOption', { name: 'background', value: background })
@@ -123,7 +123,7 @@ window.fetch('/api/statusnet/config.json')
         store.dispatch('setInstanceOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
         store.dispatch('setInstanceOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
         store.dispatch('setInstanceOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
-        store.dispatch('setInstanceOption', { name: 'collapseMessageWithSubject', value: defaultCollapseMessageWithSubject })
+        store.dispatch('setInstanceOption', { name: 'collapseMessageWithSubject', value: collapseMessageWithSubject })
         if (chatDisabled) {
           store.dispatch('disableChat')
         }

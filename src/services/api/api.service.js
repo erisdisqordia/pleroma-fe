@@ -133,8 +133,6 @@ const updateBanner = ({credentials, params}) => {
 const updateProfile = ({credentials, params}) => {
   let url = PROFILE_UPDATE_URL
 
-  console.log(params)
-
   const form = new FormData()
 
   each(params, (value, key) => {

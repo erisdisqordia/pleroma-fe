@@ -80,7 +80,6 @@ window.fetch('/api/statusnet/config.json')
   .then((data) => {
     const {name, closed: registrationClosed, textlimit, server} = data.site
 
-    console.log(store)
     store.dispatch('setInstanceOption', { name: 'name', value: name })
     store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
     store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
@@ -92,7 +91,6 @@ window.fetch('/api/statusnet/config.json')
       .then((res) => res.json())
       .catch((err) => {
         console.warn('Failed to load static/config.json, continuing without it.')
-        console.warn('Error was: ')
         console.warn(err)
         return {}
       })

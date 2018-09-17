@@ -132,7 +132,9 @@ window.fetch('/api/statusnet/config.json')
           { name: 'root',
             path: '/',
             redirect: to => {
-              return (store.state.users.currentUser ? redirectRootLogin : redirectRootNoLogin) || '/main/all'
+              return (store.state.users.currentUser
+                      ? store.state.instance.redirectRootLogin
+                      : store.state.instance.redirectRootNoLogin) || '/main/all'
             }},
           { path: '/main/all', component: PublicAndExternalTimeline },
           { path: '/main/public', component: PublicTimeline },

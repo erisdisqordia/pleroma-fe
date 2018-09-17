@@ -1,4 +1,5 @@
 import { set } from 'vue'
+import StyleSetter from '../services/style_setter/style_setter.js'
 
 const defaultState = {
   // Stuff from static/config.json and apiConfig
@@ -7,7 +8,7 @@ const defaultState = {
   textlimit: 5000,
   server: 'http://localhost:4040/',
   theme: 'pleroma-dark',
-  background: 'img.png',
+  background: '/static/aurora_borealis.jpg',
   logo: '/static/logo.png',
   logoMask: true,
   logoMargin: '.2em',
@@ -40,7 +41,9 @@ const instance = {
   state: defaultState,
   mutations: {
     setInstanceOption (state, { name, value }) {
-      set(state, name, value)
+      if (typeof value !== 'undefined') {
+        set(state, name, value)
+      }
     }
   },
   actions: {
@@ -50,6 +53,8 @@ const instance = {
         case 'name':
           dispatch('setPageTitle')
           break
+        case 'theme':
+          StyleSetter.setPreset(value, commit)
       }
     }
   }

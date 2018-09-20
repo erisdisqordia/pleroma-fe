@@ -47,8 +47,8 @@ function showWhoToFollow (panel, reply) {
           }
         })
     }
+    cn = (cn + step) % users.length
   }
-  cn = (cn + step) % users.length
 }
 
 function getWhoToFollow (panel) {

@@ -25,6 +25,7 @@ const settings = {
       collapseMessageWithSubjectLocal: typeof user.collapseMessageWithSubject === 'undefined'
         ? instance.collapseMessageWithSubject
         : user.collapseMessageWithSubject,
+      collapseMessageWithSubjectDefault: this.$t('settings.values.' + instance.collapseMessageWithSubject),
       stopGifs: user.stopGifs,
       loopSilentAvailable:
         // Firefox

@@ -29,7 +29,9 @@
           <ul class="setting-list">
             <li>
               <input type="checkbox" id="collapseMessageWithSubject" v-model="collapseMessageWithSubjectLocal">
-              <label for="collapseMessageWithSubject">{{$t('settings.collapse_subject')}}</label>
+              <label for="collapseMessageWithSubject">
+                {{$t('settings.collapse_subject')}} {{$t('settings.instance_default', { value: collapseMessageWithSubjectDefault })}}
+              </label>
             </li>
             <li>
               <input type="checkbox" id="streaming" v-model="streamingLocal">

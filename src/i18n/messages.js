@@ -298,6 +298,11 @@ const en = {
     profile_background: 'Profile Background',
     set_new_profile_background: 'Set new profile background',
     settings: 'Settings',
+    instance_default: '(default: {value})',
+    values: {
+      true: 'yes',
+      false: 'no'
+    },
     theme: 'Theme',
     presets: 'Presets',
     export_theme: 'Save preset',

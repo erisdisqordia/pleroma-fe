@@ -1,0 +1,93 @@
+{
+  "finder": {
+    "error_fetching_user": "Virhe hakiessa käyttäjää",
+    "find_user": "Hae käyttäjä"
+  },
+  "general": {
+    "apply": "Aseta",
+    "submit": "Lähetä"
+  },
+  "login": {
+    "login": "Kirjaudu sisään",
+    "logout": "Kirjaudu ulos",
+    "password": "Salasana",
+    "placeholder": "esim. lain",
+    "register": "Rekisteröidy",
+    "username": "Käyttäjänimi"
+  },
+  "nav": {
+    "mentions": "Maininnat",
+    "public_tl": "Julkinen Aikajana",
+    "timeline": "Aikajana",
+    "twkn": "Koko Tunnettu Verkosto"
+  },
+  "notifications": {
+    "favorited_you": "tykkäsi viestistäsi",
+    "followed_you": "seuraa sinua",
+    "notifications": "Ilmoitukset",
+    "read": "Lue!",
+    "repeated_you": "toisti viestisi"
+  },
+  "post_status": {
+    "default": "Tulin juuri saunasta.",
+    "posting": "Lähetetään"
+  },
+  "registration": {
+    "bio": "Kuvaus",
+    "email": "Sähköposti",
+    "fullname": "Koko nimi",
+    "password_confirm": "Salasanan vahvistaminen",
+    "registration": "Rekisteröityminen"
+  },
+  "settings": {
+    "attachments": "Liitteet",
+    "autoload": "Lataa vanhempia viestejä automaattisesti ruudun pohjalla",
+    "avatar": "Profiilikuva",
+    "background": "Tausta",
+    "bio": "Kuvaus",
+    "current_avatar": "Nykyinen profiilikuvasi",
+    "current_profile_banner": "Nykyinen julisteesi",
+    "filtering": "Suodatus",
+    "filtering_explanation": "Kaikki viestit, jotka sisältävät näitä sanoja, suodatetaan. Yksi sana per rivi.",
+    "foreground": "Korostus",
+    "hide_attachments_in_convo": "Piilota liitteet keskusteluissa",
+    "hide_attachments_in_tl": "Piilota liitteet aikajanalla",
+    "links": "Linkit",
+    "name": "Nimi",
+    "name_bio": "Nimi ja kuvaus",
+    "nsfw_clickthrough": "Piilota NSFW liitteet klikkauksen taakse.",
+    "presets": "Valmiit teemat",
+    "profile_background": "Taustakuva",
+    "profile_banner": "Juliste",
+    "reply_link_preview": "Keskusteluiden vastauslinkkien esikatselu",
+    "set_new_avatar": "Aseta uusi profiilikuva",
+    "set_new_profile_background": "Aseta uusi taustakuva",
+    "set_new_profile_banner": "Aseta uusi juliste",
+    "settings": "Asetukset",
+    "streaming": "Näytä uudet viestit automaattisesti ollessasi ruudun huipulla",
+    "text": "Teksti",
+    "theme": "Teema",
+    "theme_help": "Käytä heksadesimaalivärejä muokataksesi väriteemaasi.",
+    "user_settings": "Käyttäjän asetukset"
+  },
+  "timeline": {
+    "collapse": "Sulje",
+    "conversation": "Keskustelu",
+    "error_fetching": "Virhe ladatessa viestejä",
+    "load_older": "Lataa vanhempia viestejä",
+    "repeated": "toisti",
+    "show_new": "Näytä uudet",
+    "up_to_date": "Ajantasalla"
+  },
+  "user_card": {
+    "follow": "Seuraa",
+    "followees": "Seuraa",
+    "followers": "Seuraajat",
+    "following": "Seuraat!",
+    "follows_you": "Seuraa sinua!",
+    "mute": "Hiljennä",
+    "muted": "Hiljennetty",
+    "per_day": "päivässä",
+    "statuses": "Viestit"
+  }
+}

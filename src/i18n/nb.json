@@ -1,0 +1,119 @@
+{
+  "chat": {
+    "title": "Chat"
+  },
+  "finder": {
+    "error_fetching_user": "Feil ved henting av bruker",
+    "find_user": "Finn bruker"
+  },
+  "general": {
+    "apply": "Bruk",
+    "submit": "Legg ut"
+  },
+  "login": {
+    "login": "Logg inn",
+    "logout": "Logg ut",
+    "password": "Passord",
+    "placeholder": "f. eks lain",
+    "register": "Registrer",
+    "username": "Brukernavn"
+  },
+  "nav": {
+    "chat": "Lokal Chat",
+    "mentions": "Nevnt",
+    "public_tl": "Offentlig Tidslinje",
+    "timeline": "Tidslinje",
+    "twkn": "Det hele kjente nettverket"
+  },
+  "notifications": {
+    "favorited_you": "likte din status",
+    "followed_you": "fulgte deg",
+    "notifications": "Varslinger",
+    "read": "Les!",
+    "repeated_you": "Gjentok din status"
+  },
+  "post_status": {
+    "default": "Landet akkurat i L.A.",
+    "posting": "Publiserer"
+  },
+  "registration": {
+    "bio": "Biografi",
+    "email": "Epost-adresse",
+    "fullname": "Visningsnavn",
+    "password_confirm": "Bekreft passord",
+    "registration": "Registrering"
+  },
+  "settings": {
+    "attachmentRadius": "Vedlegg",
+    "attachments": "Vedlegg",
+    "autoload": "Automatisk lasting når du blar ned til bunnen",
+    "avatar": "Profilbilde",
+    "avatarAltRadius": "Profilbilde (Varslinger)",
+    "avatarRadius": "Profilbilde",
+    "background": "Bakgrunn",
+    "bio": "Biografi",
+    "btnRadius": "Knapper",
+    "cBlue": "Blå (Svar, følg)",
+    "cGreen": "Grønn (Gjenta)",
+    "cOrange": "Oransje (Lik)",
+    "cRed": "Rød (Avbryt)",
+    "current_avatar": "Ditt nåværende profilbilde",
+    "current_profile_banner": "Din nåværende profil-banner",
+    "filtering": "Filtrering",
+    "filtering_explanation": "Alle statuser som inneholder disse ordene vil bli dempet, en kombinasjon av tegn per linje",
+    "follow_import": "Importer følginger",
+    "follow_import_error": "Feil ved importering av følginger.",
+    "follows_imported": "Følginger imported! Det vil ta litt tid å behandle de.",
+    "foreground": "Framgrunn",
+    "hide_attachments_in_convo": "Gjem vedlegg i samtaler",
+    "hide_attachments_in_tl": "Gjem vedlegg på tidslinje",
+    "import_followers_from_a_csv_file": "Importer følginger fra en csv fil",
+    "links": "Linker",
+    "name": "Navn",
+    "name_bio": "Navn & Biografi",
+    "nsfw_clickthrough": "Krev trykk for å vise statuser som kan være upassende",
+    "panelRadius": "Panel",
+    "presets": "Forhåndsdefinerte fargekoder",
+    "profile_background": "Profil-bakgrunn",
+    "profile_banner": "Profil-banner",
+    "radii_help": "Bestem hvor runde hjørnene i brukergrensesnittet skal være (i piksler)",
+    "reply_link_preview": "Vis en forhåndsvisning når du holder musen over svar til en status",
+    "set_new_avatar": "Rediger profilbilde",
+    "set_new_profile_background": "Rediger profil-bakgrunn",
+    "set_new_profile_banner": "Sett ny profil-banner",
+    "settings": "Innstillinger",
+    "stop_gifs": "Spill av GIFs når du holder over dem",
+    "streaming": "Automatisk strømming av nye statuser når du har bladd til toppen",
+    "text": "Tekst",
+    "theme": "Tema",
+    "theme_help": "Bruk heksadesimale fargekoder (#rrggbb) til å endre farge-temaet ditt.",
+    "tooltipRadius": "Verktøytips/advarsler",
+    "user_settings": "Brukerinstillinger"
+  },
+  "timeline": {
+    "collapse": "Sammenfold",
+    "conversation": "Samtale",
+    "error_fetching": "Feil ved henting av oppdateringer",
+    "load_older": "Last eldre statuser",
+    "repeated": "gjentok",
+    "show_new": "Vis nye",
+    "up_to_date": "Oppdatert"
+  },
+  "user_card": {
+    "block": "Blokker",
+    "blocked": "Blokkert!",
+    "follow": "Følg",
+    "followees": "Følger",
+    "followers": "Følgere",
+    "following": "Følger!",
+    "follows_you": "Følger deg!",
+    "mute": "Demp",
+    "muted": "Dempet",
+    "per_day": "per dag",
+    "remote_follow": "Følg eksternt",
+    "statuses": "Statuser"
+  },
+  "user_profile": {
+    "timeline_title": "Bruker-tidslinje"
+  }
+}

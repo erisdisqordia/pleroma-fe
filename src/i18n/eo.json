@@ -1,0 +1,119 @@
+{
+  "chat": {
+    "title": "Babilejo"
+  },
+  "finder": {
+    "error_fetching_user": "Eraro alportante uzanton",
+    "find_user": "Trovi uzanton"
+  },
+  "general": {
+    "apply": "Apliki",
+    "submit": "Sendi"
+  },
+  "login": {
+    "login": "Ensaluti",
+    "logout": "Elsaluti",
+    "password": "Pasvorto",
+    "placeholder": "ekz. lain",
+    "register": "Registriĝi",
+    "username": "Salutnomo"
+  },
+  "nav": {
+    "chat": "Loka babilejo",
+    "mentions": "Mencioj",
+    "public_tl": "Publika tempolinio",
+    "timeline": "Tempolinio",
+    "twkn": "La tuta konata reto"
+  },
+  "notifications": {
+    "favorited_you": "ŝatis vian staton",
+    "followed_you": "ekabonis vin",
+    "notifications": "Sciigoj",
+    "read": "Legite!",
+    "repeated_you": "ripetis vian staton"
+  },
+  "post_status": {
+    "default": "Ĵus alvenis al la Universala Kongreso!",
+    "posting": "Afiŝante"
+  },
+  "registration": {
+    "bio": "Priskribo",
+    "email": "Retpoŝtadreso",
+    "fullname": "Vidiga nomo",
+    "password_confirm": "Konfirmo de pasvorto",
+    "registration": "Registriĝo"
+  },
+  "settings": {
+    "attachmentRadius": "Kunsendaĵoj",
+    "attachments": "Kunsendaĵoj",
+    "autoload": "Ŝalti memfaran ŝarĝadon ĉe subo de paĝo",
+    "avatar": "Profilbildo",
+    "avatarAltRadius": "Profilbildoj (sciigoj)",
+    "avatarRadius": "Profilbildoj",
+    "background": "Fono",
+    "bio": "Priskribo",
+    "btnRadius": "Butonoj",
+    "cBlue": "Blua (Respondo, abono)",
+    "cGreen": "Verda (Kunhavigo)",
+    "cOrange": "Oranĝa (Ŝato)",
+    "cRed": "Ruĝa (Nuligo)",
+    "current_avatar": "Via nuna profilbildo",
+    "current_profile_banner": "Via nuna profila rubando",
+    "filtering": "Filtrado",
+    "filtering_explanation": "Ĉiuj statoj kun tiuj ĉi vortoj silentiĝos, po unu linie",
+    "follow_import": "Abona enporto",
+    "follow_import_error": "Eraro enportante abonojn",
+    "follows_imported": "Abonoj enportiĝis! Traktado daŭros iom.",
+    "foreground": "Malfono",
+    "hide_attachments_in_convo": "Kaŝi kunsendaĵojn en interparoloj",
+    "hide_attachments_in_tl": "Kaŝi kunsendaĵojn en tempolinio",
+    "import_followers_from_a_csv_file": "Enporti abonojn el CSV-dosiero",
+    "links": "Ligiloj",
+    "name": "Nomo",
+    "name_bio": "Nomo kaj priskribo",
+    "nsfw_clickthrough": "Ŝalti traklakan kaŝon de konsternaj kunsendaĵoj",
+    "panelRadius": "Paneloj",
+    "presets": "Antaŭagordoj",
+    "profile_background": "Profila fono",
+    "profile_banner": "Profila rubando",
+    "radii_help": "Agordi fasadan rondigon de randoj (rastrumere)",
+    "reply_link_preview": "Ŝalti respond-ligilan antaŭvidon dum ŝvebo",
+    "set_new_avatar": "Agordi novan profilbildon",
+    "set_new_profile_background": "Agordi novan profilan fonon",
+    "set_new_profile_banner": "Agordi novan profilan rubandon",
+    "settings": "Agordoj",
+    "stop_gifs": "Movi GIF-bildojn dum ŝvebo",
+    "streaming": "Ŝalti memfaran fluigon de novaj afiŝoj ĉe la supro de la paĝo",
+    "text": "Teksto",
+    "theme": "Etoso",
+    "theme_help": "Uzu deksesumajn kolorkodojn (#rrvvbb) por adapti vian koloran etoson.",
+    "tooltipRadius": "Ŝpruchelpiloj/avertoj",
+    "user_settings": "Uzantaj agordoj"
+  },
+  "timeline": {
+    "collapse": "Maletendi",
+    "conversation": "Interparolo",
+    "error_fetching": "Eraro dum ĝisdatigo",
+    "load_older": "Montri pli malnovajn statojn",
+    "repeated": "ripetata",
+    "show_new": "Montri novajn",
+    "up_to_date": "Ĝisdata"
+  },
+  "user_card": {
+    "block": "Bari",
+    "blocked": "Barita!",
+    "follow": "Aboni",
+    "followees": "Abonatoj",
+    "followers": "Abonantoj",
+    "following": "Abonanta!",
+    "follows_you": "Abonas vin!",
+    "mute": "Silentigi",
+    "muted": "Silentigitaj",
+    "per_day": "tage",
+    "remote_follow": "Fore aboni",
+    "statuses": "Statoj"
+  },
+  "user_profile": {
+    "timeline_title": "Uzanta tempolinio"
+  }
+}

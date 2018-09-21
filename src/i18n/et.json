@@ -1,0 +1,83 @@
+{
+  "finder": {
+    "error_fetching_user": "Viga kasutaja leidmisel",
+    "find_user": "Otsi kasutajaid"
+  },
+  "general": {
+    "submit": "Postita"
+  },
+  "login": {
+    "login": "Logi sisse",
+    "logout": "Logi välja",
+    "password": "Parool",
+    "placeholder": "nt lain",
+    "register": "Registreeru",
+    "username": "Kasutajanimi"
+  },
+  "nav": {
+    "mentions": "Mainimised",
+    "public_tl": "Avalik Ajajoon",
+    "timeline": "Ajajoon",
+    "twkn": "Kogu Teadaolev Võrgustik"
+  },
+  "notifications": {
+    "followed_you": "alustas sinu jälgimist",
+    "notifications": "Teavitused",
+    "read": "Loe!"
+  },
+  "post_status": {
+    "default": "Just sõitsin elektrirongiga Tallinnast Pääskülla.",
+    "posting": "Postitan"
+  },
+  "registration": {
+    "bio": "Bio",
+    "email": "E-post",
+    "fullname": "Kuvatav nimi",
+    "password_confirm": "Parooli kinnitamine",
+    "registration": "Registreerimine"
+  },
+  "settings": {
+    "attachments": "Manused",
+    "autoload": "Luba ajajoone automaatne uuendamine kui ajajoon on põhja keritud",
+    "avatar": "Profiilipilt",
+    "bio": "Bio",
+    "current_avatar": "Sinu praegune profiilipilt",
+    "current_profile_banner": "Praegune profiilibänner",
+    "filtering": "Sisu filtreerimine",
+    "filtering_explanation": "Kõiki staatuseid, mis sisaldavad neid sõnu, ei kuvata. Üks sõna reale.",
+    "hide_attachments_in_convo": "Peida manused vastlustes",
+    "hide_attachments_in_tl": "Peida manused ajajoonel",
+    "name": "Nimi",
+    "name_bio": "Nimi ja Bio",
+    "nsfw_clickthrough": "Peida tööks-mittesobivad(NSFW) manuste hiireklõpsu taha",
+    "profile_background": "Profiilitaust",
+    "profile_banner": "Profiilibänner",
+    "reply_link_preview": "Luba algpostituse kuvamine vastustes",
+    "set_new_avatar": "Vali uus profiilipilt",
+    "set_new_profile_background": "Vali uus profiilitaust",
+    "set_new_profile_banner": "Vali uus profiilibänner",
+    "settings": "Sätted",
+    "theme": "Teema",
+    "user_settings": "Kasutaja sätted"
+  },
+  "timeline": {
+    "conversation": "Vestlus",
+    "error_fetching": "Viga uuenduste laadimisel",
+    "load_older": "Kuva vanemaid staatuseid",
+    "show_new": "Näita uusi",
+    "up_to_date": "Uuendatud"
+  },
+  "user_card": {
+    "block": "Blokeeri",
+    "blocked": "Blokeeritud!",
+    "follow": "Jälgi",
+    "followees": "Jälgitavaid",
+    "followers": "Jälgijaid",
+    "following": "Jälgin!",
+    "follows_you": "Jälgib sind!",
+    "mute": "Vaigista",
+    "muted": "Vaigistatud",
+    "per_day": "päevas",
+    "statuses": "Staatuseid"
+  }
+}

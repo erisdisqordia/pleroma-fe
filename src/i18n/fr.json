@@ -1,0 +1,137 @@
+{
+  "finder": {
+    "error_fetching_user": "Erreur lors de la recherche de l'utilisateur",
+    "find_user": "Chercher un utilisateur"
+  },
+  "general": {
+    "apply": "Appliquer",
+    "submit": "Envoyer"
+  },
+  "login": {
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "password": "Mot de passe",
+    "placeholder": "p.e. lain",
+    "register": "S'inscrire",
+    "username": "Identifiant"
+  },
+  "nav": {
+    "chat": "Chat local",
+    "mentions": "Notifications",
+    "public_tl": "Statuts locaux",
+    "timeline": "Journal",
+    "twkn": "Le réseau connu"
+  },
+  "notifications": {
+    "favorited_you": "a aimé votre statut",
+    "followed_you": "a commencé à vous suivre",
+    "notifications": "Notifications",
+    "read": "Lu !",
+    "repeated_you": "a partagé votre statut"
+  },
+  "post_status": {
+    "account_not_locked_warning": "Votre compte n’est pas {0}. N’importe qui peut vous suivre pour voir vos billets en Abonné·e·s uniquement.",
+    "account_not_locked_warning_link": "verrouillé",
+    "default": "Écrivez ici votre prochain statut.",
+    "direct_warning": "Ce message sera visible à toutes les personnes mentionnées.",
+    "posting": "Envoi en cours",
+    "scope": {
+      "direct": "Direct - N’envoyer qu’aux personnes mentionnées",
+      "private": "Abonné·e·s uniquement - Seul·e·s vos abonné·e·s verront vos billets",
+      "public": "Publique - Afficher dans les fils publics",
+      "unlisted": "Non-Listé - Ne pas afficher dans les fils publics"
+    }
+  },
+  "registration": {
+    "bio": "Biographie",
+    "email": "Adresse email",
+    "fullname": "Pseudonyme",
+    "password_confirm": "Confirmation du mot de passe",
+    "registration": "Inscription"
+  },
+  "settings": {
+    "attachmentRadius": "Pièces jointes",
+    "attachments": "Pièces jointes",
+    "autoload": "Charger la suite automatiquement une fois le bas de la page atteint",
+    "avatar": "Avatar",
+    "avatarAltRadius": "Avatars (Notifications)",
+    "avatarRadius": "Avatars",
+    "background": "Arrière-plan",
+    "bio": "Biographie",
+    "btnRadius": "Boutons",
+    "cBlue": "Bleu (Répondre, suivre)",
+    "cGreen": "Vert (Partager)",
+    "cOrange": "Orange (Aimer)",
+    "cRed": "Rouge (Annuler)",
+    "change_password": "Modifier son mot de passe",
+    "confirm_new_password": "Confirmation du nouveau mot de passe",
+    "current_avatar": "Avatar actuel",
+    "current_password": "Mot de passe actuel",
+    "current_profile_banner": "Bannière de profil actuelle",
+    "delete_account": "Supprimer le compte",
+    "delete_account_description": "Supprimer définitivement votre compte et tous vos statuts.",
+    "delete_account_error": "Il y a eu un problème lors de la tentative de suppression de votre compte. Si le problème persiste, contactez l'administrateur de cette instance.",
+    "delete_account_instructions": "Indiquez votre mot de passe ci-dessous pour confirmer la suppression de votre compte.",
+    "filtering": "Filtre",
+    "filtering_explanation": "Tous les statuts contenant ces mots seront masqués. Un mot par ligne.",
+    "follow_export": "Exporter les abonnements",
+    "follow_export_button": "Exporter les abonnements en csv",
+    "follow_export_processing": "Exportation en cours…",
+    "follow_import": "Importer des abonnements",
+    "follow_import_error": "Erreur lors de l'importation des abonnements.",
+    "follows_imported": "Abonnements importés ! Le traitement peut prendre un moment.",
+    "foreground": "Premier plan",
+    "hide_attachments_in_convo": "Masquer les pièces jointes dans les conversations",
+    "hide_attachments_in_tl": "Masquer les pièces jointes dans le journal",
+    "import_followers_from_a_csv_file": "Importer des abonnements depuis un fichier csv",
+    "inputRadius": "Champs de texte",
+    "links": "Liens",
+    "name": "Nom",
+    "name_bio": "Nom & Bio",
+    "new_password": "Nouveau mot de passe",
+    "nsfw_clickthrough": "Masquer les images marquées comme contenu adulte ou sensible",
+    "panelRadius": "Fenêtres",
+    "presets": "Thèmes prédéfinis",
+    "profile_background": "Image de fond",
+    "profile_banner": "Bannière de profil",
+    "radii_help": "Vous pouvez ici choisir le niveau d'arrondi des angles de l'interface (en pixels)",
+    "reply_link_preview": "Afficher un aperçu lors du survol de liens vers une réponse",
+    "set_new_avatar": "Changer d'avatar",
+    "set_new_profile_background": "Changer d'image de fond",
+    "set_new_profile_banner": "Changer de bannière",
+    "settings": "Paramètres",
+    "stop_gifs": "N'animer les GIFS que lors du survol du curseur de la souris",
+    "streaming": "Charger automatiquement les nouveaux statuts lorsque vous êtes au haut de la page",
+    "text": "Texte",
+    "theme": "Thème",
+    "theme_help": "Spécifiez des codes couleur hexadécimaux (#aabbcc) pour personnaliser les couleurs du thème",
+    "tooltipRadius": "Info-bulles/alertes ",
+    "user_settings": "Paramètres utilisateur"
+  },
+  "timeline": {
+    "collapse": "Fermer",
+    "conversation": "Conversation",
+    "error_fetching": "Erreur en cherchant les mises à jour",
+    "load_older": "Afficher plus",
+    "repeated": "a partagé",
+    "show_new": "Afficher plus",
+    "up_to_date": "À jour"
+  },
+  "user_card": {
+    "block": "Bloquer",
+    "blocked": "Bloqué",
+    "follow": "Suivre",
+    "followees": "Suivis",
+    "followers": "Vous suivent",
+    "following": "Suivi !",
+    "follows_you": "Vous suit !",
+    "mute": "Masquer",
+    "muted": "Masqué",
+    "per_day": "par jour",
+    "remote_follow": "Suivre d'une autre instance",
+    "statuses": "Statuts"
+  },
+  "user_profile": {
+    "timeline_title": "Journal de l'utilisateur"
+  }
+}

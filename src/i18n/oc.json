@@ -1,0 +1,134 @@
+{
+  "chat": {
+    "title": "Messatjariá"
+  },
+  "finder": {
+    "error_fetching_user": "Error pendent la recèrca d’un utilizaire",
+    "find_user": "Cercar un utilizaire"
+  },
+  "general": {
+    "apply": "Aplicar",
+    "submit": "Mandar"
+  },
+  "login": {
+    "login": "Connexion",
+    "logout": "Desconnexion",
+    "password": "Senhal",
+    "placeholder": "e.g. lain",
+    "register": "Se marcar",
+    "username": "Nom d’utilizaire"
+  },
+  "nav": {
+    "chat": "Chat local",
+    "mentions": "Notificacions",
+    "public_tl": "Estatuts locals",
+    "timeline": "Flux d’actualitat",
+    "twkn": "Lo malhum conegut"
+  },
+  "notifications": {
+    "favorited_you": "a aimat vòstre estatut",
+    "followed_you": "vos a seguit",
+    "notifications": "Notficacions",
+    "read": "Legit!",
+    "repeated_you": "a repetit your vòstre estatut"
+  },
+  "post_status": {
+    "content_warning": "Avís de contengut (opcional)",
+    "default": "Escrivètz aquí vòstre estatut.",
+    "posting": "Mandadís"
+  },
+  "registration": {
+    "bio": "Biografia",
+    "email": "Adreça de corrièl",
+    "fullname": "Nom complèt",
+    "password_confirm": "Confirmar lo senhal",
+    "registration": "Inscripcion"
+  },
+  "settings": {
+    "attachmentRadius": "Pèças juntas",
+    "attachments": "Pèças juntas",
+    "autoload": "Activar lo cargament automatic un còp arribat al cap de la pagina",
+    "avatar": "Avatar",
+    "avatarAltRadius": "Avatars (Notificacions)",
+    "avatarRadius": "Avatars",
+    "background": "Rèire plan",
+    "bio": "Biografia",
+    "btnRadius": "Botons",
+    "cBlue": "Blau (Respondre, seguir)",
+    "cGreen": "Verd (Repartajar)",
+    "cOrange": "Irange (Aimar)",
+    "cRed": "Roge (Anullar)",
+    "change_password": "Cambiar lo senhal",
+    "change_password_error": "Una error s’es producha en cambiant lo senhal.",
+    "changed_password": "Senhal corrèctament cambiat",
+    "confirm_new_password": "Confirmatz lo nòu senhal",
+    "current_avatar": "Vòstre avatar actual",
+    "current_password": "Senhal actual",
+    "current_profile_banner": "Bandièra actuala del perfil",
+    "delete_account": "Suprimir lo compte",
+    "delete_account_description": "Suprimir vòstre compte e los messatges per sempre.",
+    "delete_account_error": "Una error s’es producha en suprimir lo compte. S’aquò ten d’arribar mercés de contactar vòstre administrador d’instància.",
+    "delete_account_instructions": "Picatz vòstre senhal dins lo camp tèxte çai-jos per confirmar la supression del compte.",
+    "filtering": "Filtre",
+    "filtering_explanation": "Totes los estatuts amb aqueles mots seràn en silenci, un mot per linha.",
+    "follow_export": "Exportar los abonaments",
+    "follow_export_button": "Exportar vòstres abonaments dins un fichièr csv",
+    "follow_export_processing": "Tractament, vos demandarem lèu de telecargar lo fichièr",
+    "follow_import": "Importar los abonaments",
+    "follow_import_error": "Error en important los seguidors",
+    "follows_imported": "Seguidors importats. Lo tractament pòt trigar una estona.",
+    "foreground": "Endavant",
+    "hide_attachments_in_convo": "Rescondre las pèças juntas dins las conversacions",
+    "hide_attachments_in_tl": "Rescondre las pèças juntas",
+    "import_followers_from_a_csv_file": "Importar los seguidors d’un fichièr csv",
+    "inputRadius": "Camps tèxte",
+    "links": "Ligams",
+    "name": "Nom",
+    "name_bio": "Nom & Bio",
+    "new_password": "Nòu senhal",
+    "nsfw_clickthrough": "Activar lo clic per mostrar los imatges marcats coma pels adults o sensibles",
+    "panelRadius": "Panèls",
+    "presets": "Pre-enregistrats",
+    "profile_background": "Imatge de fons",
+    "profile_banner": "Bandièra del perfil",
+    "radii_help": "Configurar los caires arredondits de l’interfàcia (en pixèls)",
+    "reply_link_preview": "Activar l’apercebut en passar la mirga",
+    "set_new_avatar": "Cambiar l’avatar",
+    "set_new_profile_background": "Cambiar l’imatge de fons",
+    "set_new_profile_banner": "Cambiar de bandièra",
+    "settings": "Paramètres",
+    "stop_gifs": "Lançar los GIFs al subrevòl",
+    "streaming": "Activar lo cargament automatic dels novèls estatus en anar amont",
+    "text": "Tèxte",
+    "theme": "Tèma",
+    "theme_help": "Emplegatz los còdis de color hex (#rrggbb) per personalizar vòstre tèma de color.",
+    "tooltipRadius": "Astúcias/Alèrta",
+    "user_settings": "Paramètres utilizaire"
+  },
+  "timeline": {
+    "collapse": "Tampar",
+    "conversation": "Conversacion",
+    "error_fetching": "Error en cercant de mesas a jorn",
+    "load_older": "Ne veire mai",
+    "repeated": "repetit",
+    "show_new": "Ne veire mai",
+    "up_to_date": "A jorn"
+  },
+  "user_card": {
+    "block": "Blocar",
+    "blocked": "Blocat",
+    "follow": "Seguir",
+    "followees": "Abonaments",
+    "followers": "Seguidors",
+    "following": "Seguit!",
+    "follows_you": "Vos sèc!",
+    "mute": "Amagar",
+    "muted": "Amagat",
+    "per_day": "per jorn",
+    "remote_follow": "Seguir a distància",
+    "statuses": "Estatuts"
+  },
+  "user_profile": {
+    "timeline_title": "Flux utilizaire"
+  }
+}

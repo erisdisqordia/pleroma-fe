@@ -1,0 +1,133 @@
+{
+  "chat": {
+    "title": "Czat"
+  },
+  "finder": {
+    "error_fetching_user": "Błąd przy pobieraniu profilu",
+    "find_user": "Znajdź użytkownika"
+  },
+  "general": {
+    "apply": "Zastosuj",
+    "submit": "Wyślij"
+  },
+  "login": {
+    "login": "Zaloguj",
+    "logout": "Wyloguj",
+    "password": "Hasło",
+    "placeholder": "n.p. lain",
+    "register": "Zarejestruj",
+    "username": "Użytkownik"
+  },
+  "nav": {
+    "chat": "Lokalny czat",
+    "mentions": "Wzmianki",
+    "public_tl": "Publiczna oś czasu",
+    "timeline": "Oś czasu",
+    "twkn": "Cała znana sieć"
+  },
+  "notifications": {
+    "favorited_you": "dodał twój status do ulubionych",
+    "followed_you": "obserwuje cię",
+    "notifications": "Powiadomienia",
+    "read": "Przeczytane!",
+    "repeated_you": "powtórzył twój status"
+  },
+  "post_status": {
+    "default": "Właśnie wróciłem z kościoła",
+    "posting": "Wysyłanie"
+  },
+  "registration": {
+    "bio": "Bio",
+    "email": "Email",
+    "fullname": "Wyświetlana nazwa profilu",
+    "password_confirm": "Potwierdzenie hasła",
+    "registration": "Rejestracja"
+  },
+  "settings": {
+    "attachmentRadius": "Załączniki",
+    "attachments": "Załączniki",
+    "autoload": "Włącz automatyczne ładowanie po przewinięciu do końca strony",
+    "avatar": "Awatar",
+    "avatarAltRadius": "Awatary (powiadomienia)",
+    "avatarRadius": "Awatary",
+    "background": "Tło",
+    "bio": "Bio",
+    "btnRadius": "Przyciski",
+    "cBlue": "Niebieski (odpowiedz, obserwuj)",
+    "cGreen": "Zielony (powtórzenia)",
+    "cOrange": "Pomarańczowy (ulubione)",
+    "cRed": "Czerwony (anuluj)",
+    "change_password": "Zmień hasło",
+    "change_password_error": "Podczas zmiany hasła wystąpił problem.",
+    "changed_password": "Hasło zmienione poprawnie!",
+    "confirm_new_password": "Potwierdź nowe hasło",
+    "current_avatar": "Twój obecny awatar",
+    "current_password": "Obecne hasło",
+    "current_profile_banner": "Twój obecny banner profilu",
+    "delete_account": "Usuń konto",
+    "delete_account_description": "Trwale usuń konto i wszystkie posty.",
+    "delete_account_error": "Wystąpił problem z usuwaniem twojego konta. Jeżeli problem powtarza się, poinformuj administratora swojej instancji.",
+    "delete_account_instructions": "Wprowadź swoje hasło w poniższe pole aby potwierdzić usunięcie konta.",
+    "filtering": "Filtrowanie",
+    "filtering_explanation": "Wszystkie statusy zawierające te słowa będą wyciszone. Jedno słowo na linijkę.",
+    "follow_export": "Eksport obserwowanych",
+    "follow_export_button": "Eksportuj swoją listę obserwowanych do pliku CSV",
+    "follow_export_processing": "Przetwarzanie, wkrótce twój plik zacznie się ściągać.",
+    "follow_import": "Import obserwowanych",
+    "follow_import_error": "Błąd przy importowaniu obserwowanych",
+    "follows_imported": "Obserwowani zaimportowani! Przetwarzanie może trochę potrwać.",
+    "foreground": "Pierwszy plan",
+    "hide_attachments_in_convo": "Ukryj załączniki w rozmowach",
+    "hide_attachments_in_tl": "Ukryj załączniki w osi czasu",
+    "import_followers_from_a_csv_file": "Importuj obserwowanych z pliku CSV",
+    "inputRadius": "Pola tekstowe",
+    "links": "Łącza",
+    "name": "Imię",
+    "name_bio": "Imię i bio",
+    "new_password": "Nowe hasło",
+    "nsfw_clickthrough": "Włącz domyślne ukrywanie załączników o treści nieprzyzwoitej (NSFW)",
+    "panelRadius": "Panele",
+    "presets": "Gotowe motywy",
+    "profile_background": "Tło profilu",
+    "profile_banner": "Banner profilu",
+    "radii_help": "Ustaw zaokrąglenie krawędzi interfejsu (w pikselach)",
+    "reply_link_preview": "Włącz dymek z podglądem postu po najechaniu na znak odpowiedzi",
+    "set_new_avatar": "Ustaw nowy awatar",
+    "set_new_profile_background": "Ustaw nowe tło profilu",
+    "set_new_profile_banner": "Ustaw nowy banner profilu",
+    "settings": "Ustawienia",
+    "stop_gifs": "Odtwarzaj GIFy po najechaniu kursorem",
+    "streaming": "Włącz automatycznie strumieniowanie nowych postów gdy na początku strony",
+    "text": "Tekst",
+    "theme": "Motyw",
+    "theme_help": "Użyj kolorów w notacji szesnastkowej (#rrggbb), by stworzyć swój motyw.",
+    "tooltipRadius": "Etykiety/alerty",
+    "user_settings": "Ustawienia użytkownika"
+  },
+  "timeline": {
+    "collapse": "Zwiń",
+    "conversation": "Rozmowa",
+    "error_fetching": "Błąd pobierania",
+    "load_older": "Załaduj starsze statusy",
+    "repeated": "powtórzono",
+    "show_new": "Pokaż nowe",
+    "up_to_date": "Na bieżąco"
+  },
+  "user_card": {
+    "block": "Zablokuj",
+    "blocked": "Zablokowany!",
+    "follow": "Obserwuj",
+    "followees": "Obserwowani",
+    "followers": "Obserwujący",
+    "following": "Obserwowany!",
+    "follows_you": "Obserwuje cię!",
+    "mute": "Wycisz",
+    "muted": "Wyciszony",
+    "per_day": "dziennie",
+    "remote_follow": "Zdalna obserwacja",
+    "statuses": "Statusy"
+  },
+  "user_profile": {
+    "timeline_title": "Oś czasu użytkownika"
+  }
+}

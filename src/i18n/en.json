@@ -114,6 +114,7 @@
     "import_followers_from_a_csv_file": "Import follows from a csv file",
     "import_theme": "Load preset",
     "inputRadius": "Input fields",
+    "instance_default: (default": "{value})",
     "interfaceLanguage": "Interface language",
     "invalid_theme_imported": "The selected file is not a supported Pleroma theme. No changes to your theme were made.",
     "limited_availability": "Unavailable in your browser",
@@ -142,6 +143,8 @@
     "reply_visibility_all": "Show all replies",
     "reply_visibility_following": "Only show replies directed at me or users I'm following",
     "reply_visibility_self": "Only show replies directed at me",
+    "saving_err": "Error saving settings",
+    "saving_ok": "Settings saved",
     "security_tab": "Security",
     "set_new_avatar": "Set new avatar",
     "set_new_profile_background": "Set new profile background",
@@ -153,7 +156,11 @@
     "theme": "Theme",
     "theme_help": "Use hex color codes (#rrggbb) to customize your color theme.",
     "tooltipRadius": "Tooltips/alerts",
-    "user_settings": "User Settings"
+    "user_settings": "User Settings",
+    "values": {
+      "false": "no",
+      "true": "yes"
+    }
   },
   "timeline": {
     "collapse": "Collapse",

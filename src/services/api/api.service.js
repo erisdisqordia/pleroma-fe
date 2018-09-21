@@ -133,8 +133,6 @@ const updateBanner = ({credentials, params}) => {
 const updateProfile = ({credentials, params}) => {
   let url = PROFILE_UPDATE_URL
 
-  console.log(params)
-
   const form = new FormData()
 
   each(params, (value, key) => {
@@ -335,7 +333,14 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`
 
-  return fetch(url, { headers: authHeaders(credentials) }).then((data) => data.json())
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => {
+      if (data.ok) {
+        return data
+      }
+      throw new Error('Error fetching timeline')
+    })
+    .then((data) => data.json())
 }
 
 const verifyCredentials = (user) => {

@@ -4,7 +4,6 @@ import StyleSetter from '../services/style_setter/style_setter.js'
 const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
 const defaultState = {
-  name: 'Pleroma FE',
   colors: {},
   collapseMessageWithSubject: false,
   hideAttachments: false,
@@ -45,18 +44,12 @@ const config = {
     }
   },
   actions: {
-    setPageTitle ({state}, option = '') {
-      document.title = `${option} ${state.name}`
-    },
     setHighlight ({ commit, dispatch }, { user, color, type }) {
       commit('setHighlight', {user, color, type})
     },
     setOption ({ commit, dispatch }, { name, value }) {
       commit('setOption', {name, value})
       switch (name) {
-        case 'name':
-          dispatch('setPageTitle')
-          break
         case 'theme':
           StyleSetter.setPreset(value, commit)
           break

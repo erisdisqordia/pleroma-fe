@@ -1,7 +1,7 @@
 import merge from 'lodash.merge'
 import objectPath from 'object-path'
 import localforage from 'localforage'
-import { throttle, each } from 'lodash'
+import { each } from 'lodash'
 
 let loaded = false
 
@@ -12,17 +12,17 @@ const defaultReducer = (state, paths) => (
   }, {})
 )
 
+const saveImmedeatelyActions = [
+  'markNotificationsAsSeen',
+  'clearCurrentUser',
+  'setCurrentUser',
+  'setHighlight',
+  'setOption'
+]
+
 const defaultStorage = (() => {
   return localforage
 })()
-
-const defaultSetState = (key, state, storage) => {
-  if (!loaded) {
-    console.log('waiting for old state to be loaded...')
-  } else {
-    return storage.setItem(key, state)
-  }
-}
 
 export default function createPersistedState ({
   key = 'vuex-lz',
@@ -31,7 +31,14 @@ export default function createPersistedState ({
     let value = storage.getItem(key)
     return value
   },
-  setState = throttle(defaultSetState, 60000),
+  setState = (key, state, storage) => {
+    if (!loaded) {
+      console.log('waiting for old state to be loaded...')
+      return Promise.resolve()
+    } else {
+      return storage.setItem(key, state)
+    }
+  },
   reducer = defaultReducer,
   storage = defaultStorage,
   subscriber = store => handler => store.subscribe(handler)
@@ -72,7 +79,20 @@ export default function createPersistedState ({
 
     subscriber(store)((mutation, state) => {
       try {
-        setState(key, reducer(state, paths), storage)
+        if (saveImmedeatelyActions.includes(mutation.type)) {
+          setState(key, reducer(state, paths), storage)
+            .then(success => {
+              if (typeof success !== 'undefined') {
+                if (mutation.type === 'setOption') {
+                  store.dispatch('settingsSaved', { success })
+                }
+              }
+            }, error => {
+              if (mutation.type === 'setOption') {
+                store.dispatch('settingsSaved', { error })
+              }
+            })
+        }
       } catch (e) {
         console.log("Couldn't persist state:")
         console.log(e)

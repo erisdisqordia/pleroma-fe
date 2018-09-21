@@ -32,10 +32,10 @@ const UserSettings = {
       return this.$store.state.users.currentUser
     },
     pleromaBackend () {
-      return this.$store.state.config.pleromaBackend
+      return this.$store.state.instance.pleromaBackend
     },
     scopeOptionsEnabled () {
-      return this.$store.state.config.scopeOptionsEnabled
+      return this.$store.state.instance.scopeOptionsEnabled
     },
     vis () {
       return {

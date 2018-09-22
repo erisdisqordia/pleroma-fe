@@ -136,8 +136,8 @@ const updateProfile = ({credentials, params}) => {
   const form = new FormData()
 
   each(params, (value, key) => {
-    /* Always include description and locked, because it might be empty or false */
-    if (key === 'description' || key === 'locked' || value) {
+    /* Always include description, no_rich_text and locked, because it might be empty or false */
+    if (key === 'description' || key === 'locked' || key === 'no_rich_text' || value) {
       form.append(key, value)
     }
   })

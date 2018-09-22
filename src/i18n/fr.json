@@ -89,6 +89,7 @@
     "name": "Nom",
     "name_bio": "Nom & Bio",
     "new_password": "Nouveau mot de passe",
+    "no_rich_text_description": "Ne formatez pas le texte",
     "nsfw_clickthrough": "Masquer les images marquées comme contenu adulte ou sensible",
     "panelRadius": "Fenêtres",
     "presets": "Thèmes prédéfinis",

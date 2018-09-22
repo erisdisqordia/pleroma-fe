@@ -25,6 +25,10 @@
                 <i v-on:click="changeVis('public')" class="icon-globe" :class="vis.public"></i>
               </div>
             </div>
+            <p>
+              <input type="checkbox" v-model="newnorichtext" id="account-no-rich-text">
+              <label for="account-no-rich-text">{{$t('settings.no_rich_text_description')}}</label>
+            </p>
             <button :disabled='newname.length <= 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
           </div>
           <div class="setting-item">

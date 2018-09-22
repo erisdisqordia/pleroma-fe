@@ -130,6 +130,7 @@
     "notification_visibility_likes": "Likes",
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
+    "no_rich_text_description": "Disable rich text support",
     "nsfw_clickthrough": "Enable clickthrough NSFW attachment hiding",
     "panelRadius": "Panels",
     "pause_on_unfocused": "Pause streaming when tab is not focused",

@@ -115,7 +115,7 @@
     "import_followers_from_a_csv_file": "Import follows from a csv file",
     "import_theme": "Load preset",
     "inputRadius": "Input fields",
-    "instance_default: (default": "{value})",
+    "instance_default": "(default: {value})",
     "instance_default_simple" : "(default)",
     "interfaceLanguage": "Interface language",
     "invalid_theme_imported": "The selected file is not a supported Pleroma theme. No changes to your theme were made.",

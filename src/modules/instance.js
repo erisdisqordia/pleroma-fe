@@ -19,6 +19,8 @@ const defaultState = {
   formattingOptionsEnabled: false,
   collapseMessageWithSubject: false,
   disableChat: false,
+  scopeCopy: false,
+  subjectLineBehavior: 'email',
 
   // Nasty stuff
   pleromaBackend: true,

@@ -110,6 +110,8 @@ window.fetch('/api/statusnet/config.json')
         var scopeOptionsEnabled = (config.scopeOptionsEnabled)
         var formattingOptionsEnabled = (config.formattingOptionsEnabled)
         var collapseMessageWithSubject = (config.collapseMessageWithSubject)
+        var scopeCopy = (config.scopeCopy)
+        var subjectLineBehavior = (config.subjectLineBehavior)
 
         store.dispatch('setInstanceOption', { name: 'theme', value: theme })
         store.dispatch('setInstanceOption', { name: 'background', value: background })
@@ -122,6 +124,8 @@ window.fetch('/api/statusnet/config.json')
         store.dispatch('setInstanceOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
         store.dispatch('setInstanceOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
         store.dispatch('setInstanceOption', { name: 'collapseMessageWithSubject', value: collapseMessageWithSubject })
+        store.dispatch('setInstanceOption', { name: 'scopeCopy', value: scopeCopy })
+        store.dispatch('setInstanceOption', { name: 'subjectLineBehavior', value: subjectLineBehavior })
         if (chatDisabled) {
           store.dispatch('disableChat')
         }

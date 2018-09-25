@@ -114,7 +114,7 @@
     "import_followers_from_a_csv_file": "Importer des abonnements depuis un fichier csv",
     "import_theme": "Charger le thème",
     "inputRadius": "Champs de texte",
-    "instance_default: (default": "{value})",
+    "instance_default": "(default: {value})",
     "interfaceLanguage": "Langue de l'interface",
     "invalid_theme_imported": "Le fichier sélectionné n'est pas un thème Pleroma pris en charge. Aucun changement n'a été apporté à votre thème.",
     "limited_availability": "Non disponible dans votre navigateur",

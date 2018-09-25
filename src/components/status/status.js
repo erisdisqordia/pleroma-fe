@@ -174,7 +174,7 @@ const Status = {
       return true
     },
     replySubject () {
-      if (!this.status.summary) return '';
+      if (!this.status.summary) return ''
       const behavior = this.$store.state.config.subjectLineBehavior
       const startsWithRe = this.status.summary.match(/^re[: ]/i)
       if (behavior !== 'noop' && startsWithRe || behavior === 'masto') {

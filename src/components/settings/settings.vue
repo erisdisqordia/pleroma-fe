@@ -70,15 +70,15 @@
                   <select id="subjectLineBehavior" v-model="subjectLineBehaviorLocal">
                     <option value="email">
                       {{$t('settings.subject_line_email')}}
-                      {{subjectLineBehaviorLocal == 'email' ? $t('settings.instance_default_simple') : ''}}
+                      {{subjectLineBehaviorDefault == 'email' ? $t('settings.instance_default_simple') : ''}}
                     </option>
                     <option value="masto">
                       {{$t('settings.subject_line_mastodon')}}
-                      {{subjectLineBehaviorLocal == 'mastodon' ? $t('settings.instance_default_simple') : ''}}
+                      {{subjectLineBehaviorDefault == 'mastodon' ? $t('settings.instance_default_simple') : ''}}
                     </option>
                     <option value="noop">
                       {{$t('settings.subject_line_noop')}}
-                      {{subjectLineBehaviorLocal == 'noop' ? $t('settings.instance_default_simple') : ''}}
+                      {{subjectLineBehaviorDefault == 'noop' ? $t('settings.instance_default_simple') : ''}}
                     </option>
                   </select>
                   <i class="icon-down-open"/>

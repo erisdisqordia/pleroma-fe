@@ -19,7 +19,7 @@ const defaultState = {
   formattingOptionsEnabled: false,
   collapseMessageWithSubject: false,
   disableChat: false,
-  scopeCopy: false,
+  scopeCopy: true,
   subjectLineBehavior: 'email',
 
   // Nasty stuff

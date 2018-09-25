@@ -24,7 +24,7 @@ const PostStatusForm = {
     'replyTo',
     'repliedUser',
     'attentions',
-    'messageScope',
+    'copyMessageScope',
     'subject'
   ],
   components: {
@@ -46,6 +46,12 @@ const PostStatusForm = {
       statusText = buildMentionsString({ user: this.repliedUser, attentions: this.attentions }, currentUser)
     }
 
+    console.log(this.copyMessageScope)
+    const scope = (this.copyMessageScope && this.$store.state.config.copyScope || this.copyMessageScope === 'direct')
+          ? this.copyMessageScope
+          : this.$store.state.users.currentUser.default_scope
+
+    console.log(this)
     return {
       dropFiles: [],
       submitDisabled: false,
@@ -58,7 +64,7 @@ const PostStatusForm = {
         contentType: 'text/plain',
         nsfw: false,
         files: [],
-        visibility: this.messageScope || this.$store.state.users.currentUser.default_scope
+        visibility: scope
       },
       caret: 0
     }

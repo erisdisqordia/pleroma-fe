@@ -174,10 +174,16 @@ const Status = {
       return true
     },
     replySubject () {
-      if (this.status.summary && !this.status.summary.match(/^re[: ]/i)) {
+      if (!this.status.summary) return '';
+      const behavior = this.$store.state.config.subjectLineBehavior
+      const startsWithRe = this.status.summary.match(/^re[: ]/i)
+      if (behavior !== 'noop' && startsWithRe || behavior === 'masto') {
+        return this.status.summary
+      } else if (behavior === 'email') {
         return 're: '.concat(this.status.summary)
+      } else if (behavior === 'noop') {
+        return ''
       }
-      return this.status.summary
     },
     attachmentSize () {
       if ((this.$store.state.config.hideAttachments && !this.inConversation) ||

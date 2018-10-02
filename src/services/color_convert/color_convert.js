@@ -1,6 +1,10 @@
 import { map } from 'lodash'
 
 const rgb2hex = (r, g, b) => {
+  console.log(r)
+  if (typeof r === 'object') {
+    ({ r, g, b } = r)
+  }
   [r, g, b] = map([r, g, b], (val) => {
     val = Math.ceil(val)
     val = val < 0 ? 0 : val
@@ -27,8 +31,16 @@ const rgbstr2hex = (rgb) => {
   return `#${((Number(rgb[0]) << 16) + (Number(rgb[1]) << 8) + Number(rgb[2])).toString(16)}`
 }
 
+const mixrgb = (a, b) => {
+  return Object.keys(a).reduce((acc, k) => {
+    acc[k] = (a[k] + b[k]) / 2
+    return acc
+  }, {})
+}
+
 export {
   rgb2hex,
   hex2rgb,
+  mixrgb,
   rgbstr2hex
 }

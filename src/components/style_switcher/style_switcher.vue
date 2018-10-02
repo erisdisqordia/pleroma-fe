@@ -24,80 +24,73 @@
     </div>
   </div>
 
-  <div class="preview-container">
-    <div :style="{
-                 '--btnRadius': btnRadiusLocal + 'px',
-                 '--inputRadius': inputRadiusLocal + 'px',
-                 '--panelRadius': panelRadiusLocal + 'px',
-                 '--avatarRadius': avatarRadiusLocal + 'px',
-                 '--avatarAltRadius': avatarAltRadiusLocal + 'px',
-                 '--tooltipRadius': tooltipRadiusLocal + 'px',
-                 '--attachmentRadius': attachmentRadiusLocal + 'px'
-                 }">
-      <div class="panel dummy">
-        <div class="panel-heading" :style="{ 'background-color': btnColorLocal, 'color': textColorLocal }">Preview</div>
-        <div class="panel-body theme-preview-content" :style="{ 'background-color': bgColorLocal, 'color': textColorLocal }">
-          <div class="avatar" :style="{
-                                      'border-radius': avatarRadiusLocal + 'px'
-                                      }">
-            ( ͡° ͜ʖ ͡°)
-          </div>
-          <h4>Content</h4>
-          <br>
-          A bunch of more content and
-          <a :style="{ color: linkColorLocal }">a nice lil' link</a>
-          <i :style="{ color: blueColorLocal }" class="icon-reply"/>
-          <i :style="{ color: greenColorLocal }" class="icon-retweet"/>
-          <i :style="{ color: redColorLocal }" class="icon-cancel"/>
-          <i :style="{ color: orangeColorLocal }" class="icon-star"/>
-          <br>
-          <button class="btn" :style="{ 'background-color': btnColorLocal, 'color': textColorLocal }">Button</button>
+  <div class="preview-container" :style="previewRules">
+    <div class="panel dummy">
+      <div class="panel-heading">Preview</div>
+      <div class="panel-body theme-preview-content">
+        <div class="avatar">
+          ( ͡° ͜ʖ ͡°)
         </div>
+        <h4>Content</h4>
+        <br>
+        A bunch of more content and
+        <a style="color: var(--link)">a nice lil' link</a>
+        <i style="color: var(--cBlue)" class="icon-reply"/>
+        <i style="color: var(--cGreen)" class="icon-retweet"/>
+        <i style="color: var(--cRed)" class="icon-cancel"/>
+        <i style="color: var(--cOrange)" class="icon-star"/>
+        <br>
+        <button class="btn">Button</button>
       </div>
     </div>
   </div>
 
   <div class="color-container">
     <p>{{$t('settings.theme_help')}}</p>
-    <div class="color-item">
-      <label for="bgcolor" class="theme-color-lb">{{$t('settings.background')}}</label>
-      <input id="bgcolor" class="theme-color-cl" type="color" v-model="bgColorLocal">
-      <input id="bgcolor-t" class="theme-color-in" type="text" v-model="bgColorLocal">
+    <h3>Basic colors!!</h3>
+    <div>
+      <div class="color-item">
+        <ColorInput name="bgColor" v-model="bgColorLocal" :label="$t('settings.background')"/>
+        <OpacityInput name="bgOpacity" v-model="bgOpacityLocal" fallback="1"/>
+      </div>
+      <div class="color-item">
+        <ColorInput name="fgColor" v-model="btnColorLocal" :label="$t('settings.foreground')"/>
+        <OpacityInput name="fgOpacity" v-model="btnOpacityLocal" fallback="1"/>
+      </div>
+      <div class="color-item">
+        <ColorInput name="textColor" v-model="textColorLocal" :label="$t('settings.text')"/>
+      </div>
+      <div class="color-item">
+        <ColorInput name="linkColor" v-model="linkColorLocal" :label="$t('settings.links')"/>
+      </div>
     </div>
-    <div class="color-item">
-      <label for="fgcolor" class="theme-color-lb">{{$t('settings.foreground')}}</label>
-      <input id="fgcolor" class="theme-color-cl" type="color" v-model="btnColorLocal">
-      <input id="fgcolor-t" class="theme-color-in" type="text" v-model="btnColorLocal">
+
+    <h3>More customs!</h3>
+    <div>
+      <div class="color-item">
+        <ColorInput name="panelColor" v-model="panelColorLocal" :fallback="btnColorLocal" label="Panel header"/>
+        <OpacityInput name="panelOpacity" v-model="panelOpacityLocal" fallback="1"/>
+      </div>
+      <div class="color-item">
+        <ColorInput name="topBarColor" v-model="topBarColorLocal" :fallback="btnColorLocal" label="Top bar"/>
+        <OpacityInput name="topBarOpacity" v-model="topBarOpacityLocal" fallback="1"/>
+      </div>
     </div>
-    <div class="color-item">
-      <label for="textcolor" class="theme-color-lb">{{$t('settings.text')}}</label>
-      <input id="textcolor" class="theme-color-cl" type="color" v-model="textColorLocal">
-      <input id="textcolor-t" class="theme-color-in" type="text" v-model="textColorLocal">
-    </div>
-    <div class="color-item">
-      <label for="linkcolor" class="theme-color-lb">{{$t('settings.links')}}</label>
-      <input id="linkcolor" class="theme-color-cl" type="color" v-model="linkColorLocal">
-      <input id="linkcolor-t" class="theme-color-in" type="text" v-model="linkColorLocal">
-    </div>
-    <div class="color-item">
-      <label for="redcolor" class="theme-color-lb">{{$t('settings.cRed')}}</label>
-      <input id="redcolor" class="theme-color-cl" type="color" v-model="redColorLocal">
-      <input id="redcolor-t" class="theme-color-in" type="text" v-model="redColorLocal">
-    </div>
-    <div class="color-item">
-      <label for="bluecolor" class="theme-color-lb">{{$t('settings.cBlue')}}</label>
-      <input id="bluecolor" class="theme-color-cl" type="color" v-model="blueColorLocal">
-      <input id="bluecolor-t" class="theme-color-in" type="text" v-model="blueColorLocal">
-    </div>
-    <div class="color-item">
-      <label for="greencolor" class="theme-color-lb">{{$t('settings.cGreen')}}</label>
-      <input id="greencolor" class="theme-color-cl" type="color" v-model="greenColorLocal">
-      <input id="greencolor-t" class="theme-color-in" type="green" v-model="greenColorLocal">
-    </div>
-    <div class="color-item">
-      <label for="orangecolor" class="theme-color-lb">{{$t('settings.cOrange')}}</label>
-      <input id="orangecolor" class="theme-color-cl" type="color" v-model="orangeColorLocal">
-      <input id="orangecolor-t" class="theme-color-in" type="text" v-model="orangeColorLocal">
+
+    <h3>Rainbows!!!</h3>
+    <div>
+      <div class="color-item">
+        <ColorInput name="cRedColor" v-model="redColorLocal" :label="$t('settings.cRed')"/>
+      </div>
+      <div class="color-item">
+        <ColorInput name="cBlueColor" v-model="blueColorLocal" :label="$t('settings.cBlue')"/>
+      </div>
+      <div class="color-item">
+        <ColorInput name="cGreenColor" v-model="greenColorLocal" :label="$t('settings.cGreen')"/>
+      </div>
+      <div class="color-item">
+        <ColorInput name="cOrangeColor" v-model="orangeColorLocal" :label="$t('settings.cOrange')"/>
+      </div>
     </div>
   </div>
 
@@ -161,7 +154,7 @@
 
 .apply-container,
 .radius-container,
-.color-container,
+.color-container > div,
 .presets-container {
   display: flex;
 
@@ -176,7 +169,7 @@
   flex-direction: column;
 }
 
-.color-container {
+.color-container > div{
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -214,13 +207,29 @@
 .radius-item,
 .color-item {
   min-width: 20em;
+  margin: 5px 6px 0 0;
   display:flex;
+  flex-direction: column;
   flex: 1 1 0;
-  align-items: baseline;
-  margin: 5px 6px 5px 0;
+
+  &:nth-child(2n+1) {
+    margin-right: 7px;
+
+  }
+
+  .color, .opacity {
+    display:flex;
+    align-items: baseline;
+  }
 
   label {
     color: var(--faint, $fallback--faint);
+  }
+  .opacity-control {
+    margin-top: 5px;
+    height: 12px;
+    line-height: 12px;
+    font-size: 12px;
   }
 }
 
@@ -243,42 +252,17 @@
   margin-left: 4px;
 }
 
-.theme-color-in {
-  min-width: 4em;
-}
-
 .theme-radius-in {
   min-width: 1em;
 }
 
-.theme-radius-in,
-.theme-color-in {
+.theme-radius-in {
   max-width: 7em;
   flex: 1;
 }
 
-.theme-radius-lb,
-.theme-color-lb {
-  flex: 2;
-  min-width: 7em;
-}
-
 .theme-radius-lb{
   max-width: 50em;
-}
-
-.theme-color-lb {
-  max-width: 10em;
-}
-
-.theme-color-cl {
-  padding: 1px;
-  max-width: 8em;
-  height: 100%;
-  flex: 0;
-  min-width: 2em;
-  cursor: pointer;
-  max-height: 29px;
 }
 
 .theme-preview-content {

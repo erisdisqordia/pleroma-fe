@@ -73,6 +73,7 @@ export default function createPersistedState ({
         loaded = true
       } catch (e) {
         console.log("Couldn't load state")
+        console.error(e)
         loaded = true
       }
     })

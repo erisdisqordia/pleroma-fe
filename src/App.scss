@@ -51,7 +51,7 @@ a {
 button {
   user-select: none;
   color: $fallback--fg;
-  color: var(--fg, $fallback--fg);
+  color: var(--btnText, $fallback--fg);
   background-color: $fallback--btn;
   background-color: var(--btn, $fallback--btn);
   border: none;
@@ -254,7 +254,7 @@ nav {
       mask-position: center;
       mask-size: contain;
       background-color: $fallback--fg;
-      background-color: var(--fg, $fallback--fg);
+      background-color: var(--topBarText, $fallback--fg);
       position: absolute;
       top: 0;
       bottom: 0;
@@ -330,8 +330,9 @@ main-router {
   padding: .6em .6em;
   text-align: left;
   line-height: 28px;
+  color: var(--panelText);
   background-color: $fallback--btn;
-  background-color: var(--btn, $fallback--btn);
+  background-color: var(--panel, $fallback--btn);
   align-items: baseline;
 
   .title {
@@ -387,8 +388,9 @@ main-router {
 
 nav {
   z-index: 1000;
+  color: var(--topBarText);
   background-color: $fallback--btn;
-  background-color: var(--btn, $fallback--btn);
+  background-color: var(--topBar, $fallback--btn);
   color: $fallback--faint;
   color: var(--faint, $fallback--faint);
   box-shadow: 0px 0px 4px rgba(0,0,0,.6);

@@ -1,4 +1,7 @@
-import { rgbstr2hex } from '../../services/color_convert/color_convert.js'
+import { rgb2hex } from '../../services/color_convert/color_convert.js'
+import ColorInput from '../color_input/color_input.vue'
+import OpacityInput from '../opacity_input/opacity_input.vue'
+import StyleSetter from '../../services/style_setter/style_setter.js'
 
 export default {
   data () {
@@ -7,13 +10,23 @@ export default {
       selected: this.$store.state.config.theme,
       invalidThemeImported: false,
       bgColorLocal: '',
+      bgOpacityLocal: 0,
       btnColorLocal: '',
+      btnOpacityLocal: '',
+
       textColorLocal: '',
       linkColorLocal: '',
+
+      panelColorLocal: undefined,
+      panelOpacityLocal: undefined,
+      topBarColorLocal: undefined,
+      topBarOpacityLocal: undefined,
+
       redColorLocal: '',
       blueColorLocal: '',
       greenColorLocal: '',
       orangeColorLocal: '',
+
       btnRadiusLocal: '',
       inputRadiusLocal: '',
       panelRadiusLocal: '',
@@ -33,7 +46,48 @@ export default {
       })
   },
   mounted () {
-    this.normalizeLocalState(this.$store.state.config.colors, this.$store.state.config.radii)
+    this.normalizeLocalState(this.$store.state.config.customTheme)
+  },
+  computed: {
+    currentTheme () {
+      return {
+        colors: {
+          bg: this.bgColorLocal,
+          fg: this.textColorLocal,
+          panel: this.panelColorLocal,
+          topBar: this.topBarColorLocal,
+          btn: this.btnColorLocal,
+          link: this.linkColorLocal,
+          cRed: this.redColorLocal,
+          cBlue: this.blueColorLocal,
+          cGreen: this.greenColorLocal,
+          cOrange: this.orangeColorLocal
+        },
+        radii: {
+          btnRadius: this.btnRadiusLocal,
+          inputRadius: this.inputRadiusLocal,
+          panelRadius: this.panelRadiusLocal,
+          avatarRadius: this.avatarRadiusLocal,
+          avatarAltRadius: this.avatarAltRadiusLocal,
+          tooltipRadius: this.tooltipRadiusLocal,
+          attachmentRadius: this.attachmentRadiusLocal
+        }
+      }
+    },
+    previewRules () {
+      try {
+        const generated = StyleSetter.generatePreset(this.currentTheme.colors)
+        return [generated.colorRules, generated.radiiRules].join(';')
+      } catch (e) {
+        console.error('CATCH')
+        console.error(e)
+        return ''
+      }
+    }
+  },
+  components: {
+    ColorInput,
+    OpacityInput
   },
   methods: {
     exportCurrentTheme () {
@@ -101,57 +155,62 @@ export default {
           b: parseInt(result[3], 16)
         } : null
       }
-      const bgRgb = rgb(this.bgColorLocal)
-      const btnRgb = rgb(this.btnColorLocal)
-      const textRgb = rgb(this.textColorLocal)
-      const linkRgb = rgb(this.linkColorLocal)
 
-      const redRgb = rgb(this.redColorLocal)
-      const blueRgb = rgb(this.blueColorLocal)
-      const greenRgb = rgb(this.greenColorLocal)
-      const orangeRgb = rgb(this.orangeColorLocal)
-
-      if (bgRgb && btnRgb && linkRgb) {
-        this.$store.dispatch('setOption', {
-          name: 'customTheme',
-          value: {
-            fg: btnRgb,
-            bg: bgRgb,
-            text: textRgb,
-            link: linkRgb,
-            cRed: redRgb,
-            cBlue: blueRgb,
-            cGreen: greenRgb,
-            cOrange: orangeRgb,
-            btnRadius: this.btnRadiusLocal,
-            inputRadius: this.inputRadiusLocal,
-            panelRadius: this.panelRadiusLocal,
-            avatarRadius: this.avatarRadiusLocal,
-            avatarAltRadius: this.avatarAltRadiusLocal,
-            tooltipRadius: this.tooltipRadiusLocal,
-            attachmentRadius: this.attachmentRadiusLocal
-          }})
-      }
+      this.$store.dispatch('setOption', {
+        name: 'customTheme',
+        value: this.currentTheme
+      })
     },
 
-    normalizeLocalState (colors, radii) {
-      this.bgColorLocal = rgbstr2hex(colors.bg)
-      this.btnColorLocal = rgbstr2hex(colors.btn)
-      this.textColorLocal = rgbstr2hex(colors.fg)
-      this.linkColorLocal = rgbstr2hex(colors.link)
+    normalizeLocalState (input) {
+      const colors = input.colors || input
+      const radii = input.radii || input
+      let i = 0
+      console.log('BENIS')
+      console.log(colors)
 
-      this.redColorLocal = rgbstr2hex(colors.cRed)
-      this.blueColorLocal = rgbstr2hex(colors.cBlue)
-      this.greenColorLocal = rgbstr2hex(colors.cGreen)
-      this.orangeColorLocal = rgbstr2hex(colors.cOrange)
+      console.log(i++)
+      this.bgColorLocal = rgb2hex(colors.bg)
+      console.log(i++)
+      this.btnColorLocal = rgb2hex(colors.btn)
+      console.log(i++)
+      this.textColorLocal = rgb2hex(colors.text || colors.fg)
+      console.log(i++)
+      this.linkColorLocal = rgb2hex(colors.link)
+      console.log(i++)
+
+      this.panelColorLocal = colors.panel ? rgb2hex(colors.panel) : undefined
+      console.log(i++)
+      this.topBarColorLocal = colors.topBad ? rgb2hex(colors.topBar) : undefined
+      console.log(i++)
+
+      this.redColorLocal = rgb2hex(colors.cRed)
+      console.log(i++)
+      console.log('red')
+      console.log(colors.cRed)
+      console.log(this.redColorLocal)
+      this.blueColorLocal = rgb2hex(colors.cBlue)
+      console.log(i++)
+      console.log('blue', this.blueColorLocal, colors.cBlue)
+      this.greenColorLocal = rgb2hex(colors.cGreen)
+      console.log(i++)
+      this.orangeColorLocal = rgb2hex(colors.cOrange)
+      console.log(i++)
 
       this.btnRadiusLocal = radii.btnRadius || 4
+      console.log(i++)
       this.inputRadiusLocal = radii.inputRadius || 4
+      console.log(i++)
       this.panelRadiusLocal = radii.panelRadius || 10
+      console.log(i++)
       this.avatarRadiusLocal = radii.avatarRadius || 5
+      console.log(i++)
       this.avatarAltRadiusLocal = radii.avatarAltRadius || 50
+      console.log(i++)
       this.tooltipRadiusLocal = radii.tooltipRadius || 2
+      console.log(i++)
       this.attachmentRadiusLocal = radii.attachmentRadius || 5
+      console.log(i++)
     }
   },
   watch: {

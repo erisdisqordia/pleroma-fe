@@ -1,5 +1,6 @@
 import { times } from 'lodash'
-import { rgb2hex, hex2rgb } from '../color_convert/color_convert.js'
+import { brightness, invertLightness, convert } from 'chromatism'
+import { rgb2hex, hex2rgb, mixrgb } from '../color_convert/color_convert.js'
 
 // While this is not used anymore right now, I left it in if we want to do custom
 // styles that aren't just colors, so user can pick from a few different distinct
@@ -53,7 +54,23 @@ const setStyle = (href, commit) => {
   cssEl.addEventListener('load', setDynamic)
 }
 
-const setColors = (col, commit) => {
+const rgb2rgba = function (rgba) {
+  return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
+}
+
+const getTextColor = function (bg, text) {
+  const bgIsLight = convert(bg).hsl.l > 50
+  const textIsLight = convert(text).hsl.l > 50
+
+  if ((bgIsLight && textIsLight) || (!bgIsLight && !textIsLight)) {
+    const base = typeof text.a !== 'undefined' ? { a: text.a } : {}
+    return Object.assign(base, invertLightness(text).rgb)
+  }
+  return text
+}
+
+const setColors = (input, commit) => {
+  const { colorRules, radiiRules, col } = generatePreset(input)
   const head = document.head
   const body = document.body
   body.style.display = 'none'
@@ -62,49 +79,81 @@ const setColors = (col, commit) => {
   head.appendChild(styleEl)
   const styleSheet = styleEl.sheet
 
-  const isDark = (col.text.r + col.text.g + col.text.b) > (col.bg.r + col.bg.g + col.bg.b)
-  let colors = {}
-  let radii = {}
-
-  const mod = isDark ? -10 : 10
-
-  colors.bg = rgb2hex(col.bg.r, col.bg.g, col.bg.b)                         // background
-  colors.lightBg = rgb2hex((col.bg.r + col.fg.r) / 2, (col.bg.g + col.fg.g) / 2, (col.bg.b + col.fg.b) / 2) // hilighted bg
-  colors.btn = rgb2hex(col.fg.r, col.fg.g, col.fg.b)                         // panels & buttons
-  colors.input = `rgba(${col.fg.r}, ${col.fg.g}, ${col.fg.b}, .5)`
-  colors.border = rgb2hex(col.fg.r - mod, col.fg.g - mod, col.fg.b - mod)       // borders
-  colors.faint = `rgba(${col.text.r}, ${col.text.g}, ${col.text.b}, .5)`
-  colors.fg = rgb2hex(col.text.r, col.text.g, col.text.b)                   // text
-  colors.lightFg = rgb2hex(col.text.r - mod * 5, col.text.g - mod * 5, col.text.b - mod * 5) // strong text
-
-  colors['base07'] = rgb2hex(col.text.r - mod * 2, col.text.g - mod * 2, col.text.b - mod * 2)
-
-  colors.link = rgb2hex(col.link.r, col.link.g, col.link.b)                   // links
-  colors.icon = rgb2hex((col.bg.r + col.text.r) / 2, (col.bg.g + col.text.g) / 2, (col.bg.b + col.text.b) / 2) // icons
-
-  colors.cBlue = col.cBlue && rgb2hex(col.cBlue.r, col.cBlue.g, col.cBlue.b)
-  colors.cRed = col.cRed && rgb2hex(col.cRed.r, col.cRed.g, col.cRed.b)
-  colors.cGreen = col.cGreen && rgb2hex(col.cGreen.r, col.cGreen.g, col.cGreen.b)
-  colors.cOrange = col.cOrange && rgb2hex(col.cOrange.r, col.cOrange.g, col.cOrange.b)
-
-  colors.cAlertRed = col.cRed && `rgba(${col.cRed.r}, ${col.cRed.g}, ${col.cRed.b}, .5)`
-
-  radii.btnRadius = col.btnRadius
-  radii.inputRadius = col.inputRadius
-  radii.panelRadius = col.panelRadius
-  radii.avatarRadius = col.avatarRadius
-  radii.avatarAltRadius = col.avatarAltRadius
-  radii.tooltipRadius = col.tooltipRadius
-  radii.attachmentRadius = col.attachmentRadius
-
   styleSheet.toString()
-  styleSheet.insertRule(`body { ${Object.entries(colors).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}`).join(';')} }`, 'index-max')
-  styleSheet.insertRule(`body { ${Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';')} }`, 'index-max')
+  styleSheet.insertRule(`body { ${colorRules} }`, 'index-max')
+  styleSheet.insertRule(`body { ${radiiRules} }`, 'index-max')
   body.style.display = 'initial'
 
-  commit('setOption', { name: 'colors', value: colors })
-  commit('setOption', { name: 'radii', value: radii })
+  // commit('setOption', { name: 'colors', value: htmlColors })
+  // commit('setOption', { name: 'radii', value: radii })
   commit('setOption', { name: 'customTheme', value: col })
+}
+
+const generatePreset = (input) => {
+  const radii = input.radii || {
+    btnRadius: input.btnRadius,
+    inputRadius: input.inputRadius,
+    panelRadius: input.panelRadius,
+    avatarRadius: input.avatarRadius,
+    avatarAltRadius: input.avatarAltRadius,
+    tooltipRadius: input.tooltipRadius,
+    attachmentRadius: input.attachmentRadius
+  }
+  const colors = {}
+
+  const col = Object.entries(input.colors || input).reduce((acc, [k, v]) => {
+    if (typeof v === 'object') {
+      acc[k] = v
+    } else {
+      acc[k] = hex2rgb(v)
+    }
+    return acc
+  }, {})
+
+  colors.fg = col.fg || col.text                   // text
+  colors.text = col.fg || col.text                   // text
+  colors.lightFg = col.fg || col.text                   // text
+
+  colors.bg = col.bg                         // background
+  colors.lightBg = col.lightBg || brightness(5, colors.bg).rgb // hilighted bg
+  console.log(colors.bg)
+  console.log(colors.lightBg)
+
+  colors.btn = col.btn || { r: 0, g: 0, b: 0 }
+  colors.btnText = getTextColor(colors.btn, colors.text)
+
+  colors.panel = col.panel || col.btn
+  colors.panelText = getTextColor(colors.panel, colors.text)
+
+  colors.topBar = col.topBar || col.btn
+  colors.topBarText = getTextColor(colors.topBar, colors.text)
+
+  colors.input = col.input || Object.assign({ a: 0.5 }, col.btn)
+  colors.border = col.btn       // borders
+  colors.faint = col.faint || Object.assign({ a: 0.5 }, col.text)
+
+  colors.link = col.link                   // links
+  colors.icon = mixrgb(colors.bg, colors.text) // icons
+
+  colors.cBlue = col.cBlue
+  colors.cRed = col.cRed
+  colors.cGreen = col.cGreen
+  colors.cOrange = col.cOrange
+
+  colors.cAlertRed = col.cAlertRed || Object.assign({ a: 0.5 }, col.cRed)
+
+  const htmlColors = Object.entries(colors)
+        .reduce((acc, [k, v]) => {
+          if (!v) return acc
+          acc[k] = typeof v.a === 'undefined' ? rgb2hex(v) : rgb2rgba(v)
+          return acc
+        }, {})
+
+  return {
+    colorRules: Object.entries(htmlColors).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}`).join(';'),
+    radiiRules: Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';'),
+    col
+  }
 }
 
 const setPreset = (val, commit) => {
@@ -148,7 +197,8 @@ const setPreset = (val, commit) => {
 const StyleSetter = {
   setStyle,
   setPreset,
-  setColors
+  setColors,
+  generatePreset
 }
 
 export default StyleSetter

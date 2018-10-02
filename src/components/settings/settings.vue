@@ -18,6 +18,7 @@
     </transition>
   </div>
   <div class="panel-body">
+<keep-alive>
     <tab-switcher>
       <div :label="$t('settings.general')" >
         <div class="setting-item">
@@ -146,6 +147,7 @@
       </div>
 
     </tab-switcher>
+</keep-alive>
   </div>
 </div>
 </template>

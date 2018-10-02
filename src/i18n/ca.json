@@ -1,90 +1,90 @@
 {
   "chat": {
-    "title": "Chat"
+    "title": "Xat"
   },
   "features_panel": {
-    "chat": "Chat",
+    "chat": "Xat",
     "gopher": "Gopher",
-    "media_proxy": "Media proxy",
-    "scope_options": "Scope options",
-    "text_limit": "Text limit",
-    "title": "Features",
-    "who_to_follow": "Who to follow"
+    "media_proxy": "Proxy per multimèdia",
+    "scope_options": "Opcions d'àbast",
+    "text_limit": "Límit de text",
+    "title": "Funcionalitats",
+    "who_to_follow": "A qui seguir"
   },
   "finder": {
-    "error_fetching_user": "Error fetching user",
+    "error_fetching_user": "Hi ha hagut un error en carregar l'usuari/a",
     "find_user": "Find user"
   },
   "general": {
-    "apply": "Apply",
-    "submit": "Submit"
+    "apply": "Aplica",
+    "submit": "Desa"
   },
   "login": {
-    "login": "Log in",
-    "logout": "Log out",
-    "password": "Password",
-    "placeholder": "e.g. lain",
-    "register": "Register",
-    "username": "Username"
+    "login": "Inicia sessió",
+    "logout": "Tanca la sessió",
+    "password": "Contrasenya",
+    "placeholder": "p.ex.: Maria",
+    "register": "Registra't",
+    "username": "Nom d'usuari/a"
   },
   "nav": {
-    "chat": "Local Chat",
+    "chat": "Xat local públic",
     "friend_requests": "Follow Requests",
-    "mentions": "Mentions",
-    "public_tl": "Public Timeline",
-    "timeline": "Timeline",
-    "twkn": "The Whole Known Network"
+    "mentions": "Mencions",
+    "public_tl": "Flux públic del node",
+    "timeline": "Flux personal",
+    "twkn": "Tota la xarxa coneguda"
   },
   "notifications": {
-    "broken_favorite": "Unknown status, searching for it...",
-    "favorited_you": "favorited your status",
-    "followed_you": "followed you",
-    "load_older": "Load older notifications",
-    "notifications": "Notifications",
+    "broken_favorite": "No es coneix aquest estat. S'està cercant.",
+    "favorited_you": "ha marcat un estat teu",
+    "followed_you": "ha començat a seguir-te",
+    "load_older": "Carrega més notificacions",
+    "notifications": "Notificacions",
     "read": "Read!",
-    "repeated_you": "repeated your status"
+    "repeated_you": "ha repetit el teu estat"
   },
   "post_status": {
-    "account_not_locked_warning": "Your account is not {0}. Anyone can follow you to view your follower-only posts.",
-    "account_not_locked_warning_link": "locked",
-    "attachments_sensitive": "Mark attachments as sensitive",
+    "account_not_locked_warning": "El teu compte no està {0}. Qualsevol persona pot seguir-te per llegir les teves entrades reservades només a seguidores.",
+    "account_not_locked_warning_link": "bloquejat",
+    "attachments_sensitive": "Marca l'adjunt com a delicat",
     "content_type": {
-      "plain_text": "Plain text"
+      "plain_text": "Text pla"
     },
-    "content_warning": "Subject (optional)",
-    "default": "Just landed in L.A.",
-    "direct_warning": "This post will only be visible to all the mentioned users.",
-    "posting": "Posting",
+    "content_warning": "Assumpte (opcional)",
+    "default": "Em sento",
+    "direct_warning": "Aquesta entrada només serà visible per les usuràries que etiquetis",
+    "posting": "Publicació",
     "scope": {
-      "direct": "Direct - Post to mentioned users only",
-      "private": "Followers-only - Post to followers only",
-      "public": "Public - Post to public timelines",
-      "unlisted": "Unlisted - Do not post to public timelines"
+      "direct": "Directa - Publica només per les usuàries etiquetades",
+      "private": "Només seguidors/es - Publica només per comptes que et segueixin",
+      "public": "Pública - Publica als fluxos públics",
+      "unlisted": "Silenciosa - No la mostris en fluxos públics"
     }
   },
   "registration": {
-    "bio": "Bio",
-    "email": "Email",
-    "fullname": "Display name",
-    "password_confirm": "Password confirmation",
-    "registration": "Registration",
-    "token": "Invite token"
+    "bio": "Sobre mi",
+    "email": "Correu",
+    "fullname": "Nom per mostrar",
+    "password_confirm": "Confirma la contrasenya",
+    "registration": "Registra't",
+    "token": "Codi d'invitació"
   },
   "settings": {
-    "attachmentRadius": "Attachments",
-    "attachments": "Attachments",
-    "autoload": "Enable automatic loading when scrolled to the bottom",
+    "attachmentRadius": "Adjunts",
+    "attachments": "Adjunts",
+    "autoload": "Recarrega automàticament en arribar a sota de tot.",
     "avatar": "Avatar",
-    "avatarAltRadius": "Avatars (Notifications)",
+    "avatarAltRadius": "Avatars (notificacions)",
     "avatarRadius": "Avatars",
-    "background": "Background",
-    "bio": "Bio",
-    "btnRadius": "Buttons",
-    "cBlue": "Blue (Reply, follow)",
-    "cGreen": "Green (Retweet)",
-    "cOrange": "Orange (Favorite)",
-    "cRed": "Red (Cancel)",
-    "change_password": "Change Password",
+    "background": "Imatge de fons",
+    "bio": "Sobre l'usuària",
+    "btnRadius": "Botons",
+    "cBlue": "Blau (Respon, segueix)",
+    "cGreen": "Verd (Republica)",
+    "cOrange": "Taronja (Marca com a preferit)",
+    "cRed": "Red (Canceŀla",
+    "change_password": "Chanvia la contrasenya",
     "change_password_error": "There was an issue changing your password.",
     "changed_password": "Password changed successfully!",
     "collapse_subject": "Collapse posts with subjects",
@@ -157,43 +157,43 @@
     "theme": "Theme",
     "theme_help": "Use hex color codes (#rrggbb) to customize your color theme.",
     "tooltipRadius": "Tooltips/alerts",
-    "user_settings": "User Settings",
+    "user_settings": "Configuració personal",
     "values": {
       "false": "no",
-      "true": "yes"
+      "true": "sí"
     }
   },
   "timeline": {
-    "collapse": "Collapse",
-    "conversation": "Conversation",
-    "error_fetching": "Error fetching updates",
-    "load_older": "Load older statuses",
-    "no_retweet_hint": "Post is marked as followers-only or direct and cannot be repeated",
-    "repeated": "repeated",
-    "show_new": "Show new",
-    "up_to_date": "Up-to-date"
+    "collapse": "Amaga",
+    "conversation": "Conversa",
+    "error_fetching": "S'ha produït un error en carregar els estats",
+    "load_older": "Carrera estats anteriors",
+    "no_retweet_hint": "L'entrada és només per a seguidores o \"directa\" i no es pot republicar",
+    "repeated": "repetit",
+    "show_new": "Mostra els nous",
+    "up_to_date": "Actualitzat"
   },
   "user_card": {
-    "approve": "Approve",
-    "block": "Block",
-    "blocked": "Blocked!",
-    "deny": "Deny",
-    "follow": "Follow",
-    "followees": "Following",
-    "followers": "Followers",
-    "following": "Following!",
-    "follows_you": "Follows you!",
-    "mute": "Mute",
-    "muted": "Muted",
-    "per_day": "per day",
-    "remote_follow": "Remote follow",
-    "statuses": "Statuses"
+    "approve": "Aprova",
+    "block": "Bloqueja",
+    "blocked": "Bloquejat!",
+    "deny": "Denega",
+    "follow": "Segueix",
+    "followees": "Segueixo",
+    "followers": "Seguidors/es",
+    "following": "Seguint!",
+    "follows_you": "Et segueix!",
+    "mute": "Silencia",
+    "muted": "Silenciat",
+    "per_day": "per dia",
+    "remote_follow": "Seguiment remot",
+    "statuses": "Estats"
   },
   "user_profile": {
-    "timeline_title": "User Timeline"
+    "timeline_title": "Flux personal"
   },
   "who_to_follow": {
     "more": "More",
-    "who_to_follow": "Who to follow"
+    "who_to_follow": "A qui seguir"
   }
 }

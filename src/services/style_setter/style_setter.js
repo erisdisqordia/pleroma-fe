@@ -70,7 +70,7 @@ const getTextColor = function (bg, text) {
 }
 
 const setColors = (input, commit) => {
-  const { colorRules, radiiRules, col } = generatePreset(input)
+  const { colorRules, radiiRules } = generatePreset(input)
   const head = document.head
   const body = document.body
   body.style.display = 'none'
@@ -86,10 +86,11 @@ const setColors = (input, commit) => {
 
   // commit('setOption', { name: 'colors', value: htmlColors })
   // commit('setOption', { name: 'radii', value: radii })
-  commit('setOption', { name: 'customTheme', value: col })
+  commit('setOption', { name: 'customTheme', value: input })
 }
 
 const generatePreset = (input) => {
+  console.log(input)
   const radii = input.radii || {
     btnRadius: input.btnRadius,
     inputRadius: input.inputRadius,
@@ -116,8 +117,6 @@ const generatePreset = (input) => {
 
   colors.bg = col.bg                         // background
   colors.lightBg = col.lightBg || brightness(5, colors.bg).rgb // hilighted bg
-  console.log(colors.bg)
-  console.log(colors.lightBg)
 
   colors.btn = col.btn || { r: 0, g: 0, b: 0 }
   colors.btnText = getTextColor(colors.btn, colors.text)
@@ -151,8 +150,7 @@ const generatePreset = (input) => {
 
   return {
     colorRules: Object.entries(htmlColors).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}`).join(';'),
-    radiiRules: Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';'),
-    col
+    radiiRules: Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';')
   }
 }
 
@@ -162,7 +160,7 @@ const setPreset = (val, commit) => {
     .then((themes) => {
       const theme = themes[val] ? themes[val] : themes['pleroma-dark']
       const bgRgb = hex2rgb(theme[1])
-      const fgRgb = hex2rgb(theme[2])
+      const btnRgb = hex2rgb(theme[2])
       const textRgb = hex2rgb(theme[3])
       const linkRgb = hex2rgb(theme[4])
 
@@ -171,9 +169,9 @@ const setPreset = (val, commit) => {
       const cBlueRgb = hex2rgb(theme[7] || '#0000FF')
       const cOrangeRgb = hex2rgb(theme[8] || '#E3FF00')
 
-      const col = {
+      const colors = {
         bg: bgRgb,
-        fg: fgRgb,
+        btn: btnRgb,
         text: textRgb,
         link: linkRgb,
         cRed: cRedRgb,
@@ -189,7 +187,7 @@ const setPreset = (val, commit) => {
       // load config -> set preset -> wait for styles.json to load ->
       // load persisted state -> set colors -> styles.json loaded -> set colors
       if (!window.themeLoaded) {
-        setColors(col, commit)
+        setColors({ colors }, commit)
       }
     })
 }

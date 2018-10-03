@@ -9,17 +9,27 @@ export default {
       availableStyles: [],
       selected: this.$store.state.config.theme,
       invalidThemeImported: false,
-      bgColorLocal: '',
-      bgOpacityLocal: 0,
-      btnColorLocal: '',
-      btnOpacityLocal: '',
 
       textColorLocal: '',
       linkColorLocal: '',
 
+      bgColorLocal: '',
+      bgOpacityLocal: undefined,
+
+      btnColorLocal: '',
+      btnTextColorLocal: undefined,
+      btnOpacityLocal: undefined,
+
+      inputColorLocal: undefined,
+      inputTextColorLocal: undefined,
+      inputOpacityLocal: undefined,
+
       panelColorLocal: undefined,
+      panelTextColorLocal: undefined,
       panelOpacityLocal: undefined,
+
       topBarColorLocal: undefined,
+      topBarTextColorLocal: undefined,
       topBarOpacityLocal: undefined,
 
       redColorLocal: '',
@@ -49,6 +59,9 @@ export default {
     this.normalizeLocalState(this.$store.state.config.customTheme)
   },
   computed: {
+    selectedVersion () {
+      return Array.isArray(this.selected) ? 1 : 2
+    },
     currentTheme () {
       return {
         colors: {
@@ -76,8 +89,11 @@ export default {
     },
     previewRules () {
       try {
-        const generated = StyleSetter.generatePreset(this.currentTheme.colors)
-        return [generated.colorRules, generated.radiiRules].join(';')
+        if (!this.currentTheme.colors.bg) {
+          return ''
+        }
+        const generated = StyleSetter.generatePreset(this.currentTheme)
+        return [generated.colorRules, generated.radiiRules, 'color: var(--text)'].join(';')
       } catch (e) {
         console.error('CATCH')
         console.error(e)
@@ -93,9 +109,8 @@ export default {
     exportCurrentTheme () {
       const stringified = JSON.stringify({
         // To separate from other random JSON files and possible future theme formats
-        _pleroma_theme_version: 1,
-        colors: this.$store.state.config.colors,
-        radii: this.$store.state.config.radii
+        _pleroma_theme_version: 2,
+        theme: this.currentTheme
       }, null, 2) // Pretty-print and indent with 2 spaces
 
       // Create an invisible link with a data url and simulate a click
@@ -123,7 +138,9 @@ export default {
             try {
               const parsed = JSON.parse(target.result)
               if (parsed._pleroma_theme_version === 1) {
-                this.normalizeLocalState(parsed.colors, parsed.radii)
+                this.normalizeLocalState(parsed, 1)
+              } else if (parsed._pleroma_theme_version === 2) {
+                this.normalizeLocalState(parsed.theme)
               } else {
                 // A theme from the future, spooky
                 this.invalidThemeImported = true
@@ -162,67 +179,68 @@ export default {
       })
     },
 
-    normalizeLocalState (input) {
+    clearV1 () {
+      this.panelColorLocal = undefined
+      this.topBarColorLocal = undefined
+      this.btnTextColorLocal = undefined
+      this.btnOpacityLocal = undefined
+
+      this.inputColorLocal = undefined
+      this.inputTextColorLocal = undefined
+      this.inputOpacityLocal = undefined
+
+      this.panelColorLocal = undefined
+      this.panelTextColorLocal = undefined
+      this.panelOpacityLocal = undefined
+
+      this.topBarColorLocal = undefined
+      this.topBarTextColorLocal = undefined
+      this.topBarOpacityLocal = undefined
+    },
+
+    normalizeLocalState (input, version = 2) {
       const colors = input.colors || input
       const radii = input.radii || input
-      let i = 0
-      console.log('BENIS')
-      console.log(colors)
 
-      console.log(i++)
       this.bgColorLocal = rgb2hex(colors.bg)
-      console.log(i++)
       this.btnColorLocal = rgb2hex(colors.btn)
-      console.log(i++)
       this.textColorLocal = rgb2hex(colors.text || colors.fg)
-      console.log(i++)
       this.linkColorLocal = rgb2hex(colors.link)
-      console.log(i++)
 
-      this.panelColorLocal = colors.panel ? rgb2hex(colors.panel) : undefined
-      console.log(i++)
-      this.topBarColorLocal = colors.topBad ? rgb2hex(colors.topBar) : undefined
-      console.log(i++)
+      if (version === 1) {
+        this.clearV1()
+      }
+
+      this.panelColorLocal = rgb2hex(colors.panel)
+      this.topBarColorLocal = rgb2hex(colors.topBar)
 
       this.redColorLocal = rgb2hex(colors.cRed)
-      console.log(i++)
-      console.log('red')
-      console.log(colors.cRed)
-      console.log(this.redColorLocal)
       this.blueColorLocal = rgb2hex(colors.cBlue)
-      console.log(i++)
-      console.log('blue', this.blueColorLocal, colors.cBlue)
       this.greenColorLocal = rgb2hex(colors.cGreen)
-      console.log(i++)
       this.orangeColorLocal = rgb2hex(colors.cOrange)
-      console.log(i++)
 
       this.btnRadiusLocal = radii.btnRadius || 4
-      console.log(i++)
       this.inputRadiusLocal = radii.inputRadius || 4
-      console.log(i++)
       this.panelRadiusLocal = radii.panelRadius || 10
-      console.log(i++)
       this.avatarRadiusLocal = radii.avatarRadius || 5
-      console.log(i++)
       this.avatarAltRadiusLocal = radii.avatarAltRadius || 50
-      console.log(i++)
       this.tooltipRadiusLocal = radii.tooltipRadius || 2
-      console.log(i++)
       this.attachmentRadiusLocal = radii.attachmentRadius || 5
-      console.log(i++)
     }
   },
   watch: {
     selected () {
-      this.bgColorLocal = this.selected[1]
-      this.btnColorLocal = this.selected[2]
-      this.textColorLocal = this.selected[3]
-      this.linkColorLocal = this.selected[4]
-      this.redColorLocal = this.selected[5]
-      this.greenColorLocal = this.selected[6]
-      this.blueColorLocal = this.selected[7]
-      this.orangeColorLocal = this.selected[8]
+      if (this.selectedVersion === 1) {
+        this.clearV1();
+        this.bgColorLocal = this.selected[1]
+        this.btnColorLocal = this.selected[2]
+        this.textColorLocal = this.selected[3]
+        this.linkColorLocal = this.selected[4]
+        this.redColorLocal = this.selected[5]
+        this.greenColorLocal = this.selected[6]
+        this.blueColorLocal = this.selected[7]
+        this.orangeColorLocal = this.selected[8]
+      }
     }
   }
 }

@@ -52,44 +52,65 @@
       <div class="color-item">
         <ColorInput name="bgColor" v-model="bgColorLocal" :label="$t('settings.background')"/>
         <OpacityInput name="bgOpacity" v-model="bgOpacityLocal" fallback="1"/>
+        <ColorInput name="textColor" v-model="textColorLocal" :label="$t('settings.text')"/>
+        <ColorInput name="linkColor" v-model="linkColorLocal" :label="$t('settings.links')"/>
       </div>
       <div class="color-item">
         <ColorInput name="fgColor" v-model="btnColorLocal" :label="$t('settings.foreground')"/>
-        <OpacityInput name="fgOpacity" v-model="btnOpacityLocal" fallback="1"/>
+        <OpacityInput name="fgOpacity" v-model="fgOpacityLocal" :fallback="bgOpacityLocal || 1"/>
+        <ColorInput name="fgTextColor" v-model="fgTextColorLocal" :label="$t('settings.text')" :fallback="textColorLocal"/>
+        <ColorInput name="fgLinkColor" v-model="fgLinkColorLocal" :label="$t('settings.links')" :fallback="linkColorLocal"/>
       </div>
       <div class="color-item">
-        <ColorInput name="textColor" v-model="textColorLocal" :label="$t('settings.text')"/>
+        <ColorInput name="cRedColor" v-model="redColorLocal" :label="$t('settings.cRed')"/>
+        <ColorInput name="cBlueColor" v-model="blueColorLocal" :label="$t('settings.cBlue')"/>
       </div>
       <div class="color-item">
-        <ColorInput name="linkColor" v-model="linkColorLocal" :label="$t('settings.links')"/>
+        <ColorInput name="cGreenColor" v-model="greenColorLocal" :label="$t('settings.cGreen')"/>
+        <ColorInput name="cOrangeColor" v-model="orangeColorLocal" :label="$t('settings.cOrange')"/>
+      </div>
+      <div class="color-item wide">
+        <h4>Alert opacity</h4>
+        <OpacityInput name="alertOpacity" v-model="alertOpacityLocal" fallback="1"/>
       </div>
     </div>
 
     <h3>More customs!</h3>
     <div>
       <div class="color-item">
-        <ColorInput name="panelColor" v-model="panelColorLocal" :fallback="btnColorLocal" label="Panel header"/>
+        <h4>Panel header</h4>
+        <ColorInput name="panelColor" v-model="panelColorLocal" :fallback="btnColorLocal" :label="$t('settings.background')"/>
         <OpacityInput name="panelOpacity" v-model="panelOpacityLocal" fallback="1"/>
+        <ColorInput name="panelTextColor" v-model="panelTextColorLocal" :fallback="textColorLocal" :label="$t('settings.links')"/>
       </div>
       <div class="color-item">
-        <ColorInput name="topBarColor" v-model="topBarColorLocal" :fallback="btnColorLocal" label="Top bar"/>
+        <h4>Top bar</h4>
+        <ColorInput name="topBarColor" v-model="topBarColorLocal" :fallback="btnColorLocal" :label="$t('settings.background')"/>
         <OpacityInput name="topBarOpacity" v-model="topBarOpacityLocal" fallback="1"/>
-      </div>
-    </div>
-
-    <h3>Rainbows!!!</h3>
-    <div>
-      <div class="color-item">
-        <ColorInput name="cRedColor" v-model="redColorLocal" :label="$t('settings.cRed')"/>
+        <ColorInput name="topBarTextColor" v-model="topBarTextColorLocal" :fallback="textColorLocal" :label="$t('settings.text')"/>
+        <ColorInput name="topBarLinkColor" v-model="topBarLinkColorLocal" :fallback="linkColorLocal" :label="$t('settings.links')"/>
       </div>
       <div class="color-item">
-        <ColorInput name="cBlueColor" v-model="blueColorLocal" :label="$t('settings.cBlue')"/>
+        <h4>Inputs</h4>
+        <ColorInput name="inputColor" v-model="inputColorLocal" :fallback="btnColorLocal" :label="$t('settings.background')"/>
+        <OpacityInput name="inputOpacity" v-model="inputOpacityLocal" fallback="0.5"/>
+        <ColorInput name="inputTextColor" v-model="inputTextColorLocal" :fallback="textColorLocal" :label="$t('settings.text')"/>
       </div>
       <div class="color-item">
-        <ColorInput name="cGreenColor" v-model="greenColorLocal" :label="$t('settings.cGreen')"/>
+        <h4>Buttons</h4>
+        <ColorInput name="buttonColor" v-model="buttonColorLocal" :fallback="btnColorLocal" :label="$t('settings.background')"/>
+        <OpacityInput name="buttonOpacity" v-model="buttonOpacityLocal" fallback="0.5"/>
+        <ColorInput name="buttonTextColor" v-model="buttonTextColorLocal" :fallback="textColorLocal" :label="$t('settings.text')"/>
       </div>
       <div class="color-item">
-        <ColorInput name="cOrangeColor" v-model="orangeColorLocal" :label="$t('settings.cOrange')"/>
+        <h4>Borders</h4>
+        <ColorInput name="buttonColor" v-model="buttonColorLocal" :fallback="btnColorLocal" label="Color"/>
+        <OpacityInput name="buttonOpacity" v-model="buttonOpacityLocal" fallback="0.5"/>
+      </div>
+      <div class="color-item">
+        <h4>Faint text</h4>
+        <ColorInput name="buttonColor" v-model="buttonColorLocal" :fallback="btnColorLocal" :label="$t('settings.text')"/>
+        <OpacityInput name="buttonOpacity" v-model="buttonOpacityLocal" fallback="0.5"/>
       </div>
     </div>
   </div>
@@ -212,7 +233,10 @@
   flex-direction: column;
   flex: 1 1 0;
 
-  &:nth-child(2n+1) {
+  &.wide {
+    min-width: 60%
+  }
+  &:not(.wide):nth-child(2n+1) {
     margin-right: 7px;
 
   }
@@ -222,14 +246,16 @@
     align-items: baseline;
   }
 
+  h4 {
+    margin-top: 1em;
+  }
+
   label {
     color: var(--faint, $fallback--faint);
   }
   .opacity-control {
     margin-top: 5px;
-    height: 12px;
-    line-height: 12px;
-    font-size: 12px;
+    margin-bottom: 5px;
   }
 }
 

@@ -1,7 +1,12 @@
 import { map } from 'lodash'
 
 const rgb2hex = (r, g, b) => {
-  console.log(r)
+  if (r === null || typeof r === 'undefined') {
+    return undefined
+  }
+  if (r[0] === '#') {
+    return r
+  }
   if (typeof r === 'object') {
     ({ r, g, b } = r)
   }

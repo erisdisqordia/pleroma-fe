@@ -228,26 +228,9 @@ export default {
       const colors = input.colors || input
       const radii = input.radii || input
 
-      if (version === 0) {
-        if (input.version) version = input.version
-        // Old v1 naming: fg is text, btn is foreground
-        if (typeof input.text === 'undefined' && typeof input.fg !== 'undefined') {
-          version = 1
-        }
-        // New v2 naming: text is text, fg is foreground
-        if (typeof input.text !== 'undefined' && typeof input.fg !== 'undefined') {
-          version = 2
-        }
-      }
-
       this.bgColorLocal = rgb2hex(colors.bg)
-      if (version === 1) {
-        this.fgColorLocal = rgb2hex(colors.btn)
-        this.textColorLocal = rgb2hex(colors.fg)
-      } else {
-        this.fgColorLocal = rgb2hex(colors.fg)
-        this.textColorLocal = rgb2hex(colors.text)
-      }
+      this.fgColorLocal = rgb2hex(colors.fg)
+      this.textColorLocal = rgb2hex(colors.text)
       this.linkColorLocal = rgb2hex(colors.link)
 
       if (version === 1) {

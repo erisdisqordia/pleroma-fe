@@ -110,40 +110,22 @@ const generatePreset = (input) => {
     return acc
   }, {})
 
-  let version = 0
-
-  if (input.version) {
-    version = input.version
-  }
-  // Old v1 naming: fg is text, btn is foreground
-  if (typeof col.text === 'undefined' && typeof col.fg !== 'undefined') {
-    version = 1
-  }
-  // New v2 naming: text is text, fg is foreground
-  if (typeof col.text !== 'undefined' && typeof col.fg !== 'undefined') {
-    version = 2
-  }
-
-  colors.text = version === 1 ? col.fg : col.text
+  colors.text = col.text
   colors.lightText = colors.text
 
   colors.bg = col.bg
   colors.lightBg = col.lightBg || brightness(5, colors.bg).rgb
 
-  colors.fg = version === 1 ? col.btn : col.fg
-  console.log('BENIN')
-  console.log(version)
-  console.log(col)
-  console.log(colors.text)
+  colors.fg = col.fg
   colors.fgText = getTextColor(colors.fg, colors.text)
 
-  colors.btn = col.btn || { r: 0, g: 0, b: 0 }
+  colors.btn = col.btn || col.fg
   colors.btnText = getTextColor(colors.btn, colors.text)
 
-  colors.panel = col.panel || col.btn
+  colors.panel = col.panel || col.fg
   colors.panelText = getTextColor(colors.panel, colors.text)
 
-  colors.topBar = col.topBar || col.btn
+  colors.topBar = col.topBar || col.fg
   colors.topBarText = getTextColor(colors.topBar, colors.text)
 
   colors.input = col.input || Object.assign({ a: 0.5 }, col.btn)

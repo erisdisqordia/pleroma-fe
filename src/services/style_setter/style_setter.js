@@ -101,7 +101,6 @@ const generatePreset = (input) => {
     attachmentRadius: input.attachmentRadius
   }
   const colors = {}
-
   const col = Object.entries(input.colors || input).reduce((acc, [k, v]) => {
     if (typeof v === 'object') {
       acc[k] = v
@@ -111,12 +110,32 @@ const generatePreset = (input) => {
     return acc
   }, {})
 
-  colors.fg = col.fg || col.text                   // text
-  colors.text = col.fg || col.text                   // text
-  colors.lightFg = col.fg || col.text                   // text
+  let version = 0
 
-  colors.bg = col.bg                         // background
-  colors.lightBg = col.lightBg || brightness(5, colors.bg).rgb // hilighted bg
+  if (input.version) {
+    version = input.version
+  }
+  // Old v1 naming: fg is text, btn is foreground
+  if (typeof col.text === 'undefined' && typeof col.fg !== 'undefined') {
+    version = 1
+  }
+  // New v2 naming: text is text, fg is foreground
+  if (typeof col.text !== 'undefined' && typeof col.fg !== 'undefined') {
+    version = 2
+  }
+
+  colors.text = version === 1 ? col.fg : col.text
+  colors.lightText = colors.text
+
+  colors.bg = col.bg
+  colors.lightBg = col.lightBg || brightness(5, colors.bg).rgb
+
+  colors.fg = version === 1 ? col.btn : col.fg
+  console.log('BENIN')
+  console.log(version)
+  console.log(col)
+  console.log(colors.text)
+  colors.fgText = getTextColor(colors.fg, colors.text)
 
   colors.btn = col.btn || { r: 0, g: 0, b: 0 }
   colors.btnText = getTextColor(colors.btn, colors.text)
@@ -128,11 +147,11 @@ const generatePreset = (input) => {
   colors.topBarText = getTextColor(colors.topBar, colors.text)
 
   colors.input = col.input || Object.assign({ a: 0.5 }, col.btn)
-  colors.border = col.btn       // borders
+  colors.border = col.btn
   colors.faint = col.faint || Object.assign({ a: 0.5 }, col.text)
 
-  colors.link = col.link                   // links
-  colors.icon = mixrgb(colors.bg, colors.text) // icons
+  colors.link = col.link
+  colors.icon = mixrgb(colors.bg, colors.text)
 
   colors.cBlue = col.cBlue
   colors.cRed = col.cRed
@@ -150,7 +169,11 @@ const generatePreset = (input) => {
 
   return {
     colorRules: Object.entries(htmlColors).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}`).join(';'),
-    radiiRules: Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';')
+    radiiRules: Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';'),
+    theme: {
+      colors,
+      radii
+    }
   }
 }
 
@@ -196,6 +219,7 @@ const StyleSetter = {
   setStyle,
   setPreset,
   setColors,
+  getTextColor,
   generatePreset
 }
 

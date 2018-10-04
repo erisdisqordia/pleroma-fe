@@ -56,9 +56,9 @@
         <ColorInput name="linkColor" v-model="linkColorLocal" :label="$t('settings.links')"/>
       </div>
       <div class="color-item">
-        <ColorInput name="fgColor" v-model="btnColorLocal" :label="$t('settings.foreground')"/>
+        <ColorInput name="fgColor" v-model="fgColorLocal" :label="$t('settings.foreground')"/>
         <OpacityInput name="fgOpacity" v-model="fgOpacityLocal" :fallback="bgOpacityLocal || 1"/>
-        <ColorInput name="fgTextColor" v-model="fgTextColorLocal" :label="$t('settings.text')" :fallback="textColorLocal"/>
+        <ColorInput name="fgTextColor" v-model="fgTextColorLocal" :label="$t('settings.text')" :fallback="previewTheme.colors.btnText"/>
         <ColorInput name="fgLinkColor" v-model="fgLinkColorLocal" :label="$t('settings.links')" :fallback="linkColorLocal"/>
       </div>
       <div class="color-item">
@@ -98,19 +98,19 @@
       </div>
       <div class="color-item">
         <h4>Buttons</h4>
-        <ColorInput name="buttonColor" v-model="buttonColorLocal" :fallback="btnColorLocal" :label="$t('settings.background')"/>
-        <OpacityInput name="buttonOpacity" v-model="buttonOpacityLocal" fallback="0.5"/>
-        <ColorInput name="buttonTextColor" v-model="buttonTextColorLocal" :fallback="textColorLocal" :label="$t('settings.text')"/>
+        <ColorInput name="btnColor" v-model="btnColorLocal" :fallback="btnColorLocal" :label="$t('settings.background')"/>
+        <OpacityInput name="btnOpacity" v-model="btnOpacityLocal" fallback="0.5"/>
+        <ColorInput name="btnTextColor" v-model="btnTextColorLocal" :fallback="textColorLocal" :label="$t('settings.text')"/>
       </div>
       <div class="color-item">
         <h4>Borders</h4>
-        <ColorInput name="buttonColor" v-model="buttonColorLocal" :fallback="btnColorLocal" label="Color"/>
-        <OpacityInput name="buttonOpacity" v-model="buttonOpacityLocal" fallback="0.5"/>
+        <ColorInput name="btnColor" v-model="btnColorLocal" :fallback="btnColorLocal" label="Color"/>
+        <OpacityInput name="btnOpacity" v-model="btnOpacityLocal" fallback="0.5"/>
       </div>
       <div class="color-item">
         <h4>Faint text</h4>
-        <ColorInput name="buttonColor" v-model="buttonColorLocal" :fallback="btnColorLocal" :label="$t('settings.text')"/>
-        <OpacityInput name="buttonOpacity" v-model="buttonOpacityLocal" fallback="0.5"/>
+        <ColorInput name="btnColor" v-model="btnColorLocal" :fallback="btnColorLocal" :label="$t('settings.text')"/>
+        <OpacityInput name="btnOpacity" v-model="btnOpacityLocal" fallback="0.5"/>
       </div>
     </div>
   </div>

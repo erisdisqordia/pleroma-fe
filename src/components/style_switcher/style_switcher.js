@@ -16,7 +16,12 @@ export default {
       bgColorLocal: '',
       bgOpacityLocal: undefined,
 
-      btnColorLocal: '',
+      fgColorLocal: '',
+      fgOpacityLocal: undefined,
+      fgTextColorLocal: undefined,
+      fgLinkColorLocal: undefined,
+
+      btnColorLocal: undefined,
       btnTextColorLocal: undefined,
       btnOpacityLocal: undefined,
 
@@ -30,7 +35,10 @@ export default {
 
       topBarColorLocal: undefined,
       topBarTextColorLocal: undefined,
+      topBarLinkColorLocal: undefined,
       topBarOpacityLocal: undefined,
+
+      alertOpacityLocal: undefined,
 
       redColorLocal: '',
       blueColorLocal: '',
@@ -66,7 +74,8 @@ export default {
       return {
         colors: {
           bg: this.bgColorLocal,
-          fg: this.textColorLocal,
+          fg: this.fgColorLocal,
+          text: this.textColorLocal,
           panel: this.panelColorLocal,
           topBar: this.topBarColorLocal,
           btn: this.btnColorLocal,
@@ -87,18 +96,26 @@ export default {
         }
       }
     },
-    previewRules () {
+    preview () {
       try {
         if (!this.currentTheme.colors.bg) {
-          return ''
+          return {}
         }
-        const generated = StyleSetter.generatePreset(this.currentTheme)
-        return [generated.colorRules, generated.radiiRules, 'color: var(--text)'].join(';')
+        return StyleSetter.generatePreset(this.currentTheme)
       } catch (e) {
         console.error('CATCH')
         console.error(e)
-        return ''
+        return {}
       }
+    },
+    previewTheme () {
+      if (!this.preview.theme) return { colors: {}, radii: {} }
+      console.log(this.preview.theme)
+      return this.preview.theme
+    },
+    previewRules () {
+      if (!this.preview.colorRules) return ''
+      return [this.preview.colorRules, this.preview.radiiRules, 'color: var(--text)'].join(';')
     }
   },
   components: {
@@ -140,7 +157,7 @@ export default {
               if (parsed._pleroma_theme_version === 1) {
                 this.normalizeLocalState(parsed, 1)
               } else if (parsed._pleroma_theme_version === 2) {
-                this.normalizeLocalState(parsed.theme)
+                this.normalizeLocalState(parsed.theme, 2)
               } else {
                 // A theme from the future, spooky
                 this.invalidThemeImported = true
@@ -180,6 +197,10 @@ export default {
     },
 
     clearV1 () {
+      this.fgOpacityLocal = undefined
+      this.fgTextColorLocal = undefined
+      this.fgLinkColorLocal = undefined
+
       this.panelColorLocal = undefined
       this.topBarColorLocal = undefined
       this.btnTextColorLocal = undefined
@@ -198,13 +219,35 @@ export default {
       this.topBarOpacityLocal = undefined
     },
 
-    normalizeLocalState (input, version = 2) {
+    /**
+     * This applies stored theme data onto form.
+     * @param {Object} input - input data
+     * @param {Number} version - version of data. 0 means try to guess based on data.
+     */
+    normalizeLocalState (input, version = 0) {
       const colors = input.colors || input
       const radii = input.radii || input
 
+      if (version === 0) {
+        if (input.version) version = input.version
+        // Old v1 naming: fg is text, btn is foreground
+        if (typeof input.text === 'undefined' && typeof input.fg !== 'undefined') {
+          version = 1
+        }
+        // New v2 naming: text is text, fg is foreground
+        if (typeof input.text !== 'undefined' && typeof input.fg !== 'undefined') {
+          version = 2
+        }
+      }
+
       this.bgColorLocal = rgb2hex(colors.bg)
-      this.btnColorLocal = rgb2hex(colors.btn)
-      this.textColorLocal = rgb2hex(colors.text || colors.fg)
+      if (version === 1) {
+        this.fgColorLocal = rgb2hex(colors.btn)
+        this.textColorLocal = rgb2hex(colors.fg)
+      } else {
+        this.fgColorLocal = rgb2hex(colors.fg)
+        this.textColorLocal = rgb2hex(colors.text)
+      }
       this.linkColorLocal = rgb2hex(colors.link)
 
       if (version === 1) {
@@ -231,7 +274,7 @@ export default {
   watch: {
     selected () {
       if (this.selectedVersion === 1) {
-        this.clearV1();
+        this.clearV1()
         this.bgColorLocal = this.selected[1]
         this.btnColorLocal = this.selected[2]
         this.textColorLocal = this.selected[3]

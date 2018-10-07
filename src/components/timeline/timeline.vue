@@ -61,12 +61,12 @@
     opacity: 0.8;
     background-color: transparent;
     color: $fallback--faint;
-    color: var(--faint, $fallback--faint);
+    color: var(--panelFaint, $fallback--faint);
   }
 
   .loadmore-error {
-    color: $fallback--fg;
-    color: var(--fg, $fallback--fg);
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
   }
 }
 
@@ -79,7 +79,7 @@
   border-color: var(--border, $fallback--border);
   padding: 10px;
   z-index: 1;
-  background-color: $fallback--btn;
-  background-color: var(--btn, $fallback--btn);
+  background-color: $fallback--fg;
+  background-color: var(--fg, $fallback--fg);
 }
 </style>

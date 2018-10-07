@@ -159,7 +159,7 @@
 @import '../../_variables.scss';
 
 .setting-item {
-  border-bottom: 2px solid var(--btn, $fallback--btn);
+  border-bottom: 2px solid var(--fg, $fallback--fg);
   margin: 1em 1em 1.4em;
   padding-bottom: 1.4em;
 

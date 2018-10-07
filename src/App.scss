@@ -36,8 +36,8 @@ body {
   font-family: sans-serif;
   font-size: 14px;
   margin: 0;
-  color: $fallback--fg;
-  color: var(--fg, $fallback--fg);
+  color: $fallback--text;
+  color: var(--text, $fallback--text);
   max-width: 100vw;
   overflow-x: hidden;
 }
@@ -50,10 +50,10 @@ a {
 
 button {
   user-select: none;
-  color: $fallback--fg;
-  color: var(--btnText, $fallback--fg);
-  background-color: $fallback--btn;
-  background-color: var(--btn, $fallback--btn);
+  color: $fallback--text;
+  color: var(--btnText, $fallback--text);
+  background-color: $fallback--fg;
+  background-color: var(--btn, $fallback--fg);
   border: none;
   border-radius: $fallback--btnRadius;
   border-radius: var(--btnRadius, $fallback--btnRadius);
@@ -102,10 +102,10 @@ input, textarea, .select {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 2px black inset;
-  background-color: $fallback--input;
-  background-color: var(--input, $fallback--input);
-  color: $fallback--lightFg;
-  color: var(--lightFg, $fallback--lightFg);
+  background-color: $fallback--fg;
+  background-color: var(--input, $fallback--fg);
+  color: $fallback--lightText;
+  color: var(--inputText, $fallback--lightText);
   font-family: sans-serif;
   font-size: 14px;
   padding: 8px 7px;
@@ -122,8 +122,8 @@ input, textarea, .select {
     bottom: 0;
     right: 5px;
     height: 100%;
-    color: $fallback--fg;
-    color: var(--fg, $fallback--fg);
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
     line-height: 29px;
     z-index: 0;
     pointer-events: none;
@@ -136,8 +136,8 @@ input, textarea, .select {
     background: transparent;
     border: none;
     margin: 0;
-    color: $fallback--fg;
-    color: var(--fg, $fallback--fg);
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
     padding: 4px 2em 3px 3px;
     width: 100%;
     z-index: 1;
@@ -149,8 +149,8 @@ input, textarea, .select {
   &[type=checkbox] {
     display: none;
     &:checked + label::before {
-      color: $fallback--fg;
-      color: var(--fg, $fallback--fg);
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
     }
     &:disabled,
     {
@@ -172,8 +172,8 @@ input, textarea, .select {
       border-top: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: 0px 0px 2px black inset;
       margin-right: .5em;
-      background-color: $fallback--input;
-      background-color: var(--input, $fallback--input);
+      background-color: $fallback--fg;
+      background-color: var(--input, $fallback--fg);
       vertical-align: top;
       text-align: center;
       line-height: 1.1em;
@@ -187,8 +187,8 @@ input, textarea, .select {
 }
 
 option {
-  color: $fallback--fg;
-  color: var(--fg, $fallback--fg);
+  color: $fallback--text;
+  color: var(--text, $fallback--text);
   background-color: $fallback--bg;
   background-color: var(--bg, $fallback--bg);
 }
@@ -279,9 +279,9 @@ nav {
     margin: auto;
     height: 50px;
 
-    a i {
+    a, a i {
       color: $fallback--link;
-      color: var(--link, $fallback--link);
+      color: var(--topBarLink, $fallback--link);
     }
   }
 }
@@ -331,8 +331,8 @@ main-router {
   text-align: left;
   line-height: 28px;
   color: var(--panelText);
-  background-color: $fallback--btn;
-  background-color: var(--panel, $fallback--btn);
+  background-color: $fallback--fg;
+  background-color: var(--panel, $fallback--fg);
   align-items: baseline;
 
   .title {
@@ -389,8 +389,8 @@ main-router {
 nav {
   z-index: 1000;
   color: var(--topBarText);
-  background-color: $fallback--btn;
-  background-color: var(--topBar, $fallback--btn);
+  background-color: $fallback--fg;
+  background-color: var(--topBar, $fallback--fg);
   color: $fallback--faint;
   color: var(--faint, $fallback--faint);
   box-shadow: 0px 0px 4px rgba(0,0,0,.6);
@@ -518,8 +518,8 @@ nav {
   cursor: pointer;
 
   .selected {
-    color: $fallback--lightFg;
-    color: var(--lightFg, $fallback--lightFg);
+    color: $fallback--lightText;
+    color: var(--lightText, $fallback--lightText);
   }
 
   .text-format {

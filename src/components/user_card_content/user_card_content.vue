@@ -138,8 +138,8 @@
 }
 
 .user-info {
-  color: $fallback--lightFg;
-  color: var(--lightFg, $fallback--lightFg);
+  color: $fallback--lightText;
+  color: var(--lightText, $fallback--lightText);
   padding: 0 16px;
 
   .container {
@@ -173,8 +173,8 @@
   }
 
   .usersettings {
-    color: $fallback--lightFg;
-    color: var(--lightFg, $fallback--lightFg);
+    color: $fallback--lightText;
+    color: var(--lightText, $fallback--lightText);
     opacity: .8;
   }
 
@@ -193,8 +193,8 @@
   }
 
   .user-screen-name {
-    color: $fallback--lightFg;
-    color: var(--lightFg, $fallback--lightFg);
+    color: $fallback--lightText;
+    color: var(--lightText, $fallback--lightText);
     display: inline-block;
     font-weight: light;
     font-size: 15px;
@@ -269,8 +269,8 @@
   padding: .5em 1.5em 0em 1.5em;
   text-align: center;
   justify-content: space-between;
-  color: $fallback--lightFg;
-  color: var(--lightFg, $fallback--lightFg);
+  color: $fallback--lightText;
+  color: var(--lightText, $fallback--lightText);
 
   &.clickable {
     .user-count {

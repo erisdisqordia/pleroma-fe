@@ -153,8 +153,8 @@
       padding-bottom: 0;
       margin-left: $fallback--attachmentRadius;
       margin-left: var(--attachmentRadius, $fallback--attachmentRadius);
-      background-color: $fallback--btn;
-      background-color: var(--btn, $fallback--btn);
+      background-color: $fallback--fg;
+      background-color: var(--fg, $fallback--fg);
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -261,8 +261,8 @@
     min-width: 75%;
     background: $fallback--bg;
     background: var(--bg, $fallback--bg);
-    color: $fallback--lightFg;
-    color: var(--lightFg, $fallback--lightFg);
+    color: $fallback--lightText;
+    color: var(--lightText, $fallback--lightText);
   }
 
   .autocomplete {
@@ -291,8 +291,8 @@
     }
 
     &.highlighted {
-      background-color: $fallback--btn;
-      background-color: var(--btn, $fallback--btn);
+      background-color: $fallback--fg;
+      background-color: var(--fg, $fallback--fg);
     }
   }
 }

@@ -112,27 +112,33 @@ const generatePreset = (input) => {
 
   colors.text = col.text
   colors.lightText = colors.text
+  colors.link = col.link
+  colors.border = col.border || col.fg
+  colors.faint = col.faint || col.text
 
   colors.bg = col.bg
   colors.lightBg = col.lightBg || brightness(5, colors.bg).rgb
 
   colors.fg = col.fg
-  colors.fgText = getTextColor(colors.fg, colors.text)
+  colors.fgText = col.fgText || getTextColor(colors.fg, colors.text)
+  colors.fgLink = col.fgLink || getTextColor(colors.fg, colors.link)
 
   colors.btn = col.btn || col.fg
-  colors.btnText = getTextColor(colors.btn, colors.text)
+  colors.btnText = col.btnText || getTextColor(colors.btn, colors.fgText)
+
+  colors.input = col.input || col.fg
+  colors.inputText = col.inputText || getTextColor(colors.input, colors.fgText)
 
   colors.panel = col.panel || col.fg
-  colors.panelText = getTextColor(colors.panel, colors.text)
+  colors.panelText = col.panelText || getTextColor(colors.panel, colors.fgText)
+  colors.panelFaint = col.panelFaint || getTextColor(colors.panel, colors.faint)
 
   colors.topBar = col.topBar || col.fg
-  colors.topBarText = getTextColor(colors.topBar, colors.text)
+  colors.topBarText = col.topBarText || getTextColor(colors.topBar, colors.fgText)
+  colors.topBarLink = col.topBarLink || getTextColor(colors.topBar, colors.fgLink)
 
-  colors.input = col.input || Object.assign({ a: 0.5 }, col.btn)
-  colors.border = col.btn
-  colors.faint = col.faint || Object.assign({ a: 0.5 }, col.text)
+  colors.faintLink = col.faintLink || col.link
 
-  colors.link = col.link
   colors.icon = mixrgb(colors.bg, colors.text)
 
   colors.cBlue = col.cBlue
@@ -153,7 +159,7 @@ const generatePreset = (input) => {
     colorRules: Object.entries(htmlColors).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}`).join(';'),
     radiiRules: Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';'),
     theme: {
-      colors,
+      colors: htmlColors,
       radii
     }
   }
@@ -165,7 +171,7 @@ const setPreset = (val, commit) => {
     .then((themes) => {
       const theme = themes[val] ? themes[val] : themes['pleroma-dark']
       const bgRgb = hex2rgb(theme[1])
-      const btnRgb = hex2rgb(theme[2])
+      const fgRgb = hex2rgb(theme[2])
       const textRgb = hex2rgb(theme[3])
       const linkRgb = hex2rgb(theme[4])
 
@@ -176,7 +182,7 @@ const setPreset = (val, commit) => {
 
       const colors = {
         bg: bgRgb,
-        btn: btnRgb,
+        fg: fgRgb,
         text: textRgb,
         link: linkRgb,
         cRed: cRedRgb,

@@ -22,8 +22,8 @@
   }
 
   .loadmore-error {
-    color: $fallback--fg;
-    color: var(--fg, $fallback--fg);
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
   }
 
   .unseen {
@@ -90,6 +90,9 @@
         padding: 0.25em 0;
         color: $fallback--faint;
         color: var(--faint, $fallback--faint);
+        a {
+          color: var(--faintLink);
+        }
       }
       padding: 0;
       .media-body {

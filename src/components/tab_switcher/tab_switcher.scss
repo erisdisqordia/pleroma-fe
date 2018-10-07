@@ -17,8 +17,8 @@
 
     .tab, &::after, &::before {
       border-bottom: 1px solid;
-      border-bottom-color: $fallback--btn;
-      border-bottom-color: var(--btn, $fallback--btn);
+      border-bottom-color: $fallback--fg;
+      border-bottom-color: var(--fg, $fallback--fg);
     }
 
     .tab {
@@ -28,8 +28,8 @@
 
       &:not(.active) {
         border-bottom: 1px solid;
-        border-bottom-color: $fallback--btn;
-        border-bottom-color: var(--btn, $fallback--btn);
+        border-bottom-color: $fallback--fg;
+        border-bottom-color: var(--fg, $fallback--fg);
         z-index: 4;
       }
 

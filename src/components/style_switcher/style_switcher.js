@@ -31,6 +31,7 @@ export default {
 
       panelColorLocal: undefined,
       panelTextColorLocal: undefined,
+      panelFaintColorLocal: undefined,
       panelOpacityLocal: undefined,
 
       topBarColorLocal: undefined,
@@ -40,10 +41,17 @@ export default {
 
       alertOpacityLocal: undefined,
 
-      redColorLocal: '',
-      blueColorLocal: '',
-      greenColorLocal: '',
-      orangeColorLocal: '',
+      borderColorLocal: undefined,
+      borderOpacityLocal: undefined,
+
+      faintColorLocal: undefined,
+      faintOpacityLocal: undefined,
+      faintLinkColorLocal: undefined,
+
+      cRedColorLocal: '',
+      cBlueColorLocal: '',
+      cGreenColorLocal: '',
+      cOrangeColorLocal: '',
 
       btnRadiusLocal: '',
       inputRadiusLocal: '',
@@ -74,16 +82,35 @@ export default {
       return {
         colors: {
           bg: this.bgColorLocal,
-          fg: this.fgColorLocal,
           text: this.textColorLocal,
-          panel: this.panelColorLocal,
-          topBar: this.topBarColorLocal,
-          btn: this.btnColorLocal,
           link: this.linkColorLocal,
-          cRed: this.redColorLocal,
-          cBlue: this.blueColorLocal,
-          cGreen: this.greenColorLocal,
-          cOrange: this.orangeColorLocal
+
+          fg: this.fgColorLocal,
+          fgText: this.fgTextColorLocal,
+          fgLink: this.fgLinkColorLocal,
+
+          panel: this.panelColorLocal,
+          panelText: this.panelTextColorLocal,
+          panelFaint: this.panelFaintColorLocal,
+
+          input: this.inputColorLocal,
+          inputText: this.inputTextColorLocal,
+
+          topBar: this.topBarColorLocal,
+          topBarText: this.topBarTextColorLocal,
+          topBarLink: this.topBarLinkColorLocal,
+
+          btn: this.btnColorLocal,
+          btnText: this.btnTextColorLocal,
+
+          faint: this.faintColorLocal,
+          faintLink: this.faintLinkColorLocal,
+          border: this.borderColorLocal,
+
+          cRed: this.cRedColorLocal,
+          cBlue: this.cBlueColorLocal,
+          cGreen: this.cGreenColorLocal,
+          cOrange: this.cOrangeColorLocal
         },
         radii: {
           btnRadius: this.btnRadiusLocal,
@@ -197,12 +224,12 @@ export default {
     },
 
     clearV1 () {
+      this.bgOpacityLocal = undefined
       this.fgOpacityLocal = undefined
       this.fgTextColorLocal = undefined
       this.fgLinkColorLocal = undefined
 
-      this.panelColorLocal = undefined
-      this.topBarColorLocal = undefined
+      this.btnColorLocal = undefined
       this.btnTextColorLocal = undefined
       this.btnOpacityLocal = undefined
 
@@ -216,7 +243,17 @@ export default {
 
       this.topBarColorLocal = undefined
       this.topBarTextColorLocal = undefined
+      this.topBarLinkColorLocal = undefined
       this.topBarOpacityLocal = undefined
+
+      this.alertOpacityLocal = undefined
+
+      this.borderColorLocal = undefined
+      this.borderOpacityLocal = undefined
+
+      this.faintColorLocal = undefined
+      this.faintOpacityLocal = undefined
+      this.faintLinkColorLocal = undefined
     },
 
     /**
@@ -228,22 +265,42 @@ export default {
       const colors = input.colors || input
       const radii = input.radii || input
 
-      this.bgColorLocal = rgb2hex(colors.bg)
-      this.fgColorLocal = rgb2hex(colors.fg)
-      this.textColorLocal = rgb2hex(colors.text)
-      this.linkColorLocal = rgb2hex(colors.link)
-
-      if (version === 1) {
-        this.clearV1()
+      if (version === 0) {
+        if (input.version) version = input.version
+        // Old v1 naming: fg is text, btn is foreground
+        if (typeof colors.text === 'undefined' && typeof colors.fg !== 'undefined') {
+          version = 1
+        }
+        // New v2 naming: text is text, fg is foreground
+        if (typeof colors.text !== 'undefined' && typeof colors.fg !== 'undefined') {
+          version = 2
+        }
       }
 
-      this.panelColorLocal = rgb2hex(colors.panel)
-      this.topBarColorLocal = rgb2hex(colors.topBar)
+      console.log('BENIS')
+      console.log(version)
+      // Stuff that differs between V1 and V2
+      if (version === 1) {
+        console.log(colors)
+        this.fgColorLocal = rgb2hex(colors.btn)
+        this.textColorLocal = rgb2hex(colors.fg)
+      }
 
-      this.redColorLocal = rgb2hex(colors.cRed)
-      this.blueColorLocal = rgb2hex(colors.cBlue)
-      this.greenColorLocal = rgb2hex(colors.cGreen)
-      this.orangeColorLocal = rgb2hex(colors.cOrange)
+      const keys = new Set(version !== 1 ? Object.keys(colors) : [])
+      if (version === 1) {
+        // V1 ignores the rest
+        this.clearV1()
+        keys
+          .add('bg')
+          .add('link')
+          .add('cRed')
+          .add('cBlue')
+          .add('cGreen')
+          .add('cOrange')
+      }
+      keys.forEach(key => {
+        this[key + 'ColorLocal'] = rgb2hex(colors[key])
+      })
 
       this.btnRadiusLocal = radii.btnRadius || 4
       this.inputRadiusLocal = radii.inputRadius || 4
@@ -259,7 +316,7 @@ export default {
       if (this.selectedVersion === 1) {
         this.clearV1()
         this.bgColorLocal = this.selected[1]
-        this.btnColorLocal = this.selected[2]
+        this.fgColorLocal = this.selected[2]
         this.textColorLocal = this.selected[3]
         this.linkColorLocal = this.selected[4]
         this.redColorLocal = this.selected[5]

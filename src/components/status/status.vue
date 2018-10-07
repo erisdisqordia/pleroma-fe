@@ -284,8 +284,8 @@
       margin-left: 0.2em;
     }
     a:hover i {
-      color: $fallback--fg;
-      color: var(--fg, $fallback--fg);
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
     }
   }
 

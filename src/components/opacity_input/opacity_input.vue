@@ -22,6 +22,16 @@
     max="1"
     min="0"
     step=".05">
+  <input
+    :id="name"
+    class="input-number"
+    type="number"
+    :value="value || fallback"
+    :disabled="!present"
+    @input="$emit('input', $event.target.value)"
+    max="1"
+    min="0"
+    step=".05">
 </div>
 </template>
 
@@ -64,12 +74,17 @@ export default {
     align-self: center;
     background: none;
     border: none;
-    padding: 0;
     margin: 0;
     height: auto;
     box-shadow: none;
-    min-width: 9em;
+    min-width: 7em;
     flex: 1;
+  }
+  .input-number {
+    align-self: center;
+    margin: 0;
+    min-width: 4em;
+    flex: 0;
   }
 }
 </style>

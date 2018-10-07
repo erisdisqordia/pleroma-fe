@@ -17,7 +17,6 @@ export default {
       bgOpacityLocal: undefined,
 
       fgColorLocal: '',
-      fgOpacityLocal: undefined,
       fgTextColorLocal: undefined,
       fgLinkColorLocal: undefined,
 
@@ -37,7 +36,6 @@ export default {
       topBarColorLocal: undefined,
       topBarTextColorLocal: undefined,
       topBarLinkColorLocal: undefined,
-      topBarOpacityLocal: undefined,
 
       alertOpacityLocal: undefined,
 
@@ -112,6 +110,15 @@ export default {
           cGreen: this.cGreenColorLocal,
           cOrange: this.cOrangeColorLocal
         },
+        opacity: {
+          bg: this.bgOpacityLocal,
+          btn: this.btnOpacityLocal,
+          input: this.inputOpacityLocal,
+          panel: this.panelOpacityLocal,
+          topBar: this.topBarOpacityLocal,
+          border: this.borderOpacityLocal,
+          faint: this.faintOpacityLocal
+        },
         radii: {
           btnRadius: this.btnRadiusLocal,
           inputRadius: this.inputRadiusLocal,
@@ -136,8 +143,7 @@ export default {
       }
     },
     previewTheme () {
-      if (!this.preview.theme) return { colors: {}, radii: {} }
-      console.log(this.preview.theme)
+      if (!this.preview.theme) return { colors: {}, opacity: {}, radii: {} }
       return this.preview.theme
     },
     previewRules () {
@@ -226,7 +232,6 @@ export default {
     clearV1 () {
       this.bgOpacityLocal = undefined
       this.fgOpacityLocal = undefined
-      this.fgTextColorLocal = undefined
       this.fgLinkColorLocal = undefined
 
       this.btnColorLocal = undefined
@@ -239,14 +244,13 @@ export default {
 
       this.panelColorLocal = undefined
       this.panelTextColorLocal = undefined
+      this.panelFaintColorLocal = undefined
       this.panelOpacityLocal = undefined
 
       this.topBarColorLocal = undefined
       this.topBarTextColorLocal = undefined
       this.topBarLinkColorLocal = undefined
       this.topBarOpacityLocal = undefined
-
-      this.alertOpacityLocal = undefined
 
       this.borderColorLocal = undefined
       this.borderOpacityLocal = undefined
@@ -264,6 +268,7 @@ export default {
     normalizeLocalState (input, version = 0) {
       const colors = input.colors || input
       const radii = input.radii || input
+      const opacity = input.opacity || input
 
       if (version === 0) {
         if (input.version) version = input.version
@@ -277,11 +282,8 @@ export default {
         }
       }
 
-      console.log('BENIS')
-      console.log(version)
       // Stuff that differs between V1 and V2
       if (version === 1) {
-        console.log(colors)
         this.fgColorLocal = rgb2hex(colors.btn)
         this.textColorLocal = rgb2hex(colors.fg)
       }
@@ -302,6 +304,7 @@ export default {
         this[key + 'ColorLocal'] = rgb2hex(colors[key])
       })
 
+      // TODO optimize this
       this.btnRadiusLocal = radii.btnRadius || 4
       this.inputRadiusLocal = radii.inputRadius || 4
       this.panelRadiusLocal = radii.panelRadius || 10
@@ -309,6 +312,11 @@ export default {
       this.avatarAltRadiusLocal = radii.avatarAltRadius || 50
       this.tooltipRadiusLocal = radii.tooltipRadius || 2
       this.attachmentRadiusLocal = radii.attachmentRadius || 5
+
+      Object.entries(opacity).forEach(([k, v]) => {
+        if (typeof v === 'undefined' || v === null || Number.isNaN(v)) return
+        this[k + 'OpacityLocal'] = v
+      })
     }
   },
   watch: {

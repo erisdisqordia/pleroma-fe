@@ -90,7 +90,6 @@ const setColors = (input, commit) => {
 }
 
 const generatePreset = (input) => {
-  console.log(input)
   const radii = input.radii || {
     btnRadius: input.btnRadius,
     inputRadius: input.inputRadius,
@@ -101,6 +100,12 @@ const generatePreset = (input) => {
     attachmentRadius: input.attachmentRadius
   }
   const colors = {}
+  const opacity = Object.assign({
+    alert: 0.5,
+    input: 0.5,
+    faint: 0.5
+  }, input.opacity)
+
   const col = Object.entries(input.colors || input).reduce((acc, [k, v]) => {
     if (typeof v === 'object') {
       acc[k] = v
@@ -110,11 +115,13 @@ const generatePreset = (input) => {
     return acc
   }, {})
 
+  const isLightOnDark = convert(col.bg).hsl.l < convert(col.text).hsl.l
+  const mod = isLightOnDark ? 1 : -1
+
   colors.text = col.text
-  colors.lightText = colors.text
+  colors.lightText = brightness(20 * mod, colors.text).rgb
   colors.link = col.link
-  colors.border = col.border || col.fg
-  colors.faint = col.faint || col.text
+  colors.faint = col.faint || Object.assign({}, col.text)
 
   colors.bg = col.bg
   colors.lightBg = col.lightBg || brightness(5, colors.bg).rgb
@@ -123,21 +130,23 @@ const generatePreset = (input) => {
   colors.fgText = col.fgText || getTextColor(colors.fg, colors.text)
   colors.fgLink = col.fgLink || getTextColor(colors.fg, colors.link)
 
-  colors.btn = col.btn || col.fg
+  colors.border = col.border || brightness(20 * mod, colors.fg).rgb
+
+  colors.btn = col.btn || Object.assign({}, col.fg)
   colors.btnText = col.btnText || getTextColor(colors.btn, colors.fgText)
 
-  colors.input = col.input || col.fg
-  colors.inputText = col.inputText || getTextColor(colors.input, colors.fgText)
+  colors.input = col.input || Object.assign({}, col.fg)
+  colors.inputText = col.inputText || getTextColor(colors.input, colors.lightText)
 
-  colors.panel = col.panel || col.fg
+  colors.panel = col.panel || Object.assign({}, col.fg)
   colors.panelText = col.panelText || getTextColor(colors.panel, colors.fgText)
   colors.panelFaint = col.panelFaint || getTextColor(colors.panel, colors.faint)
 
-  colors.topBar = col.topBar || col.fg
+  colors.topBar = col.topBar || Object.assign({}, col.fg)
   colors.topBarText = col.topBarText || getTextColor(colors.topBar, colors.fgText)
   colors.topBarLink = col.topBarLink || getTextColor(colors.topBar, colors.fgLink)
 
-  colors.faintLink = col.faintLink || col.link
+  colors.faintLink = col.faintLink || Object.assign({}, col.link)
 
   colors.icon = mixrgb(colors.bg, colors.text)
 
@@ -146,20 +155,35 @@ const generatePreset = (input) => {
   colors.cGreen = col.cGreen
   colors.cOrange = col.cOrange
 
-  colors.cAlertRed = col.cAlertRed || Object.assign({ a: 0.5 }, col.cRed)
+  colors.cAlertRed = col.cAlertRed || Object.assign({}, col.cRed)
+
+  Object.entries(opacity).forEach(([ k, v ]) => {
+    if (typeof v === 'undefined') return
+    if (k === 'alert') {
+      colors.cAlertRed.a = v
+      return
+    }
+    if (k === 'faint') {
+      colors[k + 'Link'].a = v
+      colors['panelFaint'].a = v
+    }
+    colors[k].a = v
+  })
 
   const htmlColors = Object.entries(colors)
         .reduce((acc, [k, v]) => {
           if (!v) return acc
-          acc[k] = typeof v.a === 'undefined' ? rgb2hex(v) : rgb2rgba(v)
+          acc.solid[k] = rgb2hex(v)
+          acc.complete[k] = typeof v.a === 'undefined' ? rgb2hex(v) : rgb2rgba(v)
           return acc
-        }, {})
+        }, { complete: {}, solid: {} })
 
   return {
-    colorRules: Object.entries(htmlColors).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}`).join(';'),
+    colorRules: Object.entries(htmlColors.complete).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}`).join(';'),
     radiiRules: Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';'),
     theme: {
-      colors: htmlColors,
+      colors: htmlColors.solid,
+      opacity,
       radii
     }
   }

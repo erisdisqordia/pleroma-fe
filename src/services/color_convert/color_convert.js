@@ -19,6 +19,42 @@ const rgb2hex = (r, g, b) => {
   return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`
 }
 
+// https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+// https://www.w3.org/TR/2008/REC-WCAG20-20081211/relative-luminance.xml
+// https://en.wikipedia.org/wiki/SRGB#The_reverse_transformation
+const c2linear = (b) => {
+  // W3C gives 0.03928 while wikipedia states 0.04045
+  // what those magical numbers mean - I don't know.
+  // something about gamma-correction, i suppose.
+  // Sticking with W3C example.
+  const c = b / 255
+  if (c < 0.03928) {
+    return c / 12.92
+  } else {
+    return Math.pow((c + 0.055) / 1.055, 2.4)
+  }
+}
+
+const srgbToLinear = (srgb) => {
+  return 'rgb'.split('').reduce((acc, c) => { acc[c] = c2linear(srgb[c]); return acc }, {})
+}
+
+// https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+// https://www.w3.org/TR/2008/REC-WCAG20-20081211/relative-luminance.xml
+const relativeLuminance = (srgb) => {
+  const {r, g, b} = srgbToLinear(srgb)
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b
+}
+
+// https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+const getContrastRatio = (a, b) => {
+  const la = relativeLuminance(a)
+  const lb = relativeLuminance(b)
+  const [l1, l2] = la > lb ? [la, lb] : [lb, la]
+
+  return (l1 + 0.05) / (l2 + 0.05)
+}
+
 const hex2rgb = (hex) => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
   return result ? {
@@ -47,5 +83,6 @@ export {
   rgb2hex,
   hex2rgb,
   mixrgb,
-  rgbstr2hex
+  rgbstr2hex,
+  getContrastRatio
 }

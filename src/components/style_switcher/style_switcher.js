@@ -1,5 +1,6 @@
-import { rgb2hex } from '../../services/color_convert/color_convert.js'
+import { rgb2hex, hex2rgb, getContrastRatio } from '../../services/color_convert/color_convert.js'
 import ColorInput from '../color_input/color_input.vue'
+import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
 import StyleSetter from '../../services/style_setter/style_setter.js'
 
@@ -127,7 +128,7 @@ export default {
           avatarAltRadius: this.avatarAltRadiusLocal,
           tooltipRadius: this.tooltipRadiusLocal,
           attachmentRadius: this.attachmentRadiusLocal
-        }
+        },
       }
     },
     preview () {
@@ -143,8 +144,35 @@ export default {
       }
     },
     previewTheme () {
-      if (!this.preview.theme) return { colors: {}, opacity: {}, radii: {} }
+      if (!this.preview.theme) return { colors: {}, opacity: {}, radii: {}, contrast: {} }
       return this.preview.theme
+    },
+    previewContrast () {
+      if (!this.previewTheme.colors) return {}
+      const colors = this.previewTheme.colors
+      const hints = (ratio) => ({
+        text: ratio.toPrecision(3) + ':1',
+        // AA level, AAA level
+        aa: ratio >= 4.5,
+        aaa: ratio >= 7,
+        // same but for 18pt+ texts
+        laa: ratio >= 3,
+        laaa: ratio >= 4.5
+      })
+
+      const ratios = {
+        bgText: getContrastRatio(hex2rgb(colors.bg), hex2rgb(colors.text)),
+        bgLink: getContrastRatio(hex2rgb(colors.bg), hex2rgb(colors.link)),
+
+        panelText: getContrastRatio(hex2rgb(colors.panel), hex2rgb(colors.panelText)),
+
+        btnText: getContrastRatio(hex2rgb(colors.btn), hex2rgb(colors.btnText)),
+
+        topBarText: getContrastRatio(hex2rgb(colors.topBar), hex2rgb(colors.topBarText)),
+        topBarLink: getContrastRatio(hex2rgb(colors.topBar), hex2rgb(colors.topBarLink)),
+      }
+
+      return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})
     },
     previewRules () {
       if (!this.preview.colorRules) return ''
@@ -153,7 +181,8 @@ export default {
   },
   components: {
     ColorInput,
-    OpacityInput
+    OpacityInput,
+    ContrastRatio
   },
   methods: {
     exportCurrentTheme () {

@@ -53,7 +53,9 @@
         <ColorInput name="bgColor" v-model="bgColorLocal" :label="$t('settings.background')"/>
         <OpacityInput name="bgOpacity" v-model="bgOpacityLocal" :fallback="previewTheme.opacity.bg || 1"/>
         <ColorInput name="textColor" v-model="textColorLocal" :label="$t('settings.text')"/>
+        <ContrastRatio :contrast="previewContrast.bgText"/>
         <ColorInput name="linkColor" v-model="linkColorLocal" :label="$t('settings.links')"/>
+        <ContrastRatio :contrast="previewContrast.bgLink"/>
       </div>
       <div class="color-item">
         <ColorInput name="fgColor" v-model="fgColorLocal" :label="$t('settings.foreground')"/>
@@ -81,13 +83,16 @@
         <ColorInput name="panelColor" v-model="panelColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
         <OpacityInput name="panelOpacity" v-model="panelOpacityLocal" :fallback="previewTheme.opacity.panel || 1"/>
         <ColorInput name="panelTextColor" v-model="panelTextColorLocal" :fallback="previewTheme.colors.panelText" :label="$t('settings.links')"/>
+        <ContrastRatio :contrast="previewContrast.panelText" large="1"/>
         <ColorInput name="panelFaintColor" v-model="panelFaintColorLocal" :fallback="previewTheme.colors.panelFaint" :label="$t('settings.faint')"/>
       </div>
       <div class="color-item">
         <h4>Top bar</h4>
         <ColorInput name="topBarColor" v-model="topBarColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
         <ColorInput name="topBarTextColor" v-model="topBarTextColorLocal" :fallback="previewTheme.colors.topBarText" :label="$t('settings.text')"/>
+        <ContrastRatio :contrast="previewContrast.topBarText"/>
         <ColorInput name="topBarLinkColor" v-model="topBarLinkColorLocal" :fallback="previewTheme.colors.topBarLink" :label="$t('settings.links')"/>
+        <ContrastRatio :contrast="previewContrast.topBarLink"/>
       </div>
       <div class="color-item">
         <h4>Inputs</h4>
@@ -100,6 +105,7 @@
         <ColorInput name="btnColor" v-model="btnColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
         <OpacityInput name="btnOpacity" v-model="btnOpacityLocal" :fallback="previewTheme.opacity.btn || 1"/>
         <ColorInput name="btnTextColor" v-model="btnTextColorLocal" :fallback="previewTheme.colors.btnText" :label="$t('settings.text')"/>
+        <ContrastRatio :contrast="previewContrast.btnText"/>
       </div>
       <div class="color-item">
         <h4>Borders</h4>

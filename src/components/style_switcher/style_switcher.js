@@ -1,4 +1,4 @@
-import { rgb2hex, hex2rgb, getContrastRatio } from '../../services/color_convert/color_convert.js'
+import { rgb2hex, hex2rgb, getContrastRatio, worstCase } from '../../services/color_convert/color_convert.js'
 import ColorInput from '../color_input/color_input.vue'
 import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
@@ -144,12 +144,13 @@ export default {
       }
     },
     previewTheme () {
-      if (!this.preview.theme) return { colors: {}, opacity: {}, radii: {}, contrast: {} }
+      if (!this.preview.theme) return { colors: {}, opacity: {}, radii: {} }
       return this.preview.theme
     },
     previewContrast () {
       if (!this.previewTheme.colors) return {}
       const colors = this.previewTheme.colors
+      const opacity = this.previewTheme.opacity
       const hints = (ratio) => ({
         text: ratio.toPrecision(3) + ':1',
         // AA level, AAA level
@@ -160,16 +161,37 @@ export default {
         laaa: ratio >= 4.5
       })
 
+      // fgsfds :DDDD
+      const fgs = {
+        text: hex2rgb(colors.text),
+        panelText: hex2rgb(colors.panelText),
+        btnText: hex2rgb(colors.btnText),
+        topBarText: hex2rgb(colors.topBarText),
+
+        link: hex2rgb(colors.link),
+        topBarLink: hex2rgb(colors.topBarLink),
+      }
+
+      const bgs = {
+        bg: hex2rgb(colors.bg),
+        btn: hex2rgb(colors.btn),
+        panel: hex2rgb(colors.panel),
+        topBar: hex2rgb(colors.topBar)
+      }
+
       const ratios = {
-        bgText: getContrastRatio(hex2rgb(colors.bg), hex2rgb(colors.text)),
-        bgLink: getContrastRatio(hex2rgb(colors.bg), hex2rgb(colors.link)),
+        bgText: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.text), fgs.text),
+        bgLink: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.link), fgs.link),
 
-        panelText: getContrastRatio(hex2rgb(colors.panel), hex2rgb(colors.panelText)),
+        // User Profile
+        tintText: getContrastRatio(worstCase(bgs.bg, 0.5, fgs.panelText), fgs.text),
 
-        btnText: getContrastRatio(hex2rgb(colors.btn), hex2rgb(colors.btnText)),
+        panelText: getContrastRatio(worstCase(bgs.panel, opacity.panel, fgs.panelText), fgs.panelText),
 
-        topBarText: getContrastRatio(hex2rgb(colors.topBar), hex2rgb(colors.topBarText)),
-        topBarLink: getContrastRatio(hex2rgb(colors.topBar), hex2rgb(colors.topBarLink)),
+        btnText: getContrastRatio(worstCase(bgs.btn, opacity.btn, fgs.btnText), fgs.btnText),
+
+        topBarText: getContrastRatio(worstCase(bgs.topBar, opacity.topBar, fgs.topBarText), fgs.topBarText),
+        topBarLink: getContrastRatio(worstCase(bgs.topBar, opacity.topBar, fgs.topBarLink), fgs.topBarLink)
       }
 
       return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})

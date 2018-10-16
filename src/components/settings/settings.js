@@ -16,11 +16,11 @@ const settings = {
       hidePostStatsLocal: typeof user.hidePostStats === 'undefined'
         ? instance.hidePostStats
         : user.hidePostStats,
-      hidePostStatsDefault : this.$t('settings.values.' + instance.hidePostStats),
+      hidePostStatsDefault: this.$t('settings.values.' + instance.hidePostStats),
       hideUserStatsLocal: typeof user.hideUserStats === 'undefined'
         ? instance.hideUserStats
         : user.hideUserStats,
-      hideUserStatsDefault : this.$t('settings.values.' + instance.hideUserStats),
+      hideUserStatsDefault: this.$t('settings.values.' + instance.hideUserStats),
       notificationVisibilityLocal: user.notificationVisibility,
       replyVisibilityLocal: user.replyVisibility,
       loopVideoLocal: user.loopVideo,

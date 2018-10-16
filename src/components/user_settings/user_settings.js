@@ -7,6 +7,7 @@ const UserSettings = {
       newname: this.$store.state.users.currentUser.name,
       newbio: this.$store.state.users.currentUser.description,
       newlocked: this.$store.state.users.currentUser.locked,
+      newnorichtext: this.$store.state.users.currentUser.no_rich_text,
       newdefaultScope: this.$store.state.users.currentUser.default_scope,
       followList: null,
       followImportError: false,
@@ -32,10 +33,10 @@ const UserSettings = {
       return this.$store.state.users.currentUser
     },
     pleromaBackend () {
-      return this.$store.state.config.pleromaBackend
+      return this.$store.state.instance.pleromaBackend
     },
     scopeOptionsEnabled () {
-      return this.$store.state.config.scopeOptionsEnabled
+      return this.$store.state.instance.scopeOptionsEnabled
     },
     vis () {
       return {
@@ -53,7 +54,8 @@ const UserSettings = {
       const locked = this.newlocked
       /* eslint-disable camelcase */
       const default_scope = this.newdefaultScope
-      this.$store.state.api.backendInteractor.updateProfile({params: {name, description, locked, default_scope}}).then((user) => {
+      const no_rich_text = this.newnorichtext
+      this.$store.state.api.backendInteractor.updateProfile({params: {name, description, locked, default_scope, no_rich_text}}).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)

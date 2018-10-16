@@ -14,6 +14,8 @@ import Registration from './components/registration/registration.vue'
 import UserSettings from './components/user_settings/user_settings.vue'
 import FollowRequests from './components/follow_requests/follow_requests.vue'
 
+import interfaceModule from './modules/interface.js'
+import instanceModule from './modules/instance.js'
 import statusesModule from './modules/statuses.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
@@ -45,25 +47,7 @@ Vue.use(VueChatScroll)
 
 const persistedStateOptions = {
   paths: [
-    'config.collapseMessageWithSubject',
-    'config.hideAttachments',
-    'config.hideAttachmentsInConv',
-    'config.hidePostStats',
-    'config.hideUserStats',
-    'config.hideNsfw',
-    'config.replyVisibility',
-    'config.notificationVisibility',
-    'config.autoLoad',
-    'config.hoverPreview',
-    'config.streaming',
-    'config.muteWords',
-    'config.customTheme',
-    'config.highlight',
-    'config.loopVideo',
-    'config.loopVideoSilentOnly',
-    'config.pauseOnUnfocused',
-    'config.stopGifs',
-    'config.interfaceLanguage',
+    'config',
     'users.lastLoginName',
     'statuses.notifications.maxSavedId'
   ]
@@ -71,6 +55,8 @@ const persistedStateOptions = {
 
 const store = new Vuex.Store({
   modules: {
+    interface: interfaceModule,
+    instance: instanceModule,
     statuses: statusesModule,
     users: usersModule,
     api: apiModule,
@@ -94,102 +80,104 @@ window.fetch('/api/statusnet/config.json')
   .then((data) => {
     const {name, closed: registrationClosed, textlimit, server} = data.site
 
-    store.dispatch('setOption', { name: 'name', value: name })
-    store.dispatch('setOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
-    store.dispatch('setOption', { name: 'textlimit', value: parseInt(textlimit) })
-    store.dispatch('setOption', { name: 'server', value: server })
+    store.dispatch('setInstanceOption', { name: 'name', value: name })
+    store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
+    store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
+    store.dispatch('setInstanceOption', { name: 'server', value: server })
 
     var apiConfig = data.site.pleromafe
 
     window.fetch('/static/config.json')
-    .then((res) => res.json())
-    .then((data) => {
-      var staticConfig = data
-      // This takes static config and overrides properties that are present in apiConfig
-      var config = Object.assign({}, staticConfig, apiConfig)
+      .then((res) => res.json())
+      .catch((err) => {
+        console.warn('Failed to load static/config.json, continuing without it.')
+        console.warn(err)
+        return {}
+      })
+      .then((staticConfig) => {
+        // This takes static config and overrides properties that are present in apiConfig
+        var config = Object.assign({}, staticConfig, apiConfig)
 
-      var theme = (config.theme)
-      var background = (config.background)
-      var logo = (config.logo)
-      var logoMask = (typeof config.logoMask === 'undefined' ? true : config.logoMask)
-      var logoMargin = (typeof config.logoMargin === 'undefined' ? 0 : config.logoMargin)
-      var redirectRootNoLogin = (config.redirectRootNoLogin)
-      var redirectRootLogin = (config.redirectRootLogin)
-      var chatDisabled = (config.chatDisabled)
-      var showWhoToFollowPanel = (config.showWhoToFollowPanel)
-      var whoToFollowProvider = (config.whoToFollowProvider)
-      var whoToFollowLink = (config.whoToFollowLink)
-      var showInstanceSpecificPanel = (config.showInstanceSpecificPanel)
-      var scopeOptionsEnabled = (config.scopeOptionsEnabled)
-      var formattingOptionsEnabled = (config.formattingOptionsEnabled)
-      var collapseMessageWithSubject = (config.collapseMessageWithSubject)
-      var hidePostStats = (config.hidePostStats)
-      var hideUserStats = (config.hideUserStats)
+        var theme = (config.theme)
+        var background = (config.background)
+        var hidePostStats = (config.hidePostStats)
+        var hideUserStats = (config.hideUserStats)
+        var logo = (config.logo)
+        var logoMask = (typeof config.logoMask === 'undefined' ? true : config.logoMask)
+        var logoMargin = (typeof config.logoMargin === 'undefined' ? 0 : config.logoMargin)
+        var redirectRootNoLogin = (config.redirectRootNoLogin)
+        var redirectRootLogin = (config.redirectRootLogin)
+        var chatDisabled = (config.chatDisabled)
+        var showInstanceSpecificPanel = (config.showInstanceSpecificPanel)
+        var scopeOptionsEnabled = (config.scopeOptionsEnabled)
+        var formattingOptionsEnabled = (config.formattingOptionsEnabled)
+        var collapseMessageWithSubject = (config.collapseMessageWithSubject)
 
-      store.dispatch('setOption', { name: 'theme', value: theme })
-      store.dispatch('setOption', { name: 'background', value: background })
-      store.dispatch('setOption', { name: 'logo', value: logo })
-      store.dispatch('setOption', { name: 'logoMask', value: logoMask })
-      store.dispatch('setOption', { name: 'logoMargin', value: logoMargin })
-      store.dispatch('setOption', { name: 'showWhoToFollowPanel', value: showWhoToFollowPanel })
-      store.dispatch('setOption', { name: 'whoToFollowProvider', value: whoToFollowProvider })
-      store.dispatch('setOption', { name: 'whoToFollowLink', value: whoToFollowLink })
-      store.dispatch('setOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
-      store.dispatch('setOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
-      store.dispatch('setOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
-      store.dispatch('setOption', { name: 'collapseMessageWithSubject', value: collapseMessageWithSubject })
-      store.dispatch('setOption', { name: 'hidePostStats', value: hidePostStats })
-      store.dispatch('setOption', { name: 'hideUserStats', value: hideUserStats })
-      if (chatDisabled) {
-        store.dispatch('disableChat')
-      }
-
-      const routes = [
-        { name: 'root',
-          path: '/',
-          redirect: to => {
-            return (store.state.users.currentUser ? redirectRootLogin : redirectRootNoLogin) || '/main/all'
-          }},
-        { path: '/main/all', component: PublicAndExternalTimeline },
-        { path: '/main/public', component: PublicTimeline },
-        { path: '/main/friends', component: FriendsTimeline },
-        { path: '/tag/:tag', component: TagTimeline },
-        { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
-        { name: 'user-profile', path: '/users/:id', component: UserProfile },
-        { name: 'mentions', path: '/:username/mentions', component: Mentions },
-        { name: 'settings', path: '/settings', component: Settings },
-        { name: 'registration', path: '/registration', component: Registration },
-        { name: 'registration', path: '/registration/:token', component: Registration },
-        { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
-        { name: 'user-settings', path: '/user-settings', component: UserSettings }
-      ]
-
-      const router = new VueRouter({
-        mode: 'history',
-        routes,
-        scrollBehavior: (to, from, savedPosition) => {
-          if (to.matched.some(m => m.meta.dontScroll)) {
-            return false
-          }
-          return savedPosition || { x: 0, y: 0 }
+        store.dispatch('setInstanceOption', { name: 'theme', value: theme })
+        store.dispatch('setInstanceOption', { name: 'background', value: background })
+        store.dispatch('setInstanceOption', { name: 'hidePostStats', value: hidePostStats })
+        store.dispatch('setInstanceOption', { name: 'hideUserStats', value: hideUserStats })
+        store.dispatch('setInstanceOption', { name: 'logo', value: logo })
+        store.dispatch('setInstanceOption', { name: 'logoMask', value: logoMask })
+        store.dispatch('setInstanceOption', { name: 'logoMargin', value: logoMargin })
+        store.dispatch('setInstanceOption', { name: 'redirectRootNoLogin', value: redirectRootNoLogin })
+        store.dispatch('setInstanceOption', { name: 'redirectRootLogin', value: redirectRootLogin })
+        store.dispatch('setInstanceOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
+        store.dispatch('setInstanceOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
+        store.dispatch('setInstanceOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
+        store.dispatch('setInstanceOption', { name: 'collapseMessageWithSubject', value: collapseMessageWithSubject })
+        if (chatDisabled) {
+          store.dispatch('disableChat')
         }
-      })
 
-      /* eslint-disable no-new */
-      new Vue({
-        router,
-        store,
-        i18n,
-        el: '#app',
-        render: h => h(App)
+        const routes = [
+          { name: 'root',
+            path: '/',
+            redirect: to => {
+              return (store.state.users.currentUser
+                      ? store.state.instance.redirectRootLogin
+                      : store.state.instance.redirectRootNoLogin) || '/main/all'
+            }},
+          { path: '/main/all', component: PublicAndExternalTimeline },
+          { path: '/main/public', component: PublicTimeline },
+          { path: '/main/friends', component: FriendsTimeline },
+          { path: '/tag/:tag', component: TagTimeline },
+          { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
+          { name: 'user-profile', path: '/users/:id', component: UserProfile },
+          { name: 'mentions', path: '/:username/mentions', component: Mentions },
+          { name: 'settings', path: '/settings', component: Settings },
+          { name: 'registration', path: '/registration', component: Registration },
+          { name: 'registration', path: '/registration/:token', component: Registration },
+          { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
+          { name: 'user-settings', path: '/user-settings', component: UserSettings }
+        ]
+
+        const router = new VueRouter({
+          mode: 'history',
+          routes,
+          scrollBehavior: (to, from, savedPosition) => {
+            if (to.matched.some(m => m.meta.dontScroll)) {
+              return false
+            }
+            return savedPosition || { x: 0, y: 0 }
+          }
+        })
+
+        /* eslint-disable no-new */
+        new Vue({
+          router,
+          store,
+          i18n,
+          el: '#app',
+          render: h => h(App)
+        })
       })
-    })
   })
 
 window.fetch('/static/terms-of-service.html')
   .then((res) => res.text())
   .then((html) => {
-    store.dispatch('setOption', { name: 'tos', value: html })
+    store.dispatch('setInstanceOption', { name: 'tos', value: html })
   })
 
 window.fetch('/api/pleroma/emoji.json')
@@ -200,11 +188,11 @@ window.fetch('/api/pleroma/emoji.json')
           const emoji = Object.keys(values).map((key) => {
             return { shortcode: key, image_url: values[key] }
           })
-          store.dispatch('setOption', { name: 'customEmoji', value: emoji })
-          store.dispatch('setOption', { name: 'pleromaBackend', value: true })
+          store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
+          store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })
         },
         (failure) => {
-          store.dispatch('setOption', { name: 'pleromaBackend', value: false })
+          store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: false })
         }
       ),
     (error) => console.log(error)
@@ -216,19 +204,24 @@ window.fetch('/static/emoji.json')
     const emoji = Object.keys(values).map((key) => {
       return { shortcode: key, image_url: false, 'utf': values[key] }
     })
-    store.dispatch('setOption', { name: 'emoji', value: emoji })
+    store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
   })
 
 window.fetch('/instance/panel.html')
   .then((res) => res.text())
   .then((html) => {
-    store.dispatch('setOption', { name: 'instanceSpecificPanelContent', value: html })
+    store.dispatch('setInstanceOption', { name: 'instanceSpecificPanelContent', value: html })
   })
 
 window.fetch('/nodeinfo/2.0.json')
   .then((res) => res.json())
   .then((data) => {
-    const suggestions = data.metadata.suggestions
-    store.dispatch('setOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
-    store.dispatch('setOption', { name: 'suggestionsWeb', value: suggestions.web })
+    const metadata = data.metadata
+    store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: data.metadata.mediaProxy })
+    store.dispatch('setInstanceOption', { name: 'chatAvailable', value: data.metadata.chat })
+    store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: data.metadata.gopher })
+
+    const suggestions = metadata.suggestions
+    store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
+    store.dispatch('setInstanceOption', { name: 'suggestionsWeb', value: suggestions.web })
   })

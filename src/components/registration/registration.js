@@ -5,16 +5,16 @@ const registration = {
     registering: false
   }),
   created () {
-    if ((!this.$store.state.config.registrationOpen && !this.token) || !!this.$store.state.users.currentUser) {
+    if ((!this.$store.state.instance.registrationOpen && !this.token) || !!this.$store.state.users.currentUser) {
       this.$router.push('/main/all')
     }
     // Seems like this doesn't work at first page open for some reason
-    if (this.$store.state.config.registrationOpen && this.token) {
+    if (this.$store.state.instance.registrationOpen && this.token) {
       this.$router.push('/registration')
     }
   },
   computed: {
-    termsofservice () { return this.$store.state.config.tos },
+    termsofservice () { return this.$store.state.instance.tos },
     token () { return this.$route.params.token }
   },
   methods: {

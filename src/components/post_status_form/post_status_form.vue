@@ -90,8 +90,7 @@
       </div>
       <div class="upload_settings" v-if="newStatus.files.length > 0">
         <input type="checkbox" id="filesSensitive" v-model="newStatus.nsfw">
-        <label for="filesSensitive" v-if="newStatus.nsfw">{{$t('post_status.attachments_sensitive')}}</label>
-        <label for="filesSensitive" v-else v-html="$t('post_status.attachments_not_sensitive')"></label>
+        <label for="filesSensitive">{{$t('post_status.attachments_sensitive')}}</label>
       </div>
     </form>
   </div>

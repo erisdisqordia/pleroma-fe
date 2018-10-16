@@ -1,0 +1,117 @@
+{
+  "chat": {
+    "title": "Chat"
+  },
+  "finder": {
+    "error_fetching_user": "Erro procurando usuário",
+    "find_user": "Buscar usuário"
+  },
+  "general": {
+    "apply": "Aplicar",
+    "submit": "Enviar"
+  },
+  "login": {
+    "login": "Entrar",
+    "logout": "Sair",
+    "password": "Senha",
+    "placeholder": "p.e. lain",
+    "register": "Registrar",
+    "username": "Usuário"
+  },
+  "nav": {
+    "chat": "Chat local",
+    "mentions": "Menções",
+    "public_tl": "Linha do tempo pública",
+    "timeline": "Linha do tempo",
+    "twkn": "Toda a rede conhecida"
+  },
+  "notifications": {
+    "favorited_you": "favoritou sua postagem",
+    "followed_you": "seguiu você",
+    "notifications": "Notificações",
+    "read": "Lido!",
+    "repeated_you": "repetiu sua postagem"
+  },
+  "post_status": {
+    "default": "Acabei de chegar no Rio!",
+    "posting": "Publicando"
+  },
+  "registration": {
+    "bio": "Biografia",
+    "email": "Correio eletrônico",
+    "fullname": "Nome para exibição",
+    "password_confirm": "Confirmação de senha",
+    "registration": "Registro"
+  },
+  "settings": {
+    "attachmentRadius": "Anexos",
+    "attachments": "Anexos",
+    "autoload": "Habilitar carregamento automático quando a rolagem chegar ao fim.",
+    "avatar": "Avatar",
+    "avatarAltRadius": "Avatares (Notificações)",
+    "avatarRadius": "Avatares",
+    "background": "Plano de Fundo",
+    "bio": "Biografia",
+    "btnRadius": "Botões",
+    "cBlue": "Azul (Responder, seguir)",
+    "cGreen": "Verde (Repetir)",
+    "cOrange": "Laranja (Favoritar)",
+    "cRed": "Vermelho (Cancelar)",
+    "current_avatar": "Seu avatar atual",
+    "current_profile_banner": "Sua capa de perfil atual",
+    "filtering": "Filtragem",
+    "filtering_explanation": "Todas as postagens contendo estas palavras serão silenciadas, uma por linha.",
+    "follow_import": "Importar seguidas",
+    "follow_import_error": "Erro ao importar seguidores",
+    "follows_imported": "Seguidores importados! O processamento pode demorar um pouco.",
+    "foreground": "Primeiro Plano",
+    "hide_attachments_in_convo": "Ocultar anexos em conversas",
+    "hide_attachments_in_tl": "Ocultar anexos na linha do tempo.",
+    "import_followers_from_a_csv_file": "Importe seguidores a partir de um arquivo CSV",
+    "links": "Links",
+    "name": "Nome",
+    "name_bio": "Nome & Biografia",
+    "nsfw_clickthrough": "Habilitar clique para ocultar anexos NSFW",
+    "panelRadius": "Paineis",
+    "presets": "Predefinições",
+    "profile_background": "Plano de fundo de perfil",
+    "profile_banner": "Capa de perfil",
+    "radii_help": "Arredondar arestas da interface (em píxeis)",
+    "reply_link_preview": "Habilitar a pré-visualização de link de respostas ao passar o mouse.",
+    "set_new_avatar": "Alterar avatar",
+    "set_new_profile_background": "Alterar o plano de fundo de perfil",
+    "set_new_profile_banner": "Alterar capa de perfil",
+    "settings": "Configurações",
+    "stop_gifs": "Reproduzir GIFs ao passar o cursor em cima",
+    "streaming": "Habilitar o fluxo automático de postagens quando ao topo da página",
+    "text": "Texto",
+    "theme": "Tema",
+    "theme_help": "Use cores em código hexadecimal (#rrggbb) para personalizar seu esquema de cores.",
+    "tooltipRadius": "Dicass/alertas",
+    "user_settings": "Configurações de Usuário"
+  },
+  "timeline": {
+    "conversation": "Conversa",
+    "error_fetching": "Erro buscando atualizações",
+    "load_older": "Carregar postagens antigas",
+    "show_new": "Mostrar novas",
+    "up_to_date": "Atualizado"
+  },
+  "user_card": {
+    "block": "Bloquear",
+    "blocked": "Bloqueado!",
+    "follow": "Seguir",
+    "followees": "Seguindo",
+    "followers": "Seguidores",
+    "following": "Seguindo!",
+    "follows_you": "Segue você!",
+    "mute": "Silenciar",
+    "muted": "Silenciado",
+    "per_day": "por dia",
+    "remote_follow": "Seguidor Remoto",
+    "statuses": "Postagens"
+  },
+  "user_profile": {
+    "timeline_title": "Linha do tempo do usuário"
+  }
+}

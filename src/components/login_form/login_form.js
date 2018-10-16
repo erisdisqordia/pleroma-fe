@@ -5,7 +5,7 @@ const LoginForm = {
   }),
   computed: {
     loggingIn () { return this.$store.state.users.loggingIn },
-    registrationOpen () { return this.$store.state.config.registrationOpen }
+    registrationOpen () { return this.$store.state.instance.registrationOpen }
   },
   methods: {
     submit () {

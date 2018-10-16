@@ -1,0 +1,100 @@
+{
+  "chat": {
+    "title": "Chat"
+  },
+  "finder": {
+    "error_fetching_user": "Error al buscar usuario",
+    "find_user": "Encontrar usuario"
+  },
+  "general": {
+    "apply": "Aplicar",
+    "submit": "Enviar"
+  },
+  "login": {
+    "login": "Identificación",
+    "logout": "Salir",
+    "password": "Contraseña",
+    "placeholder": "p.ej. lain",
+    "register": "Registrar",
+    "username": "Usuario"
+  },
+  "nav": {
+    "chat": "Chat Local",
+    "mentions": "Menciones",
+    "public_tl": "Línea Temporal Pública",
+    "timeline": "Línea Temporal",
+    "twkn": "Toda La Red Conocida"
+  },
+  "notifications": {
+    "followed_you": "empezó a seguirte",
+    "notifications": "Notificaciones",
+    "read": "¡Leído!"
+  },
+  "post_status": {
+    "default": "Acabo de aterrizar en L.A.",
+    "posting": "Publicando"
+  },
+  "registration": {
+    "bio": "Biografía",
+    "email": "Correo electrónico",
+    "fullname": "Nombre a mostrar",
+    "password_confirm": "Confirmación de contraseña",
+    "registration": "Registro"
+  },
+  "settings": {
+    "attachments": "Adjuntos",
+    "autoload": "Activar carga automática al llegar al final de la página",
+    "avatar": "Avatar",
+    "background": "Segundo plano",
+    "bio": "Biografía",
+    "current_avatar": "Tu avatar actual",
+    "current_profile_banner": "Cabecera actual",
+    "filtering": "Filtros",
+    "filtering_explanation": "Todos los estados que contengan estas palabras serán silenciados, una por línea",
+    "follow_import": "Importar personas que tú sigues",
+    "follow_import_error": "Error al importal el archivo",
+    "follows_imported": "¡Importado! Procesarlos llevará tiempo.",
+    "foreground": "Primer plano",
+    "hide_attachments_in_convo": "Ocultar adjuntos en las conversaciones",
+    "hide_attachments_in_tl": "Ocultar adjuntos en la línea temporal",
+    "import_followers_from_a_csv_file": "Importar personas que tú sigues apartir de un archivo csv",
+    "links": "Links",
+    "name": "Nombre",
+    "name_bio": "Nombre y Biografía",
+    "nsfw_clickthrough": "Activar el clic para ocultar los adjuntos NSFW",
+    "presets": "Por defecto",
+    "profile_background": "Fondo del Perfil",
+    "profile_banner": "Cabecera del perfil",
+    "reply_link_preview": "Activar la previsualización del enlace de responder al pasar el ratón por encima",
+    "set_new_avatar": "Cambiar avatar",
+    "set_new_profile_background": "Cambiar fondo del perfil",
+    "set_new_profile_banner": "Cambiar cabecera",
+    "settings": "Ajustes",
+    "streaming": "Habilite la transmisión automática de nuevas publicaciones cuando se desplaza hacia la parte superior",
+    "text": "Texto",
+    "theme": "Tema",
+    "theme_help": "Use códigos de color hexadecimales (#rrggbb) para personalizar su tema de colores.",
+    "user_settings": "Ajustes de Usuario"
+  },
+  "timeline": {
+    "conversation": "Conversación",
+    "error_fetching": "Error al cargar las actualizaciones",
+    "load_older": "Cargar actualizaciones anteriores",
+    "show_new": "Mostrar lo nuevo",
+    "up_to_date": "Actualizado"
+  },
+  "user_card": {
+    "block": "Bloquear",
+    "blocked": "¡Bloqueado!",
+    "follow": "Seguir",
+    "followees": "Siguiendo",
+    "followers": "Seguidores",
+    "following": "¡Siguiendo!",
+    "follows_you": "¡Te sigue!",
+    "mute": "Silenciar",
+    "muted": "Silenciado",
+    "per_day": "por día",
+    "remote_follow": "Seguir",
+    "statuses": "Estados"
+  }
+}

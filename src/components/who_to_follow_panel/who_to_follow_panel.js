@@ -3,9 +3,10 @@ import apiService from '../../services/api/api.service.js'
 function showWhoToFollow (panel, reply) {
   var users = reply
   var cn
-  var index = 0
-  var random = Math.floor(Math.random() * 10)
-  for (cn = random; cn < users.length; cn = cn + 10) {
+  var index
+  var step = 7
+  cn = Math.floor(Math.random() * step)
+  for (index = 0; index < 3; index++) {
     var user
     user = users[cn]
     var img
@@ -46,10 +47,7 @@ function showWhoToFollow (panel, reply) {
           }
         })
     }
-    index = index + 1
-    if (index > 2) {
-      break
-    }
+    cn = (cn + step) % users.length
   }
 }
 
@@ -85,14 +83,14 @@ const WhoToFollowPanel = {
     moreUrl: function () {
       var host = window.location.hostname
       var user = this.user
-      var suggestionsWeb = this.$store.state.config.suggestionsWeb
+      var suggestionsWeb = this.$store.state.instance.suggestionsWeb
       var url
       url = suggestionsWeb.replace(/{{host}}/g, encodeURIComponent(host))
       url = url.replace(/{{user}}/g, encodeURIComponent(user))
       return url
     },
     suggestionsEnabled () {
-      return this.$store.state.config.suggestionsEnabled
+      return this.$store.state.instance.suggestionsEnabled
     }
   },
   watch: {

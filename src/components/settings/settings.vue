@@ -1,7 +1,21 @@
 <template>
 <div class="settings panel panel-default">
   <div class="panel-heading">
-    {{$t('settings.settings')}}
+    <div class="title">
+      {{$t('settings.settings')}}
+    </div>
+
+    <transition name="fade">
+      <template v-if="currentSaveStateNotice">
+        <div @click.prevent class="alert error" v-if="currentSaveStateNotice.error">
+          {{ $t('settings.saving_err') }}
+        </div>
+
+        <div @click.prevent class="alert transparent" v-if="!currentSaveStateNotice.error">
+          {{ $t('settings.saving_ok') }}
+        </div>
+    </template>
+    </transition>
   </div>
   <div class="panel-body">
     <tab-switcher>
@@ -15,7 +29,9 @@
           <ul class="setting-list">
             <li>
               <input type="checkbox" id="collapseMessageWithSubject" v-model="collapseMessageWithSubjectLocal">
-              <label for="collapseMessageWithSubject">{{$t('settings.collapse_subject')}}</label>
+              <label for="collapseMessageWithSubject">
+                {{$t('settings.collapse_subject')}} {{$t('settings.instance_default', { value: collapseMessageWithSubjectDefault })}}
+              </label>
             </li>
             <li>
               <input type="checkbox" id="streaming" v-model="streamingLocal">
@@ -124,11 +140,15 @@
           </div>
           <div>
             <input type="checkbox" id="hidePostStats" v-model="hidePostStatsLocal">
-            <label for="hidePostStats">{{$t('settings.hide_post_stats')}}</label>
+            <label for="hidePostStats">
+              {{$t('settings.hide_post_stats')}} {{$t('settings.instance_default', { value: hidePostStatsDefault })}}
+            </label>
           </div>
           <div>
             <input type="checkbox" id="hideUserStats" v-model="hideUserStatsLocal">
-            <label for="hideUserStats">{{$t('settings.hide_user_stats')}}</label>
+            <label for="hideUserStats">
+              {{$t('settings.hide_user_stats')}} {{$t('settings.instance_default', { value: hideUserStatsDefault })}}
+            </label>
           </div>
         </div>
         <div class="setting-item">

@@ -5,7 +5,9 @@ export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio' ],
   data () {
     return {
-      hideUserStatsLocal: this.$store.state.config.hideUserStats
+      hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
+        ? this.$store.state.instance.hideUserStats
+        : this.$store.state.config.hideUserStats
     }
   },
   computed: {

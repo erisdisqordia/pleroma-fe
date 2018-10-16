@@ -75,8 +75,11 @@ const PostStatusForm = {
     candidates () {
       const firstchar = this.textAtCaret.charAt(0)
       if (firstchar === '@') {
-        const matchedUsers = filter(this.users, (user) => (String(user.name + user.screen_name)).toUpperCase()
-            .startsWith(this.textAtCaret.slice(1).toUpperCase()))
+        const query = this.textAtCaret.slice(1).toUpperCase()
+        const matchedUsers = filter(this.users, (user) => {
+          return user.screen_name.toUpperCase().startsWith(query) ||
+            user.name && user.name.toUpperCase().startsWith(query)
+        })
         if (matchedUsers.length <= 0) {
           return false
         }
@@ -99,7 +102,7 @@ const PostStatusForm = {
           name: '',
           utf: utf || '',
           // eslint-disable-next-line camelcase
-          img: utf ? '' : this.$store.state.config.server + image_url,
+          img: utf ? '' : this.$store.state.instance.server + image_url,
           highlighted: index === this.highlighted
         }))
       } else {
@@ -117,16 +120,16 @@ const PostStatusForm = {
       return this.$store.state.users.users
     },
     emoji () {
-      return this.$store.state.config.emoji || []
+      return this.$store.state.instance.emoji || []
     },
     customEmoji () {
-      return this.$store.state.config.customEmoji || []
+      return this.$store.state.instance.customEmoji || []
     },
     statusLength () {
       return this.newStatus.status.length
     },
     statusLengthLimit () {
-      return this.$store.state.config.textlimit
+      return this.$store.state.instance.textlimit
     },
     hasStatusLengthLimit () {
       return this.statusLengthLimit > 0
@@ -138,10 +141,10 @@ const PostStatusForm = {
       return this.hasStatusLengthLimit && (this.statusLength > this.statusLengthLimit)
     },
     scopeOptionsEnabled () {
-      return this.$store.state.config.scopeOptionsEnabled
+      return this.$store.state.instance.scopeOptionsEnabled
     },
     formattingOptionsEnabled () {
-      return this.$store.state.config.formattingOptionsEnabled
+      return this.$store.state.instance.formattingOptionsEnabled
     }
   },
   methods: {

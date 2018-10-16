@@ -6,23 +6,35 @@ import { filter, trim } from 'lodash'
 
 const settings = {
   data () {
+    const user = this.$store.state.config
+    const instance = this.$store.state.instance
+
     return {
-      hideAttachmentsLocal: this.$store.state.config.hideAttachments,
-      hideAttachmentsInConvLocal: this.$store.state.config.hideAttachmentsInConv,
-      hideNsfwLocal: this.$store.state.config.hideNsfw,
-      hidePostStatsLocal: this.$store.state.config.hidePostStats,
-      hideUserStatsLocal: this.$store.state.config.hideUserStats,
-      notificationVisibilityLocal: this.$store.state.config.notificationVisibility,
-      replyVisibilityLocal: this.$store.state.config.replyVisibility,
-      loopVideoLocal: this.$store.state.config.loopVideo,
-      loopVideoSilentOnlyLocal: this.$store.state.config.loopVideoSilentOnly,
-      muteWordsString: this.$store.state.config.muteWords.join('\n'),
-      autoLoadLocal: this.$store.state.config.autoLoad,
-      streamingLocal: this.$store.state.config.streaming,
-      pauseOnUnfocusedLocal: this.$store.state.config.pauseOnUnfocused,
-      hoverPreviewLocal: this.$store.state.config.hoverPreview,
-      collapseMessageWithSubjectLocal: this.$store.state.config.collapseMessageWithSubject,
-      stopGifs: this.$store.state.config.stopGifs,
+      hideAttachmentsLocal: user.hideAttachments,
+      hideAttachmentsInConvLocal: user.hideAttachmentsInConv,
+      hideNsfwLocal: user.hideNsfw,
+      hidePostStatsLocal: typeof user.hidePostStats === 'undefined'
+        ? instance.hidePostStats
+        : user.hidePostStats,
+      hidePostStatsDefault : this.$t('settings.values.' + instance.hidePostStats),
+      hideUserStatsLocal: typeof user.hideUserStats === 'undefined'
+        ? instance.hideUserStats
+        : user.hideUserStats,
+      hideUserStatsDefault : this.$t('settings.values.' + instance.hideUserStats),
+      notificationVisibilityLocal: user.notificationVisibility,
+      replyVisibilityLocal: user.replyVisibility,
+      loopVideoLocal: user.loopVideo,
+      loopVideoSilentOnlyLocal: user.loopVideoSilentOnly,
+      muteWordsString: user.muteWords.join('\n'),
+      autoLoadLocal: user.autoLoad,
+      streamingLocal: user.streaming,
+      pauseOnUnfocusedLocal: user.pauseOnUnfocused,
+      hoverPreviewLocal: user.hoverPreview,
+      collapseMessageWithSubjectLocal: typeof user.collapseMessageWithSubject === 'undefined'
+        ? instance.collapseMessageWithSubject
+        : user.collapseMessageWithSubject,
+      collapseMessageWithSubjectDefault: this.$t('settings.values.' + instance.collapseMessageWithSubject),
+      stopGifs: user.stopGifs,
       loopSilentAvailable:
         // Firefox
         Object.getOwnPropertyDescriptor(HTMLVideoElement.prototype, 'mozHasAudio') ||
@@ -40,6 +52,9 @@ const settings = {
   computed: {
     user () {
       return this.$store.state.users.currentUser
+    },
+    currentSaveStateNotice () {
+      return this.$store.state.interface.settings.currentSaveStateNotice
     }
   },
   watch: {

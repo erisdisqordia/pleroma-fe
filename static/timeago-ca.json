@@ -1,10 +1,10 @@
 [
   "ara mateix",
-  ["fa %ss",  "fa %ss"],
-  ["fa %smin","fa %smin"],
-  ["fa %sh",  "fa %sh"],
-  ["fa %sd",  "fa %sd"],
-  ["fa %sw",  "fa %sw"],
-  ["fa %smo", "fa %smo"],
-  ["fa %sy",  "fa %sy"]
+  ["fa %s s",     "fa %s s"],
+  ["fa %s min",   "fa %s min"],
+  ["fa %s h",     "fa %s h"],
+  ["fa %s dia",   "fa %s dies"],
+  ["fa %s setm.", "fa %s setm."],
+  ["fa %s mes",   "fa %s mesos"],
+  ["fa %s any",   "fa %s anys"]
 ]

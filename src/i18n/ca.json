@@ -52,7 +52,7 @@
       "plain_text": "Text pla"
     },
     "content_warning": "Assumpte (opcional)",
-    "default": "Em sento",
+    "default": "Em sento…",
     "direct_warning": "Aquesta entrada només serà visible per les usuràries que etiquetis",
     "posting": "Publicació",
     "scope": {
@@ -63,7 +63,7 @@
     }
   },
   "registration": {
-    "bio": "Sobre mi",
+    "bio": "Presentació",
     "email": "Correu",
     "fullname": "Nom per mostrar",
     "password_confirm": "Confirma la contrasenya",
@@ -78,7 +78,7 @@
     "avatarAltRadius": "Avatars en les notificacions",
     "avatarRadius": "Avatars",
     "background": "Fons de pantalla",
-    "bio": "Sobre l'usuari/a",
+    "bio": "Presentació",
     "btnRadius": "Botons",
     "cBlue": "Blau (respon, segueix)",
     "cGreen": "Verd (republica)",

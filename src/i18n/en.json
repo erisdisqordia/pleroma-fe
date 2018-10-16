@@ -111,6 +111,8 @@
     "general": "General",
     "hide_attachments_in_convo": "Hide attachments in conversations",
     "hide_attachments_in_tl": "Hide attachments in timeline",
+    "hide_post_stats": "Hide post statistics (e.g. the number of favorites)",
+    "hide_user_stats": "Hide user statistics (e.g. the number of followers)",
     "import_followers_from_a_csv_file": "Import follows from a csv file",
     "import_theme": "Load preset",
     "inputRadius": "Input fields",

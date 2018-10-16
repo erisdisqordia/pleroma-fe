@@ -18,6 +18,8 @@ const defaultState = {
   scopeOptionsEnabled: true,
   formattingOptionsEnabled: false,
   collapseMessageWithSubject: false,
+  hidePostStats: false,
+  hideUserStats: false,
   disableChat: false,
 
   // Nasty stuff

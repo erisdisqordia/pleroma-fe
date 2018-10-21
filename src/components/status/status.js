@@ -31,10 +31,17 @@ const Status = {
       preview: null,
       showPreview: false,
       showingTall: false,
-      expandingSubject: !this.$store.state.config.collapseMessageWithSubject
+      expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
+        ? !this.$store.state.instance.collapseMessageWithSubject
+        : !this.$store.state.config.collapseMessageWithSubject
     }
   },
   computed: {
+    localCollapseSubjectDefault () {
+      return typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
+        ? this.$store.state.instance.collapseMessageWithSubject
+        : this.$store.state.config.collapseMessageWithSubject
+    },
     muteWords () {
       return this.$store.state.config.muteWords
     },
@@ -147,13 +154,13 @@ const Status = {
       return this.status.attentions.length > 0
     },
     hideSubjectStatus () {
-      if (this.tallStatus && !this.$store.state.config.collapseMessageWithSubject) {
+      if (this.tallStatus && !this.localCollapseSubjectDefault) {
         return false
       }
       return !this.expandingSubject && this.status.summary
     },
     hideTallStatus () {
-      if (this.status.summary && this.$store.state.config.collapseMessageWithSubject) {
+      if (this.status.summary && this.localCollapseSubjectDefault) {
         return false
       }
       if (this.showingTall) {
@@ -168,7 +175,7 @@ const Status = {
       if (!this.status.nsfw) {
         return false
       }
-      if (this.status.summary && this.$store.state.config.collapseMessageWithSubject) {
+      if (this.status.summary && this.localCollapseSubjectDefault) {
         return false
       }
       return true

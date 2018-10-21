@@ -5,6 +5,7 @@ const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
 const defaultState = {
   colors: {},
+  collapseMessageWithSubject: undefined,
   hideAttachments: false,
   hideAttachmentsInConv: false,
   hideNsfw: true,

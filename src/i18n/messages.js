@@ -7,6 +7,7 @@
 // There's only problem that apostrophe character ' gets replaced by \\ so you have to fix it manually, sorry.
 
 const messages = {
+  ar: require('./ar.json'),
   de: require('./de.json'),
   fi: require('./fi.json'),
   en: require('./en.json'),

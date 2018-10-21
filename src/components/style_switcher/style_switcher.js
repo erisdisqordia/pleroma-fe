@@ -128,7 +128,7 @@ export default {
           avatarAltRadius: this.avatarAltRadiusLocal,
           tooltipRadius: this.tooltipRadiusLocal,
           attachmentRadius: this.attachmentRadiusLocal
-        },
+        }
       }
     },
     preview () {
@@ -170,6 +170,11 @@ export default {
 
         link: hex2rgb(colors.link),
         topBarLink: hex2rgb(colors.topBarLink),
+
+        red: hex2rgb(colors.cRed),
+        green: hex2rgb(colors.cGreen),
+        blue: hex2rgb(colors.cBlue),
+        orange: hex2rgb(colors.cOrange)
       }
 
       const bgs = {
@@ -182,8 +187,11 @@ export default {
       const ratios = {
         bgText: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.text), fgs.text),
         bgLink: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.link), fgs.link),
+        bgRed: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.red), fgs.red),
+        bgGreen: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.green), fgs.green),
+        bgBlue: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.blue), fgs.blue),
+        bgOrange: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.orange), fgs.orange),
 
-        // User Profile
         tintText: getContrastRatio(worstCase(bgs.bg, 0.5, fgs.panelText), fgs.text),
 
         panelText: getContrastRatio(worstCase(bgs.panel, opacity.panel, fgs.panelText), fgs.panelText),
@@ -378,10 +386,10 @@ export default {
         this.fgColorLocal = this.selected[2]
         this.textColorLocal = this.selected[3]
         this.linkColorLocal = this.selected[4]
-        this.redColorLocal = this.selected[5]
-        this.greenColorLocal = this.selected[6]
-        this.blueColorLocal = this.selected[7]
-        this.orangeColorLocal = this.selected[8]
+        this.cRedColorLocal = this.selected[5]
+        this.cGreenColorLocal = this.selected[6]
+        this.cBlueColorLocal = this.selected[7]
+        this.cOrangeColorLocal = this.selected[8]
       }
     }
   }

@@ -64,11 +64,15 @@
       </div>
       <div class="color-item">
         <ColorInput name="cRedColor" v-model="cRedColorLocal" :label="$t('settings.cRed')"/>
+        <ContrastRatio :contrast="previewContrast.bgRed"/>
         <ColorInput name="cBlueColor" v-model="cBlueColorLocal" :label="$t('settings.cBlue')"/>
+        <ContrastRatio :contrast="previewContrast.bgBlue"/>
       </div>
       <div class="color-item">
         <ColorInput name="cGreenColor" v-model="cGreenColorLocal" :label="$t('settings.cGreen')"/>
+        <ContrastRatio :contrast="previewContrast.bgGreen"/>
         <ColorInput name="cOrangeColor" v-model="cOrangeColorLocal" :label="$t('settings.cOrange')"/>
+        <ContrastRatio :contrast="previewContrast.bgOrange"/>
       </div>
       <div class="color-item wide">
         <h4>Alert opacity</h4>

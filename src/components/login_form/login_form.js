@@ -1,3 +1,4 @@
+import oauthApi from "../../services/new_api/oauth.js";
 const LoginForm = {
   data: () => ({
     user: {},
@@ -8,6 +9,13 @@ const LoginForm = {
     registrationOpen () { return this.$store.state.instance.registrationOpen }
   },
   methods: {
+    oAuthLogin () {
+      oauthApi.login({
+        oauth: this.$store.state.oauth,
+        instance: this.$store.state.instance.server,
+        commit: this.$store.commit
+      });
+    },
     submit () {
       this.$store.dispatch('loginUser', this.user).then(
         () => {},

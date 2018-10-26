@@ -1,4 +1,4 @@
-import oauthApi from "../../services/new_api/oauth.js";
+import oauthApi from '../../services/new_api/oauth.js'
 const LoginForm = {
   data: () => ({
     user: {},
@@ -14,7 +14,7 @@ const LoginForm = {
         oauth: this.$store.state.oauth,
         instance: this.$store.state.instance.server,
         commit: this.$store.commit
-      });
+      })
     },
     submit () {
       this.$store.dispatch('loginUser', this.user).then(

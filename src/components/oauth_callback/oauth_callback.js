@@ -9,8 +9,8 @@ const oac = {
         instance: this.$store.state.instance.server,
         code: this.code
       }).then((result) => {
-        this.$store.commit("setToken", result.access_token)
-        this.$store.dispatch("loginUser", result.access_token)
+        this.$store.commit('setToken', result.access_token)
+        this.$store.dispatch('loginUser', result.access_token)
         this.$router.push('/main/friends')
       })
     }

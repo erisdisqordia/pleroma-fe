@@ -219,18 +219,9 @@ window.fetch('/nodeinfo/2.0.json')
     const metadata = data.metadata
 
     const features = metadata.features
-    store.dispatch('setInstanceOption', {
-      name: 'mediaProxyAvailable',
-      value: features.findIndex((element, index, array) => (element === 'media_proxy')) >= 0
-    })
-    store.dispatch('setInstanceOption', {
-      name: 'chatAvailable',
-      value: features.findIndex((element, index, array) => (element === 'chat')) >= 0
-    })
-    store.dispatch('setInstanceOption', {
-      name: 'gopherAvailable',
-      value: features.findIndex((element, index, array) => (element === 'gopher')) >= 0
-    })
+    store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: features.includes('media_proxy') })
+    store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
+    store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
 
     const suggestions = metadata.suggestions
     store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })

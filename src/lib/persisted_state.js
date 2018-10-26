@@ -70,7 +70,6 @@ export default function createPersistedState ({
           })
         }
         if (store.state.oauth.token) {
-          console.log(store.state.oauth)
           store.dispatch('loginUser', store.state.oauth.token)
         }
         loaded = true

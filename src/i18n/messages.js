@@ -17,6 +17,7 @@ const messages = {
   et: require('./et.json'),
   fi: require('./fi.json'),
   fr: require('./fr.json'),
+  ga: require('./ga.json'),
   he: require('./he.json'),
   hu: require('./hu.json'),
   it: require('./it.json'),

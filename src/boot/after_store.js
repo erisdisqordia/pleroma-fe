@@ -91,7 +91,7 @@ const afterStoreSetup = ({store, i18n}) => {
             { name: 'registration', path: '/registration/:token', component: Registration },
             { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
             { name: 'user-settings', path: '/user-settings', component: UserSettings },
-            { name: 'ouath-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) }
+            { name: 'oauth-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) }
           ]
 
           const router = new VueRouter({

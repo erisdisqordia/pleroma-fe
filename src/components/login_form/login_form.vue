@@ -7,7 +7,10 @@
     <div class="panel-body">
       <form v-on:submit.prevent='oAuthLogin'  class="login-form">
         <div class='form-group'>
-          <button class="btn btn-default">Login with OAuth</button>
+          <div class='login-bottom'>
+            <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>{{$t('login.register')}}</router-link></div>
+            <button :disabled="loggingIn" type='submit' class='btn btn-default'>{{$t('login.login')}}</button>
+          </div>
         </div>
       </form>
     </div>

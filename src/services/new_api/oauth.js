@@ -40,6 +40,22 @@ const login = (args) => {
   })
 }
 
+const getTokenWithCredentials = ({app, instance, username, password}) => {
+  const url = `${instance}/oauth/token`
+  const form = new window.FormData()
+
+  form.append('client_id', app.client_id)
+  form.append('client_secret', app.client_secret)
+  form.append('grant_type', 'password')
+  form.append('username', username)
+  form.append('password', password)
+
+  return window.fetch(url, {
+    method: 'POST',
+    body: form
+  }).then((data) => data.json())
+}
+
 const getToken = ({app, instance, code}) => {
   const url = `${instance}/oauth/token`
   const form = new window.FormData()
@@ -58,7 +74,9 @@ const getToken = ({app, instance, code}) => {
 
 const oauth = {
   login,
-  getToken
+  getToken,
+  getTokenWithCredentials,
+  getOrCreateApp
 }
 
 export default oauth

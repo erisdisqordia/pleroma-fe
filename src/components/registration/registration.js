@@ -33,10 +33,11 @@ const registration = {
             }
             oauthApi.getOrCreateApp(data).then((app) => {
               oauthApi.getTokenWithCredentials(
-                {app,
-                 instance: data.instance,
-                 username: this.user.username,
-                 password: this.user.password})
+                {
+                  app,
+                  instance: data.instance,
+                  username: this.user.username,
+                  password: this.user.password})
                 .then((result) => {
                   this.$store.commit('setToken', result.access_token)
                   this.$store.dispatch('loginUser', result.access_token)

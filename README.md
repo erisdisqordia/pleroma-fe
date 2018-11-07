@@ -32,3 +32,9 @@ npm run unit
 # Configuration
 
 Edit config.json for configuration. scopeOptionsEnabled gives you input fields for CWs and the scope settings.
+
+## Options
+
+### Login methods
+
+```loginMethod``` can be set to either ```password``` (the default) or ```token```, which will use the full oauth redirection flow, which is useful for SSO situations.

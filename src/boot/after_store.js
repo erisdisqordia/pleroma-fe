@@ -53,6 +53,7 @@ const afterStoreSetup = ({store, i18n}) => {
           var scopeOptionsEnabled = (config.scopeOptionsEnabled)
           var formattingOptionsEnabled = (config.formattingOptionsEnabled)
           var collapseMessageWithSubject = (config.collapseMessageWithSubject)
+          var loginMethod = (config.loginMethod)
 
           store.dispatch('setInstanceOption', { name: 'theme', value: theme })
           store.dispatch('setInstanceOption', { name: 'background', value: background })
@@ -67,6 +68,7 @@ const afterStoreSetup = ({store, i18n}) => {
           store.dispatch('setInstanceOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
           store.dispatch('setInstanceOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
           store.dispatch('setInstanceOption', { name: 'collapseMessageWithSubject', value: collapseMessageWithSubject })
+          store.dispatch('setInstanceOption', { name: 'loginMethod', value: loginMethod })
           if (chatDisabled) {
             store.dispatch('disableChat')
           }

@@ -5,6 +5,7 @@ const LoginForm = {
     authError: false
   }),
   computed: {
+    loginMethod () { return this.$store.state.instance.loginMethod },
     loggingIn () { return this.$store.state.users.loggingIn },
     registrationOpen () { return this.$store.state.instance.registrationOpen }
   },
@@ -17,14 +18,23 @@ const LoginForm = {
       })
     },
     submit () {
-      this.$store.dispatch('loginUser', this.user).then(
-        () => {},
-        (error) => {
-          this.authError = error
-          this.user.username = ''
-          this.user.password = ''
-        }
-      )
+      const data = {
+        oauth: this.$store.state.oauth,
+        instance: this.$store.state.instance.server
+      }
+      oauthApi.getOrCreateApp(data).then((app) => {
+        oauthApi.getTokenWithCredentials(
+          {
+            app,
+            instance: data.instance,
+            username: this.user.username,
+            password: this.user.password})
+          .then((result) => {
+            this.$store.commit('setToken', result.access_token)
+            this.$store.dispatch('loginUser', result.access_token)
+            this.$router.push('/main/friends')
+          })
+      })
     }
   }
 }

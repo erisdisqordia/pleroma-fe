@@ -5,7 +5,24 @@
       {{$t('login.login')}}
     </div>
     <div class="panel-body">
-      <form v-on:submit.prevent='oAuthLogin'  class="login-form">
+      <form v-if="loginMethod == 'password'" v-on:submit.prevent='submit(user)' class='login-form'>
+        <div class='form-group'>
+          <label for='username'>{{$t('login.username')}}</label>
+          <input :disabled="loggingIn" v-model='user.username' class='form-control' id='username' v-bind:placeholder="$t('login.placeholder')">
+        </div>
+        <div class='form-group'>
+          <label for='password'>{{$t('login.password')}}</label>
+          <input :disabled="loggingIn" v-model='user.password' class='form-control' id='password' type='password'>
+        </div>
+        <div class='form-group'>
+          <div class='login-bottom'>
+            <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>{{$t('login.register')}}</router-link></div>
+            <button :disabled="loggingIn" type='submit' class='btn btn-default'>{{$t('login.login')}}</button>
+          </div>
+        </div>
+      </form>
+
+      <form v-if="loginMethod == 'token'" v-on:submit.prevent='oAuthLogin'  class="login-form">
         <div class='form-group'>
           <div class='login-bottom'>
             <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>{{$t('login.register')}}</router-link></div>

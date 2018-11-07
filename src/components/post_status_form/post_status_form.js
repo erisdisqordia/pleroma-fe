@@ -53,7 +53,7 @@ const PostStatusForm = {
       posting: false,
       highlighted: 0,
       newStatus: {
-        spoilerText: this.subject,
+        spoilerText: this.subject || '',
         status: statusText,
         contentType: 'text/plain',
         nsfw: false,
@@ -128,6 +128,9 @@ const PostStatusForm = {
     statusLength () {
       return this.newStatus.status.length
     },
+    spoilerTextLength () {
+      return this.newStatus.spoilerText.length
+    },
     statusLengthLimit () {
       return this.$store.state.instance.textlimit
     },
@@ -135,10 +138,10 @@ const PostStatusForm = {
       return this.statusLengthLimit > 0
     },
     charactersLeft () {
-      return this.statusLengthLimit - this.statusLength
+      return this.statusLengthLimit - (this.statusLength + this.spoilerTextLength)
     },
     isOverLengthLimit () {
-      return this.hasStatusLengthLimit && (this.statusLength > this.statusLengthLimit)
+      return this.hasStatusLengthLimit && (this.charactersLeft < 0)
     },
     scopeOptionsEnabled () {
       return this.$store.state.instance.scopeOptionsEnabled

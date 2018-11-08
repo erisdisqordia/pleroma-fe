@@ -226,6 +226,7 @@ const PostStatusForm = {
         if (!data.error) {
           this.newStatus = {
             status: '',
+            spoilerText: '',
             files: [],
             visibility: newStatus.visibility,
             contentType: newStatus.contentType

@@ -26,7 +26,7 @@
         <div class='form-group'>
           <div class='login-bottom'>
             <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>{{$t('login.register')}}</router-link></div>
-            <button :disabled="loggingIn" type='submit' class='btn btn-default'>{{$t('login.login')}}</button>
+            <button :disabled="loggingIn" type='submit' class='btn btn-default'>{{$t('login.login_token')}}</button>
           </div>
         </div>
       </form>

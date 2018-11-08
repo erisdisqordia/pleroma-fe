@@ -12,6 +12,7 @@
   },
   "login": {
     "login": "Anmelden",
+    "login_token": "Mit OAuth anmelden",
     "logout": "Abmelden",
     "password": "Passwort",
     "placeholder": "z.B. lain",

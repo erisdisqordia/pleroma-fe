@@ -21,7 +21,7 @@
   },
   "login": {
     "login": "Log in",
-    "login_token": "Log in with OAuth",
+    "description": "Log in with OAuth",
     "logout": "Log out",
     "password": "Password",
     "placeholder": "e.g. lain",

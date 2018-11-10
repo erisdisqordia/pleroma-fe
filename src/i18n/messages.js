@@ -26,7 +26,8 @@ const messages = {
   pl: require('./pl.json'),
   pt: require('./pt.json'),
   ro: require('./ro.json'),
-  ru: require('./ru.json')
+  ru: require('./ru.json'),
+  zh: require('./zh.json')
 }
 
 export default messages

@@ -41,7 +41,8 @@ export const defaultState = {
     own: emptyTl(),
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
-    tag: emptyTl()
+    tag: emptyTl(),
+    dms: emptyTl()
   }
 }
 

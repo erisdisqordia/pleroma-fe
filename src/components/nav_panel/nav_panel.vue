@@ -12,6 +12,11 @@
             {{ $t("nav.mentions") }}
           </router-link>
         </li>
+        <li v-if='currentUser && showDMs'>
+          <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
+            {{ $t("nav.dms") }}
+          </router-link>
+        </li>
         <li v-if='currentUser && currentUser.locked'>
           <router-link to='/friend-requests'>
             {{ $t("nav.friend_requests") }}

@@ -32,6 +32,7 @@
     "chat": "Local Chat",
     "friend_requests": "Follow Requests",
     "mentions": "Mentions",
+    "dms": "Direct Messages",
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
     "twkn": "The Whole Known Network"

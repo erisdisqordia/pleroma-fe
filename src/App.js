@@ -73,6 +73,7 @@ export default {
       window.scrollTo(0, 0)
     },
     logout () {
+      this.$router.replace('/main/public')
       this.$store.dispatch('logout')
     }
   }

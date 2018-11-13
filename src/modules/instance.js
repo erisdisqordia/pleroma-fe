@@ -21,6 +21,7 @@ const defaultState = {
   hidePostStats: false,
   hideUserStats: false,
   disableChat: false,
+  loginMethod: 'password',
 
   // Nasty stuff
   pleromaBackend: true,

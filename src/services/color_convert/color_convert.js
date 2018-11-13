@@ -81,29 +81,27 @@ const getContrastRatio = (a, b) => {
 
 /**
  * This generates what "worst case" color would look like for transparent
- * segments. I.e. black with .2 alpha and pure-white background image
- * could make white text unreadable
+ * segments. I.e. transparent black with yellow text over yellow background.
  *
  * @param {Object} srgb - transparent color
  * @param {Number} alpha - color's opacity/alpha channel
- * @param {Boolean} white - use white "background" if true, black otherwise
+ * @param {Object} textSrgb - text color (considered as worst case scenario for transparent background)
  * @returns {Object} sRGB of resulting color
  */
-const transparentWorstCase = (srgb, alpha, white = false) => {
-  const bg = 'rgb'.split('').reduce((acc, c) => { acc[c] = Number(white) * 255; return acc }, {})
+const transparentWorstCase = (srgb, alpha, textSrgb) => {
   return 'rgb'.split('').reduce((acc, c) => {
     // Simplified https://en.wikipedia.org/wiki/Alpha_compositing#Alpha_blending
     // for opaque bg and transparent fg
-    acc[c] = (srgb[c] * alpha + bg[c] * (1 - alpha))
+    acc[c] = (srgb[c] * alpha + textSrgb[c] * (1 - alpha))
     return acc
   }, {})
 }
 
 const worstCase = (bg, bga, text) => {
+  console.log(bg)
+  console.log(text)
   if (bga === 1 || typeof bga === 'undefined') return bg
-  // taken from https://github.com/toish/chromatism/blob/master/src/operations/contrastRatio.js
-  const blackWorse = ((text.r * 299) + (text.g * 587) + (text.b * 114)) / 1000 <= 128
-  return transparentWorstCase(bg, bga, !blackWorse)
+  return transparentWorstCase(bg, bga, text)
 }
 
 const hex2rgb = (hex) => {

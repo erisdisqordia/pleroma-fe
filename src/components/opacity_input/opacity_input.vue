@@ -14,16 +14,6 @@
   <label v-if="typeof fallback !== 'undefined'" class="opt-l" :for="name + '-o'"></label>
   <input
     :id="name"
-    class="input-range"
-    type="range"
-    :value="value || fallback"
-    :disabled="!present"
-    @input="$emit('input', $event.target.value)"
-    max="1"
-    min="0"
-    step=".05">
-  <input
-    :id="name"
     class="input-number"
     type="number"
     :value="value || fallback"

@@ -7,7 +7,7 @@
   .unseen-count {
     display: inline-block;
     background-color: $fallback--cRed;
-    background-color: var(--cRed, $fallback--cRed);
+    background-color: var(--badgeNotification, $fallback--cRed);
     text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
     border-radius: 99px;
     min-width: 22px;
@@ -27,7 +27,7 @@
   }
 
   .unseen {
-    box-shadow: inset 4px 0 0 var(--cRed, $fallback--cRed);
+    box-shadow: inset 4px 0 0 var(--badgeNotification, $fallback--cRed);
     padding-left: 0;
   }
 }
@@ -44,8 +44,8 @@
     border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
     color: $fallback--faint;
     color: var(--faint, $fallback--faint);
-    background-color: $fallback--cAlertRed;
-    background-color: var(--cAlertRed, $fallback--cAlertRed);
+    background-color: $fallback--alertError;
+    background-color: var(--alertError, $fallback--alertError);
     padding: 2px .5em
   }
 

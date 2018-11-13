@@ -39,6 +39,10 @@ export default {
       topBarLinkColorLocal: undefined,
 
       alertOpacityLocal: undefined,
+      alertErrorColorLocal: undefined,
+
+      badgeOpacityLocal: undefined,
+      badgeNotificationColorLocal: undefined,
 
       borderColorLocal: undefined,
       borderOpacityLocal: undefined,
@@ -102,6 +106,9 @@ export default {
           btn: this.btnColorLocal,
           btnText: this.btnTextColorLocal,
 
+          alertError: this.alertErrorColorLocal,
+          badgeNotification: this.badgeNotificationColorLocal,
+
           faint: this.faintColorLocal,
           faintLink: this.faintLinkColorLocal,
           border: this.borderColorLocal,
@@ -116,6 +123,8 @@ export default {
           btn: this.btnOpacityLocal,
           input: this.inputOpacityLocal,
           panel: this.panelOpacityLocal,
+          alert: this.alertOpacityLocal,
+          badge: this.badgeOpacityLocal,
           topBar: this.topBarOpacityLocal,
           border: this.borderOpacityLocal,
           faint: this.faintOpacityLocal
@@ -167,6 +176,7 @@ export default {
         panelText: hex2rgb(colors.panelText),
         btnText: hex2rgb(colors.btnText),
         topBarText: hex2rgb(colors.topBarText),
+        inputText: hex2rgb(colors.inputText),
 
         link: hex2rgb(colors.link),
         topBarLink: hex2rgb(colors.topBarLink),
@@ -181,7 +191,10 @@ export default {
         bg: hex2rgb(colors.bg),
         btn: hex2rgb(colors.btn),
         panel: hex2rgb(colors.panel),
-        topBar: hex2rgb(colors.topBar)
+        topBar: hex2rgb(colors.topBar),
+        input: hex2rgb(colors.input),
+        alertError: hex2rgb(colors.alertError),
+        badgeNotification: hex2rgb(colors.badgeNotification)
       }
 
       const ratios = {
@@ -197,6 +210,10 @@ export default {
         panelText: getContrastRatio(worstCase(bgs.panel, opacity.panel, fgs.panelText), fgs.panelText),
 
         btnText: getContrastRatio(worstCase(bgs.btn, opacity.btn, fgs.btnText), fgs.btnText),
+
+        inputText: getContrastRatio(worstCase(bgs.input, opacity.input, fgs.inputText), fgs.inputText),
+
+        badgeNotification: getContrastRatio(worstCase(bgs.badgeNotification, opacity.badge, fgs.text), fgs.text),
 
         topBarText: getContrastRatio(worstCase(bgs.topBar, opacity.topBar, fgs.topBarText), fgs.topBarText),
         topBarLink: getContrastRatio(worstCase(bgs.topBar, opacity.topBar, fgs.topBarLink), fgs.topBarLink)
@@ -317,6 +334,10 @@ export default {
       this.faintColorLocal = undefined
       this.faintOpacityLocal = undefined
       this.faintLinkColorLocal = undefined
+
+      this.alertErrorColorLocal = undefined
+
+      this.badgeNotificationColorLocal = undefined
     },
 
     /**
@@ -348,6 +369,7 @@ export default {
       }
 
       const keys = new Set(version !== 1 ? Object.keys(colors) : [])
+      console.log(keys)
       if (version === 1) {
         // V1 ignores the rest
         this.clearV1()

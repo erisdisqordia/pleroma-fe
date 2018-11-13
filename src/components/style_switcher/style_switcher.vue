@@ -74,21 +74,27 @@
         <ColorInput name="cOrangeColor" v-model="cOrangeColorLocal" :label="$t('settings.cOrange')"/>
         <ContrastRatio :contrast="previewContrast.bgOrange"/>
       </div>
-      <div class="color-item wide">
-        <h4>Alert opacity</h4>
-        <OpacityInput name="alertOpacity" v-model="alertOpacityLocal" fallback="previewTheme.opacity.alert || 1"/>
-      </div>
     </div>
 
     <h3>More customs!</h3>
     <div>
+      <div class="color-item">
+        <h4>Alerts</h4>
+        <ColorInput name="alertError" v-model="alertErrorColorLocal" :label="$t('settings.error')" :fallback="previewTheme.colors.alertError"/>
+        <OpacityInput name="alertOpacity" v-model="alertOpacityLocal" :fallback="previewTheme.opacity.alert || 1"/>
+      </div>
+      <div class="color-item">
+        <h4>Alerts</h4>
+        <ColorInput name="badgeNotification" v-model="badgeNotificationColorLocal" :label="$t('settings.notification')" :fallback="previewTheme.colors.badgeNotification"/>
+        <ContrastRatio :contrast="previewContrast.badgeNotification"/>
+        <OpacityInput name="badgeOpacity" v-model="badgeOpacityLocal" :fallback="previewTheme.opacity.badge || 1"/>
+      </div>
       <div class="color-item">
         <h4>Panel header</h4>
         <ColorInput name="panelColor" v-model="panelColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
         <OpacityInput name="panelOpacity" v-model="panelOpacityLocal" :fallback="previewTheme.opacity.panel || 1"/>
         <ColorInput name="panelTextColor" v-model="panelTextColorLocal" :fallback="previewTheme.colors.panelText" :label="$t('settings.links')"/>
         <ContrastRatio :contrast="previewContrast.panelText" large="1"/>
-        <ColorInput name="panelFaintColor" v-model="panelFaintColorLocal" :fallback="previewTheme.colors.panelFaint" :label="$t('settings.faint')"/>
       </div>
       <div class="color-item">
         <h4>Top bar</h4>
@@ -99,10 +105,11 @@
         <ContrastRatio :contrast="previewContrast.topBarLink"/>
       </div>
       <div class="color-item">
-        <h4>Inputs</h4>
+        <h4>Text fields</h4>
         <ColorInput name="inputColor" v-model="inputColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
         <OpacityInput name="inputOpacity" v-model="inputOpacityLocal" :fallback="previewTheme.opacity.input || 1"/>
         <ColorInput name="inputTextColor" v-model="inputTextColorLocal" :fallback="previewTheme.colors.inputText" :label="$t('settings.text')"/>
+        <ContrastRatio :contrast="previewContrast.inputText"/>
       </div>
       <div class="color-item">
         <h4>Buttons</h4>
@@ -120,7 +127,8 @@
         <h4>Faint text</h4>
         <ColorInput name="faintColor" v-model="faintColorLocal" :fallback="previewTheme.colors.faint || 1" :label="$t('settings.text')"/>
         <ColorInput name="faintLinkColor" v-model="faintLinkColorLocal" :fallback="previewTheme.colors.faintLink" :label="$t('settings.links')"/>
-        <OpacityInput name="faintOpacity" v-model="faintOpacityLocal" fallback="previewTheme.opacity.faint"/>
+        <ColorInput name="panelFaintColor" v-model="panelFaintColorLocal" :fallback="previewTheme.colors.panelFaint" :label="$t('settings.panel')"/>
+        <OpacityInput name="faintOpacity" v-model="faintOpacityLocal" :fallback="previewTheme.opacity.faint || 0.5"/>
       </div>
     </div>
   </div>
@@ -258,10 +266,6 @@
 
   h4 {
     margin-top: 1em;
-  }
-
-  label {
-    color: var(--faint, $fallback--faint);
   }
 }
 

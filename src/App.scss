@@ -479,8 +479,8 @@ nav {
   line-height: 28px;
 
   &.error {
-    background-color: $fallback--cAlertRed;
-    background-color: var(--cAlertRed, $fallback--cAlertRed);
+    background-color: $fallback--alertError;
+    background-color: var(--alertError, $fallback--alertError);
   }
 }
 

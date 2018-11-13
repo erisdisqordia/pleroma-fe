@@ -155,12 +155,14 @@ const generatePreset = (input) => {
   colors.cGreen = col.cGreen
   colors.cOrange = col.cOrange
 
-  colors.cAlertRed = col.cAlertRed || Object.assign({}, col.cRed)
+  colors.alertError = col.alertError || Object.assign({}, col.cRed)
+  colors.badgeNotification = col.badgeNotification || Object.assign({}, col.cRed)
+  colors.badgeNotificationText = col.badgeNotification || Object.assign({}, col.cRed)
 
   Object.entries(opacity).forEach(([ k, v ]) => {
     if (typeof v === 'undefined') return
     if (k === 'alert') {
-      colors.cAlertRed.a = v
+      colors.alertError.a = v
       return
     }
     if (k === 'faint') {

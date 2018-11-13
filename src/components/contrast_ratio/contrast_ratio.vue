@@ -1,41 +1,28 @@
 <template>
-<div class="contrast-ratio">
-  <span class="label">
-    Contrast:
-  </span>
-  <span>
-    <span>
-      {{contrast.text}}
+<span class="contrast-ratio">
+  <span :title="`Contrast is ${contrast.text}`" class="rating">
+    <span v-if="contrast.aaa">
+      <i class="icon-thumbs-up-alt"/>
     </span>
-    <span class="rating">
-      <span v-if="contrast.aaa">
-        AAA
-      </span>
-      <span v-if="!contrast.aaa && contrast.aa">
-        AA
-      </span>
-      <span v-if="!contrast.aaa && !contrast.aa">
-        bad
-      </span>
+    <span v-if="!contrast.aaa && contrast.aa">
+      <i class="icon-adjust"/>
+    </span>
+    <span v-if="!contrast.aaa && !contrast.aa">
+      <i class="icon-attention"/>
     </span>
   </span>
-  <span v-if="large">
-    <span>
-      18pt+:
+  <span class="rating" v-if="large" :title="`Contrast is ${contrast.text} (18pt+)`">
+    <span v-if="contrast.aaa">
+      <i class="icon-thumbs-up-alt"/>
     </span>
-    <span class="rating">
-      <span v-if="contrast.aaa">
-        AAA
-      </span>
-      <span v-if="!contrast.aaa && contrast.aa">
-        AA
-      </span>
-      <span v-if="!contrast.aaa && !contrast.aa">
-        bad
-      </span>
+    <span v-if="!contrast.aaa && contrast.aa">
+      <i class="icon-adjust"/>
+    </span>
+    <span v-if="!contrast.aaa && !contrast.aa">
+      <i class="icon-attention"/>
     </span>
   </span>
-</div>
+</span>
 </template>
 
 <script>
@@ -57,7 +44,6 @@ export default {
 
   .rating {
     display: inline-block;
-    min-width: 3em;
     text-align: center;
   }
 }

@@ -2,6 +2,15 @@
   "chat": {
     "title": "Chat"
   },
+  "features_panel": {
+    "chat": "Chat",
+    "gopher": "Gopher",
+    "media_proxy": "Media Proxy",
+    "scope_options": "Scope options",
+    "text_limit": "Textlimit",
+    "title": "Features",
+    "who_to_follow": "Who to follow"
+  },
   "finder": {
     "error_fetching_user": "Fehler beim Suchen des Benutzers",
     "find_user": "Finde Benutzer"
@@ -24,11 +33,13 @@
     "mentions": "Erwähnungen",
     "public_tl": "Lokale Zeitleiste",
     "timeline": "Zeitleiste",
-    "twkn": "Das gesamte Netzwerk"
+    "twkn": "Das gesamte bekannte Netzwerk"
   },
   "notifications": {
+    "broken_favorite": "Unbekannte Nachricht, suche danach...",
     "favorited_you": "favorisierte deine Nachricht",
     "followed_you": "folgt dir",
+    "load_older": "Ältere Benachrichtigungen laden",
     "notifications": "Benachrichtigungen",
     "read": "Gelesen!",
     "repeated_you": "wiederholte deine Nachricht"
@@ -36,6 +47,11 @@
   "post_status": {
     "account_not_locked_warning": "Dein Profil ist nicht {0}. Wer dir folgen will, kann das jederzeit tun und dann auch deine privaten Beiträge sehen.",
     "account_not_locked_warning_link": "gesperrt",
+    "attachments_sensitive": "Anhänge als heikel markieren",
+    "content_type": {
+      "plain_text": "Nur Text"
+    },
+    "content_warning": "Betreff (optional)",
     "default": "Sitze gerade im Hofbräuhaus.",
     "direct_warning": "Dieser Beitrag wird nur für die erwähnten Nutzer sichtbar sein.",
     "posting": "Veröffentlichen",
@@ -71,42 +87,68 @@
     "change_password": "Passwort ändern",
     "change_password_error": "Es gab ein Problem bei der Änderung des Passworts.",
     "changed_password": "Passwort erfolgreich geändert!",
+    "collapse_subject": "Beiträge mit Betreff einklappen",
     "confirm_new_password": "Neues Passwort bestätigen",
     "current_avatar": "Dein derzeitiger Avatar",
     "current_password": "Aktuelles Passwort",
     "current_profile_banner": "Der derzeitige Banner deines Profils",
+    "data_import_export_tab": "Datenimport/-export",
+    "default_vis": "Standard-Sichtbarkeitsumfang",
     "delete_account": "Account löschen",
     "delete_account_description": "Lösche deinen Account und alle deine Nachrichten unwiderruflich.",
-    "delete_account_error": "Es ist ein Fehler beim löschen deines Accounts aufgetreten. Tritt dies weiterhin auf, wende dich an den Administrator der Instanz.",
+    "delete_account_error": "Es ist ein Fehler beim Löschen deines Accounts aufgetreten. Tritt dies weiterhin auf, wende dich an den Administrator der Instanz.",
     "delete_account_instructions": "Tippe dein Passwort unten in das Feld ein, um die Löschung deines Accounts zu bestätigen.",
     "export_theme": "Farbschema speichern",
-    "filtering": "Filter",
+    "filtering": "Filtern",
     "filtering_explanation": "Alle Beiträge die diese Wörter enthalten werden ausgeblendet. Ein Wort pro Zeile.",
     "follow_export": "Follower exportieren",
-    "follow_export_button": "Liste (.csv) erstellen",
+    "follow_export_button": "Exportiere deine Follows in eine csv-Datei",
     "follow_export_processing": "In Bearbeitung. Die Liste steht gleich zum herunterladen bereit.",
     "follow_import": "Followers importieren",
     "follow_import_error": "Fehler beim importieren der Follower",
     "follows_imported": "Followers importiert! Die Bearbeitung kann eine Zeit lang dauern.",
     "foreground": "Vordergrund",
+    "general": "Allgemein",
     "hide_attachments_in_convo": "Anhänge in Unterhaltungen ausblenden",
     "hide_attachments_in_tl": "Anhänge in der Zeitleiste ausblenden",
+    "hide_post_stats": "Beitragsstatistiken verbergen (z.B. die Anzahl der Favoriten)",
+    "hide_user_stats": "Benutzerstatistiken verbergen (z.B. die Anzahl der Follower)",
     "import_followers_from_a_csv_file": "Importiere Follower, denen du folgen möchtest, aus einer CSV-Datei",
     "import_theme": "Farbschema laden",
     "inputRadius": "Eingabefelder",
+    "instance_default": "(Standard: {value})",
+    "interfaceLanguage": "Sprache der Oberfläche",
     "invalid_theme_imported": "Die ausgewählte Datei ist kein unterstütztes Pleroma-Theme. Keine Änderungen wurden vorgenommen.",
+    "limited_availability": "In deinem Browser nicht verfügbar",
     "links": "Links",
     "lock_account_description": "Sperre deinen Account, um neue Follower zu genehmigen oder abzulehnen",
+    "loop_video": "Videos wiederholen",
+    "loop_video_silent_only": "Nur Videos ohne Ton wiederholen (z.B. Mastodons \"gifs\")",
     "name": "Name",
     "name_bio": "Name & Bio",
     "new_password": "Neues Passwort",
+    "notification_visibility": "Benachrichtigungstypen, die angezeigt werden sollen",
+    "notification_visibility_follows": "Follows",
+    "notification_visibility_likes": "Favoriten",
+    "notification_visibility_mentions": "Erwähnungen",
+    "notification_visibility_repeats": "Wiederholungen",
+    "no_rich_text_description": "Rich-Text Formatierungen von allen Beiträgen entfernen",
     "nsfw_clickthrough": "Aktiviere ausblendbares Overlay für Anhänge, die als NSFW markiert sind",
     "panelRadius": "Panel",
+    "pause_on_unfocused": "Streaming pausieren, wenn das Tab nicht fokussiert ist",
     "presets": "Voreinstellungen",
-    "profile_background": "Profil Hintergrund",
-    "profile_banner": "Profil Banner",
+    "profile_background": "Profilhintergrund",
+    "profile_banner": "Profilbanner",
+    "profile_tab": "Profil",
     "radii_help": "Kantenrundung (in Pixel) der Oberfläche anpassen",
-    "reply_link_preview": "Aktiviere reply-link Vorschau bei Maus-Hover",
+    "replies_in_timeline": "Antworten in der Zeitleiste",
+    "reply_link_preview": "Antwortlink-Vorschau beim Überfahren mit der Maus aktivieren",
+    "reply_visibility_all": "Alle Antworten zeigen",
+    "reply_visibility_following": "Zeige nur Antworten an mich oder an Benutzer, denen ich folge",
+    "reply_visibility_self": "Nur Antworten an mich anzeigen",
+    "saving_err": "Fehler beim Speichern der Einstellungen",
+    "saving_ok": "Einstellungen gespeichert",
+    "security_tab": "Sicherheit",
     "set_new_avatar": "Setze einen neuen Avatar",
     "set_new_profile_background": "Setze einen neuen Hintergrund für dein Profil",
     "set_new_profile_banner": "Setze einen neuen Banner für dein Profil",
@@ -115,15 +157,20 @@
     "streaming": "Aktiviere automatisches Laden (Streaming) von neuen Beiträgen",
     "text": "Text",
     "theme": "Farbschema",
-    "theme_help": "Benutze HTML Farbcodes (#rrggbb) um dein Farbschema anzupassen",
+    "theme_help": "Benutze HTML-Farbcodes (#rrggbb) um dein Farbschema anzupassen",
     "tooltipRadius": "Tooltips/Warnungen",
-    "user_settings": "Benutzereinstellungen"
+    "user_settings": "Benutzereinstellungen",
+    "values": {
+      "false": "nein",
+      "true": "Ja"
+    }
   },
   "timeline": {
     "collapse": "Einklappen",
     "conversation": "Unterhaltung",
     "error_fetching": "Fehler beim Laden",
     "load_older": "Lade ältere Beiträge",
+    "no_retweet_hint": "Der Beitrag ist als nur-für-Follower oder als Direktnachricht markiert und kann nicht wiederholt werden.",
     "repeated": "wiederholte",
     "show_new": "Zeige Neuere",
     "up_to_date": "Aktuell"
@@ -146,5 +193,9 @@
   },
   "user_profile": {
     "timeline_title": "Beiträge"
+  },
+  "who_to_follow": {
+    "more": "Mehr",
+    "who_to_follow": "Wem soll ich folgen"
   }
 }

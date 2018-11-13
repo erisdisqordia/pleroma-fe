@@ -12,7 +12,7 @@
             {{ $t("nav.mentions") }}
           </router-link>
         </li>
-        <li v-if='currentUser && showDMs'>
+        <li v-if='currentUser'>
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
             {{ $t("nav.dms") }}
           </router-link>

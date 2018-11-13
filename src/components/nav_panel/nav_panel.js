@@ -5,9 +5,6 @@ const NavPanel = {
     },
     chat () {
       return this.$store.state.chat.channel
-    },
-    showDMs () {
-      return this.$store.state.instance.scopeOptionsEnabled
     }
   }
 }

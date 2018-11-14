@@ -7,25 +7,10 @@ const UserFinder = {
   }),
   methods: {
     findUser (username) {
-      username = username[0] === '@' ? username.slice(1) : username
-      this.loading = true
-      this.$store.state.api.backendInteractor.externalProfile(username)
-        .then((user) => {
-          this.loading = false
-          this.hidden = true
-          if (!user.error) {
-            this.$store.commit('addNewUsers', [user])
-            this.$router.push({name: 'user-profile', params: {id: user.id}})
-          } else {
-            this.error = true
-          }
-        })
+      this.$router.push({ name: 'user-search', query: { query: username } })
     },
     toggleHidden () {
       this.hidden = !this.hidden
-    },
-    dismissError () {
-      this.error = false
     }
   }
 }

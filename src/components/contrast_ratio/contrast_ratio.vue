@@ -1,5 +1,5 @@
 <template>
-<span class="contrast-ratio">
+<span  v-if="contrast" class="contrast-ratio">
   <span :title="`Contrast is ${contrast.text}`" class="rating">
     <span v-if="contrast.aaa">
       <i class="icon-thumbs-up-alt"/>
@@ -11,7 +11,7 @@
       <i class="icon-attention"/>
     </span>
   </span>
-  <span class="rating" v-if="large" :title="`Contrast is ${contrast.text} (18pt+)`">
+  <span class="rating" v-if="contrast && large" :title="`Contrast is ${contrast.text} (18pt+)`">
     <span v-if="contrast.aaa">
       <i class="icon-thumbs-up-alt"/>
     </span>

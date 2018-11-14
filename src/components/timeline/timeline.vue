@@ -63,11 +63,6 @@
     color: $fallback--faint;
     color: var(--panelFaint, $fallback--faint);
   }
-
-  .loadmore-error {
-    color: $fallback--text;
-    color: var(--text, $fallback--text);
-  }
 }
 
 .new-status-notification {

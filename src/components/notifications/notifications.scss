@@ -8,13 +8,13 @@
     display: inline-block;
     background-color: $fallback--cRed;
     background-color: var(--badgeNotification, $fallback--cRed);
-    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
     border-radius: 99px;
     min-width: 22px;
     max-width: 22px;
     min-height: 22px;
     max-height: 22px;
     color: white;
+    color: var(--badgeNotificationText, white);
     font-size: 15px;
     line-height: 22px;
     text-align: center;
@@ -27,8 +27,8 @@
   }
 
   .unseen {
-    box-shadow: inset 4px 0 0 var(--badgeNotification, $fallback--cRed);
-    padding-left: 0;
+
+    background-image: linear-gradient(135deg, var(--badgeNotification, $fallback--cRed) 4px, transparent 10px)
   }
 }
 
@@ -42,8 +42,8 @@
   .broken-favorite {
     border-radius: $fallback--tooltipRadius;
     border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-    color: $fallback--faint;
-    color: var(--faint, $fallback--faint);
+    color: $fallback--text;
+    color: var(--alertErrorText, $fallback--text);
     background-color: $fallback--alertError;
     background-color: var(--alertError, $fallback--alertError);
     padding: 2px .5em

@@ -24,8 +24,8 @@
     </div>
   </div>
 
-  <div class="preview-container" :style="previewRules">
-    <div class="panel dummy">
+  <div class="preview-container">
+    <div class="panel dummy" :style="previewRules">
       <div class="panel-heading">Preview</div>
       <div class="panel-body theme-preview-content">
         <div class="avatar">
@@ -45,132 +45,132 @@
     </div>
   </div>
 
-  <div class="color-container">
     <p>{{$t('settings.theme_help')}}</p>
-    <h3>Basic colors!!</h3>
-    <div>
-      <div class="color-item">
-        <ColorInput name="bgColor" v-model="bgColorLocal" :label="$t('settings.background')"/>
-        <OpacityInput name="bgOpacity" v-model="bgOpacityLocal" :fallback="previewTheme.opacity.bg || 1"/>
-        <ColorInput name="textColor" v-model="textColorLocal" :label="$t('settings.text')"/>
-        <ContrastRatio :contrast="previewContrast.bgText"/>
-        <ColorInput name="linkColor" v-model="linkColorLocal" :label="$t('settings.links')"/>
-        <ContrastRatio :contrast="previewContrast.bgLink"/>
+    <tab-switcher>
+      <div label="Basic" class="color-container">
+        <div class="color-item">
+          <h4>Main colors</h4>
+          <ColorInput name="bgColor" v-model="bgColorLocal" :label="$t('settings.background')"/>
+          <OpacityInput name="bgOpacity" v-model="bgOpacityLocal" :fallback="previewTheme.opacity.bg || 1"/>
+          <ColorInput name="textColor" v-model="textColorLocal" :label="$t('settings.text')"/>
+          <ContrastRatio :contrast="previewContrast.bgText"/>
+          <ColorInput name="linkColor" v-model="linkColorLocal" :label="$t('settings.links')"/>
+          <ContrastRatio :contrast="previewContrast.bgLink"/>
+        </div>
+        <div class="color-item">
+          <h4>Panel header, top bar, buttons, text fields</h4>
+          <ColorInput name="fgColor" v-model="fgColorLocal" :label="$t('settings.foreground')"/>
+          <ColorInput name="fgTextColor" v-model="fgTextColorLocal" :label="$t('settings.text')" :fallback="previewTheme.colors.fgText"/>
+          <ColorInput name="fgLinkColor" v-model="fgLinkColorLocal" :label="$t('settings.links')" :fallback="previewTheme.colors.fgLink"/>
+          <p>See "Advanced" tab for more detailed control</p>
+        </div>
+        <div class="color-item">
+          <h4>Icons, alerts, etc.</h4>
+          <ColorInput name="cRedColor" v-model="cRedColorLocal" :label="$t('settings.cRed')"/>
+          <ContrastRatio :contrast="previewContrast.bgRed"/>
+          <ColorInput name="cBlueColor" v-model="cBlueColorLocal" :label="$t('settings.cBlue')"/>
+          <ContrastRatio :contrast="previewContrast.bgBlue"/>
+        </div>
+        <div class="color-item">
+          <h4>.</h4>
+          <ColorInput name="cGreenColor" v-model="cGreenColorLocal" :label="$t('settings.cGreen')"/>
+          <ContrastRatio :contrast="previewContrast.bgGreen"/>
+          <ColorInput name="cOrangeColor" v-model="cOrangeColorLocal" :label="$t('settings.cOrange')"/>
+          <ContrastRatio :contrast="previewContrast.bgOrange"/>
+        </div>
       </div>
-      <div class="color-item">
-        <ColorInput name="fgColor" v-model="fgColorLocal" :label="$t('settings.foreground')"/>
-        <ColorInput name="fgTextColor" v-model="fgTextColorLocal" :label="$t('settings.text')" :fallback="previewTheme.colors.fgText"/>
-        <ColorInput name="fgLinkColor" v-model="fgLinkColorLocal" :label="$t('settings.links')" :fallback="previewTheme.colors.fgLink"/>
-      </div>
-      <div class="color-item">
-        <ColorInput name="cRedColor" v-model="cRedColorLocal" :label="$t('settings.cRed')"/>
-        <ContrastRatio :contrast="previewContrast.bgRed"/>
-        <ColorInput name="cBlueColor" v-model="cBlueColorLocal" :label="$t('settings.cBlue')"/>
-        <ContrastRatio :contrast="previewContrast.bgBlue"/>
-      </div>
-      <div class="color-item">
-        <ColorInput name="cGreenColor" v-model="cGreenColorLocal" :label="$t('settings.cGreen')"/>
-        <ContrastRatio :contrast="previewContrast.bgGreen"/>
-        <ColorInput name="cOrangeColor" v-model="cOrangeColorLocal" :label="$t('settings.cOrange')"/>
-        <ContrastRatio :contrast="previewContrast.bgOrange"/>
-      </div>
-    </div>
 
-    <h3>More customs!</h3>
-    <div>
-      <div class="color-item">
-        <h4>Alerts</h4>
-        <ColorInput name="alertError" v-model="alertErrorColorLocal" :label="$t('settings.error')" :fallback="previewTheme.colors.alertError"/>
-        <OpacityInput name="alertOpacity" v-model="alertOpacityLocal" :fallback="previewTheme.opacity.alert || 1"/>
+      <div label="Advanced" class="color-container">
+        <div class="color-item">
+          <h4>Alerts</h4>
+          <ColorInput name="alertError" v-model="alertErrorColorLocal" :label="$t('settings.error')" :fallback="previewTheme.colors.alertError"/>
+          <ContrastRatio :contrast="previewContrast.alertError"/>
+        </div>
+        <div class="color-item">
+          <h4>Badges</h4>
+          <ColorInput name="badgeNotification" v-model="badgeNotificationColorLocal" :label="$t('settings.notification')" :fallback="previewTheme.colors.badgeNotification"/>
+        </div>
+        <div class="color-item">
+          <h4>Panel header</h4>
+          <ColorInput name="panelColor" v-model="panelColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
+          <OpacityInput name="panelOpacity" v-model="panelOpacityLocal" :fallback="previewTheme.opacity.panel || 1"/>
+          <ColorInput name="panelTextColor" v-model="panelTextColorLocal" :fallback="previewTheme.colors.panelText" :label="$t('settings.links')"/>
+          <ContrastRatio :contrast="previewContrast.panelText" large="1"/>
+        </div>
+        <div class="color-item">
+          <h4>Top bar</h4>
+          <ColorInput name="topBarColor" v-model="topBarColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
+          <ColorInput name="topBarTextColor" v-model="topBarTextColorLocal" :fallback="previewTheme.colors.topBarText" :label="$t('settings.text')"/>
+          <ContrastRatio :contrast="previewContrast.topBarText"/>
+          <ColorInput name="topBarLinkColor" v-model="topBarLinkColorLocal" :fallback="previewTheme.colors.topBarLink" :label="$t('settings.links')"/>
+          <ContrastRatio :contrast="previewContrast.topBarLink"/>
+        </div>
+        <div class="color-item">
+          <h4>Text fields</h4>
+          <ColorInput name="inputColor" v-model="inputColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
+          <OpacityInput name="inputOpacity" v-model="inputOpacityLocal" :fallback="previewTheme.opacity.input || 1"/>
+          <ColorInput name="inputTextColor" v-model="inputTextColorLocal" :fallback="previewTheme.colors.inputText" :label="$t('settings.text')"/>
+          <ContrastRatio :contrast="previewContrast.inputText"/>
+        </div>
+        <div class="color-item">
+          <h4>Buttons</h4>
+          <ColorInput name="btnColor" v-model="btnColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
+          <OpacityInput name="btnOpacity" v-model="btnOpacityLocal" :fallback="previewTheme.opacity.btn || 1"/>
+          <ColorInput name="btnTextColor" v-model="btnTextColorLocal" :fallback="previewTheme.colors.btnText" :label="$t('settings.text')"/>
+          <ContrastRatio :contrast="previewContrast.btnText"/>
+        </div>
+        <div class="color-item">
+          <h4>Borders</h4>
+          <ColorInput name="borderColor" v-model="borderColorLocal" :fallback="previewTheme.colors.border" label="Color"/>
+          <OpacityInput name="borderOpacity" v-model="borderOpacityLocal" :fallback="previewTheme.opacity.border || 1"/>
+        </div>
+        <div class="color-item">
+          <h4>Faint text</h4>
+          <ColorInput name="faintColor" v-model="faintColorLocal" :fallback="previewTheme.colors.faint || 1" :label="$t('settings.text')"/>
+          <ColorInput name="faintLinkColor" v-model="faintLinkColorLocal" :fallback="previewTheme.colors.faintLink" :label="$t('settings.links')"/>
+          <ColorInput name="panelFaintColor" v-model="panelFaintColorLocal" :fallback="previewTheme.colors.panelFaint" :label="$t('settings.panel')"/>
+          <OpacityInput name="faintOpacity" v-model="faintOpacityLocal" :fallback="previewTheme.opacity.faint || 0.5"/>
+        </div>
       </div>
-      <div class="color-item">
-        <h4>Alerts</h4>
-        <ColorInput name="badgeNotification" v-model="badgeNotificationColorLocal" :label="$t('settings.notification')" :fallback="previewTheme.colors.badgeNotification"/>
-        <ContrastRatio :contrast="previewContrast.badgeNotification"/>
-        <OpacityInput name="badgeOpacity" v-model="badgeOpacityLocal" :fallback="previewTheme.opacity.badge || 1"/>
+      <div label="Roundness" class="radius-container">
+        <p>{{$t('settings.radii_help')}}</p>
+        <div class="radius-item">
+          <label for="btnradius" class="theme-radius-lb">{{$t('settings.btnRadius')}}</label>
+          <input id="btnradius" class="theme-radius-rn" type="range" v-model="btnRadiusLocal" max="16">
+          <input id="btnradius-t" class="theme-radius-in" type="text" v-model="btnRadiusLocal">
+        </div>
+        <div class="radius-item">
+          <label for="inputradius" class="theme-radius-lb">{{$t('settings.inputRadius')}}</label>
+          <input id="inputradius" class="theme-radius-rn" type="range" v-model="inputRadiusLocal" max="16">
+          <input id="inputradius-t" class="theme-radius-in" type="text" v-model="inputRadiusLocal">
+        </div>
+        <div class="radius-item">
+          <label for="panelradius" class="theme-radius-lb">{{$t('settings.panelRadius')}}</label>
+          <input id="panelradius" class="theme-radius-rn" type="range" v-model="panelRadiusLocal" max="50">
+          <input id="panelradius-t" class="theme-radius-in" type="text" v-model="panelRadiusLocal">
+        </div>
+        <div class="radius-item">
+          <label for="avatarradius" class="theme-radius-lb">{{$t('settings.avatarRadius')}}</label>
+          <input id="avatarradius" class="theme-radius-rn" type="range" v-model="avatarRadiusLocal" max="28">
+          <input id="avatarradius-t" class="theme-radius-in" type="green" v-model="avatarRadiusLocal">
+        </div>
+        <div class="radius-item">
+          <label for="avataraltradius" class="theme-radius-lb">{{$t('settings.avatarAltRadius')}}</label>
+          <input id="avataraltradius" class="theme-radius-rn" type="range" v-model="avatarAltRadiusLocal" max="28">
+          <input id="avataraltradius-t" class="theme-radius-in" type="text" v-model="avatarAltRadiusLocal">
+        </div>
+        <div class="radius-item">
+          <label for="attachmentradius" class="theme-radius-lb">{{$t('settings.attachmentRadius')}}</label>
+          <input id="attachmentrradius" class="theme-radius-rn" type="range" v-model="attachmentRadiusLocal" max="50">
+          <input id="attachmentradius-t" class="theme-radius-in" type="text" v-model="attachmentRadiusLocal">
+        </div>
+        <div class="radius-item">
+          <label for="tooltipradius" class="theme-radius-lb">{{$t('settings.tooltipRadius')}}</label>
+          <input id="tooltipradius" class="theme-radius-rn" type="range" v-model="tooltipRadiusLocal" max="20">
+          <input id="tooltipradius-t" class="theme-radius-in" type="text" v-model="tooltipRadiusLocal">
+        </div>
       </div>
-      <div class="color-item">
-        <h4>Panel header</h4>
-        <ColorInput name="panelColor" v-model="panelColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
-        <OpacityInput name="panelOpacity" v-model="panelOpacityLocal" :fallback="previewTheme.opacity.panel || 1"/>
-        <ColorInput name="panelTextColor" v-model="panelTextColorLocal" :fallback="previewTheme.colors.panelText" :label="$t('settings.links')"/>
-        <ContrastRatio :contrast="previewContrast.panelText" large="1"/>
-      </div>
-      <div class="color-item">
-        <h4>Top bar</h4>
-        <ColorInput name="topBarColor" v-model="topBarColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
-        <ColorInput name="topBarTextColor" v-model="topBarTextColorLocal" :fallback="previewTheme.colors.topBarText" :label="$t('settings.text')"/>
-        <ContrastRatio :contrast="previewContrast.topBarText"/>
-        <ColorInput name="topBarLinkColor" v-model="topBarLinkColorLocal" :fallback="previewTheme.colors.topBarLink" :label="$t('settings.links')"/>
-        <ContrastRatio :contrast="previewContrast.topBarLink"/>
-      </div>
-      <div class="color-item">
-        <h4>Text fields</h4>
-        <ColorInput name="inputColor" v-model="inputColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
-        <OpacityInput name="inputOpacity" v-model="inputOpacityLocal" :fallback="previewTheme.opacity.input || 1"/>
-        <ColorInput name="inputTextColor" v-model="inputTextColorLocal" :fallback="previewTheme.colors.inputText" :label="$t('settings.text')"/>
-        <ContrastRatio :contrast="previewContrast.inputText"/>
-      </div>
-      <div class="color-item">
-        <h4>Buttons</h4>
-        <ColorInput name="btnColor" v-model="btnColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
-        <OpacityInput name="btnOpacity" v-model="btnOpacityLocal" :fallback="previewTheme.opacity.btn || 1"/>
-        <ColorInput name="btnTextColor" v-model="btnTextColorLocal" :fallback="previewTheme.colors.btnText" :label="$t('settings.text')"/>
-        <ContrastRatio :contrast="previewContrast.btnText"/>
-      </div>
-      <div class="color-item">
-        <h4>Borders</h4>
-        <ColorInput name="borderColor" v-model="borderColorLocal" :fallback="previewTheme.colors.border" label="Color"/>
-        <OpacityInput name="borderOpacity" v-model="borderOpacityLocal" :fallback="previewTheme.opacity.border || 1"/>
-      </div>
-      <div class="color-item">
-        <h4>Faint text</h4>
-        <ColorInput name="faintColor" v-model="faintColorLocal" :fallback="previewTheme.colors.faint || 1" :label="$t('settings.text')"/>
-        <ColorInput name="faintLinkColor" v-model="faintLinkColorLocal" :fallback="previewTheme.colors.faintLink" :label="$t('settings.links')"/>
-        <ColorInput name="panelFaintColor" v-model="panelFaintColorLocal" :fallback="previewTheme.colors.panelFaint" :label="$t('settings.panel')"/>
-        <OpacityInput name="faintOpacity" v-model="faintOpacityLocal" :fallback="previewTheme.opacity.faint || 0.5"/>
-      </div>
-    </div>
-  </div>
-
-  <div class="radius-container">
-    <p>{{$t('settings.radii_help')}}</p>
-    <div class="radius-item">
-      <label for="btnradius" class="theme-radius-lb">{{$t('settings.btnRadius')}}</label>
-      <input id="btnradius" class="theme-radius-rn" type="range" v-model="btnRadiusLocal" max="16">
-      <input id="btnradius-t" class="theme-radius-in" type="text" v-model="btnRadiusLocal">
-    </div>
-    <div class="radius-item">
-      <label for="inputradius" class="theme-radius-lb">{{$t('settings.inputRadius')}}</label>
-      <input id="inputradius" class="theme-radius-rn" type="range" v-model="inputRadiusLocal" max="16">
-      <input id="inputradius-t" class="theme-radius-in" type="text" v-model="inputRadiusLocal">
-    </div>
-    <div class="radius-item">
-      <label for="panelradius" class="theme-radius-lb">{{$t('settings.panelRadius')}}</label>
-      <input id="panelradius" class="theme-radius-rn" type="range" v-model="panelRadiusLocal" max="50">
-      <input id="panelradius-t" class="theme-radius-in" type="text" v-model="panelRadiusLocal">
-    </div>
-    <div class="radius-item">
-      <label for="avatarradius" class="theme-radius-lb">{{$t('settings.avatarRadius')}}</label>
-      <input id="avatarradius" class="theme-radius-rn" type="range" v-model="avatarRadiusLocal" max="28">
-      <input id="avatarradius-t" class="theme-radius-in" type="green" v-model="avatarRadiusLocal">
-    </div>
-    <div class="radius-item">
-      <label for="avataraltradius" class="theme-radius-lb">{{$t('settings.avatarAltRadius')}}</label>
-      <input id="avataraltradius" class="theme-radius-rn" type="range" v-model="avatarAltRadiusLocal" max="28">
-      <input id="avataraltradius-t" class="theme-radius-in" type="text" v-model="avatarAltRadiusLocal">
-    </div>
-    <div class="radius-item">
-      <label for="attachmentradius" class="theme-radius-lb">{{$t('settings.attachmentRadius')}}</label>
-      <input id="attachmentrradius" class="theme-radius-rn" type="range" v-model="attachmentRadiusLocal" max="50">
-      <input id="attachmentradius-t" class="theme-radius-in" type="text" v-model="attachmentRadiusLocal">
-    </div>
-    <div class="radius-item">
-      <label for="tooltipradius" class="theme-radius-lb">{{$t('settings.tooltipRadius')}}</label>
-      <input id="tooltipradius" class="theme-radius-rn" type="range" v-model="tooltipRadiusLocal" max="20">
-      <input id="tooltipradius-t" class="theme-radius-in" type="text" v-model="tooltipRadiusLocal">
-    </div>
-  </div>
+    </tab-switcher>
 
   <div class="apply-container">
     <button class="btn submit" @click="setCustomTheme">{{$t('general.apply')}}</button>
@@ -193,14 +193,12 @@
 
 .apply-container,
 .radius-container,
-.color-container > div,
+.color-container,
 .presets-container {
   display: flex;
 
   p {
-    flex: 2 0 100%;
-    margin-top: 2em;
-    margin-bottom: .5em;
+    margin-left: 1em
   }
 }
 
@@ -208,7 +206,7 @@
   flex-direction: column;
 }
 
-.color-container > div{
+.color-container{
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -231,6 +229,9 @@
   border-color: var(--border, $fallback--border);
   margin: 1em -1em 0;
   padding: 1em;
+  background: var(--body-background-image);
+  background-size: cover;
+  background-position: 50% 50%;
 
   .btn {
     margin-top: 1em;

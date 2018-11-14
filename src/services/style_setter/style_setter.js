@@ -1,6 +1,6 @@
 import { times } from 'lodash'
-import { brightness, invertLightness, convert } from 'chromatism'
-import { rgb2hex, hex2rgb, mixrgb } from '../color_convert/color_convert.js'
+import { brightness, invertLightness, convert, contrastRatio } from 'chromatism'
+import { rgb2hex, hex2rgb, mixrgb, getContrastRatio, alphaBlend } from '../color_convert/color_convert.js'
 
 // While this is not used anymore right now, I left it in if we want to do custom
 // styles that aren't just colors, so user can pick from a few different distinct
@@ -58,13 +58,17 @@ const rgb2rgba = function (rgba) {
   return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
 }
 
-const getTextColor = function (bg, text) {
+const getTextColor = function (bg, text, preserve) {
   const bgIsLight = convert(bg).hsl.l > 50
   const textIsLight = convert(text).hsl.l > 50
 
   if ((bgIsLight && textIsLight) || (!bgIsLight && !textIsLight)) {
     const base = typeof text.a !== 'undefined' ? { a: text.a } : {}
-    return Object.assign(base, invertLightness(text).rgb)
+    const result = Object.assign(base, invertLightness(text).rgb)
+    if (!preserve && getContrastRatio(bg, result) < 4.5) {
+      return contrastRatio(bg, text).rgb
+    }
+    return result
   }
   return text
 }
@@ -104,7 +108,12 @@ const generatePreset = (input) => {
     alert: 0.5,
     input: 0.5,
     faint: 0.5
-  }, input.opacity)
+  }, Object.entries(input.opacity || {}).reduce((acc, [k, v]) => {
+    if (typeof v !== 'undefined') {
+      acc[k] = v
+    }
+    return acc
+  }, {}))
 
   const col = Object.entries(input.colors || input).reduce((acc, [k, v]) => {
     if (typeof v === 'object') {
@@ -128,9 +137,9 @@ const generatePreset = (input) => {
 
   colors.fg = col.fg
   colors.fgText = col.fgText || getTextColor(colors.fg, colors.text)
-  colors.fgLink = col.fgLink || getTextColor(colors.fg, colors.link)
+  colors.fgLink = col.fgLink || getTextColor(colors.fg, colors.link, true)
 
-  colors.border = col.border || brightness(20 * mod, colors.fg).rgb
+  colors.border = col.border || brightness(2 * mod, colors.fg).rgb
 
   colors.btn = col.btn || Object.assign({}, col.fg)
   colors.btnText = col.btnText || getTextColor(colors.btn, colors.fgText)
@@ -156,8 +165,11 @@ const generatePreset = (input) => {
   colors.cOrange = col.cOrange
 
   colors.alertError = col.alertError || Object.assign({}, col.cRed)
+  colors.alertErrorText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.bg), colors.text)
+  colors.alertErrorPanelText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.panel), colors.panelText)
+
   colors.badgeNotification = col.badgeNotification || Object.assign({}, col.cRed)
-  colors.badgeNotificationText = col.badgeNotification || Object.assign({}, col.cRed)
+  colors.badgeNotificationText = contrastRatio(colors.badgeNotification).rgb
 
   Object.entries(opacity).forEach(([ k, v ]) => {
     if (typeof v === 'undefined') return

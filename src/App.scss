@@ -473,14 +473,19 @@ nav {
   padding: 0.25em;
   border-radius: $fallback--tooltipRadius;
   border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-  color: $fallback--faint;
-  color: var(--faint, $fallback--faint);
   min-height: 28px;
   line-height: 28px;
 
   &.error {
     background-color: $fallback--alertError;
     background-color: var(--alertError, $fallback--alertError);
+    color: $fallback--text;
+    color: var(--alertErrorText, $fallback--text);
+
+    .panel-heading & {
+      color: $fallback--text;
+      color: var(--alertErrorPanelText, $fallback--text);
+    }
   }
 }
 

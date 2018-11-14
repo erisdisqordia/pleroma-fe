@@ -80,28 +80,21 @@ const getContrastRatio = (a, b) => {
 }
 
 /**
- * This generates what "worst case" color would look like for transparent
- * segments. I.e. transparent black with yellow text over yellow background.
+ * This performs alpha blending between solid background and semi-transparent foreground
  *
- * @param {Object} srgb - transparent color
- * @param {Number} alpha - color's opacity/alpha channel
- * @param {Object} textSrgb - text color (considered as worst case scenario for transparent background)
+ * @param {Object} fg - top layer color
+ * @param {Number} fga - top layer's alpha
+ * @param {Object} bg - bottom layer color
  * @returns {Object} sRGB of resulting color
  */
-const transparentWorstCase = (srgb, alpha, textSrgb) => {
+const alphaBlend = (fg, fga, bg) => {
+  if (fga === 1 || typeof fga === 'undefined') return fg
   return 'rgb'.split('').reduce((acc, c) => {
     // Simplified https://en.wikipedia.org/wiki/Alpha_compositing#Alpha_blending
     // for opaque bg and transparent fg
-    acc[c] = (srgb[c] * alpha + textSrgb[c] * (1 - alpha))
+    acc[c] = (fg[c] * fga + bg[c] * (1 - fga))
     return acc
   }, {})
-}
-
-const worstCase = (bg, bga, text) => {
-  console.log(bg)
-  console.log(text)
-  if (bga === 1 || typeof bga === 'undefined') return bg
-  return transparentWorstCase(bg, bga, text)
 }
 
 const hex2rgb = (hex) => {
@@ -134,5 +127,5 @@ export {
   mixrgb,
   rgbstr2hex,
   getContrastRatio,
-  worstCase
+  alphaBlend
 }

@@ -1,8 +1,9 @@
-import { rgb2hex, hex2rgb, getContrastRatio, worstCase } from '../../services/color_convert/color_convert.js'
+import { rgb2hex, hex2rgb, getContrastRatio, alphaBlend } from '../../services/color_convert/color_convert.js'
 import ColorInput from '../color_input/color_input.vue'
 import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
 import StyleSetter from '../../services/style_setter/style_setter.js'
+import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
 
 export default {
   data () {
@@ -38,7 +39,6 @@ export default {
       topBarTextColorLocal: undefined,
       topBarLinkColorLocal: undefined,
 
-      alertOpacityLocal: undefined,
       alertErrorColorLocal: undefined,
 
       badgeOpacityLocal: undefined,
@@ -123,8 +123,6 @@ export default {
           btn: this.btnOpacityLocal,
           input: this.inputOpacityLocal,
           panel: this.panelOpacityLocal,
-          alert: this.alertOpacityLocal,
-          badge: this.badgeOpacityLocal,
           topBar: this.topBarOpacityLocal,
           border: this.borderOpacityLocal,
           faint: this.faintOpacityLocal
@@ -160,6 +158,7 @@ export default {
       if (!this.previewTheme.colors) return {}
       const colors = this.previewTheme.colors
       const opacity = this.previewTheme.opacity
+      if (!colors.bg) return {}
       const hints = (ratio) => ({
         text: ratio.toPrecision(3) + ':1',
         // AA level, AAA level
@@ -197,26 +196,28 @@ export default {
         badgeNotification: hex2rgb(colors.badgeNotification)
       }
 
+      /* This is a bit confusing because "bottom layer" used is text color
+       * This is done to get worst case scenario when background below transparent
+       * layer matches text color, making it harder to read the lower alpha is.
+       */
       const ratios = {
-        bgText: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.text), fgs.text),
-        bgLink: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.link), fgs.link),
-        bgRed: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.red), fgs.red),
-        bgGreen: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.green), fgs.green),
-        bgBlue: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.blue), fgs.blue),
-        bgOrange: getContrastRatio(worstCase(bgs.bg, opacity.bg, fgs.orange), fgs.orange),
+        bgText: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.text), fgs.text),
+        bgLink: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.link), fgs.link),
+        bgRed: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.red), fgs.red),
+        bgGreen: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.green), fgs.green),
+        bgBlue: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.blue), fgs.blue),
+        bgOrange: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.orange), fgs.orange),
 
-        tintText: getContrastRatio(worstCase(bgs.bg, 0.5, fgs.panelText), fgs.text),
+        tintText: getContrastRatio(alphaBlend(bgs.bg, 0.5, fgs.panelText), fgs.text),
 
-        panelText: getContrastRatio(worstCase(bgs.panel, opacity.panel, fgs.panelText), fgs.panelText),
+        panelText: getContrastRatio(alphaBlend(bgs.panel, opacity.panel, fgs.panelText), fgs.panelText),
 
-        btnText: getContrastRatio(worstCase(bgs.btn, opacity.btn, fgs.btnText), fgs.btnText),
+        btnText: getContrastRatio(alphaBlend(bgs.btn, opacity.btn, fgs.btnText), fgs.btnText),
 
-        inputText: getContrastRatio(worstCase(bgs.input, opacity.input, fgs.inputText), fgs.inputText),
+        inputText: getContrastRatio(alphaBlend(bgs.input, opacity.input, fgs.inputText), fgs.inputText),
 
-        badgeNotification: getContrastRatio(worstCase(bgs.badgeNotification, opacity.badge, fgs.text), fgs.text),
-
-        topBarText: getContrastRatio(worstCase(bgs.topBar, opacity.topBar, fgs.topBarText), fgs.topBarText),
-        topBarLink: getContrastRatio(worstCase(bgs.topBar, opacity.topBar, fgs.topBarLink), fgs.topBarLink)
+        topBarText: getContrastRatio(alphaBlend(bgs.topBar, opacity.topBar, fgs.topBarText), fgs.topBarText),
+        topBarLink: getContrastRatio(alphaBlend(bgs.topBar, opacity.topBar, fgs.topBarLink), fgs.topBarLink)
       }
 
       return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})
@@ -229,7 +230,8 @@ export default {
   components: {
     ColorInput,
     OpacityInput,
-    ContrastRatio
+    ContrastRatio,
+    TabSwitcher
   },
   methods: {
     exportCurrentTheme () {

@@ -97,6 +97,15 @@ const alphaBlend = (fg, fga, bg) => {
   }, {})
 }
 
+const invert = (rgb) => {
+  return 'rgb'.split('').reduce((acc, c) => {
+    console.log(rgb[c])
+    acc[c] = 255 - rgb[c]
+    console.log(acc[c])
+    return acc
+  }, {})
+}
+
 const hex2rgb = (hex) => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
   return result ? {
@@ -125,6 +134,7 @@ export {
   rgb2hex,
   hex2rgb,
   mixrgb,
+  invert,
   rgbstr2hex,
   getContrastRatio,
   alphaBlend

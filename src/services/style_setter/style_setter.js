@@ -40,8 +40,6 @@ const setStyle = (href, commit) => {
       colors[name] = color
     })
 
-    commit('setOption', { name: 'colors', value: colors })
-
     body.removeChild(baseEl)
 
     const styleEl = document.createElement('style')
@@ -74,7 +72,7 @@ const getTextColor = function (bg, text, preserve) {
 }
 
 const setColors = (input, commit) => {
-  const { colorRules, radiiRules } = generatePreset(input)
+  const { colorRules, radiiRules, theme } = generatePreset(input)
   const head = document.head
   const body = document.body
   body.style.display = 'none'
@@ -91,6 +89,7 @@ const setColors = (input, commit) => {
   // commit('setOption', { name: 'colors', value: htmlColors })
   // commit('setOption', { name: 'radii', value: radii })
   commit('setOption', { name: 'customTheme', value: input })
+  commit('setOption', { name: 'colors', value: theme.colors })
 }
 
 const generatePreset = (input) => {

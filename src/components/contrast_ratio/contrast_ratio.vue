@@ -36,7 +36,7 @@ export default {
 <style lang="scss">
 .contrast-ratio {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 
   .label {
     margin-right: 1em;

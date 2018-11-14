@@ -47,6 +47,7 @@ export default {
 <style lang="scss">
 .color-control {
   display: flex;
+  align-items: baseline;
 
   &.disabled *:not(.opt-l){
     opacity: .5
@@ -75,10 +76,10 @@ export default {
     flex: 0;
     padding: 1px;
     cursor: pointer;
-    height: 100%;
-    max-height: 29px;
+    height: 29px;
     min-width: 2em;
     border: none;
+    align-self: stretch;
   }
 }
 </style>

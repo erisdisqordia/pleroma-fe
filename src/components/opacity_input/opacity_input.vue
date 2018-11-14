@@ -41,6 +41,7 @@ export default {
 <style lang="scss">
 .opacity-control {
   display: flex;
+  align-items: baseline;
 
   &.disabled *:not(.opt-l) {
     opacity: .5
@@ -48,7 +49,6 @@ export default {
 
   .opt-l {
     align-self: center;
-    line-height: 0;
     &::before {
       width: 14px;
       height: 14px;
@@ -61,7 +61,6 @@ export default {
   }
 
   .input-range {
-    align-self: center;
     background: none;
     border: none;
     margin: 0;
@@ -70,8 +69,8 @@ export default {
     min-width: 7em;
     flex: 1;
   }
+
   .input-number {
-    align-self: center;
     margin: 0;
     min-width: 4em;
     flex: 0;

@@ -8,6 +8,7 @@ import FriendsTimeline from '../components/friends_timeline/friends_timeline.vue
 import TagTimeline from '../components/tag_timeline/tag_timeline.vue'
 import ConversationPage from '../components/conversation-page/conversation-page.vue'
 import Mentions from '../components/mentions/mentions.vue'
+import DMs from '../components/dm_timeline/dm_timeline.vue'
 import UserProfile from '../components/user_profile/user_profile.vue'
 import Settings from '../components/settings/settings.vue'
 import Registration from '../components/registration/registration.vue'
@@ -88,6 +89,7 @@ const afterStoreSetup = ({store, i18n}) => {
             { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
             { name: 'user-profile', path: '/users/:id', component: UserProfile },
             { name: 'mentions', path: '/:username/mentions', component: Mentions },
+            { name: 'dms', path: '/:username/dms', component: DMs },
             { name: 'settings', path: '/settings', component: Settings },
             { name: 'registration', path: '/registration', component: Registration },
             { name: 'registration', path: '/registration/:token', component: Registration },

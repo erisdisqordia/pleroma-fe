@@ -21,6 +21,7 @@
   },
   "login": {
     "login": "Connexion",
+    "description": "Connexion avec OAuth",
     "logout": "Déconnexion",
     "password": "Mot de passe",
     "placeholder": "p.e. lain",
@@ -30,6 +31,7 @@
   "nav": {
     "chat": "Chat local",
     "friend_requests": "Demandes d'ami",
+    "dms": "Messages adressés",
     "mentions": "Notifications",
     "public_tl": "Statuts locaux",
     "timeline": "Journal",
@@ -111,6 +113,8 @@
     "general": "Général",
     "hide_attachments_in_convo": "Masquer les pièces jointes dans les conversations",
     "hide_attachments_in_tl": "Masquer les pièces jointes dans le journal",
+    "hide_post_stats": "Masquer les statistiques de publication (le nombre de favoris)",
+    "hide_user_stats": "Masquer les statistiques de profil (le nombre d'amis)",
     "import_followers_from_a_csv_file": "Importer des abonnements depuis un fichier csv",
     "import_theme": "Charger le thème",
     "inputRadius": "Champs de texte",

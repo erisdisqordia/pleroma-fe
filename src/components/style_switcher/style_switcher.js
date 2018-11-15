@@ -288,19 +288,6 @@ export default {
     },
 
     setCustomTheme () {
-      if (!this.bgColorLocal && !this.btnColorLocal && !this.linkColorLocal) {
-        // reset to picked themes
-      }
-
-      const rgb = (hex) => {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-        return result ? {
-          r: parseInt(result[1], 16),
-          g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16)
-        } : null
-      }
-
       this.$store.dispatch('setOption', {
         name: 'customTheme',
         value: this.currentTheme
@@ -310,6 +297,8 @@ export default {
     clearV1 () {
       this.bgOpacityLocal = undefined
       this.fgOpacityLocal = undefined
+
+      this.fgTextColorLocal = undefined
       this.fgLinkColorLocal = undefined
 
       this.btnColorLocal = undefined
@@ -371,7 +360,6 @@ export default {
       }
 
       const keys = new Set(version !== 1 ? Object.keys(colors) : [])
-      console.log(keys)
       if (version === 1) {
         // V1 ignores the rest
         this.clearV1()

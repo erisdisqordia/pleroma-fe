@@ -99,9 +99,7 @@ const alphaBlend = (fg, fga, bg) => {
 
 const invert = (rgb) => {
   return 'rgb'.split('').reduce((acc, c) => {
-    console.log(rgb[c])
     acc[c] = 255 - rgb[c]
-    console.log(acc[c])
     return acc
   }, {})
 }

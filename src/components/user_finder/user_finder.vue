@@ -1,9 +1,5 @@
 <template>
   <span class="user-finder-container">
-    <span class="alert error" v-if="error">
-      <i class="icon-cancel user-finder-icon" @click="dismissError"/>
-      {{$t('finder.error_fetching_user')}}
-    </span>
     <i class="icon-spin4 user-finder-icon animate-spin-slow" v-if="loading" />
     <a href="#" v-if="hidden"><i class="icon-user-plus user-finder-icon" @click.prevent.stop="toggleHidden"/></a>
     <span v-else>

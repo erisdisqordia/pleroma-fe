@@ -15,6 +15,7 @@ import Registration from '../components/registration/registration.vue'
 import UserSettings from '../components/user_settings/user_settings.vue'
 import FollowRequests from '../components/follow_requests/follow_requests.vue'
 import OAuthCallback from '../components/oauth_callback/oauth_callback.vue'
+import UserSearch from '../components/user_search/user_search.vue'
 
 const afterStoreSetup = ({store, i18n}) => {
   window.fetch('/api/statusnet/config.json')
@@ -95,7 +96,8 @@ const afterStoreSetup = ({store, i18n}) => {
             { name: 'registration', path: '/registration/:token', component: Registration },
             { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
             { name: 'user-settings', path: '/user-settings', component: UserSettings },
-            { name: 'oauth-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) }
+            { name: 'oauth-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) },
+            { name: 'user-search', path: '/user-search', component: UserSearch, props: (route) => ({ query: route.query.query }) }
           ]
 
           const router = new VueRouter({

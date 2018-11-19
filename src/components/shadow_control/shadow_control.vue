@@ -5,6 +5,7 @@
       <input
         v-model="selected.y"
         :disabled="!present"
+        @input="update"
         class="input-number"
         type="number">
       <div class="wrap">
@@ -182,15 +183,15 @@
     }
     .preview-window {
       flex: 1;
-      background-color: white;
+      background-color: #999999;
       display: flex;
       align-items: center;
       justify-content: center;
       background-image:
-      linear-gradient(45deg, #808080 25%, transparent 25%),
-      linear-gradient(-45deg, #808080 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, #808080 75%),
-      linear-gradient(-45deg, transparent 75%, #808080 75%);
+      linear-gradient(45deg, #666666 25%, transparent 25%),
+      linear-gradient(-45deg, #666666 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #666666 75%),
+      linear-gradient(-45deg, transparent 75%, #666666 75%);
       background-size: 20px 20px;
       background-position:0 0, 0 10px, 10px -10px, -10px 0;
 

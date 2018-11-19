@@ -313,6 +313,7 @@ main-router {
   border-radius: $fallback--panelRadius;
   border-radius: var(--panelRadius, $fallback--panelRadius);
   box-shadow: 1px 1px 4px rgba(0,0,0,.6);
+  box-shadow: var(--panel-shadow);
 }
 
 .panel-body:empty::before {

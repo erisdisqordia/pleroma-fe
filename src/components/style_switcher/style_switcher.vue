@@ -1,49 +1,49 @@
 <template>
-<div>
-  <div class="presets-container">
-    <div>
-      {{$t('settings.presets')}}
-      <label for="style-switcher" class='select'>
-        <select id="style-switcher" v-model="selected" class="style-switcher">
-          <option v-for="style in availableStyles"
-                  :value="style"
-                  :style="{
-                          backgroundColor: style[1],
-                          color: style[3]
-                          }">
-            {{style[0]}}
-          </option>
-        </select>
-        <i class="icon-down-open"/>
-      </label>
-    </div>
-    <div class="import-export">
-      <button class="btn" @click="exportCurrentTheme">{{ $t('settings.export_theme') }}</button>
-      <button class="btn" @click="importTheme">{{ $t('settings.import_theme') }}</button>
-      <p v-if="invalidThemeImported" class="import-warning">{{ $t('settings.invalid_theme_imported') }}</p>
-    </div>
-  </div>
-
-  <div class="preview-container">
-    <div class="panel dummy" :style="previewRules">
-      <div class="panel-heading">Preview</div>
-      <div class="panel-body theme-preview-content">
-        <div class="avatar">
-          ( ͡° ͜ʖ ͡°)
-        </div>
-        <h4>Content</h4>
-        <br>
-        A bunch of more content and
-        <a style="color: var(--link)">a nice lil' link</a>
-        <i style="color: var(--cBlue)" class="icon-reply"/>
-        <i style="color: var(--cGreen)" class="icon-retweet"/>
-        <i style="color: var(--cRed)" class="icon-cancel"/>
-        <i style="color: var(--cOrange)" class="icon-star"/>
-        <br>
-        <button class="btn">Button</button>
+  <div>
+    <div class="presets-container">
+      <div>
+        {{$t('settings.presets')}}
+        <label for="style-switcher" class='select'>
+          <select id="style-switcher" v-model="selected" class="style-switcher">
+            <option v-for="style in availableStyles"
+                    :value="style"
+                    :style="{
+                            backgroundColor: style[1],
+                            color: style[3]
+                            }">
+              {{style[0]}}
+            </option>
+          </select>
+          <i class="icon-down-open"/>
+        </label>
+      </div>
+      <div class="import-export">
+        <button class="btn" @click="exportCurrentTheme">{{ $t('settings.export_theme') }}</button>
+        <button class="btn" @click="importTheme">{{ $t('settings.import_theme') }}</button>
+        <p v-if="invalidThemeImported" class="import-warning">{{ $t('settings.invalid_theme_imported') }}</p>
       </div>
     </div>
-  </div>
+
+    <div class="preview-container">
+      <div class="panel dummy" :style="previewRules">
+        <div class="panel-heading">Preview</div>
+        <div class="panel-body theme-preview-content">
+          <div class="avatar">
+            ( ͡° ͜ʖ ͡°)
+          </div>
+          <h4>Content</h4>
+          <br>
+          A bunch of more content and
+          <a style="color: var(--link)">a nice lil' link</a>
+          <i style="color: var(--cBlue)" class="icon-reply"/>
+          <i style="color: var(--cGreen)" class="icon-retweet"/>
+          <i style="color: var(--cRed)" class="icon-cancel"/>
+          <i style="color: var(--cOrange)" class="icon-star"/>
+          <br>
+          <button class="btn">Button</button>
+        </div>
+      </div>
+    </div>
 
     <p>{{$t('settings.theme_help')}}</p>
     <tab-switcher>
@@ -171,15 +171,29 @@
         </div>
       </div>
       <div label="Shadow Realm" class="shadow-container">
-        <div class="shadow-selector">
-          <select id="style-switcher" v-model="shadowSelected" class="style-switcher">
-            <option v-for="shadow in shadowsAvailable"
-                    :value="shadow">
-              {{shadow}}
-            </option>
-          </select>
+        <div>
+          Shadow
+          <label for="shadow-switcher" class="shadow-selector select">
+            <select id="shadow-switcher" v-model="shadowSelected" class="shadow-switcher">
+              <option v-for="shadow in shadowsAvailable"
+                      :value="shadow">
+                {{shadow}}
+              </option>
+            </select>
+            <i class="icon-down-open"/>
+          </label>
+          <label for="override" class="label">
+            Override
+          </label>
+          <input
+            v-model="currentShadowOverriden"
+            name="override"
+            id="override"
+            class="input-override"
+            type="checkbox">
+          <label class="checkbox-label" for="override"></label>
         </div>
-        <shadow-control v-if="currentShadow" :value="currentShadow.value" :fallback="currentShadow.fallback"/>
+        <shadow-control v-if="currentShadowFallback" :fallback="currentShadowFallback" v-model="currentShadow"/>
       </div>
     </tab-switcher>
 

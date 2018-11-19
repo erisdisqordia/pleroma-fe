@@ -9,6 +9,8 @@ export default {
     'value', 'fallback'
   ],
   data () {
+    console.log('sdsa')
+    console.log(this.value, this.fallback)
     return {
       selectedId: 0,
       cValue: this.value || this.fallback
@@ -36,6 +38,9 @@ export default {
       const movable = this.cValue.splice(this.selectedId, 1)[0]
       this.cValue.splice(this.selectedId + 1, 0, movable)
       this.selectedId += 1
+    },
+    update () {
+      this.$emit('input', this.cValue)
     }
   },
   computed: {
@@ -67,7 +72,6 @@ export default {
       return hex2rgb(this.selected.color)
     },
     style () {
-      console.log(StyleSetter.generateShadow(this.cValue))
       return {
         boxShadow: StyleSetter.generateShadow(this.cValue)
       }

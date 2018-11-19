@@ -1,4 +1,5 @@
 import { rgb2hex, hex2rgb, getContrastRatio, alphaBlend } from '../../services/color_convert/color_convert.js'
+import { set, delete as del } from 'vue'
 import ColorInput from '../color_input/color_input.vue'
 import ShadowControl from '../shadow_control/shadow_control.vue'
 import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
@@ -155,7 +156,7 @@ export default {
       }
     },
     previewTheme () {
-      if (!this.preview.theme) return { colors: {}, opacity: {}, radii: {} }
+      if (!this.preview.theme) return { colors: {}, opacity: {}, radii: {}, shadows: {} }
       return this.preview.theme
     },
     previewContrast () {
@@ -231,14 +232,30 @@ export default {
       return [this.preview.colorRules, this.preview.radiiRules, 'color: var(--text)'].join(';')
     },
     shadowsAvailable () {
-      return Object.keys(this.preview.theme.shadows)
+      return Object.keys(this.previewTheme.shadows)
     },
-    currentShadow () {
-      const fallback = this.preview.theme.shadows[this.shadowSelected];
-      return fallback ? {
-        fallback,
-        value: this.shadowsLocal[this.shadowSelected]
-      } : undefined
+    currentShadowOverriden: {
+      get () {
+        return this.currentShadow
+      },
+      set (val) {
+        if (val) {
+          set(this.shadowsLocal, this.shadowSelected, Object.assign({}, this.currentShadowFallback))
+        } else {
+          del(this.shadowsLocal, this.shadowSelected)
+        }
+      }
+    },
+    currentShadowFallback () {
+      return this.previewTheme.shadows[this.shadowSelected]
+    },
+    currentShadow: {
+      get () {
+        return this.shadowsLocal[this.shadowSelected]
+      },
+      set (v) {
+        set(this.shadowsLocal, this.shadowSelected, v)
+      }
     }
   },
   components: {
@@ -305,7 +322,10 @@ export default {
     setCustomTheme () {
       this.$store.dispatch('setOption', {
         name: 'customTheme',
-        value: this.currentTheme
+        value: {
+          ...this.currentTheme,
+          shadows: this.shadowsLocal
+        }
       })
     },
 

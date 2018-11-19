@@ -72,7 +72,7 @@ const getTextColor = function (bg, text, preserve) {
 }
 
 const setColors = (input, commit) => {
-  const { colorRules, radiiRules, theme } = generatePreset(input)
+  const { colorRules, radiiRules, shadowRules, theme } = generatePreset(input)
   const head = document.head
   const body = document.body
   body.style.display = 'none'
@@ -84,6 +84,7 @@ const setColors = (input, commit) => {
   styleSheet.toString()
   styleSheet.insertRule(`body { ${colorRules} }`, 'index-max')
   styleSheet.insertRule(`body { ${radiiRules} }`, 'index-max')
+  styleSheet.insertRule(`body { ${shadowRules} }`, 'index-max')
   body.style.display = 'initial'
 
   // commit('setOption', { name: 'colors', value: htmlColors })

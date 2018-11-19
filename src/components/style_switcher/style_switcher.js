@@ -1,11 +1,22 @@
 import { rgb2hex, hex2rgb, getContrastRatio, alphaBlend } from '../../services/color_convert/color_convert.js'
 import { set, delete as del } from 'vue'
+import { generateColors, generateShadows, generateRadii, composePreset } from '../../services/style_setter/style_setter.js'
 import ColorInput from '../color_input/color_input.vue'
 import ShadowControl from '../shadow_control/shadow_control.vue'
 import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
-import StyleSetter from '../../services/style_setter/style_setter.js'
 import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
+
+const v1OnlyNames = [
+  'bg',
+  'fg',
+  'text',
+  'link',
+  'cRed',
+  'cGreen',
+  'cBlue',
+  'cOrange'
+].map(_ => _ + 'ColorLocal')
 
 export default {
   data () {
@@ -53,13 +64,13 @@ export default {
       faintOpacityLocal: undefined,
       faintLinkColorLocal: undefined,
 
-      shadowSelected: undefined,
-      shadowsLocal: {},
-
       cRedColorLocal: '',
       cBlueColorLocal: '',
       cGreenColorLocal: '',
       cOrangeColorLocal: '',
+
+      shadowSelected: undefined,
+      shadowsLocal: {},
 
       btnRadiusLocal: '',
       inputRadiusLocal: '',
@@ -86,81 +97,90 @@ export default {
     selectedVersion () {
       return Array.isArray(this.selected) ? 1 : 2
     },
-    currentTheme () {
+    currentColors () {
       return {
-        colors: {
-          bg: this.bgColorLocal,
-          text: this.textColorLocal,
-          link: this.linkColorLocal,
+        bg: this.bgColorLocal,
+        text: this.textColorLocal,
+        link: this.linkColorLocal,
 
-          fg: this.fgColorLocal,
-          fgText: this.fgTextColorLocal,
-          fgLink: this.fgLinkColorLocal,
+        fg: this.fgColorLocal,
+        fgText: this.fgTextColorLocal,
+        fgLink: this.fgLinkColorLocal,
 
-          panel: this.panelColorLocal,
-          panelText: this.panelTextColorLocal,
-          panelFaint: this.panelFaintColorLocal,
+        panel: this.panelColorLocal,
+        panelText: this.panelTextColorLocal,
+        panelFaint: this.panelFaintColorLocal,
 
-          input: this.inputColorLocal,
-          inputText: this.inputTextColorLocal,
+        input: this.inputColorLocal,
+        inputText: this.inputTextColorLocal,
 
-          topBar: this.topBarColorLocal,
-          topBarText: this.topBarTextColorLocal,
-          topBarLink: this.topBarLinkColorLocal,
+        topBar: this.topBarColorLocal,
+        topBarText: this.topBarTextColorLocal,
+        topBarLink: this.topBarLinkColorLocal,
 
-          btn: this.btnColorLocal,
-          btnText: this.btnTextColorLocal,
+        btn: this.btnColorLocal,
+        btnText: this.btnTextColorLocal,
 
-          alertError: this.alertErrorColorLocal,
-          badgeNotification: this.badgeNotificationColorLocal,
+        alertError: this.alertErrorColorLocal,
+        badgeNotification: this.badgeNotificationColorLocal,
 
-          faint: this.faintColorLocal,
-          faintLink: this.faintLinkColorLocal,
-          border: this.borderColorLocal,
+        faint: this.faintColorLocal,
+        faintLink: this.faintLinkColorLocal,
+        border: this.borderColorLocal,
 
-          cRed: this.cRedColorLocal,
-          cBlue: this.cBlueColorLocal,
-          cGreen: this.cGreenColorLocal,
-          cOrange: this.cOrangeColorLocal
-        },
-        opacity: {
-          bg: this.bgOpacityLocal,
-          btn: this.btnOpacityLocal,
-          input: this.inputOpacityLocal,
-          panel: this.panelOpacityLocal,
-          topBar: this.topBarOpacityLocal,
-          border: this.borderOpacityLocal,
-          faint: this.faintOpacityLocal
-        },
-        radii: {
-          btnRadius: this.btnRadiusLocal,
-          inputRadius: this.inputRadiusLocal,
-          panelRadius: this.panelRadiusLocal,
-          avatarRadius: this.avatarRadiusLocal,
-          avatarAltRadius: this.avatarAltRadiusLocal,
-          tooltipRadius: this.tooltipRadiusLocal,
-          attachmentRadius: this.attachmentRadiusLocal
-        }
+        cRed: this.cRedColorLocal,
+        cBlue: this.cBlueColorLocal,
+        cGreen: this.cGreenColorLocal,
+        cOrange: this.cOrangeColorLocal
       }
     },
-    preview () {
-      try {
-        if (!this.currentTheme.colors.bg) {
-          return {}
-        }
-        return StyleSetter.generatePreset(this.currentTheme)
-      } catch (e) {
-        console.error('CATCH')
-        console.error(e)
+    currentOpacity () {
+      return {
+        bg: this.bgOpacityLocal,
+        btn: this.btnOpacityLocal,
+        input: this.inputOpacityLocal,
+        panel: this.panelOpacityLocal,
+        topBar: this.topBarOpacityLocal,
+        border: this.borderOpacityLocal,
+        faint: this.faintOpacityLocal
+      }
+    },
+    currentRadii () {
+      return {
+        btn: this.btnRadiusLocal,
+        input: this.inputRadiusLocal,
+        panel: this.panelRadiusLocal,
+        avatar: this.avatarRadiusLocal,
+        avatarAlt: this.avatarAltRadiusLocal,
+        tooltip: this.tooltipRadiusLocal,
+        attachment: this.attachmentRadiusLocal
+      }
+    },
+    previewColors () {
+      if (this.currentColors.bg) {
+        return generateColors({
+          opacity: this.currentOpacity,
+          colors: this.currentColors
+        })
+      } else {
         return {}
       }
     },
+    previewRadii () {
+      return generateRadii(this.currentRadii)
+    },
+    previewShadows () {
+      return generateShadows({ shadows: this.shadowsLocal })
+    },
+    preview () {
+      return composePreset(this.previewColors, this.previewRadii, this.previewShadows)
+    },
     previewTheme () {
-      if (!this.preview.theme) return { colors: {}, opacity: {}, radii: {}, shadows: {} }
+      if (!this.preview.theme.colors) return { colors: {}, opacity: {}, radii: {}, shadows: {} }
       return this.preview.theme
     },
     previewContrast () {
-      if (!this.previewTheme.colors) return {}
+      if (!this.previewTheme.colors.bg) return {}
       const colors = this.previewTheme.colors
       const opacity = this.previewTheme.opacity
       if (!colors.bg) return {}
@@ -228,19 +248,19 @@ export default {
       return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})
     },
     previewRules () {
-      if (!this.preview.colorRules) return ''
-      return [this.preview.colorRules, this.preview.radiiRules, 'color: var(--text)'].join(';')
+      if (!this.preview.rules) return ''
+      return [...Object.values(this.preview.rules), 'color: var(--text)'].join(';')
     },
     shadowsAvailable () {
       return Object.keys(this.previewTheme.shadows)
     },
     currentShadowOverriden: {
       get () {
-        return this.currentShadow
+        return !!this.currentShadow
       },
       set (val) {
         if (val) {
-          set(this.shadowsLocal, this.shadowSelected, Object.assign({}, this.currentShadowFallback))
+          set(this.shadowsLocal, this.shadowSelected, this.currentShadowFallback.map(_ => Object.assign({}, _)))
         } else {
           del(this.shadowsLocal, this.shadowSelected)
         }
@@ -270,7 +290,12 @@ export default {
       const stringified = JSON.stringify({
         // To separate from other random JSON files and possible future theme formats
         _pleroma_theme_version: 2,
-        theme: this.currentTheme
+        theme: {
+          shadows: this.shadowsLocal,
+          opacity: this.currentOpacity,
+          colors: this.currentColors,
+          radii: this.currentRadii
+        }
       }, null, 2) // Pretty-print and indent with 2 spaces
 
       // Create an invisible link with a data url and simulate a click
@@ -323,47 +348,22 @@ export default {
       this.$store.dispatch('setOption', {
         name: 'customTheme',
         value: {
-          ...this.currentTheme,
-          shadows: this.shadowsLocal
+          shadows: this.shadowsLocal,
+          opacity: this.currentOpacity,
+          colors: this.currentColors,
+          radii: this.currentRadii
         }
       })
     },
 
+    // Clears all the extra stuff when loading V1 theme
     clearV1 () {
-      this.bgOpacityLocal = undefined
-      this.fgOpacityLocal = undefined
-
-      this.fgTextColorLocal = undefined
-      this.fgLinkColorLocal = undefined
-
-      this.btnColorLocal = undefined
-      this.btnTextColorLocal = undefined
-      this.btnOpacityLocal = undefined
-
-      this.inputColorLocal = undefined
-      this.inputTextColorLocal = undefined
-      this.inputOpacityLocal = undefined
-
-      this.panelColorLocal = undefined
-      this.panelTextColorLocal = undefined
-      this.panelFaintColorLocal = undefined
-      this.panelOpacityLocal = undefined
-
-      this.topBarColorLocal = undefined
-      this.topBarTextColorLocal = undefined
-      this.topBarLinkColorLocal = undefined
-      this.topBarOpacityLocal = undefined
-
-      this.borderColorLocal = undefined
-      this.borderOpacityLocal = undefined
-
-      this.faintColorLocal = undefined
-      this.faintOpacityLocal = undefined
-      this.faintLinkColorLocal = undefined
-
-      this.alertErrorColorLocal = undefined
-
-      this.badgeNotificationColorLocal = undefined
+      Object.keys(this.$data)
+        .filter(_ => _.endsWith('ColorLocal') || _.endsWith('OpacityLocal'))
+        .filter(_ => !v1OnlyNames.includes(_))
+        .forEach(key => {
+          set(this.$data, key, undefined)
+        })
     },
 
     /**

@@ -72,7 +72,7 @@ const getTextColor = function (bg, text, preserve) {
 }
 
 const setColors = (input, commit) => {
-  const { colorRules, radiiRules, shadowRules, theme } = generatePreset(input)
+  const { rules, theme } = generatePreset(input)
   const head = document.head
   const body = document.body
   body.style.display = 'none'
@@ -81,10 +81,11 @@ const setColors = (input, commit) => {
   head.appendChild(styleEl)
   const styleSheet = styleEl.sheet
 
+  console.log(rules)
   styleSheet.toString()
-  styleSheet.insertRule(`body { ${colorRules} }`, 'index-max')
-  styleSheet.insertRule(`body { ${radiiRules} }`, 'index-max')
-  styleSheet.insertRule(`body { ${shadowRules} }`, 'index-max')
+  styleSheet.insertRule(`body { ${rules.radii} }`, 'index-max')
+  styleSheet.insertRule(`body { ${rules.colors} }`, 'index-max')
+  styleSheet.insertRule(`body { ${rules.shadows} }`, 'index-max')
   body.style.display = 'initial'
 
   // commit('setOption', { name: 'colors', value: htmlColors })
@@ -93,7 +94,8 @@ const setColors = (input, commit) => {
   commit('setOption', { name: 'colors', value: theme.colors })
 }
 
-const generateShadow = (input) => {
+const getCssShadow = (input) => {
+  console.log(input)
   // >shad
   return input.map((shad) => [
     shad.x,
@@ -106,27 +108,8 @@ const generateShadow = (input) => {
   ]).join(' ')).join(', ')
 }
 
-const generatePreset = (input) => {
-  const radii = input.radii || {
-    btnRadius: input.btnRadius,
-    inputRadius: input.inputRadius,
-    panelRadius: input.panelRadius,
-    avatarRadius: input.avatarRadius,
-    avatarAltRadius: input.avatarAltRadius,
-    tooltipRadius: input.tooltipRadius,
-    attachmentRadius: input.attachmentRadius
-  }
-  const shadows = {
-    panel: [{
-      x: 1,
-      y: 1,
-      blur: 4,
-      spread: 0,
-      color: '#000000',
-      alpha: 0.6
-    }],
-    ...(input.shadows || {})
-  }
+const generateColors = (input) => {
+  console.log(input.opacity)
   const colors = {}
   const opacity = Object.assign({
     alert: 0.5,
@@ -138,7 +121,7 @@ const generatePreset = (input) => {
     }
     return acc
   }, {}))
-
+  console.log(colors, opacity)
   const col = Object.entries(input.colors || input).reduce((acc, [k, v]) => {
     if (typeof v === 'object') {
       acc[k] = v
@@ -205,7 +188,11 @@ const generatePreset = (input) => {
       colors[k + 'Link'].a = v
       colors['panelFaint'].a = v
     }
-    colors[k].a = v
+    if (colors[k]) {
+      colors[k].a = v
+    } else {
+      console.error('Wrong key ' + k)
+    }
   })
 
   const htmlColors = Object.entries(colors)
@@ -215,18 +202,97 @@ const generatePreset = (input) => {
           acc.complete[k] = typeof v.a === 'undefined' ? rgb2hex(v) : rgb2rgba(v)
           return acc
         }, { complete: {}, solid: {} })
-
   return {
-    colorRules: Object.entries(htmlColors.complete).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}`).join(';'),
-    radiiRules: Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}: ${v}px`).join(';'),
-    shadowRules: Object.entries(shadows).filter(([k, v]) => v).map(([k, v]) => `--${k}-shadow: ${generateShadow(v)}`).join(';'),
+    rules: {
+      colors: Object.entries(htmlColors.complete)
+        .filter(([k, v]) => v)
+        .map(([k, v]) => `--${k}: ${v}`)
+        .join(';')
+    },
     theme: {
       colors: htmlColors.solid,
-      shadows,
-      opacity,
+      opacity
+    }
+  }
+}
+
+const generateRadii = (input) => {
+  const inputRadii = input.radii || {
+    btn: input.btnRadius,
+    input: input.inputRadius,
+    panel: input.panelRadius,
+    avatar: input.avatarRadius,
+    avatarAlt: input.avatarAltRadius,
+    tooltip: input.tooltipRadius,
+    attachment: input.attachmentRadius
+  }
+
+  const radii = {
+    btn: 4,
+    input: 4,
+    panel: 10,
+    avatar: 5,
+    avatarAlt: 50,
+    tooltip: 2,
+    attachment: 5,
+    ...inputRadii
+  }
+
+  return {
+    rules: {
+      radii: Object.entries(radii).filter(([k, v]) => v).map(([k, v]) => `--${k}Radius: ${v}px`).join(';')
+    },
+    theme: {
       radii
     }
   }
+}
+
+const generateShadows = (input) => {
+  const shadows = {
+    panel: [{
+      x: 1,
+      y: 1,
+      blur: 4,
+      spread: 0,
+      color: '#000000',
+      alpha: 0.6
+    }],
+    ...(input.shadows || {})
+  }
+  console.log('benis')
+
+  return {
+    rules: {
+      shadows: Object.entries(shadows).filter(([k, v]) => v).map(([k, v]) => `--${k}Shadow: ${getCssShadow(v)}`).join(';')
+    },
+    theme: {
+      shadows
+    }
+  }
+}
+
+const composePreset = (colors, radii, shadows) => {
+  return {
+    rules: {
+      ...shadows.rules,
+      ...colors.rules,
+      ...radii.rules
+    },
+    theme: {
+      ...shadows.theme,
+      ...colors.theme,
+      ...radii.theme
+    }
+  }
+}
+
+const generatePreset = (input) => {
+  const shadows = generateShadows(input)
+  const colors = generateColors(input)
+  const radii = generateRadii(input)
+
+  return composePreset(colors, radii, shadows)
 }
 
 const setPreset = (val, commit) => {
@@ -267,13 +333,15 @@ const setPreset = (val, commit) => {
     })
 }
 
-const StyleSetter = {
+export {
   setStyle,
   setPreset,
   setColors,
   getTextColor,
+  generateColors,
+  generateRadii,
+  generateShadows,
   generatePreset,
-  generateShadow
+  composePreset,
+  getCssShadow
 }
-
-export default StyleSetter

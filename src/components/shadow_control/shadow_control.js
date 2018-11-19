@@ -1,16 +1,13 @@
 import ColorInput from '../color_input/color_input.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
-import StyleSetter from '../../services/style_setter/style_setter.js'
+import { getCssShadow } from '../../services/style_setter/style_setter.js'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
-import { set } from 'vue'
 
 export default {
   props: [
     'value', 'fallback'
   ],
   data () {
-    console.log('sdsa')
-    console.log(this.value, this.fallback)
     return {
       selectedId: 0,
       cValue: this.value || this.fallback
@@ -38,9 +35,6 @@ export default {
       const movable = this.cValue.splice(this.selectedId, 1)[0]
       this.cValue.splice(this.selectedId + 1, 0, movable)
       this.selectedId += 1
-    },
-    update () {
-      this.$emit('input', this.cValue)
     }
   },
   computed: {
@@ -73,7 +67,7 @@ export default {
     },
     style () {
       return {
-        boxShadow: StyleSetter.generateShadow(this.cValue)
+        boxShadow: getCssShadow(this.cValue)
       }
     }
   }

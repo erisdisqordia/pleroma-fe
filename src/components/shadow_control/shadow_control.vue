@@ -5,7 +5,6 @@
       <input
         v-model="selected.y"
         :disabled="!present"
-        @input="update"
         class="input-number"
         type="number">
       <div class="wrap">

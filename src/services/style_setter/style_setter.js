@@ -95,7 +95,6 @@ const setColors = (input, commit) => {
 }
 
 const getCssShadow = (input) => {
-  console.log(input)
   // >shad
   return input.map((shad) => [
     shad.x,

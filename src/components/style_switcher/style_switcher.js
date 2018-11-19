@@ -1,5 +1,6 @@
 import { rgb2hex, hex2rgb, getContrastRatio, alphaBlend } from '../../services/color_convert/color_convert.js'
 import ColorInput from '../color_input/color_input.vue'
+import ShadowControl from '../shadow_control/shadow_control.vue'
 import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
 import StyleSetter from '../../services/style_setter/style_setter.js'
@@ -50,6 +51,9 @@ export default {
       faintColorLocal: undefined,
       faintOpacityLocal: undefined,
       faintLinkColorLocal: undefined,
+
+      shadowSelected: undefined,
+      shadowsLocal: {},
 
       cRedColorLocal: '',
       cBlueColorLocal: '',
@@ -225,12 +229,23 @@ export default {
     previewRules () {
       if (!this.preview.colorRules) return ''
       return [this.preview.colorRules, this.preview.radiiRules, 'color: var(--text)'].join(';')
+    },
+    shadowsAvailable () {
+      return Object.keys(this.preview.theme.shadows)
+    },
+    currentShadow () {
+      const fallback = this.preview.theme.shadows[this.shadowSelected];
+      return fallback ? {
+        fallback,
+        value: this.shadowsLocal[this.shadowSelected]
+      } : undefined
     }
   },
   components: {
     ColorInput,
     OpacityInput,
     ContrastRatio,
+    ShadowControl,
     TabSwitcher
   },
   methods: {
@@ -340,6 +355,7 @@ export default {
       const colors = input.colors || input
       const radii = input.radii || input
       const opacity = input.opacity || input
+      const shadows = input.shadows || {}
 
       if (version === 0) {
         if (input.version) version = input.version
@@ -383,6 +399,8 @@ export default {
       this.avatarAltRadiusLocal = radii.avatarAltRadius || 50
       this.tooltipRadiusLocal = radii.tooltipRadius || 2
       this.attachmentRadiusLocal = radii.attachmentRadius || 5
+
+      this.shadowsLocal = shadows
 
       Object.entries(opacity).forEach(([k, v]) => {
         if (typeof v === 'undefined' || v === null || Number.isNaN(v)) return

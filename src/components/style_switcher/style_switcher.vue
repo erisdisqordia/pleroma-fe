@@ -170,6 +170,17 @@
           <input id="tooltipradius-t" class="theme-radius-in" type="text" v-model="tooltipRadiusLocal">
         </div>
       </div>
+      <div label="Shadow Realm" class="shadow-container">
+        <div class="shadow-selector">
+          <select id="style-switcher" v-model="shadowSelected" class="style-switcher">
+            <option v-for="shadow in shadowsAvailable"
+                    :value="shadow">
+              {{shadow}}
+            </option>
+          </select>
+        </div>
+        <shadow-control v-if="currentShadow" :value="currentShadow.value" :fallback="currentShadow.fallback"/>
+      </div>
     </tab-switcher>
 
   <div class="apply-container">

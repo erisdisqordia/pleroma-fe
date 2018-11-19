@@ -1,5 +1,4 @@
 {
-  "name": "",
   "css_prefix_text": "icon-",
   "css_use_suffix": false,
   "hinting": true,
@@ -208,6 +207,12 @@
       "uid": "1a5cfa186647e8c929c2b17b9fc4dac1",
       "css": "plus-squared",
       "code": 61694,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "44e04715aecbca7f266a17d5a7863c68",
+      "css": "plus",
+      "code": 59413,
       "src": "fontawesome"
     }
   ]

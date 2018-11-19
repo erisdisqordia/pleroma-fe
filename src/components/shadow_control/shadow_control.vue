@@ -1,0 +1,249 @@
+<template>
+<div class="shadow-control" :class="{ disabled: !present }">
+  <div class="shadow-preview-container">
+    <div :disabled="!present" class="y-shift-control">
+      <input
+        v-model="selected.y"
+        :disabled="!present"
+        class="input-number"
+        type="number">
+      <div class="wrap">
+        <input
+          v-model="selected.y"
+          :disabled="!present"
+          class="input-range"
+          type="range"
+          max="20"
+          min="-20">
+      </div>
+    </div>
+    <div class="preview-window">
+      <div class="preview-block" :style="style"></div>
+    </div>
+    <div :disabled="!present" class="x-shift-control">
+      <input
+        v-model="selected.x"
+        :disabled="!present"
+        class="input-number"
+        type="number">
+      <div class="wrap">
+        <input
+          v-model="selected.x"
+          :disabled="!present"
+          class="input-range"
+          type="range"
+          max="20"
+          min="-20">
+      </div>
+    </div>
+  </div>
+
+  <div class="shadow-tweak">
+    <div :disabled="usingFallback" class="id-control">
+      <label for="id" class="label">
+        Shadow id
+      </label>
+      <input
+        v-model="selectedId"
+        :disabled="usingFallback"
+        class="input-number"
+        type="number"
+        min="0"
+        :max="cValue.length - 1">
+      <button class="btn btn-default" :disabled="!present" @click="del">
+        <i class="icon-cancel"/>
+      </button>
+      <button class="btn btn-default" :disabled="!moveUpValid" @click="moveUp">
+        <i class="icon-up-open"/>
+      </button>
+      <button class="btn btn-default" :disabled="!moveDnValid" @click="moveDn">
+        <i class="icon-down-open"/>
+      </button>
+      <button class="btn btn-default" @click="add">
+        <i class="icon-plus"/>
+      </button>
+    </div>
+    <div :disabled="!present" class="inset-control">
+      <label for="inset" class="label">
+        Inset
+      </label>
+      <input
+        v-model="selected.inset"
+        :disabled="!present"
+        name="inset"
+        id="inset"
+        class="input-inset"
+        type="checkbox">
+      <label class="checkbox-label" for="inset"></label>
+    </div>
+    <div :disabled="!present" class="blur-control">
+      <label for="spread" class="label">
+        Blur
+      </label>
+      <input
+        v-model="selected.blur"
+        :disabled="!present"
+        name="blur"
+        id="blur"
+        class="input-range"
+        type="range"
+        max="20"
+        min="0">
+      <input
+        v-model="selected.blur"
+        :disabled="!present"
+        class="input-number"
+        type="number"
+        min="0">
+    </div>
+    <div :disabled="!present" class="spread-control">
+      <label for="spread" class="label">
+        Spread
+      </label>
+      <input
+        v-model="selected.spread"
+        :disabled="!present"
+        name="spread"
+        id="spread"
+        class="input-range"
+        type="range"
+        max="20"
+        min="-20">
+      <input
+        v-model="selected.spread"
+        :disabled="!present"
+        class="input-number"
+        type="number">
+    </div>
+    <ColorInput
+      v-model="selected.color"
+      :disabled="!present"
+      label="Color"
+      name="shadow"/>
+    <OpacityInput
+      v-model="selected.alpha"
+      :disabled="!present"/>
+  </div>
+</div>
+</template>
+
+<script src="./shadow_control.js" ></script>
+
+<style lang="scss">
+@import '../../_variables.scss';
+.shadow-control {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .shadow-preview-container {
+    flex: 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    $side: 15em;
+
+    input[type=number] {
+      width: 5em;
+      min-width: 2em;
+    }
+    .x-shift-control,
+    .y-shift-control {
+      display: flex;
+      flex: 0;
+
+      &[disabled=disabled] *{
+        opacity: .5
+      }
+
+    }
+
+    .x-shift-control {
+      align-items: flex-start;
+    }
+
+    .x-shift-control .wrap,
+    input[type=range] {
+      margin: 0;
+      width: $side;
+      height: 2em;
+    }
+    .y-shift-control {
+      flex-direction: column;
+      align-items: flex-end;
+      .wrap {
+        width: 2em;
+        height: $side;
+      }
+      input[type=range] {
+        transform-origin: 1em 1em;
+        transform: rotate(90deg);
+      }
+    }
+    .preview-window {
+      flex: 1;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image:
+      linear-gradient(45deg, #808080 25%, transparent 25%),
+      linear-gradient(-45deg, #808080 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #808080 75%),
+      linear-gradient(-45deg, transparent 75%, #808080 75%);
+      background-size: 20px 20px;
+      background-position:0 0, 0 10px, 10px -10px, -10px 0;
+
+      border-radius: $fallback--inputRadius;
+      border-radius: var(--inputRadius, $fallback--inputRadius);
+
+      .preview-block {
+        width: 33%;
+        height: 33%;
+        background-color: $fallback--bg;
+        background-color: var(--bg, $fallback--bg);
+        border-radius: $fallback--panelRadius;
+        border-radius: var(--panelRadius, $fallback--panelRadius);
+      }
+    }
+  }
+
+  .shadow-tweak {
+    .label {
+      flex: 1;
+      min-width: 3em;
+    }
+
+    .inset-control {
+      justify-content: flex-end;
+      label {
+        flex: 0
+      }
+    }
+
+    .blur-control,
+    .id-control,
+    .inset-control,
+    .spread-control {
+      display: flex;
+      align-items: baseline;
+      max-width: 100%;
+
+      &[disabled=disabled] *{
+        opacity: .5
+      }
+
+      .input-range {
+        flex: 1;
+        align-self: center;
+      }
+
+      .input-number {
+        width: 4em;
+        min-width: 4em;
+        flex: 0;
+      }
+    }
+  }
+}
+</style>

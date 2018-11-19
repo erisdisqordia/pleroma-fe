@@ -1,5 +1,5 @@
 <template>
-<div class="opacity-control" :class="{ disabled: !present }">
+<div class="opacity-control" :class="{ disabled: !present || disabled }">
   <label :for="name" class="label">
     {{$t('settings.opacity')}}
   </label>
@@ -17,7 +17,7 @@
     class="input-number"
     type="number"
     :value="value || fallback"
-    :disabled="!present"
+    :disabled="!present || disabled"
     @input="$emit('input', $event.target.value)"
     max="1"
     min="0"
@@ -28,7 +28,7 @@
 <script>
 export default {
   props: [
-    'name', 'value', 'fallback'
+    'name', 'value', 'fallback', 'disabled'
   ],
   computed: {
     present () {

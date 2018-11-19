@@ -1,5 +1,5 @@
 <template>
-<div class="color-control" :class="{ disabled: !present }">
+<div class="color-control" :class="{ disabled: !present || disabled }">
   <label :for="name" class="label">
     {{label}}
   </label>
@@ -17,7 +17,7 @@
     class="color-input"
     type="color"
     :value="value || fallback"
-    :disabled="!present"
+    :disabled="!present || disabled"
     @input="$emit('input', $event.target.value)"
     >
   <input
@@ -25,7 +25,7 @@
     class="text-input"
     type="text"
     :value="value || fallback"
-    :disabled="!present"
+    :disabled="!present || disabled"
     @input="$emit('input', $event.target.value)"
     >
 </div>
@@ -34,7 +34,7 @@
 <script>
 export default {
   props: [
-    'name', 'label', 'value', 'fallback'
+    'name', 'label', 'value', 'fallback', 'disabled'
   ],
   computed: {
     present () {

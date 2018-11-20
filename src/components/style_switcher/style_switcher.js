@@ -93,6 +93,9 @@ export default {
   },
   mounted () {
     this.normalizeLocalState(this.$store.state.config.customTheme)
+    if (typeof this.shadowSelected === 'undefined') {
+      this.shadowSelected = this.shadowsAvailable[0]
+    }
   },
   computed: {
     selectedVersion () {
@@ -180,6 +183,7 @@ export default {
       if (!this.preview.theme.colors) return { colors: {}, opacity: {}, radii: {}, shadows: {} }
       return this.preview.theme
     },
+    // This needs optimization maybe
     previewContrast () {
       if (!this.previewTheme.colors.bg) return {}
       const colors = this.previewTheme.colors

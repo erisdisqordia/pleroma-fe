@@ -37,9 +37,12 @@ export default {
       this.selectedId += 1
     }
   },
+  beforeUpdate () {
+    this.cValue = this.value || this.fallback
+  },
   computed: {
     selected () {
-      return this.cValue[this.selectedId] || {
+      return this.isReady && this.cValue[this.selectedId] || {
         x: 0,
         y: 0,
         blur: 0,
@@ -50,13 +53,17 @@ export default {
       }
     },
     moveUpValid () {
-      return this.selectedId > 0
+      return this.isReady && this.selectedId > 0
     },
     moveDnValid () {
-      return this.selectedId < this.cValue.length - 1
+      return this.isReady && this.selectedId < this.cValue.length - 1
+    },
+    isReady () {
+      return typeof this.cValue !== 'undefined'
     },
     present () {
-      return typeof this.cValue[this.selectedId] !== 'undefined' &&
+      return this.isReady &&
+        typeof this.cValue[this.selectedId] !== 'undefined' &&
         !this.usingFallback
     },
     usingFallback () {
@@ -66,9 +73,9 @@ export default {
       return hex2rgb(this.selected.color)
     },
     style () {
-      return {
+      return this.isReady ? {
         boxShadow: getCssShadow(this.cValue)
-      }
+      } : {}
     }
   }
 }

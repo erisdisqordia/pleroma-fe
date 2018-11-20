@@ -1,5 +1,7 @@
 import Vue from 'vue'
 
+// FIXME: This doesn't like v-if directly inside the tab's contents, breaks vue really bad
+
 import './tab_switcher.scss'
 
 export default Vue.component('tab-switcher', {

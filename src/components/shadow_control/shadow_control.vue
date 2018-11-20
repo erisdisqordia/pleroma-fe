@@ -39,7 +39,7 @@
   </div>
 
   <div class="shadow-tweak">
-    <div :disabled="usingFallback" class="id-control">
+    <div :disabled="usingFallback" class="id-control style-control">
       <label for="shadow-switcher" class="select">
         <select
           v-model="selectedId" class="shadow-switcher"
@@ -64,7 +64,7 @@
         <i class="icon-plus"/>
       </button>
     </div>
-    <div :disabled="!present" class="inset-control">
+    <div :disabled="!present" class="inset-control style-control">
       <label for="inset" class="label">
         {{$t('settings.style.shadows.inset')}}
       </label>
@@ -77,7 +77,7 @@
         type="checkbox">
       <label class="checkbox-label" for="inset"></label>
     </div>
-    <div :disabled="!present" class="blur-control">
+    <div :disabled="!present" class="blur-control style-control">
       <label for="spread" class="label">
         {{$t('settings.style.shadows.blur')}}
       </label>
@@ -97,7 +97,7 @@
         type="number"
         min="0">
     </div>
-    <div :disabled="!present" class="spread-control">
+    <div :disabled="!present" class="spread-control style-control">
       <label for="spread" class="label">
         {{$t('settings.style.shadows.spread')}}
       </label>
@@ -137,6 +137,11 @@
   flex-wrap: wrap;
   justify-content: center;
 
+
+  .shadow-preview-container,
+  .shadow-tweak {
+    margin: 5px 6px 0 0;
+  }
   .shadow-preview-container {
     flex: 0;
     display: flex;
@@ -210,39 +215,18 @@
   }
 
   .shadow-tweak {
-    .label {
-      flex: 1;
-      min-width: 3em;
-    }
+    flex: 1;
 
-    .inset-control {
-      justify-content: flex-end;
-      label {
-        flex: 0
+    .id-control {
+      align-items: stretch;
+      .select, .btn {
+        margin-right: 5px;
       }
-    }
-
-    .blur-control,
-    .id-control,
-    .inset-control,
-    .spread-control {
-      display: flex;
-      align-items: baseline;
-      max-width: 100%;
-
-      &[disabled=disabled] *{
-        opacity: .5
-      }
-
-      .input-range {
+      .select {
         flex: 1;
-        align-self: center;
-      }
-
-      .input-number {
-        width: 4em;
-        min-width: 4em;
-        flex: 0;
+        select {
+          align-self: initial;
+        }
       }
     }
   }

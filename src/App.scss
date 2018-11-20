@@ -64,6 +64,11 @@ button {
   font-size: 14px;
   font-family: sans-serif;
 
+  i[class*=icon-] {
+    color: $fallback--text;
+    color: var(--btnText, $fallback--text);
+  }
+
   &::-moz-focus-inner {
     border: none;
   }
@@ -143,6 +148,14 @@ input, textarea, .select {
     z-index: 1;
     height: 29px;
     line-height: 16px;
+  }
+
+  &[type=range] {
+    background: none;
+    border: none;
+    margin: 0;
+    box-shadow: none;
+    flex: 1;
   }
 
   &[type=radio],

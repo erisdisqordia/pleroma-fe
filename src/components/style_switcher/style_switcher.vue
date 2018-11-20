@@ -1,52 +1,53 @@
 <template>
-  <div>
-    <div class="presets-container">
-      <div>
-        {{$t('settings.presets')}}
-        <label for="style-switcher" class='select'>
-          <select id="style-switcher" v-model="selected" class="style-switcher">
-            <option v-for="style in availableStyles"
-                    :value="style"
-                    :style="{
-                            backgroundColor: style[1],
-                            color: style[3]
-                            }">
-              {{style[0]}}
-            </option>
-          </select>
-          <i class="icon-down-open"/>
-        </label>
-      </div>
-      <div class="import-export">
-        <button class="btn" @click="exportCurrentTheme">{{ $t('settings.export_theme') }}</button>
-        <button class="btn" @click="importTheme">{{ $t('settings.import_theme') }}</button>
-        <p v-if="invalidThemeImported" class="import-warning">{{ $t('settings.invalid_theme_imported') }}</p>
-      </div>
+<div class="style-switcher">
+  <div class="presets-container">
+    <div>
+      {{$t('settings.presets')}}
+      <label for="preset-switcher" class='select'>
+        <select id="preset-switcher" v-model="selected" class="preset-switcher">
+          <option v-for="style in availableStyles"
+                  :value="style"
+                  :style="{
+                          backgroundColor: style[1],
+                          color: style[3]
+                          }">
+            {{style[0]}}
+          </option>
+        </select>
+        <i class="icon-down-open"/>
+      </label>
     </div>
+    <div class="import-export">
+      <button class="btn" @click="exportCurrentTheme">{{ $t('settings.export_theme') }}</button>
+      <button class="btn" @click="importTheme">{{ $t('settings.import_theme') }}</button>
+      <p v-if="invalidThemeImported" class="import-warning">{{ $t('settings.invalid_theme_imported') }}</p>
+    </div>
+  </div>
 
-    <div class="preview-container">
-      <div class="panel dummy" :style="previewRules">
-        <div class="panel-heading">Preview</div>
-        <div class="panel-body theme-preview-content">
-          <div class="avatar">
-            ( ͡° ͜ʖ ͡°)
-          </div>
-          <h4>Content</h4>
-          <br>
-          A bunch of more content and
-          <a style="color: var(--link)">a nice lil' link</a>
-          <i style="color: var(--cBlue)" class="icon-reply"/>
-          <i style="color: var(--cGreen)" class="icon-retweet"/>
-          <i style="color: var(--cRed)" class="icon-cancel"/>
-          <i style="color: var(--cOrange)" class="icon-star"/>
-          <br>
-          <button class="btn">Button</button>
+  <div class="preview-container">
+    <div class="panel dummy" :style="previewRules">
+      <div class="panel-heading">Preview</div>
+      <div class="panel-body theme-preview-content">
+        <div class="avatar">
+          ( ͡° ͜ʖ ͡°)
         </div>
+        <h4>Content</h4>
+        <br>
+        A bunch of more content and
+        <a style="color: var(--link)">a nice lil' link</a>
+        <i style="color: var(--cBlue)" class="icon-reply"/>
+        <i style="color: var(--cGreen)" class="icon-retweet"/>
+        <i style="color: var(--cRed)" class="icon-cancel"/>
+        <i style="color: var(--cOrange)" class="icon-star"/>
+        <br>
+        <button class="btn">Button</button>
       </div>
     </div>
+  </div>
 
-    <p>{{$t('settings.theme_help')}}</p>
-    <tab-switcher>
+  <p>{{$t('settings.theme_help')}}</p>
+  <keep-alive>
+    <tab-switcher key="style-tweak">
       <div :label="$t('settings.style.basic_colors._tab_label')" class="color-container">
         <div class="color-item">
           <h4>{{ $t('settings.style.basic_colors.main') }}</h4>
@@ -171,31 +172,36 @@
         </div>
       </div>
       <div :label="$t('settings.style.shadows._tab_label')" class="shadow-container">
-        <div>
-          {{$t('settings.style.shadows.component')}}
-          <label for="shadow-switcher" class="shadow-selector select">
-            <select id="shadow-switcher" v-model="shadowSelected" class="shadow-switcher">
-              <option v-for="shadow in shadowsAvailable"
-                      :value="shadow">
-                {{$t('settings.style.shadows.components.' + shadow)}}
-              </option>
-            </select>
-            <i class="icon-down-open"/>
-          </label>
-          <label for="override" class="label">
-            {{$t('settings.style.shadows.override')}}
-          </label>
-          <input
-            v-model="currentShadowOverriden"
-            name="override"
-            id="override"
-            class="input-override"
-            type="checkbox">
-          <label class="checkbox-label" for="override"></label>
+        <div class="shadow-selector">
+          <div>
+            {{$t('settings.style.shadows.component')}}
+            <label for="shadow-switcher" class="select">
+              <select id="shadow-switcher" v-model="shadowSelected" class="shadow-switcher">
+                <option v-for="shadow in shadowsAvailable"
+                        :value="shadow">
+                  {{$t('settings.style.shadows.components.' + shadow)}}
+                </option>
+              </select>
+              <i class="icon-down-open"/>
+            </label>
+          </div>
+          <div class="override">
+            <label for="override" class="label">
+              {{$t('settings.style.shadows.override')}}
+            </label>
+            <input
+              v-model="currentShadowOverriden"
+              name="override"
+              id="override"
+              class="input-override"
+              type="checkbox">
+            <label class="checkbox-label" for="override"></label>
+          </div>
         </div>
         <shadow-control v-if="currentShadowFallback" :fallback="currentShadowFallback" v-model="currentShadow"/>
       </div>
     </tab-switcher>
+  </keep-alive>
 
   <div class="apply-container">
     <button class="btn submit" @click="setCustomTheme">{{$t('general.apply')}}</button>
@@ -205,142 +211,4 @@
 
 <script src="./style_switcher.js"></script>
 
-<style lang="scss">
-@import '../../_variables.scss';
-.style-switcher {
-  margin-right: 1em;
-}
-
-.import-warning {
-  color: $fallback--cRed;
-  color: var(--cRed, $fallback--cRed);
-}
-
-.apply-container,
-.radius-container,
-.color-container,
-.presets-container {
-  display: flex;
-
-  p {
-    margin-left: 1em
-  }
-}
-
-.radius-container {
-  flex-direction: column;
-}
-
-.color-container{
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.presets-container {
-  justify-content: center;
-  .import-export {
-    display: flex;
-
-    .btn {
-      margin-left: .5em;
-    }
-  }
-}
-
-.preview-container {
-  border-top: 1px dashed;
-  border-bottom: 1px dashed;
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
-  margin: 1em -1em 0;
-  padding: 1em;
-  background: var(--body-background-image);
-  background-size: cover;
-  background-position: 50% 50%;
-
-  .btn {
-    margin-top: 1em;
-    min-height: 30px;
-    width: 10em;
-  }
-}
-
-.apply-container {
-  justify-content: center;
-}
-
-.radius-item,
-.color-item {
-  min-width: 20em;
-  margin: 5px 6px 0 0;
-  display:flex;
-  flex-direction: column;
-  flex: 1 1 0;
-
-  &.wide {
-    min-width: 60%
-  }
-  &:not(.wide):nth-child(2n+1) {
-    margin-right: 7px;
-
-  }
-
-  .color, .opacity {
-    display:flex;
-    align-items: baseline;
-  }
-
-  h4 {
-    margin-top: 1em;
-  }
-}
-
-.radius-item {
-  flex-basis: auto;
-}
-
-.theme-radius-rn,
-.theme-color-cl {
-  border: 0;
-  box-shadow: none;
-  background: transparent;
-  color: var(--faint, $fallback--faint);
-  align-self: stretch;
-}
-
-.theme-color-cl,
-.theme-radius-in,
-.theme-color-in {
-  margin-left: 4px;
-}
-
-.theme-radius-in {
-  min-width: 1em;
-}
-
-.theme-radius-in {
-  max-width: 7em;
-  flex: 1;
-}
-
-.theme-radius-lb{
-  max-width: 50em;
-}
-
-.theme-preview-content {
-  padding: 20px;
-}
-
-.dummy {
-  .avatar {
-    background: linear-gradient(135deg, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%);
-    color: black;
-    text-align: center;
-    height: 48px;
-    line-height: 48px;
-    width: 48px;
-    float: left;
-    margin-right: 1em;
-  }
-}
-</style>
+<style src="./style_switcher.scss" lang="scss"></style>

@@ -5,7 +5,7 @@
   </label>
   <input
     v-if="typeof fallback !== 'undefined'"
-    class="opt"
+    class="opt exlcude-disabled"
     :id="name + '-o'"
     type="checkbox"
     :checked="present"
@@ -45,40 +45,9 @@ export default {
 
 <style lang="scss">
 .color-control {
-  display: flex;
-  align-items: baseline;
-
-  &.disabled *:not(.opt-l){
-    opacity: .5
-  }
-
-  .label {
-    flex: 2;
-    min-width: 7em;
-  }
-
-  .opt-l {
-    align-self: center;
-    flex: 0;
-    &::before {
-      width: 14px;
-      height: 14px;
-    }
-  }
-
-  .text-input {
+  input.text-input {
     max-width: 7em;
     flex: 1;
-  }
-
-  .color-input {
-    flex: 0;
-    padding: 1px;
-    cursor: pointer;
-    height: 29px;
-    min-width: 2em;
-    border: none;
-    align-self: stretch;
   }
 }
 </style>

@@ -1,17 +1,16 @@
 <template>
-<div class="color-control" :class="{ disabled: !present || disabled }">
+<div class="color-control style-control" :class="{ disabled: !present || disabled }">
   <label :for="name" class="label">
     {{label}}
   </label>
   <input
-  v-if="typeof fallback !== 'undefined'"
-  class="opt"
-  :id="name + '-o'"
-      type="checkbox"
-  :checked="present"
-           @input="$emit('input', typeof value === 'undefined' ? fallback : undefined)"
-           >
-           <label v-if="typeof fallback !== 'undefined'" class="opt-l" :for="name + '-o'"></label>
+    v-if="typeof fallback !== 'undefined'"
+    class="opt"
+    :id="name + '-o'"
+    type="checkbox"
+    :checked="present"
+    @input="$emit('input', typeof value === 'undefined' ? fallback : undefined)">
+  <label v-if="typeof fallback !== 'undefined'" class="opt-l" :for="name + '-o'"></label>
   <input
     :id="name"
     class="color-input"

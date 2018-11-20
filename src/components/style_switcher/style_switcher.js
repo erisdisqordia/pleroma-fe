@@ -7,6 +7,7 @@ import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
 import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
 
+// List of color values used in v1
 const v1OnlyNames = [
   'bg',
   'fg',

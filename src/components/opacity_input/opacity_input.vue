@@ -1,16 +1,15 @@
 <template>
-<div class="opacity-control" :class="{ disabled: !present || disabled }">
+<div class="opacity-control style-control" :class="{ disabled: !present || disabled }">
   <label :for="name" class="label">
-    {{$t('settings.opacity')}}
+    {{$t('settings.style.common.opacity')}}
   </label>
   <input
-  v-if="typeof fallback !== 'undefined'"
-  class="opt"
-  :id="name + '-o'"
-      type="checkbox"
-  :checked="present"
-           @input="$emit('input', !present ? fallback : undefined)"
-           >
+    v-if="typeof fallback !== 'undefined'"
+    class="opt"
+    :id="name + '-o'"
+    type="checkbox"
+    :checked="present"
+    @input="$emit('input', !present ? fallback : undefined)">
   <label v-if="typeof fallback !== 'undefined'" class="opt-l" :for="name + '-o'"></label>
   <input
     :id="name"

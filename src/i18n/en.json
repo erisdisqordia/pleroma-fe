@@ -108,7 +108,6 @@
     "follow_import_error": "Error importing followers",
     "follows_imported": "Follows imported! Processing them will take a while.",
     "foreground": "Foreground",
-    "opacity": "Opacity",
     "general": "General",
     "hide_attachments_in_convo": "Hide attachments in conversations",
     "hide_attachments_in_tl": "Hide attachments in timeline",
@@ -162,6 +161,52 @@
     "values": {
       "false": "no",
       "true": "yes"
+    },
+    "style": {
+      "common": {
+        "color": "Color",
+        "opacity": "Opacity"
+      },
+      "basic_colors": {
+        "_tab_label": "Basic",
+        "main": "Basic colors",
+        "foreground": "Panel header, top bar, buttons, text fields",
+        "foreground_hint": "See \"Advanced\" tab for more detailed control",
+        "rgbo": "Icons, accents, badges"
+      },
+      "advanced_colors": {
+        "_tab_label": "Advanced",
+        "alert": "Alert background",
+        "alert_error": "Error",
+        "badge": "Badge background",
+        "badge_notification": "Notification",
+        "panel_header": "Panel header",
+        "top_bar": "Top bar",
+        "borders": "Borders",
+        "buttons": "Buttons",
+        "inputs": "Input fields",
+        "faint_text": "Faded text"
+      },
+      "radii": {
+        "_tab_label": "Roundness"
+      },
+      "shadows": {
+        "_tab_label": "Shadow and lighting",
+        "component": "Component",
+        "override": "Override",
+        "shadow_id": "Shadow #{value}",
+        "blur": "Blur",
+        "spread": "Spread",
+        "inset": "Inset",
+        "components": {
+          "panel": "Panel",
+          "button": "Button",
+          "button_hover": "Button (hover)",
+          "button_pressed": "Button (pressed)",
+          "button_pressed_hover": "Button (pressed+hover)",
+          "input_box": "Input field"
+        }
+      }
     }
   },
   "timeline": {

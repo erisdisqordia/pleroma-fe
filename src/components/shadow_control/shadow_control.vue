@@ -40,16 +40,17 @@
 
   <div class="shadow-tweak">
     <div :disabled="usingFallback" class="id-control">
-      <label for="id" class="label">
-        Shadow id
+      <label for="shadow-switcher" class="select">
+        <select
+          v-model="selectedId" class="shadow-switcher"
+          :disabled="usingFallback"
+          id="shadow-switcher">
+          <option v-for="(shadow, index) in cValue" :value="index">
+            {{$t('settings.style.shadows.shadow_id', { value: index })}}
+          </option>
+        </select>
+        <i class="icon-down-open"/>
       </label>
-      <input
-        v-model="selectedId"
-        :disabled="usingFallback"
-        class="input-number"
-        type="number"
-        min="0"
-        :max="cValue.length - 1">
       <button class="btn btn-default" :disabled="!present" @click="del">
         <i class="icon-cancel"/>
       </button>
@@ -65,7 +66,7 @@
     </div>
     <div :disabled="!present" class="inset-control">
       <label for="inset" class="label">
-        Inset
+        {{$t('settings.style.shadows.inset')}}
       </label>
       <input
         v-model="selected.inset"
@@ -78,7 +79,7 @@
     </div>
     <div :disabled="!present" class="blur-control">
       <label for="spread" class="label">
-        Blur
+        {{$t('settings.style.shadows.blur')}}
       </label>
       <input
         v-model="selected.blur"
@@ -98,7 +99,7 @@
     </div>
     <div :disabled="!present" class="spread-control">
       <label for="spread" class="label">
-        Spread
+        {{$t('settings.style.shadows.spread')}}
       </label>
       <input
         v-model="selected.spread"
@@ -118,7 +119,7 @@
     <ColorInput
       v-model="selected.color"
       :disabled="!present"
-      label="Color"
+      :label="$t('settings.style.common.color')"
       name="shadow"/>
     <OpacityInput
       v-model="selected.alpha"

@@ -26,9 +26,22 @@
     color: var(--text, $fallback--text);
   }
 
-  .unseen {
+  .notification {
+    position: relative;
 
-    background-image: linear-gradient(135deg, var(--badgeNotification, $fallback--cRed) 4px, transparent 10px)
+    .notification-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+    }
+
+    &.unseen {
+      .notification-overlay {
+        background-image: linear-gradient(135deg, var(--badgeNotification, $fallback--cRed) 4px, transparent 10px)
+      }
+    }
   }
 }
 

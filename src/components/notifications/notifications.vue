@@ -13,6 +13,7 @@
       </div>
       <div class="panel-body">
         <div v-for="notification in visibleNotifications" :key="notification.action.id" class="notification" :class='{"unseen": !notification.seen}'>
+          <div class="notification-overlay"></div>
           <notification :notification="notification"></notification>
         </div>
       </div>

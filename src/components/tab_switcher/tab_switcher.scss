@@ -1,6 +1,11 @@
 @import '../../_variables.scss';
 
 .tab-switcher {
+  .contents {
+    .hidden {
+      display: none;
+    }
+  }
   .tabs {
     display: flex;
     position: relative;

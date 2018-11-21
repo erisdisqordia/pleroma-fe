@@ -146,6 +146,7 @@
   border-radius: $fallback--tooltipRadius;
   border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--popupShadow);
   margin-top: 0.25em;
   margin-left: 0.5em;
   z-index: 50;

@@ -212,11 +212,16 @@
         "inset": "Inset",
         "components": {
           "panel": "Panel",
+          "panelHeader": "Panel header",
+          "topBar": "Top bar",
+          "avatar": "User avatar (in post display)",
+          "avatarStatus": "User avatar (in profile view)",
+          "popup": "Popups and tooltips",
           "button": "Button",
-          "button_hover": "Button (hover)",
-          "button_pressed": "Button (pressed)",
-          "button_pressed_hover": "Button (pressed+hover)",
-          "input_box": "Input field"
+          "buttonHover": "Button (hover)",
+          "buttonPressed": "Button (pressed)",
+          "buttonPressedHover": "Button (pressed+hover)",
+          "input": "Input field"
         }
       }
     }

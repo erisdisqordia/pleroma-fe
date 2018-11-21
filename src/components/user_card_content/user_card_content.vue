@@ -155,6 +155,7 @@
       width: 56px;
       height: 56px;
       box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
+      box-shadow: var(--avatarShadow);
       object-fit: cover;
 
       &.animated::before {

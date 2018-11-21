@@ -258,6 +258,40 @@ const generateRadii = (input) => {
 }
 
 const generateShadows = (input) => {
+  const buttonInsetFakeBorders = [{
+    x: 0,
+    y: 101,
+    blur: 0,
+    spread: -100,
+    color: '#FFFFFF',
+    alpha: 0.2,
+    inset: true
+  }, {
+    x: 0,
+    y: -101,
+    blur: 0,
+    spread: -100,
+    color: '#000000',
+    alpha: 0.2,
+    inset: true
+  }]
+  const inputInsetFakeBorders = [{
+    x: 0,
+    y: 101,
+    blur: 0,
+    spread: -100,
+    color: '#000000',
+    alpha: 0.2,
+    inset: true
+  }, {
+    x: 0,
+    y: -101,
+    blur: 0,
+    spread: -100,
+    color: '#FFFFFF',
+    alpha: 0.3,
+    inset: true
+  }]
   const shadows = {
     panel: [{
       x: 1,
@@ -267,6 +301,48 @@ const generateShadows = (input) => {
       color: '#000000',
       alpha: 0.6
     }],
+    popup: [{
+      x: 2,
+      y: 2,
+      blur: 3,
+      spread: 0,
+      color: '#000000',
+      alpha: 0.5
+    }],
+    avatar: [{
+      x: 0,
+      y: 1,
+      blur: 8,
+      spread: 0,
+      color: '#000000',
+      alpha: 0.7
+    }],
+    panelHeader: [],
+    button: [{
+      x: 0,
+      y: 0,
+      blur: 2,
+      spread: 0,
+      color: '#000000',
+      alpha: 1
+    }, ...buttonInsetFakeBorders],
+    buttonHover: [{
+      x: 0,
+      y: 0,
+      blur: 4,
+      spread: 0,
+      color: '--faint',
+      alpha: 1
+    }, ...buttonInsetFakeBorders],
+    input: [{
+      x: 0,
+      y: 0,
+      blur: 2,
+      inset: true,
+      spread: 0,
+      color: '#000000',
+      alpha: 1
+    }, ...inputInsetFakeBorders],
     ...(input.shadows || {})
   }
 

@@ -1,5 +1,4 @@
 import StillImage from '../still-image/still-image.vue'
-import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
 export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio' ],

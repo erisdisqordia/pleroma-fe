@@ -101,9 +101,27 @@ const getCssShadow = (input) => {
     shad.blur,
     shad.spread
   ].map(_ => _ + 'px').concat([
-    rgb2rgba({...(hex2rgb(shad.color)), a: shad.alpha}),
+    getCssColor(shad.color, shad.alpha),
     shad.inset ? 'inset' : ''
   ]).join(' ')).join(', ')
+}
+
+const getCssColor = (input, a) => {
+  console.log(input)
+  let rgb = {}
+  if (typeof input === 'object') {
+    rgb = input
+  } else if (typeof input === 'string') {
+    if (input.startsWith('#')) {
+      rgb = hex2rgb(input)
+    } else if (input.startsWith('--')) {
+      return `var(${input})`
+    } else {
+      return input
+    }
+  }
+  console.log(rgb2rgba({ ...rgb, a }))
+  return rgb2rgba({ ...rgb, a })
 }
 
 const generateColors = (input) => {

@@ -2,9 +2,10 @@ import { rgb2hex, hex2rgb, getContrastRatio, alphaBlend } from '../../services/c
 import { set, delete as del } from 'vue'
 import { generateColors, generateShadows, generateRadii, composePreset } from '../../services/style_setter/style_setter.js'
 import ColorInput from '../color_input/color_input.vue'
+import RangeInput from '../range_input/range_input.vue'
+import OpacityInput from '../opacity_input/opacity_input.vue'
 import ShadowControl from '../shadow_control/shadow_control.vue'
 import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
-import OpacityInput from '../opacity_input/opacity_input.vue'
 import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
 
 // List of color values used in v1
@@ -171,7 +172,7 @@ export default {
       }
     },
     previewRadii () {
-      return generateRadii(this.currentRadii)
+      return generateRadii({ radii: this.currentRadii })
     },
     previewShadows () {
       return generateShadows({ shadows: this.shadowsLocal })
@@ -181,6 +182,7 @@ export default {
     },
     previewTheme () {
       if (!this.preview.theme.colors) return { colors: {}, opacity: {}, radii: {}, shadows: {} }
+      console.log(this.preview.theme.radii)
       return this.preview.theme
     },
     // This needs optimization maybe
@@ -286,6 +288,7 @@ export default {
   components: {
     ColorInput,
     OpacityInput,
+    RangeInput,
     ContrastRatio,
     ShadowControl,
     TabSwitcher
@@ -379,6 +382,8 @@ export default {
     normalizeLocalState (input, version = 0) {
       const colors = input.colors || input
       const radii = input.radii || input
+      console.log('Benis')
+      console.log(JSON.stringify(radii, null, 2))
       const opacity = input.opacity || input
       const shadows = input.shadows || {}
 
@@ -417,13 +422,13 @@ export default {
       })
 
       // TODO optimize this
-      this.btnRadiusLocal = radii.btnRadius || 4
-      this.inputRadiusLocal = radii.inputRadius || 4
-      this.panelRadiusLocal = radii.panelRadius || 10
-      this.avatarRadiusLocal = radii.avatarRadius || 5
-      this.avatarAltRadiusLocal = radii.avatarAltRadius || 50
-      this.tooltipRadiusLocal = radii.tooltipRadius || 2
-      this.attachmentRadiusLocal = radii.attachmentRadius || 5
+      this.btnRadiusLocal = radii.btn
+      this.inputRadiusLocal = radii.input
+      this.panelRadiusLocal = radii.panel
+      this.avatarRadiusLocal = radii.avatar
+      this.avatarAltRadiusLocal = radii.avatarAlt
+      this.tooltipRadiusLocal = radii.tooltip
+      this.attachmentRadiusLocal = radii.attachment
 
       this.shadowsLocal = shadows
 

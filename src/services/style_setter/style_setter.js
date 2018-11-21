@@ -81,7 +81,6 @@ const setColors = (input, commit) => {
   head.appendChild(styleEl)
   const styleSheet = styleEl.sheet
 
-  console.log(rules)
   styleSheet.toString()
   styleSheet.insertRule(`body { ${rules.radii} }`, 'index-max')
   styleSheet.insertRule(`body { ${rules.colors} }`, 'index-max')
@@ -108,7 +107,6 @@ const getCssShadow = (input) => {
 }
 
 const generateColors = (input) => {
-  console.log(input.opacity)
   const colors = {}
   const opacity = Object.assign({
     alert: 0.5,
@@ -120,7 +118,6 @@ const generateColors = (input) => {
     }
     return acc
   }, {}))
-  console.log(colors, opacity)
   const col = Object.entries(input.colors || input).reduce((acc, [k, v]) => {
     if (typeof v === 'object') {
       acc[k] = v
@@ -216,26 +213,19 @@ const generateColors = (input) => {
 }
 
 const generateRadii = (input) => {
-  const inputRadii = input.radii || {
-    btn: input.btnRadius,
-    input: input.inputRadius,
-    panel: input.panelRadius,
-    avatar: input.avatarRadius,
-    avatarAlt: input.avatarAltRadius,
-    tooltip: input.tooltipRadius,
-    attachment: input.attachmentRadius
-  }
-
-  const radii = {
+  console.log(input)
+  const radii = Object.entries(input.radii).filter(([k, v]) => v).reduce((acc, [k, v]) => {
+    acc[k] = v
+    return acc
+  }, {
     btn: 4,
     input: 4,
     panel: 10,
     avatar: 5,
     avatarAlt: 50,
     tooltip: 2,
-    attachment: 5,
-    ...inputRadii
-  }
+    attachment: 5
+  })
 
   return {
     rules: {
@@ -259,7 +249,6 @@ const generateShadows = (input) => {
     }],
     ...(input.shadows || {})
   }
-  console.log('benis')
 
   return {
     rules: {

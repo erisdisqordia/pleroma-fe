@@ -13,6 +13,14 @@
       flex: 1;
     }
 
+    &.disabled {
+      input, select {
+        &:not(.exclude-disabled) {
+          opacity: .5
+        }
+      }
+    }
+
     input, select {
       min-width: 3em;
       margin: 0;
@@ -42,10 +50,6 @@
 
       &:not([type=number]):not([type=text]) {
         align-self: center;
-      }
-
-      &.disabled *:not(.exlcude-disabled) {
-        opacity: .5
       }
     }
   }

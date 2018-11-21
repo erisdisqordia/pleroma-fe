@@ -135,41 +135,13 @@
       </div>
       <div :label="$t('settings.style.radii._tab_label')" class="radius-container">
         <p>{{$t('settings.radii_help')}}</p>
-        <div class="radius-item">
-          <label for="btnradius" class="theme-radius-lb">{{$t('settings.btnRadius')}}</label>
-          <input id="btnradius" class="theme-radius-rn" type="range" v-model="btnRadiusLocal" max="16">
-          <input id="btnradius-t" class="theme-radius-in" type="text" v-model="btnRadiusLocal">
-        </div>
-        <div class="radius-item">
-          <label for="inputradius" class="theme-radius-lb">{{$t('settings.inputRadius')}}</label>
-          <input id="inputradius" class="theme-radius-rn" type="range" v-model="inputRadiusLocal" max="16">
-          <input id="inputradius-t" class="theme-radius-in" type="text" v-model="inputRadiusLocal">
-        </div>
-        <div class="radius-item">
-          <label for="panelradius" class="theme-radius-lb">{{$t('settings.panelRadius')}}</label>
-          <input id="panelradius" class="theme-radius-rn" type="range" v-model="panelRadiusLocal" max="50">
-          <input id="panelradius-t" class="theme-radius-in" type="text" v-model="panelRadiusLocal">
-        </div>
-        <div class="radius-item">
-          <label for="avatarradius" class="theme-radius-lb">{{$t('settings.avatarRadius')}}</label>
-          <input id="avatarradius" class="theme-radius-rn" type="range" v-model="avatarRadiusLocal" max="28">
-          <input id="avatarradius-t" class="theme-radius-in" type="green" v-model="avatarRadiusLocal">
-        </div>
-        <div class="radius-item">
-          <label for="avataraltradius" class="theme-radius-lb">{{$t('settings.avatarAltRadius')}}</label>
-          <input id="avataraltradius" class="theme-radius-rn" type="range" v-model="avatarAltRadiusLocal" max="28">
-          <input id="avataraltradius-t" class="theme-radius-in" type="text" v-model="avatarAltRadiusLocal">
-        </div>
-        <div class="radius-item">
-          <label for="attachmentradius" class="theme-radius-lb">{{$t('settings.attachmentRadius')}}</label>
-          <input id="attachmentrradius" class="theme-radius-rn" type="range" v-model="attachmentRadiusLocal" max="50">
-          <input id="attachmentradius-t" class="theme-radius-in" type="text" v-model="attachmentRadiusLocal">
-        </div>
-        <div class="radius-item">
-          <label for="tooltipradius" class="theme-radius-lb">{{$t('settings.tooltipRadius')}}</label>
-          <input id="tooltipradius" class="theme-radius-rn" type="range" v-model="tooltipRadiusLocal" max="20">
-          <input id="tooltipradius-t" class="theme-radius-in" type="text" v-model="tooltipRadiusLocal">
-        </div>
+        <RangeInput name="btnRadius" :label="$t('settings.btnRadius')" v-model="btnRadiusLocal" :fallback="previewTheme.radii.btn" max="16" hardMin="0"/>
+        <RangeInput name="inputRadius" :label="$t('settings.inputRadius')" v-model="inputRadiusLocal" :fallback="previewTheme.radii.input" max="16" hardMin="0"/>
+        <RangeInput name="panelRadius" :label="$t('settings.panelRadius')" v-model="panelRadiusLocal" :fallback="previewTheme.radii.panel" max="50" hardMin="0"/>
+        <RangeInput name="avatarRadius" :label="$t('settings.avatarRadius')" v-model="avatarRadiusLocal" :fallback="previewTheme.radii.avatar" max="28" hardMin="0"/>
+        <RangeInput name="avatarAltRadius" :label="$t('settings.avatarAltRadius')" v-model="avatarAltRadiusLocal" :fallback="previewTheme.radii.avatarAlt" max="28" hardMin="0"/>
+        <RangeInput name="attachmentRadius" :label="$t('settings.attachmentRadius')" v-model="attachmentRadiusLocal" :fallback="previewTheme.radii.attachment" max="50" hardMin="0"/>
+        <RangeInput name="tooltipRadius" :label="$t('settings.tooltipRadius')" v-model="tooltipRadiusLocal" :fallback="previewTheme.radii.tooltip" max="50" hardMin="0"/>
       </div>
       <div :label="$t('settings.style.shadows._tab_label')" class="shadow-container">
         <div class="shadow-selector">

@@ -213,8 +213,7 @@ const generateColors = (input) => {
 }
 
 const generateRadii = (input) => {
-  console.log(input)
-  const radii = Object.entries(input.radii).filter(([k, v]) => v).reduce((acc, [k, v]) => {
+  const radii = Object.entries(input.radii || {}).filter(([k, v]) => v).reduce((acc, [k, v]) => {
     acc[k] = v
     return acc
   }, {

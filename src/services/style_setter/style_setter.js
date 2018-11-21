@@ -260,34 +260,34 @@ const generateRadii = (input) => {
 const generateShadows = (input) => {
   const buttonInsetFakeBorders = [{
     x: 0,
-    y: 101,
+    y: 1,
     blur: 0,
-    spread: -100,
+    spread: 0,
     color: '#FFFFFF',
     alpha: 0.2,
     inset: true
   }, {
     x: 0,
-    y: -101,
+    y: -1,
     blur: 0,
-    spread: -100,
+    spread: 0,
     color: '#000000',
     alpha: 0.2,
     inset: true
   }]
   const inputInsetFakeBorders = [{
     x: 0,
-    y: 101,
+    y: 1,
     blur: 0,
-    spread: -100,
+    spread: 0,
     color: '#000000',
     alpha: 0.2,
     inset: true
   }, {
     x: 0,
-    y: -101,
+    y: -1,
     blur: 0,
-    spread: -100,
+    spread: 0,
     color: '#FFFFFF',
     alpha: 0.3,
     inset: true
@@ -334,7 +334,7 @@ const generateShadows = (input) => {
       color: '--faint',
       alpha: 1
     }, ...buttonInsetFakeBorders],
-    input: [{
+    input: [...inputInsetFakeBorders, {
       x: 0,
       y: 0,
       blur: 2,
@@ -342,7 +342,7 @@ const generateShadows = (input) => {
       spread: 0,
       color: '#000000',
       alpha: 1
-    }, ...inputInsetFakeBorders],
+    }],
     ...(input.shadows || {})
   }
 

@@ -41,7 +41,7 @@ export default Vue.component('tab-switcher', {
         <div class="contents">
           {contents}
         </div>
-        </div>
-      )
+      </div>
+    )
   }
 })

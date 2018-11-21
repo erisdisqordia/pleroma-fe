@@ -54,6 +54,9 @@ export default {
   display: flex;
   justify-content: flex-end;
 
+  margin-top: -4px;
+  margin-bottom: 5px;
+
   .label {
     margin-right: 1em;
   }

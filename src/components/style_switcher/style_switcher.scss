@@ -59,6 +59,10 @@
     color: var(--cRed, $fallback--cRed);
   }
 
+  .tab-switcher {
+    margin: 0 -1em;
+  }
+
   .apply-container,
   .radius-container,
   .color-container,
@@ -75,8 +79,17 @@
   }
 
   .color-container{
+    > h4 {
+      width: 99%;
+    }
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+
+  .color-container,
+  .shadow-container,
+  .radius-container {
+    margin: 1em 1em 0;
   }
 
   .presets-container,
@@ -138,10 +151,6 @@
     .color, .opacity {
       display:flex;
       align-items: baseline;
-    }
-
-    h4 {
-      margin-top: 1em;
     }
   }
 

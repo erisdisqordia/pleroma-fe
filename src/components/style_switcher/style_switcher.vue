@@ -48,9 +48,9 @@
   <p>{{$t('settings.theme_help')}}</p>
   <keep-alive>
     <tab-switcher key="style-tweak">
-      <div :label="$t('settings.style.basic_colors._tab_label')" class="color-container">
+      <div :label="$t('settings.style.common_colors._tab_label')" class="color-container">
+        <h4>{{ $t('settings.style.common_colors.main') }}</h4>
         <div class="color-item">
-          <h4>{{ $t('settings.style.basic_colors.main') }}</h4>
           <ColorInput name="bgColor" v-model="bgColorLocal" :label="$t('settings.background')"/>
           <OpacityInput name="bgOpacity" v-model="bgOpacityLocal" :fallback="previewTheme.opacity.bg || 1"/>
           <ColorInput name="textColor" v-model="textColorLocal" :label="$t('settings.text')"/>
@@ -59,21 +59,19 @@
           <ContrastRatio :contrast="previewContrast.bgLink"/>
         </div>
         <div class="color-item">
-          <h4>{{ $t('settings.style.basic_colors.foreground') }}</h4>
           <ColorInput name="fgColor" v-model="fgColorLocal" :label="$t('settings.foreground')"/>
           <ColorInput name="fgTextColor" v-model="fgTextColorLocal" :label="$t('settings.text')" :fallback="previewTheme.colors.fgText"/>
           <ColorInput name="fgLinkColor" v-model="fgLinkColorLocal" :label="$t('settings.links')" :fallback="previewTheme.colors.fgLink"/>
-          <p>{{ $t('settings.style.basic_colors.foreground_hint') }}</p>
+          <p>{{ $t('settings.style.common_colors.foreground_hint') }}</p>
         </div>
+        <h4>{{ $t('settings.style.common_colors.rgbo') }}</h4>
         <div class="color-item">
-          <h4>{{ $t('settings.style.basic_colors.rgbo') }}</h4>
           <ColorInput name="cRedColor" v-model="cRedColorLocal" :label="$t('settings.cRed')"/>
           <ContrastRatio :contrast="previewContrast.bgRed"/>
           <ColorInput name="cBlueColor" v-model="cBlueColorLocal" :label="$t('settings.cBlue')"/>
           <ContrastRatio :contrast="previewContrast.bgBlue"/>
         </div>
         <div class="color-item">
-          <h4>.</h4>
           <ColorInput name="cGreenColor" v-model="cGreenColorLocal" :label="$t('settings.cGreen')"/>
           <ContrastRatio :contrast="previewContrast.bgGreen"/>
           <ColorInput name="cOrangeColor" v-model="cOrangeColorLocal" :label="$t('settings.cOrange')"/>

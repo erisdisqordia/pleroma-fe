@@ -179,9 +179,9 @@
           }
         }
       },
-      "basic_colors": {
-        "_tab_label": "Basic",
-        "main": "Basic colors",
+      "common_colors": {
+        "_tab_label": "Common",
+        "main": "Common colors",
         "foreground": "Panel header, top bar, buttons, text fields",
         "foreground_hint": "See \"Advanced\" tab for more detailed control",
         "rgbo": "Icons, accents, badges"

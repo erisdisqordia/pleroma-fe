@@ -165,7 +165,19 @@
     "style": {
       "common": {
         "color": "Color",
-        "opacity": "Opacity"
+        "opacity": "Opacity",
+        "contrast": {
+          "hint": "Contrast ratio is {ratio}, it {level} {context}",
+          "level": {
+            "aa": "meets Level AA guideline (minimal)",
+            "aaa": "meets Level AAA guideline (recommended)",
+            "bad": "doesn't meet any accessibility guidelines"
+          },
+          "context": {
+            "18pt": "for large (18pt+) text",
+            "text": "for text"
+          }
+        }
       },
       "basic_colors": {
         "_tab_label": "Basic",

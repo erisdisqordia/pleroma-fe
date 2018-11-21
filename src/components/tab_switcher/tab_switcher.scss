@@ -13,6 +13,8 @@
     width: 100%;
     overflow: hidden;
     padding-top: 5px;
+    height: 32px;
+    box-sizing: border-box;
 
     &::after, &::before {
       display: block;
@@ -29,7 +31,7 @@
     .tab {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      padding: .3em 1em;
+      padding: .3em 1em 99px;
 
       &:not(.active) {
         border-bottom: 1px solid;

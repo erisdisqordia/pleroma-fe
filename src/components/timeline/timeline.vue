@@ -75,6 +75,6 @@
   padding: 10px;
   z-index: 1;
   background-color: $fallback--fg;
-  background-color: var(--fg, $fallback--fg);
+  background-color: var(--panel, $fallback--fg);
 }
 </style>

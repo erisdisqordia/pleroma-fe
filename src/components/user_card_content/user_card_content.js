@@ -1,11 +1,13 @@
 import StillImage from '../still-image/still-image.vue'
+import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
 export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio' ],
   computed: {
     headingStyle () {
-      const rgb = this.$store.state.config.customTheme.colors.bg
-      if (rgb) {
+      const color = this.$store.state.config.customTheme.colors.bg
+      if (color) {
+        const rgb = (typeof color === 'string') ? hex2rgb(color) : color
         const tintColor = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .5)`
         return {
           backgroundColor: `rgb(${Math.floor(rgb.r * 0.53)}, ${Math.floor(rgb.g * 0.56)}, ${Math.floor(rgb.b * 0.59)})`,

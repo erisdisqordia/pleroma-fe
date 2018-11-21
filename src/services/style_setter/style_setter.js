@@ -202,6 +202,9 @@ const generateColors = (input) => {
       colors[k + 'Link'].a = v
       colors['panelFaint'].a = v
     }
+    if (k === 'bg') {
+      colors['lightBg'].a = v
+    }
     if (colors[k]) {
       colors[k].a = v
     } else {

@@ -154,7 +154,7 @@
       margin-left: $fallback--attachmentRadius;
       margin-left: var(--attachmentRadius, $fallback--attachmentRadius);
       background-color: $fallback--fg;
-      background-color: var(--fg, $fallback--fg);
+      background-color: var(--btn, $fallback--fg);
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -292,7 +292,7 @@
 
     &.highlighted {
       background-color: $fallback--fg;
-      background-color: var(--fg, $fallback--fg);
+      background-color: var(--lightBg, $fallback--fg);
     }
   }
 }

@@ -289,7 +289,7 @@ const generateShadows = (input) => {
     blur: 0,
     spread: 0,
     color: '#FFFFFF',
-    alpha: 0.3,
+    alpha: 0.2,
     inset: true
   }]
   const shadows = {

@@ -5,9 +5,8 @@ export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio' ],
   computed: {
     headingStyle () {
-      const color = this.$store.state.config.customTheme.colors.bg
-      if (color) {
-        const rgb = hex2rgb(color)
+      const rgb = this.$store.state.config.customTheme.colors.bg
+      if (rgb) {
         const tintColor = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .5)`
         return {
           backgroundColor: `rgb(${Math.floor(rgb.r * 0.53)}, ${Math.floor(rgb.g * 0.56)}, ${Math.floor(rgb.b * 0.59)})`,

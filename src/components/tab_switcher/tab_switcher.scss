@@ -29,15 +29,24 @@
     }
 
     .tab {
+      position: relative;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      padding: .3em 1em 99px;
+      padding: 5px 1em 99px;
 
       &:not(.active) {
-        border-bottom: 1px solid;
-        border-bottom-color: $fallback--border;
-        border-bottom-color: var(--border, $fallback--border);
         z-index: 4;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 26px;
+          border-bottom: 1px solid;
+          border-bottom-color: $fallback--border;
+          border-bottom-color: var(--border, $fallback--border);
+        }
       }
 
       &.active {

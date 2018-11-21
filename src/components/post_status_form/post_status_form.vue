@@ -258,6 +258,8 @@
     position: absolute;
     z-index: 1;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+    // this doesn't match original but i don't care, making it uniform.
+    box-shadow: var(--popupShadow);
     min-width: 75%;
     background: $fallback--bg;
     background: var(--bg, $fallback--bg);

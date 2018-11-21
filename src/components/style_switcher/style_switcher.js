@@ -259,7 +259,7 @@ export default {
       return [...Object.values(this.preview.rules), 'color: var(--text)'].join(';')
     },
     shadowsAvailable () {
-      return Object.keys(this.previewTheme.shadows)
+      return Object.keys(this.previewTheme.shadows).sort()
     },
     currentShadowOverriden: {
       get () {

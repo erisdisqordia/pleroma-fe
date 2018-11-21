@@ -301,6 +301,14 @@ const generateShadows = (input) => {
       color: '#000000',
       alpha: 0.6
     }],
+    topBar: [{
+      x: 0,
+      y: 0,
+      blur: 4,
+      spread: 0,
+      color: '#000000',
+      alpha: 0.6
+    }],
     popup: [{
       x: 2,
       y: 2,

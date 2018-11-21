@@ -134,14 +134,16 @@
         </div>
       </div>
       <div :label="$t('settings.style.radii._tab_label')" class="radius-container">
-        <p>{{$t('settings.radii_help')}}</p>
-        <RangeInput name="btnRadius" :label="$t('settings.btnRadius')" v-model="btnRadiusLocal" :fallback="previewTheme.radii.btn" max="16" hardMin="0"/>
-        <RangeInput name="inputRadius" :label="$t('settings.inputRadius')" v-model="inputRadiusLocal" :fallback="previewTheme.radii.input" max="16" hardMin="0"/>
-        <RangeInput name="panelRadius" :label="$t('settings.panelRadius')" v-model="panelRadiusLocal" :fallback="previewTheme.radii.panel" max="50" hardMin="0"/>
-        <RangeInput name="avatarRadius" :label="$t('settings.avatarRadius')" v-model="avatarRadiusLocal" :fallback="previewTheme.radii.avatar" max="28" hardMin="0"/>
-        <RangeInput name="avatarAltRadius" :label="$t('settings.avatarAltRadius')" v-model="avatarAltRadiusLocal" :fallback="previewTheme.radii.avatarAlt" max="28" hardMin="0"/>
-        <RangeInput name="attachmentRadius" :label="$t('settings.attachmentRadius')" v-model="attachmentRadiusLocal" :fallback="previewTheme.radii.attachment" max="50" hardMin="0"/>
-        <RangeInput name="tooltipRadius" :label="$t('settings.tooltipRadius')" v-model="tooltipRadiusLocal" :fallback="previewTheme.radii.tooltip" max="50" hardMin="0"/>
+        <div>
+          <p>{{$t('settings.radii_help')}}</p>
+          <RangeInput name="btnRadius" :label="$t('settings.btnRadius')" v-model="btnRadiusLocal" :fallback="previewTheme.radii.btn" max="16" hardMin="0"/>
+          <RangeInput name="inputRadius" :label="$t('settings.inputRadius')" v-model="inputRadiusLocal" :fallback="previewTheme.radii.input" max="16" hardMin="0"/>
+          <RangeInput name="panelRadius" :label="$t('settings.panelRadius')" v-model="panelRadiusLocal" :fallback="previewTheme.radii.panel" max="50" hardMin="0"/>
+          <RangeInput name="avatarRadius" :label="$t('settings.avatarRadius')" v-model="avatarRadiusLocal" :fallback="previewTheme.radii.avatar" max="28" hardMin="0"/>
+          <RangeInput name="avatarAltRadius" :label="$t('settings.avatarAltRadius')" v-model="avatarAltRadiusLocal" :fallback="previewTheme.radii.avatarAlt" max="28" hardMin="0"/>
+          <RangeInput name="attachmentRadius" :label="$t('settings.attachmentRadius')" v-model="attachmentRadiusLocal" :fallback="previewTheme.radii.attachment" max="50" hardMin="0"/>
+          <RangeInput name="tooltipRadius" :label="$t('settings.tooltipRadius')" v-model="tooltipRadiusLocal" :fallback="previewTheme.radii.tooltip" max="50" hardMin="0"/>
+        </div>
       </div>
       <div :label="$t('settings.style.shadows._tab_label')" class="shadow-container">
         <div class="shadow-selector">

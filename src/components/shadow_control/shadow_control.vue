@@ -43,7 +43,7 @@
       <label for="shadow-switcher" class="select">
         <select
           v-model="selectedId" class="shadow-switcher"
-          :disabled="!isReady || usingFallback"
+          :disabled="!ready || usingFallback"
           id="shadow-switcher">
           <option v-for="(shadow, index) in cValue" :value="index">
             {{$t('settings.style.shadows.shadow_id', { value: index })}}
@@ -51,7 +51,7 @@
         </select>
         <i class="icon-down-open"/>
       </label>
-      <button class="btn btn-default" :disabled="!isReady || !present" @click="del">
+      <button class="btn btn-default" :disabled="!ready || !present" @click="del">
         <i class="icon-cancel"/>
       </button>
       <button class="btn btn-default" :disabled="!moveUpValid" @click="moveUp">
@@ -60,7 +60,7 @@
       <button class="btn btn-default" :disabled="!moveDnValid" @click="moveDn">
         <i class="icon-down-open"/>
       </button>
-      <button class="btn btn-default" :disabled="!isReady" @click="add">
+      <button class="btn btn-default" :disabled="!ready" @click="add">
         <i class="icon-plus"/>
       </button>
     </div>

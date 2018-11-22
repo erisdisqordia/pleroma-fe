@@ -8,10 +8,10 @@
           <option v-for="style in availableStyles"
                   :value="style"
                   :style="{
-                          backgroundColor: style[1],
-                          color: style[3]
+                          backgroundColor: style[1] || style.theme.colors.bg,
+                          color: style[3] || style.theme.colors.text
                           }">
-            {{style[0]}}
+            {{style[0] || style.name}}
           </option>
         </select>
         <i class="icon-down-open"/>

@@ -447,6 +447,8 @@ export default {
         this.cGreenColorLocal = this.selected[6]
         this.cBlueColorLocal = this.selected[7]
         this.cOrangeColorLocal = this.selected[8]
+      } else if (this.selectedVersion >= 2) {
+        this.normalizeLocalState(this.selected.theme, 2)
       }
     }
   }

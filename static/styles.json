@@ -5,5 +5,231 @@
   "bird": [ "Bird", "#f8fafd", "#e6ecf0", "#14171a", "#0084b8", "#e0245e", "#17bf63", "#1b95e0", "#fab81e"],
   "ir-black": [ "Ir Black", "#000000", "#242422", "#b5b3aa", "#ff6c60", "#FF6C60", "#A8FF60", "#96CBFE", "#FFFFB6" ],
   "monokai": [ "Monokai", "#272822", "#383830", "#f8f8f2", "#f92672", "#F92672", "#a6e22e", "#66d9ef", "#f4bf75" ],
-  "mammal": [ "Mammal", "#272c37", "#444b5d", "#f8f8f8", "#9bacc8", "#7f3142", "#2bd850", "#2b90d9", "#ca8f04" ]
+  "mammal": [ "Mammal", "#272c37", "#444b5d", "#f8f8f8", "#9bacc8", "#7f3142", "#2bd850", "#2b90d9", "#ca8f04" ],
+  "redmond-xx": {
+    "_pleroma_theme_version": 2,
+    "name": "Redmond XX",
+    "theme": {
+      "shadows": {
+        "panel": [
+          {
+            "x": "-1",
+            "y": "-1",
+            "blur": "0",
+            "spread": 0,
+            "color": "#000000",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "1",
+            "y": "1",
+            "blur": "0",
+            "spread": 0,
+            "color": "--bg",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "2",
+            "y": "2",
+            "blur": "0",
+            "spread": 0,
+            "color": "#FFFFFF",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "-2",
+            "y": "-2",
+            "blur": "0",
+            "spread": 0,
+            "color": "#848484",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "0",
+            "y": "0",
+            "blur": "0",
+            "spread": "3",
+            "color": "--bg",
+            "alpha": "1",
+            "inset": true
+          }
+        ],
+        "button": [
+          {
+            "x": "-1",
+            "y": "-1",
+            "blur": "0",
+            "spread": 0,
+            "color": "#000000",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "1",
+            "y": "1",
+            "blur": "0",
+            "spread": 0,
+            "color": "--bg",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "2",
+            "y": "2",
+            "blur": "0",
+            "spread": 0,
+            "color": "#FFFFFF",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "-2",
+            "y": "-2",
+            "blur": "0",
+            "spread": 0,
+            "color": "#848484",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "0",
+            "y": "0",
+            "blur": "0",
+            "spread": "3",
+            "color": "--bg",
+            "alpha": "1",
+            "inset": true
+          }
+        ],
+        "buttonHover": [
+          {
+            "x": "-1",
+            "y": "-1",
+            "blur": "0",
+            "spread": 0,
+            "color": "#000000",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "1",
+            "y": "1",
+            "blur": "0",
+            "spread": 0,
+            "color": "--bg",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "2",
+            "y": "2",
+            "blur": "0",
+            "spread": 0,
+            "color": "#FFFFFF",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "-2",
+            "y": "-2",
+            "blur": "0",
+            "spread": 0,
+            "color": "#848484",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "0",
+            "y": "0",
+            "blur": "0",
+            "spread": "3",
+            "color": "--bg",
+            "alpha": "1",
+            "inset": true
+          }
+        ],
+        "input": [
+          {
+            "x": "1",
+            "y": "1",
+            "blur": "0",
+            "spread": 0,
+            "color": "#000000",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "-1",
+            "y": "-1",
+            "blur": "0",
+            "spread": 0,
+            "color": "--bg",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "-2",
+            "y": "-2",
+            "blur": "0",
+            "spread": 0,
+            "color": "#FFFFFF",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "2",
+            "y": "2",
+            "blur": "0",
+            "spread": 0,
+            "color": "#848484",
+            "alpha": "1",
+            "inset": true
+          },
+          {
+            "x": "0",
+            "y": "0",
+            "blur": "0",
+            "spread": "3",
+            "color": "--input",
+            "alpha": "1",
+            "inset": true
+          }
+        ]
+      },
+      "opacity": {
+        "input": "1"
+      },
+      "colors": {
+        "bg": "#c0c0c0",
+        "text": "#000000",
+        "link": "#0000ff",
+        "fg": "#c0c0c0",
+        "panel": "#000080",
+        "input": "#ffffff",
+        "topBar": "#000080",
+        "topBarLink": "#ffffff",
+        "btn": "#c0c0c0",
+        "faint": "#3f3f3f",
+        "faintLink": "#404080",
+        "border": "#808080",
+        "cRed": "#FF0000",
+        "cBlue": "#008080",
+        "cGreen": "#00FF00",
+        "cOrange": "#808000"
+      },
+      "radii": {
+        "btn": "0",
+        "input": "0",
+        "panel": "0",
+        "avatar": "0",
+        "avatarAlt": "0",
+        "tooltip": "0",
+        "attachment": "0"
+      }
+    }
+  }
 }

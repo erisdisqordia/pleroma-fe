@@ -256,40 +256,26 @@ const generateRadii = (input) => {
 }
 
 const generateShadows = (input) => {
-  const buttonInsetFakeBorders = [{
+  const border = (top, shadow) => ({
     x: 0,
-    y: 1,
+    y: top ? 1 : -1,
     blur: 0,
     spread: 0,
-    color: '#FFFFFF',
+    color: shadow ? '#000000' : '#FFFFFF',
     alpha: 0.2,
     inset: true
-  }, {
+  })
+  const buttonInsetFakeBorders = [border(true, false), border(false, true)]
+  const inputInsetFakeBorders = [border(true, true), border(false, false)]
+  const hoverGlow = {
     x: 0,
-    y: -1,
-    blur: 0,
+    y: 0,
+    blur: 4,
     spread: 0,
-    color: '#000000',
-    alpha: 0.2,
-    inset: true
-  }]
-  const inputInsetFakeBorders = [{
-    x: 0,
-    y: 1,
-    blur: 0,
-    spread: 0,
-    color: '#000000',
-    alpha: 0.2,
-    inset: true
-  }, {
-    x: 0,
-    y: -1,
-    blur: 0,
-    spread: 0,
-    color: '#FFFFFF',
-    alpha: 0.2,
-    inset: true
-  }]
+    color: '--faint',
+    alpha: 1
+  }
+
   const shadows = {
     panel: [{
       x: 1,
@@ -332,14 +318,8 @@ const generateShadows = (input) => {
       color: '#000000',
       alpha: 1
     }, ...buttonInsetFakeBorders],
-    buttonHover: [{
-      x: 0,
-      y: 0,
-      blur: 4,
-      spread: 0,
-      color: '--faint',
-      alpha: 1
-    }, ...buttonInsetFakeBorders],
+    buttonHover: [hoverGlow, ...buttonInsetFakeBorders],
+    buttonPressed: [hoverGlow, ...inputInsetFakeBorders],
     input: [...inputInsetFakeBorders, {
       x: 0,
       y: 0,

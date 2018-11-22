@@ -58,8 +58,6 @@ button {
   border-radius: $fallback--btnRadius;
   border-radius: var(--btnRadius, $fallback--btnRadius);
   cursor: pointer;
-  /* border-top: 1px solid rgba(255, 255, 255, 0.2); */
-  /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
   box-shadow: 0px 0px 2px black;
   box-shadow: var(--buttonShadow);
   font-size: 14px;
@@ -80,8 +78,7 @@ button {
   }
 
   &:active {
-    /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
-    /* border-top: 1px solid rgba(0, 0, 0, 0.2); */
+    box-shadow: var(--buttonPressedShadow);
   }
 
   &:disabled {
@@ -106,8 +103,6 @@ input, textarea, .select {
   border: none;
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
-  /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
-  /* border-top: 1px solid rgba(0, 0, 0, 0.2); */
   box-shadow: 0px 0px 2px black inset;
   box-shadow: var(--inputShadow);
   background-color: $fallback--fg;
@@ -184,8 +179,6 @@ input, textarea, .select {
       height: 1.1em;
       border-radius: $fallback--checkBoxRadius;
       border-radius: var(--checkBoxRadius, $fallback--checkBoxRadius);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      border-top: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: 0px 0px 2px black inset;
       box-shadow: var(--inputShadow);
       margin-right: .5em;

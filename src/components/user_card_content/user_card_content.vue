@@ -124,6 +124,7 @@
   .panel-heading {
     padding: 0.6em 0em;
     text-align: center;
+    box-shadow: none;
   }
 }
 

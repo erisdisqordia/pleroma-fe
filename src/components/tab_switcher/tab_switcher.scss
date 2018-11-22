@@ -34,6 +34,10 @@
       border-bottom-right-radius: 0;
       padding: 5px 1em 99px;
 
+      &:hover {
+        z-index: 6;
+      }
+
       &:not(.active) {
         z-index: 4;
 

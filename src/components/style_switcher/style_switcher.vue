@@ -170,7 +170,7 @@
             <label class="checkbox-label" for="override"></label>
           </div>
         </div>
-        <shadow-control :fallback="currentShadowFallback" v-model="currentShadow"/>
+        <shadow-control :ready="!!currentShadowFallback" :fallback="currentShadowFallback" v-model="currentShadow"/>
       </div>
     </tab-switcher>
   </keep-alive>

@@ -107,7 +107,6 @@ const getCssShadow = (input) => {
 }
 
 const getCssColor = (input, a) => {
-  console.log(input)
   let rgb = {}
   if (typeof input === 'object') {
     rgb = input
@@ -120,7 +119,6 @@ const getCssColor = (input, a) => {
       return input
     }
   }
-  console.log(rgb2rgba({ ...rgb, a }))
   return rgb2rgba({ ...rgb, a })
 }
 

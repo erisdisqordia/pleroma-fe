@@ -182,7 +182,6 @@ export default {
     },
     previewTheme () {
       if (!this.preview.theme.colors) return { colors: {}, opacity: {}, radii: {}, shadows: {} }
-      console.log(this.preview.theme.radii)
       return this.preview.theme
     },
     // This needs optimization maybe
@@ -382,8 +381,6 @@ export default {
     normalizeLocalState (input, version = 0) {
       const colors = input.colors || input
       const radii = input.radii || input
-      console.log('Benis')
-      console.log(JSON.stringify(radii, null, 2))
       const opacity = input.opacity || input
       const shadows = input.shadows || {}
 

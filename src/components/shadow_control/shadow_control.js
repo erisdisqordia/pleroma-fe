@@ -4,13 +4,17 @@ import { getCssShadow } from '../../services/style_setter/style_setter.js'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
 export default {
+  // 'Value' and 'Fallback' can be undefined, but if they are
+  // initially vue won't detect it when they become something else
+  // therefore i'm using "ready" which should be passed as true when
+  // data becomes available
   props: [
-    'value', 'fallback'
+    'value', 'fallback', 'ready'
   ],
   data () {
     return {
       selectedId: 0,
-      cValue: this.value || this.fallback
+      cValue: this.value || this.fallback || []
     }
   },
   components: {
@@ -42,27 +46,28 @@ export default {
   },
   computed: {
     selected () {
-      return this.isReady && this.cValue[this.selectedId] || {
-        x: 0,
-        y: 0,
-        blur: 0,
-        spread: 0,
-        inset: false,
-        color: '#000000',
-        alpha: 1
+      if (this.ready && this.cValue.length > 0) {
+        return this.cValue[this.selectedId]
+      } else {
+        return {
+          x: 0,
+          y: 0,
+          blur: 0,
+          spread: 0,
+          inset: false,
+          color: '#000000',
+          alpha: 1
+        }
       }
     },
     moveUpValid () {
-      return this.isReady && this.selectedId > 0
+      return this.ready && this.selectedId > 0
     },
     moveDnValid () {
-      return this.isReady && this.selectedId < this.cValue.length - 1
-    },
-    isReady () {
-      return typeof this.cValue !== 'undefined'
+      return this.ready && this.selectedId < this.cValue.length - 1
     },
     present () {
-      return this.isReady &&
+      return this.ready &&
         typeof this.cValue[this.selectedId] !== 'undefined' &&
         !this.usingFallback
     },
@@ -73,7 +78,7 @@ export default {
       return hex2rgb(this.selected.color)
     },
     style () {
-      return this.isReady ? {
+      return this.ready ? {
         boxShadow: getCssShadow(this.cValue)
       } : {}
     }

@@ -233,7 +233,8 @@ const generateColors = (input) => {
 
 const generateRadii = (input) => {
   const radii = Object.entries(input.radii || {}).filter(([k, v]) => v).reduce((acc, [k, v]) => {
-    acc[k] = v
+    const key = k.endsWith('Radius') ? k.split('Radius')[0] : k
+    acc[key] = v
     return acc
   }, {
     btn: 4,

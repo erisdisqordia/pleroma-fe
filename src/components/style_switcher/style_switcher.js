@@ -438,15 +438,11 @@ export default {
 
       if (!this.keepRoundness) {
         this.clearRoundness()
-        // TODO optimize this
-        this.btnRadiusLocal = radii.btn
-        this.inputRadiusLocal = radii.input
-        this.checkboxRadiusLocal = radii.checkbox
-        this.panelRadiusLocal = radii.panel
-        this.avatarRadiusLocal = radii.avatar
-        this.avatarAltRadiusLocal = radii.avatarAlt
-        this.tooltipRadiusLocal = radii.tooltip
-        this.attachmentRadiusLocal = radii.attachment
+        Object.entries(radii).forEach(([k, v]) => {
+          // 'Radius' is kept mostly for v1->v2 localstorage transition
+          const key = k.endsWith('Radius') ? k.split('Radius')[0] : k
+          this[key + 'RadiusLocal'] = v
+        })
       }
 
       if (!this.keepShadows) {

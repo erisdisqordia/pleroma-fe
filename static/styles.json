@@ -271,6 +271,7 @@
       "radii": {
         "btn": "0",
         "input": "0",
+        "checkbox": "0",
         "panel": "0",
         "avatar": "0",
         "avatarAlt": "0",
@@ -555,6 +556,7 @@
       "radii": {
         "btn": "0",
         "input": "0",
+        "checkbox": "0",
         "panel": "0",
         "avatar": "0",
         "avatarAlt": "0",
@@ -839,6 +841,7 @@
       "radii": {
         "btn": "0",
         "input": "0",
+        "checkbox": "0",
         "panel": "0",
         "avatar": "0",
         "avatarAlt": "0",

@@ -76,6 +76,7 @@ export default {
 
       btnRadiusLocal: '',
       inputRadiusLocal: '',
+      checkboxRadiusLocal: '',
       panelRadiusLocal: '',
       avatarRadiusLocal: '',
       avatarAltRadiusLocal: '',
@@ -154,6 +155,7 @@ export default {
       return {
         btn: this.btnRadiusLocal,
         input: this.inputRadiusLocal,
+        checkbox: this.checkboxRadiusLocal,
         panel: this.panelRadiusLocal,
         avatar: this.avatarRadiusLocal,
         avatarAlt: this.avatarAltRadiusLocal,
@@ -421,6 +423,7 @@ export default {
       // TODO optimize this
       this.btnRadiusLocal = radii.btn
       this.inputRadiusLocal = radii.input
+      this.checkboxRadiusLocal = radii.checkbox
       this.panelRadiusLocal = radii.panel
       this.avatarRadiusLocal = radii.avatar
       this.avatarAltRadiusLocal = radii.avatarAlt

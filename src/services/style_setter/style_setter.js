@@ -94,7 +94,10 @@ const setColors = (input, commit) => {
 }
 
 const getCssShadow = (input) => {
-  // >shad
+  if (input.length === 0) {
+    return 'none'
+  }
+
   return input.map((shad) => [
     shad.x,
     shad.y,
@@ -340,9 +343,10 @@ const generateShadows = (input) => {
     ...(input.shadows || {})
   }
 
+  console.log(Object.entries(shadows).map(([k, v]) => `--${k}Shadow: ${getCssShadow(v)}`).join(';'))
   return {
     rules: {
-      shadows: Object.entries(shadows).filter(([k, v]) => v).map(([k, v]) => `--${k}Shadow: ${getCssShadow(v)}`).join(';')
+      shadows: Object.entries(shadows).map(([k, v]) => `--${k}Shadow: ${getCssShadow(v)}`).join(';')
     },
     theme: {
       shadows

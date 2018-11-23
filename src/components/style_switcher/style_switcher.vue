@@ -34,6 +34,13 @@
       </span>
       <span>
         <input
+          id="keep-opacity"
+          type="checkbox"
+          v-model="keepOpacity">
+        <label for="keep-opacity">{{$t('settings.style.switcher.keep_opacity')}}</label>
+      </span>
+      <span>
+        <input
           id="keep-roundness"
           type="checkbox"
           v-model="keepRoundness">

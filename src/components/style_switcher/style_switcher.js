@@ -28,6 +28,7 @@ export default {
       invalidThemeImported: false,
 
       keepShadows: false,
+      keepOpacity: false,
       keepRoundness: false,
 
       textColorLocal: '',
@@ -386,6 +387,14 @@ export default {
         })
     },
 
+    clearOpacity () {
+      Object.keys(this.$data)
+        .filter(_ => _.endsWith('OpacityLocal'))
+        .forEach(key => {
+          set(this.$data, key, undefined)
+        })
+    },
+
     clearShadows () {
       this.shadowsLocal = {}
       console.log(this.shadowsLocal)
@@ -397,9 +406,10 @@ export default {
      * @param {Number} version - version of data. 0 means try to guess based on data.
      */
     normalizeLocalState (input, version = 0) {
+      console.log(input.opacity)
       const colors = input.colors || input
       const radii = input.radii || input
-      const opacity = input.opacity || input
+      const opacity = input.opacity
       const shadows = input.shadows || {}
 
       if (version === 0) {
@@ -451,10 +461,13 @@ export default {
         this.shadowSelected = this.shadowsAvailable[0]
       }
 
-      Object.entries(opacity).forEach(([k, v]) => {
-        if (typeof v === 'undefined' || v === null || Number.isNaN(v)) return
-        this[k + 'OpacityLocal'] = v
-      })
+      if (opacity && !this.keepOpacity) {
+        this.clearOpacity()
+        Object.entries(opacity).forEach(([k, v]) => {
+          if (typeof v === 'undefined' || v === null || Number.isNaN(v)) return
+          this[k + 'OpacityLocal'] = v
+        })
+      }
     }
   },
   watch: {
@@ -466,6 +479,10 @@ export default {
 
         if (!this.keepShadows) {
           this.clearShadows()
+        }
+
+        if (!this.keepOpacity) {
+          this.clearOpacity()
         }
 
         this.clearV1()

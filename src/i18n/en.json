@@ -166,6 +166,7 @@
     "style": {
       "switcher": {
         "keep_shadows": "Keep shadows",
+        "keep_opacity": "Keep opacity",
         "keep_roundness": "Keep roundness",
         "save_load_hint": "\"Keep\" options preserve currently set options when selecting or loading themes, it also stores said options when exporting a theme."
       },

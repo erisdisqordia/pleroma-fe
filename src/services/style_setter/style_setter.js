@@ -232,9 +232,16 @@ const generateColors = (input) => {
 }
 
 const generateRadii = (input) => {
-  const radii = Object.entries(input.radii || {}).filter(([k, v]) => v).reduce((acc, [k, v]) => {
-    const key = k.endsWith('Radius') ? k.split('Radius')[0] : k
-    acc[key] = v
+  let inputRadii = input.radii || {}
+  // v1 -> v2
+  if (typeof input.btnRadius !== 'undefined') {
+    inputRadii = Object
+      .entries(input)
+      .filter(([k, v]) => k.endsWith('Radius'))
+      .reduce((acc, e) => { acc[e[0].split('Radius')[0]] = e[1]; return acc }, {})
+  }
+  const radii = Object.entries(inputRadii).filter(([k, v]) => v).reduce((acc, [k, v]) => {
+    acc[k] = v
     return acc
   }, {
     btn: 4,

@@ -369,6 +369,10 @@ export default {
       })
     },
 
+    clearAll () {
+      this.normalizeLocalState(this.$store.state.config.customTheme)
+    },
+
     // Clears all the extra stuff when loading V1 theme
     clearV1 () {
       Object.keys(this.$data)

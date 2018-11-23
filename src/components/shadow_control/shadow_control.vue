@@ -40,7 +40,7 @@
 
   <div class="shadow-tweak">
     <div :disabled="usingFallback" class="id-control style-control">
-      <label for="shadow-switcher" class="select">
+      <label for="shadow-switcher" class="select" :disabled="!ready || usingFallback">
         <select
           v-model="selectedId" class="shadow-switcher"
           :disabled="!ready || usingFallback"
@@ -60,7 +60,7 @@
       <button class="btn btn-default" :disabled="!moveDnValid" @click="moveDn">
         <i class="icon-down-open"/>
       </button>
-      <button class="btn btn-default" :disabled="!ready" @click="add">
+      <button class="btn btn-default" :disabled="usingFallback" @click="add">
         <i class="icon-plus"/>
       </button>
     </div>
@@ -219,7 +219,12 @@
     .id-control {
       align-items: stretch;
       .select, .btn {
+        min-width: 1px;
         margin-right: 5px;
+      }
+      .btn {
+        padding: 0 .4em;
+        margin: 0 .1em;
       }
       .select {
         flex: 1;

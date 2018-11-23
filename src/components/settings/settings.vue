@@ -208,12 +208,8 @@
 
   .btn {
     min-height: 28px;
-  }
-
-  .submit {
-    margin-top: 1em;
-    min-height: 30px;
-    width: 10em;
+    min-width: 10em;
+    padding: 0 2em;
   }
 }
 .select-multiple {

@@ -249,6 +249,7 @@ const generateRadii = (input) => {
   }, {
     btn: 4,
     input: 4,
+    checkbox: 2,
     panel: 10,
     avatar: 5,
     avatarAlt: 50,

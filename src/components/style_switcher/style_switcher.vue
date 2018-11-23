@@ -71,10 +71,13 @@
     </div>
   </div>
 
-  <p>{{$t('settings.theme_help')}}</p>
   <keep-alive>
     <tab-switcher key="style-tweak">
       <div :label="$t('settings.style.common_colors._tab_label')" class="color-container">
+        <div class="tab-header">
+          <p>{{$t('settings.theme_help')}}</p>
+          <button class="btn" @click="clearOpacity">{{$t('settings.style.switcher.clear_opacity')}}</button>
+        </div>
         <h4>{{ $t('settings.style.common_colors.main') }}</h4>
         <div class="color-item">
           <ColorInput name="bgColor" v-model="bgColorLocal" :label="$t('settings.background')"/>
@@ -106,6 +109,11 @@
       </div>
 
       <div :label="$t('settings.style.advanced_colors._tab_label')" class="color-container">
+        <div class="tab-header">
+          <p>{{$t('settings.theme_help')}}</p>
+          <button class="btn" @click="clearV1">{{$t('settings.style.switcher.clear_all')}}</button>
+          <button class="btn" @click="clearOpacity">{{$t('settings.style.switcher.clear_opacity')}}</button>
+        </div>
         <div class="color-item">
           <h4>{{ $t('settings.style.advanced_colors.alert') }}</h4>
           <ColorInput name="alertError" v-model="alertErrorColorLocal" :label="$t('settings.style.advanced_colors.alert_error')" :fallback="previewTheme.colors.alertError"/>
@@ -159,7 +167,10 @@
       </div>
       <div :label="$t('settings.style.radii._tab_label')" class="radius-container">
         <div>
-          <p>{{$t('settings.radii_help')}}</p>
+          <div class="tab-header">
+            <p>{{$t('settings.radii_help')}}</p>
+            <button class="btn" @click="clearRoundness">{{$t('settings.style.switcher.clear_all')}}</button>
+          </div>
           <RangeInput name="btnRadius" :label="$t('settings.btnRadius')" v-model="btnRadiusLocal" :fallback="previewTheme.radii.btn" max="16" hardMin="0"/>
           <RangeInput name="inputRadius" :label="$t('settings.inputRadius')" v-model="inputRadiusLocal" :fallback="previewTheme.radii.input" max="9" hardMin="0"/>
           <RangeInput name="checkboxRadius" :label="$t('settings.checkboxRadius')" v-model="checkboxRadiusLocal" :fallback="previewTheme.radii.checkbox" max="16" hardMin="0"/>
@@ -171,8 +182,8 @@
         </div>
       </div>
       <div :label="$t('settings.style.shadows._tab_label')" class="shadow-container">
-        <div class="shadow-selector">
-          <div>
+        <div class="tab-header shadow-selector">
+          <div class="select-container">
             {{$t('settings.style.shadows.component')}}
             <label for="shadow-switcher" class="select">
               <select id="shadow-switcher" v-model="shadowSelected" class="shadow-switcher">
@@ -196,6 +207,7 @@
               type="checkbox">
             <label class="checkbox-label" for="override"></label>
           </div>
+          <button class="btn" @click="clearShadows">{{$t('settings.style.switcher.clear_all')}}</button>
         </div>
         <shadow-control :ready="!!currentShadowFallback" :fallback="currentShadowFallback" v-model="currentShadow"/>
       </div>
@@ -204,6 +216,7 @@
 
   <div class="apply-container">
     <button class="btn submit" @click="setCustomTheme">{{$t('general.apply')}}</button>
+    <button class="btn" @click="clearAll">{{$t('settings.style.switcher.reset')}}</button>
   </div>
 </div>
 </template>

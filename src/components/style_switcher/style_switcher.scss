@@ -63,15 +63,16 @@
     margin: 0 -1em;
   }
 
+  .reset-container {
+    flex-wrap: wrap;
+  }
+
+  .reset-container,
   .apply-container,
   .radius-container,
   .color-container,
   {
     display: flex;
-
-    p {
-      margin-left: 1em
-    }
   }
 
   .radius-container {
@@ -93,7 +94,38 @@
     margin: 1em 1em 0;
   }
 
-  .shadow-selector,
+  .tab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    min-height: 30px;
+
+    .btn {
+      min-width: 1px;
+      flex: 0 auto;
+      padding: 0 1em;
+    }
+
+    p {
+      flex: 1;
+      margin: 0;
+    }
+
+    margin-bottom: 1em;
+  }
+
+  .shadow-selector {
+    .override {
+      flex: 1;
+      margin-left: .5em;
+    }
+    .select-container {
+      margin-top: -4px;
+      margin-bottom: -3px;
+    }
+  }
+
   .save-load,
   .save-load-options {
     display: flex;
@@ -102,11 +134,8 @@
 
     .import-export {
       display: flex;
-
-      .btn {
-        margin-left: .5em;
-      }
     }
+
     .override {
       margin-left: .5em;
     }
@@ -132,6 +161,7 @@
     background-position: 50% 50%;
 
     .btn {
+      margin-left: 0;
       margin-top: 1em;
       min-height: 30px;
       width: 10em;
@@ -153,6 +183,7 @@
     &.wide {
       min-width: 60%
     }
+
     &:not(.wide):nth-child(2n+1) {
       margin-right: 7px;
 
@@ -198,6 +229,11 @@
 
   .theme-preview-content {
     padding: 20px;
+  }
+
+  .btn {
+    margin-left: .25em;
+    margin-right: .25em;
   }
 
   .dummy {

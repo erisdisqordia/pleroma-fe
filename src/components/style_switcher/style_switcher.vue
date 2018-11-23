@@ -1,26 +1,45 @@
 <template>
 <div class="style-switcher">
   <div class="presets-container">
-    <div>
-      {{$t('settings.presets')}}
-      <label for="preset-switcher" class='select'>
-        <select id="preset-switcher" v-model="selected" class="preset-switcher">
-          <option v-for="style in availableStyles"
-                  :value="style"
-                  :style="{
-                          backgroundColor: style[1] || style.theme.colors.bg,
-                          color: style[3] || style.theme.colors.text
-                          }">
-            {{style[0] || style.name}}
-          </option>
-        </select>
-        <i class="icon-down-open"/>
-      </label>
+    <div class="save-load">
+      <div>
+        {{$t('settings.presets')}}
+        <label for="preset-switcher" class='select'>
+          <select id="preset-switcher" v-model="selected" class="preset-switcher">
+            <option v-for="style in availableStyles"
+                    :value="style"
+                    :style="{
+                            backgroundColor: style[1] || style.theme.colors.bg,
+                            color: style[3] || style.theme.colors.text
+                            }">
+              {{style[0] || style.name}}
+            </option>
+          </select>
+          <i class="icon-down-open"/>
+        </label>
+      </div>
+      <div class="import-export">
+        <button class="btn" @click="exportCurrentTheme">{{ $t('settings.export_theme') }}</button>
+        <button class="btn" @click="importTheme">{{ $t('settings.import_theme') }}</button>
+        <p v-if="invalidThemeImported" class="import-warning">{{ $t('settings.invalid_theme_imported') }}</p>
+      </div>
     </div>
-    <div class="import-export">
-      <button class="btn" @click="exportCurrentTheme">{{ $t('settings.export_theme') }}</button>
-      <button class="btn" @click="importTheme">{{ $t('settings.import_theme') }}</button>
-      <p v-if="invalidThemeImported" class="import-warning">{{ $t('settings.invalid_theme_imported') }}</p>
+    <div class="save-load-options">
+      <span>
+        <input
+          id="keep-shadows"
+          type="checkbox"
+          v-model="keepShadows">
+        <label for="keep-shadows">{{$t('settings.style.switcher.keep_shadows')}}</label>
+      </span>
+      <span>
+        <input
+          id="keep-roundness"
+          type="checkbox"
+          v-model="keepRoundness">
+        <label for="keep-roundness">{{$t('settings.style.switcher.keep_roundness')}}</label>
+      </span>
+      <p>{{$t('settings.style.switcher.save_load_hint')}}</p>
     </div>
   </div>
 

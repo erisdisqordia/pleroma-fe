@@ -27,6 +27,9 @@ export default {
       selected: this.$store.state.config.theme,
       invalidThemeImported: false,
 
+      keepShadows: false,
+      keepRoundness: false,
+
       textColorLocal: '',
       linkColorLocal: '',
 
@@ -375,6 +378,19 @@ export default {
         })
     },
 
+    clearRoundness () {
+      Object.keys(this.$data)
+        .filter(_ => _.endsWith('RadiusLocal'))
+        .forEach(key => {
+          set(this.$data, key, undefined)
+        })
+    },
+
+    clearShadows () {
+      this.shadowsLocal = {}
+      console.log(this.shadowsLocal)
+    },
+
     /**
      * This applies stored theme data onto form.
      * @param {Object} input - input data
@@ -420,17 +436,24 @@ export default {
         this[key + 'ColorLocal'] = rgb2hex(colors[key])
       })
 
-      // TODO optimize this
-      this.btnRadiusLocal = radii.btn
-      this.inputRadiusLocal = radii.input
-      this.checkboxRadiusLocal = radii.checkbox
-      this.panelRadiusLocal = radii.panel
-      this.avatarRadiusLocal = radii.avatar
-      this.avatarAltRadiusLocal = radii.avatarAlt
-      this.tooltipRadiusLocal = radii.tooltip
-      this.attachmentRadiusLocal = radii.attachment
+      if (!this.keepRoundness) {
+        this.clearRoundness()
+        // TODO optimize this
+        this.btnRadiusLocal = radii.btn
+        this.inputRadiusLocal = radii.input
+        this.checkboxRadiusLocal = radii.checkbox
+        this.panelRadiusLocal = radii.panel
+        this.avatarRadiusLocal = radii.avatar
+        this.avatarAltRadiusLocal = radii.avatarAlt
+        this.tooltipRadiusLocal = radii.tooltip
+        this.attachmentRadiusLocal = radii.attachment
+      }
 
-      this.shadowsLocal = shadows
+      if (!this.keepShadows) {
+        this.clearShadows()
+        this.shadowsLocal = shadows
+        this.shadowSelected = this.shadowsAvailable[0]
+      }
 
       Object.entries(opacity).forEach(([k, v]) => {
         if (typeof v === 'undefined' || v === null || Number.isNaN(v)) return
@@ -441,7 +464,16 @@ export default {
   watch: {
     selected () {
       if (this.selectedVersion === 1) {
+        if (!this.keepRoundness) {
+          this.clearRoundness()
+        }
+
+        if (!this.keepShadows) {
+          this.clearShadows()
+        }
+
         this.clearV1()
+
         this.bgColorLocal = this.selected[1]
         this.fgColorLocal = this.selected[2]
         this.textColorLocal = this.selected[3]

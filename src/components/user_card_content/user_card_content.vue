@@ -41,74 +41,74 @@
         </div>
       </div>
       <div v-if="isOtherUser" class="user-interactions">
-          <div class="follow" v-if="loggedIn">
-            <span v-if="user.following">
-              <!--Following them!-->
-              <button @click="unfollowUser" class="pressed">
-                {{ $t('user_card.following') }}
-              </button>
-            </span>
-            <span v-if="!user.following">
-              <button @click="followUser">
-                {{ $t('user_card.follow') }}
-              </button>
-            </span>
-          </div>
-          <div class='mute' v-if='isOtherUser'>
-            <span v-if='user.muted'>
-              <button @click="toggleMute" class="pressed">
-                {{ $t('user_card.muted') }}
-              </button>
-            </span>
-            <span v-if='!user.muted'>
-              <button @click="toggleMute">
-                {{ $t('user_card.mute') }}
-              </button>
-            </span>
-          </div>
-          <div class="remote-follow" v-if='!loggedIn && user.is_local'>
-            <form method="POST" :action='subscribeUrl'>
-              <input type="hidden" name="nickname" :value="user.screen_name">
-              <input type="hidden" name="profile" value="">
-              <button click="submit" class="remote-button">
-                {{ $t('user_card.remote_follow') }}
-              </button>
-            </form>
-          </div>
-          <div class='block' v-if='isOtherUser && loggedIn'>
-            <span v-if='user.statusnet_blocking'>
-              <button @click="unblockUser" class="pressed">
-                {{ $t('user_card.blocked') }}
-              </button>
-            </span>
-            <span v-if='!user.statusnet_blocking'>
-              <button @click="blockUser">
-                {{ $t('user_card.block') }}
-              </button>
-            </span>
-          </div>
+        <div class="follow" v-if="loggedIn">
+          <span v-if="user.following">
+            <!--Following them!-->
+            <button @click="unfollowUser" class="pressed">
+              {{ $t('user_card.following') }}
+            </button>
+          </span>
+          <span v-if="!user.following">
+            <button @click="followUser">
+              {{ $t('user_card.follow') }}
+            </button>
+          </span>
+        </div>
+        <div class='mute' v-if='isOtherUser'>
+          <span v-if='user.muted'>
+            <button @click="toggleMute" class="pressed">
+              {{ $t('user_card.muted') }}
+            </button>
+          </span>
+          <span v-if='!user.muted'>
+            <button @click="toggleMute">
+              {{ $t('user_card.mute') }}
+            </button>
+          </span>
+        </div>
+        <div class="remote-follow" v-if='!loggedIn && user.is_local'>
+          <form method="POST" :action='subscribeUrl'>
+            <input type="hidden" name="nickname" :value="user.screen_name">
+            <input type="hidden" name="profile" value="">
+            <button click="submit" class="remote-button">
+              {{ $t('user_card.remote_follow') }}
+            </button>
+          </form>
+        </div>
+        <div class='block' v-if='isOtherUser && loggedIn'>
+          <span v-if='user.statusnet_blocking'>
+            <button @click="unblockUser" class="pressed">
+              {{ $t('user_card.blocked') }}
+            </button>
+          </span>
+          <span v-if='!user.statusnet_blocking'>
+            <button @click="blockUser">
+              {{ $t('user_card.block') }}
+            </button>
+          </span>
         </div>
       </div>
-    </div>
-    <div class="panel-body profile-panel-body">
-      <div class="user-counts" :class="{clickable: switcher}">
-        <div class="user-count" v-on:click.prevent="setProfileView('statuses')" :class="{selected: selected === 'statuses'}">
-          <h5>{{ $t('user_card.statuses') }}</h5>
-          <span>{{user.statuses_count}} <br></span>
-        </div>
-        <div class="user-count" v-on:click.prevent="setProfileView('friends')" :class="{selected: selected === 'friends'}">
-          <h5>{{ $t('user_card.followees') }}</h5>
-          <span>{{user.friends_count}}</span>
-        </div>
-        <div class="user-count" v-on:click.prevent="setProfileView('followers')" :class="{selected: selected === 'followers'}">
-          <h5>{{ $t('user_card.followers') }}</h5>
-          <span>{{user.followers_count}}</span>
-        </div>
-      </div>
-      <p v-if="!hideBio && user.description_html" class="profile-bio" v-html="user.description_html"></p>
-      <p v-else-if="!hideBio" class="profile-bio">{{ user.description }}</p>
     </div>
   </div>
+  <div class="panel-body profile-panel-body">
+    <div class="user-counts" :class="{clickable: switcher}">
+      <div class="user-count" v-on:click.prevent="setProfileView('statuses')" :class="{selected: selected === 'statuses'}">
+        <h5>{{ $t('user_card.statuses') }}</h5>
+        <span>{{user.statuses_count}} <br></span>
+      </div>
+      <div class="user-count" v-on:click.prevent="setProfileView('friends')" :class="{selected: selected === 'friends'}">
+        <h5>{{ $t('user_card.followees') }}</h5>
+        <span>{{user.friends_count}}</span>
+      </div>
+      <div class="user-count" v-on:click.prevent="setProfileView('followers')" :class="{selected: selected === 'followers'}">
+        <h5>{{ $t('user_card.followers') }}</h5>
+        <span>{{user.followers_count}}</span>
+      </div>
+    </div>
+    <p v-if="!hideBio && user.description_html" class="profile-bio" v-html="user.description_html"></p>
+    <p v-else-if="!hideBio" class="profile-bio">{{ user.description }}</p>
+  </div>
+</div>
 </template>
 
 <script src="./user_card_content.js"></script>

@@ -1,5 +1,5 @@
 <template>
-<div class="font-control style-control">
+<div class="font-control style-control" :class="{ custom: isCustom }">
   <label :for="preset === 'custom' ? name : name + '-font-switcher'" class="label">
     {{label}}
   </label>
@@ -16,18 +16,18 @@
       :disabled="!present"
       v-model="preset"
       class="font-switcher"
-      id="name + '-font-switcher'">
+      :id="name + '-font-switcher'">
       <option v-for="option in availableOptions" :value="option">
-        {{ option }}
+        {{ option === 'custom' ? $t('settings.style.fonts.custom') : option }}
       </option>
     </select>
     <i class="icon-down-open"/>
   </label>
   <input
-    v-if="preset === 'custom'"
+    v-if="isCustom"
     class="custom-font"
     type="text"
-    id="name"
+    :id="name"
     v-model="family">
 </div>
 </template>
@@ -71,6 +71,9 @@ export default {
         this.$emit('input', this.lValue)
       }
     },
+    isCustom () {
+      return this.preset === 'custom'
+    },
     preset: {
       get () {
         console.log(this.family)
@@ -96,6 +99,16 @@ export default {
 .font-control {
   input.custom-font {
     min-width: 10em;
+  }
+  &.custom {
+    .select {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .custom-font {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
   }
 }
 </style>

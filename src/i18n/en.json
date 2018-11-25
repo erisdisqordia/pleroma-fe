@@ -248,7 +248,8 @@
         },
         "family": "Font name",
         "size": "Size (in px)",
-        "weight": "Weight (boldness)"
+        "weight": "Weight (boldness)",
+        "custom": "Custom"
       }
     }
   },

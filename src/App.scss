@@ -115,7 +115,7 @@ input, textarea, .select {
   font-family: sans-serif;
   font-family: var(--inputFont, sans-serif);
   font-size: 14px;
-  padding: 8px 7px;
+  padding: 8px .5em;
   box-sizing: border-box;
   display: inline-block;
   position: relative;
@@ -147,10 +147,13 @@ input, textarea, .select {
     appearance: none;
     background: transparent;
     border: none;
-    margin: 0;
     color: $fallback--text;
     color: var(--text, $fallback--text);
-    padding: 4px 2em 3px 3px;
+    margin: 0;
+    padding: 0 2em 0 .2em;
+    font-family: sans-serif;
+    font-family: var(--inputFont, sans-serif);
+    font-size: 14px;
     width: 100%;
     z-index: 1;
     height: 29px;

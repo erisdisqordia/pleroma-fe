@@ -11,7 +11,7 @@
         </div>
         <div class='item right'>
           <user-finder class="nav-icon"></user-finder>
-          <router-link :to="{ name: 'settings'}"><i class="icon-cog nav-icon"></i></router-link>
+          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'settings'}"><i class="icon-cog nav-icon"></i></router-link>
           <a href="#" v-if="currentUser" @click.prevent="logout"><i class="icon-logout nav-icon" :title="$t('login.logout')"></i></a>
         </div>
       </div>

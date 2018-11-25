@@ -106,7 +106,31 @@ export default {
     window.fetch('/static/styles.json')
       .then((data) => data.json())
       .then((themes) => {
-        self.availableStyles = themes
+        return Promise.all(Object.entries(themes).map(([k, v]) => {
+          if (typeof v === 'object') {
+            return Promise.resolve([k, v])
+          } else if (typeof v === 'string') {
+            return window.fetch(v)
+              .then((data) => data.json())
+              .then((theme) => {
+                return [k, theme]
+              })
+              .catch((e) => {
+                console.error(e)
+                return []
+              })
+          }
+        }))
+      })
+      .then((promises) => {
+        return promises
+          .filter(([k, v]) => v)
+          .reduce((acc, [k, v]) => {
+            acc[k] = v
+            return acc
+          }, {})
+      }).then((themesComplete) => {
+        self.availableStyles = themesComplete
       })
   },
   mounted () {
@@ -184,7 +208,6 @@ export default {
     },
     previewTheme () {
       if (!this.preview.theme.colors) return { colors: {}, opacity: {}, radii: {}, shadows: {}, fonts: {} }
-      console.log(this.preview.theme)
       return this.preview.theme
     },
     // This needs optimization maybe
@@ -515,8 +538,6 @@ export default {
       handler () {
         try {
           this.previewFonts = generateFonts({ fonts: this.fontsLocal })
-          console.log('BENIS')
-          console.log(this.previewFonts)
           this.fontsInvalid = false
         } catch (e) {
           this.fontsInvalid = true

@@ -76,7 +76,6 @@ export default {
     },
     preset: {
       get () {
-        console.log(this.family)
         if (this.family === 'serif' ||
             this.family === 'sans-serif' ||
             this.family === 'monospace' ||

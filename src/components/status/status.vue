@@ -324,6 +324,8 @@
 
   .status-content {
     margin-right: 0.5em;
+    font-family: var(--postFont, sans-serif);
+
     img, video {
       max-width: 100%;
       max-height: 400px;
@@ -338,6 +340,7 @@
 
     pre {
       overflow: auto;
+      font-family: var(--postCodeFont, sans-serif);
     }
 
     p {

@@ -17,7 +17,7 @@
       v-model="preset"
       class="font-switcher"
       id="name + '-font-switcher'">
-      <option v-for="option in options" :value="option">
+      <option v-for="option in availableOptions" :value="option">
         {{ option }}
       </option>
     </select>
@@ -37,11 +37,19 @@ import { set } from 'vue'
 
 export default {
   props: [
-    'name', 'label', 'value', 'fallback', 'options'
+    'name', 'label', 'value', 'fallback', 'options', 'no-inherit'
   ],
   data () {
     return {
-      lValue: this.value
+      lValue: this.value,
+      availableOptions: [
+        this.noInherit ? '' : 'inherit',
+        'custom',
+        ...(this.options || []),
+        'serif',
+        'monospace',
+        'sans-serif'
+      ].filter(_ => _)
     }
   },
   beforeUpdate () {

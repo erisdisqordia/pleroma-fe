@@ -215,31 +215,29 @@
       <div :label="$t('settings.style.fonts._tab_label')" class="fonts-container">
         <div class="tab-header">
           <p>{{$t('settings.style.fonts.help')}}</p>
+          <button class="btn" @click="clearFonts">{{$t('settings.style.switcher.clear_all')}}</button>
         </div>
         <FontControl
           name="ui"
           v-model="fontsLocal.interface"
           :label="$t('settings.style.fonts.components.interface')"
           :fallback="previewTheme.fonts.interface"
-          :options="['serif', 'sans-serif', 'monospace', 'custom']" />
+          no-inherit="1"/>
         <FontControl
           name="input"
           v-model="fontsLocal.input"
           :label="$t('settings.style.fonts.components.input')"
-          :fallback="previewTheme.fonts.input"
-          :options="['serif', 'sans-serif', 'monospace', 'inherit', 'custom']" />
+          :fallback="previewTheme.fonts.input"/>
         <FontControl
           name="post"
           v-model="fontsLocal.post"
           :label="$t('settings.style.fonts.components.post')"
-          :fallback="previewTheme.fonts.post"
-          :options="['serif', 'sans-serif', 'monospace', 'inherit', 'custom']" />
+          :fallback="previewTheme.fonts.post"/>
         <FontControl
           name="postCode"
           v-model="fontsLocal.postCode"
           :label="$t('settings.style.fonts.components.postCode')"
-          :fallback="previewTheme.fonts.postCode"
-          :options="['serif', 'sans-serif', 'monospace', 'inherit', 'custom']" />
+          :fallback="previewTheme.fonts.postCode"/>
       </div>
     </tab-switcher>
   </keep-alive>

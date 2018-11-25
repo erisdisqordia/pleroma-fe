@@ -120,6 +120,7 @@
   background-size: cover;
   border-radius: $fallback--panelRadius;
   border-radius: var(--panelRadius, $fallback--panelRadius);
+  overflow: hidden;
 
   .panel-heading {
     padding: 0.6em 0em;
@@ -147,7 +148,6 @@
     padding: 16px 10px 6px 10px;
     display: flex;
     max-height: 56px;
-    overflow: hidden;
 
     .avatar {
       border-radius: $fallback--avatarRadius;
@@ -187,6 +187,16 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     flex: 1 1 0;
+    // This is so that text doesn't get overlapped by avatar's shadow if it has
+    // big one
+    z-index: 1;
+
+    img {
+      width: 26px;
+      height: 26px;
+      vertical-align: middle;
+      object-fit: contain
+    }
   }
 
   .user-name{

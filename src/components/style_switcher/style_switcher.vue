@@ -218,7 +218,7 @@
   </keep-alive>
 
   <div class="apply-container">
-    <button class="btn submit" @click="setCustomTheme">{{$t('general.apply')}}</button>
+    <button class="btn submit" :disabled="!themeValid" @click="setCustomTheme">{{$t('general.apply')}}</button>
     <button class="btn" @click="clearAll">{{$t('settings.style.switcher.reset')}}</button>
   </div>
 </div>

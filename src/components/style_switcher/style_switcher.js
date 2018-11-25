@@ -27,6 +27,14 @@ export default {
       selected: this.$store.state.config.theme,
       invalidThemeImported: false,
 
+      previewShadows: {},
+      previewColors: {},
+      previewRadii: {},
+
+      shadowsInvalid: true,
+      colorsInvalid: true,
+      radiiInvalid: true,
+
       keepShadows: false,
       keepOpacity: false,
       keepRoundness: false,
@@ -167,22 +175,6 @@ export default {
         attachment: this.attachmentRadiusLocal
       }
     },
-    previewColors () {
-      if (this.currentColors.bg) {
-        return generateColors({
-          opacity: this.currentOpacity,
-          colors: this.currentColors
-        })
-      } else {
-        return {}
-      }
-    },
-    previewRadii () {
-      return generateRadii({ radii: this.currentRadii })
-    },
-    previewShadows () {
-      return generateShadows({ shadows: this.shadowsLocal })
-    },
     preview () {
       return composePreset(this.previewColors, this.previewRadii, this.previewShadows)
     },
@@ -288,6 +280,9 @@ export default {
       set (v) {
         set(this.shadowsLocal, this.shadowSelected, v)
       }
+    },
+    themeValid () {
+      return !this.shadowsInvalid && !this.colorsInvalid && !this.radiiInvalid
     }
   },
   components: {
@@ -475,6 +470,46 @@ export default {
     }
   },
   watch: {
+    currentRadii () {
+      try {
+        this.previewRadii = generateRadii({ radii: this.currentRadii })
+        this.radiiInvalid = false
+      } catch (e) {
+        this.radiiInvalid = true
+        console.warn(e)
+      }
+    },
+    shadowsLocal () {
+      try {
+        this.previewShadows = generateShadows({ shadows: this.shadowsLocal })
+        this.shadowsInvalid = false
+      } catch (e) {
+        this.shadowsInvalid = true
+        console.warn(e)
+      }
+    },
+    currentColors () {
+      try {
+        this.previewColors = generateColors({
+          opacity: this.currentOpacity,
+          colors: this.currentColors
+        })
+        this.colorsInvalid = false
+      } catch (e) {
+        this.colorsInvalid = true
+        console.warn(e)
+      }
+    },
+    currentOpacity () {
+      try {
+        this.previewColors = generateColors({
+          opacity: this.currentOpacity,
+          colors: this.currentColors
+        })
+      } catch (e) {
+        console.warn(e)
+      }
+    },
     selected () {
       if (this.selectedVersion === 1) {
         if (!this.keepRoundness) {

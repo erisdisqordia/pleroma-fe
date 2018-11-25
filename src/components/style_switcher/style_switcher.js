@@ -396,7 +396,6 @@ export default {
 
     clearShadows () {
       this.shadowsLocal = {}
-      console.log(this.shadowsLocal)
     },
 
     /**
@@ -405,7 +404,6 @@ export default {
      * @param {Number} version - version of data. 0 means try to guess based on data.
      */
     normalizeLocalState (input, version = 0) {
-      console.log(input.opacity)
       const colors = input.colors || input
       const radii = input.radii || input
       const opacity = input.opacity

@@ -345,7 +345,6 @@ const generateShadows = (input) => {
     ...(input.shadows || {})
   }
 
-  console.log(Object.entries(shadows).map(([k, v]) => `--${k}Shadow: ${getCssShadow(v)}`).join(';'))
   return {
     rules: {
       shadows: Object.entries(shadows).map(([k, v]) => `--${k}Shadow: ${getCssShadow(v)}`).join(';')

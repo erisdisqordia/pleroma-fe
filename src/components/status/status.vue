@@ -340,7 +340,10 @@
 
     pre {
       overflow: auto;
-      font-family: var(--postCodeFont, sans-serif);
+    }
+
+    code, samp, kbd, var, pre {
+      font-family: var(--postCodeFont, monospace);
     }
 
     p {

@@ -75,7 +75,7 @@
     <tab-switcher key="style-tweak">
       <div :label="$t('settings.style.common_colors._tab_label')" class="color-container">
         <div class="tab-header">
-            <p>{{$t('settings.theme_help')}}</p>
+          <p>{{$t('settings.theme_help')}}</p>
           <button class="btn" @click="clearOpacity">{{$t('settings.style.switcher.clear_opacity')}}</button>
           <button class="btn" @click="clearV1">{{$t('settings.style.switcher.clear_all')}}</button>
         </div>
@@ -169,20 +169,18 @@
         </div>
       </div>
       <div :label="$t('settings.style.radii._tab_label')" class="radius-container">
-        <div>
-          <div class="tab-header">
-            <p>{{$t('settings.radii_help')}}</p>
-            <button class="btn" @click="clearRoundness">{{$t('settings.style.switcher.clear_all')}}</button>
-          </div>
-          <RangeInput name="btnRadius" :label="$t('settings.btnRadius')" v-model="btnRadiusLocal" :fallback="previewTheme.radii.btn" max="16" hardMin="0"/>
-          <RangeInput name="inputRadius" :label="$t('settings.inputRadius')" v-model="inputRadiusLocal" :fallback="previewTheme.radii.input" max="9" hardMin="0"/>
-          <RangeInput name="checkboxRadius" :label="$t('settings.checkboxRadius')" v-model="checkboxRadiusLocal" :fallback="previewTheme.radii.checkbox" max="16" hardMin="0"/>
-          <RangeInput name="panelRadius" :label="$t('settings.panelRadius')" v-model="panelRadiusLocal" :fallback="previewTheme.radii.panel" max="50" hardMin="0"/>
-          <RangeInput name="avatarRadius" :label="$t('settings.avatarRadius')" v-model="avatarRadiusLocal" :fallback="previewTheme.radii.avatar" max="28" hardMin="0"/>
-          <RangeInput name="avatarAltRadius" :label="$t('settings.avatarAltRadius')" v-model="avatarAltRadiusLocal" :fallback="previewTheme.radii.avatarAlt" max="28" hardMin="0"/>
-          <RangeInput name="attachmentRadius" :label="$t('settings.attachmentRadius')" v-model="attachmentRadiusLocal" :fallback="previewTheme.radii.attachment" max="50" hardMin="0"/>
-          <RangeInput name="tooltipRadius" :label="$t('settings.tooltipRadius')" v-model="tooltipRadiusLocal" :fallback="previewTheme.radii.tooltip" max="50" hardMin="0"/>
+        <div class="tab-header">
+          <p>{{$t('settings.radii_help')}}</p>
+          <button class="btn" @click="clearRoundness">{{$t('settings.style.switcher.clear_all')}}</button>
         </div>
+        <RangeInput name="btnRadius" :label="$t('settings.btnRadius')" v-model="btnRadiusLocal" :fallback="previewTheme.radii.btn" max="16" hardMin="0"/>
+        <RangeInput name="inputRadius" :label="$t('settings.inputRadius')" v-model="inputRadiusLocal" :fallback="previewTheme.radii.input" max="9" hardMin="0"/>
+        <RangeInput name="checkboxRadius" :label="$t('settings.checkboxRadius')" v-model="checkboxRadiusLocal" :fallback="previewTheme.radii.checkbox" max="16" hardMin="0"/>
+        <RangeInput name="panelRadius" :label="$t('settings.panelRadius')" v-model="panelRadiusLocal" :fallback="previewTheme.radii.panel" max="50" hardMin="0"/>
+        <RangeInput name="avatarRadius" :label="$t('settings.avatarRadius')" v-model="avatarRadiusLocal" :fallback="previewTheme.radii.avatar" max="28" hardMin="0"/>
+        <RangeInput name="avatarAltRadius" :label="$t('settings.avatarAltRadius')" v-model="avatarAltRadiusLocal" :fallback="previewTheme.radii.avatarAlt" max="28" hardMin="0"/>
+        <RangeInput name="attachmentRadius" :label="$t('settings.attachmentRadius')" v-model="attachmentRadiusLocal" :fallback="previewTheme.radii.attachment" max="50" hardMin="0"/>
+        <RangeInput name="tooltipRadius" :label="$t('settings.tooltipRadius')" v-model="tooltipRadiusLocal" :fallback="previewTheme.radii.tooltip" max="50" hardMin="0"/>
       </div>
       <div :label="$t('settings.style.shadows._tab_label')" class="shadow-container">
         <div class="tab-header shadow-selector">
@@ -213,6 +211,35 @@
           <button class="btn" @click="clearShadows">{{$t('settings.style.switcher.clear_all')}}</button>
         </div>
         <shadow-control :ready="!!currentShadowFallback" :fallback="currentShadowFallback" v-model="currentShadow"/>
+      </div>
+      <div :label="$t('settings.style.fonts._tab_label')" class="fonts-container">
+        <div class="tab-header">
+          <p>{{$t('settings.style.fonts.help')}}</p>
+        </div>
+        <FontControl
+          name="ui"
+          v-model="fontsLocal.interface"
+          :label="$t('settings.style.fonts.components.interface')"
+          :fallback="previewTheme.fonts.interface"
+          :options="['serif', 'sans-serif', 'monospace', 'custom']" />
+        <FontControl
+          name="input"
+          v-model="fontsLocal.input"
+          :label="$t('settings.style.fonts.components.input')"
+          :fallback="previewTheme.fonts.input"
+          :options="['serif', 'sans-serif', 'monospace', 'inherit', 'custom']" />
+        <FontControl
+          name="post"
+          v-model="fontsLocal.post"
+          :label="$t('settings.style.fonts.components.post')"
+          :fallback="previewTheme.fonts.post"
+          :options="['serif', 'sans-serif', 'monospace', 'inherit', 'custom']" />
+        <FontControl
+          name="postCode"
+          v-model="fontsLocal.postCode"
+          :label="$t('settings.style.fonts.components.postCode')"
+          :fallback="previewTheme.fonts.postCode"
+          :options="['serif', 'sans-serif', 'monospace', 'inherit', 'custom']" />
       </div>
     </tab-switcher>
   </keep-alive>

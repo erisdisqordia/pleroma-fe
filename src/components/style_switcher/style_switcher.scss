@@ -67,6 +67,7 @@
     flex-wrap: wrap;
   }
 
+  .fonts-container,
   .reset-container,
   .apply-container,
   .radius-container,
@@ -75,6 +76,7 @@
     display: flex;
   }
 
+  .fonts-container,
   .radius-container {
     flex-direction: column;
   }
@@ -87,6 +89,7 @@
     justify-content: space-between;
   }
 
+  .fonts-container,
   .color-container,
   .shadow-container,
   .radius-container,

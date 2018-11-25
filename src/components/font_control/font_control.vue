@@ -1,0 +1,93 @@
+<template>
+<div class="font-control style-control">
+  <label :for="preset === 'custom' ? name : name + '-font-switcher'" class="label">
+    {{label}}
+  </label>
+  <input
+    v-if="typeof fallback !== 'undefined'"
+    class="opt exlcude-disabled"
+    type="checkbox"
+    :id="name + '-o'"
+    :checked="present"
+    @input="$emit('input', typeof value === 'undefined' ? fallback : undefined)">
+  <label v-if="typeof fallback !== 'undefined'" class="opt-l" :for="name + '-o'"></label>
+  <label :for="name + '-font-switcher'" class="select" :disabled="!present">
+    <select
+      :disabled="!present"
+      v-model="preset"
+      class="font-switcher"
+      id="name + '-font-switcher'">
+      <option v-for="option in options" :value="option">
+        {{ option }}
+      </option>
+    </select>
+    <i class="icon-down-open"/>
+  </label>
+  <input
+    v-if="preset === 'custom'"
+    class="custom-font"
+    type="text"
+    id="name"
+    v-model="family">
+</div>
+</template>
+
+<script>
+import { set } from 'vue'
+
+export default {
+  props: [
+    'name', 'label', 'value', 'fallback', 'options'
+  ],
+  data () {
+    return {
+      lValue: this.value
+    }
+  },
+  beforeUpdate () {
+    this.lValue = this.value
+  },
+  computed: {
+    present () {
+      return typeof this.lValue !== 'undefined'
+    },
+    dValue () {
+      return this.lValue || this.fallback || {}
+    },
+    family: {
+      get () {
+        return this.dValue.family
+      },
+      set (v) {
+        set(this.lValue, 'family', v)
+        this.$emit('input', this.lValue)
+      }
+    },
+    preset: {
+      get () {
+        console.log(this.family)
+        if (this.family === 'serif' ||
+            this.family === 'sans-serif' ||
+            this.family === 'monospace' ||
+            this.family === 'inherit') {
+          return this.family
+        } else {
+          return 'custom'
+        }
+      },
+      set (v) {
+        this.family = v === 'custom' ? '' : v
+      }
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../../_variables.scss';
+.font-control {
+  input.custom-font {
+    min-width: 10em;
+  }
+}
+</style>

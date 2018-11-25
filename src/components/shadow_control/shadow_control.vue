@@ -124,9 +124,9 @@
     <OpacityInput
       v-model="selected.alpha"
       :disabled="!present"/>
-    <div>
+    <p>
       {{$t('settings.style.shadows.hint')}}
-    </div>
+    </p>
   </div>
 </div>
 </template>
@@ -139,6 +139,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 1em;
 
   .shadow-preview-container,
   .shadow-tweak {

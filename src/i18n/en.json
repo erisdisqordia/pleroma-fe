@@ -236,6 +236,19 @@
           "buttonPressedHover": "Button (pressed+hover)",
           "input": "Input field"
         }
+      },
+      "fonts": {
+        "_tab_label": "Fonts",
+        "help": "Select font to use for elements of UI. For \"custom\" you have to enter exact font name as it appears in system.",
+        "components": {
+          "interface": "Interface",
+          "input": "Input fields",
+          "post": "Post text",
+          "postCode": "Monospaced text in a post (rich text)"
+        },
+        "family": "Font name",
+        "size": "Size (in px)",
+        "weight": "Weight (boldness)"
       }
     }
   },

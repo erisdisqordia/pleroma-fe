@@ -85,6 +85,7 @@ const setColors = (input, commit) => {
   styleSheet.insertRule(`body { ${rules.radii} }`, 'index-max')
   styleSheet.insertRule(`body { ${rules.colors} }`, 'index-max')
   styleSheet.insertRule(`body { ${rules.shadows} }`, 'index-max')
+  styleSheet.insertRule(`body { ${rules.fonts} }`, 'index-max')
   body.style.display = 'initial'
 
   // commit('setOption', { name: 'colors', value: htmlColors })
@@ -267,6 +268,41 @@ const generateRadii = (input) => {
   }
 }
 
+const generateFonts = (input) => {
+  const fonts = Object.entries(input.fonts || {}).filter(([k, v]) => v).reduce((acc, [k, v]) => {
+    acc[k] = Object.entries(v).filter(([k, v]) => v).reduce((acc, [k, v]) => {
+      acc[k] = v
+      return acc
+    }, acc[k])
+    return acc
+  }, {
+    interface: {
+      family: 'sans-serif'
+    },
+    input: {
+      family: 'inherit'
+    },
+    post: {
+      family: 'inherit'
+    },
+    postCode: {
+      family: 'monospace'
+    }
+  })
+
+  return {
+    rules: {
+      fonts: Object
+        .entries(fonts)
+        .filter(([k, v]) => v)
+        .map(([k, v]) => `--${k}Font: ${v.family}`).join(';')
+    },
+    theme: {
+      fonts
+    }
+  }
+}
+
 const generateShadows = (input) => {
   const border = (top, shadow) => ({
     x: 0,
@@ -355,17 +391,19 @@ const generateShadows = (input) => {
   }
 }
 
-const composePreset = (colors, radii, shadows) => {
+const composePreset = (colors, radii, shadows, fonts) => {
   return {
     rules: {
       ...shadows.rules,
       ...colors.rules,
-      ...radii.rules
+      ...radii.rules,
+      ...fonts.rules
     },
     theme: {
       ...shadows.theme,
       ...colors.theme,
-      ...radii.theme
+      ...radii.theme,
+      ...fonts.theme
     }
   }
 }
@@ -374,8 +412,9 @@ const generatePreset = (input) => {
   const shadows = generateShadows(input)
   const colors = generateColors(input)
   const radii = generateRadii(input)
+  const fonts = generateFonts(input)
 
-  return composePreset(colors, radii, shadows)
+  return composePreset(colors, radii, shadows, fonts)
 }
 
 const setPreset = (val, commit) => {
@@ -424,6 +463,7 @@ export {
   generateColors,
   generateRadii,
   generateShadows,
+  generateFonts,
   generatePreset,
   composePreset,
   getCssShadow

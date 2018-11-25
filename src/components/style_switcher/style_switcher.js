@@ -1,10 +1,11 @@
 import { rgb2hex, hex2rgb, getContrastRatio, alphaBlend } from '../../services/color_convert/color_convert.js'
 import { set, delete as del } from 'vue'
-import { generateColors, generateShadows, generateRadii, composePreset } from '../../services/style_setter/style_setter.js'
+import { generateColors, generateShadows, generateRadii, generateFonts, composePreset } from '../../services/style_setter/style_setter.js'
 import ColorInput from '../color_input/color_input.vue'
 import RangeInput from '../range_input/range_input.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
 import ShadowControl from '../shadow_control/shadow_control.vue'
+import FontControl from '../font_control/font_control.vue'
 import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
 import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
 
@@ -30,6 +31,7 @@ export default {
       previewShadows: {},
       previewColors: {},
       previewRadii: {},
+      previewFonts: {},
 
       shadowsInvalid: true,
       colorsInvalid: true,
@@ -38,6 +40,7 @@ export default {
       keepShadows: false,
       keepOpacity: false,
       keepRoundness: false,
+      keepFonts: false,
 
       textColorLocal: '',
       linkColorLocal: '',
@@ -85,6 +88,7 @@ export default {
 
       shadowSelected: undefined,
       shadowsLocal: {},
+      fontsLocal: {},
 
       btnRadiusLocal: '',
       inputRadiusLocal: '',
@@ -176,10 +180,11 @@ export default {
       }
     },
     preview () {
-      return composePreset(this.previewColors, this.previewRadii, this.previewShadows)
+      return composePreset(this.previewColors, this.previewRadii, this.previewShadows, this.previewFonts)
     },
     previewTheme () {
-      if (!this.preview.theme.colors) return { colors: {}, opacity: {}, radii: {}, shadows: {} }
+      if (!this.preview.theme.colors) return { colors: {}, opacity: {}, radii: {}, shadows: {}, fonts: {} }
+      console.log(this.preview.theme)
       return this.preview.theme
     },
     // This needs optimization maybe
@@ -253,7 +258,11 @@ export default {
     },
     previewRules () {
       if (!this.preview.rules) return ''
-      return [...Object.values(this.preview.rules), 'color: var(--text)'].join(';')
+      return [
+        ...Object.values(this.preview.rules),
+        'color: var(--text)',
+        'font-family: var(--interfaceFont, sans-serif)'
+      ].join(';')
     },
     shadowsAvailable () {
       return Object.keys(this.previewTheme.shadows).sort()
@@ -291,6 +300,7 @@ export default {
     RangeInput,
     ContrastRatio,
     ShadowControl,
+    FontControl,
     TabSwitcher
   },
   methods: {
@@ -300,6 +310,7 @@ export default {
         _pleroma_theme_version: 2,
         theme: {
           shadows: this.shadowsLocal,
+          fonts: this.fontsLocal,
           opacity: this.currentOpacity,
           colors: this.currentColors,
           radii: this.currentRadii
@@ -357,6 +368,7 @@ export default {
         name: 'customTheme',
         value: {
           shadows: this.shadowsLocal,
+          fonts: this.fontsLocal,
           opacity: this.currentOpacity,
           colors: this.currentColors,
           radii: this.currentRadii
@@ -398,6 +410,10 @@ export default {
       this.shadowsLocal = {}
     },
 
+    clearFonts () {
+      this.fontsLocal = {}
+    },
+
     /**
      * This applies stored theme data onto form.
      * @param {Object} input - input data
@@ -408,6 +424,7 @@ export default {
       const radii = input.radii || input
       const opacity = input.opacity
       const shadows = input.shadows || {}
+      const fonts = input.fonts || {}
 
       if (version === 0) {
         if (input.version) version = input.version
@@ -458,6 +475,11 @@ export default {
         this.shadowSelected = this.shadowsAvailable[0]
       }
 
+      if (!this.keepFonts) {
+        this.clearFonts()
+        this.fontsLocal = fonts
+      }
+
       if (opacity && !this.keepOpacity) {
         this.clearOpacity()
         Object.entries(opacity).forEach(([k, v]) => {
@@ -477,14 +499,31 @@ export default {
         console.warn(e)
       }
     },
-    shadowsLocal () {
-      try {
-        this.previewShadows = generateShadows({ shadows: this.shadowsLocal })
-        this.shadowsInvalid = false
-      } catch (e) {
-        this.shadowsInvalid = true
-        console.warn(e)
-      }
+    shadowsLocal: {
+      handler () {
+        try {
+          this.previewShadows = generateShadows({ shadows: this.shadowsLocal })
+          this.shadowsInvalid = false
+        } catch (e) {
+          this.shadowsInvalid = true
+          console.warn(e)
+        }
+      },
+      deep: true
+    },
+    fontsLocal: {
+      handler () {
+        try {
+          this.previewFonts = generateFonts({ fonts: this.fontsLocal })
+          console.log('BENIS')
+          console.log(this.previewFonts)
+          this.fontsInvalid = false
+        } catch (e) {
+          this.fontsInvalid = true
+          console.warn(e)
+        }
+      },
+      deep: true
     },
     currentColors () {
       try {

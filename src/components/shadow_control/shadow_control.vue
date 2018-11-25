@@ -124,6 +124,9 @@
     <OpacityInput
       v-model="selected.alpha"
       :disabled="!present"/>
+    <div>
+      {{$t('settings.style.shadows.hint')}}
+    </div>
   </div>
 </div>
 </template>
@@ -215,6 +218,7 @@
 
   .shadow-tweak {
     flex: 1;
+    min-width: 280px;
 
     .id-control {
       align-items: stretch;

@@ -75,9 +75,11 @@
     <tab-switcher key="style-tweak">
       <div :label="$t('settings.style.common_colors._tab_label')" class="color-container">
         <div class="tab-header">
-          <p>{{$t('settings.theme_help')}}</p>
+            <p>{{$t('settings.theme_help')}}</p>
           <button class="btn" @click="clearOpacity">{{$t('settings.style.switcher.clear_opacity')}}</button>
+          <button class="btn" @click="clearV1">{{$t('settings.style.switcher.clear_all')}}</button>
         </div>
+        <p>{{$t('settings.theme_help_v2_1')}}</p>
         <h4>{{ $t('settings.style.common_colors.main') }}</h4>
         <div class="color-item">
           <ColorInput name="bgColor" v-model="bgColorLocal" :label="$t('settings.background')"/>
@@ -106,13 +108,14 @@
           <ColorInput name="cOrangeColor" v-model="cOrangeColorLocal" :label="$t('settings.cOrange')"/>
           <ContrastRatio :contrast="previewContrast.bgOrange"/>
         </div>
+        <p>{{$t('settings.theme_help_v2_2')}}</p>
       </div>
 
       <div :label="$t('settings.style.advanced_colors._tab_label')" class="color-container">
         <div class="tab-header">
           <p>{{$t('settings.theme_help')}}</p>
-          <button class="btn" @click="clearV1">{{$t('settings.style.switcher.clear_all')}}</button>
           <button class="btn" @click="clearOpacity">{{$t('settings.style.switcher.clear_opacity')}}</button>
+          <button class="btn" @click="clearV1">{{$t('settings.style.switcher.clear_all')}}</button>
         </div>
         <div class="color-item">
           <h4>{{ $t('settings.style.advanced_colors.alert') }}</h4>

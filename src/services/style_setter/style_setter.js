@@ -321,6 +321,7 @@ const generateShadows = (input) => {
       color: '#000000',
       alpha: 0.7
     }],
+    avatarStatus: [],
     panelHeader: [],
     button: [{
       x: 0,

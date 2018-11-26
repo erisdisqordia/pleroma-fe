@@ -46,12 +46,10 @@ const PostStatusForm = {
       statusText = buildMentionsString({ user: this.repliedUser, attentions: this.attentions }, currentUser)
     }
 
-    console.log(this.copyMessageScope)
     const scope = (this.copyMessageScope && this.$store.state.config.copyScope || this.copyMessageScope === 'direct')
           ? this.copyMessageScope
           : this.$store.state.users.currentUser.default_scope
 
-    console.log(this)
     return {
       dropFiles: [],
       submitDisabled: false,

@@ -43,7 +43,6 @@ const i18n = new VueI18n({
   messages
 })
 
-=======
 const persistedStateOptions = {
   paths: [
     'config',
@@ -67,7 +66,6 @@ createPersistedState(persistedStateOptions).then((persistedState) => {
     plugins: [persistedState],
     strict: false // Socket modifies itself, let's ignore this for now.
     // strict: process.env.NODE_ENV !== 'production'
->>>>>>> upstream/develop
   })
 
   afterStoreSetup({store, i18n})

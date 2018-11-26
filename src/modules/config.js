@@ -5,7 +5,7 @@ const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
 const defaultState = {
   colors: {},
-  collapseMessageWithSubject: undefined,
+  collapseMessageWithSubject: undefined, // instance default
   hideAttachments: false,
   hideAttachmentsInConv: false,
   hideNsfw: true,
@@ -25,7 +25,9 @@ const defaultState = {
   },
   muteWords: [],
   highlight: {},
-  interfaceLanguage: browserLocale
+  interfaceLanguage: browserLocale,
+  scopeCopy: undefined, // instance default
+  subjectLineBehavior: undefined // instance default
 }
 
 const config = {

@@ -21,6 +21,8 @@ const defaultState = {
   hidePostStats: false,
   hideUserStats: false,
   disableChat: false,
+  scopeCopy: true,
+  subjectLineBehavior: 'email',
   loginMethod: 'password',
 
   // Nasty stuff

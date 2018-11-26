@@ -34,6 +34,12 @@ const settings = {
         ? instance.collapseMessageWithSubject
         : user.collapseMessageWithSubject,
       collapseMessageWithSubjectDefault: this.$t('settings.values.' + instance.collapseMessageWithSubject),
+      subjectLineBehaviorLocal: typeof user.subjectLineBehavior === 'undefined'
+        ? instance.subjectLineBehavior
+        : user.subjectLineBehavior,
+      subjectLineBehaviorDefault: instance.subjectLineBehavior,
+      scopeCopyLocal: user.scopeCopy,
+      scopeCopyDefault: this.$t('settings.values.' + instance.scopeCopy),
       stopGifs: user.stopGifs,
       loopSilentAvailable:
         // Firefox
@@ -112,6 +118,12 @@ const settings = {
     },
     collapseMessageWithSubjectLocal (value) {
       this.$store.dispatch('setOption', { name: 'collapseMessageWithSubject', value })
+    },
+    scopeCopyLocal (value) {
+      this.$store.dispatch('setOption', { name: 'scopeCopy', value })
+    },
+    subjectLineBehaviorLocal (value) {
+      this.$store.dispatch('setOption', { name: 'subjectLineBehavior', value })
     },
     stopGifs (value) {
       this.$store.dispatch('setOption', { name: 'stopGifs', value })

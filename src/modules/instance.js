@@ -18,7 +18,12 @@ const defaultState = {
   scopeOptionsEnabled: true,
   formattingOptionsEnabled: false,
   collapseMessageWithSubject: false,
+  hidePostStats: false,
+  hideUserStats: false,
   disableChat: false,
+  scopeCopy: true,
+  subjectLineBehavior: 'email',
+  loginMethod: 'password',
 
   // Nasty stuff
   pleromaBackend: true,

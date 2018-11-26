@@ -54,6 +54,41 @@
             </li>
           </ul>
         </div>
+
+        <div class="setting-item">
+          <h2>{{$t('settings.composing')}}</h2>
+          <ul class="setting-list">
+            <li>
+              <input type="checkbox" id="scopeCopy" v-model="scopeCopyLocal">
+              <label for="scopeCopy">
+                {{$t('settings.scope_copy')}} {{$t('settings.instance_default', { value: scopeCopyDefault })}}
+              </label>
+            </li>
+            <li>
+              <div>
+                {{$t('settings.subject_line_behavior')}}
+                <label for="subjectLineBehavior" class="select">
+                  <select id="subjectLineBehavior" v-model="subjectLineBehaviorLocal">
+                    <option value="email">
+                      {{$t('settings.subject_line_email')}}
+                      {{subjectLineBehaviorDefault == 'email' ? $t('settings.instance_default_simple') : ''}}
+                    </option>
+                    <option value="masto">
+                      {{$t('settings.subject_line_mastodon')}}
+                      {{subjectLineBehaviorDefault == 'mastodon' ? $t('settings.instance_default_simple') : ''}}
+                    </option>
+                    <option value="noop">
+                      {{$t('settings.subject_line_noop')}}
+                      {{subjectLineBehaviorDefault == 'noop' ? $t('settings.instance_default_simple') : ''}}
+                    </option>
+                  </select>
+                  <i class="icon-down-open"/>
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+
         <div class="setting-item">
           <h2>{{$t('settings.attachments')}}</h2>
           <ul class="setting-list">
@@ -137,6 +172,18 @@
                 <option value="self">{{$t('settings.reply_visibility_self')}}</option>
               </select>
               <i class="icon-down-open"/>
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="hidePostStats" v-model="hidePostStatsLocal">
+            <label for="hidePostStats">
+              {{$t('settings.hide_post_stats')}} {{$t('settings.instance_default', { value: hidePostStatsDefault })}}
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="hideUserStats" v-model="hideUserStatsLocal">
+            <label for="hideUserStats">
+              {{$t('settings.hide_user_stats')}} {{$t('settings.instance_default', { value: hideUserStatsDefault })}}
             </label>
           </div>
         </div>

@@ -13,6 +13,14 @@ const settings = {
       hideAttachmentsLocal: user.hideAttachments,
       hideAttachmentsInConvLocal: user.hideAttachmentsInConv,
       hideNsfwLocal: user.hideNsfw,
+      hidePostStatsLocal: typeof user.hidePostStats === 'undefined'
+        ? instance.hidePostStats
+        : user.hidePostStats,
+      hidePostStatsDefault: this.$t('settings.values.' + instance.hidePostStats),
+      hideUserStatsLocal: typeof user.hideUserStats === 'undefined'
+        ? instance.hideUserStats
+        : user.hideUserStats,
+      hideUserStatsDefault: this.$t('settings.values.' + instance.hideUserStats),
       notificationVisibilityLocal: user.notificationVisibility,
       replyVisibilityLocal: user.replyVisibility,
       loopVideoLocal: user.loopVideo,
@@ -26,6 +34,12 @@ const settings = {
         ? instance.collapseMessageWithSubject
         : user.collapseMessageWithSubject,
       collapseMessageWithSubjectDefault: this.$t('settings.values.' + instance.collapseMessageWithSubject),
+      subjectLineBehaviorLocal: typeof user.subjectLineBehavior === 'undefined'
+        ? instance.subjectLineBehavior
+        : user.subjectLineBehavior,
+      subjectLineBehaviorDefault: instance.subjectLineBehavior,
+      scopeCopyLocal: user.scopeCopy,
+      scopeCopyDefault: this.$t('settings.values.' + instance.scopeCopy),
       stopGifs: user.stopGifs,
       loopSilentAvailable:
         // Firefox
@@ -55,6 +69,12 @@ const settings = {
     },
     hideAttachmentsInConvLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideAttachmentsInConv', value })
+    },
+    hidePostStatsLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hidePostStats', value })
+    },
+    hideUserStatsLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hideUserStats', value })
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
@@ -98,6 +118,12 @@ const settings = {
     },
     collapseMessageWithSubjectLocal (value) {
       this.$store.dispatch('setOption', { name: 'collapseMessageWithSubject', value })
+    },
+    scopeCopyLocal (value) {
+      this.$store.dispatch('setOption', { name: 'scopeCopy', value })
+    },
+    subjectLineBehaviorLocal (value) {
+      this.$store.dispatch('setOption', { name: 'subjectLineBehavior', value })
     },
     stopGifs (value) {
       this.$store.dispatch('setOption', { name: 'stopGifs', value })

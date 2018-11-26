@@ -3,6 +3,13 @@ import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
 export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio' ],
+  data () {
+    return {
+      hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
+        ? this.$store.state.instance.hideUserStats
+        : this.$store.state.config.hideUserStats
+    }
+  },
   computed: {
     headingStyle () {
       const color = this.$store.state.config.customTheme.colors.bg

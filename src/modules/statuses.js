@@ -41,7 +41,8 @@ export const defaultState = {
     own: emptyTl(),
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
-    tag: emptyTl()
+    tag: emptyTl(),
+    dms: emptyTl()
   }
 }
 
@@ -170,6 +171,14 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
           sortTimeline(mentions)
         }
+      }
+      if (status.visibility === 'direct') {
+        const dms = state.timelines.dms
+
+        mergeOrAdd(dms.statuses, dms.statusesObject, status)
+        dms.newStatusCount += 1
+
+        sortTimeline(dms)
       }
     }
 

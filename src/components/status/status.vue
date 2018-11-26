@@ -106,7 +106,7 @@
       </div>
       <div class="container" v-if="replying">
         <div class="reply-left"/>
-        <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" :message-scope="status.visibility" :subject="replySubject" v-on:posted="toggleReplying"/>
+        <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" :copy-message-scope="status.visibility" :subject="replySubject" v-on:posted="toggleReplying"/>
       </div>
     </template>
   </div>

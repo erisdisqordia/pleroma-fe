@@ -2,7 +2,7 @@
   <div v-if="loggedIn">
     <template v-if="visibility !== 'private' && visibility !== 'direct'">
       <i :class='classes' class='icon-retweet rt-active' v-on:click.prevent='retweet()'></i>
-      <span v-if='status.repeat_num > 0'>{{status.repeat_num}}</span>
+      <span v-if='!hidePostStatsLocal && status.repeat_num > 0'>{{status.repeat_num}}</span>
     </template>
     <template v-else>
       <i :class='classes' class='icon-lock' :title="$t('timeline.no_retweet_hint')"></i>
@@ -10,7 +10,7 @@
   </div>
   <div v-else-if="!loggedIn">
     <i :class='classes' class='icon-retweet'></i>
-    <span v-if='status.repeat_num > 0'>{{status.repeat_num}}</span>
+    <span v-if='!hidePostStatsLocal && status.repeat_num > 0'>{{status.repeat_num}}</span>
   </div>
 </template>
 

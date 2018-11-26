@@ -163,11 +163,32 @@
     background-size: cover;
     background-position: 50% 50%;
 
+    .separator {
+      margin: 1em;
+      border-bottom: 1px solid;
+      border-color: $fallback--border;
+      border-color: var(--border, $fallback--border);
+    }
+
+    .panel-heading {
+      .badge, .alert, .btn, .faint {
+        margin-left: 1em;
+      }
+      .flex-spacer {
+        flex: 1;
+      }
+    }
+    .checkbox {
+      display: inline-flex;
+      align-items: baseline;
+      margin-right: 1em;
+    }
+
     .btn {
       margin-left: 0;
-      margin-top: 1em;
+      padding: 0 1em;
+      min-width: 3em;
       min-height: 30px;
-      width: 10em;
     }
   }
 

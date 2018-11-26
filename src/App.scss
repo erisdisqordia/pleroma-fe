@@ -381,6 +381,12 @@ main-router {
     font-size: 1.3em;
   }
 
+  .faint {
+    background-color: transparent;
+    color: $fallback--faint;
+    color: var(--panelFaint, $fallback--faint);
+  }
+
   .alert {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -507,6 +513,27 @@ nav {
     max-height: 96vh;
     flex-shrink: 0;
     flex-grow: 0;
+  }
+}
+.badge {
+  display: inline-block;
+  border-radius: 99px;
+  min-width: 22px;
+  max-width: 22px;
+  min-height: 22px;
+  max-height: 22px;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 0;
+
+  &.badge-notification {
+    background-color: $fallback--cRed;
+    background-color: var(--badgeNotification, $fallback--cRed);
+    color: white;
+    color: var(--badgeNotificationText, white);
   }
 }
 

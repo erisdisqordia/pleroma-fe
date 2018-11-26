@@ -58,10 +58,7 @@
 
 .timeline {
   .loadmore-text {
-    opacity: 0.8;
-    background-color: transparent;
-    color: $fallback--faint;
-    color: var(--panelFaint, $fallback--faint);
+    opacity: 1;
   }
 }
 

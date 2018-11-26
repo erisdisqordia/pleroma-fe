@@ -471,6 +471,7 @@
 .avatar {
   width: 48px;
   height: 48px;
+  box-shadow: var(--avatarStatusShadow);
   border-radius: $fallback--avatarRadius;
   border-radius: var(--avatarRadius, $fallback--avatarRadius);
   overflow: hidden;

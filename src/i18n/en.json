@@ -170,6 +170,7 @@
         "keep_shadows": "Keep shadows",
         "keep_opacity": "Keep opacity",
         "keep_roundness": "Keep roundness",
+        "keep_fonts": "Keep fonts",
         "save_load_hint": "\"Keep\" options preserve currently set options when selecting or loading themes, it also stores said options when exporting a theme.",
         "reset": "Reset",
         "clear_all": "Clear all",
@@ -250,6 +251,18 @@
         "size": "Size (in px)",
         "weight": "Weight (boldness)",
         "custom": "Custom"
+      },
+      "preview": {
+        "header": "Preview of header",
+        "error": "Example error",
+        "button": "Button",
+        "text": "A bunch of more content and {0}",
+        "input": "Just landed in L.A.",
+        "faint_link": "helpful manual",
+        "fine_print": "Read our {0} to learn nothing useful!",
+        "header_faint": "This is fine",
+        "checkbox": "I have skimmed over terms and conditions",
+        "link": "a nice lil' link"
       }
     }
   },

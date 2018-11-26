@@ -4,23 +4,6 @@
   // a bit of a hack to allow scrolling below notifications
   padding-bottom: 15em;
 
-  .unseen-count {
-    display: inline-block;
-    background-color: $fallback--cRed;
-    background-color: var(--badgeNotification, $fallback--cRed);
-    border-radius: 99px;
-    min-width: 22px;
-    max-width: 22px;
-    min-height: 22px;
-    max-height: 22px;
-    color: white;
-    color: var(--badgeNotificationText, white);
-    font-size: 15px;
-    line-height: 22px;
-    text-align: center;
-    vertical-align: middle
-  }
-
   .loadmore-error {
     color: $fallback--text;
     color: var(--text, $fallback--text);

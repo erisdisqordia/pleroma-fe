@@ -46,27 +46,80 @@
           v-model="keepRoundness">
         <label for="keep-roundness">{{$t('settings.style.switcher.keep_roundness')}}</label>
       </span>
+      <span>
+        <input
+          id="keep-fonts"
+          type="checkbox"
+          v-model="keepFonts">
+        <label for="keep-fonts">{{$t('settings.style.switcher.keep_fonts')}}</label>
+      </span>
       <p>{{$t('settings.style.switcher.save_load_hint')}}</p>
     </div>
   </div>
 
   <div class="preview-container">
     <div class="panel dummy" :style="previewRules">
-      <div class="panel-heading">Preview</div>
+      <div class="panel-heading">
+        {{$t('settings.style.preview.header')}}
+        <span class="badge badge-notification">
+          99
+        </span>
+        <span class="alert error">
+          {{$t('settings.style.preview.error')}}
+        </span>
+        <button class="btn">
+          {{$t('settings.style.preview.button')}}
+        </button>
+        <span class="flex-spacer"/>
+        <span class="faint">
+          {{$t('settings.style.preview.header_faint')}}
+        </span>
+      </div>
       <div class="panel-body theme-preview-content">
         <div class="avatar">
           ( ͡° ͜ʖ ͡°)
         </div>
         <h4>Content</h4>
+
         <br>
-        A bunch of more content and
-        <a style="color: var(--link)">a nice lil' link</a>
+
+        <i18n path="settings.style.preview.text">
+          <a style="color: var(--link)">
+            {{$t('settings.style.preview.link')}}
+          </a>
+        </i18n>
+
         <i style="color: var(--cBlue)" class="icon-reply"/>
         <i style="color: var(--cGreen)" class="icon-retweet"/>
         <i style="color: var(--cRed)" class="icon-cancel"/>
         <i style="color: var(--cOrange)" class="icon-star"/>
+
         <br>
-        <button class="btn">Button</button>
+        <br>
+
+        <input :value="$t('settings.style.preview.error')" type="text">
+        <span class="alert error">
+          {{$t('settings.style.preview.error')}}
+        </span>
+
+        <br>
+        <br>
+
+        <span class="checkbox">
+          <input checked="very yes" type="checkbox" id="preview_checkbox">
+          <label for="preview_checkbox">{{$t('settings.style.preview.checkbox')}}</label>
+        </span>
+        <button class="btn">
+          {{$t('settings.style.preview.button')}}
+        </button>
+
+        <div class="separator"></div>
+
+        <i18n path="settings.style.preview.fine_print" tag="span" class="faint">
+          <a style="color: var(--faintLink)">
+            {{$t('settings.style.preview.faint_link')}}
+          </a>
+        </i18n>
       </div>
     </div>
   </div>

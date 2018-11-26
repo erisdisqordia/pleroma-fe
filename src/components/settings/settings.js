@@ -13,6 +13,14 @@ const settings = {
       hideAttachmentsLocal: user.hideAttachments,
       hideAttachmentsInConvLocal: user.hideAttachmentsInConv,
       hideNsfwLocal: user.hideNsfw,
+      hidePostStatsLocal: typeof user.hidePostStats === 'undefined'
+        ? instance.hidePostStats
+        : user.hidePostStats,
+      hidePostStatsDefault: this.$t('settings.values.' + instance.hidePostStats),
+      hideUserStatsLocal: typeof user.hideUserStats === 'undefined'
+        ? instance.hideUserStats
+        : user.hideUserStats,
+      hideUserStatsDefault: this.$t('settings.values.' + instance.hideUserStats),
       notificationVisibilityLocal: user.notificationVisibility,
       replyVisibilityLocal: user.replyVisibility,
       loopVideoLocal: user.loopVideo,
@@ -61,6 +69,12 @@ const settings = {
     },
     hideAttachmentsInConvLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideAttachmentsInConv', value })
+    },
+    hidePostStatsLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hidePostStats', value })
+    },
+    hideUserStatsLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hideUserStats', value })
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })

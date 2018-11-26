@@ -100,6 +100,8 @@ window.fetch('/api/statusnet/config.json')
 
         var theme = (config.theme)
         var background = (config.background)
+        var hidePostStats = (config.hidePostStats)
+        var hideUserStats = (config.hideUserStats)
         var logo = (config.logo)
         var logoMask = (typeof config.logoMask === 'undefined' ? true : config.logoMask)
         var logoMargin = (typeof config.logoMargin === 'undefined' ? 0 : config.logoMargin)
@@ -115,6 +117,8 @@ window.fetch('/api/statusnet/config.json')
 
         store.dispatch('setInstanceOption', { name: 'theme', value: theme })
         store.dispatch('setInstanceOption', { name: 'background', value: background })
+        store.dispatch('setInstanceOption', { name: 'hidePostStats', value: hidePostStats })
+        store.dispatch('setInstanceOption', { name: 'hideUserStats', value: hideUserStats })
         store.dispatch('setInstanceOption', { name: 'logo', value: logo })
         store.dispatch('setInstanceOption', { name: 'logoMask', value: logoMask })
         store.dispatch('setInstanceOption', { name: 'logoMargin', value: logoMargin })
@@ -217,9 +221,11 @@ window.fetch('/nodeinfo/2.0.json')
   .then((res) => res.json())
   .then((data) => {
     const metadata = data.metadata
-    store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: data.metadata.mediaProxy })
-    store.dispatch('setInstanceOption', { name: 'chatAvailable', value: data.metadata.chat })
-    store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: data.metadata.gopher })
+
+    const features = metadata.features
+    store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: features.includes('media_proxy') })
+    store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
+    store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
 
     const suggestions = metadata.suggestions
     store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })

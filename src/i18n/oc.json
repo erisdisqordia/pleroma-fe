@@ -23,26 +23,43 @@
     "mentions": "Notificacions",
     "public_tl": "Estatuts locals",
     "timeline": "Flux d’actualitat",
-    "twkn": "Lo malhum conegut"
+    "twkn": "Lo malhum conegut",
+    "friend_requests": "Demandas d'abonament"
   },
   "notifications": {
     "favorited_you": "a aimat vòstre estatut",
     "followed_you": "vos a seguit",
     "notifications": "Notficacions",
-    "read": "Legit!",
-    "repeated_you": "a repetit your vòstre estatut"
+    "read": "Legit !",
+    "repeated_you": "a repetit vòstre estatut",
+    "broken_favorite": "Estatut desconegut, sèm a lo cercar...",
+    "load_older": "Cargar las notificaciones mai ancianas"
   },
   "post_status": {
     "content_warning": "Avís de contengut (opcional)",
     "default": "Escrivètz aquí vòstre estatut.",
-    "posting": "Mandadís"
+    "posting": "Mandadís",
+    "account_not_locked_warning": "Vòstre compte es pas {0}. Qual que siá pòt vos seguir per veire vòstras publicacions destinadas pas qu'a vòstres seguidors.",
+    "account_not_locked_warning_link": "clavat",
+    "attachments_sensitive": "Marcar las pèças juntas coma sensiblas",
+    "content_type": {
+      "plain_text": "Tèxte brut"
+    },
+    "direct_warning": "Aquesta publicacion serà pas que visibla pels utilizaires mencionats.",
+    "scope": {
+      "direct": "Dirècte - Publicar pels utilizaires mencionats solament",
+      "private": "Seguidors solament - Publicar pels sols seguidors",
+      "public": "Public - Publicar pel flux d’actualitat public",
+      "unlisted": "Pas listat - Publicar pas pel flux public"
+    }
   },
   "registration": {
     "bio": "Biografia",
     "email": "Adreça de corrièl",
     "fullname": "Nom complèt",
     "password_confirm": "Confirmar lo senhal",
-    "registration": "Inscripcion"
+    "registration": "Inscripcion",
+    "token": "Geton de convidat"
   },
   "settings": {
     "attachmentRadius": "Pèças juntas",
@@ -60,7 +77,7 @@
     "cRed": "Roge (Anullar)",
     "change_password": "Cambiar lo senhal",
     "change_password_error": "Una error s’es producha en cambiant lo senhal.",
-    "changed_password": "Senhal corrèctament cambiat",
+    "changed_password": "Senhal corrèctament cambiat !",
     "confirm_new_password": "Confirmatz lo nòu senhal",
     "current_avatar": "Vòstre avatar actual",
     "current_password": "Senhal actual",
@@ -70,7 +87,7 @@
     "delete_account_error": "Una error s’es producha en suprimir lo compte. S’aquò ten d’arribar mercés de contactar vòstre administrador d’instància.",
     "delete_account_instructions": "Picatz vòstre senhal dins lo camp tèxte çai-jos per confirmar la supression del compte.",
     "filtering": "Filtre",
-    "filtering_explanation": "Totes los estatuts amb aqueles mots seràn en silenci, un mot per linha.",
+    "filtering_explanation": "Totes los estatuts amb aqueles mots seràn en silenci, un mot per linha",
     "follow_export": "Exportar los abonaments",
     "follow_export_button": "Exportar vòstres abonaments dins un fichièr csv",
     "follow_export_processing": "Tractament, vos demandarem lèu de telecargar lo fichièr",
@@ -103,7 +120,41 @@
     "theme": "Tèma",
     "theme_help": "Emplegatz los còdis de color hex (#rrggbb) per personalizar vòstre tèma de color.",
     "tooltipRadius": "Astúcias/Alèrta",
-    "user_settings": "Paramètres utilizaire"
+    "user_settings": "Paramètres utilizaire",
+    "collapse_subject": "Replegar las publicacions amb de subjèctes",
+    "data_import_export_tab": "Importar / Exportar las donadas",
+    "default_vis": "Nivèl de visibilitat per defaut",
+    "export_theme": "Enregistrar la preconfiguracion",
+    "general": "General",
+    "hide_post_stats": "Amagar los estatistics de publicacion (ex. lo ombre de favorits)",
+    "hide_user_stats": "Amagar las estatisticas de l’utilizaire (ex. lo nombre de seguidors)",
+    "import_theme": "Cargar un tèma",
+    "instance_default": "(defaut : {value})",
+    "interfaceLanguage": "Lenga de l’interfàcia",
+    "invalid_theme_imported": "Lo fichièr seleccionat es pas un tèma Pleroma valid. Cap de cambiament es estat fach a vòstre tèma.",
+    "limited_availability": "Pas disponible per vòstre navigador",
+    "lock_account_description": "Limitar vòstre compte als seguidors acceptats solament",
+    "loop_video": "Bocla vidèo",
+    "loop_video_silent_only": "Legir en bocla solament las vidèos sens son (coma los « Gifs » de Mastodon)",
+    "notification_visibility": "Tipes de notificacion de mostrar",
+    "notification_visibility_follows": "Abonaments",
+    "notification_visibility_likes": "Aiman",
+    "notification_visibility_mentions": "Mencions",
+    "notification_visibility_repeats": "Repeticions",
+    "no_rich_text_description": "Netejar lo format tèxte de totas las publicacions",
+    "pause_on_unfocused": "Pausar la difusion quand l’onglet es pas seleccionat",
+    "profile_tab": "Perfil",
+    "replies_in_timeline": "Responsas del flux",
+    "reply_visibility_all": "Mostrar totas las responsas",
+    "reply_visibility_following": "Mostrar pas que las responsas que me son destinada a ieu o un utilizaire que seguissi",
+    "reply_visibility_self": "Mostrar pas que las responsas que me son destinadas",
+    "saving_err": "Error en enregistrant los paramètres",
+    "saving_ok": "Paramètres enregistrats",
+    "security_tab": "Seguretat",
+    "values": {
+      "false": "non",
+      "true": "òc"
+    }
   },
   "timeline": {
     "collapse": "Tampar",
@@ -112,23 +163,39 @@
     "load_older": "Ne veire mai",
     "repeated": "repetit",
     "show_new": "Ne veire mai",
-    "up_to_date": "A jorn"
+    "up_to_date": "A jorn",
+    "no_retweet_hint": "La publicacion marcada coma pels seguidors solament o dirècte pòt pas èsser repetida"
   },
   "user_card": {
     "block": "Blocar",
-    "blocked": "Blocat",
+    "blocked": "Blocat !",
     "follow": "Seguir",
     "followees": "Abonaments",
     "followers": "Seguidors",
-    "following": "Seguit!",
-    "follows_you": "Vos sèc!",
+    "following": "Seguit !",
+    "follows_you": "Vos sèc !",
     "mute": "Amagar",
     "muted": "Amagat",
     "per_day": "per jorn",
     "remote_follow": "Seguir a distància",
-    "statuses": "Estatuts"
+    "statuses": "Estatuts",
+    "approve": "Validar",
+    "deny": "Refusar"
   },
   "user_profile": {
     "timeline_title": "Flux utilizaire"
+  },
+  "features_panel": {
+    "chat": "Discutida",
+    "gopher": "Gopher",
+    "media_proxy": "Servidor mandatari dels mèdias",
+    "scope_options": "Opcions d'encastres",
+    "text_limit": "Limit de tèxte",
+    "title": "Foncionalitats",
+    "who_to_follow": "Qui seguir"
+  },
+  "who_to_follow": {
+    "more": "Mai",
+    "who_to_follow": "Qui seguir"
   }
 }

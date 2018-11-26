@@ -173,6 +173,18 @@
               <i class="icon-down-open"/>
             </label>
           </div>
+          <div>
+            <input type="checkbox" id="hidePostStats" v-model="hidePostStatsLocal">
+            <label for="hidePostStats">
+              {{$t('settings.hide_post_stats')}} {{$t('settings.instance_default', { value: hidePostStatsDefault })}}
+            </label>
+          </div>
+          <div>
+            <input type="checkbox" id="hideUserStats" v-model="hideUserStatsLocal">
+            <label for="hideUserStats">
+              {{$t('settings.hide_user_stats')}} {{$t('settings.instance_default', { value: hideUserStatsDefault })}}
+            </label>
+          </div>
         </div>
         <div class="setting-item">
           <p>{{$t('settings.filtering_explanation')}}</p>

@@ -12,5 +12,7 @@
   "formattingOptionsEnabled": false,
   "collapseMessageWithSubject": false,
   "scopeCopy": false,
-  "subjectLineBehavior": "email"
+  "subjectLineBehavior": "email",
+  "hidePostStats": false,
+  "hideUserStats": false
 }

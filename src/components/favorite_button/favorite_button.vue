@@ -1,11 +1,11 @@
 <template>
   <div v-if="loggedIn">
     <i :class='classes' class='favorite-button fav-active' @click.prevent='favorite()'/>
-    <span v-if='status.fave_num > 0'>{{status.fave_num}}</span>
+    <span v-if='!hidePostStatsLocal && status.fave_num > 0'>{{status.fave_num}}</span>
   </div>
   <div v-else>
     <i :class='classes' class='favorite-button'/>
-    <span v-if='status.fave_num > 0'>{{status.fave_num}}</span>
+    <span v-if='!hidePostStatsLocal && status.fave_num > 0'>{{status.fave_num}}</span>
   </div>
 </template>
 

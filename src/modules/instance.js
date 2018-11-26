@@ -23,6 +23,7 @@ const defaultState = {
   disableChat: false,
   scopeCopy: true,
   subjectLineBehavior: 'email',
+  loginMethod: 'password',
 
   // Nasty stuff
   pleromaBackend: true,

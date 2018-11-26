@@ -21,6 +21,7 @@
   },
   "login": {
     "login": "ログイン",
+    "description": "OAuthでログイン",
     "logout": "ログアウト",
     "password": "パスワード",
     "placeholder": "れい: lain",
@@ -31,6 +32,7 @@
     "chat": "ローカルチャット",
     "friend_requests": "フォローリクエスト",
     "mentions": "メンション",
+    "dms": "ダイレクトメッセージ",
     "public_tl": "パブリックタイムライン",
     "timeline": "タイムライン",
     "twkn": "つながっているすべてのネットワーク"
@@ -111,6 +113,8 @@
     "general": "ぜんぱん",
     "hide_attachments_in_convo": "スレッドのファイルをかくす",
     "hide_attachments_in_tl": "タイムラインのファイルをかくす",
+    "hide_post_stats": "とうこうのとうけいをかくす (れい: おきにいりのかず)",
+    "hide_user_stats": "ユーザーのとうけいをかくす (れい: フォロワーのかず)",
     "import_followers_from_a_csv_file": "CSVファイルからフォローをインポートする",
     "import_theme": "ロード",
     "inputRadius": "インプットフィールド",

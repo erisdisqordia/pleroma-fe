@@ -21,6 +21,7 @@
   },
   "login": {
     "login": "Anmelden",
+    "description": "Mit OAuth anmelden",
     "logout": "Abmelden",
     "password": "Passwort",
     "placeholder": "z.B. lain",

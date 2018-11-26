@@ -23,17 +23,17 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:4000/',
+        target: 'https://shigusegubu.club/',
         changeOrigin: true,
         cookieDomainRewrite: 'localhost'
       },
       '/nodeinfo': {
-        target: 'http://localhost:4000/',
+        target: 'https://shigusegubu.club/',
         changeOrigin: true,
         cookieDomainRewrite: 'localhost'
       },
       '/socket': {
-        target: 'http://localhost:4000/',
+        target: 'https://shigusegubu.club/',
         changeOrigin: true,
         cookieDomainRewrite: 'localhost',
         ws: true

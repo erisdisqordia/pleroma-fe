@@ -15,6 +15,7 @@ const STATUS_URL = '/api/statuses/show'
 const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 const CONVERSATION_URL = '/api/statusnet/conversation'
 const MENTIONS_URL = '/api/statuses/mentions.json'
+const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
@@ -50,16 +51,6 @@ let fetch = (url, options) => {
   const fullUrl = baseUrl + url
   options.credentials = 'same-origin'
   return oldfetch(fullUrl, options)
-}
-
-// from https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
-let utoa = (str) => {
-  // first we use encodeURIComponent to get percent-encoded UTF-8,
-  // then we convert the percent encodings into raw bytes which
-  // can be fed into btoa.
-  return btoa(encodeURIComponent(str)
-              .replace(/%([0-9A-F]{2})/g,
-                       (match, p1) => { return String.fromCharCode('0x' + p1) }))
 }
 
 // Params
@@ -175,9 +166,9 @@ const register = (params) => {
   })
 }
 
-const authHeaders = (user) => {
-  if (user && user.username && user.password) {
-    return { 'Authorization': `Basic ${utoa(`${user.username}:${user.password}`)}` }
+const authHeaders = (accessToken) => {
+  if (accessToken) {
+    return { 'Authorization': `Bearer ${accessToken}` }
   } else {
     return { }
   }
@@ -302,6 +293,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
     mentions: MENTIONS_URL,
+    dms: DM_TIMELINE_URL,
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
     user: QVITTER_USER_TIMELINE_URL,

@@ -82,24 +82,26 @@ const users = {
     },
     logout (store) {
       store.commit('clearCurrentUser')
+      store.commit('setToken', false)
       store.dispatch('stopFetching', 'friends')
       store.commit('setBackendInteractor', backendInteractorService())
     },
-    loginUser (store, userCredentials) {
+    loginUser (store, accessToken) {
       return new Promise((resolve, reject) => {
         const commit = store.commit
         commit('beginLogin')
-        store.rootState.api.backendInteractor.verifyCredentials(userCredentials)
+        store.rootState.api.backendInteractor.verifyCredentials(accessToken)
           .then((response) => {
             if (response.ok) {
               response.json()
                 .then((user) => {
-                  user.credentials = userCredentials
+                  // user.credentials = userCredentials
+                  user.credentials = accessToken
                   commit('setCurrentUser', user)
                   commit('addNewUsers', [user])
 
                   // Set our new backend interactor
-                  commit('setBackendInteractor', backendInteractorService(userCredentials))
+                  commit('setBackendInteractor', backendInteractorService(accessToken))
 
                   if (user.token) {
                     store.dispatch('initializeSocket', user.token)

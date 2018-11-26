@@ -14,5 +14,6 @@
   "scopeCopy": false,
   "subjectLineBehavior": "email",
   "hidePostStats": false,
-  "hideUserStats": false
+  "hideUserStats": false,
+  "loginMethod": "password"
 }

@@ -17,7 +17,9 @@ const saveImmedeatelyActions = [
   'clearCurrentUser',
   'setCurrentUser',
   'setHighlight',
-  'setOption'
+  'setOption',
+  'setClientData',
+  'setToken'
 ]
 
 const defaultStorage = (() => {
@@ -43,8 +45,8 @@ export default function createPersistedState ({
   storage = defaultStorage,
   subscriber = store => handler => store.subscribe(handler)
 } = {}) {
-  return store => {
-    getState(key, storage).then((savedState) => {
+  return getState(key, storage).then((savedState) => {
+    return store => {
       try {
         if (typeof savedState === 'object') {
           // build user cache
@@ -67,36 +69,35 @@ export default function createPersistedState ({
             value: store.state.config.customTheme
           })
         }
-        if (store.state.users.lastLoginName) {
-          store.dispatch('loginUser', {username: store.state.users.lastLoginName, password: 'xxx'})
+        if (store.state.oauth.token) {
+          store.dispatch('loginUser', store.state.oauth.token)
         }
         loaded = true
       } catch (e) {
         console.log("Couldn't load state")
         loaded = true
       }
-    })
-
-    subscriber(store)((mutation, state) => {
-      try {
-        if (saveImmedeatelyActions.includes(mutation.type)) {
-          setState(key, reducer(state, paths), storage)
-            .then(success => {
-              if (typeof success !== 'undefined') {
-                if (mutation.type === 'setOption') {
-                  store.dispatch('settingsSaved', { success })
+      subscriber(store)((mutation, state) => {
+        try {
+          if (saveImmedeatelyActions.includes(mutation.type)) {
+            setState(key, reducer(state, paths), storage)
+              .then(success => {
+                if (typeof success !== 'undefined') {
+                  if (mutation.type === 'setOption') {
+                    store.dispatch('settingsSaved', { success })
+                  }
                 }
-              }
-            }, error => {
-              if (mutation.type === 'setOption') {
-                store.dispatch('settingsSaved', { error })
-              }
-            })
+              }, error => {
+                if (mutation.type === 'setOption') {
+                  store.dispatch('settingsSaved', { error })
+                }
+              })
+          }
+        } catch (e) {
+          console.log("Couldn't persist state:")
+          console.log(e)
         }
-      } catch (e) {
-        console.log("Couldn't persist state:")
-        console.log(e)
-      }
-    })
-  }
+      })
+    }
+  })
 }

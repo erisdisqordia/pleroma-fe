@@ -21,6 +21,7 @@
   },
   "login": {
     "login": "Log in",
+    "description": "Log in with OAuth",
     "logout": "Log out",
     "password": "Password",
     "placeholder": "e.g. lain",
@@ -31,9 +32,11 @@
     "chat": "Local Chat",
     "friend_requests": "Follow Requests",
     "mentions": "Mentions",
+    "dms": "Direct Messages",
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
-    "twkn": "The Whole Known Network"
+    "twkn": "The Whole Known Network",
+    "user_search": "User Search"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it...",

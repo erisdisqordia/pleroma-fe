@@ -172,6 +172,7 @@ const generateColors = (input) => {
 
   colors.panel = col.panel || Object.assign({}, col.fg)
   colors.panelText = col.panelText || getTextColor(colors.panel, colors.fgText)
+  colors.panelLink = col.panelLink || getTextColor(colors.panel, colors.fgLink)
   colors.panelFaint = col.panelFaint || getTextColor(colors.panel, colors.faint)
 
   colors.topBar = col.topBar || Object.assign({}, col.fg)

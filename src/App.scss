@@ -407,6 +407,11 @@ main-router {
     min-width: 1px;
     align-self: stretch;
   }
+
+  a {
+    color: $fallback--link;
+    color: var(--panelLink, $fallback--link)
+  }
 }
 
 .panel-heading.stub {
@@ -417,6 +422,11 @@ main-router {
 .panel-footer {
   border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
   border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
+
+  a {
+    color: $fallback--link;
+    color: var(--panelLink, $fallback--link)
+  }
 }
 
 .panel-body > p {

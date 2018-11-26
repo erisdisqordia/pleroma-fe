@@ -62,6 +62,7 @@ export default {
 
       panelColorLocal: undefined,
       panelTextColorLocal: undefined,
+      panelLinkColorLocal: undefined,
       panelFaintColorLocal: undefined,
       panelOpacityLocal: undefined,
 
@@ -155,6 +156,7 @@ export default {
 
         panel: this.panelColorLocal,
         panelText: this.panelTextColorLocal,
+        panelLink: this.panelLinkColorLocal,
         panelFaint: this.panelFaintColorLocal,
 
         input: this.inputColorLocal,
@@ -230,6 +232,7 @@ export default {
       const fgs = {
         text: hex2rgb(colors.text),
         panelText: hex2rgb(colors.panelText),
+        panelLink: hex2rgb(colors.panelLink),
         btnText: hex2rgb(colors.btnText),
         topBarText: hex2rgb(colors.topBarText),
         inputText: hex2rgb(colors.inputText),
@@ -268,6 +271,7 @@ export default {
         tintText: getContrastRatio(alphaBlend(bgs.bg, 0.5, fgs.panelText), fgs.text),
 
         panelText: getContrastRatio(alphaBlend(bgs.panel, opacity.panel, fgs.panelText), fgs.panelText),
+        panelLink: getContrastRatio(alphaBlend(bgs.panel, opacity.panel, fgs.panelLink), fgs.panelLink),
 
         btnText: getContrastRatio(alphaBlend(bgs.btn, opacity.btn, fgs.btnText), fgs.btnText),
 

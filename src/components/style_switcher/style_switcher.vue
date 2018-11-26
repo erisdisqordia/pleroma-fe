@@ -183,8 +183,10 @@
           <h4>{{ $t('settings.style.advanced_colors.panel_header') }}</h4>
           <ColorInput name="panelColor" v-model="panelColorLocal" :fallback="fgColorLocal" :label="$t('settings.background')"/>
           <OpacityInput name="panelOpacity" v-model="panelOpacityLocal" :fallback="previewTheme.opacity.panel || 1"/>
-          <ColorInput name="panelTextColor" v-model="panelTextColorLocal" :fallback="previewTheme.colors.panelText" :label="$t('settings.links')"/>
+          <ColorInput name="panelTextColor" v-model="panelTextColorLocal" :fallback="previewTheme.colors.panelText" :label="$t('settings.text')"/>
           <ContrastRatio :contrast="previewContrast.panelText" large="1"/>
+          <ColorInput name="panelLinkColor" v-model="panelLinkColorLocal" :fallback="previewTheme.colors.panelLink" :label="$t('settings.links')"/>
+          <ContrastRatio :contrast="previewContrast.panelLink" large="1"/>
         </div>
         <div class="color-item">
           <h4>{{ $t('settings.style.advanced_colors.top_bar') }}</h4>

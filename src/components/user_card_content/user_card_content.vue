@@ -105,10 +105,9 @@
         <span v-if="!hideUserStatsLocal">{{user.followers_count}}</span>
       </div>
     </div>
+    <p v-if="!hideBio && user.description_html" class="profile-bio" v-html="user.description_html"></p>
+    <p v-else-if="!hideBio" class="profile-bio">{{ user.description }}</p>
   </div>
-  <p v-if="!hideBio && user.description_html" class="profile-bio" v-html="user.description_html"></p>
-  <p v-else-if="!hideBio" class="profile-bio">{{ user.description }}</p>
-</div>
 </div>
 </template>
 

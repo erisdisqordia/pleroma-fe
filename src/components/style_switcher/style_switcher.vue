@@ -97,7 +97,7 @@
         <br>
         <br>
 
-        <input :value="$t('settings.style.preview.error')" type="text">
+        <input :value="$t('settings.style.preview.input')" type="text">
         <span class="alert error">
           {{$t('settings.style.preview.error')}}
         </span>

@@ -12,9 +12,9 @@ export default {
   },
   computed: {
     headingStyle () {
-      const color = this.$store.state.config.customTheme.colors ?
-            this.$store.state.config.customTheme.colors.bg : // v2
-            this.$store.state.config.colors.bg // v1
+      const color = this.$store.state.config.customTheme.colors
+            ? this.$store.state.config.customTheme.colors.bg  // v2
+            : this.$store.state.config.colors.bg // v1
 
       if (color) {
         const rgb = (typeof color === 'string') ? hex2rgb(color) : color

@@ -50,6 +50,26 @@
           "inset": true
         }
       ],
+      "panelHeader": [
+        {
+          "x": 0,
+          "y": 0,
+          "blur": 0,
+          "spread": "3",
+          "inset": true,
+          "color": "#c0c0c0",
+          "alpha": 1
+        },
+        {
+          "x": "-2200",
+          "y": 0,
+          "blur": "200",
+          "spread": "-2000",
+          "inset": true,
+          "color": "#1084d0",
+          "alpha": 1
+        }
+      ],
       "button": [
         {
           "x": "-1",
@@ -237,21 +257,12 @@
           "alpha": "1",
           "inset": true
         }
-      ],
-      "panelHeader": [
-        {
-          "x": "-2200",
-          "y": 0,
-          "blur": "200",
-          "spread": "-2000",
-          "inset": true,
-          "color": "#1084d0",
-          "alpha": 1
-        }
       ]
     },
+    "fonts": {},
     "opacity": {
-      "input": "1"
+      "input": "1",
+      "faint": "1"
     },
     "colors": {
       "bg": "#c0c0c0",
@@ -259,6 +270,7 @@
       "link": "#0000ff",
       "fg": "#c0c0c0",
       "panel": "#000080",
+      "panelFaint": "#c0c0c0",
       "input": "#ffffff",
       "topBar": "#000080",
       "topBarLink": "#ffffff",
@@ -268,7 +280,7 @@
       "border": "#808080",
       "cRed": "#FF0000",
       "cBlue": "#008080",
-      "cGreen": "#00FF00",
+      "cGreen": "#008000",
       "cOrange": "#808000"
     },
     "radii": {

@@ -9,7 +9,7 @@
           "y": "-1",
           "blur": "0",
           "spread": 0,
-          "color": "#000000",
+          "color": "#404040",
           "alpha": "1",
           "inset": true
         },
@@ -50,13 +50,33 @@
           "inset": true
         }
       ],
+      "panelHeader": [
+        {
+          "x": 0,
+          "y": 0,
+          "blur": 0,
+          "spread": "3",
+          "inset": true,
+          "color": "#d6d6ce",
+          "alpha": 1
+        },
+        {
+          "x": "-2200",
+          "y": 0,
+          "blur": "200",
+          "spread": "-2000",
+          "inset": true,
+          "color": "#a5cef7",
+          "alpha": 1
+        }
+      ],
       "button": [
         {
           "x": "-1",
           "y": "-1",
           "blur": "0",
           "spread": 0,
-          "color": "#000000",
+          "color": "#404040",
           "alpha": "1",
           "inset": true
         },
@@ -75,15 +95,6 @@
           "blur": "0",
           "spread": 0,
           "color": "#848484",
-          "alpha": "1",
-          "inset": true
-        },
-        {
-          "x": "2",
-          "y": "2",
-          "blur": "0",
-          "spread": 0,
-          "color": "#dfdfdf",
           "alpha": "1",
           "inset": true
         },
@@ -103,7 +114,7 @@
           "y": "-1",
           "blur": "0",
           "spread": 0,
-          "color": "#000000",
+          "color": "#404040",
           "alpha": "1",
           "inset": true
         },
@@ -122,15 +133,6 @@
           "blur": "0",
           "spread": 0,
           "color": "#848484",
-          "alpha": "1",
-          "inset": true
-        },
-        {
-          "x": "2",
-          "y": "2",
-          "blur": "0",
-          "spread": 0,
-          "color": "#dfdfdf",
           "alpha": "1",
           "inset": true
         },
@@ -150,7 +152,7 @@
           "y": "1",
           "blur": "0",
           "spread": 0,
-          "color": "#000000",
+          "color": "#404040",
           "alpha": "1",
           "inset": true
         },
@@ -169,15 +171,6 @@
           "blur": "0",
           "spread": 0,
           "color": "#848484",
-          "alpha": "1",
-          "inset": true
-        },
-        {
-          "x": "-2",
-          "y": "-2",
-          "blur": "0",
-          "spread": 0,
-          "color": "#dfdfdf",
           "alpha": "1",
           "inset": true
         },
@@ -215,7 +208,7 @@
           "y": "-2",
           "blur": "0",
           "spread": 0,
-          "color": "#dfdfdf",
+          "color": "#d4d0c8",
           "alpha": "1",
           "inset": true
         },
@@ -224,7 +217,7 @@
           "y": "2",
           "blur": "0",
           "spread": 0,
-          "color": "#000000",
+          "color": "#404040",
           "alpha": "1",
           "inset": true
         },
@@ -237,21 +230,12 @@
           "alpha": "1",
           "inset": true
         }
-      ],
-      "panelHeader": [
-        {
-          "x": "-2200",
-          "y": 0,
-          "blur": "200",
-          "spread": "-2000",
-          "inset": true,
-          "color": "#a5cef7",
-          "alpha": 1
-        }
       ]
     },
+    "fonts": {},
     "opacity": {
-      "input": "1"
+      "input": "1",
+      "faint": "1"
     },
     "colors": {
       "bg": "#d6d6ce",
@@ -259,6 +243,7 @@
       "link": "#0000ff",
       "fg": "#d6d6ce",
       "panel": "#042967",
+      "panelFaint": "#FFFFFF",
       "input": "#ffffff",
       "topBar": "#042967",
       "topBarLink": "#ffffff",
@@ -266,10 +251,10 @@
       "faint": "#3f3f3f",
       "faintLink": "#404080",
       "border": "#808080",
-      "cRed": "#FF0000",
-      "cBlue": "#008080",
-      "cGreen": "#00FF00",
-      "cOrange": "#808000"
+      "cRed": "#c42726",
+      "cBlue": "#6699cc",
+      "cGreen": "#669966",
+      "cOrange": "#cc6633"
     },
     "radii": {
       "btn": "0",

@@ -332,16 +332,34 @@ export default {
   },
   methods: {
     exportCurrentTheme () {
+      const saveEverything = !this.keepFonts && !this.keepShadows && !this.keepColors && !this.keepOpacity && !this.keepRoundness
+      const theme = {
+        shadows: this.shadowsLocal,
+        fonts: this.fontsLocal,
+        opacity: this.currentOpacity,
+        colors: this.currentColors,
+        radii: this.currentRadii
+      }
+
+      if (!this.keepFonts && !saveEverything) {
+        delete theme.fonts
+      }
+      if (!this.keepShadows && !saveEverything) {
+        delete theme.shadows
+      }
+      if (!this.keepOpacity && !saveEverything) {
+        delete theme.opacity
+      }
+      if (!this.keepColors && !saveEverything) {
+        delete theme.colors
+      }
+      if (!this.keepRoundness && !saveEverything) {
+        delete theme.radii
+      }
+
       const stringified = JSON.stringify({
         // To separate from other random JSON files and possible future theme formats
-        _pleroma_theme_version: 2,
-        theme: {
-          shadows: this.shadowsLocal,
-          fonts: this.fontsLocal,
-          opacity: this.currentOpacity,
-          colors: this.currentColors,
-          radii: this.currentRadii
-        }
+        _pleroma_theme_version: 2, theme
       }, null, 2) // Pretty-print and indent with 2 spaces
 
       // Create an invisible link with a data url and simulate a click
@@ -404,7 +422,9 @@ export default {
     },
 
     clearAll () {
-      this.normalizeLocalState(this.$store.state.config.customTheme)
+      const state = this.$store.state.config.customTheme
+      const version = state.colors ? 2 : 'l1'
+      this.normalizeLocalState(this.$store.state.config.customTheme, version)
     },
 
     // Clears all the extra stuff when loading V1 theme
@@ -442,9 +462,13 @@ export default {
     },
 
     /**
-     * This applies stored theme data onto form.
+     * This applies stored theme data onto form. Supports three versions of data:
+     * v2 (version = 2) - newer version of themes.
+     * v1 (version = 1) - older version of themes (import from file)
+     * v1l (version = l1) - older version of theme (load from local storage)
+     * v1 and v1l differ because of way themes were stored/exported.
      * @param {Object} input - input data
-     * @param {Number} version - version of data. 0 means try to guess based on data.
+     * @param {Number} version - version of data. 0 means try to guess based on data. "l1" means v1, locastorage type
      */
     normalizeLocalState (input, version = 0) {
       const colors = input.colors || input
@@ -465,6 +489,8 @@ export default {
         }
       }
 
+      console.log(version)
+
       // Stuff that differs between V1 and V2
       if (version === 1) {
         this.fgColorLocal = rgb2hex(colors.btn)
@@ -472,7 +498,7 @@ export default {
       }
 
       const keys = new Set(version !== 1 ? Object.keys(colors) : [])
-      if (version === 1) {
+      if (version === 1 || version === 'l1') {
         // V1 ignores the rest
         this.clearV1()
         keys
@@ -483,6 +509,7 @@ export default {
           .add('cGreen')
           .add('cOrange')
       }
+
       keys.forEach(key => {
         this[key + 'ColorLocal'] = rgb2hex(colors[key])
       })

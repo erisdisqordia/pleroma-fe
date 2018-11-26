@@ -183,7 +183,7 @@
         "keep_opacity": "Keep opacity",
         "keep_roundness": "Keep roundness",
         "keep_fonts": "Keep fonts",
-        "save_load_hint": "\"Keep\" options preserve currently set options when selecting or loading themes, it also stores said options when exporting a theme.",
+        "save_load_hint": "\"Keep\" options preserve currently set options when selecting or loading themes, it also stores said options when exporting a theme. When all checkboxes unset, exporting theme will save everything.",
         "reset": "Reset",
         "clear_all": "Clear all",
         "clear_opacity": "Clear opacity"

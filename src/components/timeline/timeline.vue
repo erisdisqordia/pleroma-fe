@@ -10,7 +10,7 @@
       <button @click.prevent="showNewStatuses" class="loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
         {{$t('timeline.show_new')}}{{newStatusCountStr}}
       </button>
-      <div @click.prevent class="loadmore-text" v-if="!timeline.newStatusCount > 0 && !timelineError">
+      <div @click.prevent class="loadmore-text faint" v-if="!timeline.newStatusCount > 0 && !timelineError">
         {{$t('timeline.up_to_date')}}
       </div>
     </div>

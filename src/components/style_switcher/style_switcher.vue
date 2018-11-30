@@ -278,6 +278,18 @@
           <button class="btn" @click="clearShadows">{{$t('settings.style.switcher.clear_all')}}</button>
         </div>
         <shadow-control :ready="!!currentShadowFallback" :fallback="currentShadowFallback" v-model="currentShadow"/>
+        <div v-if="shadowSelected === 'avatar' || shadowSelected === 'avatarStatus'">
+          <i18n path="settings.style.shadows.filter_hint.always_drop_shadow" tag="p">
+            <code>filter: drop-shadow()</code>
+          </i18n>
+          <i18n path="settings.style.shadows.filter_hint.text" tag="p">
+            <code>drop-shadow</code>
+            <code>spread-radius</code>
+            <code>inset</code>
+          </i18n>
+          <p>{{$t('settings.style.shadows.filter_hint.inset_ignored')}}</p>
+          <p>{{$t('settings.style.shadows.filter_hint.spread_zero')}}</p>
+        </div>
       </div>
       <div :label="$t('settings.style.fonts._tab_label')" class="fonts-container">
         <div class="tab-header">

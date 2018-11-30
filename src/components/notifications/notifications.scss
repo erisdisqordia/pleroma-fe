@@ -49,10 +49,16 @@
   .avatar-compact {
     width: 32px;
     height: 32px;
+    box-shadow: var(--avatarStatusShadow);
     border-radius: $fallback--avatarAltRadius;
     border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
     overflow: hidden;
     line-height: 0;
+
+    &.better-shadow {
+      box-shadow: none;
+      filter: drop-shadow(var(--avatarStatusShadowFilter))
+    }
 
     &.animated::before {
       display: none;

@@ -21,7 +21,7 @@
       <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <a :href="status.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
-            <StillImage class='avatar' :class="{'avatar-compact': compact}"  :src="status.user.profile_image_url_original"/>
+            <StillImage class='avatar' :class="{'avatar-compact': compact, 'better-shadow': betterShadow}"  :src="status.user.profile_image_url_original"/>
           </a>
         </div>
         <div class="status-body">
@@ -464,8 +464,14 @@
 .status .avatar-compact {
   width: 32px;
   height: 32px;
+  box-shadow: var(--avatarStatusShadow);
   border-radius: $fallback--avatarAltRadius;
   border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+
+  &.better-shadow {
+    box-shadow: none;
+    filter: drop-shadow(var(--avatarStatusShadowFilter))
+  }
 }
 
 .avatar {
@@ -476,6 +482,11 @@
   border-radius: var(--avatarRadius, $fallback--avatarRadius);
   overflow: hidden;
   position: relative;
+
+  &.better-shadow {
+    box-shadow: none;
+    filter: drop-shadow(var(--avatarStatusShadowFilter))
+  }
 
   img {
     width: 100%;

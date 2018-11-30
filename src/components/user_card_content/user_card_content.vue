@@ -10,7 +10,7 @@
       </a>
       <div class='container'>
         <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
-          <StillImage class="avatar" :src="user.profile_image_url_original"/>
+          <StillImage class="avatar" :class='{ "better-shadow": betterShadow }' :src="user.profile_image_url_original"/>
         </router-link>
         <div class="name-and-screen-name">
           <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
@@ -158,6 +158,11 @@
       box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
       box-shadow: var(--avatarShadow);
       object-fit: cover;
+
+      &.better-shadow {
+        box-shadow: none;
+        filter: drop-shadow(var(--avatarStatusShadowFilter))
+      }
 
       &.animated::before {
         display: none;

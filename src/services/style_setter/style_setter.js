@@ -110,6 +110,24 @@ const getCssShadow = (input) => {
   ]).join(' ')).join(', ')
 }
 
+const getCssShadowFilter = (input) => {
+  if (input.length === 0) {
+    return 'none'
+  }
+
+  return input
+  // drop-shadow doesn't support inset or spread
+    .filter((shad) => console.log(shad) || !shad.inset && Number(shad.spread) === 0)
+    .map((shad) => [
+      shad.x,
+      shad.y,
+      // drop-shadow's blur is twice as strong compared to box-shadow
+      shad.blur / 2
+    ].map(_ => _ + 'px').concat([
+      getCssColor(shad.color, shad.alpha)
+    ]).join(' ')).join(', ')
+}
+
 const getCssColor = (input, a) => {
   let rgb = {}
   if (typeof input === 'object') {
@@ -384,7 +402,12 @@ const generateShadows = (input) => {
 
   return {
     rules: {
-      shadows: Object.entries(shadows).map(([k, v]) => `--${k}Shadow: ${getCssShadow(v)}`).join(';')
+      shadows: Object
+        .entries(shadows)
+      // TODO for v2.1: if shadow doesn't have non-inset shadows with spread > 0 - optionally
+      // convert all non-inset shadows into filter: drop-shadow() to boost performance
+        .map(([k, v]) => `--${k}Shadow: ${getCssShadow(v)}; --${k}ShadowFilter: ${getCssShadowFilter(v)}`)
+        .join(';')
     },
     theme: {
       shadows
@@ -467,5 +490,6 @@ export {
   generateFonts,
   generatePreset,
   composePreset,
-  getCssShadow
+  getCssShadow,
+  getCssShadowFilter
 }

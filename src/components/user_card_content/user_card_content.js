@@ -7,7 +7,8 @@ export default {
     return {
       hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
         ? this.$store.state.instance.hideUserStats
-        : this.$store.state.config.hideUserStats
+        : this.$store.state.config.hideUserStats,
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
   computed: {

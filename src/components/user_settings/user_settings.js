@@ -235,7 +235,7 @@ const UserSettings = {
           if (res.status === 'success') {
             this.changedPassword = true
             this.changePasswordError = false
-            this._logout()
+            this.logout()
           } else {
             this.changedPassword = false
             this.changePasswordError = res.error
@@ -245,7 +245,7 @@ const UserSettings = {
     activateTab (tabName) {
       this.activeTab = tabName
     },
-    _logout () {
+    logout () {
       this.$store.dispatch('logout')
       this.$router.replace('/')
     }

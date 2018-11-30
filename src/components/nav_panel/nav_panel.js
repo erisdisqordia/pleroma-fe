@@ -1,4 +1,5 @@
 const NavPanel = {
+  props: [ 'activatePanel' ],
   computed: {
     currentUser () {
       return this.$store.state.users.currentUser

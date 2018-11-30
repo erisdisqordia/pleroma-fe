@@ -19,7 +19,9 @@
           {{ $t('user_card.follows_you') }}
         </span>
       </div>
-      <a :href="user.statusnet_profile_url" target="blank"><div class="user-screen-name">@{{ user.screen_name }}</div></a>
+      <router-link class='user-screen-name' :to="{ name: 'user-profile', params: { id: user.id } }">
+        @{{user.screen_name}}
+      </router-link>
     </div>
     <div class="approval" v-if="showApproval">
       <button class="btn btn-default" @click="approveUser">{{ $t('user_card.approve') }}</button>

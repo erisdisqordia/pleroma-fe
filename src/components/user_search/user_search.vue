@@ -1,5 +1,5 @@
 <template>
-  <div class="user-seach panel panel-default">
+  <div class="user-search panel panel-default">
     <div class="panel-heading">
       {{$t('nav.user_search')}}
     </div>

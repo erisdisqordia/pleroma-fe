@@ -9,11 +9,11 @@ const fileType = (typeString) => {
     type = 'image'
   }
 
-  if (typeString.match(/video\/(webm|mp4)/)) {
+  if (typeString.match(/video/)) {
     type = 'video'
   }
 
-  if (typeString.match(/audio|ogg/)) {
+  if (typeString.match(/audio/)) {
     type = 'audio'
   }
 

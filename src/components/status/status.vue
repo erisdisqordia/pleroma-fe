@@ -9,7 +9,7 @@
     </template>
     <template v-else>
       <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
-        <StillImage v-if="retweet" class='avatar' :src="statusoid.user.profile_image_url_original"/>
+        <StillImage v-if="retweet" class='avatar' :class='{ "better-shadow": betterShadow }' :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
           <a v-else :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>

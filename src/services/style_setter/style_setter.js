@@ -119,7 +119,7 @@ const getCssShadowFilter = (input) => {
 
   return input
   // drop-shadow doesn't support inset or spread
-    .filter((shad) => console.log(shad) || !shad.inset && Number(shad.spread) === 0)
+    .filter((shad) => !shad.inset && Number(shad.spread) === 0)
     .map((shad) => [
       shad.x,
       shad.y,

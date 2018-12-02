@@ -282,12 +282,15 @@
           <i18n path="settings.style.shadows.filter_hint.always_drop_shadow" tag="p">
             <code>filter: drop-shadow()</code>
           </i18n>
-          <i18n path="settings.style.shadows.filter_hint.text" tag="p">
+          <p>{{$t('settings.style.shadows.filter_hint.avatar_inset')}}</p>
+          <i18n path="settings.style.shadows.filter_hint.drop_shadow_syntax" tag="p">
             <code>drop-shadow</code>
             <code>spread-radius</code>
             <code>inset</code>
           </i18n>
-          <p>{{$t('settings.style.shadows.filter_hint.inset_ignored')}}</p>
+          <i18n path="settings.style.shadows.filter_hint.inset_classic" tag="p">
+            <code>box-shadow</code>
+          </i18n>
           <p>{{$t('settings.style.shadows.filter_hint.spread_zero')}}</p>
         </div>
       </div>

@@ -160,8 +160,8 @@
       object-fit: cover;
 
       &.better-shadow {
-        box-shadow: none;
-        filter: drop-shadow(var(--avatarStatusShadowFilter))
+        box-shadow: var(--avatarShadowInset);
+        filter: var(--avatarShadowFilter)
       }
 
       &.animated::before {

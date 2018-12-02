@@ -469,8 +469,8 @@
   border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
 
   &.better-shadow {
-    box-shadow: none;
-    filter: drop-shadow(var(--avatarStatusShadowFilter))
+    box-shadow: var(--avatarStatusShadowInset);
+    filter: var(--avatarStatusShadowFilter)
   }
 }
 
@@ -484,8 +484,8 @@
   position: relative;
 
   &.better-shadow {
-    box-shadow: none;
-    filter: drop-shadow(var(--avatarStatusShadowFilter))
+    box-shadow: var(--avatarStatusShadowInset);
+    filter: var(--avatarStatusShadowFilter)
   }
 
   img {

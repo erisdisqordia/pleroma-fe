@@ -94,20 +94,22 @@ const setColors = (input, commit) => {
   commit('setOption', { name: 'colors', value: theme.colors })
 }
 
-const getCssShadow = (input) => {
+const getCssShadow = (input, usesDropShadow) => {
   if (input.length === 0) {
     return 'none'
   }
 
-  return input.map((shad) => [
-    shad.x,
-    shad.y,
-    shad.blur,
-    shad.spread
-  ].map(_ => _ + 'px').concat([
-    getCssColor(shad.color, shad.alpha),
-    shad.inset ? 'inset' : ''
-  ]).join(' ')).join(', ')
+  return input
+    .filter(_ => usesDropShadow ? _.inset : _)
+    .map((shad) => [
+      shad.x,
+      shad.y,
+      shad.blur,
+      shad.spread
+    ].map(_ => _ + 'px').concat([
+      getCssColor(shad.color, shad.alpha),
+      shad.inset ? 'inset' : ''
+    ]).join(' ')).join(', ')
 }
 
 const getCssShadowFilter = (input) => {
@@ -125,7 +127,9 @@ const getCssShadowFilter = (input) => {
       shad.blur / 2
     ].map(_ => _ + 'px').concat([
       getCssColor(shad.color, shad.alpha)
-    ]).join(' ')).join(', ')
+    ]).join(' '))
+    .map(_ => `drop-shadow(${_})`)
+    .join(' ')
 }
 
 const getCssColor = (input, a) => {
@@ -406,7 +410,11 @@ const generateShadows = (input) => {
         .entries(shadows)
       // TODO for v2.1: if shadow doesn't have non-inset shadows with spread > 0 - optionally
       // convert all non-inset shadows into filter: drop-shadow() to boost performance
-        .map(([k, v]) => `--${k}Shadow: ${getCssShadow(v)}; --${k}ShadowFilter: ${getCssShadowFilter(v)}`)
+        .map(([k, v]) => [
+          `--${k}Shadow: ${getCssShadow(v)}`,
+          `--${k}ShadowFilter: ${getCssShadowFilter(v)}`,
+          `--${k}ShadowInset: ${getCssShadow(v, true)}`
+        ].join(';'))
         .join(';')
     },
     theme: {

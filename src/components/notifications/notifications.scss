@@ -56,8 +56,8 @@
     line-height: 0;
 
     &.better-shadow {
-      box-shadow: none;
-      filter: drop-shadow(var(--avatarStatusShadowFilter))
+      box-shadow: var(--avatarStatusShadowInset);
+      filter: var(--avatarStatusShadowFilter)
     }
 
     &.animated::before {

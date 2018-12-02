@@ -238,10 +238,10 @@
         "hint": "For shadows you can also use --variable as a color value to use CSS3 variables. Please note that setting opacity won't work in this case.",
         "filter_hint": {
           "always_drop_shadow": "Warning, this shadow always uses {0} when browser supports it.",
-          "text": "Please note that {0} does not support {1} parameter and {2} keyword.",
+          "drop_shadow_syntax": "{0} does not support {1} parameter and {2} keyword.",
+          "avatar_inset": "Please note that combining both inset and non-inset shadows on avatars might give unexpected results with transparent avatars.",
           "spread_zero": "Shadows with spread > 0 will appear as if it was set to zero",
-          "inset_ignored": "Inset shadows using will be ignored",
-          "inset_substituted": "Inset shadows will be substituted with {1} equivalent"
+          "inset_classic": "Inset shadows will be using {0}"
         },
         "components": {
           "panel": "Panel",

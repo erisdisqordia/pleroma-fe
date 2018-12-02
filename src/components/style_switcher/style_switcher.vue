@@ -83,7 +83,7 @@
           </div>
           <div class="content">
             <h4>
-              Content
+              {{$t('settings.style.preview.content')}}
             </h4>
 
             <i18n path="settings.style.preview.text">
@@ -224,7 +224,7 @@
         </div>
         <div class="color-item">
           <h4>{{ $t('settings.style.advanced_colors.borders') }}</h4>
-          <ColorInput name="borderColor" v-model="borderColorLocal" :fallback="previewTheme.colors.border" label="Color"/>
+          <ColorInput name="borderColor" v-model="borderColorLocal" :fallback="previewTheme.colors.border" :label="$t('settings.style.common.color')"/>
           <OpacityInput name="borderOpacity" v-model="borderOpacityLocal" :fallback="previewTheme.opacity.border || 1"/>
         </div>
         <div class="color-item">

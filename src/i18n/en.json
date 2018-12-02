@@ -207,7 +207,6 @@
       "common_colors": {
         "_tab_label": "Common",
         "main": "Common colors",
-        "foreground": "Panel header, top bar, buttons, text fields",
         "foreground_hint": "See \"Advanced\" tab for more detailed control",
         "rgbo": "Icons, accents, badges"
       },
@@ -273,6 +272,7 @@
       },
       "preview": {
         "header": "Preview of header",
+        "content": "Content",
         "error": "Example error",
         "button": "Button",
         "text": "A bunch of more {0} and {1}",

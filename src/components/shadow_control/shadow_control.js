@@ -14,6 +14,7 @@ export default {
   data () {
     return {
       selectedId: 0,
+      // TODO there are some bugs regarding display of array (it's not getting updated when deleting for some reason)
       cValue: this.value || this.fallback || []
     }
   },

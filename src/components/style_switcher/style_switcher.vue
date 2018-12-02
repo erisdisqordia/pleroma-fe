@@ -2,7 +2,7 @@
 <div class="style-switcher">
   <div class="presets-container">
     <div class="save-load">
-      <div>
+      <div class="presets">
         {{$t('settings.presets')}}
         <label for="preset-switcher" class='select'>
           <select id="preset-switcher" v-model="selected" class="preset-switcher">

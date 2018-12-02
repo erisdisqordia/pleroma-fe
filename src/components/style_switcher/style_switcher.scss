@@ -135,6 +135,12 @@
     display: flex;
     justify-content: center;
     align-items: baseline;
+    flex-wrap: wrap;
+
+    .presets,
+    .import-export {
+      margin-bottom: .5em;
+    }
 
     .import-export {
       display: flex;

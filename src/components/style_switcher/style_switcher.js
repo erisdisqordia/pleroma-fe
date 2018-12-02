@@ -497,10 +497,9 @@ export default {
         this.textColorLocal = rgb2hex(colors.fg)
       }
 
+      this.clearV1()
       const keys = new Set(version !== 1 ? Object.keys(colors) : [])
       if (version === 1 || version === 'l1') {
-        // V1 ignores the rest
-        this.clearV1()
         keys
           .add('bg')
           .add('link')

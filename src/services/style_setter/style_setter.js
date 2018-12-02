@@ -205,10 +205,10 @@ const generateColors = (input) => {
 
   colors.icon = mixrgb(colors.bg, colors.text)
 
-  colors.cBlue = col.cBlue
-  colors.cRed = col.cRed
-  colors.cGreen = col.cGreen
-  colors.cOrange = col.cOrange
+  colors.cBlue = col.cBlue || hex2rgb('#0000FF')
+  colors.cRed = col.cRed || hex2rgb('#FF0000')
+  colors.cGreen = col.cGreen || hex2rgb('#00FF00')
+  colors.cOrange = col.cOrange || hex2rgb('#E3FF00')
 
   colors.alertError = col.alertError || Object.assign({}, col.cRed)
   colors.alertErrorText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.bg), colors.text)

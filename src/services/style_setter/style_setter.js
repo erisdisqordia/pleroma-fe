@@ -210,11 +210,11 @@ const generateColors = (input) => {
   colors.cGreen = col.cGreen || hex2rgb('#00FF00')
   colors.cOrange = col.cOrange || hex2rgb('#E3FF00')
 
-  colors.alertError = col.alertError || Object.assign({}, col.cRed)
+  colors.alertError = col.alertError || Object.assign({}, colors.cRed)
   colors.alertErrorText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.bg), colors.text)
   colors.alertErrorPanelText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.panel), colors.panelText)
 
-  colors.badgeNotification = col.badgeNotification || Object.assign({}, col.cRed)
+  colors.badgeNotification = col.badgeNotification || Object.assign({}, colors.cRed)
   colors.badgeNotificationText = contrastRatio(colors.badgeNotification).rgb
 
   Object.entries(opacity).forEach(([ k, v ]) => {

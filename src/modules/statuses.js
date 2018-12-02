@@ -1,5 +1,4 @@
 import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
-import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -26,7 +25,6 @@ export const defaultState = {
   notifications: {
     desktopNotificationSilence: true,
     maxId: 0,
-    maxSavedId: 0,
     minId: Number.POSITIVE_INFINITY,
     data: [],
     error: false,
@@ -297,7 +295,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)
       state.notifications.minId = Math.min(notification.id, state.notifications.minId)
 
-      const fresh = !older && !notification.is_seen && notification.id > state.notifications.maxSavedId
+      const fresh = !notification.is_seen
       const status = notification.ntype === 'like'
             ? find(allStatuses, { id: action.in_reply_to_status_id })
             : action
@@ -306,7 +304,6 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
         type: notification.ntype,
         status,
         action,
-        // Always assume older notifications as seen
         seen: !fresh
       }
 
@@ -404,9 +401,8 @@ export const mutations = {
   addFollowers (state, { followers }) {
     state.timelines['user'].followers = followers
   },
-  markNotificationsAsSeen (state, notifications) {
-    set(state.notifications, 'maxSavedId', state.notifications.maxId)
-    each(notifications, (notification) => {
+  markNotificationsAsSeen (state) {
+    each(state.notifications.data, (notification) => {
       notification.seen = true
     })
   },
@@ -484,6 +480,13 @@ const statuses = {
     },
     queueFlush ({ rootState, commit }, { timeline, id }) {
       commit('queueFlush', { timeline, id })
+    },
+    markNotificationsAsSeen ({ rootState, commit }) {
+      commit('markNotificationsAsSeen')
+      apiService.markNotificationsAsSeen({
+        id: rootState.statuses.notifications.maxId,
+        credentials: rootState.users.currentUser.credentials
+      })
     }
   },
   mutations

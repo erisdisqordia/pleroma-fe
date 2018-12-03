@@ -17,6 +17,7 @@ const defaultState = {
   showInstanceSpecificPanel: false,
   scopeOptionsEnabled: true,
   formattingOptionsEnabled: false,
+  alwaysShowSubjectInput: true,
   collapseMessageWithSubject: false,
   hidePostStats: false,
   hideUserStats: false,

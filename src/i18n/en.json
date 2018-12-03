@@ -159,6 +159,7 @@
     "set_new_profile_background": "Set new profile background",
     "set_new_profile_banner": "Set new profile banner",
     "settings": "Settings",
+    "subject_input_always_show": "Always show subject field",
     "subject_line_behavior": "Copy subject when replying",
     "subject_line_email": "Like email: \"re: subject\"",
     "subject_line_mastodon": "Like mastodon: copy as is",

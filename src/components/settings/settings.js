@@ -38,6 +38,10 @@ const settings = {
         ? instance.subjectLineBehavior
         : user.subjectLineBehavior,
       subjectLineBehaviorDefault: instance.subjectLineBehavior,
+      alwaysShowSubjectInputLocal: typeof user.alwaysShowSubjectInput === 'undefined'
+        ? instance.alwaysShowSubjectInput
+        : user.alwaysShowSubjectInput,
+      alwaysShowSubjectInputDefault: instance.alwaysShowSubjectInput,
       scopeCopyLocal: user.scopeCopy,
       scopeCopyDefault: this.$t('settings.values.' + instance.scopeCopy),
       stopGifs: user.stopGifs,
@@ -121,6 +125,9 @@ const settings = {
     },
     scopeCopyLocal (value) {
       this.$store.dispatch('setOption', { name: 'scopeCopy', value })
+    },
+    alwaysShowSubjectInputLocal (value) {
+      this.$store.dispatch('setOption', { name: 'alwaysShowSubjectInput', value })
     },
     subjectLineBehaviorLocal (value) {
       this.$store.dispatch('setOption', { name: 'subjectLineBehavior', value })

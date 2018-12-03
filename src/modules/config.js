@@ -27,7 +27,8 @@ const defaultState = {
   highlight: {},
   interfaceLanguage: browserLocale,
   scopeCopy: undefined, // instance default
-  subjectLineBehavior: undefined // instance default
+  subjectLineBehavior: undefined, // instance default
+  alwaysShowSubjectInput: undefined // instance default
 }
 
 const config = {

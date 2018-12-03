@@ -11,7 +11,7 @@
       </i18n>
       <p v-if="this.newStatus.visibility == 'direct'" class="visibility-notice">{{ $t('post_status.direct_warning') }}</p>
       <input
-        v-if="scopeOptionsEnabled"
+        v-if="newStatus.spoilerText || alwaysShowSubject"
         type="text"
         :placeholder="$t('post_status.content_warning')"
         v-model="newStatus.spoilerText"

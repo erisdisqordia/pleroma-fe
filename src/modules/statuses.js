@@ -16,6 +16,7 @@ const emptyTl = () => ({
   followers: [],
   friends: [],
   viewing: 'statuses',
+  userId: 0,
   flushMarker: 0
 })
 
@@ -132,7 +133,7 @@ const sortTimeline = (timeline) => {
   return timeline
 }
 
-const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false }) => {
+const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false, userId }) => {
   // Sanity check
   if (!isArray(statuses)) {
     return false
@@ -147,6 +148,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
   if (timeline && !noIdUpdate && statuses.length > 0 && !older) {
     timelineObject.maxId = maxNew
+  }
+
+  // This makes sure that user timeline won't get data meant for other
+  // user. I.e. opening different user profiles makes request which could
+  // return data late after user already viewing different user profile
+  if (timeline === 'user' && timelineObject.userId !== userId) {
+    return
   }
 
   const addStatus = (status, showImmediately, addToTimeline = true) => {
@@ -418,8 +426,8 @@ export const mutations = {
 const statuses = {
   state: defaultState,
   actions: {
-    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false }) {
-      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser })
+    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
+      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })
     },
     addNewNotifications ({ rootState, commit, dispatch }, { notifications, older }) {
       commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older })

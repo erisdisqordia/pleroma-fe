@@ -21,6 +21,7 @@ export default {
   },
   data: () => ({
     mobileActivePanel: 'timeline',
+    finderHidden: true,
     supportsMask: window.CSS && window.CSS.supports && (
       window.CSS.supports('mask-size', 'contain') ||
         window.CSS.supports('-webkit-mask-size', 'contain') ||
@@ -53,7 +54,8 @@ export default {
     },
     logoBgStyle () {
       return Object.assign({
-        'margin': `${this.$store.state.instance.logoMargin} 0`
+        'margin': `${this.$store.state.instance.logoMargin} 0`,
+        opacity: this.finderHidden ? 1 : 0
       }, this.enableMask ? {} : {
         'background-color': this.enableMask ? '' : 'transparent'
       })
@@ -75,6 +77,9 @@ export default {
     logout () {
       this.$router.replace('/main/public')
       this.$store.dispatch('logout')
+    },
+    onFinderToggled (hidden) {
+      this.finderHidden = hidden
     }
   }
 }

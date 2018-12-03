@@ -248,6 +248,9 @@ nav {
     justify-content: center;
     flex: 0 0 auto;
     z-index: -1;
+    transition: opacity;
+    transition-timing-function: ease-out;
+    transition-duration: 100ms;
 
     .mask {
       mask-repeat: no-repeat;
@@ -485,6 +488,11 @@ nav {
 .faint {
   color: $fallback--faint;
   color: var(--faint, $fallback--faint);
+}
+@media all and (min-width: 959px) {
+  .logo {
+    opacity: 1 !important;
+  }
 }
 
 @media all and (max-width: 959px) {

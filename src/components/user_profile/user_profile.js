@@ -27,6 +27,7 @@ const UserProfile = {
   },
   watch: {
     userId () {
+      this.$store.dispatch('stopFetching', 'user')
       this.$store.commit('clearTimeline', { timeline: 'user' })
       this.$store.dispatch('startFetching', ['user', this.userId])
     }

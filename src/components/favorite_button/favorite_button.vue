@@ -1,10 +1,10 @@
 <template>
   <div v-if="loggedIn">
-    <i :class='classes' class='favorite-button fav-active' @click.prevent='favorite()'/>
+    <i :class='classes' class='favorite-button fav-active' @click.prevent='favorite()' :title="$t('tool_tip.star')"/>
     <span v-if='!hidePostStatsLocal && status.fave_num > 0'>{{status.fave_num}}</span>
   </div>
   <div v-else>
-    <i :class='classes' class='favorite-button'/>
+    <i :class='classes' class='favorite-button' :title="$t('tool_tip.star')"/>
     <span v-if='!hidePostStatsLocal && status.fave_num > 0'>{{status.fave_num}}</span>
   </div>
 </template>

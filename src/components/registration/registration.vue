@@ -49,8 +49,10 @@
           <div class='terms-of-service' v-html="termsofservice">
           </div>
         </div>
-        <div v-if="error" class='form-group'>
-          <div class='alert error'>{{error}}</div>
+        <div v-if="errors.length" class='form-group'>
+          <div class='alert error'>
+            <span v-for="error in errors">{{error}}</span>
+          </div>
         </div>
       </form>
     </div>

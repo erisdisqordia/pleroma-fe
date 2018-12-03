@@ -1,9 +1,10 @@
 import oauthApi from '../../services/new_api/oauth.js'
+import { humanizeErrors } from '../../modules/errors'
 
 const registration = {
   data: () => ({
     user: {},
-    error: false,
+    errors: [],
     registering: false
   }),
   created () {
@@ -37,7 +38,8 @@ const registration = {
                   app,
                   instance: data.instance,
                   username: this.user.username,
-                  password: this.user.password})
+                  password: this.user.password
+                })
                 .then((result) => {
                   this.$store.commit('setToken', result.access_token)
                   this.$store.dispatch('loginUser', result.access_token)
@@ -47,10 +49,10 @@ const registration = {
           } else {
             this.registering = false
             response.json().then((data) => {
-              this.error = data.error
+              this.errors = humanizeErrors(JSON.parse(data.error))
             })
           }
-        }
+        },
       )
     }
   }

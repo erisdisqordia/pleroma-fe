@@ -37,7 +37,7 @@
     "timeline": "Timeline",
     "twkn": "The Whole Known Network",
     "user_search": "User Search",
-    "instance_settings": "Instance Settings"
+    "preferences": "Preferences"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it...",
@@ -214,6 +214,6 @@
     "media_upload": "Upload Media",
     "repeat": "Repeat",
     "reply": "Reply",
-    "star": "Star"
+    "favorite": "Favorite"
   }
 }

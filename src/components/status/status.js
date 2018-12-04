@@ -53,6 +53,9 @@ const Status = {
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
       return highlightClass(user)
     },
+    deleted() {
+      return this.statusoid.deleted
+    },
     repeaterStyle () {
       const user = this.statusoid.user
       const highlight = this.$store.state.config.highlight

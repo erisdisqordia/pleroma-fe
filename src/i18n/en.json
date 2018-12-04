@@ -214,6 +214,7 @@
     "media_upload": "Upload Media",
     "repeat": "Repeat",
     "reply": "Reply",
-    "favorite": "Favorite"
+    "favorite": "Favorite",
+    "user_settings": "User Settings"
   }
 }

@@ -98,6 +98,14 @@ export default {
         const store = this.$store
         store.commit('setProfileView', { v })
       }
+    },
+    linkClicked ({target}) {
+      if (target.tagName === 'SPAN') {
+        target = target.parentNode
+      }
+      if (target.tagName === 'A') {
+        window.open(target.href, '_blank')
+      }
     }
   }
 }

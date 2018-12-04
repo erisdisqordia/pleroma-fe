@@ -150,6 +150,15 @@ const PostStatusForm = {
     scopeOptionsEnabled () {
       return this.$store.state.instance.scopeOptionsEnabled
     },
+    alwaysShowSubject () {
+      if (typeof this.$store.state.config.alwaysShowSubjectInput !== 'undefined') {
+        return this.$store.state.config.alwaysShowSubjectInput
+      } else if (typeof this.$store.state.instance.alwaysShowSubjectInput !== 'undefined') {
+        return this.$store.state.instance.alwaysShowSubjectInput
+      } else {
+        return this.$store.state.instance.scopeOptionsEnabled
+      }
+    },
     formattingOptionsEnabled () {
       return this.$store.state.instance.formattingOptionsEnabled
     }

@@ -29,6 +29,7 @@ const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json'
+const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKING_URL = '/api/blocks/create.json'
 const UNBLOCKING_URL = '/api/blocks/destroy.json'
 const USER_URL = '/api/users/show.json'
@@ -460,6 +461,18 @@ const suggestions = ({credentials}) => {
   }).then((data) => data.json())
 }
 
+const markNotificationsAsSeen = ({id, credentials}) => {
+  const body = new FormData()
+
+  body.append('latest_id', id)
+
+  return fetch(QVITTER_USER_NOTIFICATIONS_READ_URL, {
+    body,
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => data.json())
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -494,7 +507,8 @@ const apiService = {
   fetchFollowRequests,
   approveUser,
   denyUser,
-  suggestions
+  suggestions,
+  markNotificationsAsSeen
 }
 
 export default apiService

@@ -1,8 +1,8 @@
-import {capitalize, reduce} from 'lodash'
+import { capitalize } from 'lodash'
 
 export function humanizeErrors (errors) {
-  return reduce(errors, (errs, val, k) => {
-    let message = reduce(val, (acc, message) => {
+  return Object.entries(errors).reduce((errs, [k, val]) => {
+    let message = val.reduce((acc, message) => {
       let key = capitalize(k.replace(/_/g, ' '))
       return acc + [key, message].join(' ') + '. '
     }, '')

@@ -5,6 +5,8 @@ export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio' ],
   data () {
     return {
+      followRequestInProgress: false,
+      followRequestSent: false,
       hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
         ? this.$store.state.instance.hideUserStats
         : this.$store.state.config.hideUserStats
@@ -70,13 +72,57 @@ export default {
   methods: {
     followUser () {
       const store = this.$store
+      this.followRequestInProgress = true
       store.state.api.backendInteractor.followUser(this.user.id)
         .then((followedUser) => store.commit('addNewUsers', [followedUser]))
+        .then(() => {
+          if (this.user.following) {
+            this.followRequestInProgress = false
+            return
+          }
+          if (!this.user.locked) {
+            let attemptsLeft = 3
+            const fetchUser = () => new Promise((resolve, reject) => {
+              setTimeout(() => {
+                store.state.api.backendInteractor.fetchUser({ id: this.user.id })
+                  .then((user) => store.commit('addNewUsers', [user]))
+                  .then(() => resolve(this.user.following))
+                  .catch((e) => reject(e))
+              }, 500)
+            }).then((confirmed) => {
+              if (!confirmed && attemptsLeft > 0) {
+                attemptsLeft--
+                return fetchUser()
+              } else if (confirmed) {
+                return true
+              } else {
+                return false
+              }
+            })
+
+            return fetchUser()
+              .then((successfulConfirmation) => {
+                if (successfulConfirmation) {
+                  this.followRequestInProgress = false
+                } else {
+                  this.followRequestInProgress = false
+                  this.followRequestSent = true
+                }
+              })
+          } else {
+            this.followRequestInProgress = false
+            this.followRequestSent = true
+          }
+        })
     },
     unfollowUser () {
       const store = this.$store
+      this.followRequestInProgress = true
       store.state.api.backendInteractor.unfollowUser(this.user.id)
         .then((unfollowedUser) => store.commit('addNewUsers', [unfollowedUser]))
+        .then(() => {
+          this.followRequestInProgress = false
+        })
     },
     blockUser () {
       const store = this.$store

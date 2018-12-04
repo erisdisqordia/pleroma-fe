@@ -44,13 +44,26 @@
           <div class="follow" v-if="loggedIn">
             <span v-if="user.following">
               <!--Following them!-->
-              <button @click="unfollowUser" class="pressed">
-                {{ $t('user_card.following') }}
+              <button @click="unfollowUser" class="pressed" :disabled="followRequestInProgress" :title="$t('user_card.follow_unfollow')">
+                <template v-if="followRequestInProgress">
+                  {{ $t('user_card.follow_progress') }}
+                </template>
+                <template v-else>
+                  {{ $t('user_card.following') }}
+                </template>
               </button>
             </span>
             <span v-if="!user.following">
-              <button @click="followUser">
-                {{ $t('user_card.follow') }}
+              <button @click="followUser" :disabled="followRequestInProgress" :title="followRequestSent ? $t('user_card.follow_again') : ''">
+                <template v-if="followRequestInProgress">
+                  {{ $t('user_card.follow_progress') }}
+                </template>
+                <template v-else-if="followRequestSent">
+                  {{ $t('user_card.follow_sent') }}
+                </template>
+                <template v-else>
+                  {{ $t('user_card.follow') }}
+                </template>
               </button>
             </span>
           </div>

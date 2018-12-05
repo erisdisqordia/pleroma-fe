@@ -248,6 +248,12 @@
       .panel-heading {
         .badge, .alert, .btn, .faint {
           margin-left: 1em;
+          white-space: nowrap;
+        }
+        .faint {
+          text-overflow: ellipsis;
+          min-width: 2em;
+          overflow-x: hidden;
         }
         .flex-spacer {
           flex: 1;

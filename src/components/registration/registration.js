@@ -53,7 +53,7 @@ const registration = {
           await this.signUp(this.user)
           this.$router.push('/main/friends')
         } catch (error) {
-          console.log('Registration failed: ' + error)
+          console.warn('Registration failed: ' + error)
         }
       }
     }

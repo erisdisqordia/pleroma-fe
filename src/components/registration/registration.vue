@@ -12,7 +12,11 @@
               <input :disabled="isPending" v-model.trim='$v.user.username.$model' class='form-control' id='sign-up-username' placeholder='e.g. lain'>
             </div>
             <div class="form-error" v-if="$v.user.username.$dirty">
-              <span class="error-required" v-if="!$v.user.username.required">Username is required.</span>
+              <ul>
+                <li v-if="!$v.user.username.required">
+                  <span>{{$t('registration.validations.username_required')}}</span>
+                </li>
+              </ul>
             </div>
 
             <div class='form-group'>
@@ -25,7 +29,14 @@
               <input :disabled="isPending" v-model='$v.user.email.$model' class='form-control' id='email' type="email">
             </div>
             <div class="form-error" v-if="$v.user.email.$dirty">
-              <span class="error-required" v-if="!$v.user.email.required">Email is required.</span>
+              <ul>
+                <li v-if="!$v.user.email.required">
+                  <span>{{$t('registration.validations.email_required')}}</span>
+                </li>
+                <li v-if="!$v.user.email.email">
+                  <span>{{$t('registration.validations.email_valid')}}</span>
+                </li>
+              </ul>
             </div>
 
             <div class='form-group'>
@@ -38,7 +49,11 @@
               <input :disabled="isPending" v-model='user.password' class='form-control' id='sign-up-password' type='password'>
             </div>
             <div class="form-error" v-if="$v.user.password.$dirty">
-              <span class="error-required" v-if="!$v.user.password.required">Password is required.</span>
+              <ul>
+                <li v-if="!$v.user.password.required">
+                  <span>{{$t('registration.validations.password_required')}}</span>
+                </li>
+              </ul>
             </div>
 
             <div class='form-group' :class="{ 'form-group--error': $v.user.confirm.$error }">
@@ -46,7 +61,14 @@
               <input :disabled="isPending" v-model='user.confirm' class='form-control' id='sign-up-password-confirmation' type='password'>
             </div>
             <div class="form-error" v-if="$v.user.confirm.$dirty">
-              <span class="error-required" v-if="!$v.user.confirm.required">Password confirmation is required.</span>
+              <ul>
+                <li v-if="!$v.user.confirm.required">
+                  <span>{{$t('registration.validations.password_confirmation_required')}}</span>
+                </li>
+                <li v-if="!$v.user.confirm.sameAsPassword">
+                  <span>{{$t('registration.validations.password_confirmation_match')}}</span>
+                </li>
+              </ul>
             </div>
             <!--
             <div class='form-group'>
@@ -131,6 +153,17 @@
     text-align: left;
     span {
       font-size: 12px;
+    }
+
+  }
+
+  .form-error ul {
+    list-style: none;
+    padding: 0 0 0 5px;
+    margin-top: 0;
+
+    li::before {
+      content: "• ";
     }
   }
 

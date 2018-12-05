@@ -52,13 +52,14 @@ export const mutations = {
   },
   [SIGN_UP.PENDING] (state) {
     state[SIGN_UP.isPending] = true
+    state[SIGN_UP.errors] = []
   },
   [SIGN_UP.SUCCESS] (state) {
     state[SIGN_UP.isPending] = false
   },
   [SIGN_UP.FAILURE] (state, errors) {
     state[SIGN_UP.isPending] = false
-    state[SIGN_UP.errors] = [...state[SIGN_UP.errors], ...errors]
+    state[SIGN_UP.errors] = errors
   }
 }
 
@@ -97,27 +98,29 @@ const users = {
     async signUp (store, userInfo) {
       store.commit(SIGN_UP.PENDING)
 
-      let response = await store.rootState.api.backendInteractor.register(userInfo)
+      let rootState = store.rootState
+
+      let response = await rootState.api.backendInteractor.register(userInfo)
       if (response.ok) {
         const data = {
-          oauth: store.state.oauth,
-          instance: store.state.instance.server
+          oauth: rootState.oauth,
+          instance: rootState.instance.server
         }
         let app = await oauthApi.getOrCreateApp(data)
         let result = await oauthApi.getTokenWithCredentials({
           app,
           instance: data.instance,
-          username: this.user.username,
-          password: this.user.password
+          username: userInfo.username,
+          password: userInfo.password
         })
         store.commit(SIGN_UP.SUCCESS)
         store.commit('setToken', result.access_token)
         store.dispatch('loginUser', result.access_token)
-        this.$router.push('/main/friends')
       } else {
         let data = await response.json()
         let errors = humanizeErrors(JSON.parse(data.error))
         store.commit(SIGN_UP.FAILURE, errors)
+        throw Error(errors)
       }
     },
     logout (store) {

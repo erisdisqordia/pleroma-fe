@@ -2,8 +2,8 @@
 <div id="heading" class="profile-panel-background" :style="headingStyle">
   <div class="panel-heading text-center">
     <div class='user-info'>
-      <router-link to='/user-settings' style="float: right; margin-top:16px;" v-if="!isOtherUser">
-        <i class="icon-cog usersettings"></i>
+      <router-link @click.native="activatePanel('timeline')" to='/user-settings' style="float: right; margin-top:16px;" v-if="!isOtherUser">
+        <i class="icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
       </router-link>
       <a :href="user.statusnet_profile_url" target="_blank" class="floater" v-if="isOtherUser">
         <i class="icon-link-ext usersettings"></i>
@@ -105,7 +105,7 @@
         <span v-if="!hideUserStatsLocal">{{user.followers_count}}</span>
       </div>
     </div>
-    <p v-if="!hideBio && user.description_html" class="profile-bio" v-html="user.description_html"></p>
+    <p @click.prevent="linkClicked" v-if="!hideBio && user.description_html" class="profile-bio" v-html="user.description_html"></p>
     <p v-else-if="!hideBio" class="profile-bio">{{ user.description }}</p>
   </div>
 </div>

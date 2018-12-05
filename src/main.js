@@ -47,7 +47,6 @@ const persistedStateOptions = {
   paths: [
     'config',
     'users.lastLoginName',
-    'statuses.notifications.maxSavedId',
     'oauth'
   ]
 }

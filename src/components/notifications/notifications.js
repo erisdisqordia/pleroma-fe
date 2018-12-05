@@ -52,7 +52,7 @@ const Notifications = {
   },
   methods: {
     markAsSeen () {
-      this.$store.commit('markNotificationsAsSeen', this.visibleNotifications)
+      this.$store.dispatch('markNotificationsAsSeen', this.visibleNotifications)
     },
     fetchOlderNotifications () {
       const store = this.$store

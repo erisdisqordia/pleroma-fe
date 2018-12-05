@@ -36,7 +36,8 @@
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
     "twkn": "The Whole Known Network",
-    "user_search": "User Search"
+    "user_search": "User Search",
+    "preferences": "Preferences"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it...",
@@ -160,6 +161,7 @@
     "set_new_profile_background": "Set new profile background",
     "set_new_profile_banner": "Set new profile banner",
     "settings": "Settings",
+    "subject_input_always_show": "Always show subject field",
     "subject_line_behavior": "Copy subject when replying",
     "subject_line_email": "Like email: \"re: subject\"",
     "subject_line_mastodon": "Like mastodon: copy as is",
@@ -318,5 +320,12 @@
   "who_to_follow": {
     "more": "More",
     "who_to_follow": "Who to follow"
+  },
+  "tool_tip": {
+    "media_upload": "Upload Media",
+    "repeat": "Repeat",
+    "reply": "Reply",
+    "favorite": "Favorite",
+    "user_settings": "User Settings"
   }
 }

@@ -2,13 +2,14 @@ import { camelCase } from 'lodash'
 
 import apiService from '../api/api.service.js'
 
-const update = ({store, statuses, timeline, showImmediately}) => {
+const update = ({store, statuses, timeline, showImmediately, userId}) => {
   const ccTimeline = camelCase(timeline)
 
   store.dispatch('setError', { value: false })
 
   store.dispatch('addNewStatuses', {
     timeline: ccTimeline,
+    userId,
     statuses,
     showImmediately
   })
@@ -33,7 +34,7 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
       if (!older && statuses.length >= 20 && !timelineData.loading) {
         store.dispatch('queueFlush', { timeline: timeline, id: timelineData.maxId })
       }
-      update({store, statuses, timeline, showImmediately})
+      update({store, statuses, timeline, showImmediately, userId})
     }, () => store.dispatch('setError', { value: true }))
 }
 
@@ -41,6 +42,7 @@ const startFetching = ({timeline = 'friends', credentials, store, userId = false
   const rootState = store.rootState || store.state
   const timelineData = rootState.statuses.timelines[camelCase(timeline)]
   const showImmediately = timelineData.visibleStatuses.length === 0
+  timelineData.userId = userId
   fetchAndUpdate({timeline, credentials, store, showImmediately, userId, tag})
   const boundFetchAndUpdate = () => fetchAndUpdate({ timeline, credentials, store, userId, tag })
   return setInterval(boundFetchAndUpdate, 10000)

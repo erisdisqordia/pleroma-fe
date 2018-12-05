@@ -1,5 +1,4 @@
 import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
-import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -16,6 +15,7 @@ const emptyTl = () => ({
   followers: [],
   friends: [],
   viewing: 'statuses',
+  userId: 0,
   flushMarker: 0
 })
 
@@ -26,7 +26,6 @@ export const defaultState = {
   notifications: {
     desktopNotificationSilence: true,
     maxId: 0,
-    maxSavedId: 0,
     minId: Number.POSITIVE_INFINITY,
     data: [],
     error: false,
@@ -132,7 +131,7 @@ const sortTimeline = (timeline) => {
   return timeline
 }
 
-const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false }) => {
+const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false, userId }) => {
   // Sanity check
   if (!isArray(statuses)) {
     return false
@@ -147,6 +146,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
   if (timeline && !noIdUpdate && statuses.length > 0 && !older) {
     timelineObject.maxId = maxNew
+  }
+
+  // This makes sure that user timeline won't get data meant for other
+  // user. I.e. opening different user profiles makes request which could
+  // return data late after user already viewing different user profile
+  if (timeline === 'user' && timelineObject.userId !== userId) {
+    return
   }
 
   const addStatus = (status, showImmediately, addToTimeline = true) => {
@@ -297,7 +303,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)
       state.notifications.minId = Math.min(notification.id, state.notifications.minId)
 
-      const fresh = !older && !notification.is_seen && notification.id > state.notifications.maxSavedId
+      const fresh = !notification.is_seen
       const status = notification.ntype === 'like'
             ? find(allStatuses, { id: action.in_reply_to_status_id })
             : action
@@ -306,7 +312,6 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
         type: notification.ntype,
         status,
         action,
-        // Always assume older notifications as seen
         seen: !fresh
       }
 
@@ -404,9 +409,8 @@ export const mutations = {
   addFollowers (state, { followers }) {
     state.timelines['user'].followers = followers
   },
-  markNotificationsAsSeen (state, notifications) {
-    set(state.notifications, 'maxSavedId', state.notifications.maxId)
-    each(notifications, (notification) => {
+  markNotificationsAsSeen (state) {
+    each(state.notifications.data, (notification) => {
       notification.seen = true
     })
   },
@@ -418,8 +422,8 @@ export const mutations = {
 const statuses = {
   state: defaultState,
   actions: {
-    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false }) {
-      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser })
+    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
+      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })
     },
     addNewNotifications ({ rootState, commit, dispatch }, { notifications, older }) {
       commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older })
@@ -484,6 +488,13 @@ const statuses = {
     },
     queueFlush ({ rootState, commit }, { timeline, id }) {
       commit('queueFlush', { timeline, id })
+    },
+    markNotificationsAsSeen ({ rootState, commit }) {
+      commit('markNotificationsAsSeen')
+      apiService.markNotificationsAsSeen({
+        id: rootState.statuses.notifications.maxId,
+        credentials: rootState.users.currentUser.credentials
+      })
     }
   },
   mutations

@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el" v-if="!hideReply" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
+  <div class="status-el" v-if="!hideReply && !deleted" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
     <template v-if="muted && !noReplyLinks">
       <div class="media status container muted">
         <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
@@ -13,7 +13,7 @@
         <div class="media-body faint">
           <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
           <a v-else :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
-          <i class='fa icon-retweet retweeted'></i>
+          <i class='fa icon-retweet retweeted' :title="$t('tool_tip.repeat')"></i>
           {{$t('timeline.repeated')}}
         </div>
       </div>
@@ -41,7 +41,7 @@
                       {{status.in_reply_to_screen_name}}
                     </router-link>
                   </span>
-                  <a v-if="isReply && !noReplyLinks" href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)">
+                  <a v-if="isReply && !noReplyLinks" href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)" :title="$t('tool_tip.reply')">
                     <i class="icon-reply" @mouseenter="replyEnter(status.in_reply_to_status_id, $event)" @mouseout="replyLeave()"></i>
                   </a>
                 </span>
@@ -94,7 +94,7 @@
 
           <div v-if="!noHeading && !noReplyLinks" class='status-actions media-body'>
             <div v-if="loggedIn">
-              <a href="#" v-on:click.prevent="toggleReplying">
+              <a href="#" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')">
                 <i class="icon-reply" :class="{'icon-reply-active': replying}"></i>
               </a>
             </div>

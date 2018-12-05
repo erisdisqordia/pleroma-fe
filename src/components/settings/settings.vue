@@ -65,6 +65,12 @@
               </label>
             </li>
             <li>
+              <input type="checkbox" id="subjectHide" v-model="alwaysShowSubjectInputLocal">
+              <label for="subjectHide">
+                {{$t('settings.subject_input_always_show')}} {{$t('settings.instance_default', { value: alwaysShowSubjectInputDefault })}}
+              </label>
+            </li>
+            <li>
               <div>
                 {{$t('settings.subject_line_behavior')}}
                 <label for="subjectLineBehavior" class="select">

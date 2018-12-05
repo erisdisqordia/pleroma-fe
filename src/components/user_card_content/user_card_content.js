@@ -2,7 +2,7 @@ import StillImage from '../still-image/still-image.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
 export default {
-  props: [ 'user', 'switcher', 'selected', 'hideBio' ],
+  props: [ 'user', 'switcher', 'selected', 'hideBio', 'activatePanel' ],
   data () {
     return {
       hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
@@ -101,6 +101,14 @@ export default {
       if (this.switcher) {
         const store = this.$store
         store.commit('setProfileView', { v })
+      }
+    },
+    linkClicked ({target}) {
+      if (target.tagName === 'SPAN') {
+        target = target.parentNode
+      }
+      if (target.tagName === 'A') {
+        window.open(target.href, '_blank')
       }
     }
   }

@@ -17,7 +17,7 @@
             <small>{{$t('notifications.favorited_you')}}</small>
           </span>
           <span v-if="notification.type === 'repeat'">
-            <i class="fa icon-retweet lit"></i>
+            <i class="fa icon-retweet lit" :title="$t('tool_tip.repeat')"></i>
             <small>{{$t('notifications.repeated_you')}}</small>
           </span>
           <span v-if="notification.type === 'follow'">

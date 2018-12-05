@@ -14,7 +14,7 @@
       <StillImage :class="{'small': isSmall}" referrerpolicy="no-referrer" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
-    <video :class="{'small': isSmall}" v-if="type === 'video' && !hidden" @loadeddata="onVideoDataLoad" :src="attachment.url" controls :loop="loopVideo"></video>
+    <video :class="{'small': isSmall}" v-if="type === 'video' && !hidden" @loadeddata="onVideoDataLoad" :src="attachment.url" controls :loop="loopVideo" playsinline></video>
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 

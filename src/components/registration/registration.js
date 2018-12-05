@@ -1,7 +1,6 @@
 import { validationMixin } from 'vuelidate'
 import { required, sameAs } from 'vuelidate/lib/validators'
 import { mapActions, mapState } from 'vuex'
-import { SIGN_UP } from '../../mutation_types'
 
 const registration = {
   mixins: [validationMixin],
@@ -12,8 +11,7 @@ const registration = {
       username: '',
       password: '',
       confirm: ''
-    },
-    clientValidationFailed: false
+    }
   }),
   validations: {
     user: {
@@ -37,8 +35,8 @@ const registration = {
     ...mapState({
       registrationOpen: (state) => state.instance.registrationOpen,
       signedIn: (state) => !!state.users.currentUser,
-      isPending: (state) => state.users[SIGN_UP.isPending],
-      serverValidationErrors: (state) => state.users[SIGN_UP.errors],
+      isPending: (state) => state.users.signUpPending,
+      serverValidationErrors: (state) => state.users.signUpErrors,
       termsOfService: (state) => state.instance.tos
     })
   },

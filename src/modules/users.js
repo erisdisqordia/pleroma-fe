@@ -1,7 +1,6 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
-import { SIGN_UP } from '../mutation_types'
 import oauthApi from '../services/new_api/oauth'
 import {humanizeErrors} from './errors'
 
@@ -50,26 +49,27 @@ export const mutations = {
     const user = state.usersObject[id]
     set(user, 'highlight', highlighted)
   },
-  [SIGN_UP.PENDING] (state) {
-    state[SIGN_UP.isPending] = true
-    state[SIGN_UP.errors] = []
+  signUpPending (state) {
+    state.signUpPending = true
+    state.signUpErrors = []
   },
-  [SIGN_UP.SUCCESS] (state) {
-    state[SIGN_UP.isPending] = false
+  signUpSuccess (state) {
+    state.signUpPending = false
   },
-  [SIGN_UP.FAILURE] (state, errors) {
-    state[SIGN_UP.isPending] = false
-    state[SIGN_UP.errors] = errors
+  signUpFailure (state, errors) {
+    state.signUpPending = false
+    state.signUpErrors = errors
   }
 }
 
 export const defaultState = {
+  loggingIn: false,
   lastLoginName: false,
   currentUser: false,
   users: [],
   usersObject: {},
-  sign_up_pending: false,
-  sign_up_errors: []
+  signUpPending: false,
+  signUpErrors: []
 }
 
 const users = {
@@ -96,7 +96,7 @@ const users = {
       })
     },
     async signUp (store, userInfo) {
-      store.commit(SIGN_UP.PENDING)
+      store.commit('signUpPending')
 
       let rootState = store.rootState
 
@@ -113,13 +113,13 @@ const users = {
           username: userInfo.username,
           password: userInfo.password
         })
-        store.commit(SIGN_UP.SUCCESS)
+        store.commit('signUpSuccess')
         store.commit('setToken', result.access_token)
         store.dispatch('loginUser', result.access_token)
       } else {
         let data = await response.json()
         let errors = humanizeErrors(JSON.parse(data.error))
-        store.commit(SIGN_UP.FAILURE, errors)
+        store.commit('signUpFailure', errors)
         throw Error(errors)
       }
     },

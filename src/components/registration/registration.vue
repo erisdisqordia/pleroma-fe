@@ -7,29 +7,46 @@
       <form v-on:submit.prevent='submit(user)' class='registration-form'>
         <div class='container'>
           <div class='text-fields'>
-            <div class='form-group'>
-              <label for='username'>{{$t('login.username')}}</label>
-              <input :disabled="registering" v-model='user.username' class='form-control' id='username' placeholder='e.g. lain'>
+            <div class='form-group' :class="{ 'form-group--error': $v.user.username.$error }">
+              <label class='form--label' for='sign-up-username'>{{$t('login.username')}}</label>
+              <input :disabled="isPending" v-model.trim='$v.user.username.$model' class='form-control' id='sign-up-username' placeholder='e.g. lain'>
             </div>
-            <div class='form-group'>
-              <label for='fullname'>{{$t('registration.fullname')}}</label>
-              <input :disabled="registering" v-model='user.fullname' class='form-control' id='fullname' placeholder='e.g. Lain Iwakura'>
+            <div class="form-error" v-if="$v.user.username.$dirty">
+              <span class="error-required" v-if="!$v.user.username.required">Username is required.</span>
             </div>
+
             <div class='form-group'>
-              <label for='email'>{{$t('registration.email')}}</label>
-              <input :disabled="registering" v-model='user.email' class='form-control' id='email' type="email">
+              <label class='form--label' for='sign-up-fullname'>{{$t('registration.fullname')}}</label>
+              <input :disabled="isPending" v-model='user.fullname' class='form-control' id='sign-up-fullname' placeholder='e.g. Lain Iwakura'>
             </div>
-            <div class='form-group'>
-              <label for='bio'>{{$t('registration.bio')}}</label>
-              <input :disabled="registering" v-model='user.bio' class='form-control' id='bio'>
+
+            <div class='form-group' :class="{ 'form-group--error': $v.user.email.$error }">
+              <label class='form--label' for='email'>{{$t('registration.email')}}</label>
+              <input :disabled="isPending" v-model='$v.user.email.$model' class='form-control' id='email' type="email">
             </div>
-            <div class='form-group'>
-              <label for='password'>{{$t('login.password')}}</label>
-              <input :disabled="registering" v-model='user.password' class='form-control' id='password' type='password'>
+            <div class="form-error" v-if="$v.user.email.$dirty">
+              <span class="error-required" v-if="!$v.user.email.required">Email is required.</span>
             </div>
+
             <div class='form-group'>
-              <label for='password_confirmation'>{{$t('registration.password_confirm')}}</label>
-              <input :disabled="registering" v-model='user.confirm' class='form-control' id='password_confirmation' type='password'>
+              <label class='form--label' for='bio'>{{$t('registration.bio')}}</label>
+              <input :disabled="isPending" v-model='user.bio' class='form-control' id='bio'>
+            </div>
+
+            <div class='form-group' :class="{ 'form-group--error': $v.user.password.$error }">
+              <label class='form--label' for='sign-up-password'>{{$t('login.password')}}</label>
+              <input :disabled="isPending" v-model='user.password' class='form-control' id='sign-up-password' type='password'>
+            </div>
+            <div class="form-error" v-if="$v.user.password.$dirty">
+              <span class="error-required" v-if="!$v.user.password.required">Password is required.</span>
+            </div>
+
+            <div class='form-group' :class="{ 'form-group--error': $v.user.confirm.$error }">
+              <label class='form--label' for='sign-up-password-confirmation'>{{$t('registration.password_confirm')}}</label>
+              <input :disabled="isPending" v-model='user.confirm' class='form-control' id='sign-up-password-confirmation' type='password'>
+            </div>
+            <div class="form-error" v-if="$v.user.confirm.$dirty">
+              <span class="error-required" v-if="!$v.user.confirm.required">Password confirmation is required.</span>
             </div>
             <!--
             <div class='form-group'>
@@ -43,15 +60,18 @@
               <input disabled='true' v-model='token' class='form-control' id='token' type='text'>
             </div>
             <div class='form-group'>
-              <button :disabled="registering" type='submit' class='btn btn-default'>{{$t('general.submit')}}</button>
+              <button :disabled="isPending" type='submit' class='btn btn-default'>{{$t('general.submit')}}</button>
             </div>
           </div>
           <div class='terms-of-service' v-html="termsofservice">
           </div>
         </div>
-        <div v-if="errors.length" class='form-group'>
+        <div v-if="clientValidationFailed">
+          <span>Form is invalid</span>
+        </div>
+        <div v-if="serverValidationErrors.length" class='form-group'>
           <div class='alert error'>
-            <span v-for="error in errors">{{error}}</span>
+            <span v-for="error in serverValidationErrors">{{error}}</span>
           </div>
         </div>
       </form>
@@ -91,6 +111,27 @@
     flex-direction: column;
     padding: 0.3em 0.0em 0.3em;
     line-height:24px;
+    margin-bottom: 1em;
+  }
+
+  .form-group--error {
+    animation-name: shakeError;
+    animation-duration: .6s;
+    animation-timing-function: ease-in-out;
+  }
+
+  .form-group--error .form--label {
+    color: #f04124;
+  }
+
+  .form-error {
+    margin-top: -0.7em;
+    margin-bottom: 0.5em;
+
+    text-align: left;
+    span {
+      font-size: 12px;
+    }
   }
 
   form textarea {

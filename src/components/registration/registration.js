@@ -1,12 +1,27 @@
-import oauthApi from '../../services/new_api/oauth.js'
-import { humanizeErrors } from '../../modules/errors'
+import { validationMixin } from 'vuelidate'
+import { required } from 'vuelidate/lib/validators'
+import { mapActions, mapState } from 'vuex'
+import { SIGN_UP } from "../../mutation_types"
 
 const registration = {
+  mixins: [validationMixin],
   data: () => ({
-    user: {},
-    errors: [],
-    registering: false
+    user: {
+      email: '',
+      username: '',
+      password: '',
+      confirm: ''
+    },
+    clientValidationFailed: false
   }),
+  validations: {
+    user: {
+      email: { required },
+      username: { required },
+      password: { required },
+      confirm: { required }
+    }
+  },
   created () {
     if ((!this.$store.state.instance.registrationOpen && !this.token) || !!this.$store.state.users.currentUser) {
       this.$router.push('/main/all')
@@ -17,43 +32,24 @@ const registration = {
     }
   },
   computed: {
-    termsofservice () { return this.$store.state.instance.tos },
-    token () { return this.$route.params.token }
+    token () { return this.$route.params.token },
+    ...mapState({
+      isPending: (state) => state.users[SIGN_UP.isPending],
+      serverValidationErrors: (state) => state.users[SIGN_UP.errors],
+      termsofservice: 'instance.tos',
+    })
   },
   methods: {
+    ...mapActions(['signUp']),
     submit () {
-      this.registering = true
       this.user.nickname = this.user.username
       this.user.token = this.token
-      this.$store.state.api.backendInteractor.register(this.user).then(
-        (response) => {
-          if (response.ok) {
-            const data = {
-              oauth: this.$store.state.oauth,
-              instance: this.$store.state.instance.server
-            }
-            oauthApi.getOrCreateApp(data).then((app) => {
-              oauthApi.getTokenWithCredentials(
-                {
-                  app,
-                  instance: data.instance,
-                  username: this.user.username,
-                  password: this.user.password
-                })
-                .then((result) => {
-                  this.$store.commit('setToken', result.access_token)
-                  this.$store.dispatch('loginUser', result.access_token)
-                  this.$router.push('/main/friends')
-                })
-            })
-          } else {
-            this.registering = false
-            response.json().then((data) => {
-              this.errors = humanizeErrors(JSON.parse(data.error))
-            })
-          }
-        },
-      )
+
+      this.$v.$touch()
+
+      if (!this.$v.$invalid) {
+        this.signUp(this.user)
+      }
     }
   }
 }

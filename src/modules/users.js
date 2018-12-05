@@ -1,6 +1,9 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
+import { SIGN_UP } from '../mutation_types'
+import oauthApi from '../services/new_api/oauth'
+import {humanizeErrors} from './errors'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
@@ -46,15 +49,26 @@ export const mutations = {
   setColor (state, { user: {id}, highlighted }) {
     const user = state.usersObject[id]
     set(user, 'highlight', highlighted)
+  },
+  [SIGN_UP.PENDING] (state) {
+    state[SIGN_UP.isPending] = true
+  },
+  [SIGN_UP.SUCCESS] (state) {
+    state[SIGN_UP.isPending] = false
+  },
+  [SIGN_UP.FAILURE] (state, errors) {
+    state[SIGN_UP.isPending] = false
+    state[SIGN_UP.errors] = [...state[SIGN_UP.errors], ...errors]
   }
 }
 
 export const defaultState = {
   lastLoginName: false,
   currentUser: false,
-  loggingIn: false,
   users: [],
-  usersObject: {}
+  usersObject: {},
+  sign_up_pending: false,
+  sign_up_errors: []
 }
 
 const users = {
@@ -79,6 +93,32 @@ const users = {
       each(compact(map(statuses, 'retweeted_status')), (status) => {
         store.commit('setUserForStatus', status)
       })
+    },
+    async signUp (store, userInfo) {
+      store.commit(SIGN_UP.PENDING)
+
+      let response = await store.rootState.api.backendInteractor.register(userInfo)
+      if (response.ok) {
+        const data = {
+          oauth: store.state.oauth,
+          instance: store.state.instance.server
+        }
+        let app = await oauthApi.getOrCreateApp(data)
+        let result = await oauthApi.getTokenWithCredentials({
+          app,
+          instance: data.instance,
+          username: this.user.username,
+          password: this.user.password
+        })
+        store.commit(SIGN_UP.SUCCESS)
+        store.commit('setToken', result.access_token)
+        store.dispatch('loginUser', result.access_token)
+        this.$router.push('/main/friends')
+      } else {
+        let data = await response.json()
+        let errors = humanizeErrors(JSON.parse(data.error))
+        store.commit(SIGN_UP.FAILURE, errors)
+      }
     },
     logout (store) {
       store.commit('clearCurrentUser')

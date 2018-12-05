@@ -206,24 +206,23 @@ i[class*=icon-] {
   padding: 0 10px 0 10px;
 }
 
-.gaps {
-  margin: -1em 0 0 -1em;
-}
-
 .item {
   flex: 1;
   line-height: 50px;
   height: 50px;
   overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
 
   .nav-icon {
     font-size: 1.1em;
     margin-left: 0.4em;
   }
-}
 
-.gaps > .item {
-  padding: 1em 0 0 1em;
+  &.right {
+    justify-content: right;
+    padding-right: 20px;
+  }
 }
 
 .auto-size {
@@ -271,8 +270,6 @@ nav {
   }
 
   .inner-nav {
-    padding-left: 20px;
-    padding-right: 20px;
     display: flex;
     align-items: center;
     flex-basis: 970px;
@@ -392,6 +389,23 @@ nav {
   color: $fallback--faint;
   color: var(--faint, $fallback--faint);
   box-shadow: 0px 0px 4px rgba(0,0,0,.6);
+
+  .back-button {
+    display: block;
+    max-width: 99px;
+    transition-property: opacity, max-width;
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
+
+    i {
+      margin: 0 1em;
+    }
+
+    &.hidden {
+      opacity: 0;
+      max-width: 20px;
+    }
+  }
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -426,6 +440,7 @@ nav {
   display: none;
   width: 100%;
   height: 46px;
+
   button {
     display: block;
     flex: 1;
@@ -439,6 +454,16 @@ nav {
   body {
     overflow-y: scroll;
   }
+
+  nav {
+    .back-button {
+      display: none;
+    }
+    .site-name {
+      padding-left: 20px;
+    }
+  }
+
   .sidebar-bounds {
     overflow: hidden;
     max-height: 100vh;
@@ -503,11 +528,6 @@ nav {
   .panel {
     margin: 0.5em 0 0.5em 0;
   }
-}
-
-.item.right {
-  text-align: right;
-  padding-right: 20px;
 }
 
 .visibility-tray {

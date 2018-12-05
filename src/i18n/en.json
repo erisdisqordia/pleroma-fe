@@ -29,6 +29,7 @@
     "username": "Username"
   },
   "nav": {
+    "back": "Back",
     "chat": "Local Chat",
     "friend_requests": "Follow Requests",
     "mentions": "Mentions",

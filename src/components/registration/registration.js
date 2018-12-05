@@ -1,5 +1,5 @@
 import { validationMixin } from 'vuelidate'
-import { required, sameAs, email } from 'vuelidate/lib/validators'
+import { required, sameAs } from 'vuelidate/lib/validators'
 import { mapActions, mapState } from 'vuex'
 import { SIGN_UP } from '../../mutation_types'
 
@@ -8,6 +8,7 @@ const registration = {
   data: () => ({
     user: {
       email: '',
+      fullname: '',
       username: '',
       password: '',
       confirm: ''
@@ -16,8 +17,9 @@ const registration = {
   }),
   validations: {
     user: {
-      email: { required, email },
+      email: { required },
       username: { required },
+      fullname: { required },
       password: { required },
       confirm: {
         required,
@@ -57,7 +59,7 @@ const registration = {
           await this.signUp(this.user)
           this.$router.push('/main/friends')
         } catch (error) {
-          console.log("Registration failed: " + error)
+          console.log('Registration failed: ' + error)
         }
       }
     }

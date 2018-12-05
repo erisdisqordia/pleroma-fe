@@ -58,8 +58,8 @@
     "token": "Код приглашения",
     "validations": {
       "username_required": "не должно быть пустым",
+      "fullname_required": "не должно быть пустым",
       "email_required": "не должен быть пустым",
-      "email_valid": "должен быть корректный email адрес",
       "password_required": "не должен быть пустым",
       "password_confirmation_required": "не должно быть пустым",
       "password_confirmation_match": "должно совпадать с паролем"

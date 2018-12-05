@@ -74,9 +74,9 @@
     "registration": "Registration",
     "token": "Invite token",
     "validations": {
-      "username_required": "username should not be blank",
+      "username_required": "should not be blank",
+      "fullname_required": "should not be blank",
       "email_required": "should not be blank",
-      "email_valid": "should be valid email",
       "password_required": "should not be blank",
       "password_confirmation_required": "should not be blank",
       "password_confirmation_match": "should be the same as password"

@@ -19,9 +19,16 @@
               </ul>
             </div>
 
-            <div class='form-group'>
+            <div class='form-group' :class="{ 'form-group--error': $v.user.fullname.$error }">
               <label class='form--label' for='sign-up-fullname'>{{$t('registration.fullname')}}</label>
-              <input :disabled="isPending" v-model='user.fullname' class='form-control' id='sign-up-fullname' placeholder='e.g. Lain Iwakura'>
+              <input :disabled="isPending" v-model.trim='$v.user.fullname.$model' class='form-control' id='sign-up-fullname' placeholder='e.g. Lain Iwakura'>
+            </div>
+            <div class="form-error" v-if="$v.user.fullname.$dirty">
+              <ul>
+                <li v-if="!$v.user.fullname.required">
+                  <span>{{$t('registration.validations.fullname_required')}}</span>
+                </li>
+              </ul>
             </div>
 
             <div class='form-group' :class="{ 'form-group--error': $v.user.email.$error }">
@@ -32,9 +39,6 @@
               <ul>
                 <li v-if="!$v.user.email.required">
                   <span>{{$t('registration.validations.email_required')}}</span>
-                </li>
-                <li v-if="!$v.user.email.email">
-                  <span>{{$t('registration.validations.email_valid')}}</span>
                 </li>
               </ul>
             </div>
@@ -136,6 +140,24 @@
     margin-bottom: 1em;
   }
 
+  @keyframes shakeError {
+    0% {
+      transform: translateX(0); }
+    15% {
+      transform: translateX(0.375rem); }
+    30% {
+      transform: translateX(-0.375rem); }
+    45% {
+      transform: translateX(0.375rem); }
+    60% {
+      transform: translateX(-0.375rem); }
+    75% {
+      transform: translateX(0.375rem); }
+    90% {
+      transform: translateX(-0.375rem); }
+    100% {
+      transform: translateX(0); } }
+
   .form-group--error {
     animation-name: shakeError;
     animation-duration: .6s;
@@ -148,13 +170,11 @@
 
   .form-error {
     margin-top: -0.7em;
-    margin-bottom: 0.5em;
-
     text-align: left;
+
     span {
       font-size: 12px;
     }
-
   }
 
   .form-error ul {

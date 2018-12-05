@@ -31,10 +31,6 @@ const registration = {
     if ((!this.registrationOpen && !this.token) || this.signedIn) {
       this.$router.push('/main/all')
     }
-    // // Seems like this doesn't work at first page open for some reason
-    // if (this.$store.state.instance.registrationOpen && this.token) {
-    //   this.$router.push('/registration')
-    // }
   },
   computed: {
     token () { return this.$route.params.token },
@@ -43,7 +39,7 @@ const registration = {
       signedIn: (state) => !!state.users.currentUser,
       isPending: (state) => state.users[SIGN_UP.isPending],
       serverValidationErrors: (state) => state.users[SIGN_UP.errors],
-      termsofservice: (state) => state.instance.tos
+      termsOfService: (state) => state.instance.tos
     })
   },
   methods: {

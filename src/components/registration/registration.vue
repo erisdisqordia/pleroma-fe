@@ -74,13 +74,7 @@
                 </li>
               </ul>
             </div>
-            <!--
-            <div class='form-group'>
-              <label for='captcha'>Captcha</label>
-              <img src='/qvittersimplesecurity/captcha.jpg' alt='captcha' class='captcha'>
-              <input :disabled="registering" v-model='user.captcha' placeholder='Enter captcha' type='test' class='form-control' id='captcha'>
-            </div>
-            -->
+
             <div class='form-group' v-if='token' >
               <label for='token'>{{$t('registration.token')}}</label>
               <input disabled='true' v-model='token' class='form-control' id='token' type='text'>
@@ -89,11 +83,9 @@
               <button :disabled="isPending" type='submit' class='btn btn-default'>{{$t('general.submit')}}</button>
             </div>
           </div>
-          <div class='terms-of-service' v-html="termsofservice">
+
+          <div class='terms-of-service' v-html="termsOfService">
           </div>
-        </div>
-        <div v-if="clientValidationFailed">
-          <span>Form is invalid</span>
         </div>
         <div v-if="serverValidationErrors.length" class='form-group'>
           <div class='alert error'>
@@ -165,7 +157,7 @@
   }
 
   .form-group--error .form--label {
-    color: #f04124;
+    color: var(--cRed, #f04124);
   }
 
   .form-error {
@@ -198,8 +190,6 @@
   }
 
   .btn {
-    //align-self: flex-start;
-    //width: 10em;
     margin-top: 0.6em;
     height: 28px;
   }

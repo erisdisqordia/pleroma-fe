@@ -100,6 +100,7 @@
 <script src="./registration.js"></script>
 <style lang="scss">
 @import '../../_variables.scss';
+$validations-cRed: #f04124;
 
 .registration-form {
   display: flex;
@@ -157,7 +158,8 @@
   }
 
   .form-group--error .form--label {
-    color: var(--cRed, #f04124);
+    color: var(--cRed, $validations-cRed);
+    color: $validations-cRed;
   }
 
   .form-error {

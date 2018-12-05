@@ -158,8 +158,8 @@ $validations-cRed: #f04124;
   }
 
   .form-group--error .form--label {
-    color: var(--cRed, $validations-cRed);
     color: $validations-cRed;
+    color: var(--cRed, $validations-cRed);
   }
 
   .form-error {

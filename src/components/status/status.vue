@@ -461,7 +461,7 @@
   border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
 }
 
-.avatar {
+.avatar.still-image {
   width: 48px;
   height: 48px;
   border-radius: $fallback--avatarRadius;

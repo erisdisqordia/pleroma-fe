@@ -14,16 +14,16 @@ describe('routes', () => {
   it('root path', () => {
     router.push('/p/main/all')
 
-    const mathcedComponents = router.getMatchedComponents()
+    const matchedComponents = router.getMatchedComponents()
 
-    expect(mathcedComponents[0].components.hasOwnProperty('Timeline'))
+    expect(matchedComponents[0].components.hasOwnProperty('Timeline'))
   })
 
   it('user\'s profile', () => {
     router.push('/fake-user-name')
 
-    const mathcedComponents = router.getMatchedComponents()
+    const matchedComponents = router.getMatchedComponents()
 
-    expect(mathcedComponents[0].components.hasOwnProperty('UserProfile'))
+    expect(matchedComponents[0].components.hasOwnProperty('UserProfile'))
   })
 })

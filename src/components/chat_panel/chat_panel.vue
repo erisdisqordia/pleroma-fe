@@ -13,7 +13,7 @@
             <img :src="message.author.avatar" />
           </span>
           <div class="chat-content">
-            <router-link class="chat-name" :to="{ name: 'user-profile', params: { id: message.author.id } }">
+            <router-link class="chat-name" :to="{ name: 'user-profile', params: { name: message.author.username } }">
               {{message.author.username}}
             </router-link>
             <br>

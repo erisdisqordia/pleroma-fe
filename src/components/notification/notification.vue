@@ -28,7 +28,7 @@
         <small class="timeago"><router-link v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
       </span>
       <div class="follow-text" v-if="notification.type === 'follow'">
-        <router-link :to="{ name: 'user-profile', params: { id: notification.action.user.id } }">@{{notification.action.user.screen_name}}</router-link>
+        <router-link :to="{ name: 'user-profile', params: { name: notification.action.user.screen_name } }">@{{notification.action.user.screen_name}}</router-link>
       </div>
       <template v-else>
         <status v-if="notification.status"  class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>

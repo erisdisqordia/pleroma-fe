@@ -15,18 +15,23 @@ const UserProfile = {
   computed: {
     timeline () { return this.$store.state.statuses.timelines.user },
     userId () {
-      return this.$route.params.id
+      return this.user.id
+    },
+    userName () {
+      return this.$route.params.name
     },
     user () {
       if (this.timeline.statuses[0]) {
         return this.timeline.statuses[0].user
       } else {
-        return this.$store.state.users.usersObject[this.userId] || false
+        return Object.values(this.$store.state.users.usersObject).filter(user => {
+          return user.name === this.userName
+        })[0] || false
       }
     }
   },
   watch: {
-    userId () {
+    userName () {
       this.$store.dispatch('stopFetching', 'user')
       this.$store.commit('clearTimeline', { timeline: 'user' })
       this.$store.dispatch('startFetching', ['user', this.userId])

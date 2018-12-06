@@ -7,7 +7,7 @@
         path="post_status.account_not_locked_warning"
         tag="p"
         class="visibility-notice">
-        <router-link to="/user-settings">{{ $t('post_status.account_not_locked_warning_link') }}</router-link>
+        <router-link :to="{ name: 'user-settings' }">{{ $t('post_status.account_not_locked_warning_link') }}</router-link>
       </i18n>
       <p v-if="this.newStatus.visibility == 'direct'" class="visibility-notice">{{ $t('post_status.direct_warning') }}</p>
       <input

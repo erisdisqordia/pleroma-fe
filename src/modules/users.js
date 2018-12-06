@@ -1,6 +1,8 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
+import oauthApi from '../services/new_api/oauth'
+import {humanizeErrors} from './errors'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
@@ -46,15 +48,28 @@ export const mutations = {
   setColor (state, { user: {id}, highlighted }) {
     const user = state.usersObject[id]
     set(user, 'highlight', highlighted)
+  },
+  signUpPending (state) {
+    state.signUpPending = true
+    state.signUpErrors = []
+  },
+  signUpSuccess (state) {
+    state.signUpPending = false
+  },
+  signUpFailure (state, errors) {
+    state.signUpPending = false
+    state.signUpErrors = errors
   }
 }
 
 export const defaultState = {
+  loggingIn: false,
   lastLoginName: false,
   currentUser: false,
-  loggingIn: false,
   users: [],
-  usersObject: {}
+  usersObject: {},
+  signUpPending: false,
+  signUpErrors: []
 }
 
 const users = {
@@ -79,6 +94,34 @@ const users = {
       each(compact(map(statuses, 'retweeted_status')), (status) => {
         store.commit('setUserForStatus', status)
       })
+    },
+    async signUp (store, userInfo) {
+      store.commit('signUpPending')
+
+      let rootState = store.rootState
+
+      let response = await rootState.api.backendInteractor.register(userInfo)
+      if (response.ok) {
+        const data = {
+          oauth: rootState.oauth,
+          instance: rootState.instance.server
+        }
+        let app = await oauthApi.getOrCreateApp(data)
+        let result = await oauthApi.getTokenWithCredentials({
+          app,
+          instance: data.instance,
+          username: userInfo.username,
+          password: userInfo.password
+        })
+        store.commit('signUpSuccess')
+        store.commit('setToken', result.access_token)
+        store.dispatch('loginUser', result.access_token)
+      } else {
+        let data = await response.json()
+        let errors = humanizeErrors(JSON.parse(data.error))
+        store.commit('signUpFailure', errors)
+        throw Error(errors)
+      }
     },
     logout (store) {
       store.commit('clearCurrentUser')

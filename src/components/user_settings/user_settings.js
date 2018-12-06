@@ -218,7 +218,7 @@ const UserSettings = {
         .then((res) => {
           if (res.status === 'success') {
             this.$store.dispatch('logout')
-            this.$router.push('/main/all')
+            this.$router.push('/p/main/all')
           } else {
             this.deleteAccountError = res.error
           }

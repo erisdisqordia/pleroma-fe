@@ -27,7 +27,7 @@ const registration = {
   },
   created () {
     if ((!this.registrationOpen && !this.token) || this.signedIn) {
-      this.$router.push('/main/all')
+      this.$router.push('/p/main/all')
     }
   },
   computed: {
@@ -51,7 +51,7 @@ const registration = {
       if (!this.$v.$invalid) {
         try {
           await this.signUp(this.user)
-          this.$router.push('/main/friends')
+          this.$router.push('/p/main/friends')
         } catch (error) {
           console.warn('Registration failed: ' + error)
         }

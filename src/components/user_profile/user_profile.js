@@ -4,9 +4,9 @@ import Timeline from '../timeline/timeline.vue'
 const UserProfile = {
   created () {
     this.$store.commit('clearTimeline', { timeline: 'user' })
-    this.$store.dispatch('startFetching', ['user', this.userId])
-    if (!this.$store.state.users.usersObject[this.userId]) {
-      this.$store.dispatch('fetchUser', this.userId)
+    this.$store.dispatch('startFetching', ['user', this.userName])
+    if (!this.user) {
+      this.$store.dispatch('fetchUser', this.userName)
     }
   },
   destroyed () {
@@ -34,7 +34,7 @@ const UserProfile = {
     userName () {
       this.$store.dispatch('stopFetching', 'user')
       this.$store.commit('clearTimeline', { timeline: 'user' })
-      this.$store.dispatch('startFetching', ['user', this.userId])
+      this.$store.dispatch('startFetching', ['user', this.userName])
     }
   },
   components: {

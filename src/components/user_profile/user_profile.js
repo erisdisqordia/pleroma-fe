@@ -25,7 +25,7 @@ const UserProfile = {
         return this.timeline.statuses[0].user
       } else {
         return Object.values(this.$store.state.users.usersObject).filter(user => {
-          return user.name === this.userName
+          return user.screen_name === this.userName
         })[0] || false
       }
     }

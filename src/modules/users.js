@@ -2,6 +2,8 @@ import backendInteractorService from '../services/backend_interactor_service/bac
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
 
+import registerPushNotifications from '../services/push/push.js'
+
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
   if (!item) { return false }
@@ -125,6 +127,8 @@ const users = {
                   // Fetch our friends
                   store.rootState.api.backendInteractor.fetchFriends({id: user.id})
                     .then((friends) => commit('addNewUsers', friends))
+
+                  registerPushNotifications(store)
                 })
             } else {
               // Authentication failed

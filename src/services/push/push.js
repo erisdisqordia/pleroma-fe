@@ -1,4 +1,3 @@
-
 function urlBase64ToUint8Array (base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4)
   const base64 = (base64String + padding)
@@ -46,6 +45,10 @@ function askPermission () {
 }
 
 function subscribe (registration, store) {
+  if (!store.rootState.config.webPushNotifications) {
+    return Promise.reject(new Error('Web Push is disabled in config'))
+  }
+
   if (!store.rootState.instance.vapidPublicKey) {
     return Promise.reject(new Error('VAPID publick key is not found'))
   }

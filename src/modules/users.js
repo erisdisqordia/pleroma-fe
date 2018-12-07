@@ -1,8 +1,7 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
+import registerPushNotifications from '../services/push/push.js'
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
-
-import registerPushNotifications from '../services/push/push.js'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
@@ -119,10 +118,6 @@ const users = {
                     each(mutedUsers, (user) => { user.muted = true })
                     store.commit('addNewUsers', mutedUsers)
                   })
-
-                  if ('Notification' in window && window.Notification.permission === 'default') {
-                    window.Notification.requestPermission()
-                  }
 
                   // Fetch our friends
                   store.rootState.api.backendInteractor.fetchFriends({id: user.id})

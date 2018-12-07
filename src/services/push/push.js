@@ -26,7 +26,11 @@ function registerServiceWorker () {
 
 function askPermission () {
   return new Promise(function (resolve, reject) {
-    if (!window.Notification) return resolve('Notifications disabled')
+    if (!window.Notification) return reject(new Error('Notifications disabled'))
+
+    if (window.Notification.permission !== 'default') {
+      return resolve(window.Notification.permission)
+    }
 
     const permissionResult = window.Notification.requestPermission(function (result) {
       resolve(result)
@@ -42,6 +46,10 @@ function askPermission () {
 }
 
 function subscribe (registration, store) {
+  if (!store.rootState.instance.vapidPublicKey) {
+    return Promise.reject(new Error('VAPID publick key is not found'))
+  }
+
   const subscribeOptions = {
     userVisibleOnly: true,
     applicationServerKey: urlBase64ToUint8Array(store.rootState.instance.vapidPublicKey)

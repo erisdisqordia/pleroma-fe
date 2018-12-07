@@ -10,6 +10,7 @@ import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
 import chatModule from './modules/chat.js'
 import oauthModule from './modules/oauth.js'
+import pushNotificationsModule from './modules/pushNotifications.js'
 
 import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
@@ -60,12 +61,13 @@ createPersistedState(persistedStateOptions).then((persistedState) => {
       api: apiModule,
       config: configModule,
       chat: chatModule,
-      oauth: oauthModule
+      oauth: oauthModule,
+      pushNotifications: pushNotificationsModule
     },
     plugins: [persistedState],
     strict: false // Socket modifies itself, let's ignore this for now.
     // strict: process.env.NODE_ENV !== 'production'
   })
 
-  afterStoreSetup({store, i18n})
+  afterStoreSetup({ store, i18n })
 })

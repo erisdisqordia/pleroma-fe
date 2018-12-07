@@ -50,7 +50,7 @@ function subscribe (registration, store) {
   }
 
   if (!store.rootState.instance.vapidPublicKey) {
-    return Promise.reject(new Error('VAPID publick key is not found'))
+    return Promise.reject(new Error('VAPID public key is not found'))
   }
 
   const subscribeOptions = {

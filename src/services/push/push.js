@@ -45,17 +45,17 @@ function askPermission () {
 }
 
 function subscribe (registration, store) {
-  if (!store.state.config.webPushNotifications) {
+  if (!store.rootState.config.webPushNotifications) {
     return Promise.reject(new Error('Web Push is disabled in config'))
   }
 
-  if (!store.state.subscribe.vapidPublicKey) {
+  if (!store.rootState.instance.vapidPublicKey) {
     return Promise.reject(new Error('VAPID public key is not found'))
   }
 
   const subscribeOptions = {
     userVisibleOnly: true,
-    applicationServerKey: urlBase64ToUint8Array(store.state.subscribe.vapidPublicKey)
+    applicationServerKey: urlBase64ToUint8Array(store.rootState.instance.vapidPublicKey)
   }
   return registration.pushManager.subscribe(subscribeOptions)
 }
@@ -65,7 +65,7 @@ function sendSubscriptionToBackEnd (subscription, store) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${store.state.subscribe.token}`
+      'Authorization': `Bearer ${store.rootState.oauth.token}`
     },
     body: JSON.stringify({
       subscription,

@@ -1,4 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
+import registerPushNotifications from '../services/push/push.js'
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
 
@@ -119,8 +120,10 @@ const users = {
                   })
 
                   // Fetch our friends
-                  store.rootState.api.backendInteractor.fetchFriends({ id: user.id })
+                  store.rootState.api.backendInteractor.fetchFriends({id: user.id})
                     .then((friends) => commit('addNewUsers', friends))
+
+                  registerPushNotifications(store)
                 })
             } else {
               // Authentication failed

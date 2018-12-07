@@ -10,6 +10,7 @@ import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
 import chatModule from './modules/chat.js'
 import oauthModule from './modules/oauth.js'
+import subscribeModule from './modules/subscribe.js'
 
 import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
@@ -60,7 +61,8 @@ createPersistedState(persistedStateOptions).then((persistedState) => {
       api: apiModule,
       config: configModule,
       chat: chatModule,
-      oauth: oauthModule
+      oauth: oauthModule,
+      subscribe: subscribeModule
     },
     plugins: [persistedState],
     strict: false // Socket modifies itself, let's ignore this for now.

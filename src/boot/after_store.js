@@ -21,11 +21,12 @@ const afterStoreSetup = ({store, i18n}) => {
   window.fetch('/api/statusnet/config.json')
     .then((res) => res.json())
     .then((data) => {
-      const {name, closed: registrationClosed, textlimit, server} = data.site
+      const {name, closed: registrationClosed, textlimit, uploadlimit, server} = data.site
 
       store.dispatch('setInstanceOption', { name: 'name', value: name })
       store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
       store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
+      store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadlimit) })
       store.dispatch('setInstanceOption', { name: 'server', value: server })
 
       var apiConfig = data.site.pleromafe

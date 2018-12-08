@@ -52,6 +52,8 @@
     "account_not_locked_warning": "Your account is not {0}. Anyone can follow you to view your follower-only posts.",
     "account_not_locked_warning_link": "locked",
     "attachments_sensitive": "Mark attachments as sensitive",
+    "upload_error": "Upload failed.",
+    "upload_error_file_too_big": "Upload failed. File too big",
     "content_type": {
       "plain_text": "Plain text"
     },

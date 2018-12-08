@@ -14,15 +14,23 @@
         <div @click.prevent class="alert transparent" v-if="!currentSaveStateNotice.error">
           {{ $t('settings.saving_ok') }}
         </div>
-    </template>
+      </template>
     </transition>
   </div>
   <div class="panel-body">
     <tab-switcher>
       <div :label="$t('settings.general')" >
         <div class="setting-item">
-          <h2>{{ $t('settings.interfaceLanguage') }}</h2>
-          <interface-language-switcher />
+          <h2>{{ $t('settings.interface') }}</h2>
+          <ul class="setting-list">
+            <li>
+              <interface-language-switcher />
+            </li>
+            <li>
+              <input type="checkbox" id="hideISP" v-model="hideISPLocal">
+              <label for="hideISP">{{$t('settings.hide_isp')}}</label>
+            </li>
+          </ul>
         </div>
         <div class="setting-item">
           <h2>{{$t('nav.timeline')}}</h2>

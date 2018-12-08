@@ -1,5 +1,8 @@
 <template>
   <div>
+    <label for="interface-language-switcher">
+      {{ $t('settings.interfaceLanguage') }}
+    </label>
     <label for="interface-language-switcher" class='select'>
       <select id="interface-language-switcher" v-model="language">
         <option v-for="(langCode, i) in languageCodes" :value="langCode">

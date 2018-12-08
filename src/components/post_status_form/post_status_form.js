@@ -263,7 +263,7 @@ const PostStatusForm = {
       this.newStatus.files.splice(index, 1)
     },
     uploadFailed (errString, templateArgs) {
-      templateArgs = templateArgs || {};
+      templateArgs = templateArgs || {}
       this.error = this.$t('post_status.upload_error') + ' ' + this.$t('post_status.' + errString, templateArgs)
       this.enableSubmit()
     },

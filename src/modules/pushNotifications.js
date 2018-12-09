@@ -12,16 +12,23 @@ const subscribe = {
     setVapidPublicKey (state, vapidPublicKey) {
       state.vapidPublicKey = vapidPublicKey
     }
-
   },
   actions: {
     setInstanceOption (store, { name, value }) {
-      store.commit('setVapidPublicKey', value)
-      if (store.state.token) registerPushNotifications(this)
+      if (name === 'vapidPublicKey') {
+        store.commit('setVapidPublicKey', value)
+
+        if (store.state.token) {
+          registerPushNotifications(store.rootState.config.webPushNotifications, value, store.state.token)
+        }
+      }
     },
     setCurrentUser (store, user) {
       store.commit('setApiToken', user.credentials)
-      if (store.state.vapidPublicKey) registerPushNotifications(this)
+
+      if (store.state.vapidPublicKey) {
+        registerPushNotifications(store.rootState.config.webPushNotifications, store.state.vapidPublicKey, user.credentials)
+      }
     }
   }
 }

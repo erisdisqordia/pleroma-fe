@@ -14,58 +14,42 @@ function isPushSupported () {
 
 function registerServiceWorker () {
   return navigator.serviceWorker.register('/static/sw.js')
-    .then(function (registration) {
-      console.log('Service worker successfully registered.')
-      return registration
-    })
-    .catch(function (err) {
-      console.error('Unable to register service worker.', err)
-    })
+    .catch((err) => console.error('Unable to register service worker.', err))
 }
 
 function askPermission () {
-  return new Promise(function (resolve, reject) {
-    if (!window.Notification) return reject(new Error('Notifications disabled'))
+  return new Promise((resolve, reject) => {
+    const Notification = window.Notification
 
-    if (window.Notification.permission !== 'default') {
-      return resolve(window.Notification.permission)
-    }
+    if (!Notification) return reject(new Error('Notifications disabled'))
+    if (Notification.permission !== 'default') return resolve(Notification.permission)
 
-    const permissionResult = window.Notification.requestPermission(function (result) {
-      resolve(result)
-    })
+    const permissionResult = Notification.requestPermission(resolve)
 
     if (permissionResult) permissionResult.then(resolve, reject)
-  }).then(function (permissionResult) {
-    if (permissionResult !== 'granted') {
-      throw new Error('We weren\'t granted permission.')
-    }
+  }).then((permissionResult) => {
+    if (permissionResult !== 'granted') throw new Error('We weren\'t granted permission.')
     return permissionResult
   })
 }
 
-function subscribe (registration, store) {
-  if (!store.rootState.config.webPushNotifications) {
-    return Promise.reject(new Error('Web Push is disabled in config'))
-  }
-
-  if (!store.rootState.instance.vapidPublicKey) {
-    return Promise.reject(new Error('VAPID public key is not found'))
-  }
+function subscribe (registration, isEnabled, vapidPublicKey) {
+  if (!isEnabled) return Promise.reject(new Error('Web Push is disabled in config'))
+  if (!vapidPublicKey) return Promise.reject(new Error('VAPID public key is not found'))
 
   const subscribeOptions = {
     userVisibleOnly: true,
-    applicationServerKey: urlBase64ToUint8Array(store.rootState.instance.vapidPublicKey)
+    applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
   }
   return registration.pushManager.subscribe(subscribeOptions)
 }
 
-function sendSubscriptionToBackEnd (subscription, store) {
+function sendSubscriptionToBackEnd (subscription, token) {
   return window.fetch('/api/v1/push/subscription/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${store.rootState.oauth.token}`
+      'Authorization': `Bearer ${token}`
     },
     body: JSON.stringify({
       subscription,
@@ -79,28 +63,23 @@ function sendSubscriptionToBackEnd (subscription, store) {
       }
     })
   })
-    .then(function (response) {
-      if (!response.ok) {
-        throw new Error('Bad status code from server.')
-      }
-
+    .then((response) => {
+      if (!response.ok) throw new Error('Bad status code from server.')
       return response.json()
     })
-    .then(function (responseData) {
-      if (!responseData.id) {
-        throw new Error('Bad response from server.')
-      }
+    .then((responseData) => {
+      if (!responseData.id) throw new Error('Bad response from server.')
       return responseData
     })
 }
 
-export default function registerPushNotifications (store) {
+export default function registerPushNotifications (isEnabled, vapidPublicKey, token) {
   if (isPushSupported()) {
     registerServiceWorker()
-      .then(function (registration) {
+      .then((registration) => {
         return askPermission()
-          .then(() => subscribe(registration, store))
-          .then((subscription) => sendSubscriptionToBackEnd(subscription, store))
+          .then(() => subscribe(registration, isEnabled, vapidPublicKey))
+          .then((subscription) => sendSubscriptionToBackEnd(subscription, token))
           .catch((e) => console.warn(`Failed to setup Web Push Notifications: ${e.message}`))
       })
   }

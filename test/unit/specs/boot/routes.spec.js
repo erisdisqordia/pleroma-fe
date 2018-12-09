@@ -12,7 +12,7 @@ describe('routes', () => {
   })
 
   it('root path', () => {
-    router.push('/p/main/all')
+    router.push('/~/main/all')
 
     const matchedComponents = router.getMatchedComponents()
 

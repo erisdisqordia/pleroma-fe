@@ -18,11 +18,14 @@
           <i class="icon-down-open"/>
         </label>
       </div>
-      <div class="import-export">
-        <button class="btn" @click="exportCurrentTheme">{{ $t('settings.export_theme') }}</button>
-        <button class="btn" @click="importTheme">{{ $t('settings.import_theme') }}</button>
-        <p v-if="invalidThemeImported" class="import-warning">{{ $t('settings.invalid_theme_imported') }}</p>
-      </div>
+      <export-import
+        :exportObject='exportedTheme'
+        :exportLabel='$t("settings.export_theme")'
+        :importLabel='$t("settings.import_theme")'
+        :importFailedText='$t("settings.invalid_theme_imported")'
+        :onImport='onImport'
+        :validator='importValidator'
+        />
     </div>
     <div class="save-load-options">
       <span>
@@ -58,82 +61,7 @@
   </div>
 
   <div class="preview-container">
-    <div class="panel dummy" :style="previewRules">
-      <div class="panel-heading">
-        <div class="title">
-          {{$t('settings.style.preview.header')}}
-          <span class="badge badge-notification">
-            99
-          </span>
-        </div>
-        <span class="faint">
-          {{$t('settings.style.preview.header_faint')}}
-        </span>
-        <span class="alert error">
-          {{$t('settings.style.preview.error')}}
-        </span>
-        <button class="btn">
-          {{$t('settings.style.preview.button')}}
-        </button>
-      </div>
-      <div class="panel-body theme-preview-content">
-        <div class="post">
-          <div class="avatar">
-            ( ͡° ͜ʖ ͡°)
-          </div>
-          <div class="content">
-            <h4>
-              {{$t('settings.style.preview.content')}}
-            </h4>
-
-            <i18n path="settings.style.preview.text">
-              <code style="font-family: var(--postCodeFont)">
-                {{$t('settings.style.preview.mono')}}
-              </code>
-              <a style="color: var(--link)">
-                {{$t('settings.style.preview.link')}}
-              </a>
-            </i18n>
-
-            <div class="icons">
-              <i style="color: var(--cBlue)" class="icon-reply"/>
-              <i style="color: var(--cGreen)" class="icon-retweet"/>
-              <i style="color: var(--cOrange)" class="icon-star"/>
-              <i style="color: var(--cRed)" class="icon-cancel"/>
-            </div>
-          </div>
-        </div>
-
-        <div class="after-post">
-          <div class="avatar-alt">
-            :^)
-          </div>
-          <div class="content">
-            <i18n path="settings.style.preview.fine_print" tag="span" class="faint">
-              <a style="color: var(--faintLink)">
-                {{$t('settings.style.preview.faint_link')}}
-              </a>
-            </i18n>
-          </div>
-        </div>
-        <div class="separator"></div>
-
-        <span class="alert error">
-          {{$t('settings.style.preview.error')}}
-        </span>
-        <input :value="$t('settings.style.preview.input')" type="text">
-
-        <div class="actions">
-          <span class="checkbox">
-            <input checked="very yes" type="checkbox" id="preview_checkbox">
-            <label for="preview_checkbox">{{$t('settings.style.preview.checkbox')}}</label>
-          </span>
-          <button class="btn">
-            {{$t('settings.style.preview.button')}}
-          </button>
-        </div>
-      </div>
-    </div>
+    <preview :style="previewRules"/>
   </div>
 
   <keep-alive>
@@ -235,6 +163,7 @@
           <OpacityInput name="faintOpacity" v-model="faintOpacityLocal" :fallback="previewTheme.opacity.faint || 0.5"/>
         </div>
       </div>
+
       <div :label="$t('settings.style.radii._tab_label')" class="radius-container">
         <div class="tab-header">
           <p>{{$t('settings.radii_help')}}</p>
@@ -249,6 +178,7 @@
         <RangeInput name="attachmentRadius" :label="$t('settings.attachmentRadius')" v-model="attachmentRadiusLocal" :fallback="previewTheme.radii.attachment" max="50" hardMin="0"/>
         <RangeInput name="tooltipRadius" :label="$t('settings.tooltipRadius')" v-model="tooltipRadiusLocal" :fallback="previewTheme.radii.tooltip" max="50" hardMin="0"/>
       </div>
+
       <div :label="$t('settings.style.shadows._tab_label')" class="shadow-container">
         <div class="tab-header shadow-selector">
           <div class="select-container">
@@ -294,6 +224,7 @@
           <p>{{$t('settings.style.shadows.filter_hint.spread_zero')}}</p>
         </div>
       </div>
+
       <div :label="$t('settings.style.fonts._tab_label')" class="fonts-container">
         <div class="tab-header">
           <p>{{$t('settings.style.fonts.help')}}</p>

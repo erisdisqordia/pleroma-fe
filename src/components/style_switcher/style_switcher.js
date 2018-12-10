@@ -8,6 +8,8 @@ import ShadowControl from '../shadow_control/shadow_control.vue'
 import FontControl from '../font_control/font_control.vue'
 import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
 import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
+import Preview from './preview.vue'
+import ExportImport from '../export_import/export_import.vue'
 
 // List of color values used in v1
 const v1OnlyNames = [
@@ -26,7 +28,6 @@ export default {
     return {
       availableStyles: [],
       selected: this.$store.state.config.theme,
-      invalidThemeImported: false,
 
       previewShadows: {},
       previewColors: {},
@@ -293,20 +294,11 @@ export default {
     },
     themeValid () {
       return !this.shadowsInvalid && !this.colorsInvalid && !this.radiiInvalid
-    }
-  },
-  components: {
-    ColorInput,
-    OpacityInput,
-    RangeInput,
-    ContrastRatio,
-    ShadowControl,
-    FontControl,
-    TabSwitcher
-  },
-  methods: {
-    exportCurrentTheme () {
+    },
+    exportedTheme () {
       const saveEverything = !this.keepFonts && !this.keepShadows && !this.keepColors && !this.keepOpacity && !this.keepRoundness
+
+      // TODO change into delete-less version.
       const theme = {
         shadows: this.shadowsLocal,
         fonts: this.fontsLocal,
@@ -331,57 +323,24 @@ export default {
         delete theme.radii
       }
 
-      const stringified = JSON.stringify({
+      return {
         // To separate from other random JSON files and possible future theme formats
         _pleroma_theme_version: 2, theme
-      }, null, 2) // Pretty-print and indent with 2 spaces
-
-      // Create an invisible link with a data url and simulate a click
-      const e = document.createElement('a')
-      e.setAttribute('download', 'pleroma_theme.json')
-      e.setAttribute('href', 'data:application/json;base64,' + window.btoa(stringified))
-      e.style.display = 'none'
-
-      document.body.appendChild(e)
-      e.click()
-      document.body.removeChild(e)
-    },
-
-    importTheme () {
-      this.invalidThemeImported = false
-      const filePicker = document.createElement('input')
-      filePicker.setAttribute('type', 'file')
-      filePicker.setAttribute('accept', '.json')
-
-      filePicker.addEventListener('change', event => {
-        if (event.target.files[0]) {
-          // eslint-disable-next-line no-undef
-          const reader = new FileReader()
-          reader.onload = ({target}) => {
-            try {
-              const parsed = JSON.parse(target.result)
-              if (parsed._pleroma_theme_version === 1) {
-                this.normalizeLocalState(parsed, 1)
-              } else if (parsed._pleroma_theme_version === 2) {
-                this.normalizeLocalState(parsed.theme, 2)
-              } else {
-                // A theme from the future, spooky
-                this.invalidThemeImported = true
-              }
-            } catch (e) {
-              // This will happen both if there is a JSON syntax error or the theme is missing components
-              this.invalidThemeImported = true
-            }
-          }
-          reader.readAsText(event.target.files[0])
-        }
-      })
-
-      document.body.appendChild(filePicker)
-      filePicker.click()
-      document.body.removeChild(filePicker)
-    },
-
+      }
+    }
+  },
+  components: {
+    ColorInput,
+    OpacityInput,
+    RangeInput,
+    ContrastRatio,
+    ShadowControl,
+    FontControl,
+    TabSwitcher,
+    Preview,
+    ExportImport
+  },
+  methods: {
     setCustomTheme () {
       this.$store.dispatch('setOption', {
         name: 'customTheme',
@@ -394,7 +353,17 @@ export default {
         }
       })
     },
-
+    onImport (parsed) {
+      if (parsed._pleroma_theme_version === 1) {
+        this.normalizeLocalState(parsed, 1)
+      } else if (parsed._pleroma_theme_version === 2) {
+        this.normalizeLocalState(parsed.theme, 2)
+      }
+    },
+    importValidator (parsed) {
+      const version = parsed._pleroma_theme_version
+      return version >= 1 || version <= 2
+    },
     clearAll () {
       const state = this.$store.state.config.customTheme
       const version = state.colors ? 2 : 'l1'

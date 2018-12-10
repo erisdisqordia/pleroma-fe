@@ -1,5 +1,5 @@
 import { set, delete as del } from 'vue'
-import { setPreset, setColors } from '../services/style_setter/style_setter.js'
+import { setPreset, applyTheme } from '../services/style_setter/style_setter.js'
 
 const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
@@ -57,7 +57,7 @@ const config = {
           setPreset(value, commit)
           break
         case 'customTheme':
-          setColors(value, commit)
+          applyTheme(value, commit)
       }
     }
   }

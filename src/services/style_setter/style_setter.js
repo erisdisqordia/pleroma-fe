@@ -523,6 +523,7 @@ const setPreset = (val, commit) => {
 export {
   setStyle,
   setPreset,
+  applyTheme,
   getTextColor,
   generateColors,
   generateRadii,

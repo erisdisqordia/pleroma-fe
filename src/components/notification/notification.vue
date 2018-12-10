@@ -1,5 +1,5 @@
 <template>
-  <status v-if="notification.type === 'mention'" :compact="true" :statusoid="notification.status"></status>
+  <status :activatePanel="activatePanel" v-if="notification.type === 'mention'" :compact="true" :statusoid="notification.status"></status>
   <div class="non-mention" :class="[userClass, { highlighted: userStyle }]" :style="[ userStyle ]"v-else>
     <a class='avatar-container' :href="notification.action.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
       <StillImage class='avatar-compact' :class="{'better-shadow': betterShadow}" :src="notification.action.user.profile_image_url_original"/>
@@ -31,7 +31,7 @@
         <router-link :to="{ name: 'user-profile', params: { id: notification.action.user.id } }">@{{notification.action.user.screen_name}}</router-link>
       </div>
       <template v-else>
-        <status v-if="notification.status"  class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>
+        <status :activatePanel="activatePanel" v-if="notification.status"  class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>
         <div class="broken-favorite" v-else>
           {{$t('notifications.broken_favorite')}}
         </div>

@@ -508,7 +508,6 @@ const setPreset = (val, commit) => {
       }
     }
 
-    console.log(data)
     // This is a hack, this function is only called during initial load.
     // We want to cancel loading the theme from config.json if we're already
     // loading a theme from the persisted state.

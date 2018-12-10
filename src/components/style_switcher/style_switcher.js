@@ -463,8 +463,6 @@ export default {
         }
       }
 
-      console.log(version)
-
       // Stuff that differs between V1 and V2
       if (version === 1) {
         this.fgColorLocal = rgb2hex(colors.btn)

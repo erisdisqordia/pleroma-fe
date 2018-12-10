@@ -71,7 +71,7 @@ const getTextColor = function (bg, text, preserve) {
   return text
 }
 
-const setColors = (input, commit) => {
+const applyTheme = (input, commit) => {
   const { rules, theme } = generatePreset(input)
   const head = document.head
   const body = document.body
@@ -516,7 +516,7 @@ const setPreset = (val, commit) => {
     // load config -> set preset -> wait for styles.json to load ->
     // load persisted state -> set colors -> styles.json loaded -> set colors
     if (!window.themeLoaded) {
-      setColors(data, commit)
+      applyTheme(data, commit)
     }
   })
 }
@@ -524,7 +524,6 @@ const setPreset = (val, commit) => {
 export {
   setStyle,
   setPreset,
-  setColors,
   getTextColor,
   generateColors,
   generateRadii,

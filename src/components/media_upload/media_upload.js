@@ -23,7 +23,9 @@ const mediaUpload = {
       const self = this
       const store = this.$store
       if (file.size > store.state.instance.uploadlimit) {
-        self.$emit('upload-failed', 'upload_error_file_too_big', {filesize: fileSizeFormatService.fileSizeFormat(file.size, self.$t), allowedsize: fileSizeFormatService.fileSizeFormat(store.state.instance.uploadlimit, self.$t)})
+        const filesize = fileSizeFormatService.fileSizeFormat(file.size)
+        const allowedsize = fileSizeFormatService.fileSizeFormat(store.state.instance.uploadlimit)
+        self.$emit('upload-failed', 'upload_error_file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit})
         return
       }
       const formData = new FormData()

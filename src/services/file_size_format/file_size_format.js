@@ -1,15 +1,15 @@
-const fileSizeFormat = (num, t) => {
+const fileSizeFormat = (num) => {
   var exponent
   var unit
-  var units = [t('file_size_units.B'), t('file_size_units.KB'), t('file_size_units.MB'), t('file_size_units.GB'), t('file_size_units.TB')]
+  var units = ['B', 'KiB', 'MiB', 'GiB', 'TiB']
   if (num < 1) {
     return num + ' ' + units[0]
   }
 
-  exponent = Math.min(Math.floor(Math.log(num) / Math.log(1000)), units.length - 1)
-  num = (num / Math.pow(1000, exponent)).toFixed(2) * 1
+  exponent = Math.min(Math.floor(Math.log(num) / Math.log(1024)), units.length - 1)
+  num = (num / Math.pow(1024, exponent)).toFixed(2) * 1
   unit = units[exponent]
-  return num + ' ' + unit
+  return {num: num, unit: unit}
 }
 const fileSizeFormatService = {
   fileSizeFormat

@@ -15,7 +15,7 @@
         <div class="name-and-screen-name">
           <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
           <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
-          <router-link class='user-screen-name':to="{ name: 'user-profile', params: { id: user.id } }">
+          <router-link @click.native="activatePanel('timeline')" class='user-screen-name':to="{ name: 'user-profile', params: { id: user.id } }">
             <span>@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>

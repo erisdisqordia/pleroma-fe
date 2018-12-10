@@ -449,11 +449,43 @@ const generatePreset = (input) => {
   return composePreset(colors, radii, shadows, fonts)
 }
 
-const setPreset = (val, commit) => {
-  window.fetch('/static/styles.json')
+const getThemes = () => {
+  return window.fetch('/static/styles.json')
     .then((data) => data.json())
     .then((themes) => {
-      const theme = themes[val] ? themes[val] : themes['pleroma-dark']
+      return Promise.all(Object.entries(themes).map(([k, v]) => {
+        if (typeof v === 'object') {
+          return Promise.resolve([k, v])
+        } else if (typeof v === 'string') {
+          return window.fetch(v)
+            .then((data) => data.json())
+            .then((theme) => {
+              return [k, theme]
+            })
+            .catch((e) => {
+              console.error(e)
+              return []
+            })
+        }
+      }))
+    })
+    .then((promises) => {
+      return promises
+        .filter(([k, v]) => v)
+        .reduce((acc, [k, v]) => {
+          acc[k] = v
+          return acc
+        }, {})
+    })
+}
+
+const setPreset = (val, commit) => {
+  getThemes().then((themes) => {
+    const theme = themes[val] ? themes[val] : themes['pleroma-dark']
+    const isV1 = Array.isArray(theme)
+    const data = isV1 ? {} : theme.theme
+
+    if (isV1) {
       const bgRgb = hex2rgb(theme[1])
       const fgRgb = hex2rgb(theme[2])
       const textRgb = hex2rgb(theme[3])
@@ -464,7 +496,7 @@ const setPreset = (val, commit) => {
       const cBlueRgb = hex2rgb(theme[7] || '#0000FF')
       const cOrangeRgb = hex2rgb(theme[8] || '#E3FF00')
 
-      const colors = {
+      data.colors = {
         bg: bgRgb,
         fg: fgRgb,
         text: textRgb,
@@ -474,17 +506,19 @@ const setPreset = (val, commit) => {
         cGreen: cGreenRgb,
         cOrange: cOrangeRgb
       }
+    }
 
-      // This is a hack, this function is only called during initial load.
-      // We want to cancel loading the theme from config.json if we're already
-      // loading a theme from the persisted state.
-      // Needed some way of dealing with the async way of things.
-      // load config -> set preset -> wait for styles.json to load ->
-      // load persisted state -> set colors -> styles.json loaded -> set colors
-      if (!window.themeLoaded) {
-        setColors({ colors }, commit)
-      }
-    })
+    console.log(data)
+    // This is a hack, this function is only called during initial load.
+    // We want to cancel loading the theme from config.json if we're already
+    // loading a theme from the persisted state.
+    // Needed some way of dealing with the async way of things.
+    // load config -> set preset -> wait for styles.json to load ->
+    // load persisted state -> set colors -> styles.json loaded -> set colors
+    if (!window.themeLoaded) {
+      setColors(data, commit)
+    }
+  })
 }
 
 export {
@@ -497,6 +531,7 @@ export {
   generateShadows,
   generateFonts,
   generatePreset,
+  getThemes,
   composePreset,
   getCssShadow,
   getCssShadowFilter

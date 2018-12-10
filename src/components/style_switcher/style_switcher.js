@@ -1,6 +1,6 @@
 import { rgb2hex, hex2rgb, getContrastRatio, alphaBlend } from '../../services/color_convert/color_convert.js'
 import { set, delete as del } from 'vue'
-import { generateColors, generateShadows, generateRadii, generateFonts, composePreset } from '../../services/style_setter/style_setter.js'
+import { generateColors, generateShadows, generateRadii, generateFonts, composePreset, getThemes } from '../../services/style_setter/style_setter.js'
 import ColorInput from '../color_input/color_input.vue'
 import RangeInput from '../range_input/range_input.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
@@ -104,35 +104,9 @@ export default {
   created () {
     const self = this
 
-    window.fetch('/static/styles.json')
-      .then((data) => data.json())
-      .then((themes) => {
-        return Promise.all(Object.entries(themes).map(([k, v]) => {
-          if (typeof v === 'object') {
-            return Promise.resolve([k, v])
-          } else if (typeof v === 'string') {
-            return window.fetch(v)
-              .then((data) => data.json())
-              .then((theme) => {
-                return [k, theme]
-              })
-              .catch((e) => {
-                console.error(e)
-                return []
-              })
-          }
-        }))
-      })
-      .then((promises) => {
-        return promises
-          .filter(([k, v]) => v)
-          .reduce((acc, [k, v]) => {
-            acc[k] = v
-            return acc
-          }, {})
-      }).then((themesComplete) => {
-        self.availableStyles = themesComplete
-      })
+    getThemes().then((themesComplete) => {
+      self.availableStyles = themesComplete
+    })
   },
   mounted () {
     this.normalizeLocalState(this.$store.state.config.customTheme)

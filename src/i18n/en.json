@@ -229,5 +229,12 @@
     "reply": "Reply",
     "favorite": "Favorite",
     "user_settings": "User Settings"
+  },
+  "file_size_units": {
+    "B": "B",
+    "KB": "KB",
+    "MB": "MB",
+    "GB": "GB",
+    "TB": "TB"
   }
 }

@@ -1,5 +1,7 @@
 /* eslint-env browser */
 import statusPosterService from '../../services/status_poster/status_poster.service.js'
+import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
+
 
 const mediaUpload = {
   mounted () {
@@ -22,7 +24,7 @@ const mediaUpload = {
       const self = this
       const store = this.$store
       if (file.size > store.state.instance.uploadlimit) {
-        self.$emit('upload-failed', 'upload_error_file_too_big', {filesize: file.size, allowedsize: store.state.instance.uploadlimit})
+        self.$emit('upload-failed', 'upload_error_file_too_big', {filesize: fileSizeFormatService.fileSizeFormat(file.size, self.$t), allowedsize: fileSizeFormatService.fileSizeFormat(store.state.instance.uploadlimit, self.$t)})
         return
       }
       const formData = new FormData()

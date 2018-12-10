@@ -58,6 +58,7 @@ const afterStoreSetup = ({store, i18n}) => {
           var loginMethod = (config.loginMethod)
           var scopeCopy = (config.scopeCopy)
           var subjectLineBehavior = (config.subjectLineBehavior)
+          var alwaysShowSubjectInput = (config.alwaysShowSubjectInput)
 
           store.dispatch('setInstanceOption', { name: 'theme', value: theme })
           store.dispatch('setInstanceOption', { name: 'background', value: background })
@@ -75,6 +76,7 @@ const afterStoreSetup = ({store, i18n}) => {
           store.dispatch('setInstanceOption', { name: 'loginMethod', value: loginMethod })
           store.dispatch('setInstanceOption', { name: 'scopeCopy', value: scopeCopy })
           store.dispatch('setInstanceOption', { name: 'subjectLineBehavior', value: subjectLineBehavior })
+          store.dispatch('setInstanceOption', { name: 'alwaysShowSubjectInput', value: alwaysShowSubjectInput })
           if (chatDisabled) {
             store.dispatch('disableChat')
           }

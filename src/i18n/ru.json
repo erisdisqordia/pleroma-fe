@@ -55,7 +55,15 @@
     "fullname": "Отображаемое имя",
     "password_confirm": "Подтверждение пароля",
     "registration": "Регистрация",
-    "token": "Код приглашения"
+    "token": "Код приглашения",
+    "validations": {
+      "username_required": "не должно быть пустым",
+      "fullname_required": "не должно быть пустым",
+      "email_required": "не должен быть пустым",
+      "password_required": "не должен быть пустым",
+      "password_confirmation_required": "не должно быть пустым",
+      "password_confirmation_match": "должно совпадать с паролем"
+    }
   },
   "settings": {
     "attachmentRadius": "Прикреплённые файлы",
@@ -97,10 +105,12 @@
     "general": "Общие",
     "hide_attachments_in_convo": "Прятать вложения в разговорах",
     "hide_attachments_in_tl": "Прятать вложения в ленте",
+    "hide_isp": "Скрыть серверную панель",
     "import_followers_from_a_csv_file": "Импортировать читаемых из файла .csv",
     "import_theme": "Загрузить Тему",
     "inputRadius": "Поля ввода",
     "checkboxRadius": "Чекбоксы",
+    "interface": "Интерфейс",
     "interfaceLanguage": "Язык интерфейса",
     "limited_availability": "Не доступно в вашем браузере",
     "links": "Ссылки",

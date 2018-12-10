@@ -72,7 +72,15 @@
     "fullname": "Display name",
     "password_confirm": "Password confirmation",
     "registration": "Registration",
-    "token": "Invite token"
+    "token": "Invite token",
+    "validations": {
+      "username_required": "cannot be left blank",
+      "fullname_required": "cannot be left blank",
+      "email_required": "cannot be left blank",
+      "password_required": "cannot be left blank",
+      "password_confirmation_required": "cannot be left blank",
+      "password_confirmation_match": "should be the same as password"
+    }
   },
   "settings": {
     "attachmentRadius": "Attachments",
@@ -116,6 +124,7 @@
     "general": "General",
     "hide_attachments_in_convo": "Hide attachments in conversations",
     "hide_attachments_in_tl": "Hide attachments in timeline",
+    "hide_isp": "Hide instance-specific panel",
     "hide_post_stats": "Hide post statistics (e.g. the number of favorites)",
     "hide_user_stats": "Hide user statistics (e.g. the number of followers)",
     "import_followers_from_a_csv_file": "Import follows from a csv file",
@@ -124,6 +133,7 @@
     "checkboxRadius": "Checkboxes",
     "instance_default": "(default: {value})",
     "instance_default_simple" : "(default)",
+    "interface": "Interface",
     "interfaceLanguage": "Interface language",
     "invalid_theme_imported": "The selected file is not a supported Pleroma theme. No changes to your theme were made.",
     "limited_availability": "Unavailable in your browser",

@@ -13,6 +13,7 @@ const settings = {
       hideAttachmentsLocal: user.hideAttachments,
       hideAttachmentsInConvLocal: user.hideAttachmentsInConv,
       hideNsfwLocal: user.hideNsfw,
+      hideISPLocal: user.hideISP,
       hidePostStatsLocal: typeof user.hidePostStats === 'undefined'
         ? instance.hidePostStats
         : user.hidePostStats,
@@ -82,6 +83,9 @@ const settings = {
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
+    },
+    hideISPLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hideISP', value })
     },
     'notificationVisibilityLocal.likes' (value) {
       this.$store.dispatch('setOption', { name: 'notificationVisibility', value: this.$store.state.config.notificationVisibility })

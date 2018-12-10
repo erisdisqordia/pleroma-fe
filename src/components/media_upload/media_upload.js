@@ -2,7 +2,6 @@
 import statusPosterService from '../../services/status_poster/status_poster.service.js'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 
-
 const mediaUpload = {
   mounted () {
     const input = this.$el.querySelector('input')

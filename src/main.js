@@ -10,7 +10,6 @@ import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
 import chatModule from './modules/chat.js'
 import oauthModule from './modules/oauth.js'
-import pushNotificationsModule from './modules/pushNotifications.js'
 
 import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
@@ -61,12 +60,18 @@ createPersistedState(persistedStateOptions).then((persistedState) => {
       api: apiModule,
       config: configModule,
       chat: chatModule,
-      oauth: oauthModule,
-      pushNotifications: pushNotificationsModule
+      oauth: oauthModule
     },
     plugins: [persistedState],
     strict: false // Socket modifies itself, let's ignore this for now.
     // strict: process.env.NODE_ENV !== 'production'
+  })
+
+  store.subscribe((mutation, state) => {
+    if ((mutation.type === 'setCurrentUser' && state.instance.vapidPublicKey) || // Login + existing key
+      (mutation.type === 'setInstanceOption' && mutation.payload.name === 'vapidPublicKey' && state.users.currentUser)) { // Logged in, key arrives late
+      store.dispatch('registerPushNotifications')
+    }
   })
 
   afterStoreSetup({ store, i18n })

@@ -1,6 +1,7 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
+import registerPushNotifications from '../services/push/push.js'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
@@ -65,6 +66,13 @@ const users = {
       store.rootState.api.backendInteractor.fetchUser({id})
         .then((user) => store.commit('addNewUsers', user))
     },
+    registerPushNotifications (store) {
+      const token = store.state.currentUser.credentials
+      const vapidPublicKey = store.rootState.instance.vapidPublicKey
+      const isEnabled = store.rootState.config.webPushNotifications
+
+      registerPushNotifications(isEnabled, vapidPublicKey, token)
+    },
     addNewStatuses (store, { statuses }) {
       const users = map(statuses, 'user')
       const retweetedUsers = compact(map(statuses, 'retweeted_status.user'))
@@ -86,9 +94,6 @@ const users = {
       store.dispatch('stopFetching', 'friends')
       store.commit('setBackendInteractor', backendInteractorService())
     },
-    setCurrentUser (store, user) {
-      store.commit('setCurrentUser', user)
-    },
     loginUser (store, accessToken) {
       return new Promise((resolve, reject) => {
         const commit = store.commit
@@ -100,7 +105,7 @@ const users = {
                 .then((user) => {
                   // user.credentials = userCredentials
                   user.credentials = accessToken
-                  store.dispatch('setCurrentUser', user)
+                  commit('setCurrentUser', user)
                   commit('addNewUsers', [user])
 
                   // Set our new backend interactor

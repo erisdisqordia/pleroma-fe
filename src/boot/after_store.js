@@ -27,7 +27,10 @@ const afterStoreSetup = ({ store, i18n }) => {
       store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
       store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
       store.dispatch('setInstanceOption', { name: 'server', value: server })
-      store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })
+
+      if (vapidPublicKey) {
+        store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })
+      }
 
       var apiConfig = data.site.pleromafe
 

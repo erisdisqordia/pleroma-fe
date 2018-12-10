@@ -53,7 +53,7 @@
     "account_not_locked_warning_link": "locked",
     "attachments_sensitive": "Mark attachments as sensitive",
     "upload_error": "Upload failed.",
-    "upload_error_file_too_big": "File too big [{filesize}/{allowedsize}]",
+    "upload_error_file_too_big": "File too big [{filesize} / {allowedsize}]",
     "upload_error_generic": "Try again later",
     "content_type": {
       "plain_text": "Plain text"

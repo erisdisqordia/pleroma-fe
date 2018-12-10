@@ -113,14 +113,6 @@ const hex2rgb = (hex) => {
   } : null
 }
 
-const rgbstr2hex = (rgb) => {
-  if (rgb[0] === '#') {
-    return rgb
-  }
-  rgb = rgb.match(/\d+/g)
-  return `#${((Number(rgb[0]) << 16) + (Number(rgb[1]) << 8) + Number(rgb[2])).toString(16)}`
-}
-
 const mixrgb = (a, b) => {
   return Object.keys(a).reduce((acc, k) => {
     acc[k] = (a[k] + b[k]) / 2
@@ -133,7 +125,6 @@ export {
   hex2rgb,
   mixrgb,
   invert,
-  rgbstr2hex,
   getContrastRatio,
   alphaBlend
 }

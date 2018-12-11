@@ -191,6 +191,7 @@
     },
     "style": {
       "switcher": {
+        "keep_color": "Keep colors",
         "keep_shadows": "Keep shadows",
         "keep_opacity": "Keep opacity",
         "keep_roundness": "Keep roundness",

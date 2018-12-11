@@ -54,11 +54,6 @@
     }
   }
 
-  .import-warning {
-    color: $fallback--cRed;
-    color: var(--cRed, $fallback--cRed);
-  }
-
   .tab-switcher {
     margin: 0 -1em;
   }
@@ -154,8 +149,10 @@
   .save-load-options {
     flex-wrap: wrap;
     margin-top: .5em;
-    span {
+    justify-content: center;
+    .keep-option {
       margin: 0 .5em .5em;
+      min-width: 25%;
     }
   }
 

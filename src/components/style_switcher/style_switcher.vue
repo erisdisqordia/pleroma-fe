@@ -28,28 +28,35 @@
         />
     </div>
     <div class="save-load-options">
-      <span>
+      <span class="keep-option">
+        <input
+          id="keep-color"
+          type="checkbox"
+          v-model="keepColor">
+        <label for="keep-color">{{$t('settings.style.switcher.keep_color')}}</label>
+      </span>
+      <span class="keep-option">
         <input
           id="keep-shadows"
           type="checkbox"
           v-model="keepShadows">
         <label for="keep-shadows">{{$t('settings.style.switcher.keep_shadows')}}</label>
       </span>
-      <span>
+      <span class="keep-option">
         <input
           id="keep-opacity"
           type="checkbox"
           v-model="keepOpacity">
         <label for="keep-opacity">{{$t('settings.style.switcher.keep_opacity')}}</label>
       </span>
-      <span>
+      <span class="keep-option">
         <input
           id="keep-roundness"
           type="checkbox"
           v-model="keepRoundness">
         <label for="keep-roundness">{{$t('settings.style.switcher.keep_roundness')}}</label>
       </span>
-      <span>
+      <span class="keep-option">
         <input
           id="keep-fonts"
           type="checkbox"

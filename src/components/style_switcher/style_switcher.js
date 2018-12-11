@@ -38,6 +38,7 @@ export default {
       colorsInvalid: true,
       radiiInvalid: true,
 
+      keepColor: false,
       keepShadows: false,
       keepOpacity: false,
       keepRoundness: false,
@@ -296,31 +297,30 @@ export default {
       return !this.shadowsInvalid && !this.colorsInvalid && !this.radiiInvalid
     },
     exportedTheme () {
-      const saveEverything = !this.keepFonts && !this.keepShadows && !this.keepColors && !this.keepOpacity && !this.keepRoundness
+      const saveEverything = (
+        !this.keepFonts &&
+        !this.keepShadows &&
+        !this.keepOpacity &&
+        !this.keepRoundness &&
+        !this.keepColor
+      )
 
-      // TODO change into delete-less version.
-      const theme = {
-        shadows: this.shadowsLocal,
-        fonts: this.fontsLocal,
-        opacity: this.currentOpacity,
-        colors: this.currentColors,
-        radii: this.currentRadii
-      }
+      const theme = {}
 
-      if (!this.keepFonts && !saveEverything) {
-        delete theme.fonts
+      if (this.keepFonts || saveEverything) {
+        theme.fonts = this.fontsLocal
       }
-      if (!this.keepShadows && !saveEverything) {
-        delete theme.shadows
+      if (this.keepShadows || saveEverything) {
+        theme.shadows = this.shadowsLocal
       }
-      if (!this.keepOpacity && !saveEverything) {
-        delete theme.opacity
+      if (this.keepOpacity || saveEverything) {
+        theme.opacity = this.currentOpacity
       }
-      if (!this.keepColors && !saveEverything) {
-        delete theme.colors
+      if (this.keepColor || saveEverything) {
+        theme.colors = this.currentColors
       }
-      if (!this.keepRoundness && !saveEverything) {
-        delete theme.radii
+      if (this.keepRoundness || saveEverything) {
+        theme.radii = this.currentRadii
       }
 
       return {
@@ -438,21 +438,23 @@ export default {
         this.textColorLocal = rgb2hex(colors.fg)
       }
 
-      this.clearV1()
-      const keys = new Set(version !== 1 ? Object.keys(colors) : [])
-      if (version === 1 || version === 'l1') {
-        keys
-          .add('bg')
-          .add('link')
-          .add('cRed')
-          .add('cBlue')
-          .add('cGreen')
-          .add('cOrange')
-      }
+      if (!this.keepColor) {
+        this.clearV1()
+        const keys = new Set(version !== 1 ? Object.keys(colors) : [])
+        if (version === 1 || version === 'l1') {
+          keys
+            .add('bg')
+            .add('link')
+            .add('cRed')
+            .add('cBlue')
+            .add('cGreen')
+            .add('cOrange')
+        }
 
-      keys.forEach(key => {
-        this[key + 'ColorLocal'] = rgb2hex(colors[key])
-      })
+        keys.forEach(key => {
+          this[key + 'ColorLocal'] = rgb2hex(colors[key])
+        })
+      }
 
       if (!this.keepRoundness) {
         this.clearRoundness()
@@ -553,16 +555,18 @@ export default {
           this.clearOpacity()
         }
 
-        this.clearV1()
+        if (!this.keepColor) {
+          this.clearV1()
 
-        this.bgColorLocal = this.selected[1]
-        this.fgColorLocal = this.selected[2]
-        this.textColorLocal = this.selected[3]
-        this.linkColorLocal = this.selected[4]
-        this.cRedColorLocal = this.selected[5]
-        this.cGreenColorLocal = this.selected[6]
-        this.cBlueColorLocal = this.selected[7]
-        this.cOrangeColorLocal = this.selected[8]
+          this.bgColorLocal = this.selected[1]
+          this.fgColorLocal = this.selected[2]
+          this.textColorLocal = this.selected[3]
+          this.linkColorLocal = this.selected[4]
+          this.cRedColorLocal = this.selected[5]
+          this.cGreenColorLocal = this.selected[6]
+          this.cBlueColorLocal = this.selected[7]
+          this.cOrangeColorLocal = this.selected[8]
+        }
       } else if (this.selectedVersion >= 2) {
         this.normalizeLocalState(this.selected.theme, 2)
       }

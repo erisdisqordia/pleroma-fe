@@ -156,6 +156,7 @@
     "user_settings": "Настройки пользователя",
     "style": {
       "switcher": {
+        "keep_color": "Оставить цвета",
         "keep_shadows": "Оставить тени",
         "keep_opacity": "Оставить прозрачность",
         "keep_roundness": "Оставить скругление",

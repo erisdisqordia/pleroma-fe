@@ -9,7 +9,7 @@
         <i class="icon-link-ext usersettings"></i>
       </a>
       <div class='container'>
-        <router-link :to="{ name: 'user-profile', params: { id: user.id } }">
+        <router-link @click.native="activatePanel('timeline')" :to="{ name: 'user-profile', params: { id: user.id } }">
           <StillImage class="avatar" :class='{ "better-shadow": betterShadow }' :src="user.profile_image_url_original"/>
         </router-link>
         <div class="name-and-screen-name">

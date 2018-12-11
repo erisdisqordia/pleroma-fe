@@ -1,9 +1,13 @@
 import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
+import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 
 const UserSettings = {
   data () {
     return {
+      avataruploaderror: null,
+      backgrounduploaderror: null,
+      banneruploaderror: null,
       newname: this.$store.state.users.currentUser.name,
       newbio: this.$store.state.users.currentUser.description,
       newlocked: this.$store.state.users.currentUser.locked,
@@ -69,6 +73,29 @@ const UserSettings = {
     uploadFile (slot, e) {
       const file = e.target.files[0]
       if (!file) { return }
+      var limit = 0
+      var error = () => {}
+      switch (slot) {
+        case 0:
+          limit = this.$store.state.instance.avatarlimit
+          error = (error) => { this.avataruploaderror = error }
+          break
+        case 1:
+          limit = this.$store.state.instance.bannerlimit
+          error = (error) => { this.banneruploaderror = error }
+          break
+        case 2:
+          limit = this.$store.state.instance.backgroundlimit
+          error = (error) => { this.backgrounduploaderror = error }
+      }
+      console.log(this.$store)
+      console.log(file.size + ' ' + slot + ' ' + limit)
+      if (file.size > limit) {
+        const filesize = fileSizeFormatService.fileSizeFormat(file.size)
+        const allowedsize = fileSizeFormatService.fileSizeFormat(limit)
+        error(this.$t('post_status.upload_error_file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit}))
+        return
+      }
       // eslint-disable-next-line no-undef
       const reader = new FileReader()
       reader.onload = ({target}) => {
@@ -106,6 +133,19 @@ const UserSettings = {
         }
         this.uploading[0] = false
       })
+    },
+    clearUploadError (slot) {
+      switch (slot) {
+        case 0:
+          this.avataruploaderror = null
+          break
+        case 1:
+          this.banneruploaderror = null
+          break
+        case 2:
+          this.backgrounduploaderror = null
+          break
+      }
     },
     submitBanner () {
       if (!this.previews[1]) { return }

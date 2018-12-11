@@ -43,7 +43,7 @@ const afterStoreSetup = ({store, i18n}) => {
 
           // This takes static config and overrides properties that are present in apiConfig
           let config = {}
-          if (overrides.staticConfigPreference && env === 'DEV') {
+          if (overrides.staticConfigPreference && env === 'development') {
             console.warn('OVERRIDING API CONFIG WITH STATIC CONFIG')
             config = Object.assign({}, apiConfig, staticConfig)
           } else {

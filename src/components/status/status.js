@@ -33,7 +33,8 @@ const Status = {
       showingTall: false,
       expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
         ? !this.$store.state.instance.collapseMessageWithSubject
-        : !this.$store.state.config.collapseMessageWithSubject
+        : !this.$store.state.config.collapseMessageWithSubject,
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
   computed: {

@@ -130,6 +130,7 @@
     "import_followers_from_a_csv_file": "Import follows from a csv file",
     "import_theme": "Load preset",
     "inputRadius": "Input fields",
+    "checkboxRadius": "Checkboxes",
     "instance_default": "(default: {value})",
     "instance_default_simple" : "(default)",
     "interface": "Interface",
@@ -180,11 +181,122 @@
     "text": "Text",
     "theme": "Theme",
     "theme_help": "Use hex color codes (#rrggbb) to customize your color theme.",
+    "theme_help_v2_1": "You can also override certain component's colors and opacity by toggling the checkbox, use \"Clear all\" button to clear all overrides.",
+    "theme_help_v2_2": "Icons underneath some entries are background/text contrast indicators, hover over for detailed info. Please keep in mind that when using transparency contrast indicators show the worst possible case.",
     "tooltipRadius": "Tooltips/alerts",
     "user_settings": "User Settings",
     "values": {
       "false": "no",
       "true": "yes"
+    },
+    "style": {
+      "switcher": {
+        "keep_color": "Keep colors",
+        "keep_shadows": "Keep shadows",
+        "keep_opacity": "Keep opacity",
+        "keep_roundness": "Keep roundness",
+        "keep_fonts": "Keep fonts",
+        "save_load_hint": "\"Keep\" options preserve currently set options when selecting or loading themes, it also stores said options when exporting a theme. When all checkboxes unset, exporting theme will save everything.",
+        "reset": "Reset",
+        "clear_all": "Clear all",
+        "clear_opacity": "Clear opacity"
+      },
+      "common": {
+        "color": "Color",
+        "opacity": "Opacity",
+        "contrast": {
+          "hint": "Contrast ratio is {ratio}, it {level} {context}",
+          "level": {
+            "aa": "meets Level AA guideline (minimal)",
+            "aaa": "meets Level AAA guideline (recommended)",
+            "bad": "doesn't meet any accessibility guidelines"
+          },
+          "context": {
+            "18pt": "for large (18pt+) text",
+            "text": "for text"
+          }
+        }
+      },
+      "common_colors": {
+        "_tab_label": "Common",
+        "main": "Common colors",
+        "foreground_hint": "See \"Advanced\" tab for more detailed control",
+        "rgbo": "Icons, accents, badges"
+      },
+      "advanced_colors": {
+        "_tab_label": "Advanced",
+        "alert": "Alert background",
+        "alert_error": "Error",
+        "badge": "Badge background",
+        "badge_notification": "Notification",
+        "panel_header": "Panel header",
+        "top_bar": "Top bar",
+        "borders": "Borders",
+        "buttons": "Buttons",
+        "inputs": "Input fields",
+        "faint_text": "Faded text"
+      },
+      "radii": {
+        "_tab_label": "Roundness"
+      },
+      "shadows": {
+        "_tab_label": "Shadow and lighting",
+        "component": "Component",
+        "override": "Override",
+        "shadow_id": "Shadow #{value}",
+        "blur": "Blur",
+        "spread": "Spread",
+        "inset": "Inset",
+        "hint": "For shadows you can also use --variable as a color value to use CSS3 variables. Please note that setting opacity won't work in this case.",
+        "filter_hint": {
+          "always_drop_shadow": "Warning, this shadow always uses {0} when browser supports it.",
+          "drop_shadow_syntax": "{0} does not support {1} parameter and {2} keyword.",
+          "avatar_inset": "Please note that combining both inset and non-inset shadows on avatars might give unexpected results with transparent avatars.",
+          "spread_zero": "Shadows with spread > 0 will appear as if it was set to zero",
+          "inset_classic": "Inset shadows will be using {0}"
+        },
+        "components": {
+          "panel": "Panel",
+          "panelHeader": "Panel header",
+          "topBar": "Top bar",
+          "avatar": "User avatar (in profile view)",
+          "avatarStatus": "User avatar (in post display)",
+          "popup": "Popups and tooltips",
+          "button": "Button",
+          "buttonHover": "Button (hover)",
+          "buttonPressed": "Button (pressed)",
+          "buttonPressedHover": "Button (pressed+hover)",
+          "input": "Input field"
+        }
+      },
+      "fonts": {
+        "_tab_label": "Fonts",
+        "help": "Select font to use for elements of UI. For \"custom\" you have to enter exact font name as it appears in system.",
+        "components": {
+          "interface": "Interface",
+          "input": "Input fields",
+          "post": "Post text",
+          "postCode": "Monospaced text in a post (rich text)"
+        },
+        "family": "Font name",
+        "size": "Size (in px)",
+        "weight": "Weight (boldness)",
+        "custom": "Custom"
+      },
+      "preview": {
+        "header": "Preview",
+        "content": "Content",
+        "error": "Example error",
+        "button": "Button",
+        "text": "A bunch of more {0} and {1}",
+        "mono": "content",
+        "input": "Just landed in L.A.",
+        "faint_link": "helpful manual",
+        "fine_print": "Read our {0} to learn nothing useful!",
+        "header_faint": "This is fine",
+        "checkbox": "I have skimmed over terms and conditions",
+        "link": "a nice lil' link"
+      }
     }
   },
   "timeline": {

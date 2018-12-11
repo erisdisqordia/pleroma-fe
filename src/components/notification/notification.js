@@ -6,7 +6,8 @@ import { highlightClass, highlightStyle } from '../../services/user_highlighter/
 const Notification = {
   data () {
     return {
-      userExpanded: false
+      userExpanded: false,
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
   props: [

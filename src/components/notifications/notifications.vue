@@ -4,7 +4,7 @@
       <div class="panel-heading">
         <div class="title">
           {{$t('notifications.notifications')}}
-          <span class="unseen-count" v-if="unseenCount">{{unseenCount}}</span>
+          <span class="badge badge-notification unseen-count" v-if="unseenCount">{{unseenCount}}</span>
         </div>
         <div @click.prevent class="loadmore-error alert error" v-if="error">
           {{$t('timeline.error_fetching')}}
@@ -13,6 +13,7 @@
       </div>
       <div class="panel-body">
         <div v-for="notification in visibleNotifications" :key="notification.action.id" class="notification" :class='{"unseen": !notification.seen}'>
+          <div class="notification-overlay"></div>
           <notification :notification="notification"></notification>
         </div>
       </div>

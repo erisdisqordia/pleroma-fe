@@ -11,7 +11,7 @@ const highlightStyle = (prefs) => {
   if (type === 'striped') {
     return {
       backgroundImage: [
-        'repeating-linear-gradient(-45deg,',
+        'repeating-linear-gradient(135deg,',
         `${tintColor} ,`,
         `${tintColor} 20px,`,
         `${tintColor2} 20px,`,

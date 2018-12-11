@@ -9,7 +9,7 @@
     </template>
     <template v-else>
       <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
-        <StillImage v-if="retweet" class='avatar' :src="statusoid.user.profile_image_url_original"/>
+        <StillImage v-if="retweet" class='avatar' :class='{ "better-shadow": betterShadow }' :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
           <a v-else :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
@@ -21,7 +21,7 @@
       <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <a :href="status.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
-            <StillImage class='avatar' :class="{'avatar-compact': compact}"  :src="status.user.profile_image_url_original"/>
+            <StillImage class='avatar' :class="{'avatar-compact': compact, 'better-shadow': betterShadow}"  :src="status.user.profile_image_url_original"/>
           </a>
         </div>
         <div class="status-body">
@@ -146,6 +146,7 @@
   border-radius: $fallback--tooltipRadius;
   border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--popupShadow);
   margin-top: 0.25em;
   margin-left: 0.5em;
   z-index: 50;
@@ -284,8 +285,8 @@
       margin-left: 0.2em;
     }
     a:hover i {
-      color: $fallback--fg;
-      color: var(--fg, $fallback--fg);
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
     }
   }
 
@@ -323,6 +324,8 @@
 
   .status-content {
     margin-right: 0.5em;
+    font-family: var(--postFont, sans-serif);
+
     img, video {
       max-width: 100%;
       max-height: 400px;
@@ -337,6 +340,10 @@
 
     pre {
       overflow: auto;
+    }
+
+    code, samp, kbd, var, pre {
+      font-family: var(--postCodeFont, monospace);
     }
 
     p {
@@ -457,17 +464,29 @@
 .status .avatar-compact {
   width: 32px;
   height: 32px;
+  box-shadow: var(--avatarStatusShadow);
   border-radius: $fallback--avatarAltRadius;
   border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+
+  &.better-shadow {
+    box-shadow: var(--avatarStatusShadowInset);
+    filter: var(--avatarStatusShadowFilter)
+  }
 }
 
 .avatar {
   width: 48px;
   height: 48px;
+  box-shadow: var(--avatarStatusShadow);
   border-radius: $fallback--avatarRadius;
   border-radius: var(--avatarRadius, $fallback--avatarRadius);
   overflow: hidden;
   position: relative;
+
+  &.better-shadow {
+    box-shadow: var(--avatarStatusShadowInset);
+    filter: var(--avatarStatusShadowFilter)
+  }
 
   img {
     width: 100%;
@@ -532,6 +551,7 @@ a.unmute {
   .status-el:last-child {
     border-bottom-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;;
     border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
+    border-bottom: none;
   }
 }
 

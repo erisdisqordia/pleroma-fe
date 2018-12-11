@@ -18,6 +18,7 @@
     </transition>
   </div>
   <div class="panel-body">
+<keep-alive>
     <tab-switcher>
       <div :label="$t('settings.general')" >
         <div class="setting-item">
@@ -207,6 +208,7 @@
       </div>
 
     </tab-switcher>
+</keep-alive>
   </div>
 </div>
 </template>
@@ -218,7 +220,7 @@
 @import '../../_variables.scss';
 
 .setting-item {
-  border-bottom: 2px solid var(--btn, $fallback--btn);
+  border-bottom: 2px solid var(--fg, $fallback--fg);
   margin: 1em 1em 1.4em;
   padding-bottom: 1.4em;
 
@@ -267,12 +269,8 @@
 
   .btn {
     min-height: 28px;
-  }
-
-  .submit {
-    margin-top: 1em;
-    min-height: 30px;
-    width: 10em;
+    min-width: 10em;
+    padding: 0 2em;
   }
 }
 .select-multiple {

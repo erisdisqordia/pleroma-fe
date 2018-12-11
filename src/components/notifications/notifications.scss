@@ -4,31 +4,28 @@
   // a bit of a hack to allow scrolling below notifications
   padding-bottom: 15em;
 
-  .unseen-count {
-    display: inline-block;
-    background-color: $fallback--cRed;
-    background-color: var(--cRed, $fallback--cRed);
-    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
-    border-radius: 99px;
-    min-width: 22px;
-    max-width: 22px;
-    min-height: 22px;
-    max-height: 22px;
-    color: white;
-    font-size: 15px;
-    line-height: 22px;
-    text-align: center;
-    vertical-align: middle
-  }
-
   .loadmore-error {
-    color: $fallback--fg;
-    color: var(--fg, $fallback--fg);
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
   }
 
-  .unseen {
-    box-shadow: inset 4px 0 0 var(--cRed, $fallback--cRed);
-    padding-left: 0;
+  .notification {
+    position: relative;
+
+    .notification-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      pointer-events: none;
+    }
+
+    &.unseen {
+      .notification-overlay {
+        background-image: linear-gradient(135deg, var(--badgeNotification, $fallback--cRed) 4px, transparent 10px)
+      }
+    }
   }
 }
 
@@ -42,20 +39,26 @@
   .broken-favorite {
     border-radius: $fallback--tooltipRadius;
     border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-    color: $fallback--faint;
-    color: var(--faint, $fallback--faint);
-    background-color: $fallback--cAlertRed;
-    background-color: var(--cAlertRed, $fallback--cAlertRed);
+    color: $fallback--text;
+    color: var(--alertErrorText, $fallback--text);
+    background-color: $fallback--alertError;
+    background-color: var(--alertError, $fallback--alertError);
     padding: 2px .5em
   }
 
   .avatar-compact {
     width: 32px;
     height: 32px;
+    box-shadow: var(--avatarStatusShadow);
     border-radius: $fallback--avatarAltRadius;
     border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
     overflow: hidden;
     line-height: 0;
+
+    &.better-shadow {
+      box-shadow: var(--avatarStatusShadowInset);
+      filter: var(--avatarStatusShadowFilter)
+    }
 
     &.animated::before {
       display: none;
@@ -90,6 +93,9 @@
         padding: 0.25em 0;
         color: $fallback--faint;
         color: var(--faint, $fallback--faint);
+        a {
+          color: var(--faintLink);
+        }
       }
       padding: 0;
       .media-body {

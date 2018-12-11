@@ -10,7 +10,7 @@
       <button @click.prevent="showNewStatuses" class="loadmore-button" v-if="timeline.newStatusCount > 0 && !timelineError">
         {{$t('timeline.show_new')}}{{newStatusCountStr}}
       </button>
-      <div @click.prevent class="loadmore-text" v-if="!timeline.newStatusCount > 0 && !timelineError">
+      <div @click.prevent class="loadmore-text faint" v-if="!timeline.newStatusCount > 0 && !timelineError">
         {{$t('timeline.up_to_date')}}
       </div>
     </div>
@@ -58,15 +58,7 @@
 
 .timeline {
   .loadmore-text {
-    opacity: 0.8;
-    background-color: transparent;
-    color: $fallback--faint;
-    color: var(--faint, $fallback--faint);
-  }
-
-  .loadmore-error {
-    color: $fallback--fg;
-    color: var(--fg, $fallback--fg);
+    opacity: 1;
   }
 }
 
@@ -79,7 +71,7 @@
   border-color: var(--border, $fallback--border);
   padding: 10px;
   z-index: 1;
-  background-color: $fallback--btn;
-  background-color: var(--btn, $fallback--btn);
+  background-color: $fallback--fg;
+  background-color: var(--panel, $fallback--fg);
 }
 </style>

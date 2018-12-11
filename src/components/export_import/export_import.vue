@@ -1,8 +1,11 @@
 <template>
-<div class="import-export">
+<div class="import-export-container">
+  <slot name="before"/>
   <button class="btn" @click="exportData">{{ exportLabel }}</button>
   <button class="btn" @click="importData">{{ importLabel }}</button>
-  <p v-if="importFailed" class="import-warning">{{ importFailedText }}</p>
+  <slot name="afterButtons"/>
+  <p v-if="importFailed" class="alert error">{{ importFailedText }}</p>
+  <slot name="afterError"/>
 </div>
 </template>
 
@@ -73,3 +76,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.import-export-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+}
+</style>

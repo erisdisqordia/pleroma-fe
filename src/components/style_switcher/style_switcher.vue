@@ -2,30 +2,32 @@
 <div class="style-switcher">
   <div class="presets-container">
     <div class="save-load">
-      <div class="presets">
-        {{$t('settings.presets')}}
-        <label for="preset-switcher" class='select'>
-          <select id="preset-switcher" v-model="selected" class="preset-switcher">
-            <option v-for="style in availableStyles"
-                    :value="style"
-                    :style="{
-                            backgroundColor: style[1] || style.theme.colors.bg,
-                            color: style[3] || style.theme.colors.text
-                            }">
-              {{style[0] || style.name}}
-            </option>
-          </select>
-          <i class="icon-down-open"/>
-        </label>
-      </div>
       <export-import
         :exportObject='exportedTheme'
         :exportLabel='$t("settings.export_theme")'
         :importLabel='$t("settings.import_theme")'
         :importFailedText='$t("settings.invalid_theme_imported")'
         :onImport='onImport'
-        :validator='importValidator'
-        />
+        :validator='importValidator'>
+        <template slot="before">
+          <div class="presets">
+            {{$t('settings.presets')}}
+            <label for="preset-switcher" class='select'>
+              <select id="preset-switcher" v-model="selected" class="preset-switcher">
+                <option v-for="style in availableStyles"
+                        :value="style"
+                        :style="{
+                                backgroundColor: style[1] || style.theme.colors.bg,
+                                color: style[3] || style.theme.colors.text
+                                }">
+                  {{style[0] || style.name}}
+                </option>
+              </select>
+              <i class="icon-down-open"/>
+            </label>
+          </div>
+        </template>
+      </export-import>
     </div>
     <div class="save-load-options">
       <span class="keep-option">

@@ -85,7 +85,7 @@ const settings = {
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
     },
-    preloadImage(value) {
+    preloadImage (value) {
       this.$store.dispatch('setOption', { name: 'preloadImage', value })
     },
     hideISPLocal (value) {

@@ -119,7 +119,7 @@ input, textarea, .select {
   box-sizing: border-box;
   display: inline-block;
   position: relative;
-  height: 29px;
+  height: 28px;
   line-height: 16px;
   hyphens: none;
 
@@ -136,7 +136,7 @@ input, textarea, .select {
     height: 100%;
     color: $fallback--text;
     color: var(--text, $fallback--text);
-    line-height: 29px;
+    line-height: 28px;
     z-index: 0;
     pointer-events: none;
   }
@@ -156,7 +156,7 @@ input, textarea, .select {
     font-size: 14px;
     width: 100%;
     z-index: 1;
-    height: 29px;
+    height: 28px;
     line-height: 16px;
   }
 

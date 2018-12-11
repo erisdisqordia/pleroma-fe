@@ -25,10 +25,10 @@
             <small>{{$t('notifications.followed_you')}}</small>
           </span>
         </div>
-        <small class="timeago"><router-link v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
+        <small class="timeago"><router-link @click.native="activatePanel('timeline')" v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
       </span>
       <div class="follow-text" v-if="notification.type === 'follow'">
-        <router-link :to="{ name: 'user-profile', params: { id: notification.action.user.id } }">@{{notification.action.user.screen_name}}</router-link>
+        <router-link @click.native="activatePanel('timeline')" :to="{ name: 'user-profile', params: { id: notification.action.user.id } }">@{{notification.action.user.screen_name}}</router-link>
       </div>
       <template v-else>
         <status :activatePanel="activatePanel" v-if="notification.status"  class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>

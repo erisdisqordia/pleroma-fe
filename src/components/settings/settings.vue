@@ -118,10 +118,12 @@
               <input type="checkbox" id="hideNsfw" v-model="hideNsfwLocal">
               <label for="hideNsfw">{{$t('settings.nsfw_clickthrough')}}</label>
             </li>
-            <li>
-              <input type="checkbox" id="preloadNsfwImage" v-model="preloadNsfwImage">
-              <label for="preloadNsfwImage">{{$t('settings.preload_sensitive')}}</label>
-            </li>
+            <ul class="setting-list suboptions" >
+              <li>
+                <input type="checkbox" id="preloadImage" v-model="preloadImage">
+                <label for="preloadImage">{{$t('settings.preload_images')}}</label>
+              </li>
+            </ul>
             <li>
               <input type="checkbox" id="stopGifs" v-model="stopGifs">
               <label for="stopGifs">{{$t('settings.stop_gifs')}}</label>

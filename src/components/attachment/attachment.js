@@ -13,7 +13,7 @@ const Attachment = {
     return {
       nsfwImage,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
-      preloadNsfwImage: this.$store.state.config.preloadNsfwImage,
+      preloadImage: this.$store.state.config.preloadImage,
       loopVideo: this.$store.state.config.loopVideo,
       showHidden: false,
       loading: false,

@@ -9,7 +9,7 @@ const defaultState = {
   hideAttachments: false,
   hideAttachmentsInConv: false,
   hideNsfw: true,
-  preloadNsfwImage: true,
+  preloadImage: true,
   loopVideo: true,
   loopVideoSilentOnly: true,
   autoLoad: true,

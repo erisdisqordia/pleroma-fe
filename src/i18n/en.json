@@ -125,6 +125,7 @@
     "hide_attachments_in_convo": "Hide attachments in conversations",
     "hide_attachments_in_tl": "Hide attachments in timeline",
     "hide_isp": "Hide instance-specific panel",
+    "preload_sensitive": "Preload Sensitive Images",
     "hide_post_stats": "Hide post statistics (e.g. the number of favorites)",
     "hide_user_stats": "Hide user statistics (e.g. the number of followers)",
     "import_followers_from_a_csv_file": "Import follows from a csv file",

@@ -13,6 +13,7 @@ const Attachment = {
     return {
       nsfwImage,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
+      preloadNsfwImage: this.$store.state.config.preloadNsfwImage,
       loopVideo: this.$store.state.config.loopVideo,
       showHidden: false,
       loading: false,
@@ -27,7 +28,7 @@ const Attachment = {
       return fileTypeService.fileType(this.attachment.mimetype)
     },
     hidden () {
-      return this.nsfw && this.hideNsfwLocal && !this.showHidden
+      return (this.nsfw && this.hideNsfwLocal && !this.showHidden)
     },
     isEmpty () {
       return (this.type === 'html' && !this.attachment.oembed) || this.type === 'unknown'

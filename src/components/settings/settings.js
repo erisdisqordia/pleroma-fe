@@ -14,6 +14,7 @@ const settings = {
       hideAttachmentsInConvLocal: user.hideAttachmentsInConv,
       hideNsfwLocal: user.hideNsfw,
       hideISPLocal: user.hideISP,
+      preloadNsfwImage: user.preloadNsfwImage,
       hidePostStatsLocal: typeof user.hidePostStats === 'undefined'
         ? instance.hidePostStats
         : user.hidePostStats,
@@ -83,6 +84,9 @@ const settings = {
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
+    },
+    preloadNsfwImage(value) {
+      this.$store.dispatch('setOption', { name: 'preloadNsfwImage', value })
     },
     hideISPLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideISP', value })

@@ -36,6 +36,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env,
       'COMMIT_HASH': JSON.stringify(commitHash)
+      'DEV_OVERRIDES': JSON.stringify(undefined)
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

@@ -88,6 +88,7 @@
     "raw-loader": "^0.5.1",
     "selenium-server": "2.53.1",
     "semver": "^5.3.0",
+    "serviceworker-webpack-plugin": "0.2.3",
     "shelljs": "^0.7.4",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",

@@ -128,6 +128,18 @@
             </li>
           </ul>
         </div>
+
+       <div class="setting-item">
+          <h2>{{$t('settings.notifications')}}</h2>
+          <ul class="setting-list">
+            <li>
+              <input type="checkbox" id="webPushNotifications" v-model="webPushNotificationsLocal">
+              <label for="webPushNotifications">
+                {{$t('settings.enable_web_push_notifications')}}
+              </label>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div :label="$t('settings.theme')" >

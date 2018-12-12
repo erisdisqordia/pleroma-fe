@@ -45,6 +45,7 @@ const settings = {
       scopeCopyLocal: user.scopeCopy,
       scopeCopyDefault: this.$t('settings.values.' + instance.scopeCopy),
       stopGifs: user.stopGifs,
+      webPushNotificationsLocal: user.webPushNotifications,
       loopSilentAvailable:
         // Firefox
         Object.getOwnPropertyDescriptor(HTMLVideoElement.prototype, 'mozHasAudio') ||
@@ -134,6 +135,10 @@ const settings = {
     },
     stopGifs (value) {
       this.$store.dispatch('setOption', { name: 'stopGifs', value })
+    },
+    webPushNotificationsLocal (value) {
+      this.$store.dispatch('setOption', { name: 'webPushNotifications', value })
+      if (value) this.$store.dispatch('registerPushNotifications')
     }
   }
 }

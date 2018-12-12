@@ -175,7 +175,9 @@
     "values": {
       "false": "no",
       "true": "yes"
-    }
+    },
+    "notifications": "Notifications",
+    "enable_web_push_notifications": "Enable web push notifications"
   },
   "timeline": {
     "collapse": "Collapse",

@@ -28,7 +28,7 @@ const Attachment = {
       return fileTypeService.fileType(this.attachment.mimetype)
     },
     hidden () {
-      return (this.nsfw && this.hideNsfwLocal && !this.showHidden)
+      return this.nsfw && this.hideNsfwLocal && !this.showHidden
     },
     isEmpty () {
       return (this.type === 'html' && !this.attachment.oembed) || this.type === 'unknown'

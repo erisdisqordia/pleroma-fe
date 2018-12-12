@@ -47,7 +47,7 @@ const Attachment = {
       }
     },
     toggleHidden () {
-      if (this.img) {
+      if (this.img && !this.preloadImage) {
         if (this.img.onload) {
           this.img.onload()
         } else {

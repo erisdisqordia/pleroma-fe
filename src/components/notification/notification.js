@@ -11,7 +11,8 @@ const Notification = {
     }
   },
   props: [
-    'notification'
+    'notification',
+    'activatePanel'
   ],
   components: {
     Status, StillImage, UserCardContent

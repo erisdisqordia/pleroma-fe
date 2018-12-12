@@ -2,7 +2,7 @@
   <div class="status-el" v-if="!hideReply && !deleted" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
     <template v-if="muted && !noReplyLinks">
       <div class="media status container muted">
-        <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
+        <small><router-link @click.native="activatePanel('timeline')" :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
         <small class="muteWords">{{muteWordHits.join(', ')}}</small>
         <a href="#" class="unmute" @click.prevent="toggleMute"><i class="icon-eye-off"></i></a>
       </div>
@@ -34,10 +34,10 @@
                 <h4 class="user-name" v-if="status.user.name_html" v-html="status.user.name_html"></h4>
                 <h4 class="user-name" v-else>{{status.user.name}}</h4>
                 <span class="links">
-                  <router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link>
+                  <router-link @click.native="activatePanel('timeline')" :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link>
                   <span v-if="status.in_reply_to_screen_name" class="faint reply-info">
                     <i class="icon-right-open"></i>
-                    <router-link :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
+                    <router-link @click.native="activatePanel('timeline')" :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
                       {{status.in_reply_to_screen_name}}
                     </router-link>
                   </span>
@@ -54,7 +54,7 @@
               </h4>
             </div>
             <div class="media-heading-right">
-              <router-link class="timeago" :to="{ name: 'conversation', params: { id: status.id } }">
+              <router-link @click.native="activatePanel('timeline')" :to="{ name: 'conversation', params: { id: status.id } }">
                 <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
               <div class="visibility-icon" v-if="status.visibility">
@@ -73,7 +73,7 @@
           </div>
 
           <div v-if="showPreview" class="status-preview-container">
-            <status class="status-preview" v-if="preview" :noReplyLinks="true" :statusoid="preview" :compact=true></status>
+            <status :activatePanel="activatePanel" class="status-preview" v-if="preview" :noReplyLinks="true" :statusoid="preview" :compact=true></status>
             <div class="status-preview status-preview-loading" v-else>
               <i class="icon-spin4 animate-spin"></i>
             </div>

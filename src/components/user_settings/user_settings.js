@@ -72,7 +72,6 @@ const UserSettings = {
       const file = e.target.files[0]
       if (!file) { return }
       var limit = [this.$store.state.instance.avatarlimit, this.$store.state.instance.bannerlimit, this.$store.state.instance.backgroundlimit]
-      console.log(file.size, limit)
       if (file.size > limit[slot]) {
         const filesize = fileSizeFormatService.fileSizeFormat(file.size)
         const allowedsize = fileSizeFormatService.fileSizeFormat(limit[slot])

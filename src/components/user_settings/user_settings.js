@@ -113,6 +113,8 @@ const UserSettings = {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
           this.previews[0] = null
+        } else {
+          this.$set(this.uploaderror, 0, this.$t('upload.error.base') + user.error)
         }
         this.uploading[0] = false
       })
@@ -141,6 +143,8 @@ const UserSettings = {
           this.$store.commit('addNewUsers', [clone])
           this.$store.commit('setCurrentUser', clone)
           this.previews[1] = null
+        } else {
+          this.$set(this.uploaderror, 1, this.$t('upload.error.base') + data.error)
         }
         this.uploading[1] = false
       })
@@ -165,6 +169,8 @@ const UserSettings = {
           this.$store.commit('addNewUsers', [clone])
           this.$store.commit('setCurrentUser', clone)
           this.previews[2] = null
+        } else {
+          this.$set(this.uploaderror, 2, this.$t('upload.error.base') + data.error)
         }
         this.uploading[2] = false
       })

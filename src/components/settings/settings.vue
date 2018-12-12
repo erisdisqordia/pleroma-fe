@@ -120,7 +120,7 @@
             </li>
             <ul class="setting-list suboptions" >
               <li>
-                <input type="checkbox" id="preloadImage" v-model="preloadImage">
+                <input :disabled="!hideAttachmentsInConvLocal" type="checkbox" id="preloadImage" v-model="preloadImage">
                 <label for="preloadImage">{{$t('settings.preload_images')}}</label>
               </li>
             </ul>

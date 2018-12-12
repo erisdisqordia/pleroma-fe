@@ -43,8 +43,8 @@
             </div>
             <i class="icon-spin4 animate-spin" v-if="uploading[0]"></i>
             <button class="btn btn-default" v-else-if="previews[0]" @click="submitAvatar">{{$t('general.submit')}}</button>
-            <div class='alert error' v-if="avataruploaderror">
-              Error: {{ avataruploaderror }}
+            <div class='alert error' v-if="uploaderror[0]">
+              Error: {{ uploaderror[0] }}
               <i class="icon-cancel" @click="clearUploadError(0)"></i>
             </div>
           </div>
@@ -60,8 +60,8 @@
             </div>
             <i class=" icon-spin4 animate-spin uploading" v-if="uploading[1]"></i>
             <button class="btn btn-default" v-else-if="previews[1]" @click="submitBanner">{{$t('general.submit')}}</button>
-            <div class='alert error' v-if="banneruploaderror">
-              Error: {{ banneruploaderror }}
+            <div class='alert error' v-if="uploaderror[1]">
+              Error: {{ uploaderror[1] }}
               <i class="icon-cancel" @click="clearUploadError(1)"></i>
             </div>
           </div>
@@ -75,8 +75,8 @@
             </div>
             <i class=" icon-spin4 animate-spin uploading" v-if="uploading[2]"></i>
             <button class="btn btn-default" v-else-if="previews[2]" @click="submitBg">{{$t('general.submit')}}</button>
-            <div class='alert error' v-if="backgrounduploaderror">
-              Error: {{ backgrounduploaderror }}
+            <div class='alert error' v-if="uploaderror[2]">
+              Error: {{ uploaderror[2] }}
               <i class="icon-cancel" @click="clearUploadError(2)"></i>
             </div>
           </div>

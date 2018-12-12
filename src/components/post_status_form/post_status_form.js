@@ -264,7 +264,7 @@ const PostStatusForm = {
     },
     uploadFailed (errString, templateArgs) {
       templateArgs = templateArgs || {}
-      this.error = this.$t('post_status.upload_error') + ' ' + this.$t('post_status.' + errString, templateArgs)
+      this.error = this.$t('upload.error.base') + ' ' + this.$t('upload.error.' + errString, templateArgs)
       this.enableSubmit()
     },
     disableSubmit () {

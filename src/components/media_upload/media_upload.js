@@ -25,7 +25,7 @@ const mediaUpload = {
       if (file.size > store.state.instance.uploadlimit) {
         const filesize = fileSizeFormatService.fileSizeFormat(file.size)
         const allowedsize = fileSizeFormatService.fileSizeFormat(store.state.instance.uploadlimit)
-        self.$emit('upload-failed', 'upload_error_file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit})
+        self.$emit('upload-failed', 'file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit})
         return
       }
       const formData = new FormData()
@@ -39,7 +39,7 @@ const mediaUpload = {
           self.$emit('uploaded', fileData)
           self.uploading = false
         }, (error) => { // eslint-disable-line handle-callback-err
-          self.$emit('upload-failed', 'upload_error_generic')
+          self.$emit('upload-failed', 'default')
           self.uploading = false
         })
     },

@@ -52,9 +52,6 @@
     "account_not_locked_warning": "Your account is not {0}. Anyone can follow you to view your follower-only posts.",
     "account_not_locked_warning_link": "locked",
     "attachments_sensitive": "Mark attachments as sensitive",
-    "upload_error": "Upload failed.",
-    "upload_error_file_too_big": "File too big [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-    "upload_error_generic": "Try again later",
     "content_type": {
       "plain_text": "Plain text"
     },
@@ -230,11 +227,18 @@
     "favorite": "Favorite",
     "user_settings": "User Settings"
   },
-  "file_size_units": {
-    "B": "B",
-    "KiB": "KiB",
-    "MiB": "MiB",
-    "GiB": "GiB",
-    "TiB": "TiB"
+  "upload":{
+    "error": {
+    "base": "Upload failed.",
+    "file_too_big": "File too big [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+    "default": "Try again later"
+    },
+    "file_size_units": {
+      "B": "B",
+      "KiB": "KiB",
+      "MiB": "MiB",
+      "GiB": "GiB",
+      "TiB": "TiB"
+    }
   }
 }

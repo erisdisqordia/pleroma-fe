@@ -198,6 +198,7 @@ const UserSettings = {
         .fetchFriends({id: this.$store.state.users.currentUser.id})
         .then((friendList) => {
           this.exportPeople(friendList, 'friends.csv')
+          setTimeout(() => { this.enableFollowsExport = true }, 2000)
         })
     },
     followListChange () {

@@ -4,11 +4,12 @@ import StyleSwitcher from '../style_switcher/style_switcher.vue'
 const UserSettings = {
   data () {
     return {
-      newname: this.$store.state.users.currentUser.name,
-      newbio: this.$store.state.users.currentUser.description,
-      newlocked: this.$store.state.users.currentUser.locked,
-      newnorichtext: this.$store.state.users.currentUser.no_rich_text,
-      newdefaultScope: this.$store.state.users.currentUser.default_scope,
+      newName: this.$store.state.users.currentUser.name,
+      newBio: this.$store.state.users.currentUser.description,
+      newLocked: this.$store.state.users.currentUser.locked,
+      newNoRichText: this.$store.state.users.currentUser.no_rich_text,
+      newDefaultScope: this.$store.state.users.currentUser.default_scope,
+      newHideNetwork: this.$store.state.users.currentUser.hide_network,
       followList: null,
       followImportError: false,
       followsImported: false,
@@ -40,31 +41,45 @@ const UserSettings = {
     },
     vis () {
       return {
-        public: { selected: this.newdefaultScope === 'public' },
-        unlisted: { selected: this.newdefaultScope === 'unlisted' },
-        private: { selected: this.newdefaultScope === 'private' },
-        direct: { selected: this.newdefaultScope === 'direct' }
+        public: { selected: this.newDefaultScope === 'public' },
+        unlisted: { selected: this.newDefaultScope === 'unlisted' },
+        private: { selected: this.newDefaultScope === 'private' },
+        direct: { selected: this.newDefaultScope === 'direct' }
       }
     }
   },
   methods: {
     updateProfile () {
       const name = this.newname
-      const description = this.newbio
-      const locked = this.newlocked
+      const description = this.newBio
+      const locked = this.newLocked
+      // Backend notation.
       /* eslint-disable camelcase */
-      const default_scope = this.newdefaultScope
-      const no_rich_text = this.newnorichtext
-      this.$store.state.api.backendInteractor.updateProfile({params: {name, description, locked, default_scope, no_rich_text}}).then((user) => {
-        if (!user.error) {
-          this.$store.commit('addNewUsers', [user])
-          this.$store.commit('setCurrentUser', user)
-        }
-      })
+      const default_scope = this.newDefaultScope
+      const no_rich_text = this.newNoRichText
+      const hide_network = this.newHideNetwork
       /* eslint-enable camelcase */
+      this.$store.state.api.backendInteractor
+        .updateProfile({
+          params: {
+            name,
+            description,
+            locked,
+            // Backend notation.
+            /* eslint-disable camelcase */
+            default_scope,
+            no_rich_text,
+            hide_network
+            /* eslint-enable camelcase */
+          }}).then((user) => {
+            if (!user.error) {
+              this.$store.commit('addNewUsers', [user])
+              this.$store.commit('setCurrentUser', user)
+            }
+          })
     },
     changeVis (visibility) {
-      this.newdefaultScope = visibility
+      this.newDefaultScope = visibility
     },
     uploadFile (slot, e) {
       const file = e.target.files[0]

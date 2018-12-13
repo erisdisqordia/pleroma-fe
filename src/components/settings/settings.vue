@@ -18,6 +18,7 @@
     </transition>
   </div>
   <div class="panel-body">
+<keep-alive>
     <tab-switcher>
       <div :label="$t('settings.general')" >
         <div class="setting-item">
@@ -117,6 +118,12 @@
               <input type="checkbox" id="hideNsfw" v-model="hideNsfwLocal">
               <label for="hideNsfw">{{$t('settings.nsfw_clickthrough')}}</label>
             </li>
+            <ul class="setting-list suboptions" >
+              <li>
+                <input :disabled="!hideAttachmentsInConvLocal" type="checkbox" id="preloadImage" v-model="preloadImage">
+                <label for="preloadImage">{{$t('settings.preload_images')}}</label>
+              </li>
+            </ul>
             <li>
               <input type="checkbox" id="stopGifs" v-model="stopGifs">
               <label for="stopGifs">{{$t('settings.stop_gifs')}}</label>
@@ -133,6 +140,18 @@
                   </div>
                 </li>
               </ul>
+            </li>
+          </ul>
+        </div>
+
+       <div class="setting-item">
+          <h2>{{$t('settings.notifications')}}</h2>
+          <ul class="setting-list">
+            <li>
+              <input type="checkbox" id="webPushNotifications" v-model="webPushNotificationsLocal">
+              <label for="webPushNotifications">
+                {{$t('settings.enable_web_push_notifications')}}
+              </label>
             </li>
           </ul>
         </div>
@@ -207,6 +226,7 @@
       </div>
 
     </tab-switcher>
+</keep-alive>
   </div>
 </div>
 </template>
@@ -218,7 +238,7 @@
 @import '../../_variables.scss';
 
 .setting-item {
-  border-bottom: 2px solid var(--btn, $fallback--btn);
+  border-bottom: 2px solid var(--fg, $fallback--fg);
   margin: 1em 1em 1.4em;
   padding-bottom: 1.4em;
 
@@ -267,12 +287,8 @@
 
   .btn {
     min-height: 28px;
-  }
-
-  .submit {
-    margin-top: 1em;
-    min-height: 30px;
-    width: 10em;
+    min-width: 10em;
+    padding: 0 2em;
   }
 }
 .select-multiple {

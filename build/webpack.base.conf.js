@@ -2,6 +2,7 @@ var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
+var ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
 
 var env = process.env.NODE_ENV
 // check env & config/index.js to decide weither to enable CSS Sourcemaps for the
@@ -91,5 +92,10 @@ module.exports = {
         browsers: ['last 2 versions']
       })
     ]
-  }
+  },
+  plugins: [
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, '..', 'src/sw.js')
+    })
+  ]
 }

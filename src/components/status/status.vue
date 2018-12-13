@@ -2,14 +2,14 @@
   <div class="status-el" v-if="!hideReply && !deleted" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
     <template v-if="muted && !noReplyLinks">
       <div class="media status container muted">
-        <small><router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
+        <small><router-link @click.native="activatePanel('timeline')" :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link></small>
         <small class="muteWords">{{muteWordHits.join(', ')}}</small>
         <a href="#" class="unmute" @click.prevent="toggleMute"><i class="icon-eye-off"></i></a>
       </div>
     </template>
     <template v-else>
       <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
-        <StillImage v-if="retweet" class='avatar' :src="statusoid.user.profile_image_url_original"/>
+        <StillImage v-if="retweet" class='avatar' :class='{ "better-shadow": betterShadow }' :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
           <a v-else :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
@@ -21,7 +21,7 @@
       <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <a :href="status.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
-            <StillImage class='avatar' :class="{'avatar-compact': compact}"  :src="status.user.profile_image_url_original"/>
+            <StillImage class='avatar' :class="{'avatar-compact': compact, 'better-shadow': betterShadow}"  :src="status.user.profile_image_url_original"/>
           </a>
         </div>
         <div class="status-body">
@@ -34,10 +34,10 @@
                 <h4 class="user-name" v-if="status.user.name_html" v-html="status.user.name_html"></h4>
                 <h4 class="user-name" v-else>{{status.user.name}}</h4>
                 <span class="links">
-                  <router-link :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link>
+                  <router-link @click.native="activatePanel('timeline')" :to="{ name: 'user-profile', params: { id: status.user.id } }">{{status.user.screen_name}}</router-link>
                   <span v-if="status.in_reply_to_screen_name" class="faint reply-info">
                     <i class="icon-right-open"></i>
-                    <router-link :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
+                    <router-link @click.native="activatePanel('timeline')" :to="{ name: 'user-profile', params: { id: status.in_reply_to_user_id } }">
                       {{status.in_reply_to_screen_name}}
                     </router-link>
                   </span>
@@ -54,7 +54,7 @@
               </h4>
             </div>
             <div class="media-heading-right">
-              <router-link class="timeago" :to="{ name: 'conversation', params: { id: status.id } }">
+              <router-link class="timeago" @click.native="activatePanel('timeline')" :to="{ name: 'conversation', params: { id: status.id } }">
                 <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
               <div class="visibility-icon" v-if="status.visibility">
@@ -73,7 +73,7 @@
           </div>
 
           <div v-if="showPreview" class="status-preview-container">
-            <status class="status-preview" v-if="preview" :noReplyLinks="true" :statusoid="preview" :compact=true></status>
+            <status :activatePanel="activatePanel" class="status-preview" v-if="preview" :noReplyLinks="true" :statusoid="preview" :compact=true></status>
             <div class="status-preview status-preview-loading" v-else>
               <i class="icon-spin4 animate-spin"></i>
             </div>
@@ -146,6 +146,7 @@
   border-radius: $fallback--tooltipRadius;
   border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--popupShadow);
   margin-top: 0.25em;
   margin-left: 0.5em;
   z-index: 50;
@@ -284,8 +285,8 @@
       margin-left: 0.2em;
     }
     a:hover i {
-      color: $fallback--fg;
-      color: var(--fg, $fallback--fg);
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
     }
   }
 
@@ -323,6 +324,8 @@
 
   .status-content {
     margin-right: 0.5em;
+    font-family: var(--postFont, sans-serif);
+
     img, video {
       max-width: 100%;
       max-height: 400px;
@@ -337,6 +340,10 @@
 
     pre {
       overflow: auto;
+    }
+
+    code, samp, kbd, var, pre {
+      font-family: var(--postCodeFont, monospace);
     }
 
     p {
@@ -457,17 +464,29 @@
 .status .avatar-compact {
   width: 32px;
   height: 32px;
+  box-shadow: var(--avatarStatusShadow);
   border-radius: $fallback--avatarAltRadius;
   border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+
+  &.better-shadow {
+    box-shadow: var(--avatarStatusShadowInset);
+    filter: var(--avatarStatusShadowFilter)
+  }
 }
 
 .avatar {
   width: 48px;
   height: 48px;
+  box-shadow: var(--avatarStatusShadow);
   border-radius: $fallback--avatarRadius;
   border-radius: var(--avatarRadius, $fallback--avatarRadius);
   overflow: hidden;
   position: relative;
+
+  &.better-shadow {
+    box-shadow: var(--avatarStatusShadowInset);
+    filter: var(--avatarStatusShadowFilter)
+  }
 
   img {
     width: 100%;
@@ -532,6 +551,7 @@ a.unmute {
   .status-el:last-child {
     border-bottom-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;;
     border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
+    border-bottom: none;
   }
 }
 

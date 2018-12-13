@@ -17,16 +17,20 @@ import FollowRequests from '../components/follow_requests/follow_requests.vue'
 import OAuthCallback from '../components/oauth_callback/oauth_callback.vue'
 import UserSearch from '../components/user_search/user_search.vue'
 
-const afterStoreSetup = ({store, i18n}) => {
+const afterStoreSetup = ({ store, i18n }) => {
   window.fetch('/api/statusnet/config.json')
     .then((res) => res.json())
     .then((data) => {
-      const {name, closed: registrationClosed, textlimit, server} = data.site
+      const { name, closed: registrationClosed, textlimit, server, vapidPublicKey } = data.site
 
       store.dispatch('setInstanceOption', { name: 'name', value: name })
       store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
       store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
       store.dispatch('setInstanceOption', { name: 'server', value: server })
+
+      if (vapidPublicKey) {
+        store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })
+      }
 
       var apiConfig = data.site.pleromafe
 
@@ -38,8 +42,17 @@ const afterStoreSetup = ({store, i18n}) => {
           return {}
         })
         .then((staticConfig) => {
+          const overrides = window.___pleromafe_dev_overrides || {}
+          const env = window.___pleromafe_mode.NODE_ENV
+
           // This takes static config and overrides properties that are present in apiConfig
-          var config = Object.assign({}, staticConfig, apiConfig)
+          let config = {}
+          if (overrides.staticConfigPreference && env === 'development') {
+            console.warn('OVERRIDING API CONFIG WITH STATIC CONFIG')
+            config = Object.assign({}, apiConfig, staticConfig)
+          } else {
+            config = Object.assign({}, staticConfig, apiConfig)
+          }
 
           var theme = (config.theme)
           var background = (config.background)
@@ -58,6 +71,7 @@ const afterStoreSetup = ({store, i18n}) => {
           var loginMethod = (config.loginMethod)
           var scopeCopy = (config.scopeCopy)
           var subjectLineBehavior = (config.subjectLineBehavior)
+          var alwaysShowSubjectInput = (config.alwaysShowSubjectInput)
 
           store.dispatch('setInstanceOption', { name: 'theme', value: theme })
           store.dispatch('setInstanceOption', { name: 'background', value: background })
@@ -75,6 +89,7 @@ const afterStoreSetup = ({store, i18n}) => {
           store.dispatch('setInstanceOption', { name: 'loginMethod', value: loginMethod })
           store.dispatch('setInstanceOption', { name: 'scopeCopy', value: scopeCopy })
           store.dispatch('setInstanceOption', { name: 'subjectLineBehavior', value: subjectLineBehavior })
+          store.dispatch('setInstanceOption', { name: 'alwaysShowSubjectInput', value: alwaysShowSubjectInput })
           if (chatDisabled) {
             store.dispatch('disableChat')
           }

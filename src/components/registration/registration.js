@@ -1,57 +1,61 @@
-import oauthApi from '../../services/new_api/oauth.js'
+import { validationMixin } from 'vuelidate'
+import { required, sameAs } from 'vuelidate/lib/validators'
+import { mapActions, mapState } from 'vuex'
 
 const registration = {
+  mixins: [validationMixin],
   data: () => ({
-    user: {},
-    error: false,
-    registering: false
-  }),
-  created () {
-    if ((!this.$store.state.instance.registrationOpen && !this.token) || !!this.$store.state.users.currentUser) {
-      this.$router.push('/main/all')
+    user: {
+      email: '',
+      fullname: '',
+      username: '',
+      password: '',
+      confirm: ''
     }
-    // Seems like this doesn't work at first page open for some reason
-    if (this.$store.state.instance.registrationOpen && this.token) {
-      this.$router.push('/registration')
+  }),
+  validations: {
+    user: {
+      email: { required },
+      username: { required },
+      fullname: { required },
+      password: { required },
+      confirm: {
+        required,
+        sameAsPassword: sameAs('password')
+      }
+    }
+  },
+  created () {
+    if ((!this.registrationOpen && !this.token) || this.signedIn) {
+      this.$router.push('/main/all')
     }
   },
   computed: {
-    termsofservice () { return this.$store.state.instance.tos },
-    token () { return this.$route.params.token }
+    token () { return this.$route.params.token },
+    ...mapState({
+      registrationOpen: (state) => state.instance.registrationOpen,
+      signedIn: (state) => !!state.users.currentUser,
+      isPending: (state) => state.users.signUpPending,
+      serverValidationErrors: (state) => state.users.signUpErrors,
+      termsOfService: (state) => state.instance.tos
+    })
   },
   methods: {
-    submit () {
-      this.registering = true
+    ...mapActions(['signUp']),
+    async submit () {
       this.user.nickname = this.user.username
       this.user.token = this.token
-      this.$store.state.api.backendInteractor.register(this.user).then(
-        (response) => {
-          if (response.ok) {
-            const data = {
-              oauth: this.$store.state.oauth,
-              instance: this.$store.state.instance.server
-            }
-            oauthApi.getOrCreateApp(data).then((app) => {
-              oauthApi.getTokenWithCredentials(
-                {
-                  app,
-                  instance: data.instance,
-                  username: this.user.username,
-                  password: this.user.password})
-                .then((result) => {
-                  this.$store.commit('setToken', result.access_token)
-                  this.$store.dispatch('loginUser', result.access_token)
-                  this.$router.push('/main/friends')
-                })
-            })
-          } else {
-            this.registering = false
-            response.json().then((data) => {
-              this.error = data.error
-            })
-          }
+
+      this.$v.$touch()
+
+      if (!this.$v.$invalid) {
+        try {
+          await this.signUp(this.user)
+          this.$router.push('/main/friends')
+        } catch (error) {
+          console.warn('Registration failed: ' + error)
         }
-      )
+      }
     }
   }
 }

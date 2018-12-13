@@ -1,13 +1,21 @@
 @import '../../_variables.scss';
 
 .tab-switcher {
+  .contents {
+    .hidden {
+      display: none;
+    }
+  }
   .tabs {
     display: flex;
     position: relative;
     justify-content: center;
     width: 100%;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
     padding-top: 5px;
+    height: 32px;
+    box-sizing: border-box;
 
     &::after, &::before {
       display: block;
@@ -17,20 +25,34 @@
 
     .tab, &::after, &::before {
       border-bottom: 1px solid;
-      border-bottom-color: $fallback--btn;
-      border-bottom-color: var(--btn, $fallback--btn);
+      border-bottom-color: $fallback--border;
+      border-bottom-color: var(--border, $fallback--border);
     }
 
     .tab {
+      position: relative;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      padding: .3em 1em;
+      padding: 5px 1em 99px;
+      white-space: nowrap;
 
       &:not(.active) {
-        border-bottom: 1px solid;
-        border-bottom-color: $fallback--btn;
-        border-bottom-color: var(--btn, $fallback--btn);
         z-index: 4;
+
+        &:hover {
+          z-index: 6;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 26px;
+          border-bottom: 1px solid;
+          border-bottom-color: $fallback--border;
+          border-bottom-color: var(--border, $fallback--border);
+        }
       }
 
       &.active {

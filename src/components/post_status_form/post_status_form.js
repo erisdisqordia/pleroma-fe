@@ -46,7 +46,7 @@ const PostStatusForm = {
       statusText = buildMentionsString({ user: this.repliedUser, attentions: this.attentions }, currentUser)
     }
 
-    const scope = (this.copyMessageScope && this.$store.state.config.copyScope || this.copyMessageScope === 'direct')
+    const scope = (this.copyMessageScope && this.$store.state.config.scopeCopy || this.copyMessageScope === 'direct')
           ? this.copyMessageScope
           : this.$store.state.users.currentUser.default_scope
 

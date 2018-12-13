@@ -4,6 +4,7 @@ import notificationsFetcher from '../../services/notifications_fetcher/notificat
 import { sortBy, filter } from 'lodash'
 
 const Notifications = {
+  props: [ 'activatePanel' ],
   created () {
     const store = this.$store
     const credentials = store.state.users.currentUser.credentials

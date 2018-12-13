@@ -78,42 +78,18 @@ const UserSettings = {
     uploadFile (slot, e) {
       const file = e.target.files[0]
       if (!file) { return }
-      var error = () => {}
-      switch (slot) {
-        case 0:
-          error = (error) => { this.avatarUploadError = error }
-          break
-        case 1:
-          error = (error) => { this.bannerUploadError = error }
-          break
-        case 2:
-          error = (error) => { this.backgroundUploadError = error }
-          break
-      }
       var limit = [this.$store.state.instance.avatarlimit, this.$store.state.instance.bannerlimit, this.$store.state.instance.backgroundlimit]
       if (file.size > limit[slot]) {
         const filesize = fileSizeFormatService.fileSizeFormat(file.size)
         const allowedsize = fileSizeFormatService.fileSizeFormat(limit[slot])
-        error(this.$t('upload.error.base') + ' ' + this.$t('upload.error.file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit}))
+        this[slot + 'UploadError'] = this.$t('upload.error.base') + ' ' + this.$t('upload.error.file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit})
         return
       }
       // eslint-disable-next-line no-undef
       const reader = new FileReader()
       reader.onload = ({target}) => {
         const img = target.result
-        var preview = () => {}
-        switch (slot) {
-          case 0:
-            preview = (preview) => { this.avatarPreview = preview }
-            break
-          case 1:
-            preview = (preview) => { this.bannerPreview = preview }
-            break
-          case 2:
-            preview = (preview) => { this.backgroundPreview = preview }
-            break
-        }
-        preview(img)
+        this[slot + 'Preview'] = img
       }
       reader.readAsDataURL(file)
     },
@@ -149,17 +125,7 @@ const UserSettings = {
       })
     },
     clearUploadError (slot) {
-      switch (slot) {
-        case 0:
-          this.avatarUploadError = null
-          break
-        case 1:
-          this.bannerUploadError = null
-          break
-        case 2:
-          this.backgroundUploadError = null
-          break
-      }
+      this[slot + 'UploadError'] = null
     },
     submitBanner () {
       if (!this.bannerPreview) { return }

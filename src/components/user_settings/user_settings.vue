@@ -39,13 +39,13 @@
             <img class="new-avatar" v-bind:src="avatarPreview" v-if="avatarPreview">
             </img>
             <div>
-              <input type="file" @change="uploadFile(0, $event)" ></input>
+              <input type="file" @change="uploadFile('avatar', $event)" ></input>
             </div>
             <i class="icon-spin4 animate-spin" v-if="avatarUploading"></i>
             <button class="btn btn-default" v-else-if="avatarPreview" @click="submitAvatar">{{$t('general.submit')}}</button>
             <div class='alert error' v-if="avatarUploadError">
               Error: {{ avatarUploadError }}
-              <i class="icon-cancel" @click="clearUploadError(0)"></i>
+              <i class="icon-cancel" @click="clearUploadError('avatar')"></i>
             </div>
           </div>
           <div class="setting-item">
@@ -56,13 +56,13 @@
             <img class="banner" v-bind:src="bannerPreview" v-if="bannerPreview">
             </img>
             <div>
-              <input type="file" @change="uploadFile(1, $event)" ></input>
+              <input type="file" @change="uploadFile('banner', $event)" ></input>
             </div>
             <i class=" icon-spin4 animate-spin uploading" v-if="bannerUploading"></i>
             <button class="btn btn-default" v-else-if="bannerPreview" @click="submitBanner">{{$t('general.submit')}}</button>
             <div class='alert error' v-if="bannerUploadError">
               Error: {{ bannerUploadError }}
-              <i class="icon-cancel" @click="clearUploadError(1)"></i>
+              <i class="icon-cancel" @click="clearUploadError('banner')"></i>
             </div>
           </div>
           <div class="setting-item">
@@ -71,13 +71,13 @@
             <img class="bg" v-bind:src="backgroundPreview" v-if="backgroundPreview">
             </img>
             <div>
-              <input type="file" @change="uploadFile(2, $event)" ></input>
+              <input type="file" @change="uploadFile('background', $event)" ></input>
             </div>
             <i class=" icon-spin4 animate-spin uploading" v-if="backgroundUploading"></i>
             <button class="btn btn-default" v-else-if="backgroundPreview" @click="submitBg">{{$t('general.submit')}}</button>
             <div class='alert error' v-if="backgroundUploadError">
               Error: {{ backgroundUploadError }}
-              <i class="icon-cancel" @click="clearUploadError(2)"></i>
+              <i class="icon-cancel" @click="clearUploadError('background')"></i>
             </div>
           </div>
         </div>

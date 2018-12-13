@@ -54,7 +54,7 @@
               </h4>
             </div>
             <div class="media-heading-right">
-              <router-link @click.native="activatePanel('timeline')" :to="{ name: 'conversation', params: { id: status.id } }">
+              <router-link class="timeago" @click.native="activatePanel('timeline')" :to="{ name: 'conversation', params: { id: status.id } }">
                 <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
               <div class="visibility-icon" v-if="status.visibility">

@@ -1,3 +1,5 @@
+import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+
 const chatPanel = {
   data () {
     return {
@@ -9,6 +11,9 @@ const chatPanel = {
   computed: {
     messages () {
       return this.$store.state.chat.messages
+    },
+    userProfileLink (user) {
+      return generateProfileLink(user, user.name)
     }
   },
   methods: {

@@ -10,13 +10,13 @@
       <div :title="user.name" v-if="user.name_html" class="user-name">
         <span v-html="user.name_html"></span>
         <span class="follows-you" v-if="!userExpanded && showFollows && user.follows_you">
-          {{ $t('user_card.follows_you') }}
+          {{ currentUser.id == user.id ? $t('user_card.its_you') : $t('user_card.follows_you') }}
         </span>
       </div>
       <div :title="user.name" v-else class="user-name">
         {{ user.name }}
         <span class="follows-you" v-if="!userExpanded && showFollows && user.follows_you">
-          {{ $t('user_card.follows_you') }}
+          {{ currentUser.id == user.id ? $t('user_card.its_you') : $t('user_card.follows_you') }}
         </span>
       </div>
       <router-link class='user-screen-name' :to="{ name: 'user-profile', params: { id: user.id } }">

@@ -90,7 +90,7 @@
       </div>
     </div>
   </div>
-  <div class="panel-body profile-panel-body" v-if="switcher">
+  <div class="panel-body profile-panel-body" v-if="!hideBio">
     <div v-if="!hideUserStatsLocal || switcher" class="user-counts" :class="{clickable: switcher}">
       <div class="user-count" v-on:click.prevent="setProfileView('statuses')" :class="{selected: selected === 'statuses'}">
         <h5>{{ $t('user_card.statuses') }}</h5>
@@ -121,6 +121,9 @@
   border-radius: $fallback--panelRadius;
   border-radius: var(--panelRadius, $fallback--panelRadius);
   overflow: hidden;
+
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 
   .panel-heading {
     padding: 0.6em 0em;

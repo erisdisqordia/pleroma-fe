@@ -25,6 +25,8 @@ const defaultState = {
   scopeCopy: true,
   subjectLineBehavior: 'email',
   loginMethod: 'password',
+  nsfwCensorImage: undefined,
+  vapidPublicKey: undefined,
 
   // Nasty stuff
   pleromaBackend: true,

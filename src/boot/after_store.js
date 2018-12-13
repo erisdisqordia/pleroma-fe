@@ -28,6 +28,10 @@ const afterStoreSetup = ({ store, i18n }) => {
       store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
       store.dispatch('setInstanceOption', { name: 'server', value: server })
 
+      if (data.nsfwCensorImage) {
+        store.dispatch('setInstanceOption', { name: 'nsfwCensorImage', value: data.nsfwCensorImage })
+      }
+
       if (vapidPublicKey) {
         store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })
       }

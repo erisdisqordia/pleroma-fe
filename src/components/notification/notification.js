@@ -2,6 +2,7 @@ import Status from '../status/status.vue'
 import StillImage from '../still-image/still-image.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
+import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 const Notification = {
   data () {
@@ -28,6 +29,9 @@ const Notification = {
       const highlight = this.$store.state.config.highlight
       const user = this.notification.action.user
       return highlightStyle(highlight[user.screen_name])
+    },
+    userProfileLink (user) {
+      return generateProfileLink(user.id, user.screen_name)
     }
   }
 }

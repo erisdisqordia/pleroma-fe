@@ -2,14 +2,14 @@ import generateProfileLink from 'src/services/user_profile_link_generator/user_p
 
 describe('generateProfileLink', () => {
   it('returns obj for local user', () => {
-    const user = { screen_name: 'john' }
-
-    expect(generateProfileLink(user, 'jack')).to.eql({ name: 'user-profile', params: { name: 'jack' } })
+    expect(generateProfileLink(1, 'jack')).to.eql({
+      name: 'user-profile', params: { name: 'jack' }
+    })
   })
 
   it('returns obj for external user', () => {
-    const user = { screen_name: 'john@domain', id: 1 }
-
-    expect(generateProfileLink(user)).to.eql({ name: 'user-profile', params: { id: 1 } })
+    expect(generateProfileLink(1, 'john@domain')).to.eql({
+      name: 'user-profile', params: { id: 1 }
+    })
   })
 })

@@ -19,7 +19,8 @@
           {{ $t('user_card.follows_you') }}
         </span>
       </div>
-      <router-link class='user-screen-name' :to="{ name: 'user-profile', params: { name: user.screen_name } }">
+
+      <router-link class='user-screen-name' :to="userProfileLink(user)">
         @{{user.screen_name}}
       </router-link>
     </div>

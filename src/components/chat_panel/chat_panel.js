@@ -13,7 +13,7 @@ const chatPanel = {
       return this.$store.state.chat.messages
     },
     userProfileLink (user) {
-      return generateProfileLink(user, user.name)
+      return generateProfileLink(user.id, user.screen_name)
     }
   },
   methods: {

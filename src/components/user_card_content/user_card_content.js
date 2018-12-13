@@ -1,5 +1,6 @@
 import StillImage from '../still-image/still-image.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
+import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio', 'activatePanel' ],
@@ -39,6 +40,9 @@ export default {
     dailyAvg () {
       const days = Math.ceil((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
       return Math.round(this.user.statuses_count / days)
+    },
+    userProfileLink (user) {
+      return generateProfileLink(user.id, user.screen_name)
     },
     userHighlightType: {
       get () {

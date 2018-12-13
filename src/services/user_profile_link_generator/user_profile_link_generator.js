@@ -5,6 +5,6 @@ const generateProfileLink = (user, name = '') => {
   return { ...baseLinkParams, params: (isExternal(user) ? { id } : { name }) }
 }
 
-const isExternal = ({screen_name}) => (screen_name.indexOf('@') > 0)
+const isExternal = ({screen_name}) => (screen_name.indexOf('@') > -1)
 
 export default generateProfileLink

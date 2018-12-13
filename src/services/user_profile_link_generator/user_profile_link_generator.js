@@ -5,6 +5,6 @@ const generateProfileLink = (id, screenName) => {
   }
 }
 
-const isExternal = screenName => (screenName.indexOf('@') > -1)
+const isExternal = screenName => screenName.includes('@')
 
 export default generateProfileLink

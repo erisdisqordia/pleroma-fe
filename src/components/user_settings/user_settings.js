@@ -78,10 +78,9 @@ const UserSettings = {
     uploadFile (slot, e) {
       const file = e.target.files[0]
       if (!file) { return }
-      var limit = [this.$store.state.instance.avatarlimit, this.$store.state.instance.bannerlimit, this.$store.state.instance.backgroundlimit]
-      if (file.size > limit[slot]) {
+      if (file.size > this.$store.state.instance[slot + 'limit']) {
         const filesize = fileSizeFormatService.fileSizeFormat(file.size)
-        const allowedsize = fileSizeFormatService.fileSizeFormat(limit[slot])
+        const allowedsize = fileSizeFormatService.fileSizeFormat(this.$store.state.instance[slot + 'limit'])
         this[slot + 'UploadError'] = this.$t('upload.error.base') + ' ' + this.$t('upload.error.file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit})
         return
       }

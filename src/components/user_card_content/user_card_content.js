@@ -2,21 +2,25 @@ import StillImage from '../still-image/still-image.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
 export default {
-  props: [ 'user', 'switcher', 'selected', 'hideBio' ],
+  props: [ 'user', 'switcher', 'selected', 'hideBio', 'activatePanel' ],
   data () {
     return {
       followRequestInProgress: false,
       followRequestSent: false,
       hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
         ? this.$store.state.instance.hideUserStats
-        : this.$store.state.config.hideUserStats
+        : this.$store.state.config.hideUserStats,
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
   computed: {
     headingStyle () {
-      const color = this.$store.state.config.colors.bg
+      const color = this.$store.state.config.customTheme.colors
+            ? this.$store.state.config.customTheme.colors.bg  // v2
+            : this.$store.state.config.colors.bg // v1
+
       if (color) {
-        const rgb = hex2rgb(color)
+        const rgb = (typeof color === 'string') ? hex2rgb(color) : color
         const tintColor = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .5)`
         return {
           backgroundColor: `rgb(${Math.floor(rgb.r * 0.53)}, ${Math.floor(rgb.g * 0.56)}, ${Math.floor(rgb.b * 0.59)})`,
@@ -143,6 +147,14 @@ export default {
       if (this.switcher) {
         const store = this.$store
         store.commit('setProfileView', { v })
+      }
+    },
+    linkClicked ({target}) {
+      if (target.tagName === 'SPAN') {
+        target = target.parentNode
+      }
+      if (target.tagName === 'A') {
+        window.open(target.href, '_blank')
       }
     }
   }

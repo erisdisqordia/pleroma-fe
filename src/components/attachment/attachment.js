@@ -13,6 +13,7 @@ const Attachment = {
     return {
       nsfwImage,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
+      preloadImage: this.$store.state.config.preloadImage,
       loopVideo: this.$store.state.config.loopVideo,
       showHidden: false,
       loading: false,
@@ -46,7 +47,7 @@ const Attachment = {
       }
     },
     toggleHidden () {
-      if (this.img) {
+      if (this.img && !this.preloadImage) {
         if (this.img.onload) {
           this.img.onload()
         } else {

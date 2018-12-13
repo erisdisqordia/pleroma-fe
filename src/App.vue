@@ -25,12 +25,12 @@
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">
             <div class="sidebar">
-              <user-panel></user-panel>
+              <user-panel :activatePanel="activatePanel"></user-panel>
               <nav-panel :activatePanel="activatePanel"></nav-panel>
               <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
               <features-panel v-if="!currentUser"></features-panel>
               <who-to-follow-panel v-if="currentUser && suggestionsEnabled"></who-to-follow-panel>
-              <notifications v-if="currentUser"></notifications>
+              <notifications :activatePanel="activatePanel" v-if="currentUser"></notifications>
             </div>
           </div>
         </div>

@@ -20,7 +20,8 @@ const Status = {
     'replies',
     'noReplyLinks',
     'noHeading',
-    'inlineExpanded'
+    'inlineExpanded',
+    'activatePanel'
   ],
   data () {
     return {
@@ -33,7 +34,8 @@ const Status = {
       showingTall: false,
       expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
         ? !this.$store.state.instance.collapseMessageWithSubject
-        : !this.$store.state.config.collapseMessageWithSubject
+        : !this.$store.state.config.collapseMessageWithSubject,
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
   computed: {
@@ -52,6 +54,9 @@ const Status = {
     userClass () {
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
       return highlightClass(user)
+    },
+    deleted () {
+      return this.statusoid.deleted
     },
     repeaterStyle () {
       const user = this.statusoid.user

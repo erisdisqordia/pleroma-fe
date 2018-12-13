@@ -9,11 +9,11 @@
           <div class="setting-item" >
             <h2>{{$t('settings.name_bio')}}</h2>
             <p>{{$t('settings.name')}}</p>
-            <input class='name-changer' id='username' v-model="newname"></input>
+            <input class='name-changer' id='username' v-model="newName"></input>
             <p>{{$t('settings.bio')}}</p>
-            <textarea class="bio" v-model="newbio"></textarea>
+            <textarea class="bio" v-model="newBio"></textarea>
             <p>
-              <input type="checkbox" v-model="newlocked" id="account-locked">
+              <input type="checkbox" v-model="newLocked" id="account-locked">
               <label for="account-locked">{{$t('settings.lock_account_description')}}</label>
             </p>
             <div v-if="scopeOptionsEnabled">
@@ -26,10 +26,14 @@
               </div>
             </div>
             <p>
-              <input type="checkbox" v-model="newnorichtext" id="account-no-rich-text">
+              <input type="checkbox" v-model="newNoRichText" id="account-no-rich-text">
               <label for="account-no-rich-text">{{$t('settings.no_rich_text_description')}}</label>
             </p>
-            <button :disabled='newname.length <= 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
+            <p>
+              <input type="checkbox" v-model="newHideNetwork" id="account-hide-network">
+              <label for="account-no-rich-text">{{$t('settings.hide_network_description')}}</label>
+            </p>
+            <button :disabled='newName.length <= 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
           </div>
           <div class="setting-item">
             <h2>{{$t('settings.avatar')}}</h2>

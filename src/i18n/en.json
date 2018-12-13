@@ -133,7 +133,7 @@
     "inputRadius": "Input fields",
     "checkboxRadius": "Checkboxes",
     "instance_default": "(default: {value})",
-    "instance_default_simple" : "(default)",
+    "instance_default_simple": "(default)",
     "interface": "Interface",
     "interfaceLanguage": "Interface language",
     "invalid_theme_imported": "The selected file is not a supported Pleroma theme. No changes to your theme were made.",
@@ -190,6 +190,8 @@
       "false": "no",
       "true": "yes"
     },
+    "notifications": "Notifications",
+    "enable_web_push_notifications": "Enable web push notifications",
     "style": {
       "switcher": {
         "keep_color": "Keep colors",

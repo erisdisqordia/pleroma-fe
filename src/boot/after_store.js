@@ -42,8 +42,17 @@ const afterStoreSetup = ({ store, i18n }) => {
           return {}
         })
         .then((staticConfig) => {
+          const overrides = window.___pleromafe_dev_overrides || {}
+          const env = window.___pleromafe_mode.NODE_ENV
+
           // This takes static config and overrides properties that are present in apiConfig
-          var config = Object.assign({}, staticConfig, apiConfig)
+          let config = {}
+          if (overrides.staticConfigPreference && env === 'development') {
+            console.warn('OVERRIDING API CONFIG WITH STATIC CONFIG')
+            config = Object.assign({}, apiConfig, staticConfig)
+          } else {
+            config = Object.assign({}, staticConfig, apiConfig)
+          }
 
           var theme = (config.theme)
           var background = (config.background)

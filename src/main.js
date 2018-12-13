@@ -60,6 +60,9 @@ const registerPushNotifications = store => {
     if (isUserMutation && vapidPublicKey && permission) {
       return store.dispatch('registerPushNotifications')
     }
+    if (data['nsfwCensorImage']) {
+      store.dispatch('setOption', { name: 'nsfwCensorImage', value: data['nsfwCensorImage'] })
+    }
 
     const user = state.users.currentUser
     const isVapidMutation = mutation.type === 'setInstanceOption' && mutation.payload.name === 'vapidPublicKey'

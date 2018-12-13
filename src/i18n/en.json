@@ -344,5 +344,19 @@
     "reply": "Reply",
     "favorite": "Favorite",
     "user_settings": "User Settings"
+  },
+  "upload":{
+    "error": {
+    "base": "Upload failed.",
+    "file_too_big": "File too big [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+    "default": "Try again later"
+    },
+    "file_size_units": {
+      "B": "B",
+      "KiB": "KiB",
+      "MiB": "MiB",
+      "GiB": "GiB",
+      "TiB": "TiB"
+    }
   }
 }

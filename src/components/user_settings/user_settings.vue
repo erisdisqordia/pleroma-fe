@@ -40,37 +40,49 @@
             <p>{{$t('settings.current_avatar')}}</p>
             <img :src="user.profile_image_url_original" class="old-avatar"></img>
             <p>{{$t('settings.set_new_avatar')}}</p>
-            <img class="new-avatar" v-bind:src="previews[0]" v-if="previews[0]">
+            <img class="new-avatar" v-bind:src="avatarPreview" v-if="avatarPreview">
             </img>
             <div>
-              <input type="file" @change="uploadFile(0, $event)" ></input>
+              <input type="file" @change="uploadFile('avatar', $event)" ></input>
             </div>
-            <i class="icon-spin4 animate-spin" v-if="uploading[0]"></i>
-            <button class="btn btn-default" v-else-if="previews[0]" @click="submitAvatar">{{$t('general.submit')}}</button>
+            <i class="icon-spin4 animate-spin" v-if="avatarUploading"></i>
+            <button class="btn btn-default" v-else-if="avatarPreview" @click="submitAvatar">{{$t('general.submit')}}</button>
+            <div class='alert error' v-if="avatarUploadError">
+              Error: {{ avatarUploadError }}
+              <i class="icon-cancel" @click="clearUploadError('avatar')"></i>
+            </div>
           </div>
           <div class="setting-item">
             <h2>{{$t('settings.profile_banner')}}</h2>
             <p>{{$t('settings.current_profile_banner')}}</p>
             <img :src="user.cover_photo" class="banner"></img>
             <p>{{$t('settings.set_new_profile_banner')}}</p>
-            <img class="banner" v-bind:src="previews[1]" v-if="previews[1]">
+            <img class="banner" v-bind:src="bannerPreview" v-if="bannerPreview">
             </img>
             <div>
-              <input type="file" @change="uploadFile(1, $event)" ></input>
+              <input type="file" @change="uploadFile('banner', $event)" ></input>
             </div>
-            <i class=" icon-spin4 animate-spin uploading" v-if="uploading[1]"></i>
-            <button class="btn btn-default" v-else-if="previews[1]" @click="submitBanner">{{$t('general.submit')}}</button>
+            <i class=" icon-spin4 animate-spin uploading" v-if="bannerUploading"></i>
+            <button class="btn btn-default" v-else-if="bannerPreview" @click="submitBanner">{{$t('general.submit')}}</button>
+            <div class='alert error' v-if="bannerUploadError">
+              Error: {{ bannerUploadError }}
+              <i class="icon-cancel" @click="clearUploadError('banner')"></i>
+            </div>
           </div>
           <div class="setting-item">
             <h2>{{$t('settings.profile_background')}}</h2>
             <p>{{$t('settings.set_new_profile_background')}}</p>
-            <img class="bg" v-bind:src="previews[2]" v-if="previews[2]">
+            <img class="bg" v-bind:src="backgroundPreview" v-if="backgroundPreview">
             </img>
             <div>
-              <input type="file" @change="uploadFile(2, $event)" ></input>
+              <input type="file" @change="uploadFile('background', $event)" ></input>
             </div>
-            <i class=" icon-spin4 animate-spin uploading" v-if="uploading[2]"></i>
-            <button class="btn btn-default" v-else-if="previews[2]" @click="submitBg">{{$t('general.submit')}}</button>
+            <i class=" icon-spin4 animate-spin uploading" v-if="backgroundUploading"></i>
+            <button class="btn btn-default" v-else-if="backgroundPreview" @click="submitBg">{{$t('general.submit')}}</button>
+            <div class='alert error' v-if="backgroundUploadError">
+              Error: {{ backgroundUploadError }}
+              <i class="icon-cancel" @click="clearUploadError('background')"></i>
+            </div>
           </div>
         </div>
 
@@ -117,7 +129,7 @@
             <form v-model="followImportForm">
               <input type="file" ref="followlist" v-on:change="followListChange"></input>
             </form>
-            <i class=" icon-spin4 animate-spin uploading" v-if="uploading[3]"></i>
+            <i class=" icon-spin4 animate-spin uploading" v-if="followListUploading"></i>
             <button class="btn btn-default" v-else @click="importFollows">{{$t('general.submit')}}</button>
             <div v-if="followsImported">
               <i class="icon-cross" @click="dismissImported"></i>

@@ -21,11 +21,15 @@ const afterStoreSetup = ({ store, i18n }) => {
   window.fetch('/api/statusnet/config.json')
     .then((res) => res.json())
     .then((data) => {
-      const { name, closed: registrationClosed, textlimit, server, vapidPublicKey } = data.site
+      const { name, closed: registrationClosed, textlimit, uploadlimit, server, vapidPublicKey } = data.site
 
       store.dispatch('setInstanceOption', { name: 'name', value: name })
       store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
       store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
+      store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadlimit.uploadlimit) })
+      store.dispatch('setInstanceOption', { name: 'avatarlimit', value: parseInt(uploadlimit.avatarlimit) })
+      store.dispatch('setInstanceOption', { name: 'backgroundlimit', value: parseInt(uploadlimit.backgroundlimit) })
+      store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadlimit.bannerlimit) })
       store.dispatch('setInstanceOption', { name: 'server', value: server })
 
       if (data.nsfwCensorImage) {

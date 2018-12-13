@@ -262,6 +262,11 @@ const PostStatusForm = {
       let index = this.newStatus.files.indexOf(fileInfo)
       this.newStatus.files.splice(index, 1)
     },
+    uploadFailed (errString, templateArgs) {
+      templateArgs = templateArgs || {}
+      this.error = this.$t('upload.error.base') + ' ' + this.$t('upload.error.' + errString, templateArgs)
+      this.enableSubmit()
+    },
     disableSubmit () {
       this.submitDisabled = true
     },

@@ -1,5 +1,6 @@
 import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
+import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 
 const UserSettings = {
   data () {
@@ -14,8 +15,16 @@ const UserSettings = {
       followImportError: false,
       followsImported: false,
       enableFollowsExport: true,
-      uploading: [ false, false, false, false ],
-      previews: [ null, null, null ],
+      avatarUploading: false,
+      bannerUploading: false,
+      backgroundUploading: false,
+      followListUploading: false,
+      avatarPreview: null,
+      bannerPreview: null,
+      backgroundPreview: null,
+      avatarUploadError: null,
+      bannerUploadError: null,
+      backgroundUploadError: null,
       deletingAccount: false,
       deleteAccountConfirmPasswordInput: '',
       deleteAccountError: false,
@@ -84,19 +93,24 @@ const UserSettings = {
     uploadFile (slot, e) {
       const file = e.target.files[0]
       if (!file) { return }
+      if (file.size > this.$store.state.instance[slot + 'limit']) {
+        const filesize = fileSizeFormatService.fileSizeFormat(file.size)
+        const allowedsize = fileSizeFormatService.fileSizeFormat(this.$store.state.instance[slot + 'limit'])
+        this[slot + 'UploadError'] = this.$t('upload.error.base') + ' ' + this.$t('upload.error.file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit})
+        return
+      }
       // eslint-disable-next-line no-undef
       const reader = new FileReader()
       reader.onload = ({target}) => {
         const img = target.result
-        this.previews[slot] = img
-        this.$forceUpdate() // just changing the array with the index doesn't update the view
+        this[slot + 'Preview'] = img
       }
       reader.readAsDataURL(file)
     },
     submitAvatar () {
-      if (!this.previews[0]) { return }
+      if (!this.avatarPreview) { return }
 
-      let img = this.previews[0]
+      let img = this.avatarPreview
       // eslint-disable-next-line no-undef
       let imginfo = new Image()
       let cropX, cropY, cropW, cropH
@@ -112,20 +126,25 @@ const UserSettings = {
         cropX = Math.floor((imginfo.width - imginfo.height) / 2)
         cropW = imginfo.height
       }
-      this.uploading[0] = true
+      this.avatarUploading = true
       this.$store.state.api.backendInteractor.updateAvatar({params: {img, cropX, cropY, cropW, cropH}}).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
-          this.previews[0] = null
+          this.avatarPreview = null
+        } else {
+          this.avatarUploadError = this.$t('upload.error.base') + user.error
         }
-        this.uploading[0] = false
+        this.avatarUploading = false
       })
     },
+    clearUploadError (slot) {
+      this[slot + 'UploadError'] = null
+    },
     submitBanner () {
-      if (!this.previews[1]) { return }
+      if (!this.bannerPreview) { return }
 
-      let banner = this.previews[1]
+      let banner = this.bannerPreview
       // eslint-disable-next-line no-undef
       let imginfo = new Image()
       /* eslint-disable camelcase */
@@ -135,22 +154,24 @@ const UserSettings = {
       height = imginfo.height
       offset_top = 0
       offset_left = 0
-      this.uploading[1] = true
+      this.bannerUploading = true
       this.$store.state.api.backendInteractor.updateBanner({params: {banner, offset_top, offset_left, width, height}}).then((data) => {
         if (!data.error) {
           let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
           clone.cover_photo = data.url
           this.$store.commit('addNewUsers', [clone])
           this.$store.commit('setCurrentUser', clone)
-          this.previews[1] = null
+          this.bannerPreview = null
+        } else {
+          this.bannerUploadError = this.$t('upload.error.base') + data.error
         }
-        this.uploading[1] = false
+        this.bannerUploading = false
       })
       /* eslint-enable camelcase */
     },
     submitBg () {
-      if (!this.previews[2]) { return }
-      let img = this.previews[2]
+      if (!this.backgroundPreview) { return }
+      let img = this.backgroundPreview
       // eslint-disable-next-line no-undef
       let imginfo = new Image()
       let cropX, cropY, cropW, cropH
@@ -159,20 +180,22 @@ const UserSettings = {
       cropY = 0
       cropW = imginfo.width
       cropH = imginfo.width
-      this.uploading[2] = true
+      this.backgroundUploading = true
       this.$store.state.api.backendInteractor.updateBg({params: {img, cropX, cropY, cropW, cropH}}).then((data) => {
         if (!data.error) {
           let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
           clone.background_image = data.url
           this.$store.commit('addNewUsers', [clone])
           this.$store.commit('setCurrentUser', clone)
-          this.previews[2] = null
+          this.backgroundPreview = null
+        } else {
+          this.backgroundUploadError = this.$t('upload.error.base') + data.error
         }
-        this.uploading[2] = false
+        this.backgroundUploading = false
       })
     },
     importFollows () {
-      this.uploading[3] = true
+      this.followListUploading = true
       const followList = this.followList
       this.$store.state.api.backendInteractor.followImport({params: followList})
         .then((status) => {
@@ -181,7 +204,7 @@ const UserSettings = {
           } else {
             this.followImportError = true
           }
-          this.uploading[3] = false
+          this.followListUploading = false
         })
     },
     /* This function takes an Array of Users

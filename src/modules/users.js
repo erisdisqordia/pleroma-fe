@@ -16,6 +16,9 @@ export const mergeOrAdd = (arr, obj, item) => {
     // This is a new item, prepare it
     arr.push(item)
     obj[item.id] = item
+    if (item.screen_name && !item.screen_name.includes('@')) {
+      obj[item.screen_name] = item
+    }
     return {item, new: true}
   }
 }
@@ -78,7 +81,7 @@ const users = {
   actions: {
     fetchUser (store, id) {
       store.rootState.api.backendInteractor.fetchUser({id})
-        .then((user) => store.commit('addNewUsers', user))
+        .then((user) => store.commit('addNewUsers', [user]))
     },
     addNewStatuses (store, { statuses }) {
       const users = map(statuses, 'user')

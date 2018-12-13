@@ -50,6 +50,32 @@ const persistedStateOptions = {
     'oauth'
   ]
 }
+
+const registerPushNotifications = store => {
+  store.subscribe((mutation, state) => {
+    const vapidPublicKey = state.instance.vapidPublicKey
+    const permission = state.interface.notificationPermission === 'granted'
+    const isUserMutation = mutation.type === 'setCurrentUser'
+
+    if (isUserMutation && vapidPublicKey && permission) {
+      return store.dispatch('registerPushNotifications')
+    }
+
+    const user = state.users.currentUser
+    const isVapidMutation = mutation.type === 'setInstanceOption' && mutation.payload.name === 'vapidPublicKey'
+
+    if (isVapidMutation && user && permission) {
+      return store.dispatch('registerPushNotifications')
+    }
+
+    const isPermMutation = mutation.type === 'setNotificationPermission' && mutation.payload === 'granted'
+
+    if (isPermMutation && user && vapidPublicKey) {
+      return store.dispatch('registerPushNotifications')
+    }
+  })
+}
+
 createPersistedState(persistedStateOptions).then((persistedState) => {
   const store = new Vuex.Store({
     modules: {
@@ -62,16 +88,9 @@ createPersistedState(persistedStateOptions).then((persistedState) => {
       chat: chatModule,
       oauth: oauthModule
     },
-    plugins: [persistedState],
+    plugins: [persistedState, registerPushNotifications],
     strict: false // Socket modifies itself, let's ignore this for now.
     // strict: process.env.NODE_ENV !== 'production'
-  })
-
-  store.subscribe((mutation, state) => {
-    if ((mutation.type === 'setCurrentUser' && state.instance.vapidPublicKey) || // Login + existing key
-      (mutation.type === 'setInstanceOption' && mutation.payload.name === 'vapidPublicKey' && state.users.currentUser)) { // Logged in, key arrives late
-      store.dispatch('registerPushNotifications')
-    }
   })
 
   afterStoreSetup({ store, i18n })

@@ -19,6 +19,14 @@ export const mergeOrAdd = (arr, obj, item) => {
   }
 }
 
+const getNotificationPermission = () => {
+  const Notification = window.Notification
+
+  if (!Notification) return Promise.resolve(null)
+  if (Notification.permission === 'default') return Notification.requestPermission()
+  return Promise.resolve(Notification.permission)
+}
+
 export const mutations = {
   setMuted (state, { user: {id}, muted }) {
     const user = state.usersObject[id]
@@ -107,6 +115,9 @@ const users = {
                   user.credentials = accessToken
                   commit('setCurrentUser', user)
                   commit('addNewUsers', [user])
+
+                  getNotificationPermission()
+                    .then(permission => commit('setNotificationPermission', permission))
 
                   // Set our new backend interactor
                   commit('setBackendInteractor', backendInteractorService(accessToken))

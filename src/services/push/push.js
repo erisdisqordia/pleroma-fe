@@ -19,22 +19,6 @@ function registerServiceWorker () {
     .catch((err) => console.error('Unable to register service worker.', err))
 }
 
-function askPermission () {
-  return new Promise((resolve, reject) => {
-    const Notification = window.Notification
-
-    if (!Notification) return reject(new Error('Notifications disabled'))
-    if (Notification.permission !== 'default') return resolve(Notification.permission)
-
-    const permissionResult = Notification.requestPermission(resolve)
-
-    if (permissionResult) permissionResult.then(resolve, reject)
-  }).then((permissionResult) => {
-    if (permissionResult !== 'granted') throw new Error('We weren\'t granted permission.')
-    return permissionResult
-  })
-}
-
 function subscribe (registration, isEnabled, vapidPublicKey) {
   if (!isEnabled) return Promise.reject(new Error('Web Push is disabled in config'))
   if (!vapidPublicKey) return Promise.reject(new Error('VAPID public key is not found'))
@@ -78,11 +62,8 @@ function sendSubscriptionToBackEnd (subscription, token) {
 export default function registerPushNotifications (isEnabled, vapidPublicKey, token) {
   if (isPushSupported()) {
     registerServiceWorker()
-      .then((registration) => {
-        return askPermission()
-          .then(() => subscribe(registration, isEnabled, vapidPublicKey))
-          .then((subscription) => sendSubscriptionToBackEnd(subscription, token))
-          .catch((e) => console.warn(`Failed to setup Web Push Notifications: ${e.message}`))
-      })
+      .then((registration) => subscribe(registration, isEnabled, vapidPublicKey))
+      .then((subscription) => sendSubscriptionToBackEnd(subscription, token))
+      .catch((e) => console.warn(`Failed to setup Web Push Notifications: ${e.message}`))
   }
 }

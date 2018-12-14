@@ -13,7 +13,7 @@
           <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
         </div>
         <div class='item right'>
-          <user-finder class="nav-icon"></user-finder>
+          <user-finder class="nav-icon" @toggled="onFinderToggled"></user-finder>
           <router-link @click.native="activatePanel('timeline')" :to="{ name: 'settings'}"><i class="icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
           <a href="#" v-if="currentUser" @click.prevent="logout"><i class="icon-logout nav-icon" :title="$t('login.logout')"></i></a>
         </div>

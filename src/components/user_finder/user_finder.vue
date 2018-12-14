@@ -1,11 +1,14 @@
 <template>
   <div class="user-finder-container">
     <i class="icon-spin4 user-finder-icon animate-spin-slow" v-if="loading" />
-    <a href="#" v-if="hidden"  :title="$t('finder.find_user')" ><i class="icon-user-plus user-finder-icon" @click.prevent.stop="toggleHidden" /></a>
-    <span v-else>
+    <a href="#" v-if="hidden" :title="$t('finder.find_user')"><i class="icon-user-plus user-finder-icon" @click.prevent.stop="toggleHidden" /></a>
+    <template v-else>
       <input class="user-finder-input" @keyup.enter="findUser(username)" v-model="username" :placeholder="$t('finder.find_user')" id="user-finder-input" type="text"/>
+      <button class="btn search-button" @click="findUser(username)">
+        <i class="icon-search"/>
+      </button>
       <i class="icon-cancel user-finder-icon" @click.prevent.stop="toggleHidden"/>
-    </span>
+    </template>
   </div>
 </template>
 
@@ -16,11 +19,23 @@
 
 .user-finder-container {
   max-width: 100%;
-}
+  display: inline-flex;
+  align-items: baseline;
+  vertical-align: baseline;
 
-.user-finder-input {
-  max-width: 80%;
-  vertical-align: middle;
+
+  .user-finder-input,
+  .search-button {
+    height: 29px;
+  }
+  .user-finder-input {
+    max-width: 80%;
+  }
+
+  .search-button {
+    margin-left: .5em;
+    margin-right: .5em;
+  }
 }
 
 </style>

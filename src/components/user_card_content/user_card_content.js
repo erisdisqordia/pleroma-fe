@@ -90,43 +90,54 @@ export default {
       store.state.api.backendInteractor.followUser(this.user.id)
         .then((followedUser) => store.commit('addNewUsers', [followedUser]))
         .then(() => {
+          // For locked users we just mark it that we sent the follow request
+          if (this.user.locked) {
+            this.followRequestInProgress = false
+            this.followRequestSent = true
+            return
+          }
+
           if (this.user.following) {
+            // If we get result immediately, just stop.
             this.followRequestInProgress = false
             return
           }
-          if (!this.user.locked) {
-            let attemptsLeft = 3
-            const fetchUser = () => new Promise((resolve, reject) => {
-              setTimeout(() => {
-                store.state.api.backendInteractor.fetchUser({ id: this.user.id })
-                  .then((user) => store.commit('addNewUsers', [user]))
-                  .then(() => resolve(this.user.following))
-                  .catch((e) => reject(e))
-              }, 500)
-            }).then((confirmed) => {
-              if (!confirmed && attemptsLeft > 0) {
-                attemptsLeft--
-                return fetchUser()
-              } else if (confirmed) {
-                return true
+
+          // But usually we don't get result immediately, so we ask server
+          // for updated user profile to confirm if we are following them
+          // Sometimes it takes several tries. Sometimes we end up not following
+          // user anyway, probably because they locked themselves and we
+          // don't know that yet.
+          // Recursive Promise, it will call itself up to 3 times.
+          const fetchUser = (attempt) => new Promise((resolve, reject) => {
+            setTimeout(() => {
+              store.state.api.backendInteractor.fetchUser({ id: this.user.id })
+                .then((user) => store.commit('addNewUsers', [user]))
+                .then(() => resolve([this.user.following, attempt]))
+                .catch((e) => reject(e))
+            }, 500)
+          }).then(([following, attempt]) => {
+            if (!following && attempt <= 3) {
+              // If we BE reports that we still not following that user - retry,
+              // increment attempts by one
+              return fetchUser(++attempt)
+            } else {
+              // If we run out of attempts, just return whatever status is.
+              return following
+            }
+          })
+
+          return fetchUser(1)
+            .then((following) => {
+              if (following) {
+                // We confirmed and everything its good.
+                this.followRequestInProgress = false
               } else {
-                return false
+                // If after all the tries, just treat it as if user is locked
+                this.followRequestInProgress = false
+                this.followRequestSent = true
               }
             })
-
-            return fetchUser()
-              .then((successfulConfirmation) => {
-                if (successfulConfirmation) {
-                  this.followRequestInProgress = false
-                } else {
-                  this.followRequestInProgress = false
-                  this.followRequestSent = true
-                }
-              })
-          } else {
-            this.followRequestInProgress = false
-            this.followRequestSent = true
-          }
         })
     },
     unfollowUser () {

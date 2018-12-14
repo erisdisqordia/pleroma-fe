@@ -46,7 +46,7 @@ const PostStatusForm = {
       statusText = buildMentionsString({ user: this.repliedUser, attentions: this.attentions }, currentUser)
     }
 
-    const scope = (this.copyMessageScope && this.$store.state.config.copyScope || this.copyMessageScope === 'direct')
+    const scope = (this.copyMessageScope && this.$store.state.config.scopeCopy || this.copyMessageScope === 'direct')
           ? this.copyMessageScope
           : this.$store.state.users.currentUser.default_scope
 
@@ -261,6 +261,11 @@ const PostStatusForm = {
     removeMediaFile (fileInfo) {
       let index = this.newStatus.files.indexOf(fileInfo)
       this.newStatus.files.splice(index, 1)
+    },
+    uploadFailed (errString, templateArgs) {
+      templateArgs = templateArgs || {}
+      this.error = this.$t('upload.error.base') + ' ' + this.$t('upload.error.' + errString, templateArgs)
+      this.enableSubmit()
     },
     disableSubmit () {
       this.submitDisabled = true

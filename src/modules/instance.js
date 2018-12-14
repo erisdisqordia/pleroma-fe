@@ -1,5 +1,5 @@
 import { set } from 'vue'
-import StyleSetter from '../services/style_setter/style_setter.js'
+import { setPreset } from '../services/style_setter/style_setter.js'
 
 const defaultState = {
   // Stuff from static/config.json and apiConfig
@@ -25,6 +25,8 @@ const defaultState = {
   scopeCopy: true,
   subjectLineBehavior: 'email',
   loginMethod: 'password',
+  nsfwCensorImage: undefined,
+  vapidPublicKey: undefined,
 
   // Nasty stuff
   pleromaBackend: true,
@@ -60,7 +62,7 @@ const instance = {
           dispatch('setPageTitle')
           break
         case 'theme':
-          StyleSetter.setPreset(value, commit)
+          setPreset(value, commit)
       }
     }
   }

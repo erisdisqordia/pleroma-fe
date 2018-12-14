@@ -1,6 +1,9 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
+import registerPushNotifications from '../services/push/push.js'
+import oauthApi from '../services/new_api/oauth'
+import { humanizeErrors } from './errors'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
@@ -9,17 +12,28 @@ export const mergeOrAdd = (arr, obj, item) => {
   if (oldItem) {
     // We already have this, so only merge the new info.
     merge(oldItem, item)
-    return {item: oldItem, new: false}
+    return { item: oldItem, new: false }
   } else {
     // This is a new item, prepare it
     arr.push(item)
     obj[item.id] = item
-    return {item, new: true}
+    if (item.screen_name && !item.screen_name.includes('@')) {
+      obj[item.screen_name] = item
+    }
+    return { item, new: true }
   }
 }
 
+const getNotificationPermission = () => {
+  const Notification = window.Notification
+
+  if (!Notification) return Promise.resolve(null)
+  if (Notification.permission === 'default') return Notification.requestPermission()
+  return Promise.resolve(Notification.permission)
+}
+
 export const mutations = {
-  setMuted (state, { user: {id}, muted }) {
+  setMuted (state, { user: { id }, muted }) {
     const user = state.usersObject[id]
     set(user, 'muted', muted)
   },
@@ -43,18 +57,31 @@ export const mutations = {
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
   },
-  setColor (state, { user: {id}, highlighted }) {
+  setColor (state, { user: { id }, highlighted }) {
     const user = state.usersObject[id]
     set(user, 'highlight', highlighted)
+  },
+  signUpPending (state) {
+    state.signUpPending = true
+    state.signUpErrors = []
+  },
+  signUpSuccess (state) {
+    state.signUpPending = false
+  },
+  signUpFailure (state, errors) {
+    state.signUpPending = false
+    state.signUpErrors = errors
   }
 }
 
 export const defaultState = {
+  loggingIn: false,
   lastLoginName: false,
   currentUser: false,
-  loggingIn: false,
   users: [],
-  usersObject: {}
+  usersObject: {},
+  signUpPending: false,
+  signUpErrors: []
 }
 
 const users = {
@@ -62,8 +89,15 @@ const users = {
   mutations,
   actions: {
     fetchUser (store, id) {
-      store.rootState.api.backendInteractor.fetchUser({id})
-        .then((user) => store.commit('addNewUsers', user))
+      store.rootState.api.backendInteractor.fetchUser({ id })
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    registerPushNotifications (store) {
+      const token = store.state.currentUser.credentials
+      const vapidPublicKey = store.rootState.instance.vapidPublicKey
+      const isEnabled = store.rootState.config.webPushNotifications
+
+      registerPushNotifications(isEnabled, vapidPublicKey, token)
     },
     addNewStatuses (store, { statuses }) {
       const users = map(statuses, 'user')
@@ -79,6 +113,34 @@ const users = {
       each(compact(map(statuses, 'retweeted_status')), (status) => {
         store.commit('setUserForStatus', status)
       })
+    },
+    async signUp (store, userInfo) {
+      store.commit('signUpPending')
+
+      let rootState = store.rootState
+
+      let response = await rootState.api.backendInteractor.register(userInfo)
+      if (response.ok) {
+        const data = {
+          oauth: rootState.oauth,
+          instance: rootState.instance.server
+        }
+        let app = await oauthApi.getOrCreateApp(data)
+        let result = await oauthApi.getTokenWithCredentials({
+          app,
+          instance: data.instance,
+          username: userInfo.username,
+          password: userInfo.password
+        })
+        store.commit('signUpSuccess')
+        store.commit('setToken', result.access_token)
+        store.dispatch('loginUser', result.access_token)
+      } else {
+        let data = await response.json()
+        let errors = humanizeErrors(JSON.parse(data.error))
+        store.commit('signUpFailure', errors)
+        throw Error(errors)
+      }
     },
     logout (store) {
       store.commit('clearCurrentUser')
@@ -100,6 +162,9 @@ const users = {
                   commit('setCurrentUser', user)
                   commit('addNewUsers', [user])
 
+                  getNotificationPermission()
+                    .then(permission => commit('setNotificationPermission', permission))
+
                   // Set our new backend interactor
                   commit('setBackendInteractor', backendInteractorService(accessToken))
 
@@ -118,12 +183,8 @@ const users = {
                     store.commit('addNewUsers', mutedUsers)
                   })
 
-                  if ('Notification' in window && window.Notification.permission === 'default') {
-                    window.Notification.requestPermission()
-                  }
-
                   // Fetch our friends
-                  store.rootState.api.backendInteractor.fetchFriends({id: user.id})
+                  store.rootState.api.backendInteractor.fetchFriends({ id: user.id })
                     .then((friends) => commit('addNewUsers', friends))
                 })
             } else {

@@ -1,5 +1,5 @@
 <template>
-  <span class="user-finder-container">
+  <div class="user-finder-container">
     <i class="icon-spin4 user-finder-icon animate-spin-slow" v-if="loading" />
     <a href="#" v-if="hidden" :title="$t('finder.find_user')"><i class="icon-user-plus user-finder-icon" @click.prevent.stop="toggleHidden" /></a>
     <template v-else>
@@ -9,7 +9,7 @@
       </button>
       <i class="icon-cancel user-finder-icon" @click.prevent.stop="toggleHidden"/>
     </template>
-  </span>
+  </div>
 </template>
 
 <script src="./user_finder.js"></script>

@@ -61,7 +61,12 @@ export default {
       })
     },
     logo () { return this.$store.state.instance.logo },
-    style () { return { 'background-image': `url(${this.background})` } },
+    style () {
+      return {
+        '--body-background-image': `url(${this.background})`,
+        'background-image': `url(${this.background})`
+      }
+    },
     sitename () { return this.$store.state.instance.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },

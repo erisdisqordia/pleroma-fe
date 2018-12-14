@@ -25,11 +25,14 @@ export default Vue.component('tab-switcher', {
             }
             return (<button onClick={this.activateTab(index)} class={ classes.join(' ') }>{slot.data.attrs.label}</button>)
           });
-    const contents = (
-      <div>
-        {this.$slots.default.filter(slot => slot.data)[this.active]}
-      </div>
-    );
+    const contents = this.$slots.default.filter(_=>_.data).map(( slot, index ) => {
+      const active = index === this.active
+      return (
+        <div class={active ? 'active' : 'hidden'}>
+          {slot}
+        </div>
+      )
+    });
     return (
       <div class="tab-switcher">
         <div class="tabs">

@@ -3,6 +3,7 @@ import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
 
 const UserPanel = {
+  props: [ 'activatePanel' ],
   computed: {
     user () { return this.$store.state.users.currentUser }
   },

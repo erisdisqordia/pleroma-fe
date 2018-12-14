@@ -19,6 +19,7 @@
     "username": "Имя пользователя"
   },
   "nav": {
+    "back": "Назад",
     "chat": "Локальный чат",
     "mentions": "Упоминания",
     "public_tl": "Публичная лента",
@@ -126,6 +127,7 @@
     "notification_visibility_mentions": "Упоминания",
     "notification_visibility_repeats": "Повторы",
     "no_rich_text_description": "Убрать форматирование из всех постов",
+    "hide_network_description": "Не показывать кого я читаю и кто меня читает",
     "nsfw_clickthrough": "Включить скрытие NSFW вложений",
     "panelRadius": "Панели",
     "pause_on_unfocused": "Приостановить загрузку когда вкладка не в фокусе",

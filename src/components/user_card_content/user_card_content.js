@@ -22,10 +22,20 @@ export default {
       if (color) {
         const rgb = (typeof color === 'string') ? hex2rgb(color) : color
         const tintColor = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .5)`
+
+        const gradient = [
+          [tintColor, this.hideBio ? '60%' : ''],
+          this.hideBio ? [
+            color, '100%'
+          ] : [
+            tintColor, ''
+          ]
+        ].map(_ => _.join(' ')).join(', ')
+
         return {
           backgroundColor: `rgb(${Math.floor(rgb.r * 0.53)}, ${Math.floor(rgb.g * 0.56)}, ${Math.floor(rgb.b * 0.59)})`,
           backgroundImage: [
-            `linear-gradient(to bottom, ${tintColor}, ${tintColor})`,
+            `linear-gradient(to bottom, ${gradient})`,
             `url(${this.user.cover_photo})`
           ].join(', ')
         }

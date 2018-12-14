@@ -7,8 +7,13 @@ var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var env = process.env.NODE_ENV === 'testing'
-  ? require('../config/test.env')
-  : config.build.env
+    ? require('../config/test.env')
+    : config.build.env
+
+let commitHash = require('child_process')
+    .execSync('git rev-parse --short HEAD')
+    .toString();
+console.log(commitHash)
 
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -29,7 +34,9 @@ var webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     // http://vuejs.github.io/vue-loader/workflow/production.html
     new webpack.DefinePlugin({
-      'process.env': env
+      'process.env': env,
+      'COMMIT_HASH': JSON.stringify(commitHash),
+      'DEV_OVERRIDES': JSON.stringify(undefined)
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -51,7 +58,8 @@ var webpackConfig = merge(baseWebpackConfig, {
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true
+        removeAttributeQuotes: true,
+        ignoreCustomComments: [/server-generated-meta/]
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },

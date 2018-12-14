@@ -11,7 +11,7 @@ const Attachment = {
   ],
   data () {
     return {
-      nsfwImage,
+      nsfwImage: this.$store.state.config.nsfwCensorImage || nsfwImage,
       hideNsfwLocal: this.$store.state.config.hideNsfw,
       preloadImage: this.$store.state.config.preloadImage,
       loopVideo: this.$store.state.config.loopVideo,

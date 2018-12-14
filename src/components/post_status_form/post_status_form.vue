@@ -64,7 +64,7 @@
         </div>
       </div>
       <div class='form-bottom'>
-        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
+        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="uploadFailed" :drop-files="dropFiles"></media-upload>
 
         <p v-if="isOverLengthLimit" class="error">{{ charactersLeft }}</p>
         <p class="faint" v-else-if="hasStatusLengthLimit">{{ charactersLeft }}</p>

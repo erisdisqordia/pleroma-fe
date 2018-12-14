@@ -7,7 +7,10 @@
       </div>
       <div class='inner-nav'>
         <div class='item'>
-          <router-link :to="{ name: 'root'}">{{sitename}}</router-link>
+          <router-link class="back-button" @click.native="activatePanel('timeline')" :to="{ name: 'root' }" active-class="hidden">
+            <i class="icon-left-open" :title="$t('nav.back')"></i>
+          </router-link>
+          <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
         </div>
         <div class='item right'>
           <user-finder class="nav-icon"></user-finder>

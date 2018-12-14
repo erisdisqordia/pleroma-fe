@@ -29,6 +29,7 @@
     "username": "Username"
   },
   "nav": {
+    "back": "Back",
     "chat": "Local Chat",
     "friend_requests": "Follow Requests",
     "mentions": "Mentions",
@@ -133,7 +134,7 @@
     "inputRadius": "Input fields",
     "checkboxRadius": "Checkboxes",
     "instance_default": "(default: {value})",
-    "instance_default_simple" : "(default)",
+    "instance_default_simple": "(default)",
     "interface": "Interface",
     "interfaceLanguage": "Interface language",
     "invalid_theme_imported": "The selected file is not a supported Pleroma theme. No changes to your theme were made.",
@@ -151,6 +152,7 @@
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
     "no_rich_text_description": "Strip rich text formatting from all posts",
+    "hide_network_description": "Don't show who I'm following and who's following me",
     "nsfw_clickthrough": "Enable clickthrough NSFW attachment hiding",
     "panelRadius": "Panels",
     "pause_on_unfocused": "Pause streaming when tab is not focused",
@@ -190,6 +192,8 @@
       "false": "no",
       "true": "yes"
     },
+    "notifications": "Notifications",
+    "enable_web_push_notifications": "Enable web push notifications",
     "style": {
       "switcher": {
         "keep_color": "Keep colors",
@@ -324,6 +328,7 @@
     "followers": "Followers",
     "following": "Following!",
     "follows_you": "Follows you!",
+    "its_you": "It's you!",
     "mute": "Mute",
     "muted": "Muted",
     "per_day": "per day",
@@ -343,5 +348,19 @@
     "reply": "Reply",
     "favorite": "Favorite",
     "user_settings": "User Settings"
+  },
+  "upload":{
+    "error": {
+    "base": "Upload failed.",
+    "file_too_big": "File too big [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+    "default": "Try again later"
+    },
+    "file_size_units": {
+      "B": "B",
+      "KiB": "KiB",
+      "MiB": "MiB",
+      "GiB": "GiB",
+      "TiB": "TiB"
+    }
   }
 }

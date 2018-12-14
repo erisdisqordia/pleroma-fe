@@ -2,6 +2,7 @@ import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import StatusOrConversation from '../status_or_conversation/status_or_conversation.vue'
 import UserCard from '../user_card/user_card.vue'
+import { throttle } from 'lodash'
 
 const Timeline = {
   props: [
@@ -88,7 +89,7 @@ const Timeline = {
         this.paused = false
       }
     },
-    fetchOlderStatuses () {
+    fetchOlderStatuses: throttle(function () {
       const store = this.$store
       const credentials = store.state.users.currentUser.credentials
       store.commit('setLoading', { timeline: this.timelineName, value: true })
@@ -101,7 +102,7 @@ const Timeline = {
         userId: this.userId,
         tag: this.tag
       }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
-    },
+    }, 1000, this),
     fetchFollowers () {
       const id = this.userId
       this.$store.state.api.backendInteractor.fetchFollowers({ id })

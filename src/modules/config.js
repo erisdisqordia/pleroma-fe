@@ -24,6 +24,7 @@ const defaultState = {
     likes: true,
     repeats: true
   },
+  webPushNotifications: true,
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale,

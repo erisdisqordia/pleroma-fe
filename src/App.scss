@@ -242,7 +242,7 @@ i[class*=icon-] {
   }
 
   &.right {
-    justify-content: right;
+    justify-content: flex-end;
     padding-right: 20px;
   }
 }

@@ -75,7 +75,7 @@
               </ul>
             </div>
 
-            <div class="form-group" id="captcha-group">
+            <div class="form-group" id="captcha-group" v-if="captcha.type != 'none'">
               <template v-if="captcha.type == 'kocaptcha'">
                 <img v-bind:src="captcha.url">
 

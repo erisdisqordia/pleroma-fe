@@ -9,7 +9,7 @@ describe('generateProfileLink', () => {
 
   it('returns obj for external user', () => {
     expect(generateProfileLink(1, 'john@domain')).to.eql({
-      name: 'user-profile', params: { id: 1 }
+      name: 'external-user-profile', params: { id: 1 }
     })
   })
 })

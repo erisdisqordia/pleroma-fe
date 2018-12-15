@@ -16,7 +16,7 @@ describe('routes', () => {
 
     const matchedComponents = router.getMatchedComponents()
 
-    expect(matchedComponents[0].components.hasOwnProperty('Timeline'))
+    expect(matchedComponents[0].components.hasOwnProperty('Timeline')).to.eql(true)
   })
 
   it('user\'s profile', () => {
@@ -24,6 +24,7 @@ describe('routes', () => {
 
     const matchedComponents = router.getMatchedComponents()
 
-    expect(matchedComponents[0].components.hasOwnProperty('UserProfile'))
+    console.log(matchedComponents[0].components.UserCardContent)
+    expect(matchedComponents[0].components.hasOwnProperty('UserProfile')).to.eql(true)
   })
 })

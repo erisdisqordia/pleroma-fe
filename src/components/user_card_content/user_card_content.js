@@ -41,9 +41,6 @@ export default {
       const days = Math.ceil((new Date() - new Date(this.user.created_at)) / (60 * 60 * 24 * 1000))
       return Math.round(this.user.statuses_count / days)
     },
-    userProfileLink (user) {
-      return generateProfileLink(user.id, user.screen_name)
-    },
     userHighlightType: {
       get () {
         const data = this.$store.state.config.highlight[this.user.screen_name]
@@ -110,6 +107,9 @@ export default {
       if (target.tagName === 'A') {
         window.open(target.href, '_blank')
       }
+    },
+    userProfileLink (user) {
+      return generateProfileLink(user.id, user.screen_name)
     }
   }
 }

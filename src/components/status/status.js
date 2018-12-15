@@ -204,9 +204,6 @@ const Status = {
         return 'small'
       }
       return 'normal'
-    },
-    userProfileLink (id, name) {
-      return generateProfileLink(id, name)
     }
   },
   components: {
@@ -288,6 +285,9 @@ const Status = {
     },
     replyLeave () {
       this.showPreview = false
+    },
+    userProfileLink (id, name) {
+      return generateProfileLink(id, name)
     }
   },
   watch: {

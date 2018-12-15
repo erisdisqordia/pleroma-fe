@@ -1,6 +1,6 @@
 const generateProfileLink = (id, screenName) => {
   return {
-    name: 'user-profile',
+    name: (isExternal(screenName) ? 'external-user-profile' : 'user-profile'),
     params: (isExternal(screenName) ? { id } : { name: screenName })
   }
 }

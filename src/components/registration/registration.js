@@ -11,7 +11,8 @@ const registration = {
       username: '',
       password: '',
       confirm: ''
-    }
+    },
+    captcha: {}
   }),
   validations: {
     user: {
@@ -29,6 +30,13 @@ const registration = {
     if ((!this.registrationOpen && !this.token) || this.signedIn) {
       this.$router.push('/main/all')
     }
+
+    fetch("/api/pleroma/captcha")
+      .then(resp => resp.json())
+      .then(resp => {
+        // TODO: check for errors
+        this.captcha = resp
+      })
   },
   computed: {
     token () { return this.$route.params.token },
@@ -45,6 +53,8 @@ const registration = {
     async submit () {
       this.user.nickname = this.user.username
       this.user.token = this.token
+      this.user.captcha_solution = this.captcha.solution;
+      this.user.captcha_token = this.captcha.token;
 
       this.$v.$touch()
 

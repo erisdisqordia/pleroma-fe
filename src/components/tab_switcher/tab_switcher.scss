@@ -13,7 +13,6 @@
     overflow-y: hidden;
     overflow-x: auto;
     padding-top: 5px;
-    height: 32px;
     box-sizing: border-box;
 
     &::after, &::before {
@@ -33,6 +32,7 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       padding: 5px 1em 99px;
+      margin-bottom: 5px - 99px - 1px;
       white-space: nowrap;
 
       &:not(.active) {

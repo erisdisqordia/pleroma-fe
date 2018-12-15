@@ -59,7 +59,7 @@ const UserSettings = {
   },
   methods: {
     updateProfile () {
-      const name = this.newname
+      const name = this.newName
       const description = this.newBio
       const locked = this.newLocked
       // Backend notation.

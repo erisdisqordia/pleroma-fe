@@ -13,27 +13,33 @@
           <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
         </div>
         <div class='item right'>
+          <a href="#" @click.prevent="toggleMobileSidebar()"><i class="icon-menu"></i></a>
           <user-finder class="nav-icon" @toggled="onFinderToggled"></user-finder>
           <router-link @click.native="activatePanel('timeline')" :to="{ name: 'settings'}"><i class="icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
           <a href="#" v-if="currentUser" @click.prevent="logout"><i class="icon-logout nav-icon" :title="$t('login.logout')"></i></a>
         </div>
       </div>
     </nav>
-    <div class="container" id="content">
-      <div class="panel-switcher">
-        <button @click="activatePanel('sidebar')">Sidebar</button>
-        <button @click="activatePanel('timeline')">Timeline</button>
-      </div>
-      <div class="sidebar-flexer" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar'}">
+
+
+
+    <div v-if="" class="container" id="content">
+      <side-drawer :activatePanel="activatePanel" :closed="!showMobileSidebar"></side-drawer>
+      <!--
+        <button @click="activatePanel(mobileViews.postStatus)">post status</button>
+        <button @click="activatePanel(mobileViews.notifications)">notifs</button>
+        <button @click="activatePanel(mobileViews.timeline)">timeline</button>
+      -->
+      <div class="sidebar-flexer">
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">
             <div class="sidebar">
-              <user-panel :activatePanel="activatePanel"></user-panel>
-              <nav-panel :activatePanel="activatePanel"></nav-panel>
-              <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
+              <user-panel :activatePanel="activatePanel" :class="mobileShowOnlyIn(mobileViews.postStatus)"></user-panel>
+              <nav-panel :activatePanel="activatePanel" class="mobile-hidden"></nav-panel>
+              <instance-specific-panel v-if="showInstanceSpecificPanel" class="mobile-hidden"></instance-specific-panel>
               <features-panel v-if="!currentUser"></features-panel>
               <who-to-follow-panel v-if="currentUser && suggestionsEnabled"></who-to-follow-panel>
-              <notifications :activatePanel="activatePanel" v-if="currentUser"></notifications>
+              <notifications :activatePanel="activatePanel" v-if="currentUser" :class="mobileShowOnlyIn(mobileViews.notifications)"></notifications>
             </div>
           </div>
         </div>

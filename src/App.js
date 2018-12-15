@@ -6,6 +6,7 @@ import InstanceSpecificPanel from './components/instance_specific_panel/instance
 import FeaturesPanel from './components/features_panel/features_panel.vue'
 import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_panel.vue'
 import ChatPanel from './components/chat_panel/chat_panel.vue'
+import SideDrawer from './components/side_drawer/side_drawer.vue'
 
 export default {
   name: 'app',
@@ -17,7 +18,8 @@ export default {
     InstanceSpecificPanel,
     FeaturesPanel,
     WhoToFollowPanel,
-    ChatPanel
+    ChatPanel,
+    SideDrawer
   },
   data: () => ({
     mobileActivePanel: 'timeline',
@@ -28,7 +30,13 @@ export default {
         window.CSS.supports('-moz-mask-size', 'contain') ||
         window.CSS.supports('-ms-mask-size', 'contain') ||
         window.CSS.supports('-o-mask-size', 'contain')
-    )
+    ),
+    mobileViews: {
+      postStatus: 'poststatus',
+      notifications: 'notifications',
+      timeline: 'timeline'
+    },
+    showMobileSidebar: false
   }),
   created () {
     // Load the locale from the storage
@@ -67,6 +75,9 @@ export default {
         'background-image': `url(${this.background})`
       }
     },
+    mobileShowOnlyIn () {
+      return view => ({ 'mobile-hidden': this.mobileActivePanel !== view })
+    },
     sitename () { return this.$store.state.instance.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
@@ -85,6 +96,9 @@ export default {
     },
     onFinderToggled (hidden) {
       this.finderHidden = hidden
+    },
+    toggleMobileSidebar () {
+      this.showMobileSidebar = !this.showMobileSidebar
     }
   }
 }

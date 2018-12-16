@@ -31,7 +31,7 @@ const registration = {
       this.$router.push('/main/all')
     }
 
-    this.getCaptcha().then(cpt => this.captcha = cpt)
+    this.getCaptcha().then(cpt => { this.captcha = cpt })
   },
   computed: {
     token () { return this.$route.params.token },
@@ -48,8 +48,8 @@ const registration = {
     async submit () {
       this.user.nickname = this.user.username
       this.user.token = this.token
-      this.user.captcha_solution = this.captcha.solution;
-      this.user.captcha_token = this.captcha.token;
+      this.user.captcha_solution = this.captcha.solution
+      this.user.captcha_token = this.captcha.token
 
       this.$v.$touch()
 

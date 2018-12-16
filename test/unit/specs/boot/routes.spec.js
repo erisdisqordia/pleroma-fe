@@ -24,7 +24,6 @@ describe('routes', () => {
 
     const matchedComponents = router.getMatchedComponents()
 
-    console.log(matchedComponents[0].components.UserCardContent)
-    expect(matchedComponents[0].components.hasOwnProperty('UserProfile')).to.eql(true)
+    expect(matchedComponents[0].components.hasOwnProperty('UserCardContent')).to.eql(true)
   })
 })

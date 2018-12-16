@@ -26,6 +26,29 @@ export default (store) => {
     { name: 'public-external-timeline', path: '/~/main/all', component: PublicAndExternalTimeline },
     { name: 'public-timeline', path: '/~/main/public', component: PublicTimeline },
     { name: 'friends', path: '/~/main/friends', component: FriendsTimeline },
+    // Beginning of temporary redirects
+    { path: '/main/:route',
+      redirect: to => {
+        const { params } = to
+
+        return { path: `/~/main/${params.route}` }
+      }
+    },
+    { path: '/tag/:tag',
+      redirect: to => {
+        const { params } = to
+
+        return { path: `/~/tag/${params.tag}` }
+      }
+    },
+    { path: '/notice/:id',
+      redirect: to => {
+        const { params } = to
+
+        return { path: `/~/notice/${params.id}` }
+      }
+    },
+    // End of temporary redirects
     { name: 'tag-timeline', path: '/~/tag/:tag', component: TagTimeline },
     { name: 'conversation', path: '/~/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
     { name: 'user-profile', path: '/:name', component: UserProfile },

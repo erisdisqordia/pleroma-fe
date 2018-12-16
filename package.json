@@ -16,6 +16,7 @@
   "dependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-lodash": "^3.2.11",
+    "chromatism": "^3.0.0",
     "diff": "^3.0.1",
     "karma-mocha-reporter": "^2.2.1",
     "localforage": "^1.5.0",
@@ -91,6 +92,7 @@
     "raw-loader": "^0.5.1",
     "selenium-server": "2.53.1",
     "semver": "^5.3.0",
+    "serviceworker-webpack-plugin": "0.2.3",
     "shelljs": "^0.7.4",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",

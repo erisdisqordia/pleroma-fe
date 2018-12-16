@@ -1,5 +1,15 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
-var path = require('path')
+const path = require('path')
+let settings = {}
+try {
+  settings = require('./local.json')
+  console.log('Using local dev server settings (/config/local.json):')
+  console.log(JSON.stringify(settings, null, 2))
+} catch (e) {
+  console.log('Local dev server settings not found (/config/local.json)')
+}
+
+const target = settings.target || 'http://localhost:4000/'
 
 module.exports = {
   build: {
@@ -19,21 +29,22 @@ module.exports = {
   dev: {
     env: require('./dev.env'),
     port: 8080,
+    settings,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:4000/',
+        target,
         changeOrigin: true,
         cookieDomainRewrite: 'localhost'
       },
       '/nodeinfo': {
-        target: 'http://localhost:4000/',
+        target,
         changeOrigin: true,
         cookieDomainRewrite: 'localhost'
       },
       '/socket': {
-        target: 'http://localhost:4000/',
+        target,
         changeOrigin: true,
         cookieDomainRewrite: 'localhost',
         ws: true

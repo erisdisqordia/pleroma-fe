@@ -64,7 +64,7 @@
         </div>
       </div>
       <div class='form-bottom'>
-        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="enableSubmit" :drop-files="dropFiles"></media-upload>
+        <media-upload @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="uploadFailed" :drop-files="dropFiles"></media-upload>
 
         <p v-if="isOverLengthLimit" class="error">{{ charactersLeft }}</p>
         <p class="faint" v-else-if="hasStatusLengthLimit">{{ charactersLeft }}</p>
@@ -153,8 +153,8 @@
       padding-bottom: 0;
       margin-left: $fallback--attachmentRadius;
       margin-left: var(--attachmentRadius, $fallback--attachmentRadius);
-      background-color: $fallback--btn;
-      background-color: var(--btn, $fallback--btn);
+      background-color: $fallback--fg;
+      background-color: var(--btn, $fallback--fg);
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -258,11 +258,13 @@
     position: absolute;
     z-index: 1;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+    // this doesn't match original but i don't care, making it uniform.
+    box-shadow: var(--popupShadow);
     min-width: 75%;
     background: $fallback--bg;
     background: var(--bg, $fallback--bg);
-    color: $fallback--lightFg;
-    color: var(--lightFg, $fallback--lightFg);
+    color: $fallback--lightText;
+    color: var(--lightText, $fallback--lightText);
   }
 
   .autocomplete {
@@ -291,8 +293,8 @@
     }
 
     &.highlighted {
-      background-color: $fallback--btn;
-      background-color: var(--btn, $fallback--btn);
+      background-color: $fallback--fg;
+      background-color: var(--lightBg, $fallback--fg);
     }
   }
 }

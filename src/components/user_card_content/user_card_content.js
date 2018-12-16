@@ -6,21 +6,37 @@ export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio', 'activatePanel' ],
   data () {
     return {
+      followRequestInProgress: false,
+      followRequestSent: false,
       hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
         ? this.$store.state.instance.hideUserStats
-        : this.$store.state.config.hideUserStats
+        : this.$store.state.config.hideUserStats,
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
   computed: {
     headingStyle () {
-      const color = this.$store.state.config.colors.bg
+      const color = this.$store.state.config.customTheme.colors
+            ? this.$store.state.config.customTheme.colors.bg  // v2
+            : this.$store.state.config.colors.bg // v1
+
       if (color) {
-        const rgb = hex2rgb(color)
+        const rgb = (typeof color === 'string') ? hex2rgb(color) : color
         const tintColor = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .5)`
+
+        const gradient = [
+          [tintColor, this.hideBio ? '60%' : ''],
+          this.hideBio ? [
+            color, '100%'
+          ] : [
+            tintColor, ''
+          ]
+        ].map(_ => _.join(' ')).join(', ')
+
         return {
           backgroundColor: `rgb(${Math.floor(rgb.r * 0.53)}, ${Math.floor(rgb.g * 0.56)}, ${Math.floor(rgb.b * 0.59)})`,
           backgroundImage: [
-            `linear-gradient(to bottom, ${tintColor}, ${tintColor})`,
+            `linear-gradient(to bottom, ${gradient})`,
             `url(${this.user.cover_photo})`
           ].join(', ')
         }
@@ -71,13 +87,68 @@ export default {
   methods: {
     followUser () {
       const store = this.$store
+      this.followRequestInProgress = true
       store.state.api.backendInteractor.followUser(this.user.id)
         .then((followedUser) => store.commit('addNewUsers', [followedUser]))
+        .then(() => {
+          // For locked users we just mark it that we sent the follow request
+          if (this.user.locked) {
+            this.followRequestInProgress = false
+            this.followRequestSent = true
+            return
+          }
+
+          if (this.user.following) {
+            // If we get result immediately, just stop.
+            this.followRequestInProgress = false
+            return
+          }
+
+          // But usually we don't get result immediately, so we ask server
+          // for updated user profile to confirm if we are following them
+          // Sometimes it takes several tries. Sometimes we end up not following
+          // user anyway, probably because they locked themselves and we
+          // don't know that yet.
+          // Recursive Promise, it will call itself up to 3 times.
+          const fetchUser = (attempt) => new Promise((resolve, reject) => {
+            setTimeout(() => {
+              store.state.api.backendInteractor.fetchUser({ id: this.user.id })
+                .then((user) => store.commit('addNewUsers', [user]))
+                .then(() => resolve([this.user.following, attempt]))
+                .catch((e) => reject(e))
+            }, 500)
+          }).then(([following, attempt]) => {
+            if (!following && attempt <= 3) {
+              // If we BE reports that we still not following that user - retry,
+              // increment attempts by one
+              return fetchUser(++attempt)
+            } else {
+              // If we run out of attempts, just return whatever status is.
+              return following
+            }
+          })
+
+          return fetchUser(1)
+            .then((following) => {
+              if (following) {
+                // We confirmed and everything its good.
+                this.followRequestInProgress = false
+              } else {
+                // If after all the tries, just treat it as if user is locked
+                this.followRequestInProgress = false
+                this.followRequestSent = true
+              }
+            })
+        })
     },
     unfollowUser () {
       const store = this.$store
+      this.followRequestInProgress = true
       store.state.api.backendInteractor.unfollowUser(this.user.id)
         .then((unfollowedUser) => store.commit('addNewUsers', [unfollowedUser]))
+        .then(() => {
+          this.followRequestInProgress = false
+        })
     },
     blockUser () {
       const store = this.$store

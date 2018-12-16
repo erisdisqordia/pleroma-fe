@@ -1,5 +1,5 @@
 import { set, delete as del } from 'vue'
-import StyleSetter from '../services/style_setter/style_setter.js'
+import { setPreset, applyTheme } from '../services/style_setter/style_setter.js'
 
 const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
@@ -9,6 +9,7 @@ const defaultState = {
   hideAttachments: false,
   hideAttachmentsInConv: false,
   hideNsfw: true,
+  preloadImage: true,
   loopVideo: true,
   loopVideoSilentOnly: true,
   autoLoad: true,
@@ -23,6 +24,7 @@ const defaultState = {
     likes: true,
     repeats: true
   },
+  webPushNotifications: true,
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale,
@@ -54,10 +56,10 @@ const config = {
       commit('setOption', {name, value})
       switch (name) {
         case 'theme':
-          StyleSetter.setPreset(value, commit)
+          setPreset(value, commit)
           break
         case 'customTheme':
-          StyleSetter.setColors(value, commit)
+          applyTheme(value, commit)
       }
     }
   }

@@ -7,10 +7,13 @@
       </div>
       <div class='inner-nav'>
         <div class='item'>
-          <router-link :to="{ name: 'root'}">{{sitename}}</router-link>
+          <router-link class="back-button" @click.native="activatePanel('timeline')" :to="{ name: 'root' }" active-class="hidden">
+            <i class="icon-left-open" :title="$t('nav.back')"></i>
+          </router-link>
+          <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
         </div>
         <div class='item right'>
-          <user-finder class="nav-icon"></user-finder>
+          <user-finder class="nav-icon" @toggled="onFinderToggled"></user-finder>
           <router-link @click.native="activatePanel('timeline')" :to="{ name: 'settings'}"><i class="icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
           <a href="#" v-if="currentUser" @click.prevent="logout"><i class="icon-logout nav-icon" :title="$t('login.logout')"></i></a>
         </div>
@@ -30,7 +33,7 @@
               <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
               <features-panel v-if="!currentUser"></features-panel>
               <who-to-follow-panel v-if="currentUser && suggestionsEnabled"></who-to-follow-panel>
-              <notifications v-if="currentUser"></notifications>
+              <notifications :activatePanel="activatePanel" v-if="currentUser"></notifications>
             </div>
           </div>
         </div>

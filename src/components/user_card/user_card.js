@@ -15,6 +15,9 @@ const UserCard = {
   components: {
     UserCardContent
   },
+  computed: {
+    currentUser () { return this.$store.state.users.currentUser }
+  },
   methods: {
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded

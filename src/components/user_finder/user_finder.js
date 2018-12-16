@@ -11,6 +11,7 @@ const UserFinder = {
     },
     toggleHidden () {
       this.hidden = !this.hidden
+      this.$emit('toggled', this.hidden)
     }
   }
 }

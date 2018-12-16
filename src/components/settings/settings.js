@@ -13,6 +13,8 @@ const settings = {
       hideAttachmentsLocal: user.hideAttachments,
       hideAttachmentsInConvLocal: user.hideAttachmentsInConv,
       hideNsfwLocal: user.hideNsfw,
+      hideISPLocal: user.hideISP,
+      preloadImage: user.preloadImage,
       hidePostStatsLocal: typeof user.hidePostStats === 'undefined'
         ? instance.hidePostStats
         : user.hidePostStats,
@@ -45,6 +47,7 @@ const settings = {
       scopeCopyLocal: user.scopeCopy,
       scopeCopyDefault: this.$t('settings.values.' + instance.scopeCopy),
       stopGifs: user.stopGifs,
+      webPushNotificationsLocal: user.webPushNotifications,
       loopSilentAvailable:
         // Firefox
         Object.getOwnPropertyDescriptor(HTMLVideoElement.prototype, 'mozHasAudio') ||
@@ -82,6 +85,12 @@ const settings = {
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
+    },
+    preloadImage (value) {
+      this.$store.dispatch('setOption', { name: 'preloadImage', value })
+    },
+    hideISPLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hideISP', value })
     },
     'notificationVisibilityLocal.likes' (value) {
       this.$store.dispatch('setOption', { name: 'notificationVisibility', value: this.$store.state.config.notificationVisibility })
@@ -134,6 +143,10 @@ const settings = {
     },
     stopGifs (value) {
       this.$store.dispatch('setOption', { name: 'stopGifs', value })
+    },
+    webPushNotificationsLocal (value) {
+      this.$store.dispatch('setOption', { name: 'webPushNotifications', value })
+      if (value) this.$store.dispatch('registerPushNotifications')
     }
   }
 }

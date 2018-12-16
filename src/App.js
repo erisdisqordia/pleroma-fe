@@ -21,6 +21,7 @@ export default {
   },
   data: () => ({
     mobileActivePanel: 'timeline',
+    finderHidden: true,
     supportsMask: window.CSS && window.CSS.supports && (
       window.CSS.supports('mask-size', 'contain') ||
         window.CSS.supports('-webkit-mask-size', 'contain') ||
@@ -53,13 +54,19 @@ export default {
     },
     logoBgStyle () {
       return Object.assign({
-        'margin': `${this.$store.state.instance.logoMargin} 0`
+        'margin': `${this.$store.state.instance.logoMargin} 0`,
+        opacity: this.finderHidden ? 1 : 0
       }, this.enableMask ? {} : {
         'background-color': this.enableMask ? '' : 'transparent'
       })
     },
     logo () { return this.$store.state.instance.logo },
-    style () { return { 'background-image': `url(${this.background})` } },
+    style () {
+      return {
+        '--body-background-image': `url(${this.background})`,
+        'background-image': `url(${this.background})`
+      }
+    },
     sitename () { return this.$store.state.instance.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
@@ -75,6 +82,9 @@ export default {
     logout () {
       this.$router.replace('/main/public')
       this.$store.dispatch('logout')
+    },
+    onFinderToggled (hidden) {
+      this.finderHidden = hidden
     }
   }
 }

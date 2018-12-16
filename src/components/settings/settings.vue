@@ -14,15 +14,24 @@
         <div @click.prevent class="alert transparent" v-if="!currentSaveStateNotice.error">
           {{ $t('settings.saving_ok') }}
         </div>
-    </template>
+      </template>
     </transition>
   </div>
   <div class="panel-body">
+<keep-alive>
     <tab-switcher>
       <div :label="$t('settings.general')" >
         <div class="setting-item">
-          <h2>{{ $t('settings.interfaceLanguage') }}</h2>
-          <interface-language-switcher />
+          <h2>{{ $t('settings.interface') }}</h2>
+          <ul class="setting-list">
+            <li>
+              <interface-language-switcher />
+            </li>
+            <li>
+              <input type="checkbox" id="hideISP" v-model="hideISPLocal">
+              <label for="hideISP">{{$t('settings.hide_isp')}}</label>
+            </li>
+          </ul>
         </div>
         <div class="setting-item">
           <h2>{{$t('nav.timeline')}}</h2>
@@ -109,6 +118,12 @@
               <input type="checkbox" id="hideNsfw" v-model="hideNsfwLocal">
               <label for="hideNsfw">{{$t('settings.nsfw_clickthrough')}}</label>
             </li>
+            <ul class="setting-list suboptions" >
+              <li>
+                <input :disabled="!hideNsfwLocal" type="checkbox" id="preloadImage" v-model="preloadImage">
+                <label for="preloadImage">{{$t('settings.preload_images')}}</label>
+              </li>
+            </ul>
             <li>
               <input type="checkbox" id="stopGifs" v-model="stopGifs">
               <label for="stopGifs">{{$t('settings.stop_gifs')}}</label>
@@ -125,6 +140,18 @@
                   </div>
                 </li>
               </ul>
+            </li>
+          </ul>
+        </div>
+
+       <div class="setting-item">
+          <h2>{{$t('settings.notifications')}}</h2>
+          <ul class="setting-list">
+            <li>
+              <input type="checkbox" id="webPushNotifications" v-model="webPushNotificationsLocal">
+              <label for="webPushNotifications">
+                {{$t('settings.enable_web_push_notifications')}}
+              </label>
             </li>
           </ul>
         </div>
@@ -199,6 +226,7 @@
       </div>
 
     </tab-switcher>
+</keep-alive>
   </div>
 </div>
 </template>
@@ -210,7 +238,7 @@
 @import '../../_variables.scss';
 
 .setting-item {
-  border-bottom: 2px solid var(--btn, $fallback--btn);
+  border-bottom: 2px solid var(--fg, $fallback--fg);
   margin: 1em 1em 1.4em;
   padding-bottom: 1.4em;
 
@@ -259,12 +287,8 @@
 
   .btn {
     min-height: 28px;
-  }
-
-  .submit {
-    margin-top: 1em;
-    min-height: 30px;
-    width: 10em;
+    min-width: 10em;
+    padding: 0 2em;
   }
 }
 .select-multiple {

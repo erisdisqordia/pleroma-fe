@@ -7,11 +7,13 @@ import generateProfileLink from 'src/services/user_profile_link_generator/user_p
 const Notification = {
   data () {
     return {
-      userExpanded: false
+      userExpanded: false,
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
   props: [
-    'notification'
+    'notification',
+    'activatePanel'
   ],
   components: {
     Status, StillImage, UserCardContent

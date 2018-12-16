@@ -57,8 +57,8 @@
 .chat-heading {
   cursor: pointer;
   .icon-comment-empty {
-    color: $fallback--fg;
-    color: var(--fg, $fallback--fg);
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
   }
 }
 

@@ -31,7 +31,7 @@ const registration = {
       this.$router.push('/main/all')
     }
 
-    this.getCaptcha().then(cpt => { this.captcha = cpt })
+    this.setCaptcha()
   },
   computed: {
     token () { return this.$route.params.token },
@@ -61,6 +61,9 @@ const registration = {
           console.warn('Registration failed: ' + error)
         }
       }
+    },
+    setCaptcha() {
+      this.getCaptcha().then(cpt => { this.captcha = cpt })
     }
   }
 }

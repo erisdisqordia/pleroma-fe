@@ -31,12 +31,7 @@ const registration = {
       this.$router.push('/main/all')
     }
 
-    fetch("/api/pleroma/captcha")
-      .then(resp => resp.json())
-      .then(resp => {
-        // TODO: check for errors
-        this.captcha = resp
-      })
+    this.getCaptcha().then(cpt => this.captcha = cpt)
   },
   computed: {
     token () { return this.$route.params.token },
@@ -49,7 +44,7 @@ const registration = {
     })
   },
   methods: {
-    ...mapActions(['signUp']),
+    ...mapActions(['signUp', 'getCaptcha']),
     async submit () {
       this.user.nickname = this.user.username
       this.user.token = this.token

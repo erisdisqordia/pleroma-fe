@@ -167,6 +167,8 @@ const register = (params) => {
   })
 }
 
+const getCaptcha = () => fetch('/api/pleroma/captcha').then(resp => resp.json())
+
 const authHeaders = (accessToken) => {
   if (accessToken) {
     return { 'Authorization': `Bearer ${accessToken}` }
@@ -496,6 +498,7 @@ const apiService = {
   setUserMute,
   fetchMutes,
   register,
+  getCaptcha,
   updateAvatar,
   updateBg,
   updateProfile,

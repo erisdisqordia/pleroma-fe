@@ -62,7 +62,7 @@ const registration = {
         }
       }
     },
-    setCaptcha() {
+    setCaptcha () {
       this.getCaptcha().then(cpt => { this.captcha = cpt })
     }
   }

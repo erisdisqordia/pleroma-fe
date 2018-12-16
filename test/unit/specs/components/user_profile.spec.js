@@ -16,9 +16,15 @@ const externalProfileStore = new Vuex.Store({
     api: {
       backendInteractor: backendInteractorService('')
     },
+    interface: {
+      browserSupport: ''
+    },
     config: {
       colors: '',
-      highlight: {}
+      highlight: {},
+      customTheme: {
+        colors: []
+      }
     },
     instance: {
       hideUserStats: true
@@ -103,9 +109,15 @@ const localProfileStore = new Vuex.Store({
     api: {
       backendInteractor: backendInteractorService('')
     },
+    interface: {
+      browserSupport: ''
+    },
     config: {
       colors: '',
-      highlight: {}
+      highlight: {},
+      customTheme: {
+        colors: []
+      }
     },
     instance: {
       hideUserStats: true

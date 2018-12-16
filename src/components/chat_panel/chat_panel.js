@@ -11,9 +11,6 @@ const chatPanel = {
   computed: {
     messages () {
       return this.$store.state.chat.messages
-    },
-    userProfileLink (user) {
-      return generateProfileLink(user.id, user.screen_name)
     }
   },
   methods: {
@@ -23,6 +20,9 @@ const chatPanel = {
     },
     togglePanel () {
       this.collapsed = !this.collapsed
+    },
+    userProfileLink (user) {
+      return generateProfileLink(user.id, user.screen_name)
     }
   }
 }

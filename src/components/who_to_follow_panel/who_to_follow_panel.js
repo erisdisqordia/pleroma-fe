@@ -92,7 +92,9 @@ const WhoToFollowPanel = {
     },
     suggestionsEnabled () {
       return this.$store.state.instance.suggestionsEnabled
-    },
+    }
+  },
+  methods: {
     userProfileLink (id, name) {
       return generateProfileLink(id, name)
     }

@@ -21,6 +21,9 @@ const Notification = {
   methods: {
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
+    },
+    userProfileLink (user) {
+      return generateProfileLink(user.id, user.screen_name)
     }
   },
   computed: {
@@ -31,9 +34,6 @@ const Notification = {
       const highlight = this.$store.state.config.highlight
       const user = this.notification.action.user
       return highlightStyle(highlight[user.screen_name])
-    },
-    userProfileLink (user) {
-      return generateProfileLink(user.id, user.screen_name)
     }
   }
 }

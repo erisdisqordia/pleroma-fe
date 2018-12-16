@@ -29,9 +29,7 @@ const UserCard = {
     denyUser () {
       this.$store.state.api.backendInteractor.denyUser(this.user.id)
       this.$store.dispatch('removeFollowRequest', this.user)
-    }
-  },
-  computed: {
+    },
     userProfileLink (user) {
       return generateProfileLink(user.id, user.screen_name)
     }

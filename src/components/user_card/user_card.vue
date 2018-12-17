@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <a href="#">
-      <img @click.prevent="toggleUserExpanded" class="avatar" :src="user.profile_image_url">
+      <StillImage @click.prevent="toggleUserExpanded" class="avatar" :src="user.profile_image_url"/>
     </a>
     <div class="usercard" v-if="userExpanded">
       <user-card-content :user="user" :switcher="false"></user-card-content>
@@ -40,6 +40,14 @@
   margin-top:0.0em;
   text-align: left;
   width: 100%;
+  .user-name {
+    img {
+      object-fit: contain;
+      height: 16px;
+      width: 16px;
+      vertical-align: middle;
+    }
+  }
 }
 
 .follows-you {

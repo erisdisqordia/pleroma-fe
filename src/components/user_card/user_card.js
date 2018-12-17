@@ -1,4 +1,5 @@
 import UserCardContent from '../user_card_content/user_card_content.vue'
+import StillImage from '../still-image/still-image.vue'
 
 const UserCard = {
   props: [
@@ -12,7 +13,8 @@ const UserCard = {
     }
   },
   components: {
-    UserCardContent
+    UserCardContent,
+    StillImage
   },
   computed: {
     currentUser () { return this.$store.state.users.currentUser }

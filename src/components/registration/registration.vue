@@ -75,6 +75,19 @@
               </ul>
             </div>
 
+            <div class="form-group" id="captcha-group" v-if="captcha.type != 'none'">
+              <template v-if="captcha.type == 'kocaptcha'">
+                <img v-bind:src="captcha.url" v-on:click="setCaptcha">
+
+                <sub>Click the image to get a new captcha</sub>
+                <label class='form--label' for='captcha-label'>CAPTCHA</label>
+
+                <input :disabled="isPending"
+                  v-model='captcha.solution'
+                  class='form-control' id='captcha-answer' type='text'>
+              </template>
+            </div>
+
             <div class='form-group' v-if='token' >
               <label for='token'>{{$t('registration.token')}}</label>
               <input disabled='true' v-model='token' class='form-control' id='token' type='text'>

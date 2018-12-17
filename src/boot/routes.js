@@ -30,8 +30,9 @@ export default (store) => {
     { path: '/main/:route',
       redirect: to => {
         const { params } = to
+        const route = params.route ? params.route : 'all'
 
-        return { path: `/~/main/${params.route}` }
+        return { path: `/~/main/${route}` }
       }
     },
     { path: '/tag/:tag',

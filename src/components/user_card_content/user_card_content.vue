@@ -25,7 +25,7 @@
         <div v-if="user.follows_you && loggedIn && isOtherUser" class="following">
           {{ $t('user_card.follows_you') }}
         </div>
-        <div class="floater" v-if="switcher || isOtherUser">
+        <div class="floater" v-if="isOtherUser && (loggedIn || !switcher)">
           <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
           <input class="userHighlightText" type="text" :id="'userHighlightColorTx'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
           <input class="userHighlightCl" type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
@@ -67,7 +67,7 @@
             </button>
           </span>
         </div>
-        <div class='mute' v-if='isOtherUser'>
+        <div class='mute' v-if='isOtherUser && loggedIn'>
           <span v-if='user.muted'>
             <button @click="toggleMute" class="pressed">
               {{ $t('user_card.muted') }}

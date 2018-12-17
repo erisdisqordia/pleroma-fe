@@ -1,20 +1,38 @@
 <template>
-  <div>
-    <div v-if="user" class="user-profile panel panel-default">
-      <user-card-content :user="user" :switcher="true" :selected="timeline.viewing"></user-card-content>
-    </div>
-    <div v-else class="panel user-profile-placeholder">
-      <div class="panel-heading">
-        <div class="title">
-          {{ $t('settings.profile_tab') }}
+<div>
+  <div v-if="user" class="user-profile panel panel-default">
+    <user-card-content :user="user" :switcher="true" :selected="timeline.viewing"></user-card-content>
+    <tab-switcher>
+      <Timeline label="Posts" :embedded="true" :title="$t('user_profile.timeline_title')" :timeline="timeline" :timeline-name="'user'" :user-id="userId"/>
+      <div :label="$t('user_card.followers')">
+        <div v-if="followers">
+          <user-card v-for="follower in followers" :key="follower.id" :user="follower" :showFollows="false"></user-card>
+        </div>
+        <div class="userlist-placeholder" v-else>
+          <i class="icon-spin3 animate-spin"></i>
         </div>
       </div>
-      <div class="panel-body">
-        <i class="icon-spin3 animate-spin"></i>
+      <div :label="$t('user_card.followees')">
+        <div v-if="friends">
+          <user-card v-for="friend in friends" :key="friend.id" :user="friend" :showFollows="true"></user-card>
+        </div>
+        <div class="userlist-placeholder" v-else>
+          <i class="icon-spin3 animate-spin"></i>
+        </div>
+      </div>
+    </tab-switcher>
+  </div>
+  <div v-else class="panel user-profile-placeholder">
+    <div class="panel-heading">
+      <div class="title">
+        {{ $t('settings.profile_tab') }}
       </div>
     </div>
-    <Timeline :title="$t('user_profile.timeline_title')" :timeline="timeline" :timeline-name="'user'" :user-id="userId"/>
+    <div class="panel-body">
+      <i class="icon-spin3 animate-spin"></i>
+    </div>
   </div>
+</div>
 </template>
 
 <script src="./user_profile.js"></script>
@@ -24,11 +42,35 @@
 .user-profile {
   flex: 2;
   flex-basis: 500px;
-  padding-bottom: 10px;
+
   .panel-heading {
     background: transparent;
     flex-direction: column;
     align-items: stretch;
+  }
+  .userlist-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: middle;
+    padding: 2em;
+  }
+
+  .timeline-heading {
+    display: flex;
+    justify-content: center;
+
+    .loadmore-button, .alert {
+      flex: 1;
+    }
+
+    .loadmore-button {
+      height: 28px;
+      margin: 10px .6em;
+    }
+
+    .title, .loadmore-text {
+      display: none
+    }
   }
 }
 .user-profile-placeholder {

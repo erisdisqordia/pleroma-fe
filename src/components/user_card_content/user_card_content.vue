@@ -104,16 +104,16 @@
     </div>
   </div>
   <div class="panel-body profile-panel-body" v-if="!hideBio">
-    <div v-if="!hideUserStatsLocal || switcher" class="user-counts" :class="{clickable: switcher}">
-      <div class="user-count" v-on:click.prevent="setProfileView('statuses')" :class="{selected: selected === 'statuses'}">
+    <div v-if="!hideUserStatsLocal || switcher" class="user-counts">
+      <div class="user-count" v-on:click.prevent="setProfileView('statuses')">
         <h5>{{ $t('user_card.statuses') }}</h5>
         <span v-if="!hideUserStatsLocal">{{user.statuses_count}} <br></span>
       </div>
-      <div class="user-count" v-on:click.prevent="setProfileView('friends')" :class="{selected: selected === 'friends'}">
+      <div class="user-count" v-on:click.prevent="setProfileView('friends')">
         <h5>{{ $t('user_card.followees') }}</h5>
         <span v-if="!hideUserStatsLocal">{{user.friends_count}}</span>
       </div>
-      <div class="user-count" v-on:click.prevent="setProfileView('followers')" :class="{selected: selected === 'followers'}">
+      <div class="user-count" v-on:click.prevent="setProfileView('followers')">
         <h5>{{ $t('user_card.followers') }}</h5>
         <span v-if="!hideUserStatsLocal">{{user.followers_count}}</span>
       </div>
@@ -304,32 +304,12 @@
   justify-content: space-between;
   color: $fallback--lightText;
   color: var(--lightText, $fallback--lightText);
-
-  &.clickable {
-    .user-count {
-      cursor: pointer;
-
-      &:hover:not(.selected) {
-        transition: border-bottom 100ms;
-        border-bottom: 3px solid $fallback--link;
-        border-bottom: 3px solid var(--link, $fallback--link);
-      }
-    }
-  }
 }
 
 .user-count {
   flex: 1;
   padding: .5em 0 .5em 0;
   margin: 0 .5em;
-
-  &.selected {
-    transition: none;
-    border-bottom: 5px solid $fallback--link;
-    border-bottom: 5px solid var(--link, $fallback--link);
-    border-radius: $fallback--btnRadius;
-    border-radius: var(--btnRadius, $fallback--btnRadius);
-  }
 
   h5 {
     font-size:1em;

@@ -159,6 +159,10 @@ const users = {
         throw Error(errors)
       }
     },
+    async getCaptcha (store) {
+      return await store.rootState.api.backendInteractor.getCaptcha()
+    },
+
     logout (store) {
       store.commit('clearCurrentUser')
       store.commit('setToken', false)

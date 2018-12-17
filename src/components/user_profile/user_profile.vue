@@ -3,18 +3,18 @@
   <div v-if="user" class="user-profile panel panel-default">
     <user-card-content :user="user" :switcher="true" :selected="timeline.viewing"></user-card-content>
     <tab-switcher>
-      <Timeline label="Posts" :embedded="true" :title="$t('user_profile.timeline_title')" :timeline="timeline" :timeline-name="'user'" :user-id="userId"/>
-      <div :label="$t('user_card.followers')">
-        <div v-if="followers">
-          <user-card v-for="follower in followers" :key="follower.id" :user="follower" :showFollows="false"></user-card>
+      <Timeline :label="$t('user_card.statuses')" :embedded="true" :title="$t('user_profile.timeline_title')" :timeline="timeline" :timeline-name="'user'" :user-id="userId"/>
+      <div :label="$t('user_card.followees')">
+        <div v-if="friends">
+          <user-card v-for="friend in friends" :key="friend.id" :user="friend" :showFollows="true"></user-card>
         </div>
         <div class="userlist-placeholder" v-else>
           <i class="icon-spin3 animate-spin"></i>
         </div>
       </div>
-      <div :label="$t('user_card.followees')">
-        <div v-if="friends">
-          <user-card v-for="friend in friends" :key="friend.id" :user="friend" :showFollows="true"></user-card>
+      <div :label="$t('user_card.followers')">
+        <div v-if="followers">
+          <user-card v-for="follower in followers" :key="follower.id" :user="follower" :showFollows="false"></user-card>
         </div>
         <div class="userlist-placeholder" v-else>
           <i class="icon-spin3 animate-spin"></i>

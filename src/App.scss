@@ -237,13 +237,11 @@ i[class*=icon-] {
   flex-wrap: wrap;
 
   .nav-icon {
-    font-size: 1.1em;
     margin-left: 0.4em;
   }
 
   &.right {
     justify-content: flex-end;
-    padding-right: 20px;
   }
 }
 
@@ -251,7 +249,8 @@ i[class*=icon-] {
   flex: 1
 }
 
-nav {
+.nav-bar {
+  padding: 0;
   width: 100%;
   align-items: center;
   position: fixed;
@@ -295,10 +294,13 @@ nav {
   }
 
   .inner-nav {
+    margin: auto;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
     display: flex;
     align-items: center;
     flex-basis: 970px;
-    margin: auto;
     height: 50px;
 
     a, a i {
@@ -466,7 +468,7 @@ nav {
 
     &.hidden {
       opacity: 0;
-      max-width: 20px;
+      max-width: 5px;
     }
   }
 }
@@ -606,22 +608,8 @@ nav {
   }
 }
 
-@media all and (max-width: 959px) {
-  .mobile-hidden {
-    display: none;
-  }
-
-  .panel-switcher {
-    display: flex;
-  }
-
-  .container {
-    padding: 0 0 0 0;
-  }
-
-  .panel {
-    margin: 0.5em 0 0.5em 0;
-  }
+.item.right {
+  text-align: right;
 }
 
 .visibility-tray {
@@ -649,4 +637,32 @@ nav {
   border: 1px solid var(--faint, $fallback--faint);
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
+}
+
+@media all and (max-width: 959px) {
+  .mobile-hidden {
+    display: none;
+  }
+
+  .panel-switcher {
+    display: flex;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .panel {
+    margin: 0.5em 0 0.5em 0;
+  }
+
+  .button-icon {
+    font-size: 1.2em;
+  }
+
+  .status .status-actions {
+    div {
+      max-width: 4em;
+    }
+  }
 }

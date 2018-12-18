@@ -13,11 +13,16 @@ const afterStoreSetup = ({ store, i18n }) => {
       store.dispatch('setInstanceOption', { name: 'name', value: name })
       store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
       store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
-      store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadlimit.uploadlimit) })
-      store.dispatch('setInstanceOption', { name: 'avatarlimit', value: parseInt(uploadlimit.avatarlimit) })
-      store.dispatch('setInstanceOption', { name: 'backgroundlimit', value: parseInt(uploadlimit.backgroundlimit) })
-      store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadlimit.bannerlimit) })
       store.dispatch('setInstanceOption', { name: 'server', value: server })
+
+      // TODO: default values for this stuff, added if to not make it break on
+      // my dev config out of the box.
+      if (uploadlimit) {
+        store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadlimit.uploadlimit) })
+        store.dispatch('setInstanceOption', { name: 'avatarlimit', value: parseInt(uploadlimit.avatarlimit) })
+        store.dispatch('setInstanceOption', { name: 'backgroundlimit', value: parseInt(uploadlimit.backgroundlimit) })
+        store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadlimit.bannerlimit) })
+      }
 
       if (data.nsfwCensorImage) {
         store.dispatch('setInstanceOption', { name: 'nsfwCensorImage', value: data.nsfwCensorImage })

@@ -1,6 +1,6 @@
 <template>
   <div id="app" v-bind:style="style">
-    <nav class='container' @click="scrollToTop()" id="nav">
+    <nav class='nav-bar container' @click="scrollToTop()" id="nav">
       <div class='logo' :style='logoBgStyle'>
         <div class='mask' :style='logoMaskStyle'></div>
         <img :src='logo' :style='logoStyle'>
@@ -13,9 +13,9 @@
           <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
         </div>
         <div class='item right'>
-          <user-finder class="nav-icon" @toggled="onFinderToggled"></user-finder>
-          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'settings'}"><i class="icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
-          <a href="#" v-if="currentUser" @click.prevent="logout"><i class="icon-logout nav-icon" :title="$t('login.logout')"></i></a>
+          <user-finder class="button-icon nav-icon" @toggled="onFinderToggled"></user-finder>
+          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'settings'}"><i class="button-icon icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
+          <a href="#" v-if="currentUser" @click.prevent="logout"><i class="button-icon icon-logout nav-icon" :title="$t('login.logout')"></i></a>
         </div>
       </div>
     </nav>

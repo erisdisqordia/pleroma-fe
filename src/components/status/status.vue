@@ -8,7 +8,7 @@
           </router-link>
         </small>
         <small class="muteWords">{{muteWordHits.join(', ')}}</small>
-        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="icon-eye-off"></i></a>
+        <a href="#" class="unmute" @click.prevent="toggleMute"><i class="button-icon icon-eye-off"></i></a>
       </div>
     </template>
     <template v-else>
@@ -48,7 +48,7 @@
                     </router-link>
                   </span>
                   <a v-if="isReply && !noReplyLinks" href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)" :title="$t('tool_tip.reply')">
-                    <i class="icon-reply" @mouseenter="replyEnter(status.in_reply_to_status_id, $event)" @mouseout="replyLeave()"></i>
+                    <i class="button-icon icon-reply" @mouseenter="replyEnter(status.in_reply_to_status_id, $event)" @mouseout="replyLeave()"></i>
                   </a>
                 </span>
               </div>
@@ -63,18 +63,18 @@
               <router-link class="timeago" @click.native="activatePanel('timeline')" :to="{ name: 'conversation', params: { id: status.id } }">
                 <timeago :since="status.created_at" :auto-update="60"></timeago>
               </router-link>
-              <div class="visibility-icon" v-if="status.visibility">
+              <div class="button-icon visibility-icon" v-if="status.visibility">
                 <i :class="visibilityIcon(status.visibility)" :title="status.visibility | capitalize"></i>
               </div>
               <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url" title="Source">
-                <i class="icon-link-ext-alt"></i>
+                <i class="button-icon icon-link-ext-alt"></i>
               </a>
               <template v-if="expandable">
                 <a href="#" @click.prevent="toggleExpanded" title="Expand">
-                  <i class="icon-plus-squared"></i>
+                  <i class="button-icon icon-plus-squared"></i>
                 </a>
               </template>
-              <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="icon-eye-off"></i></a>
+              <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="button-icon icon-eye-off"></i></a>
             </div>
           </div>
 
@@ -101,7 +101,7 @@
           <div v-if="!noHeading && !noReplyLinks" class='status-actions media-body'>
             <div v-if="loggedIn">
               <a href="#" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')">
-                <i class="icon-reply" :class="{'icon-reply-active': replying}"></i>
+                <i class="button-icon icon-reply" :class="{'icon-reply-active': replying}"></i>
               </a>
             </div>
             <retweet-button :visibility='status.visibility' :loggedIn='loggedIn' :status='status'></retweet-button>

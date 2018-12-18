@@ -3,7 +3,7 @@
   <div class="panel-heading text-center">
     <div class='user-info'>
       <router-link @click.native="activatePanel && activatePanel('timeline')" :to="{ name: 'user-settings' }" style="float: right; margin-top:16px;" v-if="!isOtherUser">
-        <i class="icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
+        <i class="button-icon icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
       </router-link>
       <a :href="user.statusnet_profile_url" target="_blank" class="floater" v-if="isOtherUser">
         <i class="icon-link-ext usersettings"></i>

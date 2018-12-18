@@ -7,7 +7,7 @@
       <button class="btn search-button" @click="findUser(username)">
         <i class="icon-search"/>
       </button>
-      <i class="icon-cancel user-finder-icon" @click.prevent.stop="toggleHidden"/>
+      <i class="button-icon icon-cancel user-finder-icon" @click.prevent.stop="toggleHidden"/>
     </template>
   </div>
 </template>
@@ -29,7 +29,8 @@
     height: 29px;
   }
   .user-finder-input {
-    max-width: 80%;
+    // TODO: do this properly without a rough guesstimate of 2 icons + paddings
+    max-width: calc(100% - 30px - 30px - 20px);
   }
 
   .search-button {

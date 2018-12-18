@@ -33,10 +33,7 @@
         </router-link>
       </div>
       <template v-else>
-        <status :activatePanel="activatePanel" v-if="notification.status"  class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>
-        <div class="broken-favorite" v-else>
-          {{$t('notifications.broken_favorite')}}
-        </div>
+        <status :activatePanel="activatePanel" class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>
       </template>
     </div>
   </div>

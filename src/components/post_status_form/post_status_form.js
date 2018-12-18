@@ -32,6 +32,8 @@ const PostStatusForm = {
   },
   mounted () {
     this.resize(this.$refs.textarea)
+    const textLength = this.$refs.textarea.value.length
+    this.$refs.textarea.setSelectionRange(textLength, textLength)
 
     if (this.replyTo) {
       this.$refs.textarea.focus()

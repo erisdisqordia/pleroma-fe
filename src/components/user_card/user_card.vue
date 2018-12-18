@@ -19,7 +19,8 @@
           {{ currentUser.id == user.id ? $t('user_card.its_you') : $t('user_card.follows_you') }}
         </span>
       </div>
-      <router-link class='user-screen-name' :to="{ name: 'user-profile', params: { id: user.id } }">
+
+      <router-link class='user-screen-name' :to="userProfileLink(user)">
         @{{user.screen_name}}
       </router-link>
     </div>

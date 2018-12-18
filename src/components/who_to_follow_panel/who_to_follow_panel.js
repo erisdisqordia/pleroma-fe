@@ -1,4 +1,5 @@
 import apiService from '../../services/api/api.service.js'
+import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 function showWhoToFollow (panel, reply) {
   var users = reply
@@ -91,6 +92,11 @@ const WhoToFollowPanel = {
     },
     suggestionsEnabled () {
       return this.$store.state.instance.suggestionsEnabled
+    }
+  },
+  methods: {
+    userProfileLink (id, name) {
+      return generateProfileLink(id, name)
     }
   },
   watch: {

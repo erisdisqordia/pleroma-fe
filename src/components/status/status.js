@@ -188,7 +188,9 @@ const Status = {
     },
     replySubject () {
       if (!this.status.summary) return ''
-      const behavior = this.$store.state.config.subjectLineBehavior
+      const behavior = typeof this.$store.state.config.subjectLineBehavior === 'undefined'
+            ? this.$store.state.instance.subjectLineBehavior
+            : this.$store.state.config.subjectLineBehavior
       const startsWithRe = this.status.summary.match(/^re[: ]/i)
       if (behavior !== 'noop' && startsWithRe || behavior === 'masto') {
         return this.status.summary

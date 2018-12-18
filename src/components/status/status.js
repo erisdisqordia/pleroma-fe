@@ -7,6 +7,7 @@ import UserCardContent from '../user_card_content/user_card_content.vue'
 import StillImage from '../still-image/still-image.vue'
 import { filter, find } from 'lodash'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
+import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 const Status = {
   name: 'Status',
@@ -286,6 +287,9 @@ const Status = {
     },
     replyLeave () {
       this.showPreview = false
+    },
+    userProfileLink (id, name) {
+      return generateProfileLink(id, name)
     }
   },
   watch: {

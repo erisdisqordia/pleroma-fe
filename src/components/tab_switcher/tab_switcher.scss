@@ -9,57 +9,67 @@
   .tabs {
     display: flex;
     position: relative;
-    justify-content: center;
     width: 100%;
     overflow-y: hidden;
     overflow-x: auto;
     padding-top: 5px;
-    height: 32px;
     box-sizing: border-box;
 
     &::after, &::before {
       display: block;
       content: '';
       flex: 1 1 auto;
-    }
-
-    .tab, &::after, &::before {
       border-bottom: 1px solid;
       border-bottom-color: $fallback--border;
       border-bottom-color: var(--border, $fallback--border);
     }
 
-    .tab {
+    .tab-wrapper {
+      height: 28px;
+      overflow: hidden;
       position: relative;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      padding: 5px 1em 99px;
-      white-space: nowrap;
+      display: flex;
+      flex: 0 0 auto;
 
-      &:not(.active) {
-        z-index: 4;
+      .tab {
+        width: 100%;
+        min-width: 1px;
+        position: relative;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding: 6px 1em;
+        padding-bottom: 99px;
+        margin-bottom: 6px - 99px;
+        white-space: nowrap;
 
-        &:hover {
-          z-index: 6;
+        &:not(.active) {
+          z-index: 4;
+
+          &:hover {
+            z-index: 6;
+          }
         }
 
+        &.active {
+          background: transparent;
+          z-index: 5;
+        }
+      }
+
+      &:not(.active) {
         &::after {
           content: '';
           position: absolute;
           left: 0;
           right: 0;
-          top: 26px;
+          bottom: 0;
+          z-index: 7;
           border-bottom: 1px solid;
           border-bottom-color: $fallback--border;
           border-bottom-color: var(--border, $fallback--border);
         }
       }
-
-      &.active {
-        background: transparent;
-        border-bottom: none;
-        z-index: 5;
-      }
     }
+
   }
 }

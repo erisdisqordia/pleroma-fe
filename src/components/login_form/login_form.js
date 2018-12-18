@@ -32,7 +32,7 @@ const LoginForm = {
           .then((result) => {
             this.$store.commit('setToken', result.access_token)
             this.$store.dispatch('loginUser', result.access_token)
-            this.$router.push('/main/friends')
+            this.$router.push('/~/main/friends')
           })
       })
     }

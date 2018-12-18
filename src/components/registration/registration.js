@@ -11,7 +11,8 @@ const registration = {
       username: '',
       password: '',
       confirm: ''
-    }
+    },
+    captcha: {}
   }),
   validations: {
     user: {
@@ -27,8 +28,10 @@ const registration = {
   },
   created () {
     if ((!this.registrationOpen && !this.token) || this.signedIn) {
-      this.$router.push('/main/all')
+      this.$router.push('/~/main/all')
     }
+
+    this.setCaptcha()
   },
   computed: {
     token () { return this.$route.params.token },
@@ -41,21 +44,26 @@ const registration = {
     })
   },
   methods: {
-    ...mapActions(['signUp']),
+    ...mapActions(['signUp', 'getCaptcha']),
     async submit () {
       this.user.nickname = this.user.username
       this.user.token = this.token
+      this.user.captcha_solution = this.captcha.solution
+      this.user.captcha_token = this.captcha.token
 
       this.$v.$touch()
 
       if (!this.$v.$invalid) {
         try {
           await this.signUp(this.user)
-          this.$router.push('/main/friends')
+          this.$router.push('/~/main/friends')
         } catch (error) {
           console.warn('Registration failed: ' + error)
         }
       }
+    },
+    setCaptcha () {
+      this.getCaptcha().then(cpt => { this.captcha = cpt })
     }
   }
 }

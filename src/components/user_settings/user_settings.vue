@@ -49,7 +49,7 @@
             <button class="btn btn-default" v-else-if="avatarPreview" @click="submitAvatar">{{$t('general.submit')}}</button>
             <div class='alert error' v-if="avatarUploadError">
               Error: {{ avatarUploadError }}
-              <i class="icon-cancel" @click="clearUploadError('avatar')"></i>
+              <i class="button-icon icon-cancel" @click="clearUploadError('avatar')"></i>
             </div>
           </div>
           <div class="setting-item">
@@ -66,7 +66,7 @@
             <button class="btn btn-default" v-else-if="bannerPreview" @click="submitBanner">{{$t('general.submit')}}</button>
             <div class='alert error' v-if="bannerUploadError">
               Error: {{ bannerUploadError }}
-              <i class="icon-cancel" @click="clearUploadError('banner')"></i>
+              <i class="button-icon icon-cancel" @click="clearUploadError('banner')"></i>
             </div>
           </div>
           <div class="setting-item">
@@ -81,7 +81,7 @@
             <button class="btn btn-default" v-else-if="backgroundPreview" @click="submitBg">{{$t('general.submit')}}</button>
             <div class='alert error' v-if="backgroundUploadError">
               Error: {{ backgroundUploadError }}
-              <i class="icon-cancel" @click="clearUploadError('background')"></i>
+              <i class="button-icon icon-cancel" @click="clearUploadError('background')"></i>
             </div>
           </div>
         </div>

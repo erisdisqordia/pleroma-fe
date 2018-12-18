@@ -1,15 +1,15 @@
 <template>
   <div v-if="loggedIn">
     <template v-if="visibility !== 'private' && visibility !== 'direct'">
-      <i :class='classes' class='retweet-button icon-retweet rt-active' v-on:click.prevent='retweet()' :title="$t('tool_tip.repeat')"></i>
+      <i :class='classes' class='button-icon retweet-button icon-retweet rt-active' v-on:click.prevent='retweet()' :title="$t('tool_tip.repeat')"></i>
       <span v-if='!hidePostStatsLocal && status.repeat_num > 0'>{{status.repeat_num}}</span>
     </template>
     <template v-else>
-      <i :class='classes' class='icon-lock' :title="$t('timeline.no_retweet_hint')"></i>
+      <i :class='classes' class='button-icon icon-lock' :title="$t('timeline.no_retweet_hint')"></i>
     </template>
   </div>
   <div v-else-if="!loggedIn">
-    <i :class='classes' class='icon-retweet' :title="$t('tool_tip.repeat')"></i>
+    <i :class='classes' class='button-icon icon-retweet' :title="$t('tool_tip.repeat')"></i>
     <span v-if='!hidePostStatsLocal && status.repeat_num > 0'>{{status.repeat_num}}</span>
   </div>
 </template>

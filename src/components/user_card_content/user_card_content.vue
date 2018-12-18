@@ -2,20 +2,20 @@
 <div id="heading" class="profile-panel-background" :style="headingStyle">
   <div class="panel-heading text-center">
     <div class='user-info'>
-      <router-link @click.native="activatePanel && activatePanel('timeline')" to='/user-settings' style="float: right; margin-top:16px;" v-if="!isOtherUser">
-        <i class="icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
+      <router-link @click.native="activatePanel && activatePanel('timeline')" :to="{ name: 'user-settings' }" style="float: right; margin-top:16px;" v-if="!isOtherUser">
+        <i class="button-icon icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
       </router-link>
       <a :href="user.statusnet_profile_url" target="_blank" class="floater" v-if="isOtherUser">
         <i class="icon-link-ext usersettings"></i>
       </a>
       <div class='container'>
-        <router-link @click.native="activatePanel && activatePanel('timeline')" :to="{ name: 'user-profile', params: { id: user.id } }">
+        <router-link @click.native="activatePanel && activatePanel('timeline')" :to="userProfileLink(user)">
           <StillImage class="avatar" :class='{ "better-shadow": betterShadow }' :src="user.profile_image_url_original"/>
         </router-link>
         <div class="name-and-screen-name">
           <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
           <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
-          <router-link @click.native="activatePanel && activatePanel('timeline')" class='user-screen-name':to="{ name: 'user-profile', params: { id: user.id } }">
+          <router-link @click.native="activatePanel && activatePanel('timeline')" class='user-screen-name' :to="userProfileLink(user)">
             <span>@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>
@@ -25,7 +25,7 @@
         <div v-if="user.follows_you && loggedIn && isOtherUser" class="following">
           {{ $t('user_card.follows_you') }}
         </div>
-        <div class="floater" v-if="switcher || isOtherUser">
+        <div class="floater" v-if="isOtherUser && (loggedIn || !switcher)">
           <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
           <input class="userHighlightText" type="text" :id="'userHighlightColorTx'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
           <input class="userHighlightCl" type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
@@ -67,7 +67,7 @@
             </button>
           </span>
         </div>
-        <div class='mute' v-if='isOtherUser'>
+        <div class='mute' v-if='isOtherUser && loggedIn'>
           <span v-if='user.muted'>
             <button @click="toggleMute" class="pressed">
               {{ $t('user_card.muted') }}

@@ -1,5 +1,6 @@
 import StillImage from '../still-image/still-image.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
+import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio', 'activatePanel' ],
@@ -177,6 +178,9 @@ export default {
       if (target.tagName === 'A') {
         window.open(target.href, '_blank')
       }
+    },
+    userProfileLink (user) {
+      return generateProfileLink(user.id, user.screen_name)
     }
   }
 }

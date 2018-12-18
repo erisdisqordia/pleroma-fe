@@ -37,10 +37,10 @@
         </i18n>
 
         <div class="icons">
-          <i style="color: var(--cBlue)" class="icon-reply"/>
-          <i style="color: var(--cGreen)" class="icon-retweet"/>
-          <i style="color: var(--cOrange)" class="icon-star"/>
-          <i style="color: var(--cRed)" class="icon-cancel"/>
+          <i style="color: var(--cBlue)" class="button-icon icon-reply"/>
+          <i style="color: var(--cGreen)" class="button-icon icon-retweet"/>
+          <i style="color: var(--cOrange)" class="button-icon icon-star"/>
+          <i style="color: var(--cRed)" class="button-icon icon-cancel"/>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import UserCardContent from '../user_card_content/user_card_content.vue'
 import StillImage from '../still-image/still-image.vue'
+import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 const UserCard = {
   props: [
@@ -30,6 +31,9 @@ const UserCard = {
     denyUser () {
       this.$store.state.api.backendInteractor.denyUser(this.user.id)
       this.$store.dispatch('removeFollowRequest', this.user)
+    },
+    userProfileLink (user) {
+      return generateProfileLink(user.id, user.screen_name)
     }
   }
 }

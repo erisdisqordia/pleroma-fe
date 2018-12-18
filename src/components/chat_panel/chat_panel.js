@@ -1,3 +1,5 @@
+import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+
 const chatPanel = {
   data () {
     return {
@@ -18,6 +20,9 @@ const chatPanel = {
     },
     togglePanel () {
       this.collapsed = !this.collapsed
+    },
+    userProfileLink (user) {
+      return generateProfileLink(user.id, user.screen_name)
     }
   }
 }

@@ -1,21 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import routes from './routes'
 
 import App from '../App.vue'
-import PublicTimeline from '../components/public_timeline/public_timeline.vue'
-import PublicAndExternalTimeline from '../components/public_and_external_timeline/public_and_external_timeline.vue'
-import FriendsTimeline from '../components/friends_timeline/friends_timeline.vue'
-import TagTimeline from '../components/tag_timeline/tag_timeline.vue'
-import ConversationPage from '../components/conversation-page/conversation-page.vue'
-import Mentions from '../components/mentions/mentions.vue'
-import DMs from '../components/dm_timeline/dm_timeline.vue'
-import UserProfile from '../components/user_profile/user_profile.vue'
-import Settings from '../components/settings/settings.vue'
-import Registration from '../components/registration/registration.vue'
-import UserSettings from '../components/user_settings/user_settings.vue'
-import FollowRequests from '../components/follow_requests/follow_requests.vue'
-import OAuthCallback from '../components/oauth_callback/oauth_callback.vue'
-import UserSearch from '../components/user_search/user_search.vue'
 
 const afterStoreSetup = ({ store, i18n }) => {
   window.fetch('/api/statusnet/config.json')
@@ -26,11 +13,16 @@ const afterStoreSetup = ({ store, i18n }) => {
       store.dispatch('setInstanceOption', { name: 'name', value: name })
       store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
       store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
-      store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadlimit.uploadlimit) })
-      store.dispatch('setInstanceOption', { name: 'avatarlimit', value: parseInt(uploadlimit.avatarlimit) })
-      store.dispatch('setInstanceOption', { name: 'backgroundlimit', value: parseInt(uploadlimit.backgroundlimit) })
-      store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadlimit.bannerlimit) })
       store.dispatch('setInstanceOption', { name: 'server', value: server })
+
+      // TODO: default values for this stuff, added if to not make it break on
+      // my dev config out of the box.
+      if (uploadlimit) {
+        store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadlimit.uploadlimit) })
+        store.dispatch('setInstanceOption', { name: 'avatarlimit', value: parseInt(uploadlimit.avatarlimit) })
+        store.dispatch('setInstanceOption', { name: 'backgroundlimit', value: parseInt(uploadlimit.backgroundlimit) })
+        store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadlimit.bannerlimit) })
+      }
 
       if (data.nsfwCensorImage) {
         store.dispatch('setInstanceOption', { name: 'nsfwCensorImage', value: data.nsfwCensorImage })
@@ -102,35 +94,10 @@ const afterStoreSetup = ({ store, i18n }) => {
             store.dispatch('disableChat')
           }
 
-          const routes = [
-            { name: 'root',
-              path: '/',
-              redirect: to => {
-                return (store.state.users.currentUser
-                        ? store.state.instance.redirectRootLogin
-                        : store.state.instance.redirectRootNoLogin) || '/main/all'
-              }},
-            { path: '/main/all', component: PublicAndExternalTimeline },
-            { path: '/main/public', component: PublicTimeline },
-            { path: '/main/friends', component: FriendsTimeline },
-            { path: '/tag/:tag', component: TagTimeline },
-            { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
-            { name: 'user-profile', path: '/users/:id', component: UserProfile },
-            { name: 'mentions', path: '/:username/mentions', component: Mentions },
-            { name: 'dms', path: '/:username/dms', component: DMs },
-            { name: 'settings', path: '/settings', component: Settings },
-            { name: 'registration', path: '/registration', component: Registration },
-            { name: 'registration', path: '/registration/:token', component: Registration },
-            { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
-            { name: 'user-settings', path: '/user-settings', component: UserSettings },
-            { name: 'oauth-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) },
-            { name: 'user-search', path: '/user-search', component: UserSearch, props: (route) => ({ query: route.query.query }) }
-          ]
-
           const router = new VueRouter({
             mode: 'history',
-            routes,
-            scrollBehavior: (to, from, savedPosition) => {
+            routes: routes(store),
+            scrollBehavior: (to, _from, savedPosition) => {
               if (to.matched.some(m => m.meta.dontScroll)) {
                 return false
               }

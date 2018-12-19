@@ -41,12 +41,16 @@ const PostStatusForm = {
     const preset = this.$route.query.message
     let statusText = preset || ''
 
+    const scopeCopy = typeof this.$store.state.config.scopeCopy === 'undefined'
+          ? this.$store.state.instance.scopeCopy
+          : this.$store.state.config.scopeCopy
+
     if (this.replyTo) {
       const currentUser = this.$store.state.users.currentUser
       statusText = buildMentionsString({ user: this.repliedUser, attentions: this.attentions }, currentUser)
     }
 
-    const scope = (this.copyMessageScope && this.$store.state.config.scopeCopy || this.copyMessageScope === 'direct')
+    const scope = (this.copyMessageScope && scopeCopy || this.copyMessageScope === 'direct')
           ? this.copyMessageScope
           : this.$store.state.users.currentUser.default_scope
 

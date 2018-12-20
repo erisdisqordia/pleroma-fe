@@ -304,7 +304,7 @@ const PostStatusForm = {
       target.style.height = 'auto'
       target.style.height = `${target.scrollHeight - vertPadding}px`
       if (target.value === '') {
-        target.style.height = undefined
+        target.style.height = null
       }
     },
     clearError () {

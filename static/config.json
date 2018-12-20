@@ -16,5 +16,6 @@
   "alwaysShowSubjectInput": true,
   "hidePostStats": false,
   "hideUserStats": false,
-  "loginMethod": "password"
+  "loginMethod": "password",
+  "webPushNotifications": false
 }

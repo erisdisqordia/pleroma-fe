@@ -76,15 +76,16 @@
             </div>
 
             <div class="form-group" id="captcha-group" v-if="captcha.type != 'none'">
+              <label class='form--label' for='captcha-label'>CAPTCHA</label>
+
               <template v-if="captcha.type == 'kocaptcha'">
                 <img v-bind:src="captcha.url" v-on:click="setCaptcha">
 
                 <sub>Click the image to get a new captcha</sub>
-                <label class='form--label' for='captcha-label'>CAPTCHA</label>
 
                 <input :disabled="isPending"
                   v-model='captcha.solution'
-                  class='form-control' id='captcha-answer' type='text'>
+                  class='form-control' id='captcha-answer' type='text' autocomplete="off">
               </template>
             </div>
 

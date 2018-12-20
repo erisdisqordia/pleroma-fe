@@ -1,7 +1,7 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
-import registerPushNotifications from '../services/push/push.js'
+import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
 import oauthApi from '../services/new_api/oauth'
 import { humanizeErrors } from './errors'
 
@@ -115,6 +115,9 @@ const users = {
       const isEnabled = store.rootState.config.webPushNotifications
 
       registerPushNotifications(isEnabled, vapidPublicKey, token)
+    },
+    unregisterPushNotifications (store) {
+      unregisterPushNotifications()
     },
     addNewStatuses (store, { statuses }) {
       const users = map(statuses, 'user')

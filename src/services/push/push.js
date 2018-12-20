@@ -19,6 +19,12 @@ function registerServiceWorker () {
     .catch((err) => console.error('Unable to register service worker.', err))
 }
 
+function unregisterServiceWorker () {
+  return runtime.register()
+    .then((registration) => registration.unregister())
+    .catch((err) => console.error('Unable to unregister serviceworker', err))
+}
+
 function subscribe (registration, isEnabled, vapidPublicKey) {
   if (!isEnabled) return Promise.reject(new Error('Web Push is disabled in config'))
   if (!vapidPublicKey) return Promise.reject(new Error('VAPID public key is not found'))
@@ -59,9 +65,18 @@ function sendSubscriptionToBackEnd (subscription, token) {
     })
 }
 
-export default function registerPushNotifications (isEnabled, vapidPublicKey, token) {
+export function registerPushNotifications (isEnabled, vapidPublicKey, token) {
   if (isPushSupported()) {
     registerServiceWorker()
+      .then((registration) => subscribe(registration, isEnabled, vapidPublicKey))
+      .then((subscription) => sendSubscriptionToBackEnd(subscription, token))
+      .catch((e) => console.warn(`Failed to setup Web Push Notifications: ${e.message}`))
+  }
+}
+
+export function unregisterPushNotifications (isEnabled, vapidPublicKey, token) {
+  if (isPushSupported()) {
+    unregisterServiceWorker()
       .then((registration) => subscribe(registration, isEnabled, vapidPublicKey))
       .then((subscription) => sendSubscriptionToBackEnd(subscription, token))
       .catch((e) => console.warn(`Failed to setup Web Push Notifications: ${e.message}`))

@@ -54,24 +54,21 @@ const persistedStateOptions = {
 const registerPushNotifications = store => {
   store.subscribe((mutation, state) => {
     const vapidPublicKey = state.instance.vapidPublicKey
+    const webPushNotification = state.config.webPushNotifications
     const permission = state.interface.notificationPermission === 'granted'
-    const isUserMutation = mutation.type === 'setCurrentUser'
-
-    if (isUserMutation && vapidPublicKey && permission) {
-      return store.dispatch('registerPushNotifications')
-    }
-
     const user = state.users.currentUser
+
+    const isUserMutation = mutation.type === 'setCurrentUser'
     const isVapidMutation = mutation.type === 'setInstanceOption' && mutation.payload.name === 'vapidPublicKey'
-
-    if (isVapidMutation && user && permission) {
-      return store.dispatch('registerPushNotifications')
-    }
-
     const isPermMutation = mutation.type === 'setNotificationPermission' && mutation.payload === 'granted'
+    const isUserConfigMutation = mutation.type === 'setOption' && mutation.payload.name === 'webPushNotifications'
 
-    if (isPermMutation && user && vapidPublicKey) {
-      return store.dispatch('registerPushNotifications')
+    if (isUserMutation || isVapidMutation || isPermMutation || isUserConfigMutation) {
+      if (user && vapidPublicKey && permission && webPushNotification) {
+        return store.dispatch('registerPushNotifications')
+      } else if (isUserConfigMutation && !webPushNotification) {
+        return store.dispatch('unregisterPushNotifications')
+      }
     }
   })
 }

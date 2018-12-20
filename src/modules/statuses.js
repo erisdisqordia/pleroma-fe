@@ -14,7 +14,6 @@ const emptyTl = () => ({
   loading: false,
   followers: [],
   friends: [],
-  viewing: 'statuses',
   userId: 0,
   flushMarker: 0
 })
@@ -399,16 +398,6 @@ export const mutations = {
   setNotificationsSilence (state, { value }) {
     state.notifications.desktopNotificationSilence = value
   },
-  setProfileView (state, { v }) {
-    // load followers / friends only when needed
-    state.timelines['user'].viewing = v
-  },
-  addFriends (state, { friends }) {
-    state.timelines['user'].friends = friends
-  },
-  addFollowers (state, { followers }) {
-    state.timelines['user'].followers = followers
-  },
   markNotificationsAsSeen (state) {
     each(state.notifications.data, (notification) => {
       notification.seen = true
@@ -436,12 +425,6 @@ const statuses = {
     },
     setNotificationsSilence ({ rootState, commit }, { value }) {
       commit('setNotificationsSilence', { value })
-    },
-    addFriends ({ rootState, commit }, { friends }) {
-      commit('addFriends', { friends })
-    },
-    addFollowers ({ rootState, commit }, { followers }) {
-      commit('addFollowers', { followers })
     },
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })

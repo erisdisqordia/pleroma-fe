@@ -31,11 +31,6 @@ export default {
         window.CSS.supports('-ms-mask-size', 'contain') ||
         window.CSS.supports('-o-mask-size', 'contain')
     ),
-    mobileViews: {
-      postStatus: 'poststatus',
-      notifications: 'notifications',
-      timeline: 'timeline'
-    },
     showMobileSidebar: false
   }),
   created () {

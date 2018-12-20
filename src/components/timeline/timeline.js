@@ -10,7 +10,8 @@ const Timeline = {
     'timelineName',
     'title',
     'userId',
-    'tag'
+    'tag',
+    'embedded'
   ],
   data () {
     return {
@@ -20,15 +21,6 @@ const Timeline = {
   },
   computed: {
     timelineError () { return this.$store.state.statuses.error },
-    followers () {
-      return this.timeline.followers
-    },
-    friends () {
-      return this.timeline.friends
-    },
-    viewing () {
-      return this.timeline.viewing
-    },
     newStatusCount () {
       return this.timeline.newStatusCount
     },
@@ -37,6 +29,14 @@ const Timeline = {
         return ''
       } else {
         return ` (${this.newStatusCount})`
+      }
+    },
+    classes () {
+      return {
+        root: ['timeline'].concat(!this.embedded ? ['panel', 'panel-default'] : []),
+        header: ['timeline-heading'].concat(!this.embedded ? ['panel-heading'] : []),
+        body: ['timeline-body'].concat(!this.embedded ? ['panel-body'] : []),
+        footer: ['timeline-footer'].concat(!this.embedded ? ['panel-footer'] : [])
       }
     }
   },
@@ -60,12 +60,6 @@ const Timeline = {
       userId: this.userId,
       tag: this.tag
     })
-
-    // don't fetch followers for public, friend, twkn
-    if (this.timelineName === 'user') {
-      this.fetchFriends()
-      this.fetchFollowers()
-    }
   },
   mounted () {
     if (typeof document.hidden !== 'undefined') {
@@ -103,16 +97,6 @@ const Timeline = {
         tag: this.tag
       }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
     }, 1000, this),
-    fetchFollowers () {
-      const id = this.userId
-      this.$store.state.api.backendInteractor.fetchFollowers({ id })
-        .then((followers) => this.$store.dispatch('addFollowers', { followers }))
-    },
-    fetchFriends () {
-      const id = this.userId
-      this.$store.state.api.backendInteractor.fetchFriends({ id })
-        .then((friends) => this.$store.dispatch('addFriends', { friends }))
-    },
     scrollLoad (e) {
       const bodyBRect = document.body.getBoundingClientRect()
       const height = Math.max(bodyBRect.height, -(bodyBRect.y))

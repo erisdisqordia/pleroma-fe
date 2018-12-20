@@ -75,11 +75,11 @@
       </div>
       <div class='alert error' v-if="error">
         Error: {{ error }}
-        <i class="icon-cancel" @click="clearError"></i>
+        <i class="button-icon icon-cancel" @click="clearError"></i>
       </div>
       <div class="attachments">
         <div class="media-upload-wrapper" v-for="file in newStatus.files">
-          <i class="fa icon-cancel" @click="removeMediaFile(file)"></i>
+          <i class="fa button-icon icon-cancel" @click="removeMediaFile(file)"></i>
           <div class="media-upload-container attachment">
             <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
             <video v-if="type(file) === 'video'" :src="file.image" controls></video>

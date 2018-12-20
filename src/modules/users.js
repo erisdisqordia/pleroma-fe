@@ -51,6 +51,15 @@ export const mutations = {
   endLogin (state) {
     state.loggingIn = false
   },
+  // TODO Clean after ourselves?
+  addFriends (state, { id, friends }) {
+    const user = state.usersObject[id]
+    user.friends = friends
+  },
+  addFollowers (state, { id, followers }) {
+    const user = state.usersObject[id]
+    user.followers = followers
+  },
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
@@ -91,6 +100,14 @@ const users = {
     fetchUser (store, id) {
       store.rootState.api.backendInteractor.fetchUser({ id })
         .then((user) => store.commit('addNewUsers', [user]))
+    },
+    addFriends ({ rootState, commit }, { id }) {
+      rootState.api.backendInteractor.fetchFriends({ id })
+        .then((friends) => commit('addFriends', { id, friends }))
+    },
+    addFollowers ({ rootState, commit }, { id }) {
+      rootState.api.backendInteractor.fetchFollowers({ id })
+        .then((followers) => commit('addFollowers', { id, followers }))
     },
     registerPushNotifications (store) {
       const token = store.state.currentUser.credentials

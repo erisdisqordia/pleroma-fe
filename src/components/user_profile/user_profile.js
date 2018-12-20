@@ -1,4 +1,5 @@
 import UserCardContent from '../user_card_content/user_card_content.vue'
+import UserCard from '../user_card/user_card.vue'
 import Timeline from '../timeline/timeline.vue'
 
 const UserProfile = {
@@ -39,6 +40,16 @@ const UserProfile = {
       return this.$route.name === 'external-user-profile'
     }
   },
+  methods: {
+    fetchFollowers () {
+      const id = this.userId
+      this.$store.dispatch('addFollowers', { id })
+    },
+    fetchFriends () {
+      const id = this.userId
+      this.$store.dispatch('addFriends', { id })
+    }
+  },
   watch: {
     userName () {
       if (this.isExternal) {
@@ -55,10 +66,17 @@ const UserProfile = {
       this.$store.dispatch('stopFetching', 'user')
       this.$store.commit('clearTimeline', { timeline: 'user' })
       this.$store.dispatch('startFetching', ['user', this.userId])
+    },
+    user () {
+      if (!this.user.followers) {
+        this.fetchFollowers()
+        this.fetchFriends()
+      }
     }
   },
   components: {
     UserCardContent,
+    UserCard,
     Timeline
   }
 }

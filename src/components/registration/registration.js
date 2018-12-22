@@ -48,8 +48,10 @@ const registration = {
     async submit () {
       this.user.nickname = this.user.username
       this.user.token = this.token
+
       this.user.captcha_solution = this.captcha.solution
       this.user.captcha_token = this.captcha.token
+      this.user.captcha_answer_data = this.captcha.answer_data
 
       this.$v.$touch()
 

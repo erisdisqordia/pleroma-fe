@@ -18,10 +18,16 @@ const UserProfile = {
       return this.$store.state.statuses.timelines.user
     },
     userId () {
-      return this.$route.params.id
+      return this.$route.params.id || this.user.id
     },
     userName () {
       return this.$route.params.name
+    },
+    friends () {
+      return this.user.friends
+    },
+    followers () {
+      return this.user.followers
     },
     user () {
       if (this.timeline.statuses[0]) {
@@ -29,7 +35,7 @@ const UserProfile = {
       } else {
         return Object.values(this.$store.state.users.usersObject).filter(user => {
           return (this.isExternal ? user.id === this.userId : user.screen_name === this.userName)
-        })[0] || false
+        })[0] || {}
       }
     },
     fetchBy () {
@@ -67,7 +73,7 @@ const UserProfile = {
       this.$store.dispatch('startFetching', ['user', this.userId])
     },
     user () {
-      if (!this.user.followers) {
+      if (this.user.id && !this.user.followers) {
         this.fetchFollowers()
         this.fetchFriends()
       }

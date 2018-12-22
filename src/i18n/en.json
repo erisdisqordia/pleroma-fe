@@ -75,6 +75,8 @@
     "password_confirm": "Password confirmation",
     "registration": "Registration",
     "token": "Invite token",
+    "captcha": "CAPTCHA",
+    "new_captcha": "Click the image to get a new captcha",
     "validations": {
       "username_required": "cannot be left blank",
       "fullname_required": "cannot be left blank",

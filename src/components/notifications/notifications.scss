@@ -36,16 +36,6 @@
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
 
-  .broken-favorite {
-    border-radius: $fallback--tooltipRadius;
-    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-    color: $fallback--text;
-    color: var(--alertErrorText, $fallback--text);
-    background-color: $fallback--alertError;
-    background-color: var(--alertError, $fallback--alertError);
-    padding: 2px .5em
-  }
-
   .avatar-compact {
     width: 32px;
     height: 32px;

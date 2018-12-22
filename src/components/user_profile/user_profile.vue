@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-if="user" class="user-profile panel panel-default">
+  <div v-if="user.id" class="user-profile panel panel-default">
     <user-card-content :user="user" :switcher="true" :selected="timeline.viewing"></user-card-content>
     <tab-switcher>
       <Timeline :label="$t('user_card.statuses')" :embedded="true" :title="$t('user_profile.timeline_title')" :timeline="timeline" :timeline-name="'user'" :user-id="userId"/>

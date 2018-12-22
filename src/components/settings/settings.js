@@ -15,14 +15,17 @@ const settings = {
       hideNsfwLocal: user.hideNsfw,
       hideISPLocal: user.hideISP,
       preloadImage: user.preloadImage,
+
       hidePostStatsLocal: typeof user.hidePostStats === 'undefined'
         ? instance.hidePostStats
         : user.hidePostStats,
       hidePostStatsDefault: this.$t('settings.values.' + instance.hidePostStats),
+
       hideUserStatsLocal: typeof user.hideUserStats === 'undefined'
         ? instance.hideUserStats
         : user.hideUserStats,
       hideUserStatsDefault: this.$t('settings.values.' + instance.hideUserStats),
+
       notificationVisibilityLocal: user.notificationVisibility,
       replyVisibilityLocal: user.replyVisibility,
       loopVideoLocal: user.loopVideo,
@@ -32,20 +35,27 @@ const settings = {
       streamingLocal: user.streaming,
       pauseOnUnfocusedLocal: user.pauseOnUnfocused,
       hoverPreviewLocal: user.hoverPreview,
+
       collapseMessageWithSubjectLocal: typeof user.collapseMessageWithSubject === 'undefined'
         ? instance.collapseMessageWithSubject
         : user.collapseMessageWithSubject,
       collapseMessageWithSubjectDefault: this.$t('settings.values.' + instance.collapseMessageWithSubject),
+
       subjectLineBehaviorLocal: typeof user.subjectLineBehavior === 'undefined'
         ? instance.subjectLineBehavior
         : user.subjectLineBehavior,
       subjectLineBehaviorDefault: instance.subjectLineBehavior,
+
       alwaysShowSubjectInputLocal: typeof user.alwaysShowSubjectInput === 'undefined'
         ? instance.alwaysShowSubjectInput
         : user.alwaysShowSubjectInput,
       alwaysShowSubjectInputDefault: instance.alwaysShowSubjectInput,
-      scopeCopyLocal: user.scopeCopy,
+
+      scopeCopyLocal: typeof user.scopeCopy === 'undefined'
+        ? instance.scopeCopy
+        : user.scopeCopy,
       scopeCopyDefault: this.$t('settings.values.' + instance.scopeCopy),
+
       stopGifs: user.stopGifs,
       webPushNotificationsLocal: user.webPushNotifications,
       loopSilentAvailable:

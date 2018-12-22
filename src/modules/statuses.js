@@ -27,8 +27,7 @@ export const defaultState = {
     maxId: 0,
     minId: Number.POSITIVE_INFINITY,
     data: [],
-    error: false,
-    brokenFavorites: {}
+    error: false
   },
   favorites: new Set(),
   error: false,
@@ -36,7 +35,6 @@ export const defaultState = {
     mentions: emptyTl(),
     public: emptyTl(),
     user: emptyTl(),
-    own: emptyTl(),
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
     tag: emptyTl(),
@@ -157,12 +155,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const addStatus = (status, showImmediately, addToTimeline = true) => {
     const result = mergeOrAdd(allStatuses, allStatusesObject, status)
     status = result.item
-
-    const brokenFavorites = state.notifications.brokenFavorites[status.id] || []
-    brokenFavorites.forEach((fav) => {
-      fav.status = status
-    })
-    delete state.notifications.brokenFavorites[status.id]
 
     if (result.new) {
       // We are mentioned in a post
@@ -304,7 +296,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
 
       const fresh = !notification.is_seen
       const status = notification.ntype === 'like'
-            ? find(allStatuses, { id: action.in_reply_to_status_id })
+            ? action.favorited_status
             : action
 
       const result = {
@@ -312,17 +304,6 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
         status,
         action,
         seen: !fresh
-      }
-
-      if (notification.ntype === 'like' && !status) {
-        let broken = state.notifications.brokenFavorites[action.in_reply_to_status_id]
-        if (broken) {
-          broken.push(result)
-        } else {
-          dispatch('fetchOldPost', { postId: action.in_reply_to_status_id })
-          broken = [ result ]
-          state.notifications.brokenFavorites[action.in_reply_to_status_id] = broken
-        }
       }
 
       state.notifications.data.push(result)

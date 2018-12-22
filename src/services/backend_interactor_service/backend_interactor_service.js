@@ -54,16 +54,6 @@ const backendInteractorService = (credentials) => {
     return timelineFetcherService.startFetching({timeline, store, credentials, userId})
   }
 
-  const fetchOldPost = ({store, postId}) => {
-    return timelineFetcherService.fetchAndUpdate({
-      store,
-      credentials,
-      timeline: 'own',
-      older: true,
-      until: postId + 1
-    })
-  }
-
   const setUserMute = ({id, muted = true}) => {
     return apiService.setUserMute({id, muted, credentials})
   }
@@ -97,7 +87,6 @@ const backendInteractorService = (credentials) => {
     fetchAllFollowing,
     verifyCredentials: apiService.verifyCredentials,
     startFetching,
-    fetchOldPost,
     setUserMute,
     fetchMutes,
     register,

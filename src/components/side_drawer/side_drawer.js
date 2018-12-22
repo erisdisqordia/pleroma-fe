@@ -1,5 +1,5 @@
 const SideDrawer = {
-  props: [ 'activatePanel', 'closed', 'clickoutside' ],
+  props: [ 'activatePanel', 'closed', 'clickoutside', 'logout' ],
   computed: {
     currentUser () {
       return this.$store.state.users.currentUser
@@ -14,6 +14,10 @@ const SideDrawer = {
       if (typeof this.clickoutside === 'function') {
         this.clickoutside()
       }
+    },
+    doLogout () {
+      this.logout()
+      this.gotoPanel('timeline')
     }
   }
 }

@@ -24,7 +24,13 @@
 
 
     <div v-if="" class="container" id="content">
-      <side-drawer :activatePanel="activatePanel" :closed="!showMobileSidebar" :clickoutside="toggleMobileSidebar"></side-drawer>
+      <side-drawer
+        :activatePanel="activatePanel"
+        :closed="!showMobileSidebar"
+        :clickoutside="toggleMobileSidebar"
+        :logout="logout"
+        >
+      </side-drawer>
       <!--
         <button @click="activatePanel(mobileViews.postStatus)">post status</button>
         <button @click="activatePanel(mobileViews.notifications)">notifs</button>

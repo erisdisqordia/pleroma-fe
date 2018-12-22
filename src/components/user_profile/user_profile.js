@@ -4,7 +4,6 @@ import Timeline from '../timeline/timeline.vue'
 
 const UserProfile = {
   created () {
-    debugger
     this.$store.commit('clearTimeline', { timeline: 'user' })
     this.$store.dispatch('startFetching', ['user', this.fetchBy])
     if (!this.user) {

@@ -3,19 +3,23 @@
     <div class="panel panel-default side-drawer" :class="{'side-drawer-closed': closed}">
       <ul>
         <li v-if='currentUser'>
-          <a href="#" @click="gotoPanel('poststatus')">poststatus</a>
+          <a href="#" @click="gotoPanel('poststatus')">
+            {{ $t("post_status.new_status") }}
+          </a>
+        </li>
+        <li v-else>
+          <a href="#" @click="gotoPanel('poststatus')">
+            {{ $t("login.login") }}
+          </a>
         </li>
         <li v-if='currentUser'>
-          <a href="#" @click="gotoPanel('notifications')">notifications</a>
+          <a href="#" @click="gotoPanel('notifications')">
+            {{ $t("notifications.notifications") }}
+          </a>
         </li>
         <li v-if='currentUser'>
           <router-link @click.native="gotoPanel('timeline')" to='/main/friends'>
             {{ $t("nav.timeline") }}
-          </router-link>
-        </li>
-        <li v-if='currentUser'>
-          <router-link @click.native="gotoPanel('timeline')" :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
-            {{ $t("nav.mentions") }}
           </router-link>
         </li>
         <li v-if='currentUser'>
@@ -37,6 +41,16 @@
           <router-link @click.native="gotoPanel('timeline')" to='/main/all'>
             {{ $t("nav.twkn") }}
           </router-link>
+        </li>
+        <li>
+          <router-link @click.native="gotoPanel('timeline')" :to="{ name: 'settings'}">
+            {{ $t("settings.settings") }}
+          </router-link>
+        </li>
+        <li v-if="currentUser">
+          <a @click="doLogout" href="#">
+            {{ $t("login.logout") }}
+          </a>
         </li>
       </ul>
     </div>
@@ -139,8 +153,6 @@
 
   &.router-link-active {
     font-weight: bolder;
-    background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
 
     &:hover {
       text-decoration: underline;

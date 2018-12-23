@@ -33,7 +33,7 @@ const SideDrawer = {
     },
     touchMove (e) {
       const delta = deltaX(this.touchX, touchEventX(e))
-      if (delta < -30) {
+      if (delta < -30 && !this.closed) {
         this.toggleDrawer()
       }
     }

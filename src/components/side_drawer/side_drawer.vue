@@ -1,6 +1,10 @@
 <template>
   <div class="side-drawer-container" :class="{ 'side-drawer-container-closed': closed, 'side-drawer-container-open': !closed }">
-    <div class="panel panel-default side-drawer" :class="{'side-drawer-closed': closed}" @touchstart="touchStart" @touchmove.prevent="touchMove">
+    <div class="panel panel-default side-drawer"
+      :class="{'side-drawer-closed': closed}"
+      @touchstart="touchStart"
+      @touchmove.prevent="touchMove"
+    >
       <div class="side-drawer-heading">
         <user-card-content :activatePanel="activatePanel" :user="currentUser" :switcher="false" :hideBio="true">
         </user-card-content>

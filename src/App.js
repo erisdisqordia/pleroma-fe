@@ -30,8 +30,7 @@ export default {
         window.CSS.supports('-moz-mask-size', 'contain') ||
         window.CSS.supports('-ms-mask-size', 'contain') ||
         window.CSS.supports('-o-mask-size', 'contain')
-    ),
-    showMobileSidebar: false
+    )
   }),
   created () {
     // Load the locale from the storage
@@ -93,7 +92,7 @@ export default {
       this.finderHidden = hidden
     },
     toggleMobileSidebar () {
-      this.showMobileSidebar = !this.showMobileSidebar
+      this.$refs.sideDrawer.toggleDrawer()
     }
   }
 }

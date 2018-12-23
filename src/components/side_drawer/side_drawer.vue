@@ -1,6 +1,10 @@
 <template>
-  <div class="side-drawer-container" :class="{'side-drawer-container-closed': closed, 'side-drawer-container-open': !closed}">
-    <div class="panel panel-default side-drawer" :class="{'side-drawer-closed': closed}">
+  <div class="side-drawer-container" :class="{ 'side-drawer-container-closed': closed, 'side-drawer-container-open': !closed }">
+    <div class="panel panel-default side-drawer" :class="{'side-drawer-closed': closed}" @touchstart="touchStart" @touchmove.prevent="touchMove">
+      <div class="side-drawer-heading">
+        <user-card-content :activatePanel="activatePanel" :user="currentUser" :switcher="false" :hideBio="true">
+        </user-card-content>
+      </div>
       <ul>
         <li v-if='currentUser'>
           <a href="#" @click="gotoPanel('poststatus')">
@@ -54,7 +58,7 @@
         </li>
       </ul>
     </div>
-    <div class="side-drawer-click-outside" @click.stop.prevent="clickedOutside" :class="{'side-drawer-click-outside-closed': closed}"></div>
+    <div class="side-drawer-click-outside" @click.stop.prevent="toggleDrawer" :class="{'side-drawer-click-outside-closed': closed}"></div>
   </div>
 </template>
 
@@ -110,7 +114,28 @@
 .side-drawer .panel {
   overflow: hidden;
   margin: 0;
+  display: flex;
 }
+
+.side-drawer-heading {
+  background: transparent;
+  flex-direction: column;
+  align-items: stretch;
+  display: flex;
+  min-height: 8em;
+  padding: 0;
+  margin: 0;
+
+  .profile-panel-background {
+    border-radius: 0;
+    .panel-heading {
+      background: transparent;
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+}
+
 .side-drawer ul {
   list-style: none;
   margin: 0;
@@ -123,40 +148,18 @@
   border-color: var(--border, $fallback--border);
   padding: 0;
 
-  &:first-child a {
-    border-top-right-radius: $fallback--panelRadius;
-    border-top-right-radius: var(--panelRadius, $fallback--panelRadius);
-    border-top-left-radius: $fallback--panelRadius;
-    border-top-left-radius: var(--panelRadius, $fallback--panelRadius);
-  }
+  a {
+    display: block;
+    padding: 0.8em 0.85em;
 
-  &:last-child a {
-    border-bottom-right-radius: $fallback--panelRadius;
-    border-bottom-right-radius: var(--panelRadius, $fallback--panelRadius);
-    border-bottom-left-radius: $fallback--panelRadius;
-    border-bottom-left-radius: var(--panelRadius, $fallback--panelRadius);
+    &:hover {
+      background-color: $fallback--lightBg;
+      background-color: var(--lightBg, $fallback--lightBg);
+    }
   }
 }
 
 .side-drawer li:last-child {
   border: none;
-}
-
-.side-drawer a {
-  display: block;
-  padding: 0.8em 0.85em;
-
-  &:hover {
-    background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
-  }
-
-  &.router-link-active {
-    font-weight: bolder;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 }
 </style>

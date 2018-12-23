@@ -14,9 +14,9 @@
         </div>
         <div class='item right'>
           <a href="#" @click.stop.prevent="toggleMobileSidebar()"><i class="button-icon icon-menu"></i></a>
-          <user-finder class="button-icon nav-icon" @toggled="onFinderToggled"></user-finder>
-          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'settings'}"><i class="button-icon icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
-          <a href="#" v-if="currentUser" @click.prevent="logout"><i class="button-icon icon-logout nav-icon" :title="$t('login.logout')"></i></a>
+          <user-finder class="button-icon nav-icon mobile-hidden" @toggled="onFinderToggled"></user-finder>
+          <router-link class="mobile-hidden" @click.native="activatePanel('timeline')" :to="{ name: 'settings'}"><i class="button-icon icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
+          <a href="#" class="mobile-hidden" v-if="currentUser" @click.prevent="logout"><i class="button-icon icon-logout nav-icon" :title="$t('login.logout')"></i></a>
         </div>
       </div>
     </nav>
@@ -25,17 +25,11 @@
 
     <div v-if="" class="container" id="content">
       <side-drawer
+        ref="sideDrawer"
         :activatePanel="activatePanel"
-        :closed="!showMobileSidebar"
-        :clickoutside="toggleMobileSidebar"
         :logout="logout"
         >
       </side-drawer>
-      <!--
-        <button @click="activatePanel(mobileViews.postStatus)">post status</button>
-        <button @click="activatePanel(mobileViews.notifications)">notifs</button>
-        <button @click="activatePanel(mobileViews.timeline)">timeline</button>
-      -->
       <div class="sidebar-flexer">
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">

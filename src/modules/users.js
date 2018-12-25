@@ -117,7 +117,9 @@ const users = {
       registerPushNotifications(isEnabled, vapidPublicKey, token)
     },
     unregisterPushNotifications (store) {
-      unregisterPushNotifications()
+      const token = store.state.currentUser.credentials
+
+      unregisterPushNotifications(token)
     },
     addNewStatuses (store, { statuses }) {
       const users = map(statuses, 'user')

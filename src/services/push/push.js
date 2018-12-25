@@ -14,18 +14,12 @@ function isPushSupported () {
   return 'serviceWorker' in navigator && 'PushManager' in window
 }
 
-function registerServiceWorker () {
+function getOrCreateServiceWorker () {
   return runtime.register()
-    .catch((err) => console.error('Unable to register service worker.', err))
+    .catch((err) => console.error('Unable to get or create a service worker.', err))
 }
 
-function unregisterServiceWorker () {
-  return runtime.register()
-    .then((registration) => registration.unregister())
-    .catch((err) => console.error('Unable to unregister serviceworker', err))
-}
-
-function subscribe (registration, isEnabled, vapidPublicKey) {
+function subscribePush (registration, isEnabled, vapidPublicKey) {
   if (!isEnabled) return Promise.reject(new Error('Web Push is disabled in config'))
   if (!vapidPublicKey) return Promise.reject(new Error('VAPID public key is not found'))
 
@@ -34,6 +28,30 @@ function subscribe (registration, isEnabled, vapidPublicKey) {
     applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
   }
   return registration.pushManager.subscribe(subscribeOptions)
+}
+
+function unsubscribePush (registration) {
+  return registration.pushManager.getSubscription()
+    .then((subscribtion) => {
+      if (subscribtion === null) { return }
+      return subscribtion.unsubscribe()
+    })
+}
+
+function deleteSubscriptionFromBackEnd (token) {
+  return window.fetch('/api/v1/push/subscription/', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  }).then((response) => {
+    if (!response.ok) throw new Error('Bad status code from server.')
+    return response.json()
+  }).then((responseData) => {
+    if (!responseData.id) throw new Error('Bad response from server.')
+    return responseData
+  })
 }
 
 function sendSubscriptionToBackEnd (subscription, token) {
@@ -54,31 +72,42 @@ function sendSubscriptionToBackEnd (subscription, token) {
         }
       }
     })
+  }).then((response) => {
+    if (!response.ok) throw new Error('Bad status code from server.')
+    return response.json()
+  }).then((responseData) => {
+    if (!responseData.id) throw new Error('Bad response from server.')
+    return responseData
   })
-    .then((response) => {
-      if (!response.ok) throw new Error('Bad status code from server.')
-      return response.json()
-    })
-    .then((responseData) => {
-      if (!responseData.id) throw new Error('Bad response from server.')
-      return responseData
-    })
 }
 
 export function registerPushNotifications (isEnabled, vapidPublicKey, token) {
   if (isPushSupported()) {
-    registerServiceWorker()
-      .then((registration) => subscribe(registration, isEnabled, vapidPublicKey))
+    getOrCreateServiceWorker()
+      .then((registration) => subscribePush(registration, isEnabled, vapidPublicKey))
       .then((subscription) => sendSubscriptionToBackEnd(subscription, token))
       .catch((e) => console.warn(`Failed to setup Web Push Notifications: ${e.message}`))
   }
 }
 
-export function unregisterPushNotifications (isEnabled, vapidPublicKey, token) {
+export function unregisterPushNotifications (token) {
   if (isPushSupported()) {
-    unregisterServiceWorker()
-      .then((registration) => subscribe(registration, isEnabled, vapidPublicKey))
-      .then((subscription) => sendSubscriptionToBackEnd(subscription, token))
-      .catch((e) => console.warn(`Failed to setup Web Push Notifications: ${e.message}`))
+    Promise.all([
+      deleteSubscriptionFromBackEnd(token),
+      getOrCreateServiceWorker()
+        .then((registration) => {
+          return unsubscribePush(registration).then((result) => [registration, result])
+        })
+        .then(([registration, unsubResult]) => {
+          if (!unsubResult) {
+            console.warn('Push subscription cancellation wasn\'t successful, killing SW anyway...')
+          }
+          return registration.unregister().then((result) => {
+            if (!result) {
+              console.warn('Failed to kill SW')
+            }
+          })
+        })
+    ]).catch((e) => console.warn(`Failed to disable Web Push Notifications: ${e.message}`))
   }
 }

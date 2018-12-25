@@ -248,6 +248,7 @@ const PostStatusForm = {
           }
           this.$emit('posted')
           let el = this.$el.querySelector('textarea')
+          el.style.height = 'auto'
           el.style.height = undefined
           this.error = null
         } else {

@@ -24,8 +24,8 @@ function showWhoToFollow (panel, reply) {
 function getWhoToFollow (panel) {
   var credentials = panel.$store.state.users.currentUser.credentials
   if (credentials) {
-    panel.usersToFollow.forEach((_, index) => {
-      panel.usersToFollow[index].name = 'Loading...'
+    panel.usersToFollow.forEach(toFollow => {
+      toFollow.name = 'Loading...'
     })
     apiService.suggestions({credentials: credentials})
       .then((reply) => {
@@ -49,11 +49,11 @@ const WhoToFollowPanel = {
       return this.$store.state.users.currentUser.screen_name
     },
     moreUrl: function () {
-      let host = window.location.hostname
-      let user = this.user
-      let suggestionsWeb = this.$store.state.instance.suggestionsWeb
-      let url = suggestionsWeb.replace(/{{host}}/g, encodeURIComponent(host))
-                              .replace(/{{user}}/g, encodeURIComponent(user))
+      const host = window.location.hostname
+      const user = this.user
+      const suggestionsWeb = this.$store.state.instance.suggestionsWeb
+      const url = suggestionsWeb.replace(/{{host}}/g, encodeURIComponent(host))
+                                .replace(/{{user}}/g, encodeURIComponent(user))
       return url
     },
     suggestionsEnabled () {

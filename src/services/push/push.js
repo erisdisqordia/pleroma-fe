@@ -47,10 +47,7 @@ function deleteSubscriptionFromBackEnd (token) {
     }
   }).then((response) => {
     if (!response.ok) throw new Error('Bad status code from server.')
-    return response.json()
-  }).then((responseData) => {
-    if (!responseData.id) throw new Error('Bad response from server.')
-    return responseData
+    return response
   })
 }
 

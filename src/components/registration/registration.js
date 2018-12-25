@@ -28,7 +28,7 @@ const registration = {
   },
   created () {
     if ((!this.registrationOpen && !this.token) || this.signedIn) {
-      this.$router.push('/~/main/all')
+      this.$router.push({name: 'root'})
     }
 
     this.setCaptcha()
@@ -58,7 +58,7 @@ const registration = {
       if (!this.$v.$invalid) {
         try {
           await this.signUp(this.user)
-          this.$router.push('/~/main/friends')
+          this.$router.push({name: 'friends'})
         } catch (error) {
           console.warn('Registration failed: ' + error)
         }

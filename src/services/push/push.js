@@ -51,7 +51,7 @@ function deleteSubscriptionFromBackEnd (token) {
   })
 }
 
-function sendSubscriptionToBackEnd (subscription, token) {
+function sendSubscriptionToBackEnd (subscription, token, notificationVisibility) {
   return window.fetch('/api/v1/push/subscription/', {
     method: 'POST',
     headers: {
@@ -62,10 +62,10 @@ function sendSubscriptionToBackEnd (subscription, token) {
       subscription,
       data: {
         alerts: {
-          follow: true,
-          favourite: true,
-          mention: true,
-          reblog: true
+          follow: notificationVisibility.follows,
+          favourite: notificationVisibility.likes,
+          mention: notificationVisibility.mentions,
+          reblog: notificationVisibility.repeats
         }
       }
     })
@@ -78,11 +78,11 @@ function sendSubscriptionToBackEnd (subscription, token) {
   })
 }
 
-export function registerPushNotifications (isEnabled, vapidPublicKey, token) {
+export function registerPushNotifications (isEnabled, vapidPublicKey, token, notificationVisibility) {
   if (isPushSupported()) {
     getOrCreateServiceWorker()
       .then((registration) => subscribePush(registration, isEnabled, vapidPublicKey))
-      .then((subscription) => sendSubscriptionToBackEnd(subscription, token))
+      .then((subscription) => sendSubscriptionToBackEnd(subscription, token, notificationVisibility))
       .catch((e) => console.warn(`Failed to setup Web Push Notifications: ${e.message}`))
   }
 }

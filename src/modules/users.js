@@ -116,8 +116,9 @@ const users = {
       const token = store.state.currentUser.credentials
       const vapidPublicKey = store.rootState.instance.vapidPublicKey
       const isEnabled = store.rootState.config.webPushNotifications
+      const notificationVisibility = store.rootState.config.notificationVisibility
 
-      registerPushNotifications(isEnabled, vapidPublicKey, token)
+      registerPushNotifications(isEnabled, vapidPublicKey, token, notificationVisibility)
     },
     unregisterPushNotifications (store) {
       const token = store.state.currentUser.credentials

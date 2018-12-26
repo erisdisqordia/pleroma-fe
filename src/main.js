@@ -15,6 +15,7 @@ import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
 
 import createPersistedState from './lib/persisted_state.js'
+import pushNotifications from './lib/push_notifications_plugin.js'
 
 import messages from './i18n/messages.js'
 
@@ -51,28 +52,6 @@ const persistedStateOptions = {
   ]
 }
 
-const registerPushNotifications = store => {
-  store.subscribe((mutation, state) => {
-    const vapidPublicKey = state.instance.vapidPublicKey
-    const webPushNotification = state.config.webPushNotifications
-    const permission = state.interface.notificationPermission === 'granted'
-    const user = state.users.currentUser
-
-    const isUserMutation = mutation.type === 'setCurrentUser'
-    const isVapidMutation = mutation.type === 'setInstanceOption' && mutation.payload.name === 'vapidPublicKey'
-    const isPermMutation = mutation.type === 'setNotificationPermission' && mutation.payload === 'granted'
-    const isUserConfigMutation = mutation.type === 'setOption' && mutation.payload.name === 'webPushNotifications'
-
-    if (isUserMutation || isVapidMutation || isPermMutation || isUserConfigMutation) {
-      if (user && vapidPublicKey && permission && webPushNotification) {
-        return store.dispatch('registerPushNotifications')
-      } else if (isUserConfigMutation && !webPushNotification) {
-        return store.dispatch('unregisterPushNotifications')
-      }
-    }
-  })
-}
-
 createPersistedState(persistedStateOptions).then((persistedState) => {
   const store = new Vuex.Store({
     modules: {
@@ -85,7 +64,7 @@ createPersistedState(persistedStateOptions).then((persistedState) => {
       chat: chatModule,
       oauth: oauthModule
     },
-    plugins: [persistedState, registerPushNotifications],
+    plugins: [persistedState, pushNotifications],
     strict: false // Socket modifies itself, let's ignore this for now.
     // strict: process.env.NODE_ENV !== 'production'
   })

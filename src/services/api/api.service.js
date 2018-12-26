@@ -376,6 +376,7 @@ const postStatus = ({credentials, status, spoilerText, visibility, sensitive, me
 
   form.append('status', status)
   form.append('source', 'Pleroma FE')
+  form.append('no_attachment_links', true)
   if (spoilerText) form.append('spoiler_text', spoilerText)
   if (visibility) form.append('visibility', visibility)
   if (sensitive) form.append('sensitive', sensitive)

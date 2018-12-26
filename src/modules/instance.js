@@ -32,6 +32,7 @@ const defaultState = {
   pleromaBackend: true,
   emoji: [],
   customEmoji: [],
+  restrictedNicknames: [],
 
   // Feature-set, apparently, not everything here is reported...
   mediaProxyAvailable: false,

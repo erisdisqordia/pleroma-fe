@@ -2,22 +2,25 @@
 <div id="heading" class="profile-panel-background" :style="headingStyle">
   <div class="panel-heading text-center">
     <div class='user-info'>
-      <router-link @click.native="activatePanel && activatePanel('timeline')" :to="{ name: 'user-settings' }" style="float: right; margin-top:16px;" v-if="!isOtherUser">
-        <i class="button-icon icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
-      </router-link>
-      <a :href="user.statusnet_profile_url" target="_blank" class="floater" v-if="isOtherUser">
-        <i class="icon-link-ext usersettings"></i>
-      </a>
       <div class='container'>
         <router-link @click.native="activatePanel && activatePanel('timeline')" :to="userProfileLink(user)">
           <StillImage class="avatar" :class='{ "better-shadow": betterShadow }' :src="user.profile_image_url_original"/>
         </router-link>
         <div class="name-and-screen-name">
-          <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
-          <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
+          <div class="top-line">
+            <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
+            <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
+            <router-link @click.native="activatePanel && activatePanel('timeline')" :to="{ name: 'user-settings' }" v-if="!isOtherUser">
+              <i class="button-icon icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
+            </router-link>
+            <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser">
+              <i class="icon-link-ext usersettings"></i>
+            </a>
+          </div>
+
           <router-link @click.native="activatePanel && activatePanel('timeline')" class='user-screen-name' :to="userProfileLink(user)">
-            <span>@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
-            <span v-if="!hideUserStatsLocal" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
+            <span class="handle">@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
+            <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>
         </div>
       </div>
@@ -25,7 +28,7 @@
         <div v-if="user.follows_you && loggedIn && isOtherUser" class="following">
           {{ $t('user_card.follows_you') }}
         </div>
-        <div class="floater" v-if="isOtherUser && (loggedIn || !switcher)">
+        <div class="highlighter" v-if="isOtherUser && (loggedIn || !switcher)">
           <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
           <input class="userHighlightText" type="text" :id="'userHighlightColorTx'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
           <input class="userHighlightCl" type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
@@ -139,7 +142,7 @@
   border-bottom-right-radius: 0;
 
   .panel-heading {
-    padding: 0.6em 0em;
+    padding: .6em 0;
     text-align: center;
     box-shadow: none;
   }
@@ -158,10 +161,10 @@
 .user-info {
   color: $fallback--lightText;
   color: var(--lightText, $fallback--lightText);
-  padding: 0 16px;
+  padding: 0 26px;
 
   .container {
-    padding: 16px 10px 6px 10px;
+    padding: 16px 0 6px;
     display: flex;
     max-height: 56px;
 
@@ -218,11 +221,15 @@
       vertical-align: middle;
       object-fit: contain
     }
+    .top-line {
+      display: flex;
+    }
   }
 
   .user-name{
     text-overflow: ellipsis;
     overflow: hidden;
+    flex: 1 0 auto;
   }
 
   .user-screen-name {
@@ -232,27 +239,73 @@
     font-weight: light;
     font-size: 15px;
     padding-right: 0.1em;
+    width: 100%;
+    display: flex;
+
+    .dailyAvg {
+      min-width: 1px;
+      flex: 0 0 auto;
+    }
+
+    .handle {
+      min-width: 1px;
+      flex: 0 1 auto;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 
   .user-meta {
-    margin-bottom: .4em;
+    margin-bottom: .15em;
+    display: flex;
+    align-items: baseline;
+    font-size: 14px;
+    line-height: 22px;
+    flex-wrap: wrap;
 
     .following {
-      font-size: 14px;
-      flex: 0 0 100%;
+      flex: 1 0 auto;
       margin: 0;
-      padding-left: 16px;
+      margin-bottom: .25em;
       text-align: left;
-      float: left;
-    }
-    .floater {
-      margin: 0;
     }
 
-    &::after {
-      display: block;
-      content: '';
-      clear: both;
+    .highlighter {
+      flex: 0 1 auto;
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -.5em;
+      align-self: start;
+
+      .userHighlightCl {
+        padding: 2px 10px;
+        flex: 1 0 auto;
+      }
+
+      .userHighlightSel,
+      .userHighlightSel.select {
+        padding-top: 0;
+        padding-bottom: 0;
+        flex: 1 0 auto;
+      }
+      .userHighlightSel.select i {
+        line-height: 22px;
+      }
+
+      .userHighlightText {
+        width: 70px;
+        flex: 1 0 auto;
+      }
+
+      .userHighlightCl,
+      .userHighlightText,
+      .userHighlightSel,
+      .userHighlightSel.select {
+        height: 22px;
+        vertical-align: top;
+        margin-right: .5em;
+        margin-bottom: .25em;
+      }
     }
   }
   .user-interactions {
@@ -260,8 +313,13 @@
     flex-flow: row wrap;
     justify-content: space-between;
 
+    margin-right: -.75em;
+
     div {
-      flex: 1;
+      flex: 1 0 0;
+      margin-right: .75em;
+      margin-bottom: .6em;
+      white-space: nowrap;
     }
 
     .mute {
@@ -280,8 +338,9 @@
     }
 
     button {
-      width: 92%;
+      width: 100%;
       height: 100%;
+      margin: 0;
     }
 
     .remote-button {
@@ -304,10 +363,11 @@
   justify-content: space-between;
   color: $fallback--lightText;
   color: var(--lightText, $fallback--lightText);
+  flex-wrap: wrap;
 }
 
 .user-count {
-  flex: 1;
+  flex: 1 0 auto;
   padding: .5em 0 .5em 0;
   margin: 0 .5em;
 
@@ -327,32 +387,5 @@
   color: #CCC;
 }
 .floater {
-  float: right;
-  margin-top: 16px;
-
-  .userHighlightCl {
-    padding: 2px 10px;
-  }
-  .userHighlightSel,
-  .userHighlightSel.select {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .userHighlightSel.select i {
-    line-height: 22px;
-  }
-
-  .userHighlightText {
-    width: 70px;
-  }
-
-  .userHighlightCl,
-  .userHighlightText,
-  .userHighlightSel,
-  .userHighlightSel.select {
-    height: 22px;
-    vertical-align: top;
-    margin-right: 0
-  }
 }
 </style>

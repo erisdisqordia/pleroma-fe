@@ -66,6 +66,9 @@ export const mutations = {
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
   },
+  setUserForNotification (state, notification) {
+    notification.action.user = state.usersObject[notification.action.user.id]
+  },
   setColor (state, { user: { id }, highlighted }) {
     const user = state.usersObject[id]
     set(user, 'highlight', highlighted)
@@ -134,6 +137,21 @@ const users = {
       // Reconnect users to retweets
       each(compact(map(statuses, 'retweeted_status')), (status) => {
         store.commit('setUserForStatus', status)
+      })
+    },
+    addNewNotifications (store, { notifications }) {
+      const users = compact(map(notifications, 'from_profile'))
+      const notificationIds = compact(notifications.map(_ => String(_.id)))
+      store.commit('addNewUsers', users)
+
+      const notificationsObject = store.rootState.statuses.notifications.idStore
+      const relevantNotifications = Object.entries(notificationsObject)
+            .filter(([k, val]) => notificationIds.includes(k))
+            .map(([k, val]) => val)
+
+      // Reconnect users to notifications
+      each(relevantNotifications, (notification) => {
+        store.commit('setUserForNotification', notification)
       })
     },
     async signUp (store, userInfo) {

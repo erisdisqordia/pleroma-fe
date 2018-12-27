@@ -17,5 +17,6 @@
   "hidePostStats": false,
   "hideUserStats": false,
   "loginMethod": "password",
-  "webPushNotifications": false
+  "webPushNotifications": false,
+  "noAttachmentLinks": false
 }

@@ -27,6 +27,7 @@ const defaultState = {
   loginMethod: 'password',
   nsfwCensorImage: undefined,
   vapidPublicKey: undefined,
+  noAttachmentLinks: false,
 
   // Nasty stuff
   pleromaBackend: true,

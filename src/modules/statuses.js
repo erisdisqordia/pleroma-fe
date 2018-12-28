@@ -27,6 +27,7 @@ export const defaultState = {
     maxId: 0,
     minId: Number.POSITIVE_INFINITY,
     data: [],
+    idStore: {},
     error: false
   },
   favorites: new Set(),
@@ -307,6 +308,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       }
 
       state.notifications.data.push(result)
+      state.notifications.idStore[notification.id] = result
 
       if ('Notification' in window && window.Notification.permission === 'granted') {
         const title = action.user.name

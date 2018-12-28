@@ -2,62 +2,31 @@ import apiService from '../../services/api/api.service.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 function showWhoToFollow (panel, reply) {
-  var users = reply
-  var cn
-  var index
-  var step = 7
-  cn = Math.floor(Math.random() * step)
-  for (index = 0; index < 3; index++) {
-    var user
-    user = users[cn]
-    var img
-    if (user.avatar) {
-      img = user.avatar
-    } else {
-      img = '/images/avi.png'
-    }
-    var name = user.acct
-    if (index === 0) {
-      panel.img1 = img
-      panel.name1 = name
-      panel.$store.state.api.backendInteractor.externalProfile(name)
-        .then((externalUser) => {
-          if (!externalUser.error) {
-            panel.$store.commit('addNewUsers', [externalUser])
-            panel.id1 = externalUser.id
-          }
-        })
-    } else if (index === 1) {
-      panel.img2 = img
-      panel.name2 = name
-      panel.$store.state.api.backendInteractor.externalProfile(name)
-        .then((externalUser) => {
-          if (!externalUser.error) {
-            panel.$store.commit('addNewUsers', [externalUser])
-            panel.id2 = externalUser.id
-          }
-        })
-    } else if (index === 2) {
-      panel.img3 = img
-      panel.name3 = name
-      panel.$store.state.api.backendInteractor.externalProfile(name)
-        .then((externalUser) => {
-          if (!externalUser.error) {
-            panel.$store.commit('addNewUsers', [externalUser])
-            panel.id3 = externalUser.id
-          }
-        })
-    }
-    cn = (cn + step) % users.length
-  }
+  panel.usersToFollow.forEach((toFollow, index) => {
+    let randIndex = Math.floor(Math.random() * reply.length)
+    let user = reply[randIndex]
+    let img = user.avatar || '/images/avi.png'
+    let name = user.acct
+
+    toFollow.img = img
+    toFollow.name = name
+
+    panel.$store.state.api.backendInteractor.externalProfile(name)
+      .then((externalUser) => {
+        if (!externalUser.error) {
+          panel.$store.commit('addNewUsers', [externalUser])
+          toFollow.id = externalUser.id
+        }
+      })
+  })
 }
 
 function getWhoToFollow (panel) {
   var credentials = panel.$store.state.users.currentUser.credentials
   if (credentials) {
-    panel.name1 = 'Loading...'
-    panel.name2 = 'Loading...'
-    panel.name3 = 'Loading...'
+    panel.usersToFollow.forEach(toFollow => {
+      toFollow.name = 'Loading...'
+    })
     apiService.suggestions({credentials: credentials})
       .then((reply) => {
         showWhoToFollow(panel, reply)
@@ -67,27 +36,24 @@ function getWhoToFollow (panel) {
 
 const WhoToFollowPanel = {
   data: () => ({
-    img1: '/images/avi.png',
-    name1: '',
-    id1: 0,
-    img2: '/images/avi.png',
-    name2: '',
-    id2: 0,
-    img3: '/images/avi.png',
-    name3: '',
-    id3: 0
+    usersToFollow: new Array(3).fill().map(x => (
+      {
+        img: '/images/avi.png',
+        name: '',
+        id: 0
+      }
+    ))
   }),
   computed: {
     user: function () {
       return this.$store.state.users.currentUser.screen_name
     },
     moreUrl: function () {
-      var host = window.location.hostname
-      var user = this.user
-      var suggestionsWeb = this.$store.state.instance.suggestionsWeb
-      var url
-      url = suggestionsWeb.replace(/{{host}}/g, encodeURIComponent(host))
-      url = url.replace(/{{user}}/g, encodeURIComponent(user))
+      const host = window.location.hostname
+      const user = this.user
+      const suggestionsWeb = this.$store.state.instance.suggestionsWeb
+      const url = suggestionsWeb.replace(/{{host}}/g, encodeURIComponent(host))
+                                .replace(/{{user}}/g, encodeURIComponent(user))
       return url
     },
     suggestionsEnabled () {

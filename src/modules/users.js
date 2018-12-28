@@ -1,7 +1,7 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { compact, map, each, merge } from 'lodash'
 import { set } from 'vue'
-import registerPushNotifications from '../services/push/push.js'
+import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
 import oauthApi from '../services/new_api/oauth'
 import { humanizeErrors } from './errors'
 
@@ -66,6 +66,9 @@ export const mutations = {
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
   },
+  setUserForNotification (state, notification) {
+    notification.action.user = state.usersObject[notification.action.user.id]
+  },
   setColor (state, { user: { id }, highlighted }) {
     const user = state.usersObject[id]
     set(user, 'highlight', highlighted)
@@ -113,8 +116,14 @@ const users = {
       const token = store.state.currentUser.credentials
       const vapidPublicKey = store.rootState.instance.vapidPublicKey
       const isEnabled = store.rootState.config.webPushNotifications
+      const notificationVisibility = store.rootState.config.notificationVisibility
 
-      registerPushNotifications(isEnabled, vapidPublicKey, token)
+      registerPushNotifications(isEnabled, vapidPublicKey, token, notificationVisibility)
+    },
+    unregisterPushNotifications (store) {
+      const token = store.state.currentUser.credentials
+
+      unregisterPushNotifications(token)
     },
     addNewStatuses (store, { statuses }) {
       const users = map(statuses, 'user')
@@ -129,6 +138,21 @@ const users = {
       // Reconnect users to retweets
       each(compact(map(statuses, 'retweeted_status')), (status) => {
         store.commit('setUserForStatus', status)
+      })
+    },
+    addNewNotifications (store, { notifications }) {
+      const users = compact(map(notifications, 'from_profile'))
+      const notificationIds = compact(notifications.map(_ => String(_.id)))
+      store.commit('addNewUsers', users)
+
+      const notificationsObject = store.rootState.statuses.notifications.idStore
+      const relevantNotifications = Object.entries(notificationsObject)
+            .filter(([k, val]) => notificationIds.includes(k))
+            .map(([k, val]) => val)
+
+      // Reconnect users to notifications
+      each(relevantNotifications, (notification) => {
+        store.commit('setUserForNotification', notification)
       })
     },
     async signUp (store, userInfo) {

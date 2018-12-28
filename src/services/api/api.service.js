@@ -370,12 +370,13 @@ const unretweet = ({ id, credentials }) => {
   })
 }
 
-const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType}) => {
+const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType, noAttachmentLinks}) => {
   const idsText = mediaIds.join(',')
   const form = new FormData()
 
   form.append('status', status)
   form.append('source', 'Pleroma FE')
+  if (noAttachmentLinks) form.append('no_attachment_links', noAttachmentLinks)
   if (spoilerText) form.append('spoiler_text', spoilerText)
   if (visibility) form.append('visibility', visibility)
   if (sensitive) form.append('sensitive', sensitive)

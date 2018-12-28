@@ -72,6 +72,7 @@ const afterStoreSetup = ({ store, i18n }) => {
           var scopeCopy = (config.scopeCopy)
           var subjectLineBehavior = (config.subjectLineBehavior)
           var alwaysShowSubjectInput = (config.alwaysShowSubjectInput)
+          var noAttachmentLinks = (config.noAttachmentLinks)
 
           store.dispatch('setInstanceOption', { name: 'theme', value: theme })
           store.dispatch('setInstanceOption', { name: 'background', value: background })
@@ -90,6 +91,8 @@ const afterStoreSetup = ({ store, i18n }) => {
           store.dispatch('setInstanceOption', { name: 'scopeCopy', value: scopeCopy })
           store.dispatch('setInstanceOption', { name: 'subjectLineBehavior', value: subjectLineBehavior })
           store.dispatch('setInstanceOption', { name: 'alwaysShowSubjectInput', value: alwaysShowSubjectInput })
+          store.dispatch('setInstanceOption', { name: 'noAttachmentLinks', value: noAttachmentLinks })
+
           if (chatDisabled) {
             store.dispatch('disableChat')
           }

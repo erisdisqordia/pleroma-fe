@@ -32,6 +32,8 @@ const PostStatusForm = {
   },
   mounted () {
     this.resize(this.$refs.textarea)
+    const textLength = this.$refs.textarea.value.length
+    this.$refs.textarea.setSelectionRange(textLength, textLength)
 
     if (this.replyTo) {
       this.$refs.textarea.focus()
@@ -250,7 +252,8 @@ const PostStatusForm = {
           }
           this.$emit('posted')
           let el = this.$el.querySelector('textarea')
-          el.style.height = '16px'
+          el.style.height = 'auto'
+          el.style.height = undefined
           this.error = null
         } else {
           this.error = data.error
@@ -298,13 +301,15 @@ const PostStatusForm = {
       e.dataTransfer.dropEffect = 'copy'
     },
     resize (e) {
-      if (!e.target) { return }
-      const vertPadding = Number(window.getComputedStyle(e.target)['padding-top'].substr(0, 1)) +
-            Number(window.getComputedStyle(e.target)['padding-bottom'].substr(0, 1))
-      e.target.style.height = 'auto'
-      e.target.style.height = `${e.target.scrollHeight - vertPadding}px`
-      if (e.target.value === '') {
-        e.target.style.height = '16px'
+      const target = e.target || e
+      if (!(target instanceof window.Element)) { return }
+      const vertPadding = Number(window.getComputedStyle(target)['padding-top'].substr(0, 1)) +
+            Number(window.getComputedStyle(target)['padding-bottom'].substr(0, 1))
+      // Auto is needed to make textbox shrink when removing lines
+      target.style.height = 'auto'
+      target.style.height = `${target.scrollHeight - vertPadding}px`
+      if (target.value === '') {
+        target.style.height = null
       }
     },
     clearError () {

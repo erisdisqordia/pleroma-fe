@@ -7,7 +7,8 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 
 const mutations = {
-  clearTimeline: () => {}
+  clearTimeline: () => {},
+  setError: () => {}
 }
 
 const externalProfileStore = new Vuex.Store({

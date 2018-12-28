@@ -1,6 +1,7 @@
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 const chatPanel = {
+  props: [ 'floating' ],
   data () {
     return {
       currentMessage: '',
@@ -22,7 +23,7 @@ const chatPanel = {
       this.collapsed = !this.collapsed
     },
     userProfileLink (user) {
-      return generateProfileLink(user.id, user.screen_name)
+      return generateProfileLink(user.id, user.username)
     }
   }
 }

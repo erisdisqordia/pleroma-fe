@@ -12,6 +12,10 @@ import UserSettings from 'components/user_settings/user_settings.vue'
 import FollowRequests from 'components/follow_requests/follow_requests.vue'
 import OAuthCallback from 'components/oauth_callback/oauth_callback.vue'
 import UserSearch from 'components/user_search/user_search.vue'
+import Notifications from 'components/notifications/notifications.vue'
+import UserPanel from 'components/user_panel/user_panel.vue'
+import LoginForm from 'components/login_form/login_form.vue'
+import ChatPanel from 'components/chat_panel/chat_panel.vue'
 
 export default (store) => {
   return [
@@ -62,6 +66,10 @@ export default (store) => {
     { name: 'friend-requests', path: '/~/friend-requests', component: FollowRequests },
     { name: 'user-settings', path: '/~/user-settings', component: UserSettings },
     { name: 'oauth-callback', path: '/~/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) },
-    { name: 'user-search', path: '/~/user-search', component: UserSearch, props: (route) => ({ query: route.query.query }) }
+    { name: 'user-search', path: '/~/user-search', component: UserSearch, props: (route) => ({ query: route.query.query }) },
+    { name: 'notifications', path: '/:username/notifications', component: Notifications },
+    { name: 'new-status', path: '/:username/new-status', component: UserPanel },
+    { name: 'login', path: '/~/login', component: LoginForm },
+    { name: 'chat', path: '/~/chat', component: ChatPanel, props: () => ({ floating: false }) }
   ]
 }

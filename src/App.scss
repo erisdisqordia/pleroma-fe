@@ -473,6 +473,24 @@ nav {
   }
 }
 
+.menu-button {
+  display: none;
+  position: relative;
+}
+
+.alert-dot {
+  border-radius: 100%;
+  height: 8px;
+  width: 8px;
+  position: absolute;
+  left: calc(50% - 4px);
+  top: calc(50% - 4px);
+  margin-left: 6px;
+  margin-top: -6px;
+  background-color: $fallback--cRed;
+  background-color: var(--badgeNotification, $fallback--cRed);
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s
 }
@@ -523,9 +541,6 @@ nav {
   nav {
     .back-button {
       display: none;
-    }
-    .site-name {
-      padding-left: 20px;
     }
   }
 
@@ -664,5 +679,10 @@ nav {
     div {
       max-width: 4em;
     }
+  }
+
+  .menu-button {
+    display: block;
+    margin-right: 0.8em;
   }
 }

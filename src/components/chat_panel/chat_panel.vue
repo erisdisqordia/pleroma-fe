@@ -1,10 +1,10 @@
 <template>
-  <div class="chat-panel" v-if="!this.collapsed">
+  <div class="chat-panel" v-if="!this.collapsed || !this.floating">
     <div class="panel panel-default">
-      <div class="panel-heading timeline-heading chat-heading" @click.stop.prevent="togglePanel">
+      <div class="panel-heading timeline-heading" :class="{ 'chat-heading': floating }" @click.stop.prevent="togglePanel">
         <div class="title">
           {{$t('chat.title')}}
-          <i class="icon-cancel" style="float: right;"></i>
+          <i class="icon-cancel" style="float: right;" v-if="floating"></i>
         </div>
       </div>
       <div class="chat-window" v-chat-scroll>
@@ -52,6 +52,7 @@
   right: 0px;
   bottom: 0px;
   z-index: 1000;
+  max-width: 25em;
 }
 
 .chat-heading {
@@ -63,10 +64,13 @@
 }
 
 .chat-window {
-  width: 345px;
-  max-height: 40vh;
   overflow-y: auto;
   overflow-x: hidden;
+  max-height: 20em;
+}
+
+.chat-window-container {
+  height: 100%;
 }
 
 .chat-message {

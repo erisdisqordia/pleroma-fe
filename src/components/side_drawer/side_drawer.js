@@ -1,39 +1,43 @@
 import UserCardContent from '../user_card_content/user_card_content.vue'
+import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 
-const deltaX = (oldX, newX) => newX - oldX
+const deltaCoord = (oldCoord, newCoord) => [newCoord[0] - oldCoord[0], newCoord[1] - oldCoord[1]]
 
-const touchEventX = e => e.touches[0].screenX
+const touchEventCoord = e => ([e.touches[0].screenX, e.touches[0].screenY])
 
 const SideDrawer = {
-  props: [ 'activatePanel', 'logout' ],
+  props: [ 'logout' ],
   data: () => ({
     closed: true,
-    touchX: 0
+    touchCoord: [0, 0]
   }),
   components: { UserCardContent },
   computed: {
     currentUser () {
       return this.$store.state.users.currentUser
+    },
+    chat () { return this.$store.state.chat.channel.state === 'joined' },
+    unseenNotifications () {
+      return unseenNotificationsFromStore(this.$store)
+    },
+    unseenNotificationsCount () {
+      return this.unseenNotifications.length
     }
   },
   methods: {
     toggleDrawer () {
       this.closed = !this.closed
     },
-    gotoPanel (panel) {
-      this.activatePanel(panel)
-      this.toggleDrawer()
-    },
     doLogout () {
       this.logout()
-      this.gotoPanel('timeline')
+      this.toggleDrawer()
     },
     touchStart (e) {
-      this.touchX = touchEventX(e)
+      this.touchCoord = touchEventCoord(e)
     },
     touchMove (e) {
-      const delta = deltaX(this.touchX, touchEventX(e))
-      if (delta < -30 && !this.closed) {
+      const delta = deltaCoord(this.touchCoord, touchEventCoord(e))
+      if (delta[0] < -30 && Math.abs(delta[1]) < Math.abs(delta[0]) && !this.closed) {
         this.toggleDrawer()
       }
     }

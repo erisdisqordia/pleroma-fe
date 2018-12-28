@@ -1,61 +1,77 @@
 <template>
   <div class="side-drawer-container" :class="{ 'side-drawer-container-closed': closed, 'side-drawer-container-open': !closed }">
-    <div class="panel panel-default side-drawer"
+    <div class="side-drawer"
       :class="{'side-drawer-closed': closed}"
       @touchstart="touchStart"
-      @touchmove.prevent="touchMove"
+      @touchmove="touchMove"
     >
-      <div class="side-drawer-heading">
-        <user-card-content :activatePanel="activatePanel" :user="currentUser" :switcher="false" :hideBio="true">
+      <div class="side-drawer-heading" @click="toggleDrawer">
+        <user-card-content :user="currentUser" :switcher="false" :hideBio="true">
         </user-card-content>
       </div>
       <ul>
-        <li v-if='currentUser'>
-          <a href="#" @click="gotoPanel('poststatus')">
+        <li v-if="currentUser" @click="toggleDrawer">
+          <router-link :to="{ name: 'new-status', params: { username: currentUser.screen_name } }">
             {{ $t("post_status.new_status") }}
-          </a>
-        </li>
-        <li v-else>
-          <a href="#" @click="gotoPanel('poststatus')">
-            {{ $t("login.login") }}
-          </a>
-        </li>
-        <li v-if='currentUser'>
-          <a href="#" @click="gotoPanel('notifications')">
-            {{ $t("notifications.notifications") }}
-          </a>
-        </li>
-        <li v-if='currentUser'>
-          <router-link @click.native="gotoPanel('timeline')" to='/main/friends'>
-            {{ $t("nav.timeline") }}
           </router-link>
         </li>
-        <li v-if='currentUser'>
-          <router-link @click.native="gotoPanel('timeline')" :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
+        <li v-else @click="toggleDrawer">
+          <router-link :to="{ name: 'login' }">
+            {{ $t("login.login") }}
+          </router-link>
+        </li>
+        <li v-if="currentUser" @click="toggleDrawer">
+          <router-link :to="{ name: 'notifications', params: { username: currentUser.screen_name } }">
+            {{ $t("notifications.notifications") }} {{ unseenNotificationsCount > 0 ? `(${unseenNotificationsCount})` : '' }}
+          </router-link>
+        </li>
+        <li v-if="currentUser" @click="toggleDrawer">
+          <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
             {{ $t("nav.dms") }}
           </router-link>
         </li>
-        <li v-if='currentUser && currentUser.locked'>
-          <router-link @click.native="gotoPanel('timeline')" to='/friend-requests'>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li v-if="currentUser" @click="toggleDrawer">
+          <router-link :to="{ name: 'friends' }">
+            {{ $t("nav.timeline") }}
+          </router-link>
+        </li>
+        <li v-if="currentUser && currentUser.locked" @click="toggleDrawer">
+          <router-link to='/friend-requests'>
             {{ $t("nav.friend_requests") }}
           </router-link>
         </li>
-        <li>
-          <router-link @click.native="gotoPanel('timeline')" to='/main/public'>
+        <li @click="toggleDrawer">
+          <router-link to='/main/public'>
             {{ $t("nav.public_tl") }}
           </router-link>
         </li>
-        <li>
-          <router-link @click.native="gotoPanel('timeline')" to='/main/all'>
+        <li @click="toggleDrawer">
+          <router-link to='/main/all'>
             {{ $t("nav.twkn") }}
           </router-link>
         </li>
+        <li v-if="currentUser && chat" @click="toggleDrawer">
+          <router-link :to="{ name: 'chat' }">
+            {{ $t("nav.chat") }}
+          </router-link>
+        </li>
         <li>
-          <router-link @click.native="gotoPanel('timeline')" :to="{ name: 'settings'}">
+          <div class="divider"></div>
+        </li>
+        <li @click="toggleDrawer">
+          <router-link :to="{ name: 'user-search'}">
+            {{ $t("nav.user_search") }}
+          </router-link>
+        </li>
+        <li @click="toggleDrawer">
+          <router-link :to="{ name: 'settings'}">
             {{ $t("settings.settings") }}
           </router-link>
         </li>
-        <li v-if="currentUser">
+        <li v-if="currentUser" @click="toggleDrawer">
           <a @click="doLogout" href="#">
             {{ $t("login.logout") }}
           </a>
@@ -102,9 +118,14 @@
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
   transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
   margin: 0 0 0 -100px;
-  padding: 0 0 0 100px;
-  width: 75%;
-  flex: 0 0 75%;
+  padding: 0 0 1em 100px;
+  width: 80%;
+  max-width: 20em;
+  flex: 0 0 80%;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--panelShadow);
+  background-color: $fallback--bg;
+  background-color: var(--bg, $fallback--bg);
 }
 
 .side-drawer-click-outside-closed {
@@ -115,18 +136,12 @@
   margin: 0 0 0 calc(-100% - 100px);
 }
 
-.side-drawer .panel {
-  overflow: hidden;
-  margin: 0;
-  display: flex;
-}
-
 .side-drawer-heading {
   background: transparent;
   flex-direction: column;
   align-items: stretch;
   display: flex;
-  min-height: 8em;
+  min-height: 7em;
   padding: 0;
   margin: 0;
 
@@ -147,14 +162,18 @@
 }
 
 .side-drawer li {
-  border-bottom: 1px solid;
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
   padding: 0;
+
+  .divider {
+    border-top: 1px solid;
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
+    margin: 0.2em 0;
+  }
 
   a {
     display: block;
-    padding: 0.8em 0.85em;
+    padding: 0.5em 0.85em;
 
     &:hover {
       background-color: $fallback--lightBg;

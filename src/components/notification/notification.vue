@@ -1,5 +1,5 @@
 <template>
-  <status :activatePanel="activatePanel" v-if="notification.type === 'mention'" :compact="true" :statusoid="notification.status"></status>
+  <status v-if="notification.type === 'mention'" :compact="true" :statusoid="notification.status"></status>
   <div class="non-mention" :class="[userClass, { highlighted: userStyle }]" :style="[ userStyle ]"v-else>
     <a class='avatar-container' :href="notification.action.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
       <StillImage class='avatar-compact' :class="{'better-shadow': betterShadow}" :src="notification.action.user.profile_image_url_original"/>
@@ -25,15 +25,15 @@
             <small>{{$t('notifications.followed_you')}}</small>
           </span>
         </div>
-        <small class="timeago"><router-link @click.native="activatePanel('timeline')" v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
+        <small class="timeago"><router-link v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
       </span>
       <div class="follow-text" v-if="notification.type === 'follow'">
-        <router-link @click.native="activatePanel('timeline')" :to="userProfileLink(notification.action.user)">
+        <router-link :to="userProfileLink(notification.action.user)">
           @{{notification.action.user.screen_name}}
         </router-link>
       </div>
       <template v-else>
-        <status :activatePanel="activatePanel" class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>
+        <status class="faint" :compact="true" :statusoid="notification.status" :noHeading="true"></status>
       </template>
     </div>
   </div>

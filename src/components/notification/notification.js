@@ -11,10 +11,7 @@ const Notification = {
       betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
-  props: [
-    'notification',
-    'activatePanel'
-  ],
+  props: [ 'notification' ],
   components: {
     Status, StillImage, UserCardContent
   },

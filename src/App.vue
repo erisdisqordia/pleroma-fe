@@ -11,9 +11,6 @@
             <i class="button-icon icon-menu"></i>
             <div class="alert-dot" v-if="unseenNotificationsCount"></div>
           </a>
-          <!-- <router-link class="back-button" @click.native="activatePanel('timeline')" :to="{ name: 'root' }" active-class="hidden">
-            <i class="icon-left-open" :title="$t('nav.back')"></i>
-          </router-link> -->
           <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
         </div>
         <div class='item right'>

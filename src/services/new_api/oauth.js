@@ -5,7 +5,7 @@ const getOrCreateApp = ({oauth, instance}) => {
   const form = new window.FormData()
 
   form.append('client_name', `PleromaFE_${Math.random()}`)
-  form.append('redirect_uris', `${window.location.origin}/~/oauth-callback`)
+  form.append('redirect_uris', `${window.location.origin}/oauth-callback`)
   form.append('scopes', 'read write follow')
 
   return window.fetch(url, {
@@ -64,7 +64,7 @@ const getToken = ({app, instance, code}) => {
   form.append('client_secret', app.client_secret)
   form.append('grant_type', 'authorization_code')
   form.append('code', code)
-  form.append('redirect_uri', `${window.location.origin}/~/oauth-callback`)
+  form.append('redirect_uri', `${window.location.origin}/oauth-callback`)
 
   return window.fetch(url, {
     method: 'POST',

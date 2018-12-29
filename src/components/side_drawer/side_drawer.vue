@@ -8,7 +8,7 @@
       @touchmove="touchMove"
     >
       <div class="side-drawer-heading" @click="toggleDrawer">
-        <user-card-content :user="currentUser" :switcher="false" :hideBio="true">
+        <user-card-content :user="currentUser" :switcher="false" :hideBio="true" v-if="currentUser">
         </user-card-content>
       </div>
       <ul>

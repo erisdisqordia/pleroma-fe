@@ -290,7 +290,7 @@ const Status = {
       this.showPreview = false
     },
     userProfileLink (id, name) {
-      return generateProfileLink(id, name)
+      return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
     }
   },
   watch: {

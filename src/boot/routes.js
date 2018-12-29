@@ -24,52 +24,28 @@ export default (store) => {
       redirect: _to => {
         return (store.state.users.currentUser
                 ? store.state.instance.redirectRootLogin
-                : store.state.instance.redirectRootNoLogin) || '/~/main/all'
+                : store.state.instance.redirectRootNoLogin) || '/main/all'
       }
     },
-    { name: 'public-external-timeline', path: '/~/main/all', component: PublicAndExternalTimeline },
-    { name: 'public-timeline', path: '/~/main/public', component: PublicTimeline },
-    { name: 'friends', path: '/~/main/friends', component: FriendsTimeline },
-    // Beginning of temporary redirects
-    { path: '/main/:route',
-      redirect: to => {
-        const { params } = to
-        const route = params.route ? params.route : 'all'
-
-        return { path: `/~/main/${route}` }
-      }
-    },
-    { path: '/tag/:tag',
-      redirect: to => {
-        const { params } = to
-
-        return { path: `/~/tag/${params.tag}` }
-      }
-    },
-    { path: '/notice/:id',
-      redirect: to => {
-        const { params } = to
-
-        return { path: `/~/notice/${params.id}` }
-      }
-    },
-    // End of temporary redirects
-    { name: 'tag-timeline', path: '/~/tag/:tag', component: TagTimeline },
-    { name: 'conversation', path: '/~/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
-    { name: 'user-profile', path: '/:name', component: UserProfile },
-    { name: 'external-user-profile', path: '/~/users/:id', component: UserProfile },
-    { name: 'mentions', path: '/:username/mentions', component: Mentions },
-    { name: 'dms', path: '/:username/dms', component: DMs },
-    { name: 'settings', path: '/~/settings', component: Settings },
-    { name: 'registration', path: '/~/registration', component: Registration },
-    { name: 'registration', path: '/~/registration/:token', component: Registration },
-    { name: 'friend-requests', path: '/~/friend-requests', component: FollowRequests },
-    { name: 'user-settings', path: '/~/user-settings', component: UserSettings },
-    { name: 'oauth-callback', path: '/~/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) },
-    { name: 'user-search', path: '/~/user-search', component: UserSearch, props: (route) => ({ query: route.query.query }) },
+    { name: 'public-external-timeline', path: '/main/all', component: PublicAndExternalTimeline },
+    { name: 'public-timeline', path: '/main/public', component: PublicTimeline },
+    { name: 'friends', path: '/main/friends', component: FriendsTimeline },
+    { name: 'tag-timeline', path: '/tag/:tag', component: TagTimeline },
+    { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
+    { name: 'external-user-profile', path: '/users/:id', component: UserProfile },
+    { name: 'mentions', path: '/users/:username/mentions', component: Mentions },
+    { name: 'dms', path: '/users/:username/dms', component: DMs },
+    { name: 'settings', path: '/settings', component: Settings },
+    { name: 'registration', path: '/registration', component: Registration },
+    { name: 'registration', path: '/registration/:token', component: Registration },
+    { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
+    { name: 'user-settings', path: '/user-settings', component: UserSettings },
     { name: 'notifications', path: '/:username/notifications', component: Notifications },
     { name: 'new-status', path: '/:username/new-status', component: UserPanel },
-    { name: 'login', path: '/~/login', component: LoginForm },
-    { name: 'chat', path: '/~/chat', component: ChatPanel, props: () => ({ floating: false }) }
+    { name: 'login', path: '/login', component: LoginForm },
+    { name: 'chat', path: '/chat', component: ChatPanel, props: () => ({ floating: false }) },
+    { name: 'oauth-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) },
+    { name: 'user-search', path: '/user-search', component: UserSearch, props: (route) => ({ query: route.query.query }) },
+    { name: 'user-profile', path: '/(users/)?:name', component: UserProfile }
   ]
 }

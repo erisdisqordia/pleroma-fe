@@ -168,6 +168,8 @@ const afterStoreSetup = ({ store, i18n }) => {
       store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
       store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
 
+      store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
+
       const suggestions = metadata.suggestions
       store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
       store.dispatch('setInstanceOption', { name: 'suggestionsWeb', value: suggestions.web })

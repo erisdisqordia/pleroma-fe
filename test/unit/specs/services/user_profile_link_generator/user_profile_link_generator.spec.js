@@ -12,4 +12,10 @@ describe('generateProfileLink', () => {
       name: 'external-user-profile', params: { id: 1 }
     })
   })
+
+  it('returns obj for restricted user', () => {
+    expect(generateProfileLink(1, 'lain', ['lain'])).to.eql({
+      name: 'external-user-profile', params: { id: 1 }
+    })
+  })
 })

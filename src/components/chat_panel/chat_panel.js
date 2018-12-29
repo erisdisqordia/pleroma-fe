@@ -22,7 +22,7 @@ const chatPanel = {
       this.collapsed = !this.collapsed
     },
     userProfileLink (user) {
-      return generateProfileLink(user.id, user.screen_name)
+      return generateProfileLink(user.id, user.screen_name, this.$store.state.instance.restrictedNicknames)
     }
   }
 }

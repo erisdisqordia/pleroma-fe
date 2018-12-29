@@ -12,8 +12,8 @@ const defaultState = {
   logo: '/static/logo.png',
   logoMask: true,
   logoMargin: '.2em',
-  redirectRootNoLogin: '/~/main/all',
-  redirectRootLogin: '/~/main/friends',
+  redirectRootNoLogin: '/main/all',
+  redirectRootLogin: '/main/friends',
   showInstanceSpecificPanel: false,
   scopeOptionsEnabled: true,
   formattingOptionsEnabled: false,
@@ -33,6 +33,7 @@ const defaultState = {
   pleromaBackend: true,
   emoji: [],
   customEmoji: [],
+  restrictedNicknames: [],
 
   // Feature-set, apparently, not everything here is reported...
   mediaProxyAvailable: false,

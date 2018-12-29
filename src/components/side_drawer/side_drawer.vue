@@ -1,5 +1,7 @@
 <template>
-  <div class="side-drawer-container" :class="{ 'side-drawer-container-closed': closed, 'side-drawer-container-open': !closed }">
+  <div class="side-drawer-container"
+    :class="{ 'side-drawer-container-closed': closed, 'side-drawer-container-open': !closed }"
+  >
     <div class="side-drawer"
       :class="{'side-drawer-closed': closed}"
       @touchstart="touchStart"
@@ -30,9 +32,8 @@
             {{ $t("nav.dms") }}
           </router-link>
         </li>
-        <li>
-          <div class="divider"></div>
-        </li>
+      </ul>
+      <ul>
         <li v-if="currentUser" @click="toggleDrawer">
           <router-link :to="{ name: 'friends' }">
             {{ $t("nav.timeline") }}
@@ -58,9 +59,8 @@
             {{ $t("nav.chat") }}
           </router-link>
         </li>
-        <li>
-          <div class="divider"></div>
-        </li>
+      </ul>
+      <ul>
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'user-search'}">
             {{ $t("nav.user_search") }}
@@ -78,7 +78,10 @@
         </li>
       </ul>
     </div>
-    <div class="side-drawer-click-outside" @click.stop.prevent="toggleDrawer" :class="{'side-drawer-click-outside-closed': closed}"></div>
+    <div class="side-drawer-click-outside"
+      @click.stop.prevent="toggleDrawer"
+      :class="{'side-drawer-click-outside-closed': closed}"
+    ></div>
   </div>
 </template>
 
@@ -114,8 +117,8 @@
 }
 
 .side-drawer {
-  overflow-x: hidden; /* Disable horizontal scroll */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  overflow-x: hidden;
+  transition: 0.5s;
   transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
   margin: 0 0 0 -100px;
   padding: 0 0 1em 100px;
@@ -159,17 +162,19 @@
   list-style: none;
   margin: 0;
   padding: 0;
+
+  border-bottom: 1px solid;
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
+  margin: 0.2em 0;
+}
+
+.side-drawer ul:last-child {
+  border: 0;
 }
 
 .side-drawer li {
   padding: 0;
-
-  .divider {
-    border-top: 1px solid;
-    border-color: $fallback--border;
-    border-color: var(--border, $fallback--border);
-    margin: 0.2em 0;
-  }
 
   a {
     display: block;
@@ -180,9 +185,5 @@
       background-color: var(--lightBg, $fallback--lightBg);
     }
   }
-}
-
-.side-drawer li:last-child {
-  border: none;
 }
 </style>

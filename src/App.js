@@ -70,9 +70,6 @@ export default {
         'background-image': `url(${this.background})`
       }
     },
-    mobileShowOnlyIn () {
-      return view => ({ 'mobile-hidden': this.mobileActivePanel !== view })
-    },
     sitename () { return this.$store.state.instance.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },

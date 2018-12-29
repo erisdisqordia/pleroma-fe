@@ -1,6 +1,7 @@
 import UserCardContent from '../user_card_content/user_card_content.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 
+// TODO: separate touch gesture stuff into their own utils if more components want them
 const deltaCoord = (oldCoord, newCoord) => [newCoord[0] - oldCoord[0], newCoord[1] - oldCoord[1]]
 
 const touchEventCoord = e => ([e.touches[0].screenX, e.touches[0].screenY])

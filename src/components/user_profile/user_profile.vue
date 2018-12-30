@@ -43,7 +43,7 @@
   flex: 2;
   flex-basis: 500px;
 
-  .panel-heading {
+  .profile-panel-background .panel-heading {
     background: transparent;
     flex-direction: column;
     align-items: stretch;

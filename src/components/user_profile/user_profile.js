@@ -6,7 +6,7 @@ const UserProfile = {
   created () {
     this.$store.commit('clearTimeline', { timeline: 'user' })
     this.$store.dispatch('startFetching', ['user', this.fetchBy])
-    if (!this.user) {
+    if (!this.user.id) {
       this.$store.dispatch('fetchUser', this.fetchBy)
     }
   },
@@ -29,14 +29,20 @@ const UserProfile = {
     followers () {
       return this.user.followers
     },
+    userInStore () {
+      if (this.isExternal) {
+        return this.$store.getters.userById(this.userId)
+      }
+      return this.$store.getters.userByName(this.userName)
+    },
     user () {
       if (this.timeline.statuses[0]) {
         return this.timeline.statuses[0].user
-      } else {
-        return Object.values(this.$store.state.users.usersObject).filter(user => {
-          return (this.isExternal ? user.id === this.userId : user.screen_name === this.userName)
-        })[0] || {}
       }
+      if (this.userInStore) {
+        return this.userInStore
+      }
+      return {}
     },
     fetchBy () {
       return this.isExternal ? this.userId : this.userName

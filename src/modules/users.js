@@ -86,6 +86,13 @@ export const mutations = {
   }
 }
 
+export const getters = {
+  userById: state => id =>
+    state.users.find(user => user.id === id),
+  userByName: state => name =>
+    state.users.find(user => user.screen_name === name)
+}
+
 export const defaultState = {
   loggingIn: false,
   lastLoginName: false,
@@ -99,6 +106,7 @@ export const defaultState = {
 const users = {
   state: defaultState,
   mutations,
+  getters,
   actions: {
     fetchUser (store, id) {
       store.rootState.api.backendInteractor.fetchUser({ id })

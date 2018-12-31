@@ -3,7 +3,7 @@ import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 export default {
-  props: [ 'user', 'switcher', 'selected', 'hideBio', 'activatePanel' ],
+  props: [ 'user', 'switcher', 'selected', 'hideBio' ],
   data () {
     return {
       followRequestInProgress: false,

@@ -9,6 +9,7 @@ const userSearch = {
   ],
   data () {
     return {
+      username: '',
       users: []
     }
   },
@@ -21,7 +22,14 @@ const userSearch = {
     }
   },
   methods: {
+    newQuery (query) {
+      this.$router.push({ name: 'user-search', query: { query } })
+    },
     search (query) {
+      if (!query) {
+        this.users = []
+        return
+      }
       userSearchApi.search({query, store: this.$store})
         .then((res) => {
           this.users = res

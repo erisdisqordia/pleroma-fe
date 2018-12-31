@@ -3,14 +3,14 @@
   <div class="panel-heading text-center">
     <div class='user-info'>
       <div class='container'>
-        <router-link @click.native="activatePanel && activatePanel('timeline')" :to="userProfileLink(user)">
+        <router-link :to="userProfileLink(user)">
           <StillImage class="avatar" :class='{ "better-shadow": betterShadow }' :src="user.profile_image_url_original"/>
         </router-link>
         <div class="name-and-screen-name">
           <div class="top-line">
             <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
             <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
-            <router-link @click.native="activatePanel && activatePanel('timeline')" :to="{ name: 'user-settings' }" v-if="!isOtherUser">
+            <router-link :to="{ name: 'user-settings' }" v-if="!isOtherUser">
               <i class="button-icon icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
             </router-link>
             <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser">
@@ -18,7 +18,7 @@
             </a>
           </div>
 
-          <router-link @click.native="activatePanel && activatePanel('timeline')" class='user-screen-name' :to="userProfileLink(user)">
+          <router-link class='user-screen-name' :to="userProfileLink(user)">
             <span class="handle">@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>

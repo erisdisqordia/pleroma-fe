@@ -7,44 +7,42 @@
       </div>
       <div class='inner-nav'>
         <div class='item'>
-          <router-link class="back-button" @click.native="activatePanel('timeline')" :to="{ name: 'root' }" active-class="hidden">
-            <i class="icon-left-open" :title="$t('nav.back')"></i>
-          </router-link>
+          <a href="#" class="menu-button" @click.stop.prevent="toggleMobileSidebar()">
+            <i class="button-icon icon-menu"></i>
+            <div class="alert-dot" v-if="unseenNotificationsCount"></div>
+          </a>
           <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
         </div>
         <div class='item right'>
-          <user-finder class="button-icon nav-icon" @toggled="onFinderToggled"></user-finder>
-          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'settings'}"><i class="button-icon icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
-          <a href="#" v-if="currentUser" @click.prevent="logout"><i class="button-icon icon-logout nav-icon" :title="$t('login.logout')"></i></a>
+          <user-finder class="button-icon nav-icon mobile-hidden" @toggled="onFinderToggled"></user-finder>
+          <router-link class="mobile-hidden" :to="{ name: 'settings'}"><i class="button-icon icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
+          <a href="#" class="mobile-hidden" v-if="currentUser" @click.prevent="logout"><i class="button-icon icon-logout nav-icon" :title="$t('login.logout')"></i></a>
         </div>
       </div>
     </nav>
-    <div class="container" id="content">
-      <div class="panel-switcher">
-        <button @click="activatePanel('sidebar')">Sidebar</button>
-        <button @click="activatePanel('timeline')">Timeline</button>
-      </div>
-      <div class="sidebar-flexer" :class="{ 'mobile-hidden': mobileActivePanel != 'sidebar'}">
+    <div v-if="" class="container" id="content">
+      <side-drawer ref="sideDrawer" :logout="logout"></side-drawer>
+      <div class="sidebar-flexer mobile-hidden">
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">
             <div class="sidebar">
-              <user-panel :activatePanel="activatePanel"></user-panel>
-              <nav-panel :activatePanel="activatePanel"></nav-panel>
+              <user-panel></user-panel>
+              <nav-panel></nav-panel>
               <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
               <features-panel v-if="!currentUser"></features-panel>
               <who-to-follow-panel v-if="currentUser && suggestionsEnabled"></who-to-follow-panel>
-              <notifications :activatePanel="activatePanel" v-if="currentUser"></notifications>
+              <notifications v-if="currentUser"></notifications>
             </div>
           </div>
         </div>
       </div>
-      <div class="main" :class="{ 'mobile-hidden': mobileActivePanel != 'timeline' }">
+      <div class="main">
         <transition name="fade">
           <router-view></router-view>
         </transition>
       </div>
     </div>
-    <chat-panel v-if="currentUser && chat" class="floating-chat mobile-hidden"></chat-panel>
+    <chat-panel :floating="true" v-if="currentUser && chat" class="floating-chat mobile-hidden"></chat-panel>
   </div>
 </template>
 

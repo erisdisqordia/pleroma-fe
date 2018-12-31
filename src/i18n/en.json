@@ -50,6 +50,7 @@
     "repeated_you": "repeated your status"
   },
   "post_status": {
+    "new_status": "Post new status",
     "account_not_locked_warning": "Your account is not {0}. Anyone can follow you to view your follower-only posts.",
     "account_not_locked_warning_link": "locked",
     "attachments_sensitive": "Mark attachments as sensitive",

@@ -1,10 +1,12 @@
 import Notification from '../notification/notification.vue'
 import notificationsFetcher from '../../services/notifications_fetcher/notifications_fetcher.service.js'
-
-import { sortBy, filter } from 'lodash'
+import {
+  notificationsFromStore,
+  visibleNotificationsFromStore,
+  unseenNotificationsFromStore
+} from '../../services/notification_utils/notification_utils.js'
 
 const Notifications = {
-  props: [ 'activatePanel' ],
   created () {
     const store = this.$store
     const credentials = store.state.users.currentUser.credentials
@@ -12,28 +14,17 @@ const Notifications = {
     notificationsFetcher.startFetching({ store, credentials })
   },
   computed: {
-    visibleTypes () {
-      return [
-        this.$store.state.config.notificationVisibility.likes && 'like',
-        this.$store.state.config.notificationVisibility.mentions && 'mention',
-        this.$store.state.config.notificationVisibility.repeats && 'repeat',
-        this.$store.state.config.notificationVisibility.follows && 'follow'
-      ].filter(_ => _)
-    },
     notifications () {
-      return this.$store.state.statuses.notifications.data
+      return notificationsFromStore(this.$store)
     },
     error () {
       return this.$store.state.statuses.notifications.error
     },
     unseenNotifications () {
-      return filter(this.visibleNotifications, ({seen}) => !seen)
+      return unseenNotificationsFromStore(this.$store)
     },
     visibleNotifications () {
-      // Don't know why, but sortBy([seen, -action.id]) doesn't work.
-      let sortedNotifications = sortBy(this.notifications, ({action}) => -action.id)
-      sortedNotifications = sortBy(sortedNotifications, 'seen')
-      return sortedNotifications.filter((notification) => this.visibleTypes.includes(notification.type))
+      return visibleNotificationsFromStore(this.$store)
     },
     unseenCount () {
       return this.unseenNotifications.length

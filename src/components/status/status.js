@@ -21,8 +21,7 @@ const Status = {
     'replies',
     'noReplyLinks',
     'noHeading',
-    'inlineExpanded',
-    'activatePanel'
+    'inlineExpanded'
   ],
   data () {
     return {

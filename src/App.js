@@ -6,6 +6,8 @@ import InstanceSpecificPanel from './components/instance_specific_panel/instance
 import FeaturesPanel from './components/features_panel/features_panel.vue'
 import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_panel.vue'
 import ChatPanel from './components/chat_panel/chat_panel.vue'
+import SideDrawer from './components/side_drawer/side_drawer.vue'
+import { unseenNotificationsFromStore } from './services/notification_utils/notification_utils'
 
 export default {
   name: 'app',
@@ -17,7 +19,8 @@ export default {
     InstanceSpecificPanel,
     FeaturesPanel,
     WhoToFollowPanel,
-    ChatPanel
+    ChatPanel,
+    SideDrawer
   },
   data: () => ({
     mobileActivePanel: 'timeline',
@@ -70,12 +73,15 @@ export default {
     sitename () { return this.$store.state.instance.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
-    showInstanceSpecificPanel () { return this.$store.state.instance.showInstanceSpecificPanel }
+    showInstanceSpecificPanel () { return this.$store.state.instance.showInstanceSpecificPanel },
+    unseenNotifications () {
+      return unseenNotificationsFromStore(this.$store)
+    },
+    unseenNotificationsCount () {
+      return this.unseenNotifications.length
+    }
   },
   methods: {
-    activatePanel (panelName) {
-      this.mobileActivePanel = panelName
-    },
     scrollToTop () {
       window.scrollTo(0, 0)
     },
@@ -85,6 +91,9 @@ export default {
     },
     onFinderToggled (hidden) {
       this.finderHidden = hidden
+    },
+    toggleMobileSidebar () {
+      this.$refs.sideDrawer.toggleDrawer()
     }
   }
 }

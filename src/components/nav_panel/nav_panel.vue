@@ -3,32 +3,32 @@
     <div class="panel panel-default">
       <ul>
         <li v-if='currentUser'>
-          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'friends' }">
+          <router-link :to="{ name: 'friends' }">
             {{ $t("nav.timeline") }}
           </router-link>
         </li>
         <li v-if='currentUser'>
-          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
+          <router-link :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
             {{ $t("nav.mentions") }}
           </router-link>
         </li>
         <li v-if='currentUser'>
-          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
+          <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
             {{ $t("nav.dms") }}
           </router-link>
         </li>
         <li v-if='currentUser && currentUser.locked'>
-          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'friend-requests' }">
+          <router-link :to="{ name: 'friend-requests' }">
             {{ $t("nav.friend_requests") }}
           </router-link>
         </li>
         <li>
-          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'public-timeline' }">
+          <router-link :to="{ name: 'public-timeline' }">
             {{ $t("nav.public_tl") }}
           </router-link>
         </li>
         <li>
-          <router-link @click.native="activatePanel('timeline')" :to="{ name: 'public-external-timeline' }">
+          <router-link :to="{ name: 'public-external-timeline' }">
             {{ $t("nav.twkn") }}
           </router-link>
         </li>

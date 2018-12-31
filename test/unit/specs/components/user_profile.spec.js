@@ -2,6 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import UserProfile from 'src/components/user_profile/user_profile.vue'
 import backendInteractorService from 'src/services/backend_interactor_service/backend_interactor_service.js'
+import { getters } from 'src/modules/users.js'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -10,8 +11,26 @@ const mutations = {
   clearTimeline: () => {}
 }
 
+const testGetters = {
+  userByName: state => getters.userByName(state.users),
+  userById: state => getters.userById(state.users)
+}
+
+const localUser = {
+  id: 100,
+  is_local: true,
+  screen_name: 'testUser'
+}
+
+const extUser = {
+  id: 100,
+  is_local: false,
+  screen_name: 'testUser@test.instance'
+}
+
 const externalProfileStore = new Vuex.Store({
   mutations,
+  getters: testGetters,
   state: {
     api: {
       backendInteractor: backendInteractorService('')
@@ -44,7 +63,7 @@ const externalProfileStore = new Vuex.Store({
           followers: [],
           friends: [],
           viewing: 'statuses',
-          userId: 701,
+          userId: 100,
           flushMarker: 0
         }
       }
@@ -53,58 +72,15 @@ const externalProfileStore = new Vuex.Store({
       currentUser: {
         credentials: ''
       },
-      usersObject: [
-        {
-          background_image: null,
-          cover_photo: 'https://playvicious.social/system/accounts/headers/000/000/001/original/7dae4fc0e8330e83.jpg?1507329206',
-          created_at: 'Mon Dec 18 16:01:35 +0000 2017',
-          default_scope: 'public',
-          description: "Your favorite person's favorite person.",
-          description_html: "<p>Your favorite person's favorite person.</p>",
-          favourites_count: 0,
-          fields: [
-            {
-              name: '✌🏾',
-              value: '<a href="https://thetwelfth.house" rel="me nofollow noopener" target="_blank"><span class="invisible">https://</span><span class="">thetwelfth.house</span><span class="invisible"></span></a>'
-            },
-            {
-              name: '🚧',
-              value: '<a href="https://code.playvicio.us" rel="me nofollow noopener" target="_blank"><span class="invisible">https://</span><span class="">code.playvicio.us</span><span class="invisible"></span></a>'
-            },
-            {
-              name: '❤️',
-              value: '<a href="https://www.patreon.com/Are0h" rel="me nofollow noopener" target="_blank"><span class="invisible">https://www.</span><span class="">patreon.com/Are0h</span><span class="invisible"></span></a>'
-            }
-          ],
-          followers_count: 2,
-          following: false,
-          follows_you: false,
-          friends_count: 0,
-          id: 701,
-          is_local: false,
-          locked: false,
-          name: 'Are0h',
-          name_html: 'Are0h',
-          no_rich_text: false,
-          profile_image_url: 'https://playvicious.social/system/accounts/avatars/000/000/001/original/33e9983bc2d96aeb.png?1520872572',
-          profile_image_url_https: 'https://playvicious.social/system/accounts/avatars/000/000/001/original/33e9983bc2d96aeb.png?1520872572',
-          profile_image_url_original: 'https://playvicious.social/system/accounts/avatars/000/000/001/original/33e9983bc2d96aeb.png?1520872572',
-          profile_image_url_profile_size: 'https://playvicious.social/system/accounts/avatars/000/000/001/original/33e9983bc2d96aeb.png?1520872572',
-          rights: {
-            delete_others_notice: false
-          },
-          screen_name: 'Are0h@playvicious.social',
-          statuses_count: 6727,
-          statusnet_blocking: false,
-          statusnet_profile_url: 'https://playvicious.social/users/Are0h'
-        }
-      ]
+      usersObject: [extUser],
+      users: [extUser]
     }
   }
 })
 
 const localProfileStore = new Vuex.Store({
   mutations,
+  getters: testGetters,
   state: {
     api: {
       backendInteractor: backendInteractorService('')
@@ -137,7 +113,7 @@ const localProfileStore = new Vuex.Store({
           followers: [],
           friends: [],
           viewing: 'statuses',
-          userId: 701,
+          userId: 100,
           flushMarker: 0
         }
       }
@@ -146,52 +122,8 @@ const localProfileStore = new Vuex.Store({
       currentUser: {
         credentials: ''
       },
-      usersObject: [
-        {
-          background_image: null,
-          cover_photo: 'https://playvicious.social/system/accounts/headers/000/000/001/original/7dae4fc0e8330e83.jpg?1507329206',
-          created_at: 'Mon Dec 18 16:01:35 +0000 2017',
-          default_scope: 'public',
-          description: "Your favorite person's favorite person.",
-          description_html: "<p>Your favorite person's favorite person.</p>",
-          favourites_count: 0,
-          fields: [
-            {
-              name: '✌🏾',
-              value: '<a href="https://thetwelfth.house" rel="me nofollow noopener" target="_blank"><span class="invisible">https://</span><span class="">thetwelfth.house</span><span class="invisible"></span></a>'
-            },
-            {
-              name: '🚧',
-              value: '<a href="https://code.playvicio.us" rel="me nofollow noopener" target="_blank"><span class="invisible">https://</span><span class="">code.playvicio.us</span><span class="invisible"></span></a>'
-            },
-            {
-              name: '❤️',
-              value: '<a href="https://www.patreon.com/Are0h" rel="me nofollow noopener" target="_blank"><span class="invisible">https://www.</span><span class="">patreon.com/Are0h</span><span class="invisible"></span></a>'
-            }
-          ],
-          followers_count: 2,
-          following: false,
-          follows_you: false,
-          friends_count: 0,
-          id: 701,
-          is_local: false,
-          locked: false,
-          name: 'Are0h',
-          name_html: 'Are0h',
-          no_rich_text: false,
-          profile_image_url: 'https://playvicious.social/system/accounts/avatars/000/000/001/original/33e9983bc2d96aeb.png?1520872572',
-          profile_image_url_https: 'https://playvicious.social/system/accounts/avatars/000/000/001/original/33e9983bc2d96aeb.png?1520872572',
-          profile_image_url_original: 'https://playvicious.social/system/accounts/avatars/000/000/001/original/33e9983bc2d96aeb.png?1520872572',
-          profile_image_url_profile_size: 'https://playvicious.social/system/accounts/avatars/000/000/001/original/33e9983bc2d96aeb.png?1520872572',
-          rights: {
-            delete_others_notice: false
-          },
-          screen_name: 'Are0h',
-          statuses_count: 6727,
-          statusnet_blocking: false,
-          statusnet_profile_url: 'https://playvicious.social/users/Are0h'
-        }
-      ]
+      usersObject: [localUser],
+      users: [localUser]
     }
   }
 })
@@ -203,14 +135,14 @@ describe('UserProfile', () => {
       store: externalProfileStore,
       mocks: {
         $route: {
-          params: { id: 701 },
+          params: { id: 100 },
           name: 'external-user-profile'
         },
         $t: (msg) => msg
       }
     })
 
-    expect(wrapper.find('.user-screen-name').text()).to.eql('@Are0h@playvicious.social')
+    expect(wrapper.find('.user-screen-name').text()).to.eql('@testUser@test.instance')
   })
 
   it('renders local profile', () => {
@@ -219,13 +151,13 @@ describe('UserProfile', () => {
       store: localProfileStore,
       mocks: {
         $route: {
-          params: { name: 'Are0h' },
+          params: { name: 'testUser' },
           name: 'user-profile'
         },
         $t: (msg) => msg
       }
     })
 
-    expect(wrapper.find('.user-screen-name').text()).to.eql('@Are0h')
+    expect(wrapper.find('.user-screen-name').text()).to.eql('@testUser')
   })
 })

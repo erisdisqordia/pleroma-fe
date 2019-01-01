@@ -6,11 +6,12 @@
 
 # For Translators
 
-To translate Pleroma, add your language to [src/i18n/messages.js](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/src/i18n/messages.js). Pleroma will set your language by your browser locale, but you can temporarily force it in the code by changing the locale in main.js.
+To translate Pleroma-FE, add your language to [src/i18n/messages.js](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/src/i18n/messages.js). Pleroma-FE will set your language by your browser locale, but you can temporarily force it in the code by changing the locale in main.js.
 
 # FOR ADMINS
 
-You don't need to build Pleroma yourself. Check out https://git.pleroma.social/pleroma/pleroma-fe/wikis/dual-boot-with-qvitter to see how to run Pleroma and Qvitter at the same time.
+You don't need to build Pleroma-FE yourself. Those using the Pleroma backend will be able to use it out of the box.
+For the GNU social backend, check out https://git.pleroma.social/pleroma/pleroma-fe/wikis/dual-boot-with-qvitter to see how to run Pleroma-FE and Qvitter at the same time.
 
 ## Build Setup
 

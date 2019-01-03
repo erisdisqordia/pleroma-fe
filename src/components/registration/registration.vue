@@ -76,7 +76,7 @@
             </div>
 
             <div class="form-group" id="captcha-group" v-if="captcha.type != 'none'">
-              <label class='form--label' for='captcha-label'>$t('captcha')</label>
+              <label class='form--label' for='captcha-label'>{{$t('captcha')}}</label>
 
               <template v-if="captcha.type == 'kocaptcha'">
                 <img v-bind:src="captcha.url" v-on:click="setCaptcha">

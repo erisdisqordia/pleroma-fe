@@ -6,7 +6,7 @@
     "chat": "Chat",
     "gopher": "Gopher",
     "media_proxy": "Media Proxy",
-    "scope_options": "Scope options",
+    "scope_options": "Reichweitenoptionen",
     "text_limit": "Textlimit",
     "title": "Features",
     "who_to_follow": "Who to follow"
@@ -29,12 +29,16 @@
     "username": "Benutzername"
   },
   "nav": {
+    "back": "Zurück",
     "chat": "Lokaler Chat",
     "friend_requests": "Followanfragen",
     "mentions": "Erwähnungen",
-    "public_tl": "Lokale Zeitleiste",
+    "dms": "Direktnachrichten",
+    "public_tl": "Öffentliche Zeitleiste",
     "timeline": "Zeitleiste",
-    "twkn": "Das gesamte bekannte Netzwerk"
+    "twkn": "Das gesamte bekannte Netzwerk",
+    "user_search": "Benutzersuche",
+    "preferences": "Voreinstellungen"
   },
   "notifications": {
     "broken_favorite": "Unbekannte Nachricht, suche danach...",
@@ -46,6 +50,7 @@
     "repeated_you": "wiederholte deine Nachricht"
   },
   "post_status": {
+    "new_status": "Neuen Status veröffentlichen",
     "account_not_locked_warning": "Dein Profil ist nicht {0}. Wer dir folgen will, kann das jederzeit tun und dann auch deine privaten Beiträge sehen.",
     "account_not_locked_warning_link": "gesperrt",
     "attachments_sensitive": "Anhänge als heikel markieren",
@@ -69,7 +74,17 @@
     "fullname": "Angezeigter Name",
     "password_confirm": "Passwort bestätigen",
     "registration": "Registrierung",
-    "token": "Einladungsschlüssel"
+    "token": "Einladungsschlüssel",
+    "captcha": "CAPTCHA",
+    "new_captcha": "Zum Erstellen eines neuen Captcha auf das Bild klicken.",
+    "validations": {
+      "username_required": "darf nicht leer sein",
+      "fullname_required": "darf nicht leer sein",
+      "email_required": "darf nicht leer sein",
+      "password_required": "darf nicht leer sein",
+      "password_confirmation_required": "darf nicht leer sein",
+      "password_confirmation_match": "sollte mit dem Passwort identisch sein."
+    }
   },
   "settings": {
     "attachmentRadius": "Anhänge",
@@ -89,6 +104,7 @@
     "change_password_error": "Es gab ein Problem bei der Änderung des Passworts.",
     "changed_password": "Passwort erfolgreich geändert!",
     "collapse_subject": "Beiträge mit Betreff einklappen",
+    "composing": "Verfassen",
     "confirm_new_password": "Neues Passwort bestätigen",
     "current_avatar": "Dein derzeitiger Avatar",
     "current_password": "Aktuelles Passwort",
@@ -112,12 +128,17 @@
     "general": "Allgemein",
     "hide_attachments_in_convo": "Anhänge in Unterhaltungen ausblenden",
     "hide_attachments_in_tl": "Anhänge in der Zeitleiste ausblenden",
+    "hide_isp": "Instanz-spezifisches Panel ausblenden",
+    "preload_images": "Bilder vorausladen",
     "hide_post_stats": "Beitragsstatistiken verbergen (z.B. die Anzahl der Favoriten)",
     "hide_user_stats": "Benutzerstatistiken verbergen (z.B. die Anzahl der Follower)",
     "import_followers_from_a_csv_file": "Importiere Follower, denen du folgen möchtest, aus einer CSV-Datei",
     "import_theme": "Farbschema laden",
     "inputRadius": "Eingabefelder",
+    "checkboxRadius": "Auswahlfelder",
     "instance_default": "(Standard: {value})",
+    "instance_default_simple": "(Standard)",
+    "interface": "Oberfläche",
     "interfaceLanguage": "Sprache der Oberfläche",
     "invalid_theme_imported": "Die ausgewählte Datei ist kein unterstütztes Pleroma-Theme. Keine Änderungen wurden vorgenommen.",
     "limited_availability": "In deinem Browser nicht verfügbar",
@@ -134,6 +155,7 @@
     "notification_visibility_mentions": "Erwähnungen",
     "notification_visibility_repeats": "Wiederholungen",
     "no_rich_text_description": "Rich-Text Formatierungen von allen Beiträgen entfernen",
+    "hide_network_description": "Zeige nicht, wem ich folge und wer mir folgt",
     "nsfw_clickthrough": "Aktiviere ausblendbares Overlay für Anhänge, die als NSFW markiert sind",
     "panelRadius": "Panel",
     "pause_on_unfocused": "Streaming pausieren, wenn das Tab nicht fokussiert ist",
@@ -150,20 +172,139 @@
     "saving_err": "Fehler beim Speichern der Einstellungen",
     "saving_ok": "Einstellungen gespeichert",
     "security_tab": "Sicherheit",
+    "scope_copy": "Reichweite beim Antworten übernehmen (Direktnachrichten werden immer kopiert)",
     "set_new_avatar": "Setze einen neuen Avatar",
     "set_new_profile_background": "Setze einen neuen Hintergrund für dein Profil",
     "set_new_profile_banner": "Setze einen neuen Banner für dein Profil",
     "settings": "Einstellungen",
+    "subject_input_always_show": "Betreff-Feld immer anzeigen",
+    "subject_line_behavior": "Betreff beim Antworten kopieren",
+    "subject_line_email": "Wie Email: \"re: Betreff\"",
+    "subject_line_mastodon": "Wie Mastodon: unverändert kopieren",
+    "subject_line_noop": "Nicht kopieren",
     "stop_gifs": "Play-on-hover GIFs",
     "streaming": "Aktiviere automatisches Laden (Streaming) von neuen Beiträgen",
     "text": "Text",
     "theme": "Farbschema",
     "theme_help": "Benutze HTML-Farbcodes (#rrggbb) um dein Farbschema anzupassen",
+    "theme_help_v2_1": "Du kannst auch die Farben und die Deckkraft bestimmter Komponenten überschreiben, indem du das Kontrollkästchen umschaltest. Verwende die Schaltfläche \"Alle löschen\", um alle Überschreibungen zurückzusetzen.",
+    "theme_help_v2_2": "Unter einigen Einträgen befinden sich Symbole für Hintergrund-/Textkontrastindikatoren, für detaillierte Informationen fahre mit der Maus darüber. Bitte beachte, dass bei der Verwendung von Transparenz Kontrastindikatoren den schlechtest möglichen Fall darstellen.",
     "tooltipRadius": "Tooltips/Warnungen",
     "user_settings": "Benutzereinstellungen",
     "values": {
       "false": "nein",
       "true": "Ja"
+    },
+    "notifications": "Benachrichtigungen",
+    "enable_web_push_notifications": "Web-Pushbenachrichtigungen aktivieren",
+        "style": {
+      "switcher": {
+        "keep_color": "Farben beibehalten",
+        "keep_shadows": "Schatten beibehalten",
+        "keep_opacity": "Deckkraft beibehalten",
+        "keep_roundness": "Abrundungen beibehalten",
+        "keep_fonts": "Schriften beibehalten",
+        "save_load_hint": "Die \"Beibehalten\"-Optionen behalten die aktuell eingestellten Optionen beim Auswählen oder Laden von Designs bei, sie speichern diese Optionen auch beim Exportieren eines Designs. Wenn alle Kontrollkästchen deaktiviert sind, wird beim Exportieren des Designs alles gespeichert.",
+        "reset": "Zurücksetzen",
+        "clear_all": "Alles leeren",
+        "clear_opacity": "Deckkraft leeren"
+      },
+      "common": {
+        "color": "Farbe",
+        "opacity": "Deckkraft",
+        "contrast": {
+          "hint": "Das Kontrastverhältnis ist {ratio}, es {level} {context}",
+          "level": {
+            "aa": "entspricht Level AA Richtlinie (minimum)",
+            "aaa": "entspricht Level AAA Richtlinie (empfohlen)",
+            "bad": "entspricht keiner Richtlinien zur Barrierefreiheit"
+          },
+          "context": {
+            "18pt": "für großen (18pt+) Text",
+            "text": "für Text"
+          }
+        }
+      },
+      "common_colors": {
+        "_tab_label": "Allgemein",
+        "main": "Allgemeine Farben",
+        "foreground_hint": "Siehe Reiter \"Erweitert\" für eine detailliertere Einstellungen",
+        "rgbo": "Symbole, Betonungen, Kennzeichnungen"
+      },
+      "advanced_colors": {
+        "_tab_label": "Erweitert",
+        "alert": "Warnhinweis-Hintergrund",
+        "alert_error": "Fehler",
+        "badge": "Kennzeichnungs-Hintergrund",
+        "badge_notification": "Benachrichtigung",
+        "panel_header": "Panel-Kopf",
+        "top_bar": "Obere Leiste",
+        "borders": "Rahmen",
+        "buttons": "Schaltflächen",
+        "inputs": "Eingabefelder",
+        "faint_text": "Verblasster Text"
+      },
+      "radii": {
+        "_tab_label": "Abrundungen"
+      },
+      "shadows": {
+        "_tab_label": "Schatten und Beleuchtung",
+        "component": "Komponente",
+        "override": "Überschreiben",
+        "shadow_id": "Schatten #{value}",
+        "blur": "Unschärfe",
+        "spread": "Streuung",
+        "inset": "Einsatz",
+        "hint": "Für Schatten kannst du auch --variable als Farbwert verwenden, um CSS3-Variablen zu verwenden. Bitte beachte, dass die Einstellung der Deckkraft in diesem Fall nicht funktioniert.",
+        "filter_hint": {
+          "always_drop_shadow": "Achtung, dieser Schatten verwendet immer {0}, wenn der Browser dies unterstützt.",
+          "drop_shadow_syntax": "{0} unterstützt Parameter {1} und Schlüsselwort {2} nicht.",
+          "avatar_inset": "Bitte beachte, dass die Kombination von eingesetzten und nicht eingesetzten Schatten auf Avataren zu unerwarteten Ergebnissen bei transparenten Avataren führen kann.",
+          "spread_zero": "Schatten mit einer Streuung > 0 erscheinen so, als ob sie auf Null gesetzt wären.",
+          "inset_classic": "Eingesetzte Schatten werden mit {0} verwendet"
+        },
+        "components": {
+          "panel": "Panel",
+          "panelHeader": "Panel-Kopf",
+          "topBar": "Obere Leiste",
+          "avatar": "Benutzer-Avatar (in der Profilansicht)",
+          "avatarStatus": "Benutzer-Avatar (in der Beitragsanzeige)",
+          "popup": "Dialogfenster und Hinweistexte",
+          "button": "Schaltfläche",
+          "buttonHover": "Schaltfläche (hover)",
+          "buttonPressed": "Schaltfläche (gedrückt)",
+          "buttonPressedHover": "Schaltfläche (gedrückt+hover)",
+          "input": "Input field"
+        }
+      },
+      "fonts": {
+        "_tab_label": "Schriften",
+        "help": "Wähl die Schriftart, die für Elemente der Benutzeroberfläche verwendet werden soll. Für \" Benutzerdefiniert\" musst du den genauen Schriftnamen eingeben, wie er im System angezeigt wird.",
+        "components": {
+          "interface": "Oberfläche",
+          "input": "Eingabefelder",
+          "post": "Beitragstext",
+          "postCode": "Dicktengleicher Text in einem Beitrag (Rich-Text)"
+        },
+        "family": "Schriftname",
+        "size": "Größe (in px)",
+        "weight": "Gewicht (Dicke)",
+        "custom": "Benutzerdefiniert"
+      },
+      "preview": {
+        "header": "Vorschau",
+        "content": "Inhalt",
+        "error": "Beispielfehler",
+        "button": "Schaltfläche",
+        "text": "Ein Haufen mehr von {0} und {1}",
+        "mono": "Inhalt",
+        "input": "Sitze gerade im Hofbräuhaus.",
+        "faint_link": "Hilfreiche Anleitung",
+        "fine_print": "Lies unser {0}, um nichts Nützliches zu lernen!",
+        "header_faint": "Das ist in Ordnung",
+        "checkbox": "Ich habe die Allgemeinen Geschäftsbedingungen überflogen",
+        "link": "ein netter kleiner Link"
+      }
     }
   },
   "timeline": {
@@ -182,10 +323,15 @@
     "blocked": "Blockiert!",
     "deny": "Ablehnen",
     "follow": "Folgen",
+    "follow_sent": "Anfrage gesendet!",
+    "follow_progress": "Anfragen…",
+    "follow_again": "Anfrage erneut senden?",
+    "follow_unfollow": "Folgen beenden",
     "followees": "Folgt",
     "followers": "Followers",
     "following": "Folgst du!",
     "follows_you": "Folgt dir!",
+    "its_you": "Das bist du!",
     "mute": "Stummschalten",
     "muted": "Stummgeschaltet",
     "per_day": "pro Tag",
@@ -198,5 +344,26 @@
   "who_to_follow": {
     "more": "Mehr",
     "who_to_follow": "Wem soll ich folgen"
+  },
+  "tool_tip": {
+    "media_upload": "Medien hochladen",
+    "repeat": "Wiederholen",
+    "reply": "Antworten",
+    "favorite": "Favorisieren",
+    "user_settings": "Benutzereinstellungen"
+  },
+  "upload":{
+    "error": {
+    "base": "Hochladen fehlgeschlagen.",
+    "file_too_big": "Datei ist zu groß [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+    "default": "Bitte versuche es später erneut"
+    },
+    "file_size_units": {
+      "B": "B",
+      "KiB": "KiB",
+      "MiB": "MiB",
+      "GiB": "GiB",
+      "TiB": "TiB"
+    }
   }
 }

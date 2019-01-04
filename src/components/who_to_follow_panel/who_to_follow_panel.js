@@ -1,10 +1,12 @@
 import apiService from '../../services/api/api.service.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+import _ from 'lodash'
 
 function showWhoToFollow (panel, reply) {
+  _.shuffle(reply)
+
   panel.usersToFollow.forEach((toFollow, index) => {
-    let randIndex = Math.floor(Math.random() * reply.length)
-    let user = reply[randIndex]
+    let user = reply[index]
     let img = user.avatar || '/images/avi.png'
     let name = user.acct
 

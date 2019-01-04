@@ -7,15 +7,13 @@
         </div>
       </div>
       <div class="panel-body who-to-follow">
-        <p>
-          <span v-for="user in usersToFollow">
-	      <img v-bind:src="user.img" />
-              <router-link v-bind:to="userProfileLink(user.id, user.name)">
-                {{user.name}}
-              </router-link><br />
-          </span>
-          <img v-bind:src="$store.state.instance.logo"> <a v-bind:href="moreUrl" target="_blank">{{$t('who_to_follow.more')}}</a>
-        </p>
+        <span v-for="user in usersToFollow">
+          <img v-bind:src="user.img" />
+            <router-link v-bind:to="userProfileLink(user.id, user.name)">
+              {{user.name}}
+            </router-link><br />
+        </span>
+        <img v-bind:src="$store.state.instance.logo"> <a v-bind:href="moreUrl" target="_blank">{{$t('who_to_follow.more')}}</a>
       </div>
     </div>
   </div>
@@ -31,7 +29,9 @@
     width: 32px;
     height: 32px;
   }
-  .who-to-follow p {
+  .who-to-follow {
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 0px;
     line-height: 40px;
     white-space: nowrap;
     overflow: hidden;

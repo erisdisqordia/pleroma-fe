@@ -16,6 +16,7 @@ import Notifications from 'components/notifications/notifications.vue'
 import UserPanel from 'components/user_panel/user_panel.vue'
 import LoginForm from 'components/login_form/login_form.vue'
 import ChatPanel from 'components/chat_panel/chat_panel.vue'
+import About from 'components/about/about.vue'
 
 export default (store) => {
   return [
@@ -46,6 +47,7 @@ export default (store) => {
     { name: 'chat', path: '/chat', component: ChatPanel, props: () => ({ floating: false }) },
     { name: 'oauth-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) },
     { name: 'user-search', path: '/user-search', component: UserSearch, props: (route) => ({ query: route.query.query }) },
+    { name: 'about', path: '/about', component: About },
     { name: 'user-profile', path: '/(users/)?:name', component: UserProfile }
   ]
 }

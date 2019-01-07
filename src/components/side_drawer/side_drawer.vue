@@ -71,6 +71,11 @@
             {{ $t("settings.settings") }}
           </router-link>
         </li>
+        <li @click="toggleDrawer">
+          <router-link :to="{ name: 'about'}">
+            {{ $t("nav.about") }}
+          </router-link>
+        </li>
         <li v-if="currentUser" @click="toggleDrawer">
           <a @click="doLogout" href="#">
             {{ $t("login.logout") }}

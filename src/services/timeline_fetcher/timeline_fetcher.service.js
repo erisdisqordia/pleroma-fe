@@ -31,7 +31,7 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
 
   return apiService.fetchTimeline(args)
     .then((statuses) => {
-      if (!older && statuses.length >= 20 && !timelineData.loading) {
+      if (!older && statuses.length >= 20 && !timelineData.loading && timelineData.statuses.length) {
         store.dispatch('queueFlush', { timeline: timeline, id: timelineData.maxId })
       }
       update({store, statuses, timeline, showImmediately, userId})

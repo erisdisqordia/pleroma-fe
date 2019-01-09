@@ -142,7 +142,7 @@
   border-bottom-right-radius: 0;
 
   .panel-heading {
-    padding: .6em 0;
+    padding: .5em 0;
     text-align: center;
     box-shadow: none;
   }
@@ -226,10 +226,11 @@
     }
   }
 
-  .user-name{
+  .user-name {
     text-overflow: ellipsis;
     overflow: hidden;
-    flex: 1 0 auto;
+    flex: 1 1 auto;
+    margin-right: 1em;
   }
 
   .user-screen-name {
@@ -245,6 +246,10 @@
     .dailyAvg {
       min-width: 1px;
       flex: 0 0 auto;
+      margin-left: 1em;
+      font-size: 0.7em;
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
     }
 
     .handle {
@@ -381,11 +386,6 @@
   }
 }
 
-.dailyAvg {
-  margin-left: 1em;
-  font-size: 0.7em;
-  color: #CCC;
-}
 .floater {
 }
 </style>

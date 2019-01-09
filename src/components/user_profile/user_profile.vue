@@ -3,7 +3,7 @@
   <div v-if="user.id" class="user-profile panel panel-default">
     <user-card-content :user="user" :switcher="true" :selected="timeline.viewing"></user-card-content>
     <tab-switcher>
-      <Timeline :label="$t('user_card.statuses')" :embedded="true" :title="$t('user_profile.timeline_title')" :timeline="timeline" :timeline-name="'user'" :user-id="userId"/>
+      <Timeline :label="$t('user_card.statuses')" :embedded="true" :title="$t('user_profile.timeline_title')" :timeline="timeline" :timeline-name="'user'" :user-id="fetchBy"/>
       <div :label="$t('user_card.followees')">
         <div v-if="friends">
           <user-card v-for="friend in friends" :key="friend.id" :user="friend" :showFollows="true"></user-card>

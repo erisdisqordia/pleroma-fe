@@ -153,6 +153,10 @@
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%);
 
+  /* This fixes chrome's pixel rounding glitch */
+  margin-bottom: -1px;
+  padding-bottom: 1px;
+
   .profile-bio {
     text-align: center;
   }
@@ -226,10 +230,11 @@
     }
   }
 
-  .user-name{
+  .user-name {
     text-overflow: ellipsis;
     overflow: hidden;
-    flex: 1 0 auto;
+    flex: 1 1 auto;
+    margin-right: 1em;
   }
 
   .user-screen-name {
@@ -245,6 +250,10 @@
     .dailyAvg {
       min-width: 1px;
       flex: 0 0 auto;
+      margin-left: 1em;
+      font-size: 0.7em;
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
     }
 
     .handle {
@@ -381,11 +390,6 @@
   }
 }
 
-.dailyAvg {
-  margin-left: 1em;
-  font-size: 0.7em;
-  color: #CCC;
-}
 .floater {
 }
 </style>

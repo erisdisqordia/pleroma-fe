@@ -142,7 +142,7 @@
   border-bottom-right-radius: 0;
 
   .panel-heading {
-    padding: .6em 0;
+    padding: .5em 0;
     text-align: center;
     box-shadow: none;
   }
@@ -152,10 +152,6 @@
   word-wrap: break-word;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%);
-
-  /* This fixes chrome's pixel rounding glitch */
-  margin-bottom: -1px;
-  padding-bottom: 1px;
 
   .profile-bio {
     text-align: center;

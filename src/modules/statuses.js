@@ -1,4 +1,4 @@
-import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
+import { includes, remove, slice, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -122,9 +122,11 @@ const mergeOrAdd = (arr, obj, item) => {
   }
 }
 
+const sortById = (a, b) => a.id > b.id ? -1 : 1
+
 const sortTimeline = (timeline) => {
-  timeline.visibleStatuses = sortBy(timeline.visibleStatuses, ({id}) => -id)
-  timeline.statuses = sortBy(timeline.statuses, ({id}) => -id)
+  timeline.visibleStatuses = timeline.visibleStatuses.sort(sortById)
+  timeline.statuses = timeline.statuses.sort(sortById)
   timeline.minVisibleId = (last(timeline.visibleStatuses) || {}).id
   return timeline
 }
@@ -200,7 +202,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const favoriteStatus = (favorite, counter) => {
-    const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
+    const status = find(allStatuses, { id: String(favorite.in_reply_to_status_id) })
     if (status) {
       // This is our favorite, so the relevant bit.
       if (favorite.user.id === user.id) {

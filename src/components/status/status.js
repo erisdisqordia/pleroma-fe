@@ -270,7 +270,7 @@ const Status = {
     },
     replyEnter (id, event) {
       this.showPreview = true
-      const targetId = Number(id)
+      const targetId = String(id)
       const statuses = this.$store.state.statuses.allStatuses
 
       if (!this.preview) {
@@ -295,7 +295,7 @@ const Status = {
   },
   watch: {
     'highlight': function (id) {
-      id = Number(id)
+      id = String(id)
       if (this.status.id === id) {
         let rect = this.$el.getBoundingClientRect()
         if (rect.top < 100) {

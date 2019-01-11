@@ -1,4 +1,4 @@
-import { includes, remove, slice, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
+import { includes, remove, slice, each, find, maxBy, minBy, merge, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 

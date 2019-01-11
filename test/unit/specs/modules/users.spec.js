@@ -6,8 +6,8 @@ describe('The users module', () => {
   describe('mutations', () => {
     it('adds new users to the set, merging in new information for old users', () => {
       const state = cloneDeep(defaultState)
-      const user = { id: 1, name: 'Guy' }
-      const modUser = { id: 1, name: 'Dude' }
+      const user = { id: '1', name: 'Guy' }
+      const modUser = { id: '1', name: 'Dude' }
 
       mutations.addNewUsers(state, [user])
       expect(state.users).to.have.length(1)
@@ -21,7 +21,7 @@ describe('The users module', () => {
 
     it('sets a mute bit on users', () => {
       const state = cloneDeep(defaultState)
-      const user = { id: 1, name: 'Guy' }
+      const user = { id: '1', name: 'Guy' }
 
       mutations.addNewUsers(state, [user])
       mutations.setMuted(state, {user, muted: true})
@@ -38,11 +38,11 @@ describe('The users module', () => {
     it('returns user with matching screen_name', () => {
       const state = {
         users: [
-          { screen_name: 'Guy', id: 1 }
+          { screen_name: 'Guy', id: '1' }
         ]
       }
       const name = 'Guy'
-      const expected = { screen_name: 'Guy', id: 1 }
+      const expected = { screen_name: 'Guy', id: '1' }
       expect(getters.userByName(state)(name)).to.eql(expected)
     })
   })
@@ -51,11 +51,11 @@ describe('The users module', () => {
     it('returns user with matching id', () => {
       const state = {
         users: [
-          { screen_name: 'Guy', id: 1 }
+          { screen_name: 'Guy', id: '1' }
         ]
       }
-      const id = 1
-      const expected = { screen_name: 'Guy', id: 1 }
+      const id = '1'
+      const expected = { screen_name: 'Guy', id: '1' }
       expect(getters.userById(state)(id)).to.eql(expected)
     })
   })

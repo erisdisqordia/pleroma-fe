@@ -100,10 +100,6 @@ export const statusType = (status) => {
   return 'unknown'
 }
 
-export const findMaxId = (...args) => {
-  return (maxBy(flatten(args), 'id') || {}).id
-}
-
 const mergeOrAdd = (arr, obj, item) => {
   // For sequential IDs BE passes numbers as numbers, we want them as strings.
   item.id = String(item.id)

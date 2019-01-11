@@ -105,6 +105,9 @@ export const findMaxId = (...args) => {
 }
 
 const mergeOrAdd = (arr, obj, item) => {
+  // For sequential IDs BE passes numbers as numbers, we want them as strings.
+  item.id = String(item.id)
+
   const oldItem = obj[item.id]
 
   if (oldItem) {
@@ -292,8 +295,13 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
   each(notifications, (notification) => {
     const result = mergeOrAdd(allStatuses, allStatusesObject, notification.notice)
     const action = result.item
+    // For sequential IDs BE passes numbers as numbers, we want them as strings.
+    action.id = String(action.id)
+
     // Only add a new notification if we don't have one for the same action
+    // TODO: this technically works but should be checking for notification.id, not action.id i think
     if (!find(state.notifications.data, (oldNotification) => oldNotification.action.id === action.id)) {
+      // TODO: adapt to "what if notification ids are not actually numbers"
       state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)
       state.notifications.minId = Math.min(notification.id, state.notifications.minId)
 

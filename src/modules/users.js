@@ -7,6 +7,9 @@ import { humanizeErrors } from './errors'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
+  // For sequential IDs BE passes numbers as numbers, we want them as strings.
+  item.id = String(item.id)
+
   if (!item) { return false }
   const oldItem = obj[item.id]
   if (oldItem) {
@@ -64,10 +67,10 @@ export const mutations = {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
   setUserForStatus (state, status) {
-    status.user = state.usersObject[status.user.id]
+    status.user = state.usersObject[String(status.user.id)]
   },
   setUserForNotification (state, notification) {
-    notification.action.user = state.usersObject[notification.action.user.id]
+    notification.action.user = state.usersObject[String(notification.action.user.id)]
   },
   setColor (state, { user: { id }, highlighted }) {
     const user = state.usersObject[id]

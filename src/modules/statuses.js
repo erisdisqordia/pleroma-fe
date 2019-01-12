@@ -2,7 +2,7 @@ import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy,
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
-const emptyTl = () => ({
+export const emptyTl = (tl) => (Object.assign(tl, {
   statuses: [],
   statusesObject: {},
   faves: [],
@@ -16,7 +16,7 @@ const emptyTl = () => ({
   friends: [],
   userId: 0,
   flushMarker: 0
-})
+}))
 
 export const defaultState = {
   allStatuses: [],
@@ -33,13 +33,13 @@ export const defaultState = {
   favorites: new Set(),
   error: false,
   timelines: {
-    mentions: emptyTl(),
-    public: emptyTl(),
-    user: emptyTl(),
-    publicAndExternal: emptyTl(),
-    friends: emptyTl(),
-    tag: emptyTl(),
-    dms: emptyTl()
+    mentions: emptyTl({ type: 'mentions' }),
+    public: emptyTl({ type: 'public' }),
+    user: emptyTl({ type: 'user' }), // TODO: switch to unregistered
+    publicAndExternal: emptyTl({ type: 'publicAndExternal' }),
+    friends: emptyTl({ type: 'friends' }),
+    tag: emptyTl({ type: 'tag' }),
+    dms: emptyTl({ type: 'dms' })
   }
 }
 
@@ -137,7 +137,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
   const allStatuses = state.allStatuses
   const allStatusesObject = state.allStatusesObject
-  const timelineObject = state.timelines[timeline]
+  const timelineObject = typeof timeline === 'object' ? timeline : state.timelines[timeline]
 
   const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
   const older = timeline && maxNew < timelineObject.maxId
@@ -337,7 +337,7 @@ export const mutations = {
   addNewStatuses,
   addNewNotifications,
   showNewStatuses (state, { timeline }) {
-    const oldTimeline = (state.timelines[timeline])
+    const oldTimeline = (typeof timeline === 'object' ? timeline : state.timelines[timeline])
 
     oldTimeline.newStatusCount = 0
     oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
@@ -346,7 +346,8 @@ export const mutations = {
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
   clearTimeline (state, { timeline }) {
-    state.timelines[timeline] = emptyTl()
+    const timelineObject = typeof timeline === 'object' ? timeline : state.timelines[timeline]
+    emptyTl(timelineObject)
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
@@ -366,7 +367,8 @@ export const mutations = {
     newStatus.deleted = true
   },
   setLoading (state, { timeline, value }) {
-    state.timelines[timeline].loading = value
+    const timelineObject = typeof timeline === 'object' ? timeline : state.timelines[timeline]
+    timelineObject.loading = value
   },
   setNsfw (state, { id, nsfw }) {
     const newStatus = state.allStatusesObject[id]
@@ -387,7 +389,8 @@ export const mutations = {
     })
   },
   queueFlush (state, { timeline, id }) {
-    state.timelines[timeline].flushMarker = id
+    const timelineObject = typeof timeline === 'object' ? timeline : state.timelines[timeline]
+    timelineObject.flushMarker = id
   }
 }
 

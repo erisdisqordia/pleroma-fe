@@ -41,6 +41,8 @@ const APPROVE_USER_URL = '/api/pleroma/friendships/approve'
 const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
+const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+
 import { each, map } from 'lodash'
 import 'whatwg-fetch'
 
@@ -300,10 +302,11 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
     user: QVITTER_USER_TIMELINE_URL,
+    favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: TAG_TIMELINE_URL
   }
 
-  let url = timelineUrls[timeline]
+  let url = timelineUrls[timeline.type || timeline]
 
   let params = []
 

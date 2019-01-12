@@ -7,7 +7,6 @@ import { throttle } from 'lodash'
 const Timeline = {
   props: [
     'timeline',
-    'timelineName',
     'title',
     'userId',
     'tag',
@@ -55,7 +54,7 @@ const Timeline = {
     timelineFetcher.fetchAndUpdate({
       store,
       credentials,
-      timeline: this.timelineName,
+      timeline: this.timeline,
       showImmediately,
       userId: this.userId,
       tag: this.tag
@@ -70,32 +69,32 @@ const Timeline = {
   destroyed () {
     window.removeEventListener('scroll', this.scrollLoad)
     if (typeof document.hidden !== 'undefined') document.removeEventListener('visibilitychange', this.handleVisibilityChange, false)
-    this.$store.commit('setLoading', { timeline: this.timelineName, value: false })
+    this.$store.commit('setLoading', { timeline: this.timeline, value: false })
   },
   methods: {
     showNewStatuses () {
       if (this.timeline.flushMarker !== 0) {
-        this.$store.commit('clearTimeline', { timeline: this.timelineName })
-        this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
+        this.$store.commit('clearTimeline', { timeline: this.timeline })
+        this.$store.commit('queueFlush', { timeline: this.timeline, id: 0 })
         this.fetchOlderStatuses()
       } else {
-        this.$store.commit('showNewStatuses', { timeline: this.timelineName })
+        this.$store.commit('showNewStatuses', { timeline: this.timeline })
         this.paused = false
       }
     },
     fetchOlderStatuses: throttle(function () {
       const store = this.$store
       const credentials = store.state.users.currentUser.credentials
-      store.commit('setLoading', { timeline: this.timelineName, value: true })
+      store.commit('setLoading', { timeline: this.timeline, value: true })
       timelineFetcher.fetchAndUpdate({
         store,
         credentials,
-        timeline: this.timelineName,
+        timeline: this.timeline,
         older: true,
         showImmediately: true,
         userId: this.userId,
         tag: this.tag
-      }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
+      }).then(() => store.commit('setLoading', { timeline: this.timeline, value: false }))
     }, 1000, this),
     scrollLoad (e) {
       const bodyBRect = document.body.getBoundingClientRect()

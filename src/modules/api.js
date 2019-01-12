@@ -5,7 +5,7 @@ import { Socket } from 'phoenix'
 const api = {
   state: {
     backendInteractor: backendInteractorService(),
-    fetchers: {},
+    fetchers: new Map(),
     socket: null,
     chatDisabled: false,
     followRequests: []
@@ -15,10 +15,10 @@ const api = {
       state.backendInteractor = backendInteractor
     },
     addFetcher (state, {timeline, fetcher}) {
-      state.fetchers[timeline] = fetcher
+      state.fetchers.set(timeline, fetcher)
     },
     removeFetcher (state, {timeline}) {
-      delete state.fetchers[timeline]
+      delete state.fetchers.delete(timeline)
     },
     setSocket (state, socket) {
       state.socket = socket
@@ -41,13 +41,13 @@ const api = {
       }
 
       // Don't start fetching if we already are.
-      if (!store.state.fetchers[timeline]) {
+      if (!store.state.fetchers.has(timeline)) {
         const fetcher = store.state.backendInteractor.startFetching({timeline, store, userId})
         store.commit('addFetcher', {timeline, fetcher})
       }
     },
     stopFetching (store, timeline) {
-      const fetcher = store.state.fetchers[timeline]
+      const fetcher = store.state.fetchers.get(timeline)
       window.clearInterval(fetcher)
       store.commit('removeFetcher', {timeline})
     },

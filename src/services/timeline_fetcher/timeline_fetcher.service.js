@@ -3,7 +3,7 @@ import { camelCase } from 'lodash'
 import apiService from '../api/api.service.js'
 
 const update = ({store, statuses, timeline, showImmediately, userId}) => {
-  const ccTimeline = camelCase(timeline)
+  const ccTimeline = typeof timeline === 'object' ? timeline : camelCase(timeline)
 
   store.dispatch('setError', { value: false })
 
@@ -18,7 +18,7 @@ const update = ({store, statuses, timeline, showImmediately, userId}) => {
 const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false, showImmediately = false, userId = false, tag = false, until}) => {
   const args = { timeline, credentials }
   const rootState = store.rootState || store.state
-  const timelineData = rootState.statuses.timelines[camelCase(timeline)]
+  const timelineData = typeof timeline === 'object' ? timeline : rootState.statuses.timelines[camelCase(timeline)]
 
   if (older) {
     args['until'] = until || timelineData.minVisibleId

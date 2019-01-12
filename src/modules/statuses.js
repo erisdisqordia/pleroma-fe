@@ -1,4 +1,4 @@
-import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
+import { remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -43,20 +43,7 @@ export const defaultState = {
   }
 }
 
-const isNsfw = (status) => {
-  const nsfwRegex = /#nsfw/i
-  return includes(status.tags, 'nsfw') || !!status.text.match(nsfwRegex)
-}
-
 export const prepareStatus = (status) => {
-  // Parse nsfw tags
-  if (status.nsfw === undefined) {
-    status.nsfw = isNsfw(status)
-    if (status.retweeted_status) {
-      status.nsfw = status.retweeted_status.nsfw
-    }
-  }
-
   // Set deleted flag
   status.deleted = false
 
@@ -73,31 +60,6 @@ const visibleNotificationTypes = (rootState) => {
     rootState.config.notificationVisibility.repeats && 'repeat',
     rootState.config.notificationVisibility.follows && 'follow'
   ].filter(_ => _)
-}
-
-export const statusType = (status) => {
-  if (status.is_post_verb) {
-    return 'status'
-  }
-
-  if (status.retweeted_status) {
-    return 'retweet'
-  }
-
-  if ((typeof status.uri === 'string' && status.uri.match(/(fave|objectType=Favourite)/)) ||
-      (typeof status.text === 'string' && status.text.match(/favorited/))) {
-    return 'favorite'
-  }
-
-  if (status.text.match(/deleted notice {{tag/) || status.qvitter_delete_notice) {
-    return 'deletion'
-  }
-
-  if (status.text.match(/started following/) || status.activity_type === 'follow') {
-    return 'follow'
-  }
-
-  return 'unknown'
 }
 
 export const findMaxId = (...args) => {
@@ -153,13 +115,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     return
   }
 
-  const addStatus = (status, showImmediately, addToTimeline = true) => {
-    const result = mergeOrAdd(allStatuses, allStatusesObject, status)
-    status = result.item
+  const addStatus = (data, showImmediately, addToTimeline = true) => {
+    const result = mergeOrAdd(allStatuses, allStatusesObject, data)
+    const status = result.item
 
     if (result.new) {
       // We are mentioned in a post
-      if (statusType(status) === 'status' && find(status.attentions, { id: user.id })) {
+      if (status.type === 'status' && find(status.attentions, { id: user.id })) {
         const mentions = state.timelines.mentions
 
         // Add the mention to the mentions timeline
@@ -270,7 +232,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   each(statuses, (status) => {
-    const type = statusType(status)
+    const type = status.type
     const processor = processors[type] || processors['default']
     processor(status)
   })

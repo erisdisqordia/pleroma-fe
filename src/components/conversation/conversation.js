@@ -1,9 +1,8 @@
 import { reduce, filter, sortBy } from 'lodash'
-import { statusType } from '../../modules/statuses.js'
 import Status from '../status/status.vue'
 
 const sortAndFilterConversation = (conversation) => {
-  conversation = filter(conversation, (status) => statusType(status) !== 'retweet')
+  conversation = filter(conversation, (status) => status.type !== 'retweet')
   return sortBy(conversation, 'id')
 }
 
@@ -18,10 +17,12 @@ const conversation = {
     'collapsable'
   ],
   computed: {
-    status () { return this.statusoid },
+    status () {
+      return this.statusoid
+    },
     conversation () {
       if (!this.status) {
-        return false
+        return []
       }
 
       const conversationId = this.status.statusnet_conversation_id

@@ -44,6 +44,7 @@ const SUGGESTIONS_URL = '/api/v1/suggestions'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 
 import { each, map } from 'lodash'
+import { parseStatus } from '../status_normalizer/status_normalizer.service.js'
 import 'whatwg-fetch'
 
 const oldfetch = window.fetch
@@ -272,12 +273,14 @@ const fetchConversation = ({id, credentials}) => {
   let url = `${CONVERSATION_URL}/${id}.json?count=100`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => data.map(parseStatus))
 }
 
 const fetchStatus = ({id, credentials}) => {
   let url = `${STATUS_URL}/${id}.json`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => parseStatus(data))
 }
 
 const setUserMute = ({id, credentials, muted = true}) => {
@@ -296,99 +299,6 @@ const setUserMute = ({id, credentials, muted = true}) => {
   })
 }
 
-export const statusType = (status) => {
-  if (status.is_post_verb) {
-    return 'status'
-  }
-
-  if (status.retweeted_status) {
-    return 'retweet'
-  }
-
-  if ((typeof status.uri === 'string' && status.uri.match(/(fave|objectType=Favourite)/)) ||
-      (typeof status.text === 'string' && status.text.match(/favorited/))) {
-    return 'favorite'
-  }
-
-  if (status.text.match(/deleted notice {{tag/) || status.qvitter_delete_notice) {
-    return 'deletion'
-  }
-
-  if (status.text.match(/started following/) || status.activity_type === 'follow') {
-    return 'follow'
-  }
-
-  return 'unknown'
-}
-
-const isMastoAPI = (status) => {
-  return status.hasOwnProperty('account')
-}
-
-const parseUser = (data) => {
-  return {
-    id: data.id,
-    screen_name: data.screen_name || data.acct
-  }
-}
-
-const parseAttachment = (data) => {
-  return {
-    ...data,
-    mimetype: data.mimetype || data.type
-  }
-}
-
-const parseData = (data) => {
-  const output = {}
-  const masto = isMastoAPI(data)
-  output.raw = data
-  output.id = data.id
-
-  output.user = parseUser(masto ? data.account : data.user)
-
-  output.attentions = ((masto ? data.mentions : data.attentions) || []).map(_ => ({
-    id: _.id,
-    following: _.following // FIXME: MastoAPI doesn't have this
-  }))
-
-  // FIXME: Masto doesn't have "raw text" data, using html data...
-  output.text = masto ? data.content : data.text
-
-  output.attachments = ((masto ? data.media_attachments : data.attachments) || []).map(parseAttachment)
-
-  const retweetedStatus = masto ? data.reblog : data.retweeted_status
-  if (retweetedStatus) {
-    output.retweeted_status = parseData(retweetedStatus)
-  }
-
-  if (masto) {
-    output.type = data.reblog ? 'retweet' : 'status'
-    output.nsfw = data.sensitive
-    output.statusnet_html = data.content
-  } else {
-    // catchall, temporary
-    Object.assign(output, data)
-
-    // QVitterAPI
-    output.type = statusType(data)
-
-    if (data.nsfw === undefined) {
-      output.nsfw = isNsfw(data)
-      if (data.retweeted_status) {
-        output.nsfw = data.retweeted_status.nsfw
-      }
-    }
-  }
-
-  return output
-}
-
-const isNsfw = (status) => {
-  const nsfwRegex = /#nsfw/i
-  return (status.tags || []).includes('nsfw') || !!status.text.match(nsfwRegex)
-}
-
 const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false}) => {
   const timelineUrls = {
     public: PUBLIC_TIMELINE_URL,
@@ -401,10 +311,11 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: TAG_TIMELINE_URL
   }
+  const type = timeline.type || timeline
+  const isNotifications = type === 'notifications'
+  const params = []
 
-  let url = timelineUrls[timeline.type || timeline]
-
-  let params = []
+  let url = timelineUrls[type]
 
   if (since) {
     params.push(['since_id', since])
@@ -432,7 +343,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
       throw new Error('Error fetching timeline')
     })
     .then((data) => data.json())
-    .then((data) => data.map(parseData))
+    .then((data) => data.map(isNotifications ? _ => _ : parseStatus))
 }
 
 const verifyCredentials = (user) => {

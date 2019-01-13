@@ -2,7 +2,7 @@ import { remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, me
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
-export const emptyTl = (tl, userId) => (Object.assign(tl, {
+export const emptyTl = (tl, userId = 0) => (Object.assign(tl, {
   statuses: [],
   statusesObject: {},
   faves: [],
@@ -14,7 +14,6 @@ export const emptyTl = (tl, userId) => (Object.assign(tl, {
   loading: false,
   followers: [],
   friends: [],
-  userId: 0,
   flushMarker: 0,
   userId
 }))

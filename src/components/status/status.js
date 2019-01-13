@@ -117,19 +117,7 @@ const Status = {
       return lengthScore > 20
     },
     isReply () {
-      if (this.status.in_reply_to_status_id) {
-        return true
-      }
-      // For private replies where we can't see the OP, in_reply_to_status_id will be null.
-      // So instead, check that the post starts with a @mention.
-      if (this.status.visibility === 'private') {
-        var textBody = this.status.text
-        if (this.status.summary !== null) {
-          textBody = textBody.substring(this.status.summary.length, textBody.length)
-        }
-        return textBody.startsWith('@')
-      }
-      return false
+      return !!this.status.in_reply_to_status_id
     },
     hideReply () {
       if (this.$store.state.config.replyVisibility === 'all') {

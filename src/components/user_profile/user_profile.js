@@ -27,7 +27,7 @@ const UserProfile = {
       return this.$route.params.id || this.user.id
     },
     userName () {
-      return this.$route.params.name
+      return this.$route.params.name || this.user.screen_name
     },
     friends () {
       return this.user.friends
@@ -74,7 +74,7 @@ const UserProfile = {
       }
       this.$store.dispatch('stopFetching', 'user')
       this.$store.commit('clearTimeline', { timeline: 'user' })
-      this.$store.dispatch('startFetching', ['user', this.userName])
+      this.$store.dispatch('startFetching', ['user', this.fetchBy])
     },
     userId () {
       if (!this.isExternal) {
@@ -82,7 +82,7 @@ const UserProfile = {
       }
       this.$store.dispatch('stopFetching', 'user')
       this.$store.commit('clearTimeline', { timeline: 'user' })
-      this.$store.dispatch('startFetching', ['user', this.userId])
+      this.$store.dispatch('startFetching', ['user', this.fetchBy])
     },
     user () {
       if (this.user.id && !this.user.followers) {

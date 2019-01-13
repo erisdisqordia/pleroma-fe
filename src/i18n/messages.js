@@ -22,6 +22,7 @@ const messages = {
   hu: require('./hu.json'),
   it: require('./it.json'),
   ja: require('./ja.json'),
+  ko: require('./ko.json'),
   nb: require('./nb.json'),
   oc: require('./oc.json'),
   pl: require('./pl.json'),

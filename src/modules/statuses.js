@@ -2,7 +2,7 @@ import { remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, me
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
-export const emptyTl = (tl) => (Object.assign(tl, {
+export const emptyTl = (tl, userId) => (Object.assign(tl, {
   statuses: [],
   statusesObject: {},
   faves: [],
@@ -15,7 +15,8 @@ export const emptyTl = (tl) => (Object.assign(tl, {
   followers: [],
   friends: [],
   userId: 0,
-  flushMarker: 0
+  flushMarker: 0,
+  userId
 }))
 
 export const defaultState = {
@@ -309,7 +310,7 @@ export const mutations = {
   },
   clearTimeline (state, { timeline }) {
     const timelineObject = typeof timeline === 'object' ? timeline : state.timelines[timeline]
-    emptyTl(timelineObject)
+    emptyTl(timelineObject, state.timelines[timeline].userId)
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]

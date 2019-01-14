@@ -7,7 +7,8 @@ const Attachment = {
     'attachment',
     'nsfw',
     'statusId',
-    'size'
+    'size',
+    'setMedia'
   ],
   data () {
     return {
@@ -17,13 +18,17 @@ const Attachment = {
       loopVideo: this.$store.state.config.loopVideo,
       showHidden: false,
       loading: false,
-      img: fileTypeService.fileType(this.attachment.mimetype) === 'image' && document.createElement('img')
+      img: fileTypeService.fileType(this.attachment.mimetype) === 'image' && document.createElement('img'),
+      modalOpen: false
     }
   },
   components: {
     StillImage
   },
   computed: {
+    usePlaceHolder () {
+      return this.size === 'hide' || this.type === 'unknown'
+    },
     type () {
       return fileTypeService.fileType(this.attachment.mimetype)
     },
@@ -37,7 +42,7 @@ const Attachment = {
       return this.size === 'small'
     },
     fullwidth () {
-      return fileTypeService.fileType(this.attachment.mimetype) === 'html'
+      return this.type === 'html' || this.type === 'audio'
     }
   },
   methods: {
@@ -61,6 +66,14 @@ const Attachment = {
       } else {
         this.showHidden = !this.showHidden
       }
+    },
+    toggleModal (event) {
+      if (this.type !== 'image' && this.type !== 'video') {
+        return
+      }
+      event.preventDefault()
+      this.setMedia()
+      this.$store.dispatch('setCurrent', this.attachment)
     },
     onVideoDataLoad (e) {
       if (typeof e.srcElement.webkitAudioDecodedByteCount !== 'undefined') {

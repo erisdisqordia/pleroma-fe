@@ -35,7 +35,8 @@ const Status = {
       expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
         ? !this.$store.state.instance.collapseMessageWithSubject
         : !this.$store.state.config.collapseMessageWithSubject,
-      betterShadow: this.$store.state.interface.browserSupport.cssFilter
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter,
+      maxAttachments: 9
     }
   },
   computed: {
@@ -201,7 +202,8 @@ const Status = {
     },
     attachmentSize () {
       if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
-        (this.$store.state.config.hideAttachmentsInConv && this.inConversation)) {
+        (this.$store.state.config.hideAttachmentsInConv && this.inConversation) ||
+        (this.status.attachments.length > this.maxAttachments)) {
         return 'hide'
       } else if (this.compact) {
         return 'small'
@@ -291,6 +293,10 @@ const Status = {
     },
     userProfileLink (id, name) {
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
+    },
+    setMedia () {
+      const attachments = this.status.attachments
+      return () => this.$store.dispatch('setMedia', attachments)
     }
   },
   watch: {

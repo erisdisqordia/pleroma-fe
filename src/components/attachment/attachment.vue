@@ -1,19 +1,29 @@
 <template>
-  <div v-if="size==='hide'">
+  <div v-if="usePlaceHolder" @click="toggleModal">
     <a class="placeholder" v-if="type !== 'html'" target="_blank" :href="attachment.url">[{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]</a>
   </div>
-  <div v-else class="attachment" :class="{[type]: true, loading, 'small-attachment': isSmall, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}" v-show="!isEmpty">
+  <div
+    v-else class="attachment"
+    :class="{[type]: true, loading, 'small-attachment': isSmall, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}"
+    v-show="!isEmpty"
+    @click="toggleModal"
+  >
     <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">
       <img :key="nsfwImage" :src="nsfwImage"/>
     </a>
     <div class="hider" v-if="nsfw && hideNsfwLocal && !hidden">
       <a href="#" @click.prevent="toggleHidden()">Hide</a>
     </div>
-    <a v-if="type === 'image' && (!hidden || preloadImage)" class="image-attachment" :class="{'hidden': hidden && preloadImage}" :href="attachment.url" target="_blank" :title="attachment.description">
+    <a v-if="type === 'image' && (!hidden || preloadImage)"
+      class="image-attachment"
+      :class="{'hidden': hidden && preloadImage}"
+      :href="attachment.url" target="_blank"
+      :title="attachment.description"
+    >
       <StillImage :class="{'small': isSmall}" referrerpolicy="no-referrer" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
-    <video :class="{'small': isSmall}" v-if="type === 'video' && !hidden" @loadeddata="onVideoDataLoad" :src="attachment.url" controls :loop="loopVideo" playsinline></video>
+    <video :class="{'small': isSmall}" v-if="type === 'video' && !hidden" :src="attachment.url"></video>
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 
@@ -40,12 +50,13 @@
 
   .attachment.media-upload-container {
     flex: 0 0 auto;
-    max-height: 300px;
+    max-height: 160px;
     max-width: 100%;
   }
 
   .placeholder {
-    margin-right: 0.5em;
+    margin-right: 8px;
+    margin-bottom: 4px;
   }
 
   .nsfw-placeholder {
@@ -57,16 +68,12 @@
   }
 
   .small-attachment {
-    &.image, &.video {
-      max-width: 35%;
-    }
     max-height: 100px;
   }
 
   .attachment {
     position: relative;
-    flex: 1 0 30%;
-    margin: 0.5em 0.7em 0.6em 0.0em;
+    margin: 0.5em 0.5em 0em 0em;
     align-self: flex-start;
     line-height: 0;
 
@@ -84,6 +91,10 @@
   // fixes small gap below video
   &.video {
     line-height: 0;
+  }
+
+  .video {
+    object-fit: cover;
   }
 
   &.html {
@@ -107,10 +118,10 @@
   .small {
     max-height: 100px;
   }
+
   video {
-    max-height: 500px;
+    max-height: 160px;
     height: 100%;
-    width: 100%;
     z-index: 0;
   }
 
@@ -120,7 +131,7 @@
 
   img.media-upload {
     line-height: 0;
-    max-height: 300px;
+    max-height: 160px;
     max-width: 100%;
   }
 
@@ -165,21 +176,19 @@
     }
 
     .still-image {
-      width: 100%;
       height: 100%;
     }
 
     .small {
       img {
-        max-height: 100px;
+        max-height: 80px;
       }
     }
 
     img {
-      object-fit: contain;
-      width: 100%;
+      object-fit: cover;
       height: 100%; /* If this isn't here, chrome will stretch the images */
-      max-height: 500px;
+      height: 160px;
       image-orientation: from-image;
     }
   }

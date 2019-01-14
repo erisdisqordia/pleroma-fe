@@ -44,7 +44,7 @@ const SUGGESTIONS_URL = '/api/v1/suggestions'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 
 import { each, map } from 'lodash'
-import { parseStatus } from '../status_normalizer/status_normalizer.service.js'
+import { parseStatus, parseUser } from '../status_normalizer/status_normalizer.service.js'
 import 'whatwg-fetch'
 
 const oldfetch = window.fetch
@@ -243,24 +243,28 @@ const fetchUser = ({id, credentials}) => {
   let url = `${USER_URL}?user_id=${id}`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => parseUser(data))
 }
 
 const fetchFriends = ({id, credentials}) => {
   let url = `${FRIENDS_URL}?user_id=${id}`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => data.map(parseUser))
 }
 
 const fetchFollowers = ({id, credentials}) => {
   let url = `${FOLLOWERS_URL}?user_id=${id}`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => data.map(parseUser))
 }
 
 const fetchAllFollowing = ({username, credentials}) => {
   const url = `${ALL_FOLLOWING_URL}/${username}.json`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => data.map(parseUser))
 }
 
 const fetchFollowRequests = ({credentials}) => {
@@ -280,7 +284,7 @@ const fetchStatus = ({id, credentials}) => {
   let url = `${STATUS_URL}/${id}.json`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
-    .then((data) => parseStatus(data))
+    .then((data) => data.map(parseStatus))
 }
 
 const setUserMute = ({id, credentials, muted = true}) => {

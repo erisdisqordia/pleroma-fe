@@ -1,4 +1,4 @@
-export const qvitterStatusType = (status) => {
+const qvitterStatusType = (status) => {
   if (status.is_post_verb) {
     return 'status'
   }
@@ -27,11 +27,71 @@ const isMastoAPI = (status) => {
   return status.hasOwnProperty('account')
 }
 
-const parseUser = (data) => {
-  return {
-    id: data.id,
-    screen_name: data.screen_name || data.acct
+export const parseUser = (data) => {
+  const output = {}
+  const masto = data.hasOwnProperty('acct')
+  // case for users in "mentions" property for statuses in MastoAPI
+  const mastoShort = masto && !data.hasOwnProperty('avatar')
+
+  output.id = data.id
+
+  if (masto) {
+    output.screen_name = data.acct
+
+    // There's nothing else to get
+    if (mastoShort) {
+      return output
+    }
+
+    output.name = null // missing
+    output.name_html = data.display_name
+
+    output.description = null // missing
+    output.description_html = data.note
+
+    // Utilize avatar_static for gif avatars?
+    output.profile_image_url = data.avatar
+    output.profile_image_url_original = data.avatar
+
+    // Same, utilize header_static?
+    output.cover_photo = data.header
+
+    output.friends_count = data.following_count
+
+    output.bot = data.bot
+
+    output.statusnet_profile_url = data.url
+
+    // Missing, trying to recover
+    output.is_local = !output.screen_name.includes('@')
+  } else {
+    output.screen_name = data.screen_name
+
+    output.name = data.name
+    output.name_html = data.name_html
+
+    output.description = data.description
+    output.description_html = data.description_html
+
+    output.profile_image_url = data.profile_image_url
+    output.profile_image_url_original = data.profile_image_url_original
+
+    output.cover_photo = data.cover_photo
+
+    output.friends_count = data.friends_count
+
+    output.bot = null // missing
+
+    output.statusnet_profile_url = data.statusnet_profile_url
+    output.is_local = data.is_local
   }
+
+  output.created_at = new Date(data.created_at)
+  output.locked = data.locked
+  output.followers_count = data.followers_count
+  output.statuses_count = data.statuses_count
+
+  return output
 }
 
 const parseAttachment = (data) => {

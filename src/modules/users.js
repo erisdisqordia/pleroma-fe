@@ -68,6 +68,7 @@ export const mutations = {
   },
   setUserForNotification (state, notification) {
     notification.action.user = state.usersObject[notification.action.user.id]
+    notification.from_profile = state.usersObject[notification.action.user.id]
   },
   setColor (state, { user: { id }, highlighted }) {
     const user = state.usersObject[id]
@@ -149,8 +150,8 @@ const users = {
       })
     },
     addNewNotifications (store, { notifications }) {
-      const users = compact(map(notifications, 'from_profile'))
-      const notificationIds = compact(notifications.map(_ => String(_.id)))
+      const users = map(notifications, 'from_profile')
+      const notificationIds = notifications.map(_ => String(_.id))
       store.commit('addNewUsers', users)
 
       const notificationsObject = store.rootState.statuses.notifications.idStore

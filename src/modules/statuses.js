@@ -250,42 +250,33 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
   const allStatuses = state.allStatuses
   const allStatusesObject = state.allStatusesObject
   each(notifications, (notification) => {
-    const result = mergeOrAdd(allStatuses, allStatusesObject, notification.notice)
-    const action = result.item
+    notification.action = mergeOrAdd(allStatuses, allStatusesObject, notification.action).item
+    notification.status = notification.status && mergeOrAdd(allStatuses, allStatusesObject, notification.status).item
+
     // Only add a new notification if we don't have one for the same action
-    if (!find(state.notifications.data, (oldNotification) => oldNotification.action.id === action.id)) {
+    if (!state.notifications.idStore.hasOwnProperty(notification.id)) {
       state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)
       state.notifications.minId = Math.min(notification.id, state.notifications.minId)
 
-      const fresh = !notification.is_seen
-      const status = notification.ntype === 'like'
-            ? action.favorited_status
-            : action
-
-      const result = {
-        type: notification.ntype,
-        status,
-        action,
-        seen: !fresh
-      }
-
-      state.notifications.data.push(result)
-      state.notifications.idStore[notification.id] = result
+      console.log('AWOOOOOO', notification)
+      state.notifications.data.push(notification)
+      state.notifications.idStore[notification.id] = notification
 
       if ('Notification' in window && window.Notification.permission === 'granted') {
+        const notifObj = {}
+        const action = notification.action
         const title = action.user.name
-        const result = {}
-        result.icon = action.user.profile_image_url
-        result.body = action.text // there's a problem that it doesn't put a space before links tho
+        notifObj.icon = action.user.profile_image_url
+        notifObj.body = action.text // there's a problem that it doesn't put a space before links tho
 
         // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
         if (action.attachments && action.attachments.length > 0 && !action.nsfw &&
             action.attachments[0].mimetype.startsWith('image/')) {
-          result.image = action.attachments[0].url
+          notifObj.image = action.attachments[0].url
         }
 
-        if (fresh && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.ntype)) {
-          let notification = new window.Notification(title, result)
+        if (notification.fresh && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.ntype)) {
+          let notification = new window.Notification(title, notifObj)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.
           setTimeout(notification.close.bind(notification), 5000)

@@ -44,7 +44,7 @@ const SUGGESTIONS_URL = '/api/v1/suggestions'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 
 import { each, map } from 'lodash'
-import { parseStatus, parseUser } from '../status_normalizer/status_normalizer.service.js'
+import { parseStatus, parseUser, parseNotification } from '../status_normalizer/status_normalizer.service.js'
 import 'whatwg-fetch'
 
 const oldfetch = window.fetch
@@ -347,7 +347,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
       throw new Error('Error fetching timeline')
     })
     .then((data) => data.json())
-    .then((data) => data.map(isNotifications ? _ => _ : parseStatus))
+    .then((data) => data.map(isNotifications ? parseNotification : parseStatus))
 }
 
 const verifyCredentials = (user) => {

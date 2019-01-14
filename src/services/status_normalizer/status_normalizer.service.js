@@ -23,10 +23,6 @@ const qvitterStatusType = (status) => {
   return 'unknown'
 }
 
-const isMastoAPI = (status) => {
-  return status.hasOwnProperty('account')
-}
-
 export const parseUser = (data) => {
   const output = {}
   const masto = data.hasOwnProperty('acct')
@@ -95,6 +91,7 @@ export const parseUser = (data) => {
 }
 
 const parseAttachment = (data) => {
+  // TODO A little bit messy ATM but works with both APIs
   return {
     ...data,
     mimetype: data.mimetype || data.type
@@ -103,11 +100,12 @@ const parseAttachment = (data) => {
 
 export const parseStatus = (data) => {
   const output = {}
-  const masto = isMastoAPI(data)
+  const masto = data.hasOwnProperty('account')
   output.raw = data
 
   console.log(masto ? 'MAMMAL' : 'OLD SHIT')
   console.log(data)
+
   if (masto) {
     output.favorited = data.favourited
     output.fave_num = data.favourites_count
@@ -168,6 +166,37 @@ export const parseStatus = (data) => {
   if (retweetedStatus) {
     output.retweeted_status = parseStatus(retweetedStatus)
   }
+
+  return output
+}
+
+export const parseNotification = (data) => {
+  const mastoDict = {
+    'favourite': 'like',
+    'reblog': 'repeat'
+  }
+  const masto = !data.hasOwnProperty('ntype')
+  const output = {}
+
+  if (masto) {
+    output.type = mastoDict[data.type] || data.type
+    output.seen = null // missing
+    output.status = parseStatus(data.status)
+    output.action = null // missing
+    output.from_profile = parseUser(data.account)
+  } else {
+    const parsedNotice = parseStatus(data.notice)
+    output.type = data.ntype
+    output.seen = data.is_seen
+    output.status = output.type === 'like'
+      ? parseStatus(data.notice.favorited_status)
+      : parsedNotice
+    output.action = parsedNotice
+    output.from_profile = parseUser(data.from_profile)
+  }
+
+  output.created_at = new Date(data.created_at)
+  output.id = data.id
 
   return output
 }

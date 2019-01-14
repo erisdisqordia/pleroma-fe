@@ -300,7 +300,7 @@ export const mutations = {
   },
   clearTimeline (state, { timeline }) {
     const timelineObject = typeof timeline === 'object' ? timeline : state.timelines[timeline]
-    emptyTl(timelineObject, state.timelines[timeline].userId)
+    emptyTl(timelineObject, timeline.userId)
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]

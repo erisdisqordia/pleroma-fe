@@ -277,6 +277,12 @@ const fetchConversation = ({id, credentials}) => {
   let url = `${CONVERSATION_URL}/${id}.json?count=100`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => {
+      if (data.ok) {
+        return data
+      }
+      throw new Error('Error fetching timeline')
+    })
     .then((data) => data.map(parseStatus))
 }
 
@@ -284,7 +290,13 @@ const fetchStatus = ({id, credentials}) => {
   let url = `${STATUS_URL}/${id}.json`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
-    .then((data) => data.map(parseStatus))
+    .then((data) => {
+      if (data.ok) {
+        return data
+      }
+      throw new Error('Error fetching timeline')
+    })
+    .then((data) => parseStatus(data))
 }
 
 const setUserMute = ({id, credentials, muted = true}) => {

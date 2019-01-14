@@ -117,11 +117,15 @@ export const parseStatus = (data) => {
     output.nsfw = data.sensitive
 
     output.statusnet_html = data.content
-    // Not exactly the same...
+
+    // Not exactly the same but works?
     output.text = data.content
 
     output.in_reply_to_status_id = data.in_reply_to_id
     output.in_reply_to_user_id = data.in_reply_to_user_id
+
+    // Not exactly the same but works
+    output.statusnet_conversation_id = data.id
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num
@@ -145,6 +149,8 @@ export const parseStatus = (data) => {
 
     output.in_reply_to_status_id = data.in_reply_to_id
     output.in_reply_to_user_id = data.in_reply_to_account_id
+
+    output.statusnet_conversation_id = data.statusnet_conversation_id
   }
 
   output.id = Number(data.id)

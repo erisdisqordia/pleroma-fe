@@ -258,7 +258,6 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)
       state.notifications.minId = Math.min(notification.id, state.notifications.minId)
 
-      console.log('AWOOOOOO', notification)
       state.notifications.data.push(notification)
       state.notifications.idStore[notification.id] = notification
 

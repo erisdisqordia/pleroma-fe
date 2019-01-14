@@ -101,10 +101,6 @@ const parseAttachment = (data) => {
 export const parseStatus = (data) => {
   const output = {}
   const masto = data.hasOwnProperty('account')
-  output.raw = data
-
-  console.log(masto ? 'MAMMAL' : 'OLD SHIT')
-  console.log(data)
 
   if (masto) {
     output.favorited = data.favourited

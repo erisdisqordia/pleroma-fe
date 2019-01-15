@@ -139,7 +139,10 @@ export const parseStatus = (data) => {
       if (data.retweeted_status) {
         output.nsfw = data.retweeted_status.nsfw
       }
+    } else {
+      output.nsfw = data.nsfw
     }
+
     output.statusnet_html = data.statusnet_html
     output.text = data.text
 

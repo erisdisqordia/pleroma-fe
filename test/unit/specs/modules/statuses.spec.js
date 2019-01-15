@@ -1,8 +1,8 @@
 import { cloneDeep } from 'lodash'
-import { defaultState, mutations, findMaxId, prepareStatus, statusType } from '../../../../src/modules/statuses.js'
+import { defaultState, mutations, findMaxId, prepareStatus } from '../../../../src/modules/statuses.js'
 
 // eslint-disable-next-line camelcase
-const makeMockStatus = ({id, text, is_post_verb = true}) => {
+const makeMockStatus = ({id, text, type = 'status'}) => {
   return {
     id,
     user: {id: 0},
@@ -10,42 +10,12 @@ const makeMockStatus = ({id, text, is_post_verb = true}) => {
     text: text || `Text number ${id}`,
     fave_num: 0,
     uri: '',
-    is_post_verb,
+    type,
     attentions: []
   }
 }
 
-describe('Statuses.statusType', () => {
-  it('identifies favorites', () => {
-    const fav = {
-      uri: 'tag:soykaf.com,2016-08-21:fave:2558:note:339495:2016-08-21T16:54:04+00:00'
-    }
-
-    const mastoFav = {
-      uri: 'tag:mastodon.social,2016-11-27:objectId=73903:objectType=Favourite'
-    }
-
-    expect(statusType(fav)).to.eql('favorite')
-    expect(statusType(mastoFav)).to.eql('favorite')
-  })
-})
-
 describe('Statuses.prepareStatus', () => {
-  it('sets nsfw for statuses with the #nsfw tag', () => {
-    const safe = makeMockStatus({id: 1, text: 'Hello oniichan'})
-    const nsfw = makeMockStatus({id: 1, text: 'Hello oniichan #nsfw'})
-
-    expect(prepareStatus(safe).nsfw).to.eq(false)
-    expect(prepareStatus(nsfw).nsfw).to.eq(true)
-  })
-
-  it('leaves existing nsfw settings alone', () => {
-    const nsfw = makeMockStatus({id: 1, text: 'Hello oniichan #nsfw'})
-    nsfw.nsfw = false
-
-    expect(prepareStatus(nsfw).nsfw).to.eq(false)
-  })
-
   it('sets deleted flag to false', () => {
     const aStatus = makeMockStatus({id: 1, text: 'Hello oniichan'})
     expect(prepareStatus(aStatus).deleted).to.eq(false)
@@ -127,7 +97,7 @@ describe('The Statuses module', () => {
     const status = makeMockStatus({id: 1})
     const otherStatus = makeMockStatus({id: 3})
     status.uri = 'xxx'
-    const deletion = makeMockStatus({id: 2, is_post_verb: false})
+    const deletion = makeMockStatus({id: 2, type: 'deletion'})
     deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
     deletion.uri = 'xxx'
 
@@ -177,7 +147,7 @@ describe('The Statuses module', () => {
   it('splits retweets from their status and links them', () => {
     const state = cloneDeep(defaultState)
     const status = makeMockStatus({id: 1})
-    const retweet = makeMockStatus({id: 2, is_post_verb: false})
+    const retweet = makeMockStatus({id: 2, type: 'retweet'})
     const modStatus = makeMockStatus({id: 1, text: 'something else'})
 
     retweet.retweeted_status = status
@@ -220,7 +190,7 @@ describe('The Statuses module', () => {
     const state = cloneDeep(defaultState)
     const status = makeMockStatus({id: 1})
     const modStatus = makeMockStatus({id: 1, text: 'something else'})
-    const retweet = makeMockStatus({id: 2, is_post_verb: false})
+    const retweet = makeMockStatus({id: 2, type: 'retweet'})
     retweet.retweeted_status = modStatus
 
     // Add original status
@@ -243,7 +213,7 @@ describe('The Statuses module', () => {
 
     const favorite = {
       id: 2,
-      is_post_verb: false,
+      type: 'favorite',
       in_reply_to_status_id: '1', // The API uses strings here...
       uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
       text: 'a favorited something by b',
@@ -271,7 +241,7 @@ describe('The Statuses module', () => {
 
     const ownFavorite = {
       id: 3,
-      is_post_verb: false,
+      type: 'favorite',
       in_reply_to_status_id: '1', // The API uses strings here...
       uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
       text: 'a favorited something by b',
@@ -296,7 +266,7 @@ describe('The Statuses module', () => {
       mentionedStatus.uri = 'xxx'
       otherStatus.attentions = [user]
 
-      const deletion = makeMockStatus({id: 4, is_post_verb: false})
+      const deletion = makeMockStatus({id: 4, type: 'deletion'})
       deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
       deletion.uri = 'xxx'
 
@@ -305,10 +275,12 @@ describe('The Statuses module', () => {
         state,
         {
           notifications: [{
-            ntype: 'mention',
+            from_profile: { id: 2 },
+            id: 998,
+            type: 'mention',
             status: otherStatus,
-            notice: otherStatus,
-            is_seen: false
+            action: otherStatus,
+            seen: false
           }]
         })
 
@@ -317,10 +289,12 @@ describe('The Statuses module', () => {
         state,
         {
           notifications: [{
-            ntype: 'mention',
+            from_profile: { id: 2 },
+            id: 999,
+            type: 'mention',
             status: mentionedStatus,
-            notice: mentionedStatus,
-            is_seen: false
+            action: mentionedStatus,
+            seen: false
           }]
         })
 

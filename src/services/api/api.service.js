@@ -44,7 +44,7 @@ const SUGGESTIONS_URL = '/api/v1/suggestions'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 
 import { each, map } from 'lodash'
-import { parseStatus, parseUser, parseNotification } from '../status_normalizer/status_normalizer.service.js'
+import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
 
 const oldfetch = window.fetch

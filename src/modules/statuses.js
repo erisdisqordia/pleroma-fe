@@ -225,6 +225,9 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
         remove(timelineObject.visibleStatuses, { uri })
       }
     },
+    'follow': (follow) => {
+      // NOOP, it is known status but we don't do anything about it for now
+    },
     'default': (unknown) => {
       console.log('unknown status type')
       console.log(unknown)

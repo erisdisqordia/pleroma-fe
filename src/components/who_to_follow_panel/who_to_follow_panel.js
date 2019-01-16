@@ -50,14 +50,6 @@ const WhoToFollowPanel = {
     user: function () {
       return this.$store.state.users.currentUser.screen_name
     },
-    moreUrl: function () {
-      const host = window.location.hostname
-      const user = this.user
-      const suggestionsWeb = this.$store.state.instance.suggestionsWeb
-      const url = suggestionsWeb.replace(/{{host}}/g, encodeURIComponent(host))
-                                .replace(/{{user}}/g, encodeURIComponent(user))
-      return url
-    },
     suggestionsEnabled () {
       return this.$store.state.instance.suggestionsEnabled
     }

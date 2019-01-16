@@ -289,6 +289,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
   const allStatuses = state.allStatuses
   const allStatusesObject = state.allStatusesObject
   each(notifications, (notification) => {
+    notification.notice.id = String(notification.notice.id)
     const result = mergeOrAdd(allStatuses, allStatusesObject, notification.notice)
     const action = result.item
     // For sequential IDs BE passes numbers as numbers, we want them as strings.

@@ -297,9 +297,12 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
     // Only add a new notification if we don't have one for the same action
     // TODO: this technically works but should be checking for notification.id, not action.id i think
     if (!find(state.notifications.data, (oldNotification) => oldNotification.action.id === action.id)) {
-      // TODO: adapt to "what if notification ids are not actually numbers"
-      state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)
-      state.notifications.minId = Math.min(notification.id, state.notifications.minId)
+      state.notifications.maxId = notification.id > state.notifications.maxId
+        ? notification.id
+        : state.notifications.maxId
+      state.notifications.minId = notification.id < state.notifications.minId
+        ? notification.id
+        : state.notifications.minId
 
       const fresh = !notification.is_seen
       const status = notification.ntype === 'like'

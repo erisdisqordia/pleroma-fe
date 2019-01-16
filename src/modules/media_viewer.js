@@ -28,7 +28,6 @@ const mediaViewer = {
     },
     setCurrent ({ commit, state }, current) {
       const index = state.media.indexOf(current)
-      console.log(index, current)
       commit('setCurrent', index || 0)
     },
     closeMediaViewer ({ commit }) {

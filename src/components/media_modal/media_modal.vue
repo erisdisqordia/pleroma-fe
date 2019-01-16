@@ -7,8 +7,8 @@
       :src="currentMedia.url"
       @click.stop=""
       controls autoplay
-      :loop="loopVideo"
-      @loadeddata="onVideoDataLoad">
+      @loadeddata="onVideoDataLoad" 
+      :loop="loopVideo">
     </video>
   </div>
 </template>

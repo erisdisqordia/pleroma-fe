@@ -62,12 +62,17 @@
       </ul>
       <ul>
         <li @click="toggleDrawer">
-          <router-link :to="{ name: 'user-search'}">
+          <router-link :to="{ name: 'user-search' }">
             {{ $t("nav.user_search") }}
           </router-link>
         </li>
+        <li v-if="currentUser && suggestionsEnabled" @click="toggleDrawer">
+          <router-link :to="{ name: 'who-to-follow' }">
+            {{ $t("nav.who_to_follow") }}
+          </router-link>
+        </li>
         <li @click="toggleDrawer">
-          <router-link :to="{ name: 'settings'}">
+          <router-link :to="{ name: 'settings' }">
             {{ $t("settings.settings") }}
           </router-link>
         </li>

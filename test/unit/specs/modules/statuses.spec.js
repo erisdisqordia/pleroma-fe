@@ -82,7 +82,7 @@ describe('The Statuses module', () => {
     const status = makeMockStatus({id: '1'})
     const otherStatus = makeMockStatus({id: '3'})
     status.uri = 'xxx'
-    const deletion = makeMockStatus({id: 2, type: 'deletion'})
+    const deletion = makeMockStatus({id: '2', type: 'deletion'})
     deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
     deletion.uri = 'xxx'
 
@@ -131,9 +131,9 @@ describe('The Statuses module', () => {
 
   it('splits retweets from their status and links them', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
-    const retweet = makeMockStatus({id: 2, type: 'retweet'})
-    const modStatus = makeMockStatus({id: 1, text: 'something else'})
+    const status = makeMockStatus({id: '1'})
+    const retweet = makeMockStatus({id: '2', type: 'retweet'})
+    const modStatus = makeMockStatus({id: '1', text: 'something else'})
 
     retweet.retweeted_status = status
 
@@ -173,9 +173,9 @@ describe('The Statuses module', () => {
 
   it('replaces existing statuses with the same id, coming from a retweet', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
-    const modStatus = makeMockStatus({id: 1, text: 'something else'})
-    const retweet = makeMockStatus({id: 2, type: 'retweet'})
+    const status = makeMockStatus({id: '1'})
+    const modStatus = makeMockStatus({id: '1', text: 'something else'})
+    const retweet = makeMockStatus({id: '2', type: 'retweet'})
     retweet.retweeted_status = modStatus
 
     // Add original status
@@ -197,7 +197,7 @@ describe('The Statuses module', () => {
     const status = makeMockStatus({id: '1'})
 
     const favorite = {
-      id: 2,
+      id: '2',
       type: 'favorite',
       in_reply_to_status_id: '1', // The API uses strings here...
       uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
@@ -225,7 +225,7 @@ describe('The Statuses module', () => {
     }
 
     const ownFavorite = {
-      id: 3,
+      id: '3',
       type: 'favorite',
       in_reply_to_status_id: '1', // The API uses strings here...
       uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
@@ -251,7 +251,7 @@ describe('The Statuses module', () => {
       mentionedStatus.uri = 'xxx'
       otherStatus.attentions = [user]
 
-      const deletion = makeMockStatus({id: 4, type: 'deletion'})
+      const deletion = makeMockStatus({id: '4', type: 'deletion'})
       deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
       deletion.uri = 'xxx'
 
@@ -260,8 +260,8 @@ describe('The Statuses module', () => {
         state,
         {
           notifications: [{
-            from_profile: { id: 2 },
-            id: 998,
+            from_profile: { id: '2' },
+            id: '998',
             type: 'mention',
             status: otherStatus,
             action: otherStatus,
@@ -274,8 +274,8 @@ describe('The Statuses module', () => {
         state,
         {
           notifications: [{
-            from_profile: { id: 2 },
-            id: 999,
+            from_profile: { id: '2' },
+            id: '999',
             type: 'mention',
             status: mentionedStatus,
             action: mentionedStatus,

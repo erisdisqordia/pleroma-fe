@@ -9,7 +9,7 @@ const makeMockStatusQvitter = (overrides = {}) => {
     external_url: 'https://ap.example/whatever',
     fave_num: 1,
     favorited: false,
-    id: 10335970,
+    id: '10335970',
     in_reply_to_ostatus_uri: null,
     in_reply_to_profileurl: null,
     in_reply_to_screen_name: null,
@@ -20,7 +20,7 @@ const makeMockStatusQvitter = (overrides = {}) => {
     possibly_sensitive: false,
     repeat_num: 0,
     repeated: false,
-    statusnet_conversation_id: 16300488,
+    statusnet_conversation_id: '16300488',
     statusnet_html: '<p>haha benis</p>',
     summary: null,
     tags: [],
@@ -45,7 +45,7 @@ const makeMockUserQvitter = (overrides = {}) => {
     following: true,
     follows_you: true,
     friends_count: 1,
-    id: 60717,
+    id: '60717',
     is_local: false,
     locked: false,
     name: 'Spurdo :ebin:',
@@ -87,15 +87,15 @@ describe('QVitter preprocessing', () => {
   })
 
   it('sets nsfw for statuses with the #nsfw tag', () => {
-    const safe = makeMockStatusQvitter({id: 1, text: 'Hello oniichan'})
-    const nsfw = makeMockStatusQvitter({id: 1, text: 'Hello oniichan #nsfw'})
+    const safe = makeMockStatusQvitter({id: '1', text: 'Hello oniichan'})
+    const nsfw = makeMockStatusQvitter({id: '1', text: 'Hello oniichan #nsfw'})
 
     expect(parseStatus(safe).nsfw).to.eq(false)
     expect(parseStatus(nsfw).nsfw).to.eq(true)
   })
 
   it('leaves existing nsfw settings alone', () => {
-    const nsfw = makeMockStatusQvitter({id: 1, text: 'Hello oniichan #nsfw', nsfw: false})
+    const nsfw = makeMockStatusQvitter({id: '1', text: 'Hello oniichan #nsfw', nsfw: false})
 
     expect(parseStatus(nsfw).nsfw).to.eq(false)
   })

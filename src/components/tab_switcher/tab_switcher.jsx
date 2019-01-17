@@ -54,12 +54,12 @@ export default Vue.component('tab-switcher', {
 
     return (
       <div class="tab-switcher">
-      <div class="tabs">
-      {tabs}
-      </div>
-      <div class="contents">
-      {contents}
-      </div>
+        <div class="tabs">
+          {tabs}
+        </div>
+        <div class="contents">
+          {contents}
+        </div>
       </div>
     )
   }

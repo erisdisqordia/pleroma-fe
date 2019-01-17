@@ -327,11 +327,10 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: TAG_TIMELINE_URL
   }
-  const type = timeline.type || timeline
-  const isNotifications = type === 'notifications'
+  const isNotifications = timeline === 'notifications'
   const params = []
 
-  let url = timelineUrls[type]
+  let url = timelineUrls[timeline]
 
   if (since) {
     params.push(['since_id', since])

@@ -1,7 +1,6 @@
 import UserCardContent from '../user_card_content/user_card_content.vue'
 import UserCard from '../user_card/user_card.vue'
 import Timeline from '../timeline/timeline.vue'
-import { emptyTl } from '../../modules/statuses.js'
 
 const UserProfile = {
   created () {
@@ -14,14 +13,12 @@ const UserProfile = {
   destroyed () {
     this.$store.dispatch('stopFetching', 'user')
   },
-  data () {
-    return {
-      favorites: emptyTl({ type: 'favorites', userId: this.userId })
-    }
-  },
   computed: {
     timeline () {
       return this.$store.state.statuses.timelines.user
+    },
+    favorites () {
+      return this.$store.state.statuses.timelines.favorites
     },
     userId () {
       return this.$route.params.id || this.user.id

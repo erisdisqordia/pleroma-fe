@@ -122,6 +122,10 @@ export const parseStatus = (data) => {
 
     // Not exactly the same but works
     output.statusnet_conversation_id = data.id
+
+    if (output.type === 'retweet') {
+      output.retweeted_status = parseStatus(data.reblog)
+    }
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num
@@ -150,6 +154,10 @@ export const parseStatus = (data) => {
     output.in_reply_to_user_id = data.in_reply_to_account_id
 
     output.statusnet_conversation_id = data.statusnet_conversation_id
+
+    if (output.type === 'retweet') {
+      output.retweeted_status = parseStatus(data.retweeted_status)
+    }
   }
 
   output.id = String(data.id)
@@ -187,12 +195,12 @@ export const parseNotification = (data) => {
     output.type = mastoDict[data.type] || data.type
     output.seen = null // missing
     output.status = parseStatus(data.status)
-    output.action = null // missing
+    output.action = output.status // not sure
     output.from_profile = parseUser(data.account)
   } else {
     const parsedNotice = parseStatus(data.notice)
     output.type = data.ntype
-    output.seen = data.is_seen
+    output.seen = Boolean(data.is_seen)
     output.status = output.type === 'like'
       ? parseStatus(data.notice.favorited_status)
       : parsedNotice

@@ -126,7 +126,7 @@ export const parseStatus = (data) => {
     output.text = data.content
 
     output.in_reply_to_status_id = data.in_reply_to_id
-    output.in_reply_to_user_id = data.in_reply_to_user_id
+    output.in_reply_to_user_id = data.in_reply_to_account_id
 
     // Not exactly the same but works
     output.statusnet_conversation_id = data.id
@@ -134,6 +134,8 @@ export const parseStatus = (data) => {
     if (output.type === 'retweet') {
       output.retweeted_status = parseStatus(data.reblog)
     }
+
+    output.summary = data.spoiler_text
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num
@@ -158,14 +160,16 @@ export const parseStatus = (data) => {
     output.statusnet_html = data.statusnet_html
     output.text = data.text
 
-    output.in_reply_to_status_id = data.in_reply_to_id
-    output.in_reply_to_user_id = data.in_reply_to_account_id
+    output.in_reply_to_status_id = data.in_reply_to_status_id
+    output.in_reply_to_user_id = data.in_reply_to_user_id
 
     output.statusnet_conversation_id = data.statusnet_conversation_id
 
     if (output.type === 'retweet') {
       output.retweeted_status = parseStatus(data.retweeted_status)
     }
+
+    output.summary = data.summary
   }
 
   output.id = String(data.id)

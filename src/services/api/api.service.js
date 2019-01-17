@@ -276,26 +276,26 @@ const fetchFollowRequests = ({credentials}) => {
 const fetchConversation = ({id, credentials}) => {
   let url = `${CONVERSATION_URL}/${id}.json?count=100`
   return fetch(url, { headers: authHeaders(credentials) })
-    .then((data) => data.json())
     .then((data) => {
       if (data.ok) {
         return data
       }
-      throw new Error('Error fetching timeline')
+      throw new Error('Error fetching timeline', data)
     })
+    .then((data) => data.json())
     .then((data) => data.map(parseStatus))
 }
 
 const fetchStatus = ({id, credentials}) => {
   let url = `${STATUS_URL}/${id}.json`
   return fetch(url, { headers: authHeaders(credentials) })
-    .then((data) => data.json())
     .then((data) => {
       if (data.ok) {
         return data
       }
-      throw new Error('Error fetching timeline')
+      throw new Error('Error fetching timeline', data)
     })
+    .then((data) => data.json())
     .then((data) => parseStatus(data))
 }
 
@@ -355,7 +355,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
       if (data.ok) {
         return data
       }
-      throw new Error('Error fetching timeline')
+      throw new Error('Error fetching timeline', data)
     })
     .then((data) => data.json())
     .then((data) => data.map(isNotifications ? parseNotification : parseStatus))

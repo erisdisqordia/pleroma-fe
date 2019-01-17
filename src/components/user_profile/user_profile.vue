@@ -20,7 +20,7 @@
           <i class="icon-spin3 animate-spin"></i>
         </div>
       </div>
-      <Timeline v-if="isUs" :label="$t('user_card.favorites')" :embedded="true" :title="$t('user_profile.favorites_title')" :timeline="favorites"/>
+      <Timeline v-if="isUs" :label="$t('user_card.favorites')" :embedded="true" :title="$t('user_profile.favorites_title')" timeline-name="favorites" :timeline="favorites"/>
     </tab-switcher>
   </div>
   <div v-else class="panel user-profile-placeholder">

@@ -64,9 +64,6 @@ const visibleNotificationTypes = (rootState) => {
 }
 
 const mergeOrAdd = (arr, obj, item) => {
-  // For sequential IDs BE passes numbers as numbers, we want them as strings.
-  item.id = String(item.id)
-
   const oldItem = obj[item.id]
 
   if (oldItem) {
@@ -164,7 +161,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const favoriteStatus = (favorite, counter) => {
-    const status = find(allStatuses, { id: String(favorite.in_reply_to_status_id) })
+    const status = find(allStatuses, { id: favorite.in_reply_to_status_id })
     if (status) {
       // This is our favorite, so the relevant bit.
       if (favorite.user.id === user.id) {

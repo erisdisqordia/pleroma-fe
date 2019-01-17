@@ -7,7 +7,7 @@ const conversationPage = {
   },
   computed: {
     statusoid () {
-      const id = String(this.$route.params.id)
+      const id = this.$route.params.id
       const statuses = this.$store.state.statuses.allStatuses
       const status = find(statuses, {id})
 

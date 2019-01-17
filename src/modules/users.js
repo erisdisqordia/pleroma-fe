@@ -151,7 +151,7 @@ const users = {
     },
     addNewNotifications (store, { notifications }) {
       const users = map(notifications, 'from_profile')
-      const notificationIds = notifications.map(_ => String(_.id))
+      const notificationIds = notifications.map(_ => _.id)
       store.commit('addNewUsers', users)
 
       const notificationsObject = store.rootState.statuses.notifications.idStore

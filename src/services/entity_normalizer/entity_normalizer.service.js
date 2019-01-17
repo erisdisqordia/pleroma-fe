@@ -58,6 +58,15 @@ export const parseUser = (data) => {
 
     output.statusnet_profile_url = data.url
 
+    // FIXME missing
+    output.follows_you = null
+
+    // FIXME ???????
+    output.statusnet_blocking = false
+
+    // FIXME missing
+    output.muted = null
+
     // Missing, trying to recover
     output.is_local = !output.screen_name.includes('@')
   } else {
@@ -79,7 +88,14 @@ export const parseUser = (data) => {
     output.bot = null // missing
 
     output.statusnet_profile_url = data.statusnet_profile_url
+
+    output.statusnet_blocking = data.statusnet_blocking
+
     output.is_local = data.is_local
+
+    output.follows_you = data.follows_you
+
+    output.muted = data.muted
 
     // QVITTER ONLY FOR NOW
     // Really only applies to logged in user, really.. I THINK

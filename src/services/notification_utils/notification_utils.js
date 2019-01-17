@@ -10,8 +10,8 @@ export const visibleTypes = store => ([
 ].filter(_ => _))
 
 export const visibleNotificationsFromStore = store => {
-  // Don't know why, but sortBy([seen, -action.id]) doesn't work.
-  let sortedNotifications = sortBy(notificationsFromStore(store), ({action}) => -action.id)
+  // map is just to clone the array since sort mutates it and it causes some issues
+  let sortedNotifications = notificationsFromStore(store).map(_ => _).sort((a, b) => a.action.id > b.action.id ? -1 : 1)
   sortedNotifications = sortBy(sortedNotifications, 'seen')
   return sortedNotifications.filter((notification) => visibleTypes(store).includes(notification.type))
 }

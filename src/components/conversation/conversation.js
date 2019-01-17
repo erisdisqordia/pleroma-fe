@@ -33,7 +33,7 @@ const conversation = {
     replies () {
       let i = 1
       return reduce(this.conversation, (result, {id, in_reply_to_status_id}) => {
-        const irid = Number(in_reply_to_status_id)
+        const irid = String(in_reply_to_status_id)
         if (irid) {
           result[irid] = result[irid] || []
           result[irid].push({
@@ -70,7 +70,7 @@ const conversation = {
       }
     },
     getReplies (id) {
-      id = Number(id)
+      id = String(id)
       return this.replies[id] || []
     },
     focused (id) {
@@ -81,7 +81,7 @@ const conversation = {
       }
     },
     setHighlight (id) {
-      this.highlight = Number(id)
+      this.highlight = String(id)
     }
   }
 }

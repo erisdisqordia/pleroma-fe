@@ -1,4 +1,4 @@
-import { remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
+import { remove, slice, each, find, maxBy, minBy, merge, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -62,11 +62,10 @@ const visibleNotificationTypes = (rootState) => {
   ].filter(_ => _)
 }
 
-export const findMaxId = (...args) => {
-  return (maxBy(flatten(args), 'id') || {}).id
-}
-
 const mergeOrAdd = (arr, obj, item) => {
+  // For sequential IDs BE passes numbers as numbers, we want them as strings.
+  item.id = String(item.id)
+
   const oldItem = obj[item.id]
 
   if (oldItem) {
@@ -84,9 +83,11 @@ const mergeOrAdd = (arr, obj, item) => {
   }
 }
 
+const sortById = (a, b) => a.id > b.id ? -1 : 1
+
 const sortTimeline = (timeline) => {
-  timeline.visibleStatuses = sortBy(timeline.visibleStatuses, ({id}) => -id)
-  timeline.statuses = sortBy(timeline.statuses, ({id}) => -id)
+  timeline.visibleStatuses = timeline.visibleStatuses.sort(sortById)
+  timeline.statuses = timeline.statuses.sort(sortById)
   timeline.minVisibleId = (last(timeline.visibleStatuses) || {}).id
   return timeline
 }
@@ -162,7 +163,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const favoriteStatus = (favorite, counter) => {
-    const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
+    const status = find(allStatuses, { id: String(favorite.in_reply_to_status_id) })
     if (status) {
       // This is our favorite, so the relevant bit.
       if (favorite.user.id === user.id) {
@@ -258,8 +259,12 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
 
     // Only add a new notification if we don't have one for the same action
     if (!state.notifications.idStore.hasOwnProperty(notification.id)) {
-      state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)
-      state.notifications.minId = Math.min(notification.id, state.notifications.minId)
+      state.notifications.maxId = notification.id > state.notifications.maxId
+        ? notification.id
+        : state.notifications.maxId
+      state.notifications.minId = notification.id < state.notifications.minId
+        ? notification.id
+        : state.notifications.minId
 
       state.notifications.data.push(notification)
       state.notifications.idStore[notification.id] = notification

@@ -1,11 +1,11 @@
 import { cloneDeep } from 'lodash'
-import { defaultState, mutations, findMaxId, prepareStatus } from '../../../../src/modules/statuses.js'
+import { defaultState, mutations, prepareStatus } from '../../../../src/modules/statuses.js'
 
 // eslint-disable-next-line camelcase
 const makeMockStatus = ({id, text, type = 'status'}) => {
   return {
     id,
-    user: {id: 0},
+    user: {id: '0'},
     name: 'status',
     text: text || `Text number ${id}`,
     fave_num: 0,
@@ -17,30 +17,15 @@ const makeMockStatus = ({id, text, type = 'status'}) => {
 
 describe('Statuses.prepareStatus', () => {
   it('sets deleted flag to false', () => {
-    const aStatus = makeMockStatus({id: 1, text: 'Hello oniichan'})
+    const aStatus = makeMockStatus({id: '1', text: 'Hello oniichan'})
     expect(prepareStatus(aStatus).deleted).to.eq(false)
-  })
-})
-
-describe('Statuses.findMaxId', () => {
-  it('returns the largest id in any of the given arrays', () => {
-    const statusesOne = [{ id: 100 }, { id: 2 }]
-    const statusesTwo = [{ id: 3 }]
-
-    const maxId = findMaxId(statusesOne, statusesTwo)
-    expect(maxId).to.eq(100)
-  })
-
-  it('returns undefined for empty arrays', () => {
-    const maxId = findMaxId([], [])
-    expect(maxId).to.eq(undefined)
   })
 })
 
 describe('The Statuses module', () => {
   it('adds the status to allStatuses and to the given timeline', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
+    const status = makeMockStatus({id: '1'})
 
     mutations.addNewStatuses(state, { statuses: [status], timeline: 'public' })
 
@@ -52,7 +37,7 @@ describe('The Statuses module', () => {
 
   it('counts the status as new if it has not been seen on this timeline', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
+    const status = makeMockStatus({id: '1'})
 
     mutations.addNewStatuses(state, { statuses: [status], timeline: 'public' })
     mutations.addNewStatuses(state, { statuses: [status], timeline: 'friends' })
@@ -70,7 +55,7 @@ describe('The Statuses module', () => {
 
   it('add the statuses to allStatuses if no timeline is given', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
+    const status = makeMockStatus({id: '1'})
 
     mutations.addNewStatuses(state, { statuses: [status] })
 
@@ -82,7 +67,7 @@ describe('The Statuses module', () => {
 
   it('adds the status to allStatuses and to the given timeline, directly visible', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
+    const status = makeMockStatus({id: '1'})
 
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
 
@@ -94,8 +79,8 @@ describe('The Statuses module', () => {
 
   it('removes statuses by tag on deletion', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
-    const otherStatus = makeMockStatus({id: 3})
+    const status = makeMockStatus({id: '1'})
+    const otherStatus = makeMockStatus({id: '3'})
     status.uri = 'xxx'
     const deletion = makeMockStatus({id: 2, type: 'deletion'})
     deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
@@ -107,36 +92,36 @@ describe('The Statuses module', () => {
     expect(state.allStatuses).to.eql([otherStatus])
     expect(state.timelines.public.statuses).to.eql([otherStatus])
     expect(state.timelines.public.visibleStatuses).to.eql([otherStatus])
-    expect(state.timelines.public.maxId).to.eql(3)
+    expect(state.timelines.public.maxId).to.eql('3')
   })
 
   it('does not update the maxId when the noIdUpdate flag is set', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
-    const secondStatus = makeMockStatus({id: 2})
+    const status = makeMockStatus({id: '1'})
+    const secondStatus = makeMockStatus({id: '2'})
 
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
-    expect(state.timelines.public.maxId).to.eql(1)
+    expect(state.timelines.public.maxId).to.eql('1')
 
     mutations.addNewStatuses(state, { statuses: [secondStatus], showImmediately: true, timeline: 'public', noIdUpdate: true })
     expect(state.timelines.public.statuses).to.eql([secondStatus, status])
     expect(state.timelines.public.visibleStatuses).to.eql([secondStatus, status])
-    expect(state.timelines.public.maxId).to.eql(1)
+    expect(state.timelines.public.maxId).to.eql('1')
   })
 
   it('keeps a descending by id order in timeline.visibleStatuses and timeline.statuses', () => {
     const state = cloneDeep(defaultState)
-    const nonVisibleStatus = makeMockStatus({id: 1})
-    const status = makeMockStatus({id: 3})
-    const statusTwo = makeMockStatus({id: 2})
-    const statusThree = makeMockStatus({id: 4})
+    const nonVisibleStatus = makeMockStatus({id: '1'})
+    const status = makeMockStatus({id: '3'})
+    const statusTwo = makeMockStatus({id: '2'})
+    const statusThree = makeMockStatus({id: '4'})
 
     mutations.addNewStatuses(state, { statuses: [nonVisibleStatus], showImmediately: false, timeline: 'public' })
 
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
     mutations.addNewStatuses(state, { statuses: [statusTwo], showImmediately: true, timeline: 'public' })
 
-    expect(state.timelines.public.minVisibleId).to.equal(2)
+    expect(state.timelines.public.minVisibleId).to.equal('2')
 
     mutations.addNewStatuses(state, { statuses: [statusThree], showImmediately: true, timeline: 'public' })
 
@@ -157,22 +142,22 @@ describe('The Statuses module', () => {
     expect(state.timelines.public.visibleStatuses).to.have.length(1)
     expect(state.timelines.public.statuses).to.have.length(1)
     expect(state.allStatuses).to.have.length(2)
-    expect(state.allStatuses[0].id).to.equal(1)
-    expect(state.allStatuses[1].id).to.equal(2)
+    expect(state.allStatuses[0].id).to.equal('1')
+    expect(state.allStatuses[1].id).to.equal('2')
 
     // It refers to the modified status.
     mutations.addNewStatuses(state, { statuses: [modStatus], timeline: 'public' })
     expect(state.allStatuses).to.have.length(2)
-    expect(state.allStatuses[0].id).to.equal(1)
+    expect(state.allStatuses[0].id).to.equal('1')
     expect(state.allStatuses[0].text).to.equal(modStatus.text)
-    expect(state.allStatuses[1].id).to.equal(2)
+    expect(state.allStatuses[1].id).to.equal('2')
     expect(retweet.retweeted_status.text).to.eql(modStatus.text)
   })
 
   it('replaces existing statuses with the same id', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
-    const modStatus = makeMockStatus({id: 1, text: 'something else'})
+    const status = makeMockStatus({id: '1'})
+    const modStatus = makeMockStatus({id: '1', text: 'something else'})
 
     // Add original status
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
@@ -209,7 +194,7 @@ describe('The Statuses module', () => {
 
   it('handles favorite actions', () => {
     const state = cloneDeep(defaultState)
-    const status = makeMockStatus({id: 1})
+    const status = makeMockStatus({id: '1'})
 
     const favorite = {
       id: 2,
@@ -217,7 +202,7 @@ describe('The Statuses module', () => {
       in_reply_to_status_id: '1', // The API uses strings here...
       uri: 'tag:shitposter.club,2016-08-21:fave:3895:note:773501:2016-08-21T16:52:15+00:00',
       text: 'a favorited something by b',
-      user: { id: 99 }
+      user: { id: '99' }
     }
 
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
@@ -236,7 +221,7 @@ describe('The Statuses module', () => {
 
     // If something is favorited by the current user, it also sets the 'favorited' property but does not increment counter to avoid over-counting. Counter is incremented (updated, really) via response to the favorite request.
     const user = {
-      id: 1
+      id: '1'
     }
 
     const ownFavorite = {
@@ -257,11 +242,11 @@ describe('The Statuses module', () => {
 
   describe('notifications', () => {
     it('removes a notification when the notice gets removed', () => {
-      const user = { id: 1 }
+      const user = { id: '1' }
       const state = cloneDeep(defaultState)
-      const status = makeMockStatus({id: 1})
-      const otherStatus = makeMockStatus({id: 3})
-      const mentionedStatus = makeMockStatus({id: 2})
+      const status = makeMockStatus({id: '1'})
+      const otherStatus = makeMockStatus({id: '3'})
+      const mentionedStatus = makeMockStatus({id: '2'})
       mentionedStatus.attentions = [user]
       mentionedStatus.uri = 'xxx'
       otherStatus.attentions = [user]

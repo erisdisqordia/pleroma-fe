@@ -80,6 +80,14 @@ export const parseUser = (data) => {
 
     output.statusnet_profile_url = data.statusnet_profile_url
     output.is_local = data.is_local
+
+    // QVITTER ONLY FOR NOW
+    // Really only applies to logged in user, really.. I THINK
+    output.rights = data.rights
+    output.no_rich_text = data.no_rich_text
+    output.default_scope = data.default_scope
+    output.hide_network = data.hide_network
+    output.background_image = data.background_image
   }
 
   output.created_at = new Date(data.created_at)

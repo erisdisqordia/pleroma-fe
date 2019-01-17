@@ -366,6 +366,18 @@ const verifyCredentials = (user) => {
     method: 'POST',
     headers: authHeaders(user)
   })
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {
+          error: response
+        }
+      }
+    })
+    .then((data) => ({
+      user: parseUser(data)
+    }))
 }
 
 const favorite = ({ id, credentials }) => {

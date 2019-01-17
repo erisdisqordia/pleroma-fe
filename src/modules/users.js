@@ -207,39 +207,38 @@ const users = {
         const commit = store.commit
         commit('beginLogin')
         store.rootState.api.backendInteractor.verifyCredentials(accessToken)
-          .then((response) => {
-            if (response.ok) {
-              response.json()
-                .then((user) => {
-                  // user.credentials = userCredentials
-                  user.credentials = accessToken
-                  commit('setCurrentUser', user)
-                  commit('addNewUsers', [user])
+          .then((data) => {
+            if (!data.error) {
+              const { user } = data
+              // user.credentials = userCredentials
+              user.credentials = accessToken
+              commit('setCurrentUser', user)
+              commit('addNewUsers', [user])
 
-                  getNotificationPermission()
-                    .then(permission => commit('setNotificationPermission', permission))
+              getNotificationPermission()
+                .then(permission => commit('setNotificationPermission', permission))
 
-                  // Set our new backend interactor
-                  commit('setBackendInteractor', backendInteractorService(accessToken))
+              // Set our new backend interactor
+              commit('setBackendInteractor', backendInteractorService(accessToken))
 
-                  if (user.token) {
-                    store.dispatch('initializeSocket', user.token)
-                  }
+              if (user.token) {
+                store.dispatch('initializeSocket', user.token)
+              }
 
-                  // Start getting fresh tweets.
-                  store.dispatch('startFetching', 'friends')
+              // Start getting fresh tweets.
+              store.dispatch('startFetching', 'friends')
 
-                  // Get user mutes and follower info
-                  store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {
-                    each(mutedUsers, (user) => { user.muted = true })
-                    store.commit('addNewUsers', mutedUsers)
-                  })
+              // Get user mutes and follower info
+              store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {
+                each(mutedUsers, (user) => { user.muted = true })
+                store.commit('addNewUsers', mutedUsers)
+              })
 
-                  // Fetch our friends
-                  store.rootState.api.backendInteractor.fetchFriends({ id: user.id })
-                    .then((friends) => commit('addNewUsers', friends))
-                })
+              // Fetch our friends
+              store.rootState.api.backendInteractor.fetchFriends({ id: user.id })
+                .then((friends) => commit('addNewUsers', friends))
             } else {
+              const response = data.error
               // Authentication failed
               commit('endLogin')
               if (response.status === 401) {
@@ -251,11 +250,11 @@ const users = {
             commit('endLogin')
             resolve()
           })
-          .catch((error) => {
-            console.log(error)
-            commit('endLogin')
-            reject('Failed to connect to server, try again')
-          })
+        .catch((error) => {
+          console.log(error)
+          commit('endLogin')
+          reject('Failed to connect to server, try again')
+        })
       })
     }
   }

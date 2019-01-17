@@ -5,13 +5,16 @@ import Timeline from '../timeline/timeline.vue'
 const UserProfile = {
   created () {
     this.$store.commit('clearTimeline', { timeline: 'user' })
+    this.$store.commit('clearTimeline', { timeline: 'favorites' })
     this.$store.dispatch('startFetching', ['user', this.fetchBy])
+    this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
     if (!this.user.id) {
       this.$store.dispatch('fetchUser', this.fetchBy)
     }
   },
   destroyed () {
     this.$store.dispatch('stopFetching', 'user')
+    this.$store.dispatch('stopFetching', 'favorites')
   },
   computed: {
     timeline () {
@@ -25,6 +28,9 @@ const UserProfile = {
     },
     userName () {
       return this.$route.params.name || this.user.screen_name
+    },
+    isUs () {
+      return this.userId === this.$store.state.users.currentUser.id
     },
     friends () {
       return this.user.friends
@@ -65,21 +71,28 @@ const UserProfile = {
     }
   },
   watch: {
+    // TODO get rid of this copypasta
     userName () {
       if (this.isExternal) {
         return
       }
       this.$store.dispatch('stopFetching', 'user')
+      this.$store.dispatch('stopFetching', 'favorites')
       this.$store.commit('clearTimeline', { timeline: 'user' })
+      this.$store.commit('clearTimeline', { timeline: 'favorites' })
       this.$store.dispatch('startFetching', ['user', this.fetchBy])
+      this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
     },
     userId () {
       if (!this.isExternal) {
         return
       }
       this.$store.dispatch('stopFetching', 'user')
+      this.$store.dispatch('stopFetching', 'favorites')
       this.$store.commit('clearTimeline', { timeline: 'user' })
+      this.$store.commit('clearTimeline', { timeline: 'favorites' })
       this.$store.dispatch('startFetching', ['user', this.fetchBy])
+      this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
     },
     user () {
       if (this.user.id && !this.user.followers) {

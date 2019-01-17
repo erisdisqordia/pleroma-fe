@@ -375,9 +375,7 @@ const verifyCredentials = (user) => {
         }
       }
     })
-    .then((data) => ({
-      user: parseUser(data)
-    }))
+    .then((data) => data.error ? data : parseUser(data))
 }
 
 const favorite = ({ id, credentials }) => {
@@ -429,6 +427,16 @@ const postStatus = ({credentials, status, spoilerText, visibility, sensitive, me
     method: 'POST',
     headers: authHeaders(credentials)
   })
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {
+          error: response
+        }
+      }
+    })
+    .then((data) => data.error ? data : parseStatus(data))
 }
 
 const deleteStatus = ({ id, credentials }) => {

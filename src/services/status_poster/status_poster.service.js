@@ -5,7 +5,6 @@ const postStatus = ({ store, status, spoilerText, visibility, sensitive, media =
   const mediaIds = map(media, 'id')
 
   return apiService.postStatus({credentials: store.state.users.currentUser.credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType, noAttachmentLinks: store.state.instance.noAttachmentLinks})
-    .then((data) => data.json())
     .then((data) => {
       if (!data.error) {
         store.dispatch('addNewStatuses', {

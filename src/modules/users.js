@@ -209,7 +209,7 @@ const users = {
         store.rootState.api.backendInteractor.verifyCredentials(accessToken)
           .then((data) => {
             if (!data.error) {
-              const { user } = data
+              const user = data
               // user.credentials = userCredentials
               user.credentials = accessToken
               commit('setCurrentUser', user)

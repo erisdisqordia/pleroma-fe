@@ -29,7 +29,7 @@ export const parseUser = (data) => {
   // case for users in "mentions" property for statuses in MastoAPI
   const mastoShort = masto && !data.hasOwnProperty('avatar')
 
-  output.id = data.id
+  output.id = String(data.id)
 
   if (masto) {
     output.screen_name = data.acct
@@ -152,7 +152,7 @@ export const parseStatus = (data) => {
     output.statusnet_conversation_id = data.statusnet_conversation_id
   }
 
-  output.id = Number(data.id)
+  output.id = String(data.id)
   output.visibility = data.visibility
   output.created_at = new Date(data.created_at)
 
@@ -201,7 +201,7 @@ export const parseNotification = (data) => {
   }
 
   output.created_at = new Date(data.created_at)
-  output.id = data.id
+  output.id = String(data.id)
 
   return output
 }

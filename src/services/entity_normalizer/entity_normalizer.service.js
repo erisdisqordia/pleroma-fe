@@ -127,6 +127,7 @@ export const parseStatus = (data) => {
 
     output.in_reply_to_status_id = data.in_reply_to_id
     output.in_reply_to_user_id = data.in_reply_to_account_id
+    output.in_reply_to_screen_name = data.in_reply_to_screen_name
 
     // Not exactly the same but works
     output.statusnet_conversation_id = data.id
@@ -136,6 +137,10 @@ export const parseStatus = (data) => {
     }
 
     output.summary = data.spoiler_text
+    output.external_url = data.url
+
+    // FIXME missing!!
+    output.is_local = false
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num
@@ -163,6 +168,9 @@ export const parseStatus = (data) => {
     output.in_reply_to_status_id = data.in_reply_to_status_id
     output.in_reply_to_user_id = data.in_reply_to_user_id
 
+    // Missing!! fix in UI?
+    output.in_reply_to_screen_name = null
+
     output.statusnet_conversation_id = data.statusnet_conversation_id
 
     if (output.type === 'retweet') {
@@ -170,6 +178,8 @@ export const parseStatus = (data) => {
     }
 
     output.summary = data.summary
+    output.external_url = data.external_url
+    output.is_local = data.is_local
   }
 
   output.id = String(data.id)

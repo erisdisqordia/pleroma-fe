@@ -141,7 +141,7 @@ const Status = {
       if (this.status.user.id === this.$store.state.users.currentUser.id) {
         return false
       }
-      if (this.status.activity_type === 'repeat') {
+      if (this.status.type === 'retweet') {
         return false
       }
       var checkFollowing = this.$store.state.config.replyVisibility === 'following'

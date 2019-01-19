@@ -24,6 +24,9 @@ const Attachment = {
     StillImage
   },
   computed: {
+    referrerpolicy () {
+      return this.$store.state.instance.mediaProxyAvailable ? "" : "no-referrer"
+    },
     type () {
       return fileTypeService.fileType(this.attachment.mimetype)
     },

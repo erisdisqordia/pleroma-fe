@@ -10,7 +10,7 @@
       <a href="#" @click.prevent="toggleHidden()">Hide</a>
     </div>
     <a v-if="type === 'image' && (!hidden || preloadImage)" class="image-attachment" :class="{'hidden': hidden && preloadImage}" :href="attachment.url" target="_blank" :title="attachment.description">
-      <StillImage :class="{'small': isSmall}" referrerpolicy="no-referrer" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
+      <StillImage :class="{'small': isSmall}" :referrerpolicy="referrerPolicy" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
     <video :class="{'small': isSmall}" v-if="type === 'video' && !hidden" @loadeddata="onVideoDataLoad" :src="attachment.url" controls :loop="loopVideo" playsinline></video>

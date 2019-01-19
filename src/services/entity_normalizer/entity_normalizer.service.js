@@ -58,14 +58,12 @@ export const parseUser = (data) => {
 
     output.statusnet_profile_url = data.url
 
-    // FIXME missing
-    output.follows_you = null
-
-    // FIXME ???????
-    output.statusnet_blocking = false
-
-    // FIXME missing
-    output.muted = null
+    if (data.pleroma) {
+      const pleroma = data.pleroma
+      output.follows_you = pleroma.follows_you
+      output.statusnet_blocking = pleroma.statusnet_blocking
+      output.muted = pleroma.muted
+    }
 
     // Missing, trying to recover
     output.is_local = !output.screen_name.includes('@')
@@ -204,11 +202,7 @@ export const parseStatus = (data) => {
 
   output.user = parseUser(masto ? data.account : data.user)
 
-  output.attentions = ((masto ? data.mentions : data.attentions) || [])
-    .map(_ => ({
-      id: _.id,
-      following: _.following // FIXME: MastoAPI doesn't have this
-    }))
+  output.attentions = ((masto ? data.mentions : data.attentions) || []).map(parseUser)
 
   output.attachments = ((masto ? data.media_attachments : data.attachments) || [])
     .map(parseAttachment)

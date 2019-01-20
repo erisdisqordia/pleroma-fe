@@ -2,11 +2,6 @@ import StillImage from '../still-image/still-image.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 
 const MediaModal = {
-  data () {
-    return {
-      loopVideo: this.$store.state.config.loopVideo
-    }
-  },
   components: {
     StillImage
   },
@@ -22,6 +17,9 @@ const MediaModal = {
     },
     type () {
       return this.currentMedia ? fileTypeService.fileType(this.currentMedia.mimetype) : null
+    },
+    loopVideo () {
+      return this.$store.state.config.loopVideo
     }
   },
   created () {
@@ -34,26 +32,6 @@ const MediaModal = {
   methods: {
     hide () {
       this.$store.dispatch('closeMediaViewer')
-    },
-    onVideoDataLoad (e) {
-      if (!e.srcElement) {
-        return
-      }
-      if (typeof e.srcElement.webkitAudioDecodedByteCount !== 'undefined') {
-        // non-zero if video has audio track
-        if (e.srcElement.webkitAudioDecodedByteCount > 0) {
-          this.loopVideo = this.$store.state.config.loopVideo && !this.$store.state.config.loopVideoSilentOnly
-        }
-      } else if (typeof e.srcElement.mozHasAudio !== 'undefined') {
-        // true if video has audio track
-        if (e.srcElement.mozHasAudio) {
-          this.loopVideo = this.$store.state.config.loopVideo && !this.$store.state.config.loopVideoSilentOnly
-        }
-      } else if (typeof e.srcElement.audioTracks !== 'undefined') {
-        if (e.srcElement.audioTracks.length > 0) {
-          this.loopVideo = this.$store.state.config.loopVideo && !this.$store.state.config.loopVideoSilentOnly
-        }
-      }
     }
   }
 }

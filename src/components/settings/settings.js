@@ -29,7 +29,6 @@ const settings = {
       notificationVisibilityLocal: user.notificationVisibility,
       replyVisibilityLocal: user.replyVisibility,
       loopVideoLocal: user.loopVideo,
-      loopVideoSilentOnlyLocal: user.loopVideoSilentOnly,
       muteWordsString: user.muteWords.join('\n'),
       autoLoadLocal: user.autoLoad,
       streamingLocal: user.streaming,
@@ -57,14 +56,7 @@ const settings = {
       scopeCopyDefault: this.$t('settings.values.' + instance.scopeCopy),
 
       stopGifs: user.stopGifs,
-      webPushNotificationsLocal: user.webPushNotifications,
-      loopSilentAvailable:
-        // Firefox
-        Object.getOwnPropertyDescriptor(HTMLVideoElement.prototype, 'mozHasAudio') ||
-        // Chrome-likes
-        Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'webkitAudioDecodedByteCount') ||
-        // Future spec, still not supported in Nightly 63 as of 08/2018
-        Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'audioTracks')
+      webPushNotificationsLocal: user.webPushNotifications
     }
   },
   components: {
@@ -119,9 +111,6 @@ const settings = {
     },
     loopVideoLocal (value) {
       this.$store.dispatch('setOption', { name: 'loopVideo', value })
-    },
-    loopVideoSilentOnlyLocal (value) {
-      this.$store.dispatch('setOption', { name: 'loopVideoSilentOnly', value })
     },
     autoLoadLocal (value) {
       this.$store.dispatch('setOption', { name: 'autoLoad', value })

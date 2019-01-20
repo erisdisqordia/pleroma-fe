@@ -4,16 +4,15 @@
   </div>
   <div
     v-else class="attachment"
-    :class="{[type]: true, loading, 'small-attachment': isSmall, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}"
+    :class="{[type]: true, loading, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}"
     v-show="!isEmpty"
     @click="toggleModal"
   >
-    <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">
-      <img :key="nsfwImage" :src="nsfwImage"/>
+    <a class="image-attachment" v-if="hidden" :href="attachment.url">
+      <img :key="nsfwImage" :src="nsfwImage" :class="{'small': isSmall}"/>
+      <i v-if="type === 'video'" class="play-icon icon-play-circled"></i>
     </a>
-    <div class="hider" v-if="nsfw && hideNsfwLocal && !hidden">
-      <a href="#" @click.prevent="toggleHidden()">Hide</a>
-    </div>
+
     <a v-if="type === 'image' && (!hidden || preloadImage)"
       class="image-attachment"
       :class="{'hidden': hidden && preloadImage}"
@@ -23,7 +22,14 @@
       <StillImage :class="{'small': isSmall}" referrerpolicy="no-referrer" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
-    <video :class="{'small': isSmall}" v-if="type === 'video' && !hidden" :src="attachment.url"></video>
+    <a class="video-container"
+      v-if="type === 'video' && !hidden"
+      :class="{'small': isSmall}"
+      :href="attachment.url"
+    >
+      <video class="video" :src="attachment.url"></video>
+      <i class="play-icon icon-play-circled"></i>
+    </a>
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 
@@ -44,13 +50,17 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
+$normalheight: 140px;
+$normalwidth: 180px;
+$smallheight: 80px;
+
 .attachments {
   display: flex;
   flex-wrap: wrap;
 
   .attachment.media-upload-container {
     flex: 0 0 auto;
-    max-height: 160px;
+    max-height: $normalheight;
     max-width: 100%;
   }
 
@@ -67,15 +77,12 @@
     }
   }
 
-  .small-attachment {
-    max-height: 100px;
-  }
-
   .attachment {
     position: relative;
     margin: 0.5em 0.5em 0em 0em;
     align-self: flex-start;
     line-height: 0;
+    flex-grow: 0;
 
     border-style: solid;
     border-width: 1px;
@@ -93,8 +100,28 @@
     line-height: 0;
   }
 
+  .video-container {
+    width: auto;
+    height: $normalheight;
+    max-width: $normalwidth;
+  }
+
   .video {
+    width: auto;
     object-fit: cover;
+  }
+
+  .play-icon {
+    position: absolute;
+    font-size: 64px;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  }
+
+  .play-icon::before {
+    margin: 0;
   }
 
   &.html {
@@ -116,11 +143,10 @@
   }
 
   .small {
-    max-height: 100px;
+    max-height: $smallheight;
   }
 
   video {
-    max-height: 160px;
     height: 100%;
     z-index: 0;
   }
@@ -131,7 +157,7 @@
 
   img.media-upload {
     line-height: 0;
-    max-height: 160px;
+    max-height: $normalheight;
     max-width: 100%;
   }
 
@@ -168,27 +194,26 @@
   }
 
   .image-attachment {
-    display: flex;
-    flex: 1;
+    flex-grow: 0;
 
     &.hidden {
       display: none;
     }
 
     .still-image {
-      height: 100%;
     }
 
     .small {
       img {
-        max-height: 80px;
+        height: $smallheight;
       }
     }
 
     img {
       object-fit: cover;
-      height: 100%; /* If this isn't here, chrome will stretch the images */
-      height: 160px;
+      height: $normalheight;
+      width: auto;
+      max-width: $normalwidth;
       image-orientation: from-image;
     }
   }

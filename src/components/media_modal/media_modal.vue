@@ -7,7 +7,6 @@
       :src="currentMedia.url"
       @click.stop=""
       controls autoplay
-      @loadeddata="onVideoDataLoad" 
       :loop="loopVideo">
     </video>
   </div>

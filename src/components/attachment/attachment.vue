@@ -19,7 +19,7 @@
       :href="attachment.url" target="_blank"
       :title="attachment.description"
     >
-      <StillImage :class="{'small': isSmall}" referrerpolicy="no-referrer" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
+      <StillImage :class="{'small': isSmall}" referrerpolicy="referrerPolicy" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
     <a class="video-container"

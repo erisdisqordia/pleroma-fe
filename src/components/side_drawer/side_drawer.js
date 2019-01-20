@@ -23,6 +23,9 @@ const SideDrawer = {
     },
     unseenNotificationsCount () {
       return this.unseenNotifications.length
+    },
+    suggestionsEnabled () {
+      return this.$store.state.instance.suggestionsEnabled
     }
   },
   methods: {

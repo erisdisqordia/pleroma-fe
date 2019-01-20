@@ -29,6 +29,7 @@
     "username": "ユーザーめい"
   },
   "nav": {
+    "about": "これはなに？",
     "back": "もどる",
     "chat": "ローカルチャット",
     "friend_requests": "フォローリクエスト",
@@ -38,6 +39,7 @@
     "timeline": "タイムライン",
     "twkn": "つながっているすべてのネットワーク",
     "user_search": "ユーザーをさがす",
+    "who_to_follow": "おすすめユーザー",
     "preferences": "せってい"
   },
   "notifications": {
@@ -50,6 +52,7 @@
     "repeated_you": "あなたのステータスがリピートされました"
   },
   "post_status": {
+    "new_status": "とうこうする",
     "account_not_locked_warning": "あなたのアカウントは {0} ではありません。あなたをフォローすれば、だれでも、フォロワーげんていのステータスをよむことができます。",
     "account_not_locked_warning_link": "ロックされたアカウント",
     "attachments_sensitive": "ファイルをNSFWにする",

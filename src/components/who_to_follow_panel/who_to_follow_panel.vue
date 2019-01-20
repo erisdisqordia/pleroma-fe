@@ -13,7 +13,7 @@
               {{user.name}}
             </router-link><br />
         </span>
-        <img v-bind:src="$store.state.instance.logo"> <a v-bind:href="moreUrl" target="_blank">{{$t('who_to_follow.more')}}</a>
+        <img v-bind:src="$store.state.instance.logo"> <router-link :to="{ name: 'who-to-follow' }">{{$t('who_to_follow.more')}}</router-link>
       </div>
     </div>
   </div>

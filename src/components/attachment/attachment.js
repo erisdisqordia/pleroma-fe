@@ -26,6 +26,9 @@ const Attachment = {
     usePlaceHolder () {
       return this.size === 'hide' || this.type === 'unknown'
     },
+    referrerpolicy () {
+      return this.$store.state.instance.mediaProxyAvailable ? '' : 'no-referrer'
+    },
     type () {
       return fileTypeService.fileType(this.attachment.mimetype)
     },

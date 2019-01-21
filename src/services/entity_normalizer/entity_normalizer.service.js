@@ -152,7 +152,9 @@ export const parseStatus = (data) => {
 
     output.in_reply_to_status_id = data.in_reply_to_id
     output.in_reply_to_user_id = data.in_reply_to_account_id
-    output.in_reply_to_screen_name = data.in_reply_to_screen_name
+
+    // Missing!! fix in UI?
+    output.in_reply_to_screen_name = null
 
     // Not exactly the same but works
     output.statusnet_conversation_id = data.id
@@ -192,9 +194,7 @@ export const parseStatus = (data) => {
 
     output.in_reply_to_status_id = data.in_reply_to_status_id
     output.in_reply_to_user_id = data.in_reply_to_user_id
-
-    // Missing!! fix in UI?
-    output.in_reply_to_screen_name = null
+    output.in_reply_to_screen_name = data.in_reply_to_screen_name
 
     output.statusnet_conversation_id = data.statusnet_conversation_id
 

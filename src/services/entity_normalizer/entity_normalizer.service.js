@@ -113,11 +113,22 @@ export const parseUser = (data) => {
 }
 
 const parseAttachment = (data) => {
-  // TODO A little bit messy ATM but works with both APIs
-  return {
-    ...data,
-    mimetype: data.mimetype || data.type
+  const output = {}
+  const masto = !data.hasOwnProperty('oembed')
+
+  if (masto) {
+    // Not exactly same...
+    output.mimetype = data.type
+    output.meta = data.meta // not present in BE yet
+  } else {
+    output.mimetype = data.mimetype
+    output.meta = null // missing
   }
+
+  output.url = data.url
+  output.description = data.description
+
+  return output
 }
 
 export const parseStatus = (data) => {

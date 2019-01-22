@@ -1,6 +1,5 @@
 import Vue from 'vue'
 
-
 import './tab_switcher.scss'
 
 export default Vue.component('tab-switcher', {
@@ -37,7 +36,7 @@ export default Vue.component('tab-switcher', {
 
             return (
               <div class={ classesWrapper.join(' ')}>
-              <button onClick={this.activateTab(index)} class={ classesTab.join(' ') }>{slot.data.attrs.label}</button>
+                <button onClick={this.activateTab(index)} class={ classesTab.join(' ') }>{slot.data.attrs.label}</button>
               </div>
             )
           })
@@ -47,7 +46,7 @@ export default Vue.component('tab-switcher', {
       const active = index === this.active
       return (
         <div class={active ? 'active' : 'hidden'}>
-        {slot}
+          {slot}
         </div>
       )
     })

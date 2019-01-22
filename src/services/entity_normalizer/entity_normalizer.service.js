@@ -211,14 +211,6 @@ export const parseStatus = (data) => {
   output.visibility = data.visibility
   output.created_at = new Date(data.created_at)
 
-  // Converting to string, the right way.
-  output.in_reply_to_status_id = output.in_reply_to_status_id
-    ? String(output.in_reply_to_status_id)
-    : null
-  output.in_reply_to_user_id = output.in_reply_to_user_id
-    ? String(output.in_reply_to_user_id)
-    : null
-
   output.user = parseUser(masto ? data.account : data.user)
 
   output.attentions = ((masto ? data.mentions : data.attentions) || []).map(parseUser)

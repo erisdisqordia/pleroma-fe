@@ -73,16 +73,6 @@ const Status = {
       return (this.$store.state.config.hideAttachments && !this.inConversation) ||
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
     },
-    userProfileLink () {
-      return this.generateUserProfileLink(this.status.user.id, this.status.user.screen_name)
-    },
-    replyProfileLink () {
-      if (this.isReply) {
-        return this.generateUserProfileLink(this.status.in_reply_to_status_id, this.replyToName)
-      } else {
-        return ''
-      }
-    },
     retweet () { return !!this.statusoid.retweeted_status },
     retweeter () { return this.statusoid.user.name },
     retweeterHtml () { return this.statusoid.user.name_html },
@@ -128,14 +118,6 @@ const Status = {
     },
     isReply () {
       return !!this.status.in_reply_to_status_id
-    },
-    replyToName () {
-      const user = this.$store.state.users.usersObject[this.status.in_reply_to_user_id]
-      if (user) {
-        return user.screen_name
-      } else {
-        return this.status.in_reply_to_screen_name || ''
-      }
     },
     hideReply () {
       if (this.$store.state.config.replyVisibility === 'all') {
@@ -295,7 +277,7 @@ const Status = {
     replyLeave () {
       this.showPreview = false
     },
-    generateUserProfileLink (id, name) {
+    userProfileLink (id, name) {
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
     }
   },

@@ -149,8 +149,8 @@ parseStatus
 makeMockStatusQvitter
 makeMockUserQvitter
 
-describe.only('API Entities normalizer', () => {
-  describe('statuses', () => {
+describe('API Entities normalizer', () => {
+  describe('parseStatus', () => {
     describe('QVitter preprocessing', () => {
       it('doesn\'t blow up', () => {
         const parsed = qvitterapidata.map(parseStatus)
@@ -220,8 +220,9 @@ describe.only('API Entities normalizer', () => {
       })
     })
   })
+
   // Statuses generally already contain some info regarding users and there's nearly 1:1 mapping, so very little to test
-  describe('users (MastoAPI)', () => {
+  describe('parseUsers (MastoAPI)', () => {
     it('sets correct is_local for users depending on their screen_name', () => {
       const local = makeMockUserMasto({ acct: 'foo' })
       const remote = makeMockUserMasto({ acct: 'foo@bar.baz' })
@@ -233,7 +234,7 @@ describe.only('API Entities normalizer', () => {
 
   // We currently use QvitterAPI notifications only, and especially due to MastoAPI lacking is_seen, support for MastoAPI
   // is more of an afterthought
-  describe('notifications (QvitterAPI)', () => {
+  describe('parseNotifications (QvitterAPI)', () => {
     it('correctly normalizes data to FE\'s format', () => {
       const notif = makeMockNotificationQvitter({
         id: 123,

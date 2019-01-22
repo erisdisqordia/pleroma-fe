@@ -1,8 +1,8 @@
-import { includes, remove, slice, sortBy, toInteger, each, find, flatten, maxBy, minBy, merge, last, isArray } from 'lodash'
+import { remove, slice, each, find, maxBy, minBy, merge, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
-const emptyTl = (userId = 0) => ({
+const emptyTl = () => ({
   statuses: [],
   statusesObject: {},
   faves: [],
@@ -14,8 +14,8 @@ const emptyTl = (userId = 0) => ({
   loading: false,
   followers: [],
   friends: [],
-  flushMarker: 0,
-  userId
+  userId: 0,
+  flushMarker: 0
 })
 
 export const defaultState = {
@@ -36,6 +36,7 @@ export const defaultState = {
     mentions: emptyTl(),
     public: emptyTl(),
     user: emptyTl(),
+    favorites: emptyTl(),
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
     tag: emptyTl(),
@@ -43,20 +44,7 @@ export const defaultState = {
   }
 }
 
-const isNsfw = (status) => {
-  const nsfwRegex = /#nsfw/i
-  return includes(status.tags, 'nsfw') || !!status.text.match(nsfwRegex)
-}
-
 export const prepareStatus = (status) => {
-  // Parse nsfw tags
-  if (status.nsfw === undefined) {
-    status.nsfw = isNsfw(status)
-    if (status.retweeted_status) {
-      status.nsfw = status.retweeted_status.nsfw
-    }
-  }
-
   // Set deleted flag
   status.deleted = false
 
@@ -73,35 +61,6 @@ const visibleNotificationTypes = (rootState) => {
     rootState.config.notificationVisibility.repeats && 'repeat',
     rootState.config.notificationVisibility.follows && 'follow'
   ].filter(_ => _)
-}
-
-export const statusType = (status) => {
-  if (status.is_post_verb) {
-    return 'status'
-  }
-
-  if (status.retweeted_status) {
-    return 'retweet'
-  }
-
-  if ((typeof status.uri === 'string' && status.uri.match(/(fave|objectType=Favourite)/)) ||
-      (typeof status.text === 'string' && status.text.match(/favorited/))) {
-    return 'favorite'
-  }
-
-  if (status.text.match(/deleted notice {{tag/) || status.qvitter_delete_notice) {
-    return 'deletion'
-  }
-
-  if (status.text.match(/started following/) || status.activity_type === 'follow') {
-    return 'follow'
-  }
-
-  return 'unknown'
-}
-
-export const findMaxId = (...args) => {
-  return (maxBy(flatten(args), 'id') || {}).id
 }
 
 const mergeOrAdd = (arr, obj, item) => {
@@ -122,9 +81,11 @@ const mergeOrAdd = (arr, obj, item) => {
   }
 }
 
+const sortById = (a, b) => a.id > b.id ? -1 : 1
+
 const sortTimeline = (timeline) => {
-  timeline.visibleStatuses = sortBy(timeline.visibleStatuses, ({id}) => -id)
-  timeline.statuses = sortBy(timeline.statuses, ({id}) => -id)
+  timeline.visibleStatuses = timeline.visibleStatuses.sort(sortById)
+  timeline.statuses = timeline.statuses.sort(sortById)
   timeline.minVisibleId = (last(timeline.visibleStatuses) || {}).id
   return timeline
 }
@@ -153,13 +114,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     return
   }
 
-  const addStatus = (status, showImmediately, addToTimeline = true) => {
-    const result = mergeOrAdd(allStatuses, allStatusesObject, status)
-    status = result.item
+  const addStatus = (data, showImmediately, addToTimeline = true) => {
+    const result = mergeOrAdd(allStatuses, allStatusesObject, data)
+    const status = result.item
 
     if (result.new) {
       // We are mentioned in a post
-      if (statusType(status) === 'status' && find(status.attentions, { id: user.id })) {
+      if (status.type === 'status' && find(status.attentions, { id: user.id })) {
         const mentions = state.timelines.mentions
 
         // Add the mention to the mentions timeline
@@ -200,7 +161,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const favoriteStatus = (favorite, counter) => {
-    const status = find(allStatuses, { id: toInteger(favorite.in_reply_to_status_id) })
+    const status = find(allStatuses, { id: favorite.in_reply_to_status_id })
     if (status) {
       // This is our favorite, so the relevant bit.
       if (favorite.user.id === user.id) {
@@ -263,6 +224,9 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
         remove(timelineObject.visibleStatuses, { uri })
       }
     },
+    'follow': (follow) => {
+      // NOOP, it is known status but we don't do anything about it for now
+    },
     'default': (unknown) => {
       console.log('unknown status type')
       console.log(unknown)
@@ -270,7 +234,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   each(statuses, (status) => {
-    const type = statusType(status)
+    const type = status.type
     const processor = processors[type] || processors['default']
     processor(status)
   })
@@ -288,42 +252,36 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
   const allStatuses = state.allStatuses
   const allStatusesObject = state.allStatusesObject
   each(notifications, (notification) => {
-    const result = mergeOrAdd(allStatuses, allStatusesObject, notification.notice)
-    const action = result.item
+    notification.action = mergeOrAdd(allStatuses, allStatusesObject, notification.action).item
+    notification.status = notification.status && mergeOrAdd(allStatuses, allStatusesObject, notification.status).item
+
     // Only add a new notification if we don't have one for the same action
-    if (!find(state.notifications.data, (oldNotification) => oldNotification.action.id === action.id)) {
-      state.notifications.maxId = Math.max(notification.id, state.notifications.maxId)
-      state.notifications.minId = Math.min(notification.id, state.notifications.minId)
+    if (!state.notifications.idStore.hasOwnProperty(notification.id)) {
+      state.notifications.maxId = notification.id > state.notifications.maxId
+        ? notification.id
+        : state.notifications.maxId
+      state.notifications.minId = notification.id < state.notifications.minId
+        ? notification.id
+        : state.notifications.minId
 
-      const fresh = !notification.is_seen
-      const status = notification.ntype === 'like'
-            ? action.favorited_status
-            : action
-
-      const result = {
-        type: notification.ntype,
-        status,
-        action,
-        seen: !fresh
-      }
-
-      state.notifications.data.push(result)
-      state.notifications.idStore[notification.id] = result
+      state.notifications.data.push(notification)
+      state.notifications.idStore[notification.id] = notification
 
       if ('Notification' in window && window.Notification.permission === 'granted') {
+        const notifObj = {}
+        const action = notification.action
         const title = action.user.name
-        const result = {}
-        result.icon = action.user.profile_image_url
-        result.body = action.text // there's a problem that it doesn't put a space before links tho
+        notifObj.icon = action.user.profile_image_url
+        notifObj.body = action.text // there's a problem that it doesn't put a space before links tho
 
         // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
         if (action.attachments && action.attachments.length > 0 && !action.nsfw &&
             action.attachments[0].mimetype.startsWith('image/')) {
-          result.image = action.attachments[0].url
+          notifObj.image = action.attachments[0].url
         }
 
-        if (fresh && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.ntype)) {
-          let notification = new window.Notification(title, result)
+        if (notification.fresh && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.ntype)) {
+          let notification = new window.Notification(title, notifObj)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.
           setTimeout(notification.close.bind(notification), 5000)
@@ -346,7 +304,7 @@ export const mutations = {
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
   clearTimeline (state, { timeline }) {
-    state.timelines[timeline] = emptyTl(state.timelines[timeline].userId)
+    state.timelines[timeline] = emptyTl()
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]

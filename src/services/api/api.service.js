@@ -41,7 +41,10 @@ const APPROVE_USER_URL = '/api/pleroma/friendships/approve'
 const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
+const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+
 import { each, map } from 'lodash'
+import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
 
 const oldfetch = window.fetch
@@ -70,6 +73,7 @@ const updateAvatar = ({credentials, params}) => {
       form.append(key, value)
     }
   })
+
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST',
@@ -87,6 +91,7 @@ const updateBg = ({credentials, params}) => {
       form.append(key, value)
     }
   })
+
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST',
@@ -110,6 +115,7 @@ const updateBanner = ({credentials, params}) => {
       form.append(key, value)
     }
   })
+
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST',
@@ -237,24 +243,28 @@ const fetchUser = ({id, credentials}) => {
   let url = `${USER_URL}?user_id=${id}`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => parseUser(data))
 }
 
 const fetchFriends = ({id, credentials}) => {
   let url = `${FRIENDS_URL}?user_id=${id}`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => data.map(parseUser))
 }
 
 const fetchFollowers = ({id, credentials}) => {
   let url = `${FOLLOWERS_URL}?user_id=${id}`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => data.map(parseUser))
 }
 
 const fetchAllFollowing = ({username, credentials}) => {
   const url = `${ALL_FOLLOWING_URL}/${username}.json`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => data.map(parseUser))
 }
 
 const fetchFollowRequests = ({credentials}) => {
@@ -266,13 +276,27 @@ const fetchFollowRequests = ({credentials}) => {
 const fetchConversation = ({id, credentials}) => {
   let url = `${CONVERSATION_URL}/${id}.json?count=100`
   return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => {
+      if (data.ok) {
+        return data
+      }
+      throw new Error('Error fetching timeline', data)
+    })
     .then((data) => data.json())
+    .then((data) => data.map(parseStatus))
 }
 
 const fetchStatus = ({id, credentials}) => {
   let url = `${STATUS_URL}/${id}.json`
   return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => {
+      if (data.ok) {
+        return data
+      }
+      throw new Error('Error fetching timeline', data)
+    })
     .then((data) => data.json())
+    .then((data) => parseStatus(data))
 }
 
 const setUserMute = ({id, credentials, muted = true}) => {
@@ -300,12 +324,13 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
     user: QVITTER_USER_TIMELINE_URL,
+    favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: TAG_TIMELINE_URL
   }
+  const isNotifications = timeline === 'notifications'
+  const params = []
 
   let url = timelineUrls[timeline]
-
-  let params = []
 
   if (since) {
     params.push(['since_id', since])
@@ -330,9 +355,10 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
       if (data.ok) {
         return data
       }
-      throw new Error('Error fetching timeline')
+      throw new Error('Error fetching timeline', data)
     })
     .then((data) => data.json())
+    .then((data) => data.map(isNotifications ? parseNotification : parseStatus))
 }
 
 const verifyCredentials = (user) => {
@@ -340,6 +366,16 @@ const verifyCredentials = (user) => {
     method: 'POST',
     headers: authHeaders(user)
   })
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {
+          error: response
+        }
+      }
+    })
+    .then((data) => data.error ? data : parseUser(data))
 }
 
 const favorite = ({ id, credentials }) => {
@@ -391,6 +427,16 @@ const postStatus = ({credentials, status, spoilerText, visibility, sensitive, me
     method: 'POST',
     headers: authHeaders(credentials)
   })
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {
+          error: response
+        }
+      }
+    })
+    .then((data) => data.error ? data : parseStatus(data))
 }
 
 const deleteStatus = ({ id, credentials }) => {

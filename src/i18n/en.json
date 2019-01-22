@@ -324,6 +324,7 @@
     "block": "Block",
     "blocked": "Blocked!",
     "deny": "Deny",
+    "favorites": "Favorites",
     "follow": "Follow",
     "follow_sent": "Request sent!",
     "follow_progress": "Requesting…",

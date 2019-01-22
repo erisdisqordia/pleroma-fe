@@ -1,9 +1,8 @@
 import { reduce, filter, sortBy } from 'lodash'
-import { statusType } from '../../modules/statuses.js'
 import Status from '../status/status.vue'
 
 const sortAndFilterConversation = (conversation) => {
-  conversation = filter(conversation, (status) => statusType(status) !== 'retweet')
+  conversation = filter(conversation, (status) => status.type !== 'retweet')
   return sortBy(conversation, 'id')
 }
 
@@ -18,10 +17,12 @@ const conversation = {
     'collapsable'
   ],
   computed: {
-    status () { return this.statusoid },
+    status () {
+      return this.statusoid
+    },
     conversation () {
       if (!this.status) {
-        return false
+        return []
       }
 
       const conversationId = this.status.statusnet_conversation_id
@@ -32,7 +33,9 @@ const conversation = {
     replies () {
       let i = 1
       return reduce(this.conversation, (result, {id, in_reply_to_status_id}) => {
-        const irid = Number(in_reply_to_status_id)
+        /* eslint-disable camelcase */
+        const irid = in_reply_to_status_id
+        /* eslint-enable camelcase */
         if (irid) {
           result[irid] = result[irid] || []
           result[irid].push({
@@ -69,7 +72,6 @@ const conversation = {
       }
     },
     getReplies (id) {
-      id = Number(id)
       return this.replies[id] || []
     },
     focused (id) {
@@ -80,7 +82,7 @@ const conversation = {
       }
     },
     setHighlight (id) {
-      this.highlight = Number(id)
+      this.highlight = id
     }
   }
 }

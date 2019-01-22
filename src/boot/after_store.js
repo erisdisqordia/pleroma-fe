@@ -24,10 +24,6 @@ const afterStoreSetup = ({ store, i18n }) => {
         store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadlimit.bannerlimit) })
       }
 
-      if (data.nsfwCensorImage) {
-        store.dispatch('setInstanceOption', { name: 'nsfwCensorImage', value: data.nsfwCensorImage })
-      }
-
       if (vapidPublicKey) {
         store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })
       }
@@ -73,7 +69,9 @@ const afterStoreSetup = ({ store, i18n }) => {
           var subjectLineBehavior = (config.subjectLineBehavior)
           var alwaysShowSubjectInput = (config.alwaysShowSubjectInput)
           var noAttachmentLinks = (config.noAttachmentLinks)
+          var nsfwCensorImage = (config.nsfwCensorImage)
 
+          store.dispatch('setInstanceOption', { name: 'nsfwCensorImage', value: nsfwCensorImage })
           store.dispatch('setInstanceOption', { name: 'theme', value: theme })
           store.dispatch('setInstanceOption', { name: 'background', value: background })
           store.dispatch('setInstanceOption', { name: 'hidePostStats', value: hidePostStats })

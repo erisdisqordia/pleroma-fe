@@ -129,13 +129,14 @@ const updateBanner = ({credentials, params}) => {
 // location
 // description
 const updateProfile = ({credentials, params}) => {
+  // Always include these fields, because they might be empty or false
+  const fields = ['description', 'locked', 'no_rich_text', 'hide_network']
   let url = PROFILE_UPDATE_URL
 
   const form = new FormData()
 
   each(params, (value, key) => {
-    /* Always include description, no_rich_text and locked, because it might be empty or false */
-    if (key === 'description' || key === 'locked' || key === 'no_rich_text' || value) {
+    if (fields.includes(key) || value) {
       form.append(key, value)
     }
   })

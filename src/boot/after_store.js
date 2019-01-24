@@ -50,48 +50,44 @@ const afterStoreSetup = ({ store, i18n }) => {
             config = Object.assign({}, staticConfig, apiConfig)
           }
 
-          var theme = (config.theme)
-          var background = (config.background)
-          var hidePostStats = (config.hidePostStats)
-          var hideUserStats = (config.hideUserStats)
-          var logo = (config.logo)
-          var logoMask = (typeof config.logoMask === 'undefined' ? true : config.logoMask)
-          var logoMargin = (typeof config.logoMargin === 'undefined' ? 0 : config.logoMargin)
-          var redirectRootNoLogin = (config.redirectRootNoLogin)
-          var redirectRootLogin = (config.redirectRootLogin)
-          var chatDisabled = (config.chatDisabled)
-          var showInstanceSpecificPanel = (config.showInstanceSpecificPanel)
-          var scopeOptionsEnabled = (config.scopeOptionsEnabled)
-          var formattingOptionsEnabled = (config.formattingOptionsEnabled)
-          var collapseMessageWithSubject = (config.collapseMessageWithSubject)
-          var loginMethod = (config.loginMethod)
-          var scopeCopy = (config.scopeCopy)
-          var subjectLineBehavior = (config.subjectLineBehavior)
-          var alwaysShowSubjectInput = (config.alwaysShowSubjectInput)
-          var noAttachmentLinks = (config.noAttachmentLinks)
-          var nsfwCensorImage = (config.nsfwCensorImage)
+          const copyInstanceOption = (name) => {
+            store.dispatch('setInstanceOption', {name, value: config[name]})
+          }
 
-          store.dispatch('setInstanceOption', { name: 'nsfwCensorImage', value: nsfwCensorImage })
-          store.dispatch('setInstanceOption', { name: 'theme', value: theme })
-          store.dispatch('setInstanceOption', { name: 'background', value: background })
-          store.dispatch('setInstanceOption', { name: 'hidePostStats', value: hidePostStats })
-          store.dispatch('setInstanceOption', { name: 'hideUserStats', value: hideUserStats })
-          store.dispatch('setInstanceOption', { name: 'logo', value: logo })
-          store.dispatch('setInstanceOption', { name: 'logoMask', value: logoMask })
-          store.dispatch('setInstanceOption', { name: 'logoMargin', value: logoMargin })
-          store.dispatch('setInstanceOption', { name: 'redirectRootNoLogin', value: redirectRootNoLogin })
-          store.dispatch('setInstanceOption', { name: 'redirectRootLogin', value: redirectRootLogin })
-          store.dispatch('setInstanceOption', { name: 'showInstanceSpecificPanel', value: showInstanceSpecificPanel })
-          store.dispatch('setInstanceOption', { name: 'scopeOptionsEnabled', value: scopeOptionsEnabled })
-          store.dispatch('setInstanceOption', { name: 'formattingOptionsEnabled', value: formattingOptionsEnabled })
-          store.dispatch('setInstanceOption', { name: 'collapseMessageWithSubject', value: collapseMessageWithSubject })
-          store.dispatch('setInstanceOption', { name: 'loginMethod', value: loginMethod })
-          store.dispatch('setInstanceOption', { name: 'scopeCopy', value: scopeCopy })
-          store.dispatch('setInstanceOption', { name: 'subjectLineBehavior', value: subjectLineBehavior })
-          store.dispatch('setInstanceOption', { name: 'alwaysShowSubjectInput', value: alwaysShowSubjectInput })
-          store.dispatch('setInstanceOption', { name: 'noAttachmentLinks', value: noAttachmentLinks })
+          copyInstanceOption('nsfwCensorImage')
+          copyInstanceOption('theme')
+          copyInstanceOption('background')
+          copyInstanceOption('hidePostStats')
+          copyInstanceOption('hideUserStats')
+          copyInstanceOption('logo')
 
-          if (chatDisabled) {
+          store.dispatch('setInstanceOption', {
+            name: 'logoMask',
+            value: typeof config.logoMask === 'undefined'
+              ? true
+              : config.logoMask
+          })
+
+          store.dispatch('setInstanceOption', {
+            name: 'logoMargin',
+            value: typeof config.logoMargin === 'undefined'
+              ? 0
+              : config.logoMargin
+          })
+
+          copyInstanceOption('redirectRootNoLogin')
+          copyInstanceOption('redirectRootLogin')
+          copyInstanceOption('showInstanceSpecificPanel')
+          copyInstanceOption('scopeOptionsEnabled')
+          copyInstanceOption('formattingOptionsEnabled')
+          copyInstanceOption('collapseMessageWithSubject')
+          copyInstanceOption('loginMethod')
+          copyInstanceOption('scopeCopy')
+          copyInstanceOption('subjectLineBehavior')
+          copyInstanceOption('alwaysShowSubjectInput')
+          copyInstanceOption('noAttachmentLinks')
+
+          if ((config.chatDisabled)) {
             store.dispatch('disableChat')
           }
 

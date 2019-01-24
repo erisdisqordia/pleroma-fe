@@ -81,7 +81,21 @@ const mergeOrAdd = (arr, obj, item) => {
   }
 }
 
-const sortById = (a, b) => a.id > b.id ? -1 : 1
+const sortById = (a, b) => {
+  const seqA = Number(a.id)
+  const seqB = Number(b.id)
+  const isSeqA = Number.isNaN(seqA)
+  const isSeqB = Number.isNaN(seqB)
+  if (isSeqA && isSeqB) {
+    return seqA > seqB ? -1 : 1
+  } else if (isSeqA && !isSeqB) {
+    return 1
+  } else if (!isSeqA && isSeqB) {
+    return -1
+  } else {
+    return a.id > b.id ? -1 : 1
+  }
+}
 
 const sortTimeline = (timeline) => {
   timeline.visibleStatuses = timeline.visibleStatuses.sort(sortById)
@@ -239,7 +253,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     processor(status)
   })
 
-  // Keep the visible statuses sorted
+    // Keep the visible statuses sorted
   if (timeline) {
     sortTimeline(timelineObject)
     if ((older || timelineObject.minVisibleId <= 0) && statuses.length > 0) {

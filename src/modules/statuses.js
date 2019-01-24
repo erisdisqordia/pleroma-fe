@@ -84,8 +84,8 @@ const mergeOrAdd = (arr, obj, item) => {
 const sortById = (a, b) => {
   const seqA = Number(a.id)
   const seqB = Number(b.id)
-  const isSeqA = Number.isNaN(seqA)
-  const isSeqB = Number.isNaN(seqB)
+  const isSeqA = !Number.isNaN(seqA)
+  const isSeqB = !Number.isNaN(seqB)
   if (isSeqA && isSeqB) {
     return seqA > seqB ? -1 : 1
   } else if (isSeqA && !isSeqB) {

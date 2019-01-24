@@ -4,8 +4,8 @@ import Status from '../status/status.vue'
 const sortById = (a, b) => {
   const seqA = Number(a.action.id)
   const seqB = Number(b.action.id)
-  const isSeqA = Number.isNaN(seqA)
-  const isSeqB = Number.isNaN(seqB)
+  const isSeqA = !Number.isNaN(seqA)
+  const isSeqB = !Number.isNaN(seqB)
   if (isSeqA && isSeqB) {
     return seqA > seqB ? -1 : 1
   } else if (isSeqA && !isSeqB) {

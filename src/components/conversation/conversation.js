@@ -1,9 +1,25 @@
 import { reduce, filter, sortBy } from 'lodash'
 import Status from '../status/status.vue'
 
+const sortById = (a, b) => {
+  const seqA = Number(a.action.id)
+  const seqB = Number(b.action.id)
+  const isSeqA = Number.isNaN(seqA)
+  const isSeqB = Number.isNaN(seqB)
+  if (isSeqA && isSeqB) {
+    return seqA > seqB ? -1 : 1
+  } else if (isSeqA && !isSeqB) {
+    return 1
+  } else if (!isSeqA && isSeqB) {
+    return -1
+  } else {
+    return a.action.id > b.action.id ? -1 : 1
+  }
+}
+
 const sortAndFilterConversation = (conversation) => {
   conversation = filter(conversation, (status) => status.type !== 'retweet')
-  return sortBy(conversation, 'id')
+  return sortBy(conversation, sortById)
 }
 
 const conversation = {

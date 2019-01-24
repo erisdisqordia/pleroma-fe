@@ -20,6 +20,7 @@
           <i class="icon-spin3 animate-spin"></i>
         </div>
       </div>
+      <Timeline :label="$t('user_card.media')" :embedded="true" :title="$t('user_profile.media_title')" timeline-name="media" :timeline="media" :user-id="fetchBy" />
       <Timeline v-if="isUs" :label="$t('user_card.favorites')" :embedded="true" :title="$t('user_profile.favorites_title')" timeline-name="favorites" :timeline="favorites"/>
     </tab-switcher>
   </div>

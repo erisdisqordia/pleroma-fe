@@ -325,6 +325,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
     user: QVITTER_USER_TIMELINE_URL,
+    media: QVITTER_USER_TIMELINE_URL,
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: TAG_TIMELINE_URL
   }
@@ -344,6 +345,9 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   }
   if (tag) {
     url += `/${tag}.json`
+  }
+  if (timeline === 'media') {
+    params.push(['only_media', 1])
   }
 
   params.push(['count', 20])

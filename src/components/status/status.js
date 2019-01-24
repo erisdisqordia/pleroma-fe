@@ -79,8 +79,6 @@ const Status = {
     replyProfileLink () {
       if (this.isReply) {
         return this.generateUserProfileLink(this.status.in_reply_to_status_id, this.replyToName)
-      } else {
-        return ''
       }
     },
     retweet () { return !!this.statusoid.retweeted_status },
@@ -134,7 +132,7 @@ const Status = {
       if (user) {
         return user.screen_name
       } else {
-        return this.status.in_reply_to_screen_name || ''
+        return this.status.in_reply_to_screen_name
       }
     },
     hideReply () {

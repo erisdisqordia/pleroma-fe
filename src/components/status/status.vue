@@ -3,7 +3,7 @@
     <template v-if="muted && !noReplyLinks">
       <div class="media status container muted">
         <small>
-          <router-link :to="userProfileLink(status.user.id, status.user.screen_name)">
+          <router-link :to="userProfileLink">
             {{status.user.screen_name}}
           </router-link>
         </small>
@@ -38,16 +38,16 @@
                 <h4 class="user-name" v-if="status.user.name_html" v-html="status.user.name_html"></h4>
                 <h4 class="user-name" v-else>{{status.user.name}}</h4>
                 <span class="links">
-                  <router-link :to="userProfileLink(status.user.id, status.user.screen_name)">
+                  <router-link :to="userProfileLink">
                     {{status.user.screen_name}}
                   </router-link>
-                  <span v-if="status.in_reply_to_screen_name" class="faint reply-info">
+                  <span v-if="isReply" class="faint reply-info">
                     <i class="icon-right-open"></i>
-                    <router-link :to="userProfileLink(status.in_reply_to_user_id, status.in_reply_to_screen_name)">
-                      {{status.in_reply_to_screen_name}}
+                    <router-link :to="replyProfileLink">
+                      {{replyToName}}
                     </router-link>
                   </span>
-                  <a v-if="isReply && !noReplyLinks" href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)" :title="$t('tool_tip.reply')">
+                  <a v-if="isReply && !noReplyLinks" href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)" :aria-label="$t('tool_tip.reply')">
                     <i class="button-icon icon-reply" @mouseenter="replyEnter(status.in_reply_to_status_id, $event)" @mouseout="replyLeave()"></i>
                   </a>
                 </span>

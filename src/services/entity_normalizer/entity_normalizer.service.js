@@ -164,6 +164,7 @@ export const parseStatus = (data) => {
     }
 
     output.summary = data.spoiler_text
+    output.summary_html = data.spoiler_text
     output.external_url = data.url
 
     // FIXME missing!!
@@ -203,6 +204,7 @@ export const parseStatus = (data) => {
     }
 
     output.summary = data.summary
+    output.summary_html = data.summary_html
     output.external_url = data.external_url
     output.is_local = data.is_local
   }

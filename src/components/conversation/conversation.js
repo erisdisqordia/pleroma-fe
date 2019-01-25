@@ -7,13 +7,13 @@ const sortById = (a, b) => {
   const isSeqA = !Number.isNaN(seqA)
   const isSeqB = !Number.isNaN(seqB)
   if (isSeqA && isSeqB) {
-    return seqA > seqB ? -1 : 1
+    return seqA < seqB ? -1 : 1
   } else if (isSeqA && !isSeqB) {
     return 1
   } else if (!isSeqA && isSeqB) {
     return -1
   } else {
-    return a.id > b.id ? -1 : 1
+    return a.id < b.id ? -1 : 1
   }
 }
 

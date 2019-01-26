@@ -6,8 +6,10 @@ const UserProfile = {
   created () {
     this.$store.commit('clearTimeline', { timeline: 'user' })
     this.$store.commit('clearTimeline', { timeline: 'favorites' })
+    this.$store.commit('clearTimeline', { timeline: 'media' })
     this.$store.dispatch('startFetching', ['user', this.fetchBy])
     this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
+    this.$store.dispatch('startFetching', ['media', this.fetchBy])
     if (!this.user.id) {
       this.$store.dispatch('fetchUser', this.fetchBy)
     }
@@ -15,6 +17,7 @@ const UserProfile = {
   destroyed () {
     this.$store.dispatch('stopFetching', 'user')
     this.$store.dispatch('stopFetching', 'favorites')
+    this.$store.dispatch('stopFetching', 'media')
   },
   computed: {
     timeline () {
@@ -22,6 +25,9 @@ const UserProfile = {
     },
     favorites () {
       return this.$store.state.statuses.timelines.favorites
+    },
+    media () {
+      return this.$store.state.statuses.timelines.media
     },
     userId () {
       return this.$route.params.id || this.user.id
@@ -78,10 +84,13 @@ const UserProfile = {
       }
       this.$store.dispatch('stopFetching', 'user')
       this.$store.dispatch('stopFetching', 'favorites')
+      this.$store.dispatch('stopFetching', 'media')
       this.$store.commit('clearTimeline', { timeline: 'user' })
       this.$store.commit('clearTimeline', { timeline: 'favorites' })
+      this.$store.commit('clearTimeline', { timeline: 'media' })
       this.$store.dispatch('startFetching', ['user', this.fetchBy])
       this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
+      this.$store.dispatch('startFetching', ['media', this.fetchBy])
     },
     userId () {
       if (!this.isExternal) {
@@ -89,10 +98,13 @@ const UserProfile = {
       }
       this.$store.dispatch('stopFetching', 'user')
       this.$store.dispatch('stopFetching', 'favorites')
+      this.$store.dispatch('stopFetching', 'media')
       this.$store.commit('clearTimeline', { timeline: 'user' })
       this.$store.commit('clearTimeline', { timeline: 'favorites' })
+      this.$store.commit('clearTimeline', { timeline: 'media' })
       this.$store.dispatch('startFetching', ['user', this.fetchBy])
       this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
+      this.$store.dispatch('startFetching', ['media', this.fetchBy])
     },
     user () {
       if (this.user.id && !this.user.followers) {

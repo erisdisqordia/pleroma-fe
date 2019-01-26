@@ -499,7 +499,7 @@ nav {
 }
 
 .main {
-  flex-basis: 60%;
+  flex-basis: 50%;
   flex-grow: 1;
   flex-shrink: 1;
 }
@@ -533,7 +533,7 @@ nav {
   }
 }
 
-@media all and (min-width: 960px) {
+@media all and (min-width: 800px) {
   body {
     overflow-y: scroll;
   }
@@ -617,7 +617,7 @@ nav {
   color: $fallback--faint;
   color: var(--faint, $fallback--faint);
 }
-@media all and (min-width: 959px) {
+@media all and (min-width: 800px) {
   .logo {
     opacity: 1 !important;
   }
@@ -654,7 +654,7 @@ nav {
   border-radius: var(--inputRadius, $fallback--inputRadius);
 }
 
-@media all and (max-width: 959px) {
+@media all and (max-width: 800px) {
   .mobile-hidden {
     display: none;
   }

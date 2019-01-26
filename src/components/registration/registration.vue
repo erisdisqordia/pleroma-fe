@@ -215,7 +215,7 @@ $validations-cRed: #f04124;
   }
 }
 
-@media all and (max-width: 959px) {
+@media all and (max-width: 800px) {
   .registration-form .container {
     flex-direction: column-reverse;
   }

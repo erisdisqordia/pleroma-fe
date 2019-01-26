@@ -13,6 +13,7 @@ const settings = {
       hideAttachmentsLocal: user.hideAttachments,
       hideAttachmentsInConvLocal: user.hideAttachmentsInConv,
       hideNsfwLocal: user.hideNsfw,
+      useOneClickNsfw: user.useOneClickNsfw,
       hideISPLocal: user.hideISP,
       preloadImage: user.preloadImage,
 
@@ -56,7 +57,17 @@ const settings = {
       scopeCopyDefault: this.$t('settings.values.' + instance.scopeCopy),
 
       stopGifs: user.stopGifs,
-      webPushNotificationsLocal: user.webPushNotifications
+      webPushNotificationsLocal: user.webPushNotifications,
+      loopVideoSilentOnlyLocal: user.loopVideosSilentOnly,
+      loopSilentAvailable:
+        // Firefox
+        Object.getOwnPropertyDescriptor(HTMLVideoElement.prototype, 'mozHasAudio') ||
+        // Chrome-likes
+        Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'webkitAudioDecodedByteCount') ||
+        // Future spec, still not supported in Nightly 63 as of 08/2018
+        Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'audioTracks'),
+      playVideosInline: user.playVideosInline,
+      useContainFit: user.useContainFit
     }
   },
   components: {
@@ -88,6 +99,9 @@ const settings = {
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
     },
+    useOneClickNsfw (value) {
+      this.$store.dispatch('setOption', { name: 'useOneClickNsfw', value })
+    },
     preloadImage (value) {
       this.$store.dispatch('setOption', { name: 'preloadImage', value })
     },
@@ -111,6 +125,9 @@ const settings = {
     },
     loopVideoLocal (value) {
       this.$store.dispatch('setOption', { name: 'loopVideo', value })
+    },
+    loopVideoSilentOnlyLocal (value) {
+      this.$store.dispatch('setOption', { name: 'loopVideoSilentOnly', value })
     },
     autoLoadLocal (value) {
       this.$store.dispatch('setOption', { name: 'autoLoad', value })
@@ -146,6 +163,12 @@ const settings = {
     webPushNotificationsLocal (value) {
       this.$store.dispatch('setOption', { name: 'webPushNotifications', value })
       if (value) this.$store.dispatch('registerPushNotifications')
+    },
+    playVideosInline (value) {
+      this.$store.dispatch('setOption', { name: 'playVideosInline', value })
+    },
+    useContainFit (value) {
+      this.$store.dispatch('setOption', { name: 'useContainFit', value })
     }
   }
 }

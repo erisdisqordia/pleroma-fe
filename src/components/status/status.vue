@@ -93,16 +93,23 @@
             <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">Show less</a>
           </div>
 
-          <div v-if='status.attachments && !hideSubjectStatus' class='attachments media-body'>
+          <div v-if="status.attachments && !hideSubjectStatus" class="attachments media-body">
             <attachment
+              class="non-gallery"
+              v-for="attachment in nonGalleryAttachments"
               :size="attachmentSize"
-              :status-id="status.id"
               :nsfw="nsfwClickthrough"
               :attachment="attachment"
-              :set-media="setMedia()"
-              v-for="attachment in status.attachments"
-              :key="attachment.id">
-            </attachment>
+              :allowPlay="true"
+              :setMedia="setMedia()"
+              :key="attachment.id"
+            />
+            <gallery
+              v-if="galleryAttachments.length > 0"
+              :nsfw="nsfwClickthrough"
+              :attachments="galleryAttachments"
+              :setMedia="setMedia()"
+            />
           </div>
 
           <div v-if="!noHeading && !noReplyLinks" class='status-actions media-body'>
@@ -568,7 +575,7 @@ a.unmute {
   }
 }
 
-@media all and (max-width: 960px) {
+@media all and (max-width: 800px) {
   .status-el {
     .retweet-info {
       .avatar {

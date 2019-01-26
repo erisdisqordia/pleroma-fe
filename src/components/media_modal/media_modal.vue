@@ -1,14 +1,13 @@
 <template>
   <div class="modal-view" v-if="showing" @click.prevent="hide">
     <img class="modal-image" v-if="type === 'image'" :src="currentMedia.url"></img>
-    <video
+    <VideoAttachment
       class="modal-image"
       v-if="type === 'video'"
-      :src="currentMedia.url"
-      @click.stop=""
-      controls autoplay
-      :loop="loopVideo">
-    </video>
+      :attachment="currentMedia"
+      :controls="true"
+      @click.stop.native="">
+    </VideoAttachment>
   </div>
 </template>
 
@@ -18,7 +17,7 @@
 @import '../../_variables.scss';
 
 .modal-view {
-  z-index: 1005;
+  z-index: 1000;
   position: fixed;
   width: 100vw;
   height: 100vh;

@@ -1,9 +1,11 @@
 import StillImage from '../still-image/still-image.vue'
+import VideoAttachment from '../video_attachment/video_attachment.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 
 const MediaModal = {
   components: {
-    StillImage
+    StillImage,
+    VideoAttachment
   },
   computed: {
     showing () {
@@ -17,9 +19,6 @@ const MediaModal = {
     },
     type () {
       return this.currentMedia ? fileTypeService.fileType(this.currentMedia.mimetype) : null
-    },
-    loopVideo () {
-      return this.$store.state.config.loopVideo
     }
   },
   created () {

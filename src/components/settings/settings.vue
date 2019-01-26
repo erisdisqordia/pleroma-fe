@@ -123,6 +123,10 @@
                 <input :disabled="!hideNsfwLocal" type="checkbox" id="preloadImage" v-model="preloadImage">
                 <label for="preloadImage">{{$t('settings.preload_images')}}</label>
               </li>
+              <li>
+                <input type="checkbox" id="useOneClickNsfw" v-model="useOneClickNsfw">
+                <label for="useOneClickNsfw">{{$t('settings.use_one_click_nsfw')}}</label>
+              </li>
             </ul>
             <li>
               <input type="checkbox" id="stopGifs" v-model="stopGifs">
@@ -131,6 +135,23 @@
             <li>
               <input type="checkbox" id="loopVideo" v-model="loopVideoLocal">
               <label for="loopVideo">{{$t('settings.loop_video')}}</label>
+              <ul class="setting-list suboptions" :class="[{disabled: !streamingLocal}]">
+                <li>
+                  <input :disabled="!loopVideoLocal || !loopSilentAvailable" type="checkbox" id="loopVideoSilentOnly" v-model="loopVideoSilentOnlyLocal">
+                  <label for="loopVideoSilentOnly">{{$t('settings.loop_video_silent_only')}}</label>
+                  <div v-if="!loopSilentAvailable" class="unavailable">
+                    <i class="icon-globe"/>! {{$t('settings.limited_availability')}}
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <input type="checkbox" id="playVideosInline" v-model="playVideosInline">
+              <label for="playVideosInline">{{$t('settings.play_videos_inline')}}</label>
+            </li>
+            <li>
+              <input type="checkbox" id="useContainFit" v-model="useContainFit">
+              <label for="useContainFit">{{$t('settings.use_contain_fit')}}</label>
             </li>
           </ul>
         </div>

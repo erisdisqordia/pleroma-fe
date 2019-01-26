@@ -34,7 +34,7 @@
       @click="openModal"
       v-if="type === 'video' && !hidden"
       :class="{'small': isSmall}"
-      :href="attachment.url"
+      :href="allowPlay ? undefined : attachment.url"
     >
       <VideoAttachment class="video" :attachment="attachment" :controls="allowPlay" />
       <i v-if="!allowPlay" class="play-icon icon-play-circled"></i>

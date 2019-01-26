@@ -279,6 +279,7 @@
   "user_card": {
     "block": "Заблокировать",
     "blocked": "Заблокирован",
+    "favorites": "Понравившиеся",
     "follow": "Читать",
     "follow_sent": "Запрос отправлен!",
     "follow_progress": "Запрашиваем…",

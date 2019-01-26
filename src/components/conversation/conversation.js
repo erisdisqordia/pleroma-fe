@@ -1,10 +1,25 @@
-import { reduce, filter, sortBy } from 'lodash'
-import { statusType } from '../../modules/statuses.js'
+import { reduce, filter } from 'lodash'
 import Status from '../status/status.vue'
 
+const sortById = (a, b) => {
+  const seqA = Number(a.id)
+  const seqB = Number(b.id)
+  const isSeqA = !Number.isNaN(seqA)
+  const isSeqB = !Number.isNaN(seqB)
+  if (isSeqA && isSeqB) {
+    return seqA < seqB ? -1 : 1
+  } else if (isSeqA && !isSeqB) {
+    return 1
+  } else if (!isSeqA && isSeqB) {
+    return -1
+  } else {
+    return a.id < b.id ? -1 : 1
+  }
+}
+
 const sortAndFilterConversation = (conversation) => {
-  conversation = filter(conversation, (status) => statusType(status) !== 'retweet')
-  return sortBy(conversation, 'id')
+  conversation = filter(conversation, (status) => status.type !== 'retweet')
+  return conversation.filter(_ => _).sort(sortById)
 }
 
 const conversation = {
@@ -18,10 +33,12 @@ const conversation = {
     'collapsable'
   ],
   computed: {
-    status () { return this.statusoid },
+    status () {
+      return this.statusoid
+    },
     conversation () {
       if (!this.status) {
-        return false
+        return []
       }
 
       const conversationId = this.status.statusnet_conversation_id
@@ -32,7 +49,9 @@ const conversation = {
     replies () {
       let i = 1
       return reduce(this.conversation, (result, {id, in_reply_to_status_id}) => {
-        const irid = Number(in_reply_to_status_id)
+        /* eslint-disable camelcase */
+        const irid = in_reply_to_status_id
+        /* eslint-enable camelcase */
         if (irid) {
           result[irid] = result[irid] || []
           result[irid].push({
@@ -69,7 +88,6 @@ const conversation = {
       }
     },
     getReplies (id) {
-      id = Number(id)
       return this.replies[id] || []
     },
     focused (id) {
@@ -80,7 +98,7 @@ const conversation = {
       }
     },
     setHighlight (id) {
-      this.highlight = Number(id)
+      this.highlight = id
     }
   }
 }

@@ -9,15 +9,15 @@ describe('NotificationUtils', () => {
             notifications: {
               data: [
                 {
-                  action: { id: 1 },
+                  action: { id: '1' },
                   type: 'like'
                 },
                 {
-                  action: { id: 2 },
+                  action: { id: '2' },
                   type: 'mention'
                 },
                 {
-                  action: { id: 3 },
+                  action: { id: '3' },
                   type: 'repeat'
                 }
               ]
@@ -34,11 +34,11 @@ describe('NotificationUtils', () => {
       }
       const expected = [
         {
-          action: { id: 3 },
+          action: { id: '3' },
           type: 'repeat'
         },
         {
-          action: { id: 1 },
+          action: { id: '1' },
           type: 'like'
         }
       ]
@@ -54,12 +54,12 @@ describe('NotificationUtils', () => {
             notifications: {
               data: [
                 {
-                  action: { id: 1 },
+                  action: { id: '1' },
                   type: 'like',
                   seen: false
                 },
                 {
-                  action: { id: 2 },
+                  action: { id: '2' },
                   type: 'mention',
                   seen: true
                 }
@@ -77,7 +77,7 @@ describe('NotificationUtils', () => {
       }
       const expected = [
         {
-          action: { id: 1 },
+          action: { id: '1' },
           type: 'like',
           seen: false
         }

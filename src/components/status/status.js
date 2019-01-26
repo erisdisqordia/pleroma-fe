@@ -76,6 +76,14 @@ const Status = {
       return (this.$store.state.config.hideAttachments && !this.inConversation) ||
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
     },
+    userProfileLink () {
+      return this.generateUserProfileLink(this.status.user.id, this.status.user.screen_name)
+    },
+    replyProfileLink () {
+      if (this.isReply) {
+        return this.generateUserProfileLink(this.status.in_reply_to_status_id, this.replyToName)
+      }
+    },
     retweet () { return !!this.statusoid.retweeted_status },
     retweeter () { return this.statusoid.user.name },
     retweeterHtml () { return this.statusoid.user.name_html },
@@ -122,6 +130,14 @@ const Status = {
     isReply () {
       return !!this.status.in_reply_to_status_id
     },
+    replyToName () {
+      const user = this.$store.state.users.usersObject[this.status.in_reply_to_user_id]
+      if (user) {
+        return user.screen_name
+      } else {
+        return this.status.in_reply_to_screen_name
+      }
+    },
     hideReply () {
       if (this.$store.state.config.replyVisibility === 'all') {
         return false
@@ -132,7 +148,7 @@ const Status = {
       if (this.status.user.id === this.$store.state.users.currentUser.id) {
         return false
       }
-      if (this.status.activity_type === 'repeat') {
+      if (this.status.type === 'retweet') {
         return false
       }
       var checkFollowing = this.$store.state.config.replyVisibility === 'following'
@@ -281,7 +297,7 @@ const Status = {
     },
     replyEnter (id, event) {
       this.showPreview = true
-      const targetId = Number(id)
+      const targetId = id
       const statuses = this.$store.state.statuses.allStatuses
 
       if (!this.preview) {
@@ -300,7 +316,7 @@ const Status = {
     replyLeave () {
       this.showPreview = false
     },
-    userProfileLink (id, name) {
+    generateUserProfileLink (id, name) {
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
     },
     setMedia () {
@@ -310,7 +326,6 @@ const Status = {
   },
   watch: {
     'highlight': function (id) {
-      id = Number(id)
       if (this.status.id === id) {
         let rect = this.$el.getBoundingClientRect()
         if (rect.top < 100) {

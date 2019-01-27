@@ -74,9 +74,6 @@ const Status = {
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
     },
     userProfileLink () {
-      if (this.status.user.screen_name === null) {
-        console.log(this.status.user)
-      }
       return this.generateUserProfileLink(this.status.user.id, this.status.user.screen_name)
     },
     replyProfileLink () {
@@ -297,9 +294,6 @@ const Status = {
       this.showPreview = false
     },
     generateUserProfileLink (id, name) {
-      if (!name) {
-        console.log(id, name)
-      }
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
     }
   },

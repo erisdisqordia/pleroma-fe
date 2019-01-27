@@ -215,6 +215,7 @@ export const parseStatus = (data) => {
 
   output.id = String(data.id)
   output.visibility = data.visibility
+  output.card = data.card
   output.created_at = new Date(data.created_at)
 
   // Converting to string, the right way.

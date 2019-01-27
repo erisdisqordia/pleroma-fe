@@ -74,6 +74,9 @@ const Status = {
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
     },
     userProfileLink () {
+      if (this.status.user.screen_name === null) {
+        console.log(this.status.user)
+      }
       return this.generateUserProfileLink(this.status.user.id, this.status.user.screen_name)
     },
     replyProfileLink () {
@@ -125,7 +128,7 @@ const Status = {
       return lengthScore > 20
     },
     isReply () {
-      return !!this.status.in_reply_to_status_id
+      return !!(this.status.in_reply_to_status_id && this.status.in_reply_to_user_id)
     },
     replyToName () {
       const user = this.$store.state.users.usersObject[this.status.in_reply_to_user_id]
@@ -294,6 +297,9 @@ const Status = {
       this.showPreview = false
     },
     generateUserProfileLink (id, name) {
+      if (!name) {
+        console.log(id, name)
+      }
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
     }
   },

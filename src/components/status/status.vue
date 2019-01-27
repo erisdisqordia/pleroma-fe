@@ -98,7 +98,7 @@
             </attachment>
           </div>
 
-          <div v-if='status.card && !hideSubjectStatus' class='link-preview media-body'>
+          <div v-if='status.card && !hideSubjectStatus && !noHeading' class='link-preview media-body'>
             <link-preview :card="status.card"></link-preview>
           </div>
 

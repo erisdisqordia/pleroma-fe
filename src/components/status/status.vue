@@ -98,6 +98,10 @@
             </attachment>
           </div>
 
+          <div v-if='status.card && !hideSubjectStatus' class='link-preview media-body'>
+            <link-preview :card="status.card"></link-preview>
+          </div>
+
           <div v-if="!noHeading && !noReplyLinks" class='status-actions media-body'>
             <div v-if="loggedIn">
               <a href="#" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')">

@@ -80,6 +80,7 @@ const makeMockUserMasto = (overrides = {}) => {
     fields: [],
     followers_count: 705,
     following_count: 326,
+    following: true,
     header:
     'https://shigusegubu.club/media/7ab024d9-2a8a-4fbc-9ce8-da06756ae2db/6aadefe4e264133bc377ab450e6b045b6f5458542a5c59e6c741f86107f0388b.png',
     header_static:

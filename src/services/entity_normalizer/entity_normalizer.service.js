@@ -104,6 +104,7 @@ export const parseUser = (data) => {
     output.background_image = data.background_image
   }
 
+  output.following = data.following
   output.created_at = new Date(data.created_at)
   output.locked = data.locked
   output.followers_count = data.followers_count

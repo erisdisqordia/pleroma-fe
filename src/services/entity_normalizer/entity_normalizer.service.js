@@ -102,6 +102,10 @@ export const parseUser = (data) => {
     output.default_scope = data.default_scope
     output.hide_network = data.hide_network
     output.background_image = data.background_image
+    // on mastoapi this info is contained in a "relationship"
+    output.following = data.following
+    // Websocket token
+    output.token = data.token
   }
 
   output.created_at = new Date(data.created_at)

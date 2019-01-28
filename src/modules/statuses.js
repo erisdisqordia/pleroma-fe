@@ -37,6 +37,7 @@ export const defaultState = {
     public: emptyTl(),
     user: emptyTl(),
     favorites: emptyTl(),
+    media: emptyTl(),
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
     tag: emptyTl(),

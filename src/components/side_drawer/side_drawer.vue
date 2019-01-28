@@ -128,7 +128,7 @@
 
 .side-drawer {
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: 0.35s;
   transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
   margin: 0 0 0 -100px;
   padding: 0 0 1em 100px;
@@ -146,7 +146,7 @@
 }
 
 .side-drawer-closed {
-  margin: 0 0 0 calc(-100% - 100px);
+  transform: translate(-100%);
 }
 
 .side-drawer-heading {

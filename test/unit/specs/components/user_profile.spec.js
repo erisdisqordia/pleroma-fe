@@ -66,6 +66,22 @@ const externalProfileStore = new Vuex.Store({
           viewing: 'statuses',
           userId: 100,
           flushMarker: 0
+        },
+        media: {
+          statuses: [],
+          statusesObject: {},
+          faves: [],
+          visibleStatuses: [],
+          visibleStatusesObject: {},
+          newStatusCount: 0,
+          maxId: 0,
+          minVisibleId: 0,
+          loading: false,
+          followers: [],
+          friends: [],
+          viewing: 'statuses',
+          userId: 100,
+          flushMarker: 0
         }
       }
     },
@@ -102,6 +118,22 @@ const localProfileStore = new Vuex.Store({
     statuses: {
       timelines: {
         user: {
+          statuses: [],
+          statusesObject: {},
+          faves: [],
+          visibleStatuses: [],
+          visibleStatusesObject: {},
+          newStatusCount: 0,
+          maxId: 0,
+          minVisibleId: 0,
+          loading: false,
+          followers: [],
+          friends: [],
+          viewing: 'statuses',
+          userId: 100,
+          flushMarker: 0
+        },
+        media: {
           statuses: [],
           statusesObject: {},
           faves: [],

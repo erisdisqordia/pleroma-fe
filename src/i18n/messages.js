@@ -24,6 +24,7 @@ const messages = {
   ja: require('./ja.json'),
   ko: require('./ko.json'),
   nb: require('./nb.json'),
+  nl: require('./nl.json'),
   oc: require('./oc.json'),
   pl: require('./pl.json'),
   pt: require('./pt.json'),

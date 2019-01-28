@@ -33,6 +33,13 @@
           </div>
         </div>
       </form>
+      
+      <div v-if="authError" class='form-group'>
+        <div class='alert error'>
+          {{authError}}
+          <i class="button-icon icon-cancel" @click="clearError"></i>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,10 +55,6 @@
     width: 10em;
   }
 
-  .error {
-    text-align: center;
-  }
-
   .register {
     flex: 1 1;
   }
@@ -62,6 +65,16 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+}
+
+.login {
+  .error {
+    text-align: center;
+
+    animation-name: shakeError;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
   }
 }
 </style>

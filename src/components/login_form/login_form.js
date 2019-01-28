@@ -22,19 +22,29 @@ const LoginForm = {
         oauth: this.$store.state.oauth,
         instance: this.$store.state.instance.server
       }
+      this.clearError()
       oauthApi.getOrCreateApp(data).then((app) => {
         oauthApi.getTokenWithCredentials(
           {
             app,
             instance: data.instance,
             username: this.user.username,
-            password: this.user.password})
-          .then((result) => {
-            this.$store.commit('setToken', result.access_token)
-            this.$store.dispatch('loginUser', result.access_token)
-            this.$router.push({name: 'friends'})
-          })
+            password: this.user.password
+          }
+        ).then((result) => {
+          if (result.error) {
+            this.authError = result.error
+            this.user.password = ''
+            return
+          }
+          this.$store.commit('setToken', result.access_token)
+          this.$store.dispatch('loginUser', result.access_token)
+          this.$router.push({name: 'friends'})
+        })
       })
+    },
+    clearError () {
+      this.authError = false
     }
   }
 }

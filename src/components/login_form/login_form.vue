@@ -33,6 +33,7 @@
           </div>
         </div>
       </form>
+      
       <div v-if="authError" class='form-group'>
         <div class='alert error'>
           {{authError}}

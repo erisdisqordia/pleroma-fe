@@ -91,7 +91,7 @@ export const getters = {
   userById: state => id =>
     state.users.find(user => user.id === id),
   userByName: state => name =>
-    state.users.find(user => user.screen_name === name)
+    state.users.find(user => user.screen_name.toLowerCase() === name.toLowerCase())
 }
 
 export const defaultState = {

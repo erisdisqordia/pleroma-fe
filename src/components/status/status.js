@@ -31,7 +31,7 @@ const Status = {
       userExpanded: false,
       preview: null,
       showPreview: false,
-      showingTall: false,
+      showingTall: this.inConversation && this.focused,
       expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
         ? !this.$store.state.instance.collapseMessageWithSubject
         : !this.$store.state.config.collapseMessageWithSubject,
@@ -264,11 +264,11 @@ const Status = {
     toggleShowMore () {
       if (this.showingTall) {
         this.showingTall = false
-      } else if (this.expandingSubject) {
+      } else if (this.expandingSubject && this.status.summary) {
         this.expandingSubject = false
       } else if (this.hideTallStatus) {
         this.showingTall = true
-      } else if (this.hideSubjectStatus) {
+      } else if (this.hideSubjectStatus && this.status.summary) {
         this.expandingSubject = true
       }
     },
@@ -301,8 +301,10 @@ const Status = {
     'highlight': function (id) {
       if (this.status.id === id) {
         let rect = this.$el.getBoundingClientRect()
-        if (rect.top < 100) {
+        if (rect.top < 140) {
           window.scrollBy(0, rect.top - 200)
+        } else if (rect.top < window.innerHeight && rect.height >= (window.innerHeight - 50)) {
+          window.scrollBy(0, rect.top - 50)
         } else if (rect.bottom > window.innerHeight - 50) {
           window.scrollBy(0, rect.bottom - window.innerHeight + 50)
         }

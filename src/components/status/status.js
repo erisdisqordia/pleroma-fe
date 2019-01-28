@@ -125,7 +125,7 @@ const Status = {
       return lengthScore > 20
     },
     isReply () {
-      return !!this.status.in_reply_to_status_id
+      return !!(this.status.in_reply_to_status_id && this.status.in_reply_to_user_id)
     },
     replyToName () {
       const user = this.$store.state.users.usersObject[this.status.in_reply_to_user_id]

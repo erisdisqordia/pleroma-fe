@@ -1,0 +1,372 @@
+{
+  "chat": {
+    "title": "Chat"
+  },
+  "features_panel": {
+    "chat": "Chat",
+    "gopher": "Gopher",
+    "media_proxy": "Media proxy",
+    "scope_options": "Zichtbaarheidsopties",
+    "text_limit": "Tekst limiet",
+    "title": "Features",
+    "who_to_follow": "Wie te volgen"
+  },
+  "finder": {
+    "error_fetching_user": "Fout tijdens ophalen gebruiker",
+    "find_user": "Gebruiker zoeken"
+  },
+  "general": {
+    "apply": "toepassen",
+    "submit": "Verzend"
+  },
+  "login": {
+    "login": "Log in",
+    "description": "Log in met OAuth",
+    "logout": "Log uit",
+    "password": "Wachtwoord",
+    "placeholder": "bv. lain",
+    "register": "Registreer",
+    "username": "Gebruikersnaam"
+  },
+  "nav": {
+    "about": "Over",
+    "back": "Terug",
+    "chat": "Locale Chat",
+    "friend_requests": "Volgverzoek",
+    "mentions": "Vermeldingen",
+    "dms": "Directe Berichten",
+    "public_tl": "Publieke Tijdlijn",
+    "timeline": "Tijdlijn",
+    "twkn": "Het Geheel Gekende Netwerk",
+    "user_search": "Zoek Gebruiker",
+    "who_to_follow": "Wie te volgen",
+    "preferences": "Voorkeuren"
+  },
+  "notifications": {
+    "broken_favorite": "Onbekende status, aan het zoeken...",
+    "favorited_you": "vond je status leuk",
+    "followed_you": "volgt jou",
+    "load_older": "Laad oudere meldingen",
+    "notifications": "Meldingen",
+    "read": "Gelezen!",
+    "repeated_you": "Herhaalde je status"
+  },
+  "post_status": {
+    "new_status": "Post nieuwe status",
+    "account_not_locked_warning": "Je account is niet {0}. Iedereen die je volgt kan enkel-volgers posts lezen.",
+    "account_not_locked_warning_link": "gesloten",
+    "attachments_sensitive": "Markeer bijlage als gevoelig",
+    "content_type": {
+      "plain_text": "Gewone tekst"
+    },
+    "content_warning": "Onderwerp (optioneel)",
+    "default": "Tijd voor een pauze!",
+    "direct_warning": "Deze post zal enkel zichtbaar zijn voor de personen die genoemd zijn.",
+    "posting": "Plaatsen",
+    "scope": {
+      "direct": "Direct - Post enkel naar genoemde gebruikers",
+      "private": "Enkel volgers - Post enkel naar volgers",
+      "public": "Publiek - Post op publieke tijdlijnen",
+      "unlisted": "Unlisted - Toon niet op publieke tijdlijnen"
+    }
+  },
+  "registration": {
+    "bio": "Bio",
+    "email": "Email",
+    "fullname": "Weergave naam",
+    "password_confirm": "Wachtwoord bevestiging",
+    "registration": "Registratie",
+    "token": "Uitnodigingstoken",
+    "captcha": "CAPTCHA",
+    "new_captcha": "Klik op de afbeelding voor een nieuwe captcha",
+    "validations": {
+      "username_required": "moet ingevuld zijn",
+      "fullname_required": "moet ingevuld zijn",
+      "email_required": "moet ingevuld zijn",
+      "password_required": "moet ingevuld zijn",
+      "password_confirmation_required": "moet ingevuld zijn",
+      "password_confirmation_match": "komt niet overeen met het wachtwoord"
+    }
+  },
+  "settings": {
+    "attachmentRadius": "Bijlages",
+    "attachments": "Bijlages",
+    "autoload": "Automatisch laden wanneer tot de bodem gescrold inschakelen",
+    "avatar": "Avatar",
+    "avatarAltRadius": "Avatars (Meldingen)",
+    "avatarRadius": "Avatars",
+    "background": "Achtergrond",
+    "bio": "Bio",
+    "btnRadius": "Knoppen",
+    "cBlue": "Blauw (Antwoord, volgen)",
+    "cGreen": "Groen (Herhaal)",
+    "cOrange": "Oranje (Vind ik leuk)",
+    "cRed": "Rood (Annuleer)",
+    "change_password": "Verander Wachtwoord",
+    "change_password_error": "Er was een probleem bij het aanpassen van je wachtwoord.",
+    "changed_password": "Wachtwoord succesvol aangepast!",
+    "collapse_subject": "Klap posts met onderwerp in",
+    "composing": "Samenstellen",
+    "confirm_new_password": "Bevestig nieuw wachtwoord",
+    "current_avatar": "Je huidige avatar",
+    "current_password": "Huidig wachtwoord",
+    "current_profile_banner": "Je huidige profiel banner",
+    "data_import_export_tab": "Data Import / Export",
+    "default_vis": "Standaard zichtbaarheidsscope",
+    "delete_account": "Verwijder Account",
+    "delete_account_description": "Verwijder je account en berichten permanent.",
+    "delete_account_error": "Er was een probleem bij het verwijderen van je account. Indien dit probleem blijft, gelieve de administratie van deze instantie te verwittigen.",
+    "delete_account_instructions": "Typ je wachtwoord in de input hieronder om het verwijderen van je account te bevestigen.",
+    "export_theme": "Sla preset op",
+    "filtering": "Filtering",
+    "filtering_explanation": "Alle statussen die deze woorden bevatten worden genegeerd, één filter per lijn.",
+    "follow_export": "Volgers export",
+    "follow_export_button": "Exporteer je volgers naar een csv file",
+    "follow_export_processing": "Aan het verwerken, binnen enkele ogenblikken wordt je gevraagd je bestand te downloaden",
+    "follow_import": "Volgers import",
+    "follow_import_error": "Fout bij importeren volgers",
+    "follows_imported": "Volgers geïmporteerd! Het kan even duren om ze allemaal te verwerken.",
+    "foreground": "Voorgrond",
+    "general": "Algemeen",
+    "hide_attachments_in_convo": "Verberg bijlages in conversaties",
+    "hide_attachments_in_tl": "Verberg bijlages in de tijdlijn",
+    "hide_isp": "Verberg instantie-specifiek paneel",
+    "preload_images": "Afbeeldingen voorladen",
+    "hide_post_stats": "Verberg post statistieken (bv. het aantal vind-ik-leuks)",
+    "hide_user_stats": "Verberg post statistieken (bv. het aantal volgers)",
+    "import_followers_from_a_csv_file": "Importeer volgers uit een csv file",
+    "import_theme": "Laad preset",
+    "inputRadius": "Invoer velden",
+    "checkboxRadius": "Checkboxen",
+    "instance_default": "(standaard: {value})",
+    "instance_default_simple": "(standaard)",
+    "interface": "Interface",
+    "interfaceLanguage": "Interface taal",
+    "invalid_theme_imported": "Het geselecteerde thema is geen door Pleroma ondersteund thema. Er zijn geen aanpassingen gedaan.",
+    "limited_availability": "Onbeschikbaar in je browser",
+    "links": "Links",
+    "lock_account_description": "Laat volgers enkel toe na expliciete toestemming",
+    "loop_video": "Speel videos af in een lus",
+    "loop_video_silent_only": "Speel enkel videos zonder geluid af in een lus (bv. Mastodon's \"gifs\")",
+    "name": "Naam",
+    "name_bio": "Naam & Bio",
+    "new_password": "Nieuw wachtwoord",
+    "notification_visibility": "Type meldingen die getoond worden",
+    "notification_visibility_follows": "Volgers",
+    "notification_visibility_likes": "Vind-ik-leuks",
+    "notification_visibility_mentions": "Vermeldingen",
+    "notification_visibility_repeats": "Herhalingen",
+    "no_rich_text_description": "Strip rich text formattering van alle posts",
+    "hide_network_description": "Toon niet wie mij volgt en wie ik volg.",
+    "nsfw_clickthrough": "Schakel doorklikbaar verbergen van NSFW bijlages in",
+    "panelRadius": "Panelen",
+    "pause_on_unfocused": "Pauzeer streamen wanneer de tab niet gefocused is",
+    "presets": "Presets",
+    "profile_background": "Profiel Achtergrond",
+    "profile_banner": "Profiel Banner",
+    "profile_tab": "Profiel",
+    "radii_help": "Stel afronding van hoeken in de interface in (in pixels)",
+    "replies_in_timeline": "Antwoorden in tijdlijn",
+    "reply_link_preview": "Schakel antwoordlink preview in bij over zweven met muisaanwijzer",
+    "reply_visibility_all": "Toon alle antwoorden",
+    "reply_visibility_following": "Toon enkel antwoorden naar mij of andere gebruikers gericht",
+    "reply_visibility_self": "Toon enkel antwoorden naar mij gericht",
+    "saving_err": "Fout tijdens opslaan van instellingen",
+    "saving_ok": "Instellingen opgeslagen",
+    "security_tab": "Veiligheid",
+    "scope_copy": "Neem scope over bij antwoorden (Directe Berichten blijven altijd Direct)",
+    "set_new_avatar": "Zet nieuwe avatar",
+    "set_new_profile_background": "Zet nieuwe profiel achtergrond",
+    "set_new_profile_banner": "Zet nieuwe profiel banner",
+    "settings": "Instellingen",
+    "subject_input_always_show": "Maak onderwerpveld altijd zichtbaar",
+    "subject_line_behavior": "Kopieer onderwerp bij antwoorden",
+    "subject_line_email": "Zoals email: \"re: onderwerp\"",
+    "subject_line_mastodon": "Zoals Mastodon: kopieer zoals het is",
+    "subject_line_noop": "Kopieer niet",
+    "stop_gifs": "Speel GIFs af bij zweven",
+    "streaming": "Schakel automatisch streamen van posts in wanneer tot boven gescrold.",
+    "text": "Tekst",
+    "theme": "Thema",
+    "theme_help": "Gebruik hex color codes (#rrggbb) om je kleurschema te wijzigen.",
+    "theme_help_v2_1": "Je kan ook de kleur en transparantie van bepaalde componenten overschrijven door de checkbox aan te vinken, gebruik de \"Wis alles\" knop om alle overschrijvingen te annuleren.",
+    "theme_help_v2_2": "Iconen onder sommige items zijn achtergrond/tekst contrast indicators, zweef er over voor gedetailleerde info. Hou er rekening mee dat bij doorzichtigheid de ergst mogelijke situatie wordt weer gegeven.",
+    "tooltipRadius": "Gereedschapstips/alarmen",
+    "user_settings": "Gebruikers Instellingen",
+    "values": {
+      "false": "nee",
+      "true": "ja"
+    },
+    "notifications": "Meldingen",
+    "enable_web_push_notifications": "Schakel web push meldingen in",
+    "style": {
+      "switcher": {
+        "keep_color": "Behoud kleuren",
+        "keep_shadows": "Behoud schaduwen",
+        "keep_opacity": "Behoud transparantie",
+        "keep_roundness": "Behoud afrondingen",
+        "keep_fonts": "Behoud lettertypes",
+        "save_load_hint": "\"Behoud\" opties behouden de momenteel ingestelde opties bij het selecteren of laden van thema's, maar slaan ook de genoemde opties op bij het exporteren van een thema. Wanneer alle selectievakjes zijn uitgeschakeld, zal het exporteren van thema's alles opslaan.",
+        "reset": "Reset",
+        "clear_all": "Wis alles",
+        "clear_opacity": "Wis transparantie"
+      },
+      "common": {
+        "color": "Kleur",
+        "opacity": "Transparantie",
+        "contrast": {
+          "hint": "Contrast ratio is {ratio}, {level} {context}",
+          "level": {
+            "aa": "voldoet aan de richtlijn van niveau AA (minimum)",
+            "aaa": "voldoet aan de richtlijn van niveau AAA (aangeraden)",
+            "bad": "voldoet aan geen enkele toegankelijkheidsrichtlijn"
+          },
+          "context": {
+            "18pt": "voor grote (18pt+) tekst",
+            "text": "voor tekst"
+          }
+        }
+      },
+      "common_colors": {
+        "_tab_label": "Gemeenschappelijk",
+        "main": "Gemeenschappelijke kleuren",
+        "foreground_hint": "Zie \"Geavanceerd\" tab voor meer gedetailleerde controle",
+        "rgbo": "Iconen, accenten, badges"
+      },
+      "advanced_colors": {
+        "_tab_label": "Geavanceerd",
+        "alert": "Alarm achtergrond",
+        "alert_error": "Fout",
+        "badge": "Badge achtergrond",
+        "badge_notification": "Meldingen",
+        "panel_header": "Paneel hoofding",
+        "top_bar": "Top bar",
+        "borders": "Randen",
+        "buttons": "Knoppen",
+        "inputs": "Invoervelden",
+        "faint_text": "Vervaagde tekst"
+      },
+      "radii": {
+        "_tab_label": "Rondheid"
+      },
+      "shadows": {
+        "_tab_label": "Schaduw en belichting",
+        "component": "Component",
+        "override": "Overschrijven",
+        "shadow_id": "Schaduw #{value}",
+        "blur": "Vervagen",
+        "spread": "Spreid",
+        "inset": "Inzet",
+        "hint": "Voor schaduw kan je ook --variable gebruiken als een kleur waarde om CSS3 variabelen te gebruiken. Houd er rekening mee dat het instellen van opaciteit in dit geval niet werkt.",
+        "filter_hint": {
+          "always_drop_shadow": "Waarschuwing, deze schaduw gebruikt altijd {0} als de browser dit ondersteund.",
+          "drop_shadow_syntax": "{0} ondersteund niet de {1} parameter en {2} sleutelwoord.",
+          "avatar_inset": "Houd er rekening mee dat het combineren van zowel inzet and niet-inzet schaduwen op transparante avatars onverwachte resultaten kan opleveren.",
+          "spread_zero": "Schaduw met spreiding > 0 worden weergegeven alsof ze op nul staan",
+          "inset_classic": "Inzet schaduw zal {0} gebruiken"
+        },
+        "components": {
+          "panel": "Paneel",
+          "panelHeader": "Paneel hoofding",
+          "topBar": "Top bar",
+          "avatar": "Gebruiker avatar (in profiel weergave)",
+          "avatarStatus": "Gebruiker avatar  (in post weergave)",
+          "popup": "Popups en gereedschapstips",
+          "button": "Knop",
+          "buttonHover": "Knop (zweven)",
+          "buttonPressed": "Knop (ingedrukt)",
+          "buttonPressedHover": "Knop (ingedrukt+zweven)",
+          "input": "Invoerveld"
+        }
+      },
+      "fonts": {
+        "_tab_label": "Lettertypes",
+        "help": "Selecteer het lettertype om te gebruiken voor elementen van de UI.Voor \"aangepast\" moet je de exacte naam van het lettertype invoeren zoals die in het systeem wordt weergegeven.",
+        "components": {
+          "interface": "Interface",
+          "input": "Invoervelden",
+          "post": "Post tekst",
+          "postCode": "Monospaced tekst in een post (rich text)"
+        },
+        "family": "Naam lettertype",
+        "size": "Grootte (in px)",
+        "weight": "Gewicht (vetheid)",
+        "custom": "Aangepast"
+      },
+      "preview": {
+        "header": "Voorvertoning",
+        "content": "Inhoud",
+        "error": "Voorbeeld fout",
+        "button": "Knop",
+        "text": "Nog een boel andere {0} en {1}",
+        "mono": "inhoud",
+        "input": "Tijd voor een pauze!",
+        "faint_link": "handige gebruikershandleiding",
+        "fine_print": "Lees onze {0} om niets nuttig te leren!",
+        "header_faint": "Alles komt goed",
+        "checkbox": "Ik heb de gebruikersvoorwaarden eens van ver bekeken",
+        "link": "een link"
+      }
+    }
+  },
+  "timeline": {
+    "collapse": "Inklappen",
+    "conversation": "Conversatie",
+    "error_fetching": "Fout bij ophalen van updates",
+    "load_older": "Laad oudere Statussen",
+    "no_retweet_hint": "Post is gemarkeerd als enkel volgers of direct en kan niet worden herhaald",
+    "repeated": "herhaalde",
+    "show_new": "Toon nieuwe",
+    "up_to_date": "Up-to-date"
+  },
+  "user_card": {
+    "approve": "Goedkeuren",
+    "block": "Blokkeren",
+    "blocked": "Geblokkeerd!",
+    "deny": "Ontzeggen",
+    "favorites": "Vind-ik-leuks",
+    "follow": "Volgen",
+    "follow_sent": "Aanvraag verzonden!",
+    "follow_progress": "Aanvragen…",
+    "follow_again": "Aanvraag opnieuw zenden?",
+    "follow_unfollow": "Stop volgen",
+    "followees": "Aan het volgen",
+    "followers": "Volgers",
+    "following": "Aan het volgen!",
+    "follows_you": "Volgt jou!",
+    "its_you": "'t is jij!",
+    "mute": "Dempen",
+    "muted": "Gedempt",
+    "per_day": "per dag",
+    "remote_follow": "Volg vanop afstand",
+    "statuses": "Statussen"
+  },
+  "user_profile": {
+    "timeline_title": "Gebruikers Tijdlijn"
+  },
+  "who_to_follow": {
+    "more": "Meer",
+    "who_to_follow": "Wie te volgen"
+  },
+  "tool_tip": {
+    "media_upload": "Upload Media",
+    "repeat": "Herhaal",
+    "reply": "Antwoord",
+    "favorite": "Vind-ik-leuk",
+    "user_settings": "Gebruikers Instellingen"
+  },
+  "upload":{
+    "error": {
+    "base": "Upload gefaald.",
+    "file_too_big": "Bestand is te groot [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+    "default": "Probeer later opnieuw"
+    },
+    "file_size_units": {
+      "B": "B",
+      "KiB": "KiB",
+      "MiB": "MiB",
+      "GiB": "GiB",
+      "TiB": "TiB"
+    }
+  }
+}

@@ -240,6 +240,15 @@ describe('The Statuses module', () => {
     expect(state.timelines.public.visibleStatuses[0].favorited).to.eql(true)
   })
 
+  it('keeps userId when clearing user timeline', () => {
+    const state = cloneDeep(defaultState)
+    state.timelines.user.userId = 123
+
+    mutations.clearTimeline(state, { timeline: 'user' })
+
+    expect(state.timelines.user.userId).to.eql(123)
+  })
+
   describe('notifications', () => {
     it('removes a notification when the notice gets removed', () => {
       const user = { id: '1' }

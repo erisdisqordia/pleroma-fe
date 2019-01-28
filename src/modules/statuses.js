@@ -2,7 +2,7 @@ import { remove, slice, each, find, maxBy, minBy, merge, last, isArray } from 'l
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
-const emptyTl = () => ({
+const emptyTl = (userId = 0) => ({
   statuses: [],
   statusesObject: {},
   faves: [],
@@ -14,7 +14,7 @@ const emptyTl = () => ({
   loading: false,
   followers: [],
   friends: [],
-  userId: 0,
+  userId,
   flushMarker: 0
 })
 
@@ -319,7 +319,7 @@ export const mutations = {
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
   clearTimeline (state, { timeline }) {
-    state.timelines[timeline] = emptyTl()
+    state.timelines[timeline] = emptyTl(state.timelines[timeline].userId)
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]

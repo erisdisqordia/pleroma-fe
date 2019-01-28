@@ -262,7 +262,6 @@ const Status = {
       this.userExpanded = !this.userExpanded
     },
     toggleShowMore () {
-      console.log('toggleShowMore', this.showingTall)
       if (this.showingTall) {
         this.showingTall = false
       } else if (this.expandingSubject && this.status.summary) {

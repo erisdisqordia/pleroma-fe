@@ -95,7 +95,8 @@ module.exports = {
   },
   plugins: [
     new ServiceWorkerWebpackPlugin({
-      entry: path.join(__dirname, '..', 'src/sw.js')
+      entry: path.join(__dirname, '..', 'src/sw.js'),
+      filename: 'sw-pleroma.js'
     })
   ]
 }

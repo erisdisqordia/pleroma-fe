@@ -8,8 +8,8 @@ const UserProfile = {
     this.$store.commit('clearTimeline', { timeline: 'favorites' })
     this.$store.commit('clearTimeline', { timeline: 'media' })
     this.$store.dispatch('startFetching', ['user', this.fetchBy])
-    this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
     this.$store.dispatch('startFetching', ['media', this.fetchBy])
+    this.startFetchFavorites()
     if (!this.user.id) {
       this.$store.dispatch('fetchUser', this.fetchBy)
     }
@@ -74,6 +74,11 @@ const UserProfile = {
     fetchFriends () {
       const id = this.userId
       this.$store.dispatch('addFriends', { id })
+    },
+    startFetchFavorites () {
+      if (this.isUs) {
+        this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
+      }
     }
   },
   watch: {
@@ -89,8 +94,8 @@ const UserProfile = {
       this.$store.commit('clearTimeline', { timeline: 'favorites' })
       this.$store.commit('clearTimeline', { timeline: 'media' })
       this.$store.dispatch('startFetching', ['user', this.fetchBy])
-      this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
       this.$store.dispatch('startFetching', ['media', this.fetchBy])
+      this.startFetchFavorites()
     },
     userId () {
       if (!this.isExternal) {
@@ -103,8 +108,8 @@ const UserProfile = {
       this.$store.commit('clearTimeline', { timeline: 'favorites' })
       this.$store.commit('clearTimeline', { timeline: 'media' })
       this.$store.dispatch('startFetching', ['user', this.fetchBy])
-      this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
       this.$store.dispatch('startFetching', ['media', this.fetchBy])
+      this.startFetchFavorites()
     },
     user () {
       if (this.user.id && !this.user.followers) {

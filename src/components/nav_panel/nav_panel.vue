@@ -44,6 +44,7 @@
 
 .nav-panel .panel {
   overflow: hidden;
+  box-shadow: var(--panelShadow);
 }
 .nav-panel ul {
   list-style: none;

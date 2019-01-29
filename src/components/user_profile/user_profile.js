@@ -36,7 +36,8 @@ const UserProfile = {
       return this.$route.params.name || this.user.screen_name
     },
     isUs () {
-      return this.userId === this.$store.state.users.currentUser.id
+      return this.userId && this.$store.state.users.currentUser.id &&
+        this.userId === this.$store.state.users.currentUser.id
     },
     friends () {
       return this.user.friends

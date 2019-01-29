@@ -222,10 +222,10 @@ const users = {
               commit('setBackendInteractor', backendInteractorService(accessToken))
 
               if (user.token) {
-                store.dispatch('initializeSocket', user.token)
+                store.dispatch('setWsToken', user.token)
               }
 
-              // Start getting fresh tweets.
+              // Start getting fresh posts.
               store.dispatch('startFetching', 'friends')
 
               // Get user mutes and follower info

@@ -98,6 +98,10 @@
             </attachment>
           </div>
 
+          <div v-if="status.card && !hideSubjectStatus && !noHeading" class="link-preview media-body">
+            <link-preview :card="status.card" :size="attachmentSize" :nsfw="nsfwClickthrough" />
+          </div>
+
           <div v-if="!noHeading && !noReplyLinks" class='status-actions media-body'>
             <div v-if="loggedIn">
               <a href="#" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')">
@@ -221,6 +225,11 @@
     vertical-align: bottom;
     flex-basis: 100%;
 
+    a {
+      display: inline-block;
+      word-break: break-all;
+    }
+
     small {
       font-weight: lighter;
     }
@@ -296,11 +305,6 @@
     }
   }
 
-  a {
-    display: inline-block;
-    word-break: break-all;
-  }
-
   .tall-status {
     position: relative;
     height: 220px;
@@ -309,6 +313,8 @@
   }
 
   .tall-status-hider {
+    display: inline-block;
+    word-break: break-all;
     position: absolute;
     height: 70px;
     margin-top: 150px;
@@ -326,6 +332,8 @@
   .status-unhider, .cw-status-hider {
     width: 100%;
     text-align: center;
+    display: inline-block;
+    word-break: break-all;
   }
 
   .status-content {

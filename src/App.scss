@@ -425,6 +425,12 @@ main-router {
   border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
   border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
 
+
+  .faint {
+    color: $fallback--faint;
+    color: var(--panelFaint, $fallback--faint);
+  }
+
   a {
     color: $fallback--link;
     color: var(--panelLink, $fallback--link)

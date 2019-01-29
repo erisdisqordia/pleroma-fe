@@ -89,6 +89,8 @@ const afterStoreSetup = ({ store, i18n }) => {
 
           if ((config.chatDisabled)) {
             store.dispatch('disableChat')
+          } else {
+            store.dispatch('initializeSocket')
           }
 
           const router = new VueRouter({

@@ -180,7 +180,7 @@ const Status = {
       return this.tallStatus
     },
     showingMore () {
-      return this.showingTall || (this.status.summary && this.expandingSubject)
+      return (this.tallStatus && this.showingTall) || (this.status.summary && this.expandingSubject)
     },
     nsfwClickthrough () {
       if (!this.status.nsfw) {
@@ -316,11 +316,14 @@ const Status = {
     'highlight': function (id) {
       if (this.status.id === id) {
         let rect = this.$el.getBoundingClientRect()
-        if (rect.top < 140) {
-          window.scrollBy(0, rect.top - 200)
-        } else if (rect.top < window.innerHeight && rect.height >= (window.innerHeight - 50)) {
-          window.scrollBy(0, rect.top - 50)
+        if (rect.top < 100) {
+          // Post is above screen, match its top to screen top
+          window.scrollBy(0, rect.top - 100)
+        } else if (rect.height >= (window.innerHeight - 50)) {
+          // Post we want to see is taller than screen so match its top to screen top
+          window.scrollBy(0, rect.top - 100)
         } else if (rect.bottom > window.innerHeight - 50) {
+          // Post is below screen, match its bottom to screen bottom
           window.scrollBy(0, rect.bottom - window.innerHeight + 50)
         }
       }

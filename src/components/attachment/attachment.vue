@@ -1,19 +1,44 @@
 <template>
-  <div v-if="size==='hide'">
-    <a class="placeholder" v-if="type !== 'html'" target="_blank" :href="attachment.url">[{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]</a>
+  <div v-if="usePlaceHolder" @click="openModal">
+    <a class="placeholder"
+      v-if="type !== 'html'"
+      target="_blank" :href="attachment.url"
+    >
+      [{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]
+    </a>
   </div>
-  <div v-else class="attachment" :class="{[type]: true, loading, 'small-attachment': isSmall, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}" v-show="!isEmpty">
-    <a class="image-attachment" v-if="hidden" @click.prevent="toggleHidden()">
-      <img :key="nsfwImage" :src="nsfwImage"/>
+  <div
+    v-else class="attachment"
+    :class="{[type]: true, loading, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}"
+    v-show="!isEmpty"
+  >
+    <a class="image-attachment" v-if="hidden" :href="attachment.url" @click.prevent="toggleHidden">
+      <img class="nsfw" :key="nsfwImage" :src="nsfwImage" :class="{'small': isSmall}"/>
+      <i v-if="type === 'video'" class="play-icon icon-play-circled"></i>
     </a>
     <div class="hider" v-if="nsfw && hideNsfwLocal && !hidden">
-      <a href="#" @click.prevent="toggleHidden()">Hide</a>
+      <a href="#" @click.prevent="toggleHidden">Hide</a>
     </div>
-    <a v-if="type === 'image' && (!hidden || preloadImage)" class="image-attachment" :class="{'hidden': hidden && preloadImage}" :href="attachment.url" target="_blank" :title="attachment.description">
-      <StillImage :class="{'small': isSmall}" :referrerpolicy="referrerpolicy" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
+
+    <a v-if="type === 'image' && (!hidden || preloadImage)"
+      @click="openModal"
+      class="image-attachment"
+      :class="{'hidden': hidden && preloadImage }"
+      :href="attachment.url" target="_blank"
+      :title="attachment.description"
+    >
+      <StillImage :referrerpolicy="referrerpolicy" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
-    <video :class="{'small': isSmall}" v-if="type === 'video' && !hidden" @loadeddata="onVideoDataLoad" :src="attachment.url" controls :loop="loopVideo" playsinline></video>
+    <a class="video-container"
+      @click="openModal"
+      v-if="type === 'video' && !hidden"
+      :class="{'small': isSmall}"
+      :href="allowPlay ? undefined : attachment.url"
+    >
+      <VideoAttachment class="video" :attachment="attachment" :controls="allowPlay" />
+      <i v-if="!allowPlay" class="play-icon icon-play-circled"></i>
+    </a>
 
     <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 
@@ -40,12 +65,17 @@
 
   .attachment.media-upload-container {
     flex: 0 0 auto;
-    max-height: 300px;
+    max-height: 200px;
     max-width: 100%;
+    display: flex;
+    video {
+      max-width: 100%;
+    }
   }
 
   .placeholder {
-    margin-right: 0.5em;
+    margin-right: 8px;
+    margin-bottom: 4px;
   }
 
   .nsfw-placeholder {
@@ -56,17 +86,9 @@
     }
   }
 
-  .small-attachment {
-    &.image, &.video {
-      max-width: 35%;
-    }
-    max-height: 100px;
-  }
-
   .attachment {
     position: relative;
-    flex: 1 0 30%;
-    margin: 0.5em 0.7em 0.6em 0.0em;
+    margin: 0.5em 0.5em 0em 0em;
     align-self: flex-start;
     line-height: 0;
 
@@ -78,12 +100,56 @@
     border-color: var(--border, $fallback--border);
     overflow: hidden;
   }
+
+  .non-gallery.attachment {
+    &.video {
+      flex: 1 0 40%;
+    }
+    .nsfw {
+      height: 260px;
+    }
+    .small {
+      height: 120px;
+      flex-grow: 0;
+    }
+    .video {
+      height: 260px;
+      display: flex;
+    }
+    video {
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+
   .fullwidth {
     flex-basis: 100%;
   }
   // fixes small gap below video
   &.video {
     line-height: 0;
+  }
+
+  .video-container {
+    display: flex;
+    max-height: 100%;
+  }
+
+  .video {
+    width: 100%;
+  }
+
+  .play-icon {
+    position: absolute;
+    font-size: 64px;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  }
+
+  .play-icon::before {
+    margin: 0;
   }
 
   &.html {
@@ -94,6 +160,7 @@
 
   .hider {
     position: absolute;
+    white-space: nowrap;
     margin: 10px;
     padding: 5px;
     background: rgba(230,230,230,0.6);
@@ -104,13 +171,7 @@
     border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
   }
 
-  .small {
-    max-height: 100px;
-  }
   video {
-    max-height: 500px;
-    height: 100%;
-    width: 100%;
     z-index: 0;
   }
 
@@ -120,7 +181,7 @@
 
   img.media-upload {
     line-height: 0;
-    max-height: 300px;
+    max-height: 200px;
     max-width: 100%;
   }
 
@@ -157,29 +218,20 @@
   }
 
   .image-attachment {
-    display: flex;
-    flex: 1;
+    width: 100%;
+    height: 100%;
 
     &.hidden {
       display: none;
     }
 
-    .still-image {
+    .nsfw {
+      object-fit: cover;
       width: 100%;
       height: 100%;
     }
 
-    .small {
-      img {
-        max-height: 100px;
-      }
-    }
-
     img {
-      object-fit: contain;
-      width: 100%;
-      height: 100%; /* If this isn't here, chrome will stretch the images */
-      max-height: 500px;
       image-orientation: from-image;
     }
   }

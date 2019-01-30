@@ -1,27 +1,32 @@
-const fileType = (typeString) => {
-  let type = 'unknown'
-
-  if (typeString.match(/text\/html/)) {
-    type = 'html'
+// TODO this func might as well take the entire file and use its mimetype
+// or the entire service could be just mimetype service that only operates
+// on mimetypes and not files. Currently the naming is confusing.
+const fileType = mimetype => {
+  if (mimetype.match(/text\/html/)) {
+    return 'html'
   }
 
-  if (typeString.match(/image/)) {
-    type = 'image'
+  if (mimetype.match(/image/)) {
+    return 'image'
   }
 
-  if (typeString.match(/video/)) {
-    type = 'video'
+  if (mimetype.match(/video/)) {
+    return 'video'
   }
 
-  if (typeString.match(/audio/)) {
-    type = 'audio'
+  if (mimetype.match(/audio/)) {
+    return 'audio'
   }
 
-  return type
+  return 'unknown'
 }
 
+const fileMatchesSomeType = (types, file) =>
+  types.some(type => fileType(file.mimetype) === type)
+
 const fileTypeService = {
-  fileType
+  fileType,
+  fileMatchesSomeType
 }
 
 export default fileTypeService

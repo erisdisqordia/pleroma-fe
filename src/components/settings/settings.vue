@@ -123,6 +123,10 @@
                 <input :disabled="!hideNsfwLocal" type="checkbox" id="preloadImage" v-model="preloadImage">
                 <label for="preloadImage">{{$t('settings.preload_images')}}</label>
               </li>
+              <li>
+                <input type="checkbox" id="useOneClickNsfw" v-model="useOneClickNsfw">
+                <label for="useOneClickNsfw">{{$t('settings.use_one_click_nsfw')}}</label>
+              </li>
             </ul>
             <li>
               <input type="checkbox" id="stopGifs" v-model="stopGifs">
@@ -140,6 +144,14 @@
                   </div>
                 </li>
               </ul>
+            </li>
+            <li>
+              <input type="checkbox" id="playVideosInline" v-model="playVideosInline">
+              <label for="playVideosInline">{{$t('settings.play_videos_inline')}}</label>
+            </li>
+            <li>
+              <input type="checkbox" id="useContainFit" v-model="useContainFit">
+              <label for="useContainFit">{{$t('settings.use_contain_fit')}}</label>
             </li>
           </ul>
         </div>

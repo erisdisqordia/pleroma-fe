@@ -5,11 +5,13 @@ import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
 import StillImage from '../still-image/still-image.vue'
+import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
-import { filter, find } from 'lodash'
-import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+import fileType from 'src/services/file_type/file_type.service'
+import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import { mentionMatchesUrl } from 'src/services/mention_matcher/mention_matcher.js'
+import { filter, find } from 'lodash'
 
 const Status = {
   name: 'Status',
@@ -37,7 +39,8 @@ const Status = {
       expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
         ? !this.$store.state.instance.collapseMessageWithSubject
         : !this.$store.state.config.collapseMessageWithSubject,
-      betterShadow: this.$store.state.interface.browserSupport.cssFilter
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter,
+      maxAttachments: 9
     }
   },
   computed: {
@@ -207,12 +210,31 @@ const Status = {
     },
     attachmentSize () {
       if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
-        (this.$store.state.config.hideAttachmentsInConv && this.inConversation)) {
+        (this.$store.state.config.hideAttachmentsInConv && this.inConversation) ||
+        (this.status.attachments.length > this.maxAttachments)) {
         return 'hide'
       } else if (this.compact) {
         return 'small'
       }
       return 'normal'
+    },
+    galleryTypes () {
+      if (this.attachmentSize === 'hide') {
+        return []
+      }
+      return this.$store.state.config.playVideosInline
+        ? ['image']
+        : ['image', 'video']
+    },
+    galleryAttachments () {
+      return this.status.attachments.filter(
+        file => fileType.fileMatchesSomeType(this.galleryTypes, file)
+      )
+    },
+    nonGalleryAttachments () {
+      return this.status.attachments.filter(
+        file => !fileType.fileMatchesSomeType(this.galleryTypes, file)
+      )
     }
   },
   components: {
@@ -223,6 +245,7 @@ const Status = {
     PostStatusForm,
     UserCardContent,
     StillImage,
+    Gallery,
     LinkPreview
   },
   methods: {
@@ -310,6 +333,10 @@ const Status = {
     },
     generateUserProfileLink (id, name) {
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
+    },
+    setMedia () {
+      const attachments = this.attachmentSize === 'hide' ? this.status.attachments : this.galleryAttachments
+      return () => this.$store.dispatch('setMedia', attachments)
     }
   },
   watch: {

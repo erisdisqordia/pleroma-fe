@@ -28,6 +28,7 @@ export const defaultState = {
     minId: Number.POSITIVE_INFINITY,
     data: [],
     idStore: {},
+    loading: false,
     error: false
   },
   favorites: new Set(),
@@ -348,6 +349,9 @@ export const mutations = {
   setError (state, { value }) {
     state.error = value
   },
+  setNotificationsLoading (state, { value }) {
+    state.notifications.loading = value
+  },
   setNotificationsError (state, { value }) {
     state.notifications.error = value
   },
@@ -375,6 +379,9 @@ const statuses = {
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })
+    },
+    setNotificationsLoading ({ rootState, commit }, { value }) {
+      commit('setNotificationsLoading', { value })
     },
     setNotificationsError ({ rootState, commit }, { value }) {
       commit('setNotificationsError', { value })

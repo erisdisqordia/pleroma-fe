@@ -13,6 +13,11 @@ const Notifications = {
 
     notificationsFetcher.startFetching({ store, credentials })
   },
+  data () {
+    return {
+      bottomedOut: false
+    }
+  },
   computed: {
     notifications () {
       return notificationsFromStore(this.$store)
@@ -28,6 +33,9 @@ const Notifications = {
     },
     unseenCount () {
       return this.unseenNotifications.length
+    },
+    loading () {
+      return this.$store.state.statuses.notifications.loading
     }
   },
   components: {
@@ -49,10 +57,16 @@ const Notifications = {
     fetchOlderNotifications () {
       const store = this.$store
       const credentials = store.state.users.currentUser.credentials
+      store.commit('setNotificationsLoading', { value: true })
       notificationsFetcher.fetchAndUpdate({
         store,
         credentials,
         older: true
+      }).then(notifs => {
+        store.commit('setNotificationsLoading', { value: false })
+        if (notifs.length === 0) {
+          this.bottomedOut = true
+        }
       })
     }
   }

@@ -16,7 +16,8 @@ const Timeline = {
   data () {
     return {
       paused: false,
-      unfocused: false
+      unfocused: false,
+      bottomedOut: false
     }
   },
   computed: {
@@ -95,7 +96,12 @@ const Timeline = {
         showImmediately: true,
         userId: this.userId,
         tag: this.tag
-      }).then(() => store.commit('setLoading', { timeline: this.timelineName, value: false }))
+      }).then(statuses => {
+        store.commit('setLoading', { timeline: this.timelineName, value: false })
+        if (statuses.length === 0) {
+          this.bottomedOut = true
+        }
+      })
     }, 1000, this),
     scrollLoad (e) {
       const bodyBRect = document.body.getBoundingClientRect()

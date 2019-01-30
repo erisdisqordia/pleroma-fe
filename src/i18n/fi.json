@@ -26,7 +26,8 @@
     "followed_you": "seuraa sinua",
     "notifications": "Ilmoitukset",
     "read": "Lue!",
-    "repeated_you": "toisti viestisi"
+    "repeated_you": "toisti viestisi",
+    "no_more_notifications": "Ei enempää ilmoituksia"
   },
   "post_status": {
     "default": "Tulin juuri saunasta.",
@@ -77,7 +78,8 @@
     "load_older": "Lataa vanhempia viestejä",
     "repeated": "toisti",
     "show_new": "Näytä uudet",
-    "up_to_date": "Ajantasalla"
+    "up_to_date": "Ajantasalla",
+    "no_more_statuses": "Ei enempää viestejä"
   },
   "user_card": {
     "follow": "Seuraa",

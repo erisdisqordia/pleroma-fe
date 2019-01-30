@@ -49,7 +49,8 @@
     "load_older": "Load older notifications",
     "notifications": "Notifications",
     "read": "Read!",
-    "repeated_you": "repeated your status"
+    "repeated_you": "repeated your status",
+    "no_more_notifications": "No more notifications"
   },
   "post_status": {
     "new_status": "Post new status",
@@ -318,7 +319,8 @@
     "no_retweet_hint": "Post is marked as followers-only or direct and cannot be repeated",
     "repeated": "repeated",
     "show_new": "Show new",
-    "up_to_date": "Up-to-date"
+    "up_to_date": "Up-to-date",
+    "no_more_statuses": "No more statuses"
   },
   "user_card": {
     "approve": "Approve",

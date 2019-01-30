@@ -35,6 +35,7 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
         store.dispatch('queueFlush', { timeline: timeline, id: timelineData.maxId })
       }
       update({store, statuses, timeline, showImmediately, userId})
+      return statuses
     }, () => store.dispatch('setError', { value: true }))
 }
 

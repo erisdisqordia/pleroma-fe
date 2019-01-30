@@ -24,9 +24,9 @@
 
       <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
-          <a :href="status.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
+          <router-link :to="userProfileLink" @click.stop.prevent.capture.native="toggleUserExpanded">
             <StillImage class='avatar' :class="{'avatar-compact': compact, 'better-shadow': betterShadow}"  :src="status.user.profile_image_url_original"/>
-          </a>
+          </router-link>
         </div>
         <div class="status-body">
           <div class="usercard media-body" v-if="userExpanded">

@@ -26,7 +26,7 @@
 
   // TODO: clean up the random margins in attachments, this makes preview line
   // up with attachments...
-  margin-right: 0.7em;
+  margin-right: 0.5em;
 
   .card-image {
     flex-shrink: 0;

@@ -80,7 +80,7 @@ const Status = {
     },
     replyProfileLink () {
       if (this.isReply) {
-        return this.generateUserProfileLink(this.status.in_reply_to_status_id, this.replyToName)
+        return this.generateUserProfileLink(this.status.in_reply_to_user_id, this.replyToName)
       }
     },
     retweet () { return !!this.statusoid.retweeted_status },

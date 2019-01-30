@@ -24,9 +24,9 @@
 
       <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
-          <a :href="status.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
+          <router-link :to="userProfileLink" @click.stop.prevent.capture.native="toggleUserExpanded">
             <StillImage class='avatar' :class="{'avatar-compact': compact, 'better-shadow': betterShadow}"  :src="status.user.profile_image_url_original"/>
-          </a>
+          </router-link>
         </div>
         <div class="status-body">
           <div class="usercard media-body" v-if="userExpanded">
@@ -110,6 +110,10 @@
               :attachments="galleryAttachments"
               :setMedia="setMedia()"
             />
+          </div>
+
+          <div v-if="status.card && !hideSubjectStatus && !noHeading" class="link-preview media-body">
+            <link-preview :card="status.card" :size="attachmentSize" :nsfw="nsfwClickthrough" />
           </div>
 
           <div v-if="!noHeading && !noReplyLinks" class='status-actions media-body'>
@@ -235,6 +239,11 @@
     vertical-align: bottom;
     flex-basis: 100%;
 
+    a {
+      display: inline-block;
+      word-break: break-all;
+    }
+
     small {
       font-weight: lighter;
     }
@@ -310,11 +319,6 @@
     }
   }
 
-  a {
-    display: inline-block;
-    word-break: break-all;
-  }
-
   .tall-status {
     position: relative;
     height: 220px;
@@ -323,6 +327,8 @@
   }
 
   .tall-status-hider {
+    display: inline-block;
+    word-break: break-all;
     position: absolute;
     height: 70px;
     margin-top: 150px;
@@ -340,6 +346,8 @@
   .status-unhider, .cw-status-hider {
     width: 100%;
     text-align: center;
+    display: inline-block;
+    word-break: break-all;
   }
 
   .status-content {

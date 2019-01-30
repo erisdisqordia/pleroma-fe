@@ -91,7 +91,9 @@ export const getters = {
   userById: state => id =>
     state.users.find(user => user.id === id),
   userByName: state => name =>
-    state.users.find(user => user.screen_name === name)
+    state.users.find(user => user.screen_name &&
+      (user.screen_name.toLowerCase() === name.toLowerCase())
+    )
 }
 
 export const defaultState = {
@@ -222,10 +224,10 @@ const users = {
               commit('setBackendInteractor', backendInteractorService(accessToken))
 
               if (user.token) {
-                store.dispatch('initializeSocket', user.token)
+                store.dispatch('setWsToken', user.token)
               }
 
-              // Start getting fresh tweets.
+              // Start getting fresh posts.
               store.dispatch('startFetching', 'friends')
 
               // Get user mutes and follower info

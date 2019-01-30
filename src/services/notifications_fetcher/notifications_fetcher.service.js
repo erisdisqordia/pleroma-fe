@@ -24,6 +24,7 @@ const fetchAndUpdate = ({store, credentials, older = false}) => {
   return apiService.fetchTimeline(args)
     .then((notifications) => {
       update({store, notifications, older})
+      return notifications
     }, () => store.dispatch('setNotificationsError', { value: true }))
     .catch(() => store.dispatch('setNotificationsError', { value: true }))
 }

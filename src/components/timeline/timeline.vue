@@ -20,10 +20,15 @@
       </div>
     </div>
     <div :class="classes.footer">
-      <a href="#" v-on:click.prevent='fetchOlderStatuses()' v-if="!timeline.loading">
+      <div v-if="bottomedOut" class="new-status-notification text-center panel-footer faint">
+        {{$t('timeline.no_more_statuses')}}
+      </div>
+      <a v-else-if="!timeline.loading" href="#" v-on:click.prevent='fetchOlderStatuses()'>
         <div class="new-status-notification text-center panel-footer">{{$t('timeline.load_older')}}</div>
       </a>
-      <div class="new-status-notification text-center panel-footer" v-else>...</div>
+      <div v-else class="new-status-notification text-center panel-footer">
+        <i class="icon-spin3 animate-spin"/>
+      </div>
     </div>
   </div>
 </template>

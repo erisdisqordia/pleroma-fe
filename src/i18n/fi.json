@@ -49,7 +49,8 @@
     "load_older": "Lataa vanhempia ilmoituksia",
     "notifications": "Ilmoitukset",
     "read": "Lue!",
-    "repeated_you": "toisti viestisi"
+    "repeated_you": "toisti viestisi",
+    "no_more_notifications": "Ei enempää ilmoituksia"
   },
   "post_status": {
     "new_status": "Uusi viesti",
@@ -209,7 +210,8 @@
     "no_retweet_hint": "Viesti ei ole julkinen, eikä sitä voi toistaa",
     "repeated": "toisti",
     "show_new": "Näytä uudet",
-    "up_to_date": "Ajantasalla"
+    "up_to_date": "Ajantasalla",
+    "no_more_statuses": "Ei enempää viestejä"
   },
   "user_card": {
     "approve": "Hyväksy",

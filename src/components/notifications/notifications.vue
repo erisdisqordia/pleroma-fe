@@ -18,10 +18,15 @@
         </div>
       </div>
       <div class="panel-footer">
-        <a href="#" v-on:click.prevent='fetchOlderNotifications()' v-if="!notifications.loading">
+        <div v-if="bottomedOut" class="new-status-notification text-center panel-footer faint">
+          {{$t('notifications.no_more_notifications')}}
+        </div>
+        <a v-else-if="!loading" href="#" v-on:click.prevent="fetchOlderNotifications()">
           <div class="new-status-notification text-center panel-footer">{{$t('notifications.load_older')}}</div>
         </a>
-        <div class="new-status-notification text-center panel-footer" v-else>...</div>
+        <div v-else class="new-status-notification text-center panel-footer">
+          <i class="icon-spin3 animate-spin"/>
+        </div>
       </div>
     </div>
   </div>

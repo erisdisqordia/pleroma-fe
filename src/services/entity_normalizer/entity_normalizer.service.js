@@ -100,7 +100,8 @@ export const parseUser = (data) => {
     output.rights = data.rights
     output.no_rich_text = data.no_rich_text
     output.default_scope = data.default_scope
-    output.hide_network = data.hide_network
+    output.hide_followings = data.hide_followings
+    output.hide_followers = data.hide_followers
     output.background_image = data.background_image
     // on mastoapi this info is contained in a "relationship"
     output.following = data.following
@@ -215,6 +216,7 @@ export const parseStatus = (data) => {
 
   output.id = String(data.id)
   output.visibility = data.visibility
+  output.card = data.card
   output.created_at = new Date(data.created_at)
 
   // Converting to string, the right way.

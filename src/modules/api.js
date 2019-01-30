@@ -20,6 +20,9 @@ const api = {
     removeFetcher (state, {timeline}) {
       delete state.fetchers[timeline]
     },
+    setWsToken (state, token) {
+      state.wsToken = token
+    },
     setSocket (state, socket) {
       state.socket = socket
     },
@@ -51,10 +54,14 @@ const api = {
       window.clearInterval(fetcher)
       store.commit('removeFetcher', {timeline})
     },
-    initializeSocket (store, token) {
+    setWsToken (store, token) {
+      store.commit('setWsToken', token)
+    },
+    initializeSocket (store) {
       // Set up websocket connection
       if (!store.state.chatDisabled) {
-        let socket = new Socket('/socket', {params: {token: token}})
+        const token = store.state.wsToken
+        const socket = new Socket('/socket', {params: {token}})
         socket.connect()
         store.dispatch('initializeChat', socket)
       }

@@ -2,7 +2,7 @@ import { remove, slice, each, find, maxBy, minBy, merge, last, isArray } from 'l
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
-const emptyTl = () => ({
+const emptyTl = (userId = 0) => ({
   statuses: [],
   statusesObject: {},
   faves: [],
@@ -14,7 +14,7 @@ const emptyTl = () => ({
   loading: false,
   followers: [],
   friends: [],
-  userId: 0,
+  userId,
   flushMarker: 0
 })
 
@@ -28,6 +28,7 @@ export const defaultState = {
     minId: Number.POSITIVE_INFINITY,
     data: [],
     idStore: {},
+    loading: false,
     error: false
   },
   favorites: new Set(),
@@ -319,7 +320,7 @@ export const mutations = {
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
   clearTimeline (state, { timeline }) {
-    state.timelines[timeline] = emptyTl()
+    state.timelines[timeline] = emptyTl(state.timelines[timeline].userId)
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
@@ -348,6 +349,9 @@ export const mutations = {
   setError (state, { value }) {
     state.error = value
   },
+  setNotificationsLoading (state, { value }) {
+    state.notifications.loading = value
+  },
   setNotificationsError (state, { value }) {
     state.notifications.error = value
   },
@@ -375,6 +379,9 @@ const statuses = {
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })
+    },
+    setNotificationsLoading ({ rootState, commit }, { value }) {
+      commit('setNotificationsLoading', { value })
     },
     setNotificationsError ({ rootState, commit }, { value }) {
       commit('setNotificationsError', { value })

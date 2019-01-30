@@ -9,6 +9,7 @@ import LinkPreview from '../link-preview/link-preview.vue'
 import { filter, find } from 'lodash'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+import { mentionMatchesUrl } from 'src/services/mention_matcher/mention_matcher.js'
 
 const Status = {
   name: 'Status',
@@ -237,11 +238,23 @@ const Status = {
           return 'icon-globe'
       }
     },
-    linkClicked ({target}) {
+    linkClicked (event) {
+      let { target } = event
       if (target.tagName === 'SPAN') {
         target = target.parentNode
       }
       if (target.tagName === 'A') {
+        if (target.className.match(/mention/)) {
+          const href = target.getAttribute('href')
+          const attn = this.status.attentions.find(attn => mentionMatchesUrl(attn, href))
+          if (attn) {
+            event.stopPropagation()
+            event.preventDefault()
+            const link = this.generateUserProfileLink(attn.id, attn.screen_name)
+            this.$router.push(link)
+            return
+          }
+        }
         window.open(target.href, '_blank')
       }
     },

@@ -130,7 +130,7 @@
           <div class="setting-item">
             <h2>{{$t('settings.follow_import')}}</h2>
             <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
-            <form v-model="followImportForm">
+            <form>
               <input type="file" ref="followlist" v-on:change="followListChange"></input>
             </form>
             <i class=" icon-spin4 animate-spin uploading" v-if="followListUploading"></i>

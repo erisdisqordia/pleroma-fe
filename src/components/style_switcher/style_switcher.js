@@ -7,7 +7,7 @@ import OpacityInput from '../opacity_input/opacity_input.vue'
 import ShadowControl from '../shadow_control/shadow_control.vue'
 import FontControl from '../font_control/font_control.vue'
 import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
-import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
+import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import Preview from './preview.vue'
 import ExportImport from '../export_import/export_import.vue'
 

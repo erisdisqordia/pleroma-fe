@@ -1,4 +1,4 @@
-import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
+import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 

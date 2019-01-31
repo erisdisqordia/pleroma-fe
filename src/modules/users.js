@@ -1,5 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import { compact, map, each, merge } from 'lodash'
+import { compact, map, each, merge, concat } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
 import oauthApi from '../services/new_api/oauth'
@@ -54,7 +54,8 @@ export const mutations = {
   // TODO Clean after ourselves?
   addFriends (state, { id, friends }) {
     const user = state.usersObject[id]
-    user.friends = friends
+    console.log(user.friends)
+    user.friends = concat(user.friends, friends)
   },
   addFollowers (state, { id, followers }) {
     const user = state.usersObject[id]
@@ -115,12 +116,12 @@ const users = {
       store.rootState.api.backendInteractor.fetchUser({ id })
         .then((user) => store.commit('addNewUsers', [user]))
     },
-    addFriends ({ rootState, commit }, { id }) {
-      rootState.api.backendInteractor.fetchFriends({ id })
+    addFriends ({ rootState, commit }, { id, page }) {
+      rootState.api.backendInteractor.fetchFriends({ id, page })
         .then((friends) => commit('addFriends', { id, friends }))
     },
-    addFollowers ({ rootState, commit }, { id }) {
-      rootState.api.backendInteractor.fetchFollowers({ id })
+    addFollowers ({ rootState, commit }, { id, page }) {
+      rootState.api.backendInteractor.fetchFollowers({ id, page })
         .then((followers) => commit('addFollowers', { id, followers }))
     },
     registerPushNotifications (store) {

@@ -19,6 +19,12 @@ const UserProfile = {
     this.$store.dispatch('stopFetching', 'favorites')
     this.$store.dispatch('stopFetching', 'media')
   },
+  data () {
+    return {
+      followsPage: 0,
+      followersPage: 0
+    }
+  },
   computed: {
     timeline () {
       return this.$store.state.statuses.timelines.user
@@ -80,6 +86,11 @@ const UserProfile = {
       if (this.isUs) {
         this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
       }
+    },
+    nextFollowsPage () {
+      this.followsPage += 1
+      this.$store.dispatch('addFriends', { id: this.userId, page: this.followsPage })
+      console.log(this.user.friends)
     }
   },
   watch: {

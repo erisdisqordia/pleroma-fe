@@ -247,15 +247,21 @@ const fetchUser = ({id, credentials}) => {
     .then((data) => parseUser(data))
 }
 
-const fetchFriends = ({id, credentials}) => {
+const fetchFriends = ({id, page, credentials}) => {
   let url = `${FRIENDS_URL}?user_id=${id}`
+  if (page) {
+    url = url + `&page=${page}`
+  }
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
 }
 
-const fetchFollowers = ({id, credentials}) => {
+const fetchFollowers = ({id, page, credentials}) => {
   let url = `${FOLLOWERS_URL}?user_id=${id}`
+  if (page) {
+    url = url + `&page=${page}`
+  }
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))

@@ -107,7 +107,7 @@
     </div>
   </div>
   <div class="panel-body profile-panel-body" v-if="!hideBio">
-    <div v-if="!hideUserStatsLocal || switcher" class="user-counts">
+    <div v-if="!hideUserStatsLocal && switcher" class="user-counts">
       <div class="user-count" v-on:click.prevent="setProfileView('statuses')">
         <h5>{{ $t('user_card.statuses') }}</h5>
         <span v-if="!hideUserStatsLocal">{{user.statuses_count}} <br></span>

@@ -7,6 +7,7 @@
       <div :label="$t('user_card.followees')">
         <div v-if="friends">
           <user-card v-for="friend in friends" :key="friend.id" :user="friend" :showFollows="true"></user-card>
+          <div @click="nextFollowsPage" class="panel-footer">MORE</div>
         </div>
         <div class="userlist-placeholder" v-else>
           <i class="icon-spin3 animate-spin"></i>

@@ -113,6 +113,8 @@ export const parseUser = (data) => {
   output.locked = data.locked
   output.followers_count = data.followers_count
   output.statuses_count = data.statuses_count
+  output.friends = []
+  output.followers = []
 
   return output
 }

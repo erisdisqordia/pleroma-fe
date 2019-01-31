@@ -4,6 +4,7 @@ import './tab_switcher.scss'
 
 export default Vue.component('tab-switcher', {
   name: 'TabSwitcher',
+  props: ['renderOnlyFocused'],
   data () {
     return {
       active: this.$slots.default.findIndex(_ => _.tag)
@@ -44,11 +45,12 @@ export default Vue.component('tab-switcher', {
     const contents = this.$slots.default.map((slot, index) => {
       if (!slot.tag) return
       const active = index === this.active
-      return (
-        <div class={active ? 'active' : 'hidden'}>
-          {slot}
-        </div>
-      )
+      if (this.renderOnlyFocused) {
+        return active
+          ? <div class="active">{slot}</div>
+          : <div class="hidden"></div>
+      }
+      return <div class={active ? 'active' : 'hidden' }>{slot}</div>
     })
 
     return (

@@ -57,9 +57,9 @@ const Attachment = {
       }
     },
     openModal (event) {
-      const modalTypes = this.$store.state.config.playVideosInline
-        ? ['image']
-        : ['image', 'video']
+      const modalTypes = this.$store.state.config.playVideosInModal
+        ? ['image', 'video']
+        : ['image']
       if (fileTypeService.fileMatchesSomeType(modalTypes, this.attachment) ||
         this.usePlaceHolder
       ) {

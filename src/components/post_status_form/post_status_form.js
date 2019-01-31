@@ -16,7 +16,7 @@ const buildMentionsString = ({user, attentions}, currentUser) => {
     return `@${attention.screen_name}`
   })
 
-  return mentions.join(' ') + ' '
+  return mentions.length > 0 ? mentions.join(' ') + ' ' : ''
 }
 
 const PostStatusForm = {

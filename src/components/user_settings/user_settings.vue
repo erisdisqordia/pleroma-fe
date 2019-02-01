@@ -179,5 +179,9 @@
     font-size: 1.5em;
     margin: 0.25em;
   }
+
+  .name-changer {
+    width: 100%;
+  }
 }
 </style>

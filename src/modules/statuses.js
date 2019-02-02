@@ -273,11 +273,10 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
 
     // Only add a new notification if we don't have one for the same action
     if (!state.notifications.idStore.hasOwnProperty(notification.id)) {
-      const notificationId = parseInt(notification.id, 10)
-      state.notifications.maxId = notificationId > parseInt(state.notifications.maxId, 10)
+      state.notifications.maxId = notification.id > state.notifications.maxId
         ? notification.id
         : state.notifications.maxId
-      state.notifications.minId = notificationId < parseInt(state.notifications.minId, 10)
+      state.notifications.minId = notification.id < state.notifications.minId
         ? notification.id
         : state.notifications.minId
 

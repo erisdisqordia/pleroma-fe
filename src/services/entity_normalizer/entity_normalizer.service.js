@@ -268,7 +268,7 @@ export const parseNotification = (data) => {
   }
 
   output.created_at = new Date(data.created_at)
-  output.id = String(data.id)
+  output.id = data.id
 
   return output
 }

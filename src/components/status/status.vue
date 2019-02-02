@@ -13,7 +13,7 @@
     </template>
     <template v-else>
       <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
-        <UserAvatar v-if="retweet" :class='{ "better-shadow": betterShadow }' :src="statusoid.user.profile_image_url_original"/>
+        <UserAvatar v-if="retweet" :betterShadow="betterShadow" :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
           <a v-else :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
@@ -25,7 +25,7 @@
       <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <router-link :to="userProfileLink" @click.stop.prevent.capture.native="toggleUserExpanded">
-            <UserAvatar :class="{'avatar-compact': compact, 'better-shadow': betterShadow}" :src="status.user.profile_image_url_original"/>
+            <UserAvatar :compact="compact" :betterShadow="betterShadow" :src="status.user.profile_image_url_original"/>
           </router-link>
         </div>
         <div class="status-body">
@@ -489,19 +489,6 @@
   color: var(--cBlue, $fallback--cBlue);
 }
 
-.status .avatar-compact {
-  width: 32px;
-  height: 32px;
-  box-shadow: var(--avatarStatusShadow);
-  border-radius: $fallback--avatarAltRadius;
-  border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
-
-  &.better-shadow {
-    box-shadow: var(--avatarStatusShadowInset);
-    filter: var(--avatarStatusShadowFilter)
-  }
-}
-
 .status:hover .animated.avatar {
   canvas {
     display: none;
@@ -571,11 +558,11 @@ a.unmute {
   .status .avatar {
     width: 40px;
     height: 40px;
-  }
 
-  .status .avatar-compact {
-    width: 32px;
-    height: 32px;
+    &.avatar-compact {
+      width: 32px;
+      height: 32px;
+    }
   }
 }
 

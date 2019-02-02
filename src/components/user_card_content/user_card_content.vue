@@ -4,7 +4,7 @@
     <div class='user-info'>
       <div class='container'>
         <router-link :to="userProfileLink(user)">
-          <UserAvatar :class='{ "better-shadow": betterShadow }' :src="user.profile_image_url_original"/>
+          <UserAvatar :betterShadow="betterShadow" :src="user.profile_image_url_original"/>
         </router-link>
         <div class="name-and-screen-name">
           <div class="top-line">
@@ -169,23 +169,12 @@
     max-height: 56px;
 
     .avatar {
-      border-radius: $fallback--avatarRadius;
-      border-radius: var(--avatarRadius, $fallback--avatarRadius);
       flex: 1 0 100%;
       width: 56px;
       height: 56px;
       box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
       box-shadow: var(--avatarShadow);
       object-fit: cover;
-
-      &.better-shadow {
-        box-shadow: var(--avatarShadowInset);
-        filter: var(--avatarShadowFilter)
-      }
-
-      &.animated::before {
-        display: none;
-      }
     }
   }
 

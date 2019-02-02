@@ -3,7 +3,9 @@ import avatarPlaceholderImage from '../../assets/avatar-placeholder.png'
 
 const UserAvatar = {
   props: [
-    'src'
+    'src',
+    'betterShadow',
+    'compact'
   ],
   data () {
     return {

@@ -1,5 +1,5 @@
 import StillImage from '../still-image/still-image.vue'
-import nsfwImage from '../../assets/nsfw.png'
+import avatarPlaceholderImage from '../../assets/avatar-placeholder.png'
 
 const UserAvatar = {
   props: [
@@ -15,7 +15,7 @@ const UserAvatar = {
   },
   computed: {
     imgSrc () {
-      return this.showPlaceholder ? nsfwImage : this.src
+      return this.showPlaceholder ? avatarPlaceholderImage : this.src
     }
   },
   methods: {

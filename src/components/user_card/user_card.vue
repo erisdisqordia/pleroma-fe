@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <a href="#">
-      <StillImage @click.prevent="toggleUserExpanded" class="avatar" :src="user.profile_image_url"/>
+      <UserAvatar @click.prevent="toggleUserExpanded" :src="user.profile_image_url"/>
     </a>
     <div class="usercard" v-if="userExpanded">
       <user-card-content :user="user" :switcher="false"></user-card-content>

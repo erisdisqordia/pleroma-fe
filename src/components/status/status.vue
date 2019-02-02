@@ -502,33 +502,6 @@
   }
 }
 
-.avatar.still-image {
-  width: 48px;
-  height: 48px;
-  box-shadow: var(--avatarStatusShadow);
-  border-radius: $fallback--avatarRadius;
-  border-radius: var(--avatarRadius, $fallback--avatarRadius);
-  overflow: hidden;
-  position: relative;
-
-  &.better-shadow {
-    box-shadow: var(--avatarStatusShadowInset);
-    filter: var(--avatarStatusShadowFilter)
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-
-  &.animated::before {
-    display: none;
-  }
-
-  &.retweeted {
-  }
-}
-
 .status:hover .animated.avatar {
   canvas {
     display: none;

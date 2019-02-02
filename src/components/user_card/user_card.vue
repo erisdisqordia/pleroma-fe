@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <a href="#">
-      <StillImage @click.prevent="toggleUserExpanded" class="avatar" :src="user.profile_image_url"/>
+      <StillImage @click.prevent.native="toggleUserExpanded" class="avatar" :src="user.profile_image_url"/>
     </a>
     <div class="usercard" v-if="userExpanded">
       <user-card-content :user="user" :switcher="false"></user-card-content>
@@ -79,7 +79,7 @@
 
 .usercard {
   width: fill-available;
-  margin: 0.2em 0 0.7em 0;
+  margin: 0.2em 0 0 0.7em;
   border-radius: $fallback--panelRadius;
   border-radius: var(--panelRadius, $fallback--panelRadius);
   border-style: solid;

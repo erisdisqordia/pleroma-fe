@@ -405,7 +405,7 @@
     padding: 0.4em 0.6em 0 0.6em;
     margin: 0;
 
-    .avatar {
+    .avatar.still-image {
       border-radius: $fallback--avatarAltRadius;
       border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
       margin-left: 28px;
@@ -546,7 +546,7 @@ a.unmute {
 @media all and (max-width: 800px) {
   .status-el {
     .retweet-info {
-      .avatar {
+      .avatar.still-image {
         margin-left: 20px;
       }
     }
@@ -555,7 +555,7 @@ a.unmute {
     max-width: 100%;
   }
 
-  .status .avatar {
+  .status .avatar.still-image {
     width: 40px;
     height: 40px;
 

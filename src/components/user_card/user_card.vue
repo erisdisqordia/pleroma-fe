@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <a href="#">
-      <UserAvatar @click.prevent="toggleUserExpanded" :src="user.profile_image_url"/>
+      <UserAvatar :compact="true" @click.prevent="toggleUserExpanded" :src="user.profile_image_url"/>
     </a>
     <div class="usercard" v-if="userExpanded">
       <user-card-content :user="user" :switcher="false"></user-card-content>
@@ -70,10 +70,6 @@
 
   .avatar {
     margin-top: 0.2em;
-    width:32px;
-    height: 32px;
-    border-radius: $fallback--avatarAltRadius;
-    border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
   }
 }
 

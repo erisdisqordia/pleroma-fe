@@ -222,9 +222,9 @@ const Status = {
       if (this.attachmentSize === 'hide') {
         return []
       }
-      return this.$store.state.config.playVideosInline
-        ? ['image']
-        : ['image', 'video']
+      return this.$store.state.config.playVideosInModal
+        ? ['image', 'video']
+        : ['image']
     },
     galleryAttachments () {
       return this.status.attachments.filter(

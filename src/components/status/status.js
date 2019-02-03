@@ -89,6 +89,7 @@ const Status = {
     retweet () { return !!this.statusoid.retweeted_status },
     retweeter () { return this.statusoid.user.name || this.statusoid.user.screen_name },
     retweeterHtml () { return this.statusoid.user.name_html },
+    retweeterProfileLink () { return this.generateUserProfileLink(this.statusoid.user.id, this.statusoid.user.screen_name) },
     status () {
       if (this.retweet) {
         return this.statusoid.retweeted_status

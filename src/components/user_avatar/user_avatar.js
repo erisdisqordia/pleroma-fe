@@ -1,5 +1,4 @@
 import StillImage from '../still-image/still-image.vue'
-import avatarPlaceholderImage from '../../assets/avatar-placeholder.png'
 
 const UserAvatar = {
   props: [
@@ -17,7 +16,7 @@ const UserAvatar = {
   },
   computed: {
     imgSrc () {
-      return this.showPlaceholder ? avatarPlaceholderImage : this.src
+      return this.showPlaceholder ? '/images/avi.png' : this.src
     }
   },
   methods: {

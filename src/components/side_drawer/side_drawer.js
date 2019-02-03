@@ -26,6 +26,12 @@ const SideDrawer = {
     },
     suggestionsEnabled () {
       return this.$store.state.instance.suggestionsEnabled
+    },
+    logo () {
+      return this.$store.state.instance.logo
+    },
+    sitename () {
+      return this.$store.state.instance.name
     }
   },
   methods: {

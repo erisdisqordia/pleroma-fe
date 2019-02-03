@@ -118,6 +118,7 @@
     "delete_account_description": "Permanently delete your account and all your messages.",
     "delete_account_error": "There was an issue deleting your account. If this persists please contact your instance administrator.",
     "delete_account_instructions": "Type your password in the input below to confirm account deletion.",
+    "avatar_size_instruction": "The recommended minimum size for avatar images is 150x150 pixels.",
     "export_theme": "Save preset",
     "filtering": "Filtering",
     "filtering_explanation": "All statuses containing these words will be muted, one per line",

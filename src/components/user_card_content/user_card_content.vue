@@ -112,11 +112,11 @@
         <h5>{{ $t('user_card.statuses') }}</h5>
         <span>{{user.statuses_count}} <br></span>
       </div>
-      <div class="user-count" v-on:click.prevent="setProfileView('friends')" v-if="!user.hide_followings">
+      <div class="user-count" v-on:click.prevent="setProfileView('friends')" v-if="followeesCountVisible">
         <h5>{{ $t('user_card.followees') }}</h5>
         <span>{{user.friends_count}}</span>
       </div>
-      <div class="user-count" v-on:click.prevent="setProfileView('followers')" v-if="!user.hide_followers">
+      <div class="user-count" v-on:click.prevent="setProfileView('followers')" v-if="followersCountVisible">
         <h5>{{ $t('user_card.followers') }}</h5>
         <span>{{user.followers_count}}</span>
       </div>

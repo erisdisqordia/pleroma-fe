@@ -41,6 +41,7 @@
           </div>
           <div class="setting-item">
             <h2>{{$t('settings.avatar')}}</h2>
+            <p class="visibility-notice">{{$t('settings.avatar_size_instruction')}}</p>
             <p>{{$t('settings.current_avatar')}}</p>
             <img :src="user.profile_image_url_original" class="old-avatar"></img>
             <p>{{$t('settings.set_new_avatar')}}</p>

@@ -285,6 +285,14 @@
         overflow: hidden;
         white-space: nowrap;
       }
+      & > span {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      & > a:last-child {
+        flex-shrink: 0;
+      }
     }
     .reply-info {
       display: flex;

@@ -30,12 +30,8 @@
               <label for="account-no-rich-text">{{$t('settings.no_rich_text_description')}}</label>
             </p>
             <p>
-              <input type="checkbox" v-model="hideFollowings" id="account-hide-followings">
-              <label for="account-hide-followings">{{$t('settings.hide_followings_description')}}</label>
-            </p>
-            <p>
-              <input type="checkbox" v-model="hideFollowers" id="account-hide-followers">
-              <label for="account-hide-followers">{{$t('settings.hide_followers_description')}}</label>
+              <input type="checkbox" v-model="newHideNetwork" id="account-hide-network">
+              <label for="account-hide-network">{{$t('settings.hide_network_description')}}</label>
             </p>
             <button :disabled='newName.length <= 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
           </div>

@@ -10,8 +10,7 @@ const UserSettings = {
       newLocked: this.$store.state.users.currentUser.locked,
       newNoRichText: this.$store.state.users.currentUser.no_rich_text,
       newDefaultScope: this.$store.state.users.currentUser.default_scope,
-      hideFollowings: this.$store.state.users.currentUser.hide_followings,
-      hideFollowers: this.$store.state.users.currentUser.hide_followers,
+      newHideNetwork: this.$store.state.users.currentUser.hide_network,
       followList: null,
       followImportError: false,
       followsImported: false,
@@ -67,8 +66,7 @@ const UserSettings = {
       /* eslint-disable camelcase */
       const default_scope = this.newDefaultScope
       const no_rich_text = this.newNoRichText
-      const hide_followings = this.hideFollowings
-      const hide_followers = this.hideFollowers
+      const hide_network = this.newHideNetwork
       /* eslint-enable camelcase */
       this.$store.state.api.backendInteractor
         .updateProfile({
@@ -80,8 +78,7 @@ const UserSettings = {
             /* eslint-disable camelcase */
             default_scope,
             no_rich_text,
-            hide_followings,
-            hide_followers
+            hide_network
             /* eslint-enable camelcase */
           }}).then((user) => {
             if (!user.error) {

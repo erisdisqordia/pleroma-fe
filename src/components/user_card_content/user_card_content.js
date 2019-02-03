@@ -79,12 +79,6 @@ export default {
       set (color) {
         this.$store.dispatch('setHighlight', { user: this.user.screen_name, color })
       }
-    },
-    followeesCountVisible () {
-      return !this.isOtherUser || !this.user.hide_followings
-    },
-    followersCountVisible () {
-      return !this.isOtherUser || !this.user.hide_followers
     }
   },
   components: {

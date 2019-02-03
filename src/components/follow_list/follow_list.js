@@ -1,6 +1,6 @@
 import UserCard from '../user_card/user_card.vue'
 
-const FollowersList = {
+const FollowList = {
   data () {
     return {
       loading: false,
@@ -8,11 +8,11 @@ const FollowersList = {
       error: false
     }
   },
-  props: ['userId'],
+  props: ['userId', 'showFollowers'],
   created () {
     window.addEventListener('scroll', this.scrollLoad)
-    if (this.user.followers.length === 0) {
-      this.fetchFollowers()
+    if (this.entries.length === 0) {
+      this.fetchEntries()
     }
   },
   destroyed () {
@@ -23,18 +23,19 @@ const FollowersList = {
     user () {
       return this.$store.getters.userById(this.userId)
     },
-    followers () {
-      return this.user.followers
+    entries () {
+      return this.showFollowers ? this.user.followers : this.user.friends
     }
   },
   methods: {
-    fetchFollowers () {
+    fetchEntries () {
       if (!this.loading) {
+        const command = this.showFollowers ? 'addFollowers' : 'addFriends'
         this.loading = true
-        this.$store.dispatch('addFollowers', this.userId).then(followers => {
+        this.$store.dispatch(command, this.userId).then(entries => {
           this.error = false
           this.loading = false
-          this.bottomedOut = followers.length === 0
+          this.bottomedOut = entries.length === 0
         }).catch(() => {
           this.error = true
           this.loading = false
@@ -49,7 +50,7 @@ const FollowersList = {
         this.$el.offsetHeight > 0 &&
         (window.innerHeight + window.pageYOffset) >= (height - 750)
       ) {
-        this.fetchFollowers()
+        this.fetchEntries()
       }
     }
   },
@@ -58,4 +59,4 @@ const FollowersList = {
   }
 }
 
-export default FollowersList
+export default FollowList

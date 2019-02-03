@@ -1,8 +1,7 @@
 import UserCardContent from '../user_card_content/user_card_content.vue'
 import UserCard from '../user_card/user_card.vue'
 import Timeline from '../timeline/timeline.vue'
-import FriendsList from '../friends_list/friends_list.vue'
-import FollowersList from '../followers_list/followers_list.vue'
+import FollowList from '../follow_list/follow_list.vue'
 
 const UserProfile = {
   created () {
@@ -102,8 +101,7 @@ const UserProfile = {
     UserCardContent,
     UserCard,
     Timeline,
-    FriendsList,
-    FollowersList
+    FollowList
   }
 }
 

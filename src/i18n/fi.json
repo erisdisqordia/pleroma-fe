@@ -17,7 +17,9 @@
   },
   "general": {
     "apply": "Aseta",
-    "submit": "Lähetä"
+    "submit": "Lähetä",
+    "more": "Lisää",
+    "generic_error": "Virhe tapahtui"
   },
   "login": {
     "login": "Kirjaudu sisään",

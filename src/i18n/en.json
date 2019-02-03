@@ -17,7 +17,9 @@
   },
   "general": {
     "apply": "Apply",
-    "submit": "Submit"
+    "submit": "Submit",
+    "more": "More",
+    "generic_error": "An error occured"
   },
   "login": {
     "login": "Log in",
@@ -365,9 +367,9 @@
   },
   "upload":{
     "error": {
-    "base": "Upload failed.",
-    "file_too_big": "File too big [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-    "default": "Try again later"
+      "base": "Upload failed.",
+      "file_too_big": "File too big [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+      "default": "Try again later"
     },
     "file_size_units": {
       "B": "B",

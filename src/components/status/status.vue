@@ -280,7 +280,6 @@
       color: var(--link, $fallback--link);
       max-width: 100%;
       a {
-        min-width: 17px;
         max-width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;

@@ -1,13 +1,19 @@
 @import './_variables.scss';
 
 #app {
-  background-size: cover;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: 0 50px;
   min-height: 100vh;
   max-width: 100%;
   overflow: hidden;
+}
+
+.app-bg-wrapper {
+  position: fixed;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 50%;
 }
 
 i {

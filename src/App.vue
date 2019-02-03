@@ -1,5 +1,6 @@
 <template>
-  <div id="app" v-bind:style="style">
+  <div id="app">
+    <div class="app-bg-wrapper" v-bind:style="bgStyle"></div>
     <nav class='nav-bar container' @click="scrollToTop()" id="nav">
       <div class='logo' :style='logoBgStyle'>
         <div class='mask' :style='logoMaskStyle'></div>

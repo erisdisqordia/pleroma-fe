@@ -15,13 +15,13 @@
         :timeline-name="'user'"
         :user-id="fetchBy"
       />
-      <div :label="$t('user_card.followees')">
+      <div :label="$t('user_card.followees')" v-if="!user.hide_followings">
         <FollowList v-if="user.friends_count > 0" :userId="userId" :showFollowers="false" />
         <div class="userlist-placeholder" v-else>
           <i class="icon-spin3 animate-spin"></i>
         </div>
       </div>
-      <div :label="$t('user_card.followers')">
+      <div :label="$t('user_card.followers')" v-if="!user.hide_followers">
         <FollowList v-if="user.followers_count > 0" :userId="userId" :showFollowers="true" />
         <div class="userlist-placeholder" v-else>
           <i class="icon-spin3 animate-spin"></i>

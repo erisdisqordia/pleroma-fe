@@ -146,8 +146,8 @@
               </ul>
             </li>
             <li>
-              <input type="checkbox" id="playVideosInline" v-model="playVideosInline">
-              <label for="playVideosInline">{{$t('settings.play_videos_inline')}}</label>
+              <input type="checkbox" id="playVideosInModal" v-model="playVideosInModal">
+              <label for="playVideosInModal">{{$t('settings.play_videos_in_modal')}}</label>
             </li>
             <li>
               <input type="checkbox" id="useContainFit" v-model="useContainFit">

@@ -87,7 +87,7 @@ const Status = {
       }
     },
     retweet () { return !!this.statusoid.retweeted_status },
-    retweeter () { return this.statusoid.user.name },
+    retweeter () { return this.statusoid.user.name || this.statusoid.user.screen_name },
     retweeterHtml () { return this.statusoid.user.name_html },
     status () {
       if (this.retweet) {
@@ -222,9 +222,9 @@ const Status = {
       if (this.attachmentSize === 'hide') {
         return []
       }
-      return this.$store.state.config.playVideosInline
-        ? ['image']
-        : ['image', 'video']
+      return this.$store.state.config.playVideosInModal
+        ? ['image', 'video']
+        : ['image']
     },
     galleryAttachments () {
       return this.status.attachments.filter(

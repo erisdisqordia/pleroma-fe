@@ -150,7 +150,7 @@
     "lock_account_description": "Vain erikseen hyväksytyt käyttäjät voivat seurata tiliäsi",
     "loop_video": "Uudelleentoista videot",
     "loop_video_silent_only": "Uudelleentoista ainoastaan äänettömät videot (Video-\"giffit\")",
-    "play_videos_inline": "Toista videot suoraan aikajanalla",
+    "play_videos_in_modal": "Toista videot modaalissa",
     "use_contain_fit": "Älä rajaa liitteitä esikatselussa",
     "name": "Nimi",
     "name_bio": "Nimi ja kuvaus",

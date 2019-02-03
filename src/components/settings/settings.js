@@ -1,5 +1,5 @@
 /* eslint-env browser */
-import TabSwitcher from '../tab_switcher/tab_switcher.jsx'
+import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import InterfaceLanguageSwitcher from '../interface_language_switcher/interface_language_switcher.vue'
 import { filter, trim } from 'lodash'
@@ -66,7 +66,7 @@ const settings = {
         Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'webkitAudioDecodedByteCount') ||
         // Future spec, still not supported in Nightly 63 as of 08/2018
         Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'audioTracks'),
-      playVideosInline: user.playVideosInline,
+      playVideosInModal: user.playVideosInModal,
       useContainFit: user.useContainFit
     }
   },
@@ -164,8 +164,8 @@ const settings = {
       this.$store.dispatch('setOption', { name: 'webPushNotifications', value })
       if (value) this.$store.dispatch('registerPushNotifications')
     },
-    playVideosInline (value) {
-      this.$store.dispatch('setOption', { name: 'playVideosInline', value })
+    playVideosInModal (value) {
+      this.$store.dispatch('setOption', { name: 'playVideosInModal', value })
     },
     useContainFit (value) {
       this.$store.dispatch('setOption', { name: 'useContainFit', value })

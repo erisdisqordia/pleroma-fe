@@ -20,8 +20,7 @@
 
           <router-link class='user-screen-name' :to="userProfileLink(user)">
             <span class="handle">@{{user.screen_name}}
-              <span class="staff" v-if="user.is_admin">Admin</span>
-              <span class="staff" v-else-if="user.is_moderator">Moderator</span>
+              <span class="staff" v-if="!!visibleRole">{{visibleRole}}</span>
             </span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>
@@ -254,6 +253,7 @@
     .staff {
       border: 1px solid $admin-border-color;
       color: $admin-color;
+      text-transform: capitalize;
       background-color: $admin-background-color;
       line-height: 12px;
       border-radius: 3px;

@@ -37,6 +37,11 @@
               <input type="checkbox" v-model="hideFollowers" id="account-hide-followers">
               <label for="account-hide-followers">{{$t('settings.hide_followers_description')}}</label>
             </p>
+            <p>
+              <input type="checkbox" v-model="showRole" id="account-show-role">
+              <label for="account-show-role" v-if="role === 'admin'">{{$t('settings.show_admin_badge')}}</label>
+              <label for="account-show-role" v-if="role === 'moderator'">{{$t('settings.show_moderator_badge')}}</label>
+            </p>
             <button :disabled='newName && newName.length === 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
           </div>
           <div class="setting-item">

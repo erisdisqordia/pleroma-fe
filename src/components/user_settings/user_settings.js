@@ -14,6 +14,8 @@ const UserSettings = {
       newDefaultScope: this.$store.state.users.currentUser.default_scope,
       hideFollows: this.$store.state.users.currentUser.hide_follows,
       hideFollowers: this.$store.state.users.currentUser.hide_followers,
+      showRole: this.$store.state.users.currentUser.show_role,
+      role: this.$store.state.users.currentUser.role,
       followList: null,
       followImportError: false,
       followsImported: false,
@@ -71,6 +73,8 @@ const UserSettings = {
       const no_rich_text = this.newNoRichText
       const hide_follows = this.hideFollows
       const hide_followers = this.hideFollowers
+      const show_role = this.showRole
+
       /* eslint-enable camelcase */
       this.$store.state.api.backendInteractor
         .updateProfile({
@@ -83,7 +87,8 @@ const UserSettings = {
             default_scope,
             no_rich_text,
             hide_follows,
-            hide_followers
+            hide_followers,
+            show_role
             /* eslint-enable camelcase */
           }}).then((user) => {
             if (!user.error) {

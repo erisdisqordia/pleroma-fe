@@ -68,6 +68,7 @@ export default {
     logo () { return this.$store.state.instance.logo },
     bgStyle () {
       return {
+        '--body-background-image': `url(${this.background})`,
         'background-image': `url(${this.background})`
       }
     },

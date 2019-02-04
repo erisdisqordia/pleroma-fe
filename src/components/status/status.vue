@@ -85,10 +85,10 @@
             </div>
           </div>
 
-          <div class="status-content-wrapper" :class="{ 'tall-status': !showingTallSubject }" v-if="tallSubject">
-            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="!showingTallSubject" href="#" @click.prevent="showingTallSubject=true">Show more</a>
+          <div class="status-content-wrapper" :class="{ 'tall-status': !showingLongSubject }" v-if="longSubject">
+            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="!showingLongSubject" href="#" @click.prevent="showingLongSubject=true">Show more</a>
             <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
-            <a v-if="showingTallSubject" href="#" class="status-unhider" @click.prevent="showingTallSubject=false">Show less</a>
+            <a v-if="showingLongSubject" href="#" class="status-unhider" @click.prevent="showingLongSubject=false">Show less</a>
           </div>
           <div :class="{'tall-status': hideTallStatus}" class="status-content-wrapper" v-else>
             <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowMore">Show more</a>
@@ -98,7 +98,7 @@
             <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">Show less</a>
           </div>
 
-          <div v-if="status.attachments && (!hideSubjectStatus || showingTallSubject)" class="attachments media-body">
+          <div v-if="status.attachments && (!hideSubjectStatus || showingLongSubject)" class="attachments media-body">
             <attachment
               class="non-gallery"
               v-for="attachment in nonGalleryAttachments"

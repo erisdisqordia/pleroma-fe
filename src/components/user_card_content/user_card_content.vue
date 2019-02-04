@@ -19,7 +19,10 @@
           </div>
 
           <router-link class='user-screen-name' :to="userProfileLink(user)">
-            <span class="handle">@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
+            <span class="handle">@{{user.screen_name}}
+              <span class="staff" v-if="user.is_admin">Admin</span>
+              <span class="staff" v-else-if="user.is_moderator">Moderator</span>
+            </span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>
         </div>
@@ -246,6 +249,17 @@
       flex: 0 1 auto;
       text-overflow: ellipsis;
       overflow: hidden;
+    }
+
+    .staff {
+      border: 1px solid $admin-border-color;
+      color: $admin-color;
+      background-color: $admin-background-color;
+      line-height: 12px;
+      border-radius: 3px;
+      font-size: 12px;
+      padding: 4px 6px;
+      margin-left: 5px;
     }
   }
 

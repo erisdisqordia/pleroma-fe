@@ -85,7 +85,12 @@
             </div>
           </div>
 
-          <div :class="{'tall-status': hideTallStatus}" class="status-content-wrapper">
+          <div class="status-content-wrapper" :class="{ 'tall-status': !showingTallSubject }" v-if="tallSubject">
+            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="!showingTallSubject" href="#" @click.prevent="showingTallSubject=true">Show more</a>
+            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
+            <a v-if="showingTallSubject" href="#" class="status-unhider" @click.prevent="showingTallSubject=false">Show less</a>
+          </div>
+          <div :class="{'tall-status': hideTallStatus}" class="status-content-wrapper" v-else>
             <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowMore">Show more</a>
             <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html" v-if="!hideSubjectStatus"></div>
             <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.summary_html" v-else></div>

@@ -36,26 +36,7 @@
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
 
-  .avatar-compact {
-    width: 32px;
-    height: 32px;
-    box-shadow: var(--avatarStatusShadow);
-    border-radius: $fallback--avatarAltRadius;
-    border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
-    overflow: hidden;
-    line-height: 0;
-
-    &.better-shadow {
-      box-shadow: var(--avatarStatusShadowInset);
-      filter: var(--avatarStatusShadowFilter)
-    }
-
-    &.animated::before {
-      display: none;
-    }
-  }
-
-  &:hover .animated.avatar-compact {
+  &:hover .animated.avatar {
     canvas {
       display: none;
     }

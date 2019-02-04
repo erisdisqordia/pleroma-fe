@@ -100,8 +100,7 @@ export const parseUser = (data) => {
     output.rights = data.rights
     output.no_rich_text = data.no_rich_text
     output.default_scope = data.default_scope
-    output.hide_followings = data.hide_followings
-    output.hide_followers = data.hide_followers
+    output.hide_network = data.hide_network
     output.background_image = data.background_image
     // on mastoapi this info is contained in a "relationship"
     output.following = data.following

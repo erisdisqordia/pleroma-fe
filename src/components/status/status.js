@@ -4,7 +4,7 @@ import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
-import StillImage from '../still-image/still-image.vue'
+import UserAvatar from '../user_avatar/user_avatar.vue'
 import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
@@ -36,6 +36,7 @@ const Status = {
       preview: null,
       showPreview: false,
       showingTall: this.inConversation && this.focused,
+      showingLongSubject: false,
       expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
         ? !this.$store.state.instance.collapseMessageWithSubject
         : !this.$store.state.config.collapseMessageWithSubject,
@@ -89,6 +90,7 @@ const Status = {
     retweet () { return !!this.statusoid.retweeted_status },
     retweeter () { return this.statusoid.user.name || this.statusoid.user.screen_name },
     retweeterHtml () { return this.statusoid.user.name_html },
+    retweeterProfileLink () { return this.generateUserProfileLink(this.statusoid.user.id, this.statusoid.user.screen_name) },
     status () {
       if (this.retweet) {
         return this.statusoid.retweeted_status
@@ -128,6 +130,9 @@ const Status = {
     tallStatus () {
       const lengthScore = this.status.statusnet_html.split(/<p|<br/).length + this.status.text.length / 80
       return lengthScore > 20
+    },
+    longSubject () {
+      return this.status.summary.length > 900
     },
     isReply () {
       return !!(this.status.in_reply_to_status_id && this.status.in_reply_to_user_id)
@@ -244,7 +249,7 @@ const Status = {
     DeleteButton,
     PostStatusForm,
     UserCardContent,
-    StillImage,
+    UserAvatar,
     Gallery,
     LinkPreview
   },

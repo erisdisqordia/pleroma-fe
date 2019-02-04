@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <a href="#">
-      <StillImage @click.prevent.native="toggleUserExpanded" class="avatar" :src="user.profile_image_url"/>
+      <UserAvatar class="avatar" :compact="true" @click.prevent.native="toggleUserExpanded" :src="user.profile_image_url"/>
     </a>
     <div class="usercard" v-if="userExpanded">
       <user-card-content :user="user" :switcher="false"></user-card-content>
@@ -69,11 +69,7 @@
 	border-bottom-color: var(--border, $fallback--border);
 
   .avatar {
-    margin-top: 0.2em;
-    width:32px;
-    height: 32px;
-    border-radius: $fallback--avatarAltRadius;
-    border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+    padding: 0;
   }
 }
 

@@ -8,7 +8,7 @@
       @touchmove="touchMove"
     >
       <div class="side-drawer-heading" @click="toggleDrawer">
-        <div class="side-drawer__logo-wrapper">
+        <div class="side-drawer__logo-wrapper" v-if="!currentUser">
           <img :src="logo"/>
           <span>{{sitename}}</span>
         </div>
@@ -175,7 +175,6 @@
   flex-direction: column;
   align-items: stretch;
   display: flex;
-  min-height: 7em;
   padding: 0;
   margin: 0;
 

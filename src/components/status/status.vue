@@ -98,7 +98,7 @@
             <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">Show less</a>
           </div>
 
-          <div v-if="status.attachments && !hideSubjectStatus" class="attachments media-body">
+          <div v-if="status.attachments && (!hideSubjectStatus || showingTallSubject)" class="attachments media-body">
             <attachment
               class="non-gallery"
               v-for="attachment in nonGalleryAttachments"

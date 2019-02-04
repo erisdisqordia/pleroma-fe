@@ -8,8 +8,11 @@
       @touchmove="touchMove"
     >
       <div class="side-drawer-heading" @click="toggleDrawer">
-        <user-card-content :user="currentUser" :switcher="false" :hideBio="true" v-if="currentUser">
-        </user-card-content>
+        <user-card-content :user="currentUser" :switcher="false" :hideBio="true" v-if="currentUser"/>
+        <div class="side-drawer-logo-wrapper" v-else>
+          <img :src="logo"/>
+          <span>{{sitename}}</span>
+        </div>
       </div>
       <ul>
         <li v-if="currentUser" @click="toggleDrawer">
@@ -141,6 +144,24 @@
   background-color: var(--bg, $fallback--bg);
 }
 
+.side-drawer-logo-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 0.85em;
+
+  img {
+    flex: none;
+    height: 50px;
+    margin-right: 0.85em;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 .side-drawer-click-outside-closed {
   flex: 0 0 0;
 }
@@ -154,7 +175,6 @@
   flex-direction: column;
   align-items: stretch;
   display: flex;
-  min-height: 7em;
   padding: 0;
   margin: 0;
 

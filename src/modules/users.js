@@ -1,5 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import { compact, map, each, merge } from 'lodash'
+import { compact, map, each, merge, find } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
 import oauthApi from '../services/new_api/oauth'
@@ -52,13 +52,35 @@ export const mutations = {
     state.loggingIn = false
   },
   // TODO Clean after ourselves?
-  addFriends (state, { id, friends }) {
+  addFriends (state, { id, friends, page }) {
     const user = state.usersObject[id]
-    user.friends = friends
+    each(friends, friend => {
+      if (!find(user.friends, { id: friend.id })) {
+        user.friends.push(friend)
+      }
+    })
+    user.friendsPage = page + 1
   },
-  addFollowers (state, { id, followers }) {
+  addFollowers (state, { id, followers, page }) {
     const user = state.usersObject[id]
-    user.followers = followers
+    each(followers, follower => {
+      if (!find(user.followers, { id: follower.id })) {
+        user.followers.push(follower)
+      }
+    })
+    user.followersPage = page + 1
+  },
+  // Because frontend doesn't have a reason to keep these stuff in memory
+  // outside of viewing someones user profile.
+  clearFriendsAndFollowers (state, userKey) {
+    const user = state.usersObject[userKey]
+    if (!user) {
+      return
+    }
+    user.friends = []
+    user.followers = []
+    user.friendsPage = 0
+    user.followersPage = 0
   },
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
@@ -115,13 +137,34 @@ const users = {
       store.rootState.api.backendInteractor.fetchUser({ id })
         .then((user) => store.commit('addNewUsers', [user]))
     },
-    addFriends ({ rootState, commit }, { id }) {
-      rootState.api.backendInteractor.fetchFriends({ id })
-        .then((friends) => commit('addFriends', { id, friends }))
+    addFriends ({ rootState, commit }, fetchBy) {
+      return new Promise((resolve, reject) => {
+        const user = rootState.users.usersObject[fetchBy]
+        const page = user.friendsPage || 1
+        rootState.api.backendInteractor.fetchFriends({ id: user.id, page })
+          .then((friends) => {
+            commit('addFriends', { id: user.id, friends, page })
+            resolve(friends)
+          }).catch(() => {
+            reject()
+          })
+      })
     },
-    addFollowers ({ rootState, commit }, { id }) {
-      rootState.api.backendInteractor.fetchFollowers({ id })
-        .then((followers) => commit('addFollowers', { id, followers }))
+    addFollowers ({ rootState, commit }, fetchBy) {
+      return new Promise((resolve, reject) => {
+        const user = rootState.users.usersObject[fetchBy]
+        const page = user.followersPage || 1
+        rootState.api.backendInteractor.fetchFollowers({ id: user.id, page })
+          .then((followers) => {
+            commit('addFollowers', { id: user.id, followers, page })
+            resolve(followers)
+          }).catch(() => {
+            reject()
+          })
+      })
+    },
+    clearFriendsAndFollowers ({ commit }, userKey) {
+      commit('clearFriendsAndFollowers', userKey)
     },
     registerPushNotifications (store) {
       const token = store.state.currentUser.credentials

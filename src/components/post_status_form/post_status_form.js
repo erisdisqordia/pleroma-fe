@@ -250,6 +250,7 @@ const PostStatusForm = {
             visibility: newStatus.visibility,
             contentType: newStatus.contentType
           }
+          this.$refs.mediaUpload.clearFile()
           this.$emit('posted')
           let el = this.$el.querySelector('textarea')
           el.style.height = 'auto'

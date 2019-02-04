@@ -3,19 +3,10 @@ import statusPosterService from '../../services/status_poster/status_poster.serv
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 
 const mediaUpload = {
-  mounted () {
-    const input = this.$el.querySelector('input')
-
-    input.addEventListener('change', ({target}) => {
-      for (var i = 0; i < target.files.length; i++) {
-        let file = target.files[i]
-        this.uploadFile(file)
-      }
-    })
-  },
   data () {
     return {
-      uploading: false
+      uploading: false,
+      uploadReady: true
     }
   },
   methods: {
@@ -55,6 +46,18 @@ const mediaUpload = {
         e.dataTransfer.dropEffect = 'copy'
       } else {
         e.dataTransfer.dropEffect = 'none'
+      }
+    },
+    clearFile () {
+      this.uploadReady = false
+      this.$nextTick(() => {
+        this.uploadReady = true
+      })
+    },
+    change ({target}) {
+      for (var i = 0; i < target.files.length; i++) {
+        let file = target.files[i]
+        this.uploadFile(file)
       }
     }
   },

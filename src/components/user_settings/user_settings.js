@@ -1,4 +1,4 @@
-import { unescape } from 'lodash';
+import { unescape } from 'lodash'
 
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'

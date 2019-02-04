@@ -1,3 +1,5 @@
+import { unescape } from 'lodash';
+
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
@@ -6,7 +8,7 @@ const UserSettings = {
   data () {
     return {
       newName: this.$store.state.users.currentUser.name,
-      newBio: this.parseEntities(this.$store.state.users.currentUser.description),
+      newBio: unescape(this.$store.state.users.currentUser.description),
       newLocked: this.$store.state.users.currentUser.locked,
       newNoRichText: this.$store.state.users.currentUser.no_rich_text,
       newDefaultScope: this.$store.state.users.currentUser.default_scope,
@@ -287,14 +289,6 @@ const UserSettings = {
     logout () {
       this.$store.dispatch('logout')
       this.$router.replace('/')
-    },
-    parseEntities (text) {
-      const parser = new DOMParser
-      const dom = parser.parseFromString(
-        '<!doctype html><body>' + text,
-        'text/html')
-      const decodedText = dom.body.textContent
-      return decodedText
     }
   }
 }

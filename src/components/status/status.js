@@ -36,6 +36,7 @@ const Status = {
       preview: null,
       showPreview: false,
       showingTall: this.inConversation && this.focused,
+      showingLongSubject: false,
       expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
         ? !this.$store.state.instance.collapseMessageWithSubject
         : !this.$store.state.config.collapseMessageWithSubject,
@@ -129,6 +130,9 @@ const Status = {
     tallStatus () {
       const lengthScore = this.status.statusnet_html.split(/<p|<br/).length + this.status.text.length / 80
       return lengthScore > 20
+    },
+    longSubject () {
+      return this.status.summary.length > 900
     },
     isReply () {
       return !!(this.status.in_reply_to_status_id && this.status.in_reply_to_user_id)

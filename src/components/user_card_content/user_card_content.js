@@ -81,19 +81,10 @@ export default {
       }
     },
     visibleRole () {
-      const user = this.user
+      const validRole = (this.user.role === 'admin' || this.user.role === 'moderator')
+      const showRole = this.isOtherUser || this.user.show_role
 
-      if (!(user.role === 'admin' || user.role === 'moderator')) {
-        return undefined
-      }
-
-      if (this.isOtherUser) {
-        return user.role
-      }
-
-      if (user.show_role) {
-        return user.role
-      }
+      return validRole && showRole && this.user.role
     }
   },
   components: {

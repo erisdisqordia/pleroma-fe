@@ -8,11 +8,11 @@
       @touchmove="touchMove"
     >
       <div class="side-drawer-heading" @click="toggleDrawer">
-        <div class="side-drawer__logo-wrapper" v-if="!currentUser">
+        <user-card-content :user="currentUser" :switcher="false" :hideBio="true" v-if="currentUser"/>
+        <div class="side-drawer__logo-wrapper" v-else>
           <img :src="logo"/>
           <span>{{sitename}}</span>
         </div>
-        <user-card-content :user="currentUser" :switcher="false" :hideBio="true" v-if="currentUser"/>
       </div>
       <ul>
         <li v-if="currentUser" @click="toggleDrawer">

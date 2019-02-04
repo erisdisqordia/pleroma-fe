@@ -4,7 +4,7 @@ import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCardContent from '../user_card_content/user_card_content.vue'
-import StillImage from '../still-image/still-image.vue'
+import UserAvatar from '../user_avatar/user_avatar.vue'
 import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
@@ -244,7 +244,7 @@ const Status = {
     DeleteButton,
     PostStatusForm,
     UserCardContent,
-    StillImage,
+    UserAvatar,
     Gallery,
     LinkPreview
   },

@@ -13,7 +13,7 @@
     </template>
     <template v-else>
       <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
-        <StillImage v-if="retweet" class='avatar' :class='{ "better-shadow": betterShadow }' :src="statusoid.user.profile_image_url_original"/>
+        <UserAvatar v-if="retweet" :betterShadow="betterShadow" :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <a v-if="retweeterHtml" :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name" v-html="retweeterHtml"></a>
           <a v-else :href="statusoid.user.statusnet_profile_url" class="user-name" :title="'@'+statusoid.user.screen_name">{{retweeter}}</a>
@@ -25,7 +25,7 @@
       <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <router-link :to="userProfileLink" @click.stop.prevent.capture.native="toggleUserExpanded">
-            <StillImage class='avatar' :class="{'avatar-compact': compact, 'better-shadow': betterShadow}"  :src="status.user.profile_image_url_original"/>
+            <UserAvatar :compact="compact" :betterShadow="betterShadow" :src="status.user.profile_image_url_original"/>
           </router-link>
         </div>
         <div class="status-body">
@@ -413,7 +413,7 @@
     padding: 0.4em 0.6em 0 0.6em;
     margin: 0;
 
-    .avatar {
+    .avatar.still-image {
       border-radius: $fallback--avatarAltRadius;
       border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
       margin-left: 28px;
@@ -497,46 +497,6 @@
   color: var(--cBlue, $fallback--cBlue);
 }
 
-.status .avatar-compact {
-  width: 32px;
-  height: 32px;
-  box-shadow: var(--avatarStatusShadow);
-  border-radius: $fallback--avatarAltRadius;
-  border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
-
-  &.better-shadow {
-    box-shadow: var(--avatarStatusShadowInset);
-    filter: var(--avatarStatusShadowFilter)
-  }
-}
-
-.avatar.still-image {
-  width: 48px;
-  height: 48px;
-  box-shadow: var(--avatarStatusShadow);
-  border-radius: $fallback--avatarRadius;
-  border-radius: var(--avatarRadius, $fallback--avatarRadius);
-  overflow: hidden;
-  position: relative;
-
-  &.better-shadow {
-    box-shadow: var(--avatarStatusShadowInset);
-    filter: var(--avatarStatusShadowFilter)
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-  }
-
-  &.animated::before {
-    display: none;
-  }
-
-  &.retweeted {
-  }
-}
-
 .status:hover .animated.avatar {
   canvas {
     display: none;
@@ -594,7 +554,7 @@ a.unmute {
 @media all and (max-width: 800px) {
   .status-el {
     .retweet-info {
-      .avatar {
+      .avatar.still-image {
         margin-left: 20px;
       }
     }
@@ -603,14 +563,14 @@ a.unmute {
     max-width: 100%;
   }
 
-  .status .avatar {
+  .status .avatar.still-image {
     width: 40px;
     height: 40px;
-  }
 
-  .status .avatar-compact {
-    width: 32px;
-    height: 32px;
+    &.avatar-compact {
+      width: 32px;
+      height: 32px;
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-import StillImage from '../still-image/still-image.vue'
+import UserAvatar from '../user_avatar/user_avatar.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
@@ -82,7 +82,7 @@ export default {
     }
   },
   components: {
-    StillImage
+    UserAvatar
   },
   methods: {
     followUser () {

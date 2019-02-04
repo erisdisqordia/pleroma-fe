@@ -2,7 +2,8 @@ const StillImage = {
   props: [
     'src',
     'referrerpolicy',
-    'mimetype'
+    'mimetype',
+    'imageLoadError'
   ],
   data () {
     return {

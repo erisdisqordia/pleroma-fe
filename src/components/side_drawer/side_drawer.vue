@@ -9,7 +9,7 @@
     >
       <div class="side-drawer-heading" @click="toggleDrawer">
         <user-card-content :user="currentUser" :switcher="false" :hideBio="true" v-if="currentUser"/>
-        <div class="side-drawer__logo-wrapper" v-else>
+        <div class="side-drawer-logo-wrapper" v-else>
           <img :src="logo"/>
           <span>{{sitename}}</span>
         </div>
@@ -142,23 +142,23 @@
   box-shadow: var(--panelShadow);
   background-color: $fallback--bg;
   background-color: var(--bg, $fallback--bg);
+}
 
-  &__logo-wrapper {
-    display: flex;
-    align-items: center;
-    padding: 0.85em;
+.side-drawer-logo-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 0.85em;
 
-    img {
-      flex: none;
-      height: 50px;
-      margin-right: 0.85em;
-    }
+  img {
+    flex: none;
+    height: 50px;
+    margin-right: 0.85em;
+  }
 
-    span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 

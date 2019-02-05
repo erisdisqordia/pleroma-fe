@@ -33,7 +33,7 @@
               <input type="checkbox" v-model="newHideNetwork" id="account-hide-network">
               <label for="account-hide-network">{{$t('settings.hide_network_description')}}</label>
             </p>
-            <button :disabled='newName.length <= 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
+            <button :disabled='newName && newName.length === 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
           </div>
           <div class="setting-item">
             <h2>{{$t('settings.avatar')}}</h2>

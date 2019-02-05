@@ -18,6 +18,10 @@
 
 .login-hint {
   text-align: center;
+  
+  @media all and (min-width: 801px) {
+    display: none;
+  }
 
   a {
     display: inline-block;

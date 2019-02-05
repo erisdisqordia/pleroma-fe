@@ -250,7 +250,9 @@
       overflow: hidden;
     }
 
+    // TODO use proper colors
     .staff {
+      text-transform: capitalize;
       color: $fallback--text;
       color: var(--btnText, $fallback--text);
       background-color: $fallback--fg;

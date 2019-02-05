@@ -20,7 +20,7 @@
 
           <router-link class='user-screen-name' :to="userProfileLink(user)">
             <span class="handle">@{{user.screen_name}}
-              <span class="alert staff" v-if="!!visibleRole">{{visibleRole}}</span>
+              <span class="alert staff" v-if="!hideBio && !!visibleRole">{{visibleRole}}</span>
             </span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>

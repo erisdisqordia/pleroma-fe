@@ -39,7 +39,8 @@ const Timeline = {
         body: ['timeline-body'].concat(!this.embedded ? ['panel-body'] : []),
         footer: ['timeline-footer'].concat(!this.embedded ? ['panel-footer'] : [])
       }
-    }
+    },
+    currentUser () { return this.$store.state.users.currentUser }
   },
   components: {
     Status,

@@ -4,7 +4,8 @@ const PublicTimeline = {
     Timeline
   },
   computed: {
-    timeline () { return this.$store.state.statuses.timelines.public }
+    timeline () { return this.$store.state.statuses.timelines.public },
+    currentUser () { return this.$store.state.users.currentUser }
   },
   created () {
     this.$store.dispatch('startFetching', 'public')

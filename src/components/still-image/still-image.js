@@ -24,6 +24,9 @@ const StillImage = {
       canvas.width = width
       canvas.height = height
       canvas.getContext('2d').drawImage(this.$refs.src, 0, 0, width, height)
+    },
+    onError () {
+      this.imageLoadError && this.imageLoadError()
     }
   }
 }

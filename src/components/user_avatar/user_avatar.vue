@@ -1,5 +1,10 @@
 <template>
-  <StillImage class="avatar" :class="{ 'avatar-compact': compact, 'better-shadow': betterShadow }" :src="imgSrc" :imageLoadError="imageLoadError"/>
+  <StillImage
+    class="avatar"
+    :class="{ 'avatar-compact': compact, 'better-shadow': betterShadow }"
+    :src="imgSrc"
+    :imageLoadError="imageLoadError"
+  />
 </template>
 
 <script src="./user_avatar.js"></script>

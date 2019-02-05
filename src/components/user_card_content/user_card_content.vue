@@ -20,7 +20,7 @@
 
           <router-link class='user-screen-name' :to="userProfileLink(user)">
             <span class="handle">@{{user.screen_name}}
-              <span class="staff" v-if="!!visibleRole">{{visibleRole}}</span>
+              <span class="alert staff" v-if="!!visibleRole">{{visibleRole}}</span>
             </span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>
@@ -251,15 +251,10 @@
     }
 
     .staff {
-      border: 1px solid $admin-border-color;
-      color: $admin-color;
-      text-transform: capitalize;
-      background-color: $admin-background-color;
-      line-height: 12px;
-      border-radius: 3px;
-      font-size: 12px;
-      padding: 4px 6px;
-      margin-left: 5px;
+      color: $fallback--text;
+      color: var(--btnText, $fallback--text);
+      background-color: $fallback--fg;
+      background-color: var(--btn, $fallback--fg);
     }
   }
 

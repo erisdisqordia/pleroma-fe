@@ -282,8 +282,15 @@ const Status = {
             this.$router.push(link)
             return
           }
+        } else {
+          if (target.hostname === window.location.hostname) {
+            // if the hashtag's target is current instance, open in same tab
+            this.$router.push(target.pathname)
+          } else {
+            // if it is different instance, open in a new tab
+            window.open(target.href, '_blank')
+          }
         }
-        window.open(target.href, '_blank')
       }
     },
     toggleReplying () {

@@ -16,9 +16,8 @@
         <UserAvatar v-if="retweet" :betterShadow="betterShadow" :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <span class="user-name">
-            <router-link :to="retweeterProfileLink">
-              {{retweeterHtml || retweeter}}
-            </router-link>
+            <router-link v-if="retweeterHtml" :to="retweeterProfileLink" v-html="retweeterHtml"/>
+            <router-link v-else :to="retweeterProfileLink">{{retweeter}}</router-link>
           </span>
           <i class='fa icon-retweet retweeted' :title="$t('tool_tip.repeat')"></i>
           {{$t('timeline.repeated')}}

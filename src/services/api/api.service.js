@@ -252,7 +252,7 @@ const fetchFriends = ({id, page, isExport, credentials}) => {
   if (page) {
     url = url + `&page=${page}`
   }
-  if (isExport !== undefined) {
+  if (isExport) {
     url = url + `&export=${isExport}`
   }
   return fetch(url, { headers: authHeaders(credentials) })

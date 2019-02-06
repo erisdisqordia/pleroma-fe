@@ -238,7 +238,10 @@ const UserSettings = {
     exportFollows () {
       this.enableFollowsExport = false
       this.$store.state.api.backendInteractor
-        .fetchFriends({id: this.$store.state.users.currentUser.id})
+        .fetchFriends({
+          id: this.$store.state.users.currentUser.id,
+          isExport: true
+        })
         .then((friendList) => {
           this.exportPeople(friendList, 'friends.csv')
           setTimeout(() => { this.enableFollowsExport = true }, 2000)

@@ -130,7 +130,7 @@ const updateBanner = ({credentials, params}) => {
 // description
 const updateProfile = ({credentials, params}) => {
   // Always include these fields, because they might be empty or false
-  const fields = ['description', 'locked', 'no_rich_text', 'hide_network']
+  const fields = ['description', 'locked', 'no_rich_text', 'hide_follows', 'hide_followers']
   let url = PROFILE_UPDATE_URL
 
   const form = new FormData()

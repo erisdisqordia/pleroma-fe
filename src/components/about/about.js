@@ -7,6 +7,9 @@ const About = {
     InstanceSpecificPanel,
     FeaturesPanel,
     TermsOfServicePanel
+  },
+  computed: {
+    showFeaturesPanel () { return this.$store.state.config.showFeaturesPanel }
   }
 }
 

@@ -37,6 +37,13 @@
         </div>
       </div>
       <div class="main">
+        <div v-if="!currentUser" class="login-hint panel panel-default">
+          <div class="panel-body">
+            <router-link :to="{ name: 'login' }">
+              {{ $t("login.hint") }}
+            </router-link>
+          </div>
+        </div>
         <transition name="fade">
           <router-view></router-view>
         </transition>

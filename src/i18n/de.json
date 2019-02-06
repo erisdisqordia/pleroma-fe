@@ -132,6 +132,7 @@
     "preload_images": "Bilder vorausladen",
     "hide_post_stats": "Beitragsstatistiken verbergen (z.B. die Anzahl der Favoriten)",
     "hide_user_stats": "Benutzerstatistiken verbergen (z.B. die Anzahl der Follower)",
+    "hide_filtered_statuses": "Gefilterte Beiträge verbergen",
     "import_followers_from_a_csv_file": "Importiere Follower, denen du folgen möchtest, aus einer CSV-Datei",
     "import_theme": "Farbschema laden",
     "inputRadius": "Eingabefelder",

@@ -59,6 +59,7 @@ const afterStoreSetup = ({ store, i18n }) => {
           copyInstanceOption('background')
           copyInstanceOption('hidePostStats')
           copyInstanceOption('hideUserStats')
+          copyInstanceOption('hideFilteredStatuses')
           copyInstanceOption('logo')
 
           store.dispatch('setInstanceOption', {

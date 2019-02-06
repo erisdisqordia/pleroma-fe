@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el" v-if="!hideReply && !deleted" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
+  <div class="status-el" v-if="(!hideReply && !deleted) && !(muted && hideFilteredStatuses)" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
     <template v-if="muted && !noReplyLinks">
       <div class="media status container muted">
         <small>

@@ -21,6 +21,7 @@ const defaultState = {
   collapseMessageWithSubject: false,
   hidePostStats: false,
   hideUserStats: false,
+  hideFilteredStatuses: true,
   disableChat: false,
   scopeCopy: true,
   subjectLineBehavior: 'email',

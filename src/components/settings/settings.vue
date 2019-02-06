@@ -205,7 +205,6 @@
                 </label>
               </li>
             </ul>
-            </label>
           </div>
           <div>
             {{$t('settings.replies_in_timeline')}}
@@ -232,11 +231,18 @@
           </div>
         </div>
         <div class="setting-item">
-          <p>{{$t('settings.filtering_explanation')}}</p>
-          <textarea id="muteWords" v-model="muteWordsString"></textarea>
+          <div>
+            <p>{{$t('settings.filtering_explanation')}}</p>
+            <textarea id="muteWords" v-model="muteWordsString"></textarea>
+          </div>
+          <div>
+            <input type="checkbox" id="hideFilteredStatuses" v-model="hideFilteredStatusesLocal">
+            <label for="hideFilteredStatuses">
+              {{$t('settings.hide_filtered_statuses')}} {{$t('settings.instance_default', { value: hideFilteredStatusesDefault })}}
+            </label>
+          </div>
         </div>
       </div>
-
     </tab-switcher>
 </keep-alive>
   </div>

@@ -110,6 +110,11 @@ const Status = {
       return hits
     },
     muted () { return !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
+    hideFilteredStatuses () {
+      return typeof this.$store.state.config.hideFilteredStatuses === 'undefined'
+        ? this.$store.state.instance.hideFilteredStatuses
+        : this.$store.state.config.hideFilteredStatuses
+    },
     isFocused () {
       // retweet or root of an expanded conversation
       if (this.focused) {

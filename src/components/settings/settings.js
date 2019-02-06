@@ -27,6 +27,11 @@ const settings = {
         : user.hideUserStats,
       hideUserStatsDefault: this.$t('settings.values.' + instance.hideUserStats),
 
+      hideFilteredStatusesLocal: typeof user.hideFilteredStatuses === 'undefined'
+        ? instance.hideFilteredStatuses
+        : user.hideFilteredStatuses,
+      hideFilteredStatusesDefault: this.$t('settings.values.' + instance.hideFilteredStatuses),
+
       notificationVisibilityLocal: user.notificationVisibility,
       replyVisibilityLocal: user.replyVisibility,
       loopVideoLocal: user.loopVideo,
@@ -95,6 +100,9 @@ const settings = {
     },
     hideUserStatsLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideUserStats', value })
+    },
+    hideFilteredStatusesLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hideFilteredStatuses', value })
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })

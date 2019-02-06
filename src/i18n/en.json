@@ -164,7 +164,7 @@
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
     "no_rich_text_description": "Strip rich text formatting from all posts",
-    "hide_followings_description": "Don't show who I'm following",
+    "hide_follows_description": "Don't show who I'm following",
     "hide_followers_description": "Don't show who's following me",
     "nsfw_clickthrough": "Enable clickthrough NSFW attachment hiding",
     "panelRadius": "Panels",

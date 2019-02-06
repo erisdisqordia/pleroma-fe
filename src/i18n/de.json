@@ -155,7 +155,7 @@
     "notification_visibility_mentions": "Erwähnungen",
     "notification_visibility_repeats": "Wiederholungen",
     "no_rich_text_description": "Rich-Text Formatierungen von allen Beiträgen entfernen",
-    "hide_followings_description": "Zeige nicht, wem ich folge",
+    "hide_follows_description": "Zeige nicht, wem ich folge",
     "hide_followers_description": "Zeige nicht, wer mir folgt",
     "nsfw_clickthrough": "Aktiviere ausblendbares Overlay für Anhänge, die als NSFW markiert sind",
     "panelRadius": "Panel",

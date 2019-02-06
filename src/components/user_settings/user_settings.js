@@ -12,7 +12,7 @@ const UserSettings = {
       newLocked: this.$store.state.users.currentUser.locked,
       newNoRichText: this.$store.state.users.currentUser.no_rich_text,
       newDefaultScope: this.$store.state.users.currentUser.default_scope,
-      hideFollowings: this.$store.state.users.currentUser.hide_followings,
+      hideFollows: this.$store.state.users.currentUser.hide_follows,
       hideFollowers: this.$store.state.users.currentUser.hide_followers,
       followList: null,
       followImportError: false,
@@ -69,7 +69,7 @@ const UserSettings = {
       /* eslint-disable camelcase */
       const default_scope = this.newDefaultScope
       const no_rich_text = this.newNoRichText
-      const hide_followings = this.hideFollowings
+      const hide_follows = this.hideFollows
       const hide_followers = this.hideFollowers
       /* eslint-enable camelcase */
       this.$store.state.api.backendInteractor
@@ -82,7 +82,7 @@ const UserSettings = {
             /* eslint-disable camelcase */
             default_scope,
             no_rich_text,
-            hide_followings,
+            hide_follows,
             hide_followers
             /* eslint-enable camelcase */
           }}).then((user) => {

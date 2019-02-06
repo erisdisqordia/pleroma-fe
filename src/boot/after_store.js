@@ -84,6 +84,7 @@ const afterStoreSetup = ({ store, i18n }) => {
           copyInstanceOption('loginMethod')
           copyInstanceOption('scopeCopy')
           copyInstanceOption('subjectLineBehavior')
+          copyInstanceOption('postContentType')
           copyInstanceOption('alwaysShowSubjectInput')
           copyInstanceOption('noAttachmentLinks')
 

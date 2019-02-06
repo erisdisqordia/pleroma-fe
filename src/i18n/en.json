@@ -28,7 +28,8 @@
     "password": "Password",
     "placeholder": "e.g. lain",
     "register": "Register",
-    "username": "Username"
+    "username": "Username",
+    "hint": "Log in to join discussion"
   },
   "nav": {
     "about": "About",

@@ -311,20 +311,6 @@
     color: $fallback--cRed;
   }
 
-  .old-avatar {
-    width: 128px;
-    border-radius: $fallback--avatarRadius;
-    border-radius: var(--avatarRadius, $fallback--avatarRadius);
-  }
-
-  .new-avatar {
-    object-fit: cover;
-    width: 128px;
-    height: 128px;
-    border-radius: $fallback--avatarRadius;
-    border-radius: var(--avatarRadius, $fallback--avatarRadius);
-  }
-
   .btn {
     min-height: 28px;
     min-width: 10em;

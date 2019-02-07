@@ -59,8 +59,8 @@ const UserProfile = {
     isExternal () {
       return this.$route.name === 'external-user-profile'
     },
-    followeesTabVisible () {
-      return this.isUs || !this.user.hide_followings
+    followsTabVisible () {
+      return this.isUs || !this.user.hide_follows
     },
     followersTabVisible () {
       return this.isUs || !this.user.hide_followers

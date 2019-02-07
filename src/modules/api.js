@@ -1,5 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import {isArray} from 'lodash'
+import { isArray } from 'lodash'
 import { Socket } from 'phoenix'
 
 const api = {
@@ -34,18 +34,24 @@ const api = {
     }
   },
   actions: {
-    startFetching (store, timeline) {
+    startFetching (store, payload) {
       let userId = false
+      let timeline = 'friends'
+      let tag = false
 
-      // This is for user timelines
-      if (isArray(timeline)) {
-        userId = timeline[1]
-        timeline = timeline[0]
+      if (isArray(payload)) {
+        // For user timelines
+        timeline = payload[0]
+        userId = payload[1]
+      } else if (payload.tag) {
+        // For tag timelines
+        timeline = 'tag'
+        tag = payload.tag
       }
 
       // Don't start fetching if we already are.
       if (!store.state.fetchers[timeline]) {
-        const fetcher = store.state.backendInteractor.startFetching({timeline, store, userId})
+        const fetcher = store.state.backendInteractor.startFetching({timeline, store, userId, tag})
         store.commit('addFetcher', {timeline, fetcher})
       }
     },

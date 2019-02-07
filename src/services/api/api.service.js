@@ -257,6 +257,13 @@ const fetchFriends = ({id, page, credentials}) => {
     .then((data) => data.map(parseUser))
 }
 
+const exportFriends = ({id, credentials}) => {
+  let url = `${FRIENDS_URL}?user_id=${id}&export=true`
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
+    .then((data) => data.map(parseUser))
+}
+
 const fetchFollowers = ({id, page, credentials}) => {
   let url = `${FOLLOWERS_URL}?user_id=${id}`
   if (page) {
@@ -536,6 +543,7 @@ const apiService = {
   fetchConversation,
   fetchStatus,
   fetchFriends,
+  exportFriends,
   fetchFollowers,
   followUser,
   unfollowUser,

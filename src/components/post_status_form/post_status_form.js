@@ -65,7 +65,6 @@ const PostStatusForm = {
       newStatus: {
         spoilerText: this.subject || '',
         status: statusText,
-        contentType: 'text/plain',
         nsfw: false,
         files: [],
         visibility: scope
@@ -167,6 +166,11 @@ const PostStatusForm = {
     },
     formattingOptionsEnabled () {
       return this.$store.state.instance.formattingOptionsEnabled
+    },
+    defaultPostContentType () {
+      return typeof this.$store.state.config.postContentType === 'undefined'
+        ? this.$store.state.instance.postContentType
+        : this.$store.state.config.postContentType
     }
   },
   methods: {

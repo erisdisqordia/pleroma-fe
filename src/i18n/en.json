@@ -167,6 +167,8 @@
     "no_rich_text_description": "Strip rich text formatting from all posts",
     "hide_follows_description": "Don't show who I'm following",
     "hide_followers_description": "Don't show who's following me",
+    "show_admin_badge": "Show Admin badge in my profile",
+    "show_moderator_badge": "Show Moderator badge in my profile",
     "nsfw_clickthrough": "Enable clickthrough NSFW attachment hiding",
     "panelRadius": "Panels",
     "pause_on_unfocused": "Pause streaming when tab is not focused",

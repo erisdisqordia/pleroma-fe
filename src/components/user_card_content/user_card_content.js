@@ -79,6 +79,12 @@ export default {
       set (color) {
         this.$store.dispatch('setHighlight', { user: this.user.screen_name, color })
       }
+    },
+    visibleRole () {
+      const validRole = (this.user.role === 'admin' || this.user.role === 'moderator')
+      const showRole = this.isOtherUser || this.user.show_role
+
+      return validRole && showRole && this.user.role
     }
   },
   components: {

@@ -90,6 +90,8 @@ export const parseUser = (data) => {
     output.statusnet_blocking = data.statusnet_blocking
 
     output.is_local = data.is_local
+    output.role = data.role
+    output.show_role = data.show_role
 
     output.follows_you = data.follows_you
 

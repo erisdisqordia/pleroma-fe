@@ -10,7 +10,7 @@ import LinkPreview from '../link-preview/link-preview.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import fileType from 'src/services/file_type/file_type.service'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
-import { mentionMatchesUrl } from 'src/services/mention_matcher/mention_matcher.js'
+import { mentionMatchesUrl, extractTagFromUrl } from 'src/services/matcher/matcher.service.js'
 import { filter, find } from 'lodash'
 
 const Status = {
@@ -273,7 +273,7 @@ const Status = {
       }
       if (target.tagName === 'A') {
         if (target.className.match(/mention/)) {
-          const href = target.getAttribute('href')
+          const href = target.href
           const attn = this.status.attentions.find(attn => mentionMatchesUrl(attn, href))
           if (attn) {
             event.stopPropagation()
@@ -282,8 +282,14 @@ const Status = {
             this.$router.push(link)
             return
           }
-        } else {
-          this.$router.push(target.pathname)
+        }
+        if (target.className.match(/hashtag/)) {
+          // Extract tag name from link url
+          const tag = extractTagFromUrl(target.href)
+          if (tag) {
+            const link = this.generateTagLink(tag)
+            this.$router.push(link)
+          }
         }
       }
     },
@@ -339,6 +345,9 @@ const Status = {
     },
     generateUserProfileLink (id, name) {
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
+    },
+    generateTagLink (tag) {
+      return `/tag/${tag}`
     },
     setMedia () {
       const attachments = this.attachmentSize === 'hide' ? this.status.attachments : this.galleryAttachments

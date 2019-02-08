@@ -126,7 +126,7 @@ const AutoCompleteInput = {
         const candidate = this.candidates[this.highlighted]
         const replacement = candidate.utf || (candidate.screen_name + ' ')
         this.text = Completion.replaceWord(this.text, this.wordAtCaret, replacement)
-        const el = this.$el.querySelector('textarea')
+        const el = this.$el.querySelector('textarea') || this.$el.querySelector('input')
         el.focus()
         this.caret = 0
         this.highlighted = 0

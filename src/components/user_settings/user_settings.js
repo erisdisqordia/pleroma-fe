@@ -119,7 +119,7 @@ const UserSettings = {
       reader.readAsDataURL(file)
     },
     submitAvatar (cropper) {
-      const img = cropper.getCroppedCanvas({ width: 150, height: 150 }).toDataURL('image/jpeg')
+      const img = cropper.getCroppedCanvas({ minWidth: 150, minHeight: 150 }).toDataURL('image/jpeg')
       this.avatarUploading = true
       this.$store.state.api.backendInteractor.updateAvatar({ params: { img } }).then((user) => {
         if (!user.error) {

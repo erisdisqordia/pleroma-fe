@@ -9,7 +9,7 @@
     <tab-switcher :renderOnlyFocused="true">
       <Timeline
         :label="$t('user_card.statuses')"
-        :diabled="!user.statuses_count"
+        :disabled="!user.statuses_count"
         :embedded="true"
         :title="$t('user_profile.timeline_title')"
         :timeline="timeline"

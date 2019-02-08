@@ -45,7 +45,7 @@
         timeline-name="favorites"
         :timeline="favorites"
       />
-    </tab-switcher> 
+    </tab-switcher>
   </div>
   <div v-else class="panel user-profile-placeholder">
     <div class="panel-heading">

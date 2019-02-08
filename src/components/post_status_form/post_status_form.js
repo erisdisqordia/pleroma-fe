@@ -116,7 +116,7 @@ const PostStatusForm = {
     }
   },
   methods: {
-    postStatus () {
+    postStatusCopy () {
       this.postStatus(this.newStatus)
     },
     postStatus (newStatus) {

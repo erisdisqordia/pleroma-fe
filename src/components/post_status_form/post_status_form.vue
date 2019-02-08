@@ -24,8 +24,8 @@
         :drop="fileDrop"
         :dragoverPrevent="fileDrag"
         :paste="paste"
-        :keydownMetaEnter="postStatus"
-        :keyupCtrlEnter="postStatus"/>
+        :keydownMetaEnter="postStatusCopy"
+        :keyupCtrlEnter="postStatusCopy"/>
       <div class="visibility-tray">
         <span class="text-format" v-if="formattingOptionsEnabled">
           <label for="post-content-type" class="select">

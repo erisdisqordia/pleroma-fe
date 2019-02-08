@@ -18,7 +18,9 @@
         class="form-cw">
       <auto-complete-input v-model="newStatus.status"
         :classObj="{ 'form-control': true }"
+        :placeholder="$t('post_status.default')"
         :autoResize="true"
+        :multiline="true"
         :drop="fileDrop"
         :dragoverPrevent="fileDrag"
         :paste="paste"

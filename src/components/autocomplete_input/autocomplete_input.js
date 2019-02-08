@@ -3,9 +3,12 @@ import { take, filter, map } from 'lodash'
 
 const AutoCompleteInput = {
   props: [
+    'id',
     'classObj',
     'value',
+    'placeholder',
     'autoResize',
+    'multiline',
     'drop',
     'dragoverPrevent',
     'paste',

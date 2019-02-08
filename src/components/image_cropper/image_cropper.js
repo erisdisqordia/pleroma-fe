@@ -5,7 +5,7 @@ import 'cropperjs/dist/cropper.css'
 const ImageCropper = {
   props: {
     trigger: {
-      type: [String, Element],
+      type: [String, window.Element],
       required: true
     },
     cropperOptions: {
@@ -74,7 +74,7 @@ const ImageCropper = {
     readFile () {
       const fileInput = this.$refs.input
       if (fileInput.files != null && fileInput.files[0] != null) {
-        let reader = new FileReader()
+        let reader = new window.FileReader()
         reader.onload = (e) => {
           this.dataUrl = e.target.result
         }

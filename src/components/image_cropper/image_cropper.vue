@@ -1,13 +1,13 @@
 <template>
   <div class="image-cropper">
-    <modal :show="dataUrl" :title="title" @close="destroy">
+    <modal :show="dataUrl" :title="modalTitle" @close="destroy">
       <div class="modal-body">
         <div class="image-cropper-image-container">
           <img ref="img" :src="dataUrl" alt="" @load.stop="createCropper" />
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn image-cropper-btn" type="button" @click="submit" v-text="saveButtonLabel"></button>
+        <button class="btn image-cropper-btn" type="button" @click="submit" v-text="modalSaveButtonLabel"></button>
       </div>
     </modal>
     <input ref="input" type="file" class="image-cropper-img-input" :accept="mimes">

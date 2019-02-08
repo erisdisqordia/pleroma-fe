@@ -26,12 +26,10 @@ const ImageCropper = {
       default: 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon'
     },
     title: {
-      type: String,
-      default: 'Crop picture'
+      type: String
     },
     saveButtonLabel: {
-      type: String,
-      default: 'Save'
+      type: String
     }
   },
   data () {
@@ -43,6 +41,14 @@ const ImageCropper = {
   },
   components: {
     Modal
+  },
+  computed: {
+    modalTitle () {
+      return this.title || this.$t('image_cropper.crop_picture')
+    },
+    modalSaveButtonLabel () {
+      return this.saveButtonLabel || this.$t('image_cropper.save')
+    }
   },
   methods: {
     destroy () {

@@ -21,6 +21,10 @@
     "more": "More",
     "generic_error": "An error occured"
   },
+  "image_cropper": {
+    "crop_picture": "Crop picture",
+    "save": "Save"
+  },
   "login": {
     "login": "Log in",
     "description": "Log in with OAuth",

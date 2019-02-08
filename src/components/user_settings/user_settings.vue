@@ -11,7 +11,7 @@
             <p>{{$t('settings.name')}}</p>
             <input class='name-changer' id='username' v-model="newName"></input>
             <p>{{$t('settings.bio')}}</p>
-            <textarea class="bio" v-model="newBio"></textarea>
+            <auto-complete-input :classObj="{ bio: true }" v-model="newBio"/>
             <p>
               <input type="checkbox" v-model="newLocked" id="account-locked">
               <label for="account-locked">{{$t('settings.lock_account_description')}}</label>

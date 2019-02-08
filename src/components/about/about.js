@@ -9,7 +9,7 @@ const About = {
     TermsOfServicePanel
   },
   computed: {
-    showFeaturesPanel () { return this.$store.state.config.showFeaturesPanel }
+    showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel }
   }
 }
 

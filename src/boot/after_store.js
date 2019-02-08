@@ -86,6 +86,7 @@ const afterStoreSetup = ({ store, i18n }) => {
           copyInstanceOption('subjectLineBehavior')
           copyInstanceOption('alwaysShowSubjectInput')
           copyInstanceOption('noAttachmentLinks')
+          copyInstanceOption('showFeaturesPanel')
 
           if ((config.chatDisabled)) {
             store.dispatch('disableChat')

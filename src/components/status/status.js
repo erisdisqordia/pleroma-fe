@@ -12,6 +12,7 @@ import fileType from 'src/services/file_type/file_type.service'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import { mentionMatchesUrl } from 'src/services/mention_matcher/mention_matcher.js'
 import { filter, find } from 'lodash'
+import entities from 'entities'
 
 const Status = {
   name: 'Status',
@@ -201,14 +202,15 @@ const Status = {
     },
     replySubject () {
       if (!this.status.summary) return ''
+      const decodedSummary = entities.decodeHTML(this.status.summary)
       const behavior = typeof this.$store.state.config.subjectLineBehavior === 'undefined'
             ? this.$store.state.instance.subjectLineBehavior
             : this.$store.state.config.subjectLineBehavior
-      const startsWithRe = this.status.summary.match(/^re[: ]/i)
+      const startsWithRe = decodedSummary.match(/^re[: ]/i)
       if (behavior !== 'noop' && startsWithRe || behavior === 'masto') {
-        return this.status.summary
+        return decodedSummary
       } else if (behavior === 'email') {
-        return 're: '.concat(this.status.summary)
+        return 're: '.concat(decodedSummary)
       } else if (behavior === 'noop') {
         return ''
       }

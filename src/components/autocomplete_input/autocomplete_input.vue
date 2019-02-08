@@ -3,11 +3,11 @@
     <textarea
       v-if="multiline"
       ref="textarea"
-      :value="text"
-      :id="id"
+      rows="1"
+      :value="text" :class="classObj" :id="id" :placeholder="placeholder"
       @input="text = $event.target.value, $emit('input', $event.target.value), autoResize && resize($event)" 
       @click="setCaret"
-      @keyup="setCaret" :placeholder="placeholder" rows="1" :class="classObj"
+      @keyup="setCaret"
       @keydown.down="cycleForward"
       @keydown.up="cycleBackward"
       @keydown.shift.tab="cycleBackward"
@@ -22,11 +22,10 @@
     <input
       v-else
       ref="textarea"
-      :value="text"
-      :id="id"
+      :value="text" :class="classObj" :id="id" :placeholder="placeholder"
       @input="text = $event.target.value, $emit('input', $event.target.value), autoResize && resize($event)" 
       @click="setCaret"
-      @keyup="setCaret" :placeholder="placeholder" rows="1" :class="classObj"
+      @keyup="setCaret"
       @keydown.down="cycleForward"
       @keydown.up="cycleBackward"
       @keydown.shift.tab="cycleBackward"

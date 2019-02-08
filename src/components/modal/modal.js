@@ -3,14 +3,18 @@ const Modal = {
   methods: {
     close: function () {
       this.$emit('close')
-    }
-  },
-  mounted: function () {
-    document.addEventListener('keydown', (e) => {
+    },
+    handleKeydown: function (e) {
       if (this.show && e.keyCode === 27) {
         this.close()
       }
-    })
+    }
+  },
+  mounted: function () {
+    document.addEventListener('keydown', this.handleKeydown)
+  },
+  destroyed: function () {
+    document.removeEventListener('keydown', this.handleKeydown)
   }
 }
 

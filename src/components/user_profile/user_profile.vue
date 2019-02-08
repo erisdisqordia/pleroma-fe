@@ -30,7 +30,7 @@
       </div>
       <Timeline
         :label="$t('user_card.media')"
-        :disabled="!user.media_count"
+        :disabled="!media.visibleStatuses.length"
         :embedded="true" :title="$t('user_card.media')"
         timeline-name="media"
         :timeline="media"
@@ -39,13 +39,13 @@
       <Timeline
         v-if="isUs"
         :label="$t('user_card.favorites')"
-        :disabled="!user.favourites_count"
+        :disabled="!favorites.visibleStatuses.length"
         :embedded="true"
         :title="$t('user_card.favorites')"
         timeline-name="favorites"
         :timeline="favorites"
       />
-    </tab-switcher>
+    </tab-switcher> 
   </div>
   <div v-else class="panel user-profile-placeholder">
     <div class="panel-heading">

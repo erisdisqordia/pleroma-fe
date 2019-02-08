@@ -65,19 +65,12 @@ const ImageCropper = {
     },
     createCropper () {
       this.cropper = new Cropper(this.$refs.img, this.cropperOptions)
-    }
-  },
-  mounted () {
-    // listen for click event on trigger
-    let trigger = typeof this.trigger === 'object' ? this.trigger : document.querySelector(this.trigger)
-    if (!trigger) {
-      this.$emit('error', 'No image make trigger found.', 'user')
-    } else {
-      trigger.addEventListener('click', this.pickImage)
-    }
-    // listen for input file changes
-    let fileInput = this.$refs.input
-    fileInput.addEventListener('change', () => {
+    },
+    getTriggerDOM () {
+      return typeof this.trigger === 'object' ? this.trigger : document.querySelector(this.trigger)
+    },
+    readFile () {
+      const fileInput = this.$refs.input
       if (fileInput.files != null && fileInput.files[0] != null) {
         let reader = new FileReader()
         reader.onload = (e) => {
@@ -87,7 +80,28 @@ const ImageCropper = {
         this.filename = fileInput.files[0].name || 'unknown'
         this.$emit('changed', fileInput.files[0], reader)
       }
-    })
+    }
+  },
+  mounted () {
+    // listen for click event on trigger
+    const trigger = this.getTriggerDOM()
+    if (!trigger) {
+      this.$emit('error', 'No image make trigger found.', 'user')
+    } else {
+      trigger.addEventListener('click', this.pickImage)
+    }
+    // listen for input file changes
+    const fileInput = this.$refs.input
+    fileInput.addEventListener('change', this.readFile)
+  },
+  beforeDestroy: function () {
+    // remove the event listeners
+    const trigger = this.getTriggerDOM()
+    if (trigger) {
+      trigger.removeEventListener('click', this.pickImage)
+    }
+    const fileInput = this.$refs.input
+    fileInput.removeEventListener('change', this.readFile)
   }
 }
 

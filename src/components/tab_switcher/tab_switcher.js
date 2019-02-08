@@ -37,7 +37,7 @@ export default Vue.component('tab-switcher', {
 
             return (
               <div class={ classesWrapper.join(' ')}>
-                <button onClick={this.activateTab(index)} class={ classesTab.join(' ') }>{slot.data.attrs.label}</button>
+                <button disabled={slot.data.attrs.disabled} onClick={this.activateTab(index)} class={ classesTab.join(' ') }>{slot.data.attrs.label}</button>
               </div>
             )
           })

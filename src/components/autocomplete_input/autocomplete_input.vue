@@ -1,6 +1,7 @@
 <template>
   <div>
     <textarea
+      v-if="multiline"
       ref="textarea"
       :value="text"
       @input="text = $event.target.value, $emit('input', $event.target.value), autoResize && resize($event)" 
@@ -17,6 +18,24 @@
       @keydown.meta.enter="keydownMetaEnter && keydownMetaEnter()"
       @keyup.ctrl.enter="keyupCtrlEnter && keyupCtrlEnter()">
     </textarea>
+    <input
+      v-else
+      ref="textarea"
+      :value="text"
+      :id="id"
+      @input="text = $event.target.value, $emit('input', $event.target.value), autoResize && resize($event)" 
+      @click="setCaret"
+      @keyup="setCaret" :placeholder="placeholder" rows="1" :class="classObj"
+      @keydown.down="cycleForward"
+      @keydown.up="cycleBackward"
+      @keydown.shift.tab="cycleBackward"
+      @keydown.tab="cycleForward"
+      @keydown.enter="replaceCandidate"
+      @drop="drop && drop()"
+      @dragover.prevent="dragoverPrevent && dragoverPrevent()"
+      @paste="paste && paste()"
+      @keydown.meta.enter="keydownMetaEnter && keydownMetaEnter()"
+      @keyup.ctrl.enter="keyupCtrlEnter && keyupCtrlEnter()"/>
     <div style="position:relative;" v-if="candidates">
       <div class="autocomplete-panel">
         <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">

@@ -9,9 +9,9 @@
           <div class="setting-item" >
             <h2>{{$t('settings.name_bio')}}</h2>
             <p>{{$t('settings.name')}}</p>
-            <input class='name-changer' id='username' v-model="newName"></input>
+            <auto-complete-input :classObj="{ 'name-changer': true }" :id="'username'" v-model="newName"/>
             <p>{{$t('settings.bio')}}</p>
-            <auto-complete-input :classObj="{ bio: true }" v-model="newBio"/>
+            <auto-complete-input :classObj="{ bio: true }" v-model="newBio" :multiline="true"/>
             <p>
               <input type="checkbox" v-model="newLocked" id="account-locked">
               <label for="account-locked">{{$t('settings.lock_account_description')}}</label>

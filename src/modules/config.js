@@ -31,7 +31,6 @@ const defaultState = {
   scopeCopy: undefined, // instance default
   subjectLineBehavior: undefined, // instance default
   alwaysShowSubjectInput: undefined, // instance default
-  showFeaturesPanel: true,
   postContentType: undefined // instance default
 }
 

@@ -29,6 +29,7 @@ const defaultState = {
   nsfwCensorImage: undefined,
   vapidPublicKey: undefined,
   noAttachmentLinks: false,
+  showFeaturesPanel: true,
 
   // Nasty stuff
   pleromaBackend: true,

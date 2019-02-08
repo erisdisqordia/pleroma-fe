@@ -20,5 +20,6 @@
   "loginMethod": "password",
   "webPushNotifications": false,
   "noAttachmentLinks": false,
-  "nsfwCensorImage": ""
+  "nsfwCensorImage": "",
+  "showFeaturesPanel": true
 }

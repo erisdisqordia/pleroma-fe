@@ -30,7 +30,13 @@ const defaultState = {
   interfaceLanguage: browserLocale,
   scopeCopy: undefined, // instance default
   subjectLineBehavior: undefined, // instance default
+<<<<<<< HEAD
   alwaysShowSubjectInput: undefined // instance default
+=======
+  alwaysShowSubjectInput: undefined, // instance default
+  showFeaturesPanel: true,
+  postContentType: undefined // instance default
+>>>>>>> da0a5535eb09f6637df921a8a5f951c295bedeac
 }
 
 const config = {

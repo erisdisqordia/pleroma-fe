@@ -46,6 +46,11 @@ const settings = {
         : user.subjectLineBehavior,
       subjectLineBehaviorDefault: instance.subjectLineBehavior,
 
+      postContentTypeLocal: typeof user.postContentType === 'undefined'
+        ? instance.postContentType
+        : user.postContentType,
+      postContentTypeDefault: instance.postContentType,
+
       alwaysShowSubjectInputLocal: typeof user.alwaysShowSubjectInput === 'undefined'
         ? instance.alwaysShowSubjectInput
         : user.alwaysShowSubjectInput,
@@ -156,6 +161,9 @@ const settings = {
     },
     subjectLineBehaviorLocal (value) {
       this.$store.dispatch('setOption', { name: 'subjectLineBehavior', value })
+    },
+    postContentTypeLocal (value) {
+      this.$store.dispatch('setOption', { name: 'postContentType', value })
     },
     stopGifs (value) {
       this.$store.dispatch('setOption', { name: 'stopGifs', value })

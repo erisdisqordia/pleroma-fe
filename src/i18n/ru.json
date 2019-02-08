@@ -129,6 +129,8 @@
     "no_rich_text_description": "Убрать форматирование из всех постов",
     "hide_follows_description": "Не показывать кого я читаю",
     "hide_followers_description": "Не показывать кто читает меня",
+    "show_admin_badge": "Показывать значок администратора в моем профиле",
+    "show_moderator_badge": "Показывать значок модератора в моем профиле",
     "nsfw_clickthrough": "Включить скрытие NSFW вложений",
     "panelRadius": "Панели",
     "pause_on_unfocused": "Приостановить загрузку когда вкладка не в фокусе",

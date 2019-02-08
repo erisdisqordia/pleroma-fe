@@ -24,6 +24,7 @@ const defaultState = {
   disableChat: false,
   scopeCopy: true,
   subjectLineBehavior: 'email',
+  postContentType: 'text/plain',
   loginMethod: 'password',
   nsfwCensorImage: undefined,
   vapidPublicKey: undefined,

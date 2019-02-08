@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="display: flex; flex-direction: column;">
     <textarea
       v-if="multiline"
       ref="textarea"

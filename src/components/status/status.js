@@ -115,6 +115,9 @@ const Status = {
         ? this.$store.state.instance.hideFilteredStatuses
         : this.$store.state.config.hideFilteredStatuses
     },
+    hideStatus () {
+      return (!this.hideReply && !this.deleted) && !(this.muted && this.hideFilteredStatuses)
+    },
     isFocused () {
       // retweet or root of an expanded conversation
       if (this.focused) {

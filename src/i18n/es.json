@@ -28,7 +28,8 @@
     "password": "Contraseña",
     "placeholder": "p.ej. lain",
     "register": "Registrar",
-    "username": "Usuario"
+    "username": "Usuario",
+    "hint": "Inicia sesión para unirte a la discusión"
   },
   "nav": {
     "about": "Sobre",
@@ -55,7 +56,7 @@
     "no_more_notifications": "No hay más notificaciones"
   },
   "post_status": {
-    "new_status": "Post new status",
+    "new_status": "Publicar un nuevo estado",
     "account_not_locked_warning": "Tu cuenta no está {0}. Cualquiera puede seguirte y leer las entradas para Solo-Seguidores.",
     "account_not_locked_warning_link": "bloqueada",
     "attachments_sensitive": "Contenido sensible",
@@ -139,7 +140,7 @@
     "use_one_click_nsfw": "Abrir los adjuntos NSFW con un solo click.",
     "hide_post_stats": "Ocultar las estadísticas de las entradas (p.ej. el número de favoritos)",
     "hide_user_stats": "Ocultar las estadísticas del usuario (p.ej. el número de seguidores)",
-    "import_followers_from_a_csv_file": "Importar personas que tú sigues apartir de un archivo csv",
+    "import_followers_from_a_csv_file": "Importar personas que tú sigues a partir de un archivo csv",
     "import_theme": "Importar tema",
     "inputRadius": "Campos de entrada",
     "checkboxRadius": "Casillas de verificación",
@@ -164,7 +165,10 @@
     "notification_visibility_mentions": "Menciones",
     "notification_visibility_repeats": "Repeticiones (Repeats)",
     "no_rich_text_description": "Eliminar el formato de texto enriquecido de todas las entradas",
-    "hide_network_description": "No mostrar a quién sigo, ni quién me sigue",
+    "hide_follows_description": "No mostrar a quién sigo",
+    "hide_followers_description": "No mostrar quién me sigue",
+    "show_admin_badge": "Mostrar la placa de administrador en mi perfil",
+    "show_moderator_badge": "Mostrar la placa de moderador en mi perfil",
     "nsfw_clickthrough": "Activar el clic para ocultar los adjuntos NSFW",
     "panelRadius": "Paneles",
     "pause_on_unfocused": "Parar la transmisión cuando no estés en foco.",
@@ -191,6 +195,8 @@
     "subject_line_email": "Tipo email: \"re: tema\"",
     "subject_line_mastodon": "Tipo mastodon: copiar como es",
     "subject_line_noop": "No copiar",
+    "post_status_content_type": "Formato de publicación",
+    "status_content_type_plain": "Texto plano",
     "stop_gifs": "Iniciar GIFs al pasar el ratón",
     "streaming": "Habilite la transmisión automática de nuevas publicaciones cuando se desplaza hacia la parte superior",
     "text": "Texto",

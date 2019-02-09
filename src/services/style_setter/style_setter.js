@@ -480,7 +480,7 @@ const getThemes = () => {
 }
 
 const setPreset = (val, commit) => {
-  getThemes().then((themes) => {
+  return getThemes().then((themes) => {
     const theme = themes[val] ? themes[val] : themes['pleroma-dark']
     const isV1 = Array.isArray(theme)
     const data = isV1 ? {} : theme.theme

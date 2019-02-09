@@ -48,7 +48,7 @@ export default function createPersistedState ({
   return getState(key, storage).then((savedState) => {
     return store => {
       try {
-        if (typeof savedState === 'object') {
+        if (savedState !== null && typeof savedState === 'object') {
           // build user cache
           const usersState = savedState.users || {}
           usersState.usersObject = {}

@@ -63,9 +63,11 @@ const instance = {
         case 'name':
           dispatch('setPageTitle')
           break
-        case 'theme':
-          setPreset(value, commit)
       }
+    },
+    setTheme ({ commit }, themeName) {
+      commit('setInstanceOption', { name: 'theme', value: themeName })
+      return setPreset(themeName, commit)
     }
   }
 }

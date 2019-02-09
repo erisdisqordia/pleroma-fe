@@ -118,7 +118,7 @@ const UserSettings = {
       reader.readAsDataURL(file)
     },
     submitAvatar (cropper) {
-      const img = cropper.getCroppedCanvas({ minWidth: 150, minHeight: 150 }).toDataURL('image/jpeg')
+      const img = cropper.getCroppedCanvas().toDataURL('image/jpeg')
       return this.$store.state.api.backendInteractor.updateAvatar({ params: { img } }).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])

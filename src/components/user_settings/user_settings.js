@@ -21,13 +21,12 @@ const UserSettings = {
       followImportError: false,
       followsImported: false,
       enableFollowsExport: true,
-      avatarUploading: false,
+      pickAvatarBtnVisible: true,
       bannerUploading: false,
       backgroundUploading: false,
       followListUploading: false,
       bannerPreview: null,
       backgroundPreview: null,
-      avatarUploadError: null,
       bannerUploadError: null,
       backgroundUploadError: null,
       deletingAccount: false,
@@ -120,15 +119,13 @@ const UserSettings = {
     },
     submitAvatar (cropper) {
       const img = cropper.getCroppedCanvas({ minWidth: 150, minHeight: 150 }).toDataURL('image/jpeg')
-      this.avatarUploading = true
-      this.$store.state.api.backendInteractor.updateAvatar({ params: { img } }).then((user) => {
+      return this.$store.state.api.backendInteractor.updateAvatar({ params: { img } }).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
         } else {
-          this.avatarUploadError = this.$t('upload.error.base') + user.error
+          throw this.$t('upload.error.base') + user.error
         }
-        this.avatarUploading = false
       })
     },
     clearUploadError (slot) {

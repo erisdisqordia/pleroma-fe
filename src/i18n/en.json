@@ -23,7 +23,8 @@
   },
   "image_cropper": {
     "crop_picture": "Crop picture",
-    "save": "Save"
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "login": {
     "login": "Log in",
@@ -116,7 +117,6 @@
     "collapse_subject": "Collapse posts with subjects",
     "composing": "Composing",
     "confirm_new_password": "Confirm new password",
-    "crop_your_new_avatar": "Crop your new avatar",
     "current_avatar": "Your current avatar",
     "current_password": "Current password",
     "current_profile_banner": "Your current profile banner",
@@ -211,6 +211,7 @@
     "theme_help_v2_1": "You can also override certain component's colors and opacity by toggling the checkbox, use \"Clear all\" button to clear all overrides.",
     "theme_help_v2_2": "Icons underneath some entries are background/text contrast indicators, hover over for detailed info. Please keep in mind that when using transparency contrast indicators show the worst possible case.",
     "tooltipRadius": "Tooltips/alerts",
+    "upload_a_photo": "Upload a photo",
     "user_settings": "User Settings",
     "values": {
       "false": "no",

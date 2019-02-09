@@ -1,15 +1,19 @@
 <template>
   <div class="image-cropper">
-    <modal :show="dataUrl" :title="modalTitle" @close="destroy">
-      <div class="modal-body">
-        <div class="image-cropper-image-container">
-          <img ref="img" :src="dataUrl" alt="" @load.stop="createCropper" />
-        </div>
+    <div v-if="dataUrl">
+      <div class="image-cropper-image-container">
+        <img ref="img" :src="dataUrl" alt="" @load.stop="createCropper" />
       </div>
-      <div class="modal-footer">
-        <button class="btn image-cropper-btn" type="button" @click="submit" v-text="modalSaveButtonLabel"></button>
+      <div class="image-cropper-buttons-wrapper">
+        <button class="btn" type="button" :disabled="submitting" @click="submit" v-text="saveText"></button>
+        <button class="btn" type="button" :disabled="submitting" @click="destroy" v-text="cancelText"></button>
+        <i class="icon-spin4 animate-spin" v-if="submitting"></i>
       </div>
-    </modal>
+      <div class="alert error" v-if="submitError">
+        Error: {{ submitError }}
+        <i class="button-icon icon-cancel" @click="clearError"></i>
+      </div>
+    </div>
     <input ref="input" type="file" class="image-cropper-img-input" :accept="mimes">
   </div>
 </template>
@@ -31,9 +35,8 @@
     }
   }
 
-  &-btn {
-    display: block;
-    width: 100%;
+  &-buttons-wrapper {
+    margin-top: 15px;
   }
 }
 </style>

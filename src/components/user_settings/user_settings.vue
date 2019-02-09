@@ -47,20 +47,11 @@
           <div class="setting-item">
             <h2>{{$t('settings.avatar')}}</h2>
             <p class="visibility-notice">{{$t('settings.avatar_size_instruction')}}</p>
-            <div class="avatar-upload-wrapper">
-              <div class="avatar-upload">
-                <img :src="user.profile_image_url_original" class="avatar" />
-                <div class="avatar-upload-loading-wrapper" v-if="avatarUploading">
-                  <i class="icon-spin4 animate-spin"></i>
-                </div>
-              </div>
-            </div>
-            <button class="btn" type="button" id="pick-avatar" :disabled="avatarUploading">{{$t('settings.set_new_avatar')}}</button>
-            <div class="alert error" v-if="avatarUploadError">
-              Error: {{ avatarUploadError }}
-              <i class="button-icon icon-cancel" @click="clearUploadError('avatar')"></i>
-            </div>
-            <image-cropper trigger="#pick-avatar" :title="$t('settings.crop_your_new_avatar')" :saveButtonLabel="$t('settings.set_new_avatar')" @submit="submitAvatar" />
+            <p>{{$t('settings.current_avatar')}}</p>
+            <img :src="user.profile_image_url_original" class="current-avatar"></img>
+            <p>{{$t('settings.set_new_avatar')}}</p>
+            <button class="btn" type="button" id="pick-avatar" v-show="pickAvatarBtnVisible">{{$t('settings.upload_a_photo')}}</button>
+            <image-cropper trigger="#pick-avatar" :submitHandler="submitAvatar" @open="pickAvatarBtnVisible=false" @close="pickAvatarBtnVisible=true" />
           </div>
           <div class="setting-item">
             <h2>{{$t('settings.profile_banner')}}</h2>
@@ -196,29 +187,7 @@
     max-width: 100%;
   }
 
-  .avatar-upload {
-    display: inline-block;
-    position: relative;
-  }
-
-  .avatar-upload-loading-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0,0,0,.3);
-
-    i {
-      font-size: 50px;
-      color: #FFF;
-    }
-  }
-
-  .avatar {
+  .current-avatar {
     display: block;
     width: 150px;
     height: 150px;

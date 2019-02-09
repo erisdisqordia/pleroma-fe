@@ -1,11 +1,14 @@
 import Cropper from 'cropperjs'
-import Modal from '../modal/modal.vue'
 import 'cropperjs/dist/cropper.css'
 
 const ImageCropper = {
   props: {
     trigger: {
       type: [String, window.Element],
+      required: true
+    },
+    submitHandler: {
+      type: Function,
       required: true
     },
     cropperOptions: {
@@ -25,10 +28,10 @@ const ImageCropper = {
       type: String,
       default: 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon'
     },
-    title: {
+    saveButtonLabel: {
       type: String
     },
-    saveButtonLabel: {
+    cancelButtonLabel: {
       type: String
     }
   },
@@ -36,18 +39,17 @@ const ImageCropper = {
     return {
       cropper: undefined,
       dataUrl: undefined,
-      filename: undefined
+      filename: undefined,
+      submitting: false,
+      submitError: null
     }
   },
-  components: {
-    Modal
-  },
   computed: {
-    modalTitle () {
-      return this.title || this.$t('image_cropper.crop_picture')
-    },
-    modalSaveButtonLabel () {
+    saveText () {
       return this.saveButtonLabel || this.$t('image_cropper.save')
+    },
+    cancelText () {
+      return this.cancelButtonLabel || this.$t('image_cropper.cancel')
     }
   },
   methods: {
@@ -57,10 +59,15 @@ const ImageCropper = {
       }
       this.$refs.input.value = ''
       this.dataUrl = undefined
+      this.$emit('close')
     },
     submit () {
-      this.$emit('submit', this.cropper, this.filename)
-      this.destroy()
+      this.submitting = true
+      this.avatarUploadError = null
+      this.submitHandler(this.cropper, this.filename)
+        .then(() => this.destroy())
+        .catch(err => this.submitError = err)
+        .finally(() => this.submitting = false)
     },
     pickImage () {
       this.$refs.input.click()
@@ -77,11 +84,15 @@ const ImageCropper = {
         let reader = new window.FileReader()
         reader.onload = (e) => {
           this.dataUrl = e.target.result
+          this.$emit('open')
         }
         reader.readAsDataURL(fileInput.files[0])
         this.filename = fileInput.files[0].name || 'unknown'
         this.$emit('changed', fileInput.files[0], reader)
       }
+    },
+    clearError () {
+      this.submitError = null
     }
   },
   mounted () {

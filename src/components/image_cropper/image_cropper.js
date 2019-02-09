@@ -69,8 +69,12 @@ const ImageCropper = {
       this.avatarUploadError = null
       this.submitHandler(this.cropper, this.filename)
         .then(() => this.destroy())
-        .catch(err => this.submitError = err)
-        .finally(() => this.submitting = false)
+        .catch((err) => {
+          this.submitError = err
+        })
+        .finally(() => {
+          this.submitting = false
+        })
     },
     pickImage () {
       this.$refs.input.click()

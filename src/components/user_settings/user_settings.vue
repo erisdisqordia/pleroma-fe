@@ -189,5 +189,9 @@
   .name-changer {
     width: 100%;
   }
+
+  .bg {
+    max-width: 100%;
+  }
 }
 </style>

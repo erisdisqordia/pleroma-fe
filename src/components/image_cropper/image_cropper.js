@@ -50,6 +50,9 @@ const ImageCropper = {
     },
     cancelText () {
       return this.cancelButtonLabel || this.$t('image_cropper.cancel')
+    },
+    submitErrorMsg () {
+      return this.submitError && this.submitError instanceof Error ? this.submitError.toString() : this.submitError
     }
   },
   methods: {

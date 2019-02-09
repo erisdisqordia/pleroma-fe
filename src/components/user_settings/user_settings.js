@@ -124,7 +124,7 @@ const UserSettings = {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
         } else {
-          throw this.$t('upload.error.base') + user.error
+          throw new Error(this.$t('upload.error.base') + user.error)
         }
       })
     },

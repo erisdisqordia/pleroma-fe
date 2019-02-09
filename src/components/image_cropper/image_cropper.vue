@@ -10,7 +10,7 @@
         <i class="icon-spin4 animate-spin" v-if="submitting"></i>
       </div>
       <div class="alert error" v-if="submitError">
-        Error: {{ submitError }}
+        {{submitErrorMsg}}
         <i class="button-icon icon-cancel" @click="clearError"></i>
       </div>
     </div>

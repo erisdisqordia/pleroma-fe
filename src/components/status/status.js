@@ -11,8 +11,7 @@ import generateProfileLink from 'src/services/user_profile_link_generator/user_p
 import fileType from 'src/services/file_type/file_type.service'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import { mentionMatchesUrl } from 'src/services/mention_matcher/mention_matcher.js'
-import { filter, find } from 'lodash'
-import entities from 'entities'
+import { filter, find, unescape } from 'lodash'
 
 const Status = {
   name: 'Status',
@@ -197,12 +196,12 @@ const Status = {
       }
       if (this.status.summary && this.localCollapseSubjectDefault) {
         return false
-      }
+      } 
       return true
     },
     replySubject () {
       if (!this.status.summary) return ''
-      const decodedSummary = entities.decodeHTML(this.status.summary)
+      const decodedSummary = unescape(this.status.summary)
       const behavior = typeof this.$store.state.config.subjectLineBehavior === 'undefined'
             ? this.$store.state.instance.subjectLineBehavior
             : this.$store.state.config.subjectLineBehavior

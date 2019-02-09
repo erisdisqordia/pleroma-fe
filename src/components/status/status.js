@@ -196,7 +196,7 @@ const Status = {
       }
       if (this.status.summary && this.localCollapseSubjectDefault) {
         return false
-      } 
+      }
       return true
     },
     replySubject () {

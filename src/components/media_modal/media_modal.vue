@@ -8,8 +8,8 @@
       :controls="true"
       @click.stop.native="">
     </VideoAttachment>
-    <button title="Previous" class="modal-view-button-arrow modal-view-button-arrow--prev" v-if="canNavigate" @click.stop.prevent="goPrev"></button>
-    <button title="Next" class="modal-view-button-arrow modal-view-button-arrow--next" v-if="canNavigate" @click.stop.prevent="goNext"></button>
+    <button :title="$t('media_modal.previous')" class="modal-view-button-arrow modal-view-button-arrow--prev" v-if="canNavigate" @click.stop.prevent="goPrev"></button>
+    <button :title="$t('media_modal.next')" class="modal-view-button-arrow modal-view-button-arrow--next" v-if="canNavigate" @click.stop.prevent="goNext"></button>
   </div>
 </template>
 
@@ -65,7 +65,7 @@
       outline: none;
       box-shadow: none;
     }
-    
+
     &#{&}#{&} {
       &:hover {
         opacity: 1;

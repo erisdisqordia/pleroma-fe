@@ -17,7 +17,7 @@ const externalAttn = () => ({
 })
 
 describe('MatcherService', () => {
-  describe.only('mentionMatchesUrl', () => {
+  describe('mentionMatchesUrl', () => {
     it('should match local mention', () => {
       const attention = localAttn()
       const url = 'https://instance.com/users/person'
@@ -60,7 +60,7 @@ describe('MatcherService', () => {
       expect(MatcherService.mentionMatchesUrl(attention, url)).to.eql(false)
     })
   })
-  describe.only('extractTagFromUrl', () => {
+  describe('extractTagFromUrl', () => {
     it('should return tag name from valid pleroma url', () => {
       const url = 'https://website.com/tag/photo'
 

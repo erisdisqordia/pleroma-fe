@@ -30,7 +30,8 @@ const defaultState = {
   interfaceLanguage: browserLocale,
   scopeCopy: undefined, // instance default
   subjectLineBehavior: undefined, // instance default
-  alwaysShowSubjectInput: undefined // instance default
+  alwaysShowSubjectInput: undefined, // instance default
+  postContentType: undefined // instance default
 }
 
 const config = {

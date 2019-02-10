@@ -12,7 +12,10 @@ const UserSettings = {
       newLocked: this.$store.state.users.currentUser.locked,
       newNoRichText: this.$store.state.users.currentUser.no_rich_text,
       newDefaultScope: this.$store.state.users.currentUser.default_scope,
-      newHideNetwork: this.$store.state.users.currentUser.hide_network,
+      hideFollows: this.$store.state.users.currentUser.hide_follows,
+      hideFollowers: this.$store.state.users.currentUser.hide_followers,
+      showRole: this.$store.state.users.currentUser.show_role,
+      role: this.$store.state.users.currentUser.role,
       followList: null,
       followImportError: false,
       followsImported: false,
@@ -68,7 +71,10 @@ const UserSettings = {
       /* eslint-disable camelcase */
       const default_scope = this.newDefaultScope
       const no_rich_text = this.newNoRichText
-      const hide_network = this.newHideNetwork
+      const hide_follows = this.hideFollows
+      const hide_followers = this.hideFollowers
+      const show_role = this.showRole
+
       /* eslint-enable camelcase */
       this.$store.state.api.backendInteractor
         .updateProfile({
@@ -80,7 +86,9 @@ const UserSettings = {
             /* eslint-disable camelcase */
             default_scope,
             no_rich_text,
-            hide_network
+            hide_follows,
+            hide_followers,
+            show_role
             /* eslint-enable camelcase */
           }}).then((user) => {
             if (!user.error) {
@@ -235,7 +243,9 @@ const UserSettings = {
     exportFollows () {
       this.enableFollowsExport = false
       this.$store.state.api.backendInteractor
-        .fetchFriends({id: this.$store.state.users.currentUser.id})
+        .exportFriends({
+          id: this.$store.state.users.currentUser.id
+        })
         .then((friendList) => {
           this.exportPeople(friendList, 'friends.csv')
           setTimeout(() => { this.enableFollowsExport = true }, 2000)

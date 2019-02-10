@@ -130,7 +130,7 @@ const updateBanner = ({credentials, params}) => {
 // description
 const updateProfile = ({credentials, params}) => {
   // Always include these fields, because they might be empty or false
-  const fields = ['description', 'locked', 'no_rich_text', 'hide_network']
+  const fields = ['description', 'locked', 'no_rich_text', 'hide_follows', 'hide_followers', 'show_role']
   let url = PROFILE_UPDATE_URL
 
   const form = new FormData()
@@ -252,6 +252,13 @@ const fetchFriends = ({id, page, credentials}) => {
   if (page) {
     url = url + `&page=${page}`
   }
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
+    .then((data) => data.map(parseUser))
+}
+
+const exportFriends = ({id, credentials}) => {
+  let url = `${FRIENDS_URL}?user_id=${id}&export=true`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
@@ -536,6 +543,7 @@ const apiService = {
   fetchConversation,
   fetchStatus,
   fetchFriends,
+  exportFriends,
   fetchFollowers,
   followUser,
   unfollowUser,

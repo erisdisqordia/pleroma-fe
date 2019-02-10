@@ -90,6 +90,8 @@ export const parseUser = (data) => {
     output.statusnet_blocking = data.statusnet_blocking
 
     output.is_local = data.is_local
+    output.role = data.role
+    output.show_role = data.show_role
 
     output.follows_you = data.follows_you
 
@@ -100,7 +102,8 @@ export const parseUser = (data) => {
     output.rights = data.rights
     output.no_rich_text = data.no_rich_text
     output.default_scope = data.default_scope
-    output.hide_network = data.hide_network
+    output.hide_follows = data.hide_follows
+    output.hide_followers = data.hide_followers
     output.background_image = data.background_image
     // on mastoapi this info is contained in a "relationship"
     output.following = data.following

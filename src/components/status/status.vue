@@ -1,5 +1,5 @@
 <template>
-  <div class="status-el" v-if="!hideReply && !deleted" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
+  <div class="status-el" v-if="!hideStatus" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
     <template v-if="muted && !noReplyLinks">
       <div class="media status container muted">
         <small>
@@ -16,9 +16,8 @@
         <UserAvatar v-if="retweet" :betterShadow="betterShadow" :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <span class="user-name">
-            <router-link :to="retweeterProfileLink">
-              {{retweeterHtml || retweeter}}
-            </router-link>
+            <router-link v-if="retweeterHtml" :to="retweeterProfileLink" v-html="retweeterHtml"/>
+            <router-link v-else :to="retweeterProfileLink">{{retweeter}}</router-link>
           </span>
           <i class='fa icon-retweet retweeted' :title="$t('tool_tip.repeat')"></i>
           {{$t('timeline.repeated')}}

@@ -59,6 +59,7 @@ const afterStoreSetup = ({ store, i18n }) => {
           copyInstanceOption('background')
           copyInstanceOption('hidePostStats')
           copyInstanceOption('hideUserStats')
+          copyInstanceOption('hideFilteredStatuses')
           copyInstanceOption('logo')
 
           store.dispatch('setInstanceOption', {
@@ -84,8 +85,10 @@ const afterStoreSetup = ({ store, i18n }) => {
           copyInstanceOption('loginMethod')
           copyInstanceOption('scopeCopy')
           copyInstanceOption('subjectLineBehavior')
+          copyInstanceOption('postContentType')
           copyInstanceOption('alwaysShowSubjectInput')
           copyInstanceOption('noAttachmentLinks')
+          copyInstanceOption('showFeaturesPanel')
 
           if ((config.chatDisabled)) {
             store.dispatch('disableChat')

@@ -21,13 +21,16 @@ const defaultState = {
   collapseMessageWithSubject: false,
   hidePostStats: false,
   hideUserStats: false,
+  hideFilteredStatuses: true,
   disableChat: false,
   scopeCopy: true,
   subjectLineBehavior: 'email',
+  postContentType: 'text/plain',
   loginMethod: 'password',
   nsfwCensorImage: undefined,
   vapidPublicKey: undefined,
   noAttachmentLinks: false,
+  showFeaturesPanel: true,
 
   // Nasty stuff
   pleromaBackend: true,

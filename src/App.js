@@ -81,7 +81,8 @@ export default {
     },
     unseenNotificationsCount () {
       return this.unseenNotifications.length
-    }
+    },
+    showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel }
   },
   methods: {
     scrollToTop () {

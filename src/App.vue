@@ -29,7 +29,7 @@
               <user-panel></user-panel>
               <nav-panel></nav-panel>
               <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
-              <features-panel v-if="!currentUser"></features-panel>
+              <features-panel v-if="!currentUser && showFeaturesPanel"></features-panel>
               <who-to-follow-panel v-if="currentUser && suggestionsEnabled"></who-to-follow-panel>
               <notifications v-if="currentUser"></notifications>
             </div>
@@ -37,6 +37,11 @@
         </div>
       </div>
       <div class="main">
+        <div v-if="!currentUser" class="login-hint panel panel-default">
+          <router-link :to="{ name: 'login' }" class="panel-body">
+            {{ $t("login.hint") }}
+          </router-link>
+        </div>
         <transition name="fade">
           <router-view></router-view>
         </transition>

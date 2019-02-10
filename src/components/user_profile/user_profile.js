@@ -8,8 +8,8 @@ const UserProfile = {
     this.$store.commit('clearTimeline', { timeline: 'user' })
     this.$store.commit('clearTimeline', { timeline: 'favorites' })
     this.$store.commit('clearTimeline', { timeline: 'media' })
-    this.$store.dispatch('startFetching', ['user', this.fetchBy])
-    this.$store.dispatch('startFetching', ['media', this.fetchBy])
+    this.$store.dispatch('startFetching', { timeline: 'user', userId: this.fetchBy })
+    this.$store.dispatch('startFetching', { timeline: 'media', userId: this.fetchBy })
     this.startFetchFavorites()
     if (!this.user.id) {
       this.$store.dispatch('fetchUser', this.fetchBy)
@@ -58,17 +58,23 @@ const UserProfile = {
     },
     isExternal () {
       return this.$route.name === 'external-user-profile'
+    },
+    followsTabVisible () {
+      return this.isUs || !this.user.hide_follows
+    },
+    followersTabVisible () {
+      return this.isUs || !this.user.hide_followers
     }
   },
   methods: {
     startFetchFavorites () {
       if (this.isUs) {
-        this.$store.dispatch('startFetching', ['favorites', this.fetchBy])
+        this.$store.dispatch('startFetching', { timeline: 'favorites', userId: this.fetchBy })
       }
     },
     startUp () {
-      this.$store.dispatch('startFetching', ['user', this.fetchBy])
-      this.$store.dispatch('startFetching', ['media', this.fetchBy])
+      this.$store.dispatch('startFetching', { timeline: 'user', userId: this.fetchBy })
+      this.$store.dispatch('startFetching', { timeline: 'media', userId: this.fetchBy })
 
       this.startFetchFavorites()
     },

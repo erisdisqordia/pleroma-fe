@@ -30,8 +30,17 @@
               <label for="account-no-rich-text">{{$t('settings.no_rich_text_description')}}</label>
             </p>
             <p>
-              <input type="checkbox" v-model="newHideNetwork" id="account-hide-network">
-              <label for="account-hide-network">{{$t('settings.hide_network_description')}}</label>
+              <input type="checkbox" v-model="hideFollows" id="account-hide-follows">
+              <label for="account-hide-follows">{{$t('settings.hide_follows_description')}}</label>
+            </p>
+            <p>
+              <input type="checkbox" v-model="hideFollowers" id="account-hide-followers">
+              <label for="account-hide-followers">{{$t('settings.hide_followers_description')}}</label>
+            </p>
+            <p>
+              <input type="checkbox" v-model="showRole" id="account-show-role">
+              <label for="account-show-role" v-if="role === 'admin'">{{$t('settings.show_admin_badge')}}</label>
+              <label for="account-show-role" v-if="role === 'moderator'">{{$t('settings.show_moderator_badge')}}</label>
             </p>
             <button :disabled='newName && newName.length === 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
           </div>
@@ -179,6 +188,10 @@
 
   .name-changer {
     width: 100%;
+  }
+
+  .bg {
+    max-width: 100%;
   }
 }
 </style>

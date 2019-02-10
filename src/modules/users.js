@@ -271,7 +271,7 @@ const users = {
               }
 
               // Start getting fresh posts.
-              store.dispatch('startFetching', 'friends')
+              store.dispatch('startFetching', { timeline: 'friends' })
 
               // Get user mutes and follower info
               store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {

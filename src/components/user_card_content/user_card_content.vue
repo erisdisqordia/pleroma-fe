@@ -19,7 +19,9 @@
           </div>
 
           <router-link class='user-screen-name' :to="userProfileLink(user)">
-            <span class="handle">@{{user.screen_name}}</span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
+            <span class="handle">@{{user.screen_name}}
+              <span class="alert staff" v-if="!hideBio && !!visibleRole">{{visibleRole}}</span>
+            </span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </router-link>
         </div>
@@ -246,6 +248,15 @@
       flex: 0 1 auto;
       text-overflow: ellipsis;
       overflow: hidden;
+    }
+
+    // TODO use proper colors
+    .staff {
+      text-transform: capitalize;
+      color: $fallback--text;
+      color: var(--btnText, $fallback--text);
+      background-color: $fallback--fg;
+      background-color: var(--btn, $fallback--fg);
     }
   }
 

@@ -27,6 +27,11 @@ const settings = {
         : user.hideUserStats,
       hideUserStatsDefault: this.$t('settings.values.' + instance.hideUserStats),
 
+      hideFilteredStatusesLocal: typeof user.hideFilteredStatuses === 'undefined'
+        ? instance.hideFilteredStatuses
+        : user.hideFilteredStatuses,
+      hideFilteredStatusesDefault: this.$t('settings.values.' + instance.hideFilteredStatuses),
+
       notificationVisibilityLocal: user.notificationVisibility,
       replyVisibilityLocal: user.replyVisibility,
       loopVideoLocal: user.loopVideo,
@@ -45,6 +50,11 @@ const settings = {
         ? instance.subjectLineBehavior
         : user.subjectLineBehavior,
       subjectLineBehaviorDefault: instance.subjectLineBehavior,
+
+      postContentTypeLocal: typeof user.postContentType === 'undefined'
+        ? instance.postContentType
+        : user.postContentType,
+      postContentTypeDefault: instance.postContentType,
 
       alwaysShowSubjectInputLocal: typeof user.alwaysShowSubjectInput === 'undefined'
         ? instance.alwaysShowSubjectInput
@@ -95,6 +105,9 @@ const settings = {
     },
     hideUserStatsLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideUserStats', value })
+    },
+    hideFilteredStatusesLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hideFilteredStatuses', value })
     },
     hideNsfwLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideNsfw', value })
@@ -156,6 +169,9 @@ const settings = {
     },
     subjectLineBehaviorLocal (value) {
       this.$store.dispatch('setOption', { name: 'subjectLineBehavior', value })
+    },
+    postContentTypeLocal (value) {
+      this.$store.dispatch('setOption', { name: 'postContentType', value })
     },
     stopGifs (value) {
       this.$store.dispatch('setOption', { name: 'stopGifs', value })

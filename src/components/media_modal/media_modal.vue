@@ -8,6 +8,8 @@
       :controls="true"
       @click.stop.native="">
     </VideoAttachment>
+    <button title="Previous" class="modal-view-button-arrow modal-view-button-arrow--prev" v-if="canNavigate" @click.stop.prevent="goPrev"></button>
+    <button title="Next" class="modal-view-button-arrow modal-view-button-arrow--next" v-if="canNavigate" @click.stop.prevent="goNext"></button>
   </div>
 </template>
 
@@ -19,15 +21,81 @@
 .modal-view {
   z-index: 1000;
   position: fixed;
-  width: 100vw;
-  height: 100vh;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
+
+  &-button-arrow {
+    position: absolute;
+    display: block;
+    top: 50%;
+    margin-top: -50px;
+    width: 70px;
+    height: 100px;
+    border: 0;
+    padding: 0;
+    opacity: 0;
+    box-shadow: none;
+    background: none;
+    appearance: none;
+    overflow: visible;
+    cursor: pointer;
+    transition: opacity 333ms cubic-bezier(.4,0,.22,1);
+
+    &:before {
+      position: absolute;
+      top: 35px;
+      height: 30px;
+      width: 32px;
+      font-family: "fontello";
+      font-size: 14px;
+      line-height: 30px;
+      color: #FFF;
+      text-align: center;
+      background-color: rgba(0,0,0,.3);
+    }
+
+    &:hover,
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    
+    &#{&}#{&} {
+      &:hover {
+        opacity: 1;
+      }
+    }
+    
+    &--prev {
+      left: 0;
+
+      &:before {
+        left: 6px;
+        content: '\e80e';
+      }
+    }
+      
+    &--next {
+      right: 0;
+
+      &:before {
+        right: 6px;
+        content: '\e80d';
+      }
+    }
+  }
+
+  &:hover {
+    .modal-view-button-arrow {
+      opacity: .75;
+    }
+  }
 }
 
 .modal-image {

@@ -7,22 +7,43 @@
       <user-card-content :user="user" :switcher="false"></user-card-content>
     </div>
     <div class="name-and-screen-name" v-else>
-      <div :title="user.name" v-if="user.name_html" class="user-name">
-        <span v-html="user.name_html"></span>
+      <div :title="user.name" class="user-name">
+        <span v-if="user.name_html" v-html="user.name_html"></span>
+        <span v-else>{{ user.name }}</span>
         <span class="follows-you" v-if="!userExpanded && showFollows && user.follows_you">
           {{ currentUser.id == user.id ? $t('user_card.its_you') : $t('user_card.follows_you') }}
         </span>
       </div>
-      <div :title="user.name" v-else class="user-name">
-        {{ user.name }}
-        <span class="follows-you" v-if="!userExpanded && showFollows && user.follows_you">
-          {{ currentUser.id == user.id ? $t('user_card.its_you') : $t('user_card.follows_you') }}
-        </span>
+      <div class="user-link-action">
+        <router-link class='user-screen-name' :to="userProfileLink(user)">
+          @{{user.screen_name}}
+        </router-link>
+        <button 
+          v-if="showFollow" 
+          class="btn btn-default" 
+          @click="followUser" 
+          :disabled="followRequestInProgress"
+          :title="followRequestSent ? $t('user_card.follow_again') : ''"
+        >
+          <template v-if="followRequestInProgress">
+            {{ $t('user_card.follow_progress') }}
+          </template>
+          <template v-else-if="followRequestSent">
+            {{ $t('user_card.follow_sent') }}
+          </template>
+          <template v-else>
+            {{ $t('user_card.follow') }}
+          </template>
+        </button>
+        <button v-if="showActions && showFollows && following" class="btn btn-default" @click="unfollowUser" :disabled="followRequestInProgress">
+          <template v-if="followRequestInProgress">
+            {{ $t('user_card.follow_progress') }}
+          </template>
+          <template v-else>
+            {{ $t('user_card.follow_unfollow') }}
+          </template>
+        </button>
       </div>
-
-      <router-link class='user-screen-name' :to="userProfileLink(user)">
-        @{{user.screen_name}}
-      </router-link>
     </div>
     <div class="approval" v-if="showApproval">
       <button class="btn btn-default" @click="approveUser">{{ $t('user_card.approve') }}</button>
@@ -42,6 +63,9 @@
   text-align: left;
   width: 100%;
   .user-name {
+    display: flex;
+    justify-content: space-between;
+
     img {
       object-fit: contain;
       height: 16px;
@@ -49,11 +73,20 @@
       vertical-align: middle;
     }
   }
+  
+  .user-link-action {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    button {
+      margin-top: 3px;
+    }
+  }
 }
 
 .follows-you {
   margin-left: 2em;
-  float: right;
 }
 
 .card {

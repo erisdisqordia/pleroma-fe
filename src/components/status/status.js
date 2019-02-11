@@ -298,8 +298,8 @@ const Status = {
           if (tag) {
             const link = this.generateTagLink(tag)
             this.$router.push(link)
+            return
           }
-          return
         }
         window.open(target.href, '_blank')
       }

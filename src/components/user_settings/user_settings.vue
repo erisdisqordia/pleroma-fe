@@ -178,7 +178,7 @@
   }
 
   .banner {
-    max-width: 400px;
+    max-width: 100%;
   }
 
   .uploading {

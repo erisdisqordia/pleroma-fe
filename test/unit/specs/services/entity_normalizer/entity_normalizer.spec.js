@@ -241,7 +241,7 @@ describe('API Entities normalizer', () => {
         notice: makeMockStatusQvitter({ id: 444 }),
         from_profile: makeMockUserQvitter({ id: 'spurdo' })
       })
-      expect(parseNotification(notif)).to.have.property('id', '123')
+      expect(parseNotification(notif)).to.have.property('id', 123)
       expect(parseNotification(notif)).to.have.property('seen', false)
       expect(parseNotification(notif)).to.have.deep.property('status.id', '444')
       expect(parseNotification(notif)).to.have.deep.property('action.id', '444')
@@ -259,7 +259,7 @@ describe('API Entities normalizer', () => {
         is_seen: 1,
         from_profile: makeMockUserQvitter({ id: 'spurdo' })
       })
-      expect(parseNotification(notif)).to.have.property('id', '123')
+      expect(parseNotification(notif)).to.have.property('id', 123)
       expect(parseNotification(notif)).to.have.property('type', 'like')
       expect(parseNotification(notif)).to.have.property('seen', true)
       expect(parseNotification(notif)).to.have.deep.property('status.id', '4412')

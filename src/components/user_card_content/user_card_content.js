@@ -1,5 +1,6 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
+import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 export default {
@@ -92,69 +93,17 @@ export default {
   },
   methods: {
     followUser () {
-      const store = this.$store
       this.followRequestInProgress = true
-      store.state.api.backendInteractor.followUser(this.user.id)
-        .then((followedUser) => store.commit('addNewUsers', [followedUser]))
-        .then(() => {
-          // For locked users we just mark it that we sent the follow request
-          if (this.user.locked) {
-            this.followRequestInProgress = false
-            this.followRequestSent = true
-            return
-          }
-
-          if (this.user.following) {
-            // If we get result immediately, just stop.
-            this.followRequestInProgress = false
-            return
-          }
-
-          // But usually we don't get result immediately, so we ask server
-          // for updated user profile to confirm if we are following them
-          // Sometimes it takes several tries. Sometimes we end up not following
-          // user anyway, probably because they locked themselves and we
-          // don't know that yet.
-          // Recursive Promise, it will call itself up to 3 times.
-          const fetchUser = (attempt) => new Promise((resolve, reject) => {
-            setTimeout(() => {
-              store.state.api.backendInteractor.fetchUser({ id: this.user.id })
-                .then((user) => store.commit('addNewUsers', [user]))
-                .then(() => resolve([this.user.following, attempt]))
-                .catch((e) => reject(e))
-            }, 500)
-          }).then(([following, attempt]) => {
-            if (!following && attempt <= 3) {
-              // If we BE reports that we still not following that user - retry,
-              // increment attempts by one
-              return fetchUser(++attempt)
-            } else {
-              // If we run out of attempts, just return whatever status is.
-              return following
-            }
-          })
-
-          return fetchUser(1)
-            .then((following) => {
-              if (following) {
-                // We confirmed and everything its good.
-                this.followRequestInProgress = false
-              } else {
-                // If after all the tries, just treat it as if user is locked
-                this.followRequestInProgress = false
-                this.followRequestSent = true
-              }
-            })
-        })
+      requestFollow(this.user, this.$store).then(({sent}) => {
+        this.followRequestInProgress = false
+        this.followRequestSent = sent
+      })
     },
     unfollowUser () {
-      const store = this.$store
       this.followRequestInProgress = true
-      store.state.api.backendInteractor.unfollowUser(this.user.id)
-        .then((unfollowedUser) => store.commit('addNewUsers', [unfollowedUser]))
-        .then(() => {
-          this.followRequestInProgress = false
-        })
+      requestUnfollow(this.user, this.$store).then(() => {
+        this.followRequestInProgress = false
+      })
     },
     blockUser () {
       const store = this.$store

@@ -47,7 +47,7 @@
     cursor: pointer;
     transition: opacity 333ms cubic-bezier(.4,0,.22,1);
 
-    &:before {
+    &::before {
       position: absolute;
       top: 35px;
       height: 30px;
@@ -75,7 +75,7 @@
     &--prev {
       left: 0;
 
-      &:before {
+      &::before {
         left: 6px;
         content: '\e80e';
       }
@@ -84,7 +84,7 @@
     &--next {
       right: 0;
 
-      &:before {
+      &::before {
         right: 6px;
         content: '\e80d';
       }

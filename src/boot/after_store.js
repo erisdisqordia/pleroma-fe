@@ -55,7 +55,6 @@ const afterStoreSetup = ({ store, i18n }) => {
           }
 
           copyInstanceOption('nsfwCensorImage')
-          copyInstanceOption('theme')
           copyInstanceOption('background')
           copyInstanceOption('hidePostStats')
           copyInstanceOption('hideUserStats')
@@ -96,6 +95,9 @@ const afterStoreSetup = ({ store, i18n }) => {
             store.dispatch('initializeSocket')
           }
 
+          return store.dispatch('setTheme', config['theme'])
+        })
+        .then(() => {
           const router = new VueRouter({
             mode: 'history',
             routes: routes(store),

@@ -56,7 +56,7 @@
               </div>
               <h4 class="replies" v-if="inConversation && !noReplyLinks">
                 <small v-if="replies.length">Replies:</small>
-                <small class="reply-link" v-for="reply in replies">
+                <small class="reply-link" v-bind:key="reply.id" v-for="reply in replies">
                   <a href="#" @click.prevent="gotoOriginal(reply.id)" @mouseenter="replyEnter(reply.id, $event)" @mouseout="replyLeave()">{{reply.name}}&nbsp;</a>
                 </small>
               </h4>

@@ -19,7 +19,10 @@
         </li>
         <li v-if='currentUser && currentUser.locked'>
           <router-link :to="{ name: 'friend-requests' }">
-            {{ $t("nav.friend_requests") }}
+            {{ $t("nav.friend_requests")}}
+            <span v-if='currentUser.follow_request_count > 0' class="badge follow-request-count">
+              {{currentUser.follow_request_count}}
+            </span>
           </router-link>
         </li>
         <li>
@@ -50,6 +53,12 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.follow-request-count {
+  margin: -6px 10px;
+  background-color: $fallback--bg;
+  background-color: var(--input, $fallback--faint);
 }
 
 .nav-panel li {

@@ -386,6 +386,4 @@
   }
 }
 
-.floater {
-}
 </style>

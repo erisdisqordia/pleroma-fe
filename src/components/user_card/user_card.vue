@@ -10,40 +10,42 @@
       <div :title="user.name" class="user-name">
         <span v-if="user.name_html" v-html="user.name_html"></span>
         <span v-else>{{ user.name }}</span>
-        <span class="follows-you" v-if="!userExpanded && showFollows && user.follows_you">
-          {{ currentUser.id == user.id ? $t('user_card.its_you') : $t('user_card.follows_you') }}
-        </span>
       </div>
       <div class="user-link-action">
         <router-link class='user-screen-name' :to="userProfileLink(user)">
           @{{user.screen_name}}
         </router-link>
-        <button 
-          v-if="showFollow" 
-          class="btn btn-default" 
-          @click="followUser" 
-          :disabled="followRequestInProgress"
-          :title="followRequestSent ? $t('user_card.follow_again') : ''"
-        >
-          <template v-if="followRequestInProgress">
-            {{ $t('user_card.follow_progress') }}
-          </template>
-          <template v-else-if="followRequestSent">
-            {{ $t('user_card.follow_sent') }}
-          </template>
-          <template v-else>
-            {{ $t('user_card.follow') }}
-          </template>
-        </button>
-        <button v-if="showActions && showFollows && following" class="btn btn-default" @click="unfollowUser" :disabled="followRequestInProgress">
-          <template v-if="followRequestInProgress">
-            {{ $t('user_card.follow_progress') }}
-          </template>
-          <template v-else>
-            {{ $t('user_card.follow_unfollow') }}
-          </template>
-        </button>
       </div>
+    </div>
+    <div class="follow-box">
+      <span class="follows-you" v-if="showFollows && user.follows_you">
+        {{ currentUser.id == user.id ? $t('user_card.its_you') : $t('user_card.follows_you') }}
+      </span>
+      <button
+        v-if="showFollow"
+        class="btn btn-default"
+        @click="followUser"
+        :disabled="followRequestInProgress"
+        :title="followRequestSent ? $t('user_card.follow_again') : ''"
+      >
+        <template v-if="followRequestInProgress">
+          {{ $t('user_card.follow_progress') }}
+        </template>
+        <template v-else-if="followRequestSent">
+          {{ $t('user_card.follow_sent') }}
+        </template>
+        <template v-else>
+          {{ $t('user_card.follow') }}
+        </template>
+      </button>
+      <button v-if="showActions && following" class="btn btn-default" @click="unfollowUser" :disabled="followRequestInProgress">
+        <template v-if="followRequestInProgress">
+          {{ $t('user_card.follow_progress') }}
+        </template>
+        <template v-else>
+          {{ $t('user_card.follow_unfollow') }}
+        </template>
+      </button>
     </div>
     <div class="approval" v-if="showApproval">
       <button class="btn btn-default" @click="approveUser">{{ $t('user_card.approve') }}</button>
@@ -56,16 +58,13 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
-
 .name-and-screen-name {
   margin-left: 0.7em;
-  margin-top:0.0em;
+  margin-top: 0.0em;
   text-align: left;
   width: 100%;
-  .user-name {
-    display: flex;
-    justify-content: space-between;
 
+  .user-name {
     img {
       object-fit: contain;
       height: 16px;
@@ -73,21 +72,14 @@
       vertical-align: middle;
     }
   }
-  
+
   .user-link-action {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-
-    button {
-      margin-top: 3px;
-    }
   }
 }
 
-.follows-you {
-  margin-left: 2em;
-}
 
 .card {
   display: flex;
@@ -99,10 +91,34 @@
   border-bottom: 1px solid;
   margin: 0;
   border-bottom-color: $fallback--border;
-	border-bottom-color: var(--border, $fallback--border);
+  border-bottom-color: var(--border, $fallback--border);
 
   .avatar {
     padding: 0;
+  }
+
+  .avatar.still-image.avatar-compact {
+    width: 48px;
+    height: 48px;
+  }
+
+  .follow-box {
+    width: 15em;
+    text-align: center;
+    position: relative;
+
+    .follows-you {
+      color: $fallback--link;
+      color: var(--link, $fallback--link);
+    }
+
+    button {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 3px;
+    }
   }
 }
 

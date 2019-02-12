@@ -140,6 +140,7 @@
     "use_one_click_nsfw": "Abrir los adjuntos NSFW con un solo click.",
     "hide_post_stats": "Ocultar las estadísticas de las entradas (p.ej. el número de favoritos)",
     "hide_user_stats": "Ocultar las estadísticas del usuario (p.ej. el número de seguidores)",
+    "hide_filtered_statuses": "Ocultar estados filtrados",
     "import_followers_from_a_csv_file": "Importar personas que tú sigues a partir de un archivo csv",
     "import_theme": "Importar tema",
     "inputRadius": "Campos de entrada",

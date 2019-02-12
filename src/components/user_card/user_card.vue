@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <router-link :to="userProfileLink(user)">
-      <UserAvatar class="avatar" :compact="true" @click.prevent.native="toggleUserExpanded" :src="user.profile_image_url"/>
+      <UserAvatar class="avatar" @click.prevent.native="toggleUserExpanded" :src="user.profile_image_url"/>
     </router-link>
     <div class="usercard" v-if="userExpanded">
       <user-card-content :user="user" :switcher="false"></user-card-content>
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="follow-box">
-      <span class="follows-you" v-if="showFollows && user.follows_you">
+      <span class="faint" v-if="showFollows && user.follows_you">
         {{ currentUser.id == user.id ? $t('user_card.its_you') : $t('user_card.follows_you') }}
       </span>
       <button
@@ -97,27 +97,16 @@
     padding: 0;
   }
 
-  .avatar.still-image.avatar-compact {
-    width: 48px;
-    height: 48px;
-  }
-
   .follow-box {
     width: 15em;
     text-align: center;
     position: relative;
 
-    .follows-you {
-      color: $fallback--link;
-      color: var(--link, $fallback--link);
-    }
-
-    button {
+    .btn {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      padding: 3px;
     }
   }
 }

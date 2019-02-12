@@ -438,6 +438,8 @@
 
       .user-name {
         font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         img {
           width: 14px;

@@ -32,6 +32,16 @@ describe('The users module', () => {
 
       expect(user.muted).to.eql(false)
     })
+
+    it('sets oauth tokens', () => {
+      const state = cloneDeep(defaultState)
+      const tokens = [{ id: 1, token: 'bar' }]
+
+      mutations.addOAuthTokens(state, tokens)
+
+      expect(state.oauthTokens).to.have.length(1)
+      expect(state.oauthTokens).to.eql(tokens)
+    })
   })
 
   describe('getUserByName', () => {

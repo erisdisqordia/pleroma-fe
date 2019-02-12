@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import { compose } from 'vue-compose'
 import unescape from 'lodash/unescape'
 import get from 'lodash/get'
+=======
+import { unescape, truncate } from 'lodash'
+>>>>>>> Add OAuth Tokens management to settings
 
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import ImageCropper from '../image_cropper/image_cropper.vue'
@@ -62,6 +66,9 @@ const UserSettings = {
       activeTab: 'profile'
     }
   },
+  created () {
+    this.$store.dispatch('fetchTokens')
+  },
   components: {
     StyleSwitcher,
     TabSwitcher,
@@ -87,8 +94,20 @@ const UserSettings = {
         direct: { selected: this.newDefaultScope === 'direct' }
       }
     },
+<<<<<<< HEAD
     currentSaveStateNotice () {
       return this.$store.state.interface.settings.currentSaveStateNotice
+=======
+    oauthTokens () {
+      return this.$store.state.oauthTokens.tokens.map(oauthToken => {
+        return {
+          id: oauthToken.id,
+          token: truncate(oauthToken.token, { length: 15 }),
+          refreshToken: truncate(oauthToken.refresh_token, { length: 15 }),
+          validUntil: new Date(oauthToken.valid_until).toLocaleDateString()
+        }
+      })
+>>>>>>> Add OAuth Tokens management to settings
     }
   },
   methods: {
@@ -308,6 +327,11 @@ const UserSettings = {
     logout () {
       this.$store.dispatch('logout')
       this.$router.replace('/')
+    },
+    revokeToken (id) {
+      if(confirm('Are you sure?')) {
+        this.$store.dispatch('revokeToken', id)
+      }
     }
   }
 }

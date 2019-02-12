@@ -531,6 +531,23 @@ const fetchBlocks = ({page, credentials}) => {
   })
 }
 
+const fetchOAuthTokens = ({credentials}) => {
+  const url = '/api/oauth_tokens.json'
+
+  return fetch(url, {
+    headers: authHeaders(credentials)
+  }).then((data) => data.json())
+}
+
+const revokeOAuthToken = ({id, credentials}) => {
+  const url = `/api/oauth_tokens/${id}`
+
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'DELETE'
+  })
+}
+
 const suggestions = ({credentials}) => {
   return fetch(SUGGESTIONS_URL, {
     headers: authHeaders(credentials)
@@ -573,6 +590,8 @@ const apiService = {
   setUserMute,
   fetchMutes,
   fetchBlocks,
+  fetchOAuthTokens,
+  revokeOAuthToken,
   register,
   getCaptcha,
   updateAvatar,

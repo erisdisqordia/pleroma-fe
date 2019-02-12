@@ -65,6 +65,8 @@ const backendInteractorService = (credentials) => {
   const fetchMutes = () => apiService.fetchMutes({credentials})
   const fetchBlocks = (params) => apiService.fetchBlocks({credentials, ...params})
   const fetchFollowRequests = () => apiService.fetchFollowRequests({credentials})
+  const fetchOAuthTokens = () => apiService.fetchOAuthTokens({credentials})
+  const revokeOAuthToken = (id) => apiService.revokeOAuthToken({id, credentials})
 
   const getCaptcha = () => apiService.getCaptcha()
   const register = (params) => apiService.register(params)
@@ -96,6 +98,8 @@ const backendInteractorService = (credentials) => {
     setUserMute,
     fetchMutes,
     fetchBlocks,
+    fetchOAuthTokens,
+    revokeOAuthToken,
     register,
     getCaptcha,
     updateAvatar,

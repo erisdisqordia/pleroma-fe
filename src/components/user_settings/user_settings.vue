@@ -126,9 +126,9 @@
             <table class="oauth-tokens">
               <thead>
                 <tr>
-                  <th>Token</th>
-                  <th>Refresh Token</th>
-                  <th>Valid Until</th>
+                  <th>{{$t('settings.token')}}</th>
+                  <th>{{$t('settings.refresh_token')}}</th>
+                  <th>{{$t('settings.valid_until')}}</th>
                   <th></th>
                 </tr>
               </thead>
@@ -138,7 +138,9 @@
                   <td>{{oauthToken.refreshToken}}</td>
                   <td>{{oauthToken.validUntil}}</td>
                   <td class="actions">
-                    <button class="btn btn-default" @click="revokeToken(oauthToken.id)">Revoke</button>
+                    <button class="btn btn-default" @click="revokeToken(oauthToken.id)">
+                      {{$t('settings.revoke_token')}}
+                    </button>
                   </td>
                 </tr>
               </tbody>

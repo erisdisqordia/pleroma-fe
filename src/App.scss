@@ -175,8 +175,7 @@ input, textarea, .select {
       color: $fallback--text;
       color: var(--text, $fallback--text);
     }
-    &:disabled,
-    {
+    &:disabled {
       &,
       & + label,
       & + label::before {
@@ -641,10 +640,6 @@ nav {
   .selected {
     color: $fallback--lightText;
     color: var(--lightText, $fallback--lightText);
-  }
-
-  .text-format {
-    float: right;
   }
 
   div {

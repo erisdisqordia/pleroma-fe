@@ -329,7 +329,7 @@ const UserSettings = {
       this.$router.replace('/')
     },
     revokeToken (id) {
-      if(confirm('Are you sure?')) {
+      if (window.confirm('Are you sure?')) {
         this.$store.dispatch('revokeToken', id)
       }
     }

@@ -85,6 +85,15 @@ export const mutations = {
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
+  addBlocks (state, { blocks, page }) {
+    const user = state.currentUser
+    each(blocks, block => {
+      if (!find(user.blocks, { id: block.id })) {
+        user.blocks.push(block)
+      }
+    })
+    user.blocksPage = page + 1
+  },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
   },
@@ -136,6 +145,14 @@ const users = {
     fetchUser (store, id) {
       store.rootState.api.backendInteractor.fetchUser({ id })
         .then((user) => store.commit('addNewUsers', [user]))
+    },
+    fetchBlocks (store) {
+      const page = store.state.currentUser.blocksPage || 1
+      return store.rootState.api.backendInteractor.fetchBlocks({ page })
+        .then((blocks) => {
+          store.commit('addBlocks', { blocks, page })
+          return blocks
+        })
     },
     addFriends ({ rootState, commit }, fetchBy) {
       return new Promise((resolve, reject) => {

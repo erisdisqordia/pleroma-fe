@@ -10,8 +10,8 @@ import withLoadMore from '../../hocs/with_load_more/with_load_more'
 
 const BlockListWithLoadMore = withLoadMore(
   UserList,
-  (props, $store) => $store.dispatch('addFriends', $store.state.users.currentUser.id),
-  (props, $store) => get($store.getters.userById($store.state.users.currentUser.id), 'friends', [])
+  (props, $store) => $store.dispatch('fetchBlocks'),
+  (props, $store) => get($store.state.users.currentUser, 'blocks', [])
 )
 
 const UserSettings = {

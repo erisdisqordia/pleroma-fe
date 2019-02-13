@@ -18,6 +18,7 @@ const MENTIONS_URL = '/api/statuses/mentions.json'
 const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
+const BLOCKS_URL = '/api/statuses/blocks.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
@@ -519,6 +520,21 @@ const fetchMutes = ({credentials}) => {
   }).then((data) => data.json())
 }
 
+const fetchBlocks = ({page, credentials}) => {
+  let url = BLOCKS_URL
+  if (page) {
+    url = url + `?page=${page}`
+  }
+  return fetch(url, {
+    headers: authHeaders(credentials)
+  }).then((data) => {
+    if (data.ok) {
+      return data.json()
+    }
+    throw new Error('Error fetching blocks', data)
+  })
+}
+
 const suggestions = ({credentials}) => {
   return fetch(SUGGESTIONS_URL, {
     headers: authHeaders(credentials)
@@ -560,6 +576,7 @@ const apiService = {
   fetchAllFollowing,
   setUserMute,
   fetchMutes,
+  fetchBlocks,
   register,
   getCaptcha,
   updateAvatar,

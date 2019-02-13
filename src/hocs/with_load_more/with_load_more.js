@@ -48,7 +48,7 @@ const withLoadMore = (Component, fetchEntries, getEntries) => {
           fetchEntries(this.$props, this.$store).then((newEntries) => {
             this.error = false
             this.loading = false
-            this.bottomedOut = newEntries.length === 0
+            this.bottomedOut = !newEntries || newEntries.length === 0
           }).catch(() => {
             this.error = true
             this.loading = false

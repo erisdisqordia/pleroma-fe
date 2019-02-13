@@ -366,7 +366,9 @@
     "muted": "Muted",
     "per_day": "per day",
     "remote_follow": "Remote follow",
-    "statuses": "Statuses"
+    "statuses": "Statuses",
+    "unblock": "Unblock",
+    "unblock_progress": "Unblocking..."
   },
   "user_profile": {
     "timeline_title": "User Timeline"

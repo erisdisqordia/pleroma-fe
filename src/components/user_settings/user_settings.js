@@ -1,9 +1,18 @@
-import { unescape } from 'lodash'
+import unescape from 'lodash/unescape'
+import get from 'lodash/get'
 
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import ImageCropper from '../image_cropper/image_cropper.vue'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
+import UserList from '../user_list/user_list.vue'
+import withLoadMore from '../../hocs/with_load_more/with_load_more'
+
+const BlockListWithLoadMore = withLoadMore(
+  UserList,
+  (props, $store) => $store.dispatch('addFriends', $store.state.users.currentUser.id),
+  (props, $store) => get($store.getters.userById($store.state.users.currentUser.id), 'friends', [])
+)
 
 const UserSettings = {
   data () {
@@ -41,7 +50,8 @@ const UserSettings = {
   components: {
     StyleSwitcher,
     TabSwitcher,
-    ImageCropper
+    ImageCropper,
+    'block-list': BlockListWithLoadMore
   },
   computed: {
     user () {

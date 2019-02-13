@@ -9,7 +9,7 @@ import BlockCard from '../block_card/block_card.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
 import withList from '../../hocs/with_list/with_list'
 
-const BlockList = withList(BlockCard, entry => ({ user: entry }))
+const BlockList = withList(BlockCard, entry => ({ userId: entry.id }))
 const BlockListWithLoadMore = withLoadMore(
   BlockList,
   (props, $store) => $store.dispatch('fetchBlocks'),

@@ -154,6 +154,14 @@ const users = {
           return blocks
         })
     },
+    blockUser (store, id) {
+      return store.rootState.api.backendInteractor.blockUser(id)
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    unblockUser (store, id) {
+      return store.rootState.api.backendInteractor.unblockUser(id)
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
     addFriends ({ rootState, commit }, fetchBy) {
       return new Promise((resolve, reject) => {
         const user = rootState.users.usersObject[fetchBy]

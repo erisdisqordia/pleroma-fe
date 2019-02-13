@@ -1,11 +1,18 @@
 import BasicUserCard from '../basic_user_card/basic_user_card.vue'
 
 const BlockCard = {
-  props: ['user'],
+  props: ['userId'],
   data () {
     return {
-      progress: false,
-      updated: false
+      progress: false
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.getters.userById(this.userId)
+    },
+    blocked () {
+      return this.user.statusnet_blocking
     }
   },
   components: {
@@ -14,6 +21,15 @@ const BlockCard = {
   methods: {
     unblockUser () {
       this.progress = true
+      this.$store.dispatch('unblockUser', this.user.id).then(() => {
+        this.progress = false
+      })
+    },
+    blockUser () {
+      this.progress = true
+      this.$store.dispatch('blockUser', this.user.id).then(() => {
+        this.progress = false
+      })
     }
   }
 }

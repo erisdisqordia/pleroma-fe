@@ -368,7 +368,8 @@
     "remote_follow": "Remote follow",
     "statuses": "Statuses",
     "unblock": "Unblock",
-    "unblock_progress": "Unblocking..."
+    "unblock_progress": "Unblocking...",
+    "block_progress": "Blocking..."
   },
   "user_profile": {
     "timeline_title": "User Timeline"

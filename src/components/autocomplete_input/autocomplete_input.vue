@@ -4,8 +4,8 @@
       v-if="multiline"
       ref="textarea"
       rows="1"
-      :value="text" :class="classObj" :id="id" :placeholder="placeholder"
-      @input="text = $event.target.value, $emit('input', $event.target.value), autoResize && resize($event)" 
+      :value="value" :class="classObj" :id="id" :placeholder="placeholder"
+      @input="$emit('input', $event.target.value), autoResize && resize($event)" 
       @click="setCaret"
       @keyup="setCaret"
       @keydown.down="cycleForward"
@@ -22,8 +22,8 @@
     <input
       v-else
       ref="textarea"
-      :value="text" :class="classObj" :id="id" :placeholder="placeholder"
-      @input="text = $event.target.value, $emit('input', $event.target.value), autoResize && resize($event)" 
+      :value="value" :class="classObj" :id="id" :placeholder="placeholder"
+      @input="$emit('input', $event.target.value), autoResize && resize($event)" 
       @click="setCaret"
       @keyup="setCaret"
       @keydown.down="cycleForward"

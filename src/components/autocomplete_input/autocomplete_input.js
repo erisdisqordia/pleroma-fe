@@ -113,7 +113,7 @@ const AutoCompleteInput = {
     },
     replace (replacement) {
       this.$emit('input', Completion.replaceWord(this.value, this.wordAtCaret, replacement))
-      const el = this.$el.querySelector('textarea')
+      const el = this.$el.querySelector('textarea') || this.$el.querySelector('input')
       el.focus()
       this.caret = 0
     },

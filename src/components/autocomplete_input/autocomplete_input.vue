@@ -13,11 +13,11 @@
       @keydown.shift.tab="cycleBackward"
       @keydown.tab="cycleForward"
       @keydown.enter="replaceCandidate"
-      @drop="drop && drop()"
-      @dragover.prevent="dragoverPrevent && dragoverPrevent()"
-      @paste="paste && paste()"
-      @keydown.meta.enter="keydownMetaEnter && keydownMetaEnter()"
-      @keyup.ctrl.enter="keyupCtrlEnter && keyupCtrlEnter()">
+      @drop="drop && drop($event)"
+      @dragover.prevent="dragoverPrevent && dragoverPrevent($event)"
+      @paste="paste && paste($event)"
+      @keydown.meta.enter="keydownMetaEnter && keydownMetaEnter($event)"
+      @keyup.ctrl.enter="keyupCtrlEnter && keyupCtrlEnter($event)">
     </textarea>
     <input
       v-else
@@ -31,11 +31,11 @@
       @keydown.shift.tab="cycleBackward"
       @keydown.tab="cycleForward"
       @keydown.enter="replaceCandidate"
-      @drop="drop && drop()"
-      @dragover.prevent="dragoverPrevent && dragoverPrevent()"
-      @paste="paste && paste()"
-      @keydown.meta.enter="keydownMetaEnter && keydownMetaEnter()"
-      @keyup.ctrl.enter="keyupCtrlEnter && keyupCtrlEnter()"/>
+      @drop="drop && drop($event)"
+      @dragover.prevent="dragoverPrevent && dragoverPrevent($event)"
+      @paste="paste && paste($event)"
+      @keydown.meta.enter="keydownMetaEnter && keydownMetaEnter($event)"
+      @keyup.ctrl.enter="keyupCtrlEnter && keyupCtrlEnter($event)"/>
     <div style="position:relative;" v-if="candidates">
       <div class="autocomplete-panel">
         <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">

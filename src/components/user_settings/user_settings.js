@@ -1,3 +1,4 @@
+import { compose } from 'vue-compose'
 import unescape from 'lodash/unescape'
 import get from 'lodash/get'
 
@@ -10,19 +11,23 @@ import MuteCard from '../mute_card/mute_card.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import withList from '../../hocs/with_list/with_list'
 
-const BlockList = withList({ getEntryProps: userId => ({ userId }) })(BlockCard)
-const BlockListWithSubscription = withSubscription({
-  fetch: (props, $store) => $store.dispatch('fetchBlocks'),
-  select: (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
-  contentPropName: 'entries'
-})(BlockList)
+const BlockList = compose(
+  withSubscription({
+    fetch: (props, $store) => $store.dispatch('fetchBlocks'),
+    select: (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
+    contentPropName: 'entries'
+  }),
+  withList({ getEntryProps: userId => ({ userId }) })
+)(BlockCard)
 
-const MuteList = withList({ getEntryProps: userId => ({ userId }) })(MuteCard)
-const MuteListWithSubscription = withSubscription({
-  fetch: (props, $store) => $store.dispatch('fetchMutes'),
-  select: (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
-  contentPropName: 'entries'
-})(MuteList)
+const MuteList = compose(
+  withSubscription({
+    fetch: (props, $store) => $store.dispatch('fetchMutes'),
+    select: (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
+    contentPropName: 'entries'
+  }),
+  withList({ getEntryProps: userId => ({ userId }) })
+)(MuteCard)
 
 const UserSettings = {
   data () {
@@ -61,8 +66,8 @@ const UserSettings = {
     StyleSwitcher,
     TabSwitcher,
     ImageCropper,
-    'block-list': BlockListWithSubscription,
-    'mute-list': MuteListWithSubscription
+    BlockList,
+    MuteList
   },
   computed: {
     user () {

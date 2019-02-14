@@ -16,16 +16,22 @@
         :placeholder="$t('post_status.content_warning')"
         v-model="newStatus.spoilerText"
         class="form-cw">
-      <auto-complete-input v-model="newStatus.status"
-        :classObj="{ 'form-control': true }"
-        :placeholder="$t('post_status.default')"
-        :autoResize="true"
-        :multiline="true"
-        :drop="fileDrop"
-        :dragoverPrevent="fileDrag"
-        :paste="paste"
-        :keydownMetaEnter="postStatusCopy"
-        :keyupCtrlEnter="postStatusCopy"/>
+      <textarea
+        ref="textarea"
+        @click="setCaret"
+        @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control"
+        @keydown.down="cycleForward"
+        @keydown.up="cycleBackward"
+        @keydown.shift.tab="cycleBackward"
+        @keydown.tab="cycleForward"
+        @keydown.enter="replaceCandidate"
+        @keydown.meta.enter="postStatus(newStatus)"
+        @keyup.ctrl.enter="postStatus(newStatus)"
+        @drop="fileDrop"
+        @dragover.prevent="fileDrag"
+        @input="resize"
+        @paste="paste">
+      </textarea>
       <div class="visibility-tray">
         <span class="text-format" v-if="formattingOptionsEnabled">
           <label for="post-content-type" class="select">
@@ -46,6 +52,17 @@
         </div>
       </div>
     </div>
+    <div style="position:relative;" v-if="candidates">
+        <div class="autocomplete-panel">
+          <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">
+            <div class="autocomplete" :class="{ highlighted: candidate.highlighted }">
+              <span v-if="candidate.img"><img :src="candidate.img"></img></span>
+              <span v-else>{{candidate.utf}}</span>
+              <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class='form-bottom'>
         <media-upload ref="mediaUpload" @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="uploadFailed" :drop-files="dropFiles"></media-upload>
 
@@ -232,6 +249,53 @@
   .icon-cancel {
     cursor: pointer;
     z-index: 4;
+  }
+
+  .autocomplete-panel {
+    margin: 0 0.5em 0 0.5em;
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    position: absolute;
+    z-index: 1;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+    // this doesn't match original but i don't care, making it uniform.
+    box-shadow: var(--popupShadow);
+    min-width: 75%;
+    background: $fallback--bg;
+    background: var(--bg, $fallback--bg);
+    color: $fallback--lightText;
+    color: var(--lightText, $fallback--lightText);
+  }
+
+  .autocomplete {
+    cursor: pointer;
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    display: flex;
+
+    img {
+      width: 24px;
+      height: 24px;
+      border-radius: $fallback--avatarRadius;
+      border-radius: var(--avatarRadius, $fallback--avatarRadius);
+      object-fit: contain;
+    }
+
+    span {
+      line-height: 24px;
+      margin: 0 0.1em 0 0.2em;
+    }
+
+    small {
+      margin-left: .5em;
+      color: $fallback--faint;
+      color: var(--faint, $fallback--faint);
+    }
+
+    &.highlighted {
+      background-color: $fallback--fg;
+      background-color: var(--lightBg, $fallback--fg);
+    }
   }
 }
 </style>

@@ -55,6 +55,9 @@ const FollowList = {
       }
     }
   },
+  watch: {
+    '$route': 'fetchEntries'
+  },
   components: {
     UserCard
   }

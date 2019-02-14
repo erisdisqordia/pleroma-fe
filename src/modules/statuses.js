@@ -296,7 +296,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
           notifObj.image = action.attachments[0].url
         }
 
-        if (notification.fresh && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.ntype)) {
+        if (!notification.seen && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.type)) {
           let notification = new window.Notification(title, notifObj)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.

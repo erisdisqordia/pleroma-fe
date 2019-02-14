@@ -303,6 +303,8 @@ const users = {
               const user = data
               // user.credentials = userCredentials
               user.credentials = accessToken
+              user.blockIds = []
+              user.muteIds = []
               commit('setCurrentUser', user)
               commit('addNewUsers', [user])
 
@@ -319,7 +321,7 @@ const users = {
               // Start getting fresh posts.
               store.dispatch('startFetching', { timeline: 'friends' })
 
-              // Get user mutes and follower info
+              // Get user mutes
               store.dispatch('fetchMutes')
 
               // Fetch our friends

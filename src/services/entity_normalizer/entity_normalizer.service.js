@@ -120,8 +120,6 @@ export const parseUser = (data) => {
   if (data.pleroma) {
     output.follow_request_count = data.pleroma.follow_request_count
   }
-  output.blockIds = []
-  output.muteIds = []
 
   return output
 }

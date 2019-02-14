@@ -160,6 +160,7 @@
 
   .hider {
     position: absolute;
+    right: 0;
     white-space: nowrap;
     margin: 10px;
     padding: 5px;

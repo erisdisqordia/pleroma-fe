@@ -165,6 +165,7 @@
     "lock_account_description": "Restrict your account to approved followers only",
     "loop_video": "Loop videos",
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
+    "mutes_tab": "Mutes",
     "play_videos_in_modal": "Play videos directly in the media viewer",
     "use_contain_fit": "Don't crop the attachment in thumbnails",
     "name": "Name",

@@ -6,7 +6,7 @@ import ImageCropper from '../image_cropper/image_cropper.vue'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 import BlockCard from '../block_card/block_card.vue'
-import withLoadMore from '../../hocs/with_load_more/with_load_more'
+import MuteCard from '../mute_card/mute_card.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import withList from '../../hocs/with_list/with_list'
 
@@ -15,6 +15,14 @@ const BlockListWithSubscription = withSubscription(
   BlockList,
   (props, $store) => $store.dispatch('fetchBlocks'),
   (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
+  'entries'
+)
+
+const MuteList = withList(MuteCard, userId => ({ userId }))
+const MuteListWithSubscription = withSubscription(
+  MuteList,
+  (props, $store) => $store.dispatch('fetchMutes'),
+  (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
   'entries'
 )
 
@@ -55,7 +63,8 @@ const UserSettings = {
     StyleSwitcher,
     TabSwitcher,
     ImageCropper,
-    'block-list': BlockListWithSubscription
+    'block-list': BlockListWithSubscription,
+    'mute-list': MuteListWithSubscription
   },
   computed: {
     user () {

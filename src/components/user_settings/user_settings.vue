@@ -166,6 +166,10 @@
         <div :label="$t('settings.blocks_tab')">
           <block-list :refresh="true" />
         </div>
+
+        <div :label="$t('settings.mutes_tab')">
+          <mute-list :refresh="true" />
+        </div>
       </tab-switcher>
     </div>
   </div>

@@ -89,6 +89,10 @@ export const mutations = {
     const user = state.currentUser
     user.blockIds = union(user.blockIds, blockIds)
   },
+  saveMutes (state, ids) {
+    const user = state.currentUser
+    user.muteIds = union(user.muteIds, ids)
+  },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
   },
@@ -155,6 +159,22 @@ const users = {
     },
     unblockUser (store, id) {
       return store.rootState.api.backendInteractor.unblockUser(id)
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    fetchMutes (store) {
+      return store.rootState.api.backendInteractor.fetchMutes()
+        .then((mutedUsers) => {
+          each(mutedUsers, (user) => { user.muted = true })
+          store.commit('addNewUsers', mutedUsers)
+          store.commit('saveMutes', map(mutedUsers, 'id'))
+        })
+    },
+    muteUser (store, id) {
+      return store.state.api.backendInteractor.setUserMute({ id, muted: true })
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    unmuteUser (store, id) {
+      return store.state.api.backendInteractor.setUserMute({ id, muted: false })
         .then((user) => store.commit('addNewUsers', [user]))
     },
     addFriends ({ rootState, commit }, fetchBy) {
@@ -300,10 +320,7 @@ const users = {
               store.dispatch('startFetching', { timeline: 'friends' })
 
               // Get user mutes and follower info
-              store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {
-                each(mutedUsers, (user) => { user.muted = true })
-                store.commit('addNewUsers', mutedUsers)
-              })
+              store.dispatch('fetchMutes')
 
               // Fetch our friends
               store.rootState.api.backendInteractor.fetchFriends({ id: user.id })

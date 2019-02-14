@@ -13,25 +13,39 @@ const withSubscription = ({
   const props = reject(originalProps, v => v === 'content')
 
   return Vue.component('withSubscription', {
+    props: [
+      ...props,
+      'refresh'               // boolean saying to force-fetch data whenever created
+    ],
     render (createElement) {
-      const props = {
-        props: {
-          ...omit(this.$props, 'refresh'),
-          [childPropName]: this.fetchedData
-        },
-        on: this.$listeners
-      }
-      return (
-        <div class="with-subscription">
-          {!this.error && !this.loading && <WrappedComponent {...props} />}
-          <div class="with-subscription-footer">
-            {this.error && <a onClick={this.fetchData} class="alert error">{this.$t('general.generic_error')}</a>}
-            {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}
+      if (!this.error && !this.loading) {
+        const props = {
+          props: {
+            ...omit(this.$props, 'refresh'),
+            [childPropName]: this.fetchedData
+          },
+          on: this.$listeners,
+          scopedSlots: this.$scopedSlots
+        }
+        const children = Object.keys(this.$slots).map(slot => createElement('template', { slot }, this.$slots[slot]))
+        return (
+          <div class="with-subscription">
+            <WrappedComponent {...props}>
+              {children}
+            </WrappedComponent>
           </div>
-        </div>
-      )
+        )
+      } else {
+        return (
+          <div class="with-subscription-loading">
+            {this.error
+              ? <a onClick={this.fetchData} class="alert error">{this.$t('general.generic_error')}</a>
+              : <i class="icon-spin3 animate-spin"/>
+            }
+          </div>
+        )
+      }
     },
-    props: [...props, 'refresh'],
     data () {
       return {
         loading: false,

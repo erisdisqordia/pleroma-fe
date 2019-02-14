@@ -18,11 +18,15 @@ const withLoadMore = ({
           ...this.$props,
           [childPropName]: this.entries
         },
-        on: this.$listeners
+        on: this.$listeners,
+        scopedSlots: this.$scopedSlots
       }
+      const children = Object.keys(this.$slots).map(slot => createElement('template', { slot }, this.$slots[slot]))
       return (
         <div class="with-load-more">
-          <WrappedComponent {...props} />
+          <WrappedComponent {...props}>
+            {children}
+          </WrappedComponent>
           <div class="with-load-more-footer">
             {this.error && <a onClick={this.fetchEntries} class="alert error">{this.$t('general.generic_error')}</a>}
             {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}

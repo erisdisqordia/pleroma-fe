@@ -7,13 +7,15 @@ import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 import BlockCard from '../block_card/block_card.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
+import withSubscription from '../../hocs/with_subscription/with_subscription'
 import withList from '../../hocs/with_list/with_list'
 
-const BlockList = withList(BlockCard, entry => ({ userId: entry.id }))
-const BlockListWithLoadMore = withLoadMore(
+const BlockList = withList(BlockCard, userId => ({ userId }))
+const BlockListWithSubscription = withSubscription(
   BlockList,
   (props, $store) => $store.dispatch('fetchBlocks'),
-  (props, $store) => get($store.state.users.currentUser, 'blocks', [])
+  (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
+  'entries'
 )
 
 const UserSettings = {
@@ -53,7 +55,7 @@ const UserSettings = {
     StyleSwitcher,
     TabSwitcher,
     ImageCropper,
-    'block-list': BlockListWithLoadMore
+    'block-list': BlockListWithSubscription
   },
   computed: {
     user () {

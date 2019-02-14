@@ -1,5 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import { compact, map, each, merge, find } from 'lodash'
+import { compact, map, each, merge, find, union } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
 import oauthApi from '../services/new_api/oauth'
@@ -85,14 +85,9 @@ export const mutations = {
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
-  addBlocks (state, { blocks, page }) {
+  addBlocks (state, blockIds) {
     const user = state.currentUser
-    each(blocks, block => {
-      if (!find(user.blocks, { id: block.id })) {
-        user.blocks.push(block)
-      }
-    })
-    user.blocksPage = page + 1
+    user.blockIds = union(user.blockIds, blockIds)
   },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
@@ -147,10 +142,10 @@ const users = {
         .then((user) => store.commit('addNewUsers', [user]))
     },
     fetchBlocks (store) {
-      const page = store.state.currentUser.blocksPage || 1
-      return store.rootState.api.backendInteractor.fetchBlocks({ page })
+      return store.rootState.api.backendInteractor.fetchBlocks()
         .then((blocks) => {
-          store.commit('addBlocks', { blocks, page })
+          store.commit('addBlocks', map(blocks, 'id'))
+          store.commit('addNewUsers', blocks)
           return blocks
         })
     },

@@ -34,7 +34,9 @@ const Gallery = {
       return rows
     },
     rowHeight () {
-      return itemsPerRow => ({ 'height': `${(this.width / (itemsPerRow + 0.6))}px` })
+      return itemsPerRow => ({
+        'height': this.attachments.length === 1 ? '260px' : `${(this.width / (itemsPerRow + 0.6))}px`
+      })
     },
     useContainFit () {
       return this.$store.state.config.useContainFit

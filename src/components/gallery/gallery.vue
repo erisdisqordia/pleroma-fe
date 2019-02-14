@@ -1,6 +1,11 @@
 <template>
   <div ref="galleryContainer" style="width: 100%;">
-    <div class="gallery-row" v-for="row in rows" :style="rowHeight(row.length)" :class="{ 'contain-fit': useContainFit, 'cover-fit': !useContainFit }">
+    <div
+      v-for="(row, row_num) in rows"
+      :key="row_num"
+      :style="rowHeight(row.length)"
+      :class="{ 'gallery-row': true, 'contain-fit': useContainFit, 'cover-fit': !useContainFit }"
+    >
       <attachment
         v-for="attachment in row"
         :setMedia="setMedia"

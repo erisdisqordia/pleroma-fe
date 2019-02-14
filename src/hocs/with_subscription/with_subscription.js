@@ -4,8 +4,12 @@ import isEmpty from 'lodash/isEmpty'
 import omit from 'lodash/omit'
 import './with_subscription.scss'
 
-const withSubscription = ({ fetch, select, contentPropName = 'content' }) => (WrapperComponent) => {
-  const originalProps = WrapperComponent.props || []
+const withSubscription = ({
+  fetch,                      // function to fetch entries and return a promise
+  select,                     // function to select data from store
+  childPropName = 'content'   // name of the prop to be passed into the wrapped component
+}) => (WrappedComponent) => {
+  const originalProps = WrappedComponent.props || []
   const props = reject(originalProps, v => v === 'content')
 
   return Vue.component('withSubscription', {
@@ -13,13 +17,13 @@ const withSubscription = ({ fetch, select, contentPropName = 'content' }) => (Wr
       const props = {
         props: {
           ...omit(this.$props, 'refresh'),
-          [contentPropName]: this.fetchedData
+          [childPropName]: this.fetchedData
         },
         on: this.$listeners
       }
       return (
         <div class="with-subscription">
-          {!this.error && !this.loading && <WrapperComponent {...props} />}
+          {!this.error && !this.loading && <WrappedComponent {...props} />}
           <div class="with-subscription-footer">
             {this.error && <a onClick={this.fetchData} class="alert error">{this.$t('general.generic_error')}</a>}
             {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}

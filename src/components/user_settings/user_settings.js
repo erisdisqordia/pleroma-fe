@@ -15,7 +15,7 @@ const BlockList = compose(
   withSubscription({
     fetch: (props, $store) => $store.dispatch('fetchBlocks'),
     select: (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
-    contentPropName: 'entries'
+    childPropName: 'entries'
   }),
   withList({ getEntryProps: userId => ({ userId }) })
 )(BlockCard)
@@ -24,7 +24,7 @@ const MuteList = compose(
   withSubscription({
     fetch: (props, $store) => $store.dispatch('fetchMutes'),
     select: (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
-    contentPropName: 'entries'
+    childPropName: 'entries'
   }),
   withList({ getEntryProps: userId => ({ userId }) })
 )(MuteCard)

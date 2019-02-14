@@ -3,7 +3,11 @@ import filter from 'lodash/filter'
 import isEmpty from 'lodash/isEmpty'
 import './with_load_more.scss'
 
-const withLoadMore = ({ fetch, select, entriesPropName = 'entries' }) => (WrappedComponent) => {
+const withLoadMore = ({
+  fetch,                      // function to fetch entries and return a promise
+  select,                     // function to select data from store
+  childPropName = 'entries'   // name of the prop to be passed into the wrapped component
+}) => (WrappedComponent) => {
   const originalProps = WrappedComponent.props || []
   const props = filter(originalProps, v => v !== 'entries')
 
@@ -12,7 +16,7 @@ const withLoadMore = ({ fetch, select, entriesPropName = 'entries' }) => (Wrappe
       const props = {
         props: {
           ...this.$props,
-          [entriesPropName]: this.entries
+          [childPropName]: this.entries
         },
         on: this.$listeners
       }

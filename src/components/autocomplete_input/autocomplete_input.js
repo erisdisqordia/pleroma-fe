@@ -24,7 +24,8 @@ const AutoCompleteInput = {
   data () {
     return {
       caret: 0,
-      highlighted: 0
+      highlighted: 0,
+      text: this.value
     }
   },
   computed: {
@@ -41,7 +42,7 @@ const AutoCompleteInput = {
       return (this.wordAtCaret || {}).word || ''
     },
     wordAtCaret () {
-      const word = Completion.wordAtPosition(this.value, this.caret - 1) || {}
+      const word = Completion.wordAtPosition(this.text, this.caret - 1) || {}
       return word
     },
     candidates () {
@@ -112,8 +113,8 @@ const AutoCompleteInput = {
       }
     },
     replace (replacement) {
-      this.$emit('input', Completion.replaceWord(this.value, this.wordAtCaret, replacement))
-      const el = this.$el.querySelector('textarea') || this.$el.querySelector('input')
+      this.text = Completion.replaceWord(this.text, this.wordAtCaret, replacement)
+      const el = this.$el.querySelector('textarea')
       el.focus()
       this.caret = 0
     },
@@ -124,7 +125,8 @@ const AutoCompleteInput = {
         e.preventDefault()
         const candidate = this.candidates[this.highlighted]
         const replacement = candidate.utf || (candidate.screen_name + ' ')
-        this.$emit('input', Completion.replaceWord(this.value, this.wordAtCaret, replacement))
+        this.text = Completion.replaceWord(this.text, this.wordAtCaret, replacement)
+        this.$emit('input', this.text)
         const el = this.$el.querySelector('textarea') || this.$el.querySelector('input')
         el.focus()
         this.caret = 0

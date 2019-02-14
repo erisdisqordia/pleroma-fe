@@ -1,0 +1,65 @@
+import Vue from 'vue'
+import filter from 'lodash/filter'
+import isEmpty from 'lodash/isEmpty'
+import './with_subscription.scss'
+
+const withSubscription = (Component, fetch, select, contentPropName = 'content') => {
+  const originalProps = Component.props || []
+  const props = filter(originalProps, v => v !== 'content')
+
+  return Vue.component('withSubscription', {
+    render (createElement) {
+      const props = {
+        props: {
+          ...this.$props,
+          [contentPropName]: this.fetchedData
+        },
+        on: this.$listeners
+      }
+      return (
+        <div class="with-subscription">
+          <Component {...props} />
+          <div class="with-subscription-footer">
+            {this.error && <a onClick={this.fetchData} class="alert error">{this.$t('general.generic_error')}</a>}
+            {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}
+          </div>
+        </div>
+      )
+    },
+    props,
+    data () {
+      return {
+        loading: false,
+        error: false
+      }
+    },
+    computed: {
+      fetchedData () {
+        return select(this.$props, this.$store)
+      }
+    },
+    created () {
+      if (isEmpty(this.fetchedData)) {
+        this.fetchData()
+      }
+    },
+    methods: {
+      fetchData () {
+        if (!this.loading) {
+          this.loading = true
+          this.error = false
+          fetch(this.$props, this.$store)
+            .then(() => {
+              this.loading = false
+            })
+            .catch(() => {
+              this.error = true
+              this.loading = false
+            })
+        }
+      }
+    }
+  })
+}
+
+export default withSubscription

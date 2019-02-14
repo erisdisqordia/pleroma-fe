@@ -1,10 +1,10 @@
 .with-subscription {
-  &-footer {
+  &-loading {
     padding: 10px;
     text-align: center;
-  }
 
-  .error {
-    font-size: 14px;
+    .error {
+      font-size: 14px;
+    }
   }
 }

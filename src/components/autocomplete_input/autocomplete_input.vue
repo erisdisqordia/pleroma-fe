@@ -4,8 +4,8 @@
       v-if="multiline"
       ref="textarea"
       rows="1"
-      :value="text" :class="classObj" :id="id" :placeholder="placeholder"
-      @input="text = $event.target.value, $emit('input', $event.target.value), autoResize && resize($event)" 
+      :value="value" :class="classObj" :id="id" :placeholder="placeholder"
+      @input="$emit('input', $event.target.value), autoResize && resize($event)" 
       @click="setCaret"
       @keyup="setCaret"
       @keydown.down="cycleForward"
@@ -13,17 +13,17 @@
       @keydown.shift.tab="cycleBackward"
       @keydown.tab="cycleForward"
       @keydown.enter="replaceCandidate"
-      @drop="drop && drop()"
-      @dragover.prevent="dragoverPrevent && dragoverPrevent()"
-      @paste="paste && paste()"
-      @keydown.meta.enter="keydownMetaEnter && keydownMetaEnter()"
-      @keyup.ctrl.enter="keyupCtrlEnter && keyupCtrlEnter()">
+      @drop="drop && drop($event)"
+      @dragover.prevent="dragoverPrevent && dragoverPrevent($event)"
+      @paste="paste && paste($event)"
+      @keydown.meta.enter="keydownMetaEnter && keydownMetaEnter($event)"
+      @keyup.ctrl.enter="keyupCtrlEnter && keyupCtrlEnter($event)">
     </textarea>
     <input
       v-else
       ref="textarea"
-      :value="text" :class="classObj" :id="id" :placeholder="placeholder"
-      @input="text = $event.target.value, $emit('input', $event.target.value), autoResize && resize($event)" 
+      :value="value" :class="classObj" :id="id" :placeholder="placeholder"
+      @input="$emit('input', $event.target.value), autoResize && resize($event)" 
       @click="setCaret"
       @keyup="setCaret"
       @keydown.down="cycleForward"
@@ -31,11 +31,11 @@
       @keydown.shift.tab="cycleBackward"
       @keydown.tab="cycleForward"
       @keydown.enter="replaceCandidate"
-      @drop="drop && drop()"
-      @dragover.prevent="dragoverPrevent && dragoverPrevent()"
-      @paste="paste && paste()"
-      @keydown.meta.enter="keydownMetaEnter && keydownMetaEnter()"
-      @keyup.ctrl.enter="keyupCtrlEnter && keyupCtrlEnter()"/>
+      @drop="drop && drop($event)"
+      @dragover.prevent="dragoverPrevent && dragoverPrevent($event)"
+      @paste="paste && paste($event)"
+      @keydown.meta.enter="keydownMetaEnter && keydownMetaEnter($event)"
+      @keyup.ctrl.enter="keyupCtrlEnter && keyupCtrlEnter($event)"/>
     <div style="position:relative;" v-if="candidates">
       <div class="autocomplete-panel">
         <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">

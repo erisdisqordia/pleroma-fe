@@ -1,20 +1,28 @@
 import Vue from 'vue'
 import filter from 'lodash/filter'
+import isEmpty from 'lodash/isEmpty'
 import './with_load_more.scss'
 
-const withLoadMore = (Component, fetchEntries, getEntries) => {
+const withLoadMore = (Component, fetch, select, entriesPropName = 'entries') => {
   const originalProps = Component.props || []
   const props = filter(originalProps, v => v !== 'entries')
 
   return Vue.component('withLoadMore', {
     render (createElement) {
+      const props = {
+        props: {
+          ...this.$props,
+          [entriesPropName]: this.entries
+        },
+        on: this.$listeners
+      }
       return (
         <div class="with-load-more">
-          <Component entries={this.entries} />
+          <Component {...props} />
           <div class="with-load-more-footer">
-            {this.error && <a onClick={this.fetch} class="alert error">{this.$t('general.generic_error')}</a>}
+            {this.error && <a onClick={this.fetchEntries} class="alert error">{this.$t('general.generic_error')}</a>}
             {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}
-            {!this.error && !this.loading && !this.bottomedOut && <a onClick={this.fetch}>{this.$t('general.more')}</a>}
+            {!this.error && !this.loading && !this.bottomedOut && <a onClick={this.fetchEntries}>{this.$t('general.more')}</a>}
           </div>
         </div>
       )
@@ -29,30 +37,32 @@ const withLoadMore = (Component, fetchEntries, getEntries) => {
     },
     computed: {
       entries () {
-        return getEntries(this.$props, this.$store) || []
+        return select(this.$props, this.$store) || []
       }
     },
     created () {
       window.addEventListener('scroll', this.scrollLoad)
       if (this.entries.length === 0) {
-        this.fetch()
+        this.fetchEntries()
       }
     },
     destroyed () {
       window.removeEventListener('scroll', this.scrollLoad)
     },
     methods: {
-      fetch () {
+      fetchEntries () {
         if (!this.loading) {
           this.loading = true
-          fetchEntries(this.$props, this.$store).then((newEntries) => {
-            this.error = false
-            this.loading = false
-            this.bottomedOut = !newEntries || newEntries.length === 0
-          }).catch(() => {
-            this.error = true
-            this.loading = false
-          })
+          this.error = false
+          fetch(this.$props, this.$store)
+            .then((newEntries) => {
+              this.loading = false
+              this.bottomedOut = isEmpty(newEntries)
+            })
+            .catch(() => {
+              this.loading = false
+              this.error = true
+            })
         }
       },
       scrollLoad (e) {
@@ -63,7 +73,7 @@ const withLoadMore = (Component, fetchEntries, getEntries) => {
           this.$el.offsetHeight > 0 &&
           (window.innerHeight + window.pageYOffset) >= (height - 750)
         ) {
-          this.fetch()
+          this.fetchEntries()
         }
       }
     }

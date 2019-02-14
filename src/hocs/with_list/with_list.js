@@ -12,15 +12,18 @@ const withList = (Component, getEntryProps = defaultEntryPropsGetter, getKey = d
           {map(this.entries, (entry, index) => {
             const props = {
               key: getKey(entry, index),
-              ...this.$props.entryProps,
-              ...getEntryProps(entry, index)
+              props: {
+                ...this.$props.entryProps,
+                ...getEntryProps(entry, index)
+              },
+              on: this.$props.entryListeners
             }
-            return <Component {...{ attrs: props }} />
+            return <Component {...props} />
           })}
         </div>
       )
     },
-    props: ['entries', 'entryProps']
+    props: ['entries', 'entryProps', 'entryListeners']
   })
 }
 

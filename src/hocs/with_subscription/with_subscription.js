@@ -1,24 +1,25 @@
 import Vue from 'vue'
-import filter from 'lodash/filter'
+import reject from 'lodash/reject'
 import isEmpty from 'lodash/isEmpty'
+import omit from 'lodash/omit'
 import './with_subscription.scss'
 
 const withSubscription = (Component, fetch, select, contentPropName = 'content') => {
   const originalProps = Component.props || []
-  const props = filter(originalProps, v => v !== 'content')
+  const props = reject(originalProps, v => v === 'content')
 
   return Vue.component('withSubscription', {
     render (createElement) {
       const props = {
         props: {
-          ...this.$props,
+          ...omit(this.$props, 'refresh'),
           [contentPropName]: this.fetchedData
         },
         on: this.$listeners
       }
       return (
         <div class="with-subscription">
-          <Component {...props} />
+          {!this.error && !this.loading && <Component {...props} />}
           <div class="with-subscription-footer">
             {this.error && <a onClick={this.fetchData} class="alert error">{this.$t('general.generic_error')}</a>}
             {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}
@@ -26,7 +27,7 @@ const withSubscription = (Component, fetch, select, contentPropName = 'content')
         </div>
       )
     },
-    props,
+    props: [...props, 'refresh'],
     data () {
       return {
         loading: false,
@@ -39,7 +40,7 @@ const withSubscription = (Component, fetch, select, contentPropName = 'content')
       }
     },
     created () {
-      if (isEmpty(this.fetchedData)) {
+      if (this.refresh || isEmpty(this.fetchedData)) {
         this.fetchData()
       }
     },

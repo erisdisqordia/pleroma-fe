@@ -164,7 +164,7 @@
         </div>
         
         <div :label="$t('settings.blocks_tab')">
-          <block-list id="123" />
+          <block-list :refresh="true" />
         </div>
       </tab-switcher>
     </div>

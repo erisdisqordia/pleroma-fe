@@ -521,11 +521,7 @@ const fetchMutes = ({credentials}) => {
 }
 
 const fetchBlocks = ({page, credentials}) => {
-  let url = BLOCKS_URL
-  if (page) {
-    url = url + `?page=${page}`
-  }
-  return fetch(url, {
+  return fetch(BLOCKS_URL, {
     headers: authHeaders(credentials)
   }).then((data) => {
     if (data.ok) {

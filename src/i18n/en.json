@@ -177,6 +177,8 @@
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
     "no_rich_text_description": "Strip rich text formatting from all posts",
+    "no_blocks": "No blocks",
+    "no_mutes": "No mutes",
     "hide_follows_description": "Don't show who I'm following",
     "hide_followers_description": "Don't show who's following me",
     "show_admin_badge": "Show Admin badge in my profile",

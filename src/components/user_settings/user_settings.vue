@@ -165,13 +165,13 @@
         
         <div :label="$t('settings.blocks_tab')">
           <block-list :refresh="true">
-            <template slot="empty">No blocks</template>
+            <template slot="empty">{{$t('settings.no_blocks')}}</template>
           </block-list>
         </div>
 
         <div :label="$t('settings.mutes_tab')">
           <mute-list :refresh="true">
-            <template slot="empty">No mutes</template>
+            <template slot="empty">{{$t('settings.no_mutes')}}</template>
           </mute-list>
         </div>
       </tab-switcher>

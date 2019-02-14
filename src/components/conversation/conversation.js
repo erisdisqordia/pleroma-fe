@@ -9,9 +9,9 @@ const sortById = (a, b) => {
   if (isSeqA && isSeqB) {
     return seqA < seqB ? -1 : 1
   } else if (isSeqA && !isSeqB) {
-    return 1
-  } else if (!isSeqA && isSeqB) {
     return -1
+  } else if (!isSeqA && isSeqB) {
+    return 1
   } else {
     return a.id < b.id ? -1 : 1
   }

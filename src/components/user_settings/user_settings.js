@@ -2,7 +2,6 @@ import { unescape } from 'lodash'
 
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
-import AutoCompleteInput from '../autocomplete_input/autocomplete_input.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 
 const UserSettings = {
@@ -42,8 +41,7 @@ const UserSettings = {
   },
   components: {
     StyleSwitcher,
-    TabSwitcher,
-    AutoCompleteInput
+    TabSwitcher
   },
   computed: {
     user () {

@@ -3,8 +3,8 @@ import filter from 'lodash/filter'
 import isEmpty from 'lodash/isEmpty'
 import './with_load_more.scss'
 
-const withLoadMore = (Component, fetch, select, entriesPropName = 'entries') => {
-  const originalProps = Component.props || []
+const withLoadMore = ({ fetch, select, entriesPropName = 'entries' }) => (WrappedComponent) => {
+  const originalProps = WrappedComponent.props || []
   const props = filter(originalProps, v => v !== 'entries')
 
   return Vue.component('withLoadMore', {
@@ -18,7 +18,7 @@ const withLoadMore = (Component, fetch, select, entriesPropName = 'entries') => 
       }
       return (
         <div class="with-load-more">
-          <Component {...props} />
+          <WrappedComponent {...props} />
           <div class="with-load-more-footer">
             {this.error && <a onClick={this.fetchEntries} class="alert error">{this.$t('general.generic_error')}</a>}
             {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}

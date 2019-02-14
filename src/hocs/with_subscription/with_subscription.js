@@ -4,8 +4,8 @@ import isEmpty from 'lodash/isEmpty'
 import omit from 'lodash/omit'
 import './with_subscription.scss'
 
-const withSubscription = (Component, fetch, select, contentPropName = 'content') => {
-  const originalProps = Component.props || []
+const withSubscription = ({ fetch, select, contentPropName = 'content' }) => (WrapperComponent) => {
+  const originalProps = WrapperComponent.props || []
   const props = reject(originalProps, v => v === 'content')
 
   return Vue.component('withSubscription', {
@@ -19,7 +19,7 @@ const withSubscription = (Component, fetch, select, contentPropName = 'content')
       }
       return (
         <div class="with-subscription">
-          {!this.error && !this.loading && <Component {...props} />}
+          {!this.error && !this.loading && <WrapperComponent {...props} />}
           <div class="with-subscription-footer">
             {this.error && <a onClick={this.fetchData} class="alert error">{this.$t('general.generic_error')}</a>}
             {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}

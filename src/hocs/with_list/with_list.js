@@ -4,8 +4,8 @@ import map from 'lodash/map'
 const defaultEntryPropsGetter = entry => ({ entry })
 const defaultKeyGetter = entry => entry.id
 
-const withList = (Component, getEntryProps = defaultEntryPropsGetter, getKey = defaultKeyGetter) => {
-  return Vue.component('withList', {
+const withList = ({ getEntryProps = defaultEntryPropsGetter, getKey = defaultKeyGetter }) => (ItemComponent) => (
+  Vue.component('withList', {
     render (createElement) {
       return (
         <div class="with-list">
@@ -18,13 +18,13 @@ const withList = (Component, getEntryProps = defaultEntryPropsGetter, getKey = d
               },
               on: this.$props.entryListeners
             }
-            return <Component {...props} />
+            return <ItemComponent {...props} />
           })}
         </div>
       )
     },
     props: ['entries', 'entryProps', 'entryListeners']
   })
-}
+)
 
 export default withList

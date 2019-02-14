@@ -10,21 +10,19 @@ import MuteCard from '../mute_card/mute_card.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import withList from '../../hocs/with_list/with_list'
 
-const BlockList = withList(BlockCard, userId => ({ userId }))
-const BlockListWithSubscription = withSubscription(
-  BlockList,
-  (props, $store) => $store.dispatch('fetchBlocks'),
-  (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
-  'entries'
-)
+const BlockList = withList({ getEntryProps: userId => ({ userId }) })(BlockCard)
+const BlockListWithSubscription = withSubscription({
+  fetch: (props, $store) => $store.dispatch('fetchBlocks'),
+  select: (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
+  contentPropName: 'entries'
+})(BlockList)
 
-const MuteList = withList(MuteCard, userId => ({ userId }))
-const MuteListWithSubscription = withSubscription(
-  MuteList,
-  (props, $store) => $store.dispatch('fetchMutes'),
-  (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
-  'entries'
-)
+const MuteList = withList({ getEntryProps: userId => ({ userId }) })(MuteCard)
+const MuteListWithSubscription = withSubscription({
+  fetch: (props, $store) => $store.dispatch('fetchMutes'),
+  select: (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
+  contentPropName: 'entries'
+})(MuteList)
 
 const UserSettings = {
   data () {

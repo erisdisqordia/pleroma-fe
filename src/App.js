@@ -68,8 +68,12 @@ export default {
     logo () { return this.$store.state.instance.logo },
     bgStyle () {
       return {
-        '--body-background-image': `url(${this.background})`,
         'background-image': `url(${this.background})`
+      }
+    },
+    bgAppStyle () {
+      return {
+        '--body-background-image': `url(${this.background})`
       }
     },
     sitename () { return this.$store.state.instance.name },

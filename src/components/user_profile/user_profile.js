@@ -16,7 +16,7 @@ const UserProfile = {
     }
   },
   destroyed () {
-    this.cleanUp(this.userId)
+    this.cleanUp()
   },
   computed: {
     timeline () {

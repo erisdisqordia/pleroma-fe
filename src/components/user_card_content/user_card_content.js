@@ -93,27 +93,55 @@ export default {
   },
   methods: {
     followUser () {
+      const store = this.$store
       this.followRequestInProgress = true
-      requestFollow(this.user, this.$store).then(({sent}) => {
+      requestFollow(this.user, store).then(({sent}) => {
         this.followRequestInProgress = false
         this.followRequestSent = sent
+
+        store.dispatch('stopFetching', 'friends')
+        store.commit('clearTimeline', { timeline: 'friends' })
+        store.dispatch('startFetching', { timeline: 'friends' })
       })
     },
     unfollowUser () {
+      const store = this.$store
       this.followRequestInProgress = true
-      requestUnfollow(this.user, this.$store).then(() => {
+      requestUnfollow(this.user, store).then(() => {
         this.followRequestInProgress = false
+
+        store.dispatch('stopFetching', 'friends')
+        store.commit('clearTimeline', { timeline: 'friends' })
+        store.dispatch('startFetching', { timeline: 'friends' })
       })
     },
     blockUser () {
       const store = this.$store
       store.state.api.backendInteractor.blockUser(this.user.id)
-        .then((blockedUser) => store.commit('addNewUsers', [blockedUser]))
+        .then((blockedUser) => {
+          store.commit('addNewUsers', [blockedUser])
+
+          store.dispatch('stopFetching', 'friends')
+          store.commit('clearTimeline', { timeline: 'friends' })
+          store.dispatch('startFetching', { timeline: 'friends' })
+
+          store.commit('clearTimeline', { timeline: 'public' })
+          store.commit('clearTimeline', { timeline: 'publicAndExternal' })
+        })
     },
     unblockUser () {
       const store = this.$store
       store.state.api.backendInteractor.unblockUser(this.user.id)
-        .then((unblockedUser) => store.commit('addNewUsers', [unblockedUser]))
+        .then((unblockedUser) => {
+          store.commit('addNewUsers', [unblockedUser])
+
+          store.dispatch('stopFetching', 'friends')
+          store.commit('clearTimeline', { timeline: 'friends' })
+          store.dispatch('startFetching', { timeline: 'friends' })
+
+          store.commit('clearTimeline', { timeline: 'public' })
+          store.commit('clearTimeline', { timeline: 'publicAndExternal' })
+        })
     },
     toggleMute () {
       const store = this.$store

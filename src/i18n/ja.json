@@ -17,7 +17,9 @@
   },
   "general": {
     "apply": "てきよう",
-    "submit": "そうしん"
+    "submit": "そうしん",
+    "more": "つづき",
+    "generic_error": "エラーになりました"
   },
   "login": {
     "login": "ログイン",
@@ -26,7 +28,8 @@
     "password": "パスワード",
     "placeholder": "れい: lain",
     "register": "はじめる",
-    "username": "ユーザーめい"
+    "username": "ユーザーめい",
+    "hint": "はなしあいにくわわるには、ログインしてください"
   },
   "nav": {
     "about": "これはなに？",
@@ -49,7 +52,8 @@
     "load_older": "ふるいつうちをみる",
     "notifications": "つうち",
     "read": "よんだ！",
-    "repeated_you": "あなたのステータスがリピートされました"
+    "repeated_you": "あなたのステータスがリピートされました",
+    "no_more_notifications": "つうちはありません"
   },
   "post_status": {
     "new_status": "とうこうする",
@@ -117,6 +121,7 @@
     "delete_account_description": "あなたのアカウントとメッセージが、きえます。",
     "delete_account_error": "アカウントをけすことが、できなかったかもしれません。インスタンスのかんりしゃに、れんらくしてください。",
     "delete_account_instructions": "ほんとうにアカウントをけしてもいいなら、パスワードをかいてください。",
+    "avatar_size_instruction": "アバターのおおきさは、150×150ピクセルか、それよりもおおきくするといいです。",
     "export_theme": "セーブ",
     "filtering": "フィルタリング",
     "filtering_explanation": "これらのことばをふくむすべてのものがミュートされます。1ぎょうに1つのことばをかいてください。",
@@ -132,8 +137,10 @@
     "hide_attachments_in_tl": "タイムラインのファイルをかくす",
     "hide_isp": "インスタンススペシフィックパネルをかくす",
     "preload_images": "がぞうをさきよみする",
+    "use_one_click_nsfw": "NSFWなファイルを1クリックでひらく",
     "hide_post_stats": "とうこうのとうけいをかくす (れい: おきにいりのかず)",
     "hide_user_stats": "ユーザーのとうけいをかくす (れい: フォロワーのかず)",
+    "hide_filtered_statuses": "フィルターされたとうこうをかくす",
     "import_followers_from_a_csv_file": "CSVファイルからフォローをインポートする",
     "import_theme": "ロード",
     "inputRadius": "インプットフィールド",
@@ -148,6 +155,8 @@
     "lock_account_description": "あなたがみとめたひとだけ、あなたのアカウントをフォローできる",
     "loop_video": "ビデオをくりかえす",
     "loop_video_silent_only": "おとのないビデオだけくりかえす",
+    "play_videos_in_modal": "ビデオをメディアビューアーでみる",
+    "use_contain_fit": "がぞうのサムネイルを、きりぬかない",
     "name": "なまえ",
     "name_bio": "なまえとプロフィール",
     "new_password": "あたらしいパスワード",
@@ -157,8 +166,10 @@
     "notification_visibility_mentions": "メンション",
     "notification_visibility_repeats": "リピート",
     "no_rich_text_description": "リッチテキストをつかわない",
-    "hide_follows_description": "フォローしている人を表示しない",
-    "hide_followers_description": "フォローしている人を表示しない",
+    "hide_follows_description": "フォローしているひとをみせない",
+    "hide_followers_description": "フォロワーをみせない",
+    "show_admin_badge": "アドミンのしるしをみる",
+    "show_moderator_badge": "モデレーターのしるしをみる",
     "nsfw_clickthrough": "NSFWなファイルをかくす",
     "panelRadius": "パネル",
     "pause_on_unfocused": "タブにフォーカスがないときストリーミングをとめる",
@@ -185,6 +196,8 @@
     "subject_line_email": "メールふう: \"re: サブジェクト\"",
     "subject_line_mastodon": "マストドンふう: そのままコピー",
     "subject_line_noop": "コピーしない",
+    "post_status_content_type": "とうこうのコンテントタイプ",
+    "status_content_type_plain": "プレーンテキスト",
     "stop_gifs": "カーソルをかさねたとき、GIFをうごかす",
     "streaming": "うえまでスクロールしたとき、じどうてきにストリーミングする",
     "text": "もじ",
@@ -318,13 +331,15 @@
     "no_retweet_hint": "とうこうを「フォロワーのみ」または「ダイレクト」にすると、リピートできなくなります",
     "repeated": "リピート",
     "show_new": "よみこみ",
-    "up_to_date": "さいしん"
+    "up_to_date": "さいしん",
+    "no_more_statuses": "これでおわりです"
   },
   "user_card": {
     "approve": "うけいれ",
     "block": "ブロック",
     "blocked": "ブロックしています！",
     "deny": "おことわり",
+    "favorites": "おきにいり",
     "follow": "フォロー",
     "follow_sent": "リクエストを、おくりました！",
     "follow_progress": "リクエストしています…",
@@ -335,6 +350,7 @@
     "following": "フォローしています！",
     "follows_you": "フォローされました！",
     "its_you": "これはあなたです！",
+    "media": "メディア",
     "mute": "ミュート",
     "muted": "ミュートしています！",
     "per_day": "/日",

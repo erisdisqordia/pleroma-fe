@@ -258,7 +258,7 @@ const fetchFriends = ({id, page, credentials}) => {
 }
 
 const exportFriends = ({id, credentials}) => {
-  let url = `${FRIENDS_URL}?user_id=${id}&export=true`
+  let url = `${FRIENDS_URL}?user_id=${id}&all=true`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))

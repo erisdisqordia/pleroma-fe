@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 import { compose } from 'vue-compose'
 import unescape from 'lodash/unescape'
 import get from 'lodash/get'
-=======
-import { unescape, truncate } from 'lodash'
->>>>>>> Add OAuth Tokens management to settings
-
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import ImageCropper from '../image_cropper/image_cropper.vue'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
@@ -94,20 +89,17 @@ const UserSettings = {
         direct: { selected: this.newDefaultScope === 'direct' }
       }
     },
-<<<<<<< HEAD
     currentSaveStateNotice () {
       return this.$store.state.interface.settings.currentSaveStateNotice
-=======
+    },
     oauthTokens () {
       return this.$store.state.oauthTokens.tokens.map(oauthToken => {
         return {
           id: oauthToken.id,
-          token: truncate(oauthToken.token, { length: 15 }),
-          refreshToken: truncate(oauthToken.refresh_token, { length: 15 }),
+          appName: oauthToken.app_name,
           validUntil: new Date(oauthToken.valid_until).toLocaleDateString()
         }
       })
->>>>>>> Add OAuth Tokens management to settings
     }
   },
   methods: {

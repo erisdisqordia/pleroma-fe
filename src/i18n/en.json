@@ -106,6 +106,7 @@
     }
   },
   "settings": {
+    "app_name": "App name",
     "attachmentRadius": "Attachments",
     "attachments": "Attachments",
     "autoload": "Enable automatic loading when scrolled to the bottom",

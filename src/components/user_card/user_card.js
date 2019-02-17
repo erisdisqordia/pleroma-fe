@@ -6,9 +6,8 @@ import { requestFollow, requestUnfollow } from '../../services/follow_manipulate
 const UserCard = {
   props: [
     'user',
-    'showFollows',
-    'showApproval',
-    'showActions'
+    'noFollowsYou',
+    'showApproval'
   ],
   data () {
     return {
@@ -26,7 +25,7 @@ const UserCard = {
     currentUser () { return this.$store.state.users.currentUser },
     following () { return this.updated ? this.updated.following : this.user.following },
     showFollow () {
-      return this.showActions && (!this.showFollows && !this.following || this.updated && !this.updated.following)
+      return !this.showApproval && (!this.following || this.updated && !this.updated.following)
     }
   },
   methods: {

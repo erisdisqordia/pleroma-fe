@@ -67,6 +67,9 @@ const Timeline = {
       document.addEventListener('visibilitychange', this.handleVisibilityChange, false)
       this.unfocused = document.hidden
     }
+    window.addEventListener('keydown', e => {
+      if (e.key === '.') this.showNewStatuses()
+    })
   },
   destroyed () {
     window.removeEventListener('scroll', this.scrollLoad)

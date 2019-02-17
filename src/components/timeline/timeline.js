@@ -67,16 +67,18 @@ const Timeline = {
       document.addEventListener('visibilitychange', this.handleVisibilityChange, false)
       this.unfocused = document.hidden
     }
-    window.addEventListener('keydown', e => {
-      if (e.key === '.') this.showNewStatuses()
-    })
+    window.addEventListener('keydown', this.handleShortKey)
   },
   destroyed () {
     window.removeEventListener('scroll', this.scrollLoad)
+    window.removeEventListener('keydown', this.handleShortKey)
     if (typeof document.hidden !== 'undefined') document.removeEventListener('visibilitychange', this.handleVisibilityChange, false)
     this.$store.commit('setLoading', { timeline: this.timelineName, value: false })
   },
   methods: {
+    handleShortKey (e) {
+      if (e.key === '.') this.showNewStatuses()
+    },
     showNewStatuses () {
       if (this.timeline.flushMarker !== 0) {
         this.$store.commit('clearTimeline', { timeline: this.timelineName })

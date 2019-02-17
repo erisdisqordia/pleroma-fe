@@ -27,7 +27,7 @@
             <li>
               <interface-language-switcher />
             </li>
-            <li>
+            <li v-if="showInstanceSpecificPanel">
               <input type="checkbox" id="hideISP" v-model="hideISPLocal">
               <label for="hideISP">{{$t('settings.hide_isp')}}</label>
             </li>

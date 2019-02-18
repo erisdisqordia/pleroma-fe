@@ -8,6 +8,8 @@
       v-if="type === 'image'"
       class="modal-image"
       :src="currentMedia.url"
+      :alt="currentMedia.description"
+      :title="currentMedia.description"
       @touchstart.stop="mediaTouchStart"
       @touchmove.stop="mediaTouchMove"
       @click="hide"

@@ -78,6 +78,7 @@ const PostStatusForm = {
         nsfw: false,
         files: [],
         poll: {},
+        mediaDescriptions: {},
         visibility: scope,
         contentType
       },
@@ -190,6 +191,7 @@ const PostStatusForm = {
         visibility: newStatus.visibility,
         sensitive: newStatus.nsfw,
         media: newStatus.files,
+        mediaDescriptions: newStatus.mediaDescriptions || {},
         store: this.$store,
         inReplyToStatusId: this.replyTo,
         contentType: newStatus.contentType,
@@ -200,6 +202,7 @@ const PostStatusForm = {
             status: '',
             spoilerText: '',
             files: [],
+            mediaDescriptions: {},
             visibility: newStatus.visibility,
             contentType: newStatus.contentType,
             poll: {}

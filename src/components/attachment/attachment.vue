@@ -51,7 +51,6 @@
       :class="{'hidden': hidden && preloadImage }"
       :href="attachment.url"
       target="_blank"
-      :title="attachment.description"
       @click="openModal"
     >
       <StillImage
@@ -59,6 +58,7 @@
         :mimetype="attachment.mimetype"
         :src="attachment.large_thumb_url || attachment.url"
         :image-load-handler="onImageLoad"
+        :alt="attachment.description"
       />
     </a>
 

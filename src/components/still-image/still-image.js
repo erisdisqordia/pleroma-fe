@@ -4,7 +4,8 @@ const StillImage = {
     'referrerpolicy',
     'mimetype',
     'imageLoadError',
-    'imageLoadHandler'
+    'imageLoadHandler',
+    'alt'
   ],
   data () {
     return {

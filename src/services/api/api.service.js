@@ -617,7 +617,8 @@ const postStatus = ({
   poll,
   mediaIds = [],
   inReplyToStatusId,
-  contentType
+  contentType,
+  mediaDescriptions
 }) => {
   const form = new FormData()
   const pollOptions = poll.options || []
@@ -644,6 +645,7 @@ const postStatus = ({
       form.append('poll[options][]', option)
     })
   }
+  form.append('descriptions', JSON.stringify(mediaDescriptions))
   if (inReplyToStatusId) {
     form.append('in_reply_to_id', inReplyToStatusId)
   }

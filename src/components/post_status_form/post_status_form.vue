@@ -266,6 +266,7 @@
               :href="file.url"
             >{{ file.url }}</a>
           </div>
+          <input type="text" :placeholder="$t('post_status.media_description')" v-model="newStatus.mediaDescriptions[file.id]"></input>
         </div>
       </div>
       <div
@@ -398,6 +399,11 @@
       background-color: var(--btn, $fallback--fg);
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+    }
+
+    input {
+      min-width: 300px;
+      flex: 1;
     }
   }
 

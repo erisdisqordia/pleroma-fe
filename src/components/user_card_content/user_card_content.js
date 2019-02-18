@@ -1,4 +1,5 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
+import apiService from '../../services/api/api.service.js'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
@@ -99,9 +100,24 @@ export default {
         this.followRequestInProgress = false
         this.followRequestSent = sent
 
-        store.dispatch('stopFetching', 'friends')
-        store.commit('clearTimeline', { timeline: 'friends' })
-        store.dispatch('startFetching', { timeline: 'friends' })
+        const rootState = store.rootState || store.state
+        const credentials = store.state.users.currentUser.credentials
+        const timelineData = rootState.statuses.timelines['friends']
+        apiService.fetchTimeline({
+          store,
+          credentials,
+          userId: this.user.id,
+          timeline: 'user',
+          between: true,
+          until: timelineData.maxId,
+          since: timelineData.minVisibleId
+        }).then((statuses) => {
+          store.dispatch('addNewStatuses', {
+            timeline: 'friends',
+            statuses,
+            showImmediately: true
+          })
+        }, () => store.dispatch('setError', { value: true }))
       })
     },
     unfollowUser () {
@@ -110,9 +126,7 @@ export default {
       requestUnfollow(this.user, store).then(() => {
         this.followRequestInProgress = false
 
-        store.dispatch('stopFetching', 'friends')
-        store.commit('clearTimeline', { timeline: 'friends' })
-        store.dispatch('startFetching', { timeline: 'friends' })
+        store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
       })
     },
     blockUser () {
@@ -121,12 +135,9 @@ export default {
         .then((blockedUser) => {
           store.commit('addNewUsers', [blockedUser])
 
-          store.dispatch('stopFetching', 'friends')
-          store.commit('clearTimeline', { timeline: 'friends' })
-          store.dispatch('startFetching', { timeline: 'friends' })
-
-          store.commit('clearTimeline', { timeline: 'public' })
-          store.commit('clearTimeline', { timeline: 'publicAndExternal' })
+          store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
+          store.commit('removeStatus', { timeline: 'public', userId: this.user.id })
+          store.commit('removeStatus', { timeline: 'publicAndExternal', userId: this.user.id })
         })
     },
     unblockUser () {
@@ -135,12 +146,36 @@ export default {
         .then((unblockedUser) => {
           store.commit('addNewUsers', [unblockedUser])
 
-          store.dispatch('stopFetching', 'friends')
-          store.commit('clearTimeline', { timeline: 'friends' })
-          store.dispatch('startFetching', { timeline: 'friends' })
-
-          store.commit('clearTimeline', { timeline: 'public' })
-          store.commit('clearTimeline', { timeline: 'publicAndExternal' })
+          const rootState = store.rootState || store.state
+          const credentials = store.state.users.currentUser.credentials
+          const timelineData = rootState.statuses.timelines['friends']
+          apiService.fetchTimeline({
+            store,
+            credentials,
+            userId: this.user.id,
+            timeline: 'user',
+            between: true,
+            until: timelineData.maxId,
+            since: timelineData.minVisibleId
+          }).then((statuses) => {
+            store.dispatch('addNewStatuses', {
+              timeline: 'public',
+              statuses,
+              showImmediately: true
+            })
+            store.dispatch('addNewStatuses', {
+              timeline: 'publicAndExternal',
+              statuses,
+              showImmediately: true
+            })
+            if (this.user.follows_you) {
+              store.dispatch('addNewStatuses', {
+                timeline: 'friends',
+                statuses,
+                showImmediately: true
+              })
+            }
+          }, () => store.dispatch('setError', { value: true }))
         })
     },
     toggleMute () {

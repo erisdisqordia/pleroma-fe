@@ -329,7 +329,7 @@ const setUserMute = ({id, credentials, muted = true}) => {
   })
 }
 
-const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false}) => {
+const fetchTimeline = ({timeline, credentials, since = false, until = false, between = false, count = 20, userId = false, tag = false}) => {
   const timelineUrls = {
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
@@ -362,8 +362,9 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   if (timeline === 'media') {
     params.push(['only_media', 1])
   }
-
-  params.push(['count', 20])
+  if (!between) {
+    params.push(['count', count])
+  }
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`

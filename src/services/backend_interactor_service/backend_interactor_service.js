@@ -62,6 +62,30 @@ const backendInteractorService = (credentials) => {
     return timelineFetcherService.startFetching({timeline, store, credentials, userId, tag})
   }
 
+  const tagUser = ({screen_name}, tag) => {
+    return apiService.tagUser({screen_name, tag, credentials})
+  }
+
+  const untagUser = ({screen_name}, tag) => {
+    return apiService.untagUser({screen_name, tag, credentials})
+  }
+
+  const addRight = ({screen_name}, right) => {
+    return apiService.addRight({screen_name, right, credentials})
+  }
+
+  const deleteRight = ({screen_name}, right) => {
+    return apiService.deleteRight({screen_name, right, credentials})
+  }
+
+  const setActivationStatus = ({screen_name}, status) => {
+    return apiService.setActivationStatus({screen_name, status, credentials})
+  }
+
+  const deleteUser = ({screen_name}) => {
+    return apiService.deleteUser({screen_name, credentials})
+  }
+
   const fetchMutes = () => apiService.fetchMutes({credentials})
   const muteUser = (id) => apiService.muteUser({credentials, id})
   const unmuteUser = (id) => apiService.unmuteUser({credentials, id})
@@ -104,6 +128,12 @@ const backendInteractorService = (credentials) => {
     fetchBlocks,
     fetchOAuthTokens,
     revokeOAuthToken,
+    tagUser,
+    untagUser,
+    addRight,
+    deleteRight,
+    deleteUser,
+    setActivationStatus,
     register,
     getCaptcha,
     updateAvatar,

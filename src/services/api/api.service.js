@@ -16,6 +16,10 @@ const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
 const FOLLOW_REQUESTS_URL = '/api/pleroma/friend_requests'
 const APPROVE_USER_URL = '/api/pleroma/friendships/approve'
 const DENY_USER_URL = '/api/pleroma/friendships/deny'
+const TAG_USER_URL = '/api/pleroma/admin/users/tag'
+const PERMISSION_GROUP_URL = '/api/pleroma/admin/permission_group'
+const ACTIVATION_STATUS_URL = '/api/pleroma/admin/activation_status'
+const ADMIN_USER_URL = '/api/pleroma/admin/user'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
@@ -352,6 +356,86 @@ const fetchStatus = ({id, credentials}) => {
     .then((data) => parseStatus(data))
 }
 
+const tagUser = ({tag, credentials, ...options}) => {
+  const screenName = options.screen_name
+  const form = {
+    nicknames: [screenName],
+    tags: [tag]
+  }
+
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(TAG_USER_URL, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(form)
+  })
+}
+
+const untagUser = ({tag, credentials, ...options}) => {
+  const screenName = options.screen_name
+  const body = {
+    nicknames: [screenName],
+    tags: [tag]
+  }
+
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(TAG_USER_URL, {
+    method: 'DELETE',
+    headers: headers,
+    body: JSON.stringify(body)
+  })
+}
+
+const addRight = ({right, credentials, ...user}) => {
+  const screenName = user.screen_name
+
+  return fetch(`${PERMISSION_GROUP_URL}/${screenName}/${right}`, {
+    method: 'POST',
+    headers: authHeaders(credentials),
+    body: {}
+  })
+}
+
+const deleteRight = ({right, credentials, ...user}) => {
+  const screenName = user.screen_name
+
+  return fetch(`${PERMISSION_GROUP_URL}/${screenName}/${right}`, {
+    method: 'DELETE',
+    headers: authHeaders(credentials),
+    body: {}
+  })
+}
+
+const setActivationStatus = ({status, credentials, ...user}) => {
+  const screenName = user.screen_name
+  const body = {
+    status: status
+  }
+
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(`${ACTIVATION_STATUS_URL}/${screenName}.json`, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(body)
+  })
+}
+
+const deleteUser = ({credentials, ...user}) => {
+  const screenName = user.screen_name
+  const headers = authHeaders(credentials)
+
+  return fetch(`${ADMIN_USER_URL}.json?nickname=${screenName}`, {
+    method: 'DELETE',
+    headers: headers
+  })
+}
+
 const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false, withMuted = false}) => {
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
@@ -666,6 +750,12 @@ const apiService = {
   fetchBlocks,
   fetchOAuthTokens,
   revokeOAuthToken,
+  tagUser,
+  untagUser,
+  deleteUser,
+  addRight,
+  deleteRight,
+  setActivationStatus,
   register,
   getCaptcha,
   updateAvatar,

@@ -210,6 +210,7 @@ const getNodeInfo = async ({ store }) => {
 
       const frontendVersion = window.___pleromafe_commit_hash
       store.dispatch('setInstanceOption', { name: 'frontendVersion', value: frontendVersion })
+      store.dispatch('setInstanceOption', { name: 'tagPolicyAvailable', value: metadata.federation.mrf_policies.includes('TagPolicy') })
     } else {
       throw (res)
     }

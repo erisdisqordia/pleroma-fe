@@ -67,6 +67,11 @@ export const parseUser = (data) => {
         output.statusnet_blocking = relationship.blocking
         output.muted = relationship.muting
       }
+
+      output.rights = {
+        moderator: data.pleroma.is_moderator,
+        admin: data.pleroma.is_admin
+      }
     }
 
     // Missing, trying to recover
@@ -103,7 +108,12 @@ export const parseUser = (data) => {
 
     // QVITTER ONLY FOR NOW
     // Really only applies to logged in user, really.. I THINK
-    output.rights = data.rights
+    if (data.rights) {
+      output.rights = {
+        moderator: data.rights.delete_others_notice,
+        admin: data.rights.admin
+      }
+    }
     output.no_rich_text = data.no_rich_text
     output.default_scope = data.default_scope
     output.hide_follows = data.hide_follows
@@ -124,6 +134,13 @@ export const parseUser = (data) => {
   if (data.pleroma) {
     output.follow_request_count = data.pleroma.follow_request_count
   }
+
+  if (data.pleroma) {
+    output.tags = data.pleroma.tags
+    output.deactivated = data.pleroma.deactivated
+  }
+
+  output.tags = output.tags || []
 
   return output
 }

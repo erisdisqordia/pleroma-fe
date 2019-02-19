@@ -60,6 +60,9 @@ const UserSettings = {
         private: { selected: this.newDefaultScope === 'private' },
         direct: { selected: this.newDefaultScope === 'direct' }
       }
+    },
+    currentSaveStateNotice () {
+      return this.$store.state.interface.settings.currentSaveStateNotice
     }
   },
   methods: {

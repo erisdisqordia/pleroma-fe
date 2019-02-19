@@ -103,6 +103,7 @@
     flex: 1 1 0;
     display: flex;
     flex-wrap: nowrap;
+    justify-content: space-between;
 
     .name-and-action {
       flex: 1;
@@ -123,8 +124,8 @@
         object-fit: contain
       }
     }
+
     .timeago {
-      float: right;
       font-size: 12px;
     }
 

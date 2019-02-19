@@ -3,8 +3,8 @@
     <div class="panel panel-default">
       <div class="panel-heading timeline-heading" :class="{ 'chat-heading': floating }" @click.stop.prevent="togglePanel">
         <div class="title">
-          {{$t('chat.title')}}
-          <i class="icon-cancel" style="float: right;" v-if="floating"></i>
+          <span>{{$t('chat.title')}}</span>
+          <i class="icon-cancel" v-if="floating"></i>
         </div>
       </div>
       <div class="chat-window" v-chat-scroll>
@@ -96,6 +96,13 @@
     margin: 0.6em;
     min-height: 3.5em;
     resize: none;
+  }
+}
+
+.chat-panel {
+  .title {
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>

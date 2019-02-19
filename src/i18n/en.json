@@ -36,6 +36,10 @@
     "username": "Username",
     "hint": "Log in to join the discussion"
   },
+  "media_modal": {
+    "previous": "Previous",
+    "next": "Next"
+  },
   "nav": {
     "about": "About",
     "back": "Back",

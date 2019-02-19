@@ -80,6 +80,8 @@ const Timeline = {
       if (e.key === '.') this.showNewStatuses()
     },
     showNewStatuses () {
+      if (this.newStatusCount === 0) return
+
       if (this.timeline.flushMarker !== 0) {
         this.$store.commit('clearTimeline', { timeline: this.timelineName })
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })

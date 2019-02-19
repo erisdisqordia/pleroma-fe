@@ -53,16 +53,16 @@ const Timeline = {
 
     window.addEventListener('scroll', this.scrollLoad)
 
-    if (typeof credentials !== 'undefined' || this.timelineName !== 'friends') {
-      timelineFetcher.fetchAndUpdate({
-        store,
-        credentials,
-        timeline: this.timelineName,
-        showImmediately,
-        userId: this.userId,
-        tag: this.tag
-      })
-    }
+    if (this.timelineName === 'friends' && !credentials) { return false }
+
+    timelineFetcher.fetchAndUpdate({
+      store,
+      credentials,
+      timeline: this.timelineName,
+      showImmediately,
+      userId: this.userId,
+      tag: this.tag
+    })
   },
   mounted () {
     if (typeof document.hidden !== 'undefined') {

@@ -231,8 +231,14 @@ const users = {
         store.commit('setToken', result.access_token)
         store.dispatch('loginUser', result.access_token)
       } else {
-        let data = await response.json()
-        let errors = humanizeErrors(JSON.parse(data.error))
+        const data = await response.json()
+        let errors = JSON.parse(data.error)
+        // replace ap_id with username
+        if (errors.ap_id) {
+          errors.username = errors.ap_id
+          delete errors.ap_id
+        }
+        errors = humanizeErrors(errors)
         store.commit('signUpFailure', errors)
         throw Error(errors)
       }

@@ -13,7 +13,7 @@
             <router-link :to="{ name: 'user-settings' }" v-if="!isOtherUser">
               <i class="button-icon icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
             </router-link>
-            <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser">
+            <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser && !user.is_local">
               <i class="icon-link-ext usersettings"></i>
             </a>
           </div>

@@ -47,7 +47,22 @@ const Timeline = {
     UserCard
   },
   created () {
+    const store = this.$store
+    const credentials = store.state.users.currentUser.credentials
+    const showImmediately = this.timeline.visibleStatuses.length === 0
+
     window.addEventListener('scroll', this.scrollLoad)
+
+    if (typeof credentials !== 'undefined' || this.timelineName !== 'friends') {
+      timelineFetcher.fetchAndUpdate({
+        store,
+        credentials,
+        timeline: this.timelineName,
+        showImmediately,
+        userId: this.userId,
+        tag: this.tag
+      })
+    }
   },
   mounted () {
     if (typeof document.hidden !== 'undefined') {

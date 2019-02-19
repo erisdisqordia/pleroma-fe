@@ -26,7 +26,9 @@ const FollowList = {
     entries () {
       return this.showFollowers ? this.user.followers : this.user.friends
     },
-    showActions () { return this.$store.state.users.currentUser.id === this.userId }
+    showFollowsYou () {
+      return !this.showFollowers || (this.showFollowers && this.userId !== this.$store.state.users.currentUser.id)
+    }
   },
   methods: {
     fetchEntries () {

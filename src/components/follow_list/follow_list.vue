@@ -3,8 +3,7 @@
     <user-card
       v-for="entry in entries"
       :key="entry.id" :user="entry"
-      :showFollows="!showFollowers"
-      :showActions="showActions"
+      :noFollowsYou="!showFollowsYou"
     />
     <div class="text-center panel-footer">
       <a v-if="error" @click="fetchEntries" class="alert error">

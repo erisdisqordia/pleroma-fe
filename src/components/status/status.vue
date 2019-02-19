@@ -554,7 +554,7 @@ a.unmute {
 
 .timeline > {
   .status-el:last-child {
-    border-bottom-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;;
+    border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
     border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
     border-bottom: none;
   }

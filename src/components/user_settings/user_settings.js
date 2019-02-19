@@ -1,6 +1,7 @@
 import { unescape } from 'lodash'
 
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
+import ImageCropper from '../image_cropper/image_cropper.vue'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 
@@ -20,14 +21,12 @@ const UserSettings = {
       followImportError: false,
       followsImported: false,
       enableFollowsExport: true,
-      avatarUploading: false,
+      pickAvatarBtnVisible: true,
       bannerUploading: false,
       backgroundUploading: false,
       followListUploading: false,
-      avatarPreview: null,
       bannerPreview: null,
       backgroundPreview: null,
-      avatarUploadError: null,
       bannerUploadError: null,
       backgroundUploadError: null,
       deletingAccount: false,
@@ -41,7 +40,8 @@ const UserSettings = {
   },
   components: {
     StyleSwitcher,
-    TabSwitcher
+    TabSwitcher,
+    ImageCropper
   },
   computed: {
     user () {
@@ -117,35 +117,15 @@ const UserSettings = {
       }
       reader.readAsDataURL(file)
     },
-    submitAvatar () {
-      if (!this.avatarPreview) { return }
-
-      let img = this.avatarPreview
-      // eslint-disable-next-line no-undef
-      let imginfo = new Image()
-      let cropX, cropY, cropW, cropH
-      imginfo.src = img
-      if (imginfo.height > imginfo.width) {
-        cropX = 0
-        cropW = imginfo.width
-        cropY = Math.floor((imginfo.height - imginfo.width) / 2)
-        cropH = imginfo.width
-      } else {
-        cropY = 0
-        cropH = imginfo.height
-        cropX = Math.floor((imginfo.width - imginfo.height) / 2)
-        cropW = imginfo.height
-      }
-      this.avatarUploading = true
-      this.$store.state.api.backendInteractor.updateAvatar({params: {img, cropX, cropY, cropW, cropH}}).then((user) => {
+    submitAvatar (cropper) {
+      const img = cropper.getCroppedCanvas().toDataURL('image/jpeg')
+      return this.$store.state.api.backendInteractor.updateAvatar({ params: { img } }).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
-          this.avatarPreview = null
         } else {
-          this.avatarUploadError = this.$t('upload.error.base') + user.error
+          throw new Error(this.$t('upload.error.base') + user.error)
         }
-        this.avatarUploading = false
       })
     },
     clearUploadError (slot) {

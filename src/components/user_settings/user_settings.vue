@@ -48,19 +48,10 @@
             <h2>{{$t('settings.avatar')}}</h2>
             <p class="visibility-notice">{{$t('settings.avatar_size_instruction')}}</p>
             <p>{{$t('settings.current_avatar')}}</p>
-            <img :src="user.profile_image_url_original" class="old-avatar"></img>
+            <img :src="user.profile_image_url_original" class="current-avatar"></img>
             <p>{{$t('settings.set_new_avatar')}}</p>
-            <img class="new-avatar" v-bind:src="avatarPreview" v-if="avatarPreview">
-            </img>
-            <div>
-              <input type="file" @change="uploadFile('avatar', $event)" ></input>
-            </div>
-            <i class="icon-spin4 animate-spin" v-if="avatarUploading"></i>
-            <button class="btn btn-default" v-else-if="avatarPreview" @click="submitAvatar">{{$t('general.submit')}}</button>
-            <div class='alert error' v-if="avatarUploadError">
-              Error: {{ avatarUploadError }}
-              <i class="button-icon icon-cancel" @click="clearUploadError('avatar')"></i>
-            </div>
+            <button class="btn" type="button" id="pick-avatar" v-show="pickAvatarBtnVisible">{{$t('settings.upload_a_photo')}}</button>
+            <image-cropper trigger="#pick-avatar" :submitHandler="submitAvatar" @open="pickAvatarBtnVisible=false" @close="pickAvatarBtnVisible=true" />
           </div>
           <div class="setting-item">
             <h2>{{$t('settings.profile_banner')}}</h2>
@@ -167,6 +158,8 @@
 </script>
 
 <style lang="scss">
+@import '../../_variables.scss';
+
 .profile-edit {
   .bio {
     margin: 0;
@@ -192,6 +185,14 @@
 
   .bg {
     max-width: 100%;
+  }
+
+  .current-avatar {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: $fallback--avatarRadius;
+    border-radius: var(--avatarRadius, $fallback--avatarRadius);
   }
 }
 </style>

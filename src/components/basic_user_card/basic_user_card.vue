@@ -40,7 +40,7 @@
   border-bottom: 1px solid;
   margin: 0;
   border-bottom-color: $fallback--border;
-	border-bottom-color: var(--border, $fallback--border);
+  border-bottom-color: var(--border, $fallback--border);
 
   &-collapsed-content {
     margin-left: 0.7em;

@@ -57,6 +57,9 @@ const FollowList = {
       }
     }
   },
+  watch: {
+    'user': 'fetchEntries'
+  },
   components: {
     UserCard
   }

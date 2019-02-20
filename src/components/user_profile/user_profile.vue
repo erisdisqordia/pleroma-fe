@@ -10,6 +10,7 @@
       <Timeline
         :label="$t('user_card.statuses')"
         :disabled="!user.statuses_count"
+        :count="user.statuses_count"
         :embedded="true"
         :title="$t('user_profile.timeline_title')"
         :timeline="timeline"

@@ -342,7 +342,8 @@
     "repeated": "repeated",
     "show_new": "Show new",
     "up_to_date": "Up-to-date",
-    "no_more_statuses": "No more statuses"
+    "no_more_statuses": "No more statuses",
+    "no_statuses": "No statuses"
   },
   "user_card": {
     "approve": "Approve",

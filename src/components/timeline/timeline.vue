@@ -20,7 +20,10 @@
       </div>
     </div>
     <div :class="classes.footer">
-      <div v-if="bottomedOut" class="new-status-notification text-center panel-footer faint">
+      <div v-if="count===0" class="new-status-notification text-center panel-footer faint">
+        {{$t('timeline.no_statuses')}}
+      </div>
+      <div v-else-if="bottomedOut" class="new-status-notification text-center panel-footer faint">
         {{$t('timeline.no_more_statuses')}}
       </div>
       <a v-else-if="!timeline.loading" href="#" v-on:click.prevent='fetchOlderStatuses()'>

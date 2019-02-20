@@ -1,7 +1,20 @@
 <template>
   <div class="settings panel panel-default">
     <div class="panel-heading">
-      {{$t('settings.user_settings')}}
+      <div class="title">
+        {{$t('settings.user_settings')}}
+      </div>
+      <transition name="fade">
+        <template v-if="currentSaveStateNotice">
+          <div @click.prevent class="alert error" v-if="currentSaveStateNotice.error">
+            {{ $t('settings.saving_err') }}
+          </div>
+
+          <div @click.prevent class="alert transparent" v-if="!currentSaveStateNotice.error">
+            {{ $t('settings.saving_ok') }}
+          </div>
+        </template>
+      </transition>
     </div>
     <div class="panel-body profile-edit">
       <tab-switcher>

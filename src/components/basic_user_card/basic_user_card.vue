@@ -44,7 +44,6 @@
 
   &-collapsed-content {
     margin-left: 0.7em;
-    margin-top:0.0em;
     text-align: left;
     flex: 1;
     display: flex;

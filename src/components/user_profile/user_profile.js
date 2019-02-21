@@ -4,6 +4,11 @@ import Timeline from '../timeline/timeline.vue'
 import FollowList from '../follow_list/follow_list.vue'
 
 const UserProfile = {
+  data () {
+    return {
+      error: false
+    }
+  },
   created () {
     this.$store.commit('clearTimeline', { timeline: 'user' })
     this.$store.commit('clearTimeline', { timeline: 'favorites' })
@@ -13,6 +18,9 @@ const UserProfile = {
     this.startFetchFavorites()
     if (!this.user.id) {
       this.$store.dispatch('fetchUser', this.fetchBy)
+        .catch(() => {
+          this.error = true
+        })
     }
   },
   destroyed () {

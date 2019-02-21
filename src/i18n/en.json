@@ -383,7 +383,8 @@
     "mute_progress": "Muting..."
   },
   "user_profile": {
-    "timeline_title": "User Timeline"
+    "timeline_title": "User Timeline",
+    "profile_does_not_exist": "Sorry, this profile does not exist."
   },
   "who_to_follow": {
     "more": "More",

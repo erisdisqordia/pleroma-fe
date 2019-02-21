@@ -244,6 +244,12 @@ const denyUser = ({id, credentials}) => {
 const fetchUser = ({id, credentials}) => {
   let url = `${USER_URL}?user_id=${id}`
   return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => {
+      if (!data.ok) {
+        throw Error(data.statusText)
+      }
+      return data
+    })
     .then((data) => data.json())
     .then((data) => parseUser(data))
 }

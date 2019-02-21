@@ -140,7 +140,7 @@ const users = {
   getters,
   actions: {
     fetchUser (store, id) {
-      store.rootState.api.backendInteractor.fetchUser({ id })
+      return store.rootState.api.backendInteractor.fetchUser({ id })
         .then((user) => store.commit('addNewUsers', [user]))
     },
     fetchBlocks (store) {

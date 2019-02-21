@@ -24,6 +24,7 @@ const userSearch = {
   methods: {
     newQuery (query) {
       this.$router.push({ name: 'user-search', query: { query } })
+      this.$refs.username.focus()
     },
     search (query) {
       if (!query) {

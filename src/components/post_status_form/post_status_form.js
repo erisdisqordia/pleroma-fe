@@ -56,6 +56,10 @@ const PostStatusForm = {
           ? this.copyMessageScope
           : this.$store.state.users.currentUser.default_scope
 
+    const contentType = typeof this.$store.state.config.postContentType === 'undefined'
+      ? this.$store.state.instance.postContentType
+      : this.$store.state.config.postContentType
+
     return {
       dropFiles: [],
       submitDisabled: false,
@@ -67,7 +71,8 @@ const PostStatusForm = {
         status: statusText,
         nsfw: false,
         files: [],
-        visibility: scope
+        visibility: scope,
+        contentType
       },
       caret: 0
     }
@@ -166,11 +171,6 @@ const PostStatusForm = {
     },
     formattingOptionsEnabled () {
       return this.$store.state.instance.formattingOptionsEnabled
-    },
-    defaultPostContentType () {
-      return typeof this.$store.state.config.postContentType === 'undefined'
-        ? this.$store.state.instance.postContentType
-        : this.$store.state.config.postContentType
     }
   },
   methods: {

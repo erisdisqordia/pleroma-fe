@@ -1,0 +1,10 @@
+.with-load-more {
+  &-footer {
+    padding: 10px;
+    text-align: center;
+
+    .error {
+      font-size: 14px;
+    }
+  }
+}

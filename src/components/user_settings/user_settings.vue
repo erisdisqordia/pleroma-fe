@@ -162,6 +162,12 @@
             <h2>{{$t('settings.follow_export_processing')}}</h2>
           </div>
         </div>
+
+        <div :label="$t('settings.blocks_tab')">
+          <block-list :refresh="true">
+            <template slot="empty">{{$t('settings.no_blocks')}}</template>
+          </block-list>
+        </div>
       </tab-switcher>
     </div>
   </div>

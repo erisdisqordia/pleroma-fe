@@ -110,6 +110,7 @@
     "avatarRadius": "Avatars",
     "background": "Background",
     "bio": "Bio",
+    "blocks_tab": "Blocks",
     "btnRadius": "Buttons",
     "cBlue": "Blue (Reply, follow)",
     "cGreen": "Green (Retweet)",
@@ -164,6 +165,7 @@
     "lock_account_description": "Restrict your account to approved followers only",
     "loop_video": "Loop videos",
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
+    "mutes_tab": "Mutes",
     "play_videos_in_modal": "Play videos directly in the media viewer",
     "use_contain_fit": "Don't crop the attachment in thumbnails",
     "name": "Name",
@@ -175,6 +177,8 @@
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
     "no_rich_text_description": "Strip rich text formatting from all posts",
+    "no_blocks": "No blocks",
+    "no_mutes": "No mutes",
     "hide_follows_description": "Don't show who I'm following",
     "hide_followers_description": "Don't show who's following me",
     "show_admin_badge": "Show Admin badge in my profile",
@@ -366,7 +370,13 @@
     "muted": "Muted",
     "per_day": "per day",
     "remote_follow": "Remote follow",
-    "statuses": "Statuses"
+    "statuses": "Statuses",
+    "unblock": "Unblock",
+    "unblock_progress": "Unblocking...",
+    "block_progress": "Blocking...",
+    "unmute": "Unmute",
+    "unmute_progress": "Unmuting...",
+    "mute_progress": "Muting..."
   },
   "user_profile": {
     "timeline_title": "User Timeline"

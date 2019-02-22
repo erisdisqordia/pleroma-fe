@@ -85,6 +85,12 @@ export const mutations = {
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
+  saveBlocks (state, blockIds) {
+    state.currentUser.blockIds = blockIds
+  },
+  saveMutes (state, muteIds) {
+    state.currentUser.muteIds = muteIds
+  },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
   },
@@ -135,6 +141,38 @@ const users = {
   actions: {
     fetchUser (store, id) {
       store.rootState.api.backendInteractor.fetchUser({ id })
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    fetchBlocks (store) {
+      return store.rootState.api.backendInteractor.fetchBlocks()
+        .then((blocks) => {
+          store.commit('saveBlocks', map(blocks, 'id'))
+          store.commit('addNewUsers', blocks)
+          return blocks
+        })
+    },
+    blockUser (store, id) {
+      return store.rootState.api.backendInteractor.blockUser(id)
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    unblockUser (store, id) {
+      return store.rootState.api.backendInteractor.unblockUser(id)
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    fetchMutes (store) {
+      return store.rootState.api.backendInteractor.fetchMutes()
+        .then((mutedUsers) => {
+          each(mutedUsers, (user) => { user.muted = true })
+          store.commit('addNewUsers', mutedUsers)
+          store.commit('saveMutes', map(mutedUsers, 'id'))
+        })
+    },
+    muteUser (store, id) {
+      return store.state.api.backendInteractor.setUserMute({ id, muted: true })
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    unmuteUser (store, id) {
+      return store.state.api.backendInteractor.setUserMute({ id, muted: false })
         .then((user) => store.commit('addNewUsers', [user]))
     },
     addFriends ({ rootState, commit }, fetchBy) {
@@ -263,6 +301,8 @@ const users = {
               const user = data
               // user.credentials = userCredentials
               user.credentials = accessToken
+              user.blockIds = []
+              user.muteIds = []
               commit('setCurrentUser', user)
               commit('addNewUsers', [user])
 
@@ -279,11 +319,8 @@ const users = {
               // Start getting fresh posts.
               store.dispatch('startFetching', { timeline: 'friends' })
 
-              // Get user mutes and follower info
-              store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {
-                each(mutedUsers, (user) => { user.muted = true })
-                store.commit('addNewUsers', mutedUsers)
-              })
+              // Get user mutes
+              store.dispatch('fetchMutes')
 
               // Fetch our friends
               store.rootState.api.backendInteractor.fetchFriends({ id: user.id })

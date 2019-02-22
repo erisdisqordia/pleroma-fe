@@ -54,6 +54,8 @@ const Timeline = {
 
     window.addEventListener('scroll', this.scrollLoad)
 
+    if (this.timelineName === 'friends' && !credentials) { return false }
+
     timelineFetcher.fetchAndUpdate({
       store,
       credentials,

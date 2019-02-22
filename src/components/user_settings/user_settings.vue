@@ -168,12 +168,6 @@
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
           </block-list>
         </div>
-
-        <!-- <div :label="$t('settings.mutes_tab')">
-          <mute-list :refresh="true">
-            <template slot="empty">{{$t('settings.no_mutes')}}</template>
-          </mute-list>
-        </div> -->
       </tab-switcher>
     </div>
   </div>

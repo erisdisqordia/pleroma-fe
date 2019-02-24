@@ -9,7 +9,7 @@
           <div class='text-fields'>
             <div class='form-group' :class="{ 'form-group--error': $v.user.username.$error }">
               <label class='form--label' for='sign-up-username'>{{$t('login.username')}}</label>
-              <input :disabled="isPending" v-model.trim='$v.user.username.$model' class='form-control' id='sign-up-username' placeholder='e.g. lain'>
+              <input :disabled="isPending" v-model.trim='$v.user.username.$model' class='form-control' id='sign-up-username' :placeholder="$t('registration.username_placeholder')">
             </div>
             <div class="form-error" v-if="$v.user.username.$dirty">
               <ul>
@@ -21,7 +21,7 @@
 
             <div class='form-group' :class="{ 'form-group--error': $v.user.fullname.$error }">
               <label class='form--label' for='sign-up-fullname'>{{$t('registration.fullname')}}</label>
-              <input :disabled="isPending" v-model.trim='$v.user.fullname.$model' class='form-control' id='sign-up-fullname' placeholder='e.g. Lain Iwakura'>
+              <input :disabled="isPending" v-model.trim='$v.user.fullname.$model' class='form-control' id='sign-up-fullname' :placeholder="$t('registration.fullname_placeholder')">
             </div>
             <div class="form-error" v-if="$v.user.fullname.$dirty">
               <ul>
@@ -44,8 +44,8 @@
             </div>
 
             <div class='form-group'>
-              <label class='form--label' for='bio'>{{$t('registration.bio')}}</label>
-              <input :disabled="isPending" v-model='user.bio' class='form-control' id='bio'>
+              <label class='form--label' for='bio'>{{$t('registration.bio')}} ({{$t('registration.optional')}})</label>
+              <textarea :disabled="isPending" v-model='user.bio' class='form-control' id='bio' :placeholder="$t('registration.bio_placeholder')"></textarea>
             </div>
 
             <div class='form-group' :class="{ 'form-group--error': $v.user.password.$error }">
@@ -137,6 +137,10 @@ $validations-cRed: #f04124;
     flex: 1 0;
     display: flex;
     flex-direction: column;
+  }
+
+  textarea {
+    min-height: 100px;
   }
 
   .form-group {

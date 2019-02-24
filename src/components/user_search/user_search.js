@@ -10,7 +10,8 @@ const userSearch = {
   data () {
     return {
       username: '',
-      users: []
+      users: [],
+      loading: false
     }
   },
   mounted () {
@@ -30,8 +31,10 @@ const userSearch = {
         this.users = []
         return
       }
+      this.loading = true
       userSearchApi.search({query, store: this.$store})
         .then((res) => {
+          this.loading = false
           this.users = res
         })
     }

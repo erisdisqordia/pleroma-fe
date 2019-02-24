@@ -9,7 +9,10 @@
         <i class="icon-search"/>
       </button>
     </div>
-    <div class="panel-body">
+    <div v-if="loading" class="text-center loading-icon">
+      <i class="icon-spin3 animate-spin"/>
+    </div>
+    <div v-else class="panel-body">
       <user-card v-for="user in users" :key="user.id" :user="user" :showFollows="true"></user-card>
     </div>
   </div>
@@ -26,5 +29,9 @@
   .search-button {
     margin-left: 0.5em;
   }
+}
+
+.loading-icon {
+  padding: 1em;
 }
 </style>

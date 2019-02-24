@@ -200,6 +200,11 @@ const users = {
     },
     fetchMutes (store) {
       return store.rootState.api.backendInteractor.fetchMutes()
+        .then((mutes) => {
+          // fetchMutes api doesn't return full user data, let's fetch full user data using separate api calls
+          const promises = mutes.map(({ id }) => store.rootState.api.backendInteractor.fetchUser({ id }))
+          return Promise.all(promises)
+        })
         .then((mutedUsers) => {
           each(mutedUsers, (user) => { user.mastodonMuted = true })
           store.commit('addNewUsers', mutedUsers)

@@ -177,9 +177,14 @@ const users = {
           return blocks
         })
     },
-    blockUser (store, id) {
-      return store.rootState.api.backendInteractor.blockUser(id)
-        .then((user) => store.commit('addNewUsers', [user]))
+    blockUser (store, userId) {
+      return store.rootState.api.backendInteractor.blockUser(userId)
+        .then((blockedUser) => {
+          store.commit('addNewUsers', [blockedUser])
+          store.commit('removeStatus', { timeline: 'friends', userId })
+          store.commit('removeStatus', { timeline: 'public', userId })
+          store.commit('removeStatus', { timeline: 'publicAndExternal', userId })
+        })
     },
     unblockUser (store, id) {
       return store.rootState.api.backendInteractor.unblockUser(id)
@@ -188,18 +193,26 @@ const users = {
     fetchMutes (store) {
       return store.rootState.api.backendInteractor.fetchMutes()
         .then((mutedUsers) => {
-          each(mutedUsers, (user) => { user.muted = true })
+          each(mutedUsers, (user) => { user.mastodonMuted = true })
           store.commit('addNewUsers', mutedUsers)
           store.commit('saveMutes', map(mutedUsers, 'id'))
         })
     },
     muteUser (store, id) {
-      return store.state.api.backendInteractor.setUserMute({ id, muted: true })
-        .then((user) => store.commit('addNewUsers', [user]))
+      return store.rootState.api.backendInteractor.muteUser(id)
+        .then(() => {
+          const user = store.rootState.users.usersObject[id]
+          set(user, 'mastodonMuted', true)
+          store.commit('addNewUsers', [user])
+        })
     },
     unmuteUser (store, id) {
-      return store.state.api.backendInteractor.setUserMute({ id, muted: false })
-        .then((user) => store.commit('addNewUsers', [user]))
+      return store.rootState.api.backendInteractor.unmuteUser(id)
+        .then(() => {
+          const user = store.rootState.users.usersObject[id]
+          set(user, 'mastodonMuted', false)
+          store.commit('addNewUsers', [user])
+        })
     },
     addFriends ({ rootState, commit }, fetchBy) {
       return new Promise((resolve, reject) => {
@@ -349,9 +362,6 @@ const users = {
 
               // Start getting fresh posts.
               store.dispatch('startFetching', { timeline: 'friends' })
-
-              // Get user mutes
-              store.dispatch('fetchMutes')
 
               // Fetch our friends
               store.rootState.api.backendInteractor.fetchFriends({ id: user.id })

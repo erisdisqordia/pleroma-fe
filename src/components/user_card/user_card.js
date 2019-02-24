@@ -121,21 +121,19 @@ export default {
       })
     },
     blockUser () {
-      const store = this.$store
-      store.state.api.backendInteractor.blockUser(this.user.id)
-        .then((blockedUser) => {
-          store.commit('addNewUsers', [blockedUser])
-          store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
-          store.commit('removeStatus', { timeline: 'public', userId: this.user.id })
-          store.commit('removeStatus', { timeline: 'publicAndExternal', userId: this.user.id })
-        })
+      this.$store.dispatch('blockUser', this.user.id)
     },
     unblockUser () {
-      const store = this.$store
-      store.state.api.backendInteractor.unblockUser(this.user.id)
-        .then((unblockedUser) => store.commit('addNewUsers', [unblockedUser]))
+      this.$store.dispatch('unblockUser', this.user.id)
+    },
+    muteUser () {   // Mastodon Mute
+      this.$store.dispatch('muteUser', this.user.id)
+    },
+    unmuteUser () { // Mastodon Unmute
+      this.$store.dispatch('unmuteUser', this.user.id)
     },
     toggleMute () {
+      // TODO: Pleroma mute/unmute, Need to migrate to the Mastodon API
       const store = this.$store
       store.commit('setMuted', {user: this.user, muted: !this.user.muted})
       store.state.api.backendInteractor.setUserMute(this.user)

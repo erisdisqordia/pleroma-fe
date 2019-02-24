@@ -1,3 +1,5 @@
+import { generateUrl } from '../../utils/url'
+
 /* eslint-env browser */
 const LOGIN_URL = '/api/account/verify_credentials.json'
 const FRIENDS_TIMELINE_URL = '/api/statuses/friends_timeline.json'
@@ -19,6 +21,9 @@ const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
 const BLOCKS_URL = '/api/statuses/blocks.json'
+const MUTES_URL = '/api/v1/mutes.json'
+const MUTING_URL = '/api/v1/accounts/:id/mute'
+const UNMUTING_URL = '/api/v1/accounts/:id/unmute'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
@@ -538,14 +543,43 @@ const changePassword = ({credentials, password, newPassword, newPasswordConfirma
 }
 
 const fetchMutes = ({credentials}) => {
-  const url = '/api/qvitter/mutes.json'
-
-  return fetch(url, {
+  return fetch(MUTES_URL, {
     headers: authHeaders(credentials)
-  }).then((data) => data.json())
+  }).then((data) => {
+    if (data.ok) {
+      return data.json()
+    }
+    throw new Error('Error fetching mutes', data)
+  })
 }
 
-const fetchBlocks = ({page, credentials}) => {
+const muteUser = ({id, credentials}) => {
+  const url = generateUrl(MUTING_URL, { id })
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => {
+    if (data.ok) {
+      return data.json()
+    }
+    throw new Error('Error muting', data)
+  })
+}
+
+const unmuteUser = ({id, credentials}) => {
+  const url = generateUrl(UNMUTING_URL, { id })
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => {
+    if (data.ok) {
+      return data.json()
+    }
+    throw new Error('Error unmuting', data)
+  })
+}
+
+const fetchBlocks = ({credentials}) => {
   return fetch(BLOCKS_URL, {
     headers: authHeaders(credentials)
   }).then((data) => {
@@ -620,6 +654,8 @@ const apiService = {
   fetchAllFollowing,
   setUserMute,
   fetchMutes,
+  muteUser,
+  unmuteUser,
   fetchBlocks,
   fetchOAuthTokens,
   revokeOAuthToken,

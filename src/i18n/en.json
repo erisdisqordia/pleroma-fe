@@ -19,7 +19,8 @@
     "apply": "Apply",
     "submit": "Submit",
     "more": "More",
-    "generic_error": "An error occured"
+    "generic_error": "An error occured",
+    "optional": "optional"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",
@@ -92,7 +93,6 @@
     "token": "Invite token",
     "captcha": "CAPTCHA",
     "new_captcha": "Click the image to get a new captcha",
-    "optional": "optional",
     "username_placeholder": "e.g. lain",
     "fullname_placeholder": "e.g. Lain Iwakura",
     "bio_placeholder": "e.g.\nHi, I'm Lain\nI’m an anime girl living in suburban Japan. You may know me from the Wired.",

@@ -304,7 +304,6 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
         }
       }
     } else if (notification.seen) {
-      state.notifications.data.find(n => n.id === notification.id).seen = true
       state.notifications.idStore[notification.id].seen = true
     }
   })

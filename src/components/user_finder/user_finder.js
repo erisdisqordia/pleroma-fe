@@ -8,7 +8,7 @@ const UserFinder = {
   methods: {
     findUser (username) {
       this.$router.push({ name: 'user-search', query: { query: username } })
-      this.$refs.username.focus()
+      this.$refs.userSearchInput.focus()
     },
     toggleHidden () {
       this.hidden = !this.hidden

@@ -303,6 +303,9 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
           setTimeout(notification.close.bind(notification), 5000)
         }
       }
+    } else if (notification.seen) {
+      state.notifications.data.find(n => n.id === notification.id).seen = true
+      state.notifications.idStore[notification.id].seen = true
     }
   })
 }

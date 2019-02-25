@@ -1,5 +1,4 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
-import apiService from '../../services/api/api.service.js'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
@@ -99,25 +98,6 @@ export default {
       requestFollow(this.user, store).then(({sent}) => {
         this.followRequestInProgress = false
         this.followRequestSent = sent
-
-        const rootState = store.rootState || store.state
-        const credentials = store.state.users.currentUser.credentials
-        const timelineData = rootState.statuses.timelines['friends']
-        apiService.fetchTimeline({
-          store,
-          credentials,
-          userId: this.user.id,
-          timeline: 'user',
-          between: true,
-          until: timelineData.maxId,
-          since: timelineData.minVisibleId
-        }).then((statuses) => {
-          store.dispatch('addNewStatuses', {
-            timeline: 'friends',
-            statuses,
-            showImmediately: true
-          })
-        }, () => store.dispatch('setError', { value: true }))
       })
     },
     unfollowUser () {
@@ -145,37 +125,6 @@ export default {
       store.state.api.backendInteractor.unblockUser(this.user.id)
         .then((unblockedUser) => {
           store.commit('addNewUsers', [unblockedUser])
-
-          const rootState = store.rootState || store.state
-          const credentials = store.state.users.currentUser.credentials
-          const timelineData = rootState.statuses.timelines['friends']
-          apiService.fetchTimeline({
-            store,
-            credentials,
-            userId: this.user.id,
-            timeline: 'user',
-            between: true,
-            until: timelineData.maxId,
-            since: timelineData.minVisibleId
-          }).then((statuses) => {
-            store.dispatch('addNewStatuses', {
-              timeline: 'public',
-              statuses,
-              showImmediately: true
-            })
-            store.dispatch('addNewStatuses', {
-              timeline: 'publicAndExternal',
-              statuses,
-              showImmediately: true
-            })
-            if (this.user.follows_you) {
-              store.dispatch('addNewStatuses', {
-                timeline: 'friends',
-                statuses,
-                showImmediately: true
-              })
-            }
-          }, () => store.dispatch('setError', { value: true }))
         })
     },
     toggleMute () {

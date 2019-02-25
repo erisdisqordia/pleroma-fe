@@ -1,4 +1,4 @@
-import { remove, slice, each, find, maxBy, minBy, merge, last, isArray } from 'lodash'
+import { remove, slice, each, find, maxBy, minBy, merge, first, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -312,20 +312,8 @@ const removeStatus = (state, { timeline, userId }) => {
   if (userId) {
     remove(timelineObject.statuses, { user: { id: userId } })
     remove(timelineObject.visibleStatuses, { user: { id: userId } })
-    const statusesObject = timelineObject.statusesObject
-    const visibleStatusesObject = timelineObject.visibleStatusesObject
-    each(statusesObject, (status, key) => {
-      if (status.user.id === userId) {
-        delete statusesObject[key]
-      }
-    })
-    each(visibleStatusesObject, (status, key) => {
-      if (status.user.id === userId) {
-        delete visibleStatusesObject[key]
-      }
-    })
-    timelineObject.minVisibleId = (last(timeline.visibleStatuses) || {}).id
-    timelineObject.maxId = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
+    timelineObject.minVisibleId = timelineObject.visibleStatuses.length > 0 ? last(timelineObject.visibleStatuses).id : 0
+    timelineObject.maxId = timelineObject.statuses.length > 0 ? first(timelineObject.statuses).id : 0
   }
 }
 

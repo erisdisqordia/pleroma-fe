@@ -189,17 +189,13 @@ const users = {
       })
     },
     addFollowers ({ rootState, commit }, fetchBy) {
-      return new Promise((resolve, reject) => {
-        const user = rootState.users.usersObject[fetchBy]
-        const page = user.followersPage || 1
-        rootState.api.backendInteractor.fetchFollowers({ id: user.id, page })
-          .then((followers) => {
-            commit('addFollowers', { id: user.id, followers, page })
-            resolve(followers)
-          }).catch(() => {
-            reject()
-          })
-      })
+      const user = rootState.users.usersObject[fetchBy]
+      const page = user.followersPage || 1
+      return rootState.api.backendInteractor.fetchFollowers({ id: user.id, page })
+        .then((followers) => {
+          commit('addFollowers', { id: user.id, followers, page })
+          return followers
+        })
     },
     clearFriendsAndFollowers ({ commit }, userKey) {
       commit('clearFriendsAndFollowers', userKey)

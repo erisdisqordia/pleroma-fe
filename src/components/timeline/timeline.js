@@ -1,7 +1,6 @@
 import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import StatusOrConversation from '../status_or_conversation/status_or_conversation.vue'
-import UserCard from '../user_card/user_card.vue'
 import { throttle } from 'lodash'
 
 const Timeline = {
@@ -44,8 +43,7 @@ const Timeline = {
   },
   components: {
     Status,
-    StatusOrConversation,
-    UserCard
+    StatusOrConversation
   },
   created () {
     const store = this.$store

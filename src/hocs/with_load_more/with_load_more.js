@@ -6,10 +6,11 @@ import './with_load_more.scss'
 const withLoadMore = ({
   fetch,                      // function to fetch entries and return a promise
   select,                     // function to select data from store
-  childPropName = 'entries'   // name of the prop to be passed into the wrapped component
+  childPropName = 'entries',  // name of the prop to be passed into the wrapped component
+  additionalPropNames = []    // additional prop name list of the wrapper component
 }) => (WrappedComponent) => {
   const originalProps = WrappedComponent.props || []
-  const props = filter(originalProps, v => v !== 'entries')
+  const props = filter(originalProps, v => v !== childPropName).concat(additionalPropNames)
 
   return Vue.component('withLoadMore', {
     render (createElement) {

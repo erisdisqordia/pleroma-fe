@@ -7,6 +7,7 @@ import './with_load_more.scss'
 const withLoadMore = ({
   fetch,                      // function to fetch entries and return a promise
   select,                     // function to select data from store
+  destroy,                    // function called at "destroyed" lifecycle
   childPropName = 'entries',  // name of the prop to be passed into the wrapped component
   additionalPropNames = []    // additional prop name list of the wrapper component
 }) => (WrappedComponent) => {
@@ -58,6 +59,7 @@ const withLoadMore = ({
     },
     destroyed () {
       window.removeEventListener('scroll', this.scrollLoad)
+      destroy && destroy(this.$props, this.$store)
     },
     methods: {
       fetchEntries () {

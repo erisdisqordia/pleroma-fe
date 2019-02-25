@@ -145,7 +145,6 @@ const UserProfile = {
   },
   components: {
     UserCardContent,
-    UserCard,
     Timeline,
     FollowerList,
     FriendList

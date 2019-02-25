@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import filter from 'lodash/filter'
 import isEmpty from 'lodash/isEmpty'
+import { getComponentProps } from '../../services/component_utils/component_utils'
 import './with_load_more.scss'
 
 const withLoadMore = ({
@@ -9,7 +10,7 @@ const withLoadMore = ({
   childPropName = 'entries',  // name of the prop to be passed into the wrapped component
   additionalPropNames = []    // additional prop name list of the wrapper component
 }) => (WrappedComponent) => {
-  const originalProps = WrappedComponent.props || []
+  const originalProps = Object.keys(getComponentProps(WrappedComponent))
   const props = filter(originalProps, v => v !== childPropName).concat(additionalPropNames)
 
   return Vue.component('withLoadMore', {

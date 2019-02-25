@@ -4,7 +4,7 @@
       {{$t('nav.user_search')}}
     </div>
     <div class="user-search-input-container">
-      <input class="user-finder-input" @keyup.enter="newQuery(username)" v-model="username" :placeholder="$t('finder.find_user')"/>
+      <input class="user-finder-input" ref="userSearchInput" @keyup.enter="newQuery(username)" v-model="username" :placeholder="$t('finder.find_user')"/>
       <button class="btn search-button" @click="newQuery(username)">
         <i class="icon-search"/>
       </button>

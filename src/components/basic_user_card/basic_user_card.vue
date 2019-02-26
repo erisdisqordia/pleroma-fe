@@ -73,10 +73,11 @@
 
   &-secondary-area {
     flex: none;
-  }
 
-  &-third-area {
-    margin-top: .2em;
+    .btn {
+      margin-top: .5em;
+      width: 10em;
+    }
   }
 
   &-expanded-content {

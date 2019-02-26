@@ -9,15 +9,13 @@
     <div class="user-card-collapsed-content" v-else>
       <div class="user-card-primary-secondary-wrapper">
         <div class="user-card-primary-area">
-          <div :title="user.name" class="user-name">
+          <div :title="user.name" class="user-card-user-name">
             <span v-if="user.name_html" v-html="user.name_html"></span>
             <span v-else>{{ user.name }}</span>
           </div>
-          <div>
-            <router-link class='user-screen-name' :to="userProfileLink(user)">
-              @{{user.screen_name}}
-            </router-link>
-          </div>
+          <router-link :to="userProfileLink(user)">
+            @{{user.screen_name}}
+          </router-link>
         </div>
         <div class="user-card-secondary-area">
           <slot name="secondary-area"></slot>
@@ -61,13 +59,14 @@
 
   &-primary-area {
     flex: 1;
-    .user-name {
-      img {
-        object-fit: contain;
-        height: 16px;
-        width: 16px;
-        vertical-align: middle;
-      }
+  }
+
+  &-user-name {
+    img {
+      object-fit: contain;
+      height: 16px;
+      width: 16px;
+      vertical-align: middle;
     }
   }
 

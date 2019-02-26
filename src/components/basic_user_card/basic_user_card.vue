@@ -1,7 +1,7 @@
 <template>
   <div class="user-card">
     <router-link :to="userProfileLink(user)">
-      <UserAvatar class="avatar" :compact="true" @click.prevent.native="toggleUserExpanded" :src="user.profile_image_url"/>
+      <UserAvatar class="avatar" @click.prevent.native="toggleUserExpanded" :src="user.profile_image_url"/>
     </router-link>
     <div class="user-card-expanded-content" v-if="userExpanded">
       <user-card-content :user="user" :switcher="false"></user-card-content>

@@ -8,7 +8,7 @@ const FollowCard = {
   ],
   data () {
     return {
-      progress: false,
+      inProgress: false,
       requestSent: false,
       updated: false
     }
@@ -25,17 +25,17 @@ const FollowCard = {
   },
   methods: {
     followUser () {
-      this.progress = true
+      this.inProgress = true
       requestFollow(this.user, this.$store).then(({ sent, updated }) => {
-        this.progress = false
+        this.inProgress = false
         this.requestSent = sent
         this.updated = updated
       })
     },
     unfollowUser () {
-      this.progress = true
+      this.inProgress = true
       requestUnfollow(this.user, this.$store).then(({ updated }) => {
-        this.progress = false
+        this.inProgress = false
         this.updated = updated
       })
     }

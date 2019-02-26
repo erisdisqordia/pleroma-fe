@@ -5,10 +5,10 @@
         v-if="showFollow"
         class="btn btn-default"
         @click="followUser"
-        :disabled="progress"
+        :disabled="inProgress"
         :title="requestSent ? $t('user_card.follow_again') : ''"
       >
-        <template v-if="progress">
+        <template v-if="inProgress">
           {{ $t('user_card.follow_progress') }}
         </template>
         <template v-else-if="requestSent">
@@ -18,8 +18,8 @@
           {{ $t('user_card.follow') }}
         </template>
       </button>
-      <button v-if="following" class="btn btn-default pressed" @click="unfollowUser" :disabled="progress">
-        <template v-if="progress">
+      <button v-if="following" class="btn btn-default pressed" @click="unfollowUser" :disabled="inProgress">
+        <template v-if="inProgress">
           {{ $t('user_card.follow_progress') }}
         </template>
         <template v-else>
@@ -27,7 +27,7 @@
         </template>
       </button>
     </template>
-    <template slot="third-area">
+    <template slot="tertiary-area">
       <span class="faint" v-if="!noFollowsYou && user.follows_you">
         {{ isMe ? $t('user_card.its_you') : $t('user_card.follows_you') }}
       </span>

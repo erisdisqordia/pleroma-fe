@@ -21,8 +21,8 @@
           <slot name="secondary-area"></slot>
         </div>
       </div>
-      <div class="user-card-third-area">
-        <slot name="third-area"></slot>
+      <div class="user-card-tertiary-area">
+        <slot name="tertiary-area"></slot>
       </div>
     </div>
   </div>

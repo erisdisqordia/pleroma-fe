@@ -1,6 +1,6 @@
 <template>
   <basic-user-card :user="user">
-    <template slot="third-area">
+    <template slot="tertiary-area">
       <div class="follow-request-card-action-buttons-container">
         <button class="btn btn-default" @click="approveUser">{{ $t('user_card.approve') }}</button>
         <button class="btn btn-default" @click="denyUser">{{ $t('user_card.deny') }}</button>

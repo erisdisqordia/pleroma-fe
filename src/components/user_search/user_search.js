@@ -1,8 +1,8 @@
-import UserCard from '../user_card/user_card.vue'
+import FollowCard from '../follow_card/follow_card.vue'
 import userSearchApi from '../../services/new_api/user_search.js'
 const userSearch = {
   components: {
-    UserCard
+    FollowCard
   },
   props: [
     'query'

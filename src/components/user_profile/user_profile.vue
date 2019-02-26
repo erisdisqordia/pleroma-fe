@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="panel-body">
-      <span v-if="error">{{ $t('user_profile.profile_does_not_exist') }}</span>
+      <span v-if="error">{{ error }}</span>
       <i class="icon-spin3 animate-spin" v-else></i>
     </div>
   </div>

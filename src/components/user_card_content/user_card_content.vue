@@ -222,6 +222,13 @@
     overflow: hidden;
     flex: 1 1 auto;
     margin-right: 1em;
+
+    img {
+      object-fit: contain;
+      height: 16px;
+      width: 16px;
+      vertical-align: middle;
+    }
   }
 
   .user-screen-name {
@@ -386,4 +393,24 @@
   }
 }
 
+.usercard {
+  width: fill-available;
+  border-radius: $fallback--panelRadius;
+  border-radius: var(--panelRadius, $fallback--panelRadius);
+  border-style: solid;
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
+  border-width: 1px;
+  overflow: hidden;
+
+  .panel-heading {
+    background: transparent;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
 </style>

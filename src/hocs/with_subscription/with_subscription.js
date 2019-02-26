@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import filter from 'lodash/filter'
 import isEmpty from 'lodash/isEmpty'
 import { getComponentProps } from '../../services/component_utils/component_utils'
 import './with_subscription.scss'
@@ -11,7 +10,7 @@ const withSubscription = ({
   additionalPropNames = []    // additional prop name list of the wrapper component
 }) => (WrappedComponent) => {
   const originalProps = Object.keys(getComponentProps(WrappedComponent))
-  const props = filter(originalProps, v => v !== childPropName).concat(additionalPropNames)
+  const props = originalProps.filter(v => v !== childPropName).concat(additionalPropNames)
 
   return Vue.component('withSubscription', {
     props: [

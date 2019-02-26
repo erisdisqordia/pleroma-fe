@@ -110,15 +110,10 @@
   @media (min-width: 320px) and (max-width: 480px) {
     &-primary-secondary-wrapper {
       flex-direction: column;
-      align-items: stretch;
     }
 
     &-primary-area {
       margin-right: 0;
-    }
-
-    &-secondary-area {
-      align-self: flex-end;
     }
   }
 }

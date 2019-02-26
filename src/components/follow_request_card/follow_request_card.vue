@@ -22,6 +22,10 @@
     flex: 1 1;
     max-width: 12em;
     min-width: 8em;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 </style>

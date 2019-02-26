@@ -13,9 +13,12 @@
             <span v-if="user.name_html" v-html="user.name_html"></span>
             <span v-else>{{ user.name }}</span>
           </div>
-          <router-link :to="userProfileLink(user)">
-            @{{user.screen_name}}
-          </router-link>
+          <div>
+            <router-link :to="userProfileLink(user)">
+              @{{user.screen_name}}
+            </router-link>
+          </div>
+          <slot name="primary-area"></slot>
         </div>
         <div class="user-card-secondary-area">
           <slot name="secondary-area"></slot>
@@ -49,6 +52,7 @@
     margin-left: 0.7em;
     text-align: left;
     flex: 1;
+    min-width: 0;
   }
 
   &-primary-secondary-wrapper {
@@ -59,6 +63,8 @@
 
   &-primary-area {
     flex: 1;
+    margin-right: 1em;
+    min-width: 0;
   }
 
   &-user-name {
@@ -98,6 +104,16 @@
 
     p {
       margin-bottom: 0;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    &-primary-secondary-wrapper {
+      flex-direction: column;
+    }
+
+    &-primary-area {
+      margin-right: 0;
     }
   }
 }

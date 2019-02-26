@@ -7,19 +7,24 @@
       <user-card-content :user="user" :switcher="false"></user-card-content>
     </div>
     <div class="user-card-collapsed-content" v-else>
-      <div class="user-card-primary-area">
-        <div :title="user.name" class="user-name">
-          <span v-if="user.name_html" v-html="user.name_html"></span>
-          <span v-else>{{ user.name }}</span>
+      <div class="user-card-primary-secondary-wrapper">
+        <div class="user-card-primary-area">
+          <div :title="user.name" class="user-name">
+            <span v-if="user.name_html" v-html="user.name_html"></span>
+            <span v-else>{{ user.name }}</span>
+          </div>
+          <div>
+            <router-link class='user-screen-name' :to="userProfileLink(user)">
+              @{{user.screen_name}}
+            </router-link>
+          </div>
         </div>
-        <div>
-          <router-link class='user-screen-name' :to="userProfileLink(user)">
-            @{{user.screen_name}}
-          </router-link>
+        <div class="user-card-secondary-area">
+          <slot name="secondary-area"></slot>
         </div>
       </div>
-      <div class="user-card-secondary-area">
-        <slot name="secondary-area"></slot>
+      <div class="user-card-third-area">
+        <slot name="third-area"></slot>
       </div>
     </div>
   </div>
@@ -46,6 +51,9 @@
     margin-left: 0.7em;
     text-align: left;
     flex: 1;
+  }
+
+  &-primary-secondary-wrapper {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -67,9 +75,13 @@
     flex: none;
   }
 
+  &-third-area {
+    margin-top: .2em;
+  }
+
   &-expanded-content {
     flex: 1;
-    margin: 0.2em 0 0 0.7em;
+    margin-left: 0.7em;
     border-radius: $fallback--panelRadius;
     border-radius: var(--panelRadius, $fallback--panelRadius);
     border-style: solid;

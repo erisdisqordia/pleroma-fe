@@ -1,7 +1,7 @@
 import { compose } from 'vue-compose'
 import get from 'lodash/get'
 import UserCardContent from '../user_card_content/user_card_content.vue'
-import UserCard from '../user_card/user_card.vue'
+import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
 import withList from '../../hocs/with_list/with_list'
@@ -15,7 +15,7 @@ const FollowerList = compose(
     additionalPropNames: ['userId']
   }),
   withList({ getEntryProps: user => ({ user }) })
-)(UserCard)
+)(FollowCard)
 
 const FriendList = compose(
   withLoadMore({
@@ -26,7 +26,7 @@ const FriendList = compose(
     additionalPropNames: ['userId']
   }),
   withList({ getEntryProps: user => ({ user }) })
-)(UserCard)
+)(FollowCard)
 
 const UserProfile = {
   data () {

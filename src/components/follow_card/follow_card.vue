@@ -1,11 +1,9 @@
 <template>
   <basic-user-card :user="user">
-    <template slot="primary-area">
-      <span class="faint" v-if="!noFollowsYou && user.follows_you">
+    <div class="follow-card-content-container">
+      <span class="faint">
         {{ isMe ? $t('user_card.its_you') : $t('user_card.follows_you') }}
       </span>
-    </template>
-    <template slot="secondary-area">
       <button
         v-if="showFollow"
         class="btn btn-default"
@@ -31,8 +29,25 @@
           {{ $t('user_card.follow_unfollow') }}
         </template>
       </button>
-    </template>
+    </div>
   </basic-user-card>
 </template>
 
 <script src="./follow_card.js"></script>
+
+<style lang="scss">
+.follow-card-content-container {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  line-height: 1.5em;
+
+  .btn {
+    margin-top: 0.5em;
+    margin-left: auto;
+    width: 10em;
+  }
+}
+</style>

@@ -40,8 +40,7 @@ const Status = {
       expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
         ? !this.$store.state.instance.collapseMessageWithSubject
         : !this.$store.state.config.collapseMessageWithSubject,
-      betterShadow: this.$store.state.interface.browserSupport.cssFilter,
-      maxAttachments: 9
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
   computed: {
@@ -225,7 +224,7 @@ const Status = {
     attachmentSize () {
       if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
         (this.$store.state.config.hideAttachmentsInConv && this.inConversation) ||
-        (this.status.attachments.length > this.maxAttachments)) {
+        (this.status.attachments.length > this.maxThumbnails)) {
         return 'hide'
       } else if (this.compact) {
         return 'small'
@@ -249,6 +248,9 @@ const Status = {
       return this.status.attachments.filter(
         file => !fileType.fileMatchesSomeType(this.galleryTypes, file)
       )
+    },
+    maxThumbnails () {
+      return this.$store.state.config.maxThumbnails
     }
   },
   components: {

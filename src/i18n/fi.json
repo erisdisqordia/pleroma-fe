@@ -133,6 +133,7 @@
     "general": "Yleinen",
     "hide_attachments_in_convo": "Piilota liitteet keskusteluissa",
     "hide_attachments_in_tl": "Piilota liitteet aikajanalla",
+    "max_thumbnails": "Suurin sallittu määrä liitteitä esikatselussa",
     "hide_isp": "Piilota palvelimenkohtainen ruutu",
     "preload_images": "Esilataa kuvat",
     "use_one_click_nsfw": "Avaa NSFW-liitteet yhdellä painalluksella",

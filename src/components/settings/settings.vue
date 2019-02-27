@@ -137,6 +137,10 @@
               <label for="hideAttachmentsInConv">{{$t('settings.hide_attachments_in_convo')}}</label>
             </li>
             <li>
+              <label for="maxThumbnails">{{$t('settings.max_thumbnails')}}</label>
+              <input class="number-input" type="number" id="maxThumbnails" v-model.number="maxThumbnails" min="0" step="1">
+            </li>
+            <li>
               <input type="checkbox" id="hideNsfw" v-model="hideNsfwLocal">
               <label for="hideNsfw">{{$t('settings.nsfw_clickthrough')}}</label>
             </li>
@@ -315,6 +319,10 @@
     min-height: 28px;
     min-width: 10em;
     padding: 0 2em;
+  }
+
+  .number-input {
+    max-width: 6em;
   }
 }
 .select-multiple {

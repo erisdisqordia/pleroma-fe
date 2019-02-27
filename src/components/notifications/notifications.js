@@ -1,5 +1,6 @@
 import Notification from '../notification/notification.vue'
 import notificationsFetcher from '../../services/notifications_fetcher/notifications_fetcher.service.js'
+
 import {
   notificationsFromStore,
   visibleNotificationsFromStore,

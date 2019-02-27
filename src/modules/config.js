@@ -8,6 +8,7 @@ const defaultState = {
   collapseMessageWithSubject: undefined, // instance default
   hideAttachments: false,
   hideAttachmentsInConv: false,
+  maxThumbnails: 16,
   hideNsfw: true,
   preloadImage: true,
   loopVideo: true,

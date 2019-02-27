@@ -105,7 +105,6 @@ export default {
       this.followRequestInProgress = true
       requestUnfollow(this.user, store).then(() => {
         this.followRequestInProgress = false
-
         store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
       })
     },
@@ -114,7 +113,6 @@ export default {
       store.state.api.backendInteractor.blockUser(this.user.id)
         .then((blockedUser) => {
           store.commit('addNewUsers', [blockedUser])
-
           store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
           store.commit('removeStatus', { timeline: 'public', userId: this.user.id })
           store.commit('removeStatus', { timeline: 'publicAndExternal', userId: this.user.id })
@@ -123,9 +121,7 @@ export default {
     unblockUser () {
       const store = this.$store
       store.state.api.backendInteractor.unblockUser(this.user.id)
-        .then((unblockedUser) => {
-          store.commit('addNewUsers', [unblockedUser])
-        })
+        .then((unblockedUser) => store.commit('addNewUsers', [unblockedUser]))
     },
     toggleMute () {
       const store = this.$store

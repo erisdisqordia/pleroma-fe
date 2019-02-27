@@ -362,6 +362,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   if (timeline === 'media') {
     params.push(['only_media', 1])
   }
+
   params.push(['count', 20])
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')

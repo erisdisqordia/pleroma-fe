@@ -1,7 +1,7 @@
 <template>
   <basic-user-card :user="user">
     <div class="follow-card-content-container">
-      <span class="faint">
+      <span class="faint" v-if="!noFollowsYou && user.follows_you">
         {{ isMe ? $t('user_card.its_you') : $t('user_card.follows_you') }}
       </span>
       <button

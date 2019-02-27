@@ -12,7 +12,7 @@
         <span v-else>{{ user.name }}</span>
       </div>
       <div>
-        <router-link :to="userProfileLink(user)">
+        <router-link class="user-card-screen-name" :to="userProfileLink(user)">
           @{{user.screen_name}}
         </router-link>
       </div>

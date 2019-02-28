@@ -1,4 +1,4 @@
-import { remove, slice, each, find, maxBy, minBy, merge, last, isArray, cloneDeep } from 'lodash'
+import { remove, slice, each, find, maxBy, minBy, merge, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -18,7 +18,7 @@ const emptyTl = (userId = 0) => ({
   flushMarker: 0
 })
 
-export const defaultState = {
+export const defaultState = () => ({
   allStatuses: [],
   allStatusesObject: {},
   maxId: 0,
@@ -45,7 +45,7 @@ export const defaultState = {
     tag: emptyTl(),
     dms: emptyTl()
   }
-}
+})
 
 export const prepareStatus = (status) => {
   // Set deleted flag
@@ -326,8 +326,9 @@ export const mutations = {
     state.notifications.fetcherId = fetcherId
   },
   resetStatuses (state) {
+    const emptyState = defaultState()
     Object.keys(state).forEach(key => {
-      state[key] = cloneDeep(defaultState[key])
+      state[key] = emptyState[key]
     })
   },
   clearTimeline (state, { timeline }) {
@@ -380,7 +381,7 @@ export const mutations = {
 }
 
 const statuses = {
-  state: cloneDeep(defaultState),
+  state: defaultState(),
   actions: {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })

@@ -21,7 +21,7 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
   const timelineData = rootState.statuses.timelines[camelCase(timeline)]
 
   if (older) {
-    args['until'] = until || timelineData.minVisibleId
+    args['until'] = until || timelineData.minId
   } else {
     args['since'] = timelineData.maxId
   }

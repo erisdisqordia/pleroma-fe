@@ -1,16 +1,16 @@
 import Vue from 'vue'
-import reject from 'lodash/reject'
 import isEmpty from 'lodash/isEmpty'
-import omit from 'lodash/omit'
+import { getComponentProps } from '../../services/component_utils/component_utils'
 import './with_subscription.scss'
 
 const withSubscription = ({
   fetch,                      // function to fetch entries and return a promise
   select,                     // function to select data from store
-  childPropName = 'content'   // name of the prop to be passed into the wrapped component
+  childPropName = 'content',  // name of the prop to be passed into the wrapped component
+  additionalPropNames = []    // additional prop name list of the wrapper component
 }) => (WrappedComponent) => {
-  const originalProps = WrappedComponent.props || []
-  const props = reject(originalProps, v => v === 'content')
+  const originalProps = Object.keys(getComponentProps(WrappedComponent))
+  const props = originalProps.filter(v => v !== childPropName).concat(additionalPropNames)
 
   return Vue.component('withSubscription', {
     props: [
@@ -21,7 +21,7 @@ const withSubscription = ({
       if (!this.error && !this.loading) {
         const props = {
           props: {
-            ...omit(this.$props, 'refresh'),
+            ...this.$props,
             [childPropName]: this.fetchedData
           },
           on: this.$listeners,

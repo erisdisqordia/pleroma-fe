@@ -13,7 +13,7 @@
       <i class="icon-spin3 animate-spin"/>
     </div>
     <div v-else class="panel-body">
-      <user-card v-for="user in users" :key="user.id" :user="user" :showFollows="true"></user-card>
+      <FollowCard v-for="user in users" :key="user.id" :user="user"/>
     </div>
   </div>
 </template>

@@ -1,26 +1,22 @@
 <template>
   <div class="user-card">
     <router-link :to="userProfileLink(user)">
-      <UserAvatar class="avatar" :compact="true" @click.prevent.native="toggleUserExpanded" :src="user.profile_image_url"/>
+      <UserAvatar class="avatar" @click.prevent.native="toggleUserExpanded" :src="user.profile_image_url"/>
     </router-link>
     <div class="user-card-expanded-content" v-if="userExpanded">
       <user-card-content :user="user" :switcher="false"></user-card-content>
     </div>
     <div class="user-card-collapsed-content" v-else>
-      <div class="user-card-primary-area">
-        <div :title="user.name" class="user-name">
-          <span v-if="user.name_html" v-html="user.name_html"></span>
-          <span v-else>{{ user.name }}</span>
-        </div>
-        <div>
-          <router-link class='user-screen-name' :to="userProfileLink(user)">
-            @{{user.screen_name}}
-          </router-link>
-        </div>
+      <div :title="user.name" class="user-card-user-name">
+        <span v-if="user.name_html" v-html="user.name_html"></span>
+        <span v-else>{{ user.name }}</span>
       </div>
-      <div class="user-card-secondary-area">
-        <slot name="secondary-area"></slot>
+      <div>
+        <router-link class="user-card-screen-name" :to="userProfileLink(user)">
+          @{{user.screen_name}}
+        </router-link>
       </div>
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -46,30 +42,21 @@
     margin-left: 0.7em;
     text-align: left;
     flex: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    min-width: 0;
   }
 
-  &-primary-area {
-    flex: 1;
-    .user-name {
-      img {
-        object-fit: contain;
-        height: 16px;
-        width: 16px;
-        vertical-align: middle;
-      }
+  &-user-name {
+    img {
+      object-fit: contain;
+      height: 16px;
+      width: 16px;
+      vertical-align: middle;
     }
-  }
-
-  &-secondary-area {
-    flex: none;
   }
 
   &-expanded-content {
     flex: 1;
-    margin: 0.2em 0 0 0.7em;
+    margin-left: 0.7em;
     border-radius: $fallback--panelRadius;
     border-radius: var(--panelRadius, $fallback--panelRadius);
     border-style: solid;

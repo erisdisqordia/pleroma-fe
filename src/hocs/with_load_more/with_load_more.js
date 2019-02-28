@@ -1,15 +1,17 @@
 import Vue from 'vue'
-import filter from 'lodash/filter'
 import isEmpty from 'lodash/isEmpty'
+import { getComponentProps } from '../../services/component_utils/component_utils'
 import './with_load_more.scss'
 
 const withLoadMore = ({
   fetch,                      // function to fetch entries and return a promise
   select,                     // function to select data from store
-  childPropName = 'entries'   // name of the prop to be passed into the wrapped component
+  destroy,                    // function called at "destroyed" lifecycle
+  childPropName = 'entries',  // name of the prop to be passed into the wrapped component
+  additionalPropNames = []    // additional prop name list of the wrapper component
 }) => (WrappedComponent) => {
-  const originalProps = WrappedComponent.props || []
-  const props = filter(originalProps, v => v !== 'entries')
+  const originalProps = Object.keys(getComponentProps(WrappedComponent))
+  const props = originalProps.filter(v => v !== childPropName).concat(additionalPropNames)
 
   return Vue.component('withLoadMore', {
     render (createElement) {
@@ -56,6 +58,7 @@ const withLoadMore = ({
     },
     destroyed () {
       window.removeEventListener('scroll', this.scrollLoad)
+      destroy && destroy(this.$props, this.$store)
     },
     methods: {
       fetchEntries () {

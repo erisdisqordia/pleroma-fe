@@ -1,8 +1,8 @@
-import UserCard from '../user_card/user_card.vue'
+import FollowRequestCard from '../follow_request_card/follow_request_card.vue'
 
 const FollowRequests = {
   components: {
-    UserCard
+    FollowRequestCard
   },
   created () {
     this.updateRequests()

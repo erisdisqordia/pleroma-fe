@@ -72,14 +72,20 @@ export const mutations = {
   },
   // Because frontend doesn't have a reason to keep these stuff in memory
   // outside of viewing someones user profile.
-  clearFriendsAndFollowers (state, userKey) {
-    const user = state.usersObject[userKey]
+  clearFriends (state, userId) {
+    const user = state.usersObject[userId]
     if (!user) {
       return
     }
     user.friends = []
-    user.followers = []
     user.friendsPage = 0
+  },
+  clearFollowers (state, userId) {
+    const user = state.usersObject[userId]
+    if (!user) {
+      return
+    }
+    user.followers = []
     user.followersPage = 0
   },
   addNewUsers (state, users) {
@@ -189,20 +195,19 @@ const users = {
       })
     },
     addFollowers ({ rootState, commit }, fetchBy) {
-      return new Promise((resolve, reject) => {
-        const user = rootState.users.usersObject[fetchBy]
-        const page = user.followersPage || 1
-        rootState.api.backendInteractor.fetchFollowers({ id: user.id, page })
-          .then((followers) => {
-            commit('addFollowers', { id: user.id, followers, page })
-            resolve(followers)
-          }).catch(() => {
-            reject()
-          })
-      })
+      const user = rootState.users.usersObject[fetchBy]
+      const page = user.followersPage || 1
+      return rootState.api.backendInteractor.fetchFollowers({ id: user.id, page })
+        .then((followers) => {
+          commit('addFollowers', { id: user.id, followers, page })
+          return followers
+        })
     },
-    clearFriendsAndFollowers ({ commit }, userKey) {
-      commit('clearFriendsAndFollowers', userKey)
+    clearFriends ({ commit }, userId) {
+      commit('clearFriends', userId)
+    },
+    clearFollowers ({ commit }, userId) {
+      commit('clearFollowers', userId)
     },
     registerPushNotifications (store) {
       const token = store.state.currentUser.credentials

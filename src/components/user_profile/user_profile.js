@@ -1,8 +1,32 @@
+import { compose } from 'vue-compose'
 import get from 'lodash/get'
 import UserCardContent from '../user_card_content/user_card_content.vue'
-import UserCard from '../user_card/user_card.vue'
+import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
-import FollowList from '../follow_list/follow_list.vue'
+import withLoadMore from '../../hocs/with_load_more/with_load_more'
+import withList from '../../hocs/with_list/with_list'
+
+const FollowerList = compose(
+  withLoadMore({
+    fetch: (props, $store) => $store.dispatch('addFollowers', props.userId),
+    select: (props, $store) => get($store.getters.userById(props.userId), 'followers', []),
+    destory: (props, $store) => $store.dispatch('clearFollowers', props.userId),
+    childPropName: 'entries',
+    additionalPropNames: ['userId']
+  }),
+  withList({ getEntryProps: user => ({ user }) })
+)(FollowCard)
+
+const FriendList = compose(
+  withLoadMore({
+    fetch: (props, $store) => $store.dispatch('addFriends', props.userId),
+    select: (props, $store) => get($store.getters.userById(props.userId), 'friends', []),
+    destory: (props, $store) => $store.dispatch('clearFriends', props.userId),
+    childPropName: 'entries',
+    additionalPropNames: ['userId']
+  }),
+  withList({ getEntryProps: user => ({ user }) })
+)(FollowCard)
 
 const UserProfile = {
   data () {
@@ -121,9 +145,9 @@ const UserProfile = {
   },
   components: {
     UserCardContent,
-    UserCard,
     Timeline,
-    FollowList
+    FollowerList,
+    FriendList
   }
 }
 

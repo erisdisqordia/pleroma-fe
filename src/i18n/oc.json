@@ -142,6 +142,7 @@
     "notification_visibility_mentions": "Mencions",
     "notification_visibility_repeats": "Repeticions",
     "no_rich_text_description": "Netejar lo format tèxte de totas las publicacions",
+    "oauth_tokens": "Llistats OAuth",
     "pause_on_unfocused": "Pausar la difusion quand l’onglet es pas seleccionat",
     "profile_tab": "Perfil",
     "replies_in_timeline": "Responsas del flux",

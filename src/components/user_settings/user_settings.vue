@@ -122,6 +122,30 @@
           </div>
 
           <div class="setting-item">
+            <h2>{{$t('settings.oauth_tokens')}}</h2>
+            <table class="oauth-tokens">
+              <thead>
+                <tr>
+                  <th>{{$t('settings.app_name')}}</th>
+                  <th>{{$t('settings.valid_until')}}</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="oauthToken in oauthTokens" :key="oauthToken.id">
+                  <td>{{oauthToken.appName}}</td>
+                  <td>{{oauthToken.validUntil}}</td>
+                  <td class="actions">
+                    <button class="btn btn-default" @click="revokeToken(oauthToken.id)">
+                      {{$t('settings.revoke_token')}}
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="setting-item">
             <h2>{{$t('settings.delete_account')}}</h2>
             <p v-if="!deletingAccount">{{$t('settings.delete_account_description')}}</p>
             <div v-if="deletingAccount">
@@ -212,6 +236,18 @@
     height: 150px;
     border-radius: $fallback--avatarRadius;
     border-radius: var(--avatarRadius, $fallback--avatarRadius);
+  }
+
+  .oauth-tokens {
+    width: 100%;
+
+    th {
+      text-align: left;
+    }
+
+    .actions {
+      text-align: right;
+    }
   }
 }
 </style>

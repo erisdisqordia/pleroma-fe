@@ -1,7 +1,6 @@
 import { compose } from 'vue-compose'
 import unescape from 'lodash/unescape'
 import get from 'lodash/get'
-
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import ImageCropper from '../image_cropper/image_cropper.vue'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
@@ -62,6 +61,9 @@ const UserSettings = {
       activeTab: 'profile'
     }
   },
+  created () {
+    this.$store.dispatch('fetchTokens')
+  },
   components: {
     StyleSwitcher,
     TabSwitcher,
@@ -89,6 +91,15 @@ const UserSettings = {
     },
     currentSaveStateNotice () {
       return this.$store.state.interface.settings.currentSaveStateNotice
+    },
+    oauthTokens () {
+      return this.$store.state.oauthTokens.tokens.map(oauthToken => {
+        return {
+          id: oauthToken.id,
+          appName: oauthToken.app_name,
+          validUntil: new Date(oauthToken.valid_until).toLocaleDateString()
+        }
+      })
     }
   },
   methods: {
@@ -308,6 +319,11 @@ const UserSettings = {
     logout () {
       this.$store.dispatch('logout')
       this.$router.replace('/')
+    },
+    revokeToken (id) {
+      if (window.confirm(`${this.$i18n.t('settings.revoke_token')}?`)) {
+        this.$store.dispatch('revokeToken', id)
+      }
     }
   }
 }

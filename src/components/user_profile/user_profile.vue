@@ -55,7 +55,8 @@
       </div>
     </div>
     <div class="panel-body">
-      <i class="icon-spin3 animate-spin"></i>
+      <span v-if="error">{{ error }}</span>
+      <i class="icon-spin3 animate-spin" v-else></i>
     </div>
   </div>
 </div>

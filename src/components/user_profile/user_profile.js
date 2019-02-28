@@ -1,9 +1,15 @@
+import get from 'lodash/get'
 import UserCardContent from '../user_card_content/user_card_content.vue'
 import UserCard from '../user_card/user_card.vue'
 import Timeline from '../timeline/timeline.vue'
 import FollowList from '../follow_list/follow_list.vue'
 
 const UserProfile = {
+  data () {
+    return {
+      error: false
+    }
+  },
   created () {
     this.$store.commit('clearTimeline', { timeline: 'user' })
     this.$store.commit('clearTimeline', { timeline: 'favorites' })
@@ -13,6 +19,16 @@ const UserProfile = {
     this.startFetchFavorites()
     if (!this.user.id) {
       this.$store.dispatch('fetchUser', this.fetchBy)
+        .catch((reason) => {
+          const errorMessage = get(reason, 'error.error')
+          if (errorMessage === 'No user with such user_id') { // Known error
+            this.error = this.$t('user_profile.profile_does_not_exist')
+          } else if (errorMessage) {
+            this.error = errorMessage
+          } else {
+            this.error = this.$t('user_profile.profile_loading_error')
+          }
+        })
     }
   },
   destroyed () {

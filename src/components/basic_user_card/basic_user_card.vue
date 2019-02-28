@@ -42,6 +42,7 @@
     margin-left: 0.7em;
     text-align: left;
     flex: 1;
+    min-width: 0;
   }
 
   &-user-name {

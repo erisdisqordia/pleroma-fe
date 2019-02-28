@@ -14,8 +14,8 @@ const startFetching = ({credentials, store}) => {
   return setInterval(boundFetchAndUpdate, 10000)
 }
 
-const requestFetcher = {
+const followRequestFetcher = {
   startFetching
 }
 
-export default requestFetcher
+export default followRequestFetcher

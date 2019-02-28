@@ -1,4 +1,4 @@
-import requestFetcher from '../../services/notifications_fetcher/request_fetcher.service.js'
+import followRequestFetcher from '../../services/follow_request_fetcher/follow_request_fetcher.service'
 
 const NavPanel = {
   created () {
@@ -6,7 +6,7 @@ const NavPanel = {
       const store = this.$store
       const credentials = store.state.users.currentUser.credentials
 
-      requestFetcher.startFetching({ store, credentials })
+      followRequestFetcher.startFetching({ store, credentials })
     }
   },
   computed: {

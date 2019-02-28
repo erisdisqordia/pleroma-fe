@@ -327,8 +327,8 @@ export const mutations = {
   },
   resetStatuses (state) {
     const emptyState = defaultState()
-    Object.keys(state).forEach(key => {
-      state[key] = emptyState[key]
+    Object.entries(emptyState).forEach(([key, value]) => {
+      state[key] = value
     })
   },
   clearTimeline (state, { timeline }) {

@@ -11,7 +11,8 @@ const Notifications = {
     const store = this.$store
     const credentials = store.state.users.currentUser.credentials
 
-    notificationsFetcher.startFetching({ store, credentials })
+    const fetcherId = notificationsFetcher.startFetching({ store, credentials })
+    this.$store.commit('setNotificationFetcher', { fetcherId })
   },
   data () {
     return {

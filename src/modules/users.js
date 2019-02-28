@@ -290,6 +290,10 @@ const users = {
       store.commit('setToken', false)
       store.dispatch('stopFetching', 'friends')
       store.commit('setBackendInteractor', backendInteractorService())
+      if (store.rootState.statuses.notifications.fetcherId) {
+        window.clearInterval(store.rootState.statuses.notifications.fetcherId)
+      }
+      store.commit('resetStatuses')
     },
     loginUser (store, accessToken) {
       return new Promise((resolve, reject) => {

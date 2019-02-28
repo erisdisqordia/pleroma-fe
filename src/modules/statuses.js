@@ -1,4 +1,4 @@
-import { remove, slice, each, find, maxBy, minBy, merge, last, isArray } from 'lodash'
+import { remove, slice, each, find, maxBy, minBy, merge, last, isArray, cloneDeep } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -29,7 +29,8 @@ export const defaultState = {
     data: [],
     idStore: {},
     loading: false,
-    error: false
+    error: false,
+    fetcherId: null
   },
   favorites: new Set(),
   error: false,
@@ -321,6 +322,14 @@ export const mutations = {
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
+  setNotificationFetcher (state, { fetcherId }) {
+    state.notifications.fetcherId = fetcherId
+  },
+  resetStatuses (state) {
+    Object.keys(state).forEach(key => {
+      state[key] = cloneDeep(defaultState[key])
+    })
+  },
   clearTimeline (state, { timeline }) {
     state.timelines[timeline] = emptyTl(state.timelines[timeline].userId)
   },
@@ -371,7 +380,7 @@ export const mutations = {
 }
 
 const statuses = {
-  state: defaultState,
+  state: cloneDeep(defaultState),
   actions: {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })

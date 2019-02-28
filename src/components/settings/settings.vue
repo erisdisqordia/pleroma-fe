@@ -150,7 +150,7 @@
                 <label for="preloadImage">{{$t('settings.preload_images')}}</label>
               </li>
               <li>
-                <input type="checkbox" id="useOneClickNsfw" v-model="useOneClickNsfw">
+                <input :disabled="!hideNsfwLocal" type="checkbox" id="useOneClickNsfw" v-model="useOneClickNsfw">
                 <label for="useOneClickNsfw">{{$t('settings.use_one_click_nsfw')}}</label>
               </li>
             </ul>

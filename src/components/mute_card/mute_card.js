@@ -12,7 +12,7 @@ const MuteCard = {
       return this.$store.getters.findUser(this.userId)
     },
     muted () {
-      return this.user.mastodonMuted
+      return this.user.muted
     }
   },
   components: {

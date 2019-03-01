@@ -110,11 +110,11 @@ export const mutations = {
   },
   muteUser (state, id) {
     const user = state.usersObject[id]
-    set(user, 'mastodonMuted', true)
+    set(user, 'muted', true)
   },
   unmuteUser (state, id) {
     const user = state.usersObject[id]
-    set(user, 'mastodonMuted', false)
+    set(user, 'muted', false)
   },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
@@ -206,9 +206,10 @@ const users = {
           return Promise.all(promises)
         })
         .then((mutedUsers) => {
-          each(mutedUsers, (user) => { user.mastodonMuted = true })
+          each(mutedUsers, (user) => { user.muted = true })
           store.commit('addNewUsers', mutedUsers)
           store.commit('saveMutes', map(mutedUsers, 'id'))
+          // TODO: Unset muted property of the rest users
         })
     },
     muteUser (store, id) {
@@ -367,6 +368,11 @@ const users = {
 
               // Start getting fresh posts.
               store.dispatch('startFetching', { timeline: 'friends' })
+
+              // Fetch mutes
+              // TODO: We should not show timeline until fetchMutes is resolved
+              // However, we can get rid of this logic totally if we can know user muted state from user object
+              store.dispatch('fetchMutes')
 
               // Fetch our friends
               store.rootState.api.backendInteractor.fetchFriends({ id: user.id })

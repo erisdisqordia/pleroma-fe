@@ -26,7 +26,6 @@ const MUTING_URL = '/api/v1/accounts/:id/mute'
 const UNMUTING_URL = '/api/v1/accounts/:id/unmute'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
-const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
 const REGISTRATION_URL = '/api/account/register.json'
 const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
@@ -343,22 +342,6 @@ const fetchStatus = ({id, credentials}) => {
     .then((data) => parseStatus(data))
 }
 
-const setUserMute = ({id, credentials, muted = true}) => {
-  const form = new FormData()
-
-  const muteInteger = muted ? 1 : 0
-
-  form.append('namespace', 'qvitter')
-  form.append('data', muteInteger)
-  form.append('topic', `mute:${id}`)
-
-  return fetch(QVITTER_USER_PREF_URL, {
-    method: 'POST',
-    headers: authHeaders(credentials),
-    body: form
-  })
-}
-
 const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false}) => {
   const timelineUrls = {
     public: PUBLIC_TIMELINE_URL,
@@ -652,7 +635,6 @@ const apiService = {
   deleteStatus,
   uploadMedia,
   fetchAllFollowing,
-  setUserMute,
   fetchMutes,
   muteUser,
   unmuteUser,

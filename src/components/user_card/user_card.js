@@ -126,17 +126,11 @@ export default {
     unblockUser () {
       this.$store.dispatch('unblockUser', this.user.id)
     },
-    muteUser () {   // Mastodon Mute
+    muteUser () {
       this.$store.dispatch('muteUser', this.user.id)
     },
-    unmuteUser () { // Mastodon Unmute
+    unmuteUser () {
       this.$store.dispatch('unmuteUser', this.user.id)
-    },
-    toggleMute () {
-      // TODO: Pleroma mute/unmute, Need to migrate to the Mastodon API
-      const store = this.$store
-      store.commit('setMuted', {user: this.user, muted: !this.user.muted})
-      store.state.api.backendInteractor.setUserMute(this.user)
     },
     setProfileView (v) {
       if (this.switcher) {

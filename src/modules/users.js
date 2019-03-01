@@ -102,10 +102,15 @@ export const mutations = {
       }
     })
   },
-  saveBlocks (state, blockIds) {
+  saveBlockIds (state, blockIds) {
     state.currentUser.blockIds = blockIds
   },
-  saveMutes (state, muteIds) {
+  updateMutes (state, mutedUsers) {
+    each(state.users, (user) => { user.muted = false })
+    const newUsers = map(mutedUsers, (user) => ({ ...user, muted: true }))
+    each(newUsers, (user) => mergeOrAdd(state.users, state.usersObject, user))
+  },
+  saveMuteIds (state, muteIds) {
     state.currentUser.muteIds = muteIds
   },
   muteUser (state, id) {
@@ -180,7 +185,7 @@ const users = {
     fetchBlocks (store) {
       return store.rootState.api.backendInteractor.fetchBlocks()
         .then((blocks) => {
-          store.commit('saveBlocks', map(blocks, 'id'))
+          store.commit('saveBlockIds', map(blocks, 'id'))
           store.commit('addNewUsers', blocks)
           return blocks
         })
@@ -205,11 +210,10 @@ const users = {
           const promises = mutes.map(({ id }) => store.rootState.api.backendInteractor.fetchUser({ id }))
           return Promise.all(promises)
         })
-        .then((mutedUsers) => {
-          each(mutedUsers, (user) => { user.muted = true })
-          store.commit('addNewUsers', mutedUsers)
-          store.commit('saveMutes', map(mutedUsers, 'id'))
-          // TODO: Unset muted property of the rest users
+        .then((mutes) => {
+          store.commit('updateMutes', mutes)
+          store.commit('saveMuteIds', map(mutes, 'id'))
+          return mutes
         })
     },
     muteUser (store, id) {

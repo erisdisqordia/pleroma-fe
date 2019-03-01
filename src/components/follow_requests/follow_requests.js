@@ -4,18 +4,9 @@ const FollowRequests = {
   components: {
     FollowRequestCard
   },
-  created () {
-    this.updateRequests()
-  },
   computed: {
     requests () {
       return this.$store.state.api.followRequests
-    }
-  },
-  methods: {
-    updateRequests () {
-      this.$store.state.api.backendInteractor.fetchFollowRequests()
-        .then((requests) => { this.$store.commit('setFollowRequests', requests) })
     }
   }
 }

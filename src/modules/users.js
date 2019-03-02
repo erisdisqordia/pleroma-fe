@@ -102,6 +102,11 @@ export const mutations = {
       }
     })
   },
+  updateBlocks (state, blockedUsers) {
+    // Reset statusnet_blocking of all fetched users
+    each(state.users, (user) => { user.statusnet_blocking = false })
+    each(blockedUsers, (user) => mergeOrAdd(state.users, state.usersObject, user))
+  },
   saveBlockIds (state, blockIds) {
     state.currentUser.blockIds = blockIds
   },
@@ -187,7 +192,7 @@ const users = {
       return store.rootState.api.backendInteractor.fetchBlocks()
         .then((blocks) => {
           store.commit('saveBlockIds', map(blocks, 'id'))
-          store.commit('addNewUsers', blocks)
+          store.commit('updateBlocks', blocks)
           return blocks
         })
     },

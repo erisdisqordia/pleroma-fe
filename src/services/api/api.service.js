@@ -345,7 +345,7 @@ const fetchStatus = ({id, credentials}) => {
     .then((data) => parseStatus(data))
 }
 
-const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false}) => {
+const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false, withMuted = false}) => {
   const timelineUrls = {
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
@@ -381,6 +381,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   }
 
   params.push(['count', 20])
+  params.push(['with_muted', withMuted])
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`

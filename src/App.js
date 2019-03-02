@@ -26,6 +26,7 @@ export default {
   },
   data: () => ({
     mobileActivePanel: 'timeline',
+    notificationsOpen: false,
     finderHidden: true,
     supportsMask: window.CSS && window.CSS.supports && (
       window.CSS.supports('mask-size', 'contain') ||
@@ -101,6 +102,9 @@ export default {
     },
     toggleMobileSidebar () {
       this.$refs.sideDrawer.toggleDrawer()
+    },
+    toggleMobileNotifications () {
+      this.notificationsOpen = !this.notificationsOpen
     }
   }
 }

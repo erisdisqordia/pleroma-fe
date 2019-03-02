@@ -10,7 +10,6 @@
         <div class='item'>
           <a href="#" class="menu-button" @click.stop.prevent="toggleMobileSidebar()">
             <i class="button-icon icon-menu"></i>
-            <div class="alert-dot" v-if="unseenNotificationsCount"></div>
           </a>
           <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
         </div>
@@ -18,11 +17,18 @@
           <user-finder class="button-icon nav-icon mobile-hidden" @toggled="onFinderToggled"></user-finder>
           <router-link class="mobile-hidden" :to="{ name: 'settings'}"><i class="button-icon icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
           <a href="#" class="mobile-hidden" v-if="currentUser" @click.prevent="logout"><i class="button-icon icon-logout nav-icon" :title="$t('login.logout')"></i></a>
+          <a href="#" class="menu-button" @click.stop.prevent="toggleMobileNotifications()">
+            <i class="button-icon icon-bell-alt"></i>
+            <div class="alert-dot" v-if="unseenNotificationsCount"></div>
+          </a>
         </div>
       </div>
     </nav>
     <div v-if="" class="container" id="content">
       <side-drawer ref="sideDrawer" :logout="logout"></side-drawer>
+      <div class="mobile-notifications" :class="{ 'closed': !notificationsOpen }">
+        <notifications/>
+      </div>
       <div class="sidebar-flexer mobile-hidden">
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">

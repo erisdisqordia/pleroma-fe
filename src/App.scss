@@ -661,6 +661,28 @@ nav {
   border-radius: var(--inputRadius, $fallback--inputRadius);
 }
 
+.mobile-notifications {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 50px;
+  left: 0;
+  z-index: 1001;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  transition-property: transform;
+  transition-duration: 0.35s;
+  transform: translate(0);
+
+  .notifications {
+    padding: 0;
+  }
+
+  &.closed {
+    transform: translate(100%);
+  }
+}
+
 @keyframes shakeError {
   0% {
     transform: translateX(0);
@@ -723,7 +745,7 @@ nav {
 
 .login-hint {
   text-align: center;
-  
+
   @media all and (min-width: 801px) {
     display: none;
   }

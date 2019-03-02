@@ -36,6 +36,9 @@
     box-sizing: border-box;
     // to make failed images a bit more noticeable on chromium
     min-width: 2em;
+    &:last-child {
+      margin: 0;
+    }
   }
 
   .image-attachment {

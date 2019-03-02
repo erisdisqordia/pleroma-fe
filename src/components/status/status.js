@@ -23,7 +23,7 @@ const Status = {
     'highlight',
     'compact',
     'replies',
-    'noReplyLinks',
+    'isPreview',
     'noHeading',
     'inlineExpanded'
   ],

@@ -628,6 +628,16 @@ nav {
   color: $fallback--faint;
   color: var(--faint, $fallback--faint);
 }
+
+.faint-link {
+  color: $fallback--faint;
+  color: var(--faint, $fallback--faint);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 @media all and (min-width: 800px) {
   .logo {
     opacity: 1 !important;
@@ -659,6 +669,10 @@ nav {
   border: 1px solid var(--faint, $fallback--faint);
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
+}
+
+.button-icon {
+  font-size: 1.2em;
 }
 
 @keyframes shakeError {
@@ -705,16 +719,6 @@ nav {
     margin: 0.5em 0 0.5em 0;
   }
 
-  .button-icon {
-    font-size: 1.2em;
-  }
-
-  .status .status-actions {
-    div {
-      max-width: 4em;
-    }
-  }
-
   .menu-button {
     display: block;
     margin-right: 0.8em;
@@ -723,7 +727,7 @@ nav {
 
 .login-hint {
   text-align: center;
-  
+
   @media all and (min-width: 801px) {
     display: none;
   }

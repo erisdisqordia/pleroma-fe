@@ -221,6 +221,10 @@
     "up_to_date": "Ajantasalla",
     "no_more_statuses": "Ei enempää viestejä"
   },
+  "status": {
+    "reply_to": "Vastaus",
+    "replies_list": "Vastaukset:"
+  },
   "user_card": {
     "approve": "Hyväksy",
     "block": "Estä",

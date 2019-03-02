@@ -1,5 +1,3 @@
-import { generateUrl } from '../../utils/url'
-
 /* eslint-env browser */
 const LOGIN_URL = '/api/account/verify_credentials.json'
 const FRIENDS_TIMELINE_URL = '/api/statuses/friends_timeline.json'
@@ -53,6 +51,7 @@ import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
 import { StatusCodeError } from '../errors/errors'
+import { generateUrl } from '../../utils/url'
 
 const oldfetch = window.fetch
 

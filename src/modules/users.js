@@ -107,6 +107,7 @@ export const mutations = {
   },
   updateMutes (state, mutedUsers) {
     each(state.users, (user) => { user.muted = false })
+    // TODO: Remove this line once we get muted property of user object from the api
     const newUsers = map(mutedUsers, (user) => ({ ...user, muted: true }))
     each(newUsers, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },

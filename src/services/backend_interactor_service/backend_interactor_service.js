@@ -54,8 +54,8 @@ const backendInteractorService = (credentials) => {
     return apiService.denyUser({credentials, id})
   }
 
-  const startFetching = ({timeline, store, userId = false}) => {
-    return timelineFetcherService.startFetching({timeline, store, credentials, userId})
+  const startFetching = ({timeline, store, userId = false, tag}) => {
+    return timelineFetcherService.startFetching({timeline, store, credentials, userId, tag})
   }
 
   const setUserMute = ({id, muted = true}) => {

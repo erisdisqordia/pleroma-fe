@@ -222,6 +222,7 @@
     overflow: hidden;
     flex: 1 1 auto;
     margin-right: 1em;
+    font-size: 15px;
 
     img {
       object-fit: contain;

@@ -1,6 +1,6 @@
 <template>
   <div class="status-el" v-if="!hideStatus" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
-    <template v-if="muted && !noReplyLinks">
+    <template v-if="muted && !isPreview">
       <div class="media status container muted">
         <small>
           <router-link :to="userProfileLink">
@@ -13,7 +13,7 @@
     </template>
     <template v-else>
       <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
-        <UserAvatar v-if="retweet" :betterShadow="betterShadow" :src="statusoid.user.profile_image_url_original"/>
+        <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <span class="user-name">
             <router-link v-if="retweeterHtml" :to="retweeterProfileLink" v-html="retweeterHtml"/>
@@ -31,57 +31,69 @@
           </router-link>
         </div>
         <div class="status-body">
-          <div class="usercard media-body" v-if="userExpanded">
+          <div class="usercard" v-if="userExpanded">
             <user-card-content :user="status.user" :switcher="false"></user-card-content>
           </div>
-          <div v-if="!noHeading" class="media-body container media-heading">
-            <div class="media-heading-left">
-              <div class="name-and-links">
+          <div v-if="!noHeading" class="media-heading">
+            <div class="heading-name-row">
+              <div class="name-and-account-name">
                 <h4 class="user-name" v-if="status.user.name_html" v-html="status.user.name_html"></h4>
                 <h4 class="user-name" v-else>{{status.user.name}}</h4>
-                <span class="links">
-                  <router-link :to="userProfileLink">
-                    {{status.user.screen_name}}
-                  </router-link>
-                  <span v-if="isReply" class="faint reply-info">
-                    <i class="icon-right-open"></i>
-                    <router-link :to="replyProfileLink">
-                      {{replyToName}}
-                    </router-link>
-                  </span>
-                  <a v-if="isReply && !noReplyLinks" href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)" :aria-label="$t('tool_tip.reply')">
-                    <i class="button-icon icon-reply" @mouseenter="replyEnter(status.in_reply_to_status_id, $event)" @mouseout="replyLeave()"></i>
+                <router-link class="account-name" :to="userProfileLink">
+                  {{status.user.screen_name}}
+                </router-link>
+              </div>
+
+              <span class="heading-right">
+                <router-link class="timeago faint-link" :to="{ name: 'conversation', params: { id: status.id } }">
+                  <timeago :since="status.created_at" :auto-update="60"></timeago>
+                </router-link>
+                <div class="button-icon visibility-icon" v-if="status.visibility">
+                  <i :class="visibilityIcon(status.visibility)" :title="status.visibility | capitalize"></i>
+                </div>
+                <a :href="status.external_url" target="_blank" v-if="!status.is_local && !isPreview" class="source_url" title="Source">
+                  <i class="button-icon icon-link-ext-alt"></i>
+                </a>
+                <template v-if="expandable && !isPreview">
+                  <a href="#" @click.prevent="toggleExpanded" title="Expand">
+                    <i class="button-icon icon-plus-squared"></i>
                   </a>
+                </template>
+                <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="button-icon icon-eye-off"></i></a>
+              </span>
+            </div>
+
+            <div class="heading-reply-row">
+              <div v-if="isReply" class="reply-to-and-accountname">
+                <a class="reply-to"
+                  href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
+                  :aria-label="$t('tool_tip.reply')"
+                  @mouseenter.prevent.stop="replyEnter(status.in_reply_to_status_id, $event)"
+                  @mouseleave.prevent.stop="replyLeave()"
+                >
+                  <i class="button-icon icon-reply" v-if="!isPreview"></i>
+                  <span class="faint-link reply-to-text">{{$t('status.reply_to')}}</span>
+                </a>
+                <router-link :to="replyProfileLink">
+                  {{replyToName}}
+                </router-link>
+                <span class="faint replies-separator" v-if="replies.length">
+                  -
                 </span>
               </div>
-              <h4 class="replies" v-if="inConversation && !noReplyLinks">
-                <small v-if="replies.length">Replies:</small>
-                <small class="reply-link" v-bind:key="reply.id" v-for="reply in replies">
-                  <a href="#" @click.prevent="gotoOriginal(reply.id)" @mouseenter="replyEnter(reply.id, $event)" @mouseout="replyLeave()">{{reply.name}}&nbsp;</a>
-                </small>
-              </h4>
-            </div>
-            <div class="media-heading-right">
-              <router-link class="timeago" :to="{ name: 'conversation', params: { id: status.id } }">
-                <timeago :since="status.created_at" :auto-update="60"></timeago>
-              </router-link>
-              <div class="button-icon visibility-icon" v-if="status.visibility">
-                <i :class="visibilityIcon(status.visibility)" :title="status.visibility | capitalize"></i>
+              <div class="replies" v-if="inConversation && !isPreview">
+                <span class="faint" v-if="replies.length">{{$t('status.replies_list')}}</span>
+                <span class="reply-link faint" v-for="reply in replies">
+                  <a href="#" @click.prevent="gotoOriginal(reply.id)" @mouseenter="replyEnter(reply.id, $event)" @mouseout="replyLeave()">{{reply.name}}</a>
+                </span>
               </div>
-              <a :href="status.external_url" target="_blank" v-if="!status.is_local" class="source_url" title="Source">
-                <i class="button-icon icon-link-ext-alt"></i>
-              </a>
-              <template v-if="expandable">
-                <a href="#" @click.prevent="toggleExpanded" title="Expand">
-                  <i class="button-icon icon-plus-squared"></i>
-                </a>
-              </template>
-              <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="button-icon icon-eye-off"></i></a>
             </div>
+
+
           </div>
 
           <div v-if="showPreview" class="status-preview-container">
-            <status class="status-preview" v-if="preview" :noReplyLinks="true" :statusoid="preview" :compact=true></status>
+            <status class="status-preview" v-if="preview" :isPreview="true" :statusoid="preview" :compact=true></status>
             <div class="status-preview status-preview-loading" v-else>
               <i class="icon-spin4 animate-spin"></i>
             </div>
@@ -123,7 +135,7 @@
             <link-preview :card="status.card" :size="attachmentSize" :nsfw="nsfwClickthrough" />
           </div>
 
-          <div v-if="!noHeading && !noReplyLinks" class='status-actions media-body'>
+          <div v-if="!noHeading && !isPreview" class='status-actions media-body'>
             <div v-if="loggedIn">
               <a href="#" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')">
                 <i class="button-icon icon-reply" :class="{'icon-reply-active': replying}"></i>
@@ -146,6 +158,8 @@
 <script src="./status.js" ></script>
 <style lang="scss">
 @import '../../_variables.scss';
+
+$status-margin: 0.75em;
 
 .status-body {
   flex: 1;
@@ -202,13 +216,16 @@
   }
 }
 
+.media-left {
+  margin-right: $status-margin;
+}
+
 .status-el {
   hyphens: auto;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
   border-left-width: 0px;
-  line-height: 18px;
   min-width: 0;
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
@@ -229,22 +246,34 @@
   .media-body {
     flex: 1;
     padding: 0;
-    margin: 0 0 0.25em 0.8em;
   }
 
   .usercard {
-    margin-bottom: .7em
+    margin: 0;
+    margin-bottom: $status-margin;
+  }
+
+  .user-name {
+    white-space: nowrap;
+    font-size: 14px;
+    overflow: hidden;
+    flex-shrink: 0;
+    max-width: 85%;
+    font-weight: bold;
+
+    img {
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      object-fit: contain
+    }
   }
 
   .media-heading {
-    flex-wrap: nowrap;
-    line-height: 18px;
-  }
-
-  .media-heading-left {
     padding: 0;
     vertical-align: bottom;
     flex-basis: 100%;
+    margin-bottom: 0.5em;
 
     a {
       display: inline-block;
@@ -254,83 +283,102 @@
     small {
       font-weight: lighter;
     }
-    h4 {
-      white-space: nowrap;
-      font-size: 14px;
-      margin-right: 0.25em;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .name-and-links {
+
+    .heading-name-row {
       padding: 0;
-      flex: 1 0;
       display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
+      justify-content: space-between;
+      line-height: 18px;
+
+      .name-and-account-name {
+        display: flex;
+        min-width: 0;
+      }
 
       .user-name {
-        margin-right: .45em;
+        flex-shrink: 1;
+        margin-right: 0.4em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-        img {
-          width: 14px;
-          height: 14px;
-          vertical-align: middle;
-          object-fit: contain
-        }
+      .account-name {
+        min-width: 1.6em;
+        margin-right: 0.4em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex: 1 1 0;
       }
     }
 
-    .links {
+    .heading-right {
       display: flex;
+      flex-shrink: 0;
+    }
+
+    .timeago {
+      margin-right: 0.2em;
+    }
+
+    .heading-reply-row {
+      align-content: baseline;
       font-size: 12px;
-      color: $fallback--link;
-      color: var(--link, $fallback--link);
+      line-height: 18px;
       max-width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+
       a {
         max-width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
       }
-      & > span {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-      & > a:last-child {
-        flex-shrink: 0;
+    }
+
+    .reply-to-and-accountname {
+      display: flex;
+      height: 18px;
+      margin-right: 0.5em;
+      overflow: hidden;
+      max-width: 100%;
+      .icon-reply {
+        transform: scaleX(-1);
       }
     }
+
     .reply-info {
       display: flex;
     }
+
+    .reply-to {
+      display: flex;
+    }
+
+    .reply-to-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0 0.4em 0 0.2em;
+    }
+
+    .replies-separator {
+      margin-left: 0.4em;
+    }
+
     .replies {
-      line-height: 16px;
-    }
-    .reply-link {
-      margin-right: 0.2em;
-    }
-  }
-
-  .media-heading-right {
-    display: inline-flex;
-    flex-shrink: 0;
-    flex-wrap: nowrap;
-    margin-left: .25em;
-    align-self: baseline;
-
-    .timeago {
-      margin-right: 0.2em;
+      line-height: 18px;
       font-size: 12px;
-      align-self: last baseline;
+      display: flex;
+      flex-wrap: wrap;
+      & > * {
+        margin-right: 0.4em;
+      }
     }
 
-    > * {
-      margin-left: 0.2em;
-    }
-    a:hover i {
-      color: $fallback--text;
-      color: var(--text, $fallback--text);
+    .reply-link {
+      height: 17px;
     }
   }
 
@@ -366,8 +414,8 @@
   }
 
   .status-content {
-    margin-right: 0.5em;
     font-family: var(--postFont, sans-serif);
+    line-height: 1.4em;
 
     img, video {
       max-width: 100%;
@@ -390,9 +438,11 @@
     }
 
     p {
-      margin: 0;
-      margin-top: 0.2em;
-      margin-bottom: 0.5em;
+      margin: 0 0 1em 0;
+    }
+
+    p:last-child {
+      margin: 0 0 0 0;
     }
 
     h1 {
@@ -417,7 +467,7 @@
   }
 
   .retweet-info {
-    padding: 0.4em 0.6em 0 0.6em;
+    padding: 0.4em $status-margin;
     margin: 0;
 
     .avatar.still-image {
@@ -488,10 +538,10 @@
 .status-actions {
   width: 100%;
   display: flex;
+  margin-top: $status-margin;
 
   div, favorite-button {
-    padding-top: 0.25em;
-    max-width: 6em;
+    max-width: 4em;
     flex: 1;
   }
 }
@@ -517,9 +567,9 @@
 
 .status {
   display: flex;
-  padding: 0.6em;
+  padding: $status-margin;
   &.is-retweet {
-    padding-top: 0.1em;
+    padding-top: 0;
   }
 }
 

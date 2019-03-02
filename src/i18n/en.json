@@ -360,6 +360,10 @@
     "no_more_statuses": "No more statuses",
     "no_statuses": "No statuses"
   },
+  "status": {
+    "reply_to": "Reply to",
+    "replies_list": "Replies:"
+  },
   "user_card": {
     "approve": "Approve",
     "block": "Block",

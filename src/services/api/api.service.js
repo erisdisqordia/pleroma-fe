@@ -64,6 +64,19 @@ let fetch = (url, options) => {
   return oldfetch(fullUrl, options)
 }
 
+const promisedRequest = (url, options) => {
+  return fetch(url, options)
+    .then((response) => {
+      return new Promise((resolve, reject) => response.json()
+        .then((json) => {
+          if (!response.ok) {
+            return reject(new StatusCodeError(response.status, json, { url, options }, response))
+          }
+          return resolve(json)
+        }))
+    })
+}
+
 // Params
 // cropH
 // cropW
@@ -249,16 +262,7 @@ const denyUser = ({id, credentials}) => {
 
 const fetchUser = ({id, credentials}) => {
   let url = `${MASTODON_USER_URL}/${id}`
-  return fetch(url, { headers: authHeaders(credentials) })
-    .then((response) => {
-      return new Promise((resolve, reject) => response.json()
-        .then((json) => {
-          if (!response.ok) {
-            return reject(new StatusCodeError(response.status, json, { url }, response))
-          }
-          return resolve(json)
-        }))
-    })
+  return promisedRequest(url, { headers: authHeaders(credentials) })
     .then((data) => parseUser(data))
 }
 
@@ -526,50 +530,28 @@ const changePassword = ({credentials, password, newPassword, newPasswordConfirma
 }
 
 const fetchMutes = ({credentials}) => {
-  return fetch(MUTES_URL, {
-    headers: authHeaders(credentials)
-  }).then((data) => {
-    if (data.ok) {
-      return data.json()
-    }
-    throw new Error('Error fetching mutes', data)
-  })
+  return promisedRequest(MUTES_URL, { headers: authHeaders(credentials) })
 }
 
 const muteUser = ({id, credentials}) => {
   const url = generateUrl(MUTING_URL, { id })
-  return fetch(url, {
+  return promisedRequest(url, {
     headers: authHeaders(credentials),
     method: 'POST'
-  }).then((data) => {
-    if (data.ok) {
-      return data.json()
-    }
-    throw new Error('Error muting', data)
   })
 }
 
 const unmuteUser = ({id, credentials}) => {
   const url = generateUrl(UNMUTING_URL, { id })
-  return fetch(url, {
+  return promisedRequest(url, {
     headers: authHeaders(credentials),
     method: 'POST'
-  }).then((data) => {
-    if (data.ok) {
-      return data.json()
-    }
-    throw new Error('Error unmuting', data)
   })
 }
 
 const fetchBlocks = ({credentials}) => {
-  return fetch(BLOCKS_URL, {
+  return promisedRequest(BLOCKS_URL, {
     headers: authHeaders(credentials)
-  }).then((data) => {
-    if (data.ok) {
-      return data.json()
-    }
-    throw new Error('Error fetching blocks', data)
   })
 }
 

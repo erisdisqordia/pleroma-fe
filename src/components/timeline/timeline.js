@@ -106,7 +106,7 @@ const Timeline = {
         tag: this.tag
       }).then(statuses => {
         store.commit('setLoading', { timeline: this.timelineName, value: false })
-        if (statuses.length === 0) {
+        if (statuses && statuses.length === 0) {
           this.bottomedOut = true
         }
       })

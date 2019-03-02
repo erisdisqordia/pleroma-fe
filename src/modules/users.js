@@ -111,6 +111,7 @@ export const mutations = {
     state.currentUser.blockIds = blockIds
   },
   updateMutes (state, mutedUsers) {
+    // Reset muted of all fetched users
     each(state.users, (user) => { user.muted = false })
     // TODO: Remove this line once we get muted property of user object from the api
     const newUsers = map(mutedUsers, (user) => ({ ...user, muted: true }))

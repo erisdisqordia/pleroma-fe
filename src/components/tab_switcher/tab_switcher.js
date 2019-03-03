@@ -4,7 +4,7 @@ import './tab_switcher.scss'
 
 export default Vue.component('tab-switcher', {
   name: 'TabSwitcher',
-  props: ['renderOnlyFocused'],
+  props: ['refresh', 'renderOnlyFocused'],
   data () {
     return {
       active: this.$slots.default.findIndex(_ => _.tag)
@@ -12,7 +12,9 @@ export default Vue.component('tab-switcher', {
   },
   watch: {
     $route () {
-      this.activateTab(0)
+      if (this.refresh) {
+        this.active = 0
+      }
     }
   },
   methods: {

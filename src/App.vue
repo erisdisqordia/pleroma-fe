@@ -25,11 +25,13 @@
       </div>
     </nav>
     <div v-if="" class="container" id="content">
-      <side-drawer ref="sideDrawer" :logout="logout"></side-drawer>
-      <div class="mobile-notifications" :class="{ 'closed': !notificationsOpen }">
-        <notifications/>
+      <div v-if="isMobileLayout">
+        <side-drawer ref="sideDrawer" :logout="logout"></side-drawer>
+        <div class="mobile-notifications" :class="{ 'closed': !notificationsOpen }">
+          <notifications/>
+        </div>
       </div>
-      <div class="sidebar-flexer mobile-hidden">
+      <div class="sidebar-flexer mobile-hidden" v-if="!isMobileLayout">
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">
             <div class="sidebar">

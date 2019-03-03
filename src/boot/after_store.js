@@ -5,6 +5,9 @@ import routes from './routes'
 import App from '../App.vue'
 
 const afterStoreSetup = ({ store, i18n }) => {
+  const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+  store.dispatch('setMobileLayout', width <= 800)
+
   window.fetch('/api/statusnet/config.json')
     .then((res) => res.json())
     .then((data) => {

@@ -39,6 +39,10 @@ export default {
   created () {
     // Load the locale from the storage
     this.$i18n.locale = this.$store.state.config.interfaceLanguage
+    window.addEventListener('resize', this.updateMobileState)
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.updateMobileState)
   },
   computed: {
     currentUser () { return this.$store.state.users.currentUser },
@@ -87,7 +91,8 @@ export default {
     unseenNotificationsCount () {
       return this.unseenNotifications.length
     },
-    showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel }
+    showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
+    isMobileLayout () { return this.$store.state.interface.mobileLayout }
   },
   methods: {
     scrollToTop () {
@@ -105,6 +110,13 @@ export default {
     },
     toggleMobileNotifications () {
       this.notificationsOpen = !this.notificationsOpen
+    },
+    updateMobileState () {
+      const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+      const changed = width <= 800 !== this.isMobileLayout
+      if (changed) {
+        this.$store.dispatch('setMobileLayout', width <= 800)
+      }
     }
   }
 }

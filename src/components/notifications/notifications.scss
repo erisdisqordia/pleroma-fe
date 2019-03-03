@@ -125,6 +125,10 @@
       }
     }
 
+    .timeago {
+      margin-right: .2em;
+    }
+
     .icon-retweet.lit {
       color: $fallback--cGreen;
       color: var(--cGreen, $fallback--cGreen);

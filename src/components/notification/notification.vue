@@ -25,7 +25,7 @@
             <small>{{$t('notifications.followed_you')}}</small>
           </span>
         </div>
-        <div>
+        <div class="timeago">
           <router-link v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }" class="faint-link">
             <timeago :since="notification.action.created_at" :auto-update="240"></timeago>
           </router-link>

@@ -2,38 +2,79 @@
   "chat": {
     "title": "Chat"
   },
+
+  "features_panel": {
+    "chat": "Chat",
+    "gopher": "Gopher",
+    "media_proxy": "Proxy de mídia",
+    "scope_options": "Opções de privacidade",
+    "text_limit": "Limite de caracteres",
+    "title": "Funções",
+    "who_to_follow": "Quem seguir"
+  },
+
   "finder": {
-    "error_fetching_user": "Erro procurando usuário",
+    "error_fetching_user": "Erro ao procurar usuário",
     "find_user": "Buscar usuário"
   },
   "general": {
     "apply": "Aplicar",
-    "submit": "Enviar"
+    "submit": "Enviar",
+    "more": "Mais",
+    "generic_error": "Houve um erro",
+    "optional": "opcional"
+
   },
   "login": {
     "login": "Entrar",
+    "description": "Entrar com OAuth",
     "logout": "Sair",
     "password": "Senha",
     "placeholder": "p.e. lain",
     "register": "Registrar",
-    "username": "Usuário"
+    "username": "Usuário",
+    "hint": "Entre para participar da discussão"
+  },
+
+  "media_modal": {
+    "previous": "Anterior",
+    "next": "Próximo"
   },
   "nav": {
+    "about": "Sobre",
+    "back": "Voltar",
     "chat": "Chat local",
+    "friend_requests": "Solicitações de seguidores",
     "mentions": "Menções",
+    "dms": "Mensagens diretas",
     "public_tl": "Linha do tempo pública",
     "timeline": "Linha do tempo",
-    "twkn": "Toda a rede conhecida"
+    "twkn": "Toda a rede conhecida",
+    "user_search": "Busca de usuário",
+    "who_to_follow": "Quem seguir",
+    "preferences": "Preferências"
   },
   "notifications": {
+    "broken_favorite": "Status desconhecido, buscando...",
     "favorited_you": "favoritou sua postagem",
     "followed_you": "seguiu você",
+    "load_older": "Carregar notificações antigas",
     "notifications": "Notificações",
     "read": "Lido!",
-    "repeated_you": "repetiu sua postagem"
+    "repeated_you": "repetiu sua postagem",
+    "no_more_notifications": "Mais nenhuma notificação"
   },
   "post_status": {
+    "new_status": "Postar novo status",
+    "account_not_locked_warning": "Sua conta não está {0}. Qualquer pessoa pode te seguir para ver seus posts restritos.",
+    "account_not_locked_warning_link": "fechada",
+    "attachments_sensitive": "Marcar anexos como sensíveis",
+    "content_type": {
+      "plain_text": "Texto puro"
+    },
+    "content_warning": "Assunto (opcional)",
     "default": "Acabei de chegar no Rio!",
+    "direct_warning": "Este post será visível apenas para os usuários mencionados.",
     "posting": "Publicando"
   },
   "registration": {
@@ -41,30 +82,64 @@
     "email": "Correio eletrônico",
     "fullname": "Nome para exibição",
     "password_confirm": "Confirmação de senha",
-    "registration": "Registro"
+    "registration": "Registro",
+    "token": "Código do convite",
+    "captcha": "CAPTCHA",
+    "new_captcha": "Clique na imagem para carregar um novo captcha",
+    "username_placeholder": "p. ex. lain",
+    "fullname_placeholder": "p. ex. Lain Iwakura",
+    "bio_placeholder": "e.g.\nOi, sou Lain\nSou uma garota que vive no subúrbio do Japão. Você deve me conhecer da Rede.",
+    "validations": {
+      "username_required": "não pode ser deixado em branco",
+      "fullname_required": "não pode ser deixado em branco",
+      "email_required": "não pode ser deixado em branco",
+      "password_required": "não pode ser deixado em branco",
+      "password_confirmation_required": "não pode ser deixado em branco",
+      "password_confirmation_match": "deve ser idêntica à senha"
+    }
   },
   "settings": {
+    "app_name": "Nome do aplicativo",
     "attachmentRadius": "Anexos",
     "attachments": "Anexos",
     "autoload": "Habilitar carregamento automático quando a rolagem chegar ao fim.",
     "avatar": "Avatar",
     "avatarAltRadius": "Avatares (Notificações)",
     "avatarRadius": "Avatares",
-    "background": "Plano de Fundo",
+    "background": "Pano de Fundo",
     "bio": "Biografia",
+    "blocks_tab": "Blocos",
     "btnRadius": "Botões",
     "cBlue": "Azul (Responder, seguir)",
     "cGreen": "Verde (Repetir)",
     "cOrange": "Laranja (Favoritar)",
     "cRed": "Vermelho (Cancelar)",
+    "change_password": "Mudar senha",
+    "change_password_error": "Houve um erro ao modificar sua senha.",
+    "changed_password": "Senha modificada com sucesso!",
+    "collapse_subject": "Esconder posts com assunto",
+    "composing": "Escrevendo",
+    "confirm_new_password": "Confirmar nova senha",
     "current_avatar": "Seu avatar atual",
     "current_profile_banner": "Sua capa de perfil atual",
+    "data_import_export_tab": "Importação/exportação de dados",
+    "default_vis": "Opção de privacidade padrão",
+    "delete_account": "Deletar conta",
+    "delete_account_description": "Deletar sua conta e mensagens permanentemente.",
+    "delete_account_error": "Houve um problema ao deletar sua conta. Se ele persistir, por favor entre em contato com o/a administrador/a da instância.",
+    "delete_account_instructions": "Digite sua senha no campo abaixo para confirmar a exclusão da conta.",
+    "avatar_size_instruction": "O tamanho mínimo recomendado para imagens de avatar é 150x150 pixels.",
+    "export_theme": "Salvar predefinições",
     "filtering": "Filtragem",
     "filtering_explanation": "Todas as postagens contendo estas palavras serão silenciadas, uma por linha.",
-    "follow_import": "Importar seguidas",
+    "follow_export": "Exportar quem você segue",
+    "follow_export_button": "Exportar quem você segue para um arquivo csv",
+    "follow_export_processing": "Processando. Em breve você receberá a solicitação de download do arquivo",
+    "follow_import": "Importar quem você segue",
     "follow_import_error": "Erro ao importar seguidores",
     "follows_imported": "Seguidores importados! O processamento pode demorar um pouco.",
     "foreground": "Primeiro Plano",
+    "general": "Geral",
     "hide_attachments_in_convo": "Ocultar anexos em conversas",
     "hide_attachments_in_tl": "Ocultar anexos na linha do tempo.",
     "import_followers_from_a_csv_file": "Importe seguidores a partir de um arquivo CSV",

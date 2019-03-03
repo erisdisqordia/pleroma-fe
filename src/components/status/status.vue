@@ -82,8 +82,8 @@
                 </span>
               </div>
               <div class="replies" v-if="inConversation && !isPreview">
-                <span class="faint" v-if="replies.length">{{$t('status.replies_list')}}</span>
-                <span class="reply-link faint" v-for="reply in replies">
+                <span class="faint" v-if="replies && replies.length">{{$t('status.replies_list')}}</span>
+                <span class="reply-link faint" v-if="replies" v-for="reply in replies">
                   <a href="#" @click.prevent="gotoOriginal(reply.id)" @mouseenter="replyEnter(reply.id, $event)" @mouseout="replyLeave()">{{reply.name}}</a>
                 </span>
               </div>

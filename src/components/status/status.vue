@@ -77,7 +77,7 @@
                 <router-link :to="replyProfileLink">
                   {{replyToName}}
                 </router-link>
-                <span class="faint replies-separator" v-if="replies.length">
+                <span class="faint replies-separator" v-if="replies && replies.length">
                   -
                 </span>
               </div>

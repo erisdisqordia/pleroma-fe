@@ -10,6 +10,11 @@ export default Vue.component('tab-switcher', {
       active: this.$slots.default.findIndex(_ => _.tag)
     }
   },
+  watch: {
+    $route () {
+      this.activateTab(0)
+    }
+  },
   methods: {
     activateTab (index) {
       return () => {

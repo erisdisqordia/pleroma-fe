@@ -2,7 +2,6 @@
   "chat": {
     "title": "Chat"
   },
-
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
@@ -12,7 +11,6 @@
     "title": "Funções",
     "who_to_follow": "Quem seguir"
   },
-
   "finder": {
     "error_fetching_user": "Erro ao procurar usuário",
     "find_user": "Buscar usuário"
@@ -23,7 +21,11 @@
     "more": "Mais",
     "generic_error": "Houve um erro",
     "optional": "opcional"
-
+  },
+  "image_cropper": {
+    "crop_picture": "Cortar imagem",
+    "save": "Salvar",
+    "cancel": "Cancelar"
   },
   "login": {
     "login": "Entrar",
@@ -35,7 +37,6 @@
     "username": "Usuário",
     "hint": "Entre para participar da discussão"
   },
-
   "media_modal": {
     "previous": "Anterior",
     "next": "Próximo"
@@ -75,7 +76,13 @@
     "content_warning": "Assunto (opcional)",
     "default": "Acabei de chegar no Rio!",
     "direct_warning": "Este post será visível apenas para os usuários mencionados.",
-    "posting": "Publicando"
+    "posting": "Publicando",
+    "scope": {
+      "direct": "Direto - Enviar somente aos usuários mencionados",
+      "private": "Apenas para seguidores - Enviar apenas para seguidores",
+      "public": "Público - Enviar a linhas do tempo públicas",
+      "unlisted": "Não listado - Não enviar a linhas do tempo públicas"
+    }
   },
   "registration": {
     "bio": "Biografia",
@@ -121,6 +128,7 @@
     "composing": "Escrevendo",
     "confirm_new_password": "Confirmar nova senha",
     "current_avatar": "Seu avatar atual",
+    "current_password": "Sua senha atual",
     "current_profile_banner": "Sua capa de perfil atual",
     "data_import_export_tab": "Importação/exportação de dados",
     "default_vis": "Opção de privacidade padrão",
@@ -142,35 +150,203 @@
     "general": "Geral",
     "hide_attachments_in_convo": "Ocultar anexos em conversas",
     "hide_attachments_in_tl": "Ocultar anexos na linha do tempo.",
-    "max_thumbnails": "Maximum amount of thumbnails per post",
-    "hide_isp": "Hide instance-specific panel",
-    "preload_images": "Preload images",
-    "use_one_click_nsfw": "Open NSFW attachments with just one click",
-    "hide_post_stats": "Hide post statistics (e.g. the number of favorites)",
-    "hide_user_stats": "Hide user statistics (e.g. the number of followers)",
-    "hide_filtered_statuses": "Hide filtered statuses",
+    "max_thumbnails": "Número máximo de miniaturas por post",
+    "hide_isp": "Esconder painel específico da instância",
+    "preload_images": "Pré-carregar imagens",
+    "use_one_click_nsfw": "Abrir anexos sensíveis com um clique",
+    "hide_post_stats": "Esconder estatísticas de posts (p. ex. número de favoritos)",
+    "hide_user_stats": "Esconder estatísticas do usuário (p. ex. número de seguidores)",
+    "hide_filtered_statuses": "Esconder posts filtrados",
     "import_followers_from_a_csv_file": "Importe seguidores a partir de um arquivo CSV",
+    "import_theme": "Carregar pré-definição",
+    "inputRadius": "Campos de entrada",
+    "checkboxRadius": "Checkboxes",
+    "instance_default": "(padrão: {value})",
+    "instance_default_simple": "(padrão)",
+    "interface": "Interface",
+    "interfaceLanguage": "Idioma da interface",
+    "invalid_theme_imported": "O arquivo selecionado não é um tema compatível com o Pleroma. Nenhuma mudança no tema foi feita.",
+    "limited_availability": "Indisponível para seu navegador",
     "links": "Links",
+    "lock_account_description": "Restringir sua conta a seguidores aprovados",
+    "loop_video": "Repetir vídeos",
+    "loop_video_silent_only": "Repetir apenas vídeos sem som (como os \"gifs\" do Mastodon)",
+    "mutes_tab": "Silenciados",
+    "play_videos_in_modal": "Tocar vídeos diretamente no visualizador de mídia",
+    "use_contain_fit": "Não cortar o anexo na miniatura",
     "name": "Nome",
     "name_bio": "Nome & Biografia",
-    "nsfw_clickthrough": "Habilitar clique para ocultar anexos NSFW",
+    "new_password": "Nova senha",
+    "notification_visibility": "Tipos de notificação para mostrar",
+    "notification_visibility_follows": "Seguidos",
+    "notification_visibility_likes": "Favoritos",
+    "notification_visibility_mentions": "Menções",
+    "notification_visibility_repeats": "Repetições",
+    "no_rich_text_description": "Remover formatação de todos os posts",
+    "no_blocks": "Sem bloqueios",
+    "no_mutes": "Sem silenciados",
+    "hide_follows_description": "Não mostrar quem estou seguindo",
+    "hide_followers_description": "Não mostrar quem me segue",
+    "show_admin_badge": "Mostrar título de Administrador em meu perfil",
+    "show_moderator_badge": "Mostrar título de Moderador em meu perfil",
+    "nsfw_clickthrough": "Habilitar clique para ocultar anexos sensíveis",
+    "oauth_tokens": "Token OAuth",
+    "token": "Token",
+    "refresh_token": "Atualizar Token",
+    "valid_until": "Válido até",
+    "revoke_token": "Revogar",
     "panelRadius": "Paineis",
+    "pause_on_unfocused": "Parar transmissão quando a aba não estiver em primeiro plano",
     "presets": "Predefinições",
-    "profile_background": "Plano de fundo de perfil",
+    "profile_background": "Pano de fundo de perfil",
     "profile_banner": "Capa de perfil",
+    "profile_tab": "Perfil",
     "radii_help": "Arredondar arestas da interface (em píxeis)",
+    "replies_in_timeline": "Respostas na linha do tempo",
     "reply_link_preview": "Habilitar a pré-visualização de link de respostas ao passar o mouse.",
+    "reply_visibility_all": "Mostrar todas as respostas",
+    "reply_visibility_following": "Só mostrar respostas direcionadas a mim ou a usuários que sigo",
+    "reply_visibility_self": "Só mostrar respostas direcionadas a mim",
+    "saving_err": "Erro ao salvar configurações",
+    "saving_ok": "Configurações salvas",
+    "security_tab": "Segurança",
+    "scope_copy": "Copiar opções de privacidade ao responder (Mensagens diretas sempre copiam)",
     "set_new_avatar": "Alterar avatar",
     "set_new_profile_background": "Alterar o plano de fundo de perfil",
     "set_new_profile_banner": "Alterar capa de perfil",
     "settings": "Configurações",
+    "subject_input_always_show": "Sempre mostrar campo de assunto",
+    "subject_line_behavior": "Copiar assunto ao responder",
+    "subject_line_email": "Como em email: \"re: assunto\"",
+    "subject_line_mastodon": "Como o Mastodon: copiar como está",
+    "subject_line_noop": "Não copiar",
+    "post_status_content_type": "Postar tipo de conteúdo do status",
+    "status_content_type_plain": "Texto puro",
     "stop_gifs": "Reproduzir GIFs ao passar o cursor em cima",
     "streaming": "Habilitar o fluxo automático de postagens quando ao topo da página",
     "text": "Texto",
     "theme": "Tema",
     "theme_help": "Use cores em código hexadecimal (#rrggbb) para personalizar seu esquema de cores.",
-    "tooltipRadius": "Dicass/alertas",
-    "user_settings": "Configurações de Usuário"
+    "theme_help_v2_1": "Você também pode sobrescrever as cores e opacidade de alguns componentes ao modificar o checkbox, use \"Limpar todos\" para limpar todas as modificações.",
+    "theme_help_v2_2": "Alguns ícones sob registros são indicadores de fundo/contraste de textos, passe por cima para informações detalhadas.  Tenha ciência de que os indicadores de contraste não funcionam muito bem com transparência.",
+    "tooltipRadius": "Dicas/alertas",
+    "upload_a_photo": "Enviar uma foto",
+    "user_settings": "Configurações de Usuário",
+    "values": {
+      "false": "não",
+      "true": "sim"
+    },
+    "notifications": "Notifications",
+    "enable_web_push_notifications": "Habilitar notificações web push",
+    "style": {
+      "switcher": {
+        "keep_color": "Manter cores",
+        "keep_shadows": "Manter sombras",
+        "keep_opacity": "Manter opacidade",
+        "keep_roundness": "Manter arredondado",
+        "keep_fonts": "Manter fontes",
+        "save_load_hint": "Manter as opções preserva as opções atuais ao selecionar ou carregar temas; também salva as opções ao exportar um tempo. Quanto todos os campos estiverem desmarcados, tudo será salvo ao exportar o tema.",
+        "reset": "Voltar ao padrão",
+        "clear_all": "Limpar tudo",
+        "clear_opacity": "Limpar opacidade"
+      },
+      "common": {
+        "color": "Cor",
+        "opacity": "Opacidade",
+        "contrast": {
+          "hint": "Contrast ratio is {ratio}, it {level} {context}",
+          "level": {
+            "aa": "meets Level AA guideline (minimal)",
+            "aaa": "meets Level AAA guideline (recommended)",
+            "bad": "doesn't meet any accessibility guidelines"
+          },
+          "context": {
+            "18pt": "for large (18pt+) text",
+            "text": "for text"
+          }
+        }
+      },
+      "common_colors": {
+        "_tab_label": "Common",
+        "main": "Common colors",
+        "foreground_hint": "See \"Advanced\" tab for more detailed control",
+        "rgbo": "Icons, accents, badges"
+      },
+      "advanced_colors": {
+        "_tab_label": "Advanced",
+        "alert": "Alert background",
+        "alert_error": "Error",
+        "badge": "Badge background",
+        "badge_notification": "Notification",
+        "panel_header": "Panel header",
+        "top_bar": "Top bar",
+        "borders": "Borders",
+        "buttons": "Buttons",
+        "inputs": "Input fields",
+        "faint_text": "Faded text"
+      },
+      "radii": {
+        "_tab_label": "Roundness"
+      },
+      "shadows": {
+        "_tab_label": "Shadow and lighting",
+        "component": "Component",
+        "override": "Override",
+        "shadow_id": "Shadow #{value}",
+        "blur": "Blur",
+        "spread": "Spread",
+        "inset": "Inset",
+        "hint": "For shadows you can also use --variable as a color value to use CSS3 variables. Please note that setting opacity won't work in this case.",
+        "filter_hint": {
+          "always_drop_shadow": "Warning, this shadow always uses {0} when browser supports it.",
+          "drop_shadow_syntax": "{0} does not support {1} parameter and {2} keyword.",
+          "avatar_inset": "Please note that combining both inset and non-inset shadows on avatars might give unexpected results with transparent avatars.",
+          "spread_zero": "Shadows with spread > 0 will appear as if it was set to zero",
+          "inset_classic": "Inset shadows will be using {0}"
+        },
+        "components": {
+          "panel": "Panel",
+          "panelHeader": "Panel header",
+          "topBar": "Top bar",
+          "avatar": "User avatar (in profile view)",
+          "avatarStatus": "User avatar (in post display)",
+          "popup": "Popups and tooltips",
+          "button": "Button",
+          "buttonHover": "Button (hover)",
+          "buttonPressed": "Button (pressed)",
+          "buttonPressedHover": "Button (pressed+hover)",
+          "input": "Input field"
+        }
+      },
+      "fonts": {
+        "_tab_label": "Fonts",
+        "help": "Select font to use for elements of UI. For \"custom\" you have to enter exact font name as it appears in system.",
+        "components": {
+          "interface": "Interface",
+          "input": "Input fields",
+          "post": "Post text",
+          "postCode": "Monospaced text in a post (rich text)"
+        },
+        "family": "Font name",
+        "size": "Size (in px)",
+        "weight": "Weight (boldness)",
+        "custom": "Custom"
+      },
+      "preview": {
+        "header": "Preview",
+        "content": "Content",
+        "error": "Example error",
+        "button": "Button",
+        "text": "A bunch of more {0} and {1}",
+        "mono": "content",
+        "input": "Just landed in L.A.",
+        "faint_link": "helpful manual",
+        "fine_print": "Read our {0} to learn nothing useful!",
+        "header_faint": "This is fine",
+        "checkbox": "I have skimmed over terms and conditions",
+        "link": "a nice lil' link"
+      }
+    }
   },
   "timeline": {
     "conversation": "Conversa",

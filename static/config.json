@@ -21,5 +21,6 @@
   "webPushNotifications": false,
   "noAttachmentLinks": false,
   "nsfwCensorImage": "",
-  "showFeaturesPanel": true
+  "showFeaturesPanel": true,
+  "minimalScopesMode": false
 }

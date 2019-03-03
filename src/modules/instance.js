@@ -15,7 +15,6 @@ const defaultState = {
   redirectRootNoLogin: '/main/all',
   redirectRootLogin: '/main/friends',
   showInstanceSpecificPanel: false,
-  scopeOptionsEnabled: true,
   formattingOptionsEnabled: false,
   alwaysShowSubjectInput: true,
   collapseMessageWithSubject: false,
@@ -31,6 +30,7 @@ const defaultState = {
   vapidPublicKey: undefined,
   noAttachmentLinks: false,
   showFeaturesPanel: true,
+  minimalScopesMode: false,
 
   // Nasty stuff
   pleromaBackend: true,

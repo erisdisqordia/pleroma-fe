@@ -78,7 +78,7 @@ const afterStoreSetup = ({ store, i18n }) => {
           copyInstanceOption('redirectRootNoLogin')
           copyInstanceOption('redirectRootLogin')
           copyInstanceOption('showInstanceSpecificPanel')
-          copyInstanceOption('scopeOptionsEnabled')
+          copyInstanceOption('minimalScopesMode')
           copyInstanceOption('formattingOptionsEnabled')
           copyInstanceOption('collapseMessageWithSubject')
           copyInstanceOption('loginMethod')

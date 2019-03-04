@@ -6,7 +6,7 @@
       :switcher="true"
       :selected="timeline.viewing"
     />
-    <tab-switcher :renderOnlyFocused="true">
+    <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
       <Timeline
         :label="$t('user_card.statuses')"
         :disabled="!user.statuses_count"

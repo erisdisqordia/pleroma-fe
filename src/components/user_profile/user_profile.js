@@ -141,6 +141,9 @@ const UserProfile = {
       }
       this.cleanUp()
       this.startUp()
+    },
+    $route () {
+      this.$refs.tabSwitcher.activateTab(0)()
     }
   },
   components: {

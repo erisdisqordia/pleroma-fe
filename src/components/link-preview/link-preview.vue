@@ -23,6 +23,7 @@
   flex-direction: row;
   cursor: pointer;
   overflow: hidden;
+  margin-top: 0.5em;
 
   .card-image {
     flex-shrink: 0;

@@ -187,7 +187,7 @@
     "no_mutes": "Sem silenciados",
     "hide_follows_description": "Não mostrar quem estou seguindo",
     "hide_followers_description": "Não mostrar quem me segue",
-    "show_admin_badge": "Mostrar título de Administrador em meu perfil",
+    "show_admin_badge": "Mostrar distintivo de Administrador em meu perfil",
     "show_moderator_badge": "Mostrar título de Moderador em meu perfil",
     "nsfw_clickthrough": "Habilitar clique para ocultar anexos sensíveis",
     "oauth_tokens": "Token OAuth",
@@ -254,122 +254,173 @@
         "color": "Cor",
         "opacity": "Opacidade",
         "contrast": {
-          "hint": "Contrast ratio is {ratio}, it {level} {context}",
+          "hint": "A taxa de contraste é {ratio}, {level} {context}",
           "level": {
-            "aa": "meets Level AA guideline (minimal)",
-            "aaa": "meets Level AAA guideline (recommended)",
-            "bad": "doesn't meet any accessibility guidelines"
+            "aa": "padrão Nível AA (mínimo)",
+            "aaa": "padrão Nível AAA (recomendado)",
+            "bad": "nenhum padrão de acessibilidade"
           },
           "context": {
-            "18pt": "for large (18pt+) text",
-            "text": "for text"
+            "18pt": "para textos longos (18pt+)",
+            "text": "para texto"
           }
         }
       },
       "common_colors": {
-        "_tab_label": "Common",
-        "main": "Common colors",
-        "foreground_hint": "See \"Advanced\" tab for more detailed control",
-        "rgbo": "Icons, accents, badges"
+        "_tab_label": "Comum",
+        "main": "Cores Comuns",
+        "foreground_hint": "Configurações mais detalhadas na aba\"Avançado\"",
+        "rgbo": "Ícones, acentuação, distintivos"
       },
       "advanced_colors": {
-        "_tab_label": "Advanced",
-        "alert": "Alert background",
-        "alert_error": "Error",
-        "badge": "Badge background",
-        "badge_notification": "Notification",
-        "panel_header": "Panel header",
-        "top_bar": "Top bar",
-        "borders": "Borders",
-        "buttons": "Buttons",
-        "inputs": "Input fields",
-        "faint_text": "Faded text"
+        "_tab_label": "Avançado",
+        "alert": "Fundo de alerta",
+        "alert_error": "Erro",
+        "badge": "Fundo do distintivo",
+        "badge_notification": "Notificação",
+        "panel_header": "Topo do painel",
+        "top_bar": "Barra do topo",
+        "borders": "Bordas",
+        "buttons": "Botões",
+        "inputs": "Caixas de entrada",
+        "faint_text": "Texto esmaecido"
       },
       "radii": {
-        "_tab_label": "Roundness"
+        "_tab_label": "Arredondado"
       },
       "shadows": {
-        "_tab_label": "Shadow and lighting",
-        "component": "Component",
-        "override": "Override",
-        "shadow_id": "Shadow #{value}",
-        "blur": "Blur",
-        "spread": "Spread",
-        "inset": "Inset",
-        "hint": "For shadows you can also use --variable as a color value to use CSS3 variables. Please note that setting opacity won't work in this case.",
+        "_tab_label": "Luz e sombra",
+        "component": "Componente",
+        "override": "Sobrescrever",
+        "shadow_id": "Sombra #{value}",
+        "blur": "Borrado",
+        "spread": "Difusão",
+        "inset": "Inserção",
+        "hint": "Para as sombras você também pode usar --variável como valor de cor para utilizar variáveis do CSS3. Tenha em mente que configurar a opacidade não será possível neste caso.",
         "filter_hint": {
-          "always_drop_shadow": "Warning, this shadow always uses {0} when browser supports it.",
-          "drop_shadow_syntax": "{0} does not support {1} parameter and {2} keyword.",
-          "avatar_inset": "Please note that combining both inset and non-inset shadows on avatars might give unexpected results with transparent avatars.",
-          "spread_zero": "Shadows with spread > 0 will appear as if it was set to zero",
-          "inset_classic": "Inset shadows will be using {0}"
+          "always_drop_shadow": "Atenção, esta sombra sempre utiliza {0} quando compatível com o navegador.",
+          "drop_shadow_syntax": "{0} não é compatível com o parâmetro {1} e a palavra-chave {2}.",
+          "avatar_inset": "Tenha em mente que combinar as sombras de inserção e a não-inserção em avatares pode causar resultados inesperados em avatares transparentes.",
+          "spread_zero": "Sombras com uma difusão > 0 aparecerão como se fossem definidas como 0.",
+          "inset_classic": "Sombras de inserção utilizarão {0}"
         },
         "components": {
-          "panel": "Panel",
-          "panelHeader": "Panel header",
-          "topBar": "Top bar",
-          "avatar": "User avatar (in profile view)",
-          "avatarStatus": "User avatar (in post display)",
-          "popup": "Popups and tooltips",
-          "button": "Button",
-          "buttonHover": "Button (hover)",
-          "buttonPressed": "Button (pressed)",
-          "buttonPressedHover": "Button (pressed+hover)",
-          "input": "Input field"
+          "panel": "Painel",
+          "panelHeader": "Topo do painel",
+          "topBar": "Barra do topo",
+          "avatar": "Avatar do usuário (na visualização do perfil)",
+          "avatarStatus": "Avatar do usuário (na exibição de posts)",
+          "popup": "Dicas e notificações",
+          "button": "Botão",
+          "buttonHover": "Botão (em cima)",
+          "buttonPressed": "Botão (pressionado)",
+          "buttonPressedHover": "Botão (pressionado+em cima)",
+          "input": "Campo de entrada"
         }
       },
       "fonts": {
-        "_tab_label": "Fonts",
-        "help": "Select font to use for elements of UI. For \"custom\" you have to enter exact font name as it appears in system.",
+        "_tab_label": "Fontes",
+        "help": "Selecionar fonte dos elementos da interface. Para fonte \"personalizada\" você deve entrar exatamente o nome da fonte no sistema.",
         "components": {
           "interface": "Interface",
-          "input": "Input fields",
-          "post": "Post text",
-          "postCode": "Monospaced text in a post (rich text)"
+          "input": "Campo de entrada",
+          "post": "Postar texto",
+          "postCode": "Texto monoespaçado em post (formatação rica)"
         },
-        "family": "Font name",
-        "size": "Size (in px)",
-        "weight": "Weight (boldness)",
-        "custom": "Custom"
+        "family": "Nome da fonte",
+        "size": "Tamanho (em px)",
+        "weight": "Peso",
+        "custom": "Personalizada"
       },
       "preview": {
-        "header": "Preview",
-        "content": "Content",
-        "error": "Example error",
-        "button": "Button",
-        "text": "A bunch of more {0} and {1}",
-        "mono": "content",
-        "input": "Just landed in L.A.",
-        "faint_link": "helpful manual",
-        "fine_print": "Read our {0} to learn nothing useful!",
-        "header_faint": "This is fine",
-        "checkbox": "I have skimmed over terms and conditions",
-        "link": "a nice lil' link"
+        "header": "Pré-visualizar",
+        "content": "Conteúdo",
+        "error": "Erro de exemplo",
+        "button": "Botão",
+        "text": "Vários {0} e {1}",
+        "mono": "conteúdo",
+        "input": "Acabei de chegar no Rio!",
+        "faint_link": "manual útil",
+        "fine_print": "Leia nosso {0} para não aprender nada!",
+        "header_faint": "Está ok!",
+        "checkbox": "Li os termos e condições",
+        "link": "um belo link"
       }
     }
   },
   "timeline": {
+    "collapse": "Esconder",
     "conversation": "Conversa",
-    "error_fetching": "Erro buscando atualizações",
+    "error_fetching": "Erro ao buscar atualizações",
     "load_older": "Carregar postagens antigas",
+    "no_retweet_hint": "Posts apenas para seguidores ou diretos não podem ser repetidos",
+    "repeated": "Repetido",
     "show_new": "Mostrar novas",
-    "up_to_date": "Atualizado"
+    "up_to_date": "Atualizado",
+    "no_more_statuses": "Sem mais posts",
+    "no_statuses": "Sem posts"
+  },
+  "status": {
+    "reply_to": "Responder a",
+    "replies_list": "Respostas:"
   },
   "user_card": {
+    "approve": "Aprovar",
     "block": "Bloquear",
     "blocked": "Bloqueado!",
+    "deny": "Negar",
+    "favorites": "Favoritos",
     "follow": "Seguir",
+    "follow_sent": "Pedido enviado!",
+    "follow_progress": "Enviando…",
+    "follow_again": "Enviar solicitação novamente?",
+    "follow_unfollow": "Deixar de seguir",
     "followees": "Seguindo",
     "followers": "Seguidores",
     "following": "Seguindo!",
     "follows_you": "Segue você!",
+    "its_you": "É você!",
+    "media": "Mídia",
     "mute": "Silenciar",
     "muted": "Silenciado",
     "per_day": "por dia",
     "remote_follow": "Seguidor Remoto",
-    "statuses": "Postagens"
+    "statuses": "Postagens",
+    "unblock": "Desbloquear",
+    "unblock_progress": "Desbloqueando...",
+    "block_progress": "Bloqueando...",
+    "unmute": "Retirar silêncio",
+    "unmute_progress": "Retirando silêncio...",
+    "mute_progress": "Silenciando..."
   },
   "user_profile": {
-    "timeline_title": "Linha do tempo do usuário"
+    "timeline_title": "Linha do tempo do usuário",
+    "profile_does_not_exist": "Desculpe, este perfil não existe.",
+    "profile_loading_error": "Desculpe, houve um erro ao carregar este perfil."
+  },
+  "who_to_follow": {
+    "more": "Mais",
+    "who_to_follow": "Quem seguir"
+  },
+  "tool_tip": {
+    "media_upload": "Envio de mídia",
+    "repeat": "Repetir",
+    "reply": "Responder",
+    "favorite": "Favoritar",
+    "user_settings": "Configurações do usuário"
+  },
+  "upload":{
+    "error": {
+      "base": "Falha no envio.",
+      "file_too_big": "Arquivo grande demais [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+      "default": "Tente novamente mais tarde"
+    },
+    "file_size_units": {
+      "B": "B",
+      "KiB": "KiB",
+      "MiB": "MiB",
+      "GiB": "GiB",
+      "TiB": "TiB"
+    }
   }
 }

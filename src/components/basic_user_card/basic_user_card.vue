@@ -4,7 +4,7 @@
       <UserAvatar class="avatar" @click.prevent.native="toggleUserExpanded" :src="user.profile_image_url"/>
     </router-link>
     <div class="basic-user-card-expanded-content" v-if="userExpanded">
-      <UserCardContent :user="user" :rounded="true" :bordered="true"/>
+      <UserCard :user="user" :rounded="true" :bordered="true"/>
     </div>
     <div class="basic-user-card-collapsed-content" v-else>
       <div :title="user.name" class="basic-user-card-user-name">

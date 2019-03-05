@@ -1,5 +1,5 @@
 <template>
-<div class="user-card-content" :class="classes" :style="style">
+<div class="user-card" :class="classes" :style="style">
   <div class="panel-heading">
     <div class='user-info'>
       <div class='container'>
@@ -123,18 +123,18 @@
         <span>{{user.followers_count}}</span>
       </div>
     </div>
-    <p @click.prevent="linkClicked" v-if="!hideBio && user.description_html" class="user-card-content-bio" v-html="user.description_html"></p>
-    <p v-else-if="!hideBio" class="user-card-content-bio">{{ user.description }}</p>
+    <p @click.prevent="linkClicked" v-if="!hideBio && user.description_html" class="user-card-bio" v-html="user.description_html"></p>
+    <p v-else-if="!hideBio" class="user-card-bio">{{ user.description }}</p>
   </div>
 </div>
 </template>
 
-<script src="./user_card_content.js"></script>
+<script src="./user_card.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
 
-.user-card-content {
+.user-card {
   background-size: cover;
   overflow: hidden;
 

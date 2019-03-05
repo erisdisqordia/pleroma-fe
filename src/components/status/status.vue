@@ -31,7 +31,7 @@
           </router-link>
         </div>
         <div class="status-body">
-          <UserCardContent :user="status.user" :rounded="true" :bordered="true" class="status-usercard-content" v-if="userExpanded"/>
+          <UserCard :user="status.user" :rounded="true" :bordered="true" class="status-usercard-content" v-if="userExpanded"/>
           <div v-if="!noHeading" class="media-heading">
             <div class="heading-name-row">
               <div class="name-and-account-name">

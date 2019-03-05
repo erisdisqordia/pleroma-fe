@@ -3,7 +3,7 @@ import FavoriteButton from '../favorite_button/favorite_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
-import UserCardContent from '../user_card_content/user_card_content.vue'
+import UserCard from '../user_card/user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
@@ -259,7 +259,7 @@ const Status = {
     RetweetButton,
     DeleteButton,
     PostStatusForm,
-    UserCardContent,
+    UserCard,
     UserAvatar,
     Gallery,
     LinkPreview

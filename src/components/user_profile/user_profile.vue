@@ -1,7 +1,7 @@
 <template>
 <div>
   <div v-if="user.id" class="user-profile panel panel-default">
-    <UserCardContent :user="user" :switcher="true" :selected="timeline.viewing" rounded="top"/>
+    <UserCard :user="user" :switcher="true" :selected="timeline.viewing" rounded="top"/>
     <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
       <Timeline
         :label="$t('user_card.statuses')"

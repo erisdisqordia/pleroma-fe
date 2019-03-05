@@ -164,19 +164,19 @@
   //
   // Modifiers
 
-  &-rounded {
+  &-rt {
+    border-top-left-radius: $fallback--panelRadius;
+    border-top-left-radius: var(--panelRadius, $fallback--panelRadius);
+    border-top-right-radius: $fallback--panelRadius;
+    border-top-right-radius: var(--panelRadius, $fallback--panelRadius);
+  }
+
+  &-r {
     border-radius: $fallback--panelRadius;
     border-radius: var(--panelRadius, $fallback--panelRadius);
   }
 
-  &-rounded-t {
-    border-radius: $fallback--panelRadius;
-    border-radius: var(--panelRadius, $fallback--panelRadius);
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  &-bordered {
+  &-b {
     border-width: 1px;
     border-style: solid;
     border-color: $fallback--border;

@@ -4,7 +4,7 @@ import { requestFollow, requestUnfollow } from '../../services/follow_manipulate
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 export default {
-  props: [ 'user', 'switcher', 'selected', 'hideBio' ],
+  props: [ 'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered' ],
   data () {
     return {
       followRequestInProgress: false,
@@ -16,7 +16,14 @@ export default {
     }
   },
   computed: {
-    headingStyle () {
+    classes () {
+      return [{
+        'user-card-content-rounded': this.rounded === true,
+        'user-card-content-rounded-t': this.rounded === 'top',  // top only
+        'user-card-content-bordered': this.bordered
+      }]
+    },
+    style () {
       const color = this.$store.state.config.customTheme.colors
             ? this.$store.state.config.customTheme.colors.bg  // v2
             : this.$store.state.config.colors.bg // v1

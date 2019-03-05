@@ -8,7 +8,7 @@
       @touchmove="touchMove"
     >
       <div class="side-drawer-heading" @click="toggleDrawer">
-        <user-card-content :user="currentUser" :switcher="false" :hideBio="true" v-if="currentUser"/>
+        <UserCardContent :user="currentUser" :hideBio="true" v-if="currentUser"/>
         <div class="side-drawer-logo-wrapper" v-else>
           <img :src="logo"/>
           <span>{{sitename}}</span>
@@ -181,15 +181,6 @@
   display: flex;
   padding: 0;
   margin: 0;
-
-  .profile-panel-background {
-    border-radius: 0;
-    .panel-heading {
-      background: transparent;
-      flex-direction: column;
-      align-items: stretch;
-    }
-  }
 }
 
 .side-drawer ul {

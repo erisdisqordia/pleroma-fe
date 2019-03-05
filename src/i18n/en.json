@@ -220,6 +220,11 @@
     "subject_line_email": "Like email: \"re: subject\"",
     "subject_line_mastodon": "Like mastodon: copy as is",
     "subject_line_noop": "Do not copy",
+    "post_formats": {
+      "text/plain": "Plain text",
+      "text/html": "HTML",
+      "text/markdown": "Markdown"
+    },
     "post_status_content_type": "Post status content type",
     "status_content_type_plain": "Plain text",
     "stop_gifs": "Play-on-hover GIFs",

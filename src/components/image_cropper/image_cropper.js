@@ -67,7 +67,7 @@ const ImageCropper = {
     submit () {
       this.submitting = true
       this.avatarUploadError = null
-      this.submitHandler(this.cropper, this.filename)
+      this.submitHandler(this.cropper, this.file)
         .then(() => this.destroy())
         .catch((err) => {
           this.submitError = err
@@ -88,14 +88,14 @@ const ImageCropper = {
     readFile () {
       const fileInput = this.$refs.input
       if (fileInput.files != null && fileInput.files[0] != null) {
+        this.file = fileInput.files[0]
         let reader = new window.FileReader()
         reader.onload = (e) => {
           this.dataUrl = e.target.result
           this.$emit('open')
         }
-        reader.readAsDataURL(fileInput.files[0])
-        this.filename = fileInput.files[0].name || 'unknown'
-        this.$emit('changed', fileInput.files[0], reader)
+        reader.readAsDataURL(this.file)
+        this.$emit('changed', this.file, reader)
       }
     },
     clearError () {

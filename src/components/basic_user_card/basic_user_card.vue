@@ -1,18 +1,18 @@
 <template>
-  <div class="user-card">
+  <div class="basic-user-card">
     <router-link :to="userProfileLink(user)">
       <UserAvatar class="avatar" @click.prevent.native="toggleUserExpanded" :src="user.profile_image_url"/>
     </router-link>
-    <div class="user-card-expanded-content" v-if="userExpanded">
+    <div class="basic-user-card-expanded-content" v-if="userExpanded">
       <UserCardContent :user="user" :rounded="true" :bordered="true"/>
     </div>
-    <div class="user-card-collapsed-content" v-else>
-      <div :title="user.name" class="user-card-user-name">
+    <div class="basic-user-card-collapsed-content" v-else>
+      <div :title="user.name" class="basic-user-card-user-name">
         <span v-if="user.name_html" v-html="user.name_html"></span>
         <span v-else>{{ user.name }}</span>
       </div>
       <div>
-        <router-link class="user-card-screen-name" :to="userProfileLink(user)">
+        <router-link class="basic-user-card-screen-name" :to="userProfileLink(user)">
           @{{user.screen_name}}
         </router-link>
       </div>
@@ -26,7 +26,7 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.user-card {
+.basic-user-card {
   display: flex;
   flex: 1 0;
   margin: 0;

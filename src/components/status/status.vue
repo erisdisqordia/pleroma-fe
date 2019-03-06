@@ -422,6 +422,11 @@ $status-margin: 0.75em;
       max-height: 400px;
       vertical-align: middle;
       object-fit: contain;
+
+      &.emoji {
+        width: 32px;
+        height: 32px;
+      }
     }
 
     blockquote {

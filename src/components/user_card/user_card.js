@@ -18,9 +18,9 @@ export default {
   computed: {
     classes () {
       return [{
-        'user-card-rt': this.rounded === 'top', // set border-top-left-radius and border-top-right-radius
-        'user-card-r': this.rounded === true,   // set border-radius for all sides
-        'user-card-b': this.bordered === true   // set border for all sides
+        'user-card-rounded-t': this.rounded === 'top',  // set border-top-left-radius and border-top-right-radius
+        'user-card-rounded': this.rounded === true,     // set border-radius for all sides
+        'user-card-bordered': this.bordered === true    // set border for all sides
       }]
     },
     style () {

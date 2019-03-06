@@ -10,6 +10,7 @@
 const messages = {
   ar: require('./ar.json'),
   ca: require('./ca.json'),
+  cs: require('./cs.json'),
   de: require('./de.json'),
   en: require('./en.json'),
   eo: require('./eo.json'),

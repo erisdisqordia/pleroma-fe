@@ -30,7 +30,9 @@
         @drop="fileDrop"
         @dragover.prevent="fileDrag"
         @input="resize"
-        @paste="paste">
+        @paste="paste"
+        :disabled="posting"
+      >
       </textarea>
       <div class="visibility-tray">
         <span class="text-format" v-if="formattingOptionsEnabled">

@@ -19,7 +19,7 @@ const emptyTl = (userId = 0) => ({
   flushMarker: 0
 })
 
-export const defaultState = {
+export const defaultState = () => ({
   allStatuses: [],
   allStatusesObject: {},
   maxId: 0,
@@ -30,7 +30,8 @@ export const defaultState = {
     data: [],
     idStore: {},
     loading: false,
-    error: false
+    error: false,
+    fetcherId: null
   },
   favorites: new Set(),
   error: false,
@@ -45,7 +46,7 @@ export const defaultState = {
     tag: emptyTl(),
     dms: emptyTl()
   }
-}
+})
 
 export const prepareStatus = (status) => {
   // Set deleted flag
@@ -335,6 +336,15 @@ export const mutations = {
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
+  setNotificationFetcher (state, { fetcherId }) {
+    state.notifications.fetcherId = fetcherId
+  },
+  resetStatuses (state) {
+    const emptyState = defaultState()
+    Object.entries(emptyState).forEach(([key, value]) => {
+      state[key] = value
+    })
+  },
   clearTimeline (state, { timeline }) {
     state.timelines[timeline] = emptyTl(state.timelines[timeline].userId)
   },
@@ -385,7 +395,7 @@ export const mutations = {
 }
 
 const statuses = {
-  state: defaultState,
+  state: defaultState(),
   actions: {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })
@@ -404,6 +414,12 @@ const statuses = {
     },
     setNotificationsSilence ({ rootState, commit }, { value }) {
       commit('setNotificationsSilence', { value })
+    },
+    stopFetchingNotifications ({ rootState, commit }) {
+      if (rootState.statuses.notifications.fetcherId) {
+        window.clearInterval(rootState.statuses.notifications.fetcherId)
+      }
+      commit('setNotificationFetcher', { fetcherId: null })
     },
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })

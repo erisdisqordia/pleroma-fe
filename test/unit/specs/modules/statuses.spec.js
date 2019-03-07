@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash'
 import { defaultState, mutations, prepareStatus } from '../../../../src/modules/statuses.js'
 
 // eslint-disable-next-line camelcase
@@ -24,7 +23,7 @@ describe('Statuses.prepareStatus', () => {
 
 describe('The Statuses module', () => {
   it('adds the status to allStatuses and to the given timeline', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const status = makeMockStatus({id: '1'})
 
     mutations.addNewStatuses(state, { statuses: [status], timeline: 'public' })
@@ -36,7 +35,7 @@ describe('The Statuses module', () => {
   })
 
   it('counts the status as new if it has not been seen on this timeline', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const status = makeMockStatus({id: '1'})
 
     mutations.addNewStatuses(state, { statuses: [status], timeline: 'public' })
@@ -54,7 +53,7 @@ describe('The Statuses module', () => {
   })
 
   it('add the statuses to allStatuses if no timeline is given', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const status = makeMockStatus({id: '1'})
 
     mutations.addNewStatuses(state, { statuses: [status] })
@@ -66,7 +65,7 @@ describe('The Statuses module', () => {
   })
 
   it('adds the status to allStatuses and to the given timeline, directly visible', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const status = makeMockStatus({id: '1'})
 
     mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
@@ -78,7 +77,7 @@ describe('The Statuses module', () => {
   })
 
   it('removes statuses by tag on deletion', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const status = makeMockStatus({id: '1'})
     const otherStatus = makeMockStatus({id: '3'})
     status.uri = 'xxx'
@@ -96,7 +95,7 @@ describe('The Statuses module', () => {
   })
 
   it('does not update the maxId when the noIdUpdate flag is set', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const status = makeMockStatus({id: '1'})
     const secondStatus = makeMockStatus({id: '2'})
 
@@ -110,7 +109,7 @@ describe('The Statuses module', () => {
   })
 
   it('keeps a descending by id order in timeline.visibleStatuses and timeline.statuses', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const nonVisibleStatus = makeMockStatus({id: '1'})
     const status = makeMockStatus({id: '3'})
     const statusTwo = makeMockStatus({id: '2'})
@@ -130,7 +129,7 @@ describe('The Statuses module', () => {
   })
 
   it('splits retweets from their status and links them', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const status = makeMockStatus({id: '1'})
     const retweet = makeMockStatus({id: '2', type: 'retweet'})
     const modStatus = makeMockStatus({id: '1', text: 'something else'})
@@ -155,7 +154,7 @@ describe('The Statuses module', () => {
   })
 
   it('replaces existing statuses with the same id', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const status = makeMockStatus({id: '1'})
     const modStatus = makeMockStatus({id: '1', text: 'something else'})
 
@@ -172,7 +171,7 @@ describe('The Statuses module', () => {
   })
 
   it('replaces existing statuses with the same id, coming from a retweet', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const status = makeMockStatus({id: '1'})
     const modStatus = makeMockStatus({id: '1', text: 'something else'})
     const retweet = makeMockStatus({id: '2', type: 'retweet'})
@@ -193,7 +192,7 @@ describe('The Statuses module', () => {
   })
 
   it('handles favorite actions', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     const status = makeMockStatus({id: '1'})
 
     const favorite = {
@@ -241,7 +240,7 @@ describe('The Statuses module', () => {
   })
 
   it('keeps userId when clearing user timeline', () => {
-    const state = cloneDeep(defaultState)
+    const state = defaultState()
     state.timelines.user.userId = 123
 
     mutations.clearTimeline(state, { timeline: 'user' })
@@ -252,7 +251,7 @@ describe('The Statuses module', () => {
   describe('notifications', () => {
     it('removes a notification when the notice gets removed', () => {
       const user = { id: '1' }
-      const state = cloneDeep(defaultState)
+      const state = defaultState()
       const status = makeMockStatus({id: '1'})
       const otherStatus = makeMockStatus({id: '3'})
       const mentionedStatus = makeMockStatus({id: '2'})

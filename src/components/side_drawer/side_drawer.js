@@ -1,4 +1,4 @@
-import UserCardContent from '../user_card_content/user_card_content.vue'
+import UserCard from '../user_card/user_card.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 
 // TODO: separate touch gesture stuff into their own utils if more components want them
@@ -12,7 +12,7 @@ const SideDrawer = {
     closed: true,
     touchCoord: [0, 0]
   }),
-  components: { UserCardContent },
+  components: { UserCard },
   computed: {
     currentUser () {
       return this.$store.state.users.currentUser

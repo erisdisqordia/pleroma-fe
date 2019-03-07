@@ -1,11 +1,7 @@
 <template>
 <div>
   <div v-if="user.id" class="user-profile panel panel-default">
-    <user-card-content
-      :user="user"
-      :switcher="true"
-      :selected="timeline.viewing"
-    />
+    <UserCard :user="user" :switcher="true" :selected="timeline.viewing" rounded="top"/>
     <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
       <Timeline
         :label="$t('user_card.statuses')"
@@ -64,11 +60,6 @@
   flex: 2;
   flex-basis: 500px;
 
-  .profile-panel-background .panel-heading {
-    background: transparent;
-    flex-direction: column;
-    align-items: stretch;
-  }
   .userlist-placeholder {
     display: flex;
     justify-content: center;

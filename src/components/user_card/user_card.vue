@@ -1,6 +1,6 @@
 <template>
-<div id="heading" class="profile-panel-background" :style="headingStyle">
-  <div class="panel-heading text-center">
+<div class="user-card" :class="classes" :style="style">
+  <div class="panel-heading">
     <div class='user-info'>
       <div class='container'>
         <router-link :to="userProfileLink(user)">
@@ -108,7 +108,7 @@
       </div>
     </div>
   </div>
-  <div class="panel-body profile-panel-body" v-if="!hideBio">
+  <div class="panel-body" v-if="!hideBio">
     <div v-if="!hideUserStatsLocal && switcher" class="user-counts">
       <div class="user-count" v-on:click.prevent="setProfileView('statuses')">
         <h5>{{ $t('user_card.statuses') }}</h5>
@@ -123,40 +123,63 @@
         <span>{{user.followers_count}}</span>
       </div>
     </div>
-    <p @click.prevent="linkClicked" v-if="!hideBio && user.description_html" class="profile-bio" v-html="user.description_html"></p>
-    <p v-else-if="!hideBio" class="profile-bio">{{ user.description }}</p>
+    <p @click.prevent="linkClicked" v-if="!hideBio && user.description_html" class="user-card-bio" v-html="user.description_html"></p>
+    <p v-else-if="!hideBio" class="user-card-bio">{{ user.description }}</p>
   </div>
 </div>
 </template>
 
-<script src="./user_card_content.js"></script>
+<script src="./user_card.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
 
-.profile-panel-background {
+.user-card {
   background-size: cover;
-  border-radius: $fallback--panelRadius;
-  border-radius: var(--panelRadius, $fallback--panelRadius);
   overflow: hidden;
-
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
 
   .panel-heading {
     padding: .5em 0;
     text-align: center;
     box-shadow: none;
+    background: transparent;
+    flex-direction: column;
+    align-items: stretch;
   }
-}
 
-.profile-panel-body {
-  word-wrap: break-word;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%);
+  .panel-body {
+    word-wrap: break-word;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%);
+  }
 
-  .profile-bio {
+  p {
+    margin-bottom: 0;
+  }
+
+  &-bio {
     text-align: center;
+  }
+
+  // Modifiers
+
+  &-rounded-t {
+    border-top-left-radius: $fallback--panelRadius;
+    border-top-left-radius: var(--panelRadius, $fallback--panelRadius);
+    border-top-right-radius: $fallback--panelRadius;
+    border-top-right-radius: var(--panelRadius, $fallback--panelRadius);
+  }
+
+  &-rounded {
+    border-radius: $fallback--panelRadius;
+    border-radius: var(--panelRadius, $fallback--panelRadius);
+  }
+
+  &-bordered {
+    border-width: 1px;
+    border-style: solid;
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
   }
 }
 
@@ -391,27 +414,6 @@
   }
   a {
     text-decoration: none;
-  }
-}
-
-.usercard {
-  width: fill-available;
-  border-radius: $fallback--panelRadius;
-  border-radius: var(--panelRadius, $fallback--panelRadius);
-  border-style: solid;
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
-  border-width: 1px;
-  overflow: hidden;
-
-  .panel-heading {
-    background: transparent;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  p {
-    margin-bottom: 0;
   }
 }
 </style>

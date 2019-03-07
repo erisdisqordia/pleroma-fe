@@ -1,4 +1,4 @@
-import { remove, slice, each, find, maxBy, minBy, merge, last, isArray } from 'lodash'
+import { remove, slice, each, find, maxBy, minBy, merge, first, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -312,9 +312,20 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
   })
 }
 
+const removeStatus = (state, { timeline, userId }) => {
+  const timelineObject = state.timelines[timeline]
+  if (userId) {
+    remove(timelineObject.statuses, { user: { id: userId } })
+    remove(timelineObject.visibleStatuses, { user: { id: userId } })
+    timelineObject.minVisibleId = timelineObject.visibleStatuses.length > 0 ? last(timelineObject.visibleStatuses).id : 0
+    timelineObject.maxId = timelineObject.statuses.length > 0 ? first(timelineObject.statuses).id : 0
+  }
+}
+
 export const mutations = {
   addNewStatuses,
   addNewNotifications,
+  removeStatus,
   showNewStatuses (state, { timeline }) {
     const oldTimeline = (state.timelines[timeline])
 

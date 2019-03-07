@@ -93,22 +93,30 @@ export default {
   },
   methods: {
     followUser () {
+      const store = this.$store
       this.followRequestInProgress = true
-      requestFollow(this.user, this.$store).then(({sent}) => {
+      requestFollow(this.user, store).then(({sent}) => {
         this.followRequestInProgress = false
         this.followRequestSent = sent
       })
     },
     unfollowUser () {
+      const store = this.$store
       this.followRequestInProgress = true
-      requestUnfollow(this.user, this.$store).then(() => {
+      requestUnfollow(this.user, store).then(() => {
         this.followRequestInProgress = false
+        store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
       })
     },
     blockUser () {
       const store = this.$store
       store.state.api.backendInteractor.blockUser(this.user.id)
-        .then((blockedUser) => store.commit('addNewUsers', [blockedUser]))
+        .then((blockedUser) => {
+          store.commit('addNewUsers', [blockedUser])
+          store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
+          store.commit('removeStatus', { timeline: 'public', userId: this.user.id })
+          store.commit('removeStatus', { timeline: 'publicAndExternal', userId: this.user.id })
+        })
     },
     unblockUser () {
       const store = this.$store

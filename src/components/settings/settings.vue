@@ -106,7 +106,7 @@
                 <label for="postContentType" class="select">
                   <select id="postContentType" v-model="postContentTypeLocal">
                     <option v-for="postFormat in postFormats" :key="postFormat" :value="postFormat">
-                      {{$t(`settings.post_formats["${postFormat}"]`)}}
+                      {{$t(`post_status.content_type["${postFormat}"]`)}}
                       {{postContentTypeDefault === postFormat ? $t('settings.instance_default_simple') : ''}}
                     </option>
                   </select>

@@ -15,7 +15,6 @@ const STATUS_URL = '/api/statuses/show'
 const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 const CONVERSATION_URL = '/api/statusnet/conversation'
 const MENTIONS_URL = '/api/statuses/mentions.json'
-const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
 const BLOCKS_URL = '/api/statuses/blocks.json'
@@ -43,6 +42,7 @@ const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+const MASTODON_DIRECT_MESSAGES_TIMELINE_URL = '/api/v1/timelines/direct'
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
@@ -344,7 +344,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
     mentions: MENTIONS_URL,
-    dms: DM_TIMELINE_URL,
+    dms: MASTODON_DIRECT_MESSAGES_TIMELINE_URL,
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
     user: QVITTER_USER_TIMELINE_URL,

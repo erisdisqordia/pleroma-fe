@@ -60,18 +60,9 @@ export const parseUser = (data) => {
 
     if (data.pleroma) {
       const pleroma = data.pleroma
-      const relationship = pleroma.relationship
-      output.follows_you = relationship.followed_by
-      output.statusnet_blocking = relationship.blocking
-      output.muted = relationship.muting
-      output.following = relationship.following
-
-      // Unused:
-      // domain_blocking
-      // endorsed
-      // muting_notifications
-      // requested
-      // showing_reblogs
+      output.follows_you = pleroma.follows_you
+      output.statusnet_blocking = pleroma.statusnet_blocking
+      output.muted = pleroma.muted
     }
 
     // Missing, trying to recover

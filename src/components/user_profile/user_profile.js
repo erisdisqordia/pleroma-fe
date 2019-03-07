@@ -43,6 +43,7 @@ const UserProfile = {
     this.startFetchFavorites()
     if (!this.user.id) {
       this.$store.dispatch('fetchUser', this.fetchBy)
+        .then(() => this.$store.dispatch('fetchUserRelationship', this.fetchBy))
         .catch((reason) => {
           const errorMessage = get(reason, 'error.error')
           if (errorMessage === 'No user with such user_id') { // Known error
@@ -53,6 +54,8 @@ const UserProfile = {
             this.error = this.$t('user_profile.profile_loading_error')
           }
         })
+    } else if (typeof this.user.following === 'undefined' || this.user.following === null) {
+      this.$store.dispatch('fetchUserRelationship', this.fetchBy)
     }
   },
   destroyed () {

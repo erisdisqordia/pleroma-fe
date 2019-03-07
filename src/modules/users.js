@@ -1,5 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import { compact, map, each, merge, find } from 'lodash'
+import { compact, map, each, merge, find, omitBy } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
 import oauthApi from '../services/new_api/oauth'
@@ -11,7 +11,7 @@ export const mergeOrAdd = (arr, obj, item) => {
   const oldItem = obj[item.id]
   if (oldItem) {
     // We already have this, so only merge the new info.
-    merge(oldItem, item)
+    merge(oldItem, omitBy(item, _ => _ === null))
     return { item: oldItem, new: false }
   } else {
     // This is a new item, prepare it
@@ -39,7 +39,7 @@ export const mutations = {
   },
   setCurrentUser (state, user) {
     state.lastLoginName = user.screen_name
-    state.currentUser = merge(state.currentUser || {}, user)
+    state.currentUser = merge(state.currentUser || {}, omitBy(user, _ => _ === null))
   },
   clearCurrentUser (state) {
     state.currentUser = false
@@ -91,6 +91,16 @@ export const mutations = {
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
+  updateUserRelationship (state, relationships) {
+    relationships.forEach((relationship) => {
+      const user = state.usersObject[relationship.id]
+
+      user.follows_you = relationship.followed_by
+      user.following = relationship.following
+      user.muted = relationship.muting
+      user.statusnet_blocking = relationship.blocking
+    })
+  },
   saveBlocks (state, blockIds) {
     state.currentUser.blockIds = blockIds
   },
@@ -98,11 +108,17 @@ export const mutations = {
     state.currentUser.muteIds = muteIds
   },
   setUserForStatus (state, status) {
-    status.user = state.usersObject[status.user.id]
+    // Not setting it again since it's already reactive if it has getters
+    if (!Object.getOwnPropertyDescriptor(status.user, 'id').get) {
+      status.user = state.usersObject[status.user.id]
+    }
   },
   setUserForNotification (state, notification) {
-    notification.action.user = state.usersObject[notification.action.user.id]
-    notification.from_profile = state.usersObject[notification.action.user.id]
+    // Not setting it again since it's already reactive if it has getters
+    if (!Object.getOwnPropertyDescriptor(notification.action.user, 'id').get) {
+      notification.action.user = state.usersObject[notification.action.user.id]
+      notification.from_profile = state.usersObject[notification.action.user.id]
+    }
   },
   setColor (state, { user: { id }, highlighted }) {
     const user = state.usersObject[id]
@@ -148,6 +164,10 @@ const users = {
     fetchUser (store, id) {
       return store.rootState.api.backendInteractor.fetchUser({ id })
         .then((user) => store.commit('addNewUsers', [user]))
+    },
+    fetchUserRelationship (store, id) {
+      return store.rootState.api.backendInteractor.fetchUserRelationship({ id })
+        .then((relationships) => store.commit('updateUserRelationship', relationships))
     },
     fetchBlocks (store) {
       return store.rootState.api.backendInteractor.fetchBlocks()

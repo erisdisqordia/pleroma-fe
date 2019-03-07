@@ -133,6 +133,7 @@
     "general": "Yleinen",
     "hide_attachments_in_convo": "Piilota liitteet keskusteluissa",
     "hide_attachments_in_tl": "Piilota liitteet aikajanalla",
+    "max_thumbnails": "Suurin sallittu määrä liitteitä esikatselussa",
     "hide_isp": "Piilota palvelimenkohtainen ruutu",
     "preload_images": "Esilataa kuvat",
     "use_one_click_nsfw": "Avaa NSFW-liitteet yhdellä painalluksella",
@@ -165,6 +166,11 @@
     "no_rich_text_description": "Älä näytä tekstin muotoilua.",
     "hide_network_description": "Älä näytä seurauksiani tai seuraajiani",
     "nsfw_clickthrough": "Piilota NSFW liitteet klikkauksen taakse",
+    "oauth_tokens": "OAuth-merkit",
+    "token": "Token",
+    "refresh_token": "Päivitä token",
+    "valid_until": "Voimassa asti",
+    "revoke_token": "Peruuttaa",
     "panelRadius": "Ruudut",
     "pause_on_unfocused": "Pysäytä automaattinen viestien näyttö välilehden ollessa pois fokuksesta",
     "presets": "Valmiit teemat",
@@ -214,6 +220,10 @@
     "show_new": "Näytä uudet",
     "up_to_date": "Ajantasalla",
     "no_more_statuses": "Ei enempää viestejä"
+  },
+  "status": {
+    "reply_to": "Vastaus",
+    "replies_list": "Vastaukset:"
   },
   "user_card": {
     "approve": "Hyväksy",

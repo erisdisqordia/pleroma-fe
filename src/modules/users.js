@@ -72,18 +72,30 @@ export const mutations = {
   },
   // Because frontend doesn't have a reason to keep these stuff in memory
   // outside of viewing someones user profile.
-  clearFriendsAndFollowers (state, userKey) {
-    const user = state.usersObject[userKey]
+  clearFriends (state, userId) {
+    const user = state.usersObject[userId]
     if (!user) {
       return
     }
     user.friends = []
-    user.followers = []
     user.friendsPage = 0
+  },
+  clearFollowers (state, userId) {
+    const user = state.usersObject[userId]
+    if (!user) {
+      return
+    }
+    user.followers = []
     user.followersPage = 0
   },
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
+  },
+  saveBlocks (state, blockIds) {
+    state.currentUser.blockIds = blockIds
+  },
+  saveMutes (state, muteIds) {
+    state.currentUser.muteIds = muteIds
   },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
@@ -134,7 +146,39 @@ const users = {
   getters,
   actions: {
     fetchUser (store, id) {
-      store.rootState.api.backendInteractor.fetchUser({ id })
+      return store.rootState.api.backendInteractor.fetchUser({ id })
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    fetchBlocks (store) {
+      return store.rootState.api.backendInteractor.fetchBlocks()
+        .then((blocks) => {
+          store.commit('saveBlocks', map(blocks, 'id'))
+          store.commit('addNewUsers', blocks)
+          return blocks
+        })
+    },
+    blockUser (store, id) {
+      return store.rootState.api.backendInteractor.blockUser(id)
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    unblockUser (store, id) {
+      return store.rootState.api.backendInteractor.unblockUser(id)
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    fetchMutes (store) {
+      return store.rootState.api.backendInteractor.fetchMutes()
+        .then((mutedUsers) => {
+          each(mutedUsers, (user) => { user.muted = true })
+          store.commit('addNewUsers', mutedUsers)
+          store.commit('saveMutes', map(mutedUsers, 'id'))
+        })
+    },
+    muteUser (store, id) {
+      return store.state.api.backendInteractor.setUserMute({ id, muted: true })
+        .then((user) => store.commit('addNewUsers', [user]))
+    },
+    unmuteUser (store, id) {
+      return store.state.api.backendInteractor.setUserMute({ id, muted: false })
         .then((user) => store.commit('addNewUsers', [user]))
     },
     addFriends ({ rootState, commit }, fetchBy) {
@@ -151,20 +195,19 @@ const users = {
       })
     },
     addFollowers ({ rootState, commit }, fetchBy) {
-      return new Promise((resolve, reject) => {
-        const user = rootState.users.usersObject[fetchBy]
-        const page = user.followersPage || 1
-        rootState.api.backendInteractor.fetchFollowers({ id: user.id, page })
-          .then((followers) => {
-            commit('addFollowers', { id: user.id, followers, page })
-            resolve(followers)
-          }).catch(() => {
-            reject()
-          })
-      })
+      const user = rootState.users.usersObject[fetchBy]
+      const page = user.followersPage || 1
+      return rootState.api.backendInteractor.fetchFollowers({ id: user.id, page })
+        .then((followers) => {
+          commit('addFollowers', { id: user.id, followers, page })
+          return followers
+        })
     },
-    clearFriendsAndFollowers ({ commit }, userKey) {
-      commit('clearFriendsAndFollowers', userKey)
+    clearFriends ({ commit }, userId) {
+      commit('clearFriends', userId)
+    },
+    clearFollowers ({ commit }, userId) {
+      commit('clearFollowers', userId)
     },
     registerPushNotifications (store) {
       const token = store.state.currentUser.credentials
@@ -231,8 +274,14 @@ const users = {
         store.commit('setToken', result.access_token)
         store.dispatch('loginUser', result.access_token)
       } else {
-        let data = await response.json()
-        let errors = humanizeErrors(JSON.parse(data.error))
+        const data = await response.json()
+        let errors = JSON.parse(data.error)
+        // replace ap_id with username
+        if (errors.ap_id) {
+          errors.username = errors.ap_id
+          delete errors.ap_id
+        }
+        errors = humanizeErrors(errors)
         store.commit('signUpFailure', errors)
         throw Error(errors)
       }
@@ -257,6 +306,8 @@ const users = {
               const user = data
               // user.credentials = userCredentials
               user.credentials = accessToken
+              user.blockIds = []
+              user.muteIds = []
               commit('setCurrentUser', user)
               commit('addNewUsers', [user])
 
@@ -273,11 +324,8 @@ const users = {
               // Start getting fresh posts.
               store.dispatch('startFetching', { timeline: 'friends' })
 
-              // Get user mutes and follower info
-              store.rootState.api.backendInteractor.fetchMutes().then((mutedUsers) => {
-                each(mutedUsers, (user) => { user.muted = true })
-                store.commit('addNewUsers', mutedUsers)
-              })
+              // Get user mutes
+              store.dispatch('fetchMutes')
 
               // Fetch our friends
               store.rootState.api.backendInteractor.fetchFriends({ id: user.id })

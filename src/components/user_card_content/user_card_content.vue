@@ -13,7 +13,7 @@
             <router-link :to="{ name: 'user-settings' }" v-if="!isOtherUser">
               <i class="button-icon icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
             </router-link>
-            <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser">
+            <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser && !user.is_local">
               <i class="icon-link-ext usersettings"></i>
             </a>
           </div>
@@ -222,6 +222,14 @@
     overflow: hidden;
     flex: 1 1 auto;
     margin-right: 1em;
+    font-size: 15px;
+
+    img {
+      object-fit: contain;
+      height: 16px;
+      width: 16px;
+      vertical-align: middle;
+    }
   }
 
   .user-screen-name {
@@ -386,4 +394,24 @@
   }
 }
 
+.usercard {
+  width: fill-available;
+  border-radius: $fallback--panelRadius;
+  border-radius: var(--panelRadius, $fallback--panelRadius);
+  border-style: solid;
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
+  border-width: 1px;
+  overflow: hidden;
+
+  .panel-heading {
+    background: transparent;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
 </style>

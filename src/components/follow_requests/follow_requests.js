@@ -1,21 +1,12 @@
-import UserCard from '../user_card/user_card.vue'
+import FollowRequestCard from '../follow_request_card/follow_request_card.vue'
 
 const FollowRequests = {
   components: {
-    UserCard
-  },
-  created () {
-    this.updateRequests()
+    FollowRequestCard
   },
   computed: {
     requests () {
       return this.$store.state.api.followRequests
-    }
-  },
-  methods: {
-    updateRequests () {
-      this.$store.state.api.backendInteractor.fetchFollowRequests()
-        .then((requests) => { this.$store.commit('setFollowRequests', requests) })
     }
   }
 }

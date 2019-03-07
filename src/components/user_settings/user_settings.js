@@ -1,8 +1,32 @@
-import { unescape } from 'lodash'
-
+import { compose } from 'vue-compose'
+import unescape from 'lodash/unescape'
+import get from 'lodash/get'
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
+import ImageCropper from '../image_cropper/image_cropper.vue'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
+import BlockCard from '../block_card/block_card.vue'
+import MuteCard from '../mute_card/mute_card.vue'
+import withSubscription from '../../hocs/with_subscription/with_subscription'
+import withList from '../../hocs/with_list/with_list'
+
+const BlockList = compose(
+  withSubscription({
+    fetch: (props, $store) => $store.dispatch('fetchBlocks'),
+    select: (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
+    childPropName: 'entries'
+  }),
+  withList({ getEntryProps: userId => ({ userId }) })
+)(BlockCard)
+
+const MuteList = compose(
+  withSubscription({
+    fetch: (props, $store) => $store.dispatch('fetchMutes'),
+    select: (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
+    childPropName: 'entries'
+  }),
+  withList({ getEntryProps: userId => ({ userId }) })
+)(MuteCard)
 
 const UserSettings = {
   data () {
@@ -20,14 +44,12 @@ const UserSettings = {
       followImportError: false,
       followsImported: false,
       enableFollowsExport: true,
-      avatarUploading: false,
+      pickAvatarBtnVisible: true,
       bannerUploading: false,
       backgroundUploading: false,
       followListUploading: false,
-      avatarPreview: null,
       bannerPreview: null,
       backgroundPreview: null,
-      avatarUploadError: null,
       bannerUploadError: null,
       backgroundUploadError: null,
       deletingAccount: false,
@@ -39,9 +61,15 @@ const UserSettings = {
       activeTab: 'profile'
     }
   },
+  created () {
+    this.$store.dispatch('fetchTokens')
+  },
   components: {
     StyleSwitcher,
-    TabSwitcher
+    TabSwitcher,
+    ImageCropper,
+    BlockList,
+    MuteList
   },
   computed: {
     user () {
@@ -60,6 +88,18 @@ const UserSettings = {
         private: { selected: this.newDefaultScope === 'private' },
         direct: { selected: this.newDefaultScope === 'direct' }
       }
+    },
+    currentSaveStateNotice () {
+      return this.$store.state.interface.settings.currentSaveStateNotice
+    },
+    oauthTokens () {
+      return this.$store.state.oauthTokens.tokens.map(oauthToken => {
+        return {
+          id: oauthToken.id,
+          appName: oauthToken.app_name,
+          validUntil: new Date(oauthToken.valid_until).toLocaleDateString()
+        }
+      })
     }
   },
   methods: {
@@ -117,35 +157,15 @@ const UserSettings = {
       }
       reader.readAsDataURL(file)
     },
-    submitAvatar () {
-      if (!this.avatarPreview) { return }
-
-      let img = this.avatarPreview
-      // eslint-disable-next-line no-undef
-      let imginfo = new Image()
-      let cropX, cropY, cropW, cropH
-      imginfo.src = img
-      if (imginfo.height > imginfo.width) {
-        cropX = 0
-        cropW = imginfo.width
-        cropY = Math.floor((imginfo.height - imginfo.width) / 2)
-        cropH = imginfo.width
-      } else {
-        cropY = 0
-        cropH = imginfo.height
-        cropX = Math.floor((imginfo.width - imginfo.height) / 2)
-        cropW = imginfo.height
-      }
-      this.avatarUploading = true
-      this.$store.state.api.backendInteractor.updateAvatar({params: {img, cropX, cropY, cropW, cropH}}).then((user) => {
+    submitAvatar (cropper, file) {
+      const img = cropper.getCroppedCanvas().toDataURL(file.type)
+      return this.$store.state.api.backendInteractor.updateAvatar({ params: { img } }).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
-          this.avatarPreview = null
         } else {
-          this.avatarUploadError = this.$t('upload.error.base') + user.error
+          throw new Error(this.$t('upload.error.base') + user.error)
         }
-        this.avatarUploading = false
       })
     },
     clearUploadError (slot) {
@@ -299,6 +319,11 @@ const UserSettings = {
     logout () {
       this.$store.dispatch('logout')
       this.$router.replace('/')
+    },
+    revokeToken (id) {
+      if (window.confirm(`${this.$i18n.t('settings.revoke_token')}?`)) {
+        this.$store.dispatch('revokeToken', id)
+      }
     }
   }
 }

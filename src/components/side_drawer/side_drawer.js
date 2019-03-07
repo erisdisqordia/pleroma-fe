@@ -32,6 +32,9 @@ const SideDrawer = {
     },
     sitename () {
       return this.$store.state.instance.name
+    },
+    followRequestCount () {
+      return this.$store.state.api.followRequests.length
     }
   },
   methods: {

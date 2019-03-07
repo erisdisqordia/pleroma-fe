@@ -137,6 +137,10 @@
               <label for="hideAttachmentsInConv">{{$t('settings.hide_attachments_in_convo')}}</label>
             </li>
             <li>
+              <label for="maxThumbnails">{{$t('settings.max_thumbnails')}}</label>
+              <input class="number-input" type="number" id="maxThumbnails" v-model.number="maxThumbnails" min="0" step="1">
+            </li>
+            <li>
               <input type="checkbox" id="hideNsfw" v-model="hideNsfwLocal">
               <label for="hideNsfw">{{$t('settings.nsfw_clickthrough')}}</label>
             </li>
@@ -146,7 +150,7 @@
                 <label for="preloadImage">{{$t('settings.preload_images')}}</label>
               </li>
               <li>
-                <input type="checkbox" id="useOneClickNsfw" v-model="useOneClickNsfw">
+                <input :disabled="!hideNsfwLocal" type="checkbox" id="useOneClickNsfw" v-model="useOneClickNsfw">
                 <label for="useOneClickNsfw">{{$t('settings.use_one_click_nsfw')}}</label>
               </li>
             </ul>
@@ -311,24 +315,14 @@
     color: $fallback--cRed;
   }
 
-  .old-avatar {
-    width: 128px;
-    border-radius: $fallback--avatarRadius;
-    border-radius: var(--avatarRadius, $fallback--avatarRadius);
-  }
-
-  .new-avatar {
-    object-fit: cover;
-    width: 128px;
-    height: 128px;
-    border-radius: $fallback--avatarRadius;
-    border-radius: var(--avatarRadius, $fallback--avatarRadius);
-  }
-
   .btn {
     min-height: 28px;
     min-width: 10em;
     padding: 0 2em;
+  }
+
+  .number-input {
+    max-width: 6em;
   }
 }
 .select-multiple {

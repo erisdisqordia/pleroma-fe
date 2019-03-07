@@ -4,7 +4,7 @@
       {{$t('nav.friend_requests')}}
     </div>
     <div class="panel-body">
-      <user-card v-for="request in requests" :key="request.id" :user="request" :showFollows="false" :showApproval="true"></user-card>
+      <FollowRequestCard v-for="request in requests" :key="request.id" :user="request"/>
     </div>
   </div>
 </template>

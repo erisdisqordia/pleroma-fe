@@ -54,8 +54,8 @@ const backendInteractorService = (credentials) => {
     return apiService.denyUser({credentials, id})
   }
 
-  const startFetching = ({timeline, store, userId = false}) => {
-    return timelineFetcherService.startFetching({timeline, store, credentials, userId})
+  const startFetching = ({timeline, store, userId = false, tag}) => {
+    return timelineFetcherService.startFetching({timeline, store, credentials, userId, tag})
   }
 
   const setUserMute = ({id, muted = true}) => {
@@ -63,7 +63,10 @@ const backendInteractorService = (credentials) => {
   }
 
   const fetchMutes = () => apiService.fetchMutes({credentials})
+  const fetchBlocks = (params) => apiService.fetchBlocks({credentials, ...params})
   const fetchFollowRequests = () => apiService.fetchFollowRequests({credentials})
+  const fetchOAuthTokens = () => apiService.fetchOAuthTokens({credentials})
+  const revokeOAuthToken = (id) => apiService.revokeOAuthToken({id, credentials})
 
   const getCaptcha = () => apiService.getCaptcha()
   const register = (params) => apiService.register(params)
@@ -94,6 +97,9 @@ const backendInteractorService = (credentials) => {
     startFetching,
     setUserMute,
     fetchMutes,
+    fetchBlocks,
+    fetchOAuthTokens,
+    revokeOAuthToken,
     register,
     getCaptcha,
     updateAvatar,

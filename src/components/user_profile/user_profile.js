@@ -1,9 +1,39 @@
+import { compose } from 'vue-compose'
+import get from 'lodash/get'
 import UserCardContent from '../user_card_content/user_card_content.vue'
-import UserCard from '../user_card/user_card.vue'
+import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
-import FollowList from '../follow_list/follow_list.vue'
+import withLoadMore from '../../hocs/with_load_more/with_load_more'
+import withList from '../../hocs/with_list/with_list'
+
+const FollowerList = compose(
+  withLoadMore({
+    fetch: (props, $store) => $store.dispatch('addFollowers', props.userId),
+    select: (props, $store) => get($store.getters.userById(props.userId), 'followers', []),
+    destory: (props, $store) => $store.dispatch('clearFollowers', props.userId),
+    childPropName: 'entries',
+    additionalPropNames: ['userId']
+  }),
+  withList({ getEntryProps: user => ({ user }) })
+)(FollowCard)
+
+const FriendList = compose(
+  withLoadMore({
+    fetch: (props, $store) => $store.dispatch('addFriends', props.userId),
+    select: (props, $store) => get($store.getters.userById(props.userId), 'friends', []),
+    destory: (props, $store) => $store.dispatch('clearFriends', props.userId),
+    childPropName: 'entries',
+    additionalPropNames: ['userId']
+  }),
+  withList({ getEntryProps: user => ({ user }) })
+)(FollowCard)
 
 const UserProfile = {
+  data () {
+    return {
+      error: false
+    }
+  },
   created () {
     this.$store.commit('clearTimeline', { timeline: 'user' })
     this.$store.commit('clearTimeline', { timeline: 'favorites' })
@@ -13,6 +43,16 @@ const UserProfile = {
     this.startFetchFavorites()
     if (!this.user.id) {
       this.$store.dispatch('fetchUser', this.fetchBy)
+        .catch((reason) => {
+          const errorMessage = get(reason, 'error.error')
+          if (errorMessage === 'No user with such user_id') { // Known error
+            this.error = this.$t('user_profile.profile_does_not_exist')
+          } else if (errorMessage) {
+            this.error = errorMessage
+          } else {
+            this.error = this.$t('user_profile.profile_loading_error')
+          }
+        })
     }
   },
   destroyed () {
@@ -101,13 +141,16 @@ const UserProfile = {
       }
       this.cleanUp()
       this.startUp()
+    },
+    $route () {
+      this.$refs.tabSwitcher.activateTab(0)()
     }
   },
   components: {
     UserCardContent,
-    UserCard,
     Timeline,
-    FollowList
+    FollowerList,
+    FriendList
   }
 }
 

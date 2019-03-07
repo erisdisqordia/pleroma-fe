@@ -10,6 +10,7 @@ const emptyTl = (userId = 0) => ({
   visibleStatusesObject: {},
   newStatusCount: 0,
   maxId: 0,
+  minId: 0,
   minVisibleId: 0,
   loading: false,
   followers: [],
@@ -117,16 +118,21 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const timelineObject = state.timelines[timeline]
 
   const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
-  const older = timeline && maxNew < timelineObject.maxId
+  const minNew = statuses.length > 0 ? minBy(statuses, 'id').id : 0
+  const newer = timeline && maxNew > timelineObject.maxId && statuses.length > 0
+  const older = timeline && (minNew < timelineObject.minId || timelineObject.minId === 0) && statuses.length > 0
 
-  if (timeline && !noIdUpdate && statuses.length > 0 && !older) {
+  if (!noIdUpdate && newer) {
     timelineObject.maxId = maxNew
+  }
+  if (!noIdUpdate && older) {
+    timelineObject.minId = minNew
   }
 
   // This makes sure that user timeline won't get data meant for other
   // user. I.e. opening different user profiles makes request which could
   // return data late after user already viewing different user profile
-  if (timeline === 'user' && timelineObject.userId !== userId) {
+  if ((timeline === 'user' || timeline === 'media') && timelineObject.userId !== userId) {
     return
   }
 
@@ -255,12 +261,9 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     processor(status)
   })
 
-    // Keep the visible statuses sorted
+  // Keep the visible statuses sorted
   if (timeline) {
     sortTimeline(timelineObject)
-    if ((older || timelineObject.minVisibleId <= 0) && statuses.length > 0) {
-      timelineObject.minVisibleId = minBy(statuses, 'id').id
-    }
   }
 }
 
@@ -303,6 +306,8 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
           setTimeout(notification.close.bind(notification), 5000)
         }
       }
+    } else if (notification.seen) {
+      state.notifications.idStore[notification.id].seen = true
     }
   })
 }

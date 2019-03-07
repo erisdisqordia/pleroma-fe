@@ -12,6 +12,7 @@ const settings = {
     return {
       hideAttachmentsLocal: user.hideAttachments,
       hideAttachmentsInConvLocal: user.hideAttachmentsInConv,
+      maxThumbnails: user.maxThumbnails,
       hideNsfwLocal: user.hideNsfw,
       useOneClickNsfw: user.useOneClickNsfw,
       hideISPLocal: user.hideISP,
@@ -186,6 +187,10 @@ const settings = {
     },
     useContainFit (value) {
       this.$store.dispatch('setOption', { name: 'useContainFit', value })
+    },
+    maxThumbnails (value) {
+      value = this.maxThumbnails = Math.floor(Math.max(value, 0))
+      this.$store.dispatch('setOption', { name: 'maxThumbnails', value })
     }
   }
 }

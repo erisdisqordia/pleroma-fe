@@ -11,6 +11,7 @@ import configModule from './modules/config.js'
 import chatModule from './modules/chat.js'
 import oauthModule from './modules/oauth.js'
 import mediaViewerModule from './modules/media_viewer.js'
+import oauthTokensModule from './modules/oauth_tokens.js'
 
 import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
@@ -29,8 +30,9 @@ const currentLocale = (window.navigator.language || 'en').split('-')[0]
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueTimeago, {
-  locale: currentLocale === 'ja' ? 'ja' : 'en',
+  locale: currentLocale === 'cs' ? 'cs' : currentLocale === 'ja' ? 'ja' : 'en',
   locales: {
+    'cs': require('../static/timeago-cs.json'),
     'en': require('../static/timeago-en.json'),
     'ja': require('../static/timeago-ja.json')
   }
@@ -64,7 +66,8 @@ createPersistedState(persistedStateOptions).then((persistedState) => {
       config: configModule,
       chat: chatModule,
       oauth: oauthModule,
-      mediaViewer: mediaViewerModule
+      mediaViewer: mediaViewerModule,
+      oauthTokens: oauthTokensModule
     },
     plugins: [persistedState, pushNotifications],
     strict: false // Socket modifies itself, let's ignore this for now.

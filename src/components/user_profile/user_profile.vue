@@ -6,10 +6,11 @@
       :switcher="true"
       :selected="timeline.viewing"
     />
-    <tab-switcher :renderOnlyFocused="true">
+    <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
       <Timeline
         :label="$t('user_card.statuses')"
         :disabled="!user.statuses_count"
+        :count="user.statuses_count"
         :embedded="true"
         :title="$t('user_profile.timeline_title')"
         :timeline="timeline"
@@ -17,16 +18,10 @@
         :user-id="fetchBy"
       />
       <div :label="$t('user_card.followees')" v-if="followsTabVisible" :disabled="!user.friends_count">
-        <FollowList v-if="user.friends_count > 0" :userId="userId" :showFollowers="false" />
-        <div class="userlist-placeholder" v-else>
-          <i class="icon-spin3 animate-spin"></i>
-        </div>
+        <FriendList :userId="userId" />
       </div>
       <div :label="$t('user_card.followers')" v-if="followersTabVisible" :disabled="!user.followers_count">
-        <FollowList v-if="user.followers_count > 0" :userId="userId" :showFollowers="true" />
-        <div class="userlist-placeholder" v-else>
-          <i class="icon-spin3 animate-spin"></i>
-        </div>
+        <FollowerList :userId="userId" :entryProps="{noFollowsYou: isUs}" />
       </div>
       <Timeline
         :label="$t('user_card.media')"
@@ -54,7 +49,8 @@
       </div>
     </div>
     <div class="panel-body">
-      <i class="icon-spin3 animate-spin"></i>
+      <span v-if="error">{{ error }}</span>
+      <i class="icon-spin3 animate-spin" v-else></i>
     </div>
   </div>
 </div>

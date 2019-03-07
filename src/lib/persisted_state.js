@@ -84,12 +84,12 @@ export default function createPersistedState ({
             setState(key, reducer(state, paths), storage)
               .then(success => {
                 if (typeof success !== 'undefined') {
-                  if (mutation.type === 'setOption') {
+                  if (mutation.type === 'setOption' || mutation.type === 'setCurrentUser') {
                     store.dispatch('settingsSaved', { success })
                   }
                 }
               }, error => {
-                if (mutation.type === 'setOption') {
+                if (mutation.type === 'setOption' || mutation.type === 'setCurrentUser') {
                   store.dispatch('settingsSaved', { error })
                 }
               })

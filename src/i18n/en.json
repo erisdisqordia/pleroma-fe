@@ -19,7 +19,13 @@
     "apply": "Apply",
     "submit": "Submit",
     "more": "More",
-    "generic_error": "An error occured"
+    "generic_error": "An error occured",
+    "optional": "optional"
+  },
+  "image_cropper": {
+    "crop_picture": "Crop picture",
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "login": {
     "login": "Log in",
@@ -30,6 +36,10 @@
     "register": "Register",
     "username": "Username",
     "hint": "Log in to join the discussion"
+  },
+  "media_modal": {
+    "previous": "Previous",
+    "next": "Next"
   },
   "nav": {
     "about": "About",
@@ -83,6 +93,9 @@
     "token": "Invite token",
     "captcha": "CAPTCHA",
     "new_captcha": "Click the image to get a new captcha",
+    "username_placeholder": "e.g. lain",
+    "fullname_placeholder": "e.g. Lain Iwakura",
+    "bio_placeholder": "e.g.\nHi, I'm Lain\nI’m an anime girl living in suburban Japan. You may know me from the Wired.",
     "validations": {
       "username_required": "cannot be left blank",
       "fullname_required": "cannot be left blank",
@@ -93,6 +106,7 @@
     }
   },
   "settings": {
+    "app_name": "App name",
     "attachmentRadius": "Attachments",
     "attachments": "Attachments",
     "autoload": "Enable automatic loading when scrolled to the bottom",
@@ -101,6 +115,7 @@
     "avatarRadius": "Avatars",
     "background": "Background",
     "bio": "Bio",
+    "blocks_tab": "Blocks",
     "btnRadius": "Buttons",
     "cBlue": "Blue (Reply, follow)",
     "cGreen": "Green (Retweet)",
@@ -135,6 +150,7 @@
     "general": "General",
     "hide_attachments_in_convo": "Hide attachments in conversations",
     "hide_attachments_in_tl": "Hide attachments in timeline",
+    "max_thumbnails": "Maximum amount of thumbnails per post",
     "hide_isp": "Hide instance-specific panel",
     "preload_images": "Preload images",
     "use_one_click_nsfw": "Open NSFW attachments with just one click",
@@ -155,6 +171,7 @@
     "lock_account_description": "Restrict your account to approved followers only",
     "loop_video": "Loop videos",
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
+    "mutes_tab": "Mutes",
     "play_videos_in_modal": "Play videos directly in the media viewer",
     "use_contain_fit": "Don't crop the attachment in thumbnails",
     "name": "Name",
@@ -166,11 +183,18 @@
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
     "no_rich_text_description": "Strip rich text formatting from all posts",
+    "no_blocks": "No blocks",
+    "no_mutes": "No mutes",
     "hide_follows_description": "Don't show who I'm following",
     "hide_followers_description": "Don't show who's following me",
     "show_admin_badge": "Show Admin badge in my profile",
     "show_moderator_badge": "Show Moderator badge in my profile",
     "nsfw_clickthrough": "Enable clickthrough NSFW attachment hiding",
+    "oauth_tokens": "OAuth tokens",
+    "token": "Token",
+    "refresh_token": "Refresh Token",
+    "valid_until": "Valid Until",
+    "revoke_token": "Revoke",
     "panelRadius": "Panels",
     "pause_on_unfocused": "Pause streaming when tab is not focused",
     "presets": "Presets",
@@ -206,6 +230,7 @@
     "theme_help_v2_1": "You can also override certain component's colors and opacity by toggling the checkbox, use \"Clear all\" button to clear all overrides.",
     "theme_help_v2_2": "Icons underneath some entries are background/text contrast indicators, hover over for detailed info. Please keep in mind that when using transparency contrast indicators show the worst possible case.",
     "tooltipRadius": "Tooltips/alerts",
+    "upload_a_photo": "Upload a photo",
     "user_settings": "User Settings",
     "values": {
       "false": "no",
@@ -332,7 +357,12 @@
     "repeated": "repeated",
     "show_new": "Show new",
     "up_to_date": "Up-to-date",
-    "no_more_statuses": "No more statuses"
+    "no_more_statuses": "No more statuses",
+    "no_statuses": "No statuses"
+  },
+  "status": {
+    "reply_to": "Reply to",
+    "replies_list": "Replies:"
   },
   "user_card": {
     "approve": "Approve",
@@ -355,10 +385,18 @@
     "muted": "Muted",
     "per_day": "per day",
     "remote_follow": "Remote follow",
-    "statuses": "Statuses"
+    "statuses": "Statuses",
+    "unblock": "Unblock",
+    "unblock_progress": "Unblocking...",
+    "block_progress": "Blocking...",
+    "unmute": "Unmute",
+    "unmute_progress": "Unmuting...",
+    "mute_progress": "Muting..."
   },
   "user_profile": {
-    "timeline_title": "User Timeline"
+    "timeline_title": "User Timeline",
+    "profile_does_not_exist": "Sorry, this profile does not exist.",
+    "profile_loading_error": "Sorry, there was an error loading this profile."
   },
   "who_to_follow": {
     "more": "More",

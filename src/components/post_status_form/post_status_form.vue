@@ -30,7 +30,9 @@
         @drop="fileDrop"
         @dragover.prevent="fileDrag"
         @input="resize"
-        @paste="paste">
+        @paste="paste"
+        :disabled="posting"
+      >
       </textarea>
       <div class="visibility-tray">
         <span class="text-format" v-if="formattingOptionsEnabled">
@@ -115,6 +117,14 @@
     height: 16px;
     border-radius: $fallback--avatarAltRadius;
     border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+  }
+}
+
+.post-status-form {
+  .visibility-tray {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
   }
 }
 

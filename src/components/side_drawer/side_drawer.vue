@@ -45,6 +45,10 @@
         <li v-if="currentUser && currentUser.locked" @click="toggleDrawer">
           <router-link to='/friend-requests'>
             {{ $t("nav.friend_requests") }}
+            <span v-if='followRequestCount > 0' class="badge follow-request-count">
+              {{followRequestCount}}
+            </span>
+
           </router-link>
         </li>
         <li @click="toggleDrawer">

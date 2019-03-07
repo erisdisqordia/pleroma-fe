@@ -27,7 +27,6 @@
   align-content: stretch;
   flex-grow: 1;
   margin-top: 0.5em;
-  margin-bottom: 0.25em;
 
   .attachments, .attachment {
     margin: 0 0.5em 0 0;
@@ -36,6 +35,9 @@
     box-sizing: border-box;
     // to make failed images a bit more noticeable on chromium
     min-width: 2em;
+    &:last-child {
+      margin: 0;
+    }
   }
 
   .image-attachment {

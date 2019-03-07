@@ -38,9 +38,9 @@
         <span class="text-format" v-if="formattingOptionsEnabled">
           <label for="post-content-type" class="select">
             <select id="post-content-type" v-model="newStatus.contentType" class="form-control">
-              <option value="text/plain">{{$t('post_status.content_type.plain_text')}}</option>
-              <option value="text/html">HTML</option>
-              <option value="text/markdown">Markdown</option>
+              <option v-for="postFormat in postFormats" :key="postFormat" :value="postFormat">
+                {{$t(`post_status.content_type["${postFormat}"]`)}}
+              </option>
             </select>
             <i class="icon-down-open"></i>
           </label>

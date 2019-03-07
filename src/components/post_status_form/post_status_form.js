@@ -171,6 +171,9 @@ const PostStatusForm = {
     },
     formattingOptionsEnabled () {
       return this.$store.state.instance.formattingOptionsEnabled
+    },
+    postFormats () {
+      return this.$store.state.instance.postFormats || []
     }
   },
   methods: {

@@ -169,6 +169,8 @@ const afterStoreSetup = ({ store, i18n }) => {
       store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
       store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
 
+      store.dispatch('setInstanceOption', { name: 'postFormats', value: metadata.postFormats })
+
       store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
 
       const suggestions = metadata.suggestions

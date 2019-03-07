@@ -28,7 +28,6 @@ const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
 const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
 const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
-const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKING_URL = '/api/blocks/create.json'
@@ -44,6 +43,7 @@ const SUGGESTIONS_URL = '/api/v1/suggestions'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_URL = '/api/v1/accounts/'
 const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
+const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
@@ -362,8 +362,8 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     dms: DM_TIMELINE_URL,
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
-    user: QVITTER_USER_TIMELINE_URL,
-    media: QVITTER_USER_TIMELINE_URL,
+    user: MASTODON_USER_TIMELINE_URL,
+    media: MASTODON_USER_TIMELINE_URL,
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: TAG_TIMELINE_URL
   }
@@ -371,6 +371,10 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   const params = []
 
   let url = timelineUrls[timeline]
+
+  if (timeline === 'user' || timeline === 'media') {
+    url = url(userId)
+  }
 
   if (since) {
     params.push(['since_id', since])

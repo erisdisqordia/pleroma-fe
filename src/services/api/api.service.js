@@ -32,6 +32,7 @@ const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKING_URL = '/api/blocks/create.json'
 const UNBLOCKING_URL = '/api/blocks/destroy.json'
+const USER_URL = '/api/users/show.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
@@ -41,7 +42,7 @@ const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
-const MASTODON_USER_URL = '/api/v1/accounts/'
+const MASTODON_USER_URL = '/api/v1/accounts'
 const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
 const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
 
@@ -272,6 +273,22 @@ const fetchUserRelationship = ({id, credentials}) => {
     })
 }
 
+// TODO remove once MastoAPI supports screen_name in fetchUser one
+const figureOutUserId = ({screenName, credentials}) => {
+  let url = `${USER_URL}/?user_id=${screenName}`
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((response) => {
+      return new Promise((resolve, reject) => response.json()
+        .then((json) => {
+          if (!response.ok) {
+            return reject(new StatusCodeError(response.status, json, { url }, response))
+          }
+          return resolve(json)
+        }))
+    })
+    .then((data) => parseUser(data))
+}
+
 const fetchFriends = ({id, page, credentials}) => {
   let url = `${FRIENDS_URL}?user_id=${id}`
   if (page) {
@@ -381,9 +398,6 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   }
   if (until) {
     params.push(['max_id', until])
-  }
-  if (userId) {
-    params.push(['user_id', userId])
   }
   if (tag) {
     url += `/${tag}.json`
@@ -608,6 +622,7 @@ const apiService = {
   unblockUser,
   fetchUser,
   fetchUserRelationship,
+  figureOutUserId,
   favorite,
   unfavorite,
   retweet,

@@ -13,8 +13,7 @@ const mutations = {
 }
 
 const testGetters = {
-  userByName: state => getters.userByName(state.users),
-  userById: state => getters.userById(state.users)
+  findUser: state => getters.findUser(state.users)
 }
 
 const localUser = {

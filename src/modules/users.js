@@ -138,12 +138,7 @@ export const mutations = {
 }
 
 export const getters = {
-  userById: state => id =>
-    state.users.find(user => user.id === id),
-  userByName: state => name =>
-    state.users.find(user => user.screen_name &&
-      (user.screen_name.toLowerCase() === name.toLowerCase())
-    )
+  findUser: state => query => state.usersObject[query]
 }
 
 export const defaultState = {
@@ -164,6 +159,11 @@ const users = {
     fetchUser (store, id) {
       return store.rootState.api.backendInteractor.fetchUser({ id })
         .then((user) => store.commit('addNewUsers', [user]))
+    },
+    fetchUserByScreenName (store, screenName) {
+      return store.rootState.api.backendInteractor.figureOutUserId({ screenName })
+        .then((qvitterUserData) => store.rootState.api.backendInteractor.fetchUser({ id: qvitterUserData.id }))
+        .then((user) => store.commit('addNewUsers', [user]) || user.id)
     },
     fetchUserRelationship (store, id) {
       return store.rootState.api.backendInteractor.fetchUserRelationship({ id })

@@ -43,7 +43,7 @@ describe('The users module', () => {
       }
       const name = 'Guy'
       const expected = { screen_name: 'Guy', id: '1' }
-      expect(getters.userByName(state)(name)).to.eql(expected)
+      expect(getters.findUser(state)(name)).to.eql(expected)
     })
 
     it('returns user with matching screen_name with different case', () => {
@@ -54,7 +54,7 @@ describe('The users module', () => {
       }
       const name = 'Guy'
       const expected = { screen_name: 'guy', id: '1' }
-      expect(getters.userByName(state)(name)).to.eql(expected)
+      expect(getters.findUser(state)(name)).to.eql(expected)
     })
   })
 
@@ -67,7 +67,7 @@ describe('The users module', () => {
       }
       const id = '1'
       const expected = { screen_name: 'Guy', id: '1' }
-      expect(getters.userById(state)(id)).to.eql(expected)
+      expect(getters.findUser(state)(id)).to.eql(expected)
     })
   })
 })

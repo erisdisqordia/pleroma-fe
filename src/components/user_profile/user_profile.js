@@ -38,6 +38,9 @@ const UserProfile = {
   created () {
     if (!this.user.id) {
       this.fetchUserId()
+        .then(() => this.startUp())
+    } else {
+      this.startUp()
     }
   },
   destroyed () {
@@ -116,9 +119,11 @@ const UserProfile = {
         .then(() => this.startUp())
     },
     startUp () {
-      this.$store.dispatch('startFetching', { timeline: 'user', userId: this.userId })
-      this.$store.dispatch('startFetching', { timeline: 'media', userId: this.userId })
-      this.startFetchFavorites()
+      if (this.userId) {
+        this.$store.dispatch('startFetching', { timeline: 'user', userId: this.userId })
+        this.$store.dispatch('startFetching', { timeline: 'media', userId: this.userId })
+        this.startFetchFavorites()
+      }
     },
     cleanUp () {
       this.$store.dispatch('stopFetching', 'user')

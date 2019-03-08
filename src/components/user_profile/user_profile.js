@@ -37,27 +37,7 @@ const UserProfile = {
   },
   created () {
     if (!this.user.id) {
-      let fetchPromise
-      if (this.userId) {
-        fetchPromise = this.$store.dispatch('fetchUser', this.userId)
-      } else {
-        fetchPromise = this.$store.dispatch('fetchUserByScreenName', this.userName)
-          .then(userId => {
-            this.fetchedUserId = userId
-          })
-      }
-      fetchPromise
-        .catch((reason) => {
-          const errorMessage = get(reason, 'error.error')
-          if (errorMessage === 'No user with such user_id') { // Known error
-            this.error = this.$t('user_profile.profile_does_not_exist')
-          } else if (errorMessage) {
-            this.error = errorMessage
-          } else {
-            this.error = this.$t('user_profile.profile_loading_error')
-          }
-        })
-        .then(() => this.startUp())
+      this.fetchUserId()
     }
   },
   destroyed () {
@@ -112,8 +92,30 @@ const UserProfile = {
         this.$store.dispatch('startFetching', { timeline: 'favorites', userId: this.userId })
       }
     },
+    fetchUserId () {
+      let fetchPromise
+      if (this.userId && !this.$route.params.name) {
+        fetchPromise = this.$store.dispatch('fetchUser', this.userId)
+      } else {
+        fetchPromise = this.$store.dispatch('fetchUserByScreenName', this.userName)
+          .then(userId => {
+            this.fetchedUserId = userId
+          })
+      }
+      fetchPromise
+        .catch((reason) => {
+          const errorMessage = get(reason, 'error.error')
+          if (errorMessage === 'No user with such user_id') { // Known error
+            this.error = this.$t('user_profile.profile_does_not_exist')
+          } else if (errorMessage) {
+            this.error = errorMessage
+          } else {
+            this.error = this.$t('user_profile.profile_loading_error')
+          }
+        })
+        .then(() => this.startUp())
+    },
     startUp () {
-      this.$store.dispatch('fetchUserRelationship', this.userId)
       this.$store.dispatch('startFetching', { timeline: 'user', userId: this.userId })
       this.$store.dispatch('startFetching', { timeline: 'media', userId: this.userId })
       this.startFetchFavorites()
@@ -130,6 +132,13 @@ const UserProfile = {
   watch: {
     userId (newVal, oldVal) {
       if (newVal) {
+        this.cleanUp()
+        this.startUp()
+      }
+    },
+    userName (newVal, oldVal) {
+      if (this.$route.params.name) {
+        this.fetchUserId()
         this.cleanUp()
         this.startUp()
       }

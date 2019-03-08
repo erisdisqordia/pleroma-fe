@@ -108,17 +108,11 @@ export const mutations = {
     state.currentUser.muteIds = muteIds
   },
   setUserForStatus (state, status) {
-    // Not setting it again since it's already reactive if it has getters
-    if (!Object.getOwnPropertyDescriptor(status.user, 'id').get) {
-      status.user = state.usersObject[status.user.id]
-    }
+    status.user = state.usersObject[status.user.id]
   },
   setUserForNotification (state, notification) {
-    // Not setting it again since it's already reactive if it has getters
-    if (!Object.getOwnPropertyDescriptor(notification.action.user, 'id').get) {
-      notification.action.user = state.usersObject[notification.action.user.id]
-      notification.from_profile = state.usersObject[notification.action.user.id]
-    }
+    notification.action.user = state.usersObject[notification.action.user.id]
+    notification.from_profile = state.usersObject[notification.action.user.id]
   },
   setColor (state, { user: { id }, highlighted }) {
     const user = state.usersObject[id]

@@ -222,6 +222,9 @@ const PostStatusForm = {
         this.highlighted = 0
       }
     },
+    onKeydown (e) {
+      e.stopPropagation()
+    },
     setCaret ({target: {selectionStart}}) {
       this.caret = selectionStart
     },

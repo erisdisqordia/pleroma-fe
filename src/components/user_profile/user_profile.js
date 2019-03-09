@@ -105,7 +105,7 @@ const UserProfile = {
             this.fetchedUserId = userId
           })
       }
-      fetchPromise
+      return fetchPromise
         .catch((reason) => {
           const errorMessage = get(reason, 'error.error')
           if (errorMessage === 'No user with such user_id') { // Known error

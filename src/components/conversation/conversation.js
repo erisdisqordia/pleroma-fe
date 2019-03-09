@@ -25,7 +25,8 @@ const sortAndFilterConversation = (conversation) => {
 const conversation = {
   data () {
     return {
-      highlight: null
+      highlight: null,
+      relevantIds: []
     }
   },
   props: [
@@ -48,9 +49,11 @@ const conversation = {
         return []
       }
 
-      const conversationId = this.status.statusnet_conversation_id
-      const statuses = this.$store.state.statuses.allStatuses
-      const conversation = filter(statuses, { statusnet_conversation_id: conversationId })
+      const statusesObject = this.$store.state.statuses.allStatusesObject
+      const conversation = this.relevantIds.reduce((acc, id) => {
+        acc.push(statusesObject[id])
+        return acc
+      }, [])
       return sortAndFilterConversation(conversation)
     },
     replies () {
@@ -83,15 +86,13 @@ const conversation = {
   methods: {
     fetchConversation () {
       if (this.status) {
-        const conversationId = this.status.statusnet_conversation_id
+        const conversationId = this.status.id
         this.$store.state.api.backendInteractor.fetchConversation({id: conversationId})
-          .then((statuses) => this.$store.dispatch('addNewStatuses', { statuses }))
+          .then((statuses) => {
+            this.$store.dispatch('addNewStatuses', { statuses })
+            statuses.forEach(status => this.relevantIds.push(status.id))
+          })
           .then(() => this.setHighlight(this.statusId))
-      } else {
-        const id = this.$route.params.id
-        this.$store.state.api.backendInteractor.fetchStatus({id})
-          .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
-          .then(() => this.fetchConversation())
       }
     },
     getReplies (id) {

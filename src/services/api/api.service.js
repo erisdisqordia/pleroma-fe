@@ -11,9 +11,7 @@ const RETWEET_URL = '/api/statuses/retweet'
 const UNRETWEET_URL = '/api/statuses/unretweet'
 const STATUS_UPDATE_URL = '/api/statuses/update.json'
 const STATUS_DELETE_URL = '/api/statuses/destroy'
-const STATUS_URL = '/api/statuses/show'
 const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
-const CONVERSATION_URL = '/api/statusnet/conversation'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
@@ -43,6 +41,8 @@ const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+const MASTODON_STATUS_URL = id => `/api/v1/statuses/${id}`
+const MASTODON_STATUS_CONTEXT_URL = id => `/api/v1/statuses/${id}/context`
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
@@ -298,20 +298,31 @@ const fetchFollowRequests = ({credentials}) => {
 }
 
 const fetchConversation = ({id, credentials}) => {
-  let url = `${CONVERSATION_URL}/${id}.json?count=100`
-  return fetch(url, { headers: authHeaders(credentials) })
-    .then((data) => {
-      if (data.ok) {
-        return data
-      }
-      throw new Error('Error fetching timeline', data)
-    })
-    .then((data) => data.json())
+  let url = MASTODON_STATUS_URL(id)
+  let urlContext = MASTODON_STATUS_CONTEXT_URL(id)
+  return Promise.all([
+    fetch(url, { headers: authHeaders(credentials) })
+      .then((data) => {
+        if (data.ok) {
+          return data
+        }
+        throw new Error('Error fetching timeline', data)
+      })
+      .then((data) => data.json()),
+    fetch(urlContext, { headers: authHeaders(credentials) })
+      .then((data) => {
+        if (data.ok) {
+          return data
+        }
+        throw new Error('Error fetching timeline', data)
+      })
+      .then((data) => data.json())])
+    .then(([status, context]) => [...context.ancestors, status, ...context.descendants])
     .then((data) => data.map(parseStatus))
 }
 
 const fetchStatus = ({id, credentials}) => {
-  let url = `${STATUS_URL}/${id}.json`
+  let url = MASTODON_STATUS_URL(id)
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => {
       if (data.ok) {

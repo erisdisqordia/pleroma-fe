@@ -50,7 +50,7 @@ const api = {
     },
     initializeSocket (store) {
       // Set up websocket connection
-      if (!store.state.chatDisabled && store.state.wsToken) {
+      if (!store.state.chatDisabled) {
         const token = store.state.wsToken
         const socket = new Socket('/socket', {params: {token}})
         socket.connect()

@@ -89,10 +89,8 @@ const afterStoreSetup = ({ store, i18n }) => {
           copyInstanceOption('noAttachmentLinks')
           copyInstanceOption('showFeaturesPanel')
 
-          if ((config.chatDisabled)) {
+          if (config.chatDisabled) {
             store.dispatch('disableChat')
-          } else {
-            store.dispatch('initializeSocket')
           }
 
           return store.dispatch('setTheme', config['theme'])

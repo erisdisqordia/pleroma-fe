@@ -429,13 +429,6 @@ const statuses = {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })
       apiService.favorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            return {}
-          }
-        })
         .then(status => {
           commit('setFavoritedConfirm', { status })
         })
@@ -444,13 +437,6 @@ const statuses = {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: false })
       apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            return {}
-          }
-        })
         .then(status => {
           commit('setFavoritedConfirm', { status })
         })

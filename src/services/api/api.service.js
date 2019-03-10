@@ -5,12 +5,7 @@ const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
 const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
 const TAG_TIMELINE_URL = '/api/statusnet/tags/timeline'
-const FAVORITE_URL = '/api/favorites/create'
-const UNFAVORITE_URL = '/api/favorites/destroy'
-const RETWEET_URL = '/api/statuses/retweet'
-const UNRETWEET_URL = '/api/statuses/unretweet'
 const STATUS_UPDATE_URL = '/api/statuses/update.json'
-const STATUS_DELETE_URL = '/api/statuses/destroy'
 const STATUS_URL = '/api/statuses/show'
 const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 const CONVERSATION_URL = '/api/statusnet/conversation'
@@ -19,9 +14,6 @@ const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
 const BLOCKS_URL = '/api/statuses/blocks.json'
-const FOLLOWING_URL = '/api/friendships/create.json'
-const UNFOLLOWING_URL = '/api/friendships/destroy.json'
-const QVITTER_USER_PREF_URL = '/api/qvitter/set_profile_pref.json'
 const REGISTRATION_URL = '/api/account/register.json'
 const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
@@ -31,8 +23,6 @@ const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
-const BLOCKING_URL = '/api/blocks/create.json'
-const UNBLOCKING_URL = '/api/blocks/destroy.json'
 const USER_URL = '/api/users/show.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
@@ -43,6 +33,17 @@ const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+const MASTODON_FAVORITE_URL = id => `/api/v1/statuses/${id}/favourite`
+const MASTODON_UNFAVORITE_URL = id => `/api/v1/statuses/${id}/unfavourite`
+const MASTODON_RETWEET_URL = id => `/api/v1/statuses/${id}/reblog`
+const MASTODON_UNRETWEET_URL = id => `/api/v1/statuses/${id}/unreblog`
+const MASTODON_DELETE_URL = id => `/api/v1/statuses/${id}`
+const MASTODON_FOLLOW_URL = id => `/api/v1/accounts/${id}/follow`
+const MASTODON_UNFOLLOW_URL = id => `/api/v1/accounts/${id}/unfollow`
+const MASTODON_BLOCK_URL = id => `/api/v1/accounts/${id}/block`
+const MASTODON_UNBLOCK_URL = id => `/api/v1/accounts/${id}/unblock`
+const MASTODON_MUTE_URL = id => `/api/v1/accounts/${id}/mute`
+const MASTODON_UNMUTE_URL = id => `/api/v1/accounts/${id}/unmute`
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
@@ -195,7 +196,7 @@ const externalProfile = ({profileUrl, credentials}) => {
 }
 
 const followUser = ({id, credentials}) => {
-  let url = `${FOLLOWING_URL}?user_id=${id}`
+  let url = MASTODON_FOLLOW_URL(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -203,7 +204,7 @@ const followUser = ({id, credentials}) => {
 }
 
 const unfollowUser = ({id, credentials}) => {
-  let url = `${UNFOLLOWING_URL}?user_id=${id}`
+  let url = MASTODON_UNFOLLOW_URL(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -211,7 +212,7 @@ const unfollowUser = ({id, credentials}) => {
 }
 
 const blockUser = ({id, credentials}) => {
-  let url = `${BLOCKING_URL}?user_id=${id}`
+  let url = MASTODON_BLOCK_URL(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -219,7 +220,7 @@ const blockUser = ({id, credentials}) => {
 }
 
 const unblockUser = ({id, credentials}) => {
-  let url = `${UNBLOCKING_URL}?user_id=${id}`
+  let url = MASTODON_UNBLOCK_URL(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -324,18 +325,11 @@ const fetchStatus = ({id, credentials}) => {
 }
 
 const setUserMute = ({id, credentials, muted = true}) => {
-  const form = new FormData()
+  const url = muted ? MASTODON_MUTE_URL(id) : MASTODON_UNMUTE_URL(id)
 
-  const muteInteger = muted ? 1 : 0
-
-  form.append('namespace', 'qvitter')
-  form.append('data', muteInteger)
-  form.append('topic', `mute:${id}`)
-
-  return fetch(QVITTER_USER_PREF_URL, {
+  return fetch(url, {
     method: 'POST',
-    headers: authHeaders(credentials),
-    body: form
+    headers: authHeaders(credentials)
   })
 }
 
@@ -407,31 +401,63 @@ const verifyCredentials = (user) => {
 }
 
 const favorite = ({ id, credentials }) => {
-  return fetch(`${FAVORITE_URL}/${id}.json`, {
+  return fetch(MASTODON_FAVORITE_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {}
+      }
+    })
+    .then((data) => parseStatus(data))
 }
 
 const unfavorite = ({ id, credentials }) => {
-  return fetch(`${UNFAVORITE_URL}/${id}.json`, {
+  return fetch(MASTODON_UNFAVORITE_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {}
+      }
+    })
+    .then((data) => parseStatus(data))
 }
 
 const retweet = ({ id, credentials }) => {
-  return fetch(`${RETWEET_URL}/${id}.json`, {
+  return fetch(MASTODON_RETWEET_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {}
+      }
+    })
+    .then((data) => parseStatus(data))
 }
 
 const unretweet = ({ id, credentials }) => {
-  return fetch(`${UNRETWEET_URL}/${id}.json`, {
+  return fetch(MASTODON_UNRETWEET_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {}
+      }
+    })
+    .then((data) => parseStatus(data))
 }
 
 const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType, noAttachmentLinks}) => {
@@ -468,9 +494,9 @@ const postStatus = ({credentials, status, spoilerText, visibility, sensitive, me
 }
 
 const deleteStatus = ({ id, credentials }) => {
-  return fetch(`${STATUS_DELETE_URL}/${id}.json`, {
+  return fetch(MASTODON_DELETE_URL(id), {
     headers: authHeaders(credentials),
-    method: 'POST'
+    method: 'DELETE'
   })
 }
 

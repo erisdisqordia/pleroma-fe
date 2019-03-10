@@ -1,8 +1,10 @@
 /* eslint-env browser */
+import { filter, trim } from 'lodash'
+
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import InterfaceLanguageSwitcher from '../interface_language_switcher/interface_language_switcher.vue'
-import { filter, trim } from 'lodash'
+import { parseBackendVersionString, parseFrontendVersionString } from '../../services/version/version.service'
 
 const settings = {
   data () {
@@ -78,7 +80,10 @@ const settings = {
         // Future spec, still not supported in Nightly 63 as of 08/2018
         Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'audioTracks'),
       playVideosInModal: user.playVideosInModal,
-      useContainFit: user.useContainFit
+      useContainFit: user.useContainFit,
+
+      backendVersion: instance.backendVersion,
+      frontendVersion: instance.frontendVersion
     }
   },
   components: {
@@ -97,6 +102,14 @@ const settings = {
       return this.$store.state.instance.postFormats || []
     },
     instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel }
+  },
+  methods: {
+    parseBackendVersion (versionString) {
+      return parseBackendVersionString(versionString)
+    },
+    parseFrontendVersion (versionString) {
+      return parseFrontendVersionString(versionString)
+    }
   },
   watch: {
     hideAttachmentsLocal (value) {

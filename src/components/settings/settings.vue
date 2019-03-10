@@ -261,6 +261,28 @@
           </div>
         </div>
       </div>
+      <div :label="$t('settings.version.title')" >
+        <div class="setting-item">
+          <ul class="setting-list">
+            <li>
+              <p>{{$t('settings.version.backend_version')}}</p>
+              <ul class="option-list">
+                <li>
+                  <div v-html="parseBackendVersion(backendVersion)"></div>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>{{$t('settings.version.frontend_version')}}</p>
+              <ul class="option-list">
+                <li>
+                  <div v-html="parseFrontendVersion(frontendVersion)"></div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
     </tab-switcher>
 </keep-alive>
   </div>

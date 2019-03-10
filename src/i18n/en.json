@@ -347,6 +347,11 @@
         "checkbox": "I have skimmed over terms and conditions",
         "link": "a nice lil' link"
       }
+    },
+    "version": {
+      "title": "Version",
+      "backend_version": "Backend Version",
+      "frontend_version": "Frontend Version"
     }
   },
   "timeline": {

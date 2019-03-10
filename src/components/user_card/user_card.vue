@@ -159,6 +159,11 @@
 
   &-bio {
     text-align: center;
+
+    img.emoji {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   // Modifiers

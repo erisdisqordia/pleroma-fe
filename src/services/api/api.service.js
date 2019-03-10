@@ -16,8 +16,6 @@ const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 const CONVERSATION_URL = '/api/statusnet/conversation'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
-const FOLLOWERS_URL = '/api/statuses/followers.json'
-const FRIENDS_URL = '/api/statuses/friends.json'
 const BLOCKS_URL = '/api/statuses/blocks.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
@@ -43,6 +41,8 @@ const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+const MASTODON_FOLLOWING_URL = id => `/api/v1/accounts/${id}/following`
+const MASTODON_FOLLOWERS_URL = id => `/api/v1/accounts/${id}/followers`
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
@@ -258,9 +258,9 @@ const fetchUser = ({id, credentials}) => {
 }
 
 const fetchFriends = ({id, page, credentials}) => {
-  let url = `${FRIENDS_URL}?user_id=${id}`
+  let url = MASTODON_FOLLOWING_URL(id)
   if (page) {
-    url = url + `&page=${page}`
+    url = url + `?page=${page}`
   }
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
@@ -268,16 +268,16 @@ const fetchFriends = ({id, page, credentials}) => {
 }
 
 const exportFriends = ({id, credentials}) => {
-  let url = `${FRIENDS_URL}?user_id=${id}&all=true`
+  let url = MASTODON_FOLLOWING_URL(id) + `?all=true`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
 }
 
 const fetchFollowers = ({id, page, credentials}) => {
-  let url = `${FOLLOWERS_URL}?user_id=${id}`
+  let url = MASTODON_FOLLOWERS_URL(id)
   if (page) {
-    url = url + `&page=${page}`
+    url = url + `?page=${page}`
   }
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())

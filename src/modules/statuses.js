@@ -73,7 +73,7 @@ const mergeOrAdd = (arr, obj, item) => {
   if (oldItem) {
     // We already have this, so only merge the new info.
     // We ignore null values to avoid overwriting existing properties with missing data
-    // we also skip 'used' because that is handled by users module
+    // we also skip 'user' because that is handled by users module
     merge(oldItem, omitBy(item, (v, k) => v === null || k === 'user'))
     // Reactivity fix.
     oldItem.attachments.splice(oldItem.attachments.length)

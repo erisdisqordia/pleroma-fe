@@ -18,7 +18,7 @@ export const mergeOrAdd = (arr, obj, item) => {
     arr.push(item)
     obj[item.id] = item
     if (item.screen_name && !item.screen_name.includes('@')) {
-      obj[item.screen_name] = item
+      obj[item.screen_name.toLowerCase()] = item
     }
     return { item, new: true }
   }
@@ -132,7 +132,7 @@ export const mutations = {
 }
 
 export const getters = {
-  findUser: state => query => state.usersObject[query]
+  findUser: state => query => state.usersObject[typeof query === 'string' ? query.toLowerCase() : query]
 }
 
 export const defaultState = {

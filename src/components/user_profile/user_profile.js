@@ -68,7 +68,7 @@ const UserProfile = {
     },
     userInStore () {
       const routeParams = this.$route.params
-      return this.$store.getters.findUser(routeParams.name || routeParams.iid)
+      return this.$store.getters.findUser(routeParams.name || routeParams.id)
     },
     user () {
       if (this.timeline.statuses[0]) {
@@ -135,13 +135,14 @@ const UserProfile = {
     }
   },
   watch: {
-    userId (newVal, oldVal) {
+    // userId can be undefined if we don't know it yet
+    userId (newVal) {
       if (newVal) {
         this.cleanUp()
         this.startUp()
       }
     },
-    userName (newVal, oldVal) {
+    userName () {
       if (this.$route.params.name) {
         this.fetchUserId()
         this.cleanUp()

@@ -12,6 +12,11 @@ const mutations = {
   setError: () => {}
 }
 
+const actions = {
+  fetchUser: () => {},
+  fetchUserByScreenName: () => {}
+}
+
 const testGetters = {
   findUser: state => getters.findUser(state.users)
 }
@@ -30,6 +35,7 @@ const extUser = {
 
 const externalProfileStore = new Vuex.Store({
   mutations,
+  actions,
   getters: testGetters,
   state: {
     api: {
@@ -88,7 +94,7 @@ const externalProfileStore = new Vuex.Store({
       currentUser: {
         credentials: ''
       },
-      usersObject: [extUser],
+      usersObject: { 100: extUser },
       users: [extUser]
     }
   }
@@ -96,6 +102,7 @@ const externalProfileStore = new Vuex.Store({
 
 const localProfileStore = new Vuex.Store({
   mutations,
+  actions,
   getters: testGetters,
   state: {
     api: {
@@ -154,14 +161,13 @@ const localProfileStore = new Vuex.Store({
       currentUser: {
         credentials: ''
       },
-      usersObject: [localUser],
+      usersObject: { 100: localUser, 'testuser': localUser },
       users: [localUser]
     }
   }
 })
 
-// It's a little bit more complicated now
-describe.skip('UserProfile', () => {
+describe('UserProfile', () => {
   it('renders external profile', () => {
     const wrapper = mount(UserProfile, {
       localVue,

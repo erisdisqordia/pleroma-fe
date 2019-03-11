@@ -40,7 +40,7 @@ describe('The users module', () => {
       const state = {
         usersObject: {
           1: user,
-          Guy: user
+          guy: user
         }
       }
       const name = 'Guy'
@@ -53,7 +53,7 @@ describe('The users module', () => {
       const state = {
         usersObject: {
           1: user,
-          Guy: user
+          guy: user
         }
       }
       const id = '1'

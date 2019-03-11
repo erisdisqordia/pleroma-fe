@@ -106,10 +106,10 @@ const settings = {
     },
     instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel },
     frontendVersionLink () {
-      return pleromaFeCommitUrl + this.$store.state.instance.frontendVersion
+      return pleromaFeCommitUrl + this.frontendVersion
     },
     backendVersionLink () {
-      return pleromaBeCommitUrl + extractCommit(this.$store.state.instance.backendVersion)
+      return pleromaBeCommitUrl + extractCommit(this.backendVersion)
     }
   },
   watch: {

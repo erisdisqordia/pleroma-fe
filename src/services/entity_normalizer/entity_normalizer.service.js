@@ -39,10 +39,10 @@ export const parseUser = (data) => {
       return output
     }
 
-    output.name = null // missing
+    // output.name = ??? missing
     output.name_html = data.display_name
 
-    output.description = null // missing
+    // output.description = ??? missing
     output.description_html = data.note
 
     // Utilize avatar_static for gif avatars?
@@ -83,7 +83,7 @@ export const parseUser = (data) => {
 
     output.friends_count = data.friends_count
 
-    output.bot = null // missing
+    // output.bot = ??? missing
 
     output.statusnet_profile_url = data.statusnet_profile_url
 
@@ -134,7 +134,7 @@ const parseAttachment = (data) => {
     output.meta = data.meta // not present in BE yet
   } else {
     output.mimetype = data.mimetype
-    output.meta = null // missing
+    // output.meta = ??? missing
   }
 
   output.url = data.url
@@ -166,7 +166,7 @@ export const parseStatus = (data) => {
     output.in_reply_to_user_id = data.in_reply_to_account_id
 
     // Missing!! fix in UI?
-    output.in_reply_to_screen_name = null
+    // output.in_reply_to_screen_name = ???
 
     // Not exactly the same but works
     output.statusnet_conversation_id = data.id
@@ -179,8 +179,7 @@ export const parseStatus = (data) => {
     output.summary_html = data.spoiler_text
     output.external_url = data.url
 
-    // FIXME missing!!
-    output.is_local = false
+    // output.is_local = ??? missing
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num
@@ -259,7 +258,7 @@ export const parseNotification = (data) => {
 
   if (masto) {
     output.type = mastoDict[data.type] || data.type
-    output.seen = null // missing
+    // output.seen = ??? missing
     output.status = parseStatus(data.status)
     output.action = output.status // not sure
     output.from_profile = parseUser(data.account)

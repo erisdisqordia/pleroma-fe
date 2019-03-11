@@ -1,5 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import { compact, map, each, merge, find, omitBy } from 'lodash'
+import { compact, map, each, merge, find } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
 import oauthApi from '../services/new_api/oauth'
@@ -11,7 +11,7 @@ export const mergeOrAdd = (arr, obj, item) => {
   const oldItem = obj[item.id]
   if (oldItem) {
     // We already have this, so only merge the new info.
-    merge(oldItem, omitBy(item, _ => _ === null))
+    merge(oldItem, item)
     return { item: oldItem, new: false }
   } else {
     // This is a new item, prepare it
@@ -39,7 +39,7 @@ export const mutations = {
   },
   setCurrentUser (state, user) {
     state.lastLoginName = user.screen_name
-    state.currentUser = merge(state.currentUser || {}, omitBy(user, _ => _ === null))
+    state.currentUser = merge(state.currentUser || {}, user)
   },
   clearCurrentUser (state) {
     state.currentUser = false

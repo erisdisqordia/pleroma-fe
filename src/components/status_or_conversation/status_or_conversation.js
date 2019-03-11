@@ -5,7 +5,8 @@ const statusOrConversation = {
   props: ['statusoid'],
   data () {
     return {
-      expanded: false
+      expanded: false,
+      replying: false
     }
   },
   components: {
@@ -15,6 +16,9 @@ const statusOrConversation = {
   methods: {
     toggleExpanded () {
       this.expanded = !this.expanded
+    },
+    toggleReplying () {
+      this.replying = !this.replying
     }
   }
 }

@@ -1,7 +1,23 @@
 <template>
   <div>
-    <conversation v-if="expanded" @toggleExpanded="toggleExpanded" :collapsable="true" :statusoid="statusoid"></conversation>
-    <status v-if="!expanded" @toggleExpanded="toggleExpanded" :expandable="true" :inConversation="false" :focused="false" :statusoid="statusoid"></status>
+    <conversation
+      v-if="expanded"
+      @toggleExpanded="toggleExpanded"
+      @toggleReplying="toggleReplying"
+      :replying="replying"
+      :collapsable="true"
+      :statusoid="statusoid"
+    />
+    <status 
+      v-else
+      @toggleExpanded="toggleExpanded"
+      @toggleReplying="toggleReplying"
+      :replying="replying"
+      :expandable="true"
+      :inConversation="false"
+      :focused="false"
+      :statusoid="statusoid"
+    />
   </div>
 </template>
 

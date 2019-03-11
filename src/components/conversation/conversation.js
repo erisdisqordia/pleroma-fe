@@ -30,7 +30,8 @@ const conversation = {
   },
   props: [
     'statusoid',
-    'collapsable'
+    'collapsable',
+    'replying'
   ],
   computed: {
     status () {
@@ -102,6 +103,9 @@ const conversation = {
     },
     setHighlight (id) {
       this.highlight = id
+    },
+    toggleReplying () {
+      this.$emit('toggleReplying')
     }
   }
 }

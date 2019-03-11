@@ -49,7 +49,7 @@
     "account_not_locked_warning_link": "låst",
     "attachments_sensitive": "Merk vedlegg som sensitive",
     "content_type": {
-      "plain_text": "Klar tekst"
+      "text/plain": "Klar tekst"
     },
     "content_warning": "Tema (valgfritt)",
     "default": "Landet akkurat i L.A.",

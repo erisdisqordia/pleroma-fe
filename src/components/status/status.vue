@@ -31,9 +31,7 @@
           </router-link>
         </div>
         <div class="status-body">
-          <div class="usercard" v-if="userExpanded">
-            <user-card-content :user="status.user" :switcher="false"></user-card-content>
-          </div>
+          <UserCard :user="status.user" :rounded="true" :bordered="true" class="status-usercard" v-if="userExpanded"/>
           <div v-if="!noHeading" class="media-heading">
             <div class="heading-name-row">
               <div class="name-and-account-name">
@@ -248,8 +246,7 @@ $status-margin: 0.75em;
     padding: 0;
   }
 
-  .usercard {
-    margin: 0;
+  .status-usercard {
     margin-bottom: $status-margin;
   }
 

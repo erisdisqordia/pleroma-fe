@@ -105,17 +105,9 @@
                 {{$t('settings.post_status_content_type')}}
                 <label for="postContentType" class="select">
                   <select id="postContentType" v-model="postContentTypeLocal">
-                    <option value="text/plain">
-                      {{$t('settings.status_content_type_plain')}}
-                      {{postContentTypeDefault == 'text/plain' ? $t('settings.instance_default_simple') : ''}}
-                    </option>
-                    <option value="text/html">
-                      HTML
-                      {{postContentTypeDefault == 'text/html' ? $t('settings.instance_default_simple') : ''}}
-                    </option>
-                    <option value="text/markdown">
-                      Markdown
-                      {{postContentTypeDefault == 'text/markdown' ? $t('settings.instance_default_simple') : ''}}
+                    <option v-for="postFormat in postFormats" :key="postFormat" :value="postFormat">
+                      {{$t(`post_status.content_type["${postFormat}"]`)}}
+                      {{postContentTypeDefault === postFormat ? $t('settings.instance_default_simple') : ''}}
                     </option>
                   </select>
                   <i class="icon-down-open"/>

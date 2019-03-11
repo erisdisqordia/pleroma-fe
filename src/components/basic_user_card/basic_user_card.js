@@ -1,4 +1,4 @@
-import UserCardContent from '../user_card_content/user_card_content.vue'
+import UserCard from '../user_card/user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
@@ -12,7 +12,7 @@ const BasicUserCard = {
     }
   },
   components: {
-    UserCardContent,
+    UserCard,
     UserAvatar
   },
   methods: {

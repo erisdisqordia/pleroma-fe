@@ -5,9 +5,7 @@
       <UserAvatar :compact="true" :betterShadow="betterShadow" :src="notification.action.user.profile_image_url_original"/>
     </a>
     <div class='notification-right'>
-      <div class="usercard notification-usercard" v-if="userExpanded">
-        <user-card-content :user="notification.action.user" :switcher="false"></user-card-content>
-      </div>
+      <UserCard :user="notification.action.user" :rounded="true" :bordered="true" v-if="userExpanded"/>
       <span class="notification-details">
         <div class="name-and-action">
           <span class="username" v-if="!!notification.action.user.name_html" :title="'@'+notification.action.user.screen_name" v-html="notification.action.user.name_html"></span>

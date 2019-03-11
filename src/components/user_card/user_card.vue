@@ -160,9 +160,16 @@
   &-bio {
     text-align: center;
 
-    img.emoji {
-      width: 32px;
-      height: 32px;
+    img {
+      object-fit: contain;
+      vertical-align: middle;
+      max-width: 100%;
+      max-height: 400px;
+
+      .emoji {
+        width: 32px;
+        height: 32px;
+      }
     }
   }
 

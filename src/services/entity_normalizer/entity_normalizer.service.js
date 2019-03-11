@@ -59,10 +59,13 @@ export const parseUser = (data) => {
     output.statusnet_profile_url = data.url
 
     if (data.pleroma) {
-      const pleroma = data.pleroma
-      output.follows_you = pleroma.follows_you
-      output.statusnet_blocking = pleroma.statusnet_blocking
-      output.muted = pleroma.muted
+      const relationship = data.pleroma.relationship
+
+      if (relationship) {
+        output.follows_you = relationship.follows_you
+        output.statusnet_blocking = relationship.statusnet_blocking
+        output.muted = relationship.muted
+      }
     }
 
     // Missing, trying to recover

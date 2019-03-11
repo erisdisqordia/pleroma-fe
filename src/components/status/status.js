@@ -25,11 +25,11 @@ const Status = {
     'replies',
     'isPreview',
     'noHeading',
-    'inlineExpanded',
-    'replying'
+    'inlineExpanded'
   ],
   data () {
     return {
+      replying: false,
       expanded: false,
       unmuted: false,
       userExpanded: false,
@@ -307,10 +307,9 @@ const Status = {
       }
     },
     toggleReplying () {
-      this.$emit('toggleReplying')
+      this.replying = !this.replying
     },
     gotoOriginal (id) {
-      // only handled by conversation, not status_or_conversation
       if (this.inConversation) {
         this.$emit('goto', id)
       }

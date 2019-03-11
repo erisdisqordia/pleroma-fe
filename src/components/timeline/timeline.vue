@@ -16,7 +16,13 @@
     </div>
     <div :class="classes.body">
       <div class="timeline">
-        <status-or-conversation v-for="status in timeline.visibleStatuses" :key="status.id" v-bind:statusoid="status" class="status-fadein"></status-or-conversation>
+        <conversation 
+          v-for="status in timeline.visibleStatuses"
+          class="status-fadein"
+          :key="status.id"
+          :statusoid="status"
+          :collapsable="true"
+        />
       </div>
     </div>
     <div :class="classes.footer">

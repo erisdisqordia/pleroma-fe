@@ -1,4 +1,4 @@
-import { reduce, filter } from 'lodash'
+import { reduce, filter, findIndex } from 'lodash'
 import Status from '../status/status.vue'
 
 const sortById = (a, b) => {
@@ -25,13 +25,13 @@ const sortAndFilterConversation = (conversation) => {
 const conversation = {
   data () {
     return {
-      highlight: null
+      highlight: null,
+      expanded: false
     }
   },
   props: [
     'statusoid',
-    'collapsable',
-    'replying'
+    'collapsable'
   ],
   computed: {
     status () {
@@ -49,9 +49,18 @@ const conversation = {
         return []
       }
 
+      if (!this.expanded) {
+        return [this.status]
+      }
+
       const conversationId = this.status.statusnet_conversation_id
       const statuses = this.$store.state.statuses.allStatuses
       const conversation = filter(statuses, { statusnet_conversation_id: conversationId })
+
+      const statusIndex = findIndex(conversation, { id: this.statusId })
+      if (statusIndex !== -1) {
+        conversation[statusIndex] = this.status
+      }
       return sortAndFilterConversation(conversation)
     },
     replies () {
@@ -75,11 +84,13 @@ const conversation = {
   components: {
     Status
   },
-  created () {
-    this.fetchConversation()
-  },
   watch: {
-    '$route': 'fetchConversation'
+    '$route': 'fetchConversation',
+    expanded (value) {
+      if (value) {
+        this.fetchConversation()
+      }
+    }
   },
   methods: {
     fetchConversation () {
@@ -99,13 +110,16 @@ const conversation = {
       return this.replies[id] || []
     },
     focused (id) {
-      return id === this.statusId
+      return this.expanded && id === this.statusId
     },
     setHighlight (id) {
       this.highlight = id
     },
-    toggleReplying () {
-      this.$emit('toggleReplying')
+    getHighlight () {
+      return this.expanded ? this.highlight : null
+    },
+    toggleExpanded () {
+      this.expanded = !this.expanded
     }
   }
 }

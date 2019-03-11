@@ -142,7 +142,7 @@ const parseAttachment = (data) => {
 
   return output
 }
-const addEmojis = (string, emojis) => {
+export const addEmojis = (string, emojis) => {
   return emojis.reduce((acc, emoji) => {
     return acc.replace(
       new RegExp(`:${emoji.shortcode}:`, 'g'),

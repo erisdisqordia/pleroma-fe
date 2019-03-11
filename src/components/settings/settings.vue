@@ -268,7 +268,7 @@
               <p>{{$t('settings.version.backend_version')}}</p>
               <ul class="option-list">
                 <li>
-                  <div v-html="parseBackendVersion(backendVersion)"></div>
+                  <a :href="backendVersionLink" target="_blank">{{backendVersion}}</a>
                 </li>
               </ul>
             </li>
@@ -276,7 +276,7 @@
               <p>{{$t('settings.version.frontend_version')}}</p>
               <ul class="option-list">
                 <li>
-                  <div v-html="parseFrontendVersion(frontendVersion)"></div>
+                  <a :href="frontendVersionLink" target="_blank">{{frontendVersion}}</a>
                 </li>
               </ul>
             </li>

@@ -4,7 +4,10 @@ import { filter, trim } from 'lodash'
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import InterfaceLanguageSwitcher from '../interface_language_switcher/interface_language_switcher.vue'
-import { parseBackendVersionString, parseFrontendVersionString } from '../../services/version/version.service'
+import { extractCommit } from '../../services/version/version.service'
+
+const pleromaFeCommitUrl = 'https://git.pleroma.social/pleroma/pleroma-fe/commit/'
+const pleromaBeCommitUrl = 'https://git.pleroma.social/pleroma/pleroma/commit/'
 
 const settings = {
   data () {
@@ -101,14 +104,12 @@ const settings = {
     postFormats () {
       return this.$store.state.instance.postFormats || []
     },
-    instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel }
-  },
-  methods: {
-    parseBackendVersion (versionString) {
-      return parseBackendVersionString(versionString)
+    instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel },
+    frontendVersionLink () {
+      return pleromaFeCommitUrl + this.$store.state.instance.frontendVersion
     },
-    parseFrontendVersion (versionString) {
-      return parseFrontendVersionString(versionString)
+    backendVersionLink () {
+      return pleromaBeCommitUrl + extractCommit(this.$store.state.instance.backendVersion)
     }
   },
   watch: {

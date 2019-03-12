@@ -8,7 +8,8 @@ import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_pan
 import ChatPanel from './components/chat_panel/chat_panel.vue'
 import MediaModal from './components/media_modal/media_modal.vue'
 import SideDrawer from './components/side_drawer/side_drawer.vue'
-import { unseenNotificationsFromStore } from './services/notification_utils/notification_utils'
+import MobilePostStatusModal from './components/mobile_post_status_modal/mobile_post_status_modal.vue'
+import MobileNav from './components/mobile_nav/mobile_nav.vue'
 
 export default {
   name: 'app',
@@ -22,11 +23,12 @@ export default {
     WhoToFollowPanel,
     ChatPanel,
     MediaModal,
-    SideDrawer
+    SideDrawer,
+    MobilePostStatusModal,
+    MobileNav
   },
   data: () => ({
     mobileActivePanel: 'timeline',
-    notificationsOpen: false,
     finderHidden: true,
     supportsMask: window.CSS && window.CSS.supports && (
       window.CSS.supports('mask-size', 'contain') ||
@@ -85,12 +87,6 @@ export default {
     chat () { return this.$store.state.chat.channel.state === 'joined' },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
     showInstanceSpecificPanel () { return this.$store.state.instance.showInstanceSpecificPanel },
-    unseenNotifications () {
-      return unseenNotificationsFromStore(this.$store)
-    },
-    unseenNotificationsCount () {
-      return this.unseenNotifications.length
-    },
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
     isMobileLayout () { return this.$store.state.interface.mobileLayout }
   },
@@ -104,12 +100,6 @@ export default {
     },
     onFinderToggled (hidden) {
       this.finderHidden = hidden
-    },
-    toggleMobileSidebar () {
-      this.$refs.sideDrawer.toggleDrawer()
-    },
-    toggleMobileNotifications () {
-      this.notificationsOpen = !this.notificationsOpen
     },
     updateMobileState () {
       const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth

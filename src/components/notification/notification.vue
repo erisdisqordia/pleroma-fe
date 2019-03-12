@@ -5,9 +5,7 @@
       <UserAvatar :compact="true" :betterShadow="betterShadow" :src="notification.action.user.profile_image_url_original"/>
     </a>
     <div class='notification-right'>
-      <div class="usercard notification-usercard" v-if="userExpanded">
-        <user-card-content :user="notification.action.user" :switcher="false"></user-card-content>
-      </div>
+      <UserCard :user="notification.action.user" :rounded="true" :bordered="true" v-if="userExpanded"/>
       <span class="notification-details">
         <div class="name-and-action">
           <span class="username" v-if="!!notification.action.user.name_html" :title="'@'+notification.action.user.screen_name" v-html="notification.action.user.name_html"></span>
@@ -25,7 +23,11 @@
             <small>{{$t('notifications.followed_you')}}</small>
           </span>
         </div>
-        <small class="timeago"><router-link v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }"><timeago :since="notification.action.created_at" :auto-update="240"></timeago></router-link></small>
+        <div class="timeago">
+          <router-link v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }" class="faint-link">
+            <timeago :since="notification.action.created_at" :auto-update="240"></timeago>
+          </router-link>
+        </div>
       </span>
       <div class="follow-text" v-if="notification.type === 'follow'">
         <router-link :to="userProfileLink(notification.action.user)">

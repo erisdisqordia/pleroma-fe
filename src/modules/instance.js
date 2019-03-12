@@ -37,6 +37,7 @@ const defaultState = {
   emoji: [],
   customEmoji: [],
   restrictedNicknames: [],
+  postFormats: [],
 
   // Feature-set, apparently, not everything here is reported...
   mediaProxyAvailable: false,

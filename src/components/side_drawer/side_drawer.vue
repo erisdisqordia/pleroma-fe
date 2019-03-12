@@ -8,19 +8,14 @@
       @touchmove="touchMove"
     >
       <div class="side-drawer-heading" @click="toggleDrawer">
-        <user-card-content :user="currentUser" :switcher="false" :hideBio="true" v-if="currentUser"/>
+        <UserCard :user="currentUser" :hideBio="true" v-if="currentUser"/>
         <div class="side-drawer-logo-wrapper" v-else>
           <img :src="logo"/>
           <span>{{sitename}}</span>
         </div>
       </div>
       <ul>
-        <li v-if="currentUser" @click="toggleDrawer">
-          <router-link :to="{ name: 'new-status', params: { username: currentUser.screen_name } }">
-            {{ $t("post_status.new_status") }}
-          </router-link>
-        </li>
-        <li v-else @click="toggleDrawer">
+        <li v-if="!currentUser" @click="toggleDrawer">
           <router-link :to="{ name: 'login' }">
             {{ $t("login.login") }}
           </router-link>
@@ -119,14 +114,14 @@
 }
 
 .side-drawer-container-open {
-  transition-delay: 0.0s;
-  transition-property: left;
+  transition: 0.35s;
+  transition-property: background-color;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .side-drawer-container-closed {
   left: -100%;
-  transition-delay: 0.5s;
-  transition-property: left;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .side-drawer-click-outside {
@@ -181,15 +176,6 @@
   display: flex;
   padding: 0;
   margin: 0;
-
-  .profile-panel-background {
-    border-radius: 0;
-    .panel-heading {
-      background: transparent;
-      flex-direction: column;
-      align-items: stretch;
-    }
-  }
 }
 
 .side-drawer ul {

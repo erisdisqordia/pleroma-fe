@@ -93,6 +93,9 @@ const settings = {
     currentSaveStateNotice () {
       return this.$store.state.interface.settings.currentSaveStateNotice
     },
+    postFormats () {
+      return this.$store.state.instance.postFormats || []
+    },
     instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel }
   },
   watch: {

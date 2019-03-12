@@ -171,6 +171,9 @@ const PostStatusForm = {
     },
     formattingOptionsEnabled () {
       return this.$store.state.instance.formattingOptionsEnabled
+    },
+    postFormats () {
+      return this.$store.state.instance.postFormats || []
     }
   },
   methods: {
@@ -218,6 +221,9 @@ const PostStatusForm = {
       } else {
         this.highlighted = 0
       }
+    },
+    onKeydown (e) {
+      e.stopPropagation()
     },
     setCaret ({target: {selectionStart}}) {
       this.caret = selectionStart

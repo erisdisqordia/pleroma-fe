@@ -1,36 +1,24 @@
 <template>
   <div id="app" v-bind:style="bgAppStyle">
     <div class="app-bg-wrapper" v-bind:style="bgStyle"></div>
-    <nav class='nav-bar container' @click="scrollToTop()" id="nav">
+    <MobileNav v-if="isMobileLayout" />
+    <nav v-else class='nav-bar container' @click="scrollToTop()" id="nav">
       <div class='logo' :style='logoBgStyle'>
         <div class='mask' :style='logoMaskStyle'></div>
         <img :src='logo' :style='logoStyle'>
       </div>
       <div class='inner-nav'>
         <div class='item'>
-          <a href="#" class="menu-button" @click.stop.prevent="toggleMobileSidebar()">
-            <i class="button-icon icon-menu"></i>
-          </a>
           <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
         </div>
         <div class='item right'>
           <user-finder class="button-icon nav-icon mobile-hidden" @toggled="onFinderToggled"></user-finder>
           <router-link class="mobile-hidden" :to="{ name: 'settings'}"><i class="button-icon icon-cog nav-icon" :title="$t('nav.preferences')"></i></router-link>
           <a href="#" class="mobile-hidden" v-if="currentUser" @click.prevent="logout"><i class="button-icon icon-logout nav-icon" :title="$t('login.logout')"></i></a>
-          <a href="#" class="menu-button" @click.stop.prevent="toggleMobileNotifications()">
-            <i class="button-icon icon-bell-alt"></i>
-            <div class="alert-dot" v-if="unseenNotificationsCount"></div>
-          </a>
         </div>
       </div>
     </nav>
     <div v-if="" class="container" id="content">
-      <div v-if="isMobileLayout">
-        <side-drawer ref="sideDrawer" :logout="logout"></side-drawer>
-        <div class="mobile-notifications" :class="{ 'closed': !notificationsOpen }">
-          <notifications/>
-        </div>
-      </div>
       <div class="sidebar-flexer mobile-hidden" v-if="!isMobileLayout">
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">
@@ -58,6 +46,13 @@
       <media-modal></media-modal>
     </div>
     <chat-panel :floating="true" v-if="currentUser && chat" class="floating-chat mobile-hidden"></chat-panel>
+    <div v-if="isMobileLayout">
+      <side-drawer ref="sideDrawer" :logout="logout"></side-drawer>
+      <div class="mobile-notifications" :class="{ 'closed': !notificationsOpen }">
+        <notifications/>
+      </div>
+    </div>
+    <MobilePostStatusModal />
   </div>
 </template>
 

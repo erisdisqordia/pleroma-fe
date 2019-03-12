@@ -292,9 +292,12 @@ const users = {
 
     logout (store) {
       store.commit('clearCurrentUser')
+      store.dispatch('disconnectFromChat')
       store.commit('setToken', false)
       store.dispatch('stopFetching', 'friends')
       store.commit('setBackendInteractor', backendInteractorService())
+      store.dispatch('stopFetchingNotifications')
+      store.commit('resetStatuses')
     },
     loginUser (store, accessToken) {
       return new Promise((resolve, reject) => {
@@ -319,6 +322,9 @@ const users = {
 
               if (user.token) {
                 store.dispatch('setWsToken', user.token)
+
+                // Initialize the chat socket.
+                store.dispatch('initializeSocket')
               }
 
               // Start getting fresh posts.

@@ -71,7 +71,9 @@
     "account_not_locked_warning_link": "locked",
     "attachments_sensitive": "Mark attachments as sensitive",
     "content_type": {
-      "plain_text": "Plain text"
+      "text/plain": "Plain text",
+      "text/html": "HTML",
+      "text/markdown": "Markdown"
     },
     "content_warning": "Subject (optional)",
     "default": "Just landed in L.A.",
@@ -221,7 +223,6 @@
     "subject_line_mastodon": "Like mastodon: copy as is",
     "subject_line_noop": "Do not copy",
     "post_status_content_type": "Post status content type",
-    "status_content_type_plain": "Plain text",
     "stop_gifs": "Play-on-hover GIFs",
     "streaming": "Enable automatic streaming of new posts when scrolled to the top",
     "text": "Text",
@@ -359,6 +360,10 @@
     "up_to_date": "Up-to-date",
     "no_more_statuses": "No more statuses",
     "no_statuses": "No statuses"
+  },
+  "status": {
+    "reply_to": "Reply to",
+    "replies_list": "Replies:"
   },
   "user_card": {
     "approve": "Approve",

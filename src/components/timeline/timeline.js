@@ -132,7 +132,9 @@ const Timeline = {
       }
       if (count > 0) {
         // only 'stream' them when you're scrolled to the top
-        if (window.pageYOffset < 15 &&
+        const doc = document.documentElement
+        const top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
+        if (top < 15 &&
             !this.paused &&
             !(this.unfocused && this.$store.state.config.pauseOnUnfocused)
            ) {

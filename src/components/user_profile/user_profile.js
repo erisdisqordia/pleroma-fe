@@ -102,7 +102,6 @@ const UserProfile = {
       } else {
         fetchPromise = this.$store.dispatch('fetchUser', this.userName)
           .then(({ id }) => {
-            console.log(arguments)
             this.fetchedUserId = id
           })
       }

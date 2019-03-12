@@ -100,9 +100,10 @@ const UserProfile = {
       if (this.userId && !this.$route.params.name) {
         fetchPromise = this.$store.dispatch('fetchUser', this.userId)
       } else {
-        fetchPromise = this.$store.dispatch('fetchUserByScreenName', this.userName)
-          .then(userId => {
-            this.fetchedUserId = userId
+        fetchPromise = this.$store.dispatch('fetchUser', this.userName)
+          .then(({ id }) => {
+            console.log(arguments)
+            this.fetchedUserId = id
           })
       }
       return fetchPromise

@@ -152,12 +152,10 @@ const users = {
   actions: {
     fetchUser (store, id) {
       return store.rootState.api.backendInteractor.fetchUser({ id })
-        .then((user) => store.commit('addNewUsers', [user]))
-    },
-    fetchUserByScreenName (store, screenName) {
-      return store.rootState.api.backendInteractor.figureOutUserId({ screenName })
-        .then((qvitterUserData) => store.rootState.api.backendInteractor.fetchUser({ id: qvitterUserData.id }))
-        .then((user) => store.commit('addNewUsers', [user]) || user.id)
+        .then((user) => {
+          store.commit('addNewUsers', [user])
+          return user
+        })
     },
     fetchUserRelationship (store, id) {
       return store.rootState.api.backendInteractor.fetchUserRelationship({ id })

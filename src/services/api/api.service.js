@@ -32,7 +32,6 @@ const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKING_URL = '/api/blocks/create.json'
 const UNBLOCKING_URL = '/api/blocks/destroy.json'
-const USER_URL = '/api/users/show.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
@@ -271,22 +270,6 @@ const fetchUserRelationship = ({id, credentials}) => {
           return resolve(json)
         }))
     })
-}
-
-// TODO remove once MastoAPI supports screen_name in fetchUser one
-const figureOutUserId = ({screenName, credentials}) => {
-  let url = `${USER_URL}/?user_id=${screenName}`
-  return fetch(url, { headers: authHeaders(credentials) })
-    .then((response) => {
-      return new Promise((resolve, reject) => response.json()
-        .then((json) => {
-          if (!response.ok) {
-            return reject(new StatusCodeError(response.status, json, { url }, response))
-          }
-          return resolve(json)
-        }))
-    })
-    .then((data) => parseUser(data))
 }
 
 const fetchFriends = ({id, page, credentials}) => {
@@ -622,7 +605,6 @@ const apiService = {
   unblockUser,
   fetchUser,
   fetchUserRelationship,
-  figureOutUserId,
   favorite,
   unfavorite,
   retweet,

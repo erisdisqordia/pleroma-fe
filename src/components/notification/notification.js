@@ -21,6 +21,9 @@ const Notification = {
     },
     userProfileLink (user) {
       return generateProfileLink(user.id, user.screen_name, this.$store.state.instance.restrictedNicknames)
+    },
+    dismiss () {
+      this.$store.dispatch('dismissNotifications', { id: this.notification.id })
     }
   },
   computed: {

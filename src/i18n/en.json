@@ -62,6 +62,8 @@
     "load_older": "Load older notifications",
     "notifications": "Notifications",
     "read": "Read!",
+    "clear": "Clear!",
+    "dismiss": "Dismiss!",
     "repeated_you": "repeated your status",
     "no_more_notifications": "No more notifications"
   },

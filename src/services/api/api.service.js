@@ -29,7 +29,6 @@ const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
 const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
-const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKING_URL = '/api/blocks/create.json'
 const UNBLOCKING_URL = '/api/blocks/destroy.json'
@@ -43,6 +42,9 @@ const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
+const MASTODON_USER_NOTIFICATIONS_CLEAR_URL = '/api/v1/notifications/clear'
+const MASTODON_USER_NOTIFICATIONS_DISMISS_URL = '/api/v1/notifications/dismiss'
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
@@ -345,7 +347,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     friends: FRIENDS_TIMELINE_URL,
     mentions: MENTIONS_URL,
     dms: DM_TIMELINE_URL,
-    notifications: QVITTER_USER_NOTIFICATIONS_URL,
+    notifications: MASTODON_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
     user: QVITTER_USER_TIMELINE_URL,
     media: QVITTER_USER_TIMELINE_URL,
@@ -575,6 +577,25 @@ const markNotificationsAsSeen = ({id, credentials}) => {
   }).then((data) => data.json())
 }
 
+const clearNotifications = ({ credentials }) => {
+  return fetch(MASTODON_USER_NOTIFICATIONS_CLEAR_URL, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => data.json())
+}
+
+const dismissNotifications = ({ id, credentials }) => {
+  const body = new FormData()
+
+  body.append('id', id)
+
+  return fetch(MASTODON_USER_NOTIFICATIONS_DISMISS_URL, {
+    body,
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => data.json())
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -615,7 +636,9 @@ const apiService = {
   approveUser,
   denyUser,
   suggestions,
-  markNotificationsAsSeen
+  markNotificationsAsSeen,
+  clearNotifications,
+  dismissNotifications
 }
 
 export default apiService

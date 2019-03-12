@@ -9,7 +9,8 @@
         <div @click.prevent class="loadmore-error alert error" v-if="error">
           {{$t('timeline.error_fetching')}}
         </div>
-        <button v-if="unseenCount" @click.prevent="markAsSeen" class="read-button">{{$t('notifications.read')}}</button>
+        <!-- <button v-if="unseenCount" @click.prevent="markAsSeen" class="read-button">{{$t('notifications.read')}}</button> -->
+        <button v-if="notifications.length" @click.prevent="clear" class="read-button">{{$t('notifications.clear')}}</button>
       </div>
       <div class="panel-body">
         <div v-for="notification in visibleNotifications" :key="notification.action.id" class="notification" :class='{"unseen": !notification.seen}'>

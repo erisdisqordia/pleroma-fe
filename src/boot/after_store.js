@@ -133,7 +133,73 @@ const getInstancePanel = async ({ store }) => {
     }
   } catch (e) {
     console.warn("Can't load instance panel")
-    console.log(e)
+    console.warn(e)
+  }
+}
+
+const getStaticEmoji = async ({ store }) => {
+  try {
+    const res = await window.fetch('/static/emoji.json')
+    if (res.ok) {
+      const values = await res.json()
+      const emoji = Object.keys(values).map((key) => {
+        return { shortcode: key, image_url: false, 'utf': values[key] }
+      })
+      store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load static emoji")
+    console.warn(e)
+  }
+}
+
+// This is also used to indicate if we have a 'pleroma backend' or not.
+// Somewhat weird, should probably be somewhere else.
+const getCustomEmoji = async ({ store }) => {
+  try {
+    const res = await window.fetch('/api/pleroma/emoji.json')
+    if (res.ok) {
+      const values = await res.json()
+      const emoji = Object.keys(values).map((key) => {
+        return { shortcode: key, image_url: values[key] }
+      })
+      store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
+      store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: false })
+    console.warn("Can't load custom emojis, maybe not a Pleroma instance?")
+    console.warn(e)
+  }
+}
+
+const getNodeInfo = async ({ store }) => {
+  try {
+    const res = await window.fetch('/nodeinfo/2.0.json')
+    if (res.ok) {
+      const data = await res.json()
+      const metadata = data.metadata
+
+      const features = metadata.features
+      store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: features.includes('media_proxy') })
+      store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
+      store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
+
+      store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
+
+      const suggestions = metadata.suggestions
+      store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
+      store.dispatch('setInstanceOption', { name: 'suggestionsWeb', value: suggestions.web })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn('Could not load nodeinfo')
+    console.warn(e)
   }
 }
 
@@ -143,6 +209,9 @@ const afterStoreSetup = async ({ store, i18n }) => {
   await setSettings({ store, apiConfig, staticConfig })
   await getTOS({ store })
   await getInstancePanel({ store })
+  await getStaticEmoji({ store })
+  await getCustomEmoji({ store })
+  await getNodeInfo({ store })
 
   // Now we have the server settings and can try logging in
   if (store.state.oauth.token) {
@@ -159,50 +228,6 @@ const afterStoreSetup = async ({ store, i18n }) => {
       return savedPosition || { x: 0, y: 0 }
     }
   })
-
-  window.fetch('/api/pleroma/emoji.json')
-    .then(
-      (res) => res.json()
-        .then(
-          (values) => {
-            const emoji = Object.keys(values).map((key) => {
-              return { shortcode: key, image_url: values[key] }
-            })
-            store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
-            store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })
-          },
-          (failure) => {
-            store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: false })
-          }
-        ),
-      (error) => console.log(error)
-    )
-
-  window.fetch('/static/emoji.json')
-    .then((res) => res.json())
-    .then((values) => {
-      const emoji = Object.keys(values).map((key) => {
-        return { shortcode: key, image_url: false, 'utf': values[key] }
-      })
-      store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
-    })
-
-  window.fetch('/nodeinfo/2.0.json')
-    .then((res) => res.json())
-    .then((data) => {
-      const metadata = data.metadata
-
-      const features = metadata.features
-      store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: features.includes('media_proxy') })
-      store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
-      store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
-
-      store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
-
-      const suggestions = metadata.suggestions
-      store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
-      store.dispatch('setInstanceOption', { name: 'suggestionsWeb', value: suggestions.web })
-    })
 
   /* eslint-disable no-new */
   return new Vue({

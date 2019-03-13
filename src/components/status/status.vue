@@ -52,6 +52,9 @@
                 <a :href="status.external_url" target="_blank" v-if="!status.is_local && !isPreview" class="source_url" title="Source">
                   <i class="button-icon icon-link-ext-alt"></i>
                 </a>
+                <span class="button-icon" v-if="isNotification" @click.prevent="dismissNotification">
+                  <i class="button-icon icon-cancel delete-status"></i>
+                </span>
                 <template v-if="expandable && !isPreview">
                   <a href="#" @click.prevent="toggleExpanded" title="Expand">
                     <i class="button-icon icon-plus-squared"></i>

@@ -16,17 +16,21 @@ const fetchAndUpdate = ({store, credentials, older = false}) => {
       args['until'] = timelineData.minId
     }
   } else {
-    // load unread notifications repeadedly to provide consistency between browser tabs
-    const notifications = timelineData.data
-    const unread = notifications.filter(n => !n.seen).map(n => n.id)
-    if (!unread.length) {
+    if (timelineData.maxId !== Number.POSITIVE_INFINITY) {
       args['since'] = timelineData.maxId
-    } else {
-      args['since'] = Math.min(...unread) - 1
-      if (timelineData.maxId !== Math.max(...unread)) {
-        args['until'] = Math.max(...unread, args['since'] + 20)
-      }
     }
+    // # disabled until is_seen is impelented on the BE
+    // load unread notifications repeadedly to provide consistency between browser tabs
+    // const notifications = timelineData.data
+    // const unread = notifications.filter(n => !n.seen).map(n => n.id)
+    // if (!unread.length) {
+    //   args['since'] = timelineData.maxId
+    // } else {
+    //   args['since'] = Math.min(...unread) - 1
+    //   if (timelineData.maxId !== Math.max(...unread)) {
+    //     args['until'] = Math.max(...unread, args['since'] + 20)
+    //   }
+    // }
   }
 
   args['timeline'] = 'notifications'

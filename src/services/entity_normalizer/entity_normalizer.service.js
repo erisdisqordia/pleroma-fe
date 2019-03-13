@@ -65,8 +65,7 @@ export const parseUser = (data) => {
       output.muted = pleroma.muted
     }
 
-    // Missing, trying to recover
-    output.is_local = !output.screen_name.includes('@')
+    // TODO: handle is_local
   } else {
     output.screen_name = data.screen_name
 
@@ -179,8 +178,7 @@ export const parseStatus = (data) => {
     output.summary_html = data.spoiler_text
     output.external_url = data.url
 
-    // FIXME missing!!
-    output.is_local = false
+    // TODO: handle is_local
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num

@@ -7,28 +7,32 @@ import App from '../App.vue'
 const getStatusnetConfig = async ({ store }) => {
   try {
     const res = await window.fetch('/api/statusnet/config.json')
-    const data = await res.json()
-    const { name, closed: registrationClosed, textlimit, uploadlimit, server, vapidPublicKey } = data.site
+    if (res.ok) {
+      const data = await res.json()
+      const { name, closed: registrationClosed, textlimit, uploadlimit, server, vapidPublicKey } = data.site
 
-    store.dispatch('setInstanceOption', { name: 'name', value: name })
-    store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
-    store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
-    store.dispatch('setInstanceOption', { name: 'server', value: server })
+      store.dispatch('setInstanceOption', { name: 'name', value: name })
+      store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
+      store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
+      store.dispatch('setInstanceOption', { name: 'server', value: server })
 
-    // TODO: default values for this stuff, added if to not make it break on
-    // my dev config out of the box.
-    if (uploadlimit) {
-      store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadlimit.uploadlimit) })
-      store.dispatch('setInstanceOption', { name: 'avatarlimit', value: parseInt(uploadlimit.avatarlimit) })
-      store.dispatch('setInstanceOption', { name: 'backgroundlimit', value: parseInt(uploadlimit.backgroundlimit) })
-      store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadlimit.bannerlimit) })
+      // TODO: default values for this stuff, added if to not make it break on
+      // my dev config out of the box.
+      if (uploadlimit) {
+        store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadlimit.uploadlimit) })
+        store.dispatch('setInstanceOption', { name: 'avatarlimit', value: parseInt(uploadlimit.avatarlimit) })
+        store.dispatch('setInstanceOption', { name: 'backgroundlimit', value: parseInt(uploadlimit.backgroundlimit) })
+        store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadlimit.bannerlimit) })
+      }
+
+      if (vapidPublicKey) {
+        store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })
+      }
+
+      return data.site.pleromafe
+    } else {
+      throw (res)
     }
-
-    if (vapidPublicKey) {
-      store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })
-    }
-
-    return data.site.pleromafe
   } catch (error) {
     console.error('Could not load statusnet config, potentially fatal')
     console.error(error)
@@ -38,7 +42,11 @@ const getStatusnetConfig = async ({ store }) => {
 const getStaticConfig = async () => {
   try {
     const res = await window.fetch('/static/config.json')
-    return res.json()
+    if (res.ok) {
+      return res.json()
+    } else {
+      throw (res)
+    }
   } catch (error) {
     console.warn('Failed to load static/config.json, continuing without it.')
     console.warn(error)

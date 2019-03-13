@@ -66,7 +66,7 @@ export const parseUser = (data) => {
     }
 
     // TODO: handle is_local
-    output.is_local = true
+    output.is_local = !output.screen_name.includes('@')
   } else {
     output.screen_name = data.screen_name
 

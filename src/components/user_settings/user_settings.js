@@ -160,6 +160,7 @@ const UserSettings = {
       reader.onload = ({target}) => {
         const img = target.result
         this[slot + 'Preview'] = img
+        this[slot] = file
       }
       reader.readAsDataURL(file)
     },
@@ -190,30 +191,17 @@ const UserSettings = {
     submitBanner () {
       if (!this.bannerPreview) { return }
 
-      let banner = this.bannerPreview
-      // eslint-disable-next-line no-undef
-      let imginfo = new Image()
-      /* eslint-disable camelcase */
-      let offset_top, offset_left, width, height
-      imginfo.src = banner
-      width = imginfo.width
-      height = imginfo.height
-      offset_top = 0
-      offset_left = 0
       this.bannerUploading = true
-      this.$store.state.api.backendInteractor.updateBanner({params: {banner, offset_top, offset_left, width, height}}).then((data) => {
-        if (!data.error) {
-          let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
-          clone.cover_photo = data.url
-          this.$store.commit('addNewUsers', [clone])
-          this.$store.commit('setCurrentUser', clone)
+      this.$store.state.api.backendInteractor.updateBanner({banner: this.banner})
+        .then((user) => {
+          this.$store.commit('addNewUsers', [user])
+          this.$store.commit('setCurrentUser', user)
           this.bannerPreview = null
-        } else {
-          this.bannerUploadError = this.$t('upload.error.base') + data.error
-        }
-        this.bannerUploading = false
-      })
-      /* eslint-enable camelcase */
+        })
+        .catch((err) => {
+          this.bannerUploadError = this.$t('upload.error.base') + ' ' + err.message
+        })
+        .then(() => { this.bannerUploading = false })
     },
     submitBg () {
       if (!this.backgroundPreview) { return }

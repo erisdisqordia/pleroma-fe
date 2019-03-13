@@ -4,7 +4,6 @@ const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const REGISTRATION_URL = '/api/account/register.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
-const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
 const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
@@ -108,28 +107,16 @@ const updateBg = ({credentials, params}) => {
   }).then((data) => data.json())
 }
 
-// Params
-// height
-// width
-// offset_left
-// offset_top
-// banner (base 64 encodend data url)
-const updateBanner = ({credentials, params}) => {
-  let url = BANNER_UPDATE_URL
-
+const updateBanner = ({credentials, banner}) => {
   const form = new FormData()
-
-  each(params, (value, key) => {
-    if (value) {
-      form.append(key, value)
-    }
-  })
-
-  return fetch(url, {
+  form.append('header', banner)
+  return fetch(MASTODON_PROFILE_UPDATE_URL, {
     headers: authHeaders(credentials),
-    method: 'POST',
+    method: 'PATCH',
     body: form
-  }).then((data) => data.json())
+  })
+  .then((data) => data.json())
+  .then((data) => parseUser(data))
 }
 
 // Params

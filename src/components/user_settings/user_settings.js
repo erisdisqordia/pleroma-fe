@@ -164,19 +164,23 @@ const UserSettings = {
       reader.readAsDataURL(file)
     },
     submitAvatar (cropper, file) {
-      let img
-      if (cropper) {
-        img = cropper.getCroppedCanvas().toDataURL(file.type)
-      } else {
-        img = file
-      }
+      return new Promise((resolve, reject) => {
+        function updateAvatar (avatar) {
+          this.$store.state.api.backendInteractor.updateAvatar({ avatar })
+            .then((user) => {
+              this.$store.commit('addNewUsers', [user])
+              this.$store.commit('setCurrentUser', user)
+              resolve()
+            })
+            .catch((err) => {
+              reject(new Error(this.$t('upload.error.base') + ' ' + err.message))
+            })
+        }
 
-      return this.$store.state.api.backendInteractor.updateAvatar({ params: { img } }).then((user) => {
-        if (!user.error) {
-          this.$store.commit('addNewUsers', [user])
-          this.$store.commit('setCurrentUser', user)
+        if (cropper) {
+          cropper.getCroppedCanvas().toBlob(updateAvatar, file.type)
         } else {
-          throw new Error(this.$t('upload.error.base') + user.error)
+          updateAvatar(file)
         }
       })
     },

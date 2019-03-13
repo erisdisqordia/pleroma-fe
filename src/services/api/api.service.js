@@ -3,7 +3,6 @@ const LOGIN_URL = '/api/account/verify_credentials.json'
 const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const REGISTRATION_URL = '/api/account/register.json'
-const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
 const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
 const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
@@ -49,6 +48,7 @@ const MASTODON_MUTE_USER_URL = id => `/api/v1/accounts/${id}/mute`
 const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
 const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
 const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
+const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
 
 import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
@@ -78,28 +78,16 @@ const promisedRequest = (url, options) => {
     })
 }
 
-// Params
-// cropH
-// cropW
-// cropX
-// cropY
-// img (base 64 encodend data url)
-const updateAvatar = ({credentials, params}) => {
-  let url = AVATAR_UPDATE_URL
-
+const updateAvatar = ({credentials, avatar}) => {
   const form = new FormData()
-
-  each(params, (value, key) => {
-    if (value) {
-      form.append(key, value)
-    }
-  })
-
-  return fetch(url, {
+  form.append('avatar', avatar)
+  return fetch(MASTODON_PROFILE_UPDATE_URL, {
     headers: authHeaders(credentials),
-    method: 'POST',
+    method: 'PATCH',
     body: form
-  }).then((data) => data.json())
+  })
+  .then((data) => data.json())
+  .then((data) => parseUser(data))
 }
 
 const updateBg = ({credentials, params}) => {

@@ -107,10 +107,43 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   return store.dispatch('setTheme', config['theme'])
 }
 
+const getTOS = async ({ store }) => {
+  try {
+    const res = await window.fetch('/static/terms-of-service.html')
+    if (res.ok) {
+      const html = await res.text()
+      store.dispatch('setInstanceOption', { name: 'tos', value: html })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load TOS")
+    console.warn(e)
+  }
+}
+
+const getInstancePanel = async ({ store }) => {
+  try {
+    const res = await window.fetch('/instance/panel.html')
+    if (res.ok) {
+      const html = await res.text()
+      store.dispatch('setInstanceOption', { name: 'instanceSpecificPanelContent', value: html })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load instance panel")
+    console.log(e)
+  }
+}
+
 const afterStoreSetup = async ({ store, i18n }) => {
   const apiConfig = await getStatusnetConfig({ store })
   const staticConfig = await getStaticConfig()
   await setSettings({ store, apiConfig, staticConfig })
+  await getTOS({ store })
+  await getInstancePanel({ store })
+
   // Now we have the server settings and can try logging in
   if (store.state.oauth.token) {
     store.dispatch('loginUser', store.state.oauth.token)
@@ -126,21 +159,6 @@ const afterStoreSetup = async ({ store, i18n }) => {
       return savedPosition || { x: 0, y: 0 }
     }
   })
-
-  /* eslint-disable no-new */
-  new Vue({
-    router,
-    store,
-    i18n,
-    el: '#app',
-    render: h => h(App)
-  })
-
-  window.fetch('/static/terms-of-service.html')
-    .then((res) => res.text())
-    .then((html) => {
-      store.dispatch('setInstanceOption', { name: 'tos', value: html })
-    })
 
   window.fetch('/api/pleroma/emoji.json')
     .then(
@@ -169,13 +187,7 @@ const afterStoreSetup = async ({ store, i18n }) => {
       store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
     })
 
-  window.fetch('/instance/panel.html')
-    .then((res) => res.text())
-    .then((html) => {
-      store.dispatch('setInstanceOption', { name: 'instanceSpecificPanelContent', value: html })
-    })
-
-  return window.fetch('/nodeinfo/2.0.json')
+  window.fetch('/nodeinfo/2.0.json')
     .then((res) => res.json())
     .then((data) => {
       const metadata = data.metadata
@@ -191,6 +203,15 @@ const afterStoreSetup = async ({ store, i18n }) => {
       store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
       store.dispatch('setInstanceOption', { name: 'suggestionsWeb', value: suggestions.web })
     })
+
+  /* eslint-disable no-new */
+  return new Vue({
+    router,
+    store,
+    i18n,
+    el: '#app',
+    render: h => h(App)
+  })
 }
 
 export default afterStoreSetup

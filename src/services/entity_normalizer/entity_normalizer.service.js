@@ -66,6 +66,7 @@ export const parseUser = (data) => {
     }
 
     // TODO: handle is_local
+    output.is_local = true
   } else {
     output.screen_name = data.screen_name
 
@@ -179,6 +180,7 @@ export const parseStatus = (data) => {
     output.external_url = data.url
 
     // TODO: handle is_local
+    output.is_local = true
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num
@@ -273,6 +275,10 @@ export const parseNotification = (data) => {
     output.status = output.type === 'follow'
       ? parseFollow(data)
       : parseStatus(data.status)
+    if (data.type === 'reblog') {
+      output.status.user = parseUser(data.account)
+      output.status.created_at = new Date(data.created_at)
+    }
     output.action = output.status // not sure
     output.from_profile = parseUser(data.account)
   } else {

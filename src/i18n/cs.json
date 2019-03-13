@@ -71,7 +71,9 @@
     "account_not_locked_warning_link": "uzamčen",
     "attachments_sensitive": "Označovat přílohy jako citlivé",
     "content_type": {
-      "plain_text": "Prostý text"
+      "plain_text": "Prostý text",
+      "text/html": "HTML",
+      "text/markdown": "Markdown"
     },
     "content_warning": "Předmět (volitelný)",
     "default": "Právě jsem přistál v L.A.",
@@ -95,7 +97,7 @@
     "new_captcha": "Kliknutím na obrázek získáte novou CAPTCHA",
     "username_placeholder": "např. lain",
     "fullname_placeholder": "např. Lain Iwakura",
-    "bio_placeholder": "např.\nNazdar, jsem Lain\nJsem anime dívka a žiji v příměstském Japonsku. Možná mě znáte z Wired.",
+    "bio_placeholder": "např.\nNazdar, jsem Lain\nJsem anime dívka žijící v příměstském Japonsku. Možná mě znáte z Wired.",
     "validations": {
       "username_required": "nemůže být prázdné",
       "fullname_required": "nemůže být prázdné",
@@ -204,7 +206,7 @@
     "radii_help": "Nastavit zakulacení rohů rozhraní (v pixelech)",
     "replies_in_timeline": "Odpovědi v časové ose",
     "reply_link_preview": "Povolit náhledy odkazu pro odpověď při přejetí myši",
-    "reply_visibility_all": "Zobrazit všechny odpovědiShow all replies",
+    "reply_visibility_all": "Zobrazit všechny odpovědi",
     "reply_visibility_following": "Zobrazit pouze odpovědi směřované na mě nebo uživatele, které sleduji",
     "reply_visibility_self": "Zobrazit pouze odpovědi směřované na mě",
     "saving_err": "Chyba při ukládání nastavení",
@@ -221,7 +223,6 @@
     "subject_line_mastodon": "Jako u Mastodonu: zkopírovat tak, jak je",
     "subject_line_noop": "Nekopírovat",
     "post_status_content_type": "Publikovat typ obsahu příspěvku",
-    "status_content_type_plain": "Prostý text",
     "stop_gifs": "Přehrávat GIFy při přejetí myši",
     "streaming": "Povolit automatické streamování nových příspěvků při rolování nahoru",
     "text": "Text",
@@ -339,7 +340,7 @@
         "button": "Tlačítko",
         "text": "Spousta dalšího {0} a {1}",
         "mono": "obsahu",
-        "input": "Just landed in L.A.",
+        "input": "Právě jsem přistál v L.A.",
         "faint_link": "pomocný manuál",
         "fine_print": "Přečtěte si náš {0} a nenaučte se nic užitečného!",
         "header_faint": "Tohle je v pohodě",
@@ -361,7 +362,7 @@
     "no_statuses": "Žádné příspěvky"
   },
   "status": {
-    "reply_to": "Odpovědět uživateli",
+    "reply_to": "Odpověď uživateli",
     "replies_list": "Odpovědi:"
   },
 
@@ -413,7 +414,7 @@
   "upload":{
     "error": {
       "base": "Nahrávání selhalo.",
-      "file_too_big": "Soubor je úříliš velký [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+      "file_too_big": "Soubor je příliš velký [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
       "default": "Zkuste to znovu později"
     },
     "file_size_units": {

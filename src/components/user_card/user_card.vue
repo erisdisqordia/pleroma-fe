@@ -11,7 +11,7 @@
             <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
             <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
             <router-link :to="{ name: 'user-settings' }" v-if="!isOtherUser">
-              <i class="button-icon icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
+              <i class="button-icon icon-pencil usersettings" :title="$t('tool_tip.user_settings')"></i>
             </router-link>
             <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser && !user.is_local">
               <i class="icon-link-ext usersettings"></i>
@@ -159,6 +159,18 @@
 
   &-bio {
     text-align: center;
+
+    img {
+      object-fit: contain;
+      vertical-align: middle;
+      max-width: 100%;
+      max-height: 400px;
+
+      .emoji {
+        width: 32px;
+        height: 32px;
+      }
+    }
   }
 
   // Modifiers

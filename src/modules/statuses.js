@@ -333,6 +333,7 @@ export const mutations = {
     oldTimeline.newStatusCount = 0
     oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
     oldTimeline.minVisibleId = last(oldTimeline.visibleStatuses).id
+    oldTimeline.minId = oldTimeline.minVisibleId
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },

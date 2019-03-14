@@ -55,9 +55,6 @@ const Notifications = {
     markAsSeen () {
       this.$store.dispatch('markNotificationsAsSeen')
     },
-    clear () {
-      this.$store.dispatch('clearNotifications')
-    },
     fetchOlderNotifications () {
       const store = this.$store
       const credentials = store.state.users.currentUser.credentials

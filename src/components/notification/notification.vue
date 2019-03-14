@@ -3,8 +3,6 @@
     v-if="notification.type === 'mention'" 
     :compact="true" 
     :statusoid="notification.status"
-    isNotification="true"
-    @dismissNotification="dismiss"
   >
   </status>
   <div class="non-mention" :class="[userClass, { highlighted: userStyle }]" :style="[ userStyle ]"v-else>
@@ -40,9 +38,6 @@
             <timeago :since="notification.action.created_at" :auto-update="240"></timeago>
           </router-link>
         </div>
-        <span class="button-icon" @click.prevent="dismiss">
-          <i class="button-icon icon-cancel delete-status"></i>
-        </span>
       </span>
       <div class="follow-text" v-if="notification.type === 'follow'">
         <router-link :to="userProfileLink(notification.action.user)">

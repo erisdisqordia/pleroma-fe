@@ -1,4 +1,4 @@
-import { remove, slice, each, find, findIndex, maxBy, minBy, merge, first, last, isArray } from 'lodash'
+import { remove, slice, each, find, maxBy, minBy, merge, first, last, isArray } from 'lodash'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -390,27 +390,6 @@ export const mutations = {
       notification.seen = true
     })
   },
-  clearNotifications (state) {
-    state.notifications.data = []
-    state.notifications.idStore = {}
-    state.notifications.maxId = 0
-    state.notifications.minId = 0
-  },
-  dismissNotifications (state, { id }) {
-    const { data } = state.notifications
-    const idx = findIndex(data, { id })
-
-    if (idx !== -1) {
-      const notification = data[idx]
-      data.splice(idx, 1)
-      delete state.notifications.idStore[id]
-      if (state.notifications.maxId === notification.id) {
-        state.notifications.maxId = data.length ? maxBy(data, 'id').id : 0
-      } else if (state.notifications.minId === notification.id) {
-        state.notifications.minId = data.length ? minBy(data, 'id').id : 0
-      }
-    }
-  },
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
   }
@@ -493,19 +472,6 @@ const statuses = {
       commit('markNotificationsAsSeen')
       apiService.markNotificationsAsSeen({
         id: rootState.statuses.notifications.maxId,
-        credentials: rootState.users.currentUser.credentials
-      })
-    },
-    clearNotifications ({ rootState, commit }) {
-      commit('clearNotifications')
-      apiService.clearNotifications({
-        credentials: rootState.users.currentUser.credentials
-      })
-    },
-    dismissNotifications ({ rootState, commit }, { id }) {
-      commit('dismissNotifications', { id })
-      apiService.dismissNotifications({
-        id,
         credentials: rootState.users.currentUser.credentials
       })
     }

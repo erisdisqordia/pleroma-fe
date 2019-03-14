@@ -43,8 +43,6 @@ const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
-const MASTODON_USER_NOTIFICATIONS_CLEAR_URL = '/api/v1/notifications/clear'
-const MASTODON_USER_NOTIFICATIONS_DISMISS_URL = '/api/v1/notifications/dismiss'
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
@@ -577,25 +575,6 @@ const markNotificationsAsSeen = ({id, credentials}) => {
   }).then((data) => data.json())
 }
 
-const clearNotifications = ({ credentials }) => {
-  return fetch(MASTODON_USER_NOTIFICATIONS_CLEAR_URL, {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  }).then((data) => data.json())
-}
-
-const dismissNotifications = ({ id, credentials }) => {
-  const body = new FormData()
-
-  body.append('id', id)
-
-  return fetch(MASTODON_USER_NOTIFICATIONS_DISMISS_URL, {
-    body,
-    headers: authHeaders(credentials),
-    method: 'POST'
-  }).then((data) => data.json())
-}
-
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -636,9 +615,7 @@ const apiService = {
   approveUser,
   denyUser,
   suggestions,
-  markNotificationsAsSeen,
-  clearNotifications,
-  dismissNotifications
+  markNotificationsAsSeen
 }
 
 export default apiService

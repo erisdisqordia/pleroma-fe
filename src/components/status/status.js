@@ -25,8 +25,7 @@ const Status = {
     'replies',
     'isPreview',
     'noHeading',
-    'inlineExpanded',
-    'isNotification'
+    'inlineExpanded'
   ],
   data () {
     return {
@@ -366,9 +365,6 @@ const Status = {
     setMedia () {
       const attachments = this.attachmentSize === 'hide' ? this.status.attachments : this.galleryAttachments
       return () => this.$store.dispatch('setMedia', attachments)
-    },
-    dismissNotification () {
-      this.$emit('dismissNotification')
     }
   },
   watch: {

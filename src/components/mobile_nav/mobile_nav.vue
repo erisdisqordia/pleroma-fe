@@ -8,18 +8,18 @@
         <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
       </div>
       <div class='item right'>
-        <a href="#" class="menu-button" @click.stop.prevent="toggleMobileNotifications()">
+        <a v-if="currentUser" href="#" class="menu-button" @click.stop.prevent="toggleMobileNotifications()">
           <i class="button-icon icon-bell-alt"></i>
           <div class="alert-dot" v-if="unseenNotificationsCount"></div>
         </a>
       </div>
       <div class="mobile-notifications-header">
-        <span>Notifications</span>
+        <span>{{$t('notifications.notifications')}}</span>
         <i class="icon-cancel" @click.stop.prevent="toggleMobileNotifications()"/>
       </div>
     </div>
     <SideDrawer ref="sideDrawer" :logout="logout"/>
-    <div class="mobile-notifications" :class="{ 'closed': !notificationsOpen }">
+    <div v-if="currentUser" class="mobile-notifications" :class="{ 'closed': !notificationsOpen }">
       <Notifications ref="notifications" noHeading="true"/>
     </div>
     <MobilePostStatusModal />

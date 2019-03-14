@@ -13,6 +13,9 @@ const MobileNav = {
     notificationsOpen: false
   }),
   computed: {
+    currentUser () {
+      return this.$store.state.users.currentUser
+    },
     unseenNotifications () {
       return unseenNotificationsFromStore(this.$store)
     },

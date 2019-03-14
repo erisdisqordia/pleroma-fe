@@ -46,13 +46,6 @@
       <media-modal></media-modal>
     </div>
     <chat-panel :floating="true" v-if="currentUser && chat" class="floating-chat mobile-hidden"></chat-panel>
-    <div v-if="isMobileLayout">
-      <side-drawer ref="sideDrawer" :logout="logout"></side-drawer>
-      <div class="mobile-notifications" :class="{ 'closed': !notificationsOpen }">
-        <notifications/>
-      </div>
-    </div>
-    <MobilePostStatusModal />
   </div>
 </template>
 

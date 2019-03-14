@@ -484,24 +484,6 @@ nav {
   }
 }
 
-.menu-button {
-  display: none;
-  position: relative;
-}
-
-.alert-dot {
-  border-radius: 100%;
-  height: 8px;
-  width: 8px;
-  position: absolute;
-  left: calc(50% - 4px);
-  top: calc(50% - 4px);
-  margin-left: 6px;
-  margin-top: -6px;
-  background-color: $fallback--cRed;
-  background-color: var(--badgeNotification, $fallback--cRed);
-}
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s
 }
@@ -528,20 +510,6 @@ nav {
 
 .mobile-shown {
   display: none;
-}
-
-.panel-switcher {
-  display: none;
-  width: 100%;
-  height: 46px;
-
-  button {
-    display: block;
-    flex: 1;
-    max-height: 32px;
-    margin: 0.5em;
-    padding: 0.5em;
-  }
 }
 
 @media all and (min-width: 800px) {
@@ -669,46 +637,6 @@ nav {
   border: 1px solid var(--faint, $fallback--faint);
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
-}
-
-.mobile-notifications {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: calc(50px - 28px - 1.2em);
-  left: 0;
-  z-index: 999;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  transition-property: transform;
-  transition-duration: 0.25s;
-  transform: translate(0);
-
-  background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
-
-  .notifications {
-    margin: 0;
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none;
-    .panel {
-      border-radius: 0;
-      margin: 0;
-      box-shadow: none;
-    }
-    .panel:after {
-      border-radius: 0;
-    }
-    .panel .panel-heading {
-      border-radius: 0;
-      box-shadow: none;
-    }
-  }
-
-  &.closed {
-    transform: translate(100%);
-  }
 }
 
 @keyframes modal-background-fadein {

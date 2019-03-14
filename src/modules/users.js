@@ -94,11 +94,12 @@ export const mutations = {
   updateUserRelationship (state, relationships) {
     relationships.forEach((relationship) => {
       const user = state.usersObject[relationship.id]
-
-      user.follows_you = relationship.followed_by
-      user.following = relationship.following
-      user.muted = relationship.muting
-      user.statusnet_blocking = relationship.blocking
+      if (user) {
+        user.follows_you = relationship.followed_by
+        user.following = relationship.following
+        user.muted = relationship.muting
+        user.statusnet_blocking = relationship.blocking
+      }
     })
   },
   saveBlocks (state, blockIds) {

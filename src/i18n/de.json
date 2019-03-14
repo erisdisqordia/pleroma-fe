@@ -55,7 +55,7 @@
     "account_not_locked_warning_link": "gesperrt",
     "attachments_sensitive": "Anhänge als heikel markieren",
     "content_type": {
-      "plain_text": "Nur Text"
+      "text/plain": "Nur Text"
     },
     "content_warning": "Betreff (optional)",
     "default": "Sitze gerade im Hofbräuhaus.",

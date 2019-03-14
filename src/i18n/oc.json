@@ -71,7 +71,7 @@
     "account_not_locked_warning_link": "clavat",
     "attachments_sensitive": "Marcar las pèças juntas coma sensiblas",
     "content_type": {
-      "plain_text": "Tèxte brut"
+      "text/plain": "Tèxte brut"
     },
     "content_warning": "Avís de contengut (opcional)",
     "default": "Escrivètz aquí vòstre estatut.",

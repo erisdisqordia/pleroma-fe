@@ -71,7 +71,7 @@
     "account_not_locked_warning_link": "uzamčen",
     "attachments_sensitive": "Označovat přílohy jako citlivé",
     "content_type": {
-      "plain_text": "Prostý text",
+      "text/plain": "Prostý text",
       "text/html": "HTML",
       "text/markdown": "Markdown"
     },

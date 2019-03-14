@@ -198,6 +198,7 @@ const getNodeInfo = async ({ store }) => {
       store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
 
       store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
+      store.dispatch('setInstanceOption', { name: 'postFormats', value: metadata.postFormats })
 
       const suggestions = metadata.suggestions
       store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })

@@ -275,7 +275,7 @@ export const parseNotification = (data) => {
     output.status = output.type === 'follow'
       ? parseFollow(data)
       : parseStatus(data.status)
-    if (data.type === 'reblog') {
+    if (data.type === 'reblog' || data.type === 'favourite') {
       output.status.user = parseUser(data.account)
       output.status.created_at = new Date(data.created_at)
     }

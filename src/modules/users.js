@@ -133,7 +133,14 @@ export const mutations = {
 }
 
 export const getters = {
-  findUser: state => query => state.usersObject[typeof query === 'string' ? query.toLowerCase() : query]
+  findUser: state => query => {
+    const result = state.usersObject[query]
+    // In case it's a screen_name, we can try searching case-insensitive
+    if (!result && typeof query === 'string') {
+      return state.usersObject[query.toLowerCase()]
+    }
+    return result
+  }
 }
 
 export const defaultState = {

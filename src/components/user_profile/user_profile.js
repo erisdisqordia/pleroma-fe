@@ -68,7 +68,8 @@ const UserProfile = {
     },
     userInStore () {
       const routeParams = this.$route.params
-      return this.$store.getters.findUser(routeParams.name || routeParams.id)
+      // This needs fetchedUserId so that computed will be refreshed when user is fetched
+      return this.$store.getters.findUser(this.fetchedUserId || routeParams.name || routeParams.id)
     },
     user () {
       if (this.timeline.statuses[0]) {

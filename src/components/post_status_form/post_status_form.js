@@ -292,7 +292,7 @@ const PostStatusForm = {
       this.submitDisabled = false
     },
     type (fileInfo) {
-      return fileTypeService.fileType(fileInfo.mimetype)
+      return fileTypeService.fileType(fileInfo.pleroma.mime_type)
     },
     paste (e) {
       if (e.clipboardData.files.length > 0) {

@@ -15,6 +15,9 @@ export default {
       betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
+  created () {
+    this.$store.dispatch('fetchUserRelationship', this.user.id)
+  },
   computed: {
     classes () {
       return [{

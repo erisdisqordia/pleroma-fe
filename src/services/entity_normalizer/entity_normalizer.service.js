@@ -39,10 +39,10 @@ export const parseUser = (data) => {
       return output
     }
 
-    output.name = null // missing
+    // output.name = ??? missing
     output.name_html = data.display_name
 
-    output.description = null // missing
+    // output.description = ??? missing
     output.description_html = data.note
 
     // Utilize avatar_static for gif avatars?
@@ -59,10 +59,14 @@ export const parseUser = (data) => {
     output.statusnet_profile_url = data.url
 
     if (data.pleroma) {
-      const pleroma = data.pleroma
-      output.follows_you = pleroma.follows_you
-      output.statusnet_blocking = pleroma.statusnet_blocking
-      output.muted = pleroma.muted
+      const relationship = data.pleroma.relationship
+
+      if (relationship) {
+        output.follows_you = relationship.followed_by
+        output.following = relationship.following
+        output.statusnet_blocking = relationship.blocking
+        output.muted = relationship.muting
+      }
     }
 
     // TODO: handle is_local
@@ -83,7 +87,7 @@ export const parseUser = (data) => {
 
     output.friends_count = data.friends_count
 
-    output.bot = null // missing
+    // output.bot = ??? missing
 
     output.statusnet_profile_url = data.statusnet_profile_url
 
@@ -134,7 +138,7 @@ const parseAttachment = (data) => {
     output.meta = data.meta // not present in BE yet
   } else {
     output.mimetype = data.mimetype
-    output.meta = null // missing
+    // output.meta = ??? missing
   }
 
   output.url = data.url
@@ -166,7 +170,7 @@ export const parseStatus = (data) => {
     output.in_reply_to_user_id = data.in_reply_to_account_id
 
     // Missing!! fix in UI?
-    output.in_reply_to_screen_name = null
+    // output.in_reply_to_screen_name = ???
 
     // Not exactly the same but works
     output.statusnet_conversation_id = data.id
@@ -178,8 +182,6 @@ export const parseStatus = (data) => {
     output.summary = data.spoiler_text
     output.summary_html = data.spoiler_text
     output.external_url = data.url
-
-    // TODO: handle is_local
     output.is_local = data.pleroma.local
   } else {
     output.favorited = data.favorited
@@ -271,6 +273,7 @@ export const parseNotification = (data) => {
 
   if (masto) {
     output.type = mastoDict[data.type] || data.type
+
     output.seen = null // missing
     output.status = output.type === 'follow'
       ? parseFollow(data)

@@ -61,7 +61,7 @@
     "account_not_locked_warning_link": "ロックされたアカウント",
     "attachments_sensitive": "ファイルをNSFWにする",
     "content_type": {
-      "plain_text": "プレーンテキスト"
+      "text/plain": "プレーンテキスト"
     },
     "content_warning": "せつめい (かかなくてもよい)",
     "default": "はねだくうこうに、つきました。",

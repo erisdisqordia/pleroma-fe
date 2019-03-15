@@ -180,7 +180,7 @@ export const parseStatus = (data) => {
     output.external_url = data.url
 
     // TODO: handle is_local
-    output.is_local = true
+    output.is_local = data.pleroma.local
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num

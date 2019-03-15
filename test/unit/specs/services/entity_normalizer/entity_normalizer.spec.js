@@ -129,7 +129,10 @@ const makeMockStatusMasto = (overrides = {}) => {
     tags: [],
     uri: 'https://shigusegubu.club/objects/16033fbb-97c0-4f0e-b834-7abb92fb8639',
     url: 'https://shigusegubu.club/objects/16033fbb-97c0-4f0e-b834-7abb92fb8639',
-    visibility: 'public'
+    visibility: 'public',
+    pleroma: {
+      local: true
+    }
   }, overrides)
 }
 

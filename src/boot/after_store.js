@@ -212,6 +212,16 @@ const getNodeInfo = async ({ store }) => {
 }
 
 const afterStoreSetup = async ({ store, i18n }) => {
+  if (store.state.config.customTheme) {
+    // This is a hack to deal with async loading of config.json and themes
+    // See: style_setter.js, setPreset()
+    window.themeLoaded = true
+    store.dispatch('setOption', {
+      name: 'customTheme',
+      value: store.state.config.customTheme
+    })
+  }
+
   const apiConfig = await getStatusnetConfig({ store })
   const staticConfig = await getStaticConfig()
   await setSettings({ store, apiConfig, staticConfig })

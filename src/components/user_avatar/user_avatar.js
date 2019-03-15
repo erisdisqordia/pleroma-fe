@@ -23,6 +23,11 @@ const UserAvatar = {
     imageLoadError () {
       this.showPlaceholder = true
     }
+  },
+  watch: {
+    src () {
+      this.showPlaceholder = false
+    }
   }
 }
 

@@ -110,11 +110,11 @@ const UserSettings = {
   },
   methods: {
     updateProfile () {
-      const name = this.newName
-      const description = this.newBio
+      const note = this.newBio
       const locked = this.newLocked
       // Backend notation.
       /* eslint-disable camelcase */
+      const display_name = this.newName
       const default_scope = this.newDefaultScope
       const no_rich_text = this.newNoRichText
       const hide_follows = this.hideFollows
@@ -125,8 +125,8 @@ const UserSettings = {
       this.$store.state.api.backendInteractor
         .updateProfile({
           params: {
-            name,
-            description,
+            display_name,
+            note,
             locked,
             // Backend notation.
             /* eslint-disable camelcase */
@@ -137,10 +137,8 @@ const UserSettings = {
             show_role
             /* eslint-enable camelcase */
           }}).then((user) => {
-            if (!user.error) {
-              this.$store.commit('addNewUsers', [user])
-              this.$store.commit('setCurrentUser', user)
-            }
+            this.$store.commit('addNewUsers', [user])
+            this.$store.commit('setCurrentUser', user)
           })
     },
     changeVis (visibility) {

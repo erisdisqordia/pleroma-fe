@@ -4,7 +4,6 @@ const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const REGISTRATION_URL = '/api/account/register.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
-const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
@@ -126,9 +125,7 @@ const updateBanner = ({credentials, banner}) => {
 // description
 const updateProfile = ({credentials, params}) => {
   // Always include these fields, because they might be empty or false
-  const fields = ['description', 'locked', 'no_rich_text', 'hide_follows', 'hide_followers', 'show_role']
-  let url = PROFILE_UPDATE_URL
-
+  const fields = ['note', 'locked', 'no_rich_text', 'hide_follows', 'hide_followers', 'show_role']
   const form = new FormData()
 
   each(params, (value, key) => {
@@ -136,11 +133,13 @@ const updateProfile = ({credentials, params}) => {
       form.append(key, value)
     }
   })
-  return fetch(url, {
+  return fetch(MASTODON_PROFILE_UPDATE_URL, {
     headers: authHeaders(credentials),
-    method: 'POST',
+    method: 'PATCH',
     body: form
-  }).then((data) => data.json())
+  })
+  .then((data) => data.json())
+  .then((data) => parseUser(data))
 }
 
 // Params needed:

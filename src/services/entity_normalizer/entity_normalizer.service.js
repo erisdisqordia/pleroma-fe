@@ -40,10 +40,10 @@ export const parseUser = (data) => {
     }
 
     // output.name = ??? missing
-    output.name_html = data.display_name
+    output.name_html = addEmojis(data.display_name, data.emojis)
 
     // output.description = ??? missing
-    output.description_html = data.note
+    output.description_html = addEmojis(data.note, data.emojis)
 
     // Utilize avatar_static for gif avatars?
     output.profile_image_url = data.avatar
@@ -146,6 +146,14 @@ const parseAttachment = (data) => {
 
   return output
 }
+export const addEmojis = (string, emojis) => {
+  return emojis.reduce((acc, emoji) => {
+    return acc.replace(
+      new RegExp(`:${emoji.shortcode}:`, 'g'),
+      `<img src='${emoji.url}' alt='${emoji.shortcode}' class='emoji' />`
+    )
+  }, string)
+}
 
 export const parseStatus = (data) => {
   const output = {}
@@ -161,7 +169,7 @@ export const parseStatus = (data) => {
     output.type = data.reblog ? 'retweet' : 'status'
     output.nsfw = data.sensitive
 
-    output.statusnet_html = data.content
+    output.statusnet_html = addEmojis(data.content, data.emojis)
 
     // Not exactly the same but works?
     output.text = data.content
@@ -180,7 +188,7 @@ export const parseStatus = (data) => {
     }
 
     output.summary = data.spoiler_text
-    output.summary_html = data.spoiler_text
+    output.summary_html = addEmojis(data.spoiler_text, data.emojis)
     output.external_url = data.url
 
     // output.is_local = ??? missing

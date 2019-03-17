@@ -49,7 +49,7 @@
     "account_not_locked_warning_link": "נעול",
     "attachments_sensitive": "סמן מסמכים מצורפים כלא בטוחים לצפייה",
     "content_type": {
-      "plain_text": "טקסט פשוט"
+      "text/plain": "טקסט פשוט"
     },
     "content_warning": "נושא (נתון לבחירה)",
     "default": "הרגע נחת ב-ל.א.",

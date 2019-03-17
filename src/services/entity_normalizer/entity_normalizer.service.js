@@ -39,11 +39,11 @@ export const parseUser = (data) => {
       return output
     }
 
-    output.name = null // missing
-    output.name_html = addEmojis(data.display_name, data.emojis)
+    // output.name = ??? missing
+    output.name_html = data.display_name
 
-    output.description = null // missing
-    output.description_html = addEmojis(data.note, data.emojis)
+    // output.description = ??? missing
+    output.description_html = data.note
 
     // Utilize avatar_static for gif avatars?
     output.profile_image_url = data.avatar
@@ -59,10 +59,14 @@ export const parseUser = (data) => {
     output.statusnet_profile_url = data.url
 
     if (data.pleroma) {
-      const pleroma = data.pleroma
-      output.follows_you = pleroma.follows_you
-      output.statusnet_blocking = pleroma.statusnet_blocking
-      output.muted = pleroma.muted
+      const relationship = data.pleroma.relationship
+
+      if (relationship) {
+        output.follows_you = relationship.followed_by
+        output.following = relationship.following
+        output.statusnet_blocking = relationship.blocking
+        output.muted = relationship.muting
+      }
     }
 
     // Missing, trying to recover
@@ -83,7 +87,7 @@ export const parseUser = (data) => {
 
     output.friends_count = data.friends_count
 
-    output.bot = null // missing
+    // output.bot = ??? missing
 
     output.statusnet_profile_url = data.statusnet_profile_url
 
@@ -134,7 +138,7 @@ const parseAttachment = (data) => {
     output.meta = data.meta // not present in BE yet
   } else {
     output.mimetype = data.mimetype
-    output.meta = null // missing
+    // output.meta = ??? missing
   }
 
   output.url = data.url
@@ -174,7 +178,7 @@ export const parseStatus = (data) => {
     output.in_reply_to_user_id = data.in_reply_to_account_id
 
     // Missing!! fix in UI?
-    output.in_reply_to_screen_name = null
+    // output.in_reply_to_screen_name = ???
 
     // Not exactly the same but works
     output.statusnet_conversation_id = data.id
@@ -187,8 +191,7 @@ export const parseStatus = (data) => {
     output.summary_html = addEmojis(data.spoiler_text, data.emojis)
     output.external_url = data.url
 
-    // FIXME missing!!
-    output.is_local = false
+    // output.is_local = ??? missing
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num
@@ -267,7 +270,7 @@ export const parseNotification = (data) => {
 
   if (masto) {
     output.type = mastoDict[data.type] || data.type
-    output.seen = null // missing
+    // output.seen = ??? missing
     output.status = parseStatus(data.status)
     output.action = output.status // not sure
     output.from_profile = parseUser(data.account)

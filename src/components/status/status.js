@@ -145,11 +145,11 @@ const Status = {
       return !!(this.status.in_reply_to_status_id && this.status.in_reply_to_user_id)
     },
     replyToName () {
-      const user = this.$store.state.users.usersObject[this.status.in_reply_to_user_id]
-      if (user) {
-        return user.screen_name
-      } else {
+      if (this.status.in_reply_to_screen_name) {
         return this.status.in_reply_to_screen_name
+      } else {
+        const user = this.$store.getters.findUser(this.status.in_reply_to_user_id)
+        return user && user.screen_name
       }
     },
     hideReply () {

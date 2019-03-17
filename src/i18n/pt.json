@@ -71,7 +71,7 @@
     "account_not_locked_warning_link": "fechada",
     "attachments_sensitive": "Marcar anexos como sensíveis",
     "content_type": {
-      "plain_text": "Texto puro"
+      "text/plain": "Texto puro"
     },
     "content_warning": "Assunto (opcional)",
     "default": "Acabei de chegar no Rio!",

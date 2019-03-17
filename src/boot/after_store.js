@@ -4,10 +4,11 @@ import routes from './routes'
 
 import App from '../App.vue'
 
-const afterStoreSetup = ({ store, i18n }) => {
-  window.fetch('/api/statusnet/config.json')
-    .then((res) => res.json())
-    .then((data) => {
+const getStatusnetConfig = async ({ store }) => {
+  try {
+    const res = await window.fetch('/api/statusnet/config.json')
+    if (res.ok) {
+      const data = await res.json()
       const { name, closed: registrationClosed, textlimit, uploadlimit, server, vapidPublicKey } = data.site
 
       store.dispatch('setInstanceOption', { name: 'name', value: name })
@@ -28,140 +29,167 @@ const afterStoreSetup = ({ store, i18n }) => {
         store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })
       }
 
-      var apiConfig = data.site.pleromafe
+      return data.site.pleromafe
+    } else {
+      throw (res)
+    }
+  } catch (error) {
+    console.error('Could not load statusnet config, potentially fatal')
+    console.error(error)
+  }
+}
 
-      window.fetch('/static/config.json')
-        .then((res) => res.json())
-        .catch((err) => {
-          console.warn('Failed to load static/config.json, continuing without it.')
-          console.warn(err)
-          return {}
-        })
-        .then((staticConfig) => {
-          const overrides = window.___pleromafe_dev_overrides || {}
-          const env = window.___pleromafe_mode.NODE_ENV
+const getStaticConfig = async () => {
+  try {
+    const res = await window.fetch('/static/config.json')
+    if (res.ok) {
+      return res.json()
+    } else {
+      throw (res)
+    }
+  } catch (error) {
+    console.warn('Failed to load static/config.json, continuing without it.')
+    console.warn(error)
+    return {}
+  }
+}
 
-          // This takes static config and overrides properties that are present in apiConfig
-          let config = {}
-          if (overrides.staticConfigPreference && env === 'development') {
-            console.warn('OVERRIDING API CONFIG WITH STATIC CONFIG')
-            config = Object.assign({}, apiConfig, staticConfig)
-          } else {
-            config = Object.assign({}, staticConfig, apiConfig)
-          }
+const setSettings = async ({ apiConfig, staticConfig, store }) => {
+  const overrides = window.___pleromafe_dev_overrides || {}
+  const env = window.___pleromafe_mode.NODE_ENV
 
-          const copyInstanceOption = (name) => {
-            store.dispatch('setInstanceOption', {name, value: config[name]})
-          }
+  // This takes static config and overrides properties that are present in apiConfig
+  let config = {}
+  if (overrides.staticConfigPreference && env === 'development') {
+    console.warn('OVERRIDING API CONFIG WITH STATIC CONFIG')
+    config = Object.assign({}, apiConfig, staticConfig)
+  } else {
+    config = Object.assign({}, staticConfig, apiConfig)
+  }
 
-          copyInstanceOption('nsfwCensorImage')
-          copyInstanceOption('background')
-          copyInstanceOption('hidePostStats')
-          copyInstanceOption('hideUserStats')
-          copyInstanceOption('hideFilteredStatuses')
-          copyInstanceOption('logo')
+  const copyInstanceOption = (name) => {
+    store.dispatch('setInstanceOption', { name, value: config[name] })
+  }
 
-          store.dispatch('setInstanceOption', {
-            name: 'logoMask',
-            value: typeof config.logoMask === 'undefined'
-              ? true
-              : config.logoMask
-          })
+  copyInstanceOption('nsfwCensorImage')
+  copyInstanceOption('background')
+  copyInstanceOption('hidePostStats')
+  copyInstanceOption('hideUserStats')
+  copyInstanceOption('hideFilteredStatuses')
+  copyInstanceOption('logo')
 
-          store.dispatch('setInstanceOption', {
-            name: 'logoMargin',
-            value: typeof config.logoMargin === 'undefined'
-              ? 0
-              : config.logoMargin
-          })
+  store.dispatch('setInstanceOption', {
+    name: 'logoMask',
+    value: typeof config.logoMask === 'undefined'
+      ? true
+      : config.logoMask
+  })
 
-          copyInstanceOption('redirectRootNoLogin')
-          copyInstanceOption('redirectRootLogin')
-          copyInstanceOption('showInstanceSpecificPanel')
-          copyInstanceOption('scopeOptionsEnabled')
-          copyInstanceOption('formattingOptionsEnabled')
-          copyInstanceOption('collapseMessageWithSubject')
-          copyInstanceOption('loginMethod')
-          copyInstanceOption('scopeCopy')
-          copyInstanceOption('subjectLineBehavior')
-          copyInstanceOption('postContentType')
-          copyInstanceOption('alwaysShowSubjectInput')
-          copyInstanceOption('noAttachmentLinks')
-          copyInstanceOption('showFeaturesPanel')
+  store.dispatch('setInstanceOption', {
+    name: 'logoMargin',
+    value: typeof config.logoMargin === 'undefined'
+      ? 0
+      : config.logoMargin
+  })
 
-          if ((config.chatDisabled)) {
-            store.dispatch('disableChat')
-          } else {
-            store.dispatch('initializeSocket')
-          }
+  copyInstanceOption('redirectRootNoLogin')
+  copyInstanceOption('redirectRootLogin')
+  copyInstanceOption('showInstanceSpecificPanel')
+  copyInstanceOption('scopeOptionsEnabled')
+  copyInstanceOption('formattingOptionsEnabled')
+  copyInstanceOption('collapseMessageWithSubject')
+  copyInstanceOption('loginMethod')
+  copyInstanceOption('scopeCopy')
+  copyInstanceOption('subjectLineBehavior')
+  copyInstanceOption('postContentType')
+  copyInstanceOption('alwaysShowSubjectInput')
+  copyInstanceOption('noAttachmentLinks')
+  copyInstanceOption('showFeaturesPanel')
 
-          return store.dispatch('setTheme', config['theme'])
-        })
-        .then(() => {
-          const router = new VueRouter({
-            mode: 'history',
-            routes: routes(store),
-            scrollBehavior: (to, _from, savedPosition) => {
-              if (to.matched.some(m => m.meta.dontScroll)) {
-                return false
-              }
-              return savedPosition || { x: 0, y: 0 }
-            }
-          })
+  if ((config.chatDisabled)) {
+    store.dispatch('disableChat')
+  } else {
+    store.dispatch('initializeSocket')
+  }
 
-          /* eslint-disable no-new */
-          new Vue({
-            router,
-            store,
-            i18n,
-            el: '#app',
-            render: h => h(App)
-          })
-        })
-    })
+  return store.dispatch('setTheme', config['theme'])
+}
 
-  window.fetch('/static/terms-of-service.html')
-    .then((res) => res.text())
-    .then((html) => {
+const getTOS = async ({ store }) => {
+  try {
+    const res = await window.fetch('/static/terms-of-service.html')
+    if (res.ok) {
+      const html = await res.text()
       store.dispatch('setInstanceOption', { name: 'tos', value: html })
-    })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load TOS")
+    console.warn(e)
+  }
+}
 
-  window.fetch('/api/pleroma/emoji.json')
-    .then(
-      (res) => res.json()
-        .then(
-          (values) => {
-            const emoji = Object.keys(values).map((key) => {
-              return { shortcode: key, image_url: values[key] }
-            })
-            store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
-            store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })
-          },
-          (failure) => {
-            store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: false })
-          }
-        ),
-      (error) => console.log(error)
-    )
+const getInstancePanel = async ({ store }) => {
+  try {
+    const res = await window.fetch('/instance/panel.html')
+    if (res.ok) {
+      const html = await res.text()
+      store.dispatch('setInstanceOption', { name: 'instanceSpecificPanelContent', value: html })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load instance panel")
+    console.warn(e)
+  }
+}
 
-  window.fetch('/static/emoji.json')
-    .then((res) => res.json())
-    .then((values) => {
+const getStaticEmoji = async ({ store }) => {
+  try {
+    const res = await window.fetch('/static/emoji.json')
+    if (res.ok) {
+      const values = await res.json()
       const emoji = Object.keys(values).map((key) => {
         return { shortcode: key, image_url: false, 'utf': values[key] }
       })
       store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
-    })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load static emoji")
+    console.warn(e)
+  }
+}
 
-  window.fetch('/instance/panel.html')
-    .then((res) => res.text())
-    .then((html) => {
-      store.dispatch('setInstanceOption', { name: 'instanceSpecificPanelContent', value: html })
-    })
+// This is also used to indicate if we have a 'pleroma backend' or not.
+// Somewhat weird, should probably be somewhere else.
+const getCustomEmoji = async ({ store }) => {
+  try {
+    const res = await window.fetch('/api/pleroma/emoji.json')
+    if (res.ok) {
+      const values = await res.json()
+      const emoji = Object.keys(values).map((key) => {
+        return { shortcode: key, image_url: values[key] }
+      })
+      store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
+      store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: false })
+    console.warn("Can't load custom emojis, maybe not a Pleroma instance?")
+    console.warn(e)
+  }
+}
 
-  window.fetch('/nodeinfo/2.0.json')
-    .then((res) => res.json())
-    .then((data) => {
+const getNodeInfo = async ({ store }) => {
+  try {
+    const res = await window.fetch('/nodeinfo/2.0.json')
+    if (res.ok) {
+      const data = await res.json()
       const metadata = data.metadata
 
       const features = metadata.features
@@ -169,14 +197,65 @@ const afterStoreSetup = ({ store, i18n }) => {
       store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
       store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
 
-      store.dispatch('setInstanceOption', { name: 'postFormats', value: metadata.postFormats })
-
       store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
+      store.dispatch('setInstanceOption', { name: 'postFormats', value: metadata.postFormats })
 
       const suggestions = metadata.suggestions
       store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
       store.dispatch('setInstanceOption', { name: 'suggestionsWeb', value: suggestions.web })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn('Could not load nodeinfo')
+    console.warn(e)
+  }
+}
+
+const afterStoreSetup = async ({ store, i18n }) => {
+  if (store.state.config.customTheme) {
+    // This is a hack to deal with async loading of config.json and themes
+    // See: style_setter.js, setPreset()
+    window.themeLoaded = true
+    store.dispatch('setOption', {
+      name: 'customTheme',
+      value: store.state.config.customTheme
     })
+  }
+
+  const apiConfig = await getStatusnetConfig({ store })
+  const staticConfig = await getStaticConfig()
+  await setSettings({ store, apiConfig, staticConfig })
+  await getTOS({ store })
+  await getInstancePanel({ store })
+  await getStaticEmoji({ store })
+  await getCustomEmoji({ store })
+  await getNodeInfo({ store })
+
+  // Now we have the server settings and can try logging in
+  if (store.state.oauth.token) {
+    store.dispatch('loginUser', store.state.oauth.token)
+  }
+
+  const router = new VueRouter({
+    mode: 'history',
+    routes: routes(store),
+    scrollBehavior: (to, _from, savedPosition) => {
+      if (to.matched.some(m => m.meta.dontScroll)) {
+        return false
+      }
+      return savedPosition || { x: 0, y: 0 }
+    }
+  })
+
+  /* eslint-disable no-new */
+  return new Vue({
+    router,
+    store,
+    i18n,
+    el: '#app',
+    render: h => h(App)
+  })
 }
 
 export default afterStoreSetup

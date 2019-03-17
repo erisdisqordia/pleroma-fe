@@ -251,13 +251,12 @@ export const parseStatus = (data) => {
   return output
 }
 
+// This is for masto API only.
 export const parseFollow = (data) => {
   const output = {}
   output.id = String(data.id)
   output.visibility = true
   output.created_at = new Date(data.created_at)
-
-  // Converting to string, the right way.
   output.user = parseUser(data.account)
 
   return output
@@ -273,8 +272,7 @@ export const parseNotification = (data) => {
 
   if (masto) {
     output.type = mastoDict[data.type] || data.type
-
-    output.seen = null // missing
+    // output.seen = ??? missing
     output.status = output.type === 'follow'
       ? parseFollow(data)
       : parseStatus(data.status)

@@ -280,7 +280,7 @@ export const parseNotification = (data) => {
 
   if (masto) {
     output.type = mastoDict[data.type] || data.type
-    // output.seen = ??? missing
+    output.seen = data.pleroma.is_seen
     output.status = output.type === 'follow'
       ? parseFollow(data)
       : parseStatus(data.status)

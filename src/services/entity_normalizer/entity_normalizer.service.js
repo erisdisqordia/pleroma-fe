@@ -133,7 +133,8 @@ export const parseAttachment = (data) => {
   const masto = !data.hasOwnProperty('oembed')
 
   if (masto) {
-    output.mimetype = data.pleroma.mime_type
+    // Not exactly same...
+    output.mimetype = data.pleroma ? data.pleroma.mime_type : data.type
     output.meta = data.meta // not present in BE yet
   } else {
     output.mimetype = data.mimetype

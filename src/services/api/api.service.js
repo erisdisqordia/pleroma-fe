@@ -48,7 +48,7 @@ const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
 const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 
 import { each, map } from 'lodash'
-import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
+import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
 import { StatusCodeError } from '../errors/errors'
 
@@ -439,7 +439,7 @@ const unretweet = ({ id, credentials }) => {
   })
 }
 
-const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType}) => {
+const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds = [], inReplyToStatusId, contentType}) => {
   const form = new FormData()
 
   form.append('status', status)
@@ -448,11 +448,9 @@ const postStatus = ({credentials, status, spoilerText, visibility, sensitive, me
   if (visibility) form.append('visibility', visibility)
   if (sensitive) form.append('sensitive', sensitive)
   if (contentType) form.append('content_type', contentType)
-  if (mediaIds) {
-    mediaIds.forEach(val => {
-      form.append('media_ids[]', val)
-    })
-  }
+  mediaIds.forEach(val => {
+    form.append('media_ids[]', val)
+  })
   if (inReplyToStatusId) {
     form.append('in_reply_to_id', inReplyToStatusId)
   }
@@ -487,7 +485,8 @@ const uploadMedia = ({formData, credentials}) => {
     method: 'POST',
     headers: authHeaders(credentials)
   })
-    .then((response) => response.json())
+    .then((data) => data.json())
+    .then((data) => parseAttachment(data))
 }
 
 const followImport = ({params, credentials}) => {

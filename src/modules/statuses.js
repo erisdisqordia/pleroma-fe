@@ -271,7 +271,12 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 }
 
 const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes }) => {
+  const allStatuses = state.allStatuses
+  const allStatusesObject = state.allStatusesObject
   each(notifications, (notification) => {
+    notification.action = mergeOrAdd(allStatuses, allStatusesObject, notification.action).item
+    notification.status = notification.status && mergeOrAdd(allStatuses, allStatusesObject, notification.status).item
+
     // Only add a new notification if we don't have one for the same action
     if (!state.notifications.idStore.hasOwnProperty(notification.id)) {
       state.notifications.maxId = notification.id > state.notifications.maxId

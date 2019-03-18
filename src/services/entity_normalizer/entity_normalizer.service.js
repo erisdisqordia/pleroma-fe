@@ -180,8 +180,8 @@ export const parseStatus = (data) => {
     // Missing!! fix in UI?
     // output.in_reply_to_screen_name = ???
 
-    // Not exactly the same but works
-    output.statusnet_conversation_id = data.id
+    // It breaks the conversation when combined with notification
+    // output.statusnet_conversation_id = data.id
 
     if (output.type === 'retweet') {
       output.retweeted_status = parseStatus(data.reblog)
@@ -218,7 +218,6 @@ export const parseStatus = (data) => {
     output.in_reply_to_status_id = data.in_reply_to_status_id
     output.in_reply_to_user_id = data.in_reply_to_user_id
     output.in_reply_to_screen_name = data.in_reply_to_screen_name
-
     output.statusnet_conversation_id = data.statusnet_conversation_id
 
     if (output.type === 'retweet') {
@@ -266,6 +265,8 @@ export const parseFollow = (data) => {
   output.visibility = true
   output.created_at = new Date(data.created_at)
   output.user = parseUser(data.account)
+  output.notified_at = output.created_at
+  output.account = output.user
 
   return output
 }
@@ -286,7 +287,8 @@ export const parseNotification = (data) => {
       : parseStatus(data.status)
     if (data.type === 'reblog' || data.type === 'favourite') {
       output.status.user = parseUser(data.account)
-      output.status.created_at = new Date(data.created_at)
+      output.status.account = parseUser(data.account)
+      output.status.notified_at = new Date(data.created_at)
     }
     output.action = output.status // not sure
     output.from_profile = parseUser(data.account)

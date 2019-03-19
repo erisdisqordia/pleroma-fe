@@ -25,6 +25,7 @@
   "image_cropper": {
     "crop_picture": "Crop picture",
     "save": "Save",
+    "save_without_cropping": "Save without cropping",
     "cancel": "Cancel"
   },
   "login": {

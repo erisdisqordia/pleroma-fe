@@ -13,8 +13,6 @@
 <script src="./remote_follow.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
-
 .remote-follow {
   max-width: 220px;
 

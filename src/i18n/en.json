@@ -460,7 +460,7 @@
     "forward_description": "The account is from another server. Send an anonymized copy of the report there as well?",
     "forward_to": "Forward to {0}",
     "submit": "Submit",
-    "generic_error": "An error occured processing your request."
+    "generic_error": "An error occurred while processing your request."
   },
   "who_to_follow": {
     "more": "More",

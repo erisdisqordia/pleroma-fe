@@ -90,6 +90,7 @@
 
     .alert {
       margin: 1em 0 0 0;
+      line-height: 1.3em;
     }
   }
 

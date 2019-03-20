@@ -1,26 +1,30 @@
 <template>
   <nav class='nav-bar container asd' id="nav">
-    <div class='inner-nav mobile-inner-nav' @click="scrollToTop()" :class="{ 'shifted': notificationsOpen }">
+    <div class='mobile-inner-nav' @click="scrollToTop()">
       <div class='item'>
-        <a href="#" class="menu-button" @click.stop.prevent="toggleMobileSidebar()">
+        <a href="#" class="mobile-nav-button" @click.stop.prevent="toggleMobileSidebar()">
           <i class="button-icon icon-menu"></i>
         </a>
         <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
       </div>
       <div class='item right'>
-        <a v-if="currentUser" href="#" class="menu-button" @click.stop.prevent="toggleMobileNotifications()">
+        <a class="mobile-nav-button" v-if="currentUser" href="#" @click.stop.prevent="toggleMobileNotifications()">
           <i class="button-icon icon-bell-alt"></i>
           <div class="alert-dot" v-if="unseenNotificationsCount"></div>
         </a>
       </div>
-      <div class="mobile-notifications-header">
-        <span>{{$t('notifications.notifications')}}</span>
-        <i class="icon-cancel" @click.stop.prevent="toggleMobileNotifications()"/>
-      </div>
     </div>
     <SideDrawer ref="sideDrawer" :logout="logout"/>
-    <div v-if="currentUser" class="mobile-notifications" :class="{ 'closed': !notificationsOpen }">
-      <Notifications ref="notifications" noHeading="true"/>
+    <div v-if="currentUser" class="mobile-notifications-drawer" :class="{ 'closed': !notificationsOpen }">
+      <div class="mobile-notifications-header">
+        <span class="title">{{$t('notifications.notifications')}}</span>
+        <a class="mobile-nav-button" @click.stop.prevent="toggleMobileNotifications()">
+          <i class="button-icon icon-cancel"/>
+        </a>
+      </div>
+      <div v-if="currentUser" class="mobile-notifications">
+        <Notifications ref="notifications" noHeading="true"/>
+      </div>
     </div>
     <MobilePostStatusModal />
   </nav>
@@ -32,29 +36,17 @@
 @import '../../_variables.scss';
 
 .mobile-inner-nav {
-  transition: transform 0.25s;
-  &.shifted {
-    transform: translateX(-100%);
-  }
-}
-
-.mobile-notifications-header {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: calc(100% - 1.6em);
-  height: 100%;
-  margin: 0 0.8em 0 0.8em;
-  position: absolute;
-  font-size: 1.3em;
-  color: $fallback--text;
-  color: var(--text, $fallback--text);
-  top: 0;
-  left: 100%;
 }
 
-.menu-button {
+.mobile-nav-button {
+  display: flex;
+  justify-content: center;
+  width: 50px;
   position: relative;
+  cursor: pointer;
 }
 
 .alert-dot {
@@ -70,17 +62,51 @@
   background-color: var(--badgeNotification, $fallback--cRed);
 }
 
-.mobile-notifications {
-  position: fixed;
-  width: 100vw;
-  height: calc(100vh - 50px);
-  top: 50px;
-  left: 0;
+.mobile-notifications-drawer {
+  width: 100%;
+  height: 100vh;
   overflow-x: hidden;
-  overflow-y: scroll;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 1px 1px 4px rgba(0,0,0,.6);
+  box-shadow: var(--panelShadow);
   transition-property: transform;
   transition-duration: 0.25s;
-  transform: translate(0);
+  transform: translateX(0);
+
+  &.closed {
+    transform: translateX(100%);
+  }
+}
+
+.mobile-notifications-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  position: absolute;
+  color: var(--topBarText);
+  background-color: $fallback--fg;
+  background-color: var(--topBar, $fallback--fg);
+  box-shadow: 0px 0px 4px rgba(0,0,0,.6);
+  box-shadow: var(--topBarShadow);
+
+  .title {
+    font-size: 1.3em;
+    margin-left: 0.6em;
+  }
+}
+
+.mobile-notifications {
+  margin-top: 50px;
+  width: 100vw;
+  height: calc(100vh - 50px);
+  overflow-x: hidden;
+  overflow-y: scroll;
 
   color: $fallback--text;
   color: var(--text, $fallback--text);
@@ -88,7 +114,6 @@
   background-color: var(--bg, $fallback--bg);
 
   .notifications {
-    margin: 0;
     padding: 0;
     border-radius: 0;
     box-shadow: none;
@@ -104,10 +129,6 @@
       border-radius: 0;
       box-shadow: none;
     }
-  }
-
-  &.closed {
-    transform: translate(100%);
   }
 }
 

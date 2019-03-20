@@ -724,21 +724,17 @@ const fetchRebloggedByUsers = ({id}) => {
 }
 
 const reportUser = ({credentials, userId, statusIds, comment, forward}) => {
-  const payload = {
-    'account_id': userId,
-    'status_ids': statusIds,
-    comment,
-    forward
-  }
-  return fetch(MASTODON_REPORT_USER_URL, {
-    body: JSON.stringify(payload),
-    headers: {
-      ...authHeaders(credentials),
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+  return promisedRequest({
+    uri: MASTODON_REPORT_USER_URL,
+    method: 'POST',
+    payload: {
+      'account_id': userId,
+      'status_ids': statusIds,
+      comment,
+      forward
     },
-    method: 'POST'
-  }).then((data) => data.json())
+    credentials
+  })
 }
 
 const apiService = {

@@ -12,7 +12,8 @@ const UserReportingModal = {
       comment: '',
       forward: false,
       statusIdsToReport: [],
-      processing: false
+      processing: false,
+      error: false
     }
   },
   computed: {
@@ -45,12 +46,14 @@ const UserReportingModal = {
       this.forward = false
       this.statusIdsToReport = []
       this.processing = false
+      this.error = false
     },
     closeModal () {
       this.$store.dispatch('closeUserReportingModal')
     },
     reportUser () {
       this.processing = true
+      this.error = false
       const params = {
         userId: this.userId,
         comment: this.comment,
@@ -63,6 +66,13 @@ const UserReportingModal = {
           this.resetState()
           this.closeModal()
         })
+        .catch(() => {
+          this.processing = false
+          this.error = true
+        })
+    },
+    clearError () {
+      this.error = false
     },
     isChecked (statusId) {
       return this.statusIdsToReport.indexOf(statusId) !== -1

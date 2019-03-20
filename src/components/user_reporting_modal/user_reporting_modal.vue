@@ -20,6 +20,9 @@
         </div>
         <div>
           <button class="btn btn-default" @click="reportUser" :disabled="processing">Submit</button>
+          <div class="alert error" v-if="error">
+            An error occured processing your request
+          </div>
         </div>
       </div>
       <div class="user-reporting-panel-right">
@@ -83,6 +86,10 @@
     .btn {
       min-width: 10em;
       padding: 0 2em;
+    }
+
+    .alert {
+      margin: 1em 0 0 0;
     }
   }
 

@@ -36,15 +36,16 @@ const UserReportingModal = {
     }
   },
   watch: {
-    userId (value) {
+    userId: 'resetState'
+  },
+  methods: {
+    resetState () {
       // Reset state
       this.comment = ''
       this.forward = false
       this.statusIdsToReport = []
       this.processing = false
-    }
-  },
-  methods: {
+    },
     closeModal () {
       this.$store.dispatch('closeUserReportingModal')
     },
@@ -59,6 +60,7 @@ const UserReportingModal = {
       this.$store.state.api.backendInteractor.reportUser(params)
         .then(() => {
           this.processing = false
+          this.resetState()
           this.closeModal()
         })
     },

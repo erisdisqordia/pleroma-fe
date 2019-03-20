@@ -50,6 +50,7 @@ const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 const MASTODON_STATUS_FAVORITEDBY_URL = id => `/api/v1/statuses/${id}/favourited_by`
 const MASTODON_STATUS_REBLOGGEDBY_URL = id => `/api/v1/statuses/${id}/reblogged_by`
 const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
+const MASTODON_REPORT_USER_URL = 'api/v1/reports'
 
 import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
@@ -722,6 +723,24 @@ const fetchRebloggedByUsers = ({id}) => {
   return promisedRequest(MASTODON_STATUS_REBLOGGEDBY_URL(id)).then((users) => users.map(parseUser))
 }
 
+const reportUser = ({credentials, userId, statusIds, comment, forward}) => {
+  const payload = {
+    'account_id': userId,
+    'status_ids': statusIds,
+    comment,
+    forward
+  }
+  return fetch(MASTODON_REPORT_USER_URL, {
+    body: JSON.stringify(payload),
+    headers: {
+      ...authHeaders(credentials),
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: 'POST'
+  }).then((data) => data.json())
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -773,7 +792,8 @@ const apiService = {
   suggestions,
   markNotificationsAsSeen,
   fetchFavoritedByUsers,
-  fetchRebloggedByUsers
+  fetchRebloggedByUsers,
+  reportUser
 }
 
 export default apiService

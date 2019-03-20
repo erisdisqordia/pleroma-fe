@@ -44,12 +44,12 @@ const UserReportingModal = {
       this.$store.dispatch('closeUserReportingModal')
     },
     reportUser () {
-      const payload = {
+      const params = {
         comment: this.comment,
         forward: this.forward,
-        statusIdsToReport: this.statusIdsToReport
+        statusIds: this.statusIdsToReport
       }
-      this.$store.dispatch('reportUser', payload)
+      this.$store.dispatch('reportUser', params)
     },
     isChecked (statusId) {
       return this.statusIdsToReport.indexOf(statusId) !== -1

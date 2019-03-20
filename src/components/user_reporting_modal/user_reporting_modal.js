@@ -36,6 +36,9 @@ const UserReportingModal = {
   },
   watch: {
     userId (value) {
+      // Reset state
+      this.comment = ''
+      this.forward = false
       this.statusIdsToReport = []
     }
   },

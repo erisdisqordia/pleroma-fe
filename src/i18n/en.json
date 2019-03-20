@@ -457,7 +457,7 @@
     "title": "Reporting {0}",
     "add_comment_description": "The report will be sent to your instance moderators. You can provide an explanation of why you are reporting this account below:",
     "additional_comments": "Additional comments",
-    "forward_description": "The account is from another server. Send an anonymized copy of the report there as well?",
+    "forward_description": "The account is from another server. Send a copy of the report there as well?",
     "forward_to": "Forward to {0}",
     "submit": "Submit",
     "generic_error": "An error occurred while processing your request."

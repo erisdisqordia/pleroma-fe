@@ -1,27 +1,27 @@
 <template>
 <div class="modal-view" @click="closeModal" v-if="isOpen">
   <div class="user-reporting-panel panel" @click.stop="">
-    <div class="panel-heading">Reporting {{user.screen_name}}</div>
+    <div class="panel-heading">{{$t('user_reporting.title', [user.screen_name])}}</div>
     <div class="panel-body">
       <div class="user-reporting-panel-left">
         <div>
-          <p>The report will be sent to your instance moderators. You can provide an explanation of why you are reporting this account below:</p>
+          <p>{{$t('user_reporting.add_comment_description')}}</p>
           <textarea
             v-model="comment"
             class="form-control"
-            placeholder="Additional comments"
+            :placeholder="$t('user_reporting.additional_comments')"
             rows="1"
             @input="resize"
           />
         </div>
         <div v-if="!user.is_local">
-          <p>The account is from another server. Send an anonymized copy of the report there as well?</p>
-          <Checkbox v-model="forward">Forward to {{remoteInstance}}</Checkbox>
+          <p>{{$t('user_reporting.forward_description')}}</p>
+          <Checkbox v-model="forward">{{$t('user_reporting.forward_to', [remoteInstance])}}</Checkbox>
         </div>
         <div>
-          <button class="btn btn-default" @click="reportUser" :disabled="processing">Submit</button>
+          <button class="btn btn-default" @click="reportUser" :disabled="processing">{{$t('user_reporting.submit')}}</button>
           <div class="alert error" v-if="error">
-            An error occured processing your request
+            {{$t('user_reporting.generic_error')}}
           </div>
         </div>
       </div>

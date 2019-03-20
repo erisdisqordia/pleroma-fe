@@ -19,7 +19,7 @@
           <Checkbox v-model="forward">Forward to {{remoteInstance}}</Checkbox>
         </div>
         <div>
-          <button class="btn btn-default" @click="reportUser">Submit</button>
+          <button class="btn btn-default" @click="reportUser" :disabled="processing">Submit</button>
         </div>
       </div>
       <div class="user-reporting-panel-right">

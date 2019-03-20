@@ -23,10 +23,6 @@ const reports = {
     },
     closeUserReportingModal ({ commit }) {
       commit('closeUserReportingModal')
-    },
-    reportUser ({ state, rootState, commit }, params) {
-      rootState.api.backendInteractor.reportUser({ userId: state.userId, ...params })
-        .then(result => console.log(result))
     }
   }
 }

@@ -52,6 +52,14 @@
       width: 16px;
       vertical-align: middle;
     }
+
+    span {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
   &-expanded-content {

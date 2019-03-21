@@ -203,6 +203,12 @@ const getNodeInfo = async ({ store }) => {
       const suggestions = metadata.suggestions
       store.dispatch('setInstanceOption', { name: 'suggestionsEnabled', value: suggestions.enabled })
       store.dispatch('setInstanceOption', { name: 'suggestionsWeb', value: suggestions.web })
+
+      const software = data.software
+      store.dispatch('setInstanceOption', { name: 'backendVersion', value: software.version })
+
+      const frontendVersion = window.___pleromafe_commit_hash
+      store.dispatch('setInstanceOption', { name: 'frontendVersion', value: frontendVersion })
     } else {
       throw (res)
     }

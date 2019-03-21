@@ -11,7 +11,7 @@
         :title="$t('user_profile.timeline_title')"
         :timeline="timeline"
         :timeline-name="'user'"
-        :user-id="fetchBy"
+        :user-id="userId"
       />
       <div :label="$t('user_card.followees')" v-if="followsTabVisible" :disabled="!user.friends_count">
         <FriendList :userId="userId" />
@@ -25,7 +25,7 @@
         :embedded="true" :title="$t('user_card.media')"
         timeline-name="media"
         :timeline="media"
-        :user-id="fetchBy"
+        :user-id="userId"
       />
       <Timeline
         v-if="isUs"

@@ -7,6 +7,7 @@
       <div class="image-cropper-buttons-wrapper">
         <button class="btn" type="button" :disabled="submitting" @click="submit" v-text="saveText"></button>
         <button class="btn" type="button" :disabled="submitting" @click="destroy" v-text="cancelText"></button>
+        <button class="btn" type="button" :disabled="submitting" @click="submitWithoutCropping" v-text="saveWithoutCroppingText"></button>
         <i class="icon-spin4 animate-spin" v-if="submitting"></i>
       </div>
       <div class="alert error" v-if="submitError">
@@ -36,7 +37,11 @@
   }
 
   &-buttons-wrapper {
-    margin-top: 15px;
+    margin-top: 10px;
+
+    button {
+      margin-top: 5px;
+    }
   }
 }
 </style>

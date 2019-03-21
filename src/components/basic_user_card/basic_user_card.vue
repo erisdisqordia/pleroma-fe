@@ -53,7 +53,7 @@
       vertical-align: middle;
     }
 
-    span {
+    > span {
       display: inline-block;
       max-width: 100%;
       overflow: hidden;

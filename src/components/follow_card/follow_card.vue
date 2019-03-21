@@ -24,7 +24,7 @@
           {{ $t('user_card.follow') }}
         </template>
       </button>
-      <button v-if="following" class="btn btn-default pressed" @click="unfollowUser" :disabled="inProgress">
+      <button v-if="following" class="btn btn-default btn-follow pressed" @click="unfollowUser" :disabled="inProgress">
         <template v-if="inProgress">
           {{ $t('user_card.follow_progress') }}
         </template>

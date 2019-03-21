@@ -16,9 +16,9 @@ export const mergeOrAdd = (arr, obj, item) => {
   } else {
     // This is a new item, prepare it
     arr.push(item)
-    obj[item.id] = item
+    set(obj, item.id, item)
     if (item.screen_name && !item.screen_name.includes('@')) {
-      obj[item.screen_name.toLowerCase()] = item
+      set(obj, item.screen_name.toLowerCase(), item)
     }
     return { item, new: true }
   }

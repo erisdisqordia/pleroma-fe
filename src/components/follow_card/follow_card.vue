@@ -4,12 +4,12 @@
       <span class="faint" v-if="!noFollowsYou && user.follows_you">
         {{ isMe ? $t('user_card.its_you') : $t('user_card.follows_you') }}
       </span>
-      <div class="btn-follow" v-if="showFollow && !loggedIn">
+      <div class="follow-card-follow-button" v-if="showFollow && !loggedIn">
         <RemoteFollow :user="user" />
       </div>
       <button
         v-if="showFollow && loggedIn"
-        class="btn btn-default btn-follow"
+        class="btn btn-default follow-card-follow-button"
         @click="followUser"
         :disabled="inProgress"
         :title="requestSent ? $t('user_card.follow_again') : ''"
@@ -24,7 +24,7 @@
           {{ $t('user_card.follow') }}
         </template>
       </button>
-      <button v-if="following" class="btn btn-default btn-follow pressed" @click="unfollowUser" :disabled="inProgress">
+      <button v-if="following" class="btn btn-default follow-card-follow-button pressed" @click="unfollowUser" :disabled="inProgress">
         <template v-if="inProgress">
           {{ $t('user_card.follow_progress') }}
         </template>
@@ -39,15 +39,17 @@
 <script src="./follow_card.js"></script>
 
 <style lang="scss">
-.follow-card-content-container {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  line-height: 1.5em;
+.follow-card {
+  &-content-container {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    line-height: 1.5em;
+  }
 
-  .btn-follow {
+  &-follow-button {
     margin-top: 0.5em;
     margin-left: auto;
     width: 10em;

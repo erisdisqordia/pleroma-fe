@@ -561,7 +561,12 @@ const fetchOAuthTokens = ({credentials}) => {
 
   return fetch(url, {
     headers: authHeaders(credentials)
-  }).then((data) => data.json())
+  }).then((data) => {
+    if (data.ok) {
+      return data.json()
+    }
+    throw new Error('Error fetching auth tokens', data)
+  })
 }
 
 const revokeOAuthToken = ({id, credentials}) => {

@@ -37,6 +37,15 @@ const conversation = {
     status () {
       return this.statusoid
     },
+    idsToShow () {
+      if (this.relevantIds.length > 0) {
+        return this.relevantIds
+      } else if (this.statusId) {
+        return [this.statusId]
+      } else {
+        return []
+      }
+    },
     statusId () {
       if (this.statusoid.retweeted_status) {
         return this.statusoid.retweeted_status.id
@@ -50,7 +59,7 @@ const conversation = {
       }
 
       const statusesObject = this.$store.state.statuses.allStatusesObject
-      const conversation = this.relevantIds.reduce((acc, id) => {
+      const conversation = this.idsToShow.reduce((acc, id) => {
         acc.push(statusesObject[id])
         return acc
       }, [])

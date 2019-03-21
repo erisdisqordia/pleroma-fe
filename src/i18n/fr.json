@@ -51,7 +51,7 @@
     "account_not_locked_warning_link": "verrouillé",
     "attachments_sensitive": "Marquer le média comme sensible",
     "content_type": {
-      "plain_text": "Texte brut"
+      "text/plain": "Texte brut"
     },
     "content_warning": "Sujet (optionnel)",
     "default": "Écrivez ici votre prochain statut.",

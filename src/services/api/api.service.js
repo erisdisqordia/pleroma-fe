@@ -27,12 +27,10 @@ const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
 const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
 const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
-const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKING_URL = '/api/blocks/create.json'
 const UNBLOCKING_URL = '/api/blocks/destroy.json'
-const USER_URL = '/api/users/show.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
@@ -43,6 +41,9 @@ const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_DIRECT_MESSAGES_TIMELINE_URL = '/api/v1/timelines/direct'
+const MASTODON_USER_URL = '/api/v1/accounts'
+const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
+const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
@@ -243,7 +244,7 @@ const denyUser = ({id, credentials}) => {
 }
 
 const fetchUser = ({id, credentials}) => {
-  let url = `${USER_URL}?user_id=${id}`
+  let url = `${MASTODON_USER_URL}/${id}`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((response) => {
       return new Promise((resolve, reject) => response.json()
@@ -255,6 +256,20 @@ const fetchUser = ({id, credentials}) => {
         }))
     })
     .then((data) => parseUser(data))
+}
+
+const fetchUserRelationship = ({id, credentials}) => {
+  let url = `${MASTODON_USER_RELATIONSHIPS_URL}/?id=${id}`
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((response) => {
+      return new Promise((resolve, reject) => response.json()
+        .then((json) => {
+          if (!response.ok) {
+            return reject(new StatusCodeError(response.status, json, { url }, response))
+          }
+          return resolve(json)
+        }))
+    })
 }
 
 const fetchFriends = ({id, page, credentials}) => {
@@ -347,8 +362,8 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     dms: MASTODON_DIRECT_MESSAGES_TIMELINE_URL,
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
-    user: QVITTER_USER_TIMELINE_URL,
-    media: QVITTER_USER_TIMELINE_URL,
+    user: MASTODON_USER_TIMELINE_URL,
+    media: MASTODON_USER_TIMELINE_URL,
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: TAG_TIMELINE_URL
   }
@@ -357,14 +372,15 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
 
   let url = timelineUrls[timeline]
 
+  if (timeline === 'user' || timeline === 'media') {
+    url = url(userId)
+  }
+
   if (since) {
     params.push(['since_id', since])
   }
   if (until) {
     params.push(['max_id', until])
-  }
-  if (userId) {
-    params.push(['user_id', userId])
   }
   if (tag) {
     url += `/${tag}.json`
@@ -545,7 +561,12 @@ const fetchOAuthTokens = ({credentials}) => {
 
   return fetch(url, {
     headers: authHeaders(credentials)
-  }).then((data) => data.json())
+  }).then((data) => {
+    if (data.ok) {
+      return data.json()
+    }
+    throw new Error('Error fetching auth tokens', data)
+  })
 }
 
 const revokeOAuthToken = ({id, credentials}) => {
@@ -588,6 +609,7 @@ const apiService = {
   blockUser,
   unblockUser,
   fetchUser,
+  fetchUserRelationship,
   favorite,
   unfavorite,
   retweet,

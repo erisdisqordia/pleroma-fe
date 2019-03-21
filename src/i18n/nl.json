@@ -57,7 +57,7 @@
     "account_not_locked_warning_link": "gesloten",
     "attachments_sensitive": "Markeer bijlage als gevoelig",
     "content_type": {
-      "plain_text": "Gewone tekst"
+      "text/plain": "Gewone tekst"
     },
     "content_warning": "Onderwerp (optioneel)",
     "default": "Tijd voor een pauze!",

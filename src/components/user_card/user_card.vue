@@ -11,7 +11,7 @@
             <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
             <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
             <router-link :to="{ name: 'user-settings' }" v-if="!isOtherUser">
-              <i class="button-icon icon-cog usersettings" :title="$t('tool_tip.user_settings')"></i>
+              <i class="button-icon icon-pencil usersettings" :title="$t('tool_tip.user_settings')"></i>
             </router-link>
             <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser && !user.is_local">
               <i class="icon-link-ext usersettings"></i>
@@ -84,14 +84,8 @@
             </button>
           </span>
         </div>
-        <div class="remote-follow" v-if='!loggedIn && user.is_local'>
-          <form method="POST" :action='subscribeUrl'>
-            <input type="hidden" name="nickname" :value="user.screen_name">
-            <input type="hidden" name="profile" value="">
-            <button click="submit" class="remote-button">
-              {{ $t('user_card.remote_follow') }}
-            </button>
-          </form>
+        <div v-if='!loggedIn && user.is_local'>
+          <RemoteFollow :user="user" />
         </div>
         <div class='block' v-if='isOtherUser && loggedIn'>
           <span v-if='user.statusnet_blocking'>
@@ -159,6 +153,18 @@
 
   &-bio {
     text-align: center;
+
+    img {
+      object-fit: contain;
+      vertical-align: middle;
+      max-width: 100%;
+      max-height: 400px;
+
+      .emoji {
+        width: 32px;
+        height: 32px;
+      }
+    }
   }
 
   // Modifiers
@@ -359,11 +365,6 @@
     }
 
     .mute {
-      max-width: 220px;
-      min-height: 28px;
-    }
-
-    .remote-follow {
       max-width: 220px;
       min-height: 28px;
     }

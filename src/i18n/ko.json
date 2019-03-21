@@ -56,7 +56,7 @@
     "account_not_locked_warning_link": "잠김",
     "attachments_sensitive": "첨부물을 민감함으로 설정",
     "content_type": {
-      "plain_text": "평문"
+      "text/plain": "평문"
     },
     "content_warning": "주제 (필수 아님)",
     "default": "LA에 도착!",

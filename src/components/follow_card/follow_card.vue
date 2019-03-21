@@ -4,9 +4,12 @@
       <span class="faint" v-if="!noFollowsYou && user.follows_you">
         {{ isMe ? $t('user_card.its_you') : $t('user_card.follows_you') }}
       </span>
+      <div class="btn-follow" v-if="showFollow && !loggedIn">
+        <RemoteFollow :user="user" />
+      </div>
       <button
-        v-if="showFollow"
-        class="btn btn-default"
+        v-if="showFollow && loggedIn"
+        class="btn btn-default btn-follow"
         @click="followUser"
         :disabled="inProgress"
         :title="requestSent ? $t('user_card.follow_again') : ''"
@@ -44,7 +47,7 @@
   flex-wrap: wrap;
   line-height: 1.5em;
 
-  .btn {
+  .btn-follow {
     margin-top: 0.5em;
     margin-left: auto;
     width: 10em;

@@ -1,4 +1,5 @@
 import { reduce, filter } from 'lodash'
+import { set } from 'vue'
 import Status from '../status/status.vue'
 
 const sortById = (a, b) => {
@@ -97,9 +98,13 @@ const conversation = {
       if (this.status) {
         const conversationId = this.status.id
         this.$store.state.api.backendInteractor.fetchConversation({id: conversationId})
-          .then((statuses) => {
-            this.$store.dispatch('addNewStatuses', { statuses })
-            statuses.forEach(status => this.relevantIds.push(status.id))
+          .then(({ancestors, descendants}) => {
+            this.$store.dispatch('addNewStatuses', { statuses: ancestors })
+            this.$store.dispatch('addNewStatuses', { statuses: descendants })
+            set(this, 'relevantIds', [].concat(
+              ancestors.map(_ => _.id),
+              this.statusId,
+              descendants.map(_ => _.id)))
           })
           .then(() => this.setHighlight(this.statusId))
       } else {

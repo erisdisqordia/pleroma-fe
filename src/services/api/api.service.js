@@ -313,27 +313,19 @@ const fetchFollowRequests = ({credentials}) => {
 }
 
 const fetchConversation = ({id, credentials}) => {
-  let url = MASTODON_STATUS_URL(id)
   let urlContext = MASTODON_STATUS_CONTEXT_URL(id)
-  return Promise.all([
-    fetch(url, { headers: authHeaders(credentials) })
-      .then((data) => {
-        if (data.ok) {
-          return data
-        }
-        throw new Error('Error fetching timeline', data)
-      })
-      .then((data) => data.json()),
-    fetch(urlContext, { headers: authHeaders(credentials) })
-      .then((data) => {
-        if (data.ok) {
-          return data
-        }
-        throw new Error('Error fetching timeline', data)
-      })
-      .then((data) => data.json())])
-    .then(([status, context]) => [...context.ancestors, status, ...context.descendants])
-    .then((data) => data.map(parseStatus))
+  return fetch(urlContext, { headers: authHeaders(credentials) })
+    .then((data) => {
+      if (data.ok) {
+        return data
+      }
+      throw new Error('Error fetching timeline', data)
+    })
+    .then((data) => data.json())
+    .then(({ancestors, descendants}) => ({
+      ancestors: ancestors.map(parseStatus),
+      descendants: descendants.map(parseStatus)
+    }))
 }
 
 const fetchStatus = ({id, credentials}) => {

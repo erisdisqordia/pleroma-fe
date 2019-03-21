@@ -18,7 +18,7 @@ export const mergeOrAdd = (arr, obj, item) => {
     arr.push(item)
     obj[item.id] = item
     if (item.screen_name && !item.screen_name.includes('@')) {
-      obj[item.screen_name] = item
+      obj[item.screen_name.toLowerCase()] = item
     }
     return { item, new: true }
   }
@@ -91,6 +91,17 @@ export const mutations = {
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
+  updateUserRelationship (state, relationships) {
+    relationships.forEach((relationship) => {
+      const user = state.usersObject[relationship.id]
+      if (user) {
+        user.follows_you = relationship.followed_by
+        user.following = relationship.following
+        user.muted = relationship.muting
+        user.statusnet_blocking = relationship.blocking
+      }
+    })
+  },
   saveBlocks (state, blockIds) {
     state.currentUser.blockIds = blockIds
   },
@@ -122,12 +133,14 @@ export const mutations = {
 }
 
 export const getters = {
-  userById: state => id =>
-    state.users.find(user => user.id === id),
-  userByName: state => name =>
-    state.users.find(user => user.screen_name &&
-      (user.screen_name.toLowerCase() === name.toLowerCase())
-    )
+  findUser: state => query => {
+    const result = state.usersObject[query]
+    // In case it's a screen_name, we can try searching case-insensitive
+    if (!result && typeof query === 'string') {
+      return state.usersObject[query.toLowerCase()]
+    }
+    return result
+  }
 }
 
 export const defaultState = {
@@ -147,7 +160,14 @@ const users = {
   actions: {
     fetchUser (store, id) {
       return store.rootState.api.backendInteractor.fetchUser({ id })
-        .then((user) => store.commit('addNewUsers', [user]))
+        .then((user) => {
+          store.commit('addNewUsers', [user])
+          return user
+        })
+    },
+    fetchUserRelationship (store, id) {
+      return store.rootState.api.backendInteractor.fetchUserRelationship({ id })
+        .then((relationships) => store.commit('updateUserRelationship', relationships))
     },
     fetchBlocks (store) {
       return store.rootState.api.backendInteractor.fetchBlocks()
@@ -292,6 +312,7 @@ const users = {
 
     logout (store) {
       store.commit('clearCurrentUser')
+      store.dispatch('disconnectFromChat')
       store.commit('setToken', false)
       store.dispatch('stopFetching', 'friends')
       store.commit('setBackendInteractor', backendInteractorService())
@@ -321,6 +342,9 @@ const users = {
 
               if (user.token) {
                 store.dispatch('setWsToken', user.token)
+
+                // Initialize the chat socket.
+                store.dispatch('initializeSocket')
               }
 
               // Start getting fresh posts.

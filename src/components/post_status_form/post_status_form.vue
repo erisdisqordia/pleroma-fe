@@ -20,6 +20,7 @@
         ref="textarea"
         @click="setCaret"
         @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control"
+        @keydown="onKeydown"
         @keydown.down="cycleForward"
         @keydown.up="cycleBackward"
         @keydown.shift.tab="cycleBackward"

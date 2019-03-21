@@ -61,7 +61,7 @@
     "account_not_locked_warning_link": "bloqueada",
     "attachments_sensitive": "Contenido sensible",
     "content_type": {
-      "plain_text": "Texto Plano"
+      "text/plain": "Texto Plano"
     },
     "content_warning": "Tema (opcional)",
     "default": "Acabo de aterrizar en L.A.",

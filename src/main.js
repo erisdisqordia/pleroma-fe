@@ -53,9 +53,10 @@ const persistedStateOptions = {
     'users.lastLoginName',
     'oauth'
   ]
-}
+};
 
-createPersistedState(persistedStateOptions).then((persistedState) => {
+(async () => {
+  const persistedState = await createPersistedState(persistedStateOptions)
   const store = new Vuex.Store({
     modules: {
       interface: interfaceModule,
@@ -75,7 +76,7 @@ createPersistedState(persistedStateOptions).then((persistedState) => {
   })
 
   afterStoreSetup({ store, i18n })
-})
+})()
 
 // These are inlined by webpack's DefinePlugin
 /* eslint-disable */

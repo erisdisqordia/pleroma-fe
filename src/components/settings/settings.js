@@ -1,8 +1,13 @@
 /* eslint-env browser */
+import { filter, trim } from 'lodash'
+
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import InterfaceLanguageSwitcher from '../interface_language_switcher/interface_language_switcher.vue'
-import { filter, trim } from 'lodash'
+import { extractCommit } from '../../services/version/version.service'
+
+const pleromaFeCommitUrl = 'https://git.pleroma.social/pleroma/pleroma-fe/commit/'
+const pleromaBeCommitUrl = 'https://git.pleroma.social/pleroma/pleroma/commit/'
 
 const settings = {
   data () {
@@ -78,7 +83,10 @@ const settings = {
         // Future spec, still not supported in Nightly 63 as of 08/2018
         Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'audioTracks'),
       playVideosInModal: user.playVideosInModal,
-      useContainFit: user.useContainFit
+      useContainFit: user.useContainFit,
+
+      backendVersion: instance.backendVersion,
+      frontendVersion: instance.frontendVersion
     }
   },
   components: {
@@ -96,7 +104,13 @@ const settings = {
     postFormats () {
       return this.$store.state.instance.postFormats || []
     },
-    instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel }
+    instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel },
+    frontendVersionLink () {
+      return pleromaFeCommitUrl + this.frontendVersion
+    },
+    backendVersionLink () {
+      return pleromaBeCommitUrl + extractCommit(this.backendVersion)
+    }
   },
   watch: {
     hideAttachmentsLocal (value) {

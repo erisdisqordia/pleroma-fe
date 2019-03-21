@@ -93,6 +93,11 @@ const conversation = {
             statuses.forEach(status => this.relevantIds.push(status.id))
           })
           .then(() => this.setHighlight(this.statusId))
+      } else {
+        const id = this.$route.params.id
+        this.$store.state.api.backendInteractor.fetchStatus({id})
+          .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
+          .then(() => this.fetchConversation())
       }
     },
     getReplies (id) {

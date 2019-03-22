@@ -8,8 +8,8 @@
     </div>
     <div class="basic-user-card-collapsed-content" v-else>
       <div :title="user.name" class="basic-user-card-user-name">
-        <span v-if="user.name_html" v-html="user.name_html"></span>
-        <span v-else>{{ user.name }}</span>
+        <span v-if="user.name_html" class="basic-user-card-user-name-value" v-html="user.name_html"></span>
+        <span v-else class="basic-user-card-user-name-value">{{ user.name }}</span>
       </div>
       <div>
         <router-link class="basic-user-card-screen-name" :to="userProfileLink(user)">
@@ -53,7 +53,7 @@
       vertical-align: middle;
     }
 
-    > span {
+    &-value {
       display: inline-block;
       max-width: 100%;
       overflow: hidden;

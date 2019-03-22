@@ -213,11 +213,6 @@ const users = {
     fetchMutes (store) {
       return store.rootState.api.backendInteractor.fetchMutes()
         .then((mutes) => {
-          // fetchMutes api doesn't return full user data, let's fetch full user data using separate api calls
-          const promises = mutes.map(({ id }) => store.rootState.api.backendInteractor.fetchUser({ id }))
-          return Promise.all(promises)
-        })
-        .then((mutes) => {
           store.commit('updateMutes', mutes)
           store.commit('saveMuteIds', map(mutes, 'id'))
           return mutes

@@ -163,16 +163,17 @@ const UserSettings = {
       reader.readAsDataURL(file)
     },
     submitAvatar (cropper, file) {
+      const that = this
       return new Promise((resolve, reject) => {
         function updateAvatar (avatar) {
-          this.$store.state.api.backendInteractor.updateAvatar({ avatar })
+          that.$store.state.api.backendInteractor.updateAvatar({ avatar })
             .then((user) => {
-              this.$store.commit('addNewUsers', [user])
-              this.$store.commit('setCurrentUser', user)
+              that.$store.commit('addNewUsers', [user])
+              that.$store.commit('setCurrentUser', user)
               resolve()
             })
             .catch((err) => {
-              reject(new Error(this.$t('upload.error.base') + ' ' + err.message))
+              reject(new Error(that.$t('upload.error.base') + ' ' + err.message))
             })
         }
 

@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="user-reporting-panel-right">
-        <div v-for="status in statuses" :key="status.id" class="status-fadein">
+        <div v-for="status in statuses" :key="status.id" class="status-fadein user-reporting-panel-sitem">
           <Status :inConversation="false" :focused="false" :statusoid="status" />
           <Checkbox :checked="isChecked(status.id)" @change="checked => toggleStatus(checked, status.id)" />
         </div>
@@ -44,26 +44,24 @@
 .user-reporting-panel {
   width: 90vw;
   max-width: 700px;
+  min-height: 20vh;
+  max-height: 80vh;
 
   .panel-body {
     display: flex;
+    flex-direction: column-reverse;
     border-top: 1px solid;
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
   }
 
   &-left {
-    width: 50%;
-    padding: 1.1em;
-    border-right: 1px solid;
-    border-color: $fallback--border;
-    border-color: var(--border, $fallback--border);
-    max-width: 320px;
+    padding: 1.1em 0.7em 0.7em;
     line-height: 1.4em;
     box-sizing: border-box;
 
     > div {
-      margin-bottom: 2em;
+      margin-bottom: 1em;
 
       &:last-child {
         margin-bottom: 0;
@@ -95,24 +93,48 @@
   }
 
   &-right {
-    width: 50%;
-    flex: 1 1 auto;
-    min-height: 20vh;
-    max-height: 80vh;
     overflow-y: auto;
     overflow-x: hidden;
+  }
 
-    > div {
-      display: flex;
-      justify-content: space-between;
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
+  &-sitem {
+    display: flex;
+    justify-content: space-between;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
+
+    > .status-el {
+      flex: 1;
+    }
+
+    > .checkbox {
+      margin: 0.75em;
+    }
+  }
+
+  @media all and (min-width: 801px) {
+    .panel-body {
+      flex-direction: row;
+    }
+
+    &-left {
+      width: 50%;
+      max-width: 320px;
+      border-right: 1px solid;
       border-color: $fallback--border;
       border-color: var(--border, $fallback--border);
+      padding: 1.1em;
 
-      .checkbox {
-        margin: 0.75em;
+      > div {
+        margin-bottom: 2em;
       }
+    }
+
+    &-right {
+      width: 50%;
+      flex: 1 1 auto;
     }
   }
 }

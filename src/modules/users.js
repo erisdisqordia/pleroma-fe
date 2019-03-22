@@ -118,14 +118,6 @@ export const mutations = {
   saveMuteIds (state, muteIds) {
     state.currentUser.muteIds = muteIds
   },
-  muteUser (state, id) {
-    const user = state.usersObject[id]
-    set(user, 'muted', true)
-  },
-  unmuteUser (state, id) {
-    const user = state.usersObject[id]
-    set(user, 'muted', false)
-  },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
   },
@@ -218,11 +210,11 @@ const users = {
     },
     muteUser (store, id) {
       return store.rootState.api.backendInteractor.muteUser(id)
-        .then(() => store.commit('muteUser', id))
+        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
     },
     unmuteUser (store, id) {
       return store.rootState.api.backendInteractor.unmuteUser(id)
-        .then(() => store.commit('unmuteUser', id))
+        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
     },
     addFriends ({ rootState, commit }, fetchBy) {
       return new Promise((resolve, reject) => {

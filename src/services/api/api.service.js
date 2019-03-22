@@ -18,8 +18,6 @@ const MENTIONS_URL = '/api/statuses/mentions.json'
 const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
-const MUTING_URL = '/api/v1/accounts/:id/mute'
-const UNMUTING_URL = '/api/v1/accounts/:id/unmute'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const REGISTRATION_URL = '/api/account/register.json'
@@ -46,12 +44,13 @@ const MASTODON_USER_BLOCKS_URL = '/api/v1/blocks/'
 const MASTODON_USER_MUTES_URL = '/api/v1/mutes/'
 const MASTODON_BLOCK_USER_URL = id => `/api/v1/accounts/${id}/block`
 const MASTODON_UNBLOCK_USER_URL = id => `/api/v1/accounts/${id}/unblock`
+const MASTODON_MUTE_USER_URL = id => `/api/v1/accounts/${id}/mute`
+const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
 import { StatusCodeError } from '../errors/errors'
-import { generateUrl } from '../../utils/url'
 
 const oldfetch = window.fetch
 
@@ -533,16 +532,14 @@ const fetchMutes = ({credentials}) => {
 }
 
 const muteUser = ({id, credentials}) => {
-  const url = generateUrl(MUTING_URL, { id })
-  return promisedRequest(url, {
+  return promisedRequest(MASTODON_MUTE_USER_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   })
 }
 
 const unmuteUser = ({id, credentials}) => {
-  const url = generateUrl(UNMUTING_URL, { id })
-  return promisedRequest(url, {
+  return promisedRequest(MASTODON_UNMUTE_USER_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   })

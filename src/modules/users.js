@@ -365,11 +365,6 @@ const users = {
               // Start getting fresh posts.
               store.dispatch('startFetching', { timeline: 'friends' })
 
-              // Fetch mutes
-              // TODO: We should not show timeline until fetchMutes is resolved
-              // However, we can get rid of this logic totally if we can know user muted state from user object
-              store.dispatch('fetchMutes')
-
               // Fetch our friends
               store.rootState.api.backendInteractor.fetchFriends({ id: user.id })
                 .then((friends) => commit('addNewUsers', friends))

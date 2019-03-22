@@ -36,7 +36,7 @@ export default {
     return (
       <label class="checkbox" {...wrapperProps}>
         <input type="checkbox" {...inputProps} />
-        <i />
+        <i class="checkbox-indicator" />
         {children && <span>{children}</span>}
       </label>
     )

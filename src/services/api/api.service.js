@@ -30,8 +30,6 @@ const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
-const BLOCKING_URL = '/api/blocks/create.json'
-const UNBLOCKING_URL = '/api/blocks/destroy.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
@@ -46,6 +44,8 @@ const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
 const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
 const MASTODON_USER_BLOCKS_URL = '/api/v1/blocks/'
 const MASTODON_USER_MUTES_URL = '/api/v1/mutes/'
+const MASTODON_BLOCK_USER_URL = id => `/api/v1/accounts/${id}/block`
+const MASTODON_UNBLOCK_USER_URL = id => `/api/v1/accounts/${id}/unblock`
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
@@ -228,16 +228,14 @@ const unfollowUser = ({id, credentials}) => {
 }
 
 const blockUser = ({id, credentials}) => {
-  let url = `${BLOCKING_URL}?user_id=${id}`
-  return fetch(url, {
+  return fetch(MASTODON_BLOCK_USER_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   }).then((data) => data.json())
 }
 
 const unblockUser = ({id, credentials}) => {
-  let url = `${UNBLOCKING_URL}?user_id=${id}`
-  return fetch(url, {
+  return fetch(MASTODON_UNBLOCK_USER_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   }).then((data) => data.json())

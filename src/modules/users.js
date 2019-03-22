@@ -197,8 +197,8 @@ const users = {
     },
     blockUser (store, userId) {
       return store.rootState.api.backendInteractor.blockUser(userId)
-        .then((blockedUser) => {
-          store.commit('addNewUsers', [blockedUser])
+        .then((relationship) => {
+          store.commit('updateUserRelationship', [relationship])
           store.commit('removeStatus', { timeline: 'friends', userId })
           store.commit('removeStatus', { timeline: 'public', userId })
           store.commit('removeStatus', { timeline: 'publicAndExternal', userId })
@@ -206,7 +206,7 @@ const users = {
     },
     unblockUser (store, id) {
       return store.rootState.api.backendInteractor.unblockUser(id)
-        .then((user) => store.commit('addNewUsers', [user]))
+        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
     },
     fetchMutes (store) {
       return store.rootState.api.backendInteractor.fetchMutes()

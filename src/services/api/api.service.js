@@ -18,8 +18,6 @@ const MENTIONS_URL = '/api/statuses/mentions.json'
 const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
-const BLOCKS_URL = '/api/statuses/blocks.json'
-const MUTES_URL = '/api/v1/mutes.json'
 const MUTING_URL = '/api/v1/accounts/:id/mute'
 const UNMUTING_URL = '/api/v1/accounts/:id/unmute'
 const FOLLOWING_URL = '/api/friendships/create.json'
@@ -46,6 +44,8 @@ const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_URL = '/api/v1/accounts'
 const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
 const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
+const MASTODON_USER_BLOCKS_URL = '/api/v1/blocks/'
+const MASTODON_USER_MUTES_URL = '/api/v1/mutes/'
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
@@ -530,7 +530,8 @@ const changePassword = ({credentials, password, newPassword, newPasswordConfirma
 }
 
 const fetchMutes = ({credentials}) => {
-  return promisedRequest(MUTES_URL, { headers: authHeaders(credentials) })
+  return promisedRequest(MASTODON_USER_MUTES_URL, { headers: authHeaders(credentials) })
+    .then((users) => users.map(parseUser))
 }
 
 const muteUser = ({id, credentials}) => {
@@ -550,9 +551,8 @@ const unmuteUser = ({id, credentials}) => {
 }
 
 const fetchBlocks = ({credentials}) => {
-  return promisedRequest(BLOCKS_URL, {
-    headers: authHeaders(credentials)
-  })
+  return promisedRequest(MASTODON_USER_BLOCKS_URL, { headers: authHeaders(credentials) })
+    .then((users) => users.map(parseUser))
 }
 
 const fetchOAuthTokens = ({credentials}) => {

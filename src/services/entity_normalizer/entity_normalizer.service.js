@@ -293,5 +293,5 @@ export const parseNotification = (data) => {
 
 const isNsfw = (status) => {
   const nsfwRegex = /#nsfw/i
-  return (status.tags || []).includes('nsfw') || !!status.text.match(nsfwRegex)
+  return (status.tags || []).includes('nsfw') || !!(status.text || '').match(nsfwRegex)
 }

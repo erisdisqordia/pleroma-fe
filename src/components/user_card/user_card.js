@@ -1,4 +1,5 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
+import RemoteFollow from '../remote_follow/remote_follow.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
@@ -14,6 +15,9 @@ export default {
         : this.$store.state.config.hideUserStats,
       betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
+  },
+  created () {
+    this.$store.dispatch('fetchUserRelationship', this.user.id)
   },
   computed: {
     classes () {
@@ -96,7 +100,8 @@ export default {
     }
   },
   components: {
-    UserAvatar
+    UserAvatar,
+    RemoteFollow
   },
   methods: {
     followUser () {

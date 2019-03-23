@@ -60,7 +60,7 @@
     "account_not_locked_warning_link": "lukittu",
     "attachments_sensitive": "Merkkaa liitteet arkaluonteisiksi",
     "content_type": {
-      "plain_text": "Tavallinen teksti"
+      "text/plain": "Tavallinen teksti"
     },
     "content_warning": "Aihe (valinnainen)",
     "default": "Tulin juuri saunasta.",

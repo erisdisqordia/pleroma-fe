@@ -49,7 +49,7 @@
         "account_not_locked_warning_link": "مقفل",
         "attachments_sensitive": "اعتبر المرفقات كلها كمحتوى حساس",
         "content_type": {
-            "plain_text": "نص صافٍ"
+            "text/plain": "نص صافٍ"
         },
         "content_warning": "الموضوع (اختياري)",
         "default": "وصلت للتوّ إلى لوس أنجلس.",

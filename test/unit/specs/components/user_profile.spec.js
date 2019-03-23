@@ -12,9 +12,13 @@ const mutations = {
   setError: () => {}
 }
 
+const actions = {
+  fetchUser: () => {},
+  fetchUserByScreenName: () => {}
+}
+
 const testGetters = {
-  userByName: state => getters.userByName(state.users),
-  userById: state => getters.userById(state.users)
+  findUser: state => getters.findUser(state.users)
 }
 
 const localUser = {
@@ -31,6 +35,7 @@ const extUser = {
 
 const externalProfileStore = new Vuex.Store({
   mutations,
+  actions,
   getters: testGetters,
   state: {
     api: {
@@ -89,7 +94,7 @@ const externalProfileStore = new Vuex.Store({
       currentUser: {
         credentials: ''
       },
-      usersObject: [extUser],
+      usersObject: { 100: extUser },
       users: [extUser]
     }
   }
@@ -97,6 +102,7 @@ const externalProfileStore = new Vuex.Store({
 
 const localProfileStore = new Vuex.Store({
   mutations,
+  actions,
   getters: testGetters,
   state: {
     api: {
@@ -155,7 +161,7 @@ const localProfileStore = new Vuex.Store({
       currentUser: {
         credentials: ''
       },
-      usersObject: [localUser],
+      usersObject: { 100: localUser, 'testuser': localUser },
       users: [localUser]
     }
   }

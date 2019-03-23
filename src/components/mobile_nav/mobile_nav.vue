@@ -8,7 +8,7 @@
         <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
       </div>
       <div class='item right'>
-        <a class="mobile-nav-button" v-if="currentUser" href="#" @click.stop.prevent="toggleMobileNotifications()">
+        <a class="mobile-nav-button" v-if="currentUser" href="#" @click.stop.prevent="openMobileNotifications()">
           <i class="button-icon icon-bell-alt"></i>
           <div class="alert-dot" v-if="unseenNotificationsCount"></div>
         </a>
@@ -18,7 +18,7 @@
     <div v-if="currentUser" class="mobile-notifications-drawer" :class="{ 'closed': !notificationsOpen }">
       <div class="mobile-notifications-header">
         <span class="title">{{$t('notifications.notifications')}}</span>
-        <a class="mobile-nav-button" @click.stop.prevent="toggleMobileNotifications()">
+        <a class="mobile-nav-button" @click.stop.prevent="closeMobileNotifications()">
           <i class="button-icon icon-cancel"/>
         </a>
       </div>

@@ -28,9 +28,14 @@ const MobileNav = {
     toggleMobileSidebar () {
       this.$refs.sideDrawer.toggleDrawer()
     },
-    toggleMobileNotifications () {
-      this.notificationsOpen = !this.notificationsOpen
-      if (!this.notificationsOpen) {
+    openMobileNotifications () {
+      this.notificationsOpen = true
+    },
+    closeMobileNotifications () {
+      if (this.notificationsOpen) {
+        // make sure to mark notifs seen only when the notifs were open and not
+        // from close-calls.
+        this.notificationsOpen = false
         this.markNotificationsAsSeen()
       }
     },
@@ -43,6 +48,13 @@ const MobileNav = {
     },
     markNotificationsAsSeen () {
       this.$refs.notifications.markAsSeen()
+    }
+  },
+  watch: {
+    $route () {
+      // handles closing notificaitons when you press any router-link on the
+      // notifications.
+      this.closeMobileNotifications()
     }
   }
 }

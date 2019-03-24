@@ -365,6 +365,9 @@ const users = {
               // Start getting fresh posts.
               store.dispatch('startFetching', { timeline: 'friends' })
 
+              // Get user mutes
+              store.dispatch('fetchMutes')
+
               // Fetch our friends
               store.rootState.api.backendInteractor.fetchFriends({ id: user.id })
                 .then((friends) => commit('addNewUsers', friends))

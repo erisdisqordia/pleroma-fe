@@ -276,11 +276,15 @@ const fetchUserRelationship = ({id, credentials}) => {
     })
 }
 
-const fetchFriends = ({id, page, credentials}) => {
+const fetchFriends = ({id, maxId, sinceId, limit = 20, credentials}) => {
   let url = MASTODON_FOLLOWING_URL(id)
-  if (page) {
-    url = url + `?page=${page}`
-  }
+  const args = [
+    maxId && `max_id=${maxId}`,
+    sinceId && `max_id=${sinceId}`,
+    limit && `limit=${limit}`
+  ].filter(_ => _).join('&')
+
+  url = url + (args ? '?' + args : '')
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
@@ -293,11 +297,15 @@ const exportFriends = ({id, credentials}) => {
     .then((data) => data.map(parseUser))
 }
 
-const fetchFollowers = ({id, page, credentials}) => {
+const fetchFollowers = ({id, maxId, sinceId, limit = 20, credentials}) => {
   let url = MASTODON_FOLLOWERS_URL(id)
-  if (page) {
-    url = url + `?page=${page}`
-  }
+  const args = [
+    maxId && `max_id=${maxId}`,
+    sinceId && `max_id=${sinceId}`,
+    limit && `limit=${limit}`
+  ].filter(_ => _).join('&')
+
+  url = url + (args ? '?' + args : '')
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))

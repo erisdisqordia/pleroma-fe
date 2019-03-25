@@ -52,23 +52,23 @@ export const mutations = {
     state.loggingIn = false
   },
   // TODO Clean after ourselves?
-  addFriends (state, { id, friends, page }) {
+  addFriends (state, { id, friends }) {
     const user = state.usersObject[id]
     each(friends, friend => {
       if (!find(user.friends, { id: friend.id })) {
         user.friends.push(friend)
       }
     })
-    user.friendsPage = page + 1
+    user.lastFriendId = friends.slice(-1)[0].id
   },
-  addFollowers (state, { id, followers, page }) {
+  addFollowers (state, { id, followers }) {
     const user = state.usersObject[id]
     each(followers, follower => {
       if (!find(user.followers, { id: follower.id })) {
         user.followers.push(follower)
       }
     })
-    user.followersPage = page + 1
+    user.lastFollowerId = followers.slice(-1)[0].id
   },
   // Because frontend doesn't have a reason to keep these stuff in memory
   // outside of viewing someones user profile.
@@ -78,7 +78,7 @@ export const mutations = {
       return
     }
     user.friends = []
-    user.friendsPage = 0
+    user.lastFriendId = null
   },
   clearFollowers (state, userId) {
     const user = state.usersObject[userId]
@@ -86,7 +86,7 @@ export const mutations = {
       return
     }
     user.followers = []
-    user.followersPage = 0
+    user.lastFollowerId = null
   },
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
@@ -219,10 +219,10 @@ const users = {
     addFriends ({ rootState, commit }, fetchBy) {
       return new Promise((resolve, reject) => {
         const user = rootState.users.usersObject[fetchBy]
-        const page = user.friendsPage || 1
-        rootState.api.backendInteractor.fetchFriends({ id: user.id, page })
+        const sinceId = user.lastFriendId
+        rootState.api.backendInteractor.fetchFriends({ id: user.id, sinceId })
           .then((friends) => {
-            commit('addFriends', { id: user.id, friends, page })
+            commit('addFriends', { id: user.id, friends })
             resolve(friends)
           }).catch(() => {
             reject()
@@ -231,10 +231,10 @@ const users = {
     },
     addFollowers ({ rootState, commit }, fetchBy) {
       const user = rootState.users.usersObject[fetchBy]
-      const page = user.followersPage || 1
-      return rootState.api.backendInteractor.fetchFollowers({ id: user.id, page })
+      const sinceId = user.lastFollowerId
+      return rootState.api.backendInteractor.fetchFollowers({ id: user.id, sinceId })
         .then((followers) => {
-          commit('addFollowers', { id: user.id, followers, page })
+          commit('addFollowers', { id: user.id, followers })
           return followers
         })
     },

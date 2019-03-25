@@ -10,8 +10,6 @@ const UNFAVORITE_URL = '/api/favorites/destroy'
 const RETWEET_URL = '/api/statuses/retweet'
 const UNRETWEET_URL = '/api/statuses/unretweet'
 const STATUS_DELETE_URL = '/api/statuses/destroy'
-const STATUS_URL = '/api/statuses/show'
-const CONVERSATION_URL = '/api/statusnet/conversation'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
@@ -35,6 +33,8 @@ const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+const MASTODON_STATUS_URL = id => `/api/v1/statuses/${id}`
+const MASTODON_STATUS_CONTEXT_URL = id => `/api/v1/statuses/${id}/context`
 const MASTODON_USER_URL = '/api/v1/accounts'
 const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
 const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
@@ -317,8 +317,8 @@ const fetchFollowRequests = ({credentials}) => {
 }
 
 const fetchConversation = ({id, credentials}) => {
-  let url = `${CONVERSATION_URL}/${id}.json?count=100`
-  return fetch(url, { headers: authHeaders(credentials) })
+  let urlContext = MASTODON_STATUS_CONTEXT_URL(id)
+  return fetch(urlContext, { headers: authHeaders(credentials) })
     .then((data) => {
       if (data.ok) {
         return data
@@ -326,11 +326,14 @@ const fetchConversation = ({id, credentials}) => {
       throw new Error('Error fetching timeline', data)
     })
     .then((data) => data.json())
-    .then((data) => data.map(parseStatus))
+    .then(({ancestors, descendants}) => ({
+      ancestors: ancestors.map(parseStatus),
+      descendants: descendants.map(parseStatus)
+    }))
 }
 
 const fetchStatus = ({id, credentials}) => {
-  let url = `${STATUS_URL}/${id}.json`
+  let url = MASTODON_STATUS_URL(id)
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => {
       if (data.ok) {

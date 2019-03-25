@@ -1,5 +1,4 @@
 import Conversation from '../conversation/conversation.vue'
-import { find } from 'lodash'
 
 const conversationPage = {
   components: {
@@ -8,8 +7,8 @@ const conversationPage = {
   computed: {
     statusoid () {
       const id = this.$route.params.id
-      const statuses = this.$store.state.statuses.allStatuses
-      const status = find(statuses, {id})
+      const statuses = this.$store.state.statuses.allStatusesObject
+      const status = statuses[id]
 
       return status
     }

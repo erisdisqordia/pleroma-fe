@@ -1,4 +1,5 @@
 import { reduce, filter, findIndex } from 'lodash'
+import { set } from 'vue'
 import Status from '../status/status.vue'
 
 const sortById = (a, b) => {
@@ -26,7 +27,8 @@ const conversation = {
   data () {
     return {
       highlight: null,
-      expanded: false
+      expanded: false,
+      converationStatusIds: []
     }
   },
   props: [
@@ -37,6 +39,15 @@ const conversation = {
   computed: {
     status () {
       return this.statusoid
+    },
+    idsToShow () {
+      if (this.converationStatusIds.length > 0) {
+        return this.converationStatusIds
+      } else if (this.statusId) {
+        return [this.statusId]
+      } else {
+        return []
+      }
     },
     statusId () {
       if (this.statusoid.retweeted_status) {
@@ -54,14 +65,17 @@ const conversation = {
         return [this.status]
       }
 
-      const conversationId = this.status.statusnet_conversation_id
-      const statuses = this.$store.state.statuses.allStatuses
-      const conversation = filter(statuses, { statusnet_conversation_id: conversationId })
+      const statusesObject = this.$store.state.statuses.allStatusesObject
+      const conversation = this.idsToShow.reduce((acc, id) => {
+        acc.push(statusesObject[id])
+        return acc
+      }, [])
 
       const statusIndex = findIndex(conversation, { id: this.statusId })
       if (statusIndex !== -1) {
         conversation[statusIndex] = this.status
       }
+
       return sortAndFilterConversation(conversation)
     },
     replies () {
@@ -99,9 +113,15 @@ const conversation = {
   methods: {
     fetchConversation () {
       if (this.status) {
-        const conversationId = this.status.statusnet_conversation_id
-        this.$store.state.api.backendInteractor.fetchConversation({id: conversationId})
-          .then((statuses) => this.$store.dispatch('addNewStatuses', { statuses }))
+        this.$store.state.api.backendInteractor.fetchConversation({id: this.status.id})
+          .then(({ancestors, descendants}) => {
+            this.$store.dispatch('addNewStatuses', { statuses: ancestors })
+            this.$store.dispatch('addNewStatuses', { statuses: descendants })
+            set(this, 'converationStatusIds', [].concat(
+              ancestors.map(_ => _.id),
+              this.statusId,
+              descendants.map(_ => _.id)))
+          })
           .then(() => this.setHighlight(this.statusId))
       } else {
         const id = this.$route.params.id

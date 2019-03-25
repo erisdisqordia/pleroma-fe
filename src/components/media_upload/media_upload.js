@@ -20,7 +20,7 @@ const mediaUpload = {
         return
       }
       const formData = new FormData()
-      formData.append('media', file)
+      formData.append('file', file)
 
       self.$emit('uploading')
       self.uploading = true

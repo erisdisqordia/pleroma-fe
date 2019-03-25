@@ -128,14 +128,15 @@ export const parseUser = (data) => {
   return output
 }
 
-const parseAttachment = (data) => {
+export const parseAttachment = (data) => {
   const output = {}
   const masto = !data.hasOwnProperty('oembed')
 
   if (masto) {
     // Not exactly same...
-    output.mimetype = data.type
+    output.mimetype = data.pleroma ? data.pleroma.mime_type : data.type
     output.meta = data.meta // not present in BE yet
+    output.id = data.id
   } else {
     output.mimetype = data.mimetype
     // output.meta = ??? missing

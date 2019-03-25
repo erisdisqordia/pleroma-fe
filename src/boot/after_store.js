@@ -97,6 +97,7 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('showInstanceSpecificPanel')
   copyInstanceOption('scopeOptionsEnabled')
   copyInstanceOption('formattingOptionsEnabled')
+  copyInstanceOption('hideMutedPosts')
   copyInstanceOption('collapseMessageWithSubject')
   copyInstanceOption('loginMethod')
   copyInstanceOption('scopeCopy')

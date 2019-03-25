@@ -9,10 +9,8 @@ const FAVORITE_URL = '/api/favorites/create'
 const UNFAVORITE_URL = '/api/favorites/destroy'
 const RETWEET_URL = '/api/statuses/retweet'
 const UNRETWEET_URL = '/api/statuses/unretweet'
-const STATUS_UPDATE_URL = '/api/statuses/update.json'
 const STATUS_DELETE_URL = '/api/statuses/destroy'
 const STATUS_URL = '/api/statuses/show'
-const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
 const CONVERSATION_URL = '/api/statusnet/conversation'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
@@ -46,9 +44,11 @@ const MASTODON_BLOCK_USER_URL = id => `/api/v1/accounts/${id}/block`
 const MASTODON_UNBLOCK_USER_URL = id => `/api/v1/accounts/${id}/unblock`
 const MASTODON_MUTE_USER_URL = id => `/api/v1/accounts/${id}/mute`
 const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
+const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
+const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 
 import { each, map } from 'lodash'
-import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
+import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
 import { StatusCodeError } from '../errors/errors'
 
@@ -439,23 +439,23 @@ const unretweet = ({ id, credentials }) => {
   })
 }
 
-const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType, noAttachmentLinks}) => {
-  const idsText = mediaIds.join(',')
+const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds = [], inReplyToStatusId, contentType}) => {
   const form = new FormData()
 
   form.append('status', status)
   form.append('source', 'Pleroma FE')
-  if (noAttachmentLinks) form.append('no_attachment_links', noAttachmentLinks)
   if (spoilerText) form.append('spoiler_text', spoilerText)
   if (visibility) form.append('visibility', visibility)
   if (sensitive) form.append('sensitive', sensitive)
   if (contentType) form.append('content_type', contentType)
-  form.append('media_ids', idsText)
+  mediaIds.forEach(val => {
+    form.append('media_ids[]', val)
+  })
   if (inReplyToStatusId) {
-    form.append('in_reply_to_status_id', inReplyToStatusId)
+    form.append('in_reply_to_id', inReplyToStatusId)
   }
 
-  return fetch(STATUS_UPDATE_URL, {
+  return fetch(MASTODON_POST_STATUS_URL, {
     body: form,
     method: 'POST',
     headers: authHeaders(credentials)
@@ -480,13 +480,13 @@ const deleteStatus = ({ id, credentials }) => {
 }
 
 const uploadMedia = ({formData, credentials}) => {
-  return fetch(MEDIA_UPLOAD_URL, {
+  return fetch(MASTODON_MEDIA_UPLOAD_URL, {
     body: formData,
     method: 'POST',
     headers: authHeaders(credentials)
   })
-    .then((response) => response.text())
-    .then((text) => (new DOMParser()).parseFromString(text, 'application/xml'))
+    .then((data) => data.json())
+    .then((data) => parseAttachment(data))
 }
 
 const followImport = ({params, credentials}) => {

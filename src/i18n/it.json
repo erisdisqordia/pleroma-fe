@@ -175,7 +175,7 @@
     "account_not_locked_warning_link": "bloccato",
     "attachments_sensitive": "Segna allegati come sensibili",
     "content_type": {
-      "plain_text": "Testo normale"
+      "text/plain": "Testo normale"
     },
     "content_warning": "Oggetto (facoltativo)",
     "default": "Appena atterrato in L.A.",

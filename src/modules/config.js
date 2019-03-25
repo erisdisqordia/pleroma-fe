@@ -5,6 +5,7 @@ const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
 const defaultState = {
   colors: {},
+  hideMutedPosts: undefined, // instance default
   collapseMessageWithSubject: undefined, // instance default
   hideAttachments: false,
   hideAttachmentsInConv: false,

@@ -9,7 +9,7 @@ const MuteCard = {
   },
   computed: {
     user () {
-      return this.$store.getters.userById(this.userId)
+      return this.$store.getters.findUser(this.userId)
     },
     muted () {
       return this.user.muted

@@ -287,8 +287,6 @@
     img {
       width: 24px;
       height: 24px;
-      border-radius: $fallback--avatarRadius;
-      border-radius: var(--avatarRadius, $fallback--avatarRadius);
       object-fit: contain;
     }
 

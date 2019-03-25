@@ -19,6 +19,9 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
   const args = { timeline, credentials }
   const rootState = store.rootState || store.state
   const timelineData = rootState.statuses.timelines[camelCase(timeline)]
+  const hideMutedPosts = typeof rootState.config.hideMutedPosts === 'undefined'
+    ? rootState.instance.hideMutedPosts
+    : rootState.config.hideMutedPosts
 
   if (older) {
     args['until'] = until || timelineData.minId
@@ -28,6 +31,7 @@ const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false
 
   args['userId'] = userId
   args['tag'] = tag
+  args['withMuted'] = !hideMutedPosts
 
   const numStatusesBeforeFetch = timelineData.statuses.length
 

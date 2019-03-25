@@ -30,6 +30,10 @@ const backendInteractorService = (credentials) => {
     return apiService.fetchUser({id, credentials})
   }
 
+  const fetchUserRelationship = ({id}) => {
+    return apiService.fetchUserRelationship({id, credentials})
+  }
+
   const followUser = (id) => {
     return apiService.followUser({credentials, id})
   }
@@ -58,12 +62,10 @@ const backendInteractorService = (credentials) => {
     return timelineFetcherService.startFetching({timeline, store, credentials, userId, tag})
   }
 
-  const setUserMute = ({id, muted = true}) => {
-    return apiService.setUserMute({id, muted, credentials})
-  }
-
   const fetchMutes = () => apiService.fetchMutes({credentials})
-  const fetchBlocks = (params) => apiService.fetchBlocks({credentials, ...params})
+  const muteUser = (id) => apiService.muteUser({credentials, id})
+  const unmuteUser = (id) => apiService.unmuteUser({credentials, id})
+  const fetchBlocks = () => apiService.fetchBlocks({credentials})
   const fetchFollowRequests = () => apiService.fetchFollowRequests({credentials})
   const fetchOAuthTokens = () => apiService.fetchOAuthTokens({credentials})
   const revokeOAuthToken = (id) => apiService.revokeOAuthToken({id, credentials})
@@ -92,11 +94,13 @@ const backendInteractorService = (credentials) => {
     blockUser,
     unblockUser,
     fetchUser,
+    fetchUserRelationship,
     fetchAllFollowing,
     verifyCredentials: apiService.verifyCredentials,
     startFetching,
-    setUserMute,
     fetchMutes,
+    muteUser,
+    unmuteUser,
     fetchBlocks,
     fetchOAuthTokens,
     revokeOAuthToken,

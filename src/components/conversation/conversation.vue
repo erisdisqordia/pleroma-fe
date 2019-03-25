@@ -17,7 +17,7 @@
           :statusoid="status"
           :expandable='!expanded'
           :focused="focused(status.id)"
-          :inConversation="expanded"
+          :inConversation="isExpanded"
           :highlight="getHighlight()"
           :replies="getReplies(status.id)"
           class="status-fadein"

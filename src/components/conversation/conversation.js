@@ -36,6 +36,11 @@ const conversation = {
     'collapsable',
     'isPage'
   ],
+  created () {
+    if (this.isPage) {
+      this.fetchConversation()
+    }
+  },
   computed: {
     status () {
       return this.statusoid
@@ -140,7 +145,7 @@ const conversation = {
       this.highlight = id
     },
     getHighlight () {
-      return this.expanded ? this.highlight : null
+      return this.isExpanded ? this.highlight : null
     },
     toggleExpanded () {
       this.expanded = !this.expanded

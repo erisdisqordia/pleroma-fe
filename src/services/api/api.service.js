@@ -33,10 +33,6 @@ const MASTODON_UNRETWEET_URL = id => `/api/v1/statuses/${id}/unreblog`
 const MASTODON_DELETE_URL = id => `/api/v1/statuses/${id}`
 const MASTODON_FOLLOW_URL = id => `/api/v1/accounts/${id}/follow`
 const MASTODON_UNFOLLOW_URL = id => `/api/v1/accounts/${id}/unfollow`
-const MASTODON_BLOCK_URL = id => `/api/v1/accounts/${id}/block`
-const MASTODON_UNBLOCK_URL = id => `/api/v1/accounts/${id}/unblock`
-const MASTODON_MUTE_URL = id => `/api/v1/accounts/${id}/mute`
-const MASTODON_UNMUTE_URL = id => `/api/v1/accounts/${id}/unmute`
 const MASTODON_STATUS_URL = id => `/api/v1/statuses/${id}`
 const MASTODON_STATUS_CONTEXT_URL = id => `/api/v1/statuses/${id}/context`
 const MASTODON_USER_URL = '/api/v1/accounts'

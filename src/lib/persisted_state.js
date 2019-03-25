@@ -60,6 +60,9 @@ export default function createPersistedState ({
             merge({}, store.state, savedState)
           )
         }
+        if (store.state.oauth.token) {
+          store.dispatch('loginUser', store.state.oauth.token)
+        }
         loaded = true
       } catch (e) {
         console.log("Couldn't load state")

@@ -74,12 +74,12 @@
         </div>
         <div class='mute' v-if='isOtherUser && loggedIn'>
           <span v-if='user.muted'>
-            <button @click="toggleMute" class="pressed">
+            <button @click="unmuteUser" class="pressed">
               {{ $t('user_card.muted') }}
             </button>
           </span>
           <span v-if='!user.muted'>
-            <button @click="toggleMute">
+            <button @click="muteUser">
               {{ $t('user_card.mute') }}
             </button>
           </span>

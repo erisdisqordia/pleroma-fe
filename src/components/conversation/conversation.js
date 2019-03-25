@@ -139,7 +139,7 @@ const conversation = {
       return this.replies[id] || []
     },
     focused (id) {
-      return this.expanded && id === this.statusId
+      return (this.expanded || this.isPage) && id === this.statusId
     },
     setHighlight (id) {
       this.highlight = id

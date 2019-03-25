@@ -6,24 +6,20 @@
         <a href="#" @click.prevent="toggleExpanded">{{ $t('timeline.collapse') }}</a>
       </span>
     </div>
-    <div class="panel-body">
-      <div class="timeline">
-        <status
-          v-for="status in conversation"
-          @goto="setHighlight"
-          @toggleExpanded="toggleExpanded"
-          :key="status.id"
-          :inlineExpanded="collapsable"
-          :statusoid="status"
-          :expandable='!expanded'
-          :focused="focused(status.id)"
-          :inConversation="isExpanded"
-          :highlight="getHighlight()"
-          :replies="getReplies(status.id)"
-          class="status-fadein"
-        />
-      </div>
-    </div>
+    <status
+      v-for="status in conversation"
+      @goto="setHighlight"
+      @toggleExpanded="toggleExpanded"
+      :key="status.id"
+      :inlineExpanded="collapsable"
+      :statusoid="status"
+      :expandable='!expanded'
+      :focused="focused(status.id)"
+      :inConversation="isExpanded"
+      :highlight="getHighlight()"
+      :replies="getReplies(status.id)"
+      class="status-fadein panel-body"
+    />
   </div>
 </template>
 

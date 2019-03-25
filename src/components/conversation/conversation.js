@@ -27,7 +27,7 @@ const conversation = {
   data () {
     return {
       highlight: null,
-      relevantIds: []
+      converationStatusIds: []
     }
   },
   props: [
@@ -39,8 +39,8 @@ const conversation = {
       return this.statusoid
     },
     idsToShow () {
-      if (this.relevantIds.length > 0) {
-        return this.relevantIds
+      if (this.converationStatusIds.length > 0) {
+        return this.converationStatusIds
       } else if (this.statusId) {
         return [this.statusId]
       } else {
@@ -96,12 +96,11 @@ const conversation = {
   methods: {
     fetchConversation () {
       if (this.status) {
-        const conversationId = this.status.id
-        this.$store.state.api.backendInteractor.fetchConversation({id: conversationId})
+        this.$store.state.api.backendInteractor.fetchConversation({id: this.status.id})
           .then(({ancestors, descendants}) => {
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
-            set(this, 'relevantIds', [].concat(
+            set(this, 'converationStatusIds', [].concat(
               ancestors.map(_ => _.id),
               this.statusId,
               descendants.map(_ => _.id)))

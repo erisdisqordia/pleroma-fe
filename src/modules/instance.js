@@ -18,6 +18,7 @@ const defaultState = {
   scopeOptionsEnabled: true,
   formattingOptionsEnabled: false,
   alwaysShowSubjectInput: true,
+  hideMutedPosts: false,
   collapseMessageWithSubject: false,
   hidePostStats: false,
   hideUserStats: false,
@@ -48,7 +49,11 @@ const defaultState = {
 
   // Html stuff
   instanceSpecificPanelContent: '',
-  tos: ''
+  tos: '',
+
+  // Version Information
+  backendVersion: '',
+  frontendVersion: ''
 }
 
 const instance = {

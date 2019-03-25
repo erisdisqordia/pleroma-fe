@@ -71,7 +71,7 @@
     "account_not_locked_warning_link": "ŝlosita",
     "attachments_sensitive": "Marki kunsendaĵojn kiel konsternajn",
     "content_type": {
-      "plain_text": "Plata teksto"
+      "text/plain": "Plata teksto"
     },
     "content_warning": "Temo (malnepra)",
     "default": "Ĵus alvenis al la Universala Kongreso!",

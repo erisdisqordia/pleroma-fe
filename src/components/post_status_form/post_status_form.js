@@ -222,6 +222,9 @@ const PostStatusForm = {
         this.highlighted = 0
       }
     },
+    onKeydown (e) {
+      e.stopPropagation()
+    },
     setCaret ({target: {selectionStart}}) {
       this.caret = selectionStart
     },
@@ -293,6 +296,8 @@ const PostStatusForm = {
     },
     paste (e) {
       if (e.clipboardData.files.length > 0) {
+        // prevent pasting of file as text
+        e.preventDefault()
         // Strangely, files property gets emptied after event propagation
         // Trying to wrap it in array doesn't work. Plus I doubt it's possible
         // to hold more than one file in clipboard.

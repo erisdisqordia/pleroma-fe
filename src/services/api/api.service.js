@@ -5,25 +5,18 @@ const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
 const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
 const TAG_TIMELINE_URL = '/api/statusnet/tags/timeline'
-const STATUS_UPDATE_URL = '/api/statuses/update.json'
-const STATUS_URL = '/api/statuses/show'
-const MEDIA_UPLOAD_URL = '/api/statusnet/media/upload'
-const CONVERSATION_URL = '/api/statusnet/conversation'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
-const BLOCKS_URL = '/api/statuses/blocks.json'
 const REGISTRATION_URL = '/api/account/register.json'
 const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
 const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
 const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
-const QVITTER_USER_TIMELINE_URL = '/api/qvitter/statuses/user_timeline.json'
 const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
-const USER_URL = '/api/users/show.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
@@ -44,9 +37,22 @@ const MASTODON_BLOCK_URL = id => `/api/v1/accounts/${id}/block`
 const MASTODON_UNBLOCK_URL = id => `/api/v1/accounts/${id}/unblock`
 const MASTODON_MUTE_URL = id => `/api/v1/accounts/${id}/mute`
 const MASTODON_UNMUTE_URL = id => `/api/v1/accounts/${id}/unmute`
+const MASTODON_STATUS_URL = id => `/api/v1/statuses/${id}`
+const MASTODON_STATUS_CONTEXT_URL = id => `/api/v1/statuses/${id}/context`
+const MASTODON_USER_URL = '/api/v1/accounts'
+const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
+const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
+const MASTODON_USER_BLOCKS_URL = '/api/v1/blocks/'
+const MASTODON_USER_MUTES_URL = '/api/v1/mutes/'
+const MASTODON_BLOCK_USER_URL = id => `/api/v1/accounts/${id}/block`
+const MASTODON_UNBLOCK_USER_URL = id => `/api/v1/accounts/${id}/unblock`
+const MASTODON_MUTE_USER_URL = id => `/api/v1/accounts/${id}/mute`
+const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
+const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
+const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 
 import { each, map } from 'lodash'
-import { parseStatus, parseUser, parseNotification } from '../entity_normalizer/entity_normalizer.service.js'
+import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
 import { StatusCodeError } from '../errors/errors'
 
@@ -58,6 +64,19 @@ let fetch = (url, options) => {
   const fullUrl = baseUrl + url
   options.credentials = 'same-origin'
   return oldfetch(fullUrl, options)
+}
+
+const promisedRequest = (url, options) => {
+  return fetch(url, options)
+    .then((response) => {
+      return new Promise((resolve, reject) => response.json()
+        .then((json) => {
+          if (!response.ok) {
+            return reject(new StatusCodeError(response.status, json, { url, options }, response))
+          }
+          return resolve(json)
+        }))
+    })
 }
 
 // Params
@@ -212,16 +231,14 @@ const unfollowUser = ({id, credentials}) => {
 }
 
 const blockUser = ({id, credentials}) => {
-  let url = MASTODON_BLOCK_URL(id)
-  return fetch(url, {
+  return fetch(MASTODON_BLOCK_USER_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   }).then((data) => data.json())
 }
 
 const unblockUser = ({id, credentials}) => {
-  let url = MASTODON_UNBLOCK_URL(id)
-  return fetch(url, {
+  return fetch(MASTODON_UNBLOCK_USER_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   }).then((data) => data.json())
@@ -244,7 +261,13 @@ const denyUser = ({id, credentials}) => {
 }
 
 const fetchUser = ({id, credentials}) => {
-  let url = `${USER_URL}?user_id=${id}`
+  let url = `${MASTODON_USER_URL}/${id}`
+  return promisedRequest(url, { headers: authHeaders(credentials) })
+    .then((data) => parseUser(data))
+}
+
+const fetchUserRelationship = ({id, credentials}) => {
+  let url = `${MASTODON_USER_RELATIONSHIPS_URL}/?id=${id}`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((response) => {
       return new Promise((resolve, reject) => response.json()
@@ -255,7 +278,6 @@ const fetchUser = ({id, credentials}) => {
           return resolve(json)
         }))
     })
-    .then((data) => parseUser(data))
 }
 
 const fetchFriends = ({id, page, credentials}) => {
@@ -299,8 +321,8 @@ const fetchFollowRequests = ({credentials}) => {
 }
 
 const fetchConversation = ({id, credentials}) => {
-  let url = `${CONVERSATION_URL}/${id}.json?count=100`
-  return fetch(url, { headers: authHeaders(credentials) })
+  let urlContext = MASTODON_STATUS_CONTEXT_URL(id)
+  return fetch(urlContext, { headers: authHeaders(credentials) })
     .then((data) => {
       if (data.ok) {
         return data
@@ -308,11 +330,14 @@ const fetchConversation = ({id, credentials}) => {
       throw new Error('Error fetching timeline', data)
     })
     .then((data) => data.json())
-    .then((data) => data.map(parseStatus))
+    .then(({ancestors, descendants}) => ({
+      ancestors: ancestors.map(parseStatus),
+      descendants: descendants.map(parseStatus)
+    }))
 }
 
 const fetchStatus = ({id, credentials}) => {
-  let url = `${STATUS_URL}/${id}.json`
+  let url = MASTODON_STATUS_URL(id)
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => {
       if (data.ok) {
@@ -324,16 +349,7 @@ const fetchStatus = ({id, credentials}) => {
     .then((data) => parseStatus(data))
 }
 
-const setUserMute = ({id, credentials, muted = true}) => {
-  const url = muted ? MASTODON_MUTE_URL(id) : MASTODON_UNMUTE_URL(id)
-
-  return fetch(url, {
-    method: 'POST',
-    headers: authHeaders(credentials)
-  })
-}
-
-const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false}) => {
+const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false, withMuted = false}) => {
   const timelineUrls = {
     public: PUBLIC_TIMELINE_URL,
     friends: FRIENDS_TIMELINE_URL,
@@ -341,8 +357,8 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     dms: DM_TIMELINE_URL,
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
-    user: QVITTER_USER_TIMELINE_URL,
-    media: QVITTER_USER_TIMELINE_URL,
+    user: MASTODON_USER_TIMELINE_URL,
+    media: MASTODON_USER_TIMELINE_URL,
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: TAG_TIMELINE_URL
   }
@@ -351,14 +367,15 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
 
   let url = timelineUrls[timeline]
 
+  if (timeline === 'user' || timeline === 'media') {
+    url = url(userId)
+  }
+
   if (since) {
     params.push(['since_id', since])
   }
   if (until) {
     params.push(['max_id', until])
-  }
-  if (userId) {
-    params.push(['user_id', userId])
   }
   if (tag) {
     url += `/${tag}.json`
@@ -368,6 +385,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   }
 
   params.push(['count', 20])
+  params.push(['with_muted', withMuted])
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`
@@ -460,23 +478,23 @@ const unretweet = ({ id, credentials }) => {
     .then((data) => parseStatus(data))
 }
 
-const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType, noAttachmentLinks}) => {
-  const idsText = mediaIds.join(',')
+const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds = [], inReplyToStatusId, contentType}) => {
   const form = new FormData()
 
   form.append('status', status)
   form.append('source', 'Pleroma FE')
-  if (noAttachmentLinks) form.append('no_attachment_links', noAttachmentLinks)
   if (spoilerText) form.append('spoiler_text', spoilerText)
   if (visibility) form.append('visibility', visibility)
   if (sensitive) form.append('sensitive', sensitive)
   if (contentType) form.append('content_type', contentType)
-  form.append('media_ids', idsText)
+  mediaIds.forEach(val => {
+    form.append('media_ids[]', val)
+  })
   if (inReplyToStatusId) {
-    form.append('in_reply_to_status_id', inReplyToStatusId)
+    form.append('in_reply_to_id', inReplyToStatusId)
   }
 
-  return fetch(STATUS_UPDATE_URL, {
+  return fetch(MASTODON_POST_STATUS_URL, {
     body: form,
     method: 'POST',
     headers: authHeaders(credentials)
@@ -501,13 +519,13 @@ const deleteStatus = ({ id, credentials }) => {
 }
 
 const uploadMedia = ({formData, credentials}) => {
-  return fetch(MEDIA_UPLOAD_URL, {
+  return fetch(MASTODON_MEDIA_UPLOAD_URL, {
     body: formData,
     method: 'POST',
     headers: authHeaders(credentials)
   })
-    .then((response) => response.text())
-    .then((text) => (new DOMParser()).parseFromString(text, 'application/xml'))
+    .then((data) => data.json())
+    .then((data) => parseAttachment(data))
 }
 
 const followImport = ({params, credentials}) => {
@@ -548,22 +566,27 @@ const changePassword = ({credentials, password, newPassword, newPasswordConfirma
 }
 
 const fetchMutes = ({credentials}) => {
-  const url = '/api/qvitter/mutes.json'
-
-  return fetch(url, {
-    headers: authHeaders(credentials)
-  }).then((data) => data.json())
+  return promisedRequest(MASTODON_USER_MUTES_URL, { headers: authHeaders(credentials) })
+    .then((users) => users.map(parseUser))
 }
 
-const fetchBlocks = ({page, credentials}) => {
-  return fetch(BLOCKS_URL, {
-    headers: authHeaders(credentials)
-  }).then((data) => {
-    if (data.ok) {
-      return data.json()
-    }
-    throw new Error('Error fetching blocks', data)
+const muteUser = ({id, credentials}) => {
+  return promisedRequest(MASTODON_MUTE_USER_URL(id), {
+    headers: authHeaders(credentials),
+    method: 'POST'
   })
+}
+
+const unmuteUser = ({id, credentials}) => {
+  return promisedRequest(MASTODON_UNMUTE_USER_URL(id), {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  })
+}
+
+const fetchBlocks = ({credentials}) => {
+  return promisedRequest(MASTODON_USER_BLOCKS_URL, { headers: authHeaders(credentials) })
+    .then((users) => users.map(parseUser))
 }
 
 const fetchOAuthTokens = ({credentials}) => {
@@ -571,7 +594,12 @@ const fetchOAuthTokens = ({credentials}) => {
 
   return fetch(url, {
     headers: authHeaders(credentials)
-  }).then((data) => data.json())
+  }).then((data) => {
+    if (data.ok) {
+      return data.json()
+    }
+    throw new Error('Error fetching auth tokens', data)
+  })
 }
 
 const revokeOAuthToken = ({id, credentials}) => {
@@ -614,6 +642,7 @@ const apiService = {
   blockUser,
   unblockUser,
   fetchUser,
+  fetchUserRelationship,
   favorite,
   unfavorite,
   retweet,
@@ -622,8 +651,9 @@ const apiService = {
   deleteStatus,
   uploadMedia,
   fetchAllFollowing,
-  setUserMute,
   fetchMutes,
+  muteUser,
+  unmuteUser,
   fetchBlocks,
   fetchOAuthTokens,
   revokeOAuthToken,

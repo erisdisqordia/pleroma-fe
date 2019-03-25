@@ -18,6 +18,7 @@ const defaultState = {
   scopeOptionsEnabled: true,
   formattingOptionsEnabled: false,
   alwaysShowSubjectInput: true,
+  hideMutedPosts: false,
   collapseMessageWithSubject: false,
   hidePostStats: false,
   hideUserStats: false,

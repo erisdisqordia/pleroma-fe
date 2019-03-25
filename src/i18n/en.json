@@ -153,6 +153,7 @@
     "general": "General",
     "hide_attachments_in_convo": "Hide attachments in conversations",
     "hide_attachments_in_tl": "Hide attachments in timeline",
+    "hide_muted_posts": "Hide posts of muted users",
     "max_thumbnails": "Maximum amount of thumbnails per post",
     "hide_isp": "Hide instance-specific panel",
     "preload_images": "Preload images",

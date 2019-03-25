@@ -1,6 +1,6 @@
 <template>
   <basic-user-card :user="user">
-    <template slot="secondary-area">
+    <div class="mute-card-content-container">
       <button class="btn btn-default" @click="unmuteUser" :disabled="progress" v-if="muted">
         <template v-if="progress">
           {{ $t('user_card.unmute_progress') }}
@@ -17,8 +17,18 @@
           {{ $t('user_card.mute') }}
         </template>
       </button>
-    </template>
+    </div>
   </basic-user-card>
 </template>
 
 <script src="./mute_card.js"></script>
+
+<style lang="scss">
+.mute-card-content-container {
+  margin-top: 0.5em;
+  text-align: right;
+  button {
+    width: 10em;
+  }
+}
+</style>

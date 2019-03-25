@@ -1,13 +1,16 @@
 import utils from './utils.js'
+import { parseUser } from '../entity_normalizer/entity_normalizer.service.js'
 
 const search = ({query, store}) => {
   return utils.request({
     store,
-    url: '/api/pleroma/search_user',
+    url: '/api/v1/accounts/search',
     params: {
-      query
+      q: query
     }
-  }).then((data) => data.json())
+  })
+  .then((data) => data.json())
+  .then((data) => data.map(parseUser))
 }
 const UserSearch = {
   search

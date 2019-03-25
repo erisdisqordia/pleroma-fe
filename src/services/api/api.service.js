@@ -67,7 +67,24 @@ let fetch = (url, options) => {
   return oldfetch(fullUrl, options)
 }
 
-const promisedRequest = (url, options) => {
+const promisedRequest = ({ method, url, payload, credentials, headers = {} }) => {
+  const options = {
+    method,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      ...headers
+    }
+  }
+  if (payload) {
+    options.body = JSON.stringify(payload)
+  }
+  if (credentials) {
+    options.headers = {
+      ...options.headers,
+      ...authHeaders(credentials)
+    }
+  }
   return fetch(url, options)
     .then((response) => {
       return new Promise((resolve, reject) => response.json()
@@ -228,7 +245,7 @@ const denyUser = ({id, credentials}) => {
 
 const fetchUser = ({id, credentials}) => {
   let url = `${MASTODON_USER_URL}/${id}`
-  return promisedRequest(url, { headers: authHeaders(credentials) })
+  return promisedRequest({ url, credentials })
     .then((data) => parseUser(data))
 }
 
@@ -652,26 +669,20 @@ const changePassword = ({credentials, password, newPassword, newPasswordConfirma
 }
 
 const fetchMutes = ({credentials}) => {
-  return promisedRequest(MASTODON_USER_MUTES_URL, { headers: authHeaders(credentials) })
+  return promisedRequest({ url: MASTODON_USER_MUTES_URL, credentials })
     .then((users) => users.map(parseUser))
 }
 
 const muteUser = ({id, credentials}) => {
-  return promisedRequest(MASTODON_MUTE_USER_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
+  return promisedRequest({ url: MASTODON_MUTE_USER_URL(id), credentials, method: 'POST' })
 }
 
 const unmuteUser = ({id, credentials}) => {
-  return promisedRequest(MASTODON_UNMUTE_USER_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
+  return promisedRequest({ url: MASTODON_UNMUTE_USER_URL(id), credentials, method: 'POST' })
 }
 
 const fetchBlocks = ({credentials}) => {
-  return promisedRequest(MASTODON_USER_BLOCKS_URL, { headers: authHeaders(credentials) })
+  return promisedRequest({ url: MASTODON_USER_BLOCKS_URL, credentials })
     .then((users) => users.map(parseUser))
 }
 
@@ -725,7 +736,7 @@ const fetchRebloggedByUsers = ({id}) => {
 
 const reportUser = ({credentials, userId, statusIds, comment, forward}) => {
   return promisedRequest({
-    uri: MASTODON_REPORT_USER_URL,
+    url: MASTODON_REPORT_USER_URL,
     method: 'POST',
     payload: {
       'account_id': userId,

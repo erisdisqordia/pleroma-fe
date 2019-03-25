@@ -25,6 +25,7 @@
   "image_cropper": {
     "crop_picture": "Crop picture",
     "save": "Save",
+    "save_without_cropping": "Save without cropping",
     "cancel": "Cancel"
   },
   "login": {
@@ -152,6 +153,7 @@
     "general": "General",
     "hide_attachments_in_convo": "Hide attachments in conversations",
     "hide_attachments_in_tl": "Hide attachments in timeline",
+    "hide_muted_posts": "Hide posts of muted users",
     "max_thumbnails": "Maximum amount of thumbnails per post",
     "hide_isp": "Hide instance-specific panel",
     "preload_images": "Preload images",
@@ -347,6 +349,11 @@
         "checkbox": "I have skimmed over terms and conditions",
         "link": "a nice lil' link"
       }
+    },
+    "version": {
+      "title": "Version",
+      "backend_version": "Backend Version",
+      "frontend_version": "Frontend Version"
     }
   },
   "timeline": {

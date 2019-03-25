@@ -16,9 +16,9 @@ export const mergeOrAdd = (arr, obj, item) => {
   } else {
     // This is a new item, prepare it
     arr.push(item)
-    obj[item.id] = item
+    set(obj, item.id, item)
     if (item.screen_name && !item.screen_name.includes('@')) {
-      obj[item.screen_name] = item
+      set(obj, item.screen_name.toLowerCase(), item)
     }
     return { item, new: true }
   }
@@ -91,10 +91,31 @@ export const mutations = {
   addNewUsers (state, users) {
     each(users, (user) => mergeOrAdd(state.users, state.usersObject, user))
   },
-  saveBlocks (state, blockIds) {
+  updateUserRelationship (state, relationships) {
+    relationships.forEach((relationship) => {
+      const user = state.usersObject[relationship.id]
+      if (user) {
+        user.follows_you = relationship.followed_by
+        user.following = relationship.following
+        user.muted = relationship.muting
+        user.statusnet_blocking = relationship.blocking
+      }
+    })
+  },
+  updateBlocks (state, blockedUsers) {
+    // Reset statusnet_blocking of all fetched users
+    each(state.users, (user) => { user.statusnet_blocking = false })
+    each(blockedUsers, (user) => mergeOrAdd(state.users, state.usersObject, user))
+  },
+  saveBlockIds (state, blockIds) {
     state.currentUser.blockIds = blockIds
   },
-  saveMutes (state, muteIds) {
+  updateMutes (state, mutedUsers) {
+    // Reset muted of all fetched users
+    each(state.users, (user) => { user.muted = false })
+    each(mutedUsers, (user) => mergeOrAdd(state.users, state.usersObject, user))
+  },
+  saveMuteIds (state, muteIds) {
     state.currentUser.muteIds = muteIds
   },
   setUserForStatus (state, status) {
@@ -122,12 +143,14 @@ export const mutations = {
 }
 
 export const getters = {
-  userById: state => id =>
-    state.users.find(user => user.id === id),
-  userByName: state => name =>
-    state.users.find(user => user.screen_name &&
-      (user.screen_name.toLowerCase() === name.toLowerCase())
-    )
+  findUser: state => query => {
+    const result = state.usersObject[query]
+    // In case it's a screen_name, we can try searching case-insensitive
+    if (!result && typeof query === 'string') {
+      return state.usersObject[query.toLowerCase()]
+    }
+    return result
+  }
 }
 
 export const defaultState = {
@@ -147,39 +170,51 @@ const users = {
   actions: {
     fetchUser (store, id) {
       return store.rootState.api.backendInteractor.fetchUser({ id })
-        .then((user) => store.commit('addNewUsers', [user]))
+        .then((user) => {
+          store.commit('addNewUsers', [user])
+          return user
+        })
+    },
+    fetchUserRelationship (store, id) {
+      return store.rootState.api.backendInteractor.fetchUserRelationship({ id })
+        .then((relationships) => store.commit('updateUserRelationship', relationships))
     },
     fetchBlocks (store) {
       return store.rootState.api.backendInteractor.fetchBlocks()
         .then((blocks) => {
-          store.commit('saveBlocks', map(blocks, 'id'))
-          store.commit('addNewUsers', blocks)
+          store.commit('saveBlockIds', map(blocks, 'id'))
+          store.commit('updateBlocks', blocks)
           return blocks
         })
     },
-    blockUser (store, id) {
-      return store.rootState.api.backendInteractor.blockUser(id)
-        .then((user) => store.commit('addNewUsers', [user]))
+    blockUser (store, userId) {
+      return store.rootState.api.backendInteractor.blockUser(userId)
+        .then((relationship) => {
+          store.commit('updateUserRelationship', [relationship])
+          store.commit('removeStatus', { timeline: 'friends', userId })
+          store.commit('removeStatus', { timeline: 'public', userId })
+          store.commit('removeStatus', { timeline: 'publicAndExternal', userId })
+        })
     },
     unblockUser (store, id) {
       return store.rootState.api.backendInteractor.unblockUser(id)
-        .then((user) => store.commit('addNewUsers', [user]))
+        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
     },
     fetchMutes (store) {
       return store.rootState.api.backendInteractor.fetchMutes()
-        .then((mutedUsers) => {
-          each(mutedUsers, (user) => { user.muted = true })
-          store.commit('addNewUsers', mutedUsers)
-          store.commit('saveMutes', map(mutedUsers, 'id'))
+        .then((mutes) => {
+          store.commit('updateMutes', mutes)
+          store.commit('saveMuteIds', map(mutes, 'id'))
+          return mutes
         })
     },
     muteUser (store, id) {
-      return store.state.api.backendInteractor.setUserMute({ id, muted: true })
-        .then((user) => store.commit('addNewUsers', [user]))
+      return store.rootState.api.backendInteractor.muteUser(id)
+        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
     },
     unmuteUser (store, id) {
-      return store.state.api.backendInteractor.setUserMute({ id, muted: false })
-        .then((user) => store.commit('addNewUsers', [user]))
+      return store.rootState.api.backendInteractor.unmuteUser(id)
+        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
     },
     addFriends ({ rootState, commit }, fetchBy) {
       return new Promise((resolve, reject) => {
@@ -292,6 +327,7 @@ const users = {
 
     logout (store) {
       store.commit('clearCurrentUser')
+      store.dispatch('disconnectFromChat')
       store.commit('setToken', false)
       store.dispatch('stopFetching', 'friends')
       store.commit('setBackendInteractor', backendInteractorService())
@@ -321,6 +357,9 @@ const users = {
 
               if (user.token) {
                 store.dispatch('setWsToken', user.token)
+
+                // Initialize the chat socket.
+                store.dispatch('initializeSocket')
               }
 
               // Start getting fresh posts.

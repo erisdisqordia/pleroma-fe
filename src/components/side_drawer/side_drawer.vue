@@ -15,12 +15,7 @@
         </div>
       </div>
       <ul>
-        <li v-if="currentUser" @click="toggleDrawer">
-          <router-link :to="{ name: 'new-status', params: { username: currentUser.screen_name } }">
-            {{ $t("post_status.new_status") }}
-          </router-link>
-        </li>
-        <li v-else @click="toggleDrawer">
+        <li v-if="!currentUser" @click="toggleDrawer">
           <router-link :to="{ name: 'login' }">
             {{ $t("login.login") }}
           </router-link>
@@ -119,14 +114,14 @@
 }
 
 .side-drawer-container-open {
-  transition-delay: 0.0s;
-  transition-property: left;
+  transition: 0.35s;
+  transition-property: background-color;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .side-drawer-container-closed {
   left: -100%;
-  transition-delay: 0.5s;
-  transition-property: left;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .side-drawer-click-outside {

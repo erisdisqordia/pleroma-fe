@@ -1,4 +1,5 @@
-import { remove, slice, each, find, maxBy, minBy, merge, first, last, isArray } from 'lodash'
+import { remove, slice, each, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
+import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -72,7 +73,9 @@ const mergeOrAdd = (arr, obj, item) => {
 
   if (oldItem) {
     // We already have this, so only merge the new info.
-    merge(oldItem, item)
+    // We ignore null values to avoid overwriting existing properties with missing data
+    // we also skip 'user' because that is handled by users module
+    merge(oldItem, omitBy(item, (v, k) => v === null || k === 'user'))
     // Reactivity fix.
     oldItem.attachments.splice(oldItem.attachments.length)
     return {item: oldItem, new: false}
@@ -80,7 +83,7 @@ const mergeOrAdd = (arr, obj, item) => {
     // This is a new item, prepare it
     prepareStatus(item)
     arr.push(item)
-    obj[item.id] = item
+    set(obj, item.id, item)
     return {item, new: true}
   }
 }
@@ -333,6 +336,7 @@ export const mutations = {
     oldTimeline.newStatusCount = 0
     oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
     oldTimeline.minVisibleId = last(oldTimeline.visibleStatuses).id
+    oldTimeline.minId = oldTimeline.minVisibleId
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },

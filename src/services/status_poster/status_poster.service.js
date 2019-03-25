@@ -4,7 +4,7 @@ import apiService from '../api/api.service.js'
 const postStatus = ({ store, status, spoilerText, visibility, sensitive, media = [], inReplyToStatusId = undefined, contentType = 'text/plain' }) => {
   const mediaIds = map(media, 'id')
 
-  return apiService.postStatus({credentials: store.state.users.currentUser.credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType, noAttachmentLinks: store.state.instance.noAttachmentLinks})
+  return apiService.postStatus({credentials: store.state.users.currentUser.credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType})
     .then((data) => {
       if (!data.error) {
         store.dispatch('addNewStatuses', {
@@ -26,25 +26,7 @@ const postStatus = ({ store, status, spoilerText, visibility, sensitive, media =
 const uploadMedia = ({ store, formData }) => {
   const credentials = store.state.users.currentUser.credentials
 
-  return apiService.uploadMedia({ credentials, formData }).then((xml) => {
-    // Firefox and Chrome treat method differently...
-    let link = xml.getElementsByTagName('link')
-
-    if (link.length === 0) {
-      link = xml.getElementsByTagName('atom:link')
-    }
-
-    link = link[0]
-
-    const mediaData = {
-      id: xml.getElementsByTagName('media_id')[0].textContent,
-      url: xml.getElementsByTagName('media_url')[0].textContent,
-      image: link.getAttribute('href'),
-      mimetype: link.getAttribute('type')
-    }
-
-    return mediaData
-  })
+  return apiService.uploadMedia({ credentials, formData })
 }
 
 const statusPosterService = {

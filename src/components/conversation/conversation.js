@@ -31,7 +31,8 @@ const conversation = {
   },
   props: [
     'statusoid',
-    'collapsable'
+    'collapsable',
+    'isPage'
   ],
   computed: {
     status () {
@@ -49,7 +50,7 @@ const conversation = {
         return []
       }
 
-      if (!this.expanded) {
+      if (!this.expanded && !this.isPage) {
         return [this.status]
       }
 
@@ -79,6 +80,9 @@ const conversation = {
         i++
         return result
       }, {})
+    },
+    isExpanded () {
+      return this.expanded || this.isPage
     }
   },
   components: {

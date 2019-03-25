@@ -1,6 +1,6 @@
 <template>
-  <div class="timeline panel-default" :class="[expanded ? 'panel' : 'panel-disabled']">
-    <div v-if="expanded" class="panel-heading conversation-heading">
+  <div class="timeline panel-default" :class="[isExpanded ? 'panel' : 'panel-disabled']">
+    <div v-if="isExpanded" class="panel-heading conversation-heading">
       <span class="title"> {{ $t('timeline.conversation') }} </span>
       <span v-if="collapsable">
         <a href="#" @click.prevent="toggleExpanded">{{ $t('timeline.collapse') }}</a>

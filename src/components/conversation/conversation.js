@@ -18,8 +18,13 @@ const sortById = (a, b) => {
   }
 }
 
-const sortAndFilterConversation = (conversation) => {
-  conversation = filter(conversation, (status) => status.type !== 'retweet')
+const sortAndFilterConversation = (conversation, statusoid) => {
+  if (statusoid.type === 'retweet') {
+    conversation = filter(
+      conversation,
+      (status) => (status.type === 'retweet' || status.id !== statusoid.retweeted_status.id)
+    )
+  }
   return conversation.filter(_ => _).sort(sortById)
 }
 
@@ -66,7 +71,7 @@ const conversation = {
         return []
       }
 
-      if (!this.expanded && !this.isPage) {
+      if (!this.isExpanded) {
         return [this.status]
       }
 
@@ -81,7 +86,7 @@ const conversation = {
         conversation[statusIndex] = this.status
       }
 
-      return sortAndFilterConversation(conversation)
+      return sortAndFilterConversation(conversation, this.status)
     },
     replies () {
       let i = 1
@@ -139,7 +144,7 @@ const conversation = {
       return this.replies[id] || []
     },
     focused (id) {
-      return (this.expanded || this.isPage) && id === this.statusId
+      return (this.isExpanded) && id === this.status.id
     },
     setHighlight (id) {
       this.highlight = id
@@ -149,6 +154,9 @@ const conversation = {
     },
     toggleExpanded () {
       this.expanded = !this.expanded
+      if (!this.expanded) {
+        this.setHighlight(null)
+      }
     }
   }
 }

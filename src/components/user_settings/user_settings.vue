@@ -70,7 +70,7 @@
             <h2>{{$t('settings.avatar')}}</h2>
             <p class="visibility-notice">{{$t('settings.avatar_size_instruction')}}</p>
             <p>{{$t('settings.current_avatar')}}</p>
-            <img :src="user.profile_image_url_original" class="current-avatar"></img>
+            <img :src="user.profile_image_url_original" class="current-avatar" />
             <p>{{$t('settings.set_new_avatar')}}</p>
             <button class="btn" type="button" id="pick-avatar" v-show="pickAvatarBtnVisible">{{$t('settings.upload_a_photo')}}</button>
             <image-cropper trigger="#pick-avatar" :submitHandler="submitAvatar" @open="pickAvatarBtnVisible=false" @close="pickAvatarBtnVisible=true" />
@@ -78,12 +78,11 @@
           <div class="setting-item">
             <h2>{{$t('settings.profile_banner')}}</h2>
             <p>{{$t('settings.current_profile_banner')}}</p>
-            <img :src="user.cover_photo" class="banner"></img>
+            <img :src="user.cover_photo" class="banner" />
             <p>{{$t('settings.set_new_profile_banner')}}</p>
-            <img class="banner" v-bind:src="bannerPreview" v-if="bannerPreview">
-            </img>
+            <img class="banner" v-bind:src="bannerPreview" v-if="bannerPreview" />
             <div>
-              <input type="file" @change="uploadFile('banner', $event)" ></input>
+              <input type="file" @change="uploadFile('banner', $event)" />
             </div>
             <i class=" icon-spin4 animate-spin uploading" v-if="bannerUploading"></i>
             <button class="btn btn-default" v-else-if="bannerPreview" @click="submitBanner">{{$t('general.submit')}}</button>
@@ -95,10 +94,9 @@
           <div class="setting-item">
             <h2>{{$t('settings.profile_background')}}</h2>
             <p>{{$t('settings.set_new_profile_background')}}</p>
-            <img class="bg" v-bind:src="backgroundPreview" v-if="backgroundPreview">
-            </img>
+            <img class="bg" v-bind:src="backgroundPreview" v-if="backgroundPreview" />
             <div>
-              <input type="file" @change="uploadFile('background', $event)" ></input>
+              <input type="file" @change="uploadFile('background', $event)" />
             </div>
             <i class=" icon-spin4 animate-spin uploading" v-if="backgroundUploading"></i>
             <button class="btn btn-default" v-else-if="backgroundPreview" @click="submitBg">{{$t('general.submit')}}</button>
@@ -174,7 +172,7 @@
             <h2>{{$t('settings.follow_import')}}</h2>
             <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
             <form>
-              <input type="file" ref="followlist" v-on:change="followListChange"></input>
+              <input type="file" ref="followlist" v-on:change="followListChange" />
             </form>
             <i class=" icon-spin4 animate-spin uploading" v-if="followListUploading"></i>
             <button class="btn btn-default" v-else @click="importFollows">{{$t('general.submit')}}</button>

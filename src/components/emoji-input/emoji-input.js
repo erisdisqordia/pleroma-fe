@@ -5,7 +5,8 @@ const EmojiInput = {
   props: [
     'value',
     'placeholder',
-    'type'
+    'type',
+    'classname'
   ],
   data () {
     return {

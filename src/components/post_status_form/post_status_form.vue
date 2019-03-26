@@ -15,7 +15,7 @@
         type="text"
         :placeholder="$t('post_status.content_warning')"
         v-model="newStatus.spoilerText"
-        class="form-cw"
+        classname="form-control"
       />
       <textarea
         ref="textarea"

@@ -22,9 +22,18 @@
           <div class="setting-item" >
             <h2>{{$t('settings.name_bio')}}</h2>
             <p>{{$t('settings.name')}}</p>
-            <input class='name-changer' id='username' v-model="newName"></input>
+            <EmojiInput 
+              type="text"
+              v-model="newName"
+              id="username"
+              classname="name-changer"
+            />
             <p>{{$t('settings.bio')}}</p>
-            <textarea class="bio" v-model="newBio"></textarea>
+            <EmojiInput
+              type="textarea"
+              v-model="newBio"
+              classname="bio"
+            />
             <p>
               <input type="checkbox" v-model="newLocked" id="account-locked">
               <label for="account-locked">{{$t('settings.lock_account_description')}}</label>

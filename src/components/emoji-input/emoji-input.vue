@@ -1,7 +1,8 @@
 <template>
   <div class="emoji-input">
     <input
-      class="form-control"
+      v-if="type !== 'textarea'"
+      :class="classname"
       :type="type"
       :value="value"
       :placeholder="placeholder"
@@ -15,6 +16,21 @@
       @keydown.tab="cycleForward"
       @keydown.enter="replaceEmoji"
     />
+    <textarea
+      v-else
+      :class="classname"
+      :value="value"
+      :placeholder="placeholder"
+      @input="onInput"
+      @click="setCaret"
+      @keyup="setCaret"
+      @keydown="onKeydown"
+      @keydown.down="cycleForward"
+      @keydown.up="cycleBackward"
+      @keydown.shift.tab="cycleBackward"
+      @keydown.tab="cycleForward"
+      @keydown.enter="replaceEmoji"
+    ></textarea>
     <div class="autocomplete-panel" v-if="suggestions">
       <div class="autocomplete-panel-body">
         <div

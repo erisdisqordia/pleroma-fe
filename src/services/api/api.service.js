@@ -4,7 +4,6 @@ const FRIENDS_TIMELINE_URL = '/api/statuses/friends_timeline.json'
 const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
 const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
-const TAG_TIMELINE_URL = '/api/statusnet/tags/timeline'
 const FAVORITE_URL = '/api/favorites/create'
 const UNFAVORITE_URL = '/api/favorites/destroy'
 const RETWEET_URL = '/api/statuses/retweet'
@@ -38,6 +37,7 @@ const MASTODON_STATUS_CONTEXT_URL = id => `/api/v1/statuses/${id}/context`
 const MASTODON_USER_URL = '/api/v1/accounts'
 const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
 const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
+const MASTODON_TAG_TIMELINE_URL = tag => `/api/v1/timelines/tag/${tag}`
 const MASTODON_USER_BLOCKS_URL = '/api/v1/blocks/'
 const MASTODON_USER_MUTES_URL = '/api/v1/mutes/'
 const MASTODON_BLOCK_USER_URL = id => `/api/v1/accounts/${id}/block`
@@ -356,7 +356,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     user: MASTODON_USER_TIMELINE_URL,
     media: MASTODON_USER_TIMELINE_URL,
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
-    tag: TAG_TIMELINE_URL
+    tag: MASTODON_TAG_TIMELINE_URL
   }
   const isNotifications = timeline === 'notifications'
   const params = []
@@ -374,7 +374,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     params.push(['max_id', until])
   }
   if (tag) {
-    url += `/${tag}.json`
+    url = url(tag)
   }
   if (timeline === 'media') {
     params.push(['only_media', 1])

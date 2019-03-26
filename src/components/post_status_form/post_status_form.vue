@@ -10,12 +10,13 @@
         <router-link :to="{ name: 'user-settings' }">{{ $t('post_status.account_not_locked_warning_link') }}</router-link>
       </i18n>
       <p v-if="this.newStatus.visibility == 'direct'" class="visibility-notice">{{ $t('post_status.direct_warning') }}</p>
-      <input
+      <EmojiInput
         v-if="newStatus.spoilerText || alwaysShowSubject"
         type="text"
         :placeholder="$t('post_status.content_warning')"
         v-model="newStatus.spoilerText"
-        class="form-cw">
+        class="form-cw"
+      />
       <textarea
         ref="textarea"
         @click="setCaret"

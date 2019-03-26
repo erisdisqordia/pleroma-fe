@@ -10,11 +10,14 @@ const touchEventCoord = e => ([e.touches[0].screenX, e.touches[0].screenY])
 
 const vectorLength = v => Math.sqrt(v[0] * v[0] + v[1] * v[1])
 
-const perpendicular = v => [v[1], v[0]]
+const perpendicular = v => [v[1], -v[0]]
 
 const dotProduct = (v1, v2) => v1[0] * v2[0] + v1[1] * v2[1]
 
-const vectorFlatten = (v1, v2) => [v1[0] * v2[0], v1[1] * v2[1]]
+const project = (v1, v2) => {
+  const scalar = (dotProduct(v1, v2) / dotProduct(v2, v2))
+  return [scalar * v2[0], scalar * v2[1]]
+}
 
 // direction: either use the constants above or an arbitrary 2d vector.
 // threshold: how many Px to move from touch origin before checking if the
@@ -46,12 +49,12 @@ const updateSwipe = (event, gesture) => {
   // movement is opposite from direction
   if (dotProduct(delta, gesture.direction) < 0) return
   // movement perpendicular to direction is too much
-  const towardsDir = vectorFlatten(gesture.direction, delta)
+  const towardsDir = project(delta, gesture.direction)
   const perpendicularDir = perpendicular(gesture.direction)
-  const towardsPerpendicular = vectorFlatten(perpendicularDir, delta)
+  const towardsPerpendicular = project(delta, perpendicularDir)
   if (
-    vectorLength(towardsDir) <
-    gesture.perpendicularTolerance * vectorLength(towardsPerpendicular)
+    vectorLength(towardsDir) * gesture.perpendicularTolerance <
+    vectorLength(towardsPerpendicular)
   ) return
 
   gesture.onSwipe()

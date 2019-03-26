@@ -154,7 +154,7 @@ input, textarea, .select {
     background: transparent;
     border: none;
     color: $fallback--text;
-    color: var(--text, $fallback--text);
+    color: var(--inputText, --text, $fallback--text);
     margin: 0;
     padding: 0 2em 0 .2em;
     font-family: sans-serif;

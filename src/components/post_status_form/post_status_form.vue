@@ -84,10 +84,10 @@
         <div class="media-upload-wrapper" v-for="file in newStatus.files">
           <i class="fa button-icon icon-cancel" @click="removeMediaFile(file)"></i>
           <div class="media-upload-container attachment">
-            <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
-            <video v-if="type(file) === 'video'" :src="file.image" controls></video>
-            <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
-            <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
+            <img class="thumbnail media-upload" :src="file.url" v-if="type(file) === 'image'"></img>
+            <video v-if="type(file) === 'video'" :src="file.url" controls></video>
+            <audio v-if="type(file) === 'audio'" :src="file.url" controls></audio>
+            <a v-if="type(file) === 'unknown'" :href="file.url">{{file.url}}</a>
           </div>
         </div>
       </div>
@@ -287,8 +287,6 @@
     img {
       width: 24px;
       height: 24px;
-      border-radius: $fallback--avatarRadius;
-      border-radius: var(--avatarRadius, $fallback--avatarRadius);
       object-fit: contain;
     }
 

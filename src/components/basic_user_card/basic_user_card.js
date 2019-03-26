@@ -20,7 +20,6 @@ const BasicUserCard = {
       this.userExpanded = !this.userExpanded
     },
     userProfileLink (user) {
-      console.log('22222222222222222222222222222')
       return generateProfileLink(user.id, user.screen_name, this.$store.state.instance.restrictedNicknames)
     }
   }

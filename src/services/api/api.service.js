@@ -8,7 +8,6 @@ const RETWEET_URL = '/api/statuses/retweet'
 const UNRETWEET_URL = '/api/statuses/unretweet'
 const STATUS_DELETE_URL = '/api/statuses/destroy'
 const MENTIONS_URL = '/api/statuses/mentions.json'
-const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
 const FOLLOWERS_URL = '/api/statuses/followers.json'
 const FRIENDS_URL = '/api/statuses/friends.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
@@ -30,6 +29,7 @@ const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+const MASTODON_DIRECT_MESSAGES_TIMELINE_URL = '/api/v1/timelines/direct'
 const MASTODON_PUBLIC_TIMELINE = '/api/v1/timelines/public'
 const MASTODON_USER_HOME_TIMELINE_URL = '/api/v1/timelines/home'
 const MASTODON_STATUS_URL = id => `/api/v1/statuses/${id}`
@@ -349,7 +349,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     public: MASTODON_PUBLIC_TIMELINE,
     friends: MASTODON_USER_HOME_TIMELINE_URL,
     mentions: MENTIONS_URL,
-    dms: DM_TIMELINE_URL,
+    dms: MASTODON_DIRECT_MESSAGES_TIMELINE_URL,
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
     'publicAndExternal': MASTODON_PUBLIC_TIMELINE,
     user: MASTODON_USER_TIMELINE_URL,

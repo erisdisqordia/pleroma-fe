@@ -9,9 +9,7 @@ const SideDrawer = {
     closeGesture: undefined
   }),
   created () {
-    const cb = () => this.toggleDrawer()
-    this.closeGesture = GestureService.swipeGesture(GestureService.DIRECTION_LEFT, cb)
-    console.log(this.closeGesture)
+    this.closeGesture = GestureService.swipeGesture(GestureService.DIRECTION_LEFT, this.toggleDrawer)
   },
   components: { UserCard },
   computed: {
@@ -47,7 +45,6 @@ const SideDrawer = {
       this.toggleDrawer()
     },
     touchStart (e) {
-      console.log(this)
       GestureService.beginSwipe(e, this.closeGesture)
     },
     touchMove (e) {

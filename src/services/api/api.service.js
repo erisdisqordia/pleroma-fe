@@ -8,8 +8,6 @@ const RETWEET_URL = '/api/statuses/retweet'
 const UNRETWEET_URL = '/api/statuses/unretweet'
 const STATUS_DELETE_URL = '/api/statuses/destroy'
 const MENTIONS_URL = '/api/statuses/mentions.json'
-const FOLLOWERS_URL = '/api/statuses/followers.json'
-const FRIENDS_URL = '/api/statuses/friends.json'
 const FOLLOWING_URL = '/api/friendships/create.json'
 const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const REGISTRATION_URL = '/api/account/register.json'
@@ -29,6 +27,8 @@ const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+const MASTODON_FOLLOWING_URL = id => `/api/v1/accounts/${id}/following`
+const MASTODON_FOLLOWERS_URL = id => `/api/v1/accounts/${id}/followers`
 const MASTODON_DIRECT_MESSAGES_TIMELINE_URL = '/api/v1/timelines/direct'
 const MASTODON_PUBLIC_TIMELINE = '/api/v1/timelines/public'
 const MASTODON_USER_HOME_TIMELINE_URL = '/api/v1/timelines/home'
@@ -275,28 +275,36 @@ const fetchUserRelationship = ({id, credentials}) => {
     })
 }
 
-const fetchFriends = ({id, page, credentials}) => {
-  let url = `${FRIENDS_URL}?user_id=${id}`
-  if (page) {
-    url = url + `&page=${page}`
-  }
+const fetchFriends = ({id, maxId, sinceId, limit = 20, credentials}) => {
+  let url = MASTODON_FOLLOWING_URL(id)
+  const args = [
+    maxId && `max_id=${maxId}`,
+    sinceId && `since_id=${sinceId}`,
+    limit && `limit=${limit}`
+  ].filter(_ => _).join('&')
+
+  url = url + (args ? '?' + args : '')
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
 }
 
 const exportFriends = ({id, credentials}) => {
-  let url = `${FRIENDS_URL}?user_id=${id}&all=true`
+  let url = MASTODON_FOLLOWING_URL(id) + `?all=true`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
 }
 
-const fetchFollowers = ({id, page, credentials}) => {
-  let url = `${FOLLOWERS_URL}?user_id=${id}`
-  if (page) {
-    url = url + `&page=${page}`
-  }
+const fetchFollowers = ({id, maxId, sinceId, limit = 20, credentials}) => {
+  let url = MASTODON_FOLLOWERS_URL(id)
+  const args = [
+    maxId && `max_id=${maxId}`,
+    sinceId && `since_id=${sinceId}`,
+    limit && `limit=${limit}`
+  ].filter(_ => _).join('&')
+
+  url += args ? '?' + args : ''
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))

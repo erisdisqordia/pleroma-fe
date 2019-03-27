@@ -280,7 +280,7 @@ const fetchFriends = ({id, maxId, sinceId, limit = 20, credentials}) => {
   let url = MASTODON_FOLLOWING_URL(id)
   const args = [
     maxId && `max_id=${maxId}`,
-    sinceId && `max_id=${sinceId}`,
+    sinceId && `since_id=${sinceId}`,
     limit && `limit=${limit}`
   ].filter(_ => _).join('&')
 
@@ -301,11 +301,11 @@ const fetchFollowers = ({id, maxId, sinceId, limit = 20, credentials}) => {
   let url = MASTODON_FOLLOWERS_URL(id)
   const args = [
     maxId && `max_id=${maxId}`,
-    sinceId && `max_id=${sinceId}`,
+    sinceId && `since_id=${sinceId}`,
     limit && `limit=${limit}`
   ].filter(_ => _).join('&')
 
-  url = url + (args ? '?' + args : '')
+  url += args ? '?' + args : ''
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))

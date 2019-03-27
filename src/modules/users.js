@@ -1,5 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import { compact, map, each, merge, find } from 'lodash'
+import { compact, map, each, merge, find, last } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
 import oauthApi from '../services/new_api/oauth'
@@ -59,7 +59,7 @@ export const mutations = {
         user.friends.push(friend)
       }
     })
-    user.lastFriendId = friends.slice(-1)[0].id
+    user.lastFriendId = last(friends).id
   },
   addFollowers (state, { id, followers }) {
     const user = state.usersObject[id]
@@ -68,7 +68,7 @@ export const mutations = {
         user.followers.push(follower)
       }
     })
-    user.lastFollowerId = followers.slice(-1)[0].id
+    user.lastFollowerId = last(followers).id
   },
   // Because frontend doesn't have a reason to keep these stuff in memory
   // outside of viewing someones user profile.

@@ -1,14 +1,8 @@
 /* eslint-env browser */
 const LOGIN_URL = '/api/account/verify_credentials.json'
-const FRIENDS_TIMELINE_URL = '/api/statuses/friends_timeline.json'
 const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
-const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
-const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
 const TAG_TIMELINE_URL = '/api/statusnet/tags/timeline'
 const MENTIONS_URL = '/api/statuses/mentions.json'
-const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
-const FOLLOWERS_URL = '/api/statuses/followers.json'
-const FRIENDS_URL = '/api/statuses/friends.json'
 const REGISTRATION_URL = '/api/account/register.json'
 const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
@@ -33,6 +27,11 @@ const MASTODON_UNRETWEET_URL = id => `/api/v1/statuses/${id}/unreblog`
 const MASTODON_DELETE_URL = id => `/api/v1/statuses/${id}`
 const MASTODON_FOLLOW_URL = id => `/api/v1/accounts/${id}/follow`
 const MASTODON_UNFOLLOW_URL = id => `/api/v1/accounts/${id}/unfollow`
+const MASTODON_FOLLOWING_URL = id => `/api/v1/accounts/${id}/following`
+const MASTODON_FOLLOWERS_URL = id => `/api/v1/accounts/${id}/followers`
+const MASTODON_DIRECT_MESSAGES_TIMELINE_URL = '/api/v1/timelines/direct'
+const MASTODON_PUBLIC_TIMELINE = '/api/v1/timelines/public'
+const MASTODON_USER_HOME_TIMELINE_URL = '/api/v1/timelines/home'
 const MASTODON_STATUS_URL = id => `/api/v1/statuses/${id}`
 const MASTODON_STATUS_CONTEXT_URL = id => `/api/v1/statuses/${id}/context`
 const MASTODON_USER_URL = '/api/v1/accounts'
@@ -276,28 +275,36 @@ const fetchUserRelationship = ({id, credentials}) => {
     })
 }
 
-const fetchFriends = ({id, page, credentials}) => {
-  let url = `${FRIENDS_URL}?user_id=${id}`
-  if (page) {
-    url = url + `&page=${page}`
-  }
+const fetchFriends = ({id, maxId, sinceId, limit = 20, credentials}) => {
+  let url = MASTODON_FOLLOWING_URL(id)
+  const args = [
+    maxId && `max_id=${maxId}`,
+    sinceId && `since_id=${sinceId}`,
+    limit && `limit=${limit}`
+  ].filter(_ => _).join('&')
+
+  url = url + (args ? '?' + args : '')
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
 }
 
 const exportFriends = ({id, credentials}) => {
-  let url = `${FRIENDS_URL}?user_id=${id}&all=true`
+  let url = MASTODON_FOLLOWING_URL(id) + `?all=true`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
 }
 
-const fetchFollowers = ({id, page, credentials}) => {
-  let url = `${FOLLOWERS_URL}?user_id=${id}`
-  if (page) {
-    url = url + `&page=${page}`
-  }
+const fetchFollowers = ({id, maxId, sinceId, limit = 20, credentials}) => {
+  let url = MASTODON_FOLLOWERS_URL(id)
+  const args = [
+    maxId && `max_id=${maxId}`,
+    sinceId && `since_id=${sinceId}`,
+    limit && `limit=${limit}`
+  ].filter(_ => _).join('&')
+
+  url += args ? '?' + args : ''
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
@@ -347,12 +354,12 @@ const fetchStatus = ({id, credentials}) => {
 
 const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false, withMuted = false}) => {
   const timelineUrls = {
-    public: PUBLIC_TIMELINE_URL,
-    friends: FRIENDS_TIMELINE_URL,
+    public: MASTODON_PUBLIC_TIMELINE,
+    friends: MASTODON_USER_HOME_TIMELINE_URL,
     mentions: MENTIONS_URL,
-    dms: DM_TIMELINE_URL,
+    dms: MASTODON_DIRECT_MESSAGES_TIMELINE_URL,
     notifications: QVITTER_USER_NOTIFICATIONS_URL,
-    'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
+    'publicAndExternal': MASTODON_PUBLIC_TIMELINE,
     user: MASTODON_USER_TIMELINE_URL,
     media: MASTODON_USER_TIMELINE_URL,
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
@@ -378,6 +385,12 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   }
   if (timeline === 'media') {
     params.push(['only_media', 1])
+  }
+  if (timeline === 'public') {
+    params.push(['local', true])
+  }
+  if (timeline === 'public' || timeline === 'publicAndExternal') {
+    params.push(['only_media', false])
   }
 
   params.push(['count', 20])

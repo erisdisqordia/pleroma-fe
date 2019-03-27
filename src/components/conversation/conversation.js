@@ -3,19 +3,9 @@ import { set } from 'vue'
 import Status from '../status/status.vue'
 
 const sortById = (a, b) => {
-  const seqA = Number(a.id)
-  const seqB = Number(b.id)
-  const isSeqA = !Number.isNaN(seqA)
-  const isSeqB = !Number.isNaN(seqB)
-  if (isSeqA && isSeqB) {
-    return seqA < seqB ? -1 : 1
-  } else if (isSeqA && !isSeqB) {
-    return -1
-  } else if (!isSeqA && isSeqB) {
-    return 1
-  } else {
-    return a.id < b.id ? -1 : 1
-  }
+  const idA = a.type === 'retweet' ? a.retweeted_status.id : a.id
+  const idB = b.type === 'retweet' ? b.retweeted_status.id : b.id
+  return idA < idB ? -1 : 1
 }
 
 const sortAndFilterConversation = (conversation, statusoid) => {
@@ -24,6 +14,8 @@ const sortAndFilterConversation = (conversation, statusoid) => {
       conversation,
       (status) => (status.type === 'retweet' || status.id !== statusoid.retweeted_status.id)
     )
+  } else {
+    conversation = filter(conversation, (status) => status.type !== 'retweet')
   }
   return conversation.filter(_ => _).sort(sortById)
 }

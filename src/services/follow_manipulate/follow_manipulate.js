@@ -19,7 +19,7 @@ const fetchUser = (attempt, user, store) => new Promise((resolve, reject) => {
 export const requestFollow = (user, store) => new Promise((resolve, reject) => {
   store.state.api.backendInteractor.followUser(user.id)
     .then((updated) => {
-      store.commit('addNewUsers', [updated])
+      store.commit('updateUserRelationship', [updated])
 
       // For locked users we just mark it that we sent the follow request
       if (updated.locked) {
@@ -66,7 +66,7 @@ export const requestFollow = (user, store) => new Promise((resolve, reject) => {
 export const requestUnfollow = (user, store) => new Promise((resolve, reject) => {
   store.state.api.backendInteractor.unfollowUser(user.id)
     .then((updated) => {
-      store.commit('addNewUsers', [updated])
+      store.commit('updateUserRelationship', [updated])
       resolve({
         updated
       })

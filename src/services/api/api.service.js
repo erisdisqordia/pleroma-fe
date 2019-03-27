@@ -1,6 +1,5 @@
 /* eslint-env browser */
 const LOGIN_URL = '/api/account/verify_credentials.json'
-const FRIENDS_TIMELINE_URL = '/api/statuses/friends_timeline.json'
 const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const TAG_TIMELINE_URL = '/api/statusnet/tags/timeline'
 const FAVORITE_URL = '/api/favorites/create'
@@ -32,6 +31,7 @@ const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_PUBLIC_TIMELINE = '/api/v1/timelines/public'
+const MASTODON_USER_HOME_TIMELINE_URL = '/api/v1/timelines/home'
 const MASTODON_STATUS_URL = id => `/api/v1/statuses/${id}`
 const MASTODON_STATUS_CONTEXT_URL = id => `/api/v1/statuses/${id}/context`
 const MASTODON_USER_URL = '/api/v1/accounts'
@@ -347,7 +347,7 @@ const fetchStatus = ({id, credentials}) => {
 const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false, withMuted = false}) => {
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
-    friends: FRIENDS_TIMELINE_URL,
+    friends: MASTODON_USER_HOME_TIMELINE_URL,
     mentions: MENTIONS_URL,
     dms: DM_TIMELINE_URL,
     notifications: QVITTER_USER_NOTIFICATIONS_URL,

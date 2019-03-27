@@ -241,7 +241,7 @@ const afterStoreSetup = async ({ store, i18n }) => {
 
   // Now we have the server settings and can try logging in
   if (store.state.oauth.token) {
-    store.dispatch('loginUser', store.state.oauth.token)
+    await store.dispatch('loginUser', store.state.oauth.token)
   }
 
   const router = new VueRouter({

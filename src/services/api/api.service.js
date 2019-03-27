@@ -423,7 +423,7 @@ const favorite = ({ id, credentials }) => {
       if (response.ok) {
         return response.json()
       } else {
-        return {}
+        throw new Error('Error favoriting post')
       }
     })
     .then((data) => parseStatus(data))
@@ -438,7 +438,7 @@ const unfavorite = ({ id, credentials }) => {
       if (response.ok) {
         return response.json()
       } else {
-        return {}
+        throw new Error('Error removing favorite')
       }
     })
     .then((data) => parseStatus(data))
@@ -453,7 +453,7 @@ const retweet = ({ id, credentials }) => {
       if (response.ok) {
         return response.json()
       } else {
-        return {}
+        throw new Error('Error repeating post')
       }
     })
     .then((data) => parseStatus(data))
@@ -468,7 +468,7 @@ const unretweet = ({ id, credentials }) => {
       if (response.ok) {
         return response.json()
       } else {
-        return {}
+        throw new Error('Error removing repeat')
       }
     })
     .then((data) => parseStatus(data))

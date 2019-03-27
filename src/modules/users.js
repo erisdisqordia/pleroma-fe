@@ -219,8 +219,8 @@ const users = {
     addFriends ({ rootState, commit }, fetchBy) {
       return new Promise((resolve, reject) => {
         const user = rootState.users.usersObject[fetchBy]
-        const sinceId = user.lastFriendId
-        rootState.api.backendInteractor.fetchFriends({ id: user.id, sinceId })
+        const maxId = user.lastFriendId
+        rootState.api.backendInteractor.fetchFriends({ id: user.id, maxId })
           .then((friends) => {
             commit('addFriends', { id: user.id, friends })
             resolve(friends)
@@ -231,8 +231,8 @@ const users = {
     },
     addFollowers ({ rootState, commit }, fetchBy) {
       const user = rootState.users.usersObject[fetchBy]
-      const sinceId = user.lastFollowerId
-      return rootState.api.backendInteractor.fetchFollowers({ id: user.id, sinceId })
+      const maxId = user.lastFollowerId
+      return rootState.api.backendInteractor.fetchFollowers({ id: user.id, maxId })
         .then((followers) => {
           commit('addFollowers', { id: user.id, followers })
           return followers

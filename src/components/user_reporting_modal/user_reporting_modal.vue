@@ -1,7 +1,9 @@
 <template>
 <div class="modal-view" @click="closeModal" v-if="isOpen">
   <div class="user-reporting-panel panel" @click.stop="">
-    <div class="panel-heading">{{$t('user_reporting.title', [user.screen_name])}}</div>
+    <div class="panel-heading">
+      <div class="title">{{$t('user_reporting.title', [user.screen_name])}}</div>
+    </div>
     <div class="panel-body">
       <div class="user-reporting-panel-left">
         <div>
@@ -47,12 +49,17 @@
   min-height: 20vh;
   max-height: 80vh;
 
+  .panel-heading {
+    text-align: center;
+  }
+
   .panel-body {
     display: flex;
     flex-direction: column-reverse;
     border-top: 1px solid;
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
+    overflow: hidden;
   }
 
   &-left {

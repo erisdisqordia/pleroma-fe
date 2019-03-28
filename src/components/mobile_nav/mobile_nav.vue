@@ -1,5 +1,5 @@
 <template>
-  <nav class='nav-bar container asd' id="nav">
+  <nav class='nav-bar container' id="nav">
     <div class='mobile-inner-nav' @click="scrollToTop()">
       <div class='item'>
         <a href="#" class="mobile-nav-button" @click.stop.prevent="toggleMobileSidebar()">
@@ -15,7 +15,12 @@
       </div>
     </div>
     <SideDrawer ref="sideDrawer" :logout="logout"/>
-    <div v-if="currentUser" class="mobile-notifications-drawer" :class="{ 'closed': !notificationsOpen }">
+    <div v-if="currentUser"
+      class="mobile-notifications-drawer"
+      :class="{ 'closed': !notificationsOpen }"
+      @touchstart="notificationsTouchStart"
+      @touchmove="notificationsTouchMove"
+    >
       <div class="mobile-notifications-header">
         <span class="title">{{$t('notifications.notifications')}}</span>
         <a class="mobile-nav-button" @click.stop.prevent="closeMobileNotifications()">

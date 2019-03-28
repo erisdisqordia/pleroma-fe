@@ -2,6 +2,7 @@ import SideDrawer from '../side_drawer/side_drawer.vue'
 import Notifications from '../notifications/notifications.vue'
 import MobilePostStatusModal from '../mobile_post_status_modal/mobile_post_status_modal.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
+import GestureService from '../../services/gesture_service/gesture_service'
 
 const MobileNav = {
   components: {
@@ -10,8 +11,16 @@ const MobileNav = {
     MobilePostStatusModal
   },
   data: () => ({
+    notificationsCloseGesture: undefined,
     notificationsOpen: false
   }),
+  created () {
+    this.notificationsCloseGesture = GestureService.swipeGesture(
+      GestureService.DIRECTION_RIGHT,
+      this.closeMobileNotifications,
+      50
+    )
+  },
   computed: {
     currentUser () {
       return this.$store.state.users.currentUser
@@ -38,6 +47,12 @@ const MobileNav = {
         this.notificationsOpen = false
         this.markNotificationsAsSeen()
       }
+    },
+    notificationsTouchStart (e) {
+      GestureService.beginSwipe(e, this.notificationsCloseGesture)
+    },
+    notificationsTouchMove (e) {
+      GestureService.updateSwipe(e, this.notificationsCloseGesture)
     },
     scrollToTop () {
       window.scrollTo(0, 0)

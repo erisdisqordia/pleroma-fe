@@ -97,6 +97,7 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('showInstanceSpecificPanel')
   copyInstanceOption('scopeOptionsEnabled')
   copyInstanceOption('formattingOptionsEnabled')
+  copyInstanceOption('hideMutedPosts')
   copyInstanceOption('collapseMessageWithSubject')
   copyInstanceOption('loginMethod')
   copyInstanceOption('scopeCopy')
@@ -243,7 +244,7 @@ const afterStoreSetup = async ({ store, i18n }) => {
 
   // Now we have the server settings and can try logging in
   if (store.state.oauth.token) {
-    store.dispatch('loginUser', store.state.oauth.token)
+    await store.dispatch('loginUser', store.state.oauth.token)
   }
 
   const router = new VueRouter({

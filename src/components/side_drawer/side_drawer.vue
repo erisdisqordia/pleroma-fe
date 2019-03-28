@@ -2,6 +2,7 @@
   <div class="side-drawer-container"
     :class="{ 'side-drawer-container-closed': closed, 'side-drawer-container-open': !closed }"
   >
+    <div class="side-drawer-darken" :class="{ 'side-drawer-darken-closed': closed}" />
     <div class="side-drawer"
       :class="{'side-drawer-closed': closed}"
       @touchstart="touchStart"
@@ -106,16 +107,32 @@
   height: 100%;
   display: flex;
   align-items: stretch;
+  transition-duration: 0s;
+  transition-property: transform;
 }
 
 .side-drawer-container-open {
+  transform: translate(0%);
+}
+
+.side-drawer-container-closed {
+  transition-delay: 0.35s;
+  transform: translate(-100%);
+}
+
+.side-drawer-darken {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
   transition: 0.35s;
   transition-property: background-color;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.side-drawer-container-closed {
-  left: -100%;
+.side-drawer-darken-closed {
   background-color: rgba(0, 0, 0, 0);
 }
 
@@ -125,8 +142,9 @@
 
 .side-drawer {
   overflow-x: hidden;
-  transition: 0.35s;
   transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transition: 0.35s;
+  transition-property: transform;
   margin: 0 0 0 -100px;
   padding: 0 0 1em 100px;
   width: 80%;

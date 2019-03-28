@@ -10,16 +10,16 @@ const backendInteractorService = (credentials) => {
     return apiService.fetchConversation({id, credentials})
   }
 
-  const fetchFriends = ({id, page}) => {
-    return apiService.fetchFriends({id, page, credentials})
+  const fetchFriends = ({id, maxId, sinceId, limit}) => {
+    return apiService.fetchFriends({id, maxId, sinceId, limit, credentials})
   }
 
   const exportFriends = ({id}) => {
     return apiService.exportFriends({id, credentials})
   }
 
-  const fetchFollowers = ({id, page}) => {
-    return apiService.fetchFollowers({id, page, credentials})
+  const fetchFollowers = ({id, maxId, sinceId, limit}) => {
+    return apiService.fetchFollowers({id, maxId, sinceId, limit, credentials})
   }
 
   const fetchAllFollowing = ({username}) => {
@@ -62,12 +62,10 @@ const backendInteractorService = (credentials) => {
     return timelineFetcherService.startFetching({timeline, store, credentials, userId, tag})
   }
 
-  const setUserMute = ({id, muted = true}) => {
-    return apiService.setUserMute({id, muted, credentials})
-  }
-
   const fetchMutes = () => apiService.fetchMutes({credentials})
-  const fetchBlocks = (params) => apiService.fetchBlocks({credentials, ...params})
+  const muteUser = (id) => apiService.muteUser({credentials, id})
+  const unmuteUser = (id) => apiService.unmuteUser({credentials, id})
+  const fetchBlocks = () => apiService.fetchBlocks({credentials})
   const fetchFollowRequests = () => apiService.fetchFollowRequests({credentials})
   const fetchOAuthTokens = () => apiService.fetchOAuthTokens({credentials})
   const revokeOAuthToken = (id) => apiService.revokeOAuthToken({id, credentials})
@@ -100,8 +98,9 @@ const backendInteractorService = (credentials) => {
     fetchAllFollowing,
     verifyCredentials: apiService.verifyCredentials,
     startFetching,
-    setUserMute,
     fetchMutes,
+    muteUser,
+    unmuteUser,
     fetchBlocks,
     fetchOAuthTokens,
     revokeOAuthToken,

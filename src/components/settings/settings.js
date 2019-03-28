@@ -47,6 +47,11 @@ const settings = {
       pauseOnUnfocusedLocal: user.pauseOnUnfocused,
       hoverPreviewLocal: user.hoverPreview,
 
+      hideMutedPostsLocal: typeof user.hideMutedPosts === 'undefined'
+        ? instance.hideMutedPosts
+        : user.hideMutedPosts,
+      hideMutedPostsDefault: this.$t('settings.values.' + instance.hideMutedPosts),
+
       collapseMessageWithSubjectLocal: typeof user.collapseMessageWithSubject === 'undefined'
         ? instance.collapseMessageWithSubject
         : user.collapseMessageWithSubject,
@@ -176,6 +181,9 @@ const settings = {
     muteWordsString (value) {
       value = filter(value.split('\n'), (word) => trim(word).length > 0)
       this.$store.dispatch('setOption', { name: 'muteWords', value })
+    },
+    hideMutedPostsLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hideMutedPosts', value })
     },
     collapseMessageWithSubjectLocal (value) {
       this.$store.dispatch('setOption', { name: 'collapseMessageWithSubject', value })

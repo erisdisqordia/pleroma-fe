@@ -310,7 +310,6 @@ const Status = {
       this.replying = !this.replying
     },
     gotoOriginal (id) {
-      // only handled by conversation, not status_or_conversation
       if (this.inConversation) {
         this.$emit('goto', id)
       }

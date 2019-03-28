@@ -37,6 +37,10 @@
           <h2>{{$t('nav.timeline')}}</h2>
           <ul class="setting-list">
             <li>
+              <input type="checkbox" id="hideMutedPosts" v-model="hideMutedPostsLocal">
+              <label for="hideMutedPosts">{{$t('settings.hide_muted_posts')}} {{$t('settings.instance_default', { value: hideMutedPostsDefault })}}</label>
+            </li>
+            <li>
               <input type="checkbox" id="collapseMessageWithSubject" v-model="collapseMessageWithSubjectLocal">
               <label for="collapseMessageWithSubject">
                 {{$t('settings.collapse_subject')}} {{$t('settings.instance_default', { value: collapseMessageWithSubjectDefault })}}

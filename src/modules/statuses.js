@@ -1,4 +1,5 @@
 import { remove, slice, each, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
+import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -82,7 +83,7 @@ const mergeOrAdd = (arr, obj, item) => {
     // This is a new item, prepare it
     prepareStatus(item)
     arr.push(item)
-    obj[item.id] = item
+    set(obj, item.id, item)
     return {item, new: true}
   }
 }
@@ -432,13 +433,6 @@ const statuses = {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })
       apiService.favorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            return {}
-          }
-        })
         .then(status => {
           commit('setFavoritedConfirm', { status })
         })
@@ -447,13 +441,6 @@ const statuses = {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: false })
       apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            return {}
-          }
-        })
         .then(status => {
           commit('setFavoritedConfirm', { status })
         })

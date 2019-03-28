@@ -10,12 +10,13 @@
         <router-link :to="{ name: 'user-settings' }">{{ $t('post_status.account_not_locked_warning_link') }}</router-link>
       </i18n>
       <p v-if="this.newStatus.visibility == 'direct'" class="visibility-notice">{{ $t('post_status.direct_warning') }}</p>
-      <input
+      <EmojiInput
         v-if="newStatus.spoilerText || alwaysShowSubject"
         type="text"
         :placeholder="$t('post_status.content_warning')"
         v-model="newStatus.spoilerText"
-        class="form-cw">
+        classname="form-control"
+      />
       <textarea
         ref="textarea"
         @click="setCaret"
@@ -55,14 +56,18 @@
         </div>
       </div>
     </div>
-    <div style="position:relative;" v-if="candidates">
-        <div class="autocomplete-panel">
-          <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">
-            <div class="autocomplete" :class="{ highlighted: candidate.highlighted }">
-              <span v-if="candidate.img"><img :src="candidate.img"></img></span>
-              <span v-else>{{candidate.utf}}</span>
-              <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
-            </div>
+    <div class="autocomplete-panel" v-if="candidates">
+        <div class="autocomplete-panel-body">
+          <div
+            v-for="(candidate, index) in candidates"
+            :key="index"
+            @click="replace(candidate.utf || (candidate.screen_name + ' '))"
+            class="autocomplete-item"
+            :class="{ highlighted: candidate.highlighted }"
+          >
+            <span v-if="candidate.img"><img :src="candidate.img" /></span>
+            <span v-else>{{candidate.utf}}</span>
+            <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
           </div>
         </div>
       </div>
@@ -260,51 +265,6 @@
   .icon-cancel {
     cursor: pointer;
     z-index: 4;
-  }
-
-  .autocomplete-panel {
-    margin: 0 0.5em 0 0.5em;
-    border-radius: $fallback--tooltipRadius;
-    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-    position: absolute;
-    z-index: 1;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-    // this doesn't match original but i don't care, making it uniform.
-    box-shadow: var(--popupShadow);
-    min-width: 75%;
-    background: $fallback--bg;
-    background: var(--bg, $fallback--bg);
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-  }
-
-  .autocomplete {
-    cursor: pointer;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    display: flex;
-
-    img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
-    }
-
-    span {
-      line-height: 24px;
-      margin: 0 0.1em 0 0.2em;
-    }
-
-    small {
-      margin-left: .5em;
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
-    }
-
-    &.highlighted {
-      background-color: $fallback--fg;
-      background-color: var(--lightBg, $fallback--fg);
-    }
   }
 }
 </style>

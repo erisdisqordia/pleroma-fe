@@ -1,5 +1,6 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
+import EmojiInput from '../emoji-input/emoji-input.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import Completion from '../../services/completion/completion.js'
 import { take, filter, reject, map, uniqBy } from 'lodash'
@@ -28,7 +29,8 @@ const PostStatusForm = {
     'subject'
   ],
   components: {
-    MediaUpload
+    MediaUpload,
+    EmojiInput
   },
   mounted () {
     this.resize(this.$refs.textarea)

@@ -12,7 +12,7 @@
       </div>
     </template>
     <template v-else>
-      <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
+      <div v-if="retweet && !noHeading && !inConversation" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
         <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <span class="user-name">
@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
+      <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet && !inConversation }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <router-link :to="userProfileLink" @click.stop.prevent.capture.native="toggleUserExpanded">
             <UserAvatar :compact="compact" :betterShadow="betterShadow" :src="status.user.profile_image_url_original"/>

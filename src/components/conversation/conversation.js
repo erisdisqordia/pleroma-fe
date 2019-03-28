@@ -120,9 +120,9 @@ const conversation = {
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
             set(this, 'converationStatusIds', [].concat(
-              ancestors.map(_ => _.id),
+              ancestors.map(_ => _.id).filter(_ => _ !== this.statusId),
               this.statusId,
-              descendants.map(_ => _.id)))
+              descendants.map(_ => _.id).filter(_ => _ !== this.statusId)))
           })
           .then(() => this.setHighlight(this.statusId))
       } else {

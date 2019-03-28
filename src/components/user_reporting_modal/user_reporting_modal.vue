@@ -52,7 +52,14 @@
   max-height: 80vh;
 
   .panel-heading {
-    text-align: center;
+    .title {
+      text-align: center;
+      // TODO: Consider making these as default of panel
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   .panel-body {

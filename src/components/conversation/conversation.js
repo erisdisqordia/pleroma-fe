@@ -5,7 +5,19 @@ import Status from '../status/status.vue'
 const sortById = (a, b) => {
   const idA = a.type === 'retweet' ? a.retweeted_status.id : a.id
   const idB = b.type === 'retweet' ? b.retweeted_status.id : b.id
-  return idA < idB ? -1 : 1
+  const seqA = Number(idA)
+  const seqB = Number(idB)
+  const isSeqA = !Number.isNaN(seqA)
+  const isSeqB = !Number.isNaN(seqB)
+  if (isSeqA && isSeqB) {
+    return seqA < seqB ? -1 : 1
+  } else if (isSeqA && !isSeqB) {
+    return -1
+  } else if (!isSeqA && isSeqB) {
+    return 1
+  } else {
+    return idA < idB ? -1 : 1
+  }
 }
 
 const sortAndFilterConversation = (conversation, statusoid) => {

@@ -22,7 +22,7 @@ const project = (v1, v2) => {
 // direction: either use the constants above or an arbitrary 2d vector.
 // threshold: how many Px to move from touch origin before checking if the
 //    callback should be called.
-// divergentTolerance: a scalr for much of divergent direction we tolerate when
+// divergentTolerance: a scalar for much of divergent direction we tolerate when
 //    above threshold. for example, with 1.0 we only call the callback if
 //    divergent component of delta is < 1.0 * direction component of delta.
 const swipeGesture = (direction, onSwipe, threshold = 30, perpendicularTolerance = 1.0) => {

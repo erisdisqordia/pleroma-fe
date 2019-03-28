@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="user-reporting-panel-right" v-bar>
+      <div class="user-reporting-panel-right" v-bar="{preventParentScroll: true}">
         <div>
           <div v-for="status in statuses" :key="status.id" class="status-fadein user-reporting-panel-sitem">
             <Status :inConversation="false" :focused="false" :statusoid="status" />

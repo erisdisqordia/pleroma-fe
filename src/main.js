@@ -16,6 +16,7 @@ import reportsModule from './modules/reports.js'
 
 import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
+import Vuebar from 'vuebar'
 
 import createPersistedState from './lib/persisted_state.js'
 import pushNotifications from './lib/push_notifications_plugin.js'
@@ -42,6 +43,7 @@ Vue.use(VueTimeago, {
 Vue.use(VueI18n)
 Vue.use(VueChatScroll)
 Vue.use(VueClickOutside)
+Vue.use(Vuebar)
 
 const i18n = new VueI18n({
   // By default, use the browser locale, we will update it if neccessary

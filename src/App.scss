@@ -839,3 +839,14 @@ nav {
 .vb.vb-dragging-phantom > .vb-dragger > .vb-dragger-styler {
   opacity: .5;
 }
+
+// Disable vuebar and use native scrollbar in mobile device
+#app.mobile {
+  .vb-content {
+    width: 100% !important;
+    padding-right: 0 !important;
+  }
+  .vb-dragger {
+    display: none;
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-bind:style="bgAppStyle">
+  <div id="app" v-bind:style="bgAppStyle" v-bind:class="{ mobile: isMobile }">
     <div class="app-bg-wrapper" v-bind:style="bgStyle"></div>
     <MobileNav v-if="isMobileLayout" />
     <nav v-else class='nav-bar container' @click="scrollToTop()" id="nav">

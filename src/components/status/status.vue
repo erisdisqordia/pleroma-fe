@@ -135,9 +135,8 @@
 
           <div v-if="!noHeading && !isPreview" class='status-actions media-body'>
             <div v-if="loggedIn">
-              <a href="#" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')">
-                <i class="button-icon icon-reply" :class="{'icon-reply-active': replying}"></i>
-              </a>
+              <i class="button-icon icon-reply" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')" :class="{'icon-reply-active': replying}"></i>
+              <span v-if="status.replies_count > 0">{{status.replies_count}}</span>
             </div>
             <retweet-button :visibility='status.visibility' :loggedIn='loggedIn' :status='status'></retweet-button>
             <favorite-button :loggedIn='loggedIn' :status='status'></favorite-button>
@@ -551,6 +550,7 @@ $status-margin: 0.75em;
 .icon-reply:hover {
   color: $fallback--cBlue;
   color: var(--cBlue, $fallback--cBlue);
+  cursor: pointer;
 }
 
 .icon-reply.icon-reply-active {

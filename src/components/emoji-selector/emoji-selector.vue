@@ -1,6 +1,8 @@
 <template>
   <div class="emoji-dropdown">
-    <span class="emoji-dropdown-toggle" @click="togglePanel">Emoji</span>
+    <span class="emoji-dropdown-toggle" @click="togglePanel">
+      <i class="icon-smile"></i>
+    </span>
     <div class="emoji-dropdown-menu panel panel-default" v-if="open">
       <div class="panel-heading emoji-tabs">
         <span class="emoji-tabs-item" v-for="(value, key) in emojis" :key="key" :title="value.text">
@@ -39,21 +41,25 @@
 .emoji {
   &-dropdown {
     position: absolute;
-    right: 10px;
-    top: 2px;
+    right: 0;
+    top: 100%;
     z-index: 1;
 
     &-toggle {
       cursor: pointer;
       position: absolute;
-      right: 0;
+      top: -25px;
+      right: 2px;
+
+      i {
+        font-size: 18px;
+      }
     }
 
     &-menu {
       position: absolute;
       z-index: 1;
       right: 0;
-      top: 25px;
       width: 300px;
       height: 300px;
       display: flex;

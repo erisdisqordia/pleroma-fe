@@ -239,6 +239,18 @@
       "css": "pencil",
       "code": 59416,
       "src": "fontawesome"
+    },
+    {
+      "uid": "c64623255a4a7c72436b199b05296c4f",
+      "css": "emo-happy",
+      "code": 59417,
+      "src": "fontelico"
+    },
+    {
+      "uid": "d862a10e1448589215be19702f98f2c1",
+      "css": "smile",
+      "code": 61720,
+      "src": "fontawesome"
     }
   ]
 }

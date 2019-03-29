@@ -1,5 +1,6 @@
 <template>
   <div class="emoji-input">
+    <EmojiSelector />
     <input
       v-if="type !== 'textarea'"
       :class="classname"

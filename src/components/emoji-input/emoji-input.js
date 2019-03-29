@@ -1,4 +1,6 @@
 import Completion from '../../services/completion/completion.js'
+import EmojiSelector from '../emoji-selector/emoji-selector.vue'
+
 import { take, filter, map } from 'lodash'
 
 const EmojiInput = {
@@ -13,6 +15,9 @@ const EmojiInput = {
       highlighted: 0,
       caret: 0
     }
+  },
+  components: {
+    EmojiSelector
   },
   computed: {
     suggestions () {

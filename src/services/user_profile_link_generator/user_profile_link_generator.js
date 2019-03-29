@@ -1,10 +1,10 @@
 import { includes } from 'lodash'
 
 const generateProfileLink = (id, screenName, restrictedNicknames) => {
-  const complicated = (isExternal(screenName) || includes(restrictedNicknames, screenName))
+  const complicated = !screenName || (isExternal(screenName) || includes(restrictedNicknames, screenName))
   return {
-    name: (!screenName || complicated ? 'external-user-profile' : 'user-profile'),
-    params: (!screenName || complicated ? { id } : { name: screenName })
+    name: (complicated ? 'external-user-profile' : 'user-profile'),
+    params: (complicated ? { id } : { name: screenName })
   }
 }
 

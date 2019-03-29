@@ -14,7 +14,13 @@
         <div class="emoji-groups">
           <div v-for="(value, key) in emojis" :key="key" class="emoji-group">
             <h6 class="emoji-group-title">{{value.text}}</h6>
-            <span v-for="emoji in value.emojis" :key="key + emoji.shortcode" :title="emoji.shortcode" class="emoji-item">
+            <span
+              v-for="emoji in value.emojis"
+              :key="key + emoji.shortcode"
+              :title="emoji.shortcode"
+              class="emoji-item"
+              @click="onEmoji(emoji)"
+            >
               <span v-if="!emoji.image_url">{{emoji.utf}}</span>
               <img :src="'https://bikeshed.party' + emoji.image_url" v-else>
             </span>
@@ -32,20 +38,27 @@
 
 .emoji {
   &-dropdown {
-    position: relative;
+    position: absolute;
+    right: 10px;
+    top: 2px;
+    z-index: 1;
 
     &-toggle {
       cursor: pointer;
+      position: absolute;
+      right: 0;
     }
 
     &-menu {
       position: absolute;
       z-index: 1;
       right: 0;
+      top: 25px;
       width: 300px;
       height: 300px;
       display: flex;
       flex-direction: column;
+      margin: 0 !important;
 
       &-content {
         flex: 1 1 1px;

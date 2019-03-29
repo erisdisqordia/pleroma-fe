@@ -1,6 +1,5 @@
 <template>
   <div class="emoji-input">
-    <EmojiSelector />
     <input
       v-if="type !== 'textarea'"
       :class="classname"
@@ -16,6 +15,7 @@
       @keydown.shift.tab="cycleBackward"
       @keydown.tab="cycleForward"
       @keydown.enter="replaceEmoji"
+      ref="input"
     />
     <textarea
       v-else
@@ -31,7 +31,9 @@
       @keydown.shift.tab="cycleBackward"
       @keydown.tab="cycleForward"
       @keydown.enter="replaceEmoji"
+      ref="input"
     ></textarea>
+    <EmojiSelector @emoji="onEmoji" />
     <div class="autocomplete-panel" v-if="suggestions">
       <div class="autocomplete-panel-body">
         <div
@@ -58,6 +60,8 @@
 @import '../../_variables.scss';
 
 .emoji-input {
+  position: relative;
+
   .form-control {
     width: 100%;
   }

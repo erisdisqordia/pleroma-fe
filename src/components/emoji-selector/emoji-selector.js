@@ -12,6 +12,11 @@ const EmojiSelector = {
   methods: {
     togglePanel () {
       this.open = !this.open
+    },
+    onEmoji (emoji) {
+      const value = emoji.image_url ? `:${emoji.shortcode}:` : emoji.utf
+      this.$emit('emoji', ` ${value} `)
+      this.open = false
     }
   },
   computed: {

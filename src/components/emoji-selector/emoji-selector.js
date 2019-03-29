@@ -1,12 +1,13 @@
+const filterByKeyword = (list, keyword = '') => {
+  return list.filter(x => x.shortcode.indexOf(keyword) !== -1)
+}
+
 const EmojiSelector = {
   data () {
     return {
-      open: false
+      open: false,
+      keyword: ''
     }
-  },
-  mounted () {
-    console.log(this.$store.state.instance.emoji)
-    console.log(this.$store.state.instance.customEmoji)
   },
   methods: {
     togglePanel () {
@@ -14,11 +15,21 @@ const EmojiSelector = {
     }
   },
   computed: {
-    standardEmoji () {
-      return this.$store.state.instance.emoji || []
-    },
-    customEmoji () {
-      return this.$store.state.instance.customEmoji || []
+    emojis () {
+      const standardEmojis = this.$store.state.instance.emoji || []
+      const customEmojis = this.$store.state.instance.customEmoji || []
+      return {
+        standard: {
+          text: 'Standard',
+          icon: 'icon-star',
+          emojis: filterByKeyword(standardEmojis, this.keyword)
+        },
+        custom: {
+          text: 'Custom',
+          icon: 'icon-picture',
+          emojis: filterByKeyword(customEmojis, this.keyword)
+        }
+      }
     }
   }
 }

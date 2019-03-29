@@ -1,21 +1,7 @@
 /* eslint-env browser */
 const LOGIN_URL = '/api/account/verify_credentials.json'
-const FRIENDS_TIMELINE_URL = '/api/statuses/friends_timeline.json'
 const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
-const PUBLIC_TIMELINE_URL = '/api/statuses/public_timeline.json'
-const PUBLIC_AND_EXTERNAL_TIMELINE_URL = '/api/statuses/public_and_external_timeline.json'
-const TAG_TIMELINE_URL = '/api/statusnet/tags/timeline'
-const FAVORITE_URL = '/api/favorites/create'
-const UNFAVORITE_URL = '/api/favorites/destroy'
-const RETWEET_URL = '/api/statuses/retweet'
-const UNRETWEET_URL = '/api/statuses/unretweet'
-const STATUS_DELETE_URL = '/api/statuses/destroy'
 const MENTIONS_URL = '/api/statuses/mentions.json'
-const DM_TIMELINE_URL = '/api/statuses/dm_timeline.json'
-const FOLLOWERS_URL = '/api/statuses/followers.json'
-const FRIENDS_URL = '/api/statuses/friends.json'
-const FOLLOWING_URL = '/api/friendships/create.json'
-const UNFOLLOWING_URL = '/api/friendships/destroy.json'
 const REGISTRATION_URL = '/api/account/register.json'
 const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
@@ -33,11 +19,24 @@ const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
+const MASTODON_FAVORITE_URL = id => `/api/v1/statuses/${id}/favourite`
+const MASTODON_UNFAVORITE_URL = id => `/api/v1/statuses/${id}/unfavourite`
+const MASTODON_RETWEET_URL = id => `/api/v1/statuses/${id}/reblog`
+const MASTODON_UNRETWEET_URL = id => `/api/v1/statuses/${id}/unreblog`
+const MASTODON_DELETE_URL = id => `/api/v1/statuses/${id}`
+const MASTODON_FOLLOW_URL = id => `/api/v1/accounts/${id}/follow`
+const MASTODON_UNFOLLOW_URL = id => `/api/v1/accounts/${id}/unfollow`
+const MASTODON_FOLLOWING_URL = id => `/api/v1/accounts/${id}/following`
+const MASTODON_FOLLOWERS_URL = id => `/api/v1/accounts/${id}/followers`
+const MASTODON_DIRECT_MESSAGES_TIMELINE_URL = '/api/v1/timelines/direct'
+const MASTODON_PUBLIC_TIMELINE = '/api/v1/timelines/public'
+const MASTODON_USER_HOME_TIMELINE_URL = '/api/v1/timelines/home'
 const MASTODON_STATUS_URL = id => `/api/v1/statuses/${id}`
 const MASTODON_STATUS_CONTEXT_URL = id => `/api/v1/statuses/${id}/context`
 const MASTODON_USER_URL = '/api/v1/accounts'
 const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
 const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
+const MASTODON_TAG_TIMELINE_URL = tag => `/api/v1/timelines/tag/${tag}`
 const MASTODON_USER_BLOCKS_URL = '/api/v1/blocks/'
 const MASTODON_USER_MUTES_URL = '/api/v1/mutes/'
 const MASTODON_BLOCK_USER_URL = id => `/api/v1/accounts/${id}/block`
@@ -211,7 +210,7 @@ const externalProfile = ({profileUrl, credentials}) => {
 }
 
 const followUser = ({id, credentials}) => {
-  let url = `${FOLLOWING_URL}?user_id=${id}`
+  let url = MASTODON_FOLLOW_URL(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -219,7 +218,7 @@ const followUser = ({id, credentials}) => {
 }
 
 const unfollowUser = ({id, credentials}) => {
-  let url = `${UNFOLLOWING_URL}?user_id=${id}`
+  let url = MASTODON_UNFOLLOW_URL(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -276,28 +275,36 @@ const fetchUserRelationship = ({id, credentials}) => {
     })
 }
 
-const fetchFriends = ({id, page, credentials}) => {
-  let url = `${FRIENDS_URL}?user_id=${id}`
-  if (page) {
-    url = url + `&page=${page}`
-  }
+const fetchFriends = ({id, maxId, sinceId, limit = 20, credentials}) => {
+  let url = MASTODON_FOLLOWING_URL(id)
+  const args = [
+    maxId && `max_id=${maxId}`,
+    sinceId && `since_id=${sinceId}`,
+    limit && `limit=${limit}`
+  ].filter(_ => _).join('&')
+
+  url = url + (args ? '?' + args : '')
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
 }
 
 const exportFriends = ({id, credentials}) => {
-  let url = `${FRIENDS_URL}?user_id=${id}&all=true`
+  let url = MASTODON_FOLLOWING_URL(id) + `?all=true`
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
 }
 
-const fetchFollowers = ({id, page, credentials}) => {
-  let url = `${FOLLOWERS_URL}?user_id=${id}`
-  if (page) {
-    url = url + `&page=${page}`
-  }
+const fetchFollowers = ({id, maxId, sinceId, limit = 20, credentials}) => {
+  let url = MASTODON_FOLLOWERS_URL(id)
+  const args = [
+    maxId && `max_id=${maxId}`,
+    sinceId && `since_id=${sinceId}`,
+    limit && `limit=${limit}`
+  ].filter(_ => _).join('&')
+
+  url += args ? '?' + args : ''
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
     .then((data) => data.map(parseUser))
@@ -347,16 +354,16 @@ const fetchStatus = ({id, credentials}) => {
 
 const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false, withMuted = false}) => {
   const timelineUrls = {
-    public: PUBLIC_TIMELINE_URL,
-    friends: FRIENDS_TIMELINE_URL,
+    public: MASTODON_PUBLIC_TIMELINE,
+    friends: MASTODON_USER_HOME_TIMELINE_URL,
     mentions: MENTIONS_URL,
-    dms: DM_TIMELINE_URL,
+    dms: MASTODON_DIRECT_MESSAGES_TIMELINE_URL,
     notifications: MASTODON_USER_NOTIFICATIONS_URL,
-    'publicAndExternal': PUBLIC_AND_EXTERNAL_TIMELINE_URL,
+    'publicAndExternal': MASTODON_PUBLIC_TIMELINE,
     user: MASTODON_USER_TIMELINE_URL,
     media: MASTODON_USER_TIMELINE_URL,
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
-    tag: TAG_TIMELINE_URL
+    tag: MASTODON_TAG_TIMELINE_URL
   }
   const isNotifications = timeline === 'notifications'
   const params = []
@@ -374,10 +381,16 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     params.push(['max_id', until])
   }
   if (tag) {
-    url += `/${tag}.json`
+    url = url(tag)
   }
   if (timeline === 'media') {
     params.push(['only_media', 1])
+  }
+  if (timeline === 'public') {
+    params.push(['local', true])
+  }
+  if (timeline === 'public' || timeline === 'publicAndExternal') {
+    params.push(['only_media', false])
   }
 
   params.push(['count', 20])
@@ -415,31 +428,63 @@ const verifyCredentials = (user) => {
 }
 
 const favorite = ({ id, credentials }) => {
-  return fetch(`${FAVORITE_URL}/${id}.json`, {
+  return fetch(MASTODON_FAVORITE_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error('Error favoriting post')
+      }
+    })
+    .then((data) => parseStatus(data))
 }
 
 const unfavorite = ({ id, credentials }) => {
-  return fetch(`${UNFAVORITE_URL}/${id}.json`, {
+  return fetch(MASTODON_UNFAVORITE_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error('Error removing favorite')
+      }
+    })
+    .then((data) => parseStatus(data))
 }
 
 const retweet = ({ id, credentials }) => {
-  return fetch(`${RETWEET_URL}/${id}.json`, {
+  return fetch(MASTODON_RETWEET_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error('Error repeating post')
+      }
+    })
+    .then((data) => parseStatus(data))
 }
 
 const unretweet = ({ id, credentials }) => {
-  return fetch(`${UNRETWEET_URL}/${id}.json`, {
+  return fetch(MASTODON_UNRETWEET_URL(id), {
     headers: authHeaders(credentials),
     method: 'POST'
   })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error('Error removing repeat')
+      }
+    })
+    .then((data) => parseStatus(data))
 }
 
 const postStatus = ({credentials, status, spoilerText, visibility, sensitive, mediaIds = [], inReplyToStatusId, contentType}) => {
@@ -476,9 +521,9 @@ const postStatus = ({credentials, status, spoilerText, visibility, sensitive, me
 }
 
 const deleteStatus = ({ id, credentials }) => {
-  return fetch(`${STATUS_DELETE_URL}/${id}.json`, {
+  return fetch(MASTODON_DELETE_URL(id), {
     headers: authHeaders(credentials),
-    method: 'POST'
+    method: 'DELETE'
   })
 }
 

@@ -1,17 +1,16 @@
 import UserCard from '../user_card/user_card.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
-
-// TODO: separate touch gesture stuff into their own utils if more components want them
-const deltaCoord = (oldCoord, newCoord) => [newCoord[0] - oldCoord[0], newCoord[1] - oldCoord[1]]
-
-const touchEventCoord = e => ([e.touches[0].screenX, e.touches[0].screenY])
+import GestureService from '../../services/gesture_service/gesture_service'
 
 const SideDrawer = {
   props: [ 'logout' ],
   data: () => ({
     closed: true,
-    touchCoord: [0, 0]
+    closeGesture: undefined
   }),
+  created () {
+    this.closeGesture = GestureService.swipeGesture(GestureService.DIRECTION_LEFT, this.toggleDrawer)
+  },
   components: { UserCard },
   computed: {
     currentUser () {
@@ -46,13 +45,10 @@ const SideDrawer = {
       this.toggleDrawer()
     },
     touchStart (e) {
-      this.touchCoord = touchEventCoord(e)
+      GestureService.beginSwipe(e, this.closeGesture)
     },
     touchMove (e) {
-      const delta = deltaCoord(this.touchCoord, touchEventCoord(e))
-      if (delta[0] < -30 && Math.abs(delta[1]) < Math.abs(delta[0]) && !this.closed) {
-        this.toggleDrawer()
-      }
+      GestureService.updateSwipe(e, this.closeGesture)
     }
   }
 }

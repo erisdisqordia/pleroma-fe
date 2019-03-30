@@ -35,6 +35,9 @@ const registration = {
   },
   computed: {
     token () { return this.$route.params.token },
+    bioPlaceholder () {
+      return this.$t('registration.bio_placeholder').replace(/\s*\n\s*/g, ' \n')
+    },
     ...mapState({
       registrationOpen: (state) => state.instance.registrationOpen,
       signedIn: (state) => !!state.users.currentUser,

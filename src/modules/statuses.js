@@ -1,4 +1,5 @@
-import { remove, slice, each, find, maxBy, minBy, merge, last, isArray } from 'lodash'
+import { remove, slice, each, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
+import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
 
@@ -10,6 +11,7 @@ const emptyTl = (userId = 0) => ({
   visibleStatusesObject: {},
   newStatusCount: 0,
   maxId: 0,
+  minId: 0,
   minVisibleId: 0,
   loading: false,
   followers: [],
@@ -18,7 +20,7 @@ const emptyTl = (userId = 0) => ({
   flushMarker: 0
 })
 
-export const defaultState = {
+export const defaultState = () => ({
   allStatuses: [],
   allStatusesObject: {},
   maxId: 0,
@@ -29,7 +31,8 @@ export const defaultState = {
     data: [],
     idStore: {},
     loading: false,
-    error: false
+    error: false,
+    fetcherId: null
   },
   favorites: new Set(),
   error: false,
@@ -44,7 +47,7 @@ export const defaultState = {
     tag: emptyTl(),
     dms: emptyTl()
   }
-}
+})
 
 export const prepareStatus = (status) => {
   // Set deleted flag
@@ -70,7 +73,9 @@ const mergeOrAdd = (arr, obj, item) => {
 
   if (oldItem) {
     // We already have this, so only merge the new info.
-    merge(oldItem, item)
+    // We ignore null values to avoid overwriting existing properties with missing data
+    // we also skip 'user' because that is handled by users module
+    merge(oldItem, omitBy(item, (v, k) => v === null || k === 'user'))
     // Reactivity fix.
     oldItem.attachments.splice(oldItem.attachments.length)
     return {item: oldItem, new: false}
@@ -78,7 +83,7 @@ const mergeOrAdd = (arr, obj, item) => {
     // This is a new item, prepare it
     prepareStatus(item)
     arr.push(item)
-    obj[item.id] = item
+    set(obj, item.id, item)
     return {item, new: true}
   }
 }
@@ -117,10 +122,15 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const timelineObject = state.timelines[timeline]
 
   const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
-  const older = timeline && maxNew < timelineObject.maxId
+  const minNew = statuses.length > 0 ? minBy(statuses, 'id').id : 0
+  const newer = timeline && maxNew > timelineObject.maxId && statuses.length > 0
+  const older = timeline && (minNew < timelineObject.minId || timelineObject.minId === 0) && statuses.length > 0
 
-  if (timeline && !noIdUpdate && statuses.length > 0 && !older) {
+  if (!noIdUpdate && newer) {
     timelineObject.maxId = maxNew
+  }
+  if (!noIdUpdate && older) {
+    timelineObject.minId = minNew
   }
 
   // This makes sure that user timeline won't get data meant for other
@@ -255,12 +265,9 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     processor(status)
   })
 
-    // Keep the visible statuses sorted
+  // Keep the visible statuses sorted
   if (timeline) {
     sortTimeline(timelineObject)
-    if ((older || timelineObject.minVisibleId <= 0) && statuses.length > 0) {
-      timelineObject.minVisibleId = minBy(statuses, 'id').id
-    }
   }
 }
 
@@ -309,17 +316,38 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
   })
 }
 
+const removeStatus = (state, { timeline, userId }) => {
+  const timelineObject = state.timelines[timeline]
+  if (userId) {
+    remove(timelineObject.statuses, { user: { id: userId } })
+    remove(timelineObject.visibleStatuses, { user: { id: userId } })
+    timelineObject.minVisibleId = timelineObject.visibleStatuses.length > 0 ? last(timelineObject.visibleStatuses).id : 0
+    timelineObject.maxId = timelineObject.statuses.length > 0 ? first(timelineObject.statuses).id : 0
+  }
+}
+
 export const mutations = {
   addNewStatuses,
   addNewNotifications,
+  removeStatus,
   showNewStatuses (state, { timeline }) {
     const oldTimeline = (state.timelines[timeline])
 
     oldTimeline.newStatusCount = 0
     oldTimeline.visibleStatuses = slice(oldTimeline.statuses, 0, 50)
     oldTimeline.minVisibleId = last(oldTimeline.visibleStatuses).id
+    oldTimeline.minId = oldTimeline.minVisibleId
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
+  },
+  setNotificationFetcher (state, { fetcherId }) {
+    state.notifications.fetcherId = fetcherId
+  },
+  resetStatuses (state) {
+    const emptyState = defaultState()
+    Object.entries(emptyState).forEach(([key, value]) => {
+      state[key] = value
+    })
   },
   clearTimeline (state, { timeline }) {
     state.timelines[timeline] = emptyTl(state.timelines[timeline].userId)
@@ -335,6 +363,15 @@ export const mutations = {
   },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
+
+    if (newStatus.repeated !== value) {
+      if (value) {
+        newStatus.repeat_num++
+      } else {
+        newStatus.repeat_num--
+      }
+    }
+
     newStatus.repeated = value
   },
   setDeleted (state, { status }) {
@@ -371,7 +408,7 @@ export const mutations = {
 }
 
 const statuses = {
-  state: defaultState,
+  state: defaultState(),
   actions: {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })
@@ -391,6 +428,12 @@ const statuses = {
     setNotificationsSilence ({ rootState, commit }, { value }) {
       commit('setNotificationsSilence', { value })
     },
+    stopFetchingNotifications ({ rootState, commit }) {
+      if (rootState.statuses.notifications.fetcherId) {
+        window.clearInterval(rootState.statuses.notifications.fetcherId)
+      }
+      commit('setNotificationFetcher', { fetcherId: null })
+    },
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })
       apiService.deleteStatus({ id: status.id, credentials: rootState.users.currentUser.credentials })
@@ -399,13 +442,6 @@ const statuses = {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })
       apiService.favorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            return {}
-          }
-        })
         .then(status => {
           commit('setFavoritedConfirm', { status })
         })
@@ -414,13 +450,6 @@ const statuses = {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: false })
       apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            return {}
-          }
-        })
         .then(status => {
           commit('setFavoritedConfirm', { status })
         })

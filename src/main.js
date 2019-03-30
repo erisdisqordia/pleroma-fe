@@ -30,8 +30,9 @@ const currentLocale = (window.navigator.language || 'en').split('-')[0]
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueTimeago, {
-  locale: currentLocale === 'ja' ? 'ja' : 'en',
+  locale: currentLocale === 'cs' ? 'cs' : currentLocale === 'ja' ? 'ja' : 'en',
   locales: {
+    'cs': require('../static/timeago-cs.json'),
     'en': require('../static/timeago-en.json'),
     'ja': require('../static/timeago-ja.json')
   }
@@ -52,9 +53,10 @@ const persistedStateOptions = {
     'users.lastLoginName',
     'oauth'
   ]
-}
+};
 
-createPersistedState(persistedStateOptions).then((persistedState) => {
+(async () => {
+  const persistedState = await createPersistedState(persistedStateOptions)
   const store = new Vuex.Store({
     modules: {
       interface: interfaceModule,
@@ -74,7 +76,7 @@ createPersistedState(persistedStateOptions).then((persistedState) => {
   })
 
   afterStoreSetup({ store, i18n })
-})
+})()
 
 // These are inlined by webpack's DefinePlugin
 /* eslint-disable */

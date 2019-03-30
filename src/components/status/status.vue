@@ -12,7 +12,7 @@
       </div>
     </template>
     <template v-else>
-      <div v-if="retweet && !noHeading" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
+      <div v-if="retweet && !noHeading && !inConversation" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
         <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :src="statusoid.user.profile_image_url_original"/>
         <div class="media-body faint">
           <span class="user-name">
@@ -24,16 +24,14 @@
         </div>
       </div>
 
-      <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet }]" :style="[ userStyle ]" class="media status">
+      <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet && !inConversation }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <router-link :to="userProfileLink" @click.stop.prevent.capture.native="toggleUserExpanded">
             <UserAvatar :compact="compact" :betterShadow="betterShadow" :src="status.user.profile_image_url_original"/>
           </router-link>
         </div>
         <div class="status-body">
-          <div class="usercard" v-if="userExpanded">
-            <user-card-content :user="status.user" :switcher="false"></user-card-content>
-          </div>
+          <UserCard :user="status.user" :rounded="true" :bordered="true" class="status-usercard" v-if="userExpanded"/>
           <div v-if="!noHeading" class="media-heading">
             <div class="heading-name-row">
               <div class="name-and-account-name">
@@ -77,13 +75,13 @@
                 <router-link :to="replyProfileLink">
                   {{replyToName}}
                 </router-link>
-                <span class="faint replies-separator" v-if="replies.length">
+                <span class="faint replies-separator" v-if="replies && replies.length">
                   -
                 </span>
               </div>
               <div class="replies" v-if="inConversation && !isPreview">
-                <span class="faint" v-if="replies.length">{{$t('status.replies_list')}}</span>
-                <span class="reply-link faint" v-for="reply in replies">
+                <span class="faint" v-if="replies && replies.length">{{$t('status.replies_list')}}</span>
+                <span class="reply-link faint" v-if="replies" v-for="reply in replies">
                   <a href="#" @click.prevent="gotoOriginal(reply.id)" @mouseenter="replyEnter(reply.id, $event)" @mouseout="replyLeave()">{{reply.name}}</a>
                 </span>
               </div>
@@ -137,9 +135,8 @@
 
           <div v-if="!noHeading && !isPreview" class='status-actions media-body'>
             <div v-if="loggedIn">
-              <a href="#" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')">
-                <i class="button-icon icon-reply" :class="{'icon-reply-active': replying}"></i>
-              </a>
+              <i class="button-icon icon-reply" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')" :class="{'icon-reply-active': replying}"></i>
+              <span v-if="status.replies_count > 0">{{status.replies_count}}</span>
             </div>
             <retweet-button :visibility='status.visibility' :loggedIn='loggedIn' :status='status'></retweet-button>
             <favorite-button :loggedIn='loggedIn' :status='status'></favorite-button>
@@ -248,8 +245,7 @@ $status-margin: 0.75em;
     padding: 0;
   }
 
-  .usercard {
-    margin: 0;
+  .status-usercard {
     margin-bottom: $status-margin;
   }
 
@@ -422,6 +418,11 @@ $status-margin: 0.75em;
       max-height: 400px;
       vertical-align: middle;
       object-fit: contain;
+
+      &.emoji {
+        width: 32px;
+        height: 32px;
+      }
     }
 
     blockquote {
@@ -549,6 +550,7 @@ $status-margin: 0.75em;
 .icon-reply:hover {
   color: $fallback--cBlue;
   color: var(--cBlue, $fallback--cBlue);
+  cursor: pointer;
 }
 
 .icon-reply.icon-reply-active {

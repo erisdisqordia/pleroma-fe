@@ -1,4 +1,5 @@
 import BasicUserCard from '../basic_user_card/basic_user_card.vue'
+import RemoteFollow from '../remote_follow/remote_follow.vue'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 
 const FollowCard = {
@@ -14,13 +15,17 @@ const FollowCard = {
     }
   },
   components: {
-    BasicUserCard
+    BasicUserCard,
+    RemoteFollow
   },
   computed: {
     isMe () { return this.$store.state.users.currentUser.id === this.user.id },
     following () { return this.updated ? this.updated.following : this.user.following },
     showFollow () {
       return !this.following || this.updated && !this.updated.following
+    },
+    loggedIn () {
+      return this.$store.state.users.currentUser
     }
   },
   methods: {

@@ -31,6 +31,9 @@ const ImageCropper = {
     saveButtonLabel: {
       type: String
     },
+    saveWithoutCroppingButtonlabel: {
+      type: String
+    },
     cancelButtonLabel: {
       type: String
     }
@@ -47,6 +50,9 @@ const ImageCropper = {
   computed: {
     saveText () {
       return this.saveButtonLabel || this.$t('image_cropper.save')
+    },
+    saveWithoutCroppingText () {
+      return this.saveWithoutCroppingButtonlabel || this.$t('image_cropper.save_without_cropping')
     },
     cancelText () {
       return this.cancelButtonLabel || this.$t('image_cropper.cancel')
@@ -67,7 +73,19 @@ const ImageCropper = {
     submit () {
       this.submitting = true
       this.avatarUploadError = null
-      this.submitHandler(this.cropper, this.filename)
+      this.submitHandler(this.cropper, this.file)
+        .then(() => this.destroy())
+        .catch((err) => {
+          this.submitError = err
+        })
+        .finally(() => {
+          this.submitting = false
+        })
+    },
+    submitWithoutCropping () {
+      this.submitting = true
+      this.avatarUploadError = null
+      this.submitHandler(false, this.dataUrl)
         .then(() => this.destroy())
         .catch((err) => {
           this.submitError = err
@@ -88,14 +106,14 @@ const ImageCropper = {
     readFile () {
       const fileInput = this.$refs.input
       if (fileInput.files != null && fileInput.files[0] != null) {
+        this.file = fileInput.files[0]
         let reader = new window.FileReader()
         reader.onload = (e) => {
           this.dataUrl = e.target.result
           this.$emit('open')
         }
-        reader.readAsDataURL(fileInput.files[0])
-        this.filename = fileInput.files[0].name || 'unknown'
-        this.$emit('changed', fileInput.files[0], reader)
+        reader.readAsDataURL(this.file)
+        this.$emit('changed', this.file, reader)
       }
     },
     clearError () {

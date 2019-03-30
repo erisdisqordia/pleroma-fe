@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-view" v-if="showing" @click.prevent="hide">
+  <div class="modal-view media-modal-view" v-if="showing" @click.prevent="hide">
     <img class="modal-image" v-if="type === 'image'" :src="currentMedia.url"></img>
     <VideoAttachment
       class="modal-image"
@@ -32,18 +32,7 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.modal-view {
-  z-index: 1000;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-
+.media-modal-view {
   &:hover {
     .modal-view-button-arrow {
       opacity: 0.75;

@@ -1,12 +1,8 @@
 <template>
 <div>
   <div v-if="user.id" class="user-profile panel panel-default">
-    <user-card-content
-      :user="user"
-      :switcher="true"
-      :selected="timeline.viewing"
-    />
-    <tab-switcher :renderOnlyFocused="true">
+    <UserCard :user="user" :switcher="true" :selected="timeline.viewing" rounded="top"/>
+    <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
       <Timeline
         :label="$t('user_card.statuses')"
         :disabled="!user.statuses_count"
@@ -15,7 +11,7 @@
         :title="$t('user_profile.timeline_title')"
         :timeline="timeline"
         :timeline-name="'user'"
-        :user-id="fetchBy"
+        :user-id="userId"
       />
       <div :label="$t('user_card.followees')" v-if="followsTabVisible" :disabled="!user.friends_count">
         <FriendList :userId="userId" />
@@ -29,7 +25,7 @@
         :embedded="true" :title="$t('user_card.media')"
         timeline-name="media"
         :timeline="media"
-        :user-id="fetchBy"
+        :user-id="userId"
       />
       <Timeline
         v-if="isUs"
@@ -64,11 +60,6 @@
   flex: 2;
   flex-basis: 500px;
 
-  .profile-panel-background .panel-heading {
-    background: transparent;
-    flex-direction: column;
-    align-items: stretch;
-  }
   .userlist-placeholder {
     display: flex;
     justify-content: center;

@@ -1,6 +1,7 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
+import EmojiInput from '../emoji-input/emoji-input.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import Completion from '../../services/completion/completion.js'
 import { take, filter, reject, map, uniqBy } from 'lodash'
@@ -30,7 +31,8 @@ const PostStatusForm = {
   ],
   components: {
     MediaUpload,
-    ScopeSelector
+    ScopeSelector,
+    EmojiInput
   },
   mounted () {
     this.resize(this.$refs.textarea)
@@ -174,6 +176,9 @@ const PostStatusForm = {
     },
     formattingOptionsEnabled () {
       return this.$store.state.instance.formattingOptionsEnabled
+    },
+    postFormats () {
+      return this.$store.state.instance.postFormats || []
     }
   },
   methods: {
@@ -221,6 +226,9 @@ const PostStatusForm = {
       } else {
         this.highlighted = 0
       }
+    },
+    onKeydown (e) {
+      e.stopPropagation()
     },
     setCaret ({target: {selectionStart}}) {
       this.caret = selectionStart
@@ -293,6 +301,8 @@ const PostStatusForm = {
     },
     paste (e) {
       if (e.clipboardData.files.length > 0) {
+        // prevent pasting of file as text
+        e.preventDefault()
         // Strangely, files property gets emptied after event propagation
         // Trying to wrap it in array doesn't work. Plus I doubt it's possible
         // to hold more than one file in clipboard.

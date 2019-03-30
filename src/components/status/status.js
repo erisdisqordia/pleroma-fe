@@ -3,7 +3,7 @@ import FavoriteButton from '../favorite_button/favorite_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
 import DeleteButton from '../delete_button/delete_button.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
-import UserCardContent from '../user_card_content/user_card_content.vue'
+import UserCard from '../user_card/user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
@@ -145,11 +145,11 @@ const Status = {
       return !!(this.status.in_reply_to_status_id && this.status.in_reply_to_user_id)
     },
     replyToName () {
-      const user = this.$store.state.users.usersObject[this.status.in_reply_to_user_id]
-      if (user) {
-        return user.screen_name
-      } else {
+      if (this.status.in_reply_to_screen_name) {
         return this.status.in_reply_to_screen_name
+      } else {
+        const user = this.$store.getters.findUser(this.status.in_reply_to_user_id)
+        return user && user.screen_name
       }
     },
     hideReply () {
@@ -259,7 +259,7 @@ const Status = {
     RetweetButton,
     DeleteButton,
     PostStatusForm,
-    UserCardContent,
+    UserCard,
     UserAvatar,
     Gallery,
     LinkPreview
@@ -310,7 +310,6 @@ const Status = {
       this.replying = !this.replying
     },
     gotoOriginal (id) {
-      // only handled by conversation, not status_or_conversation
       if (this.inConversation) {
         this.$emit('goto', id)
       }

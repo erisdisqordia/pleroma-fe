@@ -2,25 +2,21 @@
   <div class="side-drawer-container"
     :class="{ 'side-drawer-container-closed': closed, 'side-drawer-container-open': !closed }"
   >
+    <div class="side-drawer-darken" :class="{ 'side-drawer-darken-closed': closed}" />
     <div class="side-drawer"
       :class="{'side-drawer-closed': closed}"
       @touchstart="touchStart"
       @touchmove="touchMove"
     >
       <div class="side-drawer-heading" @click="toggleDrawer">
-        <user-card-content :user="currentUser" :switcher="false" :hideBio="true" v-if="currentUser"/>
+        <UserCard :user="currentUser" :hideBio="true" v-if="currentUser"/>
         <div class="side-drawer-logo-wrapper" v-else>
           <img :src="logo"/>
           <span>{{sitename}}</span>
         </div>
       </div>
       <ul>
-        <li v-if="currentUser" @click="toggleDrawer">
-          <router-link :to="{ name: 'new-status', params: { username: currentUser.screen_name } }">
-            {{ $t("post_status.new_status") }}
-          </router-link>
-        </li>
-        <li v-else @click="toggleDrawer">
+        <li v-if="!currentUser" @click="toggleDrawer">
           <router-link :to="{ name: 'login' }">
             {{ $t("login.login") }}
           </router-link>
@@ -116,17 +112,33 @@
   height: 100%;
   display: flex;
   align-items: stretch;
+  transition-duration: 0s;
+  transition-property: transform;
 }
 
 .side-drawer-container-open {
-  transition-delay: 0.0s;
-  transition-property: left;
+  transform: translate(0%);
 }
 
 .side-drawer-container-closed {
-  left: -100%;
-  transition-delay: 0.5s;
-  transition-property: left;
+  transition-delay: 0.35s;
+  transform: translate(-100%);
+}
+
+.side-drawer-darken {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  transition: 0.35s;
+  transition-property: background-color;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.side-drawer-darken-closed {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .side-drawer-click-outside {
@@ -135,8 +147,9 @@
 
 .side-drawer {
   overflow-x: hidden;
-  transition: 0.35s;
   transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transition: 0.35s;
+  transition-property: transform;
   margin: 0 0 0 -100px;
   padding: 0 0 1em 100px;
   width: 80%;
@@ -181,15 +194,6 @@
   display: flex;
   padding: 0;
   margin: 0;
-
-  .profile-panel-background {
-    border-radius: 0;
-    .panel-heading {
-      background: transparent;
-      flex-direction: column;
-      align-items: stretch;
-    }
-  }
 }
 
 .side-drawer ul {

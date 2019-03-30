@@ -45,7 +45,7 @@
 
             <div class='form-group'>
               <label class='form--label' for='bio'>{{$t('registration.bio')}} ({{$t('general.optional')}})</label>
-              <textarea :disabled="isPending" v-model='user.bio' class='form-control' id='bio' :placeholder="$t('registration.bio_placeholder')"></textarea>
+              <textarea :disabled="isPending" v-model='user.bio' class='form-control' id='bio' :placeholder="bioPlaceholder"></textarea>
             </div>
 
             <div class='form-group' :class="{ 'form-group--error': $v.user.password.$error }">

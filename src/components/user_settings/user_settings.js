@@ -8,6 +8,7 @@ import ScopeSelector from '../scope_selector/scope_selector.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 import BlockCard from '../block_card/block_card.vue'
 import MuteCard from '../mute_card/mute_card.vue'
+import EmojiInput from '../emoji-input/emoji-input.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import withList from '../../hocs/with_list/with_list'
 
@@ -71,7 +72,8 @@ const UserSettings = {
     TabSwitcher,
     ImageCropper,
     BlockList,
-    MuteList
+    MuteList,
+    EmojiInput
   },
   computed: {
     user () {
@@ -159,8 +161,14 @@ const UserSettings = {
       }
       reader.readAsDataURL(file)
     },
-    submitAvatar (cropper) {
-      const img = cropper.getCroppedCanvas().toDataURL('image/jpeg')
+    submitAvatar (cropper, file) {
+      let img
+      if (cropper) {
+        img = cropper.getCroppedCanvas().toDataURL(file.type)
+      } else {
+        img = file
+      }
+
       return this.$store.state.api.backendInteractor.updateAvatar({ params: { img } }).then((user) => {
         if (!user.error) {
           this.$store.commit('addNewUsers', [user])

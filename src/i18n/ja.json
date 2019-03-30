@@ -61,7 +61,7 @@
     "account_not_locked_warning_link": "ロックされたアカウント",
     "attachments_sensitive": "ファイルをNSFWにする",
     "content_type": {
-      "plain_text": "プレーンテキスト"
+      "text/plain": "プレーンテキスト"
     },
     "content_warning": "せつめい (かかなくてもよい)",
     "default": "はねだくうこうに、つきました。",
@@ -202,7 +202,6 @@
     "subject_line_mastodon": "マストドンふう: そのままコピー",
     "subject_line_noop": "コピーしない",
     "post_status_content_type": "とうこうのコンテントタイプ",
-    "status_content_type_plain": "プレーンテキスト",
     "stop_gifs": "カーソルをかさねたとき、GIFをうごかす",
     "streaming": "うえまでスクロールしたとき、じどうてきにストリーミングする",
     "text": "もじ",

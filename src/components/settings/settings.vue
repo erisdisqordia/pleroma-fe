@@ -37,6 +37,10 @@
           <h2>{{$t('nav.timeline')}}</h2>
           <ul class="setting-list">
             <li>
+              <input type="checkbox" id="hideMutedPosts" v-model="hideMutedPostsLocal">
+              <label for="hideMutedPosts">{{$t('settings.hide_muted_posts')}} {{$t('settings.instance_default', { value: hideMutedPostsDefault })}}</label>
+            </li>
+            <li>
               <input type="checkbox" id="collapseMessageWithSubject" v-model="collapseMessageWithSubjectLocal">
               <label for="collapseMessageWithSubject">
                 {{$t('settings.collapse_subject')}} {{$t('settings.instance_default', { value: collapseMessageWithSubjectDefault })}}
@@ -105,17 +109,9 @@
                 {{$t('settings.post_status_content_type')}}
                 <label for="postContentType" class="select">
                   <select id="postContentType" v-model="postContentTypeLocal">
-                    <option value="text/plain">
-                      {{$t('settings.status_content_type_plain')}}
-                      {{postContentTypeDefault == 'text/plain' ? $t('settings.instance_default_simple') : ''}}
-                    </option>
-                    <option value="text/html">
-                      HTML
-                      {{postContentTypeDefault == 'text/html' ? $t('settings.instance_default_simple') : ''}}
-                    </option>
-                    <option value="text/markdown">
-                      Markdown
-                      {{postContentTypeDefault == 'text/markdown' ? $t('settings.instance_default_simple') : ''}}
+                    <option v-for="postFormat in postFormats" :key="postFormat" :value="postFormat">
+                      {{$t(`post_status.content_type["${postFormat}"]`)}}
+                      {{postContentTypeDefault === postFormat ? $t('settings.instance_default_simple') : ''}}
                     </option>
                   </select>
                   <i class="icon-down-open"/>
@@ -273,6 +269,28 @@
               {{$t('settings.hide_filtered_statuses')}} {{$t('settings.instance_default', { value: hideFilteredStatusesDefault })}}
             </label>
           </div>
+        </div>
+      </div>
+      <div :label="$t('settings.version.title')" >
+        <div class="setting-item">
+          <ul class="setting-list">
+            <li>
+              <p>{{$t('settings.version.backend_version')}}</p>
+              <ul class="option-list">
+                <li>
+                  <a :href="backendVersionLink" target="_blank">{{backendVersion}}</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p>{{$t('settings.version.frontend_version')}}</p>
+              <ul class="option-list">
+                <li>
+                  <a :href="frontendVersionLink" target="_blank">{{frontendVersion}}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </tab-switcher>

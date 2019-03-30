@@ -1,10 +1,11 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
+import RemoteFollow from '../remote_follow/remote_follow.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 export default {
-  props: [ 'user', 'switcher', 'selected', 'hideBio' ],
+  props: [ 'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered' ],
   data () {
     return {
       followRequestInProgress: false,
@@ -15,8 +16,18 @@ export default {
       betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
+  created () {
+    this.$store.dispatch('fetchUserRelationship', this.user.id)
+  },
   computed: {
-    headingStyle () {
+    classes () {
+      return [{
+        'user-card-rounded-t': this.rounded === 'top',  // set border-top-left-radius and border-top-right-radius
+        'user-card-rounded': this.rounded === true,     // set border-radius for all sides
+        'user-card-bordered': this.bordered === true    // set border for all sides
+      }]
+    },
+    style () {
       const color = this.$store.state.config.customTheme.colors
             ? this.$store.state.config.customTheme.colors.bg  // v2
             : this.$store.state.config.colors.bg // v1
@@ -89,36 +100,37 @@ export default {
     }
   },
   components: {
-    UserAvatar
+    UserAvatar,
+    RemoteFollow
   },
   methods: {
     followUser () {
+      const store = this.$store
       this.followRequestInProgress = true
-      requestFollow(this.user, this.$store).then(({sent}) => {
+      requestFollow(this.user, store).then(({sent}) => {
         this.followRequestInProgress = false
         this.followRequestSent = sent
       })
     },
     unfollowUser () {
+      const store = this.$store
       this.followRequestInProgress = true
-      requestUnfollow(this.user, this.$store).then(() => {
+      requestUnfollow(this.user, store).then(() => {
         this.followRequestInProgress = false
+        store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
       })
     },
     blockUser () {
-      const store = this.$store
-      store.state.api.backendInteractor.blockUser(this.user.id)
-        .then((blockedUser) => store.commit('addNewUsers', [blockedUser]))
+      this.$store.dispatch('blockUser', this.user.id)
     },
     unblockUser () {
-      const store = this.$store
-      store.state.api.backendInteractor.unblockUser(this.user.id)
-        .then((unblockedUser) => store.commit('addNewUsers', [unblockedUser]))
+      this.$store.dispatch('unblockUser', this.user.id)
     },
-    toggleMute () {
-      const store = this.$store
-      store.commit('setMuted', {user: this.user, muted: !this.user.muted})
-      store.state.api.backendInteractor.setUserMute(this.user)
+    muteUser () {
+      this.$store.dispatch('muteUser', this.user.id)
+    },
+    unmuteUser () {
+      this.$store.dispatch('unmuteUser', this.user.id)
     },
     setProfileView (v) {
       if (this.switcher) {

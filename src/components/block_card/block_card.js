@@ -9,7 +9,7 @@ const BlockCard = {
   },
   computed: {
     user () {
-      return this.$store.getters.userById(this.userId)
+      return this.$store.getters.findUser(this.userId)
     },
     blocked () {
       return this.user.statusnet_blocking

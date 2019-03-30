@@ -10,16 +10,18 @@
         <router-link :to="{ name: 'user-settings' }">{{ $t('post_status.account_not_locked_warning_link') }}</router-link>
       </i18n>
       <p v-if="this.newStatus.visibility == 'direct'" class="visibility-notice">{{ $t('post_status.direct_warning') }}</p>
-      <input
+      <EmojiInput
         v-if="newStatus.spoilerText || alwaysShowSubject"
         type="text"
         :placeholder="$t('post_status.content_warning')"
         v-model="newStatus.spoilerText"
-        class="form-cw">
+        classname="form-control"
+      />
       <textarea
         ref="textarea"
         @click="setCaret"
         @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control"
+        @keydown="onKeydown"
         @keydown.down="cycleForward"
         @keydown.up="cycleBackward"
         @keydown.shift.tab="cycleBackward"
@@ -30,15 +32,17 @@
         @drop="fileDrop"
         @dragover.prevent="fileDrag"
         @input="resize"
-        @paste="paste">
+        @paste="paste"
+        :disabled="posting"
+      >
       </textarea>
       <div class="visibility-tray">
         <span class="text-format" v-if="formattingOptionsEnabled">
           <label for="post-content-type" class="select">
             <select id="post-content-type" v-model="newStatus.contentType" class="form-control">
-              <option value="text/plain">{{$t('post_status.content_type.plain_text')}}</option>
-              <option value="text/html">HTML</option>
-              <option value="text/markdown">Markdown</option>
+              <option v-for="postFormat in postFormats" :key="postFormat" :value="postFormat">
+                {{$t(`post_status.content_type["${postFormat}"]`)}}
+              </option>
             </select>
             <i class="icon-down-open"></i>
           </label>
@@ -52,14 +56,18 @@
           :onScopeChange="changeVis"/>
       </div>
     </div>
-    <div style="position:relative;" v-if="candidates">
-        <div class="autocomplete-panel">
-          <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">
-            <div class="autocomplete" :class="{ highlighted: candidate.highlighted }">
-              <span v-if="candidate.img"><img :src="candidate.img"></img></span>
-              <span v-else>{{candidate.utf}}</span>
-              <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
-            </div>
+    <div class="autocomplete-panel" v-if="candidates">
+        <div class="autocomplete-panel-body">
+          <div
+            v-for="(candidate, index) in candidates"
+            :key="index"
+            @click="replace(candidate.utf || (candidate.screen_name + ' '))"
+            class="autocomplete-item"
+            :class="{ highlighted: candidate.highlighted }"
+          >
+            <span v-if="candidate.img"><img :src="candidate.img" /></span>
+            <span v-else>{{candidate.utf}}</span>
+            <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
           </div>
         </div>
       </div>
@@ -81,10 +89,10 @@
         <div class="media-upload-wrapper" v-for="file in newStatus.files">
           <i class="fa button-icon icon-cancel" @click="removeMediaFile(file)"></i>
           <div class="media-upload-container attachment">
-            <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
-            <video v-if="type(file) === 'video'" :src="file.image" controls></video>
-            <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
-            <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
+            <img class="thumbnail media-upload" :src="file.url" v-if="type(file) === 'image'"></img>
+            <video v-if="type(file) === 'video'" :src="file.url" controls></video>
+            <audio v-if="type(file) === 'audio'" :src="file.url" controls></audio>
+            <a v-if="type(file) === 'unknown'" :href="file.url">{{file.url}}</a>
           </div>
         </div>
       </div>
@@ -257,53 +265,6 @@
   .icon-cancel {
     cursor: pointer;
     z-index: 4;
-  }
-
-  .autocomplete-panel {
-    margin: 0 0.5em 0 0.5em;
-    border-radius: $fallback--tooltipRadius;
-    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-    position: absolute;
-    z-index: 1;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-    // this doesn't match original but i don't care, making it uniform.
-    box-shadow: var(--popupShadow);
-    min-width: 75%;
-    background: $fallback--bg;
-    background: var(--bg, $fallback--bg);
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-  }
-
-  .autocomplete {
-    cursor: pointer;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    display: flex;
-
-    img {
-      width: 24px;
-      height: 24px;
-      border-radius: $fallback--avatarRadius;
-      border-radius: var(--avatarRadius, $fallback--avatarRadius);
-      object-fit: contain;
-    }
-
-    span {
-      line-height: 24px;
-      margin: 0 0.1em 0 0.2em;
-    }
-
-    small {
-      margin-left: .5em;
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
-    }
-
-    &.highlighted {
-      background-color: $fallback--fg;
-      background-color: var(--lightBg, $fallback--fg);
-    }
   }
 }
 </style>

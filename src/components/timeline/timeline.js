@@ -1,6 +1,6 @@
 import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
-import StatusOrConversation from '../status_or_conversation/status_or_conversation.vue'
+import Conversation from '../conversation/conversation.vue'
 import { throttle } from 'lodash'
 
 const Timeline = {
@@ -43,7 +43,7 @@ const Timeline = {
   },
   components: {
     Status,
-    StatusOrConversation
+    Conversation
   },
   created () {
     const store = this.$store
@@ -132,7 +132,9 @@ const Timeline = {
       }
       if (count > 0) {
         // only 'stream' them when you're scrolled to the top
-        if (window.pageYOffset < 15 &&
+        const doc = document.documentElement
+        const top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
+        if (top < 15 &&
             !this.paused &&
             !(this.unfocused && this.$store.state.config.pauseOnUnfocused)
            ) {

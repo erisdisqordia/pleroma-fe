@@ -1,8 +1,13 @@
 /* eslint-env browser */
+import { filter, trim } from 'lodash'
+
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import InterfaceLanguageSwitcher from '../interface_language_switcher/interface_language_switcher.vue'
-import { filter, trim } from 'lodash'
+import { extractCommit } from '../../services/version/version.service'
+
+const pleromaFeCommitUrl = 'https://git.pleroma.social/pleroma/pleroma-fe/commit/'
+const pleromaBeCommitUrl = 'https://git.pleroma.social/pleroma/pleroma/commit/'
 
 const settings = {
   data () {
@@ -41,6 +46,11 @@ const settings = {
       streamingLocal: user.streaming,
       pauseOnUnfocusedLocal: user.pauseOnUnfocused,
       hoverPreviewLocal: user.hoverPreview,
+
+      hideMutedPostsLocal: typeof user.hideMutedPosts === 'undefined'
+        ? instance.hideMutedPosts
+        : user.hideMutedPosts,
+      hideMutedPostsDefault: this.$t('settings.values.' + instance.hideMutedPosts),
 
       collapseMessageWithSubjectLocal: typeof user.collapseMessageWithSubject === 'undefined'
         ? instance.collapseMessageWithSubject
@@ -83,7 +93,10 @@ const settings = {
         // Future spec, still not supported in Nightly 63 as of 08/2018
         Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'audioTracks'),
       playVideosInModal: user.playVideosInModal,
-      useContainFit: user.useContainFit
+      useContainFit: user.useContainFit,
+
+      backendVersion: instance.backendVersion,
+      frontendVersion: instance.frontendVersion
     }
   },
   components: {
@@ -98,7 +111,16 @@ const settings = {
     currentSaveStateNotice () {
       return this.$store.state.interface.settings.currentSaveStateNotice
     },
-    instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel }
+    postFormats () {
+      return this.$store.state.instance.postFormats || []
+    },
+    instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel },
+    frontendVersionLink () {
+      return pleromaFeCommitUrl + this.frontendVersion
+    },
+    backendVersionLink () {
+      return pleromaBeCommitUrl + extractCommit(this.backendVersion)
+    }
   },
   watch: {
     hideAttachmentsLocal (value) {
@@ -164,6 +186,9 @@ const settings = {
     muteWordsString (value) {
       value = filter(value.split('\n'), (word) => trim(word).length > 0)
       this.$store.dispatch('setOption', { name: 'muteWords', value })
+    },
+    hideMutedPostsLocal (value) {
+      this.$store.dispatch('setOption', { name: 'hideMutedPosts', value })
     },
     collapseMessageWithSubjectLocal (value) {
       this.$store.dispatch('setOption', { name: 'collapseMessageWithSubject', value })

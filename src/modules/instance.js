@@ -17,6 +17,7 @@ const defaultState = {
   showInstanceSpecificPanel: false,
   formattingOptionsEnabled: false,
   alwaysShowSubjectInput: true,
+  hideMutedPosts: false,
   collapseMessageWithSubject: false,
   hidePostStats: false,
   hideUserStats: false,
@@ -37,6 +38,7 @@ const defaultState = {
   emoji: [],
   customEmoji: [],
   restrictedNicknames: [],
+  postFormats: [],
 
   // Feature-set, apparently, not everything here is reported...
   mediaProxyAvailable: false,
@@ -47,7 +49,11 @@ const defaultState = {
 
   // Html stuff
   instanceSpecificPanelContent: '',
-  tos: ''
+  tos: '',
+
+  // Version Information
+  backendVersion: '',
+  frontendVersion: ''
 }
 
 const instance = {

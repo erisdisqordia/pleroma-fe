@@ -17,3 +17,12 @@
 </template>
 
 <script src="./importer.js"></script>
+
+<style lang="scss">
+.importer {
+  .uploading {
+    font-size: 1.5em;
+    margin: 0.25em;
+  }
+}
+</style>

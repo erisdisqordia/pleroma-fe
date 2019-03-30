@@ -13,10 +13,7 @@ const Importer = {
     },
     submit () {
       this.uploading = true
-      // eslint-disable-next-line no-undef
-      const formData = new FormData()
-      formData.append('list', this.file)
-      this.$store.state.api.backendInteractor.followImport({params: formData})
+      this.$store.state.api.backendInteractor.followImport(this.file)
         .then((status) => {
           if (status) {
             this.success = true

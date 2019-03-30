@@ -634,9 +634,11 @@ const uploadMedia = ({formData, credentials}) => {
     .then((data) => parseAttachment(data))
 }
 
-const followImport = ({params, credentials}) => {
+const followImport = ({file, credentials}) => {
+  const formData = new FormData()
+  formData.append('list', file)
   return fetch(FOLLOW_IMPORT_URL, {
-    body: params,
+    body: formData,
     method: 'POST',
     headers: authHeaders(credentials)
   })

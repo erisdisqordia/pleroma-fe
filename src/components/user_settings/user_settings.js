@@ -242,6 +242,14 @@ const UserSettings = {
           }
         })
     },
+    importBlocks (file) {
+      return this.$store.state.api.backendInteractor.importBlocks(file)
+        .then((status) => {
+          if (!status) {
+            throw new Error('failed')
+          }
+        })
+    },
     /* This function takes an Array of Users
      * and outputs a file with all the addresses for the user to download
      */

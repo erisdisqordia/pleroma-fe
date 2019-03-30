@@ -13,6 +13,7 @@ import SelectableList from '../selectable_list/selectable_list.vue'
 import ProgressButton from '../progress_button/progress_button.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
 import Autosuggest from '../autosuggest/autosuggest.vue'
+import Importer from '../importer/importer.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import userSearchApi from '../../services/new_api/user_search.js'
 
@@ -40,14 +41,10 @@ const UserSettings = {
       hideFollowers: this.$store.state.users.currentUser.hide_followers,
       showRole: this.$store.state.users.currentUser.show_role,
       role: this.$store.state.users.currentUser.role,
-      followList: null,
-      followImportError: false,
-      followsImported: false,
       enableFollowsExport: true,
       pickAvatarBtnVisible: true,
       bannerUploading: false,
       backgroundUploading: false,
-      followListUploading: false,
       bannerPreview: null,
       backgroundPreview: null,
       bannerUploadError: null,
@@ -75,7 +72,8 @@ const UserSettings = {
     Autosuggest,
     BlockCard,
     MuteCard,
-    ProgressButton
+    ProgressButton,
+    Importer
   },
   computed: {
     user () {
@@ -236,19 +234,6 @@ const UserSettings = {
         this.backgroundUploading = false
       })
     },
-    importFollows () {
-      this.followListUploading = true
-      const followList = this.followList
-      this.$store.state.api.backendInteractor.followImport({params: followList})
-        .then((status) => {
-          if (status) {
-            this.followsImported = true
-          } else {
-            this.followImportError = true
-          }
-          this.followListUploading = false
-        })
-    },
     /* This function takes an Array of Users
      * and outputs a file with all the addresses for the user to download
      */
@@ -282,16 +267,6 @@ const UserSettings = {
           this.exportPeople(friendList, 'friends.csv')
           setTimeout(() => { this.enableFollowsExport = true }, 2000)
         })
-    },
-    followListChange () {
-      // eslint-disable-next-line no-undef
-      let formData = new FormData()
-      formData.append('list', this.$refs.followlist.files[0])
-      this.followList = formData
-    },
-    dismissImported () {
-      this.followsImported = false
-      this.followImportError = false
     },
     confirmDelete () {
       this.deletingAccount = true

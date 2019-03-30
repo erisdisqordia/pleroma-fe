@@ -171,19 +171,7 @@
           <div class="setting-item">
             <h2>{{$t('settings.follow_import')}}</h2>
             <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
-            <form>
-              <input type="file" ref="followlist" v-on:change="followListChange" />
-            </form>
-            <i class=" icon-spin4 animate-spin uploading" v-if="followListUploading"></i>
-            <button class="btn btn-default" v-else @click="importFollows">{{$t('general.submit')}}</button>
-            <div v-if="followsImported">
-              <i class="icon-cross" @click="dismissImported"></i>
-              <p>{{$t('settings.follows_imported')}}</p>
-            </div>
-            <div v-else-if="followImportError">
-              <i class="icon-cross" @click="dismissImported"></i>
-              <p>{{$t('settings.follow_import_error')}}</p>
-            </div>
+            <Importer />
           </div>
           <div class="setting-item" v-if="enableFollowsExport">
             <h2>{{$t('settings.follow_export')}}</h2>

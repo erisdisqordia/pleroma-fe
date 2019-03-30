@@ -6,7 +6,7 @@ const FeaturesPanel = {
     gopher: function () { return this.$store.state.instance.gopherAvailable },
     whoToFollow: function () { return this.$store.state.instance.suggestionsEnabled },
     mediaProxy: function () { return this.$store.state.instance.mediaProxyAvailable },
-    scopeOptionsMinimal: function () { return this.$store.state.instance.scopeOptionsMinimal },
+    minimalScopesMode: function () { return this.$store.state.instance.minimalScopesMode },
     textlimit: function () { return this.$store.state.instance.textlimit }
   }
 }

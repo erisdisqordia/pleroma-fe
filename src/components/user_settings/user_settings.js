@@ -82,8 +82,8 @@ const UserSettings = {
     pleromaBackend () {
       return this.$store.state.instance.pleromaBackend
     },
-    scopeOptionsMinimal () {
-      return this.$store.state.instance.scopeOptionsMinimal
+    minimalScopesMode () {
+      return this.$store.state.instance.minimalScopesMode
     },
     vis () {
       return {

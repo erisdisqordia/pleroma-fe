@@ -162,8 +162,8 @@ const PostStatusForm = {
     isOverLengthLimit () {
       return this.hasStatusLengthLimit && (this.charactersLeft < 0)
     },
-    scopeOptionsMinimal () {
-      return this.$store.state.instance.scopeOptionsMinimal
+    minimalScopesMode () {
+      return this.$store.state.instance.minimalScopesMode
     },
     alwaysShowSubject () {
       if (typeof this.$store.state.config.alwaysShowSubjectInput !== 'undefined') {

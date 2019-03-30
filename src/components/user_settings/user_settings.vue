@@ -173,12 +173,9 @@
             <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
             <Importer :submitHandler="importFollows" :successMessage="$t('settings.follows_imported')" :errorMessage="$t('settings.follow_import_error')" />
           </div>
-          <div class="setting-item" v-if="enableFollowsExport">
+          <div class="setting-item">
             <h2>{{$t('settings.follow_export')}}</h2>
-            <button class="btn btn-default" @click="exportFollows">{{$t('settings.follow_export_button')}}</button>
-          </div>
-          <div class="setting-item" v-else>
-            <h2>{{$t('settings.follow_export_processing')}}</h2>
+            <Exporter :getContent="getFollowsContent" filename="friends.csv" :exportButtonLabel="$t('settings.follow_export_button')" />
           </div>
           <div class="setting-item">
             <h2>{{$t('settings.block_import')}}</h2>

@@ -14,6 +14,7 @@ import ProgressButton from '../progress_button/progress_button.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
 import Autosuggest from '../autosuggest/autosuggest.vue'
 import Importer from '../importer/importer.vue'
+import Exporter from '../exporter/exporter.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import userSearchApi from '../../services/new_api/user_search.js'
 
@@ -41,7 +42,6 @@ const UserSettings = {
       hideFollowers: this.$store.state.users.currentUser.hide_followers,
       showRole: this.$store.state.users.currentUser.show_role,
       role: this.$store.state.users.currentUser.role,
-      enableFollowsExport: true,
       pickAvatarBtnVisible: true,
       bannerUploading: false,
       backgroundUploading: false,
@@ -73,7 +73,8 @@ const UserSettings = {
     BlockCard,
     MuteCard,
     ProgressButton,
-    Importer
+    Importer,
+    Exporter
   },
   computed: {
     user () {
@@ -250,38 +251,19 @@ const UserSettings = {
           }
         })
     },
-    /* This function takes an Array of Users
-     * and outputs a file with all the addresses for the user to download
-     */
-    exportPeople (users, filename) {
-      // Get all the friends addresses
-      var UserAddresses = users.map(function (user) {
-        // check is it's a local user
-        if (user && user.is_local) {
-          // append the instance address
-          // eslint-disable-next-line no-undef
-          user.screen_name += '@' + location.hostname
-        }
-        return user.screen_name
-      }).join('\n')
-      // Make the user download the file
-      var fileToDownload = document.createElement('a')
-      fileToDownload.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(UserAddresses))
-      fileToDownload.setAttribute('download', filename)
-      fileToDownload.style.display = 'none'
-      document.body.appendChild(fileToDownload)
-      fileToDownload.click()
-      document.body.removeChild(fileToDownload)
-    },
-    exportFollows () {
-      this.enableFollowsExport = false
-      this.$store.state.api.backendInteractor
-        .exportFriends({
-          id: this.$store.state.users.currentUser.id
-        })
+    getFollowsContent () {
+      return this.$store.state.api.backendInteractor.exportFriends({ id: this.$store.state.users.currentUser.id })
         .then((friendList) => {
-          this.exportPeople(friendList, 'friends.csv')
-          setTimeout(() => { this.enableFollowsExport = true }, 2000)
+          // Get all the friends addresses
+          return friendList.map((user) => {
+            // check is it's a local user
+            if (user && user.is_local) {
+              // append the instance address
+              // eslint-disable-next-line no-undef
+              return user.screen_name + '@' + location.hostname
+            }
+            return user.screen_name
+          }).join('\n')
         })
     },
     confirmDelete () {

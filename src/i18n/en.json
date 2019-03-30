@@ -2,6 +2,10 @@
   "chat": {
     "title": "Chat"
   },
+  "exporter": {
+    "export": "Export",
+    "processing": "Processing, you'll soon be asked to download your file"
+  },
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
@@ -161,7 +165,6 @@
     "filtering_explanation": "All statuses containing these words will be muted, one per line",
     "follow_export": "Follow export",
     "follow_export_button": "Export your follows to a csv file",
-    "follow_export_processing": "Processing, you'll soon be asked to download your file",
     "follow_import": "Follow import",
     "follow_import_error": "Error importing followers",
     "follows_imported": "Follows imported! Processing them will take a while.",

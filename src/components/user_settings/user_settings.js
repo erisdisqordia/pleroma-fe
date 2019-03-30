@@ -251,35 +251,25 @@ const UserSettings = {
           }
         })
     },
+    generateExportableUsersContent (users) {
+      // Get addresses
+      return users.map((user) => {
+        // check is it's a local user
+        if (user && user.is_local) {
+          // append the instance address
+          // eslint-disable-next-line no-undef
+          return user.screen_name + '@' + location.hostname
+        }
+        return user.screen_name
+      }).join('\n')
+    },
     getFollowsContent () {
       return this.$store.state.api.backendInteractor.exportFriends({ id: this.$store.state.users.currentUser.id })
-        .then((users) => {
-          // Get all the friends addresses
-          return users.map((user) => {
-            // check is it's a local user
-            if (user && user.is_local) {
-              // append the instance address
-              // eslint-disable-next-line no-undef
-              return user.screen_name + '@' + location.hostname
-            }
-            return user.screen_name
-          }).join('\n')
-        })
+        .then(this.generateExportableUsersContent)
     },
     getBlocksContent () {
       return this.$store.state.api.backendInteractor.fetchBlocks()
-        .then((users) => {
-          // Get all the friends addresses
-          return users.map((user) => {
-            // check is it's a local user
-            if (user && user.is_local) {
-              // append the instance address
-              // eslint-disable-next-line no-undef
-              return user.screen_name + '@' + location.hostname
-            }
-            return user.screen_name
-          }).join('\n')
-        })
+        .then(this.generateExportableUsersContent)
     },
     confirmDelete () {
       this.deletingAccount = true

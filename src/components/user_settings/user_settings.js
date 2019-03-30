@@ -253,9 +253,24 @@ const UserSettings = {
     },
     getFollowsContent () {
       return this.$store.state.api.backendInteractor.exportFriends({ id: this.$store.state.users.currentUser.id })
-        .then((friendList) => {
+        .then((users) => {
           // Get all the friends addresses
-          return friendList.map((user) => {
+          return users.map((user) => {
+            // check is it's a local user
+            if (user && user.is_local) {
+              // append the instance address
+              // eslint-disable-next-line no-undef
+              return user.screen_name + '@' + location.hostname
+            }
+            return user.screen_name
+          }).join('\n')
+        })
+    },
+    getBlocksContent () {
+      return this.$store.state.api.backendInteractor.fetchBlocks()
+        .then((users) => {
+          // Get all the friends addresses
+          return users.map((user) => {
             // check is it's a local user
             if (user && user.is_local) {
               // append the instance address

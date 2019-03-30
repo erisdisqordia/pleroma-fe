@@ -135,6 +135,8 @@
     "avatarRadius": "Avatars",
     "background": "Background",
     "bio": "Bio",
+    "block_export": "Block export",
+    "block_export_button": "Export your blocks to a csv file",
     "block_import": "Block import",
     "block_import_error": "Error importing blocks",
     "blocks_imported": "Blocks imported! Processing them will take a while.",

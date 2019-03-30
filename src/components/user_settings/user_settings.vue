@@ -182,6 +182,10 @@
             <p>{{$t('settings.import_blocks_from_a_csv_file')}}</p>
             <Importer :submitHandler="importBlocks" :successMessage="$t('settings.blocks_imported')" :errorMessage="$t('settings.block_import_error')" />
           </div>
+          <div class="setting-item">
+            <h2>{{$t('settings.block_export')}}</h2>
+            <Exporter :getContent="getBlocksContent" filename="blocks.csv" :exportButtonLabel="$t('settings.block_export_button')" />
+          </div>
         </div>
 
         <div :label="$t('settings.blocks_tab')">

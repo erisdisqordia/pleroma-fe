@@ -180,7 +180,7 @@
           <div class="setting-item">
             <h2>{{$t('settings.block_import')}}</h2>
             <p>{{$t('settings.import_blocks_from_a_csv_file')}}</p>
-            <Importer :submitHandler="importFollows" :successMessage="$t('settings.blocks_imported')" :errorMessage="$t('settings.block_import_error')" />
+            <Importer :submitHandler="importBlocks" :successMessage="$t('settings.blocks_imported')" :errorMessage="$t('settings.block_import_error')" />
           </div>
         </div>
 

@@ -235,7 +235,7 @@ const UserSettings = {
       })
     },
     importFollows (file) {
-      return this.$store.state.api.backendInteractor.followImport(file)
+      return this.$store.state.api.backendInteractor.importFollows(file)
         .then((status) => {
           if (!status) {
             throw new Error('failed')

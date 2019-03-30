@@ -107,7 +107,7 @@ const backendInteractorService = (credentials) => {
   const updateProfile = ({params}) => apiService.updateProfile({credentials, params})
 
   const externalProfile = (profileUrl) => apiService.externalProfile({profileUrl, credentials})
-  const followImport = (file) => apiService.followImport({file, credentials})
+  const importFollows = (file) => apiService.importFollows({file, credentials})
 
   const deleteAccount = ({password}) => apiService.deleteAccount({credentials, password})
   const changePassword = ({password, newPassword, newPasswordConfirmation}) => apiService.changePassword({credentials, password, newPassword, newPasswordConfirmation})
@@ -147,7 +147,7 @@ const backendInteractorService = (credentials) => {
     updateBanner,
     updateProfile,
     externalProfile,
-    followImport,
+    importFollows,
     deleteAccount,
     changePassword,
     fetchFollowRequests,

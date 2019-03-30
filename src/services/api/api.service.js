@@ -634,7 +634,7 @@ const uploadMedia = ({formData, credentials}) => {
     .then((data) => parseAttachment(data))
 }
 
-const followImport = ({file, credentials}) => {
+const importFollows = ({file, credentials}) => {
   const formData = new FormData()
   formData.append('list', file)
   return fetch(FOLLOW_IMPORT_URL, {
@@ -778,7 +778,7 @@ const apiService = {
   updateProfile,
   updateBanner,
   externalProfile,
-  followImport,
+  importFollows,
   deleteAccount,
   changePassword,
   fetchFollowRequests,

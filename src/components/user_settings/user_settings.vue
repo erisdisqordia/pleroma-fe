@@ -171,7 +171,7 @@
           <div class="setting-item">
             <h2>{{$t('settings.follow_import')}}</h2>
             <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
-            <Importer />
+            <Importer :submitHandler="importFollows" :successMessage="$t('settings.follows_imported')" :errorMessage="$t('settings.follow_import_error')" />
           </div>
           <div class="setting-item" v-if="enableFollowsExport">
             <h2>{{$t('settings.follow_export')}}</h2>

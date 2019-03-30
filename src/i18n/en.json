@@ -31,6 +31,11 @@
     "save_without_cropping": "Save without cropping",
     "cancel": "Cancel"
   },
+  "importer": {
+    "submit": "Submit",
+    "success": "Imported successfully.",
+    "error": "An error occured while importing this file."
+  },
   "login": {
     "login": "Log in",
     "description": "Log in with OAuth",

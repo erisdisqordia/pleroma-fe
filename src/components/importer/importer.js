@@ -1,10 +1,34 @@
 const Importer = {
+  props: {
+    submitHandler: {
+      type: Function,
+      required: true
+    },
+    submitButtonLabel: {
+      type: String,
+      default () {
+        return this.$t('importer.submit')
+      }
+    },
+    successMessage: {
+      type: String,
+      default () {
+        return this.$t('importer.success')
+      }
+    },
+    errorMessage: {
+      type: String,
+      default () {
+        return this.$t('importer.error')
+      }
+    }
+  },
   data () {
     return {
       file: null,
       error: false,
       success: false,
-      uploading: false
+      submitting: false
     }
   },
   methods: {
@@ -12,16 +36,12 @@ const Importer = {
       this.file = this.$refs.input.files[0]
     },
     submit () {
-      this.uploading = true
-      this.$store.state.api.backendInteractor.followImport(this.file)
-        .then((status) => {
-          if (status) {
-            this.success = true
-          } else {
-            this.error = true
-          }
-          this.uploading = false
-        })
+      this.dismiss()
+      this.submitting = true
+      this.submitHandler(this.file)
+        .then(() => { this.success = true })
+        .catch(() => { this.error = true })
+        .finally(() => { this.submitting = false })
     },
     dismiss () {
       this.success = false

@@ -3,15 +3,15 @@
     <form>
       <input type="file" ref="input" v-on:change="change" />
     </form>
-    <i class="icon-spin4 animate-spin uploading" v-if="uploading"></i>
-    <button class="btn btn-default" v-else @click="submit">{{$t('general.submit')}}</button>
+    <i class="icon-spin4 animate-spin importer-uploading" v-if="submitting"></i>
+    <button class="btn btn-default" v-else @click="submit">{{submitButtonLabel}}</button>
     <div v-if="success">
       <i class="icon-cross" @click="dismiss"></i>
-      <p>{{$t('settings.follows_imported')}}</p>
+      <p>{{successMessage}}</p>
     </div>
     <div v-else-if="error">
       <i class="icon-cross" @click="dismiss"></i>
-      <p>{{$t('settings.follow_import_error')}}</p>
+      <p>{{errorMessage}}</p>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@
 
 <style lang="scss">
 .importer {
-  .uploading {
+  &-uploading {
     font-size: 1.5em;
     margin: 0.25em;
   }

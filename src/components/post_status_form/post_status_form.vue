@@ -46,7 +46,6 @@
 
         <scope-selector
           :showAll="showAllScopes"
-          :userEnabled="['direct']"
           :userDefault="userDefaultScope"
           :originalScope="copyMessageScope"
           :initialScope="newStatus.visibility"

@@ -1,7 +1,6 @@
 const ScopeSelector = {
   props: [
     'showAll',
-    'userEnabled',
     'userDefault',
     'originalScope',
     'initialScope',
@@ -43,7 +42,7 @@ const ScopeSelector = {
         this.currentScope === scope ||
         this.originalScope === scope ||
         this.userDefault === scope ||
-        this.userEnabled.includes(scope)
+        'direct' === scope
     },
     changeVis (scope) {
       this.currentScope = scope

@@ -42,7 +42,7 @@ const ScopeSelector = {
         this.currentScope === scope ||
         this.originalScope === scope ||
         this.userDefault === scope ||
-        'direct' === scope
+        scope === 'direct'
     },
     changeVis (scope) {
       this.currentScope = scope

@@ -267,8 +267,6 @@ export const parseFollow = (data) => {
   output.visibility = true
   output.created_at = new Date(data.created_at)
   output.user = parseUser(data.account)
-  output.notified_at = output.created_at
-  output.account = output.user
 
   return output
 }
@@ -289,8 +287,6 @@ export const parseNotification = (data) => {
       : parseStatus(data.status)
     if (data.type === 'reblog' || data.type === 'favourite') {
       output.status.user = parseUser(data.account)
-      output.status.account = parseUser(data.account)
-      output.status.notified_at = new Date(data.created_at)
     }
     output.action = output.status // not sure
     output.from_profile = parseUser(data.account)

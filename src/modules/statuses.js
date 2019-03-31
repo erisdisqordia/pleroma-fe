@@ -363,6 +363,15 @@ export const mutations = {
   },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
+
+    if (newStatus.repeated !== value) {
+      if (value) {
+        newStatus.repeat_num++
+      } else {
+        newStatus.repeat_num--
+      }
+    }
+
     newStatus.repeated = value
   },
   setDeleted (state, { status }) {

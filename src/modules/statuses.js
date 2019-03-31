@@ -293,7 +293,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       if ('Notification' in window && window.Notification.permission === 'granted') {
         const notifObj = {}
         const action = notification.action
-        const title = action.user.name
+        const title = action.user.name_html
         notifObj.icon = action.user.profile_image_url
         notifObj.body = action.text // there's a problem that it doesn't put a space before links tho
 

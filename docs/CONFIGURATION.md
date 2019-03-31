@@ -1,0 +1,85 @@
+# Pleroma-FE configuration and customization for instance administrators
+
+* *For user configuration, see USER_GUIDE.md*
+* *For local development server configuration, see HACKING.md*
+
+## Where configuration is stored
+
+PleromaFE gets its configuration from several sources, in order of preference (the one above overrides ones below it)
+
+1. `/api/statusnet/config.json` - this is generated on Backend and contains multiple things including instance name, char limit etc. It also contains FE/Client-specific data, PleromaFE uses `pleromafe` field of it. For more info on changing config on BE, look [here](https://git.pleroma.social/pleroma/pleroma/blob/develop/docs/config.md#frontend_configurations)
+2. `/static/config.json` - this is a static FE-provided file, containing only FE specific configuration. This file is completely optional and could be removed but is useful as a fallback if some configuration JSON property isn't present in BE-provided config. It's also a reference point to check what default configuration are and what JSON properties even exist. In local dev mode it could be used to override BE configuration, more about that in HACKING.md. File is located [here](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/static/config.json).
+3. Built-in defaults. Those are hard-coded defaults that are used when `/static/config.json` is not available and BE-provided configuration JSON is missing some JSON properties. ( [Code](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/src/modules/instance.js) )
+
+## Instance-defaults
+
+Important note that some configurations are treated as "instance default" - it means user is able to change this configuration for themselves. Currently, defaults are only applied for new visitors and people who haven't changed the option in question. If you change some instance default option, there is a chance it won't affect some users.
+
+There's currently no mechanism for user-settings synchronization across several browsers, *user* essentially means *visitor*, most user settings are stored in local storage/IndexedDB and not tied to an account in any way.
+
+## Options
+
+### `theme`
+Default theme used for new users. De-facto instance-default, user can change theme.
+
+### `background`
+Default image background. Be aware of using too big images as they may take longer to load. Currently image is fitted with `background-size: cover` which means "scaled and cropped", currently left-aligned. De-facto instance default, user can choose their own background, if they remove their own background, instance default will be used instead.
+
+### `logo`, `logoMask`, `logoMargin`
+Instance `logo`, could be any image, including svg. By default it assumes logo used will be monochrome-with-alpha one, this is done to be compatible with both light and dark themes, so that white logo designed with dark theme in mind won't be invisible over light theme, this is done via [CSS3 Masking](https://www.html5rocks.com/en/tutorials/masking/adobe/). Basically - it will take alpha channel of the image and fill non-transparent areas of it with solid color. If you really want colorful logo - it can be done by setting `logoMask` to `false`.
+
+`logoMargin` allows you to adjust vertical margins between logo boundary and navbar borders. The idea is that to have logo's image without any extra margins and instead adjust them to your need in layout.
+
+### `redirectRootNoLogin`, `redirectRootLogin`
+These two settings should point to where FE should redirect visitor when they login/open up website root
+
+### `chatDisabled`
+unused (?)
+
+### `showInstanceSpecificPanel`
+This allows you to include arbitrary HTML content in a panel below navigation menu. PleromaFE looks for an html page `instance/panel.html`, by default it's not provided in FE, but BE bundles some [default one](https://git.pleroma.social/pleroma/pleroma/blob/develop/priv/static/instance/panel.html). De-facto instance-defaults, since user can hide instance-specific panel.
+
+### `scopeOptionsEnabled`
+TODO deprecated in !633
+
+### `formattingOptionsEnabled`
+Enables rich text formatting (broken?)
+
+### `collapseMessageWithSubject`
+Collapse post content when post has a subject line (content warning). Instance-default.
+
+### `scopeCopy`
+Copy post scope (visibility) when replying to a post. Instance-default.
+
+### `subjectLineBehavior`
+How to handle subject line (CW) when replying to a post.
+* `"email"` - like EMail - prepend `re: ` to subject line if it doesn't already start with it.
+* `"masto"` - lime Mastodon - copy it as is.
+* `"noop"` - do not copy
+Instance-default.
+
+### `postContentType`
+Default text formatting option (????)
+
+### `alwaysShowSubjectInput`
+`true` - will always show subject line input, `false` - only show when it's not empty (i.e. replying). To hide subject line input completely, set it to `false` and `subjectLineBehavior` to `"noop"`
+
+### `hidePostStats` and `hideUserStats`
+Hide counters for posts and users respectively, i.e. hiding repeats/favorites counts for posts, hiding followers/friends counts for users.
+
+### `loginMethod`
+`"password"` - show simple password field
+`"token"` - show button to loken with a token (??????)
+TODO more info about token login needed
+
+### `webPushNotifications`
+Enables [PushAPI](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) - based notifications for users. Instance-default.
+
+### `noAttachmentLinks`
+TODO ?????
+
+### `nsfwCensorImage`
+Use custom image for NSFW'd images
+
+### `showFeaturesPanel`
+Show panel showcasing instance features/settings to logged-out visitors

@@ -123,7 +123,7 @@ export const mutations = {
   },
   setUserForNotification (state, notification) {
     notification.action.user = state.usersObject[notification.action.user.id]
-    notification.from_profile = state.usersObject[notification.action.user.id]
+    notification.from_profile = state.usersObject[notification.from_profile.id]
   },
   setColor (state, { user: { id }, highlighted }) {
     const user = state.usersObject[id]

@@ -285,10 +285,7 @@ export const parseNotification = (data) => {
     output.status = output.type === 'follow'
       ? parseFollow(data)
       : parseStatus(data.status)
-    if (data.type === 'reblog' || data.type === 'favourite') {
-      output.status.user = parseUser(data.account)
-    }
-    output.action = output.status // not sure
+    output.action = output.status // TODO: Refactor, this is unneeded
     output.from_profile = parseUser(data.account)
   } else {
     const parsedNotice = parseStatus(data.notice)

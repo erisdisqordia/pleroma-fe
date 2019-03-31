@@ -2,48 +2,114 @@
   "chat": {
     "title": "Czat"
   },
+  "features_panel": {
+    "chat": "Czat",
+    "gopher": "Gopher",
+    "media_proxy": "Proxy mediów",
+    "scope_options": "Ustawienia zakresu",
+    "text_limit": "Limit tekstu",
+    "title": "Funkcje",
+    "who_to_follow": "Propozycje obserwacji"
+  },
   "finder": {
     "error_fetching_user": "Błąd przy pobieraniu profilu",
     "find_user": "Znajdź użytkownika"
   },
   "general": {
     "apply": "Zastosuj",
-    "submit": "Wyślij"
+    "submit": "Wyślij",
+    "more": "Więcej",
+    "generic_error": "Wystąpił błąd",
+    "optional": "nieobowiązkowe"
+  },
+  "image_cropper": {
+    "crop_picture": "Przytnij obrazek",
+    "save": "Zapisz",
+    "save_without_cropping": "Zapisz bez przycinania",
+    "cancel": "Anuluj"
   },
   "login": {
     "login": "Zaloguj",
+    "description": "Zaloguj używając OAuth",
     "logout": "Wyloguj",
     "password": "Hasło",
     "placeholder": "n.p. lain",
     "register": "Zarejestruj",
-    "username": "Użytkownik"
+    "username": "Użytkownik",
+    "hint": "Zaloguj się, aby dołączyć do dyskusji"
+  },
+  "media_modal": {
+    "previous": "Poprzednie",
+    "next": "Następne"
   },
   "nav": {
+    "about": "O nas",
+    "back": "Wróć",
     "chat": "Lokalny czat",
+    "friend_requests": "Prośby o możliwość obserwacji",
     "mentions": "Wzmianki",
+    "dms": "Wiadomości prywatne",
     "public_tl": "Publiczna oś czasu",
     "timeline": "Oś czasu",
-    "twkn": "Cała znana sieć"
+    "twkn": "Cała znana sieć",
+    "user_search": "Wyszukiwanie użytkowników",
+    "who_to_follow": "Sugestie obserwacji",
+    "preferences": "Preferencje"
   },
   "notifications": {
-    "favorited_you": "dodał twój status do ulubionych",
+    "broken_favorite": "Nieznany status, szukam go…",
+    "favorited_you": "dodał(-a) twój status do ulubionych",
     "followed_you": "obserwuje cię",
+    "load_older": "Załaduj starsze powiadomienia",
     "notifications": "Powiadomienia",
     "read": "Przeczytane!",
-    "repeated_you": "powtórzył twój status"
+    "repeated_you": "powtórzył(-a) twój status",
+    "no_more_notifications": "Nie masz więcej powiadomień"
   },
   "post_status": {
+    "new_status": "Dodaj nowy status",
+    "account_not_locked_warning": "Twoje konto nie jest {0}. Każdy może cię zaobserwować aby zobaczyć wpisy tylko dla obserwujących.",
+    "account_not_locked_warning_link": "zablokowane",
+    "attachments_sensitive": "Oznacz załączniki jako wrażliwe",
+    "content_type": {
+      "text/plain": "Czysty tekst",
+      "text/html": "HTML",
+      "text/markdown": "Markdown"
+    },
+    "content_warning": "Temat (nieobowiązkowy)",
     "default": "Właśnie wróciłem z kościoła",
-    "posting": "Wysyłanie"
+    "direct_warning": "Ten wpis zobaczą tylko osoby, o których wspomniałeś(-aś).",
+    "posting": "Wysyłanie",
+    "scope": {
+      "direct": "Bezpośredni – Tylko dla wspomnianych użytkowników",
+      "private": "Tylko dla obserwujących – Umieść dla osób, które cię obserwują",
+      "public": "Publiczny – Umieść na publicznych osiach czasu",
+      "unlisted": "Niewidoczny – Nie umieszczaj na publicznych osiach czasu"
+    }
   },
   "registration": {
     "bio": "Bio",
-    "email": "Email",
+    "email": "E-mail",
     "fullname": "Wyświetlana nazwa profilu",
     "password_confirm": "Potwierdzenie hasła",
-    "registration": "Rejestracja"
+    "registration": "Rejestracja",
+    "token": "Token zaproszenia",
+    "captcha": "CAPTCHA",
+    "new_captcha": "Naciśnij na obrazek, aby dostać nowy kod captcha",
+    "username_placeholder": "np. lain",
+    "fullname_placeholder": "np. Lain Iwakura",
+    "bio_placeholder": "e.g.\nCześć, jestem Lain.\nJestem dziewczynką z anime żyjącą na peryferiach Japonii. Możesz znać mnie z Wired.",
+    "validations": {
+      "username_required": "nie może być pusta",
+      "fullname_required": "nie może być pusta",
+      "email_required": "nie może być pusty",
+      "password_required": "nie może być puste",
+      "password_confirmation_required": "nie może być puste",
+      "password_confirmation_match": "musi być takie jak hasło"
+    }
   },
   "settings": {
+    "app_name": "Nazwa aplikacji",
     "attachmentRadius": "Załączniki",
     "attachments": "Załączniki",
     "autoload": "Włącz automatyczne ładowanie po przewinięciu do końca strony",
@@ -52,6 +118,7 @@
     "avatarRadius": "Awatary",
     "background": "Tło",
     "bio": "Bio",
+    "blocks_tab": "Bloki",
     "btnRadius": "Przyciski",
     "cBlue": "Niebieski (odpowiedz, obserwuj)",
     "cGreen": "Zielony (powtórzenia)",
@@ -59,15 +126,21 @@
     "cRed": "Czerwony (anuluj)",
     "change_password": "Zmień hasło",
     "change_password_error": "Podczas zmiany hasła wystąpił problem.",
-    "changed_password": "Hasło zmienione poprawnie!",
+    "changed_password": "Pomyślnie zmieniono hasło!",
+    "collapse_subject": "Zwijaj posty z tematami",
+    "composing": "Pisanie",
     "confirm_new_password": "Potwierdź nowe hasło",
     "current_avatar": "Twój obecny awatar",
     "current_password": "Obecne hasło",
     "current_profile_banner": "Twój obecny banner profilu",
+    "data_import_export_tab": "Import/eksport danych",
+    "default_vis": "Domyślny zakres widoczności",
     "delete_account": "Usuń konto",
     "delete_account_description": "Trwale usuń konto i wszystkie posty.",
     "delete_account_error": "Wystąpił problem z usuwaniem twojego konta. Jeżeli problem powtarza się, poinformuj administratora swojej instancji.",
     "delete_account_instructions": "Wprowadź swoje hasło w poniższe pole aby potwierdzić usunięcie konta.",
+    "avatar_size_instruction": "Zalecany minimalny rozmiar awatarów to 150x150 pikseli.",
+    "export_theme": "Zapisz motyw",
     "filtering": "Filtrowanie",
     "filtering_explanation": "Wszystkie statusy zawierające te słowa będą wyciszone. Jedno słowo na linijkę.",
     "follow_export": "Eksport obserwowanych",
@@ -77,14 +150,49 @@
     "follow_import_error": "Błąd przy importowaniu obserwowanych",
     "follows_imported": "Obserwowani zaimportowani! Przetwarzanie może trochę potrwać.",
     "foreground": "Pierwszy plan",
-    "hide_attachments_in_convo": "Ukryj załączniki w rozmowach",
-    "hide_attachments_in_tl": "Ukryj załączniki w osi czasu",
+    "general": "Ogólne",
+    "hide_attachments_in_convo": "Ukrywaj załączniki w rozmowach",
+    "hide_attachments_in_tl": "Ukrywaj załączniki w osi czasu",
+    "hide_muted_posts": "Ukrywaj wpisy wyciszonych użytkowników",
+    "max_thumbnails": "Maksymalna liczba miniatur w poście",
+    "hide_isp": "Ukryj panel informacji o instancji",
+    "preload_images": "Ładuj wstępnie obrazy",
+    "use_one_click_nsfw": "Otwieraj załączniki NSFW jednym kliknięciem",
+    "hide_post_stats": "Ukrywaj statysyki postów (np. liczbę polubień)",
+    "hide_user_stats": "Ukrywaj statysyki użytkowników (np. liczbę obserwujących)",
+    "hide_filtered_statuses": "Ukrywaj filtrowane statusy",
     "import_followers_from_a_csv_file": "Importuj obserwowanych z pliku CSV",
+    "import_theme": "Załaduj motyw",
     "inputRadius": "Pola tekstowe",
+    "checkboxRadius": "Pola wyboru",
+    "instance_default": "(domyślny: {value})",
+    "instance_default_simple": "(domyślny)",
+    "interface": "Interfejs",
+    "interfaceLanguage": "Język interfejsu",
+    "invalid_theme_imported": "Wybrany plik nie jest obsługiwanym motywem Pleromy. Nie dokonano zmian w twoim motywie.",
+    "limited_availability": "Niedostępne w twojej przeglądarce",
     "links": "Łącza",
+    "lock_account_description": "Ogranicz swoje konto dla zatwierdzonych obserwowanych",
+    "loop_video": "Zapętlaj filmy",
+    "loop_video_silent_only": "Zapętlaj tylko filmy bez dźwięku (np. mastodonowe „gify”)",
+    "mutes_tab": "Wyciszenia",
+    "play_videos_in_modal": "Odtwarzaj filmy bezpośrednio w przeglądarce mediów",
+    "use_contain_fit": "Nie przycinaj załączników na miniaturach",
     "name": "Imię",
     "name_bio": "Imię i bio",
     "new_password": "Nowe hasło",
+    "notification_visibility": "Rodzaje powiadomień do wyświetlania",
+    "notification_visibility_follows": "Obserwacje",
+    "notification_visibility_likes": "Ulubione",
+    "notification_visibility_mentions": "Wzmianki",
+    "notification_visibility_repeats": "Powtórzenia",
+    "no_rich_text_description": "Usuwaj formatowanie ze wszystkich postów",
+    "no_blocks": "Bez blokad",
+    "no_mutes": "Bez wyciszeń",
+    "hide_follows_description": "Nie pokazuj kogo obserwuję",
+    "hide_followers_description": "Nie pokazuj kto mnie obserwuje",
+    "show_admin_badge": "Pokazuj odznakę Administrator na moim profilu",
+    "show_moderator_badge": "Pokazuj odznakę Moderator na moim profilu",
     "nsfw_clickthrough": "Włącz domyślne ukrywanie załączników o treści nieprzyzwoitej (NSFW)",
     "oauth_tokens": "Tokeny OAuth",
     "token": "Token",
@@ -92,47 +200,235 @@
     "valid_until": "Ważne do",
     "revoke_token": "Odwołać",
     "panelRadius": "Panele",
+    "pause_on_unfocused": "Wstrzymuj strumieniowanie kiedy karta nie jest aktywna",
     "presets": "Gotowe motywy",
     "profile_background": "Tło profilu",
     "profile_banner": "Banner profilu",
+    "profile_tab": "Profil",
     "radii_help": "Ustaw zaokrąglenie krawędzi interfejsu (w pikselach)",
+    "replies_in_timeline": "Odpowiedzi na osi czasu",
     "reply_link_preview": "Włącz dymek z podglądem postu po najechaniu na znak odpowiedzi",
+    "reply_visibility_all": "Pokazuj wszystkie odpowiedzi",
+    "reply_visibility_following": "Pokazuj tylko odpowiedzi skierowane do mnie i osób które obserwuję",
+    "reply_visibility_self": "Pokazuj tylko odpowiedzi skierowane do mnie",
+    "saving_err": "Nie udało się zapisać ustawień",
+    "saving_ok": "Zapisano ustawienia",
+    "security_tab": "Bezpieczeństwo",
+    "scope_copy": "Kopiuj zakres podczas odpowiadania (DM-y zawsze są kopiowane)",
     "set_new_avatar": "Ustaw nowy awatar",
     "set_new_profile_background": "Ustaw nowe tło profilu",
     "set_new_profile_banner": "Ustaw nowy banner profilu",
     "settings": "Ustawienia",
+    "subject_input_always_show": "Zawsze pokazuj pole tematu",
+    "subject_line_behavior": "Kopiuj temat podczas odpowiedzi",
+    "subject_line_email": "Jak w mailach – „re: temat”",
+    "subject_line_mastodon": "Jak na Mastodonie – po prostu kopiuj",
+    "subject_line_noop": "Nie kopiuj",
+    "post_status_content_type": "Post status content type",
     "stop_gifs": "Odtwarzaj GIFy po najechaniu kursorem",
-    "streaming": "Włącz automatycznie strumieniowanie nowych postów gdy na początku strony",
+    "streaming": "Włącz automatycznie strumieniowanie nowych postów gdy jesteś na początku strony",
     "text": "Tekst",
     "theme": "Motyw",
     "theme_help": "Użyj kolorów w notacji szesnastkowej (#rrggbb), by stworzyć swój motyw.",
+    "theme_help_v2_1": "Możesz też zastąpić kolory i widoczność poszczególnych komponentów przełączając pola wyboru, użyj „Wyczyść wszystko” aby usunąć wszystkie zastąpienia.",
+    "theme_help_v2_2": "Ikony pod niektórych wpisami są wskaźnikami kontrastu pomiędzy tłem a tekstem, po najechaniu na nie otrzymasz szczegółowe informacje. Zapamiętaj, że jeżeli używasz przezroczystości, wskaźniki pokazują najgorszy możliwy przypadek.",
     "tooltipRadius": "Etykiety/alerty",
-    "user_settings": "Ustawienia użytkownika"
+    "upload_a_photo": "Wyślij zdjęcie",
+    "user_settings": "Ustawienia użytkownika",
+    "values": {
+      "false": "nie",
+      "true": "tak"
+    },
+    "notifications": "Powiadomienia",
+    "enable_web_push_notifications": "Włącz powiadomienia push",
+    "style": {
+      "switcher": {
+        "keep_color": "Zachowaj kolory",
+        "keep_shadows": "Zachowaj cienie",
+        "keep_opacity": "Zachowaj widoczność",
+        "keep_roundness": "Zachowaj zaokrąglenie",
+        "keep_fonts": "Zachowaj czcionki",
+        "save_load_hint": "Opcje „zachowaj” pozwalają na pozostanie przy obecnych opcjach po wybraniu lub załadowaniu motywu, jak i przechowywanie ich podczas eksportowania motywu. Jeżeli wszystkie są odznaczone, eksportowanie motywu spowoduje zapisanie wszystkiego.",
+        "reset": "Wyzeruj",
+        "clear_all": "Wyczyść wszystko",
+        "clear_opacity": "Wyczyść widoczność"
+      },
+      "common": {
+        "color": "Kolor",
+        "opacity": "Widoczność",
+        "contrast": {
+          "hint": "Współczynnik kontrastu wynosi {ratio}, {level} {context}",
+          "level": {
+            "aa": "spełnia wymogi poziomu AA (minimalne)",
+            "aaa": "spełnia wymogi poziomu AAA (zalecane)",
+            "bad": "nie spełnia żadnych wymogów dostępności"
+          },
+          "context": {
+            "18pt": "dla dużego tekstu (18pt+)",
+            "text": "dla tekstu"
+          }
+        }
+      },
+      "common_colors": {
+        "_tab_label": "Ogólne",
+        "main": "Ogólne kolory",
+        "foreground_hint": "Zajrzyj do karty „Zaawansowane”, aby uzyskać dokładniejszą kontrolę",
+        "rgbo": "Ikony, wyróżnienia, odznaki"
+      },
+      "advanced_colors": {
+        "_tab_label": "Zaawansowane",
+        "alert": "Tło alertu",
+        "alert_error": "Błąd",
+        "badge": "Tło odznaki",
+        "badge_notification": "Powiadomienie",
+        "panel_header": "Nagłówek panelu",
+        "top_bar": "Górny pasek",
+        "borders": "Granice",
+        "buttons": "Przyciski",
+        "inputs": "Pola wejścia",
+        "faint_text": "Zanikający tekst"
+      },
+      "radii": {
+        "_tab_label": "Zaokrąglenie"
+      },
+      "shadows": {
+        "_tab_label": "Cień i podświetlenie",
+        "component": "Komponent",
+        "override": "Zastąp",
+        "shadow_id": "Cień #{value}",
+        "blur": "Rozmycie",
+        "spread": "Szerokość",
+        "inset": "Inset",
+        "hint": "Możesz też używać --zmiennych jako kolorów, aby wykorzystać zmienne CSS3. Pamiętaj, że ustawienie widoczności nie będzie wtedy działać.",
+        "filter_hint": {
+          "always_drop_shadow": "Ostrzeżenie, ten cień zawsze używa {0} jeżeli to obsługiwane przez przeglądarkę.",
+          "drop_shadow_syntax": "{0} nie obsługuje parametru {1} i słowa kluczowego {2}.",
+          "avatar_inset": "Pamiętaj że użycie jednocześnie cieni inset i nie inset na awatarach może daćnieoczekiwane wyniki z przezroczystymi awatarami.",
+          "spread_zero": "Cienie o ujemnej szerokości będą widoczne tak, jakby wynosiła ona zero",
+          "inset_classic": "Cienie inset będą używały {0}"
+        },
+        "components": {
+          "panel": "Panel",
+          "panelHeader": "Nagłówek panelu",
+          "topBar": "Górny pasek",
+          "avatar": "Awatar użytkownika (w widoku profilu)",
+          "avatarStatus": "Awatar użytkownika (w widoku wpisu)",
+          "popup": "Wyskakujące okna i podpowiedzi",
+          "button": "Przycisk",
+          "buttonHover": "Przycisk (po najechaniu)",
+          "buttonPressed": "Przycisk (naciśnięty)",
+          "buttonPressedHover": "Przycisk(naciśnięty+najechany)",
+          "input": "Pole wejścia"
+        }
+      },
+      "fonts": {
+        "_tab_label": "Czcionki",
+        "help": "Wybierz czcionkę używaną przez elementy UI. Jeżeli wybierzesz niestandardową, musisz wpisać dokładnie tę nazwę, pod którą pojawia się w systemie.",
+        "components": {
+          "interface": "Interfejs",
+          "input": "Pola wejścia",
+          "post": "Tekst postu",
+          "postCode": "Tekst o stałej szerokości znaków w sformatowanym poście"
+        },
+        "family": "Nazwa czcionki",
+        "size": "Rozmiar (w pikselach)",
+        "weight": "Grubość",
+        "custom": "Niestandardowa"
+      },
+      "preview": {
+        "header": "Podgląd",
+        "content": "Zawartość",
+        "error": "Przykładowy błąd",
+        "button": "Przycisk",
+        "text": "Trochę więcej {0} i {1}",
+        "mono": "treści",
+        "input": "Właśnie wróciłem z kościoła",
+        "faint_link": "pomocny podręcznik",
+        "fine_print": "Przeczytaj nasz {0}, aby nie nauczyć się niczego przydatnego!",
+        "header_faint": "W porządku",
+        "checkbox": "Przeleciałem przez zasady użytkowania",
+        "link": "i fajny mały odnośnik"
+      }
+    },
+    "version": {
+      "title": "Wersja",
+      "backend_version": "Wersja back-endu",
+      "frontend_version": "Wersja front-endu"
+    }
   },
   "timeline": {
     "collapse": "Zwiń",
     "conversation": "Rozmowa",
     "error_fetching": "Błąd pobierania",
     "load_older": "Załaduj starsze statusy",
+    "no_retweet_hint": "Wpis oznaczony jako tylko dla obserwujących lub bezpośredni nie może zostać powtórzony",
     "repeated": "powtórzono",
     "show_new": "Pokaż nowe",
-    "up_to_date": "Na bieżąco"
+    "up_to_date": "Na bieżąco",
+    "no_more_statuses": "Brak kolejnych statusów",
+    "no_statuses": "Brak statusów"
+  },
+  "status": {
+    "reply_to": "Odpowiedź dla",
+    "replies_list": "Odpowiedzi:"
   },
   "user_card": {
+    "approve": "Przyjmij",
     "block": "Zablokuj",
     "blocked": "Zablokowany!",
+    "deny": "Odrzuć",
+    "favorites": "Ulubione",
     "follow": "Obserwuj",
+    "follow_sent": "Wysłano prośbę!",
+    "follow_progress": "Wysyłam prośbę…",
+    "follow_again": "Wysłać prośbę ponownie?",
+    "follow_unfollow": "Przestań obserwować",
     "followees": "Obserwowani",
     "followers": "Obserwujący",
     "following": "Obserwowany!",
     "follows_you": "Obserwuje cię!",
+    "its_you": "To ty!",
+    "media": "Media",
     "mute": "Wycisz",
-    "muted": "Wyciszony",
+    "muted": "Wyciszony(-a)",
     "per_day": "dziennie",
     "remote_follow": "Zdalna obserwacja",
-    "statuses": "Statusy"
+    "statuses": "Statusy",
+    "unblock": "Odblokuj",
+    "unblock_progress": "Odblokowuję…",
+    "block_progress": "Blokuję…",
+    "unmute": "Cofnij wyciszenie",
+    "unmute_progress": "Cofam wyciszenie…",
+    "mute_progress": "Wyciszam…"
   },
   "user_profile": {
-    "timeline_title": "Oś czasu użytkownika"
+    "timeline_title": "Oś czasu użytkownika",
+    "profile_does_not_exist": "Przepraszamy, ten profil nie istnieje.",
+    "profile_loading_error": "Przepraszamy, wystąpił błąd podczas ładowania tego profilu."
+  },
+  "who_to_follow": {
+    "more": "Więcej",
+    "who_to_follow": "Propozycje obserwacji"
+  },
+  "tool_tip": {
+    "media_upload": "Wyślij media",
+    "repeat": "Powtórz",
+    "reply": "Odpowiedz",
+    "favorite": "Dodaj do ulubionych",
+    "user_settings": "Ustawienia użytkownika"
+  },
+  "upload":{
+    "error": {
+      "base": "Wysyłanie nie powiodło się.",
+      "file_too_big": "Zbyt duży plik [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+      "default": "Spróbuj ponownie później"
+    },
+    "file_size_units": {
+      "B": "B",
+      "KiB": "KiB",
+      "MiB": "MiB",
+      "GiB": "GiB",
+      "TiB": "TiB"
+    }
   }
 }

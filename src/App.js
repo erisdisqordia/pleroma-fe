@@ -10,6 +10,7 @@ import MediaModal from './components/media_modal/media_modal.vue'
 import SideDrawer from './components/side_drawer/side_drawer.vue'
 import MobilePostStatusModal from './components/mobile_post_status_modal/mobile_post_status_modal.vue'
 import MobileNav from './components/mobile_nav/mobile_nav.vue'
+import { windowWidth } from './services/window_utils/window_utils'
 
 export default {
   name: 'app',
@@ -102,10 +103,10 @@ export default {
       this.finderHidden = hidden
     },
     updateMobileState () {
-      const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-      const changed = width <= 800 !== this.isMobileLayout
+      const mobileLayout = windowWidth() <= 800
+      const changed = mobileLayout !== this.isMobileLayout
       if (changed) {
-        this.$store.dispatch('setMobileLayout', width <= 800)
+        this.$store.dispatch('setMobileLayout', mobileLayout)
       }
     }
   }

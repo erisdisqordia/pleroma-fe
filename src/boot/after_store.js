@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
-
 import App from '../App.vue'
+import { windowWidth } from '../services/window_utils/window_utils'
 
 const getStatusnetConfig = async ({ store }) => {
   try {
@@ -230,7 +230,7 @@ const afterStoreSetup = async ({ store, i18n }) => {
     })
   }
 
-  const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+  const width = windowWidth()
   store.dispatch('setMobileLayout', width <= 800)
 
   const apiConfig = await getStatusnetConfig({ store })

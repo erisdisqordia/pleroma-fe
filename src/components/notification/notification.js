@@ -25,11 +25,11 @@ const Notification = {
   },
   computed: {
     userClass () {
-      return highlightClass(this.notification.action.user)
+      return highlightClass(this.notification.from_profile)
     },
     userStyle () {
       const highlight = this.$store.state.config.highlight
-      const user = this.notification.action.user
+      const user = this.notification.from_profile
       return highlightStyle(highlight[user.screen_name])
     }
   }

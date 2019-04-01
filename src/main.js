@@ -59,6 +59,11 @@ const persistedStateOptions = {
   const persistedState = await createPersistedState(persistedStateOptions)
   const store = new Vuex.Store({
     modules: {
+      i18n: {
+        getters: {
+          i18n: () => i18n
+        }
+      },
       interface: interfaceModule,
       instance: instanceModule,
       statuses: statusesModule,

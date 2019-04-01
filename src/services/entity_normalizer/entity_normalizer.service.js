@@ -39,7 +39,7 @@ export const parseUser = (data) => {
       return output
     }
 
-    // output.name = ??? missing
+    output.name = data.display_name
     output.name_html = addEmojis(data.display_name, data.emojis)
 
     // output.description = ??? missing
@@ -260,17 +260,6 @@ export const parseStatus = (data) => {
   return output
 }
 
-// This is for masto API only.
-export const parseFollow = (data) => {
-  const output = {}
-  output.id = String(data.id)
-  output.visibility = true
-  output.created_at = new Date(data.created_at)
-  output.user = parseUser(data.account)
-
-  return output
-}
-
 export const parseNotification = (data) => {
   const mastoDict = {
     'favourite': 'like',
@@ -283,7 +272,7 @@ export const parseNotification = (data) => {
     output.type = mastoDict[data.type] || data.type
     output.seen = data.pleroma.is_seen
     output.status = output.type === 'follow'
-      ? parseFollow(data)
+      ? null
       : parseStatus(data.status)
     output.action = output.status // TODO: Refactor, this is unneeded
     output.from_profile = parseUser(data.account)

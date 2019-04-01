@@ -25,7 +25,7 @@ export const defaultState = () => ({
   allStatusesObject: {},
   maxId: 0,
   notifications: {
-    desktopNotificationSilence: true,
+    desktopNotificationSilence: false,
     maxId: 0,
     minId: Number.POSITIVE_INFINITY,
     data: [],
@@ -271,12 +271,14 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 }
 
-const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes }) => {
+const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters }) => {
   const allStatuses = state.allStatuses
   const allStatusesObject = state.allStatusesObject
   each(notifications, (notification) => {
-    notification.action = mergeOrAdd(allStatuses, allStatusesObject, notification.action).item
-    notification.status = notification.status && mergeOrAdd(allStatuses, allStatusesObject, notification.status).item
+    if (notification.type !== 'follow') {
+      notification.action = mergeOrAdd(allStatuses, allStatusesObject, notification.action).item
+      notification.status = notification.status && mergeOrAdd(allStatuses, allStatusesObject, notification.status).item
+    }
 
     // Only add a new notification if we don't have one for the same action
     if (!state.notifications.idStore.hasOwnProperty(notification.id)) {
@@ -292,15 +294,32 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
 
       if ('Notification' in window && window.Notification.permission === 'granted') {
         const notifObj = {}
-        const action = notification.action
-        const title = action.user.name_html
-        notifObj.icon = action.user.profile_image_url
-        notifObj.body = action.text // there's a problem that it doesn't put a space before links tho
+        const status = notification.status
+        const title = notification.from_profile.name
+        notifObj.icon = notification.from_profile.profile_image_url
+        let i18nString
+        switch (notification.type) {
+          case 'like':
+            i18nString = 'favorited_you'
+            break
+          case 'repeat':
+            i18nString = 'repeated_you'
+            break
+          case 'follow':
+            i18nString = 'followed_you'
+            break
+        }
+
+        if (i18nString) {
+          notifObj.body = rootGetters.i18n.t('notifications.' + i18nString)
+        } else {
+          notifObj.body = notification.status.text
+        }
 
         // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
-        if (action.attachments && action.attachments.length > 0 && !action.nsfw &&
-            action.attachments[0].mimetype.startsWith('image/')) {
-          notifObj.image = action.attachments[0].url
+        if (status && status.attachments && status.attachments.length > 0 && !status.nsfw &&
+          status.attachments[0].mimetype.startsWith('image/')) {
+          notifObj.image = status.attachments[0].url
         }
 
         if (!notification.seen && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.type)) {
@@ -413,8 +432,8 @@ const statuses = {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })
     },
-    addNewNotifications ({ rootState, commit, dispatch }, { notifications, older }) {
-      commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older })
+    addNewNotifications ({ rootState, commit, dispatch, rootGetters }, { notifications, older }) {
+      commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older, rootGetters })
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })

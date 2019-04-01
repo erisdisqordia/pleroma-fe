@@ -31,7 +31,16 @@ const Notification = {
       const highlight = this.$store.state.config.highlight
       const user = this.notification.action.user
       return highlightStyle(highlight[user.screen_name])
-    }
+    },
+    userInStore () {
+      return this.$store.getters.findUser(this.notification.action.user.id)
+    },
+    user () {
+      if (this.userInStore) {
+        return this.userInStore
+      }
+      return {}
+    },
   }
 }
 

@@ -118,6 +118,12 @@
                 </label>
               </div>
             </li>
+            <li>
+              <input type="checkbox" id="minimalScopesMode" v-model="minimalScopesModeLocal">
+              <label for="minimalScopesMode">
+                {{$t('settings.minimal_scopes_mode')}} {{$t('settings.instance_default', { value: minimalScopesModeDefault })}}
+              </label>
+            </li>
           </ul>
         </div>
 

@@ -217,6 +217,7 @@
     "saving_ok": "Settings saved",
     "security_tab": "Security",
     "scope_copy": "Copy scope when replying (DMs are always copied)",
+    "minimal_scopes_mode": "Minimize post scope selection options",
     "set_new_avatar": "Set new avatar",
     "set_new_profile_background": "Set new profile background",
     "set_new_profile_banner": "Set new profile banner",

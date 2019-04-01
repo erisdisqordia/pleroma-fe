@@ -41,7 +41,7 @@ FE Build process also leaves current commit hash in global variable `___pleromaf
 
 # Configuration
 
-Edit config.json for configuration. scopeOptionsEnabled gives you input fields for CWs and the scope settings.
+Edit config.json for configuration.
 
 ## Options
 

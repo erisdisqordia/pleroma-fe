@@ -72,9 +72,6 @@ const UserProfile = {
       return this.$store.getters.findUser(this.fetchedUserId || routeParams.name || routeParams.id)
     },
     user () {
-      if (this.timeline.statuses[0]) {
-        return this.timeline.statuses[0].user
-      }
       if (this.userInStore) {
         return this.userInStore
       }

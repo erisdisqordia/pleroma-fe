@@ -1,11 +1,11 @@
 <template>
   <status v-if="notification.type === 'mention'" :compact="true" :statusoid="notification.status"></status>
-  <div class="non-mention" :class="[userClass, { highlighted: userStyle }]" :style="[ userStyle ]"v-else>
+  <div class="non-mention" :class="[userClass, { highlighted: userStyle }]" :style="[ userStyle ]" v-else>
     <a class='avatar-container' :href="notification.action.user.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
       <UserAvatar :compact="true" :betterShadow="betterShadow" :src="notification.action.user.profile_image_url_original"/>
     </a>
     <div class='notification-right'>
-      <UserCard :user="notification.action.user" :rounded="true" :bordered="true" v-if="userExpanded"/>
+      <UserCard :user="user" :rounded="true" :bordered="true" v-if="userExpanded"/>
       <span class="notification-details">
         <div class="name-and-action">
           <span class="username" v-if="!!notification.action.user.name_html" :title="'@'+notification.action.user.screen_name" v-html="notification.action.user.name_html"></span>

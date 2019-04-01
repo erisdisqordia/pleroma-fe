@@ -40,7 +40,7 @@ const Notification = {
         return this.userInStore
       }
       return {}
-    },
+    }
   }
 }
 

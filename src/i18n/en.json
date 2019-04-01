@@ -20,7 +20,9 @@
     "submit": "Submit",
     "more": "More",
     "generic_error": "An error occured",
-    "optional": "optional"
+    "optional": "optional",
+    "show_more": "Show more",
+    "show_less": "Show less"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",

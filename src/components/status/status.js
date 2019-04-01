@@ -251,6 +251,9 @@ const Status = {
     },
     maxThumbnails () {
       return this.$store.state.config.maxThumbnails
+    },
+    contentHtml () {
+      return this.status.summary_html + '<br />' + this.status.statusnet_html
     }
   },
   components: {

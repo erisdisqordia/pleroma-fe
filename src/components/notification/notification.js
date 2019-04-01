@@ -33,13 +33,13 @@ const Notification = {
       return highlightStyle(highlight[user.screen_name])
     },
     userInStore () {
-      return this.$store.getters.findUser(this.notification.action.user.id)
+      return this.$store.getters.findUser(this.notification.from_profile.id)
     },
     user () {
       if (this.userInStore) {
         return this.userInStore
       }
-      return {}
+      return this.notification.from_profile
     }
   }
 }

@@ -28,6 +28,7 @@
     "sanitize-html": "^1.13.0",
     "sass-loader": "^4.0.2",
     "vue": "^2.5.13",
+    "vue-autosuggest": "^1.8.3",
     "vue-chat-scroll": "^1.2.1",
     "vue-compose": "^0.7.1",
     "vue-i18n": "^7.3.2",

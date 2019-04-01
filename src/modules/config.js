@@ -33,7 +33,8 @@ const defaultState = {
   scopeCopy: undefined, // instance default
   subjectLineBehavior: undefined, // instance default
   alwaysShowSubjectInput: undefined, // instance default
-  postContentType: undefined // instance default
+  postContentType: undefined, // instance default
+  minimalScopesMode: undefined // instance default
 }
 
 const config = {

@@ -4,9 +4,11 @@ import get from 'lodash/get'
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import ImageCropper from '../image_cropper/image_cropper.vue'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
+import ScopeSelector from '../scope_selector/scope_selector.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 import BlockCard from '../block_card/block_card.vue'
 import MuteCard from '../mute_card/mute_card.vue'
+import EmojiInput from '../emoji-input/emoji-input.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import withList from '../../hocs/with_list/with_list'
 
@@ -66,10 +68,12 @@ const UserSettings = {
   },
   components: {
     StyleSwitcher,
+    ScopeSelector,
     TabSwitcher,
     ImageCropper,
     BlockList,
-    MuteList
+    MuteList,
+    EmojiInput
   },
   computed: {
     user () {
@@ -78,8 +82,8 @@ const UserSettings = {
     pleromaBackend () {
       return this.$store.state.instance.pleromaBackend
     },
-    scopeOptionsEnabled () {
-      return this.$store.state.instance.scopeOptionsEnabled
+    minimalScopesMode () {
+      return this.$store.state.instance.minimalScopesMode
     },
     vis () {
       return {

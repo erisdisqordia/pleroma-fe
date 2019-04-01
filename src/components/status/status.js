@@ -253,6 +253,9 @@ const Status = {
       return this.$store.state.config.maxThumbnails
     },
     contentHtml () {
+      if (!this.status.summary_html) {
+        return this.status.statusnet_html
+      }
       return this.status.summary_html + '<br />' + this.status.statusnet_html
     }
   },

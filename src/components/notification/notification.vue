@@ -1,11 +1,11 @@
 <template>
-  <status 
+  <status
     v-if="notification.type === 'mention'"
     :compact="true"
     :statusoid="notification.status"
   >
   </status>
-  <div class="non-mention" :class="[userClass, { highlighted: userStyle }]" :style="[ userStyle ]"v-else>
+  <div class="non-mention" :class="[userClass, { highlighted: userStyle }]" :style="[ userStyle ]" v-else>
     <a class='avatar-container' :href="notification.from_profile.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
       <UserAvatar :compact="true" :betterShadow="betterShadow" :src="notification.from_profile.profile_image_url_original" />
     </a>

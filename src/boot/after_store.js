@@ -228,6 +228,19 @@ const setConfig = async ({ store }) => {
   await setSettings({ store, apiConfig, staticConfig })
 }
 
+const checkOAuthToken = async ({ store }) => {
+  return new Promise(async (resolve, reject) => {
+    if (store.state.oauth.token) {
+      try {
+        await store.dispatch('loginUser', store.state.oauth.token)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    resolve()
+  })
+}
+
 const afterStoreSetup = async ({ store, i18n }) => {
   if (store.state.config.customTheme) {
     // This is a hack to deal with async loading of config.json and themes
@@ -240,26 +253,15 @@ const afterStoreSetup = async ({ store, i18n }) => {
   }
 
   // Now we can try getting the server settings and logging in
-  if (store.state.oauth.token) {
-    await Promise.all([
-      setConfig({ store }),
-      getTOS({ store }),
-      getInstancePanel({ store }),
-      getStaticEmoji({ store }),
-      getCustomEmoji({ store }),
-      getNodeInfo({ store }),
-      store.dispatch('loginUser', store.state.oauth.token)
-    ])
-  } else {
-    await Promise.all([
-      setConfig({ store }),
-      getTOS({ store }),
-      getInstancePanel({ store }),
-      getStaticEmoji({ store }),
-      getCustomEmoji({ store }),
-      getNodeInfo({ store })
-    ])
-  }
+  await Promise.all([
+    checkOAuthToken({ store }),
+    setConfig({ store }),
+    getTOS({ store }),
+    getInstancePanel({ store }),
+    getStaticEmoji({ store }),
+    getCustomEmoji({ store }),
+    getNodeInfo({ store })
+  ])
 
   const router = new VueRouter({
     mode: 'history',

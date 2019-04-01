@@ -484,24 +484,6 @@ nav {
   }
 }
 
-.menu-button {
-  display: none;
-  position: relative;
-}
-
-.alert-dot {
-  border-radius: 100%;
-  height: 8px;
-  width: 8px;
-  position: absolute;
-  left: calc(50% - 4px);
-  top: calc(50% - 4px);
-  margin-left: 6px;
-  margin-top: -6px;
-  background-color: $fallback--cRed;
-  background-color: var(--badgeNotification, $fallback--cRed);
-}
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s
 }
@@ -528,20 +510,6 @@ nav {
 
 .mobile-shown {
   display: none;
-}
-
-.panel-switcher {
-  display: none;
-  width: 100%;
-  height: 46px;
-
-  button {
-    display: block;
-    flex: 1;
-    max-height: 32px;
-    margin: 0.5em;
-    padding: 0.5em;
-  }
 }
 
 @media all and (min-width: 800px) {

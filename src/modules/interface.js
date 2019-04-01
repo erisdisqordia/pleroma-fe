@@ -11,7 +11,8 @@ const defaultState = {
       window.CSS.supports('filter', 'drop-shadow(0 0)') ||
       window.CSS.supports('-webkit-filter', 'drop-shadow(0 0)')
     )
-  }
+  },
+  mobileLayout: false
 }
 
 const interfaceMod = {
@@ -31,6 +32,9 @@ const interfaceMod = {
     },
     setNotificationPermission (state, permission) {
       state.notificationPermission = permission
+    },
+    setMobileLayout (state, value) {
+      state.mobileLayout = value
     }
   },
   actions: {
@@ -42,6 +46,10 @@ const interfaceMod = {
     },
     setNotificationPermission ({ commit }, permission) {
       commit('setNotificationPermission', permission)
+    },
+    setMobileLayout ({ commit }, value) {
+      console.log('setMobileLayout called')
+      commit('setMobileLayout', value)
     }
   }
 }

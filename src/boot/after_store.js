@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
-
 import App from '../App.vue'
+import { windowWidth } from '../services/window_utils/window_utils'
 
 const getStatusnetConfig = async ({ store }) => {
   try {
@@ -251,6 +251,9 @@ const afterStoreSetup = async ({ store, i18n }) => {
       value: store.state.config.customTheme
     })
   }
+
+  const width = windowWidth()
+  store.dispatch('setMobileLayout', width <= 800)
 
   // Now we can try getting the server settings and logging in
   await Promise.all([

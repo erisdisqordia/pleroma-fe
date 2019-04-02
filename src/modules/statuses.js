@@ -537,11 +537,11 @@ const statuses = {
         credentials: rootState.users.currentUser.credentials
       })
     },
-    addFavoritedByUsers ({ rootState, commit }, { favoritedByUsers, id }) {
-      commit('addFavoritedByUsers', { favoritedByUsers, id })
+    fetchFavouritedByUsers ({ rootState, commit }, { id }) {
+      rootState.api.backendInteractor.fetchFavouritedByUsers({id}).then((favoritedByUsers) => commit('addFavoritedByUsers', { favoritedByUsers, id }))
     },
-    addRebloggedByUsers ({ rootState, commit }, { rebloggedByUsers, id }) {
-      commit('addRebloggedByUsers', { rebloggedByUsers, id })
+    fetchRebloggedByUsers ({ rootState, commit }, { id }) {
+      rootState.api.backendInteractor.fetchRebloggedByUsers({id}).then((rebloggedByUsers) => commit('addRebloggedByUsers', { rebloggedByUsers, id }))
     }
   },
   mutations

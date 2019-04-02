@@ -1,7 +1,7 @@
 <template>
   <ul class="avatars" :class="{ 'transparent-avatar': slicedAvatars.length == 10 }">
-      <li class="avatars__item" v-for="(avatar, index) in slicedAvatars" :key="index">
-        <UserAvatar :src="avatar.src" class="avatars__img" />
+      <li class="avatars__item" v-for="avatar in slicedAvatars" :key="avatar.id">
+        <UserAvatar :src="avatar.avatar_static" class="avatars__img" />
       </li>
   </ul>
 </template>

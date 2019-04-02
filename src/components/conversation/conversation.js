@@ -153,22 +153,10 @@ const conversation = {
       }
     },
     fetchFavouritedByUsers (id) {
-      this.$store.state.api.backendInteractor.fetchFavouritedByUsers({id}).then((response) => {
-        const favoritedByUsers = response.map(item => ({
-          src: item.avatar_static,
-          name: item.display_name
-        }))
-        this.$store.dispatch('addFavoritedByUsers', { favoritedByUsers, id })
-      })
+      this.$store.dispatch('fetchFavouritedByUsers', { id })
     },
     fetchRebloggedByUsers (id) {
-      this.$store.state.api.backendInteractor.fetchRebloggedByUsers({id}).then((response) => {
-        const rebloggedByUsers = response.map(item => ({
-          src: item.avatar_static,
-          name: item.display_name
-        }))
-        this.$store.dispatch('addRebloggedByUsers', { rebloggedByUsers, id })
-      })
+      this.$store.dispatch('fetchRebloggedByUsers', { id })
     }
   }
 }

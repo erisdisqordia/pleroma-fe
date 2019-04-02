@@ -1,5 +1,5 @@
 <template>
-  <ul class="avatars">
+  <ul class="avatars" :class="{ 'transparent-avatar': slicedAvatars.length == 15 }">
       <li class="avatars-item" v-for="(avatar, index) in slicedAvatars" :key="`avatar-${index}`">
         <UserAvatar :src="avatar.profile_image_url" class="avatars-img" />
       </li>
@@ -28,6 +28,29 @@
       border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
       height: 25px !important;
       width: 25px !important;
+      background-color: $fallback--lightText;
+      background-color: var(--lightText, $fallback--lightText);
+    }
+  }
+}
+
+.transparent-avatar {
+  .avatars-item {
+    &:first-child {
+      position: relative;
+
+      .avatars-img {
+        &::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: $fallback--faint;
+          background-color: var(--faint, $fallback--faint);
+          left: 0;
+          top: 0;
+        }
+      }
     }
   }
 }

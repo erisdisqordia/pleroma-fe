@@ -132,6 +132,11 @@ export const mutations = {
   saveBlockIds (state, blockIds) {
     state.currentUser.blockIds = blockIds
   },
+  addBlockId (state, blockId) {
+    if (state.currentUser.blockIds.indexOf(blockId) === -1) {
+      state.currentUser.blockIds.push(blockId)
+    }
+  },
   updateMutes (state, mutedUsers) {
     // Reset muted of all fetched users
     each(state.users, (user) => { user.muted = false })
@@ -215,6 +220,7 @@ const users = {
       return store.rootState.api.backendInteractor.blockUser(userId)
         .then((relationship) => {
           store.commit('updateUserRelationship', [relationship])
+          store.commit('addBlockId', userId)
           store.commit('removeStatus', { timeline: 'friends', userId })
           store.commit('removeStatus', { timeline: 'public', userId })
           store.commit('removeStatus', { timeline: 'publicAndExternal', userId })

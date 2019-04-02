@@ -113,6 +113,8 @@ const backendInteractorService = (credentials) => {
   const changePassword = ({password, newPassword, newPasswordConfirmation}) => apiService.changePassword({credentials, password, newPassword, newPasswordConfirmation})
 
   const fetchFavouritedByUsers = ({id}) => apiService.fetchFavouritedByUsers({id})
+  const fetchRebloggedByUsers = ({id}) => apiService.fetchRebloggedByUsers({id})
+
   const backendInteractorServiceInstance = {
     fetchStatus,
     fetchConversation,
@@ -155,6 +157,7 @@ const backendInteractorService = (credentials) => {
     approveUser,
     denyUser,
     fetchFavouritedByUsers,
+    fetchRebloggedByUsers
   }
 
   return backendInteractorServiceInstance

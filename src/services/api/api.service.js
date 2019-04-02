@@ -50,6 +50,7 @@ const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
 const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
 const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 const MASTODON_STATUS_FAVOURITEDBY_URL = id => `/api/v1/statuses/${id}/favourited_by`
+const MASTODON_STATUS_REBLOGGEDBY_URL = id => `/api/v1/statuses/${id}/reblogged_by`
 
 import { each, map } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
@@ -797,7 +798,9 @@ const apiService = {
   approveUser,
   denyUser,
   suggestions,
-  markNotificationsAsSeen
+  markNotificationsAsSeen,
+  fetchFavouritedByUsers,
+  fetchRebloggedByUsers
 }
 
 export default apiService

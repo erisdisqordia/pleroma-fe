@@ -262,6 +262,8 @@ const Status = {
     favouritedByUsers () {
       return this.statusoid.favoritedBy ? this.statusoid.favoritedBy : []
     },
+    rebloggedByUsers () {
+      return this.statusoid.rebloggedBy ? this.statusoid.rebloggedBy : []
     }
   },
   components: {

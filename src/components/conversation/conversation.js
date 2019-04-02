@@ -122,6 +122,7 @@ const conversation = {
           .then(({ancestors, descendants}) => {
             const ancestorId = ancestors.length ? ancestors[0].id : this.status.id
             this.fetchFavouritedByUsers(ancestorId)
+            this.fetchRebloggedByUsers(ancestorId)
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
           })
@@ -160,6 +161,14 @@ const conversation = {
         this.$store.dispatch('addFavoritedByUsers', { favoritedByUsers, id })
       })
     },
+    fetchRebloggedByUsers (id) {
+      this.$store.state.api.backendInteractor.fetchRebloggedByUsers({id: this.status.id}).then((response) => {
+        const rebloggedByUsers = response.map(item => ({
+          src: item.avatar_static,
+          name: item.display_name
+        }))
+        this.$store.dispatch('addRebloggedByUsers', { rebloggedByUsers, id })
+      })
     }
   }
 }

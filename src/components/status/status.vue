@@ -142,6 +142,16 @@
             <favorite-button :loggedIn='loggedIn' :status='status'></favorite-button>
             <delete-button :status='status'></delete-button>
           </div>
+          <div class="boosted-users">
+            <div class="reblogged-users" v-if="rebloggedByUsers.length > 0" :class="{ 'status-fadein': rebloggedByUsers.length > 0 }">
+              <p class="title">Boosted By {{rebloggedByUsers.length}}:</p>
+              <AvatarList :avatars='rebloggedByUsers'></AvatarList>
+            </div>
+            <div class="favourited-users" v-if="favouritedByUsers.length > 0" :class="{ 'status-fadein': favouritedByUsers.length > 0 }">
+              <p class="title">Favourited By {{favouritedByUsers.length}}:</p>
+              <AvatarList :avatars='favouritedByUsers'></AvatarList>
+            </div>
+          </div>
         </div>
       </div>
       <div class="container" v-if="replying">
@@ -609,6 +619,21 @@ a.unmute {
     border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
     border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
     border-bottom: none;
+  }
+}
+
+.boosted-users {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  .favourited-users,
+  .reblogged-users {
+    flex: 1;
+
+    .title {
+      margin: 0 0 10px 0;
+    }
   }
 }
 

@@ -466,6 +466,11 @@ export const mutations = {
       favoritedBy: favoritedByUsers
     }
   },
+  addRebloggedByUsers (state, { rebloggedByUsers, id }) {
+    state.allStatusesObject[id] = {
+      ...state.allStatusesObject[id],
+      rebloggedBy: rebloggedByUsers
+    }
   }
 }
 
@@ -535,6 +540,8 @@ const statuses = {
     addFavoritedByUsers ({ rootState, commit }, { favoritedByUsers, id }) {
       commit('addFavoritedByUsers', { favoritedByUsers, id })
     },
+    addRebloggedByUsers ({ rootState, commit }, { rebloggedByUsers, id }) {
+      commit('addRebloggedByUsers', { rebloggedByUsers, id })
     }
   },
   mutations

@@ -121,7 +121,7 @@ const conversation = {
         this.$store.state.api.backendInteractor.fetchConversation({id: this.status.id})
           .then(({ancestors, descendants}) => {
             const ancestorId = ancestors.length ? ancestors[0].id : this.status.id
-            this.fetchFavouritedByUsers(ancestorId)
+            this.fetchFavoritedByUsers(ancestorId)
             this.fetchRebloggedByUsers(ancestorId)
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
@@ -152,8 +152,8 @@ const conversation = {
         this.setHighlight(null)
       }
     },
-    fetchFavouritedByUsers (id) {
-      this.$store.dispatch('fetchFavouritedByUsers', { id })
+    fetchFavoritedByUsers (id) {
+      this.$store.dispatch('fetchFavoritedByUsers', { id })
     },
     fetchRebloggedByUsers (id) {
       this.$store.dispatch('fetchRebloggedByUsers', { id })

@@ -133,7 +133,7 @@
             <link-preview :card="status.card" :size="attachmentSize" :nsfw="nsfwClickthrough" />
           </div>
 
-          <div class="favs-favourited-users" v-if="combinedFavsAndRepeatsAvatars.length > 0" :class="{ 'status-fadein': combinedFavsAndRepeatsAvatars.length > 0 }">
+          <div class="favs-favorited-users" v-if="combinedFavsAndRepeatsAvatars.length > 0" :class="{ 'status-fadein': combinedFavsAndRepeatsAvatars.length > 0 }">
             <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>
           </div>
 
@@ -616,7 +616,7 @@ a.unmute {
   }
 }
 
-.favs-favourited-users {
+.favs-favorited-users {
   margin-top: 10px;
 }
 

@@ -537,8 +537,8 @@ const statuses = {
         credentials: rootState.users.currentUser.credentials
       })
     },
-    fetchFavouritedByUsers ({ rootState, commit }, { id }) {
-      rootState.api.backendInteractor.fetchFavouritedByUsers({id}).then((favoritedByUsers) => commit('addFavoritedByUsers', { favoritedByUsers, id }))
+    fetchFavoritedByUsers ({ rootState, commit }, { id }) {
+      rootState.api.backendInteractor.fetchFavoritedByUsers({id}).then((favoritedByUsers) => commit('addFavoritedByUsers', { favoritedByUsers, id }))
     },
     fetchRebloggedByUsers ({ rootState, commit }, { id }) {
       rootState.api.backendInteractor.fetchRebloggedByUsers({id}).then((rebloggedByUsers) => commit('addRebloggedByUsers', { rebloggedByUsers, id }))

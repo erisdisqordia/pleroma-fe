@@ -1,7 +1,7 @@
 <template>
-  <div class="user-autocomplete-search">
+  <div class="user-autosuggest">
     <input v-model="query" placeholder="Search..." />
-    <div class="user-autocomplete-search-results">
+    <div class="user-autosuggest-results">
       <BasicUserCard v-for="user in results" :key="user.id" :user="user"/>
     </div>
   </div>
@@ -10,7 +10,7 @@
 <script src="./user_autosuggest.js"></script>
 
 <style lang="scss">
-.user-autocomplete-search {
+.user-autosuggest {
   position: relative;
 
   &-results {

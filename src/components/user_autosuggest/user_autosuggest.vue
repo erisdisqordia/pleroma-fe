@@ -1,93 +1,27 @@
 <template>
-  <div class="user-autosuggest">
-    <VueAutosuggest
-      :suggestions="suggestions"
-      :inputProps="inputProps"
-      @click="clickHandler"
-		>
-      <template slot-scope="{suggestion}">
-        <BasicUserCard :user="suggestion.item" />
-      </template>
-    </VueAutosuggest>
+  <div class="user-autocomplete-search">
+    <input v-model="query" placeholder="Search..." />
+    <div class="user-autocomplete-search-results">
+      <BasicUserCard v-for="user in results" :key="user.id" :user="user"/>
+    </div>
   </div>
 </template>
 
 <script src="./user_autosuggest.js"></script>
 
 <style lang="scss">
-.user-autosuggest {
-  .avatar {
-    height: 25px;
-    width: 25px;
-    border-radius: 20px;
-    margin-right: 10px;
-  }
-  #autosuggest__input {
-    outline: none;
-    position: relative;
-    display: block;
-    border: 1px solid #616161;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-  }
+.user-autocomplete-search {
+  position: relative;
 
-  #autosuggest__input.autosuggest__input-open {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  .autosuggest__results-container {
-    position: relative;
-    width: 100%;
-  }
-
-  .autosuggest__results {
-    font-weight: 300;
-    margin: 0;
+  &-results {
     position: absolute;
-    z-index: 10000001;
-    width: 100%;
-    border: 1px solid #e0e0e0;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    background: white;
-    padding: 0px;
+    left: 0;
+    top: 100%;
+    right: 0;
+    background: #FFF;
     max-height: 400px;
-    overflow-y: scroll;
-  }
-
-  .autosuggest__results ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-  }
-
-  .autosuggest__results .autosuggest__results_item {
-    cursor: pointer;
-    padding: 15px;
-  }
-
-  #autosuggest ul:nth-child(1) > .autosuggest__results_title {
-    border-top: none;
-  }
-
-  .autosuggest__results .autosuggest__results_title {
-    color: gray;
-    font-size: 11px;
-    margin-left: 0;
-    padding: 15px 13px 5px;
-    border-top: 1px solid lightgray;
-  }
-
-  .autosuggest__results .autosuggest__results_item:active,
-  .autosuggest__results .autosuggest__results_item:hover,
-  .autosuggest__results .autosuggest__results_item:focus,
-  .autosuggest__results
-    .autosuggest__results_item.autosuggest__results_item-highlighted {
-    background-color: #f6f6f6;
+    overflow-y: auto;
+    z-index: 1;
   }
 }
 </style>

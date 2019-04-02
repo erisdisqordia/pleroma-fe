@@ -629,7 +629,9 @@ a.unmute {
 
   .favourited-users,
   .reblogged-users {
-    flex: 1;
+    flex-basis: 50%;
+    flex-grow: 1;
+    flex-shrink: 1;
 
     .title {
       margin: 0 0 10px 0;

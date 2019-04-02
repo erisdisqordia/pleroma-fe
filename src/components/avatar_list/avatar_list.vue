@@ -14,14 +14,26 @@
   display: inline-flex; /* Causes LI items to display in row. */
   list-style-type: none;
   margin: 0;
-  padding: 0px 16px 0px 0px;
-  flex-direction: row-reverse;
+  padding: 0px 20px 0px 0px;
+  flex-direction: row;
+  flex-wrap: wrap;
 
   &__item {
     height: 40px;
     margin: 0;
     padding: 0;
-    width: 25px;
+    width: 20px;
+
+    &:nth-child( 1 ) { z-index: 10 ; }
+    &:nth-child( 2 ) { z-index: 9 ; }
+    &:nth-child( 3 ) { z-index: 8 ; }
+    &:nth-child( 4 ) { z-index: 7 ; }
+    &:nth-child( 5 ) { z-index: 6 ; }
+    &:nth-child( 6 ) { z-index: 5 ; }
+    &:nth-child( 7 ) { z-index: 4 ; }
+    &:nth-child( 8 ) { z-index: 3 ; }
+    &:nth-child( 9 ) { z-index: 2 ; }
+    &:nth-child( 10 ) { z-index: 1 ; }
 
     .avatars__img {
       border-radius: 50%;
@@ -35,7 +47,7 @@
 
 .transparent-avatar {
   .avatars__item {
-    &:first-child {
+    &:last-child {
       position: relative;
 
       .avatars__img {

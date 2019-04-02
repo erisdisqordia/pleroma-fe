@@ -180,8 +180,8 @@ const PostStatusForm = {
     postFormats () {
       return this.$store.state.instance.postFormats || []
     },
-    showDirectWarning () {
-      return this.$store.state.instance.safeDM && this.newStatus.visibility === 'direct'
+    safeDMEnabled () {
+      return this.$store.state.instance.safeDM
     }
   },
   methods: {

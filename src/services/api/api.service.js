@@ -725,29 +725,11 @@ const markNotificationsAsSeen = ({id, credentials}) => {
 }
 
 const fetchFavouritedByUsers = ({id}) => {
-  return fetch(MASTODON_STATUS_FAVOURITEDBY_URL(id), {
-    method: 'GET'
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Error fetching favorited by users')
-      }
-    })
+  return promisedRequest(MASTODON_STATUS_FAVOURITEDBY_URL(id)).then((users) => users.map(parseUser))
 }
 
 const fetchRebloggedByUsers = ({id}) => {
-  return fetch(MASTODON_STATUS_REBLOGGEDBY_URL(id), {
-    method: 'GET'
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Error reblogged by users')
-      }
-    })
+  return promisedRequest(MASTODON_STATUS_REBLOGGEDBY_URL(id)).then((users) => users.map(parseUser))
 }
 
 const apiService = {

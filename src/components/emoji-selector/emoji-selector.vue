@@ -24,7 +24,7 @@
               @click="onEmoji(emoji)"
             >
               <span v-if="!emoji.image_url">{{emoji.utf}}</span>
-              <img :src="'https://bikeshed.party' + emoji.image_url" v-else>
+              <img :src="serverUrl + emoji.image_url" v-else>
             </span>
           </div>
         </div>

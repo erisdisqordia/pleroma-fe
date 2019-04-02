@@ -35,6 +35,9 @@ const EmojiSelector = {
           emojis: filterByKeyword(customEmojis, this.keyword)
         }
       }
+    },
+    serverUrl () {
+      return this.$store.state.instance.server
     }
   }
 }

@@ -28,6 +28,7 @@
       height: 40px;
       width: 40px;
       line-height: 40px;
+      background-color: $main-background;
     }
   }
 }

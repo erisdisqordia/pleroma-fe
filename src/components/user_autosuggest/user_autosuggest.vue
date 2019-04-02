@@ -1,7 +1,7 @@
 <template>
   <div class="user-autosuggest" v-click-outside="onClickOutside">
     <input v-model="query" placeholder="Search whom you want to block" @click="onInputClick" class="user-autosuggest-input" />
-    <div class="user-autosuggest-results" v-if="resultsVisible">
+    <div class="user-autosuggest-results" v-if="resultsVisible && results.length > 0">
       <BlockCard v-for="user in results" :key="user.id" :userId="user.id"/>
     </div>
   </div>
@@ -25,6 +25,7 @@
     left: 0;
     top: 100%;
     right: 0;
+    max-height: 400px;
     background-color: $fallback--lightBg;
     background-color: var(--lightBg, $fallback--lightBg);
     border-style: solid;
@@ -35,7 +36,8 @@
     border-radius: var(--inputRadius, $fallback--inputRadius);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    max-height: 400px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--panelShadow);
     overflow-y: auto;
     z-index: 1;
   }

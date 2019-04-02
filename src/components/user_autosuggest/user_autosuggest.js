@@ -1,46 +1,45 @@
-import reject from 'lodash/reject'
-import map from 'lodash/map'
 import BlockCard from '../block_card/block_card.vue'
-import userSearchApi from '../../services/new_api/user_search.js'
 
 const debounceMilliseconds = 500
 
 export default {
+  props: {
+    query: {    // function to query results and return a promise
+      type: Function,
+      required: true
+    },
+    filter: {   // function to filter results in real time
+      type: Function
+    }
+  },
   components: {
     BlockCard
   },
   data () {
     return {
-      query: '',
-      results: [],
+      term: '',
       timeout: null,
+      results: [],
       resultsVisible: false
     }
   },
   computed: {
     filtered () {
-      return reject(this.results, (userId) => {
-        const user = this.$store.getters.findUser(userId)
-        return !user || user.statusnet_blocking || user.id === this.$store.state.users.currentUser.id
-      })
+      return this.filter ? this.filter(this.results) : this.results
     }
   },
   watch: {
-    query (val) {
+    term (val) {
       this.fetchResults(val)
     }
   },
   methods: {
-    fetchResults (query) {
+    fetchResults (term) {
       clearTimeout(this.timeout)
       this.timeout = setTimeout(() => {
         this.results = []
-        if (query) {
-          userSearchApi.search({query, store: this.$store})
-            .then((users) => {
-              this.$store.dispatch('addNewUsers', users)
-              this.results = map(users, 'id')
-            })
+        if (term) {
+          this.query(term).then((results) => { this.results = results })
         }
       }, debounceMilliseconds)
     },

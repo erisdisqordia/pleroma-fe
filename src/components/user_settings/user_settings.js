@@ -1,6 +1,8 @@
 import { compose } from 'vue-compose'
 import unescape from 'lodash/unescape'
 import get from 'lodash/get'
+import map from 'lodash/map'
+import reject from 'lodash/reject'
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import ImageCropper from '../image_cropper/image_cropper.vue'
 import StyleSwitcher from '../style_switcher/style_switcher.vue'
@@ -12,6 +14,7 @@ import EmojiInput from '../emoji-input/emoji-input.vue'
 import UserAutoSuggest from '../user_autosuggest/user_autosuggest.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import withList from '../../hocs/with_list/with_list'
+import userSearchApi from '../../services/new_api/user_search.js'
 
 const BlockList = compose(
   withSubscription({
@@ -336,6 +339,19 @@ const UserSettings = {
       if (window.confirm(`${this.$i18n.t('settings.revoke_token')}?`)) {
         this.$store.dispatch('revokeToken', id)
       }
+    },
+    filterUnblockedUsers (userIds) {
+      return reject(userIds, (userId) => {
+        const user = this.$store.getters.findUser(userId)
+        return !user || user.statusnet_blocking || user.id === this.$store.state.users.currentUser.id
+      })
+    },
+    queryUserIds (query) {
+      return userSearchApi.search({query, store: this.$store})
+        .then((users) => {
+          this.$store.dispatch('addNewUsers', users)
+          return map(users, 'id')
+        })
     }
   }
 }

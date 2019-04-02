@@ -22,7 +22,7 @@
           <div class="setting-item" >
             <h2>{{$t('settings.name_bio')}}</h2>
             <p>{{$t('settings.name')}}</p>
-            <EmojiInput 
+            <EmojiInput
               type="text"
               v-model="newName"
               id="username"
@@ -195,6 +195,7 @@
         </div>
 
         <div :label="$t('settings.blocks_tab')">
+          <UserAutoSuggest />
           <block-list :refresh="true">
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
           </block-list>

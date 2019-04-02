@@ -10,6 +10,10 @@ export default {
     },
     filter: {   // function to filter results in real time
       type: Function
+    },
+    placeholder: {
+      type: String,
+      default: 'Search...'
     }
   },
   components: {

@@ -1,6 +1,6 @@
 <template>
   <div class="user-autosuggest" v-click-outside="onClickOutside">
-    <input v-model="term" placeholder="Search whom you want to block" @click="onInputClick" class="user-autosuggest-input" />
+    <input v-model="term" :placeholder="placeholder" @click="onInputClick" class="user-autosuggest-input" />
     <div class="user-autosuggest-results" v-if="resultsVisible && filtered.length > 0">
       <BlockCard v-for="userId in filtered" :key="userId" :userId="userId"/>
     </div>

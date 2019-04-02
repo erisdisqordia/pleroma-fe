@@ -196,7 +196,7 @@
 
         <div :label="$t('settings.blocks_tab')">
           <div class="profile-edit-usersearch-wrapper">
-            <UserAutoSuggest :filter="filterUnblockedUsers" :query="queryUserIds" />
+            <UserAutoSuggest :filter="filterUnblockedUsers" :query="queryUserIds" placeholder="Search whom you want to block" />
           </div>
           <block-list :refresh="true">
             <template slot="empty">{{$t('settings.no_blocks')}}</template>

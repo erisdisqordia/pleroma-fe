@@ -195,7 +195,9 @@
         </div>
 
         <div :label="$t('settings.blocks_tab')">
-          <UserAutoSuggest />
+          <div class="profile-edit-usersearch-wrapper">
+            <UserAutoSuggest />
+          </div>
           <block-list :refresh="true">
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
           </block-list>
@@ -262,6 +264,10 @@
     .actions {
       text-align: right;
     }
+  }
+
+  &-usersearch-wrapper {
+    padding: 1em;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <input v-model="query" placeholder="Search..." />
   <div class="user-autosuggest" v-click-outside="onClickOutside">
+    <input v-model="query" placeholder="Search whom you want to block" @click="onInputClick" class="user-autosuggest-input" />
     <div class="user-autosuggest-results" v-if="resultsVisible">
       <BasicUserCard v-for="user in results" :key="user.id" :user="user"/>
     </div>
@@ -10,15 +10,31 @@
 <script src="./user_autosuggest.js"></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
+
 .user-autosuggest {
   position: relative;
+
+  &-input {
+    display: block;
+    width: 100%;
+  }
 
   &-results {
     position: absolute;
     left: 0;
     top: 100%;
     right: 0;
-    background: #FFF;
+    background-color: $fallback--lightBg;
+    background-color: var(--lightBg, $fallback--lightBg);
+    border-style: solid;
+    border-width: 1px;
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
+    border-radius: $fallback--inputRadius;
+    border-radius: var(--inputRadius, $fallback--inputRadius);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     max-height: 400px;
     overflow-y: auto;
     z-index: 1;

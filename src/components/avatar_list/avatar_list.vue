@@ -1,6 +1,6 @@
 <template>
-  <ul class="avatars" :class="{ 'transparent-avatar': slicedAvatars.length == 15 }">
-      <li class="avatars-item" v-for="avatar in slicedAvatars" :key="avatar.id">
+  <ul class="avatars">
+      <li class="avatars-item" v-for="(avatar, index) in slicedAvatars" :key="`avatar-${index}`">
         <UserAvatar :src="avatar.profile_image_url" class="avatars-img" />
       </li>
   </ul>
@@ -18,37 +18,16 @@
   flex-direction: row-reverse;
 
   &-item {
-    height: 30px;
+    height: 25px;
     margin: 0;
     padding: 0;
     width: 15px;
 
     .avatars-img {
-      border-radius: 50%;
-      height: 30px;
-      width: 30px;
-      line-height: 30px;
-      background-color: $main-background;
-    }
-  }
-}
-
-.transparent-avatar {
-  .avatars-item {
-    &:first-child {
-      position: relative;
-
-      .avatars-img {
-        &::after {
-          content: '';
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(255, 255, 255, 0.7);
-          left: 0;
-          top: 0;
-        }
-      }
+      border-radius: $fallback--avatarAltRadius;
+      border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+      height: 25px !important;
+      width: 25px !important;
     }
   }
 }

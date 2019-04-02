@@ -179,6 +179,10 @@ const PostStatusForm = {
     },
     postFormats () {
       return this.$store.state.instance.postFormats || []
+    },
+    showDirectWarning () {
+      console.log(this.$store.state.instance)
+      return this.$store.state.instance.safeDM && this.newStatus.visibility === 'direct'
     }
   },
   methods: {

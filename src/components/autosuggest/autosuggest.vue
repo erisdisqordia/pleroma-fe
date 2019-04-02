@@ -1,19 +1,19 @@
 <template>
-  <div class="user-autosuggest" v-click-outside="onClickOutside">
-    <input v-model="term" :placeholder="placeholder" @click="onInputClick" class="user-autosuggest-input" />
-    <div class="user-autosuggest-results" v-if="resultsVisible && filtered.length > 0">
+  <div class="autosuggest" v-click-outside="onClickOutside">
+    <input v-model="term" :placeholder="placeholder" @click="onInputClick" class="autosuggest-input" />
+    <div class="autosuggest-results" v-if="resultsVisible && filtered.length > 0">
       <slot v-for="item in filtered" :item="item">
       </slot>
     </div>
   </div>
 </template>
 
-<script src="./user_autosuggest.js"></script>
+<script src="./autosuggest.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
 
-.user-autosuggest {
+.autosuggest {
   position: relative;
 
   &-input {

@@ -11,7 +11,7 @@ import fileSizeFormatService from '../../services/file_size_format/file_size_for
 import BlockCard from '../block_card/block_card.vue'
 import MuteCard from '../mute_card/mute_card.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
-import UserAutoSuggest from '../user_autosuggest/user_autosuggest.vue'
+import Autosuggest from '../autosuggest/autosuggest.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import withList from '../../hocs/with_list/with_list'
 import userSearchApi from '../../services/new_api/user_search.js'
@@ -78,7 +78,7 @@ const UserSettings = {
     BlockList,
     MuteList,
     EmojiInput,
-    UserAutoSuggest,
+    Autosuggest,
     BlockCard
   },
   computed: {

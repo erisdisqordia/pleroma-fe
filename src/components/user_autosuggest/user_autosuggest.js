@@ -1,4 +1,5 @@
 import reject from 'lodash/reject'
+import map from 'lodash/map'
 import BlockCard from '../block_card/block_card.vue'
 import userSearchApi from '../../services/new_api/user_search.js'
 
@@ -16,6 +17,14 @@ export default {
       resultsVisible: false
     }
   },
+  computed: {
+    filtered () {
+      return reject(this.results, (userId) => {
+        const user = this.$store.getters.findUser(userId)
+        return !user || user.statusnet_blocking || user.id === this.$store.state.users.currentUser.id
+      })
+    }
+  },
   watch: {
     query (val) {
       this.fetchResults(val)
@@ -29,12 +38,8 @@ export default {
         if (query) {
           userSearchApi.search({query, store: this.$store})
             .then((users) => {
-              const filteredUsers = reject(users, (user) => {
-                return user.statusnet_blocking || user.id === this.$store.state.users.currentUser.id
-              })
-              this.$store.dispatch('addNewUsers', filteredUsers)
-              this.results = filteredUsers
-              this.resultsVisible = true
+              this.$store.dispatch('addNewUsers', users)
+              this.results = map(users, 'id')
             })
         }
       }, debounceMilliseconds)

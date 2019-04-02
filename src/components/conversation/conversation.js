@@ -120,6 +120,8 @@ const conversation = {
       if (this.status) {
         this.$store.state.api.backendInteractor.fetchConversation({id: this.status.id})
           .then(({ancestors, descendants}) => {
+            const ancestorId = ancestors.length ? ancestors[0].id : this.status.id
+            this.fetchFavouritedByUsers(ancestorId)
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
           })
@@ -148,6 +150,16 @@ const conversation = {
       if (!this.expanded) {
         this.setHighlight(null)
       }
+    },
+    fetchFavouritedByUsers (id) {
+      this.$store.state.api.backendInteractor.fetchFavouritedByUsers({id: this.status.id}).then((response) => {
+        const favoritedByUsers = response.map(item => ({
+          src: item.avatar_static,
+          name: item.display_name
+        }))
+        this.$store.dispatch('addFavoritedByUsers', { favoritedByUsers, id })
+      })
+    },
     }
   }
 }

@@ -7,6 +7,7 @@ import UserCard from '../user_card/user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
+import AvatarList from '../avatar_list/avatar_list.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import fileType from 'src/services/file_type/file_type.service'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
@@ -257,6 +258,10 @@ const Status = {
         return this.status.statusnet_html
       }
       return this.status.summary_html + '<br />' + this.status.statusnet_html
+    },
+    favouritedByUsers () {
+      return this.statusoid.favoritedBy ? this.statusoid.favoritedBy : []
+    },
     }
   },
   components: {
@@ -268,7 +273,8 @@ const Status = {
     UserCard,
     UserAvatar,
     Gallery,
-    LinkPreview
+    LinkPreview,
+    AvatarList
   },
   methods: {
     visibilityIcon (visibility) {

@@ -459,6 +459,13 @@ export const mutations = {
   },
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
+  },
+  addFavoritedByUsers (state, { favoritedByUsers, id }) {
+    state.allStatusesObject[id] = {
+      ...state.allStatusesObject[id],
+      favoritedBy: favoritedByUsers
+    }
+  },
   }
 }
 
@@ -524,6 +531,10 @@ const statuses = {
         id: rootState.statuses.notifications.maxId,
         credentials: rootState.users.currentUser.credentials
       })
+    },
+    addFavoritedByUsers ({ rootState, commit }, { favoritedByUsers, id }) {
+      commit('addFavoritedByUsers', { favoritedByUsers, id })
+    },
     }
   },
   mutations

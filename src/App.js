@@ -9,7 +9,8 @@ import ChatPanel from './components/chat_panel/chat_panel.vue'
 import MediaModal from './components/media_modal/media_modal.vue'
 import SideDrawer from './components/side_drawer/side_drawer.vue'
 import MobilePostStatusModal from './components/mobile_post_status_modal/mobile_post_status_modal.vue'
-import { unseenNotificationsFromStore } from './services/notification_utils/notification_utils'
+import MobileNav from './components/mobile_nav/mobile_nav.vue'
+import { windowWidth } from './services/window_utils/window_utils'
 
 export default {
   name: 'app',
@@ -24,7 +25,8 @@ export default {
     ChatPanel,
     MediaModal,
     SideDrawer,
-    MobilePostStatusModal
+    MobilePostStatusModal,
+    MobileNav
   },
   data: () => ({
     mobileActivePanel: 'timeline',
@@ -40,6 +42,10 @@ export default {
   created () {
     // Load the locale from the storage
     this.$i18n.locale = this.$store.state.config.interfaceLanguage
+    window.addEventListener('resize', this.updateMobileState)
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.updateMobileState)
   },
   computed: {
     currentUser () { return this.$store.state.users.currentUser },
@@ -82,13 +88,8 @@ export default {
     chat () { return this.$store.state.chat.channel.state === 'joined' },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
     showInstanceSpecificPanel () { return this.$store.state.instance.showInstanceSpecificPanel },
-    unseenNotifications () {
-      return unseenNotificationsFromStore(this.$store)
-    },
-    unseenNotificationsCount () {
-      return this.unseenNotifications.length
-    },
-    showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel }
+    showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
+    isMobileLayout () { return this.$store.state.interface.mobileLayout }
   },
   methods: {
     scrollToTop () {
@@ -101,8 +102,12 @@ export default {
     onFinderToggled (hidden) {
       this.finderHidden = hidden
     },
-    toggleMobileSidebar () {
-      this.$refs.sideDrawer.toggleDrawer()
+    updateMobileState () {
+      const mobileLayout = windowWidth() <= 800
+      const changed = mobileLayout !== this.isMobileLayout
+      if (changed) {
+        this.$store.dispatch('setMobileLayout', mobileLayout)
+      }
     }
   }
 }

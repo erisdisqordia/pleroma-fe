@@ -123,7 +123,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
   const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
   const minNew = statuses.length > 0 ? minBy(statuses, 'id').id : 0
-  const newer = timeline && maxNew > timelineObject.maxId && statuses.length > 0
+  const newer = timeline && (maxNew > timelineObject.maxId || timelineObject.maxId === 0) && statuses.length > 0
   const older = timeline && (minNew < timelineObject.minId || timelineObject.minId === 0) && statuses.length > 0
 
   if (!noIdUpdate && newer) {
@@ -363,6 +363,15 @@ export const mutations = {
   },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
+
+    if (newStatus.repeated !== value) {
+      if (value) {
+        newStatus.repeat_num++
+      } else {
+        newStatus.repeat_num--
+      }
+    }
+
     newStatus.repeated = value
   },
   setDeleted (state, { status }) {

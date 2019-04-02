@@ -38,13 +38,13 @@
               <input type="checkbox" v-model="newLocked" id="account-locked">
               <label for="account-locked">{{$t('settings.lock_account_description')}}</label>
             </p>
-            <div v-if="scopeOptionsEnabled">
+            <div>
               <label for="default-vis">{{$t('settings.default_vis')}}</label>
               <div id="default-vis" class="visibility-tray">
-                <i v-on:click="changeVis('direct')" class="icon-mail-alt" :class="vis.direct" :title="$t('post_status.scope.direct')" ></i>
-                <i v-on:click="changeVis('private')" class="icon-lock" :class="vis.private" :title="$t('post_status.scope.private')"></i>
-                <i v-on:click="changeVis('unlisted')" class="icon-lock-open-alt" :class="vis.unlisted" :title="$t('post_status.scope.unlisted')"></i>
-                <i v-on:click="changeVis('public')" class="icon-globe" :class="vis.public" :title="$t('post_status.scope.public')"></i>
+                <scope-selector
+                  :showAll="true"
+                  :userDefault="newDefaultScope"
+                  :onScopeChange="changeVis"/>
               </div>
             </div>
             <p>

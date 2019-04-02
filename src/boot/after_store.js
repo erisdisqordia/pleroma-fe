@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
-
 import App from '../App.vue'
+import { windowWidth } from '../services/window_utils/window_utils'
 
 const getStatusnetConfig = async ({ store }) => {
   try {
@@ -95,7 +95,7 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('redirectRootNoLogin')
   copyInstanceOption('redirectRootLogin')
   copyInstanceOption('showInstanceSpecificPanel')
-  copyInstanceOption('scopeOptionsEnabled')
+  copyInstanceOption('minimalScopesMode')
   copyInstanceOption('formattingOptionsEnabled')
   copyInstanceOption('hideMutedPosts')
   copyInstanceOption('collapseMessageWithSubject')
@@ -219,6 +219,28 @@ const getNodeInfo = async ({ store }) => {
   }
 }
 
+const setConfig = async ({ store }) => {
+  // apiConfig, staticConfig
+  const configInfos = await Promise.all([getStatusnetConfig({ store }), getStaticConfig()])
+  const apiConfig = configInfos[0]
+  const staticConfig = configInfos[1]
+
+  await setSettings({ store, apiConfig, staticConfig })
+}
+
+const checkOAuthToken = async ({ store }) => {
+  return new Promise(async (resolve, reject) => {
+    if (store.state.oauth.token) {
+      try {
+        await store.dispatch('loginUser', store.state.oauth.token)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    resolve()
+  })
+}
+
 const afterStoreSetup = async ({ store, i18n }) => {
   if (store.state.config.customTheme) {
     // This is a hack to deal with async loading of config.json and themes
@@ -230,19 +252,19 @@ const afterStoreSetup = async ({ store, i18n }) => {
     })
   }
 
-  const apiConfig = await getStatusnetConfig({ store })
-  const staticConfig = await getStaticConfig()
-  await setSettings({ store, apiConfig, staticConfig })
-  await getTOS({ store })
-  await getInstancePanel({ store })
-  await getStaticEmoji({ store })
-  await getCustomEmoji({ store })
-  await getNodeInfo({ store })
+  const width = windowWidth()
+  store.dispatch('setMobileLayout', width <= 800)
 
-  // Now we have the server settings and can try logging in
-  if (store.state.oauth.token) {
-    await store.dispatch('loginUser', store.state.oauth.token)
-  }
+  // Now we can try getting the server settings and logging in
+  await Promise.all([
+    checkOAuthToken({ store }),
+    setConfig({ store }),
+    getTOS({ store }),
+    getInstancePanel({ store }),
+    getStaticEmoji({ store }),
+    getCustomEmoji({ store }),
+    getNodeInfo({ store })
+  ])
 
   const router = new VueRouter({
     mode: 'history',

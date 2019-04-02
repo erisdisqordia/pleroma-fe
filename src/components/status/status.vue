@@ -98,16 +98,16 @@
           </div>
 
           <div class="status-content-wrapper" :class="{ 'tall-status': !showingLongSubject }" v-if="longSubject">
-            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="!showingLongSubject" href="#" @click.prevent="showingLongSubject=true">Show more</a>
-            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
-            <a v-if="showingLongSubject" href="#" class="status-unhider" @click.prevent="showingLongSubject=false">Show less</a>
+            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="!showingLongSubject" href="#" @click.prevent="showingLongSubject=true">{{$t("general.show_more")}}</a>
+            <div @click.prevent="linkClicked" class="status-content media-body" v-html="contentHtml"></div>
+            <a v-if="showingLongSubject" href="#" class="status-unhider" @click.prevent="showingLongSubject=false">{{$t("general.show_less")}}</a>
           </div>
           <div :class="{'tall-status': hideTallStatus}" class="status-content-wrapper" v-else>
-            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowMore">Show more</a>
-            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html" v-if="!hideSubjectStatus"></div>
+            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowMore">{{$t("general.show_more")}}</a>
+            <div @click.prevent="linkClicked" class="status-content media-body" v-html="contentHtml" v-if="!hideSubjectStatus"></div>
             <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.summary_html" v-else></div>
-            <a v-if="hideSubjectStatus" href="#" class="cw-status-hider" @click.prevent="toggleShowMore">Show more</a>
-            <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">Show less</a>
+            <a v-if="hideSubjectStatus" href="#" class="cw-status-hider" @click.prevent="toggleShowMore">{{$t("general.show_more")}}</a>
+            <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">{{$t("general.show_less")}}</a>
           </div>
 
           <div v-if="status.attachments && (!hideSubjectStatus || showingLongSubject)" class="attachments media-body">

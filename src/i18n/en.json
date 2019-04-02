@@ -20,7 +20,9 @@
     "submit": "Submit",
     "more": "More",
     "generic_error": "An error occured",
-    "optional": "optional"
+    "optional": "optional",
+    "show_more": "Show more",
+    "show_less": "Show less"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",
@@ -215,6 +217,7 @@
     "saving_ok": "Settings saved",
     "security_tab": "Security",
     "scope_copy": "Copy scope when replying (DMs are always copied)",
+    "minimal_scopes_mode": "Minimize post scope selection options",
     "set_new_avatar": "Set new avatar",
     "set_new_profile_background": "Set new profile background",
     "set_new_profile_banner": "Set new profile banner",

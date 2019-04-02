@@ -11,7 +11,8 @@ export default {
     return {
       query: '',
       results: [],
-      timeout: null
+      timeout: null,
+      resultsVisible: false
     }
   },
   watch: {
@@ -26,9 +27,18 @@ export default {
         this.results = []
         if (query) {
           userSearchApi.search({query, store: this.$store})
-            .then((data) => { this.results = data })
+            .then((data) => {
+              this.results = data
+              this.resultsVisible = true
+            })
         }
       }, debounceMilliseconds)
+    },
+    onInputClick () {
+      this.resultsVisible = true
+    },
+    onClickOutside () {
+      this.resultsVisible = false
     }
   }
 }

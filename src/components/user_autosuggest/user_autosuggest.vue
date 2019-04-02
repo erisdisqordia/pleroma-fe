@@ -1,7 +1,7 @@
 <template>
-  <div class="user-autosuggest">
     <input v-model="query" placeholder="Search..." />
-    <div class="user-autosuggest-results">
+  <div class="user-autosuggest" v-click-outside="onClickOutside">
+    <div class="user-autosuggest-results" v-if="resultsVisible">
       <BasicUserCard v-for="user in results" :key="user.id" :user="user"/>
     </div>
   </div>

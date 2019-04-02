@@ -12,7 +12,7 @@
           <li v-if="gopher">{{$t('features_panel.gopher')}}</li>
           <li v-if="whoToFollow">{{$t('features_panel.who_to_follow')}}</li>
           <li v-if="mediaProxy">{{$t('features_panel.media_proxy')}}</li>
-          <li v-if="scopeOptions">{{$t('features_panel.scope_options')}}</li>
+          <li>{{$t('features_panel.scope_options')}}</li>
           <li>{{$t('features_panel.text_limit')}} = {{textlimit}}</li>
         </ul>
       </div>

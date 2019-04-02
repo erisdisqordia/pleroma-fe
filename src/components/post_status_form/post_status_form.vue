@@ -48,12 +48,12 @@
           </label>
         </span>
 
-        <div v-if="scopeOptionsEnabled">
-          <i v-on:click="changeVis('direct')" class="icon-mail-alt" :class="vis.direct" :title="$t('post_status.scope.direct')"></i>
-          <i v-on:click="changeVis('private')" class="icon-lock" :class="vis.private" :title="$t('post_status.scope.private')"></i>
-          <i v-on:click="changeVis('unlisted')" class="icon-lock-open-alt" :class="vis.unlisted" :title="$t('post_status.scope.unlisted')"></i>
-          <i v-on:click="changeVis('public')" class="icon-globe" :class="vis.public" :title="$t('post_status.scope.public')"></i>
-        </div>
+        <scope-selector
+          :showAll="showAllScopes"
+          :userDefault="userDefaultScope"
+          :originalScope="copyMessageScope"
+          :initialScope="newStatus.visibility"
+          :onScopeChange="changeVis"/>
       </div>
     </div>
     <div class="autocomplete-panel" v-if="candidates">

@@ -25,6 +25,7 @@
   "image_cropper": {
      "crop_picture": "Talhar l’imatge",
      "save": "Salvar",
+     "save_without_cropping": "Salvar sens talhada",
      "cancel": "Anullar"
   },
   "login": {
@@ -152,6 +153,7 @@
     "general": "General",
     "hide_attachments_in_convo": "Rescondre las pèças juntas dins las conversacions",
     "hide_attachments_in_tl": "Rescondre las pèças juntas",
+    "hide_muted_posts": "Rescondre las publicacions del monde rescondut",
     "max_thumbnails": "Nombre maximum de vinhetas per publicacion",
     "hide_isp": "Amagar lo panèl especial instància",
     "preload_images": "Precargar los imatges",

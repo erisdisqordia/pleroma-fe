@@ -7,6 +7,9 @@ import {
 } from '../../services/notification_utils/notification_utils.js'
 
 const Notifications = {
+  props: [
+    'noHeading'
+  ],
   created () {
     const store = this.$store
     const credentials = store.state.users.currentUser.credentials

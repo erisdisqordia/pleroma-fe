@@ -22,11 +22,6 @@
           </router-link>
         </li>
         <li v-if="currentUser" @click="toggleDrawer">
-          <router-link :to="{ name: 'notifications', params: { username: currentUser.screen_name } }">
-            {{ $t("notifications.notifications") }} {{ unseenNotificationsCount > 0 ? `(${unseenNotificationsCount})` : '' }}
-          </router-link>
-        </li>
-        <li v-if="currentUser" @click="toggleDrawer">
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
             {{ $t("nav.dms") }}
           </router-link>

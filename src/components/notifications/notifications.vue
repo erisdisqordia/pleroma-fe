@@ -1,7 +1,7 @@
 <template>
   <div class="notifications">
     <div class="panel panel-default">
-      <div class="panel-heading">
+      <div v-if="!noHeading" class="panel-heading">
         <div class="title">
           {{$t('notifications.notifications')}}
           <span class="badge badge-notification unseen-count" v-if="unseenCount">{{unseenCount}}</span>

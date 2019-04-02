@@ -1,17 +1,14 @@
 <template>
   <div id="app" v-bind:style="bgAppStyle">
     <div class="app-bg-wrapper" v-bind:style="bgStyle"></div>
-    <nav class='nav-bar container' @click="scrollToTop()" id="nav">
+    <MobileNav v-if="isMobileLayout" />
+    <nav v-else class='nav-bar container' @click="scrollToTop()" id="nav">
       <div class='logo' :style='logoBgStyle'>
         <div class='mask' :style='logoMaskStyle'></div>
         <img :src='logo' :style='logoStyle'>
       </div>
       <div class='inner-nav'>
         <div class='item'>
-          <a href="#" class="menu-button" @click.stop.prevent="toggleMobileSidebar()">
-            <i class="button-icon icon-menu"></i>
-            <div class="alert-dot" v-if="unseenNotificationsCount"></div>
-          </a>
           <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
         </div>
         <div class='item right'>
@@ -22,8 +19,7 @@
       </div>
     </nav>
     <div v-if="" class="container" id="content">
-      <side-drawer ref="sideDrawer" :logout="logout"></side-drawer>
-      <div class="sidebar-flexer mobile-hidden">
+      <div class="sidebar-flexer mobile-hidden" v-if="!isMobileLayout">
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">
             <div class="sidebar">
@@ -50,7 +46,6 @@
       <media-modal></media-modal>
     </div>
     <chat-panel :floating="true" v-if="currentUser && chat" class="floating-chat mobile-hidden"></chat-panel>
-    <MobilePostStatusModal />
   </div>
 </template>
 

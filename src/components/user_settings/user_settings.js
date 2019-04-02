@@ -79,7 +79,8 @@ const UserSettings = {
     MuteList,
     EmojiInput,
     Autosuggest,
-    BlockCard
+    BlockCard,
+    MuteCard
   },
   computed: {
     user () {
@@ -345,6 +346,12 @@ const UserSettings = {
       return reject(userIds, (userId) => {
         const user = this.$store.getters.findUser(userId)
         return !user || user.statusnet_blocking || user.id === this.$store.state.users.currentUser.id
+      })
+    },
+    filterUnMutedUsers (userIds) {
+      return reject(userIds, (userId) => {
+        const user = this.$store.getters.findUser(userId)
+        return !user || user.muted || user.id === this.$store.state.users.currentUser.id
       })
     },
     queryUserIds (query) {

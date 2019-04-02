@@ -206,6 +206,11 @@
         </div>
 
         <div :label="$t('settings.mutes_tab')">
+          <div class="profile-edit-usersearch-wrapper">
+            <Autosuggest :filter="filterUnMutedUsers" :query="queryUserIds" placeholder="Search whom you want to mute">
+              <MuteCard slot-scope="row" :userId="row.item"/>
+            </Autosuggest>
+          </div>
           <mute-list :refresh="true">
             <template slot="empty">{{$t('settings.no_mutes')}}</template>
           </mute-list>

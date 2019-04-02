@@ -1,11 +1,11 @@
-import BasicUserCard from '../basic_user_card/basic_user_card.vue'
+import BlockCard from '../block_card/block_card.vue'
 import userSearchApi from '../../services/new_api/user_search.js'
 
 const debounceMilliseconds = 500
 
 export default {
   components: {
-    BasicUserCard
+    BlockCard
   },
   data () {
     return {
@@ -28,6 +28,7 @@ export default {
         if (query) {
           userSearchApi.search({query, store: this.$store})
             .then((data) => {
+              this.$store.dispatch('addNewUsers', data)
               this.results = data
               this.resultsVisible = true
             })

@@ -281,6 +281,9 @@ const users = {
 
       unregisterPushNotifications(token)
     },
+    addNewUsers ({ commit }, users) {
+      commit('addNewUsers', users)
+    },
     addNewStatuses (store, { statuses }) {
       const users = map(statuses, 'user')
       const retweetedUsers = compact(map(statuses, 'retweeted_status.user'))

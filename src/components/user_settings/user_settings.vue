@@ -196,7 +196,7 @@
 
         <div :label="$t('settings.blocks_tab')">
           <div class="profile-edit-usersearch-wrapper">
-            <Autosuggest :filter="filterUnblockedUsers" :query="queryUserIds" placeholder="Search whom you want to block">
+            <Autosuggest :filter="filterUnblockedUsers" :query="queryUserIds" :placeholder="$t('settings.search_user_to_block')">
               <BlockCard slot-scope="row" :userId="row.item"/>
             </Autosuggest>
           </div>
@@ -207,7 +207,7 @@
 
         <div :label="$t('settings.mutes_tab')">
           <div class="profile-edit-usersearch-wrapper">
-            <Autosuggest :filter="filterUnMutedUsers" :query="queryUserIds" placeholder="Search whom you want to mute">
+            <Autosuggest :filter="filterUnMutedUsers" :query="queryUserIds" :placeholder="$t('settings.search_user_to_mute')">
               <MuteCard slot-scope="row" :userId="row.item"/>
             </Autosuggest>
           </div>

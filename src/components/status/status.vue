@@ -133,6 +133,10 @@
             <link-preview :card="status.card" :size="attachmentSize" :nsfw="nsfwClickthrough" />
           </div>
 
+          <div class="favs-favourited-users" v-if="combinedFavsAndRepeatsAvatars.length > 0" :class="{ 'status-fadein': combinedFavsAndRepeatsAvatars.length > 0 }">
+            <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>
+          </div>
+
           <div v-if="!noHeading && !isPreview" class='status-actions media-body'>
             <div v-if="loggedIn">
               <i class="button-icon icon-reply" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')" :class="{'icon-reply-active': replying}"></i>
@@ -141,16 +145,6 @@
             <retweet-button :visibility='status.visibility' :loggedIn='loggedIn' :status='status'></retweet-button>
             <favorite-button :loggedIn='loggedIn' :status='status'></favorite-button>
             <delete-button :status='status'></delete-button>
-          </div>
-          <div class="boosted-users">
-            <div class="reblogged-users" v-if="rebloggedByUsers.length > 0" :class="{ 'status-fadein': rebloggedByUsers.length > 0 }">
-              <p class="title">Boosted By {{rebloggedByUsers.length}}:</p>
-              <AvatarList :avatars='rebloggedByUsers'></AvatarList>
-            </div>
-            <div class="favourited-users" v-if="favouritedByUsers.length > 0" :class="{ 'status-fadein': favouritedByUsers.length > 0 }">
-              <p class="title">Favourited By {{favouritedByUsers.length}}:</p>
-              <AvatarList :avatars='favouritedByUsers'></AvatarList>
-            </div>
           </div>
         </div>
       </div>
@@ -622,21 +616,8 @@ a.unmute {
   }
 }
 
-.boosted-users {
-  display: flex;
-  justify-content: space-between;
+.favs-favourited-users {
   margin-top: 10px;
-
-  .favourited-users,
-  .reblogged-users {
-    flex-basis: 50%;
-    flex-grow: 1;
-    flex-shrink: 1;
-
-    .title {
-      margin: 0 0 10px 0;
-    }
-  }
 }
 
 @media all and (max-width: 800px) {

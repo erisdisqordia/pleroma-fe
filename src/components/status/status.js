@@ -259,11 +259,11 @@ const Status = {
       }
       return this.status.summary_html + '<br />' + this.status.statusnet_html
     },
-    favouritedByUsers () {
-      return this.statusoid.favoritedBy ? this.statusoid.favoritedBy : []
-    },
-    rebloggedByUsers () {
-      return this.statusoid.rebloggedBy ? this.statusoid.rebloggedBy : []
+    combinedFavsAndRepeatsAvatars () {
+      return [].concat(
+        this.statusoid.favoritedBy ? this.statusoid.favoritedBy : [],
+        this.statusoid.rebloggedBy ? this.statusoid.rebloggedBy : []
+      )
     }
   },
   components: {

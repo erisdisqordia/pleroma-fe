@@ -1,7 +1,7 @@
 <template>
-  <ul class="avatars" :class="{ 'transparent-avatar': slicedAvatars.length == 10 }">
-      <li class="avatars__item" v-for="avatar in slicedAvatars" :key="avatar.id">
-        <UserAvatar :src="avatar.avatar_static" class="avatars__img" />
+  <ul class="avatars" :class="{ 'transparent-avatar': slicedAvatars.length == 15 }">
+      <li class="avatars-item" v-for="avatar in slicedAvatars" :key="avatar.id">
+        <UserAvatar :src="avatar.profile_image_url" class="avatars-img" />
       </li>
   </ul>
 </template>
@@ -14,43 +14,31 @@
   display: inline-flex; /* Causes LI items to display in row. */
   list-style-type: none;
   margin: 0;
-  padding: 0px 20px 0px 0px;
-  flex-direction: row;
-  flex-wrap: wrap;
+  padding: 0px 15px 0px 0px;
+  flex-direction: row-reverse;
 
-  &__item {
-    height: 40px;
+  &-item {
+    height: 30px;
     margin: 0;
     padding: 0;
-    width: 20px;
+    width: 15px;
 
-    &:nth-child( 1 ) { z-index: 10 ; }
-    &:nth-child( 2 ) { z-index: 9 ; }
-    &:nth-child( 3 ) { z-index: 8 ; }
-    &:nth-child( 4 ) { z-index: 7 ; }
-    &:nth-child( 5 ) { z-index: 6 ; }
-    &:nth-child( 6 ) { z-index: 5 ; }
-    &:nth-child( 7 ) { z-index: 4 ; }
-    &:nth-child( 8 ) { z-index: 3 ; }
-    &:nth-child( 9 ) { z-index: 2 ; }
-    &:nth-child( 10 ) { z-index: 1 ; }
-
-    .avatars__img {
+    .avatars-img {
       border-radius: 50%;
-      height: 40px;
-      width: 40px;
-      line-height: 40px;
+      height: 30px;
+      width: 30px;
+      line-height: 30px;
       background-color: $main-background;
     }
   }
 }
 
 .transparent-avatar {
-  .avatars__item {
-    &:last-child {
+  .avatars-item {
+    &:first-child {
       position: relative;
 
-      .avatars__img {
+      .avatars-img {
         &::after {
           content: '';
           position: absolute;

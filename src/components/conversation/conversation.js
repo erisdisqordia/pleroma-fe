@@ -153,7 +153,7 @@ const conversation = {
       }
     },
     fetchFavouritedByUsers (id) {
-      this.$store.state.api.backendInteractor.fetchFavouritedByUsers({id: this.status.id}).then((response) => {
+      this.$store.state.api.backendInteractor.fetchFavouritedByUsers({id}).then((response) => {
         const favoritedByUsers = response.map(item => ({
           src: item.avatar_static,
           name: item.display_name
@@ -162,7 +162,7 @@ const conversation = {
       })
     },
     fetchRebloggedByUsers (id) {
-      this.$store.state.api.backendInteractor.fetchRebloggedByUsers({id: this.status.id}).then((response) => {
+      this.$store.state.api.backendInteractor.fetchRebloggedByUsers({id}).then((response) => {
         const rebloggedByUsers = response.map(item => ({
           src: item.avatar_static,
           name: item.display_name

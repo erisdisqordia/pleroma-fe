@@ -81,7 +81,7 @@
     "content_warning": "Subject (optional)",
     "default": "Just landed in L.A.",
     "direct_warning_to_all": "This post will be visible to all the mentioned users.",
-    "direct_warning_to_first_only": "This post will only be visible to the mentioned user at the beginning of the message.",
+    "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
     "scope": {
       "direct": "Direct - Post to mentioned users only",

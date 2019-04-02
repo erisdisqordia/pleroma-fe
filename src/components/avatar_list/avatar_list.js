@@ -4,7 +4,7 @@ const AvatarList = {
   props: ['avatars'],
   computed: {
     slicedAvatars () {
-      return this.avatars ? this.avatars.slice(0, 10) : []
+      return this.avatars ? this.avatars.slice(0, 15) : []
     }
   },
   components: {

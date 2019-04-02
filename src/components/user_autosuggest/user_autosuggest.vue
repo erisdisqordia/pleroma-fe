@@ -2,7 +2,8 @@
   <div class="user-autosuggest" v-click-outside="onClickOutside">
     <input v-model="term" :placeholder="placeholder" @click="onInputClick" class="user-autosuggest-input" />
     <div class="user-autosuggest-results" v-if="resultsVisible && filtered.length > 0">
-      <BlockCard v-for="userId in filtered" :key="userId" :userId="userId"/>
+      <slot v-for="item in filtered" :item="item">
+      </slot>
     </div>
   </div>
 </template>

@@ -1,5 +1,3 @@
-import BlockCard from '../block_card/block_card.vue'
-
 const debounceMilliseconds = 500
 
 export default {
@@ -15,9 +13,6 @@ export default {
       type: String,
       default: 'Search...'
     }
-  },
-  components: {
-    BlockCard
   },
   data () {
     return {

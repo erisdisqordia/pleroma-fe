@@ -78,7 +78,8 @@ const UserSettings = {
     BlockList,
     MuteList,
     EmojiInput,
-    UserAutoSuggest
+    UserAutoSuggest,
+    BlockCard
   },
   computed: {
     user () {

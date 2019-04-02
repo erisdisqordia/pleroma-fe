@@ -145,6 +145,11 @@ export const mutations = {
   saveMuteIds (state, muteIds) {
     state.currentUser.muteIds = muteIds
   },
+  addMuteId (state, muteId) {
+    if (state.currentUser.muteIds.indexOf(muteId) === -1) {
+      state.currentUser.muteIds.push(muteId)
+    }
+  },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
   },
@@ -240,7 +245,10 @@ const users = {
     },
     muteUser (store, id) {
       return store.rootState.api.backendInteractor.muteUser(id)
-        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+        .then((relationship) => {
+          store.commit('updateUserRelationship', [relationship])
+          store.commit('addMuteId', id)
+        })
     },
     unmuteUser (store, id) {
       return store.rootState.api.backendInteractor.unmuteUser(id)

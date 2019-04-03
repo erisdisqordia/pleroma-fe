@@ -27,8 +27,7 @@ const emptyNotifications = () => ({
   data: [],
   idStore: {},
   loading: false,
-  error: false,
-  fetcherId: null
+  error: false
 })
 
 export const defaultState = () => ({
@@ -342,9 +341,6 @@ export const mutations = {
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
-  // setNotificationFetcher (state, { fetcherId }) {
-  //   state.notifications.fetcherId = fetcherId
-  // },
   resetStatuses (state) {
     const emptyState = defaultState()
     Object.entries(emptyState).forEach(([key, value]) => {
@@ -433,12 +429,6 @@ const statuses = {
     setNotificationsSilence ({ rootState, commit }, { value }) {
       commit('setNotificationsSilence', { value })
     },
-    // stopFetchingNotifications ({ rootState, commit }) {
-    //   if (rootState.statuses.notifications.fetcherId) {
-    //     window.clearInterval(rootState.statuses.notifications.fetcherId)
-    //   }
-    //   commit('setNotificationFetcher', { fetcherId: null })
-    // },
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })
       apiService.deleteStatus({ id: status.id, credentials: rootState.users.currentUser.credentials })

@@ -1,5 +1,6 @@
 import apiService from '../api/api.service.js'
 import timelineFetcherService from '../timeline_fetcher/timeline_fetcher.service.js'
+import notificationsFetcher from '../notifications_fetcher/notifications_fetcher.service.js'
 
 const backendInteractorService = (credentials) => {
   const fetchStatus = ({id}) => {
@@ -59,6 +60,7 @@ const backendInteractorService = (credentials) => {
   }
 
   const startFetching = ({timeline, store, userId = false, tag}) => {
+    if (timeline === 'notifications') { return notificationsFetcher.startFetching({store, credentials}) }
     return timelineFetcherService.startFetching({timeline, store, credentials, userId, tag})
   }
 

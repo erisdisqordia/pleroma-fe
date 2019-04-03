@@ -313,7 +313,11 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
         if (i18nString) {
           notifObj.body = rootGetters.i18n.t('notifications.' + i18nString)
         } else {
-          notifObj.body = notification.status.text
+          // stripe html
+          const div = document.createElement('div')
+          div.innerHTML = notification.status.text
+          const text = div.textContent || div.innerText || ''
+          notifObj.body = text
         }
 
         // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...

@@ -25,7 +25,7 @@ export const defaultState = () => ({
   allStatusesObject: {},
   maxId: 0,
   notifications: {
-    desktopNotificationSilence: false,
+    desktopNotificationSilence: true,
     maxId: 0,
     minId: Number.POSITIVE_INFINITY,
     data: [],

@@ -10,6 +10,7 @@ import fileSizeFormatService from '../../services/file_size_format/file_size_for
 import BlockCard from '../block_card/block_card.vue'
 import MuteCard from '../mute_card/mute_card.vue'
 import SelectableList from '../selectable_list/selectable_list.vue'
+import ProgressButton from '../progress_button/progress_button.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
 import Autosuggest from '../autosuggest/autosuggest.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
@@ -73,7 +74,8 @@ const UserSettings = {
     EmojiInput,
     Autosuggest,
     BlockCard,
-    MuteCard
+    MuteCard,
+    ProgressButton
   },
   computed: {
     user () {

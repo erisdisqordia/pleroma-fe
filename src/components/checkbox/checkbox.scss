@@ -4,6 +4,7 @@
   position: relative;
   display: inline-block;
   padding-left: 1.2em;
+  min-height: 1.2em;
 
   &-indicator::before {
     position: absolute;

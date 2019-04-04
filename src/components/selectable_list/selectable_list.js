@@ -6,14 +6,32 @@ const SelectableList = {
     List,
     Checkbox
   },
-  props: List.props,
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    },
+    getKey: {
+      type: Function,
+      default: item => item.id
+    }
+  },
   data () {
     return {
       selected: []
     }
   },
+  computed: {
+    allSelected () {
+      return !this.items.find(item => !this.isSelected(item))
+    }
+  },
   methods: {
-    toggle (checked, key) {
+    isSelected (item) {
+      return this.selected.indexOf(this.getKey(item)) !== -1
+    },
+    toggle (checked, item) {
+      const key = this.getKey(item)
       const oldChecked = this.isSelected(key)
       if (checked !== oldChecked) {
         if (checked) {
@@ -23,8 +41,12 @@ const SelectableList = {
         }
       }
     },
-    isSelected (key) {
-      return this.selected.indexOf(key) !== -1
+    toggleAll (value) {
+      if (value) {
+        this.selected = this.items.map(this.getKey)
+      } else {
+        this.selected = []
+      }
     }
   }
 }

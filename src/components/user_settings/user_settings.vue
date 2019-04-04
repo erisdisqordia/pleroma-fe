@@ -231,6 +231,22 @@
             </Autosuggest>
           </div>
           <MuteList :refresh="true" :getKey="item => item">
+            <template slot="header" slot-scope="p">
+              <div class="bulk-actions-wrapper">
+                <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => muteUsers(p.selected)">
+                  {{ $t('user_card.mute') }}
+                  <template slot="progress">
+                    {{ $t('user_card.mute_progress') }}
+                  </template>
+                </ProgressButton>
+                <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => unmuteUsers(p.selected)">
+                  {{ $t('user_card.unmute') }}
+                  <template slot="progress">
+                    {{ $t('user_card.unmute_progress') }}
+                  </template>
+                </ProgressButton>
+              </div>
+            </template>
             <template slot="item" slot-scope="p">
               <MuteCard :userId="p.item" />
             </template>

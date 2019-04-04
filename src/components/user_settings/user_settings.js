@@ -361,6 +361,12 @@ const UserSettings = {
     },
     unblockUsers (ids) {
       return this.$store.dispatch('unblockUsers', ids)
+    },
+    muteUsers (ids) {
+      return this.$store.dispatch('muteUsers', ids)
+    },
+    unmuteUsers (ids) {
+      return this.$store.dispatch('unmuteUsers', ids)
     }
   }
 }

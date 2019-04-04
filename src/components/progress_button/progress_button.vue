@@ -15,7 +15,7 @@ export default {
     disabled: {
       type: Boolean
     },
-    click: {
+    click: { // click event handler. Must return a promise
       type: Function,
       default: () => Promise.resolve()
     }

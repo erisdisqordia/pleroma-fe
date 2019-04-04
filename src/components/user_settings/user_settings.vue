@@ -205,21 +205,15 @@
               <div class="bulk-actions-wrapper">
                 <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => blockUsers(p.selected)">
                   {{ $t('user_card.block') }}
-                  <template slot="progress">
-                    {{ $t('user_card.block_progress') }}
-                  </template>
+                  <template slot="progress">{{ $t('user_card.block_progress') }}</template>
                 </ProgressButton>
                 <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => unblockUsers(p.selected)">
                   {{ $t('user_card.unblock') }}
-                  <template slot="progress">
-                    {{ $t('user_card.unblock_progress') }}
-                  </template>
+                  <template slot="progress">{{ $t('user_card.unblock_progress') }}</template>
                 </ProgressButton>
               </div>
             </template>
-            <template slot="item" slot-scope="p">
-              <BlockCard :userId="p.item" />
-            </template>
+            <template slot="item" slot-scope="p"><BlockCard :userId="p.item" /></template>
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
           </BlockList>
         </div>
@@ -235,21 +229,15 @@
               <div class="bulk-actions-wrapper">
                 <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => muteUsers(p.selected)">
                   {{ $t('user_card.mute') }}
-                  <template slot="progress">
-                    {{ $t('user_card.mute_progress') }}
-                  </template>
+                  <template slot="progress">{{ $t('user_card.mute_progress') }}</template>
                 </ProgressButton>
                 <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => unmuteUsers(p.selected)">
                   {{ $t('user_card.unmute') }}
-                  <template slot="progress">
-                    {{ $t('user_card.unmute_progress') }}
-                  </template>
+                  <template slot="progress">{{ $t('user_card.unmute_progress') }}</template>
                 </ProgressButton>
               </div>
             </template>
-            <template slot="item" slot-scope="p">
-              <MuteCard :userId="p.item" />
-            </template>
+            <template slot="item" slot-scope="p"><MuteCard :userId="p.item" /></template>
             <template slot="empty">{{$t('settings.no_mutes')}}</template>
           </MuteList>
         </div>

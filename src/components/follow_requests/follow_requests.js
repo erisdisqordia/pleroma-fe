@@ -1,8 +1,10 @@
 import FollowRequestCard from '../follow_request_card/follow_request_card.vue'
+import List from '../list/list.vue'
 
 const FollowRequests = {
   components: {
-    FollowRequestCard
+    FollowRequestCard,
+    List
   },
   computed: {
     requests () {

@@ -4,7 +4,11 @@
       {{$t('nav.friend_requests')}}
     </div>
     <div class="panel-body">
-      <FollowRequestCard v-for="request in requests" :key="request.id" :user="request"/>
+      <List :items="requests">
+        <template slot="item" scope="p">
+          <FollowRequestCard :user="p.item" />
+        </template>
+      </List>
     </div>
   </div>
 </template>

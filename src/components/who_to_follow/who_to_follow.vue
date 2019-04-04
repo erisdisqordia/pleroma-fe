@@ -4,7 +4,11 @@
       {{$t('who_to_follow.who_to_follow')}}
     </div>
     <div class="panel-body">
-      <FollowCard v-for="user in users" :key="user.id" :user="user"/>
+      <List :items="users">
+        <template slot="item" scope="p">
+          <FollowCard :user="p.item" />
+        </template>
+      </List>
     </div>
   </div>
 </template>

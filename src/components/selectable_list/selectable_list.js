@@ -4,12 +4,11 @@ const SelectableList = {
   components: {
     Checkbox
   },
-  props: ['checked'],
-  data () {
-  },
-  computed: {
-  },
-  methods: {
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    }
   }
 }
 

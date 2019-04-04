@@ -9,7 +9,7 @@ import ScopeSelector from '../scope_selector/scope_selector.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 import BlockCard from '../block_card/block_card.vue'
 import MuteCard from '../mute_card/mute_card.vue'
-import List from '../list/list.vue'
+import SelectableList from '../selectable_list/selectable_list.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
 import Autosuggest from '../autosuggest/autosuggest.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
@@ -19,13 +19,13 @@ const BlockList = withSubscription({
   fetch: (props, $store) => $store.dispatch('fetchBlocks'),
   select: (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
   childPropName: 'items'
-})(List)
+})(SelectableList)
 
 const MuteList = withSubscription({
   fetch: (props, $store) => $store.dispatch('fetchMutes'),
   select: (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
   childPropName: 'items'
-})(List)
+})(SelectableList)
 
 const UserSettings = {
   data () {

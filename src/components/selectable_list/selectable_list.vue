@@ -1,6 +1,6 @@
 <template>
   <div class="selectable-list">
-    <div v-for="item in items">
+    <div v-for="item in items" :key="getKey(item)">
       <Checkbox :checked="isChecked(item)" @change="checked => toggle(checked, item)" />
       <slot name="item" :item="item" />
     </div>

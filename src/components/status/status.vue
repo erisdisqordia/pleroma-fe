@@ -12,6 +12,13 @@
       </div>
     </template>
     <template v-else>
+      <div v-if="pinned" class="status-pin">
+        <i class="fa icon-pin faint"></i>
+        <span class="faint">Pinned</span>
+        <div class="button-icon button-action-icon" v-if="status.pinned && ownStatus" @click.prevent="unpinStatus" title="Unpin">
+          <i class="fa icon-cancel"></i>
+        </div>
+      </div>
       <div v-if="retweet && !noHeading && !inConversation" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
         <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :user="statusoid.user"/>
         <div class="media-body faint">
@@ -54,9 +61,6 @@
                 </a>
                 <div class="button-icon button-action-icon" v-if="!status.pinned && ownStatus" @click.prevent="pinStatus" title="Pin">
                   <i class="fa icon-pin"></i>
-                </div>
-                <div class="button-icon button-action-icon" v-if="status.pinned && ownStatus" @click.prevent="unpinStatus" title="Unpin">
-                  <i class="fa icon-cancel"></i>
                 </div>
                 <div class="button-icon button-action-icon" v-if="expandable && !isPreview" @click.prevent="toggleExpanded" title="Expand">
                   <i class="button-icon icon-plus-squared"></i>
@@ -203,6 +207,13 @@ $status-margin: 0.75em;
 .status-preview-container {
   position: relative;
   max-width: 100%;
+}
+
+.status-pin {
+  padding: 0.75em 0.75em 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .status-preview {

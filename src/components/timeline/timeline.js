@@ -11,7 +11,8 @@ const Timeline = {
     'userId',
     'tag',
     'embedded',
-    'count'
+    'count',
+    'noLoadMore'
   ],
   data () {
     return {

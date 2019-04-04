@@ -41,7 +41,8 @@ const conversation = {
   props: [
     'statusoid',
     'collapsable',
-    'isPage'
+    'isPage',
+    'pinned'
   ],
   created () {
     if (this.isPage) {

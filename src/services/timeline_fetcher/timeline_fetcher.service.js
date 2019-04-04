@@ -16,6 +16,12 @@ const update = ({store, statuses, timeline, showImmediately, userId}) => {
 }
 
 const fetchAndUpdate = ({store, credentials, timeline = 'friends', older = false, showImmediately = false, userId = false, tag = false, until}) => {
+  if (timeline === 'pinned') {
+    return apiService.fetchPinnedStatuses({ id: userId, credentials })
+      .then(statuses => {
+        update({ store, statuses, timeline, showImmediately, userId })
+      })
+  }
   const args = { timeline, credentials }
   const rootState = store.rootState || store.state
   const timelineData = rootState.statuses.timelines[camelCase(timeline)]

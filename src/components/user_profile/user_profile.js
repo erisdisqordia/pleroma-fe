@@ -40,6 +40,9 @@ const UserProfile = {
     timeline () {
       return this.$store.state.statuses.timelines.user
     },
+    pinned () {
+      return this.$store.state.statuses.timelines.pinned
+    },
     favorites () {
       return this.$store.state.statuses.timelines.favorites
     },
@@ -91,6 +94,7 @@ const UserProfile = {
     fetchTimelines () {
       const userId = this.userId
       this.$store.dispatch('startFetchingTimeline', { timeline: 'user', userId })
+      this.$store.dispatch('startFetchingTimeline', { timeline: 'pinned', userId })
       this.$store.dispatch('startFetchingTimeline', { timeline: 'media', userId })
       if (this.isUs) {
         this.$store.dispatch('startFetchingTimeline', { timeline: 'favorites', userId })
@@ -98,6 +102,7 @@ const UserProfile = {
     },
     cleanUp () {
       this.$store.dispatch('stopFetching', 'user')
+      this.$store.dispatch('stopFetching', 'pinned')
       this.$store.dispatch('stopFetching', 'favorites')
       this.$store.dispatch('stopFetching', 'media')
       this.$store.commit('clearTimeline', { timeline: 'user' })

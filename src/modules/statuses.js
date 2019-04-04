@@ -47,7 +47,8 @@ export const defaultState = () => ({
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
     tag: emptyTl(),
-    dms: emptyTl()
+    dms: emptyTl(),
+    pinned: emptyTl()
   }
 })
 

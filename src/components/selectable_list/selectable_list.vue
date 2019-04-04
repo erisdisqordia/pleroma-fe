@@ -1,6 +1,6 @@
 <template>
   <div class="selectable-list">
-    <div class="selectable-list-header">
+    <div class="selectable-list-header" v-if="items.length > 0">
       <div class="selectable-list-checkbox-wrapper">
         <Checkbox :checked="allSelected" @change="toggleAll" />
       </div>

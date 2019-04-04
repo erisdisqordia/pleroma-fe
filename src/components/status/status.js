@@ -353,6 +353,16 @@ const Status = {
         this.expandingSubject = true
       }
     },
+    pinStatus () {
+      this.$store.state.api.backendInteractor.pinOwnStatus(this.status.id).then((status) => {
+        this.$store.dispatch('updatePinned', status)
+      })
+    },
+    unpinStatus () {
+      this.$store.state.api.backendInteractor.unpinOwnStatus(this.status.id).then((status) => {
+        this.$store.dispatch('updatePinned', status)
+      })
+    },
     replyEnter (id, event) {
       this.showPreview = true
       const targetId = id

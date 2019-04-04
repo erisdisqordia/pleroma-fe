@@ -52,12 +52,18 @@
                 <a :href="status.external_url" target="_blank" v-if="!status.is_local && !isPreview" class="source_url" title="Source">
                   <i class="button-icon icon-link-ext-alt"></i>
                 </a>
-                <template v-if="expandable && !isPreview">
-                  <a href="#" @click.prevent="toggleExpanded" title="Expand">
-                    <i class="button-icon icon-plus-squared"></i>
-                  </a>
-                </template>
-                <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="button-icon icon-eye-off"></i></a>
+                <div class="button-icon button-action-icon" v-if="!status.pinned" @click.prevent="pinStatus" title="Pin">
+                  <i class="fa icon-pin"></i>
+                </div>
+                <div class="button-icon button-action-icon" v-else @click.prevent="unpinStatus" title="Unpin">
+                  <i class="fa icon-cancel"></i>
+                </div>
+                <div class="button-icon button-action-icon" v-if="expandable && !isPreview" @click.prevent="toggleExpanded" title="Expand">
+                  <i class="button-icon icon-plus-squared"></i>
+                </div>
+                <div class="button-icon button-action-icon" v-if="unmuted" @click.prevent="toggleMute" title="Toggle Mute">
+                  <i class="button-icon icon-eye-off"></i>
+                </div>
               </span>
             </div>
 
@@ -676,6 +682,10 @@ a.unmute {
       }
     }
   }
+}
+
+.button-action-icon {
+  cursor: pointer;
 }
 
 @media all and (max-width: 800px) {

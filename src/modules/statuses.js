@@ -424,6 +424,10 @@ export const mutations = {
       newStatus.favoritedBy.push(user)
     }
   },
+  setPinned (state, { status }) {
+    const newStatus = state.allStatusesObject[status.id]
+    newStatus.pinned = status.pinned
+  },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
 
@@ -532,6 +536,9 @@ const statuses = {
       commit('setFavorited', { status, value: false })
       rootState.api.backendInteractor.unfavorite(status.id)
         .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
+    },
+    updatePinned ({ rootState, commit }, status) {
+      commit('setPinned', { status })
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...

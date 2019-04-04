@@ -1,15 +1,14 @@
 <template>
-  <div class="selectable-list">
-    <div v-for="item in items" :key="getKey(item)" class="selectable-list-item" :class="{ 'selectable-list-item-selected': isSelected(item) }">
-      <div class="selectable-list-checkbox-wrapper">
-        <Checkbox :checked="isSelected(item)" @change="checked => toggle(checked, item)" />
+  <List class="selectable-list" :items="items" :getKey="getKey">
+    <template slot="item" scope="p">
+      <div class="selectable-list-item-inner" :class="{ 'selectable-list-item-selected-inner': isSelected(p.item) }">
+        <div class="selectable-list-checkbox-wrapper">
+          <Checkbox :checked="isSelected(p.item)" @change="checked => toggle(checked, p.item)" />
+        </div>
+        <slot name="item" :item="p.item" />
       </div>
-      <slot name="item" :item="item" />
-    </div>
-    <div class="selectable-list-empty-content faint" v-if="items.length === 0">
-      <slot name="empty" />
-    </div>
-  </div>
+    </template>
+  </List>
 </template>
 
 <script src="./selectable_list.js"></script>
@@ -18,26 +17,18 @@
 @import '../../_variables.scss';
 
 .selectable-list {
-  &-item {
+  &-item-inner {
     display: flex;
-    border-bottom: 1px solid;
-    border-bottom-color: $fallback--border;
-    border-bottom-color: var(--border, $fallback--border);
+  }
 
-    &-selected {
-      background-color: $fallback--lightBg;
-      background-color: var(--lightBg, $fallback--lightBg);
-    }
+  &-item-selected-inner {
+    background-color: $fallback--lightBg;
+    background-color: var(--lightBg, $fallback--lightBg);
   }
 
   &-checkbox-wrapper {
     padding: 10px;
     flex: none;
-  }
-
-  &-empty-content {
-    text-align: center;
-    padding: 10px;
   }
 }
 </style>

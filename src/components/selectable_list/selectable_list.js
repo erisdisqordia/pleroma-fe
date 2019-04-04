@@ -21,7 +21,7 @@ const SelectableList = {
   },
   methods: {
     toggle (checked, item) {
-      const oldChecked = this.isChecked(item)
+      const oldChecked = this.isSelected(item)
       if (checked !== oldChecked) {
         const key = this.getKey(item)
         if (checked) {
@@ -31,7 +31,7 @@ const SelectableList = {
         }
       }
     },
-    isChecked (item) {
+    isSelected (item) {
       return this.selected.indexOf(this.getKey(item)) !== -1
     }
   }

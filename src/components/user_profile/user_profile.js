@@ -1,4 +1,3 @@
-import { compose } from 'vue-compose'
 import get from 'lodash/get'
 import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
@@ -6,7 +5,6 @@ import Timeline from '../timeline/timeline.vue'
 import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
-import withList from '../../hocs/with_list/with_list'
 
 const FollowerList = withLoadMore({
   fetch: (props, $store) => $store.dispatch('fetchFollowers', props.userId),

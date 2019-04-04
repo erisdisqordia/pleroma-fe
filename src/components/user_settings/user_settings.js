@@ -1,4 +1,3 @@
-import { compose } from 'vue-compose'
 import unescape from 'lodash/unescape'
 import get from 'lodash/get'
 import map from 'lodash/map'
@@ -14,7 +13,6 @@ import List from '../list/list.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
 import Autosuggest from '../autosuggest/autosuggest.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
-import withList from '../../hocs/with_list/with_list'
 import userSearchApi from '../../services/new_api/user_search.js'
 
 const BlockList = withSubscription({

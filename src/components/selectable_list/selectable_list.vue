@@ -9,7 +9,7 @@
       </div>
     </div>
     <List :items="items" :getKey="getKey">
-      <template slot="item" scope="p">
+      <template slot="item" slot-scope="p">
         <div class="selectable-list-item-inner" :class="{ 'selectable-list-item-selected-inner': isSelected(p.item) }">
           <div class="selectable-list-checkbox-wrapper">
             <Checkbox :checked="isSelected(p.item)" @change="checked => toggle(checked, p.item)" />

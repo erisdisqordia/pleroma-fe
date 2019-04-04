@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body">
       <List :items="users">
-        <template slot="item" scope="p">
+        <template slot="item" slot-scope="p">
           <FollowCard :user="p.item" />
         </template>
       </List>

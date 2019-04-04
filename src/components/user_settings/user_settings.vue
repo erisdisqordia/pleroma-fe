@@ -201,7 +201,7 @@
             </Autosuggest>
           </div>
           <BlockList :refresh="true" :getKey="item => item">
-            <template slot="item" scope="p">
+            <template slot="item" slot-scope="p">
               <BlockCard :userId="p.item" />
             </template>
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
@@ -215,7 +215,7 @@
             </Autosuggest>
           </div>
           <MuteList :refresh="true" :getKey="item => item">
-            <template slot="item" scope="p">
+            <template slot="item" slot-scope="p">
               <MuteCard :userId="p.item" />
             </template>
             <template slot="empty">{{$t('settings.no_mutes')}}</template>

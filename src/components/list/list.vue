@@ -28,7 +28,7 @@ export default {
 @import '../../_variables.scss';
 
 .list {
-  &-item {
+  &-item:not(:last-child) {
     border-bottom: 1px solid;
     border-bottom-color: $fallback--border;
     border-bottom-color: var(--border, $fallback--border);

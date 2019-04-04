@@ -1,7 +1,13 @@
+
+@import '../../_variables.scss';
+
 .with-load-more {
   &-footer {
     padding: 10px;
     text-align: center;
+    border-top: 1px solid;
+    border-top-color: $fallback--border;
+    border-top-color: var(--border, $fallback--border);
 
     .error {
       font-size: 14px;

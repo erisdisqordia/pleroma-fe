@@ -41,7 +41,7 @@
     display: flex;
     align-items: center;
     padding: 0.6em 0;
-    border-bottom: 1px solid;
+    border-bottom: 2px solid;
     border-bottom-color: $fallback--border;
     border-bottom-color: var(--border, $fallback--border);
 

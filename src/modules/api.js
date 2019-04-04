@@ -13,7 +13,7 @@ const api = {
     setBackendInteractor (state, backendInteractor) {
       state.backendInteractor = backendInteractor
     },
-    addFetcher (state, {fetcherName, fetcher}) {
+    addFetcher (state, { fetcherName, fetcher }) {
       state.fetchers[fetcherName] = fetcher
     },
     removeFetcher (state, { fetcherName }) {
@@ -33,7 +33,7 @@ const api = {
     }
   },
   actions: {
-    startFetchingTimeline (store, {timeline = 'friends', tag = false, userId = false}) {
+    startFetchingTimeline (store, { timeline = 'friends', tag = false, userId = false }) {
       // Don't start fetching if we already are.
       if (store.state.fetchers[timeline]) return
 

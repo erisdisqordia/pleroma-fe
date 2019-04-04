@@ -17,6 +17,7 @@
           <slot name="item" :item="p.item" />
         </div>
       </template>
+      <template slot="empty"><slot name="empty" /></template>
     </List>
   </div>
 </template>

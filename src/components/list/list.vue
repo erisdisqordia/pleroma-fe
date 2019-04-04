@@ -3,7 +3,7 @@
     <div v-for="item in items" class="list-item" :key="getKey(item)">
       <slot name="item" :item="item" :keyVal="getKey(item)" />
     </div>
-    <div class="list-empty-content faint" v-if="items.length === 0">
+    <div class="list-empty-content faint" v-if="items.length === 0 && !!$slots.empty">
       <slot name="empty" />
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <div v-for="item in items" class="list-item" :key="getKey(item)">
-      <slot name="item" :item="item" />
+      <slot name="item" :item="item" :keyVal="getKey(item)" />
     </div>
     <div class="list-empty-content faint" v-if="items.length === 0">
       <slot name="empty" />

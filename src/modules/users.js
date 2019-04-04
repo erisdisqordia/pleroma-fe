@@ -364,10 +364,10 @@ const users = {
               }
 
               // Start getting fresh posts.
-              store.dispatch('startFetching', { timeline: 'friends' })
+              store.dispatch('startFetchingTimeline', { timeline: 'friends' })
 
               // Start fetching notifications
-              store.dispatch('startFetching', { timeline: 'notifications' })
+              store.dispatch('startFetchingNotifications')
 
               // Get user mutes
               store.dispatch('fetchMutes')

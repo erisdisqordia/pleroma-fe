@@ -59,9 +59,12 @@ const backendInteractorService = (credentials) => {
     return apiService.denyUser({credentials, id})
   }
 
-  const startFetching = ({timeline, store, userId = false, tag}) => {
-    if (timeline === 'notifications') { return notificationsFetcher.startFetching({store, credentials}) }
-    return timelineFetcherService.startFetching({timeline, store, credentials, userId, tag})
+  const startFetchingTimeline = ({ timeline, store, userId = false, tag }) => {
+    return timelineFetcherService.startFetching({ timeline, store, credentials, userId, tag })
+  }
+
+  const startFetchingNotifications = ({ store }) => {
+    return notificationsFetcher.startFetching({ store, credentials })
   }
 
   const fetchMutes = () => apiService.fetchMutes({credentials})
@@ -99,7 +102,8 @@ const backendInteractorService = (credentials) => {
     fetchUserRelationship,
     fetchAllFollowing,
     verifyCredentials: apiService.verifyCredentials,
-    startFetching,
+    startFetchingTimeline,
+    startFetchingNotifications,
     fetchMutes,
     muteUser,
     unmuteUser,

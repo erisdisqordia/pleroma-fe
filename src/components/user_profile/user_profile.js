@@ -90,7 +90,7 @@ const UserProfile = {
   methods: {
     startFetchFavorites () {
       if (this.isUs) {
-        this.$store.dispatch('startFetching', { timeline: 'favorites', userId: this.userId })
+        this.$store.dispatch('startFetchingTimeline', { timeline: 'favorites', userId: this.userId })
       }
     },
     fetchUserId () {
@@ -118,8 +118,8 @@ const UserProfile = {
     },
     startUp () {
       if (this.userId) {
-        this.$store.dispatch('startFetching', { timeline: 'user', userId: this.userId })
-        this.$store.dispatch('startFetching', { timeline: 'media', userId: this.userId })
+        this.$store.dispatch('startFetchingTimeline', { timeline: 'user', userId: this.userId })
+        this.$store.dispatch('startFetchingTimeline', { timeline: 'media', userId: this.userId })
         this.startFetchFavorites()
       }
     },

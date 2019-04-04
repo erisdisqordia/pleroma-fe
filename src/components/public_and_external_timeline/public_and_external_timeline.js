@@ -7,7 +7,7 @@ const PublicAndExternalTimeline = {
     timeline () { return this.$store.state.statuses.timelines.publicAndExternal }
   },
   created () {
-    this.$store.dispatch('startFetching', { timeline: 'publicAndExternal' })
+    this.$store.dispatch('startFetchingTimeline', { timeline: 'publicAndExternal' })
   },
   destroyed () {
     this.$store.dispatch('stopFetching', 'publicAndExternal')

@@ -3,7 +3,7 @@ import Timeline from '../timeline/timeline.vue'
 const TagTimeline = {
   created () {
     this.$store.commit('clearTimeline', { timeline: 'tag' })
-    this.$store.dispatch('startFetching', { timeline: 'tag', tag: this.tag })
+    this.$store.dispatch('startFetchingTimeline', { timeline: 'tag', tag: this.tag })
   },
   components: {
     Timeline
@@ -15,7 +15,7 @@ const TagTimeline = {
   watch: {
     tag () {
       this.$store.commit('clearTimeline', { timeline: 'tag' })
-      this.$store.dispatch('startFetching', { timeline: 'tag', tag: this.tag })
+      this.$store.dispatch('startFetchingTimeline', { timeline: 'tag', tag: this.tag })
     }
   },
   destroyed () {

@@ -4,6 +4,9 @@
       <div class="selectable-list-checkbox-wrapper">
         <Checkbox :checked="allSelected" @change="toggleAll" />
       </div>
+      <div class="selectable-list-header-actions">
+        <slot name="header" :selected="selected" />
+      </div>
     </div>
     <List :items="items" :getKey="getKey">
       <template slot="item" scope="p">
@@ -38,6 +41,10 @@
     display: flex;
     align-items: center;
     padding: 0.6em 0;
+
+    &-actions {
+      flex: 1;
+    }
   }
 
   &-checkbox-wrapper {

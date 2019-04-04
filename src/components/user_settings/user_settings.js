@@ -10,29 +10,24 @@ import ScopeSelector from '../scope_selector/scope_selector.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 import BlockCard from '../block_card/block_card.vue'
 import MuteCard from '../mute_card/mute_card.vue'
+import List from '../list/list.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
 import Autosuggest from '../autosuggest/autosuggest.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import withList from '../../hocs/with_list/with_list'
 import userSearchApi from '../../services/new_api/user_search.js'
 
-const BlockList = compose(
-  withSubscription({
-    fetch: (props, $store) => $store.dispatch('fetchBlocks'),
-    select: (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
-    childPropName: 'entries'
-  }),
-  withList({ getEntryProps: userId => ({ userId }) })
-)(BlockCard)
+const BlockList = withSubscription({
+  fetch: (props, $store) => $store.dispatch('fetchBlocks'),
+  select: (props, $store) => get($store.state.users.currentUser, 'blockIds', []),
+  childPropName: 'items'
+})(List)
 
-const MuteList = compose(
-  withSubscription({
-    fetch: (props, $store) => $store.dispatch('fetchMutes'),
-    select: (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
-    childPropName: 'entries'
-  }),
-  withList({ getEntryProps: userId => ({ userId }) })
-)(MuteCard)
+const MuteList = withSubscription({
+  fetch: (props, $store) => $store.dispatch('fetchMutes'),
+  select: (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
+  childPropName: 'items'
+})(List)
 
 const UserSettings = {
   data () {

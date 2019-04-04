@@ -200,9 +200,12 @@
               <BlockCard slot-scope="row" :userId="row.item"/>
             </Autosuggest>
           </div>
-          <block-list :refresh="true">
+          <BlockList :refresh="true">
+            <template slot="item" scope="p">
+              <BlockCard :key="p.item" :userId="p.item" />
+            </template>
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
-          </block-list>
+          </BlockList>
         </div>
 
         <div :label="$t('settings.mutes_tab')">
@@ -211,9 +214,12 @@
               <MuteCard slot-scope="row" :userId="row.item"/>
             </Autosuggest>
           </div>
-          <mute-list :refresh="true">
+          <MuteList :refresh="true">
+            <template slot="item" scope="p">
+              <MuteCard :key="p.item" :userId="p.item" />
+            </template>
             <template slot="empty">{{$t('settings.no_mutes')}}</template>
-          </mute-list>
+          </MuteList>
         </div>
       </tab-switcher>
     </div>

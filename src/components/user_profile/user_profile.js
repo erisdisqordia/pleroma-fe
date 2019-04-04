@@ -4,30 +4,25 @@ import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
 import ModerationTools from '../moderation_tools/moderation_tools.vue'
+import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
 import withList from '../../hocs/with_list/with_list'
 
-const FollowerList = compose(
-  withLoadMore({
-    fetch: (props, $store) => $store.dispatch('fetchFollowers', props.userId),
-    select: (props, $store) => get($store.getters.findUser(props.userId), 'followerIds', []).map(id => $store.getters.findUser(id)),
-    destory: (props, $store) => $store.dispatch('clearFollowers', props.userId),
-    childPropName: 'entries',
-    additionalPropNames: ['userId']
-  }),
-  withList({ getEntryProps: user => ({ user }) })
-)(FollowCard)
+const FollowerList = withLoadMore({
+  fetch: (props, $store) => $store.dispatch('fetchFollowers', props.userId),
+  select: (props, $store) => get($store.getters.findUser(props.userId), 'followerIds', []).map(id => $store.getters.findUser(id)),
+  destory: (props, $store) => $store.dispatch('clearFollowers', props.userId),
+  childPropName: 'items',
+  additionalPropNames: ['userId']
+})(List)
 
-const FriendList = compose(
-  withLoadMore({
-    fetch: (props, $store) => $store.dispatch('fetchFriends', props.userId),
-    select: (props, $store) => get($store.getters.findUser(props.userId), 'friendIds', []).map(id => $store.getters.findUser(id)),
-    destory: (props, $store) => $store.dispatch('clearFriends', props.userId),
-    childPropName: 'entries',
-    additionalPropNames: ['userId']
-  }),
-  withList({ getEntryProps: user => ({ user }) })
-)(FollowCard)
+const FriendList = withLoadMore({
+  fetch: (props, $store) => $store.dispatch('fetchFriends', props.userId),
+  select: (props, $store) => get($store.getters.findUser(props.userId), 'friendIds', []).map(id => $store.getters.findUser(id)),
+  destory: (props, $store) => $store.dispatch('clearFriends', props.userId),
+  childPropName: 'items',
+  additionalPropNames: ['userId']
+})(List)
 
 const UserProfile = {
   data () {
@@ -134,7 +129,8 @@ const UserProfile = {
     Timeline,
     FollowerList,
     FriendList,
-    ModerationTools
+    ModerationTools,
+    FollowCard
   }
 }
 

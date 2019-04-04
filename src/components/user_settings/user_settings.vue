@@ -203,13 +203,13 @@
           <BlockList :refresh="true" :getKey="item => item">
             <template slot="header" slot-scope="p">
               <div class="bulk-actions-wrapper">
-                <ProgressButton class="btn btn-default" v-if="p.selected.length > 0">
+                <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => blockUsers(p.selected)">
                   {{ $t('user_card.block') }}
                   <template slot="progress">
                     {{ $t('user_card.block_progress') }}
                   </template>
                 </ProgressButton>
-                <ProgressButton class="btn btn-default" v-if="p.selected.length > 0">
+                <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => unblockUsers(p.selected)">
                   {{ $t('user_card.unblock') }}
                   <template slot="progress">
                     {{ $t('user_card.unblock_progress') }}

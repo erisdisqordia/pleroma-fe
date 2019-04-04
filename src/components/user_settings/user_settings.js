@@ -355,6 +355,12 @@ const UserSettings = {
           this.$store.dispatch('addNewUsers', users)
           return map(users, 'id')
         })
+    },
+    blockUsers (ids) {
+      return this.$store.dispatch('blockUsers', ids)
+    },
+    unblockUsers (ids) {
+      return this.$store.dispatch('unblockUsers', ids)
     }
   }
 }

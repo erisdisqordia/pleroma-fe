@@ -32,6 +32,22 @@ const getNotificationPermission = () => {
   return Promise.resolve(Notification.permission)
 }
 
+const blockUser = (store, userId) => {
+  return store.rootState.api.backendInteractor.blockUser(userId)
+    .then((relationship) => {
+      store.commit('updateUserRelationship', [relationship])
+      store.commit('addBlockId', userId)
+      store.commit('removeStatus', { timeline: 'friends', userId })
+      store.commit('removeStatus', { timeline: 'public', userId })
+      store.commit('removeStatus', { timeline: 'publicAndExternal', userId })
+    })
+}
+
+const unblockUser = (store, userId) => {
+  return store.rootState.api.backendInteractor.unblockUser(userId)
+    .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+}
+
 export const mutations = {
   setMuted (state, { user: { id }, muted }) {
     const user = state.usersObject[id]
@@ -207,18 +223,16 @@ const users = {
         })
     },
     blockUser (store, userId) {
-      return store.rootState.api.backendInteractor.blockUser(userId)
-        .then((relationship) => {
-          store.commit('updateUserRelationship', [relationship])
-          store.commit('addBlockId', userId)
-          store.commit('removeStatus', { timeline: 'friends', userId })
-          store.commit('removeStatus', { timeline: 'public', userId })
-          store.commit('removeStatus', { timeline: 'publicAndExternal', userId })
-        })
+      return blockUser(store, userId)
     },
-    unblockUser (store, id) {
-      return store.rootState.api.backendInteractor.unblockUser(id)
-        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+    unblockUser (store, userId) {
+      return unblockUser(store, userId)
+    },
+    blockUsers (store, userIds = []) {
+      return Promise.all(userIds.map(userId => blockUser(store, userId)))
+    },
+    unblockUsers (store, userIds = []) {
+      return Promise.all(userIds.map(userId => unblockUser(store, userId)))
     },
     fetchMutes (store) {
       return store.rootState.api.backendInteractor.fetchMutes()

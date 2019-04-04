@@ -200,9 +200,9 @@
               <BlockCard slot-scope="row" :userId="row.item"/>
             </Autosuggest>
           </div>
-          <BlockList :refresh="true" :getKey="item => item">
+          <BlockList :refresh="true" :getKey="item => item" class="profile-edit-user-list">
             <template slot="header" slot-scope="p">
-              <div class="bulk-actions-wrapper">
+              <div class="profile-edit-bulk-actions">
                 <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => blockUsers(p.selected)">
                   {{ $t('user_card.block') }}
                   <template slot="progress">{{ $t('user_card.block_progress') }}</template>
@@ -224,9 +224,9 @@
               <MuteCard slot-scope="row" :userId="row.item"/>
             </Autosuggest>
           </div>
-          <MuteList :refresh="true" :getKey="item => item">
+          <MuteList :refresh="true" :getKey="item => item" class="profile-edit-user-list">
             <template slot="header" slot-scope="p">
-              <div class="bulk-actions-wrapper">
+              <div class="profile-edit-bulk-actions">
                 <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => muteUsers(p.selected)">
                   {{ $t('user_card.mute') }}
                   <template slot="progress">{{ $t('user_card.mute_progress') }}</template>
@@ -303,7 +303,11 @@
     padding: 1em;
   }
 
-  .bulk-actions-wrapper {
+  &-user-list {
+    margin-top: 1.5em;
+  }
+
+  &-bulk-actions {
     text-align: right;
     padding: 0 1em;
     min-height: 28px;

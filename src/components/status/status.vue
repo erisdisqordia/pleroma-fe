@@ -52,10 +52,10 @@
                 <a :href="status.external_url" target="_blank" v-if="!status.is_local && !isPreview" class="source_url" title="Source">
                   <i class="button-icon icon-link-ext-alt"></i>
                 </a>
-                <div class="button-icon button-action-icon" v-if="!status.pinned" @click.prevent="pinStatus" title="Pin">
+                <div class="button-icon button-action-icon" v-if="!status.pinned && ownStatus" @click.prevent="pinStatus" title="Pin">
                   <i class="fa icon-pin"></i>
                 </div>
-                <div class="button-icon button-action-icon" v-else @click.prevent="unpinStatus" title="Unpin">
+                <div class="button-icon button-action-icon" v-if="status.pinned && ownStatus" @click.prevent="unpinStatus" title="Unpin">
                   <i class="fa icon-cancel"></i>
                 </div>
                 <div class="button-icon button-action-icon" v-if="expandable && !isPreview" @click.prevent="toggleExpanded" title="Expand">

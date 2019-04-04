@@ -269,6 +269,9 @@ const Status = {
         this.statusFromGlobalRepository.rebloggedBy
       )
       return uniqBy(combinedUsers, 'id')
+    },
+    ownStatus () {
+      return this.status.user.id === this.$store.state.users.currentUser.id
     }
   },
   components: {

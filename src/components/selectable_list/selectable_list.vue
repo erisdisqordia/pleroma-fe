@@ -1,7 +1,7 @@
 <template>
   <div class="selectable-list">
     <div v-for="item in items">
-      <Checkbox v-model="checked" />
+      <Checkbox :checked="isChecked(item)" @change="checked => toggle(checked, item)" />
       <slot name="item" :item="item" />
     </div>
     <div class="selectable-list-empty-content faint" v-if="items.length === 0">

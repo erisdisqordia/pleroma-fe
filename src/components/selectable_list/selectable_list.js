@@ -1,6 +1,6 @@
 import Checkbox from '../checkbox/checkbox.js'
 
-const SelectableRow = {
+const SelectableList = {
   components: {
     Checkbox
   },
@@ -13,4 +13,4 @@ const SelectableRow = {
   }
 }
 
-export default SelectableRow
+export default SelectableList

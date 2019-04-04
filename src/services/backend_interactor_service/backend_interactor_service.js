@@ -43,6 +43,14 @@ const backendInteractorService = (credentials) => {
     return apiService.unfollowUser({credentials, id})
   }
 
+  const pinOwnStatus = (id) => {
+    return apiService.pinOwnStatus({credentials, id})
+  }
+
+  const unpinOwnStatus = (id) => {
+    return apiService.unpinOwnStatus({ credentials, id })
+  }
+
   const blockUser = (id) => {
     return apiService.blockUser({credentials, id})
   }
@@ -130,6 +138,8 @@ const backendInteractorService = (credentials) => {
     fetchFollowers,
     followUser,
     unfollowUser,
+    pinOwnStatus,
+    unpinOwnStatus,
     blockUser,
     unblockUser,
     fetchUser,

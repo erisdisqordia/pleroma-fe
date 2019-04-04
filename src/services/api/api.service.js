@@ -51,6 +51,8 @@ const MASTODON_STATUS_FAVORITEDBY_URL = id => `/api/v1/statuses/${id}/favourited
 const MASTODON_STATUS_REBLOGGEDBY_URL = id => `/api/v1/statuses/${id}/reblogged_by`
 const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
 const MASTODON_REPORT_USER_URL = '/api/v1/reports'
+const MASTODON_PIN_OWN_STATUS = id => `/api/v1/statuses/${id}/pin`
+const MASTODON_UNPIN_OWN_STATUS = id => `/api/v1/statuses/${id}/unpin`
 
 import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
@@ -204,6 +206,22 @@ const followUser = ({id, credentials}) => {
 
 const unfollowUser = ({id, credentials}) => {
   let url = MASTODON_UNFOLLOW_URL(id)
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => data.json())
+}
+
+const pinOwnStatus = ({ id, credentials }) => {
+  let url = MASTODON_PIN_OWN_STATUS(id)
+  return fetch(url, {
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => data.json())
+}
+
+const unpinOwnStatus = ({ id, credentials }) => {
+  let url = MASTODON_UNPIN_OWN_STATUS(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -715,6 +733,8 @@ const apiService = {
   fetchFollowers,
   followUser,
   unfollowUser,
+  pinOwnStatus,
+  unpinOwnStatus,
   blockUser,
   unblockUser,
   fetchUser,

@@ -6,16 +6,7 @@ const SelectableList = {
     List,
     Checkbox
   },
-  props: {
-    items: {
-      type: Array,
-      default: () => []
-    },
-    getKey: {
-      type: Function,
-      default: item => item
-    }
-  },
+  props: List.props,
   data () {
     return {
       selected: []

@@ -200,9 +200,9 @@
               <BlockCard slot-scope="row" :userId="row.item"/>
             </Autosuggest>
           </div>
-          <BlockList :refresh="true">
+          <BlockList :refresh="true" :getKey="item => item">
             <template slot="item" scope="p">
-              <BlockCard :key="p.item" :userId="p.item" />
+              <BlockCard :userId="p.item" />
             </template>
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
           </BlockList>
@@ -214,9 +214,9 @@
               <MuteCard slot-scope="row" :userId="row.item"/>
             </Autosuggest>
           </div>
-          <MuteList :refresh="true">
+          <MuteList :refresh="true" :getKey="item => item">
             <template slot="item" scope="p">
-              <MuteCard :key="p.item" :userId="p.item" />
+              <MuteCard :userId="p.item" />
             </template>
             <template slot="empty">{{$t('settings.no_mutes')}}</template>
           </MuteList>

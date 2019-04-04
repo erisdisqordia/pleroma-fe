@@ -18,7 +18,7 @@ export default {
     },
     getKey: {
       type: Function,
-      default: item => item
+      default: item => item.id
     }
   }
 }

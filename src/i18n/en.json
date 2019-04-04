@@ -112,6 +112,9 @@
       "password_confirmation_match": "should be the same as password"
     }
   },
+  "selectable_list": {
+    "select_all": "Select all"
+  },
   "settings": {
     "app_name": "App name",
     "attachmentRadius": "Attachments",

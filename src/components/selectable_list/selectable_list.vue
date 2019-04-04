@@ -20,6 +20,9 @@
 .selectable-list {
   &-item {
     display: flex;
+    border-bottom: 1px solid;
+    border-bottom-color: $fallback--border;
+    border-bottom-color: var(--border, $fallback--border);
 
     &-selected {
       background-color: $fallback--lightBg;

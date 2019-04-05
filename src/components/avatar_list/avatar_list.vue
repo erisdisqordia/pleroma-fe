@@ -17,10 +17,15 @@
   padding: 0;
 
   &-item {
-    height: 25px;
-    width: 25px;
-    margin: 0 2px 0 0;
-    padding: 0;
+    height: 24px;
+    width: 24px;
+    margin: 0 5px 0 0;
+    padding: 11px 0;
+
+    &:first-child {
+      border-left: 1px solid var(--faint, $fallback--faint);
+      padding-left: 12px !important;
+    }
 
     &:last-child {
       margin-right: 0;
@@ -29,8 +34,8 @@
     .avatars-img {
       border-radius: $fallback--avatarAltRadius;
       border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
-      height: 25px !important;
-      width: 25px !important;
+      height: 24px !important;
+      width: 24px !important;
       background-color: $fallback--lightText;
       background-color: var(--lightText, $fallback--lightText);
     }

@@ -134,10 +134,17 @@
           </div>
 
           <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0" :class="{ 'status-fadein': combinedFavsAndRepeatsAvatars.length > 0 }">
-            <div class="favs-repeated-title">
-              <span>{{ statusoid.favoritedBy.length ? `${$t('user_card.favorites')} ${statusoid.favoritedBy.length}` : '' }} {{ statusoid.rebloggedBy.length ? `${$t('settings.notification_visibility_repeats')} ${statusoid.rebloggedBy.length}` : '' }}</span>
-            </div>
-            <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>
+            <ul class="stats">
+              <li class="stat-count" v-if="statusoid.favoritedBy && statusoid.favoritedBy.length > 0">
+                <a class="request-favorited-popup"><strong>{{statusoid.favoritedBy.length}}</strong> {{ $t('user_card.favorites') }}</a>
+              </li>
+              <li class="stat-count" v-if="statusoid.rebloggedBy && statusoid.rebloggedBy.length > 0">
+                <a class="request-favorited-popup"><strong>{{statusoid.rebloggedBy.length}}</strong> {{ $t('settings.notification_visibility_repeats') }}</a>
+              </li>
+              <li class="avatar-row">
+                <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>
+              </li>
+            </ul>
           </div>
 
           <div v-if="!noHeading && !isPreview" class='status-actions media-body'>
@@ -622,10 +629,43 @@ a.unmute {
 .favs-repeated-users {
   margin-top: 10px;
 
-  .favs-repeated-title {
-    margin-bottom: 8px;
-    & > span {
-      border-bottom: 1px solid var(--text, $fallback--lightText);
+  .stats {
+    border-bottom: 1px solid var(--faint, $fallback--faint);
+    border-top: 1px solid var(--faint, $fallback--faint);
+    width: 100%;
+    margin: 0;
+    list-style: none;
+    overflow: hidden;
+    padding: 0;
+    display: flex;
+
+    .stat-count {
+      margin-right: 10px;
+
+      a {
+        cursor: pointer;
+        padding-top: 14px;
+        float: left;
+        color: var(--faint, $fallback--faint);
+
+        strong {
+          color: var(--text, $fallback--text);
+        }
+
+        &:hover,
+        &:focus {
+          border-bottom: 1px solid var(--faint, $fallback--faint);
+        }
+      }
+    }
+
+    .avatar-row {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    li {
+      display: block;
     }
   }
 }

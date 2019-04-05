@@ -365,11 +365,22 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
   })
 }
 
-const removeStatus = (state, { timeline, userId }) => {
+const removeStatus = (state, { timeline, userId, statusId }) => {
   const timelineObject = state.timelines[timeline]
+  let removed = false
   if (userId) {
     remove(timelineObject.statuses, { user: { id: userId } })
     remove(timelineObject.visibleStatuses, { user: { id: userId } })
+    removed = true
+  } else if (statusId) {
+    remove(timelineObject.statuses, { id: statusId })
+    remove(timelineObject.visibleStatuses, { id: statusId })
+    removed = true
+    delete timelineObject.statusesObject[statusId]
+    delete timelineObject.visibleStatusesObject[statusId]
+  }
+
+  if (removed) {
     timelineObject.minVisibleId = timelineObject.visibleStatuses.length > 0 ? last(timelineObject.visibleStatuses).id : 0
     timelineObject.maxId = timelineObject.statuses.length > 0 ? first(timelineObject.statuses).id : 0
   }
@@ -540,6 +551,9 @@ const statuses = {
     },
     updatePinned ({ rootState, commit }, status) {
       commit('setPinned', { status })
+      if (!status.pinned) {
+        commit('removeStatus', { timeline: 'pinned', statusId: status.id })
+      }
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...

@@ -5,6 +5,7 @@ const defaultState = {
   // Stuff from static/config.json and apiConfig
   name: 'Pleroma FE',
   registrationOpen: true,
+  safeDM: true,
   textlimit: 5000,
   server: 'http://localhost:4040/',
   theme: 'pleroma-dark',

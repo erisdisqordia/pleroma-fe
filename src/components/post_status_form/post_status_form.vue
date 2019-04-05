@@ -3,13 +3,16 @@
   <form @submit.prevent="postStatus(newStatus)">
     <div class="form-group" >
       <i18n
-        v-if="!this.$store.state.users.currentUser.locked && this.newStatus.visibility == 'private'"
+        v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
         path="post_status.account_not_locked_warning"
         tag="p"
         class="visibility-notice">
         <router-link :to="{ name: 'user-settings' }">{{ $t('post_status.account_not_locked_warning_link') }}</router-link>
       </i18n>
-      <p v-if="this.newStatus.visibility == 'direct'" class="visibility-notice">{{ $t('post_status.direct_warning') }}</p>
+      <p v-if="newStatus.visibility === 'direct'" class="visibility-notice">
+        <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
+        <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
+      </p>
       <EmojiInput
         v-if="newStatus.spoilerText || alwaysShowSubject"
         type="text"

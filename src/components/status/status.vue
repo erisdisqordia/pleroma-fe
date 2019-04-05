@@ -625,7 +625,7 @@ a.unmute {
   .favs-repeated-title {
     margin-bottom: 8px;
     & > span {
-      border-bottom: 1px solid var(--text);
+      border-bottom: 1px solid var(--text, $fallback--lightText);
     }
   }
 }

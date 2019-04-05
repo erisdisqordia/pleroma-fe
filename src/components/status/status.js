@@ -12,7 +12,7 @@ import generateProfileLink from 'src/services/user_profile_link_generator/user_p
 import fileType from 'src/services/file_type/file_type.service'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import { mentionMatchesUrl, extractTagFromUrl } from 'src/services/matcher/matcher.service.js'
-import { filter, find, unescape } from 'lodash'
+import { filter, find, unescape, uniqBy } from 'lodash'
 
 const Status = {
   name: 'Status',
@@ -260,10 +260,11 @@ const Status = {
       return this.status.summary_html + '<br />' + this.status.statusnet_html
     },
     combinedFavsAndRepeatsAvatars () {
-      return [].concat(
+      const combinedAvatars = [].concat(
         this.statusoid.favoritedBy ? this.statusoid.favoritedBy : [],
         this.statusoid.rebloggedBy ? this.statusoid.rebloggedBy : []
       )
+      return uniqBy(combinedAvatars, 'id')
     }
   },
   components: {

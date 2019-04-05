@@ -20,10 +20,8 @@
     height: 24px;
     width: 24px;
     margin: 0 5px 0 0;
-    padding: 11px 0;
 
     &:first-child {
-      border-left: 1px solid var(--faint, $fallback--faint);
       padding-left: 12px !important;
     }
 

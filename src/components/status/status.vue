@@ -135,11 +135,13 @@
 
           <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0" :class="{ 'status-fadein': combinedFavsAndRepeatsAvatars.length > 0 }">
             <ul class="stats">
-              <li class="stat-count" v-if="statusoid.favoritedBy && statusoid.favoritedBy.length > 0">
-                <a class="request-favorited-popup"><strong>{{statusoid.favoritedBy.length}}</strong> {{ $t('user_card.favorites') }}</a>
-              </li>
               <li class="stat-count" v-if="statusoid.rebloggedBy && statusoid.rebloggedBy.length > 0">
-                <a class="request-favorited-popup"><strong>{{statusoid.rebloggedBy.length}}</strong> {{ $t('settings.notification_visibility_repeats') }}</a>
+                <div class="stat-title">{{ $t('settings.notification_visibility_repeats') }}</div>
+                <div class="stat-number">{{ statusoid.rebloggedBy.length }}</div>
+              </li>
+              <li class="stat-count" v-if="statusoid.favoritedBy && statusoid.favoritedBy.length > 0">
+                <div class="stat-title">{{ $t('user_card.favorites') }}</div>
+                <div class="stat-number">{{ statusoid.favoritedBy.length }}</div>
               </li>
               <li class="avatar-row">
                 <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>
@@ -627,25 +629,52 @@ a.unmute {
 }
 
 .favs-repeated-users {
-  margin-top: 10px;
+  margin-top: 0.75em;
 
   .stats {
-    border-bottom: 1px solid var(--faint, $fallback--faint);
-    border-top: 1px solid var(--faint, $fallback--faint);
     width: 100%;
     margin: 0;
     list-style: none;
     overflow: hidden;
     padding: 0;
     display: flex;
+    line-height: 1em;
 
     .stat-count {
       margin-right: 10px;
 
+      .stat-title {
+        color: var(--faint, rgba(185, 185, 186, 0.5));
+        font-weight: lighter;
+        font-size: 12px;
+        text-transform: uppercase;
+        position: relative;
+        margin-bottom: 3px;
+        cursor: pointer;
+        line-height: 1em;
+
+        &:hover,
+        &:focus {
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 100%;
+            width: 100%;
+            height: 1px;
+            background-color: var(--faint, $fallback--faint);
+          }
+        }
+      }
+
+      .stat-number {
+        font-weight: bolder;
+        font-size: 16px;
+        line-height: 1em;
+      }
+
       a {
         cursor: pointer;
-        padding-top: 14px;
-        float: left;
         color: var(--faint, $fallback--faint);
 
         strong {
@@ -662,10 +691,22 @@ a.unmute {
     .avatar-row {
       flex: 1;
       overflow: hidden;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 1px;
+        left: 0;
+        background-color: var(--faint, $fallback--faint);
+      }
     }
 
     li {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
   }
 }

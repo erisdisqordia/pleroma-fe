@@ -135,7 +135,7 @@
 
           <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0" :class="{ 'status-fadein': combinedFavsAndRepeatsAvatars.length > 0 }">
             <div class="favs-repeated-title">
-              <span>Favorites {{statusoid.favoritedBy.length}} Repeats {{statusoid.rebloggedBy.length}}</span>
+              <span>{{ $t('user_card.favorites') }} {{statusoid.favoritedBy.length}} {{ $t('settings.notification_visibility_repeats') }} {{statusoid.rebloggedBy.length}}</span>
             </div>
             <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>
           </div>
@@ -623,7 +623,7 @@ a.unmute {
   margin-top: 10px;
 
   .favs-repeated-title {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     & > span {
       border-bottom: 1px solid var(--text);
     }

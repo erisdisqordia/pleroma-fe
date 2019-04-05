@@ -14,14 +14,12 @@
   display: inline-flex; /* Causes LI items to display in row. */
   list-style-type: none;
   margin: 0;
-  padding: 0px 15px 0px 0px;
-  flex-direction: row-reverse;
 
   &-item {
     height: 25px;
+    width: 25px;
     margin: 0;
     padding: 0;
-    width: 15px;
 
     .avatars-img {
       border-radius: $fallback--avatarAltRadius;

@@ -6,7 +6,8 @@ const EmojiSelector = {
   data () {
     return {
       open: false,
-      keyword: ''
+      keyword: '',
+      activeGroup: 'standard'
     }
   },
   methods: {
@@ -17,6 +18,20 @@ const EmojiSelector = {
       const value = emoji.image_url ? `:${emoji.shortcode}:` : emoji.utf
       this.$emit('emoji', ` ${value} `)
       this.open = false
+    },
+    highlight (key) {
+      const ref = this.$refs['group-' + key]
+      const top = ref[0].offsetTop
+      this.$refs['emoji-groups'].scrollTop = top + 1
+      this.activeGroup = key
+    },
+    scrolledGroup (e) {
+      const top = e.target.scrollTop
+      Object.keys(this.emojis).forEach(key => {
+        if (this.$refs['group-' + key][0].offsetTop < top) {
+          this.activeGroup = key
+        }
+      })
     }
   },
   computed: {

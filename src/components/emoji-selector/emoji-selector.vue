@@ -5,7 +5,7 @@
     </span>
     <div class="emoji-dropdown-menu panel panel-default" v-if="open">
       <div class="panel-heading emoji-tabs">
-        <span class="emoji-tabs-item" v-for="(value, key) in emojis" :key="key" :title="value.text">
+        <span class="emoji-tabs-item" :class="{'active': activeGroup === key}" v-for="(value, key) in emojis" :key="key" :title="value.text" @click.prevent="highlight(key)">
           <i :class="value.icon"></i>
         </span>
       </div>
@@ -13,9 +13,9 @@
         <div class="emoji-search">
           <input type="text" class="form-control" v-model="keyword" />
         </div>
-        <div class="emoji-groups">
+        <div class="emoji-groups" ref="emoji-groups" @scroll="scrolledGroup">
           <div v-for="(value, key) in emojis" :key="key" class="emoji-group">
-            <h6 class="emoji-group-title">{{value.text}}</h6>
+            <h6 class="emoji-group-title" :ref="'group-' + key">{{value.text}}</h6>
             <span
               v-for="emoji in value.emojis"
               :key="key + emoji.shortcode"
@@ -78,7 +78,7 @@
     &-item {
       padding: 0 5px;
 
-      &:first-child, &.active {
+      &.active {
         border-bottom: 4px solid;
 
         i {
@@ -96,6 +96,7 @@
   &-groups {
     flex: 1 1 1px;
     overflow: auto;
+    position: relative;
   }
 
   &-group {

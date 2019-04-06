@@ -136,11 +136,11 @@
           <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0" :class="{ 'status-fadein': combinedFavsAndRepeatsAvatars.length > 0 }">
             <ul class="stats">
               <li class="stat-count" v-if="statusoid.rebloggedBy && statusoid.rebloggedBy.length > 0">
-                <div class="stat-title">{{ $t('settings.notification_visibility_repeats') }}</div>
+                <a class="stat-title">{{ $t('settings.notification_visibility_repeats') }}</a>
                 <div class="stat-number">{{ statusoid.rebloggedBy.length }}</div>
               </li>
               <li class="stat-count" v-if="statusoid.favoritedBy && statusoid.favoritedBy.length > 0">
-                <div class="stat-title">{{ $t('user_card.favorites') }}</div>
+                <a class="stat-title">{{ $t('user_card.favorites') }}</a>
                 <div class="stat-number">{{ statusoid.favoritedBy.length }}</div>
               </li>
               <li class="avatar-row">
@@ -654,15 +654,7 @@ a.unmute {
 
         &:hover,
         &:focus {
-          &::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 100%;
-            width: 100%;
-            height: 1px;
-            background-color: var(--faint, $fallback--faint);
-          }
+          text-decoration: underline;
         }
       }
 
@@ -672,19 +664,14 @@ a.unmute {
         line-height: 1em;
       }
 
-      a {
+      /* a {
         cursor: pointer;
         color: var(--faint, $fallback--faint);
 
         strong {
           color: var(--text, $fallback--text);
         }
-
-        &:hover,
-        &:focus {
-          border-bottom: 1px solid var(--faint, $fallback--faint);
-        }
-      }
+      } */
     }
 
     .avatar-row {

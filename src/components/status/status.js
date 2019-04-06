@@ -260,10 +260,7 @@ const Status = {
       return this.status.summary_html + '<br />' + this.status.statusnet_html
     },
     combinedFavsAndRepeatsAvatars () {
-      const combinedAvatars = [].concat(
-        this.statusoid.favoritedBy ? this.statusoid.favoritedBy : [],
-        this.statusoid.rebloggedBy ? this.statusoid.rebloggedBy : []
-      )
+      const combinedAvatars = [].concat(this.statusoid.favoritedBy, this.statusoid.rebloggedBy).filter(_ => _)
       return uniqBy(combinedAvatars, 'id')
     }
   },

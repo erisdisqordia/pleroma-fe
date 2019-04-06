@@ -133,21 +133,23 @@
             <link-preview :card="status.card" :size="attachmentSize" :nsfw="nsfwClickthrough" />
           </div>
 
-          <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0">
-            <ul class="stats">
-              <li class="stat-count" v-if="statusoid.rebloggedBy && statusoid.rebloggedBy.length > 0">
-                <a class="stat-title">{{ $t('settings.notification_visibility_repeats') }}</a>
-                <div class="stat-number">{{ statusoid.rebloggedBy.length }}</div>
-              </li>
-              <li class="stat-count" v-if="statusoid.favoritedBy && statusoid.favoritedBy.length > 0">
-                <a class="stat-title">{{ $t('user_card.favorites') }}</a>
-                <div class="stat-number">{{ statusoid.favoritedBy.length }}</div>
-              </li>
-              <li class="avatar-row">
-                <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>
-              </li>
-            </ul>
-          </div>
+          <transition name="fade">
+            <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0">
+              <ul class="stats">
+                <li class="stat-count" v-if="statusoid.rebloggedBy && statusoid.rebloggedBy.length > 0">
+                  <a class="stat-title">{{ $t('settings.notification_visibility_repeats') }}</a>
+                  <div class="stat-number">{{ statusoid.rebloggedBy.length }}</div>
+                </li>
+                <li class="stat-count" v-if="statusoid.favoritedBy && statusoid.favoritedBy.length > 0">
+                  <a class="stat-title">{{ $t('user_card.favorites') }}</a>
+                  <div class="stat-number">{{ statusoid.favoritedBy.length }}</div>
+                </li>
+                <li class="avatar-row">
+                  <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>
+                </li>
+              </ul>
+            </div>
+          </transition>
 
           <div v-if="!noHeading && !isPreview" class='status-actions media-body'>
             <div v-if="loggedIn">

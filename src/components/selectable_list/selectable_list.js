@@ -24,6 +24,12 @@ const SelectableList = {
   computed: {
     allSelected () {
       return !this.items.find(item => !this.isSelected(item))
+    },
+    noneSelected () {
+      return !this.items.find(item => this.isSelected(item))
+    },
+    someSelected () {
+      return !this.allSelected && !this.noneSelected
     }
   },
   methods: {

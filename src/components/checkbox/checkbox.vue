@@ -1,6 +1,6 @@
 <template>
   <label class="checkbox">
-    <input type="checkbox" :checked="checked" @change="$emit('change', $event.target.checked)">
+    <input type="checkbox" :checked="checked" @change="$emit('change', $event.target.checked)" :indeterminate.prop="indeterminate">
     <i class="checkbox-indicator" />
     <span v-if="!!$slots.default"><slot></slot></span>
   </label>
@@ -12,7 +12,7 @@ export default {
     prop: 'checked',
     event: 'change'
   },
-  props: ['checked']
+  props: ['checked', 'indeterminate']
 }
 </script>
 
@@ -53,6 +53,12 @@ export default {
     display: none;
 
     &:checked + .checkbox-indicator::before {
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
+
+    &:indeterminate + .checkbox-indicator::before {
+      content: '–';
       color: $fallback--text;
       color: var(--text, $fallback--text);
     }

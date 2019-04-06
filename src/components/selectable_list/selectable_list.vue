@@ -2,7 +2,7 @@
   <div class="selectable-list">
     <div class="selectable-list-header" v-if="items.length > 0">
       <div class="selectable-list-checkbox-wrapper">
-        <Checkbox :checked="allSelected" @change="toggleAll">{{ $t('selectable_list.select_all') }}</Checkbox>
+        <Checkbox :checked="allSelected" @change="toggleAll" :indeterminate="someSelected">{{ $t('selectable_list.select_all') }}</Checkbox>
       </div>
       <div class="selectable-list-header-actions">
         <slot name="header" :selected="selected" />

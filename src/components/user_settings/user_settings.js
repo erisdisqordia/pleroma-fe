@@ -367,6 +367,9 @@ const UserSettings = {
     },
     unmuteUsers (ids) {
       return this.$store.dispatch('unmuteUsers', ids)
+    },
+    identity (value) {
+      return value
     }
   }
 }

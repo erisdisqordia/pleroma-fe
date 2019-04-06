@@ -22,11 +22,17 @@ const SelectableList = {
     }
   },
   computed: {
+    allKeys () {
+      return this.items.map(this.getKey)
+    },
+    filteredSelected () {
+      return this.allKeys.filter(key => this.selected.indexOf(key) !== -1)
+    },
     allSelected () {
-      return !this.items.find(item => !this.isSelected(item))
+      return this.filteredSelected.length === this.items.length
     },
     noneSelected () {
-      return !this.items.find(item => this.isSelected(item))
+      return this.filteredSelected.length === 0
     },
     someSelected () {
       return !this.allSelected && !this.noneSelected
@@ -34,7 +40,7 @@ const SelectableList = {
   },
   methods: {
     isSelected (item) {
-      return this.selected.indexOf(this.getKey(item)) !== -1
+      return this.filteredSelected.indexOf(this.getKey(item)) !== -1
     },
     toggle (checked, item) {
       const key = this.getKey(item)
@@ -49,7 +55,7 @@ const SelectableList = {
     },
     toggleAll (value) {
       if (value) {
-        this.selected = this.items.map(this.getKey)
+        this.selected = this.allKeys.slice(0)
       } else {
         this.selected = []
       }

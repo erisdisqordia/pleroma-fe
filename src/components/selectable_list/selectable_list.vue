@@ -5,7 +5,7 @@
         <Checkbox :checked="allSelected" @change="toggleAll" :indeterminate="someSelected">{{ $t('selectable_list.select_all') }}</Checkbox>
       </div>
       <div class="selectable-list-header-actions">
-        <slot name="header" :selected="selected" />
+        <slot name="header" :selected="filteredSelected" />
       </div>
     </div>
     <List :items="items" :getKey="getKey">

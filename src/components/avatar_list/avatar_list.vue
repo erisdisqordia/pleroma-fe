@@ -22,7 +22,7 @@
     margin: 0 5px 0 0;
 
     &:first-child {
-      padding-left: 12px !important;
+      padding-left: 12px;
     }
 
     &:last-child {

@@ -1,6 +1,6 @@
 
 import Status from '../status/status.vue'
-import Checkbox from '../checkbox/checkbox.js'
+import Checkbox from '../checkbox/checkbox.vue'
 
 const UserReportingModal = {
   components: {

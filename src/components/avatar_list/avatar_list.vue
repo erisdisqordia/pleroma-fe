@@ -16,7 +16,7 @@
   margin: 0;
   padding: 0;
 
-  &-item {
+  li.avatars-item {
     height: 24px;
     width: 24px;
     margin: 0 5px 0 0;
@@ -32,8 +32,8 @@
     .avatars-img {
       border-radius: $fallback--avatarAltRadius;
       border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
-      height: 24px !important;
-      width: 24px !important;
+      height: 24px;
+      width: 24px;
       background-color: $fallback--lightText;
       background-color: var(--lightText, $fallback--lightText);
     }

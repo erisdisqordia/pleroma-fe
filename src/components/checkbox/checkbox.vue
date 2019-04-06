@@ -2,7 +2,7 @@
   <label class="checkbox">
     <input type="checkbox" :checked="checked" @change="$emit('change', $event.target.checked)">
     <i class="checkbox-indicator" />
-    <span><slot></slot></span>
+    <span v-if="!!$slots.default"><slot></slot></span>
   </label>
 </template>
 

@@ -133,7 +133,7 @@
             <link-preview :card="status.card" :size="attachmentSize" :nsfw="nsfwClickthrough" />
           </div>
 
-          <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0" :class="{ 'status-fadein': combinedFavsAndRepeatsAvatars.length > 0 }">
+          <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0">
             <ul class="stats">
               <li class="stat-count" v-if="statusoid.rebloggedBy && statusoid.rebloggedBy.length > 0">
                 <a class="stat-title">{{ $t('settings.notification_visibility_repeats') }}</a>
@@ -527,20 +527,6 @@ $status-margin: 0.75em;
         white-space: nowrap;
       }
     }
-  }
-}
-
-.status-fadein {
-  animation-duration: 0.4s;
-  animation-name: fadein;
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 

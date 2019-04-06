@@ -1,6 +1,6 @@
 <template>
   <label class="checkbox">
-    <input type="checkbox" :checked="value" @change="$emit('input', $event.target.checked)">
+    <input type="checkbox" :checked="checked" @change="$emit('change', $event.target.checked)">
     <i class="checkbox-indicator" />
     <span><slot></slot></span>
   </label>
@@ -8,7 +8,11 @@
 
 <script>
 export default {
-  props: ['value']
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
+  props: ['checked']
 }
 </script>
 

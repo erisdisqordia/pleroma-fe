@@ -645,7 +645,6 @@ a.unmute {
 
       .stat-title {
         color: var(--faint, $fallback--faint);
-        font-weight: lighter;
         font-size: 12px;
         text-transform: uppercase;
         position: relative;

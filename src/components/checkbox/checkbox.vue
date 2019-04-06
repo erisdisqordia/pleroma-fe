@@ -1,5 +1,18 @@
-@import '../../_variables.scss';
+<template>
+  <label class="checkbox">
+    <input type="checkbox" :checked="value" @change="$emit('input', $event.target.checked)">
+    <i class="checkbox-indicator" />
+    <span><slot></slot></span>
+  </label>
+</template>
 
+<script>
+export default {
+  props: ['value']
+}
+</script>
+
+<style lang="scss">
 .checkbox {
   position: relative;
   display: inline-block;
@@ -47,3 +60,4 @@
     margin-left: .5em;
   }
 }
+</style>

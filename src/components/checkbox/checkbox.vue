@@ -13,6 +13,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../_variables.scss';
+
 .checkbox {
   position: relative;
   display: inline-block;

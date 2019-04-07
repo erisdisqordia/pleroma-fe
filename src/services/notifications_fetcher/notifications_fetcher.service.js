@@ -1,12 +1,12 @@
 import apiService from '../api/api.service.js'
 
-const update = ({store, notifications, older}) => {
+const update = ({ store, notifications, older }) => {
   store.dispatch('setNotificationsError', { value: false })
 
   store.dispatch('addNewNotifications', { notifications, older })
 }
 
-const fetchAndUpdate = ({store, credentials, older = false}) => {
+const fetchAndUpdate = ({ store, credentials, older = false }) => {
   const args = { credentials }
   const rootState = store.rootState || store.state
   const timelineData = rootState.statuses.notifications
@@ -33,13 +33,13 @@ const fetchAndUpdate = ({store, credentials, older = false}) => {
 
   return apiService.fetchTimeline(args)
     .then((notifications) => {
-      update({store, notifications, older})
+      update({ store, notifications, older })
       return notifications
     }, () => store.dispatch('setNotificationsError', { value: true }))
     .catch(() => store.dispatch('setNotificationsError', { value: true }))
 }
 
-const startFetching = ({credentials, store}) => {
+const startFetching = ({ credentials, store }) => {
   fetchAndUpdate({ credentials, store })
   const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store })
   // Initially there's set flag to silence all desktop notifications so

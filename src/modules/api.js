@@ -13,10 +13,10 @@ const api = {
     setBackendInteractor (state, backendInteractor) {
       state.backendInteractor = backendInteractor
     },
-    addFetcher (state, {timeline, fetcher}) {
+    addFetcher (state, { timeline, fetcher }) {
       state.fetchers[timeline] = fetcher
     },
-    removeFetcher (state, {timeline}) {
+    removeFetcher (state, { timeline }) {
       delete state.fetchers[timeline]
     },
     setWsToken (state, token) {
@@ -33,7 +33,7 @@ const api = {
     }
   },
   actions: {
-    startFetching (store, {timeline = 'friends', tag = false, userId = false}) {
+    startFetching (store, { timeline = 'friends', tag = false, userId = false }) {
       // Don't start fetching if we already are.
       if (store.state.fetchers[timeline]) return
 
@@ -43,7 +43,7 @@ const api = {
     stopFetching (store, timeline) {
       const fetcher = store.state.fetchers[timeline]
       window.clearInterval(fetcher)
-      store.commit('removeFetcher', {timeline})
+      store.commit('removeFetcher', { timeline })
     },
     setWsToken (store, token) {
       store.commit('setWsToken', token)
@@ -52,7 +52,7 @@ const api = {
       // Set up websocket connection
       if (!store.state.chatDisabled) {
         const token = store.state.wsToken
-        const socket = new Socket('/socket', {params: {token}})
+        const socket = new Socket('/socket', { params: { token } })
         socket.connect()
         store.dispatch('initializeChat', socket)
       }

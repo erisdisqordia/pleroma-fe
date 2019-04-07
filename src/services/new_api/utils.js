@@ -7,13 +7,13 @@ const queryParams = (params) => {
 const headers = (store) => {
   const accessToken = store.state.oauth.token
   if (accessToken) {
-    return {'Authorization': `Bearer ${accessToken}`}
+    return { 'Authorization': `Bearer ${accessToken}` }
   } else {
     return {}
   }
 }
 
-const request = ({method = 'GET', url, params, store}) => {
+const request = ({ method = 'GET', url, params, store }) => {
   const instance = store.state.instance.server
   let fullUrl = `${instance}${url}`
 

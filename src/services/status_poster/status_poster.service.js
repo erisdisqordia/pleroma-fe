@@ -4,7 +4,7 @@ import apiService from '../api/api.service.js'
 const postStatus = ({ store, status, spoilerText, visibility, sensitive, media = [], inReplyToStatusId = undefined, contentType = 'text/plain' }) => {
   const mediaIds = map(media, 'id')
 
-  return apiService.postStatus({credentials: store.state.users.currentUser.credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType})
+  return apiService.postStatus({ credentials: store.state.users.currentUser.credentials, status, spoilerText, visibility, sensitive, mediaIds, inReplyToStatusId, contentType })
     .then((data) => {
       if (!data.error) {
         store.dispatch('addNewStatuses', {

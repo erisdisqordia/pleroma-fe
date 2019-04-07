@@ -22,7 +22,7 @@ const FollowCard = {
     isMe () { return this.$store.state.users.currentUser.id === this.user.id },
     following () { return this.updated ? this.updated.following : this.user.following },
     showFollow () {
-      return !this.following || this.updated && !this.updated.following
+      return !this.following || (this.updated && !this.updated.following)
     },
     loggedIn () {
       return this.$store.state.users.currentUser

@@ -10,6 +10,12 @@ export default Vue.component('tab-switcher', {
       active: this.$slots.default.findIndex(_ => _.tag)
     }
   },
+  beforeUpdate () {
+    const currentSlot = this.$slots.default[this.active]
+    if (!currentSlot.tag) {
+      this.active = this.$slots.default.findIndex(_ => _.tag)
+    }
+  },
   methods: {
     activateTab (index) {
       return () => {
@@ -17,30 +23,24 @@ export default Vue.component('tab-switcher', {
       }
     }
   },
-  beforeUpdate () {
-    const currentSlot = this.$slots.default[this.active]
-    if (!currentSlot.tag) {
-      this.active = this.$slots.default.findIndex(_ => _.tag)
-    }
-  },
   render (h) {
     const tabs = this.$slots.default
-          .map((slot, index) => {
-            if (!slot.tag) return
-            const classesTab = ['tab']
-            const classesWrapper = ['tab-wrapper']
+      .map((slot, index) => {
+        if (!slot.tag) return
+        const classesTab = ['tab']
+        const classesWrapper = ['tab-wrapper']
 
-            if (index === this.active) {
-              classesTab.push('active')
-              classesWrapper.push('active')
-            }
+        if (index === this.active) {
+          classesTab.push('active')
+          classesWrapper.push('active')
+        }
 
-            return (
-              <div class={ classesWrapper.join(' ')}>
-                <button disabled={slot.data.attrs.disabled} onClick={this.activateTab(index)} class={ classesTab.join(' ') }>{slot.data.attrs.label}</button>
-              </div>
-            )
-          })
+        return (
+          <div class={ classesWrapper.join(' ')}>
+            <button disabled={slot.data.attrs.disabled} onClick={this.activateTab(index)} class={ classesTab.join(' ') }>{slot.data.attrs.label}</button>
+          </div>
+        )
+      })
 
     const contents = this.$slots.default.map((slot, index) => {
       if (!slot.tag) return

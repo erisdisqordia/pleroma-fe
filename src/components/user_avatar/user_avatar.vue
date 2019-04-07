@@ -3,7 +3,7 @@
     class="avatar"
     :class="{ 'avatar-compact': compact, 'better-shadow': betterShadow }"
     :src="imgSrc"
-    :imageLoadError="imageLoadError"
+    :image-load-error="imageLoadError"
   />
 </template>
 

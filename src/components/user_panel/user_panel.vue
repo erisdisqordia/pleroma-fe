@@ -1,12 +1,20 @@
 <template>
   <div class="user-panel">
-    <div v-if='user' class="panel panel-default" style="overflow: visible;">
-      <UserCard :user="user" :hideBio="true" rounded="top"/>
+    <div
+      v-if="user"
+      class="panel panel-default"
+      style="overflow: visible;"
+    >
+      <UserCard
+        :user="user"
+        :hide-bio="true"
+        rounded="top"
+      />
       <div class="panel-footer">
-        <post-status-form v-if='user'></post-status-form>
+        <post-status-form v-if="user" />
       </div>
     </div>
-    <login-form v-if='!user'></login-form>
+    <login-form v-if="!user" />
   </div>
 </template>
 

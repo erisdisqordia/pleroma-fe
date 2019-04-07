@@ -1,13 +1,22 @@
 <template>
-  <div ref="galleryContainer" style="width: 100%;">
-    <div class="gallery-row" v-for="row in rows" :style="rowHeight(row.length)" :class="{ 'contain-fit': useContainFit, 'cover-fit': !useContainFit }">
+  <div
+    ref="galleryContainer"
+    style="width: 100%;"
+  >
+    <div
+      v-for="row in rows"
+      :key="row"
+      class="gallery-row"
+      :style="rowHeight(row.length)"
+      :class="{ 'contain-fit': useContainFit, 'cover-fit': !useContainFit }"
+    >
       <attachment
         v-for="attachment in row"
-        :setMedia="setMedia"
+        :key="attachment.id"
+        :set-media="setMedia"
         :nsfw="nsfw"
         :attachment="attachment"
-        :allowPlay="false"
-        :key="attachment.id"
+        :allow-play="false"
       />
     </div>
   </div>

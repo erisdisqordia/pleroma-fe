@@ -9,7 +9,7 @@ const fileSizeFormat = (num) => {
   exponent = Math.min(Math.floor(Math.log(num) / Math.log(1024)), units.length - 1)
   num = (num / Math.pow(1024, exponent)).toFixed(2) * 1
   unit = units[exponent]
-  return {num: num, unit: unit}
+  return { num: num, unit: unit }
 }
 const fileSizeFormatService = {
   fileSizeFormat

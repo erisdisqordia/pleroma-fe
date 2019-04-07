@@ -160,12 +160,6 @@ const makeMockEmojiMasto = (overrides = [{}]) => {
   ]
 }
 
-parseNotification
-parseUser
-parseStatus
-makeMockStatusQvitter
-makeMockUserQvitter
-
 describe('API Entities normalizer', () => {
   describe('parseStatus', () => {
     describe('QVitter preprocessing', () => {
@@ -203,15 +197,15 @@ describe('API Entities normalizer', () => {
       })
 
       it('sets nsfw for statuses with the #nsfw tag', () => {
-        const safe = makeMockStatusQvitter({id: '1', text: 'Hello oniichan'})
-        const nsfw = makeMockStatusQvitter({id: '1', text: 'Hello oniichan #nsfw'})
+        const safe = makeMockStatusQvitter({ id: '1', text: 'Hello oniichan' })
+        const nsfw = makeMockStatusQvitter({ id: '1', text: 'Hello oniichan #nsfw' })
 
         expect(parseStatus(safe).nsfw).to.eq(false)
         expect(parseStatus(nsfw).nsfw).to.eq(true)
       })
 
       it('leaves existing nsfw settings alone', () => {
-        const nsfw = makeMockStatusQvitter({id: '1', text: 'Hello oniichan #nsfw', nsfw: false})
+        const nsfw = makeMockStatusQvitter({ id: '1', text: 'Hello oniichan #nsfw', nsfw: false })
 
         expect(parseStatus(nsfw).nsfw).to.eq(false)
       })
@@ -320,9 +314,9 @@ describe('API Entities normalizer', () => {
   describe('MastoAPI emoji adder', () => {
     const emojis = makeMockEmojiMasto()
     const imageHtml = '<img src="https://example.com/image.png" alt="image" class="emoji" />'
-          .replace(/"/g, '\'')
+      .replace(/"/g, '\'')
     const thinkHtml = '<img src="https://example.com/think.png" alt="thinking" class="emoji" />'
-          .replace(/"/g, '\'')
+      .replace(/"/g, '\'')
 
     it('correctly replaces shortcodes in supplied string', () => {
       const result = addEmojis('This post has :image: emoji and :thinking: emoji', emojis)

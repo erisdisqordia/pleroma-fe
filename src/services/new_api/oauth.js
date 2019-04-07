@@ -1,6 +1,6 @@
-import {reduce} from 'lodash'
+import { reduce } from 'lodash'
 
-const getOrCreateApp = ({oauth, instance}) => {
+const getOrCreateApp = ({ oauth, instance }) => {
   const url = `${instance}/api/v1/apps`
   const form = new window.FormData()
 
@@ -40,7 +40,7 @@ const login = (args) => {
   })
 }
 
-const getTokenWithCredentials = ({app, instance, username, password}) => {
+const getTokenWithCredentials = ({ app, instance, username, password }) => {
   const url = `${instance}/oauth/token`
   const form = new window.FormData()
 
@@ -56,7 +56,7 @@ const getTokenWithCredentials = ({app, instance, username, password}) => {
   }).then((data) => data.json())
 }
 
-const getToken = ({app, instance, code}) => {
+const getToken = ({ app, instance, code }) => {
   const url = `${instance}/oauth/token`
   const form = new window.FormData()
 

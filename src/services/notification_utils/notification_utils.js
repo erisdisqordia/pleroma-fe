@@ -33,4 +33,4 @@ export const visibleNotificationsFromStore = store => {
 }
 
 export const unseenNotificationsFromStore = store =>
-  filter(visibleNotificationsFromStore(store), ({seen}) => !seen)
+  filter(visibleNotificationsFromStore(store), ({ seen }) => !seen)

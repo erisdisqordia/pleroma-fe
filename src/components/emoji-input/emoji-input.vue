@@ -9,13 +9,13 @@
       @input="onInput"
       @click="setCaret"
       @keyup="setCaret"
-      @keydown="onKeydown"
-      @keydown.down="cycleForward"
-      @keydown.up="cycleBackward"
-      @keydown.shift.tab="cycleBackward"
-      @keydown.tab="cycleForward"
-      @keydown.enter="replaceEmoji"
-    />
+      @keydown.exact="onKeydown"
+      @keydown.down.exact="cycleForward"
+      @keydown.up.exact="cycleBackward"
+      @keydown.shift.tab.exact="cycleBackward"
+      @keydown.tab.exact="cycleForward"
+      @keydown.enter.exact="replaceEmoji"
+    >
     <textarea
       v-else
       :class="classname"
@@ -24,27 +24,30 @@
       @input="onInput"
       @click="setCaret"
       @keyup="setCaret"
-      @keydown="onKeydown"
-      @keydown.down="cycleForward"
-      @keydown.up="cycleBackward"
-      @keydown.shift.tab="cycleBackward"
-      @keydown.tab="cycleForward"
-      @keydown.enter="replaceEmoji"
-    ></textarea>
-    <div class="autocomplete-panel" v-if="suggestions">
+      @keydown.exact="onKeydown"
+      @keydown.down.exact="cycleForward"
+      @keydown.up.exact="cycleBackward"
+      @keydown.shift.tab.exact="cycleBackward"
+      @keydown.tab.exact="cycleForward"
+      @keydown.enter.exact="replaceEmoji"
+    />
+    <div
+      v-if="suggestions"
+      class="autocomplete-panel"
+    >
       <div class="autocomplete-panel-body">
         <div
           v-for="(emoji, index) in suggestions"
           :key="index"
-          @click="replace(emoji.utf || (emoji.shortcode + ' '))"
           class="autocomplete-item"
           :class="{ highlighted: emoji.highlighted }"
+          @click="replace(emoji.utf || (emoji.shortcode + ' '))"
         >
           <span v-if="emoji.img">
-            <img :src="emoji.img" />
+            <img :src="emoji.img">
           </span>
-          <span v-else>{{emoji.utf}}</span>
-          <span>{{emoji.shortcode}}</span>
+          <span v-else>{{ emoji.utf }}</span>
+          <span>{{ emoji.shortcode }}</span>
         </div>
       </div>
     </div>

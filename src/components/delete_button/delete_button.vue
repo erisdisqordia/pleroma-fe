@@ -1,7 +1,10 @@
 <template>
   <div v-if="canDelete">
-    <a href="#" v-on:click.prevent="deleteStatus()">
-      <i class='button-icon icon-cancel delete-status'></i>
+    <a
+      href="#"
+      @click.prevent="deleteStatus()"
+    >
+      <i class="button-icon icon-cancel delete-status" />
     </a>
   </div>
 </template>

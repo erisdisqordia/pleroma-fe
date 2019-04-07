@@ -22,15 +22,15 @@ export default {
   computed: {
     classes () {
       return [{
-        'user-card-rounded-t': this.rounded === 'top',  // set border-top-left-radius and border-top-right-radius
-        'user-card-rounded': this.rounded === true,     // set border-radius for all sides
-        'user-card-bordered': this.bordered === true    // set border for all sides
+        'user-card-rounded-t': this.rounded === 'top', // set border-top-left-radius and border-top-right-radius
+        'user-card-rounded': this.rounded === true, // set border-radius for all sides
+        'user-card-bordered': this.bordered === true // set border for all sides
       }]
     },
     style () {
       const color = this.$store.state.config.customTheme.colors
-            ? this.$store.state.config.customTheme.colors.bg  // v2
-            : this.$store.state.config.colors.bg // v1
+        ? this.$store.state.config.customTheme.colors.bg // v2
+        : this.$store.state.config.colors.bg // v1
 
       if (color) {
         const rgb = (typeof color === 'string') ? hex2rgb(color) : color
@@ -72,12 +72,12 @@ export default {
     userHighlightType: {
       get () {
         const data = this.$store.state.config.highlight[this.user.screen_name]
-        return data && data.type || 'disabled'
+        return (data && data.type) || 'disabled'
       },
       set (type) {
         const data = this.$store.state.config.highlight[this.user.screen_name]
         if (type !== 'disabled') {
-          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: data && data.color || '#FFFFFF', type })
+          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: (data && data.color) || '#FFFFFF', type })
         } else {
           this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: undefined })
         }
@@ -107,7 +107,7 @@ export default {
     followUser () {
       const store = this.$store
       this.followRequestInProgress = true
-      requestFollow(this.user, store).then(({sent}) => {
+      requestFollow(this.user, store).then(({ sent }) => {
         this.followRequestInProgress = false
         this.followRequestSent = sent
       })
@@ -138,7 +138,7 @@ export default {
         store.commit('setProfileView', { v })
       }
     },
-    linkClicked ({target}) {
+    linkClicked ({ target }) {
       if (target.tagName === 'SPAN') {
         target = target.parentNode
       }

@@ -33,7 +33,7 @@ const userSearch = {
         return
       }
       this.loading = true
-      userSearchApi.search({query, store: this.$store})
+      userSearchApi.search({ query, store: this.$store })
         .then((res) => {
           this.loading = false
           this.users = res

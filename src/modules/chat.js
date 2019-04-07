@@ -1,7 +1,7 @@
 const chat = {
   state: {
     messages: [],
-    channel: {state: ''},
+    channel: { state: '' },
     socket: null
   },
   mutations: {
@@ -29,7 +29,7 @@ const chat = {
       channel.on('new_msg', (msg) => {
         store.commit('addMessage', msg)
       })
-      channel.on('messages', ({messages}) => {
+      channel.on('messages', ({ messages }) => {
         store.commit('setMessages', messages)
       })
       channel.join()

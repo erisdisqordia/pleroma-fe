@@ -210,10 +210,10 @@ const Status = {
       if (!this.status.summary) return ''
       const decodedSummary = unescape(this.status.summary)
       const behavior = typeof this.$store.state.config.subjectLineBehavior === 'undefined'
-            ? this.$store.state.instance.subjectLineBehavior
-            : this.$store.state.config.subjectLineBehavior
+        ? this.$store.state.instance.subjectLineBehavior
+        : this.$store.state.config.subjectLineBehavior
       const startsWithRe = decodedSummary.match(/^re[: ]/i)
-      if (behavior !== 'noop' && startsWithRe || behavior === 'masto') {
+      if ((behavior !== 'noop' && startsWithRe) || behavior === 'masto') {
         return decodedSummary
       } else if (behavior === 'email') {
         return 're: '.concat(decodedSummary)
@@ -350,7 +350,7 @@ const Status = {
         this.preview = find(statuses, { 'id': targetId })
         // or if we have to fetch it
         if (!this.preview) {
-          this.$store.state.api.backendInteractor.fetchStatus({id}).then((status) => {
+          this.$store.state.api.backendInteractor.fetchStatus({ id }).then((status) => {
             this.preview = status
           })
         }

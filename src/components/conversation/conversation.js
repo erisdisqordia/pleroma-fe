@@ -94,8 +94,8 @@ const conversation = {
     },
     replies () {
       let i = 1
-      return reduce(this.conversation, (result, {id, in_reply_to_status_id}) => {
-        /* eslint-disable camelcase */
+      /* eslint-disable camelcase */
+      return reduce(this.conversation, (result, { id, in_reply_to_status_id }) => {
         const irid = in_reply_to_status_id
         /* eslint-enable camelcase */
         if (irid) {
@@ -127,8 +127,8 @@ const conversation = {
   methods: {
     fetchConversation () {
       if (this.status) {
-        this.$store.state.api.backendInteractor.fetchConversation({id: this.status.id})
-          .then(({ancestors, descendants}) => {
+        this.$store.state.api.backendInteractor.fetchConversation({ id: this.status.id })
+          .then(({ ancestors, descendants }) => {
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
             set(this, 'converationStatusIds', [].concat(
@@ -139,7 +139,7 @@ const conversation = {
           .then(() => this.setHighlight(this.statusId))
       } else {
         const id = this.$route.params.id
-        this.$store.state.api.backendInteractor.fetchStatus({id})
+        this.$store.state.api.backendInteractor.fetchStatus({ id })
           .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
           .then(() => this.fetchConversation())
       }

@@ -818,14 +818,6 @@ a.unmute {
   flex: 1;
 }
 
-.timeline > {
-  .status-el:last-child {
-    border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
-    border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
-    border-bottom: none;
-  }
-}
-
 @media all and (max-width: 800px) {
   .status-el {
     .retweet-info {

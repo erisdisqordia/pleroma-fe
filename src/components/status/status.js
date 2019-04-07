@@ -362,7 +362,9 @@ const Status = {
       this.$store.state.api.backendInteractor.pinOwnStatus(this.status.id).then((status) => {
         if (status.error) {
           this.error = status.error
-          setTimeout(() => this.error = null, 5000)
+          setTimeout(() => {
+            this.error = null
+          }, 5000)
         } else {
           this.$store.dispatch('updatePinned', status)
         }

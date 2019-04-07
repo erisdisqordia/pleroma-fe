@@ -367,24 +367,16 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
 
 const removeStatus = (state, { timeline, userId, statusId }) => {
   const timelineObject = state.timelines[timeline]
-  let removed = false
-  if (userId) {
-    remove(timelineObject.statuses, { user: { id: userId } })
-    remove(timelineObject.visibleStatuses, { user: { id: userId } })
-    removed = true
-  } else if (statusId) {
-    remove(timelineObject.statuses, { id: statusId })
-    remove(timelineObject.visibleStatuses, { id: statusId })
-    removed = true
+  const status = userId ? { user: { id: userId } } : { id: statusId }
+  remove(timelineObject.statuses, status)
+  remove(timelineObject.visibleStatuses, status)
+  if (statusId) {
     delete timelineObject.statusesObject[statusId]
     delete timelineObject.visibleStatusesObject[statusId]
     sortTimeline(timelineObject)
   }
-
-  if (removed) {
-    timelineObject.minVisibleId = timelineObject.visibleStatuses.length > 0 ? last(timelineObject.visibleStatuses).id : 0
-    timelineObject.maxId = timelineObject.statuses.length > 0 ? first(timelineObject.statuses).id : 0
-  }
+  timelineObject.minVisibleId = timelineObject.visibleStatuses.length > 0 ? last(timelineObject.visibleStatuses).id : 0
+  timelineObject.maxId = timelineObject.statuses.length > 0 ? first(timelineObject.statuses).id : 0
 }
 
 export const mutations = {

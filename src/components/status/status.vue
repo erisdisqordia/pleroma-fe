@@ -1,5 +1,6 @@
 <template>
   <div class="status-el" v-if="!hideStatus" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
+    <div v-if="error" class="alert error">{{error}}</div>
     <template v-if="muted && !isPreview">
       <div class="media status container muted">
         <small>

@@ -38,6 +38,7 @@ const Status = {
       showPreview: false,
       showingTall: this.inConversation && this.focused,
       showingLongSubject: false,
+      error: null,
       expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
         ? !this.$store.state.instance.collapseMessageWithSubject
         : !this.$store.state.config.collapseMessageWithSubject,
@@ -359,7 +360,12 @@ const Status = {
     },
     pinStatus () {
       this.$store.state.api.backendInteractor.pinOwnStatus(this.status.id).then((status) => {
-        this.$store.dispatch('updatePinned', status)
+        if (status.error) {
+          this.error = status.error
+          setTimeout(() => this.error = null, 5000)
+        } else {
+          this.$store.dispatch('updatePinned', status)
+        }
       })
     },
     unpinStatus () {

@@ -105,7 +105,7 @@
               v-if="preview"
               :isPreview="true"
               :statusoid="preview"
-              :compact=true
+              :compact="true"
             />
             <div v-else class="status-preview status-preview-loading">
               <i class="icon-spin4 animate-spin"></i>

@@ -171,7 +171,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   // This makes sure that user timeline won't get data meant for other
   // user. I.e. opening different user profiles makes request which could
   // return data late after user already viewing different user profile
-  if ((timeline === 'user' || timeline === 'media') && timelineObject.userId !== userId) {
+  if ((timeline === 'user' || timeline === 'media' || timeline === 'pinned') && timelineObject.userId !== userId) {
     return
   }
 
@@ -378,6 +378,7 @@ const removeStatus = (state, { timeline, userId, statusId }) => {
     removed = true
     delete timelineObject.statusesObject[statusId]
     delete timelineObject.visibleStatusesObject[statusId]
+    sortTimeline(timelineObject)
   }
 
   if (removed) {
@@ -551,7 +552,17 @@ const statuses = {
     },
     updatePinned ({ rootState, commit }, status) {
       commit('setPinned', { status })
-      if (!status.pinned) {
+      if (status.pinned) {
+        const statusObj = rootState.statuses.allStatusesObject[status.id]
+        const user = rootState.users.currentUser
+        commit('addNewStatuses', {
+          statuses: [statusObj],
+          showImmediately: true,
+          timeline: 'pinned',
+          user,
+          userId: user.id
+        })
+      } else {
         commit('removeStatus', { timeline: 'pinned', statusId: status.id })
       }
     },

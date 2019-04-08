@@ -134,7 +134,7 @@
           </div>
 
           <transition name="fade">
-            <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0">
+            <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0 && isFocused">
               <ul class="stats">
                 <li class="stat-count" v-if="statusoid.rebloggedBy && statusoid.rebloggedBy.length > 0">
                   <a class="stat-title">{{ $t('settings.notification_visibility_repeats') }}</a>

@@ -99,6 +99,8 @@
             </button>
           </span>
         </div>
+        <ModerationTools :user='user' v-if='loggedIn.role === "admin"'>
+        </ModerationTools>
       </div>
     </div>
   </div>

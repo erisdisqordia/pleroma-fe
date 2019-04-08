@@ -378,6 +378,13 @@ export const mutations = {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.deleted = true
   },
+  setManyDeleted (state, condition) {
+    Object.values(state.allStatusesObject).forEach(status => {
+      if (condition(status)) {
+        status.deleted = true
+      }
+    })
+  },
   setLoading (state, { timeline, value }) {
     state.timelines[timeline].loading = value
   },
@@ -437,6 +444,9 @@ const statuses = {
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })
       apiService.deleteStatus({ id: status.id, credentials: rootState.users.currentUser.credentials })
+    },
+    markStatusesAsDeleted ({ commit }, condition) {
+      commit('setManyDeleted', condition)
     },
     favorite ({ rootState, commit }, status) {
       // Optimistic favoriting...

@@ -48,7 +48,6 @@ const interfaceMod = {
       commit('setNotificationPermission', permission)
     },
     setMobileLayout ({ commit }, value) {
-      console.log('setMobileLayout called')
       commit('setMobileLayout', value)
     }
   }

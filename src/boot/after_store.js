@@ -9,12 +9,13 @@ const getStatusnetConfig = async ({ store }) => {
     const res = await window.fetch('/api/statusnet/config.json')
     if (res.ok) {
       const data = await res.json()
-      const { name, closed: registrationClosed, textlimit, uploadlimit, server, vapidPublicKey } = data.site
+      const { name, closed: registrationClosed, textlimit, uploadlimit, server, vapidPublicKey, safeDMMentionsEnabled } = data.site
 
       store.dispatch('setInstanceOption', { name: 'name', value: name })
       store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
       store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
       store.dispatch('setInstanceOption', { name: 'server', value: server })
+      store.dispatch('setInstanceOption', { name: 'safeDM', value: safeDMMentionsEnabled !== '0' })
 
       // TODO: default values for this stuff, added if to not make it break on
       // my dev config out of the box.

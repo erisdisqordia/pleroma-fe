@@ -42,7 +42,7 @@
   &-dropdown {
     position: absolute;
     right: 0;
-    top: 100%;
+    top: 28px;
     z-index: 1;
 
     &-toggle {
@@ -50,6 +50,7 @@
       position: absolute;
       top: -25px;
       right: 2px;
+      line-height: 1;
 
       i {
         font-size: 18px;

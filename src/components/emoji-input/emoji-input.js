@@ -110,6 +110,25 @@ const EmojiInput = {
       const newValue = this.value.substr(0, this.caret) + emoji + this.value.substr(this.caret)
       this.$refs.input.focus()
       this.$emit('input', newValue)
+      this.caret += emoji.length
+      setTimeout(() => {
+        this.updateCaretPos()
+      })
+    },
+    updateCaretPos () {
+      const elem = this.$refs.input
+      if (elem.createTextRange) {
+        const range = elem.createTextRange()
+        range.move('character', this.caret)
+        range.select()
+      } else {
+        if (elem.selectionStart) {
+          elem.focus()
+          elem.setSelectionRange(this.caret, this.caret)
+        } else {
+          elem.focus()
+        }
+      }
     }
   }
 }

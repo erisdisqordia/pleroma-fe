@@ -6,7 +6,6 @@
       :type="type"
       :value="value"
       :placeholder="placeholder"
-      id="good"
       @input="onInput"
       @click="setCaret"
       @keyup="setCaret"

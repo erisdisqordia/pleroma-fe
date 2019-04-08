@@ -2,6 +2,7 @@ import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
+import EmojiSelector from '../emoji-selector/emoji-selector.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import Completion from '../../services/completion/completion.js'
 import { take, filter, reject, map, uniqBy } from 'lodash'
@@ -32,7 +33,8 @@ const PostStatusForm = {
   components: {
     MediaUpload,
     ScopeSelector,
-    EmojiInput
+    EmojiInput,
+    EmojiSelector
   },
   mounted () {
     this.resize(this.$refs.textarea)
@@ -232,6 +234,29 @@ const PostStatusForm = {
     },
     onKeydown (e) {
       e.stopPropagation()
+    },
+    onEmoji (emoji) {
+      const newValue = this.newStatus.status.substr(0, this.caret) + emoji + this.newStatus.status.substr(this.caret)
+      this.newStatus.status = newValue
+      this.caret += emoji.length
+      setTimeout(() => {
+        this.updateCaretPos()
+      })
+    },
+    updateCaretPos () {
+      const elem = this.$refs.textarea
+      if (elem.createTextRange) {
+        const range = elem.createTextRange()
+        range.move('character', this.caret)
+        range.select()
+      } else {
+        if (elem.selectionStart) {
+          elem.focus()
+          elem.setSelectionRange(this.caret, this.caret)
+        } else {
+          elem.focus()
+        }
+      }
     },
     setCaret ({target: {selectionStart}}) {
       this.caret = selectionStart

@@ -20,25 +20,28 @@
         v-model="newStatus.spoilerText"
         classname="form-control"
       />
-      <textarea
-        ref="textarea"
-        @click="setCaret"
-        @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control"
-        @keydown="onKeydown"
-        @keydown.down="cycleForward"
-        @keydown.up="cycleBackward"
-        @keydown.shift.tab="cycleBackward"
-        @keydown.tab="cycleForward"
-        @keydown.enter="replaceCandidate"
-        @keydown.meta.enter="postStatus(newStatus)"
-        @keyup.ctrl.enter="postStatus(newStatus)"
-        @drop="fileDrop"
-        @dragover.prevent="fileDrag"
-        @input="resize"
-        @paste="paste"
-        :disabled="posting"
-      >
-      </textarea>
+      <div class="status-input-wrapper">
+        <textarea
+          ref="textarea"
+          @click="setCaret"
+          @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control"
+          @keydown="onKeydown"
+          @keydown.down="cycleForward"
+          @keydown.up="cycleBackward"
+          @keydown.shift.tab="cycleBackward"
+          @keydown.tab="cycleForward"
+          @keydown.enter="replaceCandidate"
+          @keydown.meta.enter="postStatus(newStatus)"
+          @keyup.ctrl.enter="postStatus(newStatus)"
+          @drop="fileDrop"
+          @dragover.prevent="fileDrag"
+          @input="resize"
+          @paste="paste"
+          :disabled="posting"
+        >
+        </textarea>
+        <EmojiSelector @emoji="onEmoji" />
+      </div>
       <div class="visibility-tray">
         <span class="text-format" v-if="formattingOptionsEnabled">
           <label for="post-content-type" class="select">
@@ -177,6 +180,13 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+  }
+
+  .status-input-wrapper {
+    display: flex;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
   }
 
   .attachments {

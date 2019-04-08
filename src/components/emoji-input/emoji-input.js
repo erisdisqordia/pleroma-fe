@@ -108,7 +108,6 @@ const EmojiInput = {
     },
     onEmoji (emoji) {
       const newValue = this.value.substr(0, this.caret) + emoji + this.value.substr(this.caret)
-      this.$refs.input.focus()
       this.$emit('input', newValue)
       this.caret += emoji.length
       setTimeout(() => {

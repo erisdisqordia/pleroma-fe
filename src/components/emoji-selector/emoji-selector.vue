@@ -92,6 +92,10 @@
 
   &-search {
     padding: 5px;
+
+    input {
+      width: 100%;
+    }
   }
 
   &-groups {

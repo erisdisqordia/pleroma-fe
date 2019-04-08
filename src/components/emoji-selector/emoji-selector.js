@@ -3,6 +3,12 @@ const filterByKeyword = (list, keyword = '') => {
 }
 
 const EmojiSelector = {
+  mounted () {
+    document.body.addEventListener('click', this.outsideClicked)
+  },
+  destroyed () {
+    document.body.removeEventListener('click', this.outsideClicked)
+  },
   data () {
     return {
       open: false,
@@ -13,6 +19,12 @@ const EmojiSelector = {
   methods: {
     togglePanel () {
       this.open = !this.open
+    },
+    insideClicked (e) {
+      e.stopPropagation()
+    },
+    outsideClicked () {
+      this.open = false
     },
     onEmoji (emoji) {
       const value = emoji.image_url ? `:${emoji.shortcode}:` : emoji.utf

@@ -1,6 +1,6 @@
 <template>
-  <div class="emoji-dropdown">
-    <span class="emoji-dropdown-toggle" @click="togglePanel">
+  <div class="emoji-dropdown" @click.prevent="insideClicked">
+    <span class="emoji-dropdown-toggle" @click.prevent="togglePanel">
       <i class="icon-smile"></i>
     </span>
     <div class="emoji-dropdown-menu panel panel-default" v-if="open">
@@ -48,7 +48,7 @@
     &-toggle {
       cursor: pointer;
       position: absolute;
-      top: -25px;
+      top: -23px;
       right: 2px;
       line-height: 1;
 

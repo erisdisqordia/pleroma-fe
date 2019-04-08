@@ -532,6 +532,20 @@ $status-margin: 0.75em;
   }
 }
 
+.status-fadein {
+  animation-duration: 0.4s;
+  animation-name: fadein;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .greentext {
   color: green;
 }

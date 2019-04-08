@@ -651,15 +651,6 @@ a.unmute {
         font-size: 16px;
         line-height: 1em;
       }
-
-      /* a {
-        cursor: pointer;
-        color: var(--faint, $fallback--faint);
-
-        strong {
-          color: var(--text, $fallback--text);
-        }
-      } */
     }
 
     .avatar-row {

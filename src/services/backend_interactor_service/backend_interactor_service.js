@@ -1,5 +1,6 @@
 import apiService from '../api/api.service.js'
 import timelineFetcherService from '../timeline_fetcher/timeline_fetcher.service.js'
+import notificationsFetcher from '../notifications_fetcher/notifications_fetcher.service.js'
 
 const backendInteractorService = (credentials) => {
   const fetchStatus = ({id}) => {
@@ -58,8 +59,12 @@ const backendInteractorService = (credentials) => {
     return apiService.denyUser({credentials, id})
   }
 
-  const startFetching = ({timeline, store, userId = false, tag}) => {
-    return timelineFetcherService.startFetching({timeline, store, credentials, userId, tag})
+  const startFetchingTimeline = ({ timeline, store, userId = false, tag }) => {
+    return timelineFetcherService.startFetching({ timeline, store, credentials, userId, tag })
+  }
+
+  const startFetchingNotifications = ({ store }) => {
+    return notificationsFetcher.startFetching({ store, credentials })
   }
 
   const tagUser = ({screen_name}, tag) => {
@@ -121,7 +126,8 @@ const backendInteractorService = (credentials) => {
     fetchUserRelationship,
     fetchAllFollowing,
     verifyCredentials: apiService.verifyCredentials,
-    startFetching,
+    startFetchingTimeline,
+    startFetchingNotifications,
     fetchMutes,
     muteUser,
     unmuteUser,

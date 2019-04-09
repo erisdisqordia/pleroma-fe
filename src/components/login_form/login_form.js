@@ -40,10 +40,10 @@ const LoginForm = {
           this.$store.commit('setToken', result.access_token)
           try {
             await this.$store.dispatch('loginUser', result.access_token)
+            this.$router.push({name: 'friends'})
           } catch (e) {
             console.log(e)
           }
-          this.$router.push({name: 'friends'})
         })
       })
     },

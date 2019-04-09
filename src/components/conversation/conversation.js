@@ -36,8 +36,7 @@ const conversation = {
   data () {
     return {
       highlight: null,
-      expanded: false,
-      converationStatusIds: []
+      expanded: false
     }
   },
   props: [
@@ -54,20 +53,18 @@ const conversation = {
     status () {
       return this.statusoid
     },
-    idsToShow () {
-      if (this.converationStatusIds.length > 0) {
-        return this.converationStatusIds
-      } else if (this.statusId) {
-        return [this.statusId]
-      } else {
-        return []
-      }
-    },
     statusId () {
       if (this.statusoid.retweeted_status) {
         return this.statusoid.retweeted_status.id
       } else {
         return this.statusoid.id
+      }
+    },
+    conversationId () {
+      if (this.statusoid.retweeted_status) {
+        return this.statusoid.retweeted_status.statusnet_conversation_id
+      } else {
+        return this.statusoid.statusnet_conversation_id
       }
     },
     conversation () {
@@ -79,11 +76,8 @@ const conversation = {
         return [this.status]
       }
 
-      const statusesObject = this.$store.state.statuses.allStatusesObject
-      const conversation = this.idsToShow.reduce((acc, id) => {
-        acc.push(statusesObject[id])
-        return acc
-      }, [])
+      const statuses = this.$store.state.statuses.allStatuses
+      const conversation = filter(statuses, { statusnet_conversation_id: this.conversationId })
 
       const statusIndex = findIndex(conversation, { id: this.statusId })
       if (statusIndex !== -1) {
@@ -131,10 +125,6 @@ const conversation = {
           .then(({ancestors, descendants}) => {
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
-            set(this, 'converationStatusIds', [].concat(
-              ancestors.map(_ => _.id).filter(_ => _ !== this.statusId),
-              this.statusId,
-              descendants.map(_ => _.id).filter(_ => _ !== this.statusId)))
           })
           .then(() => this.setHighlight(this.statusId))
       } else {

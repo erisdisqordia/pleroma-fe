@@ -52,7 +52,7 @@ const Timeline = {
 
     window.addEventListener('scroll', this.scrollLoad)
 
-    if (this.timelineName === 'friends' && !credentials) { return false }
+    if (store.state.api.fetchers[this.timelineName]) { return false }
 
     timelineFetcher.fetchAndUpdate({
       store,

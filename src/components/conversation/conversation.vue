@@ -13,7 +13,7 @@
       :key="status.id"
       :inlineExpanded="collapsable"
       :statusoid="status"
-      :expandable='!expanded'
+      :expandable='!isExpanded'
       :focused="focused(status.id)"
       :inConversation="isExpanded"
       :highlight="getHighlight()"

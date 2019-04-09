@@ -13,11 +13,11 @@ const api = {
     setBackendInteractor (state, backendInteractor) {
       state.backendInteractor = backendInteractor
     },
-    addFetcher (state, {timeline, fetcher}) {
-      state.fetchers[timeline] = fetcher
+    addFetcher (state, { fetcherName, fetcher }) {
+      state.fetchers[fetcherName] = fetcher
     },
-    removeFetcher (state, {timeline}) {
-      delete state.fetchers[timeline]
+    removeFetcher (state, { fetcherName }) {
+      delete state.fetchers[fetcherName]
     },
     setWsToken (state, token) {
       state.wsToken = token
@@ -33,17 +33,24 @@ const api = {
     }
   },
   actions: {
-    startFetching (store, {timeline = 'friends', tag = false, userId = false}) {
+    startFetchingTimeline (store, { timeline = 'friends', tag = false, userId = false }) {
       // Don't start fetching if we already are.
       if (store.state.fetchers[timeline]) return
 
-      const fetcher = store.state.backendInteractor.startFetching({ timeline, store, userId, tag })
-      store.commit('addFetcher', { timeline, fetcher })
+      const fetcher = store.state.backendInteractor.startFetchingTimeline({ timeline, store, userId, tag })
+      store.commit('addFetcher', { fetcherName: timeline, fetcher })
     },
-    stopFetching (store, timeline) {
-      const fetcher = store.state.fetchers[timeline]
+    startFetchingNotifications (store) {
+      // Don't start fetching if we already are.
+      if (store.state.fetchers['notifications']) return
+
+      const fetcher = store.state.backendInteractor.startFetchingNotifications({ store })
+      store.commit('addFetcher', { fetcherName: 'notifications', fetcher })
+    },
+    stopFetching (store, fetcherName) {
+      const fetcher = store.state.fetchers[fetcherName]
       window.clearInterval(fetcher)
-      store.commit('removeFetcher', {timeline})
+      store.commit('removeFetcher', { fetcherName })
     },
     setWsToken (store, token) {
       store.commit('setWsToken', token)

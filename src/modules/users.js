@@ -355,7 +355,8 @@ const users = {
       store.commit('setToken', false)
       store.dispatch('stopFetching', 'friends')
       store.commit('setBackendInteractor', backendInteractorService())
-      store.dispatch('stopFetchingNotifications')
+      store.dispatch('stopFetching', 'notifications')
+      store.commit('clearNotifications')
       store.commit('resetStatuses')
     },
     loginUser (store, accessToken) {
@@ -387,7 +388,10 @@ const users = {
               }
 
               // Start getting fresh posts.
-              store.dispatch('startFetching', { timeline: 'friends' })
+              store.dispatch('startFetchingTimeline', { timeline: 'friends' })
+
+              // Start fetching notifications
+              store.dispatch('startFetchingNotifications')
 
               // Get user mutes
               store.dispatch('fetchMutes')

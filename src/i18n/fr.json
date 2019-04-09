@@ -7,17 +7,29 @@
     "gopher": "Gopher",
     "media_proxy": "Proxy média",
     "scope_options": "Options de visibilité",
-    "text_limit": "Limite du texte",
+    "text_limit": "Limite de texte",
     "title": "Caractéristiques",
-    "who_to_follow": "Qui s'abonner"
+    "who_to_follow": "Qui suivre"
   },
   "finder": {
-    "error_fetching_user": "Erreur lors de la recherche de l'utilisateur",
-    "find_user": "Chercher un utilisateur"
+    "error_fetching_user": "Erreur lors de la recherche de l'utilisateur·ice",
+    "find_user": "Chercher un·e utilisateur·ice"
   },
   "general": {
     "apply": "Appliquer",
-    "submit": "Envoyer"
+    "submit": "Envoyer",
+    "more": "Plus",
+    "generic_error": "Une erreur s'est produite",
+    "optional": "optionel",
+    "show_more": "Montrer plus",
+    "show_less": "Montrer moins",
+    "cancel": "Annuler"
+  },
+  "image_cropper": {
+    "crop_picture": "Rogner l'image",
+    "save": "Sauvegarder",
+    "save_without_cropping": "Sauvegarder sans rogner",
+    "cancel": "Annuler"
   },
   "login": {
     "login": "Connexion",
@@ -26,36 +38,51 @@
     "password": "Mot de passe",
     "placeholder": "p.e. lain",
     "register": "S'inscrire",
-    "username": "Identifiant"
+    "username": "Identifiant",
+    "hint": "Connectez-vous pour rejoindre la discussion"
+  },
+  "media_modal": {
+    "previous": "Précédent",
+    "next": "Suivant"
   },
   "nav": {
+    "about": "À propos",
+    "back": "Retour",
     "chat": "Chat local",
-    "friend_requests": "Demandes d'ami",
-    "dms": "Messages adressés",
-    "mentions": "Notifications",
-    "public_tl": "Statuts locaux",
-    "timeline": "Journal",
-    "twkn": "Le réseau connu"
+    "friend_requests": "Demandes de suivi",
+    "mentions": "Mentions",
+    "dms": "Messages directs",
+    "public_tl": "Fil d'actualité public",
+    "timeline": "Fil d'actualité",
+    "twkn": "Ensemble du réseau connu",
+    "user_search": "Recherche d'utilisateur·ice",
+    "who_to_follow": "Qui suivre",
+    "preferences": "Préférences"
   },
   "notifications": {
-    "broken_favorite": "Chargement d'un message inconnu ...",
+    "broken_favorite": "Chargement d'un message inconnu…",
     "favorited_you": "a aimé votre statut",
     "followed_you": "a commencé à vous suivre",
     "load_older": "Charger les notifications précédentes",
     "notifications": "Notifications",
-    "read": "Lu !",
+    "read": "Lu !",
     "repeated_you": "a partagé votre statut"
+    "no_more_notifications": "Aucune notification supplémentaire"
   },
   "post_status": {
+    "new_status": "Poster un nouveau statut"
     "account_not_locked_warning": "Votre compte n'est pas {0}. N'importe qui peut vous suivre pour voir vos billets en Abonné·e·s uniquement.",
     "account_not_locked_warning_link": "verrouillé",
     "attachments_sensitive": "Marquer le média comme sensible",
     "content_type": {
-      "text/plain": "Texte brut"
+      "text/plain": "Texte brut",
+      "text/html": "HTML",
+      "text/markdown": "Markdown"
     },
     "content_warning": "Sujet (optionnel)",
     "default": "Écrivez ici votre prochain statut.",
-    "direct_warning": "Ce message sera visible à toutes les personnes mentionnées.",
+    "direct_warning_to_all": "Ce message sera visible pour toutes les personnes mentionnées.",
+    "direct_warning_to_first_only": "Ce message sera visible uniquement pour personnes mentionnées au début du message.",
     "posting": "Envoi en cours",
     "scope": {
       "direct": "Direct - N'envoyer qu'aux personnes mentionnées",
@@ -66,13 +93,27 @@
   },
   "registration": {
     "bio": "Biographie",
-    "email": "Adresse email",
+    "email": "Adresse mail",
     "fullname": "Pseudonyme",
     "password_confirm": "Confirmation du mot de passe",
     "registration": "Inscription",
-    "token": "Jeton d'invitation"
+    "token": "Jeton d'invitation",
+    "captcha": "CAPTCHA",
+    "new_captcha": "Cliquez sur l'image pour avoir un nouveau captcha",
+    "username_placeholder": "p.e. lain",
+    "fullname_placeholder": "p.e. Lain Iwakura",
+    "bio_placeholder": "p.e.\nSalut, je suis Lain\nJe suis une fille d'anime qui vit dans une banlieu japonaise. Vous me connaissez peut-être du Wired.",
+    "validations": {
+      "username_required": "ne peut pas être laissé vide",
+      "fullname_required": "ne peut pas être laissé vide",
+      "email_required": "ne peut pas être laissé vide",
+      "password_required": "ne peut pas être laissé vide",
+      "password_confirmation_required": "ne peut pas être laissé vide",
+      "password_confirmation_match": "doit être identique au mot de passe"
+    }
   },
   "settings": {
+    "app_name": "Nom de l'application"
     "attachmentRadius": "Pièces jointes",
     "attachments": "Pièces jointes",
     "autoload": "Charger la suite automatiquement une fois le bas de la page atteint",
@@ -81,6 +122,7 @@
     "avatarRadius": "Avatars",
     "background": "Arrière-plan",
     "bio": "Biographie",
+    "blocks_tab": "Bloqué·e·s"
     "btnRadius": "Boutons",
     "cBlue": "Bleu (Répondre, suivre)",
     "cGreen": "Vert (Partager)",
@@ -88,7 +130,7 @@
     "cRed": "Rouge (Annuler)",
     "change_password": "Changez votre mot de passe",
     "change_password_error": "Il y a eu un problème pour changer votre mot de passe.",
-    "changed_password": "Mot de passe modifié avec succès !",
+    "changed_password": "Mot de passe modifié avec succès !",
     "collapse_subject": "Réduire les messages avec des sujets",
     "confirm_new_password": "Confirmation du nouveau mot de passe",
     "current_avatar": "Avatar actuel",

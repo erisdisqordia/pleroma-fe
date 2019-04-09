@@ -189,28 +189,27 @@ export const parseStatus = (data) => {
 
     output.statusnet_html = addEmojis(data.content, data.emojis)
 
-    // Not exactly the same but works?
-    output.text = data.content
+    if (data.pleroma) {
+      const { pleroma } = data
+      output.text = pleroma.content ? data.pleroma.content['text/plain'] : data.content
+      output.summary = pleroma.spoiler_text ? data.pleroma.spoiler_text['text/plain'] : data.spoiler_text
+      output.statusnet_conversation_id = data.pleroma.conversation_id
+      output.is_local = pleroma.is_local
+    } else {
+      output.text = data.content
+      output.summary = data.spoiler_text
+    }
 
     output.in_reply_to_status_id = data.in_reply_to_id
     output.in_reply_to_user_id = data.in_reply_to_account_id
     output.replies_count = data.replies_count
 
-    // Missing!! fix in UI?
-    // output.in_reply_to_screen_name = ???
-
-    // Not exactly the same but works
-    output.statusnet_conversation_id = data.id
-
     if (output.type === 'retweet') {
       output.retweeted_status = parseStatus(data.reblog)
     }
 
-    output.summary = data.spoiler_text
     output.summary_html = addEmojis(data.spoiler_text, data.emojis)
     output.external_url = data.url
-
-    // output.is_local = ??? missing
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num

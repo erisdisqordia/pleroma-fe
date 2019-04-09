@@ -9,7 +9,7 @@ import withLoadMore from '../../hocs/with_load_more/with_load_more'
 const FollowerList = withLoadMore({
   fetch: (props, $store) => $store.dispatch('fetchFollowers', props.userId),
   select: (props, $store) => get($store.getters.findUser(props.userId), 'followerIds', []).map(id => $store.getters.findUser(id)),
-  destory: (props, $store) => $store.dispatch('clearFollowers', props.userId),
+  destroy: (props, $store) => $store.dispatch('clearFollowers', props.userId),
   childPropName: 'items',
   additionalPropNames: ['userId']
 })(List)
@@ -17,7 +17,7 @@ const FollowerList = withLoadMore({
 const FriendList = withLoadMore({
   fetch: (props, $store) => $store.dispatch('fetchFriends', props.userId),
   select: (props, $store) => get($store.getters.findUser(props.userId), 'friendIds', []).map(id => $store.getters.findUser(id)),
-  destory: (props, $store) => $store.dispatch('clearFriends', props.userId),
+  destroy: (props, $store) => $store.dispatch('clearFriends', props.userId),
   childPropName: 'items',
   additionalPropNames: ['userId']
 })(List)

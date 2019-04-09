@@ -41,7 +41,8 @@ const conversation = {
   props: [
     'statusoid',
     'collapsable',
-    'isPage'
+    'isPage',
+    'timelineName'
   ],
   created () {
     if (this.isPage) {
@@ -120,8 +121,8 @@ const conversation = {
       if (this.status) {
         this.$store.state.api.backendInteractor.fetchConversation({id: this.status.id})
           .then(({ancestors, descendants}) => {
-            this.$store.dispatch('fetchFavoritedByUsers', { id: this.status.id })
-            this.$store.dispatch('fetchRebloggedByUsers', { id: this.status.id })
+            this.$store.dispatch('fetchFavoritedByUsers', { id: this.statusId, retweetedStatusId: this.status.id, timelineName: this.timelineName })
+            this.$store.dispatch('fetchRebloggedByUsers', { id: this.statusId, retweetedStatusId: this.status.id, timelineName: this.timelineName })
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
           })

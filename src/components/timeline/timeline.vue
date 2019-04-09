@@ -22,6 +22,7 @@
           :key="status.id"
           :statusoid="status"
           :collapsable="true"
+          :timelineName="timelineName"
         />
       </div>
     </div>

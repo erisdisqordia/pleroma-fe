@@ -460,16 +460,32 @@ export const mutations = {
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
   },
-  addFavoritedByUsers (state, { favoritedByUsers, id }) {
-    state.allStatusesObject[id] = {
-      ...state.allStatusesObject[id],
-      favoritedBy: favoritedByUsers
+  addFavoritedByUsers (state, { favoritedByUsers, id, timelineName }) {
+    if (timelineName) {
+      state.timelines[timelineName].visibleStatusesObject[id] = {
+        ...state.timelines[timelineName].visibleStatusesObject[id],
+        favoritedBy: favoritedByUsers
+      }
+      state.timelines[timelineName].visibleStatuses = state.timelines[timelineName].visibleStatuses.map(visibleStatus => visibleStatus.id === id ? { ...visibleStatus, favoritedBy: favoritedByUsers } : visibleStatus)
+    } else {
+      state.allStatusesObject[id] = {
+        ...state.allStatusesObject[id],
+        favoritedBy: favoritedByUsers
+      }
     }
   },
-  addRebloggedByUsers (state, { rebloggedByUsers, id }) {
-    state.allStatusesObject[id] = {
-      ...state.allStatusesObject[id],
-      rebloggedBy: rebloggedByUsers
+  addRebloggedByUsers (state, { rebloggedByUsers, id, timelineName }) {
+    if (timelineName) {
+      state.timelines[timelineName].visibleStatusesObject[id] = {
+        ...state.timelines[timelineName].visibleStatusesObject[id],
+        rebloggedBy: rebloggedByUsers
+      }
+      state.timelines[timelineName].visibleStatuses = state.timelines[timelineName].visibleStatuses.map(visibleStatus => visibleStatus.id === id ? { ...visibleStatus, rebloggedBy: rebloggedByUsers } : visibleStatus)
+    } else {
+      state.allStatusesObject[id] = {
+        ...state.allStatusesObject[id],
+        rebloggedBy: rebloggedByUsers
+      }
     }
   }
 }
@@ -537,11 +553,11 @@ const statuses = {
         credentials: rootState.users.currentUser.credentials
       })
     },
-    fetchFavoritedByUsers ({ rootState, commit }, { id }) {
-      rootState.api.backendInteractor.fetchFavoritedByUsers({id}).then((favoritedByUsers) => commit('addFavoritedByUsers', { favoritedByUsers, id }))
+    fetchFavoritedByUsers ({ rootState, commit }, { id, retweetedStatusId, timelineName }) {
+      rootState.api.backendInteractor.fetchFavoritedByUsers({id}).then((favoritedByUsers) => commit('addFavoritedByUsers', { favoritedByUsers, id: retweetedStatusId, timelineName }))
     },
-    fetchRebloggedByUsers ({ rootState, commit }, { id }) {
-      rootState.api.backendInteractor.fetchRebloggedByUsers({id}).then((rebloggedByUsers) => commit('addRebloggedByUsers', { rebloggedByUsers, id }))
+    fetchRebloggedByUsers ({ rootState, commit }, { id, retweetedStatusId, timelineName }) {
+      rootState.api.backendInteractor.fetchRebloggedByUsers({id}).then((rebloggedByUsers) => commit('addRebloggedByUsers', { rebloggedByUsers, id: retweetedStatusId, timelineName }))
     }
   },
   mutations

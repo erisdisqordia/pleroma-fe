@@ -1,5 +1,6 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import RemoteFollow from '../remote_follow/remote_follow.vue'
+import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
@@ -93,15 +94,17 @@ export default {
       }
     },
     visibleRole () {
-      const validRole = (this.user.role === 'admin' || this.user.role === 'moderator')
-      const showRole = this.isOtherUser || this.user.show_role
-
-      return validRole && showRole && this.user.role
+      const rights = this.user.rights
+      if (!rights) { return }
+      const validRole = rights.admin || rights.moderator
+      const roleTitle = rights.admin ? 'admin' : 'moderator'
+      return validRole && roleTitle
     }
   },
   components: {
     UserAvatar,
-    RemoteFollow
+    RemoteFollow,
+    ModerationTools
   },
   methods: {
     followUser () {

@@ -21,6 +21,9 @@ const Notification = {
     },
     userProfileLink (user) {
       return generateProfileLink(user.id, user.screen_name, this.$store.state.instance.restrictedNicknames)
+    },
+    getUser (notification) {
+      return this.$store.state.users.usersObject[notification.action.user.id]
     }
   },
   computed: {

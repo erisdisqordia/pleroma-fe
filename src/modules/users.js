@@ -37,6 +37,28 @@ export const mutations = {
     const user = state.usersObject[id]
     set(user, 'muted', muted)
   },
+  tagUser (state, { user: { id }, tag }) {
+    const user = state.usersObject[id]
+    const tags = user.tags || []
+    const newTags = tags.concat([tag])
+    set(user, 'tags', newTags)
+  },
+  untagUser (state, { user: { id }, tag }) {
+    const user = state.usersObject[id]
+    const tags = user.tags || []
+    const newTags = tags.filter(t => t !== tag)
+    set(user, 'tags', newTags)
+  },
+  updateRight (state, { user: { id }, right, value }) {
+    const user = state.usersObject[id]
+    let newRights = user.rights
+    newRights[right] = value
+    set(user, 'rights', newRights)
+  },
+  updateActivationStatus (state, { user: { id }, status }) {
+    const user = state.usersObject[id]
+    set(user, 'deactivated', !status)
+  },
   setCurrentUser (state, user) {
     state.lastLoginName = user.screen_name
     state.currentUser = merge(state.currentUser || {}, user)

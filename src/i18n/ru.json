@@ -8,7 +8,8 @@
   },
   "general": {
     "apply": "Применить",
-    "submit": "Отправить"
+    "submit": "Отправить",
+    "cancel": "Отмена"
   },
   "login": {
     "login": "Войти",
@@ -311,7 +312,26 @@
     "muted": "Игнорирую",
     "per_day": "в день",
     "remote_follow": "Читать удалённо",
-    "statuses": "Статусы"
+    "statuses": "Статусы",
+    "admin_menu": {
+      "moderation": "Опции модератора",
+      "grant_admin": "Сделать администратором",
+      "revoke_admin": "Забрать права администратора",
+      "grant_moderator": "Сделать модератором",
+      "revoke_moderator": "Забрать права модератора",
+      "activate_account": "Активировать аккаунт",
+      "deactivate_account": "Деактивировать аккаунт",
+      "delete_account": "Удалить аккаунт",
+      "force_nsfw": "Отмечать посты пользователя как NSFW",
+      "strip_media": "Убирать вложения из постов пользователя",
+      "force_unlisted": "Не добавлять посты в публичные ленты",
+      "sandbox": "Посты доступны только для подписчиков",
+      "disable_remote_subscription": "Запретить подписываться с удаленных серверов",
+      "disable_any_subscription": "Запретить подписываться на пользователя",
+      "quarantine": "Не федерировать посты пользователя",
+      "delete_user": "Удалить пользователя",
+      "delete_user_confirmation": "Вы уверены? Это действие нельзя отменить."
+    }
   },
   "user_profile": {
     "timeline_title": "Лента пользователя"

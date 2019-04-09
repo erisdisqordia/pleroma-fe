@@ -204,6 +204,8 @@ export const parseStatus = (data) => {
     output.in_reply_to_user_id = data.in_reply_to_account_id
     output.replies_count = data.replies_count
 
+    // Missing!! fix in UI?
+    // output.in_reply_to_screen_name = ???
     if (output.type === 'retweet') {
       output.retweeted_status = parseStatus(data.reblog)
     }

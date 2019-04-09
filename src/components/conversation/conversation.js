@@ -41,8 +41,7 @@ const conversation = {
   props: [
     'statusoid',
     'collapsable',
-    'isPage',
-    'timelineName'
+    'isPage'
   ],
   created () {
     if (this.isPage) {
@@ -121,8 +120,6 @@ const conversation = {
       if (this.status) {
         this.$store.state.api.backendInteractor.fetchConversation({id: this.status.id})
           .then(({ancestors, descendants}) => {
-            this.$store.dispatch('fetchFavoritedByUsers', { id: this.statusId, retweetedStatusId: this.status.id, timelineName: this.timelineName })
-            this.$store.dispatch('fetchRebloggedByUsers', { id: this.statusId, retweetedStatusId: this.status.id, timelineName: this.timelineName })
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
           })
@@ -142,6 +139,7 @@ const conversation = {
     },
     setHighlight (id) {
       this.highlight = id
+      this.$store.dispatch('fetchFavsAndRepeats', id)
     },
     getHighlight () {
       return this.isExpanded ? this.highlight : null

@@ -98,6 +98,10 @@ const Status = {
         return this.statusoid
       }
     },
+    statusFromGlobalRepository () {
+      // NOTE: Consider to replace status with statusFromGlobalRepository
+      return this.$store.state.statuses.allStatusesObject[this.status.id]
+    },
     loggedIn () {
       return !!this.$store.state.users.currentUser
     },
@@ -260,7 +264,8 @@ const Status = {
       return this.status.summary_html + '<br />' + this.status.statusnet_html
     },
     combinedFavsAndRepeatsAvatars () {
-      const combinedAvatars = [].concat(this.statusoid.favoritedBy, this.statusoid.rebloggedBy).filter(_ => _)
+      // Use the status from the global status repository since favs and repeats are saved in it
+      const combinedAvatars = [].concat(this.statusFromGlobalRepository.favoritedBy, this.statusFromGlobalRepository.rebloggedBy).filter(_ => _)
       return uniqBy(combinedAvatars, 'id')
     }
   },

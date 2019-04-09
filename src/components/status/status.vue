@@ -136,13 +136,13 @@
           <transition name="fade">
             <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0 && isFocused">
               <ul class="stats">
-                <li class="stat-count" v-if="statusoid.rebloggedBy && statusoid.rebloggedBy.length > 0">
+                <li class="stat-count" v-if="statusFromGlobalRepository.rebloggedBy && statusFromGlobalRepository.rebloggedBy.length > 0">
                   <a class="stat-title">{{ $t('settings.notification_visibility_repeats') }}</a>
-                  <div class="stat-number">{{ statusoid.rebloggedBy.length }}</div>
+                  <div class="stat-number">{{ statusFromGlobalRepository.rebloggedBy.length }}</div>
                 </li>
-                <li class="stat-count" v-if="statusoid.favoritedBy && statusoid.favoritedBy.length > 0">
+                <li class="stat-count" v-if="statusFromGlobalRepository.favoritedBy && statusFromGlobalRepository.favoritedBy.length > 0">
                   <a class="stat-title">{{ $t('user_card.favorites') }}</a>
-                  <div class="stat-number">{{ statusoid.favoritedBy.length }}</div>
+                  <div class="stat-number">{{ statusFromGlobalRepository.favoritedBy.length }}</div>
                 </li>
                 <li class="avatar-row">
                   <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>

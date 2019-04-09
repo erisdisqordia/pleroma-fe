@@ -1,5 +1,4 @@
 import { reduce, filter, findIndex } from 'lodash'
-import { set } from 'vue'
 import Status from '../status/status.vue'
 
 const sortById = (a, b) => {

@@ -9,8 +9,8 @@ import withList from '../../hocs/with_list/with_list'
 
 const FollowerList = compose(
   withLoadMore({
-    fetch: (props, $store) => $store.dispatch('addFollowers', props.userId),
-    select: (props, $store) => get($store.getters.findUser(props.userId), 'followers', []),
+    fetch: (props, $store) => $store.dispatch('fetchFollowers', props.userId),
+    select: (props, $store) => get($store.getters.findUser(props.userId), 'followerIds', []).map(id => $store.getters.findUser(id)),
     destory: (props, $store) => $store.dispatch('clearFollowers', props.userId),
     childPropName: 'entries',
     additionalPropNames: ['userId']
@@ -20,8 +20,8 @@ const FollowerList = compose(
 
 const FriendList = compose(
   withLoadMore({
-    fetch: (props, $store) => $store.dispatch('addFriends', props.userId),
-    select: (props, $store) => get($store.getters.findUser(props.userId), 'friends', []),
+    fetch: (props, $store) => $store.dispatch('fetchFriends', props.userId),
+    select: (props, $store) => get($store.getters.findUser(props.userId), 'friendIds', []).map(id => $store.getters.findUser(id)),
     destory: (props, $store) => $store.dispatch('clearFriends', props.userId),
     childPropName: 'entries',
     additionalPropNames: ['userId']

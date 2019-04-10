@@ -171,9 +171,10 @@ const getCustomEmoji = async ({ store }) => {
   try {
     const res = await window.fetch('/api/pleroma/emoji.json')
     if (res.ok) {
-      const values = await res.json()
+      const result = await res.json()
+      const values = Array.isArray(result) ? Object.assign({}, ...result) : result
       const emoji = Object.keys(values).map((key) => {
-        return { shortcode: key, image_url: values[key] }
+        return { shortcode: key, image_url: values[key].image_url || values[key] }
       })
       store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
       store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })

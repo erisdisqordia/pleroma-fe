@@ -38,6 +38,9 @@ module.exports = {
     'no-return-await': 1,
     'no-multi-spaces': 1,
     'no-trailing-spaces': 1,
+    'no-unused-expressions': 1,
+    'no-mixed-operators': 1,
+    'camelcase': 1,
     'no-multiple-empty-lines': 1
   }
 }

@@ -49,7 +49,7 @@ const Notifications = {
   },
   methods: {
     markAsSeen () {
-      this.$store.dispatch('markNotificationsAsSeen', this.visibleNotifications)
+      this.$store.dispatch('markNotificationsAsSeen')
     },
     fetchOlderNotifications () {
       const store = this.$store

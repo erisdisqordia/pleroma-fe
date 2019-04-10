@@ -28,21 +28,21 @@ const Notification = {
   },
   computed: {
     userClass () {
-      return highlightClass(this.notification.action.user)
+      return highlightClass(this.notification.from_profile)
     },
     userStyle () {
       const highlight = this.$store.state.config.highlight
-      const user = this.notification.action.user
+      const user = this.notification.from_profile
       return highlightStyle(highlight[user.screen_name])
     },
     userInStore () {
-      return this.$store.getters.findUser(this.notification.action.user.id)
+      return this.$store.getters.findUser(this.notification.from_profile.id)
     },
     user () {
       if (this.userInStore) {
         return this.userInStore
       }
-      return {}
+      return this.notification.from_profile
     }
   }
 }

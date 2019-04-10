@@ -39,7 +39,7 @@ export const parseUser = (data) => {
       return output
     }
 
-    // output.name = ??? missing
+    output.name = data.display_name
     output.name_html = addEmojis(data.display_name, data.emojis)
 
     // output.description = ??? missing
@@ -74,7 +74,7 @@ export const parseUser = (data) => {
       }
     }
 
-    // Missing, trying to recover
+    // TODO: handle is_local
     output.is_local = !output.screen_name.includes('@')
   } else {
     output.screen_name = data.screen_name
@@ -239,7 +239,6 @@ export const parseStatus = (data) => {
     output.in_reply_to_status_id = data.in_reply_to_status_id
     output.in_reply_to_user_id = data.in_reply_to_user_id
     output.in_reply_to_screen_name = data.in_reply_to_screen_name
-
     output.statusnet_conversation_id = data.statusnet_conversation_id
 
     if (output.type === 'retweet') {
@@ -290,9 +289,11 @@ export const parseNotification = (data) => {
 
   if (masto) {
     output.type = mastoDict[data.type] || data.type
-    // output.seen = ??? missing
-    output.status = parseStatus(data.status)
-    output.action = output.status // not sure
+    output.seen = data.pleroma.is_seen
+    output.status = output.type === 'follow'
+      ? null
+      : parseStatus(data.status)
+    output.action = output.status // TODO: Refactor, this is unneeded
     output.from_profile = parseUser(data.account)
   } else {
     const parsedNotice = parseStatus(data.notice)

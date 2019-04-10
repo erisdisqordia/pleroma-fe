@@ -54,10 +54,10 @@ const config = {
   },
   actions: {
     setHighlight ({ commit, dispatch }, { user, color, type }) {
-      commit('setHighlight', { user, color, type })
+      commit('setHighlight', {user, color, type})
     },
     setOption ({ commit, dispatch }, { name, value }) {
-      commit('setOption', { name, value })
+      commit('setOption', {name, value})
       switch (name) {
         case 'theme':
           setPreset(value, commit)

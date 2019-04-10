@@ -1,234 +1,109 @@
 <template>
   <div class="settings panel panel-default">
     <div class="panel-heading">
-      {{ $t('registration.registration') }}
+      {{$t('registration.registration')}}
     </div>
     <div class="panel-body">
-      <form
-        class="registration-form"
-        @submit.prevent="submit(user)"
-      >
-        <div class="container">
-          <div class="text-fields">
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.user.username.$error }"
-            >
-              <label
-                class="form--label"
-                for="sign-up-username"
-              >{{ $t('login.username') }}</label>
-              <input
-                id="sign-up-username"
-                v-model.trim="$v.user.username.$model"
-                :disabled="isPending"
-                class="form-control"
-                :placeholder="$t('registration.username_placeholder')"
-              >
+      <form v-on:submit.prevent='submit(user)' class='registration-form'>
+        <div class='container'>
+          <div class='text-fields'>
+            <div class='form-group' :class="{ 'form-group--error': $v.user.username.$error }">
+              <label class='form--label' for='sign-up-username'>{{$t('login.username')}}</label>
+              <input :disabled="isPending" v-model.trim='$v.user.username.$model' class='form-control' id='sign-up-username' :placeholder="$t('registration.username_placeholder')">
             </div>
-            <div
-              v-if="$v.user.username.$dirty"
-              class="form-error"
-            >
+            <div class="form-error" v-if="$v.user.username.$dirty">
               <ul>
                 <li v-if="!$v.user.username.required">
-                  <span>{{ $t('registration.validations.username_required') }}</span>
+                  <span>{{$t('registration.validations.username_required')}}</span>
                 </li>
               </ul>
             </div>
 
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.user.fullname.$error }"
-            >
-              <label
-                class="form--label"
-                for="sign-up-fullname"
-              >{{ $t('registration.fullname') }}</label>
-              <input
-                id="sign-up-fullname"
-                v-model.trim="$v.user.fullname.$model"
-                :disabled="isPending"
-                class="form-control"
-                :placeholder="$t('registration.fullname_placeholder')"
-              >
+            <div class='form-group' :class="{ 'form-group--error': $v.user.fullname.$error }">
+              <label class='form--label' for='sign-up-fullname'>{{$t('registration.fullname')}}</label>
+              <input :disabled="isPending" v-model.trim='$v.user.fullname.$model' class='form-control' id='sign-up-fullname' :placeholder="$t('registration.fullname_placeholder')">
             </div>
-            <div
-              v-if="$v.user.fullname.$dirty"
-              class="form-error"
-            >
+            <div class="form-error" v-if="$v.user.fullname.$dirty">
               <ul>
                 <li v-if="!$v.user.fullname.required">
-                  <span>{{ $t('registration.validations.fullname_required') }}</span>
+                  <span>{{$t('registration.validations.fullname_required')}}</span>
                 </li>
               </ul>
             </div>
 
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.user.email.$error }"
-            >
-              <label
-                class="form--label"
-                for="email"
-              >{{ $t('registration.email') }}</label>
-              <input
-                id="email"
-                v-model="$v.user.email.$model"
-                :disabled="isPending"
-                class="form-control"
-                type="email"
-              >
+            <div class='form-group' :class="{ 'form-group--error': $v.user.email.$error }">
+              <label class='form--label' for='email'>{{$t('registration.email')}}</label>
+              <input :disabled="isPending" v-model='$v.user.email.$model' class='form-control' id='email' type="email">
             </div>
-            <div
-              v-if="$v.user.email.$dirty"
-              class="form-error"
-            >
+            <div class="form-error" v-if="$v.user.email.$dirty">
               <ul>
                 <li v-if="!$v.user.email.required">
-                  <span>{{ $t('registration.validations.email_required') }}</span>
+                  <span>{{$t('registration.validations.email_required')}}</span>
                 </li>
               </ul>
             </div>
 
-            <div class="form-group">
-              <label
-                class="form--label"
-                for="bio"
-              >{{ $t('registration.bio') }} ({{ $t('general.optional') }})</label>
-              <textarea
-                id="bio"
-                v-model="user.bio"
-                :disabled="isPending"
-                class="form-control"
-                :placeholder="bioPlaceholder"
-              />
+            <div class='form-group'>
+              <label class='form--label' for='bio'>{{$t('registration.bio')}} ({{$t('general.optional')}})</label>
+              <textarea :disabled="isPending" v-model='user.bio' class='form-control' id='bio' :placeholder="bioPlaceholder"></textarea>
             </div>
 
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.user.password.$error }"
-            >
-              <label
-                class="form--label"
-                for="sign-up-password"
-              >{{ $t('login.password') }}</label>
-              <input
-                id="sign-up-password"
-                v-model="user.password"
-                :disabled="isPending"
-                class="form-control"
-                type="password"
-              >
+            <div class='form-group' :class="{ 'form-group--error': $v.user.password.$error }">
+              <label class='form--label' for='sign-up-password'>{{$t('login.password')}}</label>
+              <input :disabled="isPending" v-model='user.password' class='form-control' id='sign-up-password' type='password'>
             </div>
-            <div
-              v-if="$v.user.password.$dirty"
-              class="form-error"
-            >
+            <div class="form-error" v-if="$v.user.password.$dirty">
               <ul>
                 <li v-if="!$v.user.password.required">
-                  <span>{{ $t('registration.validations.password_required') }}</span>
+                  <span>{{$t('registration.validations.password_required')}}</span>
                 </li>
               </ul>
             </div>
 
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.user.confirm.$error }"
-            >
-              <label
-                class="form--label"
-                for="sign-up-password-confirmation"
-              >{{ $t('registration.password_confirm') }}</label>
-              <input
-                id="sign-up-password-confirmation"
-                v-model="user.confirm"
-                :disabled="isPending"
-                class="form-control"
-                type="password"
-              >
+            <div class='form-group' :class="{ 'form-group--error': $v.user.confirm.$error }">
+              <label class='form--label' for='sign-up-password-confirmation'>{{$t('registration.password_confirm')}}</label>
+              <input :disabled="isPending" v-model='user.confirm' class='form-control' id='sign-up-password-confirmation' type='password'>
             </div>
-            <div
-              v-if="$v.user.confirm.$dirty"
-              class="form-error"
-            >
+            <div class="form-error" v-if="$v.user.confirm.$dirty">
               <ul>
                 <li v-if="!$v.user.confirm.required">
-                  <span>{{ $t('registration.validations.password_confirmation_required') }}</span>
+                  <span>{{$t('registration.validations.password_confirmation_required')}}</span>
                 </li>
                 <li v-if="!$v.user.confirm.sameAsPassword">
-                  <span>{{ $t('registration.validations.password_confirmation_match') }}</span>
+                  <span>{{$t('registration.validations.password_confirmation_match')}}</span>
                 </li>
               </ul>
             </div>
 
-            <div
-              v-if="captcha.type != 'none'"
-              id="captcha-group"
-              class="form-group"
-            >
-              <label
-                class="form--label"
-                for="captcha-label"
-              >{{ $t('captcha') }}</label>
+            <div class="form-group" id="captcha-group" v-if="captcha.type != 'none'">
+              <label class='form--label' for='captcha-label'>{{$t('captcha')}}</label>
 
               <template v-if="captcha.type == 'kocaptcha'">
-                <img
-                  :src="captcha.url"
-                  @click="setCaptcha"
-                >
+                <img v-bind:src="captcha.url" v-on:click="setCaptcha">
 
-                <sub>{{ $t('registration.new_captcha') }}</sub>
+                <sub>{{$t('registration.new_captcha')}}</sub>
 
-                <input
-                  id="captcha-answer"
-                  v-model="captcha.solution"
-                  :disabled="isPending"
-                  class="form-control"
-                  type="text"
-                  autocomplete="off"
-                >
+                <input :disabled="isPending"
+                  v-model='captcha.solution'
+                  class='form-control' id='captcha-answer' type='text' autocomplete="off">
               </template>
             </div>
 
-            <div
-              v-if="token"
-              class="form-group"
-            >
-              <label for="token">{{ $t('registration.token') }}</label>
-              <input
-                id="token"
-                v-model="token"
-                disabled="true"
-                class="form-control"
-                type="text"
-              >
+            <div class='form-group' v-if='token' >
+              <label for='token'>{{$t('registration.token')}}</label>
+              <input disabled='true' v-model='token' class='form-control' id='token' type='text'>
             </div>
-            <div class="form-group">
-              <button
-                :disabled="isPending"
-                type="submit"
-                class="btn btn-default"
-              >
-                {{ $t('general.submit') }}
-              </button>
+            <div class='form-group'>
+              <button :disabled="isPending" type='submit' class='btn btn-default'>{{$t('general.submit')}}</button>
             </div>
           </div>
 
-          <div
-            class="terms-of-service"
-            v-html="termsOfService"
-          />
+          <div class='terms-of-service' v-html="termsOfService">
+          </div>
         </div>
-        <div
-          v-if="serverValidationErrors.length"
-          class="form-group"
-        >
-          <div class="alert error">
-            <span
-              v-for="error in serverValidationErrors"
-              :key="error"
-            >{{ error }}</span>
+        <div v-if="serverValidationErrors.length" class='form-group'>
+          <div class='alert error'>
+            <span v-for="error in serverValidationErrors">{{error}}</span>
           </div>
         </div>
       </form>

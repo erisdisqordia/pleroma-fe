@@ -134,12 +134,12 @@ const UserSettings = {
             hide_followers,
             show_role
             /* eslint-enable camelcase */
-          } }).then((user) => {
-          if (!user.error) {
-            this.$store.commit('addNewUsers', [user])
-            this.$store.commit('setCurrentUser', user)
-          }
-        })
+          }}).then((user) => {
+            if (!user.error) {
+              this.$store.commit('addNewUsers', [user])
+              this.$store.commit('setCurrentUser', user)
+            }
+          })
     },
     changeVis (visibility) {
       this.newDefaultScope = visibility
@@ -150,12 +150,12 @@ const UserSettings = {
       if (file.size > this.$store.state.instance[slot + 'limit']) {
         const filesize = fileSizeFormatService.fileSizeFormat(file.size)
         const allowedsize = fileSizeFormatService.fileSizeFormat(this.$store.state.instance[slot + 'limit'])
-        this[slot + 'UploadError'] = this.$t('upload.error.base') + ' ' + this.$t('upload.error.file_too_big', { filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit })
+        this[slot + 'UploadError'] = this.$t('upload.error.base') + ' ' + this.$t('upload.error.file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit})
         return
       }
       // eslint-disable-next-line no-undef
       const reader = new FileReader()
-      reader.onload = ({ target }) => {
+      reader.onload = ({target}) => {
         const img = target.result
         this[slot + 'Preview'] = img
       }
@@ -195,7 +195,7 @@ const UserSettings = {
       offset_top = 0
       offset_left = 0
       this.bannerUploading = true
-      this.$store.state.api.backendInteractor.updateBanner({ params: { banner, offset_top, offset_left, width, height } }).then((data) => {
+      this.$store.state.api.backendInteractor.updateBanner({params: {banner, offset_top, offset_left, width, height}}).then((data) => {
         if (!data.error) {
           let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
           clone.cover_photo = data.url
@@ -221,7 +221,7 @@ const UserSettings = {
       cropW = imginfo.width
       cropH = imginfo.width
       this.backgroundUploading = true
-      this.$store.state.api.backendInteractor.updateBg({ params: { img, cropX, cropY, cropW, cropH } }).then((data) => {
+      this.$store.state.api.backendInteractor.updateBg({params: {img, cropX, cropY, cropW, cropH}}).then((data) => {
         if (!data.error) {
           let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
           clone.background_image = data.url
@@ -237,7 +237,7 @@ const UserSettings = {
     importFollows () {
       this.followListUploading = true
       const followList = this.followList
-      this.$store.state.api.backendInteractor.followImport({ params: followList })
+      this.$store.state.api.backendInteractor.followImport({params: followList})
         .then((status) => {
           if (status) {
             this.followsImported = true
@@ -295,11 +295,11 @@ const UserSettings = {
       this.deletingAccount = true
     },
     deleteAccount () {
-      this.$store.state.api.backendInteractor.deleteAccount({ password: this.deleteAccountConfirmPasswordInput })
+      this.$store.state.api.backendInteractor.deleteAccount({password: this.deleteAccountConfirmPasswordInput})
         .then((res) => {
           if (res.status === 'success') {
             this.$store.dispatch('logout')
-            this.$router.push({ name: 'root' })
+            this.$router.push({name: 'root'})
           } else {
             this.deleteAccountError = res.error
           }

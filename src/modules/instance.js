@@ -68,7 +68,7 @@ const instance = {
   },
   actions: {
     setInstanceOption ({ commit, dispatch }, { name, value }) {
-      commit('setInstanceOption', { name, value })
+      commit('setInstanceOption', {name, value})
       switch (name) {
         case 'name':
           dispatch('setPageTitle')

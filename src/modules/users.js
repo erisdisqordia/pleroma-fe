@@ -224,8 +224,8 @@ const users = {
           .then((friends) => {
             commit('addFriends', { id: user.id, friends })
             resolve(friends)
-          }).catch(e => {
-            reject(e)
+          }).catch(() => {
+            reject()
           })
       })
     },
@@ -279,8 +279,8 @@ const users = {
 
       const notificationsObject = store.rootState.statuses.notifications.idStore
       const relevantNotifications = Object.entries(notificationsObject)
-        .filter(([k, val]) => notificationIds.includes(k))
-        .map(([k, val]) => val)
+            .filter(([k, val]) => notificationIds.includes(k))
+            .map(([k, val]) => val)
 
       // Reconnect users to notifications
       each(relevantNotifications, (notification) => {
@@ -322,7 +322,7 @@ const users = {
       }
     },
     async getCaptcha (store) {
-      return store.rootState.api.backendInteractor.getCaptcha()
+      return await store.rootState.api.backendInteractor.getCaptcha()
     },
 
     logout (store) {
@@ -376,19 +376,19 @@ const users = {
               // Authentication failed
               commit('endLogin')
               if (response.status === 401) {
-                reject(new Error('Wrong username or password'))
+                reject('Wrong username or password')
               } else {
-                reject(new Error('An error occurred, please try again'))
+                reject('An error occurred, please try again')
               }
             }
             commit('endLogin')
             resolve()
           })
-          .catch((error) => {
-            console.log(error)
-            commit('endLogin')
-            reject(new Error('Failed to connect to server, try again'))
-          })
+        .catch((error) => {
+          console.log(error)
+          commit('endLogin')
+          reject('Failed to connect to server, try again')
+        })
       })
     }
   }

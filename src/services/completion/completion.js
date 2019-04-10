@@ -8,7 +8,7 @@ export const wordAtPosition = (str, pos) => {
   const words = splitIntoWords(str)
   const wordsWithPosition = addPositionToWords(words)
 
-  return find(wordsWithPosition, ({ start, end }) => start <= pos && end > pos)
+  return find(wordsWithPosition, ({start, end}) => start <= pos && end > pos)
 }
 
 export const addPositionToWords = (words) => {

@@ -1,38 +1,14 @@
 <template>
   <div>
     <div class="user-finder-container">
-      <i
-        v-if="loading"
-        class="icon-spin4 user-finder-icon animate-spin-slow"
-      />
-      <a
-        v-if="hidden"
-        href="#"
-        :title="$t('finder.find_user')"
-      ><i
-        class="icon-user-plus user-finder-icon"
-        @click.prevent.stop="toggleHidden"
-      /></a>
+      <i class="icon-spin4 user-finder-icon animate-spin-slow" v-if="loading" />
+      <a href="#" v-if="hidden" :title="$t('finder.find_user')"><i class="icon-user-plus user-finder-icon" @click.prevent.stop="toggleHidden" /></a>
       <template v-else>
-        <input
-          id="user-finder-input"
-          ref="userSearchInput"
-          v-model="username"
-          class="user-finder-input"
-          :placeholder="$t('finder.find_user')"
-          type="text"
-          @keyup.enter="findUser(username)"
-        >
-        <button
-          class="btn search-button"
-          @click="findUser(username)"
-        >
-          <i class="icon-search" />
+        <input class="user-finder-input" ref="userSearchInput" @keyup.enter="findUser(username)" v-model="username" :placeholder="$t('finder.find_user')" id="user-finder-input" type="text"/>
+        <button class="btn search-button" @click="findUser(username)">
+          <i class="icon-search"/>
         </button>
-        <i
-          class="button-icon icon-cancel user-finder-icon"
-          @click.prevent.stop="toggleHidden"
-        />
+        <i class="button-icon icon-cancel user-finder-icon" @click.prevent.stop="toggleHidden"/>
       </template>
     </div>
   </div>
@@ -48,6 +24,7 @@
   display: inline-flex;
   align-items: baseline;
   vertical-align: baseline;
+
 
   .user-finder-input,
   .search-button {

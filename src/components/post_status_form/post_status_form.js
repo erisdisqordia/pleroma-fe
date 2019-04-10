@@ -6,13 +6,13 @@ import fileTypeService from '../../services/file_type/file_type.service.js'
 import Completion from '../../services/completion/completion.js'
 import { take, filter, reject, map, uniqBy } from 'lodash'
 
-const buildMentionsString = ({ user, attentions }, currentUser) => {
+const buildMentionsString = ({user, attentions}, currentUser) => {
   let allAttentions = [...attentions]
 
   allAttentions.unshift(user)
 
   allAttentions = uniqBy(allAttentions, 'id')
-  allAttentions = reject(allAttentions, { id: currentUser.id })
+  allAttentions = reject(allAttentions, {id: currentUser.id})
 
   let mentions = map(allAttentions, (attention) => {
     return `@${attention.screen_name}`
@@ -48,17 +48,17 @@ const PostStatusForm = {
     let statusText = preset || ''
 
     const scopeCopy = typeof this.$store.state.config.scopeCopy === 'undefined'
-      ? this.$store.state.instance.scopeCopy
-      : this.$store.state.config.scopeCopy
+          ? this.$store.state.instance.scopeCopy
+          : this.$store.state.config.scopeCopy
 
     if (this.replyTo) {
       const currentUser = this.$store.state.users.currentUser
       statusText = buildMentionsString({ user: this.repliedUser, attentions: this.attentions }, currentUser)
     }
 
-    const scope = ((this.copyMessageScope && scopeCopy) || this.copyMessageScope === 'direct')
-      ? this.copyMessageScope
-      : this.$store.state.users.currentUser.default_scope
+    const scope = (this.copyMessageScope && scopeCopy || this.copyMessageScope === 'direct')
+          ? this.copyMessageScope
+          : this.$store.state.users.currentUser.default_scope
 
     const contentType = typeof this.$store.state.config.postContentType === 'undefined'
       ? this.$store.state.instance.postContentType
@@ -88,13 +88,13 @@ const PostStatusForm = {
         const query = this.textAtCaret.slice(1).toUpperCase()
         const matchedUsers = filter(this.users, (user) => {
           return user.screen_name.toUpperCase().startsWith(query) ||
-            (user.name && user.name.toUpperCase().startsWith(query))
+            user.name && user.name.toUpperCase().startsWith(query)
         })
         if (matchedUsers.length <= 0) {
           return false
         }
         // eslint-disable-next-line camelcase
-        return map(take(matchedUsers, 5), ({ screen_name, name, profile_image_url_original }, index) => ({
+        return map(take(matchedUsers, 5), ({screen_name, name, profile_image_url_original}, index) => ({
           // eslint-disable-next-line camelcase
           screen_name: `@${screen_name}`,
           name: name,
@@ -107,8 +107,7 @@ const PostStatusForm = {
         if (matchedEmoji.length <= 0) {
           return false
         }
-        // eslint-disable-next-line camelcase
-        return map(take(matchedEmoji, 5), ({ shortcode, image_url, utf }, index) => ({
+        return map(take(matchedEmoji, 5), ({shortcode, image_url, utf}, index) => ({
           screen_name: `:${shortcode}:`,
           name: '',
           utf: utf || '',
@@ -135,8 +134,8 @@ const PostStatusForm = {
     },
     showAllScopes () {
       const minimalScopesMode = typeof this.$store.state.config.minimalScopesMode === 'undefined'
-        ? this.$store.state.instance.minimalScopesMode
-        : this.$store.state.config.minimalScopesMode
+            ? this.$store.state.instance.minimalScopesMode
+            : this.$store.state.config.minimalScopesMode
       return !minimalScopesMode
     },
     emoji () {
@@ -234,7 +233,7 @@ const PostStatusForm = {
     onKeydown (e) {
       e.stopPropagation()
     },
-    setCaret ({ target: { selectionStart } }) {
+    setCaret ({target: {selectionStart}}) {
       this.caret = selectionStart
     },
     postStatus (newStatus) {
@@ -315,7 +314,7 @@ const PostStatusForm = {
     },
     fileDrop (e) {
       if (e.dataTransfer.files.length > 0) {
-        e.preventDefault() // allow dropping text like before
+        e.preventDefault()  // allow dropping text like before
         this.dropFiles = e.dataTransfer.files
       }
     },

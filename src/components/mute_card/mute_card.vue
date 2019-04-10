@@ -1,12 +1,7 @@
 <template>
   <basic-user-card :user="user">
     <div class="mute-card-content-container">
-      <button
-        v-if="muted"
-        class="btn btn-default"
-        :disabled="progress"
-        @click="unmuteUser"
-      >
+      <button class="btn btn-default" @click="unmuteUser" :disabled="progress" v-if="muted">
         <template v-if="progress">
           {{ $t('user_card.unmute_progress') }}
         </template>
@@ -14,12 +9,7 @@
           {{ $t('user_card.unmute') }}
         </template>
       </button>
-      <button
-        v-else
-        class="btn btn-default"
-        :disabled="progress"
-        @click="muteUser"
-      >
+      <button class="btn btn-default" @click="muteUser" :disabled="progress" v-else>
         <template v-if="progress">
           {{ $t('user_card.mute_progress') }}
         </template>

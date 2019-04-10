@@ -1,90 +1,58 @@
 <template>
-  <div
-    class="side-drawer-container"
+  <div class="side-drawer-container"
     :class="{ 'side-drawer-container-closed': closed, 'side-drawer-container-open': !closed }"
   >
-    <div
-      class="side-drawer-darken"
-      :class="{ 'side-drawer-darken-closed': closed}"
-    />
-    <div
-      class="side-drawer"
+    <div class="side-drawer-darken" :class="{ 'side-drawer-darken-closed': closed}" />
+    <div class="side-drawer"
       :class="{'side-drawer-closed': closed}"
       @touchstart="touchStart"
       @touchmove="touchMove"
     >
-      <div
-        class="side-drawer-heading"
-        @click="toggleDrawer"
-      >
-        <UserCard
-          v-if="currentUser"
-          :user="currentUser"
-          :hide-bio="true"
-        />
-        <div
-          v-else
-          class="side-drawer-logo-wrapper"
-        >
-          <img :src="logo">
-          <span>{{ sitename }}</span>
+      <div class="side-drawer-heading" @click="toggleDrawer">
+        <UserCard :user="currentUser" :hideBio="true" v-if="currentUser"/>
+        <div class="side-drawer-logo-wrapper" v-else>
+          <img :src="logo"/>
+          <span>{{sitename}}</span>
         </div>
       </div>
       <ul>
-        <li
-          v-if="!currentUser"
-          @click="toggleDrawer"
-        >
+        <li v-if="!currentUser" @click="toggleDrawer">
           <router-link :to="{ name: 'login' }">
             {{ $t("login.login") }}
           </router-link>
         </li>
-        <li
-          v-if="currentUser"
-          @click="toggleDrawer"
-        >
+        <li v-if="currentUser" @click="toggleDrawer">
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
             {{ $t("nav.dms") }}
           </router-link>
         </li>
       </ul>
       <ul>
-        <li
-          v-if="currentUser"
-          @click="toggleDrawer"
-        >
+        <li v-if="currentUser" @click="toggleDrawer">
           <router-link :to="{ name: 'friends' }">
             {{ $t("nav.timeline") }}
           </router-link>
         </li>
-        <li
-          v-if="currentUser && currentUser.locked"
-          @click="toggleDrawer"
-        >
-          <router-link to="/friend-requests">
+        <li v-if="currentUser && currentUser.locked" @click="toggleDrawer">
+          <router-link to='/friend-requests'>
             {{ $t("nav.friend_requests") }}
-            <span
-              v-if="followRequestCount > 0"
-              class="badge follow-request-count"
-            >
-              {{ followRequestCount }}
+            <span v-if='followRequestCount > 0' class="badge follow-request-count">
+              {{followRequestCount}}
             </span>
+
           </router-link>
         </li>
         <li @click="toggleDrawer">
-          <router-link to="/main/public">
+          <router-link to='/main/public'>
             {{ $t("nav.public_tl") }}
           </router-link>
         </li>
         <li @click="toggleDrawer">
-          <router-link to="/main/all">
+          <router-link to='/main/all'>
             {{ $t("nav.twkn") }}
           </router-link>
         </li>
-        <li
-          v-if="currentUser && chat"
-          @click="toggleDrawer"
-        >
+        <li v-if="currentUser && chat" @click="toggleDrawer">
           <router-link :to="{ name: 'chat' }">
             {{ $t("nav.chat") }}
           </router-link>
@@ -96,10 +64,7 @@
             {{ $t("nav.user_search") }}
           </router-link>
         </li>
-        <li
-          v-if="currentUser && suggestionsEnabled"
-          @click="toggleDrawer"
-        >
+        <li v-if="currentUser && suggestionsEnabled" @click="toggleDrawer">
           <router-link :to="{ name: 'who-to-follow' }">
             {{ $t("nav.who_to_follow") }}
           </router-link>
@@ -114,24 +79,17 @@
             {{ $t("nav.about") }}
           </router-link>
         </li>
-        <li
-          v-if="currentUser"
-          @click="toggleDrawer"
-        >
-          <a
-            href="#"
-            @click="doLogout"
-          >
+        <li v-if="currentUser" @click="toggleDrawer">
+          <a @click="doLogout" href="#">
             {{ $t("login.logout") }}
           </a>
         </li>
       </ul>
     </div>
-    <div
-      class="side-drawer-click-outside"
-      :class="{'side-drawer-click-outside-closed': closed}"
+    <div class="side-drawer-click-outside"
       @click.stop.prevent="toggleDrawer"
-    />
+      :class="{'side-drawer-click-outside-closed': closed}"
+    ></div>
   </div>
 </template>
 

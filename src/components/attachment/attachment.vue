@@ -1,104 +1,54 @@
 <template>
-  <div
-    v-if="usePlaceHolder"
-    @click="openModal"
-  >
-    <a
+  <div v-if="usePlaceHolder" @click="openModal">
+    <a class="placeholder"
       v-if="type !== 'html'"
-      class="placeholder"
-      target="_blank"
-      :href="attachment.url"
+      target="_blank" :href="attachment.url"
     >
-      [{{ nsfw ? "NSFW/" : "" }}{{ type.toUpperCase() }}]
+      [{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]
     </a>
   </div>
   <div
-    v-else
-    v-show="!isEmpty"
-    class="attachment"
+    v-else class="attachment"
     :class="{[type]: true, loading, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}"
+    v-show="!isEmpty"
   >
-    <a
-      v-if="hidden"
-      class="image-attachment"
-      :href="attachment.url"
-      @click.prevent="toggleHidden"
-    >
-      <img
-        :key="nsfwImage"
-        class="nsfw"
-        :src="nsfwImage"
-        :class="{'small': isSmall}"
-      >
-      <i
-        v-if="type === 'video'"
-        class="play-icon icon-play-circled"
-      />
+    <a class="image-attachment" v-if="hidden" :href="attachment.url" @click.prevent="toggleHidden">
+      <img class="nsfw" :key="nsfwImage" :src="nsfwImage" :class="{'small': isSmall}"/>
+      <i v-if="type === 'video'" class="play-icon icon-play-circled"></i>
     </a>
-    <div
-      v-if="nsfw && hideNsfwLocal && !hidden"
-      class="hider"
-    >
-      <a
-        href="#"
-        @click.prevent="toggleHidden"
-      >Hide</a>
+    <div class="hider" v-if="nsfw && hideNsfwLocal && !hidden">
+      <a href="#" @click.prevent="toggleHidden">Hide</a>
     </div>
 
-    <a
-      v-if="type === 'image' && (!hidden || preloadImage)"
+    <a v-if="type === 'image' && (!hidden || preloadImage)"
+      @click="openModal"
       class="image-attachment"
       :class="{'hidden': hidden && preloadImage }"
-      :href="attachment.url"
-      target="_blank"
+      :href="attachment.url" target="_blank"
       :title="attachment.description"
-      @click="openModal"
     >
-      <StillImage
-        :referrerpolicy="referrerpolicy"
-        :mimetype="attachment.mimetype"
-        :src="attachment.large_thumb_url || attachment.url"
-      />
+      <StillImage :referrerpolicy="referrerpolicy" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
     </a>
 
-    <a
+    <a class="video-container"
+      @click="openModal"
       v-if="type === 'video' && !hidden"
-      class="video-container"
       :class="{'small': isSmall}"
       :href="allowPlay ? undefined : attachment.url"
-      @click="openModal"
     >
-      <VideoAttachment
-        class="video"
-        :attachment="attachment"
-        :controls="allowPlay"
-      />
-      <i
-        v-if="!allowPlay"
-        class="play-icon icon-play-circled"
-      />
+      <VideoAttachment class="video" :attachment="attachment" :controls="allowPlay" />
+      <i v-if="!allowPlay" class="play-icon icon-play-circled"></i>
     </a>
 
-    <audio
-      v-if="type === 'audio'"
-      :src="attachment.url"
-      controls
-    />
+    <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
 
-    <div
-      v-if="type === 'html' && attachment.oembed"
-      class="oembed"
-      @click.prevent="linkClicked"
-    >
-      <div
-        v-if="attachment.thumb_url"
-        class="image"
-      >
-        <img :src="attachment.thumb_url">
+    <div @click.prevent="linkClicked" v-if="type === 'html' && attachment.oembed" class="oembed">
+      <div v-if="attachment.thumb_url" class="image">
+        <img :src="attachment.thumb_url"/>
       </div>
       <div class="text">
-        <h1><a :href="attachment.url">{{ attachment.oembed.title }}</a></h1>
-        <div v-html="attachment.oembed.oembedHTML" />
+        <h1><a :href="attachment.url">{{attachment.oembed.title}}</a></h1>
+        <div v-html="attachment.oembed.oembedHTML"></div>
       </div>
     </div>
   </div>

@@ -1,9 +1,5 @@
 <template>
-  <Timeline
-    :title="$t('nav.timeline')"
-    :timeline="timeline"
-    :timeline-name="'friends'"
-  />
+  <Timeline :title="$t('nav.timeline')" v-bind:timeline="timeline" v-bind:timeline-name="'friends'"/>
 </template>
 
 <script src="./friends_timeline.js"></script>

@@ -2,10 +2,8 @@
   <div>
     <div class="panel panel-default">
       <div class="panel-body">
-        <div
-          class="tos-content"
-          v-html="content"
-        />
+        <div v-html="content" class="tos-content">
+        </div>
       </div>
     </div>
   </div>

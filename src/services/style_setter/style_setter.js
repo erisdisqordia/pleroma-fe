@@ -238,12 +238,12 @@ const generateColors = (input) => {
   })
 
   const htmlColors = Object.entries(colors)
-    .reduce((acc, [k, v]) => {
-      if (!v) return acc
-      acc.solid[k] = rgb2hex(v)
-      acc.complete[k] = typeof v.a === 'undefined' ? rgb2hex(v) : rgb2rgba(v)
-      return acc
-    }, { complete: {}, solid: {} })
+        .reduce((acc, [k, v]) => {
+          if (!v) return acc
+          acc.solid[k] = rgb2hex(v)
+          acc.complete[k] = typeof v.a === 'undefined' ? rgb2hex(v) : rgb2rgba(v)
+          return acc
+        }, { complete: {}, solid: {} })
   return {
     rules: {
       colors: Object.entries(htmlColors.complete)

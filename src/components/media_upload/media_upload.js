@@ -16,7 +16,7 @@ const mediaUpload = {
       if (file.size > store.state.instance.uploadlimit) {
         const filesize = fileSizeFormatService.fileSizeFormat(file.size)
         const allowedsize = fileSizeFormatService.fileSizeFormat(store.state.instance.uploadlimit)
-        self.$emit('upload-failed', 'file_too_big', { filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit })
+        self.$emit('upload-failed', 'file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit})
         return
       }
       const formData = new FormData()
@@ -36,7 +36,7 @@ const mediaUpload = {
     },
     fileDrop (e) {
       if (e.dataTransfer.files.length > 0) {
-        e.preventDefault() // allow dropping text like before
+        e.preventDefault()  // allow dropping text like before
         this.uploadFile(e.dataTransfer.files[0])
       }
     },
@@ -54,7 +54,7 @@ const mediaUpload = {
         this.uploadReady = true
       })
     },
-    change ({ target }) {
+    change ({target}) {
       for (var i = 0; i < target.files.length; i++) {
         let file = target.files[i]
         this.uploadFile(file)

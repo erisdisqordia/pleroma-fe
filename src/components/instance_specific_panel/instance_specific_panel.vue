@@ -1,11 +1,9 @@
 <template>
-  <div
-    v-if="show"
-    class="instance-specific-panel"
-  >
+  <div v-if="show" class="instance-specific-panel">
     <div class="panel panel-default">
       <div class="panel-body">
-        <div v-html="instanceSpecificPanelContent" />
+        <div v-html="instanceSpecificPanelContent">
+        </div>
       </div>
     </div>
   </div>

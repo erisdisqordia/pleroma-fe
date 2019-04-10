@@ -7,14 +7,14 @@ const defaultEntryPropsGetter = entry => ({ entry })
 const defaultKeyGetter = entry => entry.id
 
 const withList = ({
-  getEntryProps = defaultEntryPropsGetter, // function to accept entry and index values and return props to be passed into the item component
-  getKey = defaultKeyGetter // funciton to accept entry and index values and return key prop value
+  getEntryProps = defaultEntryPropsGetter,  // function to accept entry and index values and return props to be passed into the item component
+  getKey = defaultKeyGetter                 // funciton to accept entry and index values and return key prop value
 }) => (ItemComponent) => (
   Vue.component('withList', {
     props: [
-      'entries', // array of entry
-      'entryProps', // additional props to be passed into each entry
-      'entryListeners' // additional event listeners to be passed into each entry
+      'entries',                            // array of entry
+      'entryProps',                         // additional props to be passed into each entry
+      'entryListeners'                      // additional event listeners to be passed into each entry
     ],
     render (createElement) {
       return (

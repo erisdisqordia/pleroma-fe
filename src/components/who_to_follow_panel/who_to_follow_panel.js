@@ -29,7 +29,7 @@ function getWhoToFollow (panel) {
     panel.usersToFollow.forEach(toFollow => {
       toFollow.name = 'Loading...'
     })
-    apiService.suggestions({ credentials: credentials })
+    apiService.suggestions({credentials: credentials})
       .then((reply) => {
         showWhoToFollow(panel, reply)
       })

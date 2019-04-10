@@ -1,9 +1,9 @@
 <template>
   <conversation
     :collapsable="false"
-    is-page="true"
+    isPage="true"
     :statusoid="statusoid"
-  />
+  ></conversation>
 </template>
 
 <script src="./conversation-page.js"></script>

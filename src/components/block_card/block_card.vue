@@ -1,12 +1,7 @@
 <template>
   <basic-user-card :user="user">
     <div class="block-card-content-container">
-      <button
-        v-if="blocked"
-        class="btn btn-default"
-        :disabled="progress"
-        @click="unblockUser"
-      >
+      <button class="btn btn-default" @click="unblockUser" :disabled="progress" v-if="blocked">
         <template v-if="progress">
           {{ $t('user_card.unblock_progress') }}
         </template>
@@ -14,12 +9,7 @@
           {{ $t('user_card.unblock') }}
         </template>
       </button>
-      <button
-        v-else
-        class="btn btn-default"
-        :disabled="progress"
-        @click="blockUser"
-      >
+      <button class="btn btn-default" @click="blockUser" :disabled="progress" v-else>
         <template v-if="progress">
           {{ $t('user_card.block_progress') }}
         </template>

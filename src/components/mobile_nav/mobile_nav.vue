@@ -1,71 +1,34 @@
 <template>
-  <nav
-    id="nav"
-    class="nav-bar container"
-  >
-    <div
-      class="mobile-inner-nav"
-      @click="scrollToTop()"
-    >
-      <div class="item">
-        <a
-          href="#"
-          class="mobile-nav-button"
-          @click.stop.prevent="toggleMobileSidebar()"
-        >
-          <i class="button-icon icon-menu" />
+  <nav class='nav-bar container' id="nav">
+    <div class='mobile-inner-nav' @click="scrollToTop()">
+      <div class='item'>
+        <a href="#" class="mobile-nav-button" @click.stop.prevent="toggleMobileSidebar()">
+          <i class="button-icon icon-menu"></i>
         </a>
-        <router-link
-          class="site-name"
-          :to="{ name: 'root' }"
-          active-class="home"
-        >
-          {{ sitename }}
-        </router-link>
+        <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
       </div>
-      <div class="item right">
-        <a
-          v-if="currentUser"
-          class="mobile-nav-button"
-          href="#"
-          @click.stop.prevent="openMobileNotifications()"
-        >
-          <i class="button-icon icon-bell-alt" />
-          <div
-            v-if="unseenNotificationsCount"
-            class="alert-dot"
-          />
+      <div class='item right'>
+        <a class="mobile-nav-button" v-if="currentUser" href="#" @click.stop.prevent="openMobileNotifications()">
+          <i class="button-icon icon-bell-alt"></i>
+          <div class="alert-dot" v-if="unseenNotificationsCount"></div>
         </a>
       </div>
     </div>
-    <SideDrawer
-      ref="sideDrawer"
-      :logout="logout"
-    />
-    <div
-      v-if="currentUser"
+    <SideDrawer ref="sideDrawer" :logout="logout"/>
+    <div v-if="currentUser"
       class="mobile-notifications-drawer"
       :class="{ 'closed': !notificationsOpen }"
       @touchstart="notificationsTouchStart"
       @touchmove="notificationsTouchMove"
     >
       <div class="mobile-notifications-header">
-        <span class="title">{{ $t('notifications.notifications') }}</span>
-        <a
-          class="mobile-nav-button"
-          @click.stop.prevent="closeMobileNotifications()"
-        >
-          <i class="button-icon icon-cancel" />
+        <span class="title">{{$t('notifications.notifications')}}</span>
+        <a class="mobile-nav-button" @click.stop.prevent="closeMobileNotifications()">
+          <i class="button-icon icon-cancel"/>
         </a>
       </div>
-      <div
-        v-if="currentUser"
-        class="mobile-notifications"
-      >
-        <Notifications
-          ref="notifications"
-          no-heading="true"
-        />
+      <div v-if="currentUser" class="mobile-notifications">
+        <Notifications ref="notifications" noHeading="true"/>
       </div>
     </div>
     <MobilePostStatusModal />

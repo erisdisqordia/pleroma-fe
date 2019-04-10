@@ -78,13 +78,13 @@ const mergeOrAdd = (arr, obj, item) => {
     merge(oldItem, omitBy(item, (v, k) => v === null || k === 'user'))
     // Reactivity fix.
     oldItem.attachments.splice(oldItem.attachments.length)
-    return { item: oldItem, new: false }
+    return {item: oldItem, new: false}
   } else {
     // This is a new item, prepare it
     prepareStatus(item)
     arr.push(item)
     set(obj, item.id, item)
-    return { item, new: true }
+    return {item, new: true}
   }
 }
 
@@ -237,12 +237,12 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
       const uri = deletion.uri
 
       // Remove possible notification
-      const status = find(allStatuses, { uri })
+      const status = find(allStatuses, {uri})
       if (!status) {
         return
       }
 
-      remove(state.notifications.data, ({ action: { id } }) => id === status.id)
+      remove(state.notifications.data, ({action: {id}}) => id === status.id)
 
       remove(allStatuses, { uri })
       if (timeline) {

@@ -29,10 +29,10 @@ const ScopeSelector = {
     },
     css () {
       return {
-        public: { selected: this.currentScope === 'public' },
-        unlisted: { selected: this.currentScope === 'unlisted' },
-        private: { selected: this.currentScope === 'private' },
-        direct: { selected: this.currentScope === 'direct' }
+        public: {selected: this.currentScope === 'public'},
+        unlisted: {selected: this.currentScope === 'unlisted'},
+        private: {selected: this.currentScope === 'private'},
+        direct: {selected: this.currentScope === 'direct'}
       }
     }
   },

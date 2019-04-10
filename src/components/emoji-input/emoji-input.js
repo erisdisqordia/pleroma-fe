@@ -23,8 +23,7 @@ const EmojiInput = {
         if (matchedEmoji.length <= 0) {
           return false
         }
-        // eslint-disable-next-line camelcase
-        return map(take(matchedEmoji, 5), ({ shortcode, image_url, utf }, index) => ({
+        return map(take(matchedEmoji, 5), ({shortcode, image_url, utf}, index) => ({
           shortcode: `:${shortcode}:`,
           utf: utf || '',
           // eslint-disable-next-line camelcase
@@ -99,7 +98,7 @@ const EmojiInput = {
     onInput (e) {
       this.$emit('input', e.target.value)
     },
-    setCaret ({ target: { selectionStart } }) {
+    setCaret ({target: {selectionStart}}) {
       this.caret = selectionStart
     }
   }

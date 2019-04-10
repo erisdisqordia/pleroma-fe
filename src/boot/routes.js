@@ -24,8 +24,8 @@ export default (store) => {
       path: '/',
       redirect: _to => {
         return (store.state.users.currentUser
-          ? store.state.instance.redirectRootLogin
-          : store.state.instance.redirectRootNoLogin) || '/main/all'
+                ? store.state.instance.redirectRootLogin
+                : store.state.instance.redirectRootNoLogin) || '/main/all'
       }
     },
     { name: 'public-external-timeline', path: '/main/all', component: PublicAndExternalTimeline },

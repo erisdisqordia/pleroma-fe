@@ -1,62 +1,31 @@
 <template>
   <div class="notifications">
     <div class="panel panel-default">
-      <div
-        v-if="!noHeading"
-        class="panel-heading"
-      >
+      <div v-if="!noHeading" class="panel-heading">
         <div class="title">
-          {{ $t('notifications.notifications') }}
-          <span
-            v-if="unseenCount"
-            class="badge badge-notification unseen-count"
-          >{{ unseenCount }}</span>
+          {{$t('notifications.notifications')}}
+          <span class="badge badge-notification unseen-count" v-if="unseenCount">{{unseenCount}}</span>
         </div>
-        <div
-          v-if="error"
-          class="loadmore-error alert error"
-          @click.prevent
-        >
-          {{ $t('timeline.error_fetching') }}
+        <div @click.prevent class="loadmore-error alert error" v-if="error">
+          {{$t('timeline.error_fetching')}}
         </div>
-        <button
-          v-if="unseenCount"
-          class="read-button"
-          @click.prevent="markAsSeen"
-        >
-          {{ $t('notifications.read') }}
-        </button>
+        <button v-if="unseenCount" @click.prevent="markAsSeen" class="read-button">{{$t('notifications.read')}}</button>
       </div>
       <div class="panel-body">
-        <div
-          v-for="notification in visibleNotifications"
-          :key="notification.action.id"
-          class="notification"
-          :class="{&quot;unseen&quot;: !notification.seen}"
-        >
-          <div class="notification-overlay" />
-          <notification :notification="notification" />
+        <div v-for="notification in visibleNotifications" :key="notification.action.id" class="notification" :class='{"unseen": !notification.seen}'>
+          <div class="notification-overlay"></div>
+          <notification :notification="notification"></notification>
         </div>
       </div>
       <div class="panel-footer">
-        <div
-          v-if="bottomedOut"
-          class="new-status-notification text-center panel-footer faint"
-        >
-          {{ $t('notifications.no_more_notifications') }}
+        <div v-if="bottomedOut" class="new-status-notification text-center panel-footer faint">
+          {{$t('notifications.no_more_notifications')}}
         </div>
-        <a
-          v-else-if="!loading"
-          href="#"
-          @click.prevent="fetchOlderNotifications()"
-        >
-          <div class="new-status-notification text-center panel-footer">{{ $t('notifications.load_older') }}</div>
+        <a v-else-if="!loading" href="#" v-on:click.prevent="fetchOlderNotifications()">
+          <div class="new-status-notification text-center panel-footer">{{$t('notifications.load_older')}}</div>
         </a>
-        <div
-          v-else
-          class="new-status-notification text-center panel-footer"
-        >
-          <i class="icon-spin3 animate-spin" />
+        <div v-else class="new-status-notification text-center panel-footer">
+          <i class="icon-spin3 animate-spin"/>
         </div>
       </div>
     </div>

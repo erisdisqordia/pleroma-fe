@@ -194,7 +194,7 @@ export const parseStatus = (data) => {
       output.text = pleroma.content ? data.pleroma.content['text/plain'] : data.content
       output.summary = pleroma.spoiler_text ? data.pleroma.spoiler_text['text/plain'] : data.spoiler_text
       output.statusnet_conversation_id = data.pleroma.conversation_id
-      output.is_local = pleroma.is_local
+      output.is_local = pleroma.local
     } else {
       output.text = data.content
       output.summary = data.spoiler_text

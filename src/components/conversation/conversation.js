@@ -1,4 +1,4 @@
-import { reduce, filter, findIndex } from 'lodash'
+import { reduce, filter, findIndex, clone } from 'lodash'
 import Status from '../status/status.vue'
 
 const sortById = (a, b) => {
@@ -75,9 +75,7 @@ const conversation = {
         return [this.status]
       }
 
-      const statuses = this.$store.state.statuses.allStatuses
-      const conversation = filter(statuses, { statusnet_conversation_id: this.conversationId })
-
+      const conversation = clone(this.$store.state.statuses.conversationsObject[this.conversationId])
       const statusIndex = findIndex(conversation, { id: this.statusId })
       if (statusIndex !== -1) {
         conversation[statusIndex] = this.status

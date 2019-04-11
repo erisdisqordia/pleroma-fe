@@ -33,6 +33,7 @@ const emptyNotifications = () => ({
 export const defaultState = () => ({
   allStatuses: [],
   allStatusesObject: {},
+  conversationsObject: {},
   maxId: 0,
   notifications: emptyNotifications(),
   favorites: new Set(),
@@ -112,6 +113,39 @@ const sortTimeline = (timeline) => {
   return timeline
 }
 
+// Add status to the global storages (arrays and objects maintaining statuses) except timelines
+const addStatusToGlobalStorage = (state, data) => {
+  const result = mergeOrAdd(state.allStatuses, state.allStatusesObject, data)
+  if (result.new) {
+    // Add to conversation
+    const status = result.item
+    const conversationsObject = state.conversationsObject
+    const conversationId = status.statusnet_conversation_id
+    if (conversationsObject[conversationId]) {
+      conversationsObject[conversationId].push(status)
+    } else {
+      set(conversationsObject, conversationId, [status])
+    }
+  }
+  return result
+}
+
+// Remove status from the global storages (arrays and objects maintaining statuses) except timelines
+const removeStatusFromGlobalStorage = (state, status) => {
+  remove(state.allStatuses, { id: status.id })
+
+  // TODO: Need to remove from allStatusesObject?
+
+  // Remove possible notification
+  remove(state.notifications.data, ({action: {id}}) => id === status.id)
+
+  // Remove from conversation
+  const conversationId = status.statusnet_conversation_id
+  if (state.conversationsObject[conversationId]) {
+    remove(state.conversationsObject[conversationId], { id: status.id })
+  }
+}
+
 const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false, userId }) => {
   // Sanity check
   if (!isArray(statuses)) {
@@ -119,7 +153,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const allStatuses = state.allStatuses
-  const allStatusesObject = state.allStatusesObject
   const timelineObject = state.timelines[timeline]
 
   const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
@@ -142,7 +175,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const addStatus = (data, showImmediately, addToTimeline = true) => {
-    const result = mergeOrAdd(allStatuses, allStatusesObject, data)
+    const result = addStatusToGlobalStorage(state, data)
     const status = result.item
 
     if (result.new) {
@@ -236,16 +269,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     },
     'deletion': (deletion) => {
       const uri = deletion.uri
-
-      // Remove possible notification
       const status = find(allStatuses, {uri})
       if (!status) {
         return
       }
 
-      remove(state.notifications.data, ({action: {id}}) => id === status.id)
+      removeStatusFromGlobalStorage(state, status)
 
-      remove(allStatuses, { uri })
       if (timeline) {
         remove(timelineObject.statuses, { uri })
         remove(timelineObject.visibleStatuses, { uri })
@@ -273,12 +303,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 }
 
 const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters }) => {
-  const allStatuses = state.allStatuses
-  const allStatusesObject = state.allStatusesObject
   each(notifications, (notification) => {
     if (notification.type !== 'follow') {
-      notification.action = mergeOrAdd(allStatuses, allStatusesObject, notification.action).item
-      notification.status = notification.status && mergeOrAdd(allStatuses, allStatusesObject, notification.status).item
+      notification.action = addStatusToGlobalStorage(state, notification.action).item
+      notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
     }
 
     // Only add a new notification if we don't have one for the same action

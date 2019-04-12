@@ -64,10 +64,10 @@
                   <i class="fa icon-pin"></i>
                 </div>
                 <div class="button-icon button-action-icon" v-if="expandable && !isPreview" @click.prevent="toggleExpanded" title="Expand">
-                  <i class="button-icon icon-plus-squared"></i>
+                  <i class="icon-plus-squared"></i>
                 </div>
                 <div class="button-icon button-action-icon" v-if="unmuted" @click.prevent="toggleMute" title="Toggle Mute">
-                  <i class="button-icon icon-eye-off"></i>
+                  <i class="icon-eye-off"></i>
                 </div>
               </span>
             </div>
@@ -211,7 +211,7 @@ $status-margin: 0.75em;
 }
 
 .status-pin {
-  padding: 0.75em 0.75em 0;
+  padding: $status-margin $status-margin 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;

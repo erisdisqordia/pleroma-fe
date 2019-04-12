@@ -201,19 +201,19 @@
             </Autosuggest>
           </div>
           <BlockList :refresh="true" :getKey="identity" class="profile-edit-user-list">
-            <template slot="header" slot-scope="p">
+            <template slot="header" slot-scope="{selected}">
               <div class="profile-edit-bulk-actions">
-                <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => blockUsers(p.selected)">
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => blockUsers(selected)">
                   {{ $t('user_card.block') }}
                   <template slot="progress">{{ $t('user_card.block_progress') }}</template>
                 </ProgressButton>
-                <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => unblockUsers(p.selected)">
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => unblockUsers(selected)">
                   {{ $t('user_card.unblock') }}
                   <template slot="progress">{{ $t('user_card.unblock_progress') }}</template>
                 </ProgressButton>
               </div>
             </template>
-            <template slot="item" slot-scope="p"><BlockCard :userId="p.item" /></template>
+            <template slot="item" slot-scope="{item}"><BlockCard :userId="item" /></template>
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
           </BlockList>
         </div>
@@ -225,19 +225,19 @@
             </Autosuggest>
           </div>
           <MuteList :refresh="true" :getKey="identity" class="profile-edit-user-list">
-            <template slot="header" slot-scope="p">
+            <template slot="header" slot-scope="{selected}">
               <div class="profile-edit-bulk-actions">
-                <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => muteUsers(p.selected)">
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => muteUsers(selected)">
                   {{ $t('user_card.mute') }}
                   <template slot="progress">{{ $t('user_card.mute_progress') }}</template>
                 </ProgressButton>
-                <ProgressButton class="btn btn-default" v-if="p.selected.length > 0" :click="() => unmuteUsers(p.selected)">
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => unmuteUsers(selected)">
                   {{ $t('user_card.unmute') }}
                   <template slot="progress">{{ $t('user_card.unmute_progress') }}</template>
                 </ProgressButton>
               </div>
             </template>
-            <template slot="item" slot-scope="p"><MuteCard :userId="p.item" /></template>
+            <template slot="item" slot-scope="{item}"><MuteCard :userId="item" /></template>
             <template slot="empty">{{$t('settings.no_mutes')}}</template>
           </MuteList>
         </div>

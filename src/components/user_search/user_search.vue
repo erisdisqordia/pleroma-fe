@@ -14,8 +14,8 @@
     </div>
     <div v-else class="panel-body">
       <List :items="users">
-        <template slot="item" slot-scope="p">
-          <FollowCard :user="p.item" />
+        <template slot="item" slot-scope="{item}">
+          <FollowCard :user="item" />
         </template>
       </List>
     </div>

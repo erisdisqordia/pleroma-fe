@@ -15,15 +15,15 @@
       />
       <div :label="$t('user_card.followees')" v-if="followsTabVisible" :disabled="!user.friends_count">
         <FriendList :userId="userId">
-          <template slot="item" slot-scope="p">
-            <FollowCard :user="p.item" />
+          <template slot="item" slot-scope="{item}">
+            <FollowCard :user="item" />
           </template>
         </FriendList>
       </div>
       <div :label="$t('user_card.followers')" v-if="followersTabVisible" :disabled="!user.followers_count">
         <FollowerList :userId="userId">
-          <template slot="item" slot-scope="p">
-            <FollowCard :user="p.item" :noFollowsYou="isUs" />
+          <template slot="item" slot-scope="{item}">
+            <FollowCard :user="item" :noFollowsYou="isUs" />
           </template>
         </FollowerList>
       </div>

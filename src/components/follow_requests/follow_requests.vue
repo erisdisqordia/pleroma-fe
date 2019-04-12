@@ -5,8 +5,8 @@
     </div>
     <div class="panel-body">
       <List :items="requests">
-        <template slot="item" slot-scope="p">
-          <FollowRequestCard :user="p.item" />
+        <template slot="item" slot-scope="{item}">
+          <FollowRequestCard :user="item" />
         </template>
       </List>
     </div>

@@ -16,9 +16,6 @@
       <div v-if="pinned" class="status-pin">
         <i class="fa icon-pin faint"></i>
         <span class="faint">Pinned</span>
-        <div class="button-icon button-action-icon" v-if="status.pinned && ownStatus" @click.prevent="unpinStatus" title="Unpin">
-          <i class="fa icon-cancel"></i>
-        </div>
       </div>
       <div v-if="retweet && !noHeading && !inConversation" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
         <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :user="statusoid.user"/>
@@ -60,9 +57,6 @@
                 <a :href="status.external_url" target="_blank" v-if="!status.is_local && !isPreview" class="source_url" title="Source">
                   <i class="button-icon icon-link-ext-alt"></i>
                 </a>
-                <div class="button-icon button-action-icon" v-if="!status.pinned && ownStatus" @click.prevent="pinStatus" title="Pin">
-                  <i class="fa icon-pin"></i>
-                </div>
                 <div class="button-icon button-action-icon" v-if="expandable && !isPreview" @click.prevent="toggleExpanded" title="Expand">
                   <i class="icon-plus-squared"></i>
                 </div>
@@ -175,7 +169,7 @@
             </div>
             <retweet-button :visibility='status.visibility' :loggedIn='loggedIn' :status='status'></retweet-button>
             <favorite-button :loggedIn='loggedIn' :status='status'></favorite-button>
-            <delete-button :status='status'></delete-button>
+            <extra-buttons :status="status" @onError="showError"></extra-buttons>
           </div>
         </div>
       </div>

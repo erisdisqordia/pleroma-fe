@@ -402,6 +402,10 @@
   "status": {
     "favorites": "Favorites",
     "repeats": "Repeats",
+    "delete": "Delete status",
+    "pin": "Pin on profile",
+    "unpin": "Unpin form profile",
+    "delete_confirm": "Do you really want to delete this status?",
     "reply_to": "Reply to",
     "replies_list": "Replies:"
   },

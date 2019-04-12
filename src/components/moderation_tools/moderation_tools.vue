@@ -127,6 +127,14 @@
     width: 100%;
     height: 100%;
 
+    &-icon {
+      padding-left: 0.5rem;
+
+      i {
+        margin-right: 0.25rem;
+      }
+    }
+
     &:hover {
       // TODO: improve the look on breeze themes
       background-color: $fallback--fg;

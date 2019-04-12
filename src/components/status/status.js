@@ -1,7 +1,7 @@
 import Attachment from '../attachment/attachment.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
-import DeleteButton from '../delete_button/delete_button.vue'
+import ExtraButtons from '../extra_buttons/extra_buttons.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCard from '../user_card/user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
@@ -280,7 +280,7 @@ const Status = {
     Attachment,
     FavoriteButton,
     RetweetButton,
-    DeleteButton,
+    ExtraButtons,
     PostStatusForm,
     UserCard,
     UserAvatar,
@@ -300,6 +300,12 @@ const Status = {
         default:
           return 'icon-globe'
       }
+    },
+    showError (error) {
+      this.error = error
+      setTimeout(() => {
+        this.error = null
+      }, 5000)
     },
     linkClicked (event) {
       let { target } = event
@@ -357,23 +363,6 @@ const Status = {
       } else if (this.hideSubjectStatus && this.status.summary) {
         this.expandingSubject = true
       }
-    },
-    pinStatus () {
-      this.$store.state.api.backendInteractor.pinOwnStatus(this.status.id).then((status) => {
-        if (status.error) {
-          this.error = status.error
-          setTimeout(() => {
-            this.error = null
-          }, 5000)
-        } else {
-          this.$store.dispatch('updatePinned', status)
-        }
-      })
-    },
-    unpinStatus () {
-      this.$store.state.api.backendInteractor.unpinOwnStatus(this.status.id).then((status) => {
-        this.$store.dispatch('updatePinned', status)
-      })
     },
     replyEnter (id, event) {
       this.showPreview = true

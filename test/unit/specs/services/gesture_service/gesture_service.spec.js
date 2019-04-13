@@ -9,7 +9,7 @@ const mockTouchEvent = (x, y) => ({
   ]
 })
 
-describe.only('GestureService', () => {
+describe('GestureService', () => {
   describe('swipeGesture', () => {
     it('calls the callback on a successful swipe', () => {
       let swiped = false

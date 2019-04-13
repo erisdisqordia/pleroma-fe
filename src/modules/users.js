@@ -81,7 +81,8 @@ export const mutations = {
         user.friends.push(friend)
       }
     })
-    user.lastFriendId = last(friends).id
+
+    user.lastFriendId = friends.length ? last(friends).id : last(user.friends).id
   },
   addFollowers (state, { id, followers }) {
     const user = state.usersObject[id]

@@ -81,7 +81,7 @@ export const mutations = {
         user.friends.push(friend)
       }
     })
-    user.lastFriendId = last(friends).id
+    user.lastFriendId = last(user.friends).id
   },
   addFollowers (state, { id, followers }) {
     const user = state.usersObject[id]
@@ -90,7 +90,7 @@ export const mutations = {
         user.followers.push(follower)
       }
     })
-    user.lastFollowerId = last(followers).id
+    user.lastFollowerId = last(user.followers).id
   },
   // Because frontend doesn't have a reason to keep these stuff in memory
   // outside of viewing someones user profile.

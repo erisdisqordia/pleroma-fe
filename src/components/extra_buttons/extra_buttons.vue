@@ -13,10 +13,10 @@
   >
     <div class="popper-wrapper">
       <div class="dropdown-menu"> 
-        <button class="dropdown-item dropdown-item-icon" @click.prevent="pinStatus" v-if="!status.pinned && ownStatus">
+        <button class="dropdown-item dropdown-item-icon" @click.prevent="pinStatus" v-if="!status.pinned && canPin">
           <i class="icon-pin"></i><span>{{$t("status.pin")}}</span>
         </button>
-        <button class="dropdown-item dropdown-item-icon" @click.prevent="unpinStatus" v-if="status.pinned && ownStatus">
+        <button class="dropdown-item dropdown-item-icon" @click.prevent="unpinStatus" v-if="status.pinned && canPin">
           <i class="icon-pin"></i><span>{{$t("status.unpin")}}</span>
         </button>
         <button class="dropdown-item dropdown-item-icon" @click.prevent="deleteStatus" v-if="canDelete">

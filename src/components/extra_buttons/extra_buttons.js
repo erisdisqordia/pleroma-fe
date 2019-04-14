@@ -44,6 +44,9 @@ const ExtraButtons = {
     },
     ownStatus () {
       return this.status.user.id === this.currentUser.id
+    },
+    canPin () {
+      return this.ownStatus && (this.status.visibility === 'public' || this.status.visibility === 'unlisted')
     }
   }
 }

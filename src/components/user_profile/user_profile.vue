@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-if="user.id" class="user-profile panel panel-default">
+  <div v-if="user" class="user-profile panel panel-default">
     <UserCard :user="user" :switcher="true" :selected="timeline.viewing" rounded="top"/>
     <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
       <Timeline

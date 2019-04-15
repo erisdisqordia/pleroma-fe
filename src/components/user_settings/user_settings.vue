@@ -22,7 +22,7 @@
           <div class="setting-item" >
             <h2>{{$t('settings.name_bio')}}</h2>
             <p>{{$t('settings.name')}}</p>
-            <EmojiInput 
+            <EmojiInput
               type="text"
               v-model="newName"
               id="username"
@@ -195,12 +195,22 @@
         </div>
 
         <div :label="$t('settings.blocks_tab')">
+          <div class="profile-edit-usersearch-wrapper">
+            <Autosuggest :filter="filterUnblockedUsers" :query="queryUserIds" :placeholder="$t('settings.search_user_to_block')">
+              <BlockCard slot-scope="row" :userId="row.item"/>
+            </Autosuggest>
+          </div>
           <block-list :refresh="true">
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
           </block-list>
         </div>
 
         <div :label="$t('settings.mutes_tab')">
+          <div class="profile-edit-usersearch-wrapper">
+            <Autosuggest :filter="filterUnMutedUsers" :query="queryUserIds" :placeholder="$t('settings.search_user_to_mute')">
+              <MuteCard slot-scope="row" :userId="row.item"/>
+            </Autosuggest>
+          </div>
           <mute-list :refresh="true">
             <template slot="empty">{{$t('settings.no_mutes')}}</template>
           </mute-list>
@@ -261,6 +271,10 @@
     .actions {
       text-align: right;
     }
+  }
+
+  &-usersearch-wrapper {
+    padding: 1em;
   }
 }
 </style>

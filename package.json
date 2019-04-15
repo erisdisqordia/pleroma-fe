@@ -27,6 +27,7 @@
     "popper.js": "^1.14.7",
     "sanitize-html": "^1.13.0",
     "sass-loader": "^4.0.2",
+    "v-click-outside": "^2.1.1",
     "vue": "^2.5.13",
     "vue-chat-scroll": "^1.2.1",
     "vue-compose": "^0.7.1",

@@ -22,6 +22,7 @@ import pushNotifications from './lib/push_notifications_plugin.js'
 import messages from './i18n/messages.js'
 
 import VueChatScroll from 'vue-chat-scroll'
+import VueClickOutside from 'v-click-outside'
 
 import afterStoreSetup from './boot/after_store.js'
 
@@ -39,6 +40,7 @@ Vue.use(VueTimeago, {
 })
 Vue.use(VueI18n)
 Vue.use(VueChatScroll)
+Vue.use(VueClickOutside)
 
 const i18n = new VueI18n({
   // By default, use the browser locale, we will update it if neccessary

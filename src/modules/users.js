@@ -132,6 +132,11 @@ export const mutations = {
   saveBlockIds (state, blockIds) {
     state.currentUser.blockIds = blockIds
   },
+  addBlockId (state, blockId) {
+    if (state.currentUser.blockIds.indexOf(blockId) === -1) {
+      state.currentUser.blockIds.push(blockId)
+    }
+  },
   updateMutes (state, mutedUsers) {
     // Reset muted of all fetched users
     each(state.users, (user) => { user.muted = false })
@@ -139,6 +144,11 @@ export const mutations = {
   },
   saveMuteIds (state, muteIds) {
     state.currentUser.muteIds = muteIds
+  },
+  addMuteId (state, muteId) {
+    if (state.currentUser.muteIds.indexOf(muteId) === -1) {
+      state.currentUser.muteIds.push(muteId)
+    }
   },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
@@ -215,6 +225,7 @@ const users = {
       return store.rootState.api.backendInteractor.blockUser(userId)
         .then((relationship) => {
           store.commit('updateUserRelationship', [relationship])
+          store.commit('addBlockId', userId)
           store.commit('removeStatus', { timeline: 'friends', userId })
           store.commit('removeStatus', { timeline: 'public', userId })
           store.commit('removeStatus', { timeline: 'publicAndExternal', userId })
@@ -234,7 +245,10 @@ const users = {
     },
     muteUser (store, id) {
       return store.rootState.api.backendInteractor.muteUser(id)
-        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+        .then((relationship) => {
+          store.commit('updateUserRelationship', [relationship])
+          store.commit('addMuteId', id)
+        })
     },
     unmuteUser (store, id) {
       return store.rootState.api.backendInteractor.unmuteUser(id)
@@ -280,6 +294,9 @@ const users = {
       const token = store.state.currentUser.credentials
 
       unregisterPushNotifications(token)
+    },
+    addNewUsers ({ commit }, users) {
+      commit('addNewUsers', users)
     },
     addNewStatuses (store, { statuses }) {
       const users = map(statuses, 'user')

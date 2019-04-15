@@ -200,7 +200,7 @@
               <BlockCard slot-scope="row" :userId="row.item"/>
             </Autosuggest>
           </div>
-          <BlockList :refresh="true" :getKey="identity" class="profile-edit-user-list">
+          <BlockList :refresh="true" :getKey="identity">
             <template slot="header" slot-scope="{selected}">
               <div class="profile-edit-bulk-actions">
                 <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => blockUsers(selected)">
@@ -224,7 +224,7 @@
               <MuteCard slot-scope="row" :userId="row.item"/>
             </Autosuggest>
           </div>
-          <MuteList :refresh="true" :getKey="identity" class="profile-edit-user-list">
+          <MuteList :refresh="true" :getKey="identity">
             <template slot="header" slot-scope="{selected}">
               <div class="profile-edit-bulk-actions">
                 <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => muteUsers(selected)">
@@ -301,10 +301,6 @@
 
   &-usersearch-wrapper {
     padding: 1em;
-  }
-
-  &-user-list {
-    margin-top: 1.5em;
   }
 
   &-bulk-actions {

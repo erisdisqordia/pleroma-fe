@@ -7,11 +7,13 @@ const ExtraButtons = {
   },
   data () {
     return {
-      showDropDown: false
+      showDropDown: false,
+      showPopper: true
     }
   },
   methods: {
     deleteStatus () {
+      this.refreshPopper()
       const confirmed = window.confirm(this.$t('status.delete_confirm'))
       if (confirmed) {
         this.$store.dispatch('deleteStatus', { id: this.status.id })
@@ -21,6 +23,7 @@ const ExtraButtons = {
       this.showDropDown = !this.showDropDown
     },
     pinStatus () {
+      this.refreshPopper()
       this.$store.state.api.backendInteractor.pinOwnStatus(this.status.id).then((status) => {
         if (status.error) {
           this.$emit('onError', status.error)
@@ -30,8 +33,16 @@ const ExtraButtons = {
       })
     },
     unpinStatus () {
+      this.refreshPopper()
       this.$store.state.api.backendInteractor.unpinOwnStatus(this.status.id).then((status) => {
         this.$store.dispatch('updatePinned', status)
+      })
+    },
+    refreshPopper () {
+      this.showPopper = false
+      this.showDropDown = false
+      setTimeout(() => {
+        this.showPopper = true
       })
     }
   },

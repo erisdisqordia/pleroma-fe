@@ -1,260 +1,135 @@
 <template>
-  <div
-    class="user-card"
-    :class="classes"
-    :style="style"
-  >
-    <div class="panel-heading">
-      <div class="user-info">
-        <div class="container">
-          <router-link :to="userProfileLink(user)">
-            <UserAvatar
-              :better-shadow="betterShadow"
-              :user="user"
-            />
-          </router-link>
-          <div class="user-summary">
-            <div class="top-line">
-              <!-- eslint-disable vue/no-v-html -->
-              <div
-                v-if="user.name_html"
-                :title="user.name"
-                class="user-name"
-                v-html="user.name_html"
-              />
-              <!-- eslint-enable vue/no-v-html -->
-              <div
-                v-else
-                :title="user.name"
-                class="user-name"
-              >
-                {{ user.name }}
-              </div>
-              <router-link
-                v-if="!isOtherUser"
-                :to="{ name: 'user-settings' }"
-              >
-                <i
-                  class="button-icon icon-wrench usersettings"
-                  :title="$t('tool_tip.user_settings')"
-                />
-              </router-link>
-              <a
-                v-if="isOtherUser && !user.is_local"
-                :href="user.statusnet_profile_url"
-                target="_blank"
-              >
-                <i class="icon-link-ext usersettings" />
-              </a>
-            </div>
+<div class="user-card" :class="classes" :style="style">
+  <div class="panel-heading">
+    <div class='user-info'>
+      <div class='container'>
+        <router-link :to="userProfileLink(user)">
+          <UserAvatar :betterShadow="betterShadow" :user="user"/>
+        </router-link>
+        <div class="user-summary">
+          <div class="top-line">
+            <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
+            <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
+            <router-link :to="{ name: 'user-settings' }" v-if="!isOtherUser">
+              <i class="button-icon icon-wrench usersettings" :title="$t('tool_tip.user_settings')"></i>
+            </router-link>
+            <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser && !user.is_local">
+              <i class="icon-link-ext usersettings"></i>
+            </a>
+          </div>
 
-            <div class="bottom-line">
-              <router-link
-                class="user-screen-name"
-                :to="userProfileLink(user)"
-              >
-                @{{ user.screen_name }}
-              </router-link>
-              <span
-                v-if="!hideBio && !!visibleRole"
-                class="alert staff"
-              >{{ visibleRole }}</span>
-              <span v-if="user.locked"><i class="icon icon-lock" /></span>
-              <span
-                v-if="!hideUserStatsLocal && !hideBio"
-                class="dailyAvg"
-              >{{ dailyAvg }} {{ $t('user_card.per_day') }}</span>
-            </div>
+          <div class="bottom-line">
+            <router-link class="user-screen-name" :to="userProfileLink(user)">@{{user.screen_name}}</router-link>
+            <span class="alert staff" v-if="!hideBio && !!visibleRole">{{visibleRole}}</span>
+            <span v-if="user.locked"><i class="icon icon-lock"></i></span>
+            <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </div>
-        </div>
-        <div class="user-meta">
-          <div
-            v-if="user.follows_you && loggedIn && isOtherUser"
-            class="following"
-          >
-            {{ $t('user_card.follows_you') }}
-          </div>
-          <div
-            v-if="isOtherUser && (loggedIn || !switcher)"
-            class="highlighter"
-          >
-            <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
-            <input
-              v-if="userHighlightType !== 'disabled'"
-              :id="'userHighlightColorTx'+user.id"
-              v-model="userHighlightColor"
-              class="userHighlightText"
-              type="text"
-            >
-            <input
-              v-if="userHighlightType !== 'disabled'"
-              :id="'userHighlightColor'+user.id"
-              v-model="userHighlightColor"
-              class="userHighlightCl"
-              type="color"
-            >
-            <label
-              for="style-switcher"
-              class="userHighlightSel select"
-            >
-              <select
-                :id="'userHighlightSel'+user.id"
-                v-model="userHighlightType"
-                class="userHighlightSel"
-              >
-                <option value="disabled">No highlight</option>
-                <option value="solid">Solid bg</option>
-                <option value="striped">Striped bg</option>
-                <option value="side">Side stripe</option>
-              </select>
-              <i class="icon-down-open" />
-            </label>
-          </div>
-        </div>
-        <div
-          v-if="isOtherUser"
-          class="user-interactions"
-        >
-          <div
-            v-if="loggedIn"
-            class="follow"
-          >
-            <span v-if="user.following">
-              <!--Following them!-->
-              <button
-                class="pressed"
-                :disabled="followRequestInProgress"
-                :title="$t('user_card.follow_unfollow')"
-                @click="unfollowUser"
-              >
-                <template v-if="followRequestInProgress">
-                  {{ $t('user_card.follow_progress') }}
-                </template>
-                <template v-else>
-                  {{ $t('user_card.following') }}
-                </template>
-              </button>
-            </span>
-            <span v-if="!user.following">
-              <button
-                :disabled="followRequestInProgress"
-                :title="followRequestSent ? $t('user_card.follow_again') : ''"
-                @click="followUser"
-              >
-                <template v-if="followRequestInProgress">
-                  {{ $t('user_card.follow_progress') }}
-                </template>
-                <template v-else-if="followRequestSent">
-                  {{ $t('user_card.follow_sent') }}
-                </template>
-                <template v-else>
-                  {{ $t('user_card.follow') }}
-                </template>
-              </button>
-            </span>
-          </div>
-          <div
-            v-if="isOtherUser && loggedIn"
-            class="mute"
-          >
-            <span v-if="user.muted">
-              <button
-                class="pressed"
-                @click="unmuteUser"
-              >
-                {{ $t('user_card.muted') }}
-              </button>
-            </span>
-            <span v-if="!user.muted">
-              <button @click="muteUser">
-                {{ $t('user_card.mute') }}
-              </button>
-            </span>
-          </div>
-          <div v-if="!loggedIn && user.is_local">
-            <RemoteFollow :user="user" />
-          </div>
-          <div
-            v-if="isOtherUser && loggedIn"
-            class="block"
-          >
-            <span v-if="user.statusnet_blocking">
-              <button
-                class="pressed"
-                @click="unblockUser"
-              >
-                {{ $t('user_card.blocked') }}
-              </button>
-            </span>
-            <span v-if="!user.statusnet_blocking">
-              <button @click="blockUser">
-                {{ $t('user_card.block') }}
-              </button>
-            </span>
-          </div>
-          <div
-            v-if="isOtherUser && loggedIn"
-            class="block"
-          >
-            <span>
-              <button @click="reportUser">
-                {{ $t('user_card.report') }}
-              </button>
-            </span>
-          </div>
-          <ModerationTools
-            v-if="loggedIn.role === &quot;admin&quot;"
-            :user="user"
-          />
         </div>
       </div>
-    </div>
-    <div
-      v-if="!hideBio"
-      class="panel-body"
-    >
-      <div
-        v-if="!hideUserStatsLocal && switcher"
-        class="user-counts"
-      >
-        <div
-          class="user-count"
-          @click.prevent="setProfileView('statuses')"
-        >
-          <h5>{{ $t('user_card.statuses') }}</h5>
-          <span>{{ user.statuses_count }} <br></span>
+      <div class="user-meta">
+        <div v-if="user.follows_you && loggedIn && isOtherUser" class="following">
+          {{ $t('user_card.follows_you') }}
         </div>
-        <div
-          class="user-count"
-          @click.prevent="setProfileView('friends')"
-        >
-          <h5>{{ $t('user_card.followees') }}</h5>
-          <span>{{ user.friends_count }}</span>
-        </div>
-        <div
-          class="user-count"
-          @click.prevent="setProfileView('followers')"
-        >
-          <h5>{{ $t('user_card.followers') }}</h5>
-          <span>{{ user.followers_count }}</span>
+        <div class="highlighter" v-if="isOtherUser && (loggedIn || !switcher)">
+          <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
+          <input class="userHighlightText" type="text" :id="'userHighlightColorTx'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
+          <input class="userHighlightCl" type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
+          <label for="style-switcher" class='userHighlightSel select'>
+            <select class="userHighlightSel" :id="'userHighlightSel'+user.id" v-model="userHighlightType">
+              <option value="disabled">No highlight</option>
+              <option value="solid">Solid bg</option>
+              <option value="striped">Striped bg</option>
+              <option value="side">Side stripe</option>
+            </select>
+            <i class="icon-down-open"/>
+          </label>
         </div>
       </div>
-      <!-- eslint-disable vue/no-v-html -->
-      <p
-        v-if="!hideBio && user.description_html"
-        class="user-card-bio"
-        @click.prevent="linkClicked"
-        v-html="user.description_html"
-      />
-      <!-- eslint-enable vue/no-v-html -->
-      <p
-        v-else-if="!hideBio"
-        class="user-card-bio"
-      >
-        {{ user.description }}
-      </p>
+      <div v-if="isOtherUser" class="user-interactions">
+        <div class="follow" v-if="loggedIn">
+          <span v-if="user.following">
+            <!--Following them!-->
+            <button @click="unfollowUser" class="pressed" :disabled="followRequestInProgress" :title="$t('user_card.follow_unfollow')">
+              <template v-if="followRequestInProgress">
+                {{ $t('user_card.follow_progress') }}
+              </template>
+              <template v-else>
+                {{ $t('user_card.following') }}
+              </template>
+            </button>
+          </span>
+          <span v-if="!user.following">
+            <button @click="followUser" :disabled="followRequestInProgress" :title="followRequestSent ? $t('user_card.follow_again') : ''">
+              <template v-if="followRequestInProgress">
+                {{ $t('user_card.follow_progress') }}
+              </template>
+              <template v-else-if="followRequestSent">
+                {{ $t('user_card.follow_sent') }}
+              </template>
+              <template v-else>
+                {{ $t('user_card.follow') }}
+              </template>
+            </button>
+          </span>
+        </div>
+        <SubscribeButton :user="user" />
+        <div class='mute' v-if='isOtherUser && loggedIn'>
+          <span v-if='user.muted'>
+            <button @click="unmuteUser" class="pressed">
+              {{ $t('user_card.muted') }}
+            </button>
+          </span>
+          <span v-if='!user.muted'>
+            <button @click="muteUser">
+              {{ $t('user_card.mute') }}
+            </button>
+          </span>
+        </div>
+        <div v-if='!loggedIn && user.is_local'>
+          <RemoteFollow :user="user" />
+        </div>
+        <div class='block' v-if='isOtherUser && loggedIn'>
+          <span v-if='user.statusnet_blocking'>
+            <button @click="unblockUser" class="pressed">
+              {{ $t('user_card.blocked') }}
+            </button>
+          </span>
+          <span v-if='!user.statusnet_blocking'>
+            <button @click="blockUser">
+              {{ $t('user_card.block') }}
+            </button>
+          </span>
+        </div>
+        <div class='block' v-if='isOtherUser && loggedIn'>
+          <span>
+            <button @click="reportUser">
+              {{ $t('user_card.report') }}
+            </button>
+          </span>
+        </div>
+        <ModerationTools :user='user' v-if='loggedIn.role === "admin"'/>
+      </div>
     </div>
   </div>
+  <div class="panel-body" v-if="!hideBio">
+    <div v-if="!hideUserStatsLocal && switcher" class="user-counts">
+      <div class="user-count" v-on:click.prevent="setProfileView('statuses')">
+        <h5>{{ $t('user_card.statuses') }}</h5>
+        <span>{{user.statuses_count}} <br></span>
+      </div>
+      <div class="user-count" v-on:click.prevent="setProfileView('friends')">
+        <h5>{{ $t('user_card.followees') }}</h5>
+        <span>{{user.friends_count}}</span>
+      </div>
+      <div class="user-count" v-on:click.prevent="setProfileView('followers')">
+        <h5>{{ $t('user_card.followers') }}</h5>
+        <span>{{user.followers_count}}</span>
+      </div>
+    </div>
+    <p @click.prevent="linkClicked" v-if="!hideBio && user.description_html" class="user-card-bio" v-html="user.description_html"></p>
+    <p v-else-if="!hideBio" class="user-card-bio">{{ user.description }}</p>
+  </div>
+</div>
 </template>
 
 <script src="./user_card.js"></script>

@@ -135,6 +135,7 @@ export const mutations = {
         user.following = relationship.following
         user.muted = relationship.muting
         user.statusnet_blocking = relationship.blocking
+        user.subscribing = relationship.subscribing
       }
     })
   },

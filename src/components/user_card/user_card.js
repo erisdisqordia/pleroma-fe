@@ -1,5 +1,6 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import RemoteFollow from '../remote_follow/remote_follow.vue'
+import SubscribeButton from '../subscribe_button/subscribe_button.vue'
 import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
@@ -104,7 +105,8 @@ export default {
   components: {
     UserAvatar,
     RemoteFollow,
-    ModerationTools
+    ModerationTools,
+    SubscribeButton
   },
   methods: {
     followUser () {

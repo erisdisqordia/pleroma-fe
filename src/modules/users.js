@@ -32,6 +32,35 @@ const getNotificationPermission = () => {
   return Promise.resolve(Notification.permission)
 }
 
+const blockUser = (store, id) => {
+  return store.rootState.api.backendInteractor.blockUser(id)
+    .then((relationship) => {
+      store.commit('updateUserRelationship', [relationship])
+      store.commit('addBlockId', id)
+      store.commit('removeStatus', { timeline: 'friends', userId: id })
+      store.commit('removeStatus', { timeline: 'public', userId: id })
+      store.commit('removeStatus', { timeline: 'publicAndExternal', userId: id })
+    })
+}
+
+const unblockUser = (store, id) => {
+  return store.rootState.api.backendInteractor.unblockUser(id)
+    .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+}
+
+const muteUser = (store, id) => {
+  return store.rootState.api.backendInteractor.muteUser(id)
+    .then((relationship) => {
+      store.commit('updateUserRelationship', [relationship])
+      store.commit('addMuteId', id)
+    })
+}
+
+const unmuteUser = (store, id) => {
+  return store.rootState.api.backendInteractor.unmuteUser(id)
+    .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+}
+
 export const mutations = {
   setMuted (state, { user: { id }, muted }) {
     const user = state.usersObject[id]
@@ -206,19 +235,17 @@ const users = {
           return blocks
         })
     },
-    blockUser (store, userId) {
-      return store.rootState.api.backendInteractor.blockUser(userId)
-        .then((relationship) => {
-          store.commit('updateUserRelationship', [relationship])
-          store.commit('addBlockId', userId)
-          store.commit('removeStatus', { timeline: 'friends', userId })
-          store.commit('removeStatus', { timeline: 'public', userId })
-          store.commit('removeStatus', { timeline: 'publicAndExternal', userId })
-        })
+    blockUser (store, id) {
+      return blockUser(store, id)
     },
     unblockUser (store, id) {
-      return store.rootState.api.backendInteractor.unblockUser(id)
-        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+      return unblockUser(store, id)
+    },
+    blockUsers (store, ids = []) {
+      return Promise.all(ids.map(id => blockUser(store, id)))
+    },
+    unblockUsers (store, ids = []) {
+      return Promise.all(ids.map(id => unblockUser(store, id)))
     },
     fetchMutes (store) {
       return store.rootState.api.backendInteractor.fetchMutes()
@@ -229,15 +256,16 @@ const users = {
         })
     },
     muteUser (store, id) {
-      return store.rootState.api.backendInteractor.muteUser(id)
-        .then((relationship) => {
-          store.commit('updateUserRelationship', [relationship])
-          store.commit('addMuteId', id)
-        })
+      return muteUser(store, id)
     },
     unmuteUser (store, id) {
-      return store.rootState.api.backendInteractor.unmuteUser(id)
-        .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+      return unmuteUser(store, id)
+    },
+    muteUsers (store, ids = []) {
+      return Promise.all(ids.map(id => muteUser(store, id)))
+    },
+    unmuteUsers (store, ids = []) {
+      return Promise.all(ids.map(id => unmuteUser(store, id)))
     },
     fetchFriends ({ rootState, commit }, id) {
       const user = rootState.users.usersObject[id]

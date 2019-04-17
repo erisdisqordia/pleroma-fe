@@ -14,10 +14,18 @@
         :user-id="userId"
       />
       <div :label="$t('user_card.followees')" v-if="followsTabVisible" :disabled="!user.friends_count">
-        <FriendList :userId="userId" />
+        <FriendList :userId="userId">
+          <template slot="item" slot-scope="{item}">
+            <FollowCard :user="item" />
+          </template>
+        </FriendList>
       </div>
       <div :label="$t('user_card.followers')" v-if="followersTabVisible" :disabled="!user.followers_count">
-        <FollowerList :userId="userId" :entryProps="{noFollowsYou: isUs}" />
+        <FollowerList :userId="userId">
+          <template slot="item" slot-scope="{item}">
+            <FollowCard :user="item" :noFollowsYou="isUs" />
+          </template>
+        </FollowerList>
       </div>
       <Timeline
         :label="$t('user_card.media')"

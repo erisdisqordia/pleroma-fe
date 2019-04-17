@@ -135,19 +135,19 @@
 
           <transition name="fade">
             <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0 && isFocused">
-              <ul class="stats">
-                <li class="stat-count" v-if="statusFromGlobalRepository.rebloggedBy && statusFromGlobalRepository.rebloggedBy.length > 0">
+              <div class="stats">
+                <div class="stat-count" v-if="statusFromGlobalRepository.rebloggedBy && statusFromGlobalRepository.rebloggedBy.length > 0">
                   <a class="stat-title">{{ $t('settings.notification_visibility_repeats') }}</a>
                   <div class="stat-number">{{ statusFromGlobalRepository.rebloggedBy.length }}</div>
-                </li>
-                <li class="stat-count" v-if="statusFromGlobalRepository.favoritedBy && statusFromGlobalRepository.favoritedBy.length > 0">
+                </div>
+                <div class="stat-count" v-if="statusFromGlobalRepository.favoritedBy && statusFromGlobalRepository.favoritedBy.length > 0">
                   <a class="stat-title">{{ $t('user_card.favorites') }}</a>
                   <div class="stat-number">{{ statusFromGlobalRepository.favoritedBy.length }}</div>
-                </li>
-                <li class="avatar-row">
+                </div>
+                <div class="avatar-row">
                   <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
           </transition>
 
@@ -631,19 +631,15 @@ a.unmute {
 }
 
 .favs-repeated-users {
-  margin-top: 0.75em;
+  margin-top: $status-margin;
 
   .stats {
     width: 100%;
-    margin: 0;
-    list-style: none;
-    overflow: hidden;
-    padding: 0;
     display: flex;
     line-height: 1em;
 
     .stat-count {
-      margin-right: 10px;
+      margin-right: 0.8em;
 
       .stat-title {
         color: var(--faint, $fallback--faint);
@@ -651,13 +647,7 @@ a.unmute {
         text-transform: uppercase;
         position: relative;
         margin-bottom: 3px;
-        cursor: pointer;
         line-height: 1em;
-
-        &:hover,
-        &:focus {
-          text-decoration: underline;
-        }
       }
 
       .stat-number {

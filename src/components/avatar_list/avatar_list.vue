@@ -1,7 +1,7 @@
 <template>
-  <ul class="avatars" :class="{ 'transparent-avatar': slicedAvatars.length == 15 }">
-      <li class="avatars-item" v-for="(avatar, index) in slicedAvatars" :key="`avatar-${index}`">
-        <UserAvatar :src="avatar.profile_image_url" class="avatars-img" />
+  <ul class="avatars">
+      <li class="avatars-item" v-for="avatar in slicedAvatars">
+        <UserAvatar :src="avatar.profile_image_url" class="avatar-small" />
       </li>
   </ul>
 </template>
@@ -10,53 +10,28 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
+
 .avatars {
-  display: inline-flex; /* Causes LI items to display in row. */
-  list-style-type: none;
+  display: flex;
   margin: 0;
   padding: 0;
 
+  // For hiding overflowing elements
+  flex-wrap: wrap;
+  height: 24px;
+
   li.avatars-item {
-    height: 24px;
-    width: 24px;
-    margin: 0 5px 0 0;
+    margin: 0 0 5px 5px;
 
     &:first-child {
-      padding-left: 12px;
+      padding-left: 10px;
     }
 
-    &:last-child {
-      margin-right: 0;
-    }
-
-    .avatars-img {
+    .avatar-small {
       border-radius: $fallback--avatarAltRadius;
       border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
       height: 24px;
       width: 24px;
-      background-color: $fallback--lightText;
-      background-color: var(--lightText, $fallback--lightText);
-    }
-  }
-}
-
-.transparent-avatar {
-  .avatars-item {
-    &:first-child {
-      position: relative;
-
-      .avatars-img {
-        &::after {
-          content: '';
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background-color: $fallback--faint;
-          background-color: var(--faint, $fallback--faint);
-          left: 0;
-          top: 0;
-        }
-      }
     }
   }
 }

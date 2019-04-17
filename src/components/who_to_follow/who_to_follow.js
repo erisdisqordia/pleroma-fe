@@ -1,11 +1,9 @@
 import apiService from '../../services/api/api.service.js'
 import FollowCard from '../follow_card/follow_card.vue'
-import List from '../list/list.vue'
 
 const WhoToFollow = {
   components: {
-    FollowCard,
-    List
+    FollowCard
   },
   data () {
     return {

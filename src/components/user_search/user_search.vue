@@ -13,11 +13,7 @@
       <i class="icon-spin3 animate-spin"/>
     </div>
     <div v-else class="panel-body">
-      <List :items="users">
-        <template slot="item" slot-scope="{item}">
-          <FollowCard :user="item" />
-        </template>
-      </List>
+      <FollowCard v-for="user in users" :key="user.id" :user="user" class="list-item"/>
     </div>
   </div>
 </template>

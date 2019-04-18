@@ -224,8 +224,10 @@ const users = {
         })
     },
     fetchUserRelationship (store, id) {
-      return store.rootState.api.backendInteractor.fetchUserRelationship({ id })
-        .then((relationships) => store.commit('updateUserRelationship', relationships))
+      if (store.state.currentUser) {
+        store.rootState.api.backendInteractor.fetchUserRelationship({ id })
+          .then((relationships) => store.commit('updateUserRelationship', relationships))
+      }
     },
     fetchBlocks (store) {
       return store.rootState.api.backendInteractor.fetchBlocks()

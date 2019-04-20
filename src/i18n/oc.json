@@ -222,8 +222,9 @@
     "saving_ok": "Paramètres enregistrats",
     "search_user_to_block": "Cercatz qual volètz blocar",
     "search_user_to_mute": "Cercatz qual volètz rescondre",
-    "scope_copy": "Copiar lo nivèl de confidencialitat per las responsas (Totjorn aissí pels Messatges Dirèctes)",
     "security_tab": "Seguretat",
+    "scope_copy": "Copiar lo nivèl de confidencialitat per las responsas (Totjorn aissí pels Messatges Dirèctes)",
+    "minimal_scopes_mode": "Minimizar lo nombre d’opcion per publicacion",
     "set_new_avatar": "Definir un nòu avatar",
     "set_new_profile_background": "Definir un nòu fons de perfil",
     "set_new_profile_banner": "Definir una nòva bandièra de perfil",
@@ -358,6 +359,11 @@
         "checkbox": "Ai legit los tèrmes e condicions d’utilizacion",
         "link": "un pichon ligam simpatic"
       }
+    },
+    "version": {
+      "title": "Version",
+      "backend_version": "Version Backend",
+      "frontend_version": "Version Frontend"
     }
   },
   "timeline": {

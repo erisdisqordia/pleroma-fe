@@ -22,7 +22,7 @@
           <div class="setting-item" >
             <h2>{{$t('settings.name_bio')}}</h2>
             <p>{{$t('settings.name')}}</p>
-            <EmojiInput 
+            <EmojiInput
               type="text"
               v-model="newName"
               id="username"
@@ -195,15 +195,51 @@
         </div>
 
         <div :label="$t('settings.blocks_tab')">
-          <block-list :refresh="true">
+          <div class="profile-edit-usersearch-wrapper">
+            <Autosuggest :filter="filterUnblockedUsers" :query="queryUserIds" :placeholder="$t('settings.search_user_to_block')">
+              <BlockCard slot-scope="row" :userId="row.item"/>
+            </Autosuggest>
+          </div>
+          <BlockList :refresh="true" :getKey="identity">
+            <template slot="header" slot-scope="{selected}">
+              <div class="profile-edit-bulk-actions">
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => blockUsers(selected)">
+                  {{ $t('user_card.block') }}
+                  <template slot="progress">{{ $t('user_card.block_progress') }}</template>
+                </ProgressButton>
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => unblockUsers(selected)">
+                  {{ $t('user_card.unblock') }}
+                  <template slot="progress">{{ $t('user_card.unblock_progress') }}</template>
+                </ProgressButton>
+              </div>
+            </template>
+            <template slot="item" slot-scope="{item}"><BlockCard :userId="item" /></template>
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
-          </block-list>
+          </BlockList>
         </div>
 
         <div :label="$t('settings.mutes_tab')">
-          <mute-list :refresh="true">
+          <div class="profile-edit-usersearch-wrapper">
+            <Autosuggest :filter="filterUnMutedUsers" :query="queryUserIds" :placeholder="$t('settings.search_user_to_mute')">
+              <MuteCard slot-scope="row" :userId="row.item"/>
+            </Autosuggest>
+          </div>
+          <MuteList :refresh="true" :getKey="identity">
+            <template slot="header" slot-scope="{selected}">
+              <div class="profile-edit-bulk-actions">
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => muteUsers(selected)">
+                  {{ $t('user_card.mute') }}
+                  <template slot="progress">{{ $t('user_card.mute_progress') }}</template>
+                </ProgressButton>
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => unmuteUsers(selected)">
+                  {{ $t('user_card.unmute') }}
+                  <template slot="progress">{{ $t('user_card.unmute_progress') }}</template>
+                </ProgressButton>
+              </div>
+            </template>
+            <template slot="item" slot-scope="{item}"><MuteCard :userId="item" /></template>
             <template slot="empty">{{$t('settings.no_mutes')}}</template>
-          </mute-list>
+          </MuteList>
         </div>
       </tab-switcher>
     </div>
@@ -260,6 +296,20 @@
 
     .actions {
       text-align: right;
+    }
+  }
+
+  &-usersearch-wrapper {
+    padding: 1em;
+  }
+
+  &-bulk-actions {
+    text-align: right;
+    padding: 0 1em;
+    min-height: 28px;
+
+    button {
+      width: 10em;
     }
   }
 }

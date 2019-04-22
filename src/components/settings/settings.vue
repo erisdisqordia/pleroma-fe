@@ -42,9 +42,7 @@
             </li>
             <li>
               <input type="checkbox" id="collapseMessageWithSubject" v-model="collapseMessageWithSubjectLocal">
-              <label for="collapseMessageWithSubject">
-                {{$t('settings.collapse_subject')}} {{$t('settings.instance_default', { value: collapseMessageWithSubjectDefault })}}
-              </label>
+              <label for="collapseMessageWithSubject">{{$t('settings.collapse_subject')}} {{$t('settings.instance_default', { value: collapseMessageWithSubjectDefault })}}</label>
             </li>
             <li>
               <input type="checkbox" id="streaming" v-model="streamingLocal">
@@ -330,6 +328,7 @@
 
   textarea {
     width: 100%;
+    max-width: 100%;
     height: 100px;
   }
 

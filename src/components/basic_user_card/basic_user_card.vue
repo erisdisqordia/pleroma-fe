@@ -24,19 +24,11 @@
 <script src="./basic_user_card.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
-
 .basic-user-card {
   display: flex;
   flex: 1 0;
   margin: 0;
-  padding-top: 0.6em;
-  padding-right: 1em;
-  padding-bottom: 0.6em;
-  padding-left: 1em;
-  border-bottom: 1px solid;
-  border-bottom-color: $fallback--border;
-  border-bottom-color: var(--border, $fallback--border);
+  padding: 0.6em 1em;
 
   &-collapsed-content {
     margin-left: 0.7em;

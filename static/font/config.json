@@ -245,6 +245,12 @@
       "css": "bell-alt",
       "code": 61683,
       "src": "fontawesome"
+    },
+    {
+      "uid": "5bb103cd29de77e0e06a52638527b575",
+      "css": "wrench",
+      "code": 59418,
+      "src": "fontawesome"
     }
   ]
 }

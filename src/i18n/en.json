@@ -112,6 +112,9 @@
       "password_confirmation_match": "should be the same as password"
     }
   },
+  "selectable_list": {
+    "select_all": "Select all"
+  },
   "settings": {
     "app_name": "App name",
     "attachmentRadius": "Attachments",
@@ -217,6 +220,8 @@
     "reply_visibility_self": "Only show replies directed at me",
     "saving_err": "Error saving settings",
     "saving_ok": "Settings saved",
+    "search_user_to_block": "Search whom you want to block",
+    "search_user_to_mute": "Search whom you want to mute",
     "security_tab": "Security",
     "scope_copy": "Copy scope when replying (DMs are always copied)",
     "minimal_scopes_mode": "Minimize post scope selection options",

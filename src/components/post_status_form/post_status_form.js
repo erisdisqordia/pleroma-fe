@@ -338,6 +338,7 @@ const PostStatusForm = {
     },
     changeVis (visibility) {
       this.newStatus.visibility = visibility
+      this.$emit('onScopeChange', visibility)
     }
   }
 }

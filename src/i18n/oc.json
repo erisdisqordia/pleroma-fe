@@ -20,7 +20,10 @@
     "submit": "Mandar",
     "more": "Mai",
     "generic_error": "Una error s’es producha",
-    "optional": "opcional"
+    "optional": "opcional",
+    "show_more": "Mostrar mai",
+    "show_less": "Mostrar mens",
+    "cancel": "Anullar"
   },
   "image_cropper": {
      "crop_picture": "Talhar l’imatge",
@@ -78,7 +81,8 @@
     },
     "content_warning": "Avís de contengut (opcional)",
     "default": "Escrivètz aquí vòstre estatut.",
-    "direct_warning": "Aquesta publicacion serà pas que visibla pels utilizaires mencionats.",
+    "direct_warning_to_all": "Aquesta publicacion serà pas que visibla pels utilizaires mencionats.",
+    "direct_warning_to_first_only": "Aquesta publicacion serà pas que visibla pels utilizaires mencionats a la debuta del messatge.",
     "posting": "Mandadís",
     "scope": {
       "direct": "Dirècte - Publicar pels utilizaires mencionats solament",
@@ -108,6 +112,9 @@
       "password_confirmation_match": "deu èsser lo meteis senhal"
     }
   },
+  "selectable_list": {
+	    "select_all": "O seleccionar tot"
+  },  
   "settings": {
     "app_name": "Nom de l’aplicacion",
     "attachmentRadius": "Pèças juntas",
@@ -213,8 +220,11 @@
     "reply_visibility_self": "Mostrar pas que las responsas que me son destinadas",
     "saving_err": "Error en enregistrant los paramètres",
     "saving_ok": "Paramètres enregistrats",
-    "scope_copy": "Copiar lo nivèl de confidencialitat per las responsas (Totjorn aissí pels Messatges Dirèctes)",
+    "search_user_to_block": "Cercatz qual volètz blocar",
+    "search_user_to_mute": "Cercatz qual volètz rescondre",
     "security_tab": "Seguretat",
+    "scope_copy": "Copiar lo nivèl de confidencialitat per las responsas (Totjorn aissí pels Messatges Dirèctes)",
+    "minimal_scopes_mode": "Minimizar lo nombre d’opcions per publicacion",
     "set_new_avatar": "Definir un nòu avatar",
     "set_new_profile_background": "Definir un nòu fons de perfil",
     "set_new_profile_banner": "Definir una nòva bandièra de perfil",
@@ -349,6 +359,11 @@
         "checkbox": "Ai legit los tèrmes e condicions d’utilizacion",
         "link": "un pichon ligam simpatic"
       }
+    },
+    "version": {
+      "title": "Version",
+      "backend_version": "Version Backend",
+      "frontend_version": "Version Frontend"
     }
   },
   "timeline": {
@@ -394,7 +409,26 @@
     "block_progress": "Blocatge...",
     "unmute": "Tornar mostrar",
     "unmute_progress": "Afichatge...",
-    "mute_progress": "A amagar..."
+    "mute_progress": "A amagar...",
+    "admin_menu": {
+      "moderation": "Moderacion",
+      "grant_admin": "Passar Admin",
+      "revoke_admin": "Revocar Admin",
+      "grant_moderator": "Passar Moderator",
+      "revoke_moderator": "Revocar Moderator",
+      "activate_account": "Activar lo compte",
+      "deactivate_account": "Desactivar lo compte",
+      "delete_account": "Suprimir lo compte",
+      "force_nsfw": "Marcar totas las publicacions coma sensiblas",
+      "strip_media": "Tirar los mèdias de las publicacions",
+      "force_unlisted": "Forçar las publicacions en pas-listadas",
+      "sandbox": "Forçar las publicacions en seguidors solament",
+      "disable_remote_subscription": "Desactivar lo seguiment d’utilizaire d’instàncias alonhadas",
+      "disable_any_subscription": "Desactivar tot seguiment",
+      "quarantine": "Defendre la federacion de las publicacions de l’utilizaire",
+      "delete_user": "Suprimir l’utilizaire",
+      "delete_user_confirmation": "Volètz vertadièrament far aquò ? Aquesta accion se pòt pas anullar."
+    }    
   },
   "user_profile": {
     "timeline_title": "Flux utilizaire",

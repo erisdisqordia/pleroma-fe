@@ -137,11 +137,11 @@
             <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0 && isFocused">
               <div class="stats">
                 <div class="stat-count" v-if="statusFromGlobalRepository.rebloggedBy && statusFromGlobalRepository.rebloggedBy.length > 0">
-                  <a class="stat-title">{{ $t('settings.notification_visibility_repeats') }}</a>
+                  <a class="stat-title">{{ $t('status.repeats') }}</a>
                   <div class="stat-number">{{ statusFromGlobalRepository.rebloggedBy.length }}</div>
                 </div>
                 <div class="stat-count" v-if="statusFromGlobalRepository.favoritedBy && statusFromGlobalRepository.favoritedBy.length > 0">
-                  <a class="stat-title">{{ $t('user_card.favorites') }}</a>
+                  <a class="stat-title">{{ $t('status.favorites') }}</a>
                   <div class="stat-number">{{ statusFromGlobalRepository.favoritedBy.length }}</div>
                 </div>
                 <div class="avatar-row">

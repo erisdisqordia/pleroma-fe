@@ -50,7 +50,7 @@ const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
 const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
 const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 
-import { each, map } from 'lodash'
+import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
 import { StatusCodeError } from '../errors/errors'
@@ -294,10 +294,23 @@ const fetchFriends = ({id, maxId, sinceId, limit = 20, credentials}) => {
 }
 
 const exportFriends = ({id, credentials}) => {
-  let url = MASTODON_FOLLOWING_URL(id) + `?all=true`
-  return fetch(url, { headers: authHeaders(credentials) })
-    .then((data) => data.json())
-    .then((data) => data.map(parseUser))
+  return new Promise(async (resolve, reject) => {
+    try {
+      let friends = []
+      let more = true
+      while (more) {
+        const maxId = friends.length > 0 ? last(friends).id : undefined
+        const users = await fetchFriends({id, maxId, credentials})
+        friends = concat(friends, users)
+        if (users.length === 0) {
+          more = false
+        }
+      }
+      resolve(friends)
+    } catch (err) {
+      reject(err)
+    }
+  })
 }
 
 const fetchFollowers = ({id, maxId, sinceId, limit = 20, credentials}) => {

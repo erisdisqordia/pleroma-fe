@@ -162,7 +162,7 @@
       max-width: 100%;
       max-height: 400px;
 
-      .emoji {
+      &.emoji {
         width: 32px;
         height: 32px;
       }

@@ -1,9 +1,9 @@
 <template>
-  <ul class="avatars">
-      <li class="avatars-item" v-for="avatar in slicedAvatars">
+  <div class="avatars">
+      <div class="avatars-item" v-for="avatar in slicedAvatars">
         <UserAvatar :src="avatar.profile_image_url" class="avatar-small" />
-      </li>
-  </ul>
+      </div>
+  </div>
 </template>
 
 <script src="./avatar_list.js" ></script>
@@ -20,11 +20,11 @@
   flex-wrap: wrap;
   height: 24px;
 
-  li.avatars-item {
+  .avatars-item {
     margin: 0 0 5px 5px;
 
     &:first-child {
-      padding-left: 10px;
+      padding-left: 5px;
     }
 
     .avatar-small {

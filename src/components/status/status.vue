@@ -639,15 +639,13 @@ a.unmute {
     line-height: 1em;
 
     .stat-count {
-      margin-right: 0.8em;
+      margin-right: $status-margin;
 
       .stat-title {
         color: var(--faint, $fallback--faint);
         font-size: 12px;
         text-transform: uppercase;
         position: relative;
-        margin-bottom: 3px;
-        line-height: 1em;
       }
 
       .stat-number {
@@ -661,6 +659,8 @@ a.unmute {
       flex: 1;
       overflow: hidden;
       position: relative;
+      display: flex;
+      align-items: center;
 
       &::before {
         content: '';
@@ -670,12 +670,6 @@ a.unmute {
         left: 0;
         background-color: var(--faint, $fallback--faint);
       }
-    }
-
-    li {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
     }
   }
 }

@@ -15,6 +15,8 @@ lint:
     - npm run lint
 
 test:
+  services:
+    - firefox
   stage: test
   script:
     - yarn

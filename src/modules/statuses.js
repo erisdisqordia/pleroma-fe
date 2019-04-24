@@ -1,4 +1,4 @@
-import { remove, slice, each, findIndex, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
+import { remove, slice, each, findIndex, find, maxBy, minBy, merge, first, last, isArray, omitBy, map } from 'lodash'
 import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
@@ -47,8 +47,7 @@ export const defaultState = () => ({
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
     tag: emptyTl(),
-    dms: emptyTl(),
-    pinned: emptyTl()
+    dms: emptyTl()
   }
 })
 
@@ -171,7 +170,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   // This makes sure that user timeline won't get data meant for other
   // user. I.e. opening different user profiles makes request which could
   // return data late after user already viewing different user profile
-  if ((timeline === 'user' || timeline === 'media' || timeline === 'pinned') && timelineObject.userId !== userId) {
+  if ((timeline === 'user' || timeline === 'media') && timelineObject.userId !== userId) {
     return
   }
 
@@ -541,6 +540,13 @@ const statuses = {
       commit('setFavorited', { status, value: false })
       rootState.api.backendInteractor.unfavorite(status.id)
         .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
+    },
+    fetchPinnedStatuses ({ rootState, dispatch, commit }, userId) {
+      rootState.api.backendInteractor.fetchPinnedStatuses(userId)
+        .then(statuses => {
+          dispatch('addNewStatuses', { statuses })
+          commit('savePinnedStatusIds', { userId, statusIds: map(statuses, 'id') })
+        })
     },
     updatePinned ({ rootState, commit }, status) {
       commit('setPinned', { status })

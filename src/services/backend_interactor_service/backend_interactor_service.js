@@ -106,6 +106,7 @@ const backendInteractorService = (credentials) => {
   const fetchFollowRequests = () => apiService.fetchFollowRequests({credentials})
   const fetchOAuthTokens = () => apiService.fetchOAuthTokens({credentials})
   const revokeOAuthToken = (id) => apiService.revokeOAuthToken({id, credentials})
+  const fetchPinnedStatuses = (id) => apiService.fetchPinnedStatuses({ id, credentials })
 
   const getCaptcha = () => apiService.getCaptcha()
   const register = (params) => apiService.register(params)
@@ -154,6 +155,7 @@ const backendInteractorService = (credentials) => {
     fetchBlocks,
     fetchOAuthTokens,
     revokeOAuthToken,
+    fetchPinnedStatuses,
     tagUser,
     untagUser,
     addRight,

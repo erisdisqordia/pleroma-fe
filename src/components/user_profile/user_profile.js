@@ -2,6 +2,7 @@ import get from 'lodash/get'
 import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
+import Conversation from '../conversation/conversation.vue'
 import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
@@ -40,9 +41,6 @@ const UserProfile = {
     timeline () {
       return this.$store.state.statuses.timelines.user
     },
-    pinned () {
-      return this.$store.state.statuses.timelines.pinned
-    },
     favorites () {
       return this.$store.state.statuses.timelines.favorites
     },
@@ -55,6 +53,9 @@ const UserProfile = {
     },
     user () {
       return this.$store.getters.findUser(this.userId)
+    },
+    pinnedStatuses () {
+      return this.user.pinnedStatusIds.map(id => this.$store.state.statuses.allStatusesObject[id])
     },
     isExternal () {
       return this.$route.name === 'external-user-profile'
@@ -94,15 +95,14 @@ const UserProfile = {
     fetchTimelines () {
       const userId = this.userId
       this.$store.dispatch('startFetchingTimeline', { timeline: 'user', userId })
-      this.$store.dispatch('startFetchingTimeline', { timeline: 'pinned', userId })
       this.$store.dispatch('startFetchingTimeline', { timeline: 'media', userId })
       if (this.isUs) {
         this.$store.dispatch('startFetchingTimeline', { timeline: 'favorites', userId })
       }
+      this.$store.dispatch('fetchPinnedStatuses', userId)
     },
     cleanUp () {
       this.$store.dispatch('stopFetching', 'user')
-      this.$store.dispatch('stopFetching', 'pinned')
       this.$store.dispatch('stopFetching', 'favorites')
       this.$store.dispatch('stopFetching', 'media')
       this.$store.commit('clearTimeline', { timeline: 'user' })
@@ -133,7 +133,8 @@ const UserProfile = {
     FollowerList,
     FriendList,
     ModerationTools,
-    FollowCard
+    FollowCard,
+    Conversation
   }
 }
 

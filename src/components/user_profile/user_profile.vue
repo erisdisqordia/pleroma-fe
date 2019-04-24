@@ -4,15 +4,16 @@
     <UserCard :user="user" :switcher="true" :selected="timeline.viewing" rounded="top"/>
     <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
       <div :label="$t('user_card.statuses')" :disabled="!user.statuses_count">
-        <Timeline
-          :count="user.statuses_count"
-          :embedded="true"
-          :title="$t('user_profile.timeline_title')"
-          :timeline="pinned"
-          :timeline-name="'pinned'"
-          :user-id="userId"
-          :no-load-more="true"
-        />
+        <div class="timeline">
+          <Conversation
+            v-for="status in pinnedStatuses"
+            class="status-fadein"
+            :key="status.id"
+            :statusoid="status"
+            :pinned="true"
+            :collapsable="true"
+          />
+        </div>
         <Timeline
           :count="user.statuses_count"
           :embedded="true"

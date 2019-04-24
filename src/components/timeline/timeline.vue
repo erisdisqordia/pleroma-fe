@@ -21,12 +21,11 @@
           class="status-fadein"
           :key="status.id"
           :statusoid="status"
-          :pinned="timelineName === 'pinned'"
           :collapsable="true"
         />
       </div>
     </div>
-    <div :class="classes.footer" v-if="!noLoadMore">
+    <div :class="classes.footer">
       <div v-if="count===0" class="new-status-notification text-center panel-footer faint">
         {{$t('timeline.no_statuses')}}
       </div>

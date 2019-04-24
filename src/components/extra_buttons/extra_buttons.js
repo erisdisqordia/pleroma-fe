@@ -24,19 +24,15 @@ const ExtraButtons = {
     },
     pinStatus () {
       this.refreshPopper()
-      this.$store.state.api.backendInteractor.pinOwnStatus(this.status.id).then((status) => {
+      this.$store.dispatch('pinStatus', this.status.id).then((status) => {
         if (status.error) {
           this.$emit('onError', status.error)
-        } else {
-          this.$store.dispatch('updatePinned', status)
         }
       })
     },
     unpinStatus () {
       this.refreshPopper()
-      this.$store.state.api.backendInteractor.unpinOwnStatus(this.status.id).then((status) => {
-        this.$store.dispatch('updatePinned', status)
-      })
+      this.$store.dispatch('unpinStatus', this.status.id)
     },
     refreshPopper () {
       this.showPopper = false

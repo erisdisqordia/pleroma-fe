@@ -545,21 +545,17 @@ const statuses = {
       rootState.api.backendInteractor.fetchPinnedStatuses(userId)
         .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId }))
     },
-    updatePinned ({ rootState, commit }, status) {
-      commit('setPinned', { status })
-      if (status.pinned) {
-        const statusObj = rootState.statuses.allStatusesObject[status.id]
-        const user = rootState.users.currentUser
-        commit('addNewStatuses', {
-          statuses: [statusObj],
-          showImmediately: true,
-          timeline: 'pinned',
-          user,
-          userId: user.id
-        })
-      } else {
-        commit('removeStatus', { timeline: 'pinned', statusId: status.id })
-      }
+    pinStatus ({ rootState, commit }, statusId) {
+      return rootState.api.backendInteractor.pinOwnStatus(statusId).then((status) => {
+        if (!status.error) {
+          commit('setPinned', { status })
+        }
+        return status
+      })
+    },
+    unpinStatus ({ rootState, commit }, statusId) {
+      rootState.api.backendInteractor.unpinOwnStatus(statusId)
+        .then((status) => commit('setPinned', { status }))
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...

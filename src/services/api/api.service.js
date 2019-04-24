@@ -213,19 +213,17 @@ const unfollowUser = ({id, credentials}) => {
 }
 
 const pinOwnStatus = ({ id, credentials }) => {
-  let url = MASTODON_PIN_OWN_STATUS(id)
-  return fetch(url, {
+  return promisedRequest(MASTODON_PIN_OWN_STATUS(id), {
     headers: authHeaders(credentials),
     method: 'POST'
-  }).then((data) => data.json())
+  })
 }
 
 const unpinOwnStatus = ({ id, credentials }) => {
-  let url = MASTODON_UNPIN_OWN_STATUS(id)
-  return fetch(url, {
+  return promisedRequest(MASTODON_UNPIN_OWN_STATUS(id), {
     headers: authHeaders(credentials),
     method: 'POST'
-  }).then((data) => data.json())
+  })
 }
 
 const blockUser = ({id, credentials}) => {

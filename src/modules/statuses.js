@@ -546,12 +546,8 @@ const statuses = {
         .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId }))
     },
     pinStatus ({ rootState, commit }, statusId) {
-      return rootState.api.backendInteractor.pinOwnStatus(statusId).then((status) => {
-        if (!status.error) {
-          commit('setPinned', { status })
-        }
-        return status
-      })
+      return rootState.api.backendInteractor.pinOwnStatus(statusId)
+        .then((status) => commit('setPinned', { status }))
     },
     unpinStatus ({ rootState, commit }, statusId) {
       rootState.api.backendInteractor.unpinOwnStatus(statusId)

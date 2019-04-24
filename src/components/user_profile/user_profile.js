@@ -1,4 +1,5 @@
 import get from 'lodash/get'
+import filter from 'lodash/filter'
 import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
@@ -41,6 +42,9 @@ const UserProfile = {
     timeline () {
       return this.$store.state.statuses.timelines.user
     },
+    pinnedStatuses () {
+      return filter(this.timeline.statuses, { pinned: true })
+    },
     favorites () {
       return this.$store.state.statuses.timelines.favorites
     },
@@ -53,9 +57,6 @@ const UserProfile = {
     },
     user () {
       return this.$store.getters.findUser(this.userId)
-    },
-    pinnedStatuses () {
-      return this.user.pinnedStatusIds.map(id => this.$store.state.statuses.allStatusesObject[id])
     },
     isExternal () {
       return this.$route.name === 'external-user-profile'
@@ -99,6 +100,7 @@ const UserProfile = {
       if (this.isUs) {
         this.$store.dispatch('startFetchingTimeline', { timeline: 'favorites', userId })
       }
+      // Fetch all pinned statuses immediately
       this.$store.dispatch('fetchPinnedStatuses', userId)
     },
     cleanUp () {

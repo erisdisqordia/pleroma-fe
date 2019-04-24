@@ -1,4 +1,4 @@
-import { remove, slice, each, findIndex, find, maxBy, minBy, merge, first, last, isArray, omitBy, map } from 'lodash'
+import { remove, slice, each, findIndex, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
 import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
@@ -541,12 +541,9 @@ const statuses = {
       rootState.api.backendInteractor.unfavorite(status.id)
         .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
-    fetchPinnedStatuses ({ rootState, dispatch, commit }, userId) {
+    fetchPinnedStatuses ({ rootState, dispatch }, userId) {
       rootState.api.backendInteractor.fetchPinnedStatuses(userId)
-        .then(statuses => {
-          dispatch('addNewStatuses', { statuses })
-          commit('savePinnedStatusIds', { userId, statusIds: map(statuses, 'id') })
-        })
+        .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId }))
     },
     updatePinned ({ rootState, commit }, status) {
       commit('setPinned', { status })

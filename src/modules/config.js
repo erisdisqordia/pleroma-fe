@@ -17,6 +17,7 @@ const defaultState = {
   autoLoad: true,
   streaming: false,
   hoverPreview: true,
+  autohideFloatingPostButton: false,
   pauseOnUnfocused: true,
   stopGifs: false,
   replyVisibility: 'all',

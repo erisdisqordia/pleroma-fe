@@ -1,5 +1,5 @@
 import PostStatusForm from '../post_status_form/post_status_form.vue'
-import { throttle } from 'lodash'
+import { throttle, debounce } from 'lodash'
 
 const MobilePostStatusModal = {
   components: {
@@ -16,11 +16,17 @@ const MobilePostStatusModal = {
     }
   },
   created () {
-    window.addEventListener('scroll', this.handleScroll)
+    if (this.autohideFloatingPostButton) {
+      window.addEventListener('scroll', this.handleScroll)
+      window.addEventListener('scroll', this.handleScrollDown)
+    }
     window.addEventListener('resize', this.handleOSK)
   },
   destroyed () {
-    window.removeEventListener('scroll', this.handleScroll)
+    if (this.autohideFloatingPostButton) {
+      window.removeEventListener('scroll', this.handleScroll)
+      window.removeEventListener('scroll', this.handleScrollDown)
+    }
     window.removeEventListener('resize', this.handleOSK)
   },
   computed: {
@@ -28,7 +34,21 @@ const MobilePostStatusModal = {
       return this.$store.state.users.currentUser
     },
     isHidden () {
-      return this.hidden || this.inputActive
+      return this.autohideFloatingPostButton && (this.hidden || this.inputActive)
+    },
+    autohideFloatingPostButton () {
+      return !!this.$store.state.config.autohideFloatingPostButton
+    }
+  },
+  watch: {
+    autohideFloatingPostButton: function (isEnabled) {
+      if (isEnabled) {
+        window.addEventListener('scroll', this.handleScroll)
+        window.addEventListener('scroll', this.handleScrollDown)
+      } else {
+        window.removeEventListener('scroll', this.handleScroll)
+        window.removeEventListener('scroll', this.handleScrollDown)
+      }
     }
   },
   methods: {
@@ -84,6 +104,11 @@ const MobilePostStatusModal = {
 
       this.oldScrollPos = window.scrollY
       this.scrollingDown = scrollingDown
+    }, 100),
+    handleScrollDown: debounce(function () {
+      if (this.scrollingDown) {
+        this.hidden = false
+      }
     }, 100)
   }
 }

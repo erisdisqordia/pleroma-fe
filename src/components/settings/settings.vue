@@ -122,6 +122,10 @@
                 {{$t('settings.minimal_scopes_mode')}} {{$t('settings.instance_default', { value: minimalScopesModeDefault })}}
               </label>
             </li>
+            <li>
+              <input type="checkbox" id="autohideFloatingPostButton" v-model="autohideFloatingPostButtonLocal">
+              <label for="autohideFloatingPostButton">{{$t('settings.autohide_floating_post_button')}}</label>
+            </li>
           </ul>
         </div>
 

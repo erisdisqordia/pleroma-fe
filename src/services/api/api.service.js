@@ -50,7 +50,7 @@ const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 const MASTODON_STATUS_FAVORITEDBY_URL = id => `/api/v1/statuses/${id}/favourited_by`
 const MASTODON_STATUS_REBLOGGEDBY_URL = id => `/api/v1/statuses/${id}/reblogged_by`
 const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
-const MASTODON_REPORT_USER_URL = 'api/v1/reports'
+const MASTODON_REPORT_USER_URL = '/api/v1/reports'
 
 import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'

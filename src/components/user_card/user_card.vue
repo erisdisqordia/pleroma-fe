@@ -72,7 +72,14 @@
             </button>
           </span>
         </div>
-        <SubscribeButton :user="user" />
+        <div>
+          <ProgressButton :click="subscribeUser" v-if="!user.subscribing">
+            Subscribe
+          </ProgressButton>
+          <ProgressButton class="pressed" :click="unsubscribeUser" v-else>
+            Subscribing!
+          </ProgressButton>
+        </div>
         <div class='mute' v-if='isOtherUser && loggedIn'>
           <span v-if='user.muted'>
             <button @click="unmuteUser" class="pressed">

@@ -1,6 +1,6 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import RemoteFollow from '../remote_follow/remote_follow.vue'
-import SubscribeButton from '../subscribe_button/subscribe_button.vue'
+import ProgressButton from '../progress_button/progress_button.vue'
 import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
@@ -106,7 +106,7 @@ export default {
     UserAvatar,
     RemoteFollow,
     ModerationTools,
-    SubscribeButton
+    ProgressButton
   },
   methods: {
     followUser () {
@@ -136,6 +136,12 @@ export default {
     },
     unmuteUser () {
       this.$store.dispatch('unmuteUser', this.user.id)
+    },
+    subscribeUser () {
+      return this.$store.state.api.backendInteractor.subscribeUser(this.user.id)
+    },
+    unsubscribeUser () {
+      return this.$store.state.api.backendInteractor.unsubscribeUser(this.user.id)
     },
     setProfileView (v) {
       if (this.switcher) {

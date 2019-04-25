@@ -72,7 +72,7 @@
             </button>
           </span>
         </div>
-        <div>
+        <div v-if="loggedIn">
           <ProgressButton :click="subscribeUser" v-if="!user.subscribing">
             Subscribe
           </ProgressButton>

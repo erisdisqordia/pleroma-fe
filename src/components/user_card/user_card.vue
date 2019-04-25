@@ -74,10 +74,10 @@
         </div>
         <div v-if="loggedIn">
           <ProgressButton :click="subscribeUser" v-if="!user.subscribing">
-            Subscribe
+            {{ $t('user_card.subscribe') }}
           </ProgressButton>
           <ProgressButton class="pressed" :click="unsubscribeUser" v-else>
-            Subscribing!
+            {{ $t('user_card.subscribing') }}
           </ProgressButton>
         </div>
         <div class='mute' v-if='isOtherUser && loggedIn'>

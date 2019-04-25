@@ -529,6 +529,8 @@
     "remote_follow": "Remote follow",
     "report": "Report",
     "statuses": "Statuses",
+    "subscribe": "Subscribe",
+    "subscribing": "Subscribing!",
     "unblock": "Unblock",
     "unblock_progress": "Unblocking...",
     "block_progress": "Blocking...",

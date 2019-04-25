@@ -539,7 +539,7 @@ const statuses = {
     },
     fetchPinnedStatuses ({ rootState, dispatch }, userId) {
       rootState.api.backendInteractor.fetchPinnedStatuses(userId)
-        .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId }))
+        .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId, showImmediately: true }))
     },
     pinStatus ({ rootState, commit }, statusId) {
       return rootState.api.backendInteractor.pinOwnStatus(statusId)

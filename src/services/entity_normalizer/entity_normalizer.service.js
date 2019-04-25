@@ -68,7 +68,7 @@ export const parseUser = (data) => {
         output.following = relationship.following
         output.statusnet_blocking = relationship.blocking
         output.muted = relationship.muting
-        output.subscribing = relationship.subscribing
+        output.subscribed = relationship.subscribing
       }
 
       output.hide_follows = data.pleroma.hide_follows

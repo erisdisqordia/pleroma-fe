@@ -73,7 +73,7 @@
           </span>
         </div>
         <div v-if="loggedIn">
-          <ProgressButton :click="subscribeUser" v-if="!user.subscribing">
+          <ProgressButton :click="subscribeUser" v-if="!user.subscribed">
             {{ $t('user_card.subscribe') }}
           </ProgressButton>
           <ProgressButton class="pressed" :click="unsubscribeUser" v-else>

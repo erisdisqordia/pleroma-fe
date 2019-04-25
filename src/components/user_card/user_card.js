@@ -138,10 +138,10 @@ export default {
       this.$store.dispatch('unmuteUser', this.user.id)
     },
     subscribeUser () {
-      return this.$store.state.api.backendInteractor.subscribeUser(this.user.id)
+      return this.$store.dispatch('subscribeUser', this.user.id)
     },
     unsubscribeUser () {
-      return this.$store.state.api.backendInteractor.unsubscribeUser(this.user.id)
+      return this.$store.dispatch('unsubscribeUser', this.user.id)
     },
     setProfileView (v) {
       if (this.switcher) {

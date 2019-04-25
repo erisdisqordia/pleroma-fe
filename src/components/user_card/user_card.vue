@@ -77,7 +77,7 @@
             {{ $t('user_card.subscribe') }}
           </ProgressButton>
           <ProgressButton class="pressed" :click="unsubscribeUser" v-else>
-            {{ $t('user_card.subscribing') }}
+            {{ $t('user_card.subscribed') }}
           </ProgressButton>
         </div>
         <div class='mute' v-if='isOtherUser && loggedIn'>

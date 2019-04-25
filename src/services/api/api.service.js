@@ -506,14 +506,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
 
 const fetchPinnedStatuses = ({ id, credentials }) => {
   const url = MASTODON_USER_TIMELINE_URL(id) + '?pinned=true'
-  return fetch(url, { headers: authHeaders(credentials) })
-    .then((data) => {
-      if (data.ok) {
-        return data
-      }
-      throw new Error('Error fetching pinned timeline', data)
-    })
-    .then((data) => data.json())
+  return promisedRequest(url, { headers: authHeaders(credentials) })
     .then((data) => data.map(parseStatus))
 }
 

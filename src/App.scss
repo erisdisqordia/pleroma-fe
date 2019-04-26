@@ -806,11 +806,6 @@ nav {
 .vb > .vb-dragger > .vb-dragger-styler {
   backface-visibility: hidden;
   transform: rotate3d(0,0,0,0);
-  transition:
-    opacity 100ms ease-out,
-    margin 100ms ease-out,
-    height 100ms ease-out;
-
   background-color: $fallback--text;
   background-color: var(--text, $fallback--text);
   opacity: .1;

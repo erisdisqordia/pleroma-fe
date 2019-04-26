@@ -57,12 +57,12 @@
                 <a :href="status.external_url" target="_blank" v-if="!status.is_local && !isPreview" class="source_url" title="Source">
                   <i class="button-icon icon-link-ext-alt"></i>
                 </a>
-                <div class="button-icon button-action-icon" v-if="expandable && !isPreview" @click.prevent="toggleExpanded" title="Expand">
-                  <i class="icon-plus-squared"></i>
-                </div>
-                <div class="button-icon button-action-icon" v-if="unmuted" @click.prevent="toggleMute" title="Toggle Mute">
-                  <i class="icon-eye-off"></i>
-                </div>
+                <template v-if="expandable && !isPreview">
+                  <a href="#" @click.prevent="toggleExpanded" title="Expand">
+                    <i class="button-icon icon-plus-squared"></i>
+                  </a>
+                </template>
+                <a href="#" @click.prevent="toggleMute" v-if="unmuted"><i class="button-icon icon-eye-off"></i></a>
               </span>
             </div>
 
@@ -688,10 +688,6 @@ a.unmute {
       }
     }
   }
-}
-
-.button-action-icon {
-  cursor: pointer;
 }
 
 @media all and (max-width: 800px) {

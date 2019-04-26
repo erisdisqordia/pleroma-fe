@@ -46,7 +46,7 @@
         </div>
       </div>
       <div v-if="loggedIn && isOtherUser" class="user-interactions">
-        <div class="follow">
+        <div>
           <button @click="unfollowUser" class="pressed" :disabled="followRequestInProgress" :title="$t('user_card.follow_unfollow')" v-if="user.following">
             <template v-if="followRequestInProgress">
               {{ $t('user_card.follow_progress') }}
@@ -75,7 +75,7 @@
             {{ $t('user_card.subscribed') }}
           </ProgressButton>
         </div>
-        <div class='mute'>
+        <div>
           <span v-if='user.muted'>
             <button @click="unmuteUser" class="pressed">
               {{ $t('user_card.muted') }}
@@ -87,7 +87,7 @@
             </button>
           </span>
         </div>
-        <div class='block'>
+        <div>
           <span v-if='user.statusnet_blocking'>
             <button @click="unblockUser" class="pressed">
               {{ $t('user_card.blocked') }}
@@ -364,24 +364,13 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-
     margin-right: -.75em;
 
-    div {
+    > div {
       flex: 1 0 0;
       margin-right: .75em;
       margin-bottom: .6em;
       white-space: nowrap;
-    }
-
-    .mute {
-      max-width: 220px;
-      min-height: 28px;
-    }
-
-    .follow {
-      max-width: 220px;
-      min-height: 28px;
     }
 
     button {

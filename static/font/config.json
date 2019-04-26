@@ -277,6 +277,12 @@
       "search": [
         "ellipsis"
       ]
+    },
+    {
+      "uid": "563683020e0bf9f22f3f055a69b5c57a",
+      "css": "bell-off",
+      "code": 61942,
+      "src": "fontawesome"
     }
   ]
 }

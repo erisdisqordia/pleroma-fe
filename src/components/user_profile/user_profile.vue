@@ -10,7 +10,6 @@
             class="status-fadein"
             :key="status.id"
             :statusoid="status"
-            :pinned="true"
             :collapsable="true"
           />
         </div>

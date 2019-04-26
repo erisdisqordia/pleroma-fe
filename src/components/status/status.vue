@@ -13,7 +13,7 @@
       </div>
     </template>
     <template v-else>
-      <div v-if="pinned" class="status-pin">
+      <div v-if="statusoid.pinned" class="status-pin">
         <i class="fa icon-pin faint"></i>
         <span class="faint">Pinned</span>
       </div>

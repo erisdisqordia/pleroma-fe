@@ -26,8 +26,7 @@ const Status = {
     'replies',
     'isPreview',
     'noHeading',
-    'inlineExpanded',
-    'pinned'
+    'inlineExpanded'
   ],
   data () {
     return {

@@ -40,8 +40,8 @@
   cursor: pointer;
 
   &:hover, &.icon-clicked {
-    color: $fallback--cBlue;
-    color: var(--cBlue, $fallback--cBlue);
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
   }
 }
 </style>

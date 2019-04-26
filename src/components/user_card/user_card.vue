@@ -66,11 +66,11 @@
               {{ $t('user_card.follow') }}
             </template>
           </button>
-          <ProgressButton class="btn btn-default" :click="subscribeUser" v-if="!user.subscribed">
-            {{ $t('user_card.subscribe') }}
+          <ProgressButton class="btn btn-default" :click="subscribeUser" :title="$t('user_card.subscribe')" v-if="!user.subscribed">
+            <i class="icon-bell-off" />
           </ProgressButton>
-          <ProgressButton class="btn btn-default pressed" :click="unsubscribeUser" v-else>
-            {{ $t('user_card.subscribed') }}
+          <ProgressButton class="btn btn-default pressed" :click="unsubscribeUser" :title="$t('user_card.subscribed')" v-else>
+            <i class="icon-bell-alt" />
           </ProgressButton>
         </div>
 

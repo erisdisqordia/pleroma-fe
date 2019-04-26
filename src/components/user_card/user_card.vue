@@ -47,7 +47,7 @@
       </div>
       <div v-if="loggedIn && isOtherUser" class="user-interactions">
         <div>
-          <button @click="unfollowUser" class="pressed" :disabled="followRequestInProgress" :title="$t('user_card.follow_unfollow')" v-if="user.following">
+          <button @click="unfollowUser" class="btn btn-default pressed" :disabled="followRequestInProgress" :title="$t('user_card.follow_unfollow')" v-if="user.following">
             <template v-if="followRequestInProgress">
               {{ $t('user_card.follow_progress') }}
             </template>
@@ -55,7 +55,7 @@
               {{ $t('user_card.following') }}
             </template>
           </button>
-          <button @click="followUser" :disabled="followRequestInProgress" :title="followRequestSent ? $t('user_card.follow_again') : ''" v-else>
+          <button @click="followUser" class="btn btn-default" :disabled="followRequestInProgress" :title="followRequestSent ? $t('user_card.follow_again') : ''" v-else>
             <template v-if="followRequestInProgress">
               {{ $t('user_card.follow_progress') }}
             </template>
@@ -67,45 +67,40 @@
             </template>
           </button>
         </div>
+
         <div>
-          <ProgressButton :click="subscribeUser" v-if="!user.subscribed">
+          <ProgressButton class="btn btn-default" :click="subscribeUser" v-if="!user.subscribed">
             {{ $t('user_card.subscribe') }}
           </ProgressButton>
-          <ProgressButton class="pressed" :click="unsubscribeUser" v-else>
+          <ProgressButton class="btn btn-default pressed" :click="unsubscribeUser" v-else>
             {{ $t('user_card.subscribed') }}
           </ProgressButton>
         </div>
+
         <div>
-          <span v-if='user.muted'>
-            <button @click="unmuteUser" class="pressed">
-              {{ $t('user_card.muted') }}
-            </button>
-          </span>
-          <span v-if='!user.muted'>
-            <button @click="muteUser">
-              {{ $t('user_card.mute') }}
-            </button>
-          </span>
+          <button @click="unmuteUser" class="btn btn-default pressed" v-if="user.muted">
+            {{ $t('user_card.muted') }}
+          </button>
+          <button @click="muteUser" class="btn btn-default" v-else>
+            {{ $t('user_card.mute') }}
+          </button>
         </div>
+
         <div>
-          <span v-if='user.statusnet_blocking'>
-            <button @click="unblockUser" class="pressed">
-              {{ $t('user_card.blocked') }}
-            </button>
-          </span>
-          <span v-if='!user.statusnet_blocking'>
-            <button @click="blockUser">
-              {{ $t('user_card.block') }}
-            </button>
-          </span>
+          <button @click="unblockUser" class="btn btn-default pressed" v-if="user.statusnet_blocking">
+            {{ $t('user_card.blocked') }}
+          </button>
+          <button @click="blockUser" class="btn btn-default" v-else>
+            {{ $t('user_card.block') }}
+          </button>
         </div>
-        <div class='block'>
-          <span>
-            <button @click="reportUser">
-              {{ $t('user_card.report') }}
-            </button>
-          </span>
+
+        <div>
+          <button @click="reportUser">
+            {{ $t('user_card.report') }}
+          </button>
         </div>
+
         <ModerationTools :user='user' v-if='loggedIn.role === "admin"' />
       </div>
       <div class="user-interactions" v-if="!loggedIn && user.is_local">
@@ -366,25 +361,23 @@
     justify-content: space-between;
     margin-right: -.75em;
 
-    > div {
+    > * {
       flex: 1 0 0;
-      margin-right: .75em;
-      margin-bottom: .6em;
+      margin: 0 .75em .6em 0;
       white-space: nowrap;
-    }
 
-    button {
-      width: 100%;
-      height: 100%;
-      margin: 0;
+      > button {
+        margin: 0;
+        width: 100%;
+      }
     }
 
     .remote-button {
-      height: 28px !important;
-      width: 92%;
+      height: 28px;
+      margin: 0;
     }
 
-    .pressed {
+    button.pressed {
       border-bottom-color: rgba(255, 255, 255, 0.2);
       border-top-color: rgba(0, 0, 0, 0.2);
     }

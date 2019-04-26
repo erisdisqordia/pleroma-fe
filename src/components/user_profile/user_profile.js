@@ -3,7 +3,6 @@ import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
 import Conversation from '../conversation/conversation.vue'
-import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
 
@@ -132,7 +131,6 @@ const UserProfile = {
     Timeline,
     FollowerList,
     FriendList,
-    ModerationTools,
     FollowCard,
     Conversation
   }

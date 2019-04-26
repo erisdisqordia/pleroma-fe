@@ -28,12 +28,14 @@
         </div>
       </div>
       <div class="user-reporting-panel-right" v-bar="{preventParentScroll: true}">
-        <div>
-          <div v-for="status in statuses" :key="status.id" class="status-fadein user-reporting-panel-sitem">
-            <Status :inConversation="false" :focused="false" :statusoid="status" />
-            <Checkbox :checked="isChecked(status.id)" @change="checked => toggleStatus(checked, status.id)" />
-          </div>
-        </div>
+        <List :items="statuses">
+          <template slot="item" slot-scope="{item}">
+            <div class="status-fadein user-reporting-panel-sitem">
+              <Status :inConversation="false" :focused="false" :statusoid="item" />
+              <Checkbox :checked="isChecked(item.id)" @change="checked => toggleStatus(checked, item.id)" />
+            </div>
+          </template>
+        </List>
       </div>
     </div>
   </div>
@@ -116,10 +118,6 @@
   &-sitem {
     display: flex;
     justify-content: space-between;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-color: $fallback--border;
-    border-color: var(--border, $fallback--border);
     padding-right: 15px;
 
     > .status-el {

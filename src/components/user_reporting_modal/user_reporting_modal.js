@@ -1,10 +1,12 @@
 
 import Status from '../status/status.vue'
+import List from '../list/list.vue'
 import Checkbox from '../checkbox/checkbox.vue'
 
 const UserReportingModal = {
   components: {
     Status,
+    List,
     Checkbox
   },
   data () {

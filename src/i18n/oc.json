@@ -77,7 +77,8 @@
     "content_type": {
       "text/plain": "Tèxte brut",
       "text/html": "HTML",
-      "text/markdown": "Markdown"
+      "text/markdown": "Markdown",
+      "text/bbcode": "BBCode"
     },
     "content_warning": "Avís de contengut (opcional)",
     "default": "Escrivètz aquí vòstre estatut.",

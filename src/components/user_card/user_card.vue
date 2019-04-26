@@ -45,34 +45,29 @@
           </label>
         </div>
       </div>
-      <div v-if="isOtherUser" class="user-interactions">
-        <div class="follow" v-if="loggedIn">
-          <span v-if="user.following">
-            <!--Following them!-->
-            <button @click="unfollowUser" class="pressed" :disabled="followRequestInProgress" :title="$t('user_card.follow_unfollow')">
-              <template v-if="followRequestInProgress">
-                {{ $t('user_card.follow_progress') }}
-              </template>
-              <template v-else>
-                {{ $t('user_card.following') }}
-              </template>
-            </button>
-          </span>
-          <span v-if="!user.following">
-            <button @click="followUser" :disabled="followRequestInProgress" :title="followRequestSent ? $t('user_card.follow_again') : ''">
-              <template v-if="followRequestInProgress">
-                {{ $t('user_card.follow_progress') }}
-              </template>
-              <template v-else-if="followRequestSent">
-                {{ $t('user_card.follow_sent') }}
-              </template>
-              <template v-else>
-                {{ $t('user_card.follow') }}
-              </template>
-            </button>
-          </span>
+      <div v-if="loggedIn && isOtherUser" class="user-interactions">
+        <div class="follow">
+          <button @click="unfollowUser" class="pressed" :disabled="followRequestInProgress" :title="$t('user_card.follow_unfollow')" v-if="user.following">
+            <template v-if="followRequestInProgress">
+              {{ $t('user_card.follow_progress') }}
+            </template>
+            <template v-else>
+              {{ $t('user_card.following') }}
+            </template>
+          </button>
+          <button @click="followUser" :disabled="followRequestInProgress" :title="followRequestSent ? $t('user_card.follow_again') : ''" v-else>
+            <template v-if="followRequestInProgress">
+              {{ $t('user_card.follow_progress') }}
+            </template>
+            <template v-else-if="followRequestSent">
+              {{ $t('user_card.follow_sent') }}
+            </template>
+            <template v-else>
+              {{ $t('user_card.follow') }}
+            </template>
+          </button>
         </div>
-        <div v-if="loggedIn">
+        <div>
           <ProgressButton :click="subscribeUser" v-if="!user.subscribed">
             {{ $t('user_card.subscribe') }}
           </ProgressButton>
@@ -80,7 +75,7 @@
             {{ $t('user_card.subscribed') }}
           </ProgressButton>
         </div>
-        <div class='mute' v-if='isOtherUser && loggedIn'>
+        <div class='mute'>
           <span v-if='user.muted'>
             <button @click="unmuteUser" class="pressed">
               {{ $t('user_card.muted') }}
@@ -92,10 +87,7 @@
             </button>
           </span>
         </div>
-        <div v-if='!loggedIn && user.is_local'>
-          <RemoteFollow :user="user" />
-        </div>
-        <div class='block' v-if='isOtherUser && loggedIn'>
+        <div class='block'>
           <span v-if='user.statusnet_blocking'>
             <button @click="unblockUser" class="pressed">
               {{ $t('user_card.blocked') }}
@@ -107,14 +99,17 @@
             </button>
           </span>
         </div>
-        <div class='block' v-if='isOtherUser && loggedIn'>
+        <div class='block'>
           <span>
             <button @click="reportUser">
               {{ $t('user_card.report') }}
             </button>
           </span>
         </div>
-        <ModerationTools :user='user' v-if='loggedIn.role === "admin"'/>
+        <ModerationTools :user='user' v-if='loggedIn.role === "admin"' />
+      </div>
+      <div class="user-interactions" v-if="!loggedIn && user.is_local">
+        <RemoteFollow :user="user" />
       </div>
     </div>
   </div>

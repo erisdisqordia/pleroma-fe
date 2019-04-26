@@ -46,7 +46,7 @@
         </div>
       </div>
       <div v-if="loggedIn && isOtherUser" class="user-interactions">
-        <div>
+        <div class="btn-group">
           <button @click="unfollowUser" class="btn btn-default pressed" :disabled="followRequestInProgress" :title="$t('user_card.follow_unfollow')" v-if="user.following">
             <template v-if="followRequestInProgress">
               {{ $t('user_card.follow_progress') }}
@@ -66,9 +66,6 @@
               {{ $t('user_card.follow') }}
             </template>
           </button>
-        </div>
-
-        <div>
           <ProgressButton class="btn btn-default" :click="subscribeUser" v-if="!user.subscribed">
             {{ $t('user_card.subscribe') }}
           </ProgressButton>
@@ -78,19 +75,19 @@
         </div>
 
         <div>
-          <button @click="unmuteUser" class="btn btn-default pressed" v-if="user.muted">
+          <button @click="unmuteUser" class="btn btn-default btn-block pressed" v-if="user.muted">
             {{ $t('user_card.muted') }}
           </button>
-          <button @click="muteUser" class="btn btn-default" v-else>
+          <button @click="muteUser" class="btn btn-default btn-block" v-else>
             {{ $t('user_card.mute') }}
           </button>
         </div>
 
         <div>
-          <button @click="unblockUser" class="btn btn-default pressed" v-if="user.statusnet_blocking">
+          <button @click="unblockUser" class="btn btn-default btn-block pressed" v-if="user.statusnet_blocking">
             {{ $t('user_card.blocked') }}
           </button>
-          <button @click="blockUser" class="btn btn-default" v-else>
+          <button @click="blockUser" class="btn btn-default btn-block" v-else>
             {{ $t('user_card.block') }}
           </button>
         </div>
@@ -365,21 +362,15 @@
       flex: 1 0 0;
       margin: 0 .75em .6em 0;
       white-space: nowrap;
-
-      > button {
-        margin: 0;
-        width: 100%;
-      }
     }
 
-    .remote-button {
-      height: 28px;
+    button {
       margin: 0;
-    }
 
-    button.pressed {
-      border-bottom-color: rgba(255, 255, 255, 0.2);
-      border-top-color: rgba(0, 0, 0, 0.2);
+      &.pressed {
+        border-bottom-color: rgba(255, 255, 255, 0.2);
+        border-top-color: rgba(0, 0, 0, 0.2);
+      }
     }
   }
 }

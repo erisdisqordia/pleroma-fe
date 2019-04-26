@@ -61,7 +61,7 @@
         </span>
       </div>
     </div>
-    <button slot="reference" class="btn btn-default moderation-toggle-btn" v-bind:class="{ pressed: showDropDown }" @click='toggleMenu'>
+    <button slot="reference" class="btn btn-default btn-block" v-bind:class="{ pressed: showDropDown }" @click='toggleMenu'>
       {{ $t('user_card.admin_menu.moderation') }}
     </button>
   </Popper>
@@ -104,13 +104,6 @@
 
   &.menu-checkbox-checked::after {
     content: '✔';
-  }
-}
-
-.moderation-toggle-btn {
-  &#{&} {
-    margin: 0;
-    width: 100%;
   }
 }
 

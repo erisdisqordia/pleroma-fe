@@ -15,7 +15,7 @@
     <template v-else>
       <div v-if="statusoid.pinned" class="status-pin">
         <i class="fa icon-pin faint"></i>
-        <span class="faint">Pinned</span>
+        <span class="faint">{{$t('status.pinned')}}</span>
       </div>
       <div v-if="retweet && !noHeading && !inConversation" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
         <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :user="statusoid.user"/>

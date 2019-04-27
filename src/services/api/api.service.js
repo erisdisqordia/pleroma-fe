@@ -118,27 +118,16 @@ const updateBanner = ({credentials, banner}) => {
   .then((data) => parseUser(data))
 }
 
-// Params
-// name
-// url
-// location
-// description
 const updateProfile = ({credentials, params}) => {
-  // Always include these fields, because they might be empty or false
-  const fields = ['note', 'locked', 'no_rich_text', 'hide_follows', 'hide_followers', 'show_role']
-  const form = new FormData()
-
-  each(params, (value, key) => {
-    if (fields.includes(key) || value) {
-      form.append(key, value)
-    }
-  })
-  return fetch(MASTODON_PROFILE_UPDATE_URL, {
-    headers: authHeaders(credentials),
+  return promisedRequest(MASTODON_PROFILE_UPDATE_URL, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      ...authHeaders(credentials)
+    },
     method: 'PATCH',
-    body: form
+    body: JSON.stringify(params)
   })
-  .then((data) => data.json())
   .then((data) => parseUser(data))
 }
 

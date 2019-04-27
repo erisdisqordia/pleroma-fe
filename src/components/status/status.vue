@@ -1,6 +1,9 @@
 <template>
   <div class="status-el" v-if="!hideStatus" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
-    <div v-if="error" class="alert error">{{error}}</div>
+    <div v-if="error" class="alert error">
+      {{error}}
+      <i class="button-icon icon-cancel" @click="clearError"></i>
+    </div>
     <template v-if="muted && !isPreview">
       <div class="media status container muted">
         <small>
@@ -169,7 +172,7 @@
             </div>
             <retweet-button :visibility='status.visibility' :loggedIn='loggedIn' :status='status'></retweet-button>
             <favorite-button :loggedIn='loggedIn' :status='status'></favorite-button>
-            <extra-buttons :status="status" @onError="showError"></extra-buttons>
+            <extra-buttons :status="status" @onError="showError" @onSuccess="clearError"></extra-buttons>
           </div>
         </div>
       </div>

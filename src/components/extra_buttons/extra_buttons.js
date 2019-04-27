@@ -25,11 +25,14 @@ const ExtraButtons = {
     pinStatus () {
       this.refreshPopper()
       this.$store.dispatch('pinStatus', this.status.id)
+        .then(() => this.$emit('onSuccess'))
         .catch(err => this.$emit('onError', err.error.error))
     },
     unpinStatus () {
       this.refreshPopper()
       this.$store.dispatch('unpinStatus', this.status.id)
+        .then(() => this.$emit('onSuccess'))
+        .catch(err => this.$emit('onError', err.error.error))
     },
     refreshPopper () {
       this.showPopper = false

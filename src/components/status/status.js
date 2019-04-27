@@ -302,9 +302,9 @@ const Status = {
     },
     showError (error) {
       this.error = error
-      setTimeout(() => {
-        this.error = null
-      }, 5000)
+    },
+    clearError () {
+      this.error = undefined
     },
     linkClicked (event) {
       let { target } = event

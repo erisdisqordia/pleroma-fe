@@ -110,31 +110,21 @@ const UserSettings = {
   },
   methods: {
     updateProfile () {
-      const note = this.newBio
-      const locked = this.newLocked
-      // Backend notation.
-      /* eslint-disable camelcase */
-      const display_name = this.newName
-      const default_scope = this.newDefaultScope
-      const no_rich_text = this.newNoRichText
-      const hide_follows = this.hideFollows
-      const hide_followers = this.hideFollowers
-      const show_role = this.showRole
-
-      /* eslint-enable camelcase */
       this.$store.state.api.backendInteractor
         .updateProfile({
           params: {
-            display_name,
-            note,
-            locked,
+            note: this.newBio,
+            locked: this.newLocked,
+            source: {
+              privacy: this.newDefaultScope
+            },
             // Backend notation.
             /* eslint-disable camelcase */
-            default_scope,
-            no_rich_text,
-            hide_follows,
-            hide_followers,
-            show_role
+            display_name: this.newName,
+            no_rich_text: this.newNoRichText,
+            hide_follows: this.hideFollows,
+            hide_followers: this.hideFollowers,
+            show_role: this.showRole
             /* eslint-enable camelcase */
           }}).then((user) => {
             this.$store.commit('addNewUsers', [user])

@@ -73,7 +73,8 @@
     "content_type": {
       "text/plain": "Prostý text",
       "text/html": "HTML",
-      "text/markdown": "Markdown"
+      "text/markdown": "Markdown",
+      "text/bbcode": "BBCode"
     },
     "content_warning": "Předmět (volitelný)",
     "default": "Právě jsem přistál v L.A.",

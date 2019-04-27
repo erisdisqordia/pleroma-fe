@@ -22,7 +22,8 @@
     "generic_error": "An error occured",
     "optional": "optional",
     "show_more": "Show more",
-    "show_less": "Show less"
+    "show_less": "Show less",
+    "cancel": "Cancel"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",
@@ -76,7 +77,8 @@
     "content_type": {
       "text/plain": "Plain text",
       "text/html": "HTML",
-      "text/markdown": "Markdown"
+      "text/markdown": "Markdown",
+      "text/bbcode": "BBCode"
     },
     "content_warning": "Subject (optional)",
     "default": "Just landed in L.A.",
@@ -110,6 +112,9 @@
       "password_confirmation_required": "cannot be left blank",
       "password_confirmation_match": "should be the same as password"
     }
+  },
+  "selectable_list": {
+    "select_all": "Select all"
   },
   "settings": {
     "app_name": "App name",
@@ -216,6 +221,8 @@
     "reply_visibility_self": "Only show replies directed at me",
     "saving_err": "Error saving settings",
     "saving_ok": "Settings saved",
+    "search_user_to_block": "Search whom you want to block",
+    "search_user_to_mute": "Search whom you want to mute",
     "security_tab": "Security",
     "scope_copy": "Copy scope when replying (DMs are always copied)",
     "minimal_scopes_mode": "Minimize post scope selection options",
@@ -403,7 +410,26 @@
     "block_progress": "Blocking...",
     "unmute": "Unmute",
     "unmute_progress": "Unmuting...",
-    "mute_progress": "Muting..."
+    "mute_progress": "Muting...",
+    "admin_menu": {
+      "moderation": "Moderation",
+      "grant_admin": "Grant Admin",
+      "revoke_admin": "Revoke Admin",
+      "grant_moderator": "Grant Moderator",
+      "revoke_moderator": "Revoke Moderator",
+      "activate_account": "Activate account",
+      "deactivate_account": "Deactivate account",
+      "delete_account": "Delete account",
+      "force_nsfw": "Mark all posts as NSFW",
+      "strip_media": "Remove media from posts",
+      "force_unlisted": "Force posts to be unlisted",
+      "sandbox": "Force posts to be followers-only",
+      "disable_remote_subscription": "Disallow following user from remote instances",
+      "disable_any_subscription": "Disallow following user at all",
+      "quarantine": "Disallow user posts from federating",
+      "delete_user": "Delete user",
+      "delete_user_confirmation": "Are you absolutely sure? This action cannot be undone."
+    }
   },
   "user_profile": {
     "timeline_title": "User Timeline",

@@ -20,20 +20,22 @@ const emptyTl = (userId = 0) => ({
   flushMarker: 0
 })
 
+const emptyNotifications = () => ({
+  desktopNotificationSilence: true,
+  maxId: 0,
+  minId: Number.POSITIVE_INFINITY,
+  data: [],
+  idStore: {},
+  loading: false,
+  error: false
+})
+
 export const defaultState = () => ({
   allStatuses: [],
   allStatusesObject: {},
+  conversationsObject: {},
   maxId: 0,
-  notifications: {
-    desktopNotificationSilence: true,
-    maxId: 0,
-    minId: Number.POSITIVE_INFINITY,
-    data: [],
-    idStore: {},
-    loading: false,
-    error: false,
-    fetcherId: null
-  },
+  notifications: emptyNotifications(),
   favorites: new Set(),
   error: false,
   timelines: {
@@ -111,6 +113,39 @@ const sortTimeline = (timeline) => {
   return timeline
 }
 
+// Add status to the global storages (arrays and objects maintaining statuses) except timelines
+const addStatusToGlobalStorage = (state, data) => {
+  const result = mergeOrAdd(state.allStatuses, state.allStatusesObject, data)
+  if (result.new) {
+    // Add to conversation
+    const status = result.item
+    const conversationsObject = state.conversationsObject
+    const conversationId = status.statusnet_conversation_id
+    if (conversationsObject[conversationId]) {
+      conversationsObject[conversationId].push(status)
+    } else {
+      set(conversationsObject, conversationId, [status])
+    }
+  }
+  return result
+}
+
+// Remove status from the global storages (arrays and objects maintaining statuses) except timelines
+const removeStatusFromGlobalStorage = (state, status) => {
+  remove(state.allStatuses, { id: status.id })
+
+  // TODO: Need to remove from allStatusesObject?
+
+  // Remove possible notification
+  remove(state.notifications.data, ({action: {id}}) => id === status.id)
+
+  // Remove from conversation
+  const conversationId = status.statusnet_conversation_id
+  if (state.conversationsObject[conversationId]) {
+    remove(state.conversationsObject[conversationId], { id: status.id })
+  }
+}
+
 const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false, userId }) => {
   // Sanity check
   if (!isArray(statuses)) {
@@ -118,7 +153,6 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const allStatuses = state.allStatuses
-  const allStatusesObject = state.allStatusesObject
   const timelineObject = state.timelines[timeline]
 
   const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
@@ -141,7 +175,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 
   const addStatus = (data, showImmediately, addToTimeline = true) => {
-    const result = mergeOrAdd(allStatuses, allStatusesObject, data)
+    const result = addStatusToGlobalStorage(state, data)
     const status = result.item
 
     if (result.new) {
@@ -235,16 +269,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     },
     'deletion': (deletion) => {
       const uri = deletion.uri
-
-      // Remove possible notification
       const status = find(allStatuses, {uri})
       if (!status) {
         return
       }
 
-      remove(state.notifications.data, ({action: {id}}) => id === status.id)
+      removeStatusFromGlobalStorage(state, status)
 
-      remove(allStatuses, { uri })
       if (timeline) {
         remove(timelineObject.statuses, { uri })
         remove(timelineObject.visibleStatuses, { uri })
@@ -271,12 +302,12 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 }
 
-const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes }) => {
-  const allStatuses = state.allStatuses
-  const allStatusesObject = state.allStatusesObject
+const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters }) => {
   each(notifications, (notification) => {
-    notification.action = mergeOrAdd(allStatuses, allStatusesObject, notification.action).item
-    notification.status = notification.status && mergeOrAdd(allStatuses, allStatusesObject, notification.status).item
+    if (notification.type !== 'follow') {
+      notification.action = addStatusToGlobalStorage(state, notification.action).item
+      notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
+    }
 
     // Only add a new notification if we don't have one for the same action
     if (!state.notifications.idStore.hasOwnProperty(notification.id)) {
@@ -292,15 +323,32 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
 
       if ('Notification' in window && window.Notification.permission === 'granted') {
         const notifObj = {}
-        const action = notification.action
-        const title = action.user.name
-        notifObj.icon = action.user.profile_image_url
-        notifObj.body = action.text // there's a problem that it doesn't put a space before links tho
+        const status = notification.status
+        const title = notification.from_profile.name
+        notifObj.icon = notification.from_profile.profile_image_url
+        let i18nString
+        switch (notification.type) {
+          case 'like':
+            i18nString = 'favorited_you'
+            break
+          case 'repeat':
+            i18nString = 'repeated_you'
+            break
+          case 'follow':
+            i18nString = 'followed_you'
+            break
+        }
+
+        if (i18nString) {
+          notifObj.body = rootGetters.i18n.t('notifications.' + i18nString)
+        } else {
+          notifObj.body = notification.status.text
+        }
 
         // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
-        if (action.attachments && action.attachments.length > 0 && !action.nsfw &&
-            action.attachments[0].mimetype.startsWith('image/')) {
-          notifObj.image = action.attachments[0].url
+        if (status && status.attachments && status.attachments.length > 0 && !status.nsfw &&
+          status.attachments[0].mimetype.startsWith('image/')) {
+          notifObj.image = status.attachments[0].url
         }
 
         if (!notification.seen && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.type)) {
@@ -340,9 +388,6 @@ export const mutations = {
     oldTimeline.visibleStatusesObject = {}
     each(oldTimeline.visibleStatuses, (status) => { oldTimeline.visibleStatusesObject[status.id] = status })
   },
-  setNotificationFetcher (state, { fetcherId }) {
-    state.notifications.fetcherId = fetcherId
-  },
   resetStatuses (state) {
     const emptyState = defaultState()
     Object.entries(emptyState).forEach(([key, value]) => {
@@ -351,6 +396,9 @@ export const mutations = {
   },
   clearTimeline (state, { timeline }) {
     state.timelines[timeline] = emptyTl(state.timelines[timeline].userId)
+  },
+  clearNotifications (state) {
+    state.notifications = emptyNotifications()
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
@@ -377,6 +425,13 @@ export const mutations = {
   setDeleted (state, { status }) {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.deleted = true
+  },
+  setManyDeleted (state, condition) {
+    Object.values(state.allStatusesObject).forEach(status => {
+      if (condition(status)) {
+        status.deleted = true
+      }
+    })
   },
   setLoading (state, { timeline, value }) {
     state.timelines[timeline].loading = value
@@ -413,8 +468,8 @@ const statuses = {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })
     },
-    addNewNotifications ({ rootState, commit, dispatch }, { notifications, older }) {
-      commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older })
+    addNewNotifications ({ rootState, commit, dispatch, rootGetters }, { notifications, older }) {
+      commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older, rootGetters })
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })
@@ -428,15 +483,12 @@ const statuses = {
     setNotificationsSilence ({ rootState, commit }, { value }) {
       commit('setNotificationsSilence', { value })
     },
-    stopFetchingNotifications ({ rootState, commit }) {
-      if (rootState.statuses.notifications.fetcherId) {
-        window.clearInterval(rootState.statuses.notifications.fetcherId)
-      }
-      commit('setNotificationFetcher', { fetcherId: null })
-    },
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })
       apiService.deleteStatus({ id: status.id, credentials: rootState.users.currentUser.credentials })
+    },
+    markStatusesAsDeleted ({ commit }, condition) {
+      commit('setManyDeleted', condition)
     },
     favorite ({ rootState, commit }, status) {
       // Optimistic favoriting...

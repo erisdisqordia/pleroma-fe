@@ -10,13 +10,6 @@ const Notifications = {
   props: [
     'noHeading'
   ],
-  created () {
-    const store = this.$store
-    const credentials = store.state.users.currentUser.credentials
-
-    const fetcherId = notificationsFetcher.startFetching({ store, credentials })
-    this.$store.commit('setNotificationFetcher', { fetcherId })
-  },
   data () {
     return {
       bottomedOut: false
@@ -56,7 +49,7 @@ const Notifications = {
   },
   methods: {
     markAsSeen () {
-      this.$store.dispatch('markNotificationsAsSeen', this.visibleNotifications)
+      this.$store.dispatch('markNotificationsAsSeen')
     },
     fetchOlderNotifications () {
       const store = this.$store

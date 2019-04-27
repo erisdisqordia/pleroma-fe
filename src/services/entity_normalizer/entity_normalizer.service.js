@@ -39,7 +39,7 @@ export const parseUser = (data) => {
       return output
     }
 
-    // output.name = ??? missing
+    output.name = data.display_name
     output.name_html = addEmojis(data.display_name, data.emojis)
 
     // output.description = ??? missing
@@ -67,9 +67,14 @@ export const parseUser = (data) => {
         output.statusnet_blocking = relationship.blocking
         output.muted = relationship.muting
       }
+
+      output.rights = {
+        moderator: data.pleroma.is_moderator,
+        admin: data.pleroma.is_admin
+      }
     }
 
-    // Missing, trying to recover
+    // TODO: handle is_local
     output.is_local = !output.screen_name.includes('@')
   } else {
     output.screen_name = data.screen_name
@@ -103,7 +108,12 @@ export const parseUser = (data) => {
 
     // QVITTER ONLY FOR NOW
     // Really only applies to logged in user, really.. I THINK
-    output.rights = data.rights
+    if (data.rights) {
+      output.rights = {
+        moderator: data.rights.delete_others_notice,
+        admin: data.rights.admin
+      }
+    }
     output.no_rich_text = data.no_rich_text
     output.default_scope = data.default_scope
     output.hide_follows = data.hide_follows
@@ -119,11 +129,18 @@ export const parseUser = (data) => {
   output.locked = data.locked
   output.followers_count = data.followers_count
   output.statuses_count = data.statuses_count
-  output.friends = []
-  output.followers = []
+  output.friendIds = []
+  output.followerIds = []
   if (data.pleroma) {
     output.follow_request_count = data.pleroma.follow_request_count
   }
+
+  if (data.pleroma) {
+    output.tags = data.pleroma.tags
+    output.deactivated = data.pleroma.deactivated
+  }
+
+  output.tags = output.tags || []
 
   return output
 }
@@ -172,28 +189,28 @@ export const parseStatus = (data) => {
 
     output.statusnet_html = addEmojis(data.content, data.emojis)
 
-    // Not exactly the same but works?
-    output.text = data.content
+    if (data.pleroma) {
+      const { pleroma } = data
+      output.text = pleroma.content ? data.pleroma.content['text/plain'] : data.content
+      output.summary = pleroma.spoiler_text ? data.pleroma.spoiler_text['text/plain'] : data.spoiler_text
+      output.statusnet_conversation_id = data.pleroma.conversation_id
+      output.is_local = pleroma.local
+      output.in_reply_to_screen_name = data.pleroma.in_reply_to_account_acct
+    } else {
+      output.text = data.content
+      output.summary = data.spoiler_text
+    }
 
     output.in_reply_to_status_id = data.in_reply_to_id
     output.in_reply_to_user_id = data.in_reply_to_account_id
     output.replies_count = data.replies_count
 
-    // Missing!! fix in UI?
-    // output.in_reply_to_screen_name = ???
-
-    // Not exactly the same but works
-    output.statusnet_conversation_id = data.id
-
     if (output.type === 'retweet') {
       output.retweeted_status = parseStatus(data.reblog)
     }
 
-    output.summary = data.spoiler_text
     output.summary_html = addEmojis(data.spoiler_text, data.emojis)
     output.external_url = data.url
-
-    // output.is_local = ??? missing
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num
@@ -221,7 +238,6 @@ export const parseStatus = (data) => {
     output.in_reply_to_status_id = data.in_reply_to_status_id
     output.in_reply_to_user_id = data.in_reply_to_user_id
     output.in_reply_to_screen_name = data.in_reply_to_screen_name
-
     output.statusnet_conversation_id = data.statusnet_conversation_id
 
     if (output.type === 'retweet') {
@@ -272,9 +288,11 @@ export const parseNotification = (data) => {
 
   if (masto) {
     output.type = mastoDict[data.type] || data.type
-    // output.seen = ??? missing
-    output.status = parseStatus(data.status)
-    output.action = output.status // not sure
+    output.seen = data.pleroma.is_seen
+    output.status = output.type === 'follow'
+      ? null
+      : parseStatus(data.status)
+    output.action = output.status // TODO: Refactor, this is unneeded
     output.from_profile = parseUser(data.account)
   } else {
     const parsedNotice = parseStatus(data.notice)

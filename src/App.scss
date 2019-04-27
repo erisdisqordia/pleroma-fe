@@ -101,6 +101,14 @@ button {
     background-color: $fallback--bg;
     background-color: var(--bg, $fallback--bg)
   }
+
+  &.danger {
+    // TODO: add better color variable
+    color: $fallback--text;
+    color: var(--alertErrorPanelText, $fallback--text);
+    background-color: $fallback--alertError;
+    background-color: var(--alertError, $fallback--alertError);
+  }
 }
 
 label.select {

@@ -10,8 +10,8 @@ export const visibleTypes = store => ([
 ].filter(_ => _))
 
 const sortById = (a, b) => {
-  const seqA = Number(a.action.id)
-  const seqB = Number(b.action.id)
+  const seqA = Number(a.id)
+  const seqB = Number(b.id)
   const isSeqA = !Number.isNaN(seqA)
   const isSeqB = !Number.isNaN(seqB)
   if (isSeqA && isSeqB) {
@@ -21,7 +21,7 @@ const sortById = (a, b) => {
   } else if (!isSeqA && isSeqB) {
     return -1
   } else {
-    return a.action.id > b.action.id ? -1 : 1
+    return a.id > b.id ? -1 : 1
   }
 }
 

@@ -1,5 +1,6 @@
 import FollowCard from '../follow_card/follow_card.vue'
-import userSearchApi from '../../services/new_api/user_search.js'
+import map from 'lodash/map'
+
 const userSearch = {
   components: {
     FollowCard
@@ -10,8 +11,13 @@ const userSearch = {
   data () {
     return {
       username: '',
-      users: [],
+      userIds: [],
       loading: false
+    }
+  },
+  computed: {
+    users () {
+      return this.userIds.map(userId => this.$store.getters.findUser(userId))
     }
   },
   mounted () {
@@ -33,10 +39,10 @@ const userSearch = {
         return
       }
       this.loading = true
-      userSearchApi.search({query, store: this.$store})
+      this.$store.dispatch('searchUsers', query)
         .then((res) => {
           this.loading = false
-          this.users = res
+          this.userIds = map(res, 'id')
         })
     }
   }

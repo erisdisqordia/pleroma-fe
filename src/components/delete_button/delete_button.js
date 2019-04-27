@@ -10,7 +10,11 @@ const DeleteButton = {
   },
   computed: {
     currentUser () { return this.$store.state.users.currentUser },
-    canDelete () { return this.currentUser && this.currentUser.rights.delete_others_notice || this.status.user.id === this.currentUser.id }
+    canDelete () {
+      if (!this.currentUser) { return }
+      const superuser = this.currentUser.rights.moderator || this.currentUser.rights.admin
+      return superuser || this.status.user.id === this.currentUser.id
+    }
   }
 }
 

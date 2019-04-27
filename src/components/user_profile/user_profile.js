@@ -1,47 +1,37 @@
-import { compose } from 'vue-compose'
 import get from 'lodash/get'
 import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
+import ModerationTools from '../moderation_tools/moderation_tools.vue'
+import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
-import withList from '../../hocs/with_list/with_list'
 
-const FollowerList = compose(
-  withLoadMore({
-    fetch: (props, $store) => $store.dispatch('addFollowers', props.userId),
-    select: (props, $store) => get($store.getters.findUser(props.userId), 'followers', []),
-    destory: (props, $store) => $store.dispatch('clearFollowers', props.userId),
-    childPropName: 'entries',
-    additionalPropNames: ['userId']
-  }),
-  withList({ getEntryProps: user => ({ user }) })
-)(FollowCard)
+const FollowerList = withLoadMore({
+  fetch: (props, $store) => $store.dispatch('fetchFollowers', props.userId),
+  select: (props, $store) => get($store.getters.findUser(props.userId), 'followerIds', []).map(id => $store.getters.findUser(id)),
+  destroy: (props, $store) => $store.dispatch('clearFollowers', props.userId),
+  childPropName: 'items',
+  additionalPropNames: ['userId']
+})(List)
 
-const FriendList = compose(
-  withLoadMore({
-    fetch: (props, $store) => $store.dispatch('addFriends', props.userId),
-    select: (props, $store) => get($store.getters.findUser(props.userId), 'friends', []),
-    destory: (props, $store) => $store.dispatch('clearFriends', props.userId),
-    childPropName: 'entries',
-    additionalPropNames: ['userId']
-  }),
-  withList({ getEntryProps: user => ({ user }) })
-)(FollowCard)
+const FriendList = withLoadMore({
+  fetch: (props, $store) => $store.dispatch('fetchFriends', props.userId),
+  select: (props, $store) => get($store.getters.findUser(props.userId), 'friendIds', []).map(id => $store.getters.findUser(id)),
+  destroy: (props, $store) => $store.dispatch('clearFriends', props.userId),
+  childPropName: 'items',
+  additionalPropNames: ['userId']
+})(List)
 
 const UserProfile = {
   data () {
     return {
       error: false,
-      fetchedUserId: null
+      userId: null
     }
   },
   created () {
-    if (!this.user.id) {
-      this.fetchUserId()
-        .then(() => this.startUp())
-    } else {
-      this.startUp()
-    }
+    const routeParams = this.$route.params
+    this.load(routeParams.name || routeParams.id)
   },
   destroyed () {
     this.cleanUp()
@@ -56,26 +46,12 @@ const UserProfile = {
     media () {
       return this.$store.state.statuses.timelines.media
     },
-    userId () {
-      return this.$route.params.id || this.user.id || this.fetchedUserId
-    },
-    userName () {
-      return this.$route.params.name || this.user.screen_name
-    },
     isUs () {
       return this.userId && this.$store.state.users.currentUser.id &&
         this.userId === this.$store.state.users.currentUser.id
     },
-    userInStore () {
-      const routeParams = this.$route.params
-      // This needs fetchedUserId so that computed will be refreshed when user is fetched
-      return this.$store.getters.findUser(this.fetchedUserId || routeParams.name || routeParams.id)
-    },
     user () {
-      if (this.userInStore) {
-        return this.userInStore
-      }
-      return {}
+      return this.$store.getters.findUser(this.userId)
     },
     isExternal () {
       return this.$route.name === 'external-user-profile'
@@ -88,39 +64,36 @@ const UserProfile = {
     }
   },
   methods: {
-    startFetchFavorites () {
-      if (this.isUs) {
-        this.$store.dispatch('startFetching', { timeline: 'favorites', userId: this.userId })
-      }
-    },
-    fetchUserId () {
-      let fetchPromise
-      if (this.userId && !this.$route.params.name) {
-        fetchPromise = this.$store.dispatch('fetchUser', this.userId)
+    load (userNameOrId) {
+      // Check if user data is already loaded in store
+      const user = this.$store.getters.findUser(userNameOrId)
+      if (user) {
+        this.userId = user.id
+        this.fetchTimelines()
       } else {
-        fetchPromise = this.$store.dispatch('fetchUser', this.userName)
+        this.$store.dispatch('fetchUser', userNameOrId)
           .then(({ id }) => {
-            this.fetchedUserId = id
+            this.userId = id
+            this.fetchTimelines()
+          })
+          .catch((reason) => {
+            const errorMessage = get(reason, 'error.error')
+            if (errorMessage === 'No user with such user_id') { // Known error
+              this.error = this.$t('user_profile.profile_does_not_exist')
+            } else if (errorMessage) {
+              this.error = errorMessage
+            } else {
+              this.error = this.$t('user_profile.profile_loading_error')
+            }
           })
       }
-      return fetchPromise
-        .catch((reason) => {
-          const errorMessage = get(reason, 'error.error')
-          if (errorMessage === 'No user with such user_id') { // Known error
-            this.error = this.$t('user_profile.profile_does_not_exist')
-          } else if (errorMessage) {
-            this.error = errorMessage
-          } else {
-            this.error = this.$t('user_profile.profile_loading_error')
-          }
-        })
-        .then(() => this.startUp())
     },
-    startUp () {
-      if (this.userId) {
-        this.$store.dispatch('startFetching', { timeline: 'user', userId: this.userId })
-        this.$store.dispatch('startFetching', { timeline: 'media', userId: this.userId })
-        this.startFetchFavorites()
+    fetchTimelines () {
+      const userId = this.userId
+      this.$store.dispatch('startFetchingTimeline', { timeline: 'user', userId })
+      this.$store.dispatch('startFetchingTimeline', { timeline: 'media', userId })
+      if (this.isUs) {
+        this.$store.dispatch('startFetchingTimeline', { timeline: 'favorites', userId })
       }
     },
     cleanUp () {
@@ -133,18 +106,16 @@ const UserProfile = {
     }
   },
   watch: {
-    // userId can be undefined if we don't know it yet
-    userId (newVal) {
+    '$route.params.id': function (newVal) {
       if (newVal) {
         this.cleanUp()
-        this.startUp()
+        this.load(newVal)
       }
     },
-    userName () {
-      if (this.$route.params.name) {
-        this.fetchUserId()
+    '$route.params.name': function (newVal) {
+      if (newVal) {
         this.cleanUp()
-        this.startUp()
+        this.load(newVal)
       }
     },
     $route () {
@@ -155,7 +126,9 @@ const UserProfile = {
     UserCard,
     Timeline,
     FollowerList,
-    FriendList
+    FriendList,
+    ModerationTools,
+    FollowCard
   }
 }
 

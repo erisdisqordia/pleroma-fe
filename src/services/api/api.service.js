@@ -8,7 +8,6 @@ const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
 const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
 const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
-const QVITTER_USER_NOTIFICATIONS_URL = '/api/qvitter/statuses/notifications.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
@@ -16,9 +15,14 @@ const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
 const FOLLOW_REQUESTS_URL = '/api/pleroma/friend_requests'
 const APPROVE_USER_URL = '/api/pleroma/friendships/approve'
 const DENY_USER_URL = '/api/pleroma/friendships/deny'
+const TAG_USER_URL = '/api/pleroma/admin/users/tag'
+const PERMISSION_GROUP_URL = '/api/pleroma/admin/permission_group'
+const ACTIVATION_STATUS_URL = '/api/pleroma/admin/activation_status'
+const ADMIN_USER_URL = '/api/pleroma/admin/user'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
+const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
 const MASTODON_FAVORITE_URL = id => `/api/v1/statuses/${id}/favourite`
 const MASTODON_UNFAVORITE_URL = id => `/api/v1/statuses/${id}/unfavourite`
 const MASTODON_RETWEET_URL = id => `/api/v1/statuses/${id}/reblog`
@@ -46,7 +50,7 @@ const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
 const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
 const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 
-import { each, map } from 'lodash'
+import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
 import { StatusCodeError } from '../errors/errors'
@@ -290,10 +294,23 @@ const fetchFriends = ({id, maxId, sinceId, limit = 20, credentials}) => {
 }
 
 const exportFriends = ({id, credentials}) => {
-  let url = MASTODON_FOLLOWING_URL(id) + `?all=true`
-  return fetch(url, { headers: authHeaders(credentials) })
-    .then((data) => data.json())
-    .then((data) => data.map(parseUser))
+  return new Promise(async (resolve, reject) => {
+    try {
+      let friends = []
+      let more = true
+      while (more) {
+        const maxId = friends.length > 0 ? last(friends).id : undefined
+        const users = await fetchFriends({id, maxId, credentials})
+        friends = concat(friends, users)
+        if (users.length === 0) {
+          more = false
+        }
+      }
+      resolve(friends)
+    } catch (err) {
+      reject(err)
+    }
+  })
 }
 
 const fetchFollowers = ({id, maxId, sinceId, limit = 20, credentials}) => {
@@ -352,13 +369,93 @@ const fetchStatus = ({id, credentials}) => {
     .then((data) => parseStatus(data))
 }
 
+const tagUser = ({tag, credentials, ...options}) => {
+  const screenName = options.screen_name
+  const form = {
+    nicknames: [screenName],
+    tags: [tag]
+  }
+
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(TAG_USER_URL, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(form)
+  })
+}
+
+const untagUser = ({tag, credentials, ...options}) => {
+  const screenName = options.screen_name
+  const body = {
+    nicknames: [screenName],
+    tags: [tag]
+  }
+
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(TAG_USER_URL, {
+    method: 'DELETE',
+    headers: headers,
+    body: JSON.stringify(body)
+  })
+}
+
+const addRight = ({right, credentials, ...user}) => {
+  const screenName = user.screen_name
+
+  return fetch(`${PERMISSION_GROUP_URL}/${screenName}/${right}`, {
+    method: 'POST',
+    headers: authHeaders(credentials),
+    body: {}
+  })
+}
+
+const deleteRight = ({right, credentials, ...user}) => {
+  const screenName = user.screen_name
+
+  return fetch(`${PERMISSION_GROUP_URL}/${screenName}/${right}`, {
+    method: 'DELETE',
+    headers: authHeaders(credentials),
+    body: {}
+  })
+}
+
+const setActivationStatus = ({status, credentials, ...user}) => {
+  const screenName = user.screen_name
+  const body = {
+    status: status
+  }
+
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(`${ACTIVATION_STATUS_URL}/${screenName}.json`, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(body)
+  })
+}
+
+const deleteUser = ({credentials, ...user}) => {
+  const screenName = user.screen_name
+  const headers = authHeaders(credentials)
+
+  return fetch(`${ADMIN_USER_URL}.json?nickname=${screenName}`, {
+    method: 'DELETE',
+    headers: headers
+  })
+}
+
 const fetchTimeline = ({timeline, credentials, since = false, until = false, userId = false, tag = false, withMuted = false}) => {
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
     friends: MASTODON_USER_HOME_TIMELINE_URL,
     mentions: MENTIONS_URL,
     dms: MASTODON_DIRECT_MESSAGES_TIMELINE_URL,
-    notifications: QVITTER_USER_NOTIFICATIONS_URL,
+    notifications: MASTODON_USER_NOTIFICATIONS_URL,
     'publicAndExternal': MASTODON_PUBLIC_TIMELINE,
     user: MASTODON_USER_TIMELINE_URL,
     media: MASTODON_USER_TIMELINE_URL,
@@ -666,6 +763,12 @@ const apiService = {
   fetchBlocks,
   fetchOAuthTokens,
   revokeOAuthToken,
+  tagUser,
+  untagUser,
+  deleteUser,
+  addRight,
+  deleteRight,
+  setActivationStatus,
   register,
   getCaptcha,
   updateAvatar,

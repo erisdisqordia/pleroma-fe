@@ -141,6 +141,7 @@ export const parseUser = (data) => {
   }
 
   output.tags = output.tags || []
+  output.rights = output.rights || {}
 
   return output
 }

@@ -15,10 +15,13 @@ lint:
     - npm run lint
 
 test:
-  services:
-    - firefox
   stage: test
+  variables:
+    APT_CACHE_DIR: apt-cache
   script:
+    - mkdir -pv $APT_CACHE_DIR && apt-get -qq update
+    - apt install firefox-esr -y --no-install-recommends
+    - firefox --version
     - yarn
     - npm run unit
 

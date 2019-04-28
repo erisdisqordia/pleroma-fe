@@ -8120,13 +8120,6 @@ vue-chat-scroll@^1.2.1:
   resolved "https://registry.yarnpkg.com/vue-chat-scroll/-/vue-chat-scroll-1.3.5.tgz#a5ee5bae5058f614818a96eac5ee3be4394a2f68"
   integrity sha512-bOBIv3AQp9D+YkhUBwVG4vBblRTeAtqQqx3Agl8fHNNm33aHMWB74U1m45Ll+JI3B0xfyWw6htJ2o5qoiFX9ZQ==
 
-vue-compose@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/vue-compose/-/vue-compose-0.7.1.tgz#1c11c4cd5e2c8f2743b03fce8ab43d78aabc20b3"
-  integrity sha512-OAObuO3n0qH5sSupLxrNxdkRNz8p+CiIBcsczp5x8QofnoWrEiluVIsW1xwIbW7aTcnDvkDSGlrlXQn6E3xqDw==
-  dependencies:
-    vue-hoc "0.x.x"
-
 vue-eslint-parser@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-5.0.0.tgz#00f4e4da94ec974b821a26ff0ed0f7a78402b8a1"
@@ -8139,19 +8132,10 @@ vue-eslint-parser@^5.0.0:
     esquery "^1.0.1"
     lodash "^4.17.11"
 
-vue-hoc@0.x.x:
-  version "0.4.7"
-  resolved "https://registry.yarnpkg.com/vue-hoc/-/vue-hoc-0.4.7.tgz#4d3322ba89b8b0e42b19045ef536c21d948a4fac"
-  integrity sha512-bFHE7mf1bBBQSYg36Zg3ON0BawtRSxhiVS2wkDXq4LldSyBoH84WmfR+JijYenICiZTv81dbrYVFTf8S/FT1aQ==
-
 vue-hot-reload-api@^2.2.0:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.3.tgz#2756f46cb3258054c5f4723de8ae7e87302a1ccf"
   integrity sha512-KmvZVtmM26BQOMK1rwUZsrqxEGeKiYSZGA7SNWE6uExx8UX/cj9hq2MRV/wWC3Cq6AoeDGk57rL9YMFRel/q+g==
-
-vue-hot-reload-api@^2.0.11:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
 
 vue-i18n@^7.3.2:
   version "7.8.1"

@@ -70,7 +70,7 @@
     "no_more_notifications": "Aucune notification supplémentaire"
   },
   "post_status": {
-    "new_status": "Poster un nouveau statut"
+    "new_status": "Poster un nouveau statut",
     "account_not_locked_warning": "Votre compte n'est pas {0}. N'importe qui peut vous suivre pour voir vos billets en Abonné·e·s uniquement.",
     "account_not_locked_warning_link": "verrouillé",
     "attachments_sensitive": "Marquer le média comme sensible",
@@ -113,7 +113,7 @@
     }
   },
   "settings": {
-    "app_name": "Nom de l'application"
+    "app_name": "Nom de l'application",
     "attachmentRadius": "Pièces jointes",
     "attachments": "Pièces jointes",
     "autoload": "Charger la suite automatiquement une fois le bas de la page atteint",
@@ -122,7 +122,7 @@
     "avatarRadius": "Avatars",
     "background": "Arrière-plan",
     "bio": "Biographie",
-    "blocks_tab": "Bloqué·e·s"
+    "blocks_tab": "Bloqué·e·s",
     "btnRadius": "Boutons",
     "cBlue": "Bleu (Répondre, suivre)",
     "cGreen": "Vert (Partager)",

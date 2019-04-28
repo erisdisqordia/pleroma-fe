@@ -115,12 +115,10 @@ const UserSettings = {
           params: {
             note: this.newBio,
             locked: this.newLocked,
-            source: {
-              privacy: this.newDefaultScope
-            },
             // Backend notation.
             /* eslint-disable camelcase */
             display_name: this.newName,
+            default_scope: this.newDefaultScope,
             no_rich_text: this.newNoRichText,
             hide_follows: this.hideFollows,
             hide_followers: this.hideFollowers,

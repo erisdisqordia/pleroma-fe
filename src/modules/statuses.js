@@ -533,8 +533,19 @@ const statuses = {
       })
     },
     fetchFavsAndRepeats ({ rootState, commit }, id) {
-      Promise.all([rootState.api.backendInteractor.fetchFavoritedByUsers(id), rootState.api.backendInteractor.fetchRebloggedByUsers(id)])
-        .then(([favoritedByUsers, rebloggedByUsers]) => commit('addFavsAndRepeats', { id, favoritedByUsers, rebloggedByUsers }))
+      Promise.all([
+        rootState.api.backendInteractor.fetchFavoritedByUsers(id),
+        rootState.api.backendInteractor.fetchRebloggedByUsers(id)
+      ]).then(([favoritedByUsers, rebloggedByUsers]) =>
+        commit(
+          'addFavsAndRepeats',
+          {
+            id,
+            favoritedByUsers: favoritedByUsers.filter(_ => _),
+            rebloggedByUsers: rebloggedByUsers.filter(_ => _)
+          }
+        )
+      )
     }
   },
   mutations

@@ -265,7 +265,10 @@ const Status = {
     },
     combinedFavsAndRepeatsAvatars () {
       // Use the status from the global status repository since favs and repeats are saved in it
-      const combinedAvatars = [].concat(this.statusFromGlobalRepository.favoritedBy, this.statusFromGlobalRepository.rebloggedBy).filter(_ => _)
+      const combinedAvatars = [].concat(
+        this.statusFromGlobalRepository.favoritedBy,
+        this.statusFromGlobalRepository.rebloggedBy
+      )
       return uniqBy(combinedAvatars, 'id')
     }
   },

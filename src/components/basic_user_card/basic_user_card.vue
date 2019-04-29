@@ -44,14 +44,15 @@
       width: 16px;
       vertical-align: middle;
     }
+  }
 
-    &-value {
-      display: inline-block;
-      max-width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+  &-user-name-value,
+  &-screen-name {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &-expanded-content {

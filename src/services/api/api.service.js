@@ -9,6 +9,7 @@ const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
 const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
+const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
@@ -634,9 +635,22 @@ const uploadMedia = ({formData, credentials}) => {
     .then((data) => parseAttachment(data))
 }
 
-const followImport = ({params, credentials}) => {
+const importBlocks = ({file, credentials}) => {
+  const formData = new FormData()
+  formData.append('list', file)
+  return fetch(BLOCKS_IMPORT_URL, {
+    body: formData,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.ok)
+}
+
+const importFollows = ({file, credentials}) => {
+  const formData = new FormData()
+  formData.append('list', file)
   return fetch(FOLLOW_IMPORT_URL, {
-    body: params,
+    body: formData,
     method: 'POST',
     headers: authHeaders(credentials)
   })
@@ -776,7 +790,8 @@ const apiService = {
   updateProfile,
   updateBanner,
   externalProfile,
-  followImport,
+  importBlocks,
+  importFollows,
   deleteAccount,
   changePassword,
   fetchFollowRequests,

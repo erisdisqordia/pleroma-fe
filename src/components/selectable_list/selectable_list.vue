@@ -31,6 +31,10 @@
   &-item-inner {
     display: flex;
     align-items: center;
+
+    & > * {
+      min-width: 0;
+    }
   }
 
   &-item-selected-inner {

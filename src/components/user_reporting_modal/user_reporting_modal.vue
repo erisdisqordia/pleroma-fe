@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="user-reporting-panel-right" v-bar="{preventParentScroll: true}">
+      <div class="user-reporting-panel-right">
         <List :items="statuses">
           <template slot="item" slot-scope="{item}">
             <div class="status-fadein user-reporting-panel-sitem">
@@ -113,12 +113,12 @@
   &-right {
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
   }
 
   &-sitem {
     display: flex;
     justify-content: space-between;
-    padding-right: 15px;
 
     > .status-el {
       flex: 1;
@@ -150,6 +150,7 @@
     &-right {
       width: 50%;
       flex: 1 1 auto;
+      margin-bottom: 12px;
     }
   }
 }

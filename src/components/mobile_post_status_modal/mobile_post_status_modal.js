@@ -1,5 +1,5 @@
 import PostStatusForm from '../post_status_form/post_status_form.vue'
-import { throttle, debounce } from 'lodash'
+import { debounce } from 'lodash'
 
 const MobilePostStatusModal = {
   components: {
@@ -17,15 +17,13 @@ const MobilePostStatusModal = {
   },
   created () {
     if (this.autohideFloatingPostButton) {
-      window.addEventListener('scroll', this.handleScroll)
-      window.addEventListener('scroll', this.handleScrollDown)
+      this.activateFloatingPostButtonAutohide()
     }
     window.addEventListener('resize', this.handleOSK)
   },
   destroyed () {
     if (this.autohideFloatingPostButton) {
-      window.removeEventListener('scroll', this.handleScroll)
-      window.removeEventListener('scroll', this.handleScrollDown)
+      this.deactivateFloatingPostButtonAutohide()
     }
     window.removeEventListener('resize', this.handleOSK)
   },
@@ -43,15 +41,21 @@ const MobilePostStatusModal = {
   watch: {
     autohideFloatingPostButton: function (isEnabled) {
       if (isEnabled) {
-        window.addEventListener('scroll', this.handleScroll)
-        window.addEventListener('scroll', this.handleScrollDown)
+        this.activateFloatingPostButtonAutohide()
       } else {
-        window.removeEventListener('scroll', this.handleScroll)
-        window.removeEventListener('scroll', this.handleScrollDown)
+        this.deactivateFloatingPostButtonAutohide()
       }
     }
   },
   methods: {
+    activateFloatingPostButtonAutohide () {
+      window.addEventListener('scroll', this.handleScrollStart)
+      window.addEventListener('scroll', this.handleScrollEnd)
+    },
+    deactivateFloatingPostButtonAutohide () {
+      window.removeEventListener('scroll', this.handleScrollStart)
+      window.removeEventListener('scroll', this.handleScrollEnd)
+    },
     openPostForm () {
       this.postFormOpen = true
       this.hidden = true
@@ -85,31 +89,19 @@ const MobilePostStatusModal = {
         this.inputActive = false
       }
     },
-    handleScroll: throttle(function () {
-      const scrollAmount = window.scrollY - this.oldScrollPos
-      const scrollingDown = scrollAmount > 0
-
-      if (scrollingDown !== this.scrollingDown) {
-        this.amountScrolled = 0
-        this.scrollingDown = scrollingDown
-        if (!scrollingDown) {
-          this.hidden = false
-        }
-      } else if (scrollingDown) {
-        this.amountScrolled += scrollAmount
-        if (this.amountScrolled > 100 && !this.hidden) {
-          this.hidden = true
-        }
-      }
-
-      this.oldScrollPos = window.scrollY
-      this.scrollingDown = scrollingDown
-    }, 100),
-    handleScrollDown: debounce(function () {
-      if (this.scrollingDown) {
+    handleScrollStart: debounce(function () {
+      if (window.scrollY > this.oldScrollPos) {
+        this.hidden = true
+      } else {
         this.hidden = false
       }
-    }, 100)
+      this.oldScrollPos = window.scrollY
+    }, 100, {leading: true, trailing: false}),
+
+    handleScrollEnd: debounce(function () {
+      this.hidden = false
+      this.oldScrollPos = window.scrollY
+    }, 100, {leading: false, trailing: true})
   }
 }
 

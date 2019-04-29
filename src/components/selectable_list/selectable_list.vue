@@ -32,7 +32,7 @@
     display: flex;
     align-items: center;
 
-    & > * {
+    > * {
       min-width: 0;
     }
   }

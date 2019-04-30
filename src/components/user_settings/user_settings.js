@@ -109,37 +109,23 @@ const UserSettings = {
   },
   methods: {
     updateProfile () {
-      const name = this.newName
-      const description = this.newBio
-      const locked = this.newLocked
-      // Backend notation.
-      /* eslint-disable camelcase */
-      const default_scope = this.newDefaultScope
-      const no_rich_text = this.newNoRichText
-      const hide_follows = this.hideFollows
-      const hide_followers = this.hideFollowers
-      const show_role = this.showRole
-
-      /* eslint-enable camelcase */
       this.$store.state.api.backendInteractor
         .updateProfile({
           params: {
-            name,
-            description,
-            locked,
+            note: this.newBio,
+            locked: this.newLocked,
             // Backend notation.
             /* eslint-disable camelcase */
-            default_scope,
-            no_rich_text,
-            hide_follows,
-            hide_followers,
-            show_role
+            display_name: this.newName,
+            default_scope: this.newDefaultScope,
+            no_rich_text: this.newNoRichText,
+            hide_follows: this.hideFollows,
+            hide_followers: this.hideFollowers,
+            show_role: this.showRole
             /* eslint-enable camelcase */
           }}).then((user) => {
-            if (!user.error) {
-              this.$store.commit('addNewUsers', [user])
-              this.$store.commit('setCurrentUser', user)
-            }
+            this.$store.commit('addNewUsers', [user])
+            this.$store.commit('setCurrentUser', user)
           })
     },
     changeVis (visibility) {
@@ -159,23 +145,29 @@ const UserSettings = {
       reader.onload = ({target}) => {
         const img = target.result
         this[slot + 'Preview'] = img
+        this[slot] = file
       }
       reader.readAsDataURL(file)
     },
     submitAvatar (cropper, file) {
-      let img
-      if (cropper) {
-        img = cropper.getCroppedCanvas().toDataURL(file.type)
-      } else {
-        img = file
-      }
+      const that = this
+      return new Promise((resolve, reject) => {
+        function updateAvatar (avatar) {
+          that.$store.state.api.backendInteractor.updateAvatar({ avatar })
+            .then((user) => {
+              that.$store.commit('addNewUsers', [user])
+              that.$store.commit('setCurrentUser', user)
+              resolve()
+            })
+            .catch((err) => {
+              reject(new Error(that.$t('upload.error.base') + ' ' + err.message))
+            })
+        }
 
-      return this.$store.state.api.backendInteractor.updateAvatar({ params: { img } }).then((user) => {
-        if (!user.error) {
-          this.$store.commit('addNewUsers', [user])
-          this.$store.commit('setCurrentUser', user)
+        if (cropper) {
+          cropper.getCroppedCanvas().toBlob(updateAvatar, file.type)
         } else {
-          throw new Error(this.$t('upload.error.base') + user.error)
+          updateAvatar(file)
         }
       })
     },
@@ -185,30 +177,17 @@ const UserSettings = {
     submitBanner () {
       if (!this.bannerPreview) { return }
 
-      let banner = this.bannerPreview
-      // eslint-disable-next-line no-undef
-      let imginfo = new Image()
-      /* eslint-disable camelcase */
-      let offset_top, offset_left, width, height
-      imginfo.src = banner
-      width = imginfo.width
-      height = imginfo.height
-      offset_top = 0
-      offset_left = 0
       this.bannerUploading = true
-      this.$store.state.api.backendInteractor.updateBanner({params: {banner, offset_top, offset_left, width, height}}).then((data) => {
-        if (!data.error) {
-          let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
-          clone.cover_photo = data.url
-          this.$store.commit('addNewUsers', [clone])
-          this.$store.commit('setCurrentUser', clone)
+      this.$store.state.api.backendInteractor.updateBanner({banner: this.banner})
+        .then((user) => {
+          this.$store.commit('addNewUsers', [user])
+          this.$store.commit('setCurrentUser', user)
           this.bannerPreview = null
-        } else {
-          this.bannerUploadError = this.$t('upload.error.base') + data.error
-        }
-        this.bannerUploading = false
-      })
-      /* eslint-enable camelcase */
+        })
+        .catch((err) => {
+          this.bannerUploadError = this.$t('upload.error.base') + ' ' + err.message
+        })
+        .then(() => { this.bannerUploading = false })
     },
     submitBg () {
       if (!this.backgroundPreview) { return }

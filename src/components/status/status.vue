@@ -133,6 +133,24 @@
             <link-preview :card="status.card" :size="attachmentSize" :nsfw="nsfwClickthrough" />
           </div>
 
+          <transition name="fade">
+            <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsAvatars.length > 0 && isFocused">
+              <div class="stats">
+                <div class="stat-count" v-if="statusFromGlobalRepository.rebloggedBy && statusFromGlobalRepository.rebloggedBy.length > 0">
+                  <a class="stat-title">{{ $t('status.repeats') }}</a>
+                  <div class="stat-number">{{ statusFromGlobalRepository.rebloggedBy.length }}</div>
+                </div>
+                <div class="stat-count" v-if="statusFromGlobalRepository.favoritedBy && statusFromGlobalRepository.favoritedBy.length > 0">
+                  <a class="stat-title">{{ $t('status.favorites') }}</a>
+                  <div class="stat-number">{{ statusFromGlobalRepository.favoritedBy.length }}</div>
+                </div>
+                <div class="avatar-row">
+                  <AvatarList :avatars='combinedFavsAndRepeatsAvatars'></AvatarList>
+                </div>
+              </div>
+            </div>
+          </transition>
+
           <div v-if="!noHeading && !isPreview" class='status-actions media-body'>
             <div v-if="loggedIn">
               <i class="button-icon icon-reply" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')" :class="{'icon-reply-active': replying}"></i>
@@ -609,6 +627,50 @@ a.unmute {
     border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
     border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
     border-bottom: none;
+  }
+}
+
+.favs-repeated-users {
+  margin-top: $status-margin;
+
+  .stats {
+    width: 100%;
+    display: flex;
+    line-height: 1em;
+
+    .stat-count {
+      margin-right: $status-margin;
+
+      .stat-title {
+        color: var(--faint, $fallback--faint);
+        font-size: 12px;
+        text-transform: uppercase;
+        position: relative;
+      }
+
+      .stat-number {
+        font-weight: bolder;
+        font-size: 16px;
+        line-height: 1em;
+      }
+    }
+
+    .avatar-row {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      &::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 1px;
+        left: 0;
+        background-color: var(--faint, $fallback--faint);
+      }
+    }
   }
 }
 

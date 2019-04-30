@@ -47,6 +47,8 @@ const MASTODON_MUTE_USER_URL = id => `/api/v1/accounts/${id}/mute`
 const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
 const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
 const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
+const MASTODON_STATUS_FAVORITEDBY_URL = id => `/api/v1/statuses/${id}/favourited_by`
+const MASTODON_STATUS_REBLOGGEDBY_URL = id => `/api/v1/statuses/${id}/reblogged_by`
 const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
 
 import { each, map, concat, last } from 'lodash'
@@ -712,6 +714,14 @@ const markNotificationsAsSeen = ({id, credentials}) => {
   }).then((data) => data.json())
 }
 
+const fetchFavoritedByUsers = ({id}) => {
+  return promisedRequest(MASTODON_STATUS_FAVORITEDBY_URL(id)).then((users) => users.map(parseUser))
+}
+
+const fetchRebloggedByUsers = ({id}) => {
+  return promisedRequest(MASTODON_STATUS_REBLOGGEDBY_URL(id)).then((users) => users.map(parseUser))
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -761,7 +771,9 @@ const apiService = {
   approveUser,
   denyUser,
   suggestions,
-  markNotificationsAsSeen
+  markNotificationsAsSeen,
+  fetchFavoritedByUsers,
+  fetchRebloggedByUsers
 }
 
 export default apiService

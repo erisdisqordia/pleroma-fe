@@ -459,6 +459,13 @@ export const mutations = {
   },
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
+  },
+  addFavsAndRepeats (state, { id, favoritedByUsers, rebloggedByUsers }) {
+    state.allStatusesObject[id] = {
+      ...state.allStatusesObject[id],
+      favoritedBy: favoritedByUsers,
+      rebloggedBy: rebloggedByUsers
+    }
   }
 }
 
@@ -524,6 +531,21 @@ const statuses = {
         id: rootState.statuses.notifications.maxId,
         credentials: rootState.users.currentUser.credentials
       })
+    },
+    fetchFavsAndRepeats ({ rootState, commit }, id) {
+      Promise.all([
+        rootState.api.backendInteractor.fetchFavoritedByUsers(id),
+        rootState.api.backendInteractor.fetchRebloggedByUsers(id)
+      ]).then(([favoritedByUsers, rebloggedByUsers]) =>
+        commit(
+          'addFavsAndRepeats',
+          {
+            id,
+            favoritedByUsers: favoritedByUsers.filter(_ => _),
+            rebloggedByUsers: rebloggedByUsers.filter(_ => _)
+          }
+        )
+      )
     }
   },
   mutations

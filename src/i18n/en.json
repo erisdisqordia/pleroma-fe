@@ -394,6 +394,8 @@
     "no_statuses": "No statuses"
   },
   "status": {
+    "favorites": "Favorites",
+    "repeats": "Repeats",
     "reply_to": "Reply to",
     "replies_list": "Replies:"
   },

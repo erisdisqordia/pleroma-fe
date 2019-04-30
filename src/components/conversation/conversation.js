@@ -139,6 +139,7 @@ const conversation = {
     },
     setHighlight (id) {
       this.highlight = id
+      this.$store.dispatch('fetchFavsAndRepeats', id)
     },
     getHighlight () {
       return this.isExpanded ? this.highlight : null

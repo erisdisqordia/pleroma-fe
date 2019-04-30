@@ -424,7 +424,7 @@ export const mutations = {
       newStatus.favoritedBy.push(user)
     }
   },
-  setPinned (state, { status }) {
+  setPinned (state, status) {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.pinned = status.pinned
   },
@@ -543,11 +543,11 @@ const statuses = {
     },
     pinStatus ({ rootState, commit }, statusId) {
       return rootState.api.backendInteractor.pinOwnStatus(statusId)
-        .then((status) => commit('setPinned', { status }))
+        .then((status) => commit('setPinned', status))
     },
     unpinStatus ({ rootState, commit }, statusId) {
       rootState.api.backendInteractor.unpinOwnStatus(statusId)
-        .then((status) => commit('setPinned', { status }))
+        .then((status) => commit('setPinned', status))
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...

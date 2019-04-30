@@ -5,13 +5,15 @@
     <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
       <div :label="$t('user_card.statuses')" :disabled="!user.statuses_count">
         <div class="timeline">
-          <Conversation
-            v-for="status in pinnedStatuses"
-            class="status-fadein"
-            :key="status.id"
-            :statusoid="status"
-            :collapsable="true"
-          />
+          <template v-for="statusId in user.pinnedStatuseIds">
+            <Conversation
+              v-if="timeline.statusesObject[statusId]"
+              class="status-fadein"
+              :key="statusId"
+              :statusoid="timeline.statusesObject[statusId]"
+              :collapsable="true"
+            />
+          </template>
         </div>
         <Timeline
           :count="user.statuses_count"

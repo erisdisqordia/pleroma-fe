@@ -42,9 +42,6 @@ const UserProfile = {
     timeline () {
       return this.$store.state.statuses.timelines.user
     },
-    pinnedStatuses () {
-      return filter(this.timeline.statuses, { pinned: true })
-    },
     favorites () {
       return this.$store.state.statuses.timelines.favorites
     },

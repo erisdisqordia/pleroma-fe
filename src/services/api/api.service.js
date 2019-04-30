@@ -217,6 +217,7 @@ const pinOwnStatus = ({ id, credentials }) => {
     headers: authHeaders(credentials),
     method: 'POST'
   })
+  .then((data) => parseStatus(data))
 }
 
 const unpinOwnStatus = ({ id, credentials }) => {
@@ -224,6 +225,7 @@ const unpinOwnStatus = ({ id, credentials }) => {
     headers: authHeaders(credentials),
     method: 'POST'
   })
+  .then((data) => parseStatus(data))
 }
 
 const blockUser = ({id, credentials}) => {

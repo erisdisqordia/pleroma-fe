@@ -140,14 +140,11 @@ const updateBanner = ({credentials, banner}) => {
 }
 
 const updateProfile = ({credentials, params}) => {
-  return promisedRequest(MASTODON_PROFILE_UPDATE_URL, {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      ...authHeaders(credentials)
-    },
+  return promisedRequest({
+    url: MASTODON_PROFILE_UPDATE_URL,
     method: 'PATCH',
-    body: JSON.stringify(params)
+    payload: params,
+    credentials
   })
   .then((data) => parseUser(data))
 }
@@ -727,11 +724,11 @@ const markNotificationsAsSeen = ({id, credentials}) => {
 }
 
 const fetchFavoritedByUsers = ({id}) => {
-  return promisedRequest(MASTODON_STATUS_FAVORITEDBY_URL(id)).then((users) => users.map(parseUser))
+  return promisedRequest({ url: MASTODON_STATUS_FAVORITEDBY_URL(id) }).then((users) => users.map(parseUser))
 }
 
 const fetchRebloggedByUsers = ({id}) => {
-  return promisedRequest(MASTODON_STATUS_REBLOGGEDBY_URL(id)).then((users) => users.map(parseUser))
+  return promisedRequest({ url: MASTODON_STATUS_REBLOGGEDBY_URL(id) }).then((users) => users.map(parseUser))
 }
 
 const reportUser = ({credentials, userId, statusIds, comment, forward}) => {

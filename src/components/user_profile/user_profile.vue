@@ -12,6 +12,7 @@
               :key="statusId"
               :statusoid="timeline.statusesObject[statusId]"
               :collapsable="true"
+              :showPinned="true"
             />
           </template>
         </div>

@@ -1,5 +1,4 @@
 import get from 'lodash/get'
-import filter from 'lodash/filter'
 import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'

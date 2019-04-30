@@ -5,9 +5,9 @@
         <img ref="img" :src="dataUrl" alt="" @load.stop="createCropper" />
       </div>
       <div class="image-cropper-buttons-wrapper">
-        <button class="btn" type="button" :disabled="submitting" @click="submit" v-text="saveText"></button>
+        <button class="btn" type="button" :disabled="submitting" @click="submit()" v-text="saveText"></button>
         <button class="btn" type="button" :disabled="submitting" @click="destroy" v-text="cancelText"></button>
-        <button class="btn" type="button" :disabled="submitting" @click="submitWithoutCropping" v-text="saveWithoutCroppingText"></button>
+        <button class="btn" type="button" :disabled="submitting" @click="submit(false)" v-text="saveWithoutCroppingText"></button>
         <i class="icon-spin4 animate-spin" v-if="submitting"></i>
       </div>
       <div class="alert error" v-if="submitError">

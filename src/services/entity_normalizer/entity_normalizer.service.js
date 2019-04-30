@@ -195,6 +195,7 @@ export const parseStatus = (data) => {
       output.summary = pleroma.spoiler_text ? data.pleroma.spoiler_text['text/plain'] : data.spoiler_text
       output.statusnet_conversation_id = data.pleroma.conversation_id
       output.is_local = pleroma.local
+      output.in_reply_to_screen_name = data.pleroma.in_reply_to_account_acct
     } else {
       output.text = data.content
       output.summary = data.spoiler_text
@@ -204,8 +205,6 @@ export const parseStatus = (data) => {
     output.in_reply_to_user_id = data.in_reply_to_account_id
     output.replies_count = data.replies_count
 
-    // Missing!! fix in UI?
-    // output.in_reply_to_screen_name = ???
     if (output.type === 'retweet') {
       output.retweeted_status = parseStatus(data.reblog)
     }

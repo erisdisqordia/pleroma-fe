@@ -3,12 +3,10 @@ const LOGIN_URL = '/api/account/verify_credentials.json'
 const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const REGISTRATION_URL = '/api/account/register.json'
-const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
-const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
-const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
+const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
@@ -51,6 +49,7 @@ const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
 const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 const MASTODON_STATUS_FAVORITEDBY_URL = id => `/api/v1/statuses/${id}/favourited_by`
 const MASTODON_STATUS_REBLOGGEDBY_URL = id => `/api/v1/statuses/${id}/reblogged_by`
+const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
 
 import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
@@ -80,28 +79,16 @@ const promisedRequest = (url, options) => {
     })
 }
 
-// Params
-// cropH
-// cropW
-// cropX
-// cropY
-// img (base 64 encodend data url)
-const updateAvatar = ({credentials, params}) => {
-  let url = AVATAR_UPDATE_URL
-
+const updateAvatar = ({credentials, avatar}) => {
   const form = new FormData()
-
-  each(params, (value, key) => {
-    if (value) {
-      form.append(key, value)
-    }
-  })
-
-  return fetch(url, {
+  form.append('avatar', avatar)
+  return fetch(MASTODON_PROFILE_UPDATE_URL, {
     headers: authHeaders(credentials),
-    method: 'POST',
+    method: 'PATCH',
     body: form
-  }).then((data) => data.json())
+  })
+  .then((data) => data.json())
+  .then((data) => parseUser(data))
 }
 
 const updateBg = ({credentials, params}) => {
@@ -122,52 +109,29 @@ const updateBg = ({credentials, params}) => {
   }).then((data) => data.json())
 }
 
-// Params
-// height
-// width
-// offset_left
-// offset_top
-// banner (base 64 encodend data url)
-const updateBanner = ({credentials, params}) => {
-  let url = BANNER_UPDATE_URL
-
+const updateBanner = ({credentials, banner}) => {
   const form = new FormData()
-
-  each(params, (value, key) => {
-    if (value) {
-      form.append(key, value)
-    }
-  })
-
-  return fetch(url, {
+  form.append('header', banner)
+  return fetch(MASTODON_PROFILE_UPDATE_URL, {
     headers: authHeaders(credentials),
-    method: 'POST',
+    method: 'PATCH',
     body: form
-  }).then((data) => data.json())
+  })
+  .then((data) => data.json())
+  .then((data) => parseUser(data))
 }
 
-// Params
-// name
-// url
-// location
-// description
 const updateProfile = ({credentials, params}) => {
-  // Always include these fields, because they might be empty or false
-  const fields = ['description', 'locked', 'no_rich_text', 'hide_follows', 'hide_followers', 'show_role']
-  let url = PROFILE_UPDATE_URL
-
-  const form = new FormData()
-
-  each(params, (value, key) => {
-    if (fields.includes(key) || value) {
-      form.append(key, value)
-    }
+  return promisedRequest(MASTODON_PROFILE_UPDATE_URL, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      ...authHeaders(credentials)
+    },
+    method: 'PATCH',
+    body: JSON.stringify(params)
   })
-  return fetch(url, {
-    headers: authHeaders(credentials),
-    method: 'POST',
-    body: form
-  }).then((data) => data.json())
+  .then((data) => parseUser(data))
 }
 
 // Params needed:
@@ -636,9 +600,22 @@ const uploadMedia = ({formData, credentials}) => {
     .then((data) => parseAttachment(data))
 }
 
-const followImport = ({params, credentials}) => {
+const importBlocks = ({file, credentials}) => {
+  const formData = new FormData()
+  formData.append('list', file)
+  return fetch(BLOCKS_IMPORT_URL, {
+    body: formData,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.ok)
+}
+
+const importFollows = ({file, credentials}) => {
+  const formData = new FormData()
+  formData.append('list', file)
   return fetch(FOLLOW_IMPORT_URL, {
-    body: params,
+    body: formData,
     method: 'POST',
     headers: authHeaders(credentials)
   })
@@ -786,7 +763,8 @@ const apiService = {
   updateProfile,
   updateBanner,
   externalProfile,
-  followImport,
+  importBlocks,
+  importFollows,
   deleteAccount,
   changePassword,
   fetchFollowRequests,

@@ -74,7 +74,8 @@
     "content_type": {
       "text/plain": "Czysty tekst",
       "text/html": "HTML",
-      "text/markdown": "Markdown"
+      "text/markdown": "Markdown",
+      "text/bbcode": "BBCode"
     },
     "content_warning": "Temat (nieobowiązkowy)",
     "default": "Właśnie wróciłem z kościoła",

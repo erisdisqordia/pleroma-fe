@@ -4,7 +4,7 @@
     <div class='user-info'>
       <div class='container'>
         <router-link :to="userProfileLink(user)">
-          <UserAvatar :betterShadow="betterShadow" :src="user.profile_image_url_original"/>
+          <UserAvatar :betterShadow="betterShadow" :user="user"/>
         </router-link>
         <div class="name-and-screen-name">
           <div class="top-line">

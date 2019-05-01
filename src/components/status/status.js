@@ -263,13 +263,13 @@ const Status = {
       }
       return this.status.summary_html + '<br />' + this.status.statusnet_html
     },
-    combinedFavsAndRepeatsAvatars () {
+    combinedFavsAndRepeatsUsers () {
       // Use the status from the global status repository since favs and repeats are saved in it
-      const combinedAvatars = [].concat(
+      const combinedUsers = [].concat(
         this.statusFromGlobalRepository.favoritedBy,
         this.statusFromGlobalRepository.rebloggedBy
       )
-      return uniqBy(combinedAvatars, 'id')
+      return uniqBy(combinedUsers, 'id')
     }
   },
   components: {

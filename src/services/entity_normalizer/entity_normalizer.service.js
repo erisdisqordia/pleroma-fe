@@ -275,6 +275,9 @@ export const parseStatus = (data) => {
     output.retweeted_status = parseStatus(retweetedStatus)
   }
 
+  output.favoritedBy = []
+  output.rebloggedBy = []
+
   return output
 }
 

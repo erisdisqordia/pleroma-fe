@@ -1,7 +1,7 @@
 <template>
   <div class="avatars">
-      <div class="avatars-item" v-for="avatar in slicedAvatars">
-        <UserAvatar :src="avatar.profile_image_url" class="avatar-small" />
+      <div class="avatars-item" v-for="user in slicedUsers">
+        <UserAvatar :user="user" class="avatar-small" />
       </div>
   </div>
 </template>

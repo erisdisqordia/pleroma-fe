@@ -1,25 +1,26 @@
 <template>
-  <nav class='nav-bar container' id="nav">
-    <div class='mobile-inner-nav' @click="scrollToTop()">
-      <div class='item'>
-        <a href="#" class="mobile-nav-button" @click.stop.prevent="toggleMobileSidebar()">
-          <i class="button-icon icon-menu"></i>
-        </a>
-        <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
+  <div>
+    <nav class='nav-bar container' id="nav">
+      <div class='mobile-inner-nav' @click="scrollToTop()">
+        <div class='item'>
+          <a href="#" class="mobile-nav-button" @click.stop.prevent="toggleMobileSidebar()">
+            <i class="button-icon icon-menu"></i>
+          </a>
+          <router-link class="site-name" :to="{ name: 'root' }" active-class="home">{{sitename}}</router-link>
+        </div>
+        <div class='item right'>
+          <a class="mobile-nav-button" v-if="currentUser" href="#" @click.stop.prevent="openMobileNotifications()">
+            <i class="button-icon icon-bell-alt"></i>
+            <div class="alert-dot" v-if="unseenNotificationsCount"></div>
+          </a>
+        </div>
       </div>
-      <div class='item right'>
-        <a class="mobile-nav-button" v-if="currentUser" href="#" @click.stop.prevent="openMobileNotifications()">
-          <i class="button-icon icon-bell-alt"></i>
-          <div class="alert-dot" v-if="unseenNotificationsCount"></div>
-        </a>
-      </div>
-    </div>
-    <SideDrawer ref="sideDrawer" :logout="logout"/>
+    </nav>
     <div v-if="currentUser"
       class="mobile-notifications-drawer"
       :class="{ 'closed': !notificationsOpen }"
-      @touchstart="notificationsTouchStart"
-      @touchmove="notificationsTouchMove"
+      @touchstart.stop="notificationsTouchStart"
+      @touchmove.stop="notificationsTouchMove"
     >
       <div class="mobile-notifications-header">
         <span class="title">{{$t('notifications.notifications')}}</span>
@@ -31,8 +32,9 @@
         <Notifications ref="notifications" noHeading="true"/>
       </div>
     </div>
+    <SideDrawer ref="sideDrawer" :logout="logout"/>
     <MobilePostStatusModal />
-  </nav>
+  </div>
 </template>
 
 <script src="./mobile_nav.js"></script>
@@ -79,6 +81,8 @@
   transition-property: transform;
   transition-duration: 0.25s;
   transform: translateX(0);
+  z-index: 1001;
+  -webkit-overflow-scrolling: touch;
 
   &.closed {
     transform: translateX(100%);

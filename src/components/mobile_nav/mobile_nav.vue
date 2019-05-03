@@ -28,7 +28,7 @@
           <i class="button-icon icon-cancel"/>
         </a>
       </div>
-      <div v-if="currentUser" class="mobile-notifications">
+      <div class="mobile-notifications" @scroll="onScroll">
         <Notifications ref="notifications" noHeading="true"/>
       </div>
     </div>

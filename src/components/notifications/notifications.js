@@ -52,6 +52,10 @@ const Notifications = {
       this.$store.dispatch('markNotificationsAsSeen')
     },
     fetchOlderNotifications () {
+      if (this.loading) {
+        return
+      }
+
       const store = this.$store
       const credentials = store.state.users.currentUser.credentials
       store.commit('setNotificationsLoading', { value: true })

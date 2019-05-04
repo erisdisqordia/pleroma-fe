@@ -213,19 +213,13 @@ const unfollowUser = ({id, credentials}) => {
 }
 
 const pinOwnStatus = ({ id, credentials }) => {
-  return promisedRequest(MASTODON_PIN_OWN_STATUS(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
-  .then((data) => parseStatus(data))
+  return promisedRequest({ url: MASTODON_PIN_OWN_STATUS(id), credentials, method: 'POST' })
+    .then((data) => parseStatus(data))
 }
 
 const unpinOwnStatus = ({ id, credentials }) => {
-  return promisedRequest(MASTODON_UNPIN_OWN_STATUS(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
-  .then((data) => parseStatus(data))
+  return promisedRequest({ url: MASTODON_UNPIN_OWN_STATUS(id), credentials, method: 'POST' })
+    .then((data) => parseStatus(data))
 }
 
 const blockUser = ({id, credentials}) => {
@@ -508,7 +502,7 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
 
 const fetchPinnedStatuses = ({ id, credentials }) => {
   const url = MASTODON_USER_TIMELINE_URL(id) + '?pinned=true'
-  return promisedRequest(url, { headers: authHeaders(credentials) })
+  return promisedRequest({ url, credentials })
     .then((data) => data.map(parseStatus))
 }
 

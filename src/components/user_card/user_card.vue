@@ -93,7 +93,7 @@
         </div>
 
         <div>
-          <button @click="reportUser">
+          <button @click="reportUser" class="btn btn-default btn-block">
             {{ $t('user_card.report') }}
           </button>
         </div>

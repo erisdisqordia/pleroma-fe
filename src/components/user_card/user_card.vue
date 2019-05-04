@@ -99,8 +99,14 @@
             </button>
           </span>
         </div>
-        <ModerationTools :user='user' v-if='loggedIn.role === "admin"'>
-        </ModerationTools>
+        <div class='block' v-if='isOtherUser && loggedIn'>
+          <span>
+            <button @click="reportUser">
+              {{ $t('user_card.report') }}
+            </button>
+          </span>
+        </div>
+        <ModerationTools :user='user' v-if='loggedIn.role === "admin"'/>
       </div>
     </div>
   </div>

@@ -50,6 +50,7 @@ const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 const MASTODON_STATUS_FAVORITEDBY_URL = id => `/api/v1/statuses/${id}/favourited_by`
 const MASTODON_STATUS_REBLOGGEDBY_URL = id => `/api/v1/statuses/${id}/reblogged_by`
 const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
+const MASTODON_REPORT_USER_URL = '/api/v1/reports'
 
 import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
@@ -66,7 +67,24 @@ let fetch = (url, options) => {
   return oldfetch(fullUrl, options)
 }
 
-const promisedRequest = (url, options) => {
+const promisedRequest = ({ method, url, payload, credentials, headers = {} }) => {
+  const options = {
+    method,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      ...headers
+    }
+  }
+  if (payload) {
+    options.body = JSON.stringify(payload)
+  }
+  if (credentials) {
+    options.headers = {
+      ...options.headers,
+      ...authHeaders(credentials)
+    }
+  }
   return fetch(url, options)
     .then((response) => {
       return new Promise((resolve, reject) => response.json()
@@ -122,14 +140,11 @@ const updateBanner = ({credentials, banner}) => {
 }
 
 const updateProfile = ({credentials, params}) => {
-  return promisedRequest(MASTODON_PROFILE_UPDATE_URL, {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      ...authHeaders(credentials)
-    },
+  return promisedRequest({
+    url: MASTODON_PROFILE_UPDATE_URL,
     method: 'PATCH',
-    body: JSON.stringify(params)
+    payload: params,
+    credentials
   })
   .then((data) => parseUser(data))
 }
@@ -227,7 +242,7 @@ const denyUser = ({id, credentials}) => {
 
 const fetchUser = ({id, credentials}) => {
   let url = `${MASTODON_USER_URL}/${id}`
-  return promisedRequest(url, { headers: authHeaders(credentials) })
+  return promisedRequest({ url, credentials })
     .then((data) => parseUser(data))
 }
 
@@ -651,26 +666,20 @@ const changePassword = ({credentials, password, newPassword, newPasswordConfirma
 }
 
 const fetchMutes = ({credentials}) => {
-  return promisedRequest(MASTODON_USER_MUTES_URL, { headers: authHeaders(credentials) })
+  return promisedRequest({ url: MASTODON_USER_MUTES_URL, credentials })
     .then((users) => users.map(parseUser))
 }
 
 const muteUser = ({id, credentials}) => {
-  return promisedRequest(MASTODON_MUTE_USER_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
+  return promisedRequest({ url: MASTODON_MUTE_USER_URL(id), credentials, method: 'POST' })
 }
 
 const unmuteUser = ({id, credentials}) => {
-  return promisedRequest(MASTODON_UNMUTE_USER_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
+  return promisedRequest({ url: MASTODON_UNMUTE_USER_URL(id), credentials, method: 'POST' })
 }
 
 const fetchBlocks = ({credentials}) => {
-  return promisedRequest(MASTODON_USER_BLOCKS_URL, { headers: authHeaders(credentials) })
+  return promisedRequest({ url: MASTODON_USER_BLOCKS_URL, credentials })
     .then((users) => users.map(parseUser))
 }
 
@@ -715,11 +724,25 @@ const markNotificationsAsSeen = ({id, credentials}) => {
 }
 
 const fetchFavoritedByUsers = ({id}) => {
-  return promisedRequest(MASTODON_STATUS_FAVORITEDBY_URL(id)).then((users) => users.map(parseUser))
+  return promisedRequest({ url: MASTODON_STATUS_FAVORITEDBY_URL(id) }).then((users) => users.map(parseUser))
 }
 
 const fetchRebloggedByUsers = ({id}) => {
-  return promisedRequest(MASTODON_STATUS_REBLOGGEDBY_URL(id)).then((users) => users.map(parseUser))
+  return promisedRequest({ url: MASTODON_STATUS_REBLOGGEDBY_URL(id) }).then((users) => users.map(parseUser))
+}
+
+const reportUser = ({credentials, userId, statusIds, comment, forward}) => {
+  return promisedRequest({
+    url: MASTODON_REPORT_USER_URL,
+    method: 'POST',
+    payload: {
+      'account_id': userId,
+      'status_ids': statusIds,
+      comment,
+      forward
+    },
+    credentials
+  })
 }
 
 const apiService = {
@@ -773,7 +796,8 @@ const apiService = {
   suggestions,
   markNotificationsAsSeen,
   fetchFavoritedByUsers,
-  fetchRebloggedByUsers
+  fetchRebloggedByUsers,
+  reportUser
 }
 
 export default apiService

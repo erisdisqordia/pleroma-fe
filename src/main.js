@@ -12,6 +12,7 @@ import chatModule from './modules/chat.js'
 import oauthModule from './modules/oauth.js'
 import mediaViewerModule from './modules/media_viewer.js'
 import oauthTokensModule from './modules/oauth_tokens.js'
+import reportsModule from './modules/reports.js'
 
 import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
@@ -75,7 +76,8 @@ const persistedStateOptions = {
       chat: chatModule,
       oauth: oauthModule,
       mediaViewer: mediaViewerModule,
-      oauthTokens: oauthTokensModule
+      oauthTokens: oauthTokensModule,
+      reports: reportsModule
     },
     plugins: [persistedState, pushNotifications],
     strict: false // Socket modifies itself, let's ignore this for now.

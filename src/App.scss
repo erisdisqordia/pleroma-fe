@@ -379,6 +379,7 @@ main-router {
 
 .panel-heading {
   display: flex;
+  flex: none;
   border-radius: $fallback--panelRadius $fallback--panelRadius 0 0;
   border-radius: var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius) 0 0;
   background-size: cover;

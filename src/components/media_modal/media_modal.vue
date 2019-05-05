@@ -33,6 +33,8 @@
 @import '../../_variables.scss';
 
 .media-modal-view {
+  z-index: 1001;
+
   &:hover {
     .modal-view-button-arrow {
       opacity: 0.75;

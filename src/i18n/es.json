@@ -420,6 +420,7 @@
     "muted": "Silenciado",
     "per_day": "por día",
     "remote_follow": "Seguir",
+    "report": "Reportar",
     "statuses": "Estados",
     "unblock": "Desbloquear",
     "unblock_progress": "Desbloqueando...",
@@ -451,6 +452,15 @@
     "timeline_title": "Linea temporal del usuario",
     "profile_does_not_exist": "Lo sentimos, este perfil no existe.",
     "profile_loading_error": "Lo sentimos, hubo un error al cargar este perfil."
+  },
+   "user_reporting": {
+    "title": "Reportando a {0}",
+    "add_comment_description": "El informe será enviado a los moderadores de su instancia. Puedes proporcionar una explicación de por qué estás reportando esta cuenta a continuación:",
+    "additional_comments": "Comentarios adicionales",
+    "forward_description": "La cuenta es de otro servidor. ¿Enviar una copia del informe allí también?",
+    "forward_to": "Reenviar a {0}",
+    "submit": "Enviar",
+    "generic_error": "Se produjo un error al procesar la solicitud."
   },
   "who_to_follow": {
     "more": "Más",

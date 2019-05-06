@@ -159,7 +159,7 @@ const Status = {
       if (this.$store.state.config.replyVisibility === 'all') {
         return false
       }
-      if (this.inlineExpanded || this.inConversation || !this.isReply) {
+      if (this.inConversation || !this.isReply) {
         return false
       }
       if (this.status.user.id === this.$store.state.users.currentUser.id) {

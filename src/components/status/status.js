@@ -30,7 +30,6 @@ const Status = {
   data () {
     return {
       replying: false,
-      expanded: false,
       unmuted: false,
       userExpanded: false,
       preview: null,
@@ -160,7 +159,7 @@ const Status = {
       if (this.$store.state.config.replyVisibility === 'all') {
         return false
       }
-      if (this.inlineExpanded || this.expanded || this.inConversation || !this.isReply) {
+      if (this.inlineExpanded || this.inConversation || !this.isReply) {
         return false
       }
       if (this.status.user.id === this.$store.state.users.currentUser.id) {

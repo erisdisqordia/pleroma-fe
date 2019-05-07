@@ -1,4 +1,4 @@
-import { remove, slice, each, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
+import { remove, slice, each, findIndex, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
 import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
@@ -404,10 +404,16 @@ export const mutations = {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.favorited = value
   },
-  setFavoritedConfirm (state, { status }) {
+  setFavoritedConfirm (state, { status, user }) {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.favorited = status.favorited
     newStatus.fave_num = status.fave_num
+    const index = findIndex(newStatus.favoritedBy, { id: user.id })
+    if (index !== -1 && !newStatus.favorited) {
+      newStatus.favoritedBy.splice(index, 1)
+    } else if (index === -1 && newStatus.favorited) {
+      newStatus.favoritedBy.push(user)
+    }
   },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
@@ -500,7 +506,7 @@ const statuses = {
       commit('setFavorited', { status, value: true })
       apiService.favorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
         .then(status => {
-          commit('setFavoritedConfirm', { status })
+          commit('setFavoritedConfirm', { status, user: rootState.users.currentUser })
         })
     },
     unfavorite ({ rootState, commit }, status) {
@@ -508,7 +514,7 @@ const statuses = {
       commit('setFavorited', { status, value: false })
       apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
         .then(status => {
-          commit('setFavoritedConfirm', { status })
+          commit('setFavoritedConfirm', { status, user: rootState.users.currentUser })
         })
     },
     retweet ({ rootState, commit }, status) {

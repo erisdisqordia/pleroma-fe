@@ -1,5 +1,5 @@
 import PostStatusForm from '../post_status_form/post_status_form.vue'
-import { throttle } from 'lodash'
+import { debounce } from 'lodash'
 
 const MobilePostStatusModal = {
   components: {
@@ -16,11 +16,15 @@ const MobilePostStatusModal = {
     }
   },
   created () {
-    window.addEventListener('scroll', this.handleScroll)
+    if (this.autohideFloatingPostButton) {
+      this.activateFloatingPostButtonAutohide()
+    }
     window.addEventListener('resize', this.handleOSK)
   },
   destroyed () {
-    window.removeEventListener('scroll', this.handleScroll)
+    if (this.autohideFloatingPostButton) {
+      this.deactivateFloatingPostButtonAutohide()
+    }
     window.removeEventListener('resize', this.handleOSK)
   },
   computed: {
@@ -28,10 +32,30 @@ const MobilePostStatusModal = {
       return this.$store.state.users.currentUser
     },
     isHidden () {
-      return this.hidden || this.inputActive
+      return this.autohideFloatingPostButton && (this.hidden || this.inputActive)
+    },
+    autohideFloatingPostButton () {
+      return !!this.$store.state.config.autohideFloatingPostButton
+    }
+  },
+  watch: {
+    autohideFloatingPostButton: function (isEnabled) {
+      if (isEnabled) {
+        this.activateFloatingPostButtonAutohide()
+      } else {
+        this.deactivateFloatingPostButtonAutohide()
+      }
     }
   },
   methods: {
+    activateFloatingPostButtonAutohide () {
+      window.addEventListener('scroll', this.handleScrollStart)
+      window.addEventListener('scroll', this.handleScrollEnd)
+    },
+    deactivateFloatingPostButtonAutohide () {
+      window.removeEventListener('scroll', this.handleScrollStart)
+      window.removeEventListener('scroll', this.handleScrollEnd)
+    },
     openPostForm () {
       this.postFormOpen = true
       this.hidden = true
@@ -65,26 +89,19 @@ const MobilePostStatusModal = {
         this.inputActive = false
       }
     },
-    handleScroll: throttle(function () {
-      const scrollAmount = window.scrollY - this.oldScrollPos
-      const scrollingDown = scrollAmount > 0
-
-      if (scrollingDown !== this.scrollingDown) {
-        this.amountScrolled = 0
-        this.scrollingDown = scrollingDown
-        if (!scrollingDown) {
-          this.hidden = false
-        }
-      } else if (scrollingDown) {
-        this.amountScrolled += scrollAmount
-        if (this.amountScrolled > 100 && !this.hidden) {
-          this.hidden = true
-        }
+    handleScrollStart: debounce(function () {
+      if (window.scrollY > this.oldScrollPos) {
+        this.hidden = true
+      } else {
+        this.hidden = false
       }
-
       this.oldScrollPos = window.scrollY
-      this.scrollingDown = scrollingDown
-    }, 100)
+    }, 100, {leading: true, trailing: false}),
+
+    handleScrollEnd: debounce(function () {
+      this.hidden = false
+      this.oldScrollPos = window.scrollY
+    }, 100, {leading: false, trailing: true})
   }
 }
 

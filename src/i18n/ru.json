@@ -152,6 +152,7 @@
     "reply_visibility_all": "Показывать все ответы",
     "reply_visibility_following": "Показывать только ответы мне и тех на кого я подписан",
     "reply_visibility_self": "Показывать только ответы мне",
+    "autohide_floating_post_button": "Автоматически скрывать кнопку постинга (в мобильной версии)",
     "saving_err": "Не удалось сохранить настройки",
     "saving_ok": "Сохранено",
     "security_tab": "Безопасность",

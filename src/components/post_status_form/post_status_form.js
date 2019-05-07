@@ -341,7 +341,6 @@ const PostStatusForm = {
     },
     changeVis (visibility) {
       this.newStatus.visibility = visibility
-      this.$emit('onScopeChange', visibility)
     },
     dismissScopeNotice () {
       this.$store.dispatch('setOption', { name: 'hideScopeNotice', value: true })

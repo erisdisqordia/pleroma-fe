@@ -648,6 +648,19 @@ nav {
   border-radius: var(--inputRadius, $fallback--inputRadius);
 }
 
+.notice-dismissible {
+  padding-right: 4rem;
+  position: relative;
+
+  .dismiss {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .5em;
+    color: inherit;
+  }
+}
+
 @keyframes modal-background-fadein {
   from {
     background-color: rgba(0, 0, 0, 0);

@@ -12,8 +12,7 @@ const MobilePostStatusModal = {
       scrollingDown: false,
       inputActive: false,
       oldScrollPos: 0,
-      amountScrolled: 0,
-      visibility: this.$store.state.users.currentUser.default_scope
+      amountScrolled: 0
     }
   },
   created () {
@@ -33,9 +32,6 @@ const MobilePostStatusModal = {
     }
   },
   methods: {
-    onScopeChange (visibility) {
-      this.visibility = visibility
-    },
     openPostForm () {
       this.postFormOpen = true
       this.hidden = true

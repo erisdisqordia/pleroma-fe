@@ -9,21 +9,21 @@
         class="visibility-notice">
         <router-link :to="{ name: 'user-settings' }">{{ $t('post_status.account_not_locked_warning_link') }}</router-link>
       </i18n>
-      <p v-if="!hideScopeNotice && newStatus.visibility === 'public'" class="visibility-notice">
+      <p v-if="!hideScopeNotice && newStatus.visibility === 'public'" class="visibility-notice notice-dismissible">
         <span>{{ $t('post_status.scope_notice.public') }}</span>
-        <a v-on:click.prevent="dismissScopeNotice()" style="float: right" class="button-icon">
+        <a v-on:click.prevent="dismissScopeNotice()" class="button-icon dismiss">
           <i class='icon-cancel'></i>
         </a>
       </p>
-      <p v-else-if="!hideScopeNotice && newStatus.visibility === 'unlisted'" class="visibility-notice">
+      <p v-else-if="!hideScopeNotice && newStatus.visibility === 'unlisted'" class="visibility-notice notice-dismissible">
         <span>{{ $t('post_status.scope_notice.unlisted') }}</span>
-        <a v-on:click.prevent="dismissScopeNotice()" style="float: right" class="button-icon">
+        <a v-on:click.prevent="dismissScopeNotice()" class="button-icon dismiss">
           <i class='icon-cancel'></i>
         </a>
       </p>
-      <p v-else-if="!hideScopeNotice && newStatus.visibility === 'private'" class="visibility-notice">
+      <p v-else-if="!hideScopeNotice && newStatus.visibility === 'private' && $store.state.users.currentUser.locked" class="visibility-notice notice-dismissible">
         <span>{{ $t('post_status.scope_notice.private') }}</span>
-        <a v-on:click.prevent="dismissScopeNotice()" style="float: right" class="button-icon">
+        <a v-on:click.prevent="dismissScopeNotice()" class="button-icon dismiss">
           <i class='icon-cancel'></i>
         </a>
       </p>

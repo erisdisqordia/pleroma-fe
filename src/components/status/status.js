@@ -31,7 +31,6 @@ const Status = {
   data () {
     return {
       replying: false,
-      expanded: false,
       unmuted: false,
       userExpanded: false,
       preview: null,
@@ -161,7 +160,7 @@ const Status = {
       if (this.$store.state.config.replyVisibility === 'all') {
         return false
       }
-      if (this.inlineExpanded || this.expanded || this.inConversation || !this.isReply) {
+      if (this.inConversation || !this.isReply) {
         return false
       }
       if (this.status.user.id === this.$store.state.users.currentUser.id) {
@@ -175,7 +174,7 @@ const Status = {
         if (this.status.user.id === this.status.attentions[i].id) {
           continue
         }
-        if (checkFollowing && this.status.attentions[i].following) {
+        if (checkFollowing && this.$store.getters.findUser(this.status.attentions[i].id).following) {
           return false
         }
         if (this.status.attentions[i].id === this.$store.state.users.currentUser.id) {

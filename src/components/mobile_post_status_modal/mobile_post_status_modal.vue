@@ -6,7 +6,7 @@
     @click="closePostForm"
   >
     <div class="post-form-modal-panel panel" @click.stop="">
-      <div class="panel-heading">{{$t('post_status.new_status') + ' (' + $t('post_status.scope.' + visibility) + ')'}}</div>
+      <div class="panel-heading">{{$t('post_status.new_status')}}</div>
       <PostStatusForm class="panel-body" @posted="closePostForm" @onScopeChange="onScopeChange" />
     </div>
   </div>

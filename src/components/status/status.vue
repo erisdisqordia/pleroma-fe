@@ -52,7 +52,7 @@
                 <a :href="status.external_url" target="_blank" v-if="!status.is_local && !isPreview" class="source_url" title="Source">
                   <i class="button-icon icon-link-ext-alt"></i>
                 </a>
-                <template v-if="!inConversation && !isPreview">
+                <template v-if="expandable && !isPreview">
                   <a href="#" @click.prevent="toggleExpanded" title="Expand">
                     <i class="button-icon icon-plus-squared"></i>
                   </a>

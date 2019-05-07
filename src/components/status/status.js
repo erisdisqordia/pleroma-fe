@@ -18,6 +18,7 @@ const Status = {
   name: 'Status',
   props: [
     'statusoid',
+    'expandable',
     'inConversation',
     'focused',
     'highlight',

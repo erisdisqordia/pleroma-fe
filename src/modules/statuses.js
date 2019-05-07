@@ -461,11 +461,9 @@ export const mutations = {
     state.timelines[timeline].flushMarker = id
   },
   addFavsAndRepeats (state, { id, favoritedByUsers, rebloggedByUsers }) {
-    state.allStatusesObject[id] = {
-      ...state.allStatusesObject[id],
-      favoritedBy: favoritedByUsers,
-      rebloggedBy: rebloggedByUsers
-    }
+    const newStatus = state.allStatusesObject[id]
+    newStatus.favoritedBy = favoritedByUsers
+    newStatus.rebloggedBy = rebloggedByUsers
   }
 }
 

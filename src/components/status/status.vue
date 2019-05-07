@@ -139,7 +139,7 @@
           </div>
 
           <transition name="fade">
-            <div class="favs-repeated-users" v-if="combinedFavsAndRepeatsUsers.length > 0 && isFocused">
+            <div class="favs-repeated-users" v-if="isFocused && combinedFavsAndRepeatsUsers.length > 0">
               <div class="stats">
                 <div class="stat-count" v-if="statusFromGlobalRepository.rebloggedBy && statusFromGlobalRepository.rebloggedBy.length > 0">
                   <a class="stat-title">{{ $t('status.repeats') }}</a>

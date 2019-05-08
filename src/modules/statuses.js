@@ -402,6 +402,15 @@ export const mutations = {
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
+
+    if (newStatus.favorited !== value) {
+      if (value) {
+        newStatus.fave_num++
+      } else {
+        newStatus.fave_num--
+      }
+    }
+
     newStatus.favorited = value
   },
   setFavoritedConfirm (state, { status, user }) {

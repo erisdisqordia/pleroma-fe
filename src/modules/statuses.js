@@ -488,8 +488,8 @@ export const mutations = {
   },
   addFavsAndRepeats (state, { id, favoritedByUsers, rebloggedByUsers }) {
     const newStatus = state.allStatusesObject[id]
-    newStatus.favoritedBy = favoritedByUsers
-    newStatus.rebloggedBy = rebloggedByUsers
+    newStatus.favoritedBy = favoritedByUsers.filter(_ => _)
+    newStatus.rebloggedBy = rebloggedByUsers.filter(_ => _)
   }
 }
 
@@ -525,32 +525,24 @@ const statuses = {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })
       apiService.favorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(status => {
-          commit('setFavoritedConfirm', { status, user: rootState.users.currentUser })
-        })
+        .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
     unfavorite ({ rootState, commit }, status) {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: false })
       apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(status => {
-          commit('setFavoritedConfirm', { status, user: rootState.users.currentUser })
-        })
+        .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...
       commit('setRetweeted', { status, value: true })
       apiService.retweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(status => {
-          commit('setRetweetedConfirm', { status: status.retweeted_status, user: rootState.users.currentUser })
-        })
+        .then(status => commit('setRetweetedConfirm', { status: status.retweeted_status, user: rootState.users.currentUser }))
     },
     unretweet ({ rootState, commit }, status) {
       commit('setRetweeted', { status, value: false })
       apiService.unretweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(status => {
-          commit('setRetweetedConfirm', { status, user: rootState.users.currentUser })
-        })
+        .then(status => commit('setRetweetedConfirm', { status, user: rootState.users.currentUser }))
     },
     queueFlush ({ rootState, commit }, { timeline, id }) {
       commit('queueFlush', { timeline, id })
@@ -567,14 +559,7 @@ const statuses = {
         rootState.api.backendInteractor.fetchFavoritedByUsers(id),
         rootState.api.backendInteractor.fetchRebloggedByUsers(id)
       ]).then(([favoritedByUsers, rebloggedByUsers]) =>
-        commit(
-          'addFavsAndRepeats',
-          {
-            id,
-            favoritedByUsers: favoritedByUsers.filter(_ => _),
-            rebloggedByUsers: rebloggedByUsers.filter(_ => _)
-          }
-        )
+        commit('addFavsAndRepeats', { id, favoritedByUsers, rebloggedByUsers })
       )
     }
   },

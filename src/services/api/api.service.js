@@ -506,62 +506,22 @@ const verifyCredentials = (user) => {
 }
 
 const favorite = ({ id, credentials }) => {
-  return fetch(MASTODON_FAVORITE_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Error favoriting post')
-      }
-    })
+  return promisedRequest({ url: MASTODON_FAVORITE_URL(id), method: 'POST', credentials })
     .then((data) => parseStatus(data))
 }
 
 const unfavorite = ({ id, credentials }) => {
-  return fetch(MASTODON_UNFAVORITE_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Error removing favorite')
-      }
-    })
+  return promisedRequest({ url: MASTODON_UNFAVORITE_URL(id), method: 'POST', credentials })
     .then((data) => parseStatus(data))
 }
 
 const retweet = ({ id, credentials }) => {
-  return fetch(MASTODON_RETWEET_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Error repeating post')
-      }
-    })
+  return promisedRequest({ url: MASTODON_RETWEET_URL(id), method: 'POST', credentials })
     .then((data) => parseStatus(data))
 }
 
 const unretweet = ({ id, credentials }) => {
-  return fetch(MASTODON_UNRETWEET_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Error removing repeat')
-      }
-    })
+  return promisedRequest({ url: MASTODON_UNRETWEET_URL(id), method: 'POST', credentials })
     .then((data) => parseStatus(data))
 }
 

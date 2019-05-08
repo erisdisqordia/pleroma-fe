@@ -524,24 +524,25 @@ const statuses = {
     favorite ({ rootState, commit }, status) {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })
-      apiService.favorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
+      rootState.api.backendInteractor.favorite(status.id)
         .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
     unfavorite ({ rootState, commit }, status) {
-      // Optimistic favoriting...
+      // Optimistic unfavoriting...
       commit('setFavorited', { status, value: false })
-      apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
+      rootState.api.backendInteractor.unfavorite(status.id)
         .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...
       commit('setRetweeted', { status, value: true })
-      apiService.retweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
+      rootState.api.backendInteractor.retweet(status.id)
         .then(status => commit('setRetweetedConfirm', { status: status.retweeted_status, user: rootState.users.currentUser }))
     },
     unretweet ({ rootState, commit }, status) {
+      // Optimistic unretweeting...
       commit('setRetweeted', { status, value: false })
-      apiService.unretweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
+      rootState.api.backendInteractor.unretweet(status.id)
         .then(status => commit('setRetweetedConfirm', { status, user: rootState.users.currentUser }))
     },
     queueFlush ({ rootState, commit }, { timeline, id }) {

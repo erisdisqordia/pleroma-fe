@@ -1,8 +1,8 @@
 <template>
   <div class="avatars">
-      <div class="avatars-item" v-for="user in slicedUsers">
-        <UserAvatar :user="user" class="avatar-small" />
-      </div>
+    <router-link :to="userProfileLink(user)" class="avatars-item" v-for="user in slicedUsers">
+      <UserAvatar :user="user" class="avatar-small" />
+    </router-link>
   </div>
 </template>
 

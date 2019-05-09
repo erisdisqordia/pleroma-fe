@@ -94,6 +94,11 @@
     "direct_warning_to_all": "This post will be visible to all the mentioned users.",
     "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
+    "scope_notice": {
+      "public": "This post will be visible to everyone",
+      "private": "This post will be visible to your followers only",
+      "unlisted": "This post will not be visible in Public Timeline and The Whole Known Network"
+    },
     "scope": {
       "direct": "Direct - Post to mentioned users only",
       "private": "Followers-only - Post to followers only",

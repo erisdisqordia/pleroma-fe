@@ -31,6 +31,7 @@ const defaultState = {
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale,
+  hideScopeNotice: false,
   scopeCopy: undefined, // instance default
   subjectLineBehavior: undefined, // instance default
   alwaysShowSubjectInput: undefined, // instance default

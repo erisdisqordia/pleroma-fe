@@ -27,6 +27,7 @@ module.exports = {
     'vue/use-v-on-exact': 1,
     'vue/no-parsing-error': 1,
     'vue/require-v-for-key': 1,
+    'vue/valid-v-for': 1,
     'vue/require-prop-types': 1,
     'vue/no-use-v-if-with-v-for': 1,
     'indent': 1,

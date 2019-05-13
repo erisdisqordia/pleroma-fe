@@ -155,7 +155,7 @@
   }
 }
 
-.post-status-form, .login {
+.post-status-form {
   .form-bottom {
     display: flex;
     padding: 0.5em;

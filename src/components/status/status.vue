@@ -627,7 +627,7 @@ a.unmute {
   flex: 1;
 }
 
-.timeline > {
+.timeline :not(.panel-disabled) > {
   .status-el:last-child {
     border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
     border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);

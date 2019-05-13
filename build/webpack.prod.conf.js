@@ -17,17 +17,21 @@ let commitHash = require('child_process')
 console.log(commitHash)
 
 var webpackConfig = merge(baseWebpackConfig, {
+  mode: 'production',
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, extract: true })
   },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   optimization: {
-    minimize: true
+    minimize: true,
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/workflow/production.html

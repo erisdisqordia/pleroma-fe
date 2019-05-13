@@ -101,16 +101,26 @@ const backendInteractorService = (credentials) => {
 
   const getCaptcha = () => apiService.getCaptcha()
   const register = (params) => apiService.register(params)
-  const updateAvatar = ({params}) => apiService.updateAvatar({credentials, params})
+  const updateAvatar = ({avatar}) => apiService.updateAvatar({credentials, avatar})
   const updateBg = ({params}) => apiService.updateBg({credentials, params})
-  const updateBanner = ({params}) => apiService.updateBanner({credentials, params})
+  const updateBanner = ({banner}) => apiService.updateBanner({credentials, banner})
   const updateProfile = ({params}) => apiService.updateProfile({credentials, params})
 
   const externalProfile = (profileUrl) => apiService.externalProfile({profileUrl, credentials})
-  const followImport = ({params}) => apiService.followImport({params, credentials})
+  const importBlocks = (file) => apiService.importBlocks({file, credentials})
+  const importFollows = (file) => apiService.importFollows({file, credentials})
 
   const deleteAccount = ({password}) => apiService.deleteAccount({credentials, password})
   const changePassword = ({password, newPassword, newPasswordConfirmation}) => apiService.changePassword({credentials, password, newPassword, newPasswordConfirmation})
+
+  const fetchFavoritedByUsers = (id) => apiService.fetchFavoritedByUsers({id})
+  const fetchRebloggedByUsers = (id) => apiService.fetchRebloggedByUsers({id})
+  const reportUser = (params) => apiService.reportUser({credentials, ...params})
+
+  const favorite = (id) => apiService.favorite({id, credentials})
+  const unfavorite = (id) => apiService.unfavorite({id, credentials})
+  const retweet = (id) => apiService.retweet({id, credentials})
+  const unretweet = (id) => apiService.unretweet({id, credentials})
 
   const backendInteractorServiceInstance = {
     fetchStatus,
@@ -147,12 +157,20 @@ const backendInteractorService = (credentials) => {
     updateBanner,
     updateProfile,
     externalProfile,
-    followImport,
+    importBlocks,
+    importFollows,
     deleteAccount,
     changePassword,
     fetchFollowRequests,
     approveUser,
-    denyUser
+    denyUser,
+    fetchFavoritedByUsers,
+    fetchRebloggedByUsers,
+    reportUser,
+    favorite,
+    unfavorite,
+    retweet,
+    unretweet
   }
 
   return backendInteractorServiceInstance

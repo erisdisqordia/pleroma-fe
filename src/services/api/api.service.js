@@ -3,12 +3,10 @@ const LOGIN_URL = '/api/account/verify_credentials.json'
 const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
 const MENTIONS_URL = '/api/statuses/mentions.json'
 const REGISTRATION_URL = '/api/account/register.json'
-const AVATAR_UPDATE_URL = '/api/qvitter/update_avatar.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
-const BANNER_UPDATE_URL = '/api/account/update_profile_banner.json'
-const PROFILE_UPDATE_URL = '/api/account/update_profile.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
+const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
@@ -49,6 +47,10 @@ const MASTODON_MUTE_USER_URL = id => `/api/v1/accounts/${id}/mute`
 const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
 const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
 const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
+const MASTODON_STATUS_FAVORITEDBY_URL = id => `/api/v1/statuses/${id}/favourited_by`
+const MASTODON_STATUS_REBLOGGEDBY_URL = id => `/api/v1/statuses/${id}/reblogged_by`
+const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
+const MASTODON_REPORT_USER_URL = '/api/v1/reports'
 
 import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
@@ -65,7 +67,24 @@ let fetch = (url, options) => {
   return oldfetch(fullUrl, options)
 }
 
-const promisedRequest = (url, options) => {
+const promisedRequest = ({ method, url, payload, credentials, headers = {} }) => {
+  const options = {
+    method,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      ...headers
+    }
+  }
+  if (payload) {
+    options.body = JSON.stringify(payload)
+  }
+  if (credentials) {
+    options.headers = {
+      ...options.headers,
+      ...authHeaders(credentials)
+    }
+  }
   return fetch(url, options)
     .then((response) => {
       return new Promise((resolve, reject) => response.json()
@@ -78,28 +97,16 @@ const promisedRequest = (url, options) => {
     })
 }
 
-// Params
-// cropH
-// cropW
-// cropX
-// cropY
-// img (base 64 encodend data url)
-const updateAvatar = ({credentials, params}) => {
-  let url = AVATAR_UPDATE_URL
-
+const updateAvatar = ({credentials, avatar}) => {
   const form = new FormData()
-
-  each(params, (value, key) => {
-    if (value) {
-      form.append(key, value)
-    }
-  })
-
-  return fetch(url, {
+  form.append('avatar', avatar)
+  return fetch(MASTODON_PROFILE_UPDATE_URL, {
     headers: authHeaders(credentials),
-    method: 'POST',
+    method: 'PATCH',
     body: form
-  }).then((data) => data.json())
+  })
+  .then((data) => data.json())
+  .then((data) => parseUser(data))
 }
 
 const updateBg = ({credentials, params}) => {
@@ -120,52 +127,26 @@ const updateBg = ({credentials, params}) => {
   }).then((data) => data.json())
 }
 
-// Params
-// height
-// width
-// offset_left
-// offset_top
-// banner (base 64 encodend data url)
-const updateBanner = ({credentials, params}) => {
-  let url = BANNER_UPDATE_URL
-
+const updateBanner = ({credentials, banner}) => {
   const form = new FormData()
-
-  each(params, (value, key) => {
-    if (value) {
-      form.append(key, value)
-    }
-  })
-
-  return fetch(url, {
+  form.append('header', banner)
+  return fetch(MASTODON_PROFILE_UPDATE_URL, {
     headers: authHeaders(credentials),
-    method: 'POST',
+    method: 'PATCH',
     body: form
-  }).then((data) => data.json())
+  })
+  .then((data) => data.json())
+  .then((data) => parseUser(data))
 }
 
-// Params
-// name
-// url
-// location
-// description
 const updateProfile = ({credentials, params}) => {
-  // Always include these fields, because they might be empty or false
-  const fields = ['description', 'locked', 'no_rich_text', 'hide_follows', 'hide_followers', 'show_role']
-  let url = PROFILE_UPDATE_URL
-
-  const form = new FormData()
-
-  each(params, (value, key) => {
-    if (fields.includes(key) || value) {
-      form.append(key, value)
-    }
+  return promisedRequest({
+    url: MASTODON_PROFILE_UPDATE_URL,
+    method: 'PATCH',
+    payload: params,
+    credentials
   })
-  return fetch(url, {
-    headers: authHeaders(credentials),
-    method: 'POST',
-    body: form
-  }).then((data) => data.json())
+  .then((data) => parseUser(data))
 }
 
 // Params needed:
@@ -261,7 +242,7 @@ const denyUser = ({id, credentials}) => {
 
 const fetchUser = ({id, credentials}) => {
   let url = `${MASTODON_USER_URL}/${id}`
-  return promisedRequest(url, { headers: authHeaders(credentials) })
+  return promisedRequest({ url, credentials })
     .then((data) => parseUser(data))
 }
 
@@ -525,62 +506,22 @@ const verifyCredentials = (user) => {
 }
 
 const favorite = ({ id, credentials }) => {
-  return fetch(MASTODON_FAVORITE_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Error favoriting post')
-      }
-    })
+  return promisedRequest({ url: MASTODON_FAVORITE_URL(id), method: 'POST', credentials })
     .then((data) => parseStatus(data))
 }
 
 const unfavorite = ({ id, credentials }) => {
-  return fetch(MASTODON_UNFAVORITE_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Error removing favorite')
-      }
-    })
+  return promisedRequest({ url: MASTODON_UNFAVORITE_URL(id), method: 'POST', credentials })
     .then((data) => parseStatus(data))
 }
 
 const retweet = ({ id, credentials }) => {
-  return fetch(MASTODON_RETWEET_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Error repeating post')
-      }
-    })
+  return promisedRequest({ url: MASTODON_RETWEET_URL(id), method: 'POST', credentials })
     .then((data) => parseStatus(data))
 }
 
 const unretweet = ({ id, credentials }) => {
-  return fetch(MASTODON_UNRETWEET_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error('Error removing repeat')
-      }
-    })
+  return promisedRequest({ url: MASTODON_UNRETWEET_URL(id), method: 'POST', credentials })
     .then((data) => parseStatus(data))
 }
 
@@ -634,9 +575,22 @@ const uploadMedia = ({formData, credentials}) => {
     .then((data) => parseAttachment(data))
 }
 
-const followImport = ({params, credentials}) => {
+const importBlocks = ({file, credentials}) => {
+  const formData = new FormData()
+  formData.append('list', file)
+  return fetch(BLOCKS_IMPORT_URL, {
+    body: formData,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.ok)
+}
+
+const importFollows = ({file, credentials}) => {
+  const formData = new FormData()
+  formData.append('list', file)
   return fetch(FOLLOW_IMPORT_URL, {
-    body: params,
+    body: formData,
     method: 'POST',
     headers: authHeaders(credentials)
   })
@@ -672,26 +626,20 @@ const changePassword = ({credentials, password, newPassword, newPasswordConfirma
 }
 
 const fetchMutes = ({credentials}) => {
-  return promisedRequest(MASTODON_USER_MUTES_URL, { headers: authHeaders(credentials) })
+  return promisedRequest({ url: MASTODON_USER_MUTES_URL, credentials })
     .then((users) => users.map(parseUser))
 }
 
 const muteUser = ({id, credentials}) => {
-  return promisedRequest(MASTODON_MUTE_USER_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
+  return promisedRequest({ url: MASTODON_MUTE_USER_URL(id), credentials, method: 'POST' })
 }
 
 const unmuteUser = ({id, credentials}) => {
-  return promisedRequest(MASTODON_UNMUTE_USER_URL(id), {
-    headers: authHeaders(credentials),
-    method: 'POST'
-  })
+  return promisedRequest({ url: MASTODON_UNMUTE_USER_URL(id), credentials, method: 'POST' })
 }
 
 const fetchBlocks = ({credentials}) => {
-  return promisedRequest(MASTODON_USER_BLOCKS_URL, { headers: authHeaders(credentials) })
+  return promisedRequest({ url: MASTODON_USER_BLOCKS_URL, credentials })
     .then((users) => users.map(parseUser))
 }
 
@@ -735,6 +683,28 @@ const markNotificationsAsSeen = ({id, credentials}) => {
   }).then((data) => data.json())
 }
 
+const fetchFavoritedByUsers = ({id}) => {
+  return promisedRequest({ url: MASTODON_STATUS_FAVORITEDBY_URL(id) }).then((users) => users.map(parseUser))
+}
+
+const fetchRebloggedByUsers = ({id}) => {
+  return promisedRequest({ url: MASTODON_STATUS_REBLOGGEDBY_URL(id) }).then((users) => users.map(parseUser))
+}
+
+const reportUser = ({credentials, userId, statusIds, comment, forward}) => {
+  return promisedRequest({
+    url: MASTODON_REPORT_USER_URL,
+    method: 'POST',
+    payload: {
+      'account_id': userId,
+      'status_ids': statusIds,
+      comment,
+      forward
+    },
+    credentials
+  })
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -776,14 +746,18 @@ const apiService = {
   updateProfile,
   updateBanner,
   externalProfile,
-  followImport,
+  importBlocks,
+  importFollows,
   deleteAccount,
   changePassword,
   fetchFollowRequests,
   approveUser,
   denyUser,
   suggestions,
-  markNotificationsAsSeen
+  markNotificationsAsSeen,
+  fetchFavoritedByUsers,
+  fetchRebloggedByUsers,
+  reportUser
 }
 
 export default apiService

@@ -275,6 +275,9 @@ export const parseStatus = (data) => {
     output.retweeted_status = parseStatus(retweetedStatus)
   }
 
+  output.favoritedBy = []
+  output.rebloggedBy = []
+
   return output
 }
 
@@ -306,7 +309,7 @@ export const parseNotification = (data) => {
   }
 
   output.created_at = new Date(data.created_at)
-  output.id = data.id
+  output.id = parseInt(data.id)
 
   return output
 }

@@ -2,6 +2,10 @@
   "chat": {
     "title": "Messatjariá"
   },
+  "exporter": {
+     "export": "Exportar",
+     "processing": "Tractament, vos demandarem lèu de telecargar lo fichièr"
+  },  
     "features_panel": {
       "chat": "Chat",
       "gopher": "Gopher",
@@ -30,6 +34,11 @@
      "save": "Salvar",
      "save_without_cropping": "Salvar sens talhada",
      "cancel": "Anullar"
+  },
+    "importer": {
+    "submit": "Mandar",
+    "success": "Corrèctament importat.",
+    "error": "Una error s’es producha pendent l’importacion d’aqueste fichièr."
   },
   "login": {
     "login": "Connexion",
@@ -126,6 +135,11 @@
     "avatarRadius": "Avatars",
     "background": "Rèire plan",
     "bio": "Biografia",
+    "block_export": "Exportar los blocatges",
+    "block_export_button": "Exportar los blocatges dins un fichièr csv",
+    "block_import": "Impòrt de blocatges",
+    "block_import_error": "Error en importar los blocatges",
+    "blocks_imported": "Blocatges importats ! Lo tractament tardarà un pauc.",
     "blocks_tab": "Blocatges",
     "btnRadius": "Botons",
     "cBlue": "Blau (Respondre, seguir)",
@@ -153,7 +167,6 @@
     "filtering_explanation": "Totes los estatuts amb aqueles mots seràn en silenci, un mot per linha",
     "follow_export": "Exportar los abonaments",
     "follow_export_button": "Exportar vòstres abonaments dins un fichièr csv",
-    "follow_export_processing": "Tractament, vos demandarem lèu de telecargar lo fichièr",
     "follow_import": "Importar los abonaments",
     "follow_import_error": "Error en important los seguidors",
     "follows_imported": "Seguidors importats. Lo tractament pòt trigar una estona.",
@@ -188,6 +201,7 @@
     "use_contain_fit": "Talhar pas las pèças juntas per las vinhetas",
     "name": "Nom",
     "name_bio": "Nom & Bio",
+
     "new_password": "Nòu senhal",
     "notification_visibility_follows": "Abonaments",
     "notification_visibility_likes": "Aimar",
@@ -380,6 +394,8 @@
     "no_statuses": "Cap d’estatuts"
   },
   "status": {
+    "favorites": "Li a agradat",
+    "repeats": "A repetit",
     "reply_to": "Respond a",
     "replies_list": "Responsas :"
   },

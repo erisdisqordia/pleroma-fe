@@ -2,6 +2,10 @@
   "chat": {
     "title": "Chat"
   },
+  "exporter": {
+    "export": "Export",
+    "processing": "Processing, you'll soon be asked to download your file"
+  },
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
@@ -30,6 +34,11 @@
     "save": "Save",
     "save_without_cropping": "Save without cropping",
     "cancel": "Cancel"
+  },
+  "importer": {
+    "submit": "Submit",
+    "success": "Imported successfully.",
+    "error": "An error occured while importing this file."
   },
   "login": {
     "login": "Log in",
@@ -85,6 +94,11 @@
     "direct_warning_to_all": "This post will be visible to all the mentioned users.",
     "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
+    "scope_notice": {
+      "public": "This post will be visible to everyone",
+      "private": "This post will be visible to your followers only",
+      "unlisted": "This post will not be visible in Public Timeline and The Whole Known Network"
+    },
     "scope": {
       "direct": "Direct - Post to mentioned users only",
       "private": "Followers-only - Post to followers only",
@@ -126,6 +140,11 @@
     "avatarRadius": "Avatars",
     "background": "Background",
     "bio": "Bio",
+    "block_export": "Block export",
+    "block_export_button": "Export your blocks to a csv file",
+    "block_import": "Block import",
+    "block_import_error": "Error importing blocks",
+    "blocks_imported": "Blocks imported! Processing them will take a while.",
     "blocks_tab": "Blocks",
     "btnRadius": "Buttons",
     "cBlue": "Blue (Reply, follow)",
@@ -153,7 +172,6 @@
     "filtering_explanation": "All statuses containing these words will be muted, one per line",
     "follow_export": "Follow export",
     "follow_export_button": "Export your follows to a csv file",
-    "follow_export_processing": "Processing, you'll soon be asked to download your file",
     "follow_import": "Follow import",
     "follow_import_error": "Error importing followers",
     "follows_imported": "Follows imported! Processing them will take a while.",
@@ -169,6 +187,7 @@
     "hide_post_stats": "Hide post statistics (e.g. the number of favorites)",
     "hide_user_stats": "Hide user statistics (e.g. the number of followers)",
     "hide_filtered_statuses": "Hide filtered statuses",
+    "import_blocks_from_a_csv_file": "Import blocks from a csv file",
     "import_followers_from_a_csv_file": "Import follows from a csv file",
     "import_theme": "Load preset",
     "inputRadius": "Input fields",
@@ -219,6 +238,7 @@
     "reply_visibility_all": "Show all replies",
     "reply_visibility_following": "Only show replies directed at me or users I'm following",
     "reply_visibility_self": "Only show replies directed at me",
+    "autohide_floating_post_button": "Automatically hide New Post button (mobile)",
     "saving_err": "Error saving settings",
     "saving_ok": "Settings saved",
     "search_user_to_block": "Search whom you want to block",
@@ -380,6 +400,8 @@
     "no_statuses": "No statuses"
   },
   "status": {
+    "favorites": "Favorites",
+    "repeats": "Repeats",
     "reply_to": "Reply to",
     "replies_list": "Replies:"
   },
@@ -404,6 +426,7 @@
     "muted": "Muted",
     "per_day": "per day",
     "remote_follow": "Remote follow",
+    "report": "Report",
     "statuses": "Statuses",
     "unblock": "Unblock",
     "unblock_progress": "Unblocking...",
@@ -435,6 +458,15 @@
     "timeline_title": "User Timeline",
     "profile_does_not_exist": "Sorry, this profile does not exist.",
     "profile_loading_error": "Sorry, there was an error loading this profile."
+  },
+  "user_reporting": {
+    "title": "Reporting {0}",
+    "add_comment_description": "The report will be sent to your instance moderators. You can provide an explanation of why you are reporting this account below:",
+    "additional_comments": "Additional comments",
+    "forward_description": "The account is from another server. Send a copy of the report there as well?",
+    "forward_to": "Forward to {0}",
+    "submit": "Submit",
+    "generic_error": "An error occurred while processing your request."
   },
   "who_to_follow": {
     "more": "More",

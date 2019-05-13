@@ -1,7 +1,11 @@
 <template>
   <div class="basic-user-card">
     <router-link :to="userProfileLink(user)">
-      <UserAvatar class="avatar" @click.prevent.native="toggleUserExpanded" :src="user.profile_image_url"/>
+      <UserAvatar
+        class="avatar"
+        :user="user"
+        @click.prevent.native="toggleUserExpanded"
+      />
     </router-link>
     <div class="basic-user-card-expanded-content" v-if="userExpanded">
       <UserCard :user="user" :rounded="true" :bordered="true"/>
@@ -44,14 +48,15 @@
       width: 16px;
       vertical-align: middle;
     }
+  }
 
-    &-value {
-      display: inline-block;
-      max-width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+  &-user-name-value,
+  &-screen-name {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &-expanded-content {

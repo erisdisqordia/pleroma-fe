@@ -4,7 +4,7 @@
     <div class='user-info'>
       <div class='container'>
         <router-link :to="userProfileLink(user)">
-          <UserAvatar :betterShadow="betterShadow" :src="user.profile_image_url_original"/>
+          <UserAvatar :betterShadow="betterShadow" :user="user"/>
         </router-link>
         <div class="name-and-screen-name">
           <div class="top-line">
@@ -99,8 +99,14 @@
             </button>
           </span>
         </div>
-        <ModerationTools :user='user' v-if='loggedIn.role === "admin"'>
-        </ModerationTools>
+        <div class='block' v-if='isOtherUser && loggedIn'>
+          <span>
+            <button @click="reportUser">
+              {{ $t('user_card.report') }}
+            </button>
+          </span>
+        </div>
+        <ModerationTools :user='user' v-if='loggedIn.role === "admin"'/>
       </div>
     </div>
   </div>

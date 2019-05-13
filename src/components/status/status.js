@@ -7,11 +7,12 @@ import UserCard from '../user_card/user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
+import AvatarList from '../avatar_list/avatar_list.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import fileType from 'src/services/file_type/file_type.service'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import { mentionMatchesUrl, extractTagFromUrl } from 'src/services/matcher/matcher.service.js'
-import { filter, find, unescape } from 'lodash'
+import { filter, find, unescape, uniqBy } from 'lodash'
 
 const Status = {
   name: 'Status',
@@ -30,7 +31,6 @@ const Status = {
   data () {
     return {
       replying: false,
-      expanded: false,
       unmuted: false,
       userExpanded: false,
       preview: null,
@@ -97,6 +97,10 @@ const Status = {
         return this.statusoid
       }
     },
+    statusFromGlobalRepository () {
+      // NOTE: Consider to replace status with statusFromGlobalRepository
+      return this.$store.state.statuses.allStatusesObject[this.status.id]
+    },
     loggedIn () {
       return !!this.$store.state.users.currentUser
     },
@@ -156,7 +160,7 @@ const Status = {
       if (this.$store.state.config.replyVisibility === 'all') {
         return false
       }
-      if (this.inlineExpanded || this.expanded || this.inConversation || !this.isReply) {
+      if (this.inConversation || !this.isReply) {
         return false
       }
       if (this.status.user.id === this.$store.state.users.currentUser.id) {
@@ -170,7 +174,7 @@ const Status = {
         if (this.status.user.id === this.status.attentions[i].id) {
           continue
         }
-        if (checkFollowing && this.status.attentions[i].following) {
+        if (checkFollowing && this.$store.getters.findUser(this.status.attentions[i].id).following) {
           return false
         }
         if (this.status.attentions[i].id === this.$store.state.users.currentUser.id) {
@@ -257,6 +261,14 @@ const Status = {
         return this.status.statusnet_html
       }
       return this.status.summary_html + '<br />' + this.status.statusnet_html
+    },
+    combinedFavsAndRepeatsUsers () {
+      // Use the status from the global status repository since favs and repeats are saved in it
+      const combinedUsers = [].concat(
+        this.statusFromGlobalRepository.favoritedBy,
+        this.statusFromGlobalRepository.rebloggedBy
+      )
+      return uniqBy(combinedUsers, 'id')
     }
   },
   components: {
@@ -268,7 +280,8 @@ const Status = {
     UserCard,
     UserAvatar,
     Gallery,
-    LinkPreview
+    LinkPreview,
+    AvatarList
   },
   methods: {
     visibilityIcon (visibility) {

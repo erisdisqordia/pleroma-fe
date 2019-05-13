@@ -18,17 +18,19 @@
         </div>
       </div>
     </nav>
-    <div v-if="" class="container" id="content">
-      <div class="sidebar-flexer mobile-hidden" v-if="!isMobileLayout">
+    <div class="container" id="content">
+      <div class="sidebar-flexer mobile-hidden">
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">
             <div class="sidebar">
               <user-panel></user-panel>
-              <nav-panel></nav-panel>
-              <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
-              <features-panel v-if="!currentUser && showFeaturesPanel"></features-panel>
-              <who-to-follow-panel v-if="currentUser && suggestionsEnabled"></who-to-follow-panel>
-              <notifications v-if="currentUser"></notifications>
+              <div v-if="!isMobileLayout">
+                <nav-panel></nav-panel>
+                <instance-specific-panel v-if="showInstanceSpecificPanel"></instance-specific-panel>
+                <features-panel v-if="!currentUser && showFeaturesPanel"></features-panel>
+                <who-to-follow-panel v-if="currentUser && suggestionsEnabled"></who-to-follow-panel>
+                <notifications v-if="currentUser"></notifications>
+              </div>
             </div>
           </div>
         </div>
@@ -46,6 +48,7 @@
       <media-modal></media-modal>
     </div>
     <chat-panel :floating="true" v-if="currentUser && chat" class="floating-chat mobile-hidden"></chat-panel>
+    <UserReportingModal />
   </div>
 </template>
 

@@ -1,4 +1,4 @@
-import { remove, slice, each, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
+import { remove, slice, each, findIndex, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
 import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
@@ -402,12 +402,27 @@ export const mutations = {
   },
   setFavorited (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
+
+    if (newStatus.favorited !== value) {
+      if (value) {
+        newStatus.fave_num++
+      } else {
+        newStatus.fave_num--
+      }
+    }
+
     newStatus.favorited = value
   },
-  setFavoritedConfirm (state, { status }) {
+  setFavoritedConfirm (state, { status, user }) {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.favorited = status.favorited
     newStatus.fave_num = status.fave_num
+    const index = findIndex(newStatus.favoritedBy, { id: user.id })
+    if (index !== -1 && !newStatus.favorited) {
+      newStatus.favoritedBy.splice(index, 1)
+    } else if (index === -1 && newStatus.favorited) {
+      newStatus.favoritedBy.push(user)
+    }
   },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
@@ -421,6 +436,17 @@ export const mutations = {
     }
 
     newStatus.repeated = value
+  },
+  setRetweetedConfirm (state, { status, user }) {
+    const newStatus = state.allStatusesObject[status.id]
+    newStatus.repeated = status.repeated
+    newStatus.repeat_num = status.repeat_num
+    const index = findIndex(newStatus.rebloggedBy, { id: user.id })
+    if (index !== -1 && !newStatus.repeated) {
+      newStatus.rebloggedBy.splice(index, 1)
+    } else if (index === -1 && newStatus.repeated) {
+      newStatus.rebloggedBy.push(user)
+    }
   },
   setDeleted (state, { status }) {
     const newStatus = state.allStatusesObject[status.id]
@@ -459,6 +485,11 @@ export const mutations = {
   },
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
+  },
+  addFavsAndRepeats (state, { id, favoritedByUsers, rebloggedByUsers }) {
+    const newStatus = state.allStatusesObject[id]
+    newStatus.favoritedBy = favoritedByUsers.filter(_ => _)
+    newStatus.rebloggedBy = rebloggedByUsers.filter(_ => _)
   }
 }
 
@@ -493,27 +524,26 @@ const statuses = {
     favorite ({ rootState, commit }, status) {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })
-      apiService.favorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(status => {
-          commit('setFavoritedConfirm', { status })
-        })
+      rootState.api.backendInteractor.favorite(status.id)
+        .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
     unfavorite ({ rootState, commit }, status) {
-      // Optimistic favoriting...
+      // Optimistic unfavoriting...
       commit('setFavorited', { status, value: false })
-      apiService.unfavorite({ id: status.id, credentials: rootState.users.currentUser.credentials })
-        .then(status => {
-          commit('setFavoritedConfirm', { status })
-        })
+      rootState.api.backendInteractor.unfavorite(status.id)
+        .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...
       commit('setRetweeted', { status, value: true })
-      apiService.retweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
+      rootState.api.backendInteractor.retweet(status.id)
+        .then(status => commit('setRetweetedConfirm', { status: status.retweeted_status, user: rootState.users.currentUser }))
     },
     unretweet ({ rootState, commit }, status) {
+      // Optimistic unretweeting...
       commit('setRetweeted', { status, value: false })
-      apiService.unretweet({ id: status.id, credentials: rootState.users.currentUser.credentials })
+      rootState.api.backendInteractor.unretweet(status.id)
+        .then(status => commit('setRetweetedConfirm', { status, user: rootState.users.currentUser }))
     },
     queueFlush ({ rootState, commit }, { timeline, id }) {
       commit('queueFlush', { timeline, id })
@@ -524,6 +554,14 @@ const statuses = {
         id: rootState.statuses.notifications.maxId,
         credentials: rootState.users.currentUser.credentials
       })
+    },
+    fetchFavsAndRepeats ({ rootState, commit }, id) {
+      Promise.all([
+        rootState.api.backendInteractor.fetchFavoritedByUsers(id),
+        rootState.api.backendInteractor.fetchRebloggedByUsers(id)
+      ]).then(([favoritedByUsers, rebloggedByUsers]) =>
+        commit('addFavsAndRepeats', { id, favoritedByUsers, rebloggedByUsers })
+      )
     }
   },
   mutations

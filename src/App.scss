@@ -379,6 +379,7 @@ main-router {
 
 .panel-heading {
   display: flex;
+  flex: none;
   border-radius: $fallback--panelRadius $fallback--panelRadius 0 0;
   border-radius: var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius) 0 0;
   background-size: cover;
@@ -645,6 +646,19 @@ nav {
   border: 1px solid var(--faint, $fallback--faint);
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
+}
+
+.notice-dismissible {
+  padding-right: 4rem;
+  position: relative;
+
+  .dismiss {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .5em;
+    color: inherit;
+  }
 }
 
 @keyframes modal-background-fadein {

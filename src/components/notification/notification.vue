@@ -7,7 +7,7 @@
   </status>
   <div class="non-mention" :class="[userClass, { highlighted: userStyle }]" :style="[ userStyle ]" v-else>
     <a class='avatar-container' :href="notification.from_profile.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
-      <UserAvatar :compact="true" :betterShadow="betterShadow" :src="notification.from_profile.profile_image_url_original" />
+      <UserAvatar :compact="true" :betterShadow="betterShadow" :user="notification.from_profile"/>
     </a>
     <div class='notification-right'>
       <UserCard :user="getUser(notification)" :rounded="true" :bordered="true" v-if="userExpanded" />

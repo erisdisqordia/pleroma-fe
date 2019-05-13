@@ -13,6 +13,8 @@ import SelectableList from '../selectable_list/selectable_list.vue'
 import ProgressButton from '../progress_button/progress_button.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
 import Autosuggest from '../autosuggest/autosuggest.vue'
+import Importer from '../importer/importer.vue'
+import Exporter from '../exporter/exporter.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import userSearchApi from '../../services/new_api/user_search.js'
 
@@ -40,14 +42,9 @@ const UserSettings = {
       hideFollowers: this.$store.state.users.currentUser.hide_followers,
       showRole: this.$store.state.users.currentUser.show_role,
       role: this.$store.state.users.currentUser.role,
-      followList: null,
-      followImportError: false,
-      followsImported: false,
-      enableFollowsExport: true,
       pickAvatarBtnVisible: true,
       bannerUploading: false,
       backgroundUploading: false,
-      followListUploading: false,
       bannerPreview: null,
       backgroundPreview: null,
       bannerUploadError: null,
@@ -75,7 +72,9 @@ const UserSettings = {
     Autosuggest,
     BlockCard,
     MuteCard,
-    ProgressButton
+    ProgressButton,
+    Importer,
+    Exporter
   },
   computed: {
     user () {
@@ -110,37 +109,23 @@ const UserSettings = {
   },
   methods: {
     updateProfile () {
-      const name = this.newName
-      const description = this.newBio
-      const locked = this.newLocked
-      // Backend notation.
-      /* eslint-disable camelcase */
-      const default_scope = this.newDefaultScope
-      const no_rich_text = this.newNoRichText
-      const hide_follows = this.hideFollows
-      const hide_followers = this.hideFollowers
-      const show_role = this.showRole
-
-      /* eslint-enable camelcase */
       this.$store.state.api.backendInteractor
         .updateProfile({
           params: {
-            name,
-            description,
-            locked,
+            note: this.newBio,
+            locked: this.newLocked,
             // Backend notation.
             /* eslint-disable camelcase */
-            default_scope,
-            no_rich_text,
-            hide_follows,
-            hide_followers,
-            show_role
+            display_name: this.newName,
+            default_scope: this.newDefaultScope,
+            no_rich_text: this.newNoRichText,
+            hide_follows: this.hideFollows,
+            hide_followers: this.hideFollowers,
+            show_role: this.showRole
             /* eslint-enable camelcase */
           }}).then((user) => {
-            if (!user.error) {
-              this.$store.commit('addNewUsers', [user])
-              this.$store.commit('setCurrentUser', user)
-            }
+            this.$store.commit('addNewUsers', [user])
+            this.$store.commit('setCurrentUser', user)
           })
     },
     changeVis (visibility) {
@@ -160,23 +145,29 @@ const UserSettings = {
       reader.onload = ({target}) => {
         const img = target.result
         this[slot + 'Preview'] = img
+        this[slot] = file
       }
       reader.readAsDataURL(file)
     },
     submitAvatar (cropper, file) {
-      let img
-      if (cropper) {
-        img = cropper.getCroppedCanvas().toDataURL(file.type)
-      } else {
-        img = file
-      }
+      const that = this
+      return new Promise((resolve, reject) => {
+        function updateAvatar (avatar) {
+          that.$store.state.api.backendInteractor.updateAvatar({ avatar })
+            .then((user) => {
+              that.$store.commit('addNewUsers', [user])
+              that.$store.commit('setCurrentUser', user)
+              resolve()
+            })
+            .catch((err) => {
+              reject(new Error(that.$t('upload.error.base') + ' ' + err.message))
+            })
+        }
 
-      return this.$store.state.api.backendInteractor.updateAvatar({ params: { img } }).then((user) => {
-        if (!user.error) {
-          this.$store.commit('addNewUsers', [user])
-          this.$store.commit('setCurrentUser', user)
+        if (cropper) {
+          cropper.getCroppedCanvas().toBlob(updateAvatar, file.type)
         } else {
-          throw new Error(this.$t('upload.error.base') + user.error)
+          updateAvatar(file)
         }
       })
     },
@@ -186,30 +177,17 @@ const UserSettings = {
     submitBanner () {
       if (!this.bannerPreview) { return }
 
-      let banner = this.bannerPreview
-      // eslint-disable-next-line no-undef
-      let imginfo = new Image()
-      /* eslint-disable camelcase */
-      let offset_top, offset_left, width, height
-      imginfo.src = banner
-      width = imginfo.width
-      height = imginfo.height
-      offset_top = 0
-      offset_left = 0
       this.bannerUploading = true
-      this.$store.state.api.backendInteractor.updateBanner({params: {banner, offset_top, offset_left, width, height}}).then((data) => {
-        if (!data.error) {
-          let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
-          clone.cover_photo = data.url
-          this.$store.commit('addNewUsers', [clone])
-          this.$store.commit('setCurrentUser', clone)
+      this.$store.state.api.backendInteractor.updateBanner({banner: this.banner})
+        .then((user) => {
+          this.$store.commit('addNewUsers', [user])
+          this.$store.commit('setCurrentUser', user)
           this.bannerPreview = null
-        } else {
-          this.bannerUploadError = this.$t('upload.error.base') + data.error
-        }
-        this.bannerUploading = false
-      })
-      /* eslint-enable camelcase */
+        })
+        .catch((err) => {
+          this.bannerUploadError = this.$t('upload.error.base') + ' ' + err.message
+        })
+        .then(() => { this.bannerUploading = false })
     },
     submitBg () {
       if (!this.backgroundPreview) { return }
@@ -236,62 +214,41 @@ const UserSettings = {
         this.backgroundUploading = false
       })
     },
-    importFollows () {
-      this.followListUploading = true
-      const followList = this.followList
-      this.$store.state.api.backendInteractor.followImport({params: followList})
+    importFollows (file) {
+      return this.$store.state.api.backendInteractor.importFollows(file)
         .then((status) => {
-          if (status) {
-            this.followsImported = true
-          } else {
-            this.followImportError = true
+          if (!status) {
+            throw new Error('failed')
           }
-          this.followListUploading = false
         })
     },
-    /* This function takes an Array of Users
-     * and outputs a file with all the addresses for the user to download
-     */
-    exportPeople (users, filename) {
-      // Get all the friends addresses
-      var UserAddresses = users.map(function (user) {
+    importBlocks (file) {
+      return this.$store.state.api.backendInteractor.importBlocks(file)
+        .then((status) => {
+          if (!status) {
+            throw new Error('failed')
+          }
+        })
+    },
+    generateExportableUsersContent (users) {
+      // Get addresses
+      return users.map((user) => {
         // check is it's a local user
         if (user && user.is_local) {
           // append the instance address
           // eslint-disable-next-line no-undef
-          user.screen_name += '@' + location.hostname
+          return user.screen_name + '@' + location.hostname
         }
         return user.screen_name
       }).join('\n')
-      // Make the user download the file
-      var fileToDownload = document.createElement('a')
-      fileToDownload.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(UserAddresses))
-      fileToDownload.setAttribute('download', filename)
-      fileToDownload.style.display = 'none'
-      document.body.appendChild(fileToDownload)
-      fileToDownload.click()
-      document.body.removeChild(fileToDownload)
     },
-    exportFollows () {
-      this.enableFollowsExport = false
-      this.$store.state.api.backendInteractor
-        .exportFriends({
-          id: this.$store.state.users.currentUser.id
-        })
-        .then((friendList) => {
-          this.exportPeople(friendList, 'friends.csv')
-          setTimeout(() => { this.enableFollowsExport = true }, 2000)
-        })
+    getFollowsContent () {
+      return this.$store.state.api.backendInteractor.exportFriends({ id: this.$store.state.users.currentUser.id })
+        .then(this.generateExportableUsersContent)
     },
-    followListChange () {
-      // eslint-disable-next-line no-undef
-      let formData = new FormData()
-      formData.append('list', this.$refs.followlist.files[0])
-      this.followList = formData
-    },
-    dismissImported () {
-      this.followsImported = false
-      this.followImportError = false
+    getBlocksContent () {
+      return this.$store.state.api.backendInteractor.fetchBlocks()
+        .then(this.generateExportableUsersContent)
     },
     confirmDelete () {
       this.deletingAccount = true

@@ -13,7 +13,7 @@
     </template>
     <template v-else>
       <div v-if="retweet && !noHeading && !inConversation" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
-        <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :src="statusoid.user.profile_image_url_original"/>
+        <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :user="statusoid.user"/>
         <div class="media-body faint">
           <span class="user-name">
             <router-link v-if="retweeterHtml" :to="retweeterProfileLink" v-html="retweeterHtml"/>
@@ -27,7 +27,7 @@
       <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet && !inConversation }]" :style="[ userStyle ]" class="media status">
         <div v-if="!noHeading" class="media-left">
           <router-link :to="userProfileLink" @click.stop.prevent.capture.native="toggleUserExpanded">
-            <UserAvatar :compact="compact" :betterShadow="betterShadow" :src="status.user.profile_image_url_original"/>
+            <UserAvatar :compact="compact" :betterShadow="betterShadow" :user="status.user"/>
           </router-link>
         </div>
         <div class="status-body">
@@ -91,8 +91,13 @@
           </div>
 
           <div v-if="showPreview" class="status-preview-container">
-            <status class="status-preview" v-if="preview" :isPreview="true" :statusoid="preview" :compact=true></status>
-            <div class="status-preview status-preview-loading" v-else>
+            <status class="status-preview"
+              v-if="preview"
+              :isPreview="true"
+              :statusoid="preview"
+              :compact=true
+            />
+            <div v-else class="status-preview status-preview-loading">
               <i class="icon-spin4 animate-spin"></i>
             </div>
           </div>
@@ -132,6 +137,24 @@
           <div v-if="status.card && !hideSubjectStatus && !noHeading" class="link-preview media-body">
             <link-preview :card="status.card" :size="attachmentSize" :nsfw="nsfwClickthrough" />
           </div>
+
+          <transition name="fade">
+            <div class="favs-repeated-users" v-if="isFocused && combinedFavsAndRepeatsUsers.length > 0">
+              <div class="stats">
+                <div class="stat-count" v-if="statusFromGlobalRepository.rebloggedBy && statusFromGlobalRepository.rebloggedBy.length > 0">
+                  <a class="stat-title">{{ $t('status.repeats') }}</a>
+                  <div class="stat-number">{{ statusFromGlobalRepository.rebloggedBy.length }}</div>
+                </div>
+                <div class="stat-count" v-if="statusFromGlobalRepository.favoritedBy && statusFromGlobalRepository.favoritedBy.length > 0">
+                  <a class="stat-title">{{ $t('status.favorites') }}</a>
+                  <div class="stat-number">{{ statusFromGlobalRepository.favoritedBy.length }}</div>
+                </div>
+                <div class="avatar-row">
+                  <AvatarList :users="combinedFavsAndRepeatsUsers"></AvatarList>
+                </div>
+              </div>
+            </div>
+          </transition>
 
           <div v-if="!noHeading && !isPreview" class='status-actions media-body'>
             <div v-if="loggedIn">
@@ -602,6 +625,58 @@ a.unmute {
 
 .reply-body {
   flex: 1;
+}
+
+.timeline > {
+  .status-el:last-child {
+    border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
+    border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
+    border-bottom: none;
+  }
+}
+
+.favs-repeated-users {
+  margin-top: $status-margin;
+
+  .stats {
+    width: 100%;
+    display: flex;
+    line-height: 1em;
+
+    .stat-count {
+      margin-right: $status-margin;
+
+      .stat-title {
+        color: var(--faint, $fallback--faint);
+        font-size: 12px;
+        text-transform: uppercase;
+        position: relative;
+      }
+
+      .stat-number {
+        font-weight: bolder;
+        font-size: 16px;
+        line-height: 1em;
+      }
+    }
+
+    .avatar-row {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      &::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 1px;
+        left: 0;
+        background-color: var(--faint, $fallback--faint);
+      }
+    }
+  }
 }
 
 @media all and (max-width: 800px) {

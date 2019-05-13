@@ -11,7 +11,7 @@
       @goto="setHighlight"
       @toggleExpanded="toggleExpanded"
       :key="status.id"
-      :inlineExpanded="collapsable"
+      :inlineExpanded="collapsable && isExpanded"
       :statusoid="status"
       :expandable='!isExpanded'
       :focused="focused(status.id)"

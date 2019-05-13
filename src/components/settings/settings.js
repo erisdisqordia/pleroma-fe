@@ -46,6 +46,7 @@ const settings = {
       streamingLocal: user.streaming,
       pauseOnUnfocusedLocal: user.pauseOnUnfocused,
       hoverPreviewLocal: user.hoverPreview,
+      autohideFloatingPostButtonLocal: user.autohideFloatingPostButton,
 
       hideMutedPostsLocal: typeof user.hideMutedPosts === 'undefined'
         ? instance.hideMutedPosts
@@ -182,6 +183,9 @@ const settings = {
     },
     hoverPreviewLocal (value) {
       this.$store.dispatch('setOption', { name: 'hoverPreview', value })
+    },
+    autohideFloatingPostButtonLocal (value) {
+      this.$store.dispatch('setOption', { name: 'autohideFloatingPostButton', value })
     },
     muteWordsString (value) {
       value = filter(value.split('\n'), (word) => trim(word).length > 0)

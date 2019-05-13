@@ -16,7 +16,7 @@
     </div>
     <div :class="classes.body">
       <div class="timeline">
-        <conversation 
+        <conversation
           v-for="status in timeline.visibleStatuses"
           class="status-fadein"
           :key="status.id"

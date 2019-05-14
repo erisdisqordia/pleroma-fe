@@ -168,7 +168,6 @@
         </div>
       </div>
       <div class="container" v-if="replying">
-        <div class="reply-left"/>
         <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" :copy-message-scope="status.visibility" :subject="replySubject" v-on:posted="toggleReplying"/>
       </div>
     </template>
@@ -616,11 +615,6 @@ $status-margin: 0.75em;
 a.unmute {
   display: block;
   margin-left: auto;
-}
-
-.reply-left {
-  flex: 0;
-  min-width: 48px;
 }
 
 .reply-body {

@@ -9,7 +9,7 @@
         </li>
         <li v-if='currentUser'>
           <router-link :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
-            {{ $t("nav.mentions") }}
+            {{ $t("nav.interactions") }}
           </router-link>
         </li>
         <li v-if='currentUser'>

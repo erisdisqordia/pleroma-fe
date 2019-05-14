@@ -1,6 +1,6 @@
 <template>
   <div class="notifications">
-    <div class="panel panel-default">
+    <div :class="mainClass">
       <div v-if="!noHeading" class="panel-heading">
         <div class="title">
           {{$t('notifications.notifications')}}
@@ -12,7 +12,7 @@
         <button v-if="unseenCount" @click.prevent="markAsSeen" class="read-button">{{$t('notifications.read')}}</button>
       </div>
       <div class="panel-body">
-        <div v-for="notification in visibleNotifications" :key="notification.id" class="notification" :class='{"unseen": !notification.seen}'>
+        <div v-for="notification in visibleNotifications" :key="notification.id" class="notification" :class='{"unseen": !minimalMode && !notification.seen}'>
           <div class="notification-overlay"></div>
           <notification :notification="notification"></notification>
         </div>

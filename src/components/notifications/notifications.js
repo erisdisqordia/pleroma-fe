@@ -8,7 +8,7 @@ import {
 
 const Notifications = {
   props: [
-    'noHeading'
+    'noHeading', 'minimalMode', 'filterMode'
   ],
   data () {
     return {
@@ -16,6 +16,9 @@ const Notifications = {
     }
   },
   computed: {
+    mainClass () {
+      return this.minimalMode ? '' : 'panel panel-default'
+    },
     notifications () {
       return notificationsFromStore(this.$store)
     },
@@ -26,7 +29,8 @@ const Notifications = {
       return unseenNotificationsFromStore(this.$store)
     },
     visibleNotifications () {
-      return visibleNotificationsFromStore(this.$store)
+      console.log(this.filterMode)
+      return visibleNotificationsFromStore(this.$store, this.filterMode)
     },
     unseenCount () {
       return this.unseenNotifications.length

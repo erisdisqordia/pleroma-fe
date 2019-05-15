@@ -58,7 +58,7 @@
       >
       </textarea>
       <div class="visibility-tray">
-        <span class="text-format" v-if="formattingOptionsEnabled">
+        <div class="text-format" v-if="formattingOptionsEnabled">
           <label for="post-content-type" class="select">
             <select id="post-content-type" v-model="newStatus.contentType" class="form-control">
               <option v-for="postFormat in postFormats" :key="postFormat" :value="postFormat">
@@ -67,7 +67,7 @@
             </select>
             <i class="icon-down-open"></i>
           </label>
-        </span>
+        </div>
 
         <scope-selector
           :showAll="showAllScopes"
@@ -250,7 +250,7 @@
   .form-group {
     display: flex;
     flex-direction: column;
-    padding: 0.3em 0.5em 0.6em;
+    padding: 0.25em 0.5em 0.5em;
     line-height:24px;
   }
 

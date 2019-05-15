@@ -571,15 +571,13 @@ $status-margin: 0.75em;
   }
 }
 
-.icon-reply:hover {
-  color: $fallback--cBlue;
-  color: var(--cBlue, $fallback--cBlue);
-  cursor: pointer;
-}
-
-.icon-reply.icon-reply-active {
-  color: $fallback--cBlue;
-  color: var(--cBlue, $fallback--cBlue);
+.button-icon.icon-reply {
+  &:not(.button-icon-disabled):hover,
+  &.button-icon-active {
+    color: $fallback--cBlue;
+    color: var(--cBlue, $fallback--cBlue);
+    cursor: pointer;
+  }
 }
 
 .status:hover .animated.avatar {

@@ -15,7 +15,7 @@ const Notifications = {
     minimalMode: Boolean,
     // Custom filter mode, an array of strings, possible values 'mention', 'repeat', 'like', 'follow', used to override global filter for use in "Interactions" timeline
     filterMode: Array
- },
+  },
   data () {
     return {
       bottomedOut: false

@@ -1,5 +1,5 @@
 <template>
-  <div class="notifications">
+  <div :class="{ minimal: minimalMode }" class="notifications">
     <div :class="mainClass">
       <div v-if="!noHeading" class="panel-heading">
         <div class="title">
@@ -22,7 +22,9 @@
           {{$t('notifications.no_more_notifications')}}
         </div>
         <a v-else-if="!loading" href="#" v-on:click.prevent="fetchOlderNotifications()">
-          <div class="new-status-notification text-center panel-footer">{{$t('notifications.load_older')}}</div>
+          <div class="new-status-notification text-center panel-footer">
+            {{ minimalMode ? $t('interactions.load_older') : $t('notifications.load_older')}}
+          </div>
         </a>
         <div v-else class="new-status-notification text-center panel-footer">
           <i class="icon-spin3 animate-spin"/>

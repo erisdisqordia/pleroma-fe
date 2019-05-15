@@ -7,9 +7,15 @@ import {
 } from '../../services/notification_utils/notification_utils.js'
 
 const Notifications = {
-  props: [
-    'noHeading', 'minimalMode', 'filterMode'
-  ],
+  props: {
+    // Disables display of panel header
+    noHeading: Boolean,
+    // Disables panel styles, unread mark, potentially other notification-related actions
+    // meant for "Interactions" timeline
+    minimalMode: Boolean,
+    // Custom filter mode, an array of strings, possible values 'mention', 'repeat', 'like', 'follow', used to override global filter for use in "Interactions" timeline
+    filterMode: Array
+ },
   data () {
     return {
       bottomedOut: false

@@ -26,6 +26,11 @@
             {{ $t("nav.dms") }}
           </router-link>
         </li>
+        <li v-if="currentUser" @click="toggleDrawer">
+          <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
+            {{ $t("nav.interactions") }}
+          </router-link>
+        </li>
       </ul>
       <ul>
         <li v-if="currentUser" @click="toggleDrawer">

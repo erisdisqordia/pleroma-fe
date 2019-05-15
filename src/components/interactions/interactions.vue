@@ -9,9 +9,9 @@
       ref="tabSwitcher"
       :onSwitch="onModeSwitch"
       >
-      <span data-tab-dummy data-filter="mentions" :label="$t('MENTIONS')"/>
-      <span data-tab-dummy data-filter="likes+repeats" :label="$t('LIKES AND REPEATS')"/>
-      <span data-tab-dummy data-filter="follows" :label="$t('FOLLOWS')"/>
+      <span data-tab-dummy data-filter="mentions" :label="$t('nav.mentions')"/>
+      <span data-tab-dummy data-filter="likes+repeats" :label="$t('interactions.favs_repeats')"/>
+      <span data-tab-dummy data-filter="follows" :label="$t('interactions.follows')"/>
     </tab-switcher>
     <Notifications
       ref="notifications"

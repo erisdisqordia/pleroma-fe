@@ -34,7 +34,7 @@ export default (store) => {
     { name: 'tag-timeline', path: '/tag/:tag', component: TagTimeline },
     { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
     { name: 'external-user-profile', path: '/users/:id', component: UserProfile },
-    { name: 'mentions', path: '/users/:username/interactions', component: Interactions },
+    { name: 'interactions', path: '/users/:username/interactions', component: Interactions },
     { name: 'dms', path: '/users/:username/dms', component: DMs },
     { name: 'settings', path: '/settings', component: Settings },
     { name: 'registration', path: '/registration', component: Registration },

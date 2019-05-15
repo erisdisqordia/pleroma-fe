@@ -626,17 +626,10 @@ nav {
 }
 
 .visibility-tray {
-  font-size: 1.2em;
-  cursor: pointer;
-
-  .selected {
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-  }
-
-  div {
-    padding-top: 5px;
-  }
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  padding-top: 5px;
 }
 
 .visibility-notice {

@@ -147,14 +147,6 @@
   }
 }
 
-.post-status-form {
-  .visibility-tray {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
-  }
-}
-
 .post-status-form, .login {
   .form-bottom {
     display: flex;

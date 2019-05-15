@@ -157,8 +157,9 @@
           </transition>
 
           <div v-if="!noHeading && !isPreview" class='status-actions media-body'>
-            <div v-if="loggedIn">
-              <i class="button-icon icon-reply" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')" :class="{'icon-reply-active': replying}"></i>
+            <div>
+              <i class="button-icon icon-reply" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')" :class="{'button-icon-active': replying}" v-if="loggedIn"/>
+              <i class="button-icon button-icon-disabled icon-reply" :title="$t('tool_tip.reply')" v-else />
               <span v-if="status.replies_count > 0">{{status.replies_count}}</span>
             </div>
             <retweet-button :visibility='status.visibility' :loggedIn='loggedIn' :status='status'></retweet-button>
@@ -570,15 +571,13 @@ $status-margin: 0.75em;
   }
 }
 
-.icon-reply:hover {
-  color: $fallback--cBlue;
-  color: var(--cBlue, $fallback--cBlue);
-  cursor: pointer;
-}
-
-.icon-reply.icon-reply-active {
-  color: $fallback--cBlue;
-  color: var(--cBlue, $fallback--cBlue);
+.button-icon.icon-reply {
+  &:not(.button-icon-disabled):hover,
+  &.button-icon-active {
+    color: $fallback--cBlue;
+    color: var(--cBlue, $fallback--cBlue);
+    cursor: pointer;
+  }
 }
 
 .status:hover .animated.avatar {

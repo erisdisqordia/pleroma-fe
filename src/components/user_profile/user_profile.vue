@@ -3,16 +3,28 @@
   <div v-if="user" class="user-profile panel panel-default">
     <UserCard :user="user" :switcher="true" :selected="timeline.viewing" rounded="top"/>
     <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
-      <Timeline
-        :label="$t('user_card.statuses')"
-        :disabled="!user.statuses_count"
-        :count="user.statuses_count"
-        :embedded="true"
-        :title="$t('user_profile.timeline_title')"
-        :timeline="timeline"
-        :timeline-name="'user'"
-        :user-id="userId"
-      />
+      <div :label="$t('user_card.statuses')" :disabled="!user.statuses_count">
+        <div class="timeline">
+          <template v-for="statusId in user.pinnedStatuseIds">
+            <Conversation
+              v-if="timeline.statusesObject[statusId]"
+              class="status-fadein"
+              :key="statusId"
+              :statusoid="timeline.statusesObject[statusId]"
+              :collapsable="true"
+              :showPinned="true"
+            />
+          </template>
+        </div>
+        <Timeline
+          :count="user.statuses_count"
+          :embedded="true"
+          :title="$t('user_profile.timeline_title')"
+          :timeline="timeline"
+          :timeline-name="'user'"
+          :user-id="userId"
+        />
+      </div>
       <div :label="$t('user_card.followees')" v-if="followsTabVisible" :disabled="!user.friends_count">
         <FriendList :userId="userId">
           <template slot="item" slot-scope="{item}">

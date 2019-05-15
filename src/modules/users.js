@@ -165,6 +165,15 @@ export const mutations = {
       state.currentUser.muteIds.push(muteId)
     }
   },
+  setPinned (state, status) {
+    const user = state.usersObject[status.user.id]
+    const index = user.pinnedStatuseIds.indexOf(status.id)
+    if (status.pinned && index === -1) {
+      user.pinnedStatuseIds.push(status.id)
+    } else if (!status.pinned && index !== -1) {
+      user.pinnedStatuseIds.splice(index, 1)
+    }
+  },
   setUserForStatus (state, status) {
     status.user = state.usersObject[status.user.id]
   },
@@ -318,13 +327,17 @@ const users = {
       store.commit('addNewUsers', users)
       store.commit('addNewUsers', retweetedUsers)
 
-      // Reconnect users to statuses
       each(statuses, (status) => {
+        // Reconnect users to statuses
         store.commit('setUserForStatus', status)
+        // Set pinned statuses to user
+        store.commit('setPinned', status)
       })
-      // Reconnect users to retweets
       each(compact(map(statuses, 'retweeted_status')), (status) => {
+        // Reconnect users to retweets
         store.commit('setUserForStatus', status)
+        // Set pinned retweets to user
+        store.commit('setPinned', status)
       })
     },
     addNewNotifications (store, { notifications }) {

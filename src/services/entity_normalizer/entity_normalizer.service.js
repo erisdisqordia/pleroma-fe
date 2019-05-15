@@ -131,6 +131,8 @@ export const parseUser = (data) => {
   output.statuses_count = data.statuses_count
   output.friendIds = []
   output.followerIds = []
+  output.pinnedStatuseIds = []
+
   if (data.pleroma) {
     output.follow_request_count = data.pleroma.follow_request_count
   }
@@ -141,6 +143,7 @@ export const parseUser = (data) => {
   }
 
   output.tags = output.tags || []
+  output.rights = output.rights || {}
 
   return output
 }
@@ -211,6 +214,7 @@ export const parseStatus = (data) => {
 
     output.summary_html = addEmojis(data.spoiler_text, data.emojis)
     output.external_url = data.url
+    output.pinned = data.pinned
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num

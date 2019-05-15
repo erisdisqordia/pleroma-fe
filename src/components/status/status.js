@@ -1,7 +1,7 @@
 import Attachment from '../attachment/attachment.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
-import DeleteButton from '../delete_button/delete_button.vue'
+import ExtraButtons from '../extra_buttons/extra_buttons.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCard from '../user_card/user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
@@ -26,7 +26,8 @@ const Status = {
     'replies',
     'isPreview',
     'noHeading',
-    'inlineExpanded'
+    'inlineExpanded',
+    'showPinned'
   ],
   data () {
     return {
@@ -37,6 +38,7 @@ const Status = {
       showPreview: false,
       showingTall: this.inConversation && this.focused,
       showingLongSubject: false,
+      error: null,
       expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
         ? !this.$store.state.instance.collapseMessageWithSubject
         : !this.$store.state.config.collapseMessageWithSubject,
@@ -269,13 +271,16 @@ const Status = {
         this.statusFromGlobalRepository.rebloggedBy
       )
       return uniqBy(combinedUsers, 'id')
+    },
+    ownStatus () {
+      return this.status.user.id === this.$store.state.users.currentUser.id
     }
   },
   components: {
     Attachment,
     FavoriteButton,
     RetweetButton,
-    DeleteButton,
+    ExtraButtons,
     PostStatusForm,
     UserCard,
     UserAvatar,
@@ -295,6 +300,12 @@ const Status = {
         default:
           return 'icon-globe'
       }
+    },
+    showError (error) {
+      this.error = error
+    },
+    clearError () {
+      this.error = undefined
     },
     linkClicked (event) {
       let { target } = event

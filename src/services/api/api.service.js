@@ -51,6 +51,8 @@ const MASTODON_STATUS_FAVORITEDBY_URL = id => `/api/v1/statuses/${id}/favourited
 const MASTODON_STATUS_REBLOGGEDBY_URL = id => `/api/v1/statuses/${id}/reblogged_by`
 const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
 const MASTODON_REPORT_USER_URL = '/api/v1/reports'
+const MASTODON_PIN_OWN_STATUS = id => `/api/v1/statuses/${id}/pin`
+const MASTODON_UNPIN_OWN_STATUS = id => `/api/v1/statuses/${id}/unpin`
 
 import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
@@ -208,6 +210,16 @@ const unfollowUser = ({id, credentials}) => {
     headers: authHeaders(credentials),
     method: 'POST'
   }).then((data) => data.json())
+}
+
+const pinOwnStatus = ({ id, credentials }) => {
+  return promisedRequest({ url: MASTODON_PIN_OWN_STATUS(id), credentials, method: 'POST' })
+    .then((data) => parseStatus(data))
+}
+
+const unpinOwnStatus = ({ id, credentials }) => {
+  return promisedRequest({ url: MASTODON_UNPIN_OWN_STATUS(id), credentials, method: 'POST' })
+    .then((data) => parseStatus(data))
 }
 
 const blockUser = ({id, credentials}) => {
@@ -488,6 +500,12 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
     .then((data) => data.map(isNotifications ? parseNotification : parseStatus))
 }
 
+const fetchPinnedStatuses = ({ id, credentials }) => {
+  const url = MASTODON_USER_TIMELINE_URL(id) + '?pinned=true'
+  return promisedRequest({ url, credentials })
+    .then((data) => data.map(parseStatus))
+}
+
 const verifyCredentials = (user) => {
   return fetch(LOGIN_URL, {
     method: 'POST',
@@ -708,6 +726,7 @@ const reportUser = ({credentials, userId, statusIds, comment, forward}) => {
 const apiService = {
   verifyCredentials,
   fetchTimeline,
+  fetchPinnedStatuses,
   fetchConversation,
   fetchStatus,
   fetchFriends,
@@ -715,6 +734,8 @@ const apiService = {
   fetchFollowers,
   followUser,
   unfollowUser,
+  pinOwnStatus,
+  unpinOwnStatus,
   blockUser,
   unblockUser,
   fetchUser,

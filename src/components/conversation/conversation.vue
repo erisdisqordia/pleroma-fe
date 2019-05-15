@@ -14,6 +14,7 @@
       :inlineExpanded="collapsable && isExpanded"
       :statusoid="status"
       :expandable='!isExpanded'
+      :showPinned="showPinned"
       :focused="focused(status.id)"
       :inConversation="isExpanded"
       :highlight="getHighlight()"

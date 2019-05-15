@@ -1,5 +1,9 @@
 <template>
   <div class="status-el" v-if="!hideStatus" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
+    <div v-if="error" class="alert error">
+      {{error}}
+      <i class="button-icon icon-cancel" @click="clearError"></i>
+    </div>
     <template v-if="muted && !isPreview">
       <div class="media status container muted">
         <small>
@@ -12,6 +16,10 @@
       </div>
     </template>
     <template v-else>
+      <div v-if="showPinned && statusoid.pinned" class="status-pin">
+        <i class="fa icon-pin faint"></i>
+        <span class="faint">{{$t('status.pinned')}}</span>
+      </div>
       <div v-if="retweet && !noHeading && !inConversation" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
         <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :user="statusoid.user"/>
         <div class="media-body faint">
@@ -95,7 +103,7 @@
               v-if="preview"
               :isPreview="true"
               :statusoid="preview"
-              :compact=true
+              :compact="true"
             />
             <div v-else class="status-preview status-preview-loading">
               <i class="icon-spin4 animate-spin"></i>
@@ -164,7 +172,7 @@
             </div>
             <retweet-button :visibility='status.visibility' :loggedIn='loggedIn' :status='status'></retweet-button>
             <favorite-button :loggedIn='loggedIn' :status='status'></favorite-button>
-            <delete-button :status='status'></delete-button>
+            <extra-buttons :status="status" @onError="showError" @onSuccess="clearError"></extra-buttons>
           </div>
         </div>
       </div>
@@ -197,6 +205,13 @@ $status-margin: 0.75em;
 .status-preview-container {
   position: relative;
   max-width: 100%;
+}
+
+.status-pin {
+  padding: $status-margin $status-margin 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .status-preview {

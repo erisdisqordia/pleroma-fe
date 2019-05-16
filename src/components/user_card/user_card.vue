@@ -276,38 +276,36 @@
     display: flex;
     font-weight: light;
     font-size: 15px;
-    padding-right: 0.1em;
-    width: 100%;
-  }
 
-  .user-screen-name-role {
-    min-width: 1px;
-    flex: 0 1 auto;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
+    .user-screen-name-role {
+      min-width: 1px;
+      flex: 0 1 auto;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
 
-  .user-screen-name {
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-  }
+    .user-screen-name {
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
 
-  .dailyAvg {
-    min-width: 1px;
-    flex: 0 0 auto;
-    margin-left: 1em;
-    font-size: 0.7em;
-    color: $fallback--text;
-    color: var(--text, $fallback--text);
-  }
+    .dailyAvg {
+      min-width: 1px;
+      flex: 0 0 auto;
+      margin-left: 1em;
+      font-size: 0.7em;
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
 
-  // TODO use proper colors
-  .staff {
-    text-transform: capitalize;
-    color: $fallback--text;
-    color: var(--btnText, $fallback--text);
-    background-color: $fallback--fg;
-    background-color: var(--btn, $fallback--fg);
+    // TODO use proper colors
+    .staff {
+      text-transform: capitalize;
+      color: $fallback--text;
+      color: var(--btnText, $fallback--text);
+      background-color: $fallback--fg;
+      background-color: var(--btn, $fallback--fg);
+    }
   }
 
   .user-meta {

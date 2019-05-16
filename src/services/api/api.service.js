@@ -14,8 +14,8 @@ const FOLLOW_REQUESTS_URL = '/api/pleroma/friend_requests'
 const APPROVE_USER_URL = '/api/pleroma/friendships/approve'
 const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const TAG_USER_URL = '/api/pleroma/admin/users/tag'
-const PERMISSION_GROUP_URL = (nickname, right) => `/api/pleroma/admin/users/${nickname}/permission_group/${right}`
-const ACTIVATION_STATUS_URL = nickname => `/api/pleroma/admin/users/${nickname}/activation_status`
+const PERMISSION_GROUP_URL = (screenName, right) => `/api/pleroma/admin/users/${screenName}/permission_group/${right}`
+const ACTIVATION_STATUS_URL = screenName => `/api/pleroma/admin/users/${screenName}/activation_status`
 const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 

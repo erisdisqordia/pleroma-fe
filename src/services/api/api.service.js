@@ -14,9 +14,9 @@ const FOLLOW_REQUESTS_URL = '/api/pleroma/friend_requests'
 const APPROVE_USER_URL = '/api/pleroma/friendships/approve'
 const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const TAG_USER_URL = '/api/pleroma/admin/users/tag'
-const PERMISSION_GROUP_URL = '/api/pleroma/admin/permission_group'
-const ACTIVATION_STATUS_URL = '/api/pleroma/admin/activation_status'
-const ADMIN_USER_URL = '/api/pleroma/admin/user'
+const PERMISSION_GROUP_URL = (nickname, right) => `/api/pleroma/admin/users/${nickname}/permission_group/${right}`
+const ACTIVATION_STATUS_URL = nickname => `/api/pleroma/admin/users/${nickname}/activation_status`
+const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
@@ -399,7 +399,7 @@ const untagUser = ({tag, credentials, ...options}) => {
 const addRight = ({right, credentials, ...user}) => {
   const screenName = user.screen_name
 
-  return fetch(`${PERMISSION_GROUP_URL}/${screenName}/${right}`, {
+  return fetch(PERMISSION_GROUP_URL(screenName, right), {
     method: 'POST',
     headers: authHeaders(credentials),
     body: {}
@@ -409,7 +409,7 @@ const addRight = ({right, credentials, ...user}) => {
 const deleteRight = ({right, credentials, ...user}) => {
   const screenName = user.screen_name
 
-  return fetch(`${PERMISSION_GROUP_URL}/${screenName}/${right}`, {
+  return fetch(PERMISSION_GROUP_URL(screenName, right), {
     method: 'DELETE',
     headers: authHeaders(credentials),
     body: {}
@@ -425,7 +425,7 @@ const setActivationStatus = ({status, credentials, ...user}) => {
   const headers = authHeaders(credentials)
   headers['Content-Type'] = 'application/json'
 
-  return fetch(`${ACTIVATION_STATUS_URL}/${screenName}.json`, {
+  return fetch(ACTIVATION_STATUS_URL(screenName), {
     method: 'PUT',
     headers: headers,
     body: JSON.stringify(body)
@@ -436,7 +436,7 @@ const deleteUser = ({credentials, ...user}) => {
   const screenName = user.screen_name
   const headers = authHeaders(credentials)
 
-  return fetch(`${ADMIN_USER_URL}.json?nickname=${screenName}`, {
+  return fetch(`${ADMIN_USERS_URL}?nickname=${screenName}`, {
     method: 'DELETE',
     headers: headers
   })

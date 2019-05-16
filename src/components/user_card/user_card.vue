@@ -6,7 +6,7 @@
         <router-link :to="userProfileLink(user)">
           <UserAvatar :betterShadow="betterShadow" :user="user"/>
         </router-link>
-        <div class="name-and-screen-name">
+        <div class="user-summary">
           <div class="top-line">
             <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
             <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
@@ -18,12 +18,14 @@
             </a>
           </div>
 
-          <router-link class='user-screen-name' :to="userProfileLink(user)">
-            <span class="handle">@{{user.screen_name}}
+          <div class="bottom-line">
+            <span class="user-screen-name-role">
+              <router-link class="user-screen-name" :to="userProfileLink(user)">@{{user.screen_name}}</router-link>
               <span class="alert staff" v-if="!hideBio && !!visibleRole">{{visibleRole}}</span>
-            </span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
+            </span>
+            <span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
-          </router-link>
+          </div>
         </div>
       </div>
       <div class="user-meta">
@@ -232,7 +234,7 @@
     opacity: .8;
   }
 
-  .name-and-screen-name {
+  .user-summary {
     display: block;
     margin-left: 0.6em;
     text-align: left;
@@ -249,6 +251,7 @@
       vertical-align: middle;
       object-fit: contain
     }
+
     .top-line {
       display: flex;
     }
@@ -269,40 +272,42 @@
     }
   }
 
-  .user-screen-name {
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-    display: inline-block;
+  .bottom-line {
+    display: flex;
     font-weight: light;
     font-size: 15px;
     padding-right: 0.1em;
     width: 100%;
-    display: flex;
+  }
 
-    .dailyAvg {
-      min-width: 1px;
-      flex: 0 0 auto;
-      margin-left: 1em;
-      font-size: 0.7em;
-      color: $fallback--text;
-      color: var(--text, $fallback--text);
-    }
+  .user-screen-name-role {
+    min-width: 1px;
+    flex: 0 1 auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 
-    .handle {
-      min-width: 1px;
-      flex: 0 1 auto;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
+  .user-screen-name {
+    color: $fallback--lightText;
+    color: var(--lightText, $fallback--lightText);
+  }
 
-    // TODO use proper colors
-    .staff {
-      text-transform: capitalize;
-      color: $fallback--text;
-      color: var(--btnText, $fallback--text);
-      background-color: $fallback--fg;
-      background-color: var(--btn, $fallback--fg);
-    }
+  .dailyAvg {
+    min-width: 1px;
+    flex: 0 0 auto;
+    margin-left: 1em;
+    font-size: 0.7em;
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
+  }
+
+  // TODO use proper colors
+  .staff {
+    text-transform: capitalize;
+    color: $fallback--text;
+    color: var(--btnText, $fallback--text);
+    background-color: $fallback--fg;
+    background-color: var(--btn, $fallback--fg);
   }
 
   .user-meta {

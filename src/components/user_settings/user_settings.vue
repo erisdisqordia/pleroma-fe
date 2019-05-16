@@ -251,6 +251,10 @@
     margin: 0;
   }
 
+  .visibility-tray {
+    padding-top: 5px;
+  }
+
   input[type=file] {
     padding: 5px;
     height: auto;

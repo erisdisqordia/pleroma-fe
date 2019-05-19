@@ -530,7 +530,7 @@
     "report": "Report",
     "statuses": "Statuses",
     "subscribe": "Subscribe",
-    "subscribed": "Subscribed",
+    "unsubscribe": "Unsubscribe",
     "unblock": "Unblock",
     "unblock_progress": "Unblocking...",
     "block_progress": "Blocking...",

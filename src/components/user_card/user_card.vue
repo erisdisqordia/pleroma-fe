@@ -67,7 +67,7 @@
             </template>
           </button>
           <ProgressButton class="btn btn-default" :click="subscribeUser" :title="$t('user_card.subscribe')" v-if="!user.subscribed">
-            <i class="icon-bell-off" />
+            <i class="icon-bell-alt" />
           </ProgressButton>
           <ProgressButton class="btn btn-default pressed" :click="unsubscribeUser" :title="$t('user_card.unsubscribe')" v-else>
             <i class="icon-bell-alt" />

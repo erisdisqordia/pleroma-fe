@@ -54,6 +54,9 @@ const ExtraButtons = {
     },
     canPin () {
       return this.ownStatus && (this.status.visibility === 'public' || this.status.visibility === 'unlisted')
+    },
+    enabled () {
+      return this.canPin || this.canDelete
     }
   }
 }

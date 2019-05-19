@@ -3,7 +3,7 @@
     trigger="click"
     @hide='showDropDown = false'
     append-to-body
-    v-if="showPopper"
+    v-if="enabled && showPopper"
     :options="{
       placement: 'top',
       modifiers: {

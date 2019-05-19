@@ -152,6 +152,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
+    padding-top: 5px;
   }
 }
 

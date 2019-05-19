@@ -1,5 +1,5 @@
 <template>
-<div v-if="!showNothing">
+<div v-if="!showNothing" class="scope-selector">
   <i class="icon-mail-alt"
      :class="css.direct"
      :title="$t('post_status.scope.direct')"
@@ -28,3 +28,19 @@
 </template>
 
 <script src="./scope_selector.js"></script>
+
+<style lang="scss">
+@import '../../_variables.scss';
+
+.scope-selector {
+  i {
+    font-size: 1.2em;
+    cursor: pointer;
+
+    &.selected {
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
+  }
+}
+</style>

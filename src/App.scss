@@ -625,20 +625,6 @@ nav {
   text-align: right;
 }
 
-.visibility-tray {
-  font-size: 1.2em;
-  cursor: pointer;
-
-  .selected {
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-  }
-
-  div {
-    padding-top: 5px;
-  }
-}
-
 .visibility-notice {
   padding: .5em;
   border: 1px solid $fallback--faint;

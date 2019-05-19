@@ -257,7 +257,6 @@ $status-margin: 0.75em;
 }
 
 .status-el {
-  hyphens: auto;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;

@@ -19,10 +19,8 @@
           </div>
 
           <div class="bottom-line">
-            <span class="user-screen-name-role">
-              <router-link class="user-screen-name" :to="userProfileLink(user)">@{{user.screen_name}}</router-link>
-              <span class="alert staff" v-if="!hideBio && !!visibleRole">{{visibleRole}}</span>
-            </span>
+            <router-link class="user-screen-name" :to="userProfileLink(user)">@{{user.screen_name}}</router-link>
+            <span class="alert staff" v-if="!hideBio && !!visibleRole">{{visibleRole}}</span>
             <span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
           </div>
@@ -277,14 +275,11 @@
     font-weight: light;
     font-size: 15px;
 
-    .user-screen-name-role {
+    .user-screen-name {
       min-width: 1px;
       flex: 0 1 auto;
       text-overflow: ellipsis;
       overflow: hidden;
-    }
-
-    .user-screen-name {
       color: $fallback--lightText;
       color: var(--lightText, $fallback--lightText);
     }
@@ -300,6 +295,7 @@
 
     // TODO use proper colors
     .staff {
+      flex: none;
       text-transform: capitalize;
       color: $fallback--text;
       color: var(--btnText, $fallback--text);

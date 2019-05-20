@@ -46,16 +46,8 @@
         </div>
       </div>
       <div v-if="loggedIn && isOtherUser" class="user-interactions">
-        <div class="btn-group">
-          <button @click="unfollowUser" class="btn btn-default pressed" :disabled="followRequestInProgress" :title="$t('user_card.follow_unfollow')" v-if="user.following">
-            <template v-if="followRequestInProgress">
-              {{ $t('user_card.follow_progress') }}
-            </template>
-            <template v-else>
-              {{ $t('user_card.following') }}
-            </template>
-          </button>
-          <button @click="followUser" class="btn btn-default" :disabled="followRequestInProgress" :title="followRequestSent ? $t('user_card.follow_again') : ''" v-else>
+        <div v-if="!user.following">
+          <button @click="followUser" class="btn btn-default btn-block" :disabled="followRequestInProgress" :title="followRequestSent ? $t('user_card.follow_again') : ''">
             <template v-if="followRequestInProgress">
               {{ $t('user_card.follow_progress') }}
             </template>
@@ -65,6 +57,16 @@
             <template v-else>
               {{ $t('user_card.follow') }}
             </template>
+          </button>
+        </div>
+        <div v-else-if="followRequestInProgress">
+          <button @click="unfollowUser" class="btn btn-default btn-block pressed" disabled :title="$t('user_card.follow_unfollow')">
+            {{ $t('user_card.follow_progress') }}
+          </button>
+        </div>
+        <div class="btn-group" v-else>
+          <button @click="unfollowUser" class="btn btn-default pressed" :title="$t('user_card.follow_unfollow')">
+            {{ $t('user_card.following') }}
           </button>
           <ProgressButton class="btn btn-default" :click="subscribeUser" :title="$t('user_card.subscribe')" v-if="!user.subscribed">
             <i class="icon-bell-alt" />

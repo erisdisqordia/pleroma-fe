@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet && !inConversation }]" :style="[ userStyle ]" class="media status" v-bind="generateTagAttributes(status.tags)">
+      <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet && !inConversation }]" :style="[ userStyle ]" class="media status" :data-tags="tags">
         <div v-if="!noHeading" class="media-left">
           <router-link :to="userProfileLink" @click.stop.prevent.capture.native="toggleUserExpanded">
             <UserAvatar :compact="compact" :betterShadow="betterShadow" :user="status.user"/>

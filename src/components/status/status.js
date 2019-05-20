@@ -274,6 +274,9 @@ const Status = {
     },
     ownStatus () {
       return this.status.user.id === this.$store.state.users.currentUser.id
+    },
+    tags () {
+      return this.status.tags.filter(tagObj => tagObj.hasOwnProperty('name')).map(tagObj => tagObj.name).join(' ')
     }
   },
   components: {
@@ -289,13 +292,6 @@ const Status = {
     AvatarList
   },
   methods: {
-    generateTagAttributes (tags) {
-      let res = {}
-      for (let tag of tags) {
-        res['data-tag-' + tag.name] = tag.name
-      }
-      return res
-    },
     visibilityIcon (visibility) {
       switch (visibility) {
         case 'private':

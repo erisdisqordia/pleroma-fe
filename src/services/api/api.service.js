@@ -1,7 +1,5 @@
 /* eslint-env browser */
 const LOGIN_URL = '/api/account/verify_credentials.json'
-const ALL_FOLLOWING_URL = '/api/qvitter/allfollowing'
-const MENTIONS_URL = '/api/statuses/mentions.json'
 const REGISTRATION_URL = '/api/account/register.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
@@ -320,13 +318,6 @@ const fetchFollowers = ({id, maxId, sinceId, limit = 20, credentials}) => {
     .then((data) => data.map(parseUser))
 }
 
-const fetchAllFollowing = ({username, credentials}) => {
-  const url = `${ALL_FOLLOWING_URL}/${username}.json`
-  return fetch(url, { headers: authHeaders(credentials) })
-    .then((data) => data.json())
-    .then((data) => data.map(parseUser))
-}
-
 const fetchFollowRequests = ({credentials}) => {
   const url = FOLLOW_REQUESTS_URL
   return fetch(url, { headers: authHeaders(credentials) })
@@ -446,7 +437,6 @@ const fetchTimeline = ({timeline, credentials, since = false, until = false, use
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
     friends: MASTODON_USER_HOME_TIMELINE_URL,
-    mentions: MENTIONS_URL,
     dms: MASTODON_DIRECT_MESSAGES_TIMELINE_URL,
     notifications: MASTODON_USER_NOTIFICATIONS_URL,
     'publicAndExternal': MASTODON_PUBLIC_TIMELINE,
@@ -747,7 +737,6 @@ const apiService = {
   postStatus,
   deleteStatus,
   uploadMedia,
-  fetchAllFollowing,
   fetchMutes,
   muteUser,
   unmuteUser,

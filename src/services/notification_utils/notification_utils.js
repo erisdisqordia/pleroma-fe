@@ -25,11 +25,13 @@ const sortById = (a, b) => {
   }
 }
 
-export const visibleNotificationsFromStore = store => {
+export const visibleNotificationsFromStore = (store, types) => {
   // map is just to clone the array since sort mutates it and it causes some issues
   let sortedNotifications = notificationsFromStore(store).map(_ => _).sort(sortById)
   sortedNotifications = sortBy(sortedNotifications, 'seen')
-  return sortedNotifications.filter((notification) => visibleTypes(store).includes(notification.type))
+  return sortedNotifications.filter(
+    (notification) => (types || visibleTypes(store)).includes(notification.type)
+  )
 }
 
 export const unseenNotificationsFromStore = store =>

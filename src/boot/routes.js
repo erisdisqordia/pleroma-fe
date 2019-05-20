@@ -3,7 +3,7 @@ import PublicAndExternalTimeline from 'components/public_and_external_timeline/p
 import FriendsTimeline from 'components/friends_timeline/friends_timeline.vue'
 import TagTimeline from 'components/tag_timeline/tag_timeline.vue'
 import ConversationPage from 'components/conversation-page/conversation-page.vue'
-import Mentions from 'components/mentions/mentions.vue'
+import Interactions from 'components/interactions/interactions.vue'
 import DMs from 'components/dm_timeline/dm_timeline.vue'
 import UserProfile from 'components/user_profile/user_profile.vue'
 import Settings from 'components/settings/settings.vue'
@@ -34,7 +34,7 @@ export default (store) => {
     { name: 'tag-timeline', path: '/tag/:tag', component: TagTimeline },
     { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
     { name: 'external-user-profile', path: '/users/:id', component: UserProfile },
-    { name: 'mentions', path: '/users/:username/mentions', component: Mentions },
+    { name: 'interactions', path: '/users/:username/interactions', component: Interactions },
     { name: 'dms', path: '/users/:username/dms', component: DMs },
     { name: 'settings', path: '/settings', component: Settings },
     { name: 'registration', path: '/registration', component: Registration },

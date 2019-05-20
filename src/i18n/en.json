@@ -60,6 +60,7 @@
     "chat": "Local Chat",
     "friend_requests": "Follow Requests",
     "mentions": "Mentions",
+    "interactions": "Interactions",
     "dms": "Direct Messages",
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
@@ -77,6 +78,11 @@
     "read": "Read!",
     "repeated_you": "repeated your status",
     "no_more_notifications": "No more notifications"
+  },
+  "interactions": {
+    "favs_repeats": "Repeats and Favorites",
+    "follows": "New follows",
+    "load_older": "Load older interactions"
   },
   "post_status": {
     "new_status": "Post new status",

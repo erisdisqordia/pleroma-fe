@@ -7,15 +7,24 @@ import {
 } from '../../services/notification_utils/notification_utils.js'
 
 const Notifications = {
-  props: [
-    'noHeading'
-  ],
+  props: {
+    // Disables display of panel header
+    noHeading: Boolean,
+    // Disables panel styles, unread mark, potentially other notification-related actions
+    // meant for "Interactions" timeline
+    minimalMode: Boolean,
+    // Custom filter mode, an array of strings, possible values 'mention', 'repeat', 'like', 'follow', used to override global filter for use in "Interactions" timeline
+    filterMode: Array
+  },
   data () {
     return {
       bottomedOut: false
     }
   },
   computed: {
+    mainClass () {
+      return this.minimalMode ? '' : 'panel panel-default'
+    },
     notifications () {
       return notificationsFromStore(this.$store)
     },
@@ -26,7 +35,8 @@ const Notifications = {
       return unseenNotificationsFromStore(this.$store)
     },
     visibleNotifications () {
-      return visibleNotificationsFromStore(this.$store)
+      console.log(this.filterMode)
+      return visibleNotificationsFromStore(this.$store, this.filterMode)
     },
     unseenCount () {
       return this.unseenNotifications.length

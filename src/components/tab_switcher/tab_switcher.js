@@ -4,15 +4,18 @@ import './tab_switcher.scss'
 
 export default Vue.component('tab-switcher', {
   name: 'TabSwitcher',
-  props: ['renderOnlyFocused'],
+  props: ['renderOnlyFocused', 'onSwitch'],
   data () {
     return {
       active: this.$slots.default.findIndex(_ => _.tag)
     }
   },
   methods: {
-    activateTab (index) {
+    activateTab (index, dataset) {
       return () => {
+        if (typeof this.onSwitch === 'function') {
+          this.onSwitch.call(null, index, this.$slots.default[index].elm.dataset)
+        }
         this.active = index
       }
     }
@@ -37,7 +40,11 @@ export default Vue.component('tab-switcher', {
 
             return (
               <div class={ classesWrapper.join(' ')}>
-                <button disabled={slot.data.attrs.disabled} onClick={this.activateTab(index)} class={ classesTab.join(' ') }>{slot.data.attrs.label}</button>
+                <button
+                  disabled={slot.data.attrs.disabled}
+                  onClick={this.activateTab(index)}
+                  class={classesTab.join(' ')}>
+                {slot.data.attrs.label}</button>
               </div>
             )
           })

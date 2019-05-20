@@ -177,7 +177,6 @@
         </div>
       </div>
       <div class="container" v-if="replying">
-        <div class="reply-left"/>
         <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" :copy-message-scope="status.visibility" :subject="replySubject" v-on:posted="toggleReplying"/>
       </div>
     </template>
@@ -631,16 +630,11 @@ a.unmute {
   margin-left: auto;
 }
 
-.reply-left {
-  flex: 0;
-  min-width: 48px;
-}
-
 .reply-body {
   flex: 1;
 }
 
-.timeline > {
+.timeline :not(.panel-disabled) > {
   .status-el:last-child {
     border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
     border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);

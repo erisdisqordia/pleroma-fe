@@ -19,7 +19,7 @@ if (typeof arg === 'undefined') {
   console.log('')
   console.log('There are no other arguments or options. Make an issue if you encounter a bug or want')
   console.log('some feature to be implemented. Merge requests are welcome as well.')
-  return
+  process.exit()
 }
 
 const english = require('./en.json')

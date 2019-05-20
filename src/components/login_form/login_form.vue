@@ -50,6 +50,10 @@
 @import '../../_variables.scss';
 
 .login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6em;
+
   .btn {
     min-height: 28px;
     width: 10em;
@@ -66,9 +70,30 @@
     align-items: center;
     justify-content: space-between;
   }
-}
 
-.login {
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 0.3em 0.5em 0.6em;
+    line-height:24px;
+  }
+
+  .form-bottom {
+    display: flex;
+    padding: 0.5em;
+    height: 32px;
+
+    button {
+      width: 10em;
+    }
+
+    p {
+      margin: 0.35em;
+      padding: 0.35em;
+      display: flex;
+    }
+  }
+
   .error {
     text-align: center;
 

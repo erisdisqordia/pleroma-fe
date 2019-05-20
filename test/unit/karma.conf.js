@@ -13,7 +13,7 @@ var projectRoot = path.resolve(__dirname, '../../')
 var webpackConfig = merge(baseConfig, {
   // use inline sourcemap for karma-sourcemap-loader
   module: {
-    loaders: utils.styleLoaders()
+    rules: utils.styleLoaders()
   },
   devtool: '#inline-source-map',
   // vue: {
@@ -53,11 +53,18 @@ module.exports = function (config) {
     // 1. install corresponding karma launcher
     //    http://karma-runner.github.io/0.13/config/browsers.html
     // 2. add it to the `browsers` array below.
-    browsers: ['PhantomJS'],
+    browsers: ['FirefoxHeadless'],
     frameworks: ['mocha', 'sinon-chai'],
     reporters: ['mocha'],
+    customLaunchers: {
+      'FirefoxHeadless': {
+        base: 'Firefox',
+        flags: [
+          '-headless',
+        ]
+      }
+    },
     files: [
-      '../../node_modules/@babel/polyfill/dist/polyfill.js',
       './index.js'
     ],
     preprocessors: {

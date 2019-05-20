@@ -289,6 +289,13 @@ const Status = {
     AvatarList
   },
   methods: {
+    generateTagAttributes(tags) {
+        let res = {};
+        for (let tag of tags) {
+            res['data-tag-'+tag.name] = tag.name;
+        }
+        return res;
+    },
     visibilityIcon (visibility) {
       switch (visibility) {
         case 'private':

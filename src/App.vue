@@ -49,6 +49,7 @@
     </div>
     <chat-panel :floating="true" v-if="currentUser && chat" class="floating-chat mobile-hidden"></chat-panel>
     <UserReportingModal />
+    <portal-target name="modal" />
   </div>
 </template>
 

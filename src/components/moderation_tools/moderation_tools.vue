@@ -65,18 +65,20 @@
       {{ $t('user_card.admin_menu.moderation') }}
     </button>
   </Popper>
-  <DialogModal v-if="showDeleteUserDialog" :onCancel='deleteUserDialog.bind(this, false)'>
-    <span slot="header">{{ $t('user_card.admin_menu.delete_user') }}</span>
-    <p>{{ $t('user_card.admin_menu.delete_user_confirmation') }}</p>
-    <span slot="footer">
-      <button @click='deleteUserDialog(false)'>
-        {{ $t('general.cancel') }}
-      </button>
-      <button class="danger" @click='deleteUser()'>
-        {{ $t('user_card.admin_menu.delete_user') }}
-      </button>
-    </span>
-  </DialogModal>
+  <portal to="modal">
+    <DialogModal v-if="showDeleteUserDialog" :onCancel='deleteUserDialog.bind(this, false)'>
+      <template slot="header">{{ $t('user_card.admin_menu.delete_user') }}</template>
+      <p>{{ $t('user_card.admin_menu.delete_user_confirmation') }}</p>
+      <template slot="footer">
+        <button class="btn btn-default" @click='deleteUserDialog(false)'>
+          {{ $t('general.cancel') }}
+        </button>
+        <button class="btn btn-default danger" @click='deleteUser()'>
+          {{ $t('user_card.admin_menu.delete_user') }}
+        </button>
+      </template>
+    </DialogModal>
+  </portal>
 </div>
 </template>
 

@@ -2,16 +2,30 @@
   "_pleroma_theme_version": 2,
   "name": "Mammal",
   "theme": {
-    "fonts": {
-      "interface": { "family": "Roboto, sans-serif" },
-      "input": { "family": "Roboto, sans-serif" },
-      "post": { "family": "Roboto, sans-serif" },
-      "postCode": { "family": "Roboto Mono, monospace" }
-    },
     "shadows": {
       "button": [],
-      "buttonHover": [],
-      "buttonPressed": [],
+      "buttonHover": [
+        {
+          "x": "0",
+          "y": "0",
+          "blur": "0",
+          "spread": 1024,
+          "color": "#56a7e1",
+          "alpha": "1",
+          "inset": true
+        }
+      ],
+      "buttonPressed": [
+        {
+          "x": "0",
+          "y": "0",
+          "blur": "0",
+          "spread": 1024,
+          "color": "#56a7e1",
+          "alpha": "1",
+          "inset": true
+        }
+      ],
       "panel": [],
       "panelHeader": [],
       "topBar": []

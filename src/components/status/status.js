@@ -274,6 +274,9 @@ const Status = {
     },
     ownStatus () {
       return this.status.user.id === this.$store.state.users.currentUser.id
+    },
+    tags () {
+      return this.status.tags.filter(tagObj => tagObj.hasOwnProperty('name')).map(tagObj => tagObj.name).join(' ')
     }
   },
   components: {

@@ -192,6 +192,8 @@ export const parseStatus = (data) => {
 
     output.statusnet_html = addEmojis(data.content, data.emojis)
 
+    output.tags = data.tags
+
     if (data.pleroma) {
       const { pleroma } = data
       output.text = pleroma.content ? data.pleroma.content['text/plain'] : data.content

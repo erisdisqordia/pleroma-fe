@@ -2,6 +2,10 @@
   "chat": {
     "title": "צ'אט"
   },
+  "exporter": {
+    "export": "ייצוא",
+    "processing": "מעבד, בקרוב תופיע אפשרות להוריד את הקובץ"
+  },
   "features_panel": {
     "chat": "צ'אט",
     "gopher": "גופר",
@@ -17,23 +21,53 @@
   },
   "general": {
     "apply": "החל",
-    "submit": "שלח"
+    "submit": "שלח",
+    "more": "עוד",
+    "generic_error": "קרתה שגיאה",
+    "optional": "לבחירה",
+    "show_more": "הראה עוד",
+    "show_less": "הראה פחות",
+    "cancel": "בטל"
+  },
+  "image_cropper": {
+    "crop_picture": "חתוך תמונה",
+    "save": "שמור",
+    "save_without_cropping": "שמור בלי לחתוך",
+    "cancel": "בטל"
+  },
+  "importer": {
+    "submit": "שלח",
+    "success": "ייובא בהצלחה.",
+    "error": "אירעתה שגיאה בזמן ייבוא קובץ זה."
   },
   "login": {
     "login": "התחבר",
+    "description": "היכנס עם OAuth",
     "logout": "התנתק",
     "password": "סיסמה",
     "placeholder": "למשל lain",
     "register": "הירשם",
-    "username": "שם המשתמש"
+    "username": "שם המשתמש",
+    "hint": "הירשם על מנת להצטרף לדיון"
+  },
+  "media_modal": {
+    "previous": "הקודם",
+    "next": "הבא"
   },
   "nav": {
+    "about": "על-אודות",
+    "back": "חזור",
     "chat": "צ'אט מקומי",
     "friend_requests": "בקשות עקיבה",
     "mentions": "אזכורים",
+    "interactions": "אינטרקציות",
+    "dms": "הודעות ישירות",
     "public_tl": "ציר הזמן הציבורי",
     "timeline": "ציר הזמן",
-    "twkn": "כל הרשת הידועה"
+    "twkn": "כל הרשת הידועה",
+    "user_search": "חיפוש משתמש",
+    "who_to_follow": "אחרי מי לעקוב",
+    "preferences": "העדפות"
   },
   "notifications": {
     "broken_favorite": "סטאטוס לא ידוע, מחפש...",
@@ -42,19 +76,35 @@
     "load_older": "טען התראות ישנות",
     "notifications": "התראות",
     "read": "קרא!",
-    "repeated_you": "חזר על הסטטוס שלך"
+    "repeated_you": "חזר על הסטטוס שלך",
+    "no_more_notifications": "לא עוד התראות"
+  },
+  "interactions": {
+    "favs_repeats": "חזרות ומועדפים",
+    "follows": "עוקבים חדשים",
+    "load_older": "טען אינטרקציות ישנות"
   },
   "post_status": {
+    "new_status": "פרסם סטאטוס חדש",
     "account_not_locked_warning": "המשתמש שלך אינו {0}. כל אחד יכול לעקוב אחריך ולראות את ההודעות לעוקבים-בלבד שלך.",
     "account_not_locked_warning_link": "נעול",
     "attachments_sensitive": "סמן מסמכים מצורפים כלא בטוחים לצפייה",
     "content_type": {
-      "text/plain": "טקסט פשוט"
+      "text/plain": "טקסט פשוט",
+      "text/html": "HTML",
+      "text/markdown": "Markdown",
+      "text/bbcode": "BBCode"
     },
     "content_warning": "נושא (נתון לבחירה)",
     "default": "הרגע נחת ב-ל.א.",
-    "direct_warning": "הודעה זו תהיה זמינה רק לאנשים המוזכרים.",
+    "direct_warning_to_all": "הודעה זו תהיה נראית לכל המשתמשים המוזכרים.",
+    "direct_warning_to_first_only": "הודעה זו תהיה נראית לכל המשתמשים במוזכרים בתחילת ההודעה בלבד.",
     "posting": "מפרסם",
+    "scope_notice": {
+      "public": "הודעה זו תהיה נראית לכולם",
+      "private": "הודעה זו תהיה נראית לעוקבים שלך בלבד",
+      "unlisted": "הודעה זו לא תהיה נראית בציר זמן הציבורי או בכל הרשת הידועה"
+    },
     "scope": {
       "direct": "ישיר - שלח לאנשים המוזכרים בלבד",
       "private": "עוקבים-בלבד - שלח לעוקבים בלבד",
@@ -68,7 +118,23 @@
     "fullname": "שם תצוגה",
     "password_confirm": "אישור סיסמה",
     "registration": "הרשמה",
-    "token": "טוקן הזמנה"
+    "token": "טוקן הזמנה",
+    "captcha": "אימות אנוש",
+    "new_captcha": "לחץ על התמונה על מנת לקבל אימות אנוש חדש",
+    "username_placeholder": "למשל lain",
+    "fullname_placeholder": "למשל Lain Iwakura",
+    "bio_placeholder": "למשל\nהיי, אני ליין.\nאני ילדת אנימה שגרה בפרוורי יפן. אולי אתם מכירים אותי מהWired.",
+    "validations": {
+      "username_required": "לא יכול להישאר ריק",
+      "fullname_required": "לא יכול להישאר ריק",
+      "email_required": "לא יכול להישאר ריק",
+      "password_required": "לא יכול להישאר ריק",
+      "password_confirmation_required": "לא יכול להישאר ריק",
+      "password_confirmation_match": "צריך להיות דומה לסיסמה"
+    }
+  },
+  "selectable_list": {
+    "select_all": "בחר הכל"
   },
   "settings": {
     "attachmentRadius": "צירופים",

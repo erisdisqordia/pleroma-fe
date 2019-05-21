@@ -14,8 +14,6 @@ let commitHash = require('child_process')
     .execSync('git rev-parse --short HEAD')
     .toString();
 
-console.log(commitHash)
-
 var webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
   module: {

@@ -44,6 +44,7 @@
                 <scope-selector
                   :showAll="true"
                   :userDefault="newDefaultScope"
+                  :initialScope="newDefaultScope"
                   :onScopeChange="changeVis"/>
               </div>
             </div>

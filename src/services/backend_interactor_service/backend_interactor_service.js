@@ -99,7 +99,7 @@ const backendInteractorService = (credentials) => {
   const unpinOwnStatus = (id) => apiService.unpinOwnStatus({credentials, id})
 
   const getCaptcha = () => apiService.getCaptcha()
-  const register = (params) => apiService.register(params)
+  const register = (params) => apiService.register({ credentials, params })
   const updateAvatar = ({avatar}) => apiService.updateAvatar({credentials, avatar})
   const updateBg = ({params}) => apiService.updateBg({credentials, params})
   const updateBanner = ({banner}) => apiService.updateBanner({credentials, banner})

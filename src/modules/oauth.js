@@ -1,16 +1,25 @@
 const oauth = {
   state: {
-    client_id: false,
-    client_secret: false,
-    token: false
+    clientId: false,
+    clientSecret: false,
+    token: false,
+    clientToken: false
   },
   mutations: {
-    setClientData (state, data) {
-      state.client_id = data.client_id
-      state.client_secret = data.client_secret
+    setClientData (state, { clientId, clientSecret }) {
+      state.clientId = clientId
+      state.clientSecret = clientSecret
+    },
+    setClientToken (state, token) {
+      state.clientToken = token
     },
     setToken (state, token) {
       state.token = token
+    }
+  },
+  getters: {
+    getToken: state => () => {
+      return state.token || state.clientToken
     }
   }
 }

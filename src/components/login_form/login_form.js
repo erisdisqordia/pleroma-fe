@@ -11,22 +11,26 @@ const LoginForm = {
   },
   methods: {
     oAuthLogin () {
-      oauthApi.login({
-        oauth: this.$store.state.oauth,
+      const data = {
+        ...this.$store.state.oauth,
         instance: this.$store.state.instance.server,
         commit: this.$store.commit
-      })
+      }
+
+      oauthApi.getOrCreateApp(data)
+        .then((app) => { oauthApi.login({ ...app, ...data }) })
     },
     submit () {
       const data = {
-        oauth: this.$store.state.oauth,
-        instance: this.$store.state.instance.server
+        ...this.$store.state.oauth,
+        instance: this.$store.state.instance.server,
+        commit: this.$store.commit
       }
       this.clearError()
       oauthApi.getOrCreateApp(data).then((app) => {
         oauthApi.getTokenWithCredentials(
           {
-            app,
+            ...app,
             instance: data.instance,
             username: this.user.username,
             password: this.user.password

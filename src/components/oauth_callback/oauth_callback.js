@@ -5,13 +5,13 @@ const oac = {
   mounted () {
     if (this.code) {
       oauth.getToken({
-        app: this.$store.state.oauth,
+        ...this.$store.state.oauth,
         instance: this.$store.state.instance.server,
         code: this.code
       }).then((result) => {
         this.$store.commit('setToken', result.access_token)
         this.$store.dispatch('loginUser', result.access_token)
-        this.$router.push({name: 'friends'})
+        this.$router.push({ name: 'friends' })
       })
     }
   }

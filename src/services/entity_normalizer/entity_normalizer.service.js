@@ -33,6 +33,7 @@ export const parseUser = (data) => {
 
   if (masto) {
     output.screen_name = data.acct
+    output.statusnet_profile_url = data.url
 
     // There's nothing else to get
     if (mastoShort) {
@@ -55,8 +56,6 @@ export const parseUser = (data) => {
     output.friends_count = data.following_count
 
     output.bot = data.bot
-
-    output.statusnet_profile_url = data.url
 
     if (data.pleroma) {
       const relationship = data.pleroma.relationship

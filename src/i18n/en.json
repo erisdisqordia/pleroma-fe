@@ -209,7 +209,6 @@
     "loop_video": "Loop videos",
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
     "mutes_tab": "Mutes",
-    "interactions_tab": "Interactions",
     "play_videos_in_modal": "Play videos directly in the media viewer",
     "use_contain_fit": "Don't crop the attachment in thumbnails",
     "name": "Name",
@@ -278,12 +277,13 @@
       "true": "yes"
     },
     "notifications": "Notifications",
-    "notification_setting_local": "Show notifications from local users",
-    "notification_setting_remote": "Show notifications from remote users",
-    "notification_setting_follows": "Show notifications from users you follow",
-    "notification_setting_non_follows": "Show notifications from users you do not follow",
-    "notification_setting_followers": "Show notifications from users who follow you",
-    "notification_setting_non_followers": "Show notifications from users who do not follow you",
+    "notification_setting": "Receive notifications from:",
+    "notification_setting_follows": "Users you follow",
+    "notification_setting_non_follows": "Users you do not follow",
+    "notification_setting_followers": "Users who follow you",
+    "notification_setting_non_followers": "Users who do not follow you",
+    "notification_mutes": "To stop receiving notifications from a specific user, use a mute.",
+    "notification_blocks": "Blocking a user stops all notifications as well as unsubscribes them.",
     "enable_web_push_notifications": "Enable web push notifications",
     "style": {
       "switcher": {

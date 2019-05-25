@@ -87,6 +87,10 @@ const backendInteractorService = (credentials) => {
     return apiService.deleteUser({screen_name, credentials})
   }
 
+  const updateNotificationSettings = ({settings}) => {
+    return apiService.updateNotificationSettings({credentials, settings})
+  }
+
   const fetchMutes = () => apiService.fetchMutes({credentials})
   const muteUser = (id) => apiService.muteUser({credentials, id})
   const unmuteUser = (id) => apiService.unmuteUser({credentials, id})
@@ -171,7 +175,8 @@ const backendInteractorService = (credentials) => {
     favorite,
     unfavorite,
     retweet,
-    unretweet
+    unretweet,
+    updateNotificationSettings
   }
 
   return backendInteractorServiceInstance

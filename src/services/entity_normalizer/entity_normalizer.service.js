@@ -141,8 +141,13 @@ export const parseUser = (data) => {
     output.deactivated = data.pleroma.deactivated
   }
 
+  if (data.pleroma) {
+    output.notification_settings = data.pleroma.notification_settings
+  }
+
   output.tags = output.tags || []
   output.rights = output.rights || {}
+  output.notification_settings = output.notification_settings || {}
 
   return output
 }

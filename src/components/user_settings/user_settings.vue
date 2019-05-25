@@ -167,6 +167,51 @@
           </div>
         </div>
 
+        <div :label="$t('settings.interactions_tab')" v-if="pleromaBackend">
+          <div class="setting-item">
+            <h2>{{$t('settings.notifications')}}</h2>
+            <ul class="setting-list">
+              <li>
+                <input type="checkbox" id="notification-setting-local" v-model="notificationSettings.local">
+                <label for="notification-setting-local">
+                {{$t('settings.notification_setting_local')}}
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="notification-setting-remote" v-model="notificationSettings.remote">
+                <label for="notification-setting-remote">
+                {{$t('settings.notification_setting_remote')}}
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="notification-setting-follows" v-model="notificationSettings.follows">
+                <label for="notification-setting-follows">
+                {{$t('settings.notification_setting_follows')}}
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="notification-setting-non-follows" v-model="notificationSettings.non_follows">
+                <label for="notification-setting-non-follows">
+                {{$t('settings.notification_setting_non_follows')}}
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="notification-setting-followers" v-model="notificationSettings.followers">
+                <label for="notification-setting-followers">
+                {{$t('settings.notification_setting_followers')}}
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="notification-setting-non-followers" v-model="notificationSettings.non_followers">
+                <label for="notification-setting-non-followers">
+                {{$t('settings.notification_setting_non_followers')}}
+                </label>
+              </li>
+            </ul>
+            <button class="btn btn-default" @click="updateNotificationSettings">{{$t('general.submit')}}</button>
+          </div>
+        </div>
+
         <div :label="$t('settings.data_import_export_tab')" v-if="pleromaBackend">
           <div class="setting-item">
             <h2>{{$t('settings.follow_import')}}</h2>

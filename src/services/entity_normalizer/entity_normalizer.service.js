@@ -134,14 +134,10 @@ export const parseUser = (data) => {
 
   if (data.pleroma) {
     output.follow_request_count = data.pleroma.follow_request_count
-  }
 
-  if (data.pleroma) {
     output.tags = data.pleroma.tags
     output.deactivated = data.pleroma.deactivated
-  }
 
-  if (data.pleroma) {
     output.notification_settings = data.pleroma.notification_settings
   }
 

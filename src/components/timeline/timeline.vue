@@ -29,7 +29,7 @@
     <div :class="classes.body">
       <div class="timeline">
         <conversation
-          v-for="status in timeline.visibleStatuses"
+          v-for="status in statuses"
           :key="status.id"
           class="status-fadein"
           :statusoid="status"

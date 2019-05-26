@@ -11,7 +11,8 @@ const Timeline = {
     'userId',
     'tag',
     'embedded',
-    'count'
+    'count',
+    'excludedStatusIds'
   ],
   data () {
     return {
@@ -38,6 +39,13 @@ const Timeline = {
         header: ['timeline-heading'].concat(!this.embedded ? ['panel-heading'] : []),
         body: ['timeline-body'].concat(!this.embedded ? ['panel-body'] : []),
         footer: ['timeline-footer'].concat(!this.embedded ? ['panel-footer'] : [])
+      }
+    },
+    statuses () {
+      if (this.excludedStatusIds && this.excludedStatusIds.length > 0) {
+        return this.timeline.visibleStatuses && this.timeline.visibleStatuses.filter(status => !this.excludedStatusIds.includes(status.id))
+      } else {
+        return this.timeline.visibleStatuses
       }
     }
   },

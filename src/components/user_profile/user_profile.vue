@@ -75,6 +75,7 @@
           timeline-name="media"
           :timeline="media"
           :user-id="userId"
+          :excludedStatusIds="user.pinnedStatuseIds"
         />
         <Timeline
           v-if="isUs"

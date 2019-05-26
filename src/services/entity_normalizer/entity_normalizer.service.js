@@ -43,7 +43,7 @@ export const parseUser = (data) => {
     output.name = data.display_name
     output.name_html = addEmojis(data.display_name, data.emojis)
 
-    // output.description = ??? missing
+    output.description = data.note
     output.description_html = addEmojis(data.note, data.emojis)
 
     // Utilize avatar_static for gif avatars?

@@ -1,0 +1,392 @@
+{
+  "chat": {
+    "title": "チャット"
+  },
+  "features_panel": {
+    "chat": "チャット",
+    "gopher": "Gopher",
+    "media_proxy": "メディアプロクシ",
+    "scope_options": "公開範囲選択",
+    "text_limit": "文字の数",
+    "title": "有効な機能",
+    "who_to_follow": "おすすめユーザー"
+  },
+  "finder": {
+    "error_fetching_user": "ユーザー検索がエラーになりました。",
+    "find_user": "ユーザーを探す"
+  },
+  "general": {
+    "apply": "適用",
+    "submit": "送信",
+    "more": "続き",
+    "generic_error": "エラーになりました"
+  },
+  "login": {
+    "login": "ログイン",
+    "description": "OAuthでログイン",
+    "logout": "ログアウト",
+    "password": "パスワード",
+    "placeholder": "例: lain",
+    "register": "登録",
+    "username": "ユーザー名",
+    "hint": "会話に加わるには、ログインしてください"
+  },
+  "nav": {
+    "about": "このインスタンスについて",
+    "back": "戻る",
+    "chat": "ローカルチャット",
+    "friend_requests": "フォローリクエスト",
+    "mentions": "通知",
+    "dms": "ダイレクトメッセージ",
+    "public_tl": "パブリックタイムライン",
+    "timeline": "タイムライン",
+    "twkn": "接続しているすべてのネットワーク",
+    "user_search": "ユーザーを探す",
+    "who_to_follow": "おすすめユーザー",
+    "preferences": "設定"
+  },
+  "notifications": {
+    "broken_favorite": "ステータスが見つかりません。探しています...",
+    "favorited_you": "あなたのステータスがお気に入りされました",
+    "followed_you": "フォローされました",
+    "load_older": "古い通知をみる",
+    "notifications": "通知",
+    "read": "読んだ！",
+    "repeated_you": "あなたのステータスがリピートされました",
+    "no_more_notifications": "通知はありません"
+  },
+  "post_status": {
+    "new_status": "投稿する",
+    "account_not_locked_warning": "あなたのアカウントは {0} ではありません。あなたをフォローすれば、誰でも、フォロワー限定のステータスを読むことができます。",
+    "account_not_locked_warning_link": "ロックされたアカウント",
+    "attachments_sensitive": "ファイルをNSFWにする",
+    "content_type": {
+      "text/plain": "プレーンテキスト"
+    },
+    "content_warning": "説明 (省略可)",
+    "default": "羽田空港に着きました。",
+    "direct_warning": "このステータスは、メンションされたユーザーだけが、読むことができます。",
+    "posting": "投稿",
+    "scope": {
+      "direct": "ダイレクト: メンションされたユーザーのみに届きます。",
+      "private": "フォロワーげんてい: フォロワーのみに届きます。",
+      "public": "パブリック: パブリックタイムラインに届きます。",
+      "unlisted": "アンリステッド: パブリックタイムラインに届きません。"
+    }
+  },
+  "registration": {
+    "bio": "プロフィール",
+    "email": "Eメール",
+    "fullname": "スクリーンネーム",
+    "password_confirm": "パスワードの確認",
+    "registration": "登録",
+    "token": "招待トークン",
+    "captcha": "CAPTCHA",
+    "new_captcha": "文字が読めないときは、画像をクリックすると、新しい画像になります",
+    "validations": {
+      "username_required": "必須",
+      "fullname_required": "必須",
+      "email_required": "必須",
+      "password_required": "必須",
+      "password_confirmation_required": "必須",
+      "password_confirmation_match": "パスワードが違います"
+    }
+  },
+  "settings": {
+    "attachmentRadius": "ファイル",
+    "attachments": "ファイル",
+    "autoload": "下にスクロールしたとき、自動的に読み込む。",
+    "avatar": "アバター",
+    "avatarAltRadius": "通知のアバター",
+    "avatarRadius": "アバター",
+    "background": "バックグラウンド",
+    "bio": "プロフィール",
+    "btnRadius": "ボタン",
+    "cBlue": "返信とフォロー",
+    "cGreen": "リピート",
+    "cOrange": "お気に入り",
+    "cRed": "キャンセル",
+    "change_password": "パスワードを変える",
+    "change_password_error": "パスワードを変えることが、できなかったかもしれません。",
+    "changed_password": "パスワードが、変わりました！",
+    "collapse_subject": "説明のある投稿をたたむ",
+    "composing": "投稿",
+    "confirm_new_password": "新しいパスワードの確認",
+    "current_avatar": "現在のアバター",
+    "current_password": "現在のパスワード",
+    "current_profile_banner": "現在のプロフィールバナー",
+    "data_import_export_tab": "インポートとエクスポート",
+    "default_vis": "デフォルトの公開範囲",
+    "delete_account": "アカウントを消す",
+    "delete_account_description": "あなたのアカウントとメッセージが、消えます。",
+    "delete_account_error": "アカウントを消すことが、できなかったかもしれません。インスタンスの管理者に、連絡してください。",
+    "delete_account_instructions": "本当にアカウントを消してもいいなら、パスワードを入力してください。",
+    "avatar_size_instruction": "アバターの大きさは、150×150ピクセルか、それよりも大きくするといいです。",
+    "export_theme": "保存",
+    "filtering": "フィルタリング",
+    "filtering_explanation": "これらの言葉を含むすべてのものがミュートされます。1行に1つの言葉を書いてください。",
+    "follow_export": "フォローのエクスポート",
+    "follow_export_button": "エクスポート",
+    "follow_export_processing": "お待ちください。まもなくファイルをダウンロードできます。",
+    "follow_import": "フォローインポート",
+    "follow_import_error": "フォローのインポートがエラーになりました。",
+    "follows_imported": "フォローがインポートされました！ 少し時間がかかるかもしれません。",
+    "foreground": "フォアグラウンド",
+    "general": "全般",
+    "hide_attachments_in_convo": "スレッドのファイルを隠す",
+    "hide_attachments_in_tl": "タイムラインのファイルを隠す",
+    "hide_isp": "インスタンス固有パネルを隠す",
+    "preload_images": "画像を先読みする",
+    "use_one_click_nsfw": "NSFWなファイルを1クリックで開く",
+    "hide_post_stats": "投稿の統計を隠す (例: お気に入りの数)",
+    "hide_user_stats": "ユーザーの統計を隠す (例: フォロワーの数)",
+    "hide_filtered_statuses": "フィルターされた投稿を隠す",
+    "import_followers_from_a_csv_file": "CSVファイルからフォローをインポートする",
+    "import_theme": "ロード",
+    "inputRadius": "インプットフィールド",
+    "checkboxRadius": "チェックボックス",
+    "instance_default": "(デフォルト: {value})",
+    "instance_default_simple": "(デフォルト)",
+    "interface": "インターフェース",
+    "interfaceLanguage": "インターフェースの言語",
+    "invalid_theme_imported": "このファイルはPleromaのテーマではありません。テーマは変更されませんでした。",
+    "limited_availability": "あなたのブラウザではできません",
+    "links": "リンク",
+    "lock_account_description": "あなたが認めた人だけ、あなたのアカウントをフォローできる",
+    "loop_video": "ビデオを繰り返す",
+    "loop_video_silent_only": "音のないビデオだけ繰り返す",
+    "play_videos_in_modal": "ビデオをメディアビューアーで見る",
+    "use_contain_fit": "画像のサムネイルを、切り抜かない",
+    "name": "名前",
+    "name_bio": "名前とプロフィール",
+    "new_password": "新しいパスワード",
+    "notification_visibility": "表示する通知",
+    "notification_visibility_follows": "フォロー",
+    "notification_visibility_likes": "お気に入り",
+    "notification_visibility_mentions": "メンション",
+    "notification_visibility_repeats": "リピート",
+    "no_rich_text_description": "リッチテキストを使わない",
+    "hide_follows_description": "フォローしている人を見せない",
+    "hide_followers_description": "フォロワーを見せない",
+    "show_admin_badge": "管理者のバッジを見せる",
+    "show_moderator_badge": "モデレーターのバッジを見せる",
+    "nsfw_clickthrough": "NSFWなファイルを隠す",
+    "oauth_tokens": "OAuthトークン",
+    "token": "トークン",
+    "refresh_token": "トークンを更新",
+    "valid_until": "まで有効",
+    "revoke_token": "取り消す",
+    "panelRadius": "パネル",
+    "pause_on_unfocused": "タブにフォーカスがないときストリーミングを止める",
+    "presets": "プリセット",
+    "profile_background": "プロフィールのバックグラウンド",
+    "profile_banner": "プロフィールバナー",
+    "profile_tab": "プロフィール",
+    "radii_help": "インターフェースの丸さを設定する。",
+    "replies_in_timeline": "タイムラインのリプライ",
+    "reply_link_preview": "カーソルを重ねたとき、リプライのプレビューを見る",
+    "reply_visibility_all": "すべてのリプライを見る",
+    "reply_visibility_following": "私に宛てられたリプライと、フォローしている人からのリプライを見る",
+    "reply_visibility_self": "私に宛てられたリプライを見る",
+    "saving_err": "設定を保存できませんでした",
+    "saving_ok": "設定を保存しました",
+    "security_tab": "セキュリティ",
+    "scope_copy": "返信するとき、公開範囲をコピーする (DMの公開範囲は、常にコピーされます)",
+    "set_new_avatar": "新しいアバターを設定する",
+    "set_new_profile_background": "新しいプロフィールのバックグラウンドを設定する",
+    "set_new_profile_banner": "新しいプロフィールバナーを設定する",
+    "settings": "設定",
+    "subject_input_always_show": "サブジェクトフィールドをいつでも表示する",
+    "subject_line_behavior": "返信するときサブジェクトをコピーする",
+    "subject_line_email": "メール風: \"re: サブジェクト\"",
+    "subject_line_mastodon": "マストドン風: そのままコピー",
+    "subject_line_noop": "コピーしない",
+    "post_status_content_type": "投稿のコンテントタイプ",
+    "stop_gifs": "カーソルを重ねたとき、GIFを動かす",
+    "streaming": "上までスクロールしたとき、自動的にストリーミングする",
+    "text": "文字",
+    "theme": "テーマ",
+    "theme_help": "カラーテーマをカスタマイズできます",
+    "theme_help_v2_1": "チェックボックスをONにすると、コンポーネントごとに、色と透明度をオーバーライドできます。「すべてクリア」ボタンを押すと、すべてのオーバーライドをやめます。",
+    "theme_help_v2_2": "バックグラウンドとテキストのコントラストを表すアイコンがあります。マウスをホバーすると、詳しい説明が出ます。透明な色を使っているときは、最悪の場合のコントラストが示されます。",
+    "tooltipRadius": "ツールチップとアラート",
+    "user_settings": "ユーザー設定",
+    "values": {
+      "false": "いいえ",
+      "true": "はい"
+    },
+    "notifications": "通知",
+    "enable_web_push_notifications": "ウェブプッシュ通知を許可する",
+    "style": {
+      "switcher": {
+        "keep_color": "色を残す",
+        "keep_shadows": "影を残す",
+        "keep_opacity": "透明度を残す",
+        "keep_roundness": "丸さを残す",
+        "keep_fonts": "フォントを残す",
+        "save_load_hint": "「残す」オプションをONにすると、テーマを選んだときとロードしたとき、現在の設定を残します。また、テーマをエクスポートするとき、これらのオプションを維持します。すべてのチェックボックスをOFFにすると、テーマをエクスポートしたとき、すべての設定を保存します。",
+        "reset": "リセット",
+        "clear_all": "すべてクリア",
+        "clear_opacity": "透明度をクリア"
+      },
+      "common": {
+        "color": "色",
+        "opacity": "透明度",
+        "contrast": {
+          "hint": "コントラストは {ratio} です。{level}。({context})",
+          "level": {
+            "aa": "AAレベルガイドライン (ミニマル) を満たします",
+            "aaa": "AAAレベルガイドライン (レコメンデッド) を満たします。",
+            "bad": "ガイドラインを満たしません。"
+          },
+          "context": {
+            "18pt": "大きい (18ポイント以上) テキスト",
+            "text": "テキスト"
+          }
+        }
+      },
+      "common_colors": {
+        "_tab_label": "共通",
+        "main": "共通の色",
+        "foreground_hint": "「詳細」タブで、もっと細かく設定できます",
+        "rgbo": "アイコンとアクセントとバッジ"
+      },
+      "advanced_colors": {
+        "_tab_label": "詳細",
+        "alert": "アラートのバックグラウンド",
+        "alert_error": "エラー",
+        "badge": "バッジのバックグラウンド",
+        "badge_notification": "通知",
+        "panel_header": "パネルヘッダー",
+        "top_bar": "トップバー",
+        "borders": "境界",
+        "buttons": "ボタン",
+        "inputs": "インプットフィールド",
+        "faint_text": "薄いテキスト"
+      },
+      "radii": {
+        "_tab_label": "丸さ"
+      },
+      "shadows": {
+        "_tab_label": "光と影",
+        "component": "コンポーネント",
+        "override": "オーバーライド",
+        "shadow_id": "影 #{value}",
+        "blur": "ぼかし",
+        "spread": "広がり",
+        "inset": "内側",
+        "hint": "影の設定では、色の値として --variable を使うことができます。これはCSS3変数です。ただし、透明度の設定は、効かなくなります。",
+        "filter_hint": {
+          "always_drop_shadow": "ブラウザーがサポートしていれば、常に {0} が使われます。",
+          "drop_shadow_syntax": "{0} は、{1} パラメーターと {2} キーワードをサポートしていません。",
+          "avatar_inset": "内側の影と外側の影を同時に使うと、透明なアバターの表示が乱れます。",
+          "spread_zero": "広がりが 0 よりも大きな影は、0 と同じです。",
+          "inset_classic": "内側の影は {0} を使います。"
+        },
+        "components": {
+          "panel": "パネル",
+          "panelHeader": "パネルヘッダー",
+          "topBar": "トップバー",
+          "avatar": "ユーザーアバター (プロフィール)",
+          "avatarStatus": "ユーザーアバター (投稿)",
+          "popup": "ポップアップとツールチップ",
+          "button": "ボタン",
+          "buttonHover": "ボタン (ホバー)",
+          "buttonPressed": "ボタン (押されているとき)",
+          "buttonPressedHover": "ボタン (ホバー、かつ、押されているとき)",
+          "input": "インプットフィールド"
+        }
+      },
+      "fonts": {
+        "_tab_label": "フォント",
+        "help": "「カスタム」を選んだときは、システムにあるフォントの名前を、正しく入力してください。",
+        "components": {
+          "interface": "インターフェース",
+          "input": "インプットフィールド",
+          "post": "投稿",
+          "postCode": "等幅 (投稿がリッチテキストであるとき)"
+        },
+        "family": "フォント名",
+        "size": "大きさ (px)",
+        "weight": "太さ",
+        "custom": "カスタム"
+      },
+      "preview": {
+        "header": "プレビュー",
+        "content": "本文",
+        "error": "エラーの例",
+        "button": "ボタン",
+        "text": "これは{0}と{1}の例です。",
+        "mono": "monospace",
+        "input": "羽田空港に着きました。",
+        "faint_link": "とても助けになるマニュアル",
+        "fine_print": "私たちの{0}を、読まないでください！",
+        "header_faint": "エラーではありません",
+        "checkbox": "利用規約を読みました",
+        "link": "ハイパーリンク"
+      }
+    }
+  },
+  "timeline": {
+    "collapse": "たたむ",
+    "conversation": "スレッド",
+    "error_fetching": "読み込みがエラーになりました",
+    "load_older": "古いステータス",
+    "no_retweet_hint": "投稿を「フォロワーのみ」または「ダイレクト」にすると、リピートできなくなります",
+    "repeated": "リピート",
+    "show_new": "読み込み",
+    "up_to_date": "最新",
+    "no_more_statuses": "これで終わりです"
+  },
+  "user_card": {
+    "approve": "受け入れ",
+    "block": "ブロック",
+    "blocked": "ブロックしています！",
+    "deny": "お断り",
+    "favorites": "お気に入り",
+    "follow": "フォロー",
+    "follow_sent": "リクエストを送りました！",
+    "follow_progress": "リクエストしています…",
+    "follow_again": "再びリクエストを送りますか？",
+    "follow_unfollow": "フォローをやめる",
+    "followees": "フォロー",
+    "followers": "フォロワー",
+    "following": "フォローしています！",
+    "follows_you": "フォローされました！",
+    "its_you": "これはあなたです！",
+    "media": "メディア",
+    "mute": "ミュート",
+    "muted": "ミュートしています！",
+    "per_day": "/日",
+    "remote_follow": "リモートフォロー",
+    "statuses": "ステータス"
+  },
+  "user_profile": {
+    "timeline_title": "ユーザータイムライン"
+  },
+  "who_to_follow": {
+    "more": "詳細",
+    "who_to_follow": "おすすめユーザー"
+  },
+  "tool_tip": {
+    "media_upload": "メディアをアップロード",
+    "repeat": "リピート",
+    "reply": "返信",
+    "favorite": "お気に入り",
+    "user_settings": "ユーザー設定"
+  },
+  "upload":{
+    "error": {
+    "base": "アップロードに失敗しました。",
+    "file_too_big": "ファイルが大きすぎます [{filesize} {filesizeunit} / {allowedsize} {allowedsizeunit}]",
+    "default": "しばらくしてから試してください"
+    },
+    "file_size_units": {
+      "B": "B",
+      "KiB": "KiB",
+      "MiB": "MiB",
+      "GiB": "GiB",
+      "TiB": "TiB"
+    }
+  }
+}

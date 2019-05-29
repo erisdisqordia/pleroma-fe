@@ -26,7 +26,7 @@
       },
 
       languageNames () {
-        return _.map(this.languageCodes, ISO6391.getName)
+        return _.map(this.languageCodes, this.getLanguageName)
       },
 
       language: {
@@ -35,6 +35,17 @@
           this.$store.dispatch('setOption', { name: 'interfaceLanguage', value: val })
           this.$i18n.locale = val
         }
+      }
+    },
+
+    methods: {
+      getLanguageName (code) {
+        const specialLanguageNames = {
+          'ja': 'Japanese (やさしいにほんご)',
+          'ja_pedantic': 'Japanese (日本語)',
+          'zh': 'Chinese (简体中文)'
+        }
+        return specialLanguageNames[code] || ISO6391.getName(code)
       }
     }
   }

@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <div class="title">
-        Interactions
+        {{ $t("nav.interactions") }}
       </div>
     </div>
     <tab-switcher

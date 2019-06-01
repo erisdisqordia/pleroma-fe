@@ -16,6 +16,7 @@ const PERMISSION_GROUP_URL = (screenName, right) => `/api/pleroma/admin/users/${
 const ACTIVATION_STATUS_URL = screenName => `/api/pleroma/admin/users/${screenName}/activation_status`
 const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
+const NOTIFICATION_SETTINGS_URL = '/api/pleroma/notification_settings'
 
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
@@ -95,6 +96,21 @@ const promisedRequest = ({ method, url, payload, credentials, headers = {} }) =>
           return resolve(json)
         }))
     })
+}
+
+const updateNotificationSettings = ({credentials, settings}) => {
+  const form = new FormData()
+
+  each(settings, (value, key) => {
+    form.append(key, value)
+  })
+
+  return fetch(NOTIFICATION_SETTINGS_URL, {
+    headers: authHeaders(credentials),
+    method: 'PUT',
+    body: form
+  })
+  .then((data) => data.json())
 }
 
 const updateAvatar = ({credentials, avatar}) => {
@@ -767,7 +783,8 @@ const apiService = {
   markNotificationsAsSeen,
   fetchFavoritedByUsers,
   fetchRebloggedByUsers,
-  reportUser
+  reportUser,
+  updateNotificationSettings
 }
 
 export default apiService

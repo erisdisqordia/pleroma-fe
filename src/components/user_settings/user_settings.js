@@ -55,7 +55,8 @@ const UserSettings = {
       changePasswordInputs: [ '', '', '' ],
       changedPassword: false,
       changePasswordError: false,
-      activeTab: 'profile'
+      activeTab: 'profile',
+      notificationSettings: this.$store.state.users.currentUser.notification_settings
     }
   },
   created () {
@@ -127,6 +128,10 @@ const UserSettings = {
             this.$store.commit('addNewUsers', [user])
             this.$store.commit('setCurrentUser', user)
           })
+    },
+    updateNotificationSettings () {
+      this.$store.state.api.backendInteractor
+        .updateNotificationSettings({ settings: this.notificationSettings })
     },
     changeVis (visibility) {
       this.newDefaultScope = visibility

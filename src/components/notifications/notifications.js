@@ -35,7 +35,6 @@ const Notifications = {
       return unseenNotificationsFromStore(this.$store)
     },
     visibleNotifications () {
-      console.log(this.filterMode)
       return visibleNotificationsFromStore(this.$store, this.filterMode)
     },
     unseenCount () {

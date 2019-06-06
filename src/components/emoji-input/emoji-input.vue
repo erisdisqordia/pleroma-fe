@@ -1,23 +1,6 @@
 <template>
   <div class="emoji-input">
-    <input
-      v-if="type !== 'textarea'"
-      :class="classname"
-      :type="type"
-      :value="value"
-      :placeholder="placeholder"
-      @input="onInput"
-      @click="setCaret"
-      @keyup="setCaret"
-      @keydown="onKeydown"
-      @keydown.down="cycleForward"
-      @keydown.up="cycleBackward"
-      @keydown.shift.tab="cycleBackward"
-      @keydown.tab="cycleForward"
-      @keydown.enter="replaceEmoji"
-    />
-    <textarea
-      v-else
+    <slot
       :class="classname"
       :value="value"
       :placeholder="placeholder"
@@ -30,21 +13,22 @@
       @keydown.shift.tab="cycleBackward"
       @keydown.tab="cycleForward"
       @keydown.enter="replaceEmoji"
-    ></textarea>
+      >
+    </slot>
     <div class="autocomplete-panel" v-if="suggestions">
       <div class="autocomplete-panel-body">
         <div
-          v-for="(emoji, index) in suggestions"
+          v-for="(suggestion, index) in suggestions"
           :key="index"
-          @click="replace(emoji.utf || (emoji.shortcode + ' '))"
+          @click="replace(suggestion.replacement)"
           class="autocomplete-item"
-          :class="{ highlighted: emoji.highlighted }"
+          :class="{ highlighted: suggestion.highlighted }"
         >
-          <span v-if="emoji.img">
-            <img :src="emoji.img" />
+          <span v-if="suggestion.img">
+            <img :src="suggestion.img" />
           </span>
-          <span v-else>{{emoji.utf}}</span>
-          <span>{{emoji.shortcode}}</span>
+          <span v-else>{{suggestion.replacement}}</span>
+          <span>{{suggestion.shortcode}}</span>
         </div>
       </div>
     </div>

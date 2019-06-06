@@ -153,7 +153,11 @@ const getStaticEmoji = async ({ store }) => {
     if (res.ok) {
       const values = await res.json()
       const emoji = Object.keys(values).map((key) => {
-        return { shortcode: key, image_url: false, 'utf': values[key] }
+        return {
+          shortcode: key,
+          image_url: false,
+          'replacement': values[key]
+        }
       })
       store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
     } else {
@@ -174,7 +178,11 @@ const getCustomEmoji = async ({ store }) => {
       const result = await res.json()
       const values = Array.isArray(result) ? Object.assign({}, ...result) : result
       const emoji = Object.keys(values).map((key) => {
-        return { shortcode: key, image_url: values[key].image_url || values[key] }
+        return {
+          shortcode: key,
+          image_url: values[key].image_url || values[key],
+          replacement: `:${key}: `
+        }
       })
       store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
       store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })

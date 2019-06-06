@@ -5,6 +5,7 @@ import EmojiInput from '../emoji-input/emoji-input.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import Completion from '../../services/completion/completion.js'
 import { take, filter, reject, map, uniqBy } from 'lodash'
+import suggestor from '../emoji-input/suggestor.js'
 
 const buildMentionsString = ({user, attentions}, currentUser) => {
   let allAttentions = [...attentions]
@@ -119,13 +120,6 @@ const PostStatusForm = {
         return false
       }
     },
-    textAtCaret () {
-      return (this.wordAtCaret || {}).word || ''
-    },
-    wordAtCaret () {
-      const word = Completion.wordAtPosition(this.newStatus.status, this.caret - 1) || {}
-      return word
-    },
     users () {
       return this.$store.state.users.users
     },
@@ -137,6 +131,21 @@ const PostStatusForm = {
             ? this.$store.state.instance.minimalScopesMode
             : this.$store.state.config.minimalScopesMode
       return !minimalScopesMode
+    },
+    emojiUserSuggestor () {
+      return suggestor({
+        emoji: [
+          ...this.$store.state.instance.emoji,
+          ...this.$store.state.instance.customEmoji
+        ],
+        users: this.$store.state.users.users
+      })
+    },
+    emojiSuggestor () {
+      suggestor({ emoji: [
+        ...this.$store.state.instance.emoji,
+        ...this.$store.state.instance.customEmoji
+      ]})
     },
     emoji () {
       return this.$store.state.instance.emoji || []
@@ -188,57 +197,6 @@ const PostStatusForm = {
     }
   },
   methods: {
-    replace (replacement) {
-      this.newStatus.status = Completion.replaceWord(this.newStatus.status, this.wordAtCaret, replacement)
-      const el = this.$el.querySelector('textarea')
-      el.focus()
-      this.caret = 0
-    },
-    replaceCandidate (e) {
-      const len = this.candidates.length || 0
-      if (this.textAtCaret === ':' || e.ctrlKey) { return }
-      if (len > 0) {
-        e.preventDefault()
-        const candidate = this.candidates[this.highlighted]
-        const replacement = candidate.utf || (candidate.screen_name + ' ')
-        this.newStatus.status = Completion.replaceWord(this.newStatus.status, this.wordAtCaret, replacement)
-        const el = this.$el.querySelector('textarea')
-        el.focus()
-        this.caret = 0
-        this.highlighted = 0
-      }
-    },
-    cycleBackward (e) {
-      const len = this.candidates.length || 0
-      if (len > 0) {
-        e.preventDefault()
-        this.highlighted -= 1
-        if (this.highlighted < 0) {
-          this.highlighted = this.candidates.length - 1
-        }
-      } else {
-        this.highlighted = 0
-      }
-    },
-    cycleForward (e) {
-      const len = this.candidates.length || 0
-      if (len > 0) {
-        if (e.shiftKey) { return }
-        e.preventDefault()
-        this.highlighted += 1
-        if (this.highlighted >= len) {
-          this.highlighted = 0
-        }
-      } else {
-        this.highlighted = 0
-      }
-    },
-    onKeydown (e) {
-      e.stopPropagation()
-    },
-    setCaret ({target: {selectionStart}}) {
-      this.caret = selectionStart
-    },
     postStatus (newStatus) {
       if (this.posting) { return }
       if (this.submitDisabled) { return }

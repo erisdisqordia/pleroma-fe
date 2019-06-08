@@ -154,9 +154,9 @@ const getStaticEmoji = async ({ store }) => {
       const values = await res.json()
       const emoji = Object.keys(values).map((key) => {
         return {
-          shortcode: key,
-          image_url: false,
-          'replacement': values[key]
+          displayText: key,
+          imageUrl: false,
+          replacement: values[key]
         }
       })
       store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
@@ -178,9 +178,10 @@ const getCustomEmoji = async ({ store }) => {
       const result = await res.json()
       const values = Array.isArray(result) ? Object.assign({}, ...result) : result
       const emoji = Object.keys(values).map((key) => {
+        const imageUrl = values[key].image_url
         return {
-          shortcode: key,
-          image_url: values[key].image_url || values[key],
+          displayText: key,
+          imageUrl: imageUrl ? store.state.instance.server + imageUrl : values[key],
           replacement: `:${key}: `
         }
       })

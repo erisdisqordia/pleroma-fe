@@ -15,24 +15,26 @@ export default function suggest (data) {
 
 function suggestEmoji (emojis) {
   return input => {
-    const shortcode = input.toLowerCase().substr(1)
-    console.log(shortcode)
-    return emojis.filter(emoji => emoji.shortcode.toLowerCase().startsWith(shortcode))
+    const noPrefix = input.toLowerCase().substr(1)
+    return emojis
+      .filter(({ displayText }) => displayText.toLowerCase().startsWith(noPrefix))
   }
 }
 
 function suggestUsers (users) {
   return input => {
-    const shortcode = input.toLowerCase().substr(1)
+    const noPrefix = input.toLowerCase().substr(1)
     return users.filter(
       user =>
-        user.screen_name.toLowerCase().startsWith('@' + shortcode) ||
-        user.name.toLowerCase().startsWith(shortcode)
+        user.screen_name.toLowerCase().startsWith(noPrefix) ||
+        user.name.toLowerCase().startsWith(noPrefix)
+      /* eslint-disable camelcase */
     ).map(({ screen_name, name, profile_image_url_original }) => ({
-      shortcode: screen_name,
-      detail: name,
-      image_url: profile_image_url_original,
+      displayText: screen_name,
+      detailText: name,
+      imageUrl: profile_image_url_original,
       replacement: '@' + screen_name
     }))
+    /* eslint-enable camelcase */
   }
 }

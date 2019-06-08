@@ -32,24 +32,29 @@
         <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
       </p>
       <emoji-input
-        :suggest="emojiSuggestor" v-model="newStatus.spoilerText"
         v-if="newStatus.spoilerText || alwaysShowSubject"
+        :suggest="emojiSuggestor"
+        v-model="newStatus.spoilerText"
+        class="form-control"
         >
         <input
 
           type="text"
           :placeholder="$t('post_status.content_warning')"
           v-model="newStatus.spoilerText"
-          classname="form-control"
+          class="form-post-subject"
           />
       </emoji-input>
-      <emoji-input :suggest="emojiUserSuggestor" v-model="newStatus.status">
+      <emoji-input
+        :suggest="emojiUserSuggestor"
+        v-model="newStatus.status"
+        class="form-control"
+        >
         <textarea
           ref="textarea"
           v-model="newStatus.status"
           :placeholder="$t('post_status.default')"
           rows="1"
-          class="form-control"
           @keydown.meta.enter="postStatus(newStatus)"
           @keyup.ctrl.enter="postStatus(newStatus)"
           @drop="fileDrop"
@@ -57,6 +62,7 @@
           @input="resize"
           @paste="paste"
           :disabled="posting"
+          class="form-post-body"
         >
         </textarea>
       </emoji-input>
@@ -251,7 +257,7 @@
     min-height: 1px;
   }
 
-  form textarea.form-control {
+  .form-post-body {
     line-height:16px;
     resize: none;
     overflow: hidden;
@@ -260,7 +266,7 @@
     box-sizing: content-box;
   }
 
-  form textarea.form-control:focus {
+  .form-post-body:focus {
     min-height: 48px;
   }
 

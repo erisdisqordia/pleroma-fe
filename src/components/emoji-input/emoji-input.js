@@ -13,7 +13,19 @@ const EmojiInput = {
     return {
       input: undefined,
       highlighted: 0,
-      caret: 0
+      caret: 0,
+      focused: false,
+      popupOptions: {
+        placement: 'bottom-start',
+        trigger: 'hover',
+        // See: https://github.com/RobinCK/vue-popper/issues/63
+        'delay-on-mouse-over': 9999999,
+        'delay-on-mouse-out': 9999999,
+        modifiers: {
+          arrow: { enabled: true },
+          offset: { offset: '0, 5px' }
+        }
+      }
     }
   },
   computed: {
@@ -24,13 +36,17 @@ const EmojiInput = {
       if (matchedSuggestions.length <= 0) {
         return false
       }
-      return take(matchedSuggestions, 5).map(({shortcode, image_url, replacement}, index) => ({
-        shortcode,
-        replacement,
-        // eslint-disable-next-line camelcase
-        img: !image_url ? '' : this.$store.state.instance.server + image_url,
-        highlighted: index === this.highlighted
-      }))
+      return take(matchedSuggestions, 5)
+        .map(({ displayText, imageUrl, replacement }, index) => ({
+          displayText,
+          replacement,
+          // eslint-disable-next-line camelcase
+          img: imageUrl || '',
+          highlighted: index === this.highlighted
+        }))
+    },
+    showPopup () {
+      return this.focused && this.suggestions && this.suggestions.length > 0
     },
     textAtCaret () {
       return (this.wordAtCaret || {}).word || ''
@@ -40,25 +56,29 @@ const EmojiInput = {
         const word = Completion.wordAtPosition(this.value, this.caret - 1) || {}
         return word
       }
-    },
+    }
   },
   mounted () {
     const slots = this.$slots.default
-    if (slots.length === 0) return
+    if (!slots || slots.length === 0) return
     const input = slots.find(slot => ['input', 'textarea'].includes(slot.tag))
     if (!input) return
     this.input = input
-    input.elm.addEventListener('keyup', this.setCaret)
-    input.elm.addEventListener('paste', this.setCaret)
-    input.elm.addEventListener('focus', this.setCaret)
+    this.resize()
+    input.elm.addEventListener('blur', this.onBlur)
+    input.elm.addEventListener('focus', this.onFocus)
+    input.elm.addEventListener('paste', this.onPaste)
+    input.elm.addEventListener('keyup', this.onKeyUp)
     input.elm.addEventListener('keydown', this.onKeyDown)
   },
   unmounted () {
-    if (this.input) {
-      this.input.elm.removeEventListener('keyup', this.setCaret)
-      this.input.elm.removeEventListener('paste', this.setCaret)
-      this.input.elm.removeEventListener('focus', this.setCaret)
-      this.input.elm.removeEventListener('keydown', this.onKeyDown)
+    const { input } = this
+    if (input) {
+      input.elm.removeEventListener('blur', this.onBlur)
+      input.elm.removeEventListener('focus', this.onFocus)
+      input.elm.removeEventListener('paste', this.onPaste)
+      input.elm.removeEventListener('keyup', this.onKeyUp)
+      input.elm.removeEventListener('keydown', this.onKeyDown)
     }
   },
   methods: {
@@ -101,26 +121,49 @@ const EmojiInput = {
         this.highlighted = 0
       }
     },
+    onBlur (e) {
+      this.focused = false
+      this.setCaret(e)
+      this.resize(e)
+    },
+    onFocus (e) {
+      this.focused = true
+      this.setCaret(e)
+      this.resize(e)
+    },
+    onKeyUp (e) {
+      this.setCaret(e)
+      this.resize(e)
+    },
+    onPaste (e) {
+      this.setCaret(e)
+      this.resize(e)
+    },
     onKeyDown (e) {
       this.setCaret(e)
-      e.stopPropagation()
+      this.resize(e)
 
       const { ctrlKey, shiftKey, key } = e
       if (key === 'Tab') {
         if (shiftKey) {
           this.cycleBackward()
+          e.preventDefault()
         } else {
           this.cycleForward()
+          e.preventDefault()
         }
       }
       if (key === 'ArrowUp') {
         this.cycleBackward()
+        e.preventDefault()
       } else if (key === 'ArrowDown') {
         this.cycleForward()
+        e.preventDefault()
       }
       if (key === 'Enter') {
         if (!ctrlKey) {
           this.replaceText()
+          e.preventDefault()
         }
       }
     },
@@ -129,6 +172,12 @@ const EmojiInput = {
     },
     setCaret ({ target: { selectionStart, value } }) {
       this.caret = selectionStart
+    },
+    resize () {
+      const { panel } = this.$refs
+      if (!panel) return
+      const { offsetHeight, offsetTop } = this.input.elm
+      this.$refs.panel.style.top = (offsetTop + offsetHeight) + 'px'
     }
   }
 }

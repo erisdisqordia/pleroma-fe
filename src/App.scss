@@ -809,14 +809,10 @@ nav {
 
 .autocomplete {
   &-panel {
-    position: relative;
-
     &-body {
       margin: 0 0.5em 0 0.5em;
       border-radius: $fallback--tooltipRadius;
       border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-      position: absolute;
-      z-index: 1;
       box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
       // this doesn't match original but i don't care, making it uniform.
       box-shadow: var(--popupShadow);

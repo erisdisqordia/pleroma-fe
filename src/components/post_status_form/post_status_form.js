@@ -83,43 +83,6 @@ const PostStatusForm = {
     }
   },
   computed: {
-    candidates () {
-      const firstchar = this.textAtCaret.charAt(0)
-      if (firstchar === '@') {
-        const query = this.textAtCaret.slice(1).toUpperCase()
-        const matchedUsers = filter(this.users, (user) => {
-          return user.screen_name.toUpperCase().startsWith(query) ||
-            user.name && user.name.toUpperCase().startsWith(query)
-        })
-        if (matchedUsers.length <= 0) {
-          return false
-        }
-        // eslint-disable-next-line camelcase
-        return map(take(matchedUsers, 5), ({screen_name, name, profile_image_url_original}, index) => ({
-          // eslint-disable-next-line camelcase
-          screen_name: `@${screen_name}`,
-          name: name,
-          img: profile_image_url_original,
-          highlighted: index === this.highlighted
-        }))
-      } else if (firstchar === ':') {
-        if (this.textAtCaret === ':') { return }
-        const matchedEmoji = filter(this.emoji.concat(this.customEmoji), (emoji) => emoji.shortcode.startsWith(this.textAtCaret.slice(1)))
-        if (matchedEmoji.length <= 0) {
-          return false
-        }
-        return map(take(matchedEmoji, 5), ({shortcode, image_url, utf}, index) => ({
-          screen_name: `:${shortcode}:`,
-          name: '',
-          utf: utf || '',
-          // eslint-disable-next-line camelcase
-          img: utf ? '' : this.$store.state.instance.server + image_url,
-          highlighted: index === this.highlighted
-        }))
-      } else {
-        return false
-      }
-    },
     users () {
       return this.$store.state.users.users
     },

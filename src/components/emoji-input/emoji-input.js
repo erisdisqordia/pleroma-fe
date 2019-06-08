@@ -37,9 +37,8 @@ const EmojiInput = {
         return false
       }
       return take(matchedSuggestions, 5)
-        .map(({ displayText, imageUrl, replacement }, index) => ({
-          displayText,
-          replacement,
+        .map(({ imageUrl, ...rest }, index) => ({
+          ...rest,
           // eslint-disable-next-line camelcase
           img: imageUrl || '',
           highlighted: index === this.highlighted

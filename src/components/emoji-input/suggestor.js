@@ -1,13 +1,11 @@
 export default function suggest (data) {
   return input => {
-    const trimmed = input.trim()
-    const firstChar = trimmed[0]
-    console.log(`'${trimmed}'`, firstChar, firstChar === ':')
+    const firstChar = input[0]
     if (firstChar === ':' && data.emoji) {
-      return suggestEmoji(data.emoji)(trimmed)
+      return suggestEmoji(data.emoji)(input)
     }
     if (firstChar === '@' && data.users) {
-      return suggestUsers(data.users)(trimmed)
+      return suggestUsers(data.users)(input)
     }
     return []
   }
@@ -18,6 +16,19 @@ function suggestEmoji (emojis) {
     const noPrefix = input.toLowerCase().substr(1)
     return emojis
       .filter(({ displayText }) => displayText.toLowerCase().startsWith(noPrefix))
+      .sort((a, b) => {
+        let aScore = 0
+        let bScore = 0
+
+        // Make custom emojis a priority
+        aScore += Number(!!a.imageUrl) * 10
+        bScore += Number(!!b.imageUrl) * 10
+
+        // Sort alphabetically
+        const alphabetically = a.displayText > b.displayText ? 1 : -1
+
+        return bScore - aScore + alphabetically
+      })
   }
 }
 
@@ -33,12 +44,17 @@ function suggestUsers (users) {
       let aScore = 0
       let bScore = 0
 
+      // Matches on screen name (i.e. user@instance) makes a priority
       aScore += a.screen_name.toLowerCase().startsWith(noPrefix) * 2
-      aScore += a.name.toLowerCase().startsWith(noPrefix)
       bScore += b.screen_name.toLowerCase().startsWith(noPrefix) * 2
+
+      // Matches on name takes second priority
+      aScore += a.name.toLowerCase().startsWith(noPrefix)
       bScore += b.name.toLowerCase().startsWith(noPrefix)
 
       const diff = bScore * 10 - aScore * 10
+
+      // Then sort alphabetically
       const nameAlphabetically = a.name > b.name ? 1 : -1
       const screenNameAlphabetically = a.screen_name > b.screen_name ? 1 : -1
 

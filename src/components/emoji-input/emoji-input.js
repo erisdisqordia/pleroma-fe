@@ -64,6 +64,7 @@ const EmojiInput = {
     if (!input) return
     this.input = input
     this.resize()
+    input.elm.addEventListener('transitionend', this.onTransition)
     input.elm.addEventListener('blur', this.onBlur)
     input.elm.addEventListener('focus', this.onFocus)
     input.elm.addEventListener('paste', this.onPaste)
@@ -73,6 +74,7 @@ const EmojiInput = {
   unmounted () {
     const { input } = this
     if (input) {
+      input.elm.removeEventListener('transitionend', this.onTransition)
       input.elm.removeEventListener('blur', this.onBlur)
       input.elm.removeEventListener('focus', this.onFocus)
       input.elm.removeEventListener('paste', this.onPaste)
@@ -86,8 +88,8 @@ const EmojiInput = {
       this.$emit('input', newValue)
       this.caret = 0
     },
-    replaceText () {
-      const len = this.suggestions.length || 0
+    replaceText (e) {
+      const len = (this.suggestions && this.suggestions.length) || 0
       if (this.textAtCaret.length === 1) { return }
       if (len > 0) {
         const suggestion = this.suggestions[this.highlighted]
@@ -96,9 +98,10 @@ const EmojiInput = {
         this.$emit('input', newValue)
         this.caret = 0
         this.highlighted = 0
+        e.preventDefault()
       }
     },
-    cycleBackward () {
+    cycleBackward (e) {
       const len = this.suggestions.length || 0
       if (len > 0) {
         this.highlighted -= 1
@@ -109,7 +112,7 @@ const EmojiInput = {
         this.highlighted = 0
       }
     },
-    cycleForward () {
+    cycleForward (e) {
       const len = this.suggestions.length || 0
       if (len > 0) {
         this.highlighted += 1
@@ -119,6 +122,9 @@ const EmojiInput = {
       } else {
         this.highlighted = 0
       }
+    },
+    onTransition (e) {
+      this.resize(e)
     },
     onBlur (e) {
       this.focused = false
@@ -145,24 +151,20 @@ const EmojiInput = {
       const { ctrlKey, shiftKey, key } = e
       if (key === 'Tab') {
         if (shiftKey) {
-          this.cycleBackward()
-          e.preventDefault()
+          this.cycleBackward(e)
         } else {
-          this.cycleForward()
-          e.preventDefault()
+          this.cycleForward(e)
         }
       }
       if (key === 'ArrowUp') {
-        this.cycleBackward()
+        this.cycleBackward(e)
         e.preventDefault()
       } else if (key === 'ArrowDown') {
-        this.cycleForward()
-        e.preventDefault()
+        this.cycleForward(e)
       }
       if (key === 'Enter') {
         if (!ctrlKey) {
-          this.replaceText()
-          e.preventDefault()
+          this.replaceText(e)
         }
       }
     },

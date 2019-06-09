@@ -31,10 +31,10 @@ const EmojiInput = {
   computed: {
     suggestions () {
       const firstchar = this.textAtCaret.charAt(0)
-      if (this.textAtCaret === firstchar) { return }
+      if (this.textAtCaret === firstchar) { return [] }
       const matchedSuggestions = this.suggest(this.textAtCaret)
       if (matchedSuggestions.length <= 0) {
-        return false
+        return []
       }
       return take(matchedSuggestions, 5)
         .map(({ imageUrl, ...rest }, index) => ({
@@ -89,7 +89,7 @@ const EmojiInput = {
       this.caret = 0
     },
     replaceText (e) {
-      const len = (this.suggestions && this.suggestions.length) || 0
+      const len = this.suggestions.length || 0
       if (this.textAtCaret.length === 1) { return }
       if (len > 0) {
         const suggestion = this.suggestions[this.highlighted]
@@ -108,6 +108,7 @@ const EmojiInput = {
         if (this.highlighted < 0) {
           this.highlighted = this.suggestions.length - 1
         }
+        e.preventDefault()
       } else {
         this.highlighted = 0
       }
@@ -119,6 +120,7 @@ const EmojiInput = {
         if (this.highlighted >= len) {
           this.highlighted = 0
         }
+        e.preventDefault()
       } else {
         this.highlighted = 0
       }
@@ -158,7 +160,6 @@ const EmojiInput = {
       }
       if (key === 'ArrowUp') {
         this.cycleBackward(e)
-        e.preventDefault()
       } else if (key === 'ArrowDown') {
         this.cycleForward(e)
       }

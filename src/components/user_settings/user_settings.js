@@ -92,7 +92,7 @@ const UserSettings = {
       })
     },
     emojiSuggestor () {
-      suggestor({ emoji: [
+      return suggestor({ emoji: [
         ...this.$store.state.instance.emoji,
         ...this.$store.state.instance.customEmoji
       ]})

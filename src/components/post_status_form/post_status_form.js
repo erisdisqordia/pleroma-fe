@@ -3,17 +3,16 @@ import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
-import Completion from '../../services/completion/completion.js'
-import { take, filter, reject, map, uniqBy } from 'lodash'
+import { reject, map, uniqBy } from 'lodash'
 import suggestor from '../emoji-input/suggestor.js'
 
-const buildMentionsString = ({user, attentions}, currentUser) => {
+const buildMentionsString = ({ user, attentions }, currentUser) => {
   let allAttentions = [...attentions]
 
   allAttentions.unshift(user)
 
   allAttentions = uniqBy(allAttentions, 'id')
-  allAttentions = reject(allAttentions, {id: currentUser.id})
+  allAttentions = reject(allAttentions, { id: currentUser.id })
 
   let mentions = map(allAttentions, (attention) => {
     return `@${attention.screen_name}`
@@ -49,17 +48,17 @@ const PostStatusForm = {
     let statusText = preset || ''
 
     const scopeCopy = typeof this.$store.state.config.scopeCopy === 'undefined'
-          ? this.$store.state.instance.scopeCopy
-          : this.$store.state.config.scopeCopy
+      ? this.$store.state.instance.scopeCopy
+      : this.$store.state.config.scopeCopy
 
     if (this.replyTo) {
       const currentUser = this.$store.state.users.currentUser
       statusText = buildMentionsString({ user: this.repliedUser, attentions: this.attentions }, currentUser)
     }
 
-    const scope = (this.copyMessageScope && scopeCopy || this.copyMessageScope === 'direct')
-          ? this.copyMessageScope
-          : this.$store.state.users.currentUser.default_scope
+    const scope = ((this.copyMessageScope && scopeCopy) || this.copyMessageScope === 'direct')
+      ? this.copyMessageScope
+      : this.$store.state.users.currentUser.default_scope
 
     const contentType = typeof this.$store.state.config.postContentType === 'undefined'
       ? this.$store.state.instance.postContentType
@@ -91,8 +90,8 @@ const PostStatusForm = {
     },
     showAllScopes () {
       const minimalScopesMode = typeof this.$store.state.config.minimalScopesMode === 'undefined'
-            ? this.$store.state.instance.minimalScopesMode
-            : this.$store.state.config.minimalScopesMode
+        ? this.$store.state.instance.minimalScopesMode
+        : this.$store.state.config.minimalScopesMode
       return !minimalScopesMode
     },
     emojiUserSuggestor () {
@@ -105,10 +104,12 @@ const PostStatusForm = {
       })
     },
     emojiSuggestor () {
-      return suggestor({ emoji: [
-        ...this.$store.state.instance.emoji,
-        ...this.$store.state.instance.customEmoji
-      ]})
+      return suggestor({
+        emoji: [
+          ...this.$store.state.instance.emoji,
+          ...this.$store.state.instance.customEmoji
+        ]
+      })
     },
     emoji () {
       return this.$store.state.instance.emoji || []
@@ -238,7 +239,7 @@ const PostStatusForm = {
     },
     fileDrop (e) {
       if (e.dataTransfer.files.length > 0) {
-        e.preventDefault()  // allow dropping text like before
+        e.preventDefault() // allow dropping text like before
         this.dropFiles = e.dataTransfer.files
       }
     },

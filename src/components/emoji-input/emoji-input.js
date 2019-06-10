@@ -1,31 +1,65 @@
 import Completion from '../../services/completion/completion.js'
 import { take } from 'lodash'
 
+/**
+ * EmojiInput - augmented inputs for emoji and autocomplete support in inputs
+ * without having to give up the comfort of <input/> and <textarea/> elements
+ *
+ * Intended usage is:
+ * <emoji-input v-model="something">
+ *   <input v-model="something"/>
+ * </emoji-input>
+ *
+ * Works only with <input> and <textarea>. Intended to use with only one nested
+ * input. It will find first input or textarea and work with that, multiple
+ * nested children not tested. You HAVE TO duplicate v-model for both
+ * <emoji-input> and <input>/<textarea> otherwise it will not work.
+ *
+ * Be prepared for CSS troubles though because it still wraps component in a div
+ * while TRYING to make it look like nothing happened, but it could break stuff.
+ */
+
 const EmojiInput = {
-  props: [
-    'placeholder',
-    'suggest',
-    'value',
-    'type',
-    'classname'
-  ],
+  props: {
+    suggest: {
+      /**
+       * suggest: function (input: String) => Suggestion[]
+       *
+       * Function that takes input string which takes string (textAtCaret)
+       * and returns an array of Suggestions
+       *
+       * Suggestion is an object containing following properties:
+       * displayText: string. Main display text, what actual suggestion
+       *    represents (user's screen name/emoji shortcode)
+       * replacementText: string. Text that should replace the textAtCaret
+       * detailText: string, optional. Subtitle text, providing additional info
+       *    if present (user's nickname)
+       * imageUrl: string, optional. Image to display alongside with suggestion,
+       *    currently if no image is provided, replacementText will be used (for
+       *    unicode emojis)
+       *
+       * TODO: make it asynchronous when adding proper server-provided user
+       * suggestions
+       *
+       * For commonly used suggestors (emoji, users, both) use suggestor.js
+       */
+      required: true,
+      type: Function
+    },
+    value: {
+      /**
+       * Used for v-model
+       */
+      required: true,
+      type: String
+    }
+ },
   data () {
     return {
       input: undefined,
       highlighted: 0,
       caret: 0,
-      focused: false,
-      popupOptions: {
-        placement: 'bottom-start',
-        trigger: 'hover',
-        // See: https://github.com/RobinCK/vue-popper/issues/63
-        'delay-on-mouse-over': 9999999,
-        'delay-on-mouse-out': 9999999,
-        modifiers: {
-          arrow: { enabled: true },
-          offset: { offset: '0, 5px' }
-        }
-      }
+      focused: false
     }
   },
   computed: {
@@ -172,7 +206,7 @@ const EmojiInput = {
     onInput (e) {
       this.$emit('input', e.target.value)
     },
-    setCaret ({ target: { selectionStart, value } }) {
+    setCaret ({ target: { selectionStart } }) {
       this.caret = selectionStart
     },
     resize () {

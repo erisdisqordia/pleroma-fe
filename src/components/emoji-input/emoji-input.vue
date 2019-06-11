@@ -6,7 +6,7 @@
       <div
         v-for="(suggestion, index) in suggestions"
         :key="index"
-        @click.stop.prevent="replace(suggestion.replacement)"
+        @click.stop.prevent="replaceText"
         class="autocomplete-item"
         :class="{ highlighted: suggestion.highlighted }"
         >

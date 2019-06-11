@@ -1,3 +1,13 @@
+/**
+ * suggest - generates a suggestor function to be used by emoji-input
+ * data: object providing source information for specific types of suggestions:
+ * data.emoji - optional, an array of all emoji available i.e.
+ *   (state.instance.emoji + state.instance.customEmoji)
+ * data.users - optional, an array of all known users
+ *
+ * Depending on data present one or both (or none) can be present, so if field
+ * doesn't support user linking you can just provide only emoji.
+ */
 export default function suggest (data) {
   return input => {
     const firstChar = input[0]
@@ -39,7 +49,11 @@ function suggestUsers (users) {
       user =>
         user.screen_name.toLowerCase().startsWith(noPrefix) ||
         user.name.toLowerCase().startsWith(noPrefix)
-      /* eslint-disable camelcase */
+
+      /* taking only 20 results so that sorting is a bit cheaper, we display
+       * only 5 anyway. could be inaccurate, but we ideally we should query
+       * backend anyway
+       */
     ).slice(0, 20).sort((a, b) => {
       let aScore = 0
       let bScore = 0
@@ -59,11 +73,12 @@ function suggestUsers (users) {
       const screenNameAlphabetically = a.screen_name > b.screen_name ? 1 : -1
 
       return diff + nameAlphabetically + screenNameAlphabetically
+      /* eslint-disable camelcase */
     }).map(({ screen_name, name, profile_image_url_original }) => ({
       displayText: screen_name,
       detailText: name,
       imageUrl: profile_image_url_original,
-      replacement: '@' + screen_name
+      replacement: '@' + screen_name + ' '
     }))
     /* eslint-enable camelcase */
   }

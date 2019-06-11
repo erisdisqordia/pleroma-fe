@@ -31,11 +31,11 @@ const EmojiInput = {
        * Suggestion is an object containing following properties:
        * displayText: string. Main display text, what actual suggestion
        *    represents (user's screen name/emoji shortcode)
-       * replacementText: string. Text that should replace the textAtCaret
+       * replacement: string. Text that should replace the textAtCaret
        * detailText: string, optional. Subtitle text, providing additional info
        *    if present (user's nickname)
        * imageUrl: string, optional. Image to display alongside with suggestion,
-       *    currently if no image is provided, replacementText will be used (for
+       *    currently if no image is provided, replacement will be used (for
        *    unicode emojis)
        *
        * TODO: make it asynchronous when adding proper server-provided user
@@ -98,22 +98,22 @@ const EmojiInput = {
     if (!input) return
     this.input = input
     this.resize()
-    input.elm.addEventListener('transitionend', this.onTransition)
     input.elm.addEventListener('blur', this.onBlur)
     input.elm.addEventListener('focus', this.onFocus)
     input.elm.addEventListener('paste', this.onPaste)
     input.elm.addEventListener('keyup', this.onKeyUp)
     input.elm.addEventListener('keydown', this.onKeyDown)
+    input.elm.addEventListener('transitionend', this.onTransition)
   },
   unmounted () {
     const { input } = this
     if (input) {
-      input.elm.removeEventListener('transitionend', this.onTransition)
       input.elm.removeEventListener('blur', this.onBlur)
       input.elm.removeEventListener('focus', this.onFocus)
       input.elm.removeEventListener('paste', this.onPaste)
       input.elm.removeEventListener('keyup', this.onKeyUp)
       input.elm.removeEventListener('keydown', this.onKeyDown)
+      input.elm.removeEventListener('transitionend', this.onTransition)
     }
   },
   methods: {
@@ -132,6 +132,8 @@ const EmojiInput = {
         this.$emit('input', newValue)
         this.caret = 0
         this.highlighted = 0
+        // Re-focus inputbox after clicking suggestion
+        this.input.elm.focus()
         e.preventDefault()
       }
     },
@@ -163,9 +165,13 @@ const EmojiInput = {
       this.resize(e)
     },
     onBlur (e) {
-      this.focused = false
-      this.setCaret(e)
-      this.resize(e)
+      // Clicking on any suggestion removes focus from autocomplete,
+      // preventing click handler ever executing.
+      setTimeout(() => {
+        this.focused = false
+        this.setCaret(e)
+        this.resize(e)
+      }, 200)
     },
     onFocus (e) {
       this.focused = true

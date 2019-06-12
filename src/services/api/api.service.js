@@ -187,7 +187,7 @@ const register = ({ params, credentials }) => {
     },
     body: JSON.stringify({
       nickname,
-      locale: 'xx_XX',
+      locale: 'en_US',
       agreement: true,
       ...rest
     })

@@ -23,6 +23,7 @@ const messages = {
   hu: require('./hu.json'),
   it: require('./it.json'),
   ja: require('./ja.json'),
+  ja_pedantic: require('./ja_pedantic.json'),
   ko: require('./ko.json'),
   nb: require('./nb.json'),
   nl: require('./nl.json'),

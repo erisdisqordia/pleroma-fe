@@ -65,18 +65,20 @@
       {{ $t('user_card.admin_menu.moderation') }}
     </button>
   </Popper>
-  <DialogModal v-if="showDeleteUserDialog" :onCancel='deleteUserDialog.bind(this, false)'>
-    <span slot="header">{{ $t('user_card.admin_menu.delete_user') }}</span>
-    <p>{{ $t('user_card.admin_menu.delete_user_confirmation') }}</p>
-    <span slot="footer">
-      <button @click='deleteUserDialog(false)'>
-        {{ $t('general.cancel') }}
-      </button>
-      <button class="danger" @click='deleteUser()'>
-        {{ $t('user_card.admin_menu.delete_user') }}
-      </button>
-    </span>
-  </DialogModal>
+  <portal to="modal">
+    <DialogModal v-if="showDeleteUserDialog" :onCancel='deleteUserDialog.bind(this, false)'>
+      <template slot="header">{{ $t('user_card.admin_menu.delete_user') }}</template>
+      <p>{{ $t('user_card.admin_menu.delete_user_confirmation') }}</p>
+      <template slot="footer">
+        <button class="btn btn-default" @click='deleteUserDialog(false)'>
+          {{ $t('general.cancel') }}
+        </button>
+        <button class="btn btn-default danger" @click='deleteUser()'>
+          {{ $t('user_card.admin_menu.delete_user') }}
+        </button>
+      </template>
+    </DialogModal>
+  </portal>
 </div>
 </template>
 
@@ -85,64 +87,6 @@
 <style lang="scss">
 @import '../../_variables.scss';
 @import '../popper/popper.scss';
-
-.dropdown-menu {
-  display: block;
-  padding: .5rem 0;
-  font-size: 1rem;
-  text-align: left;
-  list-style: none;
-  max-width: 100vw;
-  z-index: 10;
-  box-shadow: 1px 1px 4px rgba(0,0,0,.6);
-  box-shadow: var(--panelShadow);
-  border: none;
-  border-radius: $fallback--btnRadius;
-  border-radius: var(--btnRadius, $fallback--btnRadius);
-  background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
-
-  .dropdown-divider {
-    height: 0;
-    margin: .5rem 0;
-    overflow: hidden;
-    border-top: 1px solid $fallback--border;
-    border-top: 1px solid var(--border, $fallback--border);
-  }
-
-  .dropdown-item {
-    line-height: 21px;
-    margin-right: 5px;
-    overflow: auto;
-    display: block;
-    padding: .25rem 1.0rem .25rem 1.5rem;
-    clear: both;
-    font-weight: 400;
-    text-align: inherit;
-    white-space: normal;
-    border: none;
-    border-radius: 0px;
-    background-color: transparent;
-    box-shadow: none;
-    width: 100%;
-    height: 100%;
-
-    &-icon {
-      padding-left: 0.5rem;
-
-      i {
-        margin-right: 0.25rem;
-      }
-    }
-
-    &:hover {
-      // TODO: improve the look on breeze themes
-      background-color: $fallback--fg;
-      background-color: var(--btn, $fallback--fg);
-      box-shadow: none;
-    }
-  }
-}
 
 .menu-checkbox {
   float: right;

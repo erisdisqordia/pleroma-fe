@@ -62,6 +62,7 @@
 
     .title {
       margin-bottom: 0;
+      text-align: center;
     }
   }
 
@@ -80,6 +81,7 @@
     background-color: var(--lightBg, $fallback--lightBg);
     border-top: 1px solid $fallback--bg;
     border-top: 1px solid var(--bg, $fallback--bg);
+    display: flex;
     justify-content: flex-end;
 
     button {

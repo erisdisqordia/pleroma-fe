@@ -33,6 +33,7 @@ export const parseUser = (data) => {
 
   if (masto) {
     output.screen_name = data.acct
+    output.statusnet_profile_url = data.url
 
     // There's nothing else to get
     if (mastoShort) {
@@ -42,7 +43,7 @@ export const parseUser = (data) => {
     output.name = data.display_name
     output.name_html = addEmojis(data.display_name, data.emojis)
 
-    // output.description = ??? missing
+    output.description = data.note
     output.description_html = addEmojis(data.note, data.emojis)
 
     // Utilize avatar_static for gif avatars?
@@ -55,8 +56,6 @@ export const parseUser = (data) => {
     output.friends_count = data.following_count
 
     output.bot = data.bot
-
-    output.statusnet_profile_url = data.url
 
     if (data.pleroma) {
       const relationship = data.pleroma.relationship
@@ -71,6 +70,23 @@ export const parseUser = (data) => {
       output.rights = {
         moderator: data.pleroma.is_moderator,
         admin: data.pleroma.is_admin
+      }
+      // TODO: Clean up in UI? This is duplication from what BE does for qvitterapi
+      if (output.rights.admin) {
+        output.role = 'admin'
+      } else if (output.rights.moderator) {
+        output.role = 'moderator'
+      } else {
+        output.role = 'member'
+      }
+    }
+
+    if (data.source) {
+      output.description = data.source.note
+      output.default_scope = data.source.privacy
+      if (data.source.pleroma) {
+        output.no_rich_text = data.source.pleroma.no_rich_text
+        output.show_role = data.source.pleroma.show_role
       }
     }
 
@@ -106,8 +122,6 @@ export const parseUser = (data) => {
 
     output.muted = data.muted
 
-    // QVITTER ONLY FOR NOW
-    // Really only applies to logged in user, really.. I THINK
     if (data.rights) {
       output.rights = {
         moderator: data.rights.delete_others_notice,
@@ -135,15 +149,16 @@ export const parseUser = (data) => {
 
   if (data.pleroma) {
     output.follow_request_count = data.pleroma.follow_request_count
-  }
 
-  if (data.pleroma) {
     output.tags = data.pleroma.tags
     output.deactivated = data.pleroma.deactivated
+
+    output.notification_settings = data.pleroma.notification_settings
   }
 
   output.tags = output.tags || []
   output.rights = output.rights || {}
+  output.notification_settings = output.notification_settings || {}
 
   return output
 }

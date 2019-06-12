@@ -1,5 +1,4 @@
 /* eslint-env browser */
-const LOGIN_URL = '/api/account/verify_credentials.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
@@ -15,7 +14,9 @@ const PERMISSION_GROUP_URL = (screenName, right) => `/api/pleroma/admin/users/${
 const ACTIVATION_STATUS_URL = screenName => `/api/pleroma/admin/users/${screenName}/activation_status`
 const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
+const NOTIFICATION_SETTINGS_URL = '/api/pleroma/notification_settings'
 
+const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
 const MASTODON_REGISTRATION_URL = '/api/v1/accounts'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
@@ -95,6 +96,21 @@ const promisedRequest = ({ method, url, payload, credentials, headers = {} }) =>
           return resolve(json)
         }))
     })
+}
+
+const updateNotificationSettings = ({credentials, settings}) => {
+  const form = new FormData()
+
+  each(settings, (value, key) => {
+    form.append(key, value)
+  })
+
+  return fetch(NOTIFICATION_SETTINGS_URL, {
+    headers: authHeaders(credentials),
+    method: 'PUT',
+    body: form
+  })
+  .then((data) => data.json())
 }
 
 const updateAvatar = ({credentials, avatar}) => {
@@ -507,8 +523,7 @@ const fetchPinnedStatuses = ({ id, credentials }) => {
 }
 
 const verifyCredentials = (user) => {
-  return fetch(LOGIN_URL, {
-    method: 'POST',
+  return fetch(MASTODON_LOGIN_URL, {
     headers: authHeaders(user)
   })
     .then((response) => {
@@ -520,6 +535,7 @@ const verifyCredentials = (user) => {
         }
       }
     })
+
     .then((data) => data.error ? data : parseUser(data))
 }
 
@@ -777,7 +793,8 @@ const apiService = {
   markNotificationsAsSeen,
   fetchFavoritedByUsers,
   fetchRebloggedByUsers,
-  reportUser
+  reportUser,
+  updateNotificationSettings
 }
 
 export default apiService

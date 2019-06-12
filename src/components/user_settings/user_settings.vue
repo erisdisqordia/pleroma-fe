@@ -44,6 +44,7 @@
                 <scope-selector
                   :showAll="true"
                   :userDefault="newDefaultScope"
+                  :initialScope="newDefaultScope"
                   :onScopeChange="changeVis"/>
               </div>
             </div>
@@ -164,6 +165,43 @@
             <p v-if="deleteAccountError !== false">{{$t('settings.delete_account_error')}}</p>
             <p v-if="deleteAccountError">{{deleteAccountError}}</p>
             <button class="btn btn-default" v-if="!deletingAccount" @click="confirmDelete">{{$t('general.submit')}}</button>
+          </div>
+        </div>
+
+        <div :label="$t('settings.notifications')" v-if="pleromaBackend">
+          <div class="setting-item">
+            <div class="select-multiple">
+              <span class="label">{{$t('settings.notification_setting')}}</span>
+              <ul class="option-list">
+                <li>
+                  <input type="checkbox" id="notification-setting-follows" v-model="notificationSettings.follows">
+                  <label for="notification-setting-follows">
+                  {{$t('settings.notification_setting_follows')}}
+                  </label>
+                </li>
+                <li>
+                  <input type="checkbox" id="notification-setting-followers" v-model="notificationSettings.followers">
+                  <label for="notification-setting-followers">
+                  {{$t('settings.notification_setting_followers')}}
+                  </label>
+                </li>
+                <li>
+                  <input type="checkbox" id="notification-setting-non-follows" v-model="notificationSettings.non_follows">
+                  <label for="notification-setting-non-follows">
+                  {{$t('settings.notification_setting_non_follows')}}
+                  </label>
+                </li>
+                <li>
+                  <input type="checkbox" id="notification-setting-non-followers" v-model="notificationSettings.non_followers">
+                  <label for="notification-setting-non-followers">
+                  {{$t('settings.notification_setting_non_followers')}}
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <p>{{$t('settings.notification_mutes')}}</p>
+            <p>{{$t('settings.notification_blocks')}}</p>
+            <button class="btn btn-default" @click="updateNotificationSettings">{{$t('general.submit')}}</button>
           </div>
         </div>
 

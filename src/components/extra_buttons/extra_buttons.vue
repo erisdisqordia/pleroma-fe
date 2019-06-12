@@ -13,7 +13,7 @@
     }"
   >
     <div class="popper-wrapper">
-      <div class="dropdown-menu"> 
+      <div class="dropdown-menu">
         <button class="dropdown-item dropdown-item-icon" @click.prevent="pinStatus" v-if="!status.pinned && canPin">
           <i class="icon-pin"></i><span>{{$t("status.pin")}}</span>
         </button>
@@ -35,6 +35,7 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
+@import '../popper/popper.scss';
 
 .icon-ellipsis {
   cursor: pointer;

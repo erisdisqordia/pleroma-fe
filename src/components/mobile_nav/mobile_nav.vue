@@ -29,7 +29,7 @@
         </a>
       </div>
       <div class="mobile-notifications" @scroll="onScroll">
-        <Notifications ref="notifications" noHeading="true"/>
+        <Notifications ref="notifications" :noHeading="true"/>
       </div>
     </div>
     <SideDrawer ref="sideDrawer" :logout="logout"/>

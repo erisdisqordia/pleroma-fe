@@ -78,6 +78,8 @@ const Timeline = {
   },
   methods: {
     handleShortKey (e) {
+      // Ignore when input fields are focused
+      if (['textarea', 'input'].includes(e.target.tagName.toLowerCase())) return
       if (e.key === '.') this.showNewStatuses()
     },
     showNewStatuses () {

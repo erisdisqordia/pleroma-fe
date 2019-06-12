@@ -1,5 +1,4 @@
 /* eslint-env browser */
-const LOGIN_URL = '/api/account/verify_credentials.json'
 const REGISTRATION_URL = '/api/account/register.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
@@ -18,6 +17,7 @@ const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 const NOTIFICATION_SETTINGS_URL = '/api/pleroma/notification_settings'
 
+const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
 const MASTODON_FAVORITE_URL = id => `/api/v1/statuses/${id}/favourite`
@@ -513,8 +513,7 @@ const fetchPinnedStatuses = ({ id, credentials }) => {
 }
 
 const verifyCredentials = (user) => {
-  return fetch(LOGIN_URL, {
-    method: 'POST',
+  return fetch(MASTODON_LOGIN_URL, {
     headers: authHeaders(user)
   })
     .then((response) => {
@@ -526,6 +525,7 @@ const verifyCredentials = (user) => {
         }
       }
     })
+
     .then((data) => data.error ? data : parseUser(data))
 }
 

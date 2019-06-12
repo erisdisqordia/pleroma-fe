@@ -71,6 +71,23 @@ export const parseUser = (data) => {
         moderator: data.pleroma.is_moderator,
         admin: data.pleroma.is_admin
       }
+      // TODO: Clean up in UI? This is duplication from what BE does for qvitterapi
+      if (output.rights.admin) {
+        output.role = 'admin'
+      } else if (output.rights.moderator) {
+        output.role = 'moderator'
+      } else {
+        output.role = 'member'
+      }
+    }
+
+    if (data.source) {
+      output.description = data.source.note
+      output.default_scope = data.source.privacy
+      if (data.source.pleroma) {
+        output.no_rich_text = data.source.pleroma.no_rich_text
+        output.show_role = data.source.pleroma.show_role
+      }
     }
 
     // TODO: handle is_local
@@ -105,8 +122,6 @@ export const parseUser = (data) => {
 
     output.muted = data.muted
 
-    // QVITTER ONLY FOR NOW
-    // Really only applies to logged in user, really.. I THINK
     if (data.rights) {
       output.rights = {
         moderator: data.rights.delete_others_notice,

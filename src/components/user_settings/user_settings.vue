@@ -152,7 +152,7 @@
               </tbody>
             </table>
           </div>
-
+          <mfa />
           <div class="setting-item">
             <h2>{{$t('settings.delete_account')}}</h2>
             <p v-if="!deletingAccount">{{$t('settings.delete_account_description')}}</p>

@@ -27,7 +27,11 @@
     "optional": "optional",
     "show_more": "Show more",
     "show_less": "Show less",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "disable": "Disable",
+    "enable": "Enable",
+    "confirm": "Confirm",
+    "verify": "Verify"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",
@@ -48,7 +52,15 @@
     "placeholder": "e.g. lain",
     "register": "Register",
     "username": "Username",
-    "hint": "Log in to join the discussion"
+    "hint": "Log in to join the discussion",
+    "authentication_code": "Authentication code",
+    "enter_recovery_code": "Enter a recovery code",
+    "enter_two_factor_code": "Enter a two-factor code",
+    "recovery_code": "Recovery code",
+    "heading" : {
+      "totp" : "Two-factor authentication",
+      "recovery" : "Two-factor recovery"
+    }
   },
   "media_modal": {
     "previous": "Previous",
@@ -138,6 +150,29 @@
   },
   "settings": {
     "app_name": "App name",
+    "security": "Security",
+    "enter_current_password_to_confirm": "Enter your current password to confirm your identity",
+    "mfa": {
+      "otp" : "OTP",
+      "setup_otp" : "Setup OTP",
+      "wait_pre_setup_otp" : "presetting OTP",
+      "confirm_and_enable" : "Confirm & enable OTP",
+      "title": "Two-factor Authentication",
+      "generate_new_recovery_codes" : "Generate new recovery codes",
+      "warning_of_generate_new_codes" : "When you generate new recovery codes, your old codes won’t work anymore.",
+      "recovery_codes" : "Recovery codes.",
+      "waiting_a_recovery_codes": "Receiving backup codes...",
+      "recovery_codes_warning" : "Write the codes down or save them somewhere secure - otherwise you won't see them again. If you lose access to your 2FA app and recovery codes you'll be locked out of your account.",
+      "authentication_methods" : "Authentication methods",
+      "scan": {
+        "title": "Scan",
+        "desc": "Using your two-factor app, scan this QR code or enter text key:",
+        "secret_code": "Key"
+      },
+      "verify": {
+        "desc": "To enable two-factor authentication, enter the code from your two-factor app:"
+      }
+    },
     "attachmentRadius": "Attachments",
     "attachments": "Attachments",
     "autoload": "Enable automatic loading when scrolled to the bottom",

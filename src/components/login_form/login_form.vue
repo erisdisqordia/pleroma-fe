@@ -1,47 +1,53 @@
 <template>
-  <div class="login panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading">
-      {{$t('login.login')}}
-    </div>
-    <div class="panel-body">
-      <form v-if="loginMethod == 'password'" v-on:submit.prevent='submit(user)' class='login-form'>
+<div class="login panel panel-default">
+  <!-- Default panel contents -->
+
+  <div class="panel-heading">{{$t('login.login')}}</div>
+
+  <div class="panel-body">
+    <form class='login-form' @submit.prevent='submit'>
+      <template v-if="isPasswordAuth">
         <div class='form-group'>
           <label for='username'>{{$t('login.username')}}</label>
-          <input :disabled="loggingIn" v-model='user.username' class='form-control' id='username' v-bind:placeholder="$t('login.placeholder')">
+          <input :disabled="loggingIn" v-model='user.username'
+                 class='form-control' id='username'
+                 :placeholder="$t('login.placeholder')">
         </div>
         <div class='form-group'>
           <label for='password'>{{$t('login.password')}}</label>
-          <input :disabled="loggingIn" v-model='user.password' class='form-control' id='password' type='password'>
+          <input :disabled="loggingIn" v-model='user.password'
+                 ref='passwordInput' class='form-control' id='password' type='password'>
         </div>
-        <div class='form-group'>
-          <div class='login-bottom'>
-            <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>{{$t('login.register')}}</router-link></div>
-            <button :disabled="loggingIn" type='submit' class='btn btn-default'>{{$t('login.login')}}</button>
-          </div>
-        </div>
-      </form>
+      </template>
 
-      <form v-if="loginMethod == 'token'" v-on:submit.prevent='oAuthLogin'  class="login-form">
-        <div class="form-group">
-          <p>{{$t('login.description')}}</p>
-        </div>
-        <div class='form-group'>
-          <div class='login-bottom'>
-            <div><router-link :to="{name: 'registration'}" v-if='registrationOpen' class='register'>{{$t('login.register')}}</router-link></div>
-            <button :disabled="loggingIn" type='submit' class='btn btn-default'>{{$t('login.login')}}</button>
+      <div class="form-group" v-if="isTokenAuth">
+        <p>{{$t('login.description')}}</p>
+      </div>
+
+      <div class='form-group'>
+        <div class='login-bottom'>
+          <div>
+            <router-link :to="{name: 'registration'}"
+                         v-if='registrationOpen'
+                         class='register'>
+              {{$t('login.register')}}
+            </router-link>
           </div>
-        </div>
-      </form>
-      
-      <div v-if="authError" class='form-group'>
-        <div class='alert error'>
-          {{authError}}
-          <i class="button-icon icon-cancel" @click="clearError"></i>
+          <button :disabled="loggingIn" type='submit' class='btn btn-default'>
+            {{$t('login.login')}}
+          </button>
         </div>
       </div>
+    </form>
+  </div>
+
+  <div v-if="error" class='form-group'>
+    <div class='alert error'>
+      {{error}}
+      <i class="button-icon icon-cancel" @click="clearError"></i>
     </div>
   </div>
+</div>
 </template>
 
 <script src="./login_form.js" ></script>

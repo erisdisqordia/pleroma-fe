@@ -86,10 +86,6 @@ export const parseUser = (data) => {
       output.description = data.source.note
       output.default_scope = data.source.privacy
       if (data.source.pleroma) {
-        if (data.source.pleroma.show_role) {
-          console.log(data.source)
-          console.log(data.pleroma)
-        }
         output.no_rich_text = data.source.pleroma.no_rich_text
         output.show_role = data.source.pleroma.show_role
       }

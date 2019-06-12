@@ -116,6 +116,12 @@ const backendInteractorService = (credentials) => {
   const deleteAccount = ({password}) => apiService.deleteAccount({credentials, password})
   const changePassword = ({password, newPassword, newPasswordConfirmation}) => apiService.changePassword({credentials, password, newPassword, newPasswordConfirmation})
 
+  const fetchSettingsMFA = () => apiService.settingsMFA({credentials})
+  const generateMfaBackupCodes = () => apiService.generateMfaBackupCodes({credentials})
+  const mfaSetupOTP = () => apiService.mfaSetupOTP({credentials})
+  const mfaConfirmOTP = ({password, token}) => apiService.mfaConfirmOTP({credentials, password, token})
+  const mfaDisableOTP = ({password}) => apiService.mfaDisableOTP({credentials, password})
+
   const fetchFavoritedByUsers = (id) => apiService.fetchFavoritedByUsers({id})
   const fetchRebloggedByUsers = (id) => apiService.fetchRebloggedByUsers({id})
   const reportUser = (params) => apiService.reportUser({credentials, ...params})
@@ -166,6 +172,11 @@ const backendInteractorService = (credentials) => {
     importFollows,
     deleteAccount,
     changePassword,
+    fetchSettingsMFA,
+    generateMfaBackupCodes,
+    mfaSetupOTP,
+    mfaConfirmOTP,
+    mfaDisableOTP,
     fetchFollowRequests,
     approveUser,
     denyUser,

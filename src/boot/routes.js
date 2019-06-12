@@ -13,7 +13,7 @@ import FollowRequests from 'components/follow_requests/follow_requests.vue'
 import OAuthCallback from 'components/oauth_callback/oauth_callback.vue'
 import UserSearch from 'components/user_search/user_search.vue'
 import Notifications from 'components/notifications/notifications.vue'
-import LoginForm from 'components/login_form/login_form.vue'
+import AuthForm from 'components/auth_form/auth_form.js'
 import ChatPanel from 'components/chat_panel/chat_panel.vue'
 import WhoToFollow from 'components/who_to_follow/who_to_follow.vue'
 import About from 'components/about/about.vue'
@@ -42,7 +42,7 @@ export default (store) => {
     { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
     { name: 'user-settings', path: '/user-settings', component: UserSettings },
     { name: 'notifications', path: '/:username/notifications', component: Notifications },
-    { name: 'login', path: '/login', component: LoginForm },
+    { name: 'login', path: '/login', component: AuthForm },
     { name: 'chat', path: '/chat', component: ChatPanel, props: () => ({ floating: false }) },
     { name: 'oauth-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) },
     { name: 'user-search', path: '/user-search', component: UserSearch, props: (route) => ({ query: route.query.query }) },

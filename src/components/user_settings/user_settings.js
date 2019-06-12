@@ -17,6 +17,7 @@ import Importer from '../importer/importer.vue'
 import Exporter from '../exporter/exporter.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
 import userSearchApi from '../../services/new_api/user_search.js'
+import Mfa from './mfa.vue'
 
 const BlockList = withSubscription({
   fetch: (props, $store) => $store.dispatch('fetchBlocks'),
@@ -75,7 +76,8 @@ const UserSettings = {
     MuteCard,
     ProgressButton,
     Importer,
-    Exporter
+    Exporter,
+    Mfa
   },
   computed: {
     user () {

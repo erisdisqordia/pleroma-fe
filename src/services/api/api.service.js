@@ -16,6 +16,13 @@ const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 const NOTIFICATION_SETTINGS_URL = '/api/pleroma/notification_settings'
 
+const MFA_SETTINGS_URL = '/api/pleroma/profile/mfa'
+const MFA_BACKUP_CODES_URL = '/api/pleroma/profile/mfa/backup_codes'
+
+const MFA_SETUP_OTP_URL = '/api/pleroma/profile/mfa/setup/totp'
+const MFA_CONFIRM_OTP_URL = '/api/pleroma/profile/mfa/confirm/totp'
+const MFA_DISABLE_OTP_URL = '/api/pleroma/profile/mfa/totp'
+
 const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
 const MASTODON_REGISTRATION_URL = '/api/v1/accounts'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
@@ -659,6 +666,51 @@ const changePassword = ({credentials, password, newPassword, newPasswordConfirma
     .then((response) => response.json())
 }
 
+const settingsMFA = ({credentials}) => {
+  return fetch(MFA_SETTINGS_URL, {
+    headers: authHeaders(credentials),
+    method: 'GET'
+  }).then((data) => data.json())
+}
+
+const mfaDisableOTP = ({credentials, password}) => {
+  const form = new FormData()
+
+  form.append('password', password)
+
+  return fetch(MFA_DISABLE_OTP_URL, {
+    body: form,
+    method: 'DELETE',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.json())
+}
+
+const mfaConfirmOTP = ({credentials, password, token}) => {
+  const form = new FormData()
+
+  form.append('password', password)
+  form.append('code', token)
+
+  return fetch(MFA_CONFIRM_OTP_URL, {
+    body: form,
+    headers: authHeaders(credentials),
+    method: 'POST'
+  }).then((data) => data.json())
+}
+const mfaSetupOTP = ({credentials}) => {
+  return fetch(MFA_SETUP_OTP_URL, {
+    headers: authHeaders(credentials),
+    method: 'GET'
+  }).then((data) => data.json())
+}
+const generateMfaBackupCodes = ({credentials}) => {
+  return fetch(MFA_BACKUP_CODES_URL, {
+    headers: authHeaders(credentials),
+    method: 'GET'
+  }).then((data) => data.json())
+}
+
 const fetchMutes = ({credentials}) => {
   return promisedRequest({ url: MASTODON_USER_MUTES_URL, credentials })
     .then((users) => users.map(parseUser))
@@ -786,6 +838,11 @@ const apiService = {
   importFollows,
   deleteAccount,
   changePassword,
+  settingsMFA,
+  mfaDisableOTP,
+  generateMfaBackupCodes,
+  mfaSetupOTP,
+  mfaConfirmOTP,
   fetchFollowRequests,
   approveUser,
   denyUser,

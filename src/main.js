@@ -10,6 +10,7 @@ import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
 import chatModule from './modules/chat.js'
 import oauthModule from './modules/oauth.js'
+import authFlowModule from './modules/auth_flow.js'
 import mediaViewerModule from './modules/media_viewer.js'
 import oauthTokensModule from './modules/oauth_tokens.js'
 import reportsModule from './modules/reports.js'
@@ -77,6 +78,7 @@ const persistedStateOptions = {
       config: configModule,
       chat: chatModule,
       oauth: oauthModule,
+      authFlow: authFlowModule,
       mediaViewer: mediaViewerModule,
       oauthTokens: oauthTokensModule,
       reports: reportsModule

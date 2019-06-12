@@ -94,6 +94,7 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
       ? 0
       : config.logoMargin
   })
+  store.commit('authFlow/setInitialStrategy', config.loginMethod)
 
   copyInstanceOption('redirectRootNoLogin')
   copyInstanceOption('redirectRootLogin')
@@ -102,7 +103,6 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('formattingOptionsEnabled')
   copyInstanceOption('hideMutedPosts')
   copyInstanceOption('collapseMessageWithSubject')
-  copyInstanceOption('loginMethod')
   copyInstanceOption('scopeCopy')
   copyInstanceOption('subjectLineBehavior')
   copyInstanceOption('postContentType')

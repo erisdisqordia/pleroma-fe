@@ -41,7 +41,8 @@ const LoginForm = {
       const data = {
         clientId,
         oauth: this.oauth,
-        instance: this.instance.server
+        instance: this.instance.server,
+        commit: this.$store.commit
       }
       this.error = false
 

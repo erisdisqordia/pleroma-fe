@@ -11,8 +11,9 @@ const LoginForm = {
   },
   methods: {
     oAuthLogin () {
+      const { clientId } = this.$store.state.oauth
       const data = {
-        ...this.$store.state.oauth,
+        clientId,
         instance: this.$store.state.instance.server,
         commit: this.$store.commit
       }
@@ -21,8 +22,9 @@ const LoginForm = {
         .then((app) => { oauthApi.login({ ...app, ...data }) })
     },
     submit () {
+      const { clientId } = this.$store.state.oauth
       const data = {
-        ...this.$store.state.oauth,
+        clientId,
         instance: this.$store.state.instance.server,
         commit: this.$store.commit
       }

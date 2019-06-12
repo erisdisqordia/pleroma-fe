@@ -4,8 +4,10 @@ const oac = {
   props: ['code'],
   mounted () {
     if (this.code) {
+      const { clientId } = this.$store.state.oauth
+
       oauth.getToken({
-        ...this.$store.state.oauth,
+        clientId,
         instance: this.$store.state.instance.server,
         code: this.code
       }).then((result) => {

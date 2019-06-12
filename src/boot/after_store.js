@@ -246,9 +246,9 @@ const setConfig = async ({ store }) => {
 
 const checkOAuthToken = async ({ store }) => {
   return new Promise(async (resolve, reject) => {
-    if (store.state.oauth.token) {
+    if (store.state.oauth.userToken) {
       try {
-        await store.dispatch('loginUser', store.state.oauth.token)
+        await store.dispatch('loginUser', store.state.oauth.userToken)
       } catch (e) {
         console.log(e)
       }

@@ -2,8 +2,8 @@ const oauth = {
   state: {
     clientId: false,
     clientSecret: false,
-    token: false,
-    clientToken: false
+    appToken: false,
+    userToken: false
   },
   mutations: {
     setClientData (state, { clientId, clientSecret }) {
@@ -11,15 +11,15 @@ const oauth = {
       state.clientSecret = clientSecret
     },
     setClientToken (state, token) {
-      state.clientToken = token
+      state.appToken = token
     },
     setToken (state, token) {
-      state.token = token
+      state.userToken = token
     }
   },
   getters: {
     getToken: state => () => {
-      return state.token || state.clientToken
+      return state.userToken || state.appToken
     }
   }
 }

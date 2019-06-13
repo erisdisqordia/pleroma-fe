@@ -23,7 +23,7 @@ const LoginForm = {
     ...mapMutations('authFlow', ['requireMFA']),
     ...mapActions({ login: 'authFlow/login' }),
     submit () {
-      this.isTokenMethod ? this.submitToken() : this.submitPassword()
+      this.isTokenAuth ? this.submitToken() : this.submitPassword()
     },
     submitToken () {
       oauthApi.login({

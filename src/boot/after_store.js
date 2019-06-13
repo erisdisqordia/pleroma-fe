@@ -196,7 +196,7 @@ const getAppSecret = async ({ store }) => {
   return getOrCreateApp({ ...oauth, instance: instance.server, commit })
     .then((app) => getClientToken({ ...app, instance: instance.server }))
     .then((token) => {
-      commit('setClientToken', token.access_token)
+      commit('setAppToken', token.access_token)
       commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
     })
 }

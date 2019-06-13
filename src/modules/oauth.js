@@ -17,7 +17,7 @@ const oauth = {
       state.clientId = clientId
       state.clientSecret = clientSecret
     },
-    setClientToken (state, token) {
+    setAppToken (state, token) {
       state.appToken = token
     },
     setToken (state, token) {

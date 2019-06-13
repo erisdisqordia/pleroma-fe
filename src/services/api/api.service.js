@@ -25,6 +25,7 @@ const MFA_DISABLE_OTP_URL = '/api/pleroma/profile/mfa/totp'
 
 const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
 const MASTODON_REGISTRATION_URL = '/api/v1/accounts'
+const GET_BACKGROUND_HACK = '/api/account/verify_credentials.json'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
 const MASTODON_FAVORITE_URL = id => `/api/v1/statuses/${id}/favourite`
@@ -542,8 +543,27 @@ const verifyCredentials = (user) => {
         }
       }
     })
-
     .then((data) => data.error ? data : parseUser(data))
+    .then((mastoUser) => {
+      // REMOVE WHEN BE SUPPORTS background_image
+      return fetch(GET_BACKGROUND_HACK, {
+        method: 'POST',
+        headers: authHeaders(user)
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            return {}
+          }
+        })
+      /* eslint-disable camelcase */
+        .then(({ background_image }) => ({
+          ...mastoUser,
+          background_image
+        }))
+      /* eslint-enable camelcase */
+    })
 }
 
 const favorite = ({ id, credentials }) => {

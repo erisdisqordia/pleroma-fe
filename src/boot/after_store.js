@@ -248,7 +248,7 @@ const checkOAuthToken = async ({ store }) => {
   return new Promise(async (resolve, reject) => {
     if (store.state.oauth.userToken) {
       try {
-        await store.dispatch('loginUser', store.state.oauth.userToken)
+        await store.dispatch('loginUser', store.getters.getUserToken())
       } catch (e) {
         console.log(e)
       }

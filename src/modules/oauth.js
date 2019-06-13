@@ -29,6 +29,11 @@ const oauth = {
       // state.token is userToken with older name, coming from persistent state
       // added here for smoother transition, otherwise user will be logged out
       return state.userToken || state.token || state.appToken
+    },
+    getUserToken: state => () => {
+      // state.token is userToken with older name, coming from persistent state
+      // added here for smoother transition, otherwise user will be logged out
+      return state.userToken || state.token
     }
   }
 }

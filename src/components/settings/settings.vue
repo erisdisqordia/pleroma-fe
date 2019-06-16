@@ -102,7 +102,7 @@
                 </label>
               </div>
             </li>
-            <li>
+            <li v-if="postFormats.length > 0">
               <div>
                 {{$t('settings.post_status_content_type')}}
                 <label for="postContentType" class="select">

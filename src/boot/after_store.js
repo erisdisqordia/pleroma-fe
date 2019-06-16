@@ -100,7 +100,6 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('redirectRootLogin')
   copyInstanceOption('showInstanceSpecificPanel')
   copyInstanceOption('minimalScopesMode')
-  copyInstanceOption('formattingOptionsEnabled')
   copyInstanceOption('hideMutedPosts')
   copyInstanceOption('collapseMessageWithSubject')
   copyInstanceOption('scopeCopy')

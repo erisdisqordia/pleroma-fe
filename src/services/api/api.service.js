@@ -1,5 +1,4 @@
 /* eslint-env browser */
-const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
@@ -25,7 +24,6 @@ const MFA_DISABLE_OTP_URL = '/api/pleroma/profile/mfa/totp'
 
 const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
 const MASTODON_REGISTRATION_URL = '/api/v1/accounts'
-const GET_BACKGROUND_HACK = '/api/account/verify_credentials.json'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
 const MASTODON_FAVORITE_URL = id => `/api/v1/statuses/${id}/favourite`
@@ -133,22 +131,17 @@ const updateAvatar = ({credentials, avatar}) => {
   .then((data) => parseUser(data))
 }
 
-const updateBg = ({credentials, params}) => {
-  let url = BG_UPDATE_URL
-
+const updateBg = ({ credentials, background }) => {
   const form = new FormData()
-
-  each(params, (value, key) => {
-    if (value) {
-      form.append(key, value)
-    }
-  })
-
-  return fetch(url, {
+  console.log(background)
+  form.append('pleroma_background_image', background)
+  return fetch(MASTODON_PROFILE_UPDATE_URL, {
     headers: authHeaders(credentials),
-    method: 'POST',
+    method: 'PATCH',
     body: form
-  }).then((data) => data.json())
+  })
+    .then((data) => data.json())
+    .then((data) => parseUser(data))
 }
 
 const updateBanner = ({credentials, banner}) => {
@@ -544,26 +537,6 @@ const verifyCredentials = (user) => {
       }
     })
     .then((data) => data.error ? data : parseUser(data))
-    .then((mastoUser) => {
-      // REMOVE WHEN BE SUPPORTS background_image
-      return fetch(GET_BACKGROUND_HACK, {
-        method: 'POST',
-        headers: authHeaders(user)
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json()
-          } else {
-            return {}
-          }
-        })
-      /* eslint-disable camelcase */
-        .then(({ background_image }) => ({
-          ...mastoUser,
-          background_image
-        }))
-      /* eslint-enable camelcase */
-    })
 }
 
 const favorite = ({ id, credentials }) => {

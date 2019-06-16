@@ -105,7 +105,7 @@ const backendInteractorService = (credentials) => {
   const getCaptcha = () => apiService.getCaptcha()
   const register = (params) => apiService.register({ credentials, params })
   const updateAvatar = ({avatar}) => apiService.updateAvatar({credentials, avatar})
-  const updateBg = ({params}) => apiService.updateBg({credentials, params})
+  const updateBg = ({background}) => apiService.updateBg({credentials, background})
   const updateBanner = ({banner}) => apiService.updateBanner({credentials, banner})
   const updateProfile = ({params}) => apiService.updateProfile({credentials, params})
 

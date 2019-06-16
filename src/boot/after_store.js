@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import App from '../App.vue'
 import { windowWidth } from '../services/window_utils/window_utils'
+import { getOrCreateApp, getClientToken } from '../services/new_api/oauth.js'
+import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 
 const getStatusnetConfig = async ({ store }) => {
   try {
@@ -188,6 +190,17 @@ const getCustomEmoji = async ({ store }) => {
   }
 }
 
+const getAppSecret = async ({ store }) => {
+  const { state, commit } = store
+  const { oauth, instance } = state
+  return getOrCreateApp({ ...oauth, instance: instance.server, commit })
+    .then((app) => getClientToken({ ...app, instance: instance.server }))
+    .then((token) => {
+      commit('setAppToken', token.access_token)
+      commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
+    })
+}
+
 const getNodeInfo = async ({ store }) => {
   try {
     const res = await window.fetch('/nodeinfo/2.0.json')
@@ -228,14 +241,14 @@ const setConfig = async ({ store }) => {
   const apiConfig = configInfos[0]
   const staticConfig = configInfos[1]
 
-  await setSettings({ store, apiConfig, staticConfig })
+  await setSettings({ store, apiConfig, staticConfig }).then(getAppSecret({ store }))
 }
 
 const checkOAuthToken = async ({ store }) => {
   return new Promise(async (resolve, reject) => {
-    if (store.state.oauth.token) {
+    if (store.getters.getUserToken()) {
       try {
-        await store.dispatch('loginUser', store.state.oauth.token)
+        await store.dispatch('loginUser', store.getters.getUserToken())
       } catch (e) {
         console.log(e)
       }

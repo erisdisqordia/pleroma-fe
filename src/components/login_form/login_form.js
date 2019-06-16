@@ -26,23 +26,30 @@ const LoginForm = {
       this.isTokenAuth ? this.submitToken() : this.submitPassword()
     },
     submitToken () {
-      oauthApi.login({
+      const { clientId } = this.oauth
+      const data = {
+        clientId,
+        instance: this.instance.server,
+        commit: this.$store.commit
+      }
+
+      oauthApi.getOrCreateApp(data)
+        .then((app) => { oauthApi.login({ ...app, ...data }) })
+    },
+    submitPassword () {
+      const { clientId } = this.oauth
+      const data = {
+        clientId,
         oauth: this.oauth,
         instance: this.instance.server,
         commit: this.$store.commit
-      })
-    },
-    submitPassword () {
-      const data = {
-        oauth: this.oauth,
-        instance: this.instance.server
       }
       this.error = false
 
       oauthApi.getOrCreateApp(data).then((app) => {
         oauthApi.getTokenWithCredentials(
           {
-            app,
+            ...app,
             instance: data.instance,
             username: this.user.username,
             password: this.user.password

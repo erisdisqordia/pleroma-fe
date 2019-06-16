@@ -5,9 +5,9 @@ const queryParams = (params) => {
 }
 
 const headers = (store) => {
-  const accessToken = store.state.oauth.token
+  const accessToken = store.getters.getToken()
   if (accessToken) {
-    return {'Authorization': `Bearer ${accessToken}`}
+    return { 'Authorization': `Bearer ${accessToken}` }
   } else {
     return {}
   }

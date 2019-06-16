@@ -1,5 +1,4 @@
 /* eslint-env browser */
-const REGISTRATION_URL = '/api/account/register.json'
 const BG_UPDATE_URL = '/api/qvitter/update_background_image.json'
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
@@ -25,6 +24,7 @@ const MFA_CONFIRM_OTP_URL = '/api/pleroma/profile/mfa/confirm/totp'
 const MFA_DISABLE_OTP_URL = '/api/pleroma/profile/mfa/totp'
 
 const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
+const MASTODON_REGISTRATION_URL = '/api/v1/accounts'
 const GET_BACKGROUND_HACK = '/api/account/verify_credentials.json'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
@@ -185,19 +185,29 @@ const updateProfile = ({credentials, params}) => {
 // homepage
 // location
 // token
-const register = (params) => {
-  const form = new FormData()
-
-  each(params, (value, key) => {
-    if (value) {
-      form.append(key, value)
-    }
-  })
-
-  return fetch(REGISTRATION_URL, {
+const register = ({ params, credentials }) => {
+  const { nickname, ...rest } = params
+  return fetch(MASTODON_REGISTRATION_URL, {
     method: 'POST',
-    body: form
+    headers: {
+      ...authHeaders(credentials),
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nickname,
+      locale: 'en_US',
+      agreement: true,
+      ...rest
+    })
   })
+    .then((response) => [response.ok, response])
+    .then(([ok, response]) => {
+      if (ok) {
+        return response.json()
+      } else {
+        return response.json().then((error) => { throw new Error(error) })
+      }
+    })
 }
 
 const getCaptcha = () => fetch('/api/pleroma/captcha').then(resp => resp.json())

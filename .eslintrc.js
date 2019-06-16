@@ -31,8 +31,7 @@ module.exports = {
     'vue/require-prop-types': 1,
     'vue/no-use-v-if-with-v-for': 1,
     'indent': 1,
-    'import/first': 1, // ????
-    'import-first': 1,
+    'import/first': 1,
     'object-curly-spacing': 1,
     'prefer-promise-reject-errors': 1,
     'eol-last': 1,

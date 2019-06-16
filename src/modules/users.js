@@ -3,7 +3,6 @@ import userSearchApi from '../services/new_api/user_search.js'
 import { compact, map, each, merge, last, concat, uniq } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
-import oauthApi from '../services/new_api/oauth'
 import { humanizeErrors } from './errors'
 
 // TODO: Unify with mergeOrAdd in statuses.js
@@ -368,31 +367,21 @@ const users = {
 
       let rootState = store.rootState
 
-      let response = await rootState.api.backendInteractor.register(userInfo)
-      if (response.ok) {
-        const data = {
-          oauth: rootState.oauth,
-          instance: rootState.instance.server
-        }
-        let app = await oauthApi.getOrCreateApp(data)
-        let result = await oauthApi.getTokenWithCredentials({
-          app,
-          instance: data.instance,
-          username: userInfo.username,
-          password: userInfo.password
-        })
+      try {
+        let data = await rootState.api.backendInteractor.register(userInfo)
         store.commit('signUpSuccess')
-        store.commit('setToken', result.access_token)
-        store.dispatch('loginUser', result.access_token)
-      } else {
-        const data = await response.json()
-        let errors = JSON.parse(data.error)
+        store.commit('setToken', data.access_token)
+        store.dispatch('loginUser', data.access_token)
+      } catch (e) {
+        let errors = e.message
         // replace ap_id with username
-        if (errors.ap_id) {
-          errors.username = errors.ap_id
-          delete errors.ap_id
+        if (typeof errors === 'object') {
+          if (errors.ap_id) {
+            errors.username = errors.ap_id
+            delete errors.ap_id
+          }
+          errors = humanizeErrors(errors)
         }
-        errors = humanizeErrors(errors)
         store.commit('signUpFailure', errors)
         throw Error(errors)
       }
@@ -406,7 +395,7 @@ const users = {
       store.dispatch('disconnectFromChat')
       store.commit('setToken', false)
       store.dispatch('stopFetching', 'friends')
-      store.commit('setBackendInteractor', backendInteractorService())
+      store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
       store.dispatch('stopFetching', 'notifications')
       store.commit('clearNotifications')
       store.commit('resetStatuses')

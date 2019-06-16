@@ -21,16 +21,28 @@ const Notification = {
     },
     userProfileLink (user) {
       return generateProfileLink(user.id, user.screen_name, this.$store.state.instance.restrictedNicknames)
+    },
+    getUser (notification) {
+      return this.$store.state.users.usersObject[notification.from_profile.id]
     }
   },
   computed: {
     userClass () {
-      return highlightClass(this.notification.action.user)
+      return highlightClass(this.notification.from_profile)
     },
     userStyle () {
       const highlight = this.$store.state.config.highlight
-      const user = this.notification.action.user
+      const user = this.notification.from_profile
       return highlightStyle(highlight[user.screen_name])
+    },
+    userInStore () {
+      return this.$store.getters.findUser(this.notification.from_profile.id)
+    },
+    user () {
+      if (this.userInStore) {
+        return this.userInStore
+      }
+      return this.notification.from_profile
     }
   }
 }

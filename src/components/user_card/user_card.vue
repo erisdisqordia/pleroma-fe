@@ -4,26 +4,26 @@
     <div class='user-info'>
       <div class='container'>
         <router-link :to="userProfileLink(user)">
-          <UserAvatar :betterShadow="betterShadow" :src="user.profile_image_url_original"/>
+          <UserAvatar :betterShadow="betterShadow" :user="user"/>
         </router-link>
-        <div class="name-and-screen-name">
+        <div class="user-summary">
           <div class="top-line">
             <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
             <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
             <router-link :to="{ name: 'user-settings' }" v-if="!isOtherUser">
-              <i class="button-icon icon-pencil usersettings" :title="$t('tool_tip.user_settings')"></i>
+              <i class="button-icon icon-wrench usersettings" :title="$t('tool_tip.user_settings')"></i>
             </router-link>
             <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser && !user.is_local">
               <i class="icon-link-ext usersettings"></i>
             </a>
           </div>
 
-          <router-link class='user-screen-name' :to="userProfileLink(user)">
-            <span class="handle">@{{user.screen_name}}
-              <span class="alert staff" v-if="!hideBio && !!visibleRole">{{visibleRole}}</span>
-            </span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
+          <div class="bottom-line">
+            <router-link class="user-screen-name" :to="userProfileLink(user)">@{{user.screen_name}}</router-link>
+            <span class="alert staff" v-if="!hideBio && !!visibleRole">{{visibleRole}}</span>
+            <span v-if="user.locked"><i class="icon icon-lock"></i></span>
             <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
-          </router-link>
+          </div>
         </div>
       </div>
       <div class="user-meta">
@@ -99,6 +99,14 @@
             </button>
           </span>
         </div>
+        <div class='block' v-if='isOtherUser && loggedIn'>
+          <span>
+            <button @click="reportUser">
+              {{ $t('user_card.report') }}
+            </button>
+          </span>
+        </div>
+        <ModerationTools :user='user' v-if='loggedIn.role === "admin"'/>
       </div>
     </div>
   </div>
@@ -160,7 +168,7 @@
       max-width: 100%;
       max-height: 400px;
 
-      .emoji {
+      &.emoji {
         width: 32px;
         height: 32px;
       }
@@ -224,7 +232,7 @@
     opacity: .8;
   }
 
-  .name-and-screen-name {
+  .user-summary {
     display: block;
     margin-left: 0.6em;
     text-align: left;
@@ -241,6 +249,7 @@
       vertical-align: middle;
       object-fit: contain
     }
+
     .top-line {
       display: flex;
     }
@@ -261,15 +270,19 @@
     }
   }
 
-  .user-screen-name {
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-    display: inline-block;
+  .bottom-line {
+    display: flex;
     font-weight: light;
     font-size: 15px;
-    padding-right: 0.1em;
-    width: 100%;
-    display: flex;
+
+    .user-screen-name {
+      min-width: 1px;
+      flex: 0 1 auto;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
 
     .dailyAvg {
       min-width: 1px;
@@ -280,15 +293,9 @@
       color: var(--text, $fallback--text);
     }
 
-    .handle {
-      min-width: 1px;
-      flex: 0 1 auto;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-
     // TODO use proper colors
     .staff {
+      flex: none;
       text-transform: capitalize;
       color: $fallback--text;
       color: var(--btnText, $fallback--text);

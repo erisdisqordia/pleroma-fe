@@ -11,9 +11,10 @@
       @goto="setHighlight"
       @toggleExpanded="toggleExpanded"
       :key="status.id"
-      :inlineExpanded="collapsable"
+      :inlineExpanded="collapsable && isExpanded"
       :statusoid="status"
-      :expandable='!expanded'
+      :expandable='!isExpanded'
+      :showPinned="showPinned"
       :focused="focused(status.id)"
       :inConversation="isExpanded"
       :highlight="getHighlight()"

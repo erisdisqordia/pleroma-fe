@@ -10,8 +10,10 @@ import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
 import chatModule from './modules/chat.js'
 import oauthModule from './modules/oauth.js'
+import authFlowModule from './modules/auth_flow.js'
 import mediaViewerModule from './modules/media_viewer.js'
 import oauthTokensModule from './modules/oauth_tokens.js'
+import reportsModule from './modules/reports.js'
 
 import VueTimeago from 'vue-timeago'
 import VueI18n from 'vue-i18n'
@@ -22,6 +24,8 @@ import pushNotifications from './lib/push_notifications_plugin.js'
 import messages from './i18n/messages.js'
 
 import VueChatScroll from 'vue-chat-scroll'
+import VueClickOutside from 'v-click-outside'
+import PortalVue from 'portal-vue'
 
 import afterStoreSetup from './boot/after_store.js'
 
@@ -39,6 +43,8 @@ Vue.use(VueTimeago, {
 })
 Vue.use(VueI18n)
 Vue.use(VueChatScroll)
+Vue.use(VueClickOutside)
+Vue.use(PortalVue)
 
 const i18n = new VueI18n({
   // By default, use the browser locale, we will update it if neccessary
@@ -59,6 +65,11 @@ const persistedStateOptions = {
   const persistedState = await createPersistedState(persistedStateOptions)
   const store = new Vuex.Store({
     modules: {
+      i18n: {
+        getters: {
+          i18n: () => i18n
+        }
+      },
       interface: interfaceModule,
       instance: instanceModule,
       statuses: statusesModule,
@@ -67,8 +78,10 @@ const persistedStateOptions = {
       config: configModule,
       chat: chatModule,
       oauth: oauthModule,
+      authFlow: authFlowModule,
       mediaViewer: mediaViewerModule,
-      oauthTokens: oauthTokensModule
+      oauthTokens: oauthTokensModule,
+      reports: reportsModule
     },
     plugins: [persistedState, pushNotifications],
     strict: false // Socket modifies itself, let's ignore this for now.

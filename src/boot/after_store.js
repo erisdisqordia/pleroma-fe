@@ -1,20 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
-
 import App from '../App.vue'
+import { windowWidth } from '../services/window_utils/window_utils'
+import { getOrCreateApp, getClientToken } from '../services/new_api/oauth.js'
+import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 
 const getStatusnetConfig = async ({ store }) => {
   try {
     const res = await window.fetch('/api/statusnet/config.json')
     if (res.ok) {
       const data = await res.json()
-      const { name, closed: registrationClosed, textlimit, uploadlimit, server, vapidPublicKey } = data.site
+      const { name, closed: registrationClosed, textlimit, uploadlimit, server, vapidPublicKey, safeDMMentionsEnabled } = data.site
 
       store.dispatch('setInstanceOption', { name: 'name', value: name })
       store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
       store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
       store.dispatch('setInstanceOption', { name: 'server', value: server })
+      store.dispatch('setInstanceOption', { name: 'safeDM', value: safeDMMentionsEnabled !== '0' })
 
       // TODO: default values for this stuff, added if to not make it break on
       // my dev config out of the box.
@@ -91,15 +94,15 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
       ? 0
       : config.logoMargin
   })
+  store.commit('authFlow/setInitialStrategy', config.loginMethod)
 
   copyInstanceOption('redirectRootNoLogin')
   copyInstanceOption('redirectRootLogin')
   copyInstanceOption('showInstanceSpecificPanel')
-  copyInstanceOption('scopeOptionsEnabled')
+  copyInstanceOption('minimalScopesMode')
   copyInstanceOption('formattingOptionsEnabled')
   copyInstanceOption('hideMutedPosts')
   copyInstanceOption('collapseMessageWithSubject')
-  copyInstanceOption('loginMethod')
   copyInstanceOption('scopeCopy')
   copyInstanceOption('subjectLineBehavior')
   copyInstanceOption('postContentType')
@@ -170,9 +173,10 @@ const getCustomEmoji = async ({ store }) => {
   try {
     const res = await window.fetch('/api/pleroma/emoji.json')
     if (res.ok) {
-      const values = await res.json()
+      const result = await res.json()
+      const values = Array.isArray(result) ? Object.assign({}, ...result) : result
       const emoji = Object.keys(values).map((key) => {
-        return { shortcode: key, image_url: values[key] }
+        return { shortcode: key, image_url: values[key].image_url || values[key] }
       })
       store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
       store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })
@@ -184,6 +188,17 @@ const getCustomEmoji = async ({ store }) => {
     console.warn("Can't load custom emojis, maybe not a Pleroma instance?")
     console.warn(e)
   }
+}
+
+const getAppSecret = async ({ store }) => {
+  const { state, commit } = store
+  const { oauth, instance } = state
+  return getOrCreateApp({ ...oauth, instance: instance.server, commit })
+    .then((app) => getClientToken({ ...app, instance: instance.server }))
+    .then((token) => {
+      commit('setAppToken', token.access_token)
+      commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
+    })
 }
 
 const getNodeInfo = async ({ store }) => {
@@ -210,6 +225,7 @@ const getNodeInfo = async ({ store }) => {
 
       const frontendVersion = window.___pleromafe_commit_hash
       store.dispatch('setInstanceOption', { name: 'frontendVersion', value: frontendVersion })
+      store.dispatch('setInstanceOption', { name: 'tagPolicyAvailable', value: metadata.federation.mrf_policies.includes('TagPolicy') })
     } else {
       throw (res)
     }
@@ -217,6 +233,28 @@ const getNodeInfo = async ({ store }) => {
     console.warn('Could not load nodeinfo')
     console.warn(e)
   }
+}
+
+const setConfig = async ({ store }) => {
+  // apiConfig, staticConfig
+  const configInfos = await Promise.all([getStatusnetConfig({ store }), getStaticConfig()])
+  const apiConfig = configInfos[0]
+  const staticConfig = configInfos[1]
+
+  await setSettings({ store, apiConfig, staticConfig }).then(getAppSecret({ store }))
+}
+
+const checkOAuthToken = async ({ store }) => {
+  return new Promise(async (resolve, reject) => {
+    if (store.getters.getUserToken()) {
+      try {
+        await store.dispatch('loginUser', store.getters.getUserToken())
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    resolve()
+  })
 }
 
 const afterStoreSetup = async ({ store, i18n }) => {
@@ -230,19 +268,19 @@ const afterStoreSetup = async ({ store, i18n }) => {
     })
   }
 
-  const apiConfig = await getStatusnetConfig({ store })
-  const staticConfig = await getStaticConfig()
-  await setSettings({ store, apiConfig, staticConfig })
-  await getTOS({ store })
-  await getInstancePanel({ store })
-  await getStaticEmoji({ store })
-  await getCustomEmoji({ store })
-  await getNodeInfo({ store })
+  const width = windowWidth()
+  store.dispatch('setMobileLayout', width <= 800)
 
-  // Now we have the server settings and can try logging in
-  if (store.state.oauth.token) {
-    await store.dispatch('loginUser', store.state.oauth.token)
-  }
+  // Now we can try getting the server settings and logging in
+  await Promise.all([
+    checkOAuthToken({ store }),
+    setConfig({ store }),
+    getTOS({ store }),
+    getInstancePanel({ store }),
+    getStaticEmoji({ store }),
+    getCustomEmoji({ store }),
+    getNodeInfo({ store })
+  ])
 
   const router = new VueRouter({
     mode: 'history',

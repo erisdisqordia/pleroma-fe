@@ -7,7 +7,7 @@
   >
     <div class="post-form-modal-panel panel" @click.stop="">
       <div class="panel-heading">{{$t('post_status.new_status')}}</div>
-      <PostStatusForm class="panel-body" @posted="closePostForm"/>
+      <PostStatusForm class="panel-body" @posted="closePostForm" />
     </div>
   </div>
   <button

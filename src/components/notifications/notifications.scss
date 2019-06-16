@@ -1,8 +1,10 @@
 @import '../../_variables.scss';
 
 .notifications {
-  // a bit of a hack to allow scrolling below notifications
-  padding-bottom: 15em;
+  &:not(.minimal) {
+    // a bit of a hack to allow scrolling below notifications
+    padding-bottom: 15em;
+  }
 
   .loadmore-error {
     color: $fallback--text;

@@ -2,6 +2,10 @@
   "chat": {
     "title": "Chat"
   },
+  "exporter": {
+    "export": "Exportar",
+    "processing": "Procesando. Pronto se te pedirá que descargues tu archivo"
+  },
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
@@ -19,7 +23,22 @@
     "apply": "Aplicar",
     "submit": "Enviar",
     "more": "Más",
-    "generic_error": "Ha ocurrido un error"
+    "generic_error": "Ha ocurrido un error",
+    "optional": "opcional",
+    "show_more": "Mostrar más",
+    "show_less": "Mostrar menos",
+    "cancel": "Cancelar"
+  },
+  "image_cropper": {
+    "crop_picture": "Recortar la foto",
+    "save": "Guardar",
+    "save_without_cropping": "Guardar sin recortar",
+    "cancel": "Cancelar"
+  },
+  "importer": {
+    "submit": "Enviar",
+    "success": "Importado con éxito",
+    "error": "Se ha producido un error al importar el archivo."
   },
   "login": {
     "login": "Identificación",
@@ -30,6 +49,10 @@
     "register": "Registrar",
     "username": "Usuario",
     "hint": "Inicia sesión para unirte a la discusión"
+  },
+   "media_modal": {
+    "previous": "Anterior",
+    "next": "Siguiente"
   },
   "nav": {
     "about": "Sobre",
@@ -61,15 +84,19 @@
     "account_not_locked_warning_link": "bloqueada",
     "attachments_sensitive": "Contenido sensible",
     "content_type": {
-      "text/plain": "Texto Plano"
+      "text/plain": "Texto Plano",
+      "text/html": "HTML",
+      "text/markdown": "Markdown",
+      "text/bbcode": "BBCode"
     },
     "content_warning": "Tema (opcional)",
     "default": "Acabo de aterrizar en L.A.",
-    "direct_warning": "Esta entrada solo será visible para los usuarios mencionados.",
+    "direct_warning": "Esta publicación solo será visible para los usuarios mencionados.",
+    "direct_warning_to_first_only": "Esta publicación solo será visible para los usuarios mencionados al comienzo del mensaje.",
     "posting": "Publicando",
     "scope": {
       "direct": "Directo - Solo para los usuarios mencionados.",
-      "private": "Solo-Seguidores - Solo tus seguidores leeran la entrada",
+      "private": "Solo-Seguidores - Solo tus seguidores leeran la publicación",
       "public": "Público - Entradas visibles en las Líneas Temporales Públicas",
       "unlisted": "Sin Listar - Entradas no visibles en las Líneas Temporales Públicas"
     }
@@ -83,6 +110,9 @@
     "token": "Token de invitación",
     "captcha": "CAPTCHA",
     "new_captcha": "Click en la imagen para obtener un nuevo captca",
+    "username_placeholder": "p.ej. lain",
+    "fullname_placeholder": "p.ej. Lain Iwakura",
+    "bio_placeholder": "e.g.\nHola, soy un ejemplo.\nAquí puedes poner algo representativo tuyo... o no.",
     "validations": {
       "username_required": "no puede estar vacío",
       "fullname_required": "no puede estar vacío",
@@ -92,7 +122,11 @@
       "password_confirmation_match": "la contraseña no coincide"
     }
   },
+   "selectable_list": {
+    "select_all": "Seleccionarlo todo"
+  },
   "settings": {
+    "app_name": "Nombre de la aplicación",
     "attachmentRadius": "Adjuntos",
     "attachments": "Adjuntos",
     "autoload": "Activar carga automática al llegar al final de la página",
@@ -101,6 +135,12 @@
     "avatarRadius": "Avatares",
     "background": "Fondo",
     "bio": "Biografía",
+    "block_export": "Exportar usuarios bloqueados",
+    "block_export_button": "Exporta la lista de tus usarios bloqueados a un archivo csv",
+    "block_import": "Importar usuarios bloqueados",
+    "block_import_error": "Error importando la lista de usuarios bloqueados",
+    "blocks_imported": "¡Lista de usuarios bloqueados importada! El procesado puede tardar un poco.",
+    "blocks_tab": "Bloqueados",
     "btnRadius": "Botones",
     "cBlue": "Azul (Responder, seguir)",
     "cGreen": "Verde (Retweet)",
@@ -127,7 +167,6 @@
     "filtering_explanation": "Todos los estados que contengan estas palabras serán silenciados, una por línea",
     "follow_export": "Exportar personas que tú sigues",
     "follow_export_button": "Exporta tus seguidores a un archivo csv",
-    "follow_export_processing": "Procesando, en breve se te preguntará para guardar el archivo",
     "follow_import": "Importar personas que tú sigues",
     "follow_import_error": "Error al importal el archivo",
     "follows_imported": "¡Importado! Procesarlos llevará tiempo.",
@@ -135,12 +174,15 @@
     "general": "General",
     "hide_attachments_in_convo": "Ocultar adjuntos en las conversaciones",
     "hide_attachments_in_tl": "Ocultar adjuntos en la línea temporal",
+    "hide_muted_posts": "Ocultar las publicaciones de los usuarios silenciados",
+    "max_thumbnails": "Cantidad máxima de miniaturas por publicación",
     "hide_isp": "Ocultar el panel específico de la instancia",
     "preload_images": "Precargar las imágenes",
     "use_one_click_nsfw": "Abrir los adjuntos NSFW con un solo click.",
     "hide_post_stats": "Ocultar las estadísticas de las entradas (p.ej. el número de favoritos)",
     "hide_user_stats": "Ocultar las estadísticas del usuario (p.ej. el número de seguidores)",
     "hide_filtered_statuses": "Ocultar estados filtrados",
+    "import_blocks_from_a_csv_file": "Importar lista de usuarios bloqueados dese un archivo csv",
     "import_followers_from_a_csv_file": "Importar personas que tú sigues a partir de un archivo csv",
     "import_theme": "Importar tema",
     "inputRadius": "Campos de entrada",
@@ -155,6 +197,7 @@
     "lock_account_description": "Restringir el acceso a tu cuenta solo a seguidores admitidos",
     "loop_video": "Vídeos en bucle",
     "loop_video_silent_only": "Bucle solo en vídeos sin sonido (p.ej. \"gifs\" de Mastodon)",
+    "mutes_tab": "Silenciados",
     "play_videos_in_modal": "Reproducir los vídeos directamente en el visor de medios",
     "use_contain_fit": "No recortar los adjuntos en miniaturas",
     "name": "Nombre",
@@ -166,6 +209,8 @@
     "notification_visibility_mentions": "Menciones",
     "notification_visibility_repeats": "Repeticiones (Repeats)",
     "no_rich_text_description": "Eliminar el formato de texto enriquecido de todas las entradas",
+    "no_blocks": "No hay usuarios bloqueados",
+    "no_mutes": "No hay usuarios sinlenciados",
     "hide_follows_description": "No mostrar a quién sigo",
     "hide_followers_description": "No mostrar quién me sigue",
     "show_admin_badge": "Mostrar la placa de administrador en mi perfil",
@@ -190,8 +235,11 @@
     "reply_visibility_self": "Solo mostrar réplicas para mí",
     "saving_err": "Error al guardar los ajustes",
     "saving_ok": "Ajustes guardados",
+    "search_user_to_block": "Buscar usuarios a bloquear",
+    "search_user_to_mute": "Buscar usuarios a silenciar",
     "security_tab": "Seguridad",
-    "scope_copy": "Copiar la visibilidad cuando contestamos (En los mensajes directos (MDs) siempre se copia)",
+    "scope_copy": "Copiar la visibilidad de la publicación cuando contestamos (En los mensajes directos (MDs) siempre se copia)",
+    "minimal_scopes_mode": "Minimizar las opciones de publicación",
     "set_new_avatar": "Cambiar avatar",
     "set_new_profile_background": "Cambiar fondo del perfil",
     "set_new_profile_banner": "Cambiar cabecera del perfil",
@@ -210,6 +258,7 @@
     "theme_help_v2_1": "También puede invalidar los colores y la opacidad de ciertos componentes si activa la casilla de verificación, use el botón \"Borrar todo\" para deshacer los cambios.",
     "theme_help_v2_2": "Los iconos debajo de algunas entradas son indicadores de contraste de fondo/texto, desplace el ratón para obtener información detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
     "tooltipRadius": "Información/alertas",
+     "upload_a_photo": "Subir una foto",
     "user_settings": "Ajustes de Usuario",
     "values": {
       "false": "no",
@@ -325,6 +374,11 @@
         "checkbox": "He revisado los términos y condiciones",
         "link": "un bonito enlace"
       }
+    },
+    "version": {
+      "title": "Versión",
+      "backend_version": "Versión del Backend",
+      "frontend_version": "Versión del Frontend"
     }
   },
   "timeline": {
@@ -336,7 +390,14 @@
     "repeated": "repetida",
     "show_new": "Mostrar lo nuevo",
     "up_to_date": "Actualizado",
-    "no_more_statuses": "No hay más estados"
+    "no_more_statuses": "No hay más estados",
+    "no_statuses": "Sin estados"
+  },
+  "status": {
+    "favorites": "Favoritos",
+    "repeats": "Repetidos",
+    "reply_to": "Responder a",
+    "replies_list": "Respuestas:"
   },
   "user_card": {
     "approve": "Aprovar",
@@ -359,10 +420,47 @@
     "muted": "Silenciado",
     "per_day": "por día",
     "remote_follow": "Seguir",
-    "statuses": "Estados"
+    "report": "Reportar",
+    "statuses": "Estados",
+    "unblock": "Desbloquear",
+    "unblock_progress": "Desbloqueando...",
+    "block_progress": "Bloqueando...",
+    "unmute": "Desenmudecer",
+    "unmute_progress": "Sesenmudeciendo...",
+    "mute_progress": "Silenciando...",
+    "admin_menu": {
+      "moderation": "Moderación",
+      "grant_admin": "Conceder permisos de Administrador",
+      "revoke_admin": "Revocar permisos de Administrador",
+      "grant_moderator": "Conceder permisos de Moderador",
+      "revoke_moderator": "Revocar permisos de Moderador",
+      "activate_account": "Activar cuenta",
+      "deactivate_account": "Desactivar cuenta",
+      "delete_account": "Borrar cuenta",
+      "force_nsfw": "Marcar todas las publicaciones como NSFW (no es seguro/apropiado para el trabajo)",
+      "strip_media": "Eliminar archivos multimedia de las publicaciones",
+      "force_unlisted": "Forzar que se publique en el modo -Sin Listar-",
+      "sandbox": "Forzar que se publique solo para tus seguidores",
+      "disable_remote_subscription": "No permitir que usuarios de instancias remotas te siga.",
+      "disable_any_subscription": "No permitir que ningún usuario te siga",
+      "quarantine": "No permitir publicaciones de usuarios de instancias remotas",
+      "delete_user": "Borrar usuario",
+      "delete_user_confirmation": "¿Estás completamente seguro? Esta acción no se puede deshacer."
+    }
   },
   "user_profile": {
-    "timeline_title": "Linea temporal del usuario"
+    "timeline_title": "Linea temporal del usuario",
+    "profile_does_not_exist": "Lo sentimos, este perfil no existe.",
+    "profile_loading_error": "Lo sentimos, hubo un error al cargar este perfil."
+  },
+   "user_reporting": {
+    "title": "Reportando a {0}",
+    "add_comment_description": "El informe será enviado a los moderadores de su instancia. Puedes proporcionar una explicación de por qué estás reportando esta cuenta a continuación:",
+    "additional_comments": "Comentarios adicionales",
+    "forward_description": "La cuenta es de otro servidor. ¿Enviar una copia del informe allí también?",
+    "forward_to": "Reenviar a {0}",
+    "submit": "Enviar",
+    "generic_error": "Se produjo un error al procesar la solicitud."
   },
   "who_to_follow": {
     "more": "Más",

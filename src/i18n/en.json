@@ -2,6 +2,10 @@
   "chat": {
     "title": "Chat"
   },
+  "exporter": {
+    "export": "Export",
+    "processing": "Processing, you'll soon be asked to download your file"
+  },
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
@@ -20,13 +24,25 @@
     "submit": "Submit",
     "more": "More",
     "generic_error": "An error occured",
-    "optional": "optional"
+    "optional": "optional",
+    "show_more": "Show more",
+    "show_less": "Show less",
+    "cancel": "Cancel",
+    "disable": "Disable",
+    "enable": "Enable",
+    "confirm": "Confirm",
+    "verify": "Verify"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",
     "save": "Save",
     "save_without_cropping": "Save without cropping",
     "cancel": "Cancel"
+  },
+  "importer": {
+    "submit": "Submit",
+    "success": "Imported successfully.",
+    "error": "An error occured while importing this file."
   },
   "login": {
     "login": "Log in",
@@ -36,7 +52,15 @@
     "placeholder": "e.g. lain",
     "register": "Register",
     "username": "Username",
-    "hint": "Log in to join the discussion"
+    "hint": "Log in to join the discussion",
+    "authentication_code": "Authentication code",
+    "enter_recovery_code": "Enter a recovery code",
+    "enter_two_factor_code": "Enter a two-factor code",
+    "recovery_code": "Recovery code",
+    "heading" : {
+      "totp" : "Two-factor authentication",
+      "recovery" : "Two-factor recovery"
+    }
   },
   "media_modal": {
     "previous": "Previous",
@@ -48,6 +72,7 @@
     "chat": "Local Chat",
     "friend_requests": "Follow Requests",
     "mentions": "Mentions",
+    "interactions": "Interactions",
     "dms": "Direct Messages",
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
@@ -66,6 +91,11 @@
     "repeated_you": "repeated your status",
     "no_more_notifications": "No more notifications"
   },
+  "interactions": {
+    "favs_repeats": "Repeats and Favorites",
+    "follows": "New follows",
+    "load_older": "Load older interactions"
+  },
   "post_status": {
     "new_status": "Post new status",
     "account_not_locked_warning": "Your account is not {0}. Anyone can follow you to view your follower-only posts.",
@@ -74,12 +104,19 @@
     "content_type": {
       "text/plain": "Plain text",
       "text/html": "HTML",
-      "text/markdown": "Markdown"
+      "text/markdown": "Markdown",
+      "text/bbcode": "BBCode"
     },
     "content_warning": "Subject (optional)",
     "default": "Just landed in L.A.",
-    "direct_warning": "This post will only be visible to all the mentioned users.",
+    "direct_warning_to_all": "This post will be visible to all the mentioned users.",
+    "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
+    "scope_notice": {
+      "public": "This post will be visible to everyone",
+      "private": "This post will be visible to your followers only",
+      "unlisted": "This post will not be visible in Public Timeline and The Whole Known Network"
+    },
     "scope": {
       "direct": "Direct - Post to mentioned users only",
       "private": "Followers-only - Post to followers only",
@@ -108,8 +145,34 @@
       "password_confirmation_match": "should be the same as password"
     }
   },
+  "selectable_list": {
+    "select_all": "Select all"
+  },
   "settings": {
     "app_name": "App name",
+    "security": "Security",
+    "enter_current_password_to_confirm": "Enter your current password to confirm your identity",
+    "mfa": {
+      "otp" : "OTP",
+      "setup_otp" : "Setup OTP",
+      "wait_pre_setup_otp" : "presetting OTP",
+      "confirm_and_enable" : "Confirm & enable OTP",
+      "title": "Two-factor Authentication",
+      "generate_new_recovery_codes" : "Generate new recovery codes",
+      "warning_of_generate_new_codes" : "When you generate new recovery codes, your old codes won’t work anymore.",
+      "recovery_codes" : "Recovery codes.",
+      "waiting_a_recovery_codes": "Receiving backup codes...",
+      "recovery_codes_warning" : "Write the codes down or save them somewhere secure - otherwise you won't see them again. If you lose access to your 2FA app and recovery codes you'll be locked out of your account.",
+      "authentication_methods" : "Authentication methods",
+      "scan": {
+        "title": "Scan",
+        "desc": "Using your two-factor app, scan this QR code or enter text key:",
+        "secret_code": "Key"
+      },
+      "verify": {
+        "desc": "To enable two-factor authentication, enter the code from your two-factor app:"
+      }
+    },
     "attachmentRadius": "Attachments",
     "attachments": "Attachments",
     "autoload": "Enable automatic loading when scrolled to the bottom",
@@ -118,6 +181,11 @@
     "avatarRadius": "Avatars",
     "background": "Background",
     "bio": "Bio",
+    "block_export": "Block export",
+    "block_export_button": "Export your blocks to a csv file",
+    "block_import": "Block import",
+    "block_import_error": "Error importing blocks",
+    "blocks_imported": "Blocks imported! Processing them will take a while.",
     "blocks_tab": "Blocks",
     "btnRadius": "Buttons",
     "cBlue": "Blue (Reply, follow)",
@@ -145,7 +213,6 @@
     "filtering_explanation": "All statuses containing these words will be muted, one per line",
     "follow_export": "Follow export",
     "follow_export_button": "Export your follows to a csv file",
-    "follow_export_processing": "Processing, you'll soon be asked to download your file",
     "follow_import": "Follow import",
     "follow_import_error": "Error importing followers",
     "follows_imported": "Follows imported! Processing them will take a while.",
@@ -161,6 +228,7 @@
     "hide_post_stats": "Hide post statistics (e.g. the number of favorites)",
     "hide_user_stats": "Hide user statistics (e.g. the number of followers)",
     "hide_filtered_statuses": "Hide filtered statuses",
+    "import_blocks_from_a_csv_file": "Import blocks from a csv file",
     "import_followers_from_a_csv_file": "Import follows from a csv file",
     "import_theme": "Load preset",
     "inputRadius": "Input fields",
@@ -211,10 +279,14 @@
     "reply_visibility_all": "Show all replies",
     "reply_visibility_following": "Only show replies directed at me or users I'm following",
     "reply_visibility_self": "Only show replies directed at me",
+    "autohide_floating_post_button": "Automatically hide New Post button (mobile)",
     "saving_err": "Error saving settings",
     "saving_ok": "Settings saved",
+    "search_user_to_block": "Search whom you want to block",
+    "search_user_to_mute": "Search whom you want to mute",
     "security_tab": "Security",
     "scope_copy": "Copy scope when replying (DMs are always copied)",
+    "minimal_scopes_mode": "Minimize post scope selection options",
     "set_new_avatar": "Set new avatar",
     "set_new_profile_background": "Set new profile background",
     "set_new_profile_banner": "Set new profile banner",
@@ -240,6 +312,13 @@
       "true": "yes"
     },
     "notifications": "Notifications",
+    "notification_setting": "Receive notifications from:",
+    "notification_setting_follows": "Users you follow",
+    "notification_setting_non_follows": "Users you do not follow",
+    "notification_setting_followers": "Users who follow you",
+    "notification_setting_non_followers": "Users who do not follow you",
+    "notification_mutes": "To stop receiving notifications from a specific user, use a mute.",
+    "notification_blocks": "Blocking a user stops all notifications as well as unsubscribes them.",
     "enable_web_push_notifications": "Enable web push notifications",
     "style": {
       "switcher": {
@@ -369,6 +448,13 @@
     "no_statuses": "No statuses"
   },
   "status": {
+    "favorites": "Favorites",
+    "repeats": "Repeats",
+    "delete": "Delete status",
+    "pin": "Pin on profile",
+    "unpin": "Unpin from profile",
+    "pinned": "Pinned",
+    "delete_confirm": "Do you really want to delete this status?",
     "reply_to": "Reply to",
     "replies_list": "Replies:"
   },
@@ -393,18 +479,47 @@
     "muted": "Muted",
     "per_day": "per day",
     "remote_follow": "Remote follow",
+    "report": "Report",
     "statuses": "Statuses",
     "unblock": "Unblock",
     "unblock_progress": "Unblocking...",
     "block_progress": "Blocking...",
     "unmute": "Unmute",
     "unmute_progress": "Unmuting...",
-    "mute_progress": "Muting..."
+    "mute_progress": "Muting...",
+    "admin_menu": {
+      "moderation": "Moderation",
+      "grant_admin": "Grant Admin",
+      "revoke_admin": "Revoke Admin",
+      "grant_moderator": "Grant Moderator",
+      "revoke_moderator": "Revoke Moderator",
+      "activate_account": "Activate account",
+      "deactivate_account": "Deactivate account",
+      "delete_account": "Delete account",
+      "force_nsfw": "Mark all posts as NSFW",
+      "strip_media": "Remove media from posts",
+      "force_unlisted": "Force posts to be unlisted",
+      "sandbox": "Force posts to be followers-only",
+      "disable_remote_subscription": "Disallow following user from remote instances",
+      "disable_any_subscription": "Disallow following user at all",
+      "quarantine": "Disallow user posts from federating",
+      "delete_user": "Delete user",
+      "delete_user_confirmation": "Are you absolutely sure? This action cannot be undone."
+    }
   },
   "user_profile": {
     "timeline_title": "User Timeline",
     "profile_does_not_exist": "Sorry, this profile does not exist.",
     "profile_loading_error": "Sorry, there was an error loading this profile."
+  },
+  "user_reporting": {
+    "title": "Reporting {0}",
+    "add_comment_description": "The report will be sent to your instance moderators. You can provide an explanation of why you are reporting this account below:",
+    "additional_comments": "Additional comments",
+    "forward_description": "The account is from another server. Send a copy of the report there as well?",
+    "forward_to": "Forward to {0}",
+    "submit": "Submit",
+    "generic_error": "An error occurred while processing your request."
   },
   "who_to_follow": {
     "more": "More",

@@ -17,6 +17,7 @@ const defaultState = {
   autoLoad: true,
   streaming: false,
   hoverPreview: true,
+  autohideFloatingPostButton: false,
   pauseOnUnfocused: true,
   stopGifs: false,
   replyVisibility: 'all',
@@ -30,10 +31,12 @@ const defaultState = {
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale,
+  hideScopeNotice: false,
   scopeCopy: undefined, // instance default
   subjectLineBehavior: undefined, // instance default
   alwaysShowSubjectInput: undefined, // instance default
-  postContentType: undefined // instance default
+  postContentType: undefined, // instance default
+  minimalScopesMode: undefined // instance default
 }
 
 const config = {

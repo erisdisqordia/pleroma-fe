@@ -2,7 +2,7 @@ import StillImage from '../still-image/still-image.vue'
 
 const UserAvatar = {
   props: [
-    'src',
+    'user',
     'betterShadow',
     'compact'
   ],

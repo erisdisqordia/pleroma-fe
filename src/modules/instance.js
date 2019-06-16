@@ -5,6 +5,7 @@ const defaultState = {
   // Stuff from static/config.json and apiConfig
   name: 'Pleroma FE',
   registrationOpen: true,
+  safeDM: true,
   textlimit: 5000,
   server: 'http://localhost:4040/',
   theme: 'pleroma-dark',
@@ -15,7 +16,6 @@ const defaultState = {
   redirectRootNoLogin: '/main/all',
   redirectRootLogin: '/main/friends',
   showInstanceSpecificPanel: false,
-  scopeOptionsEnabled: true,
   formattingOptionsEnabled: false,
   alwaysShowSubjectInput: true,
   hideMutedPosts: false,
@@ -27,11 +27,11 @@ const defaultState = {
   scopeCopy: true,
   subjectLineBehavior: 'email',
   postContentType: 'text/plain',
-  loginMethod: 'password',
   nsfwCensorImage: undefined,
   vapidPublicKey: undefined,
   noAttachmentLinks: false,
   showFeaturesPanel: true,
+  minimalScopesMode: false,
 
   // Nasty stuff
   pleromaBackend: true,

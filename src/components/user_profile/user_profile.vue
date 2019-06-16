@@ -1,23 +1,43 @@
 <template>
 <div>
-  <div v-if="user.id" class="user-profile panel panel-default">
+  <div v-if="user" class="user-profile panel panel-default">
     <UserCard :user="user" :switcher="true" :selected="timeline.viewing" rounded="top"/>
     <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
-      <Timeline
-        :label="$t('user_card.statuses')"
-        :disabled="!user.statuses_count"
-        :count="user.statuses_count"
-        :embedded="true"
-        :title="$t('user_profile.timeline_title')"
-        :timeline="timeline"
-        :timeline-name="'user'"
-        :user-id="userId"
-      />
+      <div :label="$t('user_card.statuses')" :disabled="!user.statuses_count">
+        <div class="timeline">
+          <template v-for="statusId in user.pinnedStatuseIds">
+            <Conversation
+              v-if="timeline.statusesObject[statusId]"
+              class="status-fadein"
+              :key="statusId"
+              :statusoid="timeline.statusesObject[statusId]"
+              :collapsable="true"
+              :showPinned="true"
+            />
+          </template>
+        </div>
+        <Timeline
+          :count="user.statuses_count"
+          :embedded="true"
+          :title="$t('user_profile.timeline_title')"
+          :timeline="timeline"
+          :timeline-name="'user'"
+          :user-id="userId"
+        />
+      </div>
       <div :label="$t('user_card.followees')" v-if="followsTabVisible" :disabled="!user.friends_count">
-        <FriendList :userId="userId" />
+        <FriendList :userId="userId">
+          <template slot="item" slot-scope="{item}">
+            <FollowCard :user="item" />
+          </template>
+        </FriendList>
       </div>
       <div :label="$t('user_card.followers')" v-if="followersTabVisible" :disabled="!user.followers_count">
-        <FollowerList :userId="userId" :entryProps="{noFollowsYou: isUs}" />
+        <FollowerList :userId="userId">
+          <template slot="item" slot-scope="{item}">
+            <FollowCard :user="item" :noFollowsYou="isUs" />
+          </template>
+        </FollowerList>
       </div>
       <Timeline
         :label="$t('user_card.media')"

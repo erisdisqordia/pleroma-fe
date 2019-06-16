@@ -20,9 +20,16 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
     filename: '[name].js'
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
   resolve: {
-    extensions: ['', '.js', '.vue'],
-    fallback: [path.join(__dirname, '../node_modules')],
+    extensions: ['.js', '.vue'],
+    modules: [
+      path.join(__dirname, '../node_modules')
+    ],
     alias: {
       'vue$': 'vue/dist/vue.runtime.common',
       'src': path.resolve(__dirname, '../src'),
@@ -30,67 +37,53 @@ module.exports = {
       'components': path.resolve(__dirname, '../src/components')
     }
   },
-  resolveLoader: {
-    fallback: [path.join(__dirname, '../node_modules')]
-  },
   module: {
     noParse: /node_modules\/localforage\/dist\/localforage.js/,
-    preLoaders: [
+    rules: [
       {
-        test: /\.vue$/,
-        loader: 'eslint',
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: {
+          loader: 'eslint-loader',
+          options: {
+            formatter: require('eslint-friendly-formatter'),
+            sourceMap: config.build.productionSourceMap,
+            extract: true
+          }
+        }
       },
       {
-        test: /\.js$/,
-        loader: 'eslint',
-        include: projectRoot,
-        exclude: /node_modules/
-      }
-    ],
-    loaders: [
-      {
         test: /\.vue$/,
-        loader: 'vue'
+        use: 'vue-loader'
       },
       {
         test: /\.jsx?$/,
-        loader: 'babel',
         include: projectRoot,
-        exclude: /node_modules\/(?!tributejs)/
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
+        exclude: /node_modules\/(?!tributejs)/,
+        use: 'babel-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          }
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+          }
         }
-      }
-    ]
-  },
-  eslint: {
-    formatter: require('eslint-friendly-formatter')
-  },
-  vue: {
-    loaders: utils.cssLoaders({ sourceMap: useCssSourceMap }),
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 2 versions']
-      })
+      },
     ]
   },
   plugins: [

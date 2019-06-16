@@ -46,6 +46,7 @@ const settings = {
       streamingLocal: user.streaming,
       pauseOnUnfocusedLocal: user.pauseOnUnfocused,
       hoverPreviewLocal: user.hoverPreview,
+      autohideFloatingPostButtonLocal: user.autohideFloatingPostButton,
 
       hideMutedPostsLocal: typeof user.hideMutedPosts === 'undefined'
         ? instance.hideMutedPosts
@@ -70,12 +71,17 @@ const settings = {
       alwaysShowSubjectInputLocal: typeof user.alwaysShowSubjectInput === 'undefined'
         ? instance.alwaysShowSubjectInput
         : user.alwaysShowSubjectInput,
-      alwaysShowSubjectInputDefault: instance.alwaysShowSubjectInput,
+      alwaysShowSubjectInputDefault: this.$t('settings.values.' + instance.alwaysShowSubjectInput),
 
       scopeCopyLocal: typeof user.scopeCopy === 'undefined'
         ? instance.scopeCopy
         : user.scopeCopy,
       scopeCopyDefault: this.$t('settings.values.' + instance.scopeCopy),
+
+      minimalScopesModeLocal: typeof user.minimalScopesMode === 'undefined'
+        ? instance.minimalScopesMode
+        : user.minimalScopesMode,
+      minimalScopesModeDefault: this.$t('settings.values.' + instance.minimalScopesMode),
 
       stopGifs: user.stopGifs,
       webPushNotificationsLocal: user.webPushNotifications,
@@ -178,6 +184,9 @@ const settings = {
     hoverPreviewLocal (value) {
       this.$store.dispatch('setOption', { name: 'hoverPreview', value })
     },
+    autohideFloatingPostButtonLocal (value) {
+      this.$store.dispatch('setOption', { name: 'autohideFloatingPostButton', value })
+    },
     muteWordsString (value) {
       value = filter(value.split('\n'), (word) => trim(word).length > 0)
       this.$store.dispatch('setOption', { name: 'muteWords', value })
@@ -199,6 +208,9 @@ const settings = {
     },
     postContentTypeLocal (value) {
       this.$store.dispatch('setOption', { name: 'postContentType', value })
+    },
+    minimalScopesModeLocal (value) {
+      this.$store.dispatch('setOption', { name: 'minimalScopesMode', value })
     },
     stopGifs (value) {
       this.$store.dispatch('setOption', { name: 'stopGifs', value })

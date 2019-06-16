@@ -1,5 +1,9 @@
 <template>
   <div class="status-el" v-if="!hideStatus" :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]">
+    <div v-if="error" class="alert error">
+      {{error}}
+      <i class="button-icon icon-cancel" @click="clearError"></i>
+    </div>
     <template v-if="muted && !isPreview">
       <div class="media status container muted">
         <small>
@@ -12,8 +16,12 @@
       </div>
     </template>
     <template v-else>
+      <div v-if="showPinned && statusoid.pinned" class="status-pin">
+        <i class="fa icon-pin faint"></i>
+        <span class="faint">{{$t('status.pinned')}}</span>
+      </div>
       <div v-if="retweet && !noHeading && !inConversation" :class="[repeaterClass, { highlighted: repeaterStyle }]" :style="[repeaterStyle]" class="media container retweet-info">
-        <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :src="statusoid.user.profile_image_url_original"/>
+        <UserAvatar class="media-left" v-if="retweet" :betterShadow="betterShadow" :user="statusoid.user"/>
         <div class="media-body faint">
           <span class="user-name">
             <router-link v-if="retweeterHtml" :to="retweeterProfileLink" v-html="retweeterHtml"/>
@@ -24,10 +32,10 @@
         </div>
       </div>
 
-      <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet && !inConversation }]" :style="[ userStyle ]" class="media status">
+      <div :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet && !inConversation }]" :style="[ userStyle ]" class="media status" :data-tags="tags">
         <div v-if="!noHeading" class="media-left">
           <router-link :to="userProfileLink" @click.stop.prevent.capture.native="toggleUserExpanded">
-            <UserAvatar :compact="compact" :betterShadow="betterShadow" :src="status.user.profile_image_url_original"/>
+            <UserAvatar :compact="compact" :betterShadow="betterShadow" :user="status.user"/>
           </router-link>
         </div>
         <div class="status-body">
@@ -91,23 +99,28 @@
           </div>
 
           <div v-if="showPreview" class="status-preview-container">
-            <status class="status-preview" v-if="preview" :isPreview="true" :statusoid="preview" :compact=true></status>
-            <div class="status-preview status-preview-loading" v-else>
+            <status class="status-preview"
+              v-if="preview"
+              :isPreview="true"
+              :statusoid="preview"
+              :compact="true"
+            />
+            <div v-else class="status-preview status-preview-loading">
               <i class="icon-spin4 animate-spin"></i>
             </div>
           </div>
 
           <div class="status-content-wrapper" :class="{ 'tall-status': !showingLongSubject }" v-if="longSubject">
-            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="!showingLongSubject" href="#" @click.prevent="showingLongSubject=true">Show more</a>
-            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html"></div>
-            <a v-if="showingLongSubject" href="#" class="status-unhider" @click.prevent="showingLongSubject=false">Show less</a>
+            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="!showingLongSubject" href="#" @click.prevent="showingLongSubject=true">{{$t("general.show_more")}}</a>
+            <div @click.prevent="linkClicked" class="status-content media-body" v-html="contentHtml"></div>
+            <a v-if="showingLongSubject" href="#" class="status-unhider" @click.prevent="showingLongSubject=false">{{$t("general.show_less")}}</a>
           </div>
           <div :class="{'tall-status': hideTallStatus}" class="status-content-wrapper" v-else>
-            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowMore">Show more</a>
-            <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.statusnet_html" v-if="!hideSubjectStatus"></div>
+            <a class="tall-status-hider" :class="{ 'tall-status-hider_focused': isFocused }" v-if="hideTallStatus" href="#" @click.prevent="toggleShowMore">{{$t("general.show_more")}}</a>
+            <div @click.prevent="linkClicked" class="status-content media-body" v-html="contentHtml" v-if="!hideSubjectStatus"></div>
             <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.summary_html" v-else></div>
-            <a v-if="hideSubjectStatus" href="#" class="cw-status-hider" @click.prevent="toggleShowMore">Show more</a>
-            <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">Show less</a>
+            <a v-if="hideSubjectStatus" href="#" class="cw-status-hider" @click.prevent="toggleShowMore">{{$t("general.show_more")}}</a>
+            <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">{{$t("general.show_less")}}</a>
           </div>
 
           <div v-if="status.attachments && (!hideSubjectStatus || showingLongSubject)" class="attachments media-body">
@@ -133,19 +146,37 @@
             <link-preview :card="status.card" :size="attachmentSize" :nsfw="nsfwClickthrough" />
           </div>
 
+          <transition name="fade">
+            <div class="favs-repeated-users" v-if="isFocused && combinedFavsAndRepeatsUsers.length > 0">
+              <div class="stats">
+                <div class="stat-count" v-if="statusFromGlobalRepository.rebloggedBy && statusFromGlobalRepository.rebloggedBy.length > 0">
+                  <a class="stat-title">{{ $t('status.repeats') }}</a>
+                  <div class="stat-number">{{ statusFromGlobalRepository.rebloggedBy.length }}</div>
+                </div>
+                <div class="stat-count" v-if="statusFromGlobalRepository.favoritedBy && statusFromGlobalRepository.favoritedBy.length > 0">
+                  <a class="stat-title">{{ $t('status.favorites') }}</a>
+                  <div class="stat-number">{{ statusFromGlobalRepository.favoritedBy.length }}</div>
+                </div>
+                <div class="avatar-row">
+                  <AvatarList :users="combinedFavsAndRepeatsUsers"></AvatarList>
+                </div>
+              </div>
+            </div>
+          </transition>
+
           <div v-if="!noHeading && !isPreview" class='status-actions media-body'>
-            <div v-if="loggedIn">
-              <i class="button-icon icon-reply" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')" :class="{'icon-reply-active': replying}"></i>
+            <div>
+              <i class="button-icon icon-reply" v-on:click.prevent="toggleReplying" :title="$t('tool_tip.reply')" :class="{'button-icon-active': replying}" v-if="loggedIn"/>
+              <i class="button-icon button-icon-disabled icon-reply" :title="$t('tool_tip.reply')" v-else />
               <span v-if="status.replies_count > 0">{{status.replies_count}}</span>
             </div>
             <retweet-button :visibility='status.visibility' :loggedIn='loggedIn' :status='status'></retweet-button>
             <favorite-button :loggedIn='loggedIn' :status='status'></favorite-button>
-            <delete-button :status='status'></delete-button>
+            <extra-buttons :status="status" @onError="showError" @onSuccess="clearError"></extra-buttons>
           </div>
         </div>
       </div>
       <div class="container" v-if="replying">
-        <div class="reply-left"/>
         <post-status-form class="reply-body" :reply-to="status.id" :attentions="status.attentions" :repliedUser="status.user" :copy-message-scope="status.visibility" :subject="replySubject" v-on:posted="toggleReplying"/>
       </div>
     </template>
@@ -173,6 +204,13 @@ $status-margin: 0.75em;
 .status-preview-container {
   position: relative;
   max-width: 100%;
+}
+
+.status-pin {
+  padding: $status-margin $status-margin 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .status-preview {
@@ -218,7 +256,6 @@ $status-margin: 0.75em;
 }
 
 .status-el {
-  hyphens: auto;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
@@ -547,15 +584,13 @@ $status-margin: 0.75em;
   }
 }
 
-.icon-reply:hover {
-  color: $fallback--cBlue;
-  color: var(--cBlue, $fallback--cBlue);
-  cursor: pointer;
-}
-
-.icon-reply.icon-reply-active {
-  color: $fallback--cBlue;
-  color: var(--cBlue, $fallback--cBlue);
+.button-icon.icon-reply {
+  &:not(.button-icon-disabled):hover,
+  &.button-icon-active {
+    color: $fallback--cBlue;
+    color: var(--cBlue, $fallback--cBlue);
+    cursor: pointer;
+  }
 }
 
 .status:hover .animated.avatar {
@@ -595,20 +630,59 @@ a.unmute {
   margin-left: auto;
 }
 
-.reply-left {
-  flex: 0;
-  min-width: 48px;
-}
-
 .reply-body {
   flex: 1;
 }
 
-.timeline > {
+.timeline :not(.panel-disabled) > {
   .status-el:last-child {
     border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
     border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
     border-bottom: none;
+  }
+}
+
+.favs-repeated-users {
+  margin-top: $status-margin;
+
+  .stats {
+    width: 100%;
+    display: flex;
+    line-height: 1em;
+
+    .stat-count {
+      margin-right: $status-margin;
+
+      .stat-title {
+        color: var(--faint, $fallback--faint);
+        font-size: 12px;
+        text-transform: uppercase;
+        position: relative;
+      }
+
+      .stat-number {
+        font-weight: bolder;
+        font-size: 16px;
+        line-height: 1em;
+      }
+    }
+
+    .avatar-row {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      &::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 1px;
+        left: 0;
+        background-color: var(--faint, $fallback--faint);
+      }
+    }
   }
 }
 

@@ -58,7 +58,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/16033fbb-97c0-4f0e-b834-7abb92fb8639",
     "url": "https://shigusegubu.club/objects/16033fbb-97c0-4f0e-b834-7abb92fb8639",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -127,7 +130,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/6634d32b-96a8-4852-a3db-ac8730715779",
     "url": "https://shigusegubu.club/objects/6634d32b-96a8-4852-a3db-ac8730715779",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -250,7 +256,10 @@
         "tags": [],
         "uri": "https://pleroma.soykaf.com/objects/bf7e43d4-5048-4176-8519-58e3e1014f8b",
         "url": "https://pleroma.soykaf.com/objects/bf7e43d4-5048-4176-8519-58e3e1014f8b",
-        "visibility": "public"
+        "visibility": "public",
+        "pleroma": {
+            "local": true
+        }
     },
     "reblogged": false,
     "reblogs_count": 0,
@@ -260,7 +269,10 @@
     "tags": [],
     "uri": "https://pleroma.soykaf.com/objects/bf7e43d4-5048-4176-8519-58e3e1014f8b",
     "url": "https://pleroma.soykaf.com/objects/bf7e43d4-5048-4176-8519-58e3e1014f8b",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -329,7 +341,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/0f963ca1-a263-41ca-a43c-b5d26d0a08e9",
     "url": "https://shigusegubu.club/objects/0f963ca1-a263-41ca-a43c-b5d26d0a08e9",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -390,7 +405,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/3f809bd8-656f-4a29-81d4-80eed6916eb0",
     "url": "https://shigusegubu.club/objects/3f809bd8-656f-4a29-81d4-80eed6916eb0",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -516,7 +534,10 @@
         }],
         "uri": "tag:social.super-niche.club,2019-01-17:noticeId=2353002:objectType=note",
         "url": "https://social.super-niche.club/notice/2353002",
-        "visibility": "public"
+        "visibility": "public",
+        "pleroma": {
+            "local": true
+        }
     },
     "reblogged": false,
     "reblogs_count": 0,
@@ -529,7 +550,10 @@
     }],
     "uri": "tag:social.super-niche.club,2019-01-17:noticeId=2353002:objectType=note",
     "url": "tag:social.super-niche.club,2019-01-17:noticeId=2353002:objectType=note",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -657,7 +681,10 @@
         "tags": [],
         "uri": "https://miniwa.moe/objects/448e2944-0ecd-457f-92c3-cb454f2b0fab",
         "url": "https://miniwa.moe/objects/448e2944-0ecd-457f-92c3-cb454f2b0fab",
-        "visibility": "public"
+        "visibility": "public",
+        "pleroma": {
+            "local": true
+        }
     },
     "reblogged": false,
     "reblogs_count": 0,
@@ -667,7 +694,10 @@
     "tags": [],
     "uri": "https://miniwa.moe/objects/448e2944-0ecd-457f-92c3-cb454f2b0fab",
     "url": "https://miniwa.moe/objects/448e2944-0ecd-457f-92c3-cb454f2b0fab",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -733,7 +763,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/38b1bc44-15d8-40dd-b1aa-937e0ff4a86d",
     "url": "https://shigusegubu.club/objects/38b1bc44-15d8-40dd-b1aa-937e0ff4a86d",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -794,7 +827,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/fbff5da4-a517-42a9-bca9-17cae8cf2542",
     "url": "https://shigusegubu.club/objects/fbff5da4-a517-42a9-bca9-17cae8cf2542",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -850,7 +886,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/4007d659-27c6-4577-be10-fd134f5e4e7e",
     "url": "https://shigusegubu.club/objects/4007d659-27c6-4577-be10-fd134f5e4e7e",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -906,7 +945,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/59912d51-1cc6-4dc7-828c-f167e6c8b391",
     "url": "https://shigusegubu.club/objects/59912d51-1cc6-4dc7-828c-f167e6c8b391",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -962,7 +1004,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/62690bce-3f49-4047-9c8e-8941f2f79e10",
     "url": "https://shigusegubu.club/objects/62690bce-3f49-4047-9c8e-8941f2f79e10",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -1023,7 +1068,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/818f3dd0-2ff8-4def-a170-e4d4c405f387",
     "url": "https://shigusegubu.club/objects/818f3dd0-2ff8-4def-a170-e4d4c405f387",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -1084,7 +1132,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/0783a193-c097-488d-8944-47df9372cd6e",
     "url": "https://shigusegubu.club/objects/0783a193-c097-488d-8944-47df9372cd6e",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -1145,7 +1196,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/145d5252-7b8e-467d-9f36-1db0818f452f",
     "url": "https://shigusegubu.club/objects/145d5252-7b8e-467d-9f36-1db0818f452f",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -1252,7 +1306,10 @@
         "tags": [],
         "uri": "https://pleroma.site/objects/3076c055-0e34-4cf9-86ca-2d148b9b694a",
         "url": "https://pleroma.site/objects/3076c055-0e34-4cf9-86ca-2d148b9b694a",
-        "visibility": "public"
+        "visibility": "public",
+        "pleroma": {
+            "local": true
+        }
     },
     "reblogged": false,
     "reblogs_count": 0,
@@ -1262,7 +1319,10 @@
     "tags": [],
     "uri": "https://pleroma.site/objects/3076c055-0e34-4cf9-86ca-2d148b9b694a",
     "url": "https://pleroma.site/objects/3076c055-0e34-4cf9-86ca-2d148b9b694a",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -1323,7 +1383,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/d4eb7c46-02f9-4b1f-83af-926cefa21f33",
     "url": "https://shigusegubu.club/objects/d4eb7c46-02f9-4b1f-83af-926cefa21f33",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -1446,7 +1509,10 @@
         "tags": [],
         "uri": "https://pleroma.soykaf.com/objects/338b6bd2-3c2d-40fe-93a3-28b688782733",
         "url": "https://pleroma.soykaf.com/objects/338b6bd2-3c2d-40fe-93a3-28b688782733",
-        "visibility": "public"
+        "visibility": "public",
+        "pleroma": {
+            "local": true
+        }
     },
     "reblogged": false,
     "reblogs_count": 0,
@@ -1456,7 +1522,10 @@
     "tags": [],
     "uri": "https://pleroma.soykaf.com/objects/338b6bd2-3c2d-40fe-93a3-28b688782733",
     "url": "https://pleroma.soykaf.com/objects/338b6bd2-3c2d-40fe-93a3-28b688782733",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -1517,7 +1586,10 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/f472f4ed-8b0b-492f-9d53-d69eda79629d",
     "url": "https://shigusegubu.club/objects/f472f4ed-8b0b-492f-9d53-d69eda79629d",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }, {
     "account": {
         "acct": "hj",
@@ -1578,5 +1650,8 @@
     "tags": [],
     "uri": "https://shigusegubu.club/objects/d6fb4fd2-1f6a-4446-a1a6-5edd34050096",
     "url": "https://shigusegubu.club/objects/d6fb4fd2-1f6a-4446-a1a6-5edd34050096",
-    "visibility": "public"
+    "visibility": "public",
+    "pleroma": {
+        "local": true
+    }
 }]

@@ -70,22 +70,10 @@ const ImageCropper = {
       this.dataUrl = undefined
       this.$emit('close')
     },
-    submit () {
+    submit (cropping = true) {
       this.submitting = true
       this.avatarUploadError = null
-      this.submitHandler(this.cropper, this.file)
-        .then(() => this.destroy())
-        .catch((err) => {
-          this.submitError = err
-        })
-        .finally(() => {
-          this.submitting = false
-        })
-    },
-    submitWithoutCropping () {
-      this.submitting = true
-      this.avatarUploadError = null
-      this.submitHandler(false, this.dataUrl)
+      this.submitHandler(cropping && this.cropper, this.file)
         .then(() => this.destroy())
         .catch((err) => {
           this.submitError = err

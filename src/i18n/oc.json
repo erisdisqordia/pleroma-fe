@@ -2,6 +2,10 @@
   "chat": {
     "title": "Messatjariá"
   },
+  "exporter": {
+     "export": "Exportar",
+     "processing": "Tractament, vos demandarem lèu de telecargar lo fichièr"
+  },  
     "features_panel": {
       "chat": "Chat",
       "gopher": "Gopher",
@@ -20,12 +24,21 @@
     "submit": "Mandar",
     "more": "Mai",
     "generic_error": "Una error s’es producha",
-    "optional": "opcional"
+    "optional": "opcional",
+    "show_more": "Mostrar mai",
+    "show_less": "Mostrar mens",
+    "cancel": "Anullar"
   },
   "image_cropper": {
      "crop_picture": "Talhar l’imatge",
      "save": "Salvar",
+     "save_without_cropping": "Salvar sens talhada",
      "cancel": "Anullar"
+  },
+    "importer": {
+    "submit": "Mandar",
+    "success": "Corrèctament importat.",
+    "error": "Una error s’es producha pendent l’importacion d’aqueste fichièr."
   },
   "login": {
     "login": "Connexion",
@@ -73,11 +86,13 @@
     "content_type": {
       "text/plain": "Tèxte brut",
       "text/html": "HTML",
-      "text/markdown": "Markdown"
+      "text/markdown": "Markdown",
+      "text/bbcode": "BBCode"
     },
     "content_warning": "Avís de contengut (opcional)",
     "default": "Escrivètz aquí vòstre estatut.",
-    "direct_warning": "Aquesta publicacion serà pas que visibla pels utilizaires mencionats.",
+    "direct_warning_to_all": "Aquesta publicacion serà pas que visibla pels utilizaires mencionats.",
+    "direct_warning_to_first_only": "Aquesta publicacion serà pas que visibla pels utilizaires mencionats a la debuta del messatge.",
     "posting": "Mandadís",
     "scope": {
       "direct": "Dirècte - Publicar pels utilizaires mencionats solament",
@@ -107,6 +122,9 @@
       "password_confirmation_match": "deu èsser lo meteis senhal"
     }
   },
+  "selectable_list": {
+	    "select_all": "O seleccionar tot"
+  },  
   "settings": {
     "app_name": "Nom de l’aplicacion",
     "attachmentRadius": "Pèças juntas",
@@ -117,6 +135,11 @@
     "avatarRadius": "Avatars",
     "background": "Rèire plan",
     "bio": "Biografia",
+    "block_export": "Exportar los blocatges",
+    "block_export_button": "Exportar los blocatges dins un fichièr csv",
+    "block_import": "Impòrt de blocatges",
+    "block_import_error": "Error en importar los blocatges",
+    "blocks_imported": "Blocatges importats ! Lo tractament tardarà un pauc.",
     "blocks_tab": "Blocatges",
     "btnRadius": "Botons",
     "cBlue": "Blau (Respondre, seguir)",
@@ -144,7 +167,6 @@
     "filtering_explanation": "Totes los estatuts amb aqueles mots seràn en silenci, un mot per linha",
     "follow_export": "Exportar los abonaments",
     "follow_export_button": "Exportar vòstres abonaments dins un fichièr csv",
-    "follow_export_processing": "Tractament, vos demandarem lèu de telecargar lo fichièr",
     "follow_import": "Importar los abonaments",
     "follow_import_error": "Error en important los seguidors",
     "follows_imported": "Seguidors importats. Lo tractament pòt trigar una estona.",
@@ -152,6 +174,7 @@
     "general": "General",
     "hide_attachments_in_convo": "Rescondre las pèças juntas dins las conversacions",
     "hide_attachments_in_tl": "Rescondre las pèças juntas",
+    "hide_muted_posts": "Rescondre las publicacions del monde rescondut",
     "max_thumbnails": "Nombre maximum de vinhetas per publicacion",
     "hide_isp": "Amagar lo panèl especial instància",
     "preload_images": "Precargar los imatges",
@@ -178,6 +201,7 @@
     "use_contain_fit": "Talhar pas las pèças juntas per las vinhetas",
     "name": "Nom",
     "name_bio": "Nom & Bio",
+
     "new_password": "Nòu senhal",
     "notification_visibility_follows": "Abonaments",
     "notification_visibility_likes": "Aimar",
@@ -211,8 +235,11 @@
     "reply_visibility_self": "Mostrar pas que las responsas que me son destinadas",
     "saving_err": "Error en enregistrant los paramètres",
     "saving_ok": "Paramètres enregistrats",
-    "scope_copy": "Copiar lo nivèl de confidencialitat per las responsas (Totjorn aissí pels Messatges Dirèctes)",
+    "search_user_to_block": "Cercatz qual volètz blocar",
+    "search_user_to_mute": "Cercatz qual volètz rescondre",
     "security_tab": "Seguretat",
+    "scope_copy": "Copiar lo nivèl de confidencialitat per las responsas (Totjorn aissí pels Messatges Dirèctes)",
+    "minimal_scopes_mode": "Minimizar lo nombre d’opcions per publicacion",
     "set_new_avatar": "Definir un nòu avatar",
     "set_new_profile_background": "Definir un nòu fons de perfil",
     "set_new_profile_banner": "Definir una nòva bandièra de perfil",
@@ -347,6 +374,11 @@
         "checkbox": "Ai legit los tèrmes e condicions d’utilizacion",
         "link": "un pichon ligam simpatic"
       }
+    },
+    "version": {
+      "title": "Version",
+      "backend_version": "Version Backend",
+      "frontend_version": "Version Frontend"
     }
   },
   "timeline": {
@@ -362,6 +394,8 @@
     "no_statuses": "Cap d’estatuts"
   },
   "status": {
+    "favorites": "Li a agradat",
+    "repeats": "A repetit",
     "reply_to": "Respond a",
     "replies_list": "Responsas :"
   },
@@ -392,7 +426,26 @@
     "block_progress": "Blocatge...",
     "unmute": "Tornar mostrar",
     "unmute_progress": "Afichatge...",
-    "mute_progress": "A amagar..."
+    "mute_progress": "A amagar...",
+    "admin_menu": {
+      "moderation": "Moderacion",
+      "grant_admin": "Passar Admin",
+      "revoke_admin": "Revocar Admin",
+      "grant_moderator": "Passar Moderator",
+      "revoke_moderator": "Revocar Moderator",
+      "activate_account": "Activar lo compte",
+      "deactivate_account": "Desactivar lo compte",
+      "delete_account": "Suprimir lo compte",
+      "force_nsfw": "Marcar totas las publicacions coma sensiblas",
+      "strip_media": "Tirar los mèdias de las publicacions",
+      "force_unlisted": "Forçar las publicacions en pas-listadas",
+      "sandbox": "Forçar las publicacions en seguidors solament",
+      "disable_remote_subscription": "Desactivar lo seguiment d’utilizaire d’instàncias alonhadas",
+      "disable_any_subscription": "Desactivar tot seguiment",
+      "quarantine": "Defendre la federacion de las publicacions de l’utilizaire",
+      "delete_user": "Suprimir l’utilizaire",
+      "delete_user_confirmation": "Volètz vertadièrament far aquò ? Aquesta accion se pòt pas anullar."
+    }    
   },
   "user_profile": {
     "timeline_title": "Flux utilizaire",

@@ -42,9 +42,7 @@
             </li>
             <li>
               <input type="checkbox" id="collapseMessageWithSubject" v-model="collapseMessageWithSubjectLocal">
-              <label for="collapseMessageWithSubject">
-                {{$t('settings.collapse_subject')}} {{$t('settings.instance_default', { value: collapseMessageWithSubjectDefault })}}
-              </label>
+              <label for="collapseMessageWithSubject">{{$t('settings.collapse_subject')}} {{$t('settings.instance_default', { value: collapseMessageWithSubjectDefault })}}</label>
             </li>
             <li>
               <input type="checkbox" id="streaming" v-model="streamingLocal">
@@ -117,6 +115,16 @@
                   <i class="icon-down-open"/>
                 </label>
               </div>
+            </li>
+            <li>
+              <input type="checkbox" id="minimalScopesMode" v-model="minimalScopesModeLocal">
+              <label for="minimalScopesMode">
+                {{$t('settings.minimal_scopes_mode')}} {{$t('settings.instance_default', { value: minimalScopesModeDefault })}}
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="autohideFloatingPostButton" v-model="autohideFloatingPostButtonLocal">
+              <label for="autohideFloatingPostButton">{{$t('settings.autohide_floating_post_button')}}</label>
             </li>
           </ul>
         </div>
@@ -295,70 +303,3 @@
 
 <script src="./settings.js">
 </script>
-
-<style lang="scss">
-@import '../../_variables.scss';
-
-.setting-item {
-  border-bottom: 2px solid var(--fg, $fallback--fg);
-  margin: 1em 1em 1.4em;
-  padding-bottom: 1.4em;
-
-  > div {
-    margin-bottom: .5em;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  &:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-    margin-bottom: 1em;
-  }
-
-  select {
-    min-width: 10em;
-  }
-
-
-  textarea {
-    width: 100%;
-    height: 100px;
-  }
-
-  .unavailable,
-  .unavailable i {
-    color: var(--cRed, $fallback--cRed);
-    color: $fallback--cRed;
-  }
-
-  .btn {
-    min-height: 28px;
-    min-width: 10em;
-    padding: 0 2em;
-  }
-
-  .number-input {
-    max-width: 6em;
-  }
-}
-.select-multiple {
-  display: flex;
-  .option-list {
-    margin: 0;
-    padding-left: .5em;
-  }
-}
-.setting-list,
-.option-list{
-  list-style-type: none;
-  padding-left: 2em;
-  li {
-    margin-bottom: 0.5em;
-  }
-  .suboptions {
-    margin-top: 0.3em
-  }
-}
-</style>

@@ -101,6 +101,14 @@ button {
     background-color: $fallback--bg;
     background-color: var(--bg, $fallback--bg)
   }
+
+  &.danger {
+    // TODO: add better color variable
+    color: $fallback--text;
+    color: var(--alertErrorPanelText, $fallback--text);
+    background-color: $fallback--alertError;
+    background-color: var(--alertError, $fallback--alertError);
+  }
 }
 
 label.select {
@@ -371,6 +379,7 @@ main-router {
 
 .panel-heading {
   display: flex;
+  flex: none;
   border-radius: $fallback--panelRadius $fallback--panelRadius 0 0;
   border-radius: var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius) 0 0;
   background-size: cover;
@@ -484,24 +493,6 @@ nav {
   }
 }
 
-.menu-button {
-  display: none;
-  position: relative;
-}
-
-.alert-dot {
-  border-radius: 100%;
-  height: 8px;
-  width: 8px;
-  position: absolute;
-  left: calc(50% - 4px);
-  top: calc(50% - 4px);
-  margin-left: 6px;
-  margin-top: -6px;
-  background-color: $fallback--cRed;
-  background-color: var(--badgeNotification, $fallback--cRed);
-}
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s
 }
@@ -528,20 +519,6 @@ nav {
 
 .mobile-shown {
   display: none;
-}
-
-.panel-switcher {
-  display: none;
-  width: 100%;
-  height: 46px;
-
-  button {
-    display: block;
-    flex: 1;
-    max-height: 32px;
-    margin: 0.5em;
-    padding: 0.5em;
-  }
 }
 
 @media all and (min-width: 800px) {
@@ -648,27 +625,25 @@ nav {
   text-align: right;
 }
 
-.visibility-tray {
-  font-size: 1.2em;
-  padding: 3px;
-  cursor: pointer;
-
-  .selected {
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-  }
-
-  div {
-    padding-top: 5px;
-  }
-}
-
 .visibility-notice {
   padding: .5em;
   border: 1px solid $fallback--faint;
   border: 1px solid var(--faint, $fallback--faint);
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
+}
+
+.notice-dismissible {
+  padding-right: 4rem;
+  position: relative;
+
+  .dismiss {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .5em;
+    color: inherit;
+  }
 }
 
 @keyframes modal-background-fadein {
@@ -747,6 +722,70 @@ nav {
   .menu-button {
     display: block;
     margin-right: 0.8em;
+  }
+}
+
+.setting-item {
+  border-bottom: 2px solid var(--fg, $fallback--fg);
+  margin: 1em 1em 1.4em;
+  padding-bottom: 1.4em;
+
+  > div {
+    margin-bottom: .5em;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 1em;
+  }
+
+  select {
+    min-width: 10em;
+  }
+
+
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 100px;
+  }
+
+  .unavailable,
+  .unavailable i {
+    color: var(--cRed, $fallback--cRed);
+    color: $fallback--cRed;
+  }
+
+  .btn {
+    min-height: 28px;
+    min-width: 10em;
+    padding: 0 2em;
+  }
+
+  .number-input {
+    max-width: 6em;
+  }
+}
+.select-multiple {
+  display: flex;
+  .option-list {
+    margin: 0;
+    padding-left: .5em;
+  }
+}
+.setting-list,
+.option-list{
+  list-style-type: none;
+  padding-left: 2em;
+  li {
+    margin-bottom: 0.5em;
+  }
+  .suboptions {
+    margin-top: 0.3em
   }
 }
 

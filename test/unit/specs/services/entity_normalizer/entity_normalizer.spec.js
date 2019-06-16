@@ -129,7 +129,10 @@ const makeMockStatusMasto = (overrides = {}) => {
     tags: [],
     uri: 'https://shigusegubu.club/objects/16033fbb-97c0-4f0e-b834-7abb92fb8639',
     url: 'https://shigusegubu.club/objects/16033fbb-97c0-4f0e-b834-7abb92fb8639',
-    visibility: 'public'
+    visibility: 'public',
+    pleroma: {
+      local: true
+    }
   }, overrides)
 }
 
@@ -319,9 +322,9 @@ describe('API Entities normalizer', () => {
 
   describe('MastoAPI emoji adder', () => {
     const emojis = makeMockEmojiMasto()
-    const imageHtml = '<img src="https://example.com/image.png" alt="image" class="emoji" />'
+    const imageHtml = '<img src="https://example.com/image.png" alt="image" title="image" class="emoji" />'
           .replace(/"/g, '\'')
-    const thinkHtml = '<img src="https://example.com/think.png" alt="thinking" class="emoji" />'
+    const thinkHtml = '<img src="https://example.com/think.png" alt="thinking" title="thinking" class="emoji" />'
           .replace(/"/g, '\'')
 
     it('correctly replaces shortcodes in supplied string', () => {

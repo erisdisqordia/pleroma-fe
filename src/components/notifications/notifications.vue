@@ -1,7 +1,7 @@
 <template>
-  <div class="notifications">
-    <div class="panel panel-default">
-      <div class="panel-heading">
+  <div :class="{ minimal: minimalMode }" class="notifications">
+    <div :class="mainClass">
+      <div v-if="!noHeading" class="panel-heading">
         <div class="title">
           {{$t('notifications.notifications')}}
           <span class="badge badge-notification unseen-count" v-if="unseenCount">{{unseenCount}}</span>
@@ -12,7 +12,7 @@
         <button v-if="unseenCount" @click.prevent="markAsSeen" class="read-button">{{$t('notifications.read')}}</button>
       </div>
       <div class="panel-body">
-        <div v-for="notification in visibleNotifications" :key="notification.action.id" class="notification" :class='{"unseen": !notification.seen}'>
+        <div v-for="notification in visibleNotifications" :key="notification.id" class="notification" :class='{"unseen": !minimalMode && !notification.seen}'>
           <div class="notification-overlay"></div>
           <notification :notification="notification"></notification>
         </div>
@@ -22,7 +22,9 @@
           {{$t('notifications.no_more_notifications')}}
         </div>
         <a v-else-if="!loading" href="#" v-on:click.prevent="fetchOlderNotifications()">
-          <div class="new-status-notification text-center panel-footer">{{$t('notifications.load_older')}}</div>
+          <div class="new-status-notification text-center panel-footer">
+            {{ minimalMode ? $t('interactions.load_older') : $t('notifications.load_older')}}
+          </div>
         </a>
         <div v-else class="new-status-notification text-center panel-footer">
           <i class="icon-spin3 animate-spin"/>

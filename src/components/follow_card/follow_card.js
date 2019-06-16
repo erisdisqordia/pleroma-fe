@@ -10,8 +10,7 @@ const FollowCard = {
   data () {
     return {
       inProgress: false,
-      requestSent: false,
-      updated: false
+      requestSent: false
     }
   },
   components: {
@@ -19,10 +18,8 @@ const FollowCard = {
     RemoteFollow
   },
   computed: {
-    isMe () { return this.$store.state.users.currentUser.id === this.user.id },
-    following () { return this.updated ? this.updated.following : this.user.following },
-    showFollow () {
-      return !this.following || this.updated && !this.updated.following
+    isMe () {
+      return this.$store.state.users.currentUser.id === this.user.id
     },
     loggedIn () {
       return this.$store.state.users.currentUser
@@ -31,17 +28,15 @@ const FollowCard = {
   methods: {
     followUser () {
       this.inProgress = true
-      requestFollow(this.user, this.$store).then(({ sent, updated }) => {
+      requestFollow(this.user, this.$store).then(({ sent }) => {
         this.inProgress = false
         this.requestSent = sent
-        this.updated = updated
       })
     },
     unfollowUser () {
       this.inProgress = true
-      requestUnfollow(this.user, this.$store).then(({ updated }) => {
+      requestUnfollow(this.user, this.$store).then(() => {
         this.inProgress = false
-        this.updated = updated
       })
     }
   }

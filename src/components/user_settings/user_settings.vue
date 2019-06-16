@@ -22,7 +22,7 @@
           <div class="setting-item" >
             <h2>{{$t('settings.name_bio')}}</h2>
             <p>{{$t('settings.name')}}</p>
-            <EmojiInput 
+            <EmojiInput
               type="text"
               v-model="newName"
               id="username"
@@ -38,13 +38,14 @@
               <input type="checkbox" v-model="newLocked" id="account-locked">
               <label for="account-locked">{{$t('settings.lock_account_description')}}</label>
             </p>
-            <div v-if="scopeOptionsEnabled">
+            <div>
               <label for="default-vis">{{$t('settings.default_vis')}}</label>
               <div id="default-vis" class="visibility-tray">
-                <i v-on:click="changeVis('direct')" class="icon-mail-alt" :class="vis.direct" :title="$t('post_status.scope.direct')" ></i>
-                <i v-on:click="changeVis('private')" class="icon-lock" :class="vis.private" :title="$t('post_status.scope.private')"></i>
-                <i v-on:click="changeVis('unlisted')" class="icon-lock-open-alt" :class="vis.unlisted" :title="$t('post_status.scope.unlisted')"></i>
-                <i v-on:click="changeVis('public')" class="icon-globe" :class="vis.public" :title="$t('post_status.scope.public')"></i>
+                <scope-selector
+                  :showAll="true"
+                  :userDefault="newDefaultScope"
+                  :initialScope="newDefaultScope"
+                  :onScopeChange="changeVis"/>
               </div>
             </div>
             <p>
@@ -151,7 +152,7 @@
               </tbody>
             </table>
           </div>
-
+          <mfa />
           <div class="setting-item">
             <h2>{{$t('settings.delete_account')}}</h2>
             <p v-if="!deletingAccount">{{$t('settings.delete_account_description')}}</p>
@@ -167,43 +168,110 @@
           </div>
         </div>
 
+        <div :label="$t('settings.notifications')" v-if="pleromaBackend">
+          <div class="setting-item">
+            <div class="select-multiple">
+              <span class="label">{{$t('settings.notification_setting')}}</span>
+              <ul class="option-list">
+                <li>
+                  <input type="checkbox" id="notification-setting-follows" v-model="notificationSettings.follows">
+                  <label for="notification-setting-follows">
+                  {{$t('settings.notification_setting_follows')}}
+                  </label>
+                </li>
+                <li>
+                  <input type="checkbox" id="notification-setting-followers" v-model="notificationSettings.followers">
+                  <label for="notification-setting-followers">
+                  {{$t('settings.notification_setting_followers')}}
+                  </label>
+                </li>
+                <li>
+                  <input type="checkbox" id="notification-setting-non-follows" v-model="notificationSettings.non_follows">
+                  <label for="notification-setting-non-follows">
+                  {{$t('settings.notification_setting_non_follows')}}
+                  </label>
+                </li>
+                <li>
+                  <input type="checkbox" id="notification-setting-non-followers" v-model="notificationSettings.non_followers">
+                  <label for="notification-setting-non-followers">
+                  {{$t('settings.notification_setting_non_followers')}}
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <p>{{$t('settings.notification_mutes')}}</p>
+            <p>{{$t('settings.notification_blocks')}}</p>
+            <button class="btn btn-default" @click="updateNotificationSettings">{{$t('general.submit')}}</button>
+          </div>
+        </div>
+
         <div :label="$t('settings.data_import_export_tab')" v-if="pleromaBackend">
           <div class="setting-item">
             <h2>{{$t('settings.follow_import')}}</h2>
             <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
-            <form>
-              <input type="file" ref="followlist" v-on:change="followListChange" />
-            </form>
-            <i class=" icon-spin4 animate-spin uploading" v-if="followListUploading"></i>
-            <button class="btn btn-default" v-else @click="importFollows">{{$t('general.submit')}}</button>
-            <div v-if="followsImported">
-              <i class="icon-cross" @click="dismissImported"></i>
-              <p>{{$t('settings.follows_imported')}}</p>
-            </div>
-            <div v-else-if="followImportError">
-              <i class="icon-cross" @click="dismissImported"></i>
-              <p>{{$t('settings.follow_import_error')}}</p>
-            </div>
+            <Importer :submitHandler="importFollows" :successMessage="$t('settings.follows_imported')" :errorMessage="$t('settings.follow_import_error')" />
           </div>
-          <div class="setting-item" v-if="enableFollowsExport">
+          <div class="setting-item">
             <h2>{{$t('settings.follow_export')}}</h2>
-            <button class="btn btn-default" @click="exportFollows">{{$t('settings.follow_export_button')}}</button>
+            <Exporter :getContent="getFollowsContent" filename="friends.csv" :exportButtonLabel="$t('settings.follow_export_button')" />
           </div>
-          <div class="setting-item" v-else>
-            <h2>{{$t('settings.follow_export_processing')}}</h2>
+          <div class="setting-item">
+            <h2>{{$t('settings.block_import')}}</h2>
+            <p>{{$t('settings.import_blocks_from_a_csv_file')}}</p>
+            <Importer :submitHandler="importBlocks" :successMessage="$t('settings.blocks_imported')" :errorMessage="$t('settings.block_import_error')" />
+          </div>
+          <div class="setting-item">
+            <h2>{{$t('settings.block_export')}}</h2>
+            <Exporter :getContent="getBlocksContent" filename="blocks.csv" :exportButtonLabel="$t('settings.block_export_button')" />
           </div>
         </div>
 
         <div :label="$t('settings.blocks_tab')">
-          <block-list :refresh="true">
+          <div class="profile-edit-usersearch-wrapper">
+            <Autosuggest :filter="filterUnblockedUsers" :query="queryUserIds" :placeholder="$t('settings.search_user_to_block')">
+              <BlockCard slot-scope="row" :userId="row.item"/>
+            </Autosuggest>
+          </div>
+          <BlockList :refresh="true" :getKey="identity">
+            <template slot="header" slot-scope="{selected}">
+              <div class="profile-edit-bulk-actions">
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => blockUsers(selected)">
+                  {{ $t('user_card.block') }}
+                  <template slot="progress">{{ $t('user_card.block_progress') }}</template>
+                </ProgressButton>
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => unblockUsers(selected)">
+                  {{ $t('user_card.unblock') }}
+                  <template slot="progress">{{ $t('user_card.unblock_progress') }}</template>
+                </ProgressButton>
+              </div>
+            </template>
+            <template slot="item" slot-scope="{item}"><BlockCard :userId="item" /></template>
             <template slot="empty">{{$t('settings.no_blocks')}}</template>
-          </block-list>
+          </BlockList>
         </div>
 
         <div :label="$t('settings.mutes_tab')">
-          <mute-list :refresh="true">
+          <div class="profile-edit-usersearch-wrapper">
+            <Autosuggest :filter="filterUnMutedUsers" :query="queryUserIds" :placeholder="$t('settings.search_user_to_mute')">
+              <MuteCard slot-scope="row" :userId="row.item"/>
+            </Autosuggest>
+          </div>
+          <MuteList :refresh="true" :getKey="identity">
+            <template slot="header" slot-scope="{selected}">
+              <div class="profile-edit-bulk-actions">
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => muteUsers(selected)">
+                  {{ $t('user_card.mute') }}
+                  <template slot="progress">{{ $t('user_card.mute_progress') }}</template>
+                </ProgressButton>
+                <ProgressButton class="btn btn-default" v-if="selected.length > 0" :click="() => unmuteUsers(selected)">
+                  {{ $t('user_card.unmute') }}
+                  <template slot="progress">{{ $t('user_card.unmute_progress') }}</template>
+                </ProgressButton>
+              </div>
+            </template>
+            <template slot="item" slot-scope="{item}"><MuteCard :userId="item" /></template>
             <template slot="empty">{{$t('settings.no_mutes')}}</template>
-          </mute-list>
+          </MuteList>
         </div>
       </tab-switcher>
     </div>
@@ -219,6 +287,10 @@
 .profile-edit {
   .bio {
     margin: 0;
+  }
+
+  .visibility-tray {
+    padding-top: 5px;
   }
 
   input[type=file] {
@@ -260,6 +332,20 @@
 
     .actions {
       text-align: right;
+    }
+  }
+
+  &-usersearch-wrapper {
+    padding: 1em;
+  }
+
+  &-bulk-actions {
+    text-align: right;
+    padding: 0 1em;
+    min-height: 28px;
+
+    button {
+      width: 10em;
     }
   }
 }

@@ -1,5 +1,6 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
+import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import Completion from '../../services/completion/completion.js'
@@ -30,6 +31,7 @@ const PostStatusForm = {
   ],
   components: {
     MediaUpload,
+    ScopeSelector,
     EmojiInput
   },
   mounted () {
@@ -80,14 +82,6 @@ const PostStatusForm = {
     }
   },
   computed: {
-    vis () {
-      return {
-        public: { selected: this.newStatus.visibility === 'public' },
-        unlisted: { selected: this.newStatus.visibility === 'unlisted' },
-        private: { selected: this.newStatus.visibility === 'private' },
-        direct: { selected: this.newStatus.visibility === 'direct' }
-      }
-    },
     candidates () {
       const firstchar = this.textAtCaret.charAt(0)
       if (firstchar === '@') {
@@ -135,6 +129,15 @@ const PostStatusForm = {
     users () {
       return this.$store.state.users.users
     },
+    userDefaultScope () {
+      return this.$store.state.users.currentUser.default_scope
+    },
+    showAllScopes () {
+      const minimalScopesMode = typeof this.$store.state.config.minimalScopesMode === 'undefined'
+            ? this.$store.state.instance.minimalScopesMode
+            : this.$store.state.config.minimalScopesMode
+      return !minimalScopesMode
+    },
     emoji () {
       return this.$store.state.instance.emoji || []
     },
@@ -159,8 +162,8 @@ const PostStatusForm = {
     isOverLengthLimit () {
       return this.hasStatusLengthLimit && (this.charactersLeft < 0)
     },
-    scopeOptionsEnabled () {
-      return this.$store.state.instance.scopeOptionsEnabled
+    minimalScopesMode () {
+      return this.$store.state.instance.minimalScopesMode
     },
     alwaysShowSubject () {
       if (typeof this.$store.state.config.alwaysShowSubjectInput !== 'undefined') {
@@ -168,7 +171,7 @@ const PostStatusForm = {
       } else if (typeof this.$store.state.instance.alwaysShowSubjectInput !== 'undefined') {
         return this.$store.state.instance.alwaysShowSubjectInput
       } else {
-        return this.$store.state.instance.scopeOptionsEnabled
+        return true
       }
     },
     formattingOptionsEnabled () {
@@ -176,6 +179,12 @@ const PostStatusForm = {
     },
     postFormats () {
       return this.$store.state.instance.postFormats || []
+    },
+    safeDMEnabled () {
+      return this.$store.state.instance.safeDM
+    },
+    hideScopeNotice () {
+      return this.$store.state.config.hideScopeNotice
     }
   },
   methods: {
@@ -332,6 +341,9 @@ const PostStatusForm = {
     },
     changeVis (visibility) {
       this.newStatus.visibility = visibility
+    },
+    dismissScopeNotice () {
+      this.$store.dispatch('setOption', { name: 'hideScopeNotice', value: true })
     }
   }
 }

@@ -10,8 +10,8 @@ export const visibleTypes = store => ([
 ].filter(_ => _))
 
 const sortById = (a, b) => {
-  const seqA = Number(a.action.id)
-  const seqB = Number(b.action.id)
+  const seqA = Number(a.id)
+  const seqB = Number(b.id)
   const isSeqA = !Number.isNaN(seqA)
   const isSeqB = !Number.isNaN(seqB)
   if (isSeqA && isSeqB) {
@@ -21,15 +21,17 @@ const sortById = (a, b) => {
   } else if (!isSeqA && isSeqB) {
     return -1
   } else {
-    return a.action.id > b.action.id ? -1 : 1
+    return a.id > b.id ? -1 : 1
   }
 }
 
-export const visibleNotificationsFromStore = store => {
+export const visibleNotificationsFromStore = (store, types) => {
   // map is just to clone the array since sort mutates it and it causes some issues
   let sortedNotifications = notificationsFromStore(store).map(_ => _).sort(sortById)
   sortedNotifications = sortBy(sortedNotifications, 'seen')
-  return sortedNotifications.filter((notification) => visibleTypes(store).includes(notification.type))
+  return sortedNotifications.filter(
+    (notification) => (types || visibleTypes(store)).includes(notification.type)
+  )
 }
 
 export const unseenNotificationsFromStore = store =>

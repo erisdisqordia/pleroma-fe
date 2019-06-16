@@ -39,6 +39,7 @@ const externalProfileStore = new Vuex.Store({
   getters: testGetters,
   state: {
     api: {
+      fetchers: {},
       backendInteractor: backendInteractorService('')
     },
     interface: {
@@ -106,6 +107,7 @@ const localProfileStore = new Vuex.Store({
   getters: testGetters,
   state: {
     api: {
+      fetchers: {},
       backendInteractor: backendInteractorService('')
     },
     interface: {

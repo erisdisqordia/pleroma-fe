@@ -7,12 +7,14 @@ import {
 } from '../../services/notification_utils/notification_utils.js'
 
 const Notifications = {
-  created () {
-    const store = this.$store
-    const credentials = store.state.users.currentUser.credentials
-
-    const fetcherId = notificationsFetcher.startFetching({ store, credentials })
-    this.$store.commit('setNotificationFetcher', { fetcherId })
+  props: {
+    // Disables display of panel header
+    noHeading: Boolean,
+    // Disables panel styles, unread mark, potentially other notification-related actions
+    // meant for "Interactions" timeline
+    minimalMode: Boolean,
+    // Custom filter mode, an array of strings, possible values 'mention', 'repeat', 'like', 'follow', used to override global filter for use in "Interactions" timeline
+    filterMode: Array
   },
   data () {
     return {
@@ -20,6 +22,9 @@ const Notifications = {
     }
   },
   computed: {
+    mainClass () {
+      return this.minimalMode ? '' : 'panel panel-default'
+    },
     notifications () {
       return notificationsFromStore(this.$store)
     },
@@ -30,7 +35,7 @@ const Notifications = {
       return unseenNotificationsFromStore(this.$store)
     },
     visibleNotifications () {
-      return visibleNotificationsFromStore(this.$store)
+      return visibleNotificationsFromStore(this.$store, this.filterMode)
     },
     unseenCount () {
       return this.unseenNotifications.length
@@ -53,9 +58,13 @@ const Notifications = {
   },
   methods: {
     markAsSeen () {
-      this.$store.dispatch('markNotificationsAsSeen', this.visibleNotifications)
+      this.$store.dispatch('markNotificationsAsSeen')
     },
     fetchOlderNotifications () {
+      if (this.loading) {
+        return
+      }
+
       const store = this.$store
       const credentials = store.state.users.currentUser.credentials
       store.commit('setNotificationsLoading', { value: true })

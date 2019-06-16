@@ -222,6 +222,8 @@
     "no_more_statuses": "Ei enempää viestejä"
   },
   "status": {
+    "favorites": "Tykkäykset",
+    "repeats": "Toistot",
     "reply_to": "Vastaus",
     "replies_list": "Vastaukset:"
   },

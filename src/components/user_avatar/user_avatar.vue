@@ -1,8 +1,10 @@
 <template>
   <StillImage
     class="avatar"
+    :alt="user.screen_name"
+    :title="user.screen_name"
+    :src="user.profile_image_url_original"
     :class="{ 'avatar-compact': compact, 'better-shadow': betterShadow }"
-    :src="imgSrc"
     :imageLoadError="imageLoadError"
   />
 </template>

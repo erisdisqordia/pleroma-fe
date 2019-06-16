@@ -39,12 +39,6 @@ unused (?)
 ### `showInstanceSpecificPanel`
 This allows you to include arbitrary HTML content in a panel below navigation menu. PleromaFE looks for an html page `instance/panel.html`, by default it's not provided in FE, but BE bundles some [default one](https://git.pleroma.social/pleroma/pleroma/blob/develop/priv/static/instance/panel.html). De-facto instance-defaults, since user can hide instance-specific panel.
 
-### `scopeOptionsEnabled`
-TODO deprecated in !633
-
-### `formattingOptionsEnabled`
-Enables rich text formatting (broken?)
-
 ### `collapseMessageWithSubject`
 Collapse post content when post has a subject line (content warning). Instance-default.
 
@@ -59,7 +53,7 @@ How to handle subject line (CW) when replying to a post.
 Instance-default.
 
 ### `postContentType`
-Default text formatting option (????)
+Default post formatting option (markdown/bbcode/plaintext/etc...)
 
 ### `alwaysShowSubjectInput`
 `true` - will always show subject line input, `false` - only show when it's not empty (i.e. replying). To hide subject line input completely, set it to `false` and `subjectLineBehavior` to `"noop"`
@@ -69,14 +63,13 @@ Hide counters for posts and users respectively, i.e. hiding repeats/favorites co
 
 ### `loginMethod`
 `"password"` - show simple password field
-`"token"` - show button to loken with a token (??????)
-TODO more info about token login needed
+`"token"` - show button to log in with external method (will redirect to login form, more details in BE documentation)
 
 ### `webPushNotifications`
 Enables [PushAPI](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) - based notifications for users. Instance-default.
 
 ### `noAttachmentLinks`
-TODO ?????
+**TODO Currently doesn't seem to be doing anything code-wise**, but implication is to disable adding links for attachments, which looks nicer but breaks compatibility with old GNU/Social servers.
 
 ### `nsfwCensorImage`
 Use custom image for NSFW'd images

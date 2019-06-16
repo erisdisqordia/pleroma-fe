@@ -1,7 +1,9 @@
 > Be prepared for breaking changes, unexpected behavior and this user guide becoming obsolete and wrong.
 
 > If there was no insanity
+>
 > it would be necessary to create it.
+>
 > --Catbag
 
 # Pleroma-FE user guide

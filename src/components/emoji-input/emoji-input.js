@@ -130,10 +130,16 @@ const EmojiInput = {
         const replacement = suggestion.replacement
         const newValue = Completion.replaceWord(this.value, this.wordAtCaret, replacement)
         this.$emit('input', newValue)
-        this.caret = 0
         this.highlighted = 0
-        // Re-focus inputbox after clicking suggestion
-        this.input.elm.focus()
+        const position = this.wordAtCaret.start + replacement.length
+
+        this.$nextTick(function () {
+          // Re-focus inputbox after clicking suggestion
+          this.input.elm.focus()
+          // Set selection right after the replacement instead of the very end
+          this.input.elm.setSelectionRange(position, position)
+          this.caret = position
+        })
         e.preventDefault()
       }
     },

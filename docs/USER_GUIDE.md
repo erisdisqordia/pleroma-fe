@@ -14,7 +14,11 @@ Pleroma-FE user interface is modeled after Qvitter which is modeled after older 
 
 After registering and logging in you're presented with your timeline in right column and new post form with timeline list and notifications in the left column.
 
-When posting links will automatically become hyperlinks, @user@instnace.tld and @user like text will become mentions with link, #tag like text will become link to a tag. Mentioning someone will notify that user that you've mentioned them, there's no way around that except for not using @ in the beginning or referring to them in some other way.
+Posts will contain the text you are posting, but some content will be modified:
+
+1. Mentions: Mentions have the form of @user or @user@instance.tld. These will become links to the user's profile. In addition, the mentioned user will always get a notification about the post they have been mentioned in, so only mention users that you want to receive this message.
+2. URLs: URLs like `http://example.com` will be automatically  be turned into a clickable links.
+3. Hashtags: Hashtags like #cofe will also be turned into links.
 
 **Depending on your instance some of the options might not be available or have different defaults**
 

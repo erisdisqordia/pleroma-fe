@@ -66,7 +66,7 @@ Please note that some users can be "locked", meaning instead of following them y
 ## Timelines
 
 Currently you have several timelines to browse trough:
-* **Timeline** aka Home Timeline - this timeline contains all posts by people you follow and your own posts
+* **Timeline** aka Home Timeline - this timeline contains all posts by people you follow and your own posts, as well as posts mentioning you directly.
 * **Interactions** all interactions you've had with people on the network, basically same as notifications except grouped in convenient way - mentions separate from favorites with repeats separate from follows
 * **Direct Messages** all posts with `direct` scope addressed to you or mentioning you.
 * **Public Timelines** all posts made by users on instance you're on

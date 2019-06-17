@@ -1,5 +1,5 @@
 <template>
-<div class="setting-item mfa-settings" v-if="readyInit">
+<div class="setting-item mfa-settings" v-if="readyInit && settings.available">
 
   <div class="mfa-heading">
     <h2>{{$t('settings.mfa.title')}}</h2>

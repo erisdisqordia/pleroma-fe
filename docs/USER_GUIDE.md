@@ -39,7 +39,7 @@ A few things to consider about the security and usage of these scopes:
 - Changing scopes during a thread or adding people to a direct message will not retroactively make them see the whole conversation. If you add someone to a direct message conversation, they will not see the post that happened before they were mentioned.
 * **Reply-to** if you are replying to someone, your post will also contain a note that your post is referring to the post you're replying to. Person you're replying to will receive a notification *even* if you remove them from mentioned people. You won't receive notifications when replying to your own posts, but it's useful to reply to your own posts to provide people some context if it's a follow-up to a previous post. There's a small "Reply to ..." label under post author's name which you can hover on to see what post it's referring to.
 
-Another note: PleromaFE provides a simplified way of posting, however there a lot of stuff going on inside and some other applications allow you to tweak the inmost details of a post - for example you can set "to" and "cc" fields without actually mentioning people, so if you see a post in your notifications that's supposedly not replying to you and doesn't have you in the mentions - it's probably one of those.
+Sometimes you may encounter posts that seem different than what they are supposed to. For example, you might see a direct message without any mentions in the text. This can happen because internally, the Fediverse has a different addressing mechanism similar to email, with `to` and `cc` fields. While these are not directly accessible in PleromaFE, other software in the Fediverse might generate those posts. Do not worry in these cases, these are normal and not a bug.
 
 #### Rich text
 

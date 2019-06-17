@@ -60,6 +60,9 @@ export const parseUser = (data) => {
     if (data.pleroma) {
       const relationship = data.pleroma.relationship
 
+      output.background_image = data.pleroma.background_image
+      output.token = data.pleroma.chat_token
+
       if (relationship) {
         output.follows_you = relationship.followed_by
         output.following = relationship.following

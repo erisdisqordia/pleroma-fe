@@ -46,7 +46,9 @@ const UserSettings = {
       pickAvatarBtnVisible: true,
       bannerUploading: false,
       backgroundUploading: false,
+      banner: null,
       bannerPreview: null,
+      background: null,
       backgroundPreview: null,
       bannerUploadError: null,
       backgroundUploadError: null,
@@ -198,22 +200,12 @@ const UserSettings = {
     },
     submitBg () {
       if (!this.backgroundPreview) { return }
-      let img = this.backgroundPreview
-      // eslint-disable-next-line no-undef
-      let imginfo = new Image()
-      let cropX, cropY, cropW, cropH
-      imginfo.src = img
-      cropX = 0
-      cropY = 0
-      cropW = imginfo.width
-      cropH = imginfo.width
+      let background = this.background
       this.backgroundUploading = true
-      this.$store.state.api.backendInteractor.updateBg({params: {img, cropX, cropY, cropW, cropH}}).then((data) => {
+      this.$store.state.api.backendInteractor.updateBg({ background }).then((data) => {
         if (!data.error) {
-          let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
-          clone.background_image = data.url
-          this.$store.commit('addNewUsers', [clone])
-          this.$store.commit('setCurrentUser', clone)
+          this.$store.commit('addNewUsers', [data])
+          this.$store.commit('setCurrentUser', data)
           this.backgroundPreview = null
         } else {
           this.backgroundUploadError = this.$t('upload.error.base') + data.error

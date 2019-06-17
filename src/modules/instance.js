@@ -16,7 +16,6 @@ const defaultState = {
   redirectRootNoLogin: '/main/all',
   redirectRootLogin: '/main/friends',
   showInstanceSpecificPanel: false,
-  formattingOptionsEnabled: false,
   alwaysShowSubjectInput: true,
   hideMutedPosts: false,
   collapseMessageWithSubject: false,

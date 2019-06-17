@@ -58,7 +58,7 @@
       >
       </textarea>
       <div class="visibility-tray">
-        <div class="text-format" v-if="formattingOptionsEnabled">
+        <div class="text-format" v-if="postFormats.length > 1">
           <label for="post-content-type" class="select">
             <select id="post-content-type" v-model="newStatus.contentType" class="form-control">
               <option v-for="postFormat in postFormats" :key="postFormat" :value="postFormat">
@@ -67,6 +67,11 @@
             </select>
             <i class="icon-down-open"></i>
           </label>
+        </div>
+        <div class="text-format" v-if="postFormats.length === 1">
+          <span class="only-format">
+            {{$t(`post_status.content_type["${postFormats[0]}"]`)}}
+          </span>
         </div>
 
         <scope-selector
@@ -172,6 +177,14 @@
       display: flex;
     }
   }
+
+  .text-format {
+    .only-format {
+      color: $fallback--faint;
+      color: var(--faint, $fallback--faint);
+    }
+  }
+
 
   .error {
     text-align: center;

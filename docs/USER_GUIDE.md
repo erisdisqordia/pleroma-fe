@@ -51,7 +51,9 @@ this section will be expanded later
 
 In addition to posting you can also *favorite* post also known as *liking* them and *repeat* posts (also known as *retweeting*, *boosting* and even *reprööting*). Favoriting a post increments a counter on it, notifies post author of your affection towards that post and also adds that post to your "favorited" posts list (in your own profile, "Favorites" tab). Reprööting a post does all that and also repeats this post to your followers and your profile page with a note "*user* repeated post".
 
-You can also delete your own posts (and posts of other people if you're a moderator, but it's slightly different as it won't delete posts by people on other instances) however it's not entirely reliable since deleting a post basically sends a notification "please delete this post" and it may or may not reach all instances, as well as client applications may or may not receive deletion notification from server so post will remain until entire data is refreshed.
+Your own posts can be deleted, but this will only reliably delete the post from your own instance. Other instances will receive a deletion notice, but there's no way to force them to actually delete a post. In addition, not all instances that contain the message might even receive the deletion notice, because they might be offline or not known to have the post because they received it through a repeat.
+
+If you are a moderator, you can also delete posts by other people. If those people are on your instance, it will delete the post and send out the deletion notice to other servers. If they are not on your instance, it will just remove the post from your local instance.
 
 There's also an option to report a user via a post (if the feature is available on your instance) which could be used to notify your (and probably other instance's) admin that someone is being naughty.
 

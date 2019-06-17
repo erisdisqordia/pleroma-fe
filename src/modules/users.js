@@ -356,7 +356,13 @@ const users = {
     },
     searchUsers (store, query) {
       // TODO: Move userSearch api into api.service
-      return userSearchApi.search({query, store: { state: store.rootState }})
+      return userSearchApi.search({
+        query,
+        store: {
+          state: store.rootState,
+          getters: store.rootGetters
+        }
+      })
         .then((users) => {
           store.commit('addNewUsers', users)
           return users

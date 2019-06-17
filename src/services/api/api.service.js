@@ -133,7 +133,6 @@ const updateAvatar = ({credentials, avatar}) => {
 
 const updateBg = ({ credentials, background }) => {
   const form = new FormData()
-  console.log(background)
   form.append('pleroma_background_image', background)
   return fetch(MASTODON_PROFILE_UPDATE_URL, {
     headers: authHeaders(credentials),

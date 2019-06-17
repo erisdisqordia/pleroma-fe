@@ -48,7 +48,7 @@ Copy post scope (visibility) when replying to a post. Instance-default.
 ### `subjectLineBehavior`
 How to handle subject line (CW) when replying to a post.
 * `"email"` - like EMail - prepend `re: ` to subject line if it doesn't already start with it.
-* `"masto"` - lime Mastodon - copy it as is.
+* `"masto"` - like Mastodon - copy it as is.
 * `"noop"` - do not copy
 Instance-default.
 

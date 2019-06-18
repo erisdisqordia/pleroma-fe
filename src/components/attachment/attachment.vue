@@ -68,6 +68,7 @@
     max-height: 200px;
     max-width: 100%;
     display: flex;
+    align-items: center;
     video {
       max-width: 100%;
     }

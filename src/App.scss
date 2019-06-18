@@ -47,6 +47,8 @@ body {
   color: var(--text, $fallback--text);
   max-width: 100vw;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {

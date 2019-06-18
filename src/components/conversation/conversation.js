@@ -139,6 +139,7 @@ const conversation = {
       return (this.isExpanded) && id === this.status.id
     },
     setHighlight (id) {
+      if (!id) return
       this.highlight = id
       this.$store.dispatch('fetchFavsAndRepeats', id)
     },

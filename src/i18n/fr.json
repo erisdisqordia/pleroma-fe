@@ -4,7 +4,7 @@
     },
     "exporter": {
         "export": "Exporter",
-        "processing": "En cours de traitement, vous serez demandé rapidement à télécharger votre fichier"
+        "processing": "En cours de traitement, vous pourrez bientôt télécharger votre fichier"
     },
     "features_panel": {
         "chat": "Chat",
@@ -13,7 +13,7 @@
         "scope_options": "Options de visibilité",
         "text_limit": "Limite de texte",
         "title": "Caractéristiques",
-        "who_to_follow": "Qui suivre"
+        "who_to_follow": "Personnes à suivre"
     },
     "finder": {
         "error_fetching_user": "Erreur lors de la recherche de l'utilisateur·ice",
@@ -72,7 +72,7 @@
         "chat": "Chat local",
         "friend_requests": "Demandes de suivi",
         "mentions": "Notifications",
-        "interactions": "Intéractions",
+        "interactions": "Interactions",
         "dms": "Messages directs",
         "public_tl": "Fil d'actualité public",
         "timeline": "Fil d'actualité",
@@ -93,7 +93,7 @@
     },
     "interactions": {
         "favs_repeats": "Partages et favoris",
-        "follows": "Nouveaux abonnés",
+        "follows": "Nouveaux⋅elles abonné⋅e⋅s ?",
         "load_older": "Chargez d'anciennes interactions"
     },
     "post_status": {
@@ -114,7 +114,7 @@
         "posting": "Envoi en cours",
         "scope_notice": {
             "public": "Ce statut sera visible par tout le monde",
-            "private": "Ce statut sera visible par seulement vos abonnés",
+            "private": "Ce statut sera visible par seulement vos abonné⋅e⋅s",
             "unlisted": "Ce statut ne sera pas visible dans le Fil d'actualité public et l'Ensemble du réseau connu"
         },
         "scope": {
@@ -135,7 +135,7 @@
         "new_captcha": "Cliquez sur l'image pour avoir un nouveau captcha",
         "username_placeholder": "p.e. lain",
         "fullname_placeholder": "p.e. Lain Iwakura",
-        "bio_placeholder": "p.e.\nSalut, je suis Lain\nJe suis une fille d'anime qui vit dans une banlieu japonaise. Vous me connaissez peut-être du Wired.",
+        "bio_placeholder": "p.e.\nSalut, je suis Lain\nJe suis une héroïne d'animé qui vit dans une banlieue japonaise. Vous me connaissez peut-être du Wired.",
         "validations": {
             "username_required": "ne peut pas être laissé vide",
             "fullname_required": "ne peut pas être laissé vide",
@@ -181,17 +181,17 @@
         "avatarRadius": "Avatars",
         "background": "Arrière-plan",
         "bio": "Biographie",
-        "block_export": "Export des bloqués",
-        "block_export_button": "Export des bloqués vers un fichier csv",
-        "block_import": "Import des bloqués",
-        "block_import_error": "Erreur lors de l'import des bloqués",
+        "block_export": "Export des comptes bloqués",
+        "block_export_button": "Export des comptes bloqués vers un fichier csv",
+        "block_import": "Import des comptes bloqués",
+        "block_import_error": "Erreur lors de l'import des comptes bloqués",
         "blocks_imported": "Blocks importés! Le traitement va prendre un moment.",
         "blocks_tab": "Bloqué·e·s",
         "btnRadius": "Boutons",
-        "cBlue": "Bleu (Répondre, suivre)",
-        "cGreen": "Vert (Partager)",
-        "cOrange": "Orange (Aimer)",
-        "cRed": "Rouge (Annuler)",
+        "cBlue": "Bleu (répondre, suivre)",
+        "cGreen": "Vert (partager)",
+        "cOrange": "Orange (aimer)",
+        "cRed": "Rouge (annuler)",
         "change_password": "Changez votre mot de passe",
         "change_password_error": "Il y a eu un problème pour changer votre mot de passe.",
         "changed_password": "Mot de passe modifié avec succès !",
@@ -202,10 +202,10 @@
         "current_password": "Mot de passe actuel",
         "current_profile_banner": "Bannière de profil actuelle",
         "data_import_export_tab": "Import / Export des Données",
-        "default_vis": "Portée de visibilité par défaut",
+        "default_vis": "Visibilité par défaut",
         "delete_account": "Supprimer le compte",
         "delete_account_description": "Supprimer définitivement votre compte et tous vos statuts.",
-        "delete_account_error": "Il y a eu un problème lors de la tentative de suppression de votre compte. Si le problème persiste, contactez l'administrateur de cette instance.",
+        "delete_account_error": "Il y a eu un problème lors de la tentative de suppression de votre compte. Si le problème persiste, contactez l'administrateur⋅ice de cette instance.",
         "delete_account_instructions": "Indiquez votre mot de passe ci-dessous pour confirmer la suppression de votre compte.",
         "avatar_size_instruction": "La taille minimale recommandée pour l'image de l'avatar est de 150x150 pixels.",
         "export_theme": "Enregistrer le thème",
@@ -220,14 +220,14 @@
         "general": "Général",
         "hide_attachments_in_convo": "Masquer les pièces jointes dans les conversations",
         "hide_attachments_in_tl": "Masquer les pièces jointes dans le journal",
-        "hide_muted_posts": "Masquer les status des utilisateurs masqués",
-        "max_thumbnails": "Nombre maximum de miniatures par status",
+        "hide_muted_posts": "Masquer les statuts des utilisateurs masqués",
+        "max_thumbnails": "Nombre maximum de miniatures par statuts",
         "hide_isp": "Masquer le panneau spécifique a l'instance",
         "preload_images": "Précharger les images",
         "use_one_click_nsfw": "Ouvrir les pièces-jointes NSFW avec un seul clic",
         "hide_post_stats": "Masquer les statistiques de publication (le nombre de favoris)",
         "hide_user_stats": "Masquer les statistiques de profil (le nombre d'amis)",
-        "hide_filtered_statuses": "Masquer les status filtrés",
+        "hide_filtered_statuses": "Masquer les statuts filtrés",
         "import_blocks_from_a_csv_file": "Importer les blocages depuis un fichier csv",
         "import_followers_from_a_csv_file": "Importer des abonnements depuis un fichier csv",
         "import_theme": "Charger le thème",
@@ -242,9 +242,9 @@
         "links": "Liens",
         "lock_account_description": "Limitez votre compte aux abonnés acceptés uniquement",
         "loop_video": "Vidéos en boucle",
-        "loop_video_silent_only": "Boucle uniquement les vidéos sans le son (les «gifs» de Mastodon)",
-        "mutes_tab": "Masqués",
-        "play_videos_in_modal": "Jouer les videos directement dans le visionneur de médias",
+        "loop_video_silent_only": "Boucle uniquement les vidéos sans le son (les « gifs » de Mastodon)",
+        "mutes_tab": "Comptes silenciés",
+        "play_videos_in_modal": "Jouer les vidéos directement dans le visionneur de médias",
         "use_contain_fit": "Ne pas rogner les miniatures des pièces-jointes",
         "name": "Nom",
         "name_bio": "Nom & Bio",
@@ -259,8 +259,8 @@
         "no_mutes": "Aucun masqués",
         "hide_follows_description": "Ne pas afficher à qui je suis abonné",
         "hide_followers_description": "Ne pas afficher qui est abonné à moi",
-        "show_admin_badge": "Afficher le badge d'Administrateur sur mon profil",
-        "show_moderator_badge": "Afficher le badge de Modérateur sur mon profil",
+        "show_admin_badge": "Afficher le badge d'Administrateur⋅ice sur mon profil",
+        "show_moderator_badge": "Afficher le badge de Modérateur⋅ice sur mon profil",
         "nsfw_clickthrough": "Masquer les images marquées comme contenu adulte ou sensible",
         "oauth_tokens": "Jetons OAuth",
         "token": "Jeton",
@@ -268,7 +268,7 @@
         "valid_until": "Valable jusque",
         "revoke_token": "Révoquer",
         "panelRadius": "Fenêtres",
-        "pause_on_unfocused": "Suspendre le streaming lorsque l'onglet n'est pas centré",
+        "pause_on_unfocused": "Suspendre le streaming lorsque l'onglet n'est pas actif",
         "presets": "Thèmes prédéfinis",
         "profile_background": "Image de fond",
         "profile_banner": "Bannière de profil",
@@ -277,15 +277,15 @@
         "replies_in_timeline": "Réponses au journal",
         "reply_link_preview": "Afficher un aperçu lors du survol de liens vers une réponse",
         "reply_visibility_all": "Montrer toutes les réponses",
-        "reply_visibility_following": "Afficher uniquement les réponses adressées à moi ou aux utilisateurs que je suis",
+        "reply_visibility_following": "Afficher uniquement les réponses adressées à moi ou aux personnes que je suis",
         "reply_visibility_self": "Afficher uniquement les réponses adressées à moi",
-        "autohide_floating_post_button": "Automatiquement cacher le bouton de Nouveau Status (sur mobile)",
+        "autohide_floating_post_button": "Automatiquement cacher le bouton de Nouveau Statut (sur mobile)",
         "saving_err": "Erreur lors de l'enregistrement des paramètres",
         "saving_ok": "Paramètres enregistrés",
         "search_user_to_block": "Rechercher qui vous voulez bloquer",
         "search_user_to_mute": "Rechercher qui vous voulez masquer",
         "security_tab": "Sécurité",
-        "scope_copy": "Copier la portée en répondant (les DMs sont toujours copiés)",
+        "scope_copy": "Garder la même visibilité en répondant (les DMs restent toujours des DMs)",
         "minimal_scopes_mode": "Rétrécir les options de séléction de la portée",
         "set_new_avatar": "Changer d'avatar",
         "set_new_profile_background": "Changer d'image de fond",
@@ -293,16 +293,16 @@
         "settings": "Paramètres",
         "subject_input_always_show": "Toujours copier le champ de sujet",
         "subject_line_behavior": "Copier le sujet en répondant",
-        "subject_line_email": "Comme les mails: \"re: sujet\"",
+        "subject_line_email": "Comme les mails: « re: sujet »",
         "subject_line_mastodon": "Comme mastodon: copier tel quel",
         "subject_line_noop": "Ne pas copier",
-        "post_status_content_type": "Type de contenu du status",
+        "post_status_content_type": "Type de contenu du statuts",
         "stop_gifs": "N'animer les GIFS que lors du survol du curseur de la souris",
         "streaming": "Charger automatiquement les nouveaux statuts lorsque vous êtes au haut de la page",
         "text": "Texte",
         "theme": "Thème",
         "theme_help": "Spécifiez des codes couleur hexadécimaux (#rrvvbb) pour personnaliser les couleurs du thème.",
-        "theme_help_v2_1": "Vous pouvez aussi surcharger certaines couleurs de composants et transparence via la case à cocher, utilisez le bouton \"Vider tout\" pour effacer toutes les surcharges.",
+        "theme_help_v2_1": "Vous pouvez aussi surcharger certaines couleurs de composants et transparence via la case à cocher, utilisez le bouton « Vider tout » pour effacer toutes les surcharges.",
         "theme_help_v2_2": "Les icônes sous certaines des entrées ont un indicateur de contraste du fond/texte, survolez les pour plus d'informations détailles. Veuillez garder a l'esprit que lors de l'utilisation de transparence l'indicateur de contraste indique le pire des cas.",
         "tooltipRadius": "Info-bulles/alertes",
         "upload_a_photo": "Envoyer une photo",
@@ -327,7 +327,7 @@
                 "keep_opacity": "Garder la transparence",
                 "keep_roundness": "Garder la rondeur",
                 "keep_fonts": "Garder les polices",
-                "save_load_hint": "L'option \"Garder\" préserve les options activés en cours lors de la séléction ou chargement des themes, il sauve aussi les dites options lors de l'export d'un theme. Quand toutes les cases sont décochés, exporter un theme sauvera tout.",
+                "save_load_hint": "L'option « Garder » préserve les options activés en cours lors de la séléction ou chargement des thèmes, il sauve aussi les dites options lors de l'export d'un thème. Quand toutes les cases sont décochés, exporter un thème sauvera tout.",
                 "reset": "Remise à zéro",
                 "clear_all": "Tout vider",
                 "clear_opacity": "Vider la transparence"
@@ -338,8 +338,8 @@
                 "contrast": {
                     "hint": "Le ratio de contraste est {ratio}, il {level} {context}",
                     "level": {
-                        "aa": "réponds aux directives de niveau AA (minimum)",
-                        "aaa": "réponds aux directives de niveau AAA (recommandé)",
+                        "aa": "répond aux directives de niveau AA (minimum)",
+                        "aaa": "répond aux directives de niveau AAA (recommandé)",
                         "bad": "ne réponds à aucune directive d'accessibilité"
                     },
                     "context": {
@@ -351,7 +351,7 @@
             "common_colors": {
                 "_tab_label": "Commun",
                 "main": "Couleurs communes",
-                "foreground_hint": "Voir l'onglet \"Avancé\" pour plus de contrôle détaillé",
+                "foreground_hint": "Voir l'onglet « Avancé » pour plus de contrôle détaillé",
                 "rgbo": "Icônes, accents, badges"
             },
             "advanced_colors": {
@@ -377,37 +377,37 @@
                 "shadow_id": "Ombre #{value}",
                 "blur": "Flou",
                 "spread": "Dispersion",
-                "inset": "Inséré",
+                "inset": "Interne",
                 "hint": "Pour les ombres, vous pouvez aussi utiliser --variable comme valeur de couleur en CSS3. Veuillez noter que spécifier la transparence ne fonctionnera pas dans ce cas.",
                 "filter_hint": {
                     "always_drop_shadow": "Attention, cette ombre utilise toujours {0} quand le navigateur le supporte.",
                     "drop_shadow_syntax": "{0} ne supporte pas le paramètre {1} et mot-clé {2}.",
-                    "avatar_inset": "Veuillez noter que combiner a la fois les ombres insérés et non-insérés sur les avatars peut fournir des résultats innatendus avec la transparence des avatars.",
+                    "avatar_inset": "Veuillez noter que combiner a la fois les ombres internes et non-internes sur les avatars peut fournir des résultats innatendus avec la transparence des avatars.",
                     "spread_zero": "Les ombres avec une dispersion > 0 apparaitrons comme si ils étaient à zéro",
-                    "inset_classic": "L'ombre d'insertion utilisera toujours {0}"
+                    "inset_classic": "L'ombre interne utilisera toujours {0}"
                 },
                 "components": {
                     "panel": "Panneau",
                     "panelHeader": "En-tête de panneau",
                     "topBar": "Barre du haut",
-                    "avatar": "Avatar utilisateur (dans la vue de profile)",
-                    "avatarStatus": "Avatar utilisateur (dans la vue de status)",
+                    "avatar": "Avatar utilisateur⋅ice (dans la vue de profil)",
+                    "avatarStatus": "Avatar utilisateur⋅ice (dans la vue de statuts)",
                     "popup": "Popups et infobulles",
                     "button": "Bouton",
                     "buttonHover": "Bouton (survol)",
                     "buttonPressed": "Bouton (cliqué)",
-                    "buttonPressedHover": "Bouton (cliqué+survol))",
+                    "buttonPressedHover": "Bouton (cliqué+survol)",
                     "input": "Champ de saisie"
                 }
             },
             "fonts": {
                 "_tab_label": "Polices",
-                "help": "Sélectionnez la police a utiliser pour les éléments de l'UI. Pour \"personnalisé\" vous avez a entrer la police exacte comme elle apparait dans le système.",
+                "help": "Sélectionnez la police à utiliser pour les éléments de l'UI. Pour « personnalisé » vous avez à entrer le nom exact de la police comme il apparaît dans le système.",
                 "components": {
                     "interface": "Interface",
                     "input": "Champs de saisie",
                     "post": "Post text",
-                    "postCode": "Texte à taille fixe dans un article (texte enrichi))"
+                    "postCode": "Texte à taille fixe dans un article (texte enrichi)"
                 },
                 "family": "Nom de la police",
                 "size": "Taille (en px)",
@@ -426,7 +426,7 @@
                 "fine_print": "Lisez notre {0} pour n'apprendre rien d'utile !",
                 "header_faint": "Tout va bien",
                 "checkbox": "J'ai survolé les conditions d'utilisation",
-                "link": "un sympa petit lien"
+                "link": "un petit lien sympa"
             }
         },
         "version": {
@@ -440,21 +440,21 @@
         "conversation": "Conversation",
         "error_fetching": "Erreur en cherchant les mises à jour",
         "load_older": "Afficher plus",
-        "no_retweet_hint": "Le message est marqué en abonnés-seulement ou direct et ne peut pas être répété",
+        "no_retweet_hint": "Le message est marqué en abonnés-seulement ou direct et ne peut pas être partagé",
         "repeated": "a partagé",
         "show_new": "Afficher plus",
         "up_to_date": "À jour",
-        "no_more_statuses": "Pas plus de status",
-        "no_statuses": "Aucun status"
+        "no_more_statuses": "Pas plus de statuts",
+        "no_statuses": "Aucun statuts"
     },
     "status": {
         "favorites": "Favoris",
         "repeats": "Partages",
-        "delete": "Supprimer status",
+        "delete": "Supprimer statuts",
         "pin": "Agraffer sur le profil",
         "unpin": "Dégraffer du profil",
         "pinned": "Agraffé",
-        "delete_confirm": "Voulez-vous vraiment supprimer ce status ?",
+        "delete_confirm": "Voulez-vous vraiment supprimer ce statuts ?",
         "reply_to": "Réponse à",
         "replies_list": "Réponses:"
     },
@@ -466,7 +466,7 @@
         "favorites": "Favoris",
         "follow": "Suivre",
         "follow_sent": "Demande envoyée !",
-        "follow_progress": "Demande...",
+        "follow_progress": "Demande en cours…",
         "follow_again": "Renvoyer la demande ?",
         "follow_unfollow": "Désabonner",
         "followees": "Suivis",
@@ -481,49 +481,49 @@
         "remote_follow": "Suivre d'une autre instance",
         "report": "Signalement",
         "statuses": "Statuts",
-        "unblock": "Débloqur",
-        "unblock_progress": "Déblocage...",
-        "block_progress": "Blocage...",
+        "unblock": "Débloquer",
+        "unblock_progress": "Déblocage…",
+        "block_progress": "Blocage…",
         "unmute": "Démasquer",
-        "unmute_progress": "Démasquage...",
-        "mute_progress": "Masquage...",
+        "unmute_progress": "Démasquage…",
+        "mute_progress": "Masquage…",
         "admin_menu": {
             "moderation": "Moderation",
-            "grant_admin": "Promouvoir Admin",
-            "revoke_admin": "Dégrader Admin",
-            "grant_moderator": "Promouvoir Moderator",
-            "revoke_moderator": "Dégrader Moderator",
+            "grant_admin": "Promouvoir Administrateur⋅ice",
+            "revoke_admin": "Dégrader Administrateur⋅ice",
+            "grant_moderator": "Promouvoir Modérateur⋅ice",
+            "revoke_moderator": "Dégrader Modérateur⋅ice",
             "activate_account": "Activer le compte",
             "deactivate_account": "Désactiver le compte",
             "delete_account": "Supprimer le compte",
-            "force_nsfw": "Marquer tous les status comme NSFW",
-            "strip_media": "Supprimer les medias des status",
-            "force_unlisted": "Forcer les status à être délistés",
-            "sandbox": "Forcer les status à être abonnés-seuls",
+            "force_nsfw": "Marquer tous les statuts comme NSFW",
+            "strip_media": "Supprimer les medias des statuts",
+            "force_unlisted": "Forcer les statuts à être délistés",
+            "sandbox": "Forcer les statuts à être visibles seuleument pour les abonné⋅e⋅s",
             "disable_remote_subscription": "Interdir de s'abonner a l'utilisateur depuis l'instance distante",
             "disable_any_subscription": "Interdir de s'abonner à l'utilisateur tout court",
-            "quarantine": "Interdir les status de l'utilisateur à fédérer",
+            "quarantine": "Interdir les statuts de l'utilisateur à fédérer",
             "delete_user": "Supprimer l'utilisateur",
-            "delete_user_confirmation": "Êtes-vous absolument-sûr ? Cette action ne peut être défaite."
+            "delete_user_confirmation": "Êtes-vous absolument-sûr⋅e ? Cette action ne peut être annulée."
         }
     },
     "user_profile": {
-        "timeline_title": "Journal de l'utilisateur",
+        "timeline_title": "Journal de l'utilisateur⋅ice",
         "profile_does_not_exist": "Désolé, ce profil n'existe pas.",
-        "profile_loading_error": "Désolé, il-y-a eu une erreur au chargement du profil."
+        "profile_loading_error": "Désolé, il y a eu une erreur au chargement du profil."
     },
     "user_reporting": {
         "title": "Signaler {0}",
-        "add_comment_description": "Ce signalement sera envoyé aux modérateurs de votre instance. Vous pouvez fournir une explication de pourquoi vous signalez ce compte ci-dessous :",
+        "add_comment_description": "Ce signalement sera envoyé aux modérateur⋅ice⋅s de votre instance. Vous pouvez fournir une explication de pourquoi vous signalez ce compte ci-dessous :",
         "additional_comments": "Commentaires additionnels",
-        "forward_description": "Le compte est depuis un autre serveur. Envoyer une copie du signalement à celui-ci aussi ?",
+        "forward_description": "Le compte vient d'un autre serveur. Envoyer une copie du signalement à celui-ci aussi ?",
         "forward_to": "Transmettre à {0}",
         "submit": "Envoyer",
         "generic_error": "Une erreur est survenue lors du traitement de votre requête."
     },
     "who_to_follow": {
         "more": "Plus",
-        "who_to_follow": "Qui s'abonner"
+        "who_to_follow": "À qui s'abonner"
     },
     "tool_tip": {
         "media_upload": "Envoyer un media",
@@ -534,16 +534,16 @@
     },
     "upload": {
         "error": {
-            "base": "Envoi échoué.",
+            "base": "L'envoi a échoué.",
             "file_too_big": "Fichier trop gros [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
             "default": "Réessayez plus tard"
         },
         "file_size_units": {
-            "B": "B",
-            "KiB": "KiB",
-            "MiB": "MiB",
-            "GiB": "GiB",
-            "TiB": "TiB"
+            "B": "O",
+            "KiB": "KiO",
+            "MiB": "MiO",
+            "GiB": "GiO",
+            "TiB": "TiO"
         }
     }
 }

@@ -1,6 +1,7 @@
 import Attachment from '../attachment/attachment.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
+import Poll from '../poll/poll.vue'
 import ExtraButtons from '../extra_buttons/extra_buttons.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCard from '../user_card/user_card.vue'
@@ -8,6 +9,7 @@ import UserAvatar from '../user_avatar/user_avatar.vue'
 import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
 import AvatarList from '../avatar_list/avatar_list.vue'
+import Timeago from '../timeago/timeago.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import fileType from 'src/services/file_type/file_type.service'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
@@ -216,8 +218,8 @@ const Status = {
       if (!this.status.summary) return ''
       const decodedSummary = unescape(this.status.summary)
       const behavior = typeof this.$store.state.config.subjectLineBehavior === 'undefined'
-            ? this.$store.state.instance.subjectLineBehavior
-            : this.$store.state.config.subjectLineBehavior
+        ? this.$store.state.instance.subjectLineBehavior
+        : this.$store.state.config.subjectLineBehavior
       const startsWithRe = decodedSummary.match(/^re[: ]/i)
       if (behavior !== 'noop' && startsWithRe || behavior === 'masto') {
         return decodedSummary
@@ -285,11 +287,13 @@ const Status = {
     RetweetButton,
     ExtraButtons,
     PostStatusForm,
+    Poll,
     UserCard,
     UserAvatar,
     Gallery,
     LinkPreview,
-    AvatarList
+    AvatarList,
+    Timeago
   },
   methods: {
     visibilityIcon (visibility) {
@@ -377,7 +381,7 @@ const Status = {
         this.preview = find(statuses, { 'id': targetId })
         // or if we have to fetch it
         if (!this.preview) {
-          this.$store.state.api.backendInteractor.fetchStatus({id}).then((status) => {
+          this.$store.state.api.backendInteractor.fetchStatus({ id }).then((status) => {
             this.preview = status
           })
         }

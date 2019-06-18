@@ -202,6 +202,7 @@ const generateColors = (input) => {
   colors.topBarLink = col.topBarLink || getTextColor(colors.topBar, colors.fgLink)
 
   colors.faintLink = col.faintLink || Object.assign({}, col.link)
+  colors.linkBg = alphaBlend(colors.link, 0.4, colors.bg)
 
   colors.icon = mixrgb(colors.bg, colors.text)
 

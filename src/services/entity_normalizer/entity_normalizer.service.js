@@ -234,6 +234,7 @@ export const parseStatus = (data) => {
 
     output.summary_html = addEmojis(data.spoiler_text, data.emojis)
     output.external_url = data.url
+    output.poll = data.poll
     output.pinned = data.pinned
   } else {
     output.favorited = data.favorited

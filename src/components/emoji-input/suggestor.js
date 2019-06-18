@@ -8,20 +8,18 @@
  * Depending on data present one or both (or none) can be present, so if field
  * doesn't support user linking you can just provide only emoji.
  */
-export default function suggest (data) {
-  return input => {
-    const firstChar = input[0]
-    if (firstChar === ':' && data.emoji) {
-      return suggestEmoji(data.emoji)(input)
-    }
-    if (firstChar === '@' && data.users) {
-      return suggestUsers(data.users)(input)
-    }
-    return []
+export default data => input => {
+  const firstChar = input[0]
+  if (firstChar === ':' && data.emoji) {
+    return suggestEmoji(data.emoji)(input)
   }
+  if (firstChar === '@' && data.users) {
+    return suggestUsers(data.users)(input)
+  }
+  return []
 }
 
-export const suggestEmoji = (emojis) => input => {
+export const suggestEmoji = emojis => input => {
   const noPrefix = input.toLowerCase().substr(1)
   return emojis
     .filter(({ displayText }) => displayText.toLowerCase().startsWith(noPrefix))
@@ -40,7 +38,7 @@ export const suggestEmoji = (emojis) => input => {
     })
 }
 
-export const suggestUsers = (users) => input => {
+export const suggestUsers = users => input => {
   const noPrefix = input.toLowerCase().substr(1)
   return users.filter(
     user =>

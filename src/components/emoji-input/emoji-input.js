@@ -6,7 +6,7 @@ import { take } from 'lodash'
  * without having to give up the comfort of <input/> and <textarea/> elements
  *
  * Intended usage is:
- * <emoji-input v-model="something">
+ * <EmojiInput v-model="something">
  *   <input v-model="something"/>
  * </EmojiInput>
  *

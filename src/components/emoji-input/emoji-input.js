@@ -168,7 +168,7 @@ const EmojiInput = {
       }
     },
     onTransition (e) {
-      this.resize(e)
+      this.resize()
     },
     onBlur (e) {
       // Clicking on any suggestion removes focus from autocomplete,
@@ -176,25 +176,25 @@ const EmojiInput = {
       setTimeout(() => {
         this.focused = false
         this.setCaret(e)
-        this.resize(e)
+        this.resize()
       }, 200)
     },
     onFocus (e) {
       this.focused = true
       this.setCaret(e)
-      this.resize(e)
+      this.resize()
     },
     onKeyUp (e) {
       this.setCaret(e)
-      this.resize(e)
+      this.resize()
     },
     onPaste (e) {
       this.setCaret(e)
-      this.resize(e)
+      this.resize()
     },
     onKeyDown (e) {
       this.setCaret(e)
-      this.resize(e)
+      this.resize()
 
       const { ctrlKey, shiftKey, key } = e
       if (key === 'Tab') {

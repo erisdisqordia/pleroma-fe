@@ -31,7 +31,7 @@
         <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
         <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
       </p>
-      <emoji-input
+      <EmojiInput
         v-if="newStatus.spoilerText || alwaysShowSubject"
         :suggest="emojiSuggestor"
         v-model="newStatus.spoilerText"
@@ -44,8 +44,8 @@
           v-model="newStatus.spoilerText"
           class="form-post-subject"
           />
-      </emoji-input>
-      <emoji-input
+      </EmojiInput>
+      <EmojiInput
         :suggest="emojiUserSuggestor"
         v-model="newStatus.status"
         class="form-control"
@@ -65,7 +65,7 @@
           class="form-post-body"
         >
         </textarea>
-      </emoji-input>
+      </EmojiInput>
       <div class="visibility-tray">
         <div class="text-format" v-if="formattingOptionsEnabled">
           <label for="post-content-type" class="select">

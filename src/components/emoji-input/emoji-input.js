@@ -8,7 +8,7 @@ import { take } from 'lodash'
  * Intended usage is:
  * <emoji-input v-model="something">
  *   <input v-model="something"/>
- * </emoji-input>
+ * </EmojiInput>
  *
  * Works only with <input> and <textarea>. Intended to use with only one nested
  * input. It will find first input or textarea and work with that, multiple

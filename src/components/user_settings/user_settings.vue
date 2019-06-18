@@ -22,20 +22,20 @@
           <div class="setting-item" >
             <h2>{{$t('settings.name_bio')}}</h2>
             <p>{{$t('settings.name')}}</p>
-            <emoji-input :suggest="emojiSuggestor" v-model="newName">
+            <EmojiInput :suggest="emojiSuggestor" v-model="newName">
               <input
                 v-model="newName"
                 id="username"
                 classname="name-changer"
               />
-            </emoji-input>
+            </EmojiInput>
             <p>{{$t('settings.bio')}}</p>
-            <emoji-input :suggest="emojiUserSuggestor" v-model="newBio">
+            <EmojiInput :suggest="emojiUserSuggestor" v-model="newBio">
               <textarea
                 v-model="newBio"
                 classname="bio"
                 />
-            </emoji-input>
+            </EmojiInput>
             <p>
               <input type="checkbox" v-model="newLocked" id="account-locked">
               <label for="account-locked">{{$t('settings.lock_account_description')}}</label>

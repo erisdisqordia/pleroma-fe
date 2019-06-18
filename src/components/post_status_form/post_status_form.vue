@@ -1,6 +1,6 @@
 <template>
 <div class="post-status-form">
-  <form @submit.prevent="postStatus(newStatus)">
+  <form @submit.prevent="postStatus(newStatus)" autocomplete="off">
     <div class="form-group" >
       <i18n
         v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
@@ -91,37 +91,52 @@
           :onScopeChange="changeVis"/>
       </div>
     </div>
-      <div class='form-bottom'>
+    <poll-form
+      ref="pollForm"
+      v-if="pollsAvailable"
+      :visible="pollFormVisible"
+      @update-poll="setPoll"
+    />
+    <div class='form-bottom'>
+      <div class='form-bottom-left'>
         <media-upload ref="mediaUpload" @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="uploadFailed" :drop-files="dropFiles"></media-upload>
-
-        <p v-if="isOverLengthLimit" class="error">{{ charactersLeft }}</p>
-        <p class="faint" v-else-if="hasStatusLengthLimit">{{ charactersLeft }}</p>
-
-        <button v-if="posting" disabled class="btn btn-default">{{$t('post_status.posting')}}</button>
-        <button v-else-if="isOverLengthLimit" disabled class="btn btn-default">{{$t('general.submit')}}</button>
-        <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default">{{$t('general.submit')}}</button>
-      </div>
-      <div class='alert error' v-if="error">
-        Error: {{ error }}
-        <i class="button-icon icon-cancel" @click="clearError"></i>
-      </div>
-      <div class="attachments">
-        <div class="media-upload-wrapper" v-for="file in newStatus.files">
-          <i class="fa button-icon icon-cancel" @click="removeMediaFile(file)"></i>
-          <div class="media-upload-container attachment">
-            <img class="thumbnail media-upload" :src="file.url" v-if="type(file) === 'image'"></img>
-            <video v-if="type(file) === 'video'" :src="file.url" controls></video>
-            <audio v-if="type(file) === 'audio'" :src="file.url" controls></audio>
-            <a v-if="type(file) === 'unknown'" :href="file.url">{{file.url}}</a>
-          </div>
+        <div v-if="pollsAvailable" class="poll-icon">
+          <i
+            :title="$t('polls.add_poll')"
+            @click="togglePollForm"
+            class="icon-chart-bar btn btn-default"
+            :class="pollFormVisible && 'selected'"
+          />
         </div>
       </div>
-      <div class="upload_settings" v-if="newStatus.files.length > 0">
-        <input type="checkbox" id="filesSensitive" v-model="newStatus.nsfw">
-        <label for="filesSensitive">{{$t('post_status.attachments_sensitive')}}</label>
+      <p v-if="isOverLengthLimit" class="error">{{ charactersLeft }}</p>
+      <p class="faint" v-else-if="hasStatusLengthLimit">{{ charactersLeft }}</p>
+
+      <button v-if="posting" disabled class="btn btn-default">{{$t('post_status.posting')}}</button>
+      <button v-else-if="isOverLengthLimit" disabled class="btn btn-default">{{$t('general.submit')}}</button>
+      <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default">{{$t('general.submit')}}</button>
+    </div>
+    <div class='alert error' v-if="error">
+      Error: {{ error }}
+      <i class="button-icon icon-cancel" @click="clearError"></i>
+    </div>
+    <div class="attachments">
+      <div class="media-upload-wrapper" v-for="file in newStatus.files">
+        <i class="fa button-icon icon-cancel" @click="removeMediaFile(file)"></i>
+        <div class="media-upload-container attachment">
+          <img class="thumbnail media-upload" :src="file.url" v-if="type(file) === 'image'"></img>
+          <video v-if="type(file) === 'video'" :src="file.url" controls></video>
+          <audio v-if="type(file) === 'audio'" :src="file.url" controls></audio>
+          <a v-if="type(file) === 'unknown'" :href="file.url">{{file.url}}</a>
+        </div>
       </div>
-    </form>
-  </div>
+    </div>
+    <div class="upload_settings" v-if="newStatus.files.length > 0">
+      <input type="checkbox" id="filesSensitive" v-model="newStatus.nsfw">
+      <label for="filesSensitive">{{$t('post_status.attachments_sensitive')}}</label>
+    </div>
+  </form>
+</div>
 </template>
 
 <script src="./post_status_form.js"></script>
@@ -172,6 +187,11 @@
     }
   }
 
+  .form-bottom-left {
+    display: flex;
+    flex: 1;
+  }
+
   .text-format {
     .only-format {
       color: $fallback--faint;
@@ -179,6 +199,20 @@
     }
   }
 
+  .poll-icon {
+    font-size: 26px;
+    flex: 1;
+
+    .selected {
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
+  }
+
+  .icon-chart-bar {
+    cursor: pointer;
+  }
+  
 
   .error {
     text-align: center;
@@ -239,7 +273,6 @@
       font-weight: bold;
     }
   }
-
 
   .btn {
     cursor: pointer;

@@ -1,6 +1,7 @@
 import Status from '../status/status.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import UserCard from '../user_card/user_card.vue'
+import Timeago from '../timeago/timeago.vue'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
@@ -13,7 +14,10 @@ const Notification = {
   },
   props: [ 'notification' ],
   components: {
-    Status, UserAvatar, UserCard
+    Status,
+    UserAvatar,
+    UserCard,
+    Timeago
   },
   methods: {
     toggleUserExpanded () {

@@ -52,7 +52,7 @@
 
               <span class="heading-right">
                 <router-link class="timeago faint-link" :to="{ name: 'conversation', params: { id: status.id } }">
-                  <timeago :since="status.created_at" :auto-update="60"></timeago>
+                  <Timeago :time="status.created_at" :auto-update="60"></Timeago>
                 </router-link>
                 <div class="button-icon visibility-icon" v-if="status.visibility">
                   <i :class="visibilityIcon(status.visibility)" :title="status.visibility | capitalize"></i>
@@ -121,6 +121,10 @@
             <div @click.prevent="linkClicked" class="status-content media-body" v-html="status.summary_html" v-else></div>
             <a v-if="hideSubjectStatus" href="#" class="cw-status-hider" @click.prevent="toggleShowMore">{{$t("general.show_more")}}</a>
             <a v-if="showingMore" href="#" class="status-unhider" @click.prevent="toggleShowMore">{{$t("general.show_less")}}</a>
+          </div>
+
+          <div v-if="status.poll && status.poll.options">
+            <poll :poll="status.poll" :status-id="status.id" />
           </div>
 
           <div v-if="status.attachments && (!hideSubjectStatus || showingLongSubject)" class="attachments media-body">

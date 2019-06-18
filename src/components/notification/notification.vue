@@ -30,12 +30,12 @@
         </div>
         <div class="timeago" v-if="notification.type === 'follow'">
           <span class="faint">
-            <timeago :since="notification.created_at" :auto-update="240"></timeago>
+            <Timeago :time="notification.created_at" :auto-update="240"></Timeago>
           </span>
         </div>
         <div class="timeago" v-else>
           <router-link v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }" class="faint-link">
-            <timeago :since="notification.created_at" :auto-update="240"></timeago>
+            <Timeago :time="notification.created_at" :auto-update="240"></Timeago>
           </router-link>
         </div>
       </span>

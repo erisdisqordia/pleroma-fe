@@ -2,6 +2,7 @@ import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
+import PollForm from '../poll/poll_form.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { reject, map, uniqBy } from 'lodash'
 import suggestor from '../emoji-input/suggestor.js'
@@ -31,8 +32,9 @@ const PostStatusForm = {
   ],
   components: {
     MediaUpload,
-    ScopeSelector,
-    EmojiInput
+    EmojiInput,
+    PollForm,
+    ScopeSelector
   },
   mounted () {
     this.resize(this.$refs.textarea)
@@ -75,10 +77,12 @@ const PostStatusForm = {
         status: statusText,
         nsfw: false,
         files: [],
+        poll: {},
         visibility: scope,
         contentType
       },
-      caret: 0
+      caret: 0,
+      pollFormVisible: false
     }
   },
   computed: {
@@ -153,8 +157,17 @@ const PostStatusForm = {
     safeDMEnabled () {
       return this.$store.state.instance.safeDM
     },
+    pollsAvailable () {
+      return this.$store.state.instance.pollsAvailable &&
+        this.$store.state.instance.pollLimits.max_options >= 2
+    },
     hideScopeNotice () {
       return this.$store.state.config.hideScopeNotice
+    },
+    pollContentError () {
+      return this.pollFormVisible &&
+        this.newStatus.poll &&
+        this.newStatus.poll.error
     }
   },
   methods: {
@@ -171,6 +184,12 @@ const PostStatusForm = {
         }
       }
 
+      const poll = this.pollFormVisible ? this.newStatus.poll : {}
+      if (this.pollContentError) {
+        this.error = this.pollContentError
+        return
+      }
+
       this.posting = true
       statusPoster.postStatus({
         status: newStatus.status,
@@ -180,7 +199,8 @@ const PostStatusForm = {
         media: newStatus.files,
         store: this.$store,
         inReplyToStatusId: this.replyTo,
-        contentType: newStatus.contentType
+        contentType: newStatus.contentType,
+        poll
       }).then((data) => {
         if (!data.error) {
           this.newStatus = {
@@ -188,9 +208,12 @@ const PostStatusForm = {
             spoilerText: '',
             files: [],
             visibility: newStatus.visibility,
-            contentType: newStatus.contentType
+            contentType: newStatus.contentType,
+            poll: {}
           }
+          this.pollFormVisible = false
           this.$refs.mediaUpload.clearFile()
+          this.clearPollForm()
           this.$emit('posted')
           let el = this.$el.querySelector('textarea')
           el.style.height = 'auto'
@@ -260,6 +283,17 @@ const PostStatusForm = {
     },
     changeVis (visibility) {
       this.newStatus.visibility = visibility
+    },
+    togglePollForm () {
+      this.pollFormVisible = !this.pollFormVisible
+    },
+    setPoll (poll) {
+      this.newStatus.poll = poll
+    },
+    clearPollForm () {
+      if (this.$refs.pollForm) {
+        this.$refs.pollForm.clear()
+      }
     },
     dismissScopeNotice () {
       this.$store.dispatch('setOption', { name: 'hideScopeNotice', value: true })

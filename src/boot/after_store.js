@@ -215,11 +215,12 @@ const getNodeInfo = async ({ store }) => {
     if (res.ok) {
       const data = await res.json()
       const metadata = data.metadata
-
       const features = metadata.features
       store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: features.includes('media_proxy') })
       store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
       store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
+      store.dispatch('setInstanceOption', { name: 'pollsAvailable', value: features.includes('polls') })
+      store.dispatch('setInstanceOption', { name: 'pollLimits', value: metadata.pollLimits })
 
       store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
       store.dispatch('setInstanceOption', { name: 'postFormats', value: metadata.postFormats })

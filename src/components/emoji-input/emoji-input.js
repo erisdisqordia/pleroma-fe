@@ -1,51 +1,119 @@
 import Completion from '../../services/completion/completion.js'
-import { take, filter, map } from 'lodash'
+import { take } from 'lodash'
+
+/**
+ * EmojiInput - augmented inputs for emoji and autocomplete support in inputs
+ * without having to give up the comfort of <input/> and <textarea/> elements
+ *
+ * Intended usage is:
+ * <EmojiInput v-model="something">
+ *   <input v-model="something"/>
+ * </EmojiInput>
+ *
+ * Works only with <input> and <textarea>. Intended to use with only one nested
+ * input. It will find first input or textarea and work with that, multiple
+ * nested children not tested. You HAVE TO duplicate v-model for both
+ * <emoji-input> and <input>/<textarea> otherwise it will not work.
+ *
+ * Be prepared for CSS troubles though because it still wraps component in a div
+ * while TRYING to make it look like nothing happened, but it could break stuff.
+ */
 
 const EmojiInput = {
-  props: [
-    'value',
-    'placeholder',
-    'type',
-    'classname'
-  ],
+  props: {
+    suggest: {
+      /**
+       * suggest: function (input: String) => Suggestion[]
+       *
+       * Function that takes input string which takes string (textAtCaret)
+       * and returns an array of Suggestions
+       *
+       * Suggestion is an object containing following properties:
+       * displayText: string. Main display text, what actual suggestion
+       *    represents (user's screen name/emoji shortcode)
+       * replacement: string. Text that should replace the textAtCaret
+       * detailText: string, optional. Subtitle text, providing additional info
+       *    if present (user's nickname)
+       * imageUrl: string, optional. Image to display alongside with suggestion,
+       *    currently if no image is provided, replacement will be used (for
+       *    unicode emojis)
+       *
+       * TODO: make it asynchronous when adding proper server-provided user
+       * suggestions
+       *
+       * For commonly used suggestors (emoji, users, both) use suggestor.js
+       */
+      required: true,
+      type: Function
+    },
+    value: {
+      /**
+       * Used for v-model
+       */
+      required: true,
+      type: String
+    }
+ },
   data () {
     return {
+      input: undefined,
       highlighted: 0,
-      caret: 0
+      caret: 0,
+      focused: false
     }
   },
   computed: {
     suggestions () {
       const firstchar = this.textAtCaret.charAt(0)
-      if (firstchar === ':') {
-        if (this.textAtCaret === ':') { return }
-        const matchedEmoji = filter(this.emoji.concat(this.customEmoji), (emoji) => emoji.shortcode.startsWith(this.textAtCaret.slice(1)))
-        if (matchedEmoji.length <= 0) {
-          return false
-        }
-        return map(take(matchedEmoji, 5), ({shortcode, image_url, utf}, index) => ({
-          shortcode: `:${shortcode}:`,
-          utf: utf || '',
+      if (this.textAtCaret === firstchar) { return [] }
+      const matchedSuggestions = this.suggest(this.textAtCaret)
+      if (matchedSuggestions.length <= 0) {
+        return []
+      }
+      return take(matchedSuggestions, 5)
+        .map(({ imageUrl, ...rest }, index) => ({
+          ...rest,
           // eslint-disable-next-line camelcase
-          img: utf ? '' : this.$store.state.instance.server + image_url,
+          img: imageUrl || '',
           highlighted: index === this.highlighted
         }))
-      } else {
-        return false
-      }
+    },
+    showPopup () {
+      return this.focused && this.suggestions && this.suggestions.length > 0
     },
     textAtCaret () {
       return (this.wordAtCaret || {}).word || ''
     },
     wordAtCaret () {
-      const word = Completion.wordAtPosition(this.value, this.caret - 1) || {}
-      return word
-    },
-    emoji () {
-      return this.$store.state.instance.emoji || []
-    },
-    customEmoji () {
-      return this.$store.state.instance.customEmoji || []
+      if (this.value && this.caret) {
+        const word = Completion.wordAtPosition(this.value, this.caret - 1) || {}
+        return word
+      }
+    }
+  },
+  mounted () {
+    const slots = this.$slots.default
+    if (!slots || slots.length === 0) return
+    const input = slots.find(slot => ['input', 'textarea'].includes(slot.tag))
+    if (!input) return
+    this.input = input
+    this.resize()
+    input.elm.addEventListener('blur', this.onBlur)
+    input.elm.addEventListener('focus', this.onFocus)
+    input.elm.addEventListener('paste', this.onPaste)
+    input.elm.addEventListener('keyup', this.onKeyUp)
+    input.elm.addEventListener('keydown', this.onKeyDown)
+    input.elm.addEventListener('transitionend', this.onTransition)
+  },
+  unmounted () {
+    const { input } = this
+    if (input) {
+      input.elm.removeEventListener('blur', this.onBlur)
+      input.elm.removeEventListener('focus', this.onFocus)
+      input.elm.removeEventListener('paste', this.onPaste)
+      input.elm.removeEventListener('keyup', this.onKeyUp)
+      input.elm.removeEventListener('keydown', this.onKeyDown)
+      input.elm.removeEventListener('transitionend', this.onTransition)
     }
   },
   methods: {
@@ -54,27 +122,35 @@ const EmojiInput = {
       this.$emit('input', newValue)
       this.caret = 0
     },
-    replaceEmoji (e) {
+    replaceText (e) {
       const len = this.suggestions.length || 0
-      if (this.textAtCaret === ':' || e.ctrlKey) { return }
+      if (this.textAtCaret.length === 1) { return }
       if (len > 0) {
-        e.preventDefault()
-        const emoji = this.suggestions[this.highlighted]
-        const replacement = emoji.utf || (emoji.shortcode + ' ')
+        const suggestion = this.suggestions[this.highlighted]
+        const replacement = suggestion.replacement
         const newValue = Completion.replaceWord(this.value, this.wordAtCaret, replacement)
         this.$emit('input', newValue)
-        this.caret = 0
         this.highlighted = 0
+        const position = this.wordAtCaret.start + replacement.length
+
+        this.$nextTick(function () {
+          // Re-focus inputbox after clicking suggestion
+          this.input.elm.focus()
+          // Set selection right after the replacement instead of the very end
+          this.input.elm.setSelectionRange(position, position)
+          this.caret = position
+        })
+        e.preventDefault()
       }
     },
     cycleBackward (e) {
       const len = this.suggestions.length || 0
       if (len > 0) {
-        e.preventDefault()
         this.highlighted -= 1
         if (this.highlighted < 0) {
           this.highlighted = this.suggestions.length - 1
         }
+        e.preventDefault()
       } else {
         this.highlighted = 0
       }
@@ -82,24 +158,74 @@ const EmojiInput = {
     cycleForward (e) {
       const len = this.suggestions.length || 0
       if (len > 0) {
-        if (e.shiftKey) { return }
-        e.preventDefault()
         this.highlighted += 1
         if (this.highlighted >= len) {
           this.highlighted = 0
         }
+        e.preventDefault()
       } else {
         this.highlighted = 0
       }
     },
-    onKeydown (e) {
-      e.stopPropagation()
+    onTransition (e) {
+      this.resize()
+    },
+    onBlur (e) {
+      // Clicking on any suggestion removes focus from autocomplete,
+      // preventing click handler ever executing.
+      setTimeout(() => {
+        this.focused = false
+        this.setCaret(e)
+        this.resize()
+      }, 200)
+    },
+    onFocus (e) {
+      this.focused = true
+      this.setCaret(e)
+      this.resize()
+    },
+    onKeyUp (e) {
+      this.setCaret(e)
+      this.resize()
+    },
+    onPaste (e) {
+      this.setCaret(e)
+      this.resize()
+    },
+    onKeyDown (e) {
+      this.setCaret(e)
+      this.resize()
+
+      const { ctrlKey, shiftKey, key } = e
+      if (key === 'Tab') {
+        if (shiftKey) {
+          this.cycleBackward(e)
+        } else {
+          this.cycleForward(e)
+        }
+      }
+      if (key === 'ArrowUp') {
+        this.cycleBackward(e)
+      } else if (key === 'ArrowDown') {
+        this.cycleForward(e)
+      }
+      if (key === 'Enter') {
+        if (!ctrlKey) {
+          this.replaceText(e)
+        }
+      }
     },
     onInput (e) {
       this.$emit('input', e.target.value)
     },
-    setCaret ({target: {selectionStart}}) {
+    setCaret ({ target: { selectionStart } }) {
       this.caret = selectionStart
+    },
+    resize () {
+      const { panel } = this.$refs
+      if (!panel) return
+      const { offsetHeight, offsetTop } = this.input.elm
+      this.$refs.panel.style.top = (offsetTop + offsetHeight) + 'px'
     }
   }
 }

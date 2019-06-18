@@ -33,30 +33,39 @@
       </p>
       <EmojiInput
         v-if="newStatus.spoilerText || alwaysShowSubject"
-        type="text"
-        :placeholder="$t('post_status.content_warning')"
+        :suggest="emojiSuggestor"
         v-model="newStatus.spoilerText"
-        classname="form-control"
-      />
-      <textarea
-        ref="textarea"
-        @click="setCaret"
-        @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control"
-        @keydown="onKeydown"
-        @keydown.down="cycleForward"
-        @keydown.up="cycleBackward"
-        @keydown.shift.tab="cycleBackward"
-        @keydown.tab="cycleForward"
-        @keydown.enter="replaceCandidate"
-        @keydown.meta.enter="postStatus(newStatus)"
-        @keyup.ctrl.enter="postStatus(newStatus)"
-        @drop="fileDrop"
-        @dragover.prevent="fileDrag"
-        @input="resize"
-        @paste="paste"
-        :disabled="posting"
-      >
-      </textarea>
+        class="form-control"
+        >
+        <input
+
+          type="text"
+          :placeholder="$t('post_status.content_warning')"
+          v-model="newStatus.spoilerText"
+          class="form-post-subject"
+          />
+      </EmojiInput>
+      <EmojiInput
+        :suggest="emojiUserSuggestor"
+        v-model="newStatus.status"
+        class="form-control"
+        >
+        <textarea
+          ref="textarea"
+          v-model="newStatus.status"
+          :placeholder="$t('post_status.default')"
+          rows="1"
+          @keydown.meta.enter="postStatus(newStatus)"
+          @keyup.ctrl.enter="postStatus(newStatus)"
+          @drop="fileDrop"
+          @dragover.prevent="fileDrag"
+          @input="resize"
+          @paste="paste"
+          :disabled="posting"
+          class="form-post-body"
+        >
+        </textarea>
+      </EmojiInput>
       <div class="visibility-tray">
         <div class="text-format" v-if="postFormats.length > 1">
           <label for="post-content-type" class="select">
@@ -82,21 +91,6 @@
           :onScopeChange="changeVis"/>
       </div>
     </div>
-    <div class="autocomplete-panel" v-if="candidates">
-        <div class="autocomplete-panel-body">
-          <div
-            v-for="(candidate, index) in candidates"
-            :key="index"
-            @click="replace(candidate.utf || (candidate.screen_name + ' '))"
-            class="autocomplete-item"
-            :class="{ highlighted: candidate.highlighted }"
-          >
-            <span v-if="candidate.img"><img :src="candidate.img" /></span>
-            <span v-else>{{candidate.utf}}</span>
-            <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
-          </div>
-        </div>
-      </div>
       <div class='form-bottom'>
         <media-upload ref="mediaUpload" @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="uploadFailed" :drop-files="dropFiles"></media-upload>
 
@@ -276,7 +270,7 @@
     min-height: 1px;
   }
 
-  form textarea.form-control {
+  .form-post-body {
     line-height:16px;
     resize: none;
     overflow: hidden;
@@ -285,7 +279,7 @@
     box-sizing: content-box;
   }
 
-  form textarea.form-control:focus {
+  .form-post-body:focus {
     min-height: 48px;
   }
 

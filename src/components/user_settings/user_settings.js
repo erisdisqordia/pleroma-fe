@@ -12,6 +12,7 @@ import MuteCard from '../mute_card/mute_card.vue'
 import SelectableList from '../selectable_list/selectable_list.vue'
 import ProgressButton from '../progress_button/progress_button.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
+import suggestor from '../emoji-input/suggestor.js'
 import Autosuggest from '../autosuggest/autosuggest.vue'
 import Importer from '../importer/importer.vue'
 import Exporter from '../exporter/exporter.vue'
@@ -84,6 +85,21 @@ const UserSettings = {
   computed: {
     user () {
       return this.$store.state.users.currentUser
+    },
+    emojiUserSuggestor () {
+      return suggestor({
+        emoji: [
+          ...this.$store.state.instance.emoji,
+          ...this.$store.state.instance.customEmoji
+        ],
+        users: this.$store.state.users.users
+      })
+    },
+    emojiSuggestor () {
+      return suggestor({ emoji: [
+        ...this.$store.state.instance.emoji,
+        ...this.$store.state.instance.customEmoji
+      ]})
     },
     pleromaBackend () {
       return this.$store.state.instance.pleromaBackend

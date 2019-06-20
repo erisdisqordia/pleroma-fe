@@ -76,6 +76,11 @@
 
 <style lang="scss">
 
+button:disabled {
+    cursor: not-allowed;
+    opacity: 1;
+}
+
 .user-profile {
   flex: 2;
   flex-basis: 500px;

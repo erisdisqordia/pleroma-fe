@@ -76,7 +76,7 @@
 
 <style lang="scss">
 
-button:disabled {
+.tab-switcher button:disabled {
     cursor: not-allowed;
     opacity: 1;
 }

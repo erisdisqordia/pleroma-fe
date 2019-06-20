@@ -31,8 +31,8 @@
           :disabled="loading"
           :value="index"
         >
-        <label>
-          {{option.title}}
+        <label class="option-vote">
+          <div>{{option.title}}</div>
         </label>
       </div>
     </div>
@@ -68,8 +68,7 @@
     margin: 0 0 0.5em;
   }
   .poll-option {
-    margin: 0.5em 0;
-    height: 1.5em;
+    margin: 0.75em 0.5em;
   }
   .option-result {
     height: 100%;
@@ -87,6 +86,7 @@
   }
   .result-percentage {
     width: 3.5em;
+    flex-shrink: 0;
   }
   .result-fill {
     height: 100%;
@@ -98,6 +98,10 @@
     top: 0;
     left: 0;
     transition: width 0.5s;
+  }
+  .option-vote {
+    display: flex;
+    align-items: center;
   }
   input {
     width: 3.5em;

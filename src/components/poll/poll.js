@@ -3,26 +3,33 @@ import { forEach, map } from 'lodash'
 
 export default {
   name: 'Poll',
-  props: ['poll', 'statusId'],
+  props: ['pollId'],
   components: { Timeago },
   data () {
     return {
       loading: false,
-      choices: [],
-      refreshInterval: null
+      choices: []
     }
   },
-  created () {
-    this.refreshInterval = setTimeout(this.refreshPoll, 30 * 1000)
-    // Initialize choices to booleans and set its length to match options
-    this.choices = this.poll.options.map(_ => false)
+  mounted () {
+    this.$store.dispatch('trackPoll', this.pollId)
   },
   destroyed () {
-    clearTimeout(this.refreshInterval)
+    this.$store.dispatch('untrackPoll', this.pollId)
   },
   computed: {
+    poll () {
+      const storePoll = this.$store.state.polls.pollsObject[this.pollId]
+      return storePoll || {}
+    },
+    options () {
+      return (this.poll && this.poll.options) || []
+    },
+    expiresAt () {
+      return (this.poll && this.poll.expires_at) || 0
+    },
     expired () {
-      return Date.now() > Date.parse(this.poll.expires_at)
+      return Date.now() > Date.parse(this.expiresAt)
     },
     loggedIn () {
       return this.$store.state.users.currentUser
@@ -32,9 +39,6 @@ export default {
     },
     totalVotesCount () {
       return this.poll.votes_count
-    },
-    expiresAt () {
-      return Date.parse(this.poll.expires_at).toLocaleString()
     },
     containerClass () {
       return {
@@ -55,11 +59,6 @@ export default {
     }
   },
   methods: {
-    refreshPoll () {
-      if (this.expired) return
-      this.fetchPoll()
-      this.refreshInterval = setTimeout(this.refreshPoll, 30 * 1000)
-    },
     percentageForOption (count) {
       return this.totalVotesCount === 0 ? 0 : Math.round(count / this.totalVotesCount * 100)
     },

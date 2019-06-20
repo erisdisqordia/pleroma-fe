@@ -22,6 +22,10 @@ const oauth = {
     },
     setToken (state, token) {
       state.userToken = token
+    },
+    clearToken (state) {
+      state.userToken = false
+      state.token = false
     }
   },
   getters: {

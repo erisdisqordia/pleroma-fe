@@ -14,6 +14,7 @@ import authFlowModule from './modules/auth_flow.js'
 import mediaViewerModule from './modules/media_viewer.js'
 import oauthTokensModule from './modules/oauth_tokens.js'
 import reportsModule from './modules/reports.js'
+import pollsModule from './modules/polls.js'
 
 import VueI18n from 'vue-i18n'
 
@@ -72,7 +73,8 @@ const persistedStateOptions = {
       authFlow: authFlowModule,
       mediaViewer: mediaViewerModule,
       oauthTokens: oauthTokensModule,
-      reports: reportsModule
+      reports: reportsModule,
+      polls: pollsModule
     },
     plugins: [persistedState, pushNotifications],
     strict: false // Socket modifies itself, let's ignore this for now.

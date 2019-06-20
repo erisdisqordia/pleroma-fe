@@ -2,7 +2,7 @@
   <div class="poll" v-bind:class="containerClass">
     <div
       class="poll-option"
-      v-for="(option, index) in poll.options"
+      v-for="(option, index) in options"
       :key="index"
     >
       <div v-if="showResults" :title="resultTitle(option)" class="option-result">
@@ -50,7 +50,7 @@
         {{totalVotesCount}} {{ $t("polls.votes") }}&nbsp;·&nbsp;
       </div>
       <i18n :path="expired ? 'polls.expired' : 'polls.expires_in'">
-        <Timeago :time="this.poll.expires_at" :auto-update="60" :now-threshold="0" />
+        <Timeago :time="this.expiresAt" :auto-update="60" :now-threshold="0" />
       </i18n>
     </div>
   </div>

@@ -26,9 +26,10 @@ const LoginForm = {
       this.isTokenAuth ? this.submitToken() : this.submitPassword()
     },
     submitToken () {
-      const { clientId } = this.oauth
+      const { clientId, clientSecret } = this.oauth
       const data = {
         clientId,
+        clientSecret,
         instance: this.instance.server,
         commit: this.$store.commit
       }

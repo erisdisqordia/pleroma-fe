@@ -83,4 +83,68 @@ You can also view posts you've favorited on your own profile, but you cannot see
 Due to nature of how Pleroma (backend) operates you might see old posts appear as if they are new, this is because instance just learned about that post (i.e. your instance is younger that some other ones) and someone interacted with old post. Posts are sorted by date of when they are received, not date they have been posted because it's very easy to spoof the date, so a post claiming it "was" made in year 2077 could hand at top of your TL forever.
 
 # Customization and configuration
-TODO
+
+Clicking on the cog icon in the upper right will go to the settings screen. Here you have 4 tabs with several options to customize your experience.
+
+## General
+
+### Interface
+
+- Language: Here you can set the interface language. The default language is the one that you set in your browser settings.
+- Hide instance-specific panel: This hides the panel in the lower left that usually contains general information about the server.
+
+### Timeline
+
+- Hide posts of muted users: If this is set, 'muting' a user will also hide their posts and not just collapse them.
+- Collapse posts with subjects: This will collapse posts that contain a subject, hiding their content. Subjects are also sometimes called content warnings. 
+- Enable automatic streaming of new posts when scrolled to the top: With this enabled, new posts will automatically stream in when you are scrolled to the top. Otherwise, you will see a button on the timeline that will let you display the new posts.
+- Pause streaming when tab is not focused: This pauses the automatic streaming that the previous option enables when the tab is out of focus. This is useful if you don't want to miss any new posts.
+- Enable automatic loading when scrolled to the bottom: When this is disabled, a button will be shown on the bottom of the timeline that will let you load older posts.
+- Enable reply-link preview on hover: Status posts in the timeline and notifications contain links to replies and to the post they are a reply to. If this setting is enabled, hovering over that link will display that linked post in a small hovering overlay.
+
+### Composing
+
+- Copy scope when replying: When this is activated, the scope of a reply will be the same as the scope of the post it is replying to. This is useful to prevent accidentally moving private discussions to public, or vice versa.
+- Always show subject field: Whether or not to display the 'subject' input field in the post form. If you do not want to use subjects, you can deactivate this.
+- Copy subject when replying: This controls if the subject of a post will be copied from the post it is replying to.
+- Post status content type: Selects the default content type of your post. The options are: Plain text, HTML, BBCode and Markdown.
+- Minimize scope selection options: Selecting this will reduce the visibility scopes to 'public' and 'direct'.
+- Automatically hide New Post button: TODO: Not quite sure when it's hidden.
+
+### Attachments
+
+- Hide attachments in timeline: Do not display attachments in timelines. They will still display in expanded conversations. This is useful to save bandwidth and for browsing in public.
+- Hide attachments in conversations: Also hide attachments in expanded conversations.
+- Maximum amount of thumbnails per post: Exactly that :)
+- Enable clickthrough NSFW attachment hiding: Hide attachments that are marked as NSFW/sensible behind a click-through image.
+- Preload images: This will preload the hidden images so that they display faster when clicking through.
+- Open NSFW attachments with just one click: Directly open NSFW attachments in a maximised state instead of revealing the image thumbnail.
+- Play-on-hover GIFs: With this activated, GIFs will only play on hover. Otherwise, they will autoplay normally.
+- Loop videos: Whether to loop videos indefinitely.
+- Loop only videos without sound: Some instances will use videos without sounds instead of GIFs. This will make only those videos autoplay.
+- Play videos directly in the media viewer: TODO: Don't know what this does.
+- Don't crop the attachment in thumbnails: Selecting this will not crop the attachment thumbnails for a more uniform look, instead it will leave them in the original format.
+
+### Notifications
+
+- Enable web push notifications: This enables the web push notifications that your browser displays, even when you are not looking at your pleroma site. Pleroma's own notifications are not affected by this.
+
+## Theme
+
+Here you can change, load and save the look of your Pleroma frontend. There are a lot of options, but there is a preview. Play around with the settings and see what you like!
+
+TODO: Maybe expand?
+
+## Filtering
+
+- Types of notifications to show: This controls which things you will be notified about.
+- Replies in timeline: You may know that other social networks like Twitter will often not display replies to other people in your timeline, even if you are following the poster. Pleroma usually will show these posts to you to encourage conversation. If you do not like this behavior, you can change it here.
+- Hide post statistics: This hides the number of favorites, number of replies, etc.
+- Hide user statistics: This hides the number of followers, friends, etc.
+- Muted words: A list of words that will be muted (= displayed in a collapsed state) on the timeline and in notifications. An easy way to tune down noise in your timeline. Posts can always be extended when you actually want to see them.
+- Hide filtered statuses: Selecting this will not only collapse the filtered / muted posts, but hide them completely.
+
+
+## Version
+
+Just displays the backend and frontend version. Useful to mention in bug reports.

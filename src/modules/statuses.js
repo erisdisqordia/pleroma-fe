@@ -146,7 +146,8 @@ const removeStatusFromGlobalStorage = (state, status) => {
   }
 }
 
-const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false, userId }) => {
+const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {},
+  noIdUpdate = false, userId, isPinned = false }) => {
   // Sanity check
   if (!isArray(statuses)) {
     return false
@@ -160,10 +161,10 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const newer = timeline && (maxNew > timelineObject.maxId || timelineObject.maxId === 0) && statuses.length > 0
   const older = timeline && (minNew < timelineObject.minId || timelineObject.minId === 0) && statuses.length > 0
 
-  if (!noIdUpdate && newer) {
+  if (!noIdUpdate && newer && !isPinned) {
     timelineObject.maxId = maxNew
   }
-  if (!noIdUpdate && older) {
+  if (!noIdUpdate && older && !isPinned) {
     timelineObject.minId = minNew
   }
 
@@ -504,8 +505,8 @@ export const mutations = {
 const statuses = {
   state: defaultState(),
   actions: {
-    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
-      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })
+    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId, isPinned = false }) {
+      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId, isPinned })
     },
     addNewNotifications ({ rootState, commit, dispatch, rootGetters }, { notifications, older }) {
       commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older, rootGetters })
@@ -543,7 +544,7 @@ const statuses = {
     },
     fetchPinnedStatuses ({ rootState, dispatch }, userId) {
       rootState.api.backendInteractor.fetchPinnedStatuses(userId)
-        .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId, showImmediately: true }))
+        .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId, showImmediately: true, isPinned: true }))
     },
     pinStatus ({ rootState, commit }, statusId) {
       return rootState.api.backendInteractor.pinOwnStatus(statusId)

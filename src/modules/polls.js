@@ -1,4 +1,4 @@
-import { each, merge } from 'lodash'
+import { merge } from 'lodash'
 import { set } from 'vue'
 
 const polls = {
@@ -8,15 +8,15 @@ const polls = {
     pollsObject: {}
   },
   mutations: {
-    addNewStatuses (state, { statuses }) {
-      each(statuses, status => {
-        if (status.poll) {
-          set(state.pollsObject, status.poll.id, status.poll)
-        }
-      })
-    },
-    mergePoll (state, poll) {
-      state.pollsObject[poll.id] = merge(state.pollsObject[poll.id], poll)
+    mergeOrAddPoll (state, poll) {
+      const existingPoll = state.pollsObject[poll.id]
+      // Make expired-state change trigger re-renders properly
+      poll.expired = Date.now() > Date.parse(poll.expires_at)
+      if (existingPoll) {
+        set(state.pollsObject, poll.id, merge(existingPoll, poll))
+      } else {
+        set(state.pollsObject, poll.id, poll)
+      }
     },
     trackPoll (state, pollId) {
       const currentValue = state.trackedPolls[pollId]
@@ -36,11 +36,8 @@ const polls = {
     }
   },
   actions: {
-    updatePoll ({ rootState, commit }, pollId) {
-      return rootState.api.backendInteractor.fetchPoll(pollId).then(poll => {
-        commit('mergePoll', poll)
-        return poll
-      })
+    mergeOrAddPoll ({ commit }, poll) {
+      commit('mergeOrAddPoll', poll)
     },
     updateTrackedPoll ({ rootState, dispatch, commit }, pollId) {
       rootState.api.backendInteractor.fetchPoll(pollId).then(poll => {
@@ -49,7 +46,7 @@ const polls = {
             dispatch('updateTrackedPoll', pollId)
           }
         }, 30 * 1000)
-        commit('mergePoll', poll)
+        commit('mergeOrAddPoll', poll)
       })
     },
     trackPoll ({ rootState, commit, dispatch }, pollId) {
@@ -63,7 +60,7 @@ const polls = {
     },
     votePoll ({ rootState, commit }, { id, pollId, choices }) {
       return rootState.api.backendInteractor.vote(pollId, choices).then(poll => {
-        commit('mergePoll', poll)
+        commit('mergeOrAddPoll', poll)
         return poll
       })
     }

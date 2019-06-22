@@ -3,7 +3,7 @@ import { forEach, map } from 'lodash'
 
 export default {
   name: 'Poll',
-  props: ['pollId'],
+  props: ['basePoll'],
   components: { Timeago },
   data () {
     return {
@@ -11,13 +11,19 @@ export default {
       choices: []
     }
   },
-  mounted () {
+  created () {
+    if (!this.$store.state.polls.pollsObject[this.pollId]) {
+      this.$store.dispatch('mergeOrAddPoll', this.basePoll)
+    }
     this.$store.dispatch('trackPoll', this.pollId)
   },
   destroyed () {
     this.$store.dispatch('untrackPoll', this.pollId)
   },
   computed: {
+    pollId () {
+      return this.basePoll.id
+    },
     poll () {
       const storePoll = this.$store.state.polls.pollsObject[this.pollId]
       return storePoll || {}
@@ -29,7 +35,7 @@ export default {
       return (this.poll && this.poll.expires_at) || 0
     },
     expired () {
-      return Date.now() > Date.parse(this.expiresAt)
+      return (this.poll && this.poll.expired) || false
     },
     loggedIn () {
       return this.$store.state.users.currentUser

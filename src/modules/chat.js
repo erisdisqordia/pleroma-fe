@@ -21,7 +21,7 @@ const chat = {
   },
   actions: {
     disconnectFromChat (store) {
-      store.state.socket.disconnect()
+      store.state.socket && store.state.socket.disconnect()
     },
     initializeChat (store, socket) {
       const channel = socket.channel('chat:public')

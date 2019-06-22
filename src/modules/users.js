@@ -399,7 +399,7 @@ const users = {
     logout (store) {
       store.commit('clearCurrentUser')
       store.dispatch('disconnectFromChat')
-      store.commit('setToken', false)
+      store.commit('clearToken')
       store.dispatch('stopFetching', 'friends')
       store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
       store.dispatch('stopFetching', 'notifications')

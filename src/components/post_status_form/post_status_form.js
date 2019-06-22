@@ -269,8 +269,11 @@ const PostStatusForm = {
     resize (e) {
       const target = e.target || e
       if (!(target instanceof window.Element)) { return }
-      const vertPadding = Number(window.getComputedStyle(target)['padding-top'].substr(0, 1)) +
-            Number(window.getComputedStyle(target)['padding-bottom'].substr(0, 1))
+      const topPaddingStr = window.getComputedStyle(target)['padding-top']
+      const bottomPaddingStr = window.getComputedStyle(target)['padding-bottom']
+      // Remove "px" at the end of the values
+      const vertPadding = Number(topPaddingStr.substr(0, topPaddingStr.length - 2)) +
+            Number(bottomPaddingStr.substr(0, bottomPaddingStr.length - 2))
       // Auto is needed to make textbox shrink when removing lines
       target.style.height = 'auto'
       target.style.height = `${target.scrollHeight - vertPadding}px`

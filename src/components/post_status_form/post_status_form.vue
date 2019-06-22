@@ -48,7 +48,7 @@
       <EmojiInput
         :suggest="emojiUserSuggestor"
         v-model="newStatus.status"
-        class="form-control"
+        class="form-control main-input"
         >
         <textarea
           ref="textarea"
@@ -65,6 +65,13 @@
           class="form-post-body"
         >
         </textarea>
+        <p
+          v-if="hasStatusLengthLimit"
+          class="character-counter faint"
+          :class="{ error: isOverLengthLimit }"
+        >
+          {{ charactersLeft }}
+        </p>
       </EmojiInput>
       <div class="visibility-tray">
         <div class="text-format" v-if="postFormats.length > 1">
@@ -109,8 +116,6 @@
           />
         </div>
       </div>
-      <p v-if="isOverLengthLimit" class="error">{{ charactersLeft }}</p>
-      <p class="faint" v-else-if="hasStatusLengthLimit">{{ charactersLeft }}</p>
 
       <button v-if="posting" disabled class="btn btn-default">{{$t('post_status.posting')}}</button>
       <button v-else-if="isOverLengthLimit" disabled class="btn btn-default">{{$t('general.submit')}}</button>
@@ -304,16 +309,35 @@
   }
 
   .form-post-body {
-    line-height:16px;
+    height: 16px; // Only affects the empty-height
+    line-height: 16px;
     resize: none;
     overflow: hidden;
     transition: min-height 200ms 100ms;
+    padding-bottom: 1.75em;
     min-height: 1px;
     box-sizing: content-box;
   }
 
   .form-post-body:focus {
     min-height: 48px;
+  }
+
+  .main-input {
+    position: relative;
+  }
+
+  .character-counter {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: 0 0.5em;
+
+    &.error {
+      color: $fallback--cRed;
+      color: var(--cRed, $fallback--cRed);
+    }
   }
 
   .btn {

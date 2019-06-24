@@ -141,7 +141,7 @@ TODO: Maybe expand?
 - Replies in timeline: You may know that other social networks like Twitter will often not display replies to other people in your timeline, even if you are following the poster. Pleroma usually will show these posts to you to encourage conversation. If you do not like this behavior, you can change it here.
 - Hide post statistics: This hides the number of favorites, number of replies, etc.
 - Hide user statistics: This hides the number of followers, friends, etc.
-- Muted words: A list of words that will be muted (= displayed in a collapsed state) on the timeline and in notifications. An easy way to tune down noise in your timeline. Posts can always be extended when you actually want to see them.
+- Muted words: A list of words that will be muted (i.e. displayed in a collapsed state) on the timeline and in notifications. An easy way to tune down noise in your timeline. Posts can always be expanded when you actually want to see them.
 - Hide filtered statuses: Selecting this will not only collapse the filtered / muted posts, but hide them completely.
 
 

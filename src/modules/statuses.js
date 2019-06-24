@@ -492,10 +492,15 @@ export const mutations = {
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
   },
-  addFavsAndRepeats (state, { id, favoritedByUsers, rebloggedByUsers }) {
+  addFavsAndRepeats (state, { id, favoritedByUsers, rebloggedByUsers, currentUser }) {
     const newStatus = state.allStatusesObject[id]
     newStatus.favoritedBy = favoritedByUsers.filter(_ => _)
     newStatus.rebloggedBy = rebloggedByUsers.filter(_ => _)
+    // favorites and repeats stats can be incorrect based on polling condition, let's update them using the most recent data
+    newStatus.fave_num = newStatus.favoritedBy.length
+    newStatus.repeat_num = newStatus.rebloggedBy.length
+    newStatus.favorited = !!newStatus.favoritedBy.find(({ id }) => currentUser.id === id)
+    newStatus.repeated = !!newStatus.rebloggedBy.find(({ id }) => currentUser.id === id)
   },
   updateStatusWithPoll (state, { id, poll }) {
     const status = state.allStatusesObject[id]
@@ -582,7 +587,7 @@ const statuses = {
         rootState.api.backendInteractor.fetchFavoritedByUsers(id),
         rootState.api.backendInteractor.fetchRebloggedByUsers(id)
       ]).then(([favoritedByUsers, rebloggedByUsers]) =>
-        commit('addFavsAndRepeats', { id, favoritedByUsers, rebloggedByUsers })
+        commit('addFavsAndRepeats', { id, favoritedByUsers, rebloggedByUsers, currentUser: rootState.users.currentUser })
       )
     }
   },

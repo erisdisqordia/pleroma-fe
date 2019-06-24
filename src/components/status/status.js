@@ -402,6 +402,9 @@ const Status = {
     setMedia () {
       const attachments = this.attachmentSize === 'hide' ? this.status.attachments : this.galleryAttachments
       return () => this.$store.dispatch('setMedia', attachments)
+    },
+    refetchFavsAndRepeats () {
+      this.$store.dispatch('fetchFavsAndRepeats', this.status.id)
     }
   },
   watch: {
@@ -418,6 +421,16 @@ const Status = {
           // Post is below screen, match its bottom to screen bottom
           window.scrollBy(0, rect.bottom - window.innerHeight + 50)
         }
+      }
+    },
+    'status.repeat_num': function (num) {
+      if (this.isFocused && this.statusFromGlobalRepository.rebloggedBy && this.statusFromGlobalRepository.rebloggedBy.length !== num) {
+        this.refetchFavsAndRepeats()
+      }
+    },
+    'status.fave_num': function (num) {
+      if (this.isFocused && this.statusFromGlobalRepository.favoritedBy && this.statusFromGlobalRepository.favoritedBy.length !== num) {
+        this.refetchFavsAndRepeats()
       }
     }
   },

@@ -123,7 +123,7 @@ Clicking on the cog icon in the upper right will go to the settings screen. Here
 - Loop videos: Whether to loop videos indefinitely.
 - Loop only videos without sound: Some instances will use videos without sounds instead of GIFs. This will make only those videos autoplay.
 - Play videos directly in the media viewer: TODO: Don't know what this does.
-- Don't crop the attachment in thumbnails: Selecting this will not crop the attachment thumbnails for a more uniform look, instead it will leave them in the original format.
+- Don't crop the attachment in thumbnails: if enabled, images in attachments will be fit entirely inside the container instead of being zoomed in and cropped.
 
 ### Notifications
 

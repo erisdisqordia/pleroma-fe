@@ -146,7 +146,8 @@ const removeStatusFromGlobalStorage = (state, status) => {
   }
 }
 
-const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false, userId }) => {
+const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {},
+  noIdUpdate = false, userId }) => {
   // Sanity check
   if (!isArray(statuses)) {
     return false
@@ -543,7 +544,7 @@ const statuses = {
     },
     fetchPinnedStatuses ({ rootState, dispatch }, userId) {
       rootState.api.backendInteractor.fetchPinnedStatuses(userId)
-        .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId, showImmediately: true }))
+        .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId, showImmediately: true, noIdUpdate: true }))
     },
     pinStatus ({ rootState, commit }, statusId) {
       return rootState.api.backendInteractor.pinOwnStatus(statusId)

@@ -6,7 +6,8 @@ const search = ({query, store}) => {
     store,
     url: '/api/v1/accounts/search',
     params: {
-      q: query
+      q: query,
+      resolve: true
     }
   })
   .then((data) => data.json())

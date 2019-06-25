@@ -60,7 +60,7 @@ const EmojiInput = {
       highlighted: 0,
       caret: 0,
       focused: false,
-      blurTimeout: false,
+      blurTimeout: false
     }
   },
   computed: {

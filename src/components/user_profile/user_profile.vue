@@ -3,7 +3,7 @@
   <div v-if="user" class="user-profile panel panel-default">
     <UserCard :user="user" :switcher="true" :selected="timeline.viewing" rounded="top"/>
     <tab-switcher :renderOnlyFocused="true" ref="tabSwitcher">
-      <div :label="$t('user_card.statuses')" :disabled="!user.statuses_count">
+      <div :label="$t('user_card.statuses')">
         <div class="timeline">
           <template v-for="statusId in user.pinnedStatuseIds">
             <Conversation
@@ -75,11 +75,6 @@
 <script src="./user_profile.js"></script>
 
 <style lang="scss">
-
-.tab-switcher button:disabled {
-    cursor: not-allowed;
-    opacity: 1;
-}
 
 .user-profile {
   flex: 2;

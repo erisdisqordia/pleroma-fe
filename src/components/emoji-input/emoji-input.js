@@ -60,7 +60,7 @@ const EmojiInput = {
       highlighted: 0,
       caret: 0,
       focused: false,
-      blurTimeout: false
+      blurTimeout: null
     }
   },
   computed: {
@@ -186,6 +186,7 @@ const EmojiInput = {
     onFocus (e) {
       if (this.blurTimeout) {
         clearTimeout(this.blurTimeout)
+        this.blurTimeout = null
       }
 
       this.focused = true

@@ -28,7 +28,9 @@
   flex-grow: 1;
   margin-top: 0.5em;
 
-  .attachments, .attachment {
+  // FIXME: specificity problem with this and .attachments.attachment
+  // we shouldn't have the need for .image here
+  .attachment.image {
     margin: 0 0.5em 0 0;
     flex-grow: 1;
     height: 100%;

@@ -59,7 +59,8 @@ const EmojiInput = {
       input: undefined,
       highlighted: 0,
       caret: 0,
-      focused: false
+      focused: false,
+      blurTimeout: false,
     }
   },
   computed: {
@@ -122,12 +123,12 @@ const EmojiInput = {
       this.$emit('input', newValue)
       this.caret = 0
     },
-    replaceText (e) {
+    replaceText (e, suggestion) {
       const len = this.suggestions.length || 0
       if (this.textAtCaret.length === 1) { return }
-      if (len > 0) {
-        const suggestion = this.suggestions[this.highlighted]
-        const replacement = suggestion.replacement
+      if (len > 0 || suggestion) {
+        const chosenSuggestion = suggestion || this.suggestions[this.highlighted]
+        const replacement = chosenSuggestion.replacement
         const newValue = Completion.replaceWord(this.value, this.wordAtCaret, replacement)
         this.$emit('input', newValue)
         this.highlighted = 0
@@ -173,13 +174,20 @@ const EmojiInput = {
     onBlur (e) {
       // Clicking on any suggestion removes focus from autocomplete,
       // preventing click handler ever executing.
-      setTimeout(() => {
+      this.blurTimeout = setTimeout(() => {
         this.focused = false
         this.setCaret(e)
         this.resize()
       }, 200)
     },
+    onClick (e, suggestion) {
+      this.replaceText(e, suggestion)
+    },
     onFocus (e) {
+      if (this.blurTimeout) {
+        clearTimeout(this.blurTimeout)
+      }
+
       this.focused = true
       this.setCaret(e)
       this.resize()

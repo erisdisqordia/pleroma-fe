@@ -77,18 +77,24 @@ PleromaFE also tries to persist this store, however only stable data is stored, 
 
 TODO: Refactor API code and document it here
 
-### Timelines
-
-TODO
-
 ### Themes
 
-TODO
+PleromaFE uses custom theme "framework" which is pretty much just a style tag rendered by vue which only contains CSS3 variables. Every color used in UI should be derived from theme. Theme is stored in a JSON object containing color, opacity, shadow and font information, with most of it being optional.
+
+The most basic theme can consist of 4 to 8 "basic colors", which is also what previous version of themes allowed, with all other colors being derived from those basic colors, i.e. "light background" will be "background" color lightened/darkened, "panel header" will be same as "foreground". The idea is that you can specify just basic color palette and everything else will be generated automatically, but if you really need to tweak some specific color - you can.
+
+As said before - older version only allowed 4 to 8 colors, it also used arrays instead of objects, we still support that. The basic colors are: background, foreground, text, links, red, orange, blue, green. First 4 are mandatory, last 4 have default fallbacks since ever more ancient theme formats only had 4 colors.
+
+Note that with older version themes used different internal naming when persisting state.
+
+Themes are meant to be backwards and somewhat forwards compatible - new colors should properly inherit from some existing one, making it compatible with older versions. When loading newer version of theme all unrecognized colors will be ignored, which for most part should be fine, however adding new features (gradients, masks, whatever it might be) might be breaky.
+
+Lastly, pleroma provides some contrast information and generates readable text color automatically, which is done by tracking background/text color pairs and their contrast - if contrast too low it will try to use background color with inverted lightness, if it's still unacceptable it will fall back to pure black/white.
 
 ### Still Image
 
-TODO
+Most images are wrapped in a component called StillImage, which does one simple thing - tries to detect if image is a GIF and if it is (and user has enabled relevant setting) it will show `<canvas>` with that image instead of actual image. It uses standard method to render an image into canvas which renders first frame of a GIF if it's animated (obviously because canvas by itself isn't animated and you'd need to animate it yourself in JS), it will show actual image on hover. Statuses also allow playing animated avatars when you hover over a post, not just image itself.
 
 ## Contributing
 
-TODO
+Feel free to contribute, most preferred way is by starting a Merge Request in GitLab. Please try to use descriptive names for your branches and merge requests, avoid naming them "fix-issue-777" "777" and so on.

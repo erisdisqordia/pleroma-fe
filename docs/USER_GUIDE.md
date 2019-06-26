@@ -137,7 +137,7 @@ TODO: Maybe expand?
 
 ## Filtering
 
-- Types of notifications to show: This controls which things you will be notified about.
+- Types of notifications to show: This controls what kind of notifications will appear in notification column and which notifications to get in your system outside the web page
 - Replies in timeline: You may know that other social networks like Twitter will often not display replies to other people in your timeline, even if you are following the poster. Pleroma usually will show these posts to you to encourage conversation. If you do not like this behavior, you can change it here.
 - Hide post statistics: This hides the number of favorites, number of replies, etc.
 - Hide user statistics: This hides the number of followers, friends, etc.

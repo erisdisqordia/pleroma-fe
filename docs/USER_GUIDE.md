@@ -122,7 +122,7 @@ Clicking on the cog icon in the upper right will go to the settings screen.
 - Play-on-hover GIFs: With this activated, GIFs images and avatars will only be animated on mouse hover. Otherwise, they will be always animated. This is very useful if your timeline looks too flashy from people's animated avatars and eases the CPU load.
 - Loop videos: Whether to loop videos indefinitely.
 - Loop only videos without sound: Some instances will use videos without sounds instead of GIFs. This will make only those videos autoplay.
-- Play videos directly in the media viewer: TODO: Don't know what this does.
+- Play videos directly in the media viewer: Play videos right in the timeline instead of opening it in a modal
 - Don't crop the attachment in thumbnails: if enabled, images in attachments will be fit entirely inside the container instead of being zoomed in and cropped.
 
 ### Notifications

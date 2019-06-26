@@ -84,7 +84,7 @@ Due to nature of how Pleroma (backend) operates you might see old posts appear a
 
 # Customization and configuration
 
-Clicking on the cog icon in the upper right will go to the settings screen. Here you have 4 tabs with several options to customize your experience.
+Clicking on the cog icon in the upper right will go to the settings screen.
 
 ## General
 

@@ -116,7 +116,7 @@ Clicking on the cog icon in the upper right will go to the settings screen.
 - Hide attachments in timeline: Do not display attachments in timelines. They will still display in expanded conversations. This is useful to save bandwidth and for browsing in public.
 - Hide attachments in conversations: Also hide attachments in expanded conversations.
 - Maximum amount of thumbnails per post: Exactly that :)
-- Enable clickthrough NSFW attachment hiding: Hide attachments that are marked as NSFW/sensible behind a click-through image.
+- Enable clickthrough NSFW attachment hiding: Hide attachments that are marked as NSFW/sensitive behind a click-through image.`
 - Preload images: This will preload the hidden images so that they display faster when clicking through.
 - Open NSFW attachments with just one click: Directly open NSFW attachments in a maximised state instead of revealing the image thumbnail.
 - Play-on-hover GIFs: With this activated, GIFs will only play on hover. Otherwise, they will autoplay normally.

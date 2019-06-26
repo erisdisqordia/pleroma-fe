@@ -27,7 +27,7 @@ Let's clear up some basic stuff. When you post something it's called a **post** 
 * **Subject line** also known as **CW** (Content Warning) could be used as a header to the post and/or to warn others about contents of the post having something that might upset somebody or something among those lines. Several applications allow to hide post content leaving only subject line visible. As a side-effect using subject line will also mark your images as sensitive (see above).
 * **Visiblity scope** controls who will be able to see your posts. There are four scopes available:
 
-1. `Public`: This is the default, and some fediverse software like GNU Social only supports this. This means that your post is accessible by anyone and will be shown in the public timelines. 
+1. `Public`: This is the default, and some fediverse software like GNU Social only supports this. This means that your post is accessible by anyone and will be shown in the public timelines.
 2. `Unlisted`: This is the same as public, but your post won't appear in the public timelines. The post will still be accessible by anyone who comes across it (for example, by looking at your profile) or by direct linking. They will also appear in public searches.
 3. `Followers only`: This will show your post only to your followers. Only they will be able to interact with it. Be careful: When somebody follows you, they will be able to see all your previous `followers only` posts as well! If you want to restrict who can follow you, consider [locking your account down to only approved followers](#user-settings).
 4. `Direct`: This will only send the message to the people explicitly mentioned in the post.
@@ -96,7 +96,7 @@ Clicking on the cog icon in the upper right will go to the settings screen.
 ### Timeline
 
 - Hide posts of muted users: If this is set, 'muting' a user will completely hide their posts instead of collapsing them.
-- Collapse posts with subjects: This will collapse posts that contain a subject, hiding their content. Subjects are also sometimes called content warnings. 
+- Collapse posts with subjects: This will collapse posts that contain a subject, hiding their content. Subjects are also sometimes called content warnings.
 - Enable automatic streaming of new posts when scrolled to the top: With this enabled, new posts will automatically stream in when you are scrolled to the top. Otherwise, you will see a button on the timeline that will let you display the new posts.
 - Pause streaming when tab is not focused: This pauses the automatic streaming that the previous option enables when the tab is out of focus. This is useful if you don't want to miss any new posts.
 - Enable automatic loading when scrolled to the bottom: When this is disabled, a button will be shown on the bottom of the timeline that will let you load older posts.
@@ -131,9 +131,21 @@ Clicking on the cog icon in the upper right will go to the settings screen.
 
 ## Theme
 
-Here you can change, load and save the look of your Pleroma frontend. There are a lot of options, but there is a preview. Play around with the settings and see what you like!
+You can change the look and feel of Pleroma Frontend here. You can choose from several instance-provided presets and you can load one from file and save current theme to file. Before you apply new theme you can see what it will look like approximately in preview section.
 
-TODO: Maybe expand?
+Themes engine was made to be easy to use while giving an option for powerful in-depth customization - you can just tweak colors on "Common" tab and leave everything else as is.
+
+If there's a little check box next to a color picker it means that color is optional and unless checked will be automatically picked based on some other color or defaults.
+
+For some features you can also adjust transparency of it by changing its opacity, you just need to tick checkbox next to it, otherwise it will be using default opacity.
+
+Contrast information is also provided - you can see how readable text is based on contrast between text color and background, icons under color pickers represent contrast rating based on [WCAG](https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast) - thumbs up means AAA rating (good), half-filled circle means AA rating (acceptable) and warning icon means it doesn't pass the minimal contrast requirement and probably will be less readable, especially for vision-challenged people, you can hover over icon to see more detailed information. *Please note* that if background is not opaque (opacity != 1) contrast will be measured based on "worst case scenario", i.e. behind semi-transparent background lies some solid color that makes text harder to read, this however is still inaccurate because it doesn't account that background can be noisy/busy, making text even harder to read.
+
+Apart from colors you can also tweak shadow and lighting, which is used mostly to give buttons proper relief based on their state, give panes their shade, make things glow etc. It's quite powerful, and basically provides somewhat convenient interface for [CSS Shadows](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow).
+
+Another thing you can tweak is theme's roundness - some people like sharp edges, some want things more rounded. This is also used if you want circled or square avatars.
+
+Lastly, you can redefine fonts used in UI without changing fonts in your browser or system, this however requires you to enter font's full name and having that font installed on your system.
 
 ## Filtering
 

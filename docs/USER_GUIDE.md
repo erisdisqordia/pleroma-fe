@@ -108,7 +108,7 @@ Clicking on the cog icon in the upper right will go to the settings screen.
 - Always show subject field: Whether or not to display the 'subject' input field in the post form. If you do not want to use subjects, you can deactivate this.
 - Copy subject when replying: This controls if the subject of a post will be copied from the post it is replying to.
 - Post status content type: Selects the default content type of your post. The options are: Plain text, HTML, BBCode and Markdown.
-- Minimize scope selection options: Selecting this will reduce the visibility scopes to 'public' and 'direct'.
+- Minimize scope selection options: Selecting this will reduce the visibility scopes to 'direct', your default post scope and post scope of post you're replying to.
 - Automatically hide New Post button: TODO: Not quite sure when it's hidden.
 
 ### Attachments

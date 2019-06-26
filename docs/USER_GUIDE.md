@@ -16,7 +16,7 @@ After registering and logging in you're presented with your timeline in right co
 
 Posts will contain the text you are posting, but some content will be modified:
 
-1. Mentions: Mentions have the form of @user or @user@instance.tld. These will become links to the user's profile. In addition, the mentioned user will always get a notification about the post they have been mentioned in, so only mention users that you want to receive this message.
+1. Mentions: Mentions have the form of @user or @user<span></span>@instance.tld. These will become links to the user's profile. In addition, the mentioned user will always get a notification about the post they have been mentioned in, so only mention users that you want to receive this message.
 2. URLs: URLs like `http://example.com` will be automatically  be turned into a clickable links.
 3. Hashtags: Hashtags like #cofe will also be turned into links.
 

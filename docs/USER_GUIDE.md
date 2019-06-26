@@ -119,7 +119,7 @@ Clicking on the cog icon in the upper right will go to the settings screen.
 - Enable clickthrough NSFW attachment hiding: Hide attachments that are marked as NSFW/sensitive behind a click-through image.`
 - Preload images: This will preload the hidden images so that they display faster when clicking through.
 - Open NSFW attachments with just one click: Directly open NSFW attachments in a maximised state instead of revealing the image thumbnail.
-- Play-on-hover GIFs: With this activated, GIFs will only play on hover. Otherwise, they will autoplay normally.
+- Play-on-hover GIFs: With this activated, GIFs images and avatars will only be animated on mouse hover. Otherwise, they will be always animated. This is very useful if your timeline looks too flashy from people's animated avatars and eases the CPU load.
 - Loop videos: Whether to loop videos indefinitely.
 - Loop only videos without sound: Some instances will use videos without sounds instead of GIFs. This will make only those videos autoplay.
 - Play videos directly in the media viewer: TODO: Don't know what this does.

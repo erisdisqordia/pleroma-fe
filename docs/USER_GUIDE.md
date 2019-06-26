@@ -127,7 +127,7 @@ Clicking on the cog icon in the upper right will go to the settings screen.
 
 ### Notifications
 
-- Enable web push notifications: This enables the web push notifications that your browser displays, even when you are not looking at your pleroma site. Pleroma's own notifications are not affected by this.
+- Enable web push notifications: this enables Web Push notifications, to allow receiving notifications even when the page isn't opened, doesn't affect regular notifications.
 
 ## Theme
 

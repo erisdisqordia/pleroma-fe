@@ -78,7 +78,7 @@ Use custom image for NSFW'd images
 Show panel showcasing instance features/settings to logged-out visitors
 
 ## Indirect configuration
-Some features are configured depending on how backend is configured. In general the approach is "if backend allows it there's no need to hide it, if backend doesn't allow it there's no need to show it**.
+Some features are configured depending on how backend is configured. In general the approach is "if backend allows it there's no need to hide it, if backend doesn't allow it there's no need to show it.
 
 ### Chat
 **TODO somewhat broken, see: chatDisabled** chat can be disabled by disabling it in backend

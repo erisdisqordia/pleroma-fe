@@ -34,7 +34,7 @@ Instance `logo`, could be any image, including svg. By default it assumes logo u
 These two settings should point to where FE should redirect visitor when they login/open up website root
 
 ### `chatDisabled`
-unused (?)
+hides the chat (TODO: even if it's enabled on backend)
 
 ### `showInstanceSpecificPanel`
 This allows you to include arbitrary HTML content in a panel below navigation menu. PleromaFE looks for an html page `instance/panel.html`, by default it's not provided in FE, but BE bundles some [default one](https://git.pleroma.social/pleroma/pleroma/blob/develop/priv/static/instance/panel.html). De-facto instance-defaults, since user can hide instance-specific panel.
@@ -59,7 +59,7 @@ Default post formatting option (markdown/bbcode/plaintext/etc...)
 `true` - will always show subject line input, `false` - only show when it's not empty (i.e. replying). To hide subject line input completely, set it to `false` and `subjectLineBehavior` to `"noop"`
 
 ### `hidePostStats` and `hideUserStats`
-Hide counters for posts and users respectively, i.e. hiding repeats/favorites counts for posts, hiding followers/friends counts for users.
+Hide counters for posts and users respectively, i.e. hiding repeats/favorites counts for posts, hiding followers/friends counts for users. This is just cosmetic and aimed to ease pressure and bias imposed by stat numbers of people and/or posts. (as an example: so that people care less about how many followers someone has since they can't see that info)
 
 ### `loginMethod`
 `"password"` - show simple password field
@@ -76,3 +76,18 @@ Use custom image for NSFW'd images
 
 ### `showFeaturesPanel`
 Show panel showcasing instance features/settings to logged-out visitors
+
+## Indirect configuration
+Some features are configured depending on how backend is configured. In general the approach is "if backend allows it there's no need to hide it, if backend doesn't allow it there's no need to show it**.
+
+### Chat
+**TODO somewhat broken, see: chatDisabled** chat can be disabled by disabling it in backend
+
+### Rich text formatting in post formatting
+Rich text formatting options are displayed depending on how many formatting options are enabled on backend, if you don't want your users to use rich text at all you can only allow "text/plain" one, frontend then will only display post text format as a label instead of dropdown (just so that users know for example if you only allow Markdown, only BBCode or only Plain text)
+
+### Who to follow
+This is a panel intended for users to find people to follow based on randomness or on post contents. Being potentially privacy unfriendly feature it needs to be enabled and configured in backend to be enabled.
+
+### "Safe" DMs
+There's obscure option to enable quote-unquote "safe" DMs, which makes DMs "only be visible to the mentioned users at the beginning of the message." which only changes DM warning in FE. What it does precisely is unclear and should probably be avoided since it bring in more confusion and doesn't affect other servers.

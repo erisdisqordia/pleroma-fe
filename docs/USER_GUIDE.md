@@ -95,7 +95,7 @@ Clicking on the cog icon in the upper right will go to the settings screen.
 
 ### Timeline
 
-- Hide posts of muted users: If this is set, 'muting' a user will also hide their posts and not just collapse them.
+- Hide posts of muted users: If this is set, 'muting' a user will completely hide their posts instead of collapsing them.
 - Collapse posts with subjects: This will collapse posts that contain a subject, hiding their content. Subjects are also sometimes called content warnings. 
 - Enable automatic streaming of new posts when scrolled to the top: With this enabled, new posts will automatically stream in when you are scrolled to the top. Otherwise, you will see a button on the timeline that will let you display the new posts.
 - Pause streaming when tab is not focused: This pauses the automatic streaming that the previous option enables when the tab is out of focus. This is useful if you don't want to miss any new posts.

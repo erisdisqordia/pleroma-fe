@@ -29,7 +29,7 @@ Let's clear up some basic stuff. When you post something it's called a **post** 
 
 1. `Public`: This is the default, and some fediverse software like GNU Social only supports this. This means that your post is accessible by anyone and will be shown in the public timelines.
 2. `Unlisted`: This is the same as public, but your post won't appear in the public timelines. The post will still be accessible by anyone who comes across it (for example, by looking at your profile) or by direct linking. They will also appear in public searches.
-3. `Followers only`: This will show your post only to your followers. Only they will be able to interact with it. Be careful: When somebody follows you, they will be able to see all your previous `followers only` posts as well! If you want to restrict who can follow you, consider [locking your account down to only approved followers](#user-settings).
+3. `Followers only`: This will show your post only to your followers. Only they will be able to interact with it. Be careful: When somebody follows you, they will be able to see all your previous `followers only` posts as well! If you want to restrict who can follow you, consider [locking your account down to only approved followers](#profle).
 4. `Direct`: This will only send the message to the people explicitly mentioned in the post.
 
 A few things to consider about the security and usage of these scopes:

@@ -402,9 +402,6 @@ const Status = {
     setMedia () {
       const attachments = this.attachmentSize === 'hide' ? this.status.attachments : this.galleryAttachments
       return () => this.$store.dispatch('setMedia', attachments)
-    },
-    refetchFavsAndRepeats () {
-      this.$store.dispatch('fetchFavsAndRepeats', this.status.id)
     }
   },
   watch: {
@@ -425,12 +422,12 @@ const Status = {
     },
     'status.repeat_num': function (num) {
       if (this.isFocused && this.statusFromGlobalRepository.rebloggedBy && this.statusFromGlobalRepository.rebloggedBy.length !== num) {
-        this.refetchFavsAndRepeats()
+        this.$store.dispatch('fetchRepeats', this.status.id)
       }
     },
     'status.fave_num': function (num) {
       if (this.isFocused && this.statusFromGlobalRepository.favoritedBy && this.statusFromGlobalRepository.favoritedBy.length !== num) {
-        this.refetchFavsAndRepeats()
+        this.$store.dispatch('fetchFavs', this.status.id)
       }
     }
   },

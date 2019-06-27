@@ -72,6 +72,44 @@ Currently you have several timelines to browse trough:
 * **Public Timelines** all posts made by users on instance you're on
 * **The Whole Known Network** also known as **TWKN** or **Federated Timeline** - all posts on the network by everyone, almost. Due to nature of the network your instance may not know *all** the instances on the network, so only posts originating from known instances are shown there.
 
+## Your profile
+
+By clicking wrench icon above the post form you can access the profile edit or "user settings" screen.
+
+### Profle
+
+Here you can set up how you appear to other users among with some other settings:
+
+- Name: this is text that displays next to your avatar in posts. Please note that you **cannot** change your *@<span></span>handle*
+- Bio: this will be displayed under your profile - you can put anything you want there you want for everyone to see.
+- Restrict your account to approved followers only: this makes your account "locked", when people follow you - you have to approve or deny their follow requests, this gives more control over who sees your followers only posts.
+- Default visibility scope: this chooses your default post scope for new posts
+- Strip rich text from all posts: this strips rich text formatting (bold/italics/lists etc) from all incoming posts. Will only affect newly fetched posts.
+
+If you're admin or moderator on your instance you also get "Show [role] badge in my profile" - this controls whether to show "Admin" or "Moderator** label on your profile page.
+
+**For all options mentioned above you have to click "Submit" button for changes to take place**
+
+- Avatar: this changes picture next to your posts. Your avatar shouldn't exceed 2 MiB (2097152 bytes) or it could cause problems with certain instances.
+- Banner: this changes background on your profile card. Same as avatar it shouldn't exceed 2 MiB limit.
+- Profile Background: this changes background picture for UI. It isn't shown to anyone else **yet**, but some time later it will be shown when viewing your profile.
+
+### Security
+
+Here you can change your password, revoke access tokens, configure 2-factor authentication (if available).
+
+### Notifications
+
+This screen allows more fine-grained control over what notifications to show to you based on whom it comes from
+
+### Data Import/Export
+
+This allows you to export and import a list of people you follow, in case instance's database gets reverted or if you want to move to another server. Note that you **CANNOT export/import list of people who *follow you***, they'll just need to follow you back after you move.
+
+### Blocks and Mutes
+
+These screens give access to full list of people you block/mute, useful for *un*blocking/*un*muting people because blocking/muting them most likely removes them out of your sight completely.
+
 ## Other stuff
 
 By default you can see **ALL** posts made by other users on your Home Timeline, this contrast behavior of Twitter and Mastodon, which shows you only non-reply posts and replies to people you follow. You can set it up to replicate the said behavior, however the option is currently broken.

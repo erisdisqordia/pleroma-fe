@@ -1,3 +1,4 @@
+import Popper from 'vue-popperjs/src/component/popper.js.vue'
 import Attachment from '../attachment/attachment.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
@@ -38,7 +39,6 @@ const Status = {
       unmuted: false,
       userExpanded: false,
       preview: null,
-      showPreview: false,
       showingTall: this.inConversation && this.focused,
       showingLongSubject: false,
       error: null,
@@ -290,6 +290,7 @@ const Status = {
     }
   },
   components: {
+    Popper,
     Attachment,
     FavoriteButton,
     RetweetButton,
@@ -377,7 +378,6 @@ const Status = {
       }
     },
     replyEnter (id, event) {
-      this.showPreview = true
       const targetId = id
       const statuses = this.$store.state.statuses.allStatuses
 
@@ -393,9 +393,6 @@ const Status = {
       } else if (this.preview.id !== targetId) {
         this.preview = find(statuses, { 'id': targetId })
       }
-    },
-    replyLeave () {
-      this.showPreview = false
     },
     generateUserProfileLink (id, name) {
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)

@@ -170,24 +170,30 @@
             </div>
 
             <div class="heading-reply-row">
-              <div
-                v-if="isReply"
-                class="reply-to-and-accountname"
-              >
-                <a
-                  class="reply-to"
-                  href="#"
-                  :aria-label="$t('tool_tip.reply')"
-                  @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
-                  @mouseenter.prevent.stop="replyEnter(status.in_reply_to_status_id, $event)"
-                  @mouseleave.prevent.stop="replyLeave()"
-                >
-                  <i
-                    v-if="!isPreview"
-                    class="button-icon icon-reply"
-                  />
-                  <span class="faint-link reply-to-text">{{ $t('status.reply_to') }}</span>
-                </a>
+              <div v-if="isReply" class="reply-to-and-accountname">
+                <Popper ref="foo" :options="{ placement: 'bottom-start' }" @show="replyEnter(status.in_reply_to_status_id)">
+                  <div class="popper-wrapper status-preview">
+                    <status
+                      v-if="preview"
+                      :isPreview="true"
+                      :statusoid="preview"
+                      :compact="true"
+                    />
+                    <div v-else class="status-preview-loading">
+                      <i class="icon-spin4 animate-spin"></i>
+                    </div>
+                  </div>
+
+                  <a
+                    slot="reference"
+                    class="reply-to"
+                    href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
+                    :aria-label="$t('tool_tip.reply')"
+                  >
+                    <i class="button-icon icon-reply" v-if="!isPreview"></i>
+                    <span class="faint-link reply-to-text">{{$t('status.reply_to')}}</span>
+                  </a>
+                </Popper>
                 <router-link :to="replyProfileLink">
                   {{ replyToName }}
                 </router-link>
@@ -221,25 +227,6 @@
                   </span>
                 </template>
               </div>
-            </div>
-          </div>
-
-          <div
-            v-if="showPreview"
-            class="status-preview-container"
-          >
-            <status
-              v-if="preview"
-              class="status-preview"
-              :is-preview="true"
-              :statusoid="preview"
-              :compact="true"
-            />
-            <div
-              v-else
-              class="status-preview status-preview-loading"
-            >
-              <i class="icon-spin4 animate-spin" />
             </div>
           </div>
 
@@ -439,18 +426,6 @@ $status-margin: 0.75em;
   min-width: 0;
 }
 
-.status-preview.status-el {
-  border-style: solid;
-  border-width: 1px;
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
-}
-
-.status-preview-container {
-  position: relative;
-  max-width: 100%;
-}
-
 .status-pin {
   padding: $status-margin $status-margin 0;
   display: flex;
@@ -458,43 +433,6 @@ $status-margin: 0.75em;
   justify-content: flex-end;
 }
 
-.status-preview {
-  position: absolute;
-  max-width: 95%;
-  display: flex;
-  background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
-  border-style: solid;
-  border-width: 1px;
-  border-radius: $fallback--tooltipRadius;
-  border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-  box-shadow: var(--popupShadow);
-  margin-top: 0.25em;
-  margin-left: 0.5em;
-  z-index: 50;
-
-  .status {
-    flex: 1;
-    border: 0;
-    min-width: 15em;
-  }
-}
-
-.status-preview-loading {
-  display: block;
-  min-width: 15em;
-  padding: 1em;
-  text-align: center;
-  border-width: 1px;
-  border-style: solid;
-
-  i {
-    font-size: 2em;
-  }
-}
 
 .media-left {
   margin-right: $status-margin;
@@ -600,6 +538,7 @@ $status-margin: 0.75em;
     }
 
     .heading-reply-row {
+      position: relative;
       align-content: baseline;
       font-size: 12px;
       line-height: 18px;
@@ -895,6 +834,64 @@ a.unmute {
     border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
     border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
     border-bottom: none;
+  }
+}
+
+.popper-wrapper.status-preview {
+  font-size: 14px;
+  background-color: $fallback--bg;
+  background-color: var(--bg, $fallback--bg);
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: $fallback--tooltipRadius;
+  border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--popupShadow);
+  min-width: 15em;
+  max-width: 95%;
+  margin-left: 0.5em;
+
+  > .status-el.status-el {
+    border: none;
+  }
+
+  > .status-preview-loading {
+    padding: 1em;
+    text-align: center;
+
+    i {
+      font-size: 2em;
+    }
+  }
+
+  &[x-placement^="bottom"] .popper__arrow {
+    &:before {
+      position: absolute;
+      content: '';
+      top: -2px;
+      left: -7px;
+      border-width: 0 7px 7px 7px;
+      border-color: transparent transparent $fallback--border transparent;
+      border-color: transparent transparent var(--border, $fallback--border) transparent;
+      border-style: solid;
+      z-index: -1;
+    }
+  }
+
+  &[x-placement^="top"] .popper__arrow {
+    &:before {
+      position: absolute;
+      content: '';
+      bottom: -2px;
+      left: -7px;
+      border-width: 7px 7px 0 7px;
+      border-color: $fallback--border transparent transparent transparent;
+      border-color: var(--border, $fallback--border)  transparent transparent transparent;
+      border-style: solid;
+      z-index: -1;
+    }
   }
 }
 

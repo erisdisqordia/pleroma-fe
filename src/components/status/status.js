@@ -388,6 +388,7 @@ const Status = {
         if (!this.preview) {
           this.$store.state.api.backendInteractor.fetchStatus({ id }).then((status) => {
             this.preview = status
+            this.$nextTick(this.$refs.foo.updatePopper)
           })
         }
       } else if (this.preview.id !== targetId) {

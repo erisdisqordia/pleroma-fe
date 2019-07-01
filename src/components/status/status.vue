@@ -491,11 +491,6 @@ $status-margin: 0.75em;
     flex-basis: 100%;
     margin-bottom: 0.5em;
 
-    a {
-      display: inline-block;
-      word-break: break-all;
-    }
-
     small {
       font-weight: lighter;
     }
@@ -505,6 +500,11 @@ $status-margin: 0.75em;
       display: flex;
       justify-content: space-between;
       line-height: 18px;
+
+      a {
+        display: inline-block;
+        word-break: break-all;
+      }
 
       .name-and-account-name {
         display: flex;
@@ -547,11 +547,13 @@ $status-margin: 0.75em;
       flex-wrap: wrap;
       align-items: stretch;
 
-      a {
+      > .reply-to-and-accountname > a {
         max-width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        display: inline-block;
+        word-break: break-all;
       }
     }
 

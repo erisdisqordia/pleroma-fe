@@ -868,32 +868,26 @@ a.unmute {
     }
   }
 
-  &[x-placement^="bottom"] .popper__arrow {
-    &:before {
-      position: absolute;
-      content: '';
-      top: -2px;
-      left: -7px;
-      border-width: 0 7px 7px 7px;
-      border-color: transparent transparent $fallback--border transparent;
-      border-color: transparent transparent var(--border, $fallback--border) transparent;
-      border-style: solid;
-      z-index: -1;
-    }
+  .popper__arrow::before {
+    position: absolute;
+    content: '';
+    left: -7px;
+    border: solid 7px transparent;
+    z-index: -1;
   }
 
-  &[x-placement^="top"] .popper__arrow {
-    &:before {
-      position: absolute;
-      content: '';
-      bottom: -2px;
-      left: -7px;
-      border-width: 7px 7px 0 7px;
-      border-color: $fallback--border transparent transparent transparent;
-      border-color: var(--border, $fallback--border)  transparent transparent transparent;
-      border-style: solid;
-      z-index: -1;
-    }
+  &[x-placement^="bottom"] .popper__arrow::before {
+    top: -2px;
+    border-top-width: 0;
+    border-bottom-color: $fallback--border;
+    border-bottom-color: var(--border, $fallback--border);
+  }
+
+  &[x-placement^="top"] .popper__arrow::before {
+    bottom: -2px;
+    border-bottom-width: 0;
+    border-top-color: $fallback--border;
+    border-top-color: var(--border, $fallback--border);
   }
 }
 

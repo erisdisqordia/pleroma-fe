@@ -173,14 +173,16 @@
               <div v-if="isReply" class="reply-to-and-accountname">
                 <Popper ref="statusPreviewPopper" :options="{ placement: 'bottom-start' }" @show="replyEnter(status.in_reply_to_status_id)">
                   <div class="popper-wrapper status-preview">
-                    <status
-                      v-if="preview"
-                      :isPreview="true"
-                      :statusoid="preview"
-                      :compact="true"
-                    />
-                    <div v-else class="status-preview-loading">
-                      <i class="icon-spin4 animate-spin"></i>
+                    <div class="popper-wrapper-inner" @mouseover.prevent.stop @focus.prevent.stop>
+                      <status
+                        v-if="preview"
+                        :isPreview="true"
+                        :statusoid="preview"
+                        :compact="true"
+                      />
+                      <div v-else class="status-preview-loading">
+                        <i class="icon-spin4 animate-spin"></i>
+                      </div>
                     </div>
                   </div>
 
@@ -855,11 +857,11 @@ a.unmute {
   max-width: 95%;
   margin-left: 0.5em;
 
-  > .status-el.status-el {
+  .status-el.status-el {
     border: none;
   }
 
-  > .status-preview-loading {
+  .status-preview-loading {
     padding: 1em;
     text-align: center;
 

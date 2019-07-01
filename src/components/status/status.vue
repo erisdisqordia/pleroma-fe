@@ -171,7 +171,7 @@
 
             <div class="heading-reply-row">
               <div v-if="isReply" class="reply-to-and-accountname">
-                <Popper ref="foo" :options="{ placement: 'bottom-start' }" @show="replyEnter(status.in_reply_to_status_id)">
+                <Popper ref="statusPreviewPopper" :options="{ placement: 'bottom-start' }" @show="replyEnter(status.in_reply_to_status_id)">
                   <div class="popper-wrapper status-preview">
                     <status
                       v-if="preview"

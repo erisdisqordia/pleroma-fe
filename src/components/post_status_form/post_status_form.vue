@@ -84,7 +84,7 @@
             <i class="icon-down-open"></i>
           </label>
         </div>
-        <div class="text-format" v-if="postFormats.length === 1">
+        <div class="text-format" v-if="postFormats.length === 1 && postFormats[0] !== 'text/plain'">
           <span class="only-format">
             {{$t(`post_status.content_type["${postFormats[0]}"]`)}}
           </span>

@@ -1,5 +1,6 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import userSearchApi from '../services/new_api/user_search.js'
+import oauthApi from '../services/new_api/oauth.js'
 import { compact, map, each, merge, last, concat, uniq } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
@@ -397,14 +398,34 @@ const users = {
     },
 
     logout (store) {
-      store.commit('clearCurrentUser')
-      store.dispatch('disconnectFromChat')
-      store.commit('clearToken')
-      store.dispatch('stopFetching', 'friends')
-      store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
-      store.dispatch('stopFetching', 'notifications')
-      store.commit('clearNotifications')
-      store.commit('resetStatuses')
+      const { oauth, instance } = store.rootState
+
+      const data = {
+        ...oauth,
+        commit: store.commit,
+        instance: instance.server
+      }
+
+      return oauthApi.getOrCreateApp(data)
+        .then((app) => {
+          const params = {
+            app,
+            instance: data.instance,
+            token: oauth.userToken
+          }
+
+          return oauthApi.revokeToken(params)
+        })
+        .then(() => {
+          store.commit('clearCurrentUser')
+          store.dispatch('disconnectFromChat')
+          store.commit('clearToken')
+          store.dispatch('stopFetching', 'friends')
+          store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
+          store.dispatch('stopFetching', 'notifications')
+          store.commit('clearNotifications')
+          store.commit('resetStatuses')
+        })
     },
     loginUser (store, accessToken) {
       return new Promise((resolve, reject) => {

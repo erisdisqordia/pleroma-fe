@@ -31,6 +31,8 @@ const UserProfile = {
     }
   },
   created () {
+    // Make sure that timelines used in this page are empty
+    this.cleanUp()
     const routeParams = this.$route.params
     this.load(routeParams.name || routeParams.id)
   },

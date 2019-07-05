@@ -74,6 +74,13 @@
         </p>
       </EmojiInput>
       <div class="visibility-tray">
+        <scope-selector
+          :showAll="showAllScopes"
+          :userDefault="userDefaultScope"
+          :originalScope="copyMessageScope"
+          :initialScope="newStatus.visibility"
+          :onScopeChange="changeVis"/>
+
         <div class="text-format" v-if="postFormats.length > 1">
           <label for="post-content-type" class="select">
             <select id="post-content-type" v-model="newStatus.contentType" class="form-control">
@@ -84,18 +91,11 @@
             <i class="icon-down-open"></i>
           </label>
         </div>
-        <div class="text-format" v-if="postFormats.length === 1">
+        <div class="text-format" v-if="postFormats.length === 1 && postFormats[0] !== 'text/plain'">
           <span class="only-format">
             {{$t(`post_status.content_type["${postFormats[0]}"]`)}}
           </span>
         </div>
-
-        <scope-selector
-          :showAll="showAllScopes"
-          :userDefault="userDefaultScope"
-          :originalScope="copyMessageScope"
-          :initialScope="newStatus.visibility"
-          :onScopeChange="changeVis"/>
       </div>
     </div>
     <poll-form
@@ -170,7 +170,6 @@
   .visibility-tray {
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
     padding-top: 5px;
   }
 }
@@ -217,7 +216,7 @@
   .icon-chart-bar {
     cursor: pointer;
   }
-  
+
 
   .error {
     text-align: center;

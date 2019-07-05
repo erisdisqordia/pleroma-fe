@@ -39,10 +39,13 @@ h4 {
   text-align: center;
 }
 
+html {
+  font-size: 14px;
+}
+
 body {
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
-  font-size: 14px;
   margin: 0;
   color: $fallback--text;
   color: var(--text, $fallback--text);

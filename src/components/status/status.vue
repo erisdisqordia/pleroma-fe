@@ -842,7 +842,7 @@ a.unmute {
 }
 
 .popper-wrapper.status-preview {
-  font-size: 14px;
+  font-size: 1rem;
   background-color: $fallback--bg;
   background-color: var(--bg, $fallback--bg);
   border-color: $fallback--border;

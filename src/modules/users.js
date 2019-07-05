@@ -346,8 +346,8 @@ const users = {
 
       const notificationsObject = store.rootState.statuses.notifications.idStore
       const relevantNotifications = Object.entries(notificationsObject)
-            .filter(([k, val]) => notificationIds.includes(k))
-            .map(([k, val]) => val)
+        .filter(([k, val]) => notificationIds.includes(k))
+        .map(([k, val]) => val)
 
       // Reconnect users to notifications
       each(relevantNotifications, (notification) => {
@@ -459,11 +459,11 @@ const users = {
             commit('endLogin')
             resolve()
           })
-        .catch((error) => {
-          console.log(error)
-          commit('endLogin')
-          reject('Failed to connect to server, try again')
-        })
+          .catch((error) => {
+            console.log(error)
+            commit('endLogin')
+            reject('Failed to connect to server, try again')
+          })
       })
     }
   }

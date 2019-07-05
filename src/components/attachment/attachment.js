@@ -51,7 +51,7 @@ const Attachment = {
     }
   },
   methods: {
-    linkClicked ({target}) {
+    linkClicked ({ target }) {
       if (target.tagName === 'A') {
         window.open(target.href, '_blank')
       }

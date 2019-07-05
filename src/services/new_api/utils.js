@@ -13,7 +13,7 @@ const headers = (store) => {
   }
 }
 
-const request = ({method = 'GET', url, params, store}) => {
+const request = ({ method = 'GET', url, params, store }) => {
   const instance = store.state.instance.server
   let fullUrl = `${instance}${url}`
 

@@ -53,7 +53,7 @@ const EmojiInput = {
       required: true,
       type: String
     }
- },
+  },
   data () {
     return {
       input: undefined,

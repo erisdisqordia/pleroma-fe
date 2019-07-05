@@ -139,7 +139,7 @@ const Timeline = {
         if (top < 15 &&
             !this.paused &&
             !(this.unfocused && this.$store.state.config.pauseOnUnfocused)
-           ) {
+        ) {
           this.showNewStatuses()
         } else {
           this.paused = true

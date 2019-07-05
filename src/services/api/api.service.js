@@ -315,7 +315,7 @@ const exportFriends = ({ id, credentials }) => {
       let more = true
       while (more) {
         const maxId = friends.length > 0 ? last(friends).id : undefined
-        const users = await fetchFriends({id, maxId, credentials})
+        const users = await fetchFriends({ id, maxId, credentials })
         friends = concat(friends, users)
         if (users.length === 0) {
           more = false

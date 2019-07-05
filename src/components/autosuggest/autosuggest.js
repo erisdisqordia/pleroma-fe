@@ -2,11 +2,11 @@ const debounceMilliseconds = 500
 
 export default {
   props: {
-    query: {    // function to query results and return a promise
+    query: { // function to query results and return a promise
       type: Function,
       required: true
     },
-    filter: {   // function to filter results in real time
+    filter: { // function to filter results in real time
       type: Function
     },
     placeholder: {

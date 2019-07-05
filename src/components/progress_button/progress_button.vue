@@ -1,5 +1,8 @@
 <template>
-  <button :disabled="progress || disabled" @click="onClick">
+  <button
+    :disabled="progress || disabled"
+    @click="onClick"
+  >
     <template v-if="progress">
       <slot name="progress" />
     </template>

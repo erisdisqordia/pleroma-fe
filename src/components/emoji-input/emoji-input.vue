@@ -1,27 +1,34 @@
 <template>
-<div class="emoji-input">
-  <slot></slot>
-  <div ref="panel" class="autocomplete-panel" :class="{ hide: !showPopup }">
-    <div class="autocomplete-panel-body">
-      <div
-        v-for="(suggestion, index) in suggestions"
-        :key="index"
-        @click.stop.prevent="onClick($event, suggestion)"
-        class="autocomplete-item"
-        :class="{ highlighted: suggestion.highlighted }"
+  <div class="emoji-input">
+    <slot />
+    <div
+      ref="panel"
+      class="autocomplete-panel"
+      :class="{ hide: !showPopup }"
+    >
+      <div class="autocomplete-panel-body">
+        <div
+          v-for="(suggestion, index) in suggestions"
+          :key="index"
+          class="autocomplete-item"
+          :class="{ highlighted: suggestion.highlighted }"
+          @click.stop.prevent="onClick($event, suggestion)"
         >
-        <span class="image">
-          <img v-if="suggestion.img":src="suggestion.img" />
-          <span v-else>{{suggestion.replacement}}</span>
-        </span>
-        <div class="label">
-          <span class="displayText">{{suggestion.displayText}}</span>
-          <span class="detailText">{{suggestion.detailText}}</span>
+          <span class="image">
+            <img
+              v-if="suggestion.img"
+              :src="suggestion.img"
+            >
+            <span v-else>{{ suggestion.replacement }}</span>
+          </span>
+          <div class="label">
+            <span class="displayText">{{ suggestion.displayText }}</span>
+            <span class="detailText">{{ suggestion.detailText }}</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script src="./emoji-input.js"></script>
@@ -102,7 +109,6 @@
       }
     }
   }
-
 
   input, textarea {
     flex: 1 0 auto;

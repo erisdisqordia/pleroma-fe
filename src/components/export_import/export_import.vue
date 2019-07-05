@@ -1,12 +1,27 @@
 <template>
-<div class="import-export-container">
-  <slot name="before"/>
-  <button class="btn" @click="exportData">{{ exportLabel }}</button>
-  <button class="btn" @click="importData">{{ importLabel }}</button>
-  <slot name="afterButtons"/>
-  <p v-if="importFailed" class="alert error">{{ importFailedText }}</p>
-  <slot name="afterError"/>
-</div>
+  <div class="import-export-container">
+    <slot name="before" />
+    <button
+      class="btn"
+      @click="exportData"
+    >
+      {{ exportLabel }}
+    </button>
+    <button
+      class="btn"
+      @click="importData"
+    >
+      {{ importLabel }}
+    </button>
+    <slot name="afterButtons" />
+    <p
+      v-if="importFailed"
+      class="alert error"
+    >
+      {{ importFailedText }}
+    </p>
+    <slot name="afterError" />
+  </div>
 </template>
 
 <script>
@@ -49,7 +64,7 @@ export default {
         if (event.target.files[0]) {
           // eslint-disable-next-line no-undef
           const reader = new FileReader()
-          reader.onload = ({target}) => {
+          reader.onload = ({ target }) => {
             try {
               const parsed = JSON.parse(target.result)
               const valid = this.validator(parsed)

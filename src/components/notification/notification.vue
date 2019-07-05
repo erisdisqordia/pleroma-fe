@@ -3,49 +3,102 @@
     v-if="notification.type === 'mention'"
     :compact="true"
     :statusoid="notification.status"
+  />
+  <div
+    v-else
+    class="non-mention"
+    :class="[userClass, { highlighted: userStyle }]"
+    :style="[ userStyle ]"
   >
-  </status>
-  <div class="non-mention" :class="[userClass, { highlighted: userStyle }]" :style="[ userStyle ]" v-else>
-    <a class='avatar-container' :href="notification.from_profile.statusnet_profile_url" @click.stop.prevent.capture="toggleUserExpanded">
-      <UserAvatar :compact="true" :betterShadow="betterShadow" :user="notification.from_profile"/>
+    <a
+      class="avatar-container"
+      :href="notification.from_profile.statusnet_profile_url"
+      @click.stop.prevent.capture="toggleUserExpanded"
+    >
+      <UserAvatar
+        :compact="true"
+        :better-shadow="betterShadow"
+        :user="notification.from_profile"
+      />
     </a>
-    <div class='notification-right'>
-      <UserCard :user="getUser(notification)" :rounded="true" :bordered="true" v-if="userExpanded" />
+    <div class="notification-right">
+      <UserCard
+        v-if="userExpanded"
+        :user="getUser(notification)"
+        :rounded="true"
+        :bordered="true"
+      />
       <span class="notification-details">
         <div class="name-and-action">
-          <span class="username" v-if="!!notification.from_profile.name_html" :title="'@'+notification.from_profile.screen_name" v-html="notification.from_profile.name_html"></span>
-          <span class="username" v-else :title="'@'+notification.from_profile.screen_name">{{ notification.from_profile.name }}</span>
+          <span
+            v-if="!!notification.from_profile.name_html"
+            class="username"
+            :title="'@'+notification.from_profile.screen_name"
+            v-html="notification.from_profile.name_html"
+          />
+          <span
+            v-else
+            class="username"
+            :title="'@'+notification.from_profile.screen_name"
+          >{{ notification.from_profile.name }}</span>
           <span v-if="notification.type === 'like'">
-            <i class="fa icon-star lit"></i>
-            <small>{{$t('notifications.favorited_you')}}</small>
+            <i class="fa icon-star lit" />
+            <small>{{ $t('notifications.favorited_you') }}</small>
           </span>
           <span v-if="notification.type === 'repeat'">
-            <i class="fa icon-retweet lit" :title="$t('tool_tip.repeat')"></i>
-            <small>{{$t('notifications.repeated_you')}}</small>
+            <i
+              class="fa icon-retweet lit"
+              :title="$t('tool_tip.repeat')"
+            />
+            <small>{{ $t('notifications.repeated_you') }}</small>
           </span>
           <span v-if="notification.type === 'follow'">
-            <i class="fa icon-user-plus lit"></i>
-            <small>{{$t('notifications.followed_you')}}</small>
+            <i class="fa icon-user-plus lit" />
+            <small>{{ $t('notifications.followed_you') }}</small>
           </span>
         </div>
-        <div class="timeago" v-if="notification.type === 'follow'">
+        <div
+          v-if="notification.type === 'follow'"
+          class="timeago"
+        >
           <span class="faint">
-            <Timeago :time="notification.created_at" :auto-update="240"></Timeago>
+            <Timeago
+              :time="notification.created_at"
+              :auto-update="240"
+            />
           </span>
         </div>
-        <div class="timeago" v-else>
-          <router-link v-if="notification.status" :to="{ name: 'conversation', params: { id: notification.status.id } }" class="faint-link">
-            <Timeago :time="notification.created_at" :auto-update="240"></Timeago>
+        <div
+          v-else
+          class="timeago"
+        >
+          <router-link
+            v-if="notification.status"
+            :to="{ name: 'conversation', params: { id: notification.status.id } }"
+            class="faint-link"
+          >
+            <Timeago
+              :time="notification.created_at"
+              :auto-update="240"
+            />
           </router-link>
         </div>
       </span>
-      <div class="follow-text" v-if="notification.type === 'follow'">
+      <div
+        v-if="notification.type === 'follow'"
+        class="follow-text"
+      >
         <router-link :to="userProfileLink(notification.from_profile)">
-          @{{notification.from_profile.screen_name}}
+          @{{ notification.from_profile.screen_name }}
         </router-link>
       </div>
       <template v-else>
-        <status class="faint" :compact="true" :statusoid="notification.action" :noHeading="true"></status>
+        <status
+          class="faint"
+          :compact="true"
+          :statusoid="notification.action"
+          :no-heading="true"
+        />
       </template>
     </div>
   </div>

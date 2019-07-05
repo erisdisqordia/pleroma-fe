@@ -3,19 +3,22 @@
     <div class="panel panel-default base01-background">
       <div class="panel-heading timeline-heading base02-background base04">
         <div class="title">
-          {{$t('who_to_follow.who_to_follow')}}
+          {{ $t('who_to_follow.who_to_follow') }}
         </div>
       </div>
       <div class="who-to-follow">
-        <p v-for="user in usersToFollow" class="who-to-follow-items">
-          <img v-bind:src="user.img" />
-            <router-link v-bind:to="userProfileLink(user.id, user.name)">
-              {{user.name}}
-            </router-link><br />
+        <p
+          v-for="user in usersToFollow"
+          class="who-to-follow-items"
+        >
+          <img :src="user.img">
+          <router-link :to="userProfileLink(user.id, user.name)">
+            {{ user.name }}
+          </router-link><br>
         </p>
         <p class="who-to-follow-more">
           <router-link :to="{ name: 'who-to-follow' }">
-            {{$t('who_to_follow.more')}}
+            {{ $t('who_to_follow.more') }}
           </router-link>
         </p>
       </div>

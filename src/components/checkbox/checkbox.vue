@@ -1,8 +1,13 @@
 <template>
   <label class="checkbox">
-    <input type="checkbox" :checked="checked" @change="$emit('change', $event.target.checked)" :indeterminate.prop="indeterminate">
+    <input
+      type="checkbox"
+      :checked="checked"
+      :indeterminate.prop="indeterminate"
+      @change="$emit('change', $event.target.checked)"
+    >
     <i class="checkbox-indicator" />
-    <span v-if="!!$slots.default"><slot></slot></span>
+    <span v-if="!!$slots.default"><slot /></span>
   </label>
 </template>
 

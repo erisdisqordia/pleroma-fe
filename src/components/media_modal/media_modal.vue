@@ -1,25 +1,33 @@
 <template>
-  <div class="modal-view media-modal-view" v-if="showing" @click.prevent="hide">
-    <img class="modal-image" v-if="type === 'image'" :src="currentMedia.url"></img>
-    <VideoAttachment
+  <div
+    v-if="showing"
+    class="modal-view media-modal-view"
+    @click.prevent="hide"
+  >
+    <img
+      v-if="type === 'image'"
       class="modal-image"
+      :src="currentMedia.url"
+    ></img>
+    <VideoAttachment
       v-if="type === 'video'"
+      class="modal-image"
       :attachment="currentMedia"
       :controls="true"
-      @click.stop.native="">
-    </VideoAttachment>
+      @click.stop.native=""
+    />
     <button
+      v-if="canNavigate"
       :title="$t('media_modal.previous')"
       class="modal-view-button-arrow modal-view-button-arrow--prev"
-      v-if="canNavigate"
       @click.stop.prevent="goPrev"
     >
       <i class="icon-left-open arrow-icon" />
     </button>
     <button
+      v-if="canNavigate"
       :title="$t('media_modal.next')"
       class="modal-view-button-arrow modal-view-button-arrow--next"
-      v-if="canNavigate"
       @click.stop.prevent="goNext"
     >
       <i class="icon-right-open arrow-icon" />

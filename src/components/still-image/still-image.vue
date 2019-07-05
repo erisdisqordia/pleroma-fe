@@ -1,7 +1,19 @@
 <template>
-  <div class='still-image' :class='{ animated: animated }' >
-    <canvas ref="canvas" v-if="animated"></canvas>
-    <img ref="src" :src="src" :referrerpolicy="referrerpolicy" v-on:load="onLoad" @error="onError"/>
+  <div
+    class="still-image"
+    :class="{ animated: animated }"
+  >
+    <canvas
+      v-if="animated"
+      ref="canvas"
+    />
+    <img
+      ref="src"
+      :src="src"
+      :referrerpolicy="referrerpolicy"
+      @load="onLoad"
+      @error="onError"
+    >
   </div>
 </template>
 

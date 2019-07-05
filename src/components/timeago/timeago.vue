@@ -1,5 +1,8 @@
 <template>
-  <time :datetime="time" :title="localeDateString">
+  <time
+    :datetime="time"
+    :title="localeDateString"
+  >
     {{ $t(relativeTime.key, [relativeTime.num]) }}
   </time>
 </template>
@@ -16,18 +19,18 @@ export default {
       interval: null
     }
   },
-  created () {
-    this.refreshRelativeTimeObject()
-  },
-  destroyed () {
-    clearTimeout(this.interval)
-  },
   computed: {
     localeDateString () {
       return typeof this.time === 'string'
         ? new Date(Date.parse(this.time)).toLocaleString()
         : this.time.toLocaleString()
     }
+  },
+  created () {
+    this.refreshRelativeTimeObject()
+  },
+  destroyed () {
+    clearTimeout(this.interval)
   },
   methods: {
     refreshRelativeTimeObject () {

@@ -50,7 +50,7 @@ module.exports = {
         ws: true
       },
       '/oauth/revoke': {
-        target: 'http://localhost:4000/',
+        target,
         changeOrigin: true,
         cookieDomainRewrite: 'localhost'
       }

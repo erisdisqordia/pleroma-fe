@@ -26,8 +26,8 @@
       :in-conversation="isExpanded"
       :highlight="getHighlight()"
       :replies="getReplies(status.id)"
-      @goto="setHighlight"
       class="status-fadein panel-body"
+      @goto="setHighlight"
       @toggleExpanded="toggleExpanded"
     />
   </div>

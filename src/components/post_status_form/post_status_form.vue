@@ -206,6 +206,7 @@
       <div class="attachments">
         <div
           v-for="file in newStatus.files"
+          :key="file.url"
           class="media-upload-wrapper"
         >
           <i
@@ -217,7 +218,7 @@
               v-if="type(file) === 'image'"
               class="thumbnail media-upload"
               :src="file.url"
-            ></img>
+            >
             <video
               v-if="type(file) === 'video'"
               :src="file.url"

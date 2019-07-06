@@ -15,12 +15,14 @@
           </router-link>
           <div class="user-summary">
             <div class="top-line">
+              <!-- eslint-disable vue/no-v-html -->
               <div
                 v-if="user.name_html"
                 :title="user.name"
                 class="user-name"
                 v-html="user.name_html"
               />
+              <!-- eslint-enable vue/no-v-html -->
               <div
                 v-else
                 :title="user.name"
@@ -237,12 +239,14 @@
           <span>{{ user.followers_count }}</span>
         </div>
       </div>
+      <!-- eslint-disable vue/no-v-html -->
       <p
         v-if="!hideBio && user.description_html"
         class="user-card-bio"
         @click.prevent="linkClicked"
         v-html="user.description_html"
       />
+      <!-- eslint-enable vue/no-v-html -->
       <p
         v-else-if="!hideBio"
         class="user-card-bio"

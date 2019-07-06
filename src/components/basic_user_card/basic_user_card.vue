@@ -25,11 +25,13 @@
         :title="user.name"
         class="basic-user-card-user-name"
       >
+        <!-- eslint-disable vue/no-v-html -->
         <span
           v-if="user.name_html"
           class="basic-user-card-user-name-value"
           v-html="user.name_html"
         />
+        <!-- eslint-enable vue/no-v-html -->
         <span
           v-else
           class="basic-user-card-user-name-value"

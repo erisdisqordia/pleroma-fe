@@ -24,6 +24,7 @@
                 >
                   <option
                     v-for="style in availableStyles"
+                    :key="style.name"
                     :value="style"
                     :style="{
                       backgroundColor: style[1] || style.theme.colors.bg,
@@ -463,6 +464,7 @@
                 >
                   <option
                     v-for="shadow in shadowsAvailable"
+                    :key="shadow"
                     :value="shadow"
                   >
                     {{ $t('settings.style.shadows.components.' + shadow) }}

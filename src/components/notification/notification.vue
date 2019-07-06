@@ -30,12 +30,14 @@
       />
       <span class="notification-details">
         <div class="name-and-action">
+          <!-- eslint-disable vue/no-v-html -->
           <span
             v-if="!!notification.from_profile.name_html"
             class="username"
             :title="'@'+notification.from_profile.screen_name"
             v-html="notification.from_profile.name_html"
           />
+          <!-- eslint-enable vue/no-v-html -->
           <span
             v-else
             class="username"

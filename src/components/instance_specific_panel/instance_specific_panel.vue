@@ -5,7 +5,9 @@
   >
     <div class="panel panel-default">
       <div class="panel-body">
+        <!-- eslint-disable vue/no-v-html -->
         <div v-html="instanceSpecificPanelContent" />
+        <!-- eslint-enable vue/no-v-html -->
       </div>
     </div>
   </div>

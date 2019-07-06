@@ -163,12 +163,6 @@ const makeMockEmojiMasto = (overrides = [{}]) => {
   ]
 }
 
-parseNotification
-parseUser
-parseStatus
-makeMockStatusQvitter
-makeMockUserQvitter
-
 describe('API Entities normalizer', () => {
   describe('parseStatus', () => {
     describe('QVitter preprocessing', () => {

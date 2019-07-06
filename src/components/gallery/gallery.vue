@@ -4,7 +4,8 @@
     style="width: 100%;"
   >
     <div
-      v-for="row in rows"
+      v-for="(row, index) in rows"
+      :key="index"
       class="gallery-row"
       :style="rowHeight(row.length)"
       :class="{ 'contain-fit': useContainFit, 'cover-fit': !useContainFit }"

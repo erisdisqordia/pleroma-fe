@@ -97,8 +97,10 @@
         <img :src="attachment.thumb_url">
       </div>
       <div class="text">
+        <!-- eslint-disable vue/no-v-html -->
         <h1><a :href="attachment.url">{{ attachment.oembed.title }}</a></h1>
         <div v-html="attachment.oembed.oembedHTML" />
+        <!-- eslint-enabled vue/no-v-html -->
       </div>
     </div>
   </div>

@@ -9,6 +9,7 @@
       <div class="who-to-follow">
         <p
           v-for="user in usersToFollow"
+          :key="user.id"
           class="who-to-follow-items"
         >
           <img :src="user.img">

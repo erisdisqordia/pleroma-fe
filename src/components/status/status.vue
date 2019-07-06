@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable vue/no-v-html -->
   <div
     v-if="!hideStatus"
     class="status-el"
@@ -205,18 +206,20 @@
                   v-if="replies && replies.length"
                   class="faint"
                 >{{ $t('status.replies_list') }}</span>
-                <span
-                  v-for="reply in replies"
-                  v-if="replies"
-                  class="reply-link faint"
-                >
-                  <a
-                    href="#"
-                    @click.prevent="gotoOriginal(reply.id)"
-                    @mouseenter="replyEnter(reply.id, $event)"
-                    @mouseout="replyLeave()"
-                  >{{ reply.name }}</a>
-                </span>
+                <template v-if="replies">
+                  <span
+                    v-for="reply in replies"
+                    :key="reply.id"
+                    class="reply-link faint"
+                  >
+                    <a
+                      href="#"
+                      @click.prevent="gotoOriginal(reply.id)"
+                      @mouseenter="replyEnter(reply.id, $event)"
+                      @mouseout="replyLeave()"
+                    >{{ reply.name }}</a>
+                  </span>
+                </template>
               </div>
             </div>
           </div>
@@ -422,6 +425,7 @@
       </div>
     </template>
   </div>
+<!-- eslint-enable vue/no-v-html -->
 </template>
 
 <script src="./status.js" ></script>

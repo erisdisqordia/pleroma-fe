@@ -77,6 +77,7 @@
           >
             <option
               v-for="unit in expiryUnits"
+              :key="unit"
               :value="unit"
             >
               {{ $t(`time.${unit}_short`, ['']) }}

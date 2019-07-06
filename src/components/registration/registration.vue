@@ -215,17 +215,22 @@
             </div>
           </div>
 
+          <!-- eslint-disable vue/no-v-html -->
           <div
             class="terms-of-service"
             v-html="termsOfService"
           />
+          <!-- eslint-enable vue/no-v-html -->
         </div>
         <div
           v-if="serverValidationErrors.length"
           class="form-group"
         >
           <div class="alert error">
-            <span v-for="error in serverValidationErrors">{{ error }}</span>
+            <span
+              v-for="error in serverValidationErrors"
+              :key="error"
+            >{{ error }}</span>
           </div>
         </div>
       </form>

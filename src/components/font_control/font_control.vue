@@ -35,6 +35,7 @@
       >
         <option
           v-for="option in availableOptions"
+          :key="option"
           :value="option"
         >
           {{ option === 'custom' ? $t('settings.style.fonts.custom') : option }}

@@ -23,7 +23,7 @@
         style="position: fixed; top: -100em"
         multiple="true"
         @change="change"
-      ></input>
+      >
     </label>
   </div>
 </template>

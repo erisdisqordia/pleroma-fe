@@ -393,7 +393,7 @@ const users = {
       }
     },
     async getCaptcha (store) {
-      return await store.rootState.api.backendInteractor.getCaptcha()
+      return store.rootState.api.backendInteractor.getCaptcha()
     },
 
     logout (store) {
@@ -451,9 +451,9 @@ const users = {
               // Authentication failed
               commit('endLogin')
               if (response.status === 401) {
-                reject('Wrong username or password')
+                reject(new Error('Wrong username or password'))
               } else {
-                reject('An error occurred, please try again')
+                reject(new Error('An error occurred, please try again'))
               }
             }
             commit('endLogin')
@@ -462,7 +462,7 @@ const users = {
           .catch((error) => {
             console.log(error)
             commit('endLogin')
-            reject('Failed to connect to server, try again')
+            reject(new Error('Failed to connect to server, try again'))
           })
       })
     }

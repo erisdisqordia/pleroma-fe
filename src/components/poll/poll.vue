@@ -60,7 +60,7 @@
       </div>
       <i18n :path="expired ? 'polls.expired' : 'polls.expires_in'">
         <Timeago
-          :time="this.expiresAt"
+          :time="expiresAt"
           :auto-update="60"
           :now-threshold="0"
         />

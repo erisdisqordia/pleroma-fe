@@ -9,7 +9,10 @@
         {{ $t('settings.mfa.recovery_codes_warning') }}
       </p>
       <ul class="backup-codes">
-        <li v-for="code in backupCodes.codes">
+        <li
+          v-for="code in backupCodes.codes"
+          :key="code"
+        >
           {{ code }}
         </li>
       </ul>

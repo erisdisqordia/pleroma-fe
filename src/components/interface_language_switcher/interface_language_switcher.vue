@@ -13,6 +13,7 @@
       >
         <option
           v-for="(langCode, i) in languageCodes"
+          :key="langCode"
           :value="langCode"
         >
           {{ languageNames[i] }}

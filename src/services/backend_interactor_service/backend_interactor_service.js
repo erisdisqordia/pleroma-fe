@@ -63,26 +63,32 @@ const backendInteractorService = credentials => {
     return notificationsFetcher.startFetching({ store, credentials })
   }
 
+  // eslint-disable-next-line camelcase
   const tagUser = ({ screen_name }, tag) => {
     return apiService.tagUser({ screen_name, tag, credentials })
   }
 
+  // eslint-disable-next-line camelcase
   const untagUser = ({ screen_name }, tag) => {
     return apiService.untagUser({ screen_name, tag, credentials })
   }
 
+  // eslint-disable-next-line camelcase
   const addRight = ({ screen_name }, right) => {
     return apiService.addRight({ screen_name, right, credentials })
   }
 
+  // eslint-disable-next-line camelcase
   const deleteRight = ({ screen_name }, right) => {
     return apiService.deleteRight({ screen_name, right, credentials })
   }
 
+  // eslint-disable-next-line camelcase
   const setActivationStatus = ({ screen_name }, status) => {
     return apiService.setActivationStatus({ screen_name, status, credentials })
   }
 
+  // eslint-disable-next-line camelcase
   const deleteUser = ({ screen_name }) => {
     return apiService.deleteUser({ screen_name, credentials })
   }

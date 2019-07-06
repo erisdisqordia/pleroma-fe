@@ -72,6 +72,7 @@
           >
             <option
               v-for="(shadow, index) in cValue"
+              :key="index"
               :value="index"
             >
               {{ $t('settings.style.shadows.shadow_id', { value: index }) }}

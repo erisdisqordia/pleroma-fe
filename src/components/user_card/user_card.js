@@ -73,12 +73,12 @@ export default {
     userHighlightType: {
       get () {
         const data = this.$store.state.config.highlight[this.user.screen_name]
-        return data && data.type || 'disabled'
+        return (data && data.type) || 'disabled'
       },
       set (type) {
         const data = this.$store.state.config.highlight[this.user.screen_name]
         if (type !== 'disabled') {
-          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: data && data.color || '#FFFFFF', type })
+          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: (data && data.color) || '#FFFFFF', type })
         } else {
           this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: undefined })
         }

@@ -11,7 +11,7 @@
         class="card-image"
         :class="{ 'small-image': size === 'small' }"
       >
-        <img :src="card.image"></img>
+        <img :src="card.image">
       </div>
       <div class="card-content">
         <span class="card-host faint">{{ card.provider_name }}</span>

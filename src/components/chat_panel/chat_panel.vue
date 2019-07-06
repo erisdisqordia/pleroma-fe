@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="!this.collapsed || !this.floating"
+    v-if="!collapsed || !floating"
     class="chat-panel"
   >
     <div class="panel panel-default">

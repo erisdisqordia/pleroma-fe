@@ -8,7 +8,7 @@
       v-if="type === 'image'"
       class="modal-image"
       :src="currentMedia.url"
-    ></img>
+    >
     <VideoAttachment
       v-if="type === 'video'"
       class="modal-image"

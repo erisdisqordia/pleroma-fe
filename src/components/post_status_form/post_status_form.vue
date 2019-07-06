@@ -58,150 +58,30 @@
           <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
           <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
         </p>
-        <EmojiInput
-          v-if="newStatus.spoilerText || alwaysShowSubject"
-          v-model="newStatus.spoilerText"
-          :suggest="emojiSuggestor"
-          class="form-control"
-        >
-          <input
+      </EmojiInput>
+      <div class="visibility-tray">
+        <scope-selector
+          :showAll="showAllScopes"
+          :userDefault="userDefaultScope"
+          :originalScope="copyMessageScope"
+          :initialScope="newStatus.visibility"
+          :onScopeChange="changeVis"/>
 
-            v-model="newStatus.spoilerText"
-            type="text"
-            :placeholder="$t('post_status.content_warning')"
-            class="form-post-subject"
-          >
-        </EmojiInput>
-        <EmojiInput
-          v-model="newStatus.status"
-          :suggest="emojiUserSuggestor"
-          class="form-control main-input"
-        >
-          <textarea
-            ref="textarea"
-            v-model="newStatus.status"
-            :placeholder="$t('post_status.default')"
-            rows="1"
-            :disabled="posting"
-            class="form-post-body"
-            @keydown.meta.enter="postStatus(newStatus)"
-            @keyup.ctrl.enter="postStatus(newStatus)"
-            @drop="fileDrop"
-            @dragover.prevent="fileDrag"
-            @input="resize"
-            @paste="paste"
-          />
-          <p
-            v-if="hasStatusLengthLimit"
-            class="character-counter faint"
-            :class="{ error: isOverLengthLimit }"
-          >
-            {{ charactersLeft }}
-          </p>
-        </EmojiInput>
-        <div class="visibility-tray">
-          <div
-            v-if="postFormats.length > 1"
-            class="text-format"
-          >
-            <label
-              for="post-content-type"
-              class="select"
-            >
-              <select
-                id="post-content-type"
-                v-model="newStatus.contentType"
-                class="form-control"
-              >
-                <option
-                  v-for="postFormat in postFormats"
-                  :key="postFormat"
-                  :value="postFormat"
-                >
-                  {{ $t(`post_status.content_type["${postFormat}"]`) }}
-                </option>
-              </select>
-              <i class="icon-down-open" />
-            </label>
-          </div>
-          <div
-            v-if="postFormats.length === 1"
-            class="text-format"
-          >
-            <span class="only-format">
-              {{ $t(`post_status.content_type["${postFormats[0]}"]`) }}
-            </span>
-          </div>
-
-          <scope-selector
-            :show-all="showAllScopes"
-            :user-default="userDefaultScope"
-            :original-scope="copyMessageScope"
-            :initial-scope="newStatus.visibility"
-            :on-scope-change="changeVis"
-          />
+        <div class="text-format" v-if="postFormats.length > 1">
+          <label for="post-content-type" class="select">
+            <select id="post-content-type" v-model="newStatus.contentType" class="form-control">
+              <option v-for="postFormat in postFormats" :key="postFormat" :value="postFormat">
+                {{$t(`post_status.content_type["${postFormat}"]`)}}
+              </option>
+            </select>
+            <i class="icon-down-open"></i>
+          </label>
         </div>
-      </div>
-      <poll-form
-        v-if="pollsAvailable"
-        ref="pollForm"
-        :visible="pollFormVisible"
-        @update-poll="setPoll"
-      />
-      <div class="form-bottom">
-        <div class="form-bottom-left">
-          <media-upload
-            ref="mediaUpload"
-            :drop-files="dropFiles"
-            @uploading="disableSubmit"
-            @uploaded="addMediaFile"
-            @upload-failed="uploadFailed"
-          />
-          <div
-            v-if="pollsAvailable"
-            class="poll-icon"
-          >
-            <i
-              :title="$t('polls.add_poll')"
-              class="icon-chart-bar btn btn-default"
-              :class="pollFormVisible && 'selected'"
-              @click="togglePollForm"
-            />
-          </div>
+        <div class="text-format" v-if="postFormats.length === 1 && postFormats[0] !== 'text/plain'">
+          <span class="only-format">
+            {{$t(`post_status.content_type["${postFormats[0]}"]`)}}
+          </span>
         </div>
-
-        <button
-          v-if="posting"
-          disabled
-          class="btn btn-default"
-        >
-          {{ $t('post_status.posting') }}
-        </button>
-        <button
-          v-else-if="isOverLengthLimit"
-          disabled
-          class="btn btn-default"
-        >
-          {{ $t('general.submit') }}
-        </button>
-        <button
-          v-else
-          :disabled="submitDisabled"
-          type="submit"
-          class="btn btn-default"
-        >
-          {{ $t('general.submit') }}
-        </button>
-      </div>
-      <div
-        v-if="error"
-        class="alert error"
-      >
-        Error: {{ error }}
-        <i
-          class="button-icon icon-cancel"
-          @click="clearError"
-        />
       </div>
       <div class="attachments">
         <div
@@ -276,7 +156,6 @@
   .visibility-tray {
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
     padding-top: 5px;
   }
 }
@@ -323,6 +202,7 @@
   .icon-chart-bar {
     cursor: pointer;
   }
+
 
   .error {
     text-align: center;

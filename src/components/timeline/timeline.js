@@ -86,7 +86,7 @@ const Timeline = {
       if (this.newStatusCount === 0) return
 
       if (this.timeline.flushMarker !== 0) {
-        this.$store.commit('clearTimeline', { timeline: this.timelineName })
+        this.$store.commit('clearTimeline', { timeline: this.timelineName, excludeUserId: true })
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
         this.fetchOlderStatuses()
       } else {

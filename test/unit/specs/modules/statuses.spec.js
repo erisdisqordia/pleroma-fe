@@ -258,11 +258,11 @@ describe('Statuses module', () => {
   })
 
   describe('clearTimeline', () => {
-    it('keeps userId when clearing user timeline', () => {
+    it('keeps userId when clearing user timeline when excludeUserId param is true', () => {
       const state = defaultState()
       state.timelines.user.userId = 123
 
-      mutations.clearTimeline(state, { timeline: 'user' })
+      mutations.clearTimeline(state, { timeline: 'user', excludeUserId: true })
 
       expect(state.timelines.user.userId).to.eql(123)
     })

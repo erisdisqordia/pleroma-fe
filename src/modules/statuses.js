@@ -395,8 +395,9 @@ export const mutations = {
       state[key] = value
     })
   },
-  clearTimeline (state, { timeline }) {
-    state.timelines[timeline] = emptyTl(state.timelines[timeline].userId)
+  clearTimeline (state, { timeline, excludeUserId = false }) {
+    const userId = excludeUserId ? state.timelines[timeline].userId : undefined
+    state.timelines[timeline] = emptyTl(userId)
   },
   clearNotifications (state) {
     state.notifications = emptyNotifications()

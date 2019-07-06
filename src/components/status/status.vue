@@ -453,6 +453,7 @@ $status-margin: 0.75em;
   .status-content {
     font-family: var(--postFont, sans-serif);
     line-height: 1.4em;
+    white-space: pre-wrap;
 
     img, video {
       max-width: 100%;

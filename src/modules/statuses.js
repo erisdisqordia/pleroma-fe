@@ -430,6 +430,10 @@ export const mutations = {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.pinned = status.pinned
   },
+  setMuted (state, status) {
+    const newStatus = state.allStatusesObject[status.id]
+    newStatus.muted = status.muted
+  },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
 
@@ -554,6 +558,14 @@ const statuses = {
     unpinStatus ({ rootState, commit }, statusId) {
       rootState.api.backendInteractor.unpinOwnStatus(statusId)
         .then((status) => commit('setPinned', status))
+    },
+    muteConversation ({ rootState, commit }, statusId) {
+      return rootState.api.backendInteractor.muteConversation(statusId)
+        .then((status) => commit('setMuted', status))
+    },
+    unmuteConversation ({ rootState, commit }, statusId) {
+      return rootState.api.backendInteractor.unmuteConversation(statusId)
+        .then((status) => commit('setMuted', status))
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...

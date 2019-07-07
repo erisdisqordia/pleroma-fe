@@ -34,6 +34,18 @@ const ExtraButtons = {
         .then(() => this.$emit('onSuccess'))
         .catch(err => this.$emit('onError', err.error.error))
     },
+    muteConversation () {
+      this.refreshPopper()
+      this.$store.dispatch('muteConversation', this.status.id)
+        .then(() => this.$emit('onSuccess'))
+        .catch(err => this.$emit('onError', err.error.error))
+    },
+    unmuteConversation () {
+      this.refreshPopper()
+      this.$store.dispatch('unmuteConversation', this.status.id)
+        .then(() => this.$emit('onSuccess'))
+        .catch(err => this.$emit('onError', err.error.error))
+    },
     refreshPopper () {
       this.showPopper = false
       this.showDropDown = false
@@ -54,9 +66,6 @@ const ExtraButtons = {
     },
     canPin () {
       return this.ownStatus && (this.status.visibility === 'public' || this.status.visibility === 'unlisted')
-    },
-    enabled () {
-      return this.canPin || this.canDelete
     }
   }
 }

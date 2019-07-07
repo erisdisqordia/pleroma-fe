@@ -282,6 +282,13 @@ describe('API Entities normalizer', () => {
 
       expect(parsedUser).to.have.property('description_html').that.contains('<img')
     })
+
+    it('adds hide_follows and hide_followers user settings', () => {
+      const user = makeMockUserMasto({ pleroma: { hide_followers: true, hide_follows: false } })
+
+      expect(parseUser(user)).to.have.property('hide_followers', true)
+      expect(parseUser(user)).to.have.property('hide_follows', false)
+    })
   })
 
   // We currently use QvitterAPI notifications only, and especially due to MastoAPI lacking is_seen, support for MastoAPI

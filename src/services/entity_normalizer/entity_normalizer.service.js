@@ -70,6 +70,9 @@ export const parseUser = (data) => {
         output.muted = relationship.muting
       }
 
+      output.hide_follows = data.pleroma.hide_follows
+      output.hide_followers = data.pleroma.hide_followers
+
       output.rights = {
         moderator: data.pleroma.is_moderator,
         admin: data.pleroma.is_admin

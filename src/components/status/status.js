@@ -173,12 +173,13 @@ const Status = {
       if (this.status.type === 'retweet') {
         return false
       }
-      var checkFollowing = this.$store.state.config.replyVisibility === 'following'
+      const checkFollowing = this.$store.state.config.replyVisibility === 'following'
       for (var i = 0; i < this.status.attentions.length; ++i) {
         if (this.status.user.id === this.status.attentions[i].id) {
           continue
         }
-        if (checkFollowing && this.$store.getters.findUser(this.status.attentions[i].id).following) {
+        const taggedUser = this.$store.getters.findUser(this.status.attentions[i].id)
+        if (checkFollowing && taggedUser && taggedUser.following) {
           return false
         }
         if (this.status.attentions[i].id === this.$store.state.users.currentUser.id) {

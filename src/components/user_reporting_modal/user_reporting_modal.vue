@@ -1,45 +1,75 @@
 <template>
-<div class="modal-view" @click="closeModal" v-if="isOpen">
-  <div class="user-reporting-panel panel" @click.stop="">
-    <div class="panel-heading">
-      <div class="title">{{$t('user_reporting.title', [user.screen_name])}}</div>
-    </div>
-    <div class="panel-body">
-      <div class="user-reporting-panel-left">
-        <div>
-          <p>{{$t('user_reporting.add_comment_description')}}</p>
-          <textarea
-            v-model="comment"
-            class="form-control"
-            :placeholder="$t('user_reporting.additional_comments')"
-            rows="1"
-            @input="resize"
-          />
-        </div>
-        <div v-if="!user.is_local">
-          <p>{{$t('user_reporting.forward_description')}}</p>
-          <Checkbox v-model="forward">{{$t('user_reporting.forward_to', [remoteInstance])}}</Checkbox>
-        </div>
-        <div>
-          <button class="btn btn-default" @click="reportUser" :disabled="processing">{{$t('user_reporting.submit')}}</button>
-          <div class="alert error" v-if="error">
-            {{$t('user_reporting.generic_error')}}
-          </div>
+  <div
+    v-if="isOpen"
+    class="modal-view"
+    @click="closeModal"
+  >
+    <div
+      class="user-reporting-panel panel"
+      @click.stop=""
+    >
+      <div class="panel-heading">
+        <div class="title">
+          {{ $t('user_reporting.title', [user.screen_name]) }}
         </div>
       </div>
-      <div class="user-reporting-panel-right">
-        <List :items="statuses">
-          <template slot="item" slot-scope="{item}">
-            <div class="status-fadein user-reporting-panel-sitem">
-              <Status :inConversation="false" :focused="false" :statusoid="item" />
-              <Checkbox :checked="isChecked(item.id)" @change="checked => toggleStatus(checked, item.id)" />
+      <div class="panel-body">
+        <div class="user-reporting-panel-left">
+          <div>
+            <p>{{ $t('user_reporting.add_comment_description') }}</p>
+            <textarea
+              v-model="comment"
+              class="form-control"
+              :placeholder="$t('user_reporting.additional_comments')"
+              rows="1"
+              @input="resize"
+            />
+          </div>
+          <div v-if="!user.is_local">
+            <p>{{ $t('user_reporting.forward_description') }}</p>
+            <Checkbox v-model="forward">
+              {{ $t('user_reporting.forward_to', [remoteInstance]) }}
+            </Checkbox>
+          </div>
+          <div>
+            <button
+              class="btn btn-default"
+              :disabled="processing"
+              @click="reportUser"
+            >
+              {{ $t('user_reporting.submit') }}
+            </button>
+            <div
+              v-if="error"
+              class="alert error"
+            >
+              {{ $t('user_reporting.generic_error') }}
             </div>
-          </template>
-        </List>
+          </div>
+        </div>
+        <div class="user-reporting-panel-right">
+          <List :items="statuses">
+            <template
+              slot="item"
+              slot-scope="{item}"
+            >
+              <div class="status-fadein user-reporting-panel-sitem">
+                <Status
+                  :in-conversation="false"
+                  :focused="false"
+                  :statusoid="item"
+                />
+                <Checkbox
+                  :checked="isChecked(item.id)"
+                  @change="checked => toggleStatus(checked, item.id)"
+                />
+              </div>
+            </template>
+          </List>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script src="./user_reporting_modal.js"></script>

@@ -1,24 +1,33 @@
 <template>
-  <div class="poll" v-bind:class="containerClass">
+  <div
+    class="poll"
+    :class="containerClass"
+  >
     <div
-      class="poll-option"
       v-for="(option, index) in options"
       :key="index"
+      class="poll-option"
     >
-      <div v-if="showResults" :title="resultTitle(option)" class="option-result">
+      <div
+        v-if="showResults"
+        :title="resultTitle(option)"
+        class="option-result"
+      >
         <div class="option-result-label">
           <span class="result-percentage">
-            {{percentageForOption(option.votes_count)}}%
+            {{ percentageForOption(option.votes_count) }}%
           </span>
-          <span>{{option.title}}</span>
+          <span>{{ option.title }}</span>
         </div>
         <div
           class="result-fill"
           :style="{ 'width': `${percentageForOption(option.votes_count)}%` }"
-        >     
-        </div> 
+        />
       </div>
-      <div v-else @click="activateOption(index)">
+      <div
+        v-else
+        @click="activateOption(index)"
+      >
         <input
           v-if="poll.multiple"
           type="checkbox"
@@ -32,7 +41,7 @@
           :value="index"
         >
         <label class="option-vote">
-          <div>{{option.title}}</div>
+          <div>{{ option.title }}</div>
         </label>
       </div>
     </div>
@@ -41,16 +50,20 @@
         v-if="!showResults"
         class="btn btn-default poll-vote-button"
         type="button"
-        @click="vote"
         :disabled="isDisabled"
+        @click="vote"
       >
-        {{$t('polls.vote')}}
+        {{ $t('polls.vote') }}
       </button>
       <div class="total">
-        {{totalVotesCount}} {{ $t("polls.votes") }}&nbsp;·&nbsp;
+        {{ totalVotesCount }} {{ $t("polls.votes") }}&nbsp;·&nbsp;
       </div>
       <i18n :path="expired ? 'polls.expired' : 'polls.expires_in'">
-        <Timeago :time="this.expiresAt" :auto-update="60" :now-threshold="0" />
+        <Timeago
+          :time="expiresAt"
+          :auto-update="60"
+          :now-threshold="0"
+        />
       </i18n>
     </div>
   </div>

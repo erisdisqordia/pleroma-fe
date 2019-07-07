@@ -1,10 +1,10 @@
 import { defaultState, mutations, prepareStatus } from '../../../../src/modules/statuses.js'
 
 // eslint-disable-next-line camelcase
-const makeMockStatus = ({id, text, type = 'status'}) => {
+const makeMockStatus = ({ id, text, type = 'status' }) => {
   return {
     id,
-    user: {id: '0'},
+    user: { id: '0' },
     name: 'status',
     text: text || `Text number ${id}`,
     fave_num: 0,
@@ -17,7 +17,7 @@ const makeMockStatus = ({id, text, type = 'status'}) => {
 describe('Statuses module', () => {
   describe('prepareStatus', () => {
     it('sets deleted flag to false', () => {
-      const aStatus = makeMockStatus({id: '1', text: 'Hello oniichan'})
+      const aStatus = makeMockStatus({ id: '1', text: 'Hello oniichan' })
       expect(prepareStatus(aStatus).deleted).to.eq(false)
     })
   })
@@ -25,7 +25,7 @@ describe('Statuses module', () => {
   describe('addNewStatuses', () => {
     it('adds the status to allStatuses and to the given timeline', () => {
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
+      const status = makeMockStatus({ id: '1' })
 
       mutations.addNewStatuses(state, { statuses: [status], timeline: 'public' })
 
@@ -37,7 +37,7 @@ describe('Statuses module', () => {
 
     it('counts the status as new if it has not been seen on this timeline', () => {
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
+      const status = makeMockStatus({ id: '1' })
 
       mutations.addNewStatuses(state, { statuses: [status], timeline: 'public' })
       mutations.addNewStatuses(state, { statuses: [status], timeline: 'friends' })
@@ -55,7 +55,7 @@ describe('Statuses module', () => {
 
     it('add the statuses to allStatuses if no timeline is given', () => {
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
+      const status = makeMockStatus({ id: '1' })
 
       mutations.addNewStatuses(state, { statuses: [status] })
 
@@ -67,7 +67,7 @@ describe('Statuses module', () => {
 
     it('adds the status to allStatuses and to the given timeline, directly visible', () => {
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
+      const status = makeMockStatus({ id: '1' })
 
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
 
@@ -79,10 +79,10 @@ describe('Statuses module', () => {
 
     it('removes statuses by tag on deletion', () => {
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
-      const otherStatus = makeMockStatus({id: '3'})
+      const status = makeMockStatus({ id: '1' })
+      const otherStatus = makeMockStatus({ id: '3' })
       status.uri = 'xxx'
-      const deletion = makeMockStatus({id: '2', type: 'deletion'})
+      const deletion = makeMockStatus({ id: '2', type: 'deletion' })
       deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
       deletion.uri = 'xxx'
 
@@ -97,8 +97,8 @@ describe('Statuses module', () => {
 
     it('does not update the maxId when the noIdUpdate flag is set', () => {
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
-      const secondStatus = makeMockStatus({id: '2'})
+      const status = makeMockStatus({ id: '1' })
+      const secondStatus = makeMockStatus({ id: '2' })
 
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
       expect(state.timelines.public.maxId).to.eql('1')
@@ -111,10 +111,10 @@ describe('Statuses module', () => {
 
     it('keeps a descending by id order in timeline.visibleStatuses and timeline.statuses', () => {
       const state = defaultState()
-      const nonVisibleStatus = makeMockStatus({id: '1'})
-      const status = makeMockStatus({id: '3'})
-      const statusTwo = makeMockStatus({id: '2'})
-      const statusThree = makeMockStatus({id: '4'})
+      const nonVisibleStatus = makeMockStatus({ id: '1' })
+      const status = makeMockStatus({ id: '3' })
+      const statusTwo = makeMockStatus({ id: '2' })
+      const statusThree = makeMockStatus({ id: '4' })
 
       mutations.addNewStatuses(state, { statuses: [nonVisibleStatus], showImmediately: false, timeline: 'public' })
 
@@ -131,9 +131,9 @@ describe('Statuses module', () => {
 
     it('splits retweets from their status and links them', () => {
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
-      const retweet = makeMockStatus({id: '2', type: 'retweet'})
-      const modStatus = makeMockStatus({id: '1', text: 'something else'})
+      const status = makeMockStatus({ id: '1' })
+      const retweet = makeMockStatus({ id: '2', type: 'retweet' })
+      const modStatus = makeMockStatus({ id: '1', text: 'something else' })
 
       retweet.retweeted_status = status
 
@@ -156,8 +156,8 @@ describe('Statuses module', () => {
 
     it('replaces existing statuses with the same id', () => {
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
-      const modStatus = makeMockStatus({id: '1', text: 'something else'})
+      const status = makeMockStatus({ id: '1' })
+      const modStatus = makeMockStatus({ id: '1', text: 'something else' })
 
       // Add original status
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
@@ -173,9 +173,9 @@ describe('Statuses module', () => {
 
     it('replaces existing statuses with the same id, coming from a retweet', () => {
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
-      const modStatus = makeMockStatus({id: '1', text: 'something else'})
-      const retweet = makeMockStatus({id: '2', type: 'retweet'})
+      const status = makeMockStatus({ id: '1' })
+      const modStatus = makeMockStatus({ id: '1', text: 'something else' })
+      const retweet = makeMockStatus({ id: '2', type: 'retweet' })
       retweet.retweeted_status = modStatus
 
       // Add original status
@@ -194,7 +194,7 @@ describe('Statuses module', () => {
 
     it('handles favorite actions', () => {
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
+      const status = makeMockStatus({ id: '1' })
 
       const favorite = {
         id: '2',
@@ -272,14 +272,14 @@ describe('Statuses module', () => {
     it('removes a notification when the notice gets removed', () => {
       const user = { id: '1' }
       const state = defaultState()
-      const status = makeMockStatus({id: '1'})
-      const otherStatus = makeMockStatus({id: '3'})
-      const mentionedStatus = makeMockStatus({id: '2'})
+      const status = makeMockStatus({ id: '1' })
+      const otherStatus = makeMockStatus({ id: '3' })
+      const mentionedStatus = makeMockStatus({ id: '2' })
       mentionedStatus.attentions = [user]
       mentionedStatus.uri = 'xxx'
       otherStatus.attentions = [user]
 
-      const deletion = makeMockStatus({id: '4', type: 'deletion'})
+      const deletion = makeMockStatus({ id: '4', type: 'deletion' })
       deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
       deletion.uri = 'xxx'
 

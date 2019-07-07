@@ -1,20 +1,33 @@
 <template>
-  <div class="poll-form" v-if="visible">
-    <div class="poll-option" v-for="(option, index) in options" :key="index">
+  <div
+    v-if="visible"
+    class="poll-form"
+  >
+    <div
+      v-for="(option, index) in options"
+      :key="index"
+      class="poll-option"
+    >
       <div class="input-container">
         <input
+          :id="`poll-${index}`"
+          v-model="options[index]"
           class="poll-option-input"
           type="text"
           :placeholder="$t('polls.option')"
           :maxlength="maxLength"
-          :id="`poll-${index}`"
-          v-model="options[index]"
           @change="updatePollToParent"
           @keydown.enter.stop.prevent="nextOption(index)"
         >
       </div>
-      <div class="icon-container" v-if="options.length > 2">
-        <i class="icon-cancel" @click="deleteOption(index)"></i>
+      <div
+        v-if="options.length > 2"
+        class="icon-container"
+      >
+        <i
+          class="icon-cancel"
+          @click="deleteOption(index)"
+        />
       </div>
     </div>
     <a
@@ -26,34 +39,51 @@
       {{ $t("polls.add_option") }}
     </a>
     <div class="poll-type-expiry">
-      <div class="poll-type" :title="$t('polls.type')">
-        <label for="poll-type-selector" class="select">
-          <select class="select" v-model="pollType" @change="updatePollToParent">
-            <option value="single">{{$t('polls.single_choice')}}</option>
-            <option value="multiple">{{$t('polls.multiple_choices')}}</option>
+      <div
+        class="poll-type"
+        :title="$t('polls.type')"
+      >
+        <label
+          for="poll-type-selector"
+          class="select"
+        >
+          <select
+            v-model="pollType"
+            class="select"
+            @change="updatePollToParent"
+          >
+            <option value="single">{{ $t('polls.single_choice') }}</option>
+            <option value="multiple">{{ $t('polls.multiple_choices') }}</option>
           </select>
-          <i class="icon-down-open"/>
+          <i class="icon-down-open" />
         </label>
       </div>
-      <div class="poll-expiry" :title="$t('polls.expiry')">
-        <input 
+      <div
+        class="poll-expiry"
+        :title="$t('polls.expiry')"
+      >
+        <input
+          v-model="expiryAmount"
           type="number"
           class="expiry-amount hide-number-spinner"
           :min="minExpirationInCurrentUnit"
           :max="maxExpirationInCurrentUnit"
-          v-model="expiryAmount"
           @change="expiryAmountChange"
         >
         <label class="expiry-unit select">
-          <select 
+          <select
             v-model="expiryUnit"
             @change="expiryAmountChange"
           >
-            <option v-for="unit in expiryUnits" :value="unit">
+            <option
+              v-for="unit in expiryUnits"
+              :key="unit"
+              :value="unit"
+            >
               {{ $t(`time.${unit}_short`, ['']) }}
             </option>
           </select>
-          <i class="icon-down-open"/>
+          <i class="icon-down-open" />
         </label>
       </div>
     </div>

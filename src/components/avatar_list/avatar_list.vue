@@ -1,12 +1,15 @@
 <template>
   <div class="avatars">
     <router-link
-      :to="userProfileLink(user)"
-      class="avatars-item"
       v-for="user in slicedUsers"
       :key="user.id"
+      :to="userProfileLink(user)"
+      class="avatars-item"
     >
-      <UserAvatar :user="user" class="avatar-small" />
+      <UserAvatar
+        :user="user"
+        class="avatar-small"
+      />
     </router-link>
   </div>
 </template>

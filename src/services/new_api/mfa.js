@@ -1,4 +1,4 @@
-const verifyOTPCode = ({app, instance, mfaToken, code}) => {
+const verifyOTPCode = ({ app, instance, mfaToken, code }) => {
   const url = `${instance}/oauth/mfa/challenge`
   const form = new window.FormData()
 
@@ -14,7 +14,7 @@ const verifyOTPCode = ({app, instance, mfaToken, code}) => {
   }).then((data) => data.json())
 }
 
-const verifyRecoveryCode = ({app, instance, mfaToken, code}) => {
+const verifyRecoveryCode = ({ app, instance, mfaToken, code }) => {
   const url = `${instance}/oauth/mfa/challenge`
   const form = new window.FormData()
 

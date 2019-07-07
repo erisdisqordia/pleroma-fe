@@ -96,12 +96,12 @@ const MobilePostStatusModal = {
         this.hidden = false
       }
       this.oldScrollPos = window.scrollY
-    }, 100, {leading: true, trailing: false}),
+    }, 100, { leading: true, trailing: false }),
 
     handleScrollEnd: debounce(function () {
       this.hidden = false
       this.oldScrollPos = window.scrollY
-    }, 100, {leading: false, trailing: true})
+    }, 100, { leading: false, trailing: true })
   }
 }
 

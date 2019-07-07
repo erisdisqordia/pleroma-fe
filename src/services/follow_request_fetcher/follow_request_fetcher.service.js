@@ -8,7 +8,7 @@ const fetchAndUpdate = ({ store, credentials }) => {
     .catch(() => {})
 }
 
-const startFetching = ({credentials, store}) => {
+const startFetching = ({ credentials, store }) => {
   fetchAndUpdate({ credentials, store })
   const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store })
   return setInterval(boundFetchAndUpdate, 10000)

@@ -13,7 +13,7 @@ const postStatus = ({ store, status, spoilerText, visibility, sensitive, poll, m
     mediaIds,
     inReplyToStatusId,
     contentType,
-    poll})
+    poll })
     .then((data) => {
       if (!data.error) {
         store.dispatch('addNewStatuses', {

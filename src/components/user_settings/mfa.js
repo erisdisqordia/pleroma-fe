@@ -107,7 +107,7 @@ const Mfa = {
           this.setupState.setupOTPState = 'confirm'
         })
     },
-    doConfirmOTP () {  // handler confirm enable OTP
+    doConfirmOTP () { // handler confirm enable OTP
       this.error = null
       this.backendInteractor.mfaConfirmOTP({
         token: this.otpConfirmToken,

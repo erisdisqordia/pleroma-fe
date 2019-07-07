@@ -16,7 +16,7 @@ const chatPanel = {
   },
   methods: {
     submit (message) {
-      this.$store.state.chat.channel.push('new_msg', {text: message}, 10000)
+      this.$store.state.chat.channel.push('new_msg', { text: message }, 10000)
       this.currentMessage = ''
     },
     togglePanel () {

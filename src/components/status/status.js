@@ -221,7 +221,7 @@ const Status = {
         ? this.$store.state.instance.subjectLineBehavior
         : this.$store.state.config.subjectLineBehavior
       const startsWithRe = decodedSummary.match(/^re[: ]/i)
-      if (behavior !== 'noop' && startsWithRe || behavior === 'masto') {
+      if ((behavior !== 'noop' && startsWithRe) || behavior === 'masto') {
         return decodedSummary
       } else if (behavior === 'email') {
         return 're: '.concat(decodedSummary)

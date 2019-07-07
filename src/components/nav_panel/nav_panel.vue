@@ -2,26 +2,29 @@
   <div class="nav-panel">
     <div class="panel panel-default">
       <ul>
-        <li v-if='currentUser'>
+        <li v-if="currentUser">
           <router-link :to="{ name: 'friends' }">
             {{ $t("nav.timeline") }}
           </router-link>
         </li>
-        <li v-if='currentUser'>
+        <li v-if="currentUser">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
             {{ $t("nav.interactions") }}
           </router-link>
         </li>
-        <li v-if='currentUser'>
+        <li v-if="currentUser">
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
             {{ $t("nav.dms") }}
           </router-link>
         </li>
-        <li v-if='currentUser && currentUser.locked'>
+        <li v-if="currentUser && currentUser.locked">
           <router-link :to="{ name: 'friend-requests' }">
-            {{ $t("nav.friend_requests")}}
-            <span v-if='followRequestCount > 0' class="badge follow-request-count">
-              {{followRequestCount}}
+            {{ $t("nav.friend_requests") }}
+            <span
+              v-if="followRequestCount > 0"
+              class="badge follow-request-count"
+            >
+              {{ followRequestCount }}
             </span>
           </router-link>
         </li>

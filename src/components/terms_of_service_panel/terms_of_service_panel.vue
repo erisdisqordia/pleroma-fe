@@ -2,8 +2,12 @@
   <div>
     <div class="panel panel-default">
       <div class="panel-body">
-        <div v-html="content" class="tos-content">
-        </div>
+        <!-- eslint-disable vue/no-v-html -->
+        <div
+          class="tos-content"
+          v-html="content"
+        />
+      <!-- eslint-enable vue/no-v-html -->
       </div>
     </div>
   </div>

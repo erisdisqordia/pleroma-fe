@@ -1,23 +1,31 @@
 <template>
-<div v-if="currentUser">
-  <div
-    class="post-form-modal-view modal-view"
-    v-show="postFormOpen"
-    @click="closePostForm"
-  >
-    <div class="post-form-modal-panel panel" @click.stop="">
-      <div class="panel-heading">{{$t('post_status.new_status')}}</div>
-      <PostStatusForm class="panel-body" @posted="closePostForm" />
+  <div v-if="currentUser">
+    <div
+      v-show="postFormOpen"
+      class="post-form-modal-view modal-view"
+      @click="closePostForm"
+    >
+      <div
+        class="post-form-modal-panel panel"
+        @click.stop=""
+      >
+        <div class="panel-heading">
+          {{ $t('post_status.new_status') }}
+        </div>
+        <PostStatusForm
+          class="panel-body"
+          @posted="closePostForm"
+        />
+      </div>
     </div>
+    <button
+      class="new-status-button"
+      :class="{ 'hidden': isHidden }"
+      @click="openPostForm"
+    >
+      <i class="icon-edit" />
+    </button>
   </div>
-  <button
-    class="new-status-button"
-    :class="{ 'hidden': isHidden }"
-    @click="openPostForm"
-  >
-    <i class="icon-edit" />
-  </button>
-</div>
 </template>
 
 <script src="./mobile_post_status_modal.js"></script>

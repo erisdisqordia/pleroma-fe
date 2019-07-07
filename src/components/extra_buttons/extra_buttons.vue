@@ -1,9 +1,8 @@
 <template>
   <Popper
-    trigger="click"
-    @hide='showDropDown = false'
-    append-to-body
     v-if="enabled && showPopper"
+    trigger="click"
+    append-to-body
     :options="{
       placement: 'top',
       modifiers: {
@@ -11,22 +10,42 @@
         offset: { offset: '0, 5px' },
       }
     }"
+    @hide="showDropDown = false"
   >
     <div class="popper-wrapper">
       <div class="dropdown-menu">
-        <button class="dropdown-item dropdown-item-icon" @click.prevent="pinStatus" v-if="!status.pinned && canPin">
-          <i class="icon-pin"></i><span>{{$t("status.pin")}}</span>
+        <button
+          v-if="!status.pinned && canPin"
+          class="dropdown-item dropdown-item-icon"
+          @click.prevent="pinStatus"
+        >
+          <i class="icon-pin" /><span>{{ $t("status.pin") }}</span>
         </button>
-        <button class="dropdown-item dropdown-item-icon" @click.prevent="unpinStatus" v-if="status.pinned && canPin">
-          <i class="icon-pin"></i><span>{{$t("status.unpin")}}</span>
+        <button
+          v-if="status.pinned && canPin"
+          class="dropdown-item dropdown-item-icon"
+          @click.prevent="unpinStatus"
+        >
+          <i class="icon-pin" /><span>{{ $t("status.unpin") }}</span>
         </button>
-        <button class="dropdown-item dropdown-item-icon" @click.prevent="deleteStatus" v-if="canDelete">
-          <i class="icon-cancel"></i><span>{{$t("status.delete")}}</span>
+        <button
+          v-if="canDelete"
+          class="dropdown-item dropdown-item-icon"
+          @click.prevent="deleteStatus"
+        >
+          <i class="icon-cancel" /><span>{{ $t("status.delete") }}</span>
         </button>
       </div>
     </div>
-    <div class="button-icon" slot="reference" @click="toggleMenu">
-      <i class='icon-ellipsis' :class="{'icon-clicked': showDropDown}"></i>
+    <div
+      slot="reference"
+      class="button-icon"
+      @click="toggleMenu"
+    >
+      <i
+        class="icon-ellipsis"
+        :class="{'icon-clicked': showDropDown}"
+      />
     </div>
   </Popper>
 </template>

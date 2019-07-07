@@ -1,28 +1,38 @@
 <template>
-<span  v-if="contrast" class="contrast-ratio">
-  <span :title="hint" class="rating">
-    <span v-if="contrast.aaa">
-      <i class="icon-thumbs-up-alt"/>
+  <span
+    v-if="contrast"
+    class="contrast-ratio"
+  >
+    <span
+      :title="hint"
+      class="rating"
+    >
+      <span v-if="contrast.aaa">
+        <i class="icon-thumbs-up-alt" />
+      </span>
+      <span v-if="!contrast.aaa && contrast.aa">
+        <i class="icon-adjust" />
+      </span>
+      <span v-if="!contrast.aaa && !contrast.aa">
+        <i class="icon-attention" />
+      </span>
     </span>
-    <span v-if="!contrast.aaa && contrast.aa">
-      <i class="icon-adjust"/>
-    </span>
-    <span v-if="!contrast.aaa && !contrast.aa">
-      <i class="icon-attention"/>
+    <span
+      v-if="contrast && large"
+      class="rating"
+      :title="hint_18pt"
+    >
+      <span v-if="contrast.laaa">
+        <i class="icon-thumbs-up-alt" />
+      </span>
+      <span v-if="!contrast.laaa && contrast.laa">
+        <i class="icon-adjust" />
+      </span>
+      <span v-if="!contrast.laaa && !contrast.laa">
+        <i class="icon-attention" />
+      </span>
     </span>
   </span>
-  <span class="rating" v-if="contrast && large" :title="hint_18pt">
-    <span v-if="contrast.laaa">
-      <i class="icon-thumbs-up-alt"/>
-    </span>
-    <span v-if="!contrast.laaa && contrast.laa">
-      <i class="icon-adjust"/>
-    </span>
-    <span v-if="!contrast.laaa && !contrast.laa">
-      <i class="icon-attention"/>
-    </span>
-  </span>
-</span>
 </template>
 
 <script>

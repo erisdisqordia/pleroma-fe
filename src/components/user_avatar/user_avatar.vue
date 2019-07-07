@@ -5,7 +5,7 @@
     :title="user.screen_name"
     :src="user.profile_image_url_original"
     :class="{ 'avatar-compact': compact, 'better-shadow': betterShadow }"
-    :imageLoadError="imageLoadError"
+    :image-load-error="imageLoadError"
   />
 </template>
 

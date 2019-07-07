@@ -1,16 +1,22 @@
 <template>
-  <span v-bind:class="{ 'dark-overlay': darkOverlay }" @click.self.stop='onCancel()'>
-    <div class="dialog-modal panel panel-default" @click.stop=''>
+  <span
+    :class="{ 'dark-overlay': darkOverlay }"
+    @click.self.stop="onCancel()"
+  >
+    <div
+      class="dialog-modal panel panel-default"
+      @click.stop=""
+    >
       <div class="panel-heading dialog-modal-heading">
         <div class="title">
-          <slot name="header"></slot>
+          <slot name="header" />
         </div>
       </div>
       <div class="dialog-modal-content">
-        <slot name="default"></slot>
+        <slot name="default" />
       </div>
       <div class="dialog-modal-footer user-interactions panel-footer">
-        <slot name="footer"></slot>
+        <slot name="footer" />
       </div>
     </div>
   </span>

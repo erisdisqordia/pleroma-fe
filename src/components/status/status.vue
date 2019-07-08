@@ -170,18 +170,32 @@
             </div>
 
             <div class="heading-reply-row">
-              <div v-if="isReply" class="reply-to-and-accountname">
-                <Popper ref="statusPreviewPopper" :options="{ placement: 'top-start' }" @show="replyEnter(status.in_reply_to_status_id)">
+              <div
+                v-if="isReply"
+                class="reply-to-and-accountname"
+              >
+                <Popper
+                  ref="statusPreviewPopper"
+                  :options="{ placement: 'top-start' }"
+                  @show="replyEnter(status.in_reply_to_status_id)"
+                >
                   <div class="popper-wrapper status-preview">
-                    <div class="popper-wrapper-inner" @mouseover.prevent.stop @focus.prevent.stop>
+                    <div
+                      class="popper-wrapper-inner"
+                      @mouseover.prevent.stop
+                      @focus.prevent.stop
+                    >
                       <status
                         v-if="preview"
-                        :isPreview="true"
+                        :is-preview="true"
                         :statusoid="preview"
                         :compact="true"
                       />
-                      <div v-else class="status-preview-loading">
-                        <i class="icon-spin4 animate-spin"></i>
+                      <div
+                        v-else
+                        class="status-preview-loading"
+                      >
+                        <i class="icon-spin4 animate-spin" />
                       </div>
                     </div>
                   </div>
@@ -189,11 +203,15 @@
                   <a
                     slot="reference"
                     class="reply-to"
-                    href="#" @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
+                    href="#"
                     :aria-label="$t('tool_tip.reply')"
+                    @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
                   >
-                    <i class="button-icon icon-reply" v-if="!isPreview"></i>
-                    <span class="faint-link reply-to-text">{{$t('status.reply_to')}}</span>
+                    <i
+                      v-if="!isPreview"
+                      class="button-icon icon-reply"
+                    />
+                    <span class="faint-link reply-to-text">{{ $t('status.reply_to') }}</span>
                   </a>
                 </Popper>
                 <router-link :to="replyProfileLink">
@@ -434,7 +452,6 @@ $status-margin: 0.75em;
   align-items: center;
   justify-content: flex-end;
 }
-
 
 .media-left {
   margin-right: $status-margin;

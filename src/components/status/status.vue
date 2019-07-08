@@ -176,7 +176,12 @@
               >
                 <Popper
                   ref="statusPreviewPopper"
-                  :options="{ placement: 'top-start' }"
+                  :options="{
+                    placement: 'top-start',
+                    modifiers: {
+                      preventOverflow: { padding: 50, boundariesElement: 'viewport' },
+                    }
+                  }"
                   @show="replyEnter(status.in_reply_to_status_id)"
                 >
                   <div class="popper-wrapper status-preview">

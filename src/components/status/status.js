@@ -419,6 +419,18 @@ const Status = {
           window.scrollBy(0, rect.bottom - window.innerHeight + 50)
         }
       }
+    },
+    'status.repeat_num': function (num) {
+      // refetch repeats when repeat_num is changed in any way
+      if (this.isFocused && this.statusFromGlobalRepository.rebloggedBy && this.statusFromGlobalRepository.rebloggedBy.length !== num) {
+        this.$store.dispatch('fetchRepeats', this.status.id)
+      }
+    },
+    'status.fave_num': function (num) {
+      // refetch favs when fave_num is changed in any way
+      if (this.isFocused && this.statusFromGlobalRepository.favoritedBy && this.statusFromGlobalRepository.favoritedBy.length !== num) {
+        this.$store.dispatch('fetchFavs', this.status.id)
+      }
     }
   },
   filters: {

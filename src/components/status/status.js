@@ -280,6 +280,11 @@ const Status = {
     },
     tags () {
       return this.status.tags.filter(tagObj => tagObj.hasOwnProperty('name')).map(tagObj => tagObj.name).join(' ')
+    },
+    hidePostStats () {
+      return typeof this.$store.state.config.hidePostStats === 'undefined'
+        ? this.$store.state.instance.hidePostStats
+        : this.$store.state.config.hidePostStats
     }
   },
   components: {

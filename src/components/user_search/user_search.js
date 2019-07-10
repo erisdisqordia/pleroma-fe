@@ -35,15 +35,13 @@ const userSearch = {
     },
     search (query) {
       if (!query) {
-        this.users = []
         return
       }
       this.loading = true
+      this.userIds = []
       this.$store.dispatch('searchUsers', query)
-        .then((res) => {
-          this.loading = false
-          this.userIds = map(res, 'id')
-        })
+        .then((res) => { this.userIds = map(res, 'id') })
+        .finally(() => { this.loading = false })
     }
   }
 }

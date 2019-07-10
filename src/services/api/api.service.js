@@ -65,6 +65,7 @@ const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
 const MASTODON_REPORT_USER_URL = '/api/v1/reports'
 const MASTODON_PIN_OWN_STATUS = id => `/api/v1/statuses/${id}/pin`
 const MASTODON_UNPIN_OWN_STATUS = id => `/api/v1/statuses/${id}/unpin`
+const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
 
 const oldfetch = window.fetch
 
@@ -76,7 +77,7 @@ let fetch = (url, options) => {
   return oldfetch(fullUrl, options)
 }
 
-const promisedRequest = ({ method, url, payload, credentials, headers = {} }) => {
+const promisedRequest = ({ method, url, params, payload, credentials, headers = {} }) => {
   const options = {
     method,
     headers: {
@@ -84,6 +85,11 @@ const promisedRequest = ({ method, url, payload, credentials, headers = {} }) =>
       'Content-Type': 'application/json',
       ...headers
     }
+  }
+  if (params) {
+    url += '?' + Object.entries(params)
+      .map(([key, value]) => encodeURIComponent(key) + '=' + encodeURIComponent(value))
+      .join('&')
   }
   if (payload) {
     options.body = JSON.stringify(payload)
@@ -837,6 +843,18 @@ const reportUser = ({ credentials, userId, statusIds, comment, forward }) => {
   })
 }
 
+const searchUsers = ({ credentials, query }) => {
+  return promisedRequest({
+    url: MASTODON_USER_SEARCH_URL,
+    params: {
+      q: query,
+      resolve: true
+    },
+    credentials
+  })
+    .then((data) => data.map(parseUser))
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -899,7 +917,8 @@ const apiService = {
   fetchFavoritedByUsers,
   fetchRebloggedByUsers,
   reportUser,
-  updateNotificationSettings
+  updateNotificationSettings,
+  searchUsers
 }
 
 export default apiService

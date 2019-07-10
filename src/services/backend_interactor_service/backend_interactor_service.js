@@ -147,6 +147,8 @@ const backendInteractorService = credentials => {
   const retweet = (id) => apiService.retweet({ id, credentials })
   const unretweet = (id) => apiService.unretweet({ id, credentials })
 
+  const searchUsers = (query) => apiService.searchUsers({ query, credentials })
+
   const backendInteractorServiceInstance = {
     fetchStatus,
     fetchConversation,
@@ -205,7 +207,8 @@ const backendInteractorService = credentials => {
     unfavorite,
     retweet,
     unretweet,
-    updateNotificationSettings
+    updateNotificationSettings,
+    searchUsers
   }
 
   return backendInteractorServiceInstance

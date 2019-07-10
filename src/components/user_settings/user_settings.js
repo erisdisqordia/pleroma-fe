@@ -17,7 +17,6 @@ import Autosuggest from '../autosuggest/autosuggest.vue'
 import Importer from '../importer/importer.vue'
 import Exporter from '../exporter/exporter.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
-import userSearchApi from '../../services/new_api/user_search.js'
 import Mfa from './mfa.vue'
 
 const BlockList = withSubscription({
@@ -322,11 +321,8 @@ const UserSettings = {
       })
     },
     queryUserIds (query) {
-      return userSearchApi.search({ query, store: this.$store })
-        .then((users) => {
-          this.$store.dispatch('addNewUsers', users)
-          return map(users, 'id')
-        })
+      return this.$store.dispatch('searchUsers', query)
+        .then((users) => map(users, 'id'))
     },
     blockUsers (ids) {
       return this.$store.dispatch('blockUsers', ids)

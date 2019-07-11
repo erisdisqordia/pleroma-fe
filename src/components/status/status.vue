@@ -824,7 +824,7 @@ $status-margin: 0.75em;
   display: flex;
   margin-top: $status-margin;
 
-  div, favorite-button {
+  > * {
     max-width: 4em;
     flex: 1;
   }

@@ -1,23 +1,16 @@
 <template>
-  <Popper
-    v-if="enabled && showPopper"
+  <v-popover
+    v-if="enabled"
     trigger="click"
-    append-to-body
-    :options="{
-      placement: 'top',
-      modifiers: {
-        arrow: { enabled: true },
-        offset: { offset: '0, 5px' },
-      }
-    }"
-    @hide="showDropDown = false"
+    class="extra-button-popover"
   >
-    <div class="popper-wrapper">
+    <div class="popper-wrapper" slot="popover">
       <div class="dropdown-menu">
         <button
           v-if="!status.pinned && canPin"
           class="dropdown-item dropdown-item-icon"
           @click.prevent="pinStatus"
+          v-close-popover
         >
           <i class="icon-pin" /><span>{{ $t("status.pin") }}</span>
         </button>
@@ -25,6 +18,7 @@
           v-if="status.pinned && canPin"
           class="dropdown-item dropdown-item-icon"
           @click.prevent="unpinStatus"
+          v-close-popover
         >
           <i class="icon-pin" /><span>{{ $t("status.unpin") }}</span>
         </button>
@@ -32,22 +26,16 @@
           v-if="canDelete"
           class="dropdown-item dropdown-item-icon"
           @click.prevent="deleteStatus"
+          v-close-popover
         >
           <i class="icon-cancel" /><span>{{ $t("status.delete") }}</span>
         </button>
       </div>
     </div>
-    <div
-      slot="reference"
-      class="button-icon"
-      @click="toggleMenu"
-    >
-      <i
-        class="icon-ellipsis"
-        :class="{'icon-clicked': showDropDown}"
-      />
+    <div class="button-icon">
+      <i class="icon-ellipsis" />
     </div>
-  </Popper>
+  </v-popover>
 </template>
 
 <script src="./extra_buttons.js" ></script>
@@ -59,7 +47,8 @@
 .icon-ellipsis {
   cursor: pointer;
 
-  &:hover, &.icon-clicked {
+  &:hover,
+  .extra-button-popover.open & {
     color: $fallback--text;
     color: var(--text, $fallback--text);
   }

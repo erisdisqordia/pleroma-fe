@@ -11,25 +11,25 @@
       <div class="dropdown-menu">
         <button
           v-if="!status.pinned && canPin"
+          v-close-popover
           class="dropdown-item dropdown-item-icon"
           @click.prevent="pinStatus"
-          v-close-popover
         >
           <i class="icon-pin" /><span>{{ $t("status.pin") }}</span>
         </button>
         <button
           v-if="status.pinned && canPin"
+          v-close-popover
           class="dropdown-item dropdown-item-icon"
           @click.prevent="unpinStatus"
-          v-close-popover
         >
           <i class="icon-pin" /><span>{{ $t("status.unpin") }}</span>
         </button>
         <button
           v-if="canDelete"
+          v-close-popover
           class="dropdown-item dropdown-item-icon"
           @click.prevent="deleteStatus"
-          v-close-popover
         >
           <i class="icon-cancel" /><span>{{ $t("status.delete") }}</span>
         </button>

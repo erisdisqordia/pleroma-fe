@@ -503,6 +503,7 @@
     }
   }
   .user-interactions {
+    position: relative;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;

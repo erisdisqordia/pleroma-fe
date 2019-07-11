@@ -2,10 +2,12 @@
   <v-popover
     v-if="enabled"
     trigger="click"
+    placement="top"
     class="extra-button-popover"
+    :offset="5"
     :container="false"
   >
-    <div class="popper-wrapper" slot="popover">
+    <div slot="popover">
       <div class="dropdown-menu">
         <button
           v-if="!status.pinned && canPin"

@@ -4,10 +4,12 @@
       trigger="click"
       class="moderation-tools-popover"
       :container="false"
+      placement="bottom-end"
+      :offset="5"
       @show="showDropDown = true"
       @hide="showDropDown = false"
     >
-      <div class="popper-wrapper" slot="popover">
+      <div slot="popover">
         <div class="dropdown-menu">
           <span v-if="user.is_local">
             <button

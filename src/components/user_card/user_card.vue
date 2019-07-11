@@ -168,7 +168,7 @@
               :click="unsubscribeUser"
               :title="$t('user_card.unsubscribe')"
             >
-              <i class="icon-bell-alt" />
+              <i class="icon-bell-ringing-o" />
             </ProgressButton>
           </div>
 

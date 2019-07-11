@@ -1,5 +1,4 @@
 import DialogModal from '../dialog_modal/dialog_modal.vue'
-import Popper from 'vue-popperjs/src/component/popper.js.vue'
 
 const FORCE_NSFW = 'mrf_tag:media-force-nsfw'
 const STRIP_MEDIA = 'mrf_tag:media-strip'
@@ -29,8 +28,7 @@ const ModerationTools = {
     }
   },
   components: {
-    DialogModal,
-    Popper
+    DialogModal
   },
   computed: {
     tagsSet () {
@@ -41,9 +39,6 @@ const ModerationTools = {
     }
   },
   methods: {
-    toggleMenu () {
-      this.showDropDown = !this.showDropDown
-    },
     hasTag (tagName) {
       return this.tagsSet.has(tagName)
     },

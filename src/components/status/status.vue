@@ -820,6 +820,7 @@ $status-margin: 0.75em;
 }
 
 .status-actions {
+  position: relative;
   width: 100%;
   display: flex;
   margin-top: $status-margin;

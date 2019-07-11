@@ -3,6 +3,7 @@
     v-if="enabled"
     trigger="click"
     class="extra-button-popover"
+    :container="false"
   >
     <div class="popper-wrapper" slot="popover">
       <div class="dropdown-menu">

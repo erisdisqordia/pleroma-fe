@@ -5459,10 +5459,6 @@ pngjs@^3.3.0:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.3.3.tgz#85173703bde3edac8998757b96e5821d0966a21b"
 
-popper.js@^1.14.7:
-  version "1.14.7"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.7.tgz#e31ec06cfac6a97a53280c3e55e4e0c860e7738e"
-
 popper.js@^1.15.0:
   version "1.15.0"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.15.0.tgz#5560b99bbad7647e9faa475c6b8056621f5a4ff2"
@@ -7285,12 +7281,6 @@ vue-loader@^14.0.0:
     vue-hot-reload-api "^2.2.0"
     vue-style-loader "^4.0.1"
     vue-template-es2015-compiler "^1.6.0"
-
-vue-popperjs@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/vue-popperjs/-/vue-popperjs-2.0.3.tgz#7c446d0ba7c63170ccb33a02669d0df4efc3d8cd"
-  dependencies:
-    popper.js "^1.14.7"
 
 vue-resize@^0.4.5:
   version "0.4.5"

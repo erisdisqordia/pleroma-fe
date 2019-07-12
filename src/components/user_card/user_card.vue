@@ -518,6 +518,7 @@
       margin: 0;
 
       &.pressed {
+        // TODO: This should be themed.
         border-bottom-color: rgba(255, 255, 255, 0.2);
         border-top-color: rgba(0, 0, 0, 0.2);
       }

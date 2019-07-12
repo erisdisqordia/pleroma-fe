@@ -22,7 +22,7 @@
                 class="user-name"
                 v-html="user.name_html"
               />
-              <!-- eslint-enabled vue/no-v-html -->
+              <!-- eslint-enable vue/no-v-html -->
               <div
                 v-else
                 :title="user.name"
@@ -265,7 +265,7 @@
         @click.prevent="linkClicked"
         v-html="user.description_html"
       />
-      <!-- eslint-enabled vue/no-v-html -->
+      <!-- eslint-enable vue/no-v-html -->
       <p
         v-else-if="!hideBio"
         class="user-card-bio"

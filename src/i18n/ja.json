@@ -27,7 +27,11 @@
     "optional": "かかなくてもよい",
     "show_more": "つづきをみる",
     "show_less": "たたむ",
-    "cancel": "キャンセル"
+    "cancel": "キャンセル",
+    "disable": "なし",
+    "enable": "あり",
+    "confirm": "たしかめる",
+    "verify": "たしかめる"
   },
   "image_cropper": {
     "crop_picture": "がぞうをきりぬく",
@@ -48,7 +52,15 @@
     "placeholder": "れい: lain",
     "register": "はじめる",
     "username": "ユーザーめい",
-    "hint": "はなしあいにくわわるには、ログインしてください"
+    "hint": "はなしあいにくわわるには、ログインしてください",
+    "authentication_code": "にんしょうコード",
+    "enter_recovery_code": "リカバリーコードをいれてください",
+    "enter_two_factor_code": "2-ファクターコードをいれてください",
+    "recovery_code": "リカバリーコード",
+    "heading" : {
+      "totp" : "2-ファクターにんしょう",
+      "recovery" : "2-ファクターリカバリー"
+    }
   },
   "media_modal": {
     "previous": "まえ",
@@ -78,6 +90,20 @@
     "read": "よんだ！",
     "repeated_you": "あなたのステータスがリピートされました",
     "no_more_notifications": "つうちはありません"
+  },
+  "polls": {
+    "add_poll": "いれふだをはじめる",
+    "add_option": "オプションをふやす",
+    "option": "オプション",
+    "votes": "いれふだ",
+    "vote": "ふだをいれる",
+    "type": "いれふだのかた",
+    "single_choice": "ひとつえらぶ",
+    "multiple_choices": "いくつでもえらべる",
+    "expiry": "いれふだのながさ",
+    "expires_in": "いれふだは {0} で、おわります",
+    "expired": "いれふだは {0} まえに、おわりました",
+    "not_enough_options": "ユニークなオプションが、たりません"
   },
   "interactions": {
     "favs_repeats": "リピートとおきにいり",
@@ -139,6 +165,29 @@
   },
   "settings": {
     "app_name": "アプリのなまえ",
+    "security": "セキュリティ",
+    "enter_current_password_to_confirm": "あなたのアイデンティティをたしかめるため、あなたのいまのパスワードをかいてください",
+    "mfa": {
+      "otp" : "OTP",
+      "setup_otp" : "OTPをつくる",
+      "wait_pre_setup_otp" : "OTPをよういしています",
+      "confirm_and_enable" : "OTPをたしかめて、ゆうこうにする",
+      "title": "2-ファクターにんしょう",
+      "generate_new_recovery_codes" : "あたらしいリカバリーコードをつくる",
+      "warning_of_generate_new_codes" : "あたらしいリカバリーコードをつくったら、ふるいコードはつかえなくなります。",
+      "recovery_codes" : "リカバリーコード。",
+      "waiting_a_recovery_codes": "バックアップコードをうけとっています...",
+      "recovery_codes_warning" : "コードをかきうつすか、ひとにみられないところにセーブしてください。そうでなければ、あなたはこのコードをふたたびみることはできません。もしあなたが、2FAアプリのアクセスをうしなって、なおかつ、リカバリーコードもおもいだせないならば、あなたはあなたのアカウントから、しめだされます。",
+      "authentication_methods" : "にんしょうメソッド",
+      "scan": {
+        "title": "スキャン",
+        "desc": "あなたの2-ファクターアプリをつかって、このQRコードをスキャンするか、テキストキーをうちこんでください:",
+        "secret_code": "キー"
+      },
+      "verify": {
+        "desc": "2-ファクターにんしょうをつかうには、あなたの2-ファクターアプリのコードをいれてください:"
+      }
+    },
     "attachmentRadius": "ファイル",
     "attachments": "ファイル",
     "autoload": "したにスクロールしたとき、じどうてきによみこむ。",

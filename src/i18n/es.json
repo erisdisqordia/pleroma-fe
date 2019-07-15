@@ -94,6 +94,11 @@
     "direct_warning": "Esta publicación solo será visible para los usuarios mencionados.",
     "direct_warning_to_first_only": "Esta publicación solo será visible para los usuarios mencionados al comienzo del mensaje.",
     "posting": "Publicando",
+    "scope_notice": {
+      "public": "Esta publicación será visible para todo el mundo",
+      "private": "Esta publicación solo será visible para tus seguidores.",
+      "unlisted": "Esta publicación no será visible en la Línea Temporal Pública ni en Toda La Red Conocida"
+    },
     "scope": {
       "direct": "Directo - Solo para los usuarios mencionados.",
       "private": "Solo-Seguidores - Solo tus seguidores leeran la publicación",

@@ -67,7 +67,7 @@ const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
 const MASTODON_REPORT_USER_URL = '/api/v1/reports'
 const MASTODON_PIN_OWN_STATUS = id => `/api/v1/statuses/${id}/pin`
 const MASTODON_UNPIN_OWN_STATUS = id => `/api/v1/statuses/${id}/unpin`
-const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
+const MASTODON_SEARCH_2 = `/api/v2/search`
 
 const oldfetch = window.fetch
 
@@ -853,16 +853,46 @@ const reportUser = ({ credentials, userId, statusIds, comment, forward }) => {
   })
 }
 
-const searchUsers = ({ credentials, query }) => {
-  return promisedRequest({
-    url: MASTODON_USER_SEARCH_URL,
-    params: {
-      q: query,
-      resolve: true
-    },
-    credentials
-  })
-    .then((data) => data.map(parseUser))
+const search2 = ({ credentials, q, resolve, limit, offset, following }) => {
+  let url = MASTODON_SEARCH_2
+  let params = []
+
+  if (q) {
+    params.push(['q', encodeURIComponent(q)])
+  }
+
+  if (resolve) {
+    params.push(['resolve', resolve])
+  }
+
+  if (limit) {
+    params.push(['limit', limit])
+  }
+
+  if (offset) {
+    params.push(['offset', offset])
+  }
+
+  if (following) {
+    params.push(['following', true])
+  }
+
+  let queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
+  url += `?${queryString}`
+
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => {
+      if (data.ok) {
+        return data
+      }
+      throw new Error('Error fetching search result', data)
+    })
+    .then((data) => { return data.json() })
+    .then((data) => {
+      data.accounts = data.accounts.slice(0, limit).map(u => parseUser(u))
+      data.statuses = data.statuses.slice(0, limit).map(s => parseStatus(s))
+      return data
+    })
 }
 
 const apiService = {
@@ -930,7 +960,7 @@ const apiService = {
   fetchRebloggedByUsers,
   reportUser,
   updateNotificationSettings,
-  searchUsers
+  search2
 }
 
 export default apiService

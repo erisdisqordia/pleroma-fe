@@ -38,7 +38,8 @@
     "interactions": "Взаимодействия",
     "public_tl": "Публичная лента",
     "timeline": "Лента",
-    "twkn": "Федеративная лента"
+    "twkn": "Федеративная лента",
+    "search": "Поиск"
   },
   "notifications": {
     "broken_favorite": "Неизвестный статус, ищем...",
@@ -381,5 +382,12 @@
   },
   "user_profile": {
     "timeline_title": "Лента пользователя"
+  },
+  "search": {
+    "people": "Люди",
+    "hashtags": "Хэштэги",
+    "person_talking": "Популярно у {count} человека",
+    "people_talking": "Популярно у {count} человек",
+    "no_results": "Ничего не найдено"
   }
 }

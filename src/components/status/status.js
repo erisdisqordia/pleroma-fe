@@ -173,12 +173,13 @@ const Status = {
       if (this.status.type === 'retweet') {
         return false
       }
-      var checkFollowing = this.$store.state.config.replyVisibility === 'following'
+      const checkFollowing = this.$store.state.config.replyVisibility === 'following'
       for (var i = 0; i < this.status.attentions.length; ++i) {
         if (this.status.user.id === this.status.attentions[i].id) {
           continue
         }
-        if (checkFollowing && this.$store.getters.findUser(this.status.attentions[i].id).following) {
+        const taggedUser = this.$store.getters.findUser(this.status.attentions[i].id)
+        if (checkFollowing && taggedUser && taggedUser.following) {
           return false
         }
         if (this.status.attentions[i].id === this.$store.state.users.currentUser.id) {
@@ -417,6 +418,18 @@ const Status = {
           // Post is below screen, match its bottom to screen bottom
           window.scrollBy(0, rect.bottom - window.innerHeight + 50)
         }
+      }
+    },
+    'status.repeat_num': function (num) {
+      // refetch repeats when repeat_num is changed in any way
+      if (this.isFocused && this.statusFromGlobalRepository.rebloggedBy && this.statusFromGlobalRepository.rebloggedBy.length !== num) {
+        this.$store.dispatch('fetchRepeats', this.status.id)
+      }
+    },
+    'status.fave_num': function (num) {
+      // refetch favs when fave_num is changed in any way
+      if (this.isFocused && this.statusFromGlobalRepository.favoritedBy && this.statusFromGlobalRepository.favoritedBy.length !== num) {
+        this.$store.dispatch('fetchFavs', this.status.id)
       }
     }
   },

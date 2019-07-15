@@ -496,10 +496,19 @@ export const mutations = {
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
   },
-  addFavsAndRepeats (state, { id, favoritedByUsers, rebloggedByUsers }) {
+  addRepeats (state, { id, rebloggedByUsers, currentUser }) {
+    const newStatus = state.allStatusesObject[id]
+    newStatus.rebloggedBy = rebloggedByUsers.filter(_ => _)
+    // repeats stats can be incorrect based on polling condition, let's update them using the most recent data
+    newStatus.repeat_num = newStatus.rebloggedBy.length
+    newStatus.repeated = !!newStatus.rebloggedBy.find(({ id }) => currentUser.id === id)
+  },
+  addFavs (state, { id, favoritedByUsers, currentUser }) {
     const newStatus = state.allStatusesObject[id]
     newStatus.favoritedBy = favoritedByUsers.filter(_ => _)
-    newStatus.rebloggedBy = rebloggedByUsers.filter(_ => _)
+    // favorites stats can be incorrect based on polling condition, let's update them using the most recent data
+    newStatus.fave_num = newStatus.favoritedBy.length
+    newStatus.favorited = !!newStatus.favoritedBy.find(({ id }) => currentUser.id === id)
   },
   updateStatusWithPoll (state, { id, poll }) {
     const status = state.allStatusesObject[id]
@@ -593,9 +602,26 @@ const statuses = {
       Promise.all([
         rootState.api.backendInteractor.fetchFavoritedByUsers(id),
         rootState.api.backendInteractor.fetchRebloggedByUsers(id)
-      ]).then(([favoritedByUsers, rebloggedByUsers]) =>
-        commit('addFavsAndRepeats', { id, favoritedByUsers, rebloggedByUsers })
-      )
+      ]).then(([favoritedByUsers, rebloggedByUsers]) => {
+        commit('addFavs', { id, favoritedByUsers, currentUser: rootState.users.currentUser })
+        commit('addRepeats', { id, rebloggedByUsers, currentUser: rootState.users.currentUser })
+      })
+    },
+    fetchFavs ({ rootState, commit }, id) {
+      rootState.api.backendInteractor.fetchFavoritedByUsers(id)
+        .then(favoritedByUsers => commit('addFavs', { id, favoritedByUsers, currentUser: rootState.users.currentUser }))
+    },
+    fetchRepeats ({ rootState, commit }, id) {
+      rootState.api.backendInteractor.fetchRebloggedByUsers(id)
+        .then(rebloggedByUsers => commit('addRepeats', { id, rebloggedByUsers, currentUser: rootState.users.currentUser }))
+    },
+    search (store, { q, resolve, limit, offset, following }) {
+      return store.rootState.api.backendInteractor.search2({ q, resolve, limit, offset, following })
+        .then((data) => {
+          store.commit('addNewUsers', data.accounts)
+          store.commit('addNewStatuses', { statuses: data.statuses })
+          return data
+        })
     }
   },
   mutations

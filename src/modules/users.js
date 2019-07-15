@@ -1,5 +1,4 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import userSearchApi from '../services/new_api/user_search.js'
 import oauthApi from '../services/new_api/oauth.js'
 import { compact, map, each, merge, last, concat, uniq } from 'lodash'
 import { set } from 'vue'
@@ -136,6 +135,7 @@ export const mutations = {
         user.following = relationship.following
         user.muted = relationship.muting
         user.statusnet_blocking = relationship.blocking
+        user.subscribed = relationship.subscribing
       }
     })
   },
@@ -305,6 +305,14 @@ const users = {
     clearFollowers ({ commit }, userId) {
       commit('clearFollowers', userId)
     },
+    subscribeUser ({ rootState, commit }, id) {
+      return rootState.api.backendInteractor.subscribeUser(id)
+        .then((relationship) => commit('updateUserRelationship', [relationship]))
+    },
+    unsubscribeUser ({ rootState, commit }, id) {
+      return rootState.api.backendInteractor.unsubscribeUser(id)
+        .then((relationship) => commit('updateUserRelationship', [relationship]))
+    },
     registerPushNotifications (store) {
       const token = store.state.currentUser.credentials
       const vapidPublicKey = store.rootState.instance.vapidPublicKey
@@ -356,14 +364,7 @@ const users = {
       })
     },
     searchUsers (store, query) {
-      // TODO: Move userSearch api into api.service
-      return userSearchApi.search({
-        query,
-        store: {
-          state: store.rootState,
-          getters: store.rootGetters
-        }
-      })
+      return store.rootState.api.backendInteractor.searchUsers(query)
         .then((users) => {
           store.commit('addNewUsers', users)
           return users

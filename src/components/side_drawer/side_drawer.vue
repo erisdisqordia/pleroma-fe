@@ -100,8 +100,8 @@
       </ul>
       <ul>
         <li @click="toggleDrawer">
-          <router-link :to="{ name: 'user-search' }">
-            {{ $t("nav.user_search") }}
+          <router-link :to="{ name: 'search' }">
+            {{ $t("nav.search") }}
           </router-link>
         </li>
         <li

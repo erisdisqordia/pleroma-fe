@@ -55,6 +55,8 @@ const MASTODON_BLOCK_USER_URL = id => `/api/v1/accounts/${id}/block`
 const MASTODON_UNBLOCK_USER_URL = id => `/api/v1/accounts/${id}/unblock`
 const MASTODON_MUTE_USER_URL = id => `/api/v1/accounts/${id}/mute`
 const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
+const MASTODON_SUBSCRIBE_USER = id => `/api/v1/pleroma/accounts/${id}/subscribe`
+const MASTODON_UNSUBSCRIBE_USER = id => `/api/v1/pleroma/accounts/${id}/unsubscribe`
 const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
 const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 const MASTODON_VOTE_URL = id => `/api/v1/polls/${id}/votes`
@@ -67,6 +69,7 @@ const MASTODON_PIN_OWN_STATUS = id => `/api/v1/statuses/${id}/pin`
 const MASTODON_UNPIN_OWN_STATUS = id => `/api/v1/statuses/${id}/unpin`
 const MASTODON_MUTE_CONVERSATION = id => `/api/v1/statuses/${id}/mute`
 const MASTODON_UNMUTE_CONVERSATION = id => `/api/v1/statuses/${id}/unmute`
+const MASTODON_SEARCH_2 = `/api/v2/search`
 
 const oldfetch = window.fetch
 
@@ -78,7 +81,7 @@ let fetch = (url, options) => {
   return oldfetch(fullUrl, options)
 }
 
-const promisedRequest = ({ method, url, payload, credentials, headers = {} }) => {
+const promisedRequest = ({ method, url, params, payload, credentials, headers = {} }) => {
   const options = {
     method,
     headers: {
@@ -86,6 +89,11 @@ const promisedRequest = ({ method, url, payload, credentials, headers = {} }) =>
       'Content-Type': 'application/json',
       ...headers
     }
+  }
+  if (params) {
+    url += '?' + Object.entries(params)
+      .map(([key, value]) => encodeURIComponent(key) + '=' + encodeURIComponent(value))
+      .join('&')
   }
   if (payload) {
     options.body = JSON.stringify(payload)
@@ -758,6 +766,14 @@ const unmuteUser = ({ id, credentials }) => {
   return promisedRequest({ url: MASTODON_UNMUTE_USER_URL(id), credentials, method: 'POST' })
 }
 
+const subscribeUser = ({ id, credentials }) => {
+  return promisedRequest({ url: MASTODON_SUBSCRIBE_USER(id), credentials, method: 'POST' })
+}
+
+const unsubscribeUser = ({ id, credentials }) => {
+  return promisedRequest({ url: MASTODON_UNSUBSCRIBE_USER(id), credentials, method: 'POST' })
+}
+
 const fetchBlocks = ({ credentials }) => {
   return promisedRequest({ url: MASTODON_USER_BLOCKS_URL, credentials })
     .then((users) => users.map(parseUser))
@@ -849,6 +865,48 @@ const reportUser = ({ credentials, userId, statusIds, comment, forward }) => {
   })
 }
 
+const search2 = ({ credentials, q, resolve, limit, offset, following }) => {
+  let url = MASTODON_SEARCH_2
+  let params = []
+
+  if (q) {
+    params.push(['q', encodeURIComponent(q)])
+  }
+
+  if (resolve) {
+    params.push(['resolve', resolve])
+  }
+
+  if (limit) {
+    params.push(['limit', limit])
+  }
+
+  if (offset) {
+    params.push(['offset', offset])
+  }
+
+  if (following) {
+    params.push(['following', true])
+  }
+
+  let queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
+  url += `?${queryString}`
+
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => {
+      if (data.ok) {
+        return data
+      }
+      throw new Error('Error fetching search result', data)
+    })
+    .then((data) => { return data.json() })
+    .then((data) => {
+      data.accounts = data.accounts.slice(0, limit).map(u => parseUser(u))
+      data.statuses = data.statuses.slice(0, limit).map(s => parseStatus(s))
+      return data
+    })
+}
+
 const apiService = {
   verifyCredentials,
   fetchTimeline,
@@ -878,6 +936,8 @@ const apiService = {
   fetchMutes,
   muteUser,
   unmuteUser,
+  subscribeUser,
+  unsubscribeUser,
   fetchBlocks,
   fetchOAuthTokens,
   revokeOAuthToken,
@@ -913,7 +973,8 @@ const apiService = {
   fetchFavoritedByUsers,
   fetchRebloggedByUsers,
   reportUser,
-  updateNotificationSettings
+  updateNotificationSettings,
+  search2
 }
 
 export default apiService

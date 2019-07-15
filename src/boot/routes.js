@@ -6,12 +6,12 @@ import ConversationPage from 'components/conversation-page/conversation-page.vue
 import Interactions from 'components/interactions/interactions.vue'
 import DMs from 'components/dm_timeline/dm_timeline.vue'
 import UserProfile from 'components/user_profile/user_profile.vue'
+import Search from 'components/search/search.vue'
 import Settings from 'components/settings/settings.vue'
 import Registration from 'components/registration/registration.vue'
 import UserSettings from 'components/user_settings/user_settings.vue'
 import FollowRequests from 'components/follow_requests/follow_requests.vue'
 import OAuthCallback from 'components/oauth_callback/oauth_callback.vue'
-import UserSearch from 'components/user_search/user_search.vue'
 import Notifications from 'components/notifications/notifications.vue'
 import AuthForm from 'components/auth_form/auth_form.js'
 import ChatPanel from 'components/chat_panel/chat_panel.vue'
@@ -45,7 +45,7 @@ export default (store) => {
     { name: 'login', path: '/login', component: AuthForm },
     { name: 'chat', path: '/chat', component: ChatPanel, props: () => ({ floating: false }) },
     { name: 'oauth-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) },
-    { name: 'user-search', path: '/user-search', component: UserSearch, props: (route) => ({ query: route.query.query }) },
+    { name: 'search', path: '/search', component: Search, props: (route) => ({ query: route.query.query }) },
     { name: 'who-to-follow', path: '/who-to-follow', component: WhoToFollow },
     { name: 'about', path: '/about', component: About },
     { name: 'user-profile', path: '/(users/)?:name', component: UserProfile }

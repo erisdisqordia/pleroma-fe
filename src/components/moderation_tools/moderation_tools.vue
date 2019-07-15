@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="block"
-    style="position: relative"
-  >
+  <div>
     <Popper
       trigger="click"
       append-to-body
@@ -131,6 +128,7 @@
       </div>
       <button
         slot="reference"
+        class="btn btn-default btn-block"
         :class="{ pressed: showDropDown }"
         @click="toggleMenu"
       >

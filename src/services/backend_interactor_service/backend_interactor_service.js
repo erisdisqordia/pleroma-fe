@@ -108,6 +108,8 @@ const backendInteractorService = credentials => {
   const fetchMutes = () => apiService.fetchMutes({ credentials })
   const muteUser = (id) => apiService.muteUser({ credentials, id })
   const unmuteUser = (id) => apiService.unmuteUser({ credentials, id })
+  const subscribeUser = (id) => apiService.subscribeUser({ credentials, id })
+  const unsubscribeUser = (id) => apiService.unsubscribeUser({ credentials, id })
   const fetchBlocks = () => apiService.fetchBlocks({ credentials })
   const fetchFollowRequests = () => apiService.fetchFollowRequests({ credentials })
   const fetchOAuthTokens = () => apiService.fetchOAuthTokens({ credentials })
@@ -148,6 +150,8 @@ const backendInteractorService = credentials => {
   const unfavorite = (id) => apiService.unfavorite({ id, credentials })
   const retweet = (id) => apiService.retweet({ id, credentials })
   const unretweet = (id) => apiService.unretweet({ id, credentials })
+  const search2 = ({ q, resolve, limit, offset, following }) =>
+    apiService.search2({ credentials, q, resolve, limit, offset, following })
 
   const backendInteractorServiceInstance = {
     fetchStatus,
@@ -167,6 +171,8 @@ const backendInteractorService = credentials => {
     fetchMutes,
     muteUser,
     unmuteUser,
+    subscribeUser,
+    unsubscribeUser,
     fetchBlocks,
     fetchOAuthTokens,
     revokeOAuthToken,
@@ -209,7 +215,8 @@ const backendInteractorService = credentials => {
     unfavorite,
     retweet,
     unretweet,
-    updateNotificationSettings
+    updateNotificationSettings,
+    search2
   }
 
   return backendInteractorServiceInstance

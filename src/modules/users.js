@@ -135,6 +135,7 @@ export const mutations = {
         user.following = relationship.following
         user.muted = relationship.muting
         user.statusnet_blocking = relationship.blocking
+        user.subscribed = relationship.subscribing
       }
     })
   },
@@ -303,6 +304,14 @@ const users = {
     },
     clearFollowers ({ commit }, userId) {
       commit('clearFollowers', userId)
+    },
+    subscribeUser ({ rootState, commit }, id) {
+      return rootState.api.backendInteractor.subscribeUser(id)
+        .then((relationship) => commit('updateUserRelationship', [relationship]))
+    },
+    unsubscribeUser ({ rootState, commit }, id) {
+      return rootState.api.backendInteractor.unsubscribeUser(id)
+        .then((relationship) => commit('updateUserRelationship', [relationship]))
     },
     registerPushNotifications (store) {
       const token = store.state.currentUser.credentials

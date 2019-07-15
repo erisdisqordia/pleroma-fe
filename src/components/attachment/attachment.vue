@@ -100,7 +100,7 @@
         <!-- eslint-disable vue/no-v-html -->
         <h1><a :href="attachment.url">{{ attachment.oembed.title }}</a></h1>
         <div v-html="attachment.oembed.oembedHTML" />
-        <!-- eslint-enabled vue/no-v-html -->
+        <!-- eslint-enable vue/no-v-html -->
       </div>
     </div>
   </div>

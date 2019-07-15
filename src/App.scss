@@ -283,6 +283,31 @@ i[class*=icon-] {
   color: var(--icon, $fallback--icon)
 }
 
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-group {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+
+  button {
+    position: relative;
+    flex: 1 1 auto;
+
+    &:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
 
 .container {
   display: flex;

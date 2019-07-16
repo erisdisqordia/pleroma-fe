@@ -820,11 +820,12 @@ $status-margin: 0.75em;
 }
 
 .status-actions {
+  position: relative;
   width: 100%;
   display: flex;
   margin-top: $status-margin;
 
-  div, favorite-button {
+  > * {
     max-width: 4em;
     flex: 1;
   }

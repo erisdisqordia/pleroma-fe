@@ -174,51 +174,47 @@
                 v-if="isReply"
                 class="reply-to-and-accountname"
               >
-                <Popper
+                <v-popover
+                  v-if="!isPreview"
                   ref="statusPreviewPopper"
-                  :options="{
-                    placement: 'top-start',
-                    modifiers: {
-                      preventOverflow: { padding: 50, boundariesElement: 'viewport' },
-                    }
-                  }"
+                  popoverClass="status-popover"
+                  placement="top-start"
+                  trigger="hover"
+                  :offset="5"
+                  :container="false"
                   @show="replyEnter(status.in_reply_to_status_id)"
                 >
-                  <div class="popper-wrapper status-preview">
+                  <div slot="popover">
+                    <status
+                      v-if="preview"
+                      :is-preview="true"
+                      :statusoid="preview"
+                      :compact="true"
+                    />
                     <div
-                      class="popper-wrapper-inner"
-                      @mouseover.prevent.stop
-                      @focus.prevent.stop
+                      v-else
+                      class="status-preview-loading"
                     >
-                      <status
-                        v-if="preview"
-                        :is-preview="true"
-                        :statusoid="preview"
-                        :compact="true"
-                      />
-                      <div
-                        v-else
-                        class="status-preview-loading"
-                      >
-                        <i class="icon-spin4 animate-spin" />
-                      </div>
+                      <i class="icon-spin4 animate-spin" />
                     </div>
                   </div>
 
                   <a
-                    slot="reference"
                     class="reply-to"
                     href="#"
                     :aria-label="$t('tool_tip.reply')"
                     @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
                   >
-                    <i
-                      v-if="!isPreview"
-                      class="button-icon icon-reply"
-                    />
+                    <i class="button-icon icon-reply" />
                     <span class="faint-link reply-to-text">{{ $t('status.reply_to') }}</span>
                   </a>
-                </Popper>
+                </v-popover>
+                <span
+                  v-else
+                  class="reply-to"
+                >
+                  <span class="reply-to-text">{{ $t('status.reply_to') }}</span>
+                </span>
                 <router-link :to="replyProfileLink">
                   {{ replyToName }}
                 </router-link>
@@ -604,6 +600,8 @@ $status-margin: 0.75em;
       overflow: hidden;
       text-overflow: ellipsis;
       margin: 0 0.4em 0 0.2em;
+      color: $fallback--faint;
+      color: var(--faint, $fallback--faint);
     }
 
     .replies-separator {
@@ -863,21 +861,43 @@ a.unmute {
   }
 }
 
-.popper-wrapper.status-preview {
-  font-size: 1rem;
-  background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
-  border-style: solid;
-  border-width: 1px;
-  border-radius: $fallback--tooltipRadius;
-  border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-  box-shadow: var(--popupShadow);
-  min-width: 15em;
-  max-width: 95%;
-  margin-left: 0.5em;
+.tooltip.popover.status-popover {
+  .popover-inner {
+    font-size: 1rem;
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--popupShadow);
+    min-width: 15em;
+    max-width: 95%;
+    margin-left: 0.5em;
+  }
+
+  .popover-arrow::before {
+    position: absolute;
+    content: '';
+    left: -7px;
+    border: solid 7px transparent;
+    z-index: -1;
+  }
+
+  &[x-placement^="bottom-start"] .popover-arrow::before {
+    top: -2px;
+    border-top-width: 0;
+    border-bottom-color: $fallback--border;
+    border-bottom-color: var(--border, $fallback--border);
+  }
+
+  &[x-placement^="top-start"] .popover-arrow::before {
+    bottom: -2px;
+    border-bottom-width: 0;
+    border-top-color: $fallback--border;
+    border-top-color: var(--border, $fallback--border);
+  }
 
   .status-el.status-el {
     border: none;
@@ -890,28 +910,6 @@ a.unmute {
     i {
       font-size: 2em;
     }
-  }
-
-  .popper__arrow::before {
-    position: absolute;
-    content: '';
-    left: -7px;
-    border: solid 7px transparent;
-    z-index: -1;
-  }
-
-  &[x-placement^="bottom"] .popper__arrow::before {
-    top: -2px;
-    border-top-width: 0;
-    border-bottom-color: $fallback--border;
-    border-bottom-color: var(--border, $fallback--border);
-  }
-
-  &[x-placement^="top"] .popper__arrow::before {
-    bottom: -2px;
-    border-bottom-width: 0;
-    border-top-color: $fallback--border;
-    border-top-color: var(--border, $fallback--border);
   }
 }
 

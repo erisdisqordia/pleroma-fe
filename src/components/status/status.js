@@ -1,4 +1,3 @@
-import Popper from 'vue-popperjs/src/component/popper.js.vue'
 import Attachment from '../attachment/attachment.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
@@ -290,7 +289,6 @@ const Status = {
     }
   },
   components: {
-    Popper,
     Attachment,
     FavoriteButton,
     RetweetButton,

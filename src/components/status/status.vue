@@ -864,8 +864,12 @@ a.unmute {
 }
 
 .tooltip.popover.status-popover {
+  font-size: 1rem;
+  min-width: 15em;
+  max-width: 95%;
+  margin-left: 0.5em;
+
   .popover-inner {
-    font-size: 1rem;
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
     border-style: solid;
@@ -874,9 +878,6 @@ a.unmute {
     border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
     box-shadow: var(--popupShadow);
-    min-width: 15em;
-    max-width: 95%;
-    margin-left: 0.5em;
   }
 
   .popover-arrow::before {

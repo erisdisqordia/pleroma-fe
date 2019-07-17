@@ -177,12 +177,12 @@
                 <v-popover
                   v-if="!isPreview"
                   ref="statusPreviewPopper"
-                  popoverClass="status-popover"
+                  popover-class="status-popover"
                   placement="top-start"
                   trigger="hover"
                   :offset="5"
                   :container="false"
-                  :popperOptions="{
+                  :popper-options="{
                     modifiers: {
                       preventOverflow: { padding: 50, boundariesElement: 'viewport' },
                     }

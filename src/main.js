@@ -29,6 +29,7 @@ import VueClickOutside from 'v-click-outside'
 import PortalVue from 'portal-vue'
 import VBodyScrollLock from './directives/body_scroll_lock'
 import VTooltip from 'v-tooltip'
+import MobileDetect from 'mobile-detect'
 
 import afterStoreSetup from './boot/after_store.js'
 
@@ -41,7 +42,13 @@ Vue.use(VueChatScroll)
 Vue.use(VueClickOutside)
 Vue.use(PortalVue)
 Vue.use(VBodyScrollLock)
-Vue.use(VTooltip)
+Vue.use(VTooltip, {
+  popover: {
+    defaultTrigger: (new MobileDetect(window.navigator.userAgent)).mobile() ? 'click' : 'hover',
+    defaultContainer: false,
+    defaultOffset: 5
+  }
+})
 
 const i18n = new VueI18n({
   // By default, use the browser locale, we will update it if neccessary

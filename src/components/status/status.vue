@@ -181,7 +181,7 @@
                   placement="top-start"
                   :popper-options="{
                     modifiers: {
-                      preventOverflow: { padding: 50, boundariesElement: 'viewport' },
+                      preventOverflow: { padding: { top: 50 }, boundariesElement: 'viewport' },
                     }
                   }"
                   @show="replyEnter(status.in_reply_to_status_id)"

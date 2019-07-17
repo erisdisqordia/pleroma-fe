@@ -182,6 +182,11 @@
                   trigger="hover"
                   :offset="5"
                   :container="false"
+                  :popperOptions="{
+                    modifiers: {
+                      preventOverflow: { padding: 50, boundariesElement: 'viewport' },
+                    }
+                  }"
                   @show="replyEnter(status.in_reply_to_status_id)"
                 >
                   <div slot="popover">

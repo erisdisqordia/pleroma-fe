@@ -13,7 +13,7 @@ import { debounce } from 'lodash'
 
 const debounceUserSearch = debounce((data, input) => {
   data.updateUsersList(input)
-}, 500, {leading: true, trailing: false})
+}, 500, { leading: true, trailing: false })
 
 export default data => input => {
   const firstChar = input[0]

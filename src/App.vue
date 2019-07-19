@@ -4,6 +4,7 @@
     :style="bgAppStyle"
   >
     <div
+      id="app_bg_wrapper"
       class="app-bg-wrapper"
       :style="bgStyle"
     />

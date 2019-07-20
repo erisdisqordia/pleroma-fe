@@ -167,11 +167,11 @@ export const mutations = {
   },
   setPinned (state, status) {
     const user = state.usersObject[status.user.id]
-    const index = user.pinnedStatuseIds.indexOf(status.id)
+    const index = user.pinnedStatusIds.indexOf(status.id)
     if (status.pinned && index === -1) {
-      user.pinnedStatuseIds.push(status.id)
+      user.pinnedStatusIds.push(status.id)
     } else if (!status.pinned && index !== -1) {
-      user.pinnedStatuseIds.splice(index, 1)
+      user.pinnedStatusIds.splice(index, 1)
     }
   },
   setUserForStatus (state, status) {

@@ -22,7 +22,7 @@
             :timeline="timeline"
             timeline-name="user"
             :user-id="userId"
-            :pinned-status-ids="user.pinnedStatuseIds"
+            :pinned-status-ids="user.pinnedStatusIds"
           />
         </div>
         <div

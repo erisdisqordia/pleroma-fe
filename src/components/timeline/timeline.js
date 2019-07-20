@@ -12,7 +12,7 @@ const Timeline = {
     'tag',
     'embedded',
     'count',
-    'excludedStatusIds'
+    'pinnedStatusIds'
   ],
   data () {
     return {
@@ -42,8 +42,8 @@ const Timeline = {
       }
     },
     statuses () {
-      if (this.excludedStatusIds && this.excludedStatusIds.length > 0) {
-        return this.timeline.visibleStatuses && this.timeline.visibleStatuses.filter(status => !this.excludedStatusIds.includes(status.id))
+      if (this.pinnedStatusIds && this.pinnedStatusIds.length > 0) {
+        return this.timeline.visibleStatuses && this.timeline.visibleStatuses.filter(status => !this.pinnedStatusIds.includes(status.id))
       } else {
         return this.timeline.visibleStatuses
       }

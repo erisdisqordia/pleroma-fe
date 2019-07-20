@@ -34,6 +34,7 @@
             :timeline="timeline"
             :timeline-name="'user'"
             :user-id="userId"
+            :pinned-status-ids="user.pinnedStatuseIds"
           />
         </div>
         <div
@@ -75,7 +76,6 @@
           timeline-name="media"
           :timeline="media"
           :user-id="userId"
-          :excludedStatusIds="user.pinnedStatuseIds"
         />
         <Timeline
           v-if="isUs"

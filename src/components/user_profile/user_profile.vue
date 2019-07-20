@@ -20,7 +20,7 @@
             :embedded="true"
             :title="$t('user_profile.timeline_title')"
             :timeline="timeline"
-            :timeline-name="'user'"
+            timeline-name="user"
             :user-id="userId"
             :pinned-status-ids="user.pinnedStatuseIds"
           />

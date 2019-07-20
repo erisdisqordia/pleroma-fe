@@ -28,6 +28,18 @@
     </div>
     <div :class="classes.body">
       <div class="timeline">
+        <template v-for="statusId in pinnedStatusIds">
+          <conversation
+            v-if="timeline.statusesObject[statusId]"
+            :key="statusId"
+            class="status-fadein"
+            :statusoid="timeline.statusesObject[statusId]"
+            :collapsable="true"
+            :show-pinned="true"
+          />
+        </template>
+      </div>
+      <div class="timeline">
         <conversation
           v-for="status in statuses"
           :key="status.id"

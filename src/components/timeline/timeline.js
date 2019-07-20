@@ -41,12 +41,18 @@ const Timeline = {
         footer: ['timeline-footer'].concat(!this.embedded ? ['panel-footer'] : [])
       }
     },
-    statuses () {
+    // id map of statuses which need to be hidden in the main list due to pinning logic
+    excludedStatusIdsObject () {
+      const result = {}
       if (this.pinnedStatusIds && this.pinnedStatusIds.length > 0) {
-        return this.timeline.visibleStatuses && this.timeline.visibleStatuses.filter(status => !this.pinnedStatusIds.includes(status.id))
-      } else {
-        return this.timeline.visibleStatuses
+        for (let status of this.timeline.visibleStatuses) {
+          if (this.pinnedStatusIds.indexOf(status.id) === -1) {
+            break
+          }
+          result[status.id] = true
+        }
       }
+      return result
     }
   },
   components: {

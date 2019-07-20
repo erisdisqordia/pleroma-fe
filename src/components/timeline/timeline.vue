@@ -38,13 +38,15 @@
             :show-pinned="true"
           />
         </template>
-        <conversation
-          v-for="status in statuses"
-          :key="status.id"
-          class="status-fadein"
-          :statusoid="status"
-          :collapsable="true"
-        />
+        <template v-for="status in timeline.visibleStatuses">
+          <conversation
+            v-if="!excludedStatusIdsObject[status.id]"
+            :key="status.id"
+            class="status-fadein"
+            :statusoid="status"
+            :collapsable="true"
+          />
+        </template>
       </div>
     </div>
     <div :class="classes.footer">

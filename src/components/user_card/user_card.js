@@ -5,6 +5,7 @@ import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+import { isEqual } from 'lodash'
 
 export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered' ],
@@ -100,6 +101,11 @@ export default {
       const validRole = rights.admin || rights.moderator
       const roleTitle = rights.admin ? 'admin' : 'moderator'
       return validRole && roleTitle
+    },
+    isActiveRoute () {
+      const profileRoute = this.userProfileLink(this.user)
+      const currentRoute = this.$router.currentRoute
+      return profileRoute.name === currentRoute.name && isEqual(profileRoute.params, currentRoute.params)
     }
   },
   components: {
@@ -162,6 +168,14 @@ export default {
     },
     reportUser () {
       this.$store.dispatch('openUserReportingModal', this.user.id)
+    },
+    enlargeAvatar () {
+      const attachment = {
+        url: this.user.profile_image_url_original,
+        mimetype: 'image'
+      }
+      this.$store.dispatch('setMedia', [attachment])
+      this.$store.dispatch('setCurrent', attachment)
     }
   }
 }

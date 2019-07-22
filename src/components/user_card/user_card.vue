@@ -7,7 +7,20 @@
     <div class="panel-heading">
       <div class="user-info">
         <div class="container">
-          <router-link :to="userProfileLink(user)">
+          <a
+            v-if="isActiveRoute"
+            class="user-info-avatar-link"
+            @click="enlargeAvatar"
+          >
+            <UserAvatar
+              :better-shadow="betterShadow"
+              :user="user"
+            />
+          </a>
+          <router-link
+            v-else
+            :to="userProfileLink(user)"
+          >
             <UserAvatar
               :better-shadow="betterShadow"
               :user="user"
@@ -370,6 +383,10 @@
     img {
       visibility: visible;
     }
+  }
+
+  &-avatar-link {
+    cursor: pointer;
   }
 
   .usersettings {

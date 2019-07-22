@@ -110,8 +110,9 @@ const Status = {
     },
     muteWordHits () {
       const statusText = this.status.text.toLowerCase()
+      const statusSummary = this.status.summary.toLowerCase()
       const hits = filter(this.muteWords, (muteWord) => {
-        return statusText.includes(muteWord.toLowerCase())
+        return statusText.includes(muteWord.toLowerCase()) || statusSummary.includes(muteWord.toLowerCase())
       })
 
       return hits

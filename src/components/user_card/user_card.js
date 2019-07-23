@@ -104,8 +104,7 @@ export default {
     },
     isActiveRoute () {
       const profileRoute = this.userProfileLink(this.user)
-      const currentRoute = this.$router.currentRoute
-      return profileRoute.name === currentRoute.name && isEqual(profileRoute.params, currentRoute.params)
+      return profileRoute.name === this.$route.name && isEqual(profileRoute.params, this.$route.params)
     }
   },
   components: {

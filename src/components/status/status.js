@@ -322,11 +322,8 @@ const Status = {
       this.error = undefined
     },
     linkClicked (event) {
-      let { target } = event
-      if (target.tagName === 'SPAN') {
-        target = target.parentNode
-      }
-      if (target.tagName === 'A') {
+      const target = event.target.closest('.status-content a')
+      if (target) {
         if (target.className.match(/mention/)) {
           const href = target.href
           const attn = this.status.attentions.find(attn => mentionMatchesUrl(attn, href))

@@ -106,6 +106,9 @@
     "expired": "La encuesta terminó hace {0}",
     "not_enough_options": "Muy pocas opciones únicas en la encuesta"
   },
+  "stickers": {
+    "add_sticker": "Añadir Pegatina"
+  },
   "interactions": {
     "favs_repeats": "Favoritos y Repetidos",
     "follows": "Nuevos seguidores",

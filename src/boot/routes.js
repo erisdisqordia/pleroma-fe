@@ -49,12 +49,12 @@ export default (store) => {
     { name: 'registration-token', path: '/registration/:token', component: Registration },
     { name: 'friend-requests', path: '/friend-requests', component: FollowRequests, beforeEnter: validateAuthenticatedRoute },
     { name: 'user-settings', path: '/user-settings', component: UserSettings, beforeEnter: validateAuthenticatedRoute },
-    { name: 'notifications', path: '/:username/notifications', component: Notifications },
+    { name: 'notifications', path: '/:username/notifications', component: Notifications, beforeEnter: validateAuthenticatedRoute },
     { name: 'login', path: '/login', component: AuthForm },
     { name: 'chat', path: '/chat', component: ChatPanel, props: () => ({ floating: false }) },
     { name: 'oauth-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) },
     { name: 'search', path: '/search', component: Search, props: (route) => ({ query: route.query.query }) },
-    { name: 'who-to-follow', path: '/who-to-follow', component: WhoToFollow },
+    { name: 'who-to-follow', path: '/who-to-follow', component: WhoToFollow, beforeEnter: validateAuthenticatedRoute },
     { name: 'about', path: '/about', component: About },
     { name: 'user-profile', path: '/(users/)?:name', component: UserProfile }
   ]

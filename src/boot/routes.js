@@ -19,6 +19,14 @@ import WhoToFollow from 'components/who_to_follow/who_to_follow.vue'
 import About from 'components/about/about.vue'
 
 export default (store) => {
+  const validateAuthenticatedRoute = (to, from, next) => {
+    if (store.state.users.currentUser) {
+      next()
+    } else {
+      next(store.state.instance.redirectRootNoLogin || '/main/all')
+    }
+  }
+
   return [
     { name: 'root',
       path: '/',
@@ -30,23 +38,23 @@ export default (store) => {
     },
     { name: 'public-external-timeline', path: '/main/all', component: PublicAndExternalTimeline },
     { name: 'public-timeline', path: '/main/public', component: PublicTimeline },
-    { name: 'friends', path: '/main/friends', component: FriendsTimeline },
+    { name: 'friends', path: '/main/friends', component: FriendsTimeline, beforeEnter: validateAuthenticatedRoute },
     { name: 'tag-timeline', path: '/tag/:tag', component: TagTimeline },
     { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
     { name: 'external-user-profile', path: '/users/:id', component: UserProfile },
-    { name: 'interactions', path: '/users/:username/interactions', component: Interactions },
-    { name: 'dms', path: '/users/:username/dms', component: DMs },
+    { name: 'interactions', path: '/users/:username/interactions', component: Interactions, beforeEnter: validateAuthenticatedRoute },
+    { name: 'dms', path: '/users/:username/dms', component: DMs, beforeEnter: validateAuthenticatedRoute },
     { name: 'settings', path: '/settings', component: Settings },
     { name: 'registration', path: '/registration', component: Registration },
     { name: 'registration-token', path: '/registration/:token', component: Registration },
-    { name: 'friend-requests', path: '/friend-requests', component: FollowRequests },
-    { name: 'user-settings', path: '/user-settings', component: UserSettings },
-    { name: 'notifications', path: '/:username/notifications', component: Notifications },
+    { name: 'friend-requests', path: '/friend-requests', component: FollowRequests, beforeEnter: validateAuthenticatedRoute },
+    { name: 'user-settings', path: '/user-settings', component: UserSettings, beforeEnter: validateAuthenticatedRoute },
+    { name: 'notifications', path: '/:username/notifications', component: Notifications, beforeEnter: validateAuthenticatedRoute },
     { name: 'login', path: '/login', component: AuthForm },
     { name: 'chat', path: '/chat', component: ChatPanel, props: () => ({ floating: false }) },
     { name: 'oauth-callback', path: '/oauth-callback', component: OAuthCallback, props: (route) => ({ code: route.query.code }) },
     { name: 'search', path: '/search', component: Search, props: (route) => ({ query: route.query.query }) },
-    { name: 'who-to-follow', path: '/who-to-follow', component: WhoToFollow },
+    { name: 'who-to-follow', path: '/who-to-follow', component: WhoToFollow, beforeEnter: validateAuthenticatedRoute },
     { name: 'about', path: '/about', component: About },
     { name: 'user-profile', path: '/(users/)?:name', component: UserProfile }
   ]

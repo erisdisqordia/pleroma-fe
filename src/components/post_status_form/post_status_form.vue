@@ -158,6 +158,17 @@
             @upload-failed="uploadFailed"
           />
           <div
+            v-if="stickersAvailable"
+            class="sticker-icon"
+          >
+            <i
+              :title="$t('stickers.add_sticker')"
+              class="icon-picture btn btn-default"
+              :class="{ selected: stickerPickerVisible }"
+              @click="toggleStickerPicker"
+            />
+          </div>
+          <div
             v-if="pollsAvailable"
             class="poll-icon"
           >
@@ -169,7 +180,6 @@
             />
           </div>
         </div>
-
         <button
           v-if="posting"
           disabled
@@ -248,6 +258,11 @@
         <label for="filesSensitive">{{ $t('post_status.attachments_sensitive') }}</label>
       </div>
     </form>
+    <sticker-picker
+      v-if="stickerPickerVisible"
+      ref="stickerPicker"
+      @uploaded="addMediaFile"
+    />
   </div>
 </template>
 
@@ -310,7 +325,7 @@
     }
   }
 
-  .poll-icon {
+  .poll-icon, .sticker-icon {
     font-size: 26px;
     flex: 1;
 
@@ -318,6 +333,11 @@
       color: $fallback--lightText;
       color: var(--lightText, $fallback--lightText);
     }
+  }
+
+  .sticker-icon {
+    flex: 0;
+    min-width: 50px;
   }
 
   .icon-chart-bar {

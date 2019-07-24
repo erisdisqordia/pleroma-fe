@@ -322,8 +322,7 @@ const Status = {
       this.error = undefined
     },
     linkClicked (event) {
-      let { target } = event
-      target = target.tagName === 'A' ? target : target.closest('.status-content a')
+      const target = event.target.closest('.status-content a')
       if (target) {
         if (target.className.match(/mention/)) {
           const href = target.href

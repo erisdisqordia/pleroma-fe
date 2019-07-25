@@ -46,7 +46,7 @@ const Timeline = {
       const result = {}
       if (this.pinnedStatusIds && this.pinnedStatusIds.length > 0) {
         for (let status of this.timeline.visibleStatuses) {
-          if (this.pinnedStatusIds.indexOf(status.id) === -1) {
+          if (!this.pinnedStatusIds.includes(status.id)) {
             break
           }
           result[status.id] = true

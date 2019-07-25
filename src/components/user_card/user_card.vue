@@ -8,9 +8,9 @@
       <div class="user-info">
         <div class="container">
           <a
-            v-if="isActiveRoute"
+            v-if="allowZoomingAvatar"
             class="user-info-avatar-link"
-            @click="enlargeAvatar"
+            @click="zoomAvatar"
           >
             <UserAvatar
               :better-shadow="betterShadow"

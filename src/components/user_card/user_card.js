@@ -5,10 +5,9 @@ import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
-import { isEqual } from 'lodash'
 
 export default {
-  props: [ 'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered' ],
+  props: [ 'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar' ],
   data () {
     return {
       followRequestInProgress: false,
@@ -101,10 +100,6 @@ export default {
       const validRole = rights.admin || rights.moderator
       const roleTitle = rights.admin ? 'admin' : 'moderator'
       return validRole && roleTitle
-    },
-    isActiveRoute () {
-      const profileRoute = this.userProfileLink(this.user)
-      return profileRoute.name === this.$route.name && isEqual(profileRoute.params, this.$route.params)
     }
   },
   components: {
@@ -168,7 +163,7 @@ export default {
     reportUser () {
       this.$store.dispatch('openUserReportingModal', this.user.id)
     },
-    enlargeAvatar () {
+    zoomAvatar () {
       const attachment = {
         url: this.user.profile_image_url_original,
         mimetype: 'image'

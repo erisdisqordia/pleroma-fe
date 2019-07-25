@@ -3,15 +3,28 @@ import { difference } from 'lodash'
 
 describe('Timeline', () => {
   describe('getExcludedStatusIdsByPinning', () => {
-    it('should not return unpinned status ids', () => {
-      const statuses = [
-        { id: 1 },
-        { id: 2 },
-        { id: 3 },
-        { id: 4 }
-      ]
-      const pinnedStatusIds = [1, 3]
+    const mockStatuses = (ids) => ids.map(id => ({ id }))
+
+    it('should not return any unpinned status ids', () => {
+      const statuses = mockStatuses([1, 2, 3, 4])
+      const pinnedStatusIds = [1, 3, 5]
       expect(difference(getExcludedStatusIdsByPinning(statuses, pinnedStatusIds), pinnedStatusIds)).to.eql([])
+    })
+
+    it('should not return any status ids not listed in the given statuses', () => {
+      const statusIds = [1, 2, 3, 4]
+      const statuses = mockStatuses(statusIds)
+      const pinnedStatusIds = [1, 3, 5]
+      expect(difference(getExcludedStatusIdsByPinning(statuses, pinnedStatusIds), statusIds)).to.eql([])
+    })
+
+    it('should return ids of pinned statuses not posted before any unpinned status', () => {
+      const pinnedStatusIdSet1 = ['PINNED1', 'PINNED2']
+      const pinnedStatusIdSet2 = ['PINNED3', 'PINNED4']
+      const pinnedStatusIds = [...pinnedStatusIdSet1, ...pinnedStatusIdSet2]
+      const statusIds = [...pinnedStatusIdSet1, 'UNPINNED1', ...pinnedStatusIdSet2]
+      const statuses = mockStatuses(statusIds)
+      expect(getExcludedStatusIdsByPinning(statuses, pinnedStatusIds)).to.eql(pinnedStatusIdSet1)
     })
   })
 })

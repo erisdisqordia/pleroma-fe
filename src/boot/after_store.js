@@ -148,6 +148,37 @@ const getInstancePanel = async ({ store }) => {
   }
 }
 
+const getStickers = async ({ store }) => {
+  try {
+    const res = await window.fetch('/static/stickers.json')
+    if (res.ok) {
+      const values = await res.json()
+      const stickers = (await Promise.all(
+        Object.entries(values).map(async ([name, path]) => {
+          const resPack = await window.fetch(path + 'pack.json')
+          var meta = {}
+          if (resPack.ok) {
+            meta = await resPack.json()
+          }
+          return {
+            pack: name,
+            path,
+            meta
+          }
+        })
+      )).sort((a, b) => {
+        return a.meta.title.localeCompare(b.meta.title)
+      })
+      store.dispatch('setInstanceOption', { name: 'stickers', value: stickers })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load stickers")
+    console.warn(e)
+  }
+}
+
 const getStaticEmoji = async ({ store }) => {
   try {
     const res = await window.fetch('/static/emoji.json')
@@ -286,6 +317,7 @@ const afterStoreSetup = async ({ store, i18n }) => {
     setConfig({ store }),
     getTOS({ store }),
     getInstancePanel({ store }),
+    getStickers({ store }),
     getStaticEmoji({ store }),
     getCustomEmoji({ store }),
     getNodeInfo({ store })

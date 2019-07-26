@@ -53,6 +53,12 @@
           background: transparent;
           z-index: 5;
         }
+
+        img {
+          max-height: 26px;
+          vertical-align: top;
+          margin-top: -5px;
+        }
       }
 
       &:not(.active) {

@@ -3,6 +3,7 @@ import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
 import PollForm from '../poll/poll_form.vue'
+import StickerPicker from '../sticker_picker/sticker_picker.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { reject, map, uniqBy } from 'lodash'
 import suggestor from '../emoji-input/suggestor.js'
@@ -34,6 +35,7 @@ const PostStatusForm = {
     MediaUpload,
     EmojiInput,
     PollForm,
+    StickerPicker,
     ScopeSelector
   },
   mounted () {
@@ -82,7 +84,8 @@ const PostStatusForm = {
         contentType
       },
       caret: 0,
-      pollFormVisible: false
+      pollFormVisible: false,
+      stickerPickerVisible: false
     }
   },
   computed: {
@@ -104,7 +107,8 @@ const PostStatusForm = {
           ...this.$store.state.instance.emoji,
           ...this.$store.state.instance.customEmoji
         ],
-        users: this.$store.state.users.users
+        users: this.$store.state.users.users,
+        updateUsersList: (input) => this.$store.dispatch('searchUsers', input)
       })
     },
     emojiSuggestor () {
@@ -156,6 +160,12 @@ const PostStatusForm = {
     },
     safeDMEnabled () {
       return this.$store.state.instance.safeDM
+    },
+    stickersAvailable () {
+      if (this.$store.state.instance.stickers) {
+        return this.$store.state.instance.stickers.length > 0
+      }
+      return 0
     },
     pollsAvailable () {
       return this.$store.state.instance.pollsAvailable &&
@@ -212,6 +222,7 @@ const PostStatusForm = {
             poll: {}
           }
           this.pollFormVisible = false
+          this.stickerPickerVisible = false
           this.$refs.mediaUpload.clearFile()
           this.clearPollForm()
           this.$emit('posted')
@@ -228,6 +239,7 @@ const PostStatusForm = {
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
       this.enableSubmit()
+      this.stickerPickerVisible = false
     },
     removeMediaFile (fileInfo) {
       let index = this.newStatus.files.indexOf(fileInfo)
@@ -286,6 +298,14 @@ const PostStatusForm = {
     },
     changeVis (visibility) {
       this.newStatus.visibility = visibility
+    },
+    toggleStickerPicker () {
+      this.stickerPickerVisible = !this.stickerPickerVisible
+    },
+    clearStickerPicker () {
+      if (this.$refs.stickerPicker) {
+        this.$refs.stickerPicker.clear()
+      }
     },
     togglePollForm () {
       this.pollFormVisible = !this.pollFormVisible

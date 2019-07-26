@@ -283,7 +283,6 @@
 
 .user-card {
   background-size: cover;
-  overflow: hidden;
 
   .panel-heading {
     padding: .5em 0;
@@ -298,6 +297,8 @@
     word-wrap: break-word;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%);
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
   }
 
   p {
@@ -503,6 +504,7 @@
     }
   }
   .user-interactions {
+    position: relative;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;

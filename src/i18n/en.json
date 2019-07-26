@@ -106,6 +106,9 @@
     "expired": "Poll ended {0} ago",
     "not_enough_options": "Too few unique options in poll"
   },
+  "stickers": {
+    "add_sticker": "Add Sticker"
+  },
   "interactions": {
     "favs_repeats": "Repeats and Favorites",
     "follows": "New follows",

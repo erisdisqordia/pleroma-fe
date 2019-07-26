@@ -1,20 +1,27 @@
+import { debounce } from 'lodash'
 /**
  * suggest - generates a suggestor function to be used by emoji-input
  * data: object providing source information for specific types of suggestions:
  * data.emoji - optional, an array of all emoji available i.e.
  *   (state.instance.emoji + state.instance.customEmoji)
  * data.users - optional, an array of all known users
+ * updateUsersList - optional, a function to search and append to users
  *
  * Depending on data present one or both (or none) can be present, so if field
  * doesn't support user linking you can just provide only emoji.
  */
+
+const debounceUserSearch = debounce((data, input) => {
+  data.updateUsersList(input)
+}, 500, { leading: true, trailing: false })
+
 export default data => input => {
   const firstChar = input[0]
   if (firstChar === ':' && data.emoji) {
     return suggestEmoji(data.emoji)(input)
   }
   if (firstChar === '@' && data.users) {
-    return suggestUsers(data.users)(input)
+    return suggestUsers(data)(input)
   }
   return []
 }
@@ -38,9 +45,11 @@ export const suggestEmoji = emojis => input => {
     })
 }
 
-export const suggestUsers = users => input => {
+export const suggestUsers = data => input => {
   const noPrefix = input.toLowerCase().substr(1)
-  return users.filter(
+  const users = data.users
+
+  const newUsers = users.filter(
     user =>
       user.screen_name.toLowerCase().startsWith(noPrefix) ||
       user.name.toLowerCase().startsWith(noPrefix)
@@ -75,5 +84,11 @@ export const suggestUsers = users => input => {
     imageUrl: profile_image_url_original,
     replacement: '@' + screen_name + ' '
   }))
+
+  // BE search users if there are no matches
+  if (newUsers.length === 0 && data.updateUsersList) {
+    debounceUserSearch(data, noPrefix)
+  }
+  return newUsers
   /* eslint-enable camelcase */
 }

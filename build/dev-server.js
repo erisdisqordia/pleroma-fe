@@ -24,9 +24,6 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
   stats: {
     colors: true,
     chunks: false
-  },
-  headers: {
-    'content-security-policy': "base-uri 'self'; frame-ancestors 'none'; img-src 'self' data: https:; media-src 'self' https:; style-src 'self' 'unsafe-inline'; font-src 'self'; manifest-src 'self'; script-src 'self' 'unsafe-eval';"
   }
 })
 

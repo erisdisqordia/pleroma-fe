@@ -1,18 +1,15 @@
 <template>
   <div>
-    <Popper
+    <v-popover
       trigger="click"
-      append-to-body
-      :options="{
-        placement: 'bottom-end',
-        modifiers: {
-          arrow: { enabled: true },
-          offset: { offset: '0, 5px' },
-        }
-      }"
+      class="moderation-tools-popover"
+      :container="false"
+      placement="bottom-end"
+      :offset="5"
+      @show="showDropDown = true"
       @hide="showDropDown = false"
     >
-      <div class="popper-wrapper">
+      <div slot="popover">
         <div class="dropdown-menu">
           <span v-if="user.is_local">
             <button
@@ -127,14 +124,12 @@
         </div>
       </div>
       <button
-        slot="reference"
         class="btn btn-default btn-block"
         :class="{ pressed: showDropDown }"
-        @click="toggleMenu"
       >
         {{ $t('user_card.admin_menu.moderation') }}
       </button>
-    </Popper>
+    </v-popover>
     <portal to="modal">
       <DialogModal
         v-if="showDeleteUserDialog"
@@ -188,4 +183,11 @@
   }
 }
 
+.moderation-tools-popover {
+  height: 100%;
+  .trigger {
+    display: flex !important;
+    height: 100%;
+  }
+}
 </style>

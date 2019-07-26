@@ -110,8 +110,9 @@ const Status = {
     },
     muteWordHits () {
       const statusText = this.status.text.toLowerCase()
+      const statusSummary = this.status.summary.toLowerCase()
       const hits = filter(this.muteWords, (muteWord) => {
-        return statusText.includes(muteWord.toLowerCase())
+        return statusText.includes(muteWord.toLowerCase()) || statusSummary.includes(muteWord.toLowerCase())
       })
 
       return hits
@@ -280,6 +281,11 @@ const Status = {
     },
     tags () {
       return this.status.tags.filter(tagObj => tagObj.hasOwnProperty('name')).map(tagObj => tagObj.name).join(' ')
+    },
+    hidePostStats () {
+      return typeof this.$store.state.config.hidePostStats === 'undefined'
+        ? this.$store.state.instance.hidePostStats
+        : this.$store.state.config.hidePostStats
     }
   },
   components: {
@@ -316,11 +322,8 @@ const Status = {
       this.error = undefined
     },
     linkClicked (event) {
-      let { target } = event
-      if (target.tagName === 'SPAN') {
-        target = target.parentNode
-      }
-      if (target.tagName === 'A') {
+      const target = event.target.closest('.status-content a')
+      if (target) {
         if (target.className.match(/mention/)) {
           const href = target.href
           const attn = this.status.attentions.find(attn => mentionMatchesUrl(attn, href))

@@ -1,5 +1,4 @@
 import { getExcludedStatusIdsByPinning } from 'src/components/timeline/timeline.js'
-import { difference } from 'lodash'
 
 describe('Timeline', () => {
   describe('getExcludedStatusIdsByPinning', () => {
@@ -8,14 +7,14 @@ describe('Timeline', () => {
     it('should not return any unpinned status ids', () => {
       const statuses = mockStatuses([1, 2, 3, 4])
       const pinnedStatusIds = [1, 3, 5]
-      expect(difference(getExcludedStatusIdsByPinning(statuses, pinnedStatusIds), pinnedStatusIds)).to.eql([])
+      expect(pinnedStatusIds).to.include.members(getExcludedStatusIdsByPinning(statuses, pinnedStatusIds))
     })
 
     it('should not return any status ids not listed in the given statuses', () => {
       const statusIds = [1, 2, 3, 4]
       const statuses = mockStatuses(statusIds)
       const pinnedStatusIds = [1, 3, 5]
-      expect(difference(getExcludedStatusIdsByPinning(statuses, pinnedStatusIds), statusIds)).to.eql([])
+      expect(statusIds).to.include.members(getExcludedStatusIdsByPinning(statuses, pinnedStatusIds))
     })
 
     it('should return ids of pinned statuses not posted before any unpinned status', () => {

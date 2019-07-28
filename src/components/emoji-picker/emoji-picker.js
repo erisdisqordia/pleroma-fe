@@ -2,7 +2,7 @@ const filterByKeyword = (list, keyword = '') => {
   return list.filter(x => x.shortcode.indexOf(keyword) !== -1)
 }
 
-const EmojiSelector = {
+const EmojiPicker = {
   mounted () {
     document.body.addEventListener('click', this.outsideClicked)
   },
@@ -69,4 +69,4 @@ const EmojiSelector = {
   }
 }
 
-export default EmojiSelector
+export default EmojiPicker

@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<script src="./emoji-selector.js"></script>
+<script src="./emoji-picker.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';

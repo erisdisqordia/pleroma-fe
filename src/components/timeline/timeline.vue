@@ -28,13 +28,25 @@
     </div>
     <div :class="classes.body">
       <div class="timeline">
-        <conversation
-          v-for="status in timeline.visibleStatuses"
-          :key="status.id"
-          class="status-fadein"
-          :statusoid="status"
-          :collapsable="true"
-        />
+        <template v-for="statusId in pinnedStatusIds">
+          <conversation
+            v-if="timeline.statusesObject[statusId]"
+            :key="statusId + '-pinned'"
+            class="status-fadein"
+            :statusoid="timeline.statusesObject[statusId]"
+            :collapsable="true"
+            :show-pinned="true"
+          />
+        </template>
+        <template v-for="status in timeline.visibleStatuses">
+          <conversation
+            v-if="!excludedStatusIdsObject[status.id]"
+            :key="status.id"
+            class="status-fadein"
+            :statusoid="status"
+            :collapsable="true"
+          />
+        </template>
       </div>
     </div>
     <div :class="classes.footer">

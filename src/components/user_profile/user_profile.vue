@@ -15,25 +15,14 @@
         :render-only-focused="true"
       >
         <div :label="$t('user_card.statuses')">
-          <div class="timeline">
-            <template v-for="statusId in user.pinnedStatuseIds">
-              <Conversation
-                v-if="timeline.statusesObject[statusId]"
-                :key="statusId"
-                class="status-fadein"
-                :statusoid="timeline.statusesObject[statusId]"
-                :collapsable="true"
-                :show-pinned="true"
-              />
-            </template>
-          </div>
           <Timeline
             :count="user.statuses_count"
             :embedded="true"
             :title="$t('user_profile.timeline_title')"
             :timeline="timeline"
-            :timeline-name="'user'"
+            timeline-name="user"
             :user-id="userId"
+            :pinned-status-ids="user.pinnedStatusIds"
           />
         </div>
         <div

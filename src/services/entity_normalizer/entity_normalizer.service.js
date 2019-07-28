@@ -152,7 +152,7 @@ export const parseUser = (data) => {
   output.statuses_count = data.statuses_count
   output.friendIds = []
   output.followerIds = []
-  output.pinnedStatuseIds = []
+  output.pinnedStatusIds = []
 
   if (data.pleroma) {
     output.follow_request_count = data.pleroma.follow_request_count

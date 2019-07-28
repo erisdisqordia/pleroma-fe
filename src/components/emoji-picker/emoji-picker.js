@@ -1,33 +1,17 @@
 const filterByKeyword = (list, keyword = '') => {
-  return list.filter(x => x.shortcode.indexOf(keyword) !== -1)
+  return list.filter(x => x.displayText.includes(keyword))
 }
 
 const EmojiPicker = {
-  mounted () {
-    document.body.addEventListener('click', this.outsideClicked)
-  },
-  destroyed () {
-    document.body.removeEventListener('click', this.outsideClicked)
-  },
   data () {
     return {
-      open: false,
       keyword: '',
       activeGroup: 'standard'
     }
   },
   methods: {
-    togglePanel () {
-      this.open = !this.open
-    },
-    insideClicked (e) {
-      e.stopPropagation()
-    },
-    outsideClicked () {
-      this.open = false
-    },
     onEmoji (emoji) {
-      const value = emoji.image_url ? `:${emoji.shortcode}:` : emoji.utf
+      const value = emoji.imageUrl ? `:${emoji.displayText}:` : emoji.replacement
       this.$emit('emoji', ` ${value} `)
       this.open = false
     },
@@ -51,20 +35,17 @@ const EmojiPicker = {
       const standardEmojis = this.$store.state.instance.emoji || []
       const customEmojis = this.$store.state.instance.customEmoji || []
       return {
-        standard: {
-          text: 'Standard',
-          icon: 'icon-star',
-          emojis: filterByKeyword(standardEmojis, this.keyword)
-        },
         custom: {
           text: 'Custom',
           icon: 'icon-picture',
           emojis: filterByKeyword(customEmojis, this.keyword)
+        },
+        standard: {
+          text: 'Standard',
+          icon: 'icon-star',
+          emojis: filterByKeyword(standardEmojis, this.keyword)
         }
       }
-    },
-    serverUrl () {
-      return this.$store.state.instance.server
     }
   }
 }

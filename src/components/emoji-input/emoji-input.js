@@ -53,6 +53,11 @@ const EmojiInput = {
        */
       required: true,
       type: String
+    },
+    emojiPicker: {
+      required: false,
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -61,7 +66,8 @@ const EmojiInput = {
       highlighted: 0,
       caret: 0,
       focused: false,
-      blurTimeout: null
+      blurTimeout: null,
+      showPicker: false,
     }
   },
   components: {
@@ -83,11 +89,14 @@ const EmojiInput = {
           highlighted: index === this.highlighted
         }))
     },
-    showPopup () {
+    showSuggestions () {
       return this.focused && this.suggestions && this.suggestions.length > 0
     },
     textAtCaret () {
       return (this.wordAtCaret || {}).word || ''
+    },
+    pickerIconBottom () {
+      return this.input && this.input.tag === 'textarea'
     },
     wordAtCaret () {
       if (this.value && this.caret) {
@@ -124,10 +133,21 @@ const EmojiInput = {
     }
   },
   methods: {
+    togglePicker () {
+      this.showPicker = !this.showPicker
+    },
     replace (replacement) {
       const newValue = Completion.replaceWord(this.value, this.wordAtCaret, replacement)
       this.$emit('input', newValue)
       this.caret = 0
+    },
+    insert (insertion) {
+      const newValue = [
+        this.value.substring(0, this.caret),
+        insertion,
+        this.value.substring(this.caret)
+      ].join('')
+      this.$emit('input', newValue)
     },
     replaceText (e, suggestion) {
       const len = this.suggestions.length || 0
@@ -195,6 +215,7 @@ const EmojiInput = {
         this.blurTimeout = null
       }
 
+      this.showPicker = false
       this.focused = true
       this.setCaret(e)
       this.resize()
@@ -231,6 +252,7 @@ const EmojiInput = {
       }
     },
     onInput (e) {
+      this.showPicker = false
       this.setCaret(e)
       this.$emit('input', e.target.value)
     },
@@ -238,6 +260,9 @@ const EmojiInput = {
       this.setCaret(e)
       this.resize()
       this.$emit('input', e.target.value)
+    },
+    onClickOutside () {
+      this.showPicker = false
     },
     setCaret ({ target: { selectionStart } }) {
       this.caret = selectionStart
@@ -247,6 +272,7 @@ const EmojiInput = {
       if (!panel) return
       const { offsetHeight, offsetTop } = this.input.elm
       this.$refs.panel.style.top = (offsetTop + offsetHeight) + 'px'
+      this.$refs.picker.$el.style.top = (offsetTop + offsetHeight) + 'px'
     }
   }
 }

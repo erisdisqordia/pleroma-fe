@@ -1,10 +1,29 @@
 <template>
-  <div class="emoji-input">
+<div
+  class="emoji-input"
+  v-click-outside="onClickOutside"
+  >
     <slot />
+    <template v-if="emojiPicker">
+      <div
+        @click.prevent="togglePicker"
+        class="emoji-picker-icon"
+        :class="pickerIconBottom ? 'picker-icon-bottom': 'picker-icon-right'"
+        >
+        <i class="icon-smile"></i>
+      </div>
+      <EmojiPicker
+        v-if="emojiPicker"
+        :class="{ hide: !showPicker }"
+        ref="picker"
+        class="emoji-picker-panel"
+        @emoji="insert"
+        />
+    </template>
     <div
       ref="panel"
       class="autocomplete-panel"
-      :class="{ hide: !showPopup }"
+      :class="{ hide: !showSuggestions }"
     >
       <div class="autocomplete-panel-body">
         <div
@@ -39,6 +58,37 @@
 .emoji-input {
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  .emoji-picker-icon {
+    position: absolute;
+    margin: 0 .25em;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover i {
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
+
+    &.picker-icon-bottom {
+      bottom: 0;
+      left: 0;
+    }
+    &.picker-icon-right {
+      top: 0;
+      right: 0;
+    }
+  }
+  .emoji-picker-panel {
+    position: absolute;
+    z-index: 9;
+    margin-top: 2px;
+
+    &.hide {
+      display: none
+    }
+  }
 
   .autocomplete {
     &-panel {

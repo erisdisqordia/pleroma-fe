@@ -2,7 +2,6 @@ import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
-import EmojiPicker from '../emoji-picker/emoji-picker.vue'
 import PollForm from '../poll/poll_form.vue'
 import StickerPicker from '../sticker_picker/sticker_picker.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
@@ -37,7 +36,6 @@ const PostStatusForm = {
     EmojiInput,
     PollForm,
     StickerPicker,
-    EmojiSelector,
     ScopeSelector
   },
   mounted () {

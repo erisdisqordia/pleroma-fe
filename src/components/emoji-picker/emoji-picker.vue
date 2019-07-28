@@ -1,31 +1,58 @@
 <template>
-<div class="emoji-dropdown-menu panel panel-default">
-  <div class="panel-heading emoji-tabs">
-    <span class="emoji-tabs-item" :class="{'active': activeGroup === key}" v-for="(value, key) in emojis" :key="key" :title="value.text" @click.prevent="highlight(key)">
-      <i :class="value.icon"></i>
-    </span>
-  </div>
-  <div class="panel-body emoji-dropdown-menu-content">
-    <div class="emoji-search">
-      <input type="text" class="form-control" v-model="keyword" />
+  <div class="emoji-dropdown-menu panel panel-default">
+    <div class="panel-heading emoji-tabs">
+      <span
+        v-for="(value, key) in emojis"
+        :key="key"
+        class="emoji-tabs-item"
+        :class="{'active': activeGroup === key}"
+        :title="value.text"
+        @click.prevent="highlight(key)"
+      >
+        <i :class="value.icon" />
+      </span>
     </div>
-    <div class="emoji-groups" ref="emoji-groups" @scroll="scrolledGroup">
-      <div v-for="(value, key) in emojis" :key="key" class="emoji-group">
-        <h6 class="emoji-group-title" :ref="'group-' + key">{{value.text}}</h6>
-        <span
-          v-for="emoji in value.emojis"
-          :key="key + emoji.displayText"
-          :title="emoji.displayText"
-          class="emoji-item"
-          @click="onEmoji(emoji)"
+    <div class="panel-body emoji-dropdown-menu-content">
+      <div class="emoji-search">
+        <input
+          v-model="keyword"
+          type="text"
+          class="form-control"
+        >
+      </div>
+      <div
+        ref="emoji-groups"
+        class="emoji-groups"
+        @scroll="scrolledGroup"
+      >
+        <div
+          v-for="(value, key) in emojis"
+          :key="key"
+          class="emoji-group"
+        >
+          <h6
+            :ref="'group-' + key"
+            class="emoji-group-title"
           >
-          <span v-if="!emoji.imageUrl">{{emoji.replacement}}</span>
-          <img :src="emoji.imageUrl" v-else>
-        </span>
+            {{ value.text }}
+          </h6>
+          <span
+            v-for="emoji in value.emojis"
+            :key="key + emoji.displayText"
+            :title="emoji.displayText"
+            class="emoji-item"
+            @click="onEmoji(emoji)"
+          >
+            <span v-if="!emoji.imageUrl">{{ emoji.replacement }}</span>
+            <img
+              v-else
+              :src="emoji.imageUrl"
+            >
+          </span>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script src="./emoji-picker.js"></script>

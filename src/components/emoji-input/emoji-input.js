@@ -67,7 +67,7 @@ const EmojiInput = {
       caret: 0,
       focused: false,
       blurTimeout: null,
-      showPicker: false,
+      showPicker: false
     }
   },
   components: {

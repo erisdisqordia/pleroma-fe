@@ -1,24 +1,24 @@
 <template>
-<div
-  class="emoji-input"
-  v-click-outside="onClickOutside"
+  <div
+    v-click-outside="onClickOutside"
+    class="emoji-input"
   >
     <slot />
     <template v-if="emojiPicker">
       <div
-        @click.prevent="togglePicker"
         class="emoji-picker-icon"
         :class="pickerIconBottom ? 'picker-icon-bottom': 'picker-icon-right'"
-        >
-        <i class="icon-smile"></i>
+        @click.prevent="togglePicker"
+      >
+        <i class="icon-smile" />
       </div>
       <EmojiPicker
         v-if="emojiPicker"
-        :class="{ hide: !showPicker }"
         ref="picker"
+        :class="{ hide: !showPicker }"
         class="emoji-picker-panel"
         @emoji="insert"
-        />
+      />
     </template>
     <div
       ref="panel"

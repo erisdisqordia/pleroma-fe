@@ -61,7 +61,7 @@
         <EmojiInput
           v-if="newStatus.spoilerText || alwaysShowSubject"
           v-model="newStatus.spoilerText"
-          emojiPicker
+          emoji-picker
           :suggest="emojiSuggestor"
           class="form-control"
         >
@@ -76,7 +76,7 @@
         <EmojiInput
           v-model="newStatus.status"
           :suggest="emojiUserSuggestor"
-          emojiPicker
+          emoji-picker
           class="form-control main-input"
         >
           <textarea

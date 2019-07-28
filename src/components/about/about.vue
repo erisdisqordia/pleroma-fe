@@ -1,8 +1,8 @@
 <template>
   <div class="sidebar">
-    <instance-specific-panel></instance-specific-panel>
-    <features-panel v-if="showFeaturesPanel"></features-panel>
-    <terms-of-service-panel></terms-of-service-panel>
+    <instance-specific-panel />
+    <features-panel v-if="showFeaturesPanel" />
+    <terms-of-service-panel />
   </div>
 </template>
 

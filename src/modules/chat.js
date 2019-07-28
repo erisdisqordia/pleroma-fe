@@ -1,7 +1,7 @@
 const chat = {
   state: {
     messages: [],
-    channel: {state: ''},
+    channel: { state: '' },
     socket: null
   },
   mutations: {
@@ -21,7 +21,7 @@ const chat = {
   },
   actions: {
     disconnectFromChat (store) {
-      store.state.socket.disconnect()
+      store.state.socket && store.state.socket.disconnect()
     },
     initializeChat (store, socket) {
       const channel = socket.channel('chat:public')
@@ -29,7 +29,7 @@ const chat = {
       channel.on('new_msg', (msg) => {
         store.commit('addMessage', msg)
       })
-      channel.on('messages', ({messages}) => {
+      channel.on('messages', ({ messages }) => {
         store.commit('setMessages', messages)
       })
       channel.join()

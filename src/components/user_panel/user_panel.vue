@@ -1,13 +1,30 @@
 <template>
   <div class="user-panel">
-    <div v-if='user' class="panel panel-default" style="overflow: visible;">
-      <UserCard :user="user" :hideBio="true" rounded="top"/>
+    <div
+      v-if="signedIn"
+      key="user-panel"
+      class="panel panel-default signed-in"
+    >
+      <UserCard
+        :user="user"
+        :hide-bio="true"
+        rounded="top"
+      />
       <div class="panel-footer">
-        <post-status-form v-if='user'></post-status-form>
+        <post-status-form v-if="user" />
       </div>
     </div>
-    <login-form v-if='!user'></login-form>
+    <auth-form
+      v-else
+      key="user-panel"
+    />
   </div>
 </template>
 
 <script src="./user_panel.js"></script>
+
+<style lang="scss">
+.user-panel .signed-in {
+  overflow: visible;
+}
+</style>

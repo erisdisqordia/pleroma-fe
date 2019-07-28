@@ -1,5 +1,9 @@
 <template>
-  <Timeline :title="$t('nav.dms')" v-bind:timeline="timeline" v-bind:timeline-name="'dms'"/>
+  <Timeline
+    :title="$t('nav.dms')"
+    :timeline="timeline"
+    :timeline-name="'dms'"
+  />
 </template>
 
 <script src="./dm_timeline.js"></script>

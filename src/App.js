@@ -1,7 +1,7 @@
 import UserPanel from './components/user_panel/user_panel.vue'
 import NavPanel from './components/nav_panel/nav_panel.vue'
 import Notifications from './components/notifications/notifications.vue'
-import UserFinder from './components/user_finder/user_finder.vue'
+import SearchBar from './components/search_bar/search_bar.vue'
 import InstanceSpecificPanel from './components/instance_specific_panel/instance_specific_panel.vue'
 import FeaturesPanel from './components/features_panel/features_panel.vue'
 import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_panel.vue'
@@ -10,6 +10,7 @@ import MediaModal from './components/media_modal/media_modal.vue'
 import SideDrawer from './components/side_drawer/side_drawer.vue'
 import MobilePostStatusModal from './components/mobile_post_status_modal/mobile_post_status_modal.vue'
 import MobileNav from './components/mobile_nav/mobile_nav.vue'
+import UserReportingModal from './components/user_reporting_modal/user_reporting_modal.vue'
 import { windowWidth } from './services/window_utils/window_utils'
 
 export default {
@@ -18,7 +19,7 @@ export default {
     UserPanel,
     NavPanel,
     Notifications,
-    UserFinder,
+    SearchBar,
     InstanceSpecificPanel,
     FeaturesPanel,
     WhoToFollowPanel,
@@ -26,11 +27,12 @@ export default {
     MediaModal,
     SideDrawer,
     MobilePostStatusModal,
-    MobileNav
+    MobileNav,
+    UserReportingModal
   },
   data: () => ({
     mobileActivePanel: 'timeline',
-    finderHidden: true,
+    searchBarHidden: true,
     supportsMask: window.CSS && window.CSS.supports && (
       window.CSS.supports('mask-size', 'contain') ||
         window.CSS.supports('-webkit-mask-size', 'contain') ||
@@ -68,7 +70,7 @@ export default {
     logoBgStyle () {
       return Object.assign({
         'margin': `${this.$store.state.instance.logoMargin} 0`,
-        opacity: this.finderHidden ? 1 : 0
+        opacity: this.searchBarHidden ? 1 : 0
       }, this.enableMask ? {} : {
         'background-color': this.enableMask ? '' : 'transparent'
       })
@@ -99,8 +101,8 @@ export default {
       this.$router.replace('/main/public')
       this.$store.dispatch('logout')
     },
-    onFinderToggled (hidden) {
-      this.finderHidden = hidden
+    onSearchBarToggled (hidden) {
+      this.searchBarHidden = hidden
     },
     updateMobileState () {
       const mobileLayout = windowWidth() <= 800

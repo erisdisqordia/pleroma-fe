@@ -3,17 +3,17 @@
 // we are also using it with karma-webpack
 //   https://github.com/webpack/karma-webpack
 
-var path = require('path')
+// var path = require('path')
 var merge = require('webpack-merge')
 var baseConfig = require('../../build/webpack.base.conf')
 var utils = require('../../build/utils')
 var webpack = require('webpack')
-var projectRoot = path.resolve(__dirname, '../../')
+// var projectRoot = path.resolve(__dirname, '../../')
 
 var webpackConfig = merge(baseConfig, {
   // use inline sourcemap for karma-sourcemap-loader
   module: {
-    loaders: utils.styleLoaders()
+    rules: utils.styleLoaders()
   },
   devtool: '#inline-source-map',
   // vue: {
@@ -53,11 +53,18 @@ module.exports = function (config) {
     // 1. install corresponding karma launcher
     //    http://karma-runner.github.io/0.13/config/browsers.html
     // 2. add it to the `browsers` array below.
-    browsers: ['PhantomJS'],
+    browsers: ['FirefoxHeadless'],
     frameworks: ['mocha', 'sinon-chai'],
     reporters: ['mocha'],
+    customLaunchers: {
+      'FirefoxHeadless': {
+        base: 'Firefox',
+        flags: [
+          '-headless'
+        ]
+      }
+    },
     files: [
-      '../../node_modules/@babel/polyfill/dist/polyfill.js',
       './index.js'
     ],
     preprocessors: {

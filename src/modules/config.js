@@ -17,6 +17,7 @@ const defaultState = {
   autoLoad: true,
   streaming: false,
   hoverPreview: true,
+  autohideFloatingPostButton: false,
   pauseOnUnfocused: true,
   stopGifs: false,
   replyVisibility: 'all',
@@ -30,6 +31,7 @@ const defaultState = {
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale,
+  hideScopeNotice: false,
   scopeCopy: undefined, // instance default
   subjectLineBehavior: undefined, // instance default
   alwaysShowSubjectInput: undefined, // instance default
@@ -54,10 +56,10 @@ const config = {
   },
   actions: {
     setHighlight ({ commit, dispatch }, { user, color, type }) {
-      commit('setHighlight', {user, color, type})
+      commit('setHighlight', { user, color, type })
     },
     setOption ({ commit, dispatch }, { name, value }) {
-      commit('setOption', {name, value})
+      commit('setOption', { name, value })
       switch (name) {
         case 'theme':
           setPreset(value, commit)

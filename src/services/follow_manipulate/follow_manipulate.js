@@ -23,18 +23,12 @@ export const requestFollow = (user, store) => new Promise((resolve, reject) => {
 
       // For locked users we just mark it that we sent the follow request
       if (updated.locked) {
-        resolve({
-          sent: true,
-          updated
-        })
+        resolve({ sent: true })
       }
 
       if (updated.following) {
         // If we get result immediately, just stop.
-        resolve({
-          sent: false,
-          updated
-        })
+        resolve({ sent: false })
       }
 
       // But usually we don't get result immediately, so we ask server
@@ -48,16 +42,10 @@ export const requestFollow = (user, store) => new Promise((resolve, reject) => {
         .then((following) => {
           if (following) {
             // We confirmed and everything's good.
-            resolve({
-              sent: false,
-              updated
-            })
+            resolve({ sent: false })
           } else {
             // If after all the tries, just treat it as if user is locked
-            resolve({
-              sent: false,
-              updated
-            })
+            resolve({ sent: false })
           }
         })
     })

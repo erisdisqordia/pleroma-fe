@@ -1,134 +1,207 @@
 <template>
-<div class="shadow-control" :class="{ disabled: !present }">
-  <div class="shadow-preview-container">
-    <div :disabled="!present" class="y-shift-control">
-      <input
-        v-model="selected.y"
+  <div
+    class="shadow-control"
+    :class="{ disabled: !present }"
+  >
+    <div class="shadow-preview-container">
+      <div
         :disabled="!present"
-        class="input-number"
-        type="number">
-      <div class="wrap">
+        class="y-shift-control"
+      >
         <input
           v-model="selected.y"
           :disabled="!present"
-          class="input-range"
-          type="range"
-          max="20"
-          min="-20">
+          class="input-number"
+          type="number"
+        >
+        <div class="wrap">
+          <input
+            v-model="selected.y"
+            :disabled="!present"
+            class="input-range"
+            type="range"
+            max="20"
+            min="-20"
+          >
+        </div>
       </div>
-    </div>
-    <div class="preview-window">
-      <div class="preview-block" :style="style"></div>
-    </div>
-    <div :disabled="!present" class="x-shift-control">
-      <input
-        v-model="selected.x"
+      <div class="preview-window">
+        <div
+          class="preview-block"
+          :style="style"
+        />
+      </div>
+      <div
         :disabled="!present"
-        class="input-number"
-        type="number">
-      <div class="wrap">
+        class="x-shift-control"
+      >
         <input
           v-model="selected.x"
           :disabled="!present"
+          class="input-number"
+          type="number"
+        >
+        <div class="wrap">
+          <input
+            v-model="selected.x"
+            :disabled="!present"
+            class="input-range"
+            type="range"
+            max="20"
+            min="-20"
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="shadow-tweak">
+      <div
+        :disabled="usingFallback"
+        class="id-control style-control"
+      >
+        <label
+          for="shadow-switcher"
+          class="select"
+          :disabled="!ready || usingFallback"
+        >
+          <select
+            id="shadow-switcher"
+            v-model="selectedId"
+            class="shadow-switcher"
+            :disabled="!ready || usingFallback"
+          >
+            <option
+              v-for="(shadow, index) in cValue"
+              :key="index"
+              :value="index"
+            >
+              {{ $t('settings.style.shadows.shadow_id', { value: index }) }}
+            </option>
+          </select>
+          <i class="icon-down-open" />
+        </label>
+        <button
+          class="btn btn-default"
+          :disabled="!ready || !present"
+          @click="del"
+        >
+          <i class="icon-cancel" />
+        </button>
+        <button
+          class="btn btn-default"
+          :disabled="!moveUpValid"
+          @click="moveUp"
+        >
+          <i class="icon-up-open" />
+        </button>
+        <button
+          class="btn btn-default"
+          :disabled="!moveDnValid"
+          @click="moveDn"
+        >
+          <i class="icon-down-open" />
+        </button>
+        <button
+          class="btn btn-default"
+          :disabled="usingFallback"
+          @click="add"
+        >
+          <i class="icon-plus" />
+        </button>
+      </div>
+      <div
+        :disabled="!present"
+        class="inset-control style-control"
+      >
+        <label
+          for="inset"
+          class="label"
+        >
+          {{ $t('settings.style.shadows.inset') }}
+        </label>
+        <input
+          id="inset"
+          v-model="selected.inset"
+          :disabled="!present"
+          name="inset"
+          class="input-inset"
+          type="checkbox"
+        >
+        <label
+          class="checkbox-label"
+          for="inset"
+        />
+      </div>
+      <div
+        :disabled="!present"
+        class="blur-control style-control"
+      >
+        <label
+          for="spread"
+          class="label"
+        >
+          {{ $t('settings.style.shadows.blur') }}
+        </label>
+        <input
+          id="blur"
+          v-model="selected.blur"
+          :disabled="!present"
+          name="blur"
           class="input-range"
           type="range"
           max="20"
-          min="-20">
+          min="0"
+        >
+        <input
+          v-model="selected.blur"
+          :disabled="!present"
+          class="input-number"
+          type="number"
+          min="0"
+        >
       </div>
+      <div
+        :disabled="!present"
+        class="spread-control style-control"
+      >
+        <label
+          for="spread"
+          class="label"
+        >
+          {{ $t('settings.style.shadows.spread') }}
+        </label>
+        <input
+          id="spread"
+          v-model="selected.spread"
+          :disabled="!present"
+          name="spread"
+          class="input-range"
+          type="range"
+          max="20"
+          min="-20"
+        >
+        <input
+          v-model="selected.spread"
+          :disabled="!present"
+          class="input-number"
+          type="number"
+        >
+      </div>
+      <ColorInput
+        v-model="selected.color"
+        :disabled="!present"
+        :label="$t('settings.style.common.color')"
+        name="shadow"
+      />
+      <OpacityInput
+        v-model="selected.alpha"
+        :disabled="!present"
+      />
+      <p>
+        {{ $t('settings.style.shadows.hint') }}
+      </p>
     </div>
   </div>
-
-  <div class="shadow-tweak">
-    <div :disabled="usingFallback" class="id-control style-control">
-      <label for="shadow-switcher" class="select" :disabled="!ready || usingFallback">
-        <select
-          v-model="selectedId" class="shadow-switcher"
-          :disabled="!ready || usingFallback"
-          id="shadow-switcher">
-          <option v-for="(shadow, index) in cValue" :value="index">
-            {{$t('settings.style.shadows.shadow_id', { value: index })}}
-          </option>
-        </select>
-        <i class="icon-down-open"/>
-      </label>
-      <button class="btn btn-default" :disabled="!ready || !present" @click="del">
-        <i class="icon-cancel"/>
-      </button>
-      <button class="btn btn-default" :disabled="!moveUpValid" @click="moveUp">
-        <i class="icon-up-open"/>
-      </button>
-      <button class="btn btn-default" :disabled="!moveDnValid" @click="moveDn">
-        <i class="icon-down-open"/>
-      </button>
-      <button class="btn btn-default" :disabled="usingFallback" @click="add">
-        <i class="icon-plus"/>
-      </button>
-    </div>
-    <div :disabled="!present" class="inset-control style-control">
-      <label for="inset" class="label">
-        {{$t('settings.style.shadows.inset')}}
-      </label>
-      <input
-        v-model="selected.inset"
-        :disabled="!present"
-        name="inset"
-        id="inset"
-        class="input-inset"
-        type="checkbox">
-      <label class="checkbox-label" for="inset"></label>
-    </div>
-    <div :disabled="!present" class="blur-control style-control">
-      <label for="spread" class="label">
-        {{$t('settings.style.shadows.blur')}}
-      </label>
-      <input
-        v-model="selected.blur"
-        :disabled="!present"
-        name="blur"
-        id="blur"
-        class="input-range"
-        type="range"
-        max="20"
-        min="0">
-      <input
-        v-model="selected.blur"
-        :disabled="!present"
-        class="input-number"
-        type="number"
-        min="0">
-    </div>
-    <div :disabled="!present" class="spread-control style-control">
-      <label for="spread" class="label">
-        {{$t('settings.style.shadows.spread')}}
-      </label>
-      <input
-        v-model="selected.spread"
-        :disabled="!present"
-        name="spread"
-        id="spread"
-        class="input-range"
-        type="range"
-        max="20"
-        min="-20">
-      <input
-        v-model="selected.spread"
-        :disabled="!present"
-        class="input-number"
-        type="number">
-    </div>
-    <ColorInput
-      v-model="selected.color"
-      :disabled="!present"
-      :label="$t('settings.style.common.color')"
-      name="shadow"/>
-    <OpacityInput
-      v-model="selected.alpha"
-      :disabled="!present"/>
-    <p>
-      {{$t('settings.style.shadows.hint')}}
-    </p>
-  </div>
-</div>
 </template>
 
 <script src="./shadow_control.js" ></script>

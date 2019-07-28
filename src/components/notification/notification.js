@@ -1,6 +1,7 @@
 import Status from '../status/status.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import UserCard from '../user_card/user_card.vue'
+import Timeago from '../timeago/timeago.vue'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
@@ -13,7 +14,10 @@ const Notification = {
   },
   props: [ 'notification' ],
   components: {
-    Status, UserAvatar, UserCard
+    Status,
+    UserAvatar,
+    UserCard,
+    Timeago
   },
   methods: {
     toggleUserExpanded () {
@@ -21,25 +25,28 @@ const Notification = {
     },
     userProfileLink (user) {
       return generateProfileLink(user.id, user.screen_name, this.$store.state.instance.restrictedNicknames)
+    },
+    getUser (notification) {
+      return this.$store.state.users.usersObject[notification.from_profile.id]
     }
   },
   computed: {
     userClass () {
-      return highlightClass(this.notification.action.user)
+      return highlightClass(this.notification.from_profile)
     },
     userStyle () {
       const highlight = this.$store.state.config.highlight
-      const user = this.notification.action.user
+      const user = this.notification.from_profile
       return highlightStyle(highlight[user.screen_name])
     },
     userInStore () {
-      return this.$store.getters.findUser(this.notification.action.user.id)
+      return this.$store.getters.findUser(this.notification.from_profile.id)
     },
     user () {
       if (this.userInStore) {
         return this.userInStore
       }
-      return {}
+      return this.notification.from_profile
     }
   }
 }

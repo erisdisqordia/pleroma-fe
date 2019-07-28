@@ -1,10 +1,11 @@
 <template>
-  <video class="video"
-    @loadeddata="onVideoDataLoad"
+  <video
+    class="video"
     :src="attachment.url"
     :loop="loopVideo"
     :controls="controls"
     playsinline
+    @loadeddata="onVideoDataLoad"
   />
 </template>
 

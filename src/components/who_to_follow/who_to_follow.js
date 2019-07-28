@@ -20,7 +20,8 @@ const WhoToFollow = {
           id: 0,
           name: i.display_name,
           screen_name: i.acct,
-          profile_image_url: i.avatar || '/images/avi.png'
+          profile_image_url: i.avatar || '/images/avi.png',
+          profile_image_url_original: i.avatar || '/images/avi.png'
         }
         this.users.push(user)
 
@@ -36,7 +37,7 @@ const WhoToFollow = {
     getWhoToFollow () {
       const credentials = this.$store.state.users.currentUser.credentials
       if (credentials) {
-        apiService.suggestions({credentials: credentials})
+        apiService.suggestions({ credentials: credentials })
           .then((reply) => {
             this.showWhoToFollow(reply)
           })

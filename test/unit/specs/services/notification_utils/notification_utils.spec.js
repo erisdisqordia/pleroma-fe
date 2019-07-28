@@ -9,14 +9,17 @@ describe('NotificationUtils', () => {
             notifications: {
               data: [
                 {
+                  id: 1,
                   action: { id: '1' },
                   type: 'like'
                 },
                 {
+                  id: 2,
                   action: { id: '2' },
                   type: 'mention'
                 },
                 {
+                  id: 3,
                   action: { id: '3' },
                   type: 'repeat'
                 }
@@ -35,10 +38,12 @@ describe('NotificationUtils', () => {
       const expected = [
         {
           action: { id: '3' },
+          id: 3,
           type: 'repeat'
         },
         {
           action: { id: '1' },
+          id: 1,
           type: 'like'
         }
       ]

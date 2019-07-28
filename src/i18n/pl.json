@@ -74,7 +74,8 @@
     "content_type": {
       "text/plain": "Czysty tekst",
       "text/html": "HTML",
-      "text/markdown": "Markdown"
+      "text/markdown": "Markdown",
+      "text/bbcode": "BBCode"
     },
     "content_warning": "Temat (nieobowiązkowy)",
     "default": "Właśnie wróciłem z kościoła",
@@ -362,7 +363,7 @@
     "error_fetching": "Błąd pobierania",
     "load_older": "Załaduj starsze statusy",
     "no_retweet_hint": "Wpis oznaczony jako tylko dla obserwujących lub bezpośredni nie może zostać powtórzony",
-    "repeated": "powtórzono",
+    "repeated": "powtórzył(-a)",
     "show_new": "Pokaż nowe",
     "up_to_date": "Na bieżąco",
     "no_more_statuses": "Brak kolejnych statusów",

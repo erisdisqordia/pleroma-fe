@@ -47,6 +47,8 @@ body {
   color: var(--text, $fallback--text);
   max-width: 100vw;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -101,6 +103,14 @@ button {
     background-color: $fallback--bg;
     background-color: var(--bg, $fallback--bg)
   }
+
+  &.danger {
+    // TODO: add better color variable
+    color: $fallback--text;
+    color: var(--alertErrorPanelText, $fallback--text);
+    background-color: $fallback--alertError;
+    background-color: var(--alertError, $fallback--alertError);
+  }
 }
 
 label.select {
@@ -121,6 +131,7 @@ input, textarea, .select {
   font-family: sans-serif;
   font-family: var(--inputFont, sans-serif);
   font-size: 14px;
+  margin: 0;
   padding: 8px .5em;
   box-sizing: border-box;
   display: inline-block;
@@ -174,7 +185,44 @@ input, textarea, .select {
     flex: 1;
   }
 
-  &[type=radio],
+  &[type=radio] {
+    display: none;
+    &:checked + label::before {
+      box-shadow: 0px 0px 2px black inset, 0px 0px 0px 4px $fallback--fg inset;
+      box-shadow: var(--inputShadow), 0px 0px 0px 4px var(--fg, $fallback--fg) inset;
+      background-color: var(--link, $fallback--link);
+    }
+    &:disabled {
+      &,
+      & + label,
+      & + label::before {
+        opacity: .5;
+      }
+    }
+    + label::before {
+      flex-shrink: 0;
+      display: inline-block;
+      content: '';
+      transition: box-shadow 200ms;
+      width: 1.1em;
+      height: 1.1em;
+      border-radius: 100%; // Radio buttons should always be circle
+      box-shadow: 0px 0px 2px black inset;
+      box-shadow: var(--inputShadow);
+      margin-right: .5em;
+      background-color: $fallback--fg;
+      background-color: var(--input, $fallback--fg);
+      vertical-align: top;
+      text-align: center;
+      line-height: 1.1em;
+      font-size: 1.1em;
+      box-sizing: border-box;
+      color: transparent;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+  }
+
   &[type=checkbox] {
     display: none;
     &:checked + label::before {
@@ -189,6 +237,7 @@ input, textarea, .select {
       }
     }
     + label::before {
+      flex-shrink: 0;
       display: inline-block;
       content: '✔';
       transition: color 200ms;
@@ -220,11 +269,45 @@ option {
   background-color: var(--bg, $fallback--bg);
 }
 
+.hide-number-spinner {
+  -moz-appearance: textfield;
+  &[type=number]::-webkit-inner-spin-button,
+  &[type=number]::-webkit-outer-spin-button {
+    opacity: 0;
+    display: none;
+  }
+}
+
 i[class*=icon-] {
   color: $fallback--icon;
   color: var(--icon, $fallback--icon)
 }
 
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-group {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+
+  button {
+    position: relative;
+    flex: 1 1 auto;
+
+    &:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
 
 .container {
   display: flex;
@@ -371,6 +454,7 @@ main-router {
 
 .panel-heading {
   display: flex;
+  flex: none;
   border-radius: $fallback--panelRadius $fallback--panelRadius 0 0;
   border-radius: var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius) 0 0;
   background-size: cover;
@@ -616,27 +700,25 @@ nav {
   text-align: right;
 }
 
-.visibility-tray {
-  font-size: 1.2em;
-  padding: 3px;
-  cursor: pointer;
-
-  .selected {
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-  }
-
-  div {
-    padding-top: 5px;
-  }
-}
-
 .visibility-notice {
   padding: .5em;
   border: 1px solid $fallback--faint;
   border: 1px solid var(--faint, $fallback--faint);
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
+}
+
+.notice-dismissible {
+  padding-right: 4rem;
+  position: relative;
+
+  .dismiss {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .5em;
+    color: inherit;
+  }
 }
 
 @keyframes modal-background-fadein {
@@ -718,6 +800,70 @@ nav {
   }
 }
 
+.setting-item {
+  border-bottom: 2px solid var(--fg, $fallback--fg);
+  margin: 1em 1em 1.4em;
+  padding-bottom: 1.4em;
+
+  > div {
+    margin-bottom: .5em;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 1em;
+  }
+
+  select {
+    min-width: 10em;
+  }
+
+
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 100px;
+  }
+
+  .unavailable,
+  .unavailable i {
+    color: var(--cRed, $fallback--cRed);
+    color: $fallback--cRed;
+  }
+
+  .btn {
+    min-height: 28px;
+    min-width: 10em;
+    padding: 0 2em;
+  }
+
+  .number-input {
+    max-width: 6em;
+  }
+}
+.select-multiple {
+  display: flex;
+  .option-list {
+    margin: 0;
+    padding-left: .5em;
+  }
+}
+.setting-list,
+.option-list{
+  list-style-type: none;
+  padding-left: 2em;
+  li {
+    margin-bottom: 0.5em;
+  }
+  .suboptions {
+    margin-top: 0.3em
+  }
+}
+
 .login-hint {
   text-align: center;
 
@@ -734,55 +880,4 @@ nav {
 
 .btn.btn-default {
   min-height: 28px;
-}
-
-.autocomplete {
-  &-panel {
-    position: relative;
-
-    &-body {
-      margin: 0 0.5em 0 0.5em;
-      border-radius: $fallback--tooltipRadius;
-      border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-      position: absolute;
-      z-index: 1;
-      box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-      // this doesn't match original but i don't care, making it uniform.
-      box-shadow: var(--popupShadow);
-      min-width: 75%;
-      background: $fallback--bg;
-      background: var(--bg, $fallback--bg);
-      color: $fallback--lightText;
-      color: var(--lightText, $fallback--lightText);
-    }
-  }
-
-  &-item {
-    cursor: pointer;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    display: flex;
-
-    img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
-    }
-
-    span {
-      line-height: 24px;
-      margin: 0 0.1em 0 0.2em;
-    }
-
-    small {
-      margin-left: .5em;
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
-    }
-
-    &.highlighted {
-      background-color: $fallback--fg;
-      background-color: var(--lightBg, $fallback--fg);
-    }
-  }
 }

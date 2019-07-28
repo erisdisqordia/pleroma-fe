@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import App from '../App.vue'
 import { windowWidth } from '../services/window_utils/window_utils'
+import { getOrCreateApp, getClientToken } from '../services/new_api/oauth.js'
+import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 
 const getStatusnetConfig = async ({ store }) => {
   try {
@@ -92,15 +94,14 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
       ? 0
       : config.logoMargin
   })
+  store.commit('authFlow/setInitialStrategy', config.loginMethod)
 
   copyInstanceOption('redirectRootNoLogin')
   copyInstanceOption('redirectRootLogin')
   copyInstanceOption('showInstanceSpecificPanel')
   copyInstanceOption('minimalScopesMode')
-  copyInstanceOption('formattingOptionsEnabled')
   copyInstanceOption('hideMutedPosts')
   copyInstanceOption('collapseMessageWithSubject')
-  copyInstanceOption('loginMethod')
   copyInstanceOption('scopeCopy')
   copyInstanceOption('subjectLineBehavior')
   copyInstanceOption('postContentType')
@@ -147,13 +148,48 @@ const getInstancePanel = async ({ store }) => {
   }
 }
 
+const getStickers = async ({ store }) => {
+  try {
+    const res = await window.fetch('/static/stickers.json')
+    if (res.ok) {
+      const values = await res.json()
+      const stickers = (await Promise.all(
+        Object.entries(values).map(async ([name, path]) => {
+          const resPack = await window.fetch(path + 'pack.json')
+          var meta = {}
+          if (resPack.ok) {
+            meta = await resPack.json()
+          }
+          return {
+            pack: name,
+            path,
+            meta
+          }
+        })
+      )).sort((a, b) => {
+        return a.meta.title.localeCompare(b.meta.title)
+      })
+      store.dispatch('setInstanceOption', { name: 'stickers', value: stickers })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load stickers")
+    console.warn(e)
+  }
+}
+
 const getStaticEmoji = async ({ store }) => {
   try {
     const res = await window.fetch('/static/emoji.json')
     if (res.ok) {
       const values = await res.json()
       const emoji = Object.keys(values).map((key) => {
-        return { shortcode: key, image_url: false, 'utf': values[key] }
+        return {
+          displayText: key,
+          imageUrl: false,
+          replacement: values[key]
+        }
       })
       store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
     } else {
@@ -171,9 +207,15 @@ const getCustomEmoji = async ({ store }) => {
   try {
     const res = await window.fetch('/api/pleroma/emoji.json')
     if (res.ok) {
-      const values = await res.json()
+      const result = await res.json()
+      const values = Array.isArray(result) ? Object.assign({}, ...result) : result
       const emoji = Object.keys(values).map((key) => {
-        return { shortcode: key, image_url: values[key] }
+        const imageUrl = values[key].image_url
+        return {
+          displayText: key,
+          imageUrl: imageUrl ? store.state.instance.server + imageUrl : values[key],
+          replacement: `:${key}: `
+        }
       })
       store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
       store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })
@@ -187,17 +229,29 @@ const getCustomEmoji = async ({ store }) => {
   }
 }
 
+const getAppSecret = async ({ store }) => {
+  const { state, commit } = store
+  const { oauth, instance } = state
+  return getOrCreateApp({ ...oauth, instance: instance.server, commit })
+    .then((app) => getClientToken({ ...app, instance: instance.server }))
+    .then((token) => {
+      commit('setAppToken', token.access_token)
+      commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
+    })
+}
+
 const getNodeInfo = async ({ store }) => {
   try {
     const res = await window.fetch('/nodeinfo/2.0.json')
     if (res.ok) {
       const data = await res.json()
       const metadata = data.metadata
-
       const features = metadata.features
       store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: features.includes('media_proxy') })
       store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
       store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
+      store.dispatch('setInstanceOption', { name: 'pollsAvailable', value: features.includes('polls') })
+      store.dispatch('setInstanceOption', { name: 'pollLimits', value: metadata.pollLimits })
 
       store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
       store.dispatch('setInstanceOption', { name: 'postFormats', value: metadata.postFormats })
@@ -211,6 +265,7 @@ const getNodeInfo = async ({ store }) => {
 
       const frontendVersion = window.___pleromafe_commit_hash
       store.dispatch('setInstanceOption', { name: 'frontendVersion', value: frontendVersion })
+      store.dispatch('setInstanceOption', { name: 'tagPolicyAvailable', value: metadata.federation.mrf_policies.includes('TagPolicy') })
     } else {
       throw (res)
     }
@@ -226,14 +281,14 @@ const setConfig = async ({ store }) => {
   const apiConfig = configInfos[0]
   const staticConfig = configInfos[1]
 
-  await setSettings({ store, apiConfig, staticConfig })
+  await setSettings({ store, apiConfig, staticConfig }).then(getAppSecret({ store }))
 }
 
 const checkOAuthToken = async ({ store }) => {
   return new Promise(async (resolve, reject) => {
-    if (store.state.oauth.token) {
+    if (store.getters.getUserToken()) {
       try {
-        await store.dispatch('loginUser', store.state.oauth.token)
+        await store.dispatch('loginUser', store.getters.getUserToken())
       } catch (e) {
         console.log(e)
       }
@@ -262,6 +317,7 @@ const afterStoreSetup = async ({ store, i18n }) => {
     setConfig({ store }),
     getTOS({ store }),
     getInstancePanel({ store }),
+    getStickers({ store }),
     getStaticEmoji({ store }),
     getCustomEmoji({ store }),
     getNodeInfo({ store })

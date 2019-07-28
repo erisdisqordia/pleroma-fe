@@ -19,7 +19,8 @@ const saveImmedeatelyActions = [
   'setHighlight',
   'setOption',
   'setClientData',
-  'setToken'
+  'setToken',
+  'clearToken'
 ]
 
 const defaultStorage = (() => {

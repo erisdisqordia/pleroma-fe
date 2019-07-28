@@ -1,50 +1,81 @@
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import oauthApi from '../../services/new_api/oauth.js'
+
 const LoginForm = {
   data: () => ({
     user: {},
-    authError: false
+    error: false
   }),
   computed: {
-    loginMethod () { return this.$store.state.instance.loginMethod },
-    loggingIn () { return this.$store.state.users.loggingIn },
-    registrationOpen () { return this.$store.state.instance.registrationOpen }
+    isPasswordAuth () { return this.requiredPassword },
+    isTokenAuth () { return this.requiredToken },
+    ...mapState({
+      registrationOpen: state => state.instance.registrationOpen,
+      instance: state => state.instance,
+      loggingIn: state => state.users.loggingIn,
+      oauth: state => state.oauth
+    }),
+    ...mapGetters(
+      'authFlow', ['requiredPassword', 'requiredToken', 'requiredMFA']
+    )
   },
   methods: {
-    oAuthLogin () {
-      oauthApi.login({
-        oauth: this.$store.state.oauth,
-        instance: this.$store.state.instance.server,
-        commit: this.$store.commit
-      })
-    },
+    ...mapMutations('authFlow', ['requireMFA']),
+    ...mapActions({ login: 'authFlow/login' }),
     submit () {
+      this.isTokenAuth ? this.submitToken() : this.submitPassword()
+    },
+    submitToken () {
+      const { clientId, clientSecret } = this.oauth
       const data = {
-        oauth: this.$store.state.oauth,
-        instance: this.$store.state.instance.server
+        clientId,
+        clientSecret,
+        instance: this.instance.server,
+        commit: this.$store.commit
       }
-      this.clearError()
+
+      oauthApi.getOrCreateApp(data)
+        .then((app) => { oauthApi.login({ ...app, ...data }) })
+    },
+    submitPassword () {
+      const { clientId } = this.oauth
+      const data = {
+        clientId,
+        oauth: this.oauth,
+        instance: this.instance.server,
+        commit: this.$store.commit
+      }
+      this.error = false
+
       oauthApi.getOrCreateApp(data).then((app) => {
         oauthApi.getTokenWithCredentials(
           {
-            app,
+            ...app,
             instance: data.instance,
             username: this.user.username,
             password: this.user.password
           }
         ).then((result) => {
           if (result.error) {
-            this.authError = result.error
-            this.user.password = ''
+            if (result.error === 'mfa_required') {
+              this.requireMFA({ app: app, settings: result })
+            } else {
+              this.error = result.error
+              this.focusOnPasswordInput()
+            }
             return
           }
-          this.$store.commit('setToken', result.access_token)
-          this.$store.dispatch('loginUser', result.access_token)
-          this.$router.push({name: 'friends'})
+          this.login(result).then(() => {
+            this.$router.push({ name: 'friends' })
+          })
         })
       })
     },
-    clearError () {
-      this.authError = false
+    clearError () { this.error = false },
+    focusOnPasswordInput () {
+      let passwordInput = this.$refs.passwordInput
+      passwordInput.focus()
+      passwordInput.setSelectionRange(0, passwordInput.value.length)
     }
   }
 }

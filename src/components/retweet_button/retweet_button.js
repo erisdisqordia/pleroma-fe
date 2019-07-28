@@ -11,9 +11,9 @@ const RetweetButton = {
   methods: {
     retweet () {
       if (!this.status.repeated) {
-        this.$store.dispatch('retweet', {id: this.status.id})
+        this.$store.dispatch('retweet', { id: this.status.id })
       } else {
-        this.$store.dispatch('unretweet', {id: this.status.id})
+        this.$store.dispatch('unretweet', { id: this.status.id })
       }
       this.animated = true
       setTimeout(() => {

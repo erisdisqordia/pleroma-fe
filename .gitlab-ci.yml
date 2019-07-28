@@ -1,7 +1,7 @@
 # This file is a template, and might need editing before it works on your project.
 # Official framework image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/node/tags/
-image: node:7
+image: node:8
 
 stages:
   - lint
@@ -16,7 +16,12 @@ lint:
 
 test:
   stage: test
+  variables:
+    APT_CACHE_DIR: apt-cache
   script:
+    - mkdir -pv $APT_CACHE_DIR && apt-get -qq update
+    - apt install firefox-esr -y --no-install-recommends
+    - firefox --version
     - yarn
     - npm run unit
 

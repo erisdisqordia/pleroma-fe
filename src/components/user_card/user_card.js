@@ -1,5 +1,7 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import RemoteFollow from '../remote_follow/remote_follow.vue'
+import ProgressButton from '../progress_button/progress_button.vue'
+import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
@@ -22,15 +24,15 @@ export default {
   computed: {
     classes () {
       return [{
-        'user-card-rounded-t': this.rounded === 'top',  // set border-top-left-radius and border-top-right-radius
-        'user-card-rounded': this.rounded === true,     // set border-radius for all sides
-        'user-card-bordered': this.bordered === true    // set border for all sides
+        'user-card-rounded-t': this.rounded === 'top', // set border-top-left-radius and border-top-right-radius
+        'user-card-rounded': this.rounded === true, // set border-radius for all sides
+        'user-card-bordered': this.bordered === true // set border for all sides
       }]
     },
     style () {
       const color = this.$store.state.config.customTheme.colors
-            ? this.$store.state.config.customTheme.colors.bg  // v2
-            : this.$store.state.config.colors.bg // v1
+        ? this.$store.state.config.customTheme.colors.bg // v2
+        : this.$store.state.config.colors.bg // v1
 
       if (color) {
         const rgb = (typeof color === 'string') ? hex2rgb(color) : color
@@ -72,12 +74,12 @@ export default {
     userHighlightType: {
       get () {
         const data = this.$store.state.config.highlight[this.user.screen_name]
-        return data && data.type || 'disabled'
+        return (data && data.type) || 'disabled'
       },
       set (type) {
         const data = this.$store.state.config.highlight[this.user.screen_name]
         if (type !== 'disabled') {
-          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: data && data.color || '#FFFFFF', type })
+          this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: (data && data.color) || '#FFFFFF', type })
         } else {
           this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: undefined })
         }
@@ -93,21 +95,24 @@ export default {
       }
     },
     visibleRole () {
-      const validRole = (this.user.role === 'admin' || this.user.role === 'moderator')
-      const showRole = this.isOtherUser || this.user.show_role
-
-      return validRole && showRole && this.user.role
+      const rights = this.user.rights
+      if (!rights) { return }
+      const validRole = rights.admin || rights.moderator
+      const roleTitle = rights.admin ? 'admin' : 'moderator'
+      return validRole && roleTitle
     }
   },
   components: {
     UserAvatar,
-    RemoteFollow
+    RemoteFollow,
+    ModerationTools,
+    ProgressButton
   },
   methods: {
     followUser () {
       const store = this.$store
       this.followRequestInProgress = true
-      requestFollow(this.user, store).then(({sent}) => {
+      requestFollow(this.user, store).then(({ sent }) => {
         this.followRequestInProgress = false
         this.followRequestSent = sent
       })
@@ -132,13 +137,19 @@ export default {
     unmuteUser () {
       this.$store.dispatch('unmuteUser', this.user.id)
     },
+    subscribeUser () {
+      return this.$store.dispatch('subscribeUser', this.user.id)
+    },
+    unsubscribeUser () {
+      return this.$store.dispatch('unsubscribeUser', this.user.id)
+    },
     setProfileView (v) {
       if (this.switcher) {
         const store = this.$store
         store.commit('setProfileView', { v })
       }
     },
-    linkClicked ({target}) {
+    linkClicked ({ target }) {
       if (target.tagName === 'SPAN') {
         target = target.parentNode
       }
@@ -148,6 +159,9 @@ export default {
     },
     userProfileLink (user) {
       return generateProfileLink(user.id, user.screen_name, this.$store.state.instance.restrictedNicknames)
+    },
+    reportUser () {
+      this.$store.dispatch('openUserReportingModal', this.user.id)
     }
   }
 }

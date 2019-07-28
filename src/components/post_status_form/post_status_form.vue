@@ -1,112 +1,268 @@
 <template>
-<div class="post-status-form">
-  <form @submit.prevent="postStatus(newStatus)">
-    <div class="form-group" >
-      <i18n
-        v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
-        path="post_status.account_not_locked_warning"
-        tag="p"
-        class="visibility-notice">
-        <router-link :to="{ name: 'user-settings' }">{{ $t('post_status.account_not_locked_warning_link') }}</router-link>
-      </i18n>
-      <p v-if="newStatus.visibility === 'direct'" class="visibility-notice">
-        <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
-        <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
-      </p>
-      <EmojiInput
-        v-if="newStatus.spoilerText || alwaysShowSubject"
-        type="text"
-        :placeholder="$t('post_status.content_warning')"
-        v-model="newStatus.spoilerText"
-        classname="form-control"
-      />
-      <div class="status-input-wrapper">
-        <textarea
-          ref="textarea"
-          @click="setCaret"
-          @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control"
-          @keydown="onKeydown"
-          @keydown.down="cycleForward"
-          @keydown.up="cycleBackward"
-          @keydown.shift.tab="cycleBackward"
-          @keydown.tab="cycleForward"
-          @keydown.enter="replaceCandidate"
-          @keydown.meta.enter="postStatus(newStatus)"
-          @keyup.ctrl.enter="postStatus(newStatus)"
-          @drop="fileDrop"
-          @dragover.prevent="fileDrag"
-          @input="resize"
-          @paste="paste"
-          :disabled="posting"
+  <div class="post-status-form">
+    <form
+      autocomplete="off"
+      @submit.prevent="postStatus(newStatus)"
+    >
+      <div class="form-group">
+        <i18n
+          v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
+          path="post_status.account_not_locked_warning"
+          tag="p"
+          class="visibility-notice"
         >
-        </textarea>
-        <EmojiSelector @emoji="onEmoji" />
-      </div>
-      <div class="visibility-tray">
-        <span class="text-format" v-if="formattingOptionsEnabled">
-          <label for="post-content-type" class="select">
-            <select id="post-content-type" v-model="newStatus.contentType" class="form-control">
-              <option v-for="postFormat in postFormats" :key="postFormat" :value="postFormat">
-                {{$t(`post_status.content_type["${postFormat}"]`)}}
-              </option>
-            </select>
-            <i class="icon-down-open"></i>
-          </label>
-        </span>
-
-        <scope-selector
-          :showAll="showAllScopes"
-          :userDefault="userDefaultScope"
-          :originalScope="copyMessageScope"
-          :initialScope="newStatus.visibility"
-          :onScopeChange="changeVis"/>
-      </div>
-    </div>
-    <div class="autocomplete-panel" v-if="candidates">
-        <div class="autocomplete-panel-body">
-          <div
-            v-for="(candidate, index) in candidates"
-            :key="index"
-            @click="replace(candidate.utf || (candidate.screen_name + ' '))"
-            class="autocomplete-item"
-            :class="{ highlighted: candidate.highlighted }"
+          <router-link :to="{ name: 'user-settings' }">
+            {{ $t('post_status.account_not_locked_warning_link') }}
+          </router-link>
+        </i18n>
+        <p
+          v-if="!hideScopeNotice && newStatus.visibility === 'public'"
+          class="visibility-notice notice-dismissible"
+        >
+          <span>{{ $t('post_status.scope_notice.public') }}</span>
+          <a
+            class="button-icon dismiss"
+            @click.prevent="dismissScopeNotice()"
           >
-            <span v-if="candidate.img"><img :src="candidate.img" /></span>
-            <span v-else>{{candidate.utf}}</span>
-            <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
+            <i class="icon-cancel" />
+          </a>
+        </p>
+        <p
+          v-else-if="!hideScopeNotice && newStatus.visibility === 'unlisted'"
+          class="visibility-notice notice-dismissible"
+        >
+          <span>{{ $t('post_status.scope_notice.unlisted') }}</span>
+          <a
+            class="button-icon dismiss"
+            @click.prevent="dismissScopeNotice()"
+          >
+            <i class="icon-cancel" />
+          </a>
+        </p>
+        <p
+          v-else-if="!hideScopeNotice && newStatus.visibility === 'private' && $store.state.users.currentUser.locked"
+          class="visibility-notice notice-dismissible"
+        >
+          <span>{{ $t('post_status.scope_notice.private') }}</span>
+          <a
+            class="button-icon dismiss"
+            @click.prevent="dismissScopeNotice()"
+          >
+            <i class="icon-cancel" />
+          </a>
+        </p>
+        <p
+          v-else-if="newStatus.visibility === 'direct'"
+          class="visibility-notice"
+        >
+          <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
+          <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
+        </p>
+        <EmojiInput
+          v-if="newStatus.spoilerText || alwaysShowSubject"
+          v-model="newStatus.spoilerText"
+          :suggest="emojiSuggestor"
+          class="form-control"
+        >
+          <input
+
+            v-model="newStatus.spoilerText"
+            type="text"
+            :placeholder="$t('post_status.content_warning')"
+            class="form-post-subject"
+          >
+        </EmojiInput>
+        <EmojiInput
+          v-model="newStatus.status"
+          :suggest="emojiUserSuggestor"
+          class="form-control main-input"
+        >
+          <textarea
+            ref="textarea"
+            v-model="newStatus.status"
+            :placeholder="$t('post_status.default')"
+            rows="1"
+            :disabled="posting"
+            class="form-post-body"
+            @keydown.meta.enter="postStatus(newStatus)"
+            @keyup.ctrl.enter="postStatus(newStatus)"
+            @drop="fileDrop"
+            @dragover.prevent="fileDrag"
+            @input="resize"
+            @paste="paste"
+          />
+          <p
+            v-if="hasStatusLengthLimit"
+            class="character-counter faint"
+            :class="{ error: isOverLengthLimit }"
+          >
+            {{ charactersLeft }}
+          </p>
+        </EmojiInput>
+        <div class="visibility-tray">
+          <scope-selector
+            :show-all="showAllScopes"
+            :user-default="userDefaultScope"
+            :original-scope="copyMessageScope"
+            :initial-scope="newStatus.visibility"
+            :on-scope-change="changeVis"
+          />
+
+          <div
+            v-if="postFormats.length > 1"
+            class="text-format"
+          >
+            <label
+              for="post-content-type"
+              class="select"
+            >
+              <select
+                id="post-content-type"
+                v-model="newStatus.contentType"
+                class="form-control"
+              >
+                <option
+                  v-for="postFormat in postFormats"
+                  :key="postFormat"
+                  :value="postFormat"
+                >
+                  {{ $t(`post_status.content_type["${postFormat}"]`) }}
+                </option>
+              </select>
+              <i class="icon-down-open" />
+            </label>
+          </div>
+          <div
+            v-if="postFormats.length === 1 && postFormats[0] !== 'text/plain'"
+            class="text-format"
+          >
+            <span class="only-format">
+              {{ $t(`post_status.content_type["${postFormats[0]}"]`) }}
+            </span>
           </div>
         </div>
       </div>
-      <div class='form-bottom'>
-        <media-upload ref="mediaUpload" @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="uploadFailed" :drop-files="dropFiles"></media-upload>
-
-        <p v-if="isOverLengthLimit" class="error">{{ charactersLeft }}</p>
-        <p class="faint" v-else-if="hasStatusLengthLimit">{{ charactersLeft }}</p>
-
-        <button v-if="posting" disabled class="btn btn-default">{{$t('post_status.posting')}}</button>
-        <button v-else-if="isOverLengthLimit" disabled class="btn btn-default">{{$t('general.submit')}}</button>
-        <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default">{{$t('general.submit')}}</button>
+      <poll-form
+        v-if="pollsAvailable"
+        ref="pollForm"
+        :visible="pollFormVisible"
+        @update-poll="setPoll"
+      />
+      <div class="form-bottom">
+        <div class="form-bottom-left">
+          <media-upload
+            ref="mediaUpload"
+            :drop-files="dropFiles"
+            @uploading="disableSubmit"
+            @uploaded="addMediaFile"
+            @upload-failed="uploadFailed"
+          />
+          <div
+            v-if="stickersAvailable"
+            class="sticker-icon"
+          >
+            <i
+              :title="$t('stickers.add_sticker')"
+              class="icon-picture btn btn-default"
+              :class="{ selected: stickerPickerVisible }"
+              @click="toggleStickerPicker"
+            />
+          </div>
+          <div
+            v-if="pollsAvailable"
+            class="poll-icon"
+          >
+            <i
+              :title="$t('polls.add_poll')"
+              class="icon-chart-bar btn btn-default"
+              :class="pollFormVisible && 'selected'"
+              @click="togglePollForm"
+            />
+          </div>
+        </div>
+        <button
+          v-if="posting"
+          disabled
+          class="btn btn-default"
+        >
+          {{ $t('post_status.posting') }}
+        </button>
+        <button
+          v-else-if="isOverLengthLimit"
+          disabled
+          class="btn btn-default"
+        >
+          {{ $t('general.submit') }}
+        </button>
+        <button
+          v-else
+          :disabled="submitDisabled"
+          type="submit"
+          class="btn btn-default"
+        >
+          {{ $t('general.submit') }}
+        </button>
       </div>
-      <div class='alert error' v-if="error">
+      <div
+        v-if="error"
+        class="alert error"
+      >
         Error: {{ error }}
-        <i class="button-icon icon-cancel" @click="clearError"></i>
+        <i
+          class="button-icon icon-cancel"
+          @click="clearError"
+        />
       </div>
       <div class="attachments">
-        <div class="media-upload-wrapper" v-for="file in newStatus.files">
-          <i class="fa button-icon icon-cancel" @click="removeMediaFile(file)"></i>
+        <div
+          v-for="file in newStatus.files"
+          :key="file.url"
+          class="media-upload-wrapper"
+        >
+          <i
+            class="fa button-icon icon-cancel"
+            @click="removeMediaFile(file)"
+          />
           <div class="media-upload-container attachment">
-            <img class="thumbnail media-upload" :src="file.url" v-if="type(file) === 'image'"></img>
-            <video v-if="type(file) === 'video'" :src="file.url" controls></video>
-            <audio v-if="type(file) === 'audio'" :src="file.url" controls></audio>
-            <a v-if="type(file) === 'unknown'" :href="file.url">{{file.url}}</a>
+            <img
+              v-if="type(file) === 'image'"
+              class="thumbnail media-upload"
+              :src="file.url"
+            >
+            <video
+              v-if="type(file) === 'video'"
+              :src="file.url"
+              controls
+            />
+            <audio
+              v-if="type(file) === 'audio'"
+              :src="file.url"
+              controls
+            />
+            <a
+              v-if="type(file) === 'unknown'"
+              :href="file.url"
+            >{{ file.url }}</a>
           </div>
         </div>
       </div>
-      <div class="upload_settings" v-if="newStatus.files.length > 0">
-        <input type="checkbox" id="filesSensitive" v-model="newStatus.nsfw">
-        <label for="filesSensitive">{{$t('post_status.attachments_sensitive')}}</label>
+      <div
+        v-if="newStatus.files.length > 0"
+        class="upload_settings"
+      >
+        <input
+          id="filesSensitive"
+          v-model="newStatus.nsfw"
+          type="checkbox"
+        >
+        <label for="filesSensitive">{{ $t('post_status.attachments_sensitive') }}</label>
       </div>
     </form>
+    <sticker-picker
+      v-if="stickerPickerVisible"
+      ref="stickerPicker"
+      @uploaded="addMediaFile"
+    />
   </div>
 </template>
 
@@ -136,11 +292,11 @@
   .visibility-tray {
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
+    padding-top: 5px;
   }
 }
 
-.post-status-form, .login {
+.post-status-form {
   .form-bottom {
     display: flex;
     padding: 0.5em;
@@ -155,6 +311,37 @@
       padding: 0.35em;
       display: flex;
     }
+  }
+
+  .form-bottom-left {
+    display: flex;
+    flex: 1;
+  }
+
+  .text-format {
+    .only-format {
+      color: $fallback--faint;
+      color: var(--faint, $fallback--faint);
+    }
+  }
+
+  .poll-icon, .sticker-icon {
+    font-size: 26px;
+    flex: 1;
+
+    .selected {
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
+  }
+
+  .sticker-icon {
+    flex: 0;
+    min-width: 50px;
+  }
+
+  .icon-chart-bar {
+    cursor: pointer;
   }
 
   .error {
@@ -224,7 +411,6 @@
     }
   }
 
-
   .btn {
     cursor: pointer;
   }
@@ -242,7 +428,7 @@
   .form-group {
     display: flex;
     flex-direction: column;
-    padding: 0.3em 0.5em 0.6em;
+    padding: 0.25em 0.5em 0.5em;
     line-height:24px;
   }
 
@@ -254,17 +440,36 @@
     min-height: 1px;
   }
 
-  form textarea.form-control {
-    line-height:16px;
+  .form-post-body {
+    height: 16px; // Only affects the empty-height
+    line-height: 16px;
     resize: none;
     overflow: hidden;
     transition: min-height 200ms 100ms;
+    padding-bottom: 1.75em;
     min-height: 1px;
     box-sizing: content-box;
   }
 
-  form textarea.form-control:focus {
+  .form-post-body:focus {
     min-height: 48px;
+  }
+
+  .main-input {
+    position: relative;
+  }
+
+  .character-counter {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: 0 0.5em;
+
+    &.error {
+      color: $fallback--cRed;
+      color: var(--cRed, $fallback--cRed);
+    }
   }
 
   .btn {

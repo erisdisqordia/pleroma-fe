@@ -1,45 +1,51 @@
 import apiService from '../api/api.service.js'
 
-const update = ({store, notifications, older}) => {
+const update = ({ store, notifications, older }) => {
   store.dispatch('setNotificationsError', { value: false })
 
   store.dispatch('addNewNotifications', { notifications, older })
 }
 
-const fetchAndUpdate = ({store, credentials, older = false}) => {
+const fetchAndUpdate = ({ store, credentials, older = false }) => {
   const args = { credentials }
   const rootState = store.rootState || store.state
   const timelineData = rootState.statuses.notifications
 
+  args['timeline'] = 'notifications'
   if (older) {
     if (timelineData.minId !== Number.POSITIVE_INFINITY) {
       args['until'] = timelineData.minId
     }
+    return fetchNotifications({ store, args, older })
   } else {
-    // load unread notifications repeadedly to provide consistency between browser tabs
+    // fetch new notifications
+    if (timelineData.maxId !== Number.POSITIVE_INFINITY) {
+      args['since'] = timelineData.maxId
+    }
+    const result = fetchNotifications({ store, args, older })
+
+    // load unread notifications repeatedly to provide consistency between browser tabs
     const notifications = timelineData.data
     const unread = notifications.filter(n => !n.seen).map(n => n.id)
-    if (!unread.length) {
-      args['since'] = timelineData.maxId
-    } else {
-      args['since'] = Math.min(...unread) - 1
-      if (timelineData.maxId !== Math.max(...unread)) {
-        args['until'] = Math.max(...unread, args['since'] + 20)
-      }
+    if (unread.length) {
+      args['since'] = Math.min(...unread)
+      fetchNotifications({ store, args, older })
     }
+
+    return result
   }
+}
 
-  args['timeline'] = 'notifications'
-
+const fetchNotifications = ({ store, args, older }) => {
   return apiService.fetchTimeline(args)
     .then((notifications) => {
-      update({store, notifications, older})
+      update({ store, notifications, older })
       return notifications
     }, () => store.dispatch('setNotificationsError', { value: true }))
     .catch(() => store.dispatch('setNotificationsError', { value: true }))
 }
 
-const startFetching = ({credentials, store}) => {
+const startFetching = ({ credentials, store }) => {
   fetchAndUpdate({ credentials, store })
   const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store })
   // Initially there's set flag to silence all desktop notifications so

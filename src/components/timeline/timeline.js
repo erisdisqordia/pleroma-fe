@@ -52,7 +52,7 @@ const Timeline = {
 
     window.addEventListener('scroll', this.scrollLoad)
 
-    if (this.timelineName === 'friends' && !credentials) { return false }
+    if (store.state.api.fetchers[this.timelineName]) { return false }
 
     timelineFetcher.fetchAndUpdate({
       store,
@@ -78,13 +78,15 @@ const Timeline = {
   },
   methods: {
     handleShortKey (e) {
+      // Ignore when input fields are focused
+      if (['textarea', 'input'].includes(e.target.tagName.toLowerCase())) return
       if (e.key === '.') this.showNewStatuses()
     },
     showNewStatuses () {
       if (this.newStatusCount === 0) return
 
       if (this.timeline.flushMarker !== 0) {
-        this.$store.commit('clearTimeline', { timeline: this.timelineName })
+        this.$store.commit('clearTimeline', { timeline: this.timelineName, excludeUserId: true })
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
         this.fetchOlderStatuses()
       } else {
@@ -137,7 +139,7 @@ const Timeline = {
         if (top < 15 &&
             !this.paused &&
             !(this.unfocused && this.$store.state.config.pauseOnUnfocused)
-           ) {
+        ) {
           this.showNewStatuses()
         } else {
           this.paused = true

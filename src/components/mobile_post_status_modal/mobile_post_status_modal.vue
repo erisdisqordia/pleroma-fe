@@ -34,14 +34,19 @@
 @import '../../_variables.scss';
 
 .post-form-modal-view {
-  max-height: 100%;
-  display: block;
+  align-items: flex-start;
 }
 
 .post-form-modal-panel {
   flex-shrink: 0;
-  margin: 25% 0 4em 0;
+  margin-top: 25%;
+  margin-bottom: 2em;
   width: 100%;
+  max-width: 700px;
+
+  @media (orientation: landscape) {
+    margin-top: 8%;
+  }
 }
 
 .new-status-button {

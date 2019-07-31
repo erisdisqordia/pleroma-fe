@@ -8,6 +8,7 @@
         :user="user"
         :switcher="true"
         :selected="timeline.viewing"
+        :allow-zooming-avatar="true"
         rounded="top"
       />
       <tab-switcher

@@ -7,7 +7,23 @@
     <div class="panel-heading">
       <div class="user-info">
         <div class="container">
-          <router-link :to="userProfileLink(user)">
+          <a
+            v-if="allowZoomingAvatar"
+            class="user-info-avatar-link"
+            @click="zoomAvatar"
+          >
+            <UserAvatar
+              :better-shadow="betterShadow"
+              :user="user"
+            />
+            <div class="user-info-avatar-link-overlay">
+              <i class="button-icon icon-zoom-in" />
+            </div>
+          </a>
+          <router-link
+            v-else
+            :to="userProfileLink(user)"
+          >
             <UserAvatar
               :better-shadow="betterShadow"
               :user="user"
@@ -351,6 +367,7 @@
   .container {
     padding: 16px 0 6px;
     display: flex;
+    align-items: flex-start;
     max-height: 56px;
 
     .avatar {
@@ -369,6 +386,35 @@
     }
     img {
       visibility: visible;
+    }
+  }
+
+  &-avatar-link {
+    position: relative;
+    cursor: pointer;
+
+    &-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: $fallback--avatarRadius;
+      border-radius: var(--avatarRadius, $fallback--avatarRadius);
+      opacity: 0;
+      transition: opacity .2s ease;
+
+      i {
+        color: #FFF;
+      }
+    }
+
+    &:hover &-overlay {
+      opacity: 1;
     }
   }
 

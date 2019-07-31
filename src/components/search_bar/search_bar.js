@@ -20,6 +20,11 @@ const SearchBar = {
     toggleHidden () {
       this.hidden = !this.hidden
       this.$emit('toggled', this.hidden)
+      this.$nextTick(() => {
+        if (!this.hidden) {
+          this.$refs.searchInput.focus()
+        }
+      })
     }
   }
 }

@@ -41,6 +41,7 @@
           <search-bar
             class="nav-icon mobile-hidden"
             @toggled="onSearchBarToggled"
+            @click.stop.native
           />
           <router-link
             class="mobile-hidden"

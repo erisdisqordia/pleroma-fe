@@ -1,14 +1,12 @@
 import SideDrawer from '../side_drawer/side_drawer.vue'
 import Notifications from '../notifications/notifications.vue'
-import MobilePostStatusModal from '../mobile_post_status_modal/mobile_post_status_modal.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 import GestureService from '../../services/gesture_service/gesture_service'
 
 const MobileNav = {
   components: {
     SideDrawer,
-    Notifications,
-    MobilePostStatusModal
+    Notifications
   },
   data: () => ({
     notificationsCloseGesture: undefined,

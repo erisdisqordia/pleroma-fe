@@ -25,7 +25,7 @@ This could be a bit trickier, you basically need steps 1-4 from *develop build* 
 
 ### Replacing your instance's frontend with custom FE build
 
-This is the most easiest way to use and test FE build: you just need to copy or symlink contents of `dist` folder into backend's `/instance/static` folder, creating it if it doesn't exist. Be aware that running `yarn build` wipes the contents of `dist` folder.
+This is the most easiest way to use and test FE build: you just need to copy or symlink contents of `dist` folder into backend's [static directory](https://docs.pleroma.social/static_dir.html), by default it is located in `instance/static`, or in `/var/lib/pleroma/static` for OTP release installations, create it if it doesn't exist already. Be aware that running `yarn build` wipes the contents of `dist` folder.
 
 ### Running production build locally or on a separate server
 

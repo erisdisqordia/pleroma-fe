@@ -65,6 +65,7 @@
     "timeline": "Flux d’actualitat",
     "twkn": "Lo malhum conegut",
     "user_search": "Cèrca d’utilizaires",
+    "search": "Cercar",
     "who_to_follow": "Qual seguir",
     "preferences": "Preferéncias"
   },
@@ -91,7 +92,15 @@
 	"expires_in": "Lo sondatge s’acabarà {0}",
 	"expired": "Sondatge acabat {0}",
 	"not_enough_options": "I a pas pro d’opcions"
-	},  
+	},
+	"stickers": {
+	 "add_sticker": "Add Sticker"
+	},
+  "interactions": {
+    "favs_repeats": "Repeticions e favorits",
+    "follows": "Nòus seguidors",
+    "load_older": "Cargar d’interaccions anterioras"
+  },  
   "post_status": {
     "new_status": "Publicar d’estatuts novèls",
     "account_not_locked_warning": "Vòstre compte es pas {0}. Qual que siá pòt vos seguir per veire vòstras publicacions destinadas pas qu’a vòstres seguidors.",
@@ -269,7 +278,7 @@
     "streaming": "Activar lo cargament automatic dels novèls estatus en anar amont",
     "text": "Tèxte",
     "theme": "Tèma",
-    "theme_help_v2_1": "You can also override certain component's colors and opacity by toggling the checkbox, use \"Clear all\" button to clear all overrides.",
+    "theme_help_v2_1": "Podètz tanben remplaçar la color d’unes compausants en clicant la case, utilizatz lo boton \"O escafar tot\" per escafar totes las subrecargadas.",
     "theme_help_v2_2": "Icons underneath some entries are background/text contrast indicators, hover over for detailed info. Please keep in mind that when using transparency contrast indicators show the worst possible case.",
     "theme_help": "Emplegatz los còdis de color hex (#rrggbb) per personalizar vòstre tèma de color.",
     "tooltipRadius": "Astúcias/alèrtas",
@@ -280,12 +289,12 @@
       "true": "òc"
     },
     "notifications": "Notificacions",
-    "notification_setting": "Receber las notificacions de :",
+    "notification_setting": "Recebre las notificacions de :",
     "notification_setting_follows": "Utilizaires que seguissètz",
     "notification_setting_non_follows": "Utilizaires que seguissètz pas",
     "notification_setting_followers": "Utilizaires que vos seguisson",
     "notification_setting_non_followers": "Utilizaires que vos seguisson pas",
-    "notification_mutes": "Per receber pas mai d’un utilizaire en particular, botatz-lo en silenci.",
+    "notification_mutes": "Per recebre pas mai d’un utilizaire en particular, botatz-lo en silenci.",
     "notification_blocks": "Blocar un utilizaire arrèsta totas las notificacions tan coma quitar de los seguir.",
 	"enable_web_push_notifications": "Activar las notificacions web push",
     "style": {
@@ -477,6 +486,8 @@
     "per_day": "per jorn",
     "remote_follow": "Seguir a distància",
     "statuses": "Estatuts",
+    "subscribe": "S’abonar",
+    "unsubscribe": "Se desabonar",
     "unblock": "Desblocar",
     "unblock_progress": "Desblocatge...",
     "block_progress": "Blocatge...",
@@ -532,5 +543,12 @@
       "GiB": "Gio",
       "TiB": "Tio"
     }
+  },
+    "search": {
+	    "people": "Gent",
+	    "hashtags": "Etiquetas",
+	    "person_talking": "{count} persona ne parla",
+	    "people_talking": "{count} personas ne parlan",
+	    "no_results": "Cap de resultats"
   }
 }

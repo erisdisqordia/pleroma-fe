@@ -7,7 +7,7 @@
       rel="noopener"
     >
       <div
-        v-if="useImage"
+        v-if="useImage && imageLoaded"
         class="card-image"
         :class="{ 'small-image': size === 'small' }"
       >

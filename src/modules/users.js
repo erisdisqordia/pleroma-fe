@@ -3,7 +3,6 @@ import oauthApi from '../services/new_api/oauth.js'
 import { compact, map, each, merge, last, concat, uniq } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
-import { humanizeErrors } from './errors'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
@@ -382,16 +381,8 @@ const users = {
         store.dispatch('loginUser', data.access_token)
       } catch (e) {
         let errors = e.message
-        // replace ap_id with username
-        if (typeof errors === 'object') {
-          if (errors.ap_id) {
-            errors.username = errors.ap_id
-            delete errors.ap_id
-          }
-          errors = humanizeErrors(errors)
-        }
         store.commit('signUpFailure', errors)
-        throw Error(errors)
+        throw e
       }
     },
     async getCaptcha (store) {

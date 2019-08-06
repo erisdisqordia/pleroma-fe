@@ -1,7 +1,7 @@
 import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
-import { StatusCodeError } from '../errors/errors'
+import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */
 const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
@@ -199,12 +199,11 @@ const register = ({ params, credentials }) => {
       ...rest
     })
   })
-    .then((response) => [response.ok, response])
-    .then(([ok, response]) => {
-      if (ok) {
+    .then((response) => {
+      if (response.ok) {
         return response.json()
       } else {
-        return response.json().then((error) => { throw new Error(error) })
+        return response.json().then((error) => { throw new RegistrationError(error) })
       }
     })
 }

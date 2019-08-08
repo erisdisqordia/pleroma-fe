@@ -61,13 +61,17 @@
   }
 
   &.contain-fit {
-    img, video {
+    img,
+    video,
+    canvas {
       object-fit: contain;
     }
   }
 
   &.cover-fit {
-    img, video {
+    img,
+    video,
+    canvas {
       object-fit: cover;
     }
   }

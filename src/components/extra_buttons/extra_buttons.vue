@@ -1,6 +1,5 @@
 <template>
   <v-popover
-    v-if="enabled"
     trigger="click"
     placement="top"
     class="extra-button-popover"

@@ -117,6 +117,8 @@ const backendInteractorService = credentials => {
   const fetchPinnedStatuses = (id) => apiService.fetchPinnedStatuses({ credentials, id })
   const pinOwnStatus = (id) => apiService.pinOwnStatus({ credentials, id })
   const unpinOwnStatus = (id) => apiService.unpinOwnStatus({ credentials, id })
+  const muteConversation = (id) => apiService.muteConversation({ credentials, id })
+  const unmuteConversation = (id) => apiService.unmuteConversation({ credentials, id })
 
   const getCaptcha = () => apiService.getCaptcha()
   const register = (params) => apiService.register({ credentials, params })
@@ -178,6 +180,8 @@ const backendInteractorService = credentials => {
     fetchPinnedStatuses,
     pinOwnStatus,
     unpinOwnStatus,
+    muteConversation,
+    unmuteConversation,
     tagUser,
     untagUser,
     addRight,

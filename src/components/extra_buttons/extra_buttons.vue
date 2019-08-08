@@ -10,6 +10,20 @@
     <div slot="popover">
       <div class="dropdown-menu">
         <button
+          v-if="!status.muted"
+          class="dropdown-item dropdown-item-icon"
+          @click.prevent="muteConversation"
+        >
+          <i class="icon-eye-off" /><span>{{ $t("status.mute_conversation") }}</span>
+        </button>
+        <button
+          v-if="status.muted"
+          class="dropdown-item dropdown-item-icon"
+          @click.prevent="unmuteConversation"
+        >
+          <i class="icon-eye-off" /><span>{{ $t("status.unmute_conversation") }}</span>
+        </button>
+        <button
           v-if="!status.pinned && canPin"
           v-close-popover
           class="dropdown-item dropdown-item-icon"

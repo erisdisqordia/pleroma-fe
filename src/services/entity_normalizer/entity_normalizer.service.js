@@ -240,6 +240,7 @@ export const parseStatus = (data) => {
     output.external_url = data.url
     output.poll = data.poll
     output.pinned = data.pinned
+    output.muted = data.muted
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num

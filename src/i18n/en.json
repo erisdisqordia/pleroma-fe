@@ -508,7 +508,9 @@
     "pinned": "Pinned",
     "delete_confirm": "Do you really want to delete this status?",
     "reply_to": "Reply to",
-    "replies_list": "Replies:"
+    "replies_list": "Replies:",
+    "mute_conversation": "Mute conversation",
+    "unmute_conversation": "Unmute conversation"
   },
   "user_card": {
     "approve": "Approve",

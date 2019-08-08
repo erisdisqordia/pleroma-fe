@@ -67,6 +67,8 @@ const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
 const MASTODON_REPORT_USER_URL = '/api/v1/reports'
 const MASTODON_PIN_OWN_STATUS = id => `/api/v1/statuses/${id}/pin`
 const MASTODON_UNPIN_OWN_STATUS = id => `/api/v1/statuses/${id}/unpin`
+const MASTODON_MUTE_CONVERSATION = id => `/api/v1/statuses/${id}/mute`
+const MASTODON_UNMUTE_CONVERSATION = id => `/api/v1/statuses/${id}/unmute`
 const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
 
@@ -249,6 +251,16 @@ const pinOwnStatus = ({ id, credentials }) => {
 
 const unpinOwnStatus = ({ id, credentials }) => {
   return promisedRequest({ url: MASTODON_UNPIN_OWN_STATUS(id), credentials, method: 'POST' })
+    .then((data) => parseStatus(data))
+}
+
+const muteConversation = ({ id, credentials }) => {
+  return promisedRequest({ url: MASTODON_MUTE_CONVERSATION(id), credentials, method: 'POST' })
+    .then((data) => parseStatus(data))
+}
+
+const unmuteConversation = ({ id, credentials }) => {
+  return promisedRequest({ url: MASTODON_UNMUTE_CONVERSATION(id), credentials, method: 'POST' })
     .then((data) => parseStatus(data))
 }
 
@@ -920,6 +932,8 @@ const apiService = {
   unfollowUser,
   pinOwnStatus,
   unpinOwnStatus,
+  muteConversation,
+  unmuteConversation,
   blockUser,
   unblockUser,
   fetchUser,

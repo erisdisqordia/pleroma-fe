@@ -30,13 +30,11 @@ const UserProfile = {
     }
   },
   created () {
-    // Make sure that timelines used in this page are empty
-    this.cleanUp()
     const routeParams = this.$route.params
     this.load(routeParams.name || routeParams.id)
   },
   destroyed () {
-    this.cleanUp()
+    this.stopFetching()
   },
   computed: {
     timeline () {
@@ -67,17 +65,35 @@ const UserProfile = {
   },
   methods: {
     load (userNameOrId) {
+      const startFetchingTimeline = (timeline, userId) => {
+        // Clear timeline only if load another user's profile
+        if (userId !== this.$store.state.statuses.timelines[timeline].userId) {
+          this.$store.commit('clearTimeline', { timeline })
+        }
+        this.$store.dispatch('startFetchingTimeline', { timeline, userId })
+      }
+
+      const loadById = (userId) => {
+        this.userId = userId
+        startFetchingTimeline('user', userId)
+        startFetchingTimeline('media', userId)
+        if (this.isUs) {
+          startFetchingTimeline('favorites', userId)
+        }
+        // Fetch all pinned statuses immediately
+        this.$store.dispatch('fetchPinnedStatuses', userId)
+      }
+
+      // Reset view
+      this.userId = null
+
       // Check if user data is already loaded in store
       const user = this.$store.getters.findUser(userNameOrId)
       if (user) {
-        this.userId = user.id
-        this.fetchTimelines()
+        loadById(user.id)
       } else {
         this.$store.dispatch('fetchUser', userNameOrId)
-          .then(({ id }) => {
-            this.userId = id
-            this.fetchTimelines()
-          })
+          .then(({ id }) => loadById(id))
           .catch((reason) => {
             const errorMessage = get(reason, 'error.error')
             if (errorMessage === 'No user with such user_id') { // Known error
@@ -90,36 +106,25 @@ const UserProfile = {
           })
       }
     },
-    fetchTimelines () {
-      const userId = this.userId
-      this.$store.dispatch('startFetchingTimeline', { timeline: 'user', userId })
-      this.$store.dispatch('startFetchingTimeline', { timeline: 'media', userId })
-      if (this.isUs) {
-        this.$store.dispatch('startFetchingTimeline', { timeline: 'favorites', userId })
-      }
-      // Fetch all pinned statuses immediately
-      this.$store.dispatch('fetchPinnedStatuses', userId)
-    },
-    cleanUp () {
+    stopFetching () {
       this.$store.dispatch('stopFetching', 'user')
       this.$store.dispatch('stopFetching', 'favorites')
       this.$store.dispatch('stopFetching', 'media')
-      this.$store.commit('clearTimeline', { timeline: 'user' })
-      this.$store.commit('clearTimeline', { timeline: 'favorites' })
-      this.$store.commit('clearTimeline', { timeline: 'media' })
+    },
+    switchUser (userNameOrId) {
+      this.stopFetching()
+      this.load(userNameOrId)
     }
   },
   watch: {
     '$route.params.id': function (newVal) {
       if (newVal) {
-        this.cleanUp()
-        this.load(newVal)
+        this.switchUser(newVal)
       }
     },
     '$route.params.name': function (newVal) {
       if (newVal) {
-        this.cleanUp()
-        this.load(newVal)
+        this.switchUser(newVal)
       }
     },
     $route () {

@@ -262,7 +262,7 @@
     "loop_video": "Loop videos",
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
     "mutes_tab": "Mutes",
-    "play_videos_in_modal": "Play videos directly in the media viewer",
+    "play_videos_in_modal": "Play videos in a popup frame",
     "use_contain_fit": "Don't crop the attachment in thumbnails",
     "name": "Name",
     "name_bio": "Name & Bio",

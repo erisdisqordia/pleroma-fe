@@ -36,7 +36,7 @@ export const requestFollow = (user, store) => new Promise((resolve, reject) => {
 
       return fetchUser(1, user, store)
         .then((sent) => {
-          resolve({ sent: sent })
+          resolve({ sent })
         })
     })
 })

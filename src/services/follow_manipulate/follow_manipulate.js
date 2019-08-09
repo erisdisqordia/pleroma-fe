@@ -21,7 +21,7 @@ export const requestFollow = (user, store) => new Promise((resolve, reject) => {
     .then((updated) => {
       store.commit('updateUserRelationship', [updated])
 
-      if (updated.following || user.locked) {
+      if (updated.following || (user.locked && user.requested)) {
         // If we get result immediately or the account is locked, just stop.
         resolve({ sent: updated.requested })
         return

@@ -86,6 +86,7 @@ const UserProfile = {
 
       // Reset view
       this.userId = null
+      this.error = false
 
       // Check if user data is already loaded in store
       const user = this.$store.getters.findUser(userNameOrId)

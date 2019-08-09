@@ -65,6 +65,7 @@ export const parseUser = (data) => {
 
       if (relationship) {
         output.follows_you = relationship.followed_by
+        output.requested = relationship.requested
         output.following = relationship.following
         output.statusnet_blocking = relationship.blocking
         output.muted = relationship.muting

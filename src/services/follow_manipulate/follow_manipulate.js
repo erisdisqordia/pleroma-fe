@@ -6,7 +6,7 @@ const fetchUser = (attempt, user, store) => new Promise((resolve, reject) => {
       .catch((e) => reject(e))
   }, 500)
 }).then(([following, sent, locked, attempt]) => {
-  if (!following && !locked && attempt <= 3) {
+  if (!following && !(locked && sent) && attempt <= 3) {
     // If we BE reports that we still not following that user - retry,
     // increment attempts by one
     return fetchUser(++attempt, user, store)

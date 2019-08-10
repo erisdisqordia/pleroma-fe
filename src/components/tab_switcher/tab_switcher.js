@@ -71,7 +71,7 @@ export default Vue.component('tab-switcher', {
 
     const contents = this.$slots.default.map((slot, index) => {
       if (!slot.tag) return
-      const active = index === this.active
+      const active = this.isActiveTab(index)
       if (this.renderOnlyFocused) {
         return active
           ? <div class="active">{slot}</div>

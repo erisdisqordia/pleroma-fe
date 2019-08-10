@@ -18,13 +18,11 @@ const ExtraButtons = {
         .catch(err => this.$emit('onError', err.error.error))
     },
     muteConversation () {
-      this.refreshPopper()
       this.$store.dispatch('muteConversation', this.status.id)
         .then(() => this.$emit('onSuccess'))
         .catch(err => this.$emit('onError', err.error.error))
     },
     unmuteConversation () {
-      this.refreshPopper()
       this.$store.dispatch('unmuteConversation', this.status.id)
         .then(() => this.$emit('onSuccess'))
         .catch(err => this.$emit('onError', err.error.error))

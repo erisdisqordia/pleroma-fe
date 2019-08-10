@@ -13,7 +13,7 @@ const Interactions = {
     }
   },
   methods: {
-    onModeSwitch (index, dataset) {
+    onModeSwitch (dataset) {
       this.filterMode = tabModeDict[dataset.filter]
     }
   },

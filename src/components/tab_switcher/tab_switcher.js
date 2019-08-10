@@ -20,7 +20,7 @@ export default Vue.component('tab-switcher', {
     activateTab (index, dataset) {
       return () => {
         if (typeof this.onSwitch === 'function') {
-          this.onSwitch.call(null, index, this.$slots.default[index].elm.dataset)
+          this.onSwitch.call(null, this.$slots.default[index].elm.dataset)
         }
         this.active = index
       }

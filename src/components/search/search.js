@@ -75,7 +75,7 @@ const Search = {
       const length = this[tabName].length
       return length === 0 ? '' : ` (${length})`
     },
-    onResultTabSwitch (_index, dataset) {
+    onResultTabSwitch (dataset) {
       this.currenResultTab = dataset.filter
     },
     getActiveTab () {

@@ -17,7 +17,7 @@ export default Vue.component('tab-switcher', {
     }
   },
   methods: {
-    activateTab (index, dataset) {
+    activateTab (index) {
       return () => {
         if (typeof this.onSwitch === 'function') {
           this.onSwitch.call(null, this.$slots.default[index].key)

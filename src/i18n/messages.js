@@ -32,6 +32,7 @@ const messages = {
   pt: require('./pt.json'),
   ro: require('./ro.json'),
   ru: require('./ru.json'),
+  te: require('./te.json'),
   zh: require('./zh.json')
 }
 

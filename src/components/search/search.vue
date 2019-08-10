@@ -31,7 +31,7 @@
         <tab-switcher
           ref="tabSwitcher"
           :on-switch="onResultTabSwitch"
-          :custom-active="currenResultTab"
+          :active-tab="currenResultTab"
         >
           <span
             key="statuses"

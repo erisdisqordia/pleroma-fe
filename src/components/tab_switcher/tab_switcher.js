@@ -10,6 +10,16 @@ export default Vue.component('tab-switcher', {
       active: this.$slots.default.findIndex(_ => _.tag)
     }
   },
+  computed: {
+    activeIndex () {
+      // In case of controlled component
+      if (this.activeTab) {
+        return this.$slots.default.findIndex(slot => this.activeTab === slot.key)
+      } else {
+        return this.active
+      }
+    }
+  },
   beforeUpdate () {
     const currentSlot = this.$slots.default[this.active]
     if (!currentSlot.tag) {
@@ -24,14 +34,6 @@ export default Vue.component('tab-switcher', {
         }
         this.active = index
       }
-    },
-    isActiveTab (index) {
-      // In case of controlled component
-      if (this.activeTab) {
-        return this.$slots.default.findIndex(slot => this.activeTab === slot.key) === index
-      } else {
-        return this.active === index
-      }
     }
   },
   render (h) {
@@ -41,7 +43,7 @@ export default Vue.component('tab-switcher', {
         const classesTab = ['tab']
         const classesWrapper = ['tab-wrapper']
 
-        if (this.isActiveTab(index)) {
+        if (this.activeIndex === index) {
           classesTab.push('active')
           classesWrapper.push('active')
         }
@@ -71,7 +73,7 @@ export default Vue.component('tab-switcher', {
 
     const contents = this.$slots.default.map((slot, index) => {
       if (!slot.tag) return
-      const active = this.isActiveTab(index)
+      const active = this.activeIndex === index
       if (this.renderOnlyFocused) {
         return active
           ? <div class="active">{slot}</div>

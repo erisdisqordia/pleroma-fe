@@ -22,16 +22,20 @@ const FriendList = withLoadMore({
   additionalPropNames: ['userId']
 })(List)
 
+const defaultTabKey = 'statuses'
+
 const UserProfile = {
   data () {
     return {
       error: false,
-      userId: null
+      userId: null,
+      tab: defaultTabKey
     }
   },
   created () {
     const routeParams = this.$route.params
     this.load(routeParams.name || routeParams.id)
+    this.tab = get(this.$route, 'query.tab', defaultTabKey)
   },
   destroyed () {
     this.stopFetching()
@@ -115,6 +119,10 @@ const UserProfile = {
     switchUser (userNameOrId) {
       this.stopFetching()
       this.load(userNameOrId)
+    },
+    onTabSwitch (tab) {
+      this.tab = tab
+      this.$router.replace({ query: { tab } })
     }
   },
   watch: {
@@ -128,8 +136,8 @@ const UserProfile = {
         this.switchUser(newVal)
       }
     },
-    $route () {
-      this.$refs.tabSwitcher.activateTab(0)()
+    '$route.query': function (newVal) {
+      this.tab = newVal.tab || defaultTabKey
     }
   },
   components: {

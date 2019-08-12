@@ -6,7 +6,8 @@ const EmojiPicker = {
   data () {
     return {
       keyword: '',
-      activeGroup: 'standard'
+      activeGroup: 'standard',
+      showingAdditional: false
     }
   },
   methods: {
@@ -28,6 +29,9 @@ const EmojiPicker = {
           this.activeGroup = key
         }
       })
+    },
+    toggleAdditional (value) {
+      this.showingAdditional = value
     }
   },
   computed: {

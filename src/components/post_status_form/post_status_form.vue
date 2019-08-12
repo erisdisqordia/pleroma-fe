@@ -74,10 +74,15 @@
           >
         </EmojiInput>
         <EmojiInput
+          ref="emoji-input"
           v-model="newStatus.status"
           :suggest="emojiUserSuggestor"
-          emoji-picker
           class="form-control main-input"
+          emoji-picker
+          emoji-picker-external-trigger
+          sticker-picker
+          @sticker-uploaded="addMediaFile"
+          @sticker-upload-failed="uploadFailed"
         >
           <textarea
             ref="textarea"
@@ -160,14 +165,12 @@
             @upload-failed="uploadFailed"
           />
           <div
-            v-if="stickersAvailable"
-            class="sticker-icon"
+            class="emoji-icon"
           >
             <i
-              :title="$t('stickers.add_sticker')"
-              class="icon-picture btn btn-default"
-              :class="{ selected: stickerPickerVisible }"
-              @click="toggleStickerPicker"
+              :title="$t('emoji.add_emoji')"
+              class="icon-smile btn btn-default"
+              @click.stop.prevent="showEmoji"
             />
           </div>
           <div
@@ -260,11 +263,6 @@
         <label for="filesSensitive">{{ $t('post_status.attachments_sensitive') }}</label>
       </div>
     </form>
-    <sticker-picker
-      v-if="stickerPickerVisible"
-      ref="stickerPicker"
-      @uploaded="addMediaFile"
-    />
   </div>
 </template>
 
@@ -327,7 +325,7 @@
     }
   }
 
-  .poll-icon, .sticker-icon {
+  .poll-icon, .emoji-icon {
     font-size: 26px;
     flex: 1;
 
@@ -337,7 +335,7 @@
     }
   }
 
-  .sticker-icon {
+  .emoji-icon {
     flex: 0;
     min-width: 50px;
   }

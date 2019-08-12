@@ -6,8 +6,8 @@
     <slot />
     <template v-if="emojiPicker">
       <div
+        v-if="!emojiPickerExternalTrigger"
         class="emoji-picker-icon"
-        :class="pickerIconBottom ? 'picker-icon-bottom': 'picker-icon-right'"
         @click.prevent="togglePicker"
       >
         <i class="icon-smile" />
@@ -16,8 +16,11 @@
         v-if="emojiPicker"
         ref="picker"
         :class="{ hide: !showPicker }"
+        :sticker-picker="stickerPicker"
         class="emoji-picker-panel"
         @emoji="insert"
+        @sticker-uploaded="onStickerUploaded"
+        @sticker-upload-failed="onStickerUploadFailed"
       />
     </template>
     <div
@@ -62,6 +65,8 @@
 
   .emoji-picker-icon {
     position: absolute;
+    top: 0;
+    right: 0;
     margin: 0 .25em;
     font-size: 16px;
     cursor: pointer;
@@ -69,15 +74,6 @@
     &:hover i {
       color: $fallback--text;
       color: var(--text, $fallback--text);
-    }
-
-    &.picker-icon-bottom {
-      bottom: 0;
-      left: 0;
-    }
-    &.picker-icon-right {
-      top: 0;
-      right: 0;
     }
   }
   .emoji-picker-panel {

@@ -4,7 +4,26 @@ import './tab_switcher.scss'
 
 export default Vue.component('tab-switcher', {
   name: 'TabSwitcher',
-  props: ['renderOnlyFocused', 'onSwitch', 'customActive'],
+  props: {
+    renderOnlyFocused: {
+      required: false,
+      type: Boolean,
+      default: false
+    },
+    onSwitch: {
+      required: false,
+      type: Function
+    },
+    customActive: {
+      required: false,
+      type: String
+    },
+    scrollableTabs: {
+      required: false,
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       active: this.$slots.default.findIndex(_ => _.tag)
@@ -18,7 +37,8 @@ export default Vue.component('tab-switcher', {
   },
   methods: {
     activateTab (index, dataset) {
-      return () => {
+      return (e) => {
+        e.preventDefault()
         if (typeof this.onSwitch === 'function') {
           this.onSwitch.call(null, index, this.$slots.default[index].elm.dataset)
         }
@@ -85,7 +105,7 @@ export default Vue.component('tab-switcher', {
         <div class="tabs">
           {tabs}
         </div>
-        <div class="contents">
+        <div class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')}>
           {contents}
         </div>
       </div>

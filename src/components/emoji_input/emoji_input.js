@@ -58,6 +58,16 @@ const EmojiInput = {
       required: false,
       type: Boolean,
       default: false
+    },
+    emojiPickerExternalTrigger: {
+      required: false,
+      type: Boolean,
+      default: false
+    },
+    stickerPicker: {
+      required: false,
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -95,9 +105,6 @@ const EmojiInput = {
     textAtCaret () {
       return (this.wordAtCaret || {}).word || ''
     },
-    pickerIconBottom () {
-      return this.input && this.input.tag === 'textarea'
-    },
     wordAtCaret () {
       if (this.value && this.caret) {
         const word = Completion.wordAtPosition(this.value, this.caret - 1) || {}
@@ -133,6 +140,9 @@ const EmojiInput = {
     }
   },
   methods: {
+    triggerShowPicker () {
+      this.showPicker = true
+    },
     togglePicker () {
       this.showPicker = !this.showPicker
     },
@@ -148,6 +158,15 @@ const EmojiInput = {
         this.value.substring(this.caret)
       ].join('')
       this.$emit('input', newValue)
+      const position = this.caret + insertion.length
+
+      this.$nextTick(function () {
+        // Re-focus inputbox after clicking suggestion
+        this.input.elm.focus()
+        // Set selection right after the replacement instead of the very end
+        this.input.elm.setSelectionRange(position, position)
+        this.caret = position
+      })
     },
     replaceText (e, suggestion) {
       const len = this.suggestions.length || 0
@@ -263,6 +282,14 @@ const EmojiInput = {
     },
     onClickOutside () {
       this.showPicker = false
+    },
+    onStickerUploaded (e) {
+      this.showPicker = false
+      this.$emit('sticker-uploaded', e)
+    },
+    onStickerUploadFailed (e) {
+      this.showPicker = false
+      this.$emit('sticker-upload-Failed', e)
     },
     setCaret ({ target: { selectionStart } }) {
       this.caret = selectionStart

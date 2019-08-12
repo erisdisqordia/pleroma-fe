@@ -3,7 +3,6 @@ import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji_input/emoji_input.vue'
 import PollForm from '../poll/poll_form.vue'
-import StickerPicker from '../sticker_picker/sticker_picker.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { reject, map, uniqBy } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
@@ -35,7 +34,6 @@ const PostStatusForm = {
     MediaUpload,
     EmojiInput,
     PollForm,
-    StickerPicker,
     ScopeSelector
   },
   mounted () {
@@ -84,8 +82,7 @@ const PostStatusForm = {
         contentType
       },
       caret: 0,
-      pollFormVisible: false,
-      stickerPickerVisible: false
+      pollFormVisible: false
     }
   },
   computed: {
@@ -161,12 +158,6 @@ const PostStatusForm = {
     safeDMEnabled () {
       return this.$store.state.instance.safeDM
     },
-    stickersAvailable () {
-      if (this.$store.state.instance.stickers) {
-        return this.$store.state.instance.stickers.length > 0
-      }
-      return 0
-    },
     pollsAvailable () {
       return this.$store.state.instance.pollsAvailable &&
         this.$store.state.instance.pollLimits.max_options >= 2
@@ -222,7 +213,6 @@ const PostStatusForm = {
             poll: {}
           }
           this.pollFormVisible = false
-          this.stickerPickerVisible = false
           this.$refs.mediaUpload.clearFile()
           this.clearPollForm()
           this.$emit('posted')
@@ -239,7 +229,6 @@ const PostStatusForm = {
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
       this.enableSubmit()
-      this.stickerPickerVisible = false
     },
     removeMediaFile (fileInfo) {
       let index = this.newStatus.files.indexOf(fileInfo)
@@ -293,19 +282,15 @@ const PostStatusForm = {
         target.style.height = null
       }
     },
+    showEmoji () {
+      this.$refs['textarea'].focus()
+      this.$refs['emoji-input'].triggerShowPicker()
+    },
     clearError () {
       this.error = null
     },
     changeVis (visibility) {
       this.newStatus.visibility = visibility
-    },
-    toggleStickerPicker () {
-      this.stickerPickerVisible = !this.stickerPickerVisible
-    },
-    clearStickerPicker () {
-      if (this.$refs.stickerPicker) {
-        this.$refs.stickerPicker.clear()
-      }
     },
     togglePollForm () {
       this.pollFormVisible = !this.pollFormVisible

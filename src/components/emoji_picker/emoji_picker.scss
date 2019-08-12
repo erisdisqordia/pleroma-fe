@@ -1,39 +1,78 @@
 @import '../../_variables.scss';
 
 .emoji-picker {
-  position: absolute;
-  z-index: 1;
-  right: 0;
-  width: 300px;
-  height: 300px;
   display: flex;
   flex-direction: column;
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 300px;
   margin: 0 !important;
+  z-index: 1;
 
-  .emoji {
-    &-tabs {
-      &-item {
-        padding: 0 5px;
+  .panel-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-height: 0px;
+  }
 
-        &.active {
-          border-bottom: 4px solid;
+  .additional-tabs {
+    border-left: 1px solid;
+    border-left-color: $fallback--icon;
+    border-left-color: var(--icon, $fallback--icon);
+    padding-left: 5px;
+    flex: 0 0 0;
+  }
 
-          i {
-            color: $fallback--lightText;
-            color: var(--lightText, $fallback--lightText);
-          }
+  .emoji-tabs {
+    flex: 1 1 0;
+  }
+
+  .additional-tabs,
+  .emoji-tabs {
+    &-item {
+      padding: 0 5px;
+      cursor: pointer;
+      font-size: 24px;
+
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      &.active {
+        border-bottom: 4px solid;
+
+        i {
+          color: $fallback--lightText;
+          color: var(--lightText, $fallback--lightText);
         }
       }
     }
+  }
 
+  .sticker-picker {
+    flex: 1 1 0
+  }
+
+  .stickers,
+  .emoji {
     &-content {
       display: flex;
       flex-direction: column;
-    }
+      flex: 1 1 0;
+      min-height: 0;
 
+      &.hidden {
+        display: none
+      }
+    }
+  }
+
+  .emoji {
     &-search {
       padding: 5px;
-      flex: 0 0 1px;
+      flex: 0 0 0;
 
       input {
         width: 100%;
@@ -50,13 +89,16 @@
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      padding: 5px;
-      justify-content: space-between;
+      padding-left: 5px;
+      justify-content: left;
 
       &-title {
         font-size: 12px;
         width: 100%;
         margin: 0;
+        &.disabled {
+          display: none;
+        }
       }
     }
 
@@ -68,7 +110,7 @@
       font-size: 32px;
       align-items: center;
       justify-content: center;
-      margin: 2px;
+      margin: 4px;
 
       cursor: pointer;
 

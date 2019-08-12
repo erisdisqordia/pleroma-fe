@@ -106,8 +106,13 @@
     "expired": "Poll ended {0} ago",
     "not_enough_options": "Too few unique options in poll"
   },
-  "stickers": {
-    "add_sticker": "Add Sticker"
+  "emoji": {
+    "stickers": "Stickers",
+    "emoji": "Emoji",
+    "search_emoji": "Search for an emoji",
+    "add_emoji": "Insert emoji",
+    "custom": "Custom emoji",
+    "unicode": "Unicode emoji"
   },
   "interactions": {
     "favs_repeats": "Repeats and Favorites",

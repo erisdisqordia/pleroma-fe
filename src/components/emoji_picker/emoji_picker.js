@@ -1,14 +1,25 @@
+
 const filterByKeyword = (list, keyword = '') => {
   return list.filter(x => x.displayText.includes(keyword))
 }
 
 const EmojiPicker = {
+  props: {
+    stickerPicker: {
+      required: false,
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       keyword: '',
-      activeGroup: 'standard',
-      showingAdditional: false
+      activeGroup: 'custom',
+      showingStickers: false
     }
+  },
+  components: {
+    StickerPicker: () => import('../sticker_picker/sticker_picker.vue')
   },
   methods: {
     onEmoji (emoji) {
@@ -19,37 +30,72 @@ const EmojiPicker = {
     highlight (key) {
       const ref = this.$refs['group-' + key]
       const top = ref[0].offsetTop
-      this.$refs['emoji-groups'].scrollTop = top + 1
+      this.setShowStickers(false)
       this.activeGroup = key
-    },
-    scrolledGroup (e) {
-      const top = e.target.scrollTop
-      Object.keys(this.emojis).forEach(key => {
-        if (this.$refs['group-' + key][0].offsetTop < top) {
-          this.activeGroup = key
-        }
+      this.$nextTick(() => {
+        this.$refs['emoji-groups'].scrollTop = top + 1
       })
     },
-    toggleAdditional (value) {
-      this.showingAdditional = value
+    scrolledGroup (e) {
+      const target = (e && e.target) || this.$refs['emoji-groups']
+      const top = target.scrollTop + 5
+      this.$nextTick(() => {
+        this.emojisView.forEach(group => {
+          const ref = this.$refs['group-' + group.id]
+          if (ref[0].offsetTop <= top) {
+            this.activeGroup = group.id
+          }
+        })
+      })
+    },
+    toggleStickers () {
+      this.showingStickers = !this.showingStickers
+    },
+    setShowStickers (value) {
+      this.showingStickers = value
+    },
+    onStickerUploaded (e) {
+      this.$emit('sticker-uploaded', e)
+    },
+    onStickerUploadFailed (e) {
+      this.$emit('sticker-upload-failed', e)
+    }
+  },
+  watch: {
+    keyword () {
+      this.scrolledGroup()
     }
   },
   computed: {
+    activeGroupView () {
+      return this.showingStickers ? '' : this.activeGroup
+    },
+    stickersAvailable () {
+      if (this.$store.state.instance.stickers) {
+        return this.$store.state.instance.stickers.length > 0
+      }
+      return 0
+    },
     emojis () {
       const standardEmojis = this.$store.state.instance.emoji || []
       const customEmojis = this.$store.state.instance.customEmoji || []
-      return {
-        custom: {
-          text: 'Custom',
-          icon: 'icon-picture',
+      return [
+        {
+          id: 'custom',
+          text: this.$t('emoji.custom'),
+          icon: 'icon-smile',
           emojis: filterByKeyword(customEmojis, this.keyword)
         },
-        standard: {
-          text: 'Standard',
-          icon: 'icon-star',
+        {
+          id: 'standard',
+          text: this.$t('emoji.unicode'),
+          icon: 'icon-picture',
           emojis: filterByKeyword(standardEmojis, this.keyword)
         }
-      }
+      ]
+    },
+    emojisView () {
+      return this.emojis.filter(value => value.emojis.length > 0)
     }
   }
 }

@@ -1,5 +1,5 @@
 import Completion from '../../services/completion/completion.js'
-import EmojiPicker from '../emoji-picker/emoji-picker.vue'
+import EmojiPicker from '../emoji_picker/emoji_picker.vue'
 import { take } from 'lodash'
 
 /**

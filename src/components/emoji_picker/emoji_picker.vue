@@ -55,7 +55,7 @@
   </div>
 </template>
 
-<script src="./emoji-picker.js"></script>
+<script src="./emoji_picker.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';

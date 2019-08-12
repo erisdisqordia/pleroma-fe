@@ -50,7 +50,7 @@
   </div>
 </template>
 
-<script src="./emoji-input.js"></script>
+<script src="./emoji_input.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';

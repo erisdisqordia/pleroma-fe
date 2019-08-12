@@ -1,12 +1,12 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
-import EmojiInput from '../emoji-input/emoji-input.vue'
+import EmojiInput from '../emoji_input/emoji_input.vue'
 import PollForm from '../poll/poll_form.vue'
 import StickerPicker from '../sticker_picker/sticker_picker.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { reject, map, uniqBy } from 'lodash'
-import suggestor from '../emoji-input/suggestor.js'
+import suggestor from '../emoji_input/suggestor.js'
 
 const buildMentionsString = ({ user, attentions }, currentUser) => {
   let allAttentions = [...attentions]

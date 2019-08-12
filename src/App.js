@@ -89,7 +89,11 @@ export default {
     sitename () { return this.$store.state.instance.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
-    showInstanceSpecificPanel () { return this.$store.state.instance.showInstanceSpecificPanel },
+    showInstanceSpecificPanel () {
+      return this.$store.state.instance.showInstanceSpecificPanel &&
+        !this.$store.state.config.hideISP &&
+        this.$store.state.instance.instanceSpecificPanelContent
+    },
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
     isMobileLayout () { return this.$store.state.interface.mobileLayout }
   },

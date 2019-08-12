@@ -335,7 +335,7 @@ const Status = {
             return
           }
         }
-        if (target.rel === 'tag') {
+        if (target.rel === 'tag' || target.className.match(/hashtag/)) {
           // Extract tag name from link url
           const tag = extractTagFromUrl(target.href)
           if (tag) {

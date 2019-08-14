@@ -27,16 +27,17 @@ exports.cssLoaders = function (options) {
   return [
     {
       test: /\.(post)?css$/,
-      use: generateLoaders(['css-loader']),
+      use: generateLoaders(['css-loader', 'postcss-loader']),
     },
     {
       test: /\.less$/,
-      use: generateLoaders(['css-loader', 'less-loader']),
+      use: generateLoaders(['css-loader', 'postcss-loader', 'less-loader']),
     },
     {
       test: /\.sass$/,
       use: generateLoaders([
         'css-loader',
+        'postcss-loader',
         {
           loader: 'sass-loader',
           options: {
@@ -47,11 +48,11 @@ exports.cssLoaders = function (options) {
     },
     {
       test: /\.scss$/,
-      use: generateLoaders(['css-loader', 'sass-loader'])
+      use: generateLoaders(['css-loader', 'postcss-loader', 'sass-loader'])
     },
     {
       test: /\.styl(us)?$/,
-      use: generateLoaders(['css-loader', 'stylus-loader']),
+      use: generateLoaders(['css-loader', 'postcss-loader', 'stylus-loader']),
     },
   ]
 }

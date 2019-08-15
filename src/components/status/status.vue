@@ -32,7 +32,7 @@
     </template>
     <template v-else>
       <div
-        v-if="showPinned && statusoid.pinned"
+        v-if="showPinned"
         class="status-pin"
       >
         <i class="fa icon-pin faint" />

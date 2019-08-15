@@ -35,7 +35,7 @@
             class="status-fadein"
             :statusoid="timeline.statusesObject[statusId]"
             :collapsable="true"
-            :show-pinned="true"
+            :pinned-status-ids="pinnedStatusIds"
           />
         </template>
         <template v-for="status in timeline.visibleStatuses">

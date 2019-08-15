@@ -1,4 +1,4 @@
-import { reduce, filter, findIndex, clone, keyBy } from 'lodash'
+import { reduce, filter, findIndex, clone } from 'lodash'
 import Status from '../status/status.vue'
 
 const sortById = (a, b) => {
@@ -42,7 +42,7 @@ const conversation = {
     'statusoid',
     'collapsable',
     'isPage',
-    'pinnedStatusIds'
+    'pinnedStatusIdsObject'
   ],
   created () {
     if (this.isPage) {
@@ -104,9 +104,6 @@ const conversation = {
     },
     isExpanded () {
       return this.expanded || this.isPage
-    },
-    pinnedStatusIdsObject () {
-      return keyBy(this.pinnedStatusIds, id => id)
     }
   },
   components: {

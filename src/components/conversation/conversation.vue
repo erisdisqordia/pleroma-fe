@@ -21,7 +21,7 @@
       :inline-expanded="collapsable && isExpanded"
       :statusoid="status"
       :expandable="!isExpanded"
-      :show-pinned="pinnedStatusIdsObject[status.id]"
+      :show-pinned="pinnedStatusIdsObject && pinnedStatusIdsObject[status.id]"
       :focused="focused(status.id)"
       :in-conversation="isExpanded"
       :highlight="getHighlight()"

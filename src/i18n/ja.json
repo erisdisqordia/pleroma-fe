@@ -78,6 +78,7 @@
     "timeline": "タイムライン",
     "twkn": "つながっているすべてのネットワーク",
     "user_search": "ユーザーをさがす",
+    "search": "さがす",
     "who_to_follow": "おすすめユーザー",
     "preferences": "せってい"
   },
@@ -104,6 +105,9 @@
     "expires_in": "いれふだは {0} で、おわります",
     "expired": "いれふだは {0} まえに、おわりました",
     "not_enough_options": "ユニークなオプションが、たりません"
+  },
+  "stickers": {
+    "add_sticker": "ステッカーをふやす"
   },
   "interactions": {
     "favs_repeats": "リピートとおきにいり",
@@ -506,7 +510,9 @@
     "pinned": "ピンどめ",
     "delete_confirm": "ほんとうに、このステータスを、けしてもいいですか？",
     "reply_to": "へんしん:",
-    "replies_list": "へんしん:"
+    "replies_list": "へんしん:",
+    "mute_conversation": "スレッドをミュートする",
+    "unmute_conversation": "スレッドをミュートするのをやめる"
   },
   "user_card": {
     "approve": "うけいれ",
@@ -531,6 +537,8 @@
     "remote_follow": "リモートフォロー",
     "report": "つうほう",
     "statuses": "ステータス",
+    "subscribe": "サブスクライブ",
+    "unsubscribe": "サブスクライブをやめる",
     "unblock": "ブロックをやめる",
     "unblock_progress": "ブロックをとりけしています...",
     "block_progress": "ブロックしています...",
@@ -595,5 +603,12 @@
       "GiB": "GiB",
       "TiB": "TiB"
     }
+  },
+  "search": {
+    "people": "ひとびと",
+    "hashtags": "ハッシュタグ",
+    "person_talking": "{count} にんが、はなしています",
+    "people_talking": "{count} にんが、はなしています",
+    "no_results": "みつかりませんでした"
   }
 }

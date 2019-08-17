@@ -78,6 +78,7 @@
     "timeline": "タイムライン",
     "twkn": "接続しているすべてのネットワーク",
     "user_search": "ユーザーを探す",
+    "search": "検索",
     "who_to_follow": "おすすめユーザー",
     "preferences": "設定"
   },
@@ -104,6 +105,9 @@
     "expires_in": "投票は {0} で終了します",
     "expired": "投票は {0} 前に終了しました",
     "not_enough_options": "相異なる選択肢が不足しています"
+  },
+  "stickers": {
+    "add_sticker": "ステッカーを追加"
   },
   "interactions": {
     "favs_repeats": "リピートとお気に入り",
@@ -506,7 +510,9 @@
     "pinned": "ピン留め",
     "delete_confirm": "本当にこのステータスを削除してもよろしいですか？",
     "reply_to": "返信",
-    "replies_list": "返信:"
+    "replies_list": "返信:",
+    "mute_conversation": "スレッドをミュート",
+    "unmute_conversation": "スレッドのミュートを解除"
   },
   "user_card": {
     "approve": "受け入れ",
@@ -531,6 +537,8 @@
     "remote_follow": "リモートフォロー",
     "report": "通報",
     "statuses": "ステータス",
+    "subscribe": "購読",
+    "unsubscribe": "購読を解除",
     "unblock": "ブロック解除",
     "unblock_progress": "ブロックを解除しています...",
     "block_progress": "ブロックしています...",
@@ -595,5 +603,12 @@
       "GiB": "GiB",
       "TiB": "TiB"
     }
+  },
+  "search": {
+    "people": "人々",
+    "hashtags": "ハッシュタグ",
+    "person_talking": "{count} 人が話しています",
+    "people_talking": "{count} 人が話しています",
+    "no_results": "見つかりませんでした"
   }
 }

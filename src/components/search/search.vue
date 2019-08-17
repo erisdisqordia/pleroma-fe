@@ -31,21 +31,18 @@
         <tab-switcher
           ref="tabSwitcher"
           :on-switch="onResultTabSwitch"
-          :custom-active="currenResultTab"
+          :active-tab="currenResultTab"
         >
           <span
-            data-tab-dummy
-            data-filter="statuses"
+            key="statuses"
             :label="$t('user_card.statuses') + resultCount('visibleStatuses')"
           />
           <span
-            data-tab-dummy
-            data-filter="people"
+            key="people"
             :label="$t('search.people') + resultCount('users')"
           />
           <span
-            data-tab-dummy
-            data-filter="hashtags"
+            key="hashtags"
             :label="$t('search.hashtags') + resultCount('hashtags')"
           />
         </tab-switcher>

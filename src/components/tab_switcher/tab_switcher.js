@@ -4,10 +4,20 @@ import './tab_switcher.scss'
 
 export default Vue.component('tab-switcher', {
   name: 'TabSwitcher',
-  props: ['renderOnlyFocused', 'onSwitch', 'customActive'],
+  props: ['renderOnlyFocused', 'onSwitch', 'activeTab'],
   data () {
     return {
       active: this.$slots.default.findIndex(_ => _.tag)
+    }
+  },
+  computed: {
+    activeIndex () {
+      // In case of controlled component
+      if (this.activeTab) {
+        return this.$slots.default.findIndex(slot => this.activeTab === slot.key)
+      } else {
+        return this.active
+      }
     }
   },
   beforeUpdate () {
@@ -17,21 +27,13 @@ export default Vue.component('tab-switcher', {
     }
   },
   methods: {
-    activateTab (index, dataset) {
+    activateTab (index) {
       return () => {
         if (typeof this.onSwitch === 'function') {
-          this.onSwitch.call(null, index, this.$slots.default[index].elm.dataset)
+          this.onSwitch.call(null, this.$slots.default[index].key)
         }
         this.active = index
       }
-    },
-    isActiveTab (index) {
-      const customActiveIndex = this.$slots.default.findIndex(slot => {
-        const dataFilter = slot.data && slot.data.attrs && slot.data.attrs['data-filter']
-        return this.customActive && this.customActive === dataFilter
-      })
-
-      return customActiveIndex > -1 ? customActiveIndex === index : index === this.active
     }
   },
   render (h) {
@@ -41,13 +43,13 @@ export default Vue.component('tab-switcher', {
         const classesTab = ['tab']
         const classesWrapper = ['tab-wrapper']
 
-        if (this.isActiveTab(index)) {
+        if (this.activeIndex === index) {
           classesTab.push('active')
           classesWrapper.push('active')
         }
         if (slot.data.attrs.image) {
           return (
-            <div class={ classesWrapper.join(' ')}>
+            <div class={classesWrapper.join(' ')}>
               <button
                 disabled={slot.data.attrs.disabled}
                 onClick={this.activateTab(index)}
@@ -59,7 +61,7 @@ export default Vue.component('tab-switcher', {
           )
         }
         return (
-          <div class={ classesWrapper.join(' ')}>
+          <div class={classesWrapper.join(' ')}>
             <button
               disabled={slot.data.attrs.disabled}
               onClick={this.activateTab(index)}
@@ -71,7 +73,7 @@ export default Vue.component('tab-switcher', {
 
     const contents = this.$slots.default.map((slot, index) => {
       if (!slot.tag) return
-      const active = index === this.active
+      const active = this.activeIndex === index
       if (this.renderOnlyFocused) {
         return active
           ? <div class="active">{slot}</div>

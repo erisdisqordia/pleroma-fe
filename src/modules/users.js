@@ -410,7 +410,7 @@ const users = {
         })
         .then(() => {
           store.commit('clearCurrentUser')
-          store.dispatch('disconnectFromChat')
+          store.dispatch('disconnectFromSocket')
           store.commit('clearToken')
           store.dispatch('stopFetching', 'friends')
           store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))

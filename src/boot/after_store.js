@@ -109,12 +109,6 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('noAttachmentLinks')
   copyInstanceOption('showFeaturesPanel')
 
-  if ((config.chatDisabled)) {
-    store.dispatch('disableChat')
-  } else {
-    store.dispatch('initializeSocket')
-  }
-
   return store.dispatch('setTheme', config['theme'])
 }
 

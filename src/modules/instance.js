@@ -79,6 +79,11 @@ const instance = {
         case 'name':
           dispatch('setPageTitle')
           break
+        case 'chatAvailable':
+          if (value) {
+            dispatch('initializeSocket')
+          }
+          break
       }
     },
     setTheme ({ commit }, themeName) {

@@ -291,13 +291,13 @@
     "profile_background": "Fondo del Perfil",
     "profile_banner": "Cabecera del Perfil",
     "profile_tab": "Perfil",
-    "radii_help": "Estable el redondeo de las esquinas del interfaz (en píxeles)",
+    "radii_help": "Estable el redondeo de las esquinas de la interfaz (en píxeles)",
     "replies_in_timeline": "Réplicas en la línea temporal",
-    "reply_link_preview": "Activar la previsualización del enlace de responder al pasar el ratón por encim",
+    "reply_link_preview": "Activar la previsualización del enlace de responder al pasar el ratón por encima",
     "reply_visibility_all": "Mostrar todas las réplicas",
     "reply_visibility_following": "Solo mostrar réplicas para mí o usuarios a los que sigo",
     "reply_visibility_self": "Solo mostrar réplicas para mí",
-    "autohide_floating_post_button": "Ocultar automáticamente el botón 'Nueva Publicación' (móvil)",
+    "autohide_floating_post_button": "Ocultar automáticamente el botón 'Nueva Publicación' (para móviles)",
     "saving_err": "Error al guardar los ajustes",
     "saving_ok": "Ajustes guardados",
     "search_user_to_block": "Buscar usuarios a bloquear",
@@ -320,8 +320,8 @@
     "text": "Texto",
     "theme": "Tema",
     "theme_help": "Use códigos de color hexadecimales (#rrggbb) para personalizar su tema de colores.",
-    "theme_help_v2_1": "También puede invalidar los colores y la opacidad de ciertos componentes si activa la casilla de verificación, use el botón \"Borrar todo\" para deshacer los cambios.",
-    "theme_help_v2_2": "Los iconos debajo de algunas entradas son indicadores de contraste de fondo/texto, desplace el ratón para obtener información detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
+    "theme_help_v2_1": "También puede invalidar los colores y la opacidad de ciertos componentes si activa la casilla de verificación. Use el botón \"Borrar todo\" para deshacer los cambios.",
+    "theme_help_v2_2": "Los iconos debajo de algunas entradas son indicadores de contraste de fondo/texto, desplace el ratón por encima para obtener información más detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
     "tooltipRadius": "Información/alertas",
      "upload_a_photo": "Subir una foto",
     "user_settings": "Ajustes de Usuario",
@@ -395,14 +395,14 @@
         "shadow_id": "Sombra #{value}",
         "blur": "Difuminar",
         "spread": "Cantidad",
-        "inset": "Insertada",
+        "inset": "Sombra interior",
         "hint": "Para las sombras, también puede usar --variable como un valor de color para usar las variables CSS3. Tenga en cuenta que establecer la opacidad no funcionará en este caso.",
         "filter_hint": {
           "always_drop_shadow": "Advertencia, esta sombra siempre usa {0} cuando el navegador lo soporta.",
           "drop_shadow_syntax": "{0} no soporta el parámetro {1} y la palabra clave {2}.",
-          "avatar_inset": "Tenga en cuenta que la combinación de sombras insertadas como no-insertadas en los avatares, puede dar resultados inesperados con los avatares transparentes.",
+          "avatar_inset": "Tenga en cuenta que la combinación de sombras interiores como no-interiores en los avatares, puede dar resultados inesperados con los avatares transparentes.",
           "spread_zero": "Sombras con una cantidad > 0 aparecerá como si estuviera puesto a cero",
-          "inset_classic": "Las sombras insertadas estarán usando {0}"
+          "inset_classic": "Las sombras interiores estarán usando {0}"
         },
         "components": {
           "panel": "Panel",
@@ -420,7 +420,7 @@
       },
       "fonts": {
         "_tab_label": "Fuentes",
-        "help": "Seleccione la fuente para utilizar para los elementos de la interfaz de usuario. Para \"personalizado\", debe ingresar el nombre exacto de la fuente tal como aparece en el sistema.",
+        "help": "Seleccione la fuente a utilizar para los elementos de la interfaz de usuario. Para \"personalizado\", debe ingresar el nombre exacto de la fuente tal como aparece en el sistema.",
         "components": {
           "interface": "Interfaz",
           "input": "Campos de entrada",
@@ -507,7 +507,7 @@
     "unpin": "Desclavar de tu perfil",
     "pinned": "Fijado",
     "delete_confirm": "¿Realmente quieres borrar la publicación?",
-    "reply_to": "Responder a",
+    "reply_to": "Respondiendo a",
     "replies_list": "Respuestas:"
   },
   "user_card": {

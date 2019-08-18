@@ -42,7 +42,7 @@ const conversation = {
     'statusoid',
     'collapsable',
     'isPage',
-    'showPinned'
+    'pinnedStatusIdsObject'
   ],
   created () {
     if (this.isPage) {

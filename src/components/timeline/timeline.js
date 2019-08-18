@@ -58,10 +58,10 @@ const Timeline = {
     excludedStatusIdsObject () {
       const ids = getExcludedStatusIdsByPinning(this.timeline.visibleStatuses, this.pinnedStatusIds)
       // Convert id array to object
-      return keyBy(ids, id => id)
+      return keyBy(ids)
     },
     pinnedStatusIdsObject () {
-      return keyBy(this.pinnedStatusIds, id => id)
+      return keyBy(this.pinnedStatusIds)
     }
   },
   components: {

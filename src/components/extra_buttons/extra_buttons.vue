@@ -1,5 +1,6 @@
 <template>
   <v-popover
+    v-if="canDelete || canMute || canPin"
     trigger="click"
     placement="top"
     class="extra-button-popover"

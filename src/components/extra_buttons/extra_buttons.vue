@@ -1,5 +1,6 @@
 <template>
   <v-popover
+    v-if="canDelete || canMute || canPin"
     trigger="click"
     placement="top"
     class="extra-button-popover"
@@ -9,14 +10,14 @@
     <div slot="popover">
       <div class="dropdown-menu">
         <button
-          v-if="!status.muted"
+          v-if="canMute && !status.muted"
           class="dropdown-item dropdown-item-icon"
           @click.prevent="muteConversation"
         >
           <i class="icon-eye-off" /><span>{{ $t("status.mute_conversation") }}</span>
         </button>
         <button
-          v-if="status.muted"
+          v-if="canMute && status.muted"
           class="dropdown-item dropdown-item-icon"
           @click.prevent="unmuteConversation"
         >

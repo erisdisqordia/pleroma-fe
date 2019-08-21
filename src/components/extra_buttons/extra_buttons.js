@@ -40,6 +40,9 @@ const ExtraButtons = {
     },
     canPin () {
       return this.ownStatus && (this.status.visibility === 'public' || this.status.visibility === 'unlisted')
+    },
+    canMute () {
+      return !!this.currentUser
     }
   }
 }

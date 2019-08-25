@@ -110,7 +110,7 @@ const conversation = {
     Status
   },
   watch: {
-    '$route': 'fetchConversation',
+    status: 'fetchConversation',
     expanded (value) {
       if (value) {
         this.fetchConversation()

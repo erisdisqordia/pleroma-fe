@@ -9,7 +9,7 @@
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
-    "media_proxy": "Media proxy",
+    "media_proxy": "Proxy de medios",
     "scope_options": "Opciones del alcance de la visibilidad",
     "text_limit": "Límite de caracteres",
     "title": "Características",

@@ -149,9 +149,6 @@ const conversation = {
     },
     toggleExpanded () {
       this.expanded = !this.expanded
-      if (!this.expanded) {
-        this.setHighlight(null)
-      }
     }
   }
 }

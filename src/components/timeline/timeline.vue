@@ -33,7 +33,7 @@
             v-if="timeline.statusesObject[statusId]"
             :key="statusId + '-pinned'"
             class="status-fadein"
-            :statusoid="timeline.statusesObject[statusId]"
+            :statusoid="statusId"
             :collapsable="true"
             :pinned-status-ids-object="pinnedStatusIdsObject"
           />
@@ -43,7 +43,7 @@
             v-if="!excludedStatusIdsObject[status.id]"
             :key="status.id"
             class="status-fadein"
-            :statusoid="status"
+            :statusoid="status.id"
             :collapsable="true"
           />
         </template>

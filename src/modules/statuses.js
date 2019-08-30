@@ -426,10 +426,6 @@ export const mutations = {
       newStatus.favoritedBy.push(user)
     }
   },
-  setPinned (state, status) {
-    const newStatus = state.allStatusesObject[status.id]
-    newStatus.pinned = status.pinned
-  },
   setMuted (state, status) {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.muted = status.muted
@@ -560,13 +556,13 @@ const statuses = {
       rootState.api.backendInteractor.fetchPinnedStatuses(userId)
         .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId, showImmediately: true, noIdUpdate: true }))
     },
-    pinStatus ({ rootState, commit }, statusId) {
+    pinStatus ({ rootState, dispatch }, statusId) {
       return rootState.api.backendInteractor.pinOwnStatus(statusId)
-        .then((status) => commit('setPinned', status))
+        .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
     },
-    unpinStatus ({ rootState, commit }, statusId) {
+    unpinStatus ({ rootState, dispatch }, statusId) {
       rootState.api.backendInteractor.unpinOwnStatus(statusId)
-        .then((status) => commit('setPinned', status))
+        .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
     },
     muteConversation ({ rootState, commit }, statusId) {
       return rootState.api.backendInteractor.muteConversation(statusId)

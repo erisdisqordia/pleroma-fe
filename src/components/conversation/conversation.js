@@ -57,7 +57,7 @@ const conversation = {
       if (this.status.retweeted_status) {
         return this.status.retweeted_status.id
       } else {
-        return this.status.id
+        return this.statusoid
       }
     },
     conversationId () {
@@ -120,23 +120,25 @@ const conversation = {
   methods: {
     fetchConversation () {
       if (this.status) {
-        this.$store.state.api.backendInteractor.fetchConversation({ id: this.status.id })
+        this.$store.state.api.backendInteractor.fetchConversation({ id: this.statusoid })
           .then(({ ancestors, descendants }) => {
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
+            this.setHighlight(this.statusId)
           })
-          .then(() => this.setHighlight(this.statusId))
       } else {
         this.$store.state.api.backendInteractor.fetchStatus({ id: this.statusoid })
-          .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
-          .then(() => this.fetchConversation())
+          .then((status) => {
+            this.$store.dispatch('addNewStatuses', { statuses: [status] })
+            this.fetchConversation()
+          })
       }
     },
     getReplies (id) {
       return this.replies[id] || []
     },
     focused (id) {
-      return (this.isExpanded) && id === this.status.id
+      return (this.isExpanded) && id === this.statusoid
     },
     setHighlight (id) {
       if (!id) return

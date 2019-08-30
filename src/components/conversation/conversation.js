@@ -51,20 +51,20 @@ const conversation = {
   },
   computed: {
     status () {
-      return this.statusoid
+      return this.$store.state.statuses.allStatusesObject[this.statusoid]
     },
     statusId () {
-      if (this.statusoid.retweeted_status) {
-        return this.statusoid.retweeted_status.id
+      if (this.status.retweeted_status) {
+        return this.status.retweeted_status.id
       } else {
-        return this.statusoid.id
+        return this.status.id
       }
     },
     conversationId () {
-      if (this.statusoid.retweeted_status) {
-        return this.statusoid.retweeted_status.statusnet_conversation_id
+      if (this.status.retweeted_status) {
+        return this.status.retweeted_status.statusnet_conversation_id
       } else {
-        return this.statusoid.statusnet_conversation_id
+        return this.status.statusnet_conversation_id
       }
     },
     conversation () {
@@ -127,8 +127,7 @@ const conversation = {
           })
           .then(() => this.setHighlight(this.statusId))
       } else {
-        const id = this.$route.params.id
-        this.$store.state.api.backendInteractor.fetchStatus({ id })
+        this.$store.state.api.backendInteractor.fetchStatus({ id: this.statusoid })
           .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
           .then(() => this.fetchConversation())
       }

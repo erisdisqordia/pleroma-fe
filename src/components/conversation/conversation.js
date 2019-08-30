@@ -1,4 +1,4 @@
-import { reduce, filter, findIndex, clone } from 'lodash'
+import { reduce, filter, findIndex, clone, get } from 'lodash'
 import Status from '../status/status.vue'
 
 const sortById = (a, b) => {
@@ -61,11 +61,7 @@ const conversation = {
       }
     },
     conversationId () {
-      if (this.status.retweeted_status) {
-        return this.status.retweeted_status.statusnet_conversation_id
-      } else {
-        return this.status.statusnet_conversation_id
-      }
+      return this.getConversationId(this.statusoid)
     },
     conversation () {
       if (!this.status) {
@@ -110,7 +106,15 @@ const conversation = {
     Status
   },
   watch: {
-    status: 'fetchConversation',
+    statusoid (newVal, oldVal) {
+      const newConversationId = this.getConversationId(newVal)
+      const oldConversationId = this.getConversationId(oldVal)
+      if (newConversationId && oldConversationId && newConversationId === oldConversationId) {
+        this.setHighlight(this.statusId)
+      } else {
+        this.fetchConversation()
+      }
+    },
     expanded (value) {
       if (value) {
         this.fetchConversation()
@@ -150,6 +154,10 @@ const conversation = {
     },
     toggleExpanded () {
       this.expanded = !this.expanded
+    },
+    getConversationId (statusId) {
+      const status = this.$store.state.statuses.allStatusesObject[statusId]
+      return get(status, 'retweeted_status.statusnet_conversation_id', get(status, 'statusnet_conversation_id'))
     }
   }
 }

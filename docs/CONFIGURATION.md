@@ -89,5 +89,10 @@ Rich text formatting options are displayed depending on how many formatting opti
 ### Who to follow
 This is a panel intended for users to find people to follow based on randomness or on post contents. Being potentially privacy unfriendly feature it needs to be enabled and configured in backend to be enabled.
 
-### "Safe" DMs
-There's obscure option to enable quote-unquote "safe" DMs, which makes DMs "only be visible to the mentioned users at the beginning of the message." which only changes DM warning in FE. What it does precisely is unclear and should probably be avoided since it bring in more confusion and doesn't affect other servers.
+### Safe DM message display
+
+Setting this will change the warning text that is displayed for direct messages.
+
+ATTENTION: If you actually want the behavior to change. You will need to set the appropriate option at the backend. See the backend documentation for information about that.
+
+DO NOT activate this without checking the backend configuration first!

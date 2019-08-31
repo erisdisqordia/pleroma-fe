@@ -1,13 +1,23 @@
 <template>
   <div class="user-panel">
-
-    <div v-if="signedIn" key="user-panel" class="panel panel-default signed-in">
-      <UserCard :user="user" :hideBio="true" rounded="top"/>
+    <div
+      v-if="signedIn"
+      key="user-panel"
+      class="panel panel-default signed-in"
+    >
+      <UserCard
+        :user="user"
+        :hide-bio="true"
+        rounded="top"
+      />
       <div class="panel-footer">
-        <post-status-form v-if='user'></post-status-form>
+        <post-status-form v-if="user" />
       </div>
     </div>
-    <auth-form v-else key="user-panel"/>
+    <auth-form
+      v-else
+      key="user-panel"
+    />
   </div>
 </template>
 

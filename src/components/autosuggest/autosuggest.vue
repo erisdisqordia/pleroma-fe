@@ -1,8 +1,22 @@
 <template>
-  <div class="autosuggest" v-click-outside="onClickOutside">
-    <input v-model="term" :placeholder="placeholder" @click="onInputClick" class="autosuggest-input" />
-    <div class="autosuggest-results" v-if="resultsVisible && filtered.length > 0">
-      <slot v-for="item in filtered" :item="item" />
+  <div
+    v-click-outside="onClickOutside"
+    class="autosuggest"
+  >
+    <input
+      v-model="term"
+      :placeholder="placeholder"
+      class="autosuggest-input"
+      @click="onInputClick"
+    >
+    <div
+      v-if="resultsVisible && filtered.length > 0"
+      class="autosuggest-results"
+    >
+      <slot
+        v-for="item in filtered"
+        :item="item"
+      />
     </div>
   </div>
 </template>

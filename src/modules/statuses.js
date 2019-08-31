@@ -80,13 +80,13 @@ const mergeOrAdd = (arr, obj, item) => {
     merge(oldItem, omitBy(item, (v, k) => v === null || k === 'user'))
     // Reactivity fix.
     oldItem.attachments.splice(oldItem.attachments.length)
-    return {item: oldItem, new: false}
+    return { item: oldItem, new: false }
   } else {
     // This is a new item, prepare it
     prepareStatus(item)
     arr.push(item)
     set(obj, item.id, item)
-    return {item, new: true}
+    return { item, new: true }
   }
 }
 
@@ -137,7 +137,7 @@ const removeStatusFromGlobalStorage = (state, status) => {
   // TODO: Need to remove from allStatusesObject?
 
   // Remove possible notification
-  remove(state.notifications.data, ({action: {id}}) => id === status.id)
+  remove(state.notifications.data, ({ action: { id } }) => id === status.id)
 
   // Remove from conversation
   const conversationId = status.statusnet_conversation_id
@@ -146,7 +146,8 @@ const removeStatusFromGlobalStorage = (state, status) => {
   }
 }
 
-const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false, userId }) => {
+const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {},
+  noIdUpdate = false, userId }) => {
   // Sanity check
   if (!isArray(statuses)) {
     return false
@@ -269,7 +270,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
     },
     'deletion': (deletion) => {
       const uri = deletion.uri
-      const status = find(allStatuses, {uri})
+      const status = find(allStatuses, { uri })
       if (!status) {
         return
       }
@@ -394,8 +395,9 @@ export const mutations = {
       state[key] = value
     })
   },
-  clearTimeline (state, { timeline }) {
-    state.timelines[timeline] = emptyTl(state.timelines[timeline].userId)
+  clearTimeline (state, { timeline, excludeUserId = false }) {
+    const userId = excludeUserId ? state.timelines[timeline].userId : undefined
+    state.timelines[timeline] = emptyTl(userId)
   },
   clearNotifications (state) {
     state.notifications = emptyNotifications()
@@ -427,6 +429,10 @@ export const mutations = {
   setPinned (state, status) {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.pinned = status.pinned
+  },
+  setMuted (state, status) {
+    const newStatus = state.allStatusesObject[status.id]
+    newStatus.muted = status.muted
   },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
@@ -490,10 +496,23 @@ export const mutations = {
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
   },
-  addFavsAndRepeats (state, { id, favoritedByUsers, rebloggedByUsers }) {
+  addRepeats (state, { id, rebloggedByUsers, currentUser }) {
+    const newStatus = state.allStatusesObject[id]
+    newStatus.rebloggedBy = rebloggedByUsers.filter(_ => _)
+    // repeats stats can be incorrect based on polling condition, let's update them using the most recent data
+    newStatus.repeat_num = newStatus.rebloggedBy.length
+    newStatus.repeated = !!newStatus.rebloggedBy.find(({ id }) => currentUser.id === id)
+  },
+  addFavs (state, { id, favoritedByUsers, currentUser }) {
     const newStatus = state.allStatusesObject[id]
     newStatus.favoritedBy = favoritedByUsers.filter(_ => _)
-    newStatus.rebloggedBy = rebloggedByUsers.filter(_ => _)
+    // favorites stats can be incorrect based on polling condition, let's update them using the most recent data
+    newStatus.fave_num = newStatus.favoritedBy.length
+    newStatus.favorited = !!newStatus.favoritedBy.find(({ id }) => currentUser.id === id)
+  },
+  updateStatusWithPoll (state, { id, poll }) {
+    const status = state.allStatusesObject[id]
+    status.poll = poll
   }
 }
 
@@ -539,7 +558,7 @@ const statuses = {
     },
     fetchPinnedStatuses ({ rootState, dispatch }, userId) {
       rootState.api.backendInteractor.fetchPinnedStatuses(userId)
-        .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId, showImmediately: true }))
+        .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId, showImmediately: true, noIdUpdate: true }))
     },
     pinStatus ({ rootState, commit }, statusId) {
       return rootState.api.backendInteractor.pinOwnStatus(statusId)
@@ -548,6 +567,14 @@ const statuses = {
     unpinStatus ({ rootState, commit }, statusId) {
       rootState.api.backendInteractor.unpinOwnStatus(statusId)
         .then((status) => commit('setPinned', status))
+    },
+    muteConversation ({ rootState, commit }, statusId) {
+      return rootState.api.backendInteractor.muteConversation(statusId)
+        .then((status) => commit('setMuted', status))
+    },
+    unmuteConversation ({ rootState, commit }, statusId) {
+      return rootState.api.backendInteractor.unmuteConversation(statusId)
+        .then((status) => commit('setMuted', status))
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...
@@ -575,9 +602,26 @@ const statuses = {
       Promise.all([
         rootState.api.backendInteractor.fetchFavoritedByUsers(id),
         rootState.api.backendInteractor.fetchRebloggedByUsers(id)
-      ]).then(([favoritedByUsers, rebloggedByUsers]) =>
-        commit('addFavsAndRepeats', { id, favoritedByUsers, rebloggedByUsers })
-      )
+      ]).then(([favoritedByUsers, rebloggedByUsers]) => {
+        commit('addFavs', { id, favoritedByUsers, currentUser: rootState.users.currentUser })
+        commit('addRepeats', { id, rebloggedByUsers, currentUser: rootState.users.currentUser })
+      })
+    },
+    fetchFavs ({ rootState, commit }, id) {
+      rootState.api.backendInteractor.fetchFavoritedByUsers(id)
+        .then(favoritedByUsers => commit('addFavs', { id, favoritedByUsers, currentUser: rootState.users.currentUser }))
+    },
+    fetchRepeats ({ rootState, commit }, id) {
+      rootState.api.backendInteractor.fetchRebloggedByUsers(id)
+        .then(rebloggedByUsers => commit('addRepeats', { id, rebloggedByUsers, currentUser: rootState.users.currentUser }))
+    },
+    search (store, { q, resolve, limit, offset, following }) {
+      return store.rootState.api.backendInteractor.search2({ q, resolve, limit, offset, following })
+        .then((data) => {
+          store.commit('addNewUsers', data.accounts)
+          store.commit('addNewStatuses', { statuses: data.statuses })
+          return data
+        })
     }
   },
   mutations

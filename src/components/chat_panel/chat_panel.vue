@@ -1,41 +1,70 @@
 <template>
-  <div class="chat-panel" v-if="!this.collapsed || !this.floating">
+  <div
+    v-if="!collapsed || !floating"
+    class="chat-panel"
+  >
     <div class="panel panel-default">
-      <div class="panel-heading timeline-heading" :class="{ 'chat-heading': floating }" @click.stop.prevent="togglePanel">
+      <div
+        class="panel-heading timeline-heading"
+        :class="{ 'chat-heading': floating }"
+        @click.stop.prevent="togglePanel"
+      >
         <div class="title">
-          <span>{{$t('chat.title')}}</span>
-          <i class="icon-cancel" v-if="floating"></i>
+          <span>{{ $t('chat.title') }}</span>
+          <i
+            v-if="floating"
+            class="icon-cancel"
+          />
         </div>
       </div>
-      <div class="chat-window" v-chat-scroll>
-        <div class="chat-message" v-for="message in messages" :key="message.id">
+      <div
+        v-chat-scroll
+        class="chat-window"
+      >
+        <div
+          v-for="message in messages"
+          :key="message.id"
+          class="chat-message"
+        >
           <span class="chat-avatar">
-            <img :src="message.author.avatar" />
+            <img :src="message.author.avatar">
           </span>
           <div class="chat-content">
             <router-link
               class="chat-name"
-              :to="userProfileLink(message.author)">
-                {{message.author.username}}
+              :to="userProfileLink(message.author)"
+            >
+              {{ message.author.username }}
             </router-link>
             <br>
             <span class="chat-text">
-              {{message.text}}
+              {{ message.text }}
             </span>
           </div>
         </div>
       </div>
       <div class="chat-input">
-        <textarea @keyup.enter="submit(currentMessage)" v-model="currentMessage" class="chat-input-textarea" rows="1"></textarea>
+        <textarea
+          v-model="currentMessage"
+          class="chat-input-textarea"
+          rows="1"
+          @keyup.enter="submit(currentMessage)"
+        />
       </div>
     </div>
   </div>
-  <div v-else class="chat-panel">
+  <div
+    v-else
+    class="chat-panel"
+  >
     <div class="panel panel-default">
-      <div class="panel-heading stub timeline-heading chat-heading" @click.stop.prevent="togglePanel">
+      <div
+        class="panel-heading stub timeline-heading chat-heading"
+        @click.stop.prevent="togglePanel"
+      >
         <div class="title">
-          <i class="icon-comment-empty"></i>
-          {{$t('chat.title')}}
+          <i class="icon-comment-empty" />
+          {{ $t('chat.title') }}
         </div>
       </div>
     </div>

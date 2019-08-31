@@ -4,39 +4,16 @@ import { getComponentProps } from '../../services/component_utils/component_util
 import './with_load_more.scss'
 
 const withLoadMore = ({
-  fetch,                      // function to fetch entries and return a promise
-  select,                     // function to select data from store
-  destroy,                    // function called at "destroyed" lifecycle
-  childPropName = 'entries',  // name of the prop to be passed into the wrapped component
-  additionalPropNames = []    // additional prop name list of the wrapper component
+  fetch, // function to fetch entries and return a promise
+  select, // function to select data from store
+  destroy, // function called at "destroyed" lifecycle
+  childPropName = 'entries', // name of the prop to be passed into the wrapped component
+  additionalPropNames = [] // additional prop name list of the wrapper component
 }) => (WrappedComponent) => {
   const originalProps = Object.keys(getComponentProps(WrappedComponent))
   const props = originalProps.filter(v => v !== childPropName).concat(additionalPropNames)
 
   return Vue.component('withLoadMore', {
-    render (createElement) {
-      const props = {
-        props: {
-          ...this.$props,
-          [childPropName]: this.entries
-        },
-        on: this.$listeners,
-        scopedSlots: this.$scopedSlots
-      }
-      const children = Object.entries(this.$slots).map(([key, value]) => createElement('template', { slot: key }, value))
-      return (
-        <div class="with-load-more">
-          <WrappedComponent {...props}>
-            {children}
-          </WrappedComponent>
-          <div class="with-load-more-footer">
-            {this.error && <a onClick={this.fetchEntries} class="alert error">{this.$t('general.generic_error')}</a>}
-            {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}
-            {!this.error && !this.loading && !this.bottomedOut && <a onClick={this.fetchEntries}>{this.$t('general.more')}</a>}
-          </div>
-        </div>
-      )
-    },
     props,
     data () {
       return {
@@ -87,6 +64,29 @@ const withLoadMore = ({
           this.fetchEntries()
         }
       }
+    },
+    render (createElement) {
+      const props = {
+        props: {
+          ...this.$props,
+          [childPropName]: this.entries
+        },
+        on: this.$listeners,
+        scopedSlots: this.$scopedSlots
+      }
+      const children = Object.entries(this.$slots).map(([key, value]) => createElement('template', { slot: key }, value))
+      return (
+        <div class="with-load-more">
+          <WrappedComponent {...props}>
+            {children}
+          </WrappedComponent>
+          <div class="with-load-more-footer">
+            {this.error && <a onClick={this.fetchEntries} class="alert error">{this.$t('general.generic_error')}</a>}
+            {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}
+            {!this.error && !this.loading && !this.bottomedOut && <a onClick={this.fetchEntries}>{this.$t('general.more')}</a>}
+          </div>
+        </div>
+      )
     }
   })
 }

@@ -3,9 +3,9 @@
     class="avatar"
     :alt="user.screen_name"
     :title="user.screen_name"
-    :src="user.profile_image_url_original"
+    :src="imgSrc"
     :class="{ 'avatar-compact': compact, 'better-shadow': betterShadow }"
-    :imageLoadError="imageLoadError"
+    :image-load-error="imageLoadError"
   />
 </template>
 

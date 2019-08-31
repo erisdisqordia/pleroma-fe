@@ -3,7 +3,6 @@ import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
 import Conversation from '../conversation/conversation.vue'
-import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
 
@@ -23,19 +22,23 @@ const FriendList = withLoadMore({
   additionalPropNames: ['userId']
 })(List)
 
+const defaultTabKey = 'statuses'
+
 const UserProfile = {
   data () {
     return {
       error: false,
-      userId: null
+      userId: null,
+      tab: defaultTabKey
     }
   },
   created () {
     const routeParams = this.$route.params
     this.load(routeParams.name || routeParams.id)
+    this.tab = get(this.$route, 'query.tab', defaultTabKey)
   },
   destroyed () {
-    this.cleanUp()
+    this.stopFetching()
   },
   computed: {
     timeline () {
@@ -66,17 +69,36 @@ const UserProfile = {
   },
   methods: {
     load (userNameOrId) {
+      const startFetchingTimeline = (timeline, userId) => {
+        // Clear timeline only if load another user's profile
+        if (userId !== this.$store.state.statuses.timelines[timeline].userId) {
+          this.$store.commit('clearTimeline', { timeline })
+        }
+        this.$store.dispatch('startFetchingTimeline', { timeline, userId })
+      }
+
+      const loadById = (userId) => {
+        this.userId = userId
+        startFetchingTimeline('user', userId)
+        startFetchingTimeline('media', userId)
+        if (this.isUs) {
+          startFetchingTimeline('favorites', userId)
+        }
+        // Fetch all pinned statuses immediately
+        this.$store.dispatch('fetchPinnedStatuses', userId)
+      }
+
+      // Reset view
+      this.userId = null
+      this.error = false
+
       // Check if user data is already loaded in store
       const user = this.$store.getters.findUser(userNameOrId)
       if (user) {
-        this.userId = user.id
-        this.fetchTimelines()
+        loadById(user.id)
       } else {
         this.$store.dispatch('fetchUser', userNameOrId)
-          .then(({ id }) => {
-            this.userId = id
-            this.fetchTimelines()
-          })
+          .then(({ id }) => loadById(id))
           .catch((reason) => {
             const errorMessage = get(reason, 'error.error')
             if (errorMessage === 'No user with such user_id') { // Known error
@@ -89,40 +111,33 @@ const UserProfile = {
           })
       }
     },
-    fetchTimelines () {
-      const userId = this.userId
-      this.$store.dispatch('startFetchingTimeline', { timeline: 'user', userId })
-      this.$store.dispatch('startFetchingTimeline', { timeline: 'media', userId })
-      if (this.isUs) {
-        this.$store.dispatch('startFetchingTimeline', { timeline: 'favorites', userId })
-      }
-      // Fetch all pinned statuses immediately
-      this.$store.dispatch('fetchPinnedStatuses', userId)
-    },
-    cleanUp () {
+    stopFetching () {
       this.$store.dispatch('stopFetching', 'user')
       this.$store.dispatch('stopFetching', 'favorites')
       this.$store.dispatch('stopFetching', 'media')
-      this.$store.commit('clearTimeline', { timeline: 'user' })
-      this.$store.commit('clearTimeline', { timeline: 'favorites' })
-      this.$store.commit('clearTimeline', { timeline: 'media' })
+    },
+    switchUser (userNameOrId) {
+      this.stopFetching()
+      this.load(userNameOrId)
+    },
+    onTabSwitch (tab) {
+      this.tab = tab
+      this.$router.replace({ query: { tab } })
     }
   },
   watch: {
     '$route.params.id': function (newVal) {
       if (newVal) {
-        this.cleanUp()
-        this.load(newVal)
+        this.switchUser(newVal)
       }
     },
     '$route.params.name': function (newVal) {
       if (newVal) {
-        this.cleanUp()
-        this.load(newVal)
+        this.switchUser(newVal)
       }
     },
-    $route () {
-      this.$refs.tabSwitcher.activateTab(0)()
+    '$route.query': function (newVal) {
+      this.tab = newVal.tab || defaultTabKey
     }
   },
   components: {
@@ -130,7 +145,6 @@ const UserProfile = {
     Timeline,
     FollowerList,
     FriendList,
-    ModerationTools,
     FollowCard,
     Conversation
   }

@@ -11,9 +11,9 @@ const FavoriteButton = {
   methods: {
     favorite () {
       if (!this.status.favorited) {
-        this.$store.dispatch('favorite', {id: this.status.id})
+        this.$store.dispatch('favorite', { id: this.status.id })
       } else {
-        this.$store.dispatch('unfavorite', {id: this.status.id})
+        this.$store.dispatch('unfavorite', { id: this.status.id })
       }
       this.animated = true
       setTimeout(() => {

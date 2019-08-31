@@ -1,8 +1,18 @@
 <template>
   <basic-user-card :user="user">
     <div class="follow-request-card-content-container">
-      <button class="btn btn-default" @click="approveUser">{{ $t('user_card.approve') }}</button>
-      <button class="btn btn-default" @click="denyUser">{{ $t('user_card.deny') }}</button>
+      <button
+        class="btn btn-default"
+        @click="approveUser"
+      >
+        {{ $t('user_card.approve') }}
+      </button>
+      <button
+        class="btn btn-default"
+        @click="denyUser"
+      >
+        {{ $t('user_card.deny') }}
+      </button>
     </div>
   </basic-user-card>
 </template>

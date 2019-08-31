@@ -12,11 +12,11 @@ import MuteCard from '../mute_card/mute_card.vue'
 import SelectableList from '../selectable_list/selectable_list.vue'
 import ProgressButton from '../progress_button/progress_button.vue'
 import EmojiInput from '../emoji-input/emoji-input.vue'
+import suggestor from '../emoji-input/suggestor.js'
 import Autosuggest from '../autosuggest/autosuggest.vue'
 import Importer from '../importer/importer.vue'
 import Exporter from '../exporter/exporter.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
-import userSearchApi from '../../services/new_api/user_search.js'
 import Mfa from './mfa.vue'
 
 const BlockList = withSubscription({
@@ -46,7 +46,9 @@ const UserSettings = {
       pickAvatarBtnVisible: true,
       bannerUploading: false,
       backgroundUploading: false,
+      banner: null,
       bannerPreview: null,
+      background: null,
       backgroundPreview: null,
       bannerUploadError: null,
       backgroundUploadError: null,
@@ -82,6 +84,22 @@ const UserSettings = {
   computed: {
     user () {
       return this.$store.state.users.currentUser
+    },
+    emojiUserSuggestor () {
+      return suggestor({
+        emoji: [
+          ...this.$store.state.instance.emoji,
+          ...this.$store.state.instance.customEmoji
+        ],
+        users: this.$store.state.users.users,
+        updateUsersList: (input) => this.$store.dispatch('searchUsers', input)
+      })
+    },
+    emojiSuggestor () {
+      return suggestor({ emoji: [
+        ...this.$store.state.instance.emoji,
+        ...this.$store.state.instance.customEmoji
+      ] })
     },
     pleromaBackend () {
       return this.$store.state.instance.pleromaBackend
@@ -126,10 +144,10 @@ const UserSettings = {
             hide_followers: this.hideFollowers,
             show_role: this.showRole
             /* eslint-enable camelcase */
-          }}).then((user) => {
-            this.$store.commit('addNewUsers', [user])
-            this.$store.commit('setCurrentUser', user)
-          })
+          } }).then((user) => {
+          this.$store.commit('addNewUsers', [user])
+          this.$store.commit('setCurrentUser', user)
+        })
     },
     updateNotificationSettings () {
       this.$store.state.api.backendInteractor
@@ -144,12 +162,12 @@ const UserSettings = {
       if (file.size > this.$store.state.instance[slot + 'limit']) {
         const filesize = fileSizeFormatService.fileSizeFormat(file.size)
         const allowedsize = fileSizeFormatService.fileSizeFormat(this.$store.state.instance[slot + 'limit'])
-        this[slot + 'UploadError'] = this.$t('upload.error.base') + ' ' + this.$t('upload.error.file_too_big', {filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit})
+        this[slot + 'UploadError'] = this.$t('upload.error.base') + ' ' + this.$t('upload.error.file_too_big', { filesize: filesize.num, filesizeunit: filesize.unit, allowedsize: allowedsize.num, allowedsizeunit: allowedsize.unit })
         return
       }
       // eslint-disable-next-line no-undef
       const reader = new FileReader()
-      reader.onload = ({target}) => {
+      reader.onload = ({ target }) => {
         const img = target.result
         this[slot + 'Preview'] = img
         this[slot] = file
@@ -185,7 +203,7 @@ const UserSettings = {
       if (!this.bannerPreview) { return }
 
       this.bannerUploading = true
-      this.$store.state.api.backendInteractor.updateBanner({banner: this.banner})
+      this.$store.state.api.backendInteractor.updateBanner({ banner: this.banner })
         .then((user) => {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
@@ -198,22 +216,12 @@ const UserSettings = {
     },
     submitBg () {
       if (!this.backgroundPreview) { return }
-      let img = this.backgroundPreview
-      // eslint-disable-next-line no-undef
-      let imginfo = new Image()
-      let cropX, cropY, cropW, cropH
-      imginfo.src = img
-      cropX = 0
-      cropY = 0
-      cropW = imginfo.width
-      cropH = imginfo.width
+      let background = this.background
       this.backgroundUploading = true
-      this.$store.state.api.backendInteractor.updateBg({params: {img, cropX, cropY, cropW, cropH}}).then((data) => {
+      this.$store.state.api.backendInteractor.updateBg({ background }).then((data) => {
         if (!data.error) {
-          let clone = JSON.parse(JSON.stringify(this.$store.state.users.currentUser))
-          clone.background_image = data.url
-          this.$store.commit('addNewUsers', [clone])
-          this.$store.commit('setCurrentUser', clone)
+          this.$store.commit('addNewUsers', [data])
+          this.$store.commit('setCurrentUser', data)
           this.backgroundPreview = null
         } else {
           this.backgroundUploadError = this.$t('upload.error.base') + data.error
@@ -261,11 +269,11 @@ const UserSettings = {
       this.deletingAccount = true
     },
     deleteAccount () {
-      this.$store.state.api.backendInteractor.deleteAccount({password: this.deleteAccountConfirmPasswordInput})
+      this.$store.state.api.backendInteractor.deleteAccount({ password: this.deleteAccountConfirmPasswordInput })
         .then((res) => {
           if (res.status === 'success') {
             this.$store.dispatch('logout')
-            this.$router.push({name: 'root'})
+            this.$router.push({ name: 'root' })
           } else {
             this.deleteAccountError = res.error
           }
@@ -314,11 +322,8 @@ const UserSettings = {
       })
     },
     queryUserIds (query) {
-      return userSearchApi.search({query, store: this.$store})
-        .then((users) => {
-          this.$store.dispatch('addNewUsers', users)
-          return map(users, 'id')
-        })
+      return this.$store.dispatch('searchUsers', query)
+        .then((users) => map(users, 'id'))
     },
     blockUsers (ids) {
       return this.$store.dispatch('blockUsers', ids)

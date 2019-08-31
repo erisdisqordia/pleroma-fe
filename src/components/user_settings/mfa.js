@@ -7,6 +7,7 @@ import { mapState } from 'vuex'
 const Mfa = {
   data: () => ({
     settings: { // current settings of MFA
+      available: false,
       enabled: false,
       totp: false
     },
@@ -106,7 +107,7 @@ const Mfa = {
           this.setupState.setupOTPState = 'confirm'
         })
     },
-    doConfirmOTP () {  // handler confirm enable OTP
+    doConfirmOTP () { // handler confirm enable OTP
       this.error = null
       this.backendInteractor.mfaConfirmOTP({
         token: this.otpConfirmToken,
@@ -139,7 +140,9 @@ const Mfa = {
     // fetch settings from server
     async fetchSettings () {
       let result = await this.backendInteractor.fetchSettingsMFA()
+      if (result.error) return
       this.settings = result.settings
+      this.settings.available = true
       return result
     }
   },

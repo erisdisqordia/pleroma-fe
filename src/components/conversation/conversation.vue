@@ -1,25 +1,34 @@
 <template>
-  <div class="timeline panel-default" :class="[isExpanded ? 'panel' : 'panel-disabled']">
-    <div v-if="isExpanded" class="panel-heading conversation-heading">
+  <div
+    class="timeline panel-default"
+    :class="[isExpanded ? 'panel' : 'panel-disabled']"
+  >
+    <div
+      v-if="isExpanded"
+      class="panel-heading conversation-heading"
+    >
       <span class="title"> {{ $t('timeline.conversation') }} </span>
       <span v-if="collapsable">
-        <a href="#" @click.prevent="toggleExpanded">{{ $t('timeline.collapse') }}</a>
+        <a
+          href="#"
+          @click.prevent="toggleExpanded"
+        >{{ $t('timeline.collapse') }}</a>
       </span>
     </div>
     <status
       v-for="status in conversation"
-      @goto="setHighlight"
-      @toggleExpanded="toggleExpanded"
       :key="status.id"
-      :inlineExpanded="collapsable && isExpanded"
+      :inline-expanded="collapsable && isExpanded"
       :statusoid="status"
-      :expandable='!isExpanded'
-      :showPinned="showPinned"
+      :expandable="!isExpanded"
+      :show-pinned="pinnedStatusIdsObject && pinnedStatusIdsObject[status.id]"
       :focused="focused(status.id)"
-      :inConversation="isExpanded"
+      :in-conversation="isExpanded"
       :highlight="getHighlight()"
       :replies="getReplies(status.id)"
       class="status-fadein panel-body"
+      @goto="setHighlight"
+      @toggleExpanded="toggleExpanded"
     />
   </div>
 </template>

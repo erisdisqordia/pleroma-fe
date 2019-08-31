@@ -1,6 +1,7 @@
 import Attachment from '../attachment/attachment.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
+import Poll from '../poll/poll.vue'
 import ExtraButtons from '../extra_buttons/extra_buttons.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCard from '../user_card/user_card.vue'
@@ -8,6 +9,7 @@ import UserAvatar from '../user_avatar/user_avatar.vue'
 import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
 import AvatarList from '../avatar_list/avatar_list.vue'
+import Timeago from '../timeago/timeago.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import fileType from 'src/services/file_type/file_type.service'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
@@ -108,8 +110,9 @@ const Status = {
     },
     muteWordHits () {
       const statusText = this.status.text.toLowerCase()
+      const statusSummary = this.status.summary.toLowerCase()
       const hits = filter(this.muteWords, (muteWord) => {
-        return statusText.includes(muteWord.toLowerCase())
+        return statusText.includes(muteWord.toLowerCase()) || statusSummary.includes(muteWord.toLowerCase())
       })
 
       return hits
@@ -171,12 +174,13 @@ const Status = {
       if (this.status.type === 'retweet') {
         return false
       }
-      var checkFollowing = this.$store.state.config.replyVisibility === 'following'
+      const checkFollowing = this.$store.state.config.replyVisibility === 'following'
       for (var i = 0; i < this.status.attentions.length; ++i) {
         if (this.status.user.id === this.status.attentions[i].id) {
           continue
         }
-        if (checkFollowing && this.$store.getters.findUser(this.status.attentions[i].id).following) {
+        const taggedUser = this.$store.getters.findUser(this.status.attentions[i].id)
+        if (checkFollowing && taggedUser && taggedUser.following) {
           return false
         }
         if (this.status.attentions[i].id === this.$store.state.users.currentUser.id) {
@@ -216,10 +220,10 @@ const Status = {
       if (!this.status.summary) return ''
       const decodedSummary = unescape(this.status.summary)
       const behavior = typeof this.$store.state.config.subjectLineBehavior === 'undefined'
-            ? this.$store.state.instance.subjectLineBehavior
-            : this.$store.state.config.subjectLineBehavior
+        ? this.$store.state.instance.subjectLineBehavior
+        : this.$store.state.config.subjectLineBehavior
       const startsWithRe = decodedSummary.match(/^re[: ]/i)
-      if (behavior !== 'noop' && startsWithRe || behavior === 'masto') {
+      if ((behavior !== 'noop' && startsWithRe) || behavior === 'masto') {
         return decodedSummary
       } else if (behavior === 'email') {
         return 're: '.concat(decodedSummary)
@@ -277,6 +281,11 @@ const Status = {
     },
     tags () {
       return this.status.tags.filter(tagObj => tagObj.hasOwnProperty('name')).map(tagObj => tagObj.name).join(' ')
+    },
+    hidePostStats () {
+      return typeof this.$store.state.config.hidePostStats === 'undefined'
+        ? this.$store.state.instance.hidePostStats
+        : this.$store.state.config.hidePostStats
     }
   },
   components: {
@@ -285,11 +294,13 @@ const Status = {
     RetweetButton,
     ExtraButtons,
     PostStatusForm,
+    Poll,
     UserCard,
     UserAvatar,
     Gallery,
     LinkPreview,
-    AvatarList
+    AvatarList,
+    Timeago
   },
   methods: {
     visibilityIcon (visibility) {
@@ -311,11 +322,8 @@ const Status = {
       this.error = undefined
     },
     linkClicked (event) {
-      let { target } = event
-      if (target.tagName === 'SPAN') {
-        target = target.parentNode
-      }
-      if (target.tagName === 'A') {
+      const target = event.target.closest('.status-content a')
+      if (target) {
         if (target.className.match(/mention/)) {
           const href = target.href
           const attn = this.status.attentions.find(attn => mentionMatchesUrl(attn, href))
@@ -327,7 +335,7 @@ const Status = {
             return
           }
         }
-        if (target.className.match(/hashtag/)) {
+        if (target.rel.match(/(?:^|\s)tag(?:$|\s)/) || target.className.match(/hashtag/)) {
           // Extract tag name from link url
           const tag = extractTagFromUrl(target.href)
           if (tag) {
@@ -377,7 +385,7 @@ const Status = {
         this.preview = find(statuses, { 'id': targetId })
         // or if we have to fetch it
         if (!this.preview) {
-          this.$store.state.api.backendInteractor.fetchStatus({id}).then((status) => {
+          this.$store.state.api.backendInteractor.fetchStatus({ id }).then((status) => {
             this.preview = status
           })
         }
@@ -413,6 +421,18 @@ const Status = {
           // Post is below screen, match its bottom to screen bottom
           window.scrollBy(0, rect.bottom - window.innerHeight + 50)
         }
+      }
+    },
+    'status.repeat_num': function (num) {
+      // refetch repeats when repeat_num is changed in any way
+      if (this.isFocused && this.statusFromGlobalRepository.rebloggedBy && this.statusFromGlobalRepository.rebloggedBy.length !== num) {
+        this.$store.dispatch('fetchRepeats', this.status.id)
+      }
+    },
+    'status.fave_num': function (num) {
+      // refetch favs when fave_num is changed in any way
+      if (this.isFocused && this.statusFromGlobalRepository.favoritedBy && this.statusFromGlobalRepository.favoritedBy.length !== num) {
+        this.$store.dispatch('fetchFavs', this.status.id)
       }
     }
   },

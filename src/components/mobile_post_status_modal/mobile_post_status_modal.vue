@@ -1,23 +1,31 @@
 <template>
-<div v-if="currentUser">
-  <div
-    class="post-form-modal-view modal-view"
-    v-show="postFormOpen"
-    @click="closePostForm"
-  >
-    <div class="post-form-modal-panel panel" @click.stop="">
-      <div class="panel-heading">{{$t('post_status.new_status')}}</div>
-      <PostStatusForm class="panel-body" @posted="closePostForm" />
+  <div v-if="currentUser">
+    <div
+      v-show="postFormOpen"
+      class="post-form-modal-view modal-view"
+      @click="closePostForm"
+    >
+      <div
+        class="post-form-modal-panel panel"
+        @click.stop=""
+      >
+        <div class="panel-heading">
+          {{ $t('post_status.new_status') }}
+        </div>
+        <PostStatusForm
+          class="panel-body"
+          @posted="closePostForm"
+        />
+      </div>
     </div>
+    <button
+      class="new-status-button"
+      :class="{ 'hidden': isHidden }"
+      @click="openPostForm"
+    >
+      <i class="icon-edit" />
+    </button>
   </div>
-  <button
-    class="new-status-button"
-    :class="{ 'hidden': isHidden }"
-    @click="openPostForm"
-  >
-    <i class="icon-edit" />
-  </button>
-</div>
 </template>
 
 <script src="./mobile_post_status_modal.js"></script>
@@ -26,14 +34,19 @@
 @import '../../_variables.scss';
 
 .post-form-modal-view {
-  max-height: 100%;
-  display: block;
+  align-items: flex-start;
 }
 
 .post-form-modal-panel {
   flex-shrink: 0;
-  margin: 25% 0 4em 0;
+  margin-top: 25%;
+  margin-bottom: 2em;
   width: 100%;
+  max-width: 700px;
+
+  @media (orientation: landscape) {
+    margin-top: 8%;
+  }
 }
 
 .new-status-button {

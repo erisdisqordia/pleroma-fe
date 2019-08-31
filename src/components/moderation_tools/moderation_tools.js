@@ -1,5 +1,4 @@
 import DialogModal from '../dialog_modal/dialog_modal.vue'
-import Popper from 'vue-popperjs/src/component/popper.js.vue'
 
 const FORCE_NSFW = 'mrf_tag:media-force-nsfw'
 const STRIP_MEDIA = 'mrf_tag:media-strip'
@@ -29,8 +28,7 @@ const ModerationTools = {
     }
   },
   components: {
-    DialogModal,
-    Popper
+    DialogModal
   },
   computed: {
     tagsSet () {
@@ -41,9 +39,6 @@ const ModerationTools = {
     }
   },
   methods: {
-    toggleMenu () {
-      this.showDropDown = !this.showDropDown
-    },
     hasTag (tagName) {
       return this.tagsSet.has(tagName)
     },
@@ -52,12 +47,12 @@ const ModerationTools = {
       if (this.tagsSet.has(tag)) {
         store.state.api.backendInteractor.untagUser(this.user, tag).then(response => {
           if (!response.ok) { return }
-          store.commit('untagUser', {user: this.user, tag})
+          store.commit('untagUser', { user: this.user, tag })
         })
       } else {
         store.state.api.backendInteractor.tagUser(this.user, tag).then(response => {
           if (!response.ok) { return }
-          store.commit('tagUser', {user: this.user, tag})
+          store.commit('tagUser', { user: this.user, tag })
         })
       }
     },
@@ -66,12 +61,12 @@ const ModerationTools = {
       if (this.user.rights[right]) {
         store.state.api.backendInteractor.deleteRight(this.user, right).then(response => {
           if (!response.ok) { return }
-          store.commit('updateRight', {user: this.user, right: right, value: false})
+          store.commit('updateRight', { user: this.user, right: right, value: false })
         })
       } else {
         store.state.api.backendInteractor.addRight(this.user, right).then(response => {
           if (!response.ok) { return }
-          store.commit('updateRight', {user: this.user, right: right, value: true})
+          store.commit('updateRight', { user: this.user, right: right, value: true })
         })
       }
     },
@@ -80,7 +75,7 @@ const ModerationTools = {
       const status = !!this.user.deactivated
       store.state.api.backendInteractor.setActivationStatus(this.user, status).then(response => {
         if (!response.ok) { return }
-        store.commit('updateActivationStatus', {user: this.user, status: status})
+        store.commit('updateActivationStatus', { user: this.user, status: status })
       })
     },
     deleteUserDialog (show) {
@@ -89,7 +84,7 @@ const ModerationTools = {
     deleteUser () {
       const store = this.$store
       const user = this.user
-      const {id, name} = user
+      const { id, name } = user
       store.state.api.backendInteractor.deleteUser(user)
         .then(e => {
           this.$store.dispatch('markStatusesAsDeleted', status => user.id === status.user.id)

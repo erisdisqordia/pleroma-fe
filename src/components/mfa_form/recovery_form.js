@@ -33,7 +33,7 @@ export default {
         }
 
         this.login(result).then(() => {
-          this.$router.push({name: 'friends'})
+          this.$router.push({ name: 'friends' })
         })
       })
     }

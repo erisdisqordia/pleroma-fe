@@ -1,9 +1,23 @@
 <template>
   <div class="remote-follow">
-    <form method="POST" :action='subscribeUrl'>
-      <input type="hidden" name="nickname" :value="user.screen_name">
-      <input type="hidden" name="profile" value="">
-      <button click="submit" class="remote-button">
+    <form
+      method="POST"
+      :action="subscribeUrl"
+    >
+      <input
+        type="hidden"
+        name="nickname"
+        :value="user.screen_name"
+      >
+      <input
+        type="hidden"
+        name="profile"
+        value=""
+      >
+      <button
+        click="submit"
+        class="remote-button"
+      >
         {{ $t('user_card.remote_follow') }}
       </button>
     </form>

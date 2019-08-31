@@ -60,12 +60,20 @@ export const parseUser = (data) => {
     if (data.pleroma) {
       const relationship = data.pleroma.relationship
 
+      output.background_image = data.pleroma.background_image
+      output.token = data.pleroma.chat_token
+
       if (relationship) {
         output.follows_you = relationship.followed_by
+        output.requested = relationship.requested
         output.following = relationship.following
         output.statusnet_blocking = relationship.blocking
         output.muted = relationship.muting
+        output.subscribed = relationship.subscribing
       }
+
+      output.hide_follows = data.pleroma.hide_follows
+      output.hide_followers = data.pleroma.hide_followers
 
       output.rights = {
         moderator: data.pleroma.is_moderator,
@@ -145,7 +153,7 @@ export const parseUser = (data) => {
   output.statuses_count = data.statuses_count
   output.friendIds = []
   output.followerIds = []
-  output.pinnedStatuseIds = []
+  output.pinnedStatusIds = []
 
   if (data.pleroma) {
     output.follow_request_count = data.pleroma.follow_request_count
@@ -231,7 +239,9 @@ export const parseStatus = (data) => {
 
     output.summary_html = addEmojis(data.spoiler_text, data.emojis)
     output.external_url = data.url
+    output.poll = data.poll
     output.pinned = data.pinned
+    output.muted = data.muted
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num

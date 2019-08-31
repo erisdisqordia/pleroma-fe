@@ -24,11 +24,11 @@ describe('The users module', () => {
       const user = { id: '1', name: 'Guy' }
 
       mutations.addNewUsers(state, [user])
-      mutations.setMuted(state, {user, muted: true})
+      mutations.setMuted(state, { user, muted: true })
 
       expect(user.muted).to.eql(true)
 
-      mutations.setMuted(state, {user, muted: false})
+      mutations.setMuted(state, { user, muted: false })
 
       expect(user.muted).to.eql(false)
     })

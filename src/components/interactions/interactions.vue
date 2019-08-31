@@ -7,18 +7,27 @@
     </div>
     <tab-switcher
       ref="tabSwitcher"
-      :onSwitch="onModeSwitch"
-      >
-      <span data-tab-dummy data-filter="mentions" :label="$t('nav.mentions')"/>
-      <span data-tab-dummy data-filter="likes+repeats" :label="$t('interactions.favs_repeats')"/>
-      <span data-tab-dummy data-filter="follows" :label="$t('interactions.follows')"/>
+      :on-switch="onModeSwitch"
+    >
+      <span
+        key="mentions"
+        :label="$t('nav.mentions')"
+      />
+      <span
+        key="likes+repeats"
+        :label="$t('interactions.favs_repeats')"
+      />
+      <span
+        key="follows"
+        :label="$t('interactions.follows')"
+      />
     </tab-switcher>
     <Notifications
       ref="notifications"
-      :noHeading="true"
-      :minimalMode="true"
-      :filterMode="filterMode"
-      />
+      :no-heading="true"
+      :minimal-mode="true"
+      :filter-mode="filterMode"
+    />
   </div>
 </template>
 

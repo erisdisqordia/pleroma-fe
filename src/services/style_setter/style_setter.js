@@ -202,6 +202,7 @@ const generateColors = (input) => {
   colors.topBarLink = col.topBarLink || getTextColor(colors.topBar, colors.fgLink)
 
   colors.faintLink = col.faintLink || Object.assign({}, col.link)
+  colors.linkBg = alphaBlend(colors.link, 0.4, colors.bg)
 
   colors.icon = mixrgb(colors.bg, colors.text)
 
@@ -238,12 +239,12 @@ const generateColors = (input) => {
   })
 
   const htmlColors = Object.entries(colors)
-        .reduce((acc, [k, v]) => {
-          if (!v) return acc
-          acc.solid[k] = rgb2hex(v)
-          acc.complete[k] = typeof v.a === 'undefined' ? rgb2hex(v) : rgb2rgba(v)
-          return acc
-        }, { complete: {}, solid: {} })
+    .reduce((acc, [k, v]) => {
+      if (!v) return acc
+      acc.solid[k] = rgb2hex(v)
+      acc.complete[k] = typeof v.a === 'undefined' ? rgb2hex(v) : rgb2rgba(v)
+      return acc
+    }, { complete: {}, solid: {} })
   return {
     rules: {
       colors: Object.entries(htmlColors.complete)

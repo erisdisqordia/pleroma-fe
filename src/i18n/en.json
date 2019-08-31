@@ -78,6 +78,7 @@
     "timeline": "Timeline",
     "twkn": "The Whole Known Network",
     "user_search": "User Search",
+    "search": "Search",
     "who_to_follow": "Who to follow",
     "preferences": "Preferences"
   },
@@ -90,6 +91,23 @@
     "read": "Read!",
     "repeated_you": "repeated your status",
     "no_more_notifications": "No more notifications"
+  },
+  "polls": {
+    "add_poll": "Add Poll",
+    "add_option": "Add Option",
+    "option": "Option",
+    "votes": "votes",
+    "vote": "Vote",
+    "type": "Poll type",
+    "single_choice": "Single choice",
+    "multiple_choices": "Multiple choices",
+    "expiry": "Poll age",
+    "expires_in": "Poll ends in {0}",
+    "expired": "Poll ended {0} ago",
+    "not_enough_options": "Too few unique options in poll"
+  },
+  "stickers": {
+    "add_sticker": "Add Sticker"
   },
   "interactions": {
     "favs_repeats": "Repeats and Favorites",
@@ -244,7 +262,7 @@
     "loop_video": "Loop videos",
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
     "mutes_tab": "Mutes",
-    "play_videos_in_modal": "Play videos directly in the media viewer",
+    "play_videos_in_modal": "Play videos in a popup frame",
     "use_contain_fit": "Don't crop the attachment in thumbnails",
     "name": "Name",
     "name_bio": "Name & Bio",
@@ -435,6 +453,40 @@
       "frontend_version": "Frontend Version"
     }
   },
+  "time": {
+    "day": "{0} day",
+    "days": "{0} days",
+    "day_short": "{0}d",
+    "days_short": "{0}d",
+    "hour": "{0} hour",
+    "hours": "{0} hours",
+    "hour_short": "{0}h",
+    "hours_short": "{0}h",
+    "in_future": "in {0}",
+    "in_past": "{0} ago",
+    "minute": "{0} minute",
+    "minutes": "{0} minutes",
+    "minute_short": "{0}min",
+    "minutes_short": "{0}min",
+    "month": "{0} month",
+    "months": "{0} months",
+    "month_short": "{0}mo",
+    "months_short": "{0}mo",
+    "now": "just now",
+    "now_short": "now",
+    "second": "{0} second",
+    "seconds": "{0} seconds",
+    "second_short": "{0}s",
+    "seconds_short": "{0}s",
+    "week": "{0} week",
+    "weeks": "{0} weeks",
+    "week_short": "{0}w",
+    "weeks_short": "{0}w",
+    "year": "{0} year",
+    "years": "{0} years",
+    "year_short": "{0}y",
+    "years_short": "{0}y"
+  },
   "timeline": {
     "collapse": "Collapse",
     "conversation": "Conversation",
@@ -456,7 +508,9 @@
     "pinned": "Pinned",
     "delete_confirm": "Do you really want to delete this status?",
     "reply_to": "Reply to",
-    "replies_list": "Replies:"
+    "replies_list": "Replies:",
+    "mute_conversation": "Mute conversation",
+    "unmute_conversation": "Unmute conversation"
   },
   "user_card": {
     "approve": "Approve",
@@ -481,6 +535,8 @@
     "remote_follow": "Remote follow",
     "report": "Report",
     "statuses": "Statuses",
+    "subscribe": "Subscribe",
+    "unsubscribe": "Unsubscribe",
     "unblock": "Unblock",
     "unblock_progress": "Unblocking...",
     "block_progress": "Blocking...",
@@ -545,5 +601,12 @@
       "GiB": "GiB",
       "TiB": "TiB"
     }
+  },
+  "search": {
+    "people": "People",
+    "hashtags": "Hashtags",
+    "person_talking": "{count} person talking",
+    "people_talking": "{count} people talking",
+    "no_results": "No results"
   }
 }

@@ -27,7 +27,11 @@
     "optional": "opcional",
     "show_more": "Mostrar más",
     "show_less": "Mostrar menos",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "disable": "Inhabilitar",
+    "enable": "Habilitar",
+    "confirm": "Confirmar",
+    "verify": "Verificar"
   },
   "image_cropper": {
     "crop_picture": "Recortar la foto",
@@ -48,7 +52,15 @@
     "placeholder": "p.ej. lain",
     "register": "Registrar",
     "username": "Usuario",
-    "hint": "Inicia sesión para unirte a la discusión"
+    "hint": "Inicia sesión para unirte a la discusión",
+    "authentication_code": "Código de autentificación",
+    "enter_recovery_code": "Inserta el código de recuperación",
+    "enter_two_factor_code": "Inserta el código de doble factor",
+    "recovery_code": "Código de recuperación",
+    "heading" : {
+      "totp" : "Autentificación de doble factor",
+      "recovery" : "Recuperación de doble factor"
+    }
   },
    "media_modal": {
     "previous": "Anterior",
@@ -60,11 +72,13 @@
     "chat": "Chat Local",
     "friend_requests": "Solicitudes de amistad",
     "mentions": "Menciones",
+    "interactions": "Interacciones",
     "dms": "Mensajes Directo",
     "public_tl": "Línea Temporal Pública",
     "timeline": "Línea Temporal",
     "twkn": "Toda La Red Conocida",
     "user_search": "Búsqueda de Usuarios",
+    "search": "Buscar",
     "who_to_follow": "A quién seguir",
     "preferences": "Preferencias"
   },
@@ -77,6 +91,28 @@
     "read": "¡Leído!",
     "repeated_you": "repite tu estado",
     "no_more_notifications": "No hay más notificaciones"
+  },
+  "polls": {
+    "add_poll": "Añadir encuesta",
+    "add_option": "Añadir opción",
+    "option": "Opción",
+    "votes": "votos",
+    "vote": "Votar",
+    "type": "Tipo de encuesta",
+    "single_choice": "Elección única",
+    "multiple_choices": "Múltiples elecciones",
+    "expiry": "Tiempo de vida de la encuesta",
+    "expires_in": "La encuensta termina en {0}",
+    "expired": "La encuesta terminó hace {0}",
+    "not_enough_options": "Muy pocas opciones únicas en la encuesta"
+  },
+  "stickers": {
+    "add_sticker": "Añadir Pegatina"
+  },
+  "interactions": {
+    "favs_repeats": "Favoritos y Repetidos",
+    "follows": "Nuevos seguidores",
+    "load_older": "Cargar interacciones antiguas"
   },
   "post_status": {
     "new_status": "Publicar un nuevo estado",
@@ -91,9 +127,14 @@
     },
     "content_warning": "Tema (opcional)",
     "default": "Acabo de aterrizar en L.A.",
-    "direct_warning": "Esta publicación solo será visible para los usuarios mencionados.",
+    "direct_warning_to_all": "Esta publicación será visible para todos los usarios mencionados.",
     "direct_warning_to_first_only": "Esta publicación solo será visible para los usuarios mencionados al comienzo del mensaje.",
     "posting": "Publicando",
+    "scope_notice": {
+      "public": "Esta publicación será visible para todo el mundo",
+      "private": "Esta publicación solo será visible para tus seguidores.",
+      "unlisted": "Esta publicación no será visible en la Línea Temporal Pública ni en Toda La Red Conocida"
+    },
     "scope": {
       "direct": "Directo - Solo para los usuarios mencionados.",
       "private": "Solo-Seguidores - Solo tus seguidores leeran la publicación",
@@ -127,6 +168,29 @@
   },
   "settings": {
     "app_name": "Nombre de la aplicación",
+    "security": "Seguridad",
+    "enter_current_password_to_confirm": "Introduce la contraseña actual para confirmar tu identidad",
+    "mfa": {
+      "otp" : "OTP",
+      "setup_otp" : "Configurar OTP",
+      "wait_pre_setup_otp" : "preconfiguración OTP",
+      "confirm_and_enable" : "Confirmar y habilitar OTP",
+      "title": "Autentificación de Doble Factor",
+      "generate_new_recovery_codes" : "Generar nuevos códigos de recuperación",
+      "warning_of_generate_new_codes" : "Cuando generas nuevos códigos de recuperación, los antiguos dejarán de funcionar.",
+      "recovery_codes" : "Códigos de recuperación.",
+      "waiting_a_recovery_codes": "Recibiendo códigos de respaldo",
+      "recovery_codes_warning" : "Anote los códigos o guárdelos en un lugar seguro, de lo contrario no los volverá a ver. Si pierde el acceso a su aplicación 2FA y los códigos de recuperación, su cuenta quedará bloqueada.",
+      "authentication_methods" : "Métodos de autentificación",
+      "scan": {
+        "title": "Escanear",
+        "desc": "Usando su aplicación de doble factor, escanee este código QR o ingrese la clave de texto:",
+        "secret_code": "Clave"
+      },
+      "verify": {
+        "desc": "Para habilitar la autenticación de doble factor, ingrese el código de su aplicación 2FA:"
+      }
+    },
     "attachmentRadius": "Adjuntos",
     "attachments": "Adjuntos",
     "autoload": "Activar carga automática al llegar al final de la página",
@@ -227,12 +291,13 @@
     "profile_background": "Fondo del Perfil",
     "profile_banner": "Cabecera del Perfil",
     "profile_tab": "Perfil",
-    "radii_help": "Estable el redondeo de las esquinas del interfaz (en píxeles)",
+    "radii_help": "Estable el redondeo de las esquinas de la interfaz (en píxeles)",
     "replies_in_timeline": "Réplicas en la línea temporal",
-    "reply_link_preview": "Activar la previsualización del enlace de responder al pasar el ratón por encim",
+    "reply_link_preview": "Activar la previsualización del enlace de responder al pasar el ratón por encima",
     "reply_visibility_all": "Mostrar todas las réplicas",
     "reply_visibility_following": "Solo mostrar réplicas para mí o usuarios a los que sigo",
     "reply_visibility_self": "Solo mostrar réplicas para mí",
+    "autohide_floating_post_button": "Ocultar automáticamente el botón 'Nueva Publicación' (para móviles)",
     "saving_err": "Error al guardar los ajustes",
     "saving_ok": "Ajustes guardados",
     "search_user_to_block": "Buscar usuarios a bloquear",
@@ -255,8 +320,8 @@
     "text": "Texto",
     "theme": "Tema",
     "theme_help": "Use códigos de color hexadecimales (#rrggbb) para personalizar su tema de colores.",
-    "theme_help_v2_1": "También puede invalidar los colores y la opacidad de ciertos componentes si activa la casilla de verificación, use el botón \"Borrar todo\" para deshacer los cambios.",
-    "theme_help_v2_2": "Los iconos debajo de algunas entradas son indicadores de contraste de fondo/texto, desplace el ratón para obtener información detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
+    "theme_help_v2_1": "También puede invalidar los colores y la opacidad de ciertos componentes si activa la casilla de verificación. Use el botón \"Borrar todo\" para deshacer los cambios.",
+    "theme_help_v2_2": "Los iconos debajo de algunas entradas son indicadores de contraste de fondo/texto, desplace el ratón por encima para obtener información más detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
     "tooltipRadius": "Información/alertas",
      "upload_a_photo": "Subir una foto",
     "user_settings": "Ajustes de Usuario",
@@ -265,6 +330,13 @@
       "true": "sí"
     },
     "notifications": "Notificaciones",
+    "notification_setting": "Recibir notificaciones de:",
+    "notification_setting_follows": "Usuarios que sigues",
+    "notification_setting_non_follows": "Usuarios que no sigues",
+    "notification_setting_followers": "Usuarios que te siguen",
+    "notification_setting_non_followers": "Usuarios que no te siguen",
+    "notification_mutes": "Para dejar de recibir notificaciones de un usuario específico, siléncialo.",
+    "notification_blocks": "El bloqueo de un usuario detiene todas las notificaciones y también las cancela.",
     "enable_web_push_notifications": "Habilitar las notificiaciones en el navegador",
     "style": {
       "switcher": {
@@ -323,14 +395,14 @@
         "shadow_id": "Sombra #{value}",
         "blur": "Difuminar",
         "spread": "Cantidad",
-        "inset": "Insertada",
+        "inset": "Sombra interior",
         "hint": "Para las sombras, también puede usar --variable como un valor de color para usar las variables CSS3. Tenga en cuenta que establecer la opacidad no funcionará en este caso.",
         "filter_hint": {
           "always_drop_shadow": "Advertencia, esta sombra siempre usa {0} cuando el navegador lo soporta.",
           "drop_shadow_syntax": "{0} no soporta el parámetro {1} y la palabra clave {2}.",
-          "avatar_inset": "Tenga en cuenta que la combinación de sombras insertadas como no-insertadas en los avatares, puede dar resultados inesperados con los avatares transparentes.",
+          "avatar_inset": "Tenga en cuenta que la combinación de sombras interiores como no-interiores en los avatares, puede dar resultados inesperados con los avatares transparentes.",
           "spread_zero": "Sombras con una cantidad > 0 aparecerá como si estuviera puesto a cero",
-          "inset_classic": "Las sombras insertadas estarán usando {0}"
+          "inset_classic": "Las sombras interiores estarán usando {0}"
         },
         "components": {
           "panel": "Panel",
@@ -348,7 +420,7 @@
       },
       "fonts": {
         "_tab_label": "Fuentes",
-        "help": "Seleccione la fuente para utilizar para los elementos de la interfaz de usuario. Para \"personalizado\", debe ingresar el nombre exacto de la fuente tal como aparece en el sistema.",
+        "help": "Seleccione la fuente a utilizar para los elementos de la interfaz de usuario. Para \"personalizado\", debe ingresar el nombre exacto de la fuente tal como aparece en el sistema.",
         "components": {
           "interface": "Interfaz",
           "input": "Campos de entrada",
@@ -381,6 +453,40 @@
       "frontend_version": "Versión del Frontend"
     }
   },
+  "time": {
+    "day": "{0} día",
+    "days": "{0} días",
+    "day_short": "{0}d",
+    "days_short": "{0}d",
+    "hour": "{0} hora",
+    "hours": "{0} horas",
+    "hour_short": "{0}h",
+    "hours_short": "{0}h",
+    "in_future": "en {0}",
+    "in_past": "hace {0}",
+    "minute": "{0} minuto",
+    "minutes": "{0} minutos",
+    "minute_short": "{0}min",
+    "minutes_short": "{0}min",
+    "month": "{0} mes",
+    "months": "{0} meses",
+    "month_short": "{0}m",
+    "months_short": "{0}m",
+    "now": "justo ahora",
+    "now_short": "ahora",
+    "second": "{0} segundo",
+    "seconds": "{0} segundos",
+    "second_short": "{0}s",
+    "seconds_short": "{0}s",
+    "week": "{0} semana",
+    "weeks": "{0} semana",
+    "week_short": "{0}sem",
+    "weeks_short": "{0}sem",
+    "year": "{0} año",
+    "years": "{0} años",
+    "year_short": "{0}a",
+    "years_short": "{0}a"
+  },
   "timeline": {
     "collapse": "Colapsar",
     "conversation": "Conversación",
@@ -396,7 +502,12 @@
   "status": {
     "favorites": "Favoritos",
     "repeats": "Repetidos",
-    "reply_to": "Responder a",
+    "delete": "Eliminar publicación",
+    "pin": "Fijar en tu perfil",
+    "unpin": "Desclavar de tu perfil",
+    "pinned": "Fijado",
+    "delete_confirm": "¿Realmente quieres borrar la publicación?",
+    "reply_to": "Respondiendo a",
     "replies_list": "Respuestas:"
   },
   "user_card": {
@@ -422,6 +533,8 @@
     "remote_follow": "Seguir",
     "report": "Reportar",
     "statuses": "Estados",
+    "subscribe": "Suscribirse",
+    "unsubscribe": "Desuscribirse",
     "unblock": "Desbloquear",
     "unblock_progress": "Desbloqueando...",
     "block_progress": "Bloqueando...",
@@ -486,5 +599,12 @@
       "GiB": "GiB",
       "TiB": "TiB"
     }
+  },
+  "search": {
+    "people": "Personas",
+    "hashtags": "Hashtags",
+    "person_talking": "{count} personas hablando",
+    "people_talking": "{count} gente hablando",
+    "no_results": "Sin resultados"
   }
 }

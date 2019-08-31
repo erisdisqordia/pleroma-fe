@@ -26,9 +26,10 @@ const LoginForm = {
       this.isTokenAuth ? this.submitToken() : this.submitPassword()
     },
     submitToken () {
-      const { clientId } = this.oauth
+      const { clientId, clientSecret } = this.oauth
       const data = {
         clientId,
+        clientSecret,
         instance: this.instance.server,
         commit: this.$store.commit
       }
@@ -57,7 +58,7 @@ const LoginForm = {
         ).then((result) => {
           if (result.error) {
             if (result.error === 'mfa_required') {
-              this.requireMFA({app: app, settings: result})
+              this.requireMFA({ app: app, settings: result })
             } else {
               this.error = result.error
               this.focusOnPasswordInput()
@@ -65,7 +66,7 @@ const LoginForm = {
             return
           }
           this.login(result).then(() => {
-            this.$router.push({name: 'friends'})
+            this.$router.push({ name: 'friends' })
           })
         })
       })

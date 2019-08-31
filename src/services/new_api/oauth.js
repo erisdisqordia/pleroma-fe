@@ -93,7 +93,7 @@ export const getClientToken = ({ clientId, clientSecret, instance }) => {
     body: form
   }).then((data) => data.json())
 }
-const verifyOTPCode = ({app, instance, mfaToken, code}) => {
+const verifyOTPCode = ({ app, instance, mfaToken, code }) => {
   const url = `${instance}/oauth/mfa/challenge`
   const form = new window.FormData()
 
@@ -109,7 +109,7 @@ const verifyOTPCode = ({app, instance, mfaToken, code}) => {
   }).then((data) => data.json())
 }
 
-const verifyRecoveryCode = ({app, instance, mfaToken, code}) => {
+const verifyRecoveryCode = ({ app, instance, mfaToken, code }) => {
   const url = `${instance}/oauth/mfa/challenge`
   const form = new window.FormData()
 
@@ -125,13 +125,28 @@ const verifyRecoveryCode = ({app, instance, mfaToken, code}) => {
   }).then((data) => data.json())
 }
 
+const revokeToken = ({ app, instance, token }) => {
+  const url = `${instance}/oauth/revoke`
+  const form = new window.FormData()
+
+  form.append('client_id', app.clientId)
+  form.append('client_secret', app.clientSecret)
+  form.append('token', token)
+
+  return window.fetch(url, {
+    method: 'POST',
+    body: form
+  }).then((data) => data.json())
+}
+
 const oauth = {
   login,
   getToken,
   getTokenWithCredentials,
   getOrCreateApp,
   verifyOTPCode,
-  verifyRecoveryCode
+  verifyRecoveryCode,
+  revokeToken
 }
 
 export default oauth

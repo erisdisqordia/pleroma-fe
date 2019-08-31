@@ -27,7 +27,11 @@
     "optional": "省略可",
     "show_more": "もっと見る",
     "show_less": "たたむ",
-    "cancel": "キャンセル"
+    "cancel": "キャンセル",
+    "disable": "無効",
+    "enable": "有効",
+    "confirm": "確認",
+    "verify": "検査"
   },
   "image_cropper": {
     "crop_picture": "画像を切り抜く",
@@ -48,7 +52,15 @@
     "placeholder": "例: lain",
     "register": "登録",
     "username": "ユーザー名",
-    "hint": "会話に加わるには、ログインしてください"
+    "hint": "会話に加わるには、ログインしてください",
+    "authentication_code": "認証コード",
+    "enter_recovery_code": "リカバリーコードを入力してください",
+    "enter_two_factor_code": "2段階認証コードを入力してください",
+    "recovery_code": "リカバリーコード",
+    "heading" : {
+      "totp" : "2段階認証",
+      "recovery" : "2段階リカバリー"
+    }
   },
   "media_modal": {
     "previous": "前",
@@ -66,6 +78,7 @@
     "timeline": "タイムライン",
     "twkn": "接続しているすべてのネットワーク",
     "user_search": "ユーザーを探す",
+    "search": "検索",
     "who_to_follow": "おすすめユーザー",
     "preferences": "設定"
   },
@@ -78,6 +91,23 @@
     "read": "読んだ！",
     "repeated_you": "あなたのステータスがリピートされました",
     "no_more_notifications": "通知はありません"
+  },
+  "polls": {
+    "add_poll": "投票を追加",
+    "add_option": "選択肢を追加",
+    "option": "選択肢",
+    "votes": "票",
+    "vote": "投票",
+    "type": "投票の形式",
+    "single_choice": "択一式",
+    "multiple_choices": "複数選択式",
+    "expiry": "投票期間",
+    "expires_in": "投票は {0} で終了します",
+    "expired": "投票は {0} 前に終了しました",
+    "not_enough_options": "相異なる選択肢が不足しています"
+  },
+  "stickers": {
+    "add_sticker": "ステッカーを追加"
   },
   "interactions": {
     "favs_repeats": "リピートとお気に入り",
@@ -139,6 +169,29 @@
   },
   "settings": {
     "app_name": "アプリの名称",
+    "security": "セキュリティ",
+    "enter_current_password_to_confirm": "あなたのアイデンティティを証明するため、現在のパスワードを入力してください",
+    "mfa": {
+      "otp" : "OTP",
+      "setup_otp" : "OTPのセットアップ",
+      "wait_pre_setup_otp" : "OTPのプリセット",
+      "confirm_and_enable" : "OTPの確認と有効化",
+      "title": "2段階認証",
+      "generate_new_recovery_codes" : "新しいリカバリーコードを生成",
+      "warning_of_generate_new_codes" : "新しいリカバリーコードを生成すると、古いコードは使用できなくなります。",
+      "recovery_codes" : "リカバリーコード。",
+      "waiting_a_recovery_codes": "バックアップコードを受信しています...",
+      "recovery_codes_warning" : "コードを紙に書くか、安全な場所に保存してください。そうでなければ、あなたはコードを再び見ることはできません。もし2段階認証アプリのアクセスを喪失し、なおかつ、リカバリーコードもないならば、あなたは自分のアカウントから閉め出されます。",
+      "authentication_methods" : "認証方法",
+      "scan": {
+        "title": "スキャン",
+        "desc": "あなたの2段階認証アプリを使って、このQRコードをスキャンするか、テキストキーを入力してください:",
+        "secret_code": "キー"
+      },
+      "verify": {
+        "desc": "2段階認証を有効にするには、あなたの2段階認証アプリのコードを入力してください:"
+      }
+    },
     "attachmentRadius": "ファイル",
     "attachments": "ファイル",
     "autoload": "下にスクロールしたとき、自動的に読み込む。",
@@ -402,6 +455,40 @@
       "frontend_version": "フロントエンドのバージョン"
     }
   },
+  "time": {
+    "day": "{0}日",
+    "days": "{0}日",
+    "day_short": "{0}日",
+    "days_short": "{0}日",
+    "hour": "{0}時間",
+    "hours": "{0}時間",
+    "hour_short": "{0}時間",
+    "hours_short": "{0}時間",
+    "in_future": "{0}で",
+    "in_past": "{0}前",
+    "minute": "{0}分",
+    "minutes": "{0}分",
+    "minute_short": "{0}分",
+    "minutes_short": "{0}分",
+    "month": "{0}ヶ月前",
+    "months": "{0}ヶ月前",
+    "month_short": "{0}ヶ月前",
+    "months_short": "{0}ヶ月前",
+    "now": "たった今",
+    "now_short": "たった今",
+    "second": "{0}秒",
+    "seconds": "{0}秒",
+    "second_short": "{0}秒",
+    "seconds_short": "{0}秒",
+    "week": "{0}週間",
+    "weeks": "{0}週間",
+    "week_short": "{0}週間",
+    "weeks_short": "{0}週間",
+    "year": "{0}年",
+    "years": "{0}年",
+    "year_short": "{0}年",
+    "years_short": "{0}年"
+  },
   "timeline": {
     "collapse": "たたむ",
     "conversation": "スレッド",
@@ -423,7 +510,9 @@
     "pinned": "ピン留め",
     "delete_confirm": "本当にこのステータスを削除してもよろしいですか？",
     "reply_to": "返信",
-    "replies_list": "返信:"
+    "replies_list": "返信:",
+    "mute_conversation": "スレッドをミュート",
+    "unmute_conversation": "スレッドのミュートを解除"
   },
   "user_card": {
     "approve": "受け入れ",
@@ -448,6 +537,8 @@
     "remote_follow": "リモートフォロー",
     "report": "通報",
     "statuses": "ステータス",
+    "subscribe": "購読",
+    "unsubscribe": "購読を解除",
     "unblock": "ブロック解除",
     "unblock_progress": "ブロックを解除しています...",
     "block_progress": "ブロックしています...",
@@ -512,5 +603,12 @@
       "GiB": "GiB",
       "TiB": "TiB"
     }
+  },
+  "search": {
+    "people": "人々",
+    "hashtags": "ハッシュタグ",
+    "person_talking": "{count} 人が話しています",
+    "people_talking": "{count} 人が話しています",
+    "no_results": "見つかりませんでした"
   }
 }

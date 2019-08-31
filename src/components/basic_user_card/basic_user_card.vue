@@ -7,20 +7,45 @@
         @click.prevent.native="toggleUserExpanded"
       />
     </router-link>
-    <div class="basic-user-card-expanded-content" v-if="userExpanded">
-      <UserCard :user="user" :rounded="true" :bordered="true"/>
+    <div
+      v-if="userExpanded"
+      class="basic-user-card-expanded-content"
+    >
+      <UserCard
+        :user="user"
+        :rounded="true"
+        :bordered="true"
+      />
     </div>
-    <div class="basic-user-card-collapsed-content" v-else>
-      <div :title="user.name" class="basic-user-card-user-name">
-        <span v-if="user.name_html" class="basic-user-card-user-name-value" v-html="user.name_html"></span>
-        <span v-else class="basic-user-card-user-name-value">{{ user.name }}</span>
+    <div
+      v-else
+      class="basic-user-card-collapsed-content"
+    >
+      <div
+        :title="user.name"
+        class="basic-user-card-user-name"
+      >
+        <!-- eslint-disable vue/no-v-html -->
+        <span
+          v-if="user.name_html"
+          class="basic-user-card-user-name-value"
+          v-html="user.name_html"
+        />
+        <!-- eslint-enable vue/no-v-html -->
+        <span
+          v-else
+          class="basic-user-card-user-name-value"
+        >{{ user.name }}</span>
       </div>
       <div>
-        <router-link class="basic-user-card-screen-name" :to="userProfileLink(user)">
-          @{{user.screen_name}}
+        <router-link
+          class="basic-user-card-screen-name"
+          :to="userProfileLink(user)"
+        >
+          @{{ user.screen_name }}
         </router-link>
       </div>
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>
@@ -62,6 +87,7 @@
   &-expanded-content {
     flex: 1;
     margin-left: 0.7em;
+    min-width: 0;
   }
 }
 </style>

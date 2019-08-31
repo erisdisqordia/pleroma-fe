@@ -1,9 +1,19 @@
 <template>
   <div class="list">
-    <div v-for="item in items" class="list-item" :key="getKey(item)">
-      <slot name="item" :item="item" />
+    <div
+      v-for="item in items"
+      :key="getKey(item)"
+      class="list-item"
+    >
+      <slot
+        name="item"
+        :item="item"
+      />
     </div>
-    <div class="list-empty-content faint" v-if="items.length === 0 && !!$slots.empty">
+    <div
+      v-if="items.length === 0 && !!$slots.empty"
+      class="list-empty-content faint"
+    >
       <slot name="empty" />
     </div>
   </div>

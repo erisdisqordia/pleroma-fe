@@ -1,53 +1,83 @@
 <template>
-<div class="login panel panel-default">
-  <!-- Default panel contents -->
+  <div class="login panel panel-default">
+    <!-- Default panel contents -->
 
-  <div class="panel-heading">{{$t('login.login')}}</div>
+    <div class="panel-heading">
+      {{ $t('login.login') }}
+    </div>
 
-  <div class="panel-body">
-    <form class='login-form' @submit.prevent='submit'>
-      <template v-if="isPasswordAuth">
-        <div class='form-group'>
-          <label for='username'>{{$t('login.username')}}</label>
-          <input :disabled="loggingIn" v-model='user.username'
-                 class='form-control' id='username'
-                 :placeholder="$t('login.placeholder')">
-        </div>
-        <div class='form-group'>
-          <label for='password'>{{$t('login.password')}}</label>
-          <input :disabled="loggingIn" v-model='user.password'
-                 ref='passwordInput' class='form-control' id='password' type='password'>
-        </div>
-      </template>
-
-      <div class="form-group" v-if="isTokenAuth">
-        <p>{{$t('login.description')}}</p>
-      </div>
-
-      <div class='form-group'>
-        <div class='login-bottom'>
-          <div>
-            <router-link :to="{name: 'registration'}"
-                         v-if='registrationOpen'
-                         class='register'>
-              {{$t('login.register')}}
-            </router-link>
+    <div class="panel-body">
+      <form
+        class="login-form"
+        @submit.prevent="submit"
+      >
+        <template v-if="isPasswordAuth">
+          <div class="form-group">
+            <label for="username">{{ $t('login.username') }}</label>
+            <input
+              id="username"
+              v-model="user.username"
+              :disabled="loggingIn"
+              class="form-control"
+              :placeholder="$t('login.placeholder')"
+            >
           </div>
-          <button :disabled="loggingIn" type='submit' class='btn btn-default'>
-            {{$t('login.login')}}
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
+          <div class="form-group">
+            <label for="password">{{ $t('login.password') }}</label>
+            <input
+              id="password"
+              ref="passwordInput"
+              v-model="user.password"
+              :disabled="loggingIn"
+              class="form-control"
+              type="password"
+            >
+          </div>
+        </template>
 
-  <div v-if="error" class='form-group'>
-    <div class='alert error'>
-      {{error}}
-      <i class="button-icon icon-cancel" @click="clearError"></i>
+        <div
+          v-if="isTokenAuth"
+          class="form-group"
+        >
+          <p>{{ $t('login.description') }}</p>
+        </div>
+
+        <div class="form-group">
+          <div class="login-bottom">
+            <div>
+              <router-link
+                v-if="registrationOpen"
+                :to="{name: 'registration'}"
+                class="register"
+              >
+                {{ $t('login.register') }}
+              </router-link>
+            </div>
+            <button
+              :disabled="loggingIn"
+              type="submit"
+              class="btn btn-default"
+            >
+              {{ $t('login.login') }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div
+      v-if="error"
+      class="form-group"
+    >
+      <div class="alert error">
+        {{ error }}
+        <i
+          class="button-icon icon-cancel"
+          @click="clearError"
+        />
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script src="./login_form.js" ></script>

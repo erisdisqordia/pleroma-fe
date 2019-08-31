@@ -1,11 +1,17 @@
 <template>
   <basic-user-card :user="user">
     <div class="follow-card-content-container">
-      <span class="faint" v-if="!noFollowsYou && user.follows_you">
+      <span
+        v-if="!noFollowsYou && user.follows_you"
+        class="faint"
+      >
         {{ isMe ? $t('user_card.its_you') : $t('user_card.follows_you') }}
       </span>
       <template v-if="!loggedIn">
-        <div class="follow-card-follow-button" v-if="!user.following">
+        <div
+          v-if="!user.following"
+          class="follow-card-follow-button"
+        >
           <RemoteFollow :user="user" />
         </div>
       </template>
@@ -13,9 +19,9 @@
         <button
           v-if="!user.following"
           class="btn btn-default follow-card-follow-button"
-          @click="followUser"
           :disabled="inProgress"
           :title="requestSent ? $t('user_card.follow_again') : ''"
+          @click="followUser"
         >
           <template v-if="inProgress">
             {{ $t('user_card.follow_progress') }}
@@ -27,7 +33,12 @@
             {{ $t('user_card.follow') }}
           </template>
         </button>
-        <button v-else class="btn btn-default follow-card-follow-button pressed" @click="unfollowUser" :disabled="inProgress">
+        <button
+          v-else
+          class="btn btn-default follow-card-follow-button pressed"
+          :disabled="inProgress"
+          @click="unfollowUser"
+        >
           <template v-if="inProgress">
             {{ $t('user_card.follow_progress') }}
           </template>

@@ -1,3 +1,5 @@
+import { delete as del } from 'vue'
+
 const oauth = {
   state: {
     clientId: false,
@@ -22,6 +24,12 @@ const oauth = {
     },
     setToken (state, token) {
       state.userToken = token
+    },
+    clearToken (state) {
+      state.userToken = false
+      // state.token is userToken with older name, coming from persistent state
+      // let's clear it as well, since it is being used as a fallback of state.userToken
+      del(state, 'token')
     }
   },
   getters: {

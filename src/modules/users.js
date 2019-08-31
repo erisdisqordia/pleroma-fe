@@ -1,9 +1,8 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
-import userSearchApi from '../services/new_api/user_search.js'
+import oauthApi from '../services/new_api/oauth.js'
 import { compact, map, each, merge, last, concat, uniq } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
-import { humanizeErrors } from './errors'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
@@ -135,6 +134,7 @@ export const mutations = {
         user.following = relationship.following
         user.muted = relationship.muting
         user.statusnet_blocking = relationship.blocking
+        user.subscribed = relationship.subscribing
       }
     })
   },
@@ -166,11 +166,11 @@ export const mutations = {
   },
   setPinned (state, status) {
     const user = state.usersObject[status.user.id]
-    const index = user.pinnedStatuseIds.indexOf(status.id)
+    const index = user.pinnedStatusIds.indexOf(status.id)
     if (status.pinned && index === -1) {
-      user.pinnedStatuseIds.push(status.id)
+      user.pinnedStatusIds.push(status.id)
     } else if (!status.pinned && index !== -1) {
-      user.pinnedStatuseIds.splice(index, 1)
+      user.pinnedStatusIds.splice(index, 1)
     }
   },
   setUserForStatus (state, status) {
@@ -304,6 +304,14 @@ const users = {
     clearFollowers ({ commit }, userId) {
       commit('clearFollowers', userId)
     },
+    subscribeUser ({ rootState, commit }, id) {
+      return rootState.api.backendInteractor.subscribeUser(id)
+        .then((relationship) => commit('updateUserRelationship', [relationship]))
+    },
+    unsubscribeUser ({ rootState, commit }, id) {
+      return rootState.api.backendInteractor.unsubscribeUser(id)
+        .then((relationship) => commit('updateUserRelationship', [relationship]))
+    },
     registerPushNotifications (store) {
       const token = store.state.currentUser.credentials
       const vapidPublicKey = store.rootState.instance.vapidPublicKey
@@ -346,8 +354,8 @@ const users = {
 
       const notificationsObject = store.rootState.statuses.notifications.idStore
       const relevantNotifications = Object.entries(notificationsObject)
-            .filter(([k, val]) => notificationIds.includes(k))
-            .map(([k, val]) => val)
+        .filter(([k, val]) => notificationIds.includes(k))
+        .map(([k, val]) => val)
 
       // Reconnect users to notifications
       each(relevantNotifications, (notification) => {
@@ -355,8 +363,7 @@ const users = {
       })
     },
     searchUsers (store, query) {
-      // TODO: Move userSearch api into api.service
-      return userSearchApi.search({query, store: { state: store.rootState }})
+      return store.rootState.api.backendInteractor.searchUsers(query)
         .then((users) => {
           store.commit('addNewUsers', users)
           return users
@@ -374,31 +381,43 @@ const users = {
         store.dispatch('loginUser', data.access_token)
       } catch (e) {
         let errors = e.message
-        // replace ap_id with username
-        if (typeof errors === 'object') {
-          if (errors.ap_id) {
-            errors.username = errors.ap_id
-            delete errors.ap_id
-          }
-          errors = humanizeErrors(errors)
-        }
         store.commit('signUpFailure', errors)
-        throw Error(errors)
+        throw e
       }
     },
     async getCaptcha (store) {
-      return await store.rootState.api.backendInteractor.getCaptcha()
+      return store.rootState.api.backendInteractor.getCaptcha()
     },
 
     logout (store) {
-      store.commit('clearCurrentUser')
-      store.dispatch('disconnectFromChat')
-      store.commit('setToken', false)
-      store.dispatch('stopFetching', 'friends')
-      store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
-      store.dispatch('stopFetching', 'notifications')
-      store.commit('clearNotifications')
-      store.commit('resetStatuses')
+      const { oauth, instance } = store.rootState
+
+      const data = {
+        ...oauth,
+        commit: store.commit,
+        instance: instance.server
+      }
+
+      return oauthApi.getOrCreateApp(data)
+        .then((app) => {
+          const params = {
+            app,
+            instance: data.instance,
+            token: oauth.userToken
+          }
+
+          return oauthApi.revokeToken(params)
+        })
+        .then(() => {
+          store.commit('clearCurrentUser')
+          store.dispatch('disconnectFromSocket')
+          store.commit('clearToken')
+          store.dispatch('stopFetching', 'friends')
+          store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
+          store.dispatch('stopFetching', 'notifications')
+          store.commit('clearNotifications')
+          store.commit('resetStatuses')
+        })
     },
     loginUser (store, accessToken) {
       return new Promise((resolve, reject) => {
@@ -445,19 +464,19 @@ const users = {
               // Authentication failed
               commit('endLogin')
               if (response.status === 401) {
-                reject('Wrong username or password')
+                reject(new Error('Wrong username or password'))
               } else {
-                reject('An error occurred, please try again')
+                reject(new Error('An error occurred, please try again'))
               }
             }
             commit('endLogin')
             resolve()
           })
-        .catch((error) => {
-          console.log(error)
-          commit('endLogin')
-          reject('Failed to connect to server, try again')
-        })
+          .catch((error) => {
+            console.log(error)
+            commit('endLogin')
+            reject(new Error('Failed to connect to server, try again'))
+          })
       })
     }
   }

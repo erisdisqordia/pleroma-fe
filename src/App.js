@@ -1,7 +1,7 @@
 import UserPanel from './components/user_panel/user_panel.vue'
 import NavPanel from './components/nav_panel/nav_panel.vue'
 import Notifications from './components/notifications/notifications.vue'
-import UserFinder from './components/user_finder/user_finder.vue'
+import SearchBar from './components/search_bar/search_bar.vue'
 import InstanceSpecificPanel from './components/instance_specific_panel/instance_specific_panel.vue'
 import FeaturesPanel from './components/features_panel/features_panel.vue'
 import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_panel.vue'
@@ -19,7 +19,7 @@ export default {
     UserPanel,
     NavPanel,
     Notifications,
-    UserFinder,
+    SearchBar,
     InstanceSpecificPanel,
     FeaturesPanel,
     WhoToFollowPanel,
@@ -32,7 +32,7 @@ export default {
   },
   data: () => ({
     mobileActivePanel: 'timeline',
-    finderHidden: true,
+    searchBarHidden: true,
     supportsMask: window.CSS && window.CSS.supports && (
       window.CSS.supports('mask-size', 'contain') ||
         window.CSS.supports('-webkit-mask-size', 'contain') ||
@@ -70,7 +70,7 @@ export default {
     logoBgStyle () {
       return Object.assign({
         'margin': `${this.$store.state.instance.logoMargin} 0`,
-        opacity: this.finderHidden ? 1 : 0
+        opacity: this.searchBarHidden ? 1 : 0
       }, this.enableMask ? {} : {
         'background-color': this.enableMask ? '' : 'transparent'
       })
@@ -89,7 +89,11 @@ export default {
     sitename () { return this.$store.state.instance.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
-    showInstanceSpecificPanel () { return this.$store.state.instance.showInstanceSpecificPanel },
+    showInstanceSpecificPanel () {
+      return this.$store.state.instance.showInstanceSpecificPanel &&
+        !this.$store.state.config.hideISP &&
+        this.$store.state.instance.instanceSpecificPanelContent
+    },
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
     isMobileLayout () { return this.$store.state.interface.mobileLayout }
   },
@@ -101,8 +105,8 @@ export default {
       this.$router.replace('/main/public')
       this.$store.dispatch('logout')
     },
-    onFinderToggled (hidden) {
-      this.finderHidden = hidden
+    onSearchBarToggled (hidden) {
+      this.searchBarHidden = hidden
     },
     updateMobileState () {
       const mobileLayout = windowWidth() <= 800

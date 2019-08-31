@@ -42,7 +42,7 @@ const conversation = {
     'statusoid',
     'collapsable',
     'isPage',
-    'showPinned'
+    'pinnedStatusIdsObject'
   ],
   created () {
     if (this.isPage) {
@@ -86,7 +86,8 @@ const conversation = {
     },
     replies () {
       let i = 1
-      return reduce(this.conversation, (result, {id, in_reply_to_status_id}) => {
+      // eslint-disable-next-line camelcase
+      return reduce(this.conversation, (result, { id, in_reply_to_status_id }) => {
         /* eslint-disable camelcase */
         const irid = in_reply_to_status_id
         /* eslint-enable camelcase */
@@ -109,7 +110,7 @@ const conversation = {
     Status
   },
   watch: {
-    '$route': 'fetchConversation',
+    status: 'fetchConversation',
     expanded (value) {
       if (value) {
         this.fetchConversation()
@@ -119,15 +120,15 @@ const conversation = {
   methods: {
     fetchConversation () {
       if (this.status) {
-        this.$store.state.api.backendInteractor.fetchConversation({id: this.status.id})
-          .then(({ancestors, descendants}) => {
+        this.$store.state.api.backendInteractor.fetchConversation({ id: this.status.id })
+          .then(({ ancestors, descendants }) => {
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
           })
           .then(() => this.setHighlight(this.statusId))
       } else {
         const id = this.$route.params.id
-        this.$store.state.api.backendInteractor.fetchStatus({id})
+        this.$store.state.api.backendInteractor.fetchStatus({ id })
           .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
           .then(() => this.fetchConversation())
       }
@@ -139,6 +140,7 @@ const conversation = {
       return (this.isExpanded) && id === this.status.id
     },
     setHighlight (id) {
+      if (!id) return
       this.highlight = id
       this.$store.dispatch('fetchFavsAndRepeats', id)
     },
@@ -147,9 +149,6 @@ const conversation = {
     },
     toggleExpanded () {
       this.expanded = !this.expanded
-      if (!this.expanded) {
-        this.setHighlight(null)
-      }
     }
   }
 }

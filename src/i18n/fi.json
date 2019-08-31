@@ -36,6 +36,7 @@
     "chat": "Paikallinen Chat",
     "friend_requests": "Seurauspyynnöt",
     "mentions": "Maininnat",
+    "interactions": "Interaktiot",
     "dms": "Yksityisviestit",
     "public_tl": "Julkinen Aikajana",
     "timeline": "Aikajana",
@@ -53,6 +54,25 @@
     "read": "Lue!",
     "repeated_you": "toisti viestisi",
     "no_more_notifications": "Ei enempää ilmoituksia"
+  },
+  "polls": {
+    "add_poll": "Lisää äänestys",
+    "add_option": "Lisää vaihtoehto",
+    "option": "Vaihtoehto",
+    "votes": "ääntä",
+    "vote": "Äänestä",
+    "type": "Äänestyksen tyyppi",
+    "single_choice": "Yksi valinta",
+    "multiple_choices": "Monivalinta",
+    "expiry": "Äänestyksen kesto",
+    "expires_in": "Päättyy {0} päästä",
+    "expired": "Päättyi {0} sitten",
+    "not_enough_option": "Liian vähän uniikkeja vaihtoehtoja äänestyksessä"
+  },
+  "interactions": {
+    "favs_repeats": "Toistot ja tykkäykset",
+    "follows": "Uudet seuraukset",
+    "load_older": "Lataa vanhempia interaktioita"
   },
   "post_status": {
     "new_status": "Uusi viesti",
@@ -210,6 +230,40 @@
       "true": "päällä"
     }
   },
+  "time": {
+    "day": "{0} päivä",
+    "days": "{0} päivää",
+    "day_short": "{0}pv",
+    "days_short": "{0}pv",
+    "hour": "{0} tunti",
+    "hours": "{0} tuntia",
+    "hour_short": "{0}t",
+    "hours_short": "{0}t",
+    "in_future": "{0} tulevaisuudessa",
+    "in_past": "{0} sitten",
+    "minute": "{0} minuutti",
+    "minutes": "{0} minuuttia",
+    "minute_short": "{0}min",
+    "minutes_short": "{0}min",
+    "month": "{0} kuukausi",
+    "months": "{0} kuukautta",
+    "month_short": "{0}kk",
+    "months_short": "{0}kk",
+    "now": "nyt",
+    "now_short": "juuri nyt",
+    "second": "{0} sekunti",
+    "seconds": "{0} sekuntia",
+    "second_short": "{0}s",
+    "seconds_short": "{0}s",
+    "week": "{0} viikko",
+    "weeks": "{0} viikkoa",
+    "week_short": "{0}vk",
+    "weeks_short": "{0}vk",
+    "year": "{0} vuosi",
+    "years": "{0} vuotta",
+    "year_short": "{0}v",
+    "years_short": "{0}v"
+  },
   "timeline": {
     "collapse": "Sulje",
     "conversation": "Keskustelu",
@@ -224,8 +278,15 @@
   "status": {
     "favorites": "Tykkäykset",
     "repeats": "Toistot",
+    "delete": "Poista",
+    "pin": "Kiinnitä profiiliisi",
+    "unpin": "Poista kiinnitys",
+    "pinned": "Kiinnitetty",
+    "delete_confirm": "Haluatko varmasti postaa viestin?",
     "reply_to": "Vastaus",
-    "replies_list": "Vastaukset:"
+    "replies_list": "Vastaukset:",
+    "mute_conversation": "Hiljennä keskustelu",
+    "unmute_conversation": "Poista hiljennys"
   },
   "user_card": {
     "approve": "Hyväksy",
@@ -264,9 +325,9 @@
   },
   "upload":{
     "error": {
-    "base": "Lataus epäonnistui.",
-    "file_too_big": "Tiedosto liian suuri [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-    "default": "Yritä uudestaan myöhemmin"
+      "base": "Lataus epäonnistui.",
+      "file_too_big": "Tiedosto liian suuri [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+      "default": "Yritä uudestaan myöhemmin"
     },
     "file_size_units": {
       "B": "tavua",

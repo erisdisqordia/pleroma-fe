@@ -1,5 +1,8 @@
 # v1.0
 ## Removed features/radically changed behavior
+### formattingOptionsEnabled
+as of !833 `formattingOptionsEnabled` is no longer available and instead FE check for available post formatting options and enables formatting control if there's more than one option.
+
 ### minimalScopesMode
 As of !633, `scopeOptions` is no longer available and instead is changed for `minimalScopesMode` (default: `false`)
 

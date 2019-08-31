@@ -1,7 +1,20 @@
 import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import Conversation from '../conversation/conversation.vue'
-import { throttle } from 'lodash'
+import { throttle, keyBy } from 'lodash'
+
+export const getExcludedStatusIdsByPinning = (statuses, pinnedStatusIds) => {
+  const ids = []
+  if (pinnedStatusIds && pinnedStatusIds.length > 0) {
+    for (let status of statuses) {
+      if (!pinnedStatusIds.includes(status.id)) {
+        break
+      }
+      ids.push(status.id)
+    }
+  }
+  return ids
+}
 
 const Timeline = {
   props: [
@@ -11,7 +24,8 @@ const Timeline = {
     'userId',
     'tag',
     'embedded',
-    'count'
+    'count',
+    'pinnedStatusIds'
   ],
   data () {
     return {
@@ -39,6 +53,15 @@ const Timeline = {
         body: ['timeline-body'].concat(!this.embedded ? ['panel-body'] : []),
         footer: ['timeline-footer'].concat(!this.embedded ? ['panel-footer'] : [])
       }
+    },
+    // id map of statuses which need to be hidden in the main list due to pinning logic
+    excludedStatusIdsObject () {
+      const ids = getExcludedStatusIdsByPinning(this.timeline.visibleStatuses, this.pinnedStatusIds)
+      // Convert id array to object
+      return keyBy(ids)
+    },
+    pinnedStatusIdsObject () {
+      return keyBy(this.pinnedStatusIds)
     }
   },
   components: {
@@ -78,13 +101,15 @@ const Timeline = {
   },
   methods: {
     handleShortKey (e) {
+      // Ignore when input fields are focused
+      if (['textarea', 'input'].includes(e.target.tagName.toLowerCase())) return
       if (e.key === '.') this.showNewStatuses()
     },
     showNewStatuses () {
       if (this.newStatusCount === 0) return
 
       if (this.timeline.flushMarker !== 0) {
-        this.$store.commit('clearTimeline', { timeline: this.timelineName })
+        this.$store.commit('clearTimeline', { timeline: this.timelineName, excludeUserId: true })
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
         this.fetchOlderStatuses()
       } else {
@@ -137,7 +162,7 @@ const Timeline = {
         if (top < 15 &&
             !this.paused &&
             !(this.unfocused && this.$store.state.config.pauseOnUnfocused)
-           ) {
+        ) {
           this.showNewStatuses()
         } else {
           this.paused = true

@@ -67,7 +67,7 @@ server {
 
 ### API, Data, Operations
 
-In 99% cases PleromaFE uses [MastoAPI](https://docs.joinmastodon.org/api/) with [Pleroma Extensions](https://docs-develop.pleroma.social/differences_in_mastoapi_responses.html) to fetch the data. The rest is either QvitterAPI leftovers or pleroma-exclusive APIs. QvitterAPI doesn't exactly have documentation and uses different JSON structure and sometimes different parameters and workflows. Some pleroma-exclusive API may still be using QvitterAPI JSON structure.
+In 99% cases PleromaFE uses [MastoAPI](https://docs.joinmastodon.org/api/) with [Pleroma Extensions](https://docs-develop.pleroma.social/differences_in_mastoapi_responses.html) to fetch the data. The rest is either QvitterAPI leftovers or pleroma-exclusive APIs. QvitterAPI doesn't exactly have documentation and uses different JSON structure and sometimes different parameters and workflows, [this](https://twitter-api.readthedocs.io/en/latest/index.html) could be a good reference though. Some pleroma-exclusive API may still be using QvitterAPI JSON structure.
 
 PleromaFE supports both formats by transforming them into internal format which is basically QvitterAPI one with some additions and renaming. All data is passed trough [Entity Normalizer](/src/services/entity_normalizer/entity_normalizer.service.js) which can serve as a reference of API and what's actually used, it's also a host for all the hacks and data transformation.
 

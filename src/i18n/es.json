@@ -254,7 +254,7 @@
     "instance_default": "(por defecto: {value})",
     "instance_default_simple": "(por defecto)",
     "interface": "Interfaz",
-    "interfaceLanguage": "Idioma de la interfaz",
+    "interfaceLanguage": "Idioma",
     "invalid_theme_imported": "El archivo importado no es un tema válido de Pleroma. No se han realizado cambios.",
     "limited_availability": "No disponible en tu navegador",
     "links": "Enlaces",

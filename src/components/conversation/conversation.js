@@ -39,7 +39,7 @@ const conversation = {
     }
   },
   props: [
-    'statusoid',
+    'statusId',
     'collapsable',
     'isPage',
     'pinnedStatusIdsObject'
@@ -51,17 +51,17 @@ const conversation = {
   },
   computed: {
     status () {
-      return this.$store.state.statuses.allStatusesObject[this.statusoid]
+      return this.$store.state.statuses.allStatusesObject[this.statusId]
     },
-    statusId () {
+    originalStatusId () {
       if (this.status.retweeted_status) {
         return this.status.retweeted_status.id
       } else {
-        return this.statusoid
+        return this.statusId
       }
     },
     conversationId () {
-      return this.getConversationId(this.statusoid)
+      return this.getConversationId(this.statusId)
     },
     conversation () {
       if (!this.status) {
@@ -73,7 +73,7 @@ const conversation = {
       }
 
       const conversation = clone(this.$store.state.statuses.conversationsObject[this.conversationId])
-      const statusIndex = findIndex(conversation, { id: this.statusId })
+      const statusIndex = findIndex(conversation, { id: this.originalStatusId })
       if (statusIndex !== -1) {
         conversation[statusIndex] = this.status
       }
@@ -106,11 +106,11 @@ const conversation = {
     Status
   },
   watch: {
-    statusoid (newVal, oldVal) {
+    statusId (newVal, oldVal) {
       const newConversationId = this.getConversationId(newVal)
       const oldConversationId = this.getConversationId(oldVal)
       if (newConversationId && oldConversationId && newConversationId === oldConversationId) {
-        this.setHighlight(this.statusId)
+        this.setHighlight(this.originalStatusId)
       } else {
         this.fetchConversation()
       }
@@ -124,14 +124,14 @@ const conversation = {
   methods: {
     fetchConversation () {
       if (this.status) {
-        this.$store.state.api.backendInteractor.fetchConversation({ id: this.statusoid })
+        this.$store.state.api.backendInteractor.fetchConversation({ id: this.statusId })
           .then(({ ancestors, descendants }) => {
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
-            this.setHighlight(this.statusId)
+            this.setHighlight(this.originalStatusId)
           })
       } else {
-        this.$store.state.api.backendInteractor.fetchStatus({ id: this.statusoid })
+        this.$store.state.api.backendInteractor.fetchStatus({ id: this.statusId })
           .then((status) => {
             this.$store.dispatch('addNewStatuses', { statuses: [status] })
             this.fetchConversation()
@@ -142,7 +142,7 @@ const conversation = {
       return this.replies[id] || []
     },
     focused (id) {
-      return (this.isExpanded) && id === this.statusoid
+      return (this.isExpanded) && id === this.statusId
     },
     setHighlight (id) {
       if (!id) return

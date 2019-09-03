@@ -9,6 +9,7 @@
     />
     <img
       ref="src"
+      :key="src"
       :src="src"
       :referrerpolicy="referrerpolicy"
       @load="onLoad"

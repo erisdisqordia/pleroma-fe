@@ -10,9 +10,6 @@ const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
-const FOLLOW_REQUESTS_URL = '/api/pleroma/friend_requests'
-const APPROVE_USER_URL = '/api/pleroma/friendships/approve'
-const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const TAG_USER_URL = '/api/pleroma/admin/users/tag'
 const PERMISSION_GROUP_URL = (screenName, right) => `/api/pleroma/admin/users/${screenName}/permission_group/${right}`
 const ACTIVATION_STATUS_URL = screenName => `/api/pleroma/admin/users/${screenName}/activation_status`
@@ -40,6 +37,9 @@ const MASTODON_FOLLOW_URL = id => `/api/v1/accounts/${id}/follow`
 const MASTODON_UNFOLLOW_URL = id => `/api/v1/accounts/${id}/unfollow`
 const MASTODON_FOLLOWING_URL = id => `/api/v1/accounts/${id}/following`
 const MASTODON_FOLLOWERS_URL = id => `/api/v1/accounts/${id}/followers`
+const MASTODON_FOLLOW_REQUESTS_URL = '/api/v1/follow_requests'
+const MASTODON_APPROVE_USER_URL = id => `/api/v1/follow_requests/${id}/authorize`
+const MASTODON_DENY_USER_URL = id => `/api/v1/follow_requests/${id}/reject`
 const MASTODON_DIRECT_MESSAGES_TIMELINE_URL = '/api/v1/timelines/direct'
 const MASTODON_PUBLIC_TIMELINE = '/api/v1/timelines/public'
 const MASTODON_USER_HOME_TIMELINE_URL = '/api/v1/timelines/home'
@@ -279,7 +279,7 @@ const unblockUser = ({ id, credentials }) => {
 }
 
 const approveUser = ({ id, credentials }) => {
-  let url = `${APPROVE_USER_URL}?user_id=${id}`
+  let url = MASTODON_APPROVE_USER_URL(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -287,7 +287,7 @@ const approveUser = ({ id, credentials }) => {
 }
 
 const denyUser = ({ id, credentials }) => {
-  let url = `${DENY_USER_URL}?user_id=${id}`
+  let url = MASTODON_DENY_USER_URL(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -363,9 +363,10 @@ const fetchFollowers = ({ id, maxId, sinceId, limit = 20, credentials }) => {
 }
 
 const fetchFollowRequests = ({ credentials }) => {
-  const url = FOLLOW_REQUESTS_URL
+  const url = MASTODON_FOLLOW_REQUESTS_URL
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => data.map(parseUser))
 }
 
 const fetchConversation = ({ id, credentials }) => {

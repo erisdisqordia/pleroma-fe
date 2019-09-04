@@ -117,7 +117,7 @@ const Status = {
 
       return hits
     },
-    muted () { return !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
+    muted () { return !this.unmuted && (this.status.muted || this.muteWordHits.length > 0) },
     hideFilteredStatuses () {
       return typeof this.$store.state.config.hideFilteredStatuses === 'undefined'
         ? this.$store.state.instance.hideFilteredStatuses

@@ -7,6 +7,7 @@
       v-if="animated"
       ref="canvas"
     />
+    <!-- NOTE: key is required to force to re-render img tag when src is changed -->
     <img
       ref="src"
       :key="src"

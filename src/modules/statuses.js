@@ -430,7 +430,9 @@ export const mutations = {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.thread_muted = status.thread_muted
 
-    state.conversationsObject[newStatus.statusnet_conversation_id].forEach(status => { status.thread_muted = newStatus.thread_muted })
+    if (newStatus.thread_muted !== undefined) {
+      state.conversationsObject[newStatus.statusnet_conversation_id].forEach(status => { status.thread_muted = newStatus.thread_muted })
+    }
   },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]

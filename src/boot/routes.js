@@ -9,6 +9,7 @@ import UserProfile from 'components/user_profile/user_profile.vue'
 import Search from 'components/search/search.vue'
 import Settings from 'components/settings/settings.vue'
 import Registration from 'components/registration/registration.vue'
+import PasswordReset from 'components/password_reset/password_reset.vue'
 import UserSettings from 'components/user_settings/user_settings.vue'
 import FollowRequests from 'components/follow_requests/follow_requests.vue'
 import OAuthCallback from 'components/oauth_callback/oauth_callback.vue'
@@ -46,6 +47,7 @@ export default (store) => {
     { name: 'dms', path: '/users/:username/dms', component: DMs, beforeEnter: validateAuthenticatedRoute },
     { name: 'settings', path: '/settings', component: Settings },
     { name: 'registration', path: '/registration', component: Registration },
+    { name: 'password-reset', path: '/password-reset', component: PasswordReset },
     { name: 'registration-token', path: '/registration/:token', component: Registration },
     { name: 'friend-requests', path: '/friend-requests', component: FollowRequests, beforeEnter: validateAuthenticatedRoute },
     { name: 'user-settings', path: '/user-settings', component: UserSettings, beforeEnter: validateAuthenticatedRoute },

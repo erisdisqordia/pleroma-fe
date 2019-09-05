@@ -33,6 +33,11 @@
               type="password"
             >
           </div>
+          <div class="form-group">
+            <router-link :to="{name: 'password-reset'}">
+              {{ $t('password_reset.forgot_password') }}
+            </router-link>
+          </div>
         </template>
 
         <div

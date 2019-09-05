@@ -15,20 +15,20 @@
       class="nav-bar container"
       @click="scrollToTop()"
     >
-      <div
-        class="logo"
-        :style="logoBgStyle"
-      >
-        <div
-          class="mask"
-          :style="logoMaskStyle"
-        />
-        <img
-          :src="logo"
-          :style="logoStyle"
-        >
-      </div>
       <div class="inner-nav">
+        <div
+          class="logo"
+          :style="logoBgStyle"
+        >
+          <div
+            class="mask"
+            :style="logoMaskStyle"
+          />
+          <img
+            :src="logo"
+            :style="logoStyle"
+          >
+        </div>
         <div class="item">
           <router-link
             class="site-name"

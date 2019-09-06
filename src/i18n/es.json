@@ -508,7 +508,9 @@
     "pinned": "Fijado",
     "delete_confirm": "¿Realmente quieres borrar la publicación?",
     "reply_to": "Respondiendo a",
-    "replies_list": "Respuestas:"
+    "replies_list": "Respuestas:",
+    "mute_conversation": "Silenciar la conversación",
+    "unmute_conversation": "Mostrar la conversación"
   },
   "user_card": {
     "approve": "Aprobar",
@@ -606,5 +608,16 @@
     "person_talking": "{count} personas hablando",
     "people_talking": "{count} gente hablando",
     "no_results": "Sin resultados"
+  },
+  "password_reset": {
+    "forgot_password": "¿Contraseña olvidada?",
+    "password_reset": "Restablecer la contraseña",
+    "instruction": "Ingrese su dirección de correo electrónico o nombre de usuario. Le enviaremos un enlace para restablecer su contraseña.",
+    "placeholder": "Su correo electrónico o nombre de usuario",
+    "check_email": "Revise su correo electrónico para obtener un enlace para restablecer su contraseña.",
+    "return_home": "Volver a la página de inicio",
+    "not_found": "No pudimos encontrar ese correo electrónico o nombre de usuario.",
+    "too_many_requests": "Has alcanzado el límite de intentos, vuelve a intentarlo más tarde.",
+    "password_reset_disabled": "El restablecimiento de contraseñas está deshabilitado. Póngase en contacto con el administrador de su instancia."
   }
 }

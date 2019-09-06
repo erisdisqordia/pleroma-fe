@@ -9,7 +9,8 @@ const Notification = {
   data () {
     return {
       userExpanded: false,
-      betterShadow: this.$store.state.interface.browserSupport.cssFilter
+      betterShadow: this.$store.state.interface.browserSupport.cssFilter,
+      unmuted: false
     }
   },
   props: [ 'notification' ],
@@ -23,11 +24,14 @@ const Notification = {
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
     },
-    userProfileLink (user) {
+    generateUserProfileLink (user) {
       return generateProfileLink(user.id, user.screen_name, this.$store.state.instance.restrictedNicknames)
     },
     getUser (notification) {
       return this.$store.state.users.usersObject[notification.from_profile.id]
+    },
+    toggleMute () {
+      this.unmuted = !this.unmuted
     }
   },
   computed: {
@@ -47,6 +51,12 @@ const Notification = {
         return this.userInStore
       }
       return this.notification.from_profile
+    },
+    userProfileLink () {
+      return this.generateUserProfileLink(this.notification.from_profile)
+    },
+    needMute () {
+      return this.notification.from_profile.muted
     }
   }
 }

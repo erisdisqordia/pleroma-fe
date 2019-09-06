@@ -508,7 +508,9 @@
     "pinned": "Ainguratuta",
     "delete_confirm": "Mezu hau benetan ezabatu nahi duzu?",
     "reply_to": "Erantzun",
-    "replies_list": "Erantzunak:"
+    "replies_list": "Erantzunak:",
+    "mute_conversation": "Elkarrizketa isilarazi",
+    "unmute_conversation": "Elkarrizketa aktibatu"
   },
   "user_card": {
     "approve": "Onartu",
@@ -606,5 +608,16 @@
     "person_talking": "{count} pertsona hitzegiten",
     "people_talking": "{count} gende hitzegiten",
     "no_results": "Emaitzarik ez"
+  },
+  "password_reset": {
+    "forgot_password": "Pasahitza ahaztua?",
+    "password_reset": "Pasahitza berrezarri",
+    "instruction": "Idatzi zure helbide elektronikoa edo erabiltzaile izena. Pasahitza berrezartzeko esteka bidaliko dizugu.",
+    "placeholder": "Zure e-posta edo erabiltzaile izena",
+    "check_email": "Begiratu zure posta elektronikoa pasahitza berrezarri ahal izateko.",
+    "return_home": "Itzuli hasierara",
+    "not_found": "Ezin izan dugu helbide elektroniko edo erabiltzaile hori aurkitu.",
+    "too_many_requests": "Saiakera gehiegi burutu ditzu, saiatu berriro geroxeago.",
+    "password_reset_disabled": "Pasahitza berrezartzea debekatuta dago. Mesedez, jarri harremanetan instantzia administratzailearekin."
   }
 }

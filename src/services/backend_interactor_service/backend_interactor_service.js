@@ -127,8 +127,6 @@ const backendInteractorService = credentials => {
   const updateBanner = ({ banner }) => apiService.updateBanner({ credentials, banner })
   const updateProfile = ({ params }) => apiService.updateProfile({ credentials, params })
 
-  const externalProfile = (profileUrl) => apiService.externalProfile({ profileUrl, credentials })
-
   const importBlocks = (file) => apiService.importBlocks({ file, credentials })
   const importFollows = (file) => apiService.importFollows({ file, credentials })
 
@@ -194,7 +192,6 @@ const backendInteractorService = credentials => {
     updateBg,
     updateBanner,
     updateProfile,
-    externalProfile,
     importBlocks,
     importFollows,
     deleteAccount,

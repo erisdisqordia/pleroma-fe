@@ -13,7 +13,7 @@ function showWhoToFollow (panel, reply) {
     toFollow.img = img
     toFollow.name = name
 
-    panel.$store.state.api.backendInteractor.externalProfile(name)
+    panel.$store.state.api.backendInteractor.fetchUser({ id: name })
       .then((externalUser) => {
         if (!externalUser.error) {
           panel.$store.commit('addNewUsers', [externalUser])

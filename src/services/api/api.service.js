@@ -4,7 +4,6 @@ import 'whatwg-fetch'
 import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */
-const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
@@ -218,14 +217,6 @@ const authHeaders = (accessToken) => {
   } else {
     return { }
   }
-}
-
-const externalProfile = ({ profileUrl, credentials }) => {
-  let url = `${EXTERNAL_PROFILE_URL}?profileurl=${profileUrl}`
-  return fetch(url, {
-    headers: authHeaders(credentials),
-    method: 'GET'
-  }).then((data) => data.json())
 }
 
 const followUser = ({ id, credentials }) => {
@@ -966,7 +957,6 @@ const apiService = {
   updateBg,
   updateProfile,
   updateBanner,
-  externalProfile,
   importBlocks,
   importFollows,
   deleteAccount,

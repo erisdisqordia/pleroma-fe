@@ -88,7 +88,7 @@
     "followed_you": "Zu jarraitzen zaitu",
     "load_older": "Kargatu jakinarazpen zaharragoak",
     "notifications": "Jakinarazpenak",
-    "read": "Irakurri!",
+    "read": "Irakurrita!",
     "repeated_you": "zure mezua errepikatu du",
     "no_more_notifications": "Ez dago jakinarazpen gehiago"
   },
@@ -116,7 +116,7 @@
   },
   "post_status": {
     "new_status": "Mezu berri bat idatzi",
-    "account_not_locked_warning": "Zure kontua ez dago {0}. Edozeinek jarraitzen hastearekin, zure mezuak irakur dezake.",
+    "account_not_locked_warning": "Zure kontua ez dago {0}. Edozeinek jarraitzen hastearekin, zure mezuak irakur ditzake.",
     "account_not_locked_warning_link": "Blokeatuta",
     "attachments_sensitive": "Nabarmendu eranskinak hunkigarri gisa ",
     "content_type": {
@@ -136,10 +136,10 @@
       "unlisted": "Mezu hau ez da argitaratuko Denbora-lerro Publikoan ezta Ezagutzen den Sarean"
     },
     "scope": {
-      "direct": "Zuzena - Bidali aipatutako erabiltzaileei besterik ez",
-      "private": "Jarraitzaileentzako bakarrik- Bidali jarraitzaileentzat bakarrik",
-      "public": "Publickoa - Bistaratu denbora-lerro publikoetan",
-      "unlisted": "Zerrendatu gabea - ez bidali denbora-lerro publikoetan"
+      "direct": "Zuzena: Bidali aipatutako erabiltzaileei besterik ez",
+      "private": "Jarraitzaileentzako bakarrik: Bidali jarraitzaileentzat bakarrik",
+      "public": "Publikoa: Bistaratu denbora-lerro publikoetan",
+      "unlisted": "Zerrendatu gabea: ez bidali denbora-lerro publikoetara"
     }
   },
   "registration": {
@@ -276,7 +276,7 @@
     "no_blocks": "Ez daude erabiltzaile blokeatutak",
     "no_mutes": "Ez daude erabiltzaile mututuak",
     "hide_follows_description": "Ez erakutsi nor jarraitzen ari naizen",
-    "hide_followers_description": "Ez erakutsi nor ari de ni jarraitzen",
+    "hide_followers_description": "Ez erakutsi nor ari den ni jarraitzen",
     "show_admin_badge": "Erakutsi Administratzaile etiketa nire profilan",
     "show_moderator_badge": "Erakutsi Moderatzaile etiketa nire profilan",
     "nsfw_clickthrough": "Gaitu klika hunkigarri eranskinak ezkutatzeko",
@@ -456,8 +456,8 @@
   "time": {
     "day": "{0} egun",
     "days": "{0} egun",
-    "day_short": "{0}d",
-    "days_short": "{0}d",
+    "day_short": "{0}e",
+    "days_short": "{0}e",
     "hour": "{0} ordu",
     "hours": "{0} ordu",
     "hour_short": "{0}o",
@@ -492,7 +492,7 @@
     "conversation": "Elkarrizketa",
     "error_fetching": "Errorea eguneraketak eskuratzen",
     "load_older": "Kargatu mezu zaharragoak",
-    "no_retweet_hint": "Mezu hau jarraitzailentzko bakarrik markatuta dago eta ezin da errepikatu",
+    "no_retweet_hint": "Mezu hau jarraitzailentzako bakarrik markatuta dago eta ezin da errepikatu",
     "repeated": "Errepikatuta",
     "show_new": "Berriena erakutsi",
     "up_to_date": "Eguneratuta",
@@ -507,7 +507,7 @@
     "unpin": "Aingura ezeztatu profilatik",
     "pinned": "Ainguratuta",
     "delete_confirm": "Mezu hau benetan ezabatu nahi duzu?",
-    "reply_to": "Erantzun",
+    "reply_to": "Erantzuten",
     "replies_list": "Erantzunak:",
     "mute_conversation": "Elkarrizketa isilarazi",
     "unmute_conversation": "Elkarrizketa aktibatu"
@@ -583,7 +583,7 @@
   },
   "tool_tip": {
     "media_upload": "Multimedia igo",
-    "repeat": "Erreplikatu",
+    "repeat": "Errepikatu",
     "reply": "Erantzun",
     "favorite": "Gogokoa",
     "user_settings": "Erabiltzaile ezarpenak"

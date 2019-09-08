@@ -70,7 +70,6 @@
       ref="sideDrawer"
       :logout="logout"
     />
-    <MobilePostStatusModal />
   </div>
 </template>
 

@@ -3,7 +3,6 @@ import oauthApi from '../services/new_api/oauth.js'
 import { compact, map, each, merge, last, concat, uniq } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
-import { humanizeErrors } from './errors'
 
 // TODO: Unify with mergeOrAdd in statuses.js
 export const mergeOrAdd = (arr, obj, item) => {
@@ -165,13 +164,13 @@ export const mutations = {
       state.currentUser.muteIds.push(muteId)
     }
   },
-  setPinned (state, status) {
+  setPinnedToUser (state, status) {
     const user = state.usersObject[status.user.id]
-    const index = user.pinnedStatuseIds.indexOf(status.id)
+    const index = user.pinnedStatusIds.indexOf(status.id)
     if (status.pinned && index === -1) {
-      user.pinnedStatuseIds.push(status.id)
+      user.pinnedStatusIds.push(status.id)
     } else if (!status.pinned && index !== -1) {
-      user.pinnedStatuseIds.splice(index, 1)
+      user.pinnedStatusIds.splice(index, 1)
     }
   },
   setUserForStatus (state, status) {
@@ -339,13 +338,13 @@ const users = {
         // Reconnect users to statuses
         store.commit('setUserForStatus', status)
         // Set pinned statuses to user
-        store.commit('setPinned', status)
+        store.commit('setPinnedToUser', status)
       })
       each(compact(map(statuses, 'retweeted_status')), (status) => {
         // Reconnect users to retweets
         store.commit('setUserForStatus', status)
         // Set pinned retweets to user
-        store.commit('setPinned', status)
+        store.commit('setPinnedToUser', status)
       })
     },
     addNewNotifications (store, { notifications }) {
@@ -382,16 +381,8 @@ const users = {
         store.dispatch('loginUser', data.access_token)
       } catch (e) {
         let errors = e.message
-        // replace ap_id with username
-        if (typeof errors === 'object') {
-          if (errors.ap_id) {
-            errors.username = errors.ap_id
-            delete errors.ap_id
-          }
-          errors = humanizeErrors(errors)
-        }
         store.commit('signUpFailure', errors)
-        throw Error(errors)
+        throw e
       }
     },
     async getCaptcha (store) {
@@ -419,7 +410,7 @@ const users = {
         })
         .then(() => {
           store.commit('clearCurrentUser')
-          store.dispatch('disconnectFromChat')
+          store.dispatch('disconnectFromSocket')
           store.commit('clearToken')
           store.dispatch('stopFetching', 'friends')
           store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))

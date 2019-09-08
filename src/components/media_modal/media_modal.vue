@@ -63,6 +63,7 @@
   max-width: 90%;
   max-height: 90%;
   box-shadow: 0px 5px 15px 0 rgba(0, 0, 0, 0.5);
+  image-orientation: from-image; // NOTE: only FF supports this
 }
 
 .modal-view-button-arrow {

@@ -16,6 +16,16 @@ const ExtraButtons = {
       this.$store.dispatch('unpinStatus', this.status.id)
         .then(() => this.$emit('onSuccess'))
         .catch(err => this.$emit('onError', err.error.error))
+    },
+    muteConversation () {
+      this.$store.dispatch('muteConversation', this.status.id)
+        .then(() => this.$emit('onSuccess'))
+        .catch(err => this.$emit('onError', err.error.error))
+    },
+    unmuteConversation () {
+      this.$store.dispatch('unmuteConversation', this.status.id)
+        .then(() => this.$emit('onSuccess'))
+        .catch(err => this.$emit('onError', err.error.error))
     }
   },
   computed: {
@@ -31,8 +41,8 @@ const ExtraButtons = {
     canPin () {
       return this.ownStatus && (this.status.visibility === 'public' || this.status.visibility === 'unlisted')
     },
-    enabled () {
-      return this.canPin || this.canDelete
+    canMute () {
+      return !!this.currentUser
     }
   }
 }

@@ -42,7 +42,7 @@ const conversation = {
     'statusoid',
     'collapsable',
     'isPage',
-    'showPinned'
+    'pinnedStatusIdsObject'
   ],
   created () {
     if (this.isPage) {
@@ -110,7 +110,7 @@ const conversation = {
     Status
   },
   watch: {
-    '$route': 'fetchConversation',
+    status: 'fetchConversation',
     expanded (value) {
       if (value) {
         this.fetchConversation()
@@ -149,9 +149,6 @@ const conversation = {
     },
     toggleExpanded () {
       this.expanded = !this.expanded
-      if (!this.expanded) {
-        this.setHighlight(null)
-      }
     }
   }
 }

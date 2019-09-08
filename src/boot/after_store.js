@@ -109,12 +109,6 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('noAttachmentLinks')
   copyInstanceOption('showFeaturesPanel')
 
-  if ((config.chatDisabled)) {
-    store.dispatch('disableChat')
-  } else {
-    store.dispatch('initializeSocket')
-  }
-
   return store.dispatch('setTheme', config['theme'])
 }
 
@@ -254,6 +248,7 @@ const getNodeInfo = async ({ store }) => {
       store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
       store.dispatch('setInstanceOption', { name: 'pollsAvailable', value: features.includes('polls') })
       store.dispatch('setInstanceOption', { name: 'pollLimits', value: metadata.pollLimits })
+      store.dispatch('setInstanceOption', { name: 'mailerEnabled', value: metadata.mailerEnabled })
 
       store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
       store.dispatch('setInstanceOption', { name: 'postFormats', value: metadata.postFormats })

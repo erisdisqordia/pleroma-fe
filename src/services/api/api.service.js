@@ -1,18 +1,14 @@
 import { each, map, concat, last } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
-import { StatusCodeError } from '../errors/errors'
+import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */
-const EXTERNAL_PROFILE_URL = '/api/externalprofile/show.json'
 const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
-const FOLLOW_REQUESTS_URL = '/api/pleroma/friend_requests'
-const APPROVE_USER_URL = '/api/pleroma/friendships/approve'
-const DENY_USER_URL = '/api/pleroma/friendships/deny'
 const TAG_USER_URL = '/api/pleroma/admin/users/tag'
 const PERMISSION_GROUP_URL = (screenName, right) => `/api/pleroma/admin/users/${screenName}/permission_group/${right}`
 const ACTIVATION_STATUS_URL = screenName => `/api/pleroma/admin/users/${screenName}/activation_status`
@@ -40,6 +36,9 @@ const MASTODON_FOLLOW_URL = id => `/api/v1/accounts/${id}/follow`
 const MASTODON_UNFOLLOW_URL = id => `/api/v1/accounts/${id}/unfollow`
 const MASTODON_FOLLOWING_URL = id => `/api/v1/accounts/${id}/following`
 const MASTODON_FOLLOWERS_URL = id => `/api/v1/accounts/${id}/followers`
+const MASTODON_FOLLOW_REQUESTS_URL = '/api/v1/follow_requests'
+const MASTODON_APPROVE_USER_URL = id => `/api/v1/follow_requests/${id}/authorize`
+const MASTODON_DENY_USER_URL = id => `/api/v1/follow_requests/${id}/reject`
 const MASTODON_DIRECT_MESSAGES_TIMELINE_URL = '/api/v1/timelines/direct'
 const MASTODON_PUBLIC_TIMELINE = '/api/v1/timelines/public'
 const MASTODON_USER_HOME_TIMELINE_URL = '/api/v1/timelines/home'
@@ -67,6 +66,8 @@ const MASTODON_PROFILE_UPDATE_URL = '/api/v1/accounts/update_credentials'
 const MASTODON_REPORT_USER_URL = '/api/v1/reports'
 const MASTODON_PIN_OWN_STATUS = id => `/api/v1/statuses/${id}/pin`
 const MASTODON_UNPIN_OWN_STATUS = id => `/api/v1/statuses/${id}/unpin`
+const MASTODON_MUTE_CONVERSATION = id => `/api/v1/statuses/${id}/mute`
+const MASTODON_UNMUTE_CONVERSATION = id => `/api/v1/statuses/${id}/unmute`
 const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
 
@@ -199,12 +200,11 @@ const register = ({ params, credentials }) => {
       ...rest
     })
   })
-    .then((response) => [response.ok, response])
-    .then(([ok, response]) => {
-      if (ok) {
+    .then((response) => {
+      if (response.ok) {
         return response.json()
       } else {
-        return response.json().then((error) => { throw new Error(error) })
+        return response.json().then((error) => { throw new RegistrationError(error) })
       }
     })
 }
@@ -217,14 +217,6 @@ const authHeaders = (accessToken) => {
   } else {
     return { }
   }
-}
-
-const externalProfile = ({ profileUrl, credentials }) => {
-  let url = `${EXTERNAL_PROFILE_URL}?profileurl=${profileUrl}`
-  return fetch(url, {
-    headers: authHeaders(credentials),
-    method: 'GET'
-  }).then((data) => data.json())
 }
 
 const followUser = ({ id, credentials }) => {
@@ -253,6 +245,16 @@ const unpinOwnStatus = ({ id, credentials }) => {
     .then((data) => parseStatus(data))
 }
 
+const muteConversation = ({ id, credentials }) => {
+  return promisedRequest({ url: MASTODON_MUTE_CONVERSATION(id), credentials, method: 'POST' })
+    .then((data) => parseStatus(data))
+}
+
+const unmuteConversation = ({ id, credentials }) => {
+  return promisedRequest({ url: MASTODON_UNMUTE_CONVERSATION(id), credentials, method: 'POST' })
+    .then((data) => parseStatus(data))
+}
+
 const blockUser = ({ id, credentials }) => {
   return fetch(MASTODON_BLOCK_USER_URL(id), {
     headers: authHeaders(credentials),
@@ -268,7 +270,7 @@ const unblockUser = ({ id, credentials }) => {
 }
 
 const approveUser = ({ id, credentials }) => {
-  let url = `${APPROVE_USER_URL}?user_id=${id}`
+  let url = MASTODON_APPROVE_USER_URL(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -276,7 +278,7 @@ const approveUser = ({ id, credentials }) => {
 }
 
 const denyUser = ({ id, credentials }) => {
-  let url = `${DENY_USER_URL}?user_id=${id}`
+  let url = MASTODON_DENY_USER_URL(id)
   return fetch(url, {
     headers: authHeaders(credentials),
     method: 'POST'
@@ -352,9 +354,10 @@ const fetchFollowers = ({ id, maxId, sinceId, limit = 20, credentials }) => {
 }
 
 const fetchFollowRequests = ({ credentials }) => {
-  const url = FOLLOW_REQUESTS_URL
+  const url = MASTODON_FOLLOW_REQUESTS_URL
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => data.json())
+    .then((data) => data.map(parseUser))
 }
 
 const fetchConversation = ({ id, credentials }) => {
@@ -921,6 +924,8 @@ const apiService = {
   unfollowUser,
   pinOwnStatus,
   unpinOwnStatus,
+  muteConversation,
+  unmuteConversation,
   blockUser,
   unblockUser,
   fetchUser,
@@ -952,7 +957,6 @@ const apiService = {
   updateBg,
   updateProfile,
   updateBanner,
-  externalProfile,
   importBlocks,
   importFollows,
   deleteAccount,

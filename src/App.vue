@@ -41,6 +41,7 @@
           <search-bar
             class="nav-icon mobile-hidden"
             @toggled="onSearchBarToggled"
+            @click.stop.native
           />
           <router-link
             class="mobile-hidden"
@@ -106,6 +107,7 @@
       :floating="true"
       class="floating-chat mobile-hidden"
     />
+    <MobilePostStatusModal />
     <UserReportingModal />
     <portal-target name="modal" />
   </div>

@@ -278,8 +278,15 @@
   "status": {
     "favorites": "Tykkäykset",
     "repeats": "Toistot",
+    "delete": "Poista",
+    "pin": "Kiinnitä profiiliisi",
+    "unpin": "Poista kiinnitys",
+    "pinned": "Kiinnitetty",
+    "delete_confirm": "Haluatko varmasti postaa viestin?",
     "reply_to": "Vastaus",
-    "replies_list": "Vastaukset:"
+    "replies_list": "Vastaukset:",
+    "mute_conversation": "Hiljennä keskustelu",
+    "unmute_conversation": "Poista hiljennys"
   },
   "user_card": {
     "approve": "Hyväksy",

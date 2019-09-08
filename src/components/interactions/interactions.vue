@@ -10,18 +10,15 @@
       :on-switch="onModeSwitch"
     >
       <span
-        data-tab-dummy
-        data-filter="mentions"
+        key="mentions"
         :label="$t('nav.mentions')"
       />
       <span
-        data-tab-dummy
-        data-filter="likes+repeats"
+        key="likes+repeats"
         :label="$t('interactions.favs_repeats')"
       />
       <span
-        data-tab-dummy
-        data-filter="follows"
+        key="follows"
         :label="$t('interactions.follows')"
       />
     </tab-switcher>

@@ -190,6 +190,7 @@
 
   .video {
     width: 100%;
+    height: 100%;
   }
 
   .play-icon {
@@ -286,7 +287,7 @@
     }
 
     img {
-      image-orientation: from-image;
+      image-orientation: from-image; // NOTE: only FF supports this
     }
   }
 }

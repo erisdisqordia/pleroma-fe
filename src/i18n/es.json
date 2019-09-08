@@ -9,9 +9,9 @@
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
-    "media_proxy": "Media proxy",
+    "media_proxy": "Proxy de medios",
     "scope_options": "Opciones del alcance de la visibilidad",
-    "text_limit": "Límite de carácteres",
+    "text_limit": "Límite de caracteres",
     "title": "Características",
     "who_to_follow": "A quién seguir"
   },
@@ -47,19 +47,19 @@
   "login": {
     "login": "Identificación",
     "description": "Identificación con OAuth",
-    "logout": "Salir",
+    "logout": "Cerrar sesión",
     "password": "Contraseña",
     "placeholder": "p.ej. lain",
-    "register": "Registrar",
+    "register": "Registrarse",
     "username": "Usuario",
     "hint": "Inicia sesión para unirte a la discusión",
-    "authentication_code": "Código de autentificación",
+    "authentication_code": "Código de autenticación",
     "enter_recovery_code": "Inserta el código de recuperación",
-    "enter_two_factor_code": "Inserta el código de doble factor",
+    "enter_two_factor_code": "Inserta el código de dos factores",
     "recovery_code": "Código de recuperación",
     "heading" : {
-      "totp" : "Autentificación de doble factor",
-      "recovery" : "Recuperación de doble factor"
+      "totp" : "Autenticación de dos factores",
+      "recovery" : "Recuperación de dos factores"
     }
   },
    "media_modal": {
@@ -67,13 +67,13 @@
     "next": "Siguiente"
   },
   "nav": {
-    "about": "Sobre",
+    "about": "Acerca de",
     "back": "Volver",
     "chat": "Chat Local",
-    "friend_requests": "Solicitudes de amistad",
+    "friend_requests": "Solicitudes de seguimiento",
     "mentions": "Menciones",
     "interactions": "Interacciones",
-    "dms": "Mensajes Directo",
+    "dms": "Mensajes Directos",
     "public_tl": "Línea Temporal Pública",
     "timeline": "Línea Temporal",
     "twkn": "Toda La Red Conocida",
@@ -89,7 +89,7 @@
     "load_older": "Cargar notificaciones antiguas",
     "notifications": "Notificaciones",
     "read": "¡Leído!",
-    "repeated_you": "repite tu estado",
+    "repeated_you": "repitió tu estado",
     "no_more_notifications": "No hay más notificaciones"
   },
   "polls": {
@@ -100,16 +100,19 @@
     "vote": "Votar",
     "type": "Tipo de encuesta",
     "single_choice": "Elección única",
-    "multiple_choices": "Múltiples elecciones",
+    "multiple_choices": "Elección múltiple",
     "expiry": "Tiempo de vida de la encuesta",
     "expires_in": "La encuensta termina en {0}",
     "expired": "La encuesta terminó hace {0}",
     "not_enough_options": "Muy pocas opciones únicas en la encuesta"
   },
+  "stickers": {
+    "add_sticker": "Añadir Pegatina"
+  },
   "interactions": {
     "favs_repeats": "Favoritos y Repetidos",
     "follows": "Nuevos seguidores",
-    "load_older": "Cargar interacciones antiguas"
+    "load_older": "Cargar interacciones más antiguas"
   },
   "post_status": {
     "new_status": "Publicar un nuevo estado",
@@ -134,20 +137,20 @@
     },
     "scope": {
       "direct": "Directo - Solo para los usuarios mencionados.",
-      "private": "Solo-Seguidores - Solo tus seguidores leeran la publicación",
+      "private": "Solo-seguidores - Solo tus seguidores leerán la publicación",
       "public": "Público - Entradas visibles en las Líneas Temporales Públicas",
-      "unlisted": "Sin Listar - Entradas no visibles en las Líneas Temporales Públicas"
+      "unlisted": "Sin listar - Entradas no visibles en las Líneas Temporales Públicas"
     }
   },
   "registration": {
     "bio": "Biografía",
     "email": "Correo electrónico",
     "fullname": "Nombre a mostrar",
-    "password_confirm": "Confirmación de contraseña",
+    "password_confirm": "Confirmar contraseña",
     "registration": "Registro",
     "token": "Token de invitación",
     "captcha": "CAPTCHA",
-    "new_captcha": "Click en la imagen para obtener un nuevo captca",
+    "new_captcha": "Haz click en la imagen para obtener un nuevo captcha",
     "username_placeholder": "p.ej. lain",
     "fullname_placeholder": "p.ej. Lain Iwakura",
     "bio_placeholder": "e.g.\nHola, soy un ejemplo.\nAquí puedes poner algo representativo tuyo... o no.",
@@ -161,7 +164,7 @@
     }
   },
    "selectable_list": {
-    "select_all": "Seleccionarlo todo"
+    "select_all": "Seleccionar todo"
   },
   "settings": {
     "app_name": "Nombre de la aplicación",
@@ -172,8 +175,8 @@
       "setup_otp" : "Configurar OTP",
       "wait_pre_setup_otp" : "preconfiguración OTP",
       "confirm_and_enable" : "Confirmar y habilitar OTP",
-      "title": "Autentificación de Doble Factor",
-      "generate_new_recovery_codes" : "Generar nuevos códigos de recuperación",
+      "title": "Autentificación de dos factores",
+      "generate_new_recovery_codes" : "Generar códigos de recuperación nuevos",
       "warning_of_generate_new_codes" : "Cuando generas nuevos códigos de recuperación, los antiguos dejarán de funcionar.",
       "recovery_codes" : "Códigos de recuperación.",
       "waiting_a_recovery_codes": "Recibiendo códigos de respaldo",
@@ -181,16 +184,16 @@
       "authentication_methods" : "Métodos de autentificación",
       "scan": {
         "title": "Escanear",
-        "desc": "Usando su aplicación de doble factor, escanee este código QR o ingrese la clave de texto:",
+        "desc": "Usando su aplicación de dos factores, escanee este código QR o ingrese la clave de texto:",
         "secret_code": "Clave"
       },
       "verify": {
-        "desc": "Para habilitar la autenticación de doble factor, ingrese el código de su aplicación 2FA:"
+        "desc": "Para habilitar la autenticación de dos factores, ingrese el código de su aplicación 2FA:"
       }
     },
     "attachmentRadius": "Adjuntos",
     "attachments": "Adjuntos",
-    "autoload": "Activar carga automática al llegar al final de la página",
+    "autoload": "Habilitar carga automática al llegar al final de la página",
     "avatar": "Avatar",
     "avatarAltRadius": "Avatares (Notificaciones)",
     "avatarRadius": "Avatares",
@@ -224,12 +227,12 @@
     "delete_account_instructions": "Escribe tu contraseña para confirmar la eliminación de tu cuenta.",
     "avatar_size_instruction": "El tamaño mínimo recomendado para el avatar es de 150X150 píxeles.",
     "export_theme": "Exportar tema",
-    "filtering": "Filtros",
+    "filtering": "Filtrado",
     "filtering_explanation": "Todos los estados que contengan estas palabras serán silenciados, una por línea",
     "follow_export": "Exportar personas que tú sigues",
-    "follow_export_button": "Exporta tus seguidores a un archivo csv",
+    "follow_export_button": "Exporta tus seguidores a un fichero csv",
     "follow_import": "Importar personas que tú sigues",
-    "follow_import_error": "Error al importal el archivo",
+    "follow_import_error": "Error al importar el fichero",
     "follows_imported": "¡Importado! Procesarlos llevará tiempo.",
     "foreground": "Primer plano",
     "general": "General",
@@ -259,7 +262,7 @@
     "loop_video": "Vídeos en bucle",
     "loop_video_silent_only": "Bucle solo en vídeos sin sonido (p.ej. \"gifs\" de Mastodon)",
     "mutes_tab": "Silenciados",
-    "play_videos_in_modal": "Reproducir los vídeos directamente en el visor de medios",
+    "play_videos_in_modal": "Reproducir los vídeos en un marco emergente",
     "use_contain_fit": "No recortar los adjuntos en miniaturas",
     "name": "Nombre",
     "name_bio": "Nombre y Biografía",
@@ -274,8 +277,8 @@
     "no_mutes": "No hay usuarios sinlenciados",
     "hide_follows_description": "No mostrar a quién sigo",
     "hide_followers_description": "No mostrar quién me sigue",
-    "show_admin_badge": "Mostrar la placa de administrador en mi perfil",
-    "show_moderator_badge": "Mostrar la placa de moderador en mi perfil",
+    "show_admin_badge": "Mostrar la insignia de Administrador en mi perfil",
+    "show_moderator_badge": "Mostrar la insignia de Moderador en mi perfil",
     "nsfw_clickthrough": "Activar el clic para ocultar los adjuntos NSFW",
     "oauth_tokens": "Tokens de OAuth",
     "token": "Token",
@@ -288,13 +291,13 @@
     "profile_background": "Fondo del Perfil",
     "profile_banner": "Cabecera del Perfil",
     "profile_tab": "Perfil",
-    "radii_help": "Estable el redondeo de las esquinas del interfaz (en píxeles)",
+    "radii_help": "Estable el redondeo de las esquinas de la interfaz (en píxeles)",
     "replies_in_timeline": "Réplicas en la línea temporal",
-    "reply_link_preview": "Activar la previsualización del enlace de responder al pasar el ratón por encim",
+    "reply_link_preview": "Activar la previsualización del enlace de responder al pasar el ratón por encima",
     "reply_visibility_all": "Mostrar todas las réplicas",
     "reply_visibility_following": "Solo mostrar réplicas para mí o usuarios a los que sigo",
     "reply_visibility_self": "Solo mostrar réplicas para mí",
-    "autohide_floating_post_button": "Ocultar automáticamente el botón 'Nueva Publicación' (móvil)",
+    "autohide_floating_post_button": "Ocultar automáticamente el botón 'Nueva Publicación' (para móviles)",
     "saving_err": "Error al guardar los ajustes",
     "saving_ok": "Ajustes guardados",
     "search_user_to_block": "Buscar usuarios a bloquear",
@@ -303,25 +306,25 @@
     "scope_copy": "Copiar la visibilidad de la publicación cuando contestamos (En los mensajes directos (MDs) siempre se copia)",
     "minimal_scopes_mode": "Minimizar las opciones de publicación",
     "set_new_avatar": "Cambiar avatar",
-    "set_new_profile_background": "Cambiar fondo del perfil",
-    "set_new_profile_banner": "Cambiar cabecera del perfil",
+    "set_new_profile_background": "Cambiar el fondo del perfil",
+    "set_new_profile_banner": "Cambiar la cabecera del perfil",
     "settings": "Ajustes",
     "subject_input_always_show": "Mostrar siempre el campo del tema",
-    "subject_line_behavior": "Copiar el tema en las contestaciones",
-    "subject_line_email": "Tipo email: \"re: tema\"",
-    "subject_line_mastodon": "Tipo mastodon: copiar como es",
+    "subject_line_behavior": "Copiar el tema en las respuestas",
+    "subject_line_email": "Como email: \"re: tema\"",
+    "subject_line_mastodon": "Como mastodon: copiar como es",
     "subject_line_noop": "No copiar",
     "post_status_content_type": "Formato de publicación",
     "stop_gifs": "Iniciar GIFs al pasar el ratón",
-    "streaming": "Habilite la transmisión automática de nuevas publicaciones cuando se desplaza hacia la parte superior",
+    "streaming": "Habilitar la transmisión automática de nuevas publicaciones cuando se desplaza hacia la parte superior",
     "text": "Texto",
     "theme": "Tema",
     "theme_help": "Use códigos de color hexadecimales (#rrggbb) para personalizar su tema de colores.",
-    "theme_help_v2_1": "También puede invalidar los colores y la opacidad de ciertos componentes si activa la casilla de verificación, use el botón \"Borrar todo\" para deshacer los cambios.",
-    "theme_help_v2_2": "Los iconos debajo de algunas entradas son indicadores de contraste de fondo/texto, desplace el ratón para obtener información detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
+    "theme_help_v2_1": "También puede invalidar los colores y la opacidad de ciertos componentes si activa la casilla de verificación. Use el botón \"Borrar todo\" para deshacer los cambios.",
+    "theme_help_v2_2": "Los iconos debajo de algunas entradas son indicadores de contraste de fondo/texto, desplace el ratón por encima para obtener información más detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
     "tooltipRadius": "Información/alertas",
      "upload_a_photo": "Subir una foto",
-    "user_settings": "Ajustes de Usuario",
+    "user_settings": "Ajustes del Usuario",
     "values": {
       "false": "no",
       "true": "sí"
@@ -392,14 +395,14 @@
         "shadow_id": "Sombra #{value}",
         "blur": "Difuminar",
         "spread": "Cantidad",
-        "inset": "Insertada",
+        "inset": "Sombra interior",
         "hint": "Para las sombras, también puede usar --variable como un valor de color para usar las variables CSS3. Tenga en cuenta que establecer la opacidad no funcionará en este caso.",
         "filter_hint": {
           "always_drop_shadow": "Advertencia, esta sombra siempre usa {0} cuando el navegador lo soporta.",
           "drop_shadow_syntax": "{0} no soporta el parámetro {1} y la palabra clave {2}.",
-          "avatar_inset": "Tenga en cuenta que la combinación de sombras insertadas como no-insertadas en los avatares, puede dar resultados inesperados con los avatares transparentes.",
+          "avatar_inset": "Tenga en cuenta que la combinación de sombras interiores como no-interiores en los avatares, puede dar resultados inesperados con los avatares transparentes.",
           "spread_zero": "Sombras con una cantidad > 0 aparecerá como si estuviera puesto a cero",
-          "inset_classic": "Las sombras insertadas estarán usando {0}"
+          "inset_classic": "Las sombras interiores estarán usando {0}"
         },
         "components": {
           "panel": "Panel",
@@ -417,7 +420,7 @@
       },
       "fonts": {
         "_tab_label": "Fuentes",
-        "help": "Seleccione la fuente para utilizar para los elementos de la interfaz de usuario. Para \"personalizado\", debe ingresar el nombre exacto de la fuente tal como aparece en el sistema.",
+        "help": "Seleccione la fuente a utilizar para los elementos de la interfaz de usuario. Para \"personalizar\", debe ingresar el nombre exacto de la fuente tal como aparece en el sistema.",
         "components": {
           "interface": "Interfaz",
           "input": "Campos de entrada",
@@ -476,7 +479,7 @@
     "second_short": "{0}s",
     "seconds_short": "{0}s",
     "week": "{0} semana",
-    "weeks": "{0} semana",
+    "weeks": "{0} semanas",
     "week_short": "{0}sem",
     "weeks_short": "{0}sem",
     "year": "{0} año",
@@ -504,11 +507,11 @@
     "unpin": "Desclavar de tu perfil",
     "pinned": "Fijado",
     "delete_confirm": "¿Realmente quieres borrar la publicación?",
-    "reply_to": "Responder a",
+    "reply_to": "Respondiendo a",
     "replies_list": "Respuestas:"
   },
   "user_card": {
-    "approve": "Aprovar",
+    "approve": "Aprobar",
     "block": "Bloquear",
     "blocked": "¡Bloqueado!",
     "deny": "Denegar",
@@ -535,8 +538,8 @@
     "unblock": "Desbloquear",
     "unblock_progress": "Desbloqueando...",
     "block_progress": "Bloqueando...",
-    "unmute": "Desenmudecer",
-    "unmute_progress": "Sesenmudeciendo...",
+    "unmute": "Quitar silencio",
+    "unmute_progress": "Quitando silencio...",
     "mute_progress": "Silenciando...",
     "admin_menu": {
       "moderation": "Moderación",
@@ -546,7 +549,7 @@
       "revoke_moderator": "Revocar permisos de Moderador",
       "activate_account": "Activar cuenta",
       "deactivate_account": "Desactivar cuenta",
-      "delete_account": "Borrar cuenta",
+      "delete_account": "Eliminar cuenta",
       "force_nsfw": "Marcar todas las publicaciones como NSFW (no es seguro/apropiado para el trabajo)",
       "strip_media": "Eliminar archivos multimedia de las publicaciones",
       "force_unlisted": "Forzar que se publique en el modo -Sin Listar-",
@@ -554,12 +557,12 @@
       "disable_remote_subscription": "No permitir que usuarios de instancias remotas te siga.",
       "disable_any_subscription": "No permitir que ningún usuario te siga",
       "quarantine": "No permitir publicaciones de usuarios de instancias remotas",
-      "delete_user": "Borrar usuario",
+      "delete_user": "Eliminar usuario",
       "delete_user_confirmation": "¿Estás completamente seguro? Esta acción no se puede deshacer."
     }
   },
   "user_profile": {
-    "timeline_title": "Linea temporal del usuario",
+    "timeline_title": "Linea Temporal del Usuario",
     "profile_does_not_exist": "Lo sentimos, este perfil no existe.",
     "profile_loading_error": "Lo sentimos, hubo un error al cargar este perfil."
   },
@@ -599,7 +602,7 @@
   },
   "search": {
     "people": "Personas",
-    "hashtags": "Hashtags",
+    "hashtags": "Etiquetas",
     "person_talking": "{count} personas hablando",
     "people_talking": "{count} gente hablando",
     "no_results": "Sin resultados"

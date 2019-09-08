@@ -87,6 +87,7 @@
   &-expanded-content {
     flex: 1;
     margin-left: 0.7em;
+    min-width: 0;
   }
 }
 </style>

@@ -1,7 +1,20 @@
 import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import Conversation from '../conversation/conversation.vue'
-import { throttle } from 'lodash'
+import { throttle, keyBy } from 'lodash'
+
+export const getExcludedStatusIdsByPinning = (statuses, pinnedStatusIds) => {
+  const ids = []
+  if (pinnedStatusIds && pinnedStatusIds.length > 0) {
+    for (let status of statuses) {
+      if (!pinnedStatusIds.includes(status.id)) {
+        break
+      }
+      ids.push(status.id)
+    }
+  }
+  return ids
+}
 
 const Timeline = {
   props: [
@@ -11,7 +24,8 @@ const Timeline = {
     'userId',
     'tag',
     'embedded',
-    'count'
+    'count',
+    'pinnedStatusIds'
   ],
   data () {
     return {
@@ -39,6 +53,15 @@ const Timeline = {
         body: ['timeline-body'].concat(!this.embedded ? ['panel-body'] : []),
         footer: ['timeline-footer'].concat(!this.embedded ? ['panel-footer'] : [])
       }
+    },
+    // id map of statuses which need to be hidden in the main list due to pinning logic
+    excludedStatusIdsObject () {
+      const ids = getExcludedStatusIdsByPinning(this.timeline.visibleStatuses, this.pinnedStatusIds)
+      // Convert id array to object
+      return keyBy(ids)
+    },
+    pinnedStatusIdsObject () {
+      return keyBy(this.pinnedStatusIds)
     }
   },
   components: {

@@ -21,11 +21,12 @@ const WhoToFollow = {
           name: i.display_name,
           screen_name: i.acct,
           profile_image_url: i.avatar || '/images/avi.png',
-          profile_image_url_original: i.avatar || '/images/avi.png'
+          profile_image_url_original: i.avatar || '/images/avi.png',
+          statusnet_profile_url: i.url
         }
         this.users.push(user)
 
-        this.$store.state.api.backendInteractor.externalProfile(user.screen_name)
+        this.$store.state.api.backendInteractor.fetchUser({ id: user.screen_name })
           .then((externalUser) => {
             if (!externalUser.error) {
               this.$store.commit('addNewUsers', [externalUser])

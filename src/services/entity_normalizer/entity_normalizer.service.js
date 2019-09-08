@@ -65,6 +65,7 @@ export const parseUser = (data) => {
 
       if (relationship) {
         output.follows_you = relationship.followed_by
+        output.requested = relationship.requested
         output.following = relationship.following
         output.statusnet_blocking = relationship.blocking
         output.muted = relationship.muting
@@ -152,7 +153,7 @@ export const parseUser = (data) => {
   output.statuses_count = data.statuses_count
   output.friendIds = []
   output.followerIds = []
-  output.pinnedStatuseIds = []
+  output.pinnedStatusIds = []
 
   if (data.pleroma) {
     output.follow_request_count = data.pleroma.follow_request_count
@@ -240,6 +241,7 @@ export const parseStatus = (data) => {
     output.external_url = data.url
     output.poll = data.poll
     output.pinned = data.pinned
+    output.muted = data.muted
   } else {
     output.favorited = data.favorited
     output.fave_num = data.fave_num

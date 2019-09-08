@@ -13,8 +13,8 @@ const Interactions = {
     }
   },
   methods: {
-    onModeSwitch (index, dataset) {
-      this.filterMode = tabModeDict[dataset.filter]
+    onModeSwitch (key) {
+      this.filterMode = tabModeDict[key]
     }
   },
   components: {

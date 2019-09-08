@@ -8,36 +8,28 @@
         :user="user"
         :switcher="true"
         :selected="timeline.viewing"
+        :allow-zooming-avatar="true"
         rounded="top"
       />
       <tab-switcher
-        ref="tabSwitcher"
+        :active-tab="tab"
         :render-only-focused="true"
+        :on-switch="onTabSwitch"
       >
-        <div :label="$t('user_card.statuses')">
-          <div class="timeline">
-            <template v-for="statusId in user.pinnedStatuseIds">
-              <Conversation
-                v-if="timeline.statusesObject[statusId]"
-                :key="statusId"
-                class="status-fadein"
-                :statusoid="timeline.statusesObject[statusId]"
-                :collapsable="true"
-                :show-pinned="true"
-              />
-            </template>
-          </div>
-          <Timeline
-            :count="user.statuses_count"
-            :embedded="true"
-            :title="$t('user_profile.timeline_title')"
-            :timeline="timeline"
-            :timeline-name="'user'"
-            :user-id="userId"
-          />
-        </div>
+        <Timeline
+          key="statuses"
+          :label="$t('user_card.statuses')"
+          :count="user.statuses_count"
+          :embedded="true"
+          :title="$t('user_profile.timeline_title')"
+          :timeline="timeline"
+          timeline-name="user"
+          :user-id="userId"
+          :pinned-status-ids="user.pinnedStatusIds"
+        />
         <div
           v-if="followsTabVisible"
+          key="followees"
           :label="$t('user_card.followees')"
           :disabled="!user.friends_count"
         >
@@ -52,6 +44,7 @@
         </div>
         <div
           v-if="followersTabVisible"
+          key="followers"
           :label="$t('user_card.followers')"
           :disabled="!user.followers_count"
         >
@@ -68,6 +61,7 @@
           </FollowerList>
         </div>
         <Timeline
+          key="media"
           :label="$t('user_card.media')"
           :disabled="!media.visibleStatuses.length"
           :embedded="true"
@@ -78,6 +72,7 @@
         />
         <Timeline
           v-if="isUs"
+          key="favorites"
           :label="$t('user_card.favorites')"
           :disabled="!favorites.visibleStatuses.length"
           :embedded="true"

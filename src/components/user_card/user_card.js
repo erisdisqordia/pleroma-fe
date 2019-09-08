@@ -7,7 +7,7 @@ import { requestFollow, requestUnfollow } from '../../services/follow_manipulate
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 export default {
-  props: [ 'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered' ],
+  props: [ 'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar' ],
   data () {
     return {
       followRequestInProgress: false,
@@ -162,6 +162,14 @@ export default {
     },
     reportUser () {
       this.$store.dispatch('openUserReportingModal', this.user.id)
+    },
+    zoomAvatar () {
+      const attachment = {
+        url: this.user.profile_image_url_original,
+        mimetype: 'image'
+      }
+      this.$store.dispatch('setMedia', [attachment])
+      this.$store.dispatch('setCurrent', attachment)
     }
   }
 }

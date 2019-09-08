@@ -267,7 +267,7 @@
     "loop_video": "Loop videos",
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
     "mutes_tab": "Mutes",
-    "play_videos_in_modal": "Play videos directly in the media viewer",
+    "play_videos_in_modal": "Play videos in a popup frame",
     "use_contain_fit": "Don't crop the attachment in thumbnails",
     "name": "Name",
     "name_bio": "Name & Bio",
@@ -513,7 +513,9 @@
     "pinned": "Pinned",
     "delete_confirm": "Do you really want to delete this status?",
     "reply_to": "Reply to",
-    "replies_list": "Replies:"
+    "replies_list": "Replies:",
+    "mute_conversation": "Mute conversation",
+    "unmute_conversation": "Unmute conversation"
   },
   "user_card": {
     "approve": "Approve",
@@ -611,5 +613,16 @@
     "person_talking": "{count} person talking",
     "people_talking": "{count} people talking",
     "no_results": "No results"
+  },
+  "password_reset": {
+    "forgot_password": "Forgot password?",
+    "password_reset": "Password reset",
+    "instruction": "Enter your email address or username. We will send you a link to reset your password.",
+    "placeholder": "Your email or username",
+    "check_email": "Check your email for a link to reset your password.",
+    "return_home": "Return to the home page",
+    "not_found": "We couldn't find that email or username.",
+    "too_many_requests": "You have reached the limit of attempts, try again later.",
+    "password_reset_disabled": "Password reset is disabled. Please contact your instance administrator."
   }
 }

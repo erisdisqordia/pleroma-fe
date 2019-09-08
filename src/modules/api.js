@@ -6,7 +6,6 @@ const api = {
     backendInteractor: backendInteractorService(),
     fetchers: {},
     socket: null,
-    chatDisabled: false,
     followRequests: []
   },
   mutations: {
@@ -24,9 +23,6 @@ const api = {
     },
     setSocket (state, socket) {
       state.socket = socket
-    },
-    setChatDisabled (state, value) {
-      state.chatDisabled = value
     },
     setFollowRequests (state, value) {
       state.followRequests = value
@@ -55,17 +51,20 @@ const api = {
     setWsToken (store, token) {
       store.commit('setWsToken', token)
     },
-    initializeSocket (store) {
+    initializeSocket ({ dispatch, commit, state, rootState }) {
       // Set up websocket connection
-      if (!store.state.chatDisabled) {
-        const token = store.state.wsToken
+      const token = state.wsToken
+      if (rootState.instance.chatAvailable && typeof token !== 'undefined' && state.socket === null) {
         const socket = new Socket('/socket', { params: { token } })
         socket.connect()
-        store.dispatch('initializeChat', socket)
+
+        commit('setSocket', socket)
+        dispatch('initializeChat', socket)
       }
     },
-    disableChat (store) {
-      store.commit('setChatDisabled', true)
+    disconnectFromSocket ({ commit, state }) {
+      state.socket && state.socket.disconnect()
+      commit('setSocket', null)
     },
     removeFollowRequest (store, request) {
       let requests = store.state.followRequests.filter((it) => it !== request)

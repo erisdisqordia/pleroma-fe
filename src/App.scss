@@ -549,23 +549,6 @@ nav {
   color: var(--faint, $fallback--faint);
   box-shadow: 0px 0px 4px rgba(0,0,0,.6);
   box-shadow: var(--topBarShadow);
-
-  .back-button {
-    display: block;
-    max-width: 99px;
-    transition-property: opacity, max-width;
-    transition-duration: 300ms;
-    transition-timing-function: ease-out;
-
-    i {
-      margin: 0 1em;
-    }
-
-    &.hidden {
-      opacity: 0;
-      max-width: 5px;
-    }
-  }
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -599,12 +582,6 @@ nav {
 @media all and (min-width: 800px) {
   body {
     overflow-y: scroll;
-  }
-
-  nav {
-    .back-button {
-      display: none;
-    }
   }
 
   .sidebar-bounds {

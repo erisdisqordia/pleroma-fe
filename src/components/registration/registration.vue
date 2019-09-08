@@ -268,6 +268,7 @@ $validations-cRed: #f04124;
 
   textarea {
     min-height: 100px;
+    resize: vertical;
   }
 
   .form-group {

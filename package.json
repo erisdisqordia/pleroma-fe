@@ -93,6 +93,7 @@
     "nightwatch": "^0.9.8",
     "opn": "^4.0.2",
     "ora": "^0.3.0",
+    "postcss-loader": "^3.0.0",
     "raw-loader": "^0.5.1",
     "sass": "^1.17.3",
     "sass-loader": "git://github.com/webpack-contrib/sass-loader",

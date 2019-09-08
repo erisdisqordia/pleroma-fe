@@ -117,6 +117,8 @@ const backendInteractorService = credentials => {
   const fetchPinnedStatuses = (id) => apiService.fetchPinnedStatuses({ credentials, id })
   const pinOwnStatus = (id) => apiService.pinOwnStatus({ credentials, id })
   const unpinOwnStatus = (id) => apiService.unpinOwnStatus({ credentials, id })
+  const muteConversation = (id) => apiService.muteConversation({ credentials, id })
+  const unmuteConversation = (id) => apiService.unmuteConversation({ credentials, id })
 
   const getCaptcha = () => apiService.getCaptcha()
   const register = (params) => apiService.register({ credentials, params })
@@ -124,8 +126,6 @@ const backendInteractorService = credentials => {
   const updateBg = ({ background }) => apiService.updateBg({ credentials, background })
   const updateBanner = ({ banner }) => apiService.updateBanner({ credentials, banner })
   const updateProfile = ({ params }) => apiService.updateProfile({ credentials, params })
-
-  const externalProfile = (profileUrl) => apiService.externalProfile({ profileUrl, credentials })
 
   const importBlocks = (file) => apiService.importBlocks({ file, credentials })
   const importFollows = (file) => apiService.importFollows({ file, credentials })
@@ -178,6 +178,8 @@ const backendInteractorService = credentials => {
     fetchPinnedStatuses,
     pinOwnStatus,
     unpinOwnStatus,
+    muteConversation,
+    unmuteConversation,
     tagUser,
     untagUser,
     addRight,
@@ -190,7 +192,6 @@ const backendInteractorService = credentials => {
     updateBg,
     updateBanner,
     updateProfile,
-    externalProfile,
     importBlocks,
     importFollows,
     deleteAccount,

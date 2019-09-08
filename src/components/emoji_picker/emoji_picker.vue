@@ -65,12 +65,16 @@
               :title="emoji.displayText"
               class="emoji-item"
               @click.stop.prevent="onEmoji(emoji)"
-            >
-              <span v-if="!emoji.imageUrl">{{ emoji.replacement }}</span>
+              @mouseenter="setZoomEmoji($event, emoji)"
+              @mouseleave="setZoomEmoji($event, false)"
+              >
+              <span v-if="!emoji.imageUrl">
+                {{ emoji.replacement }}
+              </span>
               <img
                 v-else
                 :src="emoji.imageUrl"
-              >
+                >
             </span>
           </div>
         </div>
@@ -94,6 +98,18 @@
           @upload-failed="onStickerUploadFailed"
         />
       </div>
+    </div>
+    <div ref="zoom-portal" class="zoom-portal">
+      <span v-if="zoomEmoji">
+        <span v-if="!zoomEmoji.imageUrl">
+          {{ zoomEmoji.replacement }}
+        </span>
+        <img
+          v-else
+          :key="zoomEmoji.imageUrl"
+          :src="zoomEmoji.imageUrl"
+          >
+      </span>
     </div>
   </div>
 </template>

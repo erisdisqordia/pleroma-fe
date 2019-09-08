@@ -244,7 +244,6 @@ const EmojiInput = {
         this.blurTimeout = null
       }
 
-      console.log(this.spamMode)
       if (!this.spamMode) {
         this.showPicker = false
       }

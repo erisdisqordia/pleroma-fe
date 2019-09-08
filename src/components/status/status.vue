@@ -705,6 +705,14 @@ $status-margin: 0.75em;
       &.emoji {
         width: 32px;
         height: 32px;
+        transition: transform 200ms;
+        transform: scale(1);
+        z-index: 1;
+
+        &:hover {
+          transform: scale(3);
+          z-index: 2;
+        }
       }
     }
 

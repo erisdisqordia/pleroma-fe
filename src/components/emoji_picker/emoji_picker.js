@@ -13,9 +13,11 @@ const EmojiPicker = {
   },
   data () {
     return {
+      labelKey: String(Math.random() * 100000),
       keyword: '',
       activeGroup: 'custom',
-      showingStickers: false
+      showingStickers: false,
+      spamMode: false
     }
   },
   components: {
@@ -24,8 +26,7 @@ const EmojiPicker = {
   methods: {
     onEmoji (emoji) {
       const value = emoji.imageUrl ? `:${emoji.displayText}:` : emoji.replacement
-      this.$emit('emoji', ` ${value} `)
-      this.open = false
+      this.$emit('emoji', { insertion: ` ${value} `, spamMode: this.spamMode })
     },
     highlight (key) {
       const ref = this.$refs['group-' + key]

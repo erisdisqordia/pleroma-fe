@@ -170,7 +170,7 @@
             <i
               :title="$t('emoji.add_emoji')"
               class="icon-smile btn btn-default"
-              @click.stop.prevent="showEmoji"
+              @click="showEmojiPicker"
             />
           </div>
           <div

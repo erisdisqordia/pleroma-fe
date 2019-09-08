@@ -282,7 +282,7 @@ const PostStatusForm = {
         target.style.height = null
       }
     },
-    showEmoji () {
+    showEmojiPicker () {
       this.$refs['textarea'].focus()
       this.$refs['emoji-input'].triggerShowPicker()
     },

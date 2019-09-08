@@ -1,6 +1,6 @@
 <template>
-  <div class="emoji-picker panel panel-default">
-    <div class="panel-heading">
+  <div class="emoji-picker panel panel-default panel-body">
+    <div class="heading">
       <span class="emoji-tabs">
         <span
           v-for="group in emojis"
@@ -30,7 +30,7 @@
         </span>
       </span>
     </div>
-    <div class="panel-body">
+    <div class="content">
       <div
         class="emoji-content"
         :class="{hidden: showingStickers}"
@@ -73,6 +73,16 @@
               >
             </span>
           </div>
+        </div>
+        <div
+          class="spam-mode"
+          >
+          <input
+            :id="labelKey + 'spam-mode'"
+            v-model="spamMode"
+            type="checkbox"
+            >
+          <label class="spam-mode-label" :for="labelKey + 'spam-mode'">{{ $t('emoji.spam') }}</label>
         </div>
       </div>
       <div

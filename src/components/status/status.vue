@@ -413,7 +413,7 @@
         v-if="replying"
         class="container"
       >
-        <post-status-form
+        <PostStatusForm
           class="reply-body"
           :reply-to="status.id"
           :attentions="status.attentions"

@@ -77,7 +77,9 @@ const EmojiInput = {
       caret: 0,
       focused: false,
       blurTimeout: null,
-      showPicker: false
+      showPicker: false,
+      spamMode: false,
+      disableClickOutside: false
     }
   },
   components: {
@@ -100,7 +102,7 @@ const EmojiInput = {
         }))
     },
     showSuggestions () {
-      return this.focused && this.suggestions && this.suggestions.length > 0
+      return this.focused && this.suggestions && this.suggestions.length > 0 && !this.showPicker
     },
     textAtCaret () {
       return (this.wordAtCaret || {}).word || ''
@@ -142,6 +144,13 @@ const EmojiInput = {
   methods: {
     triggerShowPicker () {
       this.showPicker = true
+      // This temporarily disables "click outside" handler
+      // since external trigger also means click originates
+      // from outside, thus preventing picker from opening
+      this.disableClickOutside = true
+      setTimeout(() => {
+        this.disableClickOutside = false
+      }, 0)
     },
     togglePicker () {
       this.showPicker = !this.showPicker
@@ -151,12 +160,13 @@ const EmojiInput = {
       this.$emit('input', newValue)
       this.caret = 0
     },
-    insert (insertion) {
+    insert ({ insertion, spamMode }) {
       const newValue = [
         this.value.substring(0, this.caret),
         insertion,
         this.value.substring(this.caret)
       ].join('')
+      this.spamMode = spamMode
       this.$emit('input', newValue)
       const position = this.caret + insertion.length
 
@@ -191,7 +201,7 @@ const EmojiInput = {
     },
     cycleBackward (e) {
       const len = this.suggestions.length || 0
-      if (len > 0) {
+      if (len > 1) {
         this.highlighted -= 1
         if (this.highlighted < 0) {
           this.highlighted = this.suggestions.length - 1
@@ -203,7 +213,7 @@ const EmojiInput = {
     },
     cycleForward (e) {
       const len = this.suggestions.length || 0
-      if (len > 0) {
+      if (len > 1) {
         this.highlighted += 1
         if (this.highlighted >= len) {
           this.highlighted = 0
@@ -234,7 +244,10 @@ const EmojiInput = {
         this.blurTimeout = null
       }
 
-      this.showPicker = false
+      console.log(this.spamMode)
+      if (!this.spamMode) {
+        this.showPicker = false
+      }
       this.focused = true
       this.setCaret(e)
       this.resize()
@@ -280,7 +293,8 @@ const EmojiInput = {
       this.resize()
       this.$emit('input', e.target.value)
     },
-    onClickOutside () {
+    onClickOutside (e) {
+      if (this.disableClickOutside) return
       this.showPicker = false
     },
     onStickerUploaded (e) {

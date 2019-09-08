@@ -10,29 +10,48 @@
   margin: 0 !important;
   z-index: 1;
 
-  .panel-body {
+  .spam-mode {
+    padding: 7px;
+    line-height: normal;
+  }
+  .spam-mode-label {
+    padding: 7px;
+  }
+
+  .heading {
+    display: flex;
+    height: 32px;
+    padding: 10px 7px 5px;
+  }
+
+  .content {
     display: flex;
     flex-direction: column;
     flex: 1 1 0;
     min-height: 0px;
   }
 
+  .emoji-tabs {
+    flex-grow: 1;
+  }
+
   .additional-tabs {
     border-left: 1px solid;
     border-left-color: $fallback--icon;
     border-left-color: var(--icon, $fallback--icon);
-    padding-left: 5px;
+    padding-left: 7px;
     flex: 0 0 0;
-  }
-
-  .emoji-tabs {
-    flex: 1 1 0;
   }
 
   .additional-tabs,
   .emoji-tabs {
+    display: block;
+    min-width: 0;
+    flex-basis: auto;
+    flex-shrink: 1;
+
     &-item {
-      padding: 0 5px;
+      padding: 0 7px;
       cursor: pointer;
       font-size: 24px;
 

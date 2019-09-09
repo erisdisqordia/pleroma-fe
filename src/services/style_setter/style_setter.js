@@ -22,7 +22,7 @@ const setStyle = (href, commit) => {
   ***/
   const head = document.head
   const body = document.body
-  body.style.display = 'none'
+  body.classList.add('hidden')
   const cssEl = document.createElement('link')
   cssEl.setAttribute('rel', 'stylesheet')
   cssEl.setAttribute('href', href)
@@ -46,7 +46,7 @@ const setStyle = (href, commit) => {
     head.appendChild(styleEl)
     // const styleSheet = styleEl.sheet
 
-    body.style.display = 'initial'
+    body.classList.remove('hidden')
   }
 
   cssEl.addEventListener('load', setDynamic)
@@ -75,7 +75,7 @@ const applyTheme = (input, commit) => {
   const { rules, theme } = generatePreset(input)
   const head = document.head
   const body = document.body
-  body.style.display = 'none'
+  body.classList.add('hidden')
 
   const styleEl = document.createElement('style')
   head.appendChild(styleEl)
@@ -86,7 +86,7 @@ const applyTheme = (input, commit) => {
   styleSheet.insertRule(`body { ${rules.colors} }`, 'index-max')
   styleSheet.insertRule(`body { ${rules.shadows} }`, 'index-max')
   styleSheet.insertRule(`body { ${rules.fonts} }`, 'index-max')
-  body.style.display = 'initial'
+  body.classList.remove('hidden')
 
   // commit('setOption', { name: 'colors', value: htmlColors })
   // commit('setOption', { name: 'radii', value: radii })

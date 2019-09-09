@@ -65,7 +65,6 @@ const EmojiPicker = {
     setZoomEmoji (e, emoji) {
       this.zoomEmoji = emoji
       const { x, y } = e.target.getBoundingClientRect()
-      console.log(e.target)
       this.$refs['zoom-portal'].style.left = (x - 32) + 'px'
       this.$refs['zoom-portal'].style.top = (y - 32) + 'px'
     }

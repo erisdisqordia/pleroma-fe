@@ -1,4 +1,4 @@
-import { reduce, filter, findIndex, clone } from 'lodash'
+import { reduce, filter, findIndex, clone, get } from 'lodash'
 import Status from '../status/status.vue'
 
 const sortById = (a, b) => {
@@ -39,7 +39,7 @@ const conversation = {
     }
   },
   props: [
-    'statusoid',
+    'statusId',
     'collapsable',
     'isPage',
     'pinnedStatusIdsObject'
@@ -51,21 +51,17 @@ const conversation = {
   },
   computed: {
     status () {
-      return this.statusoid
+      return this.$store.state.statuses.allStatusesObject[this.statusId]
     },
-    statusId () {
-      if (this.statusoid.retweeted_status) {
-        return this.statusoid.retweeted_status.id
+    originalStatusId () {
+      if (this.status.retweeted_status) {
+        return this.status.retweeted_status.id
       } else {
-        return this.statusoid.id
+        return this.statusId
       }
     },
     conversationId () {
-      if (this.statusoid.retweeted_status) {
-        return this.statusoid.retweeted_status.statusnet_conversation_id
-      } else {
-        return this.statusoid.statusnet_conversation_id
-      }
+      return this.getConversationId(this.statusId)
     },
     conversation () {
       if (!this.status) {
@@ -77,7 +73,7 @@ const conversation = {
       }
 
       const conversation = clone(this.$store.state.statuses.conversationsObject[this.conversationId])
-      const statusIndex = findIndex(conversation, { id: this.statusId })
+      const statusIndex = findIndex(conversation, { id: this.originalStatusId })
       if (statusIndex !== -1) {
         conversation[statusIndex] = this.status
       }
@@ -110,7 +106,15 @@ const conversation = {
     Status
   },
   watch: {
-    status: 'fetchConversation',
+    statusId (newVal, oldVal) {
+      const newConversationId = this.getConversationId(newVal)
+      const oldConversationId = this.getConversationId(oldVal)
+      if (newConversationId && oldConversationId && newConversationId === oldConversationId) {
+        this.setHighlight(this.originalStatusId)
+      } else {
+        this.fetchConversation()
+      }
+    },
     expanded (value) {
       if (value) {
         this.fetchConversation()
@@ -120,24 +124,25 @@ const conversation = {
   methods: {
     fetchConversation () {
       if (this.status) {
-        this.$store.state.api.backendInteractor.fetchConversation({ id: this.status.id })
+        this.$store.state.api.backendInteractor.fetchConversation({ id: this.statusId })
           .then(({ ancestors, descendants }) => {
             this.$store.dispatch('addNewStatuses', { statuses: ancestors })
             this.$store.dispatch('addNewStatuses', { statuses: descendants })
+            this.setHighlight(this.originalStatusId)
           })
-          .then(() => this.setHighlight(this.statusId))
       } else {
-        const id = this.$route.params.id
-        this.$store.state.api.backendInteractor.fetchStatus({ id })
-          .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
-          .then(() => this.fetchConversation())
+        this.$store.state.api.backendInteractor.fetchStatus({ id: this.statusId })
+          .then((status) => {
+            this.$store.dispatch('addNewStatuses', { statuses: [status] })
+            this.fetchConversation()
+          })
       }
     },
     getReplies (id) {
       return this.replies[id] || []
     },
     focused (id) {
-      return (this.isExpanded) && id === this.status.id
+      return (this.isExpanded) && id === this.statusId
     },
     setHighlight (id) {
       if (!id) return
@@ -149,6 +154,10 @@ const conversation = {
     },
     toggleExpanded () {
       this.expanded = !this.expanded
+    },
+    getConversationId (statusId) {
+      const status = this.$store.state.statuses.allStatusesObject[statusId]
+      return get(status, 'retweeted_status.statusnet_conversation_id', get(status, 'statusnet_conversation_id'))
     }
   }
 }

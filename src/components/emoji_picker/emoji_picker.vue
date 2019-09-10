@@ -67,7 +67,7 @@
               @click.stop.prevent="onEmoji(emoji)"
               @mouseenter="setZoomEmoji($event, emoji)"
               @mouseleave="setZoomEmoji($event, false)"
-              >
+            >
               <span v-if="!emoji.imageUrl">
                 {{ emoji.replacement }}
               </span>

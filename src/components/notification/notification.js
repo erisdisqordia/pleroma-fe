@@ -53,10 +53,10 @@ const Notification = {
       return this.notification.from_profile
     },
     userProfileLink () {
-      return this.generateUserProfileLink(this.notification.from_profile)
+      return this.generateUserProfileLink(this.user)
     },
     needMute () {
-      return this.notification.from_profile.muted
+      return this.user.muted
     }
   }
 }

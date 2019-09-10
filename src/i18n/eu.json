@@ -603,10 +603,10 @@
     }
   },
   "search": {
-    "people": "Gendea",
+    "people": "Erabiltzaileak",
     "hashtags": "Traolak",
     "person_talking": "{count} pertsona hitzegiten",
-    "people_talking": "{count} gende hitzegiten",
+    "people_talking": "{count} jende hitzegiten",
     "no_results": "Emaitzarik ez"
   },
   "password_reset": {

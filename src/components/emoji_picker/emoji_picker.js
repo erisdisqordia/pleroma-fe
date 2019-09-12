@@ -5,7 +5,7 @@ const filterByKeyword = (list, keyword = '') => {
 
 const EmojiPicker = {
   props: {
-    stickerPicker: {
+    enableStickerPicker: {
       required: false,
       type: Boolean,
       default: false
@@ -97,6 +97,9 @@ const EmojiPicker = {
     },
     emojisView () {
       return this.emojis.filter(value => value.emojis.length > 0)
+    },
+    stickerPickerEnabled () {
+      return (this.$store.state.instance.stickers || []).length !== 0
     }
   }
 }

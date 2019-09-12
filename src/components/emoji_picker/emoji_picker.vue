@@ -17,7 +17,7 @@
         </span>
       </span>
       <span
-        v-if="stickerPicker"
+        v-if="stickerPickerEnabled"
         class="additional-tabs"
       >
         <span

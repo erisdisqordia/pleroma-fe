@@ -61,7 +61,7 @@
         <EmojiInput
           v-if="newStatus.spoilerText || alwaysShowSubject"
           v-model="newStatus.spoilerText"
-          emoji-picker
+          enable-emoji-picker
           :suggest="emojiSuggestor"
           class="form-control"
         >
@@ -78,9 +78,9 @@
           v-model="newStatus.status"
           :suggest="emojiUserSuggestor"
           class="form-control main-input"
-          emoji-picker
-          emoji-picker-external-trigger
-          sticker-picker
+          enable-emoji-picker
+          hide-emoji-button
+          enable-sticker-picker
           @sticker-uploaded="addMediaFile"
           @sticker-upload-failed="uploadFailed"
         >

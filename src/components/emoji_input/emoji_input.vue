@@ -4,19 +4,19 @@
     class="emoji-input"
   >
     <slot />
-    <template v-if="emojiPicker">
+    <template v-if="enableEmojiPicker">
       <div
-        v-if="!emojiPickerExternalTrigger"
+        v-if="!hideEmojiButton"
         class="emoji-picker-icon"
         @click.prevent="togglePicker"
       >
         <i class="icon-smile" />
       </div>
       <EmojiPicker
-        v-if="emojiPicker"
+        v-if="enableEmojiPicker"
         ref="picker"
         :class="{ hide: !showPicker }"
-        :sticker-picker="stickerPicker"
+        :enable-sticker-picker="enableStickerPicker"
         class="emoji-picker-panel"
         @emoji="insert"
         @sticker-uploaded="onStickerUploaded"

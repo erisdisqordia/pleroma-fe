@@ -54,17 +54,28 @@ const EmojiInput = {
       required: true,
       type: String
     },
-    emojiPicker: {
+    enableEmojiPicker: {
+      /**
+       * Enables emoji picker support, this implies that custom emoji are supported
+       */
       required: false,
       type: Boolean,
       default: false
     },
-    emojiPickerExternalTrigger: {
+    hideEmojiButton: {
+      /**
+    enableStickerPicker: {
+       * intended to use with external picker trigger, i.e. you have a button outside
+       * input that will open up the picker, see triggerShowPicker()
+       */
       required: false,
       type: Boolean,
       default: false
     },
-    stickerPicker: {
+    enableStickerPicker: {
+      /**
+       * Enables sticker picker support, only makes sense when enableEmojiPicker=true
+       */
       required: false,
       type: Boolean,
       default: false

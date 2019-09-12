@@ -194,7 +194,7 @@ export const addEmojis = (string, emojis) => {
   return emojis.reduce((acc, emoji) => {
     return acc.replace(
       new RegExp(`:${emoji.shortcode}:`, 'g'),
-      `<span class='emoji-container'><img src='${emoji.url}' alt='${emoji.shortcode}' title='${emoji.shortcode}' class='emoji' /></span>`
+      `<img src='${emoji.url}' alt='${emoji.shortcode}' title='${emoji.shortcode}' class='emoji' />`
     )
   }, string)
 }

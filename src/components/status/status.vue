@@ -696,22 +696,6 @@ $status-margin: 0.75em;
     line-height: 1.4em;
     white-space: pre-wrap;
 
-    .emoji-container {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      z-index: 1;
-
-      &:hover {
-        z-index: 2;
-
-        .emoji {
-          transform: scale(3);
-          z-index: 2;
-        }
-      }
-    }
-
     img, video {
       max-width: 100%;
       max-height: 400px;
@@ -721,9 +705,6 @@ $status-margin: 0.75em;
       &.emoji {
         width: 32px;
         height: 32px;
-        transition: transform 200ms;
-        transform: scale(1);
-        pointer-events: none;
       }
     }
 

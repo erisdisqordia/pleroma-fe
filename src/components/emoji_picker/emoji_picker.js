@@ -17,7 +17,6 @@ const EmojiPicker = {
       keyword: '',
       activeGroup: 'custom',
       showingStickers: false,
-      zoomEmoji: false,
       spamMode: false
     }
   },
@@ -61,12 +60,6 @@ const EmojiPicker = {
     },
     onStickerUploadFailed (e) {
       this.$emit('sticker-upload-failed', e)
-    },
-    setZoomEmoji (e, emoji) {
-      this.zoomEmoji = emoji
-      const { x, y } = e.target.getBoundingClientRect()
-      this.$refs['zoom-portal'].style.left = (x - 32) + 'px'
-      this.$refs['zoom-portal'].style.top = (y - 32) + 'px'
     }
   },
   watch: {

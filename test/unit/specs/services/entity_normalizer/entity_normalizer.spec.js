@@ -323,9 +323,9 @@ describe('API Entities normalizer', () => {
 
   describe('MastoAPI emoji adder', () => {
     const emojis = makeMockEmojiMasto()
-    const imageHtml = '<span class="emoji-container"><img src="https://example.com/image.png" alt="image" title="image" class="emoji" /></span>'
+    const imageHtml = '<img src="https://example.com/image.png" alt="image" title="image" class="emoji" />'
       .replace(/"/g, '\'')
-    const thinkHtml = '<span class="emoji-container"><img src="https://example.com/think.png" alt="thinking" title="thinking" class="emoji" /></span>'
+    const thinkHtml = '<img src="https://example.com/think.png" alt="thinking" title="thinking" class="emoji" />'
       .replace(/"/g, '\'')
 
     it('correctly replaces shortcodes in supplied string', () => {

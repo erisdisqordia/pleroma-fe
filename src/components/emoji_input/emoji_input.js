@@ -78,6 +78,7 @@ const EmojiInput = {
       focused: false,
       blurTimeout: null,
       showPicker: false,
+      temporarilyHideSuggestions: false,
       spamMode: false,
       disableClickOutside: false
     }
@@ -102,7 +103,11 @@ const EmojiInput = {
         }))
     },
     showSuggestions () {
-      return this.focused && this.suggestions && this.suggestions.length > 0 && !this.showPicker
+      return this.focused &&
+        this.suggestions &&
+        this.suggestions.length > 0 &&
+        !this.showPicker &&
+        !this.temporarilyHideSuggestions
     },
     textAtCaret () {
       return (this.wordAtCaret || {}).word || ''
@@ -153,6 +158,7 @@ const EmojiInput = {
       }, 0)
     },
     togglePicker () {
+      this.input.elm.focus()
       this.showPicker = !this.showPicker
     },
     replace (replacement) {
@@ -250,44 +256,68 @@ const EmojiInput = {
       this.focused = true
       this.setCaret(e)
       this.resize()
+      this.temporarilyHideSuggestions = false
     },
     onKeyUp (e) {
+      const { key } = e
       this.setCaret(e)
       this.resize()
+
+      // Setting hider in keyUp to prevent suggestions from blinking
+      // when moving away from suggested spot
+      if (key === 'Escape') {
+        this.temporarilyHideSuggestions = true
+      } else {
+        this.temporarilyHideSuggestions = false
+      }
     },
     onPaste (e) {
       this.setCaret(e)
       this.resize()
     },
     onKeyDown (e) {
-      this.setCaret(e)
-      this.resize()
-
       const { ctrlKey, shiftKey, key } = e
-      if (key === 'Tab') {
-        if (shiftKey) {
+      // Disable suggestions hotkeys if suggestions are hidden
+      if (!this.temporarilyHideSuggestions) {
+        if (key === 'Tab') {
+          if (shiftKey) {
+            this.cycleBackward(e)
+          } else {
+            this.cycleForward(e)
+          }
+        }
+        if (key === 'ArrowUp') {
           this.cycleBackward(e)
-        } else {
+        } else if (key === 'ArrowDown') {
           this.cycleForward(e)
         }
-      }
-      if (key === 'ArrowUp') {
-        this.cycleBackward(e)
-      } else if (key === 'ArrowDown') {
-        this.cycleForward(e)
-      }
-      if (key === 'Enter') {
-        if (!ctrlKey) {
-          this.replaceText(e)
+        if (key === 'Enter') {
+          if (!ctrlKey) {
+            this.replaceText(e)
+          }
         }
       }
+      // Probably add optional keyboard controls for emoji picker?
+
+      // Escape hides suggestions, if suggestions are hidden it
+      // de-focuses the element (i.e. default browser behavior)
+      if (key === 'Escape') {
+        if (!this.temporarilyHideSuggestions) {
+          this.input.elm.focus()
+        }
+      }
+
+      this.showPicker = false
+      this.resize()
     },
     onInput (e) {
       this.showPicker = false
       this.setCaret(e)
+      this.resize()
       this.$emit('input', e.target.value)
     },
     onCompositionUpdate (e) {
+      this.showPicker = false
       this.setCaret(e)
       this.resize()
       this.$emit('input', e.target.value)

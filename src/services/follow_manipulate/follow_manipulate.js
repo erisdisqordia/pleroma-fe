@@ -9,10 +9,7 @@ const fetchUser = (attempt, user, store) => new Promise((resolve, reject) => {
   if (!following && !(locked && sent) && attempt <= 3) {
     // If we BE reports that we still not following that user - retry,
     // increment attempts by one
-    return fetchUser(++attempt, user, store)
-  } else {
-    // If we run out of attempts, just return whatever status is.
-    return sent
+    fetchUser(++attempt, user, store)
   }
 })
 
@@ -23,7 +20,7 @@ export const requestFollow = (user, store) => new Promise((resolve, reject) => {
 
       if (updated.following || (user.locked && user.requested)) {
         // If we get result immediately or the account is locked, just stop.
-        resolve({ sent: updated.requested })
+        resolve()
         return
       }
 
@@ -35,8 +32,8 @@ export const requestFollow = (user, store) => new Promise((resolve, reject) => {
       // Recursive Promise, it will call itself up to 3 times.
 
       return fetchUser(1, user, store)
-        .then((sent) => {
-          resolve({ sent })
+        .then(() => {
+          resolve()
         })
     })
 })

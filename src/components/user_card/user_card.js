@@ -11,7 +11,6 @@ export default {
   data () {
     return {
       followRequestInProgress: false,
-      followRequestSent: false,
       hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
         ? this.$store.state.instance.hideUserStats
         : this.$store.state.config.hideUserStats,
@@ -112,9 +111,8 @@ export default {
     followUser () {
       const store = this.$store
       this.followRequestInProgress = true
-      requestFollow(this.user, store).then(({ sent }) => {
+      requestFollow(this.user, store).then(() => {
         this.followRequestInProgress = false
-        this.followRequestSent = sent
       })
     },
     unfollowUser () {

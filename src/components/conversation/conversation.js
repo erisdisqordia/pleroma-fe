@@ -43,7 +43,7 @@ const conversation = {
     'collapsable',
     'isPage',
     'pinnedStatusIdsObject',
-    'forceUnmute'
+    'inProfile'
   ],
   created () {
     if (this.isPage) {

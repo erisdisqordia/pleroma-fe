@@ -36,7 +36,7 @@
             :status-id="statusId"
             :collapsable="true"
             :pinned-status-ids-object="pinnedStatusIdsObject"
-            :force-unmute="forceUnmute"
+            :in-profile="inProfile"
           />
         </template>
         <template v-for="status in timeline.visibleStatuses">
@@ -46,7 +46,7 @@
             class="status-fadein"
             :status-id="status.id"
             :collapsable="true"
-            :force-unmute="forceUnmute"
+            :in-profile="inProfile"
           />
         </template>
       </div>

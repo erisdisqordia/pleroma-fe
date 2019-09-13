@@ -26,7 +26,7 @@
           timeline-name="user"
           :user-id="userId"
           :pinned-status-ids="user.pinnedStatusIds"
-          :force-unmute="true"
+          :in-profile="true"
         />
         <div
           v-if="followsTabVisible"
@@ -70,7 +70,7 @@
           timeline-name="media"
           :timeline="media"
           :user-id="userId"
-          :force-unmute="true"
+          :in-profile="true"
         />
         <Timeline
           v-if="isUs"
@@ -81,6 +81,7 @@
           :title="$t('user_card.favorites')"
           timeline-name="favorites"
           :timeline="favorites"
+          :in-profile="true"
         />
       </tab-switcher>
     </div>

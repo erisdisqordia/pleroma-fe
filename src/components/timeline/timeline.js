@@ -26,7 +26,7 @@ const Timeline = {
     'embedded',
     'count',
     'pinnedStatusIds',
-    'forceUnmute'
+    'inProfile'
   ],
   data () {
     return {

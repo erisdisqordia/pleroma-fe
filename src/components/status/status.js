@@ -30,7 +30,7 @@ const Status = {
     'noHeading',
     'inlineExpanded',
     'showPinned',
-    'forceUnmute'
+    'inProfile'
   ],
   data () {
     return {
@@ -118,7 +118,7 @@ const Status = {
 
       return hits
     },
-    muted () { return !this.forceUnmute && !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
+    muted () { return !this.unmuted && ((!this.inProfile && this.status.user.muted) || this.muteWordHits.length > 0) },
     hideFilteredStatuses () {
       return typeof this.$store.state.config.hideFilteredStatuses === 'undefined'
         ? this.$store.state.instance.hideFilteredStatuses

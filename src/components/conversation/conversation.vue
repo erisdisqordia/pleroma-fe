@@ -26,7 +26,7 @@
       :in-conversation="isExpanded"
       :highlight="getHighlight()"
       :replies="getReplies(status.id)"
-      :force-unmute="forceUnmute"
+      :in-profile="inProfile"
       class="status-fadein panel-body"
       @goto="setHighlight"
       @toggleExpanded="toggleExpanded"

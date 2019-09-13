@@ -70,6 +70,7 @@
           timeline-name="media"
           :timeline="media"
           :user-id="userId"
+          :force-unmute="true"
         />
         <Timeline
           v-if="isUs"

@@ -26,6 +26,7 @@
           timeline-name="user"
           :user-id="userId"
           :pinned-status-ids="user.pinnedStatusIds"
+          :force-unmute="true"
         />
         <div
           v-if="followsTabVisible"

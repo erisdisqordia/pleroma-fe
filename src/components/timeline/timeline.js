@@ -25,7 +25,8 @@ const Timeline = {
     'tag',
     'embedded',
     'count',
-    'pinnedStatusIds'
+    'pinnedStatusIds',
+    'forceUnmute'
   ],
   data () {
     return {

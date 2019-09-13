@@ -74,6 +74,8 @@ export const parseUser = (data) => {
 
       output.hide_follows = data.pleroma.hide_follows
       output.hide_followers = data.pleroma.hide_followers
+      output.hide_follows_count = data.pleroma.hide_follows_count
+      output.hide_followers_count = data.pleroma.hide_followers_count
 
       output.rights = {
         moderator: data.pleroma.is_moderator,
@@ -140,6 +142,8 @@ export const parseUser = (data) => {
     output.default_scope = data.default_scope
     output.hide_follows = data.hide_follows
     output.hide_followers = data.hide_followers
+    output.hide_follows_count = data.hide_follows_count
+    output.hide_followers_count = data.hide_followers_count
     output.background_image = data.background_image
     // on mastoapi this info is contained in a "relationship"
     output.following = data.following

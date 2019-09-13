@@ -41,6 +41,8 @@ const UserSettings = {
       newDefaultScope: this.$store.state.users.currentUser.default_scope,
       hideFollows: this.$store.state.users.currentUser.hide_follows,
       hideFollowers: this.$store.state.users.currentUser.hide_followers,
+      hideFollowsCount: this.$store.state.users.currentUser.hide_follows_count,
+      hideFollowersCount: this.$store.state.users.currentUser.hide_followers_count,
       showRole: this.$store.state.users.currentUser.show_role,
       role: this.$store.state.users.currentUser.role,
       pickAvatarBtnVisible: true,
@@ -142,6 +144,8 @@ const UserSettings = {
             no_rich_text: this.newNoRichText,
             hide_follows: this.hideFollows,
             hide_followers: this.hideFollowers,
+            hide_follows_count: this.hideFollowsCount,
+            hide_followers_count: this.hideFollowersCount,
             show_role: this.showRole
             /* eslint-enable camelcase */
           } }).then((user) => {

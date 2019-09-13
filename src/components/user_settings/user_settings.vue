@@ -88,6 +88,15 @@
               >
               <label for="account-hide-follows">{{ $t('settings.hide_follows_description') }}</label>
             </p>
+            <p class="setting-subitem">
+              <input
+                id="account-hide-follows-count"
+                v-model="hideFollowsCount"
+                type="checkbox"
+                :disabled="!hideFollows"
+              >
+              <label for="account-hide-follows-count">{{ $t('settings.hide_follows_count_description') }}</label>
+            </p>
             <p>
               <input
                 id="account-hide-followers"
@@ -95,6 +104,15 @@
                 type="checkbox"
               >
               <label for="account-hide-followers">{{ $t('settings.hide_followers_description') }}</label>
+            </p>
+            <p class="setting-subitem">
+              <input
+                id="account-hide-followers-count"
+                v-model="hideFollowersCount"
+                type="checkbox"
+                :disabled="!hideFollowers"
+              >
+              <label for="account-hide-followers-count">{{ $t('settings.hide_followers_count_description') }}</label>
             </p>
             <p>
               <input
@@ -616,6 +634,10 @@
     button {
       width: 10em;
     }
+  }
+
+  .setting-subitem {
+    margin-left: 1.75em;
   }
 }
 </style>

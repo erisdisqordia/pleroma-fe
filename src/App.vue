@@ -54,6 +54,14 @@
             />
           </router-link>
           <a
+            v-if="currentUser && currentUser.role === 'admin'"
+            href="/pleroma/admin"
+            class="mobile-hidden"
+          ><i
+            class="button-icon icon-gauge nav-icon"
+            :title="$t('nav.admin_panel')"
+          /></a>
+          <a
             v-if="currentUser"
             href="#"
             class="mobile-hidden"

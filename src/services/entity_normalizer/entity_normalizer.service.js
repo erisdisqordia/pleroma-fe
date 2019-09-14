@@ -224,6 +224,7 @@ export const parseStatus = (data) => {
       output.statusnet_conversation_id = data.pleroma.conversation_id
       output.is_local = pleroma.local
       output.in_reply_to_screen_name = data.pleroma.in_reply_to_account_acct
+      output.thread_muted = pleroma.thread_muted
     } else {
       output.text = data.content
       output.summary = data.spoiler_text

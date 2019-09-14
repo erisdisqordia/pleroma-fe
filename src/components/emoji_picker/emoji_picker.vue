@@ -46,6 +46,7 @@
         <div
           ref="emoji-groups"
           class="emoji-groups"
+          :class="groupsScrolledClass"
           @scroll="scrolledGroup"
         >
           <div

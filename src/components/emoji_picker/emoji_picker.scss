@@ -6,7 +6,7 @@
   position: absolute;
   right: 0;
   left: 0;
-  height: 300px;
+  height: 320px;
   margin: 0 !important;
   z-index: 1;
 
@@ -104,6 +104,22 @@
       flex: 1 1 1px;
       position: relative;
       overflow: auto;
+      mask: linear-gradient(to top, white 0, transparent 100%) bottom no-repeat,
+            linear-gradient(to bottom, white 0, transparent 100%) top no-repeat,
+            linear-gradient(to top, white, white);
+      transition: mask-size 150ms;
+      mask-size: 100% 20px, 100% 20px, auto;
+      // Autoprefixed seem to ignore this one, and also syntax is different
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      &.scrolled {
+        &-top {
+          mask-size: 100% 20px, 100% 0, auto;
+        }
+        &-bottom {
+          mask-size: 100% 0, 100% 20px, auto;
+        }
+      }
     }
 
     &-group {

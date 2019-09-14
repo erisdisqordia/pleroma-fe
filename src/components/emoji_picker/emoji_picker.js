@@ -17,6 +17,7 @@ const EmojiPicker = {
       keyword: '',
       activeGroup: 'custom',
       showingStickers: false,
+      groupsScrolledClass: 'scrolled-top',
       spamMode: false
     }
   },
@@ -40,6 +41,13 @@ const EmojiPicker = {
     scrolledGroup (e) {
       const target = (e && e.target) || this.$refs['emoji-groups']
       const top = target.scrollTop + 5
+      if (target.scrollTop <= 5) {
+        this.groupsScrolledClass = 'scrolled-top'
+      } else if (target.scrollTop >= target.scrollTopMax - 5) {
+        this.groupsScrolledClass = 'scrolled-bottom'
+      } else {
+        this.groupsScrolledClass = 'scrolled-middle'
+      }
       this.$nextTick(() => {
         this.emojisView.forEach(group => {
           const ref = this.$refs['group-' + group.id]

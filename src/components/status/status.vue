@@ -665,6 +665,15 @@ $status-margin: 0.75em;
     height: 220px;
     overflow-x: hidden;
     overflow-y: hidden;
+    z-index: 1;
+    .status-content {
+      height: 100%;
+      mask: linear-gradient(to top, white, transparent) bottom/100% 70px no-repeat,
+            linear-gradient(to top, white, white);
+      // Autoprefixed seem to ignore this one, and also syntax is different
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
   }
 
   .tall-status-hider {
@@ -676,12 +685,7 @@ $status-margin: 0.75em;
     width: 100%;
     text-align: center;
     line-height: 110px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%);
-    &_focused {
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--lightBg 80%);
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--lightBg, $fallback--lightBg) 80%);
-    }
+    z-index: 2;
   }
 
   .status-unhider, .cw-status-hider {

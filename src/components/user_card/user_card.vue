@@ -2,8 +2,9 @@
   <div
     class="user-card"
     :class="classes"
-    :style="style"
   >
+    <div :class="{ 'hide-bio': hideBio }" :style="style" class="background-image">
+    </div>
     <div class="panel-heading">
       <div class="user-info">
         <div class="container">
@@ -298,7 +299,7 @@
 @import '../../_variables.scss';
 
 .user-card {
-  background-size: cover;
+  position: relative;
 
   .panel-heading {
     padding: .5em 0;
@@ -307,14 +308,35 @@
     background: transparent;
     flex-direction: column;
     align-items: stretch;
+    // create new stacking context
+    position: relative;
   }
 
   .panel-body {
     word-wrap: break-word;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%);
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
+    // create new stacking context
+    position: relative;
+  }
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    mask: linear-gradient(to top, white, transparent) bottom no-repeat,
+          linear-gradient(to top, white, white);
+    // Autoprefixed seem to ignore this one, and also syntax is different
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background-size: cover;
+    mask-size: 100% 60%;
+
+    &.hide-bio {
+      mask-size: 100% 40px;
+    }
   }
 
   p {

@@ -178,14 +178,37 @@ const EmojiInput = {
       this.caret = 0
     },
     insert ({ insertion, spamMode }) {
+      const before = this.value.substring(0, this.caret) || ''
+      const after = this.value.substring(this.caret) || ''
+
+      /* Using a bit more smart approach to padding emojis with spaces:
+       * - put a space before cursor if there isn't one already, unless we
+       *   are at the beginning of post or in spam mode
+       * - put a space after emoji if there isn't one already unless we are
+       *   in spam mode
+       *
+       * The idea is that when you put a cursor somewhere in between sentence
+       * inserting just ' :emoji: ' will add more spaces to post which might
+       * break the flow/spacing, as well as the case where user ends sentence
+       * with a space before adding emoji.
+       *
+       * Spam mode is intended for creating multi-part emojis and overall spamming
+       * them, masto seem to be rendering :emoji::emoji: correctly now so why not
+       */
+      const isSpaceRegex = /\s/
+      const spaceBefore = !isSpaceRegex.exec(before.slice(-1)) && before.length && !spamMode > 0 ? ' ' : ''
+      const spaceAfter = !isSpaceRegex.exec(after[0]) && !spamMode ? ' ' : ''
+
       const newValue = [
-        this.value.substring(0, this.caret),
+        before,
+        spaceBefore,
         insertion,
-        this.value.substring(this.caret)
+        spaceAfter,
+        after
       ].join('')
       this.spamMode = spamMode
       this.$emit('input', newValue)
-      const position = this.caret + insertion.length
+      const position = this.caret + (insertion + spaceAfter + spaceBefore).length
 
       this.$nextTick(function () {
         // Re-focus inputbox after clicking suggestion

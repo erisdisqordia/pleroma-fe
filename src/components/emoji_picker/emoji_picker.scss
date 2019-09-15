@@ -15,7 +15,8 @@
     line-height: normal;
   }
   .spam-mode-label {
-    padding: 7px;
+    padding: 0 7px;
+    display: flex;
   }
 
   .heading {
@@ -104,6 +105,7 @@
       flex: 1 1 1px;
       position: relative;
       overflow: auto;
+      user-select: none;
       mask: linear-gradient(to top, white 0, transparent 100%) bottom no-repeat,
             linear-gradient(to bottom, white 0, transparent 100%) top no-repeat,
             linear-gradient(to top, white, white);

@@ -83,7 +83,11 @@
             v-model="spamMode"
             type="checkbox"
             >
-          <label class="spam-mode-label" :for="labelKey + 'spam-mode'">{{ $t('emoji.spam') }}</label>
+          <label class="spam-mode-label" :for="labelKey + 'spam-mode'">
+            <div class="spam-mode-label-text">
+              {{ $t('emoji.spam') }}
+            </div>
+          </label>
         </div>
       </div>
       <div

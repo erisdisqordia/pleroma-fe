@@ -109,7 +109,7 @@
   "emoji": {
     "stickers": "Stickers",
     "emoji": "Emoji",
-    "spam": "Keep open after adding emoji",
+    "spam": "Keep picker open, don't separate emoji with spaces",
     "search_emoji": "Search for an emoji",
     "add_emoji": "Insert emoji",
     "custom": "Custom emoji",

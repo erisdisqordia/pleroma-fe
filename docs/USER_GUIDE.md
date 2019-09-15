@@ -26,8 +26,10 @@ Let's clear up some basic stuff. When you post something it's called a **post** 
 * **Emoji** are small images embedded in text, there are two major types of emoji: [unicode emoji](https://en.wikipedia.org/wiki/Emoji) and custom emoji. While unicode emoji are universal and standardized, they can appear differently depending on where you are using them or may not appear at all on older systems. Custom emoji are more *fun* kind - instance administrator can define many images as *custom emoji* for their users. This works very simple - custom emoji is defined by its *shortcode* and an image, so that any shortcode enclosed in colons get replaced with image if such shortcode exist.
 Let's say there's `:pleroma:` emoji defined on instance. That means  
 > First time using :pleroma: pleroma!  
+
 will become  
 > First time using ![pleroma](./example_emoji.png) pleroma!  
+
 Note that you can only use emoji defined on your instance, you cannot "copy" someone else's emoji, and will have to ask your administrator to copy emoji from other instance to yours.  
 Lastly, there's two convenience options for emoji: an emoji picker (smiley face to the right of "submit" button) and autocomplete suggestions - when you start typing :shortcode: it will automatically try to suggest you emoj and complete the shortcode for you if you select one. **Note** that if emoji doesn't show up in suggestions nor in emoji picker it means there's no such emoji on your instance, if shortcode doesn't match any defined emoji it will appear as text.
 * **Attachments** are fairly simple - you can attach any file to a post as long as the file is within maximum size limits. If you're uploading explicit material you can mark all of your attachments as sensitive (or add `#nsfw` tag) - it will hide the images and videos behind a warning so that it won't be displayed instantly.

@@ -159,6 +159,7 @@
         <div class="form-bottom-left">
           <media-upload
             ref="mediaUpload"
+            class="media-upload-icon"
             :drop-files="dropFiles"
             @uploading="disableSubmit"
             @uploaded="addMediaFile"
@@ -176,11 +177,11 @@
           <div
             v-if="pollsAvailable"
             class="poll-icon"
+            :class="{ selected: pollFormVisible }"
           >
             <i
               :title="$t('polls.add_poll')"
               class="icon-chart-bar btn btn-default"
-              :class="pollFormVisible && 'selected'"
               @click="togglePollForm"
             />
           </div>
@@ -316,6 +317,8 @@
   .form-bottom-left {
     display: flex;
     flex: 1;
+    padding-right: 7px;
+    margin-right: 7px;
   }
 
   .text-format {
@@ -325,19 +328,38 @@
     }
   }
 
-  .poll-icon, .emoji-icon {
+  .media-upload-icon, .poll-icon, .emoji-icon {
     font-size: 26px;
     flex: 1;
 
-    .selected {
-      color: $fallback--lightText;
-      color: var(--lightText, $fallback--lightText);
+    i {
+      display: block;
+      width: 100%;
+    }
+
+    &.selected, &:hover {
+      // needs to be specific to override icon default color
+      i, label {
+        color: $fallback--lightText;
+        color: var(--lightText, $fallback--lightText);
+      }
     }
   }
 
+  // Order is not necessary but a good indicator
+  .media-upload-icon {
+    order: 1;
+    text-align: left;
+  }
+
   .emoji-icon {
-    flex: 0;
-    min-width: 50px;
+    order: 2;
+    text-align: center;
+  }
+
+  .poll-icon {
+    order: 3;
+    text-align: right;
   }
 
   .icon-chart-bar {

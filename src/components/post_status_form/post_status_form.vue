@@ -300,6 +300,7 @@
 .post-status-form {
   .form-bottom {
     display: flex;
+    justify-content: space-between;
     padding: 0.5em;
     height: 32px;
 
@@ -319,6 +320,7 @@
     flex: 1;
     padding-right: 7px;
     margin-right: 7px;
+    max-width: 10em;
   }
 
   .text-format {

@@ -23,6 +23,13 @@ Posts will contain the text you are posting, but some content will be modified:
 **Depending on your instance some of the options might not be available or have different defaults**
 
 Let's clear up some basic stuff. When you post something it's called a **post** or it could be called a **status** or even a **toot** or a **prööt** depending on whom you ask. Post has body/content but it also has some other stuff in it - from attachments, visibility scope, subject line.
+* **Emoji** are small images embedded in text, there are two major types of emoji: [unicode emoji](https://en.wikipedia.org/wiki/Emoji) and custom emoji. While unicode emoji are universal and standardized, they can appear differently depending on where you are using them or may not appear at all on older systems. Custom emoji are more *fun* kind - instance administrator can define many images as *custom emoji* for their users. This works very simple - custom emoji is defined by its *shortcode* and an image, so that any shortcode enclosed in colons get replaced with image if such shortcode exist.
+Let's say there's `:pleroma:` emoji defined on instance. That means  
+> First time using :pleroma: pleroma!  
+will become  
+> First time using ![pleroma](./example_emoji.png) pleroma!  
+Note that you can only use emoji defined on your instance, you cannot "copy" someone else's emoji, and will have to ask your administrator to copy emoji from other instance to yours.  
+Lastly, there's two convenience options for emoji: an emoji picker (smiley face to the right of "submit" button) and autocomplete suggestions - when you start typing :shortcode: it will automatically try to suggest you emoj and complete the shortcode for you if you select one. **Note** that if emoji doesn't show up in suggestions nor in emoji picker it means there's no such emoji on your instance, if shortcode doesn't match any defined emoji it will appear as text.
 * **Attachments** are fairly simple - you can attach any file to a post as long as the file is within maximum size limits. If you're uploading explicit material you can mark all of your attachments as sensitive (or add `#nsfw` tag) - it will hide the images and videos behind a warning so that it won't be displayed instantly.
 * **Subject line** also known as **CW** (Content Warning) could be used as a header to the post and/or to warn others about contents of the post having something that might upset somebody or something among those lines. Several applications allow to hide post content leaving only subject line visible. As a side-effect using subject line will also mark your images as sensitive (see above).
 * **Visiblity scope** controls who will be able to see your posts. There are four scopes available:

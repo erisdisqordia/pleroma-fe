@@ -64,7 +64,6 @@ const EmojiInput = {
     },
     hideEmojiButton: {
       /**
-    enableStickerPicker: {
        * intended to use with external picker trigger, i.e. you have a button outside
        * input that will open up the picker, see triggerShowPicker()
        */

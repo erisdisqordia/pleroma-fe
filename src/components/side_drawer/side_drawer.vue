@@ -126,7 +126,10 @@
           v-if="currentUser && currentUser.role === 'admin'"
           @click="toggleDrawer"
         >
-          <a href="/pleroma/admin">
+          <a
+            href="/pleroma/admin"
+            target="_blank"
+          >
             {{ $t("nav.admin_panel") }}
           </a>
         </li>

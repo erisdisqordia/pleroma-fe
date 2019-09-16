@@ -57,6 +57,7 @@
             v-if="currentUser && currentUser.role === 'admin'"
             href="/pleroma/admin"
             class="mobile-hidden"
+            target="_blank"
           ><i
             class="button-icon icon-gauge nav-icon"
             :title="$t('nav.admin_panel')"

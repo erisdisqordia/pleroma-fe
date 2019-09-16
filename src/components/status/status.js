@@ -29,7 +29,8 @@ const Status = {
     'isPreview',
     'noHeading',
     'inlineExpanded',
-    'showPinned'
+    'showPinned',
+    'inProfile'
   ],
   data () {
     return {
@@ -117,7 +118,7 @@ const Status = {
 
       return hits
     },
-    muted () { return !this.unmuted && (this.status.user.muted || this.status.thread_muted || this.muteWordHits.length > 0) },
+    muted () { return !this.unmuted && ((!this.inProfile && this.status.user.muted) || (!this.inConversation && this.status.thread_muted) || this.muteWordHits.length > 0) },
     hideFilteredStatuses () {
       return typeof this.$store.state.config.hideFilteredStatuses === 'undefined'
         ? this.$store.state.instance.hideFilteredStatuses

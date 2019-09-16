@@ -16,7 +16,7 @@
   background-position: 0 50%;
 }
 
-i {
+i[class^='icon-'] {
   user-select: none;
 }
 
@@ -49,6 +49,10 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  &.hidden {
+    display: none;
+  }
 }
 
 a {

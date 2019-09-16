@@ -2,7 +2,7 @@
   <conversation
     :collapsable="false"
     is-page="true"
-    :statusoid="statusoid"
+    :status-id="statusId"
   />
 </template>
 

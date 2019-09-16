@@ -5,12 +5,8 @@ const conversationPage = {
     Conversation
   },
   computed: {
-    statusoid () {
-      const id = this.$route.params.id
-      const statuses = this.$store.state.statuses.allStatusesObject
-      const status = statuses[id]
-
-      return status
+    statusId () {
+      return this.$route.params.id
     }
   }
 }

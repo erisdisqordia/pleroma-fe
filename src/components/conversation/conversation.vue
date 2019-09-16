@@ -26,6 +26,7 @@
       :in-conversation="isExpanded"
       :highlight="getHighlight()"
       :replies="getReplies(status.id)"
+      :in-profile="inProfile"
       class="status-fadein panel-body"
       @goto="setHighlight"
       @toggleExpanded="toggleExpanded"

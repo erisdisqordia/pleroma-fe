@@ -42,7 +42,8 @@ const conversation = {
     'statusId',
     'collapsable',
     'isPage',
-    'pinnedStatusIdsObject'
+    'pinnedStatusIdsObject',
+    'inProfile'
   ],
   created () {
     if (this.isPage) {

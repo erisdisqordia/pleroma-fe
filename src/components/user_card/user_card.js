@@ -168,6 +168,9 @@ export default {
       }
       this.$store.dispatch('setMedia', [attachment])
       this.$store.dispatch('setCurrent', attachment)
+    },
+    mentionUser () {
+
     }
   }
 }

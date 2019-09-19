@@ -15,6 +15,13 @@ const PostStatusModal = {
       return this.$store.state.postStatus.params
     }
   },
+  watch: {
+    isOpen (val) {
+      if (val) {
+        this.$nextTick(() => this.$el.querySelector('textarea').focus())
+      }
+    }
+  },
   methods: {
     closeModal () {
       this.$store.dispatch('closePostStatusModal')

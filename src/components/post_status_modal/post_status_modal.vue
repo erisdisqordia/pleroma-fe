@@ -13,6 +13,7 @@
       </div>
       <PostStatusForm
         class="panel-body"
+        v-bind="params"
         @posted="closeModal"
       />
     </div>

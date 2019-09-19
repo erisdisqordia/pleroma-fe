@@ -12,7 +12,7 @@ const PostStatusModal = {
       return this.isLoggedIn && this.$store.state.postStatus.modalActivated
     },
     params () {
-      return this.$store.state.postStatus.params
+      return this.$store.state.postStatus.params || {}
     }
   },
   watch: {

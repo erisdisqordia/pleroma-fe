@@ -1,6 +1,6 @@
 import { debounce } from 'lodash'
 
-const MobilePostStatusModal = {
+const MobilePostStatusButton = {
   data () {
     return {
       hidden: false,
@@ -90,4 +90,4 @@ const MobilePostStatusModal = {
   }
 }
 
-export default MobilePostStatusModal
+export default MobilePostStatusButton

@@ -109,6 +109,7 @@
     />
     <MobilePostStatusModal />
     <UserReportingModal />
+    <PostStatusModal />
     <portal-target name="modal" />
   </div>
 </template>

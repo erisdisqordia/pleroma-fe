@@ -11,6 +11,7 @@ import SideDrawer from './components/side_drawer/side_drawer.vue'
 import MobilePostStatusModal from './components/mobile_post_status_modal/mobile_post_status_modal.vue'
 import MobileNav from './components/mobile_nav/mobile_nav.vue'
 import UserReportingModal from './components/user_reporting_modal/user_reporting_modal.vue'
+import PostStatusModal from './components/post_status_modal/post_status_modal.vue'
 import { windowWidth } from './services/window_utils/window_utils'
 
 export default {
@@ -28,7 +29,8 @@ export default {
     SideDrawer,
     MobilePostStatusModal,
     MobileNav,
-    UserReportingModal
+    UserReportingModal,
+    PostStatusModal
   },
   data: () => ({
     mobileActivePanel: 'timeline',

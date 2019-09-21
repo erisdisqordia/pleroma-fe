@@ -69,6 +69,7 @@ export const parseUser = (data) => {
         output.following = relationship.following
         output.statusnet_blocking = relationship.blocking
         output.muted = relationship.muting
+        output.showing_reblogs = relationship.showing_reblogs
         output.subscribed = relationship.subscribing
       }
 

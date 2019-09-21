@@ -186,6 +186,22 @@
             >
               <i class="icon-bell-ringing-o" />
             </ProgressButton>
+            <button
+              v-if="user.showing_reblogs"
+              class="btn btn-default"
+              :title="$t('user_card.hide_boosts', {user: user.screen_name})"
+              @click="hideReblogs"
+            >
+              <i class="icon-eye" />
+            </button>
+            <button
+              v-if="!user.showing_reblogs"
+              class="btn btn-default pressed"
+              :title="$t('user_card.show_boosts', {user: user.screen_name})"
+              @click="showReblogs"
+            >
+              <i class="icon-eye-off" />
+            </button>
           </div>
 
           <div>

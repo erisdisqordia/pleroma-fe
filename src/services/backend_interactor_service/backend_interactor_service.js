@@ -31,8 +31,8 @@ const backendInteractorService = credentials => {
     return apiService.fetchUserRelationship({ id, credentials })
   }
 
-  const followUser = (id) => {
-    return apiService.followUser({ credentials, id })
+  const followUser = ({ id, reblogs }) => {
+    return apiService.followUser({ credentials, id, reblogs })
   }
 
   const unfollowUser = (id) => {

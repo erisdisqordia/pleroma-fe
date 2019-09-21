@@ -7,7 +7,9 @@ import { requestFollow, requestUnfollow } from '../../services/follow_manipulate
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 export default {
-  props: [ 'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar' ],
+  props: [
+    'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar'
+  ],
   data () {
     return {
       followRequestInProgress: false,
@@ -108,6 +110,12 @@ export default {
     ProgressButton
   },
   methods: {
+    showReblogs () {
+      this.$store.dispatch('showReblogs', this.user.id)
+    },
+    hideReblogs () {
+      this.$store.dispatch('hideReblogs', this.user.id)
+    },
     followUser () {
       const store = this.$store
       this.followRequestInProgress = true
@@ -156,7 +164,10 @@ export default {
       }
     },
     userProfileLink (user) {
-      return generateProfileLink(user.id, user.screen_name, this.$store.state.instance.restrictedNicknames)
+      return generateProfileLink(
+        user.id, user.screen_name,
+        this.$store.state.instance.restrictedNicknames
+      )
     },
     reportUser () {
       this.$store.dispatch('openUserReportingModal', this.user.id)

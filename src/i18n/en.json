@@ -543,8 +543,8 @@
     "unmute": "Unmute",
     "unmute_progress": "Unmuting...",
     "mute_progress": "Muting...",
-    "hide_boosts": "Hide boosts from {user}",
-    "show_boosts": "Show boosts from {user}",
+    "hide_repeats": "Hide repeats",
+    "show_repeats": "Show repeats",
     "admin_menu": {
       "moderation": "Moderation",
       "grant_admin": "Grant Admin",

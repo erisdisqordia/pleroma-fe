@@ -189,16 +189,16 @@
             <button
               v-if="user.showing_reblogs"
               class="btn btn-default"
-              :title="$t('user_card.hide_boosts', {user: user.screen_name})"
-              @click="hideReblogs"
+              :title="$t('user_card.hide_repeats')"
+              @click="hideRepeats"
             >
               <i class="icon-eye" />
             </button>
             <button
               v-if="!user.showing_reblogs"
               class="btn btn-default pressed"
-              :title="$t('user_card.show_boosts', {user: user.screen_name})"
-              @click="showReblogs"
+              :title="$t('user_card.show_repeats')"
+              @click="showRepeats"
             >
               <i class="icon-eye-off" />
             </button>

@@ -110,10 +110,10 @@ export default {
     ProgressButton
   },
   methods: {
-    showReblogs () {
+    showRepeats () {
       this.$store.dispatch('showReblogs', this.user.id)
     },
-    hideReblogs () {
+    hideRepeats () {
       this.$store.dispatch('hideReblogs', this.user.id)
     },
     followUser () {

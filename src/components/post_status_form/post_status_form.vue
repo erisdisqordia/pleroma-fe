@@ -81,6 +81,7 @@
           enable-emoji-picker
           hide-emoji-button
           enable-sticker-picker
+          @input="onEmojiInputInput"
           @sticker-uploaded="addMediaFile"
           @sticker-upload-failed="uploadFailed"
         >
@@ -95,7 +96,8 @@
             @keyup.ctrl.enter="postStatus(newStatus)"
             @drop="fileDrop"
             @dragover.prevent="fileDrag"
-            @input="resize"
+            @keydown.exact="resize"
+            @compositionupdate="resize"
             @paste="paste"
           />
           <p
@@ -473,10 +475,6 @@
     padding-bottom: 1.75em;
     min-height: 1px;
     box-sizing: content-box;
-  }
-
-  .form-post-body:focus {
-    min-height: 48px;
   }
 
   .main-input {

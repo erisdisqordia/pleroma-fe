@@ -249,6 +249,7 @@ const PostStatusForm = {
       return fileTypeService.fileType(fileInfo.mimetype)
     },
     paste (e) {
+      this.resize()
       if (e.clipboardData.files.length > 0) {
         // prevent pasting of file as text
         e.preventDefault()
@@ -267,6 +268,11 @@ const PostStatusForm = {
     fileDrag (e) {
       e.dataTransfer.dropEffect = 'copy'
     },
+    onEmojiInputInput (e) {
+      this.$nextTick(() => {
+        this.resize(this.$refs['textarea'])
+      })
+    },
     resize (e) {
       const target = e.target || e
       if (!(target instanceof window.Element)) { return }
@@ -275,12 +281,25 @@ const PostStatusForm = {
       // Remove "px" at the end of the values
       const vertPadding = Number(topPaddingStr.substr(0, topPaddingStr.length - 2)) +
             Number(bottomPaddingStr.substr(0, bottomPaddingStr.length - 2))
+      const oldValue = Number((/([0-9.]+)px/.exec(target.style.height || '') || [])[1])
       // Auto is needed to make textbox shrink when removing lines
       target.style.height = 'auto'
-      target.style.height = `${target.scrollHeight - vertPadding}px`
+      const newValue = target.scrollHeight - vertPadding
+      target.style.height = `${newValue}px`
+      const scroller = this.$el.closest('.sidebar-scroller') ||
+            this.$el.closest('.post-form-modal-view') ||
+            window
+      const delta = newValue - oldValue || 0
       if (target.value === '') {
         target.style.height = null
+      } else {
+        /* For some reason this doens't _exactly_ work on mobile post form when typing
+         * but it works when adding emojis. Supposedly, removing the "height = auto"
+         * line helps with that but it obviously breaks the autoheight.
+         */
+        scroller.scrollBy(0, delta)
       }
+      this.$refs['emoji-input'].resize()
     },
     showEmojiPicker () {
       this.$refs['textarea'].focus()

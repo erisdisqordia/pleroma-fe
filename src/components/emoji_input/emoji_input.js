@@ -211,10 +211,12 @@ const EmojiInput = {
       this.keepOpen = keepOpen
       this.$emit('input', newValue)
       const position = this.caret + (insertion + spaceAfter + spaceBefore).length
+      if (!keepOpen) {
+        this.input.elm.focus()
+      }
 
       this.$nextTick(function () {
         // Re-focus inputbox after clicking suggestion
-        this.input.elm.focus()
         // Set selection right after the replacement instead of the very end
         this.input.elm.setSelectionRange(position, position)
         this.caret = position

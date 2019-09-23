@@ -96,7 +96,7 @@
             @keyup.ctrl.enter="postStatus(newStatus)"
             @drop="fileDrop"
             @dragover.prevent="fileDrag"
-            @keydown.exact="resize"
+            @input="resize"
             @compositionupdate="resize"
             @paste="paste"
           />

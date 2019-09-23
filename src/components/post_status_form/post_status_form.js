@@ -249,7 +249,7 @@ const PostStatusForm = {
       return fileTypeService.fileType(fileInfo.mimetype)
     },
     paste (e) {
-      this.resize()
+      this.resize(e)
       if (e.clipboardData.files.length > 0) {
         // prevent pasting of file as text
         e.preventDefault()

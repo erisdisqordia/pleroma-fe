@@ -76,16 +76,16 @@
           </div>
         </div>
         <div
-          class="spam-mode"
+          class="keep-open"
           >
           <input
-            :id="labelKey + 'spam-mode'"
-            v-model="spamMode"
+            :id="labelKey + 'keep-open'"
+            v-model="keepOpen"
             type="checkbox"
             >
-          <label class="spam-mode-label" :for="labelKey + 'spam-mode'">
-            <div class="spam-mode-label-text">
-              {{ $t('emoji.spam') }}
+          <label class="keep-open-label" :for="labelKey + 'keep-open'">
+            <div class="keep-open-label-text">
+              {{ $t('emoji.keep_open') }}
             </div>
           </label>
         </div>

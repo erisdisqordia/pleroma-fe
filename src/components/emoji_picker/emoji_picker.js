@@ -18,7 +18,7 @@ const EmojiPicker = {
       activeGroup: 'custom',
       showingStickers: false,
       groupsScrolledClass: 'scrolled-top',
-      spamMode: false
+      keepOpen: false
     }
   },
   components: {
@@ -27,7 +27,7 @@ const EmojiPicker = {
   methods: {
     onEmoji (emoji) {
       const value = emoji.imageUrl ? `:${emoji.displayText}:` : emoji.replacement
-      this.$emit('emoji', { insertion: value, spamMode: this.spamMode })
+      this.$emit('emoji', { insertion: value, keepOpen: this.keepOpen })
     },
     highlight (key) {
       const ref = this.$refs['group-' + key]

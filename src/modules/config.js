@@ -7,6 +7,7 @@ const defaultState = {
   colors: {},
   hideMutedPosts: undefined, // instance default
   collapseMessageWithSubject: undefined, // instance default
+  padEmoji: true,
   hideAttachments: false,
   hideAttachmentsInConv: false,
   maxThumbnails: 16,

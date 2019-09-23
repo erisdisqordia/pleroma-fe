@@ -26,7 +26,7 @@ describe('EmojiInput', () => {
       const input = wrapper.find('input')
       input.setValue(initialString)
       wrapper.setData({ caret: initialString.length })
-      wrapper.vm.insert({ insertion: '(test)', spamMode: false })
+      wrapper.vm.insert({ insertion: '(test)', keepOpen: false })
       expect(wrapper.emitted().input[0][0]).to.eql('Testing (test) ')
     })
 
@@ -36,7 +36,7 @@ describe('EmojiInput', () => {
       const input = wrapper.find('input')
       input.setValue(initialString)
       wrapper.setData({ caret: initialString.length })
-      wrapper.vm.insert({ insertion: '(test)', spamMode: false })
+      wrapper.vm.insert({ insertion: '(test)', keepOpen: false })
       expect(wrapper.emitted().input[0][0]).to.eql('Testing (test) ')
     })
 
@@ -46,7 +46,7 @@ describe('EmojiInput', () => {
       const input = wrapper.find('input')
       input.setValue(initialString)
       wrapper.setData({ caret: 0 })
-      wrapper.vm.insert({ insertion: '(test)', spamMode: false })
+      wrapper.vm.insert({ insertion: '(test)', keepOpen: false })
       expect(wrapper.emitted().input[0][0]).to.eql('(test) Testing')
     })
 
@@ -56,7 +56,7 @@ describe('EmojiInput', () => {
       const input = wrapper.find('input')
       input.setValue(initialString)
       wrapper.setData({ caret: 6 })
-      wrapper.vm.insert({ insertion: ':ebin:', spamMode: false })
+      wrapper.vm.insert({ insertion: ':ebin:', keepOpen: false })
       expect(wrapper.emitted().input[0][0]).to.eql('Spurdo :ebin: Sparde')
     })
 
@@ -66,7 +66,7 @@ describe('EmojiInput', () => {
       const input = wrapper.find('input')
       input.setValue(initialString)
       wrapper.setData({ caret: 7 })
-      wrapper.vm.insert({ insertion: ':ebin:', spamMode: false })
+      wrapper.vm.insert({ insertion: ':ebin:', keepOpen: false })
       expect(wrapper.emitted().input[0][0]).to.eql('Spurdo :ebin: Sparde')
     })
 
@@ -76,7 +76,7 @@ describe('EmojiInput', () => {
       const input = wrapper.find('input')
       input.setValue(initialString)
       wrapper.setData({ caret: initialString.length })
-      wrapper.vm.insert({ insertion: ':spam:', spamMode: true })
+      wrapper.vm.insert({ insertion: ':spam:', keepOpen: true })
       expect(wrapper.emitted().input[0][0]).to.eql('Eat some spam!:spam:')
     })
 
@@ -86,7 +86,7 @@ describe('EmojiInput', () => {
       const input = wrapper.find('input')
       input.setValue(initialString)
       wrapper.setData({ caret: 0 })
-      wrapper.vm.insert({ insertion: '1234', spamMode: false })
+      wrapper.vm.insert({ insertion: '1234', keepOpen: false })
       vue.nextTick(() => {
         expect(wrapper.vm.caret).to.eql(5)
         done()
@@ -99,7 +99,7 @@ describe('EmojiInput', () => {
       const input = wrapper.find('input')
       input.setValue(initialString)
       wrapper.setData({ caret: initialString.length })
-      wrapper.vm.insert({ insertion: '1234', spamMode: false })
+      wrapper.vm.insert({ insertion: '1234', keepOpen: false })
       vue.nextTick(() => {
         expect(wrapper.vm.caret).to.eql(10)
         done()
@@ -112,7 +112,7 @@ describe('EmojiInput', () => {
       const input = wrapper.find('input')
       input.setValue(initialString)
       wrapper.setData({ caret: initialString.length })
-      wrapper.vm.insert({ insertion: '1234', spamMode: true })
+      wrapper.vm.insert({ insertion: '1234', keepOpen: true })
       vue.nextTick(() => {
         expect(wrapper.vm.caret).to.eql(8)
         done()

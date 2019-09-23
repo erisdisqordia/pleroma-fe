@@ -16,6 +16,7 @@ const settings = {
 
     return {
       hideAttachmentsLocal: user.hideAttachments,
+      padEmojiLocal: user.padEmoji,
       hideAttachmentsInConvLocal: user.hideAttachmentsInConv,
       maxThumbnails: user.maxThumbnails,
       hideNsfwLocal: user.hideNsfw,
@@ -126,6 +127,9 @@ const settings = {
   watch: {
     hideAttachmentsLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideAttachments', value })
+    },
+    padEmojiLocal (value) {
+      this.$store.dispatch('setOption', { name: 'padEmoji', value })
     },
     hideAttachmentsInConvLocal (value) {
       this.$store.dispatch('setOption', { name: 'hideAttachmentsInConv', value })

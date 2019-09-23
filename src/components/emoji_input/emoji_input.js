@@ -89,7 +89,7 @@ const EmojiInput = {
       blurTimeout: null,
       showPicker: false,
       temporarilyHideSuggestions: false,
-      spamMode: false,
+      keepOpen: false,
       disableClickOutside: false
     }
   },
@@ -97,6 +97,9 @@ const EmojiInput = {
     EmojiPicker
   },
   computed: {
+    padEmoji () {
+      return this.$store.state.config.padEmoji
+    },
     suggestions () {
       const firstchar = this.textAtCaret.charAt(0)
       if (this.textAtCaret === firstchar) { return [] }
@@ -176,7 +179,7 @@ const EmojiInput = {
       this.$emit('input', newValue)
       this.caret = 0
     },
-    insert ({ insertion, spamMode }) {
+    insert ({ insertion, keepOpen }) {
       const before = this.value.substring(0, this.caret) || ''
       const after = this.value.substring(this.caret) || ''
 
@@ -195,8 +198,8 @@ const EmojiInput = {
        * them, masto seem to be rendering :emoji::emoji: correctly now so why not
        */
       const isSpaceRegex = /\s/
-      const spaceBefore = !isSpaceRegex.exec(before.slice(-1)) && before.length && !spamMode > 0 ? ' ' : ''
-      const spaceAfter = !isSpaceRegex.exec(after[0]) && !spamMode ? ' ' : ''
+      const spaceBefore = !isSpaceRegex.exec(before.slice(-1)) && before.length && this.padEmoji > 0 ? ' ' : ''
+      const spaceAfter = !isSpaceRegex.exec(after[0]) && this.padEmoji ? ' ' : ''
 
       const newValue = [
         before,
@@ -205,7 +208,7 @@ const EmojiInput = {
         spaceAfter,
         after
       ].join('')
-      this.spamMode = spamMode
+      this.keepOpen = keepOpen
       this.$emit('input', newValue)
       const position = this.caret + (insertion + spaceAfter + spaceBefore).length
 
@@ -283,7 +286,7 @@ const EmojiInput = {
         this.blurTimeout = null
       }
 
-      if (!this.spamMode) {
+      if (!this.keepOpen) {
         this.showPicker = false
       }
       this.focused = true

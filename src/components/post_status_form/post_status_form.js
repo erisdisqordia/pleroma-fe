@@ -4,6 +4,7 @@ import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji_input/emoji_input.vue'
 import PollForm from '../poll/poll_form.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
+import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
 import { reject, map, uniqBy } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
 
@@ -276,29 +277,68 @@ const PostStatusForm = {
     resize (e) {
       const target = e.target || e
       if (!(target instanceof window.Element)) { return }
-      const topPaddingStr = window.getComputedStyle(target)['padding-top']
-      const bottomPaddingStr = window.getComputedStyle(target)['padding-bottom']
-      // Remove "px" at the end of the values
-      const vertPadding = Number(topPaddingStr.substr(0, topPaddingStr.length - 2)) +
-            Number(bottomPaddingStr.substr(0, bottomPaddingStr.length - 2))
-      const oldValue = Number((/([0-9.]+)px/.exec(target.style.height || '') || [])[1])
-      // Auto is needed to make textbox shrink when removing lines
-      target.style.height = 'auto'
-      const newValue = target.scrollHeight - vertPadding
-      target.style.height = `${newValue}px`
+      if (target.value === '') {
+        target.style.height = null
+        this.$refs['emoji-input'].resize()
+        return
+      }
+
+      const rootRef = this.$refs['root']
       const scroller = this.$el.closest('.sidebar-scroller') ||
             this.$el.closest('.post-form-modal-view') ||
             window
-      const delta = newValue - oldValue || 0
-      if (target.value === '') {
-        target.style.height = null
+
+      const topPaddingStr = window.getComputedStyle(target)['padding-top']
+      const bottomPaddingStr = window.getComputedStyle(target)['padding-bottom']
+      // Remove "px" at the end of the values
+      const topPadding = Number(topPaddingStr.substring(0, topPaddingStr.length - 2))
+      const bottomPadding = Number(bottomPaddingStr.substring(0, bottomPaddingStr.length - 2))
+      const vertPadding = topPadding + bottomPadding
+      const oldHeightStr = target.style.height || ''
+      const oldHeight = Number(oldHeightStr.substring(0, oldHeightStr.length - 2))
+
+      const tempScroll = scroller === window ? scroller.scrollY : scroller.scrollTop
+
+      // Auto is needed to make textbox shrink when removing lines
+      target.style.height = 'auto'
+      const newHeight = target.scrollHeight - vertPadding
+      target.style.height = `${oldHeight}px`
+
+      if (scroller === window) {
+        scroller.scroll(0, tempScroll)
       } else {
-        /* For some reason this doens't _exactly_ work on mobile post form when typing
-         * but it works when adding emojis. Supposedly, removing the "height = auto"
-         * line helps with that but it obviously breaks the autoheight.
-         */
-        scroller.scrollBy(0, delta)
+        scroller.scrollTop = tempScroll
       }
+
+      const currentScroll = scroller === window ? scroller.scrollY : scroller.scrollTop
+      const scrollerHeight = scroller === window ? scroller.innerHeight : scroller.offsetHeight
+      const scrollerBottomBorder = currentScroll + scrollerHeight
+
+      const rootBottomBorder = rootRef.offsetHeight +
+            findOffset(rootRef, scroller).top
+
+      const textareaSizeChangeDelta = newHeight - oldHeight || 0
+      const rootChangeDelta = rootBottomBorder - scrollerBottomBorder + textareaSizeChangeDelta
+
+      // console.log('CURRENT SCROLL', currentScroll)
+      console.log('BOTTOM BORDERS', rootBottomBorder, scrollerBottomBorder)
+      console.log('BOTTOM DELTA', rootBottomBorder - scrollerBottomBorder)
+      const targetScroll = scrollerBottomBorder < rootBottomBorder
+            ? currentScroll + rootChangeDelta
+            : currentScroll + textareaSizeChangeDelta
+      if (scroller === window) {
+        scroller.scroll(0, targetScroll)
+      } else {
+        scroller.scrollTop = targetScroll
+      }
+      target.style.height = `${newHeight}px`
+
+      console.log(scroller, rootRef)
+      // console.log('SCROLL TO BUTTON', scrollerBottomBorder < rootBottomBorder)
+      // console.log('DELTA B', rootChangeDelta)
+      // console.log('DELTA D', textareaSizeChangeDelta)
+      // console.log('TARGET', targetScroll)
+      // console.log('ACTUAL', scroller.scrollTop || scroller.scrollY || 0)
       this.$refs['emoji-input'].resize()
     },
     showEmojiPicker () {

@@ -1,5 +1,8 @@
 <template>
-  <div class="post-status-form">
+<div
+  class="post-status-form"
+  ref="root"
+  >
     <form
       autocomplete="off"
       @submit.prevent="postStatus(newStatus)"

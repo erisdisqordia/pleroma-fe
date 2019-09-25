@@ -13,9 +13,11 @@ export const findOffset = (child, parent, { top = 0, left = 0 } = {}, ignorePadd
   if (child.offsetParent && (parent === window || parent.contains(child.offsetParent) || parent === child.offsetParent)) {
     return findOffset(child.offsetParent, parent, result, false)
   } else {
-    const { topPadding, leftPadding } = findPadding(parent)
-    result.top += topPadding
-    result.left += leftPadding
+    if (parent !== window) {
+      const { topPadding, leftPadding } = findPadding(parent)
+      result.top += topPadding
+      result.left += leftPadding
+    }
     return result
   }
 }

@@ -1,6 +1,7 @@
 import Completion from '../../services/completion/completion.js'
 import EmojiPicker from '../emoji_picker/emoji_picker.vue'
 import { take } from 'lodash'
+import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
 
 /**
  * EmojiInput - augmented inputs for emoji and autocomplete support in inputs
@@ -144,6 +145,7 @@ const EmojiInput = {
     input.elm.addEventListener('paste', this.onPaste)
     input.elm.addEventListener('keyup', this.onKeyUp)
     input.elm.addEventListener('keydown', this.onKeyDown)
+    input.elm.addEventListener('click', this.onClickInput)
     input.elm.addEventListener('transitionend', this.onTransition)
     input.elm.addEventListener('compositionupdate', this.onCompositionUpdate)
   },
@@ -155,6 +157,7 @@ const EmojiInput = {
       input.elm.removeEventListener('paste', this.onPaste)
       input.elm.removeEventListener('keyup', this.onKeyUp)
       input.elm.removeEventListener('keydown', this.onKeyDown)
+      input.elm.removeEventListener('click', this.onClickInput)
       input.elm.removeEventListener('transitionend', this.onTransition)
       input.elm.removeEventListener('compositionupdate', this.onCompositionUpdate)
     }
@@ -162,6 +165,9 @@ const EmojiInput = {
   methods: {
     triggerShowPicker () {
       this.showPicker = true
+      this.$nextTick(() => {
+        this.scrollIntoView()
+      })
       // This temporarily disables "click outside" handler
       // since external trigger also means click originates
       // from outside, thus preventing picker from opening
@@ -173,6 +179,9 @@ const EmojiInput = {
     togglePicker () {
       this.input.elm.focus()
       this.showPicker = !this.showPicker
+      if (this.showPicker) {
+        this.scrollIntoView()
+      }
     },
     replace (replacement) {
       const newValue = Completion.replaceWord(this.value, this.wordAtCaret, replacement)
@@ -267,6 +276,37 @@ const EmojiInput = {
         this.highlighted = 0
       }
     },
+    scrollIntoView () {
+      const rootRef = this.$refs['picker'].$el
+      /* Scroller is either `window` (replies in TL), sidebar (main post form,
+       * replies in notifs) or mobile post form. Note that getting and setting
+       * scroll is different for `Window` and `Element`s
+       */
+      const scrollerRef = this.$el.closest('.sidebar-scroller') ||
+            this.$el.closest('.post-form-modal-view') ||
+            window
+      const currentScroll = scrollerRef === window
+        ? scrollerRef.scrollY
+        : scrollerRef.scrollTop
+      const scrollerHeight = scrollerRef === window
+        ? scrollerRef.innerHeight
+        : scrollerRef.offsetHeight
+
+      const scrollerBottomBorder = currentScroll + scrollerHeight
+      // We check where the bottom border of root element is, this uses findOffset
+      // to find offset relative to scrollable container (scroller)
+      const rootBottomBorder = rootRef.offsetHeight + findOffset(rootRef, scrollerRef).top
+
+      const bottomDelta = Math.max(0, rootBottomBorder - scrollerBottomBorder)
+      // could also check top delta but there's no case for it
+      const targetScroll = currentScroll + bottomDelta
+
+      if (scrollerRef === window) {
+        scrollerRef.scroll(0, targetScroll)
+      } else {
+        scrollerRef.scrollTop = targetScroll
+      }
+    },
     onTransition (e) {
       this.resize()
     },
@@ -359,6 +399,9 @@ const EmojiInput = {
       this.setCaret(e)
       this.resize()
       this.$emit('input', e.target.value)
+    },
+    onClickInput (e) {
+      this.showPicker = false;
     },
     onClickOutside (e) {
       if (this.disableClickOutside) return

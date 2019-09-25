@@ -10,7 +10,8 @@
   position: fixed;
   z-index: -1;
   height: 100%;
-  width: 100%;
+  left: 0;
+  right: -20px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 0 50%;
@@ -347,6 +348,7 @@ i[class*=icon-] {
   align-items: center;
   position: fixed;
   height: 50px;
+  box-sizing: border-box;
 
   .logo {
     display: flex;
@@ -386,6 +388,7 @@ i[class*=icon-] {
   }
 
   .inner-nav {
+    position: relative;
     margin: auto;
     box-sizing: border-box;
     padding-left: 10px;

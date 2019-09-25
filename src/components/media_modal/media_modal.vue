@@ -1,6 +1,7 @@
 <template>
   <div
     v-if="showing"
+    v-body-scroll-lock="showing"
     class="modal-view media-modal-view"
     @click.prevent="hide"
   >
@@ -42,6 +43,10 @@
 
 .media-modal-view {
   z-index: 1001;
+
+  body:not(.scroll-locked) & {
+    display: none;
+  }
 
   &:hover {
     .modal-view-button-arrow {

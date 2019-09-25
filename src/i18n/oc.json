@@ -5,7 +5,7 @@
   "exporter": {
      "export": "Exportar",
      "processing": "Tractament, vos demandarem lèu de telecargar lo fichièr"
-  },  
+  },
     "features_panel": {
       "chat": "Chat",
       "gopher": "Gopher",
@@ -30,12 +30,12 @@
     "cancel": "Anullar"
   },
   "image_cropper": {
-     "crop_picture": "Talhar l’imatge",
-     "save": "Salvar",
-     "save_without_cropping": "Salvar sens talhada",
-     "cancel": "Anullar"
+    "crop_picture": "Talhar l’imatge",
+    "save": "Salvar",
+    "save_without_cropping": "Salvar sens talhada",
+    "cancel": "Anullar"
   },
-    "importer": {
+  "importer": {
     "submit": "Mandar",
     "success": "Corrèctament importat.",
     "error": "Una error s’es producha pendent l’importacion d’aqueste fichièr."
@@ -65,6 +65,7 @@
     "timeline": "Flux d’actualitat",
     "twkn": "Lo malhum conegut",
     "user_search": "Cèrca d’utilizaires",
+    "search": "Cercar",
     "who_to_follow": "Qual seguir",
     "preferences": "Preferéncias"
   },
@@ -79,19 +80,27 @@
     "no_more_notifications": "Pas mai de notificacions"
   },
   "polls": {
-"add_poll": "Ajustar un sondatge",
+    "add_poll": "Ajustar un sondatge",
     "add_option": "Ajustar d’opcions",
-	"option": "Opcion",
-	"votes": "vòtes",
-	"vote": "Votar",
-	"type": "Tipe de sondatge",
-	"single_choice": "Causida unica",
-	"multiple_choices": "Causida multipla",
-	"expiry": "Durada del sondatge",
-	"expires_in": "Lo sondatge s’acabarà {0}",
-	"expired": "Sondatge acabat {0}",
-	"not_enough_options": "I a pas pro d’opcions"
-	},  
+    "option": "Opcion",
+    "votes": "vòtes",
+    "vote": "Votar",
+    "type": "Tipe de sondatge",
+    "single_choice": "Causida unica",
+    "multiple_choices": "Causida multipla",
+    "expiry": "Durada del sondatge",
+    "expires_in": "Lo sondatge s’acabarà {0}",
+    "expired": "Sondatge acabat {0}",
+    "not_enough_options": "I a pas pro d’opcions"
+  },
+  "stickers": {
+    "add_sticker": "Ajustar un pegasolet"
+  },
+  "interactions": {
+    "favs_repeats": "Repeticions e favorits",
+    "follows": "Nòus seguidors",
+    "load_older": "Cargar d’interaccions anterioras"
+  },
   "post_status": {
     "new_status": "Publicar d’estatuts novèls",
     "account_not_locked_warning": "Vòstre compte es pas {0}. Qual que siá pòt vos seguir per veire vòstras publicacions destinadas pas qu’a vòstres seguidors.",
@@ -137,8 +146,8 @@
     }
   },
   "selectable_list": {
-	    "select_all": "O seleccionar tot"
-  },  
+    "select_all": "O seleccionar tot"
+  },
   "settings": {
     "app_name": "Nom de l’aplicacion",
     "attachmentRadius": "Pèças juntas",
@@ -216,7 +225,6 @@
     "use_contain_fit": "Talhar pas las pèças juntas per las vinhetas",
     "name": "Nom",
     "name_bio": "Nom & Bio",
-
     "new_password": "Nòu senhal",
     "notification_visibility_follows": "Abonaments",
     "notification_visibility_likes": "Aimar",
@@ -264,12 +272,12 @@
     "subject_line_email": "Coma los corrièls : \"re: subjècte\"",
     "subject_line_mastodon": "Coma mastodon : copiar tal coma es",
     "subject_line_noop": "Copiar pas",
-"post_status_content_type": "Publicar lo tipe de contengut dels estatuts",
+    "post_status_content_type": "Publicar lo tipe de contengut dels estatuts",
     "stop_gifs": "Lançar los GIFs al subrevòl",
     "streaming": "Activar lo cargament automatic dels novèls estatus en anar amont",
     "text": "Tèxte",
     "theme": "Tèma",
-    "theme_help_v2_1": "You can also override certain component's colors and opacity by toggling the checkbox, use \"Clear all\" button to clear all overrides.",
+    "theme_help_v2_1": "Podètz tanben remplaçar la color d’unes compausants en clicant la case, utilizatz lo boton \"O escafar tot\" per escafar totes las subrecargadas.",
     "theme_help_v2_2": "Icons underneath some entries are background/text contrast indicators, hover over for detailed info. Please keep in mind that when using transparency contrast indicators show the worst possible case.",
     "theme_help": "Emplegatz los còdis de color hex (#rrggbb) per personalizar vòstre tèma de color.",
     "tooltipRadius": "Astúcias/alèrtas",
@@ -280,14 +288,14 @@
       "true": "òc"
     },
     "notifications": "Notificacions",
-    "notification_setting": "Receber las notificacions de :",
+    "notification_setting": "Recebre las notificacions de :",
     "notification_setting_follows": "Utilizaires que seguissètz",
     "notification_setting_non_follows": "Utilizaires que seguissètz pas",
     "notification_setting_followers": "Utilizaires que vos seguisson",
     "notification_setting_non_followers": "Utilizaires que vos seguisson pas",
-    "notification_mutes": "Per receber pas mai d’un utilizaire en particular, botatz-lo en silenci.",
+    "notification_mutes": "Per recebre pas mai d’un utilizaire en particular, botatz-lo en silenci.",
     "notification_blocks": "Blocar un utilizaire arrèsta totas las notificacions tan coma quitar de los seguir.",
-	"enable_web_push_notifications": "Activar las notificacions web push",
+    "enable_web_push_notifications": "Activar las notificacions web push",
     "style": {
       "switcher": {
         "keep_color": "Gardar las colors",
@@ -442,7 +450,7 @@
     "conversation": "Conversacion",
     "error_fetching": "Error en cercant de mesas a jorn",
     "load_older": "Ne veire mai",
-	"no_retweet_hint": "Las publicacions marcadas pels seguidors solament o dirèctas se pòdon pas repetir",
+    "no_retweet_hint": "Las publicacions marcadas pels seguidors solament o dirèctas se pòdon pas repetir",
     "repeated": "repetit",
     "show_new": "Ne veire mai",
     "up_to_date": "A jorn",
@@ -477,6 +485,8 @@
     "per_day": "per jorn",
     "remote_follow": "Seguir a distància",
     "statuses": "Estatuts",
+    "subscribe": "S’abonar",
+    "unsubscribe": "Se desabonar",
     "unblock": "Desblocar",
     "unblock_progress": "Desblocatge...",
     "block_progress": "Blocatge...",
@@ -501,7 +511,7 @@
       "quarantine": "Defendre la federacion de las publicacions de l’utilizaire",
       "delete_user": "Suprimir l’utilizaire",
       "delete_user_confirmation": "Volètz vertadièrament far aquò ? Aquesta accion se pòt pas anullar."
-    }    
+    }
   },
   "user_profile": {
     "timeline_title": "Flux utilizaire",
@@ -532,5 +542,12 @@
       "GiB": "Gio",
       "TiB": "Tio"
     }
+  },
+  "search": {
+    "people": "Gent",
+    "hashtags": "Etiquetas",
+    "person_talking": "{count} persona ne parla",
+    "people_talking": "{count} personas ne parlan",
+    "no_results": "Cap de resultats"
   }
 }

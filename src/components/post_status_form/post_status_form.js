@@ -8,7 +8,7 @@ import { findOffset } from '../../services/offset_finder/offset_finder.service.j
 import { reject, map, uniqBy } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
 
-const buildMentionsString = ({ user, attentions }, currentUser) => {
+const buildMentionsString = ({ user, attentions = [] }, currentUser) => {
   let allAttentions = [...attentions]
 
   allAttentions.unshift(user)

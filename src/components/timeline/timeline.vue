@@ -33,9 +33,10 @@
             v-if="timeline.statusesObject[statusId]"
             :key="statusId + '-pinned'"
             class="status-fadein"
-            :statusoid="timeline.statusesObject[statusId]"
+            :status-id="statusId"
             :collapsable="true"
             :pinned-status-ids-object="pinnedStatusIdsObject"
+            :in-profile="inProfile"
           />
         </template>
         <template v-for="status in timeline.visibleStatuses">
@@ -43,8 +44,9 @@
             v-if="!excludedStatusIdsObject[status.id]"
             :key="status.id"
             class="status-fadein"
-            :statusoid="status"
+            :status-id="status.id"
             :collapsable="true"
+            :in-profile="inProfile"
           />
         </template>
       </div>

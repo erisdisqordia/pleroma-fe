@@ -11,7 +11,7 @@
         rounded="top"
       />
       <div class="panel-footer">
-        <PostStatusForm v-if="user" />
+        <PostStatusForm />
       </div>
     </div>
     <auth-form

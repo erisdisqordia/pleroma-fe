@@ -139,13 +139,13 @@
             <button
               class="btn btn-default btn-block"
               :disabled="followRequestInProgress"
-              :title="followRequestSent ? $t('user_card.follow_again') : ''"
+              :title="user.requested ? $t('user_card.follow_again') : ''"
               @click="followUser"
             >
               <template v-if="followRequestInProgress">
                 {{ $t('user_card.follow_progress') }}
               </template>
-              <template v-else-if="followRequestSent">
+              <template v-else-if="user.requested">
                 {{ $t('user_card.follow_sent') }}
               </template>
               <template v-else>
@@ -190,6 +190,15 @@
             >
               <i class="icon-bell-ringing-o" />
             </ProgressButton>
+          </div>
+
+          <div>
+            <button
+              class="btn btn-default btn-block"
+              @click="mentionUser"
+            >
+              {{ $t('user_card.mention') }}
+            </button>
           </div>
 
           <div>

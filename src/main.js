@@ -15,6 +15,7 @@ import mediaViewerModule from './modules/media_viewer.js'
 import oauthTokensModule from './modules/oauth_tokens.js'
 import reportsModule from './modules/reports.js'
 import pollsModule from './modules/polls.js'
+import postStatusModule from './modules/postStatus.js'
 
 import VueI18n from 'vue-i18n'
 
@@ -26,6 +27,7 @@ import messages from './i18n/messages.js'
 import VueChatScroll from 'vue-chat-scroll'
 import VueClickOutside from 'v-click-outside'
 import PortalVue from 'portal-vue'
+import VBodyScrollLock from './directives/body_scroll_lock'
 import VTooltip from 'v-tooltip'
 
 import afterStoreSetup from './boot/after_store.js'
@@ -38,6 +40,7 @@ Vue.use(VueI18n)
 Vue.use(VueChatScroll)
 Vue.use(VueClickOutside)
 Vue.use(PortalVue)
+Vue.use(VBodyScrollLock)
 Vue.use(VTooltip)
 
 const i18n = new VueI18n({
@@ -76,7 +79,8 @@ const persistedStateOptions = {
       mediaViewer: mediaViewerModule,
       oauthTokens: oauthTokensModule,
       reports: reportsModule,
-      polls: pollsModule
+      polls: pollsModule,
+      postStatus: postStatusModule
     },
     plugins: [persistedState, pushNotifications],
     strict: false // Socket modifies itself, let's ignore this for now.

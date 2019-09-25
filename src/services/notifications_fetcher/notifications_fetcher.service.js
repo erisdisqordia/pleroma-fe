@@ -10,6 +10,11 @@ const fetchAndUpdate = ({ store, credentials, older = false }) => {
   const args = { credentials }
   const rootState = store.rootState || store.state
   const timelineData = rootState.statuses.notifications
+  const hideMutedPosts = typeof rootState.config.hideMutedPosts === 'undefined'
+    ? rootState.instance.hideMutedPosts
+    : rootState.config.hideMutedPosts
+
+  args['withMuted'] = !hideMutedPosts
 
   args['timeline'] = 'notifications'
   if (older) {

@@ -10,14 +10,14 @@
     <div slot="popover">
       <div class="dropdown-menu">
         <button
-          v-if="canMute && !status.muted"
+          v-if="canMute && !status.thread_muted"
           class="dropdown-item dropdown-item-icon"
           @click.prevent="muteConversation"
         >
           <i class="icon-eye-off" /><span>{{ $t("status.mute_conversation") }}</span>
         </button>
         <button
-          v-if="canMute && status.muted"
+          v-if="canMute && status.thread_muted"
           class="dropdown-item dropdown-item-icon"
           @click.prevent="unmuteConversation"
         >

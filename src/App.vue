@@ -4,6 +4,7 @@
     :style="bgAppStyle"
   >
     <div
+      id="app_bg_wrapper"
       class="app-bg-wrapper"
       :style="bgStyle"
     />
@@ -14,20 +15,20 @@
       class="nav-bar container"
       @click="scrollToTop()"
     >
-      <div
-        class="logo"
-        :style="logoBgStyle"
-      >
-        <div
-          class="mask"
-          :style="logoMaskStyle"
-        />
-        <img
-          :src="logo"
-          :style="logoStyle"
-        >
-      </div>
       <div class="inner-nav">
+        <div
+          class="logo"
+          :style="logoBgStyle"
+        >
+          <div
+            class="mask"
+            :style="logoMaskStyle"
+          />
+          <img
+            :src="logo"
+            :style="logoStyle"
+          >
+        </div>
         <div class="item">
           <router-link
             class="site-name"
@@ -107,8 +108,9 @@
       :floating="true"
       class="floating-chat mobile-hidden"
     />
-    <MobilePostStatusModal />
+    <MobilePostStatusButton />
     <UserReportingModal />
+    <PostStatusModal />
     <portal-target name="modal" />
   </div>
 </template>

@@ -316,7 +316,7 @@ const PostStatusForm = {
        * height to 'auto' which makes textarea tiny again, so that scrollHeight
        * will match text height again. HOWEVER, shrinking textarea can screw with
        * the scroll since there might be not enough padding around root to even
-       * varrant a scroll, so it will jump to 0 and refuse to move anywhere,
+       * warrant a scroll, so it will jump to 0 and refuse to move anywhere,
        * so we check current scroll position before shrinking and then restore it
        * with needed delta.
        */

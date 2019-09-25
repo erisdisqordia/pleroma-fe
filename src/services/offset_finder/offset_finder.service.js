@@ -9,7 +9,6 @@ export const findOffset = (child, parent, { top = 0, left = 0 } = {}, ignorePadd
     result.left += ignorePadding ? 0 : leftPadding
   }
 
-  console.log('eee', parent, child.offsetParent)
   if (child.offsetParent && (parent === window || parent.contains(child.offsetParent) || parent === child.offsetParent)) {
     return findOffset(child.offsetParent, parent, result, false)
   } else {

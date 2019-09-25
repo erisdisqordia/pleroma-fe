@@ -277,6 +277,8 @@ const PostStatusForm = {
     resize (e) {
       const target = e.target || e
       if (!(target instanceof window.Element)) { return }
+
+      // Reset to default height for empty form, nothing else to do here.
       if (target.value === '') {
         target.style.height = null
         this.$refs['emoji-input'].resize()
@@ -284,61 +286,74 @@ const PostStatusForm = {
       }
 
       const rootRef = this.$refs['root']
-      const scroller = this.$el.closest('.sidebar-scroller') ||
+      /* Scroller is either `window` (replies in TL), sidebar (main post form,
+       * replies in notifs) or mobile post form. Note that getting and setting
+       * scroll is different for `Window` and `Element`s
+       */
+      const scrollerRef = this.$el.closest('.sidebar-scroller') ||
             this.$el.closest('.post-form-modal-view') ||
             window
 
+      // Getting info about padding we have to account for, removing 'px' part
       const topPaddingStr = window.getComputedStyle(target)['padding-top']
       const bottomPaddingStr = window.getComputedStyle(target)['padding-bottom']
-      // Remove "px" at the end of the values
       const topPadding = Number(topPaddingStr.substring(0, topPaddingStr.length - 2))
       const bottomPadding = Number(bottomPaddingStr.substring(0, bottomPaddingStr.length - 2))
       const vertPadding = topPadding + bottomPadding
+
       const oldHeightStr = target.style.height || ''
       const oldHeight = Number(oldHeightStr.substring(0, oldHeightStr.length - 2))
 
-      const tempScroll = scroller === window ? scroller.scrollY : scroller.scrollTop
+      /* Explanation:
+       *
+       * https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
+       * scrollHeight returns element's scrollable content height, i.e. visible
+       * element + overscrolled parts of it. We use it to determine when text
+       * inside the textarea exceeded its height, so we can set height to prevent
+       * overscroll, i.e. make textarea grow with the text. HOWEVER, since we
+       * explicitly set new height, scrollHeight won't go below that, so we can't
+       * SHRINK the textarea when there's extra space. To workaround that we set
+       * height to 'auto' which makes textarea tiny again, so that scrollHeight
+       * will match text height again. HOWEVER, shrinking textarea can screw with
+       * the scroll since there might be not enough padding around root to even
+       * varrant a scroll, so it will jump to 0 and refuse to move anywhere,
+       * so we check current scroll position before shrinking and then restore it
+       * with needed delta.
+       */
 
-      // Auto is needed to make textbox shrink when removing lines
-      target.style.height = 'auto'
-      const newHeight = target.scrollHeight - vertPadding
-      target.style.height = `${oldHeight}px`
-
-      if (scroller === window) {
-        scroller.scroll(0, tempScroll)
-      } else {
-        scroller.scrollTop = tempScroll
-      }
-
-      const currentScroll = scroller === window ? scroller.scrollY : scroller.scrollTop
-      const scrollerHeight = scroller === window ? scroller.innerHeight : scroller.offsetHeight
+      // this part has to be BEFORE the content size update
+      const currentScroll = scrollerRef === window
+        ? scrollerRef.scrollY
+        : scrollerRef.scrollTop
+      const scrollerHeight = scrollerRef === window
+        ? scrollerRef.innerHeight
+        : scrollerRef.offsetHeight
       const scrollerBottomBorder = currentScroll + scrollerHeight
 
-      const rootBottomBorder = rootRef.offsetHeight +
-            findOffset(rootRef, scroller).top
+      // BEGIN content size update
+      target.style.height = 'auto'
+      const newHeight = target.scrollHeight - vertPadding
+      target.style.height = `${newHeight}px`
+      // END content size update
+
+      // We check where the bottom border of root element is, this uses findOffset
+      // to find offset relative to scrollable container (scroller)
+      const rootBottomBorder = rootRef.offsetHeight + findOffset(rootRef, scrollerRef).top
 
       const textareaSizeChangeDelta = newHeight - oldHeight || 0
-      const rootChangeDelta = rootBottomBorder - scrollerBottomBorder + textareaSizeChangeDelta
+      const isBottomObstructed = scrollerBottomBorder < rootBottomBorder
+      const rootChangeDelta = rootBottomBorder - scrollerBottomBorder
+      const totalDelta = textareaSizeChangeDelta +
+        (isBottomObstructed ? rootChangeDelta : 0)
 
-      // console.log('CURRENT SCROLL', currentScroll)
-      console.log('BOTTOM BORDERS', rootBottomBorder, scrollerBottomBorder)
-      console.log('BOTTOM DELTA', rootBottomBorder - scrollerBottomBorder)
-      const targetScroll = scrollerBottomBorder < rootBottomBorder
-            ? currentScroll + rootChangeDelta
-            : currentScroll + textareaSizeChangeDelta
-      if (scroller === window) {
-        scroller.scroll(0, targetScroll)
+      const targetScroll = currentScroll + totalDelta
+
+      if (scrollerRef === window) {
+        scrollerRef.scroll(0, targetScroll)
       } else {
-        scroller.scrollTop = targetScroll
+        scrollerRef.scrollTop = targetScroll
       }
-      target.style.height = `${newHeight}px`
 
-      console.log(scroller, rootRef)
-      // console.log('SCROLL TO BUTTON', scrollerBottomBorder < rootBottomBorder)
-      // console.log('DELTA B', rootChangeDelta)
-      // console.log('DELTA D', textareaSizeChangeDelta)
-      // console.log('TARGET', targetScroll)
-      // console.log('ACTUAL', scroller.scrollTop || scroller.scrollY || 0)
       this.$refs['emoji-input'].resize()
     },
     showEmojiPicker () {

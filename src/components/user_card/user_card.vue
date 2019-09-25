@@ -190,6 +190,15 @@
 
           <div>
             <button
+              class="btn btn-default btn-block"
+              @click="mentionUser"
+            >
+              {{ $t('user_card.mention') }}
+            </button>
+          </div>
+
+          <div>
+            <button
               v-if="user.muted"
               class="btn btn-default btn-block pressed"
               @click="unmuteUser"

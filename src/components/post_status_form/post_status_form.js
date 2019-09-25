@@ -8,7 +8,7 @@ import fileTypeService from '../../services/file_type/file_type.service.js'
 import { reject, map, uniqBy } from 'lodash'
 import suggestor from '../emoji-input/suggestor.js'
 
-const buildMentionsString = ({ user, attentions }, currentUser) => {
+const buildMentionsString = ({ user, attentions = [] }, currentUser) => {
   let allAttentions = [...attentions]
 
   allAttentions.unshift(user)

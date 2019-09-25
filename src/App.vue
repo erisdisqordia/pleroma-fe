@@ -107,8 +107,9 @@
       :floating="true"
       class="floating-chat mobile-hidden"
     />
-    <MobilePostStatusModal />
+    <MobilePostStatusButton />
     <UserReportingModal />
+    <PostStatusModal />
     <portal-target name="modal" />
   </div>
 </template>

@@ -1,14 +1,9 @@
-import PostStatusForm from '../post_status_form/post_status_form.vue'
 import { debounce } from 'lodash'
 
-const MobilePostStatusModal = {
-  components: {
-    PostStatusForm
-  },
+const MobilePostStatusButton = {
   data () {
     return {
       hidden: false,
-      postFormOpen: false,
       scrollingDown: false,
       inputActive: false,
       oldScrollPos: 0,
@@ -28,8 +23,8 @@ const MobilePostStatusModal = {
     window.removeEventListener('resize', this.handleOSK)
   },
   computed: {
-    currentUser () {
-      return this.$store.state.users.currentUser
+    isLoggedIn () {
+      return !!this.$store.state.users.currentUser
     },
     isHidden () {
       return this.autohideFloatingPostButton && (this.hidden || this.inputActive)
@@ -57,17 +52,7 @@ const MobilePostStatusModal = {
       window.removeEventListener('scroll', this.handleScrollEnd)
     },
     openPostForm () {
-      this.postFormOpen = true
-      this.hidden = true
-
-      const el = this.$el.querySelector('textarea')
-      this.$nextTick(function () {
-        el.focus()
-      })
-    },
-    closePostForm () {
-      this.postFormOpen = false
-      this.hidden = false
+      this.$store.dispatch('openPostStatusModal')
     },
     handleOSK () {
       // This is a big hack: we're guessing from changed window sizes if the
@@ -105,4 +90,4 @@ const MobilePostStatusModal = {
   }
 }
 
-export default MobilePostStatusModal
+export default MobilePostStatusButton

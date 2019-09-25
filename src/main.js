@@ -15,6 +15,7 @@ import mediaViewerModule from './modules/media_viewer.js'
 import oauthTokensModule from './modules/oauth_tokens.js'
 import reportsModule from './modules/reports.js'
 import pollsModule from './modules/polls.js'
+import postStatusModule from './modules/postStatus.js'
 
 import VueI18n from 'vue-i18n'
 
@@ -76,7 +77,8 @@ const persistedStateOptions = {
       mediaViewer: mediaViewerModule,
       oauthTokens: oauthTokensModule,
       reports: reportsModule,
-      polls: pollsModule
+      polls: pollsModule,
+      postStatus: postStatusModule
     },
     plugins: [persistedState, pushNotifications],
     strict: false // Socket modifies itself, let's ignore this for now.

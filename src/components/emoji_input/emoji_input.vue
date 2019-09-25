@@ -78,7 +78,7 @@
   }
   .emoji-picker-panel {
     position: absolute;
-    z-index: 9;
+    z-index: 20;
     margin-top: 2px;
 
     &.hide {
@@ -89,7 +89,7 @@
   .autocomplete {
     &-panel {
       position: absolute;
-      z-index: 9;
+      z-index: 20;
       margin-top: 2px;
 
       &.hide {

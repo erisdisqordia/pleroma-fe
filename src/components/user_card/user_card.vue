@@ -3,8 +3,11 @@
     class="user-card"
     :class="classes"
   >
-    <div :class="{ 'hide-bio': hideBio }" :style="style" class="background-image">
-    </div>
+    <div
+      :class="{ 'hide-bio': hideBio }"
+      :style="style"
+      class="background-image"
+    />
     <div class="panel-heading">
       <div class="user-info">
         <div class="container">

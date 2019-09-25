@@ -401,7 +401,7 @@ const EmojiInput = {
       this.$emit('input', e.target.value)
     },
     onClickInput (e) {
-      this.showPicker = false;
+      this.showPicker = false
     },
     onClickOutside (e) {
       if (this.disableClickOutside) return

@@ -1,7 +1,7 @@
 <template>
-<div
-  class="post-status-form"
-  ref="root"
+  <div
+    ref="root"
+    class="post-status-form"
   >
     <form
       autocomplete="off"

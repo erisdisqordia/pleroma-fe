@@ -67,9 +67,10 @@
     position: absolute;
     top: 0;
     right: 0;
-    margin: 0 .25em;
+    margin: .2em .25em;
     font-size: 16px;
     cursor: pointer;
+    line-height: 24px;
 
     &:hover i {
       color: $fallback--text;

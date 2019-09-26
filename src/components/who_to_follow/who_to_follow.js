@@ -16,21 +16,11 @@ const WhoToFollow = {
   methods: {
     showWhoToFollow (reply) {
       reply.forEach((i, index) => {
-        const user = {
-          id: 0,
-          name: i.display_name,
-          screen_name: i.acct,
-          profile_image_url: i.avatar || '/images/avi.png',
-          profile_image_url_original: i.avatar || '/images/avi.png',
-          statusnet_profile_url: i.url
-        }
-        this.users.push(user)
-
-        this.$store.state.api.backendInteractor.fetchUser({ id: user.screen_name })
+        this.$store.state.api.backendInteractor.fetchUser({ id: i.acct })
           .then((externalUser) => {
             if (!externalUser.error) {
               this.$store.commit('addNewUsers', [externalUser])
-              user.id = externalUser.id
+              this.users.push(externalUser)
             }
           })
       })

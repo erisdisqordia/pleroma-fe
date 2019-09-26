@@ -184,7 +184,7 @@ const getStaticEmoji = async ({ store }) => {
           imageUrl: false,
           replacement: values[key]
         }
-      })
+      }).sort((a, b) => a.displayText - b.displayText)
       store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
     } else {
       throw (res)
@@ -203,14 +203,16 @@ const getCustomEmoji = async ({ store }) => {
     if (res.ok) {
       const result = await res.json()
       const values = Array.isArray(result) ? Object.assign({}, ...result) : result
-      const emoji = Object.keys(values).map((key) => {
-        const imageUrl = values[key].image_url
+      const emoji = Object.entries(values).map(([key, value]) => {
+        const imageUrl = value.image_url
         return {
           displayText: key,
-          imageUrl: imageUrl ? store.state.instance.server + imageUrl : values[key],
+          imageUrl: imageUrl ? store.state.instance.server + imageUrl : value,
+          tags: imageUrl ? value.tags.sort((a, b) => a > b ? 1 : 0) : ['utf'],
           replacement: `:${key}: `
         }
-      })
+        // Technically could use tags but those are kinda useless right now, should have been "pack" field, that would be more useful
+      }).sort((a, b) => a.displayText.toLowerCase() > b.displayText.toLowerCase() ? 1 : 0)
       store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
       store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: true })
     } else {

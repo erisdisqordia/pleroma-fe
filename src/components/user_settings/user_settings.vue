@@ -32,6 +32,7 @@
             <p>{{ $t('settings.name') }}</p>
             <EmojiInput
               v-model="newName"
+              enable-emoji-picker
               :suggest="emojiSuggestor"
             >
               <input
@@ -43,6 +44,7 @@
             <p>{{ $t('settings.bio') }}</p>
             <EmojiInput
               v-model="newBio"
+              enable-emoji-picker
               :suggest="emojiUserSuggestor"
             >
               <textarea

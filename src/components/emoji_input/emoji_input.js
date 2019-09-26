@@ -1,5 +1,7 @@
 import Completion from '../../services/completion/completion.js'
+import EmojiPicker from '../emoji_picker/emoji_picker.vue'
 import { take } from 'lodash'
+import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
 
 /**
  * EmojiInput - augmented inputs for emoji and autocomplete support in inputs
@@ -52,6 +54,31 @@ const EmojiInput = {
        */
       required: true,
       type: String
+    },
+    enableEmojiPicker: {
+      /**
+       * Enables emoji picker support, this implies that custom emoji are supported
+       */
+      required: false,
+      type: Boolean,
+      default: false
+    },
+    hideEmojiButton: {
+      /**
+       * intended to use with external picker trigger, i.e. you have a button outside
+       * input that will open up the picker, see triggerShowPicker()
+       */
+      required: false,
+      type: Boolean,
+      default: false
+    },
+    enableStickerPicker: {
+      /**
+       * Enables sticker picker support, only makes sense when enableEmojiPicker=true
+       */
+      required: false,
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -60,10 +87,20 @@ const EmojiInput = {
       highlighted: 0,
       caret: 0,
       focused: false,
-      blurTimeout: null
+      blurTimeout: null,
+      showPicker: false,
+      temporarilyHideSuggestions: false,
+      keepOpen: false,
+      disableClickOutside: false
     }
   },
+  components: {
+    EmojiPicker
+  },
   computed: {
+    padEmoji () {
+      return this.$store.state.config.padEmoji
+    },
     suggestions () {
       const firstchar = this.textAtCaret.charAt(0)
       if (this.textAtCaret === firstchar) { return [] }
@@ -79,8 +116,12 @@ const EmojiInput = {
           highlighted: index === this.highlighted
         }))
     },
-    showPopup () {
-      return this.focused && this.suggestions && this.suggestions.length > 0
+    showSuggestions () {
+      return this.focused &&
+        this.suggestions &&
+        this.suggestions.length > 0 &&
+        !this.showPicker &&
+        !this.temporarilyHideSuggestions
     },
     textAtCaret () {
       return (this.wordAtCaret || {}).word || ''
@@ -104,6 +145,7 @@ const EmojiInput = {
     input.elm.addEventListener('paste', this.onPaste)
     input.elm.addEventListener('keyup', this.onKeyUp)
     input.elm.addEventListener('keydown', this.onKeyDown)
+    input.elm.addEventListener('click', this.onClickInput)
     input.elm.addEventListener('transitionend', this.onTransition)
     input.elm.addEventListener('compositionupdate', this.onCompositionUpdate)
   },
@@ -115,15 +157,79 @@ const EmojiInput = {
       input.elm.removeEventListener('paste', this.onPaste)
       input.elm.removeEventListener('keyup', this.onKeyUp)
       input.elm.removeEventListener('keydown', this.onKeyDown)
+      input.elm.removeEventListener('click', this.onClickInput)
       input.elm.removeEventListener('transitionend', this.onTransition)
       input.elm.removeEventListener('compositionupdate', this.onCompositionUpdate)
     }
   },
   methods: {
+    triggerShowPicker () {
+      this.showPicker = true
+      this.$nextTick(() => {
+        this.scrollIntoView()
+      })
+      // This temporarily disables "click outside" handler
+      // since external trigger also means click originates
+      // from outside, thus preventing picker from opening
+      this.disableClickOutside = true
+      setTimeout(() => {
+        this.disableClickOutside = false
+      }, 0)
+    },
+    togglePicker () {
+      this.input.elm.focus()
+      this.showPicker = !this.showPicker
+      if (this.showPicker) {
+        this.scrollIntoView()
+      }
+    },
     replace (replacement) {
       const newValue = Completion.replaceWord(this.value, this.wordAtCaret, replacement)
       this.$emit('input', newValue)
       this.caret = 0
+    },
+    insert ({ insertion, keepOpen }) {
+      const before = this.value.substring(0, this.caret) || ''
+      const after = this.value.substring(this.caret) || ''
+
+      /* Using a bit more smart approach to padding emojis with spaces:
+       * - put a space before cursor if there isn't one already, unless we
+       *   are at the beginning of post or in spam mode
+       * - put a space after emoji if there isn't one already unless we are
+       *   in spam mode
+       *
+       * The idea is that when you put a cursor somewhere in between sentence
+       * inserting just ' :emoji: ' will add more spaces to post which might
+       * break the flow/spacing, as well as the case where user ends sentence
+       * with a space before adding emoji.
+       *
+       * Spam mode is intended for creating multi-part emojis and overall spamming
+       * them, masto seem to be rendering :emoji::emoji: correctly now so why not
+       */
+      const isSpaceRegex = /\s/
+      const spaceBefore = !isSpaceRegex.exec(before.slice(-1)) && before.length && this.padEmoji > 0 ? ' ' : ''
+      const spaceAfter = !isSpaceRegex.exec(after[0]) && this.padEmoji ? ' ' : ''
+
+      const newValue = [
+        before,
+        spaceBefore,
+        insertion,
+        spaceAfter,
+        after
+      ].join('')
+      this.keepOpen = keepOpen
+      this.$emit('input', newValue)
+      const position = this.caret + (insertion + spaceAfter + spaceBefore).length
+      if (!keepOpen) {
+        this.input.elm.focus()
+      }
+
+      this.$nextTick(function () {
+        // Re-focus inputbox after clicking suggestion
+        // Set selection right after the replacement instead of the very end
+        this.input.elm.setSelectionRange(position, position)
+        this.caret = position
+      })
     },
     replaceText (e, suggestion) {
       const len = this.suggestions.length || 0
@@ -148,7 +254,7 @@ const EmojiInput = {
     },
     cycleBackward (e) {
       const len = this.suggestions.length || 0
-      if (len > 0) {
+      if (len > 1) {
         this.highlighted -= 1
         if (this.highlighted < 0) {
           this.highlighted = this.suggestions.length - 1
@@ -160,7 +266,7 @@ const EmojiInput = {
     },
     cycleForward (e) {
       const len = this.suggestions.length || 0
-      if (len > 0) {
+      if (len > 1) {
         this.highlighted += 1
         if (this.highlighted >= len) {
           this.highlighted = 0
@@ -168,6 +274,37 @@ const EmojiInput = {
         e.preventDefault()
       } else {
         this.highlighted = 0
+      }
+    },
+    scrollIntoView () {
+      const rootRef = this.$refs['picker'].$el
+      /* Scroller is either `window` (replies in TL), sidebar (main post form,
+       * replies in notifs) or mobile post form. Note that getting and setting
+       * scroll is different for `Window` and `Element`s
+       */
+      const scrollerRef = this.$el.closest('.sidebar-scroller') ||
+            this.$el.closest('.post-form-modal-view') ||
+            window
+      const currentScroll = scrollerRef === window
+        ? scrollerRef.scrollY
+        : scrollerRef.scrollTop
+      const scrollerHeight = scrollerRef === window
+        ? scrollerRef.innerHeight
+        : scrollerRef.offsetHeight
+
+      const scrollerBottomBorder = currentScroll + scrollerHeight
+      // We check where the bottom border of root element is, this uses findOffset
+      // to find offset relative to scrollable container (scroller)
+      const rootBottomBorder = rootRef.offsetHeight + findOffset(rootRef, scrollerRef).top
+
+      const bottomDelta = Math.max(0, rootBottomBorder - scrollerBottomBorder)
+      // could also check top delta but there's no case for it
+      const targetScroll = currentScroll + bottomDelta
+
+      if (scrollerRef === window) {
+        scrollerRef.scroll(0, targetScroll)
+      } else {
+        scrollerRef.scrollTop = targetScroll
       }
     },
     onTransition (e) {
@@ -191,49 +328,92 @@ const EmojiInput = {
         this.blurTimeout = null
       }
 
+      if (!this.keepOpen) {
+        this.showPicker = false
+      }
       this.focused = true
       this.setCaret(e)
       this.resize()
+      this.temporarilyHideSuggestions = false
     },
     onKeyUp (e) {
+      const { key } = e
       this.setCaret(e)
       this.resize()
+
+      // Setting hider in keyUp to prevent suggestions from blinking
+      // when moving away from suggested spot
+      if (key === 'Escape') {
+        this.temporarilyHideSuggestions = true
+      } else {
+        this.temporarilyHideSuggestions = false
+      }
     },
     onPaste (e) {
       this.setCaret(e)
       this.resize()
     },
     onKeyDown (e) {
-      this.setCaret(e)
-      this.resize()
-
       const { ctrlKey, shiftKey, key } = e
-      if (key === 'Tab') {
-        if (shiftKey) {
+      // Disable suggestions hotkeys if suggestions are hidden
+      if (!this.temporarilyHideSuggestions) {
+        if (key === 'Tab') {
+          if (shiftKey) {
+            this.cycleBackward(e)
+          } else {
+            this.cycleForward(e)
+          }
+        }
+        if (key === 'ArrowUp') {
           this.cycleBackward(e)
-        } else {
+        } else if (key === 'ArrowDown') {
           this.cycleForward(e)
         }
-      }
-      if (key === 'ArrowUp') {
-        this.cycleBackward(e)
-      } else if (key === 'ArrowDown') {
-        this.cycleForward(e)
-      }
-      if (key === 'Enter') {
-        if (!ctrlKey) {
-          this.replaceText(e)
+        if (key === 'Enter') {
+          if (!ctrlKey) {
+            this.replaceText(e)
+          }
         }
       }
+      // Probably add optional keyboard controls for emoji picker?
+
+      // Escape hides suggestions, if suggestions are hidden it
+      // de-focuses the element (i.e. default browser behavior)
+      if (key === 'Escape') {
+        if (!this.temporarilyHideSuggestions) {
+          this.input.elm.focus()
+        }
+      }
+
+      this.showPicker = false
+      this.resize()
     },
     onInput (e) {
+      this.showPicker = false
       this.setCaret(e)
+      this.resize()
       this.$emit('input', e.target.value)
     },
     onCompositionUpdate (e) {
+      this.showPicker = false
       this.setCaret(e)
       this.resize()
       this.$emit('input', e.target.value)
+    },
+    onClickInput (e) {
+      this.showPicker = false
+    },
+    onClickOutside (e) {
+      if (this.disableClickOutside) return
+      this.showPicker = false
+    },
+    onStickerUploaded (e) {
+      this.showPicker = false
+      this.$emit('sticker-uploaded', e)
+    },
+    onStickerUploadFailed (e) {
+      this.showPicker = false
+      this.$emit('sticker-upload-Failed', e)
     },
     setCaret ({ target: { selectionStart } }) {
       this.caret = selectionStart
@@ -243,6 +423,7 @@ const EmojiInput = {
       if (!panel) return
       const { offsetHeight, offsetTop } = this.input.elm
       this.$refs.panel.style.top = (offsetTop + offsetHeight) + 'px'
+      this.$refs.picker.$el.style.top = (offsetTop + offsetHeight) + 'px'
     }
   }
 }

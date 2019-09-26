@@ -1,14 +1,14 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
-import EmojiInput from '../emoji-input/emoji-input.vue'
+import EmojiInput from '../emoji_input/emoji_input.vue'
 import PollForm from '../poll/poll_form.vue'
-import StickerPicker from '../sticker_picker/sticker_picker.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
+import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
 import { reject, map, uniqBy } from 'lodash'
-import suggestor from '../emoji-input/suggestor.js'
+import suggestor from '../emoji_input/suggestor.js'
 
-const buildMentionsString = ({ user, attentions }, currentUser) => {
+const buildMentionsString = ({ user, attentions = [] }, currentUser) => {
   let allAttentions = [...attentions]
 
   allAttentions.unshift(user)
@@ -35,7 +35,6 @@ const PostStatusForm = {
     MediaUpload,
     EmojiInput,
     PollForm,
-    StickerPicker,
     ScopeSelector
   },
   mounted () {
@@ -84,8 +83,7 @@ const PostStatusForm = {
         contentType
       },
       caret: 0,
-      pollFormVisible: false,
-      stickerPickerVisible: false
+      pollFormVisible: false
     }
   },
   computed: {
@@ -161,12 +159,6 @@ const PostStatusForm = {
     safeDMEnabled () {
       return this.$store.state.instance.safeDM
     },
-    stickersAvailable () {
-      if (this.$store.state.instance.stickers) {
-        return this.$store.state.instance.stickers.length > 0
-      }
-      return 0
-    },
     pollsAvailable () {
       return this.$store.state.instance.pollsAvailable &&
         this.$store.state.instance.pollLimits.max_options >= 2
@@ -222,7 +214,6 @@ const PostStatusForm = {
             poll: {}
           }
           this.pollFormVisible = false
-          this.stickerPickerVisible = false
           this.$refs.mediaUpload.clearFile()
           this.clearPollForm()
           this.$emit('posted')
@@ -239,7 +230,6 @@ const PostStatusForm = {
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
       this.enableSubmit()
-      this.stickerPickerVisible = false
     },
     removeMediaFile (fileInfo) {
       let index = this.newStatus.files.indexOf(fileInfo)
@@ -260,6 +250,7 @@ const PostStatusForm = {
       return fileTypeService.fileType(fileInfo.mimetype)
     },
     paste (e) {
+      this.resize(e)
       if (e.clipboardData.files.length > 0) {
         // prevent pasting of file as text
         e.preventDefault()
@@ -278,34 +269,102 @@ const PostStatusForm = {
     fileDrag (e) {
       e.dataTransfer.dropEffect = 'copy'
     },
+    onEmojiInputInput (e) {
+      this.$nextTick(() => {
+        this.resize(this.$refs['textarea'])
+      })
+    },
     resize (e) {
       const target = e.target || e
       if (!(target instanceof window.Element)) { return }
-      const topPaddingStr = window.getComputedStyle(target)['padding-top']
-      const bottomPaddingStr = window.getComputedStyle(target)['padding-bottom']
-      // Remove "px" at the end of the values
-      const vertPadding = Number(topPaddingStr.substr(0, topPaddingStr.length - 2)) +
-            Number(bottomPaddingStr.substr(0, bottomPaddingStr.length - 2))
-      // Auto is needed to make textbox shrink when removing lines
-      target.style.height = 'auto'
-      target.style.height = `${target.scrollHeight - vertPadding}px`
+
+      // Reset to default height for empty form, nothing else to do here.
       if (target.value === '') {
         target.style.height = null
+        this.$refs['emoji-input'].resize()
+        return
       }
+
+      const rootRef = this.$refs['root']
+      /* Scroller is either `window` (replies in TL), sidebar (main post form,
+       * replies in notifs) or mobile post form. Note that getting and setting
+       * scroll is different for `Window` and `Element`s
+       */
+      const scrollerRef = this.$el.closest('.sidebar-scroller') ||
+            this.$el.closest('.post-form-modal-view') ||
+            window
+
+      // Getting info about padding we have to account for, removing 'px' part
+      const topPaddingStr = window.getComputedStyle(target)['padding-top']
+      const bottomPaddingStr = window.getComputedStyle(target)['padding-bottom']
+      const topPadding = Number(topPaddingStr.substring(0, topPaddingStr.length - 2))
+      const bottomPadding = Number(bottomPaddingStr.substring(0, bottomPaddingStr.length - 2))
+      const vertPadding = topPadding + bottomPadding
+
+      const oldHeightStr = target.style.height || ''
+      const oldHeight = Number(oldHeightStr.substring(0, oldHeightStr.length - 2))
+
+      /* Explanation:
+       *
+       * https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
+       * scrollHeight returns element's scrollable content height, i.e. visible
+       * element + overscrolled parts of it. We use it to determine when text
+       * inside the textarea exceeded its height, so we can set height to prevent
+       * overscroll, i.e. make textarea grow with the text. HOWEVER, since we
+       * explicitly set new height, scrollHeight won't go below that, so we can't
+       * SHRINK the textarea when there's extra space. To workaround that we set
+       * height to 'auto' which makes textarea tiny again, so that scrollHeight
+       * will match text height again. HOWEVER, shrinking textarea can screw with
+       * the scroll since there might be not enough padding around root to even
+       * warrant a scroll, so it will jump to 0 and refuse to move anywhere,
+       * so we check current scroll position before shrinking and then restore it
+       * with needed delta.
+       */
+
+      // this part has to be BEFORE the content size update
+      const currentScroll = scrollerRef === window
+        ? scrollerRef.scrollY
+        : scrollerRef.scrollTop
+      const scrollerHeight = scrollerRef === window
+        ? scrollerRef.innerHeight
+        : scrollerRef.offsetHeight
+      const scrollerBottomBorder = currentScroll + scrollerHeight
+
+      // BEGIN content size update
+      target.style.height = 'auto'
+      const newHeight = target.scrollHeight - vertPadding
+      target.style.height = `${newHeight}px`
+      // END content size update
+
+      // We check where the bottom border of root element is, this uses findOffset
+      // to find offset relative to scrollable container (scroller)
+      const rootBottomBorder = rootRef.offsetHeight + findOffset(rootRef, scrollerRef).top
+
+      const textareaSizeChangeDelta = newHeight - oldHeight || 0
+      const isBottomObstructed = scrollerBottomBorder < rootBottomBorder
+      const rootChangeDelta = rootBottomBorder - scrollerBottomBorder
+      const totalDelta = textareaSizeChangeDelta +
+        (isBottomObstructed ? rootChangeDelta : 0)
+
+      const targetScroll = currentScroll + totalDelta
+
+      if (scrollerRef === window) {
+        scrollerRef.scroll(0, targetScroll)
+      } else {
+        scrollerRef.scrollTop = targetScroll
+      }
+
+      this.$refs['emoji-input'].resize()
+    },
+    showEmojiPicker () {
+      this.$refs['textarea'].focus()
+      this.$refs['emoji-input'].triggerShowPicker()
     },
     clearError () {
       this.error = null
     },
     changeVis (visibility) {
       this.newStatus.visibility = visibility
-    },
-    toggleStickerPicker () {
-      this.stickerPickerVisible = !this.stickerPickerVisible
-    },
-    clearStickerPicker () {
-      if (this.$refs.stickerPicker) {
-        this.$refs.stickerPicker.clear()
-      }
     },
     togglePollForm () {
       this.pollFormVisible = !this.pollFormVisible

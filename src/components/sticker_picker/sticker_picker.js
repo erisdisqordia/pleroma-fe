@@ -3,9 +3,9 @@ import statusPosterService from '../../services/status_poster/status_poster.serv
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 
 const StickerPicker = {
-  components: [
+  components: {
     TabSwitcher
-  ],
+  },
   data () {
     return {
       meta: {

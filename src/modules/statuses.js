@@ -426,9 +426,13 @@ export const mutations = {
       newStatus.favoritedBy.push(user)
     }
   },
-  setMuted (state, status) {
+  setMutedStatus (state, status) {
     const newStatus = state.allStatusesObject[status.id]
-    newStatus.muted = status.muted
+    newStatus.thread_muted = status.thread_muted
+
+    if (newStatus.thread_muted !== undefined) {
+      state.conversationsObject[newStatus.statusnet_conversation_id].forEach(status => { status.thread_muted = newStatus.thread_muted })
+    }
   },
   setRetweeted (state, { status, value }) {
     const newStatus = state.allStatusesObject[status.id]
@@ -566,11 +570,11 @@ const statuses = {
     },
     muteConversation ({ rootState, commit }, statusId) {
       return rootState.api.backendInteractor.muteConversation(statusId)
-        .then((status) => commit('setMuted', status))
+        .then((status) => commit('setMutedStatus', status))
     },
     unmuteConversation ({ rootState, commit }, statusId) {
       return rootState.api.backendInteractor.unmuteConversation(statusId)
-        .then((status) => commit('setMuted', status))
+        .then((status) => commit('setMutedStatus', status))
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...

@@ -1,10 +1,32 @@
 <template>
-  <div class="emoji-input">
+  <div
+    v-click-outside="onClickOutside"
+    class="emoji-input"
+  >
     <slot />
+    <template v-if="enableEmojiPicker">
+      <div
+        v-if="!hideEmojiButton"
+        class="emoji-picker-icon"
+        @click.prevent="togglePicker"
+      >
+        <i class="icon-smile" />
+      </div>
+      <EmojiPicker
+        v-if="enableEmojiPicker"
+        ref="picker"
+        :class="{ hide: !showPicker }"
+        :enable-sticker-picker="enableStickerPicker"
+        class="emoji-picker-panel"
+        @emoji="insert"
+        @sticker-uploaded="onStickerUploaded"
+        @sticker-upload-failed="onStickerUploadFailed"
+      />
+    </template>
     <div
       ref="panel"
       class="autocomplete-panel"
-      :class="{ hide: !showPopup }"
+      :class="{ hide: !showSuggestions }"
     >
       <div class="autocomplete-panel-body">
         <div
@@ -31,7 +53,7 @@
   </div>
 </template>
 
-<script src="./emoji-input.js"></script>
+<script src="./emoji_input.js"></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
@@ -39,11 +61,36 @@
 .emoji-input {
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  .emoji-picker-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: .2em .25em;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 24px;
+
+    &:hover i {
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
+  }
+  .emoji-picker-panel {
+    position: absolute;
+    z-index: 20;
+    margin-top: 2px;
+
+    &.hide {
+      display: none
+    }
+  }
 
   .autocomplete {
     &-panel {
       position: absolute;
-      z-index: 9;
+      z-index: 20;
       margin-top: 2px;
 
       &.hide {

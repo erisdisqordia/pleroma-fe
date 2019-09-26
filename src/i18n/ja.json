@@ -226,6 +226,7 @@
     "delete_account_description": "あなたのアカウントとメッセージが、きえます。",
     "delete_account_error": "アカウントをけすことが、できなかったかもしれません。インスタンスのかんりしゃに、れんらくしてください。",
     "delete_account_instructions": "ほんとうにアカウントをけしてもいいなら、パスワードをかいてください。",
+    "discoverable": "けんさくなどのサービスで、このアカウントをみつけてもよい",
     "avatar_size_instruction": "アバターのおおきさは、150×150ピクセルか、それよりもおおきくするといいです。",
     "export_theme": "セーブ",
     "filtering": "フィルタリング",

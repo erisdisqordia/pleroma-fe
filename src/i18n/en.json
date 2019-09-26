@@ -231,6 +231,7 @@
     "delete_account_description": "Permanently delete your account and all your messages.",
     "delete_account_error": "There was an issue deleting your account. If this persists please contact your instance administrator.",
     "delete_account_instructions": "Type your password in the input below to confirm account deletion.",
+    "discoverable": "Allow discovery of this account in search results and other services",
     "avatar_size_instruction": "The recommended minimum size for avatar images is 150x150 pixels.",
     "pad_emoji": "Pad emoji with spaces when adding from picker",
     "export_theme": "Save preset",

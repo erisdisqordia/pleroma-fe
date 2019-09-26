@@ -226,6 +226,7 @@
     "delete_account_description": "あなたのアカウントとメッセージが、消えます。",
     "delete_account_error": "アカウントを消すことが、できなかったかもしれません。インスタンスの管理者に、連絡してください。",
     "delete_account_instructions": "本当にアカウントを消してもいいなら、パスワードを入力してください。",
+    "discoverable": "検索などのサービスでこのアカウントを見つけることを許可する",
     "avatar_size_instruction": "アバターの大きさは、150×150ピクセルか、それよりも大きくするといいです。",
     "export_theme": "保存",
     "filtering": "フィルタリング",

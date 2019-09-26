@@ -55,12 +55,6 @@
       "src": "fontawesome"
     },
     {
-      "uid": "c5fd349cbd3d23e4ade333789c29c729",
-      "css": "eye",
-      "code": 59408,
-      "src": "fontawesome"
-    },
-    {
       "uid": "7fd683b2c518ceb9e5fa6757f2276faa",
       "css": "eye-off",
       "code": 59397,
@@ -247,6 +241,12 @@
       "src": "fontawesome"
     },
     {
+      "uid": "d862a10e1448589215be19702f98f2c1",
+      "css": "smile",
+      "code": 61720,
+      "src": "fontawesome"
+    },
+    {
       "uid": "671f29fa10dda08074a4c6a341bb4f39",
       "css": "bell-alt",
       "code": 61683,
@@ -281,7 +281,7 @@
     {
       "uid": "0bef873af785ead27781fdf98b3ae740",
       "css": "bell-ringing-o",
-      "code": 59421,
+      "code": 59408,
       "src": "custom_icons",
       "selected": true,
       "svg": {

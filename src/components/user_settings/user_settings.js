@@ -45,6 +45,7 @@ const UserSettings = {
       hideFollowersCount: this.$store.state.users.currentUser.hide_followers_count,
       showRole: this.$store.state.users.currentUser.show_role,
       role: this.$store.state.users.currentUser.role,
+      discoverable: this.$store.state.users.currentUser.discoverable,
       pickAvatarBtnVisible: true,
       bannerUploading: false,
       backgroundUploading: false,
@@ -144,6 +145,7 @@ const UserSettings = {
             no_rich_text: this.newNoRichText,
             hide_follows: this.hideFollows,
             hide_followers: this.hideFollowers,
+            discoverable: this.discoverable,
             hide_follows_count: this.hideFollowsCount,
             hide_followers_count: this.hideFollowersCount,
             show_role: this.showRole

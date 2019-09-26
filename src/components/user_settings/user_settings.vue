@@ -131,6 +131,14 @@
                 for="account-show-role"
               >{{ $t('settings.show_moderator_badge') }}</label>
             </p>
+            <p>
+              <input
+                id="discoverable"
+                v-model="discoverable"
+                type="checkbox"
+              >
+              <label for="discoverable">{{ $t('settings.discoverable') }}</label>
+            </p>
             <button
               :disabled="newName && newName.length === 0"
               class="btn btn-default"

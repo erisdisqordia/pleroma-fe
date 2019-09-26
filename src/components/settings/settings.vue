@@ -198,6 +198,14 @@
                   >
                   <label for="autohideFloatingPostButton">{{ $t('settings.autohide_floating_post_button') }}</label>
                 </li>
+                <li>
+                  <input
+                    id="padEmoji"
+                    v-model="padEmojiLocal"
+                    type="checkbox"
+                  >
+                  <label for="padEmoji">{{ $t('settings.pad_emoji') }}</label>
+                </li>
               </ul>
             </div>
 

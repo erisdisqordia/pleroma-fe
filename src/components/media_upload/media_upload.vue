@@ -31,12 +31,14 @@
 <script src="./media_upload.js" ></script>
 
 <style>
- .media-upload {
-     font-size: 26px;
-     min-width: 50px;
- }
+.media-upload {
+  .icon-upload {
+    cursor: pointer;
+  }
 
- .icon-upload {
-     cursor: pointer;
- }
+  label {
+    display: block;
+    width: 100%;
+  }
+}
 </style>

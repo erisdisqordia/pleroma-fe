@@ -2,32 +2,30 @@
   <div
     class="sticker-picker"
   >
-    <div
-      class="sticker-picker-panel"
+    <tab-switcher
+      class="tab-switcher"
+      :render-only-focused="true"
+      scrollable-tabs
     >
-      <tab-switcher
-        :render-only-focused="true"
+      <div
+        v-for="stickerpack in pack"
+        :key="stickerpack.path"
+        :image-tooltip="stickerpack.meta.title"
+        :image="stickerpack.path + stickerpack.meta.tabIcon"
+        class="sticker-picker-content"
       >
         <div
-          v-for="stickerpack in pack"
-          :key="stickerpack.path"
-          :image-tooltip="stickerpack.meta.title"
-          :image="stickerpack.path + stickerpack.meta.tabIcon"
-          class="sticker-picker-content"
+          v-for="sticker in stickerpack.meta.stickers"
+          :key="sticker"
+          class="sticker"
+          @click.stop.prevent="pick(stickerpack.path + sticker, stickerpack.meta.title)"
         >
-          <div
-            v-for="sticker in stickerpack.meta.stickers"
-            :key="sticker"
-            class="sticker"
-            @click="pick(stickerpack.path + sticker, stickerpack.meta.title)"
+          <img
+            :src="stickerpack.path + sticker"
           >
-            <img
-              :src="stickerpack.path + sticker"
-            >
-          </div>
         </div>
-      </tab-switcher>
-    </div>
+      </div>
+    </tab-switcher>
   </div>
 </template>
 
@@ -37,22 +35,24 @@
 @import '../../_variables.scss';
 
 .sticker-picker {
-  .sticker-picker-panel {
-    display: inline-block;
-    width: 100%;
-    .sticker-picker-content {
-      max-height: 300px;
-      overflow-y: scroll;
-      overflow-x: auto;
-      .sticker {
-        display: inline-block;
-        width: 20%;
-        height: 20%;
-        img {
-          width: 100%;
-          &:hover {
-            filter: drop-shadow(0 0 5px var(--link, $fallback--link));
-          }
+  width: 100%;
+  position: relative;
+  .tab-switcher {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .sticker-picker-content {
+    .sticker {
+      display: inline-block;
+      width: 20%;
+      height: 20%;
+      img {
+        width: 100%;
+        &:hover {
+          filter: drop-shadow(0 0 5px var(--link, $fallback--link));
         }
       }
     }

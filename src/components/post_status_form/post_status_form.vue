@@ -1,5 +1,8 @@
 <template>
-  <div class="post-status-form">
+  <div
+    ref="root"
+    class="post-status-form"
+  >
     <form
       autocomplete="off"
       @submit.prevent="postStatus(newStatus)"
@@ -61,6 +64,7 @@
         <EmojiInput
           v-if="newStatus.spoilerText || alwaysShowSubject"
           v-model="newStatus.spoilerText"
+          enable-emoji-picker
           :suggest="emojiSuggestor"
           class="form-control"
         >
@@ -73,9 +77,16 @@
           >
         </EmojiInput>
         <EmojiInput
+          ref="emoji-input"
           v-model="newStatus.status"
           :suggest="emojiUserSuggestor"
           class="form-control main-input"
+          enable-emoji-picker
+          hide-emoji-button
+          enable-sticker-picker
+          @input="onEmojiInputInput"
+          @sticker-uploaded="addMediaFile"
+          @sticker-upload-failed="uploadFailed"
         >
           <textarea
             ref="textarea"
@@ -89,6 +100,7 @@
             @drop="fileDrop"
             @dragover.prevent="fileDrag"
             @input="resize"
+            @compositionupdate="resize"
             @paste="paste"
           />
           <p
@@ -152,30 +164,29 @@
         <div class="form-bottom-left">
           <media-upload
             ref="mediaUpload"
+            class="media-upload-icon"
             :drop-files="dropFiles"
             @uploading="disableSubmit"
             @uploaded="addMediaFile"
             @upload-failed="uploadFailed"
           />
           <div
-            v-if="stickersAvailable"
-            class="sticker-icon"
+            class="emoji-icon"
           >
             <i
-              :title="$t('stickers.add_sticker')"
-              class="icon-picture btn btn-default"
-              :class="{ selected: stickerPickerVisible }"
-              @click="toggleStickerPicker"
+              :title="$t('emoji.add_emoji')"
+              class="icon-smile btn btn-default"
+              @click="showEmojiPicker"
             />
           </div>
           <div
             v-if="pollsAvailable"
             class="poll-icon"
+            :class="{ selected: pollFormVisible }"
           >
             <i
               :title="$t('polls.add_poll')"
               class="icon-chart-bar btn btn-default"
-              :class="pollFormVisible && 'selected'"
               @click="togglePollForm"
             />
           </div>
@@ -258,11 +269,6 @@
         <label for="filesSensitive">{{ $t('post_status.attachments_sensitive') }}</label>
       </div>
     </form>
-    <sticker-picker
-      v-if="stickerPickerVisible"
-      ref="stickerPicker"
-      @uploaded="addMediaFile"
-    />
   </div>
 </template>
 
@@ -299,6 +305,7 @@
 .post-status-form {
   .form-bottom {
     display: flex;
+    justify-content: space-between;
     padding: 0.5em;
     height: 32px;
 
@@ -316,6 +323,9 @@
   .form-bottom-left {
     display: flex;
     flex: 1;
+    padding-right: 7px;
+    margin-right: 7px;
+    max-width: 10em;
   }
 
   .text-format {
@@ -325,19 +335,38 @@
     }
   }
 
-  .poll-icon, .sticker-icon {
+  .media-upload-icon, .poll-icon, .emoji-icon {
     font-size: 26px;
     flex: 1;
 
-    .selected {
-      color: $fallback--lightText;
-      color: var(--lightText, $fallback--lightText);
+    i {
+      display: block;
+      width: 100%;
+    }
+
+    &.selected, &:hover {
+      // needs to be specific to override icon default color
+      i, label {
+        color: $fallback--lightText;
+        color: var(--lightText, $fallback--lightText);
+      }
     }
   }
 
-  .sticker-icon {
-    flex: 0;
-    min-width: 50px;
+  // Order is not necessary but a good indicator
+  .media-upload-icon {
+    order: 1;
+    text-align: left;
+  }
+
+  .emoji-icon {
+    order: 2;
+    text-align: center;
+  }
+
+  .poll-icon {
+    order: 3;
+    text-align: right;
   }
 
   .icon-chart-bar {
@@ -367,6 +396,13 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+  }
+
+  .status-input-wrapper {
+    display: flex;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
   }
 
   .attachments {
@@ -442,10 +478,6 @@
     padding-bottom: 1.75em;
     min-height: 1px;
     box-sizing: content-box;
-  }
-
-  .form-post-body:focus {
-    min-height: 48px;
   }
 
   .main-input {

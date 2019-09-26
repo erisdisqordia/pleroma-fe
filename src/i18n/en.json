@@ -284,6 +284,8 @@
     "no_mutes": "No mutes",
     "hide_follows_description": "Don't show who I'm following",
     "hide_followers_description": "Don't show who's following me",
+    "hide_follows_count_description": "Don't show follow count",
+    "hide_followers_count_description": "Don't show follower count",
     "show_admin_badge": "Show Admin badge in my profile",
     "show_moderator_badge": "Show Moderator badge in my profile",
     "nsfw_clickthrough": "Enable clickthrough NSFW attachment hiding",

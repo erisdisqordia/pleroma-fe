@@ -278,10 +278,12 @@ describe('API Entities normalizer', () => {
     })
 
     it('adds hide_follows and hide_followers user settings', () => {
-      const user = makeMockUserMasto({ pleroma: { hide_followers: true, hide_follows: false } })
+      const user = makeMockUserMasto({ pleroma: { hide_followers: true, hide_follows: false, hide_followers_count: false, hide_follows_count: true } })
 
       expect(parseUser(user)).to.have.property('hide_followers', true)
       expect(parseUser(user)).to.have.property('hide_follows', false)
+      expect(parseUser(user)).to.have.property('hide_followers_count', false)
+      expect(parseUser(user)).to.have.property('hide_follows_count', true)
     })
   })
 

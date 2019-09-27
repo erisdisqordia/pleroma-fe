@@ -127,7 +127,7 @@
           @click="toggleDrawer"
         >
           <a
-            href="/pleroma/admin"
+            href="/pleroma/admin/"
             target="_blank"
           >
             {{ $t("nav.admin_panel") }}

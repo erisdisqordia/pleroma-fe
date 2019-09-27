@@ -55,7 +55,7 @@
           </router-link>
           <a
             v-if="currentUser && currentUser.role === 'admin'"
-            href="/pleroma/admin"
+            href="/pleroma/admin/"
             class="mobile-hidden"
             target="_blank"
           ><i

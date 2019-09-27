@@ -60,7 +60,7 @@
             target="_blank"
           ><i
             class="button-icon icon-gauge nav-icon"
-            :title="$t('nav.admin_panel')"
+            :title="$t('nav.administration')"
           /></a>
           <a
             v-if="currentUser"

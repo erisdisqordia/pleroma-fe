@@ -130,7 +130,7 @@
             href="/pleroma/admin/"
             target="_blank"
           >
-            {{ $t("nav.admin_panel") }}
+            {{ $t("nav.administration") }}
           </a>
         </li>
         <li

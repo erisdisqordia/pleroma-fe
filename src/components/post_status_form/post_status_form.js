@@ -7,6 +7,7 @@ import fileTypeService from '../../services/file_type/file_type.service.js'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
 import { reject, map, uniqBy } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
+import { mapGetters } from 'vuex'
 
 const buildMentionsString = ({ user, attentions = [] }, currentUser) => {
   let allAttentions = [...attentions]
@@ -50,9 +51,7 @@ const PostStatusForm = {
     const preset = this.$route.query.message
     let statusText = preset || ''
 
-    const scopeCopy = typeof this.$store.state.config.scopeCopy === 'undefined'
-      ? this.$store.state.instance.scopeCopy
-      : this.$store.state.config.scopeCopy
+    const { scopeCopy } = this.$store.getters.mergedConfig
 
     if (this.replyTo) {
       const currentUser = this.$store.state.users.currentUser
@@ -63,9 +62,7 @@ const PostStatusForm = {
       ? this.copyMessageScope
       : this.$store.state.users.currentUser.default_scope
 
-    const contentType = typeof this.$store.state.config.postContentType === 'undefined'
-      ? this.$store.state.instance.postContentType
-      : this.$store.state.config.postContentType
+    const { postContentType: contentType } = this.$store.getters.mergedConfig
 
     return {
       dropFiles: [],
@@ -94,10 +91,7 @@ const PostStatusForm = {
       return this.$store.state.users.currentUser.default_scope
     },
     showAllScopes () {
-      const minimalScopesMode = typeof this.$store.state.config.minimalScopesMode === 'undefined'
-        ? this.$store.state.instance.minimalScopesMode
-        : this.$store.state.config.minimalScopesMode
-      return !minimalScopesMode
+      return this.mergedConfig.minimalScopesMode
     },
     emojiUserSuggestor () {
       return suggestor({
@@ -145,13 +139,7 @@ const PostStatusForm = {
       return this.$store.state.instance.minimalScopesMode
     },
     alwaysShowSubject () {
-      if (typeof this.$store.state.config.alwaysShowSubjectInput !== 'undefined') {
-        return this.$store.state.config.alwaysShowSubjectInput
-      } else if (typeof this.$store.state.instance.alwaysShowSubjectInput !== 'undefined') {
-        return this.$store.state.instance.alwaysShowSubjectInput
-      } else {
-        return true
-      }
+      return this.mergedConfig.alwaysShowSubjectInput
     },
     postFormats () {
       return this.$store.state.instance.postFormats || []
@@ -170,7 +158,8 @@ const PostStatusForm = {
       return this.pollFormVisible &&
         this.newStatus.poll &&
         this.newStatus.poll.error
-    }
+    },
+    ...mapGetters(['mergedConfig'])
   },
   methods: {
     postStatus (newStatus) {

@@ -5,15 +5,13 @@ import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+import { mapGetters } from 'vuex'
 
 export default {
   props: [ 'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar' ],
   data () {
     return {
       followRequestInProgress: false,
-      hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
-        ? this.$store.state.instance.hideUserStats
-        : this.$store.state.config.hideUserStats,
       betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
@@ -73,7 +71,8 @@ export default {
         } else {
           this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: undefined })
         }
-      }
+      },
+      ...mapGetters(['mergedConfig'])
     },
     userHighlightColor: {
       get () {
@@ -90,7 +89,8 @@ export default {
       const validRole = rights.admin || rights.moderator
       const roleTitle = rights.admin ? 'admin' : 'moderator'
       return validRole && roleTitle
-    }
+    },
+    ...mapGetters(['mergedConfig'])
   },
   components: {
     UserAvatar,

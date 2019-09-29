@@ -7,7 +7,7 @@
         :title="$t('tool_tip.repeat')"
         @click.prevent="retweet()"
       />
-      <span v-if="!hidePostStatsLocal && status.repeat_num > 0">{{ status.repeat_num }}</span>
+      <span v-if="!mergedConfig.hidePostStats && status.repeat_num > 0">{{ status.repeat_num }}</span>
     </template>
     <template v-else>
       <i
@@ -23,7 +23,7 @@
       class="button-icon icon-retweet"
       :title="$t('tool_tip.repeat')"
     />
-    <span v-if="!hidePostStatsLocal && status.repeat_num > 0">{{ status.repeat_num }}</span>
+    <span v-if="!mergedConfig.hidePostStats && status.repeat_num > 0">{{ status.repeat_num }}</span>
   </div>
 </template>
 

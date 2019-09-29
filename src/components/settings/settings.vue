@@ -38,7 +38,7 @@
                 <li v-if="instanceSpecificPanelPresent">
                   <input
                     id="hideISP"
-                    v-model="hideISPLocal"
+                    v-model="hideISP"
                     type="checkbox"
                   >
                   <label for="hideISP">{{ $t('settings.hide_isp') }}</label>
@@ -51,35 +51,35 @@
                 <li>
                   <input
                     id="hideMutedPosts"
-                    v-model="hideMutedPostsLocal"
+                    v-model="hideMutedPosts"
                     type="checkbox"
                   >
-                  <label for="hideMutedPosts">{{ $t('settings.hide_muted_posts') }} {{ $t('settings.instance_default', { value: hideMutedPostsDefault }) }}</label>
+                  <label for="hideMutedPosts">{{ $t('settings.hide_muted_posts') }} {{ $t('settings.instance_default', { value: hideMutedPostsLocalizedValue }) }}</label>
                 </li>
                 <li>
                   <input
                     id="collapseMessageWithSubject"
-                    v-model="collapseMessageWithSubjectLocal"
+                    v-model="collapseMessageWithSubject"
                     type="checkbox"
                   >
-                  <label for="collapseMessageWithSubject">{{ $t('settings.collapse_subject') }} {{ $t('settings.instance_default', { value: collapseMessageWithSubjectDefault }) }}</label>
+                  <label for="collapseMessageWithSubject">{{ $t('settings.collapse_subject') }} {{ $t('settings.instance_default', { value: collapseMessageWithSubjectLocalizedValue }) }}</label>
                 </li>
                 <li>
                   <input
                     id="streaming"
-                    v-model="streamingLocal"
+                    v-model="streaming"
                     type="checkbox"
                   >
                   <label for="streaming">{{ $t('settings.streaming') }}</label>
                   <ul
                     class="setting-list suboptions"
-                    :class="[{disabled: !streamingLocal}]"
+                    :class="[{disabled: !streaming}]"
                   >
                     <li>
                       <input
                         id="pauseOnUnfocused"
-                        v-model="pauseOnUnfocusedLocal"
-                        :disabled="!streamingLocal"
+                        v-model="pauseOnUnfocused"
+                        :disabled="!streaming"
                         type="checkbox"
                       >
                       <label for="pauseOnUnfocused">{{ $t('settings.pause_on_unfocused') }}</label>
@@ -89,7 +89,7 @@
                 <li>
                   <input
                     id="autoload"
-                    v-model="autoLoadLocal"
+                    v-model="autoLoad"
                     type="checkbox"
                   >
                   <label for="autoload">{{ $t('settings.autoload') }}</label>
@@ -97,7 +97,7 @@
                 <li>
                   <input
                     id="hoverPreview"
-                    v-model="hoverPreviewLocal"
+                    v-model="hoverPreview"
                     type="checkbox"
                   >
                   <label for="hoverPreview">{{ $t('settings.reply_link_preview') }}</label>
@@ -111,21 +111,21 @@
                 <li>
                   <input
                     id="scopeCopy"
-                    v-model="scopeCopyLocal"
+                    v-model="scopeCopy"
                     type="checkbox"
                   >
                   <label for="scopeCopy">
-                    {{ $t('settings.scope_copy') }} {{ $t('settings.instance_default', { value: scopeCopyDefault }) }}
+                    {{ $t('settings.scope_copy') }} {{ $t('settings.instance_default', { value: scopeCopyLocalizedValue }) }}
                   </label>
                 </li>
                 <li>
                   <input
                     id="subjectHide"
-                    v-model="alwaysShowSubjectInputLocal"
+                    v-model="alwaysShowSubjectInput"
                     type="checkbox"
                   >
                   <label for="subjectHide">
-                    {{ $t('settings.subject_input_always_show') }} {{ $t('settings.instance_default', { value: alwaysShowSubjectInputDefault }) }}
+                    {{ $t('settings.subject_input_always_show') }} {{ $t('settings.instance_default', { value: alwaysShowSubjectInputLocalizedValue }) }}
                   </label>
                 </li>
                 <li>
@@ -137,19 +137,19 @@
                     >
                       <select
                         id="subjectLineBehavior"
-                        v-model="subjectLineBehaviorLocal"
+                        v-model="subjectLineBehavior"
                       >
                         <option value="email">
                           {{ $t('settings.subject_line_email') }}
-                          {{ subjectLineBehaviorDefault == 'email' ? $t('settings.instance_default_simple') : '' }}
+                          {{ subjectLineBehaviorLocalizedValue == 'email' ? $t('settings.instance_default_simple') : '' }}
                         </option>
                         <option value="masto">
                           {{ $t('settings.subject_line_mastodon') }}
-                          {{ subjectLineBehaviorDefault == 'mastodon' ? $t('settings.instance_default_simple') : '' }}
+                          {{ subjectLineBehaviorLocalizedValue == 'mastodon' ? $t('settings.instance_default_simple') : '' }}
                         </option>
                         <option value="noop">
                           {{ $t('settings.subject_line_noop') }}
-                          {{ subjectLineBehaviorDefault == 'noop' ? $t('settings.instance_default_simple') : '' }}
+                          {{ subjectLineBehaviorLocalizedValue == 'noop' ? $t('settings.instance_default_simple') : '' }}
                         </option>
                       </select>
                       <i class="icon-down-open" />
@@ -165,7 +165,7 @@
                     >
                       <select
                         id="postContentType"
-                        v-model="postContentTypeLocal"
+                        v-model="postContentType"
                       >
                         <option
                           v-for="postFormat in postFormats"
@@ -173,7 +173,7 @@
                           :value="postFormat"
                         >
                           {{ $t(`post_status.content_type["${postFormat}"]`) }}
-                          {{ postContentTypeDefault === postFormat ? $t('settings.instance_default_simple') : '' }}
+                          {{ postContentTypeLocalizedValue === postFormat ? $t('settings.instance_default_simple') : '' }}
                         </option>
                       </select>
                       <i class="icon-down-open" />
@@ -183,17 +183,17 @@
                 <li>
                   <input
                     id="minimalScopesMode"
-                    v-model="minimalScopesModeLocal"
+                    v-model="minimalScopesMode"
                     type="checkbox"
                   >
                   <label for="minimalScopesMode">
-                    {{ $t('settings.minimal_scopes_mode') }} {{ $t('settings.instance_default', { value: minimalScopesModeDefault }) }}
+                    {{ $t('settings.minimal_scopes_mode') }} {{ $t('settings.instance_default', { value: minimalScopesModeLocalizedValue }) }}
                   </label>
                 </li>
                 <li>
                   <input
                     id="autohideFloatingPostButton"
-                    v-model="autohideFloatingPostButtonLocal"
+                    v-model="autohideFloatingPostButton"
                     type="checkbox"
                   >
                   <label for="autohideFloatingPostButton">{{ $t('settings.autohide_floating_post_button') }}</label>
@@ -201,7 +201,7 @@
                 <li>
                   <input
                     id="padEmoji"
-                    v-model="padEmojiLocal"
+                    v-model="padEmoji"
                     type="checkbox"
                   >
                   <label for="padEmoji">{{ $t('settings.pad_emoji') }}</label>
@@ -215,7 +215,7 @@
                 <li>
                   <input
                     id="hideAttachments"
-                    v-model="hideAttachmentsLocal"
+                    v-model="hideAttachments"
                     type="checkbox"
                   >
                   <label for="hideAttachments">{{ $t('settings.hide_attachments_in_tl') }}</label>
@@ -223,7 +223,7 @@
                 <li>
                   <input
                     id="hideAttachmentsInConv"
-                    v-model="hideAttachmentsInConvLocal"
+                    v-model="hideAttachmentsInConv"
                     type="checkbox"
                   >
                   <label for="hideAttachmentsInConv">{{ $t('settings.hide_attachments_in_convo') }}</label>
@@ -242,7 +242,7 @@
                 <li>
                   <input
                     id="hideNsfw"
-                    v-model="hideNsfwLocal"
+                    v-model="hideNsfw"
                     type="checkbox"
                   >
                   <label for="hideNsfw">{{ $t('settings.nsfw_clickthrough') }}</label>
@@ -252,7 +252,7 @@
                     <input
                       id="preloadImage"
                       v-model="preloadImage"
-                      :disabled="!hideNsfwLocal"
+                      :disabled="!hideNsfw"
                       type="checkbox"
                     >
                     <label for="preloadImage">{{ $t('settings.preload_images') }}</label>
@@ -261,7 +261,7 @@
                     <input
                       id="useOneClickNsfw"
                       v-model="useOneClickNsfw"
-                      :disabled="!hideNsfwLocal"
+                      :disabled="!hideNsfw"
                       type="checkbox"
                     >
                     <label for="useOneClickNsfw">{{ $t('settings.use_one_click_nsfw') }}</label>
@@ -278,19 +278,19 @@
                 <li>
                   <input
                     id="loopVideo"
-                    v-model="loopVideoLocal"
+                    v-model="loopVideo"
                     type="checkbox"
                   >
                   <label for="loopVideo">{{ $t('settings.loop_video') }}</label>
                   <ul
                     class="setting-list suboptions"
-                    :class="[{disabled: !streamingLocal}]"
+                    :class="[{disabled: !streaming}]"
                   >
                     <li>
                       <input
                         id="loopVideoSilentOnly"
-                        v-model="loopVideoSilentOnlyLocal"
-                        :disabled="!loopVideoLocal || !loopSilentAvailable"
+                        v-model="loopVideoSilentOnly"
+                        :disabled="!loopVideo || !loopSilentAvailable"
                         type="checkbox"
                       >
                       <label for="loopVideoSilentOnly">{{ $t('settings.loop_video_silent_only') }}</label>
@@ -328,7 +328,7 @@
                 <li>
                   <input
                     id="webPushNotifications"
-                    v-model="webPushNotificationsLocal"
+                    v-model="webPushNotifications"
                     type="checkbox"
                   >
                   <label for="webPushNotifications">
@@ -353,7 +353,7 @@
                   <li>
                     <input
                       id="notification-visibility-likes"
-                      v-model="notificationVisibilityLocal.likes"
+                      v-model="notificationVisibility.likes"
                       type="checkbox"
                     >
                     <label for="notification-visibility-likes">
@@ -363,7 +363,7 @@
                   <li>
                     <input
                       id="notification-visibility-repeats"
-                      v-model="notificationVisibilityLocal.repeats"
+                      v-model="notificationVisibility.repeats"
                       type="checkbox"
                     >
                     <label for="notification-visibility-repeats">
@@ -373,7 +373,7 @@
                   <li>
                     <input
                       id="notification-visibility-follows"
-                      v-model="notificationVisibilityLocal.follows"
+                      v-model="notificationVisibility.follows"
                       type="checkbox"
                     >
                     <label for="notification-visibility-follows">
@@ -383,7 +383,7 @@
                   <li>
                     <input
                       id="notification-visibility-mentions"
-                      v-model="notificationVisibilityLocal.mentions"
+                      v-model="notificationVisibility.mentions"
                       type="checkbox"
                     >
                     <label for="notification-visibility-mentions">
@@ -400,7 +400,7 @@
                 >
                   <select
                     id="replyVisibility"
-                    v-model="replyVisibilityLocal"
+                    v-model="replyVisibility"
                   >
                     <option
                       value="all"
@@ -415,21 +415,21 @@
               <div>
                 <input
                   id="hidePostStats"
-                  v-model="hidePostStatsLocal"
+                  v-model="hidePostStats"
                   type="checkbox"
                 >
                 <label for="hidePostStats">
-                  {{ $t('settings.hide_post_stats') }} {{ $t('settings.instance_default', { value: hidePostStatsDefault }) }}
+                  {{ $t('settings.hide_post_stats') }} {{ $t('settings.instance_default', { value: hidePostStatsLocalizedValue }) }}
                 </label>
               </div>
               <div>
                 <input
                   id="hideUserStats"
-                  v-model="hideUserStatsLocal"
+                  v-model="hideUserStats"
                   type="checkbox"
                 >
                 <label for="hideUserStats">
-                  {{ $t('settings.hide_user_stats') }} {{ $t('settings.instance_default', { value: hideUserStatsDefault }) }}
+                  {{ $t('settings.hide_user_stats') }} {{ $t('settings.instance_default', { value: hideUserStatsLocalizedValue }) }}
                 </label>
               </div>
             </div>
@@ -444,11 +444,11 @@
               <div>
                 <input
                   id="hideFilteredStatuses"
-                  v-model="hideFilteredStatusesLocal"
+                  v-model="hideFilteredStatuses"
                   type="checkbox"
                 >
                 <label for="hideFilteredStatuses">
-                  {{ $t('settings.hide_filtered_statuses') }} {{ $t('settings.instance_default', { value: hideFilteredStatusesDefault }) }}
+                  {{ $t('settings.hide_filtered_statuses') }} {{ $t('settings.instance_default', { value: hideFilteredStatusesLocalizedValue }) }}
                 </label>
               </div>
             </div>

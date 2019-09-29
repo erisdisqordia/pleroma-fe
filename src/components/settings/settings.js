@@ -10,6 +10,11 @@ import { instanceDefaultProperties, defaultState as configDefaultState } from '.
 const pleromaFeCommitUrl = 'https://git.pleroma.social/pleroma/pleroma-fe/commit/'
 const pleromaBeCommitUrl = 'https://git.pleroma.social/pleroma/pleroma/commit/'
 
+const multiChoiceProperties = [
+  'postContentType',
+  'subjectLineBehavior'
+]
+
 const settings = {
   data () {
     const instance = this.$store.state.instance
@@ -51,6 +56,16 @@ const settings = {
     },
     // Getting localized values for instance-default properties
     ...instanceDefaultProperties
+      .filter(key => multiChoiceProperties.includes(key))
+      .map(key => [
+        key + 'DefaultValue',
+        function () {
+          return this.$store.getters.instanceDefaultConfig[key]
+        }
+      ])
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}),
+    ...instanceDefaultProperties
+      .filter(key => !multiChoiceProperties.includes(key))
       .map(key => [
         key + 'LocalizedValue',
         function () {

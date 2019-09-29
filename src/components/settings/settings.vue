@@ -141,15 +141,15 @@
                       >
                         <option value="email">
                           {{ $t('settings.subject_line_email') }}
-                          {{ subjectLineBehaviorLocalizedValue == 'email' ? $t('settings.instance_default_simple') : '' }}
+                          {{ subjectLineBehaviorDefaultValue == 'email' ? $t('settings.instance_default_simple') : '' }}
                         </option>
                         <option value="masto">
                           {{ $t('settings.subject_line_mastodon') }}
-                          {{ subjectLineBehaviorLocalizedValue == 'mastodon' ? $t('settings.instance_default_simple') : '' }}
+                          {{ subjectLineBehaviorDefaultValue == 'mastodon' ? $t('settings.instance_default_simple') : '' }}
                         </option>
                         <option value="noop">
                           {{ $t('settings.subject_line_noop') }}
-                          {{ subjectLineBehaviorLocalizedValue == 'noop' ? $t('settings.instance_default_simple') : '' }}
+                          {{ subjectLineBehaviorDefaultValue == 'noop' ? $t('settings.instance_default_simple') : '' }}
                         </option>
                       </select>
                       <i class="icon-down-open" />
@@ -173,7 +173,7 @@
                           :value="postFormat"
                         >
                           {{ $t(`post_status.content_type["${postFormat}"]`) }}
-                          {{ postContentTypeLocalizedValue === postFormat ? $t('settings.instance_default_simple') : '' }}
+                          {{ postContentTypeDefaultValue === postFormat ? $t('settings.instance_default_simple') : '' }}
                         </option>
                       </select>
                       <i class="icon-down-open" />

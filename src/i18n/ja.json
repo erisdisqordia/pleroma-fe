@@ -106,6 +106,15 @@
     "expired": "いれふだは {0} まえに、おわりました",
     "not_enough_options": "ユニークなオプションが、たりません"
   },
+  "emoji": {
+    "stickers": "ステッカー",
+    "emoji": "えもじ",
+    "keep_open": "ピッカーをあけたままにする",
+    "search_emoji": "えもじをさがす",
+    "add_emoji": "えもじをうちこむ",
+    "custom": "カスタムえもじ",
+    "unicode": "ユニコードえもじ"
+  },
   "stickers": {
     "add_sticker": "ステッカーをふやす"
   },
@@ -224,10 +233,11 @@
     "default_vis": "デフォルトのこうかいはんい",
     "delete_account": "アカウントをけす",
     "delete_account_description": "あなたのアカウントとメッセージが、きえます。",
-    "delete_account_error": "アカウントをけすことが、できなかったかもしれません。インスタンスのかんりしゃに、れんらくしてください。",
+    "delete_account_error": "アカウントをけすことが、できなかったかもしれません。インスタンスのアドミニストレーターに、おといあわせください。",
     "delete_account_instructions": "ほんとうにアカウントをけしてもいいなら、パスワードをかいてください。",
     "discoverable": "けんさくなどのサービスで、このアカウントをみつけてもよい",
     "avatar_size_instruction": "アバターのおおきさは、150×150ピクセルか、それよりもおおきくするといいです。",
+    "pad_emoji": "えもじをピッカーでえらんだとき、えもじのまわりにスペースをいれる",
     "export_theme": "セーブ",
     "filtering": "フィルタリング",
     "filtering_explanation": "これらのことばをふくむすべてのものがミュートされます。1ぎょうに1つのことばをかいてください。",
@@ -280,6 +290,8 @@
     "no_mutes": "ミュートしていません",
     "hide_follows_description": "フォローしているひとをみせない",
     "hide_followers_description": "フォロワーをみせない",
+    "hide_follows_count_description": "フォローしているひとのかずをみせない",
+    "hide_followers_count_description": "フォロワーのかずをみせない",
     "show_admin_badge": "アドミンのしるしをみせる",
     "show_moderator_badge": "モデレーターのしるしをみせる",
     "nsfw_clickthrough": "NSFWなファイルをかくす",
@@ -532,6 +544,7 @@
     "follows_you": "フォローされました！",
     "its_you": "これはあなたです！",
     "media": "メディア",
+    "mention": "メンション",
     "mute": "ミュート",
     "muted": "ミュートしています！",
     "per_day": "/日",
@@ -611,5 +624,16 @@
     "person_talking": "{count} にんが、はなしています",
     "people_talking": "{count} にんが、はなしています",
     "no_results": "みつかりませんでした"
+  },
+  "password_reset": {
+    "forgot_password": "パスワードを、わすれましたか？",
+    "password_reset": "パスワードリセット",
+    "instruction": "あなたのメールアドレスかユーザーめいをいれてください。パスワードをリセットするためのリンクをおくります。",
+    "placeholder": "あなたのメールアドレスかユーザーめい",
+    "check_email": "パスワードをリセットするためのリンクがかかれたメールが、とどいているかどうか、みてください。",
+    "return_home": "ホームページにもどる",
+    "not_found": "そのメールアドレスまたはユーザーめいを、みつけることができませんでした。",
+    "too_many_requests": "パスワードリセットを、ためすことが、おおすぎます。しばらくしてから、ためしてください。",
+    "password_reset_disabled": "このインスタンスでは、パスワードリセットは、できません。インスタンスのアドミニストレーターに、おといあわせください。"
   }
 }

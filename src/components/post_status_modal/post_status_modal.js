@@ -1,24 +1,41 @@
 import PostStatusForm from '../post_status_form/post_status_form.vue'
+import get from 'lodash/get'
 
 const PostStatusModal = {
   components: {
     PostStatusForm
   },
+  data () {
+    return {
+      resettingForm: false
+    }
+  },
   computed: {
     isLoggedIn () {
       return !!this.$store.state.users.currentUser
     },
-    isOpen () {
-      return this.isLoggedIn && this.$store.state.postStatus.modalActivated
+    modalActivated () {
+      return this.$store.state.postStatus.modalActivated
+    },
+    isFormVisible () {
+      return this.isLoggedIn && !this.resettingForm && this.modalActivated
     },
     params () {
       return this.$store.state.postStatus.params || {}
     }
   },
   watch: {
-    isOpen (val) {
+    params (newVal, oldVal) {
+      if (get(newVal, 'repliedUser.id') !== get(oldVal, 'repliedUser.id')) {
+        this.resettingForm = true
+        this.$nextTick(() => {
+          this.resettingForm = false
+        })
+      }
+    },
+    isFormVisible (val) {
       if (val) {
-        this.$nextTick(() => this.$el.querySelector('textarea').focus())
+        this.$nextTick(() => this.$el && this.$el.querySelector('textarea').focus())
       }
     }
   },

@@ -131,135 +131,12 @@
             </label>
           </div>
         </div>
+
         <div
           v-if="loggedIn && isOtherUser"
           class="user-interactions"
         >
-          <div v-if="!user.following">
-            <button
-              class="btn btn-default btn-block"
-              :disabled="followRequestInProgress"
-              :title="user.requested ? $t('user_card.follow_again') : ''"
-              @click="followUser"
-            >
-              <template v-if="followRequestInProgress">
-                {{ $t('user_card.follow_progress') }}
-              </template>
-              <template v-else-if="user.requested">
-                {{ $t('user_card.follow_sent') }}
-              </template>
-              <template v-else>
-                {{ $t('user_card.follow') }}
-              </template>
-            </button>
-          </div>
-          <div v-else-if="followRequestInProgress">
-            <button
-              class="btn btn-default btn-block pressed"
-              disabled
-              :title="$t('user_card.follow_unfollow')"
-              @click="unfollowUser"
-            >
-              {{ $t('user_card.follow_progress') }}
-            </button>
-          </div>
-          <div
-            v-else
-            class="btn-group"
-          >
-            <button
-              class="btn btn-default pressed"
-              :title="$t('user_card.follow_unfollow')"
-              @click="unfollowUser"
-            >
-              {{ $t('user_card.following') }}
-            </button>
-            <ProgressButton
-              v-if="!user.subscribed"
-              class="btn btn-default"
-              :click="subscribeUser"
-              :title="$t('user_card.subscribe')"
-            >
-              <i class="icon-bell-alt" />
-            </ProgressButton>
-            <ProgressButton
-              v-else
-              class="btn btn-default pressed"
-              :click="unsubscribeUser"
-              :title="$t('user_card.unsubscribe')"
-            >
-              <i class="icon-bell-ringing-o" />
-            </ProgressButton>
-            <button
-              v-if="user.showing_reblogs"
-              class="btn btn-default"
-              :title="$t('user_card.hide_repeats')"
-              @click="hideRepeats"
-            >
-              <i class="icon-eye" />
-            </button>
-            <button
-              v-if="!user.showing_reblogs"
-              class="btn btn-default pressed"
-              :title="$t('user_card.show_repeats')"
-              @click="showRepeats"
-            >
-              <i class="icon-eye-off" />
-            </button>
-          </div>
-
-          <div>
-            <button
-              class="btn btn-default btn-block"
-              @click="mentionUser"
-            >
-              {{ $t('user_card.mention') }}
-            </button>
-          </div>
-
-          <div>
-            <button
-              v-if="user.muted"
-              class="btn btn-default btn-block pressed"
-              @click="unmuteUser"
-            >
-              {{ $t('user_card.muted') }}
-            </button>
-            <button
-              v-else
-              class="btn btn-default btn-block"
-              @click="muteUser"
-            >
-              {{ $t('user_card.mute') }}
-            </button>
-          </div>
-
-          <div>
-            <button
-              v-if="user.statusnet_blocking"
-              class="btn btn-default btn-block pressed"
-              @click="unblockUser"
-            >
-              {{ $t('user_card.blocked') }}
-            </button>
-            <button
-              v-else
-              class="btn btn-default btn-block"
-              @click="blockUser"
-            >
-              {{ $t('user_card.block') }}
-            </button>
-          </div>
-
-          <div>
-            <button
-              class="btn btn-default btn-block"
-              @click="reportUser"
-            >
-              {{ $t('user_card.report') }}
-            </button>
-          </div>
-
+          <AccountActions :user="user" />
           <ModerationTools
             v-if="loggedIn.role === &quot;admin&quot;"
             :user="user"
@@ -603,14 +480,8 @@
     position: relative;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-right: -.75em;
-
-    > * {
-      flex: 1 0 0;
-      margin: 0 .75em .6em 0;
-      white-space: nowrap;
-    }
 
     button {
       margin: 0;

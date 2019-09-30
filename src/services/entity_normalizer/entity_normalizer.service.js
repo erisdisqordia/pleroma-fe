@@ -196,9 +196,11 @@ export const parseAttachment = (data) => {
   return output
 }
 export const addEmojis = (string, emojis) => {
+  const matchOperatorsRegex = /[|\\{}()[\]^$+*?.-]/g
   return emojis.reduce((acc, emoji) => {
+    const regexSafeShortCode = emoji.shortcode.replace(matchOperatorsRegex, '\\$&')
     return acc.replace(
-      new RegExp(`:${emoji.shortcode}:`, 'g'),
+      new RegExp(`:${regexSafeShortCode}:`, 'g'),
       `<img src='${emoji.url}' alt='${emoji.shortcode}' title='${emoji.shortcode}' class='emoji' />`
     )
   }, string)

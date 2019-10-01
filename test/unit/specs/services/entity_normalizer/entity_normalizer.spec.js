@@ -345,5 +345,16 @@ describe('API Entities normalizer', () => {
       const result = addEmojis('Admin add the :tenshi: emoji', emojis)
       expect(result).to.equal('Admin add the :tenshi: emoji')
     })
+
+    it('Doesn\'t blow up on regex special characters', () => {
+      const emojis = makeMockEmojiMasto([{
+        shortcode: 'c++'
+      }, {
+        shortcode: '[a-z] {|}*'
+      }])
+      const result = addEmojis('This post has :c++: emoji and :[a-z] {|}*: emoji', emojis)
+      expect(result).to.include('title=\'c++\'')
+      expect(result).to.include('title=\'[a-z] {|}*\'')
+    })
   })
 })

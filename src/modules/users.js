@@ -60,6 +60,56 @@ const unmuteUser = (store, id) => {
     .then((relationship) => store.commit('updateUserRelationship', [relationship]))
 }
 
+const getStaticEmoji = async (store) => {
+  try {
+    const res = await window.fetch('/static/emoji.json')
+    if (res.ok) {
+      const values = await res.json()
+      const emoji = Object.keys(values).map((key) => {
+        return {
+          displayText: key,
+          imageUrl: false,
+          replacement: values[key]
+        }
+      }).sort((a, b) => a.displayText - b.displayText)
+      store.dispatch('setInstanceOption', { name: 'emoji', value: emoji })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load static emoji")
+    console.warn(e)
+  }
+}
+
+// This is also used to indicate if we have a 'pleroma backend' or not.
+// Somewhat weird, should probably be somewhere else.
+const getCustomEmoji = async (store) => {
+  try {
+    const res = await window.fetch('/api/pleroma/emoji.json')
+    if (res.ok) {
+      const result = await res.json()
+      const values = Array.isArray(result) ? Object.assign({}, ...result) : result
+      const emoji = Object.entries(values).map(([key, value]) => {
+        const imageUrl = value.image_url
+        return {
+          displayText: key,
+          imageUrl: imageUrl ? store.rootState.instance.server + imageUrl : value,
+          tags: imageUrl ? value.tags.sort((a, b) => a > b ? 1 : 0) : ['utf'],
+          replacement: `:${key}: `
+        }
+        // Technically could use tags but those are kinda useless right now, should have been "pack" field, that would be more useful
+      }).sort((a, b) => a.displayText.toLowerCase() > b.displayText.toLowerCase() ? 1 : 0)
+      store.dispatch('setInstanceOption', { name: 'customEmoji', value: emoji })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load custom emojis")
+    console.warn(e)
+  }
+}
+
 export const mutations = {
   setMuted (state, { user: { id }, muted }) {
     const user = state.usersObject[id]
@@ -433,6 +483,9 @@ const users = {
               user.muteIds = []
               commit('setCurrentUser', user)
               commit('addNewUsers', [user])
+
+              getCustomEmoji(store)
+              getStaticEmoji(store)
 
               getNotificationPermission()
                 .then(permission => commit('setNotificationPermission', permission))

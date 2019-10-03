@@ -7,6 +7,7 @@ stages:
   - lint
   - build
   - test
+  - deploy
 
 lint:
   stage: lint
@@ -33,3 +34,13 @@ build:
   artifacts:
     paths:
     - dist/
+
+docs-deploy:
+  stage: deploy
+  image: alpine:latest
+  only:
+  - develop@pleroma/pleroma-fe
+  before_script:
+  - apk add curl
+  script:
+  - curl -X POST -F"token=$DOCS_PIPELINE_TRIGGER" -F'ref=master' https://git.pleroma.social/api/v4/projects/673/trigger/pipeline

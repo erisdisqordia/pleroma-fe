@@ -1,3 +1,4 @@
+import { set } from 'vue'
 
 const filterByKeyword = (list, keyword = '') => {
   return list.filter(x => x.displayText.includes(keyword))
@@ -18,7 +19,10 @@ const EmojiPicker = {
       activeGroup: 'custom',
       showingStickers: false,
       groupsScrolledClass: 'scrolled-top',
-      keepOpen: false
+      keepOpen: false,
+      customEmojiBuffer: [],
+      customEmojiInterval: null,
+      customEmojiCounter: 0
     }
   },
   components: {
@@ -57,6 +61,36 @@ const EmojiPicker = {
         })
       })
     },
+    restartInterval () {
+      const customEmojis = filterByKeyword(
+        this.$store.state.instance.customEmoji || [],
+        this.keyword
+      )
+      const amount = 50
+      const interval = 100
+
+      if (this.customEmojiInterval) {
+        window.clearInterval(this.customEmojiInterval)
+      }
+      window.setTimeout(
+        window.clearInterval(this.customEmojiInterval),
+        1000
+      )
+      set(this, 'customEmojiBuffer', [])
+      this.customEmojiCounter = 0
+      this.customEmojiInterval = window.setInterval(() => {
+        console.log(this.customEmojiBuffer.length)
+        console.log(customEmojis.length)
+        if (this.customEmojiBuffer.length < customEmojis.length) {
+          this.customEmojiBuffer.push(
+            ...customEmojis.slice(this.customEmojiCounter, this.customEmojiCounter + amount)
+          )
+        } else {
+          window.clearInterval(this.customEmojiInterval)
+        }
+        this.customEmojiCounter += amount
+      }, interval)
+    },
     toggleStickers () {
       this.showingStickers = !this.showingStickers
     },
@@ -73,6 +107,7 @@ const EmojiPicker = {
   watch: {
     keyword () {
       this.scrolledGroup()
+      this.restartInterval()
     }
   },
   computed: {
@@ -87,13 +122,14 @@ const EmojiPicker = {
     },
     emojis () {
       const standardEmojis = this.$store.state.instance.emoji || []
-      const customEmojis = this.$store.state.instance.customEmoji || []
+      const customEmojis = this.customEmojiBuffer
+
       return [
         {
           id: 'custom',
           text: this.$t('emoji.custom'),
           icon: 'icon-smile',
-          emojis: filterByKeyword(customEmojis, this.keyword)
+          emojis: customEmojis
         },
         {
           id: 'standard',

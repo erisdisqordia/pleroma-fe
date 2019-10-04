@@ -1,7 +1,7 @@
 # Pleroma-FE configuration and customization for instance administrators
 
-* *For user configuration, see USER_GUIDE.md*
-* *For local development server configuration, see HACKING.md*
+* *For user configuration, see [Pleroma-FE user guide](USER_GUIDE.md)*
+* *For local development server configuration, see [Hacking, tweaking, contributing](HACKING.md)*
 
 ## Where configuration is stored
 

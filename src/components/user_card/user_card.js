@@ -27,9 +27,9 @@ export default {
       }]
     },
     style () {
-      const color = this.$store.state.config.customTheme.colors
-        ? this.$store.state.config.customTheme.colors.bg // v2
-        : this.$store.state.config.colors.bg // v1
+      const color = this.$store.getters.mergedConfig.customTheme.colors
+        ? this.$store.getters.mergedConfig.customTheme.colors.bg // v2
+        : this.$store.getters.mergedConfig.colors.bg // v1
 
       if (color) {
         const rgb = (typeof color === 'string') ? hex2rgb(color) : color
@@ -61,11 +61,11 @@ export default {
     },
     userHighlightType: {
       get () {
-        const data = this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.getters.mergedConfig.highlight[this.user.screen_name]
         return (data && data.type) || 'disabled'
       },
       set (type) {
-        const data = this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.getters.mergedConfig.highlight[this.user.screen_name]
         if (type !== 'disabled') {
           this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: (data && data.color) || '#FFFFFF', type })
         } else {
@@ -76,7 +76,7 @@ export default {
     },
     userHighlightColor: {
       get () {
-        const data = this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.getters.mergedConfig.highlight[this.user.screen_name]
         return data && data.color
       },
       set (color) {

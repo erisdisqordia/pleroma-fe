@@ -39,7 +39,7 @@ const Notification = {
       return highlightClass(this.notification.from_profile)
     },
     userStyle () {
-      const highlight = this.$store.state.config.highlight
+      const highlight = this.$store.getters.mergedConfig.highlight
       const user = this.notification.from_profile
       return highlightStyle(highlight[user.screen_name])
     },

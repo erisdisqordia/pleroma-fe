@@ -99,7 +99,7 @@ const settings = {
       handler (value) {
         this.$store.dispatch('setOption', {
           name: 'notificationVisibility',
-          value: this.$store.state.config.notificationVisibility
+          value: this.$store.getters.mergedConfig.notificationVisibility
         })
       },
       deep: true

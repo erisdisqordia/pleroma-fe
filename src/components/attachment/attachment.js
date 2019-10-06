@@ -15,8 +15,8 @@ const Attachment = {
   data () {
     return {
       nsfwImage: this.$store.state.instance.nsfwCensorImage || nsfwImage,
-      hideNsfwLocal: this.$store.state.config.hideNsfw,
-      preloadImage: this.$store.state.config.preloadImage,
+      hideNsfwLocal: this.$store.getters.mergedConfig.hideNsfw,
+      preloadImage: this.$store.getters.mergedConfig.preloadImage,
       loading: false,
       img: fileTypeService.fileType(this.attachment.mimetype) === 'image' && document.createElement('img'),
       modalOpen: false,
@@ -57,7 +57,7 @@ const Attachment = {
       }
     },
     openModal (event) {
-      const modalTypes = this.$store.state.config.playVideosInModal
+      const modalTypes = this.$store.getters.mergedConfig.playVideosInModal
         ? ['image', 'video']
         : ['image']
       if (fileTypeService.fileMatchesSomeType(modalTypes, this.attachment) ||
@@ -70,7 +70,7 @@ const Attachment = {
       }
     },
     toggleHidden (event) {
-      if (this.$store.state.config.useOneClickNsfw && !this.showHidden) {
+      if (this.$store.getters.mergedConfig.useOneClickNsfw && !this.showHidden) {
         this.openModal(event)
         return
       }

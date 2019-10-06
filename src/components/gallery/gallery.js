@@ -37,7 +37,7 @@ const Gallery = {
       return itemsPerRow => ({ 'height': `${(this.width / (itemsPerRow + 0.6))}px` })
     },
     useContainFit () {
-      return this.$store.state.config.useContainFit
+      return this.$store.getters.mergedConfig.useContainFit
     }
   },
   methods: {

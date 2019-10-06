@@ -18,7 +18,14 @@ const actions = {
 }
 
 const testGetters = {
-  findUser: state => getters.findUser(state.users)
+  findUser: state => getters.findUser(state.users),
+  mergedConfig: state => ({
+    colors: '',
+    highlight: {},
+    customTheme: {
+      colors: []
+    }
+  })
 }
 
 const localUser = {
@@ -44,13 +51,6 @@ const externalProfileStore = new Vuex.Store({
     },
     interface: {
       browserSupport: ''
-    },
-    config: {
-      colors: '',
-      highlight: {},
-      customTheme: {
-        colors: []
-      }
     },
     instance: {
       hideUserStats: true

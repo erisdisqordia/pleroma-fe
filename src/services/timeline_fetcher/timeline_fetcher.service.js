@@ -15,13 +15,21 @@ const update = ({ store, statuses, timeline, showImmediately, userId }) => {
   })
 }
 
-const fetchAndUpdate = ({ store, credentials, timeline = 'friends', older = false, showImmediately = false, userId = false, tag = false, until }) => {
+const fetchAndUpdate = ({
+  store,
+  credentials,
+  timeline = 'friends',
+  older = false,
+  showImmediately = false,
+  userId = false,
+  tag = false,
+  until
+}) => {
   const args = { timeline, credentials }
   const rootState = store.rootState || store.state
+  const { getters } = store
   const timelineData = rootState.statuses.timelines[camelCase(timeline)]
-  const hideMutedPosts = typeof rootState.config.hideMutedPosts === 'undefined'
-    ? rootState.instance.hideMutedPosts
-    : rootState.config.hideMutedPosts
+  const hideMutedPosts = getters.mergedConfig.hideMutedPosts
 
   if (older) {
     args['until'] = until || timelineData.minId

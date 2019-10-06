@@ -7,7 +7,7 @@ const StillImage = {
   ],
   data () {
     return {
-      stopGifs: this.$store.state.config.stopGifs
+      stopGifs: this.$store.getters.mergedConfig.stopGifs
     }
   },
   computed: {

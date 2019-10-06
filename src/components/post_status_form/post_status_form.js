@@ -152,7 +152,7 @@ const PostStatusForm = {
         this.$store.state.instance.pollLimits.max_options >= 2
     },
     hideScopeNotice () {
-      return this.$store.state.config.hideScopeNotice
+      return this.$store.getters.mergedConfig.hideScopeNotice
     },
     pollContentError () {
       return this.pollFormVisible &&

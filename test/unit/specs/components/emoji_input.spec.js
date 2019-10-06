@@ -12,8 +12,8 @@ const generateInput = (value, padEmoji = true) => {
     },
     mocks: {
       $store: {
-        state: {
-          config: {
+        getters: {
+          mergedConfig: {
             padEmoji
           }
         }

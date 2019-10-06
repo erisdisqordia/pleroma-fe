@@ -17,6 +17,7 @@ import Autosuggest from '../autosuggest/autosuggest.vue'
 import Importer from '../importer/importer.vue'
 import Exporter from '../exporter/exporter.vue'
 import withSubscription from '../../hocs/with_subscription/with_subscription'
+import Checkbox from '../checkbox/checkbox.vue'
 import Mfa from './mfa.vue'
 
 const BlockList = withSubscription({
@@ -82,7 +83,8 @@ const UserSettings = {
     ProgressButton,
     Importer,
     Exporter,
-    Mfa
+    Mfa,
+    Checkbox
   },
   computed: {
     user () {

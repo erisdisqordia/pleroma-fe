@@ -53,12 +53,9 @@
               />
             </EmojiInput>
             <p>
-              <input
-                id="account-locked"
-                v-model="newLocked"
-                type="checkbox"
-              >
-              <label for="account-locked">{{ $t('settings.lock_account_description') }}</label>
+              <Checkbox v-model="newLocked">
+                {{ $t('settings.lock_account_description') }}
+              </Checkbox>
             </p>
             <div>
               <label for="default-vis">{{ $t('settings.default_vis') }}</label>
@@ -75,69 +72,52 @@
               </div>
             </div>
             <p>
-              <input
-                id="account-no-rich-text"
-                v-model="newNoRichText"
-                type="checkbox"
-              >
-              <label for="account-no-rich-text">{{ $t('settings.no_rich_text_description') }}</label>
+              <Checkbox v-model="newNoRichText">
+                {{ $t('settings.no_rich_text_description') }}
+              </Checkbox>
             </p>
             <p>
-              <input
-                id="account-hide-follows"
-                v-model="hideFollows"
-                type="checkbox"
-              >
-              <label for="account-hide-follows">{{ $t('settings.hide_follows_description') }}</label>
+              <Checkbox v-model="hideFollows">
+                {{ $t('settings.hide_follows_description') }}
+              </Checkbox>
             </p>
             <p class="setting-subitem">
-              <input
-                id="account-hide-follows-count"
+              <Checkbox
                 v-model="hideFollowsCount"
-                type="checkbox"
                 :disabled="!hideFollows"
-              >
-              <label for="account-hide-follows-count">{{ $t('settings.hide_follows_count_description') }}</label>
+                >
+                {{ $t('settings.hide_follows_count_description') }}
+              </Checkbox>
             </p>
             <p>
-              <input
-                id="account-hide-followers"
+              <Checkbox
                 v-model="hideFollowers"
-                type="checkbox"
-              >
-              <label for="account-hide-followers">{{ $t('settings.hide_followers_description') }}</label>
+                >
+                {{ $t('settings.hide_followers_description') }}
+              </Checkbox>
             </p>
             <p class="setting-subitem">
-              <input
-                id="account-hide-followers-count"
+              <Checkbox
                 v-model="hideFollowersCount"
-                type="checkbox"
                 :disabled="!hideFollowers"
               >
-              <label for="account-hide-followers-count">{{ $t('settings.hide_followers_count_description') }}</label>
+                {{ $t('settings.hide_followers_count_description') }}
+              </Checkbox>
             </p>
             <p>
-              <input
-                id="account-show-role"
-                v-model="showRole"
-                type="checkbox"
-              >
-              <label
-                v-if="role === 'admin'"
-                for="account-show-role"
-              >{{ $t('settings.show_admin_badge') }}</label>
-              <label
-                v-if="role === 'moderator'"
-                for="account-show-role"
-              >{{ $t('settings.show_moderator_badge') }}</label>
+              <Checkbox v-model="showRole">
+                <template v-if="role === 'admin'">
+                  {{ $t('settings.show_admin_badge') }}
+                </template>
+                <template v-if="role === 'moderator'">
+                  {{ $t('settings.show_moderator_badge') }}
+                </template>
+              </Checkbox>
             </p>
             <p>
-              <input
-                id="discoverable"
-                v-model="discoverable"
-                type="checkbox"
-              >
-              <label for="discoverable">{{ $t('settings.discoverable') }}</label>
+              <Checkbox v-model="discoverable">
+                {{ $t('settings.discoverable') }}
+              </Checkbox>
             </p>
             <button
               :disabled="newName && newName.length === 0"
@@ -367,44 +347,24 @@
               <span class="label">{{ $t('settings.notification_setting') }}</span>
               <ul class="option-list">
                 <li>
-                  <input
-                    id="notification-setting-follows"
-                    v-model="notificationSettings.follows"
-                    type="checkbox"
-                  >
-                  <label for="notification-setting-follows">
+                  <Checkbox v-model="notificationSettings.follows">
                     {{ $t('settings.notification_setting_follows') }}
-                  </label>
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="notification-setting-followers"
-                    v-model="notificationSettings.followers"
-                    type="checkbox"
-                  >
-                  <label for="notification-setting-followers">
+                  <Checkbox v-model="notificationSettings.followers">
                     {{ $t('settings.notification_setting_followers') }}
-                  </label>
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="notification-setting-non-follows"
-                    v-model="notificationSettings.non_follows"
-                    type="checkbox"
-                  >
-                  <label for="notification-setting-non-follows">
+                  <Checkbox v-model="notificationSettings.non_follows">
                     {{ $t('settings.notification_setting_non_follows') }}
-                  </label>
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="notification-setting-non-followers"
-                    v-model="notificationSettings.non_followers"
-                    type="checkbox"
-                  >
-                  <label for="notification-setting-non-followers">
+                  <Checkbox v-model="notificationSettings.non_followers">
                     {{ $t('settings.notification_setting_non_followers') }}
-                  </label>
+                  </Checkbox>
                 </li>
               </ul>
             </div>

@@ -40,12 +40,16 @@ export default {
 .checkbox {
   position: relative;
   display: inline-block;
-  padding-left: 1.2em;
   min-height: 1.2em;
+
+  &-indicator {
+    position: relative;
+    padding-left: 1.2em;
+  }
 
   &-indicator::before {
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
     display: block;
     content: '✔';

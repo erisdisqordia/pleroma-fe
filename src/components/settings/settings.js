@@ -6,6 +6,7 @@ import StyleSwitcher from '../style_switcher/style_switcher.vue'
 import InterfaceLanguageSwitcher from '../interface_language_switcher/interface_language_switcher.vue'
 import { extractCommit } from '../../services/version/version.service'
 import { instanceDefaultProperties, defaultState as configDefaultState } from '../../modules/config.js'
+import Checkbox from '../checkbox/checkbox.vue'
 
 const pleromaFeCommitUrl = 'https://git.pleroma.social/pleroma/pleroma-fe/commit/'
 const pleromaBeCommitUrl = 'https://git.pleroma.social/pleroma/pleroma/commit/'
@@ -35,7 +36,8 @@ const settings = {
   components: {
     TabSwitcher,
     StyleSwitcher,
-    InterfaceLanguageSwitcher
+    InterfaceLanguageSwitcher,
+    Checkbox
   },
   computed: {
     user () {

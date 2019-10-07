@@ -8,6 +8,7 @@ import { findOffset } from '../../services/offset_finder/offset_finder.service.j
 import { reject, map, uniqBy } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
 import { mapGetters } from 'vuex'
+import Checkbox from '../checkbox/checkbox.vue'
 
 const buildMentionsString = ({ user, attentions = [] }, currentUser) => {
   let allAttentions = [...attentions]
@@ -36,7 +37,8 @@ const PostStatusForm = {
     MediaUpload,
     EmojiInput,
     PollForm,
-    ScopeSelector
+    ScopeSelector,
+    Checkbox
   },
   mounted () {
     this.resize(this.$refs.textarea)

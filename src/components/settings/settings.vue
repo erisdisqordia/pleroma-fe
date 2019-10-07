@@ -36,12 +36,9 @@
                   <interface-language-switcher />
                 </li>
                 <li v-if="instanceSpecificPanelPresent">
-                  <input
-                    id="hideISP"
-                    v-model="hideISP"
-                    type="checkbox"
-                  >
-                  <label for="hideISP">{{ $t('settings.hide_isp') }}</label>
+                  <Checkbox v-model="hideISP">
+                    {{ $t('settings.hide_isp') }}
+                  </Checkbox>
                 </li>
               </ul>
             </div>
@@ -49,58 +46,42 @@
               <h2>{{ $t('nav.timeline') }}</h2>
               <ul class="setting-list">
                 <li>
-                  <input
-                    id="hideMutedPosts"
-                    v-model="hideMutedPosts"
-                    type="checkbox"
-                  >
-                  <label for="hideMutedPosts">{{ $t('settings.hide_muted_posts') }} {{ $t('settings.instance_default', { value: hideMutedPostsLocalizedValue }) }}</label>
+                  <Checkbox v-model="hideMutedPosts">
+                    {{ $t('settings.hide_muted_posts') }} {{ $t('settings.instance_default', { value: hideMutedPostsLocalizedValue }) }}
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="collapseMessageWithSubject"
-                    v-model="collapseMessageWithSubject"
-                    type="checkbox"
-                  >
-                  <label for="collapseMessageWithSubject">{{ $t('settings.collapse_subject') }} {{ $t('settings.instance_default', { value: collapseMessageWithSubjectLocalizedValue }) }}</label>
+                  <Checkbox v-model="collapseMessageWithSubject">
+                    {{ $t('settings.collapse_subject') }} {{ $t('settings.instance_default', { value: collapseMessageWithSubjectLocalizedValue }) }}
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="streaming"
-                    v-model="streaming"
-                    type="checkbox"
-                  >
-                  <label for="streaming">{{ $t('settings.streaming') }}</label>
+                  <Checkbox v-model="streaming">
+                    {{ $t('settings.streaming') }}
+                  </Checkbox>
                   <ul
                     class="setting-list suboptions"
                     :class="[{disabled: !streaming}]"
                   >
                     <li>
-                      <input
-                        id="pauseOnUnfocused"
+                      <Checkbox
                         v-model="pauseOnUnfocused"
                         :disabled="!streaming"
-                        type="checkbox"
                       >
-                      <label for="pauseOnUnfocused">{{ $t('settings.pause_on_unfocused') }}</label>
+                        {{ $t('settings.pause_on_unfocused') }}
+                      </Checkbox>
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <input
-                    id="autoload"
-                    v-model="autoLoad"
-                    type="checkbox"
-                  >
-                  <label for="autoload">{{ $t('settings.autoload') }}</label>
+                  <Checkbox v-model="autoLoad">
+                    {{ $t('settings.autoload') }}
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="hoverPreview"
-                    v-model="hoverPreview"
-                    type="checkbox"
-                  >
-                  <label for="hoverPreview">{{ $t('settings.reply_link_preview') }}</label>
+                  <Checkbox v-model="hoverPreview">
+                    {{ $t('settings.reply_link_preview') }}
+                  </Checkbox>
                 </li>
               </ul>
             </div>
@@ -109,24 +90,14 @@
               <h2>{{ $t('settings.composing') }}</h2>
               <ul class="setting-list">
                 <li>
-                  <input
-                    id="scopeCopy"
-                    v-model="scopeCopy"
-                    type="checkbox"
-                  >
-                  <label for="scopeCopy">
+                  <Checkbox v-model="scopeCopy">
                     {{ $t('settings.scope_copy') }} {{ $t('settings.instance_default', { value: scopeCopyLocalizedValue }) }}
-                  </label>
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="subjectHide"
-                    v-model="alwaysShowSubjectInput"
-                    type="checkbox"
-                  >
-                  <label for="subjectHide">
+                  <Checkbox v-model="alwaysShowSubjectInput">
                     {{ $t('settings.subject_input_always_show') }} {{ $t('settings.instance_default', { value: alwaysShowSubjectInputLocalizedValue }) }}
-                  </label>
+                  </Checkbox>
                 </li>
                 <li>
                   <div>
@@ -181,30 +152,19 @@
                   </div>
                 </li>
                 <li>
-                  <input
-                    id="minimalScopesMode"
-                    v-model="minimalScopesMode"
-                    type="checkbox"
-                  >
-                  <label for="minimalScopesMode">
+                  <Checkbox v-model="minimalScopesMode">
                     {{ $t('settings.minimal_scopes_mode') }} {{ $t('settings.instance_default', { value: minimalScopesModeLocalizedValue }) }}
-                  </label>
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="autohideFloatingPostButton"
-                    v-model="autohideFloatingPostButton"
-                    type="checkbox"
-                  >
-                  <label for="autohideFloatingPostButton">{{ $t('settings.autohide_floating_post_button') }}</label>
+                  <Checkbox v-model="autohideFloatingPostButton">
+                    {{ $t('settings.autohide_floating_post_button') }}
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="padEmoji"
-                    v-model="padEmoji"
-                    type="checkbox"
-                  >
-                  <label for="padEmoji">{{ $t('settings.pad_emoji') }}</label>
+                  <Checkbox v-model="padEmoji">
+                    {{ $t('settings.pad_emoji') }}
+                  </Checkbox>
                 </li>
               </ul>
             </div>
@@ -213,23 +173,19 @@
               <h2>{{ $t('settings.attachments') }}</h2>
               <ul class="setting-list">
                 <li>
-                  <input
-                    id="hideAttachments"
-                    v-model="hideAttachments"
-                    type="checkbox"
-                  >
-                  <label for="hideAttachments">{{ $t('settings.hide_attachments_in_tl') }}</label>
+                  <Checkbox v-model="hideAttachments">
+                    {{ $t('settings.hide_attachments_in_tl') }}
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="hideAttachmentsInConv"
-                    v-model="hideAttachmentsInConv"
-                    type="checkbox"
-                  >
-                  <label for="hideAttachmentsInConv">{{ $t('settings.hide_attachments_in_convo') }}</label>
+                  <Checkbox v-model="hideAttachmentsInConv">
+                    {{ $t('settings.hide_attachments_in_convo') }}
+                  </Checkbox>
                 </li>
                 <li>
-                  <label for="maxThumbnails">{{ $t('settings.max_thumbnails') }}</label>
+                  <label for="maxThumbnails">
+                    {{ $t('settings.max_thumbnails') }}
+                  </label>
                   <input
                     id="maxThumbnails"
                     v-model.number="maxThumbnails"
@@ -240,60 +196,48 @@
                   >
                 </li>
                 <li>
-                  <input
-                    id="hideNsfw"
-                    v-model="hideNsfw"
-                    type="checkbox"
-                  >
-                  <label for="hideNsfw">{{ $t('settings.nsfw_clickthrough') }}</label>
+                  <Checkbox v-model="hideNsfw">
+                    {{ $t('settings.nsfw_clickthrough') }}
+                  </Checkbox>
                 </li>
                 <ul class="setting-list suboptions">
                   <li>
-                    <input
-                      id="preloadImage"
+                    <Checkbox
                       v-model="preloadImage"
                       :disabled="!hideNsfw"
-                      type="checkbox"
                     >
-                    <label for="preloadImage">{{ $t('settings.preload_images') }}</label>
+                      {{ $t('settings.preload_images') }}
+                    </Checkbox>
                   </li>
                   <li>
-                    <input
-                      id="useOneClickNsfw"
+                    <Checkbox
                       v-model="useOneClickNsfw"
                       :disabled="!hideNsfw"
-                      type="checkbox"
                     >
-                    <label for="useOneClickNsfw">{{ $t('settings.use_one_click_nsfw') }}</label>
+                      {{ $t('settings.use_one_click_nsfw') }}
+                    </Checkbox>
                   </li>
                 </ul>
                 <li>
-                  <input
-                    id="stopGifs"
-                    v-model="stopGifs"
-                    type="checkbox"
-                  >
-                  <label for="stopGifs">{{ $t('settings.stop_gifs') }}</label>
+                  <Checkbox v-model="stopGifs">
+                    {{ $t('settings.stop_gifs') }}
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="loopVideo"
-                    v-model="loopVideo"
-                    type="checkbox"
-                  >
-                  <label for="loopVideo">{{ $t('settings.loop_video') }}</label>
+                  <Checkbox v-model="loopVideo">
+                    {{ $t('settings.loop_video') }}
+                  </Checkbox>
                   <ul
                     class="setting-list suboptions"
                     :class="[{disabled: !streaming}]"
                   >
                     <li>
-                      <input
-                        id="loopVideoSilentOnly"
+                      <Checkbox
                         v-model="loopVideoSilentOnly"
                         :disabled="!loopVideo || !loopSilentAvailable"
-                        type="checkbox"
                       >
-                      <label for="loopVideoSilentOnly">{{ $t('settings.loop_video_silent_only') }}</label>
+                        {{ $t('settings.loop_video_silent_only') }}
+                      </Checkbox>
                       <div
                         v-if="!loopSilentAvailable"
                         class="unavailable"
@@ -304,20 +248,14 @@
                   </ul>
                 </li>
                 <li>
-                  <input
-                    id="playVideosInModal"
-                    v-model="playVideosInModal"
-                    type="checkbox"
-                  >
-                  <label for="playVideosInModal">{{ $t('settings.play_videos_in_modal') }}</label>
+                  <Checkbox v-model="playVideosInModal">
+                    {{ $t('settings.play_videos_in_modal') }}
+                  </Checkbox>
                 </li>
                 <li>
-                  <input
-                    id="useContainFit"
-                    v-model="useContainFit"
-                    type="checkbox"
-                  >
-                  <label for="useContainFit">{{ $t('settings.use_contain_fit') }}</label>
+                  <Checkbox v-model="useContainFit">
+                    {{ $t('settings.use_contain_fit') }}
+                  </Checkbox>
                 </li>
               </ul>
             </div>
@@ -326,14 +264,9 @@
               <h2>{{ $t('settings.notifications') }}</h2>
               <ul class="setting-list">
                 <li>
-                  <input
-                    id="webPushNotifications"
-                    v-model="webPushNotifications"
-                    type="checkbox"
-                  >
-                  <label for="webPushNotifications">
+                  <Checkbox v-model="webPushNotifications">
                     {{ $t('settings.enable_web_push_notifications') }}
-                  </label>
+                  </Checkbox>
                 </li>
               </ul>
             </div>
@@ -351,44 +284,24 @@
                 <span class="label">{{ $t('settings.notification_visibility') }}</span>
                 <ul class="option-list">
                   <li>
-                    <input
-                      id="notification-visibility-likes"
-                      v-model="notificationVisibility.likes"
-                      type="checkbox"
-                    >
-                    <label for="notification-visibility-likes">
+                    <Checkbox v-model="notificationVisibility.likes">
                       {{ $t('settings.notification_visibility_likes') }}
-                    </label>
+                    </Checkbox>
                   </li>
                   <li>
-                    <input
-                      id="notification-visibility-repeats"
-                      v-model="notificationVisibility.repeats"
-                      type="checkbox"
-                    >
-                    <label for="notification-visibility-repeats">
+                    <Checkbox v-model="notificationVisibility.repeats">
                       {{ $t('settings.notification_visibility_repeats') }}
-                    </label>
+                    </Checkbox>
                   </li>
                   <li>
-                    <input
-                      id="notification-visibility-follows"
-                      v-model="notificationVisibility.follows"
-                      type="checkbox"
-                    >
-                    <label for="notification-visibility-follows">
+                    <Checkbox v-model="notificationVisibility.follows">
                       {{ $t('settings.notification_visibility_follows') }}
-                    </label>
+                    </Checkbox>
                   </li>
                   <li>
-                    <input
-                      id="notification-visibility-mentions"
-                      v-model="notificationVisibility.mentions"
-                      type="checkbox"
-                    >
-                    <label for="notification-visibility-mentions">
+                    <Checkbox v-model="notificationVisibility.mentions">
                       {{ $t('settings.notification_visibility_mentions') }}
-                    </label>
+                    </Checkbox>
                   </li>
                 </ul>
               </div>
@@ -413,24 +326,14 @@
                 </label>
               </div>
               <div>
-                <input
-                  id="hidePostStats"
-                  v-model="hidePostStats"
-                  type="checkbox"
-                >
-                <label for="hidePostStats">
+                <Checkbox v-model="hidePostStats">
                   {{ $t('settings.hide_post_stats') }} {{ $t('settings.instance_default', { value: hidePostStatsLocalizedValue }) }}
-                </label>
+                </Checkbox>
               </div>
               <div>
-                <input
-                  id="hideUserStats"
-                  v-model="hideUserStats"
-                  type="checkbox"
-                >
-                <label for="hideUserStats">
+                <Checkbox v-model="hideUserStats">
                   {{ $t('settings.hide_user_stats') }} {{ $t('settings.instance_default', { value: hideUserStatsLocalizedValue }) }}
-                </label>
+                </Checkbox>
               </div>
             </div>
             <div class="setting-item">
@@ -442,14 +345,9 @@
                 />
               </div>
               <div>
-                <input
-                  id="hideFilteredStatuses"
-                  v-model="hideFilteredStatuses"
-                  type="checkbox"
-                >
-                <label for="hideFilteredStatuses">
+                <Checkbox v-model="hideFilteredStatuses">
                   {{ $t('settings.hide_filtered_statuses') }} {{ $t('settings.instance_default', { value: hideFilteredStatusesLocalizedValue }) }}
-                </label>
+                </Checkbox>
               </div>
             </div>
           </div>

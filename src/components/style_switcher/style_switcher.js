@@ -10,6 +10,7 @@ import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import Preview from './preview.vue'
 import ExportImport from '../export_import/export_import.vue'
+import Checkbox from '../checkbox/checkbox.vue'
 
 // List of color values used in v1
 const v1OnlyNames = [
@@ -338,7 +339,8 @@ export default {
     FontControl,
     TabSwitcher,
     Preview,
-    ExportImport
+    ExportImport,
+    Checkbox
   },
   methods: {
     setCustomTheme () {

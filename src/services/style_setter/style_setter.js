@@ -215,6 +215,10 @@ const generateColors = (input) => {
   colors.alertErrorText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.bg), colors.text)
   colors.alertErrorPanelText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.panel), colors.panelText)
 
+  colors.alertWarning = col.alertWarning || Object.assign({}, colors.cOrange)
+  colors.alertWarningText = getTextColor(alphaBlend(colors.alertWarning, opacity.alert, colors.bg), colors.text)
+  colors.alertWarningPanelText = getTextColor(alphaBlend(colors.alertWarning, opacity.alert, colors.panel), colors.panelText)
+
   colors.badgeNotification = col.badgeNotification || Object.assign({}, colors.cRed)
   colors.badgeNotificationText = contrastRatio(colors.badgeNotification).rgb
 
@@ -222,6 +226,7 @@ const generateColors = (input) => {
     if (typeof v === 'undefined') return
     if (k === 'alert') {
       colors.alertError.a = v
+      colors.alertWarning.a = v
       return
     }
     if (k === 'faint') {

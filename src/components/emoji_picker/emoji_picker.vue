@@ -92,6 +92,17 @@
             </div>
           </label>
         </div>
+        <div class="too-many-emoji" v-if="askForSanity">
+          <div class="alert warning hint">
+            {{ $t('emoji.load_all_hint', { saneAmount } ) }}
+          </div>
+          <button
+            class="btn btn-default"
+            @click="loadEmojiInsane"
+            >
+            {{ $t('emoji.load_all', { emojiAmount: filteredEmoji.length } ) }}
+          </button>
+        </div>
       </div>
       <div
         v-if="showingStickers"

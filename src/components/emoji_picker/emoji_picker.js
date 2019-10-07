@@ -1,5 +1,9 @@
 import { set } from 'vue'
 
+const LOAD_EMOJI_BY = 50
+const LOAD_EMOJI_INTERVAL = 100
+const LOAD_EMOJI_SANE_AMOUNT = 500
+
 const filterByKeyword = (list, keyword = '') => {
   return list.filter(x => x.displayText.includes(keyword))
 }
@@ -21,12 +25,16 @@ const EmojiPicker = {
       groupsScrolledClass: 'scrolled-top',
       keepOpen: false,
       customEmojiBuffer: [],
-      customEmojiInterval: null,
-      customEmojiCounter: 0
+      customEmojiTimeout: null,
+      customEmojiCounter: 0,
+      customEmojiLoadAllConfirmed: false
     }
   },
   components: {
     StickerPicker: () => import('../sticker_picker/sticker_picker.vue')
+  },
+  mounted () {
+    this.startEmojiLoad()
   },
   methods: {
     onEmoji (emoji) {
@@ -61,35 +69,39 @@ const EmojiPicker = {
         })
       })
     },
-    restartInterval () {
-      const customEmojis = filterByKeyword(
-        this.$store.state.instance.customEmoji || [],
-        this.keyword
-      )
-      const amount = 50
-      const interval = 100
+    loadEmojiInsane () {
+      this.customEmojiLoadAllConfirmed = true
+      this.continueEmojiLoad()
+    },
+    loadEmoji () {
+      const allLoaded = this.customEmojiBuffer.length === this.filteredEmoji.length
+      const saneLoaded = this.customEmojiBuffer.length >= LOAD_EMOJI_SANE_AMOUNT &&
+            !this.customEmojiLoadAllConfirmed
 
-      if (this.customEmojiInterval) {
-        window.clearInterval(this.customEmojiInterval)
+      if (allLoaded || saneLoaded) {
+        return
       }
-      window.setTimeout(
-        window.clearInterval(this.customEmojiInterval),
-        1000
+
+      this.customEmojiBuffer.push(
+        ...this.filteredEmoji.slice(
+          this.customEmojiCounter,
+          this.customEmojiCounter + LOAD_EMOJI_BY
+        )
       )
+      this.customEmojiTimeout = window.setTimeout(this.loadEmoji, LOAD_EMOJI_INTERVAL)
+      this.customEmojiCounter += LOAD_EMOJI_BY
+    },
+    startEmojiLoad () {
+      if (this.customEmojiTimeout) {
+        window.clearTimeout(this.customEmojiTimeout)
+      }
+
       set(this, 'customEmojiBuffer', [])
       this.customEmojiCounter = 0
-      this.customEmojiInterval = window.setInterval(() => {
-        console.log(this.customEmojiBuffer.length)
-        console.log(customEmojis.length)
-        if (this.customEmojiBuffer.length < customEmojis.length) {
-          this.customEmojiBuffer.push(
-            ...customEmojis.slice(this.customEmojiCounter, this.customEmojiCounter + amount)
-          )
-        } else {
-          window.clearInterval(this.customEmojiInterval)
-        }
-        this.customEmojiCounter += amount
-      }, interval)
+      this.customEmojiTimeout = window.setTimeout(this.loadEmoji, LOAD_EMOJI_INTERVAL)
+    },
+    continueEmojiLoad () {
+      this.customEmojiTimeout = window.setTimeout(this.loadEmoji, LOAD_EMOJI_INTERVAL)
     },
     toggleStickers () {
       this.showingStickers = !this.showingStickers
@@ -107,7 +119,7 @@ const EmojiPicker = {
   watch: {
     keyword () {
       this.scrolledGroup()
-      this.restartInterval()
+      this.startEmojiLoad()
     }
   },
   computed: {
@@ -119,6 +131,20 @@ const EmojiPicker = {
         return this.$store.state.instance.stickers.length > 0
       }
       return 0
+    },
+    saneAmount () {
+      // for UI
+      return LOAD_EMOJI_SANE_AMOUNT
+    },
+    filteredEmoji () {
+      return filterByKeyword(
+        this.$store.state.instance.customEmoji || [],
+        this.keyword
+      )
+    },
+    askForSanity () {
+      return this.customEmojiBuffer.length >= LOAD_EMOJI_SANE_AMOUNT &&
+        !this.customEmojiLoadAllConfirmed
     },
     emojis () {
       const standardEmojis = this.$store.state.instance.emoji || []

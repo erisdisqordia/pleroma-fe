@@ -216,6 +216,13 @@
               :fallback="previewTheme.colors.alertError"
             />
             <ContrastRatio :contrast="previewContrast.alertError" />
+            <ColorInput
+              v-model="alertWarningColorLocal"
+              name="alertWarning"
+              :label="$t('settings.style.advanced_colors.alert_warning')"
+              :fallback="previewTheme.colors.alertWarning"
+            />
+            <ContrastRatio :contrast="previewContrast.alertWarning" />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.badge') }}</h4>

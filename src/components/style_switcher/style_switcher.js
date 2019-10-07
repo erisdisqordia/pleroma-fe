@@ -73,6 +73,7 @@ export default {
       topBarLinkColorLocal: undefined,
 
       alertErrorColorLocal: undefined,
+      alertWarningColorLocal: undefined,
 
       badgeOpacityLocal: undefined,
       badgeNotificationColorLocal: undefined,
@@ -146,6 +147,7 @@ export default {
         btnText: this.btnTextColorLocal,
 
         alertError: this.alertErrorColorLocal,
+        alertWarning: this.alertWarningColorLocal,
         badgeNotification: this.badgeNotificationColorLocal,
 
         faint: this.faintColorLocal,
@@ -229,6 +231,7 @@ export default {
         topBar: hex2rgb(colors.topBar),
         input: hex2rgb(colors.input),
         alertError: hex2rgb(colors.alertError),
+        alertWarning: hex2rgb(colors.alertWarning),
         badgeNotification: hex2rgb(colors.badgeNotification)
       }
 

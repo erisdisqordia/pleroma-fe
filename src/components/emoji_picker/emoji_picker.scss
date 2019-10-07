@@ -6,14 +6,20 @@
   position: absolute;
   right: 0;
   left: 0;
-  height: 320px;
   margin: 0 !important;
   z-index: 1;
 
-  .keep-open {
+  .keep-open,
+  .too-many-emoji {
     padding: 7px;
     line-height: normal;
   }
+
+  .too-many-emoji {
+    display: flex;
+    flex-direction: column;
+  }
+
   .keep-open-label {
     padding: 0 7px;
     display: flex;
@@ -28,7 +34,7 @@
   .content {
     display: flex;
     flex-direction: column;
-    flex: 1 1 0;
+    flex: 1 1 auto;
     min-height: 0px;
   }
 
@@ -36,12 +42,16 @@
     flex-grow: 1;
   }
 
+  .emoji-groups {
+    min-height: 200px;
+  }
+
   .additional-tabs {
     border-left: 1px solid;
     border-left-color: $fallback--icon;
     border-left-color: var(--icon, $fallback--icon);
     padding-left: 7px;
-    flex: 0 0 0;
+    flex: 0 0 auto;
   }
 
   .additional-tabs,
@@ -72,7 +82,7 @@
   }
 
   .sticker-picker {
-    flex: 1 1 0
+    flex: 1 1 auto
   }
 
   .stickers,
@@ -80,7 +90,7 @@
     &-content {
       display: flex;
       flex-direction: column;
-      flex: 1 1 0;
+      flex: 1 1 auto;
       min-height: 0;
 
       &.hidden {
@@ -94,7 +104,7 @@
   .emoji {
     &-search {
       padding: 5px;
-      flex: 0 0 0;
+      flex: 0 0 auto;
 
       input {
         width: 100%;

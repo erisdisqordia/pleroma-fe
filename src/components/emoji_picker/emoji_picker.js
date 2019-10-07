@@ -14,7 +14,6 @@ const EmojiPicker = {
   },
   data () {
     return {
-      labelKey: String(Math.random() * 100000),
       keyword: '',
       activeGroup: 'custom',
       showingStickers: false,

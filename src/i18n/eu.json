@@ -68,6 +68,7 @@
   },
   "nav": {
     "about": "Honi buruz",
+    "administration": "Administrazioa",
     "back": "Atzera",
     "chat": "Txat lokala",
     "friend_requests": "Jarraitzeko eskaerak",
@@ -105,6 +106,15 @@
     "expires_in": "Inkesta {0} bukatzen da",
     "expired": "Inkesta {0} bukatu zen",
     "not_enough_options": "Aukera gutxiegi inkestan"
+  },
+  "emoji": {
+    "stickers": "Pegatinak",
+    "emoji": "Emoji",
+    "keep_open": "Mantendu hautatzailea zabalik",
+    "search_emoji": "Bilatu emoji bat",
+    "add_emoji": "Emoji bat gehitu",
+    "custom": "Ohiko emojiak",
+    "unicode": "Unicode emojiak"
   },
   "stickers": {
     "add_sticker": "Pegatina gehitu"
@@ -199,12 +209,12 @@
     "avatarRadius": "Avatarrak",
     "background": "Atzeko planoa",
     "bio": "Biografia",
-    "block_export": "Bloke esportatzea",
-    "block_export_button": "Esportatu zure blokeak csv fitxategi batera",
-    "block_import": "Bloke inportazioa",
-    "block_import_error": "Errorea blokeak inportatzen",
-    "blocks_imported": "Blokeak inportaturik! Hauek prozesatzeak denbora hartuko du.",
-    "blocks_tab": "Blokeak",
+    "block_export": "Blokeatu dituzunak esportatu",
+    "block_export_button": "Esportatu blokeatutakoak csv fitxategi batera",
+    "block_import": "Blokeatu dituzunak inportatu",
+    "block_import_error": "Errorea blokeatutakoak inportatzen",
+    "blocks_imported": "Blokeatutakoak inportaturik! Hauek prozesatzeak denbora hartuko du.",
+    "blocks_tab": "Blokeatutakoak",
     "btnRadius": "Botoiak",
     "cBlue": "Urdina (erantzun, jarraitu)",
     "cGreen": "Berdea (Bertxiotu)",
@@ -222,7 +232,9 @@
     "data_import_export_tab": "Datuak Inportatu / Esportatu",
     "default_vis": "Lehenetsitako ikusgaitasunak",
     "delete_account": "Ezabatu kontua",
+    "discoverable": "Baimendu zure kontua kanpo bilaketa-emaitzetan eta bestelako zerbitzuetan agertzea",
     "delete_account_description": "Betirako ezabatu zure kontua eta zure mezu guztiak",
+    "pad_emoji": "Zuriuneak gehitu emoji bat aukeratzen denean",
     "delete_account_error": "Arazo bat gertatu da zure kontua ezabatzerakoan. Arazoa jarraitu eskero, administratzailearekin harremanetan jarri.",
     "delete_account_instructions": "Idatzi zure pasahitza kontua ezabatzeko.",
     "avatar_size_instruction": "Avatar irudien gomendatutako gutxieneko tamaina 150x150 pixel dira.",
@@ -254,7 +266,7 @@
     "instance_default": "(lehenetsia: {value})",
     "instance_default_simple": "(lehenetsia)",
     "interface": "Interfazea",
-    "interfaceLanguage": "Interfaze hizkuntza",
+    "interfaceLanguage": "Interfazearen hizkuntza",
     "invalid_theme_imported": "Hautatutako fitxategia ez da onartutako Pleroma gaia. Ez da zure gaian aldaketarik burutu.",
     "limited_availability": "Ez dago erabilgarri zure nabigatzailean",
     "links": "Estekak",
@@ -277,6 +289,8 @@
     "no_mutes": "Ez daude erabiltzaile mututuak",
     "hide_follows_description": "Ez erakutsi nor jarraitzen ari naizen",
     "hide_followers_description": "Ez erakutsi nor ari den ni jarraitzen",
+    "hide_follows_count_description": "Ez erakutsi jarraitzen ari naizen kontuen kopurua",
+    "hide_followers_count_description": "Ez erakutsi nire jarraitzaileen kontuen kopurua",
     "show_admin_badge": "Erakutsi Administratzaile etiketa nire profilan",
     "show_moderator_badge": "Erakutsi Moderatzaile etiketa nire profilan",
     "nsfw_clickthrough": "Gaitu klika hunkigarri eranskinak ezkutatzeko",
@@ -449,7 +463,7 @@
     },
     "version": {
       "title": "Bertsioa",
-      "backend_version": "Backend Bertsio",
+      "backend_version": "Backend Bertsioa",
       "frontend_version": "Frontend Bertsioa"
     }
   },
@@ -529,6 +543,7 @@
     "follows_you": "Jarraitzen dizu!",
     "its_you": "Zu zara!",
     "media": "Multimedia",
+    "mention": "Aipatu",
     "mute": "Isilarazi",
     "muted": "Isilduta",
     "per_day": "eguneko",

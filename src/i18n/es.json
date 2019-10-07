@@ -45,8 +45,8 @@
     "error": "Se ha producido un error al importar el archivo."
   },
   "login": {
-    "login": "Identificación",
-    "description": "Identificación con OAuth",
+    "login": "Identificarse",
+    "description": "Identificarse con OAuth",
     "logout": "Cerrar sesión",
     "password": "Contraseña",
     "placeholder": "p.ej. lain",

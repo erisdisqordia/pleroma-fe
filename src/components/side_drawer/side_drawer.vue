@@ -123,6 +123,17 @@
           </router-link>
         </li>
         <li
+          v-if="currentUser && currentUser.role === 'admin'"
+          @click="toggleDrawer"
+        >
+          <a
+            href="/pleroma/admin/#/login-pleroma"
+            target="_blank"
+          >
+            {{ $t("nav.administration") }}
+          </a>
+        </li>
+        <li
           v-if="currentUser"
           @click="toggleDrawer"
         >

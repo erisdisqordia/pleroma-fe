@@ -278,10 +278,12 @@ describe('API Entities normalizer', () => {
     })
 
     it('adds hide_follows and hide_followers user settings', () => {
-      const user = makeMockUserMasto({ pleroma: { hide_followers: true, hide_follows: false } })
+      const user = makeMockUserMasto({ pleroma: { hide_followers: true, hide_follows: false, hide_followers_count: false, hide_follows_count: true } })
 
       expect(parseUser(user)).to.have.property('hide_followers', true)
       expect(parseUser(user)).to.have.property('hide_follows', false)
+      expect(parseUser(user)).to.have.property('hide_followers_count', false)
+      expect(parseUser(user)).to.have.property('hide_follows_count', true)
     })
   })
 
@@ -342,6 +344,17 @@ describe('API Entities normalizer', () => {
     it('Doesn\'t replace nonexistent emojis', () => {
       const result = addEmojis('Admin add the :tenshi: emoji', emojis)
       expect(result).to.equal('Admin add the :tenshi: emoji')
+    })
+
+    it('Doesn\'t blow up on regex special characters', () => {
+      const emojis = makeMockEmojiMasto([{
+        shortcode: 'c++'
+      }, {
+        shortcode: '[a-z] {|}*'
+      }])
+      const result = addEmojis('This post has :c++: emoji and :[a-z] {|}*: emoji', emojis)
+      expect(result).to.include('title=\'c++\'')
+      expect(result).to.include('title=\'[a-z] {|}*\'')
     })
   })
 })

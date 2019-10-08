@@ -1,3 +1,5 @@
+# Pleroma-FE user guide
+
 > Be prepared for breaking changes, unexpected behavior and this user guide becoming obsolete and wrong.
 
 > If there was no insanity
@@ -5,8 +7,6 @@
 > it would be necessary to create it.
 >
 > --Catbag
-
-# Pleroma-FE user guide
 
 Pleroma-FE user interface is modeled after Qvitter which is modeled after older Twitter design. It provides a simple 2-column interface for microblogging. While being simple by default it also provides many powerful customization options.
 

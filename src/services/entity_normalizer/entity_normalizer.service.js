@@ -75,6 +75,8 @@ export const parseUser = (data) => {
 
       output.hide_follows = data.pleroma.hide_follows
       output.hide_followers = data.pleroma.hide_followers
+      output.hide_follows_count = data.pleroma.hide_follows_count
+      output.hide_followers_count = data.pleroma.hide_followers_count
 
       output.rights = {
         moderator: data.pleroma.is_moderator,
@@ -96,6 +98,7 @@ export const parseUser = (data) => {
       if (data.source.pleroma) {
         output.no_rich_text = data.source.pleroma.no_rich_text
         output.show_role = data.source.pleroma.show_role
+        output.discoverable = data.source.pleroma.discoverable
       }
     }
 
@@ -141,6 +144,8 @@ export const parseUser = (data) => {
     output.default_scope = data.default_scope
     output.hide_follows = data.hide_follows
     output.hide_followers = data.hide_followers
+    output.hide_follows_count = data.hide_follows_count
+    output.hide_followers_count = data.hide_followers_count
     output.background_image = data.background_image
     // on mastoapi this info is contained in a "relationship"
     output.following = data.following
@@ -192,9 +197,11 @@ export const parseAttachment = (data) => {
   return output
 }
 export const addEmojis = (string, emojis) => {
+  const matchOperatorsRegex = /[|\\{}()[\]^$+*?.-]/g
   return emojis.reduce((acc, emoji) => {
+    const regexSafeShortCode = emoji.shortcode.replace(matchOperatorsRegex, '\\$&')
     return acc.replace(
-      new RegExp(`:${emoji.shortcode}:`, 'g'),
+      new RegExp(`:${regexSafeShortCode}:`, 'g'),
       `<img src='${emoji.url}' alt='${emoji.shortcode}' title='${emoji.shortcode}' class='emoji' />`
     )
   }, string)

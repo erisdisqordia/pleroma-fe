@@ -106,6 +106,15 @@
     "expired": "投票は {0} 前に終了しました",
     "not_enough_options": "相異なる選択肢が不足しています"
   },
+  "emoji": {
+    "stickers": "ステッカー",
+    "emoji": "絵文字",
+    "keep_open": "ピッカーを開いたままにする",
+    "search_emoji": "絵文字を検索",
+    "add_emoji": "絵文字を挿入",
+    "custom": "カスタム絵文字",
+    "unicode": "Unicode絵文字"
+  },
   "stickers": {
     "add_sticker": "ステッカーを追加"
   },
@@ -226,7 +235,9 @@
     "delete_account_description": "あなたのアカウントとメッセージが、消えます。",
     "delete_account_error": "アカウントを消すことが、できなかったかもしれません。インスタンスの管理者に、連絡してください。",
     "delete_account_instructions": "本当にアカウントを消してもいいなら、パスワードを入力してください。",
+    "discoverable": "検索などのサービスでこのアカウントを見つけることを許可する",
     "avatar_size_instruction": "アバターの大きさは、150×150ピクセルか、それよりも大きくするといいです。",
+    "pad_emoji": "ピッカーから絵文字を挿入するとき、絵文字の両側にスペースを入れる",
     "export_theme": "保存",
     "filtering": "フィルタリング",
     "filtering_explanation": "これらの言葉を含むすべてのものがミュートされます。1行に1つの言葉を書いてください。",
@@ -279,6 +290,8 @@
     "no_mutes": "ミュートはありません",
     "hide_follows_description": "フォローしている人を見せない",
     "hide_followers_description": "フォロワーを見せない",
+    "hide_follows_count_description": "フォローしている人の数を見せない",
+    "hide_followers_count_description": "フォロワーの数を見せない",
     "show_admin_badge": "管理者のバッジを見せる",
     "show_moderator_badge": "モデレーターのバッジを見せる",
     "nsfw_clickthrough": "NSFWなファイルを隠す",
@@ -531,6 +544,7 @@
     "follows_you": "フォローされました！",
     "its_you": "これはあなたです！",
     "media": "メディア",
+    "mention": "メンション",
     "mute": "ミュート",
     "muted": "ミュートしています！",
     "per_day": "/日",
@@ -610,5 +624,16 @@
     "person_talking": "{count} 人が話しています",
     "people_talking": "{count} 人が話しています",
     "no_results": "見つかりませんでした"
+  },
+  "password_reset": {
+    "forgot_password": "パスワードを忘れましたか？",
+    "password_reset": "パスワードリセット",
+    "instruction": "メールアドレスまたはユーザー名を入力してください。パスワードをリセットするためのリンクを送信します。",
+    "placeholder": "メールアドレスまたはユーザー名",
+    "check_email": "パスワードをリセットするためのリンクが記載されたメールが届いているか確認してください。",
+    "return_home": "ホームページに戻る",
+    "not_found": "メールアドレスまたはユーザー名が見つかりませんでした。",
+    "too_many_requests": "試行回数の制限に達しました。しばらく時間を置いてから再試行してください。",
+    "password_reset_disabled": "このインスタンスではパスワードリセットは無効になっています。インスタンスの管理者に連絡してください。"
   }
 }

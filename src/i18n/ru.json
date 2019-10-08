@@ -178,6 +178,8 @@
     "no_rich_text_description": "Убрать форматирование из всех постов",
     "hide_follows_description": "Не показывать кого я читаю",
     "hide_followers_description": "Не показывать кто читает меня",
+    "hide_follows_count_description": "Не показывать число читаемых пользователей",
+    "hide_followers_count_description": "Не показывать число моих подписчиков",
     "show_admin_badge": "Показывать значок администратора в моем профиле",
     "show_moderator_badge": "Показывать значок модератора в моем профиле",
     "nsfw_clickthrough": "Включить скрытие NSFW вложений",

@@ -1,6 +1,7 @@
 <template>
   <div
-    v-if="isOpen"
+    v-if="isLoggedIn && !resettingForm"
+    v-show="modalActivated"
     class="post-form-modal-view modal-view"
     @click="closeModal"
   >

@@ -301,9 +301,6 @@ const PostStatusForm = {
       const bottomPadding = Number(bottomPaddingStr.substring(0, bottomPaddingStr.length - 2))
       const vertPadding = topPadding + bottomPadding
 
-      const oldHeightStr = target.style.height || ''
-      const oldHeight = Number(oldHeightStr.substring(0, oldHeightStr.length - 2))
-
       /* Explanation:
        *
        * https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
@@ -340,12 +337,17 @@ const PostStatusForm = {
       // to find offset relative to scrollable container (scroller)
       const rootBottomBorder = rootRef.offsetHeight + findOffset(rootRef, scrollerRef).top
 
-      const textareaSizeChangeDelta = newHeight - oldHeight || 0
       const isBottomObstructed = scrollerBottomBorder < rootBottomBorder
+      const isRootBiggerThanScroller = scrollerHeight < rootRef.offsetHeight
       const rootChangeDelta = rootBottomBorder - scrollerBottomBorder
-      const totalDelta = textareaSizeChangeDelta +
-        (isBottomObstructed ? rootChangeDelta : 0)
-
+      // The intention is basically this;
+      // Keep bottom side always visible so that submit button is in view EXCEPT
+      // if root element bigger than scroller and caret isn't at the end, so that
+      // if you scroll up and edit middle of text you won't get scrolled back to bottom
+      const shouldScrollToBottom = isBottomObstructed &&
+            !(isRootBiggerThanScroller &&
+              this.$refs.textarea.selectionStart !== this.$refs.textarea.value.length)
+      const totalDelta = shouldScrollToBottom ? rootChangeDelta : 0
       const targetScroll = currentScroll + totalDelta
 
       if (scrollerRef === window) {

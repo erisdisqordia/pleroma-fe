@@ -33,9 +33,6 @@ const EmojiPicker = {
   components: {
     StickerPicker: () => import('../sticker_picker/sticker_picker.vue')
   },
-  mounted () {
-    this.startEmojiLoad()
-  },
   methods: {
     onEmoji (emoji) {
       const value = emoji.imageUrl ? `:${emoji.displayText}:` : emoji.replacement

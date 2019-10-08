@@ -33,11 +33,7 @@ export default {
   },
   methods: {
     onClick () {
-      if (this.user.following) {
-        this.unfollow()
-      } else {
-        this.follow()
-      }
+      this.user.following ? this.unfollow() : this.follow()
     },
     follow () {
       this.inProgress = true

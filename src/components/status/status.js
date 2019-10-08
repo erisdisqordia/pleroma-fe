@@ -43,7 +43,7 @@ const Status = {
       showingTall: this.inConversation && this.focused,
       showingLongSubject: false,
       error: null,
-      expandingSubject: this.$store.getters.mergedConfig.collapseMessageWithSubject,
+      expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject,
       betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },

@@ -1,9 +1,10 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import RemoteFollow from '../remote_follow/remote_follow.vue'
 import ProgressButton from '../progress_button/progress_button.vue'
+import FollowButton from '../follow_button/follow_button.vue'
 import ModerationTools from '../moderation_tools/moderation_tools.vue'
+import AccountActions from '../account_actions/account_actions.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
-import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
 export default {
@@ -98,36 +99,11 @@ export default {
     UserAvatar,
     RemoteFollow,
     ModerationTools,
-    ProgressButton
+    AccountActions,
+    ProgressButton,
+    FollowButton
   },
   methods: {
-    showRepeats () {
-      this.$store.dispatch('showReblogs', this.user.id)
-    },
-    hideRepeats () {
-      this.$store.dispatch('hideReblogs', this.user.id)
-    },
-    followUser () {
-      const store = this.$store
-      this.followRequestInProgress = true
-      requestFollow(this.user, store).then(() => {
-        this.followRequestInProgress = false
-      })
-    },
-    unfollowUser () {
-      const store = this.$store
-      this.followRequestInProgress = true
-      requestUnfollow(this.user, store).then(() => {
-        this.followRequestInProgress = false
-        store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
-      })
-    },
-    blockUser () {
-      this.$store.dispatch('blockUser', this.user.id)
-    },
-    unblockUser () {
-      this.$store.dispatch('unblockUser', this.user.id)
-    },
     muteUser () {
       this.$store.dispatch('muteUser', this.user.id)
     },
@@ -160,9 +136,6 @@ export default {
         this.$store.state.instance.restrictedNicknames
       )
     },
-    reportUser () {
-      this.$store.dispatch('openUserReportingModal', this.user.id)
-    },
     zoomAvatar () {
       const attachment = {
         url: this.user.profile_image_url_original,
@@ -170,9 +143,6 @@ export default {
       }
       this.$store.dispatch('setMedia', [attachment])
       this.$store.dispatch('setCurrent', attachment)
-    },
-    mentionUser () {
-      this.$store.dispatch('openPostStatusModal', { replyTo: true, repliedUser: this.user })
     }
   }
 }

@@ -24,9 +24,10 @@ const EmojiPicker = {
       showingStickers: false,
       groupsScrolledClass: 'scrolled-top',
       keepOpen: false,
-      customEmojiBuffer: [],
+      customEmojiBuffer: (this.$store.state.instance.customEmoji || [])
+        .slice(0, LOAD_EMOJI_BY),
       customEmojiTimeout: null,
-      customEmojiCounter: 0,
+      customEmojiCounter: LOAD_EMOJI_BY,
       customEmojiLoadAllConfirmed: false
     }
   },
@@ -88,13 +89,23 @@ const EmojiPicker = {
       this.customEmojiTimeout = window.setTimeout(this.loadEmoji, LOAD_EMOJI_INTERVAL)
       this.customEmojiCounter += LOAD_EMOJI_BY
     },
-    startEmojiLoad () {
+    startEmojiLoad (forceUpdate = false) {
+      const bufferSize = this.customEmojiBuffer.length
+      const bufferPrefilledSane = bufferSize === LOAD_EMOJI_SANE_AMOUNT && !this.customEmojiLoadAllConfirmed
+      const bufferPrefilledAll = bufferSize === this.filteredEmoji.length
+      if (!forceUpdate || bufferPrefilledSane || bufferPrefilledAll) {
+        return
+      }
       if (this.customEmojiTimeout) {
         window.clearTimeout(this.customEmojiTimeout)
       }
 
-      set(this, 'customEmojiBuffer', [])
-      this.customEmojiCounter = 0
+      set(
+        this,
+        'customEmojiBuffer',
+        this.filteredEmoji.slice(0, LOAD_EMOJI_BY)
+      )
+      this.customEmojiCounter = LOAD_EMOJI_BY
       this.customEmojiTimeout = window.setTimeout(this.loadEmoji, LOAD_EMOJI_INTERVAL)
     },
     continueEmojiLoad () {
@@ -115,8 +126,9 @@ const EmojiPicker = {
   },
   watch: {
     keyword () {
+      this.customEmojiLoadAllConfirmed = false
       this.scrolledGroup()
-      this.startEmojiLoad()
+      this.startEmojiLoad(true)
     }
   },
   computed: {

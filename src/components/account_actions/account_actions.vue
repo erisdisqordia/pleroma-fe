@@ -6,8 +6,6 @@
       :container="false"
       placement="bottom-end"
       :offset="5"
-      @show="showDropDown = true"
-      @hide="showDropDown = false"
     >
       <div slot="popover">
         <div class="dropdown-menu">

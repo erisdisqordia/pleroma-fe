@@ -5,9 +5,7 @@ const AccountActions = {
     'user'
   ],
   data () {
-    return {
-      showDropDown: false
-    }
+    return { }
   },
   components: {
     ProgressButton

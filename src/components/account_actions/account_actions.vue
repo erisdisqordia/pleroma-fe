@@ -46,7 +46,7 @@
             class="btn btn-default btn-block dropdown-item"
             @click="unblockUser"
           >
-            {{ $t('user_card.blocked') }}
+            {{ $t('user_card.unblock') }}
           </button>
           <button
             v-else
@@ -75,6 +75,9 @@
 <style lang="scss">
 @import '../../_variables.scss';
 @import '../popper/popper.scss';
+.account-actions {
+  margin: 0 .8em;
+}
 
 .account-actions button.dropdown-item {
   margin-left: 0;
@@ -83,6 +86,11 @@
   color: $fallback--lightText;
   color: var(--lightText, $fallback--lightText);
   opacity: .8;
+  cursor: pointer;
+  &:hover {
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
+  }
 }
 
 </style>

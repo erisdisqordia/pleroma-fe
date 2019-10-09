@@ -524,6 +524,7 @@
     > * {
       margin: 0 .75em .6em 0;
       white-space: nowrap;
+      min-width: 95px;
     }
 
     button {

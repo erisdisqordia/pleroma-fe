@@ -12,14 +12,6 @@ const AccountActions = {
   components: {
     ProgressButton
   },
-  computed: {
-    tagsSet () {
-      return new Set(this.user.tags)
-    },
-    hasTagPolicy () {
-      return this.$store.state.instance.tagPolicyAvailable
-    }
-  },
   methods: {
     showRepeats () {
       this.$store.dispatch('showReblogs', this.user.id)

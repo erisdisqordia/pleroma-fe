@@ -64,7 +64,7 @@
         </div>
       </div>
       <div class="btn btn-default ellipsis-button">
-        <i class="icon-menu trigger-button" />
+        <i class="icon-ellipsis trigger-button" />
       </div>
     </v-popover>
   </div>

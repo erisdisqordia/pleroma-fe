@@ -20,13 +20,13 @@
           v-if="!user.following"
           class="btn btn-default follow-card-follow-button"
           :disabled="inProgress"
-          :title="requestSent ? $t('user_card.follow_again') : ''"
+          :title="user.requested ? $t('user_card.follow_again') : ''"
           @click="followUser"
         >
           <template v-if="inProgress">
             {{ $t('user_card.follow_progress') }}
           </template>
-          <template v-else-if="requestSent">
+          <template v-else-if="user.requested">
             {{ $t('user_card.follow_sent') }}
           </template>
           <template v-else>

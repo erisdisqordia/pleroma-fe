@@ -9,8 +9,7 @@ const FollowCard = {
   ],
   data () {
     return {
-      inProgress: false,
-      requestSent: false
+      inProgress: false
     }
   },
   components: {
@@ -28,9 +27,8 @@ const FollowCard = {
   methods: {
     followUser () {
       this.inProgress = true
-      requestFollow(this.user, this.$store).then(({ sent }) => {
+      requestFollow(this.user, this.$store).then(() => {
         this.inProgress = false
-        this.requestSent = sent
       })
     },
     unfollowUser () {

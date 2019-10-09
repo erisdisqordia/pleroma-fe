@@ -93,7 +93,7 @@ const PostStatusForm = {
       return this.$store.state.users.currentUser.default_scope
     },
     showAllScopes () {
-      return this.mergedConfig.minimalScopesMode
+      return !this.mergedConfig.minimalScopesMode
     },
     emojiUserSuggestor () {
       return suggestor({

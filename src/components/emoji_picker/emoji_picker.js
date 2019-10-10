@@ -93,7 +93,7 @@ const EmojiPicker = {
       const bufferSize = this.customEmojiBuffer.length
       const bufferPrefilledSane = bufferSize === LOAD_EMOJI_SANE_AMOUNT && !this.customEmojiLoadAllConfirmed
       const bufferPrefilledAll = bufferSize === this.filteredEmoji.length
-      if (!forceUpdate || bufferPrefilledSane || bufferPrefilledAll) {
+      if (forceUpdate || bufferPrefilledSane || bufferPrefilledAll) {
         return
       }
       if (this.customEmojiTimeout) {

@@ -312,7 +312,6 @@ const EmojiInput = {
       this.$nextTick(() => {
         const { offsetHeight } = this.input.elm
         const { picker } = this.$refs
-        console.log(picker)
         const pickerBottom = picker.$el.getBoundingClientRect().bottom
         if (pickerBottom > window.innerHeight) {
           picker.$el.style.top = 'auto'

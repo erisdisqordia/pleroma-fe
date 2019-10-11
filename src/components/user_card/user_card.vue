@@ -278,7 +278,7 @@
     mask: linear-gradient(to top, white, transparent) bottom no-repeat,
           linear-gradient(to top, white, white);
     // Autoprefixed seem to ignore this one, and also syntax is different
-                                                 -webkit-mask-composite: xor;
+    -webkit-mask-composite: xor;
     mask-composite: exclude;
     background-size: cover;
     mask-size: 100% 60%;

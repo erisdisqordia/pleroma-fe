@@ -59,24 +59,18 @@
                   :title="$t('tool_tip.user_settings')"
                 />
               </router-link>
-              <div
-                v-if="isOtherUser"
-                class="card-actions"
+              <a
+                v-if="isOtherUser && !user.is_local"
+                :href="user.statusnet_profile_url"
+                target="_blank"
               >
-                <AccountActions
-                  v-if="loggedIn"
-                  :user="user"
-                />
-                <a
-                  v-if="!user.is_local"
-                  :href="user.statusnet_profile_url"
-                  target="_blank"
-                >
-                  <i class="icon-link-ext usersettings" />
-                </a>
-              </div>
+                <i class="icon-link-ext usersettings" />
+              </a>
+              <AccountActions
+                v-if="isOtherUser && loggedIn"
+                :user="user"
+              />
             </div>
-
             <div class="bottom-line">
               <router-link
                 class="user-screen-name"
@@ -415,19 +409,6 @@
 
     .top-line {
       display: flex;
-      .card-actions {
-        position: relative;
-        display: flex;
-        width: 60px;
-        .account-actions {
-          position: absolute;
-          left: 0;
-        }
-        a {
-          position: absolute;
-          right: 0;
-        }
-      }
     }
   }
 

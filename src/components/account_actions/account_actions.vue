@@ -90,8 +90,4 @@
     color: var(--text, $fallback--text);
   }
 }
-
-.account-actions .open {
-  min-width: 130px;
-}
 </style>

@@ -91,4 +91,7 @@
   }
 }
 
+.account-actions .open {
+  min-width: 130px;
+}
 </style>

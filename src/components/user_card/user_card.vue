@@ -59,17 +59,22 @@
                   :title="$t('tool_tip.user_settings')"
                 />
               </router-link>
-              <AccountActions
-                v-if="loggedIn && isOtherUser"
-                :user="user"
-              />
-              <a
-                v-if="isOtherUser && !user.is_local"
-                :href="user.statusnet_profile_url"
-                target="_blank"
+              <div
+                v-if="isOtherUser"
+                class="card-actions"
               >
-                <i class="icon-link-ext usersettings" />
-              </a>
+                <AccountActions
+                  v-if="loggedIn"
+                  :user="user"
+                />
+                <a
+                  v-if="!user.is_local"
+                  :href="user.statusnet_profile_url"
+                  target="_blank"
+                >
+                  <i class="icon-link-ext usersettings" />
+                </a>
+              </div>
             </div>
 
             <div class="bottom-line">
@@ -273,7 +278,7 @@
     mask: linear-gradient(to top, white, transparent) bottom no-repeat,
           linear-gradient(to top, white, white);
     // Autoprefixed seem to ignore this one, and also syntax is different
-    -webkit-mask-composite: xor;
+                                                 -webkit-mask-composite: xor;
     mask-composite: exclude;
     background-size: cover;
     mask-size: 100% 60%;
@@ -410,6 +415,19 @@
 
     .top-line {
       display: flex;
+      .card-actions {
+        position: relative;
+        display: flex;
+        width: 60px;
+        .account-actions {
+          position: absolute;
+          left: 0;
+        }
+        a {
+          position: absolute;
+          right: 0;
+        }
+      }
     }
   }
 

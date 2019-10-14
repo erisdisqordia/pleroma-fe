@@ -2,6 +2,7 @@
   <div
     v-click-outside="onClickOutside"
     class="emoji-input"
+    :class="{ 'with-picker': !hideEmojiButton }"
   >
     <slot />
     <template v-if="enableEmojiPicker">
@@ -62,6 +63,10 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
+  &.with-picker input {
+    padding-right: 30px;
+  }
 
   .emoji-picker-icon {
     position: absolute;

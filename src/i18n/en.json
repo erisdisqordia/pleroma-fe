@@ -555,6 +555,8 @@
     "unmute": "Unmute",
     "unmute_progress": "Unmuting...",
     "mute_progress": "Muting...",
+    "hide_repeats": "Hide repeats",
+    "show_repeats": "Show repeats",
     "admin_menu": {
       "moderation": "Moderation",
       "grant_admin": "Grant Admin",

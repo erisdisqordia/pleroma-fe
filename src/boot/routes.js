@@ -47,7 +47,7 @@ export default (store) => {
     { name: 'dms', path: '/users/:username/dms', component: DMs, beforeEnter: validateAuthenticatedRoute },
     { name: 'settings', path: '/settings', component: Settings },
     { name: 'registration', path: '/registration', component: Registration },
-    { name: 'password-reset', path: '/password-reset', component: PasswordReset },
+    { name: 'password-reset', path: '/password-reset', component: PasswordReset, props: true },
     { name: 'registration-token', path: '/registration/:token', component: Registration },
     { name: 'friend-requests', path: '/friend-requests', component: FollowRequests, beforeEnter: validateAuthenticatedRoute },
     { name: 'user-settings', path: '/user-settings', component: UserSettings, beforeEnter: validateAuthenticatedRoute },

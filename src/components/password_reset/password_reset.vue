@@ -10,7 +10,10 @@
       >
         <div class="container">
           <div v-if="!mailerEnabled">
-            <p>
+            <p v-if="passwordResetRequested">
+              {{ $t('password_reset.password_reset_required_but_mailer_is_disabled') }}
+            </p>
+            <p v-else>
               {{ $t('password_reset.password_reset_disabled') }}
             </p>
           </div>
@@ -25,6 +28,12 @@
             </div>
           </div>
           <div v-else>
+            <p
+              v-if="passwordResetRequested"
+              class="password-reset-required error"
+            >
+              {{ $t('password_reset.password_reset_required') }}
+            </p>
             <p>
               {{ $t('password_reset.instruction') }}
             </p>
@@ -102,6 +111,11 @@
   .alert {
     padding: 0.5em;
     margin: 0.3em 0.0em 1em;
+  }
+
+  .password-reset-required {
+    background-color: var(--alertError, $fallback--alertError);
+    padding: 10px 0;
   }
 
   .notice-dismissible {

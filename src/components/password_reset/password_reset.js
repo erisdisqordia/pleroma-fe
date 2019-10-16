@@ -25,6 +25,12 @@ const passwordReset = {
       this.$router.push({ name: 'root' })
     }
   },
+  props: {
+    passwordResetRequested: {
+      default: false,
+      type: Boolean
+    }
+  },
   methods: {
     dismissError () {
       this.error = null

@@ -18,7 +18,7 @@
       <template v-else>
         <FollowButton
           :user="user"
-          button-class="follow-card-follow-button"
+          class="follow-card-follow-button"
           :label-following="$t('user_card.follow_unfollow')"
         />
       </template>

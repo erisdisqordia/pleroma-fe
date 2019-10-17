@@ -1,7 +1,7 @@
 <template>
   <button
     class="btn btn-default follow-button"
-    :class="[buttonClass, { pressed: isPressed}]"
+    :class="{ pressed: isPressed }"
     :disabled="inProgress"
     :title="title"
     @click="onClick"

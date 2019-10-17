@@ -7,9 +7,6 @@ const FollowCard = {
     'user',
     'noFollowsYou'
   ],
-  data () {
-    return { }
-  },
   components: {
     BasicUserCard,
     RemoteFollow,
@@ -22,8 +19,6 @@ const FollowCard = {
     loggedIn () {
       return this.$store.state.users.currentUser
     }
-  },
-  methods: {
   }
 }
 

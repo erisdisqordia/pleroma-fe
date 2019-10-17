@@ -1,6 +1,6 @@
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 export default {
-  props: ['user'],
+  props: ['user', 'labelFollowing', 'buttonClass'],
   data () {
     return {
       inProgress: false
@@ -23,7 +23,7 @@ export default {
       if (this.inProgress) {
         return this.$t('user_card.follow_progress')
       } else if (this.user.following) {
-        return this.$t('user_card.following')
+        return this.labelFollowing || this.$t('user_card.following')
       } else if (this.user.requested) {
         return this.$t('user_card.follow_sent')
       } else {

@@ -16,36 +16,11 @@
         </div>
       </template>
       <template v-else>
-        <button
-          v-if="!user.following"
-          class="btn btn-default follow-card-follow-button"
-          :disabled="inProgress"
-          :title="user.requested ? $t('user_card.follow_again') : ''"
-          @click="followUser"
-        >
-          <template v-if="inProgress">
-            {{ $t('user_card.follow_progress') }}
-          </template>
-          <template v-else-if="user.requested">
-            {{ $t('user_card.follow_sent') }}
-          </template>
-          <template v-else>
-            {{ $t('user_card.follow') }}
-          </template>
-        </button>
-        <button
-          v-else
-          class="btn btn-default follow-card-follow-button pressed"
-          :disabled="inProgress"
-          @click="unfollowUser"
-        >
-          <template v-if="inProgress">
-            {{ $t('user_card.follow_progress') }}
-          </template>
-          <template v-else>
-            {{ $t('user_card.follow_unfollow') }}
-          </template>
-        </button>
+        <FollowButton
+          :user="user"
+          button-class="follow-card-follow-button"
+          :label-following="$t('user_card.follow_unfollow')"
+        />
       </template>
     </div>
   </basic-user-card>

@@ -1,7 +1,8 @@
 <template>
   <div
     v-if="isOpen"
-    class="modal-view"
+    v-body-scroll-lock="isOpen"
+    class="modal-view user-reporting-modal-view"
     @click="closeModal"
   >
     <div
@@ -76,6 +77,12 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
+
+.user-reporting-modal-view {
+  body:not(.scroll-locked) & {
+    display: none;
+  }
+}
 
 .user-reporting-panel {
   width: 90vw;

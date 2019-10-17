@@ -840,6 +840,11 @@ $status-margin: 0.75em;
   &.button-icon-active {
     color: $fallback--cBlue;
     color: var(--cBlue, $fallback--cBlue);
+  }
+}
+
+.button-icon.icon-reply {
+  &:not(.button-icon-disabled) {
     cursor: pointer;
   }
 }

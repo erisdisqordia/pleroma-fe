@@ -38,7 +38,7 @@
 <script src="./media_modal.js"></script>
 
 <style lang="scss">
-.media-modal-view {
+.modal-view.media-modal-view {
   z-index: 1001;
 
   &:hover {

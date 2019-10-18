@@ -7,6 +7,11 @@ const Gallery = {
     'nsfw',
     'setMedia'
   ],
+  data () {
+    return {
+      sizes: {}
+    }
+  },
   components: { Attachment },
   computed: {
     rows () {
@@ -23,11 +28,24 @@ const Gallery = {
       }
       return rows
     },
-    rowStyle () {
-      return itemsPerRow => ({ 'padding-bottom': `${(100 / (itemsPerRow + 0.6))}%` })
-    },
     useContainFit () {
       return this.$store.state.config.useContainFit
+    }
+  },
+  methods: {
+    onNaturalSizeLoad (id, size) {
+      this.$set(this.sizes, id, size)
+    },
+    rowStyle (itemsPerRow) {
+      return { 'padding-bottom': `${(100 / (itemsPerRow + 0.6))}%` }
+    },
+    itemStyle (id) {
+      const size = this.sizes[id]
+      if (size) {
+        return { flex: size.width / size.height }
+      } else {
+        return {}
+      }
     }
   }
 }

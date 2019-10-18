@@ -3,7 +3,8 @@ const StillImage = {
     'src',
     'referrerpolicy',
     'mimetype',
-    'imageLoadError'
+    'imageLoadError',
+    'imageLoadHandler'
   ],
   data () {
     return {
@@ -17,6 +18,7 @@ const StillImage = {
   },
   methods: {
     onLoad () {
+      this.imageLoadHandler && this.imageLoadHandler(this.$refs.src)
       const canvas = this.$refs.canvas
       if (!canvas) return
       const width = this.$refs.src.naturalWidth

@@ -1,14 +1,12 @@
 <template>
-  <portal to="modal">
-    <div
-      v-show="isOpen"
-      v-body-scroll-lock="isOpen"
-      :class="['modal-view', viewClass]"
-      @click.self="closeModal"
-    >
-      <slot />
-    </div>
-  </portal>
+  <div
+    v-show="isOpen"
+    v-body-scroll-lock="isOpen"
+    :class="['modal-view', viewClass]"
+    @click.self="closeModal"
+  >
+    <slot />
+  </div>
 </template>
 
 <script src="./modal.js"></script>

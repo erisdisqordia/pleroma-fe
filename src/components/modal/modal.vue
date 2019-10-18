@@ -1,8 +1,8 @@
 <template>
   <portal to="modal">
     <div
-      v-body-scroll-lock="isOpen"
       v-show="isOpen"
+      v-body-scroll-lock="isOpen"
       :class="['modal-view', viewClass]"
       @click.self="closeModal"
     >

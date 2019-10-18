@@ -120,7 +120,10 @@
     <MobilePostStatusButton />
     <UserReportingModal />
     <PostStatusModal />
-    <portal-target name="modal" multiple />
+    <portal-target
+      name="modal"
+      multiple
+    />
   </div>
 </template>
 

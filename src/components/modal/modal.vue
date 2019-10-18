@@ -1,7 +1,6 @@
 <template>
   <portal to="modal">
     <div
-      ref="view"
       v-body-scroll-lock="isOpen"
       v-show="isOpen"
       :class="['modal-view', viewClass]"

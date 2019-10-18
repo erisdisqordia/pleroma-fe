@@ -53,7 +53,6 @@ const UserReportingModal = {
       this.error = false
     },
     closeModal () {
-      console.log('closeModal clicked')
       this.$store.dispatch('closeUserReportingModal')
     },
     reportUser () {

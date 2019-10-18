@@ -1,8 +1,8 @@
 <template>
   <div
     v-body-scroll-lock="true"
-    @click.self="closeModal"
     class="modal-view"
+    @click.self="closeModal"
   >
     <slot />
   </div>

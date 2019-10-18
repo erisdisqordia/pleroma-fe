@@ -1,15 +1,11 @@
 <template>
-  <div
+  <Modal
     v-if="isLoggedIn && !resettingForm"
     v-show="modalActivated"
-    v-body-scroll-lock="modalActivated"
-    class="post-form-modal-view modal-view"
-    @click="closeModal"
+    class="post-form-modal-view"
+    @close="closeModal"
   >
-    <div
-      class="post-form-modal-panel panel"
-      @click.stop=""
-    >
+    <div class="post-form-modal-panel panel">
       <div class="panel-heading">
         {{ $t('post_status.new_status') }}
       </div>
@@ -19,7 +15,7 @@
         @posted="closeModal"
       />
     </div>
-  </div>
+  </Modal>
 </template>
 
 <script src="./post_status_modal.js"></script>
@@ -29,10 +25,6 @@
 
 .post-form-modal-view {
   align-items: flex-start;
-
-  body:not(.scroll-locked) & {
-    display: none;
-  }
 }
 
 .post-form-modal-panel {

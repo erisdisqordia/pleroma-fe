@@ -19,7 +19,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .modal-view {
   z-index: 1000;
   position: fixed;
@@ -39,5 +38,4 @@ export default {
     display: none;
   }
 }
-
 </style>

@@ -21,8 +21,6 @@
 <script src="./post_status_modal.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
-
 .post-form-modal-view {
   align-items: flex-start;
 }

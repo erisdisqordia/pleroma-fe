@@ -38,8 +38,6 @@
 <script src="./media_modal.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
-
 .media-modal-view {
   z-index: 1001;
 
@@ -109,5 +107,4 @@
     }
   }
 }
-
 </style>

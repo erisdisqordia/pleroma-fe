@@ -28,7 +28,7 @@
   animation-name: modal-background-fadein;
 
   body:not(.scroll-locked) & {
-    display: none;
+    opacity: 0;
   }
 }
 </style>

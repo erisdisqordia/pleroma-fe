@@ -7,17 +7,19 @@
       v-for="(row, index) in rows"
       :key="index"
       class="gallery-row"
-      :style="rowHeight(row.length)"
+      :style="rowStyle(row.length)"
       :class="{ 'contain-fit': useContainFit, 'cover-fit': !useContainFit }"
     >
-      <attachment
-        v-for="attachment in row"
-        :key="attachment.id"
-        :set-media="setMedia"
-        :nsfw="nsfw"
-        :attachment="attachment"
-        :allow-play="false"
-      />
+      <div class="gallery-row-inner">
+        <attachment
+          v-for="attachment in row"
+          :key="attachment.id"
+          :set-media="setMedia"
+          :nsfw="nsfw"
+          :attachment="attachment"
+          :allow-play="false"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -28,14 +30,23 @@
 @import '../../_variables.scss';
 
 .gallery-row {
-  height: 200px;
+  position: relative;
+  height: 0;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: stretch;
   flex-grow: 1;
   margin-top: 0.5em;
+
+  .gallery-row-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+  }
 
   // FIXME: specificity problem with this and .attachments.attachment
   // we shouldn't have the need for .image here

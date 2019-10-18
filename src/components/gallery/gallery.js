@@ -2,22 +2,12 @@ import Attachment from '../attachment/attachment.vue'
 import { chunk, last, dropRight } from 'lodash'
 
 const Gallery = {
-  data: () => ({
-    width: 500
-  }),
   props: [
     'attachments',
     'nsfw',
     'setMedia'
   ],
   components: { Attachment },
-  mounted () {
-    this.resize()
-    window.addEventListener('resize', this.resize)
-  },
-  destroyed () {
-    window.removeEventListener('resize', this.resize)
-  },
   computed: {
     rows () {
       if (!this.attachments) {
@@ -33,21 +23,11 @@ const Gallery = {
       }
       return rows
     },
-    rowHeight () {
-      return itemsPerRow => ({ 'height': `${(this.width / (itemsPerRow + 0.6))}px` })
+    rowStyle () {
+      return itemsPerRow => ({ 'padding-bottom': `${(100 / (itemsPerRow + 0.6))}%` })
     },
     useContainFit () {
       return this.$store.state.config.useContainFit
-    }
-  },
-  methods: {
-    resize () {
-      // Quick optimization to make resizing not always trigger state change,
-      // only update attachment size in 10px steps
-      const width = Math.floor(this.$el.getBoundingClientRect().width / 10) * 10
-      if (this.width !== width) {
-        this.width = width
-      }
     }
   }
 }

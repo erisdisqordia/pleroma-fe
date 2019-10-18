@@ -1,22 +1,18 @@
 <template>
-  <div
-    v-body-scroll-lock="true"
-    class="modal-view"
-    @click.self="closeModal"
-  >
-    <slot />
-  </div>
+  <portal to="modal">
+    <div
+      ref="view"
+      v-body-scroll-lock="isOpen"
+      v-show="isOpen"
+      :class="['modal-view', viewClass]"
+      @click.self="closeModal"
+    >
+      <slot />
+    </div>
+  </portal>
 </template>
 
-<script>
-export default {
-  methods: {
-    closeModal () {
-      this.$emit('close')
-    }
-  }
-}
-</script>
+<script src="./modal.js"></script>
 
 <style lang="scss">
 .modal-view {

@@ -1,8 +1,8 @@
 <template>
   <Modal
     v-if="isLoggedIn && !resettingForm"
-    v-show="modalActivated"
-    class="post-form-modal-view"
+    :is-open="modalActivated"
+    view-class="post-form-modal-view"
     @close="closeModal"
   >
     <div class="post-form-modal-panel panel">

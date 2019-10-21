@@ -36,7 +36,7 @@ const enableBodyScroll = (el) => {
     lockerEls = lockerEls.filter(e => e !== el)
   }
   setTimeout(() => {
-    if (!lockerEls.length) {
+    if (lockerEls.length === 0) {
       if (previousNavPaddingRight !== undefined) {
         document.getElementById('nav').style.paddingRight = previousNavPaddingRight
         // Restore previousNavPaddingRight to undefined so disableBodyScroll knows it can be set again.

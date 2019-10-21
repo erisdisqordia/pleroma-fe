@@ -2,7 +2,7 @@
   <div
     v-show="isOpen"
     v-body-scroll-lock="isOpen"
-    :class="['modal-view', viewClass]"
+    class="modal-view"
     @click.self="closeModal"
   >
     <slot />

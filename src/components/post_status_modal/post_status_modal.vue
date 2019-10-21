@@ -2,7 +2,7 @@
   <Modal
     v-if="isLoggedIn && !resettingForm"
     :is-open="modalActivated"
-    view-class="post-form-modal-view"
+    class="post-form-modal-view"
     @close="closeModal"
   >
     <div class="post-form-modal-panel panel">

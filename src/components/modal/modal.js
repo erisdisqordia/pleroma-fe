@@ -1,8 +1,5 @@
 const Modal = {
   props: {
-    viewClass: {
-      type: String
-    },
     isOpen: {
       type: Boolean,
       default: true

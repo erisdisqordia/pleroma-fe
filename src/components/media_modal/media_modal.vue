@@ -1,7 +1,7 @@
 <template>
   <Modal
     v-if="showing"
-    view-class="media-modal-view"
+    class="media-modal-view"
     @close="hide"
   >
     <img

@@ -31,4 +31,13 @@
     opacity: 0;
   }
 }
+
+@keyframes modal-background-fadein {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
 </style>

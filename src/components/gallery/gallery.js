@@ -1,5 +1,5 @@
 import Attachment from '../attachment/attachment.vue'
-import { chunk, last, dropRight } from 'lodash'
+import { chunk, last, dropRight, sumBy } from 'lodash'
 
 const Gallery = {
   props: [
@@ -39,13 +39,13 @@ const Gallery = {
     rowStyle (itemsPerRow) {
       return { 'padding-bottom': `${(100 / (itemsPerRow + 0.6))}%` }
     },
-    itemStyle (id) {
+    itemStyle (id, row) {
+      const total = sumBy(row, item => this.getAspectRatio(item.id))
+      return { flexGrow: this.getAspectRatio(id) / total }
+    },
+    getAspectRatio (id) {
       const size = this.sizes[id]
-      if (size) {
-        return { flex: size.width / size.height }
-      } else {
-        return {}
-      }
+      return size ? size.width / size.height : 1
     }
   }
 }

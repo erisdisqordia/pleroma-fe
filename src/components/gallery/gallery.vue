@@ -19,7 +19,7 @@
           :attachment="attachment"
           :allow-play="false"
           :natural-size-load="onNaturalSizeLoad.bind(null, attachment.id)"
-          :style="itemStyle(attachment.id)"
+          :style="itemStyle(attachment.id, row)"
         />
       </div>
     </div>

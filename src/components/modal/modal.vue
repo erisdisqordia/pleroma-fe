@@ -9,7 +9,16 @@
   </div>
 </template>
 
-<script src="./modal.js"></script>
+<script>
+export default {
+  props: {
+    isOpen: {
+      type: Boolean,
+      default: true
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 .modal-view {

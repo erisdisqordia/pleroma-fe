@@ -1,9 +1,11 @@
 import PostStatusForm from '../post_status_form/post_status_form.vue'
+import Modal from '../modal/modal.vue'
 import get from 'lodash/get'
 
 const PostStatusModal = {
   components: {
-    PostStatusForm
+    PostStatusForm,
+    Modal
   },
   data () {
     return {

@@ -3,7 +3,7 @@
     v-if="isLoggedIn && !resettingForm"
     :is-open="modalActivated"
     class="post-form-modal-view"
-    @close="closeModal"
+    @backdropClicked="closeModal"
   >
     <div class="post-form-modal-panel panel">
       <div class="panel-heading">

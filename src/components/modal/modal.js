@@ -4,11 +4,6 @@ const Modal = {
       type: Boolean,
       default: true
     }
-  },
-  methods: {
-    closeModal () {
-      this.$emit('close')
-    }
   }
 }
 

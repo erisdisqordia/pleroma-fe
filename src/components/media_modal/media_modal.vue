@@ -2,7 +2,7 @@
   <Modal
     v-if="showing"
     class="media-modal-view"
-    @close="hide"
+    @backdropClicked="hide"
   >
     <img
       v-if="type === 'image'"

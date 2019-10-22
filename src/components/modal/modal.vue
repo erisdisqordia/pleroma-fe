@@ -3,7 +3,7 @@
     v-show="isOpen"
     v-body-scroll-lock="isOpen"
     class="modal-view"
-    @click.self="closeModal"
+    @click.self="$emit('backdropClicked')"
   >
     <slot />
   </div>

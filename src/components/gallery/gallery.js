@@ -41,7 +41,7 @@ const Gallery = {
     },
     itemStyle (id, row) {
       const total = sumBy(row, item => this.getAspectRatio(item.id))
-      return { flex: this.getAspectRatio(id) / total }
+      return { flex: `${this.getAspectRatio(id) / total} 1 0%` }
     },
     getAspectRatio (id) {
       const size = this.sizes[id]

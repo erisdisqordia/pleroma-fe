@@ -285,11 +285,15 @@ const PostStatusForm = {
         return
       }
 
-      const rootRef = this.$refs['root']
+      const formRef = this.$refs['form']
+      const bottomRef = this.$refs['bottom']
       /* Scroller is either `window` (replies in TL), sidebar (main post form,
        * replies in notifs) or mobile post form. Note that getting and setting
        * scroll is different for `Window` and `Element`s
        */
+      const bottomBottomPaddingStr = window.getComputedStyle(bottomRef)['padding-bottom']
+      const bottomBottomPadding = Number(bottomBottomPaddingStr.substring(0, bottomBottomPaddingStr.length - 2))
+
       const scrollerRef = this.$el.closest('.sidebar-scroller') ||
             this.$el.closest('.post-form-modal-view') ||
             window
@@ -312,7 +316,7 @@ const PostStatusForm = {
        * SHRINK the textarea when there's extra space. To workaround that we set
        * height to 'auto' which makes textarea tiny again, so that scrollHeight
        * will match text height again. HOWEVER, shrinking textarea can screw with
-       * the scroll since there might be not enough padding around root to even
+       * the scroll since there might be not enough padding around form-bottom to even
        * warrant a scroll, so it will jump to 0 and refuse to move anywhere,
        * so we check current scroll position before shrinking and then restore it
        * with needed delta.
@@ -333,21 +337,21 @@ const PostStatusForm = {
       target.style.height = `${newHeight}px`
       // END content size update
 
-      // We check where the bottom border of root element is, this uses findOffset
+      // We check where the bottom border of form-bottom element is, this uses findOffset
       // to find offset relative to scrollable container (scroller)
-      const rootBottomBorder = rootRef.offsetHeight + findOffset(rootRef, scrollerRef).top
+      const bottomBottomBorder = bottomRef.offsetHeight + findOffset(bottomRef, scrollerRef).top + bottomBottomPadding
 
-      const isBottomObstructed = scrollerBottomBorder < rootBottomBorder
-      const isRootBiggerThanScroller = scrollerHeight < rootRef.offsetHeight
-      const rootChangeDelta = rootBottomBorder - scrollerBottomBorder
+      const isBottomObstructed = scrollerBottomBorder < bottomBottomBorder
+      const isFormBiggerThanScroller = scrollerHeight < formRef.offsetHeight
+      const bottomChangeDelta = bottomBottomBorder - scrollerBottomBorder
       // The intention is basically this;
-      // Keep bottom side always visible so that submit button is in view EXCEPT
-      // if root element bigger than scroller and caret isn't at the end, so that
+      // Keep form-bottom always visible so that submit button is in view EXCEPT
+      // if form element bigger than scroller and caret isn't at the end, so that
       // if you scroll up and edit middle of text you won't get scrolled back to bottom
       const shouldScrollToBottom = isBottomObstructed &&
-            !(isRootBiggerThanScroller &&
+            !(isFormBiggerThanScroller &&
               this.$refs.textarea.selectionStart !== this.$refs.textarea.value.length)
-      const totalDelta = shouldScrollToBottom ? rootChangeDelta : 0
+      const totalDelta = shouldScrollToBottom ? bottomChangeDelta : 0
       const targetScroll = currentScroll + totalDelta
 
       if (scrollerRef === window) {

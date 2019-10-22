@@ -1,6 +1,6 @@
 <template>
   <div
-    ref="root"
+    ref="form"
     class="post-status-form"
   >
     <form
@@ -160,7 +160,10 @@
         :visible="pollFormVisible"
         @update-poll="setPoll"
       />
-      <div class="form-bottom">
+      <div
+        ref="bottom"
+        class="form-bottom"
+        >
         <div class="form-bottom-left">
           <media-upload
             ref="mediaUpload"

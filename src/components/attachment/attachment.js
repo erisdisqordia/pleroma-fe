@@ -10,7 +10,8 @@ const Attachment = {
     'statusId',
     'size',
     'allowPlay',
-    'setMedia'
+    'setMedia',
+    'naturalSizeLoad'
   ],
   data () {
     return {
@@ -88,6 +89,11 @@ const Attachment = {
       } else {
         this.showHidden = !this.showHidden
       }
+    },
+    onImageLoad (image) {
+      const width = image.naturalWidth
+      const height = image.naturalHeight
+      this.naturalSizeLoad && this.naturalSizeLoad({ width, height })
     }
   }
 }

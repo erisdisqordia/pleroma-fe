@@ -1,23 +1,18 @@
 import Attachment from '../attachment/attachment.vue'
-import { chunk, last, dropRight } from 'lodash'
+import { chunk, last, dropRight, sumBy } from 'lodash'
 
 const Gallery = {
-  data: () => ({
-    width: 500
-  }),
   props: [
     'attachments',
     'nsfw',
     'setMedia'
   ],
+  data () {
+    return {
+      sizes: {}
+    }
+  },
   components: { Attachment },
-  mounted () {
-    this.resize()
-    window.addEventListener('resize', this.resize)
-  },
-  destroyed () {
-    window.removeEventListener('resize', this.resize)
-  },
   computed: {
     rows () {
       if (!this.attachments) {
@@ -33,21 +28,24 @@ const Gallery = {
       }
       return rows
     },
-    rowHeight () {
-      return itemsPerRow => ({ 'height': `${(this.width / (itemsPerRow + 0.6))}px` })
-    },
     useContainFit () {
       return this.$store.state.config.useContainFit
     }
   },
   methods: {
-    resize () {
-      // Quick optimization to make resizing not always trigger state change,
-      // only update attachment size in 10px steps
-      const width = Math.floor(this.$el.getBoundingClientRect().width / 10) * 10
-      if (this.width !== width) {
-        this.width = width
-      }
+    onNaturalSizeLoad (id, size) {
+      this.$set(this.sizes, id, size)
+    },
+    rowStyle (itemsPerRow) {
+      return { 'padding-bottom': `${(100 / (itemsPerRow + 0.6))}%` }
+    },
+    itemStyle (id, row) {
+      const total = sumBy(row, item => this.getAspectRatio(item.id))
+      return { flex: `${this.getAspectRatio(id) / total} 1 0%` }
+    },
+    getAspectRatio (id) {
+      const size = this.sizes[id]
+      return size ? size.width / size.height : 1
     }
   }
 }

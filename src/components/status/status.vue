@@ -209,18 +209,17 @@
                 class="replies"
               >
                 <span class="faint">{{ $t('status.replies_list') }}</span>
-                <span
+                <StatusPopover
                   v-for="reply in replies"
                   :key="reply.id"
-                  class="reply-link faint"
+                  :status-id="reply.id"
                 >
                   <a
                     href="#"
+                    class="reply-link"
                     @click.prevent="gotoOriginal(reply.id)"
-                    @mouseenter="replyEnter(reply.id, $event)"
-                    @mouseout="replyLeave()"
                   >{{ reply.name }}</a>
-                </span>
+                </StatusPopover>
               </div>
             </div>
           </div>

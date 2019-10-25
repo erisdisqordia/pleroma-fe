@@ -6,7 +6,7 @@
     :popper-options="popperOptions"
     @show="enter()"
   >
-    <div slot="popover">
+    <template slot="popover">
       <Status
         v-if="status"
         :is-preview="true"
@@ -19,7 +19,7 @@
       >
         <i class="icon-spin4 animate-spin" />
       </div>
-    </div>
+    </template>
 
     <slot />
   </v-popover>

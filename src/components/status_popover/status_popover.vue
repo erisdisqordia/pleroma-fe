@@ -8,9 +8,9 @@
   >
     <div slot="popover">
       <Status
-        v-if="preview"
+        v-if="status"
         :is-preview="true"
-        :statusoid="preview"
+        :statusoid="status"
         :compact="true"
       />
       <div

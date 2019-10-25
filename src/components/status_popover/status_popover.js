@@ -7,7 +7,6 @@ const StatusPopover = {
   ],
   data () {
     return {
-      preview: null,
       popperOptions: {
         modifiers: {
           preventOverflow: { padding: { top: 50 }, boundariesElement: 'viewport' }
@@ -15,26 +14,21 @@ const StatusPopover = {
       }
     }
   },
+  computed: {
+    status () {
+      return find(this.$store.state.statuses.allStatuses, { id: this.statusId })
+    }
+  },
   components: {
     Status: () => import('../status/status.vue')
   },
   methods: {
     enter () {
-      const id = this.statusId
-      const statuses = this.$store.state.statuses.allStatuses
-
-      if (!this.preview) {
-        // if we have the status somewhere already
-        this.preview = find(statuses, { id })
-        // or if we have to fetch it
-        if (!this.preview) {
-          this.$store.state.api.backendInteractor.fetchStatus({ id }).then((status) => {
-            this.preview = status
-            this.$nextTick(this.$refs.popper.updatePopper)
+      if (!this.status) {
+        this.$store.state.api.backendInteractor.fetchStatus({ id: this.statusId })
+          .then((status) => {
+            this.$store.dispatch('addNewStatuses', { statuses: [status] })
           })
-        }
-      } else if (this.preview.id !== id) {
-        this.preview = find(statuses, 'id')
       }
     }
   }

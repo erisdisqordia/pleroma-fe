@@ -25,10 +25,7 @@ const StatusPopover = {
   methods: {
     enter () {
       if (!this.status) {
-        this.$store.state.api.backendInteractor.fetchStatus({ id: this.statusId })
-          .then((status) => {
-            this.$store.dispatch('addNewStatuses', { statuses: [status] })
-          })
+        this.$store.dispatch('fetchStatus', this.statusId)
       }
     }
   }

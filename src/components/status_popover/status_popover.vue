@@ -1,6 +1,5 @@
 <template>
   <v-popover
-    ref="popper"
     popover-class="status-popover"
     placement="top-start"
     :popper-options="popperOptions"

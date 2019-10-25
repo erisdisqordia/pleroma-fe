@@ -205,27 +205,22 @@
                 </span>
               </div>
               <div
-                v-if="inConversation && !isPreview"
+                v-if="inConversation && !isPreview && replies && replies.length"
                 class="replies"
               >
+                <span class="faint">{{ $t('status.replies_list') }}</span>
                 <span
-                  v-if="replies && replies.length"
-                  class="faint"
-                >{{ $t('status.replies_list') }}</span>
-                <template v-if="replies">
-                  <span
-                    v-for="reply in replies"
-                    :key="reply.id"
-                    class="reply-link faint"
-                  >
-                    <a
-                      href="#"
-                      @click.prevent="gotoOriginal(reply.id)"
-                      @mouseenter="replyEnter(reply.id, $event)"
-                      @mouseout="replyLeave()"
-                    >{{ reply.name }}</a>
-                  </span>
-                </template>
+                  v-for="reply in replies"
+                  :key="reply.id"
+                  class="reply-link faint"
+                >
+                  <a
+                    href="#"
+                    @click.prevent="gotoOriginal(reply.id)"
+                    @mouseenter="replyEnter(reply.id, $event)"
+                    @mouseout="replyLeave()"
+                  >{{ reply.name }}</a>
+                </span>
               </div>
             </div>
           </div>

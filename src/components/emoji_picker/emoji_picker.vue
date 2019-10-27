@@ -101,7 +101,7 @@
           </div>
           <button
             class="btn btn-default"
-            @click="loadEmojiInsane"
+            @click.prevent="loadEmojiInsane"
           >
             {{ $t('emoji.load_all', { emojiAmount: filteredEmoji.length } ) }}
           </button>

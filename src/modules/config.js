@@ -3,8 +3,9 @@ import { setPreset, applyTheme } from '../services/style_setter/style_setter.js'
 
 const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
-const defaultState = {
+export const defaultState = {
   colors: {},
+  // bad name: actually hides posts of muted USERS
   hideMutedPosts: undefined, // instance default
   collapseMessageWithSubject: undefined, // instance default
   padEmoji: true,
@@ -37,11 +38,37 @@ const defaultState = {
   subjectLineBehavior: undefined, // instance default
   alwaysShowSubjectInput: undefined, // instance default
   postContentType: undefined, // instance default
-  minimalScopesMode: undefined // instance default
+  minimalScopesMode: undefined, // instance default
+  // This hides statuses filtered via a word filter
+  hideFilteredStatuses: undefined, // instance default
+  playVideosInModal: false,
+  useOneClickNsfw: false,
+  useContainFit: false,
+  hidePostStats: undefined, // instance default
+  hideUserStats: undefined // instance default
 }
+
+// caching the instance default properties
+export const instanceDefaultProperties = Object.entries(defaultState)
+  .filter(([key, value]) => value === undefined)
+  .map(([key, value]) => key)
 
 const config = {
   state: defaultState,
+  getters: {
+    mergedConfig (state, getters, rootState, rootGetters) {
+      const { instance } = rootState
+      return {
+        ...state,
+        ...instanceDefaultProperties
+          .map(key => [key, state[key] === undefined
+            ? instance[key]
+            : state[key]
+          ])
+          .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
+      }
+    }
+  },
   mutations: {
     setOption (state, { name, value }) {
       set(state, name, value)

@@ -1,13 +1,22 @@
 <template>
-  <label class="checkbox">
+  <label
+    class="checkbox"
+    :class="{ disabled, indeterminate }"
+  >
     <input
       type="checkbox"
+      :disabled="disabled"
       :checked="checked"
       :indeterminate.prop="indeterminate"
       @change="$emit('change', $event.target.checked)"
     >
     <i class="checkbox-indicator" />
-    <span v-if="!!$slots.default"><slot /></span>
+    <span
+      class="label"
+      v-if="!!$slots.default"
+    >
+      <slot />
+    </span>
   </label>
 </template>
 
@@ -17,7 +26,11 @@ export default {
     prop: 'checked',
     event: 'change'
   },
-  props: ['checked', 'indeterminate']
+  props: [
+    'checked',
+    'indeterminate',
+    'disabled'
+  ]
 }
 </script>
 
@@ -27,12 +40,16 @@ export default {
 .checkbox {
   position: relative;
   display: inline-block;
-  padding-left: 1.2em;
   min-height: 1.2em;
+
+  &-indicator {
+    position: relative;
+    padding-left: 1.2em;
+  }
 
   &-indicator::before {
     position: absolute;
-    left: 0;
+    right: 0;
     top: 0;
     display: block;
     content: '✔';
@@ -54,6 +71,17 @@ export default {
     box-sizing: border-box;
   }
 
+  &.disabled {
+    .checkbox-indicator::before,
+    .label {
+      opacity: .5;
+    }
+    .label {
+      color: $fallback--faint;
+      color: var(--faint, $fallback--faint);
+    }
+  }
+
   input[type=checkbox] {
     display: none;
 
@@ -68,9 +96,6 @@ export default {
       color: var(--text, $fallback--text);
     }
 
-    &:disabled + .checkbox-indicator::before {
-      opacity: .5;
-    }
   }
 
   & > span {

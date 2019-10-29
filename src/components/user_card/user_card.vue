@@ -84,7 +84,7 @@
               >{{ visibleRole }}</span>
               <span v-if="user.locked"><i class="icon icon-lock" /></span>
               <span
-                v-if="!hideUserStatsLocal && !hideBio"
+                v-if="!mergedConfig.hideUserStats && !hideBio"
                 class="dailyAvg"
               >{{ dailyAvg }} {{ $t('user_card.per_day') }}</span>
             </div>
@@ -193,7 +193,7 @@
       class="panel-body"
     >
       <div
-        v-if="!hideUserStatsLocal && switcher"
+        v-if="!mergedConfig.hideUserStats && switcher"
         class="user-counts"
       >
         <div

@@ -42,44 +42,29 @@
       </div>
       <div class="save-load-options">
         <span class="keep-option">
-          <input
-            id="keep-color"
-            v-model="keepColor"
-            type="checkbox"
-          >
-          <label for="keep-color">{{ $t('settings.style.switcher.keep_color') }}</label>
+          <Checkbox v-model="keepColor">
+            {{ $t('settings.style.switcher.keep_color') }}
+          </Checkbox>
         </span>
         <span class="keep-option">
-          <input
-            id="keep-shadows"
-            v-model="keepShadows"
-            type="checkbox"
-          >
-          <label for="keep-shadows">{{ $t('settings.style.switcher.keep_shadows') }}</label>
+          <Checkbox v-model="keepShadows">
+            {{ $t('settings.style.switcher.keep_shadows') }}
+          </Checkbox>
         </span>
         <span class="keep-option">
-          <input
-            id="keep-opacity"
-            v-model="keepOpacity"
-            type="checkbox"
-          >
-          <label for="keep-opacity">{{ $t('settings.style.switcher.keep_opacity') }}</label>
+          <Checkbox v-model="keepOpacity">
+            {{ $t('settings.style.switcher.keep_opacity') }}
+          </Checkbox>
         </span>
         <span class="keep-option">
-          <input
-            id="keep-roundness"
-            v-model="keepRoundness"
-            type="checkbox"
-          >
-          <label for="keep-roundness">{{ $t('settings.style.switcher.keep_roundness') }}</label>
+          <Checkbox v-model="keepRoundness">
+            {{ $t('settings.style.switcher.keep_roundness') }}
+          </Checkbox>
         </span>
         <span class="keep-option">
-          <input
-            id="keep-fonts"
-            v-model="keepFonts"
-            type="checkbox"
-          >
-          <label for="keep-fonts">{{ $t('settings.style.switcher.keep_fonts') }}</label>
+          <Checkbox v-model="keepFonts">
+            {{ $t('settings.style.switcher.keep_fonts') }}
+          </Checkbox>
         </span>
         <p>{{ $t('settings.style.switcher.save_load_hint') }}</p>
       </div>

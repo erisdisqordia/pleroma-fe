@@ -29,7 +29,7 @@ const Gallery = {
       return rows
     },
     useContainFit () {
-      return this.$store.state.config.useContainFit
+      return this.$store.getters.mergedConfig.useContainFit
     }
   },
   methods: {

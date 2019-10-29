@@ -6,6 +6,7 @@ import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import AccountActions from '../account_actions/account_actions.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+import { mapGetters } from 'vuex'
 
 export default {
   props: [
@@ -14,9 +15,6 @@ export default {
   data () {
     return {
       followRequestInProgress: false,
-      hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
-        ? this.$store.state.instance.hideUserStats
-        : this.$store.state.config.hideUserStats,
       betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
@@ -32,9 +30,9 @@ export default {
       }]
     },
     style () {
-      const color = this.$store.state.config.customTheme.colors
-        ? this.$store.state.config.customTheme.colors.bg // v2
-        : this.$store.state.config.colors.bg // v1
+      const color = this.$store.getters.mergedConfig.customTheme.colors
+        ? this.$store.getters.mergedConfig.customTheme.colors.bg // v2
+        : this.$store.getters.mergedConfig.colors.bg // v1
 
       if (color) {
         const rgb = (typeof color === 'string') ? hex2rgb(color) : color
@@ -66,21 +64,22 @@ export default {
     },
     userHighlightType: {
       get () {
-        const data = this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.getters.mergedConfig.highlight[this.user.screen_name]
         return (data && data.type) || 'disabled'
       },
       set (type) {
-        const data = this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.getters.mergedConfig.highlight[this.user.screen_name]
         if (type !== 'disabled') {
           this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: (data && data.color) || '#FFFFFF', type })
         } else {
           this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: undefined })
         }
-      }
+      },
+      ...mapGetters(['mergedConfig'])
     },
     userHighlightColor: {
       get () {
-        const data = this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.getters.mergedConfig.highlight[this.user.screen_name]
         return data && data.color
       },
       set (color) {
@@ -93,7 +92,8 @@ export default {
       const validRole = rights.admin || rights.moderator
       const roleTitle = rights.admin ? 'admin' : 'moderator'
       return validRole && roleTitle
-    }
+    },
+    ...mapGetters(['mergedConfig'])
   },
   components: {
     UserAvatar,

@@ -16,6 +16,7 @@ import fileType from 'src/services/file_type/file_type.service'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import { mentionMatchesUrl, extractTagFromUrl } from 'src/services/matcher/matcher.service.js'
 import { filter, unescape, uniqBy } from 'lodash'
+import { mapGetters } from 'vuex'
 
 const Status = {
   name: 'Status',
@@ -41,20 +42,16 @@ const Status = {
       showingTall: this.inConversation && this.focused,
       showingLongSubject: false,
       error: null,
-      expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
-        ? !this.$store.state.instance.collapseMessageWithSubject
-        : !this.$store.state.config.collapseMessageWithSubject,
+      expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject,
       betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
   computed: {
     localCollapseSubjectDefault () {
-      return typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
-        ? this.$store.state.instance.collapseMessageWithSubject
-        : this.$store.state.config.collapseMessageWithSubject
+      return this.mergedConfig.collapseMessageWithSubject
     },
     muteWords () {
-      return this.$store.state.config.muteWords
+      return this.mergedConfig.muteWords
     },
     repeaterClass () {
       const user = this.statusoid.user
@@ -69,18 +66,18 @@ const Status = {
     },
     repeaterStyle () {
       const user = this.statusoid.user
-      const highlight = this.$store.state.config.highlight
+      const highlight = this.mergedConfig.highlight
       return highlightStyle(highlight[user.screen_name])
     },
     userStyle () {
       if (this.noHeading) return
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
-      const highlight = this.$store.state.config.highlight
+      const highlight = this.mergedConfig.highlight
       return highlightStyle(highlight[user.screen_name])
     },
     hideAttachments () {
-      return (this.$store.state.config.hideAttachments && !this.inConversation) ||
-        (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
+      return (this.mergedConfig.hideAttachments && !this.inConversation) ||
+        (this.mergedConfig.hideAttachmentsInConv && this.inConversation)
     },
     userProfileLink () {
       return this.generateUserProfileLink(this.status.user.id, this.status.user.screen_name)
@@ -119,9 +116,7 @@ const Status = {
     },
     muted () { return !this.unmuted && ((!this.inProfile && this.status.user.muted) || (!this.inConversation && this.status.thread_muted) || this.muteWordHits.length > 0) },
     hideFilteredStatuses () {
-      return typeof this.$store.state.config.hideFilteredStatuses === 'undefined'
-        ? this.$store.state.instance.hideFilteredStatuses
-        : this.$store.state.config.hideFilteredStatuses
+      return this.mergedConfig.hideFilteredStatuses
     },
     hideStatus () {
       return (this.hideReply || this.deleted) || (this.muted && this.hideFilteredStatuses)
@@ -162,7 +157,7 @@ const Status = {
       }
     },
     hideReply () {
-      if (this.$store.state.config.replyVisibility === 'all') {
+      if (this.mergedConfig.replyVisibility === 'all') {
         return false
       }
       if (this.inConversation || !this.isReply) {
@@ -174,7 +169,7 @@ const Status = {
       if (this.status.type === 'retweet') {
         return false
       }
-      const checkFollowing = this.$store.state.config.replyVisibility === 'following'
+      const checkFollowing = this.mergedConfig.replyVisibility === 'following'
       for (var i = 0; i < this.status.attentions.length; ++i) {
         if (this.status.user.id === this.status.attentions[i].id) {
           continue
@@ -219,9 +214,7 @@ const Status = {
     replySubject () {
       if (!this.status.summary) return ''
       const decodedSummary = unescape(this.status.summary)
-      const behavior = typeof this.$store.state.config.subjectLineBehavior === 'undefined'
-        ? this.$store.state.instance.subjectLineBehavior
-        : this.$store.state.config.subjectLineBehavior
+      const behavior = this.mergedConfig.subjectLineBehavior
       const startsWithRe = decodedSummary.match(/^re[: ]/i)
       if ((behavior !== 'noop' && startsWithRe) || behavior === 'masto') {
         return decodedSummary
@@ -232,8 +225,8 @@ const Status = {
       }
     },
     attachmentSize () {
-      if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
-        (this.$store.state.config.hideAttachmentsInConv && this.inConversation) ||
+      if ((this.mergedConfig.hideAttachments && !this.inConversation) ||
+        (this.mergedConfig.hideAttachmentsInConv && this.inConversation) ||
         (this.status.attachments.length > this.maxThumbnails)) {
         return 'hide'
       } else if (this.compact) {
@@ -245,7 +238,7 @@ const Status = {
       if (this.attachmentSize === 'hide') {
         return []
       }
-      return this.$store.state.config.playVideosInModal
+      return this.mergedConfig.playVideosInModal
         ? ['image', 'video']
         : ['image']
     },
@@ -260,7 +253,7 @@ const Status = {
       )
     },
     maxThumbnails () {
-      return this.$store.state.config.maxThumbnails
+      return this.mergedConfig.maxThumbnails
     },
     contentHtml () {
       if (!this.status.summary_html) {
@@ -283,10 +276,9 @@ const Status = {
       return this.status.tags.filter(tagObj => tagObj.hasOwnProperty('name')).map(tagObj => tagObj.name).join(' ')
     },
     hidePostStats () {
-      return typeof this.$store.state.config.hidePostStats === 'undefined'
-        ? this.$store.state.instance.hidePostStats
-        : this.$store.state.config.hidePostStats
-    }
+      return this.mergedConfig.hidePostStats
+    },
+    ...mapGetters(['mergedConfig'])
   },
   components: {
     Attachment,

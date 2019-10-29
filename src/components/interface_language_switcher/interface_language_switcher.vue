@@ -40,7 +40,7 @@ export default {
     },
 
     language: {
-      get: function () { return this.$store.state.config.interfaceLanguage },
+      get: function () { return this.$store.getters.mergedConfig.interfaceLanguage },
       set: function (val) {
         this.$store.dispatch('setOption', { name: 'interfaceLanguage', value: val })
         this.$i18n.locale = val

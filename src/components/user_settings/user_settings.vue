@@ -92,7 +92,7 @@
             <p>
               <Checkbox
                 v-model="hideFollowers"
-                >
+              >
                 {{ $t('settings.hide_followers_description') }}
               </Checkbox>
             </p>

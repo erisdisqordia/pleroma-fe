@@ -2,7 +2,7 @@
   <label
     class="checkbox"
     :class="{ disabled, indeterminate }"
-    >
+  >
     <input
       type="checkbox"
       :disabled="disabled"
@@ -14,7 +14,7 @@
     <span
       class="label"
       v-if="!!$slots.default"
-      >
+    >
       <slot />
     </span>
   </label>

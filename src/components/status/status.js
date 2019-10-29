@@ -10,11 +10,12 @@ import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
 import AvatarList from '../avatar_list/avatar_list.vue'
 import Timeago from '../timeago/timeago.vue'
+import StatusPopover from '../status_popover/status_popover.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import fileType from 'src/services/file_type/file_type.service'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import { mentionMatchesUrl, extractTagFromUrl } from 'src/services/matcher/matcher.service.js'
-import { filter, find, unescape, uniqBy } from 'lodash'
+import { filter, unescape, uniqBy } from 'lodash'
 
 const Status = {
   name: 'Status',
@@ -37,8 +38,6 @@ const Status = {
       replying: false,
       unmuted: false,
       userExpanded: false,
-      preview: null,
-      showPreview: false,
       showingTall: this.inConversation && this.focused,
       showingLongSubject: false,
       error: null,
@@ -301,7 +300,8 @@ const Status = {
     Gallery,
     LinkPreview,
     AvatarList,
-    Timeago
+    Timeago,
+    StatusPopover
   },
   methods: {
     visibilityIcon (visibility) {
@@ -375,27 +375,6 @@ const Status = {
       } else if (this.hideSubjectStatus && this.status.summary) {
         this.expandingSubject = true
       }
-    },
-    replyEnter (id, event) {
-      this.showPreview = true
-      const targetId = id
-      const statuses = this.$store.state.statuses.allStatuses
-
-      if (!this.preview) {
-        // if we have the status somewhere already
-        this.preview = find(statuses, { 'id': targetId })
-        // or if we have to fetch it
-        if (!this.preview) {
-          this.$store.state.api.backendInteractor.fetchStatus({ id }).then((status) => {
-            this.preview = status
-          })
-        }
-      } else if (this.preview.id !== targetId) {
-        this.preview = find(statuses, { 'id': targetId })
-      }
-    },
-    replyLeave () {
-      this.showPreview = false
     },
     generateUserProfileLink (id, name) {
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)

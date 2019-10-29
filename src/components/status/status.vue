@@ -174,20 +174,26 @@
                 v-if="isReply"
                 class="reply-to-and-accountname"
               >
-                <a
-                  class="reply-to"
-                  href="#"
-                  :aria-label="$t('tool_tip.reply')"
-                  @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
-                  @mouseenter.prevent.stop="replyEnter(status.in_reply_to_status_id, $event)"
-                  @mouseleave.prevent.stop="replyLeave()"
+                <StatusPopover
+                  v-if="!isPreview"
+                  :status-id="status.in_reply_to_status_id"
                 >
-                  <i
-                    v-if="!isPreview"
-                    class="button-icon icon-reply"
-                  />
-                  <span class="faint-link reply-to-text">{{ $t('status.reply_to') }}</span>
-                </a>
+                  <a
+                    class="reply-to"
+                    href="#"
+                    :aria-label="$t('tool_tip.reply')"
+                    @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
+                  >
+                    <i class="button-icon icon-reply" />
+                    <span class="faint-link reply-to-text">{{ $t('status.reply_to') }}</span>
+                  </a>
+                </StatusPopover>
+                <span
+                  v-else
+                  class="reply-to"
+                >
+                  <span class="reply-to-text">{{ $t('status.reply_to') }}</span>
+                </span>
                 <router-link :to="replyProfileLink">
                   {{ replyToName }}
                 </router-link>
@@ -199,47 +205,22 @@
                 </span>
               </div>
               <div
-                v-if="inConversation && !isPreview"
+                v-if="inConversation && !isPreview && replies && replies.length"
                 class="replies"
               >
-                <span
-                  v-if="replies && replies.length"
-                  class="faint"
-                >{{ $t('status.replies_list') }}</span>
-                <template v-if="replies">
-                  <span
-                    v-for="reply in replies"
-                    :key="reply.id"
-                    class="reply-link faint"
-                  >
-                    <a
-                      href="#"
-                      @click.prevent="gotoOriginal(reply.id)"
-                      @mouseenter="replyEnter(reply.id, $event)"
-                      @mouseout="replyLeave()"
-                    >{{ reply.name }}</a>
-                  </span>
-                </template>
+                <span class="faint">{{ $t('status.replies_list') }}</span>
+                <StatusPopover
+                  v-for="reply in replies"
+                  :key="reply.id"
+                  :status-id="reply.id"
+                >
+                  <a
+                    href="#"
+                    class="reply-link"
+                    @click.prevent="gotoOriginal(reply.id)"
+                  >{{ reply.name }}</a>
+                </StatusPopover>
               </div>
-            </div>
-          </div>
-
-          <div
-            v-if="showPreview"
-            class="status-preview-container"
-          >
-            <status
-              v-if="preview"
-              class="status-preview"
-              :is-preview="true"
-              :statusoid="preview"
-              :compact="true"
-            />
-            <div
-              v-else
-              class="status-preview status-preview-loading"
-            >
-              <i class="icon-spin4 animate-spin" />
             </div>
           </div>
 
@@ -439,61 +420,11 @@ $status-margin: 0.75em;
   min-width: 0;
 }
 
-.status-preview.status-el {
-  border-style: solid;
-  border-width: 1px;
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
-}
-
-.status-preview-container {
-  position: relative;
-  max-width: 100%;
-}
-
 .status-pin {
   padding: $status-margin $status-margin 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-}
-
-.status-preview {
-  position: absolute;
-  max-width: 95%;
-  display: flex;
-  background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
-  border-style: solid;
-  border-width: 1px;
-  border-radius: $fallback--tooltipRadius;
-  border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
-  box-shadow: var(--popupShadow);
-  margin-top: 0.25em;
-  margin-left: 0.5em;
-  z-index: 50;
-
-  .status {
-    flex: 1;
-    border: 0;
-    min-width: 15em;
-  }
-}
-
-.status-preview-loading {
-  display: block;
-  min-width: 15em;
-  padding: 1em;
-  text-align: center;
-  border-width: 1px;
-  border-style: solid;
-
-  i {
-    font-size: 2em;
-  }
 }
 
 .media-left {
@@ -553,11 +484,6 @@ $status-margin: 0.75em;
     flex-basis: 100%;
     margin-bottom: 0.5em;
 
-    a {
-      display: inline-block;
-      word-break: break-all;
-    }
-
     small {
       font-weight: lighter;
     }
@@ -567,6 +493,11 @@ $status-margin: 0.75em;
       display: flex;
       justify-content: space-between;
       line-height: 18px;
+
+      a {
+        display: inline-block;
+        word-break: break-all;
+      }
 
       .name-and-account-name {
         display: flex;
@@ -600,6 +531,7 @@ $status-margin: 0.75em;
     }
 
     .heading-reply-row {
+      position: relative;
       align-content: baseline;
       font-size: 12px;
       line-height: 18px;
@@ -608,11 +540,13 @@ $status-margin: 0.75em;
       flex-wrap: wrap;
       align-items: stretch;
 
-      a {
+      > .reply-to-and-accountname > a {
         max-width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        display: inline-block;
+        word-break: break-all;
       }
     }
 
@@ -639,6 +573,8 @@ $status-margin: 0.75em;
       overflow: hidden;
       text-overflow: ellipsis;
       margin: 0 0.4em 0 0.2em;
+      color: $fallback--faint;
+      color: var(--faint, $fallback--faint);
     }
 
     .replies-separator {

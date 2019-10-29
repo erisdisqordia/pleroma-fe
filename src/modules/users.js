@@ -60,6 +60,18 @@ const unmuteUser = (store, id) => {
     .then((relationship) => store.commit('updateUserRelationship', [relationship]))
 }
 
+const hideReblogs = (store, userId) => {
+  return store.rootState.api.backendInteractor.followUser({ id: userId, reblogs: false })
+    .then((relationship) => {
+      store.commit('updateUserRelationship', [relationship])
+    })
+}
+
+const showReblogs = (store, userId) => {
+  return store.rootState.api.backendInteractor.followUser({ id: userId, reblogs: true })
+    .then((relationship) => store.commit('updateUserRelationship', [relationship]))
+}
+
 export const mutations = {
   setMuted (state, { user: { id }, muted }) {
     const user = state.usersObject[id]
@@ -135,6 +147,7 @@ export const mutations = {
         user.muted = relationship.muting
         user.statusnet_blocking = relationship.blocking
         user.subscribed = relationship.subscribing
+        user.showing_reblogs = relationship.showing_reblogs
       }
     })
   },
@@ -271,6 +284,12 @@ const users = {
     },
     unmuteUser (store, id) {
       return unmuteUser(store, id)
+    },
+    hideReblogs (store, id) {
+      return hideReblogs(store, id)
+    },
+    showReblogs (store, id) {
+      return showReblogs(store, id)
     },
     muteUsers (store, ids = []) {
       return Promise.all(ids.map(id => muteUser(store, id)))

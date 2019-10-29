@@ -219,10 +219,16 @@ const authHeaders = (accessToken) => {
   }
 }
 
-const followUser = ({ id, credentials }) => {
+const followUser = ({ id, credentials, ...options }) => {
   let url = MASTODON_FOLLOW_URL(id)
+  const form = {}
+  if (options.reblogs !== undefined) { form['reblogs'] = options.reblogs }
   return fetch(url, {
-    headers: authHeaders(credentials),
+    body: JSON.stringify(form),
+    headers: {
+      ...authHeaders(credentials),
+      'Content-Type': 'application/json'
+    },
     method: 'POST'
   }).then((data) => data.json())
 }

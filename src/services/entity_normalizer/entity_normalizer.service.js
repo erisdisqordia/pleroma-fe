@@ -69,6 +69,7 @@ export const parseUser = (data) => {
         output.following = relationship.following
         output.statusnet_blocking = relationship.blocking
         output.muted = relationship.muting
+        output.showing_reblogs = relationship.showing_reblogs
         output.subscribed = relationship.subscribing
       }
 
@@ -196,9 +197,11 @@ export const parseAttachment = (data) => {
   return output
 }
 export const addEmojis = (string, emojis) => {
+  const matchOperatorsRegex = /[|\\{}()[\]^$+*?.-]/g
   return emojis.reduce((acc, emoji) => {
+    const regexSafeShortCode = emoji.shortcode.replace(matchOperatorsRegex, '\\$&')
     return acc.replace(
-      new RegExp(`:${emoji.shortcode}:`, 'g'),
+      new RegExp(`:${regexSafeShortCode}:`, 'g'),
       `<img src='${emoji.url}' alt='${emoji.shortcode}' title='${emoji.shortcode}' class='emoji' />`
     )
   }, string)

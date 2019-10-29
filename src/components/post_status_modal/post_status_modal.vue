@@ -1,13 +1,11 @@
 <template>
-  <div
-    v-if="isOpen"
-    class="post-form-modal-view modal-view"
-    @click="closeModal"
+  <Modal
+    v-if="isLoggedIn && !resettingForm"
+    :is-open="modalActivated"
+    class="post-form-modal-view"
+    @backdropClicked="closeModal"
   >
-    <div
-      class="post-form-modal-panel panel"
-      @click.stop=""
-    >
+    <div class="post-form-modal-panel panel">
       <div class="panel-heading">
         {{ $t('post_status.new_status') }}
       </div>
@@ -17,15 +15,13 @@
         @posted="closeModal"
       />
     </div>
-  </div>
+  </Modal>
 </template>
 
 <script src="./post_status_modal.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
-
-.post-form-modal-view {
+.modal-view.post-form-modal-view {
   align-items: flex-start;
 }
 

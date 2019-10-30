@@ -39,10 +39,13 @@ h4 {
   text-align: center;
 }
 
+html {
+  font-size: 14px;
+}
+
 body {
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
-  font-size: 14px;
   margin: 0;
   color: $fallback--text;
   color: var(--text, $fallback--text);
@@ -703,31 +706,6 @@ nav {
     padding: .5em;
     color: inherit;
   }
-}
-
-@keyframes modal-background-fadein {
-  from {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  to {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-}
-
-.modal-view {
-  z-index: 1000;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
-  animation-duration: 0.2s;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation-name: modal-background-fadein;
 }
 
 .button-icon {

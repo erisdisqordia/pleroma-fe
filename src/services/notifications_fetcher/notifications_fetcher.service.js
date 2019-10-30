@@ -8,11 +8,10 @@ const update = ({ store, notifications, older }) => {
 
 const fetchAndUpdate = ({ store, credentials, older = false }) => {
   const args = { credentials }
+  const { getters } = store
   const rootState = store.rootState || store.state
   const timelineData = rootState.statuses.notifications
-  const hideMutedPosts = typeof rootState.config.hideMutedPosts === 'undefined'
-    ? rootState.instance.hideMutedPosts
-    : rootState.config.hideMutedPosts
+  const hideMutedPosts = getters.mergedConfig.hideMutedPosts
 
   args['withMuted'] = !hideMutedPosts
 

@@ -141,7 +141,7 @@ const Timeline = {
       const bodyBRect = document.body.getBoundingClientRect()
       const height = Math.max(bodyBRect.height, -(bodyBRect.y))
       if (this.timeline.loading === false &&
-          this.$store.state.config.autoLoad &&
+          this.$store.getters.mergedConfig.autoLoad &&
           this.$el.offsetHeight > 0 &&
           (window.innerHeight + window.pageYOffset) >= (height - 750)) {
         this.fetchOlderStatuses()
@@ -153,7 +153,7 @@ const Timeline = {
   },
   watch: {
     newStatusCount (count) {
-      if (!this.$store.state.config.streaming) {
+      if (!this.$store.getters.mergedConfig.streaming) {
         return
       }
       if (count > 0) {
@@ -162,7 +162,7 @@ const Timeline = {
         const top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
         if (top < 15 &&
             !this.paused &&
-            !(this.unfocused && this.$store.state.config.pauseOnUnfocused)
+            !(this.unfocused && this.$store.getters.mergedConfig.pauseOnUnfocused)
         ) {
           this.showNewStatuses()
         } else {

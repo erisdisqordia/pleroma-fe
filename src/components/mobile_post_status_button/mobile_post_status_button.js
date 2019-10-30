@@ -30,7 +30,7 @@ const MobilePostStatusButton = {
       return this.autohideFloatingPostButton && (this.hidden || this.inputActive)
     },
     autohideFloatingPostButton () {
-      return !!this.$store.state.config.autohideFloatingPostButton
+      return !!this.$store.getters.mergedConfig.autohideFloatingPostButton
     }
   },
   watch: {

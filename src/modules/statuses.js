@@ -537,6 +537,10 @@ const statuses = {
     setNotificationsSilence ({ rootState, commit }, { value }) {
       commit('setNotificationsSilence', { value })
     },
+    fetchStatus ({ rootState, dispatch }, id) {
+      rootState.api.backendInteractor.fetchStatus({ id })
+        .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
+    },
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })
       apiService.deleteStatus({ id: status.id, credentials: rootState.users.currentUser.credentials })

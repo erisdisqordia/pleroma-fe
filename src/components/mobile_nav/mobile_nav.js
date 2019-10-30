@@ -63,7 +63,7 @@ const MobileNav = {
       this.$refs.notifications.markAsSeen()
     },
     onScroll ({ target: { scrollTop, clientHeight, scrollHeight } }) {
-      if (this.$store.state.config.autoLoad && scrollTop + clientHeight >= scrollHeight) {
+      if (this.$store.getters.mergedConfig.autoLoad && scrollTop + clientHeight >= scrollHeight) {
         this.$refs.notifications.fetchOlderNotifications()
       }
     }

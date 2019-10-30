@@ -1,3 +1,4 @@
+import Checkbox from '../checkbox/checkbox.vue'
 
 const filterByKeyword = (list, keyword = '') => {
   return list.filter(x => x.displayText.includes(keyword))
@@ -13,7 +14,6 @@ const EmojiPicker = {
   },
   data () {
     return {
-      labelKey: String(Math.random() * 100000),
       keyword: '',
       activeGroup: 'custom',
       showingStickers: false,
@@ -22,7 +22,8 @@ const EmojiPicker = {
     }
   },
   components: {
-    StickerPicker: () => import('../sticker_picker/sticker_picker.vue')
+    StickerPicker: () => import('../sticker_picker/sticker_picker.vue'),
+    Checkbox
   },
   methods: {
     onEmoji (emoji) {

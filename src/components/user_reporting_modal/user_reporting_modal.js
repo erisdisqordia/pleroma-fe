@@ -2,12 +2,14 @@
 import Status from '../status/status.vue'
 import List from '../list/list.vue'
 import Checkbox from '../checkbox/checkbox.vue'
+import Modal from '../modal/modal.vue'
 
 const UserReportingModal = {
   components: {
     Status,
     List,
-    Checkbox
+    Checkbox,
+    Modal
   },
   data () {
     return {

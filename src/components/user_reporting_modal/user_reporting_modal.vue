@@ -1,13 +1,9 @@
 <template>
-  <div
+  <Modal
     v-if="isOpen"
-    class="modal-view"
-    @click="closeModal"
+    @backdropClicked="closeModal"
   >
-    <div
-      class="user-reporting-panel panel"
-      @click.stop=""
-    >
+    <div class="user-reporting-panel panel">
       <div class="panel-heading">
         <div class="title">
           {{ $t('user_reporting.title', [user.screen_name]) }}
@@ -69,7 +65,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </Modal>
 </template>
 
 <script src="./user_reporting_modal.js"></script>

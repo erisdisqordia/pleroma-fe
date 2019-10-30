@@ -1,10 +1,9 @@
+import { mapGetters } from 'vuex'
+
 const RetweetButton = {
   props: ['status', 'loggedIn', 'visibility'],
   data () {
     return {
-      hidePostStatsLocal: typeof this.$store.state.config.hidePostStats === 'undefined'
-        ? this.$store.state.instance.hidePostStats
-        : this.$store.state.config.hidePostStats,
       animated: false
     }
   },
@@ -28,7 +27,8 @@ const RetweetButton = {
         'retweeted-empty': !this.status.repeated,
         'animate-spin': this.animated
       }
-    }
+    },
+    ...mapGetters(['mergedConfig'])
   }
 }
 

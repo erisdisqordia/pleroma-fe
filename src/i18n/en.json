@@ -555,6 +555,8 @@
     "unmute": "Unmute",
     "unmute_progress": "Unmuting...",
     "mute_progress": "Muting...",
+    "hide_repeats": "Hide repeats",
+    "show_repeats": "Show repeats",
     "admin_menu": {
       "moderation": "Moderation",
       "grant_admin": "Grant Admin",
@@ -630,6 +632,8 @@
     "return_home": "Return to the home page",
     "not_found": "We couldn't find that email or username.",
     "too_many_requests": "You have reached the limit of attempts, try again later.",
-    "password_reset_disabled": "Password reset is disabled. Please contact your instance administrator."
+    "password_reset_disabled": "Password reset is disabled. Please contact your instance administrator.",
+    "password_reset_required": "You must reset your password to log in.",
+    "password_reset_required_but_mailer_is_disabled": "You must reset your password, but password reset is disabled. Please contact your instance administrator."
   }
 }

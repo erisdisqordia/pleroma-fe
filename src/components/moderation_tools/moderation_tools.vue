@@ -3,9 +3,7 @@
     <v-popover
       trigger="click"
       class="moderation-tools-popover"
-      :container="false"
       placement="bottom-end"
-      :offset="5"
       @show="showDropDown = true"
       @hide="showDropDown = false"
     >

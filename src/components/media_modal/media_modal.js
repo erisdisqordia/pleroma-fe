@@ -1,11 +1,13 @@
 import StillImage from '../still-image/still-image.vue'
 import VideoAttachment from '../video_attachment/video_attachment.vue'
+import Modal from '../modal/modal.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 
 const MediaModal = {
   components: {
     StillImage,
-    VideoAttachment
+    VideoAttachment,
+    Modal
   },
   computed: {
     showing () {

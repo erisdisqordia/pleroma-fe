@@ -59,6 +59,8 @@ const LoginForm = {
           if (result.error) {
             if (result.error === 'mfa_required') {
               this.requireMFA({ app: app, settings: result })
+            } else if (result.identifier === 'password_reset_required') {
+              this.$router.push({ name: 'password-reset', params: { passwordResetRequested: true } })
             } else {
               this.error = result.error
               this.focusOnPasswordInput()

@@ -47,7 +47,7 @@
           ref="emoji-groups"
           class="emoji-groups"
           :class="groupsScrolledClass"
-          @scroll="scrolledGroup"
+          @scroll="onScroll"
         >
           <div
             v-for="group in emojisView"
@@ -73,26 +73,13 @@
                 :src="emoji.imageUrl"
               >
             </span>
+            <span :ref="'group-end-' + group.id"/>
           </div>
         </div>
         <div class="keep-open">
           <Checkbox v-model="keepOpen">
             {{ $t('emoji.keep_open') }}
           </Checkbox>
-        </div>
-        <div
-          v-if="askForSanity"
-          class="too-many-emoji"
-        >
-          <div class="alert warning hint">
-            {{ $t('emoji.load_all_hint', { saneAmount } ) }}
-          </div>
-          <button
-            class="btn btn-default"
-            @click.prevent="loadEmojiInsane"
-          >
-            {{ $t('emoji.load_all', { emojiAmount: filteredEmoji.length } ) }}
-          </button>
         </div>
       </div>
       <div

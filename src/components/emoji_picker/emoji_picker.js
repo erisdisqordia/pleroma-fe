@@ -1,9 +1,12 @@
 import { set } from 'vue'
 import Checkbox from '../checkbox/checkbox.vue'
 
-const LOAD_EMOJI_BY = 50
-const LOAD_EMOJI_INTERVAL = 100
-const LOAD_EMOJI_SANE_AMOUNT = 500
+// At widest, approximately 20 emoji are visible in a row,
+// loading 3 rows, could be overkill for narrow picker
+const LOAD_EMOJI_BY = 60
+
+// When to start loading new batch emoji, in pixels
+const LOAD_EMOJI_MARGIN = 64
 
 const filterByKeyword = (list, keyword = '') => {
   return list.filter(x => x.displayText.includes(keyword))
@@ -34,9 +37,21 @@ const EmojiPicker = {
     Checkbox
   },
   methods: {
+    onStickerUploaded (e) {
+      this.$emit('sticker-uploaded', e)
+    },
+    onStickerUploadFailed (e) {
+      this.$emit('sticker-upload-failed', e)
+    },
     onEmoji (emoji) {
       const value = emoji.imageUrl ? `:${emoji.displayText}:` : emoji.replacement
       this.$emit('emoji', { insertion: value, keepOpen: this.keepOpen })
+    },
+    onScroll (e) {
+      const target = (e && e.target) || this.$refs['emoji-groups']
+      this.updateScrolledClass(target)
+      this.scrolledGroup(target)
+      this.triggerLoadMore(target)
     },
     highlight (key) {
       const ref = this.$refs['group-' + key]
@@ -47,9 +62,7 @@ const EmojiPicker = {
         this.$refs['emoji-groups'].scrollTop = top + 1
       })
     },
-    scrolledGroup (e) {
-      const target = (e && e.target) || this.$refs['emoji-groups']
-      const top = target.scrollTop + 5
+    updateScrolledClass (target) {
       if (target.scrollTop <= 5) {
         this.groupsScrolledClass = 'scrolled-top'
       } else if (target.scrollTop >= target.scrollTopMax - 5) {
@@ -57,6 +70,26 @@ const EmojiPicker = {
       } else {
         this.groupsScrolledClass = 'scrolled-middle'
       }
+    },
+    triggerLoadMore (target) {
+      const ref = this.$refs['group-end-custom'][0]
+      const bottom = ref.offsetTop + ref.offsetHeight
+
+      const scrollerBottom = target.scrollTop + target.clientHeight
+      const scrollerTop = target.scrollTop
+
+      // Loads more emoji when they come into view
+      const approachingBottom = bottom - scrollerBottom < LOAD_EMOJI_MARGIN
+      // Always load when at the very top in case there's no scroll space yet
+      const atTop = scrollerTop < 5
+      // Don't load when looking at unicode category
+      const bottomAboveViewport = bottom < scrollerTop
+      if (!bottomAboveViewport && (approachingBottom || atTop)) {
+        this.loadEmoji()
+      }
+    },
+    scrolledGroup (target) {
+      const top = target.scrollTop + 5
       this.$nextTick(() => {
         this.emojisView.forEach(group => {
           const ref = this.$refs['group-' + group.id]
@@ -66,56 +99,34 @@ const EmojiPicker = {
         })
       })
     },
-    loadEmojiInsane () {
-      this.customEmojiLoadAllConfirmed = true
-      this.continueEmojiLoad()
-    },
     loadEmoji () {
       const allLoaded = this.customEmojiBuffer.length === this.filteredEmoji.length
-      const saneLoaded = this.customEmojiBuffer.length >= LOAD_EMOJI_SANE_AMOUNT &&
-            !this.customEmojiLoadAllConfirmed
 
-      if (allLoaded || saneLoaded) {
+      if (allLoaded) {
         return
       }
 
       this.customEmojiBufferSlice += LOAD_EMOJI_BY
-      this.customEmojiTimeout = window.setTimeout(this.loadEmoji, LOAD_EMOJI_INTERVAL)
     },
     startEmojiLoad (forceUpdate = false) {
       const bufferSize = this.customEmojiBuffer.length
-      const bufferPrefilledSane = bufferSize === LOAD_EMOJI_SANE_AMOUNT && !this.customEmojiLoadAllConfirmed
       const bufferPrefilledAll = bufferSize === this.filteredEmoji.length
-      if ((bufferPrefilledSane || bufferPrefilledAll) && !forceUpdate) {
+      if (bufferPrefilledAll && !forceUpdate) {
         return
       }
-      if (this.customEmojiTimeout) {
-        window.clearTimeout(this.customEmojiTimeout)
-      }
-
       this.customEmojiBufferSlice = LOAD_EMOJI_BY
-      this.customEmojiTimeout = window.setTimeout(this.loadEmoji, LOAD_EMOJI_INTERVAL)
-    },
-    continueEmojiLoad () {
-      this.customEmojiTimeout = window.setTimeout(this.loadEmoji, LOAD_EMOJI_INTERVAL)
     },
     toggleStickers () {
       this.showingStickers = !this.showingStickers
     },
     setShowStickers (value) {
       this.showingStickers = value
-    },
-    onStickerUploaded (e) {
-      this.$emit('sticker-uploaded', e)
-    },
-    onStickerUploadFailed (e) {
-      this.$emit('sticker-upload-failed', e)
     }
   },
   watch: {
     keyword () {
       this.customEmojiLoadAllConfirmed = false
-      this.scrolledGroup()
+      this.onScroll()
       this.startEmojiLoad(true)
     }
   },
@@ -129,10 +140,6 @@ const EmojiPicker = {
       }
       return 0
     },
-    saneAmount () {
-      // for UI
-      return LOAD_EMOJI_SANE_AMOUNT
-    },
     filteredEmoji () {
       return filterByKeyword(
         this.$store.state.instance.customEmoji || [],
@@ -141,10 +148,6 @@ const EmojiPicker = {
     },
     customEmojiBuffer () {
       return this.filteredEmoji.slice(0, this.customEmojiBufferSlice)
-    },
-    askForSanity () {
-      return this.customEmojiBuffer.length >= LOAD_EMOJI_SANE_AMOUNT &&
-        !this.customEmojiLoadAllConfirmed
     },
     emojis () {
       const standardEmojis = this.$store.state.instance.emoji || []

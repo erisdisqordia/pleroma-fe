@@ -109,6 +109,9 @@ const EmojiPicker = {
       this.customEmojiBufferSlice += LOAD_EMOJI_BY
     },
     startEmojiLoad (forceUpdate = false) {
+      this.$nextTick(() => {
+        this.$refs['emoji-groups'].scrollTop = 0
+      })
       const bufferSize = this.customEmojiBuffer.length
       const bufferPrefilledAll = bufferSize === this.filteredEmoji.length
       if (bufferPrefilledAll && !forceUpdate) {
@@ -126,7 +129,6 @@ const EmojiPicker = {
   watch: {
     keyword () {
       this.customEmojiLoadAllConfirmed = false
-      this.$refs['emoji-groups'].scrollTop = 0
       this.onScroll()
       this.startEmojiLoad(true)
     }

@@ -5,11 +5,11 @@
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
-    "media_proxy": "Media Proxy",
+    "media_proxy": "Medienproxy",
     "scope_options": "Reichweitenoptionen",
     "text_limit": "Textlimit",
     "title": "Features",
-    "who_to_follow": "Who to follow"
+    "who_to_follow": "Wem folgen?"
   },
   "finder": {
     "error_fetching_user": "Fehler beim Suchen des Benutzers",
@@ -29,15 +29,18 @@
     "username": "Benutzername"
   },
   "nav": {
+    "about": "Über",
     "back": "Zurück",
     "chat": "Lokaler Chat",
     "friend_requests": "Followanfragen",
     "mentions": "Erwähnungen",
+    "interactions": "Interaktionen",
     "dms": "Direktnachrichten",
     "public_tl": "Öffentliche Zeitleiste",
     "timeline": "Zeitleiste",
     "twkn": "Das gesamte bekannte Netzwerk",
     "user_search": "Benutzersuche",
+    "search": "Suche",
     "preferences": "Voreinstellungen"
   },
   "notifications": {
@@ -115,6 +118,9 @@
     "delete_account_description": "Lösche deinen Account und alle deine Nachrichten unwiderruflich.",
     "delete_account_error": "Es ist ein Fehler beim Löschen deines Accounts aufgetreten. Tritt dies weiterhin auf, wende dich an den Administrator der Instanz.",
     "delete_account_instructions": "Tippe dein Passwort unten in das Feld ein, um die Löschung deines Accounts zu bestätigen.",
+    "discoverable": "Erlaubnis für automatisches Suchen nach diesem Account",
+    "avatar_size_instruction": "Die empfohlene minimale Größe für Avatare ist 150x150 Pixel.",
+    "pad_emoji": "Emojis mit Leerzeichen umrahmen",
     "export_theme": "Farbschema speichern",
     "filtering": "Filtern",
     "filtering_explanation": "Alle Beiträge die diese Wörter enthalten werden ausgeblendet. Ein Wort pro Zeile.",
@@ -128,8 +134,11 @@
     "general": "Allgemein",
     "hide_attachments_in_convo": "Anhänge in Unterhaltungen ausblenden",
     "hide_attachments_in_tl": "Anhänge in der Zeitleiste ausblenden",
+    "hide_muted_posts": "Verberge Beiträge stummgeschalteter Nutzer",
+    "max_thumbnails": "Maximale Anzahl von Vorschaubildern pro Beitrag",
     "hide_isp": "Instanz-spezifisches Panel ausblenden",
     "preload_images": "Bilder vorausladen",
+    "use_one_click_nsfw": "Heikle Anhänge mit nur einem Klick öffnen",
     "hide_post_stats": "Beitragsstatistiken verbergen (z.B. die Anzahl der Favoriten)",
     "hide_user_stats": "Benutzerstatistiken verbergen (z.B. die Anzahl der Follower)",
     "hide_filtered_statuses": "Gefilterte Beiträge verbergen",
@@ -147,6 +156,9 @@
     "lock_account_description": "Sperre deinen Account, um neue Follower zu genehmigen oder abzulehnen",
     "loop_video": "Videos wiederholen",
     "loop_video_silent_only": "Nur Videos ohne Ton wiederholen (z.B. Mastodons \"gifs\")",
+    "mutes_tab": "Mutes",
+    "play_videos_in_modal": "Videos in größerem Medienfenster abspielen",
+    "use_contain_fit": "Vorschaubilder nicht zuschneiden",
     "name": "Name",
     "name_bio": "Name & Bio",
     "new_password": "Neues Passwort",
@@ -158,6 +170,8 @@
     "no_rich_text_description": "Rich-Text Formatierungen von allen Beiträgen entfernen",
     "hide_follows_description": "Zeige nicht, wem ich folge",
     "hide_followers_description": "Zeige nicht, wer mir folgt",
+    "hide_follows_count_description": "Verberge die Anzahl deiner Gefolgten",
+    "hide_followers_count_description": "Verberge die Anzahl deiner Folgenden",
     "nsfw_clickthrough": "Aktiviere ausblendbares Overlay für Anhänge, die als NSFW markiert sind",
     "oauth_tokens": "OAuth-Token",
     "token": "Zeichen",
@@ -176,10 +190,12 @@
     "reply_visibility_all": "Alle Antworten zeigen",
     "reply_visibility_following": "Zeige nur Antworten an mich oder an Benutzer, denen ich folge",
     "reply_visibility_self": "Nur Antworten an mich anzeigen",
+    "autohide_floating_post_button": "Automatisches Verbergen des Knopfs für neue Beiträge (mobil)",
     "saving_err": "Fehler beim Speichern der Einstellungen",
     "saving_ok": "Einstellungen gespeichert",
     "security_tab": "Sicherheit",
     "scope_copy": "Reichweite beim Antworten übernehmen (Direktnachrichten werden immer kopiert)",
+    "minimal_scopes_mode": "Minimiere Reichweitenoptionen",
     "set_new_avatar": "Setze einen neuen Avatar",
     "set_new_profile_background": "Setze einen neuen Hintergrund für dein Profil",
     "set_new_profile_banner": "Setze einen neuen Banner für dein Profil",
@@ -189,7 +205,8 @@
     "subject_line_email": "Wie Email: \"re: Betreff\"",
     "subject_line_mastodon": "Wie Mastodon: unverändert kopieren",
     "subject_line_noop": "Nicht kopieren",
-    "stop_gifs": "Play-on-hover GIFs",
+    "post_status_content_type": "Beitragsart",
+    "stop_gifs": "Animationen nur beim Darüberfahren abspielen",
     "streaming": "Aktiviere automatisches Laden (Streaming) von neuen Beiträgen",
     "text": "Text",
     "theme": "Farbschema",
@@ -372,5 +389,25 @@
       "GiB": "GiB",
       "TiB": "TiB"
     }
+  },
+  "search": {
+    "people": "Leute",
+    "hashtags": "Hashtags",
+    "person_talking": "{count} Person spricht darüber",
+    "people_talking": "{count} Leute sprechen darüber",
+    "no_results": "Keine Ergebnisse"
+  },
+  "password_reset": {
+    "forgot_password": "Passwort vergessen?",
+    "password_reset": "Password zurücksetzen",
+    "instruction": "Wenn du hier deinen Benutznamen oder die zugehörige E-Mail-Adresse eingibst, kann dir der Server einen Link zum Passwortzurücksetzen zuschicken.",
+    "placeholder": "Dein Benutzername oder die zugehörige E-Mail-Adresse",
+    "check_email": "Im E-Mail-Posteingang des angebenen Kontos müsste sich jetzt (oder zumindest in Kürze) die E-Mail mit dem Link zum Passwortzurücksetzen befinden.",
+    "return_home": "Zurück zur Heimseite",
+    "not_found": "Benutzername/E-Mail-Adresse nicht gefunden. Vertippt?",
+    "too_many_requests": "Kurze Pause. Zu viele Versuche. Bitte, später nochmal probieren.",
+    "password_reset_disabled": "Passwortzurücksetzen deaktiviert. Bitte Administrator kontaktieren.",
+    "password_reset_required": "Passwortzurücksetzen erforderlich",
+    "password_reset_required_but_mailer_is_disabled": "Passwortzurücksetzen wäre erforderlich, ist aber deaktiviert. Bitte Administrator kontaktieren."
   }
 }

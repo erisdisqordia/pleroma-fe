@@ -17,12 +17,12 @@ const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 const NOTIFICATION_SETTINGS_URL = '/api/pleroma/notification_settings'
 
-const MFA_SETTINGS_URL = '/api/pleroma/profile/mfa'
-const MFA_BACKUP_CODES_URL = '/api/pleroma/profile/mfa/backup_codes'
+const MFA_SETTINGS_URL = '/api/pleroma/accounts/mfa'
+const MFA_BACKUP_CODES_URL = '/api/pleroma/accounts/mfa/backup_codes'
 
-const MFA_SETUP_OTP_URL = '/api/pleroma/profile/mfa/setup/totp'
-const MFA_CONFIRM_OTP_URL = '/api/pleroma/profile/mfa/confirm/totp'
-const MFA_DISABLE_OTP_URL = '/api/pleroma/profile/mfa/totp'
+const MFA_SETUP_OTP_URL = '/api/pleroma/accounts/mfa/setup/totp'
+const MFA_CONFIRM_OTP_URL = '/api/pleroma/accounts/mfa/confirm/totp'
+const MFA_DISABLE_OTP_URL = '/api/pleroma/account/mfa/totp'
 
 const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
 const MASTODON_REGISTRATION_URL = '/api/v1/accounts'

@@ -72,6 +72,7 @@ const EmojiPicker = {
     },
     triggerLoadMore (target) {
       const ref = this.$refs['group-end-custom'][0]
+      if (!ref) return
       const bottom = ref.offsetTop + ref.offsetHeight
 
       const scrollerBottom = target.scrollTop + target.clientHeight
@@ -109,6 +110,9 @@ const EmojiPicker = {
       this.customEmojiBufferSlice += LOAD_EMOJI_BY
     },
     startEmojiLoad (forceUpdate = false) {
+      if (!forceUpdate) {
+        this.keyword = ''
+      }
       this.$nextTick(() => {
         this.$refs['emoji-groups'].scrollTop = 0
       })

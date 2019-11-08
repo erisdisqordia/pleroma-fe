@@ -1,4 +1,3 @@
-import { set } from 'vue'
 import Checkbox from '../checkbox/checkbox.vue'
 
 // At widest, approximately 20 emoji are visible in a row,

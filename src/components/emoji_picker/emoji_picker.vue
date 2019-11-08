@@ -73,7 +73,7 @@
                 :src="emoji.imageUrl"
               >
             </span>
-            <span :ref="'group-end-' + group.id"/>
+            <span :ref="'group-end-' + group.id" />
           </div>
         </div>
         <div class="keep-open">

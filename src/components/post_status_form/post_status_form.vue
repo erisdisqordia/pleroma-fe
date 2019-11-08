@@ -163,7 +163,7 @@
       <div
         ref="bottom"
         class="form-bottom"
-        >
+      >
         <div class="form-bottom-left">
           <media-upload
             ref="mediaUpload"

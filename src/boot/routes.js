@@ -18,6 +18,7 @@ import AuthForm from 'components/auth_form/auth_form.js'
 import ChatPanel from 'components/chat_panel/chat_panel.vue'
 import WhoToFollow from 'components/who_to_follow/who_to_follow.vue'
 import About from 'components/about/about.vue'
+import RemoteUserResolver from 'components/remote_user_resolver/remote_user_resolver.vue'
 
 export default (store) => {
   const validateAuthenticatedRoute = (to, from, next) => {
@@ -42,6 +43,16 @@ export default (store) => {
     { name: 'friends', path: '/main/friends', component: FriendsTimeline, beforeEnter: validateAuthenticatedRoute },
     { name: 'tag-timeline', path: '/tag/:tag', component: TagTimeline },
     { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
+    { name: 'remote-user-profile-acct',
+      path: '/remote-users/(@?):username([^/@]+)@:hostname([^/@]+)',
+      component: RemoteUserResolver,
+      beforeEnter: validateAuthenticatedRoute
+    },
+    { name: 'remote-user-profile',
+      path: '/remote-users/:hostname/:username',
+      component: RemoteUserResolver,
+      beforeEnter: validateAuthenticatedRoute
+    },
     { name: 'external-user-profile', path: '/users/:id', component: UserProfile },
     { name: 'interactions', path: '/users/:username/interactions', component: Interactions, beforeEnter: validateAuthenticatedRoute },
     { name: 'dms', path: '/users/:username/dms', component: DMs, beforeEnter: validateAuthenticatedRoute },

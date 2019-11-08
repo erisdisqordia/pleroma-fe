@@ -77,13 +77,14 @@ const EmojiPicker = {
 
       const scrollerBottom = target.scrollTop + target.clientHeight
       const scrollerTop = target.scrollTop
+      const scrollerMax = target.scrollHeight
 
       // Loads more emoji when they come into view
       const approachingBottom = bottom - scrollerBottom < LOAD_EMOJI_MARGIN
       // Always load when at the very top in case there's no scroll space yet
       const atTop = scrollerTop < 5
-      // Don't load when looking at unicode category
-      const bottomAboveViewport = bottom < scrollerTop
+      // Don't load when looking at unicode category or at the very bottom
+      const bottomAboveViewport = bottom < scrollerTop || scrollerBottom === scrollerMax
       if (!bottomAboveViewport && (approachingBottom || atTop)) {
         this.loadEmoji()
       }
@@ -126,6 +127,7 @@ const EmojiPicker = {
   watch: {
     keyword () {
       this.customEmojiLoadAllConfirmed = false
+      this.$refs['emoji-groups'].scrollTop = 0
       this.onScroll()
       this.startEmojiLoad(true)
     }

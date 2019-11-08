@@ -12,11 +12,13 @@ export default Vue.component('tab-switcher', {
     },
     onSwitch: {
       required: false,
-      type: Function
+      type: Function,
+      default: undefined
     },
     activeTab: {
       required: false,
-      type: String
+      type: String,
+      default: undefined
     },
     scrollableTabs: {
       required: false,

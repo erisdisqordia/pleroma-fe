@@ -12,8 +12,8 @@
     >
     <i class="checkbox-indicator" />
     <span
-      class="label"
       v-if="!!$slots.default"
+      class="label"
     >
       <slot />
     </span>

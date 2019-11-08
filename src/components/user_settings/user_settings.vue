@@ -85,7 +85,7 @@
               <Checkbox
                 v-model="hideFollowsCount"
                 :disabled="!hideFollows"
-                >
+              >
                 {{ $t('settings.hide_follows_count_description') }}
               </Checkbox>
             </p>
@@ -233,6 +233,39 @@
         </div>
 
         <div :label="$t('settings.security_tab')">
+          <div class="setting-item">
+            <h2>{{ $t('settings.change_email') }}</h2>
+            <div>
+              <p>{{ $t('settings.new_email') }}</p>
+              <input
+                v-model="newEmail"
+                type="email"
+                autocomplete="email"
+              >
+            </div>
+            <div>
+              <p>{{ $t('settings.current_password') }}</p>
+              <input
+                v-model="changeEmailPassword"
+                type="password"
+                autocomplete="current-password"
+              >
+            </div>
+            <button
+              class="btn btn-default"
+              @click="changeEmail"
+            >
+              {{ $t('general.submit') }}
+            </button>
+            <p v-if="changedEmail">
+              {{ $t('settings.changed_email') }}
+            </p>
+            <template v-if="changeEmailError !== false">
+              <p>{{ $t('settings.change_email_error') }}</p>
+              <p>{{ changeEmailError }}</p>
+            </template>
+          </div>
+
           <div class="setting-item">
             <h2>{{ $t('settings.change_password') }}</h2>
             <div>

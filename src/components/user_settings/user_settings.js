@@ -35,6 +35,7 @@ const MuteList = withSubscription({
 const UserSettings = {
   data () {
     return {
+      newEmail: '',
       newName: this.$store.state.users.currentUser.name,
       newBio: unescape(this.$store.state.users.currentUser.description),
       newLocked: this.$store.state.users.currentUser.locked,
@@ -56,6 +57,9 @@ const UserSettings = {
       backgroundPreview: null,
       bannerUploadError: null,
       backgroundUploadError: null,
+      changeEmailError: false,
+      changeEmailPassword: '',
+      changedEmail: false,
       deletingAccount: false,
       deleteAccountConfirmPasswordInput: '',
       deleteAccountError: false,
@@ -302,6 +306,22 @@ const UserSettings = {
           } else {
             this.changedPassword = false
             this.changePasswordError = res.error
+          }
+        })
+    },
+    changeEmail () {
+      const params = {
+        email: this.newEmail,
+        password: this.changeEmailPassword
+      }
+      this.$store.state.api.backendInteractor.changeEmail(params)
+        .then((res) => {
+          if (res.status === 'success') {
+            this.changedEmail = true
+            this.changeEmailError = false
+          } else {
+            this.changedEmail = false
+            this.changeEmailError = res.error
           }
         })
     },

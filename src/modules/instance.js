@@ -1,5 +1,6 @@
 import { set } from 'vue'
 import { setPreset } from '../services/style_setter/style_setter.js'
+import { instanceDefaultProperties } from './config.js'
 
 const defaultState = {
   // Stuff from static/config.json and apiConfig
@@ -72,6 +73,13 @@ const instance = {
       if (typeof value !== 'undefined') {
         set(state, name, value)
       }
+    }
+  },
+  getters: {
+    instanceDefaultConfig (state) {
+      return instanceDefaultProperties
+        .map(key => [key, state[key]])
+        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
     }
   },
   actions: {

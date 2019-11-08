@@ -99,7 +99,7 @@ const EmojiInput = {
   },
   computed: {
     padEmoji () {
-      return this.$store.state.config.padEmoji
+      return this.$store.getters.mergedConfig.padEmoji
     },
     suggestions () {
       const firstchar = this.textAtCaret.charAt(0)

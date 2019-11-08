@@ -45,7 +45,7 @@ export default {
   }),
   created () {
     // Load the locale from the storage
-    this.$i18n.locale = this.$store.state.config.interfaceLanguage
+    this.$i18n.locale = this.$store.getters.mergedConfig.interfaceLanguage
     window.addEventListener('resize', this.updateMobileState)
   },
   destroyed () {
@@ -93,7 +93,7 @@ export default {
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
     showInstanceSpecificPanel () {
       return this.$store.state.instance.showInstanceSpecificPanel &&
-        !this.$store.state.config.hideISP &&
+        !this.$store.getters.mergedConfig.hideISP &&
         this.$store.state.instance.instanceSpecificPanelContent
     },
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },

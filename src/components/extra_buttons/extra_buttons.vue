@@ -4,8 +4,6 @@
     trigger="click"
     placement="top"
     class="extra-button-popover"
-    :offset="5"
-    :container="false"
   >
     <div slot="popover">
       <div class="dropdown-menu">

@@ -1,14 +1,15 @@
 <template>
-  <div
+  <Modal
     v-if="showing"
-    v-body-scroll-lock="showing"
-    class="modal-view media-modal-view"
-    @click.prevent="hide"
+    class="media-modal-view"
+    @backdropClicked="hide"
   >
     <img
       v-if="type === 'image'"
       class="modal-image"
       :src="currentMedia.url"
+      @touchstart.stop="mediaTouchStart"
+      @touchmove.stop="mediaTouchMove"
     >
     <VideoAttachment
       v-if="type === 'video'"
@@ -33,33 +34,25 @@
     >
       <i class="icon-right-open arrow-icon" />
     </button>
-  </div>
+  </Modal>
 </template>
 
 <script src="./media_modal.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
-
-.media-modal-view {
+.modal-view.media-modal-view {
   z-index: 1001;
 
-  body:not(.scroll-locked) & {
-    display: none;
-  }
+  .modal-view-button-arrow {
+    opacity: 0.75;
 
-  &:hover {
-    .modal-view-button-arrow {
-      opacity: 0.75;
-
-      &:focus,
-      &:hover {
-        outline: none;
-        box-shadow: none;
-      }
-      &:hover {
-        opacity: 1;
-      }
+    &:focus,
+    &:hover {
+      outline: none;
+      box-shadow: none;
+    }
+    &:hover {
+      opacity: 1;
     }
   }
 }
@@ -114,5 +107,4 @@
     }
   }
 }
-
 </style>

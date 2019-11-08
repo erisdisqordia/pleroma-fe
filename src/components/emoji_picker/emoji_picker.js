@@ -1,4 +1,5 @@
 import { set } from 'vue'
+import Checkbox from '../checkbox/checkbox.vue'
 
 const LOAD_EMOJI_BY = 50
 const LOAD_EMOJI_INTERVAL = 100
@@ -18,7 +19,6 @@ const EmojiPicker = {
   },
   data () {
     return {
-      labelKey: String(Math.random() * 100000),
       keyword: '',
       activeGroup: 'custom',
       showingStickers: false,
@@ -32,7 +32,8 @@ const EmojiPicker = {
     }
   },
   components: {
-    StickerPicker: () => import('../sticker_picker/sticker_picker.vue')
+    StickerPicker: () => import('../sticker_picker/sticker_picker.vue'),
+    Checkbox
   },
   methods: {
     onEmoji (emoji) {

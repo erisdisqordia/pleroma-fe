@@ -1,10 +1,9 @@
+import { mapGetters } from 'vuex'
+
 const FavoriteButton = {
   props: ['status', 'loggedIn'],
   data () {
     return {
-      hidePostStatsLocal: typeof this.$store.state.config.hidePostStats === 'undefined'
-        ? this.$store.state.instance.hidePostStats
-        : this.$store.state.config.hidePostStats,
       animated: false
     }
   },
@@ -28,7 +27,8 @@ const FavoriteButton = {
         'icon-star': this.status.favorited,
         'animate-spin': this.animated
       }
-    }
+    },
+    ...mapGetters(['mergedConfig'])
   }
 }
 

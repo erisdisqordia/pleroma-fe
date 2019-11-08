@@ -75,22 +75,10 @@
             </span>
           </div>
         </div>
-        <div
-          class="keep-open"
-        >
-          <input
-            :id="labelKey + 'keep-open'"
-            v-model="keepOpen"
-            type="checkbox"
-          >
-          <label
-            class="keep-open-label"
-            :for="labelKey + 'keep-open'"
-          >
-            <div class="keep-open-label-text">
-              {{ $t('emoji.keep_open') }}
-            </div>
-          </label>
+        <div class="keep-open">
+          <Checkbox v-model="keepOpen">
+            {{ $t('emoji.keep_open') }}
+          </Checkbox>
         </div>
         <div
           v-if="askForSanity"

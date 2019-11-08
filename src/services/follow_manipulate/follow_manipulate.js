@@ -14,7 +14,7 @@ const fetchUser = (attempt, user, store) => new Promise((resolve, reject) => {
 })
 
 export const requestFollow = (user, store) => new Promise((resolve, reject) => {
-  store.state.api.backendInteractor.followUser(user.id)
+  store.state.api.backendInteractor.followUser({ id: user.id })
     .then((updated) => {
       store.commit('updateUserRelationship', [updated])
 

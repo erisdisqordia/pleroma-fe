@@ -31,8 +31,8 @@ const backendInteractorService = credentials => {
     return apiService.fetchUserRelationship({ id, credentials })
   }
 
-  const followUser = (id) => {
-    return apiService.followUser({ credentials, id })
+  const followUser = ({ id, reblogs }) => {
+    return apiService.followUser({ credentials, id, reblogs })
   }
 
   const unfollowUser = (id) => {
@@ -131,6 +131,7 @@ const backendInteractorService = credentials => {
   const importFollows = (file) => apiService.importFollows({ file, credentials })
 
   const deleteAccount = ({ password }) => apiService.deleteAccount({ credentials, password })
+  const changeEmail = ({ email, password }) => apiService.changeEmail({ credentials, email, password })
   const changePassword = ({ password, newPassword, newPasswordConfirmation }) =>
     apiService.changePassword({ credentials, password, newPassword, newPasswordConfirmation })
 
@@ -195,6 +196,7 @@ const backendInteractorService = credentials => {
     importBlocks,
     importFollows,
     deleteAccount,
+    changeEmail,
     changePassword,
     fetchSettingsMFA,
     generateMfaBackupCodes,

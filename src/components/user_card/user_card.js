@@ -1,19 +1,20 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import RemoteFollow from '../remote_follow/remote_follow.vue'
 import ProgressButton from '../progress_button/progress_button.vue'
+import FollowButton from '../follow_button/follow_button.vue'
 import ModerationTools from '../moderation_tools/moderation_tools.vue'
+import AccountActions from '../account_actions/account_actions.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
-import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+import { mapGetters } from 'vuex'
 
 export default {
-  props: [ 'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar' ],
+  props: [
+    'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar'
+  ],
   data () {
     return {
       followRequestInProgress: false,
-      hideUserStatsLocal: typeof this.$store.state.config.hideUserStats === 'undefined'
-        ? this.$store.state.instance.hideUserStats
-        : this.$store.state.config.hideUserStats,
       betterShadow: this.$store.state.interface.browserSupport.cssFilter
     }
   },
@@ -29,9 +30,9 @@ export default {
       }]
     },
     style () {
-      const color = this.$store.state.config.customTheme.colors
-        ? this.$store.state.config.customTheme.colors.bg // v2
-        : this.$store.state.config.colors.bg // v1
+      const color = this.$store.getters.mergedConfig.customTheme.colors
+        ? this.$store.getters.mergedConfig.customTheme.colors.bg // v2
+        : this.$store.getters.mergedConfig.colors.bg // v1
 
       if (color) {
         const rgb = (typeof color === 'string') ? hex2rgb(color) : color
@@ -63,21 +64,22 @@ export default {
     },
     userHighlightType: {
       get () {
-        const data = this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.getters.mergedConfig.highlight[this.user.screen_name]
         return (data && data.type) || 'disabled'
       },
       set (type) {
-        const data = this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.getters.mergedConfig.highlight[this.user.screen_name]
         if (type !== 'disabled') {
           this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: (data && data.color) || '#FFFFFF', type })
         } else {
           this.$store.dispatch('setHighlight', { user: this.user.screen_name, color: undefined })
         }
-      }
+      },
+      ...mapGetters(['mergedConfig'])
     },
     userHighlightColor: {
       get () {
-        const data = this.$store.state.config.highlight[this.user.screen_name]
+        const data = this.$store.getters.mergedConfig.highlight[this.user.screen_name]
         return data && data.color
       },
       set (color) {
@@ -90,36 +92,18 @@ export default {
       const validRole = rights.admin || rights.moderator
       const roleTitle = rights.admin ? 'admin' : 'moderator'
       return validRole && roleTitle
-    }
+    },
+    ...mapGetters(['mergedConfig'])
   },
   components: {
     UserAvatar,
     RemoteFollow,
     ModerationTools,
-    ProgressButton
+    AccountActions,
+    ProgressButton,
+    FollowButton
   },
   methods: {
-    followUser () {
-      const store = this.$store
-      this.followRequestInProgress = true
-      requestFollow(this.user, store).then(() => {
-        this.followRequestInProgress = false
-      })
-    },
-    unfollowUser () {
-      const store = this.$store
-      this.followRequestInProgress = true
-      requestUnfollow(this.user, store).then(() => {
-        this.followRequestInProgress = false
-        store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
-      })
-    },
-    blockUser () {
-      this.$store.dispatch('blockUser', this.user.id)
-    },
-    unblockUser () {
-      this.$store.dispatch('unblockUser', this.user.id)
-    },
     muteUser () {
       this.$store.dispatch('muteUser', this.user.id)
     },
@@ -147,10 +131,10 @@ export default {
       }
     },
     userProfileLink (user) {
-      return generateProfileLink(user.id, user.screen_name, this.$store.state.instance.restrictedNicknames)
-    },
-    reportUser () {
-      this.$store.dispatch('openUserReportingModal', this.user.id)
+      return generateProfileLink(
+        user.id, user.screen_name,
+        this.$store.state.instance.restrictedNicknames
+      )
     },
     zoomAvatar () {
       const attachment = {
@@ -159,9 +143,6 @@ export default {
       }
       this.$store.dispatch('setMedia', [attachment])
       this.$store.dispatch('setCurrent', attachment)
-    },
-    mentionUser () {
-      this.$store.dispatch('openPostStatusModal', { replyTo: true, repliedUser: this.user })
     }
   }
 }

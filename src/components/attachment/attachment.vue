@@ -58,6 +58,7 @@
         :referrerpolicy="referrerpolicy"
         :mimetype="attachment.mimetype"
         :src="attachment.large_thumb_url || attachment.url"
+        :image-load-handler="onImageLoad"
       />
     </a>
 

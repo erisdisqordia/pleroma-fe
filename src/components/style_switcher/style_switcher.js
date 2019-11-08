@@ -10,6 +10,7 @@ import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
 import TabSwitcher from '../tab_switcher/tab_switcher.js'
 import Preview from './preview.vue'
 import ExportImport from '../export_import/export_import.vue'
+import Checkbox from '../checkbox/checkbox.vue'
 
 // List of color values used in v1
 const v1OnlyNames = [
@@ -27,7 +28,7 @@ export default {
   data () {
     return {
       availableStyles: [],
-      selected: this.$store.state.config.theme,
+      selected: this.$store.getters.mergedConfig.theme,
 
       previewShadows: {},
       previewColors: {},
@@ -112,7 +113,7 @@ export default {
     })
   },
   mounted () {
-    this.normalizeLocalState(this.$store.state.config.customTheme)
+    this.normalizeLocalState(this.$store.getters.mergedConfig.customTheme)
     if (typeof this.shadowSelected === 'undefined') {
       this.shadowSelected = this.shadowsAvailable[0]
     }
@@ -341,7 +342,8 @@ export default {
     FontControl,
     TabSwitcher,
     Preview,
-    ExportImport
+    ExportImport,
+    Checkbox
   },
   methods: {
     setCustomTheme () {
@@ -368,9 +370,9 @@ export default {
       return version >= 1 || version <= 2
     },
     clearAll () {
-      const state = this.$store.state.config.customTheme
+      const state = this.$store.getters.mergedConfig.customTheme
       const version = state.colors ? 2 : 'l1'
-      this.normalizeLocalState(this.$store.state.config.customTheme, version)
+      this.normalizeLocalState(this.$store.getters.mergedConfig.customTheme, version)
     },
 
     // Clears all the extra stuff when loading V1 theme

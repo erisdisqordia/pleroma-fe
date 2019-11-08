@@ -45,8 +45,8 @@
     "error": "Se ha producido un error al importar el archivo."
   },
   "login": {
-    "login": "Identificación",
-    "description": "Identificación con OAuth",
+    "login": "Identificarse",
+    "description": "Identificarse con OAuth",
     "logout": "Cerrar sesión",
     "password": "Contraseña",
     "placeholder": "p.ej. lain",
@@ -68,6 +68,7 @@
   },
   "nav": {
     "about": "Acerca de",
+    "administration": "Administración",
     "back": "Volver",
     "chat": "Chat Local",
     "friend_requests": "Solicitudes de seguimiento",
@@ -105,6 +106,15 @@
     "expires_in": "La encuensta termina en {0}",
     "expired": "La encuesta terminó hace {0}",
     "not_enough_options": "Muy pocas opciones únicas en la encuesta"
+  },
+  "emoji": {
+    "stickers": "Pegatinas",
+    "emoji": "Emoji",
+    "keep_open": "Mantener el selector abierto",
+    "search_emoji": "Buscar un emoji",
+    "add_emoji": "Insertar un emoji",
+    "custom": "Emojis personalizados",
+    "unicode": "Emojis unicode"
   },
   "stickers": {
     "add_sticker": "Añadir Pegatina"
@@ -222,7 +232,9 @@
     "data_import_export_tab": "Importar / Exportar Datos",
     "default_vis": "Alcance de visibilidad por defecto",
     "delete_account": "Eliminar la cuenta",
+    "discoverable": "Permitir la aparición de esta cuenta en los resultados de búsqueda y otros servicios",
     "delete_account_description": "Eliminar para siempre la cuenta y todos los mensajes.",
+    "pad_emoji": "Rellenar con espacios al agregar emojis desde el selector",
     "delete_account_error": "Hubo un error al eliminar tu cuenta. Si el fallo persiste, ponte en contacto con el administrador de tu instancia.",
     "delete_account_instructions": "Escribe tu contraseña para confirmar la eliminación de tu cuenta.",
     "avatar_size_instruction": "El tamaño mínimo recomendado para el avatar es de 150X150 píxeles.",
@@ -277,6 +289,8 @@
     "no_mutes": "No hay usuarios sinlenciados",
     "hide_follows_description": "No mostrar a quién sigo",
     "hide_followers_description": "No mostrar quién me sigue",
+    "hide_follows_count_description": "No mostrar el número de cuentas que sigo",
+    "hide_followers_count_description": "No mostrar el número de cuentas que me siguen",
     "show_admin_badge": "Mostrar la insignia de Administrador en mi perfil",
     "show_moderator_badge": "Mostrar la insignia de Moderador en mi perfil",
     "nsfw_clickthrough": "Activar el clic para ocultar los adjuntos NSFW",
@@ -529,6 +543,7 @@
     "follows_you": "¡Te sigue!",
     "its_you": "¡Eres tú!",
     "media": "Media",
+    "mention": "Mencionar",
     "mute": "Silenciar",
     "muted": "Silenciado",
     "per_day": "por día",

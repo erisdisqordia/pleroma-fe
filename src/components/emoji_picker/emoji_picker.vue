@@ -47,7 +47,7 @@
           ref="emoji-groups"
           class="emoji-groups"
           :class="groupsScrolledClass"
-          @scroll="scrolledGroup"
+          @scroll="onScroll"
         >
           <div
             v-for="group in emojisView"
@@ -73,6 +73,7 @@
                 :src="emoji.imageUrl"
               >
             </span>
+            <span :ref="'group-end-' + group.id" />
           </div>
         </div>
         <div class="keep-open">

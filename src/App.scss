@@ -661,6 +661,18 @@ nav {
       color: var(--alertErrorPanelText, $fallback--text);
     }
   }
+
+  &.warning {
+    background-color: $fallback--alertWarning;
+    background-color: var(--alertWarning, $fallback--alertWarning);
+    color: $fallback--text;
+    color: var(--alertWarningText, $fallback--text);
+
+    .panel-heading & {
+      color: $fallback--text;
+      color: var(--alertWarningPanelText, $fallback--text);
+    }
+  }
 }
 
 .faint {

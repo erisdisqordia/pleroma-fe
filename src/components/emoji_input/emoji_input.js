@@ -165,6 +165,7 @@ const EmojiInput = {
   methods: {
     triggerShowPicker () {
       this.showPicker = true
+      this.$refs.picker.startEmojiLoad()
       this.$nextTick(() => {
         this.scrollIntoView()
       })
@@ -181,6 +182,7 @@ const EmojiInput = {
       this.showPicker = !this.showPicker
       if (this.showPicker) {
         this.scrollIntoView()
+        this.$refs.picker.startEmojiLoad()
       }
     },
     replace (replacement) {
@@ -306,6 +308,16 @@ const EmojiInput = {
       } else {
         scrollerRef.scrollTop = targetScroll
       }
+
+      this.$nextTick(() => {
+        const { offsetHeight } = this.input.elm
+        const { picker } = this.$refs
+        const pickerBottom = picker.$el.getBoundingClientRect().bottom
+        if (pickerBottom > window.innerHeight) {
+          picker.$el.style.top = 'auto'
+          picker.$el.style.bottom = offsetHeight + 'px'
+        }
+      })
     },
     onTransition (e) {
       this.resize()
@@ -419,11 +431,14 @@ const EmojiInput = {
       this.caret = selectionStart
     },
     resize () {
-      const { panel } = this.$refs
+      const { panel, picker } = this.$refs
       if (!panel) return
       const { offsetHeight, offsetTop } = this.input.elm
-      this.$refs.panel.style.top = (offsetTop + offsetHeight) + 'px'
-      this.$refs.picker.$el.style.top = (offsetTop + offsetHeight) + 'px'
+      const offsetBottom = offsetTop + offsetHeight
+
+      panel.style.top = offsetBottom + 'px'
+      picker.$el.style.top = offsetBottom + 'px'
+      picker.$el.style.bottom = 'auto'
     }
   }
 }

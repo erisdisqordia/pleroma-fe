@@ -114,7 +114,9 @@
     "search_emoji": "Search for an emoji",
     "add_emoji": "Insert emoji",
     "custom": "Custom emoji",
-    "unicode": "Unicode emoji"
+    "unicode": "Unicode emoji",
+    "load_all_hint": "Loaded first {saneAmount} emoji, loading all emoji may cause performance issues.",
+    "load_all": "Loading all {emojiAmount} emoji"
   },
   "interactions": {
     "favs_repeats": "Repeats and Favorites",
@@ -391,6 +393,7 @@
         "_tab_label": "Advanced",
         "alert": "Alert background",
         "alert_error": "Error",
+        "alert_warning": "Warning",
         "badge": "Badge background",
         "badge_notification": "Notification",
         "panel_header": "Panel header",

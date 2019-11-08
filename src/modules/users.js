@@ -453,6 +453,8 @@ const users = {
               commit('setCurrentUser', user)
               commit('addNewUsers', [user])
 
+              store.dispatch('fetchEmoji')
+
               getNotificationPermission()
                 .then(permission => commit('setNotificationPermission', permission))
 

@@ -172,6 +172,11 @@
       "password_confirmation_match": "should be the same as password"
     }
   },
+  "remote_user_resolver": {
+    "remote_user_resolver": "Remote user resolver",
+    "searching_for": "Searching for",
+    "error": "Not found."
+  },
   "selectable_list": {
     "select_all": "Select all"
   },

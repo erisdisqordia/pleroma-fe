@@ -8,6 +8,8 @@
       v-if="type === 'image'"
       class="modal-image"
       :src="currentMedia.url"
+      @touchstart.stop="mediaTouchStart"
+      @touchmove.stop="mediaTouchMove"
     >
     <VideoAttachment
       v-if="type === 'video'"
@@ -41,18 +43,16 @@
 .modal-view.media-modal-view {
   z-index: 1001;
 
-  &:hover {
-    .modal-view-button-arrow {
-      opacity: 0.75;
+  .modal-view-button-arrow {
+    opacity: 0.75;
 
-      &:focus,
-      &:hover {
-        outline: none;
-        box-shadow: none;
-      }
-      &:hover {
-        opacity: 1;
-      }
+    &:focus,
+    &:hover {
+      outline: none;
+      box-shadow: none;
+    }
+    &:hover {
+      opacity: 1;
     }
   }
 }

@@ -8,6 +8,7 @@ const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications
 const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
+const CHANGE_EMAIL_URL = '/api/pleroma/change_email'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
 const TAG_USER_URL = '/api/pleroma/admin/users/tag'
 const PERMISSION_GROUP_URL = (screenName, right) => `/api/pleroma/admin/users/${screenName}/permission_group/${right}`
@@ -691,6 +692,20 @@ const deleteAccount = ({ credentials, password }) => {
     .then((response) => response.json())
 }
 
+const changeEmail = ({ credentials, email, password }) => {
+  const form = new FormData()
+
+  form.append('email', email)
+  form.append('password', password)
+
+  return fetch(CHANGE_EMAIL_URL, {
+    body: form,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.json())
+}
+
 const changePassword = ({ credentials, password, newPassword, newPasswordConfirmation }) => {
   const form = new FormData()
 
@@ -966,6 +981,7 @@ const apiService = {
   importBlocks,
   importFollows,
   deleteAccount,
+  changeEmail,
   changePassword,
   settingsMFA,
   mfaDisableOTP,

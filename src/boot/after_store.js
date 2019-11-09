@@ -227,6 +227,9 @@ const getNodeInfo = async ({ store }) => {
       store.dispatch('setInstanceOption', { name: 'frontendVersion', value: frontendVersion })
       store.dispatch('setInstanceOption', { name: 'tagPolicyAvailable', value: metadata.federation.mrf_policies.includes('TagPolicy') })
 
+      const federation = metadata.federation
+      store.dispatch('setInstanceOption', { name: 'federationPolicy', value: federation })
+
       const accounts = metadata.staffAccounts
       await resolveStaffAccounts({ store, accounts })
     } else {

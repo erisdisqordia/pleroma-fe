@@ -185,14 +185,9 @@ const getAppSecret = async ({ store }) => {
 }
 
 const resolveStaffAccounts = async ({ store, accounts }) => {
-  let nicknames = accounts.map(uri => uri.split('/').pop())
   const backendInteractor = store.state.api.backendInteractor
-
-  nicknames = nicknames.map(id => {
-    console.log('resolving staff account:', id)
-    return backendInteractor.fetchUser({ id })
-  })
-
+  let nicknames = accounts.map(uri => uri.split('/').pop())
+    .map(id => backendInteractor.fetchUser({ id }))
   nicknames = await Promise.all(nicknames)
 
   store.dispatch('setInstanceOption', { name: 'staffAccounts', value: nicknames })

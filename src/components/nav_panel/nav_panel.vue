@@ -38,6 +38,11 @@
             {{ $t("nav.twkn") }}
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'about' }">
+            {{ $t("nav.about") }}
+          </router-link>
+        </li>
       </ul>
     </div>
   </div>

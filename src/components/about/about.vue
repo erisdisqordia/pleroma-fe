@@ -1,6 +1,7 @@
 <template>
   <div class="sidebar">
     <instance-specific-panel v-if="showInstanceSpecificPanel" />
+    <staff-panel />
     <terms-of-service-panel />
     <features-panel v-if="showFeaturesPanel" />
   </div>

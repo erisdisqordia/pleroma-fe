@@ -2,32 +2,31 @@ const MRFTransparencyPanel = {
   components: {
   },
   computed: {
-    federationPolicy() {
+    federationPolicy () {
       return this.$store.state.instance.federationPolicy
     },
-    mrfPolicies() {
+    mrfPolicies () {
       return this.$store.state.instance.federationPolicy.mrf_policies
     },
-    acceptInstances() {
+    acceptInstances () {
       return this.$store.state.instance.federationPolicy.mrf_simple.accept
     },
-    rejectInstances() {
+    rejectInstances () {
       return this.$store.state.instance.federationPolicy.mrf_simple.reject
     },
-    quarantineInstances() {
+    quarantineInstances () {
       return this.$store.state.instance.federationPolicy.quarantined_instances
     },
-    ftlRemovalInstances() {
+    ftlRemovalInstances () {
       return this.$store.state.instance.federationPolicy.mrf_simple.federated_timeline_removal
     },
-    mediaNsfwInstances() {
+    mediaNsfwInstances () {
       return this.$store.state.instance.federationPolicy.mrf_simple.media_nsfw
     },
-    mediaRemovalInstances() {
+    mediaRemovalInstances () {
       return this.$store.state.instance.federationPolicy.mrf_simple.media_removal
     }
   }
 }
 
 export default MRFTransparencyPanel
-

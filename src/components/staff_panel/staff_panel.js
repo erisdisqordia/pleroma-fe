@@ -5,11 +5,10 @@ const StaffPanel = {
     BasicUserCard
   },
   computed: {
-    staffAccounts() {
+    staffAccounts () {
       return this.$store.state.instance.staffAccounts
     }
   }
 }
 
 export default StaffPanel
-

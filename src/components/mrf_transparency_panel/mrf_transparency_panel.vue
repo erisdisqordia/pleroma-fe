@@ -1,5 +1,8 @@
 <template>
-  <div class="mrf-transparency-panel" v-if="federationPolicy">
+  <div
+    v-if="federationPolicy"
+    class="mrf-transparency-panel"
+  >
     <div class="panel panel-default base01-background">
       <div class="panel-heading timeline-heading base02-background">
         <div class="title">
@@ -12,7 +15,11 @@
           <p>{{ $t("about.mrf_policies_desc") }}</p>
 
           <ul>
-            <li v-for="policy in mrfPolicies" v-bind:key="policy" v-text="policy" />
+            <li
+              v-for="policy in mrfPolicies"
+              :key="policy"
+              v-text="policy"
+            />
           </ul>
 
           <h2>{{ $t("about.mrf_policy_simple") }}</h2>
@@ -23,7 +30,11 @@
             <p>{{ $t("about.mrf_policy_simple_accept_desc") }}</p>
 
             <ul>
-              <li v-for="instance in acceptInstances" v-bind:key="instance" v-text="instance" />
+              <li
+                v-for="instance in acceptInstances"
+                :key="instance"
+                v-text="instance"
+              />
             </ul>
           </div>
 
@@ -33,7 +44,11 @@
             <p>{{ $t("about.mrf_policy_simple_reject_desc") }}</p>
 
             <ul>
-              <li v-for="instance in rejectInstances" v-bind:key="instance" v-text="instance" />
+              <li
+                v-for="instance in rejectInstances"
+                :key="instance"
+                v-text="instance"
+              />
             </ul>
           </div>
 
@@ -43,7 +58,11 @@
             <p>{{ $t("about.mrf_policy_simple_quarantine_desc") }}</p>
 
             <ul>
-              <li v-for="instance in quarantineInstances" v-bind:key="instance" v-text="instance" />
+              <li
+                v-for="instance in quarantineInstances"
+                :key="instance"
+                v-text="instance"
+              />
             </ul>
           </div>
 
@@ -53,7 +72,11 @@
             <p>{{ $t("about.mrf_policy_simple_ftl_removal_desc") }}</p>
 
             <ul>
-              <li v-for="instance in ftlRemovalInstances" v-bind:key="instance" v-text="instance" />
+              <li
+                v-for="instance in ftlRemovalInstances"
+                :key="instance"
+                v-text="instance"
+              />
             </ul>
           </div>
 
@@ -63,7 +86,11 @@
             <p>{{ $t("about.mrf_policy_simple_media_nsfw_desc") }}</p>
 
             <ul>
-              <li v-for="instance in mediaNsfwInstances" v-bind:key="instance" v-text="instance" />
+              <li
+                v-for="instance in mediaNsfwInstances"
+                :key="instance"
+                v-text="instance"
+              />
             </ul>
           </div>
 
@@ -73,7 +100,11 @@
             <p>{{ $t("about.mrf_policy_simple_media_removal_desc") }}</p>
 
             <ul>
-              <li v-for="instance in mediaRemovalInstances" v-bind:key="instance" v-text="instance" />
+              <li
+                v-for="instance in mediaRemovalInstances"
+                :key="instance"
+                v-text="instance"
+              />
             </ul>
           </div>
         </div>

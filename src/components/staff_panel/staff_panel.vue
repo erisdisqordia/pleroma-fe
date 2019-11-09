@@ -9,8 +9,9 @@
       <div class="panel-body">
         <basic-user-card
           v-for="user in staffAccounts"
+          :key="user.screen_name"
           :user="user"
-          v-bind:key="user.screen_name" />
+        />
       </div>
     </div>
   </div>

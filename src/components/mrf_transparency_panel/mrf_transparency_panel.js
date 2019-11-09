@@ -1,6 +1,4 @@
 const MRFTransparencyPanel = {
-  components: {
-  },
   computed: {
     federationPolicy () {
       return this.$store.state.instance.federationPolicy

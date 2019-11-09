@@ -184,6 +184,15 @@ const getAppSecret = async ({ store }) => {
     })
 }
 
+const resolveStaffAccounts = async ({ store, accounts }) => {
+  const backendInteractor = store.state.api.backendInteractor
+  let nicknames = accounts.map(uri => uri.split('/').pop())
+    .map(id => backendInteractor.fetchUser({ id }))
+  nicknames = await Promise.all(nicknames)
+
+  store.dispatch('setInstanceOption', { name: 'staffAccounts', value: nicknames })
+}
+
 const getNodeInfo = async ({ store }) => {
   try {
     const res = await window.fetch('/nodeinfo/2.0.json')
@@ -212,6 +221,12 @@ const getNodeInfo = async ({ store }) => {
       const frontendVersion = window.___pleromafe_commit_hash
       store.dispatch('setInstanceOption', { name: 'frontendVersion', value: frontendVersion })
       store.dispatch('setInstanceOption', { name: 'tagPolicyAvailable', value: metadata.federation.mrf_policies.includes('TagPolicy') })
+
+      const federation = metadata.federation
+      store.dispatch('setInstanceOption', { name: 'federationPolicy', value: federation })
+
+      const accounts = metadata.staffAccounts
+      await resolveStaffAccounts({ store, accounts })
     } else {
       throw (res)
     }

@@ -5,6 +5,7 @@ const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
 export const defaultState = {
   colors: {},
+  hideISP: false,
   // bad name: actually hides posts of muted USERS
   hideMutedPosts: undefined, // instance default
   collapseMessageWithSubject: undefined, // instance default

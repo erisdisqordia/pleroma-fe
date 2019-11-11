@@ -6,16 +6,16 @@
     @drop="fileDrop"
   >
     <label
-      class="btn btn-default"
+      class="label"
       :title="$t('tool_tip.media_upload')"
     >
       <i
         v-if="uploading"
-        class="icon-spin4 animate-spin"
+        class="progress-icon icon-spin4 animate-spin"
       />
       <i
         v-if="!uploading"
-        class="icon-upload"
+        class="new-icon icon-upload"
       />
       <input
         v-if="uploadReady"
@@ -30,15 +30,24 @@
 
 <script src="./media_upload.js" ></script>
 
-<style>
+<style lang="scss">
 .media-upload {
-  .icon-upload {
+  .label {
+    display: inline-block;
+  }
+
+  .new-icon {
     cursor: pointer;
   }
 
-  label {
-    display: block;
-    width: 100%;
+  .progress-icon {
+    display: inline-block;
+    line-height: 0;
+    &::before {
+      /* Overriding fontello to achieve the perfect speeeen */
+      margin: 0;
+      line-height: 0;
+    }
   }
 }
-</style>
+ </style>

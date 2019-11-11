@@ -34,6 +34,12 @@ const SideDrawer = {
     },
     followRequestCount () {
       return this.$store.state.api.followRequests.length
+    },
+    privateMode () {
+      return this.$store.state.instance.private
+    },
+    federating () {
+      return this.$store.state.instance.federationPolicy.federating || true
     }
   },
   methods: {

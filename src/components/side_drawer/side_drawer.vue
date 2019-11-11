@@ -79,12 +79,12 @@
             </span>
           </router-link>
         </li>
-        <li @click="toggleDrawer">
+        <li @click="toggleDrawer" v-if="currentUser || !privateMode">
           <router-link to="/main/public">
             {{ $t("nav.public_tl") }}
           </router-link>
         </li>
-        <li @click="toggleDrawer">
+        <li @click="toggleDrawer" v-if="(currentUser || !privateMode) && federating">
           <router-link to="/main/all">
             {{ $t("nav.twkn") }}
           </router-link>
@@ -99,7 +99,7 @@
         </li>
       </ul>
       <ul>
-        <li @click="toggleDrawer">
+        <li @click="toggleDrawer" v-if="currentUser || !privateMode">
           <router-link :to="{ name: 'search' }">
             {{ $t("nav.search") }}
           </router-link>

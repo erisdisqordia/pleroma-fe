@@ -97,7 +97,8 @@ export default {
         this.$store.state.instance.instanceSpecificPanelContent
     },
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
-    isMobileLayout () { return this.$store.state.interface.mobileLayout }
+    isMobileLayout () { return this.$store.state.interface.mobileLayout },
+    privateMode () { return this.$store.state.instance.private }
   },
   methods: {
     scrollToTop () {

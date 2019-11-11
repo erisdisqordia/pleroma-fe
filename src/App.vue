@@ -43,6 +43,7 @@
             class="nav-icon mobile-hidden"
             @toggled="onSearchBarToggled"
             @click.stop.native
+            v-if="currentUser || !privateMode"
           />
           <router-link
             class="mobile-hidden"

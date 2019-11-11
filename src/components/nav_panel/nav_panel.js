@@ -13,7 +13,9 @@ const NavPanel = {
   computed: mapState({
     currentUser: state => state.users.currentUser,
     chat: state => state.chat.channel,
-    followRequestCount: state => state.api.followRequests.length
+    followRequestCount: state => state.api.followRequests.length,
+    privateMode: state => state.instance.private,
+    federating: state => state.instance.federationPolicy.federating || true
   })
 }
 

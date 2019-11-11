@@ -28,12 +28,12 @@
             </span>
           </router-link>
         </li>
-        <li>
+        <li v-if="currentUser || !privateMode">
           <router-link :to="{ name: 'public-timeline' }">
             {{ $t("nav.public_tl") }}
           </router-link>
         </li>
-        <li>
+        <li v-if="(currentUser || !privateMode) && federating">
           <router-link :to="{ name: 'public-external-timeline' }">
             {{ $t("nav.twkn") }}
           </router-link>

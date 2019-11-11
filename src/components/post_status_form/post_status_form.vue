@@ -339,11 +339,6 @@
     font-size: 26px;
     flex: 1;
 
-    i {
-      display: block;
-      width: 100%;
-    }
-
     &.selected, &:hover {
       // needs to be specific to override icon default color
       i, label {

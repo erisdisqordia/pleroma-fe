@@ -208,14 +208,14 @@
           @click.prevent="setProfileView('friends')"
         >
           <h5>{{ $t('user_card.followees') }}</h5>
-          <span>{{ hideFollowsCount ? 'N/A' : user.friends_count }}</span>
+          <span>{{ hideFollowsCount ? $t('user_card.na') : user.friends_count }}</span>
         </div>
         <div
           class="user-count"
           @click.prevent="setProfileView('followers')"
         >
           <h5>{{ $t('user_card.followers') }}</h5>
-          <span>{{ hideFollowersCount ? 'N/A' : user.followers_count }}</span>
+          <span>{{ hideFollowersCount ? $t('user_card.na') : user.followers_count }}</span>
         </div>
       </div>
       <!-- eslint-disable vue/no-v-html -->

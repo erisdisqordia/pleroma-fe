@@ -93,6 +93,12 @@ export default {
       const roleTitle = rights.admin ? 'admin' : 'moderator'
       return validRole && roleTitle
     },
+    hideFollowsCount () {
+      return this.isOtherUser && this.user.hide_follows_count
+    },
+    hideFollowersCount () {
+      return this.isOtherUser && this.user.hide_followers_count
+    },
     ...mapGetters(['mergedConfig'])
   },
   components: {

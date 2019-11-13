@@ -44,7 +44,7 @@ const Status = {
       showingLongSubject: false,
       error: null,
       // not as computed because it sets the initial state which will be changed later
-      expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject,
+      expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject
     }
   },
   computed: {
@@ -266,10 +266,10 @@ const Status = {
             return processHtml(html, (string) => {
               if (string.includes('&gt;') &&
                   string
-                  .replace(/<[^>]+?>/gi, '') // remove all tags
-                  .replace(/@\w+/gi, '') // remove mentions (even failed ones)
-                  .trim()
-                  .startsWith('&gt;')) {
+                    .replace(/<[^>]+?>/gi, '') // remove all tags
+                    .replace(/@\w+/gi, '') // remove mentions (even failed ones)
+                    .trim()
+                    .startsWith('&gt;')) {
                 return `<span class='greentext'>${string}</span>`
               } else {
                 return string

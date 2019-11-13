@@ -9,17 +9,15 @@
 export const processHtml = (html, processor) => {
   const handledTags = new Set(['p', 'br', 'div'])
   const openCloseTags = new Set(['p', 'div'])
-  const tagRegex = /(?:<\/(\w+)>|<(\w+)\s?[^/]*?\/?>)/gi
 
   let buffer = '' // Current output buffer
   const level = [] // How deep we are in tags and which tags were there
   let textBuffer = '' // Current line content
   let tagBuffer = null // Current tag buffer, if null = we are not currently reading a tag
 
-  // Extracts tagname from tag, i.e. <span a="b"> => span
+  // Extracts tag name from tag, i.e. <span a="b"> => span
   const getTagName = (tag) => {
-    // eslint-disable-next-line no-unused-vars
-    const result = tagRegex.exec(tag)
+    const result = /(?:<\/(\w+)>|<(\w+)\s?[^/]*?\/?>)/gi.exec(tag)
     return result && (result[1] || result[2])
   }
 
@@ -49,28 +47,29 @@ export const processHtml = (html, processor) => {
 
   for (let i = 0; i < html.length; i++) {
     const char = html[i]
-    if (char === '<' && tagBuffer !== null) {
+    if (char === '<' && tagBuffer === null) {
       tagBuffer = char
     } else if (char !== '>' && tagBuffer !== null) {
       tagBuffer += char
     } else if (char === '>' && tagBuffer !== null) {
       tagBuffer += char
-      const tagName = getTagName(tagBuffer)
+      const tagFull = tagBuffer
+      tagBuffer = null
+      const tagName = getTagName(tagFull)
       if (handledTags.has(tagName)) {
         if (tagName === 'br') {
-          handleBr(tagBuffer)
+          handleBr(tagFull)
         }
-        if (openCloseTags.has(tagBuffer)) {
-          if (tagBuffer[1] === '/') {
-            handleClose(tagBuffer)
+        if (openCloseTags.has(tagFull)) {
+          if (tagFull[1] === '/') {
+            handleClose(tagFull)
           } else {
-            handleOpen(tagBuffer)
+            handleOpen(tagFull)
           }
         }
       } else {
-        textBuffer += tagBuffer
+        textBuffer += tagFull
       }
-      tagBuffer = null
     } else if (char === '\n') {
       handleBr(char)
     } else {

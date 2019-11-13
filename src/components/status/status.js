@@ -43,7 +43,7 @@ const Status = {
       showingTall: this.inConversation && this.focused,
       showingLongSubject: false,
       error: null,
-      // Initial state
+      // not as computed because it sets the initial state which will be changed later
       expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject,
     }
   },

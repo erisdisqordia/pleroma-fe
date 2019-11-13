@@ -606,7 +606,7 @@ $status-margin: 0.75em;
       height: 100%;
       mask: linear-gradient(to top, white, transparent) bottom/100% 70px no-repeat,
             linear-gradient(to top, white, white);
-      // Autoprefixed seem to ignore this one, and also syntax is different
+      /* Autoprefixed seem to ignore this one, and also syntax is different */
       -webkit-mask-composite: xor;
       mask-composite: exclude;
     }
@@ -752,7 +752,8 @@ $status-margin: 0.75em;
 }
 
 .greentext {
-  color: green;
+  color: $fallback--cGreen;
+  color: var(--cGreen, $fallback--cGreen);
 }
 
 .status-conversation {

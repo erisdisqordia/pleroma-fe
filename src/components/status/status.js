@@ -259,26 +259,30 @@ const Status = {
     postBodyHtml () {
       const html = this.status.statusnet_html
 
-      try {
-        if (html.includes('&gt;')) {
-          // This checks if post has '>' at the beginning, excluding mentions so that @mention >impying works
-          return processHtml(html, (string) => {
-            if (string.includes('&gt;') &&
-                string
-                .replace(/<[^>]+?>/gi, '') // remove all tags
-                .replace(/@\w+/gi, '') // remove mentions (even failed ones)
-                .trim()
-                .startsWith('&gt;')) {
-              return `<span class='greentext'>${string}</span>`
-            } else {
-              return string
-            }
-          })
-        } else {
+      if (this.mergedConfig.greentext) {
+        try {
+          if (html.includes('&gt;')) {
+            // This checks if post has '>' at the beginning, excluding mentions so that @mention >impying works
+            return processHtml(html, (string) => {
+              if (string.includes('&gt;') &&
+                  string
+                  .replace(/<[^>]+?>/gi, '') // remove all tags
+                  .replace(/@\w+/gi, '') // remove mentions (even failed ones)
+                  .trim()
+                  .startsWith('&gt;')) {
+                return `<span class='greentext'>${string}</span>`
+              } else {
+                return string
+              }
+            })
+          } else {
+            return html
+          }
+        } catch (e) {
+          console.err('Failed to process status html', e)
           return html
         }
-      } catch (e) {
-        console.err('Failed to process status html', e)
+      } else {
         return html
       }
     },

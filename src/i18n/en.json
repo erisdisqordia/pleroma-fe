@@ -370,6 +370,8 @@
       "false": "no",
       "true": "yes"
     },
+    "fun": "Fun",
+    "greentext": "Meme arrows",
     "notifications": "Notifications",
     "notification_setting": "Receive notifications from:",
     "notification_setting_follows": "Users you follow",

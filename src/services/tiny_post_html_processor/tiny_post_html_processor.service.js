@@ -2,6 +2,8 @@
  * This is a tiny purpose-built HTML parser/processor. This basically detects any type of visual newline and
  * allows it to be processed, useful for greentexting, mostly
  *
+ * known issue: doesn't handle CDATA so nested CDATA might not work well
+ *
  * @param {Object} input - input data
  * @param {(string) => string} processor - function that will be called on every line
  * @return {string} processed html
@@ -22,11 +24,15 @@ export const processHtml = (html, processor) => {
   }
 
   const flush = () => { // Processes current line buffer, adds it to output buffer and clears line buffer
-    buffer += processor(textBuffer)
+    if (textBuffer.trim().length > 0) {
+      buffer += processor(textBuffer)
+    } else {
+      buffer += textBuffer
+    }
     textBuffer = ''
   }
 
-  const handleBr = (tag) => { // handles single newlines/linebreaks
+  const handleBr = (tag) => { // handles single newlines/linebreaks/selfclosing
     flush()
     buffer += tag
   }
@@ -59,10 +65,12 @@ export const processHtml = (html, processor) => {
       if (handledTags.has(tagName)) {
         if (tagName === 'br') {
           handleBr(tagFull)
-        }
-        if (openCloseTags.has(tagFull)) {
+        } else if (openCloseTags.has(tagName)) {
           if (tagFull[1] === '/') {
             handleClose(tagFull)
+          } else if (tagFull[tagFull.length - 2] === '/') {
+            // self-closing
+            handleBr(tagFull)
           } else {
             handleOpen(tagFull)
           }
@@ -75,6 +83,9 @@ export const processHtml = (html, processor) => {
     } else {
       textBuffer += char
     }
+  }
+  if (tagBuffer) {
+    textBuffer += tagBuffer
   }
 
   flush()

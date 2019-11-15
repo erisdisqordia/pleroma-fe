@@ -1,5 +1,6 @@
 import Attachment from '../attachment/attachment.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
+import ReactButton from '../react_button/react_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
 import Poll from '../poll/poll.vue'
 import ExtraButtons from '../extra_buttons/extra_buttons.vue'
@@ -289,6 +290,7 @@ const Status = {
   components: {
     Attachment,
     FavoriteButton,
+    ReactButton,
     RetweetButton,
     ExtraButtons,
     PostStatusForm,

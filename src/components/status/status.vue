@@ -356,12 +356,12 @@
 
           <div class="emoji-reactions">
             <button
-              class="emoji-reaction btn btn-default"
               v-for="(users, emoji) in emojiReactions"
               :key="emoji"
+              class="emoji-reaction btn btn-default"
             >
-              <span>{{users.length}}</span>
-              <span>{{emoji}}</span>
+              <span>{{ users.length }}</span>
+              <span>{{ emoji }}</span>
             </button>
           </div>
 
@@ -390,6 +390,10 @@
               :status="status"
             />
             <favorite-button
+              :logged-in="loggedIn"
+              :status="status"
+            />
+            <ReactButton
               :logged-in="loggedIn"
               :status="status"
             />

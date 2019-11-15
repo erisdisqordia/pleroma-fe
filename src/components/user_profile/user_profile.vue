@@ -11,6 +11,44 @@
         :allow-zooming-avatar="true"
         rounded="top"
       />
+      <div
+        v-if="user.fields_html && user.fields_html.length > 0"
+        class="user-profile-fields"
+      >
+        <dl
+          v-for="(field, index) in user.fields_html"
+          :key="index"
+        >
+          <!-- eslint-disable vue/no-v-html -->
+          <dt
+            class="user-profile-field-name"
+            @click.prevent="linkClicked"
+            v-html="field.name"
+          />
+          <dd
+            class="user-profile-field-value"
+            @click.prevent="linkClicked"
+            v-html="field.value"
+          />
+          <!-- eslint-enable vue/no-v-html -->
+        </dl>
+      </div>
+      <div
+        v-else-if="user.fields && user.fields.length > 0"
+        class="user-card-fields"
+      >
+        <dl
+          v-for="(field, index) in user.fields"
+          :key="index"
+        >
+          <dt class="user-card-field-name">
+            {{ field.name }}
+          </dt>
+          <dd class="user-card-field-value">
+            {{ field.value }}
+          </dd>
+        </dl>
+      </div>
       <tab-switcher
         :active-tab="tab"
         :render-only-focused="true"
@@ -112,6 +150,18 @@
 .user-profile {
   flex: 2;
   flex-basis: 500px;
+
+  .user-profile-fields {
+    dl {
+      margin: 1em 1.5em;
+
+      dt, dd {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+  }
 
   .userlist-placeholder {
     display: flex;

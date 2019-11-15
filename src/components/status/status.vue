@@ -354,6 +354,17 @@
             </div>
           </transition>
 
+          <div class="emoji-reactions">
+            <button
+              class="emoji-reaction btn btn-default"
+              v-for="(users, emoji) in emojiReactions"
+              :key="emoji"
+            >
+              <span>{{users.length}}</span>
+              <span>{{emoji}}</span>
+            </button>
+          </div>
+
           <div
             v-if="!noHeading && !isPreview"
             class="status-actions media-body"
@@ -768,6 +779,23 @@ $status-margin: 0.75em;
   > * {
     max-width: 4em;
     flex: 1;
+  }
+}
+
+.emoji-reactions {
+  display: flex;
+  margin-top: 0.75em;
+}
+
+.emoji-reaction {
+  padding: 0 0.5em;
+  margin-right: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :first-child {
+    margin-right: 0.25em;
   }
 }
 

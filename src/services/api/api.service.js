@@ -71,6 +71,7 @@ const MASTODON_MUTE_CONVERSATION = id => `/api/v1/statuses/${id}/mute`
 const MASTODON_UNMUTE_CONVERSATION = id => `/api/v1/statuses/${id}/unmute`
 const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
+const PLEROMA_EMOJI_REACTIONS_URL = id => `/api/v1/pleroma/statuses/${id}/emoji_reactions_by`
 
 const oldfetch = window.fetch
 
@@ -864,6 +865,10 @@ const fetchRebloggedByUsers = ({ id }) => {
   return promisedRequest({ url: MASTODON_STATUS_REBLOGGEDBY_URL(id) }).then((users) => users.map(parseUser))
 }
 
+const fetchEmojiReactions = ({ id }) => {
+  return promisedRequest({ url: PLEROMA_EMOJI_REACTIONS_URL(id) })
+}
+
 const reportUser = ({ credentials, userId, statusIds, comment, forward }) => {
   return promisedRequest({
     url: MASTODON_REPORT_USER_URL,
@@ -997,6 +1002,7 @@ const apiService = {
   fetchPoll,
   fetchFavoritedByUsers,
   fetchRebloggedByUsers,
+  fetchEmojiReactions,
   reportUser,
   updateNotificationSettings,
   search2,

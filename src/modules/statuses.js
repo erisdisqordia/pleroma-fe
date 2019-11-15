@@ -1,4 +1,4 @@
-import { remove, slice, each, findIndex, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
+import { remove, slice, each, findIndex, find, maxBy, minBy, merge, first, last, isArray, omitBy, findKey } from 'lodash'
 import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
 // import parse from '../services/status_parser/status_parser.js'
@@ -510,6 +510,11 @@ export const mutations = {
     newStatus.fave_num = newStatus.favoritedBy.length
     newStatus.favorited = !!newStatus.favoritedBy.find(({ id }) => currentUser.id === id)
   },
+  addEmojiReactions (state, { id, emojiReactions, currentUser }) {
+    const status = state.allStatusesObject[id]
+    status.emojiReactions = emojiReactions
+    status.reactedWithEmoji = findKey(emojiReactions, { id: currentUser.id })
+  },
   updateStatusWithPoll (state, { id, poll }) {
     const status = state.allStatusesObject[id]
     status.poll = poll
@@ -610,6 +615,13 @@ const statuses = {
         commit('addFavs', { id, favoritedByUsers, currentUser: rootState.users.currentUser })
         commit('addRepeats', { id, rebloggedByUsers, currentUser: rootState.users.currentUser })
       })
+    },
+    fetchEmojiReactions ({ rootState, commit }, id) {
+      rootState.api.backendInteractor.fetchEmojiReactions(id).then(
+        emojiReactions => {
+          commit('addEmojiReactions', { id, emojiReactions, currentUser: rootState.users.currentUser })
+        }
+      )
     },
     fetchFavs ({ rootState, commit }, id) {
       rootState.api.backendInteractor.fetchFavoritedByUsers(id)

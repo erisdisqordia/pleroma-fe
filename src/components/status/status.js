@@ -278,6 +278,12 @@ const Status = {
     hidePostStats () {
       return this.mergedConfig.hidePostStats
     },
+    emojiReactions () {
+      return {
+        '🤔': [{ 'id': 'xyz..' }, { 'id': 'zyx...' }],
+        '🐻': [{ 'id': 'abc...' }]
+      }
+    },
     ...mapGetters(['mergedConfig'])
   },
   components: {

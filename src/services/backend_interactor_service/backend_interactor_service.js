@@ -143,6 +143,7 @@ const backendInteractorService = credentials => {
 
   const fetchFavoritedByUsers = (id) => apiService.fetchFavoritedByUsers({ id })
   const fetchRebloggedByUsers = (id) => apiService.fetchRebloggedByUsers({ id })
+  const fetchEmojiReactions = (id) => apiService.fetchEmojiReactions({ id })
   const reportUser = (params) => apiService.reportUser({ credentials, ...params })
 
   const favorite = (id) => apiService.favorite({ id, credentials })
@@ -210,6 +211,7 @@ const backendInteractorService = credentials => {
     fetchPoll,
     fetchFavoritedByUsers,
     fetchRebloggedByUsers,
+    fetchEmojiReactions,
     reportUser,
     favorite,
     unfavorite,

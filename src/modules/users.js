@@ -1,6 +1,6 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import oauthApi from '../services/new_api/oauth.js'
-import { compact, map, each, merge, last, concat, uniq } from 'lodash'
+import { compact, map, each, mergeWith, last, concat, uniq, isArray } from 'lodash'
 import { set } from 'vue'
 import { registerPushNotifications, unregisterPushNotifications } from '../services/push/push.js'
 
@@ -10,7 +10,7 @@ export const mergeOrAdd = (arr, obj, item) => {
   const oldItem = obj[item.id]
   if (oldItem) {
     // We already have this, so only merge the new info.
-    merge(oldItem, item)
+    mergeWith(oldItem, item, mergeArrayLength)
     return { item: oldItem, new: false }
   } else {
     // This is a new item, prepare it
@@ -20,6 +20,13 @@ export const mergeOrAdd = (arr, obj, item) => {
       set(obj, item.screen_name.toLowerCase(), item)
     }
     return { item, new: true }
+  }
+}
+
+const mergeArrayLength = (oldValue, newValue) => {
+  if (isArray(oldValue) && isArray(newValue)) {
+    oldValue.length = newValue.length
+    return mergeWith(oldValue, newValue, mergeArrayLength)
   }
 }
 
@@ -116,7 +123,7 @@ export const mutations = {
   },
   setCurrentUser (state, user) {
     state.lastLoginName = user.screen_name
-    state.currentUser = merge(state.currentUser || {}, user)
+    state.currentUser = mergeWith(state.currentUser || {}, user, mergeArrayLength)
   },
   clearCurrentUser (state) {
     state.currentUser = false

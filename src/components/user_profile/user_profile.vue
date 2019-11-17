@@ -159,15 +159,31 @@
       max-height: 400px;
 
       &.emoji {
-        width: 32px;
-        height: 32px;
+        width: 18px;
+        height: 18px;
       }
     }
 
     dl {
+      display: flex;
       margin: 1em 1.5em;
 
+      dt {
+        flex: 0 0 auto;
+        font-weight: 500;
+        color: var(--lightText);
+        width: 30%;
+        min-width: 120px;
+      }
+
+      dd {
+        flex: 1 1 auto;
+        color: var(--text);
+        margin-left: 10px;
+      }
+
       dt, dd {
+        line-height: 18px;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;

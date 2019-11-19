@@ -434,6 +434,7 @@ const users = {
           store.dispatch('stopFetching', 'friends')
           store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
           store.dispatch('stopFetching', 'notifications')
+          store.dispatch('stopFetching', 'followRequest')
           store.commit('clearNotifications')
           store.commit('resetStatuses')
         })

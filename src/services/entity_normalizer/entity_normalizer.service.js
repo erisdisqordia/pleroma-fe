@@ -46,6 +46,14 @@ export const parseUser = (data) => {
     output.description = data.note
     output.description_html = addEmojis(data.note, data.emojis)
 
+    output.fields = data.fields
+    output.fields_html = data.fields.map(field => {
+      return {
+        name: addEmojis(field.name, data.emojis),
+        value: addEmojis(field.value, data.emojis)
+      }
+    })
+
     // Utilize avatar_static for gif avatars?
     output.profile_image_url = data.avatar
     output.profile_image_url_original = data.avatar
@@ -95,6 +103,7 @@ export const parseUser = (data) => {
     if (data.source) {
       output.description = data.source.note
       output.default_scope = data.source.privacy
+      output.fields = data.source.fields
       if (data.source.pleroma) {
         output.no_rich_text = data.source.pleroma.no_rich_text
         output.show_role = data.source.pleroma.show_role

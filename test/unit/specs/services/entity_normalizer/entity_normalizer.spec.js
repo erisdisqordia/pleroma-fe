@@ -277,6 +277,19 @@ describe('API Entities normalizer', () => {
       expect(parsedUser).to.have.property('description_html').that.contains('<img')
     })
 
+    it('adds emojis to user profile fields', () => {
+      const user = makeMockUserMasto({ emojis: makeMockEmojiMasto(), fields: [{ name: ':thinking:', value: ':image:' }] })
+
+      const parsedUser = parseUser(user)
+
+      expect(parsedUser).to.have.property('fields_html').to.be.an('array')
+
+      const field = parsedUser.fields_html[0]
+
+      expect(field).to.have.property('name').that.contains('<img')
+      expect(field).to.have.property('value').that.contains('<img')
+    })
+
     it('adds hide_follows and hide_followers user settings', () => {
       const user = makeMockUserMasto({ pleroma: { hide_followers: true, hide_follows: false, hide_followers_count: false, hide_follows_count: true } })
 

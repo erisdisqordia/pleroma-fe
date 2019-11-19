@@ -95,9 +95,9 @@ export const mutations = {
     newRights[right] = value
     set(user, 'rights', newRights)
   },
-  updateActivationStatus (state, { user: { id }, status }) {
+  updateActivationStatus (state, { user: { id }, deactivated }) {
     const user = state.usersObject[id]
-    set(user, 'deactivated', !status)
+    set(user, 'deactivated', deactivated)
   },
   setCurrentUser (state, user) {
     state.lastLoginName = user.screen_name
@@ -330,6 +330,12 @@ const users = {
     unsubscribeUser ({ rootState, commit }, id) {
       return rootState.api.backendInteractor.unsubscribeUser(id)
         .then((relationship) => commit('updateUserRelationship', [relationship]))
+    },
+    toggleActivationStatus ({ rootState, commit }, user) {
+      rootState.api.backendInteractor.toggleActivationStatus(user)
+        .then(response => {
+          commit('updateActivationStatus', { user, deactivated: response.deactivated })
+        })
     },
     registerPushNotifications (store) {
       const token = store.state.currentUser.credentials

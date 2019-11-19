@@ -89,8 +89,8 @@ const backendInteractorService = credentials => {
   }
 
   // eslint-disable-next-line camelcase
-  const setActivationStatus = ({ screen_name }, status) => {
-    return apiService.setActivationStatus({ screen_name, status, credentials })
+  const toggleActivationStatus = ({ screen_name }) => {
+    return apiService.toggleActivationStatus({ screen_name, credentials })
   }
 
   // eslint-disable-next-line camelcase
@@ -191,7 +191,7 @@ const backendInteractorService = credentials => {
     addRight,
     deleteRight,
     deleteUser,
-    setActivationStatus,
+    toggleActivationStatus,
     register,
     getCaptcha,
     updateAvatar,

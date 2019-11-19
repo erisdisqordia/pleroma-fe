@@ -12,7 +12,7 @@ const CHANGE_EMAIL_URL = '/api/pleroma/change_email'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
 const TAG_USER_URL = '/api/pleroma/admin/users/tag'
 const PERMISSION_GROUP_URL = (screenName, right) => `/api/pleroma/admin/users/${screenName}/permission_group/${right}`
-const ACTIVATION_STATUS_URL = screenName => `/api/pleroma/admin/users/${screenName}/activation_status`
+const TOGGLE_ACTIVATION_URL = screenName => `/api/pleroma/admin/users/${screenName}/toggle_activation`
 const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 const NOTIFICATION_SETTINGS_URL = '/api/pleroma/notification_settings'
@@ -450,19 +450,14 @@ const deleteRight = ({ right, credentials, ...user }) => {
   })
 }
 
-const setActivationStatus = ({ status, credentials, ...user }) => {
-  const screenName = user.screen_name
-  const body = {
-    status: status
-  }
-
+// eslint-disable-next-line camelcase
+const toggleActivationStatus = ({ credentials, screen_name }) => {
   const headers = authHeaders(credentials)
   headers['Content-Type'] = 'application/json'
 
-  return fetch(ACTIVATION_STATUS_URL(screenName), {
-    method: 'PUT',
-    headers: headers,
-    body: JSON.stringify(body)
+  return fetch(TOGGLE_ACTIVATION_URL(screen_name), {
+    method: 'PATCH',
+    headers: headers
   })
 }
 
@@ -979,7 +974,7 @@ const apiService = {
   deleteUser,
   addRight,
   deleteRight,
-  setActivationStatus,
+  toggleActivationStatus,
   register,
   getCaptcha,
   updateAvatar,

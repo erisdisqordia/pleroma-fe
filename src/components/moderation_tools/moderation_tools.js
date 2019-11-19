@@ -73,7 +73,7 @@ const ModerationTools = {
     toggleActivationStatus () {
       const store = this.$store
       const status = !!this.user.deactivated
-      store.state.api.backendInteractor.setActivationStatus(this.user, status).then(response => {
+      store.state.api.backendInteractor.toggleActivationStatus(this.user).then(response => {
         if (!response.ok) { return }
         store.commit('updateActivationStatus', { user: this.user, status: status })
       })

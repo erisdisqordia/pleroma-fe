@@ -45,6 +45,7 @@ export const defaultState = {
   playVideosInModal: false,
   useOneClickNsfw: false,
   useContainFit: false,
+  greentext: undefined, // instance default
   hidePostStats: undefined, // instance default
   hideUserStats: undefined // instance default
 }

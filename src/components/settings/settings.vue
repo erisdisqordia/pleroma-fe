@@ -270,6 +270,17 @@
                 </li>
               </ul>
             </div>
+
+            <div class="setting-item">
+              <h2>{{ $t('settings.fun') }}</h2>
+              <ul class="setting-list">
+                <li>
+                  <Checkbox v-model="greentext">
+                    {{ $t('settings.greentext') }} {{ $t('settings.instance_default', { value: greentextLocalizedValue }) }}
+                  </Checkbox>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div :label="$t('settings.theme')">

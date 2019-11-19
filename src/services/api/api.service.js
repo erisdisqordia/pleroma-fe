@@ -1,4 +1,4 @@
-import { each, map, concat, last } from 'lodash'
+import { each, map, concat, last, get } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
 import 'whatwg-fetch'
 import { RegistrationError, StatusCodeError } from '../errors/errors'
@@ -12,7 +12,8 @@ const CHANGE_EMAIL_URL = '/api/pleroma/change_email'
 const CHANGE_PASSWORD_URL = '/api/pleroma/change_password'
 const TAG_USER_URL = '/api/pleroma/admin/users/tag'
 const PERMISSION_GROUP_URL = (screenName, right) => `/api/pleroma/admin/users/${screenName}/permission_group/${right}`
-const TOGGLE_ACTIVATION_URL = screenName => `/api/pleroma/admin/users/${screenName}/toggle_activation`
+const ACTIVATE_USER_URL = '/api/pleroma/admin/users/activate'
+const DEACTIVATE_USER_URL = '/api/pleroma/admin/users/deactivate'
 const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 const NOTIFICATION_SETTINGS_URL = '/api/pleroma/notification_settings'
@@ -450,9 +451,26 @@ const deleteRight = ({ right, credentials, ...user }) => {
   })
 }
 
-// eslint-disable-next-line camelcase
-const toggleActivationStatus = ({ credentials, screen_name }) => {
-  return promisedRequest({ url: TOGGLE_ACTIVATION_URL(screen_name), method: 'PATCH', credentials })
+const activateUser = ({ credentials, screen_name: nickname }) => {
+  return promisedRequest({
+    url: ACTIVATE_USER_URL,
+    method: 'PATCH',
+    credentials,
+    payload: {
+      nicknames: [nickname]
+    }
+  }).then(response => get(response, 'users.0'))
+}
+
+const deactivateUser = ({ credentials, screen_name: nickname }) => {
+  return promisedRequest({
+    url: DEACTIVATE_USER_URL,
+    method: 'PATCH',
+    credentials,
+    payload: {
+      nicknames: [nickname]
+    }
+  }).then(response => get(response, 'users.0'))
 }
 
 const deleteUser = ({ credentials, ...user }) => {
@@ -968,7 +986,8 @@ const apiService = {
   deleteUser,
   addRight,
   deleteRight,
-  toggleActivationStatus,
+  activateUser,
+  deactivateUser,
   register,
   getCaptcha,
   updateAvatar,

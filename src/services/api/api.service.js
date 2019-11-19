@@ -452,13 +452,7 @@ const deleteRight = ({ right, credentials, ...user }) => {
 
 // eslint-disable-next-line camelcase
 const toggleActivationStatus = ({ credentials, screen_name }) => {
-  const headers = authHeaders(credentials)
-  headers['Content-Type'] = 'application/json'
-
-  return fetch(TOGGLE_ACTIVATION_URL(screen_name), {
-    method: 'PATCH',
-    headers: headers
-  })
+  return promisedRequest({ url: TOGGLE_ACTIVATION_URL(screen_name), method: 'PATCH', credentials })
 }
 
 const deleteUser = ({ credentials, ...user }) => {

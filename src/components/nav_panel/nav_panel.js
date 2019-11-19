@@ -1,12 +1,7 @@
-import followRequestFetcher from '../../services/follow_request_fetcher/follow_request_fetcher.service'
-
 const NavPanel = {
   created () {
     if (this.currentUser && this.currentUser.locked) {
-      const store = this.$store
-      const credentials = store.state.users.currentUser.credentials
-
-      followRequestFetcher.startFetching({ store, credentials })
+      this.$store.dispatch('startFetchingFollowRequest')
     }
   },
   computed: {

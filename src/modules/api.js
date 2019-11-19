@@ -43,6 +43,13 @@ const api = {
       const fetcher = store.state.backendInteractor.startFetchingNotifications({ store })
       store.commit('addFetcher', { fetcherName: 'notifications', fetcher })
     },
+    startFetchingFollowRequest (store) {
+      // Don't start fetching if we already are.
+      if (store.state.fetchers['followRequest']) return
+
+      const fetcher = store.state.backendInteractor.startFetchingFollowRequest({ store })
+      store.commit('addFetcher', { fetcherName: 'followRequest', fetcher })
+    },
     stopFetching (store, fetcherName) {
       const fetcher = store.state.fetchers[fetcherName]
       window.clearInterval(fetcher)

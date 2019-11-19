@@ -10,6 +10,10 @@ const SideDrawer = {
   }),
   created () {
     this.closeGesture = GestureService.swipeGesture(GestureService.DIRECTION_LEFT, this.toggleDrawer)
+
+    if (this.currentUser && this.currentUser.locked) {
+      this.$store.dispatch('startFetchingFollowRequest')
+    }
   },
   components: { UserCard },
   computed: {

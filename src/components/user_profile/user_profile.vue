@@ -158,6 +158,7 @@
       .user-profile-field-name {
         flex: 0 0 auto;
         font-weight: 500;
+        text-align: right;
         color: var(--lightText);
         width: 30%;
         min-width: 120px;

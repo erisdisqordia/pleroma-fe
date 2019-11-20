@@ -18,6 +18,7 @@
         <dl
           v-for="(field, index) in user.fields_html"
           :key="index"
+          class="user-profile-field"
         >
           <!-- eslint-disable vue/no-v-html -->
           <dt
@@ -164,11 +165,11 @@
       }
     }
 
-    dl {
+    .user-profile-field {
       display: flex;
       margin: 1em 1.5em;
 
-      dt {
+      .user-profile-field-name {
         flex: 0 0 auto;
         font-weight: 500;
         color: var(--lightText);
@@ -176,13 +177,13 @@
         min-width: 120px;
       }
 
-      dd {
+      .user-profile-field-value {
         flex: 1 1 auto;
         color: var(--text);
         margin-left: 10px;
       }
 
-      dt, dd {
+      .user-profile-field-name, .user-profile-field-value {
         line-height: 18px;
         text-overflow: ellipsis;
         white-space: nowrap;

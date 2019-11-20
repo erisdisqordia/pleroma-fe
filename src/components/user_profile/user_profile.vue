@@ -36,22 +36,6 @@
           <!-- eslint-enable vue/no-v-html -->
         </dl>
       </div>
-      <div
-        v-else-if="user.fields && user.fields.length > 0"
-        class="user-card-fields"
-      >
-        <dl
-          v-for="(field, index) in user.fields"
-          :key="index"
-        >
-          <dt class="user-card-field-name">
-            {{ field.name }}
-          </dt>
-          <dd class="user-card-field-value">
-            {{ field.value }}
-          </dd>
-        </dl>
-      </div>
       <tab-switcher
         :active-tab="tab"
         :render-only-focused="true"

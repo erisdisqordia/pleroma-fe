@@ -6,6 +6,7 @@ const api = {
     backendInteractor: backendInteractorService(),
     fetchers: {},
     socket: null,
+    mastoSocket: null,
     followRequests: []
   },
   mutations: {
@@ -29,6 +30,20 @@ const api = {
     }
   },
   actions: {
+    startMastoSocket (store) {
+      store.state.mastoSocket = store.state.backendInteractor
+        .startUserSocket({
+          store,
+          onMessage: (message) => {
+            if (!message) return
+            if (message.event === 'notification') {
+              store.dispatch('addNewNotifications', { notifications: [message.notification], older: false })
+            } else if (message.event === 'update') {
+              store.dispatch('addNewStatuses', { statuses: [message.status], userId: false, showImmediately: false, timeline: 'friends' })
+            }
+          }
+        })
+    },
     startFetchingTimeline (store, { timeline = 'friends', tag = false, userId = false }) {
       // Don't start fetching if we already are.
       if (store.state.fetchers[timeline]) return

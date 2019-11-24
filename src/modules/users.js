@@ -469,11 +469,14 @@ const users = {
                 store.dispatch('initializeSocket')
               }
 
-              // Start getting fresh posts.
-              store.dispatch('startFetchingTimeline', { timeline: 'friends' })
+              store.dispatch('startMastoSocket').catch((error) => {
+                console.error(error)
+                // Start getting fresh posts.
+                store.dispatch('startFetchingTimeline', { timeline: 'friends' })
 
-              // Start fetching notifications
-              store.dispatch('startFetchingNotifications')
+                // Start fetching notifications
+                store.dispatch('startFetchingNotifications')
+              })
 
               // Get user mutes
               store.dispatch('fetchMutes')

@@ -71,6 +71,7 @@ const MASTODON_MUTE_CONVERSATION = id => `/api/v1/statuses/${id}/mute`
 const MASTODON_UNMUTE_CONVERSATION = id => `/api/v1/statuses/${id}/unmute`
 const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
+const MASTODON_STREAMING = '/api/v1/streaming'
 
 const oldfetch = window.fetch
 
@@ -930,6 +931,45 @@ const search2 = ({ credentials, q, resolve, limit, offset, following }) => {
       data.statuses = data.statuses.slice(0, limit).map(s => parseStatus(s))
       return data
     })
+}
+
+export const getMastodonSocketURI = ({ credentials, stream, args = {} }) => {
+  return Object.entries({
+    ...(credentials
+      ? { access_token: credentials }
+      : {}
+    ),
+    stream,
+    ...args
+  }).reduce((acc, [key, val]) => {
+    return acc + `${key}=${val}&`
+  }, MASTODON_STREAMING + '?')
+}
+
+const MASTODON_STREAMING_EVENTS = new Set([
+  'update',
+  'notification',
+  'delete',
+  'filters_changed'
+])
+
+export const handleMastoWS = (wsEvent) => {
+  console.debug('Event', wsEvent)
+  const { data } = wsEvent
+  if (!data) return
+  const parsedEvent = JSON.parse(data)
+  const { event, payload } = parsedEvent
+  if (MASTODON_STREAMING_EVENTS.has(event)) {
+    const data = payload ? JSON.parse(payload) : null
+    if (event === 'update') {
+      return { event, status: parseStatus(data) }
+    } else if (event === 'notification') {
+      return { event, notification: parseNotification(data) }
+    }
+  } else {
+    console.warn('Unknown event', wsEvent)
+    return null
+  }
 }
 
 const apiService = {

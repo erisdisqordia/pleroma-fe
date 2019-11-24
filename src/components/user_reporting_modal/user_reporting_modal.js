@@ -64,7 +64,7 @@ const UserReportingModal = {
         forward: this.forward,
         statusIds: this.statusIdsToReport
       }
-      this.$store.state.api.backendInteractor.reportUser(params)
+      this.$store.state.api.backendInteractor.reportUser({ ...params })
         .then(() => {
           this.processing = false
           this.resetState()

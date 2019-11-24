@@ -12,18 +12,23 @@ const backendInteractorService = credentials => ({
     return notificationsFetcher.startFetching({ store, credentials })
   },
 
+  fetchAndUpdateNotifications ({ store }) {
+    return notificationsFetcher.fetchAndUpdate({ store, credentials })
+  },
+
   startFetchingFollowRequest ({ store }) {
     return followRequestFetcher.startFetching({ store, credentials })
   },
 
   startUserSocket ({ store, onMessage }) {
-    const serv = store.rootState.instance.server.replace('https', 'wss')
-    // const serb = 'ws://localhost:8080/'
+    const serv = store.rootState.instance.server.replace('http', 'ws')
     const url = serv + getMastodonSocketURI({ credentials, stream: 'user' })
     const socket = new WebSocket(url)
     console.log(socket)
     if (socket) {
       socket.addEventListener('message', (wsEvent) => onMessage(handleMastoWS(wsEvent)))
+      socket.addEventListener('error', (error) => console.error('WebSocket Error:', error))
+      return socket
     } else {
       throw new Error('failed to connect to socket')
     }

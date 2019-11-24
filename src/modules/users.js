@@ -470,7 +470,7 @@ const users = {
               }
 
               store.dispatch('startMastoSocket').catch((error) => {
-                console.error(error)
+                console.error('Failed initializing MastoAPI Streaming socket', error)
                 // Start getting fresh posts.
                 store.dispatch('startFetchingTimeline', { timeline: 'friends' })
 

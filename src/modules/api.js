@@ -31,18 +31,32 @@ const api = {
   },
   actions: {
     startMastoSocket (store) {
-      store.state.mastoSocket = store.state.backendInteractor
+      const { state, dispatch } = store
+      state.mastoSocket = state.backendInteractor
         .startUserSocket({
           store,
           onMessage: (message) => {
             if (!message) return
             if (message.event === 'notification') {
-              store.dispatch('addNewNotifications', { notifications: [message.notification], older: false })
+              dispatch('addNewNotifications', {
+                notifications: [message.notification],
+                older: false
+              })
             } else if (message.event === 'update') {
-              store.dispatch('addNewStatuses', { statuses: [message.status], userId: false, showImmediately: false, timeline: 'friends' })
+              dispatch('addNewStatuses', {
+                statuses: [message.status],
+                userId: false,
+                showImmediately: false,
+                timeline: 'friends'
+              })
             }
           }
         })
+      state.mastoSocket.addEventListener('error', error => {
+        console.error('Error with MastoAPI websocket:', error)
+        dispatch('startFetchingTimeline', { timeline: 'friends' })
+        dispatch('startFetchingNotifications')
+      })
     },
     startFetchingTimeline (store, { timeline = 'friends', tag = false, userId = false }) {
       // Don't start fetching if we already are.
@@ -57,6 +71,9 @@ const api = {
 
       const fetcher = store.state.backendInteractor.startFetchingNotifications({ store })
       store.commit('addFetcher', { fetcherName: 'notifications', fetcher })
+    },
+    fetchAndUpdateNotifications (store) {
+      store.state.backendInteractor.fetchAndUpdateNotifications({ store })
     },
     startFetchingFollowRequest (store) {
       // Don't start fetching if we already are.

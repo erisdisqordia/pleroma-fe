@@ -31,6 +31,7 @@
         </div>
         <div class="item">
           <router-link
+            v-if="!hideSitename"
             class="site-name"
             :to="{ name: 'root' }"
             active-class="home"

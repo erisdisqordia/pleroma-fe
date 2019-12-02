@@ -25,9 +25,6 @@ const AccountActions = {
     },
     reportUser () {
       this.$store.dispatch('openUserReportingModal', this.user.id)
-    },
-    mentionUser () {
-      this.$store.dispatch('openPostStatusModal', { replyTo: true, repliedUser: this.user })
     }
   }
 }

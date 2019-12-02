@@ -22,7 +22,9 @@
             />
           </ul>
 
-          <h2>{{ $t("about.mrf_policy_simple") }}</h2>
+          <h2 v-if="hasInstanceSpecificPolicies">
+            {{ $t("about.mrf_policy_simple") }}
+          </h2>
 
           <div v-if="acceptInstances.length">
             <h4>{{ $t("about.mrf_policy_simple_accept") }}</h4>

@@ -33,7 +33,8 @@ const Status = {
     'noHeading',
     'inlineExpanded',
     'showPinned',
-    'inProfile'
+    'inProfile',
+    'profileUserId'
   ],
   data () {
     return {
@@ -115,7 +116,7 @@ const Status = {
 
       return hits
     },
-    muted () { return !this.unmuted && ((!this.inProfile && this.status.user.muted) || (!this.inConversation && this.status.thread_muted) || this.muteWordHits.length > 0) },
+    muted () { return !this.unmuted && ((!(this.inProfile && this.status.user.id === this.profileUserId) && this.status.user.muted) || (!this.inConversation && this.status.thread_muted) || this.muteWordHits.length > 0) },
     hideFilteredStatuses () {
       return this.mergedConfig.hideFilteredStatuses
     },

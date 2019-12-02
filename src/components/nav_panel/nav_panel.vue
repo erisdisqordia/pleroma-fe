@@ -113,4 +113,8 @@
     }
   }
 }
+
+.nav-panel .button-icon:before {
+  width: 1.1em;
+}
 </style>

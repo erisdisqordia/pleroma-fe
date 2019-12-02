@@ -215,6 +215,10 @@
   box-shadow: var(--panelShadow);
   background-color: $fallback--bg;
   background-color: var(--bg, $fallback--bg);
+
+  .button-icon:before {
+    width: 1.1em;
+  }
 }
 
 .side-drawer-logo-wrapper {

@@ -3,6 +3,7 @@ var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
 var ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
+var FontelloPlugin = require("fontello-webpack-plugin")
 
 var env = process.env.NODE_ENV
 // check env & config/index.js to decide weither to enable CSS Sourcemaps for the
@@ -10,6 +11,8 @@ var env = process.env.NODE_ENV
 var cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap)
 var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap)
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
+
+var now = Date.now()
 
 module.exports = {
   entry: {
@@ -90,6 +93,14 @@ module.exports = {
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, '..', 'src/sw.js'),
       filename: 'sw-pleroma.js'
+    }),
+    new FontelloPlugin({
+      config: require('../static/fontello.json'),
+      name: 'fontello',
+      output: {
+        css: '[name].' + now + '.css',  // [hash] is not supported. Use the current timestamp instead for versioning.
+        font: 'font/[name].' + now + '.[ext]'
+      }
     })
   ]
 }

@@ -32,8 +32,8 @@ import VTooltip from 'v-tooltip'
 
 import afterStoreSetup from './boot/after_store.js'
 
-import './font/css/fontello.css'
-import './font/css/animation.css'
+// import './font/css/fontello.css'
+// import './font/css/animation.css'
 
 const currentLocale = (window.navigator.language || 'en').split('-')[0]
 

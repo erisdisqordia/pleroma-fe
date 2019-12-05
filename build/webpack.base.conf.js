@@ -98,8 +98,8 @@ module.exports = {
       config: require('../static/fontello.json'),
       name: 'fontello',
       output: {
-        css: '[name].' + now + '.css',  // [hash] is not supported. Use the current timestamp instead for versioning.
-        font: 'font/[name].' + now + '.[ext]'
+        css: 'static/[name].' + now + '.css',  // [hash] is not supported. Use the current timestamp instead for versioning.
+        font: 'static/font/[name].' + now + '.[ext]'
       }
     })
   ]

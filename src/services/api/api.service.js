@@ -532,13 +532,19 @@ const fetchTimeline = ({
 
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => {
-      if (data.ok) {
+      if (data.ok || data.status === 403) {
         return data
       }
       throw new Error('Error fetching timeline', data)
     })
     .then((data) => data.json())
-    .then((data) => data.map(isNotifications ? parseNotification : parseStatus))
+    .then((data) => {
+      if (!data.error) {
+        return data.map(isNotifications ? parseNotification : parseStatus)
+      } else {
+        return data
+      }
+    })
 }
 
 const fetchPinnedStatuses = ({ id, credentials }) => {

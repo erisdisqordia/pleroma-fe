@@ -6,6 +6,7 @@ const update = ({ store, statuses, timeline, showImmediately, userId }) => {
   const ccTimeline = camelCase(timeline)
 
   store.dispatch('setError', { value: false })
+  store.dispatch('set403Error', { value: false })
 
   store.dispatch('addNewStatuses', {
     timeline: ccTimeline,
@@ -45,6 +46,11 @@ const fetchAndUpdate = ({
 
   return apiService.fetchTimeline(args)
     .then((statuses) => {
+      // Change messaging if not public
+      if (statuses.error) {
+        store.dispatch('set403Error', { value: true })
+        return
+      }
       if (!older && statuses.length >= 20 && !timelineData.loading && numStatusesBeforeFetch > 0) {
         store.dispatch('queueFlush', { timeline: timeline, id: timelineData.maxId })
       }

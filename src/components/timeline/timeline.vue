@@ -11,15 +11,22 @@
       >
         {{ $t('timeline.error_fetching') }}
       </div>
+      <div
+        v-else-if="error403"
+        class="loadmore-error alert error"
+        @click.prevent
+      >
+        {{ $t('timeline.error_403') }}
+      </div>
       <button
-        v-if="timeline.newStatusCount > 0 && !timelineError"
+        v-if="timeline.newStatusCount > 0 && !timelineError && !error403"
         class="loadmore-button"
         @click.prevent="showNewStatuses"
       >
         {{ $t('timeline.show_new') }}{{ newStatusCountStr }}
       </button>
       <div
-        v-if="!timeline.newStatusCount > 0 && !timelineError"
+        v-if="!timeline.newStatusCount > 0 && !timelineError && !error403"
         class="loadmore-text faint"
         @click.prevent
       >
@@ -67,11 +74,17 @@
         {{ $t('timeline.no_more_statuses') }}
       </div>
       <a
-        v-else-if="!timeline.loading"
+        v-else-if="!timeline.loading && !error403"
         href="#"
         @click.prevent="fetchOlderStatuses()"
       >
         <div class="new-status-notification text-center panel-footer">{{ $t('timeline.load_older') }}</div>
+      </a>
+      <a
+        v-else-if="error403"
+        href="#"
+      >
+        <div class="new-status-notification text-center panel-footer">{{ $t('timeline.error_403_message') }}</div>
       </a>
       <div
         v-else

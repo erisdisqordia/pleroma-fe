@@ -48,7 +48,7 @@ const fetchAndUpdate = ({
     .then((statuses) => {
       // Change messaging if not public
       if (statuses.error) {
-        store.dispatch('set403Error', { value: true })
+        store.dispatch('set403Error', { value: statuses.error })
         return
       }
       if (!older && statuses.length >= 20 && !timelineData.loading && numStatusesBeforeFetch > 0) {

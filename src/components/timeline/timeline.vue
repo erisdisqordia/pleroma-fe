@@ -84,7 +84,7 @@
         v-else-if="error403"
         href="#"
       >
-        <div class="new-status-notification text-center panel-footer">{{ $t('timeline.error_403_message') }}</div>
+        <div class="new-status-notification text-center panel-footer">{{ error403 }}</div>
       </a>
       <div
         v-else

@@ -169,9 +169,7 @@ const PostStatusForm = {
       if (this.submitDisabled) { return }
 
       if (this.newStatus.status === '') {
-        if (this.newStatus.files.length > 0) {
-          this.newStatus.status = '\u200b' // hack
-        } else {
+        if (this.newStatus.files.length === 0) {
           this.error = 'Cannot post an empty status with no files'
           return
         }

@@ -175,6 +175,14 @@
               {{ $t('user_card.mute') }}
             </button>
           </div>
+          <div>
+            <button
+              class="btn btn-default btn-block"
+              @click="mentionUser"
+            >
+              {{ $t('user_card.mention') }}
+            </button>
+          </div>
           <ModerationTools
             v-if="loggedIn.role === &quot;admin&quot;"
             :user="user"

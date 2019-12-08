@@ -37,6 +37,7 @@
             :collapsable="true"
             :pinned-status-ids-object="pinnedStatusIdsObject"
             :in-profile="inProfile"
+            :profile-user-id="userId"
           />
         </template>
         <template v-for="status in timeline.visibleStatuses">
@@ -47,6 +48,7 @@
             :status-id="status.id"
             :collapsable="true"
             :in-profile="inProfile"
+            :profile-user-id="userId"
           />
         </template>
       </div>

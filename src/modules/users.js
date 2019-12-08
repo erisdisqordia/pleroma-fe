@@ -431,10 +431,10 @@ const users = {
           store.commit('clearCurrentUser')
           store.dispatch('disconnectFromSocket')
           store.commit('clearToken')
-          store.dispatch('stopFetching', 'friends')
+          store.dispatch('stopFetchingTimeline', 'friends')
           store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
-          store.dispatch('stopFetching', 'notifications')
-          store.dispatch('stopFetching', 'followRequest')
+          store.dispatch('stopFetchingNotifications')
+          store.dispatch('stopFetchingFollowRequests')
           store.commit('clearNotifications')
           store.commit('resetStatuses')
         })
@@ -469,7 +469,7 @@ const users = {
                 store.dispatch('initializeSocket')
               }
 
-              store.dispatch('startMastoSocket').catch((error) => {
+              store.dispatch('startMastoUserSocket').catch((error) => {
                 console.error('Failed initializing MastoAPI Streaming socket', error)
                 // Start getting fresh posts.
                 store.dispatch('startFetchingTimeline', { timeline: 'friends' })

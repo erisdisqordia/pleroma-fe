@@ -24,10 +24,11 @@ const backendInteractorService = credentials => ({
     const serv = store.rootState.instance.server.replace('http', 'ws')
     const url = serv + getMastodonSocketURI({ credentials, stream: 'user' })
     const socket = new WebSocket(url)
-    console.log(socket)
+    console.debug('Socket created:', socket)
     if (socket) {
+      socket.addEventListener('open', (wsEvent) => console.debug('MastoAPI User WebSocket connection established'))
       socket.addEventListener('message', (wsEvent) => onMessage(handleMastoWS(wsEvent)))
-      socket.addEventListener('error', (error) => console.error('WebSocket Error:', error))
+      socket.addEventListener('error', (error) => console.error('MastoApi User WebSocket Error:', error))
       return socket
     } else {
       throw new Error('failed to connect to socket')

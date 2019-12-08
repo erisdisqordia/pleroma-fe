@@ -34,36 +34,35 @@ const api = {
     // MastoAPI 'User' sockets
     startMastoUserSocket (store) {
       const { state, dispatch } = store
-      state.mastoUserSocket = state.backendInteractor
-        .startUserSocket({
-          store,
-          onMessage: (message) => {
-            if (!message) return // pings
-            if (message.event === 'notification') {
-              dispatch('addNewNotifications', {
-                notifications: [message.notification],
-                older: false
-              })
-            } else if (message.event === 'update') {
-              dispatch('addNewStatuses', {
-                statuses: [message.status],
-                userId: false,
-                showImmediately: false,
-                timeline: 'friends'
-              })
-            }
+      state.mastoUserSocket = state.backendInteractor.startUserSocket({ store })
+      state.mastoUserSocket.addEventListener(
+        'message',
+        ({ detail: message }) => {
+          if (!message) return // pings
+          if (message.event === 'notification') {
+            dispatch('addNewNotifications', {
+              notifications: [message.notification],
+              older: false
+            })
+          } else if (message.event === 'update') {
+            dispatch('addNewStatuses', {
+              statuses: [message.status],
+              userId: false,
+              showImmediately: false,
+              timeline: 'friends'
+            })
           }
-        })
-      state.mastoUserSocket.addEventListener('error', error => {
+        }
+      )
+      state.mastoUserSocket.addEventListener('error', ({ detail: error }) => {
         console.error('Error in MastoAPI websocket:', error)
       })
-      state.mastoUserSocket.addEventListener('close', closeEvent => {
+      state.mastoUserSocket.addEventListener('close', ({ detail: closeEvent }) => {
         const ignoreCodes = new Set([
           1000, // Normal (intended) closure
           1001 // Going away
         ])
         const { code } = closeEvent
-        console.debug('Socket closure event:', closeEvent)
         if (ignoreCodes.has(code)) {
           console.debug(`Not restarting socket becasue of closure code ${code} is in ignore list`)
         } else {

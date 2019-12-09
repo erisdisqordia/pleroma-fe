@@ -47,7 +47,6 @@ const fetchAndUpdate = ({
   return apiService.fetchTimeline(args)
     .then((statuses) => {
       if (statuses.error) {
-        console.log(statuses)
         store.dispatch('setErrorData', { value: statuses.error })
         return
       }

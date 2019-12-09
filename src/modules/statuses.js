@@ -38,7 +38,7 @@ export const defaultState = () => ({
   notifications: emptyNotifications(),
   favorites: new Set(),
   error: false,
-  errorData: '',
+  errorData: null,
   timelines: {
     mentions: emptyTl(),
     public: emptyTl(),

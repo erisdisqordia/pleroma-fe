@@ -529,9 +529,12 @@ const fetchTimeline = ({
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`
-
+  let status = ''
+  let statusText = ''
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => {
+      status = data.status
+      statusText = data.statusText
       return data
     })
     .then((data) => data.json())
@@ -539,6 +542,8 @@ const fetchTimeline = ({
       if (!data.error) {
         return data.map(isNotifications ? parseNotification : parseStatus)
       } else {
+        data.status = status
+        data.statusText = statusText
         return data
       }
     })

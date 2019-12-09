@@ -16,7 +16,7 @@
         class="loadmore-error alert error"
         @click.prevent
       >
-        {{ $t('timeline.error_403') }}
+        {{ errorData.statusText }}
       </div>
       <button
         v-if="timeline.newStatusCount > 0 && !timelineError && !errorData"
@@ -84,7 +84,7 @@
         v-else-if="errorData"
         href="#"
       >
-        <div class="new-status-notification text-center panel-footer">{{ errorData }}</div>
+        <div class="new-status-notification text-center panel-footer">{{ errorData.error }}</div>
       </a>
       <div
         v-else

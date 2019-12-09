@@ -532,10 +532,7 @@ const fetchTimeline = ({
 
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => {
-      if (data.ok || data.status === 403) {
-        return data
-      }
-      throw new Error('Error fetching timeline', data)
+      return data
     })
     .then((data) => data.json())
     .then((data) => {

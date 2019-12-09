@@ -39,8 +39,8 @@ const Timeline = {
     timelineError () {
       return this.$store.state.statuses.error
     },
-    error403 () {
-      return this.$store.state.statuses.error403
+    errorData () {
+      return this.$store.state.statuses.errorData
     },
     newStatusCount () {
       return this.timeline.newStatusCount

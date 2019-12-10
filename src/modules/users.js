@@ -469,14 +469,22 @@ const users = {
                 store.dispatch('initializeSocket')
               }
 
-              store.dispatch('startMastoUserSocket').catch((error) => {
-                console.error('Failed initializing MastoAPI Streaming socket', error)
+              const startPolling = () => {
                 // Start getting fresh posts.
                 store.dispatch('startFetchingTimeline', { timeline: 'friends' })
 
                 // Start fetching notifications
                 store.dispatch('startFetchingNotifications')
-              })
+              }
+
+              if (store.getters.mergedConfig.useStreamingApi) {
+                store.dispatch('enableMastoSockets').catch((error) => {
+                  console.error('Failed initializing MastoAPI Streaming socket', error)
+                  startPolling()
+                })
+              } else {
+                startPolling()
+              }
 
               // Get user mutes
               store.dispatch('fetchMutes')

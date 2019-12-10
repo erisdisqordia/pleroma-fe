@@ -983,17 +983,23 @@ export const ProcessedWS = ({
       wsEvent
     )
   })
+  // Commented code reason: very spammy, uncomment to enable message debug logging
+  /*
   socket.addEventListener('message', (wsEvent) => {
     console.debug(
       `[WS][${id}] Message received`,
       wsEvent
     )
   })
+  /**/
 
   proxy(socket, 'open')
   proxy(socket, 'close')
   proxy(socket, 'message', preprocessor)
   proxy(socket, 'error')
+
+  // 1000 = Normal Closure
+  eventTarget.close = () => { socket.close(1000, 'Shutting down socket') }
 
   return eventTarget
 }

@@ -31,6 +31,18 @@ const api = {
     }
   },
   actions: {
+    // Global MastoAPI socket control, in future should disable ALL sockets/(re)start relevant sockets
+    enableMastoSockets (store) {
+      const { state, dispatch } = store
+      if (state.mastoUserSocket) return
+      dispatch('startMastoUserSocket')
+    },
+    disableMastoSockets (store) {
+      const { state, dispatch } = store
+      if (!state.mastoUserSocket) return
+      dispatch('stopMastoUserSocket')
+    },
+
     // MastoAPI 'User' sockets
     startMastoUserSocket (store) {
       const { state, dispatch } = store
@@ -80,6 +92,12 @@ const api = {
         dispatch('stopFetchingTimeline', { timeline: 'friends' })
         dispatch('stopFetchingNotifications')
       })
+    },
+    stopMastoUserSocket ({ state, dispatch }) {
+      dispatch('startFetchingTimeline', { timeline: 'friends' })
+      dispatch('startFetchingNotifications')
+      console.log(state.mastoUserSocket)
+      state.mastoUserSocket.close()
     },
 
     // Timelines

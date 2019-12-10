@@ -312,6 +312,7 @@
     "notification_visibility_likes": "Likes",
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
+    "notification_visibility_moves": "Moves",
     "no_rich_text_description": "Strip rich text formatting from all posts",
     "no_blocks": "No blocks",
     "no_mutes": "No mutes",

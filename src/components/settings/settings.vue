@@ -314,6 +314,11 @@
                       {{ $t('settings.notification_visibility_mentions') }}
                     </Checkbox>
                   </li>
+                  <li>
+                    <Checkbox v-model="notificationVisibility.moves">
+                      {{ $t('settings.notification_visibility_moves') }}
+                    </Checkbox>
+                  </li>
                 </ul>
               </div>
               <div>

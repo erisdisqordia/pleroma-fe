@@ -66,7 +66,8 @@ const visibleNotificationTypes = (rootState) => {
     rootState.config.notificationVisibility.likes && 'like',
     rootState.config.notificationVisibility.mentions && 'mention',
     rootState.config.notificationVisibility.repeats && 'repeat',
-    rootState.config.notificationVisibility.follows && 'follow'
+    rootState.config.notificationVisibility.follows && 'follow',
+    rootState.config.notificationVisibility.moves && 'move'
   ].filter(_ => _)
 }
 

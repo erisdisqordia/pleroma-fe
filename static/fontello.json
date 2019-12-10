@@ -303,6 +303,12 @@
       "css": "gauge",
       "code": 61668,
       "src": "fontawesome"
+    },
+    {
+      "uid": "f3ebd6751c15a280af5cc5f4a764187d",
+      "css": "arrow-curved",
+      "code": 59421,
+      "src": "iconic"
     }
   ]
 }

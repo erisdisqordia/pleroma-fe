@@ -123,7 +123,7 @@
           v-else-if="notification.type === 'move'"
           class="move-text"
         >
-          <router-link :to="userProfileLink">
+          <router-link :to="targetUserProfileLink">
             @{{ notification.target.screen_name }}
           </router-link>
         </div>

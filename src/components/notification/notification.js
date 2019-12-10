@@ -55,6 +55,18 @@ const Notification = {
     userProfileLink () {
       return this.generateUserProfileLink(this.user)
     },
+    targetUserInStore () {
+      return this.$store.getters.findUser(this.notification.target.id)
+    },
+    targetUser () {
+      if (this.targetUserInStore) {
+        return this.targetUserInStore
+      }
+      return this.notification.target
+    },
+    targetUserProfileLink () {
+      return this.generateUserProfileLink(this.targetUser)
+    },
     needMute () {
       return this.user.muted
     }

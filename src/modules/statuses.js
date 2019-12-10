@@ -305,7 +305,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
 const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters }) => {
   each(notifications, (notification) => {
-    if (notification.type !== 'follow') {
+    if (notification.type !== 'follow' && notification.type !== 'move') {
       notification.action = addStatusToGlobalStorage(state, notification.action).item
       notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
     }
@@ -337,6 +337,9 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
             break
           case 'follow':
             i18nString = 'followed_you'
+            break
+          case 'move':
+            i18nString = 'moved_to'
             break
         }
 

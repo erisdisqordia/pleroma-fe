@@ -110,7 +110,8 @@
     "notifications": "Notifications",
     "read": "Read!",
     "repeated_you": "repeated your status",
-    "no_more_notifications": "No more notifications"
+    "no_more_notifications": "No more notifications",
+    "moved_to": "moved to"
   },
   "polls": {
     "add_poll": "Add Poll",

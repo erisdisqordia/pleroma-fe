@@ -108,6 +108,7 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('alwaysShowSubjectInput')
   copyInstanceOption('noAttachmentLinks')
   copyInstanceOption('showFeaturesPanel')
+  copyInstanceOption('hideSitename')
 
   return store.dispatch('setTheme', config['theme'])
 }

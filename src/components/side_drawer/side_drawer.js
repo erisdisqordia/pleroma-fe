@@ -33,6 +33,9 @@ const SideDrawer = {
     logo () {
       return this.$store.state.instance.logo
     },
+    hideSitename () {
+      return this.$store.state.instance.hideSitename
+    },
     sitename () {
       return this.$store.state.instance.name
     },

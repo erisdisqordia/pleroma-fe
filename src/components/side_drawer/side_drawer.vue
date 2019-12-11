@@ -27,7 +27,7 @@
           class="side-drawer-logo-wrapper"
         >
           <img :src="logo">
-          <span>{{ sitename }}</span>
+          <span v-if="!hideSitename">{{ sitename }}</span>
         </div>
       </div>
       <ul>

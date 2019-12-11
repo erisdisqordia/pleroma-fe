@@ -22,7 +22,7 @@ const MFA_BACKUP_CODES_URL = '/api/pleroma/accounts/mfa/backup_codes'
 
 const MFA_SETUP_OTP_URL = '/api/pleroma/accounts/mfa/setup/totp'
 const MFA_CONFIRM_OTP_URL = '/api/pleroma/accounts/mfa/confirm/totp'
-const MFA_DISABLE_OTP_URL = '/api/pleroma/account/mfa/totp'
+const MFA_DISABLE_OTP_URL = '/api/pleroma/accounts/mfa/totp'
 
 const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
 const MASTODON_REGISTRATION_URL = '/api/v1/accounts'

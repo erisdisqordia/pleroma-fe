@@ -141,6 +141,7 @@
   "interactions": {
     "favs_repeats": "Repeats and Favorites",
     "follows": "New follows",
+    "moves": "User migrates",
     "load_older": "Load older interactions"
   },
   "post_status": {

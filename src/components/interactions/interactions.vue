@@ -21,6 +21,10 @@
         key="follows"
         :label="$t('interactions.follows')"
       />
+      <span
+        key="moves"
+        :label="$t('interactions.moves')"
+      />
     </tab-switcher>
     <Notifications
       ref="notifications"

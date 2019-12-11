@@ -1010,6 +1010,10 @@ export const handleMastoWS = (wsEvent) => {
   const parsedEvent = JSON.parse(data)
   const { event, payload } = parsedEvent
   if (MASTODON_STREAMING_EVENTS.has(event)) {
+    // MastoBE and PleromaBE both send payload for delete as a PLAIN string
+    if (event === 'delete') {
+      return { event, id: payload }
+    }
     const data = payload ? JSON.parse(payload) : null
     if (event === 'update') {
       return { event, status: parseStatus(data) }

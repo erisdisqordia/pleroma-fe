@@ -43,26 +43,14 @@ const Notification = {
       const user = this.notification.from_profile
       return highlightStyle(highlight[user.screen_name])
     },
-    userInStore () {
-      return this.$store.getters.findUser(this.notification.from_profile.id)
-    },
     user () {
-      if (this.userInStore) {
-        return this.userInStore
-      }
-      return this.notification.from_profile
+      return this.$store.getters.findUser(this.notification.from_profile.id)
     },
     userProfileLink () {
       return this.generateUserProfileLink(this.user)
     },
-    targetUserInStore () {
-      return this.$store.getters.findUser(this.notification.target.id)
-    },
     targetUser () {
-      if (this.targetUserInStore) {
-        return this.targetUserInStore
-      }
-      return this.notification.target
+      return this.$store.getters.findUser(this.notification.target.id)
     },
     targetUserProfileLink () {
       return this.generateUserProfileLink(this.targetUser)

@@ -340,7 +340,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
             i18nString = 'followed_you'
             break
           case 'move':
-            i18nString = 'moved_to'
+            i18nString = 'migrated_to'
             break
         }
 

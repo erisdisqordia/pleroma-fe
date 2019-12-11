@@ -76,7 +76,7 @@
             </span>
             <span v-if="notification.type === 'move'">
               <i class="fa icon-arrow-curved lit" />
-              <small>{{ $t('notifications.moved_to') }}</small>
+              <small>{{ $t('notifications.migrated_to') }}</small>
             </span>
           </div>
           <div

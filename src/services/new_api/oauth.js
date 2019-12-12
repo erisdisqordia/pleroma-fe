@@ -12,7 +12,7 @@ export const getOrCreateApp = ({ clientId, clientSecret, instance, commit }) => 
 
   form.append('client_name', `PleromaFE_${window.___pleromafe_commit_hash}_${(new Date()).toISOString()}`)
   form.append('redirect_uris', REDIRECT_URI)
-  form.append('scopes', 'read write follow push admin')
+  form.append('scopes', 'read write follow')
 
   return window.fetch(url, {
     method: 'POST',
@@ -28,7 +28,7 @@ const login = ({ instance, clientId }) => {
     response_type: 'code',
     client_id: clientId,
     redirect_uri: REDIRECT_URI,
-    scope: 'read write follow push admin'
+    scope: 'read write follow'
   }
 
   const dataString = reduce(data, (acc, v, k) => {

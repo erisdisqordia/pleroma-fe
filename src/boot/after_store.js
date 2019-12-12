@@ -228,6 +228,12 @@ const getNodeInfo = async ({ store }) => {
 
       const federation = metadata.federation
       store.dispatch('setInstanceOption', { name: 'federationPolicy', value: federation })
+      store.dispatch('setInstanceOption', {
+        name: 'federating',
+        value: typeof federation.enabled === 'undefined'
+          ? true
+          : federation.enabled
+      })
 
       const accounts = metadata.staffAccounts
       await resolveStaffAccounts({ store, accounts })

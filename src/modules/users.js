@@ -481,6 +481,8 @@ const users = {
                 store.dispatch('enableMastoSockets').catch((error) => {
                   console.error('Failed initializing MastoAPI Streaming socket', error)
                   startPolling()
+                }).then(() => {
+                  setTimeout(() => store.dispatch('setNotificationsSilence', false), 10000)
                 })
               } else {
                 startPolling()

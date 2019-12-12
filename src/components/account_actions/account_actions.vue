@@ -9,17 +9,7 @@
     >
       <div slot="popover">
         <div class="dropdown-menu">
-          <button
-            class="btn btn-default btn-block dropdown-item"
-            @click="mentionUser"
-          >
-            {{ $t('user_card.mention') }}
-          </button>
           <template v-if="user.following">
-            <div
-              role="separator"
-              class="dropdown-divider"
-            />
             <button
               v-if="user.showing_reblogs"
               class="btn btn-default dropdown-item"
@@ -34,11 +24,11 @@
             >
               {{ $t('user_card.show_repeats') }}
             </button>
+            <div
+              role="separator"
+              class="dropdown-divider"
+            />
           </template>
-          <div
-            role="separator"
-            class="dropdown-divider"
-          />
           <button
             v-if="user.statusnet_blocking"
             class="btn btn-default btn-block dropdown-item"

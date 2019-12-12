@@ -1,6 +1,7 @@
 import apiService from '../api/api.service.js'
 import timelineFetcherService from '../timeline_fetcher/timeline_fetcher.service.js'
 import notificationsFetcher from '../notifications_fetcher/notifications_fetcher.service.js'
+import followRequestFetcher from '../../services/follow_request_fetcher/follow_request_fetcher.service'
 
 const backendInteractorService = credentials => {
   const fetchStatus = ({ id }) => {
@@ -63,6 +64,10 @@ const backendInteractorService = credentials => {
     return notificationsFetcher.startFetching({ store, credentials })
   }
 
+  const startFetchingFollowRequest = ({ store }) => {
+    return followRequestFetcher.startFetching({ store, credentials })
+  }
+
   // eslint-disable-next-line camelcase
   const tagUser = ({ screen_name }, tag) => {
     return apiService.tagUser({ screen_name, tag, credentials })
@@ -111,7 +116,6 @@ const backendInteractorService = credentials => {
   const subscribeUser = (id) => apiService.subscribeUser({ credentials, id })
   const unsubscribeUser = (id) => apiService.unsubscribeUser({ credentials, id })
   const fetchBlocks = () => apiService.fetchBlocks({ credentials })
-  const fetchFollowRequests = () => apiService.fetchFollowRequests({ credentials })
   const fetchOAuthTokens = () => apiService.fetchOAuthTokens({ credentials })
   const revokeOAuthToken = (id) => apiService.revokeOAuthToken({ id, credentials })
   const fetchPinnedStatuses = (id) => apiService.fetchPinnedStatuses({ credentials, id })
@@ -168,6 +172,7 @@ const backendInteractorService = credentials => {
     verifyCredentials: apiService.verifyCredentials,
     startFetchingTimeline,
     startFetchingNotifications,
+    startFetchingFollowRequest,
     fetchMutes,
     muteUser,
     unmuteUser,
@@ -203,7 +208,6 @@ const backendInteractorService = credentials => {
     mfaSetupOTP,
     mfaConfirmOTP,
     mfaDisableOTP,
-    fetchFollowRequests,
     approveUser,
     denyUser,
     vote,

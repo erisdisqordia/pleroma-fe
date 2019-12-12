@@ -104,7 +104,7 @@
                 {{ $t('settings.hide_followers_count_description') }}
               </Checkbox>
             </p>
-            <p>
+            <p v-if="role === 'admin' || role === 'moderator'">
               <Checkbox v-model="showRole">
                 <template v-if="role === 'admin'">
                   {{ $t('settings.show_admin_badge') }}

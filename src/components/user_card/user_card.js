@@ -93,6 +93,12 @@ export default {
       const roleTitle = rights.admin ? 'admin' : 'moderator'
       return validRole && roleTitle
     },
+    hideFollowsCount () {
+      return this.isOtherUser && this.user.hide_follows_count
+    },
+    hideFollowersCount () {
+      return this.isOtherUser && this.user.hide_followers_count
+    },
     ...mapGetters(['mergedConfig'])
   },
   components: {
@@ -143,6 +149,9 @@ export default {
       }
       this.$store.dispatch('setMedia', [attachment])
       this.$store.dispatch('setCurrent', attachment)
+    },
+    mentionUser () {
+      this.$store.dispatch('openPostStatusModal', { replyTo: true, repliedUser: this.user })
     }
   }
 }

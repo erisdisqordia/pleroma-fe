@@ -370,6 +370,8 @@
       "false": "no",
       "true": "yes"
     },
+    "fun": "Fun",
+    "greentext": "Meme arrows",
     "notifications": "Notifications",
     "notification_setting": "Receive notifications from:",
     "notification_setting_follows": "Users you follow",
@@ -569,6 +571,7 @@
     "followers": "Followers",
     "following": "Following!",
     "follows_you": "Follows you!",
+    "hidden": "Hidden",
     "its_you": "It's you!",
     "media": "Media",
     "mention": "Mention",

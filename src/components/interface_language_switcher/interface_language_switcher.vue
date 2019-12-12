@@ -51,8 +51,8 @@ export default {
   methods: {
     getLanguageName (code) {
       const specialLanguageNames = {
-        'ja': 'Japanese (やさしいにほんご)',
-        'ja_pedantic': 'Japanese (日本語)',
+        'ja': 'Japanese (日本語)',
+        'ja_easy': 'Japanese (やさしいにほんご)',
         'zh': 'Chinese (简体中文)'
       }
       return specialLanguageNames[code] || ISO6391.getName(code)

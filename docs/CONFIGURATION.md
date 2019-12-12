@@ -77,6 +77,9 @@ Use custom image for NSFW'd images
 ### `showFeaturesPanel`
 Show panel showcasing instance features/settings to logged-out visitors
 
+### `hideSitename`
+Hide instance name in header
+
 ## Indirect configuration
 Some features are configured depending on how backend is configured. In general the approach is "if backend allows it there's no need to hide it, if backend doesn't allow it there's no need to show it.
 

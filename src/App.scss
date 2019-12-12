@@ -855,3 +855,31 @@ nav {
 .btn.btn-default {
   min-height: 28px;
 }
+
+.animate-spin {
+  animation: spin 2s infinite linear;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.new-status-notification {
+  position:relative;
+  margin-top: -1px;
+  font-size: 1.1em;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-color: var(--border, $fallback--border);
+  padding: 10px;
+  z-index: 1;
+  background-color: $fallback--fg;
+  background-color: var(--panel, $fallback--fg);
+}

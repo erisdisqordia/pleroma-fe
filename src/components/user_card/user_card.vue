@@ -175,6 +175,14 @@
               {{ $t('user_card.mute') }}
             </button>
           </div>
+          <div>
+            <button
+              class="btn btn-default btn-block"
+              @click="mentionUser"
+            >
+              {{ $t('user_card.mention') }}
+            </button>
+          </div>
           <ModerationTools
             v-if="loggedIn.role === &quot;admin&quot;"
             :user="user"
@@ -208,14 +216,14 @@
           @click.prevent="setProfileView('friends')"
         >
           <h5>{{ $t('user_card.followees') }}</h5>
-          <span>{{ user.friends_count }}</span>
+          <span>{{ hideFollowsCount ? $t('user_card.hidden') : user.friends_count }}</span>
         </div>
         <div
           class="user-count"
           @click.prevent="setProfileView('followers')"
         >
           <h5>{{ $t('user_card.followers') }}</h5>
-          <span>{{ user.followers_count }}</span>
+          <span>{{ hideFollowersCount ? $t('user_card.hidden') : user.followers_count }}</span>
         </div>
       </div>
       <!-- eslint-disable vue/no-v-html -->

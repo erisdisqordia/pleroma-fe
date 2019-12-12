@@ -10,6 +10,10 @@ const SideDrawer = {
   }),
   created () {
     this.closeGesture = GestureService.swipeGesture(GestureService.DIRECTION_LEFT, this.toggleDrawer)
+
+    if (this.currentUser && this.currentUser.locked) {
+      this.$store.dispatch('startFetchingFollowRequest')
+    }
   },
   components: { UserCard },
   computed: {
@@ -28,6 +32,9 @@ const SideDrawer = {
     },
     logo () {
       return this.$store.state.instance.logo
+    },
+    hideSitename () {
+      return this.$store.state.instance.hideSitename
     },
     sitename () {
       return this.$store.state.instance.name

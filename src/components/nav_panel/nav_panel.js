@@ -11,7 +11,7 @@ const NavPanel = {
     chat: state => state.chat.channel,
     followRequestCount: state => state.api.followRequests.length,
     privateMode: state => state.instance.private,
-    federating: state => state.instance.federationPolicy.enabled
+    federating: state => state.instance.federationPolicy.enabled || state.instance.federationPolicy.enabled !== false
   })
 }
 

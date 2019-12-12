@@ -93,17 +93,4 @@
     opacity: 1;
   }
 }
-
-.new-status-notification {
-  position:relative;
-  margin-top: -1px;
-  font-size: 1.1em;
-  border-width: 1px 0 0 0;
-  border-style: solid;
-  border-color: var(--border, $fallback--border);
-  padding: 10px;
-  z-index: 1;
-  background-color: $fallback--fg;
-  background-color: var(--panel, $fallback--fg);
-}
 </style>

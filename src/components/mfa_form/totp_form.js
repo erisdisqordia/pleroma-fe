@@ -7,7 +7,6 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      authApp: 'authFlow/app',
       authSettings: 'authFlow/settings'
     }),
     ...mapState({

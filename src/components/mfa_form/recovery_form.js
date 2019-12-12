@@ -8,18 +8,23 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      authApp: 'authFlow/app',
       authSettings: 'authFlow/settings'
     }),
-    ...mapState({ instance: 'instance' })
+    ...mapState({
+      instance: 'instance',
+      oauth: 'oauth'
+    })
   },
   methods: {
     ...mapMutations('authFlow', ['requireTOTP', 'abortMFA']),
     ...mapActions({ login: 'authFlow/login' }),
     clearError () { this.error = false },
     submit () {
+      const { clientId, clientSecret } = this.oauth
+
       const data = {
-        app: this.authApp,
+        clientId,
+        clientSecret,
         instance: this.instance.server,
         mfaToken: this.authSettings.mfa_token,
         code: this.code

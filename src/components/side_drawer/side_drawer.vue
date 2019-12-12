@@ -36,7 +36,7 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'login' }">
-            {{ $t("login.login") }}
+            <i class="button-icon icon-login" /> {{ $t("login.login") }}
           </router-link>
         </li>
         <li
@@ -44,7 +44,7 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
-            {{ $t("nav.dms") }}
+            <i class="button-icon icon-mail-alt" /> {{ $t("nav.dms") }}
           </router-link>
         </li>
         <li
@@ -52,7 +52,7 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
-            {{ $t("nav.interactions") }}
+            <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
           </router-link>
         </li>
       </ul>
@@ -62,7 +62,7 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'friends' }">
-            {{ $t("nav.timeline") }}
+            <i class="button-icon icon-home-2" /> {{ $t("nav.timeline") }}
           </router-link>
         </li>
         <li
@@ -70,7 +70,7 @@
           @click="toggleDrawer"
         >
           <router-link to="/friend-requests">
-            {{ $t("nav.friend_requests") }}
+            <i class="button-icon icon-user-plus" /> {{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
               class="badge follow-request-count"
@@ -81,12 +81,12 @@
         </li>
         <li @click="toggleDrawer">
           <router-link to="/main/public">
-            {{ $t("nav.public_tl") }}
+            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
           </router-link>
         </li>
         <li @click="toggleDrawer">
           <router-link to="/main/all">
-            {{ $t("nav.twkn") }}
+            <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
           </router-link>
         </li>
         <li
@@ -94,14 +94,14 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'chat' }">
-            {{ $t("nav.chat") }}
+            <i class="button-icon icon-chat" /> {{ $t("nav.chat") }}
           </router-link>
         </li>
       </ul>
       <ul>
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'search' }">
-            {{ $t("nav.search") }}
+            <i class="button-icon icon-search" /> {{ $t("nav.search") }}
           </router-link>
         </li>
         <li
@@ -109,17 +109,17 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'who-to-follow' }">
-            {{ $t("nav.who_to_follow") }}
+            <i class="button-icon icon-user-plus" /> {{ $t("nav.who_to_follow") }}
           </router-link>
         </li>
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'settings' }">
-            {{ $t("settings.settings") }}
+            <i class="button-icon icon-cog" /> {{ $t("settings.settings") }}
           </router-link>
         </li>
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'about'}">
-            {{ $t("nav.about") }}
+            <i class="button-icon icon-info-circled" /> {{ $t("nav.about") }}
           </router-link>
         </li>
         <li
@@ -130,7 +130,7 @@
             href="/pleroma/admin/#/login-pleroma"
             target="_blank"
           >
-            {{ $t("nav.administration") }}
+            <i class="button-icon icon-gauge" /> {{ $t("nav.administration") }}
           </a>
         </li>
         <li
@@ -141,7 +141,7 @@
             href="#"
             @click="doLogout"
           >
-            {{ $t("login.logout") }}
+            <i class="button-icon icon-logout" /> {{ $t("login.logout") }}
           </a>
         </li>
       </ul>
@@ -215,6 +215,10 @@
   box-shadow: var(--panelShadow);
   background-color: $fallback--bg;
   background-color: var(--bg, $fallback--bg);
+
+  .button-icon:before {
+    width: 1.1em;
+  }
 }
 
 .side-drawer-logo-wrapper {

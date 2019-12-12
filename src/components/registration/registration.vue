@@ -172,7 +172,7 @@
                 for="captcha-label"
               >{{ $t('captcha') }}</label>
 
-              <template v-if="captcha.type == 'kocaptcha'">
+              <template v-if="['kocaptcha', 'native'].includes(captcha.type)">
                 <img
                   :src="captcha.url"
                   @click="setCaptcha"

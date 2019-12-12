@@ -1,4 +1,3 @@
-import followRequestFetcher from '../../services/follow_request_fetcher/follow_request_fetcher.service'
 import { mapState } from 'vuex'
 
 const NavPanel = {

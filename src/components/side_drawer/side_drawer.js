@@ -46,7 +46,7 @@ const SideDrawer = {
       return this.$store.state.instance.private
     },
     federating () {
-      return this.$store.state.instance.federationPolicy.federating || true
+      return this.$store.state.instance.federationPolicy.enabled
     }
   },
   methods: {

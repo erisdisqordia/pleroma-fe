@@ -99,3 +99,6 @@ Setting this will change the warning text that is displayed for direct messages.
 ATTENTION: If you actually want the behavior to change. You will need to set the appropriate option at the backend. See the backend documentation for information about that.
 
 DO NOT activate this without checking the backend configuration first!
+
+### Private Mode
+If the `private` instance setting is enabled in the backend, features that are not accessible without authentication, such as the timelines and search will be disabled for unauthenticated users.

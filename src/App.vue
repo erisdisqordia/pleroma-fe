@@ -41,6 +41,7 @@
         </div>
         <div class="item right">
           <search-bar
+            v-if="currentUser || !privateMode"
             class="nav-icon mobile-hidden"
             @toggled="onSearchBarToggled"
             @click.stop.native

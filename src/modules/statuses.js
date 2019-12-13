@@ -38,6 +38,7 @@ export const defaultState = () => ({
   notifications: emptyNotifications(),
   favorites: new Set(),
   error: false,
+  errorData: null,
   timelines: {
     mentions: emptyTl(),
     public: emptyTl(),
@@ -479,6 +480,9 @@ export const mutations = {
   setError (state, { value }) {
     state.error = value
   },
+  setErrorData (state, { value }) {
+    state.errorData = value
+  },
   setNotificationsLoading (state, { value }) {
     state.notifications.loading = value
   },
@@ -527,6 +531,9 @@ const statuses = {
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })
+    },
+    setErrorData ({ rootState, commit }, { value }) {
+      commit('setErrorData', { value })
     },
     setNotificationsLoading ({ rootState, commit }, { value }) {
       commit('setNotificationsLoading', { value })

@@ -36,16 +36,20 @@
 
 .sticker-picker {
   width: 100%;
-  position: relative;
   .contents {
     min-height: 250px;
     .sticker-picker-content {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 4px;
       .sticker {
-        display: inline-block;
-        width: 20%;
-        height: 20%;
+        display: flex;
+        flex: 1 1 auto;
+        margin: 4px;
+        width: 56px;
+        height: 56px;
         img {
-          width: 100%;
+          height: 100%;
           &:hover {
             filter: drop-shadow(0 0 5px var(--link, $fallback--link));
           }

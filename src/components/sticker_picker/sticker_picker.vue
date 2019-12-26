@@ -36,23 +36,23 @@
 
 .sticker-picker {
   width: 100%;
-  position: relative;
-  .tab-switcher {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-  .sticker-picker-content {
-    .sticker {
-      display: inline-block;
-      width: 20%;
-      height: 20%;
-      img {
-        width: 100%;
-        &:hover {
-          filter: drop-shadow(0 0 5px var(--link, $fallback--link));
+  .contents {
+    min-height: 250px;
+    .sticker-picker-content {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 4px;
+      .sticker {
+        display: flex;
+        flex: 1 1 auto;
+        margin: 4px;
+        width: 56px;
+        height: 56px;
+        img {
+          height: 100%;
+          &:hover {
+            filter: drop-shadow(0 0 5px var(--link, $fallback--link));
+          }
         }
       }
     }

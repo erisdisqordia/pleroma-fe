@@ -27,6 +27,7 @@ const defaultState = {
   scopeCopy: true,
   subjectLineBehavior: 'email',
   postContentType: 'text/plain',
+  hideSitename: false,
   nsfwCensorImage: undefined,
   vapidPublicKey: undefined,
   noAttachmentLinks: false,

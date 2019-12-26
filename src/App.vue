@@ -31,6 +31,7 @@
         </div>
         <div class="item">
           <router-link
+            v-if="!hideSitename"
             class="site-name"
             :to="{ name: 'root' }"
             active-class="home"
@@ -40,6 +41,7 @@
         </div>
         <div class="item right">
           <search-bar
+            v-if="currentUser || !privateMode"
             class="nav-icon mobile-hidden"
             @toggled="onSearchBarToggled"
             @click.stop.native

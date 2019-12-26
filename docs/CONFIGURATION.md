@@ -77,6 +77,9 @@ Use custom image for NSFW'd images
 ### `showFeaturesPanel`
 Show panel showcasing instance features/settings to logged-out visitors
 
+### `hideSitename`
+Hide instance name in header
+
 ## Indirect configuration
 Some features are configured depending on how backend is configured. In general the approach is "if backend allows it there's no need to hide it, if backend doesn't allow it there's no need to show it.
 
@@ -96,3 +99,6 @@ Setting this will change the warning text that is displayed for direct messages.
 ATTENTION: If you actually want the behavior to change. You will need to set the appropriate option at the backend. See the backend documentation for information about that.
 
 DO NOT activate this without checking the backend configuration first!
+
+### Private Mode
+If the `private` instance setting is enabled in the backend, features that are not accessible without authentication, such as the timelines and search will be disabled for unauthenticated users.

@@ -47,7 +47,8 @@ const api = {
     startMastoUserSocket (store) {
       return new Promise((resolve, reject) => {
         try {
-          const { state, dispatch } = store
+          const { state, dispatch, rootState } = store
+          const timelineData = rootState.statuses.timelines.friends
           state.mastoUserSocket = state.backendInteractor.startUserSocket({ store })
           state.mastoUserSocket.addEventListener(
             'message',
@@ -62,7 +63,7 @@ const api = {
                 dispatch('addNewStatuses', {
                   statuses: [message.status],
                   userId: false,
-                  showImmediately: false,
+                  showImmediately: timelineData.visibleStatuses.length === 0,
                   timeline: 'friends'
                 })
               }

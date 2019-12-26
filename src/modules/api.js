@@ -35,60 +35,67 @@ const api = {
     enableMastoSockets (store) {
       const { state, dispatch } = store
       if (state.mastoUserSocket) return
-      dispatch('startMastoUserSocket')
+      return dispatch('startMastoUserSocket')
     },
     disableMastoSockets (store) {
       const { state, dispatch } = store
       if (!state.mastoUserSocket) return
-      dispatch('stopMastoUserSocket')
+      return dispatch('stopMastoUserSocket')
     },
 
     // MastoAPI 'User' sockets
     startMastoUserSocket (store) {
-      const { state, dispatch } = store
-      state.mastoUserSocket = state.backendInteractor.startUserSocket({ store })
-      state.mastoUserSocket.addEventListener(
-        'message',
-        ({ detail: message }) => {
-          if (!message) return // pings
-          if (message.event === 'notification') {
-            dispatch('addNewNotifications', {
-              notifications: [message.notification],
-              older: false
-            })
-          } else if (message.event === 'update') {
-            dispatch('addNewStatuses', {
-              statuses: [message.status],
-              userId: false,
-              showImmediately: false,
-              timeline: 'friends'
-            })
-          }
-        }
-      )
-      state.mastoUserSocket.addEventListener('error', ({ detail: error }) => {
-        console.error('Error in MastoAPI websocket:', error)
-      })
-      state.mastoUserSocket.addEventListener('close', ({ detail: closeEvent }) => {
-        const ignoreCodes = new Set([
-          1000, // Normal (intended) closure
-          1001 // Going away
-        ])
-        const { code } = closeEvent
-        if (ignoreCodes.has(code)) {
-          console.debug(`Not restarting socket becasue of closure code ${code} is in ignore list`)
-        } else {
-          console.warn(`MastoAPI websocket disconnected, restarting. CloseEvent code: ${code}`)
-          dispatch('startFetchingTimeline', { timeline: 'friends' })
-          dispatch('startFetchingNotifications')
-          dispatch('restartMastoUserSocket')
+      return new Promise((resolve, reject) => {
+        try {
+          const { state, dispatch } = store
+          state.mastoUserSocket = state.backendInteractor.startUserSocket({ store })
+          state.mastoUserSocket.addEventListener(
+            'message',
+            ({ detail: message }) => {
+              if (!message) return // pings
+              if (message.event === 'notification') {
+                dispatch('addNewNotifications', {
+                  notifications: [message.notification],
+                  older: false
+                })
+              } else if (message.event === 'update') {
+                dispatch('addNewStatuses', {
+                  statuses: [message.status],
+                  userId: false,
+                  showImmediately: false,
+                  timeline: 'friends'
+                })
+              }
+            }
+          )
+          state.mastoUserSocket.addEventListener('error', ({ detail: error }) => {
+            console.error('Error in MastoAPI websocket:', error)
+          })
+          state.mastoUserSocket.addEventListener('close', ({ detail: closeEvent }) => {
+            const ignoreCodes = new Set([
+              1000, // Normal (intended) closure
+              1001 // Going away
+            ])
+            const { code } = closeEvent
+            if (ignoreCodes.has(code)) {
+              console.debug(`Not restarting socket becasue of closure code ${code} is in ignore list`)
+            } else {
+              console.warn(`MastoAPI websocket disconnected, restarting. CloseEvent code: ${code}`)
+              dispatch('startFetchingTimeline', { timeline: 'friends' })
+              dispatch('startFetchingNotifications')
+              dispatch('restartMastoUserSocket')
+            }
+          })
+          resolve()
+        } catch (e) {
+          reject(e)
         }
       })
     },
     restartMastoUserSocket ({ dispatch }) {
       // This basically starts MastoAPI user socket and stops conventional
       // fetchers when connection reestablished
-      dispatch('startMastoUserSocket').then(() => {
+      return dispatch('startMastoUserSocket').then(() => {
         dispatch('stopFetchingTimeline', { timeline: 'friends' })
         dispatch('stopFetchingNotifications')
       })

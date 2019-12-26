@@ -103,6 +103,10 @@ const settings = {
 
         promise.then(() => {
           this.$store.dispatch('setOption', { name: 'useStreamingApi', value })
+        }).catch((e) => {
+          console.error('Failed starting MastoAPI Streaming socket', e)
+          this.$store.dispatch('disableMastoSockets')
+          this.$store.dispatch('setOption', { name: 'useStreamingApi', value: false })
         })
       }
     }

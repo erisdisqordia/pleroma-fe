@@ -47,6 +47,11 @@ const Notifications = {
   components: {
     Notification
   },
+  created () {
+    const { dispatch } = this.$store
+
+    dispatch('fetchAndUpdateNotifications')
+  },
   watch: {
     unseenCount (count) {
       if (count > 0) {

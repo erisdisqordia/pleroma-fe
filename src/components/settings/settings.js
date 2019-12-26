@@ -84,13 +84,29 @@ const settings = {
         }
       }])
       .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}),
-    // Special cases (need to transform values)
+    // Special cases (need to transform values or perform actions first)
     muteWordsString: {
       get () { return this.$store.getters.mergedConfig.muteWords.join('\n') },
       set (value) {
         this.$store.dispatch('setOption', {
           name: 'muteWords',
           value: filter(value.split('\n'), (word) => trim(word).length > 0)
+        })
+      }
+    },
+    useStreamingApi: {
+      get () { return this.$store.getters.mergedConfig.useStreamingApi },
+      set (value) {
+        const promise = value
+          ? this.$store.dispatch('enableMastoSockets')
+          : this.$store.dispatch('disableMastoSockets')
+
+        promise.then(() => {
+          this.$store.dispatch('setOption', { name: 'useStreamingApi', value })
+        }).catch((e) => {
+          console.error('Failed starting MastoAPI Streaming socket', e)
+          this.$store.dispatch('disableMastoSockets')
+          this.$store.dispatch('setOption', { name: 'useStreamingApi', value: false })
         })
       }
     }

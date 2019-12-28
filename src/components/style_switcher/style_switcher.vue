@@ -366,6 +366,20 @@
               :fallback="previewTheme.opacity.faint || 0.5"
             />
           </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.underlay') }}</h4>
+            <ColorInput
+              v-model="underlayColorLocal"
+              name="underlay"
+              :label="$t('settings.style.advanced_colors.underlay')"
+              fallback='#000000'
+            />
+            <OpacityInput
+              v-model="underlayOpacityLocal"
+              name="underlayOpacity"
+              :fallback="previewTheme.opacity.underlay || 0.15"
+            />
+          </div>
         </div>
 
         <div

@@ -1,4 +1,4 @@
-import { rgb2hex, hex2rgb, getContrastRatio, alphaBlend } from '../../services/color_convert/color_convert.js'
+import { rgb2hex, hex2rgb, getContrastRatio, getContrastRatioLayers, alphaBlend } from '../../services/color_convert/color_convert.js'
 import { set, delete as del } from 'vue'
 import { merge } from 'lodash'
 import { generateCompat, generateColors, generateShadows, generateRadii, generateFonts, composePreset, getThemes } from '../../services/style_setter/style_setter.js'
@@ -52,6 +52,9 @@ export default {
 
       bgColorLocal: '',
       bgOpacityLocal: undefined,
+
+      underlayColorLocal: '',
+      underlayOpacityLocal: undefined,
 
       fgColorLocal: '',
       fgTextColorLocal: undefined,
@@ -145,6 +148,8 @@ export default {
 
         accent: this.accentColorLocal,
 
+        underlay: this.underlayColorLocal,
+
         panel: this.panelColorLocal,
         panelText: this.panelTextColorLocal,
         panelLink: this.panelLinkColorLocal,
@@ -182,7 +187,8 @@ export default {
         panel: this.panelOpacityLocal,
         topBar: this.topBarOpacityLocal,
         border: this.borderOpacityLocal,
-        faint: this.faintOpacityLocal
+        faint: this.faintOpacityLocal,
+        underlay: this.underlayOpacityLocal
       }
     },
     currentRadii () {
@@ -240,6 +246,7 @@ export default {
 
       const bgs = {
         bg: hex2rgb(colors.bg),
+        underlay: hex2rgb(colors.underlay),
         btn: hex2rgb(colors.btn),
         panel: hex2rgb(colors.panel),
         topBar: hex2rgb(colors.topBar),
@@ -249,29 +256,31 @@ export default {
         badgeNotification: hex2rgb(colors.badgeNotification)
       }
 
-      /* This is a bit confusing because "bottom layer" used is text color
-       * This is done to get worst case scenario when background below transparent
-       * layer matches text color, making it harder to read the lower alpha is.
-       */
-      const ratios = {
-        bgText: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.text), fgs.text),
-        bgLink: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.link), fgs.link),
-        bgRed: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.red), fgs.red),
-        bgGreen: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.green), fgs.green),
-        bgBlue: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.blue), fgs.blue),
-        bgOrange: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.orange), fgs.orange),
+      const bg = [bgs.bg, opacity.bg]
+      const underlay = [bgs.underlay, opacity.underlay]
 
+      const panel = [underlay, bg]
+
+      const ratios = {
+        bgText: getContrastRatioLayers(fgs.text, panel, fgs.text),
+        bgLink: getContrastRatioLayers(fgs.link, panel, fgs.link),
+        bgRed: getContrastRatioLayers(fgs.red, panel, fgs.red),
+        bgGreen: getContrastRatioLayers(fgs.green, panel, fgs.green),
+        bgBlue: getContrastRatioLayers(fgs.blue, panel, fgs.blue),
+        bgOrange: getContrastRatioLayers(fgs.orange, panel, fgs.orange),
+
+        // TODO what's this?
         tintText: getContrastRatio(alphaBlend(bgs.bg, 0.5, fgs.panelText), fgs.text),
 
-        panelText: getContrastRatio(alphaBlend(bgs.panel, opacity.panel, fgs.panelText), fgs.panelText),
-        panelLink: getContrastRatio(alphaBlend(bgs.panel, opacity.panel, fgs.panelLink), fgs.panelLink),
+        panelText: getContrastRatioLayers(fgs.text, [...panel, [bgs.panel, opacity.panel]], fgs.panelText),
+        panelLink: getContrastRatioLayers(fgs.link, [...panel, [bgs.panel, opacity.panel]], fgs.panelLink),
 
-        btnText: getContrastRatio(alphaBlend(bgs.btn, opacity.btn, fgs.btnText), fgs.btnText),
+        btnText: getContrastRatioLayers(fgs.text, [...panel, [bgs.btn, opacity.btn]], fgs.btnText),
 
-        inputText: getContrastRatio(alphaBlend(bgs.input, opacity.input, fgs.inputText), fgs.inputText),
+        inputText: getContrastRatioLayers(fgs.text, [...panel, [bgs.input, opacity.input]], fgs.inputText),
 
-        topBarText: getContrastRatio(alphaBlend(bgs.topBar, opacity.topBar, fgs.topBarText), fgs.topBarText),
-        topBarLink: getContrastRatio(alphaBlend(bgs.topBar, opacity.topBar, fgs.topBarLink), fgs.topBarLink)
+        topBarText: getContrastRatioLayers(fgs.text, [...panel, [bgs.topBar, opacity.topBar]], fgs.topBarText),
+        topBarLink: getContrastRatioLayers(fgs.link, [...panel, [bgs.topBar, opacity.topBar]], fgs.topBarLink)
       }
 
       return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})

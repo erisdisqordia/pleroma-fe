@@ -1,6 +1,6 @@
 import { times } from 'lodash'
 import { brightness, invertLightness, convert, contrastRatio } from 'chromatism'
-import { rgb2hex, hex2rgb, mixrgb, getContrastRatio, alphaBlend } from '../color_convert/color_convert.js'
+import { rgb2hex, hex2rgb, mixrgb, getContrastRatio, alphaBlend, alphaBlendLayers } from '../color_convert/color_convert.js'
 
 // While this is not used anymore right now, I left it in if we want to do custom
 // styles that aren't just colors, so user can pick from a few different distinct
@@ -64,8 +64,10 @@ const getTextColor = function (bg, text, preserve) {
     const base = typeof text.a !== 'undefined' ? { a: text.a } : {}
     const result = Object.assign(base, invertLightness(text).rgb)
     if (!preserve && getContrastRatio(bg, result) < 4.5) {
+      // B&W
       return contrastRatio(bg, text).rgb
     }
+    // Inverted color
     return result
   }
   return text
@@ -173,7 +175,8 @@ const generateColors = (input) => {
   const opacity = Object.assign({
     alert: 0.5,
     input: 0.5,
-    faint: 0.5
+    faint: 0.5,
+    underlay: 0.15
   }, Object.entries(input.opacity || {}).reduce((acc, [k, v]) => {
     if (typeof v !== 'undefined') {
       acc[k] = v
@@ -210,28 +213,37 @@ const generateColors = (input) => {
   colors.faint = col.faint || Object.assign({}, col.text)
 
   colors.bg = col.bg
-  colors.lightBg = col.lightBg || brightness(5, colors.bg).rgb
+  colors.lightBg = col.lightBg || brightness(5 * mod, colors.bg).rgb
+
+  const underlay = [col.underlay, opacity.underlay]
+  const fg = [col.fg, opacity.fg]
+  const bg = [col.bg, opacity.bg]
 
   colors.fg = col.fg
-  colors.fgText = col.fgText || getTextColor(colors.fg, colors.text)
-  colors.fgLink = col.fgLink || getTextColor(colors.fg, colors.link, true)
+  colors.fgText = col.fgText || getTextColor(alphaBlendLayers(colors.text, [underlay, bg, fg]), colors.text)
+  colors.fgLink = col.fgLink || getTextColor(alphaBlendLayers(colors.link, [underlay, bg, fg]), colors.link, true)
+  colors.underlay = col.underlay || hex2rgb('#000000')
 
   colors.border = col.border || brightness(2 * mod, colors.fg).rgb
 
   colors.btn = col.btn || Object.assign({}, col.fg)
-  colors.btnText = col.btnText || getTextColor(colors.btn, colors.fgText)
+  const btn = [colors.btn, opacity.btn || 1]
+  colors.btnText = col.btnText || getTextColor(alphaBlendLayers(colors.fgText, [underlay, bg, fg, btn]), colors.fgText)
 
   colors.input = col.input || Object.assign({}, col.fg)
-  colors.inputText = col.inputText || getTextColor(colors.input, colors.lightText)
+  const inputCol = [colors.input, opacity.input]
+  colors.inputText = col.inputText || getTextColor(alphaBlendLayers(colors.lightText, [underlay, bg, fg, inputCol]), colors.lightText)
 
   colors.panel = col.panel || Object.assign({}, col.fg)
-  colors.panelText = col.panelText || getTextColor(colors.panel, colors.fgText)
-  colors.panelLink = col.panelLink || getTextColor(colors.panel, colors.fgLink)
-  colors.panelFaint = col.panelFaint || getTextColor(colors.panel, colors.faint)
+  const panel = [colors.panel, opacity.panel]
+  colors.panelText = col.panelText || getTextColor(alphaBlendLayers(colors.fgText, [underlay, bg, panel]), colors.fgText)
+  colors.panelLink = col.panelLink || getTextColor(alphaBlendLayers(colors.fgLink, [underlay, bg, panel]), colors.fgLink)
+  colors.panelFaint = col.panelFaint || getTextColor(alphaBlendLayers(colors.faint, [underlay, bg, panel]), colors.faint)
 
   colors.topBar = col.topBar || Object.assign({}, col.fg)
-  colors.topBarText = col.topBarText || getTextColor(colors.topBar, colors.fgText)
-  colors.topBarLink = col.topBarLink || getTextColor(colors.topBar, colors.fgLink)
+  const topBar = [colors.topBar, opacity.topBar]
+  colors.topBarText = col.topBarText || getTextColor(alphaBlendLayers(colors.fgText, [topBar]), colors.fgText)
+  colors.topBarLink = col.topBarLink || getTextColor(alphaBlendLayers(colors.fgLink, [topBar]), colors.fgLink)
 
   colors.faintLink = col.faintLink || Object.assign({}, col.link || col.accent)
   colors.linkBg = alphaBlend(colors.link, 0.4, colors.bg)
@@ -255,6 +267,7 @@ const generateColors = (input) => {
   colors.badgeNotificationText = contrastRatio(colors.badgeNotification).rgb
 
   Object.entries(opacity).forEach(([ k, v ]) => {
+    console.log(k)
     if (typeof v === 'undefined') return
     if (k === 'alert') {
       colors.alertError.a = v

@@ -1,5 +1,8 @@
 import { map } from 'lodash'
 
+// useful for visualizing color when debugging
+export const consoleColor = (color) => console.log('%c##########', 'background: ' + color + '; color: ' + color)
+
 const rgb2hex = (r, g, b) => {
   if (r === null || typeof r === 'undefined') {
     return undefined
@@ -78,6 +81,16 @@ const getContrastRatio = (a, b) => {
 
   return (l1 + 0.05) / (l2 + 0.05)
 }
+/**
+ * Same as `getContrastRatio` but for multiple layers in-between
+ *
+ * @param {Object} text - text color (topmost layer)
+ * @param {[Object, Number]} layers[] - layers between text and bedrock
+ * @param {Object} bedrock - layer at the very bottom
+ */
+export const getContrastRatioLayers = (text, layers, bedrock) => {
+  return getContrastRatio(alphaBlendLayers(bedrock, layers), text)
+}
 
 /**
  * This performs alpha blending between solid background and semi-transparent foreground
@@ -96,6 +109,16 @@ const alphaBlend = (fg, fga, bg) => {
     return acc
   }, {})
 }
+
+/**
+ * Same as `alphaBlend` but for multiple layers in-between
+ *
+ * @param {Object} bedrock - layer at the very bottom
+ * @param {[Object, Number]} layers[] - layers between text and bedrock
+ */
+export const alphaBlendLayers = (bedrock, layers) => layers.reduce((acc, [color, opacity]) => {
+  return alphaBlend(color, opacity, acc)
+}, bedrock)
 
 const invert = (rgb) => {
   return 'rgb'.split('').reduce((acc, c) => {

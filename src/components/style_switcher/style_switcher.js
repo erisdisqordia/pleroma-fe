@@ -46,7 +46,8 @@ export default {
       keepFonts: false,
 
       textColorLocal: '',
-      linkColorLocal: '',
+      accentColorLocal: undefined,
+      linkColorLocal: undefined,
 
       bgColorLocal: '',
       bgOpacityLocal: undefined,
@@ -131,6 +132,8 @@ export default {
         fg: this.fgColorLocal,
         fgText: this.fgTextColorLocal,
         fgLink: this.fgLinkColorLocal,
+
+        accent: this.accentColorLocal,
 
         panel: this.panelColorLocal,
         panelText: this.panelTextColorLocal,

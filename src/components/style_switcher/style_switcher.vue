@@ -115,8 +115,17 @@
             />
             <ContrastRatio :contrast="previewContrast.bgText" />
             <ColorInput
+              v-model="accentColorLocal"
+              name="accentColor"
+              :fallback="previewTheme.colors.link"
+              :showOptionalTickbox="typeof linkColorLocal !== 'undefined'"
+              :label="$t('settings.accent')"
+            />
+            <ColorInput
               v-model="linkColorLocal"
               name="linkColor"
+              :fallback="previewTheme.colors.accent"
+              :showOptionalTickbox="typeof accentColorLocal !== 'undefined'"
               :label="$t('settings.links')"
             />
             <ContrastRatio :contrast="previewContrast.bgLink" />
@@ -336,7 +345,7 @@
             <ColorInput
               v-model="faintColorLocal"
               name="faintColor"
-              :fallback="previewTheme.colors.faint || 1"
+              :fallback="previewTheme.colors.faint"
               :label="$t('settings.text')"
             />
             <ColorInput

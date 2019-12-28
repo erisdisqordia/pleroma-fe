@@ -50,7 +50,7 @@
           "y": "0",
           "blur": 0,
           "spread": "1",
-          "color": "--link",
+          "color": "--accent",
           "alpha": "0.3",
           "inset": true
         },

@@ -160,7 +160,13 @@ const generateColors = (input) => {
     }
     return acc
   }, {}))
-  const col = Object.entries(input.colors || input).reduce((acc, [k, v]) => {
+
+  const inputColors = input.colors || input
+
+  const compat = input.v3compat || {}
+  const compatColors = compat.colors || {}
+
+  const col = Object.entries({ ...inputColors, ...compatColors }).reduce((acc, [k, v]) => {
     if (typeof v === 'object') {
       acc[k] = v
     } else {
@@ -174,7 +180,10 @@ const generateColors = (input) => {
 
   colors.text = col.text
   colors.lightText = brightness(20 * mod, colors.text).rgb
-  colors.link = col.link
+
+  colors.accent = col.accent || col.link
+  colors.link = col.link || col.accent
+
   colors.faint = col.faint || Object.assign({}, col.text)
 
   colors.bg = col.bg

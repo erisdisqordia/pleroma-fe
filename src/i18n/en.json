@@ -272,6 +272,7 @@
     "follow_import": "Follow import",
     "follow_import_error": "Error importing followers",
     "follows_imported": "Follows imported! Processing them will take a while.",
+    "accent": "Accent",
     "foreground": "Foreground",
     "general": "General",
     "hide_attachments_in_convo": "Hide attachments in conversations",

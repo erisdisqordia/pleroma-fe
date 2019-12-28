@@ -2,7 +2,7 @@
   <div class="style-switcher">
     <div class="presets-container">
       <div class="save-load">
-        <export-import
+        <ExportImport
           :export-object="exportedTheme"
           :export-label="$t(&quot;settings.export_theme&quot;)"
           :import-label="$t(&quot;settings.import_theme&quot;)"
@@ -38,7 +38,7 @@
               </label>
             </div>
           </template>
-        </export-import>
+        </ExportImport>
       </div>
       <div class="save-load-options">
         <span class="keep-option">

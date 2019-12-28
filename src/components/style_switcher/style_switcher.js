@@ -1,6 +1,7 @@
 import { rgb2hex, hex2rgb, getContrastRatio, alphaBlend } from '../../services/color_convert/color_convert.js'
 import { set, delete as del } from 'vue'
-import { generateColors, generateShadows, generateRadii, generateFonts, composePreset, getThemes } from '../../services/style_setter/style_setter.js'
+import { merge } from 'lodash'
+import { generateCompat, generateColors, generateShadows, generateRadii, generateFonts, composePreset, getThemes } from '../../services/style_setter/style_setter.js'
 import ColorInput from '../color_input/color_input.vue'
 import RangeInput from '../range_input/range_input.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
@@ -122,6 +123,15 @@ export default {
   computed: {
     selectedVersion () {
       return Array.isArray(this.selected) ? 1 : 2
+    },
+    currentCompat () {
+      return generateCompat({
+        shadows: this.shadowsLocal,
+        fonts: this.fontsLocal,
+        opacity: this.currentOpacity,
+        colors: this.currentColors,
+        radii: this.currentRadii
+      })
     },
     currentColors () {
       return {
@@ -332,7 +342,7 @@ export default {
 
       return {
         // To separate from other random JSON files and possible future theme formats
-        _pleroma_theme_version: 2, theme
+        _pleroma_theme_version: 2, theme: merge(theme, this.currentCompat)
       }
     }
   },
@@ -364,7 +374,7 @@ export default {
     onImport (parsed) {
       if (parsed._pleroma_theme_version === 1) {
         this.normalizeLocalState(parsed, 1)
-      } else if (parsed._pleroma_theme_version === 2) {
+      } else if (parsed._pleroma_theme_version >= 2) {
         this.normalizeLocalState(parsed.theme, 2)
       }
     },
@@ -414,6 +424,7 @@ export default {
 
     /**
      * This applies stored theme data onto form. Supports three versions of data:
+     * v3 (version = 3) - same as 2 but with some incompatible changes
      * v2 (version = 2) - newer version of themes.
      * v1 (version = 1) - older version of themes (import from file)
      * v1l (version = l1) - older version of theme (load from local storage)
@@ -421,12 +432,21 @@ export default {
      * @param {Object} input - input data
      * @param {Number} version - version of data. 0 means try to guess based on data. "l1" means v1, locastorage type
      */
-    normalizeLocalState (input, version = 0) {
-      const colors = input.colors || input
+    normalizeLocalState (originalInput, version = 0) {
+      let input
+      if (typeof originalInput.v3compat !== undefined) {
+        version = 3
+        input = merge(originalInput, originalInput.v3compat)
+      } else {
+        input = originalInput
+      }
+
+      const compat = input.v3compat
       const radii = input.radii || input
       const opacity = input.opacity
       const shadows = input.shadows || {}
       const fonts = input.fonts || {}
+      const colors = input.colors || input
 
       if (version === 0) {
         if (input.version) version = input.version
@@ -530,6 +550,7 @@ export default {
     currentColors () {
       try {
         this.previewColors = generateColors({
+          v3compat: this.currentCompat,
           opacity: this.currentOpacity,
           colors: this.currentColors
         })
@@ -542,8 +563,9 @@ export default {
     currentOpacity () {
       try {
         this.previewColors = generateColors({
+          v3compat: this.currentCompat,
           opacity: this.currentOpacity,
-          colors: this.currentColors
+          colors: this.currentColors,
         })
       } catch (e) {
         console.warn(e)

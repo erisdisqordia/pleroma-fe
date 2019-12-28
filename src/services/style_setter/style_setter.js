@@ -148,6 +148,26 @@ const getCssColor = (input, a) => {
   return rgb2rgba({ ...rgb, a })
 }
 
+// Generates a "patch" for theme to make it compatible with v2
+export const generateCompat = (input) => {
+  const { colors } = input
+  const v3compat = {
+    colors: {}
+  }
+  const v2colorsPatch = {}
+
+  // # Link became optional in v3
+  if (typeof colors.link === 'undefined') {
+    v2colorsPatch.link = colors.accent
+    v3compat.colors.link = null
+  }
+
+  return {
+    v3compat,
+    colors: v2colorsPatch
+  }
+}
+
 const generateColors = (input) => {
   const colors = {}
   const opacity = Object.assign({
@@ -164,7 +184,10 @@ const generateColors = (input) => {
   const inputColors = input.colors || input
 
   const compat = input.v3compat || {}
-  const compatColors = compat.colors || {}
+  const compatColors = Object.entries(compat.colors || {}).reduce((acc, [key, value]) => {
+    const newVal = value === null ? undefined : value
+    return { ...acc, [key]: newVal }
+  }, {})
 
   const col = Object.entries({ ...inputColors, ...compatColors }).reduce((acc, [k, v]) => {
     if (typeof v === 'object') {
@@ -210,7 +233,7 @@ const generateColors = (input) => {
   colors.topBarText = col.topBarText || getTextColor(colors.topBar, colors.fgText)
   colors.topBarLink = col.topBarLink || getTextColor(colors.topBar, colors.fgLink)
 
-  colors.faintLink = col.faintLink || Object.assign({}, col.link)
+  colors.faintLink = col.faintLink || Object.assign({}, col.link || col.accent)
   colors.linkBg = alphaBlend(colors.link, 0.4, colors.bg)
 
   colors.icon = mixrgb(colors.bg, colors.text)

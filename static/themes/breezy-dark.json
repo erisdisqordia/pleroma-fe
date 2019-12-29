@@ -107,8 +107,12 @@
     },
     "fonts": {},
     "opacity": {
-      "input": "1",
-      "panel": "0"
+      "input": "1"
+    },
+    "v3compat": {
+      "colors": {
+        "panel": "transparent"
+      }
     },
     "colors": {
       "bg": "#31363b",

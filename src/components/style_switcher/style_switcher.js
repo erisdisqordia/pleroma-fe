@@ -25,6 +25,14 @@ const v1OnlyNames = [
   'cOrange'
 ].map(_ => _ + 'ColorLocal')
 
+const colorConvert = (color) => {
+  if (color === 'transparent') {
+    return color
+  } else {
+    return hex2rgb(color)
+  }
+}
+
 export default {
   data () {
     return {
@@ -228,36 +236,36 @@ export default {
 
       // fgsfds :DDDD
       const fgs = {
-        text: hex2rgb(colors.text),
-        panelText: hex2rgb(colors.panelText),
-        panelLink: hex2rgb(colors.panelLink),
-        btnText: hex2rgb(colors.btnText),
-        topBarText: hex2rgb(colors.topBarText),
-        inputText: hex2rgb(colors.inputText),
+        text: colorConvert(colors.text),
+        panelText: colorConvert(colors.panelText),
+        panelLink: colorConvert(colors.panelLink),
+        btnText: colorConvert(colors.btnText),
+        topBarText: colorConvert(colors.topBarText),
+        inputText: colorConvert(colors.inputText),
 
-        link: hex2rgb(colors.link),
-        topBarLink: hex2rgb(colors.topBarLink),
+        link: colorConvert(colors.link),
+        topBarLink: colorConvert(colors.topBarLink),
 
-        red: hex2rgb(colors.cRed),
-        green: hex2rgb(colors.cGreen),
-        blue: hex2rgb(colors.cBlue),
-        orange: hex2rgb(colors.cOrange)
+        red: colorConvert(colors.cRed),
+        green: colorConvert(colors.cGreen),
+        blue: colorConvert(colors.cBlue),
+        orange: colorConvert(colors.cOrange)
       }
 
       const bgs = {
-        bg: hex2rgb(colors.bg),
-        underlay: hex2rgb(colors.underlay),
-        btn: hex2rgb(colors.btn),
-        panel: hex2rgb(colors.panel),
-        topBar: hex2rgb(colors.topBar),
-        input: hex2rgb(colors.input),
-        alertError: hex2rgb(colors.alertError),
-        alertWarning: hex2rgb(colors.alertWarning),
-        badgeNotification: hex2rgb(colors.badgeNotification)
+        bg: colorConvert(colors.bg),
+        underlay: colorConvert(colors.underlay),
+        btn: colorConvert(colors.btn),
+        panel: colorConvert(colors.panel),
+        topBar: colorConvert(colors.topBar),
+        input: colorConvert(colors.input),
+        alertError: colorConvert(colors.alertError),
+        alertWarning: colorConvert(colors.alertWarning),
+        badgeNotification: colorConvert(colors.badgeNotification)
       }
 
       const bg = [bgs.bg, opacity.bg]
-      const underlay = [bgs.underlay, opacity.underlay]
+      const underlay = [bgs.underlay || colorConvert('#000000'), opacity.underlay]
 
       const panel = [underlay, bg]
 
@@ -443,7 +451,7 @@ export default {
      */
     normalizeLocalState (originalInput, version = 0) {
       let input
-      if (typeof originalInput.v3compat !== undefined) {
+      if (typeof originalInput.v3compat !== 'undefined') {
         version = 3
         input = merge(originalInput, originalInput.v3compat)
       } else {
@@ -574,7 +582,7 @@ export default {
         this.previewColors = generateColors({
           v3compat: this.currentCompat,
           opacity: this.currentOpacity,
-          colors: this.currentColors,
+          colors: this.currentColors
         })
       } catch (e) {
         console.warn(e)

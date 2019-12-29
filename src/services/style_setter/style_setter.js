@@ -170,23 +170,32 @@ export const generateCompat = (input) => {
   }
 }
 
-const generateColors = (input) => {
+const generateColors = (themeData) => {
   const colors = {}
-  const opacity = Object.assign({
+  const rawOpacity = Object.assign({
     alert: 0.5,
     input: 0.5,
     faint: 0.5,
     underlay: 0.15
-  }, Object.entries(input.opacity || {}).reduce((acc, [k, v]) => {
+  }, Object.entries(themeData.opacity || {}).reduce((acc, [k, v]) => {
     if (typeof v !== 'undefined') {
       acc[k] = v
     }
     return acc
   }, {}))
 
-  const inputColors = input.colors || input
+  const inputColors = themeData.colors || themeData
 
-  const compat = input.v3compat || {}
+  const transparentsOpacity = Object.entries(inputColors).reduce((acc, [k, v]) => {
+    if (v === 'transparent') {
+      acc[k] = 0
+    }
+    return acc
+  }, {})
+
+  const opacity = { ...rawOpacity, ...transparentsOpacity }
+
+  const compat = themeData.v3compat || {}
   const compatColors = Object.entries(compat.colors || {}).reduce((acc, [key, value]) => {
     const newVal = value === null ? undefined : value
     return { ...acc, [key]: newVal }
@@ -196,15 +205,22 @@ const generateColors = (input) => {
     if (typeof v === 'object') {
       acc[k] = v
     } else {
-      acc[k] = hex2rgb(v)
+      let value = v
+      if (v === 'transparent') {
+        value = '#FF00FF'
+      }
+      acc[k] = hex2rgb(value)
     }
     return acc
   }, {})
 
-  const isLightOnDark = convert(col.bg).hsl.l < convert(col.text).hsl.l
+  colors.bg = col.bg
+  colors.underlay = col.underlay || hex2rgb('#000000')
+  colors.text = col.text
+
+  const isLightOnDark = convert(colors.bg).hsl.l < convert(colors.text).hsl.l
   const mod = isLightOnDark ? 1 : -1
 
-  colors.text = col.text
   colors.lightText = brightness(20 * mod, colors.text).rgb
 
   colors.accent = col.accent || col.link
@@ -212,17 +228,15 @@ const generateColors = (input) => {
 
   colors.faint = col.faint || Object.assign({}, col.text)
 
-  colors.bg = col.bg
   colors.lightBg = col.lightBg || brightness(5 * mod, colors.bg).rgb
 
-  const underlay = [col.underlay, opacity.underlay]
+  const underlay = [colors.underlay, opacity.underlay]
   const fg = [col.fg, opacity.fg]
   const bg = [col.bg, opacity.bg]
 
   colors.fg = col.fg
   colors.fgText = col.fgText || getTextColor(alphaBlendLayers(colors.text, [underlay, bg, fg]), colors.text)
   colors.fgLink = col.fgLink || getTextColor(alphaBlendLayers(colors.link, [underlay, bg, fg]), colors.link, true)
-  colors.underlay = col.underlay || hex2rgb('#000000')
 
   colors.border = col.border || brightness(2 * mod, colors.fg).rgb
 
@@ -231,8 +245,8 @@ const generateColors = (input) => {
   colors.btnText = col.btnText || getTextColor(alphaBlendLayers(colors.fgText, [underlay, bg, fg, btn]), colors.fgText)
 
   colors.input = col.input || Object.assign({}, col.fg)
-  const inputCol = [colors.input, opacity.input]
-  colors.inputText = col.inputText || getTextColor(alphaBlendLayers(colors.lightText, [underlay, bg, fg, inputCol]), colors.lightText)
+  const input = [colors.input, opacity.input]
+  colors.inputText = col.inputText || getTextColor(alphaBlendLayers(colors.lightText, [underlay, bg, fg, input]), colors.lightText)
 
   colors.panel = col.panel || Object.assign({}, col.fg)
   const panel = [colors.panel, opacity.panel]
@@ -256,12 +270,14 @@ const generateColors = (input) => {
   colors.cOrange = col.cOrange || hex2rgb('#E3FF00')
 
   colors.alertError = col.alertError || Object.assign({}, colors.cRed)
-  colors.alertErrorText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.bg), colors.text)
-  colors.alertErrorPanelText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.panel), colors.panelText)
+  const alertError = [colors.alertError, opacity.alert]
+  colors.alertErrorText = getTextColor(alphaBlendLayers(colors.text, [underlay, bg, alertError]), colors.text)
+  colors.alertErrorPanelText = getTextColor(alphaBlendLayers(colors.panelText, [underlay, bg, panel, panel, alertError]), colors.panelText)
 
   colors.alertWarning = col.alertWarning || Object.assign({}, colors.cOrange)
-  colors.alertWarningText = getTextColor(alphaBlend(colors.alertWarning, opacity.alert, colors.bg), colors.text)
-  colors.alertWarningPanelText = getTextColor(alphaBlend(colors.alertWarning, opacity.alert, colors.panel), colors.panelText)
+  const alertWarning = [colors.alertWarning, opacity.alert]
+  colors.alertWarningText = getTextColor(alphaBlendLayers(colors.text, [underlay, bg, alertWarning]), colors.text)
+  colors.alertWarningPanelText = getTextColor(alphaBlendLayers(colors.panelText, [underlay, bg, panel, panel, alertWarning]), colors.panelText)
 
   colors.badgeNotification = col.badgeNotification || Object.assign({}, colors.cRed)
   colors.badgeNotificationText = contrastRatio(colors.badgeNotification).rgb

@@ -109,6 +109,11 @@
     "opacity": {
       "input": "1"
     },
+    "v3compat": {
+      "colors": {
+        "panel": "transparent"
+      }
+    },
     "colors": {
       "bg": "#eff0f1",
       "text": "#232627",

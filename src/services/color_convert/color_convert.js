@@ -7,7 +7,8 @@ const rgb2hex = (r, g, b) => {
   if (r === null || typeof r === 'undefined') {
     return undefined
   }
-  if (r[0] === '#') {
+  // TODO: clean up this mess
+  if (r[0] === '#' || r === 'transparent') {
     return r
   }
   if (typeof r === 'object') {

@@ -2,6 +2,8 @@ import { times } from 'lodash'
 import { brightness, invertLightness, convert, contrastRatio } from 'chromatism'
 import { rgb2hex, hex2rgb, mixrgb, getContrastRatio, alphaBlend, alphaBlendLayers } from '../color_convert/color_convert.js'
 
+export const CURRENT_VERSION = 3
+
 // While this is not used anymore right now, I left it in if we want to do custom
 // styles that aren't just colors, so user can pick from a few different distinct
 // styles as well as set their own colors in the future.
@@ -150,29 +152,13 @@ const getCssColor = (input, a) => {
   return rgb2rgba({ ...rgb, a })
 }
 
-// Generates a "patch" for theme to make it compatible with v2
-export const generateCompat = (input) => {
-  const { colors } = input
-  const v3compat = {
-    colors: {}
-  }
-  const v2colorsPatch = {}
-
-  // # Link became optional in v3
-  if (typeof colors.link === 'undefined') {
-    v2colorsPatch.link = colors.accent
-    v3compat.colors.link = null
-  }
-
-  return {
-    v3compat,
-    colors: v2colorsPatch
-  }
-}
-
 const generateColors = (themeData) => {
   const colors = {}
   const rawOpacity = Object.assign({
+    panel: 1,
+    btn: 1,
+    border: 1,
+    bg: 1,
     alert: 0.5,
     input: 0.5,
     faint: 0.5,
@@ -207,6 +193,7 @@ const generateColors = (themeData) => {
     } else {
       let value = v
       if (v === 'transparent') {
+        // TODO: hack to keep rest of the code from complaining
         value = '#FF00FF'
       }
       acc[k] = hex2rgb(value)
@@ -221,7 +208,7 @@ const generateColors = (themeData) => {
   const isLightOnDark = convert(colors.bg).hsl.l < convert(colors.text).hsl.l
   const mod = isLightOnDark ? 1 : -1
 
-  colors.lightText = brightness(20 * mod, colors.text).rgb
+  colors.lightText = col.lightText || brightness(20 * mod, colors.text).rgb
 
   colors.accent = col.accent || col.link
   colors.link = col.link || col.accent
@@ -231,7 +218,8 @@ const generateColors = (themeData) => {
   colors.lightBg = col.lightBg || brightness(5 * mod, colors.bg).rgb
 
   const underlay = [colors.underlay, opacity.underlay]
-  const fg = [col.fg, opacity.fg]
+  // Technically, foreground can't be transparent (descendants can) but let's keep it just in case
+  const fg = [col.fg, opacity.fg || 1]
   const bg = [col.bg, opacity.bg]
 
   colors.fg = col.fg
@@ -271,16 +259,16 @@ const generateColors = (themeData) => {
 
   colors.alertError = col.alertError || Object.assign({}, colors.cRed)
   const alertError = [colors.alertError, opacity.alert]
-  colors.alertErrorText = getTextColor(alphaBlendLayers(colors.text, [underlay, bg, alertError]), colors.text)
-  colors.alertErrorPanelText = getTextColor(alphaBlendLayers(colors.panelText, [underlay, bg, panel, panel, alertError]), colors.panelText)
+  colors.alertErrorText = col.alertErrorText || getTextColor(alphaBlendLayers(colors.text, [underlay, bg, alertError]), colors.text)
+  colors.alertErrorPanelText = col.alertErrorPanelText || getTextColor(alphaBlendLayers(colors.panelText, [underlay, bg, panel, panel, alertError]), colors.panelText)
 
   colors.alertWarning = col.alertWarning || Object.assign({}, colors.cOrange)
   const alertWarning = [colors.alertWarning, opacity.alert]
-  colors.alertWarningText = getTextColor(alphaBlendLayers(colors.text, [underlay, bg, alertWarning]), colors.text)
-  colors.alertWarningPanelText = getTextColor(alphaBlendLayers(colors.panelText, [underlay, bg, panel, panel, alertWarning]), colors.panelText)
+  colors.alertWarningText = col.alertWarningText || getTextColor(alphaBlendLayers(colors.text, [underlay, bg, alertWarning]), colors.text)
+  colors.alertWarningPanelText = col.alertWarningPanelText || getTextColor(alphaBlendLayers(colors.panelText, [underlay, bg, panel, panel, alertWarning]), colors.panelText)
 
   colors.badgeNotification = col.badgeNotification || Object.assign({}, colors.cRed)
-  colors.badgeNotificationText = contrastRatio(colors.badgeNotification).rgb
+  colors.badgeNotificationText = colors.badgeNotificationText || contrastRatio(colors.badgeNotification).rgb
 
   Object.entries(opacity).forEach(([ k, v ]) => {
     console.log(k)

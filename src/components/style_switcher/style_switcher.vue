@@ -106,7 +106,7 @@
             <OpacityInput
               v-model="bgOpacityLocal"
               name="bgOpacity"
-              :fallback="previewTheme.opacity.bg || 1"
+              :fallback="previewTheme.opacity.bg"
             />
             <ColorInput
               v-model="textColorLocal"
@@ -238,7 +238,7 @@
             <OpacityInput
               v-model="panelOpacityLocal"
               name="panelOpacity"
-              :fallback="previewTheme.opacity.panel || 1"
+              :fallback="previewTheme.opacity.panel"
             />
             <ColorInput
               v-model="panelTextColorLocal"
@@ -295,7 +295,7 @@
             <OpacityInput
               v-model="inputOpacityLocal"
               name="inputOpacity"
-              :fallback="previewTheme.opacity.input || 1"
+              :fallback="previewTheme.opacity.input"
             />
             <ColorInput
               v-model="inputTextColorLocal"
@@ -316,7 +316,7 @@
             <OpacityInput
               v-model="btnOpacityLocal"
               name="btnOpacity"
-              :fallback="previewTheme.opacity.btn || 1"
+              :fallback="previewTheme.opacity.btn"
             />
             <ColorInput
               v-model="btnTextColorLocal"
@@ -337,7 +337,7 @@
             <OpacityInput
               v-model="borderOpacityLocal"
               name="borderOpacity"
-              :fallback="previewTheme.opacity.border || 1"
+              :fallback="previewTheme.opacity.border"
             />
           </div>
           <div class="color-item">
@@ -363,7 +363,7 @@
             <OpacityInput
               v-model="faintOpacityLocal"
               name="faintOpacity"
-              :fallback="previewTheme.opacity.faint || 0.5"
+              :fallback="previewTheme.opacity.faint"
             />
           </div>
           <div class="color-item">
@@ -377,7 +377,7 @@
             <OpacityInput
               v-model="underlayOpacityLocal"
               name="underlayOpacity"
-              :fallback="previewTheme.opacity.underlay || 0.15"
+              :fallback="previewTheme.opacity.underlay"
             />
           </div>
         </div>

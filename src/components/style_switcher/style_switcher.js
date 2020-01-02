@@ -1,7 +1,15 @@
 import { rgb2hex, hex2rgb, getContrastRatio, getContrastRatioLayers, alphaBlend } from '../../services/color_convert/color_convert.js'
 import { set, delete as del } from 'vue'
 import { merge } from 'lodash'
-import { generateCompat, generateColors, generateShadows, generateRadii, generateFonts, composePreset, getThemes } from '../../services/style_setter/style_setter.js'
+import {
+  generateColors,
+  generateShadows,
+  generateRadii,
+  generateFonts,
+  composePreset,
+  getThemes,
+  CURRENT_VERSION
+} from '../../services/style_setter/style_setter.js'
 import ColorInput from '../color_input/color_input.vue'
 import RangeInput from '../range_input/range_input.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
@@ -134,15 +142,6 @@ export default {
   computed: {
     selectedVersion () {
       return Array.isArray(this.selected) ? 1 : 2
-    },
-    currentCompat () {
-      return generateCompat({
-        shadows: this.shadowsLocal,
-        fonts: this.fontsLocal,
-        opacity: this.currentOpacity,
-        colors: this.currentColors,
-        radii: this.currentRadii
-      })
     },
     currentColors () {
       return {
@@ -339,27 +338,32 @@ export default {
         !this.keepColor
       )
 
-      const theme = {}
+      const source = {
+        themeEngineVersion: CURRENT_VERSION
+      }
 
       if (this.keepFonts || saveEverything) {
-        theme.fonts = this.fontsLocal
+        source.fonts = this.fontsLocal
       }
       if (this.keepShadows || saveEverything) {
-        theme.shadows = this.shadowsLocal
+        source.shadows = this.shadowsLocal
       }
       if (this.keepOpacity || saveEverything) {
-        theme.opacity = this.currentOpacity
+        source.opacity = this.currentOpacity
       }
       if (this.keepColor || saveEverything) {
-        theme.colors = this.currentColors
+        source.colors = this.currentColors
       }
       if (this.keepRoundness || saveEverything) {
-        theme.radii = this.currentRadii
+        source.radii = this.currentRadii
       }
 
+      const theme = this.previewTheme
+
+      console.log(source)
       return {
-        // To separate from other random JSON files and possible future theme formats
-        _pleroma_theme_version: 2, theme: merge(theme, this.currentCompat)
+        // To separate from other random JSON files and possible future source formats
+        _pleroma_theme_version: 2, theme, source
       }
     }
   },
@@ -392,7 +396,7 @@ export default {
       if (parsed._pleroma_theme_version === 1) {
         this.normalizeLocalState(parsed, 1)
       } else if (parsed._pleroma_theme_version >= 2) {
-        this.normalizeLocalState(parsed.theme, 2)
+        this.normalizeLocalState(parsed.theme, 2, parsed.source)
       }
     },
     importValidator (parsed) {
@@ -402,7 +406,7 @@ export default {
     clearAll () {
       const state = this.$store.getters.mergedConfig.customTheme
       const version = state.colors ? 2 : 'l1'
-      this.normalizeLocalState(this.$store.getters.mergedConfig.customTheme, version)
+      this.normalizeLocalState(this.$store.getters.mergedConfig.customTheme, version, this.$store.getters.mergedConfig.customThemeSource)
     },
 
     // Clears all the extra stuff when loading V1 theme
@@ -441,24 +445,30 @@ export default {
 
     /**
      * This applies stored theme data onto form. Supports three versions of data:
-     * v3 (version = 3) - same as 2 but with some incompatible changes
+     * v3 (version >= 3) - newest version of themes which supports snapshots for better compatiblity
      * v2 (version = 2) - newer version of themes.
      * v1 (version = 1) - older version of themes (import from file)
      * v1l (version = l1) - older version of theme (load from local storage)
      * v1 and v1l differ because of way themes were stored/exported.
-     * @param {Object} input - input data
+     * @param {Object} theme - theme data (snapshot)
      * @param {Number} version - version of data. 0 means try to guess based on data. "l1" means v1, locastorage type
+     * @param {Object} source - theme source - this will be used if compatible
+     * @param {Boolean} source - by default source won't be used if version doesn't match since it might render differently
+     *                           this allows importing source anyway
      */
-    normalizeLocalState (originalInput, version = 0) {
+    normalizeLocalState (theme, version = 0, source, forceSource = false) {
       let input
-      if (typeof originalInput.v3compat !== 'undefined') {
-        version = 3
-        input = merge(originalInput, originalInput.v3compat)
+      if (typeof source !== 'undefined') {
+        if (forceSource || source.themeEngineVersion === CURRENT_VERSION) {
+          input = source
+          version = source.themeEngineVersion
+        } else {
+          input = theme
+        }
       } else {
-        input = originalInput
+        input = theme
       }
 
-      const compat = input.v3compat
       const radii = input.radii || input
       const opacity = input.opacity
       const shadows = input.shadows || {}
@@ -615,7 +625,7 @@ export default {
           this.cOrangeColorLocal = this.selected[8]
         }
       } else if (this.selectedVersion >= 2) {
-        this.normalizeLocalState(this.selected.theme, 2)
+        this.normalizeLocalState(this.selected.theme, 2, this.selected.source)
       }
     }
   }

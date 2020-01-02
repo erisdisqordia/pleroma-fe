@@ -122,12 +122,15 @@ button {
   }
 }
 
-label.select {
-  padding: 0;
+input, textarea, .select, .input {
 
-}
+  &.unstyled {
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    height: unset;
+  }
 
-input, textarea, .select {
   border: none;
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
@@ -141,13 +144,17 @@ input, textarea, .select {
   font-family: var(--inputFont, sans-serif);
   font-size: 14px;
   margin: 0;
-  padding: 8px .5em;
   box-sizing: border-box;
   display: inline-block;
   position: relative;
   height: 28px;
   line-height: 16px;
   hyphens: none;
+  padding: 8px .5em;
+
+  &.select {
+    padding: 0;
+  }
 
   &:disabled, &[disabled=disabled] {
     cursor: not-allowed;

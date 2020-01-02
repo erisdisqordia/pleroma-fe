@@ -18,7 +18,7 @@
       @input="$emit('input', !present ? fallback : undefined)"
     >
     <label
-      v-if="typeof fallback !== 'undefined'"
+      v-if="typeof fallback !== 'undefined' && showOptionalTickbox"
       class="opt-l"
       :for="name + '-o'"
     />
@@ -38,9 +38,38 @@
 
 <script>
 export default {
-  props: [
-    'name', 'value', 'fallback', 'disabled'
-  ],
+  props: {
+    // Name of opacity, used for identifying
+    name: {
+      required: true,
+      type: String
+    },
+    // Opacity value, should be required but vue cannot tell the difference
+    // between "property missing" and "property set to undefined"
+    value: {
+      required: false,
+      type: Number,
+      default: undefined
+    },
+    // Opacity fallback to use when value is not defeind
+    fallback: {
+      required: false,
+      type: Number,
+      default: undefined
+    },
+    // Disable the control
+    disabled: {
+      required: false,
+      type: Boolean,
+      default: false
+    },
+    // Show "optional" tickbox, for when value might become mandatory
+    showOptionalTickbox: {
+      required: false,
+      type: Boolean,
+      default: true
+    }
+  },
   computed: {
     present () {
       return typeof this.value !== 'undefined'

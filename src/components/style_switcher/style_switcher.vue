@@ -118,15 +118,15 @@
               v-model="accentColorLocal"
               name="accentColor"
               :fallback="previewTheme.colors.link"
-              :showOptionalTickbox="typeof linkColorLocal !== 'undefined'"
               :label="$t('settings.accent')"
+              :showOptionalTickbox="typeof linkColorLocal !== 'undefined'"
             />
             <ColorInput
               v-model="linkColorLocal"
               name="linkColor"
               :fallback="previewTheme.colors.accent"
-              :showOptionalTickbox="typeof accentColorLocal !== 'undefined'"
               :label="$t('settings.links')"
+              :showOptionalTickbox="typeof accentColorLocal !== 'undefined'"
             />
             <ContrastRatio :contrast="previewContrast.bgLink" />
           </div>
@@ -239,6 +239,7 @@
               v-model="panelOpacityLocal"
               name="panelOpacity"
               :fallback="previewTheme.opacity.panel"
+              :showOptionalTickbox="panelColorLocal !== 'transparent'"
             />
             <ColorInput
               v-model="panelTextColorLocal"
@@ -296,6 +297,7 @@
               v-model="inputOpacityLocal"
               name="inputOpacity"
               :fallback="previewTheme.opacity.input"
+              :showOptionalTickbox="inputColorLocal !== 'transparent'"
             />
             <ColorInput
               v-model="inputTextColorLocal"
@@ -317,6 +319,7 @@
               v-model="btnOpacityLocal"
               name="btnOpacity"
               :fallback="previewTheme.opacity.btn"
+              :showOptionalTickbox="btnColorLocal !== 'transparent'"
             />
             <ColorInput
               v-model="btnTextColorLocal"
@@ -338,6 +341,7 @@
               v-model="borderOpacityLocal"
               name="borderOpacity"
               :fallback="previewTheme.opacity.border"
+              :showOptionalTickbox="borderColorLocal !== 'transparent'"
             />
           </div>
           <div class="color-item">
@@ -378,6 +382,7 @@
               v-model="underlayOpacityLocal"
               name="underlayOpacity"
               :fallback="previewTheme.opacity.underlay"
+              :showOptionalTickbox="underlayOpacityLocal !== 'transparent'"
             />
           </div>
         </div>

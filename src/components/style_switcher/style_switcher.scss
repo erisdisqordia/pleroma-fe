@@ -15,10 +15,12 @@
 
     &.disabled {
       input, select {
-        &:not(.exclude-disabled) {
-          opacity: .5
-        }
+        opacity: .5
       }
+    }
+
+    .opt {
+      margin: .5em;
     }
 
     input, select {
@@ -42,10 +44,6 @@
       &[type=range] {
         flex: 1;
         min-width: 3em;
-      }
-
-      &[type=checkbox] + label {
-        margin: 6px 0;
       }
 
       &:not([type=number]):not([type=text]) {

@@ -9,18 +9,12 @@
     >
       {{ label }}
     </label>
-    <input
-      v-if="typeof fallback !== 'undefined'"
-      :id="name + '-o'"
-      class="opt exlcude-disabled"
-      type="checkbox"
-      :checked="present"
-      @input="$emit('input', typeof value === 'undefined' ? fallback : undefined)"
-    >
-    <label
+    <Checkbox
       v-if="typeof fallback !== 'undefined' && showOptionalTickbox"
-      class="opt-l"
-      :for="name + '-o'"
+      :checked="present"
+      :disabled="disabled"
+      @change="$emit('input', typeof value === 'undefined' ? fallback : undefined)"
+      class="opt"
     />
     <input
       :id="name"
@@ -42,6 +36,7 @@
 </template>
 
 <script>
+import Checkbox from '../checkbox/checkbox.vue'
 export default {
   props: {
     // Name of color, used for identifying
@@ -79,6 +74,9 @@ export default {
       type: Boolean,
       default: true
     }
+  },
+  components: {
+    Checkbox
   },
   computed: {
     present () {

@@ -9,18 +9,12 @@
     >
       {{ $t('settings.style.common.opacity') }}
     </label>
-    <input
+    <Checkbox
       v-if="typeof fallback !== 'undefined'"
-      :id="name + '-o'"
-      class="opt exclude-disabled"
-      type="checkbox"
       :checked="present"
-      @input="$emit('input', !present ? fallback : undefined)"
-    >
-    <label
-      v-if="typeof fallback !== 'undefined' && showOptionalTickbox"
-      class="opt-l"
-      :for="name + '-o'"
+      :disabled="disabled"
+      @change="$emit('input', !present ? fallback : undefined)"
+      class="opt"
     />
     <input
       :id="name"
@@ -37,38 +31,13 @@
 </template>
 
 <script>
+import Checkbox from '../checkbox/checkbox.vue'
 export default {
-  props: {
-    // Name of opacity, used for identifying
-    name: {
-      required: true,
-      type: String
-    },
-    // Opacity value, should be required but vue cannot tell the difference
-    // between "property missing" and "property set to undefined"
-    value: {
-      required: false,
-      type: Number,
-      default: undefined
-    },
-    // Opacity fallback to use when value is not defeind
-    fallback: {
-      required: false,
-      type: Number,
-      default: undefined
-    },
-    // Disable the control
-    disabled: {
-      required: false,
-      type: Boolean,
-      default: false
-    },
-    // Show "optional" tickbox, for when value might become mandatory
-    showOptionalTickbox: {
-      required: false,
-      type: Boolean,
-      default: true
-    }
+  props: [
+    'name', 'value', 'fallback', 'disabled'
+  ],
+  components: {
+    Checkbox
   },
   computed: {
     present () {

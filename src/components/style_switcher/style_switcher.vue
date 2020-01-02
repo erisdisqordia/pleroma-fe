@@ -239,7 +239,7 @@
               v-model="panelOpacityLocal"
               name="panelOpacity"
               :fallback="previewTheme.opacity.panel"
-              :showOptionalTickbox="panelColorLocal !== 'transparent'"
+              :disabled="panelColorLocal === 'transparent'"
             />
             <ColorInput
               v-model="panelTextColorLocal"
@@ -297,7 +297,7 @@
               v-model="inputOpacityLocal"
               name="inputOpacity"
               :fallback="previewTheme.opacity.input"
-              :showOptionalTickbox="inputColorLocal !== 'transparent'"
+              :disabled="inputColorLocal === 'transparent'"
             />
             <ColorInput
               v-model="inputTextColorLocal"
@@ -319,7 +319,7 @@
               v-model="btnOpacityLocal"
               name="btnOpacity"
               :fallback="previewTheme.opacity.btn"
-              :showOptionalTickbox="btnColorLocal !== 'transparent'"
+              :disabled="btnColorLocal === 'transparent'"
             />
             <ColorInput
               v-model="btnTextColorLocal"
@@ -341,7 +341,7 @@
               v-model="borderOpacityLocal"
               name="borderOpacity"
               :fallback="previewTheme.opacity.border"
-              :showOptionalTickbox="borderColorLocal !== 'transparent'"
+              :disabled="borderColorLocal === 'transparent'"
             />
           </div>
           <div class="color-item">
@@ -382,7 +382,7 @@
               v-model="underlayOpacityLocal"
               name="underlayOpacity"
               :fallback="previewTheme.opacity.underlay"
-              :showOptionalTickbox="underlayOpacityLocal !== 'transparent'"
+              :disabled="underlayOpacityLocal === 'transparent'"
             />
           </div>
         </div>

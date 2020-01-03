@@ -74,6 +74,15 @@
                   </ul>
                 </li>
                 <li>
+                  <Checkbox v-model="useStreamingApi">
+                    {{ $t('settings.useStreamingApi') }}
+                    <br/>
+                    <small>
+                    {{ $t('settings.useStreamingApiWarning') }}
+                    </small>
+                  </Checkbox>
+                </li>
+                <li>
                   <Checkbox v-model="autoLoad">
                     {{ $t('settings.autoload') }}
                   </Checkbox>

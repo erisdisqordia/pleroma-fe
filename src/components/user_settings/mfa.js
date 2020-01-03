@@ -139,7 +139,7 @@ const Mfa = {
 
     // fetch settings from server
     async fetchSettings () {
-      let result = await this.backendInteractor.fetchSettingsMFA()
+      let result = await this.backendInteractor.settingsMFA()
       if (result.error) return
       this.settings = result.settings
       this.settings.available = true

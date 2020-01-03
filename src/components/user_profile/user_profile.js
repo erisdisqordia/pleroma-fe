@@ -112,9 +112,9 @@ const UserProfile = {
       }
     },
     stopFetching () {
-      this.$store.dispatch('stopFetching', 'user')
-      this.$store.dispatch('stopFetching', 'favorites')
-      this.$store.dispatch('stopFetching', 'media')
+      this.$store.dispatch('stopFetchingTimeline', 'user')
+      this.$store.dispatch('stopFetchingTimeline', 'favorites')
+      this.$store.dispatch('stopFetchingTimeline', 'media')
     },
     switchUser (userNameOrId) {
       this.stopFetching()

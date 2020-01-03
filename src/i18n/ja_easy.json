@@ -1,4 +1,23 @@
 {
+  "about": {
+    "staff": "スタッフ",
+    "federation": "フェデレーション",
+    "mrf_policies": "ゆうこうなMRFポリシー",
+    "mrf_policies_desc": "MRFポリシーは、このインスタンスのフェデレーションのふるまいを、いじります。これらのMRFポリシーがゆうこうになっています:",
+    "mrf_policy_simple": "インスタンスのポリシー",
+    "mrf_policy_simple_accept": "うけいれ",
+    "mrf_policy_simple_accept_desc": "このインスンスは、これらのインスタンスからのメッセージのみをうけいれます:",
+    "mrf_policy_simple_reject": "おことわり",
+    "mrf_policy_simple_reject_desc": "このインスタンスは、これらのインスタンスからのメッセージをうけいれません:",
+    "mrf_policy_simple_quarantine": "けんえき",
+    "mrf_policy_simple_quarantine_desc": "このインスタンスは、これらのインスタンスに、パブリックなとうこうのみを、おくります:",
+    "mrf_policy_simple_ftl_removal": "「つながっているすべてのネットワーク」タイムラインからのぞく",
+    "mrf_policy_simple_ftl_removal_desc": "このインスタンスは、つながっているすべてのネットワーク」タイムラインから、これらのインスタンスを、とりのぞきます:",
+    "mrf_policy_simple_media_removal": "メディアをのぞく",
+    "mrf_policy_simple_media_removal_desc": "このインスタンスは、これらのインスタンスからおくられてきたメディアを、とりのぞきます:",
+    "mrf_policy_simple_media_nsfw": "メディアをすべてセンシティブにする",
+    "mrf_policy_simple_media_nsfw_desc": "このインスタンスは、これらのインスタンスからおくられてきたメディアを、すべて、センシティブにマークします:"
+  },
   "chat": {
     "title": "チャット"
   },
@@ -68,6 +87,7 @@
   },
   "nav": {
     "about": "これはなに？",
+    "administration": "アドミニストレーション",
     "back": "もどる",
     "chat": "ローカルチャット",
     "friend_requests": "フォローリクエスト",
@@ -113,7 +133,9 @@
     "search_emoji": "えもじをさがす",
     "add_emoji": "えもじをうちこむ",
     "custom": "カスタムえもじ",
-    "unicode": "ユニコードえもじ"
+    "unicode": "ユニコードえもじ",
+    "load_all_hint": "はじめの {saneAmount} このえもじだけがロードされています。すべてのえもじをロードすると、パフォーマンスがわるくなるかもしれません。",
+    "load_all": "すべてのえもじをロード ({emojiAmount} こあります)"
   },
   "stickers": {
     "add_sticker": "ステッカーをふやす"
@@ -173,6 +195,11 @@
       "password_confirmation_match": "パスワードがちがいます"
     }
   },
+  "remote_user_resolver": {
+    "remote_user_resolver": "リモートユーザーリゾルバー",
+    "searching_for": "さがしています:",
+    "error": "みつかりませんでした。"
+  },
   "selectable_list": {
     "select_all": "すべてえらぶ"
   },
@@ -220,6 +247,9 @@
     "cGreen": "リピート",
     "cOrange": "おきにいり",
     "cRed": "キャンセル",
+    "change_email": "メールアドレスをかえる",
+    "change_email_error": "メールアドレスをかえようとしましたが、なにかがおかしいです。",
+    "changed_email": "メールアドレスをかえることができました！",
     "change_password": "パスワードをかえる",
     "change_password_error": "パスワードをかえることが、できなかったかもしれません。",
     "changed_password": "パスワードが、かわりました！",
@@ -279,6 +309,7 @@
     "use_contain_fit": "がぞうのサムネイルを、きりぬかない",
     "name": "なまえ",
     "name_bio": "なまえとプロフィール",
+    "new_email": "あたらしいメールアドレス",
     "new_password": "あたらしいパスワード",
     "notification_visibility": "ひょうじするつうち",
     "notification_visibility_follows": "フォロー",
@@ -344,6 +375,8 @@
       "false": "いいえ",
       "true": "はい"
     },
+    "fun": "おたのしみ",
+    "greentext": "ミームやじるし",
     "notifications": "つうち",
     "notification_setting": "つうちをうけとる:",
     "notification_setting_follows": "あなたがフォローしているひとから",
@@ -391,6 +424,7 @@
         "_tab_label": "くわしく",
         "alert": "アラートのバックグラウンド",
         "alert_error": "エラー",
+        "alert_warning": "けいこく",
         "badge": "バッジのバックグラウンド",
         "badge_notification": "つうち",
         "panel_header": "パネルヘッダー",
@@ -542,6 +576,7 @@
     "followers": "フォロワー",
     "following": "フォローしています！",
     "follows_you": "フォローされました！",
+    "hidden": "かくされています",
     "its_you": "これはあなたです！",
     "media": "メディア",
     "mention": "メンション",
@@ -559,6 +594,8 @@
     "unmute": "ミュートをやめる",
     "unmute_progress": "ミュートをとりけしています...",
     "mute_progress": "ミュートしています...",
+    "hide_repeats": "リピートをかくす",
+    "show_repeats": "リピートをみる",
     "admin_menu": {
       "moderation": "モデレーション",
       "grant_admin": "アドミンにする",
@@ -634,6 +671,8 @@
     "return_home": "ホームページにもどる",
     "not_found": "そのメールアドレスまたはユーザーめいを、みつけることができませんでした。",
     "too_many_requests": "パスワードリセットを、ためすことが、おおすぎます。しばらくしてから、ためしてください。",
-    "password_reset_disabled": "このインスタンスでは、パスワードリセットは、できません。インスタンスのアドミニストレーターに、おといあわせください。"
+    "password_reset_disabled": "このインスタンスでは、パスワードリセットは、できません。インスタンスのアドミニストレーターに、おといあわせください。",
+    "password_reset_required": "ログインするには、パスワードをリセットしてください。",
+    "password_reset_required_but_mailer_is_disabled": "あなたはパスワードのリセットがひつようです。しかし、まずいことに、このインスタンスでは、パスワードのリセットができなくなっています。このインスタンスのアドミニストレーターに、おといあわせください。"
   }
 }

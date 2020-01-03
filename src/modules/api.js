@@ -6,6 +6,7 @@ const api = {
     backendInteractor: backendInteractorService(),
     fetchers: {},
     socket: null,
+    mastoUserSocket: null,
     followRequests: []
   },
   mutations: {
@@ -15,7 +16,8 @@ const api = {
     addFetcher (state, { fetcherName, fetcher }) {
       state.fetchers[fetcherName] = fetcher
     },
-    removeFetcher (state, { fetcherName }) {
+    removeFetcher (state, { fetcherName, fetcher }) {
+      window.clearInterval(fetcher)
       delete state.fetchers[fetcherName]
     },
     setWsToken (state, token) {
@@ -29,32 +31,134 @@ const api = {
     }
   },
   actions: {
-    startFetchingTimeline (store, { timeline = 'friends', tag = false, userId = false }) {
-      // Don't start fetching if we already are.
+    // Global MastoAPI socket control, in future should disable ALL sockets/(re)start relevant sockets
+    enableMastoSockets (store) {
+      const { state, dispatch } = store
+      if (state.mastoUserSocket) return
+      return dispatch('startMastoUserSocket')
+    },
+    disableMastoSockets (store) {
+      const { state, dispatch } = store
+      if (!state.mastoUserSocket) return
+      return dispatch('stopMastoUserSocket')
+    },
+
+    // MastoAPI 'User' sockets
+    startMastoUserSocket (store) {
+      return new Promise((resolve, reject) => {
+        try {
+          const { state, dispatch, rootState } = store
+          const timelineData = rootState.statuses.timelines.friends
+          state.mastoUserSocket = state.backendInteractor.startUserSocket({ store })
+          state.mastoUserSocket.addEventListener(
+            'message',
+            ({ detail: message }) => {
+              if (!message) return // pings
+              if (message.event === 'notification') {
+                dispatch('addNewNotifications', {
+                  notifications: [message.notification],
+                  older: false
+                })
+              } else if (message.event === 'update') {
+                dispatch('addNewStatuses', {
+                  statuses: [message.status],
+                  userId: false,
+                  showImmediately: timelineData.visibleStatuses.length === 0,
+                  timeline: 'friends'
+                })
+              }
+            }
+          )
+          state.mastoUserSocket.addEventListener('error', ({ detail: error }) => {
+            console.error('Error in MastoAPI websocket:', error)
+          })
+          state.mastoUserSocket.addEventListener('close', ({ detail: closeEvent }) => {
+            const ignoreCodes = new Set([
+              1000, // Normal (intended) closure
+              1001 // Going away
+            ])
+            const { code } = closeEvent
+            if (ignoreCodes.has(code)) {
+              console.debug(`Not restarting socket becasue of closure code ${code} is in ignore list`)
+            } else {
+              console.warn(`MastoAPI websocket disconnected, restarting. CloseEvent code: ${code}`)
+              dispatch('startFetchingTimeline', { timeline: 'friends' })
+              dispatch('startFetchingNotifications')
+              dispatch('restartMastoUserSocket')
+            }
+          })
+          resolve()
+        } catch (e) {
+          reject(e)
+        }
+      })
+    },
+    restartMastoUserSocket ({ dispatch }) {
+      // This basically starts MastoAPI user socket and stops conventional
+      // fetchers when connection reestablished
+      return dispatch('startMastoUserSocket').then(() => {
+        dispatch('stopFetchingTimeline', { timeline: 'friends' })
+        dispatch('stopFetchingNotifications')
+      })
+    },
+    stopMastoUserSocket ({ state, dispatch }) {
+      dispatch('startFetchingTimeline', { timeline: 'friends' })
+      dispatch('startFetchingNotifications')
+      console.log(state.mastoUserSocket)
+      state.mastoUserSocket.close()
+    },
+
+    // Timelines
+    startFetchingTimeline (store, {
+      timeline = 'friends',
+      tag = false,
+      userId = false
+    }) {
       if (store.state.fetchers[timeline]) return
 
-      const fetcher = store.state.backendInteractor.startFetchingTimeline({ timeline, store, userId, tag })
+      const fetcher = store.state.backendInteractor.startFetchingTimeline({
+        timeline, store, userId, tag
+      })
       store.commit('addFetcher', { fetcherName: timeline, fetcher })
     },
-    startFetchingNotifications (store) {
-      // Don't start fetching if we already are.
-      if (store.state.fetchers['notifications']) return
+    stopFetchingTimeline (store, timeline) {
+      const fetcher = store.state.fetchers[timeline]
+      if (!fetcher) return
+      store.commit('removeFetcher', { fetcherName: timeline, fetcher })
+    },
 
+    // Notifications
+    startFetchingNotifications (store) {
+      if (store.state.fetchers.notifications) return
       const fetcher = store.state.backendInteractor.startFetchingNotifications({ store })
       store.commit('addFetcher', { fetcherName: 'notifications', fetcher })
     },
-    startFetchingFollowRequest (store) {
-      // Don't start fetching if we already are.
-      if (store.state.fetchers['followRequest']) return
+    stopFetchingNotifications (store) {
+      const fetcher = store.state.fetchers.notifications
+      if (!fetcher) return
+      store.commit('removeFetcher', { fetcherName: 'notifications', fetcher })
+    },
+    fetchAndUpdateNotifications (store) {
+      store.state.backendInteractor.fetchAndUpdateNotifications({ store })
+    },
 
-      const fetcher = store.state.backendInteractor.startFetchingFollowRequest({ store })
-      store.commit('addFetcher', { fetcherName: 'followRequest', fetcher })
+    // Follow requests
+    startFetchingFollowRequests (store) {
+      if (store.state.fetchers['followRequests']) return
+      const fetcher = store.state.backendInteractor.startFetchingFollowRequests({ store })
+      store.commit('addFetcher', { fetcherName: 'followRequests', fetcher })
     },
-    stopFetching (store, fetcherName) {
-      const fetcher = store.state.fetchers[fetcherName]
-      window.clearInterval(fetcher)
-      store.commit('removeFetcher', { fetcherName })
+    stopFetchingFollowRequests (store) {
+      const fetcher = store.state.fetchers.followRequests
+      if (!fetcher) return
+      store.commit('removeFetcher', { fetcherName: 'followRequests', fetcher })
     },
+    removeFollowRequest (store, request) {
+      let requests = store.state.followRequests.filter((it) => it !== request)
+      store.commit('setFollowRequests', requests)
+    },
+
+    // Pleroma websocket
     setWsToken (store, token) {
       store.commit('setWsToken', token)
     },
@@ -72,10 +176,6 @@ const api = {
     disconnectFromSocket ({ commit, state }) {
       state.socket && state.socket.disconnect()
       commit('setSocket', null)
-    },
-    removeFollowRequest (store, request) {
-      let requests = store.state.followRequests.filter((it) => it !== request)
-      store.commit('setFollowRequests', requests)
     }
   }
 }

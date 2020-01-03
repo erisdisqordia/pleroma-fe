@@ -11,15 +11,22 @@
       >
         {{ $t('timeline.error_fetching') }}
       </div>
+      <div
+        v-else-if="errorData"
+        class="loadmore-error alert error"
+        @click.prevent
+      >
+        {{ errorData.statusText }}
+      </div>
       <button
-        v-if="timeline.newStatusCount > 0 && !timelineError"
+        v-if="timeline.newStatusCount > 0 && !timelineError && !errorData"
         class="loadmore-button"
         @click.prevent="showNewStatuses"
       >
         {{ $t('timeline.show_new') }}{{ newStatusCountStr }}
       </button>
       <div
-        v-if="!timeline.newStatusCount > 0 && !timelineError"
+        v-if="!timeline.newStatusCount > 0 && !timelineError && !errorData"
         class="loadmore-text faint"
         @click.prevent
       >
@@ -67,11 +74,17 @@
         {{ $t('timeline.no_more_statuses') }}
       </div>
       <a
-        v-else-if="!timeline.loading"
+        v-else-if="!timeline.loading && !errorData"
         href="#"
         @click.prevent="fetchOlderStatuses()"
       >
         <div class="new-status-notification text-center panel-footer">{{ $t('timeline.load_older') }}</div>
+      </a>
+      <a
+        v-else-if="errorData"
+        href="#"
+      >
+        <div class="new-status-notification text-center panel-footer">{{ errorData.error }}</div>
       </a>
       <div
         v-else
@@ -92,18 +105,5 @@
   .loadmore-text {
     opacity: 1;
   }
-}
-
-.new-status-notification {
-  position:relative;
-  margin-top: -1px;
-  font-size: 1.1em;
-  border-width: 1px 0 0 0;
-  border-style: solid;
-  border-color: var(--border, $fallback--border);
-  padding: 10px;
-  z-index: 1;
-  background-color: $fallback--fg;
-  background-color: var(--panel, $fallback--fg);
 }
 </style>

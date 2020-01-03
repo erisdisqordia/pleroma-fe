@@ -36,6 +36,7 @@ export const defaultState = {
   highlight: {},
   interfaceLanguage: browserLocale,
   hideScopeNotice: false,
+  useStreamingApi: false,
   scopeCopy: undefined, // instance default
   subjectLineBehavior: undefined, // instance default
   alwaysShowSubjectInput: undefined, // instance default

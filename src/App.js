@@ -90,6 +90,7 @@ export default {
     },
     sitename () { return this.$store.state.instance.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
+    hideSitename () { return this.$store.state.instance.hideSitename },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
     showInstanceSpecificPanel () {
       return this.$store.state.instance.showInstanceSpecificPanel &&
@@ -97,7 +98,8 @@ export default {
         this.$store.state.instance.instanceSpecificPanelContent
     },
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
-    isMobileLayout () { return this.$store.state.interface.mobileLayout }
+    isMobileLayout () { return this.$store.state.interface.mobileLayout },
+    privateMode () { return this.$store.state.instance.private }
   },
   methods: {
     scrollToTop () {

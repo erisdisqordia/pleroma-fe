@@ -49,7 +49,7 @@ const withSubscription = ({
         }
       }
     },
-    render (createElement) {
+    render (h) {
       if (!this.error && !this.loading) {
         const props = {
           props: {
@@ -59,7 +59,7 @@ const withSubscription = ({
           on: this.$listeners,
           scopedSlots: this.$scopedSlots
         }
-        const children = Object.entries(this.$slots).map(([key, value]) => createElement('template', { slot: key }, value))
+        const children = Object.entries(this.$slots).map(([key, value]) => h('template', { slot: key }, value))
         return (
           <div class="with-subscription">
             <WrappedComponent {...props}>

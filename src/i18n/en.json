@@ -110,7 +110,8 @@
     "notifications": "Notifications",
     "read": "Read!",
     "repeated_you": "repeated your status",
-    "no_more_notifications": "No more notifications"
+    "no_more_notifications": "No more notifications",
+    "migrated_to": "migrated to"
   },
   "polls": {
     "add_poll": "Add Poll",
@@ -140,6 +141,7 @@
   "interactions": {
     "favs_repeats": "Repeats and Favorites",
     "follows": "New follows",
+    "moves": "User migrates",
     "load_older": "Load older interactions"
   },
   "post_status": {
@@ -311,6 +313,7 @@
     "notification_visibility_likes": "Likes",
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
+    "notification_visibility_moves": "User Migrates",
     "no_rich_text_description": "Strip rich text formatting from all posts",
     "no_blocks": "No blocks",
     "no_mutes": "No mutes",

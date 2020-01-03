@@ -28,7 +28,8 @@ export const defaultState = {
     follows: true,
     mentions: true,
     likes: true,
-    repeats: true
+    repeats: true,
+    moves: true
   },
   webPushNotifications: false,
   muteWords: [],

@@ -3,6 +3,262 @@ import { brightness, invertLightness, convert, contrastRatio } from 'chromatism'
 import { rgb2hex, hex2rgb, mixrgb, getContrastRatio, alphaBlend, alphaBlendLayers } from '../color_convert/color_convert.js'
 
 export const CURRENT_VERSION = 3
+/* This is a definition of all layer combinations
+ * each key is a topmost layer, each value represents layer underneath
+ * this is essentially a simplified tree
+ */
+export const LAYERS = {
+  undelay: null, // root
+  topBar: null, // no transparency support
+  badge: null, //  no transparency support
+  fg: null,
+  bg: 'underlay',
+  panel: 'bg',
+  btn: 'bg',
+  btnPanel: 'panel',
+  btnTopBar: 'topBar',
+  input: 'bg',
+  inputPanel: 'panel',
+  inputTopBar: 'topBar',
+  alert: 'bg',
+  alertPanel: 'panel'
+}
+
+export const SLOT_INHERITANCE = {
+  bg: null,
+  fg: null,
+  text: null,
+  underlay: '#000000',
+  link: '--accent',
+  accent: '--link',
+  faint: '--text',
+  faintLink: '--link',
+
+  cBlue: '#0000ff',
+  cRed: '#FF0000',
+  cGreen: '#00FF00',
+  cOrange: '#E3FF00',
+
+  lightBg: {
+    depends: ['bg'],
+    color: (mod, bg) => brightness(5 * mod, bg).rgb
+  },
+  lightText: {
+    depends: ['text'],
+    color: (mod, text) => brightness(20 * mod, text).rgb
+  },
+
+  border: {
+    depends: 'fg',
+    color: (mod, fg) => brightness(2 * mod, fg).rgb
+  },
+
+  linkBg: {
+    depends: ['accent', 'bg'],
+    color: (mod, accent, bg) => alphaBlend(accent, 0.4, bg).rgb
+  },
+
+  icon: {
+    depends: ['bg', 'text'],
+    color: (mod, bg, text) => mixrgb(bg, text)
+  },
+
+  // Foreground
+  fgText: {
+    depends: ['text', 'fg', 'underlay', 'bg'],
+    layer: 'fg',
+    textColor: true
+  },
+  fgLink: {
+    depends: ['link', 'fg', 'underlay', 'bg'],
+    layer: 'fg',
+    textColor: 'preserve'
+  },
+
+  // Panel header
+  panel: '--fg',
+  panelText: {
+    depends: ['fgText', 'panel'],
+    layer: 'panel',
+    textColor: true
+  },
+  panelFaint: {
+    depends: ['fgText', 'panel'],
+    layer: 'panel',
+    textColor: true
+  },
+  panelLink: {
+    depends: ['fgLink', 'panel'],
+    layer: 'panel',
+    textColor: 'preserve'
+  },
+
+  // Top bar
+  topBar: '--fg',
+  topBarText: {
+    depends: ['fgText', 'topBar'],
+    layer: 'topBar',
+    textColor: true
+  },
+  topBarLink: {
+    depends: ['fgLink', 'topBar'],
+    layer: 'topBar',
+    textColor: 'preserve'
+  },
+
+  // Buttons
+  btn: '--fg',
+  btnText: {
+    depends: ['fgText', 'btn'],
+    layer: 'btn'
+  },
+  btnPanelText: {
+    depends: ['panelText', 'btn', 'panel'],
+    layer: 'btnPanel',
+    variant: 'btn',
+    textColor: true
+  },
+  btnTopBarText: {
+    depends: ['topBarText', 'btn', 'topBar'],
+    layer: 'btnTopBar',
+    variant: 'btn',
+    textColor: true
+  },
+
+  // Input fields
+  input: '--fg',
+  inputText: {
+    depends: ['text', 'input'],
+    layer: 'input',
+    textColor: true
+  },
+  inputPanelText: {
+    depends: ['panelText', 'input', 'panel'],
+    layer: 'inputPanel',
+    variant: 'input',
+    textColor: true
+  },
+  inputTopbarText: {
+    depends: ['topBarText', 'input', 'topBar'],
+    layer: 'inputTopBar',
+    variant: 'input',
+    textColor: true
+  },
+
+  alertError: '--cRed',
+  alertErrorText: {
+    depends: ['text', 'alertError'],
+    layer: 'alert',
+    variant: 'alertError',
+    textColor: true
+  },
+  alertErrorPanelText: {
+    depends: ['panelText', 'alertError', 'panel'],
+    layer: 'alertPanel',
+    variant: 'alertError',
+    textColor: true
+  },
+
+  alertWarning: '--cOrange',
+  alertWarningText: {
+    depends: ['text', 'alertWarning'],
+    layer: 'alert',
+    variant: 'alertWarning',
+    textColor: true
+  },
+  alertWarningPanelText: {
+    depends: ['panelText', 'alertWarning', 'panel'],
+    layer: 'alertPanel',
+    variant: 'alertWarning',
+    textColor: true
+  },
+
+  badgeNotification: '--cRed',
+  badgeNotificationText: {
+    depends: ['text', 'badgeNotification'],
+    layer: 'badge',
+    variant: 'badgeNotification',
+    textColor: true
+  }
+}
+
+const getDependencies = (key, inheritance) => {
+  const data = inheritance[key]
+  if (typeof data === 'string' && data.startsWith('--')) {
+    return [data.substring(2)]
+  } else {
+    if (data === null) return []
+    const { depends } = data
+    if (Array.isArray(depends)) {
+      return depends
+    } else if (typeof depends === 'object') {
+      return [depends]
+    } else {
+      return []
+    }
+  }
+}
+
+export const topoSort = (
+  inheritance = SLOT_INHERITANCE,
+  getDeps = getDependencies
+) => {
+  // This is an implementation of https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm
+
+  const allKeys = Object.keys(inheritance)
+  const whites = new Set(allKeys)
+  const grays = new Set()
+  const blacks = new Set()
+  const unprocessed = [...allKeys]
+  const output = []
+
+  const step = (node) => {
+    if (whites.has(node)) {
+      // Make node "gray"
+      whites.delete(node)
+      grays.add(node)
+      // Do step for each node connected to it (one way)
+      getDeps(node, inheritance).forEach(step)
+      // Make node "black"
+      grays.delete(node)
+      blacks.add(node)
+      // Put it into the output list
+      output.push(node)
+    } else if (grays.has(node)) {
+      console.debug('Cyclic depenency in topoSort, ignoring')
+      output.push(node)
+    } else if (blacks.has(node)) {
+      // do nothing
+    } else {
+      throw new Error('Unintended condition in topoSort!')
+    }
+  }
+  while (unprocessed.length > 0) {
+    step(unprocessed.pop())
+  }
+  return output
+}
+
+export const SLOT_ORDERED = topoSort(SLOT_INHERITANCE)
+
+export const getLayersArray = (layer, data = LAYERS) => {
+  let array = [layer]
+  let parent = data[layer]
+  while (parent) {
+    array.unshift(parent)
+    parent = data[parent]
+  }
+  return array
+}
+
+export const getLayers = (layer, variant = layer, colors, opacity) => {
+  return getLayersArray(layer).map((currentLayer) => ([
+    currentLayer === layer
+      ? colors[variant]
+      : colors[currentLayer],
+    opacity[currentLayer]
+  ]))
+}
 
 // While this is not used anymore right now, I left it in if we want to do custom
 // styles that aren't just colors, so user can pick from a few different distinct
@@ -153,12 +409,13 @@ const getCssColor = (input, a) => {
 }
 
 const generateColors = (themeData) => {
-  const colors = {}
   const rawOpacity = Object.assign({
     panel: 1,
     btn: 1,
     border: 1,
     bg: 1,
+    badge: 1,
+    text: 1,
     alert: 0.5,
     input: 0.5,
     faint: 0.5,
@@ -171,7 +428,6 @@ const generateColors = (themeData) => {
   }, {}))
 
   const inputColors = themeData.colors || themeData
-
   const transparentsOpacity = Object.entries(inputColors).reduce((acc, [k, v]) => {
     if (v === 'transparent') {
       acc[k] = 0
@@ -181,13 +437,8 @@ const generateColors = (themeData) => {
 
   const opacity = { ...rawOpacity, ...transparentsOpacity }
 
-  const compat = themeData.v3compat || {}
-  const compatColors = Object.entries(compat.colors || {}).reduce((acc, [key, value]) => {
-    const newVal = value === null ? undefined : value
-    return { ...acc, [key]: newVal }
-  }, {})
-
-  const col = Object.entries({ ...inputColors, ...compatColors }).reduce((acc, [k, v]) => {
+  // Cycle one: just whatever we have
+  const sourceColors = Object.entries(inputColors).reduce((acc, [k, v]) => {
     if (typeof v === 'object') {
       acc[k] = v
     } else {
@@ -201,77 +452,53 @@ const generateColors = (themeData) => {
     return acc
   }, {})
 
-  colors.bg = col.bg
-  colors.underlay = col.underlay || hex2rgb('#000000')
-  colors.text = col.text
-
-  const isLightOnDark = convert(colors.bg).hsl.l < convert(colors.text).hsl.l
+  const isLightOnDark = convert(sourceColors.bg).hsl.l < convert(sourceColors.text).hsl.l
   const mod = isLightOnDark ? 1 : -1
 
-  colors.lightText = col.lightText || brightness(20 * mod, colors.text).rgb
+  const colors = SLOT_ORDERED.reduce((acc, key) => {
+    const value = SLOT_INHERITANCE[key]
+    if (sourceColors[key]) {
+      return { ...acc, [key]: { ...sourceColors[key] } }
+    } else if (typeof value === 'string' && value.startsWith('#')) {
+      return { ...acc, [key]: convert(value).rgb }
+    } else {
+      const isObject = typeof value === 'object'
+      const defaultColorFunc = (mod, dep) => ({ ...dep })
+      const deps = getDependencies(key, SLOT_INHERITANCE)
+      const colorFunc = (isObject && value.color) || defaultColorFunc
 
-  colors.accent = col.accent || col.link
-  colors.link = col.link || col.accent
+      if (value.textColor) {
+        return {
+          ...acc,
+          [key]: getTextColor(
+            alphaBlendLayers(
+              { ...acc[deps[0]] },
+              getLayers(
+                value.layer,
+                value.variant || value.layer,
+                acc,
+                opacity
+              )
+            ),
+            { ...acc[deps[0]] },
+            value.textColor === 'preserve'
+          )
+        }
+      } else {
+        console.log('BENIS', key, deps, deps.map((dep) => ({ ...acc[dep] })))
+        return {
+          ...acc,
+          [key]: colorFunc(
+            mod,
+            ...deps.map((dep) => ({ ...acc[dep] }))
+          )
+        }
+      }
+    }
+  }, {})
 
-  colors.faint = col.faint || Object.assign({}, col.text)
-
-  colors.lightBg = col.lightBg || brightness(5 * mod, colors.bg).rgb
-
-  const underlay = [colors.underlay, opacity.underlay]
-  // Technically, foreground can't be transparent (descendants can) but let's keep it just in case
-  const fg = [col.fg, opacity.fg || 1]
-  const bg = [col.bg, opacity.bg]
-
-  colors.fg = col.fg
-  colors.fgText = col.fgText || getTextColor(alphaBlendLayers(colors.text, [underlay, bg, fg]), colors.text)
-  colors.fgLink = col.fgLink || getTextColor(alphaBlendLayers(colors.link, [underlay, bg, fg]), colors.link, true)
-
-  colors.border = col.border || brightness(2 * mod, colors.fg).rgb
-
-  colors.btn = col.btn || Object.assign({}, col.fg)
-  const btn = [colors.btn, opacity.btn || 1]
-  colors.btnText = col.btnText || getTextColor(alphaBlendLayers(colors.fgText, [underlay, bg, fg, btn]), colors.fgText)
-
-  colors.input = col.input || Object.assign({}, col.fg)
-  const input = [colors.input, opacity.input]
-  colors.inputText = col.inputText || getTextColor(alphaBlendLayers(colors.lightText, [underlay, bg, fg, input]), colors.lightText)
-
-  colors.panel = col.panel || Object.assign({}, col.fg)
-  const panel = [colors.panel, opacity.panel]
-  colors.panelText = col.panelText || getTextColor(alphaBlendLayers(colors.fgText, [underlay, bg, panel]), colors.fgText)
-  colors.panelLink = col.panelLink || getTextColor(alphaBlendLayers(colors.fgLink, [underlay, bg, panel]), colors.fgLink)
-  colors.panelFaint = col.panelFaint || getTextColor(alphaBlendLayers(colors.faint, [underlay, bg, panel]), colors.faint)
-
-  colors.topBar = col.topBar || Object.assign({}, col.fg)
-  const topBar = [colors.topBar, opacity.topBar]
-  colors.topBarText = col.topBarText || getTextColor(alphaBlendLayers(colors.fgText, [topBar]), colors.fgText)
-  colors.topBarLink = col.topBarLink || getTextColor(alphaBlendLayers(colors.fgLink, [topBar]), colors.fgLink)
-
-  colors.faintLink = col.faintLink || Object.assign({}, col.link || col.accent)
-  colors.linkBg = alphaBlend(colors.link, 0.4, colors.bg)
-
-  colors.icon = mixrgb(colors.bg, colors.text)
-
-  colors.cBlue = col.cBlue || hex2rgb('#0000FF')
-  colors.cRed = col.cRed || hex2rgb('#FF0000')
-  colors.cGreen = col.cGreen || hex2rgb('#00FF00')
-  colors.cOrange = col.cOrange || hex2rgb('#E3FF00')
-
-  colors.alertError = col.alertError || Object.assign({}, colors.cRed)
-  const alertError = [colors.alertError, opacity.alert]
-  colors.alertErrorText = col.alertErrorText || getTextColor(alphaBlendLayers(colors.text, [underlay, bg, alertError]), colors.text)
-  colors.alertErrorPanelText = col.alertErrorPanelText || getTextColor(alphaBlendLayers(colors.panelText, [underlay, bg, panel, panel, alertError]), colors.panelText)
-
-  colors.alertWarning = col.alertWarning || Object.assign({}, colors.cOrange)
-  const alertWarning = [colors.alertWarning, opacity.alert]
-  colors.alertWarningText = col.alertWarningText || getTextColor(alphaBlendLayers(colors.text, [underlay, bg, alertWarning]), colors.text)
-  colors.alertWarningPanelText = col.alertWarningPanelText || getTextColor(alphaBlendLayers(colors.panelText, [underlay, bg, panel, panel, alertWarning]), colors.panelText)
-
-  colors.badgeNotification = col.badgeNotification || Object.assign({}, colors.cRed)
-  colors.badgeNotificationText = colors.badgeNotificationText || contrastRatio(colors.badgeNotification).rgb
-
+  // Inheriting opacities
   Object.entries(opacity).forEach(([ k, v ]) => {
-    console.log(k)
     if (typeof v === 'undefined') return
     if (k === 'alert') {
       colors.alertError.a = v
@@ -284,6 +511,9 @@ const generateColors = (themeData) => {
     }
     if (k === 'bg') {
       colors['lightBg'].a = v
+    }
+    if (k === 'badge') {
+      colors['badgeNotification'].a = v
     }
     if (colors[k]) {
       colors[k].a = v

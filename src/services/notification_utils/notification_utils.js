@@ -6,7 +6,8 @@ export const visibleTypes = store => ([
   store.state.config.notificationVisibility.likes && 'like',
   store.state.config.notificationVisibility.mentions && 'mention',
   store.state.config.notificationVisibility.repeats && 'repeat',
-  store.state.config.notificationVisibility.follows && 'follow'
+  store.state.config.notificationVisibility.follows && 'follow',
+  store.state.config.notificationVisibility.moves && 'move'
 ].filter(_ => _))
 
 const sortById = (a, b) => {

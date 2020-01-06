@@ -74,9 +74,13 @@
               <i class="fa icon-user-plus lit" />
               <small>{{ $t('notifications.followed_you') }}</small>
             </span>
+            <span v-if="notification.type === 'move'">
+              <i class="fa icon-arrow-curved lit" />
+              <small>{{ $t('notifications.migrated_to') }}</small>
+            </span>
           </div>
           <div
-            v-if="notification.type === 'follow'"
+            v-if="notification.type === 'follow' || notification.type === 'move'"
             class="timeago"
           >
             <span class="faint">
@@ -113,6 +117,14 @@
         >
           <router-link :to="userProfileLink">
             @{{ notification.from_profile.screen_name }}
+          </router-link>
+        </div>
+        <div
+          v-else-if="notification.type === 'move'"
+          class="move-text"
+        >
+          <router-link :to="targetUserProfileLink">
+            @{{ notification.target.screen_name }}
           </router-link>
         </div>
         <template v-else>

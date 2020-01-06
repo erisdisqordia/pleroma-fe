@@ -65,7 +65,8 @@ function sendSubscriptionToBackEnd (subscription, token, notificationVisibility)
           follow: notificationVisibility.follows,
           favourite: notificationVisibility.likes,
           mention: notificationVisibility.mentions,
-          reblog: notificationVisibility.repeats
+          reblog: notificationVisibility.repeats,
+          move: notificationVisibility.moves
         }
       }
     })

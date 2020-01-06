@@ -45,12 +45,12 @@ const ModerationTools = {
     toggleTag (tag) {
       const store = this.$store
       if (this.tagsSet.has(tag)) {
-        store.state.api.backendInteractor.untagUser(this.user, tag).then(response => {
+        store.state.api.backendInteractor.untagUser({ user: this.user, tag }).then(response => {
           if (!response.ok) { return }
           store.commit('untagUser', { user: this.user, tag })
         })
       } else {
-        store.state.api.backendInteractor.tagUser(this.user, tag).then(response => {
+        store.state.api.backendInteractor.tagUser({ user: this.user, tag }).then(response => {
           if (!response.ok) { return }
           store.commit('tagUser', { user: this.user, tag })
         })
@@ -59,19 +59,19 @@ const ModerationTools = {
     toggleRight (right) {
       const store = this.$store
       if (this.user.rights[right]) {
-        store.state.api.backendInteractor.deleteRight(this.user, right).then(response => {
+        store.state.api.backendInteractor.deleteRight({ user: this.user, right }).then(response => {
           if (!response.ok) { return }
-          store.commit('updateRight', { user: this.user, right: right, value: false })
+          store.commit('updateRight', { user: this.user, right, value: false })
         })
       } else {
-        store.state.api.backendInteractor.addRight(this.user, right).then(response => {
+        store.state.api.backendInteractor.addRight({ user: this.user, right }).then(response => {
           if (!response.ok) { return }
-          store.commit('updateRight', { user: this.user, right: right, value: true })
+          store.commit('updateRight', { user: this.user, right, value: true })
         })
       }
     },
     toggleActivationStatus () {
-      this.$store.dispatch('toggleActivationStatus', this.user)
+      this.$store.dispatch('toggleActivationStatus', { user: this.user })
     },
     deleteUserDialog (show) {
       this.showDeleteUserDialog = show
@@ -80,7 +80,7 @@ const ModerationTools = {
       const store = this.$store
       const user = this.user
       const { id, name } = user
-      store.state.api.backendInteractor.deleteUser(user)
+      store.state.api.backendInteractor.deleteUser({ user })
         .then(e => {
           this.$store.dispatch('markStatusesAsDeleted', status => user.id === status.user.id)
           const isProfile = this.$route.name === 'external-user-profile' || this.$route.name === 'user-profile'

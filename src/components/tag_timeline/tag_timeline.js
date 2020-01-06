@@ -19,7 +19,7 @@ const TagTimeline = {
     }
   },
   destroyed () {
-    this.$store.dispatch('stopFetching', 'tag')
+    this.$store.dispatch('stopFetchingTimeline', 'tag')
   }
 }
 

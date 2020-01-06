@@ -74,6 +74,15 @@
                   </ul>
                 </li>
                 <li>
+                  <Checkbox v-model="useStreamingApi">
+                    {{ $t('settings.useStreamingApi') }}
+                    <br/>
+                    <small>
+                    {{ $t('settings.useStreamingApiWarning') }}
+                    </small>
+                  </Checkbox>
+                </li>
+                <li>
                   <Checkbox v-model="autoLoad">
                     {{ $t('settings.autoload') }}
                   </Checkbox>
@@ -312,6 +321,11 @@
                   <li>
                     <Checkbox v-model="notificationVisibility.mentions">
                       {{ $t('settings.notification_visibility_mentions') }}
+                    </Checkbox>
+                  </li>
+                  <li>
+                    <Checkbox v-model="notificationVisibility.moves">
+                      {{ $t('settings.notification_visibility_moves') }}
                     </Checkbox>
                   </li>
                 </ul>

@@ -72,6 +72,7 @@ const MASTODON_MUTE_CONVERSATION = id => `/api/v1/statuses/${id}/mute`
 const MASTODON_UNMUTE_CONVERSATION = id => `/api/v1/statuses/${id}/unmute`
 const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
+const MASTODON_STREAMING = '/api/v1/streaming'
 
 const oldfetch = window.fetch
 
@@ -451,7 +452,7 @@ const deleteRight = ({ right, credentials, ...user }) => {
   })
 }
 
-const activateUser = ({ credentials, screen_name: nickname }) => {
+const activateUser = ({ credentials, user: { screen_name: nickname } }) => {
   return promisedRequest({
     url: ACTIVATE_USER_URL,
     method: 'PATCH',
@@ -462,7 +463,7 @@ const activateUser = ({ credentials, screen_name: nickname }) => {
   }).then(response => get(response, 'users.0'))
 }
 
-const deactivateUser = ({ credentials, screen_name: nickname }) => {
+const deactivateUser = ({ credentials, user: { screen_name: nickname } }) => {
   return promisedRequest({
     url: DEACTIVATE_USER_URL,
     method: 'PATCH',
@@ -945,6 +946,99 @@ const search2 = ({ credentials, q, resolve, limit, offset, following }) => {
       data.statuses = data.statuses.slice(0, limit).map(s => parseStatus(s))
       return data
     })
+}
+
+export const getMastodonSocketURI = ({ credentials, stream, args = {} }) => {
+  return Object.entries({
+    ...(credentials
+      ? { access_token: credentials }
+      : {}
+    ),
+    stream,
+    ...args
+  }).reduce((acc, [key, val]) => {
+    return acc + `${key}=${val}&`
+  }, MASTODON_STREAMING + '?')
+}
+
+const MASTODON_STREAMING_EVENTS = new Set([
+  'update',
+  'notification',
+  'delete',
+  'filters_changed'
+])
+
+// A thin wrapper around WebSocket API that allows adding a pre-processor to it
+// Uses EventTarget and a CustomEvent to proxy events
+export const ProcessedWS = ({
+  url,
+  preprocessor = handleMastoWS,
+  id = 'Unknown'
+}) => {
+  const eventTarget = new EventTarget()
+  const socket = new WebSocket(url)
+  if (!socket) throw new Error(`Failed to create socket ${id}`)
+  const proxy = (original, eventName, processor = a => a) => {
+    original.addEventListener(eventName, (eventData) => {
+      eventTarget.dispatchEvent(new CustomEvent(
+        eventName,
+        { detail: processor(eventData) }
+      ))
+    })
+  }
+  socket.addEventListener('open', (wsEvent) => {
+    console.debug(`[WS][${id}] Socket connected`, wsEvent)
+  })
+  socket.addEventListener('error', (wsEvent) => {
+    console.debug(`[WS][${id}] Socket errored`, wsEvent)
+  })
+  socket.addEventListener('close', (wsEvent) => {
+    console.debug(
+      `[WS][${id}] Socket disconnected with code ${wsEvent.code}`,
+      wsEvent
+    )
+  })
+  // Commented code reason: very spammy, uncomment to enable message debug logging
+  /*
+  socket.addEventListener('message', (wsEvent) => {
+    console.debug(
+      `[WS][${id}] Message received`,
+      wsEvent
+    )
+  })
+  /**/
+
+  proxy(socket, 'open')
+  proxy(socket, 'close')
+  proxy(socket, 'message', preprocessor)
+  proxy(socket, 'error')
+
+  // 1000 = Normal Closure
+  eventTarget.close = () => { socket.close(1000, 'Shutting down socket') }
+
+  return eventTarget
+}
+
+export const handleMastoWS = (wsEvent) => {
+  const { data } = wsEvent
+  if (!data) return
+  const parsedEvent = JSON.parse(data)
+  const { event, payload } = parsedEvent
+  if (MASTODON_STREAMING_EVENTS.has(event)) {
+    // MastoBE and PleromaBE both send payload for delete as a PLAIN string
+    if (event === 'delete') {
+      return { event, id: payload }
+    }
+    const data = payload ? JSON.parse(payload) : null
+    if (event === 'update') {
+      return { event, status: parseStatus(data) }
+    } else if (event === 'notification') {
+      return { event, notification: parseNotification(data) }
+    }
+  } else {
+    console.warn('Unknown event', wsEvent)
+    return null
+  }
 }
 
 const apiService = {

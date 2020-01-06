@@ -32,7 +32,7 @@ const getNotificationPermission = () => {
 }
 
 const blockUser = (store, id) => {
-  return store.rootState.api.backendInteractor.blockUser(id)
+  return store.rootState.api.backendInteractor.blockUser({ id })
     .then((relationship) => {
       store.commit('updateUserRelationship', [relationship])
       store.commit('addBlockId', id)
@@ -43,12 +43,12 @@ const blockUser = (store, id) => {
 }
 
 const unblockUser = (store, id) => {
-  return store.rootState.api.backendInteractor.unblockUser(id)
+  return store.rootState.api.backendInteractor.unblockUser({ id })
     .then((relationship) => store.commit('updateUserRelationship', [relationship]))
 }
 
 const muteUser = (store, id) => {
-  return store.rootState.api.backendInteractor.muteUser(id)
+  return store.rootState.api.backendInteractor.muteUser({ id })
     .then((relationship) => {
       store.commit('updateUserRelationship', [relationship])
       store.commit('addMuteId', id)
@@ -56,7 +56,7 @@ const muteUser = (store, id) => {
 }
 
 const unmuteUser = (store, id) => {
-  return store.rootState.api.backendInteractor.unmuteUser(id)
+  return store.rootState.api.backendInteractor.unmuteUser({ id })
     .then((relationship) => store.commit('updateUserRelationship', [relationship]))
 }
 
@@ -324,11 +324,11 @@ const users = {
       commit('clearFollowers', userId)
     },
     subscribeUser ({ rootState, commit }, id) {
-      return rootState.api.backendInteractor.subscribeUser(id)
+      return rootState.api.backendInteractor.subscribeUser({ id })
         .then((relationship) => commit('updateUserRelationship', [relationship]))
     },
     unsubscribeUser ({ rootState, commit }, id) {
-      return rootState.api.backendInteractor.unsubscribeUser(id)
+      return rootState.api.backendInteractor.unsubscribeUser({ id })
         .then((relationship) => commit('updateUserRelationship', [relationship]))
     },
     toggleActivationStatus ({ rootState, commit }, user) {
@@ -373,8 +373,10 @@ const users = {
     },
     addNewNotifications (store, { notifications }) {
       const users = map(notifications, 'from_profile')
+      const targetUsers = map(notifications, 'target')
       const notificationIds = notifications.map(_ => _.id)
       store.commit('addNewUsers', users)
+      store.commit('addNewUsers', targetUsers)
 
       const notificationsObject = store.rootState.statuses.notifications.idStore
       const relevantNotifications = Object.entries(notificationsObject)
@@ -387,7 +389,7 @@ const users = {
       })
     },
     searchUsers (store, query) {
-      return store.rootState.api.backendInteractor.searchUsers(query)
+      return store.rootState.api.backendInteractor.searchUsers({ query })
         .then((users) => {
           store.commit('addNewUsers', users)
           return users
@@ -399,7 +401,7 @@ const users = {
       let rootState = store.rootState
 
       try {
-        let data = await rootState.api.backendInteractor.register(userInfo)
+        let data = await rootState.api.backendInteractor.register({ ...userInfo })
         store.commit('signUpSuccess')
         store.commit('setToken', data.access_token)
         store.dispatch('loginUser', data.access_token)
@@ -436,10 +438,10 @@ const users = {
           store.commit('clearCurrentUser')
           store.dispatch('disconnectFromSocket')
           store.commit('clearToken')
-          store.dispatch('stopFetching', 'friends')
+          store.dispatch('stopFetchingTimeline', 'friends')
           store.commit('setBackendInteractor', backendInteractorService(store.getters.getToken()))
-          store.dispatch('stopFetching', 'notifications')
-          store.dispatch('stopFetching', 'followRequest')
+          store.dispatch('stopFetchingNotifications')
+          store.dispatch('stopFetchingFollowRequests')
           store.commit('clearNotifications')
           store.commit('resetStatuses')
         })
@@ -474,11 +476,24 @@ const users = {
                 store.dispatch('initializeSocket')
               }
 
-              // Start getting fresh posts.
-              store.dispatch('startFetchingTimeline', { timeline: 'friends' })
+              const startPolling = () => {
+                // Start getting fresh posts.
+                store.dispatch('startFetchingTimeline', { timeline: 'friends' })
 
-              // Start fetching notifications
-              store.dispatch('startFetchingNotifications')
+                // Start fetching notifications
+                store.dispatch('startFetchingNotifications')
+              }
+
+              if (store.getters.mergedConfig.useStreamingApi) {
+                store.dispatch('enableMastoSockets').catch((error) => {
+                  console.error('Failed initializing MastoAPI Streaming socket', error)
+                  startPolling()
+                }).then(() => {
+                  setTimeout(() => store.dispatch('setNotificationsSilence', false), 10000)
+                })
+              } else {
+                startPolling()
+              }
 
               // Get user mutes
               store.dispatch('fetchMutes')

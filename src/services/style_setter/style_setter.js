@@ -65,12 +65,12 @@ export const SLOT_INHERITANCE = {
 
   // Foreground
   fgText: {
-    depends: ['text', 'fg', 'underlay', 'bg'],
+    depends: ['text'],
     layer: 'fg',
     textColor: true
   },
   fgLink: {
-    depends: ['link', 'fg', 'underlay', 'bg'],
+    depends: ['link'],
     layer: 'fg',
     textColor: 'preserve'
   },
@@ -78,17 +78,17 @@ export const SLOT_INHERITANCE = {
   // Panel header
   panel: '--fg',
   panelText: {
-    depends: ['fgText', 'panel'],
+    depends: ['fgText'],
     layer: 'panel',
     textColor: true
   },
   panelFaint: {
-    depends: ['fgText', 'panel'],
+    depends: ['fgText'],
     layer: 'panel',
     textColor: true
   },
   panelLink: {
-    depends: ['fgLink', 'panel'],
+    depends: ['fgLink'],
     layer: 'panel',
     textColor: 'preserve'
   },
@@ -96,12 +96,12 @@ export const SLOT_INHERITANCE = {
   // Top bar
   topBar: '--fg',
   topBarText: {
-    depends: ['fgText', 'topBar'],
+    depends: ['fgText'],
     layer: 'topBar',
     textColor: true
   },
   topBarLink: {
-    depends: ['fgLink', 'topBar'],
+    depends: ['fgLink'],
     layer: 'topBar',
     textColor: 'preserve'
   },
@@ -109,17 +109,17 @@ export const SLOT_INHERITANCE = {
   // Buttons
   btn: '--fg',
   btnText: {
-    depends: ['fgText', 'btn'],
+    depends: ['fgText'],
     layer: 'btn'
   },
   btnPanelText: {
-    depends: ['panelText', 'btn', 'panel'],
+    depends: ['panelText'],
     layer: 'btnPanel',
     variant: 'btn',
     textColor: true
   },
   btnTopBarText: {
-    depends: ['topBarText', 'btn', 'topBar'],
+    depends: ['topBarText'],
     layer: 'btnTopBar',
     variant: 'btn',
     textColor: true
@@ -128,18 +128,18 @@ export const SLOT_INHERITANCE = {
   // Input fields
   input: '--fg',
   inputText: {
-    depends: ['text', 'input'],
+    depends: ['text'],
     layer: 'input',
     textColor: true
   },
   inputPanelText: {
-    depends: ['panelText', 'input', 'panel'],
+    depends: ['panelText'],
     layer: 'inputPanel',
     variant: 'input',
     textColor: true
   },
   inputTopbarText: {
-    depends: ['topBarText', 'input', 'topBar'],
+    depends: ['topBarText'],
     layer: 'inputTopBar',
     variant: 'input',
     textColor: true
@@ -153,7 +153,7 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
   alertErrorPanelText: {
-    depends: ['panelText', 'alertError', 'panel'],
+    depends: ['panelText', 'alertError'],
     layer: 'alertPanel',
     variant: 'alertError',
     textColor: true
@@ -167,7 +167,7 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
   alertWarningPanelText: {
-    depends: ['panelText', 'alertWarning', 'panel'],
+    depends: ['panelText', 'alertWarning'],
     layer: 'alertPanel',
     variant: 'alertWarning',
     textColor: true
@@ -178,8 +178,27 @@ export const SLOT_INHERITANCE = {
     depends: ['text', 'badgeNotification'],
     layer: 'badge',
     variant: 'badgeNotification',
-    textColor: true
+    textColor: 'bw'
   }
+}
+
+export const getLayersArray = (layer, data = LAYERS) => {
+  let array = [layer]
+  let parent = data[layer]
+  while (parent) {
+    array.unshift(parent)
+    parent = data[parent]
+  }
+  return array
+}
+
+export const getLayers = (layer, variant = layer, colors, opacity) => {
+  return getLayersArray(layer).map((currentLayer) => ([
+    currentLayer === layer
+      ? colors[variant]
+      : colors[currentLayer],
+    opacity[currentLayer]
+  ]))
 }
 
 const getDependencies = (key, inheritance) => {
@@ -188,13 +207,18 @@ const getDependencies = (key, inheritance) => {
     return [data.substring(2)]
   } else {
     if (data === null) return []
-    const { depends } = data
+    const { depends, layer, variant } = data
+    const layerDeps = layer
+      ? getLayersArray(layer).map(currentLayer => {
+        return currentLayer === layer
+          ? variant || layer
+          : currentLayer
+      })
+      : []
     if (Array.isArray(depends)) {
-      return depends
-    } else if (typeof depends === 'object') {
-      return [depends]
+      return [...depends, ...layerDeps]
     } else {
-      return []
+      return [...layerDeps]
     }
   }
 }
@@ -240,25 +264,6 @@ export const topoSort = (
 }
 
 export const SLOT_ORDERED = topoSort(SLOT_INHERITANCE)
-
-export const getLayersArray = (layer, data = LAYERS) => {
-  let array = [layer]
-  let parent = data[layer]
-  while (parent) {
-    array.unshift(parent)
-    parent = data[parent]
-  }
-  return array
-}
-
-export const getLayers = (layer, variant = layer, colors, opacity) => {
-  return getLayersArray(layer).map((currentLayer) => ([
-    currentLayer === layer
-      ? colors[variant]
-      : colors[currentLayer],
-    opacity[currentLayer]
-  ]))
-}
 
 // While this is not used anymore right now, I left it in if we want to do custom
 // styles that aren't just colors, so user can pick from a few different distinct
@@ -317,6 +322,8 @@ const rgb2rgba = function (rgba) {
 const getTextColor = function (bg, text, preserve) {
   const bgIsLight = convert(bg).hsl.l > 50
   const textIsLight = convert(text).hsl.l > 50
+
+  console.log(bgIsLight, textIsLight)
 
   if ((bgIsLight && textIsLight) || (!bgIsLight && !textIsLight)) {
     const base = typeof text.a !== 'undefined' ? { a: text.a } : {}
@@ -468,21 +475,29 @@ const generateColors = (themeData) => {
       const colorFunc = (isObject && value.color) || defaultColorFunc
 
       if (value.textColor) {
-        return {
-          ...acc,
-          [key]: getTextColor(
-            alphaBlendLayers(
-              { ...acc[deps[0]] },
-              getLayers(
-                value.layer,
-                value.variant || value.layer,
-                acc,
-                opacity
-              )
-            ),
-            { ...acc[deps[0]] },
-            value.textColor === 'preserve'
+        const bg = alphaBlendLayers(
+          { ...acc[deps[0]] },
+          getLayers(
+            value.layer,
+            value.variant || value.layer,
+            acc,
+            opacity
           )
+        )
+        if (value.textColor === 'bw') {
+          return {
+            ...acc,
+            [key]: contrastRatio(bg)
+          }
+        } else {
+          return {
+            ...acc,
+            [key]: getTextColor(
+              bg,
+              { ...acc[deps[0]] },
+              value.textColor === 'preserve'
+            )
+          }
         }
       } else {
         console.log('BENIS', key, deps, deps.map((dep) => ({ ...acc[dep] })))

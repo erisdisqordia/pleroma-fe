@@ -13,8 +13,8 @@
       v-if="typeof fallback !== 'undefined'"
       :checked="present"
       :disabled="disabled"
-      @change="$emit('input', !present ? fallback : undefined)"
       class="opt"
+      @change="$emit('input', !present ? fallback : undefined)"
     />
     <input
       :id="name"
@@ -33,12 +33,12 @@
 <script>
 import Checkbox from '../checkbox/checkbox.vue'
 export default {
-  props: [
-    'name', 'value', 'fallback', 'disabled'
-  ],
   components: {
     Checkbox
   },
+  props: [
+    'name', 'value', 'fallback', 'disabled'
+  ],
   computed: {
     present () {
       return typeof this.value !== 'undefined'

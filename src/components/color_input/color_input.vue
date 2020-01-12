@@ -13,8 +13,8 @@
       v-if="typeof fallback !== 'undefined' && showOptionalTickbox"
       :checked="present"
       :disabled="disabled"
-      @change="$emit('input', typeof value === 'undefined' ? fallback : undefined)"
       class="opt"
+      @change="$emit('input', typeof value === 'undefined' ? fallback : undefined)"
     />
     <div class="input color-input-field">
       <input
@@ -46,6 +46,9 @@
 import Checkbox from '../checkbox/checkbox.vue'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 export default {
+  components: {
+    Checkbox
+  },
   props: {
     // Name of color, used for identifying
     name: {
@@ -82,9 +85,6 @@ export default {
       type: Boolean,
       default: true
     }
-  },
-  components: {
-    Checkbox
   },
   computed: {
     present () {

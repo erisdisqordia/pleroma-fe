@@ -119,14 +119,14 @@
               name="accentColor"
               :fallback="previewTheme.colors.link"
               :label="$t('settings.accent')"
-              :showOptionalTickbox="typeof linkColorLocal !== 'undefined'"
+              :show-optional-tickbox="typeof linkColorLocal !== 'undefined'"
             />
             <ColorInput
               v-model="linkColorLocal"
               name="linkColor"
               :fallback="previewTheme.colors.accent"
               :label="$t('settings.links')"
-              :showOptionalTickbox="typeof accentColorLocal !== 'undefined'"
+              :show-optional-tickbox="typeof accentColorLocal !== 'undefined'"
             />
             <ContrastRatio :contrast="previewContrast.bgLink" />
           </div>
@@ -388,7 +388,7 @@
               v-model="underlayColorLocal"
               name="underlay"
               :label="$t('settings.style.advanced_colors.underlay')"
-              fallback='#000000'
+              fallback="#000000"
             />
             <OpacityInput
               v-model="underlayOpacityLocal"

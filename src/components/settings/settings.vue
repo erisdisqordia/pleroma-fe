@@ -76,9 +76,9 @@
                 <li>
                   <Checkbox v-model="useStreamingApi">
                     {{ $t('settings.useStreamingApi') }}
-                    <br/>
+                    <br>
                     <small>
-                    {{ $t('settings.useStreamingApiWarning') }}
+                      {{ $t('settings.useStreamingApiWarning') }}
                     </small>
                   </Checkbox>
                 </li>

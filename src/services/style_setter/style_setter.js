@@ -1,7 +1,7 @@
 import { times } from 'lodash'
 import { convert } from 'chromatism'
 import { rgb2hex, hex2rgb, rgba2css, getCssColor } from '../color_convert/color_convert.js'
-import { getColors } from '../theme_data/theme_data.service.js'
+import { getColors, DEFAULT_OPACITY } from '../theme_data/theme_data.service.js'
 
 // While this is not used anymore right now, I left it in if we want to do custom
 // styles that aren't just colors, so user can pick from a few different distinct
@@ -115,18 +115,7 @@ const getCssShadowFilter = (input) => {
 }
 
 export const generateColors = (themeData) => {
-  const rawOpacity = Object.assign({
-    panel: 1,
-    btn: 1,
-    border: 1,
-    bg: 1,
-    badge: 1,
-    text: 1,
-    alert: 0.5,
-    input: 0.5,
-    faint: 0.5,
-    underlay: 0.15
-  }, Object.entries(themeData.opacity || {}).reduce((acc, [k, v]) => {
+  const rawOpacity = Object.assign({ ...DEFAULT_OPACITY }, Object.entries(themeData.opacity || {}).reduce((acc, [k, v]) => {
     if (typeof v !== 'undefined') {
       acc[k] = v
     }

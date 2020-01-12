@@ -209,6 +209,12 @@
               :label="$t('settings.style.advanced_colors.alert_error')"
               :fallback="previewTheme.colors.alertError"
             />
+            <ColorInput
+              v-model="alertErrorTextColorLocal"
+              name="alertErrorText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.alertErrorText"
+            />
             <ContrastRatio :contrast="previewContrast.alertError" />
             <ColorInput
               v-model="alertWarningColorLocal"
@@ -217,6 +223,12 @@
               :fallback="previewTheme.colors.alertWarning"
             />
             <ContrastRatio :contrast="previewContrast.alertWarning" />
+            <ColorInput
+              v-model="alertWarningTextColorLocal"
+              name="alertWarningText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.alertWarningText"
+            />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.badge') }}</h4>

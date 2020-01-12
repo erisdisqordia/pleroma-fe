@@ -14,7 +14,12 @@ import {
   composePreset,
   getThemes
 } from '../../services/style_setter/style_setter.js'
-import { CURRENT_VERSION } from '../../services/theme_data/theme_data.service.js'
+import {
+  CURRENT_VERSION,
+  SLOT_INHERITANCE,
+  DEFAULT_OPACITY,
+  getLayers
+} from '../../services/theme_data/theme_data.service.js'
 import ColorInput from '../color_input/color_input.vue'
 import RangeInput from '../range_input/range_input.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
@@ -67,55 +72,13 @@ export default {
       keepRoundness: false,
       keepFonts: false,
 
-      textColorLocal: '',
-      accentColorLocal: undefined,
-      linkColorLocal: undefined,
+      ...Object.keys(SLOT_INHERITANCE)
+        .map(key => [key, ''])
+        .reduce((acc, [key, val]) => ({ ...acc, [ key + 'ColorLocal' ]: val }), {}),
 
-      bgColorLocal: '',
-      bgOpacityLocal: undefined,
-
-      underlayColorLocal: '',
-      underlayOpacityLocal: undefined,
-
-      fgColorLocal: '',
-      fgTextColorLocal: undefined,
-      fgLinkColorLocal: undefined,
-
-      btnColorLocal: undefined,
-      btnTextColorLocal: undefined,
-      btnOpacityLocal: undefined,
-
-      inputColorLocal: undefined,
-      inputTextColorLocal: undefined,
-      inputOpacityLocal: undefined,
-
-      panelColorLocal: undefined,
-      panelTextColorLocal: undefined,
-      panelLinkColorLocal: undefined,
-      panelFaintColorLocal: undefined,
-      panelOpacityLocal: undefined,
-
-      topBarColorLocal: undefined,
-      topBarTextColorLocal: undefined,
-      topBarLinkColorLocal: undefined,
-
-      alertErrorColorLocal: undefined,
-      alertWarningColorLocal: undefined,
-
-      badgeOpacityLocal: undefined,
-      badgeNotificationColorLocal: undefined,
-
-      borderColorLocal: undefined,
-      borderOpacityLocal: undefined,
-
-      faintColorLocal: undefined,
-      faintOpacityLocal: undefined,
-      faintLinkColorLocal: undefined,
-
-      cRedColorLocal: '',
-      cBlueColorLocal: '',
-      cGreenColorLocal: '',
-      cOrangeColorLocal: '',
+      ...Object.keys(DEFAULT_OPACITY)
+        .map(key => [key, undefined])
+        .reduce((acc, [key, val]) => ({ ...acc, [ key + 'OpacityLocal' ]: val }), {}),
 
       shadowSelected: undefined,
       shadowsLocal: {},
@@ -149,59 +112,14 @@ export default {
       return Array.isArray(this.selected) ? 1 : 2
     },
     currentColors () {
-      return {
-        bg: this.bgColorLocal,
-        text: this.textColorLocal,
-        link: this.linkColorLocal,
-
-        fg: this.fgColorLocal,
-        fgText: this.fgTextColorLocal,
-        fgLink: this.fgLinkColorLocal,
-
-        accent: this.accentColorLocal,
-
-        underlay: this.underlayColorLocal,
-
-        panel: this.panelColorLocal,
-        panelText: this.panelTextColorLocal,
-        panelLink: this.panelLinkColorLocal,
-        panelFaint: this.panelFaintColorLocal,
-
-        input: this.inputColorLocal,
-        inputText: this.inputTextColorLocal,
-
-        topBar: this.topBarColorLocal,
-        topBarText: this.topBarTextColorLocal,
-        topBarLink: this.topBarLinkColorLocal,
-
-        btn: this.btnColorLocal,
-        btnText: this.btnTextColorLocal,
-
-        alertError: this.alertErrorColorLocal,
-        alertWarning: this.alertWarningColorLocal,
-        badgeNotification: this.badgeNotificationColorLocal,
-
-        faint: this.faintColorLocal,
-        faintLink: this.faintLinkColorLocal,
-        border: this.borderColorLocal,
-
-        cRed: this.cRedColorLocal,
-        cBlue: this.cBlueColorLocal,
-        cGreen: this.cGreenColorLocal,
-        cOrange: this.cOrangeColorLocal
-      }
+      return Object.keys(SLOT_INHERITANCE)
+        .map(key => [key, this[key + 'ColorLocal']])
+        .reduce((acc, [key, val]) => ({ ...acc, [ key ]: val }), {})
     },
     currentOpacity () {
-      return {
-        bg: this.bgOpacityLocal,
-        btn: this.btnOpacityLocal,
-        input: this.inputOpacityLocal,
-        panel: this.panelOpacityLocal,
-        topBar: this.topBarOpacityLocal,
-        border: this.borderOpacityLocal,
-        faint: this.faintOpacityLocal,
-        underlay: this.underlayOpacityLocal
-      }
+      return Object.keys(DEFAULT_OPACITY)
+        .map(key => [key, this[key + 'OpacityLocal']])
+        .reduce((acc, [key, val]) => ({ ...acc, [ key + 'OpacityLocal' ]: val }), {})
     },
     currentRadii () {
       return {
@@ -237,63 +155,45 @@ export default {
         laa: ratio >= 3,
         laaa: ratio >= 4.5
       })
+      const colorsConverted = Object.entries(colors).reduce((acc, [key, value]) => ({ ...acc, [key]: colorConvert(value) }), {})
 
-      // fgsfds :DDDD
-      const fgs = {
-        text: colorConvert(colors.text),
-        panelText: colorConvert(colors.panelText),
-        panelLink: colorConvert(colors.panelLink),
-        btnText: colorConvert(colors.btnText),
-        topBarText: colorConvert(colors.topBarText),
-        inputText: colorConvert(colors.inputText),
+      const ratios = Object.entries(SLOT_INHERITANCE).reduce((acc, [key, value]) => {
+        const slotIsBaseText = key === 'text' || key === 'link'
+        const slotIsText = slotIsBaseText || (
+          typeof value === 'object' && value !== null && value.textColor
+        )
+        if (!slotIsText) return acc
+        const { layer, variant } = slotIsBaseText ? { layer: 'bg' } : value
+        const background = variant || layer
+        const textColors = [
+          key,
+          ...(background === 'bg' ? ['cRed', 'cGreen', 'cBlue', 'cOrange'] : [])
+        ]
 
-        link: colorConvert(colors.link),
-        topBarLink: colorConvert(colors.topBarLink),
+        const layers = getLayers(
+          layer,
+          variant || layer,
+          colorsConverted,
+          opacity
+        )
 
-        red: colorConvert(colors.cRed),
-        green: colorConvert(colors.cGreen),
-        blue: colorConvert(colors.cBlue),
-        orange: colorConvert(colors.cOrange)
-      }
-
-      const bgs = {
-        bg: colorConvert(colors.bg),
-        underlay: colorConvert(colors.underlay),
-        btn: colorConvert(colors.btn),
-        panel: colorConvert(colors.panel),
-        topBar: colorConvert(colors.topBar),
-        input: colorConvert(colors.input),
-        alertError: colorConvert(colors.alertError),
-        alertWarning: colorConvert(colors.alertWarning),
-        badgeNotification: colorConvert(colors.badgeNotification)
-      }
-
-      const bg = [bgs.bg, opacity.bg]
-      const underlay = [bgs.underlay || colorConvert('#000000'), opacity.underlay]
-
-      const panel = [underlay, bg]
-
-      const ratios = {
-        bgText: getContrastRatioLayers(fgs.text, panel, fgs.text),
-        bgLink: getContrastRatioLayers(fgs.link, panel, fgs.link),
-        bgRed: getContrastRatioLayers(fgs.red, panel, fgs.red),
-        bgGreen: getContrastRatioLayers(fgs.green, panel, fgs.green),
-        bgBlue: getContrastRatioLayers(fgs.blue, panel, fgs.blue),
-        bgOrange: getContrastRatioLayers(fgs.orange, panel, fgs.orange),
-
-        // TODO what's this?
-        tintText: getContrastRatio(alphaBlend(bgs.bg, 0.5, fgs.panelText), fgs.text),
-
-        panelText: getContrastRatioLayers(fgs.text, [...panel, [bgs.panel, opacity.panel]], fgs.panelText),
-        panelLink: getContrastRatioLayers(fgs.link, [...panel, [bgs.panel, opacity.panel]], fgs.panelLink),
-
-        btnText: getContrastRatioLayers(fgs.text, [...panel, [bgs.btn, opacity.btn]], fgs.btnText),
-
-        inputText: getContrastRatioLayers(fgs.text, [...panel, [bgs.input, opacity.input]], fgs.inputText),
-
-        topBarText: getContrastRatioLayers(fgs.text, [...panel, [bgs.topBar, opacity.topBar]], fgs.topBarText),
-        topBarLink: getContrastRatioLayers(fgs.link, [...panel, [bgs.topBar, opacity.topBar]], fgs.topBarLink)
-      }
+        return {
+          ...acc,
+          ...textColors.reduce((acc, textColorKey) => {
+            const newKey = slotIsBaseText
+              ? 'bg' + textColorKey[0].toUpperCase() + textColorKey.slice(1)
+              : textColorKey
+            return {
+              ...acc,
+              [newKey]: getContrastRatioLayers(
+                colorsConverted[textColorKey],
+                layers,
+                colorsConverted[textColorKey]
+              )
+            }
+          }, {})
+        }
+      }, {})
 
       return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})
     },

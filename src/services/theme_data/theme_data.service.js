@@ -23,6 +23,19 @@ export const LAYERS = {
   alertPanel: 'panel'
 }
 
+export const DEFAULT_OPACITY = {
+  panel: 1,
+  btn: 1,
+  border: 1,
+  bg: 1,
+  badge: 1,
+  text: 1,
+  alert: 0.5,
+  input: 0.5,
+  faint: 0.5,
+  underlay: 0.15
+}
+
 export const SLOT_INHERITANCE = {
   bg: null,
   fg: null,
@@ -289,7 +302,7 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
       if (value.textColor === 'bw') {
         return {
           ...acc,
-          [key]: contrastRatio(bg)
+          [key]: contrastRatio(bg).rgb
         }
       } else {
         return {

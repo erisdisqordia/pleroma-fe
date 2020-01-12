@@ -433,7 +433,9 @@
         "faint_text": "Faded text",
         "underlay": "Underlay",
         "poll": "Poll graph",
-        "icons": "Icons"
+        "icons": "Icons",
+        "lightBg": "Highlighted elements",
+        "pressed": "Pressed"
       },
       "radii": {
         "_tab_label": "Roundness"

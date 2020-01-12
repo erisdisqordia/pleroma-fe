@@ -347,6 +347,20 @@
               :label="$t('settings.text')"
             />
             <ContrastRatio :contrast="previewContrast.btnText" />
+            <h4>{{ $t('settings.style.advanced_colors.pressed') }}</h4>
+            <ColorInput
+              v-model="btnPressedColorLocal"
+              name="btnPressedColor"
+              :fallback="previewTheme.colors.btnPressed"
+              :label="$t('settings.background')"
+            />
+            <ColorInput
+              v-model="btnPressedTextColorLocal"
+              name="btnPressedTextColor"
+              :fallback="previewTheme.colors.btnPressedText"
+              :label="$t('settings.text')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnText" />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.borders') }}</h4>
@@ -433,7 +447,7 @@
             <ColorInput
               v-model="lightBgColorLocal"
               name="lightBg"
-              :label="$t('settings.style.advanced_colors.lightBg')"
+              :label="$t('settings.background')"
               :fallback="previewTheme.colors.lightBg"
             />
             <ColorInput

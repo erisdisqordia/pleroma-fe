@@ -42,7 +42,7 @@ const v1OnlyNames = [
 ].map(_ => _ + 'ColorLocal')
 
 const colorConvert = (color) => {
-  if (color === 'transparent') {
+  if (color.startsWith('--') || color === 'transparent') {
     return color
   } else {
     return hex2rgb(color)
@@ -409,7 +409,9 @@ export default {
         }
 
         keys.forEach(key => {
-          this[key + 'ColorLocal'] = rgb2hex(colors[key])
+          const color = colors[key]
+          const hex = rgb2hex(colors[key])
+          this[key + 'ColorLocal'] = hex === '#aN' ? color : hex
         })
       }
 

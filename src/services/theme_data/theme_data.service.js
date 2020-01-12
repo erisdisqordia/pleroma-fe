@@ -40,12 +40,27 @@ export const DEFAULT_OPACITY = {
 }
 
 export const SLOT_INHERITANCE = {
-  bg: null,
-  fg: null,
-  text: null,
+  bg: {
+    depends: [],
+    priority: 1
+  },
+  fg: {
+    depends: [],
+    priority: 1
+  },
+  text: {
+    depends: [],
+    priority: 1
+  },
   underlay: '#000000',
-  link: '--accent',
-  accent: '--link',
+  link: {
+    depends: ['accent'],
+    priority: 1
+  },
+  accent: {
+    depends: ['link'],
+    priority: 1
+  },
   faint: '--text',
   faintLink: '--link',
 
@@ -167,6 +182,26 @@ export const SLOT_INHERITANCE = {
     depends: ['topBarText'],
     layer: 'btnTopBar',
     variant: 'btn',
+    textColor: true
+  },
+
+  btnPressed: '--btn',
+  btnPressedText: {
+    depends: ['btnText'],
+    layer: 'btn',
+    variant: 'btnPressed',
+    textColor: true
+  },
+  btnPressedPanelText: {
+    depends: ['btnPanelText'],
+    layer: 'btnPanel',
+    variant: 'btnPressed',
+    textColor: true
+  },
+  btnPressedTopBarText: {
+    depends: ['btnTopBarText'],
+    layer: 'btnTopBar',
+    variant: 'btnPressed',
     textColor: true
   },
 
@@ -308,12 +343,30 @@ export const topoSort = (
   return output
 }
 
-export const SLOT_ORDERED = topoSort(SLOT_INHERITANCE)
+export const SLOT_ORDERED = topoSort(
+  Object.entries(SLOT_INHERITANCE)
+    .sort(([aK, aV], [bK, bV]) => ((aV && aV.priority) || 0) - ((bV && bV.priority) || 0))
+    .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {})
+)
+
+console.log(SLOT_ORDERED)
 
 export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.reduce((acc, key) => {
   const value = SLOT_INHERITANCE[key]
-  if (sourceColors[key]) {
-    return { ...acc, [key]: { ...sourceColors[key] } }
+  const sourceColor = sourceColors[key]
+  if (sourceColor) {
+    let targetColor = sourceColor
+    if (typeof sourceColor === 'string' && sourceColor.startsWith('--')) {
+      const [variable, modifier] = sourceColor.split(/,/g).map(str => str.trim())
+      const variableSlot = variable.substring(2)
+      targetColor = acc[variableSlot] || sourceColors[variableSlot]
+      if (modifier) {
+        console.log(targetColor, acc, variableSlot)
+        targetColor = brightness(Number.parseFloat(modifier) * mod, targetColor).rgb
+      }
+      console.log(targetColor, acc, variableSlot)
+    }
+    return { ...acc, [key]: { ...targetColor } }
   } else if (typeof value === 'string' && value.startsWith('#')) {
     return { ...acc, [key]: convert(value).rgb }
   } else {

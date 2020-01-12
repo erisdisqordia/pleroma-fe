@@ -144,7 +144,11 @@ export const generateColors = (themeData) => {
         // TODO: hack to keep rest of the code from complaining
         value = '#FF00FF'
       }
-      acc[k] = hex2rgb(value)
+      if (!value || value.startsWith('--')) {
+        acc[k] = value
+      } else {
+        acc[k] = hex2rgb(value)
+      }
     }
     return acc
   }, {})

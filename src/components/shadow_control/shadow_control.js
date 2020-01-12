@@ -1,7 +1,6 @@
 import ColorInput from '../color_input/color_input.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
-import { getCssShadow } from '../../services/style_setter/style_setter.js'
-import { hex2rgb } from '../../services/color_convert/color_convert.js'
+import { hex2rgb, getCssShadow } from '../../services/color_convert/color_convert.js'
 
 export default {
   // 'Value' and 'Fallback' can be undefined, but if they are

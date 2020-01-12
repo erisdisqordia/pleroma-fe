@@ -48,7 +48,7 @@ export const SLOT_INHERITANCE = {
   },
 
   border: {
-    depends: 'fg',
+    depends: ['fg'],
     color: (mod, fg) => brightness(2 * mod, fg).rgb
   },
 

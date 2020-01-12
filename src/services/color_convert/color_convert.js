@@ -1,4 +1,4 @@
-import { invertLightness, convert, contrastRatio } from 'chromatism'
+import { invertLightness, contrastRatio } from 'chromatism'
 
 // useful for visualizing color when debugging
 export const consoleColor = (color) => console.log('%c##########', 'background: ' + color + '; color: ' + color)
@@ -185,8 +185,8 @@ export const rgba2css = function (rgba) {
  * @param {Boolean} preserve - try to preserve intended text color's hue/saturation (i.e. no BW)
  */
 export const getTextColor = function (bg, text, preserve) {
-  const bgIsLight = convert(bg).hsl.l > 50
-  const textIsLight = convert(text).hsl.l > 50
+  const bgIsLight = relativeLuminance(bg) > 0.5
+  const textIsLight = relativeLuminance(text) > 0.5
 
   if ((bgIsLight && textIsLight) || (!bgIsLight && !textIsLight)) {
     const base = typeof text.a !== 'undefined' ? { a: text.a } : {}

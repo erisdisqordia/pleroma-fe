@@ -159,13 +159,13 @@ export const SLOT_INHERITANCE = {
 
   alertError: '--cRed',
   alertErrorText: {
-    depends: ['text', 'alertError'],
+    depends: ['text'],
     layer: 'alert',
     variant: 'alertError',
     textColor: true
   },
   alertErrorPanelText: {
-    depends: ['panelText', 'alertError'],
+    depends: ['panelText'],
     layer: 'alertPanel',
     variant: 'alertError',
     textColor: true
@@ -173,13 +173,13 @@ export const SLOT_INHERITANCE = {
 
   alertWarning: '--cOrange',
   alertWarningText: {
-    depends: ['text', 'alertWarning'],
+    depends: ['text'],
     layer: 'alert',
     variant: 'alertWarning',
     textColor: true
   },
   alertWarningPanelText: {
-    depends: ['panelText', 'alertWarning'],
+    depends: ['panelText'],
     layer: 'alertPanel',
     variant: 'alertWarning',
     textColor: true

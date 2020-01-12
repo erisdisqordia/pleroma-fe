@@ -430,7 +430,8 @@
         "borders": "Borders",
         "buttons": "Buttons",
         "inputs": "Input fields",
-        "faint_text": "Faded text"
+        "faint_text": "Faded text",
+        "underlay": "Underlay"
       },
       "radii": {
         "_tab_label": "Roundness"

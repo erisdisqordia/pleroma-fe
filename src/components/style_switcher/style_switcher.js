@@ -2,9 +2,7 @@ import { set, delete as del } from 'vue'
 import {
   rgb2hex,
   hex2rgb,
-  getContrastRatio,
-  getContrastRatioLayers,
-  alphaBlend
+  getContrastRatioLayers
 } from '../../services/color_convert/color_convert.js'
 import {
   generateColors,
@@ -265,7 +263,6 @@ export default {
 
       const theme = this.previewTheme
 
-      console.log(source)
       return {
         // To separate from other random JSON files and possible future source formats
         _pleroma_theme_version: 2, theme, source

@@ -1,15 +1,20 @@
-import { rgb2hex, hex2rgb, getContrastRatio, getContrastRatioLayers, alphaBlend } from '../../services/color_convert/color_convert.js'
 import { set, delete as del } from 'vue'
-import { merge } from 'lodash'
+import {
+  rgb2hex,
+  hex2rgb,
+  getContrastRatio,
+  getContrastRatioLayers,
+  alphaBlend
+} from '../../services/color_convert/color_convert.js'
 import {
   generateColors,
   generateShadows,
   generateRadii,
   generateFonts,
   composePreset,
-  getThemes,
-  CURRENT_VERSION
+  getThemes
 } from '../../services/style_setter/style_setter.js'
+import { CURRENT_VERSION } from '../../services/theme_data/theme_data.service.js'
 import ColorInput from '../color_input/color_input.vue'
 import RangeInput from '../range_input/range_input.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'

@@ -114,7 +114,7 @@ const getCssShadowFilter = (input) => {
     .join(' ')
 }
 
-const generateColors = (themeData) => {
+export const generateColors = (themeData) => {
   const rawOpacity = Object.assign({
     panel: 1,
     btn: 1,
@@ -182,6 +182,7 @@ const generateColors = (themeData) => {
     }
     if (k === 'badge') {
       colors['badgeNotification'].a = v
+      return
     }
     if (colors[k]) {
       colors[k].a = v
@@ -211,7 +212,7 @@ const generateColors = (themeData) => {
   }
 }
 
-const generateRadii = (input) => {
+export const generateRadii = (input) => {
   let inputRadii = input.radii || {}
   // v1 -> v2
   if (typeof input.btnRadius !== 'undefined') {
@@ -244,7 +245,7 @@ const generateRadii = (input) => {
   }
 }
 
-const generateFonts = (input) => {
+export const generateFonts = (input) => {
   const fonts = Object.entries(input.fonts || {}).filter(([k, v]) => v).reduce((acc, [k, v]) => {
     acc[k] = Object.entries(v).filter(([k, v]) => v).reduce((acc, [k, v]) => {
       acc[k] = v
@@ -279,7 +280,7 @@ const generateFonts = (input) => {
   }
 }
 
-const generateShadows = (input) => {
+export const generateShadows = (input) => {
   const border = (top, shadow) => ({
     x: 0,
     y: top ? 1 : -1,
@@ -376,7 +377,7 @@ const generateShadows = (input) => {
   }
 }
 
-const composePreset = (colors, radii, shadows, fonts) => {
+export const composePreset = (colors, radii, shadows, fonts) => {
   return {
     rules: {
       ...shadows.rules,
@@ -393,14 +394,14 @@ const composePreset = (colors, radii, shadows, fonts) => {
   }
 }
 
-const generatePreset = (input) => composePreset(
+export const generatePreset = (input) => composePreset(
   generateColors(input),
   generateRadii(input),
   generateShadows(input),
   generateFonts(input)
 )
 
-const getThemes = () => {
+export const getThemes = () => {
   return window.fetch('/static/styles.json')
     .then((data) => data.json())
     .then((themes) => {

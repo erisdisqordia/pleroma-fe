@@ -1,4 +1,4 @@
-import { getLayersArray, topoSort } from 'src/services/style_setter/style_setter'
+import { getLayersArray, topoSort } from 'src/services/theme_data/theme_data.service.js'
 
 describe('getLayersArray', () => {
   const fixture = {

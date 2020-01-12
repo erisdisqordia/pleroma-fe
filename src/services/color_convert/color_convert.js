@@ -82,7 +82,7 @@ const relativeLuminance = (srgb) => {
  * @param {Object} b - sRGB color
  * @returns {Number} color ratio
  */
-const getContrastRatio = (a, b) => {
+export const getContrastRatio = (a, b) => {
   const la = relativeLuminance(a)
   const lb = relativeLuminance(b)
   const [l1, l2] = la > lb ? [la, lb] : [lb, la]

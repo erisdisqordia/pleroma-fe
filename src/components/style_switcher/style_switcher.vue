@@ -27,8 +27,8 @@
                     :key="style.name"
                     :value="style"
                     :style="{
-                      backgroundColor: style[1] || style.theme.colors.bg,
-                      color: style[3] || style.theme.colors.text
+                      backgroundColor: style[1] || (style.theme || style.source).colors.bg,
+                      color: style[3] || (style.theme || style.source).colors.text
                     }"
                   >
                     {{ style[0] || style.name }}

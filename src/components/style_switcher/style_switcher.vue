@@ -215,20 +215,20 @@
               :label="$t('settings.text')"
               :fallback="previewTheme.colors.alertErrorText"
             />
-            <ContrastRatio :contrast="previewContrast.alertError" />
+            <ContrastRatio :contrast="previewContrast.alertErrorText" large="1"/>
             <ColorInput
               v-model="alertWarningColorLocal"
               name="alertWarning"
               :label="$t('settings.style.advanced_colors.alert_warning')"
               :fallback="previewTheme.colors.alertWarning"
             />
-            <ContrastRatio :contrast="previewContrast.alertWarning" />
             <ColorInput
               v-model="alertWarningTextColorLocal"
               name="alertWarningText"
               :label="$t('settings.text')"
               :fallback="previewTheme.colors.alertWarningText"
             />
+            <ContrastRatio :contrast="previewContrast.alertWarningText" large="1"/>
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.badge') }}</h4>
@@ -238,6 +238,13 @@
               :label="$t('settings.style.advanced_colors.badge_notification')"
               :fallback="previewTheme.colors.badgeNotification"
             />
+            <ColorInput
+              v-model="badgeNotificationTextColorLocal"
+              name="badgeNotificationText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.badgeNotificationText"
+            />
+            <ContrastRatio :contrast="previewContrast.badgeNotificationText" large="1" />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.panel_header') }}</h4>
@@ -388,13 +395,37 @@
               v-model="underlayColorLocal"
               name="underlay"
               :label="$t('settings.style.advanced_colors.underlay')"
-              fallback="#000000"
+              :fallback="previewTheme.colors.underlay"
             />
             <OpacityInput
               v-model="underlayOpacityLocal"
               name="underlayOpacity"
               :fallback="previewTheme.opacity.underlay"
               :disabled="underlayOpacityLocal === 'transparent'"
+            />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.poll') }}</h4>
+            <ColorInput
+              v-model="pollColorLocal"
+              name="poll"
+              :label="$t('settings.background')"
+              :fallback="previewTheme.colors.poll"
+            />
+            <ColorInput
+              v-model="pollTextColorLocal"
+              name="poll"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.pollText"
+            />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.icons') }}</h4>
+            <ColorInput
+              v-model="iconColorLocal"
+              name="poll"
+              :label="$t('settings.style.advanced_colors.icons')"
+              :fallback="previewTheme.colors.icon"
             />
           </div>
         </div>

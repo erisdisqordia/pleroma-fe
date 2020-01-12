@@ -431,7 +431,9 @@
         "buttons": "Buttons",
         "inputs": "Input fields",
         "faint_text": "Faded text",
-        "underlay": "Underlay"
+        "underlay": "Underlay",
+        "poll": "Poll graph",
+        "icons": "Icons"
       },
       "radii": {
         "_tab_label": "Roundness"

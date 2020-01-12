@@ -20,7 +20,8 @@ export const LAYERS = {
   inputPanel: 'panel',
   inputTopBar: 'topBar',
   alert: 'bg',
-  alertPanel: 'panel'
+  alertPanel: 'panel',
+  poll: 'bg'
 }
 
 export const DEFAULT_OPACITY = {
@@ -33,7 +34,8 @@ export const DEFAULT_OPACITY = {
   alert: 0.5,
   input: 0.5,
   faint: 0.5,
-  underlay: 0.15
+  underlay: 0.15,
+  poll: 1
 }
 
 export const SLOT_INHERITANCE = {
@@ -65,9 +67,14 @@ export const SLOT_INHERITANCE = {
     color: (mod, fg) => brightness(2 * mod, fg).rgb
   },
 
-  linkBg: {
+  poll: {
     depends: ['accent', 'bg'],
-    color: (mod, accent, bg) => alphaBlend(accent, 0.4, bg).rgb
+    color: (mod, accent, bg) => alphaBlend(accent, 0.4, bg)
+  },
+  pollText: {
+    depends: ['text'],
+    layer: 'poll',
+    textColor: true
   },
 
   icon: {

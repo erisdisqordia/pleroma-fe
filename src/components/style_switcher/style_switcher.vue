@@ -251,7 +251,7 @@
             <ColorInput
               v-model="panelColorLocal"
               name="panelColor"
-              :fallback="fgColorLocal"
+              :fallback="previewTheme.colors.panel"
               :label="$t('settings.background')"
             />
             <OpacityInput
@@ -286,7 +286,7 @@
             <ColorInput
               v-model="topBarColorLocal"
               name="topBarColor"
-              :fallback="fgColorLocal"
+              :fallback="previewTheme.colors.topBar"
               :label="$t('settings.background')"
             />
             <ColorInput
@@ -309,7 +309,7 @@
             <ColorInput
               v-model="inputColorLocal"
               name="inputColor"
-              :fallback="fgColorLocal"
+              :fallback="previewTheme.colors.input"
               :label="$t('settings.background')"
             />
             <OpacityInput
@@ -331,7 +331,7 @@
             <ColorInput
               v-model="btnColorLocal"
               name="btnColor"
-              :fallback="fgColorLocal"
+              :fallback="previewTheme.colors.btn"
               :label="$t('settings.background')"
             />
             <OpacityInput

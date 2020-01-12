@@ -302,7 +302,6 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
         }
       }
     } else {
-      console.log('BENIS', key, deps, deps.map((dep) => ({ ...acc[dep] })))
       return {
         ...acc,
         [key]: colorFunc(

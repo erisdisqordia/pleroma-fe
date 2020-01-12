@@ -495,6 +495,10 @@ main-router {
     color: $fallback--faint;
     color: var(--panelFaint, $fallback--faint);
   }
+  .faint-link {
+    color: $fallback--faint;
+    color: var(--faintLink, $fallback--faint);
+  }
 
   .alert {
     white-space: nowrap;

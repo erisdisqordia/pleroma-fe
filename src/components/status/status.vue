@@ -446,6 +446,11 @@ $status-margin: 0.75em;
   &_focused {
     background-color: $fallback--lightBg;
     background-color: var(--lightBg, $fallback--lightBg);
+    color: $fallback--text;
+    color: var(--lightBgText, $fallback--text);
+    --faint: var(--lightBgFaintText, $fallback--faint);
+    --faintLink: var(--lightBgFaintLink, $fallback--faint);
+    --icon: var(--lightBgIcon, $fallback--icon);
   }
 
   .timeline & {
@@ -573,8 +578,6 @@ $status-margin: 0.75em;
       overflow: hidden;
       text-overflow: ellipsis;
       margin: 0 0.4em 0 0.2em;
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
     }
 
     .replies-separator {

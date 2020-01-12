@@ -414,7 +414,7 @@
             />
             <ColorInput
               v-model="pollTextColorLocal"
-              name="poll"
+              name="pollText"
               :label="$t('settings.text')"
               :fallback="previewTheme.colors.pollText"
             />
@@ -423,10 +423,33 @@
             <h4>{{ $t('settings.style.advanced_colors.icons') }}</h4>
             <ColorInput
               v-model="iconColorLocal"
-              name="poll"
+              name="icon"
               :label="$t('settings.style.advanced_colors.icons')"
               :fallback="previewTheme.colors.icon"
             />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.lightBg') }}</h4>
+            <ColorInput
+              v-model="lightBgColorLocal"
+              name="lightBg"
+              :label="$t('settings.style.advanced_colors.lightBg')"
+              :fallback="previewTheme.colors.lightBg"
+            />
+            <ColorInput
+              v-model="lightBgTextColorLocal"
+              name="lightBgText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.lightBgText"
+            />
+            <ContrastRatio :contrast="previewContrast.lightBgText" />
+            <ColorInput
+              v-model="lightBgLinkColorLocal"
+              name="lightBgLink"
+              :label="$t('settings.links')"
+              :fallback="previewTheme.colors.lightBgLink"
+            />
+            <ContrastRatio :contrast="previewContrast.lightBgLink" />
           </div>
         </div>
 

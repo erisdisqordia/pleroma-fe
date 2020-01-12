@@ -101,12 +101,22 @@
   &:hover {
     background-color: $fallback--lightBg;
     background-color: var(--lightBg, $fallback--lightBg);
+    color: $fallback--link;
+    color: var(--lightBgText, $fallback--link);
+    --faint: var(--lightBgFaintText, $fallback--faint);
+    --faintLink: var(--lightBgFaintLink, $fallback--faint);
+    --icon: var(--lightBgIcon, $fallback--icon);
   }
 
   &.router-link-active {
     font-weight: bolder;
     background-color: $fallback--lightBg;
     background-color: var(--lightBg, $fallback--lightBg);
+    color: $fallback--text;
+    color: var(--lightBgText, $fallback--text);
+    --faint: var(--lightBgFaintText, $fallback--faint);
+    --faintLink: var(--lightBgFaintLink, $fallback--faint);
+    --icon: var(--lightBgIcon, $fallback--icon);
 
     &:hover {
       text-decoration: underline;

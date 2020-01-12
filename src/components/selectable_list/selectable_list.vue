@@ -69,6 +69,10 @@
   &-item-selected-inner {
     background-color: $fallback--lightBg;
     background-color: var(--lightBg, $fallback--lightBg);
+    color: var(--lightBgText, $fallback--text);
+    --faint: var(--lightBgFaintText, $fallback--faint);
+    --faintLink: var(--lightBgFaintLink, $fallback--faint);
+    --icon: var(--lightBgIcon, $fallback--icon);
   }
 
   &-header {

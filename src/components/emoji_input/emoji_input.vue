@@ -158,6 +158,10 @@
       &.highlighted {
         background-color: $fallback--fg;
         background-color: var(--lightBg, $fallback--fg);
+        color: var(--lightBgText, $fallback--text);
+        --faint: var(--lightBgFaintText, $fallback--faint);
+        --faintLink: var(--lightBgFaintLink, $fallback--faint);
+        --icon: var(--lightBgIcon, $fallback--icon);
       }
     }
   }

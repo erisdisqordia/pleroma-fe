@@ -163,8 +163,10 @@ export const generateColors = (themeData) => {
       return
     }
     if (k === 'faint') {
-      colors[k + 'Link'].a = v
+      colors['faintLink'].a = v
       colors['panelFaint'].a = v
+      colors['lightBgFaintText'].a = v
+      colors['lightBgFaintLink'].a = v
     }
     if (k === 'bg') {
       colors['lightBg'].a = v

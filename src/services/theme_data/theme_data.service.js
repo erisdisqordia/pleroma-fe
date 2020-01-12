@@ -12,6 +12,7 @@ export const LAYERS = {
   badge: null, //  no transparency support
   fg: null,
   bg: 'underlay',
+  lightBg: 'bg',
   panel: 'bg',
   btn: 'bg',
   btnPanel: 'panel',
@@ -57,6 +58,31 @@ export const SLOT_INHERITANCE = {
     depends: ['bg'],
     color: (mod, bg) => brightness(5 * mod, bg).rgb
   },
+  lightBgFaintText: {
+    depends: ['faint'],
+    layer: 'lightBg',
+    textColor: true
+  },
+  lightBgFaintLink: {
+    depends: ['faintLink'],
+    layer: 'lightBg',
+    textColor: 'preserve'
+  },
+  lightBgText: {
+    depends: ['text'],
+    layer: 'lightBg',
+    textColor: true
+  },
+  lightBgLink: {
+    depends: ['link'],
+    layer: 'lightBg',
+    textColor: 'preserve'
+  },
+  lightBgIcon: {
+    depends: ['lightBg', 'lightBgText'],
+    color: (mod, bg, text) => mixrgb(bg, text)
+  },
+
   lightText: {
     depends: ['text'],
     color: (mod, text) => brightness(20 * mod, text).rgb

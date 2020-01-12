@@ -38,6 +38,11 @@
         v-if="transparentColor"
         class="transparentIndicator"
       />
+      <div
+        v-if="computedColor"
+        class="computedIndicator"
+        :style="{backgroundColor: fallback}"
+      />
     </div>
   </div>
 </template>
@@ -95,6 +100,9 @@ export default {
     },
     transparentColor () {
       return this.value === 'transparent'
+    },
+    computedColor () {
+      return this.value && this.value.startsWith('--')
     }
   }
 }

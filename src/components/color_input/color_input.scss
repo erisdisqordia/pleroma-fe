@@ -31,11 +31,14 @@
         height: 100%;
       }
     }
+    .computedIndicator,
     .transparentIndicator {
       flex: 0 0 2em;
       min-width: 2em;
       align-self: center;
       height: 100%;
+    }
+    .transparentIndicator {
       // forgot to install counter-strike source, ooops
       background-color: #FF00FF;
       position: relative;

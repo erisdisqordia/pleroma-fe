@@ -481,7 +481,6 @@ export default {
     currentColors () {
       try {
         this.previewColors = generateColors({
-          v3compat: this.currentCompat,
           opacity: this.currentOpacity,
           colors: this.currentColors
         })
@@ -494,7 +493,6 @@ export default {
     currentOpacity () {
       try {
         this.previewColors = generateColors({
-          v3compat: this.currentCompat,
           opacity: this.currentOpacity,
           colors: this.currentColors
         })

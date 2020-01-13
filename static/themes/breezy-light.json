@@ -69,15 +69,6 @@
       "buttonPressed": [
         {
           "x": 0,
-          "y": 0,
-          "blur": "0",
-          "spread": "50",
-          "color": "--faint",
-          "alpha": 1,
-          "inset": true
-        },
-        {
-          "x": 0,
           "y": "0",
           "blur": 0,
           "spread": "1",
@@ -124,7 +115,9 @@
       "cRed": "#da4453",
       "cBlue": "#2980b9",
       "cGreen": "#27ae60",
-      "cOrange": "#f67400"
+      "cOrange": "#f67400",
+      "btnPressed": "--accent",
+      "lightBg": "--accent,-20"
     },
     "radii": {
       "btn": "2",

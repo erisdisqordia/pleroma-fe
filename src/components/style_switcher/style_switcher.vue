@@ -360,7 +360,21 @@
               :fallback="previewTheme.colors.btnPressedText"
               :label="$t('settings.text')"
             />
-            <ContrastRatio :contrast="previewContrast.btnText" />
+            <ContrastRatio :contrast="previewContrast.btnPressedText" />
+            <h4>{{ $t('settings.style.advanced_colors.disabled') }}</h4>
+            <ColorInput
+              v-model="btnDisabledColorLocal"
+              name="btnDisabledColor"
+              :fallback="previewTheme.colors.btnDisabled"
+              :label="$t('settings.background')"
+            />
+            <ColorInput
+              v-model="btnDisabledTextColorLocal"
+              name="btnDisabledTextColor"
+              :fallback="previewTheme.colors.btnDisabledText"
+              :label="$t('settings.text')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnDisabledText" />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.borders') }}</h4>

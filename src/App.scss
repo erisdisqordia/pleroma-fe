@@ -107,7 +107,10 @@ button {
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    color: $fallback--text;
+    color: var(--btnDisabledText, $fallback--text);
+    background-color: $fallback--fg;
+    background-color: var(--btnDisabled, $fallback--fg)
   }
 
   &.pressed {
@@ -365,6 +368,26 @@ i[class*=icon-] {
   height: 50px;
   box-sizing: border-box;
 
+  button {
+    &, i[class*=icon-] {
+      color: $fallback--text;
+      color: var(--btnTopBarText, $fallback--text);
+    }
+
+    &:active {
+      background-color: $fallback--fg;
+      background-color: var(--btnTopBarPressed, $fallback--fg);
+      color: $fallback--text;
+      color: var(--btnTopBarPressedText, $fallback--text);
+    }
+
+    &:disabled {
+      color: $fallback--text;
+      color: var(--btnTopBarDisabledText, $fallback--text);
+    }
+  }
+
+
   .logo {
     display: flex;
     position: absolute;
@@ -523,6 +546,25 @@ main-router {
     margin-left: .25em;
     min-width: 1px;
     align-self: stretch;
+  }
+
+  button {
+    &, i[class*=icon-] {
+      color: $fallback--text;
+      color: var(--btnPanelText, $fallback--text);
+    }
+
+    &:active {
+      background-color: $fallback--fg;
+      background-color: var(--btnPanelPressed, $fallback--fg);
+      color: $fallback--text;
+      color: var(--btnPanelPressedText, $fallback--text);
+    }
+
+    &:disabled {
+      color: $fallback--text;
+      color: var(--btnPanelDisabledText, $fallback--text);
+    }
   }
 
   a {

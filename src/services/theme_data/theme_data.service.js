@@ -36,7 +36,8 @@ export const DEFAULT_OPACITY = {
   input: 0.5,
   faint: 0.5,
   underlay: 0.15,
-  poll: 1
+  poll: 1,
+  topBar: 1
 }
 
 export const SLOT_INHERITANCE = {
@@ -222,7 +223,8 @@ export const SLOT_INHERITANCE = {
   btn: '--fg',
   btnText: {
     depends: ['fgText'],
-    layer: 'btn'
+    layer: 'btn',
+    textColor: true
   },
   btnPanelText: {
     depends: ['panelText'],
@@ -255,6 +257,32 @@ export const SLOT_INHERITANCE = {
     layer: 'btnTopBar',
     variant: 'btnPressed',
     textColor: true
+  },
+
+  btnDisabled: {
+    depends: ['btn', 'bg'],
+    color: (mod, btn, bg) => alphaBlend(btn, 0.5, bg)
+  },
+  btnDisabledText: {
+    depends: ['btnText'],
+    layer: 'btn',
+    variant: 'btnDisabled',
+    textColor: true,
+    color: (mod, text) => brightness(mod * -60, text).rgb
+  },
+  btnDisabledPanelText: {
+    depends: ['btnPanelText'],
+    layer: 'btnPanel',
+    variant: 'btnDisabled',
+    textColor: true,
+    color: (mod, text) => brightness(mod * -60, text).rgb
+  },
+  btnDisabledTopBarText: {
+    depends: ['btnTopBarText'],
+    layer: 'btnTopBar',
+    variant: 'btnDisabled',
+    textColor: true,
+    color: (mod, text) => brightness(mod * -60, text).rgb
   },
 
   // Input fields
@@ -329,7 +357,10 @@ export const getLayers = (layer, variant = layer, colors, opacity) => {
     currentLayer === layer
       ? colors[variant]
       : colors[currentLayer],
-    opacity[currentLayer]
+    // TODO: Remove this hack when opacities/layers system is improved
+    currentLayer.startsWith('btn')
+      ? opacity.btn
+      : opacity[currentLayer]
   ]))
 }
 
@@ -443,11 +474,18 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
           [key]: contrastRatio(bg).rgb
         }
       } else {
+        let color = { ...acc[deps[0]] }
+        if (value.color) {
+          const isLightOnDark = convert(bg).hsl.l < convert(color).hsl.l
+          const mod = isLightOnDark ? 1 : -1
+          color = value.color(mod, ...deps.map((dep) => ({ ...acc[dep] })))
+        }
+
         return {
           ...acc,
           [key]: getTextColor(
             bg,
-            { ...acc[deps[0]] },
+            { ...color },
             value.textColor === 'preserve'
           )
         }

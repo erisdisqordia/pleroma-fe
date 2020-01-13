@@ -117,7 +117,7 @@ export default {
     currentOpacity () {
       return Object.keys(DEFAULT_OPACITY)
         .map(key => [key, this[key + 'OpacityLocal']])
-        .reduce((acc, [key, val]) => ({ ...acc, [ key + 'OpacityLocal' ]: val }), {})
+        .reduce((acc, [key, val]) => ({ ...acc, [ key ]: val }), {})
     },
     currentRadii () {
       return {

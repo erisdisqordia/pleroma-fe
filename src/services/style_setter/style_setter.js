@@ -76,7 +76,7 @@ export const applyTheme = (input, commit) => {
   commit('setOption', { name: 'colors', value: theme.colors })
 }
 
-const getCssShadow = (input, usesDropShadow) => {
+export const getCssShadow = (input, usesDropShadow) => {
   if (input.length === 0) {
     return 'none'
   }

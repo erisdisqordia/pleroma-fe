@@ -6,6 +6,7 @@ const ReactButton = {
     return {
       animated: false,
       showTooltip: false,
+      filterWord: '',
       popperOptions: {
         modifiers: {
           preventOverflow: { padding: { top: 50 }, boundariesElement: 'viewport' }
@@ -14,27 +15,25 @@ const ReactButton = {
     }
   },
   methods: {
-    openReactionSelect () {
-      console.log('test')
-      this.showTooltip = true
+    toggleReactionSelect () {
+      this.showTooltip = !this.showTooltip
     },
     closeReactionSelect () {
       this.showTooltip = false
     },
-    favorite () {
-      if (!this.status.favorited) {
-        this.$store.dispatch('favorite', { id: this.status.id })
-      } else {
-        this.$store.dispatch('unfavorite', { id: this.status.id })
-      }
-      this.animated = true
-      setTimeout(() => {
-        this.animated = false
-      }, 500)
+    addReaction (event, emoji) {
+      this.$store.dispatch('reactWithEmoji', { id: this.status.id, emoji })
+      this.closeReactionSelect()
     }
   },
   computed: {
+    commonEmojis () {
+      return ['💖', '😠', '👀', '😂', '🔥']
+    },
     emojis () {
+      if (this.filterWord !== '') {
+        return this.$store.state.instance.emoji.filter(emoji => emoji.displayText.includes(this.filterWord))
+      }
       return this.$store.state.instance.emoji || []
     },
     classes () {

@@ -280,10 +280,7 @@ const Status = {
       return this.mergedConfig.hidePostStats
     },
     emojiReactions () {
-      return {
-        '🤔': [{ 'id': 'xyz..' }, { 'id': 'zyx...' }],
-        '🐻': [{ 'id': 'abc...' }]
-      }
+      return this.status.emojiReactions
     },
     ...mapGetters(['mergedConfig'])
   },
@@ -385,6 +382,22 @@ const Status = {
     setMedia () {
       const attachments = this.attachmentSize === 'hide' ? this.status.attachments : this.galleryAttachments
       return () => this.$store.dispatch('setMedia', attachments)
+    },
+    reactedWith (emoji) {
+      return this.status.reactedWithEmoji.includes(emoji)
+    },
+    reactWith (emoji) {
+      this.$store.dispatch('reactWithEmoji', { id: this.status.id, emoji })
+    },
+    unreact (emoji) {
+      this.$store.dispatch('unreactWithEmoji', { id: this.status.id, emoji })
+    },
+    emojiOnClick (emoji, event) {
+      if (this.reactedWith(emoji)) {
+        this.unreact(emoji)
+      } else {
+        this.reactWith(emoji)
+      }
     }
   },
   watch: {

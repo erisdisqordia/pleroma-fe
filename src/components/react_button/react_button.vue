@@ -5,21 +5,37 @@
     trigger="manual"
     placement="top"
     class="react-button-popover"
-    @close-group="closeReactionSelect"
+    @hide="closeReactionSelect"
   >
     <div slot="popover">
+      <div class="reaction-picker-filter">
+        <input v-model="filterWord" placeholder="Search...">
+      </div>
       <div class="reaction-picker">
+        <span
+          v-for="emoji in commonEmojis"
+          :key="emoji"
+          class="emoji-reaction-button"
+          @click="addReaction($event, emoji)"
+        >
+          {{ emoji }}
+        </span>
+        <div class="reaction-picker-divider" />
         <span
           v-for="(emoji, key) in emojis"
           :key="key"
           class="emoji-reaction-button"
+          @click="addReaction($event, emoji.replacement)"
         >
           {{ emoji.replacement }}
         </span>
         <div class="reaction-bottom-fader" />
       </div>
     </div>
-    <div @click.prevent="openReactionSelect" v-if="loggedIn">
+    <div
+      v-if="loggedIn"
+      @click.prevent="toggleReactionSelect"
+    >
       <i
         :class="classes"
         class="button-icon favorite-button fav-active"
@@ -35,15 +51,28 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
+.reaction-picker-filter {
+  padding: 0.5em;
+}
+
+.reaction-picker-divider {
+  height: 1px;
+  width: 100%;
+  margin: 0.4em;
+  background-color: var(--border, $fallback--border);
+}
+
 .reaction-picker {
   width: 10em;
-  height: 8em;
+  height: 9em;
   font-size: 1.5em;
   overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
   padding: 0.5em;
-  text-align:center;
+  text-align: center;
+  align-content: flex-start;
+  user-select: none;
 
   mask: linear-gradient(to top, white 0, transparent 100%) bottom no-repeat,
     linear-gradient(to bottom, white 0, transparent 100%) top no-repeat,

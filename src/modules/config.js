@@ -28,13 +28,15 @@ export const defaultState = {
     follows: true,
     mentions: true,
     likes: true,
-    repeats: true
+    repeats: true,
+    moves: true
   },
   webPushNotifications: false,
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale,
   hideScopeNotice: false,
+  useStreamingApi: false,
   scopeCopy: undefined, // instance default
   subjectLineBehavior: undefined, // instance default
   alwaysShowSubjectInput: undefined, // instance default
@@ -45,6 +47,7 @@ export const defaultState = {
   playVideosInModal: false,
   useOneClickNsfw: false,
   useContainFit: false,
+  greentext: undefined, // instance default
   hidePostStats: undefined, // instance default
   hideUserStats: undefined // instance default
 }

@@ -74,6 +74,15 @@
                   </ul>
                 </li>
                 <li>
+                  <Checkbox v-model="useStreamingApi">
+                    {{ $t('settings.useStreamingApi') }}
+                    <br/>
+                    <small>
+                    {{ $t('settings.useStreamingApiWarning') }}
+                    </small>
+                  </Checkbox>
+                </li>
+                <li>
                   <Checkbox v-model="autoLoad">
                     {{ $t('settings.autoload') }}
                   </Checkbox>
@@ -270,6 +279,17 @@
                 </li>
               </ul>
             </div>
+
+            <div class="setting-item">
+              <h2>{{ $t('settings.fun') }}</h2>
+              <ul class="setting-list">
+                <li>
+                  <Checkbox v-model="greentext">
+                    {{ $t('settings.greentext') }} {{ $t('settings.instance_default', { value: greentextLocalizedValue }) }}
+                  </Checkbox>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div :label="$t('settings.theme')">
@@ -301,6 +321,11 @@
                   <li>
                     <Checkbox v-model="notificationVisibility.mentions">
                       {{ $t('settings.notification_visibility_mentions') }}
+                    </Checkbox>
+                  </li>
+                  <li>
+                    <Checkbox v-model="notificationVisibility.moves">
+                      {{ $t('settings.notification_visibility_moves') }}
                     </Checkbox>
                   </li>
                 </ul>

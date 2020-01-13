@@ -76,7 +76,7 @@
     }
   }
 
-  .follow-text {
+  .follow-text, .move-text {
     padding: 0.5em 0;
   }
 
@@ -149,6 +149,11 @@
       color: orange;
       color: $fallback--cOrange;
       color: var(--cOrange, $fallback--cOrange);
+    }
+
+    .icon-arrow-curved.lit {
+      color: $fallback--cBlue;
+      color: var(--cBlue, $fallback--cBlue);
     }
 
     .status-content {

@@ -65,7 +65,7 @@ const withLoadMore = ({
         }
       }
     },
-    render (createElement) {
+    render (h) {
       const props = {
         props: {
           ...this.$props,
@@ -74,7 +74,7 @@ const withLoadMore = ({
         on: this.$listeners,
         scopedSlots: this.$scopedSlots
       }
-      const children = Object.entries(this.$slots).map(([key, value]) => createElement('template', { slot: key }, value))
+      const children = Object.entries(this.$slots).map(([key, value]) => h('template', { slot: key }, value))
       return (
         <div class="with-load-more">
           <WrappedComponent {...props}>

@@ -27,11 +27,13 @@ const defaultState = {
   scopeCopy: true,
   subjectLineBehavior: 'email',
   postContentType: 'text/plain',
+  hideSitename: false,
   nsfwCensorImage: undefined,
   vapidPublicKey: undefined,
   noAttachmentLinks: false,
   showFeaturesPanel: true,
   minimalScopesMode: false,
+  greentext: false,
 
   // Nasty stuff
   pleromaBackend: true,

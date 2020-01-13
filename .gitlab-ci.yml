@@ -24,7 +24,7 @@ test:
     - apt install firefox-esr -y --no-install-recommends
     - firefox --version
     - yarn
-    - npm run unit
+    - yarn unit
 
 build:
   stage: build

@@ -10,13 +10,13 @@
       :src="currentMedia.url"
       @touchstart.stop="mediaTouchStart"
       @touchmove.stop="mediaTouchMove"
+      @click="hide"
     >
     <VideoAttachment
       v-if="type === 'video'"
       class="modal-image"
       :attachment="currentMedia"
       :controls="true"
-      @click.stop.native=""
     />
     <button
       v-if="canNavigate"

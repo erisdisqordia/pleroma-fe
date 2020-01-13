@@ -3,7 +3,8 @@ import Notifications from '../notifications/notifications.vue'
 const tabModeDict = {
   mentions: ['mention'],
   'likes+repeats': ['repeat', 'like'],
-  follows: ['follow']
+  follows: ['follow'],
+  moves: ['move']
 }
 
 const Interactions = {

@@ -1,9 +1,9 @@
-const verifyOTPCode = ({ app, instance, mfaToken, code }) => {
+const verifyOTPCode = ({ clientId, clientSecret, instance, mfaToken, code }) => {
   const url = `${instance}/oauth/mfa/challenge`
   const form = new window.FormData()
 
-  form.append('client_id', app.client_id)
-  form.append('client_secret', app.client_secret)
+  form.append('client_id', clientId)
+  form.append('client_secret', clientSecret)
   form.append('mfa_token', mfaToken)
   form.append('code', code)
   form.append('challenge_type', 'totp')
@@ -14,12 +14,12 @@ const verifyOTPCode = ({ app, instance, mfaToken, code }) => {
   }).then((data) => data.json())
 }
 
-const verifyRecoveryCode = ({ app, instance, mfaToken, code }) => {
+const verifyRecoveryCode = ({ clientId, clientSecret, instance, mfaToken, code }) => {
   const url = `${instance}/oauth/mfa/challenge`
   const form = new window.FormData()
 
-  form.append('client_id', app.client_id)
-  form.append('client_secret', app.client_secret)
+  form.append('client_id', clientId)
+  form.append('client_secret', clientSecret)
   form.append('mfa_token', mfaToken)
   form.append('code', code)
   form.append('challenge_type', 'recovery')

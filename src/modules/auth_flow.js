@@ -7,7 +7,6 @@ const RECOVERY_STRATEGY = 'recovery'
 
 // initial state
 const state = {
-  app: null,
   settings: {},
   strategy: PASSWORD_STRATEGY,
   initStrategy: PASSWORD_STRATEGY // default strategy from config
@@ -16,14 +15,10 @@ const state = {
 const resetState = (state) => {
   state.strategy = state.initStrategy
   state.settings = {}
-  state.app = null
 }
 
 // getters
 const getters = {
-  app: (state, getters) => {
-    return state.app
-  },
   settings: (state, getters) => {
     return state.settings
   },
@@ -55,9 +50,8 @@ const mutations = {
   requireToken (state) {
     state.strategy = TOKEN_STRATEGY
   },
-  requireMFA (state, { app, settings }) {
+  requireMFA (state, { settings }) {
     state.settings = settings
-    state.app = app
     state.strategy = TOTP_STRATEGY // default strategy of MFA
   },
   requireRecovery (state) {

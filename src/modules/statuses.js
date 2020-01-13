@@ -54,6 +54,7 @@ export const defaultState = () => ({
   notifications: emptyNotifications(),
   favorites: new Set(),
   error: false,
+  errorData: null,
   timelines: {
     mentions: emptyTl(),
     public: emptyTl(),
@@ -82,7 +83,8 @@ const visibleNotificationTypes = (rootState) => {
     rootState.config.notificationVisibility.likes && 'like',
     rootState.config.notificationVisibility.mentions && 'mention',
     rootState.config.notificationVisibility.repeats && 'repeat',
-    rootState.config.notificationVisibility.follows && 'follow'
+    rootState.config.notificationVisibility.follows && 'follow',
+    rootState.config.notificationVisibility.moves && 'move'
   ].filter(_ => _)
 }
 
@@ -321,7 +323,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
 const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters }) => {
   each(notifications, (notification) => {
-    if (notification.type !== 'follow') {
+    if (notification.type !== 'follow' && notification.type !== 'move') {
       notification.action = addStatusToGlobalStorage(state, notification.action).item
       notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
     }
@@ -353,6 +355,9 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
             break
           case 'follow':
             i18nString = 'followed_you'
+            break
+          case 'move':
+            i18nString = 'migrated_to'
             break
         }
 
@@ -495,6 +500,9 @@ export const mutations = {
   setError (state, { value }) {
     state.error = value
   },
+  setErrorData (state, { value }) {
+    state.errorData = value
+  },
   setNotificationsLoading (state, { value }) {
     state.notifications.loading = value
   },
@@ -570,6 +578,9 @@ const statuses = {
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })
     },
+    setErrorData ({ rootState, commit }, { value }) {
+      commit('setErrorData', { value })
+    },
     setNotificationsLoading ({ rootState, commit }, { value }) {
       commit('setNotificationsLoading', { value })
     },
@@ -593,45 +604,45 @@ const statuses = {
     favorite ({ rootState, commit }, status) {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })
-      rootState.api.backendInteractor.favorite(status.id)
+      rootState.api.backendInteractor.favorite({ id: status.id })
         .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
     unfavorite ({ rootState, commit }, status) {
       // Optimistic unfavoriting...
       commit('setFavorited', { status, value: false })
-      rootState.api.backendInteractor.unfavorite(status.id)
+      rootState.api.backendInteractor.unfavorite({ id: status.id })
         .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
     fetchPinnedStatuses ({ rootState, dispatch }, userId) {
-      rootState.api.backendInteractor.fetchPinnedStatuses(userId)
+      rootState.api.backendInteractor.fetchPinnedStatuses({ id: userId })
         .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId, showImmediately: true, noIdUpdate: true }))
     },
     pinStatus ({ rootState, dispatch }, statusId) {
-      return rootState.api.backendInteractor.pinOwnStatus(statusId)
+      return rootState.api.backendInteractor.pinOwnStatus({ id: statusId })
         .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
     },
     unpinStatus ({ rootState, dispatch }, statusId) {
-      rootState.api.backendInteractor.unpinOwnStatus(statusId)
+      rootState.api.backendInteractor.unpinOwnStatus({ id: statusId })
         .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
     },
     muteConversation ({ rootState, commit }, statusId) {
-      return rootState.api.backendInteractor.muteConversation(statusId)
+      return rootState.api.backendInteractor.muteConversation({ id: statusId })
         .then((status) => commit('setMutedStatus', status))
     },
     unmuteConversation ({ rootState, commit }, statusId) {
-      return rootState.api.backendInteractor.unmuteConversation(statusId)
+      return rootState.api.backendInteractor.unmuteConversation({ id: statusId })
         .then((status) => commit('setMutedStatus', status))
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...
       commit('setRetweeted', { status, value: true })
-      rootState.api.backendInteractor.retweet(status.id)
+      rootState.api.backendInteractor.retweet({ id: status.id })
         .then(status => commit('setRetweetedConfirm', { status: status.retweeted_status, user: rootState.users.currentUser }))
     },
     unretweet ({ rootState, commit }, status) {
       // Optimistic unretweeting...
       commit('setRetweeted', { status, value: false })
-      rootState.api.backendInteractor.unretweet(status.id)
+      rootState.api.backendInteractor.unretweet({ id: status.id })
         .then(status => commit('setRetweetedConfirm', { status, user: rootState.users.currentUser }))
     },
     queueFlush ({ rootState, commit }, { timeline, id }) {
@@ -646,8 +657,8 @@ const statuses = {
     },
     fetchFavsAndRepeats ({ rootState, commit }, id) {
       Promise.all([
-        rootState.api.backendInteractor.fetchFavoritedByUsers(id),
-        rootState.api.backendInteractor.fetchRebloggedByUsers(id)
+        rootState.api.backendInteractor.fetchFavoritedByUsers({ id }),
+        rootState.api.backendInteractor.fetchRebloggedByUsers({ id })
       ]).then(([favoritedByUsers, rebloggedByUsers]) => {
         commit('addFavs', { id, favoritedByUsers, currentUser: rootState.users.currentUser })
         commit('addRepeats', { id, rebloggedByUsers, currentUser: rootState.users.currentUser })
@@ -656,7 +667,7 @@ const statuses = {
     reactWithEmoji ({ rootState, dispatch, commit }, { id, emoji }) {
       const currentUser = rootState.users.currentUser
       commit('addOwnReaction', { id, emoji, currentUser })
-      rootState.api.backendInteractor.reactWithEmoji(id, emoji).then(
+      rootState.api.backendInteractor.reactWithEmoji({ id, emoji }).then(
         status => {
           dispatch('fetchEmojiReactions', id)
         }
@@ -665,25 +676,25 @@ const statuses = {
     unreactWithEmoji ({ rootState, dispatch, commit }, { id, emoji }) {
       const currentUser = rootState.users.currentUser
       commit('removeOwnReaction', { id, emoji, currentUser })
-      rootState.api.backendInteractor.unreactWithEmoji(id, emoji).then(
+      rootState.api.backendInteractor.unreactWithEmoji({ id, emoji }).then(
         status => {
           dispatch('fetchEmojiReactions', id)
         }
       )
     },
     fetchEmojiReactions ({ rootState, commit }, id) {
-      rootState.api.backendInteractor.fetchEmojiReactions(id).then(
+      rootState.api.backendInteractor.fetchEmojiReactions({ id }).then(
         emojiReactions => {
           commit('addEmojiReactions', { id, emojiReactions, currentUser: rootState.users.currentUser })
         }
       )
     },
     fetchFavs ({ rootState, commit }, id) {
-      rootState.api.backendInteractor.fetchFavoritedByUsers(id)
+      rootState.api.backendInteractor.fetchFavoritedByUsers({ id })
         .then(favoritedByUsers => commit('addFavs', { id, favoritedByUsers, currentUser: rootState.users.currentUser }))
     },
     fetchRepeats ({ rootState, commit }, id) {
-      rootState.api.backendInteractor.fetchRebloggedByUsers(id)
+      rootState.api.backendInteractor.fetchRebloggedByUsers({ id })
         .then(rebloggedByUsers => commit('addRepeats', { id, rebloggedByUsers, currentUser: rootState.users.currentUser }))
     },
     search (store, { q, resolve, limit, offset, following }) {

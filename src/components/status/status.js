@@ -14,10 +14,11 @@ import Timeago from '../timeago/timeago.vue'
 import StatusPopover from '../status_popover/status_popover.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import fileType from 'src/services/file_type/file_type.service'
+import { processHtml } from 'src/services/tiny_post_html_processor/tiny_post_html_processor.service.js'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import { mentionMatchesUrl, extractTagFromUrl } from 'src/services/matcher/matcher.service.js'
 import { filter, unescape, uniqBy } from 'lodash'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 const Status = {
   name: 'Status',
@@ -33,7 +34,8 @@ const Status = {
     'noHeading',
     'inlineExpanded',
     'showPinned',
-    'inProfile'
+    'inProfile',
+    'profileUserId'
   ],
   data () {
     return {
@@ -43,8 +45,8 @@ const Status = {
       showingTall: this.inConversation && this.focused,
       showingLongSubject: false,
       error: null,
-      expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject,
-      betterShadow: this.$store.state.interface.browserSupport.cssFilter
+      // not as computed because it sets the initial state which will be changed later
+      expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject
     }
   },
   computed: {
@@ -104,7 +106,7 @@ const Status = {
       return this.$store.state.statuses.allStatusesObject[this.status.id]
     },
     loggedIn () {
-      return !!this.$store.state.users.currentUser
+      return !!this.currentUser
     },
     muteWordHits () {
       const statusText = this.status.text.toLowerCase()
@@ -115,7 +117,7 @@ const Status = {
 
       return hits
     },
-    muted () { return !this.unmuted && ((!this.inProfile && this.status.user.muted) || (!this.inConversation && this.status.thread_muted) || this.muteWordHits.length > 0) },
+    muted () { return !this.unmuted && ((!(this.inProfile && this.status.user.id === this.profileUserId) && this.status.user.muted) || (!this.inConversation && this.status.thread_muted) || this.muteWordHits.length > 0) },
     hideFilteredStatuses () {
       return this.mergedConfig.hideFilteredStatuses
     },
@@ -164,7 +166,7 @@ const Status = {
       if (this.inConversation || !this.isReply) {
         return false
       }
-      if (this.status.user.id === this.$store.state.users.currentUser.id) {
+      if (this.status.user.id === this.currentUser.id) {
         return false
       }
       if (this.status.type === 'retweet') {
@@ -179,7 +181,7 @@ const Status = {
         if (checkFollowing && taggedUser && taggedUser.following) {
           return false
         }
-        if (this.status.attentions[i].id === this.$store.state.users.currentUser.id) {
+        if (this.status.attentions[i].id === this.currentUser.id) {
           return false
         }
       }
@@ -256,11 +258,41 @@ const Status = {
     maxThumbnails () {
       return this.mergedConfig.maxThumbnails
     },
+    postBodyHtml () {
+      const html = this.status.statusnet_html
+
+      if (this.mergedConfig.greentext) {
+        try {
+          if (html.includes('&gt;')) {
+            // This checks if post has '>' at the beginning, excluding mentions so that @mention >impying works
+            return processHtml(html, (string) => {
+              if (string.includes('&gt;') &&
+                  string
+                    .replace(/<[^>]+?>/gi, '') // remove all tags
+                    .replace(/@\w+/gi, '') // remove mentions (even failed ones)
+                    .trim()
+                    .startsWith('&gt;')) {
+                return `<span class='greentext'>${string}</span>`
+              } else {
+                return string
+              }
+            })
+          } else {
+            return html
+          }
+        } catch (e) {
+          console.err('Failed to process status html', e)
+          return html
+        }
+      } else {
+        return html
+      }
+    },
     contentHtml () {
       if (!this.status.summary_html) {
-        return this.status.statusnet_html
+        return this.postBodyHtml
       }
-      return this.status.summary_html + '<br />' + this.status.statusnet_html
+      return this.status.summary_html + '<br />' + this.postBodyHtml
     },
     combinedFavsAndRepeatsUsers () {
       // Use the status from the global status repository since favs and repeats are saved in it
@@ -271,7 +303,7 @@ const Status = {
       return uniqBy(combinedUsers, 'id')
     },
     ownStatus () {
-      return this.status.user.id === this.$store.state.users.currentUser.id
+      return this.status.user.id === this.currentUser.id
     },
     tags () {
       return this.status.tags.filter(tagObj => tagObj.hasOwnProperty('name')).map(tagObj => tagObj.name).join(' ')
@@ -282,7 +314,11 @@ const Status = {
     emojiReactions () {
       return this.status.emojiReactions
     },
-    ...mapGetters(['mergedConfig'])
+    ...mapGetters(['mergedConfig']),
+    ...mapState({
+      betterShadow: state => state.interface.browserSupport.cssFilter,
+      currentUser: state => state.users.currentUser
+    })
   },
   components: {
     Attachment,

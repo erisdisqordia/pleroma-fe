@@ -108,6 +108,7 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('alwaysShowSubjectInput')
   copyInstanceOption('noAttachmentLinks')
   copyInstanceOption('showFeaturesPanel')
+  copyInstanceOption('hideSitename')
 
   return store.dispatch('setTheme', config['theme'])
 }
@@ -218,12 +219,21 @@ const getNodeInfo = async ({ store }) => {
       store.dispatch('setInstanceOption', { name: 'backendVersion', value: software.version })
       store.dispatch('setInstanceOption', { name: 'pleromaBackend', value: software.name === 'pleroma' })
 
+      const priv = metadata.private
+      store.dispatch('setInstanceOption', { name: 'private', value: priv })
+
       const frontendVersion = window.___pleromafe_commit_hash
       store.dispatch('setInstanceOption', { name: 'frontendVersion', value: frontendVersion })
       store.dispatch('setInstanceOption', { name: 'tagPolicyAvailable', value: metadata.federation.mrf_policies.includes('TagPolicy') })
 
       const federation = metadata.federation
       store.dispatch('setInstanceOption', { name: 'federationPolicy', value: federation })
+      store.dispatch('setInstanceOption', {
+        name: 'federating',
+        value: typeof federation.enabled === 'undefined'
+          ? true
+          : federation.enabled
+      })
 
       const accounts = metadata.staffAccounts
       await resolveStaffAccounts({ store, accounts })

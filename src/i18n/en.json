@@ -435,7 +435,11 @@
         "poll": "Poll graph",
         "icons": "Icons",
         "lightBg": "Highlighted elements",
-        "pressed": "Pressed"
+        "pressed": "Pressed",
+        "selectedPost": "Selected post",
+        "selectedMenu": "Selected menu item",
+        "disabled": "Disabled",
+        "tabs": "Tabs"
       },
       "radii": {
         "_tab_label": "Roundness"

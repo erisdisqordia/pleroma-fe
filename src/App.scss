@@ -376,21 +376,21 @@ i[class*=icon-] {
 
     &:active {
       background-color: $fallback--fg;
-      background-color: var(--btnTopBarPressed, $fallback--fg);
+      background-color: var(--btnPressedTopBar, $fallback--fg);
       color: $fallback--text;
-      color: var(--btnTopBarPressedText, $fallback--text);
+      color: var(--btnPressedTopBarText, $fallback--text);
     }
 
     &:disabled {
       color: $fallback--text;
-      color: var(--btnTopBarDisabledText, $fallback--text);
+      color: var(--btnDisabledTopBarText, $fallback--text);
     }
 
     &.toggled {
       color: $fallback--text;
-      color: var(--btnTopBarToggledText, $fallback--text);
+      color: var(--btnToggledTopBarText, $fallback--text);
       background-color: $fallback--fg;
-      background-color: var(--btnTopBarToggled, $fallback--fg)
+      background-color: var(--btnToggledTopBar, $fallback--fg)
     }
   }
 
@@ -563,19 +563,19 @@ main-router {
 
     &:active {
       background-color: $fallback--fg;
-      background-color: var(--btnPanelPressed, $fallback--fg);
+      background-color: var(--btnPressedPanel, $fallback--fg);
       color: $fallback--text;
-      color: var(--btnPanelPressedText, $fallback--text);
+      color: var(--btnPressedPanelText, $fallback--text);
     }
 
     &:disabled {
       color: $fallback--text;
-      color: var(--btnPanelDisabledText, $fallback--text);
+      color: var(--btnDisabledPanelText, $fallback--text);
     }
 
     &.toggled {
       color: $fallback--text;
-      color: var(--btnPanelToggledText, $fallback--text);
+      color: var(--btnToggledPanelText, $fallback--text);
     }
   }
 

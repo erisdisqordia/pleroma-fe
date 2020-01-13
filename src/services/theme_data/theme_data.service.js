@@ -98,6 +98,58 @@ export const SLOT_INHERITANCE = {
     color: (mod, bg, text) => mixrgb(bg, text)
   },
 
+  selectedPost: '--lightBg',
+  selectedPostFaintText: {
+    depends: ['lightBgFaintText'],
+    layer: 'lightBg',
+    textColor: true
+  },
+  selectedPostFaintLink: {
+    depends: ['lightBgFaintLink'],
+    layer: 'lightBg',
+    textColor: 'preserve'
+  },
+  selectedPostText: {
+    depends: ['lightBgText'],
+    layer: 'lightBg',
+    textColor: true
+  },
+  selectedPostLink: {
+    depends: ['lightBgLink'],
+    layer: 'lightBg',
+    textColor: 'preserve'
+  },
+  selectedPostIcon: {
+    depends: ['selectedPost', 'selectedPostText'],
+    color: (mod, bg, text) => mixrgb(bg, text)
+  },
+
+  selectedMenu: '--lightBg',
+  selectedMenuFaintText: {
+    depends: ['lightBgFaintText'],
+    layer: 'lightBg',
+    textColor: true
+  },
+  selectedMenuFaintLink: {
+    depends: ['lightBgFaintLink'],
+    layer: 'lightBg',
+    textColor: 'preserve'
+  },
+  selectedMenuText: {
+    depends: ['lightBgText'],
+    layer: 'lightBg',
+    textColor: true
+  },
+  selectedMenuLink: {
+    depends: ['lightBgLink'],
+    layer: 'lightBg',
+    textColor: 'preserve'
+  },
+  selectedMenuIcon: {
+    depends: ['selectedMenu', 'selectedMenuText'],
+    color: (mod, bg, text) => mixrgb(bg, text)
+  },
+
   lightText: {
     depends: ['text'],
     color: (mod, text) => brightness(20 * mod, text).rgb

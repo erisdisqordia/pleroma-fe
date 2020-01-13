@@ -445,12 +445,12 @@ $status-margin: 0.75em;
 
   &_focused {
     background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
+    background-color: var(--selectedPost, $fallback--lightBg);
     color: $fallback--text;
-    color: var(--lightBgText, $fallback--text);
-    --faint: var(--lightBgFaintText, $fallback--faint);
-    --faintLink: var(--lightBgFaintLink, $fallback--faint);
-    --icon: var(--lightBgIcon, $fallback--icon);
+    color: var(--selectedPostText, $fallback--text);
+    --faint: var(--selectedPostFaintText, $fallback--faint);
+    --faintLink: var(--selectedPostFaintLink, $fallback--faint);
+    --icon: var(--selectedPostIcon, $fallback--icon);
   }
 
   .timeline & {

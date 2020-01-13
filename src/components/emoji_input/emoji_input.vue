@@ -157,11 +157,11 @@
 
       &.highlighted {
         background-color: $fallback--fg;
-        background-color: var(--lightBg, $fallback--fg);
-        color: var(--lightBgText, $fallback--text);
-        --faint: var(--lightBgFaintText, $fallback--faint);
-        --faintLink: var(--lightBgFaintLink, $fallback--faint);
-        --icon: var(--lightBgIcon, $fallback--icon);
+        background-color: var(--selectedMenu, $fallback--fg);
+        color: var(--selectedMenuText, $fallback--text);
+        --faint: var(--selectedMenuFaintText, $fallback--faint);
+        --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
+        --icon: var(--selectedMenuIcon, $fallback--icon);
       }
     }
   }

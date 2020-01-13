@@ -465,6 +465,52 @@
             />
             <ContrastRatio :contrast="previewContrast.lightBgLink" />
           </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.selectedPost') }}</h4>
+            <ColorInput
+              v-model="selectedPostColorLocal"
+              name="selectedPost"
+              :label="$t('settings.background')"
+              :fallback="previewTheme.colors.selectedPost"
+            />
+            <ColorInput
+              v-model="selectedPostTextColorLocal"
+              name="selectedPostText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.selectedPostText"
+            />
+            <ContrastRatio :contrast="previewContrast.selectedPostText" />
+            <ColorInput
+              v-model="selectedPostLinkColorLocal"
+              name="selectedPostLink"
+              :label="$t('settings.links')"
+              :fallback="previewTheme.colors.selectedPostLink"
+            />
+            <ContrastRatio :contrast="previewContrast.selectedPostLink" />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.selectedMenu') }}</h4>
+            <ColorInput
+              v-model="selectedMenuColorLocal"
+              name="selectedMenu"
+              :label="$t('settings.background')"
+              :fallback="previewTheme.colors.selectedMenu"
+            />
+            <ColorInput
+              v-model="selectedMenuTextColorLocal"
+              name="selectedMenuText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.selectedMenuText"
+            />
+            <ContrastRatio :contrast="previewContrast.selectedMenuText" />
+            <ColorInput
+              v-model="selectedMenuLinkColorLocal"
+              name="selectedMenuLink"
+              :label="$t('settings.links')"
+              :fallback="previewTheme.colors.selectedMenuLink"
+            />
+            <ContrastRatio :contrast="previewContrast.selectedMenuLink" />
+          </div>
         </div>
 
         <div

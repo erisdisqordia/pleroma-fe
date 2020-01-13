@@ -113,11 +113,11 @@ button {
     background-color: var(--btnDisabled, $fallback--fg)
   }
 
-  &.pressed {
-    color: $fallback--faint;
-    color: var(--faint, $fallback--faint);
-    background-color: $fallback--bg;
-    background-color: var(--bg, $fallback--bg)
+  &.toggled {
+    color: $fallback--text;
+    color: var(--btnToggledText, $fallback--text);
+    background-color: $fallback--fg;
+    background-color: var(--btnToggled, $fallback--fg)
   }
 
   &.danger {
@@ -385,6 +385,13 @@ i[class*=icon-] {
       color: $fallback--text;
       color: var(--btnTopBarDisabledText, $fallback--text);
     }
+
+    &.toggled {
+      color: $fallback--text;
+      color: var(--btnTopBarToggledText, $fallback--text);
+      background-color: $fallback--fg;
+      background-color: var(--btnTopBarToggled, $fallback--fg)
+    }
   }
 
 
@@ -564,6 +571,11 @@ main-router {
     &:disabled {
       color: $fallback--text;
       color: var(--btnPanelDisabledText, $fallback--text);
+    }
+
+    &.toggled {
+      color: $fallback--text;
+      color: var(--btnPanelToggledText, $fallback--text);
     }
   }
 

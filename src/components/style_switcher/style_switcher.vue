@@ -377,6 +377,29 @@
             <ContrastRatio :contrast="previewContrast.btnDisabledText" />
           </div>
           <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.tabs') }}</h4>
+            <ColorInput
+              v-model="tabColorLocal"
+              name="tabColor"
+              :fallback="previewTheme.colors.tab"
+              :label="$t('settings.background')"
+            />
+            <ColorInput
+              v-model="tabTextColorLocal"
+              name="tabTextColor"
+              :fallback="previewTheme.colors.tabText"
+              :label="$t('settings.text')"
+            />
+            <ContrastRatio :contrast="previewContrast.tabText" />
+            <ColorInput
+              v-model="tabActiveTextColorLocal"
+              name="tabActiveTextColor"
+              :fallback="previewTheme.colors.tabActiveText"
+              :label="$t('settings.text')"
+            />
+            <ContrastRatio :contrast="previewContrast.tabActiveText" />
+          </div>
+          <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.borders') }}</h4>
             <ColorInput
               v-model="borderColorLocal"

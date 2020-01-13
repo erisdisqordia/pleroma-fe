@@ -219,6 +219,19 @@ export const SLOT_INHERITANCE = {
     textColor: 'preserve'
   },
 
+  // Tabs
+  tab: '--btn',
+  tabText: {
+    depends: ['btnText'],
+    layer: 'btn',
+    textColor: true
+  },
+  tabActiveText: {
+    depends: ['text'],
+    layer: 'bg',
+    textColor: true
+  },
+
   // Buttons
   btn: '--fg',
   btnText: {
@@ -239,6 +252,7 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
 
+  // Buttons: pressed
   btnPressed: '--btn',
   btnPressedText: {
     depends: ['btnText'],
@@ -259,6 +273,31 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
 
+  // Buttons: toggled
+  btnToggled: {
+    depends: ['btn'],
+    color: (mod, btn) => brightness(mod * 20, btn).rgb
+  },
+  btnToggledText: {
+    depends: ['btnText'],
+    layer: 'btn',
+    variant: 'btnToggled',
+    textColor: true
+  },
+  btnToggledPanelText: {
+    depends: ['btnPanelText'],
+    layer: 'btnPanel',
+    variant: 'btnToggled',
+    textColor: true
+  },
+  btnToggledTopBarText: {
+    depends: ['btnTopBarText'],
+    layer: 'btnTopBar',
+    variant: 'btnToggled',
+    textColor: true
+  },
+
+  // Buttons: disabled
   btnDisabled: {
     depends: ['btn', 'bg'],
     color: (mod, btn, bg) => alphaBlend(btn, 0.5, bg)

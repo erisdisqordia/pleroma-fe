@@ -52,6 +52,11 @@
         margin-bottom: 6px - 99px;
         white-space: nowrap;
 
+        color: $fallback--text;
+        color: var(--tabText, $fallback--text);
+        background-color: $fallback--fg;
+        background-color: var(--tab, $fallback--fg);
+
         &:not(.active) {
           z-index: 4;
 
@@ -63,6 +68,8 @@
         &.active {
           background: transparent;
           z-index: 5;
+          color: $fallback--text;
+          color: var(--tabActiveText, $fallback--text);
         }
 
         img {

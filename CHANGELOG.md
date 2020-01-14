@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Fixed
+- Single notifications left unread when hitting read on another device/tab
+
+## [1.1.8] - 2020-01-10
+### Added
+- Icons in nav panel
+- Private mode support
+- Support for 'Move' type notifications
+- Pleroma AMOLED dark theme
+### Changed
+- 403 messaging
+### Fixed
+- Deactivation of remote accounts from frontend
+
+## [1.1.7 and earlier] - 2019-12-14
 ### Added
 - Ability to hide/show repeats from user
 - User profile button clutter organized into a menu
@@ -11,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Started changelog anew
 - Ability to change user's email
 - About page
+- Added remote user redirect
 ### Changed
 - changed the way fading effects for user profile/long statuses works, now uses css-mask instead of gradient background hacks which weren't exactly compatible with semi-transparent themes
 ### Fixed

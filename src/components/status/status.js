@@ -12,6 +12,7 @@ import LinkPreview from '../link-preview/link-preview.vue'
 import AvatarList from '../avatar_list/avatar_list.vue'
 import Timeago from '../timeago/timeago.vue'
 import StatusPopover from '../status_popover/status_popover.vue'
+import EmojiReactions from '../emoji_reactions/emoji_reactions.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import fileType from 'src/services/file_type/file_type.service'
 import { processHtml } from 'src/services/tiny_post_html_processor/tiny_post_html_processor.service.js'
@@ -311,9 +312,6 @@ const Status = {
     hidePostStats () {
       return this.mergedConfig.hidePostStats
     },
-    emojiReactions () {
-      return this.status.emojiReactions
-    },
     ...mapGetters(['mergedConfig']),
     ...mapState({
       betterShadow: state => state.interface.browserSupport.cssFilter,
@@ -334,7 +332,8 @@ const Status = {
     LinkPreview,
     AvatarList,
     Timeago,
-    StatusPopover
+    StatusPopover,
+    EmojiReactions
   },
   methods: {
     visibilityIcon (visibility) {
@@ -418,22 +417,6 @@ const Status = {
     setMedia () {
       const attachments = this.attachmentSize === 'hide' ? this.status.attachments : this.galleryAttachments
       return () => this.$store.dispatch('setMedia', attachments)
-    },
-    reactedWith (emoji) {
-      return this.status.reactedWithEmoji.includes(emoji)
-    },
-    reactWith (emoji) {
-      this.$store.dispatch('reactWithEmoji', { id: this.status.id, emoji })
-    },
-    unreact (emoji) {
-      this.$store.dispatch('unreactWithEmoji', { id: this.status.id, emoji })
-    },
-    emojiOnClick (emoji, event) {
-      if (this.reactedWith(emoji)) {
-        this.unreact(emoji)
-      } else {
-        this.reactWith(emoji)
-      }
     }
   },
   watch: {

@@ -9,13 +9,16 @@
   >
     <div slot="popover">
       <div class="reaction-picker-filter">
-        <input v-model="filterWord" placeholder="Search...">
+        <input
+          v-model="filterWord"
+          :placeholder="$t('emoji.search_emoji')"
+        >
       </div>
       <div class="reaction-picker">
         <span
           v-for="emoji in commonEmojis"
           :key="emoji"
-          class="emoji-reaction-button"
+          class="emoji-button"
           @click="addReaction($event, emoji)"
         >
           {{ emoji }}
@@ -24,7 +27,7 @@
         <span
           v-for="(emoji, key) in emojis"
           :key="key"
-          class="emoji-reaction-button"
+          class="emoji-button"
           @click="addReaction($event, emoji.replacement)"
         >
           {{ emoji.replacement }}
@@ -34,11 +37,11 @@
     </div>
     <div
       v-if="loggedIn"
-      @click.prevent="toggleReactionSelect"
+      @click.prevent="openReactionSelect"
     >
       <i
         :class="classes"
-        class="button-icon favorite-button fav-active"
+        class="button-icon add-reaction-button"
         :title="$t('tool_tip.add_reaction')"
       />
       <span v-if="!mergedConfig.hidePostStats && status.fave_num > 0">{{ status.fave_num }}</span>
@@ -58,7 +61,7 @@
 .reaction-picker-divider {
   height: 1px;
   width: 100%;
-  margin: 0.4em;
+  margin: 0.5em;
   background-color: var(--border, $fallback--border);
 }
 
@@ -82,26 +85,27 @@
   // Autoprefixed seem to ignore this one, and also syntax is different
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-}
 
-.emoji-reaction-button {
-  flex-basis: 20%;
-  line-height: 1.5em;
-  align-content: center;
-}
+  .emoji-button {
+    cursor: pointer;
 
-.fav-active {
-  cursor: pointer;
-  animation-duration: 0.6s;
+    flex-basis: 20%;
+    line-height: 1.5em;
+    align-content: center;
 
-  &:hover {
-    color: $fallback--cOrange;
-    color: var(--cOrange, $fallback--cOrange);
+    &:hover {
+      transform: scale(1.25);
+    }
   }
 }
 
-.favorite-button.icon-star {
-  color: $fallback--cOrange;
-  color: var(--cOrange, $fallback--cOrange);
+.add-reaction-button {
+  cursor: pointer;
+
+  &:hover {
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
+  }
 }
+
 </style>

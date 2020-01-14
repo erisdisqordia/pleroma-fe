@@ -537,7 +537,10 @@ export const mutations = {
   addEmojiReactions (state, { id, emojiReactions, currentUser }) {
     const status = state.allStatusesObject[id]
     set(status, 'emojiReactions', emojiReactions)
-    const reactedWithEmoji = flow(keys, filter(reaction => find(reaction, { id: currentUser.id })))(emojiReactions)
+    const reactedWithEmoji = flow(
+      keys,
+      filter(reaction => find(reaction, { id: currentUser.id }))
+    )(emojiReactions)
     set(status, 'reactedWithEmoji', reactedWithEmoji)
   },
   addOwnReaction (state, { id, emoji, currentUser }) {
@@ -547,7 +550,7 @@ export const mutations = {
     const hasSelfAlready = !!find(listOfUsers, { id: currentUser.id })
     if (!hasSelfAlready) {
       set(status.emojiReactions, emoji, listOfUsers.concat([{ id: currentUser.id }]))
-      set(status, 'reactedWithEmoji', emoji)
+      set(status, 'reactedWithEmoji', [...status.reactedWithEmoji, emoji])
     }
   },
   removeOwnReaction (state, { id, emoji, currentUser }) {
@@ -557,7 +560,7 @@ export const mutations = {
     if (hasSelfAlready) {
       const newUsers = filter(listOfUsers, user => user.id !== currentUser.id)
       set(status.emojiReactions, emoji, newUsers)
-      set(status, 'reactedWith', emoji)
+      set(status, 'reactedWithEmoji', status.reactedWithEmoji.filter(e => e !== emoji))
     }
   },
   updateStatusWithPoll (state, { id, poll }) {

@@ -15,8 +15,9 @@ const ReactButton = {
     }
   },
   methods: {
-    toggleReactionSelect () {
-      this.showTooltip = !this.showTooltip
+    openReactionSelect () {
+      this.showTooltip = true
+      this.filterWord = ''
     },
     closeReactionSelect () {
       this.showTooltip = false

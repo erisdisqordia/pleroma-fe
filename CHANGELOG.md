@@ -5,9 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Changed
+- Captcha now resets on failed registrations
 - Notifications column now cleans itself up to optimize performance when tab is left open for a long time
 ### Fixed
 - Single notifications left unread when hitting read on another device/tab
+- Registration fixed
 
 ## [1.1.8] - 2020-01-10
 ### Added

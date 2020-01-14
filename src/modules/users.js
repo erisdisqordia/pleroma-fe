@@ -401,7 +401,9 @@ const users = {
       let rootState = store.rootState
 
       try {
-        let data = await rootState.api.backendInteractor.register({ ...userInfo })
+        let data = await rootState.api.backendInteractor.register(
+          { params: { ...userInfo } }
+        )
         store.commit('signUpSuccess')
         store.commit('setToken', data.access_token)
         store.dispatch('loginUser', data.access_token)

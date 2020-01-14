@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Changed
+- Notifications column now cleans itself up to optimize performance when tab is left open for a long time
 ### Fixed
 - Single notifications left unread when hitting read on another device/tab
 

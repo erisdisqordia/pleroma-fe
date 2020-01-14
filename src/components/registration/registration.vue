@@ -170,7 +170,7 @@
               <label
                 class="form--label"
                 for="captcha-label"
-              >{{ $t('captcha') }}</label>
+              >{{ $t('registration.captcha') }}</label>
 
               <template v-if="['kocaptcha', 'native'].includes(captcha.type)">
                 <img

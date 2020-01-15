@@ -72,6 +72,7 @@ const MASTODON_MUTE_CONVERSATION = id => `/api/v1/statuses/${id}/mute`
 const MASTODON_UNMUTE_CONVERSATION = id => `/api/v1/statuses/${id}/unmute`
 const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
+const MASTODON_DOMAIN_BLOCKS_URL = '/api/v1/domain_blocks'
 const MASTODON_STREAMING = '/api/v1/streaming'
 
 const oldfetch = window.fetch
@@ -948,6 +949,28 @@ const search2 = ({ credentials, q, resolve, limit, offset, following }) => {
     })
 }
 
+const fetchDomainMutes = ({ credentials }) => {
+  return promisedRequest({ url: MASTODON_DOMAIN_BLOCKS_URL, credentials })
+}
+
+const muteDomain = ({ domain, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_DOMAIN_BLOCKS_URL,
+    method: 'POST',
+    payload: { domain },
+    credentials
+  })
+}
+
+const unmuteDomain = ({ domain, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_DOMAIN_BLOCKS_URL,
+    method: 'DELETE',
+    payload: { domain },
+    credentials
+  })
+}
+
 export const getMastodonSocketURI = ({ credentials, stream, args = {} }) => {
   return Object.entries({
     ...(credentials
@@ -1110,7 +1133,10 @@ const apiService = {
   reportUser,
   updateNotificationSettings,
   search2,
-  searchUsers
+  searchUsers,
+  fetchDomainMutes,
+  muteDomain,
+  unmuteDomain
 }
 
 export default apiService

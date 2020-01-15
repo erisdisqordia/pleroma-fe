@@ -2,15 +2,23 @@
   <div class="settings panel panel-default">
     <div class="panel-heading">
       <div class="title">
-        {{$t('settings.user_settings')}}
+        {{ $t('settings.user_settings') }}
       </div>
       <transition name="fade">
         <template v-if="currentSaveStateNotice">
-          <div @click.prevent class="alert error" v-if="currentSaveStateNotice.error">
+          <div
+            v-if="currentSaveStateNotice.error"
+            class="alert error"
+            @click.prevent
+          >
             {{ $t('settings.saving_err') }}
           </div>
 
-          <div @click.prevent class="alert transparent" v-if="!currentSaveStateNotice.error">
+          <div
+            v-if="!currentSaveStateNotice.error"
+            class="alert transparent"
+            @click.prevent
+          >
             {{ $t('settings.saving_ok') }}
           </div>
         </template>
@@ -19,178 +27,541 @@
     <div class="panel-body profile-edit">
       <tab-switcher>
         <div :label="$t('settings.profile_tab')">
-          <div class="setting-item" >
-            <h2>{{$t('settings.name_bio')}}</h2>
-            <p>{{$t('settings.name')}}</p>
-            <input class='name-changer' id='username' v-model="newName"></input>
-            <p>{{$t('settings.bio')}}</p>
-            <textarea class="bio" v-model="newBio"></textarea>
+          <div class="setting-item">
+            <h2>{{ $t('settings.name_bio') }}</h2>
+            <p>{{ $t('settings.name') }}</p>
+            <EmojiInput
+              v-model="newName"
+              enable-emoji-picker
+              :suggest="emojiSuggestor"
+            >
+              <input
+                id="username"
+                v-model="newName"
+                classname="name-changer"
+              >
+            </EmojiInput>
+            <p>{{ $t('settings.bio') }}</p>
+            <EmojiInput
+              v-model="newBio"
+              enable-emoji-picker
+              :suggest="emojiUserSuggestor"
+            >
+              <textarea
+                v-model="newBio"
+                classname="bio"
+              />
+            </EmojiInput>
             <p>
-              <input type="checkbox" v-model="newLocked" id="account-locked">
-              <label for="account-locked">{{$t('settings.lock_account_description')}}</label>
+              <Checkbox v-model="newLocked">
+                {{ $t('settings.lock_account_description') }}
+              </Checkbox>
             </p>
-            <div v-if="scopeOptionsEnabled">
-              <label for="default-vis">{{$t('settings.default_vis')}}</label>
-              <div id="default-vis" class="visibility-tray">
-                <i v-on:click="changeVis('direct')" class="icon-mail-alt" :class="vis.direct" :title="$t('post_status.scope.direct')" ></i>
-                <i v-on:click="changeVis('private')" class="icon-lock" :class="vis.private" :title="$t('post_status.scope.private')"></i>
-                <i v-on:click="changeVis('unlisted')" class="icon-lock-open-alt" :class="vis.unlisted" :title="$t('post_status.scope.unlisted')"></i>
-                <i v-on:click="changeVis('public')" class="icon-globe" :class="vis.public" :title="$t('post_status.scope.public')"></i>
+            <div>
+              <label for="default-vis">{{ $t('settings.default_vis') }}</label>
+              <div
+                id="default-vis"
+                class="visibility-tray"
+              >
+                <scope-selector
+                  :show-all="true"
+                  :user-default="newDefaultScope"
+                  :initial-scope="newDefaultScope"
+                  :on-scope-change="changeVis"
+                />
               </div>
             </div>
             <p>
-              <input type="checkbox" v-model="newNoRichText" id="account-no-rich-text">
-              <label for="account-no-rich-text">{{$t('settings.no_rich_text_description')}}</label>
+              <Checkbox v-model="newNoRichText">
+                {{ $t('settings.no_rich_text_description') }}
+              </Checkbox>
             </p>
             <p>
-              <input type="checkbox" v-model="hideFollows" id="account-hide-follows">
-              <label for="account-hide-follows">{{$t('settings.hide_follows_description')}}</label>
+              <Checkbox v-model="hideFollows">
+                {{ $t('settings.hide_follows_description') }}
+              </Checkbox>
+            </p>
+            <p class="setting-subitem">
+              <Checkbox
+                v-model="hideFollowsCount"
+                :disabled="!hideFollows"
+              >
+                {{ $t('settings.hide_follows_count_description') }}
+              </Checkbox>
             </p>
             <p>
-              <input type="checkbox" v-model="hideFollowers" id="account-hide-followers">
-              <label for="account-hide-followers">{{$t('settings.hide_followers_description')}}</label>
+              <Checkbox
+                v-model="hideFollowers"
+              >
+                {{ $t('settings.hide_followers_description') }}
+              </Checkbox>
+            </p>
+            <p class="setting-subitem">
+              <Checkbox
+                v-model="hideFollowersCount"
+                :disabled="!hideFollowers"
+              >
+                {{ $t('settings.hide_followers_count_description') }}
+              </Checkbox>
+            </p>
+            <p v-if="role === 'admin' || role === 'moderator'">
+              <Checkbox v-model="showRole">
+                <template v-if="role === 'admin'">
+                  {{ $t('settings.show_admin_badge') }}
+                </template>
+                <template v-if="role === 'moderator'">
+                  {{ $t('settings.show_moderator_badge') }}
+                </template>
+              </Checkbox>
             </p>
             <p>
-              <input type="checkbox" v-model="showRole" id="account-show-role">
-              <label for="account-show-role" v-if="role === 'admin'">{{$t('settings.show_admin_badge')}}</label>
-              <label for="account-show-role" v-if="role === 'moderator'">{{$t('settings.show_moderator_badge')}}</label>
+              <Checkbox v-model="discoverable">
+                {{ $t('settings.discoverable') }}
+              </Checkbox>
             </p>
-            <button :disabled='newName && newName.length === 0' class="btn btn-default" @click="updateProfile">{{$t('general.submit')}}</button>
+            <button
+              :disabled="newName && newName.length === 0"
+              class="btn btn-default"
+              @click="updateProfile"
+            >
+              {{ $t('general.submit') }}
+            </button>
           </div>
           <div class="setting-item">
-            <h2>{{$t('settings.avatar')}}</h2>
-            <p class="visibility-notice">{{$t('settings.avatar_size_instruction')}}</p>
-            <p>{{$t('settings.current_avatar')}}</p>
-            <img :src="user.profile_image_url_original" class="current-avatar"></img>
-            <p>{{$t('settings.set_new_avatar')}}</p>
-            <button class="btn" type="button" id="pick-avatar" v-show="pickAvatarBtnVisible">{{$t('settings.upload_a_photo')}}</button>
-            <image-cropper trigger="#pick-avatar" :submitHandler="submitAvatar" @open="pickAvatarBtnVisible=false" @close="pickAvatarBtnVisible=true" />
+            <h2>{{ $t('settings.avatar') }}</h2>
+            <p class="visibility-notice">
+              {{ $t('settings.avatar_size_instruction') }}
+            </p>
+            <p>{{ $t('settings.current_avatar') }}</p>
+            <img
+              :src="user.profile_image_url_original"
+              class="current-avatar"
+            >
+            <p>{{ $t('settings.set_new_avatar') }}</p>
+            <button
+              v-show="pickAvatarBtnVisible"
+              id="pick-avatar"
+              class="btn"
+              type="button"
+            >
+              {{ $t('settings.upload_a_photo') }}
+            </button>
+            <image-cropper
+              trigger="#pick-avatar"
+              :submit-handler="submitAvatar"
+              @open="pickAvatarBtnVisible=false"
+              @close="pickAvatarBtnVisible=true"
+            />
           </div>
           <div class="setting-item">
-            <h2>{{$t('settings.profile_banner')}}</h2>
-            <p>{{$t('settings.current_profile_banner')}}</p>
-            <img :src="user.cover_photo" class="banner"></img>
-            <p>{{$t('settings.set_new_profile_banner')}}</p>
-            <img class="banner" v-bind:src="bannerPreview" v-if="bannerPreview">
-            </img>
+            <h2>{{ $t('settings.profile_banner') }}</h2>
+            <p>{{ $t('settings.current_profile_banner') }}</p>
+            <img
+              :src="user.cover_photo"
+              class="banner"
+            >
+            <p>{{ $t('settings.set_new_profile_banner') }}</p>
+            <img
+              v-if="bannerPreview"
+              class="banner"
+              :src="bannerPreview"
+            >
             <div>
-              <input type="file" @change="uploadFile('banner', $event)" ></input>
+              <input
+                type="file"
+                @change="uploadFile('banner', $event)"
+              >
             </div>
-            <i class=" icon-spin4 animate-spin uploading" v-if="bannerUploading"></i>
-            <button class="btn btn-default" v-else-if="bannerPreview" @click="submitBanner">{{$t('general.submit')}}</button>
-            <div class='alert error' v-if="bannerUploadError">
+            <i
+              v-if="bannerUploading"
+              class=" icon-spin4 animate-spin uploading"
+            />
+            <button
+              v-else-if="bannerPreview"
+              class="btn btn-default"
+              @click="submitBanner"
+            >
+              {{ $t('general.submit') }}
+            </button>
+            <div
+              v-if="bannerUploadError"
+              class="alert error"
+            >
               Error: {{ bannerUploadError }}
-              <i class="button-icon icon-cancel" @click="clearUploadError('banner')"></i>
+              <i
+                class="button-icon icon-cancel"
+                @click="clearUploadError('banner')"
+              />
             </div>
           </div>
           <div class="setting-item">
-            <h2>{{$t('settings.profile_background')}}</h2>
-            <p>{{$t('settings.set_new_profile_background')}}</p>
-            <img class="bg" v-bind:src="backgroundPreview" v-if="backgroundPreview">
-            </img>
+            <h2>{{ $t('settings.profile_background') }}</h2>
+            <p>{{ $t('settings.set_new_profile_background') }}</p>
+            <img
+              v-if="backgroundPreview"
+              class="bg"
+              :src="backgroundPreview"
+            >
             <div>
-              <input type="file" @change="uploadFile('background', $event)" ></input>
+              <input
+                type="file"
+                @change="uploadFile('background', $event)"
+              >
             </div>
-            <i class=" icon-spin4 animate-spin uploading" v-if="backgroundUploading"></i>
-            <button class="btn btn-default" v-else-if="backgroundPreview" @click="submitBg">{{$t('general.submit')}}</button>
-            <div class='alert error' v-if="backgroundUploadError">
+            <i
+              v-if="backgroundUploading"
+              class=" icon-spin4 animate-spin uploading"
+            />
+            <button
+              v-else-if="backgroundPreview"
+              class="btn btn-default"
+              @click="submitBg"
+            >
+              {{ $t('general.submit') }}
+            </button>
+            <div
+              v-if="backgroundUploadError"
+              class="alert error"
+            >
               Error: {{ backgroundUploadError }}
-              <i class="button-icon icon-cancel" @click="clearUploadError('background')"></i>
+              <i
+                class="button-icon icon-cancel"
+                @click="clearUploadError('background')"
+              />
             </div>
           </div>
         </div>
 
         <div :label="$t('settings.security_tab')">
           <div class="setting-item">
-            <h2>{{$t('settings.change_password')}}</h2>
+            <h2>{{ $t('settings.change_email') }}</h2>
             <div>
-              <p>{{$t('settings.current_password')}}</p>
-              <input type="password" v-model="changePasswordInputs[0]">
+              <p>{{ $t('settings.new_email') }}</p>
+              <input
+                v-model="newEmail"
+                type="email"
+                autocomplete="email"
+              >
             </div>
             <div>
-              <p>{{$t('settings.new_password')}}</p>
-              <input type="password" v-model="changePasswordInputs[1]">
+              <p>{{ $t('settings.current_password') }}</p>
+              <input
+                v-model="changeEmailPassword"
+                type="password"
+                autocomplete="current-password"
+              >
             </div>
-            <div>
-              <p>{{$t('settings.confirm_new_password')}}</p>
-              <input type="password" v-model="changePasswordInputs[2]">
-            </div>
-            <button class="btn btn-default" @click="changePassword">{{$t('general.submit')}}</button>
-            <p v-if="changedPassword">{{$t('settings.changed_password')}}</p>
-            <p v-else-if="changePasswordError !== false">{{$t('settings.change_password_error')}}</p>
-            <p v-if="changePasswordError">{{changePasswordError}}</p>
+            <button
+              class="btn btn-default"
+              @click="changeEmail"
+            >
+              {{ $t('general.submit') }}
+            </button>
+            <p v-if="changedEmail">
+              {{ $t('settings.changed_email') }}
+            </p>
+            <template v-if="changeEmailError !== false">
+              <p>{{ $t('settings.change_email_error') }}</p>
+              <p>{{ changeEmailError }}</p>
+            </template>
           </div>
 
           <div class="setting-item">
-            <h2>{{$t('settings.oauth_tokens')}}</h2>
+            <h2>{{ $t('settings.change_password') }}</h2>
+            <div>
+              <p>{{ $t('settings.current_password') }}</p>
+              <input
+                v-model="changePasswordInputs[0]"
+                type="password"
+              >
+            </div>
+            <div>
+              <p>{{ $t('settings.new_password') }}</p>
+              <input
+                v-model="changePasswordInputs[1]"
+                type="password"
+              >
+            </div>
+            <div>
+              <p>{{ $t('settings.confirm_new_password') }}</p>
+              <input
+                v-model="changePasswordInputs[2]"
+                type="password"
+              >
+            </div>
+            <button
+              class="btn btn-default"
+              @click="changePassword"
+            >
+              {{ $t('general.submit') }}
+            </button>
+            <p v-if="changedPassword">
+              {{ $t('settings.changed_password') }}
+            </p>
+            <p v-else-if="changePasswordError !== false">
+              {{ $t('settings.change_password_error') }}
+            </p>
+            <p v-if="changePasswordError">
+              {{ changePasswordError }}
+            </p>
+          </div>
+
+          <div class="setting-item">
+            <h2>{{ $t('settings.oauth_tokens') }}</h2>
             <table class="oauth-tokens">
               <thead>
                 <tr>
-                  <th>{{$t('settings.app_name')}}</th>
-                  <th>{{$t('settings.valid_until')}}</th>
-                  <th></th>
+                  <th>{{ $t('settings.app_name') }}</th>
+                  <th>{{ $t('settings.valid_until') }}</th>
+                  <th />
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="oauthToken in oauthTokens" :key="oauthToken.id">
-                  <td>{{oauthToken.appName}}</td>
-                  <td>{{oauthToken.validUntil}}</td>
+                <tr
+                  v-for="oauthToken in oauthTokens"
+                  :key="oauthToken.id"
+                >
+                  <td>{{ oauthToken.appName }}</td>
+                  <td>{{ oauthToken.validUntil }}</td>
                   <td class="actions">
-                    <button class="btn btn-default" @click="revokeToken(oauthToken.id)">
-                      {{$t('settings.revoke_token')}}
+                    <button
+                      class="btn btn-default"
+                      @click="revokeToken(oauthToken.id)"
+                    >
+                      {{ $t('settings.revoke_token') }}
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-
+          <mfa />
           <div class="setting-item">
-            <h2>{{$t('settings.delete_account')}}</h2>
-            <p v-if="!deletingAccount">{{$t('settings.delete_account_description')}}</p>
+            <h2>{{ $t('settings.delete_account') }}</h2>
+            <p v-if="!deletingAccount">
+              {{ $t('settings.delete_account_description') }}
+            </p>
             <div v-if="deletingAccount">
-              <p>{{$t('settings.delete_account_instructions')}}</p>
-              <p>{{$t('login.password')}}</p>
-              <input type="password" v-model="deleteAccountConfirmPasswordInput">
-              <button class="btn btn-default" @click="deleteAccount">{{$t('settings.delete_account')}}</button>
+              <p>{{ $t('settings.delete_account_instructions') }}</p>
+              <p>{{ $t('login.password') }}</p>
+              <input
+                v-model="deleteAccountConfirmPasswordInput"
+                type="password"
+              >
+              <button
+                class="btn btn-default"
+                @click="deleteAccount"
+              >
+                {{ $t('settings.delete_account') }}
+              </button>
             </div>
-            <p v-if="deleteAccountError !== false">{{$t('settings.delete_account_error')}}</p>
-            <p v-if="deleteAccountError">{{deleteAccountError}}</p>
-            <button class="btn btn-default" v-if="!deletingAccount" @click="confirmDelete">{{$t('general.submit')}}</button>
+            <p v-if="deleteAccountError !== false">
+              {{ $t('settings.delete_account_error') }}
+            </p>
+            <p v-if="deleteAccountError">
+              {{ deleteAccountError }}
+            </p>
+            <button
+              v-if="!deletingAccount"
+              class="btn btn-default"
+              @click="confirmDelete"
+            >
+              {{ $t('general.submit') }}
+            </button>
           </div>
         </div>
 
-        <div :label="$t('settings.data_import_export_tab')" v-if="pleromaBackend">
+        <div
+          v-if="pleromaBackend"
+          :label="$t('settings.notifications')"
+        >
           <div class="setting-item">
-            <h2>{{$t('settings.follow_import')}}</h2>
-            <p>{{$t('settings.import_followers_from_a_csv_file')}}</p>
-            <form>
-              <input type="file" ref="followlist" v-on:change="followListChange"></input>
-            </form>
-            <i class=" icon-spin4 animate-spin uploading" v-if="followListUploading"></i>
-            <button class="btn btn-default" v-else @click="importFollows">{{$t('general.submit')}}</button>
-            <div v-if="followsImported">
-              <i class="icon-cross" @click="dismissImported"></i>
-              <p>{{$t('settings.follows_imported')}}</p>
+            <div class="select-multiple">
+              <span class="label">{{ $t('settings.notification_setting') }}</span>
+              <ul class="option-list">
+                <li>
+                  <Checkbox v-model="notificationSettings.follows">
+                    {{ $t('settings.notification_setting_follows') }}
+                  </Checkbox>
+                </li>
+                <li>
+                  <Checkbox v-model="notificationSettings.followers">
+                    {{ $t('settings.notification_setting_followers') }}
+                  </Checkbox>
+                </li>
+                <li>
+                  <Checkbox v-model="notificationSettings.non_follows">
+                    {{ $t('settings.notification_setting_non_follows') }}
+                  </Checkbox>
+                </li>
+                <li>
+                  <Checkbox v-model="notificationSettings.non_followers">
+                    {{ $t('settings.notification_setting_non_followers') }}
+                  </Checkbox>
+                </li>
+              </ul>
             </div>
-            <div v-else-if="followImportError">
-              <i class="icon-cross" @click="dismissImported"></i>
-              <p>{{$t('settings.follow_import_error')}}</p>
-            </div>
+            <p>{{ $t('settings.notification_mutes') }}</p>
+            <p>{{ $t('settings.notification_blocks') }}</p>
+            <button
+              class="btn btn-default"
+              @click="updateNotificationSettings"
+            >
+              {{ $t('general.submit') }}
+            </button>
           </div>
-          <div class="setting-item" v-if="enableFollowsExport">
-            <h2>{{$t('settings.follow_export')}}</h2>
-            <button class="btn btn-default" @click="exportFollows">{{$t('settings.follow_export_button')}}</button>
+        </div>
+
+        <div
+          v-if="pleromaBackend"
+          :label="$t('settings.data_import_export_tab')"
+        >
+          <div class="setting-item">
+            <h2>{{ $t('settings.follow_import') }}</h2>
+            <p>{{ $t('settings.import_followers_from_a_csv_file') }}</p>
+            <Importer
+              :submit-handler="importFollows"
+              :success-message="$t('settings.follows_imported')"
+              :error-message="$t('settings.follow_import_error')"
+            />
           </div>
-          <div class="setting-item" v-else>
-            <h2>{{$t('settings.follow_export_processing')}}</h2>
+          <div class="setting-item">
+            <h2>{{ $t('settings.follow_export') }}</h2>
+            <Exporter
+              :get-content="getFollowsContent"
+              filename="friends.csv"
+              :export-button-label="$t('settings.follow_export_button')"
+            />
+          </div>
+          <div class="setting-item">
+            <h2>{{ $t('settings.block_import') }}</h2>
+            <p>{{ $t('settings.import_blocks_from_a_csv_file') }}</p>
+            <Importer
+              :submit-handler="importBlocks"
+              :success-message="$t('settings.blocks_imported')"
+              :error-message="$t('settings.block_import_error')"
+            />
+          </div>
+          <div class="setting-item">
+            <h2>{{ $t('settings.block_export') }}</h2>
+            <Exporter
+              :get-content="getBlocksContent"
+              filename="blocks.csv"
+              :export-button-label="$t('settings.block_export_button')"
+            />
           </div>
         </div>
 
         <div :label="$t('settings.blocks_tab')">
-          <block-list :refresh="true">
-            <template slot="empty">{{$t('settings.no_blocks')}}</template>
-          </block-list>
+          <div class="profile-edit-usersearch-wrapper">
+            <Autosuggest
+              :filter="filterUnblockedUsers"
+              :query="queryUserIds"
+              :placeholder="$t('settings.search_user_to_block')"
+            >
+              <BlockCard
+                slot-scope="row"
+                :user-id="row.item"
+              />
+            </Autosuggest>
+          </div>
+          <BlockList
+            :refresh="true"
+            :get-key="identity"
+          >
+            <template
+              slot="header"
+              slot-scope="{selected}"
+            >
+              <div class="profile-edit-bulk-actions">
+                <ProgressButton
+                  v-if="selected.length > 0"
+                  class="btn btn-default"
+                  :click="() => blockUsers(selected)"
+                >
+                  {{ $t('user_card.block') }}
+                  <template slot="progress">
+                    {{ $t('user_card.block_progress') }}
+                  </template>
+                </ProgressButton>
+                <ProgressButton
+                  v-if="selected.length > 0"
+                  class="btn btn-default"
+                  :click="() => unblockUsers(selected)"
+                >
+                  {{ $t('user_card.unblock') }}
+                  <template slot="progress">
+                    {{ $t('user_card.unblock_progress') }}
+                  </template>
+                </ProgressButton>
+              </div>
+            </template>
+            <template
+              slot="item"
+              slot-scope="{item}"
+            >
+              <BlockCard :user-id="item" />
+            </template>
+            <template slot="empty">
+              {{ $t('settings.no_blocks') }}
+            </template>
+          </BlockList>
+        </div>
+
+        <div :label="$t('settings.mutes_tab')">
+          <div class="profile-edit-usersearch-wrapper">
+            <Autosuggest
+              :filter="filterUnMutedUsers"
+              :query="queryUserIds"
+              :placeholder="$t('settings.search_user_to_mute')"
+            >
+              <MuteCard
+                slot-scope="row"
+                :user-id="row.item"
+              />
+            </Autosuggest>
+          </div>
+          <MuteList
+            :refresh="true"
+            :get-key="identity"
+          >
+            <template
+              slot="header"
+              slot-scope="{selected}"
+            >
+              <div class="profile-edit-bulk-actions">
+                <ProgressButton
+                  v-if="selected.length > 0"
+                  class="btn btn-default"
+                  :click="() => muteUsers(selected)"
+                >
+                  {{ $t('user_card.mute') }}
+                  <template slot="progress">
+                    {{ $t('user_card.mute_progress') }}
+                  </template>
+                </ProgressButton>
+                <ProgressButton
+                  v-if="selected.length > 0"
+                  class="btn btn-default"
+                  :click="() => unmuteUsers(selected)"
+                >
+                  {{ $t('user_card.unmute') }}
+                  <template slot="progress">
+                    {{ $t('user_card.unmute_progress') }}
+                  </template>
+                </ProgressButton>
+              </div>
+            </template>
+            <template
+              slot="item"
+              slot-scope="{item}"
+            >
+              <MuteCard :user-id="item" />
+            </template>
+            <template slot="empty">
+              {{ $t('settings.no_mutes') }}
+            </template>
+          </MuteList>
         </div>
       </tab-switcher>
     </div>
@@ -206,6 +577,10 @@
 .profile-edit {
   .bio {
     margin: 0;
+  }
+
+  .visibility-tray {
+    padding-top: 5px;
   }
 
   input[type=file] {
@@ -248,6 +623,24 @@
     .actions {
       text-align: right;
     }
+  }
+
+  &-usersearch-wrapper {
+    padding: 1em;
+  }
+
+  &-bulk-actions {
+    text-align: right;
+    padding: 0 1em;
+    min-height: 28px;
+
+    button {
+      width: 10em;
+    }
+  }
+
+  .setting-subitem {
+    margin-left: 1.75em;
   }
 }
 </style>

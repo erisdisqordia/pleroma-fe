@@ -1,121 +1,39 @@
-import apiService from '../api/api.service.js'
+import apiService, { getMastodonSocketURI, ProcessedWS } from '../api/api.service.js'
 import timelineFetcherService from '../timeline_fetcher/timeline_fetcher.service.js'
+import notificationsFetcher from '../notifications_fetcher/notifications_fetcher.service.js'
+import followRequestFetcher from '../../services/follow_request_fetcher/follow_request_fetcher.service'
 
-const backendInteractorService = (credentials) => {
-  const fetchStatus = ({id}) => {
-    return apiService.fetchStatus({id, credentials})
-  }
+const backendInteractorService = credentials => ({
+  startFetchingTimeline ({ timeline, store, userId = false, tag }) {
+    return timelineFetcherService.startFetching({ timeline, store, credentials, userId, tag })
+  },
 
-  const fetchConversation = ({id}) => {
-    return apiService.fetchConversation({id, credentials})
-  }
+  startFetchingNotifications ({ store }) {
+    return notificationsFetcher.startFetching({ store, credentials })
+  },
 
-  const fetchFriends = ({id, page}) => {
-    return apiService.fetchFriends({id, page, credentials})
-  }
+  fetchAndUpdateNotifications ({ store }) {
+    return notificationsFetcher.fetchAndUpdate({ store, credentials })
+  },
 
-  const exportFriends = ({id}) => {
-    return apiService.exportFriends({id, credentials})
-  }
+  startFetchingFollowRequest ({ store }) {
+    return followRequestFetcher.startFetching({ store, credentials })
+  },
 
-  const fetchFollowers = ({id, page}) => {
-    return apiService.fetchFollowers({id, page, credentials})
-  }
+  startUserSocket ({ store }) {
+    const serv = store.rootState.instance.server.replace('http', 'ws')
+    const url = serv + getMastodonSocketURI({ credentials, stream: 'user' })
+    return ProcessedWS({ url, id: 'User' })
+  },
 
-  const fetchAllFollowing = ({username}) => {
-    return apiService.fetchAllFollowing({username, credentials})
-  }
+  ...Object.entries(apiService).reduce((acc, [key, func]) => {
+    return {
+      ...acc,
+      [key]: (args) => func({ credentials, ...args })
+    }
+  }, {}),
 
-  const fetchUser = ({id}) => {
-    return apiService.fetchUser({id, credentials})
-  }
-
-  const followUser = (id) => {
-    return apiService.followUser({credentials, id})
-  }
-
-  const unfollowUser = (id) => {
-    return apiService.unfollowUser({credentials, id})
-  }
-
-  const blockUser = (id) => {
-    return apiService.blockUser({credentials, id})
-  }
-
-  const unblockUser = (id) => {
-    return apiService.unblockUser({credentials, id})
-  }
-
-  const approveUser = (id) => {
-    return apiService.approveUser({credentials, id})
-  }
-
-  const denyUser = (id) => {
-    return apiService.denyUser({credentials, id})
-  }
-
-  const startFetching = ({timeline, store, userId = false, tag}) => {
-    return timelineFetcherService.startFetching({timeline, store, credentials, userId, tag})
-  }
-
-  const setUserMute = ({id, muted = true}) => {
-    return apiService.setUserMute({id, muted, credentials})
-  }
-
-  const fetchMutes = () => apiService.fetchMutes({credentials})
-  const fetchBlocks = (params) => apiService.fetchBlocks({credentials, ...params})
-  const fetchFollowRequests = () => apiService.fetchFollowRequests({credentials})
-  const fetchOAuthTokens = () => apiService.fetchOAuthTokens({credentials})
-  const revokeOAuthToken = (id) => apiService.revokeOAuthToken({id, credentials})
-
-  const getCaptcha = () => apiService.getCaptcha()
-  const register = (params) => apiService.register(params)
-  const updateAvatar = ({params}) => apiService.updateAvatar({credentials, params})
-  const updateBg = ({params}) => apiService.updateBg({credentials, params})
-  const updateBanner = ({params}) => apiService.updateBanner({credentials, params})
-  const updateProfile = ({params}) => apiService.updateProfile({credentials, params})
-
-  const externalProfile = (profileUrl) => apiService.externalProfile({profileUrl, credentials})
-  const followImport = ({params}) => apiService.followImport({params, credentials})
-
-  const deleteAccount = ({password}) => apiService.deleteAccount({credentials, password})
-  const changePassword = ({password, newPassword, newPasswordConfirmation}) => apiService.changePassword({credentials, password, newPassword, newPasswordConfirmation})
-
-  const backendInteractorServiceInstance = {
-    fetchStatus,
-    fetchConversation,
-    fetchFriends,
-    exportFriends,
-    fetchFollowers,
-    followUser,
-    unfollowUser,
-    blockUser,
-    unblockUser,
-    fetchUser,
-    fetchAllFollowing,
-    verifyCredentials: apiService.verifyCredentials,
-    startFetching,
-    setUserMute,
-    fetchMutes,
-    fetchBlocks,
-    fetchOAuthTokens,
-    revokeOAuthToken,
-    register,
-    getCaptcha,
-    updateAvatar,
-    updateBg,
-    updateBanner,
-    updateProfile,
-    externalProfile,
-    followImport,
-    deleteAccount,
-    changePassword,
-    fetchFollowRequests,
-    approveUser,
-    denyUser
-  }
-
-  return backendInteractorServiceInstance
-}
+  verifyCredentials: apiService.verifyCredentials
+})
 
 export default backendInteractorService

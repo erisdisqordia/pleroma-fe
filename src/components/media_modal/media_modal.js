@@ -1,11 +1,14 @@
 import StillImage from '../still-image/still-image.vue'
 import VideoAttachment from '../video_attachment/video_attachment.vue'
+import Modal from '../modal/modal.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
+import GestureService from '../../services/gesture_service/gesture_service'
 
 const MediaModal = {
   components: {
     StillImage,
-    VideoAttachment
+    VideoAttachment,
+    Modal
   },
   computed: {
     showing () {
@@ -27,7 +30,27 @@ const MediaModal = {
       return this.currentMedia ? fileTypeService.fileType(this.currentMedia.mimetype) : null
     }
   },
+  created () {
+    this.mediaSwipeGestureRight = GestureService.swipeGesture(
+      GestureService.DIRECTION_RIGHT,
+      this.goPrev,
+      50
+    )
+    this.mediaSwipeGestureLeft = GestureService.swipeGesture(
+      GestureService.DIRECTION_LEFT,
+      this.goNext,
+      50
+    )
+  },
   methods: {
+    mediaTouchStart (e) {
+      GestureService.beginSwipe(e, this.mediaSwipeGestureRight)
+      GestureService.beginSwipe(e, this.mediaSwipeGestureLeft)
+    },
+    mediaTouchMove (e) {
+      GestureService.updateSwipe(e, this.mediaSwipeGestureRight)
+      GestureService.updateSwipe(e, this.mediaSwipeGestureLeft)
+    },
     hide () {
       this.$store.dispatch('closeMediaViewer')
     },

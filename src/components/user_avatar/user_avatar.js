@@ -2,7 +2,7 @@ import StillImage from '../still-image/still-image.vue'
 
 const UserAvatar = {
   props: [
-    'src',
+    'user',
     'betterShadow',
     'compact'
   ],
@@ -16,12 +16,17 @@ const UserAvatar = {
   },
   computed: {
     imgSrc () {
-      return this.showPlaceholder ? '/images/avi.png' : this.src
+      return this.showPlaceholder ? '/images/avi.png' : this.user.profile_image_url_original
     }
   },
   methods: {
     imageLoadError () {
       this.showPlaceholder = true
+    }
+  },
+  watch: {
+    src () {
+      this.showPlaceholder = false
     }
   }
 }

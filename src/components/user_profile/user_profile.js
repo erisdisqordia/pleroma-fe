@@ -1,62 +1,44 @@
-import { compose } from 'vue-compose'
 import get from 'lodash/get'
 import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
+import Conversation from '../conversation/conversation.vue'
+import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
-import withList from '../../hocs/with_list/with_list'
 
-const FollowerList = compose(
-  withLoadMore({
-    fetch: (props, $store) => $store.dispatch('addFollowers', props.userId),
-    select: (props, $store) => get($store.getters.userById(props.userId), 'followers', []),
-    destory: (props, $store) => $store.dispatch('clearFollowers', props.userId),
-    childPropName: 'entries',
-    additionalPropNames: ['userId']
-  }),
-  withList({ getEntryProps: user => ({ user }) })
-)(FollowCard)
+const FollowerList = withLoadMore({
+  fetch: (props, $store) => $store.dispatch('fetchFollowers', props.userId),
+  select: (props, $store) => get($store.getters.findUser(props.userId), 'followerIds', []).map(id => $store.getters.findUser(id)),
+  destroy: (props, $store) => $store.dispatch('clearFollowers', props.userId),
+  childPropName: 'items',
+  additionalPropNames: ['userId']
+})(List)
 
-const FriendList = compose(
-  withLoadMore({
-    fetch: (props, $store) => $store.dispatch('addFriends', props.userId),
-    select: (props, $store) => get($store.getters.userById(props.userId), 'friends', []),
-    destory: (props, $store) => $store.dispatch('clearFriends', props.userId),
-    childPropName: 'entries',
-    additionalPropNames: ['userId']
-  }),
-  withList({ getEntryProps: user => ({ user }) })
-)(FollowCard)
+const FriendList = withLoadMore({
+  fetch: (props, $store) => $store.dispatch('fetchFriends', props.userId),
+  select: (props, $store) => get($store.getters.findUser(props.userId), 'friendIds', []).map(id => $store.getters.findUser(id)),
+  destroy: (props, $store) => $store.dispatch('clearFriends', props.userId),
+  childPropName: 'items',
+  additionalPropNames: ['userId']
+})(List)
+
+const defaultTabKey = 'statuses'
 
 const UserProfile = {
   data () {
     return {
-      error: false
+      error: false,
+      userId: null,
+      tab: defaultTabKey
     }
   },
   created () {
-    this.$store.commit('clearTimeline', { timeline: 'user' })
-    this.$store.commit('clearTimeline', { timeline: 'favorites' })
-    this.$store.commit('clearTimeline', { timeline: 'media' })
-    this.$store.dispatch('startFetching', { timeline: 'user', userId: this.fetchBy })
-    this.$store.dispatch('startFetching', { timeline: 'media', userId: this.fetchBy })
-    this.startFetchFavorites()
-    if (!this.user.id) {
-      this.$store.dispatch('fetchUser', this.fetchBy)
-        .catch((reason) => {
-          const errorMessage = get(reason, 'error.error')
-          if (errorMessage === 'No user with such user_id') { // Known error
-            this.error = this.$t('user_profile.profile_does_not_exist')
-          } else if (errorMessage) {
-            this.error = errorMessage
-          } else {
-            this.error = this.$t('user_profile.profile_loading_error')
-          }
-        })
-    }
+    const routeParams = this.$route.params
+    this.load(routeParams.name || routeParams.id)
+    this.tab = get(this.$route, 'query.tab', defaultTabKey)
   },
   destroyed () {
-    this.cleanUp()
+    this.stopFetching()
   },
   computed: {
     timeline () {
@@ -68,33 +50,12 @@ const UserProfile = {
     media () {
       return this.$store.state.statuses.timelines.media
     },
-    userId () {
-      return this.$route.params.id || this.user.id
-    },
-    userName () {
-      return this.$route.params.name || this.user.screen_name
-    },
     isUs () {
       return this.userId && this.$store.state.users.currentUser.id &&
         this.userId === this.$store.state.users.currentUser.id
     },
-    userInStore () {
-      if (this.isExternal) {
-        return this.$store.getters.userById(this.userId)
-      }
-      return this.$store.getters.userByName(this.userName)
-    },
     user () {
-      if (this.timeline.statuses[0]) {
-        return this.timeline.statuses[0].user
-      }
-      if (this.userInStore) {
-        return this.userInStore
-      }
-      return {}
-    },
-    fetchBy () {
-      return this.isExternal ? this.userId : this.userName
+      return this.$store.getters.findUser(this.userId)
     },
     isExternal () {
       return this.$route.name === 'external-user-profile'
@@ -107,50 +68,85 @@ const UserProfile = {
     }
   },
   methods: {
-    startFetchFavorites () {
-      if (this.isUs) {
-        this.$store.dispatch('startFetching', { timeline: 'favorites', userId: this.fetchBy })
+    load (userNameOrId) {
+      const startFetchingTimeline = (timeline, userId) => {
+        // Clear timeline only if load another user's profile
+        if (userId !== this.$store.state.statuses.timelines[timeline].userId) {
+          this.$store.commit('clearTimeline', { timeline })
+        }
+        this.$store.dispatch('startFetchingTimeline', { timeline, userId })
+      }
+
+      const loadById = (userId) => {
+        this.userId = userId
+        startFetchingTimeline('user', userId)
+        startFetchingTimeline('media', userId)
+        if (this.isUs) {
+          startFetchingTimeline('favorites', userId)
+        }
+        // Fetch all pinned statuses immediately
+        this.$store.dispatch('fetchPinnedStatuses', userId)
+      }
+
+      // Reset view
+      this.userId = null
+      this.error = false
+
+      // Check if user data is already loaded in store
+      const user = this.$store.getters.findUser(userNameOrId)
+      if (user) {
+        loadById(user.id)
+      } else {
+        this.$store.dispatch('fetchUser', userNameOrId)
+          .then(({ id }) => loadById(id))
+          .catch((reason) => {
+            const errorMessage = get(reason, 'error.error')
+            if (errorMessage === 'No user with such user_id') { // Known error
+              this.error = this.$t('user_profile.profile_does_not_exist')
+            } else if (errorMessage) {
+              this.error = errorMessage
+            } else {
+              this.error = this.$t('user_profile.profile_loading_error')
+            }
+          })
       }
     },
-    startUp () {
-      this.$store.dispatch('startFetching', { timeline: 'user', userId: this.fetchBy })
-      this.$store.dispatch('startFetching', { timeline: 'media', userId: this.fetchBy })
-
-      this.startFetchFavorites()
+    stopFetching () {
+      this.$store.dispatch('stopFetchingTimeline', 'user')
+      this.$store.dispatch('stopFetchingTimeline', 'favorites')
+      this.$store.dispatch('stopFetchingTimeline', 'media')
     },
-    cleanUp () {
-      this.$store.dispatch('stopFetching', 'user')
-      this.$store.dispatch('stopFetching', 'favorites')
-      this.$store.dispatch('stopFetching', 'media')
-      this.$store.commit('clearTimeline', { timeline: 'user' })
-      this.$store.commit('clearTimeline', { timeline: 'favorites' })
-      this.$store.commit('clearTimeline', { timeline: 'media' })
+    switchUser (userNameOrId) {
+      this.stopFetching()
+      this.load(userNameOrId)
+    },
+    onTabSwitch (tab) {
+      this.tab = tab
+      this.$router.replace({ query: { tab } })
     }
   },
   watch: {
-    userName () {
-      if (this.isExternal) {
-        return
+    '$route.params.id': function (newVal) {
+      if (newVal) {
+        this.switchUser(newVal)
       }
-      this.cleanUp()
-      this.startUp()
     },
-    userId () {
-      if (!this.isExternal) {
-        return
+    '$route.params.name': function (newVal) {
+      if (newVal) {
+        this.switchUser(newVal)
       }
-      this.cleanUp()
-      this.startUp()
     },
-    $route () {
-      this.$refs.tabSwitcher.activateTab(0)()
+    '$route.query': function (newVal) {
+      this.tab = newVal.tab || defaultTabKey
     }
   },
   components: {
     UserCard,
     Timeline,
     FollowerList,
-    FriendList
+    FriendList,
+    FollowCard,
+    Conversation
   }
 }
 

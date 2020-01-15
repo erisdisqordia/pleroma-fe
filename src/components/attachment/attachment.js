@@ -10,13 +10,14 @@ const Attachment = {
     'statusId',
     'size',
     'allowPlay',
-    'setMedia'
+    'setMedia',
+    'naturalSizeLoad'
   ],
   data () {
     return {
       nsfwImage: this.$store.state.instance.nsfwCensorImage || nsfwImage,
-      hideNsfwLocal: this.$store.state.config.hideNsfw,
-      preloadImage: this.$store.state.config.preloadImage,
+      hideNsfwLocal: this.$store.getters.mergedConfig.hideNsfw,
+      preloadImage: this.$store.getters.mergedConfig.preloadImage,
       loading: false,
       img: fileTypeService.fileType(this.attachment.mimetype) === 'image' && document.createElement('img'),
       modalOpen: false,
@@ -51,13 +52,13 @@ const Attachment = {
     }
   },
   methods: {
-    linkClicked ({target}) {
+    linkClicked ({ target }) {
       if (target.tagName === 'A') {
         window.open(target.href, '_blank')
       }
     },
     openModal (event) {
-      const modalTypes = this.$store.state.config.playVideosInModal
+      const modalTypes = this.$store.getters.mergedConfig.playVideosInModal
         ? ['image', 'video']
         : ['image']
       if (fileTypeService.fileMatchesSomeType(modalTypes, this.attachment) ||
@@ -70,7 +71,7 @@ const Attachment = {
       }
     },
     toggleHidden (event) {
-      if (this.$store.state.config.useOneClickNsfw && !this.showHidden) {
+      if (this.$store.getters.mergedConfig.useOneClickNsfw && !this.showHidden) {
         this.openModal(event)
         return
       }
@@ -88,6 +89,11 @@ const Attachment = {
       } else {
         this.showHidden = !this.showHidden
       }
+    },
+    onImageLoad (image) {
+      const width = image.naturalWidth
+      const height = image.naturalHeight
+      this.naturalSizeLoad && this.naturalSizeLoad({ width, height })
     }
   }
 }

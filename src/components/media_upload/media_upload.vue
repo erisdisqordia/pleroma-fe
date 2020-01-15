@@ -1,22 +1,53 @@
 <template>
-  <div class="media-upload" @drop.prevent @dragover.prevent="fileDrag" @drop="fileDrop">
-    <label class="btn btn-default" :title="$t('tool_tip.media_upload')">
-      <i class="icon-spin4 animate-spin" v-if="uploading"></i>
-      <i class="icon-upload" v-if="!uploading"></i>
-      <input type="file" v-if="uploadReady" @change="change" style="position: fixed; top: -100em" multiple="true"></input>
+  <div
+    class="media-upload"
+    @drop.prevent
+    @dragover.prevent="fileDrag"
+    @drop="fileDrop"
+  >
+    <label
+      class="label"
+      :title="$t('tool_tip.media_upload')"
+    >
+      <i
+        v-if="uploading"
+        class="progress-icon icon-spin4 animate-spin"
+      />
+      <i
+        v-if="!uploading"
+        class="new-icon icon-upload"
+      />
+      <input
+        v-if="uploadReady"
+        type="file"
+        style="position: fixed; top: -100em"
+        multiple="true"
+        @change="change"
+      >
     </label>
   </div>
 </template>
 
 <script src="./media_upload.js" ></script>
 
-<style>
- .media-upload {
-     font-size: 26px;
-     flex: 1;
- }
+<style lang="scss">
+.media-upload {
+  .label {
+    display: inline-block;
+  }
 
- .icon-upload {
-     cursor: pointer;
- }
-</style>
+  .new-icon {
+    cursor: pointer;
+  }
+
+  .progress-icon {
+    display: inline-block;
+    line-height: 0;
+    &::before {
+      /* Overriding fontello to achieve the perfect speeeen */
+      margin: 0;
+      line-height: 0;
+    }
+  }
+}
+ </style>

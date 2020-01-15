@@ -1,4 +1,4 @@
-import { parseStatus, parseUser, parseNotification } from '../../../../../src/services/entity_normalizer/entity_normalizer.service.js'
+import { parseStatus, parseUser, parseNotification, addEmojis } from '../../../../../src/services/entity_normalizer/entity_normalizer.service.js'
 import mastoapidata from '../../../../fixtures/mastoapi.json'
 import qvitterapidata from '../../../../fixtures/statuses.json'
 
@@ -129,7 +129,10 @@ const makeMockStatusMasto = (overrides = {}) => {
     tags: [],
     uri: 'https://shigusegubu.club/objects/16033fbb-97c0-4f0e-b834-7abb92fb8639',
     url: 'https://shigusegubu.club/objects/16033fbb-97c0-4f0e-b834-7abb92fb8639',
-    visibility: 'public'
+    visibility: 'public',
+    pleroma: {
+      local: true
+    }
   }, overrides)
 }
 
@@ -143,11 +146,22 @@ const makeMockNotificationQvitter = (overrides = {}) => {
   }, overrides)
 }
 
-parseNotification
-parseUser
-parseStatus
-makeMockStatusQvitter
-makeMockUserQvitter
+const makeMockEmojiMasto = (overrides = [{}]) => {
+  return [
+    Object.assign({
+      shortcode: 'image',
+      static_url: 'https://example.com/image.png',
+      url: 'https://example.com/image.png',
+      visible_in_picker: false
+    }, overrides[0]),
+    Object.assign({
+      shortcode: 'thinking',
+      static_url: 'https://example.com/think.png',
+      url: 'https://example.com/think.png',
+      visible_in_picker: false
+    }, overrides[1])
+  ]
+}
 
 describe('API Entities normalizer', () => {
   describe('parseStatus', () => {
@@ -186,15 +200,15 @@ describe('API Entities normalizer', () => {
       })
 
       it('sets nsfw for statuses with the #nsfw tag', () => {
-        const safe = makeMockStatusQvitter({id: '1', text: 'Hello oniichan'})
-        const nsfw = makeMockStatusQvitter({id: '1', text: 'Hello oniichan #nsfw'})
+        const safe = makeMockStatusQvitter({ id: '1', text: 'Hello oniichan' })
+        const nsfw = makeMockStatusQvitter({ id: '1', text: 'Hello oniichan #nsfw' })
 
         expect(parseStatus(safe).nsfw).to.eq(false)
         expect(parseStatus(nsfw).nsfw).to.eq(true)
       })
 
       it('leaves existing nsfw settings alone', () => {
-        const nsfw = makeMockStatusQvitter({id: '1', text: 'Hello oniichan #nsfw', nsfw: false})
+        const nsfw = makeMockStatusQvitter({ id: '1', text: 'Hello oniichan #nsfw', nsfw: false })
 
         expect(parseStatus(nsfw).nsfw).to.eq(false)
       })
@@ -218,6 +232,22 @@ describe('API Entities normalizer', () => {
         expect(parsedRepeat).to.have.property('retweeted_status')
         expect(parsedRepeat).to.have.deep.property('retweeted_status.id', 'deadbeef')
       })
+
+      it('adds emojis to post content', () => {
+        const post = makeMockStatusMasto({ emojis: makeMockEmojiMasto(), content: 'Makes you think :thinking:' })
+
+        const parsedPost = parseStatus(post)
+
+        expect(parsedPost).to.have.property('statusnet_html').that.contains('<img')
+      })
+
+      it('adds emojis to subject line', () => {
+        const post = makeMockStatusMasto({ emojis: makeMockEmojiMasto(), spoiler_text: 'CW: 300 IQ :thinking:' })
+
+        const parsedPost = parseStatus(post)
+
+        expect(parsedPost).to.have.property('summary_html').that.contains('<img')
+      })
     })
   })
 
@@ -229,6 +259,44 @@ describe('API Entities normalizer', () => {
 
       expect(parseUser(local)).to.have.property('is_local', true)
       expect(parseUser(remote)).to.have.property('is_local', false)
+    })
+
+    it('adds emojis to user name', () => {
+      const user = makeMockUserMasto({ emojis: makeMockEmojiMasto(), display_name: 'The :thinking: thinker' })
+
+      const parsedUser = parseUser(user)
+
+      expect(parsedUser).to.have.property('name_html').that.contains('<img')
+    })
+
+    it('adds emojis to user bio', () => {
+      const user = makeMockUserMasto({ emojis: makeMockEmojiMasto(), note: 'Hello i like to :thinking: a lot' })
+
+      const parsedUser = parseUser(user)
+
+      expect(parsedUser).to.have.property('description_html').that.contains('<img')
+    })
+
+    it('adds emojis to user profile fields', () => {
+      const user = makeMockUserMasto({ emojis: makeMockEmojiMasto(), fields: [{ name: ':thinking:', value: ':image:' }] })
+
+      const parsedUser = parseUser(user)
+
+      expect(parsedUser).to.have.property('fields_html').to.be.an('array')
+
+      const field = parsedUser.fields_html[0]
+
+      expect(field).to.have.property('name').that.contains('<img')
+      expect(field).to.have.property('value').that.contains('<img')
+    })
+
+    it('adds hide_follows and hide_followers user settings', () => {
+      const user = makeMockUserMasto({ pleroma: { hide_followers: true, hide_follows: false, hide_followers_count: false, hide_follows_count: true } })
+
+      expect(parseUser(user)).to.have.property('hide_followers', true)
+      expect(parseUser(user)).to.have.property('hide_follows', false)
+      expect(parseUser(user)).to.have.property('hide_followers_count', false)
+      expect(parseUser(user)).to.have.property('hide_follows_count', true)
     })
   })
 
@@ -265,6 +333,41 @@ describe('API Entities normalizer', () => {
       expect(parseNotification(notif)).to.have.deep.property('status.id', '4412')
       expect(parseNotification(notif)).to.have.deep.property('action.id', '444')
       expect(parseNotification(notif)).to.have.deep.property('from_profile.id', 'spurdo')
+    })
+  })
+
+  describe('MastoAPI emoji adder', () => {
+    const emojis = makeMockEmojiMasto()
+    const imageHtml = '<img src="https://example.com/image.png" alt="image" title="image" class="emoji" />'
+      .replace(/"/g, '\'')
+    const thinkHtml = '<img src="https://example.com/think.png" alt="thinking" title="thinking" class="emoji" />'
+      .replace(/"/g, '\'')
+
+    it('correctly replaces shortcodes in supplied string', () => {
+      const result = addEmojis('This post has :image: emoji and :thinking: emoji', emojis)
+      expect(result).to.include(thinkHtml)
+      expect(result).to.include(imageHtml)
+    })
+
+    it('handles consecutive emojis correctly', () => {
+      const result = addEmojis('Lelel emoji spam :thinking::thinking::thinking::thinking:', emojis)
+      expect(result).to.include(thinkHtml + thinkHtml + thinkHtml + thinkHtml)
+    })
+
+    it('Doesn\'t replace nonexistent emojis', () => {
+      const result = addEmojis('Admin add the :tenshi: emoji', emojis)
+      expect(result).to.equal('Admin add the :tenshi: emoji')
+    })
+
+    it('Doesn\'t blow up on regex special characters', () => {
+      const emojis = makeMockEmojiMasto([{
+        shortcode: 'c++'
+      }, {
+        shortcode: '[a-z] {|}*'
+      }])
+      const result = addEmojis('This post has :c++: emoji and :[a-z] {|}*: emoji', emojis)
+      expect(result).to.include('title=\'c++\'')
+      expect(result).to.include('title=\'[a-z] {|}*\'')
     })
   })
 })

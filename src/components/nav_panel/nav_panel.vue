@@ -2,37 +2,45 @@
   <div class="nav-panel">
     <div class="panel panel-default">
       <ul>
-        <li v-if='currentUser'>
+        <li v-if="currentUser">
           <router-link :to="{ name: 'friends' }">
-            {{ $t("nav.timeline") }}
+            <i class="button-icon icon-home-2" /> {{ $t("nav.timeline") }}
           </router-link>
         </li>
-        <li v-if='currentUser'>
-          <router-link :to="{ name: 'mentions', params: { username: currentUser.screen_name } }">
-            {{ $t("nav.mentions") }}
+        <li v-if="currentUser">
+          <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
+            <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
           </router-link>
         </li>
-        <li v-if='currentUser'>
+        <li v-if="currentUser">
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
-            {{ $t("nav.dms") }}
+            <i class="button-icon icon-mail-alt" /> {{ $t("nav.dms") }}
           </router-link>
         </li>
-        <li v-if='currentUser && currentUser.locked'>
+        <li v-if="currentUser && currentUser.locked">
           <router-link :to="{ name: 'friend-requests' }">
-            {{ $t("nav.friend_requests")}}
-            <span v-if='followRequestCount > 0' class="badge follow-request-count">
-              {{followRequestCount}}
+            <i class="button-icon icon-user-plus" /> {{ $t("nav.friend_requests") }}
+            <span
+              v-if="followRequestCount > 0"
+              class="badge follow-request-count"
+            >
+              {{ followRequestCount }}
             </span>
           </router-link>
         </li>
-        <li>
+        <li v-if="currentUser || !privateMode">
           <router-link :to="{ name: 'public-timeline' }">
-            {{ $t("nav.public_tl") }}
+            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
+          </router-link>
+        </li>
+        <li v-if="federating && !privateMode">
+          <router-link :to="{ name: 'public-external-timeline' }">
+            <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
           </router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'public-external-timeline' }">
-            {{ $t("nav.twkn") }}
+          <router-link :to="{ name: 'about' }">
+            <i class="button-icon icon-info-circled" /> {{ $t("nav.about") }}
           </router-link>
         </li>
       </ul>
@@ -104,5 +112,9 @@
       text-decoration: underline;
     }
   }
+}
+
+.nav-panel .button-icon:before {
+  width: 1.1em;
 }
 </style>

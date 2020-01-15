@@ -1,9 +1,20 @@
 @import '../../_variables.scss';
 
 .tab-switcher {
+  display: flex;
+  flex-direction: column;
+
   .contents {
+    flex: 1 0 auto;
+    min-height: 0px;
+
     .hidden {
       display: none;
+    }
+
+    &.scrollable-tabs {
+      flex-basis: 0;
+      overflow-y: auto;
     }
   }
   .tabs {
@@ -52,6 +63,12 @@
         &.active {
           background: transparent;
           z-index: 5;
+        }
+
+        img {
+          max-height: 26px;
+          vertical-align: top;
+          margin-top: -5px;
         }
       }
 

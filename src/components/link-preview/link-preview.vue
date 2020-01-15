@@ -1,13 +1,25 @@
 <template>
   <div>
-    <a class="link-preview-card" :href="card.url" target="_blank" rel="noopener">
-      <div class="card-image" :class="{ 'small-image': size === 'small' }" v-if="useImage">
-        <img :src="card.image"></img>
+    <a
+      class="link-preview-card"
+      :href="card.url"
+      target="_blank"
+      rel="noopener"
+    >
+      <div
+        v-if="useImage && imageLoaded"
+        class="card-image"
+        :class="{ 'small-image': size === 'small' }"
+      >
+        <img :src="card.image">
       </div>
       <div class="card-content">
         <span class="card-host faint">{{ card.provider_name }}</span>
         <h4 class="card-title">{{ card.title }}</h4>
-        <p class="card-description" v-if="useDescription">{{ card.description }}</p>
+        <p
+          v-if="useDescription"
+          class="card-description"
+        >{{ card.description }}</p>
       </div>
     </a>
   </div>

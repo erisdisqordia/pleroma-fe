@@ -1,34 +1,27 @@
 <template>
   <basic-user-card :user="user">
     <div class="follow-card-content-container">
-      <span class="faint" v-if="!noFollowsYou && user.follows_you">
+      <span
+        v-if="!noFollowsYou && user.follows_you"
+        class="faint"
+      >
         {{ isMe ? $t('user_card.its_you') : $t('user_card.follows_you') }}
       </span>
-      <button
-        v-if="showFollow"
-        class="btn btn-default"
-        @click="followUser"
-        :disabled="inProgress"
-        :title="requestSent ? $t('user_card.follow_again') : ''"
-      >
-        <template v-if="inProgress">
-          {{ $t('user_card.follow_progress') }}
-        </template>
-        <template v-else-if="requestSent">
-          {{ $t('user_card.follow_sent') }}
-        </template>
-        <template v-else>
-          {{ $t('user_card.follow') }}
-        </template>
-      </button>
-      <button v-if="following" class="btn btn-default pressed" @click="unfollowUser" :disabled="inProgress">
-        <template v-if="inProgress">
-          {{ $t('user_card.follow_progress') }}
-        </template>
-        <template v-else>
-          {{ $t('user_card.follow_unfollow') }}
-        </template>
-      </button>
+      <template v-if="!loggedIn">
+        <div
+          v-if="!user.following"
+          class="follow-card-follow-button"
+        >
+          <RemoteFollow :user="user" />
+        </div>
+      </template>
+      <template v-else>
+        <FollowButton
+          :user="user"
+          class="follow-card-follow-button"
+          :label-following="$t('user_card.follow_unfollow')"
+        />
+      </template>
     </div>
   </basic-user-card>
 </template>
@@ -36,15 +29,17 @@
 <script src="./follow_card.js"></script>
 
 <style lang="scss">
-.follow-card-content-container {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  line-height: 1.5em;
+.follow-card {
+  &-content-container {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    line-height: 1.5em;
+  }
 
-  .btn {
+  &-follow-button {
     margin-top: 0.5em;
     margin-left: auto;
     width: 10em;

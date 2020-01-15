@@ -28,13 +28,16 @@ const registration = {
   },
   created () {
     if ((!this.registrationOpen && !this.token) || this.signedIn) {
-      this.$router.push({name: 'root'})
+      this.$router.push({ name: 'root' })
     }
 
     this.setCaptcha()
   },
   computed: {
     token () { return this.$route.params.token },
+    bioPlaceholder () {
+      return this.$t('registration.bio_placeholder').replace(/\s*\n\s*/g, ' \n')
+    },
     ...mapState({
       registrationOpen: (state) => state.instance.registrationOpen,
       signedIn: (state) => !!state.users.currentUser,
@@ -58,9 +61,10 @@ const registration = {
       if (!this.$v.$invalid) {
         try {
           await this.signUp(this.user)
-          this.$router.push({name: 'friends'})
+          this.$router.push({ name: 'friends' })
         } catch (error) {
-          console.warn('Registration failed: ' + error)
+          console.warn('Registration failed: ', error)
+          this.setCaptcha()
         }
       }
     },

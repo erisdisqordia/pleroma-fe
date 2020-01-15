@@ -1,11 +1,20 @@
 <template>
   <div v-if="loggedIn">
-    <i :class='classes' class='button-icon favorite-button fav-active' @click.prevent='favorite()' :title="$t('tool_tip.favorite')"/>
-    <span v-if='!hidePostStatsLocal && status.fave_num > 0'>{{status.fave_num}}</span>
+    <i
+      :class="classes"
+      class="button-icon favorite-button fav-active"
+      :title="$t('tool_tip.favorite')"
+      @click.prevent="favorite()"
+    />
+    <span v-if="!mergedConfig.hidePostStats && status.fave_num > 0">{{ status.fave_num }}</span>
   </div>
   <div v-else>
-    <i :class='classes' class='button-icon favorite-button' :title="$t('tool_tip.favorite')"/>
-    <span v-if='!hidePostStatsLocal && status.fave_num > 0'>{{status.fave_num}}</span>
+    <i
+      :class="classes"
+      class="button-icon favorite-button"
+      :title="$t('tool_tip.favorite')"
+    />
+    <span v-if="!mergedConfig.hidePostStats && status.fave_num > 0">{{ status.fave_num }}</span>
   </div>
 </template>
 

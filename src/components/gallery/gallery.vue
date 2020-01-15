@@ -1,14 +1,27 @@
 <template>
-  <div ref="galleryContainer" style="width: 100%;">
-    <div class="gallery-row" v-for="row in rows" :style="rowHeight(row.length)" :class="{ 'contain-fit': useContainFit, 'cover-fit': !useContainFit }">
-      <attachment
-        v-for="attachment in row"
-        :setMedia="setMedia"
-        :nsfw="nsfw"
-        :attachment="attachment"
-        :allowPlay="false"
-        :key="attachment.id"
-      />
+  <div
+    ref="galleryContainer"
+    style="width: 100%;"
+  >
+    <div
+      v-for="(row, index) in rows"
+      :key="index"
+      class="gallery-row"
+      :style="rowStyle(row.length)"
+      :class="{ 'contain-fit': useContainFit, 'cover-fit': !useContainFit }"
+    >
+      <div class="gallery-row-inner">
+        <attachment
+          v-for="attachment in row"
+          :key="attachment.id"
+          :set-media="setMedia"
+          :nsfw="nsfw"
+          :attachment="attachment"
+          :allow-play="false"
+          :natural-size-load="onNaturalSizeLoad.bind(null, attachment.id)"
+          :style="itemStyle(attachment.id, row)"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -19,16 +32,27 @@
 @import '../../_variables.scss';
 
 .gallery-row {
-  height: 200px;
+  position: relative;
+  height: 0;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: stretch;
   flex-grow: 1;
   margin-top: 0.5em;
 
-  .attachments, .attachment {
+  .gallery-row-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+  }
+
+  // FIXME: specificity problem with this and .attachments.attachment
+  // we shouldn't have the need for .image here
+  .attachment.image {
     margin: 0 0.5em 0 0;
     flex-grow: 1;
     height: 100%;
@@ -50,13 +74,17 @@
   }
 
   &.contain-fit {
-    img, video {
+    img,
+    video,
+    canvas {
       object-fit: contain;
     }
   }
 
   &.cover-fit {
-    img, video {
+    img,
+    video,
+    canvas {
       object-fit: cover;
     }
   }

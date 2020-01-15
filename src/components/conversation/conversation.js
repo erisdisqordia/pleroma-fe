@@ -1,9 +1,11 @@
-import { reduce, filter } from 'lodash'
+import { reduce, filter, findIndex, clone, get } from 'lodash'
 import Status from '../status/status.vue'
 
 const sortById = (a, b) => {
-  const seqA = Number(a.id)
-  const seqB = Number(b.id)
+  const idA = a.type === 'retweet' ? a.retweeted_status.id : a.id
+  const idB = b.type === 'retweet' ? b.retweeted_status.id : b.id
+  const seqA = Number(idA)
+  const seqB = Number(idB)
   const isSeqA = !Number.isNaN(seqA)
   const isSeqB = !Number.isNaN(seqB)
   if (isSeqA && isSeqB) {
@@ -13,49 +15,77 @@ const sortById = (a, b) => {
   } else if (!isSeqA && isSeqB) {
     return 1
   } else {
-    return a.id < b.id ? -1 : 1
+    return idA < idB ? -1 : 1
   }
 }
 
-const sortAndFilterConversation = (conversation) => {
-  conversation = filter(conversation, (status) => status.type !== 'retweet')
+const sortAndFilterConversation = (conversation, statusoid) => {
+  if (statusoid.type === 'retweet') {
+    conversation = filter(
+      conversation,
+      (status) => (status.type === 'retweet' || status.id !== statusoid.retweeted_status.id)
+    )
+  } else {
+    conversation = filter(conversation, (status) => status.type !== 'retweet')
+  }
   return conversation.filter(_ => _).sort(sortById)
 }
 
 const conversation = {
   data () {
     return {
-      highlight: null
+      highlight: null,
+      expanded: false
     }
   },
   props: [
-    'statusoid',
-    'collapsable'
+    'statusId',
+    'collapsable',
+    'isPage',
+    'pinnedStatusIdsObject',
+    'inProfile',
+    'profileUserId'
   ],
+  created () {
+    if (this.isPage) {
+      this.fetchConversation()
+    }
+  },
   computed: {
     status () {
-      return this.statusoid
+      return this.$store.state.statuses.allStatusesObject[this.statusId]
     },
-    statusId () {
-      if (this.statusoid.retweeted_status) {
-        return this.statusoid.retweeted_status.id
+    originalStatusId () {
+      if (this.status.retweeted_status) {
+        return this.status.retweeted_status.id
       } else {
-        return this.statusoid.id
+        return this.statusId
       }
+    },
+    conversationId () {
+      return this.getConversationId(this.statusId)
     },
     conversation () {
       if (!this.status) {
         return []
       }
 
-      const conversationId = this.status.statusnet_conversation_id
-      const statuses = this.$store.state.statuses.allStatuses
-      const conversation = filter(statuses, { statusnet_conversation_id: conversationId })
-      return sortAndFilterConversation(conversation)
+      if (!this.isExpanded) {
+        return [this.status]
+      }
+
+      const conversation = clone(this.$store.state.statuses.conversationsObject[this.conversationId])
+      const statusIndex = findIndex(conversation, { id: this.originalStatusId })
+      if (statusIndex !== -1) {
+        conversation[statusIndex] = this.status
+      }
+
+      return sortAndFilterConversation(conversation, this.status)
     },
     replies () {
       let i = 1
-      return reduce(this.conversation, (result, {id, in_reply_to_status_id}) => {
+      // eslint-disable-next-line camelcase
+      return reduce(this.conversation, (result, { id, in_reply_to_status_id }) => {
         /* eslint-disable camelcase */
         const irid = in_reply_to_status_id
         /* eslint-enable camelcase */
@@ -69,39 +99,67 @@ const conversation = {
         i++
         return result
       }, {})
+    },
+    isExpanded () {
+      return this.expanded || this.isPage
     }
   },
   components: {
     Status
   },
-  created () {
-    this.fetchConversation()
-  },
   watch: {
-    '$route': 'fetchConversation'
+    statusId (newVal, oldVal) {
+      const newConversationId = this.getConversationId(newVal)
+      const oldConversationId = this.getConversationId(oldVal)
+      if (newConversationId && oldConversationId && newConversationId === oldConversationId) {
+        this.setHighlight(this.originalStatusId)
+      } else {
+        this.fetchConversation()
+      }
+    },
+    expanded (value) {
+      if (value) {
+        this.fetchConversation()
+      }
+    }
   },
   methods: {
     fetchConversation () {
       if (this.status) {
-        const conversationId = this.status.statusnet_conversation_id
-        this.$store.state.api.backendInteractor.fetchConversation({id: conversationId})
-          .then((statuses) => this.$store.dispatch('addNewStatuses', { statuses }))
-          .then(() => this.setHighlight(this.statusId))
+        this.$store.state.api.backendInteractor.fetchConversation({ id: this.statusId })
+          .then(({ ancestors, descendants }) => {
+            this.$store.dispatch('addNewStatuses', { statuses: ancestors })
+            this.$store.dispatch('addNewStatuses', { statuses: descendants })
+            this.setHighlight(this.originalStatusId)
+          })
       } else {
-        const id = this.$route.params.id
-        this.$store.state.api.backendInteractor.fetchStatus({id})
-          .then((status) => this.$store.dispatch('addNewStatuses', { statuses: [status] }))
-          .then(() => this.fetchConversation())
+        this.$store.state.api.backendInteractor.fetchStatus({ id: this.statusId })
+          .then((status) => {
+            this.$store.dispatch('addNewStatuses', { statuses: [status] })
+            this.fetchConversation()
+          })
       }
     },
     getReplies (id) {
       return this.replies[id] || []
     },
     focused (id) {
-      return id === this.statusId
+      return (this.isExpanded) && id === this.statusId
     },
     setHighlight (id) {
+      if (!id) return
       this.highlight = id
+      this.$store.dispatch('fetchFavsAndRepeats', id)
+    },
+    getHighlight () {
+      return this.isExpanded ? this.highlight : null
+    },
+    toggleExpanded () {
+      this.expanded = !this.expanded
+    },
+    getConversationId (statusId) {
+      const status = this.$store.state.statuses.allStatusesObject[statusId]
+      return get(status, 'retweeted_status.statusnet_conversation_id', get(status, 'statusnet_conversation_id'))
     }
   }
 }

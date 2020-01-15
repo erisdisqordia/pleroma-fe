@@ -31,6 +31,9 @@ const ImageCropper = {
     saveButtonLabel: {
       type: String
     },
+    saveWithoutCroppingButtonlabel: {
+      type: String
+    },
     cancelButtonLabel: {
       type: String
     }
@@ -48,6 +51,9 @@ const ImageCropper = {
     saveText () {
       return this.saveButtonLabel || this.$t('image_cropper.save')
     },
+    saveWithoutCroppingText () {
+      return this.saveWithoutCroppingButtonlabel || this.$t('image_cropper.save_without_cropping')
+    },
     cancelText () {
       return this.cancelButtonLabel || this.$t('image_cropper.cancel')
     },
@@ -64,10 +70,10 @@ const ImageCropper = {
       this.dataUrl = undefined
       this.$emit('close')
     },
-    submit () {
+    submit (cropping = true) {
       this.submitting = true
       this.avatarUploadError = null
-      this.submitHandler(this.cropper, this.file)
+      this.submitHandler(cropping && this.cropper, this.file)
         .then(() => this.destroy())
         .catch((err) => {
           this.submitError = err

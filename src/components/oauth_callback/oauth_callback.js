@@ -4,14 +4,17 @@ const oac = {
   props: ['code'],
   mounted () {
     if (this.code) {
+      const { clientId, clientSecret } = this.$store.state.oauth
+
       oauth.getToken({
-        app: this.$store.state.oauth,
+        clientId,
+        clientSecret,
         instance: this.$store.state.instance.server,
         code: this.code
       }).then((result) => {
         this.$store.commit('setToken', result.access_token)
         this.$store.dispatch('loginUser', result.access_token)
-        this.$router.push({name: 'friends'})
+        this.$router.push({ name: 'friends' })
       })
     }
   }

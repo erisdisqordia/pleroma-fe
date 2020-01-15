@@ -1,8 +1,10 @@
 @import '../../_variables.scss';
 
 .notifications {
-  // a bit of a hack to allow scrolling below notifications
-  padding-bottom: 15em;
+  &:not(.minimal) {
+    // a bit of a hack to allow scrolling below notifications
+    padding-bottom: 15em;
+  }
 
   .loadmore-error {
     color: $fallback--text;
@@ -31,7 +33,6 @@
 
 .notification {
   box-sizing: border-box;
-  display: flex;
   border-bottom: 1px solid;
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
@@ -43,6 +44,10 @@
     img {
       visibility: visible;
     }
+  }
+
+  .muted {
+    padding: .25em .6em;
   }
 
   .non-mention {
@@ -71,7 +76,7 @@
     }
   }
 
-  .follow-text {
+  .follow-text, .move-text {
     padding: 0.5em 0;
   }
 
@@ -144,6 +149,11 @@
       color: orange;
       color: $fallback--cOrange;
       color: var(--cOrange, $fallback--cOrange);
+    }
+
+    .icon-arrow-curved.lit {
+      color: $fallback--cBlue;
+      color: var(--cBlue, $fallback--cBlue);
     }
 
     .status-content {

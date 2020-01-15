@@ -1,16 +1,22 @@
 import statusPoster from '../../services/status_poster/status_poster.service.js'
 import MediaUpload from '../media_upload/media_upload.vue'
+import ScopeSelector from '../scope_selector/scope_selector.vue'
+import EmojiInput from '../emoji_input/emoji_input.vue'
+import PollForm from '../poll/poll_form.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
-import Completion from '../../services/completion/completion.js'
-import { take, filter, reject, map, uniqBy } from 'lodash'
+import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
+import { reject, map, uniqBy } from 'lodash'
+import suggestor from '../emoji_input/suggestor.js'
+import { mapGetters } from 'vuex'
+import Checkbox from '../checkbox/checkbox.vue'
 
-const buildMentionsString = ({user, attentions}, currentUser) => {
+const buildMentionsString = ({ user, attentions = [] }, currentUser) => {
   let allAttentions = [...attentions]
 
   allAttentions.unshift(user)
 
   allAttentions = uniqBy(allAttentions, 'id')
-  allAttentions = reject(allAttentions, {id: currentUser.id})
+  allAttentions = reject(allAttentions, { id: currentUser.id })
 
   let mentions = map(allAttentions, (attention) => {
     return `@${attention.screen_name}`
@@ -28,7 +34,11 @@ const PostStatusForm = {
     'subject'
   ],
   components: {
-    MediaUpload
+    MediaUpload,
+    EmojiInput,
+    PollForm,
+    ScopeSelector,
+    Checkbox
   },
   mounted () {
     this.resize(this.$refs.textarea)
@@ -43,22 +53,18 @@ const PostStatusForm = {
     const preset = this.$route.query.message
     let statusText = preset || ''
 
-    const scopeCopy = typeof this.$store.state.config.scopeCopy === 'undefined'
-          ? this.$store.state.instance.scopeCopy
-          : this.$store.state.config.scopeCopy
+    const { scopeCopy } = this.$store.getters.mergedConfig
 
     if (this.replyTo) {
       const currentUser = this.$store.state.users.currentUser
       statusText = buildMentionsString({ user: this.repliedUser, attentions: this.attentions }, currentUser)
     }
 
-    const scope = (this.copyMessageScope && scopeCopy || this.copyMessageScope === 'direct')
-          ? this.copyMessageScope
-          : this.$store.state.users.currentUser.default_scope
+    const scope = ((this.copyMessageScope && scopeCopy) || this.copyMessageScope === 'direct')
+      ? this.copyMessageScope
+      : this.$store.state.users.currentUser.default_scope
 
-    const contentType = typeof this.$store.state.config.postContentType === 'undefined'
-      ? this.$store.state.instance.postContentType
-      : this.$store.state.config.postContentType
+    const { postContentType: contentType } = this.$store.getters.mergedConfig
 
     return {
       dropFiles: [],
@@ -71,67 +77,41 @@ const PostStatusForm = {
         status: statusText,
         nsfw: false,
         files: [],
+        poll: {},
         visibility: scope,
         contentType
       },
-      caret: 0
+      caret: 0,
+      pollFormVisible: false
     }
   },
   computed: {
-    vis () {
-      return {
-        public: { selected: this.newStatus.visibility === 'public' },
-        unlisted: { selected: this.newStatus.visibility === 'unlisted' },
-        private: { selected: this.newStatus.visibility === 'private' },
-        direct: { selected: this.newStatus.visibility === 'direct' }
-      }
-    },
-    candidates () {
-      const firstchar = this.textAtCaret.charAt(0)
-      if (firstchar === '@') {
-        const query = this.textAtCaret.slice(1).toUpperCase()
-        const matchedUsers = filter(this.users, (user) => {
-          return user.screen_name.toUpperCase().startsWith(query) ||
-            user.name && user.name.toUpperCase().startsWith(query)
-        })
-        if (matchedUsers.length <= 0) {
-          return false
-        }
-        // eslint-disable-next-line camelcase
-        return map(take(matchedUsers, 5), ({screen_name, name, profile_image_url_original}, index) => ({
-          // eslint-disable-next-line camelcase
-          screen_name: `@${screen_name}`,
-          name: name,
-          img: profile_image_url_original,
-          highlighted: index === this.highlighted
-        }))
-      } else if (firstchar === ':') {
-        if (this.textAtCaret === ':') { return }
-        const matchedEmoji = filter(this.emoji.concat(this.customEmoji), (emoji) => emoji.shortcode.startsWith(this.textAtCaret.slice(1)))
-        if (matchedEmoji.length <= 0) {
-          return false
-        }
-        return map(take(matchedEmoji, 5), ({shortcode, image_url, utf}, index) => ({
-          screen_name: `:${shortcode}:`,
-          name: '',
-          utf: utf || '',
-          // eslint-disable-next-line camelcase
-          img: utf ? '' : this.$store.state.instance.server + image_url,
-          highlighted: index === this.highlighted
-        }))
-      } else {
-        return false
-      }
-    },
-    textAtCaret () {
-      return (this.wordAtCaret || {}).word || ''
-    },
-    wordAtCaret () {
-      const word = Completion.wordAtPosition(this.newStatus.status, this.caret - 1) || {}
-      return word
-    },
     users () {
       return this.$store.state.users.users
+    },
+    userDefaultScope () {
+      return this.$store.state.users.currentUser.default_scope
+    },
+    showAllScopes () {
+      return !this.mergedConfig.minimalScopesMode
+    },
+    emojiUserSuggestor () {
+      return suggestor({
+        emoji: [
+          ...this.$store.state.instance.emoji,
+          ...this.$store.state.instance.customEmoji
+        ],
+        users: this.$store.state.users.users,
+        updateUsersList: (input) => this.$store.dispatch('searchUsers', input)
+      })
+    },
+    emojiSuggestor () {
+      return suggestor({
+        emoji: [
+          ...this.$store.state.instance.emoji,
+          ...this.$store.state.instance.customEmoji
+        ]
+      })
     },
     emoji () {
       return this.$store.state.instance.emoji || []
@@ -157,88 +137,48 @@ const PostStatusForm = {
     isOverLengthLimit () {
       return this.hasStatusLengthLimit && (this.charactersLeft < 0)
     },
-    scopeOptionsEnabled () {
-      return this.$store.state.instance.scopeOptionsEnabled
+    minimalScopesMode () {
+      return this.$store.state.instance.minimalScopesMode
     },
     alwaysShowSubject () {
-      if (typeof this.$store.state.config.alwaysShowSubjectInput !== 'undefined') {
-        return this.$store.state.config.alwaysShowSubjectInput
-      } else if (typeof this.$store.state.instance.alwaysShowSubjectInput !== 'undefined') {
-        return this.$store.state.instance.alwaysShowSubjectInput
-      } else {
-        return this.$store.state.instance.scopeOptionsEnabled
-      }
-    },
-    formattingOptionsEnabled () {
-      return this.$store.state.instance.formattingOptionsEnabled
+      return this.mergedConfig.alwaysShowSubjectInput
     },
     postFormats () {
       return this.$store.state.instance.postFormats || []
-    }
+    },
+    safeDMEnabled () {
+      return this.$store.state.instance.safeDM
+    },
+    pollsAvailable () {
+      return this.$store.state.instance.pollsAvailable &&
+        this.$store.state.instance.pollLimits.max_options >= 2
+    },
+    hideScopeNotice () {
+      return this.$store.getters.mergedConfig.hideScopeNotice
+    },
+    pollContentError () {
+      return this.pollFormVisible &&
+        this.newStatus.poll &&
+        this.newStatus.poll.error
+    },
+    ...mapGetters(['mergedConfig'])
   },
   methods: {
-    replace (replacement) {
-      this.newStatus.status = Completion.replaceWord(this.newStatus.status, this.wordAtCaret, replacement)
-      const el = this.$el.querySelector('textarea')
-      el.focus()
-      this.caret = 0
-    },
-    replaceCandidate (e) {
-      const len = this.candidates.length || 0
-      if (this.textAtCaret === ':' || e.ctrlKey) { return }
-      if (len > 0) {
-        e.preventDefault()
-        const candidate = this.candidates[this.highlighted]
-        const replacement = candidate.utf || (candidate.screen_name + ' ')
-        this.newStatus.status = Completion.replaceWord(this.newStatus.status, this.wordAtCaret, replacement)
-        const el = this.$el.querySelector('textarea')
-        el.focus()
-        this.caret = 0
-        this.highlighted = 0
-      }
-    },
-    cycleBackward (e) {
-      const len = this.candidates.length || 0
-      if (len > 0) {
-        e.preventDefault()
-        this.highlighted -= 1
-        if (this.highlighted < 0) {
-          this.highlighted = this.candidates.length - 1
-        }
-      } else {
-        this.highlighted = 0
-      }
-    },
-    cycleForward (e) {
-      const len = this.candidates.length || 0
-      if (len > 0) {
-        if (e.shiftKey) { return }
-        e.preventDefault()
-        this.highlighted += 1
-        if (this.highlighted >= len) {
-          this.highlighted = 0
-        }
-      } else {
-        this.highlighted = 0
-      }
-    },
-    onKeydown (e) {
-      e.stopPropagation()
-    },
-    setCaret ({target: {selectionStart}}) {
-      this.caret = selectionStart
-    },
     postStatus (newStatus) {
       if (this.posting) { return }
       if (this.submitDisabled) { return }
 
       if (this.newStatus.status === '') {
-        if (this.newStatus.files.length > 0) {
-          this.newStatus.status = '\u200b' // hack
-        } else {
+        if (this.newStatus.files.length === 0) {
           this.error = 'Cannot post an empty status with no files'
           return
         }
+      }
+
+      const poll = this.pollFormVisible ? this.newStatus.poll : {}
+      if (this.pollContentError) {
+        this.error = this.pollContentError
+        return
       }
 
       this.posting = true
@@ -250,7 +190,8 @@ const PostStatusForm = {
         media: newStatus.files,
         store: this.$store,
         inReplyToStatusId: this.replyTo,
-        contentType: newStatus.contentType
+        contentType: newStatus.contentType,
+        poll
       }).then((data) => {
         if (!data.error) {
           this.newStatus = {
@@ -258,9 +199,12 @@ const PostStatusForm = {
             spoilerText: '',
             files: [],
             visibility: newStatus.visibility,
-            contentType: newStatus.contentType
+            contentType: newStatus.contentType,
+            poll: {}
           }
+          this.pollFormVisible = false
           this.$refs.mediaUpload.clearFile()
+          this.clearPollForm()
           this.$emit('posted')
           let el = this.$el.querySelector('textarea')
           el.style.height = 'auto'
@@ -295,7 +239,10 @@ const PostStatusForm = {
       return fileTypeService.fileType(fileInfo.mimetype)
     },
     paste (e) {
+      this.resize(e)
       if (e.clipboardData.files.length > 0) {
+        // prevent pasting of file as text
+        e.preventDefault()
         // Strangely, files property gets emptied after event propagation
         // Trying to wrap it in array doesn't work. Plus I doubt it's possible
         // to hold more than one file in clipboard.
@@ -304,30 +251,129 @@ const PostStatusForm = {
     },
     fileDrop (e) {
       if (e.dataTransfer.files.length > 0) {
-        e.preventDefault()  // allow dropping text like before
+        e.preventDefault() // allow dropping text like before
         this.dropFiles = e.dataTransfer.files
       }
     },
     fileDrag (e) {
       e.dataTransfer.dropEffect = 'copy'
     },
+    onEmojiInputInput (e) {
+      this.$nextTick(() => {
+        this.resize(this.$refs['textarea'])
+      })
+    },
     resize (e) {
       const target = e.target || e
       if (!(target instanceof window.Element)) { return }
-      const vertPadding = Number(window.getComputedStyle(target)['padding-top'].substr(0, 1)) +
-            Number(window.getComputedStyle(target)['padding-bottom'].substr(0, 1))
-      // Auto is needed to make textbox shrink when removing lines
-      target.style.height = 'auto'
-      target.style.height = `${target.scrollHeight - vertPadding}px`
+
+      // Reset to default height for empty form, nothing else to do here.
       if (target.value === '') {
         target.style.height = null
+        this.$refs['emoji-input'].resize()
+        return
       }
+
+      const formRef = this.$refs['form']
+      const bottomRef = this.$refs['bottom']
+      /* Scroller is either `window` (replies in TL), sidebar (main post form,
+       * replies in notifs) or mobile post form. Note that getting and setting
+       * scroll is different for `Window` and `Element`s
+       */
+      const bottomBottomPaddingStr = window.getComputedStyle(bottomRef)['padding-bottom']
+      const bottomBottomPadding = Number(bottomBottomPaddingStr.substring(0, bottomBottomPaddingStr.length - 2))
+
+      const scrollerRef = this.$el.closest('.sidebar-scroller') ||
+            this.$el.closest('.post-form-modal-view') ||
+            window
+
+      // Getting info about padding we have to account for, removing 'px' part
+      const topPaddingStr = window.getComputedStyle(target)['padding-top']
+      const bottomPaddingStr = window.getComputedStyle(target)['padding-bottom']
+      const topPadding = Number(topPaddingStr.substring(0, topPaddingStr.length - 2))
+      const bottomPadding = Number(bottomPaddingStr.substring(0, bottomPaddingStr.length - 2))
+      const vertPadding = topPadding + bottomPadding
+
+      /* Explanation:
+       *
+       * https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
+       * scrollHeight returns element's scrollable content height, i.e. visible
+       * element + overscrolled parts of it. We use it to determine when text
+       * inside the textarea exceeded its height, so we can set height to prevent
+       * overscroll, i.e. make textarea grow with the text. HOWEVER, since we
+       * explicitly set new height, scrollHeight won't go below that, so we can't
+       * SHRINK the textarea when there's extra space. To workaround that we set
+       * height to 'auto' which makes textarea tiny again, so that scrollHeight
+       * will match text height again. HOWEVER, shrinking textarea can screw with
+       * the scroll since there might be not enough padding around form-bottom to even
+       * warrant a scroll, so it will jump to 0 and refuse to move anywhere,
+       * so we check current scroll position before shrinking and then restore it
+       * with needed delta.
+       */
+
+      // this part has to be BEFORE the content size update
+      const currentScroll = scrollerRef === window
+        ? scrollerRef.scrollY
+        : scrollerRef.scrollTop
+      const scrollerHeight = scrollerRef === window
+        ? scrollerRef.innerHeight
+        : scrollerRef.offsetHeight
+      const scrollerBottomBorder = currentScroll + scrollerHeight
+
+      // BEGIN content size update
+      target.style.height = 'auto'
+      const newHeight = target.scrollHeight - vertPadding
+      target.style.height = `${newHeight}px`
+      // END content size update
+
+      // We check where the bottom border of form-bottom element is, this uses findOffset
+      // to find offset relative to scrollable container (scroller)
+      const bottomBottomBorder = bottomRef.offsetHeight + findOffset(bottomRef, scrollerRef).top + bottomBottomPadding
+
+      const isBottomObstructed = scrollerBottomBorder < bottomBottomBorder
+      const isFormBiggerThanScroller = scrollerHeight < formRef.offsetHeight
+      const bottomChangeDelta = bottomBottomBorder - scrollerBottomBorder
+      // The intention is basically this;
+      // Keep form-bottom always visible so that submit button is in view EXCEPT
+      // if form element bigger than scroller and caret isn't at the end, so that
+      // if you scroll up and edit middle of text you won't get scrolled back to bottom
+      const shouldScrollToBottom = isBottomObstructed &&
+            !(isFormBiggerThanScroller &&
+              this.$refs.textarea.selectionStart !== this.$refs.textarea.value.length)
+      const totalDelta = shouldScrollToBottom ? bottomChangeDelta : 0
+      const targetScroll = currentScroll + totalDelta
+
+      if (scrollerRef === window) {
+        scrollerRef.scroll(0, targetScroll)
+      } else {
+        scrollerRef.scrollTop = targetScroll
+      }
+
+      this.$refs['emoji-input'].resize()
+    },
+    showEmojiPicker () {
+      this.$refs['textarea'].focus()
+      this.$refs['emoji-input'].triggerShowPicker()
     },
     clearError () {
       this.error = null
     },
     changeVis (visibility) {
       this.newStatus.visibility = visibility
+    },
+    togglePollForm () {
+      this.pollFormVisible = !this.pollFormVisible
+    },
+    setPoll (poll) {
+      this.newStatus.poll = poll
+    },
+    clearPollForm () {
+      if (this.$refs.pollForm) {
+        this.$refs.pollForm.clear()
+      }
+    },
+    dismissScopeNotice () {
+      this.$store.dispatch('setOption', { name: 'hideScopeNotice', value: true })
     }
   }
 }

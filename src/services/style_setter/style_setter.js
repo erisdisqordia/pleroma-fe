@@ -22,7 +22,7 @@ const setStyle = (href, commit) => {
   ***/
   const head = document.head
   const body = document.body
-  body.style.display = 'none'
+  body.classList.add('hidden')
   const cssEl = document.createElement('link')
   cssEl.setAttribute('rel', 'stylesheet')
   cssEl.setAttribute('href', href)
@@ -46,7 +46,7 @@ const setStyle = (href, commit) => {
     head.appendChild(styleEl)
     // const styleSheet = styleEl.sheet
 
-    body.style.display = 'initial'
+    body.classList.remove('hidden')
   }
 
   cssEl.addEventListener('load', setDynamic)
@@ -75,7 +75,7 @@ const applyTheme = (input, commit) => {
   const { rules, theme } = generatePreset(input)
   const head = document.head
   const body = document.body
-  body.style.display = 'none'
+  body.classList.add('hidden')
 
   const styleEl = document.createElement('style')
   head.appendChild(styleEl)
@@ -86,7 +86,7 @@ const applyTheme = (input, commit) => {
   styleSheet.insertRule(`body { ${rules.colors} }`, 'index-max')
   styleSheet.insertRule(`body { ${rules.shadows} }`, 'index-max')
   styleSheet.insertRule(`body { ${rules.fonts} }`, 'index-max')
-  body.style.display = 'initial'
+  body.classList.remove('hidden')
 
   // commit('setOption', { name: 'colors', value: htmlColors })
   // commit('setOption', { name: 'radii', value: radii })
@@ -202,6 +202,7 @@ const generateColors = (input) => {
   colors.topBarLink = col.topBarLink || getTextColor(colors.topBar, colors.fgLink)
 
   colors.faintLink = col.faintLink || Object.assign({}, col.link)
+  colors.linkBg = alphaBlend(colors.link, 0.4, colors.bg)
 
   colors.icon = mixrgb(colors.bg, colors.text)
 
@@ -214,6 +215,10 @@ const generateColors = (input) => {
   colors.alertErrorText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.bg), colors.text)
   colors.alertErrorPanelText = getTextColor(alphaBlend(colors.alertError, opacity.alert, colors.panel), colors.panelText)
 
+  colors.alertWarning = col.alertWarning || Object.assign({}, colors.cOrange)
+  colors.alertWarningText = getTextColor(alphaBlend(colors.alertWarning, opacity.alert, colors.bg), colors.text)
+  colors.alertWarningPanelText = getTextColor(alphaBlend(colors.alertWarning, opacity.alert, colors.panel), colors.panelText)
+
   colors.badgeNotification = col.badgeNotification || Object.assign({}, colors.cRed)
   colors.badgeNotificationText = contrastRatio(colors.badgeNotification).rgb
 
@@ -221,6 +226,7 @@ const generateColors = (input) => {
     if (typeof v === 'undefined') return
     if (k === 'alert') {
       colors.alertError.a = v
+      colors.alertWarning.a = v
       return
     }
     if (k === 'faint') {
@@ -238,12 +244,12 @@ const generateColors = (input) => {
   })
 
   const htmlColors = Object.entries(colors)
-        .reduce((acc, [k, v]) => {
-          if (!v) return acc
-          acc.solid[k] = rgb2hex(v)
-          acc.complete[k] = typeof v.a === 'undefined' ? rgb2hex(v) : rgb2rgba(v)
-          return acc
-        }, { complete: {}, solid: {} })
+    .reduce((acc, [k, v]) => {
+      if (!v) return acc
+      acc.solid[k] = rgb2hex(v)
+      acc.complete[k] = typeof v.a === 'undefined' ? rgb2hex(v) : rgb2rgba(v)
+      return acc
+    }, { complete: {}, solid: {} })
   return {
     rules: {
       colors: Object.entries(htmlColors.complete)

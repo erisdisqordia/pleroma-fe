@@ -1,50 +1,58 @@
 <template>
-  <div class="modal-view media-modal-view" v-if="showing" @click.prevent="hide">
-    <img class="modal-image" v-if="type === 'image'" :src="currentMedia.url"></img>
-    <VideoAttachment
+  <Modal
+    v-if="showing"
+    class="media-modal-view"
+    @backdropClicked="hide"
+  >
+    <img
+      v-if="type === 'image'"
       class="modal-image"
+      :src="currentMedia.url"
+      @touchstart.stop="mediaTouchStart"
+      @touchmove.stop="mediaTouchMove"
+      @click="hide"
+    >
+    <VideoAttachment
       v-if="type === 'video'"
+      class="modal-image"
       :attachment="currentMedia"
       :controls="true"
-      @click.stop.native="">
-    </VideoAttachment>
+    />
     <button
+      v-if="canNavigate"
       :title="$t('media_modal.previous')"
       class="modal-view-button-arrow modal-view-button-arrow--prev"
-      v-if="canNavigate"
       @click.stop.prevent="goPrev"
     >
       <i class="icon-left-open arrow-icon" />
     </button>
     <button
+      v-if="canNavigate"
       :title="$t('media_modal.next')"
       class="modal-view-button-arrow modal-view-button-arrow--next"
-      v-if="canNavigate"
       @click.stop.prevent="goNext"
     >
       <i class="icon-right-open arrow-icon" />
     </button>
-  </div>
+  </Modal>
 </template>
 
 <script src="./media_modal.js"></script>
 
 <style lang="scss">
-@import '../../_variables.scss';
+.modal-view.media-modal-view {
+  z-index: 1001;
 
-.media-modal-view {
-  &:hover {
-    .modal-view-button-arrow {
-      opacity: 0.75;
+  .modal-view-button-arrow {
+    opacity: 0.75;
 
-      &:focus,
-      &:hover {
-        outline: none;
-        box-shadow: none;
-      }
-      &:hover {
-        opacity: 1;
-      }
+    &:focus,
+    &:hover {
+      outline: none;
+      box-shadow: none;
+    }
+    &:hover {
+      opacity: 1;
     }
   }
 }
@@ -53,6 +61,7 @@
   max-width: 90%;
   max-height: 90%;
   box-shadow: 0px 5px 15px 0 rgba(0, 0, 0, 0.5);
+  image-orientation: from-image; // NOTE: only FF supports this
 }
 
 .modal-view-button-arrow {
@@ -98,5 +107,4 @@
     }
   }
 }
-
 </style>

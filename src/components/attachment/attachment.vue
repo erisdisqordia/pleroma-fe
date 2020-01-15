@@ -1,54 +1,107 @@
 <template>
-  <div v-if="usePlaceHolder" @click="openModal">
-    <a class="placeholder"
+  <div
+    v-if="usePlaceHolder"
+    @click="openModal"
+  >
+    <a
       v-if="type !== 'html'"
-      target="_blank" :href="attachment.url"
+      class="placeholder"
+      target="_blank"
+      :href="attachment.url"
     >
-      [{{nsfw ? "NSFW/" : ""}}{{type.toUpperCase()}}]
+      [{{ nsfw ? "NSFW/" : "" }}{{ type.toUpperCase() }}]
     </a>
   </div>
   <div
-    v-else class="attachment"
-    :class="{[type]: true, loading, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}"
+    v-else
     v-show="!isEmpty"
+    class="attachment"
+    :class="{[type]: true, loading, 'fullwidth': fullwidth, 'nsfw-placeholder': hidden}"
   >
-    <a class="image-attachment" v-if="hidden" :href="attachment.url" @click.prevent="toggleHidden">
-      <img class="nsfw" :key="nsfwImage" :src="nsfwImage" :class="{'small': isSmall}"/>
-      <i v-if="type === 'video'" class="play-icon icon-play-circled"></i>
+    <a
+      v-if="hidden"
+      class="image-attachment"
+      :href="attachment.url"
+      @click.prevent="toggleHidden"
+    >
+      <img
+        :key="nsfwImage"
+        class="nsfw"
+        :src="nsfwImage"
+        :class="{'small': isSmall}"
+      >
+      <i
+        v-if="type === 'video'"
+        class="play-icon icon-play-circled"
+      />
     </a>
-    <div class="hider" v-if="nsfw && hideNsfwLocal && !hidden">
-      <a href="#" @click.prevent="toggleHidden">Hide</a>
+    <div
+      v-if="nsfw && hideNsfwLocal && !hidden"
+      class="hider"
+    >
+      <a
+        href="#"
+        @click.prevent="toggleHidden"
+      >Hide</a>
     </div>
 
-    <a v-if="type === 'image' && (!hidden || preloadImage)"
-      @click="openModal"
+    <a
+      v-if="type === 'image' && (!hidden || preloadImage)"
       class="image-attachment"
       :class="{'hidden': hidden && preloadImage }"
-      :href="attachment.url" target="_blank"
+      :href="attachment.url"
+      target="_blank"
       :title="attachment.description"
+      @click="openModal"
     >
-      <StillImage :referrerpolicy="referrerpolicy" :mimetype="attachment.mimetype" :src="attachment.large_thumb_url || attachment.url"/>
+      <StillImage
+        :referrerpolicy="referrerpolicy"
+        :mimetype="attachment.mimetype"
+        :src="attachment.large_thumb_url || attachment.url"
+        :image-load-handler="onImageLoad"
+      />
     </a>
 
-    <a class="video-container"
-      @click="openModal"
+    <a
       v-if="type === 'video' && !hidden"
+      class="video-container"
       :class="{'small': isSmall}"
       :href="allowPlay ? undefined : attachment.url"
+      @click="openModal"
     >
-      <VideoAttachment class="video" :attachment="attachment" :controls="allowPlay" />
-      <i v-if="!allowPlay" class="play-icon icon-play-circled"></i>
+      <VideoAttachment
+        class="video"
+        :attachment="attachment"
+        :controls="allowPlay"
+      />
+      <i
+        v-if="!allowPlay"
+        class="play-icon icon-play-circled"
+      />
     </a>
 
-    <audio v-if="type === 'audio'" :src="attachment.url" controls></audio>
+    <audio
+      v-if="type === 'audio'"
+      :src="attachment.url"
+      controls
+    />
 
-    <div @click.prevent="linkClicked" v-if="type === 'html' && attachment.oembed" class="oembed">
-      <div v-if="attachment.thumb_url" class="image">
-        <img :src="attachment.thumb_url"/>
+    <div
+      v-if="type === 'html' && attachment.oembed"
+      class="oembed"
+      @click.prevent="linkClicked"
+    >
+      <div
+        v-if="attachment.thumb_url"
+        class="image"
+      >
+        <img :src="attachment.thumb_url">
       </div>
       <div class="text">
-        <h1><a :href="attachment.url">{{attachment.oembed.title}}</a></h1>
-        <div v-html="attachment.oembed.oembedHTML"></div>
+        <!-- eslint-disable vue/no-v-html -->
+        <h1><a :href="attachment.url">{{ attachment.oembed.title }}</a></h1>
+        <div v-html="attachment.oembed.oembedHTML" />
+        <!-- eslint-enable vue/no-v-html -->
       </div>
     </div>
   </div>
@@ -68,6 +121,7 @@
     max-height: 200px;
     max-width: 100%;
     display: flex;
+    align-items: center;
     video {
       max-width: 100%;
     }
@@ -137,6 +191,7 @@
 
   .video {
     width: 100%;
+    height: 100%;
   }
 
   .play-icon {
@@ -233,7 +288,7 @@
     }
 
     img {
-      image-orientation: from-image;
+      image-orientation: from-image; // NOTE: only FF supports this
     }
   }
 }

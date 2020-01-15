@@ -1,7 +1,20 @@
 import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
-import StatusOrConversation from '../status_or_conversation/status_or_conversation.vue'
-import { throttle } from 'lodash'
+import Conversation from '../conversation/conversation.vue'
+import { throttle, keyBy } from 'lodash'
+
+export const getExcludedStatusIdsByPinning = (statuses, pinnedStatusIds) => {
+  const ids = []
+  if (pinnedStatusIds && pinnedStatusIds.length > 0) {
+    for (let status of statuses) {
+      if (!pinnedStatusIds.includes(status.id)) {
+        break
+      }
+      ids.push(status.id)
+    }
+  }
+  return ids
+}
 
 const Timeline = {
   props: [
@@ -11,7 +24,9 @@ const Timeline = {
     'userId',
     'tag',
     'embedded',
-    'count'
+    'count',
+    'pinnedStatusIds',
+    'inProfile'
   ],
   data () {
     return {
@@ -21,7 +36,12 @@ const Timeline = {
     }
   },
   computed: {
-    timelineError () { return this.$store.state.statuses.error },
+    timelineError () {
+      return this.$store.state.statuses.error
+    },
+    errorData () {
+      return this.$store.state.statuses.errorData
+    },
     newStatusCount () {
       return this.timeline.newStatusCount
     },
@@ -39,11 +59,20 @@ const Timeline = {
         body: ['timeline-body'].concat(!this.embedded ? ['panel-body'] : []),
         footer: ['timeline-footer'].concat(!this.embedded ? ['panel-footer'] : [])
       }
+    },
+    // id map of statuses which need to be hidden in the main list due to pinning logic
+    excludedStatusIdsObject () {
+      const ids = getExcludedStatusIdsByPinning(this.timeline.visibleStatuses, this.pinnedStatusIds)
+      // Convert id array to object
+      return keyBy(ids)
+    },
+    pinnedStatusIdsObject () {
+      return keyBy(this.pinnedStatusIds)
     }
   },
   components: {
     Status,
-    StatusOrConversation
+    Conversation
   },
   created () {
     const store = this.$store
@@ -52,7 +81,7 @@ const Timeline = {
 
     window.addEventListener('scroll', this.scrollLoad)
 
-    if (this.timelineName === 'friends' && !credentials) { return false }
+    if (store.state.api.fetchers[this.timelineName]) { return false }
 
     timelineFetcher.fetchAndUpdate({
       store,
@@ -78,13 +107,15 @@ const Timeline = {
   },
   methods: {
     handleShortKey (e) {
+      // Ignore when input fields are focused
+      if (['textarea', 'input'].includes(e.target.tagName.toLowerCase())) return
       if (e.key === '.') this.showNewStatuses()
     },
     showNewStatuses () {
       if (this.newStatusCount === 0) return
 
       if (this.timeline.flushMarker !== 0) {
-        this.$store.commit('clearTimeline', { timeline: this.timelineName })
+        this.$store.commit('clearTimeline', { timeline: this.timelineName, excludeUserId: true })
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
         this.fetchOlderStatuses()
       } else {
@@ -115,7 +146,7 @@ const Timeline = {
       const bodyBRect = document.body.getBoundingClientRect()
       const height = Math.max(bodyBRect.height, -(bodyBRect.y))
       if (this.timeline.loading === false &&
-          this.$store.state.config.autoLoad &&
+          this.$store.getters.mergedConfig.autoLoad &&
           this.$el.offsetHeight > 0 &&
           (window.innerHeight + window.pageYOffset) >= (height - 750)) {
         this.fetchOlderStatuses()
@@ -127,7 +158,7 @@ const Timeline = {
   },
   watch: {
     newStatusCount (count) {
-      if (!this.$store.state.config.streaming) {
+      if (!this.$store.getters.mergedConfig.streaming) {
         return
       }
       if (count > 0) {
@@ -136,8 +167,8 @@ const Timeline = {
         const top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
         if (top < 15 &&
             !this.paused &&
-            !(this.unfocused && this.$store.state.config.pauseOnUnfocused)
-           ) {
+            !(this.unfocused && this.$store.getters.mergedConfig.pauseOnUnfocused)
+        ) {
           this.showNewStatuses()
         } else {
           this.paused = true

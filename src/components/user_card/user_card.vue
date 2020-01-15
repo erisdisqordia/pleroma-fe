@@ -1,132 +1,247 @@
 <template>
-<div class="user-card" :class="classes" :style="style">
-  <div class="panel-heading">
-    <div class='user-info'>
-      <div class='container'>
-        <router-link :to="userProfileLink(user)">
-          <UserAvatar :betterShadow="betterShadow" :src="user.profile_image_url_original"/>
-        </router-link>
-        <div class="name-and-screen-name">
-          <div class="top-line">
-            <div :title="user.name" class='user-name' v-if="user.name_html" v-html="user.name_html"></div>
-            <div :title="user.name" class='user-name' v-else>{{user.name}}</div>
-            <router-link :to="{ name: 'user-settings' }" v-if="!isOtherUser">
-              <i class="button-icon icon-pencil usersettings" :title="$t('tool_tip.user_settings')"></i>
-            </router-link>
-            <a :href="user.statusnet_profile_url" target="_blank" v-if="isOtherUser && !user.is_local">
-              <i class="icon-link-ext usersettings"></i>
-            </a>
-          </div>
-
-          <router-link class='user-screen-name' :to="userProfileLink(user)">
-            <span class="handle">@{{user.screen_name}}
-              <span class="alert staff" v-if="!hideBio && !!visibleRole">{{visibleRole}}</span>
-            </span><span v-if="user.locked"><i class="icon icon-lock"></i></span>
-            <span v-if="!hideUserStatsLocal && !hideBio" class="dailyAvg">{{dailyAvg}} {{ $t('user_card.per_day') }}</span>
+  <div
+    class="user-card"
+    :class="classes"
+  >
+    <div
+      :class="{ 'hide-bio': hideBio }"
+      :style="style"
+      class="background-image"
+    />
+    <div class="panel-heading">
+      <div class="user-info">
+        <div class="container">
+          <a
+            v-if="allowZoomingAvatar"
+            class="user-info-avatar-link"
+            @click="zoomAvatar"
+          >
+            <UserAvatar
+              :better-shadow="betterShadow"
+              :user="user"
+            />
+            <div class="user-info-avatar-link-overlay">
+              <i class="button-icon icon-zoom-in" />
+            </div>
+          </a>
+          <router-link
+            v-else
+            :to="userProfileLink(user)"
+          >
+            <UserAvatar
+              :better-shadow="betterShadow"
+              :user="user"
+            />
           </router-link>
+          <div class="user-summary">
+            <div class="top-line">
+              <!-- eslint-disable vue/no-v-html -->
+              <div
+                v-if="user.name_html"
+                :title="user.name"
+                class="user-name"
+                v-html="user.name_html"
+              />
+              <!-- eslint-enable vue/no-v-html -->
+              <div
+                v-else
+                :title="user.name"
+                class="user-name"
+              >
+                {{ user.name }}
+              </div>
+              <router-link
+                v-if="!isOtherUser"
+                :to="{ name: 'user-settings' }"
+              >
+                <i
+                  class="button-icon icon-wrench usersettings"
+                  :title="$t('tool_tip.user_settings')"
+                />
+              </router-link>
+              <a
+                v-if="isOtherUser && !user.is_local"
+                :href="user.statusnet_profile_url"
+                target="_blank"
+              >
+                <i class="icon-link-ext usersettings" />
+              </a>
+              <AccountActions
+                v-if="isOtherUser && loggedIn"
+                :user="user"
+              />
+            </div>
+            <div class="bottom-line">
+              <router-link
+                class="user-screen-name"
+                :to="userProfileLink(user)"
+              >
+                @{{ user.screen_name }}
+              </router-link>
+              <span
+                v-if="!hideBio && !!visibleRole"
+                class="alert staff"
+              >{{ visibleRole }}</span>
+              <span v-if="user.locked"><i class="icon icon-lock" /></span>
+              <span
+                v-if="!mergedConfig.hideUserStats && !hideBio"
+                class="dailyAvg"
+              >{{ dailyAvg }} {{ $t('user_card.per_day') }}</span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="user-meta">
-        <div v-if="user.follows_you && loggedIn && isOtherUser" class="following">
-          {{ $t('user_card.follows_you') }}
+        <div class="user-meta">
+          <div
+            v-if="user.follows_you && loggedIn && isOtherUser"
+            class="following"
+          >
+            {{ $t('user_card.follows_you') }}
+          </div>
+          <div
+            v-if="isOtherUser && (loggedIn || !switcher)"
+            class="highlighter"
+          >
+            <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
+            <input
+              v-if="userHighlightType !== 'disabled'"
+              :id="'userHighlightColorTx'+user.id"
+              v-model="userHighlightColor"
+              class="userHighlightText"
+              type="text"
+            >
+            <input
+              v-if="userHighlightType !== 'disabled'"
+              :id="'userHighlightColor'+user.id"
+              v-model="userHighlightColor"
+              class="userHighlightCl"
+              type="color"
+            >
+            <label
+              for="style-switcher"
+              class="userHighlightSel select"
+            >
+              <select
+                :id="'userHighlightSel'+user.id"
+                v-model="userHighlightType"
+                class="userHighlightSel"
+              >
+                <option value="disabled">No highlight</option>
+                <option value="solid">Solid bg</option>
+                <option value="striped">Striped bg</option>
+                <option value="side">Side stripe</option>
+              </select>
+              <i class="icon-down-open" />
+            </label>
+          </div>
         </div>
-        <div class="highlighter" v-if="isOtherUser && (loggedIn || !switcher)">
-          <!-- id's need to be unique, otherwise vue confuses which user-card checkbox belongs to -->
-          <input class="userHighlightText" type="text" :id="'userHighlightColorTx'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
-          <input class="userHighlightCl" type="color" :id="'userHighlightColor'+user.id" v-if="userHighlightType !== 'disabled'" v-model="userHighlightColor"/>
-          <label for="style-switcher" class='userHighlightSel select'>
-            <select class="userHighlightSel" :id="'userHighlightSel'+user.id" v-model="userHighlightType">
-              <option value="disabled">No highlight</option>
-              <option value="solid">Solid bg</option>
-              <option value="striped">Striped bg</option>
-              <option value="side">Side stripe</option>
-            </select>
-            <i class="icon-down-open"/>
-          </label>
-        </div>
-      </div>
-      <div v-if="isOtherUser" class="user-interactions">
-        <div class="follow" v-if="loggedIn">
-          <span v-if="user.following">
-            <!--Following them!-->
-            <button @click="unfollowUser" class="pressed" :disabled="followRequestInProgress" :title="$t('user_card.follow_unfollow')">
-              <template v-if="followRequestInProgress">
-                {{ $t('user_card.follow_progress') }}
-              </template>
-              <template v-else>
-                {{ $t('user_card.following') }}
-              </template>
-            </button>
-          </span>
-          <span v-if="!user.following">
-            <button @click="followUser" :disabled="followRequestInProgress" :title="followRequestSent ? $t('user_card.follow_again') : ''">
-              <template v-if="followRequestInProgress">
-                {{ $t('user_card.follow_progress') }}
-              </template>
-              <template v-else-if="followRequestSent">
-                {{ $t('user_card.follow_sent') }}
-              </template>
-              <template v-else>
-                {{ $t('user_card.follow') }}
-              </template>
-            </button>
-          </span>
-        </div>
-        <div class='mute' v-if='isOtherUser && loggedIn'>
-          <span v-if='user.muted'>
-            <button @click="toggleMute" class="pressed">
+        <div
+          v-if="loggedIn && isOtherUser"
+          class="user-interactions"
+        >
+          <div class="btn-group">
+            <FollowButton :user="user" />
+            <template v-if="user.following">
+              <ProgressButton
+                v-if="!user.subscribed"
+                class="btn btn-default"
+                :click="subscribeUser"
+                :title="$t('user_card.subscribe')"
+              >
+                <i class="icon-bell-alt" />
+              </ProgressButton>
+              <ProgressButton
+                v-else
+                class="btn btn-default pressed"
+                :click="unsubscribeUser"
+                :title="$t('user_card.unsubscribe')"
+              >
+                <i class="icon-bell-ringing-o" />
+              </ProgressButton>
+            </template>
+          </div>
+          <div>
+            <button
+              v-if="user.muted"
+              class="btn btn-default btn-block pressed"
+              @click="unmuteUser"
+            >
               {{ $t('user_card.muted') }}
             </button>
-          </span>
-          <span v-if='!user.muted'>
-            <button @click="toggleMute">
+            <button
+              v-else
+              class="btn btn-default btn-block"
+              @click="muteUser"
+            >
               {{ $t('user_card.mute') }}
             </button>
-          </span>
+          </div>
+          <div>
+            <button
+              class="btn btn-default btn-block"
+              @click="mentionUser"
+            >
+              {{ $t('user_card.mention') }}
+            </button>
+          </div>
+          <ModerationTools
+            v-if="loggedIn.role === &quot;admin&quot;"
+            :user="user"
+          />
         </div>
-        <div class="remote-follow" v-if='!loggedIn && user.is_local'>
-          <form method="POST" :action='subscribeUrl'>
-            <input type="hidden" name="nickname" :value="user.screen_name">
-            <input type="hidden" name="profile" value="">
-            <button click="submit" class="remote-button">
-              {{ $t('user_card.remote_follow') }}
-            </button>
-          </form>
-        </div>
-        <div class='block' v-if='isOtherUser && loggedIn'>
-          <span v-if='user.statusnet_blocking'>
-            <button @click="unblockUser" class="pressed">
-              {{ $t('user_card.blocked') }}
-            </button>
-          </span>
-          <span v-if='!user.statusnet_blocking'>
-            <button @click="blockUser">
-              {{ $t('user_card.block') }}
-            </button>
-          </span>
+        <div
+          v-if="!loggedIn && user.is_local"
+          class="user-interactions"
+        >
+          <RemoteFollow :user="user" />
         </div>
       </div>
     </div>
-  </div>
-  <div class="panel-body" v-if="!hideBio">
-    <div v-if="!hideUserStatsLocal && switcher" class="user-counts">
-      <div class="user-count" v-on:click.prevent="setProfileView('statuses')">
-        <h5>{{ $t('user_card.statuses') }}</h5>
-        <span>{{user.statuses_count}} <br></span>
+    <div
+      v-if="!hideBio"
+      class="panel-body"
+    >
+      <div
+        v-if="!mergedConfig.hideUserStats && switcher"
+        class="user-counts"
+      >
+        <div
+          class="user-count"
+          @click.prevent="setProfileView('statuses')"
+        >
+          <h5>{{ $t('user_card.statuses') }}</h5>
+          <span>{{ user.statuses_count }} <br></span>
+        </div>
+        <div
+          class="user-count"
+          @click.prevent="setProfileView('friends')"
+        >
+          <h5>{{ $t('user_card.followees') }}</h5>
+          <span>{{ hideFollowsCount ? $t('user_card.hidden') : user.friends_count }}</span>
+        </div>
+        <div
+          class="user-count"
+          @click.prevent="setProfileView('followers')"
+        >
+          <h5>{{ $t('user_card.followers') }}</h5>
+          <span>{{ hideFollowersCount ? $t('user_card.hidden') : user.followers_count }}</span>
+        </div>
       </div>
-      <div class="user-count" v-on:click.prevent="setProfileView('friends')">
-        <h5>{{ $t('user_card.followees') }}</h5>
-        <span>{{user.friends_count}}</span>
-      </div>
-      <div class="user-count" v-on:click.prevent="setProfileView('followers')">
-        <h5>{{ $t('user_card.followers') }}</h5>
-        <span>{{user.followers_count}}</span>
-      </div>
+      <!-- eslint-disable vue/no-v-html -->
+      <p
+        v-if="!hideBio && user.description_html"
+        class="user-card-bio"
+        @click.prevent="linkClicked"
+        v-html="user.description_html"
+      />
+      <!-- eslint-enable vue/no-v-html -->
+      <p
+        v-else-if="!hideBio"
+        class="user-card-bio"
+      >
+        {{ user.description }}
+      </p>
     </div>
-    <p @click.prevent="linkClicked" v-if="!hideBio && user.description_html" class="user-card-bio" v-html="user.description_html"></p>
-    <p v-else-if="!hideBio" class="user-card-bio">{{ user.description }}</p>
   </div>
-</div>
 </template>
 
 <script src="./user_card.js"></script>
@@ -135,8 +250,7 @@
 @import '../../_variables.scss';
 
 .user-card {
-  background-size: cover;
-  overflow: hidden;
+  position: relative;
 
   .panel-heading {
     padding: .5em 0;
@@ -145,12 +259,37 @@
     background: transparent;
     flex-direction: column;
     align-items: stretch;
+    // create new stacking context
+    position: relative;
   }
 
   .panel-body {
     word-wrap: break-word;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), $fallback--bg 80%);
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg, $fallback--bg) 80%);
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+    // create new stacking context
+    position: relative;
+  }
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    mask: linear-gradient(to top, white, transparent) bottom no-repeat,
+          linear-gradient(to top, white, white);
+    // Autoprefixed seem to ignore this one, and also syntax is different
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background-size: cover;
+    mask-size: 100% 60%;
+    border-top-left-radius: calc(var(--panelRadius) - 1px);
+    border-top-right-radius: calc(var(--panelRadius) - 1px);
+
+    &.hide-bio {
+      mask-size: 100% 40px;
+    }
   }
 
   p {
@@ -166,7 +305,7 @@
       max-width: 100%;
       max-height: 400px;
 
-      .emoji {
+      &.emoji {
         width: 32px;
         height: 32px;
       }
@@ -203,6 +342,7 @@
   .container {
     padding: 16px 0 6px;
     display: flex;
+    align-items: flex-start;
     max-height: 56px;
 
     .avatar {
@@ -224,13 +364,42 @@
     }
   }
 
+  &-avatar-link {
+    position: relative;
+    cursor: pointer;
+
+    &-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: $fallback--avatarRadius;
+      border-radius: var(--avatarRadius, $fallback--avatarRadius);
+      opacity: 0;
+      transition: opacity .2s ease;
+
+      i {
+        color: #FFF;
+      }
+    }
+
+    &:hover &-overlay {
+      opacity: 1;
+    }
+  }
+
   .usersettings {
     color: $fallback--lightText;
     color: var(--lightText, $fallback--lightText);
     opacity: .8;
   }
 
-  .name-and-screen-name {
+  .user-summary {
     display: block;
     margin-left: 0.6em;
     text-align: left;
@@ -247,6 +416,7 @@
       vertical-align: middle;
       object-fit: contain
     }
+
     .top-line {
       display: flex;
     }
@@ -267,15 +437,19 @@
     }
   }
 
-  .user-screen-name {
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-    display: inline-block;
+  .bottom-line {
+    display: flex;
     font-weight: light;
     font-size: 15px;
-    padding-right: 0.1em;
-    width: 100%;
-    display: flex;
+
+    .user-screen-name {
+      min-width: 1px;
+      flex: 0 1 auto;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
 
     .dailyAvg {
       min-width: 1px;
@@ -286,15 +460,9 @@
       color: var(--text, $fallback--text);
     }
 
-    .handle {
-      min-width: 1px;
-      flex: 0 1 auto;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-
     // TODO use proper colors
     .staff {
+      flex: none;
       text-transform: capitalize;
       color: $fallback--text;
       color: var(--btnText, $fallback--text);
@@ -357,48 +525,25 @@
     }
   }
   .user-interactions {
+    position: relative;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
-
     margin-right: -.75em;
 
-    div {
-      flex: 1 0 0;
-      margin-right: .75em;
-      margin-bottom: .6em;
+    > * {
+      margin: 0 .75em .6em 0;
       white-space: nowrap;
-    }
-
-    .mute {
-      max-width: 220px;
-      min-height: 28px;
-    }
-
-    .remote-follow {
-      max-width: 220px;
-      min-height: 28px;
-    }
-
-    .follow {
-      max-width: 220px;
-      min-height: 28px;
+      min-width: 95px;
     }
 
     button {
-      width: 100%;
-      height: 100%;
       margin: 0;
-    }
 
-    .remote-button {
-      height: 28px !important;
-      width: 92%;
-    }
-
-    .pressed {
-      border-bottom-color: rgba(255, 255, 255, 0.2);
-      border-top-color: rgba(0, 0, 0, 0.2);
+      &.pressed {
+        // TODO: This should be themed.
+        border-bottom-color: rgba(255, 255, 255, 0.2);
+        border-top-color: rgba(0, 0, 0, 0.2);
+      }
     }
   }
 }

@@ -12,9 +12,20 @@ const mutations = {
   setError: () => {}
 }
 
+const actions = {
+  fetchUser: () => {},
+  fetchUserByScreenName: () => {}
+}
+
 const testGetters = {
-  userByName: state => getters.userByName(state.users),
-  userById: state => getters.userById(state.users)
+  findUser: state => getters.findUser(state.users),
+  mergedConfig: state => ({
+    colors: '',
+    highlight: {},
+    customTheme: {
+      colors: []
+    }
+  })
 }
 
 const localUser = {
@@ -31,20 +42,15 @@ const extUser = {
 
 const externalProfileStore = new Vuex.Store({
   mutations,
+  actions,
   getters: testGetters,
   state: {
     api: {
+      fetchers: {},
       backendInteractor: backendInteractorService('')
     },
     interface: {
       browserSupport: ''
-    },
-    config: {
-      colors: '',
-      highlight: {},
-      customTheme: {
-        colors: []
-      }
     },
     instance: {
       hideUserStats: true
@@ -89,7 +95,7 @@ const externalProfileStore = new Vuex.Store({
       currentUser: {
         credentials: ''
       },
-      usersObject: [extUser],
+      usersObject: { 100: extUser },
       users: [extUser]
     }
   }
@@ -97,9 +103,11 @@ const externalProfileStore = new Vuex.Store({
 
 const localProfileStore = new Vuex.Store({
   mutations,
+  actions,
   getters: testGetters,
   state: {
     api: {
+      fetchers: {},
       backendInteractor: backendInteractorService('')
     },
     interface: {
@@ -155,7 +163,7 @@ const localProfileStore = new Vuex.Store({
       currentUser: {
         credentials: ''
       },
-      usersObject: [localUser],
+      usersObject: { 100: localUser, 'testuser': localUser },
       users: [localUser]
     }
   }

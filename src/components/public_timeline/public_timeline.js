@@ -7,10 +7,10 @@ const PublicTimeline = {
     timeline () { return this.$store.state.statuses.timelines.public }
   },
   created () {
-    this.$store.dispatch('startFetching', { timeline: 'public' })
+    this.$store.dispatch('startFetchingTimeline', { timeline: 'public' })
   },
   destroyed () {
-    this.$store.dispatch('stopFetching', 'public')
+    this.$store.dispatch('stopFetchingTimeline', 'public')
   }
 
 }

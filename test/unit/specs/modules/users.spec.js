@@ -24,50 +24,41 @@ describe('The users module', () => {
       const user = { id: '1', name: 'Guy' }
 
       mutations.addNewUsers(state, [user])
-      mutations.setMuted(state, {user, muted: true})
+      mutations.setMuted(state, { user, muted: true })
 
       expect(user.muted).to.eql(true)
 
-      mutations.setMuted(state, {user, muted: false})
+      mutations.setMuted(state, { user, muted: false })
 
       expect(user.muted).to.eql(false)
     })
   })
 
-  describe('getUserByName', () => {
+  describe('findUser', () => {
     it('returns user with matching screen_name', () => {
+      const user = { screen_name: 'Guy', id: '1' }
       const state = {
-        users: [
-          { screen_name: 'Guy', id: '1' }
-        ]
+        usersObject: {
+          1: user,
+          guy: user
+        }
       }
       const name = 'Guy'
       const expected = { screen_name: 'Guy', id: '1' }
-      expect(getters.userByName(state)(name)).to.eql(expected)
+      expect(getters.findUser(state)(name)).to.eql(expected)
     })
 
-    it('returns user with matching screen_name with different case', () => {
-      const state = {
-        users: [
-          { screen_name: 'guy', id: '1' }
-        ]
-      }
-      const name = 'Guy'
-      const expected = { screen_name: 'guy', id: '1' }
-      expect(getters.userByName(state)(name)).to.eql(expected)
-    })
-  })
-
-  describe('getUserById', () => {
     it('returns user with matching id', () => {
+      const user = { screen_name: 'Guy', id: '1' }
       const state = {
-        users: [
-          { screen_name: 'Guy', id: '1' }
-        ]
+        usersObject: {
+          1: user,
+          guy: user
+        }
       }
       const id = '1'
       const expected = { screen_name: 'Guy', id: '1' }
-      expect(getters.userById(state)(id)).to.eql(expected)
+      expect(getters.findUser(state)(id)).to.eql(expected)
     })
   })
 })

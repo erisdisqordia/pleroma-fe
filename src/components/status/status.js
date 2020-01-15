@@ -1,17 +1,23 @@
 import Attachment from '../attachment/attachment.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
-import DeleteButton from '../delete_button/delete_button.vue'
+import Poll from '../poll/poll.vue'
+import ExtraButtons from '../extra_buttons/extra_buttons.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCard from '../user_card/user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import Gallery from '../gallery/gallery.vue'
 import LinkPreview from '../link-preview/link-preview.vue'
+import AvatarList from '../avatar_list/avatar_list.vue'
+import Timeago from '../timeago/timeago.vue'
+import StatusPopover from '../status_popover/status_popover.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import fileType from 'src/services/file_type/file_type.service'
+import { processHtml } from 'src/services/tiny_post_html_processor/tiny_post_html_processor.service.js'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import { mentionMatchesUrl, extractTagFromUrl } from 'src/services/matcher/matcher.service.js'
-import { filter, find, unescape } from 'lodash'
+import { filter, unescape, uniqBy } from 'lodash'
+import { mapGetters, mapState } from 'vuex'
 
 const Status = {
   name: 'Status',
@@ -25,32 +31,29 @@ const Status = {
     'replies',
     'isPreview',
     'noHeading',
-    'inlineExpanded'
+    'inlineExpanded',
+    'showPinned',
+    'inProfile',
+    'profileUserId'
   ],
   data () {
     return {
       replying: false,
-      expanded: false,
       unmuted: false,
       userExpanded: false,
-      preview: null,
-      showPreview: false,
       showingTall: this.inConversation && this.focused,
       showingLongSubject: false,
-      expandingSubject: typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
-        ? !this.$store.state.instance.collapseMessageWithSubject
-        : !this.$store.state.config.collapseMessageWithSubject,
-      betterShadow: this.$store.state.interface.browserSupport.cssFilter
+      error: null,
+      // not as computed because it sets the initial state which will be changed later
+      expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject
     }
   },
   computed: {
     localCollapseSubjectDefault () {
-      return typeof this.$store.state.config.collapseMessageWithSubject === 'undefined'
-        ? this.$store.state.instance.collapseMessageWithSubject
-        : this.$store.state.config.collapseMessageWithSubject
+      return this.mergedConfig.collapseMessageWithSubject
     },
     muteWords () {
-      return this.$store.state.config.muteWords
+      return this.mergedConfig.muteWords
     },
     repeaterClass () {
       const user = this.statusoid.user
@@ -65,18 +68,18 @@ const Status = {
     },
     repeaterStyle () {
       const user = this.statusoid.user
-      const highlight = this.$store.state.config.highlight
+      const highlight = this.mergedConfig.highlight
       return highlightStyle(highlight[user.screen_name])
     },
     userStyle () {
       if (this.noHeading) return
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
-      const highlight = this.$store.state.config.highlight
+      const highlight = this.mergedConfig.highlight
       return highlightStyle(highlight[user.screen_name])
     },
     hideAttachments () {
-      return (this.$store.state.config.hideAttachments && !this.inConversation) ||
-        (this.$store.state.config.hideAttachmentsInConv && this.inConversation)
+      return (this.mergedConfig.hideAttachments && !this.inConversation) ||
+        (this.mergedConfig.hideAttachmentsInConv && this.inConversation)
     },
     userProfileLink () {
       return this.generateUserProfileLink(this.status.user.id, this.status.user.screen_name)
@@ -97,22 +100,25 @@ const Status = {
         return this.statusoid
       }
     },
+    statusFromGlobalRepository () {
+      // NOTE: Consider to replace status with statusFromGlobalRepository
+      return this.$store.state.statuses.allStatusesObject[this.status.id]
+    },
     loggedIn () {
-      return !!this.$store.state.users.currentUser
+      return !!this.currentUser
     },
     muteWordHits () {
       const statusText = this.status.text.toLowerCase()
+      const statusSummary = this.status.summary.toLowerCase()
       const hits = filter(this.muteWords, (muteWord) => {
-        return statusText.includes(muteWord.toLowerCase())
+        return statusText.includes(muteWord.toLowerCase()) || statusSummary.includes(muteWord.toLowerCase())
       })
 
       return hits
     },
-    muted () { return !this.unmuted && (this.status.user.muted || this.muteWordHits.length > 0) },
+    muted () { return !this.unmuted && ((!(this.inProfile && this.status.user.id === this.profileUserId) && this.status.user.muted) || (!this.inConversation && this.status.thread_muted) || this.muteWordHits.length > 0) },
     hideFilteredStatuses () {
-      return typeof this.$store.state.config.hideFilteredStatuses === 'undefined'
-        ? this.$store.state.instance.hideFilteredStatuses
-        : this.$store.state.config.hideFilteredStatuses
+      return this.mergedConfig.hideFilteredStatuses
     },
     hideStatus () {
       return (this.hideReply || this.deleted) || (this.muted && this.hideFilteredStatuses)
@@ -145,35 +151,36 @@ const Status = {
       return !!(this.status.in_reply_to_status_id && this.status.in_reply_to_user_id)
     },
     replyToName () {
-      const user = this.$store.state.users.usersObject[this.status.in_reply_to_user_id]
-      if (user) {
-        return user.screen_name
-      } else {
+      if (this.status.in_reply_to_screen_name) {
         return this.status.in_reply_to_screen_name
+      } else {
+        const user = this.$store.getters.findUser(this.status.in_reply_to_user_id)
+        return user && user.screen_name
       }
     },
     hideReply () {
-      if (this.$store.state.config.replyVisibility === 'all') {
+      if (this.mergedConfig.replyVisibility === 'all') {
         return false
       }
-      if (this.inlineExpanded || this.expanded || this.inConversation || !this.isReply) {
+      if (this.inConversation || !this.isReply) {
         return false
       }
-      if (this.status.user.id === this.$store.state.users.currentUser.id) {
+      if (this.status.user.id === this.currentUser.id) {
         return false
       }
       if (this.status.type === 'retweet') {
         return false
       }
-      var checkFollowing = this.$store.state.config.replyVisibility === 'following'
+      const checkFollowing = this.mergedConfig.replyVisibility === 'following'
       for (var i = 0; i < this.status.attentions.length; ++i) {
         if (this.status.user.id === this.status.attentions[i].id) {
           continue
         }
-        if (checkFollowing && this.status.attentions[i].following) {
+        const taggedUser = this.$store.getters.findUser(this.status.attentions[i].id)
+        if (checkFollowing && taggedUser && taggedUser.following) {
           return false
         }
-        if (this.status.attentions[i].id === this.$store.state.users.currentUser.id) {
+        if (this.status.attentions[i].id === this.currentUser.id) {
           return false
         }
       }
@@ -209,11 +216,9 @@ const Status = {
     replySubject () {
       if (!this.status.summary) return ''
       const decodedSummary = unescape(this.status.summary)
-      const behavior = typeof this.$store.state.config.subjectLineBehavior === 'undefined'
-            ? this.$store.state.instance.subjectLineBehavior
-            : this.$store.state.config.subjectLineBehavior
+      const behavior = this.mergedConfig.subjectLineBehavior
       const startsWithRe = decodedSummary.match(/^re[: ]/i)
-      if (behavior !== 'noop' && startsWithRe || behavior === 'masto') {
+      if ((behavior !== 'noop' && startsWithRe) || behavior === 'masto') {
         return decodedSummary
       } else if (behavior === 'email') {
         return 're: '.concat(decodedSummary)
@@ -222,8 +227,8 @@ const Status = {
       }
     },
     attachmentSize () {
-      if ((this.$store.state.config.hideAttachments && !this.inConversation) ||
-        (this.$store.state.config.hideAttachmentsInConv && this.inConversation) ||
+      if ((this.mergedConfig.hideAttachments && !this.inConversation) ||
+        (this.mergedConfig.hideAttachmentsInConv && this.inConversation) ||
         (this.status.attachments.length > this.maxThumbnails)) {
         return 'hide'
       } else if (this.compact) {
@@ -235,7 +240,7 @@ const Status = {
       if (this.attachmentSize === 'hide') {
         return []
       }
-      return this.$store.state.config.playVideosInModal
+      return this.mergedConfig.playVideosInModal
         ? ['image', 'video']
         : ['image']
     },
@@ -250,19 +255,81 @@ const Status = {
       )
     },
     maxThumbnails () {
-      return this.$store.state.config.maxThumbnails
-    }
+      return this.mergedConfig.maxThumbnails
+    },
+    postBodyHtml () {
+      const html = this.status.statusnet_html
+
+      if (this.mergedConfig.greentext) {
+        try {
+          if (html.includes('&gt;')) {
+            // This checks if post has '>' at the beginning, excluding mentions so that @mention >impying works
+            return processHtml(html, (string) => {
+              if (string.includes('&gt;') &&
+                  string
+                    .replace(/<[^>]+?>/gi, '') // remove all tags
+                    .replace(/@\w+/gi, '') // remove mentions (even failed ones)
+                    .trim()
+                    .startsWith('&gt;')) {
+                return `<span class='greentext'>${string}</span>`
+              } else {
+                return string
+              }
+            })
+          } else {
+            return html
+          }
+        } catch (e) {
+          console.err('Failed to process status html', e)
+          return html
+        }
+      } else {
+        return html
+      }
+    },
+    contentHtml () {
+      if (!this.status.summary_html) {
+        return this.postBodyHtml
+      }
+      return this.status.summary_html + '<br />' + this.postBodyHtml
+    },
+    combinedFavsAndRepeatsUsers () {
+      // Use the status from the global status repository since favs and repeats are saved in it
+      const combinedUsers = [].concat(
+        this.statusFromGlobalRepository.favoritedBy,
+        this.statusFromGlobalRepository.rebloggedBy
+      )
+      return uniqBy(combinedUsers, 'id')
+    },
+    ownStatus () {
+      return this.status.user.id === this.currentUser.id
+    },
+    tags () {
+      return this.status.tags.filter(tagObj => tagObj.hasOwnProperty('name')).map(tagObj => tagObj.name).join(' ')
+    },
+    hidePostStats () {
+      return this.mergedConfig.hidePostStats
+    },
+    ...mapGetters(['mergedConfig']),
+    ...mapState({
+      betterShadow: state => state.interface.browserSupport.cssFilter,
+      currentUser: state => state.users.currentUser
+    })
   },
   components: {
     Attachment,
     FavoriteButton,
     RetweetButton,
-    DeleteButton,
+    ExtraButtons,
     PostStatusForm,
+    Poll,
     UserCard,
     UserAvatar,
     Gallery,
-    LinkPreview
+    LinkPreview,
+    AvatarList,
+    Timeago,
+    StatusPopover
   },
   methods: {
     visibilityIcon (visibility) {
@@ -277,12 +344,15 @@ const Status = {
           return 'icon-globe'
       }
     },
+    showError (error) {
+      this.error = error
+    },
+    clearError () {
+      this.error = undefined
+    },
     linkClicked (event) {
-      let { target } = event
-      if (target.tagName === 'SPAN') {
-        target = target.parentNode
-      }
-      if (target.tagName === 'A') {
+      const target = event.target.closest('.status-content a')
+      if (target) {
         if (target.className.match(/mention/)) {
           const href = target.href
           const attn = this.status.attentions.find(attn => mentionMatchesUrl(attn, href))
@@ -294,7 +364,7 @@ const Status = {
             return
           }
         }
-        if (target.className.match(/hashtag/)) {
+        if (target.rel.match(/(?:^|\s)tag(?:$|\s)/) || target.className.match(/hashtag/)) {
           // Extract tag name from link url
           const tag = extractTagFromUrl(target.href)
           if (tag) {
@@ -310,7 +380,6 @@ const Status = {
       this.replying = !this.replying
     },
     gotoOriginal (id) {
-      // only handled by conversation, not status_or_conversation
       if (this.inConversation) {
         this.$emit('goto', id)
       }
@@ -334,27 +403,6 @@ const Status = {
       } else if (this.hideSubjectStatus && this.status.summary) {
         this.expandingSubject = true
       }
-    },
-    replyEnter (id, event) {
-      this.showPreview = true
-      const targetId = id
-      const statuses = this.$store.state.statuses.allStatuses
-
-      if (!this.preview) {
-        // if we have the status somewhere already
-        this.preview = find(statuses, { 'id': targetId })
-        // or if we have to fetch it
-        if (!this.preview) {
-          this.$store.state.api.backendInteractor.fetchStatus({id}).then((status) => {
-            this.preview = status
-          })
-        }
-      } else if (this.preview.id !== targetId) {
-        this.preview = find(statuses, { 'id': targetId })
-      }
-    },
-    replyLeave () {
-      this.showPreview = false
     },
     generateUserProfileLink (id, name) {
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
@@ -381,6 +429,18 @@ const Status = {
           // Post is below screen, match its bottom to screen bottom
           window.scrollBy(0, rect.bottom - window.innerHeight + 50)
         }
+      }
+    },
+    'status.repeat_num': function (num) {
+      // refetch repeats when repeat_num is changed in any way
+      if (this.isFocused && this.statusFromGlobalRepository.rebloggedBy && this.statusFromGlobalRepository.rebloggedBy.length !== num) {
+        this.$store.dispatch('fetchRepeats', this.status.id)
+      }
+    },
+    'status.fave_num': function (num) {
+      // refetch favs when fave_num is changed in any way
+      if (this.isFocused && this.statusFromGlobalRepository.favoritedBy && this.statusFromGlobalRepository.favoritedBy.length !== num) {
+        this.$store.dispatch('fetchFavs', this.status.id)
       }
     }
   },

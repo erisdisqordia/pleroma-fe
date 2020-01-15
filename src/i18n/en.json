@@ -1,6 +1,29 @@
 {
+  "about": {
+    "staff": "Staff",
+    "federation": "Federation",
+    "mrf_policies": "Enabled MRF Policies",
+    "mrf_policies_desc": "MRF policies manipulate the federation behaviour of the instance.  The following policies are enabled:",
+    "mrf_policy_simple": "Instance-specific Policies",
+    "mrf_policy_simple_accept": "Accept",
+    "mrf_policy_simple_accept_desc": "This instance only accepts messages from the following instances:",
+    "mrf_policy_simple_reject": "Reject",
+    "mrf_policy_simple_reject_desc": "This instance will not accept messages from the following instances:",
+    "mrf_policy_simple_quarantine": "Quarantine",
+    "mrf_policy_simple_quarantine_desc": "This instance will send only public posts to the following instances:",
+    "mrf_policy_simple_ftl_removal": "Removal from \"The Whole Known Network\" Timeline",
+    "mrf_policy_simple_ftl_removal_desc": "This instance removes these instances from \"The Whole Known Network\" timeline:",
+    "mrf_policy_simple_media_removal": "Media Removal",
+    "mrf_policy_simple_media_removal_desc": "This instance removes media from posts on the following instances:",
+    "mrf_policy_simple_media_nsfw": "Media Force-set As Sensitive",
+    "mrf_policy_simple_media_nsfw_desc": "This instance forces media to be set sensitive in posts on the following instances:"
+  },
   "chat": {
     "title": "Chat"
+  },
+  "exporter": {
+    "export": "Export",
+    "processing": "Processing, you'll soon be asked to download your file"
   },
   "features_panel": {
     "chat": "Chat",
@@ -20,12 +43,25 @@
     "submit": "Submit",
     "more": "More",
     "generic_error": "An error occured",
-    "optional": "optional"
+    "optional": "optional",
+    "show_more": "Show more",
+    "show_less": "Show less",
+    "cancel": "Cancel",
+    "disable": "Disable",
+    "enable": "Enable",
+    "confirm": "Confirm",
+    "verify": "Verify"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",
     "save": "Save",
+    "save_without_cropping": "Save without cropping",
     "cancel": "Cancel"
+  },
+  "importer": {
+    "submit": "Submit",
+    "success": "Imported successfully.",
+    "error": "An error occured while importing this file."
   },
   "login": {
     "login": "Log in",
@@ -35,7 +71,15 @@
     "placeholder": "e.g. lain",
     "register": "Register",
     "username": "Username",
-    "hint": "Log in to join the discussion"
+    "hint": "Log in to join the discussion",
+    "authentication_code": "Authentication code",
+    "enter_recovery_code": "Enter a recovery code",
+    "enter_two_factor_code": "Enter a two-factor code",
+    "recovery_code": "Recovery code",
+    "heading" : {
+      "totp" : "Two-factor authentication",
+      "recovery" : "Two-factor recovery"
+    }
   },
   "media_modal": {
     "previous": "Previous",
@@ -43,15 +87,18 @@
   },
   "nav": {
     "about": "About",
+    "administration": "Administration",
     "back": "Back",
     "chat": "Local Chat",
     "friend_requests": "Follow Requests",
     "mentions": "Mentions",
+    "interactions": "Interactions",
     "dms": "Direct Messages",
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
     "twkn": "The Whole Known Network",
     "user_search": "User Search",
+    "search": "Search",
     "who_to_follow": "Who to follow",
     "preferences": "Preferences"
   },
@@ -63,7 +110,39 @@
     "notifications": "Notifications",
     "read": "Read!",
     "repeated_you": "repeated your status",
-    "no_more_notifications": "No more notifications"
+    "no_more_notifications": "No more notifications",
+    "migrated_to": "migrated to"
+  },
+  "polls": {
+    "add_poll": "Add Poll",
+    "add_option": "Add Option",
+    "option": "Option",
+    "votes": "votes",
+    "vote": "Vote",
+    "type": "Poll type",
+    "single_choice": "Single choice",
+    "multiple_choices": "Multiple choices",
+    "expiry": "Poll age",
+    "expires_in": "Poll ends in {0}",
+    "expired": "Poll ended {0} ago",
+    "not_enough_options": "Too few unique options in poll"
+  },
+  "emoji": {
+    "stickers": "Stickers",
+    "emoji": "Emoji",
+    "keep_open": "Keep picker open",
+    "search_emoji": "Search for an emoji",
+    "add_emoji": "Insert emoji",
+    "custom": "Custom emoji",
+    "unicode": "Unicode emoji",
+    "load_all_hint": "Loaded first {saneAmount} emoji, loading all emoji may cause performance issues.",
+    "load_all": "Loading all {emojiAmount} emoji"
+  },
+  "interactions": {
+    "favs_repeats": "Repeats and Favorites",
+    "follows": "New follows",
+    "moves": "User migrates",
+    "load_older": "Load older interactions"
   },
   "post_status": {
     "new_status": "Post new status",
@@ -73,12 +152,19 @@
     "content_type": {
       "text/plain": "Plain text",
       "text/html": "HTML",
-      "text/markdown": "Markdown"
+      "text/markdown": "Markdown",
+      "text/bbcode": "BBCode"
     },
     "content_warning": "Subject (optional)",
     "default": "Just landed in L.A.",
-    "direct_warning": "This post will only be visible to all the mentioned users.",
+    "direct_warning_to_all": "This post will be visible to all the mentioned users.",
+    "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
+    "scope_notice": {
+      "public": "This post will be visible to everyone",
+      "private": "This post will be visible to your followers only",
+      "unlisted": "This post will not be visible in Public Timeline and The Whole Known Network"
+    },
     "scope": {
       "direct": "Direct - Post to mentioned users only",
       "private": "Followers-only - Post to followers only",
@@ -97,7 +183,7 @@
     "new_captcha": "Click the image to get a new captcha",
     "username_placeholder": "e.g. lain",
     "fullname_placeholder": "e.g. Lain Iwakura",
-    "bio_placeholder": "e.g.\nHi, I'm Lain\nI’m an anime girl living in suburban Japan. You may know me from the Wired.",
+    "bio_placeholder": "e.g.\nHi, I'm Lain.\nI’m an anime girl living in suburban Japan. You may know me from the Wired.",
     "validations": {
       "username_required": "cannot be left blank",
       "fullname_required": "cannot be left blank",
@@ -107,8 +193,39 @@
       "password_confirmation_match": "should be the same as password"
     }
   },
+  "remote_user_resolver": {
+    "remote_user_resolver": "Remote user resolver",
+    "searching_for": "Searching for",
+    "error": "Not found."
+  },
+  "selectable_list": {
+    "select_all": "Select all"
+  },
   "settings": {
     "app_name": "App name",
+    "security": "Security",
+    "enter_current_password_to_confirm": "Enter your current password to confirm your identity",
+    "mfa": {
+      "otp" : "OTP",
+      "setup_otp" : "Setup OTP",
+      "wait_pre_setup_otp" : "presetting OTP",
+      "confirm_and_enable" : "Confirm & enable OTP",
+      "title": "Two-factor Authentication",
+      "generate_new_recovery_codes" : "Generate new recovery codes",
+      "warning_of_generate_new_codes" : "When you generate new recovery codes, your old codes won’t work anymore.",
+      "recovery_codes" : "Recovery codes.",
+      "waiting_a_recovery_codes": "Receiving backup codes...",
+      "recovery_codes_warning" : "Write the codes down or save them somewhere secure - otherwise you won't see them again. If you lose access to your 2FA app and recovery codes you'll be locked out of your account.",
+      "authentication_methods" : "Authentication methods",
+      "scan": {
+        "title": "Scan",
+        "desc": "Using your two-factor app, scan this QR code or enter text key:",
+        "secret_code": "Key"
+      },
+      "verify": {
+        "desc": "To enable two-factor authentication, enter the code from your two-factor app:"
+      }
+    },
     "attachmentRadius": "Attachments",
     "attachments": "Attachments",
     "autoload": "Enable automatic loading when scrolled to the bottom",
@@ -117,12 +234,20 @@
     "avatarRadius": "Avatars",
     "background": "Background",
     "bio": "Bio",
+    "block_export": "Block export",
+    "block_export_button": "Export your blocks to a csv file",
+    "block_import": "Block import",
+    "block_import_error": "Error importing blocks",
+    "blocks_imported": "Blocks imported! Processing them will take a while.",
     "blocks_tab": "Blocks",
     "btnRadius": "Buttons",
     "cBlue": "Blue (Reply, follow)",
     "cGreen": "Green (Retweet)",
     "cOrange": "Orange (Favorite)",
     "cRed": "Red (Cancel)",
+    "change_email": "Change Email",
+    "change_email_error": "There was an issue changing your email.",
+    "changed_email": "Email changed successfully!",
     "change_password": "Change Password",
     "change_password_error": "There was an issue changing your password.",
     "changed_password": "Password changed successfully!",
@@ -138,13 +263,14 @@
     "delete_account_description": "Permanently delete your account and all your messages.",
     "delete_account_error": "There was an issue deleting your account. If this persists please contact your instance administrator.",
     "delete_account_instructions": "Type your password in the input below to confirm account deletion.",
+    "discoverable": "Allow discovery of this account in search results and other services",
     "avatar_size_instruction": "The recommended minimum size for avatar images is 150x150 pixels.",
+    "pad_emoji": "Pad emoji with spaces when adding from picker",
     "export_theme": "Save preset",
     "filtering": "Filtering",
     "filtering_explanation": "All statuses containing these words will be muted, one per line",
     "follow_export": "Follow export",
     "follow_export_button": "Export your follows to a csv file",
-    "follow_export_processing": "Processing, you'll soon be asked to download your file",
     "follow_import": "Follow import",
     "follow_import_error": "Error importing followers",
     "follows_imported": "Follows imported! Processing them will take a while.",
@@ -152,6 +278,7 @@
     "general": "General",
     "hide_attachments_in_convo": "Hide attachments in conversations",
     "hide_attachments_in_tl": "Hide attachments in timeline",
+    "hide_muted_posts": "Hide posts of muted users",
     "max_thumbnails": "Maximum amount of thumbnails per post",
     "hide_isp": "Hide instance-specific panel",
     "preload_images": "Preload images",
@@ -159,6 +286,7 @@
     "hide_post_stats": "Hide post statistics (e.g. the number of favorites)",
     "hide_user_stats": "Hide user statistics (e.g. the number of followers)",
     "hide_filtered_statuses": "Hide filtered statuses",
+    "import_blocks_from_a_csv_file": "Import blocks from a csv file",
     "import_followers_from_a_csv_file": "Import follows from a csv file",
     "import_theme": "Load preset",
     "inputRadius": "Input fields",
@@ -174,21 +302,25 @@
     "loop_video": "Loop videos",
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
     "mutes_tab": "Mutes",
-    "play_videos_in_modal": "Play videos directly in the media viewer",
+    "play_videos_in_modal": "Play videos in a popup frame",
     "use_contain_fit": "Don't crop the attachment in thumbnails",
     "name": "Name",
     "name_bio": "Name & Bio",
+    "new_email": "New Email",
     "new_password": "New password",
     "notification_visibility": "Types of notifications to show",
     "notification_visibility_follows": "Follows",
     "notification_visibility_likes": "Likes",
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
+    "notification_visibility_moves": "User Migrates",
     "no_rich_text_description": "Strip rich text formatting from all posts",
     "no_blocks": "No blocks",
     "no_mutes": "No mutes",
     "hide_follows_description": "Don't show who I'm following",
     "hide_followers_description": "Don't show who's following me",
+    "hide_follows_count_description": "Don't show follow count",
+    "hide_followers_count_description": "Don't show follower count",
     "show_admin_badge": "Show Admin badge in my profile",
     "show_moderator_badge": "Show Moderator badge in my profile",
     "nsfw_clickthrough": "Enable clickthrough NSFW attachment hiding",
@@ -209,10 +341,14 @@
     "reply_visibility_all": "Show all replies",
     "reply_visibility_following": "Only show replies directed at me or users I'm following",
     "reply_visibility_self": "Only show replies directed at me",
+    "autohide_floating_post_button": "Automatically hide New Post button (mobile)",
     "saving_err": "Error saving settings",
     "saving_ok": "Settings saved",
+    "search_user_to_block": "Search whom you want to block",
+    "search_user_to_mute": "Search whom you want to mute",
     "security_tab": "Security",
     "scope_copy": "Copy scope when replying (DMs are always copied)",
+    "minimal_scopes_mode": "Minimize post scope selection options",
     "set_new_avatar": "Set new avatar",
     "set_new_profile_background": "Set new profile background",
     "set_new_profile_banner": "Set new profile banner",
@@ -225,6 +361,8 @@
     "post_status_content_type": "Post status content type",
     "stop_gifs": "Play-on-hover GIFs",
     "streaming": "Enable automatic streaming of new posts when scrolled to the top",
+    "useStreamingApi": "Receive posts and notifications real-time",
+    "useStreamingApiWarning": "(Not recommended, experimental, known to skip posts)",
     "text": "Text",
     "theme": "Theme",
     "theme_help": "Use hex color codes (#rrggbb) to customize your color theme.",
@@ -237,7 +375,16 @@
       "false": "no",
       "true": "yes"
     },
+    "fun": "Fun",
+    "greentext": "Meme arrows",
     "notifications": "Notifications",
+    "notification_setting": "Receive notifications from:",
+    "notification_setting_follows": "Users you follow",
+    "notification_setting_non_follows": "Users you do not follow",
+    "notification_setting_followers": "Users who follow you",
+    "notification_setting_non_followers": "Users who do not follow you",
+    "notification_mutes": "To stop receiving notifications from a specific user, use a mute.",
+    "notification_blocks": "Blocking a user stops all notifications as well as unsubscribes them.",
     "enable_web_push_notifications": "Enable web push notifications",
     "style": {
       "switcher": {
@@ -277,6 +424,7 @@
         "_tab_label": "Advanced",
         "alert": "Alert background",
         "alert_error": "Error",
+        "alert_warning": "Warning",
         "badge": "Badge background",
         "badge_notification": "Notification",
         "panel_header": "Panel header",
@@ -347,7 +495,46 @@
         "checkbox": "I have skimmed over terms and conditions",
         "link": "a nice lil' link"
       }
+    },
+    "version": {
+      "title": "Version",
+      "backend_version": "Backend Version",
+      "frontend_version": "Frontend Version"
     }
+  },
+  "time": {
+    "day": "{0} day",
+    "days": "{0} days",
+    "day_short": "{0}d",
+    "days_short": "{0}d",
+    "hour": "{0} hour",
+    "hours": "{0} hours",
+    "hour_short": "{0}h",
+    "hours_short": "{0}h",
+    "in_future": "in {0}",
+    "in_past": "{0} ago",
+    "minute": "{0} minute",
+    "minutes": "{0} minutes",
+    "minute_short": "{0}min",
+    "minutes_short": "{0}min",
+    "month": "{0} month",
+    "months": "{0} months",
+    "month_short": "{0}mo",
+    "months_short": "{0}mo",
+    "now": "just now",
+    "now_short": "now",
+    "second": "{0} second",
+    "seconds": "{0} seconds",
+    "second_short": "{0}s",
+    "seconds_short": "{0}s",
+    "week": "{0} week",
+    "weeks": "{0} weeks",
+    "week_short": "{0}w",
+    "weeks_short": "{0}w",
+    "year": "{0} year",
+    "years": "{0} years",
+    "year_short": "{0}y",
+    "years_short": "{0}y"
   },
   "timeline": {
     "collapse": "Collapse",
@@ -362,8 +549,17 @@
     "no_statuses": "No statuses"
   },
   "status": {
+    "favorites": "Favorites",
+    "repeats": "Repeats",
+    "delete": "Delete status",
+    "pin": "Pin on profile",
+    "unpin": "Unpin from profile",
+    "pinned": "Pinned",
+    "delete_confirm": "Do you really want to delete this status?",
     "reply_to": "Reply to",
-    "replies_list": "Replies:"
+    "replies_list": "Replies:",
+    "mute_conversation": "Mute conversation",
+    "unmute_conversation": "Unmute conversation"
   },
   "user_card": {
     "approve": "Approve",
@@ -380,24 +576,59 @@
     "followers": "Followers",
     "following": "Following!",
     "follows_you": "Follows you!",
+    "hidden": "Hidden",
     "its_you": "It's you!",
     "media": "Media",
+    "mention": "Mention",
     "mute": "Mute",
     "muted": "Muted",
     "per_day": "per day",
     "remote_follow": "Remote follow",
+    "report": "Report",
     "statuses": "Statuses",
+    "subscribe": "Subscribe",
+    "unsubscribe": "Unsubscribe",
     "unblock": "Unblock",
     "unblock_progress": "Unblocking...",
     "block_progress": "Blocking...",
     "unmute": "Unmute",
     "unmute_progress": "Unmuting...",
-    "mute_progress": "Muting..."
+    "mute_progress": "Muting...",
+    "hide_repeats": "Hide repeats",
+    "show_repeats": "Show repeats",
+    "admin_menu": {
+      "moderation": "Moderation",
+      "grant_admin": "Grant Admin",
+      "revoke_admin": "Revoke Admin",
+      "grant_moderator": "Grant Moderator",
+      "revoke_moderator": "Revoke Moderator",
+      "activate_account": "Activate account",
+      "deactivate_account": "Deactivate account",
+      "delete_account": "Delete account",
+      "force_nsfw": "Mark all posts as NSFW",
+      "strip_media": "Remove media from posts",
+      "force_unlisted": "Force posts to be unlisted",
+      "sandbox": "Force posts to be followers-only",
+      "disable_remote_subscription": "Disallow following user from remote instances",
+      "disable_any_subscription": "Disallow following user at all",
+      "quarantine": "Disallow user posts from federating",
+      "delete_user": "Delete user",
+      "delete_user_confirmation": "Are you absolutely sure? This action cannot be undone."
+    }
   },
   "user_profile": {
     "timeline_title": "User Timeline",
     "profile_does_not_exist": "Sorry, this profile does not exist.",
     "profile_loading_error": "Sorry, there was an error loading this profile."
+  },
+  "user_reporting": {
+    "title": "Reporting {0}",
+    "add_comment_description": "The report will be sent to your instance moderators. You can provide an explanation of why you are reporting this account below:",
+    "additional_comments": "Additional comments",
+    "forward_description": "The account is from another server. Send a copy of the report there as well?",
+    "forward_to": "Forward to {0}",
+    "submit": "Submit",
+    "generic_error": "An error occurred while processing your request."
   },
   "who_to_follow": {
     "more": "More",
@@ -423,5 +654,25 @@
       "GiB": "GiB",
       "TiB": "TiB"
     }
+  },
+  "search": {
+    "people": "People",
+    "hashtags": "Hashtags",
+    "person_talking": "{count} person talking",
+    "people_talking": "{count} people talking",
+    "no_results": "No results"
+  },
+  "password_reset": {
+    "forgot_password": "Forgot password?",
+    "password_reset": "Password reset",
+    "instruction": "Enter your email address or username. We will send you a link to reset your password.",
+    "placeholder": "Your email or username",
+    "check_email": "Check your email for a link to reset your password.",
+    "return_home": "Return to the home page",
+    "not_found": "We couldn't find that email or username.",
+    "too_many_requests": "You have reached the limit of attempts, try again later.",
+    "password_reset_disabled": "Password reset is disabled. Please contact your instance administrator.",
+    "password_reset_required": "You must reset your password to log in.",
+    "password_reset_required_but_mailer_is_disabled": "You must reset your password, but password reset is disabled. Please contact your instance administrator."
   }
 }

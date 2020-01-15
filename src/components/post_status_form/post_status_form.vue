@@ -1,99 +1,272 @@
 <template>
-<div class="post-status-form">
-  <form @submit.prevent="postStatus(newStatus)">
-    <div class="form-group" >
-      <i18n
-        v-if="!this.$store.state.users.currentUser.locked && this.newStatus.visibility == 'private'"
-        path="post_status.account_not_locked_warning"
-        tag="p"
-        class="visibility-notice">
-        <router-link :to="{ name: 'user-settings' }">{{ $t('post_status.account_not_locked_warning_link') }}</router-link>
-      </i18n>
-      <p v-if="this.newStatus.visibility == 'direct'" class="visibility-notice">{{ $t('post_status.direct_warning') }}</p>
-      <input
-        v-if="newStatus.spoilerText || alwaysShowSubject"
-        type="text"
-        :placeholder="$t('post_status.content_warning')"
-        v-model="newStatus.spoilerText"
-        class="form-cw">
-      <textarea
-        ref="textarea"
-        @click="setCaret"
-        @keyup="setCaret" v-model="newStatus.status" :placeholder="$t('post_status.default')" rows="1" class="form-control"
-        @keydown="onKeydown"
-        @keydown.down="cycleForward"
-        @keydown.up="cycleBackward"
-        @keydown.shift.tab="cycleBackward"
-        @keydown.tab="cycleForward"
-        @keydown.enter="replaceCandidate"
-        @keydown.meta.enter="postStatus(newStatus)"
-        @keyup.ctrl.enter="postStatus(newStatus)"
-        @drop="fileDrop"
-        @dragover.prevent="fileDrag"
-        @input="resize"
-        @paste="paste"
-        :disabled="posting"
-      >
-      </textarea>
-      <div class="visibility-tray">
-        <span class="text-format" v-if="formattingOptionsEnabled">
-          <label for="post-content-type" class="select">
-            <select id="post-content-type" v-model="newStatus.contentType" class="form-control">
-              <option v-for="postFormat in postFormats" :key="postFormat" :value="postFormat">
-                {{$t(`post_status.content_type["${postFormat}"]`)}}
-              </option>
-            </select>
-            <i class="icon-down-open"></i>
-          </label>
-        </span>
+  <div
+    ref="form"
+    class="post-status-form"
+  >
+    <form
+      autocomplete="off"
+      @submit.prevent="postStatus(newStatus)"
+    >
+      <div class="form-group">
+        <i18n
+          v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
+          path="post_status.account_not_locked_warning"
+          tag="p"
+          class="visibility-notice"
+        >
+          <router-link :to="{ name: 'user-settings' }">
+            {{ $t('post_status.account_not_locked_warning_link') }}
+          </router-link>
+        </i18n>
+        <p
+          v-if="!hideScopeNotice && newStatus.visibility === 'public'"
+          class="visibility-notice notice-dismissible"
+        >
+          <span>{{ $t('post_status.scope_notice.public') }}</span>
+          <a
+            class="button-icon dismiss"
+            @click.prevent="dismissScopeNotice()"
+          >
+            <i class="icon-cancel" />
+          </a>
+        </p>
+        <p
+          v-else-if="!hideScopeNotice && newStatus.visibility === 'unlisted'"
+          class="visibility-notice notice-dismissible"
+        >
+          <span>{{ $t('post_status.scope_notice.unlisted') }}</span>
+          <a
+            class="button-icon dismiss"
+            @click.prevent="dismissScopeNotice()"
+          >
+            <i class="icon-cancel" />
+          </a>
+        </p>
+        <p
+          v-else-if="!hideScopeNotice && newStatus.visibility === 'private' && $store.state.users.currentUser.locked"
+          class="visibility-notice notice-dismissible"
+        >
+          <span>{{ $t('post_status.scope_notice.private') }}</span>
+          <a
+            class="button-icon dismiss"
+            @click.prevent="dismissScopeNotice()"
+          >
+            <i class="icon-cancel" />
+          </a>
+        </p>
+        <p
+          v-else-if="newStatus.visibility === 'direct'"
+          class="visibility-notice"
+        >
+          <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
+          <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
+        </p>
+        <EmojiInput
+          v-if="newStatus.spoilerText || alwaysShowSubject"
+          v-model="newStatus.spoilerText"
+          enable-emoji-picker
+          :suggest="emojiSuggestor"
+          class="form-control"
+        >
+          <input
 
-        <div v-if="scopeOptionsEnabled">
-          <i v-on:click="changeVis('direct')" class="icon-mail-alt" :class="vis.direct" :title="$t('post_status.scope.direct')"></i>
-          <i v-on:click="changeVis('private')" class="icon-lock" :class="vis.private" :title="$t('post_status.scope.private')"></i>
-          <i v-on:click="changeVis('unlisted')" class="icon-lock-open-alt" :class="vis.unlisted" :title="$t('post_status.scope.unlisted')"></i>
-          <i v-on:click="changeVis('public')" class="icon-globe" :class="vis.public" :title="$t('post_status.scope.public')"></i>
-        </div>
-      </div>
-    </div>
-    <div style="position:relative;" v-if="candidates">
-        <div class="autocomplete-panel">
-          <div v-for="candidate in candidates" @click="replace(candidate.utf || (candidate.screen_name + ' '))">
-            <div class="autocomplete" :class="{ highlighted: candidate.highlighted }">
-              <span v-if="candidate.img"><img :src="candidate.img"></img></span>
-              <span v-else>{{candidate.utf}}</span>
-              <span>{{candidate.screen_name}}<small>{{candidate.name}}</small></span>
-            </div>
+            v-model="newStatus.spoilerText"
+            type="text"
+            :placeholder="$t('post_status.content_warning')"
+            class="form-post-subject"
+          >
+        </EmojiInput>
+        <EmojiInput
+          ref="emoji-input"
+          v-model="newStatus.status"
+          :suggest="emojiUserSuggestor"
+          class="form-control main-input"
+          enable-emoji-picker
+          hide-emoji-button
+          enable-sticker-picker
+          @input="onEmojiInputInput"
+          @sticker-uploaded="addMediaFile"
+          @sticker-upload-failed="uploadFailed"
+        >
+          <textarea
+            ref="textarea"
+            v-model="newStatus.status"
+            :placeholder="$t('post_status.default')"
+            rows="1"
+            :disabled="posting"
+            class="form-post-body"
+            @keydown.meta.enter="postStatus(newStatus)"
+            @keyup.ctrl.enter="postStatus(newStatus)"
+            @drop="fileDrop"
+            @dragover.prevent="fileDrag"
+            @input="resize"
+            @compositionupdate="resize"
+            @paste="paste"
+          />
+          <p
+            v-if="hasStatusLengthLimit"
+            class="character-counter faint"
+            :class="{ error: isOverLengthLimit }"
+          >
+            {{ charactersLeft }}
+          </p>
+        </EmojiInput>
+        <div class="visibility-tray">
+          <scope-selector
+            :show-all="showAllScopes"
+            :user-default="userDefaultScope"
+            :original-scope="copyMessageScope"
+            :initial-scope="newStatus.visibility"
+            :on-scope-change="changeVis"
+          />
+
+          <div
+            v-if="postFormats.length > 1"
+            class="text-format"
+          >
+            <label
+              for="post-content-type"
+              class="select"
+            >
+              <select
+                id="post-content-type"
+                v-model="newStatus.contentType"
+                class="form-control"
+              >
+                <option
+                  v-for="postFormat in postFormats"
+                  :key="postFormat"
+                  :value="postFormat"
+                >
+                  {{ $t(`post_status.content_type["${postFormat}"]`) }}
+                </option>
+              </select>
+              <i class="icon-down-open" />
+            </label>
+          </div>
+          <div
+            v-if="postFormats.length === 1 && postFormats[0] !== 'text/plain'"
+            class="text-format"
+          >
+            <span class="only-format">
+              {{ $t(`post_status.content_type["${postFormats[0]}"]`) }}
+            </span>
           </div>
         </div>
       </div>
-      <div class='form-bottom'>
-        <media-upload ref="mediaUpload" @uploading="disableSubmit" @uploaded="addMediaFile" @upload-failed="uploadFailed" :drop-files="dropFiles"></media-upload>
-
-        <p v-if="isOverLengthLimit" class="error">{{ charactersLeft }}</p>
-        <p class="faint" v-else-if="hasStatusLengthLimit">{{ charactersLeft }}</p>
-
-        <button v-if="posting" disabled class="btn btn-default">{{$t('post_status.posting')}}</button>
-        <button v-else-if="isOverLengthLimit" disabled class="btn btn-default">{{$t('general.submit')}}</button>
-        <button v-else :disabled="submitDisabled" type="submit" class="btn btn-default">{{$t('general.submit')}}</button>
+      <poll-form
+        v-if="pollsAvailable"
+        ref="pollForm"
+        :visible="pollFormVisible"
+        @update-poll="setPoll"
+      />
+      <div
+        ref="bottom"
+        class="form-bottom"
+      >
+        <div class="form-bottom-left">
+          <media-upload
+            ref="mediaUpload"
+            class="media-upload-icon"
+            :drop-files="dropFiles"
+            @uploading="disableSubmit"
+            @uploaded="addMediaFile"
+            @upload-failed="uploadFailed"
+          />
+          <div
+            class="emoji-icon"
+          >
+            <i
+              :title="$t('emoji.add_emoji')"
+              class="icon-smile btn btn-default"
+              @click="showEmojiPicker"
+            />
+          </div>
+          <div
+            v-if="pollsAvailable"
+            class="poll-icon"
+            :class="{ selected: pollFormVisible }"
+          >
+            <i
+              :title="$t('polls.add_poll')"
+              class="icon-chart-bar btn btn-default"
+              @click="togglePollForm"
+            />
+          </div>
+        </div>
+        <button
+          v-if="posting"
+          disabled
+          class="btn btn-default"
+        >
+          {{ $t('post_status.posting') }}
+        </button>
+        <button
+          v-else-if="isOverLengthLimit"
+          disabled
+          class="btn btn-default"
+        >
+          {{ $t('general.submit') }}
+        </button>
+        <button
+          v-else
+          :disabled="submitDisabled"
+          type="submit"
+          class="btn btn-default"
+        >
+          {{ $t('general.submit') }}
+        </button>
       </div>
-      <div class='alert error' v-if="error">
+      <div
+        v-if="error"
+        class="alert error"
+      >
         Error: {{ error }}
-        <i class="button-icon icon-cancel" @click="clearError"></i>
+        <i
+          class="button-icon icon-cancel"
+          @click="clearError"
+        />
       </div>
       <div class="attachments">
-        <div class="media-upload-wrapper" v-for="file in newStatus.files">
-          <i class="fa button-icon icon-cancel" @click="removeMediaFile(file)"></i>
+        <div
+          v-for="file in newStatus.files"
+          :key="file.url"
+          class="media-upload-wrapper"
+        >
+          <i
+            class="fa button-icon icon-cancel"
+            @click="removeMediaFile(file)"
+          />
           <div class="media-upload-container attachment">
-            <img class="thumbnail media-upload" :src="file.image" v-if="type(file) === 'image'"></img>
-            <video v-if="type(file) === 'video'" :src="file.image" controls></video>
-            <audio v-if="type(file) === 'audio'" :src="file.image" controls></audio>
-            <a v-if="type(file) === 'unknown'" :href="file.image">{{file.url}}</a>
+            <img
+              v-if="type(file) === 'image'"
+              class="thumbnail media-upload"
+              :src="file.url"
+            >
+            <video
+              v-if="type(file) === 'video'"
+              :src="file.url"
+              controls
+            />
+            <audio
+              v-if="type(file) === 'audio'"
+              :src="file.url"
+              controls
+            />
+            <a
+              v-if="type(file) === 'unknown'"
+              :href="file.url"
+            >{{ file.url }}</a>
           </div>
         </div>
       </div>
-      <div class="upload_settings" v-if="newStatus.files.length > 0">
-        <input type="checkbox" id="filesSensitive" v-model="newStatus.nsfw">
-        <label for="filesSensitive">{{$t('post_status.attachments_sensitive')}}</label>
+      <div
+        v-if="newStatus.files.length > 0"
+        class="upload_settings"
+      >
+        <Checkbox v-model="newStatus.nsfw">
+          {{ $t('post_status.attachments_sensitive') }}
+        </Checkbox>
       </div>
     </form>
   </div>
@@ -125,13 +298,14 @@
   .visibility-tray {
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
+    padding-top: 5px;
   }
 }
 
-.post-status-form, .login {
+.post-status-form {
   .form-bottom {
     display: flex;
+    justify-content: space-between;
     padding: 0.5em;
     height: 32px;
 
@@ -144,6 +318,54 @@
       padding: 0.35em;
       display: flex;
     }
+  }
+
+  .form-bottom-left {
+    display: flex;
+    flex: 1;
+    padding-right: 7px;
+    margin-right: 7px;
+    max-width: 10em;
+  }
+
+  .text-format {
+    .only-format {
+      color: $fallback--faint;
+      color: var(--faint, $fallback--faint);
+    }
+  }
+
+  .media-upload-icon, .poll-icon, .emoji-icon {
+    font-size: 26px;
+    flex: 1;
+
+    &.selected, &:hover {
+      // needs to be specific to override icon default color
+      i, label {
+        color: $fallback--lightText;
+        color: var(--lightText, $fallback--lightText);
+      }
+    }
+  }
+
+  // Order is not necessary but a good indicator
+  .media-upload-icon {
+    order: 1;
+    text-align: left;
+  }
+
+  .emoji-icon {
+    order: 2;
+    text-align: center;
+  }
+
+  .poll-icon {
+    order: 3;
+    text-align: right;
+  }
+
+  .icon-chart-bar {
+    cursor: pointer;
   }
 
   .error {
@@ -169,6 +391,13 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+  }
+
+  .status-input-wrapper {
+    display: flex;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
   }
 
   .attachments {
@@ -206,7 +435,6 @@
     }
   }
 
-
   .btn {
     cursor: pointer;
   }
@@ -224,7 +452,7 @@
   .form-group {
     display: flex;
     flex-direction: column;
-    padding: 0.3em 0.5em 0.6em;
+    padding: 0.25em 0.5em 0.5em;
     line-height:24px;
   }
 
@@ -236,17 +464,32 @@
     min-height: 1px;
   }
 
-  form textarea.form-control {
-    line-height:16px;
+  .form-post-body {
+    height: 16px; // Only affects the empty-height
+    line-height: 16px;
     resize: none;
     overflow: hidden;
     transition: min-height 200ms 100ms;
+    padding-bottom: 1.75em;
     min-height: 1px;
     box-sizing: content-box;
   }
 
-  form textarea.form-control:focus {
-    min-height: 48px;
+  .main-input {
+    position: relative;
+  }
+
+  .character-counter {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: 0 0.5em;
+
+    &.error {
+      color: $fallback--cRed;
+      color: var(--cRed, $fallback--cRed);
+    }
   }
 
   .btn {
@@ -260,53 +503,6 @@
   .icon-cancel {
     cursor: pointer;
     z-index: 4;
-  }
-
-  .autocomplete-panel {
-    margin: 0 0.5em 0 0.5em;
-    border-radius: $fallback--tooltipRadius;
-    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-    position: absolute;
-    z-index: 1;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-    // this doesn't match original but i don't care, making it uniform.
-    box-shadow: var(--popupShadow);
-    min-width: 75%;
-    background: $fallback--bg;
-    background: var(--bg, $fallback--bg);
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-  }
-
-  .autocomplete {
-    cursor: pointer;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    display: flex;
-
-    img {
-      width: 24px;
-      height: 24px;
-      border-radius: $fallback--avatarRadius;
-      border-radius: var(--avatarRadius, $fallback--avatarRadius);
-      object-fit: contain;
-    }
-
-    span {
-      line-height: 24px;
-      margin: 0 0.1em 0 0.2em;
-    }
-
-    small {
-      margin-left: .5em;
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
-    }
-
-    &.highlighted {
-      background-color: $fallback--fg;
-      background-color: var(--lightBg, $fallback--fg);
-    }
   }
 }
 </style>

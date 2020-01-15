@@ -1,43 +1,23 @@
 import BasicUserCard from '../basic_user_card/basic_user_card.vue'
-import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
+import RemoteFollow from '../remote_follow/remote_follow.vue'
+import FollowButton from '../follow_button/follow_button.vue'
 
 const FollowCard = {
   props: [
     'user',
     'noFollowsYou'
   ],
-  data () {
-    return {
-      inProgress: false,
-      requestSent: false,
-      updated: false
-    }
-  },
   components: {
-    BasicUserCard
+    BasicUserCard,
+    RemoteFollow,
+    FollowButton
   },
   computed: {
-    isMe () { return this.$store.state.users.currentUser.id === this.user.id },
-    following () { return this.updated ? this.updated.following : this.user.following },
-    showFollow () {
-      return !this.following || this.updated && !this.updated.following
-    }
-  },
-  methods: {
-    followUser () {
-      this.inProgress = true
-      requestFollow(this.user, this.$store).then(({ sent, updated }) => {
-        this.inProgress = false
-        this.requestSent = sent
-        this.updated = updated
-      })
+    isMe () {
+      return this.$store.state.users.currentUser.id === this.user.id
     },
-    unfollowUser () {
-      this.inProgress = true
-      requestUnfollow(this.user, this.$store).then(({ updated }) => {
-        this.inProgress = false
-        this.updated = updated
-      })
+    loggedIn () {
+      return this.$store.state.users.currentUser
     }
   }
 }

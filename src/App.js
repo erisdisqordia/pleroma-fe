@@ -1,15 +1,18 @@
 import UserPanel from './components/user_panel/user_panel.vue'
 import NavPanel from './components/nav_panel/nav_panel.vue'
 import Notifications from './components/notifications/notifications.vue'
-import UserFinder from './components/user_finder/user_finder.vue'
+import SearchBar from './components/search_bar/search_bar.vue'
 import InstanceSpecificPanel from './components/instance_specific_panel/instance_specific_panel.vue'
 import FeaturesPanel from './components/features_panel/features_panel.vue'
 import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_panel.vue'
 import ChatPanel from './components/chat_panel/chat_panel.vue'
 import MediaModal from './components/media_modal/media_modal.vue'
 import SideDrawer from './components/side_drawer/side_drawer.vue'
-import MobilePostStatusModal from './components/mobile_post_status_modal/mobile_post_status_modal.vue'
-import { unseenNotificationsFromStore } from './services/notification_utils/notification_utils'
+import MobilePostStatusButton from './components/mobile_post_status_button/mobile_post_status_button.vue'
+import MobileNav from './components/mobile_nav/mobile_nav.vue'
+import UserReportingModal from './components/user_reporting_modal/user_reporting_modal.vue'
+import PostStatusModal from './components/post_status_modal/post_status_modal.vue'
+import { windowWidth } from './services/window_utils/window_utils'
 
 export default {
   name: 'app',
@@ -17,18 +20,21 @@ export default {
     UserPanel,
     NavPanel,
     Notifications,
-    UserFinder,
+    SearchBar,
     InstanceSpecificPanel,
     FeaturesPanel,
     WhoToFollowPanel,
     ChatPanel,
     MediaModal,
     SideDrawer,
-    MobilePostStatusModal
+    MobilePostStatusButton,
+    MobileNav,
+    UserReportingModal,
+    PostStatusModal
   },
   data: () => ({
     mobileActivePanel: 'timeline',
-    finderHidden: true,
+    searchBarHidden: true,
     supportsMask: window.CSS && window.CSS.supports && (
       window.CSS.supports('mask-size', 'contain') ||
         window.CSS.supports('-webkit-mask-size', 'contain') ||
@@ -39,7 +45,11 @@ export default {
   }),
   created () {
     // Load the locale from the storage
-    this.$i18n.locale = this.$store.state.config.interfaceLanguage
+    this.$i18n.locale = this.$store.getters.mergedConfig.interfaceLanguage
+    window.addEventListener('resize', this.updateMobileState)
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.updateMobileState)
   },
   computed: {
     currentUser () { return this.$store.state.users.currentUser },
@@ -62,7 +72,7 @@ export default {
     logoBgStyle () {
       return Object.assign({
         'margin': `${this.$store.state.instance.logoMargin} 0`,
-        opacity: this.finderHidden ? 1 : 0
+        opacity: this.searchBarHidden ? 1 : 0
       }, this.enableMask ? {} : {
         'background-color': this.enableMask ? '' : 'transparent'
       })
@@ -80,15 +90,16 @@ export default {
     },
     sitename () { return this.$store.state.instance.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
+    hideSitename () { return this.$store.state.instance.hideSitename },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
-    showInstanceSpecificPanel () { return this.$store.state.instance.showInstanceSpecificPanel },
-    unseenNotifications () {
-      return unseenNotificationsFromStore(this.$store)
+    showInstanceSpecificPanel () {
+      return this.$store.state.instance.showInstanceSpecificPanel &&
+        !this.$store.getters.mergedConfig.hideISP &&
+        this.$store.state.instance.instanceSpecificPanelContent
     },
-    unseenNotificationsCount () {
-      return this.unseenNotifications.length
-    },
-    showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel }
+    showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
+    isMobileLayout () { return this.$store.state.interface.mobileLayout },
+    privateMode () { return this.$store.state.instance.private }
   },
   methods: {
     scrollToTop () {
@@ -98,11 +109,15 @@ export default {
       this.$router.replace('/main/public')
       this.$store.dispatch('logout')
     },
-    onFinderToggled (hidden) {
-      this.finderHidden = hidden
+    onSearchBarToggled (hidden) {
+      this.searchBarHidden = hidden
     },
-    toggleMobileSidebar () {
-      this.$refs.sideDrawer.toggleDrawer()
+    updateMobileState () {
+      const mobileLayout = windowWidth() <= 800
+      const changed = mobileLayout !== this.isMobileLayout
+      if (changed) {
+        this.$store.dispatch('setMobileLayout', mobileLayout)
+      }
     }
   }
 }

@@ -16,13 +16,15 @@ const messages = {
   eo: require('./eo.json'),
   es: require('./es.json'),
   et: require('./et.json'),
+  eu: require('./eu.json'),
   fi: require('./fi.json'),
   fr: require('./fr.json'),
   ga: require('./ga.json'),
   he: require('./he.json'),
   hu: require('./hu.json'),
   it: require('./it.json'),
-  ja: require('./ja.json'),
+  ja: require('./ja_pedantic.json'),
+  ja_easy: require('./ja_easy.json'),
   ko: require('./ko.json'),
   nb: require('./nb.json'),
   nl: require('./nl.json'),
@@ -31,6 +33,7 @@ const messages = {
   pt: require('./pt.json'),
   ro: require('./ro.json'),
   ru: require('./ru.json'),
+  te: require('./te.json'),
   zh: require('./zh.json')
 }
 

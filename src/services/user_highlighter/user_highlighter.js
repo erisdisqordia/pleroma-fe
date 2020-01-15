@@ -1,7 +1,7 @@
 import { hex2rgb } from '../color_convert/color_convert.js'
 const highlightStyle = (prefs) => {
   if (prefs === undefined) return
-  const {color, type} = prefs
+  const { color, type } = prefs
   if (typeof color !== 'string') return
   const rgb = hex2rgb(color)
   if (rgb == null) return

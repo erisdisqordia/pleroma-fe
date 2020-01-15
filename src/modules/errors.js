@@ -9,4 +9,3 @@ export function humanizeErrors (errors) {
     return [...errs, message]
   }, [])
 }
-

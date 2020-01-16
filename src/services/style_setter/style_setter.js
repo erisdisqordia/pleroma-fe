@@ -336,25 +336,23 @@ export const getThemes = () => {
   return window.fetch('/static/styles.json')
     .then((data) => data.json())
     .then((themes) => {
-      return Promise.all(Object.entries(themes).map(([k, v]) => {
+      return Object.entries(themes).map(([k, v]) => {
+        let promise = null
         if (typeof v === 'object') {
-          return Promise.resolve([k, v])
+          promise = Promise.resolve(v)
         } else if (typeof v === 'string') {
-          return window.fetch(v)
+          promise = window.fetch(v)
             .then((data) => data.json())
-            .then((theme) => {
-              return [k, theme]
-            })
             .catch((e) => {
               console.error(e)
-              return []
+              return null
             })
         }
-      }))
+        return [k, promise]
+      })
     })
     .then((promises) => {
       return promises
-        .filter(([k, v]) => v)
         .reduce((acc, [k, v]) => {
           acc[k] = v
           return acc
@@ -363,33 +361,34 @@ export const getThemes = () => {
 }
 
 export const setPreset = (val, commit) => {
-  return getThemes().then((themes) => {
-    const theme = themes[val] ? themes[val] : themes['pleroma-dark']
-    const isV1 = Array.isArray(theme)
-    const data = isV1 ? {} : theme.theme
+  return getThemes()
+    .then((themes) => console.log(themes) || themes[val] ? themes[val] : themes['pleroma-dark'])
+    .then((theme) => {
+      const isV1 = Array.isArray(theme)
+      const data = isV1 ? {} : theme.theme
 
-    if (isV1) {
-      const bg = hex2rgb(theme[1])
-      const fg = hex2rgb(theme[2])
-      const text = hex2rgb(theme[3])
-      const link = hex2rgb(theme[4])
+      if (isV1) {
+        const bg = hex2rgb(theme[1])
+        const fg = hex2rgb(theme[2])
+        const text = hex2rgb(theme[3])
+        const link = hex2rgb(theme[4])
 
-      const cRed = hex2rgb(theme[5] || '#FF0000')
-      const cGreen = hex2rgb(theme[6] || '#00FF00')
-      const cBlue = hex2rgb(theme[7] || '#0000FF')
-      const cOrange = hex2rgb(theme[8] || '#E3FF00')
+        const cRed = hex2rgb(theme[5] || '#FF0000')
+        const cGreen = hex2rgb(theme[6] || '#00FF00')
+        const cBlue = hex2rgb(theme[7] || '#0000FF')
+        const cOrange = hex2rgb(theme[8] || '#E3FF00')
 
-      data.colors = { bg, fg, text, link, cRed, cBlue, cGreen, cOrange }
-    }
+        data.colors = { bg, fg, text, link, cRed, cBlue, cGreen, cOrange }
+      }
 
-    // This is a hack, this function is only called during initial load.
-    // We want to cancel loading the theme from config.json if we're already
-    // loading a theme from the persisted state.
-    // Needed some way of dealing with the async way of things.
-    // load config -> set preset -> wait for styles.json to load ->
-    // load persisted state -> set colors -> styles.json loaded -> set colors
-    if (!window.themeLoaded) {
-      applyTheme(data, commit)
-    }
-  })
+      // This is a hack, this function is only called during initial load.
+      // We want to cancel loading the theme from config.json if we're already
+      // loading a theme from the persisted state.
+      // Needed some way of dealing with the async way of things.
+      // load config -> set preset -> wait for styles.json to load ->
+      // load persisted state -> set colors -> styles.json loaded -> set colors
+      if (!window.themeLoaded) {
+        applyTheme(data, commit)
+      }
+    })
 }

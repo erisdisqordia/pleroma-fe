@@ -96,9 +96,26 @@ export default {
   created () {
     const self = this
 
-    getThemes().then((themesComplete) => {
-      self.availableStyles = themesComplete
-    })
+    getThemes()
+      .then((promises) => {
+        return Promise.all(
+          Object.entries(promises)
+            .map(([k, v]) => v.then(res => [k, res]))
+        )
+      })
+      .then(themes => themes.reduce((acc, [k, v]) => {
+        if (v) {
+          return {
+            ...acc,
+            [k]: v
+          }
+        } else {
+          return acc
+        }
+      }, {}))
+      .then((themesComplete) => {
+        self.availableStyles = themesComplete
+      })
   },
   mounted () {
     this.normalizeLocalState(this.$store.getters.mergedConfig.customTheme)

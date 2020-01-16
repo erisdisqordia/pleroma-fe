@@ -35,8 +35,8 @@ export const DEFAULT_OPACITY = {
 export const SLOT_INHERITANCE = {
   bg: {
     depends: [],
-    priority: 1,
-    opacity: 'bg'
+    opacity: 'bg',
+    priority: 1
   },
   fg: {
     depends: [],
@@ -272,6 +272,9 @@ export const SLOT_INHERITANCE = {
     variant: 'btnPressed',
     textColor: true
   },
+  btnPressedPanel: {
+    depends: ['btnPressed']
+  },
   btnPressedPanelText: {
     depends: ['btnPanelText'],
     layer: 'btnPanel',
@@ -490,8 +493,13 @@ export const getOpacitySlot = (
   inheritance = SLOT_INHERITANCE,
   getDeps = getDependencies
 ) => {
-  if (v.opacity === null) return
-  if (v.opacity) return v.opacity
+  const value = typeof v === 'string'
+    ? {
+      depends: v.startsWith('--') ? [v.substring(2)] : []
+    }
+    : v
+  if (value.opacity === null) return
+  if (value.opacity) return v.opacity
   const findInheritedOpacity = (val) => {
     const depSlot = val.depends[0]
     if (depSlot === undefined) return
@@ -505,8 +513,40 @@ export const getOpacitySlot = (
       return null
     }
   }
-  if (v.depends) {
-    return findInheritedOpacity(v)
+  if (value.depends) {
+    return findInheritedOpacity(value)
+  }
+}
+
+export const getLayerSlot = (
+  k,
+  v,
+  inheritance = SLOT_INHERITANCE,
+  getDeps = getDependencies
+) => {
+  const value = typeof v === 'string'
+    ? {
+      depends: v.startsWith('--') ? [v.substring(2)] : []
+    }
+    : v
+  if (LAYERS[k]) return k
+  if (value.layer === null) return
+  if (value.layer) return v.layer
+  const findInheritedLayer = (val) => {
+    const depSlot = val.depends[0]
+    if (depSlot === undefined) return
+    const dependency = getDeps(depSlot, inheritance)[0]
+    if (dependency === undefined) return
+    if (dependency.layer || dependency === null) {
+      return dependency.layer
+    } else if (dependency.depends) {
+      return findInheritedLayer(dependency)
+    } else {
+      return null
+    }
+  }
+  if (value.depends) {
+    return findInheritedLayer(value)
   }
 }
 
@@ -550,9 +590,20 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
     // Color is defined in source color
     let targetColor = sourceColor
     if (targetColor === 'transparent') {
+      // We take only layers below current one
+      const layers = getLayers(
+        getLayerSlot(key, value),
+        key,
+        value.opacity || key,
+        colors,
+        opacity
+      ).slice(0, -1)
       targetColor = {
         // TODO: try to use alpha-blended background here
-        ...convert('#FF00FF').rgb,
+        ...alphaBlendLayers(
+          convert('#FF00FF').rgb,
+          layers
+        ),
         a: 0
       }
     } else if (typeof sourceColor === 'string' && sourceColor.startsWith('--')) {

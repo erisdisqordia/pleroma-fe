@@ -1,7 +1,7 @@
 import { times } from 'lodash'
 import { convert } from 'chromatism'
 import { rgb2hex, hex2rgb, rgba2css, getCssColor } from '../color_convert/color_convert.js'
-import { getColors, DEFAULT_OPACITY } from '../theme_data/theme_data.service.js'
+import { getColors } from '../theme_data/theme_data.service.js'
 
 // While this is not used anymore right now, I left it in if we want to do custom
 // styles that aren't just colors, so user can pick from a few different distinct
@@ -115,76 +115,12 @@ const getCssShadowFilter = (input) => {
 }
 
 export const generateColors = (themeData) => {
-  const rawOpacity = Object.assign({ ...DEFAULT_OPACITY }, Object.entries(themeData.opacity || {}).reduce((acc, [k, v]) => {
-    if (typeof v !== 'undefined') {
-      acc[k] = v
-    }
-    return acc
-  }, {}))
-
-  const inputColors = themeData.colors || themeData
-
-  const opacity = {
-    ...rawOpacity,
-    ...Object.entries(inputColors).reduce((acc, [k, v]) => {
-      if (v === 'transparent') {
-        acc[k] = 0
-      }
-      return acc
-    }, {})
-  }
-
-  // Cycle one: just whatever we have
-  const sourceColors = Object.entries(inputColors).reduce((acc, [k, v]) => {
-    if (typeof v === 'object') {
-      acc[k] = v
-    } else {
-      let value = v
-      if (v === 'transparent') {
-        // TODO: hack to keep rest of the code from complaining
-        value = '#FF00FF'
-      }
-      if (!value || value.startsWith('--')) {
-        acc[k] = value
-      } else {
-        acc[k] = hex2rgb(value)
-      }
-    }
-    return acc
-  }, {})
+  const sourceColors = themeData.colors || themeData
 
   const isLightOnDark = convert(sourceColors.bg).hsl.l < convert(sourceColors.text).hsl.l
   const mod = isLightOnDark ? 1 : -1
 
-  const colors = getColors(sourceColors, opacity, mod)
-
-  // Inheriting opacities
-  Object.entries(opacity).forEach(([ k, v ]) => {
-    if (typeof v === 'undefined') return
-    if (k === 'alert') {
-      colors.alertError.a = v
-      colors.alertWarning.a = v
-      return
-    }
-    if (k === 'faint') {
-      colors['faintLink'].a = v
-      colors['panelFaint'].a = v
-      colors['lightBgFaintText'].a = v
-      colors['lightBgFaintLink'].a = v
-    }
-    if (k === 'bg') {
-      colors['lightBg'].a = v
-    }
-    if (k === 'badge') {
-      colors['badgeNotification'].a = v
-      return
-    }
-    if (colors[k]) {
-      colors[k].a = v
-    } else {
-      console.error('Wrong key ' + k)
-    }
-  })
+  const { colors, opacity } = getColors(sourceColors, themeData.opacity || {}, mod)
 
   const htmlColors = Object.entries(colors)
     .reduce((acc, [k, v]) => {

@@ -26,24 +26,17 @@ export const LAYERS = {
 }
 
 export const DEFAULT_OPACITY = {
-  panel: 1,
-  btn: 1,
-  border: 1,
-  bg: 1,
-  badge: 1,
-  text: 1,
   alert: 0.5,
   input: 0.5,
   faint: 0.5,
-  underlay: 0.15,
-  poll: 1,
-  topBar: 1
+  underlay: 0.15
 }
 
 export const SLOT_INHERITANCE = {
   bg: {
     depends: [],
-    priority: 1
+    priority: 1,
+    opacity: 'bg'
   },
   fg: {
     depends: [],
@@ -53,7 +46,10 @@ export const SLOT_INHERITANCE = {
     depends: [],
     priority: 1
   },
-  underlay: '#000000',
+  underlay: {
+    default: '#000000',
+    opacity: 'underlay'
+  },
   link: {
     depends: ['accent'],
     priority: 1
@@ -62,8 +58,14 @@ export const SLOT_INHERITANCE = {
     depends: ['link'],
     priority: 1
   },
-  faint: '--text',
-  faintLink: '--link',
+  faint: {
+    depends: ['text'],
+    opacity: 'faint'
+  },
+  faintLink: {
+    depends: ['link'],
+    opacity: 'faint'
+  },
 
   cBlue: '#0000ff',
   cRed: '#FF0000',
@@ -158,11 +160,13 @@ export const SLOT_INHERITANCE = {
 
   border: {
     depends: ['fg'],
+    opacity: 'border',
     color: (mod, fg) => brightness(2 * mod, fg).rgb
   },
 
   poll: {
     depends: ['accent', 'bg'],
+    copacity: 'poll',
     color: (mod, accent, bg) => alphaBlend(accent, 0.4, bg)
   },
   pollText: {
@@ -173,6 +177,7 @@ export const SLOT_INHERITANCE = {
 
   icon: {
     depends: ['bg', 'text'],
+    inheritsOpacity: false,
     color: (mod, bg, text) => mixrgb(bg, text)
   },
 
@@ -189,7 +194,10 @@ export const SLOT_INHERITANCE = {
   },
 
   // Panel header
-  panel: '--fg',
+  panel: {
+    depends: ['fg'],
+    opacity: 'panel'
+  },
   panelText: {
     depends: ['fgText'],
     layer: 'panel',
@@ -198,6 +206,7 @@ export const SLOT_INHERITANCE = {
   panelFaint: {
     depends: ['fgText'],
     layer: 'panel',
+    opacity: 'faint',
     textColor: true
   },
   panelLink: {
@@ -233,7 +242,10 @@ export const SLOT_INHERITANCE = {
   },
 
   // Buttons
-  btn: '--fg',
+  btn: {
+    depends: ['fg'],
+    opacity: 'btn'
+  },
   btnText: {
     depends: ['fgText'],
     layer: 'btn',
@@ -325,7 +337,10 @@ export const SLOT_INHERITANCE = {
   },
 
   // Input fields
-  input: '--fg',
+  input: {
+    depends: ['fg'],
+    opacity: 'input'
+  },
   inputText: {
     depends: ['text'],
     layer: 'input',
@@ -344,7 +359,10 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
 
-  alertError: '--cRed',
+  alertError: {
+    depends: ['cRed'],
+    opacity: 'alert'
+  },
   alertErrorText: {
     depends: ['text'],
     layer: 'alert',
@@ -358,7 +376,10 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
 
-  alertWarning: '--cOrange',
+  alertWarning: {
+    depends: ['cOrange'],
+    opacity: 'alert'
+  },
   alertWarningText: {
     depends: ['text'],
     layer: 'alert',
@@ -465,78 +486,144 @@ export const topoSort = (
   return output
 }
 
+export const getOpacitySlot = (
+  v,
+  inheritance = SLOT_INHERITANCE,
+  getDeps = getDependencies
+) => {
+  if (v.opacity === null) return
+  if (v.opacity) return v.opacity
+  const findInheritedOpacity = (val) => {
+    const depSlot = val.depends[0]
+    if (depSlot === undefined) return
+    const dependency = getDeps(depSlot, inheritance)[0]
+    if (dependency === undefined) return
+    if (dependency.opacity || dependency === null) {
+      return dependency.opacity
+    } else if (dependency.depends) {
+      return findInheritedOpacity(dependency)
+    } else {
+      return null
+    }
+  }
+  if (v.depends) {
+    return findInheritedOpacity(v)
+  }
+}
+
 export const SLOT_ORDERED = topoSort(
   Object.entries(SLOT_INHERITANCE)
     .sort(([aK, aV], [bK, bV]) => ((aV && aV.priority) || 0) - ((bV && bV.priority) || 0))
     .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {})
 )
 
-console.log(SLOT_ORDERED)
+export const SLOTS_OPACITIES_DICT = Object.entries(SLOT_INHERITANCE).reduce((acc, [k, v]) => {
+  const opacity = getOpacitySlot(v, SLOT_INHERITANCE, getDependencies)
+  if (opacity) {
+    return { ...acc, [k]: opacity }
+  } else {
+    return acc
+  }
+}, {})
 
-export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.reduce((acc, key) => {
+export const OPACITIES = Object.entries(SLOT_INHERITANCE).reduce((acc, [k, v]) => {
+  const opacity = getOpacitySlot(v, SLOT_INHERITANCE, getDependencies)
+  if (opacity) {
+    return {
+      ...acc,
+      [opacity]: {
+        defaultValue: DEFAULT_OPACITY[opacity] || 1,
+        affectedSlots: [...((acc[opacity] && acc[opacity].affectedSlots) || []), k]
+      }
+    }
+  } else {
+    return acc
+  }
+}, {})
+
+export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.reduce(({ colors, opacity }, key) => {
   const value = SLOT_INHERITANCE[key]
+  const isObject = typeof value === 'object'
+  const isString = typeof value === 'string'
   const sourceColor = sourceColors[key]
+  let outputColor = null
   if (sourceColor) {
+    // Color is defined in source color
     let targetColor = sourceColor
-    if (typeof sourceColor === 'string' && sourceColor.startsWith('--')) {
+    if (targetColor === 'transparent') {
+      targetColor = {
+        // TODO: try to use alpha-blended background here
+        ...convert('#FF00FF').rgb,
+        a: 0
+      }
+    } else if (typeof sourceColor === 'string' && sourceColor.startsWith('--')) {
+      // Color references other color
       const [variable, modifier] = sourceColor.split(/,/g).map(str => str.trim())
       const variableSlot = variable.substring(2)
-      targetColor = acc[variableSlot] || sourceColors[variableSlot]
+      targetColor = colors[variableSlot] || sourceColors[variableSlot]
       if (modifier) {
-        console.log(targetColor, acc, variableSlot)
         targetColor = brightness(Number.parseFloat(modifier) * mod, targetColor).rgb
       }
-      console.log(targetColor, acc, variableSlot)
+    } else if (typeof sourceColor === 'string' && sourceColor.startsWith('#')) {
+      targetColor = convert(targetColor).rgb
     }
-    return { ...acc, [key]: { ...targetColor } }
-  } else if (typeof value === 'string' && value.startsWith('#')) {
-    return { ...acc, [key]: convert(value).rgb }
+    outputColor = { ...targetColor }
+  } else if (isString && value.startsWith('#')) {
+    // slot: '#000000' shorthand
+    outputColor = convert(value).rgb
+  } else if (isObject && value.default) {
+    // same as above except in object form
+    outputColor = convert(value.default).rgb
   } else {
-    const isObject = typeof value === 'object'
+    // calculate color
     const defaultColorFunc = (mod, dep) => ({ ...dep })
     const deps = getDependencies(key, SLOT_INHERITANCE)
     const colorFunc = (isObject && value.color) || defaultColorFunc
 
     if (value.textColor) {
+      // textColor case
       const bg = alphaBlendLayers(
-        { ...acc[deps[0]] },
+        { ...colors[deps[0]] },
         getLayers(
           value.layer,
           value.variant || value.layer,
-          acc,
-          sourceOpacity
+          colors,
+          opacity
         )
       )
       if (value.textColor === 'bw') {
-        return {
-          ...acc,
-          [key]: contrastRatio(bg).rgb
-        }
+        outputColor = contrastRatio(bg).rgb
       } else {
-        let color = { ...acc[deps[0]] }
+        let color = { ...colors[deps[0]] }
         if (value.color) {
           const isLightOnDark = convert(bg).hsl.l < convert(color).hsl.l
           const mod = isLightOnDark ? 1 : -1
-          color = value.color(mod, ...deps.map((dep) => ({ ...acc[dep] })))
+          color = value.color(mod, ...deps.map((dep) => ({ ...colors[dep] })))
         }
 
-        return {
-          ...acc,
-          [key]: getTextColor(
-            bg,
-            { ...color },
-            value.textColor === 'preserve'
-          )
-        }
-      }
-    } else {
-      return {
-        ...acc,
-        [key]: colorFunc(
-          mod,
-          ...deps.map((dep) => ({ ...acc[dep] }))
+        outputColor = getTextColor(
+          bg,
+          { ...color },
+          value.textColor === 'preserve'
         )
       }
+    } else {
+      // background color case
+      outputColor = colorFunc(
+        mod,
+        ...deps.map((dep) => ({ ...colors[dep] }))
+      )
     }
   }
-}, {})
+  if (!outputColor) {
+    throw new Error('Couldn\'t generate color for ' + key)
+  }
+  const opacitySlot = SLOTS_OPACITIES_DICT[key]
+  if (opacitySlot && outputColor.a === undefined) {
+    outputColor.a = sourceOpacity[opacitySlot] || OPACITIES[opacitySlot].defaultValue || 1
+  }
+  return {
+    colors: { ...colors, [key]: outputColor },
+    opacity: { ...opacity, [opacitySlot]: outputColor.a }
+  }
+}, { colors: {}, opacity: {} })

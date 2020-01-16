@@ -159,7 +159,7 @@ export const hex2rgb = (hex) => {
  * @returns {Object} result
  */
 export const mixrgb = (a, b) => {
-  return Object.keys(a).reduce((acc, k) => {
+  return 'rgb'.split('').reduce((acc, k) => {
     acc[k] = (a[k] + b[k]) / 2
     return acc
   }, {})

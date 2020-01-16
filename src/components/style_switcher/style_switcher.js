@@ -15,7 +15,7 @@ import {
 import {
   CURRENT_VERSION,
   SLOT_INHERITANCE,
-  DEFAULT_OPACITY,
+  OPACITIES,
   getLayers
 } from '../../services/theme_data/theme_data.service.js'
 import ColorInput from '../color_input/color_input.vue'
@@ -74,8 +74,8 @@ export default {
         .map(key => [key, ''])
         .reduce((acc, [key, val]) => ({ ...acc, [ key + 'ColorLocal' ]: val }), {}),
 
-      ...Object.keys(DEFAULT_OPACITY)
-        .map(key => [key, undefined])
+      ...Object.keys(OPACITIES)
+        .map(key => console.log(key) || [key, ''])
         .reduce((acc, [key, val]) => ({ ...acc, [ key + 'OpacityLocal' ]: val }), {}),
 
       shadowSelected: undefined,
@@ -115,8 +115,8 @@ export default {
         .reduce((acc, [key, val]) => ({ ...acc, [ key ]: val }), {})
     },
     currentOpacity () {
-      return Object.keys(DEFAULT_OPACITY)
-        .map(key => [key, this[key + 'OpacityLocal']])
+      return Object.keys(OPACITIES)
+        .map(key => console.log(key) || [key, this[key + 'OpacityLocal']])
         .reduce((acc, [key, val]) => ({ ...acc, [ key ]: val }), {})
     },
     currentRadii () {

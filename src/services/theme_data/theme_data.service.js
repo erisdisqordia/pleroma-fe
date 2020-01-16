@@ -105,21 +105,25 @@ export const SLOT_INHERITANCE = {
   selectedPostFaintText: {
     depends: ['lightBgFaintText'],
     layer: 'lightBg',
+    variant: 'selectedPost',
     textColor: true
   },
   selectedPostFaintLink: {
     depends: ['lightBgFaintLink'],
     layer: 'lightBg',
+    variant: 'selectedPost',
     textColor: 'preserve'
   },
   selectedPostText: {
     depends: ['lightBgText'],
     layer: 'lightBg',
+    variant: 'selectedPost',
     textColor: true
   },
   selectedPostLink: {
     depends: ['lightBgLink'],
     layer: 'lightBg',
+    variant: 'selectedPost',
     textColor: 'preserve'
   },
   selectedPostIcon: {
@@ -131,21 +135,25 @@ export const SLOT_INHERITANCE = {
   selectedMenuFaintText: {
     depends: ['lightBgFaintText'],
     layer: 'lightBg',
+    variant: 'selectedMenu',
     textColor: true
   },
   selectedMenuFaintLink: {
     depends: ['lightBgFaintLink'],
     layer: 'lightBg',
+    variant: 'selectedMenu',
     textColor: 'preserve'
   },
   selectedMenuText: {
     depends: ['lightBgText'],
     layer: 'lightBg',
+    variant: 'selectedMenu',
     textColor: true
   },
   selectedMenuLink: {
     depends: ['lightBgLink'],
     layer: 'lightBg',
+    variant: 'selectedMenu',
     textColor: 'preserve'
   },
   selectedMenuIcon: {

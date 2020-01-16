@@ -241,6 +241,7 @@
       "bg": "#d6d6ce",
       "text": "#000000",
       "link": "#0000ff",
+      "accent": "#0a246a",
       "fg": "#d6d6ce",
       "panel": "#042967",
       "panelFaint": "#FFFFFF",
@@ -254,7 +255,9 @@
       "cRed": "#c42726",
       "cBlue": "#6699cc",
       "cGreen": "#669966",
-      "cOrange": "#cc6633"
+      "cOrange": "#cc6633",
+      "lightBg": "--accent",
+      "selectedPost": "--bg,-10"
     },
     "radii": {
       "btn": "0",

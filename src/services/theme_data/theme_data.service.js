@@ -412,14 +412,13 @@ export const getLayersArray = (layer, data = LAYERS) => {
   return array
 }
 
-export const getLayers = (layer, variant = layer, colors, opacity) => {
+export const getLayers = (layer, variant = layer, opacitySlot, colors, opacity) => {
   return getLayersArray(layer).map((currentLayer) => ([
     currentLayer === layer
       ? colors[variant]
       : colors[currentLayer],
-    // TODO: Remove this hack when opacities/layers system is improved
-    currentLayer.startsWith('btn')
-      ? opacity.btn
+    currentLayer === layer
+      ? opacity[opacitySlot] || 1
       : opacity[currentLayer]
   ]))
 }
@@ -587,6 +586,7 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
         getLayers(
           value.layer,
           value.variant || value.layer,
+          getOpacitySlot(SLOT_INHERITANCE[value.variant || value.layer]),
           colors,
           opacity
         )
@@ -622,8 +622,15 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
   if (opacitySlot && outputColor.a === undefined) {
     outputColor.a = sourceOpacity[opacitySlot] || OPACITIES[opacitySlot].defaultValue || 1
   }
-  return {
-    colors: { ...colors, [key]: outputColor },
-    opacity: { ...opacity, [opacitySlot]: outputColor.a }
+  if (opacitySlot) {
+    return {
+      colors: { ...colors, [key]: outputColor },
+      opacity: { ...opacity, [opacitySlot]: outputColor.a }
+    }
+  } else {
+    return {
+      colors: { ...colors, [key]: outputColor },
+      opacity
+    }
   }
 }, { colors: {}, opacity: {} })

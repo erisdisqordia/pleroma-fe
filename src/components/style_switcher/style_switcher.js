@@ -16,7 +16,8 @@ import {
   CURRENT_VERSION,
   SLOT_INHERITANCE,
   OPACITIES,
-  getLayers
+  getLayers,
+  getOpacitySlot
 } from '../../services/theme_data/theme_data.service.js'
 import ColorInput from '../color_input/color_input.vue'
 import RangeInput from '../range_input/range_input.vue'
@@ -162,6 +163,7 @@ export default {
         )
         if (!slotIsText) return acc
         const { layer, variant } = slotIsBaseText ? { layer: 'bg' } : value
+        const opacitySlot = getOpacitySlot(SLOT_INHERITANCE[variant || layer])
         const background = variant || layer
         const textColors = [
           key,
@@ -171,6 +173,7 @@ export default {
         const layers = getLayers(
           layer,
           variant || layer,
+          opacitySlot,
           colorsConverted,
           opacity
         )

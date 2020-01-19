@@ -191,6 +191,8 @@
         v-model="selected.color"
         :disabled="!present"
         :label="$t('settings.style.common.color')"
+        :fallback="currentFallback.color"
+        :showOptionalTickbox="false"
         name="shadow"
       />
       <OpacityInput

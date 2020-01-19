@@ -61,6 +61,21 @@ export default {
         }
       }
     },
+    currentFallback () {
+      if (this.ready && this.fallback.length > 0) {
+        return this.fallback[this.selectedId]
+      } else {
+        return {
+          x: 0,
+          y: 0,
+          blur: 0,
+          spread: 0,
+          inset: false,
+          color: '#000000',
+          alpha: 1
+        }
+      }
+    },
     moveUpValid () {
       return this.ready && this.selectedId > 0
     },

@@ -698,6 +698,22 @@ export const OPACITIES = Object.entries(SLOT_INHERITANCE).reduce((acc, [k, v]) =
 }, {})
 
 /**
+ * Handle dynamic color
+ */
+export const computeDynamicColor = (sourceColor, getColor, mod) => {
+  if (typeof sourceColor !== 'string' || !sourceColor.startsWith('--')) return sourceColor
+  let targetColor = null
+  // Color references other color
+  const [variable, modifier] = sourceColor.split(/,/g).map(str => str.trim())
+  const variableSlot = variable.substring(2)
+  targetColor = getColor(variableSlot)
+  if (modifier) {
+    targetColor = brightness(Number.parseFloat(modifier) * mod, targetColor).rgb
+  }
+  return targetColor
+}
+
+/**
  * THE function you want to use. Takes provided colors and opacities, mod
  * value and uses inheritance data to figure out color needed for the slot.
  */
@@ -728,13 +744,11 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
         a: 0
       }
     } else if (typeof sourceColor === 'string' && sourceColor.startsWith('--')) {
-      // Color references other color
-      const [variable, modifier] = sourceColor.split(/,/g).map(str => str.trim())
-      const variableSlot = variable.substring(2)
-      targetColor = colors[variableSlot] || sourceColors[variableSlot]
-      if (modifier) {
-        targetColor = brightness(Number.parseFloat(modifier) * mod, targetColor).rgb
-      }
+      targetColor = computeDynamicColor(
+        sourceColor,
+        variableSlot => colors[variableSlot] || sourceColors[variableSlot],
+        mod
+      )
     } else if (typeof sourceColor === 'string' && sourceColor.startsWith('#')) {
       targetColor = convert(targetColor).rgb
     }

@@ -5,6 +5,7 @@ import {
   getContrastRatioLayers
 } from '../../services/color_convert/color_convert.js'
 import {
+  DEFAULT_SHADOWS,
   generateColors,
   generateShadows,
   generateRadii,
@@ -76,7 +77,7 @@ export default {
         .reduce((acc, [key, val]) => ({ ...acc, [ key + 'ColorLocal' ]: val }), {}),
 
       ...Object.keys(OPACITIES)
-        .map(key => console.log(key) || [key, ''])
+        .map(key => [key, ''])
         .reduce((acc, [key, val]) => ({ ...acc, [ key + 'OpacityLocal' ]: val }), {}),
 
       shadowSelected: undefined,
@@ -134,7 +135,7 @@ export default {
     },
     currentOpacity () {
       return Object.keys(OPACITIES)
-        .map(key => console.log(key) || [key, this[key + 'OpacityLocal']])
+        .map(key => [key, this[key + 'OpacityLocal']])
         .reduce((acc, [key, val]) => ({ ...acc, [ key ]: val }), {})
     },
     currentRadii () {
@@ -224,7 +225,7 @@ export default {
       ].join(';')
     },
     shadowsAvailable () {
-      return Object.keys(this.previewTheme.shadows).sort()
+      return Object.keys(DEFAULT_SHADOWS).sort()
     },
     currentShadowOverriden: {
       get () {
@@ -239,7 +240,7 @@ export default {
       }
     },
     currentShadowFallback () {
-      return this.previewTheme.shadows[this.shadowSelected]
+      return (this.previewTheme.shadows || {})[this.shadowSelected]
     },
     currentShadow: {
       get () {
@@ -313,6 +314,17 @@ export default {
           radii: this.currentRadii
         }
       })
+    },
+    updatePreviewColorsAndShadows () {
+      this.previewColors = generateColors({
+        opacity: this.currentOpacity,
+        colors: this.currentColors
+      })
+      this.previewShadows = generateShadows(
+        { shadows: this.shadowsLocal },
+        this.previewColors.theme.colors,
+        this.previewColors.mod
+      )
     },
     onImport (parsed) {
       if (parsed._pleroma_theme_version === 1) {
@@ -435,6 +447,14 @@ export default {
         })
       }
 
+      if (opacity && !this.keepOpacity) {
+        this.clearOpacity()
+        Object.entries(opacity).forEach(([k, v]) => {
+          if (typeof v === 'undefined' || v === null || Number.isNaN(v)) return
+          this[k + 'OpacityLocal'] = v
+        })
+      }
+
       if (!this.keepRoundness) {
         this.clearRoundness()
         Object.entries(radii).forEach(([k, v]) => {
@@ -454,14 +474,6 @@ export default {
         this.clearFonts()
         this.fontsLocal = fonts
       }
-
-      if (opacity && !this.keepOpacity) {
-        this.clearOpacity()
-        Object.entries(opacity).forEach(([k, v]) => {
-          if (typeof v === 'undefined' || v === null || Number.isNaN(v)) return
-          this[k + 'OpacityLocal'] = v
-        })
-      }
     }
   },
   watch: {
@@ -476,8 +488,9 @@ export default {
     },
     shadowsLocal: {
       handler () {
+        if (Object.getOwnPropertyNames(this.previewColors).length === 1) return
         try {
-          this.previewShadows = generateShadows({ shadows: this.shadowsLocal })
+          this.updatePreviewColorsAndShadows()
           this.shadowsInvalid = false
         } catch (e) {
           this.shadowsInvalid = true
@@ -500,10 +513,7 @@ export default {
     },
     currentColors () {
       try {
-        this.previewColors = generateColors({
-          opacity: this.currentOpacity,
-          colors: this.currentColors
-        })
+        this.updatePreviewColorsAndShadows()
         this.colorsInvalid = false
       } catch (e) {
         this.colorsInvalid = true
@@ -512,10 +522,7 @@ export default {
     },
     currentOpacity () {
       try {
-        this.previewColors = generateColors({
-          opacity: this.currentOpacity,
-          colors: this.currentColors
-        })
+        this.updatePreviewColorsAndShadows()
       } catch (e) {
         console.warn(e)
       }

@@ -1,7 +1,7 @@
 import { times } from 'lodash'
 import { convert } from 'chromatism'
 import { rgb2hex, hex2rgb, rgba2css, getCssColor } from '../color_convert/color_convert.js'
-import { getColors } from '../theme_data/theme_data.service.js'
+import { getColors, computeDynamicColor } from '../theme_data/theme_data.service.js'
 
 // While this is not used anymore right now, I left it in if we want to do custom
 // styles that aren't just colors, so user can pick from a few different distinct
@@ -139,7 +139,8 @@ export const generateColors = (themeData) => {
     theme: {
       colors: htmlColors.solid,
       opacity
-    }
+    },
+    mod
   }
 }
 
@@ -211,83 +212,99 @@ export const generateFonts = (input) => {
   }
 }
 
-export const generateShadows = (input) => {
-  const border = (top, shadow) => ({
-    x: 0,
-    y: top ? 1 : -1,
-    blur: 0,
+const border = (top, shadow) => ({
+  x: 0,
+  y: top ? 1 : -1,
+  blur: 0,
+  spread: 0,
+  color: shadow ? '#000000' : '#FFFFFF',
+  alpha: 0.2,
+  inset: true
+})
+const buttonInsetFakeBorders = [border(true, false), border(false, true)]
+const inputInsetFakeBorders = [border(true, true), border(false, false)]
+const hoverGlow = {
+  x: 0,
+  y: 0,
+  blur: 4,
+  spread: 0,
+  color: '--faint',
+  alpha: 1
+}
+
+export const DEFAULT_SHADOWS = {
+  panel: [{
+    x: 1,
+    y: 1,
+    blur: 4,
     spread: 0,
-    color: shadow ? '#000000' : '#FFFFFF',
-    alpha: 0.2,
-    inset: true
-  })
-  const buttonInsetFakeBorders = [border(true, false), border(false, true)]
-  const inputInsetFakeBorders = [border(true, true), border(false, false)]
-  const hoverGlow = {
+    color: '#000000',
+    alpha: 0.6
+  }],
+  topBar: [{
     x: 0,
     y: 0,
     blur: 4,
     spread: 0,
-    color: '--faint',
+    color: '#000000',
+    alpha: 0.6
+  }],
+  popup: [{
+    x: 2,
+    y: 2,
+    blur: 3,
+    spread: 0,
+    color: '#000000',
+    alpha: 0.5
+  }],
+  avatar: [{
+    x: 0,
+    y: 1,
+    blur: 8,
+    spread: 0,
+    color: '#000000',
+    alpha: 0.7
+  }],
+  avatarStatus: [],
+  panelHeader: [],
+  button: [{
+    x: 0,
+    y: 0,
+    blur: 2,
+    spread: 0,
+    color: '#000000',
     alpha: 1
-  }
-
-  const shadows = {
-    panel: [{
-      x: 1,
-      y: 1,
-      blur: 4,
-      spread: 0,
-      color: '#000000',
-      alpha: 0.6
-    }],
-    topBar: [{
-      x: 0,
-      y: 0,
-      blur: 4,
-      spread: 0,
-      color: '#000000',
-      alpha: 0.6
-    }],
-    popup: [{
-      x: 2,
-      y: 2,
-      blur: 3,
-      spread: 0,
-      color: '#000000',
-      alpha: 0.5
-    }],
-    avatar: [{
-      x: 0,
-      y: 1,
-      blur: 8,
-      spread: 0,
-      color: '#000000',
-      alpha: 0.7
-    }],
-    avatarStatus: [],
-    panelHeader: [],
-    button: [{
-      x: 0,
-      y: 0,
-      blur: 2,
-      spread: 0,
-      color: '#000000',
-      alpha: 1
-    }, ...buttonInsetFakeBorders],
-    buttonHover: [hoverGlow, ...buttonInsetFakeBorders],
-    buttonPressed: [hoverGlow, ...inputInsetFakeBorders],
-    input: [...inputInsetFakeBorders, {
-      x: 0,
-      y: 0,
-      blur: 2,
-      inset: true,
-      spread: 0,
-      color: '#000000',
-      alpha: 1
-    }],
+  }, ...buttonInsetFakeBorders],
+  buttonHover: [hoverGlow, ...buttonInsetFakeBorders],
+  buttonPressed: [hoverGlow, ...inputInsetFakeBorders],
+  input: [...inputInsetFakeBorders, {
+    x: 0,
+    y: 0,
+    blur: 2,
+    inset: true,
+    spread: 0,
+    color: '#000000',
+    alpha: 1
+  }]
+}
+export const generateShadows = (input, colors, mod) => {
+  const shadows = Object.entries({
+    ...DEFAULT_SHADOWS,
     ...(input.shadows || {})
-  }
+  }).reduce((shadowsAcc, [slotName, shadowdefs]) => {
+    const newShadow = shadowdefs.reduce((shadowAcc, def) => [
+      ...shadowAcc,
+      {
+        ...def,
+        color: rgb2hex(computeDynamicColor(
+          def.color,
+          (variableSlot) => convert(colors[variableSlot]).rgb,
+          mod
+        ))
+      }
+    ], [])
+    return { ...shadowsAcc, [slotName]: newShadow }
+  }, {})
 
   return {
     rules: {
@@ -325,12 +342,15 @@ export const composePreset = (colors, radii, shadows, fonts) => {
   }
 }
 
-export const generatePreset = (input) => composePreset(
-  generateColors(input),
-  generateRadii(input),
-  generateShadows(input),
-  generateFonts(input)
-)
+export const generatePreset = (input) => {
+  const colors = generateColors(input)
+  return composePreset(
+    colors,
+    generateRadii(input),
+    generateShadows(input, colors.theme.colors, colors.mod),
+    generateFonts(input)
+  )
+}
 
 export const getThemes = () => {
   return window.fetch('/static/styles.json')
@@ -362,7 +382,7 @@ export const getThemes = () => {
 
 export const setPreset = (val, commit) => {
   return getThemes()
-    .then((themes) => console.log(themes) || themes[val] ? themes[val] : themes['pleroma-dark'])
+    .then((themes) => themes[val] ? themes[val] : themes['pleroma-dark'])
     .then((theme) => {
       const isV1 = Array.isArray(theme)
       const data = isV1 ? {} : theme.theme

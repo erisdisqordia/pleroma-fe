@@ -691,7 +691,7 @@
               {{ $t('settings.style.switcher.clear_all') }}
             </button>
           </div>
-          <shadow-control
+          <ShadowControl
             v-model="currentShadow"
             :ready="!!currentShadowFallback"
             :fallback="currentShadowFallback"

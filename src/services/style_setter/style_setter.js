@@ -291,8 +291,8 @@ export const generateShadows = (input, colors, mod) => {
   const shadows = Object.entries({
     ...DEFAULT_SHADOWS,
     ...(input.shadows || {})
-  }).reduce((shadowsAcc, [slotName, shadowdefs]) => {
-    const newShadow = shadowdefs.reduce((shadowAcc, def) => [
+  }).reduce((shadowsAcc, [slotName, shadowDefs]) => {
+    const newShadow = shadowDefs.reduce((shadowAcc, def) => [
       ...shadowAcc,
       {
         ...def,
@@ -378,6 +378,25 @@ export const getThemes = () => {
           return acc
         }, {})
     })
+}
+
+/**
+ * This handles compatibility issues when importing v2 theme's shadows to current format
+ *
+ * Back in v2 shadows allowed you to use dynamic colors however those used pure CSS3 variables
+ */
+export const shadows2to3 = (shadows) => {
+  return Object.entries(shadows).reduce((shadowsAcc, [slotName, shadowDefs]) => {
+    const isDynamic = ({ color }) => console.log(color) || color.startsWith('--')
+    const newShadow = shadowDefs.reduce((shadowAcc, def) => [
+      ...shadowAcc,
+      {
+        ...def,
+        alpha: isDynamic(def) ? 1 : def.alpha
+      }
+    ], [])
+    return { ...shadowsAcc, [slotName]: newShadow }
+  }, {})
 }
 
 export const setPreset = (val, commit) => {

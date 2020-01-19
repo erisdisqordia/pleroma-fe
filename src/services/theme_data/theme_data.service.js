@@ -663,7 +663,14 @@ export const SLOT_ORDERED = topoSort(
   Object.entries(SLOT_INHERITANCE)
     .sort(([aK, aV], [bK, bV]) => ((aV && aV.priority) || 0) - ((bV && bV.priority) || 0))
     .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {})
-)
+).sort((a, b) => {
+  const depsA = getDependencies(a, SLOT_INHERITANCE).length
+  const depsB = getDependencies(b, SLOT_INHERITANCE).length
+
+  if (depsA === depsB || (depsB !== 0 && depsA !== 0)) return 0
+  if (depsA === 0 && depsB !== 0) return -1
+  if (depsB === 0 && depsA !== 0) return 1
+})
 
 /**
  * Dictionary where keys are color slots and values are opacity associated

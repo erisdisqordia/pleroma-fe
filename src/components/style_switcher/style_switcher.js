@@ -11,7 +11,8 @@ import {
   generateRadii,
   generateFonts,
   composePreset,
-  getThemes
+  getThemes,
+  shadows2to3
 } from '../../services/style_setter/style_setter.js'
 import {
   CURRENT_VERSION,
@@ -159,62 +160,66 @@ export default {
     },
     // This needs optimization maybe
     previewContrast () {
-      if (!this.previewTheme.colors.bg) return {}
-      const colors = this.previewTheme.colors
-      const opacity = this.previewTheme.opacity
-      if (!colors.bg) return {}
-      const hints = (ratio) => ({
-        text: ratio.toPrecision(3) + ':1',
-        // AA level, AAA level
-        aa: ratio >= 4.5,
-        aaa: ratio >= 7,
-        // same but for 18pt+ texts
-        laa: ratio >= 3,
-        laaa: ratio >= 4.5
-      })
-      const colorsConverted = Object.entries(colors).reduce((acc, [key, value]) => ({ ...acc, [key]: colorConvert(value) }), {})
+      try {
+        if (!this.previewTheme.colors.bg) return {}
+        const colors = this.previewTheme.colors
+        const opacity = this.previewTheme.opacity
+        if (!colors.bg) return {}
+        const hints = (ratio) => ({
+          text: ratio.toPrecision(3) + ':1',
+          // AA level, AAA level
+          aa: ratio >= 4.5,
+          aaa: ratio >= 7,
+          // same but for 18pt+ texts
+          laa: ratio >= 3,
+          laaa: ratio >= 4.5
+        })
+        const colorsConverted = Object.entries(colors).reduce((acc, [key, value]) => ({ ...acc, [key]: colorConvert(value) }), {})
 
-      const ratios = Object.entries(SLOT_INHERITANCE).reduce((acc, [key, value]) => {
-        const slotIsBaseText = key === 'text' || key === 'link'
-        const slotIsText = slotIsBaseText || (
-          typeof value === 'object' && value !== null && value.textColor
-        )
-        if (!slotIsText) return acc
-        const { layer, variant } = slotIsBaseText ? { layer: 'bg' } : value
-        const background = variant || layer
-        const opacitySlot = getOpacitySlot(SLOT_INHERITANCE[background])
-        const textColors = [
-          key,
-          ...(background === 'bg' ? ['cRed', 'cGreen', 'cBlue', 'cOrange'] : [])
-        ]
+        const ratios = Object.entries(SLOT_INHERITANCE).reduce((acc, [key, value]) => {
+          const slotIsBaseText = key === 'text' || key === 'link'
+          const slotIsText = slotIsBaseText || (
+            typeof value === 'object' && value !== null && value.textColor
+          )
+          if (!slotIsText) return acc
+          const { layer, variant } = slotIsBaseText ? { layer: 'bg' } : value
+          const background = variant || layer
+          const opacitySlot = getOpacitySlot(SLOT_INHERITANCE[background])
+          const textColors = [
+            key,
+            ...(background === 'bg' ? ['cRed', 'cGreen', 'cBlue', 'cOrange'] : [])
+          ]
 
-        const layers = getLayers(
-          layer,
-          variant || layer,
-          opacitySlot,
-          colorsConverted,
-          opacity
-        )
+          const layers = getLayers(
+            layer,
+            variant || layer,
+            opacitySlot,
+            colorsConverted,
+            opacity
+          )
 
-        return {
-          ...acc,
-          ...textColors.reduce((acc, textColorKey) => {
-            const newKey = slotIsBaseText
-              ? 'bg' + textColorKey[0].toUpperCase() + textColorKey.slice(1)
-              : textColorKey
-            return {
-              ...acc,
-              [newKey]: getContrastRatioLayers(
-                colorsConverted[textColorKey],
-                layers,
-                colorsConverted[textColorKey]
-              )
-            }
-          }, {})
-        }
-      }, {})
+          return {
+            ...acc,
+            ...textColors.reduce((acc, textColorKey) => {
+              const newKey = slotIsBaseText
+                    ? 'bg' + textColorKey[0].toUpperCase() + textColorKey.slice(1)
+                    : textColorKey
+              return {
+                ...acc,
+                [newKey]: getContrastRatioLayers(
+                  colorsConverted[textColorKey],
+                  layers,
+                  colorsConverted[textColorKey]
+                )
+              }
+            }, {})
+          }
+        }, {})
 
-      return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})
+        return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})
+      } catch (e) {
+        console.warn('Failure computing contrasts', e)
+      }
     },
     previewRules () {
       if (!this.preview.rules) return ''
@@ -466,7 +471,11 @@ export default {
 
       if (!this.keepShadows) {
         this.clearShadows()
-        this.shadowsLocal = shadows
+        if (version === 2) {
+          this.shadowsLocal = shadows2to3(shadows)
+        } else {
+          this.shadowsLocal = shadows
+        }
         this.shadowSelected = this.shadowsAvailable[0]
       }
 

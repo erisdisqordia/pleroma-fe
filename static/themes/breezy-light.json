@@ -53,7 +53,7 @@
           "blur": 0,
           "spread": "1",
           "color": "--accent",
-          "alpha": "0.3",
+          "alpha": "1",
           "inset": true
         },
         {

@@ -1,7 +1,42 @@
 import { convert, brightness, contrastRatio } from 'chromatism'
 import { alphaBlend, alphaBlendLayers, getTextColor, mixrgb } from '../color_convert/color_convert.js'
 
+/*
+ * # What's all this?
+ * Here be theme engine for pleromafe. All of this supposed to ease look
+ * and feel customization, making widget styles and make developer's life
+ * easier when it comes to supporting themes. Like many other theme systems
+ * it operates on color definitions, or "slots" - for example you define
+ * "button" color slot and then in UI component Button's CSS you refer to
+ * it as a CSS3 Variable.
+ *
+ * Some applications allow you to customize colors for certain things.
+ * Some UI toolkits allow you to define colors for each type of widget.
+ * Most of them are pretty barebones and have no assistance for common
+ * problems and cases, and in general themes themselves are very hard to
+ * maintain in all aspects. This theme engine tries to solve all of the
+ * common problems with themes.
+ *
+ * You don't have redefine several similar colors if you just want to
+ * change one color - all color slots are derived from other ones, so you
+ * can have at least one or two "basic" colors defined and have all other
+ * components inherit and modify basic ones.
+ *
+ * You don't have to test contrast ratio for colors or pick text color for
+ * each element even if you have light-on-dark elements in dark-on-light
+ * theme.
+ *
+ * You don't have to maintain order of code for inheriting slots from othet
+ * slots - dependency graph resolving does it for you.
+ */
+
+/* This indicates that this version of code outputs similar theme data and
+ * should be incremented if output changes - for instance if getTextColor
+ * function changes and older themes no longer render text colors as
+ * author intended previously.
+ */
 export const CURRENT_VERSION = 3
+
 /* This is a definition of all layer combinations
  * each key is a topmost layer, each value represents layer underneath
  * this is essentially a simplified tree
@@ -25,6 +60,9 @@ export const LAYERS = {
   poll: 'bg'
 }
 
+/* By default opacity slots have 1 as default opacity
+ * this allows redefining it to something else
+ */
 export const DEFAULT_OPACITY = {
   alert: 0.5,
   input: 0.5,
@@ -32,6 +70,44 @@ export const DEFAULT_OPACITY = {
   underlay: 0.15
 }
 
+/**  SUBJECT TO CHANGE IN THE FUTURE, this is all beta
+ * Color and opacity slots definitions. Each key represents a slot.
+ *
+ * Short-hands:
+ * String beginning with `--` - value after dashes treated as sole
+ *     dependency - i.e. `--value` equivalent to { depends: ['value']}
+ * String beginning with `#` - value would be treated as solid color
+ *     defined in hexadecimal representation (i.e. #FFFFFF) and will be
+ *     used as default. `#FFFFFF` is equivalent to { default: '#FFFFFF'}
+ *
+ * Full definition:
+ * @property {String[]} depends - color slot names this color depends ones.
+ *   cyclic dependencies are supported to some extent but not recommended.
+ * @property {String} [opacity] - opacity slot used by this color slot.
+ *   opacity is inherited from parents. To break inheritance graph use null
+ * @property {Number} [priority] - EXPERIMENTAL. used to pre-sort slots so
+ *   that slots with higher priority come earlier
+ * @property {Function(mod, ...colors)} [color] - function that will be
+ *   used to determine the color. By default it just copies first color in
+ *   dependency list.
+ * @argument {Number} mod - `1` (light-on-dark) or `-1` (dark-on-light)
+ *   depending on background color (for textColor)/given color.
+ * @argument {...Object} deps - each argument after mod represents each
+ *   color from `depends` array. All colors take user customizations into
+ *   account and represented by { r, g, b } objects.
+ * @returns {Object} resulting color, should be in { r, g, b } form
+ *
+ * @property {Boolean|String} [textColor] - true to mark color slot as text
+ *   color. This enables automatic text color generation for the slot. Use
+ *   'preserve' string if you don't want text color to fall back to
+ *   black/white. Use 'bw' to only ever use black or white. This also makes
+ *   following properties required:
+ * @property {String} [layer] - which layer the text sit on top on - used
+ *   to account for transparency in text color calculation
+ *   layer is inherited from parents. To break inheritance graph use null
+ * @property {String} [variant] - which color slot is background (same as
+ *   above, used to account for transparency)
+ */
 export const SLOT_INHERITANCE = {
   bg: {
     depends: [],
@@ -456,6 +532,16 @@ const getDependencies = (key, inheritance) => {
   }
 }
 
+/**
+ * Sorts inheritance object topologically - dependant slots come after
+ * dependencies
+ *
+ * @property {Object} inheritance - object defining the nodes
+ * @property {Function} getDeps - function that returns dependencies for
+ *   given value and inheritance object.
+ * @returns {String[]} keys of inheritance object, sorted in topological
+ *   order
+ */
 export const topoSort = (
   inheritance = SLOT_INHERITANCE,
   getDeps = getDependencies
@@ -496,6 +582,11 @@ export const topoSort = (
   return output
 }
 
+/**
+ * retrieves opacity slot for given slot. This goes up the depenency graph
+ * to find which parent has opacity slot defined for it.
+ * TODO refactor this
+ */
 export const getOpacitySlot = (
   v,
   inheritance = SLOT_INHERITANCE,
@@ -526,6 +617,13 @@ export const getOpacitySlot = (
   }
 }
 
+/**
+ * retrieves layer slot for given slot. This goes up the depenency graph
+ * to find which parent has opacity slot defined for it.
+ * this is basically copypaste of getOpacitySlot except it checks if key is
+ * in LAYERS
+ * TODO refactor this
+ */
 export const getLayerSlot = (
   k,
   v,
@@ -558,12 +656,19 @@ export const getLayerSlot = (
   }
 }
 
+/**
+ * topologically sorted SLOT_INHERITANCE + additional priority sort
+ */
 export const SLOT_ORDERED = topoSort(
   Object.entries(SLOT_INHERITANCE)
     .sort(([aK, aV], [bK, bV]) => ((aV && aV.priority) || 0) - ((bV && bV.priority) || 0))
     .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {})
 )
 
+/**
+ * Dictionary where keys are color slots and values are opacity associated
+ * with them
+ */
 export const SLOTS_OPACITIES_DICT = Object.entries(SLOT_INHERITANCE).reduce((acc, [k, v]) => {
   const opacity = getOpacitySlot(v, SLOT_INHERITANCE, getDependencies)
   if (opacity) {
@@ -573,6 +678,10 @@ export const SLOTS_OPACITIES_DICT = Object.entries(SLOT_INHERITANCE).reduce((acc
   }
 }, {})
 
+/**
+ * All opacity slots used in color slots, their default values and affected
+ * color slots.
+ */
 export const OPACITIES = Object.entries(SLOT_INHERITANCE).reduce((acc, [k, v]) => {
   const opacity = getOpacitySlot(v, SLOT_INHERITANCE, getDependencies)
   if (opacity) {
@@ -588,6 +697,10 @@ export const OPACITIES = Object.entries(SLOT_INHERITANCE).reduce((acc, [k, v]) =
   }
 }, {})
 
+/**
+ * THE function you want to use. Takes provided colors and opacities, mod
+ * value and uses inheritance data to figure out color needed for the slot.
+ */
 export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.reduce(({ colors, opacity }, key) => {
   const value = SLOT_INHERITANCE[key]
   const isObject = typeof value === 'object'

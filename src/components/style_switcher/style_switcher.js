@@ -202,8 +202,8 @@ export default {
             ...acc,
             ...textColors.reduce((acc, textColorKey) => {
               const newKey = slotIsBaseText
-                    ? 'bg' + textColorKey[0].toUpperCase() + textColorKey.slice(1)
-                    : textColorKey
+                ? 'bg' + textColorKey[0].toUpperCase() + textColorKey.slice(1)
+                : textColorKey
               return {
                 ...acc,
                 [newKey]: getContrastRatioLayers(

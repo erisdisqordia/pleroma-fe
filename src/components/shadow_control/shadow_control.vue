@@ -192,7 +192,7 @@
         :disabled="!present"
         :label="$t('settings.style.common.color')"
         :fallback="currentFallback.color"
-        :showOptionalTickbox="false"
+        :show-optional-tickbox="false"
         name="shadow"
       />
       <OpacityInput

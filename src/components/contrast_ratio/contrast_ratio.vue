@@ -41,8 +41,10 @@ export default {
     large: {
       required: false
     },
+    // TODO: Make theme switcher compute theme initially so that contrast
+    // component won't be called without contrast data
     contrast: {
-      required: true,
+      required: false,
       type: Object
     }
   },

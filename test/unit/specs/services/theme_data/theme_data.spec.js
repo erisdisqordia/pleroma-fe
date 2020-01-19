@@ -72,8 +72,16 @@ describe('topoSort', () => {
     expect(out.indexOf('layer2A')).to.be.below(out.indexOf('layer3AB'))
     expect(out.indexOf('layer2B')).to.be.below(out.indexOf('layer3AB'))
   })
+
+  it('dependentless nodes should be first', () => {
+    const out = topoSort(fixture2, (node, inheritance) => inheritance[node])
+    // This basically checks all ordering that matters
+    expect(out.indexOf('layerA')).to.eql(0)
+    expect(out.indexOf('layerB')).to.eql(1)
+  })
+
   it('ignores cyclic dependencies', () => {
-    const out = topoSort({ a: 'b', b: 'a', c: 'a' }, (node, inheritance) => inheritance[node])
+    const out = topoSort({ a: 'b', b: 'a', c: 'a' }, (node, inheritance) => [inheritance[node]])
     expect(out.indexOf('a')).to.be.below(out.indexOf('c'))
   })
 })

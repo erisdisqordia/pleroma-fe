@@ -37,9 +37,15 @@
 
 <script>
 export default {
-  props: [
-    'large', 'contrast'
-  ],
+  props: {
+    large: {
+      required: false
+    },
+    contrast: {
+      required: true,
+      type: Object
+    }
+  },
   computed: {
     hint () {
       const levelVal = this.contrast.aaa ? 'aaa' : (this.contrast.aa ? 'aa' : 'bad')

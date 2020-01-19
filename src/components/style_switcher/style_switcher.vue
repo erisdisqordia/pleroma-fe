@@ -157,13 +157,13 @@
               name="cRedColor"
               :label="$t('settings.cRed')"
             />
-            <ContrastRatio :contrast="previewContrast.bgRed" />
+            <ContrastRatio :contrast="previewContrast.bgCRed" />
             <ColorInput
               v-model="cBlueColorLocal"
               name="cBlueColor"
               :label="$t('settings.cBlue')"
             />
-            <ContrastRatio :contrast="previewContrast.bgBlue" />
+            <ContrastRatio :contrast="previewContrast.bgCBlue" />
           </div>
           <div class="color-item">
             <ColorInput
@@ -171,13 +171,13 @@
               name="cGreenColor"
               :label="$t('settings.cGreen')"
             />
-            <ContrastRatio :contrast="previewContrast.bgGreen" />
+            <ContrastRatio :contrast="previewContrast.bgCGreen" />
             <ColorInput
               v-model="cOrangeColorLocal"
               name="cOrangeColor"
               :label="$t('settings.cOrange')"
             />
-            <ContrastRatio :contrast="previewContrast.bgOrange" />
+            <ContrastRatio :contrast="previewContrast.bgCOrange" />
           </div>
           <p>{{ $t('settings.theme_help_v2_2') }}</p>
         </div>
@@ -217,7 +217,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.alertErrorText"
-              large="1"
+              large="true"
             />
             <ColorInput
               v-model="alertWarningColorLocal"
@@ -233,7 +233,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.alertWarningText"
-              large="1"
+              large="true"
             />
           </div>
           <div class="color-item">
@@ -252,7 +252,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.badgeNotificationText"
-              large="1"
+              large="true"
             />
           </div>
           <div class="color-item">
@@ -277,7 +277,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.panelText"
-              large="1"
+              large="true"
             />
             <ColorInput
               v-model="panelLinkColorLocal"
@@ -287,7 +287,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.panelLink"
-              large="1"
+              large="true"
             />
           </div>
           <div class="color-item">

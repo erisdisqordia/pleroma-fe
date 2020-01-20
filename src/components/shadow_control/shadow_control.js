@@ -95,7 +95,7 @@ export default {
     },
     style () {
       return this.ready ? {
-        boxShadow: getCssShadow(this.cValue)
+        boxShadow: getCssShadow(this.fallback)
       } : {}
     }
   }

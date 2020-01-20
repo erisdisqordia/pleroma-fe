@@ -452,7 +452,7 @@
         "blur": "Blur",
         "spread": "Spread",
         "inset": "Inset",
-        "hint": "For shadows you can also use --variable as a color value to use CSS3 variables. Please note that setting opacity won't work in this case.",
+        "hintV3": "For shadows you can also use the {0} notation to use other color slot.",
         "filter_hint": {
           "always_drop_shadow": "Warning, this shadow always uses {0} when browser supports it.",
           "drop_shadow_syntax": "{0} does not support {1} parameter and {2} keyword.",

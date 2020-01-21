@@ -399,6 +399,7 @@
         "load_theme": "Load theme",
         "use_snapshot": "Keep as is",
         "help": {
+          "upgraded_from_v2": "PleromaFE has been upgraded, theme could look a little bit different than you remember.",
           "v2_imported": "File you imported was made for older FE. We try to maximize compatibility but there still could be inconsitencies.",
           "future_version_imported": "File you imported was made in newer version of FE.",
           "older_version_imported": "File you imported was made in older version of FE.",

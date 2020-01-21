@@ -162,7 +162,7 @@ export default {
       } else if (origin === 'localStorage') {
         // FE upgraded from v2
         if (themeEngineVersion === 2) {
-          return 'upgraded_from_v2'
+          return t(pre + 'upgraded_from_v2')
         }
         // Admin downgraded FE
         if (themeEngineVersion > CURRENT_VERSION) {
@@ -426,6 +426,7 @@ export default {
           this.onImport(this.tempImportFile, true)
           break
       }
+      this.dismissWarning()
     },
     loadThemeFromLocalStorage (confirmLoadSource = false) {
       const {

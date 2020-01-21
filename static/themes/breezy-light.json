@@ -117,7 +117,7 @@
       "cGreen": "#27ae60",
       "cOrange": "#f67400",
       "btnPressed": "--accent",
-      "lightBg": "--accent",
+      "highlight": "--accent",
       "selectedPost": "--bg,10"
     },
     "radii": {

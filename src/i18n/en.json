@@ -449,7 +449,7 @@
         "underlay": "Underlay",
         "poll": "Poll graph",
         "icons": "Icons",
-        "lightBg": "Highlighted elements",
+        "highlight": "Highlighted elements",
         "pressed": "Pressed",
         "selectedPost": "Selected post",
         "selectedMenu": "Selected menu item",

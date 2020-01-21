@@ -518,27 +518,27 @@
             />
           </div>
           <div class="color-item">
-            <h4>{{ $t('settings.style.advanced_colors.lightBg') }}</h4>
+            <h4>{{ $t('settings.style.advanced_colors.highlight') }}</h4>
             <ColorInput
-              v-model="lightBgColorLocal"
-              name="lightBg"
+              v-model="highlightColorLocal"
+              name="highlight"
               :label="$t('settings.background')"
-              :fallback="previewTheme.colors.lightBg"
+              :fallback="previewTheme.colors.highlight"
             />
             <ColorInput
-              v-model="lightBgTextColorLocal"
-              name="lightBgText"
+              v-model="highlightTextColorLocal"
+              name="highlightText"
               :label="$t('settings.text')"
-              :fallback="previewTheme.colors.lightBgText"
+              :fallback="previewTheme.colors.highlightText"
             />
-            <ContrastRatio :contrast="previewContrast.lightBgText" />
+            <ContrastRatio :contrast="previewContrast.highlightText" />
             <ColorInput
-              v-model="lightBgLinkColorLocal"
-              name="lightBgLink"
+              v-model="highlightLinkColorLocal"
+              name="highlightLink"
               :label="$t('settings.links')"
-              :fallback="previewTheme.colors.lightBgLink"
+              :fallback="previewTheme.colors.highlightLink"
             />
-            <ContrastRatio :contrast="previewContrast.lightBgLink" />
+            <ContrastRatio :contrast="previewContrast.highlightLink" />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.selectedPost') }}</h4>

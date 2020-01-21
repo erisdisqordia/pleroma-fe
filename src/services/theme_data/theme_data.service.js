@@ -47,7 +47,7 @@ export const LAYERS = {
   badge: null, //  no transparency support
   fg: null,
   bg: 'underlay',
-  lightBg: 'bg',
+  highlight: 'bg',
   panel: 'bg',
   btn: 'bg',
   btnPanel: 'panel',
@@ -148,57 +148,57 @@ export const SLOT_INHERITANCE = {
   cGreen: '#00FF00',
   cOrange: '#E3FF00',
 
-  lightBg: {
+  highlight: {
     depends: ['bg'],
     color: (mod, bg) => brightness(5 * mod, bg).rgb
   },
-  lightBgFaintText: {
+  highlightFaintText: {
     depends: ['faint'],
-    layer: 'lightBg',
+    layer: 'highlight',
     textColor: true
   },
-  lightBgFaintLink: {
+  highlightFaintLink: {
     depends: ['faintLink'],
-    layer: 'lightBg',
+    layer: 'highlight',
     textColor: 'preserve'
   },
-  lightBgText: {
+  highlightText: {
     depends: ['text'],
-    layer: 'lightBg',
+    layer: 'highlight',
     textColor: true
   },
-  lightBgLink: {
+  highlightLink: {
     depends: ['link'],
-    layer: 'lightBg',
+    layer: 'highlight',
     textColor: 'preserve'
   },
-  lightBgIcon: {
-    depends: ['lightBg', 'lightBgText'],
+  highlightIcon: {
+    depends: ['highlight', 'highlightText'],
     color: (mod, bg, text) => mixrgb(bg, text)
   },
 
-  selectedPost: '--lightBg',
+  selectedPost: '--highlight',
   selectedPostFaintText: {
-    depends: ['lightBgFaintText'],
-    layer: 'lightBg',
+    depends: ['highlightFaintText'],
+    layer: 'highlight',
     variant: 'selectedPost',
     textColor: true
   },
   selectedPostFaintLink: {
-    depends: ['lightBgFaintLink'],
-    layer: 'lightBg',
+    depends: ['highlightFaintLink'],
+    layer: 'highlight',
     variant: 'selectedPost',
     textColor: 'preserve'
   },
   selectedPostText: {
-    depends: ['lightBgText'],
-    layer: 'lightBg',
+    depends: ['highlightText'],
+    layer: 'highlight',
     variant: 'selectedPost',
     textColor: true
   },
   selectedPostLink: {
-    depends: ['lightBgLink'],
-    layer: 'lightBg',
+    depends: ['highlightLink'],
+    layer: 'highlight',
     variant: 'selectedPost',
     textColor: 'preserve'
   },
@@ -207,28 +207,28 @@ export const SLOT_INHERITANCE = {
     color: (mod, bg, text) => mixrgb(bg, text)
   },
 
-  selectedMenu: '--lightBg',
+  selectedMenu: '--highlight',
   selectedMenuFaintText: {
-    depends: ['lightBgFaintText'],
-    layer: 'lightBg',
+    depends: ['highlightFaintText'],
+    layer: 'highlight',
     variant: 'selectedMenu',
     textColor: true
   },
   selectedMenuFaintLink: {
-    depends: ['lightBgFaintLink'],
-    layer: 'lightBg',
+    depends: ['highlightFaintLink'],
+    layer: 'highlight',
     variant: 'selectedMenu',
     textColor: 'preserve'
   },
   selectedMenuText: {
-    depends: ['lightBgText'],
-    layer: 'lightBg',
+    depends: ['highlightText'],
+    layer: 'highlight',
     variant: 'selectedMenu',
     textColor: true
   },
   selectedMenuLink: {
-    depends: ['lightBgLink'],
-    layer: 'lightBg',
+    depends: ['highlightLink'],
+    layer: 'highlight',
     variant: 'selectedMenu',
     textColor: 'preserve'
   },

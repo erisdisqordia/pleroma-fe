@@ -256,7 +256,7 @@
       "cBlue": "#6699cc",
       "cGreen": "#669966",
       "cOrange": "#cc6633",
-      "lightBg": "--accent",
+      "highlight": "--accent",
       "selectedPost": "--bg,-10"
     },
     "radii": {

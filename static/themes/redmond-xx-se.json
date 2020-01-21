@@ -283,7 +283,7 @@
       "cBlue": "#008080",
       "cGreen": "#008000",
       "cOrange": "#808000",
-      "lightBg": "--accent",
+      "highlight": "--accent",
       "selectedPost": "--bg,-10"
     },
     "radii": {

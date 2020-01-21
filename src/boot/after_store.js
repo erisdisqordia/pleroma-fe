@@ -5,6 +5,8 @@ import App from '../App.vue'
 import { windowWidth } from '../services/window_utils/window_utils'
 import { getOrCreateApp, getClientToken } from '../services/new_api/oauth.js'
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
+import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
+import { applyTheme } from '../services/style_setter/style_setter.js'
 
 const getStatusnetConfig = async ({ store }) => {
   try {
@@ -261,7 +263,7 @@ const checkOAuthToken = async ({ store }) => {
       try {
         await store.dispatch('loginUser', store.getters.getUserToken())
       } catch (e) {
-        console.log(e)
+        console.error(e)
       }
     }
     resolve()
@@ -269,23 +271,29 @@ const checkOAuthToken = async ({ store }) => {
 }
 
 const afterStoreSetup = async ({ store, i18n }) => {
-  if (store.state.config.customTheme) {
-    // This is a hack to deal with async loading of config.json and themes
-    // See: style_setter.js, setPreset()
-    window.themeLoaded = true
-    store.dispatch('setOption', {
-      name: 'customTheme',
-      value: store.state.config.customTheme
-    })
-  }
-
   const width = windowWidth()
   store.dispatch('setMobileLayout', width <= 800)
+  await setConfig({ store })
+
+  const { customTheme, customThemeSource } = store.state.config
+  const { theme } = store.state.instance
+  const customThemePresent = customThemeSource || customTheme
+
+  if (customThemePresent) {
+    if (customThemeSource && customThemeSource.version === CURRENT_VERSION) {
+      applyTheme(customThemeSource)
+    } else {
+      applyTheme(customTheme)
+    }
+  } else if (theme) {
+    // do nothing, it will load asynchronously
+  } else {
+    console.error('Failed to load any theme!')
+  }
 
   // Now we can try getting the server settings and logging in
   await Promise.all([
     checkOAuthToken({ store }),
-    setConfig({ store }),
     getTOS({ store }),
     getInstancePanel({ store }),
     getStickers({ store }),

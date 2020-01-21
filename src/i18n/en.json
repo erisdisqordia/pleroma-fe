@@ -46,6 +46,7 @@
     "optional": "optional",
     "show_more": "Show more",
     "show_less": "Show less",
+    "dismiss": "Dismiss",
     "cancel": "Cancel",
     "disable": "Disable",
     "enable": "Enable",
@@ -394,7 +395,16 @@
         "save_load_hint": "\"Keep\" options preserve currently set options when selecting or loading themes, it also stores said options when exporting a theme. When all checkboxes unset, exporting theme will save everything.",
         "reset": "Reset",
         "clear_all": "Clear all",
-        "clear_opacity": "Clear opacity"
+        "clear_opacity": "Clear opacity",
+        "load_theme": "Load theme",
+        "use_snapshot": "Keep as is",
+        "help": {
+          "v2_imported": "File you imported was made for older FE. We try to maximize compatibility but there still could be inconsitencies.",
+          "snapshot_present": "Theme snapshot is loaded, so all values are overriden. You can load theme's actual data instead.",
+          "snapshot_missing": "No theme snapshot was in the file so it could look different than originally envisioned.",
+          "future_version_imported": "File you imported was made in newer version of FE.",
+          "older_version_imported": "File you imported was made in older version of FE."
+        }
       },
       "common": {
         "color": "Color",

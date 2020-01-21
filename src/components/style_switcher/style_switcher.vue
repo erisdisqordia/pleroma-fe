@@ -1,31 +1,60 @@
 <template>
-  <div class="style-switcher">
-    <div class="presets-container">
-      <div class="save-load">
-        <ExportImport
-          :export-object="exportedTheme"
-          :export-label="$t(&quot;settings.export_theme&quot;)"
-          :import-label="$t(&quot;settings.import_theme&quot;)"
-          :import-failed-text="$t(&quot;settings.invalid_theme_imported&quot;)"
-          :on-import="onImport"
-          :validator="importValidator"
-        >
-          <template slot="before">
-            <div class="presets">
-              {{ $t('settings.presets') }}
-              <label
-                for="preset-switcher"
-                class="select"
+<div class="style-switcher">
+  <div class="presets-container">
+    <div class="save-load">
+      <div class="theme-warning" v-if="themeWarning">
+        <div class="alert warning">
+        {{ themeWarningHelp }}
+        </div>
+        <div class="buttons">
+          <template v-if="themeWarning.noActionsPossible">
+            <button
+              class="btn"
+              @click="dismissWarning"
+            >
+              {{ $t('general.dismiss') }}
+            </button>
+          </template>
+          <template v-else>
+            <button
+              class="btn"
+              @click="forceLoad"
+            >
+              {{ $t('settings.style.switcher.load_theme') }}
+            </button>
+            <button
+              class="btn"
+              @click="dismissWarning"
+            >
+              {{ $t('settings.style.switcher.use_snapshot') }}
+            </button>
+          </template>
+        </div>
+      </div>
+      <ExportImport
+        :export-object="exportedTheme"
+        :export-label="$t(&quot;settings.export_theme&quot;)"
+        :import-label="$t(&quot;settings.import_theme&quot;)"
+        :import-failed-text="$t(&quot;settings.invalid_theme_imported&quot;)"
+        :on-import="onImport"
+        :validator="importValidator"
+      >
+        <template slot="before">
+          <div class="presets">
+            {{ $t('settings.presets') }}
+            <label
+              for="preset-switcher"
+              class="select"
               >
-                <select
-                  id="preset-switcher"
-                  v-model="selected"
-                  class="preset-switcher"
+              <select
+                id="preset-switcher"
+                v-model="selected"
+                class="preset-switcher"
                 >
-                  <option
-                    v-for="style in availableStyles"
-                    :key="style.name"
-                    :value="style"
+                <option
+                  v-for="style in availableStyles"
+                  :key="style.name"
+                  :value="style"
                     :style="{
                       backgroundColor: style[1] || (style.theme || style.source).colors.bg,
                       color: style[3] || (style.theme || style.source).colors.text

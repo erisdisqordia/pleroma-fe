@@ -7,7 +7,7 @@ import { getColors, computeDynamicColor } from '../theme_data/theme_data.service
 // styles that aren't just colors, so user can pick from a few different distinct
 // styles as well as set their own colors in the future.
 
-export const setStyle = (href, commit) => {
+export const setStyle = (href) => {
   /***
       What's going on here?
       I want to make it easy for admins to style this application. To have
@@ -53,8 +53,8 @@ export const setStyle = (href, commit) => {
   cssEl.addEventListener('load', setDynamic)
 }
 
-export const applyTheme = (input, commit) => {
-  const { rules, theme } = generatePreset(input)
+export const applyTheme = (input) => {
+  const { rules } = generatePreset(input)
   const head = document.head
   const body = document.body
   body.classList.add('hidden')
@@ -69,11 +69,6 @@ export const applyTheme = (input, commit) => {
   styleSheet.insertRule(`body { ${rules.shadows} }`, 'index-max')
   styleSheet.insertRule(`body { ${rules.fonts} }`, 'index-max')
   body.classList.remove('hidden')
-
-  // commit('setOption', { name: 'colors', value: htmlColors })
-  // commit('setOption', { name: 'radii', value: radii })
-  commit('setOption', { name: 'customTheme', value: input })
-  commit('setOption', { name: 'colors', value: theme.colors })
 }
 
 export const getCssShadow = (input, usesDropShadow) => {
@@ -387,7 +382,7 @@ export const getThemes = () => {
  */
 export const shadows2to3 = (shadows) => {
   return Object.entries(shadows).reduce((shadowsAcc, [slotName, shadowDefs]) => {
-    const isDynamic = ({ color }) => console.log(color) || color.startsWith('--')
+    const isDynamic = ({ color }) => color.startsWith('--')
     const newShadow = shadowDefs.reduce((shadowAcc, def) => [
       ...shadowAcc,
       {
@@ -399,7 +394,7 @@ export const shadows2to3 = (shadows) => {
   }, {})
 }
 
-export const setPreset = (val, commit) => {
+export const getPreset = (val) => {
   return getThemes()
     .then((themes) => themes[val] ? themes[val] : themes['pleroma-dark'])
     .then((theme) => {
@@ -420,14 +415,8 @@ export const setPreset = (val, commit) => {
         data.colors = { bg, fg, text, link, cRed, cBlue, cGreen, cOrange }
       }
 
-      // This is a hack, this function is only called during initial load.
-      // We want to cancel loading the theme from config.json if we're already
-      // loading a theme from the persisted state.
-      // Needed some way of dealing with the async way of things.
-      // load config -> set preset -> wait for styles.json to load ->
-      // load persisted state -> set colors -> styles.json loaded -> set colors
-      if (!window.themeLoaded) {
-        applyTheme(data, commit)
-      }
+      return { theme: data, source: theme.source }
     })
 }
+
+export const setPreset = (val) => getPreset(val).then(data => applyTheme(data.theme))

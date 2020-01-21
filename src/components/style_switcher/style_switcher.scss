@@ -1,5 +1,9 @@
 @import '../../_variables.scss';
 .style-switcher {
+  .theme-warning {
+    display: flex;
+    align-items: baseline;
+  }
   .preset-switcher {
     margin-right: 1em;
   }

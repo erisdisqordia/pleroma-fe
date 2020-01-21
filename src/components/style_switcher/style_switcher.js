@@ -57,6 +57,8 @@ export default {
     return {
       availableStyles: [],
       selected: this.$store.getters.mergedConfig.theme,
+      themeWarning: undefined,
+      tempImportFile: undefined,
 
       previewShadows: {},
       previewColors: {},
@@ -120,12 +122,62 @@ export default {
       })
   },
   mounted () {
-    this.normalizeLocalState(this.$store.getters.mergedConfig.customTheme)
+    this.loadThemeFromLocalStorage()
     if (typeof this.shadowSelected === 'undefined') {
       this.shadowSelected = this.shadowsAvailable[0]
     }
   },
   computed: {
+    themeWarningHelp () {
+      if (!this.themeWarning) return
+      const t = this.$t
+      const pre = 'settings.style.switcher.help.'
+      const {
+        origin,
+        themeEngineVersion,
+        type,
+        noActionsPossible
+      } = this.themeWarning
+      if (origin === 'file') {
+        // Loaded v2 theme from file
+        if (themeEngineVersion === 2 && type === 'wrong_version') {
+          return t(pre + 'v2_imported')
+        }
+        if (themeEngineVersion > CURRENT_VERSION) {
+          return t(pre + 'future_version_imported') + ' ' +
+            (
+              noActionsPossible
+                ? t(pre + 'snapshot_missing')
+                : t(pre + 'snapshot_present')
+            )
+        }
+        if (themeEngineVersion < CURRENT_VERSION) {
+          return t(pre + 'future_version_imported') + ' ' +
+            (
+              noActionsPossible
+                ? t(pre + 'snapshot_missing')
+                : t(pre + 'snapshot_present')
+            )
+        }
+      } else if (origin === 'localStorage') {
+        // FE upgraded from v2
+        if (themeEngineVersion === 2) {
+          return 'upgraded_from_v2'
+        }
+        // Admin downgraded FE
+        if (themeEngineVersion > CURRENT_VERSION) {
+          return noActionsPossible
+            ? 'downgraded_theme'
+            : 'downgraded_theme_missing_snapshot'
+        }
+        // Admin upgraded FE
+        if (themeEngineVersion < CURRENT_VERSION) {
+          return noActionsPossible
+            ? 'upgraded_theme'
+            : 'upgraded_theme_missing_snapshot'
+        }
+      }
+    },
     selectedVersion () {
       return Array.isArray(this.selected) ? 1 : 2
     },
@@ -308,10 +360,96 @@ export default {
     Checkbox
   },
   methods: {
+    loadTheme (
+      {
+        theme,
+        source,
+        _pleroma_theme_version: fileVersion
+      },
+      origin,
+      forceUseSource = false
+    ) {
+      if (!source && !theme) {
+        throw new Error('Can\'t load theme: empty')
+      }
+      const version = (origin === 'localstorage' && !theme.colors)
+        ? 'l1'
+        : fileVersion
+      const themeEngineVersion = (source || {}).themeEngineVersion || 2
+      const versionsMatch = themeEngineVersion === CURRENT_VERSION
+      // Force loading of source if user requested it or if snapshot
+      // is unavailable
+      const forcedSourceLoad = (source && forceUseSource) || !theme
+      if (!versionsMatch &&
+          !forcedSourceLoad &&
+          version !== 'l1' &&
+          origin !== 'defaults'
+      ) {
+        if (!theme) {
+          this.themeWarning = {
+            origin,
+            noActionsPossible: true,
+            themeEngineVersion,
+            type: 'no_snapshot_old_version'
+          }
+        } else if (!versionsMatch) {
+          this.themeWarning = {
+            origin,
+            noActionsPossible: !source,
+            themeEngineVersion,
+            type: 'wrong_version'
+          }
+        }
+      }
+      this.normalizeLocalState(theme, version, source, forcedSourceLoad)
+    },
+    forceLoadLocalStorage () {
+      this.loadThemeFromLocalStorage(true)
+    },
+    dismissWarning () {
+      this.themeWarning = undefined
+      this.tempImportFile = undefined
+    },
+    forceLoad () {
+      const { origin } = this.themeWarning
+      switch (origin) {
+        case 'localstorage':
+          this.loadThemeFromLocalStorage(true)
+          break
+        case 'file':
+          this.onImport(this.tempImportFile, true)
+          break
+      }
+    },
+    loadThemeFromLocalStorage (confirmLoadSource = false) {
+      const {
+        customTheme: theme,
+        customThemeSource: source
+      } = this.$store.getters.mergedConfig
+      if (!theme && !source) {
+        // Anon user or never touched themes
+        this.loadTheme(
+          this.$store.state.instance.themeData,
+          'defaults',
+          confirmLoadSource
+        )
+      } else {
+        this.loadTheme(
+          { theme, source },
+          'localStorage',
+          confirmLoadSource
+        )
+      }
+    },
     setCustomTheme () {
       this.$store.dispatch('setOption', {
         name: 'customTheme',
+        value: this.previewTheme
+      })
+      this.$store.dispatch('setOption', {
+        name: 'customThemeSource',
         value: {
+          themeEngineVersion: CURRENT_VERSION,
           shadows: this.shadowsLocal,
           fonts: this.fontsLocal,
           opacity: this.currentOpacity,
@@ -331,21 +469,16 @@ export default {
         this.previewColors.mod
       )
     },
-    onImport (parsed) {
-      if (parsed._pleroma_theme_version === 1) {
-        this.normalizeLocalState(parsed, 1)
-      } else if (parsed._pleroma_theme_version >= 2) {
-        this.normalizeLocalState(parsed.theme, 2, parsed.source)
-      }
+    onImport (parsed, forceSource = false) {
+      this.tempImportFile = parsed
+      this.loadTheme(parsed, 'file', forceSource)
     },
     importValidator (parsed) {
       const version = parsed._pleroma_theme_version
       return version >= 1 || version <= 2
     },
     clearAll () {
-      const state = this.$store.getters.mergedConfig.customTheme
-      const version = state.colors ? 2 : 'l1'
-      this.normalizeLocalState(this.$store.getters.mergedConfig.customTheme, version, this.$store.getters.mergedConfig.customThemeSource)
+      this.loadThemeFromLocalStorage()
     },
 
     // Clears all the extra stuff when loading V1 theme

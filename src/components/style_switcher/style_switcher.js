@@ -166,15 +166,21 @@ export default {
         }
         // Admin downgraded FE
         if (themeEngineVersion > CURRENT_VERSION) {
-          return noActionsPossible
-            ? 'downgraded_theme'
-            : 'downgraded_theme_missing_snapshot'
+          return t(pre + 'fe_downgraded') + ' ' +
+            (
+              noActionsPossible
+                ? t(pre + 'migration_snapshot_ok')
+                : t(pre + 'migration_snapshot_gone')
+            )
         }
         // Admin upgraded FE
         if (themeEngineVersion < CURRENT_VERSION) {
-          return noActionsPossible
-            ? 'upgraded_theme'
-            : 'upgraded_theme_missing_snapshot'
+          return t(pre + 'fe_upgraded') + ' ' +
+            (
+              noActionsPossible
+                ? t(pre + 'migration_snapshot_ok')
+                : t(pre + 'migration_snapshot_gone')
+            )
         }
       }
     },

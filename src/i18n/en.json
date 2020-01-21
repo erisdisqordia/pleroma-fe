@@ -400,10 +400,14 @@
         "use_snapshot": "Keep as is",
         "help": {
           "v2_imported": "File you imported was made for older FE. We try to maximize compatibility but there still could be inconsitencies.",
+          "future_version_imported": "File you imported was made in newer version of FE.",
+          "older_version_imported": "File you imported was made in older version of FE.",
           "snapshot_present": "Theme snapshot is loaded, so all values are overriden. You can load theme's actual data instead.",
           "snapshot_missing": "No theme snapshot was in the file so it could look different than originally envisioned.",
-          "future_version_imported": "File you imported was made in newer version of FE.",
-          "older_version_imported": "File you imported was made in older version of FE."
+          "fe_upgraded": "PleromaFE's theme engine upgraded after version update.",
+          "fe_downgraded": "PleromaFE's version rolled back.",
+          "migration_snapshot_ok": "Just to be safe, theme snapshot loaded. You can try loading theme data.",
+          "migration_napshot_gone": "For whatever reason snapshot was missing, some stuff could look different than you remember."
         }
       },
       "common": {

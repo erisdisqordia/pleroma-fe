@@ -664,8 +664,10 @@ export default {
       try {
         this.updatePreviewColorsAndShadows()
         this.colorsInvalid = false
+        this.shadowsInvalid = false
       } catch (e) {
         this.colorsInvalid = true
+        this.shadowsInvalid = true
         console.warn(e)
       }
     },

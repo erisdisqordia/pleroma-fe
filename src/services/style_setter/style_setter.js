@@ -392,16 +392,6 @@ export const colors2to3 = (colors) => {
           ...btnStates.reduce((stateAcc, state) => ({ ...stateAcc, ['btn' + state]: color }), {})
         }
       case 'btnText':
-        console.log(
-          btnPositions
-            .map(position => btnStates.map(state => state + position))
-            .flat()
-            .reduce(
-              (statePositionAcc, statePosition) =>
-                ({ ...statePositionAcc, ['btn' + statePosition + 'Text']: color })
-              , {}
-            )
-        )
         return {
           ...acc,
           ...btnPositions
@@ -414,7 +404,6 @@ export const colors2to3 = (colors) => {
             )
         }
       default:
-        console.log('aaa', slotName, color, acc)
         return { ...acc, [slotName]: color }
     }
   }, {})

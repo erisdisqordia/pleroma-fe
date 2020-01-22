@@ -591,38 +591,41 @@ export const topoSort = (
   })
 }
 
+const expandSlotValue = (value) => {
+  if (typeof value === 'object') return value
+  return {
+    depends: value.startsWith('--') ? [value.substring(2)] : [],
+    default: value.startsWith('#') ? value : undefined
+  }
+}
 /**
  * retrieves opacity slot for given slot. This goes up the depenency graph
  * to find which parent has opacity slot defined for it.
  * TODO refactor this
  */
 export const getOpacitySlot = (
-  v,
+  k,
   inheritance = SLOT_INHERITANCE,
   getDeps = getDependencies
 ) => {
-  const value = typeof v === 'string'
-    ? {
-      depends: v.startsWith('--') ? [v.substring(2)] : []
-    }
-    : v
+  const value = expandSlotValue(inheritance[k])
   if (value.opacity === null) return
-  if (value.opacity) return v.opacity
-  const findInheritedOpacity = (val) => {
-    const depSlot = val.depends[0]
+  if (value.opacity) return value.opacity
+  const findInheritedOpacity = (key, visited = [k]) => {
+    const depSlot = getDeps(key, inheritance)[0]
     if (depSlot === undefined) return
-    const dependency = getDeps(depSlot, inheritance)[0]
+    const dependency = inheritance[depSlot]
     if (dependency === undefined) return
     if (dependency.opacity || dependency === null) {
       return dependency.opacity
-    } else if (dependency.depends) {
-      return findInheritedOpacity(dependency)
+    } else if (dependency.depends && visited.includes(depSlot)) {
+      return findInheritedOpacity(depSlot, [...visited, depSlot])
     } else {
       return null
     }
   }
   if (value.depends) {
-    return findInheritedOpacity(value)
+    return findInheritedOpacity(k)
   }
 }
 
@@ -635,33 +638,28 @@ export const getOpacitySlot = (
  */
 export const getLayerSlot = (
   k,
-  v,
   inheritance = SLOT_INHERITANCE,
   getDeps = getDependencies
 ) => {
-  const value = typeof v === 'string'
-    ? {
-      depends: v.startsWith('--') ? [v.substring(2)] : []
-    }
-    : v
+  const value = expandSlotValue(inheritance[k])
   if (LAYERS[k]) return k
   if (value.layer === null) return
-  if (value.layer) return v.layer
-  const findInheritedLayer = (val) => {
-    const depSlot = val.depends[0]
+  if (value.layer) return value.layer
+  const findInheritedLayer = (key, visited = [k]) => {
+    const depSlot = getDeps(key, inheritance)[0]
     if (depSlot === undefined) return
-    const dependency = getDeps(depSlot, inheritance)[0]
+    const dependency = inheritance[depSlot]
     if (dependency === undefined) return
     if (dependency.layer || dependency === null) {
       return dependency.layer
     } else if (dependency.depends) {
-      return findInheritedLayer(dependency)
+      return findInheritedLayer(dependency, [...visited, depSlot])
     } else {
       return null
     }
   }
   if (value.depends) {
-    return findInheritedLayer(value)
+    return findInheritedLayer(k)
   }
 }
 
@@ -679,7 +677,7 @@ export const SLOT_ORDERED = topoSort(
  * with them
  */
 export const SLOTS_OPACITIES_DICT = Object.entries(SLOT_INHERITANCE).reduce((acc, [k, v]) => {
-  const opacity = getOpacitySlot(v, SLOT_INHERITANCE, getDependencies)
+  const opacity = getOpacitySlot(k, SLOT_INHERITANCE, getDependencies)
   if (opacity) {
     return { ...acc, [k]: opacity }
   } else {
@@ -692,7 +690,7 @@ export const SLOTS_OPACITIES_DICT = Object.entries(SLOT_INHERITANCE).reduce((acc
  * color slots.
  */
 export const OPACITIES = Object.entries(SLOT_INHERITANCE).reduce((acc, [k, v]) => {
-  const opacity = getOpacitySlot(v, SLOT_INHERITANCE, getDependencies)
+  const opacity = getOpacitySlot(k, SLOT_INHERITANCE, getDependencies)
   if (opacity) {
     return {
       ...acc,
@@ -738,9 +736,9 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
     if (targetColor === 'transparent') {
       // We take only layers below current one
       const layers = getLayers(
-        getLayerSlot(key, value),
+        getLayerSlot(key),
         key,
-        value.opacity || key,
+        getOpacitySlot(key) || key,
         colors,
         opacity
       ).slice(0, -1)
@@ -781,7 +779,7 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
         getLayers(
           value.layer,
           value.variant || value.layer,
-          getOpacitySlot(SLOT_INHERITANCE[value.variant || value.layer]),
+          getOpacitySlot(value.variant || value.layer),
           colors,
           opacity
         )
@@ -813,7 +811,7 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
   if (!outputColor) {
     throw new Error('Couldn\'t generate color for ' + key)
   }
-  const opacitySlot = SLOTS_OPACITIES_DICT[key]
+  const opacitySlot = getOpacitySlot(key)
   if (opacitySlot && outputColor.a === undefined) {
     outputColor.a = sourceOpacity[opacitySlot] || OPACITIES[opacitySlot].defaultValue || 1
   }

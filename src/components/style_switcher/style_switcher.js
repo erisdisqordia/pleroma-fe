@@ -246,7 +246,7 @@ export default {
           if (!slotIsText) return acc
           const { layer, variant } = slotIsBaseText ? { layer: 'bg' } : value
           const background = variant || layer
-          const opacitySlot = getOpacitySlot(SLOT_INHERITANCE[background])
+          const opacitySlot = getOpacitySlot(background)
           const textColors = [
             key,
             ...(background === 'bg' ? ['cRed', 'cGreen', 'cBlue', 'cOrange'] : [])

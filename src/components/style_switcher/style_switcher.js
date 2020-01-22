@@ -160,6 +160,9 @@ export default {
             )
         }
       } else if (origin === 'localStorage') {
+        if (type === 'snapshot_source_mismatch') {
+          return t(pre + 'snapshot_source_mismatch')
+        }
         // FE upgraded from v2
         if (themeEngineVersion === 2) {
           return t(pre + 'upgraded_from_v2')
@@ -345,7 +348,10 @@ export default {
         source.radii = this.currentRadii
       }
 
-      const theme = this.previewTheme
+      const theme = {
+        themeEngineVersion: CURRENT_VERSION,
+        ...this.previewTheme
+      }
 
       return {
         // To separate from other random JSON files and possible future source formats
@@ -381,17 +387,34 @@ export default {
       const version = (origin === 'localstorage' && !theme.colors)
         ? 'l1'
         : fileVersion
+      const snapshotEngineVersion = (theme || {}).themeEngineVersion
       const themeEngineVersion = (source || {}).themeEngineVersion || 2
       const versionsMatch = themeEngineVersion === CURRENT_VERSION
+      console.log(
+        theme !== undefined,
+        source !== undefined,
+        themeEngineVersion !== snapshotEngineVersion
+      )
+      const sourceSnapshotMismatch = (
+        theme !== undefined &&
+          source !== undefined &&
+          themeEngineVersion !== snapshotEngineVersion
+      )
       // Force loading of source if user requested it or if snapshot
       // is unavailable
       const forcedSourceLoad = (source && forceUseSource) || !theme
-      if (!versionsMatch &&
+      if (!(versionsMatch && !sourceSnapshotMismatch) &&
           !forcedSourceLoad &&
           version !== 'l1' &&
           origin !== 'defaults'
       ) {
-        if (!theme) {
+        if (sourceSnapshotMismatch) {
+          this.themeWarning = {
+            origin,
+            themeEngineVersion,
+            type: 'snapshot_source_mismatch'
+          }
+        } else if (!theme) {
           this.themeWarning = {
             origin,
             noActionsPossible: true,
@@ -428,7 +451,19 @@ export default {
       }
       this.dismissWarning()
     },
-    loadThemeFromLocalStorage (confirmLoadSource = false) {
+    forceSnapshot() {
+      const { origin } = this.themeWarning
+      switch (origin) {
+        case 'localstorage':
+          this.loadThemeFromLocalStorage(false, true)
+          break
+        case 'file':
+          console.err('Forcing snapshout from file is not supported yet')
+          break
+      }
+      this.dismissWarning()
+    },
+    loadThemeFromLocalStorage (confirmLoadSource = false, forceSnapshot = false) {
       const {
         customTheme: theme,
         customThemeSource: source
@@ -442,7 +477,10 @@ export default {
         )
       } else {
         this.loadTheme(
-          { theme, source },
+          {
+            theme,
+            source: forceSnapshot ? theme : source
+          },
           'localStorage',
           confirmLoadSource
         )
@@ -451,7 +489,10 @@ export default {
     setCustomTheme () {
       this.$store.dispatch('setOption', {
         name: 'customTheme',
-        value: this.previewTheme
+        value: {
+          themeEngineVersion: CURRENT_VERSION,
+          ...this.previewTheme
+        }
       })
       this.$store.dispatch('setOption', {
         name: 'customThemeSource',

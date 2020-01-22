@@ -397,7 +397,9 @@
         "clear_all": "Clear all",
         "clear_opacity": "Clear opacity",
         "load_theme": "Load theme",
-        "use_snapshot": "Keep as is",
+        "keep_as_is": "Keep as is",
+        "use_snapshot": "Old version",
+        "use_source": "New version",
         "help": {
           "upgraded_from_v2": "PleromaFE has been upgraded, theme could look a little bit different than you remember.",
           "v2_imported": "File you imported was made for older FE. We try to maximize compatibility but there still could be inconsitencies.",
@@ -408,7 +410,8 @@
           "fe_upgraded": "PleromaFE's theme engine upgraded after version update.",
           "fe_downgraded": "PleromaFE's version rolled back.",
           "migration_snapshot_ok": "Just to be safe, theme snapshot loaded. You can try loading theme data.",
-          "migration_napshot_gone": "For whatever reason snapshot was missing, some stuff could look different than you remember."
+          "migration_napshot_gone": "For whatever reason snapshot was missing, some stuff could look different than you remember.",
+          "snapshot_source_mismatch": "Versions conflict: most likely FE was rolled back and updated again, if you changed theme using older version of FE you most likely want to use old version, otherwise use new version."
         }
       },
       "common": {

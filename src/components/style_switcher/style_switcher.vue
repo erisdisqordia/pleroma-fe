@@ -7,7 +7,21 @@
         {{ themeWarningHelp }}
         </div>
         <div class="buttons">
-          <template v-if="themeWarning.noActionsPossible">
+          <template v-if="themeWarning.type === 'snapshot_source_mismatch'">
+            <button
+              class="btn"
+              @click="forceLoad"
+            >
+              {{ $t('settings.style.switcher.use_source') }}
+            </button>
+            <button
+              class="btn"
+              @click="dismissWarning"
+            >
+              {{ $t('settings.style.switcher.use_snapshot') }}
+            </button>
+          </template>
+          <template v-else-if="themeWarning.noActionsPossible">
             <button
               class="btn"
               @click="dismissWarning"
@@ -26,7 +40,7 @@
               class="btn"
               @click="dismissWarning"
             >
-              {{ $t('settings.style.switcher.use_snapshot') }}
+              {{ $t('settings.style.switcher.keep_as_is') }}
             </button>
           </template>
         </div>

@@ -390,11 +390,6 @@ export default {
       const snapshotEngineVersion = (theme || {}).themeEngineVersion
       const themeEngineVersion = (source || {}).themeEngineVersion || 2
       const versionsMatch = themeEngineVersion === CURRENT_VERSION
-      console.log(
-        theme !== undefined,
-        source !== undefined,
-        themeEngineVersion !== snapshotEngineVersion
-      )
       const sourceSnapshotMismatch = (
         theme !== undefined &&
           source !== undefined &&
@@ -442,7 +437,7 @@ export default {
     forceLoad () {
       const { origin } = this.themeWarning
       switch (origin) {
-        case 'localstorage':
+        case 'localStorage':
           this.loadThemeFromLocalStorage(true)
           break
         case 'file':
@@ -451,10 +446,10 @@ export default {
       }
       this.dismissWarning()
     },
-    forceSnapshot() {
+    forceSnapshot () {
       const { origin } = this.themeWarning
       switch (origin) {
-        case 'localstorage':
+        case 'localStorage':
           this.loadThemeFromLocalStorage(false, true)
           break
         case 'file':

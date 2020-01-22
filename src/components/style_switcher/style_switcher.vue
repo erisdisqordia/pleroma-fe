@@ -16,7 +16,7 @@
             </button>
             <button
               class="btn"
-              @click="dismissWarning"
+              @click="forceSnapshot"
             >
               {{ $t('settings.style.switcher.use_snapshot') }}
             </button>

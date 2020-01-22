@@ -673,19 +673,6 @@ export const SLOT_ORDERED = topoSort(
 )
 
 /**
- * Dictionary where keys are color slots and values are opacity associated
- * with them
- */
-export const SLOTS_OPACITIES_DICT = Object.entries(SLOT_INHERITANCE).reduce((acc, [k, v]) => {
-  const opacity = getOpacitySlot(k, SLOT_INHERITANCE, getDependencies)
-  if (opacity) {
-    return { ...acc, [k]: opacity }
-  } else {
-    return acc
-  }
-}, {})
-
-/**
  * All opacity slots used in color slots, their default values and affected
  * color slots.
  */

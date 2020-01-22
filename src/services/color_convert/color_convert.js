@@ -185,10 +185,9 @@ export const rgba2css = function (rgba) {
  * @param {Boolean} preserve - try to preserve intended text color's hue/saturation (i.e. no BW)
  */
 export const getTextColor = function (bg, text, preserve) {
-  const bgIsLight = relativeLuminance(bg) > 0.5
-  const textIsLight = relativeLuminance(text) > 0.5
+  const contrast = getContrastRatio(bg, text)
 
-  if ((bgIsLight && textIsLight) || (!bgIsLight && !textIsLight)) {
+  if (contrast < 4.5) {
     const base = typeof text.a !== 'undefined' ? { a: text.a } : {}
     const result = Object.assign(base, invertLightness(text).rgb)
     if (!preserve && getContrastRatio(bg, result) < 4.5) {

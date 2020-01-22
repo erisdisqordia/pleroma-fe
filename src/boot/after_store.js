@@ -280,7 +280,7 @@ const afterStoreSetup = async ({ store, i18n }) => {
   const customThemePresent = customThemeSource || customTheme
 
   if (customThemePresent) {
-    if (customThemeSource && customThemeSource.version === CURRENT_VERSION) {
+    if (customThemeSource && customThemeSource.themeEngineVersion === CURRENT_VERSION) {
       applyTheme(customThemeSource)
     } else {
       applyTheme(customTheme)

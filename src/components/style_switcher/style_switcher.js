@@ -12,7 +12,8 @@ import {
   generateFonts,
   composePreset,
   getThemes,
-  shadows2to3
+  shadows2to3,
+  colors2to3
 } from '../../services/style_setter/style_setter.js'
 import {
   CURRENT_VERSION,
@@ -588,7 +589,9 @@ export default {
       const opacity = input.opacity
       const shadows = input.shadows || {}
       const fonts = input.fonts || {}
-      const colors = input.colors || input
+      const colors = !input.themeEngineVersion
+        ? colors2to3(input.colors)
+        : input.colors || input
 
       if (version === 0) {
         if (input.version) version = input.version

@@ -110,7 +110,9 @@ const getCssShadowFilter = (input) => {
 }
 
 export const generateColors = (themeData) => {
-  const sourceColors = themeData.colors || themeData
+  const sourceColors = !themeData.themeEngineVersion
+    ? colors2to3(themeData.colors)
+    : themeData.colors || themeData
 
   const isLightOnDark = convert(sourceColors.bg).hsl.l < convert(sourceColors.text).hsl.l
   const mod = isLightOnDark ? 1 : -1
@@ -283,9 +285,12 @@ export const DEFAULT_SHADOWS = {
   }]
 }
 export const generateShadows = (input, colors, mod) => {
+  const inputShadows = !input.themeEngineVersion
+    ? shadows2to3(input.shadows)
+    : input.shadows || {}
   const shadows = Object.entries({
     ...DEFAULT_SHADOWS,
-    ...(input.shadows || {})
+    ...inputShadows
   }).reduce((shadowsAcc, [slotName, shadowDefs]) => {
     const newShadow = shadowDefs.reduce((shadowAcc, def) => [
       ...shadowAcc,
@@ -373,6 +378,46 @@ export const getThemes = () => {
           return acc
         }, {})
     })
+}
+export const colors2to3 = (colors) => {
+  return Object.entries(colors).reduce((acc, [slotName, color]) => {
+    const btnStates = ['', 'Pressed', 'Disabled', 'Toggled']
+    const btnPositions = ['', 'Panel', 'TopBar']
+    switch (slotName) {
+      case 'lightBg':
+        return { ...acc, highlight: color }
+      case 'btn':
+        return {
+          ...acc,
+          ...btnStates.reduce((stateAcc, state) => ({ ...stateAcc, ['btn' + state]: color }), {})
+        }
+      case 'btnText':
+        console.log(
+          btnPositions
+            .map(position => btnStates.map(state => state + position))
+            .flat()
+            .reduce(
+              (statePositionAcc, statePosition) =>
+                ({ ...statePositionAcc, ['btn' + statePosition + 'Text']: color })
+              , {}
+            )
+        )
+        return {
+          ...acc,
+          ...btnPositions
+            .map(position => btnStates.map(state => state + position))
+            .flat()
+            .reduce(
+              (statePositionAcc, statePosition) =>
+                ({ ...statePositionAcc, ['btn' + statePosition + 'Text']: color })
+              , {}
+            )
+        }
+      default:
+        console.log('aaa', slotName, color, acc)
+        return { ...acc, [slotName]: color }
+    }
+  }, {})
 }
 
 /**

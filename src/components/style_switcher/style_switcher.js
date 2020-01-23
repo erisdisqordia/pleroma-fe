@@ -16,8 +16,10 @@ import {
   colors2to3
 } from '../../services/style_setter/style_setter.js'
 import {
+  SLOT_INHERITANCE
+} from '../../services/theme_data/pleromafe.js'
+import {
   CURRENT_VERSION,
-  SLOT_INHERITANCE,
   OPACITIES,
   getLayers,
   getOpacitySlot

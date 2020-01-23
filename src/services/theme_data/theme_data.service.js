@@ -288,7 +288,7 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
   panelFaint: {
-    depends: ['text'],
+    depends: ['fgText'],
     layer: 'panel',
     opacity: 'faint',
     textColor: true
@@ -302,7 +302,7 @@ export const SLOT_INHERITANCE = {
   // Top bar
   topBar: '--fg',
   topBarText: {
-    depends: ['text'],
+    depends: ['fgText'],
     layer: 'topBar',
     textColor: true
   },
@@ -333,7 +333,7 @@ export const SLOT_INHERITANCE = {
     opacity: 'btn'
   },
   btnText: {
-    depends: ['text'],
+    depends: ['fgText'],
     layer: 'btn',
     textColor: true
   },

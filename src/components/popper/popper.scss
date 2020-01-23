@@ -9,7 +9,12 @@
     border-radius: $fallback--btnRadius;
     border-radius: var(--btnRadius, $fallback--btnRadius);
     background-color: $fallback--bg;
-    background-color: var(--bg, $fallback--bg);
+    background-color: var(--popover, $fallback--bg);
+    color: $fallback--text;
+    color: var(--popoverText, $fallback--text);
+    --faint: var(--popoverFaintText, $fallback--faint);
+    --faintLink: var(--popoverFaintLink, $fallback--faint);
+    --icon: var(--popoverIcon, $fallback--icon);
   }
 
   .popover-arrow {

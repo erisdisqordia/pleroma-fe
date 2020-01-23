@@ -12,6 +12,8 @@ export const LAYERS = {
   bg: 'underlay',
   highlight: 'bg',
   panel: 'bg',
+  popover: 'bg',
+  selectedMenu: 'popover',
   btn: 'bg',
   btnPanel: 'panel',
   btnTopBar: 'topBar',
@@ -140,6 +142,35 @@ export const SLOT_INHERITANCE = {
     color: (mod, bg, text) => mixrgb(bg, text)
   },
 
+  popover: {
+    depends: ['bg'],
+    opacity: 'popover'
+  },
+  popoverFaintText: {
+    depends: ['faint'],
+    layer: 'popover',
+    textColor: true
+  },
+  popoverFaintLink: {
+    depends: ['faintLink'],
+    layer: 'popover',
+    textColor: 'preserve'
+  },
+  popoverText: {
+    depends: ['text'],
+    layer: 'popover',
+    textColor: true
+  },
+  popoverLink: {
+    depends: ['link'],
+    layer: 'popover',
+    textColor: 'preserve'
+  },
+  popoverIcon: {
+    depends: ['popover', 'popoverText'],
+    color: (mod, bg, text) => mixrgb(bg, text)
+  },
+
   selectedPost: '--highlight',
   selectedPostFaintText: {
     depends: ['highlightFaintText'],
@@ -170,28 +201,31 @@ export const SLOT_INHERITANCE = {
     color: (mod, bg, text) => mixrgb(bg, text)
   },
 
-  selectedMenu: '--highlight',
+  selectedMenu: {
+    depends: ['popover'],
+    color: (mod, bg) => brightness(5 * mod, bg).rgb
+  },
   selectedMenuFaintText: {
     depends: ['highlightFaintText'],
-    layer: 'highlight',
+    layer: 'selectedMenu',
     variant: 'selectedMenu',
     textColor: true
   },
   selectedMenuFaintLink: {
     depends: ['highlightFaintLink'],
-    layer: 'highlight',
+    layer: 'selectedMenu',
     variant: 'selectedMenu',
     textColor: 'preserve'
   },
   selectedMenuText: {
     depends: ['highlightText'],
-    layer: 'highlight',
+    layer: 'selectedMenu',
     variant: 'selectedMenu',
     textColor: true
   },
   selectedMenuLink: {
     depends: ['highlightLink'],
-    layer: 'highlight',
+    layer: 'selectedMenu',
     variant: 'selectedMenu',
     textColor: 'preserve'
   },

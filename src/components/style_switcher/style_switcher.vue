@@ -555,6 +555,35 @@
             <ContrastRatio :contrast="previewContrast.highlightLink" />
           </div>
           <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.popover') }}</h4>
+            <ColorInput
+              v-model="popoverColorLocal"
+              name="popover"
+              :label="$t('settings.background')"
+              :fallback="previewTheme.colors.popover"
+            />
+            <OpacityInput
+              v-model="popoverOpacityLocal"
+              name="popoverOpacity"
+              :fallback="previewTheme.opacity.popover"
+              :disabled="popoverOpacityLocal === 'transparent'"
+            />
+            <ColorInput
+              v-model="popoverTextColorLocal"
+              name="popoverText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.popoverText"
+            />
+            <ContrastRatio :contrast="previewContrast.popoverText" />
+            <ColorInput
+              v-model="popoverLinkColorLocal"
+              name="popoverLink"
+              :label="$t('settings.links')"
+              :fallback="previewTheme.colors.popoverLink"
+            />
+            <ContrastRatio :contrast="previewContrast.popoverLink" />
+          </div>
+          <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.selectedPost') }}</h4>
             <ColorInput
               v-model="selectedPostColorLocal"

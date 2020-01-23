@@ -223,7 +223,12 @@
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
   box-shadow: var(--panelShadow);
   background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
+  background-color: var(--popover, $fallback--bg);
+  color: $fallback--link;
+  color: var(--popoverText, $fallback--link);
+  --faint: var(--popoverFaintText, $fallback--faint);
+  --faintLink: var(--popoverFaintLink, $fallback--faint);
+  --icon: var(--popoverIcon, $fallback--icon);
 
   .button-icon:before {
     width: 1.1em;

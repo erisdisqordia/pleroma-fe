@@ -109,10 +109,13 @@
         box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
         box-shadow: var(--popupShadow);
         min-width: 75%;
-        background: $fallback--bg;
-        background: var(--bg, $fallback--bg);
-        color: $fallback--lightText;
-        color: var(--lightText, $fallback--lightText);
+        background-color: $fallback--bg;
+        background-color: var(--popover, $fallback--bg);
+        color: $fallback--link;
+        color: var(--popoverText, $fallback--link);
+        --faint: var(--popoverFaintText, $fallback--faint);
+        --faintLink: var(--popoverFaintLink, $fallback--faint);
+        --icon: var(--popoverIcon, $fallback--icon);
       }
     }
 

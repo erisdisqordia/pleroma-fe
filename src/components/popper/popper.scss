@@ -137,11 +137,14 @@
       }
     }
 
-    &:hover {
-      // TODO: improve the look on breeze themes
-      background-color: $fallback--fg;
-      background-color: var(--btn, $fallback--fg);
-      box-shadow: none;
+    &:active, &:hover {
+      background-color: $fallback--lightBg;
+      background-color: var(--selectedMenu, $fallback--lightBg);
+      color: $fallback--link;
+      color: var(--selectedMenuText, $fallback--link);
+      --faint: var(--selectedMenuFaintText, $fallback--faint);
+      --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
+      --icon: var(--selectedMenuIcon, $fallback--icon);
     }
   }
 }

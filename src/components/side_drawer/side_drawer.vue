@@ -88,7 +88,7 @@
           </router-link>
         </li>
         <li
-          v-if="federating && !privateMode"
+          v-if="federating && (currentUser || !privateMode)"
           @click="toggleDrawer"
         >
           <router-link to="/main/all">

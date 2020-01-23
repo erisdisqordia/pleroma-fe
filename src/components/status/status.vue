@@ -448,6 +448,7 @@ $status-margin: 0.75em;
     background-color: var(--selectedPost, $fallback--lightBg);
     color: $fallback--text;
     color: var(--selectedPostText, $fallback--text);
+    --lightText: var(--selectedPostLightText, $fallback--light);
     --faint: var(--selectedPostFaintText, $fallback--faint);
     --faintLink: var(--selectedPostFaintLink, $fallback--faint);
     --icon: var(--selectedPostIcon, $fallback--icon);

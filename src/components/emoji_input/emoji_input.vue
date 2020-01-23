@@ -115,6 +115,7 @@
         color: var(--popoverText, $fallback--link);
         --faint: var(--popoverFaintText, $fallback--faint);
         --faintLink: var(--popoverFaintLink, $fallback--faint);
+        --lightText: var(--popoverLightText, $fallback--lightText);
         --icon: var(--popoverIcon, $fallback--icon);
       }
     }
@@ -160,11 +161,12 @@
 
       &.highlighted {
         background-color: $fallback--fg;
-        background-color: var(--selectedMenu, $fallback--fg);
-        color: var(--selectedMenuText, $fallback--text);
-        --faint: var(--selectedMenuFaintText, $fallback--faint);
-        --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
-        --icon: var(--selectedMenuIcon, $fallback--icon);
+        background-color: var(--selectedMenuPopover, $fallback--fg);
+        color: var(--selectedMenuPopoverText, $fallback--text);
+        --faint: var(--selectedMenuPopoverFaintText, $fallback--faint);
+        --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
+        --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
+        --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
       }
     }
   }

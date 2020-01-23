@@ -114,8 +114,8 @@
       "cGreen": "#27ae60",
       "cOrange": "#f67400",
       "btnPressed": "--accent",
-      "highlight": "--accent",
-      "selectedPost": "--bg,10"
+      "selectedMenu": "--accent",
+      "selectedMenuPopover": "--accent"
     },
     "radii": {
       "btn": "2",

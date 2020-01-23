@@ -14,6 +14,7 @@
     color: var(--popoverText, $fallback--text);
     --faint: var(--popoverFaintText, $fallback--faint);
     --faintLink: var(--popoverFaintLink, $fallback--faint);
+    --lightText: var(--popoverLightText, $fallback--lightText);
     --icon: var(--popoverIcon, $fallback--icon);
   }
 
@@ -144,12 +145,13 @@
 
     &:active, &:hover {
       background-color: $fallback--lightBg;
-      background-color: var(--selectedMenu, $fallback--lightBg);
+      background-color: var(--selectedMenuPopover, $fallback--lightBg);
       color: $fallback--link;
-      color: var(--selectedMenuText, $fallback--link);
-      --faint: var(--selectedMenuFaintText, $fallback--faint);
-      --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
-      --icon: var(--selectedMenuIcon, $fallback--icon);
+      color: var(--selectedMenuPopoverText, $fallback--link);
+      --faint: var(--selectedMenuPopoverFaintText, $fallback--faint);
+      --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
+      --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
+      --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
     }
   }
 }

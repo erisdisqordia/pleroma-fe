@@ -1,5 +1,5 @@
 import { convert, brightness, contrastRatio } from 'chromatism'
-import { alphaBlendLayers, getTextColor } from '../color_convert/color_convert.js'
+import { alphaBlendLayers, getTextColor, relativeLuminance } from '../color_convert/color_convert.js'
 import { LAYERS, DEFAULT_OPACITY, SLOT_INHERITANCE } from './pleromafe.js'
 
 /*
@@ -318,13 +318,14 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
           opacity
         )
       )
+      const isLightOnDark = relativeLuminance(bg) > 127
+      const mod = isLightOnDark ? 1 : -1
+
       if (value.textColor === 'bw') {
         outputColor = contrastRatio(bg).rgb
       } else {
         let color = { ...colors[deps[0]] }
         if (value.color) {
-          const isLightOnDark = convert(bg).hsl.l < convert(color).hsl.l
-          const mod = isLightOnDark ? 1 : -1
           color = value.color(mod, ...deps.map((dep) => ({ ...colors[dep] })))
         }
 

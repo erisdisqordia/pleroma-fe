@@ -117,6 +117,11 @@ export const SLOT_INHERITANCE = {
     depends: ['bg'],
     color: (mod, bg) => brightness(5 * mod, bg).rgb
   },
+  highlightLightText: {
+    depends: ['lightText'],
+    layer: 'highlight',
+    textColor: true
+  },
   highlightFaintText: {
     depends: ['faint'],
     layer: 'highlight',
@@ -145,6 +150,11 @@ export const SLOT_INHERITANCE = {
   popover: {
     depends: ['bg'],
     opacity: 'popover'
+  },
+  popoverLightText: {
+    depends: ['lightText'],
+    layer: 'popover',
+    textColor: true
   },
   popoverFaintText: {
     depends: ['faint'],
@@ -178,6 +188,12 @@ export const SLOT_INHERITANCE = {
     variant: 'selectedPost',
     textColor: true
   },
+  selectedPostLightText: {
+    depends: ['highlightLightText'],
+    layer: 'highlight',
+    variant: 'selectedPost',
+    textColor: true
+  },
   selectedPostFaintLink: {
     depends: ['highlightFaintLink'],
     layer: 'highlight',
@@ -202,8 +218,14 @@ export const SLOT_INHERITANCE = {
   },
 
   selectedMenu: {
-    depends: ['popover'],
+    depends: ['bg'],
     color: (mod, bg) => brightness(5 * mod, bg).rgb
+  },
+  selectedMenuLightText: {
+    depends: ['highlightLightText'],
+    layer: 'selectedMenu',
+    variant: 'selectedMenu',
+    textColor: true
   },
   selectedMenuFaintText: {
     depends: ['highlightFaintText'],
@@ -231,6 +253,45 @@ export const SLOT_INHERITANCE = {
   },
   selectedMenuIcon: {
     depends: ['selectedMenu', 'selectedMenuText'],
+    color: (mod, bg, text) => mixrgb(bg, text)
+  },
+
+  selectedMenuPopover: {
+    depends: ['popover'],
+    color: (mod, bg) => brightness(5 * mod, bg).rgb
+  },
+  selectedMenuPopoverLightText: {
+    depends: ['selectedMenuLightText'],
+    layer: 'selectedMenuPopover',
+    variant: 'selectedMenuPopover',
+    textColor: true
+  },
+  selectedMenuPopoverFaintText: {
+    depends: ['selectedMenuFaintText'],
+    layer: 'selectedMenuPopover',
+    variant: 'selectedMenuPopover',
+    textColor: true
+  },
+  selectedMenuPopoverFaintLink: {
+    depends: ['selectedMenuFaintLink'],
+    layer: 'selectedMenuPopover',
+    variant: 'selectedMenuPopover',
+    textColor: 'preserve'
+  },
+  selectedMenuPopoverText: {
+    depends: ['selectedMenuText'],
+    layer: 'selectedMenuPopover',
+    variant: 'selectedMenuPopover',
+    textColor: true
+  },
+  selectedMenuPopoverLink: {
+    depends: ['selectedMenuLink'],
+    layer: 'selectedMenuPopover',
+    variant: 'selectedMenuPopover',
+    textColor: 'preserve'
+  },
+  selectedMenuPopoverIcon: {
+    depends: ['selectedMenuPopover', 'selectedMenuText'],
     color: (mod, bg, text) => mixrgb(bg, text)
   },
 

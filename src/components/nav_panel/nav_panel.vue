@@ -105,6 +105,7 @@
     color: var(--selectedMenuText, $fallback--link);
     --faint: var(--selectedMenuFaintText, $fallback--faint);
     --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
+    --lightText: var(--selectedMenuLightText, $fallback--lightText);
     --icon: var(--selectedMenuIcon, $fallback--icon);
   }
 
@@ -116,6 +117,7 @@
     color: var(--selectedMenuText, $fallback--text);
     --faint: var(--selectedMenuFaintText, $fallback--faint);
     --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
+    --lightText: var(--selectedMenuLightText, $fallback--lightText);
     --icon: var(--selectedMenuIcon, $fallback--icon);
 
     &:hover {

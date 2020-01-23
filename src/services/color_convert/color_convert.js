@@ -69,7 +69,7 @@ const srgbToLinear = (srgb) => {
  * @param {Object} srgb - sRGB color
  * @returns {Number} relative luminance
  */
-const relativeLuminance = (srgb) => {
+export const relativeLuminance = (srgb) => {
   const { r, g, b } = srgbToLinear(srgb)
   return 0.2126 * r + 0.7152 * g + 0.0722 * b
 }

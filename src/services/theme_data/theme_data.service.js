@@ -326,7 +326,7 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
       } else {
         let color = { ...colors[deps[0]] }
         if (value.color) {
-          color = value.color(mod, ...deps.map((dep) => ({ ...colors[dep] })))
+          color = colorFunc(mod, ...deps.map((dep) => ({ ...colors[dep] })))
         }
 
         outputColor = getTextColor(
@@ -348,7 +348,13 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
   }
   const opacitySlot = getOpacitySlot(key)
   if (opacitySlot && outputColor.a === undefined) {
-    outputColor.a = sourceOpacity[opacitySlot] || OPACITIES[opacitySlot].defaultValue || 1
+    const deps = getDependencies(key, SLOT_INHERITANCE)
+    const dependencySlot = deps && deps[0]
+    if (dependencySlot && sourceColors[dependencySlot] === 'transparent') {
+      outputColor.a = 0
+    } else {
+      outputColor.a = sourceOpacity[opacitySlot] || OPACITIES[opacitySlot].defaultValue || 1
+    }
   }
   if (opacitySlot) {
     return {

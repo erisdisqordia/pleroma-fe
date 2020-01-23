@@ -152,6 +152,9 @@
       --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
       --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
       --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
+      i {
+        color: var(--selectedMenuPopoverIcon, $fallback--icon);
+      }
     }
   }
 }

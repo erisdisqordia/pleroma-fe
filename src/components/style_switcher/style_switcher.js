@@ -385,7 +385,7 @@ export default {
       if (!source && !theme) {
         throw new Error('Can\'t load theme: empty')
       }
-      const version = (origin === 'localstorage' && !theme.colors)
+      const version = (origin === 'localStorage' && !theme.colors)
         ? 'l1'
         : fileVersion
       const snapshotEngineVersion = (theme || {}).themeEngineVersion
@@ -404,7 +404,7 @@ export default {
           version !== 'l1' &&
           origin !== 'defaults'
       ) {
-        if (sourceSnapshotMismatch) {
+        if (sourceSnapshotMismatch && origin === 'localStorage') {
           this.themeWarning = {
             origin,
             themeEngineVersion,

@@ -590,7 +590,7 @@ export default {
       const shadows = input.shadows || {}
       const fonts = input.fonts || {}
       const colors = !input.themeEngineVersion
-        ? colors2to3(input.colors)
+        ? colors2to3(input.colors || input)
         : input.colors || input
 
       if (version === 0) {

@@ -111,7 +111,7 @@ const getCssShadowFilter = (input) => {
 
 export const generateColors = (themeData) => {
   const sourceColors = !themeData.themeEngineVersion
-    ? colors2to3(themeData.colors)
+    ? colors2to3(themeData.colors || themeData)
     : themeData.colors || themeData
 
   const isLightOnDark = convert(sourceColors.bg).hsl.l < convert(sourceColors.text).hsl.l
@@ -285,7 +285,7 @@ export const DEFAULT_SHADOWS = {
   }]
 }
 export const generateShadows = (input, colors, mod) => {
-  const inputShadows = !input.themeEngineVersion
+  const inputShadows = input.shadows && !input.themeEngineVersion
     ? shadows2to3(input.shadows)
     : input.shadows || {}
   const shadows = Object.entries({

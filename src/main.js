@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 
+import 'custom-event-polyfill'
+import './lib/event_target_polyfill.js'
+
 import interfaceModule from './modules/interface.js'
 import instanceModule from './modules/instance.js'
 import statusesModule from './modules/statuses.js'

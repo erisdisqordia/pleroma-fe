@@ -9,6 +9,7 @@ import ScopeSelector from '../scope_selector/scope_selector.vue'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 import BlockCard from '../block_card/block_card.vue'
 import MuteCard from '../mute_card/mute_card.vue'
+import DomainMuteCard from '../domain_mute_card/domain_mute_card.vue'
 import SelectableList from '../selectable_list/selectable_list.vue'
 import ProgressButton from '../progress_button/progress_button.vue'
 import EmojiInput from '../emoji_input/emoji_input.vue'
@@ -29,6 +30,12 @@ const BlockList = withSubscription({
 const MuteList = withSubscription({
   fetch: (props, $store) => $store.dispatch('fetchMutes'),
   select: (props, $store) => get($store.state.users.currentUser, 'muteIds', []),
+  childPropName: 'items'
+})(SelectableList)
+
+const DomainMuteList = withSubscription({
+  fetch: (props, $store) => $store.dispatch('fetchDomainMutes'),
+  select: (props, $store) => get($store.state.users.currentUser, 'domainMutes', []),
   childPropName: 'items'
 })(SelectableList)
 
@@ -67,7 +74,8 @@ const UserSettings = {
       changedPassword: false,
       changePasswordError: false,
       activeTab: 'profile',
-      notificationSettings: this.$store.state.users.currentUser.notification_settings
+      notificationSettings: this.$store.state.users.currentUser.notification_settings,
+      newDomainToMute: ''
     }
   },
   created () {
@@ -80,10 +88,12 @@ const UserSettings = {
     ImageCropper,
     BlockList,
     MuteList,
+    DomainMuteList,
     EmojiInput,
     Autosuggest,
     BlockCard,
     MuteCard,
+    DomainMuteCard,
     ProgressButton,
     Importer,
     Exporter,
@@ -364,6 +374,13 @@ const UserSettings = {
     },
     unmuteUsers (ids) {
       return this.$store.dispatch('unmuteUsers', ids)
+    },
+    unmuteDomains (domains) {
+      return this.$store.dispatch('unmuteDomains', domains)
+    },
+    muteDomain () {
+      return this.$store.dispatch('muteDomain', this.newDomainToMute)
+        .then(() => { this.newDomainToMute = '' })
     },
     identity (value) {
       return value

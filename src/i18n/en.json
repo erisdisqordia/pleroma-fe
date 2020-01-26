@@ -21,6 +21,12 @@
   "chat": {
     "title": "Chat"
   },
+  "domain_mute_card": {
+    "mute": "Mute",
+    "mute_progress": "Muting...",
+    "unmute": "Unmute",
+    "unmute_progress": "Unmuting..."
+  },
   "exporter": {
     "export": "Export",
     "processing": "Processing, you'll soon be asked to download your file"
@@ -264,6 +270,7 @@
     "delete_account_error": "There was an issue deleting your account. If this persists please contact your instance administrator.",
     "delete_account_instructions": "Type your password in the input below to confirm account deletion.",
     "discoverable": "Allow discovery of this account in search results and other services",
+    "domain_mutes": "Domains",
     "avatar_size_instruction": "The recommended minimum size for avatar images is 150x150 pixels.",
     "pad_emoji": "Pad emoji with spaces when adding from picker",
     "export_theme": "Save preset",
@@ -361,6 +368,7 @@
     "post_status_content_type": "Post status content type",
     "stop_gifs": "Play-on-hover GIFs",
     "streaming": "Enable automatic streaming of new posts when scrolled to the top",
+    "user_mutes": "Users",
     "useStreamingApi": "Receive posts and notifications real-time",
     "useStreamingApiWarning": "(Not recommended, experimental, known to skip posts)",
     "text": "Text",
@@ -369,6 +377,7 @@
     "theme_help_v2_1": "You can also override certain component's colors and opacity by toggling the checkbox, use \"Clear all\" button to clear all overrides.",
     "theme_help_v2_2": "Icons underneath some entries are background/text contrast indicators, hover over for detailed info. Please keep in mind that when using transparency contrast indicators show the worst possible case.",
     "tooltipRadius": "Tooltips/alerts",
+    "type_domains_to_mute": "Type in domains to mute",
     "upload_a_photo": "Upload a photo",
     "user_settings": "User Settings",
     "values": {

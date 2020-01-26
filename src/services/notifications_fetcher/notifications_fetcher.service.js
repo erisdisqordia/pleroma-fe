@@ -2,7 +2,6 @@ import apiService from '../api/api.service.js'
 
 const update = ({ store, notifications, older }) => {
   store.dispatch('setNotificationsError', { value: false })
-
   store.dispatch('addNewNotifications', { notifications, older })
 }
 
@@ -30,9 +29,9 @@ const fetchAndUpdate = ({ store, credentials, older = false }) => {
 
     // load unread notifications repeatedly to provide consistency between browser tabs
     const notifications = timelineData.data
-    const unread = notifications.filter(n => !n.seen).map(n => n.id)
-    if (unread.length) {
-      args['since'] = Math.min(...unread)
+    const readNotifsIds = notifications.filter(n => n.seen).map(n => n.id)
+    if (readNotifsIds.length) {
+      args['since'] = Math.max(...readNotifsIds)
       fetchNotifications({ store, args, older })
     }
 

@@ -33,7 +33,7 @@
             <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
           </router-link>
         </li>
-        <li v-if="federating && !privateMode">
+        <li v-if="federating && (currentUser || !privateMode)">
           <router-link :to="{ name: 'public-external-timeline' }">
             <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
           </router-link>

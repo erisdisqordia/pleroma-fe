@@ -146,6 +146,7 @@ const api = {
     startFetchingFollowRequests (store) {
       if (store.state.fetchers['followRequests']) return
       const fetcher = store.state.backendInteractor.startFetchingFollowRequests({ store })
+
       store.commit('addFetcher', { fetcherName: 'followRequests', fetcher })
     },
     stopFetchingFollowRequests (store) {

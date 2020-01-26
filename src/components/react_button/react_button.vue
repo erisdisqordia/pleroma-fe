@@ -44,7 +44,6 @@
         class="button-icon add-reaction-button"
         :title="$t('tool_tip.add_reaction')"
       />
-      <span v-if="!mergedConfig.hidePostStats && status.fave_num > 0">{{ status.fave_num }}</span>
     </div>
   </v-popover>
 </template>

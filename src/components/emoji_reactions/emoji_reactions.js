@@ -4,12 +4,17 @@ const EmojiReactions = {
   props: ['status'],
   computed: {
     emojiReactions () {
-      return this.status.emojiReactions
+      console.log(this.status.emoji_reactions)
+      return this.status.emoji_reactions
     }
   },
   methods: {
     reactedWith (emoji) {
-      return this.status.reactedWithEmoji.includes(emoji)
+      // return []
+      const user = this.$store.state.users.currentUser
+      const reaction = this.status.emoji_reactions.find(r => r.emoji === emoji)
+      console.log(reaction)
+      return reaction.accounts && reaction.accounts.find(u => u.id === user.id)
     },
     reactWith (emoji) {
       this.$store.dispatch('reactWithEmoji', { id: this.status.id, emoji })

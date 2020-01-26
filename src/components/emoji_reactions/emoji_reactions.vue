@@ -1,14 +1,14 @@
 <template>
   <div class="emoji-reactions">
     <button
-      v-for="(users, emoji) in emojiReactions"
-      :key="emoji"
+      v-for="(reaction) in emojiReactions"
+      :key="reaction.emoji"
       class="emoji-reaction btn btn-default"
-      :class="{ 'picked-reaction': reactedWith(emoji) }"
-      @click="emojiOnClick(emoji, $event)"
+      :class="{ 'picked-reaction': reactedWith(reaction.emoji) }"
+      @click="emojiOnClick(reaction.emoji, $event)"
     >
-      <span v-if="users">{{ users.length }}</span>
-      <span>{{ emoji }}</span>
+      <span>{{ reaction.count }}</span>
+      <span>{{ reaction.emoji }}</span>
     </button>
   </div>
 </template>

@@ -355,7 +355,6 @@
           </transition>
 
           <EmojiReactions
-            v-if="isFocused"
             :status="status"
           />
 

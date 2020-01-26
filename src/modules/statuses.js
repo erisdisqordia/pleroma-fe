@@ -10,10 +10,7 @@ import {
   first,
   last,
   isArray,
-  omitBy,
-  flow,
-  filter,
-  keys
+  omitBy
 } from 'lodash'
 import { set } from 'vue'
 import apiService from '../services/api/api.service.js'
@@ -534,33 +531,48 @@ export const mutations = {
     newStatus.fave_num = newStatus.favoritedBy.length
     newStatus.favorited = !!newStatus.favoritedBy.find(({ id }) => currentUser.id === id)
   },
-  addEmojiReactions (state, { id, emojiReactions, currentUser }) {
+  addEmojiReactionsBy (state, { id, emojiReactions, currentUser }) {
     const status = state.allStatusesObject[id]
-    set(status, 'emojiReactions', emojiReactions)
-    const reactedWithEmoji = flow(
-      keys,
-      filter(reaction => find(reaction, { id: currentUser.id }))
-    )(emojiReactions)
-    set(status, 'reactedWithEmoji', reactedWithEmoji)
+    set(status, 'emoji_reactions', emojiReactions)
   },
   addOwnReaction (state, { id, emoji, currentUser }) {
     const status = state.allStatusesObject[id]
-    status.emojiReactions = status.emojiReactions || {}
-    const listOfUsers = (status.emojiReactions && status.emojiReactions[emoji]) || []
-    const hasSelfAlready = !!find(listOfUsers, { id: currentUser.id })
-    if (!hasSelfAlready) {
-      set(status.emojiReactions, emoji, listOfUsers.concat([{ id: currentUser.id }]))
-      set(status, 'reactedWithEmoji', [...status.reactedWithEmoji, emoji])
+    const reactionIndex = findIndex(status.emoji_reactions, { emoji })
+    const reaction = status.emoji_reactions[reactionIndex] || { emoji, count: 0, accounts: [] }
+
+    const newReaction = {
+      ...reaction,
+      count: reaction.count + 1,
+      accounts: [
+        ...reaction.accounts,
+        currentUser
+      ]
+    }
+
+    // Update count of existing reaction if it exists, otherwise append at the end
+    if (reactionIndex >= 0) {
+      set(status.emoji_reactions, reactionIndex, newReaction)
+    } else {
+      set(status, 'emoji_reactions', [...status.emoji_reactions, newReaction])
     }
   },
   removeOwnReaction (state, { id, emoji, currentUser }) {
     const status = state.allStatusesObject[id]
-    const listOfUsers = status.emojiReactions[emoji] || []
-    const hasSelfAlready = !!find(listOfUsers, { id: currentUser.id })
-    if (hasSelfAlready) {
-      const newUsers = filter(listOfUsers, user => user.id !== currentUser.id)
-      set(status.emojiReactions, emoji, newUsers)
-      set(status, 'reactedWithEmoji', status.reactedWithEmoji.filter(e => e !== emoji))
+    const reactionIndex = findIndex(status.emoji_reactions, { emoji })
+    if (reactionIndex < 0) return
+
+    const reaction = status.emoji_reactions[reactionIndex]
+
+    const newReaction = {
+      ...reaction,
+      count: reaction.count - 1,
+      accounts: reaction.accounts.filter(acc => acc.id === currentUser.id)
+    }
+
+    if (newReaction.count > 0) {
+      set(status.emoji_reactions, reactionIndex, newReaction)
+    } else {
+      set(status, 'emoji_reactions', status.emoji_reactions.filter(r => r.emoji !== emoji))
     }
   },
   updateStatusWithPoll (state, { id, poll }) {
@@ -672,7 +684,7 @@ const statuses = {
       commit('addOwnReaction', { id, emoji, currentUser })
       rootState.api.backendInteractor.reactWithEmoji({ id, emoji }).then(
         status => {
-          dispatch('fetchEmojiReactions', id)
+          dispatch('fetchEmojiReactionsBy', id)
         }
       )
     },
@@ -681,14 +693,14 @@ const statuses = {
       commit('removeOwnReaction', { id, emoji, currentUser })
       rootState.api.backendInteractor.unreactWithEmoji({ id, emoji }).then(
         status => {
-          dispatch('fetchEmojiReactions', id)
+          dispatch('fetchEmojiReactionsBy', id)
         }
       )
     },
-    fetchEmojiReactions ({ rootState, commit }, id) {
+    fetchEmojiReactionsBy ({ rootState, commit }, id) {
       rootState.api.backendInteractor.fetchEmojiReactions({ id }).then(
         emojiReactions => {
-          commit('addEmojiReactions', { id, emojiReactions, currentUser: rootState.users.currentUser })
+          commit('addEmojiReactionsBy', { id, emojiReactions, currentUser: rootState.users.currentUser })
         }
       )
     },

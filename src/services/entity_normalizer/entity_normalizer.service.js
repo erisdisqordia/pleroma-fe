@@ -233,6 +233,7 @@ export const parseStatus = (data) => {
     output.statusnet_html = addEmojis(data.content, data.emojis)
 
     output.tags = data.tags
+    output.emoji_reactions = [{ emoji: 'A', count: 5 }] // data.pleroma.emoji_reactions
 
     if (data.pleroma) {
       const { pleroma } = data

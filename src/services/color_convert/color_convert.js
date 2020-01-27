@@ -171,7 +171,7 @@ export const mixrgb = (a, b) => {
  * @returns {String} CSS rgba() color
  */
 export const rgba2css = function (rgba) {
-  return `rgba(${Math.floor(rgba.r)}, ${Math.floor(rgba.g)}, ${Math.floor(rgba.b)}, .5)`
+  return `rgba(${Math.floor(rgba.r)}, ${Math.floor(rgba.g)}, ${Math.floor(rgba.b)}, ${rgba.a})`
 }
 
 /**

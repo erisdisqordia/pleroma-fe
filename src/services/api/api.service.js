@@ -894,7 +894,7 @@ const reactWithEmoji = ({ id, emoji, credentials }) => {
     method: 'POST',
     credentials,
     payload: { emoji }
-  }).then(status => parseStatus(status))
+  }).then(parseStatus)
 }
 
 const unreactWithEmoji = ({ id, emoji, credentials }) => {

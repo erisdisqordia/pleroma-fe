@@ -248,6 +248,23 @@
             </button>
           </div>
           <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.post') }}</h4>
+            <ColorInput
+              v-model="postLinkColorLocal"
+              name="postLinkColor"
+              :fallback="previewTheme.colors.accent"
+              :label="$t('settings.links')"
+              :show-optional-tickbox="typeof accentColorLocal !== 'undefined'"
+            />
+            <ContrastRatio :contrast="previewContrast.bgPostLink" />
+            <ColorInput
+              v-model="iconColorLocal"
+              name="iconColor"
+              :fallback="previewTheme.colors.accent"
+              :label="$t('settings.links')"
+              :show-optional-tickbox="typeof accentColorLocal !== 'undefined'"
+            />
+            <ContrastRatio :contrast="previewContrast.bgIcon" />
             <h4>{{ $t('settings.style.advanced_colors.alert') }}</h4>
             <ColorInput
               v-model="alertErrorColorLocal"

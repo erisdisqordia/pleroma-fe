@@ -1,0 +1,71 @@
+{
+  "_pleroma_theme_version": 2,
+  "name": "Kenomo",
+  "source": {
+    "themeEngineVersion": 3,
+    "fonts": {},
+    "shadows": {
+      "panel": [],
+      "topBar": [],
+      "button": [
+        {
+          "x": 0,
+          "y": 1,
+          "blur": 0,
+          "spread": 0,
+          "color": "#FFFFFF",
+          "alpha": 0.2,
+          "inset": true
+        },
+        {
+          "x": 0,
+          "y": -1,
+          "blur": 0,
+          "spread": 0,
+          "color": "#000000",
+          "alpha": 0.2,
+          "inset": true
+        }
+      ],
+      "input": [
+        {
+          "x": 0,
+          "y": "0",
+          "blur": 0,
+          "spread": "1",
+          "color": "#576574",
+          "alpha": "1",
+          "inset": true
+        }
+      ]
+    },
+    "opacity": {
+      "underlay": "1",
+      "border": "0"
+    },
+    "colors": {
+      "bg": "#ffffff",
+      "fg": "#f6f6f6",
+      "text": "#494949",
+      "underlay": "#ffffff",
+      "link": "#818181",
+      "accent": "#818181",
+      "cBlue": "#2e86de",
+      "cRed": "#c96248",
+      "cGreen": "#0fa00f",
+      "cOrange": "#aa7623",
+      "postLink": "#2e86de",
+      "border": "#ffffff",
+      "icon": "#8a8a8a",
+      "panel": "transparent",
+      "topBarText": "#4b4b4b",
+      "tab": "--btn,-30",
+      "btn": "#576574"
+    },
+    "radii": {
+      "panel": "0",
+      "avatar": "6",
+      "avatarAlt": "6"
+    }
+  }
+}

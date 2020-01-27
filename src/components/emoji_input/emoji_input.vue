@@ -116,6 +116,8 @@
         --faint: var(--popoverFaintText, $fallback--faint);
         --faintLink: var(--popoverFaintLink, $fallback--faint);
         --lightText: var(--popoverLightText, $fallback--lightText);
+        --postLink: var(--popoverPostLink, $fallback--link);
+        --postFaintLink: var(--popoverPostFaintLink, $fallback--link);
         --icon: var(--popoverIcon, $fallback--icon);
       }
     }

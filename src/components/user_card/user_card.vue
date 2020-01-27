@@ -299,6 +299,11 @@
   &-bio {
     text-align: center;
 
+    a {
+      color: $fallback--link;
+      color: var(--postLink, $fallback--link);
+    }
+
     img {
       object-fit: contain;
       vertical-align: middle;

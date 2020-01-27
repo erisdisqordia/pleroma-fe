@@ -107,6 +107,10 @@ export const SLOT_INHERITANCE = {
     depends: ['link'],
     opacity: 'faint'
   },
+  postFaintLink: {
+    depends: ['postLink'],
+    opacity: 'faint'
+  },
 
   cBlue: '#0000ff',
   cRed: '#FF0000',
@@ -122,6 +126,11 @@ export const SLOT_INHERITANCE = {
     layer: 'highlight',
     textColor: true
   },
+  highlightPostLink: {
+    depends: ['postLink'],
+    layer: 'highlight',
+    textColor: 'preserve'
+  },
   highlightFaintText: {
     depends: ['faint'],
     layer: 'highlight',
@@ -129,6 +138,11 @@ export const SLOT_INHERITANCE = {
   },
   highlightFaintLink: {
     depends: ['faintLink'],
+    layer: 'highlight',
+    textColor: 'preserve'
+  },
+  highlightPostFaintLink: {
+    depends: ['postFaintLink'],
     layer: 'highlight',
     textColor: 'preserve'
   },
@@ -156,6 +170,11 @@ export const SLOT_INHERITANCE = {
     layer: 'popover',
     textColor: true
   },
+  popoverPostLink: {
+    depends: ['postLink'],
+    layer: 'popover',
+    textColor: 'preserve'
+  },
   popoverFaintText: {
     depends: ['faint'],
     layer: 'popover',
@@ -163,6 +182,11 @@ export const SLOT_INHERITANCE = {
   },
   popoverFaintLink: {
     depends: ['faintLink'],
+    layer: 'popover',
+    textColor: 'preserve'
+  },
+  popoverPostFaintLink: {
+    depends: ['postFaintLink'],
     layer: 'popover',
     textColor: 'preserve'
   },
@@ -193,6 +217,12 @@ export const SLOT_INHERITANCE = {
     layer: 'highlight',
     variant: 'selectedPost',
     textColor: true
+  },
+  selectedPostPostLink: {
+    depends: ['highlightPostLink'],
+    layer: 'highlight',
+    variant: 'selectedPost',
+    textColor: 'preserve'
   },
   selectedPostFaintLink: {
     depends: ['highlightFaintLink'],
@@ -298,6 +328,10 @@ export const SLOT_INHERITANCE = {
   lightText: {
     depends: ['text'],
     color: (mod, text) => brightness(20 * mod, text).rgb
+  },
+
+  postLink: {
+    depends: ['link']
   },
 
   border: {

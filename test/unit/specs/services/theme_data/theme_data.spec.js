@@ -86,5 +86,4 @@ describe('Theme Data utility functions', () => {
       expect(out.indexOf('a')).to.be.below(out.indexOf('c'))
     })
   })
-
 })

@@ -353,7 +353,7 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
     if (dependencySlot && sourceColors[dependencySlot] === 'transparent') {
       outputColor.a = 0
     } else {
-      outputColor.a = sourceOpacity[opacitySlot] || OPACITIES[opacitySlot].defaultValue || 1
+      outputColor.a = Number(sourceOpacity[opacitySlot]) || OPACITIES[opacitySlot].defaultValue || 1
     }
   }
   if (opacitySlot) {

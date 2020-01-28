@@ -307,7 +307,7 @@ const UserSettings = {
         newPassword: this.changePasswordInputs[1],
         newPasswordConfirmation: this.changePasswordInputs[2]
       }
-      this.$store.state.api.backendInteractor.changePassword({ params })
+      this.$store.state.api.backendInteractor.changePassword(params)
         .then((res) => {
           if (res.status === 'success') {
             this.changedPassword = true
@@ -324,7 +324,7 @@ const UserSettings = {
         email: this.newEmail,
         password: this.changeEmailPassword
       }
-      this.$store.state.api.backendInteractor.changeEmail({ params })
+      this.$store.state.api.backendInteractor.changeEmail(params)
         .then((res) => {
           if (res.status === 'success') {
             this.changedEmail = true

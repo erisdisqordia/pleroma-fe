@@ -2,6 +2,7 @@
   "_pleroma_theme_version": 2,
   "name": "Redmond XX SE",
   "source": {
+    "themeEngineVersion": 3,
     "shadows": {
       "panel": [
         {
@@ -276,6 +277,7 @@
       "topBar": "#000080",
       "topBarLink": "#ffffff",
       "btn": "#c0c0c0",
+      "btnToggled": "--btn",
       "faint": "#3f3f3f",
       "faintLink": "#404080",
       "border": "#808080",

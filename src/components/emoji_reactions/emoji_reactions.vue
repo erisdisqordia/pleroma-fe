@@ -4,7 +4,7 @@
       v-for="(reaction) in emojiReactions"
       :key="reaction.emoji"
       class="emoji-reaction btn btn-default"
-      :class="{ 'picked-reaction': reactedWith(reaction.emoji) }"
+      :class="{ 'toggled': reactedWith(reaction.emoji) }"
       @click="emojiOnClick(reaction.emoji, $event)"
     >
       <span class="reaction-emoji">{{ reaction.emoji }}</span>
@@ -38,12 +38,6 @@
   &:focus {
     outline: none;
   }
-}
-
-.picked-reaction {
-  border: 1px solid var(--link, $fallback--link);
-  margin-left: -1px; // offset the border, can't use inset shadows either
-  margin-right: calc(0.5em - 1px);
 }
 
 </style>

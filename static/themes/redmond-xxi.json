@@ -2,6 +2,7 @@
   "_pleroma_theme_version": 2,
   "name": "Redmond XXI",
   "source": {
+    "themeEngineVersion": 3,
     "shadows": {
       "panel": [
         {
@@ -249,6 +250,7 @@
       "topBar": "#042967",
       "topBarLink": "#ffffff",
       "btn": "#d6d6ce",
+      "btnToggled": "--btn",
       "faint": "#3f3f3f",
       "faintLink": "#404080",
       "border": "#808080",

@@ -460,6 +460,19 @@
               :label="$t('settings.text')"
             />
             <ContrastRatio :contrast="previewContrast.btnDisabledText" />
+            <h4>{{ $t('settings.style.advanced_colors.toggled') }}</h4>
+            <ColorInput
+              v-model="btnToggledColorLocal"
+              name="btnToggledColor"
+              :fallback="previewTheme.colors.btnToggled"
+              :label="$t('settings.background')"
+            />
+            <ColorInput
+              v-model="btnToggledTextColorLocal"
+              name="btnToggledTextColor"
+              :fallback="previewTheme.colors.btnToggledText"
+              :label="$t('settings.text')"
+            />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.tabs') }}</h4>

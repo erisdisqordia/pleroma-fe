@@ -1,4 +1,4 @@
-import { brightness } from 'chromatism'
+import { invertLightness, brightness } from 'chromatism'
 import { alphaBlend, mixrgb } from '../color_convert/color_convert.js'
 /* This is a definition of all layer combinations
  * each key is a topmost layer, each value represents layer underneath
@@ -571,6 +571,24 @@ export const SLOT_INHERITANCE = {
     depends: ['panelText'],
     layer: 'alertPanel',
     variant: 'alertWarning',
+    textColor: true
+  },
+
+  alertNeutral: {
+    depends: ['text'],
+    opacity: 'alert'
+  },
+  alertNeutralText: {
+    depends: ['text'],
+    layer: 'alert',
+    variant: 'alertNeutral',
+    color: (mod, text) => invertLightness(text).rgb,
+    textColor: true
+  },
+  alertNeutralPanelText: {
+    depends: ['panelText'],
+    layer: 'alertPanel',
+    variant: 'alertNeutral',
     textColor: true
   },
 

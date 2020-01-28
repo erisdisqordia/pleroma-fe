@@ -465,14 +465,13 @@
       color: var(--text, $fallback--text);
     }
 
-    // TODO use proper colors
     .staff {
       flex: none;
       text-transform: capitalize;
       color: $fallback--text;
-      color: var(--btnText, $fallback--text);
+      color: var(--alertNeutralText, $fallback--text);
       background-color: $fallback--fg;
-      background-color: var(--btn, $fallback--fg);
+      background-color: var(--alertNeutral, $fallback--fg);
     }
   }
 

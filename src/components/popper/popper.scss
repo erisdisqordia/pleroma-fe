@@ -137,6 +137,8 @@
     width: 100%;
     height: 100%;
 
+    --btnText: var(--popoverText, $fallback--text);
+
     &-icon {
       padding-left: 0.5rem;
 

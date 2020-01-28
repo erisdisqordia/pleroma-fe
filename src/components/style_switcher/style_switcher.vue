@@ -257,14 +257,6 @@
               :show-optional-tickbox="typeof accentColorLocal !== 'undefined'"
             />
             <ContrastRatio :contrast="previewContrast.bgPostLink" />
-            <ColorInput
-              v-model="iconColorLocal"
-              name="iconColor"
-              :fallback="previewTheme.colors.accent"
-              :label="$t('settings.links')"
-              :show-optional-tickbox="typeof accentColorLocal !== 'undefined'"
-            />
-            <ContrastRatio :contrast="previewContrast.bgIcon" />
             <h4>{{ $t('settings.style.advanced_colors.alert') }}</h4>
             <ColorInput
               v-model="alertErrorColorLocal"
@@ -297,6 +289,27 @@
             <ContrastRatio
               :contrast="previewContrast.alertWarningText"
               large="true"
+            />
+            <ColorInput
+              v-model="alertNeutralColorLocal"
+              name="alertNeutral"
+              :label="$t('settings.style.advanced_colors.alert_neutral')"
+              :fallback="previewTheme.colors.alertNeutral"
+            />
+            <ColorInput
+              v-model="alertNeutralTextColorLocal"
+              name="alertNeutralText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.alertNeutralText"
+            />
+            <ContrastRatio
+              :contrast="previewContrast.alertNeutralText"
+              large="true"
+            />
+            <OpacityInput
+              v-model="alertOpacityLocal"
+              name="alertOpacity"
+              :fallback="previewTheme.opacity.alert"
             />
           </div>
           <div class="color-item">

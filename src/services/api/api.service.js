@@ -74,6 +74,9 @@ const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
 const MASTODON_DOMAIN_BLOCKS_URL = '/api/v1/domain_blocks'
 const MASTODON_STREAMING = '/api/v1/streaming'
+const PLEROMA_EMOJI_REACTIONS_URL = id => `/api/v1/pleroma/statuses/${id}/emoji_reactions_by`
+const PLEROMA_EMOJI_REACT_URL = id => `/api/v1/pleroma/statuses/${id}/react_with_emoji`
+const PLEROMA_EMOJI_UNREACT_URL = id => `/api/v1/pleroma/statuses/${id}/unreact_with_emoji`
 
 const oldfetch = window.fetch
 
@@ -881,6 +884,28 @@ const fetchRebloggedByUsers = ({ id }) => {
   return promisedRequest({ url: MASTODON_STATUS_REBLOGGEDBY_URL(id) }).then((users) => users.map(parseUser))
 }
 
+const fetchEmojiReactions = ({ id }) => {
+  return promisedRequest({ url: PLEROMA_EMOJI_REACTIONS_URL(id) })
+}
+
+const reactWithEmoji = ({ id, emoji, credentials }) => {
+  return promisedRequest({
+    url: PLEROMA_EMOJI_REACT_URL(id),
+    method: 'POST',
+    credentials,
+    payload: { emoji }
+  }).then(parseStatus)
+}
+
+const unreactWithEmoji = ({ id, emoji, credentials }) => {
+  return promisedRequest({
+    url: PLEROMA_EMOJI_UNREACT_URL(id),
+    method: 'POST',
+    credentials,
+    payload: { emoji }
+  }).then(parseStatus)
+}
+
 const reportUser = ({ credentials, userId, statusIds, comment, forward }) => {
   return promisedRequest({
     url: MASTODON_REPORT_USER_URL,
@@ -1130,6 +1155,9 @@ const apiService = {
   fetchPoll,
   fetchFavoritedByUsers,
   fetchRebloggedByUsers,
+  fetchEmojiReactions,
+  reactWithEmoji,
+  unreactWithEmoji,
   reportUser,
   updateNotificationSettings,
   search2,

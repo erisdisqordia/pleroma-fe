@@ -63,7 +63,8 @@ const registration = {
           await this.signUp(this.user)
           this.$router.push({ name: 'friends' })
         } catch (error) {
-          console.warn('Registration failed: ' + error)
+          console.warn('Registration failed: ', error)
+          this.setCaptcha()
         }
       }
     },

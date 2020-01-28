@@ -354,6 +354,10 @@
             </div>
           </transition>
 
+          <EmojiReactions
+            :status="status"
+          />
+
           <div
             v-if="!noHeading && !isPreview"
             class="status-actions media-body"
@@ -379,6 +383,10 @@
               :status="status"
             />
             <favorite-button
+              :logged-in="loggedIn"
+              :status="status"
+            />
+            <ReactButton
               :logged-in="loggedIn"
               :status="status"
             />

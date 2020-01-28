@@ -242,6 +242,7 @@ export const parseStatus = (data) => {
       output.is_local = pleroma.local
       output.in_reply_to_screen_name = data.pleroma.in_reply_to_account_acct
       output.thread_muted = pleroma.thread_muted
+      output.emoji_reactions = pleroma.emoji_reactions
     } else {
       output.text = data.content
       output.summary = data.spoiler_text
@@ -341,10 +342,13 @@ export const parseNotification = (data) => {
   if (masto) {
     output.type = mastoDict[data.type] || data.type
     output.seen = data.pleroma.is_seen
-    output.status = output.type === 'follow'
+    output.status = output.type === 'follow' || output.type === 'move'
       ? null
       : parseStatus(data.status)
     output.action = output.status // TODO: Refactor, this is unneeded
+    output.target = output.type !== 'move'
+      ? null
+      : parseUser(data.target)
     output.from_profile = parseUser(data.account)
   } else {
     const parsedNotice = parseStatus(data.notice)

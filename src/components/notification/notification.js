@@ -43,17 +43,17 @@ const Notification = {
       const user = this.notification.from_profile
       return highlightStyle(highlight[user.screen_name])
     },
-    userInStore () {
-      return this.$store.getters.findUser(this.notification.from_profile.id)
-    },
     user () {
-      if (this.userInStore) {
-        return this.userInStore
-      }
-      return this.notification.from_profile
+      return this.$store.getters.findUser(this.notification.from_profile.id)
     },
     userProfileLink () {
       return this.generateUserProfileLink(this.user)
+    },
+    targetUser () {
+      return this.$store.getters.findUser(this.notification.target.id)
+    },
+    targetUserProfileLink () {
+      return this.generateUserProfileLink(this.targetUser)
     },
     needMute () {
       return this.user.muted

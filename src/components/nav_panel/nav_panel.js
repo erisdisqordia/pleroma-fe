@@ -3,7 +3,7 @@ import { mapState } from 'vuex'
 const NavPanel = {
   created () {
     if (this.currentUser && this.currentUser.locked) {
-      this.$store.dispatch('startFetchingFollowRequest')
+      this.$store.dispatch('startFetchingFollowRequests')
     }
   },
   computed: mapState({

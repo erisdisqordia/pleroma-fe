@@ -32,7 +32,7 @@
       </div>
       <div class="panel-body">
         <div
-          v-for="notification in visibleNotifications"
+          v-for="notification in notificationsToDisplay"
           :key="notification.id"
           class="notification"
           :class="{&quot;unseen&quot;: !minimalMode && !notification.seen}"

@@ -1,5 +1,6 @@
 import Attachment from '../attachment/attachment.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
+import ReactButton from '../react_button/react_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
 import Poll from '../poll/poll.vue'
 import ExtraButtons from '../extra_buttons/extra_buttons.vue'
@@ -11,6 +12,7 @@ import LinkPreview from '../link-preview/link-preview.vue'
 import AvatarList from '../avatar_list/avatar_list.vue'
 import Timeago from '../timeago/timeago.vue'
 import StatusPopover from '../status_popover/status_popover.vue'
+import EmojiReactions from '../emoji_reactions/emoji_reactions.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import fileType from 'src/services/file_type/file_type.service'
 import { processHtml } from 'src/services/tiny_post_html_processor/tiny_post_html_processor.service.js'
@@ -319,6 +321,7 @@ const Status = {
   components: {
     Attachment,
     FavoriteButton,
+    ReactButton,
     RetweetButton,
     ExtraButtons,
     PostStatusForm,
@@ -329,7 +332,8 @@ const Status = {
     LinkPreview,
     AvatarList,
     Timeago,
-    StatusPopover
+    StatusPopover,
+    EmojiReactions
   },
   methods: {
     visibilityIcon (visibility) {

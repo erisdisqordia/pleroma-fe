@@ -6,7 +6,8 @@ export const visibleTypes = store => ([
   store.state.config.notificationVisibility.likes && 'like',
   store.state.config.notificationVisibility.mentions && 'mention',
   store.state.config.notificationVisibility.repeats && 'repeat',
-  store.state.config.notificationVisibility.follows && 'follow'
+  store.state.config.notificationVisibility.follows && 'follow',
+  store.state.config.notificationVisibility.moves && 'move'
 ].filter(_ => _))
 
 const sortById = (a, b) => {
@@ -25,7 +26,7 @@ const sortById = (a, b) => {
   }
 }
 
-export const visibleNotificationsFromStore = (store, types) => {
+export const filteredNotificationsFromStore = (store, types) => {
   // map is just to clone the array since sort mutates it and it causes some issues
   let sortedNotifications = notificationsFromStore(store).map(_ => _).sort(sortById)
   sortedNotifications = sortBy(sortedNotifications, 'seen')
@@ -35,4 +36,4 @@ export const visibleNotificationsFromStore = (store, types) => {
 }
 
 export const unseenNotificationsFromStore = store =>
-  filter(visibleNotificationsFromStore(store), ({ seen }) => !seen)
+  filter(filteredNotificationsFromStore(store), ({ seen }) => !seen)

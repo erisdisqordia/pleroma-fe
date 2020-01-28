@@ -31,9 +31,11 @@ h4 {
   margin: auto;
   min-height: 100vh;
   max-width: 980px;
+  align-content: flex-start;
+}
+.underlay {
   background-color: rgba(0,0,0,0.15);
   background-color: var(--underlay, rgba(0,0,0,0.15));
-  align-content: flex-start;
 }
 
 .text-center {

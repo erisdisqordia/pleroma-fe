@@ -116,9 +116,7 @@
       </div>
     </div>
 
-    <div class="preview-container">
-      <preview :style="previewRules" />
-    </div>
+    <preview :style="previewRules" />
 
     <keep-alive>
       <tab-switcher key="style-tweak">

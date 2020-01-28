@@ -78,7 +78,7 @@
     </nav>
     <div
       id="content"
-      class="container"
+      class="container underlay"
     >
       <div class="sidebar-flexer mobile-hidden">
         <div class="sidebar-bounds">

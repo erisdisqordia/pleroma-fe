@@ -233,7 +233,6 @@ export const parseStatus = (data) => {
     output.statusnet_html = addEmojis(data.content, data.emojis)
 
     output.tags = data.tags
-    output.emoji_reactions = data.pleroma.emoji_reactions
 
     if (data.pleroma) {
       const { pleroma } = data
@@ -243,6 +242,7 @@ export const parseStatus = (data) => {
       output.is_local = pleroma.local
       output.in_reply_to_screen_name = data.pleroma.in_reply_to_account_acct
       output.thread_muted = pleroma.thread_muted
+      output.emoji_reactions = pleroma.emoji_reactions
     } else {
       output.text = data.content
       output.summary = data.spoiler_text

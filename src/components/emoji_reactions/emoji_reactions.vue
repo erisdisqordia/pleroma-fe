@@ -7,8 +7,8 @@
       :class="{ 'picked-reaction': reactedWith(reaction.emoji) }"
       @click="emojiOnClick(reaction.emoji, $event)"
     >
-      <span>{{ reaction.count }}</span>
       <span>{{ reaction.emoji }}</span>
+      <span>{{ reaction.count }}</span>
     </button>
   </div>
 </template>
@@ -31,10 +31,10 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  :first-child {
+  &:first-child {
     margin-right: 0.25em;
   }
-  :last-child {
+  &:last-child {
     width: 1.5em;
   }
   &:focus {

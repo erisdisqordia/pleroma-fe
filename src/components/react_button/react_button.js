@@ -4,7 +4,6 @@ const ReactButton = {
   props: ['status', 'loggedIn'],
   data () {
     return {
-      animated: false,
       showTooltip: false,
       filterWord: '',
       popperOptions: {
@@ -29,19 +28,13 @@ const ReactButton = {
   },
   computed: {
     commonEmojis () {
-      return ['💖', '😠', '👀', '😂', '🔥']
+      return ['❤️', '😠', '👀', '😂', '🔥']
     },
     emojis () {
       if (this.filterWord !== '') {
         return this.$store.state.instance.emoji.filter(emoji => emoji.displayText.includes(this.filterWord))
       }
       return this.$store.state.instance.emoji || []
-    },
-    classes () {
-      return {
-        'icon-smile': true,
-        'animate-spin': this.animated
-      }
     },
     ...mapGetters(['mergedConfig'])
   }

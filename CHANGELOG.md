@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Single notifications left unread when hitting read on another device/tab
 - Registration fixed
 - Deactivation of remote accounts from frontend
+- Fixed NSFW unhiding not working with videos when using one-click unhiding/displaying
 
 ## [1.1.7 and earlier] - 2019-12-14
 ### Added

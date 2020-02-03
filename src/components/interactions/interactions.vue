@@ -22,6 +22,7 @@
         :label="$t('interactions.follows')"
       />
       <span
+        v-if="!allowFollowingMove"
         key="moves"
         :label="$t('interactions.moves')"
       />

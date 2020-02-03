@@ -90,9 +90,7 @@
               </Checkbox>
             </p>
             <p>
-              <Checkbox
-                v-model="hideFollowers"
-              >
+              <Checkbox v-model="hideFollowers">
                 {{ $t('settings.hide_followers_description') }}
               </Checkbox>
             </p>
@@ -102,6 +100,11 @@
                 :disabled="!hideFollowers"
               >
                 {{ $t('settings.hide_followers_count_description') }}
+              </Checkbox>
+            </p>
+            <p>
+              <Checkbox v-model="allowFollowingMove">
+                {{ $t('settings.allow_following_move') }}
               </Checkbox>
             </p>
             <p v-if="role === 'admin' || role === 'moderator'">

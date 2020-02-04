@@ -72,6 +72,16 @@ const showReblogs = (store, userId) => {
     .then((relationship) => store.commit('updateUserRelationship', [relationship]))
 }
 
+const muteDomain = (store, domain) => {
+  return store.rootState.api.backendInteractor.muteDomain({ domain })
+    .then(() => store.commit('addDomainMute', domain))
+}
+
+const unmuteDomain = (store, domain) => {
+  return store.rootState.api.backendInteractor.unmuteDomain({ domain })
+    .then(() => store.commit('removeDomainMute', domain))
+}
+
 export const mutations = {
   setMuted (state, { user: { id }, muted }) {
     const user = state.usersObject[id]
@@ -175,6 +185,20 @@ export const mutations = {
   addMuteId (state, muteId) {
     if (state.currentUser.muteIds.indexOf(muteId) === -1) {
       state.currentUser.muteIds.push(muteId)
+    }
+  },
+  saveDomainMutes (state, domainMutes) {
+    state.currentUser.domainMutes = domainMutes
+  },
+  addDomainMute (state, domain) {
+    if (state.currentUser.domainMutes.indexOf(domain) === -1) {
+      state.currentUser.domainMutes.push(domain)
+    }
+  },
+  removeDomainMute (state, domain) {
+    const index = state.currentUser.domainMutes.indexOf(domain)
+    if (index !== -1) {
+      state.currentUser.domainMutes.splice(index, 1)
     }
   },
   setPinnedToUser (state, status) {
@@ -296,6 +320,25 @@ const users = {
     },
     unmuteUsers (store, ids = []) {
       return Promise.all(ids.map(id => unmuteUser(store, id)))
+    },
+    fetchDomainMutes (store) {
+      return store.rootState.api.backendInteractor.fetchDomainMutes()
+        .then((domainMutes) => {
+          store.commit('saveDomainMutes', domainMutes)
+          return domainMutes
+        })
+    },
+    muteDomain (store, domain) {
+      return muteDomain(store, domain)
+    },
+    unmuteDomain (store, domain) {
+      return unmuteDomain(store, domain)
+    },
+    muteDomains (store, domains = []) {
+      return Promise.all(domains.map(domain => muteDomain(store, domain)))
+    },
+    unmuteDomains (store, domain = []) {
+      return Promise.all(domain.map(domain => unmuteDomain(store, domain)))
     },
     fetchFriends ({ rootState, commit }, id) {
       const user = rootState.users.usersObject[id]
@@ -460,6 +503,7 @@ const users = {
               user.credentials = accessToken
               user.blockIds = []
               user.muteIds = []
+              user.domainMutes = []
               commit('setCurrentUser', user)
               commit('addNewUsers', [user])
 

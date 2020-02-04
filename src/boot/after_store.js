@@ -185,12 +185,9 @@ const getAppSecret = async ({ store }) => {
     })
 }
 
-const resolveStaffAccounts = async ({ store, accounts }) => {
-  const backendInteractor = store.state.api.backendInteractor
-  let nicknames = accounts.map(uri => uri.split('/').pop())
-    .map(id => backendInteractor.fetchUser({ id }))
-  nicknames = await Promise.all(nicknames)
-
+const resolveStaffAccounts = ({ store, accounts }) => {
+  const nicknames = accounts.map(uri => uri.split('/').pop())
+  nicknames.map(nickname => store.dispatch('fetchUser', nickname))
   store.dispatch('setInstanceOption', { name: 'staffAccounts', value: nicknames })
 }
 
@@ -236,7 +233,7 @@ const getNodeInfo = async ({ store }) => {
       })
 
       const accounts = metadata.staffAccounts
-      await resolveStaffAccounts({ store, accounts })
+      resolveStaffAccounts({ store, accounts })
     } else {
       throw (res)
     }

@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Private mode support
 - Support for 'Move' type notifications
 - Pleroma AMOLED dark theme
+- User level domain mutes, under User Settings -> Mutes
+- Emoji reactions for statuses
 ### Changed
 - Captcha now resets on failed registrations
 - Notifications column now cleans itself up to optimize performance when tab is left open for a long time
@@ -17,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Single notifications left unread when hitting read on another device/tab
 - Registration fixed
 - Deactivation of remote accounts from frontend
+- Fixed NSFW unhiding not working with videos when using one-click unhiding/displaying
 
 ## [1.1.7 and earlier] - 2019-12-14
 ### Added

@@ -150,6 +150,7 @@ const conversation = {
       if (!id) return
       this.highlight = id
       this.$store.dispatch('fetchFavsAndRepeats', id)
+      this.$store.dispatch('fetchEmojiReactionsBy', id)
     },
     getHighlight () {
       return this.isExpanded ? this.highlight : null

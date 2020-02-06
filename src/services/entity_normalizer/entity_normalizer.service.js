@@ -1,3 +1,5 @@
+import escape from 'escape-html'
+
 const qvitterStatusType = (status) => {
   if (status.is_post_verb) {
     return 'status'
@@ -41,7 +43,7 @@ export const parseUser = (data) => {
     }
 
     output.name = data.display_name
-    output.name_html = addEmojis(data.display_name, data.emojis)
+    output.name_html = addEmojis(escape(data.display_name), data.emojis)
 
     output.description = data.note
     output.description_html = addEmojis(data.note, data.emojis)
@@ -256,7 +258,7 @@ export const parseStatus = (data) => {
       output.retweeted_status = parseStatus(data.reblog)
     }
 
-    output.summary_html = addEmojis(data.spoiler_text, data.emojis)
+    output.summary_html = addEmojis(escape(data.spoiler_text), data.emojis)
     output.external_url = data.url
     output.poll = data.poll
     output.pinned = data.pinned

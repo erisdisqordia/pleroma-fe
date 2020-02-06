@@ -87,13 +87,13 @@ export default {
 
     &:checked + .checkbox-indicator::before {
       color: $fallback--text;
-      color: var(--text, $fallback--text);
+      color: var(--inputText, $fallback--text);
     }
 
     &:indeterminate + .checkbox-indicator::before {
       content: '–';
       color: $fallback--text;
-      color: var(--text, $fallback--text);
+      color: var(--inputText, $fallback--text);
     }
 
   }

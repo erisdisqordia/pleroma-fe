@@ -472,6 +472,7 @@
         "selectedPost": "Selected post",
         "selectedMenu": "Selected menu item",
         "disabled": "Disabled",
+        "toggled": "Toggled",
         "tabs": "Tabs"
       },
       "radii": {

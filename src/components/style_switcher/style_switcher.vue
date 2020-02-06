@@ -430,6 +430,20 @@
               :label="$t('settings.text')"
             />
             <ContrastRatio :contrast="previewContrast.btnText" />
+            <ColorInput
+              v-model="btnPanelTextColorLocal"
+              name="btnPanelTextColor"
+              :fallback="previewTheme.colors.btnPanelText"
+              :label="$t('settings.style.advanced_colors.panel_header')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnPanelText" />
+            <ColorInput
+              v-model="btnTopBarTextColorLocal"
+              name="btnTopBarTextColor"
+              :fallback="previewTheme.colors.btnTopBarText"
+              :label="$t('settings.style.advanced_colors.top_bar')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnTopBarText" />
             <h4>{{ $t('settings.style.advanced_colors.pressed') }}</h4>
             <ColorInput
               v-model="btnPressedColorLocal"
@@ -444,6 +458,20 @@
               :label="$t('settings.text')"
             />
             <ContrastRatio :contrast="previewContrast.btnPressedText" />
+            <ColorInput
+              v-model="btnPressedPanelTextColorLocal"
+              name="btnPressedPanelTextColor"
+              :fallback="previewTheme.colors.btnPressedPanelText"
+              :label="$t('settings.style.advanced_colors.panel_header')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnPressedPanelText" />
+            <ColorInput
+              v-model="btnPressedTopBarTextColorLocal"
+              name="btnPressedTopBarTextColor"
+              :fallback="previewTheme.colors.btnPressedTopBarText"
+              :label="$t('settings.style.advanced_colors.top_bar')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnPressedTopBarText" />
             <h4>{{ $t('settings.style.advanced_colors.disabled') }}</h4>
             <ColorInput
               v-model="btnDisabledColorLocal"
@@ -458,6 +486,20 @@
               :label="$t('settings.text')"
             />
             <ContrastRatio :contrast="previewContrast.btnDisabledText" />
+            <ColorInput
+              v-model="btnDisabledPanelTextColorLocal"
+              name="btnDisabledPanelTextColor"
+              :fallback="previewTheme.colors.btnDisabledPanelText"
+              :label="$t('settings.style.advanced_colors.panel_header')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnDisabledPanelText" />
+            <ColorInput
+              v-model="btnDisabledTopBarTextColorLocal"
+              name="btnDisabledTopBarTextColor"
+              :fallback="previewTheme.colors.btnDisabledTopBarText"
+              :label="$t('settings.style.advanced_colors.top_bar')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnDisabledTopBarText" />
             <h4>{{ $t('settings.style.advanced_colors.toggled') }}</h4>
             <ColorInput
               v-model="btnToggledColorLocal"
@@ -471,6 +513,21 @@
               :fallback="previewTheme.colors.btnToggledText"
               :label="$t('settings.text')"
             />
+            <ContrastRatio :contrast="previewContrast.btnToggledText" />
+            <ColorInput
+              v-model="btnToggledPanelTextColorLocal"
+              name="btnToggledPanelTextColor"
+              :fallback="previewTheme.colors.btnToggledPanelText"
+              :label="$t('settings.style.advanced_colors.panel_header')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnToggledPanelText" />
+            <ColorInput
+              v-model="btnToggledTopBarTextColorLocal"
+              name="btnToggledTopBarTextColor"
+              :fallback="previewTheme.colors.btnToggledTopBarText"
+              :label="$t('settings.style.advanced_colors.top_bar')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnToggledTopBarText" />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.tabs') }}</h4>

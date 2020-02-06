@@ -255,14 +255,17 @@ export const computeDynamicColor = (sourceColor, getColor, mod) => {
 }
 
 /**
- * THE function you want to use. Takes provided colors and opacities, mod
+ * THE function you want to use. Takes provided colors and opacities
  * value and uses inheritance data to figure out color needed for the slot.
  */
-export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.reduce(({ colors, opacity }, key) => {
+export const getColors = (sourceColors, sourceOpacity) => SLOT_ORDERED.reduce(({ colors, opacity }, key) => {
   const value = SLOT_INHERITANCE[key]
   const isObject = typeof value === 'object'
   const isString = typeof value === 'string'
   const sourceColor = sourceColors[key]
+  const variant = value.variant || value.layer || 'bg'
+  const isLightOnDark = relativeLuminance(colors[variant] || sourceColors[variant]) < 0.5
+  const mod = isLightOnDark ? 1 : -1
   let outputColor = null
   if (sourceColor) {
     // Color is defined in source color
@@ -318,7 +321,7 @@ export const getColors = (sourceColors, sourceOpacity, mod) => SLOT_ORDERED.redu
           opacity
         )
       )
-      const isLightOnDark = relativeLuminance(bg) > 127
+      const isLightOnDark = relativeLuminance(bg) > 0.5
       const mod = isLightOnDark ? 1 : -1
 
       if (value.textColor === 'bw') {

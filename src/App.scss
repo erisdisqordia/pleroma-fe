@@ -179,7 +179,7 @@ input, textarea, .select, .input {
     right: 5px;
     height: 100%;
     color: $fallback--text;
-    color: var(--text, $fallback--text);
+    color: var(--inputText, $fallback--text);
     line-height: 28px;
     z-index: 0;
     pointer-events: none;
@@ -254,7 +254,7 @@ input, textarea, .select, .input {
     display: none;
     &:checked + label::before {
       color: $fallback--text;
-      color: var(--text, $fallback--text);
+      color: var(--inputText, $fallback--text);
     }
     &:disabled {
       &,

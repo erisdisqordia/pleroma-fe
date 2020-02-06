@@ -114,10 +114,7 @@ export const generateColors = (themeData) => {
     ? colors2to3(themeData.colors || themeData)
     : themeData.colors || themeData
 
-  const isLightOnDark = convert(sourceColors.bg).hsl.l < convert(sourceColors.text).hsl.l
-  const mod = isLightOnDark ? 1 : -1
-
-  const { colors, opacity } = getColors(sourceColors, themeData.opacity || {}, mod)
+  const { colors, opacity } = getColors(sourceColors, themeData.opacity || {})
 
   const htmlColors = Object.entries(colors)
     .reduce((acc, [k, v]) => {
@@ -381,25 +378,17 @@ export const getThemes = () => {
 }
 export const colors2to3 = (colors) => {
   return Object.entries(colors).reduce((acc, [slotName, color]) => {
-    const btnStates = ['', 'Pressed', 'Disabled', 'Toggled']
     const btnPositions = ['', 'Panel', 'TopBar']
     switch (slotName) {
       case 'lightBg':
         return { ...acc, highlight: color }
-      case 'btn':
-        return {
-          ...acc,
-          ...btnStates.reduce((stateAcc, state) => ({ ...stateAcc, ['btn' + state]: color }), {})
-        }
       case 'btnText':
         return {
           ...acc,
           ...btnPositions
-            .map(position => btnStates.map(state => state + position))
-            .flat()
             .reduce(
-              (statePositionAcc, statePosition) =>
-                ({ ...statePositionAcc, ['btn' + statePosition + 'Text']: color })
+              (statePositionAcc, position) =>
+                ({ ...statePositionAcc, ['btn' + position + 'Text']: color })
               , {}
             )
         }

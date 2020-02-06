@@ -85,6 +85,8 @@ export const SLOT_INHERITANCE = {
   },
   text: {
     depends: [],
+    layer: 'bg',
+    opacity: null,
     priority: 1
   },
   underlay: {
@@ -422,6 +424,7 @@ export const SLOT_INHERITANCE = {
   // Buttons
   btn: {
     depends: ['fg'],
+    variant: 'btn',
     opacity: 'btn'
   },
   btnText: {
@@ -430,20 +433,23 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
   btnPanelText: {
-    depends: ['panelText'],
+    depends: ['btnText'],
     layer: 'btnPanel',
     variant: 'btn',
     textColor: true
   },
   btnTopBarText: {
-    depends: ['topBarText'],
+    depends: ['btnText'],
     layer: 'btnTopBar',
     variant: 'btn',
     textColor: true
   },
 
   // Buttons: pressed
-  btnPressed: '--btn',
+  btnPressed: {
+    depends: ['btn'],
+    layer: 'btn'
+  },
   btnPressedText: {
     depends: ['btnText'],
     layer: 'btn',
@@ -451,7 +457,8 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
   btnPressedPanel: {
-    depends: ['btnPressed']
+    depends: ['btnPressed'],
+    layer: 'btn'
   },
   btnPressedPanelText: {
     depends: ['btnPanelText'],
@@ -469,6 +476,7 @@ export const SLOT_INHERITANCE = {
   // Buttons: toggled
   btnToggled: {
     depends: ['btn'],
+    layer: 'btn',
     color: (mod, btn) => brightness(mod * 20, btn).rgb
   },
   btnToggledText: {
@@ -496,25 +504,22 @@ export const SLOT_INHERITANCE = {
     color: (mod, btn, bg) => alphaBlend(btn, 0.5, bg)
   },
   btnDisabledText: {
-    depends: ['btnText'],
+    depends: ['btnText', 'btnDisabled'],
     layer: 'btn',
     variant: 'btnDisabled',
-    textColor: true,
-    color: (mod, text) => brightness(mod * -60, text).rgb
+    color: (mod, text, btn) => alphaBlend(text, 0.5, btn)
   },
   btnDisabledPanelText: {
-    depends: ['btnPanelText'],
+    depends: ['btnPanelText', 'btnDisabled'],
     layer: 'btnPanel',
     variant: 'btnDisabled',
-    textColor: true,
-    color: (mod, text) => brightness(mod * -60, text).rgb
+    color: (mod, text, btn) => alphaBlend(text, 0.5, btn)
   },
   btnDisabledTopBarText: {
-    depends: ['btnTopBarText'],
+    depends: ['btnTopBarText', 'btnDisabled'],
     layer: 'btnTopBar',
     variant: 'btnDisabled',
-    textColor: true,
-    color: (mod, text) => brightness(mod * -60, text).rgb
+    color: (mod, text, btn) => alphaBlend(text, 0.5, btn)
   },
 
   // Input fields

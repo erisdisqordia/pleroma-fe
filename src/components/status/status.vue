@@ -277,7 +277,17 @@
               href="#"
               class="cw-status-hider"
               @click.prevent="toggleShowMore"
-            >{{ $t("general.show_more") }}</a>
+            >
+              {{ $t("general.show_more") }}
+              <span
+                v-if="galleryAttachments.length > 0"
+                class="icon-picture"
+              />
+              <span
+                v-if="status.card"
+                class="icon-link"
+              />
+            </a>
             <a
               v-if="showingMore"
               href="#"

@@ -280,8 +280,12 @@
             >
               {{ $t("general.show_more") }}
               <span
-                v-if="galleryAttachments.length > 0"
+                v-if="hasImageAttachments"
                 class="icon-picture"
+              />
+              <span
+                v-if="hasVideoAttachments"
+                class="icon-video"
               />
               <span
                 v-if="status.card"

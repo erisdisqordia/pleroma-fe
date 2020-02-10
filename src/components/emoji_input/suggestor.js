@@ -34,7 +34,15 @@ export const suggestEmoji = emojis => input => {
       let aScore = 0
       let bScore = 0
 
-      // Prioritize emoji that start with the input string
+      // An exact match always wins
+      aScore += a.displayText.toLowerCase() === noPrefix ? 200 : 0
+      bScore += b.displayText.toLowerCase() === noPrefix ? 200 : 0
+
+      // Prioritize custom emoji a lot
+      aScore += a.imageUrl ? 100 : 0
+      bScore += b.imageUrl ? 100 : 0
+
+      // Prioritize prefix matches somewhat
       aScore += a.displayText.toLowerCase().startsWith(noPrefix) ? 10 : 0
       bScore += b.displayText.toLowerCase().startsWith(noPrefix) ? 10 : 0
 

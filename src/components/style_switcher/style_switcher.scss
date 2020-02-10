@@ -3,6 +3,12 @@
   .theme-warning {
     display: flex;
     align-items: baseline;
+    margin-bottom: .5em;
+    .buttons {
+      .btn {
+        margin-bottom: .5em;
+      }
+    }
   }
   .preset-switcher {
     margin-right: 1em;

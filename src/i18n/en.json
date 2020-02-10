@@ -16,7 +16,16 @@
     "mrf_policy_simple_media_removal": "Media Removal",
     "mrf_policy_simple_media_removal_desc": "This instance removes media from posts on the following instances:",
     "mrf_policy_simple_media_nsfw": "Media Force-set As Sensitive",
-    "mrf_policy_simple_media_nsfw_desc": "This instance forces media to be set sensitive in posts on the following instances:"
+    "mrf_policy_simple_media_nsfw_desc": "This instance forces media to be set sensitive in posts on the following instances:",
+    "mrf": {
+      "keyword": {
+        "keyword_policies": "Keyword Policies",
+        "ftl_removal": "Removal from \"The Whole Known Network\" Timeline",
+        "reject": "Reject",
+        "replace": "Replace",
+        "is_replaced_by": "→"
+      }
+    }
   },
   "chat": {
     "title": "Chat"

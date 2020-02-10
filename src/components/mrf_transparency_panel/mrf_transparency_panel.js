@@ -11,7 +11,10 @@ const MRFTransparencyPanel = {
       rejectInstances: state => get(state, 'instance.federationPolicy.mrf_simple.reject', []),
       ftlRemovalInstances: state => get(state, 'instance.federationPolicy.mrf_simple.federated_timeline_removal', []),
       mediaNsfwInstances: state => get(state, 'instance.federationPolicy.mrf_simple.media_nsfw', []),
-      mediaRemovalInstances: state => get(state, 'instance.federationPolicy.mrf_simple.media_removal', [])
+      mediaRemovalInstances: state => get(state, 'instance.federationPolicy.mrf_simple.media_removal', []),
+      keywordsFtlRemoval: state => get(state, 'instance.federationPolicy.mrf_keyword.federated_timeline_removal', []),
+      keywordsReject: state => get(state, 'instance.federationPolicy.mrf_keyword.reject', []),
+      keywordsReplace: state => get(state, 'instance.federationPolicy.mrf_keyword.replace', [])
     }),
     hasInstanceSpecificPolicies () {
       return this.quarantineInstances.length ||
@@ -20,6 +23,11 @@ const MRFTransparencyPanel = {
         this.ftlRemovalInstances.length ||
         this.mediaNsfwInstances.length ||
         this.mediaRemovalInstances.length
+    },
+    hasKeywordPolicies () {
+      return this.keywordsFtlRemoval.length ||
+        this.keywordsReject.length ||
+        this.keywordsReplace.length
     }
   }
 }

@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Pleroma AMOLED dark theme
 - User level domain mutes, under User Settings -> Mutes
 - Emoji reactions for statuses
+- MRF keyword policy disclosure
 ### Changed
 - Captcha now resets on failed registrations
 - Notifications column now cleans itself up to optimize performance when tab is left open for a long time

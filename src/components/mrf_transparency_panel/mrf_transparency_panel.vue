@@ -109,6 +109,49 @@
               />
             </ul>
           </div>
+
+          <h2 v-if="hasKeywordPolicies">
+            {{ $t("about.mrf.keyword.keyword_policies") }}
+          </h2>
+
+          <div v-if="keywordsFtlRemoval.length">
+            <h4>{{ $t("about.mrf.keyword.ftl_removal") }}</h4>
+
+            <ul>
+              <li
+                v-for="keyword in keywordsFtlRemoval"
+                :key="keyword"
+                v-text="keyword"
+              />
+            </ul>
+          </div>
+
+          <div v-if="keywordsReject.length">
+            <h4>{{ $t("about.mrf.keyword.reject") }}</h4>
+
+            <ul>
+              <li
+                v-for="keyword in keywordsReject"
+                :key="keyword"
+                v-text="keyword"
+              />
+            </ul>
+          </div>
+
+          <div v-if="keywordsReplace.length">
+            <h4>{{ $t("about.mrf.keyword.replace") }}</h4>
+
+            <ul>
+              <li
+                v-for="keyword in keywordsReplace"
+                :key="keyword"
+              >
+                {{ keyword.pattern }}
+                {{ $t("about.mrf.keyword.is_replaced_by") }}
+                {{ keyword.replacement }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

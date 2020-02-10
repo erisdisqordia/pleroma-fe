@@ -11,8 +11,11 @@ const fetchAndUpdate = ({ store, credentials, older = false }) => {
   const rootState = store.rootState || store.state
   const timelineData = rootState.statuses.notifications
   const hideMutedPosts = getters.mergedConfig.hideMutedPosts
+  const allowFollowingMove = rootState.users.currentUser.allow_following_move
 
   args['withMuted'] = !hideMutedPosts
+
+  args['withMove'] = !allowFollowingMove
 
   args['timeline'] = 'notifications'
   if (older) {

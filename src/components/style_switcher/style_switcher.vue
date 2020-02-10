@@ -252,9 +252,8 @@
               name="postLinkColor"
               :fallback="previewTheme.colors.accent"
               :label="$t('settings.links')"
-              :show-optional-tickbox="typeof accentColorLocal !== 'undefined'"
             />
-            <ContrastRatio :contrast="previewContrast.bgPostLink" />
+            <ContrastRatio :contrast="previewContrast.postLink" />
             <h4>{{ $t('settings.style.advanced_colors.alert') }}</h4>
             <ColorInput
               v-model="alertErrorColorLocal"
@@ -485,21 +484,18 @@
               :fallback="previewTheme.colors.btnDisabledText"
               :label="$t('settings.text')"
             />
-            <ContrastRatio :contrast="previewContrast.btnDisabledText" />
             <ColorInput
               v-model="btnDisabledPanelTextColorLocal"
               name="btnDisabledPanelTextColor"
               :fallback="previewTheme.colors.btnDisabledPanelText"
               :label="$t('settings.style.advanced_colors.panel_header')"
             />
-            <ContrastRatio :contrast="previewContrast.btnDisabledPanelText" />
             <ColorInput
               v-model="btnDisabledTopBarTextColorLocal"
               name="btnDisabledTopBarTextColor"
               :fallback="previewTheme.colors.btnDisabledTopBarText"
               :label="$t('settings.style.advanced_colors.top_bar')"
             />
-            <ContrastRatio :contrast="previewContrast.btnDisabledTopBarText" />
             <h4>{{ $t('settings.style.advanced_colors.toggled') }}</h4>
             <ColorInput
               v-model="btnToggledColorLocal"

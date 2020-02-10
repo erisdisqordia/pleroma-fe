@@ -329,11 +329,15 @@ export const SLOT_INHERITANCE = {
 
   lightText: {
     depends: ['text'],
+    layer: 'bg',
+    textColor: 'preserve',
     color: (mod, text) => brightness(20 * mod, text).rgb
   },
 
   postLink: {
-    depends: ['link']
+    depends: ['link'],
+    layer: 'bg',
+    textColor: 'preserve'
   },
 
   border: {

@@ -1,6 +1,6 @@
 import { times } from 'lodash'
 import { convert } from 'chromatism'
-import { rgb2hex, hex2rgb, rgba2css, getCssColor } from '../color_convert/color_convert.js'
+import { rgb2hex, hex2rgb, rgba2css, getCssColor, relativeLuminance } from '../color_convert/color_convert.js'
 import { getColors, computeDynamicColor } from '../theme_data/theme_data.service.js'
 
 // While this is not used anymore right now, I left it in if we want to do custom
@@ -133,8 +133,7 @@ export const generateColors = (themeData) => {
     theme: {
       colors: htmlColors.solid,
       opacity
-    },
-    mod
+    }
   }
 }
 
@@ -281,7 +280,18 @@ export const DEFAULT_SHADOWS = {
     alpha: 1
   }]
 }
-export const generateShadows = (input, colors, mod) => {
+export const generateShadows = (input, colors) => {
+  // TODO this is a small hack for `mod` to work with shadows
+  // this is used to get the "context" of shadow, i.e. for `mod` properly depend on background color of element
+  const hackContextDict = {
+    button: 'btn',
+    panel: 'bg',
+    top: 'topBar',
+    popup: 'popover',
+    avatar: 'bg',
+    panelHeader: 'panel',
+    input: 'input'
+  }
   const inputShadows = input.shadows && !input.themeEngineVersion
     ? shadows2to3(input.shadows)
     : input.shadows || {}
@@ -289,6 +299,10 @@ export const generateShadows = (input, colors, mod) => {
     ...DEFAULT_SHADOWS,
     ...inputShadows
   }).reduce((shadowsAcc, [slotName, shadowDefs]) => {
+    const slotFirstWord = slotName.replace(/[A-Z].*$/, '')
+    const colorSlotName = hackContextDict[slotFirstWord]
+    const isLightOnDark = relativeLuminance(convert(colors[colorSlotName]).rgb) < 0.5
+    const mod = isLightOnDark ? 1 : -1
     const newShadow = shadowDefs.reduce((shadowAcc, def) => [
       ...shadowAcc,
       {

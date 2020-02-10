@@ -259,13 +259,34 @@ export const computeDynamicColor = (sourceColor, getColor, mod) => {
  * value and uses inheritance data to figure out color needed for the slot.
  */
 export const getColors = (sourceColors, sourceOpacity) => SLOT_ORDERED.reduce(({ colors, opacity }, key) => {
-  const value = SLOT_INHERITANCE[key]
-  const isObject = typeof value === 'object'
-  const isString = typeof value === 'string'
   const sourceColor = sourceColors[key]
-  const variant = value.variant || value.layer || 'bg'
-  const isLightOnDark = relativeLuminance(colors[variant] || sourceColors[variant]) < 0.5
+  const value = expandSlotValue(SLOT_INHERITANCE[key])
+  const deps = getDependencies(key, SLOT_INHERITANCE)
+  const isTextColor = !!value.textColor
+  const variant = value.variant || value.layer
+
+  let backgroundColor = null
+
+  if (isTextColor) {
+    backgroundColor = alphaBlendLayers(
+      { ...(colors[deps[0]] || convert(sourceColors[key] || '#FF00FF').rgb) },
+      getLayers(
+        getLayerSlot(key) || 'bg',
+        variant || 'bg',
+        getOpacitySlot(variant),
+        colors,
+        opacity
+      )
+    )
+  } else if (variant && variant !== key) {
+    backgroundColor = colors[variant] || convert(sourceColors[variant]).rgb
+  } else {
+    backgroundColor = colors.bg || convert(sourceColors.bg)
+  }
+
+  const isLightOnDark = relativeLuminance(backgroundColor) < 0.5
   const mod = isLightOnDark ? 1 : -1
+
   let outputColor = null
   if (sourceColor) {
     // Color is defined in source color
@@ -280,7 +301,6 @@ export const getColors = (sourceColors, sourceOpacity) => SLOT_ORDERED.reduce(({
         opacity
       ).slice(0, -1)
       targetColor = {
-        // TODO: try to use alpha-blended background here
         ...alphaBlendLayers(
           convert('#FF00FF').rgb,
           layers
@@ -297,43 +317,24 @@ export const getColors = (sourceColors, sourceOpacity) => SLOT_ORDERED.reduce(({
       targetColor = convert(targetColor).rgb
     }
     outputColor = { ...targetColor }
-  } else if (isString && value.startsWith('#')) {
-    // slot: '#000000' shorthand
-    outputColor = convert(value).rgb
-  } else if (isObject && value.default) {
+  } else if (value.default) {
     // same as above except in object form
     outputColor = convert(value.default).rgb
   } else {
     // calculate color
     const defaultColorFunc = (mod, dep) => ({ ...dep })
-    const deps = getDependencies(key, SLOT_INHERITANCE)
-    const colorFunc = (isObject && value.color) || defaultColorFunc
+    const colorFunc = value.color || defaultColorFunc
 
     if (value.textColor) {
-      // textColor case
-      const bg = alphaBlendLayers(
-        { ...colors[deps[0]] },
-        getLayers(
-          value.layer,
-          value.variant || value.layer,
-          getOpacitySlot(value.variant || value.layer),
-          colors,
-          opacity
-        )
-      )
-      const isLightOnDark = relativeLuminance(bg) > 0.5
-      const mod = isLightOnDark ? 1 : -1
-
       if (value.textColor === 'bw') {
-        outputColor = contrastRatio(bg).rgb
+        outputColor = contrastRatio(backgroundColor).rgb
       } else {
         let color = { ...colors[deps[0]] }
         if (value.color) {
           color = colorFunc(mod, ...deps.map((dep) => ({ ...colors[dep] })))
         }
-
         outputColor = getTextColor(
-          bg,
+          backgroundColor,
           { ...color },
           value.textColor === 'preserve'
         )

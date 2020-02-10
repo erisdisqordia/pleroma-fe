@@ -1,6 +1,6 @@
 <template>
   <div class="preview-container">
-    <div class="underlay underlay-preview"/>
+    <div class="underlay underlay-preview" />
     <div class="panel dummy">
       <div class="panel-heading">
         <div class="title">

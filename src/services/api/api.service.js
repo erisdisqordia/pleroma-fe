@@ -402,8 +402,8 @@ const fetchStatus = ({ id, credentials }) => {
     .then((data) => parseStatus(data))
 }
 
-const tagUser = ({ tag, credentials, ...options }) => {
-  const screenName = options.screen_name
+const tagUser = ({ tag, credentials, user }) => {
+  const screenName = user.screen_name
   const form = {
     nicknames: [screenName],
     tags: [tag]
@@ -419,8 +419,8 @@ const tagUser = ({ tag, credentials, ...options }) => {
   })
 }
 
-const untagUser = ({ tag, credentials, ...options }) => {
-  const screenName = options.screen_name
+const untagUser = ({ tag, credentials, user }) => {
+  const screenName = user.screen_name
   const body = {
     nicknames: [screenName],
     tags: [tag]
@@ -436,7 +436,7 @@ const untagUser = ({ tag, credentials, ...options }) => {
   })
 }
 
-const addRight = ({ right, credentials, ...user }) => {
+const addRight = ({ right, credentials, user }) => {
   const screenName = user.screen_name
 
   return fetch(PERMISSION_GROUP_URL(screenName, right), {
@@ -446,7 +446,7 @@ const addRight = ({ right, credentials, ...user }) => {
   })
 }
 
-const deleteRight = ({ right, credentials, ...user }) => {
+const deleteRight = ({ right, credentials, user }) => {
   const screenName = user.screen_name
 
   return fetch(PERMISSION_GROUP_URL(screenName, right), {
@@ -478,7 +478,7 @@ const deactivateUser = ({ credentials, user: { screen_name: nickname } }) => {
   }).then(response => get(response, 'users.0'))
 }
 
-const deleteUser = ({ credentials, ...user }) => {
+const deleteUser = ({ credentials, user }) => {
   const screenName = user.screen_name
   const headers = authHeaders(credentials)
 

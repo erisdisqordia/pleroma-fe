@@ -374,9 +374,9 @@ const users = {
       return rootState.api.backendInteractor.unsubscribeUser({ id })
         .then((relationship) => commit('updateUserRelationship', [relationship]))
     },
-    toggleActivationStatus ({ rootState, commit }, user) {
+    toggleActivationStatus ({ rootState, commit }, { user }) {
       const api = user.deactivated ? rootState.api.backendInteractor.activateUser : rootState.api.backendInteractor.deactivateUser
-      api(user)
+      api({ user })
         .then(({ deactivated }) => commit('updateActivationStatus', { user, deactivated }))
     },
     registerPushNotifications (store) {

@@ -35,7 +35,7 @@
       </div>
       <button
         class="emoji-reaction btn btn-default"
-        :class="{ 'picked-reaction': reactedWith(reaction.name), 'not-clickable': !loggedIn }"
+        :class="{ 'toggled': reactedWith(reaction.name), 'not-clickable': !loggedIn }"
         @click="emojiOnClick(reaction.name, $event)"
         @mouseenter="fetchEmojiReactionsByIfMissing()"
       >

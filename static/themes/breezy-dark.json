@@ -21,7 +21,7 @@
           "y": "0",
           "blur": "0",
           "spread": "1",
-          "color": "#ffffff",
+          "color": "--btn,900",
           "alpha": "0.15",
           "inset": true
         },
@@ -42,7 +42,7 @@
           "blur": "40",
           "spread": "-40",
           "inset": true,
-          "color": "#ffffff",
+          "color": "--panel,900",
           "alpha": "0.1"
         }
       ],
@@ -72,7 +72,7 @@
           "y": "0",
           "blur": 0,
           "spread": "1",
-          "color": "#ffffff",
+          "color": "--btn,900",
           "alpha": 0.2,
           "inset": true
         },
@@ -92,7 +92,7 @@
           "y": "0",
           "blur": 0,
           "spread": "1",
-          "color": "#FFFFFF",
+          "color": "--input,900",
           "alpha": "0.2",
           "inset": true
         }
@@ -105,9 +105,9 @@
       "link": "#3daee9",
       "fg": "#31363b",
       "panel": "transparent",
-      "input": "#232629",
-      "topBarLink": "#eff0f1",
-      "btn": "#31363b",
+      "input": "--bg,-6.47",
+      "topBarLink": "--topBarText",
+      "btn": "--bg",
       "border": "#4c545b",
       "cRed": "#da4453",
       "cBlue": "#3daee9",

@@ -62,6 +62,7 @@ export default {
       selected: this.$store.getters.mergedConfig.theme,
       themeWarning: undefined,
       tempImportFile: undefined,
+      engineVersion: 0,
 
       previewShadows: {},
       previewColors: {},
@@ -510,7 +511,7 @@ export default {
         colors: this.currentColors
       })
       this.previewShadows = generateShadows(
-        { shadows: this.shadowsLocal },
+        { shadows: this.shadowsLocal, opacity: this.previewTheme.opacity, themeEngineVersion: this.engineVersion },
         this.previewColors.theme.colors,
         this.previewColors.mod
       )
@@ -607,6 +608,8 @@ export default {
         }
       }
 
+      this.engineVersion = version
+
       // Stuff that differs between V1 and V2
       if (version === 1) {
         this.fgColorLocal = rgb2hex(colors.btn)
@@ -653,7 +656,7 @@ export default {
       if (!this.keepShadows) {
         this.clearShadows()
         if (version === 2) {
-          this.shadowsLocal = shadows2to3(shadows)
+          this.shadowsLocal = shadows2to3(shadows, this.previewTheme.opacity)
         } else {
           this.shadowsLocal = shadows
         }

@@ -1,6 +1,6 @@
 import { convert } from 'chromatism'
 import { rgb2hex, hex2rgb, rgba2css, getCssColor, relativeLuminance } from '../color_convert/color_convert.js'
-import { getColors, computeDynamicColor } from '../theme_data/theme_data.service.js'
+import { getColors, computeDynamicColor, getOpacitySlot } from '../theme_data/theme_data.service.js'
 
 export const applyTheme = (input) => {
   const { rules } = generatePreset(input)
@@ -242,7 +242,7 @@ export const generateShadows = (input, colors) => {
     input: 'input'
   }
   const inputShadows = input.shadows && !input.themeEngineVersion
-    ? shadows2to3(input.shadows)
+    ? shadows2to3(input.shadows, input.opacity)
     : input.shadows || {}
   const shadows = Object.entries({
     ...DEFAULT_SHADOWS,
@@ -368,14 +368,15 @@ export const colors2to3 = (colors) => {
  *
  * Back in v2 shadows allowed you to use dynamic colors however those used pure CSS3 variables
  */
-export const shadows2to3 = (shadows) => {
+export const shadows2to3 = (shadows, opacity) => {
   return Object.entries(shadows).reduce((shadowsAcc, [slotName, shadowDefs]) => {
     const isDynamic = ({ color }) => color.startsWith('--')
+    const getOpacity = ({ color }) => opacity[getOpacitySlot(color.substring(2).split(',')[0])]
     const newShadow = shadowDefs.reduce((shadowAcc, def) => [
       ...shadowAcc,
       {
         ...def,
-        alpha: isDynamic(def) ? 1 : def.alpha
+        alpha: isDynamic(def) ? getOpacity(def) || 1 : def.alpha
       }
     ], [])
     return { ...shadowsAcc, [slotName]: newShadow }

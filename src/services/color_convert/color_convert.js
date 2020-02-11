@@ -214,8 +214,6 @@ export const getCssColor = (input, a) => {
   } else if (typeof input === 'string') {
     if (input.startsWith('#')) {
       rgb = hex2rgb(input)
-    } else if (input.startsWith('--')) {
-      return `var(${input})`
     } else {
       return input
     }

@@ -22,7 +22,12 @@ const ReactButton = {
       this.showTooltip = false
     },
     addReaction (event, emoji) {
-      this.$store.dispatch('reactWithEmoji', { id: this.status.id, emoji })
+      const existingReaction = this.status.emoji_reactions.find(r => r.name === emoji)
+      if (existingReaction && existingReaction.me) {
+        this.$store.dispatch('unreactWithEmoji', { id: this.status.id, emoji })
+      } else {
+        this.$store.dispatch('reactWithEmoji', { id: this.status.id, emoji })
+      }
       this.closeReactionSelect()
     }
   },

@@ -20,6 +20,7 @@ export const defaultState = {
   autoLoad: true,
   streaming: false,
   hoverPreview: true,
+  emojiReactionsOnTimeline: true,
   autohideFloatingPostButton: false,
   pauseOnUnfocused: true,
   stopGifs: false,
@@ -29,7 +30,8 @@ export const defaultState = {
     mentions: true,
     likes: true,
     repeats: true,
-    moves: true
+    moves: true,
+    emojiReactions: false
   },
   webPushNotifications: false,
   muteWords: [],

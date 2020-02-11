@@ -618,7 +618,7 @@ export default {
 
       if (!this.keepColor) {
         this.clearV1()
-        const keys = new Set(version !== 1 ? Object.keys(colors) : [])
+        const keys = new Set(version !== 1 ? Object.keys(SLOT_INHERITANCE) : [])
         if (version === 1 || version === 'l1') {
           keys
             .add('bg')

@@ -352,9 +352,8 @@ export const getColors = (sourceColors, sourceOpacity) => SLOT_ORDERED.reduce(({
   }
   const opacitySlot = getOpacitySlot(key)
   if (opacitySlot && outputColor.a === undefined) {
-    const deps = getDependencies(key, SLOT_INHERITANCE)
-    const dependencySlot = deps && deps[0]
-    if (dependencySlot && sourceColors[dependencySlot] === 'transparent') {
+    const dependencySlot = deps[0]
+    if (dependencySlot && colors[dependencySlot] === 'transparent') {
       outputColor.a = 0
     } else {
       outputColor.a = Number(sourceOpacity[opacitySlot]) || OPACITIES[opacitySlot].defaultValue || 1

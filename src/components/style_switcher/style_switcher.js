@@ -385,6 +385,7 @@ export default {
       origin,
       forceUseSource = false
     ) {
+      this.dismissWarning()
       if (!source && !theme) {
         throw new Error('Can\'t load theme: empty')
       }
@@ -723,6 +724,7 @@ export default {
       }
     },
     selected () {
+      this.dismissWarning()
       if (this.selectedVersion === 1) {
         if (!this.keepRoundness) {
           this.clearRoundness()

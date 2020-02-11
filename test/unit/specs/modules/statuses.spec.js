@@ -245,11 +245,12 @@ describe('Statuses module', () => {
     it('increments count in existing reaction', () => {
       const state = defaultState()
       const status = makeMockStatus({ id: '1' })
-      status.emoji_reactions = [ { emoji: '😂', count: 1, accounts: [] } ]
+      status.emoji_reactions = [ { name: '😂', count: 1, accounts: [] } ]
 
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
       mutations.addOwnReaction(state, { id: '1', emoji: '😂', currentUser: { id: 'me' } })
       expect(state.allStatusesObject['1'].emoji_reactions[0].count).to.eql(2)
+      expect(state.allStatusesObject['1'].emoji_reactions[0].me).to.eql(true)
       expect(state.allStatusesObject['1'].emoji_reactions[0].accounts[0].id).to.eql('me')
     })
 
@@ -261,27 +262,29 @@ describe('Statuses module', () => {
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
       mutations.addOwnReaction(state, { id: '1', emoji: '😂', currentUser: { id: 'me' } })
       expect(state.allStatusesObject['1'].emoji_reactions[0].count).to.eql(1)
+      expect(state.allStatusesObject['1'].emoji_reactions[0].me).to.eql(true)
       expect(state.allStatusesObject['1'].emoji_reactions[0].accounts[0].id).to.eql('me')
     })
 
     it('decreases count in existing reaction', () => {
       const state = defaultState()
       const status = makeMockStatus({ id: '1' })
-      status.emoji_reactions = [ { emoji: '😂', count: 2, accounts: [{ id: 'me' }] } ]
+      status.emoji_reactions = [ { name: '😂', count: 2, accounts: [{ id: 'me' }] } ]
 
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
-      mutations.removeOwnReaction(state, { id: '1', emoji: '😂', currentUser: {} })
+      mutations.removeOwnReaction(state, { id: '1', emoji: '😂', currentUser: { id: 'me' } })
       expect(state.allStatusesObject['1'].emoji_reactions[0].count).to.eql(1)
+      expect(state.allStatusesObject['1'].emoji_reactions[0].me).to.eql(false)
       expect(state.allStatusesObject['1'].emoji_reactions[0].accounts).to.eql([])
     })
 
     it('removes a reaction', () => {
       const state = defaultState()
       const status = makeMockStatus({ id: '1' })
-      status.emoji_reactions = [{ emoji: '😂', count: 1, accounts: [{ id: 'me' }] }]
+      status.emoji_reactions = [{ name: '😂', count: 1, accounts: [{ id: 'me' }] }]
 
       mutations.addNewStatuses(state, { statuses: [status], showImmediately: true, timeline: 'public' })
-      mutations.removeOwnReaction(state, { id: '1', emoji: '😂', currentUser: {} })
+      mutations.removeOwnReaction(state, { id: '1', emoji: '😂', currentUser: { id: 'me' } })
       expect(state.allStatusesObject['1'].emoji_reactions.length).to.eql(0)
     })
   })

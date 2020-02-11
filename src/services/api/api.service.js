@@ -74,9 +74,9 @@ const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
 const MASTODON_DOMAIN_BLOCKS_URL = '/api/v1/domain_blocks'
 const MASTODON_STREAMING = '/api/v1/streaming'
-const PLEROMA_EMOJI_REACTIONS_URL = id => `/api/v1/pleroma/statuses/${id}/emoji_reactions_by`
-const PLEROMA_EMOJI_REACT_URL = id => `/api/v1/pleroma/statuses/${id}/react_with_emoji`
-const PLEROMA_EMOJI_UNREACT_URL = id => `/api/v1/pleroma/statuses/${id}/unreact_with_emoji`
+const PLEROMA_EMOJI_REACTIONS_URL = id => `/api/v1/pleroma/statuses/${id}/reactions`
+const PLEROMA_EMOJI_REACT_URL = (id, emoji) => `/api/v1/pleroma/statuses/${id}/reactions/${emoji}`
+const PLEROMA_EMOJI_UNREACT_URL = (id, emoji) => `/api/v1/pleroma/statuses/${id}/reactions/${emoji}`
 
 const oldfetch = window.fetch
 
@@ -888,25 +888,27 @@ const fetchRebloggedByUsers = ({ id }) => {
   return promisedRequest({ url: MASTODON_STATUS_REBLOGGEDBY_URL(id) }).then((users) => users.map(parseUser))
 }
 
-const fetchEmojiReactions = ({ id }) => {
-  return promisedRequest({ url: PLEROMA_EMOJI_REACTIONS_URL(id) })
+const fetchEmojiReactions = ({ id, credentials }) => {
+  return promisedRequest({ url: PLEROMA_EMOJI_REACTIONS_URL(id), credentials })
+    .then((reactions) => reactions.map(r => {
+      r.accounts = r.accounts.map(parseUser)
+      return r
+    }))
 }
 
 const reactWithEmoji = ({ id, emoji, credentials }) => {
   return promisedRequest({
-    url: PLEROMA_EMOJI_REACT_URL(id),
-    method: 'POST',
-    credentials,
-    payload: { emoji }
+    url: PLEROMA_EMOJI_REACT_URL(id, emoji),
+    method: 'PUT',
+    credentials
   }).then(parseStatus)
 }
 
 const unreactWithEmoji = ({ id, emoji, credentials }) => {
   return promisedRequest({
-    url: PLEROMA_EMOJI_UNREACT_URL(id),
-    method: 'POST',
-    credentials,
-    payload: { emoji }
+    url: PLEROMA_EMOJI_UNREACT_URL(id, emoji),
+    method: 'DELETE',
+    credentials
   }).then(parseStatus)
 }
 

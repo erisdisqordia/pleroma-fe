@@ -126,7 +126,8 @@
     "read": "Read!",
     "repeated_you": "repeated your status",
     "no_more_notifications": "No more notifications",
-    "migrated_to": "migrated to"
+    "migrated_to": "migrated to",
+    "reacted_with": "reacted with {0}"
   },
   "polls": {
     "add_poll": "Add Poll",
@@ -283,6 +284,7 @@
     "domain_mutes": "Domains",
     "avatar_size_instruction": "The recommended minimum size for avatar images is 150x150 pixels.",
     "pad_emoji": "Pad emoji with spaces when adding from picker",
+    "emoji_reactions_on_timeline": "Show emoji reactions on timeline",
     "export_theme": "Save preset",
     "filtering": "Filtering",
     "filtering_explanation": "All statuses containing these words will be muted, one per line",
@@ -331,6 +333,7 @@
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
     "notification_visibility_moves": "User Migrates",
+    "notification_visibility_emoji_reactions": "Reactions",
     "no_rich_text_description": "Strip rich text formatting from all posts",
     "no_blocks": "No blocks",
     "no_mutes": "No mutes",

@@ -369,6 +369,7 @@
           </transition>
 
           <EmojiReactions
+            v-if="(mergedConfig.emojiReactionsOnTimeline || isFocused) && (!noHeading && !isPreview)"
             :status="status"
           />
 

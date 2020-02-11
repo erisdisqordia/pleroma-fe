@@ -313,7 +313,9 @@ export const generatePreset = (input) => {
 }
 
 export const getThemes = () => {
-  return window.fetch('/static/styles.json')
+  const cache = 'no-store'
+
+  return window.fetch('/static/styles.json', { cache })
     .then((data) => data.json())
     .then((themes) => {
       return Object.entries(themes).map(([k, v]) => {
@@ -321,7 +323,7 @@ export const getThemes = () => {
         if (typeof v === 'object') {
           promise = Promise.resolve(v)
         } else if (typeof v === 'string') {
-          promise = window.fetch(v)
+          promise = window.fetch(v, { cache })
             .then((data) => data.json())
             .catch((e) => {
               console.error(e)

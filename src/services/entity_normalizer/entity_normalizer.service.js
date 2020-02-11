@@ -83,6 +83,8 @@ export const parseUser = (data) => {
         output.subscribed = relationship.subscribing
       }
 
+      output.allow_following_move = data.pleroma.allow_following_move
+
       output.hide_follows = data.pleroma.hide_follows
       output.hide_followers = data.pleroma.hide_followers
       output.hide_follows_count = data.pleroma.hide_follows_count
@@ -352,6 +354,7 @@ export const parseNotification = (data) => {
       ? null
       : parseUser(data.target)
     output.from_profile = parseUser(data.account)
+    output.emoji = data.emoji
   } else {
     const parsedNotice = parseStatus(data.notice)
     output.type = data.ntype

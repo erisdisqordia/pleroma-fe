@@ -81,7 +81,8 @@ const visibleNotificationTypes = (rootState) => {
     rootState.config.notificationVisibility.mentions && 'mention',
     rootState.config.notificationVisibility.repeats && 'repeat',
     rootState.config.notificationVisibility.follows && 'follow',
-    rootState.config.notificationVisibility.moves && 'move'
+    rootState.config.notificationVisibility.moves && 'move',
+    rootState.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reactions'
   ].filter(_ => _)
 }
 
@@ -325,6 +326,10 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
     }
 
+    if (notification.type === 'pleroma:emoji_reaction') {
+      dispatch('fetchEmojiReactionsBy', notification.status.id)
+    }
+
     // Only add a new notification if we don't have one for the same action
     if (!state.notifications.idStore.hasOwnProperty(notification.id)) {
       state.notifications.maxId = notification.id > state.notifications.maxId
@@ -358,7 +363,9 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
             break
         }
 
-        if (i18nString) {
+        if (notification.type === 'pleroma:emoji_reaction') {
+          notifObj.body = rootGetters.i18n.t('notifications.reacted_with', [notification.emoji])
+        } else if (i18nString) {
           notifObj.body = rootGetters.i18n.t('notifications.' + i18nString)
         } else {
           notifObj.body = notification.status.text
@@ -371,10 +378,10 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
         }
 
         if (!notification.seen && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.type)) {
-          let notification = new window.Notification(title, notifObj)
+          let desktopNotification = new window.Notification(title, notifObj)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.
-          setTimeout(notification.close.bind(notification), 5000)
+          setTimeout(desktopNotification.close.bind(desktopNotification), 5000)
         }
       }
     } else if (notification.seen) {
@@ -537,12 +544,13 @@ export const mutations = {
   },
   addOwnReaction (state, { id, emoji, currentUser }) {
     const status = state.allStatusesObject[id]
-    const reactionIndex = findIndex(status.emoji_reactions, { emoji })
-    const reaction = status.emoji_reactions[reactionIndex] || { emoji, count: 0, accounts: [] }
+    const reactionIndex = findIndex(status.emoji_reactions, { name: emoji })
+    const reaction = status.emoji_reactions[reactionIndex] || { name: emoji, count: 0, accounts: [] }
 
     const newReaction = {
       ...reaction,
       count: reaction.count + 1,
+      me: true,
       accounts: [
         ...reaction.accounts,
         currentUser
@@ -558,21 +566,23 @@ export const mutations = {
   },
   removeOwnReaction (state, { id, emoji, currentUser }) {
     const status = state.allStatusesObject[id]
-    const reactionIndex = findIndex(status.emoji_reactions, { emoji })
+    const reactionIndex = findIndex(status.emoji_reactions, { name: emoji })
     if (reactionIndex < 0) return
 
     const reaction = status.emoji_reactions[reactionIndex]
+    const accounts = reaction.accounts || []
 
     const newReaction = {
       ...reaction,
       count: reaction.count - 1,
-      accounts: reaction.accounts.filter(acc => acc.id === currentUser.id)
+      me: false,
+      accounts: accounts.filter(acc => acc.id !== currentUser.id)
     }
 
     if (newReaction.count > 0) {
       set(status.emoji_reactions, reactionIndex, newReaction)
     } else {
-      set(status, 'emoji_reactions', status.emoji_reactions.filter(r => r.emoji !== emoji))
+      set(status, 'emoji_reactions', status.emoji_reactions.filter(r => r.name !== emoji))
     }
   },
   updateStatusWithPoll (state, { id, poll }) {
@@ -681,18 +691,22 @@ const statuses = {
     },
     reactWithEmoji ({ rootState, dispatch, commit }, { id, emoji }) {
       const currentUser = rootState.users.currentUser
+      if (!currentUser) return
+
       commit('addOwnReaction', { id, emoji, currentUser })
       rootState.api.backendInteractor.reactWithEmoji({ id, emoji }).then(
-        status => {
+        ok => {
           dispatch('fetchEmojiReactionsBy', id)
         }
       )
     },
     unreactWithEmoji ({ rootState, dispatch, commit }, { id, emoji }) {
       const currentUser = rootState.users.currentUser
+      if (!currentUser) return
+
       commit('removeOwnReaction', { id, emoji, currentUser })
       rootState.api.backendInteractor.unreactWithEmoji({ id, emoji }).then(
-        status => {
+        ok => {
           dispatch('fetchEmojiReactionsBy', id)
         }
       )

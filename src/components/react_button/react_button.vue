@@ -54,6 +54,10 @@
 
 .reaction-picker-filter {
   padding: 0.5em;
+  display: flex;
+  input {
+    flex: 1;
+  }
 }
 
 .reaction-picker-divider {

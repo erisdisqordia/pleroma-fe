@@ -92,6 +92,11 @@
                     {{ $t('settings.reply_link_preview') }}
                   </Checkbox>
                 </li>
+                <li>
+                  <Checkbox v-model="emojiReactionsOnTimeline">
+                    {{ $t('settings.emoji_reactions_on_timeline') }}
+                  </Checkbox>
+                </li>
               </ul>
             </div>
 
@@ -326,6 +331,11 @@
                   <li>
                     <Checkbox v-model="notificationVisibility.moves">
                       {{ $t('settings.notification_visibility_moves') }}
+                    </Checkbox>
+                  </li>
+                  <li>
+                    <Checkbox v-model="notificationVisibility.emojiReactions">
+                      {{ $t('settings.notification_visibility_emoji_reactions') }}
                     </Checkbox>
                   </li>
                 </ul>

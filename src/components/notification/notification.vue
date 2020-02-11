@@ -78,6 +78,13 @@
               <i class="fa icon-arrow-curved lit" />
               <small>{{ $t('notifications.migrated_to') }}</small>
             </span>
+            <span v-if="notification.type === 'pleroma:emoji_reaction'">
+              <small>
+                <i18n path="notifications.reacted_with">
+                  <span class="emoji-reaction-emoji">{{ notification.emoji }}</span>
+                </i18n>
+              </small>
+            </span>
           </div>
           <div
             v-if="notification.type === 'follow' || notification.type === 'move'"

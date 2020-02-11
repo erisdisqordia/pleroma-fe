@@ -256,6 +256,16 @@ const Status = {
         file => !fileType.fileMatchesSomeType(this.galleryTypes, file)
       )
     },
+    hasImageAttachments () {
+      return this.status.attachments.some(
+        file => fileType.fileType(file.mimetype) === 'image'
+      )
+    },
+    hasVideoAttachments () {
+      return this.status.attachments.some(
+        file => fileType.fileType(file.mimetype) === 'video'
+      )
+    },
     maxThumbnails () {
       return this.mergedConfig.maxThumbnails
     },

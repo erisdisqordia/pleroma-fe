@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Pleroma AMOLED dark theme
 - User level domain mutes, under User Settings -> Mutes
 - Emoji reactions for statuses
+- MRF keyword policy disclosure
 ### Changed
 - theme engine update to 3 (themes v2.1 introduction)
 - massive internal changes in theme engine - slowly away from "generate things separately with spaghetti code" towards "feed all data into single 'generateTheme' function and declare slot inheritance and all in a separate file"

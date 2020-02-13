@@ -470,6 +470,10 @@ export const SLOT_INHERITANCE = {
     variant: 'btnPressed',
     textColor: true
   },
+  btnPressedTopBar: {
+    depends: ['btnPressed'],
+    layer: 'btn'
+  },
   btnPressedTopBarText: {
     depends: ['btnTopBarText'],
     layer: 'btnTopBar',

@@ -221,9 +221,16 @@ const getNodeInfo = async ({ store }) => {
 
       const frontendVersion = window.___pleromafe_commit_hash
       store.dispatch('setInstanceOption', { name: 'frontendVersion', value: frontendVersion })
-      store.dispatch('setInstanceOption', { name: 'tagPolicyAvailable', value: metadata.federation.mrf_policies.includes('TagPolicy') })
 
       const federation = metadata.federation
+
+      store.dispatch('setInstanceOption', {
+        name: 'tagPolicyAvailable',
+        value: typeof federation.mrf_policies === 'undefined'
+          ? false
+          : metadata.federation.mrf_policies.includes('TagPolicy')
+      })
+
       store.dispatch('setInstanceOption', { name: 'federationPolicy', value: federation })
       store.dispatch('setInstanceOption', {
         name: 'federating',

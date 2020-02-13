@@ -1,31 +1,33 @@
 {
   "about": {
-    "staff": "Staff",
-    "federation": "Federation",
-    "mrf_policies": "Enabled MRF Policies",
-    "mrf_policies_desc": "MRF policies manipulate the federation behaviour of the instance.  The following policies are enabled:",
-    "mrf_policy_simple": "Instance-specific Policies",
-    "mrf_policy_simple_accept": "Accept",
-    "mrf_policy_simple_accept_desc": "This instance only accepts messages from the following instances:",
-    "mrf_policy_simple_reject": "Reject",
-    "mrf_policy_simple_reject_desc": "This instance will not accept messages from the following instances:",
-    "mrf_policy_simple_quarantine": "Quarantine",
-    "mrf_policy_simple_quarantine_desc": "This instance will send only public posts to the following instances:",
-    "mrf_policy_simple_ftl_removal": "Removal from \"The Whole Known Network\" Timeline",
-    "mrf_policy_simple_ftl_removal_desc": "This instance removes these instances from \"The Whole Known Network\" timeline:",
-    "mrf_policy_simple_media_removal": "Media Removal",
-    "mrf_policy_simple_media_removal_desc": "This instance removes media from posts on the following instances:",
-    "mrf_policy_simple_media_nsfw": "Media Force-set As Sensitive",
-    "mrf_policy_simple_media_nsfw_desc": "This instance forces media to be set sensitive in posts on the following instances:",
     "mrf": {
+      "federation": "Federation",
       "keyword": {
         "keyword_policies": "Keyword Policies",
         "ftl_removal": "Removal from \"The Whole Known Network\" Timeline",
         "reject": "Reject",
         "replace": "Replace",
         "is_replaced_by": "→"
+      },
+      "mrf_policies": "Enabled MRF Policies",
+      "mrf_policies_desc": "MRF policies manipulate the federation behaviour of the instance.  The following policies are enabled:",
+      "simple": {
+        "simple_policies": "Instance-specific Policies",
+        "accept": "Accept",
+        "accept_desc": "This instance only accepts messages from the following instances:",
+        "reject": "Reject",
+        "reject_desc": "This instance will not accept messages from the following instances:",
+        "quarantine": "Quarantine",
+        "quarantine_desc": "This instance will send only public posts to the following instances:",
+        "ftl_removal": "Removal from \"The Whole Known Network\" Timeline",
+        "ftl_removal_desc": "This instance removes these instances from \"The Whole Known Network\" timeline:",
+        "media_removal": "Media Removal",
+        "media_removal_desc": "This instance removes media from posts on the following instances:",
+        "media_nsfw": "Media Force-set As Sensitive",
+        "media_nsfw_desc": "This instance forces media to be set sensitive in posts on the following instances:"
       }
-    }
+    },
+    "staff": "Staff"
   },
   "chat": {
     "title": "Chat"

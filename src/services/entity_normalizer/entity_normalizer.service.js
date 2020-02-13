@@ -354,6 +354,7 @@ export const parseNotification = (data) => {
       ? null
       : parseUser(data.target)
     output.from_profile = parseUser(data.account)
+    output.emoji = data.emoji
   } else {
     const parsedNotice = parseStatus(data.notice)
     output.type = data.ntype

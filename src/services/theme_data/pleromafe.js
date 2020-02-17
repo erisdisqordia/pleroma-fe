@@ -509,25 +509,25 @@ export const SLOT_INHERITANCE = {
   // Buttons: disabled
   btnDisabled: {
     depends: ['btn', 'bg'],
-    color: (mod, btn, bg) => alphaBlend(btn, 0.5, bg)
+    color: (mod, btn, bg) => alphaBlend(btn, 0.25, bg)
   },
   btnDisabledText: {
     depends: ['btnText', 'btnDisabled'],
     layer: 'btn',
     variant: 'btnDisabled',
-    color: (mod, text, btn) => alphaBlend(text, 0.5, btn)
+    color: (mod, text, btn) => alphaBlend(text, 0.25, btn)
   },
   btnDisabledPanelText: {
     depends: ['btnPanelText', 'btnDisabled'],
     layer: 'btnPanel',
     variant: 'btnDisabled',
-    color: (mod, text, btn) => alphaBlend(text, 0.5, btn)
+    color: (mod, text, btn) => alphaBlend(text, 0.25, btn)
   },
   btnDisabledTopBarText: {
     depends: ['btnTopBarText', 'btnDisabled'],
     layer: 'btnTopBar',
     variant: 'btnDisabled',
-    color: (mod, text, btn) => alphaBlend(text, 0.5, btn)
+    color: (mod, text, btn) => alphaBlend(text, 0.25, btn)
   },
 
   // Input fields

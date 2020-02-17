@@ -21,7 +21,7 @@
       </div>
       <div class="panel-body theme-preview-content">
         <div class="post">
-          <div class="avatar">
+          <div class="avatar still-image">
             ( ͡° ͜ʖ ͡°)
           </div>
           <div class="content">

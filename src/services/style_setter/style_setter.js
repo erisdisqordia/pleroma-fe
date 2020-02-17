@@ -270,7 +270,7 @@ export const generateShadows = (input, colors) => {
     rules: {
       shadows: Object
         .entries(shadows)
-      // TODO for v2.1: if shadow doesn't have non-inset shadows with spread > 0 - optionally
+      // TODO for v2.2: if shadow doesn't have non-inset shadows with spread > 0 - optionally
       // convert all non-inset shadows into filter: drop-shadow() to boost performance
         .map(([k, v]) => [
           `--${k}Shadow: ${getCssShadow(v)}`,

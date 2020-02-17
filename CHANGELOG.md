@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Tons of color slots including ones for hover/pressed/toggled buttons
 - Experimental `--variable[,mod]` syntax support for color slots in themes. the `mod` makes color brighter/darker depending on background color (makes darker color brighter/darker depending on background color)
-- Kenomo theme based on new UX proposal mockups
+- Paper theme by Shpuld
 - Icons in nav panel
 - Private mode support
 - Support for 'Move' type notifications

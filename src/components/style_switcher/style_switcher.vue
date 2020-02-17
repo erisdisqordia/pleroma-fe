@@ -443,7 +443,7 @@
               :label="$t('settings.style.advanced_colors.top_bar')"
             />
             <ContrastRatio :contrast="previewContrast.btnTopBarText" />
-            <h4>{{ $t('settings.style.advanced_colors.pressed') }}</h4>
+            <h5>{{ $t('settings.style.advanced_colors.pressed') }}</h5>
             <ColorInput
               v-model="btnPressedColorLocal"
               name="btnPressedColor"
@@ -471,7 +471,7 @@
               :label="$t('settings.style.advanced_colors.top_bar')"
             />
             <ContrastRatio :contrast="previewContrast.btnPressedTopBarText" />
-            <h4>{{ $t('settings.style.advanced_colors.disabled') }}</h4>
+            <h5>{{ $t('settings.style.advanced_colors.disabled') }}</h5>
             <ColorInput
               v-model="btnDisabledColorLocal"
               name="btnDisabledColor"
@@ -496,7 +496,7 @@
               :fallback="previewTheme.colors.btnDisabledTopBarText"
               :label="$t('settings.style.advanced_colors.top_bar')"
             />
-            <h4>{{ $t('settings.style.advanced_colors.toggled') }}</h4>
+            <h5>{{ $t('settings.style.advanced_colors.toggled') }}</h5>
             <ColorInput
               v-model="btnToggledColorLocal"
               name="btnToggledColor"

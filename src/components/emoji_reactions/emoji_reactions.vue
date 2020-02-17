@@ -35,7 +35,7 @@
       </div>
       <button
         class="emoji-reaction btn btn-default"
-        :class="{ 'toggled': reactedWith(reaction.name), 'not-clickable': !loggedIn }"
+        :class="{ 'picked-reaction': reactedWith(reaction.name), 'not-clickable': !loggedIn }"
         @click="emojiOnClick(reaction.name, $event)"
         @mouseenter="fetchEmojiReactionsByIfMissing()"
       >
@@ -125,6 +125,12 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+.picked-reaction {
+  border: 1px solid var(--accent, $fallback--link);
+  margin-left: -1px; // offset the border, can't use inset shadows either
+  margin-right: calc(0.5em - 1px);
 }
 
 </style>

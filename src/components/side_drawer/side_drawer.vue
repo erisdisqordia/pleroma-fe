@@ -223,7 +223,13 @@
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
   box-shadow: var(--panelShadow);
   background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
+  background-color: var(--popover, $fallback--bg);
+  color: $fallback--link;
+  color: var(--popoverText, $fallback--link);
+  --faint: var(--popoverFaintText, $fallback--faint);
+  --faintLink: var(--popoverFaintLink, $fallback--faint);
+  --lightText: var(--popoverLightText, $fallback--lightText);
+  --icon: var(--popoverIcon, $fallback--icon);
 
   .button-icon:before {
     width: 1.1em;
@@ -289,7 +295,13 @@
 
     &:hover {
       background-color: $fallback--lightBg;
-      background-color: var(--lightBg, $fallback--lightBg);
+      background-color: var(--selectedMenuPopover, $fallback--lightBg);
+      color: $fallback--text;
+      color: var(--selectedMenuPopoverText, $fallback--text);
+      --faint: var(--selectedMenuPopoverFaintText, $fallback--faint);
+      --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
+      --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
+      --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
     }
   }
 }

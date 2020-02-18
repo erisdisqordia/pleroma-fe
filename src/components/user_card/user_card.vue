@@ -151,7 +151,7 @@
               </ProgressButton>
               <ProgressButton
                 v-else
-                class="btn btn-default pressed"
+                class="btn btn-default toggled"
                 :click="unsubscribeUser"
                 :title="$t('user_card.unsubscribe')"
               >
@@ -162,7 +162,7 @@
           <div>
             <button
               v-if="user.muted"
-              class="btn btn-default btn-block pressed"
+              class="btn btn-default btn-block toggled"
               @click="unmuteUser"
             >
               {{ $t('user_card.muted') }}
@@ -298,6 +298,11 @@
 
   &-bio {
     text-align: center;
+
+    a {
+      color: $fallback--link;
+      color: var(--postLink, $fallback--link);
+    }
 
     img {
       object-fit: contain;
@@ -460,14 +465,13 @@
       color: var(--text, $fallback--text);
     }
 
-    // TODO use proper colors
     .staff {
       flex: none;
       text-transform: capitalize;
       color: $fallback--text;
-      color: var(--btnText, $fallback--text);
+      color: var(--alertNeutralText, $fallback--text);
       background-color: $fallback--fg;
-      background-color: var(--btn, $fallback--fg);
+      background-color: var(--alertNeutral, $fallback--fg);
     }
   }
 
@@ -538,12 +542,6 @@
 
     button {
       margin: 0;
-
-      &.pressed {
-        // TODO: This should be themed.
-        border-bottom-color: rgba(255, 255, 255, 0.2);
-        border-top-color: rgba(0, 0, 0, 0.2);
-      }
     }
   }
 }

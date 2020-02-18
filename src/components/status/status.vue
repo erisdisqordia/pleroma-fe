@@ -468,7 +468,15 @@ $status-margin: 0.75em;
 
   &_focused {
     background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
+    background-color: var(--selectedPost, $fallback--lightBg);
+    color: $fallback--text;
+    color: var(--selectedPostText, $fallback--text);
+    --lightText: var(--selectedPostLightText, $fallback--light);
+    --faint: var(--selectedPostFaintText, $fallback--faint);
+    --faintLink: var(--selectedPostFaintLink, $fallback--faint);
+    --postLink: var(--selectedPostPostLink, $fallback--faint);
+    --postFaintLink: var(--selectedPostFaintPostLink, $fallback--faint);
+    --icon: var(--selectedPostIcon, $fallback--icon);
   }
 
   .timeline & {
@@ -596,8 +604,6 @@ $status-margin: 0.75em;
       overflow: hidden;
       text-overflow: ellipsis;
       margin: 0 0.4em 0 0.2em;
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
     }
 
     .replies-separator {
@@ -658,6 +664,11 @@ $status-margin: 0.75em;
     font-family: var(--postFont, sans-serif);
     line-height: 1.4em;
     white-space: pre-wrap;
+
+    a {
+      color: $fallback--link;
+      color: var(--postLink, $fallback--link);
+    }
 
     img, video {
       max-width: 100%;

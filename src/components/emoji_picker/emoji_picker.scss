@@ -8,6 +8,15 @@
   left: 0;
   margin: 0 !important;
   z-index: 1;
+  background-color: $fallback--bg;
+  background-color: var(--popover, $fallback--bg);
+  color: $fallback--link;
+  color: var(--popoverText, $fallback--link);
+  --lightText: var(--popoverLightText, $fallback--faint);
+  --faint: var(--popoverFaintText, $fallback--faint);
+  --faintLink: var(--popoverFaintLink, $fallback--faint);
+  --lightText: var(--popoverLightText, $fallback--lightText);
+  --icon: var(--popoverIcon, $fallback--icon);
 
   .keep-open,
   .too-many-emoji {

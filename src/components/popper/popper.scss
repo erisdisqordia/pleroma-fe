@@ -9,7 +9,15 @@
     border-radius: $fallback--btnRadius;
     border-radius: var(--btnRadius, $fallback--btnRadius);
     background-color: $fallback--bg;
-    background-color: var(--bg, $fallback--bg);
+    background-color: var(--popover, $fallback--bg);
+    color: $fallback--text;
+    color: var(--popoverText, $fallback--text);
+    --faint: var(--popoverFaintText, $fallback--faint);
+    --faintLink: var(--popoverFaintLink, $fallback--faint);
+    --lightText: var(--popoverLightText, $fallback--lightText);
+    --postLink: var(--popoverPostLink, $fallback--link);
+    --postFaintLink: var(--popoverPostFaintLink, $fallback--link);
+    --icon: var(--popoverIcon, $fallback--icon);
   }
 
   .popover-arrow {
@@ -129,6 +137,8 @@
     width: 100%;
     height: 100%;
 
+    --btnText: var(--popoverText, $fallback--text);
+
     &-icon {
       padding-left: 0.5rem;
 
@@ -137,11 +147,18 @@
       }
     }
 
-    &:hover {
-      // TODO: improve the look on breeze themes
-      background-color: $fallback--fg;
-      background-color: var(--btn, $fallback--fg);
-      box-shadow: none;
+    &:active, &:hover {
+      background-color: $fallback--lightBg;
+      background-color: var(--selectedMenuPopover, $fallback--lightBg);
+      color: $fallback--link;
+      color: var(--selectedMenuPopoverText, $fallback--link);
+      --faint: var(--selectedMenuPopoverFaintText, $fallback--faint);
+      --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
+      --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
+      --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
+      i {
+        color: var(--selectedMenuPopoverIcon, $fallback--icon);
+      }
     }
   }
 }

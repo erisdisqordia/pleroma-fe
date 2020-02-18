@@ -31,8 +31,11 @@ h4 {
   margin: auto;
   min-height: 100vh;
   max-width: 980px;
-  background-color: rgba(0,0,0,0.15);
   align-content: flex-start;
+}
+.underlay {
+  background-color: rgba(0,0,0,0.15);
+  background-color: var(--underlay, rgba(0,0,0,0.15));
 }
 
 .text-center {
@@ -98,18 +101,39 @@ button {
   &:active {
     box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.3), 0px 1px 0px 0px rgba(0, 0, 0, 0.2) inset, 0px -1px 0px 0px rgba(255, 255, 255, 0.2) inset;
     box-shadow: var(--buttonPressedShadow);
+    color: $fallback--text;
+    color: var(--btnPressedText, $fallback--text);
+    background-color: $fallback--fg;
+    background-color: var(--btnPressed, $fallback--fg);
+    i {
+      color: $fallback--text;
+      color: var(--btnPressedText, $fallback--text);
+    }
   }
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    color: $fallback--text;
+    color: var(--btnDisabledText, $fallback--text);
+    background-color: $fallback--fg;
+    background-color: var(--btnDisabled, $fallback--fg);
+    i {
+      color: $fallback--text;
+      color: var(--btnDisabledText, $fallback--text);
+    }
   }
 
-  &.pressed {
-    color: $fallback--faint;
-    color: var(--faint, $fallback--faint);
-    background-color: $fallback--bg;
-    background-color: var(--bg, $fallback--bg)
+  &.toggled {
+    color: $fallback--text;
+    color: var(--btnToggledText, $fallback--text);
+    background-color: $fallback--fg;
+    background-color: var(--btnToggled, $fallback--fg);
+    box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.3), 0px 1px 0px 0px rgba(0, 0, 0, 0.2) inset, 0px -1px 0px 0px rgba(255, 255, 255, 0.2) inset;
+    box-shadow: var(--buttonPressedShadow);
+    i {
+      color: $fallback--text;
+      color: var(--btnToggledText, $fallback--text);
+    }
   }
 
   &.danger {
@@ -121,12 +145,15 @@ button {
   }
 }
 
-label.select {
-  padding: 0;
+input, textarea, .select, .input {
 
-}
+  &.unstyled {
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    height: unset;
+  }
 
-input, textarea, .select {
   border: none;
   border-radius: $fallback--inputRadius;
   border-radius: var(--inputRadius, $fallback--inputRadius);
@@ -140,13 +167,17 @@ input, textarea, .select {
   font-family: var(--inputFont, sans-serif);
   font-size: 14px;
   margin: 0;
-  padding: 8px .5em;
   box-sizing: border-box;
   display: inline-block;
   position: relative;
   height: 28px;
   line-height: 16px;
   hyphens: none;
+  padding: 8px .5em;
+
+  &.select {
+    padding: 0;
+  }
 
   &:disabled, &[disabled=disabled] {
     cursor: not-allowed;
@@ -160,7 +191,7 @@ input, textarea, .select {
     right: 5px;
     height: 100%;
     color: $fallback--text;
-    color: var(--text, $fallback--text);
+    color: var(--inputText, $fallback--text);
     line-height: 28px;
     z-index: 0;
     pointer-events: none;
@@ -198,7 +229,7 @@ input, textarea, .select {
     &:checked + label::before {
       box-shadow: 0px 0px 2px black inset, 0px 0px 0px 4px $fallback--fg inset;
       box-shadow: var(--inputShadow), 0px 0px 0px 4px var(--fg, $fallback--fg) inset;
-      background-color: var(--link, $fallback--link);
+      background-color: var(--accent, $fallback--link);
     }
     &:disabled {
       &,
@@ -235,7 +266,7 @@ input, textarea, .select {
     display: none;
     &:checked + label::before {
       color: $fallback--text;
-      color: var(--text, $fallback--text);
+      color: var(--inputText, $fallback--text);
     }
     &:disabled {
       &,
@@ -352,6 +383,33 @@ i[class*=icon-] {
   position: fixed;
   height: 50px;
   box-sizing: border-box;
+
+  button {
+    &, i[class*=icon-] {
+      color: $fallback--text;
+      color: var(--btnTopBarText, $fallback--text);
+    }
+
+    &:active {
+      background-color: $fallback--fg;
+      background-color: var(--btnPressedTopBar, $fallback--fg);
+      color: $fallback--text;
+      color: var(--btnPressedTopBarText, $fallback--text);
+    }
+
+    &:disabled {
+      color: $fallback--text;
+      color: var(--btnDisabledTopBarText, $fallback--text);
+    }
+
+    &.toggled {
+      color: $fallback--text;
+      color: var(--btnToggledTopBarText, $fallback--text);
+      background-color: $fallback--fg;
+      background-color: var(--btnToggledTopBar, $fallback--fg)
+    }
+  }
+
 
   .logo {
     display: flex;
@@ -487,6 +545,10 @@ main-router {
     color: $fallback--faint;
     color: var(--panelFaint, $fallback--faint);
   }
+  .faint-link {
+    color: $fallback--faint;
+    color: var(--faintLink, $fallback--faint);
+  }
 
   .alert {
     white-space: nowrap;
@@ -507,6 +569,30 @@ main-router {
     margin-left: .25em;
     min-width: 1px;
     align-self: stretch;
+  }
+
+  button {
+    &, i[class*=icon-] {
+      color: $fallback--text;
+      color: var(--btnPanelText, $fallback--text);
+    }
+
+    &:active {
+      background-color: $fallback--fg;
+      background-color: var(--btnPressedPanel, $fallback--fg);
+      color: $fallback--text;
+      color: var(--btnPressedPanelText, $fallback--text);
+    }
+
+    &:disabled {
+      color: $fallback--text;
+      color: var(--btnDisabledPanelText, $fallback--text);
+    }
+
+    &.toggled {
+      color: $fallback--text;
+      color: var(--btnToggledPanelText, $fallback--text);
+    }
   }
 
   a {

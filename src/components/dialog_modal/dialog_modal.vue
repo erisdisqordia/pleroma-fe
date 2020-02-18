@@ -75,18 +75,18 @@
   .dialog-modal-content {
     margin: 0;
     padding: 1rem 1rem;
-    background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
+    background-color: $fallback--bg;
+    background-color: var(--bg, $fallback--bg);
     white-space: normal;
   }
 
   .dialog-modal-footer {
     margin: 0;
     padding: .5em .5em;
-    background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
-    border-top: 1px solid $fallback--bg;
-    border-top: 1px solid var(--bg, $fallback--bg);
+    background-color: $fallback--bg;
+    background-color: var(--bg, $fallback--bg);
+    border-top: 1px solid $fallback--border;
+    border-top: 1px solid var(--border, $fallback--border);
     display: flex;
     justify-content: flex-end;
 

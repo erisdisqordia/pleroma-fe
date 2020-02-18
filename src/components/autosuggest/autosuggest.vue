@@ -40,8 +40,8 @@
     top: 100%;
     right: 0;
     max-height: 400px;
-    background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
+    background-color: $fallback--bg;
+    background-color: var(--bg, $fallback--bg);
     border-style: solid;
     border-width: 1px;
     border-color: $fallback--border;

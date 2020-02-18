@@ -128,7 +128,7 @@
 }
 
 .picked-reaction {
-  border: 1px solid var(--link, $fallback--link);
+  border: 1px solid var(--accent, $fallback--link);
   margin-left: -1px; // offset the border, can't use inset shadows either
   margin-right: calc(0.5em - 1px);
 }

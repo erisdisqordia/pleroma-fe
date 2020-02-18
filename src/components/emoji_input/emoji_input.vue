@@ -109,10 +109,16 @@
         box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
         box-shadow: var(--popupShadow);
         min-width: 75%;
-        background: $fallback--bg;
-        background: var(--bg, $fallback--bg);
-        color: $fallback--lightText;
-        color: var(--lightText, $fallback--lightText);
+        background-color: $fallback--bg;
+        background-color: var(--popover, $fallback--bg);
+        color: $fallback--link;
+        color: var(--popoverText, $fallback--link);
+        --faint: var(--popoverFaintText, $fallback--faint);
+        --faintLink: var(--popoverFaintLink, $fallback--faint);
+        --lightText: var(--popoverLightText, $fallback--lightText);
+        --postLink: var(--popoverPostLink, $fallback--link);
+        --postFaintLink: var(--popoverPostFaintLink, $fallback--link);
+        --icon: var(--popoverIcon, $fallback--icon);
       }
     }
 
@@ -157,7 +163,12 @@
 
       &.highlighted {
         background-color: $fallback--fg;
-        background-color: var(--lightBg, $fallback--fg);
+        background-color: var(--selectedMenuPopover, $fallback--fg);
+        color: var(--selectedMenuPopoverText, $fallback--text);
+        --faint: var(--selectedMenuPopoverFaintText, $fallback--faint);
+        --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
+        --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
+        --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
       }
     }
   }

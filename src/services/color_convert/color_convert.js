@@ -1,16 +1,27 @@
-import { map } from 'lodash'
+import { invertLightness, contrastRatio } from 'chromatism'
 
-const rgb2hex = (r, g, b) => {
+// useful for visualizing color when debugging
+export const consoleColor = (color) => console.log('%c##########', 'background: ' + color + '; color: ' + color)
+
+/**
+ * Convert r, g, b values into hex notation. All components are [0-255]
+ *
+ * @param {Number|String|Object} r - Either red component, {r,g,b} object, or hex string
+ * @param {Number} [g] - Green component
+ * @param {Number} [b] - Blue component
+ */
+export const rgb2hex = (r, g, b) => {
   if (r === null || typeof r === 'undefined') {
     return undefined
   }
-  if (r[0] === '#') {
+  // TODO: clean up this mess
+  if (r[0] === '#' || r === 'transparent') {
     return r
   }
   if (typeof r === 'object') {
     ({ r, g, b } = r)
   }
-  [r, g, b] = map([r, g, b], (val) => {
+  [r, g, b] = [r, g, b].map(val => {
     val = Math.ceil(val)
     val = val < 0 ? 0 : val
     val = val > 255 ? 255 : val
@@ -58,7 +69,7 @@ const srgbToLinear = (srgb) => {
  * @param {Object} srgb - sRGB color
  * @returns {Number} relative luminance
  */
-const relativeLuminance = (srgb) => {
+export const relativeLuminance = (srgb) => {
   const { r, g, b } = srgbToLinear(srgb)
   return 0.2126 * r + 0.7152 * g + 0.0722 * b
 }
@@ -71,12 +82,23 @@ const relativeLuminance = (srgb) => {
  * @param {Object} b - sRGB color
  * @returns {Number} color ratio
  */
-const getContrastRatio = (a, b) => {
+export const getContrastRatio = (a, b) => {
   const la = relativeLuminance(a)
   const lb = relativeLuminance(b)
   const [l1, l2] = la > lb ? [la, lb] : [lb, la]
 
   return (l1 + 0.05) / (l2 + 0.05)
+}
+
+/**
+ * Same as `getContrastRatio` but for multiple layers in-between
+ *
+ * @param {Object} text - text color (topmost layer)
+ * @param {[Object, Number]} layers[] - layers between text and bedrock
+ * @param {Object} bedrock - layer at the very bottom
+ */
+export const getContrastRatioLayers = (text, layers, bedrock) => {
+  return getContrastRatio(alphaBlendLayers(bedrock, layers), text)
 }
 
 /**
@@ -87,7 +109,7 @@ const getContrastRatio = (a, b) => {
  * @param {Object} bg - bottom layer color
  * @returns {Object} sRGB of resulting color
  */
-const alphaBlend = (fg, fga, bg) => {
+export const alphaBlend = (fg, fga, bg) => {
   if (fga === 1 || typeof fga === 'undefined') return fg
   return 'rgb'.split('').reduce((acc, c) => {
     // Simplified https://en.wikipedia.org/wiki/Alpha_compositing#Alpha_blending
@@ -97,14 +119,30 @@ const alphaBlend = (fg, fga, bg) => {
   }, {})
 }
 
-const invert = (rgb) => {
+/**
+ * Same as `alphaBlend` but for multiple layers in-between
+ *
+ * @param {Object} bedrock - layer at the very bottom
+ * @param {[Object, Number]} layers[] - layers between text and bedrock
+ */
+export const alphaBlendLayers = (bedrock, layers) => layers.reduce((acc, [color, opacity]) => {
+  return alphaBlend(color, opacity, acc)
+}, bedrock)
+
+export const invert = (rgb) => {
   return 'rgb'.split('').reduce((acc, c) => {
     acc[c] = 255 - rgb[c]
     return acc
   }, {})
 }
 
-const hex2rgb = (hex) => {
+/**
+ * Converts #rrggbb hex notation into an {r, g, b} object
+ *
+ * @param {String} hex - #rrggbb string
+ * @returns {Object} rgb representation of the color, values are 0-255
+ */
+export const hex2rgb = (hex) => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
   return result ? {
     r: parseInt(result[1], 16),
@@ -113,18 +151,72 @@ const hex2rgb = (hex) => {
   } : null
 }
 
-const mixrgb = (a, b) => {
-  return Object.keys(a).reduce((acc, k) => {
+/**
+ * Old somewhat weird function for mixing two colors together
+ *
+ * @param {Object} a - one color (rgb)
+ * @param {Object} b - other color (rgb)
+ * @returns {Object} result
+ */
+export const mixrgb = (a, b) => {
+  return 'rgb'.split('').reduce((acc, k) => {
     acc[k] = (a[k] + b[k]) / 2
     return acc
   }, {})
 }
+/**
+ * Converts rgb object into a CSS rgba() color
+ *
+ * @param {Object} color - rgb
+ * @returns {String} CSS rgba() color
+ */
+export const rgba2css = function (rgba) {
+  return `rgba(${Math.floor(rgba.r)}, ${Math.floor(rgba.g)}, ${Math.floor(rgba.b)}, ${rgba.a})`
+}
 
-export {
-  rgb2hex,
-  hex2rgb,
-  mixrgb,
-  invert,
-  getContrastRatio,
-  alphaBlend
+/**
+ * Get text color for given background color and intended text color
+ * This checks if text and background don't have enough color and inverts
+ * text color's lightness if needed. If text color is still not enough it
+ * will fall back to black or white
+ *
+ * @param {Object} bg - background color
+ * @param {Object} text - intended text color
+ * @param {Boolean} preserve - try to preserve intended text color's hue/saturation (i.e. no BW)
+ */
+export const getTextColor = function (bg, text, preserve) {
+  const contrast = getContrastRatio(bg, text)
+
+  if (contrast < 4.5) {
+    const base = typeof text.a !== 'undefined' ? { a: text.a } : {}
+    const result = Object.assign(base, invertLightness(text).rgb)
+    if (!preserve && getContrastRatio(bg, result) < 4.5) {
+      // B&W
+      return contrastRatio(bg, text).rgb
+    }
+    // Inverted color
+    return result
+  }
+  return text
+}
+
+/**
+ * Converts color to CSS Color value
+ *
+ * @param {Object|String} input - color
+ * @param {Number} [a] - alpha value
+ * @returns {String} a CSS Color value
+ */
+export const getCssColor = (input, a) => {
+  let rgb = {}
+  if (typeof input === 'object') {
+    rgb = input
+  } else if (typeof input === 'string') {
+    if (input.startsWith('#')) {
+      rgb = hex2rgb(input)
+    } else {
+      return input
+    }
+  }
+  return rgba2css({ ...rgb, a })
 }

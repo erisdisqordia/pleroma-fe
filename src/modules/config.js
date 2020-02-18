@@ -5,6 +5,9 @@ const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
 export const defaultState = {
   colors: {},
+  theme: undefined,
+  customTheme: undefined,
+  customThemeSource: undefined,
   hideISP: false,
   // bad name: actually hides posts of muted USERS
   hideMutedPosts: undefined, // instance default
@@ -96,10 +99,10 @@ const config = {
       commit('setOption', { name, value })
       switch (name) {
         case 'theme':
-          setPreset(value, commit)
+          setPreset(value)
           break
         case 'customTheme':
-          applyTheme(value, commit)
+          applyTheme(value)
       }
     }
   }

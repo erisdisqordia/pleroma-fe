@@ -68,6 +68,9 @@
         a {
           color: var(--faintLink);
         }
+        .status-content a {
+          color: var(--postFaintLink);
+        }
       }
       padding: 0;
       .media-body {

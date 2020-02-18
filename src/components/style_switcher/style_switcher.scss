@@ -1,5 +1,15 @@
 @import '../../_variables.scss';
 .style-switcher {
+  .theme-warning {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: .5em;
+    .buttons {
+      .btn {
+        margin-bottom: .5em;
+      }
+    }
+  }
   .preset-switcher {
     margin-right: 1em;
   }
@@ -15,25 +25,22 @@
 
     &.disabled {
       input, select {
-        &:not(.exclude-disabled) {
-          opacity: .5
-        }
+        opacity: .5
       }
+    }
+
+    .opt {
+      margin: .5em;
+    }
+
+    .color-input {
+      flex: 0 0 0;
     }
 
     input, select {
       min-width: 3em;
       margin: 0;
       flex: 0;
-
-      &[type=color] {
-        padding: 1px;
-        cursor: pointer;
-        height: 29px;
-        min-width: 2em;
-        border: none;
-        align-self: stretch;
-      }
 
       &[type=number] {
         min-width: 5em;
@@ -42,13 +49,6 @@
       &[type=range] {
         flex: 1;
         min-width: 3em;
-      }
-
-      &[type=checkbox] + label {
-        margin: 6px 0;
-      }
-
-      &:not([type=number]):not([type=text]) {
         align-self: flex-start;
       }
     }

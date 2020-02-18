@@ -123,7 +123,7 @@
       </div>
       <button
         class="btn btn-default btn-block"
-        :class="{ pressed: showDropDown }"
+        :class="{ toggled: showDropDown }"
       >
         {{ $t('user_card.admin_menu.moderation') }}
       </button>

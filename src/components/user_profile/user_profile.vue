@@ -22,13 +22,13 @@
         >
           <!-- eslint-disable vue/no-v-html -->
           <dt
-            :title="user.fields[index].name"
+            :title="user.fields_text[index].name"
             class="user-profile-field-name"
             @click.prevent="linkClicked"
             v-html="field.name"
           />
           <dd
-            :title="user.fields[index].value"
+            :title="user.fields_text[index].value"
             class="user-profile-field-value"
             @click.prevent="linkClicked"
             v-html="field.value"

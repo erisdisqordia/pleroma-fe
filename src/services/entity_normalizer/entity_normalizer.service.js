@@ -53,6 +53,12 @@ export const parseUser = (data) => {
         value: addEmojis(field.value, data.emojis)
       }
     })
+    output.fields_text = data.fields.map(field => {
+      return {
+        name: field.name.replace(/<[^>]*>/g, ''),
+        value: field.value.replace(/<[^>]*>/g, '')
+      }
+    })
 
     // Utilize avatar_static for gif avatars?
     output.profile_image_url = data.avatar

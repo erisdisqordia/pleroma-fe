@@ -286,6 +286,7 @@
     mask-size: 100% 60%;
     border-top-left-radius: calc(var(--panelRadius) - 1px);
     border-top-right-radius: calc(var(--panelRadius) - 1px);
+    background-color: var(--profileBg);
 
     &.hide-bio {
       mask-size: 100% 40px;

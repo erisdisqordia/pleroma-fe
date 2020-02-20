@@ -8,6 +8,7 @@ export const LAYERS = {
   undelay: null, // root
   topBar: null, // no transparency support
   badge: null, //  no transparency support
+  profileTint: null, // doesn't matter
   fg: null,
   bg: 'underlay',
   highlight: 'bg',
@@ -29,6 +30,7 @@ export const LAYERS = {
  * this allows redefining it to something else
  */
 export const DEFAULT_OPACITY = {
+  profileTint: 0.5,
   alert: 0.5,
   input: 0.5,
   faint: 0.5,
@@ -118,6 +120,20 @@ export const SLOT_INHERITANCE = {
   cRed: '#FF0000',
   cGreen: '#00FF00',
   cOrange: '#E3FF00',
+
+  profileBg: {
+    depends: ['bg'],
+    color: (mod, bg) => ({
+      r: Math.floor(bg.r * 0.53),
+      g: Math.floor(bg.g * 0.56),
+      b: Math.floor(bg.b * 0.59)
+    })
+  },
+  profileTint: {
+    depends: ['bg'],
+    layer: 'profileTint',
+    opacity: 'profileTint'
+  },
 
   highlight: {
     depends: ['bg'],

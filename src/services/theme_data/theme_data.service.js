@@ -351,7 +351,8 @@ export const getColors = (sourceColors, sourceOpacity) => SLOT_ORDERED.reduce(({
     throw new Error('Couldn\'t generate color for ' + key)
   }
   const opacitySlot = getOpacitySlot(key)
-  if (opacitySlot && outputColor.a === undefined) {
+  const ownOpacitySlot = value.opacity
+  if (opacitySlot && (outputColor.a === undefined || ownOpacitySlot)) {
     const dependencySlot = deps[0]
     if (dependencySlot && colors[dependencySlot] === 'transparent') {
       outputColor.a = 0

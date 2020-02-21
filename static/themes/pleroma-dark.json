@@ -527,7 +527,7 @@
       "border": "#1b232d",
       "topBarText": "--text,-9.75",
       "topBarLink": "--topBarText",
-      "btnToggled": "#c08f60",
+      "btnToggled": "--accent,-24.2",
       "alertErrorText": "--text,21.2",
       "badgeNotification": "#e15932",
       "badgeNotificationText": "#ffffff"

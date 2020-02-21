@@ -524,7 +524,7 @@
       "cRed": "#d31014",
       "cGreen": "#5dc94a",
       "cOrange": "#ffc459",
-      "border": "#1b232d",
+      "border": "--fg,3",
       "topBarText": "--text,-9.75",
       "topBarLink": "--topBarText",
       "btnToggled": "--accent,-24.2",

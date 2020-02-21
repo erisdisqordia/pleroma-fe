@@ -528,7 +528,7 @@
       "topBarText": "#a0a5aa",
       "topBarLink": "#A0A5AA",
       "btnToggled": "#c08f60",
-      "alertErrorText": "#f0f0f0",
+      "alertErrorText": "--text,21.2",
       "badgeNotification": "#e15932",
       "badgeNotificationText": "#ffffff"
     },

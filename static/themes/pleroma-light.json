@@ -554,8 +554,8 @@
       "cOrange": "#ffa500",
       "border": "#d8e6f9",
       "topBarText": "#304055",
-      "topBarLink": "#304055",
-      "btnToggled": "#db9d77",
+      "topBarLink": "--topBarText",
+      "btnToggled": "--accent,-24.2",
       "input": "#dee3ed",
       "badgeNotification": "#e83802"
     },

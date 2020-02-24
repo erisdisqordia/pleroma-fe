@@ -188,23 +188,22 @@ const Status = {
       }
       return this.status.attentions.length > 0
     },
+
+    // When a status has a subject and is also tall, we should only have one show more/less button. If the default is to collapse statuses with subjects, we just treat it like a status with a subject; otherwise, we just treat it like a tall status.
+    mightHideBecauseSubject () {
+      return this.status.summary && (!this.tallStatus || this.localCollapseSubjectDefault)
+    },
+    mightHideBecauseTall () {
+      return this.tallStatus && (!this.status.summary || !this.localCollapseSubjectDefault)
+    },
     hideSubjectStatus () {
-      if (this.tallStatus && !this.localCollapseSubjectDefault) {
-        return false
-      }
-      return !this.expandingSubject && this.status.summary
+      return this.mightHideBecauseSubject && !this.expandingSubject
     },
     hideTallStatus () {
-      if (this.status.summary && this.localCollapseSubjectDefault) {
-        return false
-      }
-      if (this.showingTall) {
-        return false
-      }
-      return this.tallStatus
+      return this.mightHideBecauseTall && !this.showingTall
     },
     showingMore () {
-      return (this.tallStatus && this.showingTall) || (this.status.summary && this.expandingSubject)
+      return (this.mightHideBecauseTall && this.showingTall) || (this.mightHideBecauseSubject && this.expandingSubject)
     },
     nsfwClickthrough () {
       if (!this.status.nsfw) {
@@ -408,14 +407,10 @@ const Status = {
       this.userExpanded = !this.userExpanded
     },
     toggleShowMore () {
-      if (this.showingTall) {
-        this.showingTall = false
-      } else if (this.expandingSubject && this.status.summary) {
-        this.expandingSubject = false
-      } else if (this.hideTallStatus) {
-        this.showingTall = true
-      } else if (this.hideSubjectStatus && this.status.summary) {
-        this.expandingSubject = true
+      if (this.mightHideBecauseTall) {
+        this.showingTall = !this.showingTall
+      } else if (this.mightHideBecauseSubject) {
+        this.expandingSubject = !this.expandingSubject
       }
     },
     generateUserProfileLink (id, name) {

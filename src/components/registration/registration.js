@@ -1,5 +1,5 @@
 import { validationMixin } from 'vuelidate'
-import { required, sameAs } from 'vuelidate/lib/validators'
+import { required, requiredIf, sameAs } from 'vuelidate/lib/validators'
 import { mapActions, mapState } from 'vuex'
 
 const registration = {
@@ -16,7 +16,7 @@ const registration = {
   }),
   validations: {
     user: {
-      email: { required },
+      email: requiredIf('accountActivationRequired'),
       username: { required },
       fullname: { required },
       password: { required },
@@ -24,6 +24,11 @@ const registration = {
         required,
         sameAsPassword: sameAs('password')
       }
+    },
+    nested: {
+      required: requiredIf(function (nestedModel) {
+        return this.accountActivationRequired
+      })
     }
   },
   created () {

@@ -24,11 +24,6 @@ const registration = {
         required,
         sameAsPassword: sameAs('password')
       }
-    },
-    nested: {
-      required: requiredIf(function (nestedModel) {
-        return this.accountActivationRequired
-      })
     }
   },
   created () {

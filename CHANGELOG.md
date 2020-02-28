@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Registration fixed
 - Deactivation of remote accounts from frontend
 - Fixed NSFW unhiding not working with videos when using one-click unhiding/displaying
+- Improved performance of anything that uses popovers (most notably statuses)
 
 ## [1.1.7 and earlier] - 2019-12-14
 ### Added

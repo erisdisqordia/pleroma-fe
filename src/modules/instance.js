@@ -163,7 +163,7 @@ const instance = {
 
           // New theme presets don't have 'theme' property, they use 'source'
           const themeSource = themeData.source
-          if (themeSource && themeSource.themeEngineVersion === CURRENT_VERSION) {
+          if (!themeData.theme || (themeSource && themeSource.themeEngineVersion === CURRENT_VERSION)) {
             applyTheme(themeSource)
           } else {
             applyTheme(themeData.theme)

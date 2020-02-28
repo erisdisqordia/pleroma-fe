@@ -1,15 +1,14 @@
 <template>
   <div class="emoji-reactions">
-    <v-popover
+    <Popover
       v-for="(reaction) in emojiReactions"
       :key="reaction.name"
-      :popper-options="popperOptions"
       trigger="hover"
       placement="top"
+      :offset="{ y: 5 }"
     >
-
       <div
-        slot="popover"
+        slot="content"
         class="reacted-users"
       >
         <div v-if="accountsForEmoji[reaction.name].length">
@@ -24,7 +23,12 @@
               :compact="true"
             />
             <div class="reacted-user-names">
-              <span class="reacted-user-name" v-html="account.name_html" />
+              <!-- eslint-disable vue/no-v-html -->
+              <span
+                class="reacted-user-name"
+                v-html="account.name_html"
+              />
+              <!-- eslint-enable vue/no-v-html -->
               <span class="reacted-user-screen-name">{{ account.screen_name }}</span>
             </div>
           </div>
@@ -34,6 +38,7 @@
         </div>
       </div>
       <button
+        slot="trigger"
         class="emoji-reaction btn btn-default"
         :class="{ 'picked-reaction': reactedWith(reaction.name), 'not-clickable': !loggedIn }"
         @click="emojiOnClick(reaction.name, $event)"
@@ -42,17 +47,16 @@
         <span class="reaction-emoji">{{ reaction.name }}</span>
         <span>{{ reaction.count }}</span>
       </button>
-    </v-popover>
+    </Popover>
     <a
-        v-if="tooManyReactions"
-        @click="toggleShowAll"
-        class="emoji-reaction-expand faint"
-        href='javascript:void(0)'
-      >
-        {{ showAll ? $t('general.show_less') : showMoreString }}
-      </a>
+      v-if="tooManyReactions"
+      class="emoji-reaction-expand faint"
+      href="javascript:void(0)"
+      @click="toggleShowAll"
+    >
+      {{ showAll ? $t('general.show_less') : showMoreString }}
+    </a>
   </div>
-
 </template>
 
 <script src="./emoji_reactions.js" ></script>
@@ -78,6 +82,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 0.5em;
+    min-width: 5em;
 
     img {
       width: 1em;

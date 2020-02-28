@@ -1,20 +1,17 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
+import Popover from '../popover/popover.vue'
 
 const EMOJI_REACTION_COUNT_CUTOFF = 12
 
 const EmojiReactions = {
   name: 'EmojiReactions',
   components: {
-    UserAvatar
+    UserAvatar,
+    Popover
   },
   props: ['status'],
   data: () => ({
-    showAll: false,
-    popperOptions: {
-      modifiers: {
-        preventOverflow: { padding: { top: 50 }, boundariesElement: 'viewport' }
-      }
-    }
+    showAll: false
   }),
   computed: {
     tooManyReactions () {

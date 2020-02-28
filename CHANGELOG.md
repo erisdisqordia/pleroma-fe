@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+
+## [2.0.0] - 2019-02-28
 ### Added
 - Tons of color slots including ones for hover/pressed/toggled buttons
 - Experimental `--variable[,mod]` syntax support for color slots in themes. the `mod` makes color brighter/darker depending on background color (makes darker color brighter/darker depending on background color)
@@ -16,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Emoji reactions for statuses
 - MRF keyword policy disclosure
 ### Changed
+- Updated Pleroma default themes
 - theme engine update to 3 (themes v2.1 introduction)
 - massive internal changes in theme engine - slowly away from "generate things separately with spaghetti code" towards "feed all data into single 'generateTheme' function and declare slot inheritance and all in a separate file"
 - Breezy theme updates to make it closer to actual Breeze in some aspects

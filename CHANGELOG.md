@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-## [2.0.0] - 2019-02-28
+## [2.0.0] - 2020-02-28
 ### Added
 - Tons of color slots including ones for hover/pressed/toggled buttons
 - Experimental `--variable[,mod]` syntax support for color slots in themes. the `mod` makes color brighter/darker depending on background color (makes darker color brighter/darker depending on background color)

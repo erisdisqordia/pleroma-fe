@@ -1,5 +1,6 @@
 import { set } from 'vue'
-import { setPreset } from '../services/style_setter/style_setter.js'
+import { getPreset, applyTheme } from '../services/style_setter/style_setter.js'
+import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { instanceDefaultProperties } from './config.js'
 
 const defaultState = {
@@ -10,6 +11,7 @@ const defaultState = {
   textlimit: 5000,
   server: 'http://localhost:4040/',
   theme: 'pleroma-dark',
+  themeData: undefined,
   background: '/static/aurora_borealis.jpg',
   logo: '/static/logo.png',
   logoMask: true,
@@ -96,6 +98,9 @@ const instance = {
             dispatch('initializeSocket')
           }
           break
+        case 'theme':
+          dispatch('setTheme', value)
+          break
       }
     },
     async getStaticEmoji ({ commit }) {
@@ -147,9 +152,23 @@ const instance = {
       }
     },
 
-    setTheme ({ commit }, themeName) {
+    setTheme ({ commit, rootState }, themeName) {
       commit('setInstanceOption', { name: 'theme', value: themeName })
-      return setPreset(themeName, commit)
+      getPreset(themeName)
+        .then(themeData => {
+          commit('setInstanceOption', { name: 'themeData', value: themeData })
+          // No need to apply theme if there's user theme already
+          const { customTheme } = rootState.config
+          if (customTheme) return
+
+          // New theme presets don't have 'theme' property, they use 'source'
+          const themeSource = themeData.source
+          if (!themeData.theme || (themeSource && themeSource.themeEngineVersion === CURRENT_VERSION)) {
+            applyTheme(themeSource)
+          } else {
+            applyTheme(themeData.theme)
+          }
+        })
     },
     fetchEmoji ({ dispatch, state }) {
       if (!state.customEmojiFetched) {

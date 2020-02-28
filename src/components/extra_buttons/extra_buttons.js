@@ -1,5 +1,8 @@
+import Popover from '../popover/popover.vue'
+
 const ExtraButtons = {
   props: [ 'status' ],
+  components: { Popover },
   methods: {
     deleteStatus () {
       const confirmed = window.confirm(this.$t('status.delete_confirm'))

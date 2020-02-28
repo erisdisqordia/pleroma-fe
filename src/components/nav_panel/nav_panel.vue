@@ -33,7 +33,7 @@
             <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
           </router-link>
         </li>
-        <li v-if="federating && !privateMode">
+        <li v-if="federating && (currentUser || !privateMode)">
           <router-link :to="{ name: 'public-external-timeline' }">
             <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
           </router-link>
@@ -100,13 +100,25 @@
 
   &:hover {
     background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
+    background-color: var(--selectedMenu, $fallback--lightBg);
+    color: $fallback--link;
+    color: var(--selectedMenuText, $fallback--link);
+    --faint: var(--selectedMenuFaintText, $fallback--faint);
+    --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
+    --lightText: var(--selectedMenuLightText, $fallback--lightText);
+    --icon: var(--selectedMenuIcon, $fallback--icon);
   }
 
   &.router-link-active {
     font-weight: bolder;
     background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
+    background-color: var(--selectedMenu, $fallback--lightBg);
+    color: $fallback--text;
+    color: var(--selectedMenuText, $fallback--text);
+    --faint: var(--selectedMenuFaintText, $fallback--faint);
+    --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
+    --lightText: var(--selectedMenuLightText, $fallback--lightText);
+    --icon: var(--selectedMenuIcon, $fallback--icon);
 
     &:hover {
       text-decoration: underline;

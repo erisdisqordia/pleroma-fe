@@ -68,6 +68,9 @@
         a {
           color: var(--faintLink);
         }
+        .status-content a {
+          color: var(--postFaintLink);
+        }
       }
       padding: 0;
       .media-body {
@@ -92,6 +95,10 @@
     flex: 1;
     padding-left: 0.8em;
     min-width: 0;
+  }
+
+  .emoji-reaction-emoji {
+    font-size: 16px;
   }
 
   .notification-details {

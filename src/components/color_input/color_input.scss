@@ -1,0 +1,68 @@
+@import '../../_variables.scss';
+
+.color-input {
+  display: inline-flex;
+
+  &-field.input {
+    display: inline-flex;
+    flex: 0 0 0;
+    max-width: 9em;
+    align-items: stretch;
+    padding: .2em 8px;
+
+    input {
+      background: none;
+      color: $fallback--lightText;
+      color: var(--inputText, $fallback--lightText);
+      border: none;
+      padding: 0;
+      margin: 0;
+
+      &.textColor {
+        flex: 1 0 3em;
+        min-width: 3em;
+        padding: 0;
+      }
+
+      &.nativeColor {
+        flex: 0 0 2em;
+        min-width: 2em;
+        align-self: center;
+        height: 100%;
+      }
+    }
+    .computedIndicator,
+    .transparentIndicator {
+      flex: 0 0 2em;
+      min-width: 2em;
+      align-self: center;
+      height: 100%;
+    }
+    .transparentIndicator {
+      // forgot to install counter-strike source, ooops
+      background-color: #FF00FF;
+      position: relative;
+      &::before, &::after {
+        display: block;
+        content: '';
+        background-color: #000000;
+        position: absolute;
+        height: 50%;
+        width: 50%;
+      }
+      &::after {
+        top: 0;
+        left: 0;
+      }
+      &::before {
+        bottom: 0;
+        right: 0;
+      }
+    }
+  }
+
+  .label {
+    flex: 1 1 auto;
+  }
+
+}

@@ -177,6 +177,8 @@
                 <StatusPopover
                   v-if="!isPreview"
                   :status-id="status.in_reply_to_status_id"
+                  class="reply-to-popover"
+                  style="min-width: 0"
                 >
                   <a
                     class="reply-to"
@@ -277,7 +279,21 @@
               href="#"
               class="cw-status-hider"
               @click.prevent="toggleShowMore"
-            >{{ $t("general.show_more") }}</a>
+            >
+              {{ $t("general.show_more") }}
+              <span
+                v-if="hasImageAttachments"
+                class="icon-picture"
+              />
+              <span
+                v-if="hasVideoAttachments"
+                class="icon-video"
+              />
+              <span
+                v-if="status.card"
+                class="icon-link"
+              />
+            </a>
             <a
               v-if="showingMore"
               href="#"
@@ -354,6 +370,11 @@
             </div>
           </transition>
 
+          <EmojiReactions
+            v-if="(mergedConfig.emojiReactionsOnTimeline || isFocused) && (!noHeading && !isPreview)"
+            :status="status"
+          />
+
           <div
             v-if="!noHeading && !isPreview"
             class="status-actions media-body"
@@ -379,6 +400,10 @@
               :status="status"
             />
             <favorite-button
+              :logged-in="loggedIn"
+              :status="status"
+            />
+            <ReactButton
               :logged-in="loggedIn"
               :status="status"
             />
@@ -445,7 +470,15 @@ $status-margin: 0.75em;
 
   &_focused {
     background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
+    background-color: var(--selectedPost, $fallback--lightBg);
+    color: $fallback--text;
+    color: var(--selectedPostText, $fallback--text);
+    --lightText: var(--selectedPostLightText, $fallback--light);
+    --faint: var(--selectedPostFaintText, $fallback--faint);
+    --faintLink: var(--selectedPostFaintLink, $fallback--faint);
+    --postLink: var(--selectedPostPostLink, $fallback--faint);
+    --postFaintLink: var(--selectedPostFaintPostLink, $fallback--faint);
+    --icon: var(--selectedPostIcon, $fallback--icon);
   }
 
   .timeline & {
@@ -541,11 +574,10 @@ $status-margin: 0.75em;
       align-items: stretch;
 
       > .reply-to-and-accountname > a {
+        overflow: hidden;
         max-width: 100%;
         text-overflow: ellipsis;
-        overflow: hidden;
         white-space: nowrap;
-        display: inline-block;
         word-break: break-all;
       }
     }
@@ -554,7 +586,6 @@ $status-margin: 0.75em;
       display: flex;
       height: 18px;
       margin-right: 0.5em;
-      overflow: hidden;
       max-width: 100%;
       .icon-reply {
         transform: scaleX(-1);
@@ -565,6 +596,10 @@ $status-margin: 0.75em;
       display: flex;
     }
 
+    .reply-to-popover {
+      min-width: 0;
+    }
+
     .reply-to {
       display: flex;
     }
@@ -572,9 +607,8 @@ $status-margin: 0.75em;
     .reply-to-text {
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
       margin: 0 0.4em 0 0.2em;
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
     }
 
     .replies-separator {
@@ -635,6 +669,11 @@ $status-margin: 0.75em;
     font-family: var(--postFont, sans-serif);
     line-height: 1.4em;
     white-space: pre-wrap;
+
+    a {
+      color: $fallback--link;
+      color: var(--postLink, $fallback--link);
+    }
 
     img, video {
       max-width: 100%;

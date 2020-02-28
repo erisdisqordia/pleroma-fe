@@ -36,7 +36,8 @@ describe('EmojiInput', () => {
       input.setValue(initialString)
       wrapper.setData({ caret: initialString.length })
       wrapper.vm.insert({ insertion: '(test)', keepOpen: false })
-      expect(wrapper.emitted().input[0][0]).to.eql('Testing (test) ')
+      const inputEvents = wrapper.emitted().input
+      expect(inputEvents[inputEvents.length - 1][0]).to.eql('Testing (test) ')
     })
 
     it('inserts string at the end with trailing space (source has a trailing space)', () => {
@@ -46,7 +47,8 @@ describe('EmojiInput', () => {
       input.setValue(initialString)
       wrapper.setData({ caret: initialString.length })
       wrapper.vm.insert({ insertion: '(test)', keepOpen: false })
-      expect(wrapper.emitted().input[0][0]).to.eql('Testing (test) ')
+      const inputEvents = wrapper.emitted().input
+      expect(inputEvents[inputEvents.length - 1][0]).to.eql('Testing (test) ')
     })
 
     it('inserts string at the begginning without leading space', () => {
@@ -56,7 +58,8 @@ describe('EmojiInput', () => {
       input.setValue(initialString)
       wrapper.setData({ caret: 0 })
       wrapper.vm.insert({ insertion: '(test)', keepOpen: false })
-      expect(wrapper.emitted().input[0][0]).to.eql('(test) Testing')
+      const inputEvents = wrapper.emitted().input
+      expect(inputEvents[inputEvents.length - 1][0]).to.eql('(test) Testing')
     })
 
     it('inserts string between words without creating extra spaces', () => {
@@ -66,7 +69,8 @@ describe('EmojiInput', () => {
       input.setValue(initialString)
       wrapper.setData({ caret: 6 })
       wrapper.vm.insert({ insertion: ':ebin:', keepOpen: false })
-      expect(wrapper.emitted().input[0][0]).to.eql('Spurdo :ebin: Sparde')
+      const inputEvents = wrapper.emitted().input
+      expect(inputEvents[inputEvents.length - 1][0]).to.eql('Spurdo :ebin: Sparde')
     })
 
     it('inserts string between words without creating extra spaces (other caret)', () => {
@@ -76,7 +80,8 @@ describe('EmojiInput', () => {
       input.setValue(initialString)
       wrapper.setData({ caret: 7 })
       wrapper.vm.insert({ insertion: ':ebin:', keepOpen: false })
-      expect(wrapper.emitted().input[0][0]).to.eql('Spurdo :ebin: Sparde')
+      const inputEvents = wrapper.emitted().input
+      expect(inputEvents[inputEvents.length - 1][0]).to.eql('Spurdo :ebin: Sparde')
     })
 
     it('inserts string without any padding if padEmoji setting is set to false', () => {
@@ -86,7 +91,8 @@ describe('EmojiInput', () => {
       input.setValue(initialString)
       wrapper.setData({ caret: initialString.length, keepOpen: false })
       wrapper.vm.insert({ insertion: ':spam:' })
-      expect(wrapper.emitted().input[0][0]).to.eql('Eat some spam!:spam:')
+      const inputEvents = wrapper.emitted().input
+      expect(inputEvents[inputEvents.length - 1][0]).to.eql('Eat some spam!:spam:')
     })
 
     it('correctly sets caret after insertion at beginning', (done) => {

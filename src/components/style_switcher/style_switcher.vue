@@ -2,7 +2,53 @@
   <div class="style-switcher">
     <div class="presets-container">
       <div class="save-load">
-        <export-import
+        <div
+          v-if="themeWarning"
+          class="theme-warning"
+        >
+          <div class="alert warning">
+            {{ themeWarningHelp }}
+          </div>
+          <div class="buttons">
+            <template v-if="themeWarning.type === 'snapshot_source_mismatch'">
+              <button
+                class="btn"
+                @click="forceLoad"
+              >
+                {{ $t('settings.style.switcher.use_source') }}
+              </button>
+              <button
+                class="btn"
+                @click="forceSnapshot"
+              >
+                {{ $t('settings.style.switcher.use_snapshot') }}
+              </button>
+            </template>
+            <template v-else-if="themeWarning.noActionsPossible">
+              <button
+                class="btn"
+                @click="dismissWarning"
+              >
+                {{ $t('general.dismiss') }}
+              </button>
+            </template>
+            <template v-else>
+              <button
+                class="btn"
+                @click="forceLoad"
+              >
+                {{ $t('settings.style.switcher.load_theme') }}
+              </button>
+              <button
+                class="btn"
+                @click="dismissWarning"
+              >
+                {{ $t('settings.style.switcher.keep_as_is') }}
+              </button>
+            </template>
+          </div>
+        </div>
+        <ExportImport
           :export-object="exportedTheme"
           :export-label="$t(&quot;settings.export_theme&quot;)"
           :import-label="$t(&quot;settings.import_theme&quot;)"
@@ -27,8 +73,8 @@
                     :key="style.name"
                     :value="style"
                     :style="{
-                      backgroundColor: style[1] || style.theme.colors.bg,
-                      color: style[3] || style.theme.colors.text
+                      backgroundColor: style[1] || (style.theme || style.source).colors.bg,
+                      color: style[3] || (style.theme || style.source).colors.text
                     }"
                   >
                     {{ style[0] || style.name }}
@@ -38,7 +84,7 @@
               </label>
             </div>
           </template>
-        </export-import>
+        </ExportImport>
       </div>
       <div class="save-load-options">
         <span class="keep-option">
@@ -70,9 +116,7 @@
       </div>
     </div>
 
-    <div class="preview-container">
-      <preview :style="previewRules" />
-    </div>
+    <preview :style="previewRules" />
 
     <keep-alive>
       <tab-switcher key="style-tweak">
@@ -106,7 +150,7 @@
             <OpacityInput
               v-model="bgOpacityLocal"
               name="bgOpacity"
-              :fallback="previewTheme.opacity.bg || 1"
+              :fallback="previewTheme.opacity.bg"
             />
             <ColorInput
               v-model="textColorLocal"
@@ -115,9 +159,18 @@
             />
             <ContrastRatio :contrast="previewContrast.bgText" />
             <ColorInput
+              v-model="accentColorLocal"
+              name="accentColor"
+              :fallback="previewTheme.colors.link"
+              :label="$t('settings.accent')"
+              :show-optional-tickbox="typeof linkColorLocal !== 'undefined'"
+            />
+            <ColorInput
               v-model="linkColorLocal"
               name="linkColor"
+              :fallback="previewTheme.colors.accent"
               :label="$t('settings.links')"
+              :show-optional-tickbox="typeof accentColorLocal !== 'undefined'"
             />
             <ContrastRatio :contrast="previewContrast.bgLink" />
           </div>
@@ -148,13 +201,13 @@
               name="cRedColor"
               :label="$t('settings.cRed')"
             />
-            <ContrastRatio :contrast="previewContrast.bgRed" />
+            <ContrastRatio :contrast="previewContrast.bgCRed" />
             <ColorInput
               v-model="cBlueColorLocal"
               name="cBlueColor"
               :label="$t('settings.cBlue')"
             />
-            <ContrastRatio :contrast="previewContrast.bgBlue" />
+            <ContrastRatio :contrast="previewContrast.bgCBlue" />
           </div>
           <div class="color-item">
             <ColorInput
@@ -162,13 +215,13 @@
               name="cGreenColor"
               :label="$t('settings.cGreen')"
             />
-            <ContrastRatio :contrast="previewContrast.bgGreen" />
+            <ContrastRatio :contrast="previewContrast.bgCGreen" />
             <ColorInput
               v-model="cOrangeColorLocal"
               name="cOrangeColor"
               :label="$t('settings.cOrange')"
             />
-            <ContrastRatio :contrast="previewContrast.bgOrange" />
+            <ContrastRatio :contrast="previewContrast.bgCOrange" />
           </div>
           <p>{{ $t('settings.theme_help_v2_2') }}</p>
         </div>
@@ -193,6 +246,14 @@
             </button>
           </div>
           <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.post') }}</h4>
+            <ColorInput
+              v-model="postLinkColorLocal"
+              name="postLinkColor"
+              :fallback="previewTheme.colors.accent"
+              :label="$t('settings.links')"
+            />
+            <ContrastRatio :contrast="previewContrast.postLink" />
             <h4>{{ $t('settings.style.advanced_colors.alert') }}</h4>
             <ColorInput
               v-model="alertErrorColorLocal"
@@ -200,14 +261,53 @@
               :label="$t('settings.style.advanced_colors.alert_error')"
               :fallback="previewTheme.colors.alertError"
             />
-            <ContrastRatio :contrast="previewContrast.alertError" />
+            <ColorInput
+              v-model="alertErrorTextColorLocal"
+              name="alertErrorText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.alertErrorText"
+            />
+            <ContrastRatio
+              :contrast="previewContrast.alertErrorText"
+              large="true"
+            />
             <ColorInput
               v-model="alertWarningColorLocal"
               name="alertWarning"
               :label="$t('settings.style.advanced_colors.alert_warning')"
               :fallback="previewTheme.colors.alertWarning"
             />
-            <ContrastRatio :contrast="previewContrast.alertWarning" />
+            <ColorInput
+              v-model="alertWarningTextColorLocal"
+              name="alertWarningText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.alertWarningText"
+            />
+            <ContrastRatio
+              :contrast="previewContrast.alertWarningText"
+              large="true"
+            />
+            <ColorInput
+              v-model="alertNeutralColorLocal"
+              name="alertNeutral"
+              :label="$t('settings.style.advanced_colors.alert_neutral')"
+              :fallback="previewTheme.colors.alertNeutral"
+            />
+            <ColorInput
+              v-model="alertNeutralTextColorLocal"
+              name="alertNeutralText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.alertNeutralText"
+            />
+            <ContrastRatio
+              :contrast="previewContrast.alertNeutralText"
+              large="true"
+            />
+            <OpacityInput
+              v-model="alertOpacityLocal"
+              name="alertOpacity"
+              :fallback="previewTheme.opacity.alert"
+            />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.badge') }}</h4>
@@ -217,19 +317,30 @@
               :label="$t('settings.style.advanced_colors.badge_notification')"
               :fallback="previewTheme.colors.badgeNotification"
             />
+            <ColorInput
+              v-model="badgeNotificationTextColorLocal"
+              name="badgeNotificationText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.badgeNotificationText"
+            />
+            <ContrastRatio
+              :contrast="previewContrast.badgeNotificationText"
+              large="true"
+            />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.panel_header') }}</h4>
             <ColorInput
               v-model="panelColorLocal"
               name="panelColor"
-              :fallback="fgColorLocal"
+              :fallback="previewTheme.colors.panel"
               :label="$t('settings.background')"
             />
             <OpacityInput
               v-model="panelOpacityLocal"
               name="panelOpacity"
-              :fallback="previewTheme.opacity.panel || 1"
+              :fallback="previewTheme.opacity.panel"
+              :disabled="panelColorLocal === 'transparent'"
             />
             <ColorInput
               v-model="panelTextColorLocal"
@@ -239,7 +350,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.panelText"
-              large="1"
+              large="true"
             />
             <ColorInput
               v-model="panelLinkColorLocal"
@@ -249,7 +360,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.panelLink"
-              large="1"
+              large="true"
             />
           </div>
           <div class="color-item">
@@ -257,7 +368,7 @@
             <ColorInput
               v-model="topBarColorLocal"
               name="topBarColor"
-              :fallback="fgColorLocal"
+              :fallback="previewTheme.colors.topBar"
               :label="$t('settings.background')"
             />
             <ColorInput
@@ -280,13 +391,14 @@
             <ColorInput
               v-model="inputColorLocal"
               name="inputColor"
-              :fallback="fgColorLocal"
+              :fallback="previewTheme.colors.input"
               :label="$t('settings.background')"
             />
             <OpacityInput
               v-model="inputOpacityLocal"
               name="inputOpacity"
-              :fallback="previewTheme.opacity.input || 1"
+              :fallback="previewTheme.opacity.input"
+              :disabled="inputColorLocal === 'transparent'"
             />
             <ColorInput
               v-model="inputTextColorLocal"
@@ -301,13 +413,14 @@
             <ColorInput
               v-model="btnColorLocal"
               name="btnColor"
-              :fallback="fgColorLocal"
+              :fallback="previewTheme.colors.btn"
               :label="$t('settings.background')"
             />
             <OpacityInput
               v-model="btnOpacityLocal"
               name="btnOpacity"
-              :fallback="previewTheme.opacity.btn || 1"
+              :fallback="previewTheme.opacity.btn"
+              :disabled="btnColorLocal === 'transparent'"
             />
             <ColorInput
               v-model="btnTextColorLocal"
@@ -316,6 +429,124 @@
               :label="$t('settings.text')"
             />
             <ContrastRatio :contrast="previewContrast.btnText" />
+            <ColorInput
+              v-model="btnPanelTextColorLocal"
+              name="btnPanelTextColor"
+              :fallback="previewTheme.colors.btnPanelText"
+              :label="$t('settings.style.advanced_colors.panel_header')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnPanelText" />
+            <ColorInput
+              v-model="btnTopBarTextColorLocal"
+              name="btnTopBarTextColor"
+              :fallback="previewTheme.colors.btnTopBarText"
+              :label="$t('settings.style.advanced_colors.top_bar')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnTopBarText" />
+            <h5>{{ $t('settings.style.advanced_colors.pressed') }}</h5>
+            <ColorInput
+              v-model="btnPressedColorLocal"
+              name="btnPressedColor"
+              :fallback="previewTheme.colors.btnPressed"
+              :label="$t('settings.background')"
+            />
+            <ColorInput
+              v-model="btnPressedTextColorLocal"
+              name="btnPressedTextColor"
+              :fallback="previewTheme.colors.btnPressedText"
+              :label="$t('settings.text')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnPressedText" />
+            <ColorInput
+              v-model="btnPressedPanelTextColorLocal"
+              name="btnPressedPanelTextColor"
+              :fallback="previewTheme.colors.btnPressedPanelText"
+              :label="$t('settings.style.advanced_colors.panel_header')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnPressedPanelText" />
+            <ColorInput
+              v-model="btnPressedTopBarTextColorLocal"
+              name="btnPressedTopBarTextColor"
+              :fallback="previewTheme.colors.btnPressedTopBarText"
+              :label="$t('settings.style.advanced_colors.top_bar')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnPressedTopBarText" />
+            <h5>{{ $t('settings.style.advanced_colors.disabled') }}</h5>
+            <ColorInput
+              v-model="btnDisabledColorLocal"
+              name="btnDisabledColor"
+              :fallback="previewTheme.colors.btnDisabled"
+              :label="$t('settings.background')"
+            />
+            <ColorInput
+              v-model="btnDisabledTextColorLocal"
+              name="btnDisabledTextColor"
+              :fallback="previewTheme.colors.btnDisabledText"
+              :label="$t('settings.text')"
+            />
+            <ColorInput
+              v-model="btnDisabledPanelTextColorLocal"
+              name="btnDisabledPanelTextColor"
+              :fallback="previewTheme.colors.btnDisabledPanelText"
+              :label="$t('settings.style.advanced_colors.panel_header')"
+            />
+            <ColorInput
+              v-model="btnDisabledTopBarTextColorLocal"
+              name="btnDisabledTopBarTextColor"
+              :fallback="previewTheme.colors.btnDisabledTopBarText"
+              :label="$t('settings.style.advanced_colors.top_bar')"
+            />
+            <h5>{{ $t('settings.style.advanced_colors.toggled') }}</h5>
+            <ColorInput
+              v-model="btnToggledColorLocal"
+              name="btnToggledColor"
+              :fallback="previewTheme.colors.btnToggled"
+              :label="$t('settings.background')"
+            />
+            <ColorInput
+              v-model="btnToggledTextColorLocal"
+              name="btnToggledTextColor"
+              :fallback="previewTheme.colors.btnToggledText"
+              :label="$t('settings.text')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnToggledText" />
+            <ColorInput
+              v-model="btnToggledPanelTextColorLocal"
+              name="btnToggledPanelTextColor"
+              :fallback="previewTheme.colors.btnToggledPanelText"
+              :label="$t('settings.style.advanced_colors.panel_header')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnToggledPanelText" />
+            <ColorInput
+              v-model="btnToggledTopBarTextColorLocal"
+              name="btnToggledTopBarTextColor"
+              :fallback="previewTheme.colors.btnToggledTopBarText"
+              :label="$t('settings.style.advanced_colors.top_bar')"
+            />
+            <ContrastRatio :contrast="previewContrast.btnToggledTopBarText" />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.tabs') }}</h4>
+            <ColorInput
+              v-model="tabColorLocal"
+              name="tabColor"
+              :fallback="previewTheme.colors.tab"
+              :label="$t('settings.background')"
+            />
+            <ColorInput
+              v-model="tabTextColorLocal"
+              name="tabTextColor"
+              :fallback="previewTheme.colors.tabText"
+              :label="$t('settings.text')"
+            />
+            <ContrastRatio :contrast="previewContrast.tabText" />
+            <ColorInput
+              v-model="tabActiveTextColorLocal"
+              name="tabActiveTextColor"
+              :fallback="previewTheme.colors.tabActiveText"
+              :label="$t('settings.text')"
+            />
+            <ContrastRatio :contrast="previewContrast.tabActiveText" />
           </div>
           <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.borders') }}</h4>
@@ -328,7 +559,8 @@
             <OpacityInput
               v-model="borderOpacityLocal"
               name="borderOpacity"
-              :fallback="previewTheme.opacity.border || 1"
+              :fallback="previewTheme.opacity.border"
+              :disabled="borderColorLocal === 'transparent'"
             />
           </div>
           <div class="color-item">
@@ -336,7 +568,7 @@
             <ColorInput
               v-model="faintColorLocal"
               name="faintColor"
-              :fallback="previewTheme.colors.faint || 1"
+              :fallback="previewTheme.colors.faint"
               :label="$t('settings.text')"
             />
             <ColorInput
@@ -354,8 +586,145 @@
             <OpacityInput
               v-model="faintOpacityLocal"
               name="faintOpacity"
-              :fallback="previewTheme.opacity.faint || 0.5"
+              :fallback="previewTheme.opacity.faint"
             />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.underlay') }}</h4>
+            <ColorInput
+              v-model="underlayColorLocal"
+              name="underlay"
+              :label="$t('settings.style.advanced_colors.underlay')"
+              :fallback="previewTheme.colors.underlay"
+            />
+            <OpacityInput
+              v-model="underlayOpacityLocal"
+              name="underlayOpacity"
+              :fallback="previewTheme.opacity.underlay"
+              :disabled="underlayOpacityLocal === 'transparent'"
+            />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.poll') }}</h4>
+            <ColorInput
+              v-model="pollColorLocal"
+              name="poll"
+              :label="$t('settings.background')"
+              :fallback="previewTheme.colors.poll"
+            />
+            <ColorInput
+              v-model="pollTextColorLocal"
+              name="pollText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.pollText"
+            />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.icons') }}</h4>
+            <ColorInput
+              v-model="iconColorLocal"
+              name="icon"
+              :label="$t('settings.style.advanced_colors.icons')"
+              :fallback="previewTheme.colors.icon"
+            />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.highlight') }}</h4>
+            <ColorInput
+              v-model="highlightColorLocal"
+              name="highlight"
+              :label="$t('settings.background')"
+              :fallback="previewTheme.colors.highlight"
+            />
+            <ColorInput
+              v-model="highlightTextColorLocal"
+              name="highlightText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.highlightText"
+            />
+            <ContrastRatio :contrast="previewContrast.highlightText" />
+            <ColorInput
+              v-model="highlightLinkColorLocal"
+              name="highlightLink"
+              :label="$t('settings.links')"
+              :fallback="previewTheme.colors.highlightLink"
+            />
+            <ContrastRatio :contrast="previewContrast.highlightLink" />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.popover') }}</h4>
+            <ColorInput
+              v-model="popoverColorLocal"
+              name="popover"
+              :label="$t('settings.background')"
+              :fallback="previewTheme.colors.popover"
+            />
+            <OpacityInput
+              v-model="popoverOpacityLocal"
+              name="popoverOpacity"
+              :fallback="previewTheme.opacity.popover"
+              :disabled="popoverOpacityLocal === 'transparent'"
+            />
+            <ColorInput
+              v-model="popoverTextColorLocal"
+              name="popoverText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.popoverText"
+            />
+            <ContrastRatio :contrast="previewContrast.popoverText" />
+            <ColorInput
+              v-model="popoverLinkColorLocal"
+              name="popoverLink"
+              :label="$t('settings.links')"
+              :fallback="previewTheme.colors.popoverLink"
+            />
+            <ContrastRatio :contrast="previewContrast.popoverLink" />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.selectedPost') }}</h4>
+            <ColorInput
+              v-model="selectedPostColorLocal"
+              name="selectedPost"
+              :label="$t('settings.background')"
+              :fallback="previewTheme.colors.selectedPost"
+            />
+            <ColorInput
+              v-model="selectedPostTextColorLocal"
+              name="selectedPostText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.selectedPostText"
+            />
+            <ContrastRatio :contrast="previewContrast.selectedPostText" />
+            <ColorInput
+              v-model="selectedPostLinkColorLocal"
+              name="selectedPostLink"
+              :label="$t('settings.links')"
+              :fallback="previewTheme.colors.selectedPostLink"
+            />
+            <ContrastRatio :contrast="previewContrast.selectedPostLink" />
+          </div>
+          <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.selectedMenu') }}</h4>
+            <ColorInput
+              v-model="selectedMenuColorLocal"
+              name="selectedMenu"
+              :label="$t('settings.background')"
+              :fallback="previewTheme.colors.selectedMenu"
+            />
+            <ColorInput
+              v-model="selectedMenuTextColorLocal"
+              name="selectedMenuText"
+              :label="$t('settings.text')"
+              :fallback="previewTheme.colors.selectedMenuText"
+            />
+            <ContrastRatio :contrast="previewContrast.selectedMenuText" />
+            <ColorInput
+              v-model="selectedMenuLinkColorLocal"
+              name="selectedMenuLink"
+              :label="$t('settings.links')"
+              :fallback="previewTheme.colors.selectedMenuLink"
+            />
+            <ContrastRatio :contrast="previewContrast.selectedMenuLink" />
           </div>
         </div>
 
@@ -491,7 +860,7 @@
               {{ $t('settings.style.switcher.clear_all') }}
             </button>
           </div>
-          <shadow-control
+          <ShadowControl
             v-model="currentShadow"
             :ready="!!currentShadowFallback"
             :fallback="currentShadowFallback"

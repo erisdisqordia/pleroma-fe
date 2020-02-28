@@ -12,7 +12,7 @@
     <input
       v-if="typeof fallback !== 'undefined'"
       :id="name + '-o'"
-      class="opt exclude-disabled"
+      class="opt"
       type="checkbox"
       :checked="present"
       @input="$emit('input', !present ? fallback : undefined)"

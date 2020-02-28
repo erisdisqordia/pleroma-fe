@@ -1,22 +1,26 @@
 {
   "about": {
-    "staff": "スタッフ",
-    "federation": "フェデレーション",
-    "mrf_policies": "ゆうこうなMRFポリシー",
-    "mrf_policies_desc": "MRFポリシーは、このインスタンスのフェデレーションのふるまいを、いじります。これらのMRFポリシーがゆうこうになっています:",
-    "mrf_policy_simple": "インスタンスのポリシー",
-    "mrf_policy_simple_accept": "うけいれ",
-    "mrf_policy_simple_accept_desc": "このインスンスは、これらのインスタンスからのメッセージのみをうけいれます:",
-    "mrf_policy_simple_reject": "おことわり",
-    "mrf_policy_simple_reject_desc": "このインスタンスは、これらのインスタンスからのメッセージをうけいれません:",
-    "mrf_policy_simple_quarantine": "けんえき",
-    "mrf_policy_simple_quarantine_desc": "このインスタンスは、これらのインスタンスに、パブリックなとうこうのみを、おくります:",
-    "mrf_policy_simple_ftl_removal": "「つながっているすべてのネットワーク」タイムラインからのぞく",
-    "mrf_policy_simple_ftl_removal_desc": "このインスタンスは、つながっているすべてのネットワーク」タイムラインから、これらのインスタンスを、とりのぞきます:",
-    "mrf_policy_simple_media_removal": "メディアをのぞく",
-    "mrf_policy_simple_media_removal_desc": "このインスタンスは、これらのインスタンスからおくられてきたメディアを、とりのぞきます:",
-    "mrf_policy_simple_media_nsfw": "メディアをすべてセンシティブにする",
-    "mrf_policy_simple_media_nsfw_desc": "このインスタンスは、これらのインスタンスからおくられてきたメディアを、すべて、センシティブにマークします:"
+    "mrf": {
+      "federation": "フェデレーション",
+      "mrf_policies": "ゆうこうなMRFポリシー",
+      "mrf_policies_desc": "MRFポリシーは、このインスタンスのフェデレーションのふるまいを、いじります。これらのMRFポリシーがゆうこうになっています:",
+      "simple": {
+        "simple_policies": "インスタンスのポリシー",
+        "accept": "うけいれ",
+        "accept_desc": "このインスンスは、これらのインスタンスからのメッセージのみをうけいれます:",
+        "reject": "おことわり",
+        "reject_desc": "このインスタンスは、これらのインスタンスからのメッセージをうけいれません:",
+        "quarantine": "けんえき",
+        "quarantine_desc": "このインスタンスは、これらのインスタンスに、パブリックなとうこうのみを、おくります:",
+        "ftl_removal": "「つながっているすべてのネットワーク」タイムラインからのぞく",
+        "ftl_removal_desc": "このインスタンスは、つながっているすべてのネットワーク」タイムラインから、これらのインスタンスを、とりのぞきます:",
+        "media_removal": "メディアをのぞく",
+        "media_removal_desc": "このインスタンスは、これらのインスタンスからおくられてきたメディアを、とりのぞきます:",
+        "media_nsfw": "メディアをすべてセンシティブにする",
+        "media_nsfw_desc": "このインスタンスは、これらのインスタンスからおくられてきたメディアを、すべて、センシティブにマークします:"
+      }
+    },
+    "staff": "スタッフ"
   },
   "chat": {
     "title": "チャット"

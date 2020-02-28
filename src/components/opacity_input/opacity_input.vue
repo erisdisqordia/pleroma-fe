@@ -9,18 +9,12 @@
     >
       {{ $t('settings.style.common.opacity') }}
     </label>
-    <input
+    <Checkbox
       v-if="typeof fallback !== 'undefined'"
-      :id="name + '-o'"
-      class="opt exclude-disabled"
-      type="checkbox"
       :checked="present"
-      @input="$emit('input', !present ? fallback : undefined)"
-    >
-    <label
-      v-if="typeof fallback !== 'undefined'"
-      class="opt-l"
-      :for="name + '-o'"
+      :disabled="disabled"
+      class="opt"
+      @change="$emit('input', !present ? fallback : undefined)"
     />
     <input
       :id="name"
@@ -37,7 +31,11 @@
 </template>
 
 <script>
+import Checkbox from '../checkbox/checkbox.vue'
 export default {
+  components: {
+    Checkbox
+  },
   props: [
     'name', 'value', 'fallback', 'disabled'
   ],

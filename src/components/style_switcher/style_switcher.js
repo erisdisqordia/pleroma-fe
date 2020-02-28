@@ -1,6 +1,29 @@
-import { rgb2hex, hex2rgb, getContrastRatio, alphaBlend } from '../../services/color_convert/color_convert.js'
 import { set, delete as del } from 'vue'
-import { generateColors, generateShadows, generateRadii, generateFonts, composePreset, getThemes } from '../../services/style_setter/style_setter.js'
+import {
+  rgb2hex,
+  hex2rgb,
+  getContrastRatioLayers
+} from '../../services/color_convert/color_convert.js'
+import {
+  DEFAULT_SHADOWS,
+  generateColors,
+  generateShadows,
+  generateRadii,
+  generateFonts,
+  composePreset,
+  getThemes,
+  shadows2to3,
+  colors2to3
+} from '../../services/style_setter/style_setter.js'
+import {
+  SLOT_INHERITANCE
+} from '../../services/theme_data/pleromafe.js'
+import {
+  CURRENT_VERSION,
+  OPACITIES,
+  getLayers,
+  getOpacitySlot
+} from '../../services/theme_data/theme_data.service.js'
 import ColorInput from '../color_input/color_input.vue'
 import RangeInput from '../range_input/range_input.vue'
 import OpacityInput from '../opacity_input/opacity_input.vue'
@@ -24,11 +47,22 @@ const v1OnlyNames = [
   'cOrange'
 ].map(_ => _ + 'ColorLocal')
 
+const colorConvert = (color) => {
+  if (color.startsWith('--') || color === 'transparent') {
+    return color
+  } else {
+    return hex2rgb(color)
+  }
+}
+
 export default {
   data () {
     return {
       availableStyles: [],
       selected: this.$store.getters.mergedConfig.theme,
+      themeWarning: undefined,
+      tempImportFile: undefined,
+      engineVersion: 0,
 
       previewShadows: {},
       previewColors: {},
@@ -45,51 +79,13 @@ export default {
       keepRoundness: false,
       keepFonts: false,
 
-      textColorLocal: '',
-      linkColorLocal: '',
+      ...Object.keys(SLOT_INHERITANCE)
+        .map(key => [key, ''])
+        .reduce((acc, [key, val]) => ({ ...acc, [ key + 'ColorLocal' ]: val }), {}),
 
-      bgColorLocal: '',
-      bgOpacityLocal: undefined,
-
-      fgColorLocal: '',
-      fgTextColorLocal: undefined,
-      fgLinkColorLocal: undefined,
-
-      btnColorLocal: undefined,
-      btnTextColorLocal: undefined,
-      btnOpacityLocal: undefined,
-
-      inputColorLocal: undefined,
-      inputTextColorLocal: undefined,
-      inputOpacityLocal: undefined,
-
-      panelColorLocal: undefined,
-      panelTextColorLocal: undefined,
-      panelLinkColorLocal: undefined,
-      panelFaintColorLocal: undefined,
-      panelOpacityLocal: undefined,
-
-      topBarColorLocal: undefined,
-      topBarTextColorLocal: undefined,
-      topBarLinkColorLocal: undefined,
-
-      alertErrorColorLocal: undefined,
-      alertWarningColorLocal: undefined,
-
-      badgeOpacityLocal: undefined,
-      badgeNotificationColorLocal: undefined,
-
-      borderColorLocal: undefined,
-      borderOpacityLocal: undefined,
-
-      faintColorLocal: undefined,
-      faintOpacityLocal: undefined,
-      faintLinkColorLocal: undefined,
-
-      cRedColorLocal: '',
-      cBlueColorLocal: '',
-      cGreenColorLocal: '',
-      cOrangeColorLocal: '',
+      ...Object.keys(OPACITIES)
+        .map(key => [key, ''])
+        .reduce((acc, [key, val]) => ({ ...acc, [ key + 'OpacityLocal' ]: val }), {}),
 
       shadowSelected: undefined,
       shadowsLocal: {},
@@ -108,69 +104,105 @@ export default {
   created () {
     const self = this
 
-    getThemes().then((themesComplete) => {
-      self.availableStyles = themesComplete
-    })
+    getThemes()
+      .then((promises) => {
+        return Promise.all(
+          Object.entries(promises)
+            .map(([k, v]) => v.then(res => [k, res]))
+        )
+      })
+      .then(themes => themes.reduce((acc, [k, v]) => {
+        if (v) {
+          return {
+            ...acc,
+            [k]: v
+          }
+        } else {
+          return acc
+        }
+      }, {}))
+      .then((themesComplete) => {
+        self.availableStyles = themesComplete
+      })
   },
   mounted () {
-    this.normalizeLocalState(this.$store.getters.mergedConfig.customTheme)
+    this.loadThemeFromLocalStorage()
     if (typeof this.shadowSelected === 'undefined') {
       this.shadowSelected = this.shadowsAvailable[0]
     }
   },
   computed: {
+    themeWarningHelp () {
+      if (!this.themeWarning) return
+      const t = this.$t
+      const pre = 'settings.style.switcher.help.'
+      const {
+        origin,
+        themeEngineVersion,
+        type,
+        noActionsPossible
+      } = this.themeWarning
+      if (origin === 'file') {
+        // Loaded v2 theme from file
+        if (themeEngineVersion === 2 && type === 'wrong_version') {
+          return t(pre + 'v2_imported')
+        }
+        if (themeEngineVersion > CURRENT_VERSION) {
+          return t(pre + 'future_version_imported') + ' ' +
+            (
+              noActionsPossible
+                ? t(pre + 'snapshot_missing')
+                : t(pre + 'snapshot_present')
+            )
+        }
+        if (themeEngineVersion < CURRENT_VERSION) {
+          return t(pre + 'future_version_imported') + ' ' +
+            (
+              noActionsPossible
+                ? t(pre + 'snapshot_missing')
+                : t(pre + 'snapshot_present')
+            )
+        }
+      } else if (origin === 'localStorage') {
+        if (type === 'snapshot_source_mismatch') {
+          return t(pre + 'snapshot_source_mismatch')
+        }
+        // FE upgraded from v2
+        if (themeEngineVersion === 2) {
+          return t(pre + 'upgraded_from_v2')
+        }
+        // Admin downgraded FE
+        if (themeEngineVersion > CURRENT_VERSION) {
+          return t(pre + 'fe_downgraded') + ' ' +
+            (
+              noActionsPossible
+                ? t(pre + 'migration_snapshot_ok')
+                : t(pre + 'migration_snapshot_gone')
+            )
+        }
+        // Admin upgraded FE
+        if (themeEngineVersion < CURRENT_VERSION) {
+          return t(pre + 'fe_upgraded') + ' ' +
+            (
+              noActionsPossible
+                ? t(pre + 'migration_snapshot_ok')
+                : t(pre + 'migration_snapshot_gone')
+            )
+        }
+      }
+    },
     selectedVersion () {
       return Array.isArray(this.selected) ? 1 : 2
     },
     currentColors () {
-      return {
-        bg: this.bgColorLocal,
-        text: this.textColorLocal,
-        link: this.linkColorLocal,
-
-        fg: this.fgColorLocal,
-        fgText: this.fgTextColorLocal,
-        fgLink: this.fgLinkColorLocal,
-
-        panel: this.panelColorLocal,
-        panelText: this.panelTextColorLocal,
-        panelLink: this.panelLinkColorLocal,
-        panelFaint: this.panelFaintColorLocal,
-
-        input: this.inputColorLocal,
-        inputText: this.inputTextColorLocal,
-
-        topBar: this.topBarColorLocal,
-        topBarText: this.topBarTextColorLocal,
-        topBarLink: this.topBarLinkColorLocal,
-
-        btn: this.btnColorLocal,
-        btnText: this.btnTextColorLocal,
-
-        alertError: this.alertErrorColorLocal,
-        alertWarning: this.alertWarningColorLocal,
-        badgeNotification: this.badgeNotificationColorLocal,
-
-        faint: this.faintColorLocal,
-        faintLink: this.faintLinkColorLocal,
-        border: this.borderColorLocal,
-
-        cRed: this.cRedColorLocal,
-        cBlue: this.cBlueColorLocal,
-        cGreen: this.cGreenColorLocal,
-        cOrange: this.cOrangeColorLocal
-      }
+      return Object.keys(SLOT_INHERITANCE)
+        .map(key => [key, this[key + 'ColorLocal']])
+        .reduce((acc, [key, val]) => ({ ...acc, [ key ]: val }), {})
     },
     currentOpacity () {
-      return {
-        bg: this.bgOpacityLocal,
-        btn: this.btnOpacityLocal,
-        input: this.inputOpacityLocal,
-        panel: this.panelOpacityLocal,
-        topBar: this.topBarOpacityLocal,
-        border: this.borderOpacityLocal,
-        faint: this.faintOpacityLocal
-      }
+      return Object.keys(OPACITIES)
+        .map(key => [key, this[key + 'OpacityLocal']])
+        .reduce((acc, [key, val]) => ({ ...acc, [ key ]: val }), {})
     },
     currentRadii () {
       return {
@@ -193,75 +225,66 @@ export default {
     },
     // This needs optimization maybe
     previewContrast () {
-      if (!this.previewTheme.colors.bg) return {}
-      const colors = this.previewTheme.colors
-      const opacity = this.previewTheme.opacity
-      if (!colors.bg) return {}
-      const hints = (ratio) => ({
-        text: ratio.toPrecision(3) + ':1',
-        // AA level, AAA level
-        aa: ratio >= 4.5,
-        aaa: ratio >= 7,
-        // same but for 18pt+ texts
-        laa: ratio >= 3,
-        laaa: ratio >= 4.5
-      })
+      try {
+        if (!this.previewTheme.colors.bg) return {}
+        const colors = this.previewTheme.colors
+        const opacity = this.previewTheme.opacity
+        if (!colors.bg) return {}
+        const hints = (ratio) => ({
+          text: ratio.toPrecision(3) + ':1',
+          // AA level, AAA level
+          aa: ratio >= 4.5,
+          aaa: ratio >= 7,
+          // same but for 18pt+ texts
+          laa: ratio >= 3,
+          laaa: ratio >= 4.5
+        })
+        const colorsConverted = Object.entries(colors).reduce((acc, [key, value]) => ({ ...acc, [key]: colorConvert(value) }), {})
 
-      // fgsfds :DDDD
-      const fgs = {
-        text: hex2rgb(colors.text),
-        panelText: hex2rgb(colors.panelText),
-        panelLink: hex2rgb(colors.panelLink),
-        btnText: hex2rgb(colors.btnText),
-        topBarText: hex2rgb(colors.topBarText),
-        inputText: hex2rgb(colors.inputText),
+        const ratios = Object.entries(SLOT_INHERITANCE).reduce((acc, [key, value]) => {
+          const slotIsBaseText = key === 'text' || key === 'link'
+          const slotIsText = slotIsBaseText || (
+            typeof value === 'object' && value !== null && value.textColor
+          )
+          if (!slotIsText) return acc
+          const { layer, variant } = slotIsBaseText ? { layer: 'bg' } : value
+          const background = variant || layer
+          const opacitySlot = getOpacitySlot(background)
+          const textColors = [
+            key,
+            ...(background === 'bg' ? ['cRed', 'cGreen', 'cBlue', 'cOrange'] : [])
+          ]
 
-        link: hex2rgb(colors.link),
-        topBarLink: hex2rgb(colors.topBarLink),
+          const layers = getLayers(
+            layer,
+            variant || layer,
+            opacitySlot,
+            colorsConverted,
+            opacity
+          )
 
-        red: hex2rgb(colors.cRed),
-        green: hex2rgb(colors.cGreen),
-        blue: hex2rgb(colors.cBlue),
-        orange: hex2rgb(colors.cOrange)
+          return {
+            ...acc,
+            ...textColors.reduce((acc, textColorKey) => {
+              const newKey = slotIsBaseText
+                ? 'bg' + textColorKey[0].toUpperCase() + textColorKey.slice(1)
+                : textColorKey
+              return {
+                ...acc,
+                [newKey]: getContrastRatioLayers(
+                  colorsConverted[textColorKey],
+                  layers,
+                  colorsConverted[textColorKey]
+                )
+              }
+            }, {})
+          }
+        }, {})
+
+        return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})
+      } catch (e) {
+        console.warn('Failure computing contrasts', e)
       }
-
-      const bgs = {
-        bg: hex2rgb(colors.bg),
-        btn: hex2rgb(colors.btn),
-        panel: hex2rgb(colors.panel),
-        topBar: hex2rgb(colors.topBar),
-        input: hex2rgb(colors.input),
-        alertError: hex2rgb(colors.alertError),
-        alertWarning: hex2rgb(colors.alertWarning),
-        badgeNotification: hex2rgb(colors.badgeNotification)
-      }
-
-      /* This is a bit confusing because "bottom layer" used is text color
-       * This is done to get worst case scenario when background below transparent
-       * layer matches text color, making it harder to read the lower alpha is.
-       */
-      const ratios = {
-        bgText: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.text), fgs.text),
-        bgLink: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.link), fgs.link),
-        bgRed: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.red), fgs.red),
-        bgGreen: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.green), fgs.green),
-        bgBlue: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.blue), fgs.blue),
-        bgOrange: getContrastRatio(alphaBlend(bgs.bg, opacity.bg, fgs.orange), fgs.orange),
-
-        tintText: getContrastRatio(alphaBlend(bgs.bg, 0.5, fgs.panelText), fgs.text),
-
-        panelText: getContrastRatio(alphaBlend(bgs.panel, opacity.panel, fgs.panelText), fgs.panelText),
-        panelLink: getContrastRatio(alphaBlend(bgs.panel, opacity.panel, fgs.panelLink), fgs.panelLink),
-
-        btnText: getContrastRatio(alphaBlend(bgs.btn, opacity.btn, fgs.btnText), fgs.btnText),
-
-        inputText: getContrastRatio(alphaBlend(bgs.input, opacity.input, fgs.inputText), fgs.inputText),
-
-        topBarText: getContrastRatio(alphaBlend(bgs.topBar, opacity.topBar, fgs.topBarText), fgs.topBarText),
-        topBarLink: getContrastRatio(alphaBlend(bgs.topBar, opacity.topBar, fgs.topBarLink), fgs.topBarLink)
-      }
-
-      return Object.entries(ratios).reduce((acc, [k, v]) => { acc[k] = hints(v); return acc }, {})
     },
     previewRules () {
       if (!this.preview.rules) return ''
@@ -272,7 +295,7 @@ export default {
       ].join(';')
     },
     shadowsAvailable () {
-      return Object.keys(this.previewTheme.shadows).sort()
+      return Object.keys(DEFAULT_SHADOWS).sort()
     },
     currentShadowOverriden: {
       get () {
@@ -287,7 +310,7 @@ export default {
       }
     },
     currentShadowFallback () {
-      return this.previewTheme.shadows[this.shadowSelected]
+      return (this.previewTheme.shadows || {})[this.shadowSelected]
     },
     currentShadow: {
       get () {
@@ -309,27 +332,34 @@ export default {
         !this.keepColor
       )
 
-      const theme = {}
+      const source = {
+        themeEngineVersion: CURRENT_VERSION
+      }
 
       if (this.keepFonts || saveEverything) {
-        theme.fonts = this.fontsLocal
+        source.fonts = this.fontsLocal
       }
       if (this.keepShadows || saveEverything) {
-        theme.shadows = this.shadowsLocal
+        source.shadows = this.shadowsLocal
       }
       if (this.keepOpacity || saveEverything) {
-        theme.opacity = this.currentOpacity
+        source.opacity = this.currentOpacity
       }
       if (this.keepColor || saveEverything) {
-        theme.colors = this.currentColors
+        source.colors = this.currentColors
       }
       if (this.keepRoundness || saveEverything) {
-        theme.radii = this.currentRadii
+        source.radii = this.currentRadii
+      }
+
+      const theme = {
+        themeEngineVersion: CURRENT_VERSION,
+        ...this.previewTheme
       }
 
       return {
-        // To separate from other random JSON files and possible future theme formats
-        _pleroma_theme_version: 2, theme
+        // To separate from other random JSON files and possible future source formats
+        _pleroma_theme_version: 2, theme, source
       }
     }
   },
@@ -346,10 +376,128 @@ export default {
     Checkbox
   },
   methods: {
+    loadTheme (
+      {
+        theme,
+        source,
+        _pleroma_theme_version: fileVersion
+      },
+      origin,
+      forceUseSource = false
+    ) {
+      this.dismissWarning()
+      if (!source && !theme) {
+        throw new Error('Can\'t load theme: empty')
+      }
+      const version = (origin === 'localStorage' && !theme.colors)
+        ? 'l1'
+        : fileVersion
+      const snapshotEngineVersion = (theme || {}).themeEngineVersion
+      const themeEngineVersion = (source || {}).themeEngineVersion || 2
+      const versionsMatch = themeEngineVersion === CURRENT_VERSION
+      const sourceSnapshotMismatch = (
+        theme !== undefined &&
+          source !== undefined &&
+          themeEngineVersion !== snapshotEngineVersion
+      )
+      // Force loading of source if user requested it or if snapshot
+      // is unavailable
+      const forcedSourceLoad = (source && forceUseSource) || !theme
+      if (!(versionsMatch && !sourceSnapshotMismatch) &&
+          !forcedSourceLoad &&
+          version !== 'l1' &&
+          origin !== 'defaults'
+      ) {
+        if (sourceSnapshotMismatch && origin === 'localStorage') {
+          this.themeWarning = {
+            origin,
+            themeEngineVersion,
+            type: 'snapshot_source_mismatch'
+          }
+        } else if (!theme) {
+          this.themeWarning = {
+            origin,
+            noActionsPossible: true,
+            themeEngineVersion,
+            type: 'no_snapshot_old_version'
+          }
+        } else if (!versionsMatch) {
+          this.themeWarning = {
+            origin,
+            noActionsPossible: !source,
+            themeEngineVersion,
+            type: 'wrong_version'
+          }
+        }
+      }
+      this.normalizeLocalState(theme, version, source, forcedSourceLoad)
+    },
+    forceLoadLocalStorage () {
+      this.loadThemeFromLocalStorage(true)
+    },
+    dismissWarning () {
+      this.themeWarning = undefined
+      this.tempImportFile = undefined
+    },
+    forceLoad () {
+      const { origin } = this.themeWarning
+      switch (origin) {
+        case 'localStorage':
+          this.loadThemeFromLocalStorage(true)
+          break
+        case 'file':
+          this.onImport(this.tempImportFile, true)
+          break
+      }
+      this.dismissWarning()
+    },
+    forceSnapshot () {
+      const { origin } = this.themeWarning
+      switch (origin) {
+        case 'localStorage':
+          this.loadThemeFromLocalStorage(false, true)
+          break
+        case 'file':
+          console.err('Forcing snapshout from file is not supported yet')
+          break
+      }
+      this.dismissWarning()
+    },
+    loadThemeFromLocalStorage (confirmLoadSource = false, forceSnapshot = false) {
+      const {
+        customTheme: theme,
+        customThemeSource: source
+      } = this.$store.getters.mergedConfig
+      if (!theme && !source) {
+        // Anon user or never touched themes
+        this.loadTheme(
+          this.$store.state.instance.themeData,
+          'defaults',
+          confirmLoadSource
+        )
+      } else {
+        this.loadTheme(
+          {
+            theme,
+            source: forceSnapshot ? theme : source
+          },
+          'localStorage',
+          confirmLoadSource
+        )
+      }
+    },
     setCustomTheme () {
       this.$store.dispatch('setOption', {
         name: 'customTheme',
         value: {
+          themeEngineVersion: CURRENT_VERSION,
+          ...this.previewTheme
+        }
+      })
+      this.$store.dispatch('setOption', {
+        name: 'customThemeSource',
+        value: {
+          themeEngineVersion: CURRENT_VERSION,
           shadows: this.shadowsLocal,
           fonts: this.fontsLocal,
           opacity: this.currentOpacity,
@@ -358,21 +506,27 @@ export default {
         }
       })
     },
-    onImport (parsed) {
-      if (parsed._pleroma_theme_version === 1) {
-        this.normalizeLocalState(parsed, 1)
-      } else if (parsed._pleroma_theme_version === 2) {
-        this.normalizeLocalState(parsed.theme, 2)
-      }
+    updatePreviewColorsAndShadows () {
+      this.previewColors = generateColors({
+        opacity: this.currentOpacity,
+        colors: this.currentColors
+      })
+      this.previewShadows = generateShadows(
+        { shadows: this.shadowsLocal, opacity: this.previewTheme.opacity, themeEngineVersion: this.engineVersion },
+        this.previewColors.theme.colors,
+        this.previewColors.mod
+      )
+    },
+    onImport (parsed, forceSource = false) {
+      this.tempImportFile = parsed
+      this.loadTheme(parsed, 'file', forceSource)
     },
     importValidator (parsed) {
       const version = parsed._pleroma_theme_version
       return version >= 1 || version <= 2
     },
     clearAll () {
-      const state = this.$store.getters.mergedConfig.customTheme
-      const version = state.colors ? 2 : 'l1'
-      this.normalizeLocalState(this.$store.getters.mergedConfig.customTheme, version)
+      this.loadThemeFromLocalStorage()
     },
 
     // Clears all the extra stuff when loading V1 theme
@@ -411,19 +565,37 @@ export default {
 
     /**
      * This applies stored theme data onto form. Supports three versions of data:
+     * v3 (version >= 3) - newest version of themes which supports snapshots for better compatiblity
      * v2 (version = 2) - newer version of themes.
      * v1 (version = 1) - older version of themes (import from file)
      * v1l (version = l1) - older version of theme (load from local storage)
      * v1 and v1l differ because of way themes were stored/exported.
-     * @param {Object} input - input data
+     * @param {Object} theme - theme data (snapshot)
      * @param {Number} version - version of data. 0 means try to guess based on data. "l1" means v1, locastorage type
+     * @param {Object} source - theme source - this will be used if compatible
+     * @param {Boolean} source - by default source won't be used if version doesn't match since it might render differently
+     *                           this allows importing source anyway
      */
-    normalizeLocalState (input, version = 0) {
-      const colors = input.colors || input
+    normalizeLocalState (theme, version = 0, source, forceSource = false) {
+      let input
+      if (typeof source !== 'undefined') {
+        if (forceSource || source.themeEngineVersion === CURRENT_VERSION) {
+          input = source
+          version = source.themeEngineVersion
+        } else {
+          input = theme
+        }
+      } else {
+        input = theme
+      }
+
       const radii = input.radii || input
       const opacity = input.opacity
       const shadows = input.shadows || {}
       const fonts = input.fonts || {}
+      const colors = !input.themeEngineVersion
+        ? colors2to3(input.colors || input)
+        : input.colors || input
 
       if (version === 0) {
         if (input.version) version = input.version
@@ -437,6 +609,8 @@ export default {
         }
       }
 
+      this.engineVersion = version
+
       // Stuff that differs between V1 and V2
       if (version === 1) {
         this.fgColorLocal = rgb2hex(colors.btn)
@@ -445,7 +619,7 @@ export default {
 
       if (!this.keepColor) {
         this.clearV1()
-        const keys = new Set(version !== 1 ? Object.keys(colors) : [])
+        const keys = new Set(version !== 1 ? Object.keys(SLOT_INHERITANCE) : [])
         if (version === 1 || version === 'l1') {
           keys
             .add('bg')
@@ -457,7 +631,17 @@ export default {
         }
 
         keys.forEach(key => {
-          this[key + 'ColorLocal'] = rgb2hex(colors[key])
+          const color = colors[key]
+          const hex = rgb2hex(colors[key])
+          this[key + 'ColorLocal'] = hex === '#aN' ? color : hex
+        })
+      }
+
+      if (opacity && !this.keepOpacity) {
+        this.clearOpacity()
+        Object.entries(opacity).forEach(([k, v]) => {
+          if (typeof v === 'undefined' || v === null || Number.isNaN(v)) return
+          this[k + 'OpacityLocal'] = v
         })
       }
 
@@ -472,21 +656,17 @@ export default {
 
       if (!this.keepShadows) {
         this.clearShadows()
-        this.shadowsLocal = shadows
+        if (version === 2) {
+          this.shadowsLocal = shadows2to3(shadows, this.previewTheme.opacity)
+        } else {
+          this.shadowsLocal = shadows
+        }
         this.shadowSelected = this.shadowsAvailable[0]
       }
 
       if (!this.keepFonts) {
         this.clearFonts()
         this.fontsLocal = fonts
-      }
-
-      if (opacity && !this.keepOpacity) {
-        this.clearOpacity()
-        Object.entries(opacity).forEach(([k, v]) => {
-          if (typeof v === 'undefined' || v === null || Number.isNaN(v)) return
-          this[k + 'OpacityLocal'] = v
-        })
       }
     }
   },
@@ -502,8 +682,9 @@ export default {
     },
     shadowsLocal: {
       handler () {
+        if (Object.getOwnPropertyNames(this.previewColors).length === 1) return
         try {
-          this.previewShadows = generateShadows({ shadows: this.shadowsLocal })
+          this.updatePreviewColorsAndShadows()
           this.shadowsInvalid = false
         } catch (e) {
           this.shadowsInvalid = true
@@ -526,27 +707,24 @@ export default {
     },
     currentColors () {
       try {
-        this.previewColors = generateColors({
-          opacity: this.currentOpacity,
-          colors: this.currentColors
-        })
+        this.updatePreviewColorsAndShadows()
         this.colorsInvalid = false
+        this.shadowsInvalid = false
       } catch (e) {
         this.colorsInvalid = true
+        this.shadowsInvalid = true
         console.warn(e)
       }
     },
     currentOpacity () {
       try {
-        this.previewColors = generateColors({
-          opacity: this.currentOpacity,
-          colors: this.currentColors
-        })
+        this.updatePreviewColorsAndShadows()
       } catch (e) {
         console.warn(e)
       }
     },
     selected () {
+      this.dismissWarning()
       if (this.selectedVersion === 1) {
         if (!this.keepRoundness) {
           this.clearRoundness()
@@ -573,7 +751,7 @@ export default {
           this.cOrangeColorLocal = this.selected[8]
         }
       } else if (this.selectedVersion >= 2) {
-        this.normalizeLocalState(this.selected.theme, 2)
+        this.normalizeLocalState(this.selected.theme, 2, this.selected.source)
       }
     }
   }

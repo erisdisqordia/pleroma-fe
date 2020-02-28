@@ -72,7 +72,11 @@ const MASTODON_MUTE_CONVERSATION = id => `/api/v1/statuses/${id}/mute`
 const MASTODON_UNMUTE_CONVERSATION = id => `/api/v1/statuses/${id}/unmute`
 const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
+const MASTODON_DOMAIN_BLOCKS_URL = '/api/v1/domain_blocks'
 const MASTODON_STREAMING = '/api/v1/streaming'
+const PLEROMA_EMOJI_REACTIONS_URL = id => `/api/v1/pleroma/statuses/${id}/reactions`
+const PLEROMA_EMOJI_REACT_URL = (id, emoji) => `/api/v1/pleroma/statuses/${id}/reactions/${emoji}`
+const PLEROMA_EMOJI_UNREACT_URL = (id, emoji) => `/api/v1/pleroma/statuses/${id}/reactions/${emoji}`
 
 const oldfetch = window.fetch
 
@@ -398,8 +402,8 @@ const fetchStatus = ({ id, credentials }) => {
     .then((data) => parseStatus(data))
 }
 
-const tagUser = ({ tag, credentials, ...options }) => {
-  const screenName = options.screen_name
+const tagUser = ({ tag, credentials, user }) => {
+  const screenName = user.screen_name
   const form = {
     nicknames: [screenName],
     tags: [tag]
@@ -415,8 +419,8 @@ const tagUser = ({ tag, credentials, ...options }) => {
   })
 }
 
-const untagUser = ({ tag, credentials, ...options }) => {
-  const screenName = options.screen_name
+const untagUser = ({ tag, credentials, user }) => {
+  const screenName = user.screen_name
   const body = {
     nicknames: [screenName],
     tags: [tag]
@@ -432,7 +436,7 @@ const untagUser = ({ tag, credentials, ...options }) => {
   })
 }
 
-const addRight = ({ right, credentials, ...user }) => {
+const addRight = ({ right, credentials, user }) => {
   const screenName = user.screen_name
 
   return fetch(PERMISSION_GROUP_URL(screenName, right), {
@@ -442,7 +446,7 @@ const addRight = ({ right, credentials, ...user }) => {
   })
 }
 
-const deleteRight = ({ right, credentials, ...user }) => {
+const deleteRight = ({ right, credentials, user }) => {
   const screenName = user.screen_name
 
   return fetch(PERMISSION_GROUP_URL(screenName, right), {
@@ -474,7 +478,7 @@ const deactivateUser = ({ credentials, user: { screen_name: nickname } }) => {
   }).then(response => get(response, 'users.0'))
 }
 
-const deleteUser = ({ credentials, ...user }) => {
+const deleteUser = ({ credentials, user }) => {
   const screenName = user.screen_name
   const headers = authHeaders(credentials)
 
@@ -491,7 +495,8 @@ const fetchTimeline = ({
   until = false,
   userId = false,
   tag = false,
-  withMuted = false
+  withMuted = false,
+  withMove = false
 }) => {
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
@@ -530,6 +535,9 @@ const fetchTimeline = ({
   }
   if (timeline === 'public' || timeline === 'publicAndExternal') {
     params.push(['only_media', false])
+  }
+  if (timeline === 'notifications') {
+    params.push(['with_move', withMove])
   }
 
   params.push(['count', 20])
@@ -880,6 +888,30 @@ const fetchRebloggedByUsers = ({ id }) => {
   return promisedRequest({ url: MASTODON_STATUS_REBLOGGEDBY_URL(id) }).then((users) => users.map(parseUser))
 }
 
+const fetchEmojiReactions = ({ id, credentials }) => {
+  return promisedRequest({ url: PLEROMA_EMOJI_REACTIONS_URL(id), credentials })
+    .then((reactions) => reactions.map(r => {
+      r.accounts = r.accounts.map(parseUser)
+      return r
+    }))
+}
+
+const reactWithEmoji = ({ id, emoji, credentials }) => {
+  return promisedRequest({
+    url: PLEROMA_EMOJI_REACT_URL(id, emoji),
+    method: 'PUT',
+    credentials
+  }).then(parseStatus)
+}
+
+const unreactWithEmoji = ({ id, emoji, credentials }) => {
+  return promisedRequest({
+    url: PLEROMA_EMOJI_UNREACT_URL(id, emoji),
+    method: 'DELETE',
+    credentials
+  }).then(parseStatus)
+}
+
 const reportUser = ({ credentials, userId, statusIds, comment, forward }) => {
   return promisedRequest({
     url: MASTODON_REPORT_USER_URL,
@@ -946,6 +978,28 @@ const search2 = ({ credentials, q, resolve, limit, offset, following }) => {
       data.statuses = data.statuses.slice(0, limit).map(s => parseStatus(s))
       return data
     })
+}
+
+const fetchDomainMutes = ({ credentials }) => {
+  return promisedRequest({ url: MASTODON_DOMAIN_BLOCKS_URL, credentials })
+}
+
+const muteDomain = ({ domain, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_DOMAIN_BLOCKS_URL,
+    method: 'POST',
+    payload: { domain },
+    credentials
+  })
+}
+
+const unmuteDomain = ({ domain, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_DOMAIN_BLOCKS_URL,
+    method: 'DELETE',
+    payload: { domain },
+    credentials
+  })
 }
 
 export const getMastodonSocketURI = ({ credentials, stream, args = {} }) => {
@@ -1107,10 +1161,16 @@ const apiService = {
   fetchPoll,
   fetchFavoritedByUsers,
   fetchRebloggedByUsers,
+  fetchEmojiReactions,
+  reactWithEmoji,
+  unreactWithEmoji,
   reportUser,
   updateNotificationSettings,
   search2,
-  searchUsers
+  searchUsers,
+  fetchDomainMutes,
+  muteDomain,
+  unmuteDomain
 }
 
 export default apiService

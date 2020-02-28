@@ -37,9 +37,17 @@
 
 <script>
 export default {
-  props: [
-    'large', 'contrast'
-  ],
+  props: {
+    large: {
+      required: false
+    },
+    // TODO: Make theme switcher compute theme initially so that contrast
+    // component won't be called without contrast data
+    contrast: {
+      required: false,
+      type: Object
+    }
+  },
   computed: {
     hint () {
       const levelVal = this.contrast.aaa ? 'aaa' : (this.contrast.aa ? 'aa' : 'bad')

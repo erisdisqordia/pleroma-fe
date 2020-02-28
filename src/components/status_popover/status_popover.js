@@ -5,22 +5,14 @@ const StatusPopover = {
   props: [
     'statusId'
   ],
-  data () {
-    return {
-      popperOptions: {
-        modifiers: {
-          preventOverflow: { padding: { top: 50 }, boundariesElement: 'viewport' }
-        }
-      }
-    }
-  },
   computed: {
     status () {
       return find(this.$store.state.statuses.allStatuses, { id: this.statusId })
     }
   },
   components: {
-    Status: () => import('../status/status.vue')
+    Status: () => import('../status/status.vue'),
+    Popover: () => import('../popover/popover.vue')
   },
   methods: {
     enter () {

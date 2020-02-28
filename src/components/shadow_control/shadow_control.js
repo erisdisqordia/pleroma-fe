@@ -3,6 +3,17 @@ import OpacityInput from '../opacity_input/opacity_input.vue'
 import { getCssShadow } from '../../services/style_setter/style_setter.js'
 import { hex2rgb } from '../../services/color_convert/color_convert.js'
 
+const toModel = (object = {}) => ({
+  x: 0,
+  y: 0,
+  blur: 0,
+  spread: 0,
+  inset: false,
+  color: '#000000',
+  alpha: 1,
+  ...object
+})
+
 export default {
   // 'Value' and 'Fallback' can be undefined, but if they are
   // initially vue won't detect it when they become something else
@@ -15,7 +26,7 @@ export default {
     return {
       selectedId: 0,
       // TODO there are some bugs regarding display of array (it's not getting updated when deleting for some reason)
-      cValue: this.value || this.fallback || []
+      cValue: (this.value || this.fallback || []).map(toModel)
     }
   },
   components: {
@@ -24,12 +35,12 @@ export default {
   },
   methods: {
     add () {
-      this.cValue.push(Object.assign({}, this.selected))
+      this.cValue.push(toModel(this.selected))
       this.selectedId = this.cValue.length - 1
     },
     del () {
       this.cValue.splice(this.selectedId, 1)
-      this.selectedId = this.cValue.length === 0 ? undefined : this.selectedId - 1
+      this.selectedId = this.cValue.length === 0 ? undefined : Math.max(this.selectedId - 1, 0)
     },
     moveUp () {
       const movable = this.cValue.splice(this.selectedId, 1)[0]
@@ -46,19 +57,24 @@ export default {
     this.cValue = this.value || this.fallback
   },
   computed: {
+    anyShadows () {
+      return this.cValue.length > 0
+    },
+    anyShadowsFallback () {
+      return this.fallback.length > 0
+    },
     selected () {
-      if (this.ready && this.cValue.length > 0) {
+      if (this.ready && this.anyShadows) {
         return this.cValue[this.selectedId]
       } else {
-        return {
-          x: 0,
-          y: 0,
-          blur: 0,
-          spread: 0,
-          inset: false,
-          color: '#000000',
-          alpha: 1
-        }
+        return toModel({})
+      }
+    },
+    currentFallback () {
+      if (this.ready && this.anyShadowsFallback) {
+        return this.fallback[this.selectedId]
+      } else {
+        return toModel({})
       }
     },
     moveUpValid () {
@@ -80,7 +96,7 @@ export default {
     },
     style () {
       return this.ready ? {
-        boxShadow: getCssShadow(this.cValue)
+        boxShadow: getCssShadow(this.fallback)
       } : {}
     }
   }

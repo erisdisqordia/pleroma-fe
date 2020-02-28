@@ -53,7 +53,8 @@
     "notifications": "Ilmoitukset",
     "read": "Lue!",
     "repeated_you": "toisti viestisi",
-    "no_more_notifications": "Ei enempää ilmoituksia"
+    "no_more_notifications": "Ei enempää ilmoituksia",
+    "reacted_with": "lisäsi reaktion {0}"
   },
   "polls": {
     "add_poll": "Lisää äänestys",
@@ -140,6 +141,7 @@
     "delete_account_description": "Poista tilisi ja viestisi pysyvästi.",
     "delete_account_error": "Virhe poistaessa tiliäsi. Jos virhe jatkuu, ota yhteyttä palvelimesi ylläpitoon.",
     "delete_account_instructions": "Syötä salasanasi vahvistaaksesi tilin poiston.",
+    "emoji_reactions_on_timeline": "Näytä emojireaktiot aikajanalla",
     "export_theme": "Tallenna teema",
     "filtering": "Suodatus",
     "filtering_explanation": "Kaikki viestit, jotka sisältävät näitä sanoja, suodatetaan. Yksi sana per rivi.",
@@ -183,6 +185,7 @@
     "notification_visibility_likes": "Tykkäykset",
     "notification_visibility_mentions": "Maininnat",
     "notification_visibility_repeats": "Toistot",
+    "notification_visibility_emoji_reactions": "Reaktiot",
     "no_rich_text_description": "Älä näytä tekstin muotoilua.",
     "hide_network_description": "Älä näytä seurauksiani tai seuraajiani",
     "nsfw_clickthrough": "Piilota NSFW liitteet klikkauksen taakse",

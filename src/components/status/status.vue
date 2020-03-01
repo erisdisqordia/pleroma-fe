@@ -150,8 +150,18 @@
                   class="source_url"
                   title="Source"
                 >
-                  <i class="button-icon icon-link-ext-alt" />
+                  <img
+                    height="18px"
+                    v-if="!!(status.user && status.user.favicon)"
+                    :src="status.user.favicon"
+                  />
+                  <i v-else class="button-icon icon-link-ext-alt" />
                 </a>
+                <img
+                  v-else-if="!!(status.user && status.user.favicon)"
+                  height="18px"
+                  :src="status.user.favicon"
+                />
                 <template v-if="expandable && !isPreview">
                   <a
                     href="#"

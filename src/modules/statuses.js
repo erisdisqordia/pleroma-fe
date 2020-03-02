@@ -616,7 +616,7 @@ const statuses = {
       commit('setNotificationsSilence', { value })
     },
     fetchStatus ({ rootState, dispatch }, id) {
-      rootState.api.backendInteractor.fetchStatus({ id })
+      return rootState.api.backendInteractor.fetchStatus({ id })
         .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
     },
     deleteStatus ({ rootState, commit }, status) {

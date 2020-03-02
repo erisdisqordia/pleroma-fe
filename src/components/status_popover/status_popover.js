@@ -5,6 +5,11 @@ const StatusPopover = {
   props: [
     'statusId'
   ],
+  data () {
+    return {
+      error: false
+    }
+  },
   computed: {
     status () {
       return find(this.$store.state.statuses.allStatuses, { id: this.statusId })
@@ -18,6 +23,8 @@ const StatusPopover = {
     enter () {
       if (!this.status) {
         this.$store.dispatch('fetchStatus', this.statusId)
+          .then(data => (this.error = false))
+          .catch(e => (this.error = true))
       }
     }
   }

@@ -102,6 +102,7 @@ const config = {
           setPreset(value)
           break
         case 'customTheme':
+        case 'customThemeSource':
           applyTheme(value)
       }
     }

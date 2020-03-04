@@ -615,7 +615,8 @@
     "reply_to": "Reply to",
     "replies_list": "Replies:",
     "mute_conversation": "Mute conversation",
-    "unmute_conversation": "Unmute conversation"
+    "unmute_conversation": "Unmute conversation",
+    "status_unavailable": "Status unavailable"
   },
   "user_card": {
     "approve": "Approve",

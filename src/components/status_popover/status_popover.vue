@@ -18,8 +18,14 @@
         :compact="true"
       />
       <div
+        v-else-if="error"
+        class="status-preview-no-content faint"
+      >
+        {{ $t('status.status_unavailable') }}
+      </div>
+      <div
         v-else
-        class="status-preview-loading"
+        class="status-preview-no-content"
       >
         <i class="icon-spin4 animate-spin" />
       </div>
@@ -50,7 +56,7 @@
     border: none;
   }
 
-  .status-preview-loading {
+  .status-preview-no-content {
     padding: 1em;
     text-align: center;
 

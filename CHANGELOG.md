@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Notifications column now cleans itself up to optimize performance when tab is left open for a long time
 - 403 messaging
 ### Fixed
+- Fixed loader-spinner not disappearing when a status preview fails to load
 - anon viewers won't get theme data saved to local storage, so admin changing default theme will have an effect for users coming back to instance.
 - Single notifications left unread when hitting read on another device/tab
 - Registration fixed

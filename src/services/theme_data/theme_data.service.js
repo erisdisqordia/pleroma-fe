@@ -384,10 +384,11 @@ export const getColors = (sourceColors, sourceOpacity) => SLOT_ORDERED.reduce(({
             : (OPACITIES[opacitySlot] || {}).defaultValue
         )
       }
-      if (Number.isNaN(outputColor.a)) {
-        outputColor.a = 1
-      }
     }
+  }
+
+  if (Number.isNaN(outputColor.a) || outputColor.a === undefined) {
+    outputColor.a = 1
   }
 
   if (opacitySlot) {

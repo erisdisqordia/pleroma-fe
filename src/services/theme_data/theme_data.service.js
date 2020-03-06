@@ -350,17 +350,43 @@ export const getColors = (sourceColors, sourceOpacity) => SLOT_ORDERED.reduce(({
   if (!outputColor) {
     throw new Error('Couldn\'t generate color for ' + key)
   }
-  const opacitySlot = getOpacitySlot(key)
+
+  const opacitySlot = value.opacity || getOpacitySlot(key)
   const ownOpacitySlot = value.opacity
-  const opacityOverriden = ownOpacitySlot && sourceOpacity[opacitySlot] !== undefined
-  if (opacitySlot && (outputColor.a === undefined || opacityOverriden)) {
+
+  if (sourceColor === 'transparent') {
+    outputColor.a = 0
+  } else if (ownOpacitySlot === null) {
+    outputColor.a = 1
+  } else {
+    const opacityOverriden = ownOpacitySlot && sourceOpacity[opacitySlot] !== undefined
+
     const dependencySlot = deps[0]
-    if (dependencySlot && colors[dependencySlot] === 'transparent') {
-      outputColor.a = 0
+    const dependencyColor = dependencySlot && colors[dependencySlot]
+
+    if (!ownOpacitySlot && dependencyColor && !value.textColor && ownOpacitySlot !== null) {
+      // Inheriting color from dependency (weird, i know)
+      // except if it's a text color or opacity slot is set to 'null'
+      outputColor.a = dependencyColor.a
+    } else if (!dependencyColor && !opacitySlot) {
+      // Remove any alpha channel if no dependency and no opacitySlot found
+      delete outputColor.a
     } else {
-      outputColor.a = Number(sourceOpacity[opacitySlot]) || OPACITIES[opacitySlot].defaultValue || 1
+      // Otherwise try to assign opacity
+      if (dependencyColor && dependencyColor.a === 0) {
+        // transparent dependency shall make dependents transparent too
+        outputColor.a = 0
+      } else {
+        // Otherwise check if opacity is overriden and use that or default value instead
+        outputColor.a = Number(
+          opacityOverriden
+            ? sourceOpacity[opacitySlot]
+            : (OPACITIES[opacitySlot] || {}).defaultValue
+        )
+      }
     }
   }
+
   if (opacitySlot) {
     return {
       colors: { ...colors, [key]: outputColor },

@@ -354,10 +354,10 @@ export const getColors = (sourceColors, sourceOpacity) => SLOT_ORDERED.reduce(({
   const opacitySlot = value.opacity || getOpacitySlot(key)
   const ownOpacitySlot = value.opacity
 
-  if (sourceColor === 'transparent') {
-    outputColor.a = 0
-  } else if (ownOpacitySlot === null) {
+  if (ownOpacitySlot === null) {
     outputColor.a = 1
+  } else if (sourceColor === 'transparent') {
+    outputColor.a = 0
   } else {
     const opacityOverriden = ownOpacitySlot && sourceOpacity[opacitySlot] !== undefined
 

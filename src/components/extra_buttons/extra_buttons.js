@@ -3,6 +3,11 @@ import Popover from '../popover/popover.vue'
 const ExtraButtons = {
   props: [ 'status' ],
   components: { Popover },
+  data: function () {
+    return {
+      statusLink: `https://${this.$store.state.instance.name}${this.$router.resolve({ name: 'conversation', params: { id: this.status.id } }).href}`
+    }
+  },
   methods: {
     deleteStatus () {
       const confirmed = window.confirm(this.$t('status.delete_confirm'))
@@ -27,6 +32,11 @@ const ExtraButtons = {
     },
     unmuteConversation () {
       this.$store.dispatch('unmuteConversation', this.status.id)
+        .then(() => this.$emit('onSuccess'))
+        .catch(err => this.$emit('onError', err.error.error))
+    },
+    copyLink () {
+      navigator.clipboard.writeText(this.statusLink)
         .then(() => this.$emit('onSuccess'))
         .catch(err => this.$emit('onError', err.error.error))
     }

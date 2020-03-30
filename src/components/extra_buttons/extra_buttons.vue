@@ -1,6 +1,5 @@
 <template>
   <Popover
-    v-if="canDelete || canMute || canPin"
     trigger="click"
     placement="top"
     class="extra-button-popover"
@@ -44,6 +43,13 @@
           @click.prevent="deleteStatus"
         >
           <i class="icon-cancel" /><span>{{ $t("status.delete") }}</span>
+        </button>
+        <button
+          v-close-popover
+          class="dropdown-item dropdown-item-icon"
+          @click.prevent="copyLink"
+        >
+          <i class="icon-share" /><span>{{ $t("status.copy_link") }}</span>
         </button>
       </div>
     </div>

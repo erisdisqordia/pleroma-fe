@@ -616,7 +616,8 @@
     "replies_list": "Replies:",
     "mute_conversation": "Mute conversation",
     "unmute_conversation": "Unmute conversation",
-    "status_unavailable": "Status unavailable"
+    "status_unavailable": "Status unavailable",
+    "copy_link": "Copy link to status"
   },
   "user_card": {
     "approve": "Approve",

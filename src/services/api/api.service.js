@@ -880,12 +880,20 @@ const fetchPoll = ({ pollId, credentials }) => {
   )
 }
 
-const fetchFavoritedByUsers = ({ id }) => {
-  return promisedRequest({ url: MASTODON_STATUS_FAVORITEDBY_URL(id) }).then((users) => users.map(parseUser))
+const fetchFavoritedByUsers = ({ id, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_STATUS_FAVORITEDBY_URL(id),
+    method: 'GET',
+    credentials
+  }).then((users) => users.map(parseUser))
 }
 
-const fetchRebloggedByUsers = ({ id }) => {
-  return promisedRequest({ url: MASTODON_STATUS_REBLOGGEDBY_URL(id) }).then((users) => users.map(parseUser))
+const fetchRebloggedByUsers = ({ id, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_STATUS_REBLOGGEDBY_URL(id),
+    method: 'GET',
+    credentials
+  }).then((users) => users.map(parseUser))
 }
 
 const fetchEmojiReactions = ({ id, credentials }) => {

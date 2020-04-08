@@ -1,6 +1,46 @@
 {
+  "about": {
+    "mrf": {
+      "federation": "Federacja",
+      "keyword": {
+        "keyword_policies": "Zasady słów kluczowych",
+        "ftl_removal": "Usunięcie z \"Całej znanej sieci\"",
+        "reject": "Odrzucanie",
+        "replace": "Zastąpienie",
+        "is_replaced_by": "→"
+      },
+      "mrf_policies": "Włączone zasady MRF",
+      "mrf_policies_desc": "Zasady MRF zmieniają zachowanie federowania instancji. Następujące zasady są włączone:",
+      "simple": {
+        "simple_policies": "Zasady specyficzne dla instancji",
+        "accept": "Akceptowanie",
+        "accept_desc": "Ta instancja akceptuje tylko posty z wymienionych instancji:",
+        "reject": "Odrzucanie",
+        "reject_desc": "Ta instancja odrzuca posty z wymienionych instancji:",
+        "quarantine": "Kwarantanna",
+        "quarantine_desc": "Ta instancja wysyła tylko publiczne posty do wymienionych instancji:",
+        "ftl_removal": "Usunięcie z \"Całej znanej sieci\"",
+        "ftl_removal_desc": "Ta instancja usuwa te instancje z \"Całej znanej sieci\"",
+        "media_removal": "Usuwanie multimediów",
+        "media_removal_desc": "Ta instancja usuwa multimedia z postów od wymienionych instancji:",
+        "media_nsfw": "Multimedia ustawione jako wrażliwe",
+        "media_nsfw_desc": "Ta instancja wymusza, by multimedia z wymienionych instancji były ustawione jako wrażliwe:"
+      }
+    },
+    "staff": "Obsługa"
+  },
   "chat": {
     "title": "Czat"
+  },
+  "domain_mute_card": {
+    "mute": "Wycisz",
+    "mute_progress": "Wyciszam...",
+    "unmute": "Odcisz",
+    "unmute_progress": "Odciszam..."
+  },
+  "exporter": {
+    "export": "Eksportuj",
+    "processing": "Przetwarzam, za chwilę zostaniesz zapytany o ściągnięcie pliku"
   },
   "features_panel": {
     "chat": "Czat",
@@ -20,13 +60,26 @@
     "submit": "Wyślij",
     "more": "Więcej",
     "generic_error": "Wystąpił błąd",
-    "optional": "nieobowiązkowe"
+    "optional": "nieobowiązkowe",
+    "show_more": "Pokaż więcej",
+    "show_less": "Pokaż mniej",
+    "dismiss": "Odrzuć",
+    "cancel": "Anuluj",
+    "disable": "Wyłącz",
+    "enable": "Włącz",
+    "confirm": "Potwierdź",
+    "verify": "Zweryfikuj"
   },
   "image_cropper": {
     "crop_picture": "Przytnij obrazek",
     "save": "Zapisz",
     "save_without_cropping": "Zapisz bez przycinania",
     "cancel": "Anuluj"
+  },
+  "importer": {
+    "submit": "Wyślij",
+    "success": "Zaimportowano pomyślnie",
+    "error": "Wystąpił błąd podczas importowania pliku."
   },
   "login": {
     "login": "Zaloguj",
@@ -36,7 +89,15 @@
     "placeholder": "n.p. lain",
     "register": "Zarejestruj",
     "username": "Użytkownik",
-    "hint": "Zaloguj się, aby dołączyć do dyskusji"
+    "hint": "Zaloguj się, aby dołączyć do dyskusji",
+    "authentication_code": "Kod weryfikacyjny",
+    "enter_recovery_code": "Wprowadź kod zapasowy",
+    "enter_two_factor_code": "Wprowadź kod weryfikacyjny",
+    "recovery_code": "Kod zapasowy",
+    "heading" : {
+      "totp" : "Weryfikacja dwuetapowa",
+      "recovery" : "Zapasowa weryfikacja dwuetapowa"
+    }
   },
   "media_modal": {
     "previous": "Poprzednie",
@@ -44,15 +105,18 @@
   },
   "nav": {
     "about": "O nas",
+    "administration": "Administracja",
     "back": "Wróć",
     "chat": "Lokalny czat",
     "friend_requests": "Prośby o możliwość obserwacji",
     "mentions": "Wzmianki",
+    "interactions": "Interakcje",
     "dms": "Wiadomości prywatne",
     "public_tl": "Publiczna oś czasu",
     "timeline": "Oś czasu",
     "twkn": "Cała znana sieć",
     "user_search": "Wyszukiwanie użytkowników",
+    "search": "Wyszukiwanie",
     "who_to_follow": "Sugestie obserwacji",
     "preferences": "Preferencje"
   },
@@ -64,7 +128,40 @@
     "notifications": "Powiadomienia",
     "read": "Przeczytane!",
     "repeated_you": "powtórzył(-a) twój status",
-    "no_more_notifications": "Nie masz więcej powiadomień"
+    "no_more_notifications": "Nie masz więcej powiadomień",
+    "migrated_to": "wyemigrował do",
+    "reacted_with": "zareagował z {0}"
+  },
+  "polls": {
+    "add_poll": "Dodaj ankietę",
+    "add_option": "Dodaj opcję",
+    "option": "Opcja",
+    "votes": "głosów",
+    "vote": "Głosuj",
+    "type": "Typ ankiety",
+    "single_choice": "jednokrotnego wyboru",
+    "multiple_choices": "wielokrotnego wyboru",
+    "expiry": "Czas trwania ankiety",
+    "expires_in": "Ankieta kończy się za{0}",
+    "expired": "Ankieta skończyła się {0} temu",
+    "not_enough_options": "Zbyt mało unikalnych opcji w ankiecie"
+  },
+  "emoji": {
+    "stickers": "Naklejki",
+    "emoji": "Emoji",
+    "keep_open": "Zostaw selektor otwarty",
+    "search_emoji": "Wyszukaj emoji",
+    "add_emoji": "Wstaw emoji",
+    "custom": "Niestandardowe emoji",
+    "unicode": "Emoji unicode",
+    "load_all_hint": "Załadowano pierwsze {saneAmount} emoji, Załadowanie wszystkich emoji może spowodować problemy z wydajnością.",
+    "load_all": "Ładuję wszystkie {emojiAmount} emoji"
+  },
+  "interactions": {
+    "favs_repeats": "Powtórzenia i ulubione",
+    "follows": "Nowi obserwujący",
+    "moves": "Użytkownik migruje",
+    "load_older": "Załaduj starsze interakcje"
   },
   "post_status": {
     "new_status": "Dodaj nowy status",
@@ -79,8 +176,14 @@
     },
     "content_warning": "Temat (nieobowiązkowy)",
     "default": "Właśnie wróciłem z kościoła",
-    "direct_warning": "Ten wpis zobaczą tylko osoby, o których wspomniałeś(-aś).",
+    "direct_warning_to_all": "Ten wpis zobaczą wszystkie osoby, o których wspomniałeś(-aś).",
+    "direct_warning_to_first_only": "Ten wpis zobaczą tylko te osoby, o których wspomniałeś(-aś) na początku wiadomości.",
     "posting": "Wysyłanie",
+    "scope_notice": {
+      "public": "Ten post będzie widoczny dla każdego",
+      "private": "Ten post będzie widoczny tylko dla twoich obserwujących",
+      "unlisted": "Ten post nie będzie widoczny na publicznej osi czasu i całej znanej sieci"
+    },
     "scope": {
       "direct": "Bezpośredni – Tylko dla wspomnianych użytkowników",
       "private": "Tylko dla obserwujących – Umieść dla osób, które cię obserwują",
@@ -109,8 +212,40 @@
       "password_confirmation_match": "musi być takie jak hasło"
     }
   },
+  "remote_user_resolver": {
+    "remote_user_resolver": "Wyszukiwarka użytkowników nietutejszych",
+    "searching_for": "Szukam",
+    "error": "Nie znaleziono."
+  },
+  "selectable_list": {
+    "select_all": "Zaznacz wszystko"
+  },
   "settings": {
     "app_name": "Nazwa aplikacji",
+    "security": "Bezpieczeństwo",
+    "enter_current_password_to_confirm": "Wprowadź obecne hasło, by potwierdzić twoją tożsamość",
+    "mfa": {
+      "otp" : "OTP",
+      "setup_otp" : "Ustaw OTP",
+      "wait_pre_setup_otp" : "początkowe ustawianie OTP",
+      "confirm_and_enable" : "Potwierdź i włącz OTP",
+      "title": "Weryfikacja dwuetapowa",
+      "generate_new_recovery_codes" : "Wygeneruj nowe kody zapasowe",
+      "warning_of_generate_new_codes" : "Po tym gdy generujesz nowe kody zapasowe, stare przestaną działać.",
+      "recovery_codes" : "Kody zapasowe.",
+      "waiting_a_recovery_codes": "Otrzymuję kody zapasowe...",
+      "recovery_codes_warning" : "Spisz kody na kartce papieru, albo zapisz je w bezpiecznym miejscu - inaczej nie zobaczysz ich już nigdy. Jeśli stracisz dostęp do twojej aplikacji 2FA i kodów zapasowych, nie będziesz miał dostępu do swojego konta.",
+      "authentication_methods" : "Metody weryfikacji",
+      "scan": {
+        "title": "Skanuj",
+        "desc": "Zeskanuj ten kod QR używając twojej aplikacji 2FA albo wpisz ten klucz:",
+        "secret_code": "Klucz"
+      },
+      "verify": {
+        "desc": "By włączyć weryfikację dwuetapową, wpisz kod z twojej aplikacji 2FA:"
+      }
+    },
+    "allow_following_move": "Zezwalaj na automatyczną obserwację gdy obserwowane konto migruje",
     "attachmentRadius": "Załączniki",
     "attachments": "Załączniki",
     "autoload": "Włącz automatyczne ładowanie po przewinięciu do końca strony",
@@ -119,12 +254,20 @@
     "avatarRadius": "Awatary",
     "background": "Tło",
     "bio": "Bio",
+    "block_export": "Eksport blokad",
+    "block_export_button": "Eksportuj twoje blokady do pliku .csv",
+    "block_import": "Import blokad",
+    "block_import_error": "Wystąpił błąd podczas importowania blokad",
+    "blocks_imported": "Zaimportowano blokady, przetwarzanie może zająć trochę czasu.",
     "blocks_tab": "Bloki",
     "btnRadius": "Przyciski",
     "cBlue": "Niebieski (odpowiedz, obserwuj)",
     "cGreen": "Zielony (powtórzenia)",
     "cOrange": "Pomarańczowy (ulubione)",
     "cRed": "Czerwony (anuluj)",
+    "change_email": "Zmień email",
+    "change_email_error": "Wystąpił problem podczas zmiany emaila.",
+    "changed_email": "Pomyślnie zmieniono email!",
     "change_password": "Zmień hasło",
     "change_password_error": "Podczas zmiany hasła wystąpił problem.",
     "changed_password": "Pomyślnie zmieniono hasło!",
@@ -140,16 +283,20 @@
     "delete_account_description": "Trwale usuń konto i wszystkie posty.",
     "delete_account_error": "Wystąpił problem z usuwaniem twojego konta. Jeżeli problem powtarza się, poinformuj administratora swojej instancji.",
     "delete_account_instructions": "Wprowadź swoje hasło w poniższe pole aby potwierdzić usunięcie konta.",
+    "discoverable": "Zezwól na odkrywanie tego konta w wynikach wyszukiwania i innych usługa.",
+    "domain_mutes": "Domeny",
     "avatar_size_instruction": "Zalecany minimalny rozmiar awatarów to 150x150 pikseli.",
+    "pad_emoji": "Dodaj odstęp z obu stron emoji podczas dodawania selektorem",
+    "emoji_reactions_on_timeline": "Pokaż reakcje emoji na osi czasu",
     "export_theme": "Zapisz motyw",
     "filtering": "Filtrowanie",
     "filtering_explanation": "Wszystkie statusy zawierające te słowa będą wyciszone. Jedno słowo na linijkę.",
     "follow_export": "Eksport obserwowanych",
     "follow_export_button": "Eksportuj swoją listę obserwowanych do pliku CSV",
-    "follow_export_processing": "Przetwarzanie, wkrótce twój plik zacznie się ściągać.",
     "follow_import": "Import obserwowanych",
     "follow_import_error": "Błąd przy importowaniu obserwowanych",
     "follows_imported": "Obserwowani zaimportowani! Przetwarzanie może trochę potrwać.",
+    "accent": "Akcent",
     "foreground": "Pierwszy plan",
     "general": "Ogólne",
     "hide_attachments_in_convo": "Ukrywaj załączniki w rozmowach",
@@ -162,6 +309,7 @@
     "hide_post_stats": "Ukrywaj statysyki postów (np. liczbę polubień)",
     "hide_user_stats": "Ukrywaj statysyki użytkowników (np. liczbę obserwujących)",
     "hide_filtered_statuses": "Ukrywaj filtrowane statusy",
+    "import_blocks_from_a_csv_file": "Importuj blokady z pliku CSV",
     "import_followers_from_a_csv_file": "Importuj obserwowanych z pliku CSV",
     "import_theme": "Załaduj motyw",
     "inputRadius": "Pola tekstowe",
@@ -181,17 +329,22 @@
     "use_contain_fit": "Nie przycinaj załączników na miniaturach",
     "name": "Imię",
     "name_bio": "Imię i bio",
+    "new_email": "Nowy email",
     "new_password": "Nowe hasło",
     "notification_visibility": "Rodzaje powiadomień do wyświetlania",
     "notification_visibility_follows": "Obserwacje",
     "notification_visibility_likes": "Ulubione",
     "notification_visibility_mentions": "Wzmianki",
     "notification_visibility_repeats": "Powtórzenia",
+    "notification_visibility_moves": "Użytkownik migruje",
+    "notification_visibility_emoji_reactions": "Reakcje",
     "no_rich_text_description": "Usuwaj formatowanie ze wszystkich postów",
     "no_blocks": "Bez blokad",
     "no_mutes": "Bez wyciszeń",
     "hide_follows_description": "Nie pokazuj kogo obserwuję",
     "hide_followers_description": "Nie pokazuj kto mnie obserwuje",
+    "hide_follows_count_description": "Nie pokazuj licznika obserwowanych",
+    "hide_followers_count_description": "Nie pokazuj licznika obserwujących",
     "show_admin_badge": "Pokazuj odznakę Administrator na moim profilu",
     "show_moderator_badge": "Pokazuj odznakę Moderator na moim profilu",
     "nsfw_clickthrough": "Włącz domyślne ukrywanie załączników o treści nieprzyzwoitej (NSFW)",
@@ -212,10 +365,14 @@
     "reply_visibility_all": "Pokazuj wszystkie odpowiedzi",
     "reply_visibility_following": "Pokazuj tylko odpowiedzi skierowane do mnie i osób które obserwuję",
     "reply_visibility_self": "Pokazuj tylko odpowiedzi skierowane do mnie",
+    "autohide_floating_post_button": "Ukryj automatycznie przycisk \"Nowy post\" (mobile)",
     "saving_err": "Nie udało się zapisać ustawień",
     "saving_ok": "Zapisano ustawienia",
+    "search_user_to_block": "Wyszukaj kogo chcesz zablokować",
+    "search_user_to_mute": "Wyszukaj kogo chcesz wyciszyć",
     "security_tab": "Bezpieczeństwo",
     "scope_copy": "Kopiuj zakres podczas odpowiadania (DM-y zawsze są kopiowane)",
+    "minimal_scopes_mode": "Zminimalizuj opcje wyboru zakresu postów",
     "set_new_avatar": "Ustaw nowy awatar",
     "set_new_profile_background": "Ustaw nowe tło profilu",
     "set_new_profile_banner": "Ustaw nowy banner profilu",
@@ -228,19 +385,32 @@
     "post_status_content_type": "Post status content type",
     "stop_gifs": "Odtwarzaj GIFy po najechaniu kursorem",
     "streaming": "Włącz automatycznie strumieniowanie nowych postów gdy jesteś na początku strony",
+    "user_mutes": "Users",
+    "useStreamingApi": "Otrzymuj posty i powiadomienia w czasie rzeczywistym",
+    "useStreamingApiWarning": "(Niezalecane, eksperymentalne, pomija posty)",
     "text": "Tekst",
     "theme": "Motyw",
     "theme_help": "Użyj kolorów w notacji szesnastkowej (#rrggbb), by stworzyć swój motyw.",
     "theme_help_v2_1": "Możesz też zastąpić kolory i widoczność poszczególnych komponentów przełączając pola wyboru, użyj „Wyczyść wszystko” aby usunąć wszystkie zastąpienia.",
     "theme_help_v2_2": "Ikony pod niektórych wpisami są wskaźnikami kontrastu pomiędzy tłem a tekstem, po najechaniu na nie otrzymasz szczegółowe informacje. Zapamiętaj, że jeżeli używasz przezroczystości, wskaźniki pokazują najgorszy możliwy przypadek.",
     "tooltipRadius": "Etykiety/alerty",
+    "type_domains_to_mute": "Wpisz domeny, które chcesz wyciszyć",
     "upload_a_photo": "Wyślij zdjęcie",
     "user_settings": "Ustawienia użytkownika",
     "values": {
       "false": "nie",
       "true": "tak"
     },
+    "fun": "Zabawa",
+    "greentext": "Memiczne strzałki",
     "notifications": "Powiadomienia",
+    "notification_setting": "Otrzymuj powiadomienia od:",
+    "notification_setting_follows": "Ludzi których obserwujesz",
+    "notification_setting_non_follows": "Ludzi których nie obserwujesz",
+    "notification_setting_followers": "Ludzi którzy obserwują ciebie",
+    "notification_setting_non_followers": "Ludzi którzy nie obserwują ciebie",
+    "notification_mutes": "By przestać otrzymywać powiadomienia od jednego użytkownika, wycisz go",
+    "notification_blocks": "Blokowanie uzytkownika zatrzymuje wszystkie powiadomienia i odsubskrybowuje go.",
     "enable_web_push_notifications": "Włącz powiadomienia push",
     "style": {
       "switcher": {
@@ -252,7 +422,24 @@
         "save_load_hint": "Opcje „zachowaj” pozwalają na pozostanie przy obecnych opcjach po wybraniu lub załadowaniu motywu, jak i przechowywanie ich podczas eksportowania motywu. Jeżeli wszystkie są odznaczone, eksportowanie motywu spowoduje zapisanie wszystkiego.",
         "reset": "Wyzeruj",
         "clear_all": "Wyczyść wszystko",
-        "clear_opacity": "Wyczyść widoczność"
+        "clear_opacity": "Wyczyść widoczność",
+        "load_theme": "Załaduj motyw",
+        "keep_as_is": "Zostaw po staremu",
+        "use_snapshot": "Stara wersja",
+        "use_source": "Nowa wersja",
+        "help": {
+          "upgraded_from_v2": "PleromaFE zostało zaaktualizowane, motyw może wyglądać nieco inaczej niż sobie zapamiętałeś.",
+          "v2_imported": "Plik który zaimportowałeś został stworzony dla starszego FE. Próbujemy zwiększyć kompatybiliność, lecz wciąż mogą występować rozbieżności.",
+          "future_version_imported": "Plik który zaimportowałeś został stworzony w nowszej wersji FE.",
+          "older_version_imported": "Plik który zaimportowałeś został stworzony w starszej wersji FE.",
+          "snapshot_present": "Migawka motywu jest załadowana, więc wszystkie wartości zostały nadpisane. Zamiast tego, możesz załadować właściwe dane motywu",
+          "snapshot_missing": "Nie znaleziono migawki motywu w pliku, więc motyw może wyglądać inaczej niż pierwotnie zaplanowano.",
+          "fe_upgraded": "Silnik motywów PleromaFE został zaaktualizowany.",
+          "fe_downgraded": "Wersja PleromaFE została cofnięta.",
+          "migration_snapshot_ok": "Żeby być bezpiecznym, migawka motywu została załadowana. Możesz spróbować załadować dane motywu.",
+          "migration_napshot_gone": "Z jakiegoś powodu migawka zniknęła, niektóre rzeczy mogą wyglądać inaczej niż sobie zapamiętałeś.",
+          "snapshot_source_mismatch": "Konflikt wersji: najprawdopodobniej FE zostało cofnięte do poprzedniej wersji i zaaktualizowane ponownie, jeśli zmieniłeś motyw używając starszej wersji FE, najprawdopodobniej chcesz używać starszej wersji, w przeciwnym razie użyj nowej wersji."
+        }
       },
       "common": {
         "color": "Kolor",
@@ -280,14 +467,28 @@
         "_tab_label": "Zaawansowane",
         "alert": "Tło alertu",
         "alert_error": "Błąd",
+        "alert_warning": "Ostrzeżenie",
+        "alert_neutral": "Neutralne",
+        "post": "Posty/Bio użytkowników",
         "badge": "Tło odznaki",
+        "popover": "Etykiety, menu, popovery",
         "badge_notification": "Powiadomienie",
         "panel_header": "Nagłówek panelu",
         "top_bar": "Górny pasek",
         "borders": "Granice",
         "buttons": "Przyciski",
         "inputs": "Pola wejścia",
-        "faint_text": "Zanikający tekst"
+        "faint_text": "Zanikający tekst",
+        "underlay": "Podkład",
+        "poll": "Wykres ankiety",
+        "icons": "Ikony",
+        "highlight": "Podświetlone elementy",
+        "pressed": "Naciśnięte",
+        "selectedPost": "Wybrany post",
+        "selectedMenu": "Wybrany element menu",
+        "disabled": "Wyłączone",
+        "toggled": "Przełączone",
+        "tabs": "Karty"
       },
       "radii": {
         "_tab_label": "Zaokrąglenie"
@@ -300,7 +501,7 @@
         "blur": "Rozmycie",
         "spread": "Szerokość",
         "inset": "Inset",
-        "hint": "Możesz też używać --zmiennych jako kolorów, aby wykorzystać zmienne CSS3. Pamiętaj, że ustawienie widoczności nie będzie wtedy działać.",
+        "hintV3": "Dla cieni możesz również użyć notacji {0} by użyć inny slot koloru.",
         "filter_hint": {
           "always_drop_shadow": "Ostrzeżenie, ten cień zawsze używa {0} jeżeli to obsługiwane przez przeglądarkę.",
           "drop_shadow_syntax": "{0} nie obsługuje parametru {1} i słowa kluczowego {2}.",
@@ -357,6 +558,40 @@
       "frontend_version": "Wersja front-endu"
     }
   },
+  "time": {
+    "day": "{0} dzień",
+    "days": "{0} dni",
+    "day_short": "{0}d",
+    "days_short": "{0}d",
+    "hour": "{0} godzina",
+    "hours": "{0} godzin",
+    "hour_short": "{0} godz.",
+    "hours_short": "{0} godz.",
+    "in_future": "za {0}",
+    "in_past": "{0} temu",
+    "minute": "{0} minuta",
+    "minutes": "{0} minut",
+    "minute_short": "{0}min",
+    "minutes_short": "{0}min",
+    "month": "{0} miesiąc",
+    "months": "{0} miesięcy",
+    "month_short": "{0} mies.",
+    "months_short": "{0} mies.",
+    "now": "teraz",
+    "now_short": "teraz",
+    "second": "{0} sekunda",
+    "seconds": "{0} sekund",
+    "second_short": "{0}s",
+    "seconds_short": "{0}s",
+    "week": "{0} tydzień",
+    "weeks": "{0} tygodni",
+    "week_short": "{0} tydz.",
+    "weeks_short": "{0} tyg.",
+    "year": "{0} rok",
+    "years": "{0} lata",
+    "year_short": "{0} r.",
+    "years_short": "{0} lata"
+  },
   "timeline": {
     "collapse": "Zwiń",
     "conversation": "Rozmowa",
@@ -370,8 +605,17 @@
     "no_statuses": "Brak statusów"
   },
   "status": {
+    "favorites": "Ulubione",
+    "repeats": "Powtórzenia",
+    "delete": "Usuń status",
+    "pin": "Przypnij na profilu",
+    "unpin": "Odepnij z profilu",
+    "pinned": "Przypnięte",
+    "delete_confirm": "Czy naprawdę chcesz usunąć ten status?",
     "reply_to": "Odpowiedź dla",
-    "replies_list": "Odpowiedzi:"
+    "replies_list": "Odpowiedzi:",
+    "mute_conversation": "Wycisz konwersację",
+    "unmute_conversation": "Odcisz konwersację"
   },
   "user_card": {
     "approve": "Przyjmij",
@@ -388,24 +632,59 @@
     "followers": "Obserwujący",
     "following": "Obserwowany!",
     "follows_you": "Obserwuje cię!",
+    "hidden": "Ukryte",
     "its_you": "To ty!",
     "media": "Media",
+    "mention": "Wspomnienie",
     "mute": "Wycisz",
     "muted": "Wyciszony(-a)",
     "per_day": "dziennie",
     "remote_follow": "Zdalna obserwacja",
+    "report": "Raportuj",
     "statuses": "Statusy",
+    "subscribe": "Subskrybuj",
+    "unsubscribe": "Odsubskrybuj",
     "unblock": "Odblokuj",
     "unblock_progress": "Odblokowuję…",
     "block_progress": "Blokuję…",
     "unmute": "Cofnij wyciszenie",
     "unmute_progress": "Cofam wyciszenie…",
-    "mute_progress": "Wyciszam…"
+    "mute_progress": "Wyciszam…",
+    "hide_repeats": "Ukryj powtórzenia",
+    "show_repeats": "Pokaż powtórzenia",
+    "admin_menu": {
+      "moderation": "Moderacja",
+      "grant_admin": "Przyznaj admina",
+      "revoke_admin": "Odwołaj admina",
+      "grant_moderator": "Przyznaj moderatora",
+      "revoke_moderator": "Odwołaj moderatora",
+      "activate_account": "Aktywuj konto",
+      "deactivate_account": "Dezaktywuj konto",
+      "delete_account": "Usuń konto",
+      "force_nsfw": "Oznacz wszystkie posty jako NSFW",
+      "strip_media": "Usuń multimedia z postów",
+      "force_unlisted": "Wymuś posty na niepubliczne",
+      "sandbox": "Wymuś by posty były tylko dla obserwujących",
+      "disable_remote_subscription": "Zakaż obserwowania użytkownika ze zdalnych instancji",
+      "disable_any_subscription": "Zakaż całkowicie obserwowania użytkownika",
+      "quarantine": "Zakaż federowania postów od tego użytkownika",
+      "delete_user": "Usuń użytkownika",
+      "delete_user_confirmation": "Czy jesteś absolutnie pewny? Ta operacja nie może być cofnięta."
+    }
   },
   "user_profile": {
     "timeline_title": "Oś czasu użytkownika",
     "profile_does_not_exist": "Przepraszamy, ten profil nie istnieje.",
     "profile_loading_error": "Przepraszamy, wystąpił błąd podczas ładowania tego profilu."
+  },
+  "user_reporting": {
+    "title": "Raportowanie {0}",
+    "add_comment_description": "Raport zostanie wysłany do moderatorów instancji. Możesz dodać powód dlaczego raportujesz to konto poniżej:",
+    "additional_comments": "Dodatkowe komentarze",
+    "forward_description": "To konto jest z innego serwera. Wysłać również tam kopię raportu?",
+    "forward_to": "Przekaż do{0}",
+    "submit": "Wyślij",
+    "generic_error": "Wystąpił błąd podczas przetwarzania twojej prośby."
   },
   "who_to_follow": {
     "more": "Więcej",
@@ -416,6 +695,7 @@
     "repeat": "Powtórz",
     "reply": "Odpowiedz",
     "favorite": "Dodaj do ulubionych",
+    "add_reaction": "Dodaj reakcję",
     "user_settings": "Ustawienia użytkownika"
   },
   "upload":{
@@ -431,5 +711,25 @@
       "GiB": "GiB",
       "TiB": "TiB"
     }
+  },
+  "search": {
+    "people": "Ludzie",
+    "hashtags": "Hasztagi",
+    "person_talking": "{count} osoba rozmawia o tym",
+    "people_talking": "{count} osób rozmawia o tym",
+    "no_results": "Brak wyników"
+  },
+  "password_reset": {
+    "forgot_password": "Zapomniałeś hasła?",
+    "password_reset": "Reset hasła",
+    "instruction": "Wprowadź swój adres email lub nazwę użytkownika. Wyślemy ci link z którym możesz zresetować hasło.",
+    "placeholder": "Twój email lub nazwa użytkownika",
+    "check_email": "Sprawdź pocztę, aby uzyskać link do zresetowania hasła.",
+    "return_home": "Wróć do strony głównej",
+    "not_found": "Nie mogliśmy znaleźć tego emaila lub nazwy użytkownika.",
+    "too_many_requests": "Przekroczyłeś limit prób, spróbuj ponownie później.",
+    "password_reset_disabled": "Resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji.",
+    "password_reset_required": "Musisz zresetować hasło, by się zalogować.",
+    "password_reset_required_but_mailer_is_disabled": "Musisz zresetować hasło, ale resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji."
   }
 }

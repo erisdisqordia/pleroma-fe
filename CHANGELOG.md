@@ -5,6 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [2.0.2] - 2020-04-08
+### Fixed
+- Favorite/Repeat avatars not showing up on private instances/non-public posts
+- Autocorrect getting triggered in the captcha field
+- Overflow on long domains in follow/move notifications
+
+### Changed
+- Polish translation updated
+
 ## [2.0.0] - 2020-02-28
 ### Added
 - Tons of color slots including ones for hover/pressed/toggled buttons

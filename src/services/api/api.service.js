@@ -540,7 +540,7 @@ const fetchTimeline = ({
     params.push(['with_move', withMove])
   }
 
-  params.push(['count', 20])
+  params.push(['limit', 20])
   params.push(['with_muted', withMuted])
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')

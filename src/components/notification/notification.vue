@@ -47,7 +47,7 @@
         <span class="notification-details">
           <div class="name-and-action">
             <!-- eslint-disable vue/no-v-html -->
-            <span
+            <bdi
               v-if="!!notification.from_profile.name_html"
               class="username"
               :title="'@'+notification.from_profile.screen_name"

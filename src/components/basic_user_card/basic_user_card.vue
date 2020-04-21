@@ -12,7 +12,7 @@
       class="basic-user-card-expanded-content"
     >
       <UserCard
-        :user="user"
+        :userId="user.id"
         :rounded="true"
         :bordered="true"
       />

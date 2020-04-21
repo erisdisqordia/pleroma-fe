@@ -40,7 +40,7 @@
       <div class="notification-right">
         <UserCard
           v-if="userExpanded"
-          :user="getUser(notification)"
+          :user-id="getUser(notification).id"
           :rounded="true"
           :bordered="true"
         />

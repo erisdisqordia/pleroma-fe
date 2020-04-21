@@ -31,6 +31,7 @@ const fetchAndUpdate = ({
   const { getters } = store
   const timelineData = rootState.statuses.timelines[camelCase(timeline)]
   const hideMutedPosts = getters.mergedConfig.hideMutedPosts
+  const replyVisibility = getters.mergedConfig.replyVisibility
 
   if (older) {
     args['until'] = until || timelineData.minId
@@ -41,6 +42,7 @@ const fetchAndUpdate = ({
   args['userId'] = userId
   args['tag'] = tag
   args['withMuted'] = !hideMutedPosts
+  args['withRelationships'] = replyVisibility === 'following'
 
   const numStatusesBeforeFetch = timelineData.statuses.length
 

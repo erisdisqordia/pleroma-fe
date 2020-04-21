@@ -304,6 +304,9 @@ const afterStoreSetup = async ({ store, i18n }) => {
     getNodeInfo({ store })
   ])
 
+  // Start fetching things that don't need to block the UI
+  store.dispatch('fetchMutes')
+
   const router = new VueRouter({
     mode: 'history',
     routes: routes(store),

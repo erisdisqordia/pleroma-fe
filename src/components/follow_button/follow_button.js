@@ -1,6 +1,6 @@
 import { requestFollow, requestUnfollow } from '../../services/follow_manipulate/follow_manipulate'
 export default {
-  props: ['user', 'labelFollowing', 'buttonClass'],
+  props: ['relationship', 'labelFollowing', 'buttonClass'],
   data () {
     return {
       inProgress: false
@@ -8,12 +8,12 @@ export default {
   },
   computed: {
     isPressed () {
-      return this.inProgress || this.user.following
+      return this.inProgress || this.relationship.following
     },
     title () {
-      if (this.inProgress || this.user.following) {
+      if (this.inProgress || this.relationship.following) {
         return this.$t('user_card.follow_unfollow')
-      } else if (this.user.requested) {
+      } else if (this.relationship.requested) {
         return this.$t('user_card.follow_again')
       } else {
         return this.$t('user_card.follow')
@@ -22,9 +22,9 @@ export default {
     label () {
       if (this.inProgress) {
         return this.$t('user_card.follow_progress')
-      } else if (this.user.following) {
+      } else if (this.relationship.following) {
         return this.labelFollowing || this.$t('user_card.following')
-      } else if (this.user.requested) {
+      } else if (this.relationship.requested) {
         return this.$t('user_card.follow_sent')
       } else {
         return this.$t('user_card.follow')
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     onClick () {
-      this.user.following ? this.unfollow() : this.follow()
+      this.relationship.following ? this.unfollow() : this.follow()
     },
     follow () {
       this.inProgress = true

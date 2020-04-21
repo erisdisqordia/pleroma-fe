@@ -9,16 +9,16 @@
         class="account-tools-popover"
       >
         <div class="dropdown-menu">
-          <template v-if="user.following">
+          <template v-if="relationship.following">
             <button
-              v-if="user.showing_reblogs"
+              v-if="relationship.showing_reblogs"
               class="btn btn-default dropdown-item"
               @click="hideRepeats"
             >
               {{ $t('user_card.hide_repeats') }}
             </button>
             <button
-              v-if="!user.showing_reblogs"
+              v-if="!relationship.showing_reblogs"
               class="btn btn-default dropdown-item"
               @click="showRepeats"
             >
@@ -30,7 +30,7 @@
             />
           </template>
           <button
-            v-if="user.statusnet_blocking"
+            v-if="relationship.blocking"
             class="btn btn-default btn-block dropdown-item"
             @click="unblockUser"
           >

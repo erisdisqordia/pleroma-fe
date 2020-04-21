@@ -73,7 +73,7 @@ export const parseUser = (data) => {
       output.background_image = data.pleroma.background_image
       output.token = data.pleroma.chat_token
 
-      if (relationship) {
+      if (relationship && !relationship) {
         output.follows_you = relationship.followed_by
         output.requested = relationship.requested
         output.following = relationship.following
@@ -81,6 +81,9 @@ export const parseUser = (data) => {
         output.muted = relationship.muting
         output.showing_reblogs = relationship.showing_reblogs
         output.subscribed = relationship.subscribing
+      }
+      if (relationship) {
+        output.relationship = relationship
       }
 
       output.allow_following_move = data.pleroma.allow_following_move
@@ -137,15 +140,9 @@ export const parseUser = (data) => {
 
     output.statusnet_profile_url = data.statusnet_profile_url
 
-    output.statusnet_blocking = data.statusnet_blocking
-
     output.is_local = data.is_local
     output.role = data.role
     output.show_role = data.show_role
-
-    output.follows_you = data.follows_you
-
-    output.muted = data.muted
 
     if (data.rights) {
       output.rights = {
@@ -160,10 +157,16 @@ export const parseUser = (data) => {
     output.hide_follows_count = data.hide_follows_count
     output.hide_followers_count = data.hide_followers_count
     output.background_image = data.background_image
-    // on mastoapi this info is contained in a "relationship"
-    output.following = data.following
     // Websocket token
     output.token = data.token
+
+    // Convert relationsip data to expected format
+    output.relationship = {
+      muting: data.muted,
+      blocking: data.statusnet_blocking,
+      followed_by: data.follows_you,
+      following: data.following
+    }
   }
 
   output.created_at = new Date(data.created_at)
@@ -317,6 +320,9 @@ export const parseStatus = (data) => {
     ? String(output.in_reply_to_user_id)
     : null
 
+  if (data.account.pleroma.relationship) {
+    data.account.pleroma.relationship = undefined
+  }
   output.user = parseUser(masto ? data.account : data.user)
 
   output.attentions = ((masto ? data.mentions : data.attentions) || []).map(parseUser)
@@ -342,7 +348,6 @@ export const parseNotification = (data) => {
   }
   const masto = !data.hasOwnProperty('ntype')
   const output = {}
-
   if (masto) {
     output.type = mastoDict[data.type] || data.type
     output.seen = data.pleroma.is_seen

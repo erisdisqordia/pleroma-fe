@@ -496,7 +496,8 @@ const fetchTimeline = ({
   userId = false,
   tag = false,
   withMuted = false,
-  withMove = false
+  withMove = false,
+  withRelationships = false
 }) => {
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
@@ -542,6 +543,7 @@ const fetchTimeline = ({
 
   params.push(['count', 20])
   params.push(['with_muted', withMuted])
+  params.push(['with_relationships', withRelationships])
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`

@@ -2,14 +2,14 @@
   <basic-user-card :user="user">
     <div class="follow-card-content-container">
       <span
-        v-if="!noFollowsYou && user.follows_you"
+        v-if="!noFollowsYou && relationship.followed_by"
         class="faint"
       >
         {{ isMe ? $t('user_card.its_you') : $t('user_card.follows_you') }}
       </span>
       <template v-if="!loggedIn">
         <div
-          v-if="!user.following"
+          v-if="!relationship.following"
           class="follow-card-follow-button"
         >
           <RemoteFollow :user="user" />
@@ -18,6 +18,7 @@
       <template v-else>
         <FollowButton
           :user="user"
+          :relationship="relationship"
           class="follow-card-follow-button"
           :label-following="$t('user_card.follow_unfollow')"
         />

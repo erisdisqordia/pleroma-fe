@@ -5,7 +5,7 @@
       class="user-profile panel panel-default"
     >
       <UserCard
-        :user="user"
+        :userId="user.id"
         :switcher="true"
         :selected="timeline.viewing"
         :allow-zooming-avatar="true"

@@ -48,7 +48,6 @@ const fetchNotifications = ({ store, args, older }) => {
       update({ store, notifications, older })
       return notifications
     }, () => store.dispatch('setNotificationsError', { value: true }))
-    .catch(() => store.dispatch('setNotificationsError', { value: true }))
 }
 
 const startFetching = ({ credentials, store }) => {

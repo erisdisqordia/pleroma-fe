@@ -8,9 +8,7 @@
       :style="style"
       class="background-image"
     />
-    <div
-      class="panel-heading"
-    >
+    <div class="panel-heading">
       <div class="user-info">
         <div class="container">
           <a

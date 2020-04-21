@@ -147,7 +147,6 @@ export const mutations = {
   },
   addNewUsers (state, users) {
     each(users, (user) => {
-      // console.log(user)
       if (user.relationship) {
         set(state.relationships, user.relationship.id, user.relationship)
       }

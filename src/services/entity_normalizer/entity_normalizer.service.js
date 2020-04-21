@@ -320,9 +320,6 @@ export const parseStatus = (data) => {
     ? String(output.in_reply_to_user_id)
     : null
 
-  if (data.account.pleroma.relationship) {
-    data.account.pleroma.relationship = undefined
-  }
   output.user = parseUser(masto ? data.account : data.user)
 
   output.attentions = ((masto ? data.mentions : data.attentions) || []).map(parseUser)

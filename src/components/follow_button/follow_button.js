@@ -37,16 +37,16 @@ export default {
     },
     follow () {
       this.inProgress = true
-      requestFollow(this.user, this.$store).then(() => {
+      requestFollow(this.relationship.id, this.$store).then(() => {
         this.inProgress = false
       })
     },
     unfollow () {
       const store = this.$store
       this.inProgress = true
-      requestUnfollow(this.user, store).then(() => {
+      requestUnfollow(this.relationship.id, store).then(() => {
         this.inProgress = false
-        store.commit('removeStatus', { timeline: 'friends', userId: this.user.id })
+        store.commit('removeStatus', { timeline: 'friends', userId: this.relationship.id })
       })
     }
   }

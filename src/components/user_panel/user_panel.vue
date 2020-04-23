@@ -6,7 +6,7 @@
       class="panel panel-default signed-in"
     >
       <UserCard
-        :userId="user.id"
+        :user-id="user.id"
         :hide-bio="true"
         rounded="top"
       />

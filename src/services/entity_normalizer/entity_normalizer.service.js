@@ -336,6 +336,7 @@ export const parseNotification = (data) => {
   }
   const masto = !data.hasOwnProperty('ntype')
   const output = {}
+
   if (masto) {
     output.type = mastoDict[data.type] || data.type
     output.seen = data.pleroma.is_seen

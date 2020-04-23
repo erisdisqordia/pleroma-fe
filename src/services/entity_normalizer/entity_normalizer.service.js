@@ -73,15 +73,6 @@ export const parseUser = (data) => {
       output.background_image = data.pleroma.background_image
       output.token = data.pleroma.chat_token
 
-      if (relationship && !relationship) {
-        output.follows_you = relationship.followed_by
-        output.requested = relationship.requested
-        output.following = relationship.following
-        output.statusnet_blocking = relationship.blocking
-        output.muted = relationship.muting
-        output.showing_reblogs = relationship.showing_reblogs
-        output.subscribed = relationship.subscribing
-      }
       if (relationship) {
         output.relationship = relationship
       }

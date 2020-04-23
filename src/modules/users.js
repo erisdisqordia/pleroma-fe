@@ -83,10 +83,6 @@ const unmuteDomain = (store, domain) => {
 }
 
 export const mutations = {
-  setMuted (state, { user: { id }, muted }) {
-    const user = state.usersObject[id]
-    set(user, 'muted', muted)
-  },
   tagUser (state, { user: { id }, tag }) {
     const user = state.usersObject[id]
     const tags = user.tags || []

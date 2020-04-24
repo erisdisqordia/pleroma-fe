@@ -48,6 +48,11 @@ const unblockUser = (store, id) => {
 }
 
 const muteUser = (store, id) => {
+  const predictedRelationship = store.state.relationships[id] || { id }
+  predictedRelationship.muting = true
+  store.commit('updateUserRelationship', [predictedRelationship])
+  store.commit('addMuteId', id)
+
   return store.rootState.api.backendInteractor.muteUser({ id })
     .then((relationship) => {
       store.commit('updateUserRelationship', [relationship])
@@ -56,6 +61,10 @@ const muteUser = (store, id) => {
 }
 
 const unmuteUser = (store, id) => {
+  const predictedRelationship = store.state.relationships[id] || { id }
+  predictedRelationship.muting = false
+  store.commit('updateUserRelationship', [predictedRelationship])
+
   return store.rootState.api.backendInteractor.unmuteUser({ id })
     .then((relationship) => store.commit('updateUserRelationship', [relationship]))
 }
@@ -227,6 +236,9 @@ export const getters = {
       return state.usersObject[query.toLowerCase()]
     }
     return result
+  },
+  relationship: state => id => {
+    return state.relationships[id] || { id, loading: true }
   }
 }
 

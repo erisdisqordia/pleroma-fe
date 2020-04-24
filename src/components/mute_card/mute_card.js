@@ -12,7 +12,7 @@ const MuteCard = {
       return this.$store.getters.findUser(this.userId)
     },
     relationship () {
-      return this.$store.state.users.relationships[this.userId]
+      return this.$store.getters.relationship(this.userId)
     },
     muted () {
       return this.relationship.muting

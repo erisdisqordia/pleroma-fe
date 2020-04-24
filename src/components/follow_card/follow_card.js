@@ -20,7 +20,7 @@ const FollowCard = {
       return this.$store.state.users.currentUser
     },
     relationship () {
-      return this.$store.state.users.relationships[this.user.id]
+      return this.$store.getters.relationship(this.user.id)
     }
   }
 }

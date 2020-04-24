@@ -19,6 +19,7 @@ const actions = {
 
 const testGetters = {
   findUser: state => getters.findUser(state.users),
+  relationship: state => getters.relationship(state.users),
   mergedConfig: state => ({
     colors: '',
     highlight: {},

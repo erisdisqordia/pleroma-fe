@@ -351,13 +351,13 @@ const UserSettings = {
     },
     filterUnblockedUsers (userIds) {
       return reject(userIds, (userId) => {
-        const relationship = this.$store.state.users.relationships[userId] || {}
+        const relationship = this.$store.getters.relationship(this.userId)
         return relationship.blocking || userId === this.$store.state.users.currentUser.id
       })
     },
     filterUnMutedUsers (userIds) {
       return reject(userIds, (userId) => {
-        const relationship = this.$store.state.users.relationships[userId] || {}
+        const relationship = this.$store.getters.relationship(this.userId)
         return relationship.muting || userId === this.$store.state.users.currentUser.id
       })
     },

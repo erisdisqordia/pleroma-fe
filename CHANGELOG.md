@@ -11,6 +11,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Emoji autocomplete will match any part of the word and not just start, for example :drool will now helpfully suggest :blobcatdrool: and :blobcatdroolreach:
 
+### Add
+- Follow request notification support
+
 ## [2.0.2] - 2020-04-08
 ### Fixed
 - Favorite/Repeat avatars not showing up on private instances/non-public posts

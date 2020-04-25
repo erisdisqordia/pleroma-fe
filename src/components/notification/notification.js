@@ -2,6 +2,7 @@ import Status from '../status/status.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import UserCard from '../user_card/user_card.vue'
 import Timeago from '../timeago/timeago.vue'
+import { isStatusNotification } from '../../services/notification_utils/notification_utils.js'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
@@ -32,6 +33,21 @@ const Notification = {
     },
     toggleMute () {
       this.unmuted = !this.unmuted
+    },
+    approveUser () {
+      this.$store.state.api.backendInteractor.approveUser({ id: this.user.id })
+      this.$store.dispatch('removeFollowRequest', this.user)
+      this.$store.dispatch('updateNotification', {
+        id: this.notification.id,
+        updater: notification => {
+          notification.type = 'follow'
+        }
+      })
+    },
+    denyUser () {
+      this.$store.state.api.backendInteractor.denyUser({ id: this.user.id })
+      this.$store.dispatch('removeFollowRequest', this.user)
+      this.$store.dispatch('dismissNotification', { id: this.notification.id })
     }
   },
   computed: {
@@ -57,6 +73,9 @@ const Notification = {
     },
     needMute () {
       return this.user.muted
+    },
+    isStatusNotification () {
+      return isStatusNotification(this.notification.type)
     }
   }
 }

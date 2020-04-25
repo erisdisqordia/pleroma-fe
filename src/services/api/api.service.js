@@ -29,6 +29,7 @@ const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
 const MASTODON_REGISTRATION_URL = '/api/v1/accounts'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
+const MASTODON_DISMISS_NOTIFICATION_URL = id => `/api/v1/notifications/${id}/dismiss`
 const MASTODON_FAVORITE_URL = id => `/api/v1/statuses/${id}/favourite`
 const MASTODON_UNFAVORITE_URL = id => `/api/v1/statuses/${id}/unfavourite`
 const MASTODON_RETWEET_URL = id => `/api/v1/statuses/${id}/reblog`
@@ -1010,6 +1011,15 @@ const unmuteDomain = ({ domain, credentials }) => {
   })
 }
 
+const dismissNotification = ({ credentials, id }) => {
+  return promisedRequest({
+    url: MASTODON_DISMISS_NOTIFICATION_URL(id),
+    method: 'POST',
+    payload: { id },
+    credentials
+  })
+}
+
 export const getMastodonSocketURI = ({ credentials, stream, args = {} }) => {
   return Object.entries({
     ...(credentials
@@ -1165,6 +1175,7 @@ const apiService = {
   denyUser,
   suggestions,
   markNotificationsAsSeen,
+  dismissNotification,
   vote,
   fetchPoll,
   fetchFavoritedByUsers,

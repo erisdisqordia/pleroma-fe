@@ -119,7 +119,7 @@ const Status = {
       return hits
     },
     muted () {
-      const relationship = this.$store.getters.relationship(this.userId)
+      const relationship = this.$store.getters.relationship(this.status.user.id)
       return !this.unmuted && (
         (!(this.inProfile && this.status.user.id === this.profileUserId) && relationship.muting) ||
         (!this.inConversation && this.status.thread_muted) ||

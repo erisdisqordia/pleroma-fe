@@ -238,7 +238,8 @@ export const getters = {
     return result
   },
   relationship: state => id => {
-    return state.relationships[id] || { id, loading: true }
+    const rel = id && state.relationships[id]
+    return rel || { id, loading: true }
   }
 }
 

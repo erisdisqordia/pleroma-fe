@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Fixed
+- Show more/less works correctly with auto-collapsed subjects and long posts
+- RTL characters won't look messed up in notifications
+
+### Changed
+- Emoji autocomplete will match any part of the word and not just start, for example :drool will now helpfully suggest :blobcatdrool: and :blobcatdroolreach:
 
 ## [2.0.2] - 2020-04-08
 ### Fixed

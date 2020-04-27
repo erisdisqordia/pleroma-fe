@@ -1,23 +1,17 @@
-import Attachment from '../attachment/attachment.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
 import ReactButton from '../react_button/react_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
-import Poll from '../poll/poll.vue'
 import ExtraButtons from '../extra_buttons/extra_buttons.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import UserCard from '../user_card/user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
-import Gallery from '../gallery/gallery.vue'
-import LinkPreview from '../link-preview/link-preview.vue'
 import AvatarList from '../avatar_list/avatar_list.vue'
 import Timeago from '../timeago/timeago.vue'
+import StatusContent from '../status_content/status_content.vue'
 import StatusPopover from '../status_popover/status_popover.vue'
 import EmojiReactions from '../emoji_reactions/emoji_reactions.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
-import fileType from 'src/services/file_type/file_type.service'
-import { processHtml } from 'src/services/tiny_post_html_processor/tiny_post_html_processor.service.js'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
-import { mentionMatchesUrl, extractTagFromUrl } from 'src/services/matcher/matcher.service.js'
 import { filter, unescape, uniqBy } from 'lodash'
 import { mapGetters, mapState } from 'vuex'
 
@@ -43,17 +37,10 @@ const Status = {
       replying: false,
       unmuted: false,
       userExpanded: false,
-      showingTall: this.inConversation && this.focused,
-      showingLongSubject: false,
-      error: null,
-      // not as computed because it sets the initial state which will be changed later
-      expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject
+      error: null
     }
   },
   computed: {
-    localCollapseSubjectDefault () {
-      return this.mergedConfig.collapseMessageWithSubject
-    },
     muteWords () {
       return this.mergedConfig.muteWords
     },
@@ -78,10 +65,6 @@ const Status = {
       const user = this.retweet ? (this.statusoid.retweeted_status.user) : this.statusoid.user
       const highlight = this.mergedConfig.highlight
       return highlightStyle(highlight[user.screen_name])
-    },
-    hideAttachments () {
-      return (this.mergedConfig.hideAttachments && !this.inConversation) ||
-        (this.mergedConfig.hideAttachmentsInConv && this.inConversation)
     },
     userProfileLink () {
       return this.generateUserProfileLink(this.status.user.id, this.status.user.screen_name)
@@ -135,20 +118,6 @@ const Status = {
       // use conversation highlight only when in conversation
       return this.status.id === this.highlight
     },
-    // This is a bit hacky, but we want to approximate post height before rendering
-    // so we count newlines (masto uses <p> for paragraphs, GS uses <br> between them)
-    // as well as approximate line count by counting characters and approximating ~80
-    // per line.
-    //
-    // Using max-height + overflow: auto for status components resulted in false positives
-    // very often with japanese characters, and it was very annoying.
-    tallStatus () {
-      const lengthScore = this.status.statusnet_html.split(/<p|<br/).length + this.status.text.length / 80
-      return lengthScore > 20
-    },
-    longSubject () {
-      return this.status.summary.length > 900
-    },
     isReply () {
       return !!(this.status.in_reply_to_status_id && this.status.in_reply_to_user_id)
     },
@@ -188,32 +157,6 @@ const Status = {
       }
       return this.status.attentions.length > 0
     },
-
-    // When a status has a subject and is also tall, we should only have one show more/less button. If the default is to collapse statuses with subjects, we just treat it like a status with a subject; otherwise, we just treat it like a tall status.
-    mightHideBecauseSubject () {
-      return this.status.summary && (!this.tallStatus || this.localCollapseSubjectDefault)
-    },
-    mightHideBecauseTall () {
-      return this.tallStatus && (!this.status.summary || !this.localCollapseSubjectDefault)
-    },
-    hideSubjectStatus () {
-      return this.mightHideBecauseSubject && !this.expandingSubject
-    },
-    hideTallStatus () {
-      return this.mightHideBecauseTall && !this.showingTall
-    },
-    showingMore () {
-      return (this.mightHideBecauseTall && this.showingTall) || (this.mightHideBecauseSubject && this.expandingSubject)
-    },
-    nsfwClickthrough () {
-      if (!this.status.nsfw) {
-        return false
-      }
-      if (this.status.summary && this.localCollapseSubjectDefault) {
-        return false
-      }
-      return true
-    },
     replySubject () {
       if (!this.status.summary) return ''
       const decodedSummary = unescape(this.status.summary)
@@ -227,83 +170,6 @@ const Status = {
         return ''
       }
     },
-    attachmentSize () {
-      if ((this.mergedConfig.hideAttachments && !this.inConversation) ||
-        (this.mergedConfig.hideAttachmentsInConv && this.inConversation) ||
-        (this.status.attachments.length > this.maxThumbnails)) {
-        return 'hide'
-      } else if (this.compact) {
-        return 'small'
-      }
-      return 'normal'
-    },
-    galleryTypes () {
-      if (this.attachmentSize === 'hide') {
-        return []
-      }
-      return this.mergedConfig.playVideosInModal
-        ? ['image', 'video']
-        : ['image']
-    },
-    galleryAttachments () {
-      return this.status.attachments.filter(
-        file => fileType.fileMatchesSomeType(this.galleryTypes, file)
-      )
-    },
-    nonGalleryAttachments () {
-      return this.status.attachments.filter(
-        file => !fileType.fileMatchesSomeType(this.galleryTypes, file)
-      )
-    },
-    hasImageAttachments () {
-      return this.status.attachments.some(
-        file => fileType.fileType(file.mimetype) === 'image'
-      )
-    },
-    hasVideoAttachments () {
-      return this.status.attachments.some(
-        file => fileType.fileType(file.mimetype) === 'video'
-      )
-    },
-    maxThumbnails () {
-      return this.mergedConfig.maxThumbnails
-    },
-    postBodyHtml () {
-      const html = this.status.statusnet_html
-
-      if (this.mergedConfig.greentext) {
-        try {
-          if (html.includes('&gt;')) {
-            // This checks if post has '>' at the beginning, excluding mentions so that @mention >impying works
-            return processHtml(html, (string) => {
-              if (string.includes('&gt;') &&
-                  string
-                    .replace(/<[^>]+?>/gi, '') // remove all tags
-                    .replace(/@\w+/gi, '') // remove mentions (even failed ones)
-                    .trim()
-                    .startsWith('&gt;')) {
-                return `<span class='greentext'>${string}</span>`
-              } else {
-                return string
-              }
-            })
-          } else {
-            return html
-          }
-        } catch (e) {
-          console.err('Failed to process status html', e)
-          return html
-        }
-      } else {
-        return html
-      }
-    },
-    contentHtml () {
-      if (!this.status.summary_html) {
-        return this.postBodyHtml
-      }
-      return this.status.summary_html + '<br />' + this.postBodyHtml
-    },
     combinedFavsAndRepeatsUsers () {
       // Use the status from the global status repository since favs and repeats are saved in it
       const combinedUsers = [].concat(
@@ -311,9 +177,6 @@ const Status = {
         this.statusFromGlobalRepository.rebloggedBy
       )
       return uniqBy(combinedUsers, 'id')
-    },
-    ownStatus () {
-      return this.status.user.id === this.currentUser.id
     },
     tags () {
       return this.status.tags.filter(tagObj => tagObj.hasOwnProperty('name')).map(tagObj => tagObj.name).join(' ')
@@ -328,21 +191,18 @@ const Status = {
     })
   },
   components: {
-    Attachment,
     FavoriteButton,
     ReactButton,
     RetweetButton,
     ExtraButtons,
     PostStatusForm,
-    Poll,
     UserCard,
     UserAvatar,
-    Gallery,
-    LinkPreview,
     AvatarList,
     Timeago,
     StatusPopover,
-    EmojiReactions
+    EmojiReactions,
+    StatusContent
   },
   methods: {
     visibilityIcon (visibility) {
@@ -363,32 +223,6 @@ const Status = {
     clearError () {
       this.error = undefined
     },
-    linkClicked (event) {
-      const target = event.target.closest('.status-content a')
-      if (target) {
-        if (target.className.match(/mention/)) {
-          const href = target.href
-          const attn = this.status.attentions.find(attn => mentionMatchesUrl(attn, href))
-          if (attn) {
-            event.stopPropagation()
-            event.preventDefault()
-            const link = this.generateUserProfileLink(attn.id, attn.screen_name)
-            this.$router.push(link)
-            return
-          }
-        }
-        if (target.rel.match(/(?:^|\s)tag(?:$|\s)/) || target.className.match(/hashtag/)) {
-          // Extract tag name from link url
-          const tag = extractTagFromUrl(target.href)
-          if (tag) {
-            const link = this.generateTagLink(tag)
-            this.$router.push(link)
-            return
-          }
-        }
-        window.open(target.href, '_blank')
-      }
-    },
     toggleReplying () {
       this.replying = !this.replying
     },
@@ -406,22 +240,8 @@ const Status = {
     toggleUserExpanded () {
       this.userExpanded = !this.userExpanded
     },
-    toggleShowMore () {
-      if (this.mightHideBecauseTall) {
-        this.showingTall = !this.showingTall
-      } else if (this.mightHideBecauseSubject) {
-        this.expandingSubject = !this.expandingSubject
-      }
-    },
     generateUserProfileLink (id, name) {
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
-    },
-    generateTagLink (tag) {
-      return `/tag/${tag}`
-    },
-    setMedia () {
-      const attachments = this.attachmentSize === 'hide' ? this.status.attachments : this.galleryAttachments
-      return () => this.$store.dispatch('setMedia', attachments)
     }
   },
   watch: {

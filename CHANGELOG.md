@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [2.0.3] - 2020-05-02
 ### Fixed
 - Show more/less works correctly with auto-collapsed subjects and long posts
 - RTL characters won't look messed up in notifications

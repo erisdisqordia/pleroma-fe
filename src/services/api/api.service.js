@@ -495,8 +495,7 @@ const fetchTimeline = ({
   until = false,
   userId = false,
   tag = false,
-  withMuted = false,
-  withMove = false
+  withMuted = false
 }) => {
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
@@ -535,9 +534,6 @@ const fetchTimeline = ({
   }
   if (timeline === 'public' || timeline === 'publicAndExternal') {
     params.push(['only_media', false])
-  }
-  if (timeline === 'notifications') {
-    params.push(['with_move', withMove])
   }
 
   params.push(['limit', 20])

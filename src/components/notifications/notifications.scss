@@ -79,6 +79,25 @@
     }
   }
 
+  .follow-request-accept {
+    cursor: pointer;
+
+    &:hover {
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
+  }
+
+  .follow-request-reject {
+    cursor: pointer;
+
+    &:hover {
+      color: $fallback--cRed;
+      color: var(--cRed, $fallback--cRed);
+    }
+  }
+
+
   .follow-text, .move-text {
     padding: 0.5em 0;
     overflow-wrap: break-word;

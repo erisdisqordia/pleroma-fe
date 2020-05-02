@@ -41,6 +41,7 @@ const Notification = {
         id: this.notification.id,
         updater: notification => {
           notification.type = 'follow'
+          notification.seen = true
         }
       })
     },

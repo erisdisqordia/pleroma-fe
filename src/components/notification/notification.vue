@@ -137,13 +137,13 @@
             style="white-space: nowrap;"
           >
             <i
-              class="icon-ok button-icon add-reaction-button"
+              class="icon-ok button-icon follow-request-accept"
               :title="$t('tool_tip.accept_follow_request')"
               @click="approveUser()"
             />
             <i
-              class="icon-cancel button-icon add-reaction-button"
-              :title="$t('tool_tip.accept_follow_request')"
+              class="icon-cancel button-icon follow-request-reject"
+              :title="$t('tool_tip.reject_follow_request')"
               @click="denyUser()"
             />
           </div>

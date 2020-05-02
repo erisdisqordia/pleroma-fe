@@ -525,6 +525,10 @@ export const mutations = {
       notification.seen = true
     })
   },
+  markSingleNotificationAsSeen (state, { id }) {
+    const notification = find(state.notifications.data, n => n.id === id)
+    if (notification) notification.seen = true
+  },
   dismissNotification (state, { id }) {
     state.notifications.data = state.notifications.data.filter(n => n.id !== id)
   },
@@ -691,9 +695,20 @@ const statuses = {
         credentials: rootState.users.currentUser.credentials
       })
     },
+    markSingleNotificationAsSeen ({ rootState, commit }, { id }) {
+      commit('markSingleNotificationAsSeen', { id })
+      apiService.markNotificationsAsSeen({
+        single: true,
+        id,
+        credentials: rootState.users.currentUser.credentials
+      })
+    },
+    dismissNotificationLocal ({ rootState, commit }, { id }) {
+      commit('dismissNotification', { id })
+    },
     dismissNotification ({ rootState, commit }, { id }) {
+      commit('dismissNotification', { id })
       rootState.api.backendInteractor.dismissNotification({ id })
-        .then(() => commit('dismissNotification', { id }))
     },
     updateNotification ({ rootState, commit }, { id, updater }) {
       commit('updateNotification', { id, updater })

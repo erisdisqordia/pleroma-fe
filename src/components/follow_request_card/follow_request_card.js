@@ -18,11 +18,11 @@ const FollowRequestCard = {
       this.$store.dispatch('removeFollowRequest', this.user)
 
       const notifId = this.findFollowRequestNotificationId()
+      this.$store.dispatch('markSingleNotificationAsSeen', { id: notifId })
       this.$store.dispatch('updateNotification', {
         id: notifId,
         updater: notification => {
           notification.type = 'follow'
-          notification.seen = true
         }
       })
     },

@@ -4,7 +4,6 @@ import 'whatwg-fetch'
 import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */
-const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
@@ -17,6 +16,7 @@ const DEACTIVATE_USER_URL = '/api/pleroma/admin/users/deactivate'
 const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 const NOTIFICATION_SETTINGS_URL = '/api/pleroma/notification_settings'
+const NOTIFICATION_READ_URL = '/api/v1/pleroma/notifications/read'
 
 const MFA_SETTINGS_URL = '/api/pleroma/accounts/mfa'
 const MFA_BACKUP_CODES_URL = '/api/pleroma/accounts/mfa/backup_codes'
@@ -845,12 +845,16 @@ const suggestions = ({ credentials }) => {
   }).then((data) => data.json())
 }
 
-const markNotificationsAsSeen = ({ id, credentials }) => {
+const markNotificationsAsSeen = ({ id, credentials, single = false }) => {
   const body = new FormData()
 
-  body.append('latest_id', id)
+  if (single) {
+    body.append('id', id)
+  } else {
+    body.append('max_id', id)
+  }
 
-  return fetch(QVITTER_USER_NOTIFICATIONS_READ_URL, {
+  return fetch(NOTIFICATION_READ_URL, {
     body,
     headers: authHeaders(credentials),
     method: 'POST'

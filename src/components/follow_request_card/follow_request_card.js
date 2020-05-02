@@ -27,11 +27,12 @@ const FollowRequestCard = {
       })
     },
     denyUser () {
-      this.$store.state.api.backendInteractor.denyUser({ id: this.user.id })
-      this.$store.dispatch('removeFollowRequest', this.user)
-
       const notifId = this.findFollowRequestNotificationId()
-      this.$store.dispatch('dismissNotification', { id: notifId })
+      this.$store.state.api.backendInteractor.denyUser({ id: this.user.id })
+        .then(() => {
+          this.$store.dispatch('dismissNotificationLocal', { id: notifId })
+          this.$store.dispatch('removeFollowRequest', this.user)
+        })
     }
   }
 }

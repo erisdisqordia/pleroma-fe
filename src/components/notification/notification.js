@@ -47,8 +47,10 @@ const Notification = {
     },
     denyUser () {
       this.$store.state.api.backendInteractor.denyUser({ id: this.user.id })
-      this.$store.dispatch('removeFollowRequest', this.user)
-      this.$store.dispatch('dismissNotification', { id: this.notification.id })
+        .then(() => {
+          this.$store.dispatch('dismissNotificationLocal', { id: this.notification.id })
+          this.$store.dispatch('removeFollowRequest', this.user)
+        })
     }
   },
   computed: {

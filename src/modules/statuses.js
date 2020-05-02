@@ -703,9 +703,12 @@ const statuses = {
         credentials: rootState.users.currentUser.credentials
       })
     },
+    dismissNotificationLocal ({ rootState, commit }, { id }) {
+      commit('dismissNotification', { id })
+    },
     dismissNotification ({ rootState, commit }, { id }) {
+      commit('dismissNotification', { id })
       rootState.api.backendInteractor.dismissNotification({ id })
-        .then(() => commit('dismissNotification', { id }))
     },
     updateNotification ({ rootState, commit }, { id, updater }) {
       commit('updateNotification', { id, updater })

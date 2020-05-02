@@ -79,9 +79,38 @@
     }
   }
 
+  .follow-request-accept {
+    cursor: pointer;
+
+    &:hover {
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
+  }
+
+  .follow-request-reject {
+    cursor: pointer;
+
+    &:hover {
+      color: $fallback--cRed;
+      color: var(--cRed, $fallback--cRed);
+    }
+  }
+
+
   .follow-text, .move-text {
     padding: 0.5em 0;
     overflow-wrap: break-word;
+    display: flex;
+    justify-content: space-between;
+
+    .follow-name {
+      display: block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   .status-el {
@@ -141,6 +170,11 @@
     .icon-retweet.lit {
       color: $fallback--cGreen;
       color: var(--cGreen, $fallback--cGreen);
+    }
+
+    .icon-user.lit {
+      color: $fallback--cBlue;
+      color: var(--cBlue, $fallback--cBlue);
     }
 
     .icon-user-plus.lit {

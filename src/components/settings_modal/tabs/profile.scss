@@ -1,41 +1,5 @@
-<template>
-  <div class="settings panel panel-default">
-    <div class="panel-heading">
-      <div class="title">
-        {{ $t('settings.user_settings') }}
-      </div>
-      <transition name="fade">
-        <template v-if="currentSaveStateNotice">
-          <div
-            v-if="currentSaveStateNotice.error"
-            class="alert error"
-            @click.prevent
-          >
-            {{ $t('settings.saving_err') }}
-          </div>
-
-          <div
-            v-if="!currentSaveStateNotice.error"
-            class="alert transparent"
-            @click.prevent
-          >
-            {{ $t('settings.saving_ok') }}
-          </div>
-        </template>
-      </transition>
-    </div>
-    <div class="panel-body profile-edit">
-    </div>
-  </div>
-</template>
-
-<script src="./user_settings.js">
-</script>
-
-<style lang="scss">
-@import '../../_variables.scss';
-
-.profile-edit {
+@import '../../../_variables.scss';
+.profile-tab {
   .bio {
     margin: 0;
   }
@@ -116,4 +80,3 @@
     margin-left: 1.75em;
   }
 }
-</style>

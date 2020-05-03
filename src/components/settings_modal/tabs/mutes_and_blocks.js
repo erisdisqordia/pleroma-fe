@@ -1,17 +1,15 @@
 import get from 'lodash/get'
 import map from 'lodash/map'
 import reject from 'lodash/reject'
-import Autosuggest from '../autosuggest/autosuggest.vue'
-import TabSwitcher from '../tab_switcher/tab_switcher.js'
-import BlockCard from '../block_card/block_card.vue'
-import MuteCard from '../mute_card/mute_card.vue'
-import DomainMuteCard from '../domain_mute_card/domain_mute_card.vue'
-import SelectableList from '../selectable_list/selectable_list.vue'
-import ProgressButton from '../progress_button/progress_button.vue'
-import Importer from '../importer/importer.vue'
-import Exporter from '../exporter/exporter.vue'
-import withSubscription from '../../hocs/with_subscription/with_subscription'
-import Checkbox from '../checkbox/checkbox.vue'
+import Autosuggest from '../../autosuggest/autosuggest.vue'
+import TabSwitcher from '../../tab_switcher/tab_switcher.js'
+import BlockCard from '../../block_card/block_card.vue'
+import MuteCard from '../../mute_card/mute_card.vue'
+import DomainMuteCard from '../../domain_mute_card/domain_mute_card.vue'
+import SelectableList from '../../selectable_list/selectable_list.vue'
+import ProgressButton from '../../progress_button/progress_button.vue'
+import withSubscription from '../../../hocs/with_subscription/with_subscription'
+import Checkbox from '../../checkbox/checkbox.vue'
 
 const BlockList = withSubscription({
   fetch: (props, $store) => $store.dispatch('fetchBlocks'),
@@ -31,7 +29,7 @@ const DomainMuteList = withSubscription({
   childPropName: 'items'
 })(SelectableList)
 
-const UserSettings = {
+const MutesAndBlocks = {
   data () {
     return {
       activeTab: 'profile',
@@ -52,17 +50,6 @@ const UserSettings = {
     ProgressButton,
     Autosuggest,
     Checkbox
-  },
-  computed: {
-    user () {
-      return this.$store.state.users.currentUser
-    },
-    pleromaBackend () {
-      return this.$store.state.instance.pleromaBackend
-    },
-    currentSaveStateNotice () {
-      return this.$store.state.interface.settings.currentSaveStateNotice
-    }
   },
   methods: {
     importFollows (file) {
@@ -130,11 +117,8 @@ const UserSettings = {
     muteDomain () {
       return this.$store.dispatch('muteDomain', this.newDomainToMute)
         .then(() => { this.newDomainToMute = '' })
-    },
-    identity (value) {
-      return value
     }
   }
 }
 
-export default UserSettings
+export default MutesAndBlocks

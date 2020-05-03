@@ -6,6 +6,7 @@ import InstanceSpecificPanel from './components/instance_specific_panel/instance
 import FeaturesPanel from './components/features_panel/features_panel.vue'
 import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_panel.vue'
 import ChatPanel from './components/chat_panel/chat_panel.vue'
+import SettingsModal from './components/settings_modal/settings_modal.vue'
 import MediaModal from './components/media_modal/media_modal.vue'
 import SideDrawer from './components/side_drawer/side_drawer.vue'
 import MobilePostStatusButton from './components/mobile_post_status_button/mobile_post_status_button.vue'
@@ -29,6 +30,7 @@ export default {
     SideDrawer,
     MobilePostStatusButton,
     MobileNav,
+    SettingsModal,
     UserReportingModal,
     PostStatusModal
   },
@@ -111,6 +113,9 @@ export default {
     },
     onSearchBarToggled (hidden) {
       this.searchBarHidden = hidden
+    },
+    openSettingsModal () {
+      this.$store.dispatch('openSettingsModal')
     },
     updateMobileState () {
       const mobileLayout = windowWidth() <= 800

@@ -1,6 +1,7 @@
 import { set, delete as del } from 'vue'
 
 const defaultState = {
+  settingsModalState: 'hidden',
   settings: {
     currentSaveStateNotice: null,
     noticeClearTimeout: null,
@@ -35,6 +36,24 @@ const interfaceMod = {
     },
     setMobileLayout (state, value) {
       state.mobileLayout = value
+    },
+    closeSettingsModal (state) {
+      state.settingsModalState = 'hidden'
+    },
+    togglePeekSettingsModal (state) {
+      switch (state.settingsModalState) {
+        case 'minimized':
+          state.settingsModalState = 'visible'
+          return
+        case 'visible':
+          state.settingsModalState = 'minimized'
+          return
+        default:
+          throw new Error('Illegal minimization state of settings modal')
+      }
+    },
+    openSettingsModal (state) {
+      state.settingsModalState = 'visible'
     }
   },
   actions: {
@@ -49,6 +68,15 @@ const interfaceMod = {
     },
     setMobileLayout ({ commit }, value) {
       commit('setMobileLayout', value)
+    },
+    closeSettingsModal ({ commit }) {
+      commit('closeSettingsModal')
+    },
+    openSettingsModal ({ commit }) {
+      commit('openSettingsModal')
+    },
+    togglePeekSettingsModal ({ commit }) {
+      commit('togglePeekSettingsModal')
     }
   }
 }

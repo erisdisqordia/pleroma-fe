@@ -24,6 +24,11 @@ export default Vue.component('tab-switcher', {
       required: false,
       type: Boolean,
       default: false
+    },
+    sideTabBar: {
+      required: false,
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -105,7 +110,7 @@ export default Vue.component('tab-switcher', {
     })
 
     return (
-      <div class="tab-switcher">
+      <div class={'tab-switcher ' + (this.sideTabBar ? 'side-tabs' : 'top-tabs')}>
         <div class="tabs">
           {tabs}
         </div>

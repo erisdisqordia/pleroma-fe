@@ -13,9 +13,6 @@ const PostStatusModal = {
     }
   },
   computed: {
-    isLoggedIn () {
-      return !!this.$store.state.users.currentUser
-    },
     modalActivated () {
       return this.$store.state.postStatus.modalActivated
     },

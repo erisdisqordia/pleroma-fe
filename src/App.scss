@@ -860,6 +860,7 @@ nav {
   }
 }
 
+// DELETE
 .setting-item {
   border-bottom: 2px solid var(--fg, $fallback--fg);
   margin: 1em 1em 1.4em;
@@ -905,6 +906,8 @@ nav {
     max-width: 6em;
   }
 }
+// DELETE
+
 .select-multiple {
   display: flex;
   .option-list {

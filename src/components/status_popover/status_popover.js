@@ -7,11 +7,7 @@ const StatusPopover = {
   ],
   data () {
     return {
-      popperOptions: {
-        modifiers: {
-          preventOverflow: { padding: { top: 50 }, boundariesElement: 'viewport' }
-        }
-      }
+      error: false
     }
   },
   computed: {
@@ -20,12 +16,15 @@ const StatusPopover = {
     }
   },
   components: {
-    Status: () => import('../status/status.vue')
+    Status: () => import('../status/status.vue'),
+    Popover: () => import('../popover/popover.vue')
   },
   methods: {
     enter () {
       if (!this.status) {
         this.$store.dispatch('fetchStatus', this.statusId)
+          .then(data => (this.error = false))
+          .catch(e => (this.error = true))
       }
     }
   }

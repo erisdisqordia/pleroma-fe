@@ -1,11 +1,11 @@
 <template>
-  <v-popover
+  <Popover
     v-if="canDelete || canMute || canPin"
     trigger="click"
     placement="top"
     class="extra-button-popover"
   >
-    <div slot="popover">
+    <div slot="content">
       <div class="dropdown-menu">
         <button
           v-if="canMute && !status.thread_muted"
@@ -47,17 +47,17 @@
         </button>
       </div>
     </div>
-    <div class="button-icon">
-      <i class="icon-ellipsis" />
-    </div>
-  </v-popover>
+    <i
+      slot="trigger"
+      class="icon-ellipsis button-icon"
+    />
+  </Popover>
 </template>
 
 <script src="./extra_buttons.js" ></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
-@import '../popper/popper.scss';
 
 .icon-ellipsis {
   cursor: pointer;

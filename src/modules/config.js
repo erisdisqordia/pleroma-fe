@@ -34,7 +34,8 @@ export const defaultState = {
     likes: true,
     repeats: true,
     moves: true,
-    emojiReactions: false
+    emojiReactions: false,
+    followRequest: true
   },
   webPushNotifications: false,
   muteWords: [],
@@ -102,6 +103,7 @@ const config = {
           setPreset(value)
           break
         case 'customTheme':
+        case 'customThemeSource':
           applyTheme(value)
       }
     }

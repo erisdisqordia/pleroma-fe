@@ -124,6 +124,7 @@
     "broken_favorite": "Unknown status, searching for it...",
     "favorited_you": "favorited your status",
     "followed_you": "followed you",
+    "follow_request": "wants to follow you",
     "load_older": "Load older notifications",
     "notifications": "Notifications",
     "read": "Read!",
@@ -615,7 +616,8 @@
     "reply_to": "Reply to",
     "replies_list": "Replies:",
     "mute_conversation": "Mute conversation",
-    "unmute_conversation": "Unmute conversation"
+    "unmute_conversation": "Unmute conversation",
+    "status_unavailable": "Status unavailable"
   },
   "user_card": {
     "approve": "Approve",
@@ -696,7 +698,9 @@
     "reply": "Reply",
     "favorite": "Favorite",
     "add_reaction": "Add Reaction",
-    "user_settings": "User Settings"
+    "user_settings": "User Settings",
+    "accept_follow_request": "Accept follow request",
+    "reject_follow_request": "Reject follow request"
   },
   "upload":{
     "error": {

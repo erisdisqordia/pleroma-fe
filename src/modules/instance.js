@@ -1,5 +1,6 @@
 import { set } from 'vue'
 import { getPreset, applyTheme } from '../services/style_setter/style_setter.js'
+import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { instanceDefaultProperties } from './config.js'
 
 const defaultState = {
@@ -159,7 +160,14 @@ const instance = {
           // No need to apply theme if there's user theme already
           const { customTheme } = rootState.config
           if (customTheme) return
-          applyTheme(themeData.theme)
+
+          // New theme presets don't have 'theme' property, they use 'source'
+          const themeSource = themeData.source
+          if (!themeData.theme || (themeSource && themeSource.themeEngineVersion === CURRENT_VERSION)) {
+            applyTheme(themeSource)
+          } else {
+            applyTheme(themeData.theme)
+          }
         })
     },
     fetchEmoji ({ dispatch, state }) {

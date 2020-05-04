@@ -14,15 +14,17 @@ const registration = {
     },
     captcha: {}
   }),
-  validations: {
-    user: {
-      email: requiredIf('accountActivationRequired'),
-      username: { required },
-      fullname: { required },
-      password: { required },
-      confirm: {
-        required,
-        sameAsPassword: sameAs('password')
+  validations () {
+    return {
+      user: {
+        email: { required: requiredIf(() => this.accountActivationRequired) },
+        username: { required },
+        fullname: { required },
+        password: { required },
+        confirm: {
+          required,
+          sameAsPassword: sameAs('password')
+        }
       }
     }
   },
@@ -43,7 +45,8 @@ const registration = {
       signedIn: (state) => !!state.users.currentUser,
       isPending: (state) => state.users.signUpPending,
       serverValidationErrors: (state) => state.users.signUpErrors,
-      termsOfService: (state) => state.instance.tos
+      termsOfService: (state) => state.instance.tos,
+      accountActivationRequired: (state) => state.instance.accountActivationRequired
     })
   },
   methods: {

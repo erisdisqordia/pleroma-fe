@@ -5,19 +5,20 @@
   >
     <form
       autocomplete="off"
-      @submit.prevent="postStatus(newStatus)"
+      @submit.prevent
       @dragover.prevent="fileDrag"
     >
       <div
         v-show="showDropIcon !== 'hide'"
         :style="{ animation: showDropIcon === 'show' ? 'fade-in 0.25s' : 'fade-out 0.5s' }"
-        class="drop-indicator icon-upload"
+        class="drop-indicator"
+        :class="[uploadFileLimitReached ? 'icon-block' : 'icon-upload']"
         @dragleave="fileDragStop"
         @drop.stop="fileDrop"
       />
       <div class="form-group">
         <i18n
-          v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
+          v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private' && !disableLockWarning"
           path="post_status.account_not_locked_warning"
           tag="p"
           class="visibility-notice"
@@ -108,7 +109,7 @@
           />
         </div>
         <EmojiInput
-          v-if="newStatus.spoilerText || alwaysShowSubject"
+          v-if="!disableSubject && (newStatus.spoilerText || alwaysShowSubject)"
           v-model="newStatus.spoilerText"
           enable-emoji-picker
           :suggest="emojiSuggestor"
@@ -126,6 +127,7 @@
           ref="emoji-input"
           v-model="newStatus.status"
           :suggest="emojiUserSuggestor"
+          :placement="emojiPickerPlacement"
           class="form-control main-input"
           enable-emoji-picker
           hide-emoji-button
@@ -133,16 +135,19 @@
           @input="onEmojiInputInput"
           @sticker-uploaded="addMediaFile"
           @sticker-upload-failed="uploadFailed"
+          @shown="handleEmojiInputShow"
         >
           <textarea
             ref="textarea"
             v-model="newStatus.status"
-            :placeholder="$t('post_status.default')"
+            :placeholder="placeholder || $t('post_status.default')"
             rows="1"
             :disabled="posting"
             class="form-post-body"
-            @keydown.meta.enter="postStatus(newStatus)"
-            @keydown.ctrl.enter="postStatus(newStatus)"
+            :class="{ 'scrollable-form': !!maxHeight }"
+            @keydown.exact.enter="submitOnEnter && postStatus($event, newStatus)"
+            @keydown.meta.enter="postStatus($event, newStatus, { control: true })"
+            @keydown.ctrl.enter="postStatus($event, newStatus)"
             @input="resize"
             @compositionupdate="resize"
             @paste="paste"
@@ -155,7 +160,10 @@
             {{ charactersLeft }}
           </p>
         </EmojiInput>
-        <div class="visibility-tray">
+        <div
+          v-if="!disableScopeSelector"
+          class="visibility-tray"
+        >
           <scope-selector
             :show-all="showAllScopes"
             :user-default="userDefaultScope"
@@ -213,10 +221,11 @@
             ref="mediaUpload"
             class="media-upload-icon"
             :drop-files="dropFiles"
-            @uploading="disableSubmit"
+            :disabled="uploadFileLimitReached"
+            @uploading="startedUploadingFiles"
             @uploaded="addMediaFile"
             @upload-failed="uploadFailed"
-            @all-uploaded="enableSubmit"
+            @all-uploaded="finishedUploadingFiles"
           />
           <div
             class="emoji-icon"
@@ -253,11 +262,13 @@
         >
           {{ $t('general.submit') }}
         </button>
+        <!-- touchstart is used to keep the OSK at the same position after a message send -->
         <button
           v-else
-          :disabled="submitDisabled"
-          type="submit"
+          :disabled="uploadingFiles || disableSubmit"
           class="btn btn-default"
+          @touchstart.stop.prevent="postStatus($event, newStatus)"
+          @click.stop.prevent="postStatus($event, newStatus)"
         >
           {{ $t('general.submit') }}
         </button>
@@ -297,7 +308,7 @@
         </div>
       </div>
       <div
-        v-if="newStatus.files.length > 0"
+        v-if="newStatus.files.length > 0 && !disableSensitivityCheckbox"
         class="upload_settings"
       >
         <Checkbox v-model="newStatus.nsfw">
@@ -331,6 +342,8 @@
 }
 
 .post-status-form {
+  position: relative;
+
   .form-bottom {
     display: flex;
     justify-content: space-between;
@@ -547,6 +560,10 @@
     padding-bottom: 1.75em;
     min-height: 1px;
     box-sizing: content-box;
+
+    &.scrollable-form {
+      overflow-y: auto;
+    }
   }
 
   .main-input {
@@ -608,5 +625,12 @@
     border: 2px dashed $fallback--text;
     border: 2px dashed var(--text, $fallback--text);
   }
+}
+
+// todo: unify with attachment.vue (otherwise the uploaded images are not minified unless a status with an attachment was displayed before)
+img.media-upload {
+  line-height: 0;
+  max-height: 200px;
+  max-width: 100%;
 }
 </style>

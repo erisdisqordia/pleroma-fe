@@ -29,7 +29,10 @@
       class="autocomplete-panel"
       :class="{ hide: !showSuggestions }"
     >
-      <div class="autocomplete-panel-body">
+      <div
+        ref="panel-body"
+        class="autocomplete-panel-body"
+      >
         <div
           v-for="(suggestion, index) in suggestions"
           :key="index"

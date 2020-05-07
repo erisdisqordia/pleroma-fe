@@ -9,7 +9,7 @@ import fileTypeService from '../../services/file_type/file_type.service.js'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
 import { reject, map, uniqBy, debounce } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import Checkbox from '../checkbox/checkbox.vue'
 
 const buildMentionsString = ({ user, attentions = [] }, currentUser) => {
@@ -33,7 +33,22 @@ const PostStatusForm = {
     'repliedUser',
     'attentions',
     'copyMessageScope',
-    'subject'
+    'subject',
+    'disableSubject',
+    'disableScopeSelector',
+    'disableNotice',
+    'disableLockWarning',
+    'disablePolls',
+    'disableSensitivityCheckbox',
+    'disableSubmit',
+    'placeholder',
+    'maxHeight',
+    'request',
+    'preserveFocus',
+    'autoFocus',
+    'fileLimit',
+    'submitOnEnter',
+    'emojiPickerPlacement'
   ],
   components: {
     MediaUpload,
@@ -46,10 +61,13 @@ const PostStatusForm = {
   },
   mounted () {
     this.resize(this.$refs.textarea)
-    const textLength = this.$refs.textarea.value.length
-    this.$refs.textarea.setSelectionRange(textLength, textLength)
 
     if (this.replyTo) {
+      const textLength = this.$refs.textarea.value.length
+      this.$refs.textarea.setSelectionRange(textLength, textLength)
+    }
+
+    if (this.replyTo || this.autoFocus) {
       this.$refs.textarea.focus()
     }
   },
@@ -72,7 +90,7 @@ const PostStatusForm = {
 
     return {
       dropFiles: [],
-      submitDisabled: false,
+      uploadingFiles: false,
       error: null,
       posting: false,
       highlighted: 0,
@@ -91,7 +109,8 @@ const PostStatusForm = {
       showDropIcon: 'hide',
       dropStopTimeout: null,
       preview: null,
-      previewLoading: false
+      previewLoading: false,
+      emojiInputShown: false
     }
   },
   computed: {
@@ -160,10 +179,11 @@ const PostStatusForm = {
     },
     pollsAvailable () {
       return this.$store.state.instance.pollsAvailable &&
-        this.$store.state.instance.pollLimits.max_options >= 2
+        this.$store.state.instance.pollLimits.max_options >= 2 &&
+        this.disablePolls !== true
     },
     hideScopeNotice () {
-      return this.$store.getters.mergedConfig.hideScopeNotice
+      return this.disableNotice || this.$store.getters.mergedConfig.hideScopeNotice
     },
     pollContentError () {
       return this.pollFormVisible &&
@@ -176,7 +196,13 @@ const PostStatusForm = {
     emptyStatus () {
       return this.newStatus.status.trim() === '' && this.newStatus.files.length === 0
     },
-    ...mapGetters(['mergedConfig'])
+    uploadFileLimitReached () {
+      return this.newStatus.files.length >= this.fileLimit
+    },
+    ...mapGetters(['mergedConfig']),
+    ...mapState({
+      mobileLayout: state => state.interface.mobileLayout
+    })
   },
   watch: {
     'newStatus.contentType': function () {
@@ -187,9 +213,19 @@ const PostStatusForm = {
     }
   },
   methods: {
-    async postStatus (newStatus) {
+    async postStatus (event, newStatus, opts = {}) {
       if (this.posting) { return }
       if (this.submitDisabled) { return }
+      if (this.emojiInputShown) { return }
+      if (this.submitOnEnter) {
+        event.stopPropagation()
+        event.preventDefault()
+      }
+      if (opts.control && this.submitOnEnter) {
+        newStatus.status = `${newStatus.status}\n`
+        return
+      }
+
       if (this.emptyStatus) {
         this.error = this.$t('post_status.empty_status_error')
         return
@@ -211,7 +247,7 @@ const PostStatusForm = {
         return
       }
 
-      const data = await statusPoster.postStatus({
+      const postingOptions = {
         status: newStatus.status,
         spoilerText: newStatus.spoilerText || null,
         visibility: newStatus.visibility,
@@ -221,32 +257,40 @@ const PostStatusForm = {
         inReplyToStatusId: this.replyTo,
         contentType: newStatus.contentType,
         poll
-      })
-
-      if (!data.error) {
-        this.newStatus = {
-          status: '',
-          spoilerText: '',
-          files: [],
-          visibility: newStatus.visibility,
-          contentType: newStatus.contentType,
-          poll: {},
-          mediaDescriptions: {}
-        }
-        this.pollFormVisible = false
-        this.$refs.mediaUpload.clearFile()
-        this.clearPollForm()
-        this.$emit('posted')
-        let el = this.$el.querySelector('textarea')
-        el.style.height = 'auto'
-        el.style.height = undefined
-        this.error = null
-        if (this.preview) this.previewStatus()
-      } else {
-        this.error = data.error
       }
 
-      this.posting = false
+      const request = this.request ? this.request : statusPoster.postStatus
+
+      request(postingOptions).then((data) => {
+        if (!data.error) {
+          this.newStatus = {
+            status: '',
+            spoilerText: '',
+            files: [],
+            visibility: newStatus.visibility,
+            contentType: newStatus.contentType,
+            poll: {},
+            mediaDescriptions: {}
+          }
+          this.pollFormVisible = false
+          this.$refs.mediaUpload && this.$refs.mediaUpload.clearFile()
+          this.clearPollForm()
+          this.$emit('posted', data)
+          if (this.preserveFocus) {
+            this.$nextTick(() => {
+              this.$refs.textarea.focus()
+            })
+          }
+          let el = this.$el.querySelector('textarea')
+          el.style.height = 'auto'
+          el.style.height = undefined
+          this.error = null
+          if (this.preview) this.previewStatus()
+        } else {
+          this.error = data.error
+        }
+        this.posting = false
+      })
     },
     previewStatus () {
       if (this.emptyStatus && this.newStatus.spoilerText.trim() === '') {
@@ -301,20 +345,26 @@ const PostStatusForm = {
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
+
+      // TODO: use fixed dimensions instead so relying on timeout
+      setTimeout(() => {
+        this.$emit('resize')
+      }, 150)
     },
     removeMediaFile (fileInfo) {
       let index = this.newStatus.files.indexOf(fileInfo)
       this.newStatus.files.splice(index, 1)
+      this.$emit('resize')
     },
     uploadFailed (errString, templateArgs) {
       templateArgs = templateArgs || {}
       this.error = this.$t('upload.error.base') + ' ' + this.$t('upload.error.' + errString, templateArgs)
     },
-    disableSubmit () {
-      this.submitDisabled = true
+    startedUploadingFiles () {
+      this.uploadingFiles = true
     },
-    enableSubmit () {
-      this.submitDisabled = false
+    finishedUploadingFiles () {
+      this.uploadingFiles = false
     },
     type (fileInfo) {
       return fileTypeService.fileType(fileInfo.mimetype)
@@ -348,7 +398,7 @@ const PostStatusForm = {
       this.dropStopTimeout = setTimeout(() => (this.showDropIcon = 'hide'), 500)
     },
     fileDrag (e) {
-      e.dataTransfer.dropEffect = 'copy'
+      e.dataTransfer.dropEffect = this.uploadFileLimitReached ? 'none' : 'copy'
       if (e.dataTransfer && e.dataTransfer.types.includes('Files')) {
         clearTimeout(this.dropStopTimeout)
         this.showDropIcon = 'show'
@@ -367,6 +417,7 @@ const PostStatusForm = {
       // Reset to default height for empty form, nothing else to do here.
       if (target.value === '') {
         target.style.height = null
+        this.$emit('resize', null)
         this.$refs['emoji-input'].resize()
         return
       }
@@ -419,8 +470,10 @@ const PostStatusForm = {
 
       // BEGIN content size update
       target.style.height = 'auto'
-      const newHeight = target.scrollHeight - vertPadding
+      const heightWithoutPadding = target.scrollHeight - vertPadding
+      const newHeight = this.maxHeight ? Math.min(heightWithoutPadding, this.maxHeight) : heightWithoutPadding
       target.style.height = `${newHeight}px`
+      this.$emit('resize', newHeight)
       // END content size update
 
       // We check where the bottom border of form-bottom element is, this uses findOffset
@@ -480,6 +533,9 @@ const PostStatusForm = {
     setAllMediaDescriptions () {
       const ids = this.newStatus.files.map(file => file.id)
       return Promise.all(ids.map(id => this.setMediaDescription(id)))
+    },
+    handleEmojiInputShow (value) {
+      this.emojiInputShown = value
     }
   }
 }

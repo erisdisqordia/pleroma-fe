@@ -23,7 +23,9 @@ export const LAYERS = {
   inputTopBar: 'topBar',
   alert: 'bg',
   alertPanel: 'panel',
-  poll: 'bg'
+  poll: 'bg',
+  chatBg: 'underlay',
+  chatMessage: 'chatBg'
 }
 
 /* By default opacity slots have 1 as default opacity
@@ -667,5 +669,54 @@ export const SLOT_INHERITANCE = {
     layer: 'badge',
     variant: 'badgeNotification',
     textColor: 'bw'
+  },
+
+  chatBg: {
+    depends: ['bg']
+  },
+
+  chatMessage: {
+    depends: ['chatBg']
+  },
+
+  chatMessageIncomingBg: {
+    depends: ['chatMessage'],
+    layer: 'chatMessage'
+  },
+
+  chatMessageIncomingText: {
+    depends: ['text'],
+    layer: 'text'
+  },
+
+  chatMessageIncomingLink: {
+    depends: ['link'],
+    layer: 'link'
+  },
+
+  chatMessageIncomingBorder: {
+    depends: ['border'],
+    opacity: 'border',
+    color: (mod, border) => brightness(2 * mod, border).rgb
+  },
+
+  chatMessageOutgoingBg: {
+    depends: ['chatMessage'],
+    color: (mod, chatMessage) => brightness(5 * mod, chatMessage).rgb
+  },
+
+  chatMessageOutgoingText: {
+    depends: ['text'],
+    layer: 'text'
+  },
+
+  chatMessageOutgoingLink: {
+    depends: ['link'],
+    layer: 'link'
+  },
+
+  chatMessageOutgoingBorder: {
+    depends: ['chatMessage'],
+    opacity: 'chatMessage'
   }
 }

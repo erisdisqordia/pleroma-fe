@@ -3,6 +3,7 @@
     <nav
       id="nav"
       class="nav-bar container"
+      :style="navBarStyle"
     >
       <div
         class="mobile-inner-nav"

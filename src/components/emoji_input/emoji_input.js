@@ -79,6 +79,15 @@ const EmojiInput = {
       required: false,
       type: Boolean,
       default: false
+    },
+    placement: {
+      /**
+       * Forces the panel to take a specific position relative to the input element.
+       * The 'auto' placement chooses either bottom or top depending on which has the available space (when both have available space, bottom is preferred).
+       */
+      required: false,
+      type: String, // 'auto', 'top', 'bottom'
+      default: 'auto'
     }
   },
   data () {
@@ -160,6 +169,11 @@ const EmojiInput = {
       input.elm.removeEventListener('click', this.onClickInput)
       input.elm.removeEventListener('transitionend', this.onTransition)
       input.elm.removeEventListener('input', this.onInput)
+    }
+  },
+  watch: {
+    showSuggestions: function (newValue) {
+      this.$emit('shown', newValue)
     }
   },
   methods: {
@@ -425,15 +439,29 @@ const EmojiInput = {
       this.caret = selectionStart
     },
     resize () {
-      const { panel, picker } = this.$refs
+      const panel = this.$refs.panel
       if (!panel) return
+      const picker = this.$refs.picker.$el
+      const panelBody = this.$refs['panel-body']
       const { offsetHeight, offsetTop } = this.input.elm
       const offsetBottom = offsetTop + offsetHeight
 
-      panel.style.top = offsetBottom + 'px'
-      if (!picker) return
-      picker.$el.style.top = offsetBottom + 'px'
-      picker.$el.style.bottom = 'auto'
+      this.setPlacement(panelBody, panel, offsetBottom)
+      this.setPlacement(picker, picker, offsetBottom)
+    },
+    setPlacement (container, target, offsetBottom) {
+      if (!container || !target) return
+
+      target.style.top = offsetBottom + 'px'
+      target.style.bottom = 'auto'
+
+      if (this.placement === 'top' || (this.placement === 'auto' && this.overflowsBottom(container))) {
+        target.style.top = 'auto'
+        target.style.bottom = this.input.elm.offsetHeight + 'px'
+      }
+    },
+    overflowsBottom (el) {
+      return el.getBoundingClientRect().bottom > window.innerHeight
     }
   }
 }

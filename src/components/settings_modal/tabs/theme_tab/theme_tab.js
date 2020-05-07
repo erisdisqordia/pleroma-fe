@@ -99,7 +99,8 @@ export default {
       avatarRadiusLocal: '',
       avatarAltRadiusLocal: '',
       attachmentRadiusLocal: '',
-      tooltipRadiusLocal: ''
+      tooltipRadiusLocal: '',
+      chatMessageRadiusLocal: ''
     }
   },
   created () {
@@ -214,7 +215,8 @@ export default {
         avatar: this.avatarRadiusLocal,
         avatarAlt: this.avatarAltRadiusLocal,
         tooltip: this.tooltipRadiusLocal,
-        attachment: this.attachmentRadiusLocal
+        attachment: this.attachmentRadiusLocal,
+        chatMessage: this.chatMessageRadiusLocal
       }
     },
     preview () {

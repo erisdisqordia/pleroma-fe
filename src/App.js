@@ -14,7 +14,7 @@ import MobileNav from './components/mobile_nav/mobile_nav.vue'
 import UserReportingModal from './components/user_reporting_modal/user_reporting_modal.vue'
 import PostStatusModal from './components/post_status_modal/post_status_modal.vue'
 import GlobalNoticeList from './components/global_notice_list/global_notice_list.vue'
-import { windowWidth } from './services/window_utils/window_utils'
+import { windowWidth, windowHeight } from './services/window_utils/window_utils'
 
 export default {
   name: 'app',
@@ -45,7 +45,8 @@ export default {
         window.CSS.supports('-moz-mask-size', 'contain') ||
         window.CSS.supports('-ms-mask-size', 'contain') ||
         window.CSS.supports('-o-mask-size', 'contain')
-    )
+    ),
+    transitionName: 'fade'
   }),
   created () {
     // Load the locale from the storage
@@ -127,9 +128,20 @@ export default {
     },
     updateMobileState () {
       const mobileLayout = windowWidth() <= 800
+      const layoutHeight = windowHeight()
       const changed = mobileLayout !== this.isMobileLayout
       if (changed) {
         this.$store.dispatch('setMobileLayout', mobileLayout)
+      }
+      this.$store.dispatch('setLayoutHeight', layoutHeight)
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      if ((to.name === 'chat' && from.name === 'chats') || (to.name === 'chats' && from.name === 'chat')) {
+        this.transitionName = 'none'
+      } else {
+        this.transitionName = 'fade'
       }
     }
   }

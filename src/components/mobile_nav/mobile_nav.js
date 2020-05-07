@@ -30,7 +30,10 @@ const MobileNav = {
       return this.unseenNotifications.length
     },
     hideSitename () { return this.$store.state.instance.hideSitename },
-    sitename () { return this.$store.state.instance.name }
+    sitename () { return this.$store.state.instance.name },
+    navBarStyle () {
+      return { 'visibility': this.$route.name === 'chat' ? 'hidden' : 'visible' }
+    }
   },
   methods: {
     toggleMobileSidebar () {

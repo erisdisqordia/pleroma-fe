@@ -404,7 +404,7 @@
               :status="status"
             />
             <ReactButton
-              :logged-in="loggedIn"
+              v-if="loggedIn"
               :status="status"
             />
             <extra-buttons

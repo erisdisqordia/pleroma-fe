@@ -5,7 +5,7 @@ const ExtraButtons = {
   components: { Popover },
   data: function () {
     return {
-      statusLink: `https://${this.$store.state.instance.name}${this.$router.resolve({ name: 'conversation', params: { id: this.status.id } }).href}`
+      statusLink: `${this.$store.state.instance.server}${this.$router.resolve({ name: 'conversation', params: { id: this.status.id } }).href}`
     }
   },
   methods: {

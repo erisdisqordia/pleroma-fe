@@ -29,6 +29,11 @@ const ExtraButtons = {
       this.$store.dispatch('unmuteConversation', this.status.id)
         .then(() => this.$emit('onSuccess'))
         .catch(err => this.$emit('onError', err.error.error))
+    },
+    copyLink () {
+      navigator.clipboard.writeText(this.statusLink)
+        .then(() => this.$emit('onSuccess'))
+        .catch(err => this.$emit('onError', err.error.error))
     }
   },
   computed: {
@@ -46,6 +51,9 @@ const ExtraButtons = {
     },
     canMute () {
       return !!this.currentUser
+    },
+    statusLink () {
+      return `${this.$store.state.instance.server}${this.$router.resolve({ name: 'conversation', params: { id: this.status.id } }).href}`
     }
   }
 }

@@ -124,6 +124,7 @@
     "broken_favorite": "Unknown status, searching for it...",
     "favorited_you": "favorited your status",
     "followed_you": "followed you",
+    "follow_request": "wants to follow you",
     "load_older": "Load older notifications",
     "notifications": "Notifications",
     "read": "Read!",
@@ -404,11 +405,14 @@
     "fun": "Fun",
     "greentext": "Meme arrows",
     "notifications": "Notifications",
+    "notification_setting_filters": "Filters",
     "notification_setting": "Receive notifications from:",
     "notification_setting_follows": "Users you follow",
     "notification_setting_non_follows": "Users you do not follow",
     "notification_setting_followers": "Users who follow you",
     "notification_setting_non_followers": "Users who do not follow you",
+    "notification_setting_privacy": "Privacy",
+    "notification_setting_privacy_option": "Hide the sender and contents of push notifications",
     "notification_mutes": "To stop receiving notifications from a specific user, use a mute.",
     "notification_blocks": "Blocking a user stops all notifications as well as unsubscribes them.",
     "enable_web_push_notifications": "Enable web push notifications",
@@ -616,7 +620,8 @@
     "replies_list": "Replies:",
     "mute_conversation": "Mute conversation",
     "unmute_conversation": "Unmute conversation",
-    "status_unavailable": "Status unavailable"
+    "status_unavailable": "Status unavailable",
+    "copy_link": "Copy link to status"
   },
   "user_card": {
     "approve": "Approve",
@@ -697,7 +702,9 @@
     "reply": "Reply",
     "favorite": "Favorite",
     "add_reaction": "Add Reaction",
-    "user_settings": "User Settings"
+    "user_settings": "User Settings",
+    "accept_follow_request": "Accept follow request",
+    "reject_follow_request": "Reject follow request"
   },
   "upload":{
     "error": {

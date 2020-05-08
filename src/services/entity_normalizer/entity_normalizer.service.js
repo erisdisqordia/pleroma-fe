@@ -1,4 +1,5 @@
 import escape from 'escape-html'
+import { isStatusNotification } from '../notification_utils/notification_utils.js'
 
 const qvitterStatusType = (status) => {
   if (status.is_post_verb) {
@@ -340,9 +341,7 @@ export const parseNotification = (data) => {
   if (masto) {
     output.type = mastoDict[data.type] || data.type
     output.seen = data.pleroma.is_seen
-    output.status = output.type === 'follow' || output.type === 'move'
-      ? null
-      : parseStatus(data.status)
+    output.status = isStatusNotification(output.type) ? parseStatus(data.status) : null
     output.action = output.status // TODO: Refactor, this is unneeded
     output.target = output.type !== 'move'
       ? null

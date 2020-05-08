@@ -47,7 +47,7 @@
         <span class="notification-details">
           <div class="name-and-action">
             <!-- eslint-disable vue/no-v-html -->
-            <span
+            <bdi
               v-if="!!notification.from_profile.name_html"
               class="username"
               :title="'@'+notification.from_profile.screen_name"
@@ -74,6 +74,10 @@
               <i class="fa icon-user-plus lit" />
               <small>{{ $t('notifications.followed_you') }}</small>
             </span>
+            <span v-if="notification.type === 'follow_request'">
+              <i class="fa icon-user lit" />
+              <small>{{ $t('notifications.follow_request') }}</small>
+            </span>
             <span v-if="notification.type === 'move'">
               <i class="fa icon-arrow-curved lit" />
               <small>{{ $t('notifications.migrated_to') }}</small>
@@ -87,18 +91,7 @@
             </span>
           </div>
           <div
-            v-if="notification.type === 'follow' || notification.type === 'move'"
-            class="timeago"
-          >
-            <span class="faint">
-              <Timeago
-                :time="notification.created_at"
-                :auto-update="240"
-              />
-            </span>
-          </div>
-          <div
-            v-else
+            v-if="isStatusNotification"
             class="timeago"
           >
             <router-link
@@ -112,6 +105,17 @@
               />
             </router-link>
           </div>
+          <div
+            v-else
+            class="timeago"
+          >
+            <span class="faint">
+              <Timeago
+                :time="notification.created_at"
+                :auto-update="240"
+              />
+            </span>
+          </div>
           <a
             v-if="needMute"
             href="#"
@@ -119,12 +123,30 @@
           ><i class="button-icon icon-eye-off" /></a>
         </span>
         <div
-          v-if="notification.type === 'follow'"
+          v-if="notification.type === 'follow' || notification.type === 'follow_request'"
           class="follow-text"
         >
-          <router-link :to="userProfileLink">
+          <router-link
+            :to="userProfileLink"
+            class="follow-name"
+          >
             @{{ notification.from_profile.screen_name }}
           </router-link>
+          <div
+            v-if="notification.type === 'follow_request'"
+            style="white-space: nowrap;"
+          >
+            <i
+              class="icon-ok button-icon follow-request-accept"
+              :title="$t('tool_tip.accept_follow_request')"
+              @click="approveUser()"
+            />
+            <i
+              class="icon-cancel button-icon follow-request-reject"
+              :title="$t('tool_tip.reject_follow_request')"
+              @click="denyUser()"
+            />
+          </div>
         </div>
         <div
           v-else-if="notification.type === 'move'"

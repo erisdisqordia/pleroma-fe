@@ -2,8 +2,29 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-
 ## [Unreleased]
+### Changed
+- Removed the use of with_move parameters when fetching notifications
+
+## [2.0.3] - 2020-05-02
+### Fixed
+- Show more/less works correctly with auto-collapsed subjects and long posts
+- RTL characters won't look messed up in notifications
+
+### Changed
+- Emoji autocomplete will match any part of the word and not just start, for example :drool will now helpfully suggest :blobcatdrool: and :blobcatdroolreach:
+
+### Add
+- Follow request notification support
+
+## [2.0.2] - 2020-04-08
+### Fixed
+- Favorite/Repeat avatars not showing up on private instances/non-public posts
+- Autocorrect getting triggered in the captcha field
+- Overflow on long domains in follow/move notifications
+
+### Changed
+- Polish translation updated
 
 ## [2.0.0] - 2020-02-28
 ### Added

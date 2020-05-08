@@ -18,20 +18,6 @@ describe('The users module', () => {
       expect(state.users).to.eql([user])
       expect(state.users[0].name).to.eql('Dude')
     })
-
-    it('sets a mute bit on users', () => {
-      const state = cloneDeep(defaultState)
-      const user = { id: '1', name: 'Guy' }
-
-      mutations.addNewUsers(state, [user])
-      mutations.setMuted(state, { user, muted: true })
-
-      expect(user.muted).to.eql(true)
-
-      mutations.setMuted(state, { user, muted: false })
-
-      expect(user.muted).to.eql(false)
-    })
   })
 
   describe('findUser', () => {

@@ -94,7 +94,7 @@
         <div class="status-body">
           <UserCard
             v-if="userExpanded"
-            :user="status.user"
+            :user-id="status.user.id"
             :rounded="true"
             :bordered="true"
             class="status-usercard"

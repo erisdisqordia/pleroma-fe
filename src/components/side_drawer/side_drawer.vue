@@ -19,7 +19,7 @@
       >
         <UserCard
           v-if="currentUser"
-          :user="currentUser"
+          :user-id="currentUser.id"
           :hide-bio="true"
         />
         <div

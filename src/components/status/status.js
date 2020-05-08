@@ -101,7 +101,13 @@ const Status = {
 
       return hits
     },
-    muted () { return !this.unmuted && ((!(this.inProfile && this.status.user.id === this.profileUserId) && this.status.user.muted) || (!this.inConversation && this.status.thread_muted) || this.muteWordHits.length > 0) },
+    muted () {
+      const relationship = this.$store.getters.relationship(this.status.user.id)
+      return !this.unmuted && (
+        (!(this.inProfile && this.status.user.id === this.profileUserId) && relationship.muting) ||
+        (!this.inConversation && this.status.thread_muted) ||
+        this.muteWordHits.length > 0)
+    },
     hideFilteredStatuses () {
       return this.mergedConfig.hideFilteredStatuses
     },
@@ -147,8 +153,11 @@ const Status = {
         if (this.status.user.id === this.status.attentions[i].id) {
           continue
         }
-        const taggedUser = this.$store.getters.findUser(this.status.attentions[i].id)
-        if (checkFollowing && taggedUser && taggedUser.following) {
+        // There's zero guarantee of this working. If we happen to have that user and their
+        // relationship in store then it will work, but there's kinda little chance of having
+        // them for people you're not following.
+        const relationship = this.$store.state.users.relationships[this.status.attentions[i].id]
+        if (checkFollowing && relationship && relationship.following) {
           return false
         }
         if (this.status.attentions[i].id === this.currentUser.id) {

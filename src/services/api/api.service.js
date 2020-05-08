@@ -4,7 +4,6 @@ import 'whatwg-fetch'
 import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */
-const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
@@ -17,6 +16,7 @@ const DEACTIVATE_USER_URL = '/api/pleroma/admin/users/deactivate'
 const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 const NOTIFICATION_SETTINGS_URL = '/api/pleroma/notification_settings'
+const NOTIFICATION_READ_URL = '/api/v1/pleroma/notifications/read'
 
 const MFA_SETTINGS_URL = '/api/pleroma/accounts/mfa'
 const MFA_BACKUP_CODES_URL = '/api/pleroma/accounts/mfa/backup_codes'
@@ -29,6 +29,7 @@ const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
 const MASTODON_REGISTRATION_URL = '/api/v1/accounts'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
+const MASTODON_DISMISS_NOTIFICATION_URL = id => `/api/v1/notifications/${id}/dismiss`
 const MASTODON_FAVORITE_URL = id => `/api/v1/statuses/${id}/favourite`
 const MASTODON_UNFAVORITE_URL = id => `/api/v1/statuses/${id}/unfavourite`
 const MASTODON_RETWEET_URL = id => `/api/v1/statuses/${id}/reblog`
@@ -495,8 +496,7 @@ const fetchTimeline = ({
   until = false,
   userId = false,
   tag = false,
-  withMuted = false,
-  withMove = false
+  withMuted = false
 }) => {
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
@@ -536,11 +536,8 @@ const fetchTimeline = ({
   if (timeline === 'public' || timeline === 'publicAndExternal') {
     params.push(['only_media', false])
   }
-  if (timeline === 'notifications') {
-    params.push(['with_move', withMove])
-  }
 
-  params.push(['count', 20])
+  params.push(['limit', 20])
   params.push(['with_muted', withMuted])
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
@@ -844,12 +841,16 @@ const suggestions = ({ credentials }) => {
   }).then((data) => data.json())
 }
 
-const markNotificationsAsSeen = ({ id, credentials }) => {
+const markNotificationsAsSeen = ({ id, credentials, single = false }) => {
   const body = new FormData()
 
-  body.append('latest_id', id)
+  if (single) {
+    body.append('id', id)
+  } else {
+    body.append('max_id', id)
+  }
 
-  return fetch(QVITTER_USER_NOTIFICATIONS_READ_URL, {
+  return fetch(NOTIFICATION_READ_URL, {
     body,
     headers: authHeaders(credentials),
     method: 'POST'
@@ -880,12 +881,20 @@ const fetchPoll = ({ pollId, credentials }) => {
   )
 }
 
-const fetchFavoritedByUsers = ({ id }) => {
-  return promisedRequest({ url: MASTODON_STATUS_FAVORITEDBY_URL(id) }).then((users) => users.map(parseUser))
+const fetchFavoritedByUsers = ({ id, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_STATUS_FAVORITEDBY_URL(id),
+    method: 'GET',
+    credentials
+  }).then((users) => users.map(parseUser))
 }
 
-const fetchRebloggedByUsers = ({ id }) => {
-  return promisedRequest({ url: MASTODON_STATUS_REBLOGGEDBY_URL(id) }).then((users) => users.map(parseUser))
+const fetchRebloggedByUsers = ({ id, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_STATUS_REBLOGGEDBY_URL(id),
+    method: 'GET',
+    credentials
+  }).then((users) => users.map(parseUser))
 }
 
 const fetchEmojiReactions = ({ id, credentials }) => {
@@ -998,6 +1007,15 @@ const unmuteDomain = ({ domain, credentials }) => {
     url: MASTODON_DOMAIN_BLOCKS_URL,
     method: 'DELETE',
     payload: { domain },
+    credentials
+  })
+}
+
+const dismissNotification = ({ credentials, id }) => {
+  return promisedRequest({
+    url: MASTODON_DISMISS_NOTIFICATION_URL(id),
+    method: 'POST',
+    payload: { id },
     credentials
   })
 }
@@ -1157,6 +1175,7 @@ const apiService = {
   denyUser,
   suggestions,
   markNotificationsAsSeen,
+  dismissNotification,
   vote,
   fetchPoll,
   fetchFavoritedByUsers,

@@ -29,17 +29,29 @@ export default data => input => {
 export const suggestEmoji = emojis => input => {
   const noPrefix = input.toLowerCase().substr(1)
   return emojis
-    .filter(({ displayText }) => displayText.toLowerCase().startsWith(noPrefix))
+    .filter(({ displayText }) => displayText.toLowerCase().match(noPrefix))
     .sort((a, b) => {
       let aScore = 0
       let bScore = 0
 
-      // Make custom emojis a priority
-      aScore += a.imageUrl ? 10 : 0
-      bScore += b.imageUrl ? 10 : 0
+      // An exact match always wins
+      aScore += a.displayText.toLowerCase() === noPrefix ? 200 : 0
+      bScore += b.displayText.toLowerCase() === noPrefix ? 200 : 0
 
-      // Sort alphabetically
-      const alphabetically = a.displayText > b.displayText ? 1 : -1
+      // Prioritize custom emoji a lot
+      aScore += a.imageUrl ? 100 : 0
+      bScore += b.imageUrl ? 100 : 0
+
+      // Prioritize prefix matches somewhat
+      aScore += a.displayText.toLowerCase().startsWith(noPrefix) ? 10 : 0
+      bScore += b.displayText.toLowerCase().startsWith(noPrefix) ? 10 : 0
+
+      // Sort by length
+      aScore -= a.displayText.length
+      bScore -= b.displayText.length
+
+      // Break ties alphabetically
+      const alphabetically = a.displayText > b.displayText ? 0.5 : -0.5
 
       return bScore - aScore + alphabetically
     })

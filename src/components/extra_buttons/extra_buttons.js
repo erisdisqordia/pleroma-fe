@@ -3,11 +3,6 @@ import Popover from '../popover/popover.vue'
 const ExtraButtons = {
   props: [ 'status' ],
   components: { Popover },
-  data: function () {
-    return {
-      statusLink: `${this.$store.state.instance.server}${this.$router.resolve({ name: 'conversation', params: { id: this.status.id } }).href}`
-    }
-  },
   methods: {
     deleteStatus () {
       const confirmed = window.confirm(this.$t('status.delete_confirm'))
@@ -56,6 +51,9 @@ const ExtraButtons = {
     },
     canMute () {
       return !!this.currentUser
+    },
+    statusLink () {
+      return `${this.$store.state.instance.server}${this.$router.resolve({ name: 'conversation', params: { id: this.status.id } }).href}`
     }
   }
 }

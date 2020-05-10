@@ -401,7 +401,7 @@
     "theme_help_v2_1": "You can also override certain component's colors and opacity by toggling the checkbox, use \"Clear all\" button to clear all overrides.",
     "theme_help_v2_2": "Icons underneath some entries are background/text contrast indicators, hover over for detailed info. Please keep in mind that when using transparency contrast indicators show the worst possible case.",
     "tooltipRadius": "Tooltips/alerts",
-    "type_domains_to_mute": "Type in domains to mute",
+    "type_domains_to_mute": "Search domains to mute",
     "upload_a_photo": "Upload a photo",
     "user_settings": "User Settings",
     "values": {

@@ -209,5 +209,5 @@
 </div>
 </template>
 
-<script src="./profile.js"></script>
-<style lang="scss" src="./profile.scss"></style>
+<script src="./profile_tab.js"></script>
+<style lang="scss" src="./profile_tab.scss"></style>

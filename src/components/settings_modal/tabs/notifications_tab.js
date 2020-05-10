@@ -1,6 +1,6 @@
-import Checkbox from '../../checkbox/checkbox.vue'
+import Checkbox from 'src/components/checkbox/checkbox.vue'
 
-const Notifications = {
+const NotificationsTab = {
   data () {
     return {
       activeTab: 'profile',
@@ -24,4 +24,4 @@ const Notifications = {
   }
 }
 
-export default Notifications
+export default NotificationsTab

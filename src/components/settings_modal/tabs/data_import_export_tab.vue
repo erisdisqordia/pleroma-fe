@@ -39,5 +39,5 @@
 </div>
 </template>
 
-<script src="./data_import_export.js"></script>
+<script src="./data_import_export_tab.js"></script>
 <!-- <style lang="scss" src="./profile.scss"></style> -->

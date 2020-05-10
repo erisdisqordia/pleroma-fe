@@ -38,5 +38,5 @@
 </div>
 </template>
 
-<script src="./notifications.js"></script>
+<script src="./notifications_tab.js"></script>
 <!-- <style lang="scss" src="./profile.scss"></style> -->

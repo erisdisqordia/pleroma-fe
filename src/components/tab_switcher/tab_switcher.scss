@@ -46,8 +46,14 @@
 
   &.side-tabs {
     flex-direction: row;
+    @media all and (max-width: 800px) {
+      overflow-x: auto;
+    }
     > .contents {
       flex: 0 1 80%;
+      @media all and (max-width: 800px) {
+        min-width: 96vw;
+      }
     }
     > .tabs {
       flex: 1 0 auto;

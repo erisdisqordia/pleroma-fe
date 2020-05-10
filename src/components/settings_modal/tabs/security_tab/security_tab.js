@@ -1,8 +1,8 @@
-import ProgressButton from '../../progress_button/progress_button.vue'
-import Checkbox from '../../checkbox/checkbox.vue'
-import Mfa from '../../user_settings/mfa.vue'
+import ProgressButton from 'src/components/progress_button/progress_button.vue'
+import Checkbox from 'src/components/checkbox/checkbox.vue'
+import Mfa from './mfa.vue'
 
-const Security = {
+const SecurityTab = {
   data () {
     return {
       newEmail: '',
@@ -103,4 +103,4 @@ const Security = {
   }
 }
 
-export default Security
+export default SecurityTab

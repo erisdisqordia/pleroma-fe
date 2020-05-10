@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mfa-backup-codes">
     <h4 v-if="displayTitle">
       {{ $t('settings.mfa.recovery_codes') }}
     </h4>
@@ -21,13 +21,15 @@
 </template>
 <script src="./mfa_backup_codes.js"></script>
 <style lang="scss">
-@import '../../_variables.scss';
+@import '../../../../_variables.scss';
 
-.warning {
-  color: $fallback--cOrange;
-  color: var(--cOrange, $fallback--cOrange);
-}
-.backup-codes {
-  font-family: var(--postCodeFont, monospace);
+.mfa-backup-codes {
+  .warning {
+    color: $fallback--cOrange;
+    color: var(--cOrange, $fallback--cOrange);
+  }
+  .backup-codes {
+    font-family: var(--postCodeFont, monospace);
+  }
 }
 </style>

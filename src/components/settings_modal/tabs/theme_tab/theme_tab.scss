@@ -1,5 +1,5 @@
-@import '../../_variables.scss';
-.style-switcher {
+@import 'src/_variables.scss';
+.theme-tab {
   .theme-warning {
     display: flex;
     align-items: baseline;
@@ -52,10 +52,6 @@
         align-self: flex-start;
       }
     }
-  }
-
-  .tab-switcher {
-    margin: 0 -1em;
   }
 
   .reset-container {
@@ -161,7 +157,7 @@
     border-bottom: 1px dashed;
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
-    margin: 1em -1em 0;
+    margin: 1em 0;
     padding: 1em;
     background: var(--body-background-image);
     background-size: cover;
@@ -326,6 +322,14 @@
 
   .theme-preview-content {
     padding: 20px;
+  }
+
+  .apply-container {
+    .btn {
+      min-height: 28px;
+      min-width: 10em;
+      padding: 0 2em;
+    }
   }
 
   .btn {

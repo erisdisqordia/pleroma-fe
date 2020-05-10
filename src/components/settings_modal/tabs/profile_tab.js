@@ -1,12 +1,12 @@
 import unescape from 'lodash/unescape'
-import ImageCropper from '../../image_cropper/image_cropper.vue'
-import ScopeSelector from '../../scope_selector/scope_selector.vue'
-import fileSizeFormatService from '../../../services/file_size_format/file_size_format.js'
-import ProgressButton from '../../progress_button/progress_button.vue'
-import EmojiInput from '../../emoji_input/emoji_input.vue'
-import suggestor from '../../emoji_input/suggestor.js'
-import Autosuggest from '../../autosuggest/autosuggest.vue'
-import Checkbox from '../../checkbox/checkbox.vue'
+import ImageCropper from 'src/components/image_cropper/image_cropper.vue'
+import ScopeSelector from 'src/components/scope_selector/scope_selector.vue'
+import fileSizeFormatService from 'src/components/../services/file_size_format/file_size_format.js'
+import ProgressButton from 'src/components/progress_button/progress_button.vue'
+import EmojiInput from 'src/components/emoji_input/emoji_input.vue'
+import suggestor from 'src/components/emoji_input/suggestor.js'
+import Autosuggest from 'src/components/autosuggest/autosuggest.vue'
+import Checkbox from 'src/components/checkbox/checkbox.vue'
 
 const ProfileTab = {
   data () {

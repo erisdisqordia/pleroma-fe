@@ -3,6 +3,7 @@
     v-show="isOpen"
     v-body-scroll-lock="isOpen"
     class="modal-view"
+    :class="{ 'modal-background': !noBackground }"
     @click.self="$emit('backdropClicked')"
   >
     <slot />
@@ -15,6 +16,10 @@ export default {
     isOpen: {
       type: Boolean,
       default: true
+    },
+    noBackground: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -32,9 +37,18 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: auto;
+  pointer-events: none;
   animation-duration: 0.2s;
-  background-color: rgba(0, 0, 0, 0.5);
   animation-name: modal-background-fadein;
+
+  > * {
+    pointer-events: initial;
+  }
+
+  &.modal-background {
+    pointer-events: initial;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 
   body:not(.scroll-locked) & {
     opacity: 0;

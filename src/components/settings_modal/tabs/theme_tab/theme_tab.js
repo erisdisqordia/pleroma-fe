@@ -3,7 +3,7 @@ import {
   rgb2hex,
   hex2rgb,
   getContrastRatioLayers
-} from '../../services/color_convert/color_convert.js'
+} from 'src/services/color_convert/color_convert.js'
 import {
   DEFAULT_SHADOWS,
   generateColors,
@@ -14,26 +14,27 @@ import {
   getThemes,
   shadows2to3,
   colors2to3
-} from '../../services/style_setter/style_setter.js'
+} from 'src/services/style_setter/style_setter.js'
 import {
   SLOT_INHERITANCE
-} from '../../services/theme_data/pleromafe.js'
+} from 'src/services/theme_data/pleromafe.js'
 import {
   CURRENT_VERSION,
   OPACITIES,
   getLayers,
   getOpacitySlot
-} from '../../services/theme_data/theme_data.service.js'
-import ColorInput from '../color_input/color_input.vue'
-import RangeInput from '../range_input/range_input.vue'
-import OpacityInput from '../opacity_input/opacity_input.vue'
-import ShadowControl from '../shadow_control/shadow_control.vue'
-import FontControl from '../font_control/font_control.vue'
-import ContrastRatio from '../contrast_ratio/contrast_ratio.vue'
-import TabSwitcher from '../tab_switcher/tab_switcher.js'
+} from 'src/services/theme_data/theme_data.service.js'
+import ColorInput from 'src/components/color_input/color_input.vue'
+import RangeInput from 'src/components/range_input/range_input.vue'
+import OpacityInput from 'src/components/opacity_input/opacity_input.vue'
+import ShadowControl from 'src/components/shadow_control/shadow_control.vue'
+import FontControl from 'src/components/font_control/font_control.vue'
+import ContrastRatio from 'src/components/contrast_ratio/contrast_ratio.vue'
+import TabSwitcher from 'src/components/tab_switcher/tab_switcher.js'
+import ExportImport from 'src/components/export_import/export_import.vue'
+import Checkbox from 'src/components/checkbox/checkbox.vue'
+
 import Preview from './preview.vue'
-import ExportImport from '../export_import/export_import.vue'
-import Checkbox from '../checkbox/checkbox.vue'
 
 // List of color values used in v1
 const v1OnlyNames = [

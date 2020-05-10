@@ -1,8 +1,8 @@
-import Importer from '../../importer/importer.vue'
-import Exporter from '../../exporter/exporter.vue'
-import Checkbox from '../../checkbox/checkbox.vue'
+import Importer from 'src/components/importer/importer.vue'
+import Exporter from 'src/components/exporter/exporter.vue'
+import Checkbox from 'src/components/checkbox/checkbox.vue'
 
-const DataImportExport = {
+const DataImportExportTab = {
   data () {
     return {
       activeTab: 'profile',
@@ -62,4 +62,4 @@ const DataImportExport = {
   }
 }
 
-export default DataImportExport
+export default DataImportExportTab

@@ -1,90 +1,90 @@
 <template>
-  <div class="style-switcher">
-    <div class="presets-container">
-      <div class="save-load">
-        <div
-          v-if="themeWarning"
-          class="theme-warning"
+<div class="theme-tab">
+  <div class="presets-container">
+    <div class="save-load">
+      <div
+        v-if="themeWarning"
+        class="theme-warning"
         >
-          <div class="alert warning">
-            {{ themeWarningHelp }}
-          </div>
-          <div class="buttons">
-            <template v-if="themeWarning.type === 'snapshot_source_mismatch'">
-              <button
-                class="btn"
-                @click="forceLoad"
-              >
-                {{ $t('settings.style.switcher.use_source') }}
-              </button>
-              <button
-                class="btn"
-                @click="forceSnapshot"
-              >
-                {{ $t('settings.style.switcher.use_snapshot') }}
-              </button>
-            </template>
-            <template v-else-if="themeWarning.noActionsPossible">
-              <button
-                class="btn"
-                @click="dismissWarning"
-              >
-                {{ $t('general.dismiss') }}
-              </button>
-            </template>
-            <template v-else>
-              <button
-                class="btn"
-                @click="forceLoad"
-              >
-                {{ $t('settings.style.switcher.load_theme') }}
-              </button>
-              <button
-                class="btn"
-                @click="dismissWarning"
-              >
-                {{ $t('settings.style.switcher.keep_as_is') }}
-              </button>
-            </template>
-          </div>
+        <div class="alert warning">
+          {{ themeWarningHelp }}
         </div>
-        <ExportImport
-          :export-object="exportedTheme"
-          :export-label="$t(&quot;settings.export_theme&quot;)"
-          :import-label="$t(&quot;settings.import_theme&quot;)"
-          :import-failed-text="$t(&quot;settings.invalid_theme_imported&quot;)"
-          :on-import="onImport"
-          :validator="importValidator"
-        >
-          <template slot="before">
-            <div class="presets">
-              {{ $t('settings.presets') }}
-              <label
-                for="preset-switcher"
-                class="select"
+        <div class="buttons">
+          <template v-if="themeWarning.type === 'snapshot_source_mismatch'">
+            <button
+              class="btn"
+              @click="forceLoad"
               >
-                <select
-                  id="preset-switcher"
-                  v-model="selected"
-                  class="preset-switcher"
-                >
-                  <option
-                    v-for="style in availableStyles"
-                    :key="style.name"
-                    :value="style"
-                    :style="{
-                      backgroundColor: style[1] || (style.theme || style.source).colors.bg,
-                      color: style[3] || (style.theme || style.source).colors.text
-                    }"
-                  >
-                    {{ style[0] || style.name }}
-                  </option>
-                </select>
-                <i class="icon-down-open" />
-              </label>
-            </div>
+              {{ $t('settings.style.switcher.use_source') }}
+            </button>
+            <button
+              class="btn"
+              @click="forceSnapshot"
+              >
+              {{ $t('settings.style.switcher.use_snapshot') }}
+            </button>
           </template>
-        </ExportImport>
+          <template v-else-if="themeWarning.noActionsPossible">
+            <button
+              class="btn"
+              @click="dismissWarning"
+              >
+              {{ $t('general.dismiss') }}
+            </button>
+          </template>
+          <template v-else>
+            <button
+              class="btn"
+              @click="forceLoad"
+              >
+              {{ $t('settings.style.switcher.load_theme') }}
+            </button>
+            <button
+              class="btn"
+              @click="dismissWarning"
+              >
+              {{ $t('settings.style.switcher.keep_as_is') }}
+            </button>
+          </template>
+        </div>
+      </div>
+      <ExportImport
+        :export-object="exportedTheme"
+        :export-label="$t(&quot;settings.export_theme&quot;)"
+        :import-label="$t(&quot;settings.import_theme&quot;)"
+        :import-failed-text="$t(&quot;settings.invalid_theme_imported&quot;)"
+        :on-import="onImport"
+        :validator="importValidator"
+        >
+        <template slot="before">
+          <div class="presets">
+            {{ $t('settings.presets') }}
+            <label
+              for="preset-switcher"
+              class="select"
+              >
+              <select
+                id="preset-switcher"
+                v-model="selected"
+                class="preset-switcher"
+                >
+                <option
+                  v-for="style in availableStyles"
+                  :key="style.name"
+                  :value="style"
+                  :style="{
+                          backgroundColor: style[1] || (style.theme || style.source).colors.bg,
+                          color: style[3] || (style.theme || style.source).colors.text
+                          }"
+                  >
+                  {{ style[0] || style.name }}
+                </option>
+              </select>
+              <i class="icon-down-open" />
+            </label>
+          </div>
+        </template>
+      </ExportImport>
       </div>
       <div class="save-load-options">
         <span class="keep-option">
@@ -951,6 +951,6 @@
   </div>
 </template>
 
-<script src="./style_switcher.js"></script>
+<script src="./theme_tab.js"></script>
 
-<style src="./style_switcher.scss" lang="scss"></style>
+<style src="./theme_tab.scss" lang="scss"></style>

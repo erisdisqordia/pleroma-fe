@@ -15,7 +15,7 @@
       </div>
       <BlockList
         :refresh="true"
-        :get-key="identity"
+        :get-key="i => i"
         >
         <template
           slot="header"
@@ -73,7 +73,7 @@
           </div>
           <MuteList
             :refresh="true"
-            :get-key="identity"
+            :get-key="i => i"
             >
             <template
               slot="header"
@@ -134,7 +134,7 @@
           </div>
           <DomainMuteList
             :refresh="true"
-            :get-key="identity"
+            :get-key="i => i"
             >
             <template
               slot="header"
@@ -169,5 +169,5 @@
   </tab-switcher>
 </template>
 
-<script src="./mutes_and_blocks.js"></script>
+<script src="./mutes_and_blocks_tab.js"></script>
 <!-- <style lang="scss" src="./profile.scss"></style> -->

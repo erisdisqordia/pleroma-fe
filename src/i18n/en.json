@@ -68,7 +68,9 @@
     "disable": "Disable",
     "enable": "Enable",
     "confirm": "Confirm",
-    "verify": "Verify"
+    "verify": "Verify",
+    "close": "Close",
+    "peek": "Peek"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",

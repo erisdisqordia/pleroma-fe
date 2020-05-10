@@ -3,10 +3,20 @@
   v-if="isLoggedIn && !resettingForm"
   :is-open="modalActivated"
   class="settings-modal"
+  :class="{ peek: modalPeeked }"
+  :no-background="modalPeeked"
   >
   <div class="settings-modal-panel panel">
     <div class="panel-heading">
-      {{ $t('settings.settings') }}
+      <span class="title">
+        {{ $t('settings.settings') }}
+      </span>
+      <button class="btn" @click="peekModal">
+        {{ $t('general.peek') }}
+      </button>
+      <button class="btn" @click="closeModal">
+        {{ $t('general.close') }}
+      </button>
     </div>
     <div class="panel-body">
       <tab-switcher
@@ -15,11 +25,15 @@
         :scrollableTabs="true"
         ref="tabSwitcher"
         >
-        <div :label="$t('settings.profile_tab')"><Profile /></div>
-        <div :label="$t('settings.security_tab')"><Security /></div>
-        <div :label="$t('settings.notifications')"><Notifications /></div>
-        <div :label="$t('settings.data_import_export_tab')"><DataImportExport /></div>
-        <div :label="$t('settings.mutes_and_blocks')"><MutesAndBlocks /></div>
+        <div :label="$t('settings.general')"><GeneralTab /></div>
+        <div :label="$t('settings.profile_tab')"><ProfileTab /></div>
+        <div :label="$t('settings.security_tab')"><SecurityTab /></div>
+        <div :label="$t('settings.filtering')"><FilteringTab /></div>
+        <div :label="$t('settings.theme')"><ThemeTab /></div>
+        <div :label="$t('settings.notifications')"><NotificationsTab /></div>
+        <div :label="$t('settings.data_import_export_tab')"><DataImportExportTab /></div>
+        <div :label="$t('settings.mutes_and_blocks')"><MutesAndBlocksTab /></div>
+        <div :label="$t('settings.version.title')"><VersionTab /></div>
       </tab-switcher>
     </div>
   </div>

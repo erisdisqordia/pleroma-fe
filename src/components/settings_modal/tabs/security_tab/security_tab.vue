@@ -139,5 +139,5 @@
 </div>
 </template>
 
-<script src="./security.js"></script>
+<script src="./security_tab.js"></script>
 <!-- <style lang="scss" src="./profile.scss"></style> -->

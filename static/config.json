@@ -19,5 +19,6 @@
   "noAttachmentLinks": false,
   "nsfwCensorImage": "",
   "showFeaturesPanel": true,
-  "minimalScopesMode": false
+  "minimalScopesMode": false,
+  "sidebarRight": false
 }

@@ -36,6 +36,7 @@ const defaultState = {
   showFeaturesPanel: true,
   minimalScopesMode: false,
   greentext: false,
+  sidebarRight: false,
 
   // Nasty stuff
   pleromaBackend: true,

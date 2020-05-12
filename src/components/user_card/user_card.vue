@@ -69,6 +69,7 @@
               <AccountActions
                 v-if="isOtherUser && loggedIn"
                 :user="user"
+                :relationship="relationship"
               />
             </div>
             <div class="bottom-line">
@@ -92,7 +93,7 @@
         </div>
         <div class="user-meta">
           <div
-            v-if="user.follows_you && loggedIn && isOtherUser"
+            v-if="relationship.followed_by && loggedIn && isOtherUser"
             class="following"
           >
             {{ $t('user_card.follows_you') }}
@@ -139,10 +140,10 @@
           class="user-interactions"
         >
           <div class="btn-group">
-            <FollowButton :user="user" />
-            <template v-if="user.following">
+            <FollowButton :relationship="relationship" />
+            <template v-if="relationship.following">
               <ProgressButton
-                v-if="!user.subscribed"
+                v-if="!relationship.subscribing"
                 class="btn btn-default"
                 :click="subscribeUser"
                 :title="$t('user_card.subscribe')"
@@ -161,7 +162,7 @@
           </div>
           <div>
             <button
-              v-if="user.muted"
+              v-if="relationship.muting"
               class="btn btn-default btn-block toggled"
               @click="unmuteUser"
             >

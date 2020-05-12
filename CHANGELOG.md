@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Removed the use of with_move parameters when fetching notifications
 
+## [2.0.5] - 2020-05-12
+### Add
+- Added private notifications option for push notifications
+- 'Copy link' button for statuses (in the ellipsis menu)
+
+### Changed
+- Registration page no longer requires email if the server is configured not to require it
+
+### Fixed
+- Status ellipsis menu closes properly when selecting certain options
+
 ## [2.0.3] - 2020-05-02
 ### Fixed
 - Show more/less works correctly with auto-collapsed subjects and long posts

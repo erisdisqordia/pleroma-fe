@@ -241,6 +241,9 @@ const getNodeInfo = async ({ store }) => {
           : federation.enabled
       })
 
+      const accountActivationRequired = metadata.accountActivationRequired
+      store.dispatch('setInstanceOption', { name: 'accountActivationRequired', value: accountActivationRequired })
+
       const accounts = metadata.staffAccounts
       resolveStaffAccounts({ store, accounts })
     } else {
@@ -303,6 +306,9 @@ const afterStoreSetup = async ({ store, i18n }) => {
     getStickers({ store }),
     getNodeInfo({ store })
   ])
+
+  // Start fetching things that don't need to block the UI
+  store.dispatch('fetchMutes')
 
   const router = new VueRouter({
     mode: 'history',

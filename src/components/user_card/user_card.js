@@ -9,7 +9,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   props: [
-    'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar'
+    'userId', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar'
   ],
   data () {
     return {
@@ -21,6 +21,12 @@ export default {
     this.$store.dispatch('fetchUserRelationship', this.user.id)
   },
   computed: {
+    user () {
+      return this.$store.getters.findUser(this.userId)
+    },
+    relationship () {
+      return this.$store.getters.relationship(this.userId)
+    },
     classes () {
       return [{
         'user-card-rounded-t': this.rounded === 'top', // set border-top-left-radius and border-top-right-radius

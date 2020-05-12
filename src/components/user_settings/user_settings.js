@@ -351,14 +351,14 @@ const UserSettings = {
     },
     filterUnblockedUsers (userIds) {
       return reject(userIds, (userId) => {
-        const user = this.$store.getters.findUser(userId)
-        return !user || user.statusnet_blocking || user.id === this.$store.state.users.currentUser.id
+        const relationship = this.$store.getters.relationship(this.userId)
+        return relationship.blocking || userId === this.$store.state.users.currentUser.id
       })
     },
     filterUnMutedUsers (userIds) {
       return reject(userIds, (userId) => {
-        const user = this.$store.getters.findUser(userId)
-        return !user || user.muted || user.id === this.$store.state.users.currentUser.id
+        const relationship = this.$store.getters.relationship(this.userId)
+        return relationship.muting || userId === this.$store.state.users.currentUser.id
       })
     },
     queryUserIds (query) {

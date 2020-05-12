@@ -3,7 +3,7 @@ import Popover from '../popover/popover.vue'
 
 const AccountActions = {
   props: [
-    'user'
+    'user', 'relationship'
   ],
   data () {
     return { }

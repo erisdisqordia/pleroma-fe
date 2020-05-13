@@ -16,7 +16,6 @@
   "hideUserStats": false,
   "loginMethod": "password",
   "webPushNotifications": false,
-  "noAttachmentLinks": false,
   "nsfwCensorImage": "",
   "showFeaturesPanel": true,
   "minimalScopesMode": false

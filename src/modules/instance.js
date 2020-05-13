@@ -32,7 +32,6 @@ const defaultState = {
   hideSitename: false,
   nsfwCensorImage: undefined,
   vapidPublicKey: undefined,
-  noAttachmentLinks: false,
   showFeaturesPanel: true,
   minimalScopesMode: false,
   greentext: false,

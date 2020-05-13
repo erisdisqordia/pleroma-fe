@@ -8,6 +8,7 @@ const defaultState = {
   name: 'Pleroma FE',
 
   // Stuff from apiConfig
+  registrationOpen: true,
   server: 'http://localhost:4040/',
   textlimit: 5000,
   themeData: undefined,
@@ -33,7 +34,6 @@ const defaultState = {
   postContentType: 'text/plain',
   redirectRootLogin: '/main/friends',
   redirectRootNoLogin: '/main/all',
-  registrationOpen: true,
   scopeCopy: true,
   showFeaturesPanel: true,
   showInstanceSpecificPanel: false,

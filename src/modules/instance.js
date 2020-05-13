@@ -4,10 +4,16 @@ import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { instanceDefaultProperties } from './config.js'
 
 const defaultState = {
-  // not user configurable
+  // not configurable
   name: 'Pleroma FE',
 
-  // Stuff from static/config.json and apiConfig
+  // Stuff from apiConfig
+  server: 'http://localhost:4040/',
+  textlimit: 5000,
+  themeData: undefined,
+  vapidPublicKey: undefined,
+
+  // Stuff from static/config.json
   alwaysShowSubjectInput: true,
   background: '/static/aurora_borealis.jpg',
   collapseMessageWithSubject: false,
@@ -28,29 +34,25 @@ const defaultState = {
   redirectRootLogin: '/main/friends',
   redirectRootNoLogin: '/main/all',
   registrationOpen: true,
-  safeDM: true,
   scopeCopy: true,
-  server: 'http://localhost:4040/',
   showFeaturesPanel: true,
   showInstanceSpecificPanel: false,
   subjectLineBehavior: 'email',
-  textlimit: 5000,
   theme: 'pleroma-dark',
-  themeData: undefined,
-  vapidPublicKey: undefined,
 
   // Nasty stuff
-  pleromaBackend: true,
-  emoji: [],
-  emojiFetched: false,
   customEmoji: [],
   customEmojiFetched: false,
-  restrictedNicknames: [],
+  emoji: [],
+  emojiFetched: false,
+  pleromaBackend: true,
   postFormats: [],
+  restrictedNicknames: [],
+  safeDM: true,
 
   // Feature-set, apparently, not everything here is reported...
-  mediaProxyAvailable: false,
   chatAvailable: false,
+  mediaProxyAvailable: false,
   gopherAvailable: false,
   suggestionsEnabled: false,
   suggestionsWeb: '',

@@ -42,7 +42,8 @@
         "public_tl": "Публичная лента",
         "timeline": "Лента",
         "twkn": "Федеративная лента",
-        "search": "Поиск"
+        "search": "Поиск",
+        "friend_requests": "Запросы на чтение"
     },
     "notifications": {
         "broken_favorite": "Неизвестный статус, ищем...",
@@ -51,7 +52,8 @@
         "load_older": "Загрузить старые уведомления",
         "notifications": "Уведомления",
         "read": "Прочесть",
-        "repeated_you": "повторил(а) ваш статус"
+        "repeated_you": "повторил(а) ваш статус",
+        "follow_request": "хочет читать вас"
     },
     "interactions": {
         "favs_repeats": "Повторы и фавориты",
@@ -59,7 +61,7 @@
         "load_older": "Загрузить старые взаимодействия"
     },
     "post_status": {
-        "account_not_locked_warning": "Ваш аккаунт не {0}. Кто угодно может зафоловить вас чтобы прочитать посты только для подписчиков.",
+        "account_not_locked_warning": "Ваш аккаунт не {0}. Кто угодно может начать читать вас чтобы видеть посты только для подписчиков.",
         "account_not_locked_warning_link": "залочен",
         "attachments_sensitive": "Вложения содержат чувствительный контент",
         "content_warning": "Тема (не обязательно)",
@@ -207,7 +209,7 @@
         "replies_in_timeline": "Ответы в ленте",
         "reply_link_preview": "Включить предварительный просмотр ответа при наведении мыши",
         "reply_visibility_all": "Показывать все ответы",
-        "reply_visibility_following": "Показывать только ответы мне и тех на кого я подписан",
+        "reply_visibility_following": "Показывать только ответы мне или тех на кого я подписан",
         "reply_visibility_self": "Показывать только ответы мне",
         "autohide_floating_post_button": "Автоматически скрывать кнопку постинга (в мобильной версии)",
         "saving_err": "Не удалось сохранить настройки",
@@ -343,7 +345,13 @@
                 "checkbox": "Я подтверждаю что не было ни единого разрыва",
                 "link": "ссылка"
             }
-        }
+        },
+        "notification_setting_non_followers": "Не читающие вас",
+        "allow_following_move": "Разрешить автоматически читать новый аккаунт при перемещении на другой сервер",
+        "hide_user_stats": "Не показывать статистику пользователей (например количество читателей)",
+        "notification_setting_followers": "Читающие вас",
+        "notification_setting_follows": "Читаемые вами",
+        "notification_setting_non_follows": "Не читаемые вами"
     },
     "timeline": {
         "collapse": "Свернуть",
@@ -362,12 +370,12 @@
         "follow": "Читать",
         "follow_sent": "Запрос отправлен!",
         "follow_progress": "Запрашиваем…",
-        "follow_again": "Запросить еще заново?",
+        "follow_again": "Запросить еще раз?",
         "follow_unfollow": "Перестать читать",
         "followees": "Читаемые",
         "followers": "Читатели",
-        "following": "Читаю",
-        "follows_you": "Читает вас",
+        "following": "Читаю!",
+        "follows_you": "Читает вас!",
         "mute": "Игнорировать",
         "muted": "Игнорирую",
         "per_day": "в день",
@@ -385,9 +393,9 @@
             "force_nsfw": "Отмечать посты пользователя как NSFW",
             "strip_media": "Убирать вложения из постов пользователя",
             "force_unlisted": "Не добавлять посты в публичные ленты",
-            "sandbox": "Посты доступны только для подписчиков",
-            "disable_remote_subscription": "Запретить подписываться с удаленных серверов",
-            "disable_any_subscription": "Запретить подписываться на пользователя",
+            "sandbox": "Принудить видимость постов только читателям",
+            "disable_remote_subscription": "Запретить читать с удаленных серверов",
+            "disable_any_subscription": "Запретить читать пользователя",
             "quarantine": "Не федерировать посты пользователя",
             "delete_user": "Удалить пользователя",
             "delete_user_confirmation": "Вы уверены? Это действие нельзя отменить."
@@ -460,5 +468,9 @@
         "text_limit": "Лимит символов",
         "title": "Особенности",
         "gopher": "Gopher"
+    },
+    "tool_tip": {
+        "accept_follow_request": "Принять запрос на чтение",
+        "reject_follow_request": "Отклонить запрос на чтение"
     }
 }

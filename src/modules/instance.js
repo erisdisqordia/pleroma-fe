@@ -52,8 +52,8 @@ const defaultState = {
 
   // Feature-set, apparently, not everything here is reported...
   chatAvailable: false,
-  mediaProxyAvailable: false,
   gopherAvailable: false,
+  mediaProxyAvailable: false,
   suggestionsEnabled: false,
   suggestionsWeb: '',
 

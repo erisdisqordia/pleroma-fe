@@ -416,7 +416,11 @@
             "federation": "Федерация",
             "simple": {
                 "accept_desc": ""
+            },
+            "keyword": {
+                "ftl_removal": "Убраны из федеративной ленты"
             }
-        }
+        },
+        "staff": "Администрация"
     }
 }

@@ -4,6 +4,9 @@ import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { instanceDefaultProperties } from './config.js'
 
 const defaultState = {
+  // not user configurable
+  name: 'Pleroma FE',
+
   // Stuff from static/config.json and apiConfig
   alwaysShowSubjectInput: true,
   background: '/static/aurora_borealis.jpg',
@@ -19,7 +22,6 @@ const defaultState = {
   logoMargin: '.2em',
   logoMask: true,
   minimalScopesMode: false,
-  name: 'Pleroma FE',
   nsfwCensorImage: undefined,
   postContentType: 'text/plain',
   redirectRootLogin: '/main/friends',

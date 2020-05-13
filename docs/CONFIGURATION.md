@@ -100,11 +100,11 @@ Some features are configured depending on how backend is configured. In general 
 ### Chat
 **TODO somewhat broken, see: chatDisabled** chat can be disabled by disabling it in backend
 
+### Private Mode
+If the `private` instance setting is enabled in the backend, features that are not accessible without authentication, such as the timelines and search will be disabled for unauthenticated users.
+
 ### Rich text formatting in post formatting
 Rich text formatting options are displayed depending on how many formatting options are enabled on backend, if you don't want your users to use rich text at all you can only allow "text/plain" one, frontend then will only display post text format as a label instead of dropdown (just so that users know for example if you only allow Markdown, only BBCode or only Plain text)
-
-### Who to follow
-This is a panel intended for users to find people to follow based on randomness or on post contents. Being potentially privacy unfriendly feature it needs to be enabled and configured in backend to be enabled.
 
 ### Safe DM message display
 
@@ -114,5 +114,6 @@ ATTENTION: If you actually want the behavior to change. You will need to set the
 
 DO NOT activate this without checking the backend configuration first!
 
-### Private Mode
-If the `private` instance setting is enabled in the backend, features that are not accessible without authentication, such as the timelines and search will be disabled for unauthenticated users.
+### Who to follow
+This is a panel intended for users to find people to follow based on randomness or on post contents. Being potentially privacy unfriendly feature it needs to be enabled and configured in backend to be enabled.
+

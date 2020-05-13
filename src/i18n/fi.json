@@ -289,7 +289,15 @@
             "warning_of_generate_new_codes": "Luodessasi uudet palautuskoodit, vanhat koodisi lakkaavat toimimasta.",
             "recovery_codes": "Palautuskoodit.",
             "waiting_a_recovery_codes": "Odotetaan palautuskoodeja...",
-            "recovery_codes_warning": "Kirjoita koodit ylös tai tallenna ne turvallisesti, muuten et näe niitä uudestaan. Jos et voi käyttää monivaihetodennusta ja sinulla ei ole palautuskoodeja, et voi enää kirjautua sisään tilillesi."
+            "recovery_codes_warning": "Kirjoita koodit ylös tai tallenna ne turvallisesti, muuten et näe niitä uudestaan. Jos et voi käyttää monivaihetodennusta ja sinulla ei ole palautuskoodeja, et voi enää kirjautua sisään tilillesi.",
+            "scan": {
+                "title": "Skannaa",
+                "secret_code": "Avain",
+                "desc": "Käytä monivaihetodennus-sovellusta skannakksesi tämän QR-kooding, tai syötä avain:"
+            },
+            "verify": {
+                "desc": "Kytkeäksesi päälle monivaihetodennuksen, syötä koodi monivaihetodennussovellksesta:"
+            }
         },
         "allow_following_move": "Salli automaattinen seuraaminen kun käyttäjä siirtää tilinsä",
         "block_export": "Estojen vienti",
@@ -375,7 +383,12 @@
                 "poll": "Äänestyksen kuvaaja",
                 "icons": "Ikonit",
                 "highlight": "Korostetut elementit",
-                "pressed": "Painettu"
+                "pressed": "Painettu",
+                "selectedMenu": "Valikon valinta",
+                "disabled": "Pois käytöstä",
+                "toggled": "Kytketty",
+                "tabs": "Välilehdet",
+                "popover": "Työkaluvinkit, valikot, ponnahdusviestit"
             },
             "common": {
                 "color": "Väri",
@@ -398,6 +411,67 @@
                 "main": "Yleiset värit",
                 "foreground_hint": "Löydät \"Edistynyt\"-välilehdeltä tarkemmat asetukset",
                 "rgbo": "Ikonit, korostukset, merkit"
+            },
+            "shadows": {
+                "filter_hint": {
+                    "always_drop_shadow": "Varoitus, tämä varjo käyttää aina {0} kun selain tukee sitä.",
+                    "avatar_inset": "Huom. sisennettyjen ja ei-sisennettyjen varjojen yhdistelmät saattavat luoda ei-odotettuja lopputuloksia läpinäkyvillä profiilikuvilla.",
+                    "drop_shadow_syntax": "{0} ei tue {1} parametria ja {2} avainsanaa.",
+                    "spread_zero": "Varjot joiden levitys > 0 näyttävät samalta kuin se olisi nolla",
+                    "inset_classic": "Sisennetyt varjot käyttävät {0}"
+                },
+                "components": {
+                    "buttonPressedHover": "Nappi (painettu ja kohdistettu)",
+                    "panel": "Ruutu",
+                    "panelHeader": "Ruudun otsikko",
+                    "topBar": "Yläpalkki",
+                    "avatar": "Profiilikuva (profiilinäkymässä)",
+                    "avatarStatus": "Profiilikuva (viestin yhtyedessä)",
+                    "popup": "Ponnahdusviestit ja työkaluvinkit",
+                    "button": "Nappi",
+                    "buttonHover": "Nappi (kohdistus)",
+                    "buttonPressed": "Nappi (painettu)",
+                    "input": "Syöttökenttä"
+                },
+                "hintV3": "Voit käyttää {0} merkintää varjoille käyttääksesi väriä toisesta asetuksesta.",
+                "_tab_label": "Valo ja varjostus",
+                "component": "Komponentti",
+                "override": "Ylikirjoita",
+                "shadow_id": "Varjo #{value}",
+                "blur": "Sumennus",
+                "spread": "Levitys",
+                "inset": "Sisennys"
+            },
+            "fonts": {
+                "help": "Valitse fontti käyttöliittymälle. \"Oma\"-vaihtohdolle on syötettävä fontin nimi tarkalleen samana kuin se on järjestelmässäsi.",
+                "_tab_label": "Fontit",
+                "components": {
+                    "interface": "Käyttöliittymä",
+                    "input": "Syöttökentät",
+                    "post": "Viestin teksti",
+                    "postCode": "Tasavälistetty teksti viestissä"
+                },
+                "family": "Fontin nimi",
+                "size": "Koko (pikseleissä)",
+                "weight": "Painostus (paksuus)",
+                "custom": "Oma"
+            },
+            "preview": {
+                "input": "Tulin juuri saunasta.",
+                "header": "Esikatselu",
+                "content": "Sisältö",
+                "error": "Esimerkkivirhe",
+                "button": "Nappi",
+                "text": "Vähän lisää {0} ja {1}",
+                "mono": "sisältöä",
+                "faint_link": "manuaali",
+                "fine_print": "Lue meidän {0} vaikka huvin vuoksi!",
+                "header_faint": "Tämä on OK",
+                "checkbox": "Olen silmäillyt käyttöehdot",
+                "link": "kiva linkki"
+            },
+            "radii": {
+                "_tab_label": "Pyöristys"
             }
         },
         "enter_current_password_to_confirm": "Syötä nykyinen salasanasi todentaaksesi henkilöllisyytesi",
@@ -411,7 +485,12 @@
         "notification_setting_non_followers": "Käyttäjät jotka eivät seuraa sinua",
         "notification_setting_privacy": "Yksityisyys",
         "notification_mutes": "Jos et halua ilmoituksia joltain käyttäjältä, käytä mykistystä.",
-        "notification_blocks": "Estäminen pysäyttää kaikki ilmoitukset käyttäjältä ja poistaa seurauksen."
+        "notification_blocks": "Estäminen pysäyttää kaikki ilmoitukset käyttäjältä ja poistaa seurauksen.",
+        "version": {
+            "title": "Versio",
+            "backend_version": "Palvelimen versio",
+            "frontend_version": "Käyttöliittymän versio"
+        }
     },
     "time": {
         "day": "{0} päivä",
@@ -432,8 +511,8 @@
         "months": "{0} kuukautta",
         "month_short": "{0}kk",
         "months_short": "{0}kk",
-        "now": "nyt",
-        "now_short": "juuri nyt",
+        "now": "juuri nyt",
+        "now_short": "nyt",
         "second": "{0} sekunti",
         "seconds": "{0} sekuntia",
         "second_short": "{0}s",
@@ -456,7 +535,8 @@
         "repeated": "toisti",
         "show_new": "Näytä uudet",
         "up_to_date": "Ajantasalla",
-        "no_more_statuses": "Ei enempää viestejä"
+        "no_more_statuses": "Ei enempää viestejä",
+        "no_statuses": "Ei viestejä"
     },
     "status": {
         "favorites": "Tykkäykset",
@@ -468,9 +548,10 @@
         "delete_confirm": "Haluatko varmasti postaa viestin?",
         "reply_to": "Vastaus",
         "replies_list": "Vastaukset:",
-        "mute_conversation": "Hiljennä keskustelu",
-        "unmute_conversation": "Poista hiljennys",
-        "status_unavailable": "Viesti ei saatavissa"
+        "mute_conversation": "Mykistä keskustelu",
+        "unmute_conversation": "Poista mykistys",
+        "status_unavailable": "Viesti ei saatavissa",
+        "copy_link": "Kopioi linkki"
     },
     "user_card": {
         "approve": "Hyväksy",
@@ -479,7 +560,7 @@
         "deny": "Älä hyväksy",
         "follow": "Seuraa",
         "follow_sent": "Pyyntö lähetetty!",
-        "follow_progress": "Pyydetään...",
+        "follow_progress": "Pyydetään…",
         "follow_again": "Lähetä pyyntö uudestaan",
         "follow_unfollow": "Älä seuraa",
         "followees": "Seuraa",
@@ -487,14 +568,50 @@
         "following": "Seuraat!",
         "follows_you": "Seuraa sinua!",
         "its_you": "Sinun tili!",
-        "mute": "Hiljennä",
-        "muted": "Hiljennetty",
+        "mute": "Mykistä",
+        "muted": "Mykistetty",
         "per_day": "päivässä",
         "remote_follow": "Seuraa muualta",
-        "statuses": "Viestit"
+        "statuses": "Viestit",
+        "hidden": "Piilotettu",
+        "media": "Media",
+        "block_progress": "Estetään...",
+        "admin_menu": {
+            "grant_admin": "Anna Ylläpitöoikeudet",
+            "force_nsfw": "Merkitse kaikki viestit NSFW:nä",
+            "disable_any_subscription": "Estä käyttäjän seuraaminen",
+            "moderation": "Moderaatio",
+            "revoke_admin": "Poista Ylläpitöoikeudet",
+            "grant_moderator": "Anna Moderaattorioikeudet",
+            "revoke_moderator": "Poista Moderaattorioikeudet",
+            "activate_account": "Aktivoi tili",
+            "deactivate_account": "Deaktivoi tili",
+            "delete_account": "Poista tili",
+            "strip_media": "Poista media viesteistä",
+            "force_unlisted": "Pakota viestit listaamattomiksi",
+            "sandbox": "Pakota viestit vain seuraajille",
+            "disable_remote_subscription": "Estä seuraaminen ulkopuolisilta sivuilta",
+            "quarantine": "Estä käyttäjän viestin federoituminen",
+            "delete_user": "Poista käyttäjä",
+            "delete_user_confirmation": "Oletko aivan varma? Tätä ei voi kumota."
+        },
+        "favorites": "Tykkäykset",
+        "mention": "Mainitse",
+        "report": "Ilmianna",
+        "subscribe": "Tilaa",
+        "unsubscribe": "Poista tilaus",
+        "unblock": "Poista esto",
+        "unblock_progress": "Postetaan estoa...",
+        "unmute": "Poista mykistys",
+        "unmute_progress": "Poistetaan mykistystä...",
+        "mute_progress": "Mykistetään...",
+        "hide_repeats": "Piilota toistot",
+        "show_repeats": "Näytä toistot"
     },
     "user_profile": {
-        "timeline_title": "Käyttäjän aikajana"
+        "timeline_title": "Käyttäjän aikajana",
+        "profile_does_not_exist": "Tätä profiilia ei ole.",
+        "profile_loading_error": "Virhe ladatessa profiilia."
     },
     "who_to_follow": {
         "more": "Lisää",
@@ -505,7 +622,10 @@
         "repeat": "Toista",
         "reply": "Vastaa",
         "favorite": "Tykkää",
-        "user_settings": "Käyttäjäasetukset"
+        "user_settings": "Käyttäjäasetukset",
+        "add_reaction": "Lisää Reaktio",
+        "accept_follow_request": "Hyväksy seurauspyyntö",
+        "reject_follow_request": "Hylkää seurauspyyntö"
     },
     "upload": {
         "error": {
@@ -535,10 +655,19 @@
                 "reject": "Hylkää",
                 "quarantine": "Karanteeni",
                 "ftl_removal": "Poisto \"Koko Tunnettu Verkosto\" -aikajanalta",
-                "media_removal": "Media-tiedostojen poisto"
+                "media_removal": "Media-tiedostojen poisto",
+                "simple_policies": "Palvelinkohtaiset Säännöt",
+                "accept_desc": "Tämä palvelin hyväksyy viestit vain seuraavilta palvelimilta:",
+                "reject_desc": "Tämä palvelin ei hyväksy viestejä seuraavilta palvelimilta:",
+                "quarantine_desc": "Tämä palvelin lähettää vain julkisia viestejä seuraaville palvelimille:",
+                "ftl_removal_desc": "Tämä palvelin poistaa nämä palvelimet \"Koko Tunnettu Verkosto\"-aikajanalta:",
+                "media_removal_desc": "Tämä palvelin postaa mediatiedostot viesteistä seuraavilta palvelimilta:",
+                "media_nsfw": "Pakota Media Arkaluontoiseksi",
+                "media_nsfw_desc": "Tämä palvelin pakottaa mediatiedostot arkaluonteisiksi seuraavilta palvelimilta:"
             },
             "federation": "Federaatio",
-            "mrf_policies": "Aktivoidut MRF-säännöt"
+            "mrf_policies": "Aktivoidut MRF-säännöt",
+            "mrf_policies_desc": "MRF-säännöt muuttavat federaation toimintaa sivulla. Seuraavat säännöt ovat kytketty päälle:"
         },
         "staff": "Henkilökunta"
     },
@@ -585,5 +714,34 @@
     },
     "selectable_list": {
         "select_all": "Valitse kaikki"
+    },
+    "password_reset": {
+        "check_email": "Tarkista sähköpostisi salasanannollausta varten.",
+        "instruction": "Syötä sähköpostiosoite tai käyttäjänimi. Lähetämme linkin salasanan nollausta varten.",
+        "password_reset_disabled": "Salasanan nollaus ei käytössä. Ota yhteyttä sivun ylläpitäjään.",
+        "password_reset_required_but_mailer_is_disabled": "Sinun täytyy vaihtaa salasana, mutta salasanan nollaus on pois käytöstä. Ota yhteyttä sivun ylläpitäjään.",
+        "forgot_password": "Unohditko salasanan?",
+        "password_reset": "Salasanan nollaus",
+        "placeholder": "Sähköpostiosoite tai käyttäjänimi",
+        "return_home": "Palaa etusivulle",
+        "not_found": "Sähköpostiosoitetta tai käyttäjänimeä ei löytynyt.",
+        "too_many_requests": "Olet käyttänyt kaikki yritykset, yritä uudelleen myöhemmin.",
+        "password_reset_required": "Sinun täytyy vaihtaa salasana kirjautuaksesi."
+    },
+    "user_reporting": {
+        "add_comment_description": "Tämä raportti lähetetään sivun moderaattoreille. Voit antaa selityksen miksi ilmiannoit tilin:",
+        "title": "Ilmiannetaan {0}",
+        "additional_comments": "Lisäkommentit",
+        "forward_description": "Tämä tili on toiselta palvelimelta. Lähetä kopio ilmiannosta sinnekin?",
+        "forward_to": "Lähetä eteenpäin: {0}",
+        "submit": "Lähetä",
+        "generic_error": "Virhe käsitellessä pyyntöä."
+    },
+    "search": {
+        "people": "Käyttäjät",
+        "hashtags": "Aihetunnisteet",
+        "people_talking": "{0} käyttäjää puhuvat",
+        "person_talking": "{0} käyttäjä puhuu",
+        "no_results": "Ei tuloksia"
     }
 }

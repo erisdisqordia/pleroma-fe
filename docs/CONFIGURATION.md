@@ -68,9 +68,6 @@ Hide counters for posts and users respectively, i.e. hiding repeats/favorites co
 ### `webPushNotifications`
 Enables [PushAPI](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) - based notifications for users. Instance-default.
 
-### `noAttachmentLinks`
-**TODO Currently doesn't seem to be doing anything code-wise**, but implication is to disable adding links for attachments, which looks nicer but breaks compatibility with old GNU/Social servers.
-
 ### `nsfwCensorImage`
 Use custom image for NSFW'd images
 

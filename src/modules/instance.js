@@ -4,10 +4,8 @@ import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { instanceDefaultProperties } from './config.js'
 
 const defaultState = {
-  // not configurable
-  name: 'Pleroma FE',
-
   // Stuff from apiConfig
+  name: 'Pleroma FE',
   registrationOpen: true,
   server: 'http://localhost:4040/',
   textlimit: 5000,

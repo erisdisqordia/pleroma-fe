@@ -18,6 +18,7 @@ const defaultState = {
   hidePostStats: false,
   hideSitename: false,
   hideUserStats: false,
+  loginMethod: 'password',
   logo: '/static/logo.png',
   logoMargin: '.2em',
   logoMask: true,

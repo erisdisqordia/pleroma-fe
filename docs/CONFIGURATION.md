@@ -106,14 +106,6 @@ If the `private` instance setting is enabled in the backend, features that are n
 ### Rich text formatting in post formatting
 Rich text formatting options are displayed depending on how many formatting options are enabled on backend, if you don't want your users to use rich text at all you can only allow "text/plain" one, frontend then will only display post text format as a label instead of dropdown (just so that users know for example if you only allow Markdown, only BBCode or only Plain text)
 
-### Safe DM message display
-
-Setting this will change the warning text that is displayed for direct messages.
-
-ATTENTION: If you actually want the behavior to change. You will need to set the appropriate option at the backend. See the backend documentation for information about that.
-
-DO NOT activate this without checking the backend configuration first!
-
 ### Who to follow
 This is a panel intended for users to find people to follow based on randomness or on post contents. Being potentially privacy unfriendly feature it needs to be enabled and configured in backend to be enabled.
 

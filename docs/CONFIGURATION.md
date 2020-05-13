@@ -98,7 +98,7 @@ Enables [PushAPI](https://developer.mozilla.org/en-US/docs/Web/API/Push_API) - b
 Some features are configured depending on how backend is configured. In general the approach is "if backend allows it there's no need to hide it, if backend doesn't allow it there's no need to show it.
 
 ### Chat
-**TODO somewhat broken, see: chatDisabled** chat can be disabled by disabling it in backend
+**TODO somewhat broken, see: disableChat** chat can be disabled by disabling it in backend
 
 ### Private Mode
 If the `private` instance setting is enabled in the backend, features that are not accessible without authentication, such as the timelines and search will be disabled for unauthenticated users.

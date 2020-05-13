@@ -943,7 +943,7 @@ const searchUsers = ({ credentials, query, withRelationships }) => {
     params: {
       q: query,
       resolve: true,
-      with_relationships: withRelationships
+      with_relationships: !!withRelationships
     },
     credentials
   })

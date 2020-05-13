@@ -1,13 +1,24 @@
 {
     "general": {
         "submit": "Invia",
-        "apply": "Applica"
+        "apply": "Applica",
+        "more": "Altro",
+        "generic_error": "Errore",
+        "optional": "facoltativo",
+        "show_more": "Mostra tutto",
+        "show_less": "Ripiega",
+        "dismiss": "Chiudi",
+        "cancel": "Annulla",
+        "disable": "Disabilita",
+        "enable": "Abilita",
+        "confirm": "Conferma",
+        "verify": "Verifica"
     },
     "nav": {
         "mentions": "Menzioni",
         "public_tl": "Sequenza pubblica",
         "timeline": "Sequenza personale",
-        "twkn": "Tutte le stanze accessibili",
+        "twkn": "Sequenza globale",
         "chat": "Chat della stanza",
         "friend_requests": "Vogliono seguirti"
     },
@@ -22,13 +33,13 @@
     },
     "settings": {
         "attachments": "Allegati",
-        "autoload": "Abilita caricamento automatico quando si raggiunge il fondo pagina",
+        "autoload": "Abilita caricamento automatico quando raggiungi il fondo pagina",
         "avatar": "Icona utente",
         "bio": "Introduzione",
         "current_avatar": "La tua icona attuale",
         "current_profile_banner": "Il tuo stendardo attuale",
         "filtering": "Filtri",
-        "filtering_explanation": "Tutti i post contenenti queste parole saranno silenziati, una per linea",
+        "filtering_explanation": "Tutti i post contenenti queste parole saranno silenziati, una per riga",
         "hide_attachments_in_convo": "Nascondi gli allegati presenti nelle conversazioni",
         "hide_attachments_in_tl": "Nascondi gli allegati presenti nelle sequenze",
         "name": "Nome",
@@ -44,18 +55,18 @@
         "theme": "Tema",
         "user_settings": "Impostazioni Utente",
         "attachmentRadius": "Allegati",
-        "avatarAltRadius": "Icona utente (Notifiche)",
+        "avatarAltRadius": "Icone utente (Notifiche)",
         "avatarRadius": "Icone utente",
         "background": "Sfondo",
         "btnRadius": "Pulsanti",
         "cBlue": "Blu (risposte, seguire)",
         "cGreen": "Verde (ripeti)",
-        "cOrange": "Arancio (gradire)",
+        "cOrange": "Arancione (gradire)",
         "cRed": "Rosso (annulla)",
-        "change_password": "Cambia Password",
+        "change_password": "Cambia password",
         "change_password_error": "C'è stato un problema durante il cambiamento della password.",
         "changed_password": "Password cambiata correttamente!",
-        "collapse_subject": "Collassa messaggi con Oggetto",
+        "collapse_subject": "Ripiega messaggi con Oggetto",
         "confirm_new_password": "Conferma la nuova password",
         "current_password": "La tua password attuale",
         "data_import_export_tab": "Importa o esporta dati",
@@ -66,7 +77,7 @@
         "delete_account_instructions": "Digita la tua password nel campo sottostante per confermare l'eliminazione del tuo profilo.",
         "export_theme": "Salva impostazioni",
         "follow_export": "Esporta la lista di chi segui",
-        "follow_export_button": "Esporta la lista di chi segui in un file csv",
+        "follow_export_button": "Esporta la lista di chi segui in un file CSV",
         "follow_export_processing": "Sto elaborando, presto ti sarà chiesto di scaricare il tuo file",
         "follow_import": "Importa la lista di chi segui",
         "follow_import_error": "Errore nell'importazione della lista di chi segui",
@@ -75,7 +86,7 @@
         "general": "Generale",
         "hide_post_stats": "Nascondi statistiche dei messaggi (es. il numero di preferenze)",
         "hide_user_stats": "Nascondi statistiche dell'utente (es. il numero dei tuoi seguaci)",
-        "import_followers_from_a_csv_file": "Importa una lista di chi segui da un file csv",
+        "import_followers_from_a_csv_file": "Importa una lista di chi segui da un file CSV",
         "import_theme": "Carica impostazioni",
         "inputRadius": "Campi di testo",
         "instance_default": "(predefinito: {value})",
@@ -102,7 +113,7 @@
         "pause_on_unfocused": "Interrompi l'aggiornamento continuo mentre la scheda è in secondo piano",
         "presets": "Valori predefiniti",
         "profile_tab": "Profilo",
-        "radii_help": "Imposta il raggio dei bordi (in pixel)",
+        "radii_help": "Imposta il raggio degli angoli (in pixel)",
         "replies_in_timeline": "Risposte nella sequenza personale",
         "reply_visibility_all": "Mostra tutte le risposte",
         "reply_visibility_following": "Mostra solo le risposte rivolte a me o agli utenti che seguo",
@@ -134,7 +145,7 @@
         "follow": "Segui",
         "followees": "Chi stai seguendo",
         "followers": "Seguaci",
-        "following": "Lo stai seguendo!",
+        "following": "Seguìto!",
         "follows_you": "Ti segue!",
         "mute": "Silenzia",
         "muted": "Silenziato",
@@ -153,7 +164,7 @@
         "chat": "Chat",
         "gopher": "Gopher",
         "media_proxy": "Proxy multimedia",
-        "scope_options": "Opzioni raggio d'azione",
+        "scope_options": "Opzioni visibilità",
         "text_limit": "Lunghezza massima",
         "title": "Caratteristiche",
         "who_to_follow": "Chi seguire"
@@ -166,9 +177,10 @@
         "login": "Accedi",
         "logout": "Disconnettiti",
         "password": "Password",
-        "placeholder": "es. lain",
+        "placeholder": "es. Lupo Lucio",
         "register": "Registrati",
-        "username": "Nome utente"
+        "username": "Nome utente",
+        "description": "Accedi con OAuth"
     },
     "post_status": {
         "account_not_locked_warning": "Il tuo profilo non è {0}. Chiunque può seguirti e vedere i tuoi messaggi riservati ai tuoi seguaci.",
@@ -209,12 +221,49 @@
             "keyword": {
                 "reject": "Rifiuta",
                 "replace": "Sostituisci",
-                "is_replaced_by": "→"
+                "is_replaced_by": "→",
+                "keyword_policies": "Regole per parole chiave",
+                "ftl_removal": "Rimozione dalla sequenza globale"
             },
             "simple": {
                 "reject": "Rifiuta",
-                "accept": "Accetta"
-            }
-        }
+                "accept": "Accetta",
+                "simple_policies": "Regole specifiche alla stanza",
+                "accept_desc": "Questa stanza accetta messaggi solo dalle seguenti stanze:",
+                "reject_desc": "Questa stanza non accetterà messaggi dalle stanze seguenti:",
+                "quarantine": "Quarantena",
+                "quarantine_desc": "Questa stanza inoltrerà solo messaggi pubblici alle seguenti stanze:",
+                "ftl_removal": "Rimozione dalla sequenza globale",
+                "ftl_removal_desc": "Questa stanza rimuove le seguenti stanze dalla sequenza globale:",
+                "media_removal": "Rimozione multimedia",
+                "media_removal_desc": "Questa istanza rimuove gli allegati dalle seguenti stanze:",
+                "media_nsfw": "Allegati oscurati forzatamente",
+                "media_nsfw_desc": "Questa stanza oscura gli allegati dei messaggi provenienti da queste stanze:"
+            },
+            "mrf_policies": "Regole RM abilitate",
+            "mrf_policies_desc": "Le regole RM cambiano il comportamento federativo della stanza. Vigono le seguenti regole:"
+        },
+        "staff": "Equipaggio"
+    },
+    "domain_mute_card": {
+        "mute": "Zittisci",
+        "mute_progress": "Zittisco...",
+        "unmute": "Ascolta",
+        "unmute_progress": "Procedo..."
+    },
+    "exporter": {
+        "export": "Esporta",
+        "processing": "In elaborazione, il tuo file sarà scaricabile a breve"
+    },
+    "image_cropper": {
+        "crop_picture": "Ritaglia immagine",
+        "save": "Salva",
+        "save_without_cropping": "Salva senza ritagliare",
+        "cancel": "Annulla"
+    },
+    "importer": {
+        "submit": "Invia",
+        "success": "Importato.",
+        "error": "L'importazione non è andata a buon fine."
     }
 }

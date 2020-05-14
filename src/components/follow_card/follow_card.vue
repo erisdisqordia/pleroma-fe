@@ -2,7 +2,7 @@
   <basic-user-card :user="user">
     <div class="follow-card-content-container">
       <span
-        v-if="isMe || !noFollowsYou && relationship.followed_by"
+        v-if="isMe || (!noFollowsYou && relationship.followed_by)"
         class="faint"
       >
         {{ isMe ? $t('user_card.its_you') : $t('user_card.follows_you') }}

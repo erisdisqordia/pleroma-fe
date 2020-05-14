@@ -20,7 +20,16 @@
         "timeline": "Sequenza personale",
         "twkn": "Sequenza globale",
         "chat": "Chat della stanza",
-        "friend_requests": "Vogliono seguirti"
+        "friend_requests": "Vogliono seguirti",
+        "about": "Informazioni",
+        "administration": "Amministrazione",
+        "back": "Indietro",
+        "interactions": "Interazioni",
+        "dms": "Messaggi diretti",
+        "user_search": "Ricerca utenti",
+        "search": "Ricerca",
+        "who_to_follow": "Chi seguire",
+        "preferences": "Preferenze"
     },
     "notifications": {
         "followed_you": "ti segue",
@@ -29,7 +38,11 @@
         "broken_favorite": "Stato sconosciuto, lo sto cercando...",
         "favorited_you": "ha gradito il tuo messaggio",
         "load_older": "Carica notifiche precedenti",
-        "repeated_you": "ha condiviso il tuo messaggio"
+        "repeated_you": "ha condiviso il tuo messaggio",
+        "follow_request": "vuole seguirti",
+        "no_more_notifications": "Fine delle notifiche",
+        "migrated_to": "è migrato verso",
+        "reacted_with": "ha reagito con"
     },
     "settings": {
         "attachments": "Allegati",
@@ -274,5 +287,23 @@
         "submit": "Invia",
         "success": "Importato.",
         "error": "L'importazione non è andata a buon fine."
+    },
+    "media_modal": {
+        "previous": "Precedente",
+        "next": "Prossimo"
+    },
+    "polls": {
+        "add_poll": "Sondaggio",
+        "add_option": "Alternativa",
+        "option": "Opzione",
+        "votes": "voti",
+        "vote": "Vota",
+        "type": "Tipo di sondaggio",
+        "single_choice": "Scelta singola",
+        "multiple_choices": "Scelta multipla",
+        "expiry": "Scadenza",
+        "expires_in": "Scade fra {0}",
+        "expired": "Scaduto {0} fa",
+        "not_enough_options": "Aggiungi altre risposte"
     }
 }

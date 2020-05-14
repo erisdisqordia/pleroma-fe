@@ -180,7 +180,16 @@
         "placeholder": "es. Lupo Lucio",
         "register": "Registrati",
         "username": "Nome utente",
-        "description": "Accedi con OAuth"
+        "description": "Accedi con OAuth",
+        "hint": "Accedi per partecipare alla discussione",
+        "authentication_code": "Codice di autenticazione",
+        "enter_recovery_code": "Inserisci un codice di recupero",
+        "enter_two_factor_code": "Inserisci un codice two-factor",
+        "recovery_code": "Codice di recupero",
+        "heading": {
+            "totp": "Autenticazione two-factor",
+            "recovery": "Recupero two-factor"
+        }
     },
     "post_status": {
         "account_not_locked_warning": "Il tuo profilo non è {0}. Chiunque può seguirti e vedere i tuoi messaggi riservati ai tuoi seguaci.",

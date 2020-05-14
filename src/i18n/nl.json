@@ -514,10 +514,10 @@
                 "is_replaced_by": "→",
                 "keyword_policies": "Zoekwoord Beleid"
             },
-            "mrf_policies_desc": "MRF beleidsregels beïnvloeden het federatie gedrag van de instantie. De volgende beleidsregels zijn ingeschakeld:",
-            "mrf_policies": "Ingeschakelde MRF Beleidsregels",
+            "mrf_policies_desc": "MRF regels beïnvloeden het federatie gedrag van de instantie. De volgende regels zijn ingeschakeld:",
+            "mrf_policies": "Ingeschakelde MRF Regels",
             "simple": {
-                "simple_policies": "Instantie-specifieke Beleidsregels",
+                "simple_policies": "Instantie-specifieke Regels",
                 "accept": "Accepteren",
                 "accept_desc": "Deze instantie accepteert alleen berichten van de volgende instanties:",
                 "reject": "Afwijzen",
@@ -526,7 +526,9 @@
                 "quarantine_desc": "Deze instantie zal alleen publieke berichten sturen naar de volgende instanties:",
                 "ftl_removal_desc": "Deze instantie verwijdert de volgende instanties van \"Het Geheel Gekende Netwerk\" tijdlijn:",
                 "media_removal_desc": "Deze instantie verwijdert media van berichten van de volgende instanties:",
-                "media_nsfw_desc": "Deze instantie stelt media in als gevoelig in berichten van de volgende instanties:"
+                "media_nsfw_desc": "Deze instantie stelt media in als gevoelig in berichten van de volgende instanties:",
+                "ftl_removal": "Verwijderen van \"Het Geheel Bekende Netwerk\" Tijdlijn",
+                "media_removal": "Media Verwijdering"
             }
         },
         "staff": "Personeel"

@@ -580,7 +580,8 @@
         "unicode": "Unicode emoji",
         "load_all": "Alle {emojiAmount} emoji worden geladen",
         "stickers": "Stickers",
-        "load_all_hint": "Eerste {saneAmount} emoji geladen, alle emoji tegelijk laden kan prestatie problemen veroorzaken."
+        "load_all_hint": "Eerste {saneAmount} emoji geladen, alle emoji tegelijk laden kan prestatie problemen veroorzaken.",
+        "custom": "Gepersonaliseerde emoji"
     },
     "interactions": {
         "favs_repeats": "Herhalingen en Favorieten",

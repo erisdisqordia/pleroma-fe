@@ -371,7 +371,12 @@
         },
         "app_name": "Anwendungsname",
         "mfa": {
-            "otp": "OTP"
+            "otp": "OTP",
+            "recovery_codes_warning": "Schreibe dir die Codes auf oder speichere sie an einem sicheren Ort - ansonsten wirst du sie nicht wieder finden. Wenn du den Zugriff zu deiner 2FA App und die Wiederherstellungs-Codes verlierst, wirst du aus deinem Account ausgeschlossen sein.",
+            "recovery_codes": "Wiederherstellungs-Codes.",
+            "warning_of_generate_new_codes": "Wenn du neue Wiederherstellungs-Codes generierst, werden die alten Codes nicht mehr funktionieren.",
+            "generate_new_recovery_codes": "Generiere neue Wiederherstellungs-Codes",
+            "title": "Zwei-Faktor Authentifizierung"
         },
         "enter_current_password_to_confirm": "Gib dein aktuelles Passwort ein, um deine Identität zu bestätigen",
         "security": "Sicherheit"

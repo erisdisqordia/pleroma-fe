@@ -102,7 +102,7 @@
         "direct_warning_to_all": "Dieser Beitrag wird für alle erwähnten Benutzer sichtbar sein.",
         "direct_warning_to_first_only": "Dieser Beitrag wird für alle Benutzer, die am Anfang der Nachricht erwähnt wurden, sichtbar sein.",
         "scope_notice": {
-            "public": "Dieser Post wird für alle sichtbar sein"
+            "public": "Dieser Beitrag wird für alle sichtbar sein"
         }
     },
     "registration": {

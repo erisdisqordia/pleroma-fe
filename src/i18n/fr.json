@@ -79,7 +79,9 @@
         "twkn": "Ensemble du réseau connu",
         "user_search": "Recherche d'utilisateur·ice",
         "who_to_follow": "Qui suivre",
-        "preferences": "Préférences"
+        "preferences": "Préférences",
+        "search": "Recherche",
+        "administration": "Administration"
     },
     "notifications": {
         "broken_favorite": "Chargement d'un message inconnu…",
@@ -89,12 +91,16 @@
         "notifications": "Notifications",
         "read": "Lu !",
         "repeated_you": "a partagé votre statut",
-        "no_more_notifications": "Aucune notification supplémentaire"
+        "no_more_notifications": "Aucune notification supplémentaire",
+        "migrated_to": "a migré à",
+        "reacted_with": "a réagi avec {0}",
+        "follow_request": "veut vous suivre"
     },
     "interactions": {
         "favs_repeats": "Partages et favoris",
-        "follows": "Nouveaux⋅elles abonné⋅e⋅s ?",
-        "load_older": "Chargez d'anciennes interactions"
+        "follows": "Nouveaux suivis",
+        "load_older": "Chargez d'anciennes interactions",
+        "moves": "Migrations de comptes"
     },
     "post_status": {
         "new_status": "Poster un nouveau statut",
@@ -170,7 +176,7 @@
                 "secret_code": "Clé"
             },
             "verify": {
-                "desc": "Pour activer la double authentification, entrez le code depuis votre application:"
+                "desc": "Pour activer la double authentification, entrez le code depuis votre application :"
             }
         },
         "attachmentRadius": "Pièces jointes",
@@ -185,7 +191,7 @@
         "block_export_button": "Export des comptes bloqués vers un fichier csv",
         "block_import": "Import des comptes bloqués",
         "block_import_error": "Erreur lors de l'import des comptes bloqués",
-        "blocks_imported": "Blocks importés! Le traitement va prendre un moment.",
+        "blocks_imported": "Blocks importés ! Le traitement va prendre un moment.",
         "blocks_tab": "Bloqué·e·s",
         "btnRadius": "Boutons",
         "cBlue": "Bleu (répondre, suivre)",
@@ -233,7 +239,7 @@
         "import_theme": "Charger le thème",
         "inputRadius": "Champs de texte",
         "checkboxRadius": "Cases à cocher",
-        "instance_default": "(default: {value})",
+        "instance_default": "(default : {value})",
         "instance_default_simple": "(default)",
         "interface": "Interface",
         "interfaceLanguage": "Langue de l'interface",
@@ -264,7 +270,7 @@
         "nsfw_clickthrough": "Masquer les images marquées comme contenu adulte ou sensible",
         "oauth_tokens": "Jetons OAuth",
         "token": "Jeton",
-        "refresh_token": "Refresh Token",
+        "refresh_token": "Rafraichir le jeton",
         "valid_until": "Valable jusque",
         "revoke_token": "Révoquer",
         "panelRadius": "Fenêtres",
@@ -293,8 +299,8 @@
         "settings": "Paramètres",
         "subject_input_always_show": "Toujours copier le champ de sujet",
         "subject_line_behavior": "Copier le sujet en répondant",
-        "subject_line_email": "Comme les mails: « re: sujet »",
-        "subject_line_mastodon": "Comme mastodon: copier tel quel",
+        "subject_line_email": "Similaire au courriel : « re : sujet »",
+        "subject_line_mastodon": "Comme mastodon : copier tel quel",
         "subject_line_noop": "Ne pas copier",
         "post_status_content_type": "Type de contenu du statuts",
         "stop_gifs": "N'animer les GIFS que lors du survol du curseur de la souris",
@@ -312,7 +318,7 @@
             "true": "oui"
         },
         "notifications": "Notifications",
-        "notification_setting": "Reçevoir les notifications de:",
+        "notification_setting": "Reçevoir les notifications de :",
         "notification_setting_follows": "Utilisateurs que vous suivez",
         "notification_setting_non_follows": "Utilisateurs que vous ne suivez pas",
         "notification_setting_followers": "Utilisateurs qui vous suivent",
@@ -330,7 +336,17 @@
                 "save_load_hint": "L'option « Garder » préserve les options activés en cours lors de la séléction ou chargement des thèmes, il sauve aussi les dites options lors de l'export d'un thème. Quand toutes les cases sont décochés, exporter un thème sauvera tout.",
                 "reset": "Remise à zéro",
                 "clear_all": "Tout vider",
-                "clear_opacity": "Vider la transparence"
+                "clear_opacity": "Vider la transparence",
+                "load_theme": "Charger le thème",
+                "use_snapshot": "Ancienne version",
+                "help": {
+                    "upgraded_from_v2": "PleromaFE à été mis à jour, le thème peut être un peu différent que dans vos souvenirs.",
+                    "v2_imported": "Le fichier que vous avez importé vient d'un version antérieure. Nous essayons de maximizer la compatibilité mais il peu y avoir quelques incohérences.",
+                    "future_version_imported": "Le fichier importé viens d'une version postérieure de PleromaFE.",
+                    "older_version_imported": "Le fichier importé viens d'une version antérieure de PleromaFE."
+                },
+                "keep_as_is": "Garder tel-quel",
+                "use_source": "Nouvelle version"
             },
             "common": {
                 "color": "Couleur",
@@ -365,7 +381,18 @@
                 "borders": "Bordures",
                 "buttons": "Boutons",
                 "inputs": "Champs de saisie",
-                "faint_text": "Texte en fondu"
+                "faint_text": "Texte en fondu",
+                "underlay": "sous-calque",
+                "pressed": "Appuyé",
+                "alert_warning": "Avertissement",
+                "alert_neutral": "Neutre",
+                "post": "Messages/Bios des comptes",
+                "poll": "Graphique de Sondage",
+                "icons": "Icônes",
+                "selectedPost": "Message sélectionné",
+                "selectedMenu": "Objet sélectionné du menu",
+                "disabled": "Désactivé",
+                "tabs": "Onglets"
             },
             "radii": {
                 "_tab_label": "Rondeur"
@@ -398,7 +425,8 @@
                     "buttonPressed": "Bouton (cliqué)",
                     "buttonPressedHover": "Bouton (cliqué+survol)",
                     "input": "Champ de saisie"
-                }
+                },
+                "hintV3": "Pour les ombres vous pouvez aussi utiliser la notation {0} pour utiliser un autre emplacement de couleur."
             },
             "fonts": {
                 "_tab_label": "Polices",
@@ -433,7 +461,28 @@
             "title": "Version",
             "backend_version": "Version du Backend",
             "frontend_version": "Version du Frontend"
-        }
+        },
+        "change_email": "Changer de courriel",
+        "domain_mutes": "Domaines",
+        "pad_emoji": "Rajouter un espace autour de l'émoji après l’avoir choisit",
+        "notification_visibility_emoji_reactions": "Réactions",
+        "hide_follows_count_description": "Masquer le nombre de suivis",
+        "useStreamingApiWarning": "(Non recommandé, expérimental, connu pour rater des messages)",
+        "type_domains_to_mute": "Écrire les domaines à masquer",
+        "fun": "Rigolo",
+        "greentext": "greentexting",
+        "allow_following_move": "Suivre automatiquement quand ce compte migre",
+        "change_email_error": "Il y a eu un problème pour charger votre courriel.",
+        "changed_email": "Courriel changé avec succès !",
+        "discoverable": "Permettre de découvrir ce compte dans les résultats de recherche web et autres services",
+        "emoji_reactions_on_timeline": "Montrer les émojis-réactions dans le flux",
+        "new_email": "Nouveau courriel",
+        "notification_visibility_moves": "Migrations de compte",
+        "user_mutes": "Comptes",
+        "useStreamingApi": "Recevoir les messages et notifications en temps réel",
+        "notification_setting_filters": "Filtres",
+        "notification_setting_privacy_option": "Masquer l'expéditeur et le contenu des notifications push",
+        "notification_setting_privacy": "Intimité"
     },
     "timeline": {
         "collapse": "Fermer",
@@ -456,7 +505,11 @@
         "pinned": "Agraffé",
         "delete_confirm": "Voulez-vous vraiment supprimer ce statuts ?",
         "reply_to": "Réponse à",
-        "replies_list": "Réponses:"
+        "replies_list": "Réponses :",
+        "mute_conversation": "Masquer la conversation",
+        "unmute_conversation": "Démasquer la conversation",
+        "status_unavailable": "Status indisponible",
+        "copy_link": "Copier le lien au status"
     },
     "user_card": {
         "approve": "Accepter",
@@ -505,7 +558,13 @@
             "quarantine": "Interdir les statuts de l'utilisateur à fédérer",
             "delete_user": "Supprimer l'utilisateur",
             "delete_user_confirmation": "Êtes-vous absolument-sûr⋅e ? Cette action ne peut être annulée."
-        }
+        },
+        "mention": "Mention",
+        "hidden": "Caché",
+        "subscribe": "Abonner",
+        "unsubscribe": "Désabonner",
+        "hide_repeats": "Cacher les partages",
+        "show_repeats": "Montrer les partages"
     },
     "user_profile": {
         "timeline_title": "Journal de l'utilisateur⋅ice",
@@ -530,7 +589,10 @@
         "repeat": "Répéter",
         "reply": "Répondre",
         "favorite": "Favoriser",
-        "user_settings": "Paramètres utilisateur"
+        "user_settings": "Paramètres utilisateur",
+        "add_reaction": "Ajouter une réaction",
+        "accept_follow_request": "Accepter la demande de suivit",
+        "reject_follow_request": "Rejeter la demande de suivit"
     },
     "upload": {
         "error": {
@@ -545,5 +607,122 @@
             "GiB": "GiO",
             "TiB": "TiO"
         }
+    },
+    "about": {
+        "mrf": {
+            "keyword": {
+                "reject": "Rejeté",
+                "replace": "Remplacer",
+                "keyword_policies": "Politiques par mot-clés",
+                "ftl_removal": "Suppression du flux \"Ensemble du réseau connu\"",
+                "is_replaced_by": "→"
+            },
+            "simple": {
+                "simple_policies": "Politiques par instances",
+                "accept": "Accepter",
+                "accept_desc": "Cette instance accepte des messages seulement depuis ces instances :",
+                "reject": "Rejeter",
+                "reject_desc": "Cette instance n'acceptera pas de message de ces instances :",
+                "quarantine": "Quarantaine",
+                "quarantine_desc": "Cette instance enverras seulement des messages publics à ces instances :",
+                "ftl_removal_desc": "Cette instance supprime ces instance du flux fédéré :",
+                "media_removal": "Suppression multimédia",
+                "media_removal_desc": "Cette instance supprime le contenu multimédia des instances suivantes :",
+                "media_nsfw": "Force le contenu multimédia comme sensible",
+                "ftl_removal": "Suppression du flux fédéré",
+                "media_nsfw_desc": "Cette instance force le contenu multimédia comme sensible pour les messages des instances suivantes :"
+            },
+            "federation": "Fédération",
+            "mrf_policies": "Politiques MRF activées",
+            "mrf_policies_desc": "Les politiques MRF modifient la fédération entre les instances. Les politiques suivantes sont activées :"
+        },
+        "staff": "Staff"
+    },
+    "domain_mute_card": {
+        "mute": "Muet",
+        "mute_progress": "Masquage…",
+        "unmute": "Démasquer",
+        "unmute_progress": "Démasquage…"
+    },
+    "polls": {
+        "add_poll": "Ajouter un Sondage",
+        "add_option": "Ajouter une option",
+        "option": "Option",
+        "votes": "votes",
+        "type": "Type de Sondage",
+        "single_choice": "Choix unique",
+        "multiple_choices": "Choix multiples",
+        "expiry": "Age du sondage",
+        "expires_in": "Fin du sondage dans {0}",
+        "not_enough_options": "Trop peu d'options unique au sondage",
+        "vote": "Voter",
+        "expired": "Sondage terminé il y a {0}"
+    },
+    "emoji": {
+        "emoji": "Émoji",
+        "search_emoji": "Rechercher un émoji",
+        "add_emoji": "Insérer un émoji",
+        "custom": "émoji personnalisé",
+        "unicode": "émoji unicode",
+        "load_all": "Charger tout les {emojiAmount} émojis",
+        "load_all_hint": "{saneAmount} émojis chargé, charger tout les émojis peuvent causer des problèmes de performances.",
+        "stickers": "Stickers"
+    },
+    "remote_user_resolver": {
+        "error": "Non trouvé."
+    },
+    "time": {
+        "minutes_short": "{0}min",
+        "second_short": "{0}s",
+        "day": "{0} jour",
+        "days": "{0} jours",
+        "months": "{0} mois",
+        "month_short": "{0}m",
+        "months_short": "{0}m",
+        "now": "tout de suite",
+        "now_short": "maintenant",
+        "second": "{0} seconde",
+        "seconds": "{0} secondes",
+        "seconds_short": "{0}s",
+        "day_short": "{0}j",
+        "days_short": "{0}j",
+        "hour": "{0} heure",
+        "hours": "{0} heures",
+        "hour_short": "{0}h",
+        "hours_short": "{0}h",
+        "in_future": "dans {0}",
+        "in_past": "il y a {0}",
+        "minute": "{0} minute",
+        "minutes": "{0} minutes",
+        "minute_short": "{0}min",
+        "month": "{0} mois",
+        "week": "{0} semaine",
+        "weeks": "{0} semaines",
+        "week_short": "{0}s",
+        "weeks_short": "{0}s",
+        "year": "{0} année",
+        "years": "{0} années",
+        "year_short": "{0}a",
+        "years_short": "{0}a"
+    },
+    "search": {
+        "people": "Comptes",
+        "person_talking": "{count} personnes discutant",
+        "hashtags": "Mot-dièses",
+        "people_talking": "{count} personnes discutant",
+        "no_results": "Aucun résultats"
+    },
+    "password_reset": {
+        "forgot_password": "Mot de passe oublié ?",
+        "check_email": "Vérifiez vos courriels pour le lien permettant de changer votre mot de passe.",
+        "password_reset_disabled": "Le changement de mot de passe est désactivé. Veuillez contacter l'administration de votre instance.",
+        "password_reset_required_but_mailer_is_disabled": "Vous devez changer votre mot de passe mais sont changement est désactivé. Veuillez contacter l’administration de votre instance.",
+        "password_reset": "Nouveau mot de passe",
+        "instruction": "Entrer votre address de courriel ou votre nom utilisateur. Nous enverrons un lien pour changer votre mot de passe.",
+        "placeholder": "Votre email ou nom d'utilisateur",
+        "return_home": "Retourner à la page d'accueil",
+        "not_found": "Email ou nom d'utilisateur inconnu.",
+        "too_many_requests": "Vos avez atteint la limite d'essais, essayez plus tard.",
+        "password_reset_required": "Vous devez changer votre mot de passe pour vous authentifier."
     }
 }

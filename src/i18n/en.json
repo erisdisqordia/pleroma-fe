@@ -281,7 +281,7 @@
     "data_import_export_tab": "Data Import / Export",
     "default_vis": "Default visibility scope",
     "delete_account": "Delete Account",
-    "delete_account_description": "Permanently delete your account and all your messages.",
+    "delete_account_description": "Permanently delete your data and deactivate your account.",
     "delete_account_error": "There was an issue deleting your account. If this persists please contact your instance administrator.",
     "delete_account_instructions": "Type your password in the input below to confirm account deletion.",
     "discoverable": "Allow discovery of this account in search results and other services",
@@ -433,7 +433,7 @@
         "use_source": "New version",
         "help": {
           "upgraded_from_v2": "PleromaFE has been upgraded, theme could look a little bit different than you remember.",
-          "v2_imported": "File you imported was made for older FE. We try to maximize compatibility but there still could be inconsitencies.",
+          "v2_imported": "File you imported was made for older FE. We try to maximize compatibility but there still could be inconsistencies.",
           "future_version_imported": "File you imported was made in newer version of FE.",
           "older_version_imported": "File you imported was made in older version of FE.",
           "snapshot_present": "Theme snapshot is loaded, so all values are overriden. You can load theme's actual data instead.",

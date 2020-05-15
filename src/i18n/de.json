@@ -123,7 +123,10 @@
             "password_required": "darf nicht leer sein",
             "password_confirmation_required": "darf nicht leer sein",
             "password_confirmation_match": "sollte mit dem Passwort identisch sein."
-        }
+        },
+        "bio_placeholder": "z.B.\nHallo, ich bin Lain.\nIch bin ein Anime Mödchen aus dem vorstädtischen Japan. Du kennst mich vielleicht vom Wired.",
+        "fullname_placeholder": "z.B. Lain Iwakura",
+        "username_placeholder": "z.B. lain"
     },
     "settings": {
         "attachmentRadius": "Anhänge",
@@ -365,7 +368,13 @@
                 "checkbox": "Ich habe die Allgemeinen Geschäftsbedingungen überflogen",
                 "link": "ein netter kleiner Link"
             }
-        }
+        },
+        "app_name": "Anwendungsname",
+        "mfa": {
+            "otp": "OTP"
+        },
+        "enter_current_password_to_confirm": "Gib dein aktuelles Passwort ein, um deine Identität zu bestätigen",
+        "security": "Sicherheit"
     },
     "timeline": {
         "collapse": "Einklappen",

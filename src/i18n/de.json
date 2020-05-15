@@ -104,7 +104,7 @@
         "scope_notice": {
             "public": "Dieser Beitrag wird für alle sichtbar sein",
             "private": "Dieser Beitrag wird nur für deine Follower sichtbar sein",
-            "unlisted": "Dieser Post wird weder in der öffentlichen Zeitleiste noch im gesamten bekannten Netzwerk sichtbar sein"
+            "unlisted": "Dieser Beitrag wird weder in der öffentlichen Zeitleiste noch im gesamten bekannten Netzwerk sichtbar sein"
         }
     },
     "registration": {
@@ -531,5 +531,8 @@
         "follows": "Neue Follows",
         "favs_repeats": "Wiederholungen und Favoriten",
         "moves": "Benutzer migriert zu"
+    },
+    "selectable_list": {
+        "select_all": "Alle auswählen"
     }
 }

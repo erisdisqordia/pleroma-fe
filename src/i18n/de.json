@@ -103,7 +103,8 @@
         "direct_warning_to_first_only": "Dieser Beitrag wird für alle Benutzer, die am Anfang der Nachricht erwähnt wurden, sichtbar sein.",
         "scope_notice": {
             "public": "Dieser Beitrag wird für alle sichtbar sein",
-            "private": "Dieser Beitrag wird nur für deine Follower sichtbar sein"
+            "private": "Dieser Beitrag wird nur für deine Follower sichtbar sein",
+            "unlisted": "Dieser Post wird weder in der öffentlichen Zeitleiste noch im gesamten bekannten Netzwerk sichtbar sein"
         }
     },
     "registration": {

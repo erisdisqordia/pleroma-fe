@@ -84,7 +84,10 @@
         "account_not_locked_warning_link": "gesperrt",
         "attachments_sensitive": "Anhänge als heikel markieren",
         "content_type": {
-            "text/plain": "Nur Text"
+            "text/plain": "Nur Text",
+            "text/bbcode": "BBCode",
+            "text/markdown": "Markdown",
+            "text/html": "HTML"
         },
         "content_warning": "Betreff (optional)",
         "default": "Sitze gerade im Hofbräuhaus.",
@@ -95,7 +98,8 @@
             "private": "Nur Follower - Beitrag nur für Follower sichtbar",
             "public": "Öffentlich - Beitrag an öffentliche Zeitleisten",
             "unlisted": "Nicht gelistet - Nicht in öffentlichen Zeitleisten anzeigen"
-        }
+        },
+        "direct_warning_to_all": "Dieser Post wird für alle erwähnten User sichtbar sein."
     },
     "registration": {
         "bio": "Bio",
@@ -511,6 +515,14 @@
         "search_emoji": "Nach einem Emoji suchen",
         "custom": "Benutzerdefinierter Emoji",
         "keep_open": "Auswahlfenster offen halten",
-        "add_emoji": "Emoji einfügen"
+        "add_emoji": "Emoji einfügen",
+        "load_all": "Lade alle {emojiAmount} Emoji",
+        "load_all_hint": "Erfolgreich erste {saneAmount} Emoji geladen, alle Emojis zu laden würde Leistungsprobleme hervorrufen.",
+        "unicode": "Unicode Emoji"
+    },
+    "interactions": {
+        "load_older": "Lade ältere Interaktionen",
+        "follows": "Neue Follows",
+        "favs_repeats": "Wiederholungen und Favoriten"
     }
 }

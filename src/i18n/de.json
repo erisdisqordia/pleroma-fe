@@ -122,7 +122,7 @@
             "email_required": "darf nicht leer sein",
             "password_required": "darf nicht leer sein",
             "password_confirmation_required": "darf nicht leer sein",
-            "password_confirmation_match": "sollte mit dem Passwort identisch sein."
+            "password_confirmation_match": "sollte mit dem Passwort identisch sein"
         },
         "bio_placeholder": "z.B.\nHallo, ich bin Lain.\nIch bin ein Anime Mödchen aus dem vorstädtischen Japan. Du kennst mich vielleicht vom Wired.",
         "fullname_placeholder": "z.B. Lain Iwakura",
@@ -162,13 +162,13 @@
         "pad_emoji": "Emojis mit Leerzeichen umrahmen",
         "export_theme": "Farbschema speichern",
         "filtering": "Filtern",
-        "filtering_explanation": "Alle Beiträge die diese Wörter enthalten werden ausgeblendet. Ein Wort pro Zeile.",
+        "filtering_explanation": "Alle Beiträge, welche diese Wörter enthalten, werden ausgeblendet. Ein Wort pro Zeile.",
         "follow_export": "Follower exportieren",
         "follow_export_button": "Exportiere deine Follows in eine csv-Datei",
         "follow_export_processing": "In Bearbeitung. Die Liste steht gleich zum herunterladen bereit.",
-        "follow_import": "Followers importieren",
-        "follow_import_error": "Fehler beim importieren der Follower",
-        "follows_imported": "Followers importiert! Die Bearbeitung kann eine Zeit lang dauern.",
+        "follow_import": "Follower importieren",
+        "follow_import_error": "Fehler beim Importieren der Follower",
+        "follows_imported": "Follower importiert! Die Bearbeitung kann einen Moment dauern.",
         "foreground": "Vordergrund",
         "general": "Allgemein",
         "hide_attachments_in_convo": "Anhänge in Unterhaltungen ausblenden",
@@ -181,7 +181,7 @@
         "hide_post_stats": "Beitragsstatistiken verbergen (z.B. die Anzahl der Favoriten)",
         "hide_user_stats": "Benutzerstatistiken verbergen (z.B. die Anzahl der Follower)",
         "hide_filtered_statuses": "Gefilterte Beiträge verbergen",
-        "import_followers_from_a_csv_file": "Importiere Follower, denen du folgen möchtest, aus einer CSV-Datei",
+        "import_followers_from_a_csv_file": "Importiere Follower aus einer CSV-Datei",
         "import_theme": "Farbschema laden",
         "inputRadius": "Eingabefelder",
         "checkboxRadius": "Auswahlfelder",
@@ -195,7 +195,7 @@
         "lock_account_description": "Sperre deinen Account, um neue Follower zu genehmigen oder abzulehnen",
         "loop_video": "Videos wiederholen",
         "loop_video_silent_only": "Nur Videos ohne Ton wiederholen (z.B. Mastodons \"gifs\")",
-        "mutes_tab": "Mutes",
+        "mutes_tab": "Stummschaltungen",
         "play_videos_in_modal": "Videos in größerem Medienfenster abspielen",
         "use_contain_fit": "Vorschaubilder nicht zuschneiden",
         "name": "Name",
@@ -396,7 +396,7 @@
         "block_import": "Block Import",
         "block_export_button": "Exportiere deine Blocks in eine csv Datei",
         "block_export": "Block Export",
-        "emoji_reactions_on_timeline": "Zeige Emoji Reaktionen auf der Zeitleiste",
+        "emoji_reactions_on_timeline": "Zeige Emoji-Reaktionen auf der Zeitleiste",
         "domain_mutes": "Domains",
         "changed_email": "Email Adresse erfolgreich geändert!",
         "change_email_error": "Es trat ein Problem auf beim Versuch, deine Email Adresse zu ändern.",
@@ -423,7 +423,7 @@
         "follow_again": "Anfrage erneut senden?",
         "follow_unfollow": "Folgen beenden",
         "followees": "Folgt",
-        "followers": "Followers",
+        "followers": "Folgende",
         "following": "Folgst du!",
         "follows_you": "Folgt dir!",
         "its_you": "Das bist du!",
@@ -431,7 +431,10 @@
         "muted": "Stummgeschaltet",
         "per_day": "pro Tag",
         "remote_follow": "Folgen",
-        "statuses": "Beiträge"
+        "statuses": "Beiträge",
+        "admin_menu": {
+            "sandbox": "Erzwinge Beiträge nur für Follower sichtbar zu sein"
+        }
     },
     "user_profile": {
         "timeline_title": "Beiträge"
@@ -569,5 +572,8 @@
     },
     "selectable_list": {
         "select_all": "Alle auswählen"
+    },
+    "remote_user_resolver": {
+        "searching_for": "Suche nach"
     }
 }

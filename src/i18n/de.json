@@ -395,7 +395,12 @@
         "block_import_error": "Fehler beim Importieren der Blocks",
         "block_import": "Block Import",
         "block_export_button": "Exportiere deine Blocks in eine csv Datei",
-        "block_export": "Block Export"
+        "block_export": "Block Export",
+        "emoji_reactions_on_timeline": "Zeige Emoji Reaktionen auf der Zeitleiste",
+        "domain_mutes": "Domains",
+        "changed_email": "Email Adresse erfolgreich geändert!",
+        "change_email_error": "Es trat ein Problem auf beim Versuch, deine Email Adresse zu ändern.",
+        "change_email": "Ändere Email"
     },
     "timeline": {
         "collapse": "Einklappen",

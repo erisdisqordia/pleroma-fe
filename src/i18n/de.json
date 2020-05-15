@@ -523,6 +523,7 @@
     "interactions": {
         "load_older": "Lade ältere Interaktionen",
         "follows": "Neue Follows",
-        "favs_repeats": "Wiederholungen und Favoriten"
+        "favs_repeats": "Wiederholungen und Favoriten",
+        "moves": "Benutzer migriert zu"
     }
 }

@@ -377,7 +377,8 @@
             "warning_of_generate_new_codes": "Wenn du neue Wiederherstellungs-Codes generierst, werden die alten Codes nicht mehr funktionieren.",
             "generate_new_recovery_codes": "Generiere neue Wiederherstellungs-Codes",
             "title": "Zwei-Faktor Authentifizierung",
-            "waiting_a_recovery_codes": "Erhalte Wiederherstellungscodes..."
+            "waiting_a_recovery_codes": "Erhalte Wiederherstellungscodes...",
+            "authentication_methods": "Authentifizierungs-Methoden"
         },
         "enter_current_password_to_confirm": "Gib dein aktuelles Passwort ein, um deine Identität zu bestätigen",
         "security": "Sicherheit"

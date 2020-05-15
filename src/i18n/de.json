@@ -400,7 +400,11 @@
         "domain_mutes": "Domains",
         "changed_email": "Email Adresse erfolgreich geändert!",
         "change_email_error": "Es trat ein Problem auf beim Versuch, deine Email Adresse zu ändern.",
-        "change_email": "Ändere Email"
+        "change_email": "Ändere Email",
+        "notification_setting_non_followers": "Nutzer, die dir nicht folgen",
+        "notification_setting_followers": "Nutzer, die dir folgen",
+        "import_blocks_from_a_csv_file": "Importiere Blocks von einer CSV Datei",
+        "accent": "Akzent"
     },
     "timeline": {
         "collapse": "Einklappen",
@@ -571,9 +575,10 @@
         "moves": "Benutzer migriert zu"
     },
     "selectable_list": {
-        "select_all": "Alle auswählen"
+        "select_all": "Wähle alle"
     },
     "remote_user_resolver": {
-        "searching_for": "Suche nach"
+        "searching_for": "Suche nach",
+        "error": "Nicht gefunden."
     }
 }

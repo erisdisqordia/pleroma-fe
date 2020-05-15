@@ -380,12 +380,22 @@
             "waiting_a_recovery_codes": "Erhalte Wiederherstellungscodes...",
             "authentication_methods": "Authentifizierungsmethoden",
             "scan": {
-                "title": "Scan"
+                "title": "Scan",
+                "secret_code": "Schlüssel",
+                "desc": "Wenn du deine 2FA App verwendest, scanne diesen QR Code oder gebe den Schlüssel ein:"
+            },
+            "verify": {
+                "desc": "Um 2FA zu aktivieren, gib den Code von deiner 2FA-App ein:"
             }
         },
         "enter_current_password_to_confirm": "Gib dein aktuelles Passwort ein, um deine Identität zu bestätigen",
         "security": "Sicherheit",
-        "allow_following_move": "Erlaube automatisches Folgen, sobald ein gefolgter Nutzer umzieht"
+        "allow_following_move": "Erlaube automatisches Folgen, sobald ein gefolgter Nutzer umzieht",
+        "blocks_imported": "Blocks importiert! Die Verarbeitung wird eine kurze Weile brauchen.",
+        "block_import_error": "Fehler beim Importieren der Blocks",
+        "block_import": "Block Import",
+        "block_export_button": "Exportiere deine Blocks in eine csv Datei",
+        "block_export": "Block Export"
     },
     "timeline": {
         "collapse": "Einklappen",

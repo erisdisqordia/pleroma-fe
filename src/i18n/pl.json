@@ -27,7 +27,7 @@
                 "media_nsfw_desc": "Ta instancja wymusza, by multimedia z wymienionych instancji były ustawione jako wrażliwe:"
             }
         },
-        "staff": "Obsługa"
+        "staff": "Administracja"
     },
     "chat": {
         "title": "Czat"
@@ -40,7 +40,7 @@
     },
     "exporter": {
         "export": "Eksportuj",
-        "processing": "Przetwarzam, za chwilę zostaniesz zapytany o ściągnięcie pliku"
+        "processing": "Przetwarzam, za chwilę zostaniesz zapytany(-na) o ściągnięcie pliku"
     },
     "features_panel": {
         "chat": "Czat",
@@ -131,7 +131,7 @@
         "no_more_notifications": "Nie masz więcej powiadomień",
         "migrated_to": "wyemigrował do",
         "reacted_with": "zareagował z {0}",
-        "follow_request": "chce cię obserwować"
+        "follow_request": "chce ciebie obserwować"
     },
     "polls": {
         "add_poll": "Dodaj ankietę",
@@ -143,7 +143,7 @@
         "single_choice": "jednokrotnego wyboru",
         "multiple_choices": "wielokrotnego wyboru",
         "expiry": "Czas trwania ankiety",
-        "expires_in": "Ankieta kończy się za{0}",
+        "expires_in": "Ankieta kończy się za {0}",
         "expired": "Ankieta skończyła się {0} temu",
         "not_enough_options": "Zbyt mało unikalnych opcji w ankiecie"
     },
@@ -232,10 +232,10 @@
             "confirm_and_enable": "Potwierdź i włącz OTP",
             "title": "Weryfikacja dwuetapowa",
             "generate_new_recovery_codes": "Wygeneruj nowe kody zapasowe",
-            "warning_of_generate_new_codes": "Po tym gdy generujesz nowe kody zapasowe, stare przestaną działać.",
+            "warning_of_generate_new_codes": "Po tym gdy wygenerujesz nowe kody zapasowe, stare przestaną działać.",
             "recovery_codes": "Kody zapasowe.",
             "waiting_a_recovery_codes": "Otrzymuję kody zapasowe...",
-            "recovery_codes_warning": "Spisz kody na kartce papieru, albo zapisz je w bezpiecznym miejscu - inaczej nie zobaczysz ich już nigdy. Jeśli stracisz dostęp do twojej aplikacji 2FA i kodów zapasowych, nie będziesz miał dostępu do swojego konta.",
+            "recovery_codes_warning": "Spisz kody na kartce papieru, albo zapisz je w bezpiecznym miejscu - inaczej nie zobaczysz ich już nigdy. Jeśli stracisz dostęp do twojej aplikacji 2FA i kodów zapasowych, nie będziesz miał(-a) dostępu do swojego konta.",
             "authentication_methods": "Metody weryfikacji",
             "scan": {
                 "title": "Skanuj",
@@ -281,7 +281,7 @@
         "data_import_export_tab": "Import/eksport danych",
         "default_vis": "Domyślny zakres widoczności",
         "delete_account": "Usuń konto",
-        "delete_account_description": "Trwale usuń konto i wszystkie posty.",
+        "delete_account_description": "Trwale usuń dane i zdezaktywuj konto.",
         "delete_account_error": "Wystąpił problem z usuwaniem twojego konta. Jeżeli problem powtarza się, poinformuj administratora swojej instancji.",
         "delete_account_instructions": "Wprowadź swoje hasło w poniższe pole aby potwierdzić usunięcie konta.",
         "discoverable": "Zezwól na odkrywanie tego konta w wynikach wyszukiwania i innych usługach",
@@ -315,14 +315,14 @@
         "import_theme": "Załaduj motyw",
         "inputRadius": "Pola tekstowe",
         "checkboxRadius": "Pola wyboru",
-        "instance_default": "(domyślny: {value})",
-        "instance_default_simple": "(domyślny)",
+        "instance_default": "(domyślnie: {value})",
+        "instance_default_simple": "(domyślne)",
         "interface": "Interfejs",
         "interfaceLanguage": "Język interfejsu",
         "invalid_theme_imported": "Wybrany plik nie jest obsługiwanym motywem Pleromy. Nie dokonano zmian w twoim motywie.",
         "limited_availability": "Niedostępne w twojej przeglądarce",
         "links": "Łącza",
-        "lock_account_description": "Ogranicz swoje konto dla zatwierdzonych obserwowanych",
+        "lock_account_description": "Spraw, by konto mogli wyświetlać tylko zatwierdzeni obserwujący",
         "loop_video": "Zapętlaj filmy",
         "loop_video_silent_only": "Zapętlaj tylko filmy bez dźwięku (np. mastodonowe „gify”)",
         "mutes_tab": "Wyciszenia",
@@ -420,7 +420,7 @@
                 "keep_opacity": "Zachowaj widoczność",
                 "keep_roundness": "Zachowaj zaokrąglenie",
                 "keep_fonts": "Zachowaj czcionki",
-                "save_load_hint": "Opcje „zachowaj” pozwalają na pozostanie przy obecnych opcjach po wybraniu lub załadowaniu motywu, jak i przechowywanie ich podczas eksportowania motywu. Jeżeli wszystkie są odznaczone, eksportowanie motywu spowoduje zapisanie wszystkiego.",
+                "save_load_hint": "Opcje „zachowaj” pozwalają na pozostanie przy obecnych opcjach po wybraniu lub załadowaniu motywu, jak i przechowywanie ich podczas eksportowania motywu. Jeżeli wszystkie opcje są odznaczone, eksportowanie motywu spowoduje zapisanie wszystkiego.",
                 "reset": "Wyzeruj",
                 "clear_all": "Wyczyść wszystko",
                 "clear_opacity": "Wyczyść widoczność",
@@ -429,17 +429,17 @@
                 "use_snapshot": "Stara wersja",
                 "use_source": "Nowa wersja",
                 "help": {
-                    "upgraded_from_v2": "PleromaFE zostało zaaktualizowane, motyw może wyglądać nieco inaczej niż sobie zapamiętałeś.",
-                    "v2_imported": "Plik który zaimportowałeś został stworzony dla starszego FE. Próbujemy zwiększyć kompatybiliność, lecz wciąż mogą występować rozbieżności.",
-                    "future_version_imported": "Plik który zaimportowałeś został stworzony w nowszej wersji FE.",
-                    "older_version_imported": "Plik który zaimportowałeś został stworzony w starszej wersji FE.",
+                    "upgraded_from_v2": "PleromaFE zostało zaaktualizowane, motyw może wyglądać nieco inaczej niż zapamiętałeś(-aś).",
+                    "v2_imported": "Plik który zaimportowałeś(-aś) został stworzony dla starszego FE. Próbujemy zwiększyć kompatybilność, lecz wciąż mogą występować rozbieżności.",
+                    "future_version_imported": "Plik który zaimportowałeś(-aś) został stworzony w nowszej wersji FE.",
+                    "older_version_imported": "Plik który zaimportowałeś(-aś) został stworzony w starszej wersji FE.",
                     "snapshot_present": "Migawka motywu jest załadowana, więc wszystkie wartości zostały nadpisane. Zamiast tego możesz załadować właściwe dane motywu.",
                     "snapshot_missing": "Nie znaleziono migawki motywu w pliku, więc motyw może wyglądać inaczej niż pierwotnie zaplanowano.",
                     "fe_upgraded": "Silnik motywów PleromaFE został zaaktualizowany.",
                     "fe_downgraded": "Wersja PleromaFE została cofnięta.",
                     "migration_snapshot_ok": "Żeby być bezpiecznym, migawka motywu została załadowana. Możesz spróbować załadować dane motywu.",
-                    "migration_napshot_gone": "Z jakiegoś powodu migawka zniknęła, niektóre rzeczy mogą wyglądać inaczej niż sobie zapamiętałeś.",
-                    "snapshot_source_mismatch": "Konflikt wersji: najprawdopodobniej FE zostało cofnięte do poprzedniej wersji i zaaktualizowane ponownie, jeśli zmieniłeś motyw używając starszej wersji FE, najprawdopodobniej chcesz używać starszej wersji, w przeciwnym razie użyj nowej wersji."
+                    "migration_napshot_gone": "Z jakiegoś powodu migawka zniknęła, niektóre rzeczy mogą wyglądać inaczej niż zapamiętałeś(-aś).",
+                    "snapshot_source_mismatch": "Konflikt wersji: najprawdopodobniej FE zostało cofnięte do poprzedniej wersji i zaktualizowane ponownie, jeśli zmieniłeś(-aś) motyw używając starszej wersji FE, najprawdopodobniej chcesz używać starszej wersji, w przeciwnym razie użyj nowej wersji."
                 }
             },
             "common": {
@@ -506,7 +506,7 @@
                 "filter_hint": {
                     "always_drop_shadow": "Ostrzeżenie, ten cień zawsze używa {0} jeżeli to obsługiwane przez przeglądarkę.",
                     "drop_shadow_syntax": "{0} nie obsługuje parametru {1} i słowa kluczowego {2}.",
-                    "avatar_inset": "Pamiętaj że użycie jednocześnie cieni inset i nie inset na awatarach może daćnieoczekiwane wyniki z przezroczystymi awatarami.",
+                    "avatar_inset": "Pamiętaj że użycie jednocześnie cieni inset i nie inset na awatarach może dać nieoczekiwane wyniki z przezroczystymi awatarami.",
                     "spread_zero": "Cienie o ujemnej szerokości będą widoczne tak, jakby wynosiła ona zero",
                     "inset_classic": "Cienie inset będą używały {0}"
                 },
@@ -549,7 +549,7 @@
                 "faint_link": "pomocny podręcznik",
                 "fine_print": "Przeczytaj nasz {0}, aby nie nauczyć się niczego przydatnego!",
                 "header_faint": "W porządku",
-                "checkbox": "Przeleciałem przez zasady użytkowania",
+                "checkbox": "Przeleciałem(-am) przez zasady użytkowania",
                 "link": "i fajny mały odnośnik"
             }
         },
@@ -565,8 +565,8 @@
     "time": {
         "day": "{0} dzień",
         "days": "{0} dni",
-        "day_short": "{0}d",
-        "days_short": "{0}d",
+        "day_short": "{0} d",
+        "days_short": "{0} d",
         "hour": "{0} godzina",
         "hours": "{0} godzin",
         "hour_short": "{0} godz.",
@@ -575,8 +575,8 @@
         "in_past": "{0} temu",
         "minute": "{0} minuta",
         "minutes": "{0} minut",
-        "minute_short": "{0}min",
-        "minutes_short": "{0}min",
+        "minute_short": "{0} min",
+        "minutes_short": "{0} min",
         "month": "{0} miesiąc",
         "months": "{0} miesięcy",
         "month_short": "{0} mies.",
@@ -585,8 +585,8 @@
         "now_short": "teraz",
         "second": "{0} sekunda",
         "seconds": "{0} sekund",
-        "second_short": "{0}s",
-        "seconds_short": "{0}s",
+        "second_short": "{0} s",
+        "seconds_short": "{0} s",
         "week": "{0} tydzień",
         "weeks": "{0} tygodni",
         "week_short": "{0} tydz.",
@@ -646,7 +646,7 @@
         "muted": "Wyciszony(-a)",
         "per_day": "dziennie",
         "remote_follow": "Zdalna obserwacja",
-        "report": "Raportuj",
+        "report": "Zgłoś",
         "statuses": "Statusy",
         "subscribe": "Subskrybuj",
         "unsubscribe": "Odsubskrybuj",
@@ -675,7 +675,7 @@
             "disable_any_subscription": "Zakaż całkowicie obserwowania użytkownika",
             "quarantine": "Zakaż federowania postów od tego użytkownika",
             "delete_user": "Usuń użytkownika",
-            "delete_user_confirmation": "Czy jesteś absolutnie pewny? Ta operacja nie może być cofnięta."
+            "delete_user_confirmation": "Czy jesteś absolutnie pewny(-a)? Ta operacja nie może być cofnięta."
         }
     },
     "user_profile": {
@@ -685,10 +685,10 @@
     },
     "user_reporting": {
         "title": "Raportowanie {0}",
-        "add_comment_description": "Raport zostanie wysłany do moderatorów instancji. Możesz dodać powód dlaczego raportujesz to konto poniżej:",
+        "add_comment_description": "Zgłoszenie zostanie wysłane do moderatorów instancji. Możesz dodać powód dlaczego zgłaszasz owe konto poniżej:",
         "additional_comments": "Dodatkowe komentarze",
-        "forward_description": "To konto jest z innego serwera. Wysłać również tam kopię raportu?",
-        "forward_to": "Przekaż do{0}",
+        "forward_description": "To konto jest z innego serwera. Wysłać również tam kopię zgłoszenia?",
+        "forward_to": "Przekaż do {0}",
         "submit": "Wyślij",
         "generic_error": "Wystąpił błąd podczas przetwarzania twojej prośby."
     },
@@ -728,14 +728,14 @@
         "no_results": "Brak wyników"
     },
     "password_reset": {
-        "forgot_password": "Zapomniałeś hasła?",
+        "forgot_password": "Zapomniałeś(-aś) hasła?",
         "password_reset": "Reset hasła",
         "instruction": "Wprowadź swój adres email lub nazwę użytkownika. Wyślemy ci link z którym możesz zresetować hasło.",
         "placeholder": "Twój email lub nazwa użytkownika",
         "check_email": "Sprawdź pocztę, aby uzyskać link do zresetowania hasła.",
         "return_home": "Wróć do strony głównej",
         "not_found": "Nie mogliśmy znaleźć tego emaila lub nazwy użytkownika.",
-        "too_many_requests": "Przekroczyłeś limit prób, spróbuj ponownie później.",
+        "too_many_requests": "Przekroczyłeś(-aś) limit prób, spróbuj ponownie później.",
         "password_reset_disabled": "Resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji.",
         "password_reset_required": "Musisz zresetować hasło, by się zalogować.",
         "password_reset_required_but_mailer_is_disabled": "Musisz zresetować hasło, ale resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji."

@@ -85,7 +85,7 @@
         "data_import_export_tab": "Importa o esporta dati",
         "default_vis": "Visibilità predefinita dei messaggi",
         "delete_account": "Elimina profilo",
-        "delete_account_description": "Elimina definitivamente il tuo profilo e tutti i tuoi messaggi.",
+        "delete_account_description": "Elimina definitivamente i tuoi dati e disattiva il tuo profilo.",
         "delete_account_error": "C'è stato un problema durante l'eliminazione del tuo profilo. Se il problema persiste contatta l'amministratore della tua stanza.",
         "delete_account_instructions": "Digita la tua password nel campo sottostante per confermare l'eliminazione del tuo profilo.",
         "export_theme": "Salva impostazioni",
@@ -305,5 +305,19 @@
         "expires_in": "Scade fra {0}",
         "expired": "Scaduto {0} fa",
         "not_enough_options": "Aggiungi altre risposte"
+    },
+    "interactions": {
+        "favs_repeats": "Condivisi e preferiti"
+    },
+    "emoji": {
+        "load_all": "Carico tutti i {emojiAmount} emoji",
+        "load_all_hint": "Primi {saneAmount} emoji caricati, caricarli tutti potrebbe causare rallentamenti.",
+        "unicode": "Emoji Unicode",
+        "custom": "Emoji personale",
+        "add_emoji": "Inserisci Emoji",
+        "search_emoji": "Cerca un emoji",
+        "keep_open": "Tieni aperto il menù",
+        "emoji": "Emoji",
+        "stickers": "Adesivi"
     }
 }

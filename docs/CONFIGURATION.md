@@ -73,6 +73,9 @@ These two settings should point to where FE should redirect visitor when they lo
 ### `scopeCopy`
 Copy post scope (visibility) when replying to a post. Instance-default.
 
+### `sidebarRight`
+Change alignment of sidebar and panels to the right. Defaults to `false`.
+
 ### `showFeaturesPanel`
 Show panel showcasing instance features/settings to logged-out visitors
 

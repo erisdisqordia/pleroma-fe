@@ -108,7 +108,6 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
   copyInstanceOption('subjectLineBehavior')
   copyInstanceOption('postContentType')
   copyInstanceOption('alwaysShowSubjectInput')
-  copyInstanceOption('noAttachmentLinks')
   copyInstanceOption('showFeaturesPanel')
   copyInstanceOption('hideSitename')
 

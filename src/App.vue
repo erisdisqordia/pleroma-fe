@@ -80,7 +80,10 @@
       id="content"
       class="container underlay"
     >
-      <div class="sidebar-flexer mobile-hidden">
+      <div
+        class="sidebar-flexer mobile-hidden"
+        :style="sidebarAlign"
+      >
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">
             <div class="sidebar">

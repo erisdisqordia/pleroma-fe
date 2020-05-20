@@ -99,7 +99,12 @@ export default {
     },
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
     isMobileLayout () { return this.$store.state.interface.mobileLayout },
-    privateMode () { return this.$store.state.instance.private }
+    privateMode () { return this.$store.state.instance.private },
+    sidebarAlign () {
+      return {
+        'order': this.$store.state.instance.sidebarRight ? 99 : 0
+      }
+    }
   },
   methods: {
     scrollToTop () {

@@ -20,7 +20,16 @@
         "timeline": "Sequenza personale",
         "twkn": "Sequenza globale",
         "chat": "Chat della stanza",
-        "friend_requests": "Vogliono seguirti"
+        "friend_requests": "Vogliono seguirti",
+        "about": "Informazioni",
+        "administration": "Amministrazione",
+        "back": "Indietro",
+        "interactions": "Interazioni",
+        "dms": "Messaggi diretti",
+        "user_search": "Ricerca utenti",
+        "search": "Ricerca",
+        "who_to_follow": "Chi seguire",
+        "preferences": "Preferenze"
     },
     "notifications": {
         "followed_you": "ti segue",
@@ -29,7 +38,11 @@
         "broken_favorite": "Stato sconosciuto, lo sto cercando...",
         "favorited_you": "ha gradito il tuo messaggio",
         "load_older": "Carica notifiche precedenti",
-        "repeated_you": "ha condiviso il tuo messaggio"
+        "repeated_you": "ha condiviso il tuo messaggio",
+        "follow_request": "vuole seguirti",
+        "no_more_notifications": "Fine delle notifiche",
+        "migrated_to": "è migrato verso",
+        "reacted_with": "ha reagito con"
     },
     "settings": {
         "attachments": "Allegati",
@@ -72,7 +85,7 @@
         "data_import_export_tab": "Importa o esporta dati",
         "default_vis": "Visibilità predefinita dei messaggi",
         "delete_account": "Elimina profilo",
-        "delete_account_description": "Elimina definitivamente il tuo profilo e tutti i tuoi messaggi.",
+        "delete_account_description": "Elimina definitivamente i tuoi dati e disattiva il tuo profilo.",
         "delete_account_error": "C'è stato un problema durante l'eliminazione del tuo profilo. Se il problema persiste contatta l'amministratore della tua stanza.",
         "delete_account_instructions": "Digita la tua password nel campo sottostante per confermare l'eliminazione del tuo profilo.",
         "export_theme": "Salva impostazioni",
@@ -180,7 +193,16 @@
         "placeholder": "es. Lupo Lucio",
         "register": "Registrati",
         "username": "Nome utente",
-        "description": "Accedi con OAuth"
+        "description": "Accedi con OAuth",
+        "hint": "Accedi per partecipare alla discussione",
+        "authentication_code": "Codice di autenticazione",
+        "enter_recovery_code": "Inserisci un codice di recupero",
+        "enter_two_factor_code": "Inserisci un codice two-factor",
+        "recovery_code": "Codice di recupero",
+        "heading": {
+            "totp": "Autenticazione two-factor",
+            "recovery": "Recupero two-factor"
+        }
     },
     "post_status": {
         "account_not_locked_warning": "Il tuo profilo non è {0}. Chiunque può seguirti e vedere i tuoi messaggi riservati ai tuoi seguaci.",
@@ -265,5 +287,37 @@
         "submit": "Invia",
         "success": "Importato.",
         "error": "L'importazione non è andata a buon fine."
+    },
+    "media_modal": {
+        "previous": "Precedente",
+        "next": "Prossimo"
+    },
+    "polls": {
+        "add_poll": "Sondaggio",
+        "add_option": "Alternativa",
+        "option": "Opzione",
+        "votes": "voti",
+        "vote": "Vota",
+        "type": "Tipo di sondaggio",
+        "single_choice": "Scelta singola",
+        "multiple_choices": "Scelta multipla",
+        "expiry": "Scadenza",
+        "expires_in": "Scade fra {0}",
+        "expired": "Scaduto {0} fa",
+        "not_enough_options": "Aggiungi altre risposte"
+    },
+    "interactions": {
+        "favs_repeats": "Condivisi e preferiti"
+    },
+    "emoji": {
+        "load_all": "Carico tutti i {emojiAmount} emoji",
+        "load_all_hint": "Primi {saneAmount} emoji caricati, caricarli tutti potrebbe causare rallentamenti.",
+        "unicode": "Emoji Unicode",
+        "custom": "Emoji personale",
+        "add_emoji": "Inserisci Emoji",
+        "search_emoji": "Cerca un emoji",
+        "keep_open": "Tieni aperto il menù",
+        "emoji": "Emoji",
+        "stickers": "Adesivi"
     }
 }

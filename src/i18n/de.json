@@ -84,7 +84,10 @@
         "account_not_locked_warning_link": "gesperrt",
         "attachments_sensitive": "Anhänge als heikel markieren",
         "content_type": {
-            "text/plain": "Nur Text"
+            "text/plain": "Nur Text",
+            "text/bbcode": "BBCode",
+            "text/markdown": "Markdown",
+            "text/html": "HTML"
         },
         "content_warning": "Betreff (optional)",
         "default": "Sitze gerade im Hofbräuhaus.",
@@ -95,6 +98,13 @@
             "private": "Nur Follower - Beitrag nur für Follower sichtbar",
             "public": "Öffentlich - Beitrag an öffentliche Zeitleisten",
             "unlisted": "Nicht gelistet - Nicht in öffentlichen Zeitleisten anzeigen"
+        },
+        "direct_warning_to_all": "Dieser Beitrag wird für alle erwähnten Benutzer sichtbar sein.",
+        "direct_warning_to_first_only": "Dieser Beitrag wird für alle Benutzer, die am Anfang der Nachricht erwähnt wurden, sichtbar sein.",
+        "scope_notice": {
+            "public": "Dieser Beitrag wird für alle sichtbar sein",
+            "private": "Dieser Beitrag wird nur für deine Follower sichtbar sein",
+            "unlisted": "Dieser Beitrag wird weder in der öffentlichen Zeitleiste noch im gesamten bekannten Netzwerk sichtbar sein"
         }
     },
     "registration": {
@@ -112,8 +122,11 @@
             "email_required": "darf nicht leer sein",
             "password_required": "darf nicht leer sein",
             "password_confirmation_required": "darf nicht leer sein",
-            "password_confirmation_match": "sollte mit dem Passwort identisch sein."
-        }
+            "password_confirmation_match": "sollte mit dem Passwort identisch sein"
+        },
+        "bio_placeholder": "z.B.\nHallo, ich bin Lain.\nIch bin ein Anime Mödchen aus dem vorstädtischen Japan. Du kennst mich vielleicht vom Wired.",
+        "fullname_placeholder": "z.B. Lain Iwakura",
+        "username_placeholder": "z.B. lain"
     },
     "settings": {
         "attachmentRadius": "Anhänge",
@@ -125,7 +138,7 @@
         "background": "Hintergrund",
         "bio": "Bio",
         "btnRadius": "Buttons",
-        "cBlue": "Blau (Antworten, Folgt dir)",
+        "cBlue": "Blau (Antworten, folgt dir)",
         "cGreen": "Grün (Retweet)",
         "cOrange": "Orange (Favorisieren)",
         "cRed": "Rot (Abbrechen)",
@@ -141,21 +154,21 @@
         "data_import_export_tab": "Datenimport/-export",
         "default_vis": "Standard-Sichtbarkeitsumfang",
         "delete_account": "Account löschen",
-        "delete_account_description": "Lösche deinen Account und alle deine Nachrichten unwiderruflich.",
+        "delete_account_description": "Lösche deine Daten und deaktiviere deinen Account unwiderruflich.",
         "delete_account_error": "Es ist ein Fehler beim Löschen deines Accounts aufgetreten. Tritt dies weiterhin auf, wende dich an den Administrator der Instanz.",
         "delete_account_instructions": "Tippe dein Passwort unten in das Feld ein, um die Löschung deines Accounts zu bestätigen.",
-        "discoverable": "Erlaubnis für automatisches Suchen nach diesem Account",
+        "discoverable": "Erlaube, dass dieser Account in Suchergebnissen auftaucht",
         "avatar_size_instruction": "Die empfohlene minimale Größe für Avatare ist 150x150 Pixel.",
         "pad_emoji": "Emojis mit Leerzeichen umrahmen",
         "export_theme": "Farbschema speichern",
         "filtering": "Filtern",
-        "filtering_explanation": "Alle Beiträge die diese Wörter enthalten werden ausgeblendet. Ein Wort pro Zeile.",
+        "filtering_explanation": "Alle Beiträge, welche diese Wörter enthalten, werden ausgeblendet. Ein Wort pro Zeile.",
         "follow_export": "Follower exportieren",
         "follow_export_button": "Exportiere deine Follows in eine csv-Datei",
         "follow_export_processing": "In Bearbeitung. Die Liste steht gleich zum herunterladen bereit.",
-        "follow_import": "Followers importieren",
-        "follow_import_error": "Fehler beim importieren der Follower",
-        "follows_imported": "Followers importiert! Die Bearbeitung kann eine Zeit lang dauern.",
+        "follow_import": "Follower importieren",
+        "follow_import_error": "Fehler beim Importieren der Follower",
+        "follows_imported": "Follower importiert! Die Bearbeitung kann einen Moment dauern.",
         "foreground": "Vordergrund",
         "general": "Allgemein",
         "hide_attachments_in_convo": "Anhänge in Unterhaltungen ausblenden",
@@ -168,7 +181,7 @@
         "hide_post_stats": "Beitragsstatistiken verbergen (z.B. die Anzahl der Favoriten)",
         "hide_user_stats": "Benutzerstatistiken verbergen (z.B. die Anzahl der Follower)",
         "hide_filtered_statuses": "Gefilterte Beiträge verbergen",
-        "import_followers_from_a_csv_file": "Importiere Follower, denen du folgen möchtest, aus einer CSV-Datei",
+        "import_followers_from_a_csv_file": "Importiere Follower aus einer CSV-Datei",
         "import_theme": "Farbschema laden",
         "inputRadius": "Eingabefelder",
         "checkboxRadius": "Auswahlfelder",
@@ -182,7 +195,7 @@
         "lock_account_description": "Sperre deinen Account, um neue Follower zu genehmigen oder abzulehnen",
         "loop_video": "Videos wiederholen",
         "loop_video_silent_only": "Nur Videos ohne Ton wiederholen (z.B. Mastodons \"gifs\")",
-        "mutes_tab": "Mutes",
+        "mutes_tab": "Stummschaltungen",
         "play_videos_in_modal": "Videos in größerem Medienfenster abspielen",
         "use_contain_fit": "Vorschaubilder nicht zuschneiden",
         "name": "Name",
@@ -355,7 +368,43 @@
                 "checkbox": "Ich habe die Allgemeinen Geschäftsbedingungen überflogen",
                 "link": "ein netter kleiner Link"
             }
-        }
+        },
+        "app_name": "Anwendungsname",
+        "mfa": {
+            "otp": "OTP",
+            "recovery_codes_warning": "Schreibe dir die Codes auf oder speichere sie an einem sicheren Ort - ansonsten wirst du sie nicht wiederfinden. Wenn du den Zugriff zu deiner 2FA App und die Wiederherstellungs-Codes verlierst, wirst du aus deinem Account ausgeschlossen sein.",
+            "recovery_codes": "Wiederherstellungs-Codes.",
+            "warning_of_generate_new_codes": "Wenn du neue Wiederherstellungs-Codes generierst, werden die alten Codes nicht mehr funktionieren.",
+            "generate_new_recovery_codes": "Generiere neue Wiederherstellungs-Codes",
+            "title": "Zwei-Faktor Authentifizierung",
+            "waiting_a_recovery_codes": "Erhalte Wiederherstellungscodes...",
+            "authentication_methods": "Authentifizierungsmethoden",
+            "scan": {
+                "title": "Scan",
+                "secret_code": "Schlüssel",
+                "desc": "Wenn du deine 2FA App verwendest, scanne diesen QR Code oder gebe den Schlüssel ein:"
+            },
+            "verify": {
+                "desc": "Um 2FA zu aktivieren, gib den Code von deiner 2FA-App ein:"
+            }
+        },
+        "enter_current_password_to_confirm": "Gib dein aktuelles Passwort ein, um deine Identität zu bestätigen",
+        "security": "Sicherheit",
+        "allow_following_move": "Erlaube automatisches Folgen, sobald ein gefolgter Nutzer umzieht",
+        "blocks_imported": "Blocks importiert! Die Verarbeitung wird einen Moment brauchen.",
+        "block_import_error": "Fehler beim Importieren der Blocks",
+        "block_import": "Block Import",
+        "block_export_button": "Exportiere deine Blocks in eine csv Datei",
+        "block_export": "Block Export",
+        "emoji_reactions_on_timeline": "Zeige Emoji-Reaktionen auf der Zeitleiste",
+        "domain_mutes": "Domains",
+        "changed_email": "Email Adresse erfolgreich geändert!",
+        "change_email_error": "Es trat ein Problem auf beim Versuch, deine Email Adresse zu ändern.",
+        "change_email": "Ändere Email",
+        "notification_setting_non_followers": "Nutzer, die dir nicht folgen",
+        "notification_setting_followers": "Nutzer, die dir folgen",
+        "import_blocks_from_a_csv_file": "Importiere Blocks von einer CSV Datei",
+        "accent": "Akzent"
     },
     "timeline": {
         "collapse": "Einklappen",
@@ -378,7 +427,7 @@
         "follow_again": "Anfrage erneut senden?",
         "follow_unfollow": "Folgen beenden",
         "followees": "Folgt",
-        "followers": "Followers",
+        "followers": "Folgende",
         "following": "Folgst du!",
         "follows_you": "Folgt dir!",
         "its_you": "Das bist du!",
@@ -386,7 +435,10 @@
         "muted": "Stummgeschaltet",
         "per_day": "pro Tag",
         "remote_follow": "Folgen",
-        "statuses": "Beiträge"
+        "statuses": "Beiträge",
+        "admin_menu": {
+            "sandbox": "Erzwinge Beiträge nur für Follower sichtbar zu sein"
+        }
     },
     "user_profile": {
         "timeline_title": "Beiträge"
@@ -511,6 +563,22 @@
         "search_emoji": "Nach einem Emoji suchen",
         "custom": "Benutzerdefinierter Emoji",
         "keep_open": "Auswahlfenster offen halten",
-        "add_emoji": "Emoji einfügen"
+        "add_emoji": "Emoji einfügen",
+        "load_all": "Lade alle {emojiAmount} Emoji",
+        "load_all_hint": "Erfolgreich erste {saneAmount} Emoji geladen, alle Emojis zu laden würde Leistungsprobleme hervorrufen.",
+        "unicode": "Unicode Emoji"
+    },
+    "interactions": {
+        "load_older": "Lade ältere Interaktionen",
+        "follows": "Neue Follows",
+        "favs_repeats": "Wiederholungen und Favoriten",
+        "moves": "Benutzer migriert zu"
+    },
+    "selectable_list": {
+        "select_all": "Wähle alle"
+    },
+    "remote_user_resolver": {
+        "searching_for": "Suche nach",
+        "error": "Nicht gefunden."
     }
 }

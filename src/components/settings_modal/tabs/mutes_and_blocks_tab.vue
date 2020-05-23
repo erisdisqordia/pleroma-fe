@@ -1,173 +1,176 @@
 <template>
-  <tab-switcher>
-    <div :label="$t('settings.blocks_tab')">
-      <div class="profile-edit-usersearch-wrapper">
-        <Autosuggest
-          :filter="filterUnblockedUsers"
-          :query="queryUserIds"
-          :placeholder="$t('settings.search_user_to_block')"
-          >
-          <BlockCard
-            slot-scope="row"
-            :user-id="row.item"
-            />
-        </Autosuggest>
-      </div>
-      <BlockList
-        :refresh="true"
-        :get-key="i => i"
+<tab-switcher
+  :scrollableTabs="true"
+  class="mutes-and-blocks-tab"
+  >
+  <div :label="$t('settings.blocks_tab')">
+    <div class="usersearch-wrapper">
+      <Autosuggest
+        :filter="filterUnblockedUsers"
+        :query="queryUserIds"
+        :placeholder="$t('settings.search_user_to_block')"
         >
-        <template
-          slot="header"
-          slot-scope="{selected}"
-          >
-          <div class="profile-edit-bulk-actions">
-            <ProgressButton
-              v-if="selected.length > 0"
-              class="btn btn-default"
-              :click="() => blockUsers(selected)"
-              >
-              {{ $t('user_card.block') }}
-              <template slot="progress">
-                {{ $t('user_card.block_progress') }}
-              </template>
-            </ProgressButton>
-            <ProgressButton
-              v-if="selected.length > 0"
-              class="btn btn-default"
-              :click="() => unblockUsers(selected)"
-              >
-              {{ $t('user_card.unblock') }}
-              <template slot="progress">
-                {{ $t('user_card.unblock_progress') }}
-              </template>
-            </ProgressButton>
-          </div>
-        </template>
-        <template
-          slot="item"
-          slot-scope="{item}"
-          >
-          <BlockCard :user-id="item" />
-        </template>
-        <template slot="empty">
-          {{ $t('settings.no_blocks') }}
-        </template>
-      </BlockList>
+        <BlockCard
+          slot-scope="row"
+          :user-id="row.item"
+          />
+      </Autosuggest>
     </div>
-
-    <div :label="$t('settings.mutes_tab')">
-      <tab-switcher>
-        <div label="Users">
-          <div class="profile-edit-usersearch-wrapper">
-            <Autosuggest
-              :filter="filterUnMutedUsers"
-              :query="queryUserIds"
-              :placeholder="$t('settings.search_user_to_mute')"
-              >
-              <MuteCard
-                slot-scope="row"
-                :user-id="row.item"
-                />
-            </Autosuggest>
-          </div>
-          <MuteList
-            :refresh="true"
-            :get-key="i => i"
+    <BlockList
+      :refresh="true"
+      :get-key="i => i"
+      >
+      <template
+        slot="header"
+        slot-scope="{selected}"
+        >
+        <div class="bulk-actions">
+          <ProgressButton
+            v-if="selected.length > 0"
+            class="btn btn-default bulk-action-button"
+            :click="() => blockUsers(selected)"
             >
-            <template
-              slot="header"
-              slot-scope="{selected}"
-              >
-              <div class="profile-edit-bulk-actions">
-                <ProgressButton
-                  v-if="selected.length > 0"
-                  class="btn btn-default"
-                  :click="() => muteUsers(selected)"
-                  >
-                  {{ $t('user_card.mute') }}
-                  <template slot="progress">
-                    {{ $t('user_card.mute_progress') }}
-                  </template>
-                </ProgressButton>
-                <ProgressButton
-                  v-if="selected.length > 0"
-                  class="btn btn-default"
-                  :click="() => unmuteUsers(selected)"
-                  >
-                  {{ $t('user_card.unmute') }}
-                  <template slot="progress">
-                    {{ $t('user_card.unmute_progress') }}
-                  </template>
-                </ProgressButton>
-              </div>
+            {{ $t('user_card.block') }}
+            <template slot="progress">
+              {{ $t('user_card.block_progress') }}
             </template>
-            <template
-              slot="item"
-              slot-scope="{item}"
-              >
-              <MuteCard :user-id="item" />
-            </template>
-            <template slot="empty">
-              {{ $t('settings.no_mutes') }}
-            </template>
-          </MuteList>
-        </div>
-
-        <div :label="$t('settings.domain_mutes')">
-          <div class="profile-edit-domain-mute-form">
-            <input
-              v-model="newDomainToMute"
-              :placeholder="$t('settings.type_domains_to_mute')"
-              type="text"
-              @keyup.enter="muteDomain"
-              >
-            <ProgressButton
-              class="btn btn-default"
-              :click="muteDomain"
-              >
-              {{ $t('domain_mute_card.mute') }}
-              <template slot="progress">
-                {{ $t('domain_mute_card.mute_progress') }}
-              </template>
-            </ProgressButton>
-          </div>
-          <DomainMuteList
-            :refresh="true"
-            :get-key="i => i"
+          </ProgressButton>
+          <ProgressButton
+            v-if="selected.length > 0"
+            class="btn btn-default"
+            :click="() => unblockUsers(selected)"
             >
-            <template
-              slot="header"
-              slot-scope="{selected}"
-              >
-              <div class="profile-edit-bulk-actions">
-                <ProgressButton
-                  v-if="selected.length > 0"
-                  class="btn btn-default"
-                  :click="() => unmuteDomains(selected)"
-                  >
-                  {{ $t('domain_mute_card.unmute') }}
-                  <template slot="progress">
-                    {{ $t('domain_mute_card.unmute_progress') }}
-                  </template>
-                </ProgressButton>
-              </div>
+            {{ $t('user_card.unblock') }}
+            <template slot="progress">
+              {{ $t('user_card.unblock_progress') }}
             </template>
-            <template
-              slot="item"
-              slot-scope="{item}"
-              >
-              <DomainMuteCard :domain="item" />
-            </template>
-            <template slot="empty">
-              {{ $t('settings.no_mutes') }}
-            </template>
-          </DomainMuteList>
+          </ProgressButton>
         </div>
-      </tab-switcher>
-    </div>
-  </tab-switcher>
+      </template>
+      <template
+        slot="item"
+        slot-scope="{item}"
+        >
+        <BlockCard :user-id="item" />
+      </template>
+      <template slot="empty">
+        {{ $t('settings.no_blocks') }}
+      </template>
+    </BlockList>
+  </div>
+
+  <div :label="$t('settings.mutes_tab')">
+    <tab-switcher>
+      <div label="Users">
+        <div class="usersearch-wrapper">
+          <Autosuggest
+            :filter="filterUnMutedUsers"
+            :query="queryUserIds"
+            :placeholder="$t('settings.search_user_to_mute')"
+            >
+            <MuteCard
+              slot-scope="row"
+              :user-id="row.item"
+              />
+          </Autosuggest>
+        </div>
+        <MuteList
+          :refresh="true"
+          :get-key="i => i"
+          >
+          <template
+            slot="header"
+            slot-scope="{selected}"
+            >
+            <div class="bulk-actions">
+              <ProgressButton
+                v-if="selected.length > 0"
+                class="btn btn-default"
+                :click="() => muteUsers(selected)"
+                >
+                {{ $t('user_card.mute') }}
+                <template slot="progress">
+                  {{ $t('user_card.mute_progress') }}
+                </template>
+              </ProgressButton>
+              <ProgressButton
+                v-if="selected.length > 0"
+                class="btn btn-default"
+                :click="() => unmuteUsers(selected)"
+                >
+                {{ $t('user_card.unmute') }}
+                <template slot="progress">
+                  {{ $t('user_card.unmute_progress') }}
+                </template>
+              </ProgressButton>
+            </div>
+          </template>
+          <template
+            slot="item"
+            slot-scope="{item}"
+            >
+            <MuteCard :user-id="item" />
+          </template>
+          <template slot="empty">
+            {{ $t('settings.no_mutes') }}
+          </template>
+        </MuteList>
+      </div>
+
+      <div :label="$t('settings.domain_mutes')">
+        <div class="domain-mute-form">
+          <input
+            v-model="newDomainToMute"
+            :placeholder="$t('settings.type_domains_to_mute')"
+            type="text"
+            @keyup.enter="muteDomain"
+            >
+          <ProgressButton
+            class="btn btn-default domain-mute-button"
+            :click="muteDomain"
+            >
+            {{ $t('domain_mute_card.mute') }}
+            <template slot="progress">
+              {{ $t('domain_mute_card.mute_progress') }}
+            </template>
+          </ProgressButton>
+        </div>
+        <DomainMuteList
+          :refresh="true"
+          :get-key="i => i"
+          >
+          <template
+            slot="header"
+            slot-scope="{selected}"
+            >
+            <div class="bulk-actions">
+              <ProgressButton
+                v-if="selected.length > 0"
+                class="btn btn-default"
+                :click="() => unmuteDomains(selected)"
+                >
+                {{ $t('domain_mute_card.unmute') }}
+                <template slot="progress">
+                  {{ $t('domain_mute_card.unmute_progress') }}
+                </template>
+              </ProgressButton>
+            </div>
+          </template>
+          <template
+            slot="item"
+            slot-scope="{item}"
+            >
+            <DomainMuteCard :domain="item" />
+          </template>
+          <template slot="empty">
+            {{ $t('settings.no_mutes') }}
+          </template>
+        </DomainMuteList>
+      </div>
+    </tab-switcher>
+  </div>
+</tab-switcher>
 </template>
 
 <script src="./mutes_and_blocks_tab.js"></script>
-<!-- <style lang="scss" src="./profile.scss"></style> -->
+<style lang="scss" src="./mutes_and_blocks_tab.scss"></style>

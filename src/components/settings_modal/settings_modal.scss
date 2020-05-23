@@ -1,12 +1,21 @@
 @import 'src/_variables.scss';
 .settings-modal {
+  overflow: hidden;
 
   .settings_tab-switcher {
     height: 100%;
   }
   &.peek {
     .settings-modal-panel {
-      transform: translateY(calc(100% - 50px));
+      /* Explanation:
+       * Modal is positioned vertically centered.
+       * 100vh - 100% = Distance between modal's top+bottom boundaries and screen
+       * (100vh - 100%) / 2 = Distance between bottom (or top) boundary and screen
+       * + 100% - we move modal completely off-screen, it's top boundary touches
+       *   bottom of the screen
+       * - 50px - leaving tiny amount of space so that titlebar + tiny amount of modal is visible
+       */
+      transform: translateY(calc(((100vh - 100%) / 2 + 100%) - 50px));
     }
   }
 
@@ -25,17 +34,22 @@
   .panel-body {
     height: 100%;
     overflow-y: hidden;
-  }
-  .setting-item {
-    border-bottom: 2px solid var(--fg, $fallback--fg);
-    margin: 1em 1em 1.4em;
-    padding-bottom: 1.4em;
 
     .btn {
       min-height: 28px;
       min-width: 10em;
       padding: 0 2em;
     }
+  }
+
+  .full-height {
+    height: 100%;
+  }
+
+  .setting-item {
+    border-bottom: 2px solid var(--fg, $fallback--fg);
+    margin: 1em 1em 1.4em;
+    padding-bottom: 1.4em;
 
     > div {
       margin-bottom: .5em;

@@ -1,6 +1,5 @@
 <template>
 <Modal
-  v-if="isLoggedIn && !resettingForm"
   :is-open="modalActivated"
   class="settings-modal"
   :class="{ peek: modalPeeked }"
@@ -25,15 +24,57 @@
         :scrollableTabs="true"
         ref="tabSwitcher"
         >
-        <div :label="$t('settings.general')"><GeneralTab /></div>
-        <div :label="$t('settings.profile_tab')"><ProfileTab /></div>
-        <div :label="$t('settings.security_tab')"><SecurityTab /></div>
-        <div :label="$t('settings.filtering')"><FilteringTab /></div>
-        <div :label="$t('settings.theme')"><ThemeTab /></div>
-        <div :label="$t('settings.notifications')"><NotificationsTab /></div>
-        <div :label="$t('settings.data_import_export_tab')"><DataImportExportTab /></div>
-        <div :label="$t('settings.mutes_and_blocks')"><MutesAndBlocksTab /></div>
-        <div :label="$t('settings.version.title')"><VersionTab /></div>
+        <div
+          :label="$t('settings.general')"
+          >
+          <GeneralTab />
+        </div>
+        <div v-if="isLoggedIn"
+             :label="$t('settings.profile_tab')"
+             >
+          <ProfileTab />
+        </div>
+        <div
+          v-if="isLoggedIn"
+          :label="$t('settings.security_tab')"
+          >
+          <SecurityTab />
+        </div>
+        <div
+          :label="$t('settings.filtering')"
+          >
+          <FilteringTab />
+        </div>
+        <div
+          :label="$t('settings.theme')"
+          >
+          <ThemeTab />
+        </div>
+        <div
+          v-if="isLoggedIn"
+          :label="$t('settings.notifications')"
+          >
+          <NotificationsTab />
+        </div>
+        <div
+          v-if="isLoggedIn"
+          :label="$t('settings.data_import_export_tab')"
+          >
+          <DataImportExportTab />
+        </div>
+        <div
+          v-if="isLoggedIn"
+          :label="$t('settings.mutes_and_blocks')"
+          :fullHeight="true"
+          class="full-height"
+          >
+          <MutesAndBlocksTab />
+        </div>
+        <div
+          :label="$t('settings.version.title')"
+          >
+          <VersionTab />
+        </div>
       </tab-switcher>
     </div>
   </div>

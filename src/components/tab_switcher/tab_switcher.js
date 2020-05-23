@@ -69,7 +69,6 @@ export default Vue.component('tab-switcher', {
         if (!slot.tag) return
         const classesTab = ['tab']
         const classesWrapper = ['tab-wrapper']
-
         if (this.activeIndex === index) {
           classesTab.push('active')
           classesWrapper.push('active')
@@ -101,12 +100,17 @@ export default Vue.component('tab-switcher', {
     const contents = this.$slots.default.map((slot, index) => {
       if (!slot.tag) return
       const active = this.activeIndex === index
+      const classes = [ active ? 'active' : 'hidden' ]
+      if (slot.data.attrs.fullHeight) {
+        classes.push('full-height')
+      }
+
       if (this.renderOnlyFocused) {
         return active
-          ? <div class="active">{slot}</div>
-          : <div class="hidden"></div>
+          ? <div class={classes.join(' ')}>{slot}</div>
+          : <div class={classes.join(' ')}></div>
       }
-      return <div class={active ? 'active' : 'hidden' }>{slot}</div>
+      return <div class={classes.join(' ')}>{slot}</div>
     })
 
     return (

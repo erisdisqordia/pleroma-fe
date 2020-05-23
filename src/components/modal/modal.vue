@@ -1,9 +1,9 @@
 <template>
   <div
     v-show="isOpen"
-    v-body-scroll-lock="isOpen"
+    v-body-scroll-lock="isOpen && !noBackground"
     class="modal-view"
-    :class="{ 'modal-background': !noBackground }"
+    :class="classes"
     @click.self="$emit('backdropClicked')"
   >
     <slot />
@@ -20,6 +20,14 @@ export default {
     noBackground: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    classes () {
+      return {
+        'modal-background': !this.noBackground,
+        'open': this.isOpen
+      }
     }
   }
 }
@@ -40,6 +48,7 @@ export default {
   pointer-events: none;
   animation-duration: 0.2s;
   animation-name: modal-background-fadein;
+  opacity: 0;
 
   > * {
     pointer-events: initial;
@@ -50,8 +59,8 @@ export default {
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  body:not(.scroll-locked) & {
-    opacity: 0;
+  &.open {
+    opacity: 1;
   }
 }
 

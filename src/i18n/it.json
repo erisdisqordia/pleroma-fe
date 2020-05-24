@@ -142,7 +142,45 @@
         "values": {
             "false": "no",
             "true": "sì"
-        }
+        },
+        "avatar_size_instruction": "La taglia minima per l'icona personale è 150x150 pixel.",
+        "domain_mutes": "Domini",
+        "discoverable": "Permetti la scoperta di questo profilo da servizi di ricerca ed altro",
+        "composing": "Composizione",
+        "changed_email": "Email cambiata con successo!",
+        "change_email_error": "C'è stato un problema nel cambiare la tua email.",
+        "change_email": "Cambia email",
+        "blocks_tab": "Bloccati",
+        "blocks_imported": "Blocchi importati! Saranno elaborati a breve.",
+        "block_import_error": "Errore nell'importazione",
+        "block_import": "Importa blocchi",
+        "block_export_button": "Esporta i tuoi blocchi in un file CSV",
+        "block_export": "Esporta blocchi",
+        "allow_following_move": "Consenti",
+        "mfa": {
+            "verify": {
+                "desc": "Per abilitare l'autenticazione bifattoriale, inserisci il codice fornito dalla tua applicazione:"
+            },
+            "scan": {
+                "secret_code": "Codice",
+                "desc": "Con la tua applicazione bifattoriale, acquisisci questo QR o inserisci il codice manualmente:",
+                "title": "Acquisisci"
+            },
+            "authentication_methods": "Metodi di accesso",
+            "recovery_codes_warning": "Appuntati i codici o salvali in un posto sicuro, altrimenti rischi di non rivederli mai più. Se perderai l'accesso sia alla tua applicazione bifattoriale che ai codici di recupero non potrai più accedere al tuo profilo.",
+            "waiting_a_recovery_codes": "Ricevo codici di recupero...",
+            "recovery_codes": "Codici di recupero.",
+            "warning_of_generate_new_codes": "Alla generazione di nuovi codici di recupero, quelli vecchi saranno disattivati.",
+            "generate_new_recovery_codes": "Genera nuovi codici di recupero",
+            "title": "Accesso bifattoriale",
+            "confirm_and_enable": "Conferma ed abilita OTP",
+            "wait_pre_setup_otp": "preimposto OTP",
+            "setup_otp": "Imposta OTP",
+            "otp": "OTP"
+        },
+        "enter_current_password_to_confirm": "Inserisci la tua password per identificarti",
+        "security": "Sicurezza",
+        "app_name": "Nome applicazione"
     },
     "timeline": {
         "error_fetching": "Errore nell'aggiornamento",
@@ -209,7 +247,10 @@
         "account_not_locked_warning_link": "protetto",
         "attachments_sensitive": "Nascondi gli allegati",
         "content_type": {
-            "text/plain": "Testo normale"
+            "text/plain": "Testo normale",
+            "text/bbcode": "BBCode",
+            "text/markdown": "Markdown",
+            "text/html": "HTML"
         },
         "content_warning": "Oggetto (facoltativo)",
         "default": "Sono appena atterrato a Fiumicino.",
@@ -220,7 +261,15 @@
             "private": "Solo per seguaci - Visibile solo dai tuoi seguaci",
             "public": "Pubblico - Visibile sulla sequenza pubblica",
             "unlisted": "Non elencato - Non visibile sulla sequenza pubblica"
-        }
+        },
+        "scope_notice": {
+            "unlisted": "Questo messaggio non sarà visibile sulla sequenza locale né su quella pubblica",
+            "private": "Questo messaggio sarà visibile solo ai tuoi seguaci",
+            "public": "Questo messaggio sarà visibile a tutti"
+        },
+        "direct_warning_to_first_only": "Questo messaggio sarà visibile solo agli utenti menzionati all'inizio.",
+        "direct_warning_to_all": "Questo messaggio sarà visibile a tutti i menzionati.",
+        "new_status": "Nuovo messaggio"
     },
     "registration": {
         "bio": "Introduzione",
@@ -228,7 +277,20 @@
         "fullname": "Nome visualizzato",
         "password_confirm": "Conferma password",
         "registration": "Registrazione",
-        "token": "Codice d'invito"
+        "token": "Codice d'invito",
+        "validations": {
+            "password_confirmation_match": "dovrebbe essere uguale alla password",
+            "password_confirmation_required": "non può essere vuoto",
+            "password_required": "non può essere vuoto",
+            "email_required": "non può essere vuoto",
+            "fullname_required": "non può essere vuoto",
+            "username_required": "non può essere vuoto"
+        },
+        "bio_placeholder": "es.\nCiao, sono Lupo Lucio.\nSono un lupo fantastico che vive nel Fantabosco. Forse mi hai visto alla Melevisione.",
+        "fullname_placeholder": "es. Lupo Lucio",
+        "username_placeholder": "es. mister_wolf",
+        "new_captcha": "Clicca l'immagine per avere un altro captcha",
+        "captcha": "CAPTCHA"
     },
     "user_profile": {
         "timeline_title": "Sequenza dell'Utente"
@@ -307,7 +369,10 @@
         "not_enough_options": "Aggiungi altre risposte"
     },
     "interactions": {
-        "favs_repeats": "Condivisi e preferiti"
+        "favs_repeats": "Condivisi e preferiti",
+        "load_older": "Carica vecchie interazioni",
+        "moves": "Utenti migrati",
+        "follows": "Nuovi seguìti"
     },
     "emoji": {
         "load_all": "Carico tutti i {emojiAmount} emoji",
@@ -319,5 +384,13 @@
         "keep_open": "Tieni aperto il menù",
         "emoji": "Emoji",
         "stickers": "Adesivi"
+    },
+    "selectable_list": {
+        "select_all": "Seleziona tutto"
+    },
+    "remote_user_resolver": {
+        "error": "Non trovato.",
+        "searching_for": "Cerco",
+        "remote_user_resolver": "Cerca utenti remoti"
     }
 }

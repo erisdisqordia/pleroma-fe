@@ -9,5 +9,8 @@
   font-size: 15em;
   line-height: 0;
   opacity: .6;
+  > i {
+    color: white;
+  }
 }
 </style>

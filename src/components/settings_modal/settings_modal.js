@@ -13,14 +13,6 @@ const SettingsModal = {
       return this.$store.state.interface.settingsModalState === 'minimized'
     }
   },
-  methods: {
-    closeModal () {
-      this.$store.dispatch('closeSettingsModal')
-    },
-    peekModal () {
-      this.$store.dispatch('togglePeekSettingsModal')
-    }
-  }
 }
 
 export default SettingsModal

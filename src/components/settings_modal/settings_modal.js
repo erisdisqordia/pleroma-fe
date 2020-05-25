@@ -11,8 +11,7 @@ const SettingsModal = {
       {
         loading: BigSpinner,
         error: ErrorWindow,
-        delay: 0,
-        timeout: 3000
+        delay: 0
       }
     )
   },

@@ -147,8 +147,10 @@
     white-space: nowrap;
 
     padding: 6px 1em;
-    color: $fallback--text;
-    color: var(--tabText, $fallback--text);
+    &, &:active .tab-icon {
+      color: $fallback--text;
+      color: var(--tabText, $fallback--text);
+    }
     background-color: $fallback--fg;
     background-color: var(--tab, $fallback--fg);
 

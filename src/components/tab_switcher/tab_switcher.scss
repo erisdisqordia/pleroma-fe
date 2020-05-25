@@ -72,6 +72,9 @@
         border-right-color: $fallback--border;
         border-right-color: var(--border, $fallback--border);
       }
+      &::before {
+        flex-grow: 0;
+      }
       .tab-wrapper {
         min-width: 10em;
         display: flex;

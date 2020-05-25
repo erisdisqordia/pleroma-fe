@@ -47,6 +47,7 @@
             @click.stop.native
           />
           <a
+            href="#"
             class="mobile-hidden"
             @click.stop="openSettingsModal"
           >

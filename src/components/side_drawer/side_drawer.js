@@ -62,7 +62,10 @@ const SideDrawer = {
     },
     touchMove (e) {
       GestureService.updateSwipe(e, this.closeGesture)
-    }
+    },
+    openSettingsModal () {
+      this.$store.dispatch('openSettingsModal')
+    },
   }
 }
 

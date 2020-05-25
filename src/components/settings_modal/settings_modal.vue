@@ -1,15 +1,15 @@
 <template>
-<Modal
-  :is-open="modalActivated"
-  class="settings-modal"
-  :class="{ peek: modalPeeked }"
-  :no-background="modalPeeked"
+  <Modal
+    :is-open="modalActivated"
+    class="settings-modal"
+    :class="{ peek: modalPeeked }"
+    :no-background="modalPeeked"
   >
-  <SettingsModalContent
-    v-if="modalActivated"
-    class="modal-panel"
+    <SettingsModalContent
+      v-if="modalActivated"
+      class="modal-panel"
     />
-</Modal>
+  </Modal>
 </template>
 
 <script src="./settings_modal.js"></script>

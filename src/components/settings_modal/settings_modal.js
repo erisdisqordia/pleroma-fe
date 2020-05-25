@@ -12,7 +12,7 @@ const SettingsModal = {
     modalPeeked () {
       return this.$store.state.interface.settingsModalState === 'minimized'
     }
-  },
+  }
 }
 
 export default SettingsModal

@@ -5,7 +5,6 @@ import SharedComputedObject from './helpers/shared_computed_object.js'
 
 const GeneralTab = {
   data () {
-    const instance = this.$store.state.instance
     return {
       loopSilentAvailable:
       // Firefox
@@ -13,7 +12,7 @@ const GeneralTab = {
       // Chrome-likes
       Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'webkitAudioDecodedByteCount') ||
       // Future spec, still not supported in Nightly 63 as of 08/2018
-      Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'audioTracks'),
+      Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'audioTracks')
     }
   },
   components: {

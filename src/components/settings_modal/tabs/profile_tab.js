@@ -32,7 +32,7 @@ const ProfileTab = {
       background: null,
       backgroundPreview: null,
       bannerUploadError: null,
-      backgroundUploadError: null,
+      backgroundUploadError: null
     }
   },
   components: {

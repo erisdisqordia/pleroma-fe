@@ -10,7 +10,7 @@
             v-if="currentSaveStateNotice.error"
             class="alert error"
             @click.prevent
-            >
+          >
             {{ $t('settings.saving_err') }}
           </div>
 
@@ -18,7 +18,7 @@
             v-if="!currentSaveStateNotice.error"
             class="alert transparent"
             @click.prevent
-            >
+          >
             {{ $t('settings.saving_ok') }}
           </div>
         </template>

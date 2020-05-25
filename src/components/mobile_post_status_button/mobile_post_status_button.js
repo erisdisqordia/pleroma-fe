@@ -52,7 +52,7 @@ const MobilePostStatusButton = {
       window.removeEventListener('scroll', this.handleScrollEnd)
     },
     openPostForm () {
-      this.$store.dispatch('openSettingsModal')
+      this.$store.dispatch('openPostStatusModal')
     },
     handleOSK () {
       // This is a big hack: we're guessing from changed window sizes if the

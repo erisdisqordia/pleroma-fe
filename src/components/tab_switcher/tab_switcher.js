@@ -60,6 +60,9 @@ export default Vue.component('tab-switcher', {
           this.onSwitch.call(null, this.$slots.default[index].key)
         }
         this.active = index
+        if (this.scrollableTabs) {
+          this.$refs.contents.scrollTop = 0
+        }
       }
     }
   },
@@ -118,7 +121,7 @@ export default Vue.component('tab-switcher', {
         <div class="tabs">
           {tabs}
         </div>
-        <div class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')}>
+        <div ref="contents" class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')}>
           {contents}
         </div>
       </div>

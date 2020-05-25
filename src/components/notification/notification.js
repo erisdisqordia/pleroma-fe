@@ -21,7 +21,7 @@ const Notification = {
     UserAvatar,
     UserCard,
     Timeago,
-    Status,
+    Status
   },
   methods: {
     toggleUserExpanded () {

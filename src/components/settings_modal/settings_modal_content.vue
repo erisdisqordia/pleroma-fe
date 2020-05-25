@@ -4,6 +4,25 @@
       <span class="title">
         {{ $t('settings.settings') }}
       </span>
+      <transition name="fade">
+        <template v-if="currentSaveStateNotice">
+          <div
+            v-if="currentSaveStateNotice.error"
+            class="alert error"
+            @click.prevent
+            >
+            {{ $t('settings.saving_err') }}
+          </div>
+
+          <div
+            v-if="!currentSaveStateNotice.error"
+            class="alert transparent"
+            @click.prevent
+            >
+            {{ $t('settings.saving_ok') }}
+          </div>
+        </template>
+      </transition>
       <button
         class="btn"
         @click="peekModal"

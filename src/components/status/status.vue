@@ -18,9 +18,25 @@
     <template v-if="muted && !isPreview">
       <div class="media status container muted">
         <small>
+          <i
+            v-if="muted && retweet"
+            class="button-icon icon-retweet"
+          />
           <router-link :to="userProfileLink">
             {{ status.user.screen_name }}
           </router-link>
+        </small>
+        <small
+          v-if="showReasonMutedThread && muteWordHits.length === 0"
+          class="mutedThread"
+        >
+          {{ $t('status.thread_muted') }}
+        </small>
+        <small
+          v-if="showReasonMutedThread && muteWordHits.length > 0"
+          class="mutedThread"
+        >
+          {{ $t('status.thread_muted_and_words') }}
         </small>
         <small class="muteWords">{{ muteWordHits.join(', ') }}</small>
         <a
@@ -642,7 +658,7 @@ $status-margin: 0.75em;
     margin-left: auto;
   }
 
-  .muteWords {
+  .mutedThread, .muteWords {
     margin-left: 10px;
   }
 }

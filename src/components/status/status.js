@@ -122,8 +122,6 @@ const Status = {
         this.muteWordHits.length > 0
       )
       const excusesNotToMute = (
-        // Currently showing status
-        this.unmuted ||
         (
           this.inProfile && (
             // Don't mute user's posts on user timeline (except reblogs)
@@ -137,7 +135,7 @@ const Status = {
         // No excuses if post has muted words
       ) && !this.muteWordHits.length > 0
 
-      return !excusesNotToMute && reasonsToMute
+      return !this.unmuted && !excusesNotToMute && reasonsToMute
     },
     hideFilteredStatuses () {
       return this.mergedConfig.hideFilteredStatuses

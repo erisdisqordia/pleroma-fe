@@ -386,7 +386,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
             state.notifications.desktopNotificationSilence ||
             !visibleNotificationTypes.includes(notification.type) ||
             (
-              status && (
+              notification.type === 'mention' && status && (
                 status.muted ||
                   muteWordHits(status, rootGetters.mergedConfig.muteWords).length === 0
               )

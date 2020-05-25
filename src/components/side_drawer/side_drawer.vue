@@ -124,7 +124,7 @@
         <li @click="toggleDrawer">
           <a
             href="#"
-            @click.stop="openSettingsModal"
+            @click="openSettingsModal"
           >
             <i class="button-icon icon-cog" /> {{ $t("settings.settings") }}
           </a>

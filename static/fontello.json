@@ -363,6 +363,18 @@
       "css": "ok",
       "code": 59431,
       "src": "fontawesome"
+    },
+    {
+      "uid": "4109c474ff99cad28fd5a2c38af2ec6f",
+      "css": "filter",
+      "code": 61616,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "9a76bc135eac17d2c8b8ad4a5774fc87",
+      "css": "download",
+      "code": 59429,
+      "src": "fontawesome"
     }
   ]
 }

@@ -3,6 +3,11 @@
 .tab-switcher {
   display: flex;
 
+  .tab-icon {
+    font-size: 2em;
+    display: block;
+  }
+
   &.top-tabs {
     flex-direction: column;
     > .tabs {

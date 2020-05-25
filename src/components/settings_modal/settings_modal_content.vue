@@ -45,40 +45,47 @@
       >
         <div
           :label="$t('settings.general')"
+          icon="wrench"
         >
           <GeneralTab />
         </div>
         <div
           v-if="isLoggedIn"
           :label="$t('settings.profile_tab')"
+          icon="user"
         >
           <ProfileTab />
         </div>
         <div
           v-if="isLoggedIn"
           :label="$t('settings.security_tab')"
+          icon="lock"
         >
           <SecurityTab />
         </div>
         <div
           :label="$t('settings.filtering')"
+          icon="filter"
         >
           <FilteringTab />
         </div>
         <div
           :label="$t('settings.theme')"
+          icon="brush"
         >
           <ThemeTab />
         </div>
         <div
           v-if="isLoggedIn"
           :label="$t('settings.notifications')"
+          icon="chat"
         >
           <NotificationsTab />
         </div>
         <div
           v-if="isLoggedIn"
           :label="$t('settings.data_import_export_tab')"
+          icon="download"
         >
           <DataImportExportTab />
         </div>
@@ -87,11 +94,13 @@
           :label="$t('settings.mutes_and_blocks')"
           :fullHeight="true"
           class="full-height"
+          icon="eye-off"
         >
           <MutesAndBlocksTab />
         </div>
         <div
           :label="$t('settings.version.title')"
+          icon="info-circled"
         >
           <VersionTab />
         </div>

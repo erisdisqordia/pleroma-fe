@@ -94,8 +94,11 @@ export default Vue.component('tab-switcher', {
             <button
               disabled={slot.data.attrs.disabled}
               onClick={this.activateTab(index)}
-              class={classesTab.join(' ')}>
-              {slot.data.attrs.label}</button>
+              class={classesTab.join(' ')}
+            >
+              {!slot.data.attrs.icon ? '' : (<i class={'tab-icon icon-' + slot.data.attrs.icon}/>)}
+              {slot.data.attrs.label}
+            </button>
           </div>
         )
       })

@@ -538,9 +538,11 @@ const fetchTimeline = ({
   if (timeline === 'public' || timeline === 'publicAndExternal') {
     params.push(['only_media', false])
   }
+  if (timeline !== 'favorites') {
+    params.push(['with_muted', withMuted])
+  }
 
   params.push(['limit', 20])
-  params.push(['with_muted', withMuted])
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`

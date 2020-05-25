@@ -65,7 +65,7 @@ const SideDrawer = {
     },
     openSettingsModal () {
       this.$store.dispatch('openSettingsModal')
-    },
+    }
   }
 }
 

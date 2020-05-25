@@ -37,7 +37,6 @@
       </div>
     </div>
     <i
-      v-if="loggedIn"
       slot="trigger"
       class="icon-smile button-icon add-reaction-button"
       :title="$t('tool_tip.add_reaction')"

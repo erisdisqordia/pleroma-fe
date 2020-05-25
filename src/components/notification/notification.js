@@ -75,7 +75,7 @@ const Notification = {
       return this.generateUserProfileLink(this.targetUser)
     },
     needMute () {
-      return this.user.muted
+      return this.$store.getters.relationship(this.user.id).muting
     },
     isStatusNotification () {
       return isStatusNotification(this.notification.type)

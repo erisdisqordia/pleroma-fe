@@ -1,10 +1,9 @@
 import { filter, trim } from 'lodash'
-import { instanceDefaultProperties, defaultState as configDefaultState } from 'src/modules/config.js'
-
-const multiChoiceProperties = [
-  'postContentType',
-  'subjectLineBehavior'
-]
+import {
+  instanceDefaultProperties,
+  multiChoiceProperties,
+  defaultState as configDefaultState
+} from 'src/modules/config.js'
 
 const SharedComputedObject = () => ({
   user () {

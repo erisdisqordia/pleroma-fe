@@ -10,7 +10,7 @@
       <button
         class="btn"
         @click="retry"
-        >
+      >
         {{ $t('general.retry') }}
       </button>
     </div>

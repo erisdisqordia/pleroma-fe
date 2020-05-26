@@ -1,19 +1,17 @@
 <template>
-  <div class="error-window panel">
-    <div class="panel-heading">
-      <span class="title">
+  <div class="async-component-error">
+    <div>
+      <h4>
         {{ $t('general.generic_error') }}
-      </span>
-    </div>
-    <div class="panel-body">
+      </h4>
       <p>
         {{ $t('general.error_retry') }}
       </p>
       <button
         class="btn"
-        @click="closeAllModals"
-      >
-        {{ $t('general.close') }}
+        @click="retry"
+        >
+        {{ $t('general.retry') }}
       </button>
     </div>
   </div>
@@ -22,9 +20,7 @@
 <script>
 export default {
   methods: {
-    closeAllModals () {
-      // TODO make a global hook to close all modals?
-      this.$store.dispatch('closeSettingsModal')
+    retry () {
       this.$emit('resetAsyncComponent')
     }
   }
@@ -32,7 +28,11 @@ export default {
 </script>
 
 <style lang="scss">
-.error-window {
+.async-component-error {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
   .btn {
     margin: .5em;
     padding: .5em 2em;

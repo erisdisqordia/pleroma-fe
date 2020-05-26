@@ -1,6 +1,6 @@
 import Modal from 'src/components/modal/modal.vue'
-import BigSpinner from 'src/components/big_spinner/big_spinner.vue'
-import ErrorWindow from 'src/components/error_window/error_window.vue'
+import PanelLoading from 'src/components/panel_loading/panel_loading.vue'
+import AsyncComponentError from 'src/components/async_component_error/async_component_error.vue'
 import getResettableAsyncComponent from 'src/services/resettable_async_component.js'
 
 const SettingsModal = {
@@ -9,11 +9,19 @@ const SettingsModal = {
     SettingsModalContent: getResettableAsyncComponent(
       () => import('./settings_modal_content.vue'),
       {
-        loading: BigSpinner,
-        error: ErrorWindow,
+        loading: PanelLoading,
+        error: AsyncComponentError,
         delay: 0
       }
     )
+  },
+  methods: {
+    closeModal () {
+      this.$store.dispatch('closeSettingsModal')
+    },
+    peekModal () {
+      this.$store.dispatch('togglePeekSettingsModal')
+    }
   },
   computed: {
     modalActivated () {

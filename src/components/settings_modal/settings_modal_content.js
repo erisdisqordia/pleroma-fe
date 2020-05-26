@@ -31,14 +31,6 @@ const SettingsModalContent = {
     isLoggedIn () {
       return !!this.$store.state.users.currentUser
     }
-  },
-  methods: {
-    closeModal () {
-      this.$store.dispatch('closeSettingsModal')
-    },
-    peekModal () {
-      this.$store.dispatch('togglePeekSettingsModal')
-    }
   }
 }
 

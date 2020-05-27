@@ -95,20 +95,25 @@
     align-items: baseline;
     width: 100%;
     min-height: 30px;
-
-    .btn {
-      min-width: 1px;
-      flex: 0 auto;
-      padding: 0 1em;
-    }
+    margin-bottom: 1em;
 
     p {
       flex: 1;
       margin: 0;
       margin-right: .5em;
     }
+  }
 
-    margin-bottom: 1em;
+  .tab-header-buttons {
+    display: flex;
+    flex-direction: column;
+
+    .btn {
+      min-width: 1px;
+      flex: 0 auto;
+      padding: 0 1em;
+      margin-bottom: .5em;
+    }
   }
 
   .shadow-selector {

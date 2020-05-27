@@ -25,9 +25,6 @@ const SettingsModalContent = {
     ThemeTab
   },
   computed: {
-    currentSaveStateNotice () {
-      return this.$store.state.interface.settings.currentSaveStateNotice
-    },
     isLoggedIn () {
       return !!this.$store.state.users.currentUser
     }

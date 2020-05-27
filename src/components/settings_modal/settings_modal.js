@@ -24,6 +24,9 @@ const SettingsModal = {
     }
   },
   computed: {
+    currentSaveStateNotice () {
+      return this.$store.state.interface.settings.currentSaveStateNotice
+    },
     modalActivated () {
       return this.$store.state.interface.settingsModalState !== 'hidden'
     },

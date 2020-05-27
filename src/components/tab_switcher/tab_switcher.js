@@ -95,9 +95,12 @@ export default Vue.component('tab-switcher', {
               disabled={slot.data.attrs.disabled}
               onClick={this.activateTab(index)}
               class={classesTab.join(' ')}
+              type="button"
             >
               {!slot.data.attrs.icon ? '' : (<i class={'tab-icon icon-' + slot.data.attrs.icon}/>)}
-              {slot.data.attrs.label}
+              <span class="text">
+                {slot.data.attrs.label}
+              </span>
             </button>
           </div>
         )
@@ -110,13 +113,23 @@ export default Vue.component('tab-switcher', {
       if (slot.data.attrs.fullHeight) {
         classes.push('full-height')
       }
+      const newSlot = (
+        <div class={classes}>
+          {
+            this.sideTabBar
+              ? <h1 class="mobile-label">{slot.data.attrs.label}</h1>
+              : ''
+          }
+          {slot}
+        </div>
+      )
 
       if (this.renderOnlyFocused) {
         return active
-          ? <div class={classes.join(' ')}>{slot}</div>
+          ? <div class={classes.join(' ')}>{newSlot}</div>
           : <div class={classes.join(' ')}></div>
       }
-      return <div class={classes.join(' ')}>{slot}</div>
+      return <div class={classes.join(' ')}>{newSlot}</div>
     })
 
     return (

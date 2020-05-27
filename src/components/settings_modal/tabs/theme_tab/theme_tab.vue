@@ -126,18 +126,20 @@
         >
           <div class="tab-header">
             <p>{{ $t('settings.theme_help') }}</p>
-            <button
-              class="btn"
-              @click="clearOpacity"
-            >
-              {{ $t('settings.style.switcher.clear_opacity') }}
-            </button>
-            <button
-              class="btn"
-              @click="clearV1"
-            >
-              {{ $t('settings.style.switcher.clear_all') }}
-            </button>
+            <div class="tab-header-buttons">
+              <button
+                class="btn"
+                @click="clearOpacity"
+              >
+                {{ $t('settings.style.switcher.clear_opacity') }}
+              </button>
+              <button
+                class="btn"
+                @click="clearV1"
+              >
+                {{ $t('settings.style.switcher.clear_all') }}
+              </button>
+            </div>
           </div>
           <p>{{ $t('settings.theme_help_v2_1') }}</p>
           <h4>{{ $t('settings.style.common_colors.main') }}</h4>

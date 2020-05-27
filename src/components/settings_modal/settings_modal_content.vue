@@ -40,7 +40,7 @@
     <div
       v-if="isLoggedIn"
       :label="$t('settings.notifications')"
-      icon="chat"
+      icon="bell-ringing-o"
     >
       <NotificationsTab />
     </div>

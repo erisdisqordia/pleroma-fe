@@ -35,7 +35,7 @@
         "followed_you": "ti segue",
         "notifications": "Notifiche",
         "read": "Letto!",
-        "broken_favorite": "Stato sconosciuto, lo sto cercando...",
+        "broken_favorite": "Stato sconosciuto, lo sto cercando…",
         "favorited_you": "ha gradito il tuo messaggio",
         "load_older": "Carica notifiche precedenti",
         "repeated_you": "ha condiviso il tuo messaggio",
@@ -168,7 +168,7 @@
             },
             "authentication_methods": "Metodi di accesso",
             "recovery_codes_warning": "Appuntati i codici o salvali in un posto sicuro, altrimenti rischi di non rivederli mai più. Se perderai l'accesso sia alla tua applicazione bifattoriale che ai codici di recupero non potrai più accedere al tuo profilo.",
-            "waiting_a_recovery_codes": "Ricevo codici di recupero...",
+            "waiting_a_recovery_codes": "Ricevo codici di recupero…",
             "recovery_codes": "Codici di recupero.",
             "warning_of_generate_new_codes": "Alla generazione di nuovi codici di recupero, quelli vecchi saranno disattivati.",
             "generate_new_recovery_codes": "Genera nuovi codici di recupero",
@@ -187,7 +187,12 @@
                     "older_version_imported": "Il tema importato è stato creato per una versione precedente dell'interfaccia.",
                     "future_version_imported": "Il tema importato è stato creato per una versione più recente dell'interfaccia.",
                     "v2_imported": "Il tema importato è stato creato per una vecchia interfaccia. Non tutto potrebbe essere come prima.",
-                    "upgraded_from_v2": "L'interfaccia è stata aggiornata, il tema potrebbe essere diverso da come lo intendevi."
+                    "upgraded_from_v2": "L'interfaccia è stata aggiornata, il tema potrebbe essere diverso da come lo intendevi.",
+                    "migration_snapshot_ok": "Ho caricato l'anteprima del tema. Puoi provare a caricarne i contenuti.",
+                    "fe_downgraded": "L'interfaccia è stata portata ad una versione precedente.",
+                    "fe_upgraded": "Lo schema dei temi è stato aggiornato insieme all'interfaccia.",
+                    "snapshot_missing": "Il tema non è provvisto di anteprima, quindi potrebbe essere diverso da come appare.",
+                    "snapshot_present": "Tutti i valori sono sostituiti dall'anteprima del tema. Puoi invece caricare i suoi contenuti."
                 },
                 "use_source": "Nuova versione",
                 "use_snapshot": "Versione precedente",
@@ -261,7 +266,8 @@
         "hide_muted_posts": "Nascondi messaggi degli utenti zittiti",
         "accent": "Accento",
         "emoji_reactions_on_timeline": "Mostra emoji di reazione sulle sequenze",
-        "pad_emoji": "Affianca spazi agli emoji inseriti tramite selettore"
+        "pad_emoji": "Affianca spazi agli emoji inseriti tramite selettore",
+        "notification_blocks": "Bloccando un utente non riceverai più le sue notifiche né lo seguirai più."
     },
     "timeline": {
         "error_fetching": "Errore nell'aggiornamento",
@@ -412,9 +418,9 @@
     },
     "domain_mute_card": {
         "mute": "Zittisci",
-        "mute_progress": "Zittisco...",
+        "mute_progress": "Zittisco…",
         "unmute": "Ascolta",
-        "unmute_progress": "Procedo..."
+        "unmute_progress": "Procedo…"
     },
     "exporter": {
         "export": "Esporta",

@@ -125,8 +125,9 @@
         border-bottom-right-radius: 0;
         padding-left: 1em;
         padding-right: calc(1em + 200px);
-        margin-right: calc(1em - 200px);
+        margin-right: -200px;
         margin-left: 1em;
+
         @media all and (max-width: 800px) {
           padding-left: .25em;
           padding-right: calc(.25em + 200px);
@@ -146,6 +147,14 @@
 
     .hidden {
       display: none;
+    }
+    .full-height {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      > *:not(.mobile-label) {
+        flex: 1;
+      }
     }
 
     &.scrollable-tabs {

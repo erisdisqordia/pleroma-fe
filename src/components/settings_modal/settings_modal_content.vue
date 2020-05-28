@@ -55,7 +55,6 @@
       v-if="isLoggedIn"
       :label="$t('settings.mutes_and_blocks')"
       :fullHeight="true"
-      class="full-height"
       icon="eye-off"
     >
       <MutesAndBlocksTab />

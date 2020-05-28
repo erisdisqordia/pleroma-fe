@@ -113,23 +113,20 @@ export default Vue.component('tab-switcher', {
       if (slot.data.attrs.fullHeight) {
         classes.push('full-height')
       }
-      const newSlot = (
+      const renderSlot = (!this.renderOnlyFocused || active)
+        ? slot
+        : ''
+
+      return (
         <div class={classes}>
           {
             this.sideTabBar
               ? <h1 class="mobile-label">{slot.data.attrs.label}</h1>
               : ''
           }
-          {slot}
+          {renderSlot}
         </div>
       )
-
-      if (this.renderOnlyFocused) {
-        return active
-          ? <div class={classes.join(' ')}>{newSlot}</div>
-          : <div class={classes.join(' ')}></div>
-      }
-      return <div class={classes.join(' ')}>{newSlot}</div>
     })
 
     return (

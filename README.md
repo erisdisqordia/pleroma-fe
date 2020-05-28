@@ -1,4 +1,4 @@
-# pleroma_fe
+# Pleroma-FE 
 
 > A single column frontend designed for Pleroma.
 

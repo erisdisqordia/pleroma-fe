@@ -148,7 +148,7 @@
     .hidden {
       display: none;
     }
-    .full-height {
+    .full-height:not(.hidden) {
       height: 100%;
       display: flex;
       flex-direction: column;

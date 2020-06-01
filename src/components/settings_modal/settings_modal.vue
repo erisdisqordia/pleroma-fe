@@ -43,7 +43,7 @@
         </button>
       </div>
       <div class="panel-body">
-        <SettingsModalContent v-if="modalActivated" />
+        <SettingsModalContent v-if="modalOpenedOnce" />
       </div>
     </div>
   </Modal>

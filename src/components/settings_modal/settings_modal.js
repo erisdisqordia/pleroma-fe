@@ -30,6 +30,9 @@ const SettingsModal = {
     modalActivated () {
       return this.$store.state.interface.settingsModalState !== 'hidden'
     },
+    modalOpenedOnce () {
+      return this.$store.state.interface.settingsModalLoaded
+    },
     modalPeeked () {
       return this.$store.state.interface.settingsModalState === 'minimized'
     }

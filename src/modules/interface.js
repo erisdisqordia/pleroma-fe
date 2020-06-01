@@ -2,6 +2,7 @@ import { set, delete as del } from 'vue'
 
 const defaultState = {
   settingsModalState: 'hidden',
+  settingsModalLoaded: false,
   settings: {
     currentSaveStateNotice: null,
     noticeClearTimeout: null,
@@ -54,6 +55,9 @@ const interfaceMod = {
     },
     openSettingsModal (state) {
       state.settingsModalState = 'visible'
+      if (!state.settingsModalLoaded) {
+        state.settingsModalLoaded = true
+      }
     }
   },
   actions: {

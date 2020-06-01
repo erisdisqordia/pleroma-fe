@@ -604,9 +604,9 @@
     },
     "domain_mute_card": {
         "mute": "Negeren",
-        "mute_progress": "Negeren...",
+        "mute_progress": "Negeren…",
         "unmute": "Negering opheffen",
-        "unmute_progress": "Negering wordt opgeheven..."
+        "unmute_progress": "Negering wordt opgeheven…"
     },
     "exporter": {
         "export": "Exporteren",

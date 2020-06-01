@@ -28,17 +28,17 @@
         </small>
         <small
           v-if="showReasonMutedThread && muteWordHits.length === 0"
-          class="mutedThread"
+          class="muted-thread"
         >
           {{ $t('status.thread_muted') }}
         </small>
         <small
           v-if="showReasonMutedThread && muteWordHits.length > 0"
-          class="mutedThread"
+          class="muted-Thread"
         >
           {{ $t('status.thread_muted_and_words') }}
         </small>
-        <small class="muteWords">{{ muteWordHits.join(', ') }}</small>
+        <small class="mute-words">{{ muteWordHits.join(', ') }}</small>
         <a
           href="#"
           class="unmute"
@@ -658,7 +658,7 @@ $status-margin: 0.75em;
     margin-left: auto;
   }
 
-  .mutedThread, .muteWords {
+  .muted-thread, .mute-words {
     margin-left: 10px;
   }
 }

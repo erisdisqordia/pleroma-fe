@@ -31,7 +31,8 @@
         "disable": "Désactiver",
         "enable": "Activer",
         "confirm": "Confirmer",
-        "verify": "Vérifier"
+        "verify": "Vérifier",
+        "dismiss": "Rejeter"
     },
     "image_cropper": {
         "crop_picture": "Rogner l'image",

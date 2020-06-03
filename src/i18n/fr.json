@@ -167,7 +167,7 @@
             "generate_new_recovery_codes": "Générer de nouveaux codes de récupération",
             "warning_of_generate_new_codes": "Quand vous générez de nouveauc codes de récupération, vos anciens codes ne fonctionnerons plus.",
             "recovery_codes": "Codes de récupération.",
-            "waiting_a_recovery_codes": "Récéption des codes de récupération…",
+            "waiting_a_recovery_codes": "Réception des codes de récupération…",
             "recovery_codes_warning": "Écrivez les codes ou sauvez les quelquepart sécurisé - sinon vous ne les verrez plus jamais. Si vous perdez l'accès à votre application de double authentification et codes de récupération vous serez vérouillé en dehors de votre compte.",
             "authentication_methods": "Methodes d'authentification",
             "scan": {
@@ -210,7 +210,7 @@
         "data_import_export_tab": "Import / Export des Données",
         "default_vis": "Visibilité par défaut",
         "delete_account": "Supprimer le compte",
-        "delete_account_description": "Supprimer définitivement votre compte et tous vos statuts.",
+        "delete_account_description": "Supprimer définitivement vos données et désactiver votre compte.",
         "delete_account_error": "Il y a eu un problème lors de la tentative de suppression de votre compte. Si le problème persiste, contactez l'administrateur⋅ice de cette instance.",
         "delete_account_instructions": "Indiquez votre mot de passe ci-dessous pour confirmer la suppression de votre compte.",
         "avatar_size_instruction": "La taille minimale recommandée pour l'image de l'avatar est de 150x150 pixels.",
@@ -343,7 +343,13 @@
                     "upgraded_from_v2": "PleromaFE à été mis à jour, le thème peut être un peu différent que dans vos souvenirs.",
                     "v2_imported": "Le fichier que vous avez importé vient d'un version antérieure. Nous essayons de maximizer la compatibilité mais il peu y avoir quelques incohérences.",
                     "future_version_imported": "Le fichier importé viens d'une version postérieure de PleromaFE.",
-                    "older_version_imported": "Le fichier importé viens d'une version antérieure de PleromaFE."
+                    "older_version_imported": "Le fichier importé viens d'une version antérieure de PleromaFE.",
+                    "snapshot_source_mismatch": "Conflict de version : Probablement due à un retour arrière puis remise à jour de la version de PleromaFE, si vous avez charger le thème en utilisant une version antérieure vous voulez probablement utiliser la version antérieure, autrement utiliser la version postérieure.",
+                    "migration_napshot_gone": "Pour une raison inconnue l'instantané est manquant, des parties peuvent rendre différentes que dans vos souvenirs.",
+                    "migration_snapshot_ok": "Pour être sûr un instantanée du thème à été chargé. Vos pouvez essayer de charger ses données.",
+                    "fe_downgraded": "Retour en arrière de la version de PleromaFE.",
+                    "fe_upgraded": "Le moteur de thème PleromaFE à été mis à jour après un changement de version.",
+                    "snapshot_missing": "Aucun instantané du thème à été trouvé dans le fichier, il peut y avoir un rendu différent à la vision originelle."
                 },
                 "keep_as_is": "Garder tel-quel",
                 "use_source": "Nouvelle version"
@@ -392,7 +398,10 @@
                 "selectedPost": "Message sélectionné",
                 "selectedMenu": "Objet sélectionné du menu",
                 "disabled": "Désactivé",
-                "tabs": "Onglets"
+                "tabs": "Onglets",
+                "toggled": "(Dés)activé",
+                "highlight": "Éléments mis en valeur",
+                "popover": "Infobulles, menus"
             },
             "radii": {
                 "_tab_label": "Rondeur"
@@ -482,7 +491,9 @@
         "useStreamingApi": "Recevoir les messages et notifications en temps réel",
         "notification_setting_filters": "Filtres",
         "notification_setting_privacy_option": "Masquer l'expéditeur et le contenu des notifications push",
-        "notification_setting_privacy": "Intimité"
+        "notification_setting_privacy": "Intimité",
+        "hide_followers_count_description": "Masquer le nombre d'abonnés",
+        "accent": "Accent"
     },
     "timeline": {
         "collapse": "Fermer",
@@ -666,10 +677,13 @@
         "unicode": "émoji unicode",
         "load_all": "Charger tout les {emojiAmount} émojis",
         "load_all_hint": "{saneAmount} émojis chargé, charger tout les émojis peuvent causer des problèmes de performances.",
-        "stickers": "Stickers"
+        "stickers": "Stickers",
+        "keep_open": "Garder le sélecteur ouvert"
     },
     "remote_user_resolver": {
-        "error": "Non trouvé."
+        "error": "Non trouvé.",
+        "searching_for": "Rechercher",
+        "remote_user_resolver": "Résolution de compte distant"
     },
     "time": {
         "minutes_short": "{0}min",

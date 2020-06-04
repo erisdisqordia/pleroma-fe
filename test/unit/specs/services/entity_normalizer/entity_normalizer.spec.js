@@ -366,8 +366,8 @@ describe('API Entities normalizer', () => {
         shortcode: '[a-z] {|}*'
       }])
       const result = addEmojis('This post has :c++: emoji and :[a-z] {|}*: emoji', emojis)
-      expect(result).to.include('title=\'c++\'')
-      expect(result).to.include('title=\'[a-z] {|}*\'')
+      expect(result).to.include('title=\':c++:\'')
+      expect(result).to.include('title=\':[a-z] {|}*:\'')
     })
   })
 })

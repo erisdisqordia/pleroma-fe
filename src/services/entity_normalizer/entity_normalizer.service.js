@@ -210,7 +210,7 @@ export const addEmojis = (string, emojis) => {
     const regexSafeShortCode = emoji.shortcode.replace(matchOperatorsRegex, '\\$&')
     return acc.replace(
       new RegExp(`:${regexSafeShortCode}:`, 'g'),
-      `<img src='${emoji.url}' alt='${emoji.shortcode}' title='${emoji.shortcode}' class='emoji' />`
+      `<img src='${emoji.url}' alt=':${emoji.shortcode}:' title=':${emoji.shortcode}:' class='emoji' />`
     )
   }, string)
 }

@@ -55,13 +55,13 @@
     },
     "notifications": {
         "followed_you": "alustas sinu jälgimist",
-        "notifications": "Teavitused",
+        "notifications": "Teated",
         "read": "Loe!",
         "reacted_with": "reageeris {0}",
-        "migrated_to": "migreerus",
-        "no_more_notifications": "Rohkem teavitusi ei ole",
+        "migrated_to": "kolis",
+        "no_more_notifications": "Rohkem teateid ei ole",
         "repeated_you": "taaspostitas su staatuse",
-        "load_older": "Laadi vanemad teavitused",
+        "load_older": "Laadi vanemad teated",
         "follow_request": "soovib Teid jälgida",
         "favorited_you": "lisas su staatuse lemmikuks",
         "broken_favorite": "Tundmatu staatus, otsin…"
@@ -251,7 +251,7 @@
         "block_export": "Blokeeringute eksport",
         "background": "Taust",
         "avatarRadius": "Profiilipildid",
-        "avatarAltRadius": "Profiilipildid (Teavitused)",
+        "avatarAltRadius": "Profiilipildid (Teated)",
         "attachmentRadius": "Manused",
         "allow_following_move": "Luba automaatjälgimine kui jälgitav konto kolib",
         "mfa": {
@@ -277,7 +277,60 @@
         },
         "enter_current_password_to_confirm": "Sisetage isiku tõestamiseks oma salasõna",
         "security": "Turvalisus",
-        "app_name": "Rakenduse nimi"
+        "app_name": "Rakenduse nimi",
+        "style": {
+            "switcher": {
+                "help": {
+                    "snapshot_present": "Kujunduse eelvaade on laetud, nii et kõik väärtused on üle kirjutatud. Te saate laadida ka kujunduse päris sisu.",
+                    "older_version_imported": "Teie imporditud fail oli loodud vanemas versioonis.",
+                    "future_version_imported": "Teie imporditud fail oli loodud uuemas versioonis.",
+                    "v2_imported": "Teie imporditud fail oli vanema versiooni jaoks. Me üritame hoida ühilduvust, kuid ikkagi võib esineda erinevusi.",
+                    "upgraded_from_v2": "PleromaFE-d uuendati, teie kujundus võib välja näha natuke erinev, kui mäletate."
+                },
+                "use_source": "Uus versioon",
+                "use_snapshot": "Vana versioon",
+                "keep_as_is": "Jäta nii, nagu on",
+                "load_theme": "Lae kujundus",
+                "clear_opacity": "Tühista läbipaistvus",
+                "clear_all": "Tühista kõik",
+                "reset": "Taasta algne",
+                "keep_fonts": "Jäta fondid",
+                "keep_roundness": "Jäta ümarus",
+                "keep_opacity": "Jäta läbipaistvus",
+                "keep_shadows": "Jäta varjud",
+                "keep_color": "Jäta värvid"
+            }
+        },
+        "enable_web_push_notifications": "Luba veebipõhised push-teated",
+        "notification_blocks": "Kasutaja blokeerimisel ei tule neilt enam teateid ning nendele teilt ka mitte.",
+        "notification_setting_privacy_option": "Peida saatja ning sisu push-teadetelt",
+        "notification_setting": "Saa teateid nendelt:",
+        "notifications": "Teated",
+        "notification_mutes": "Kui soovid mõnelt kasutajalt mitte teateid saada, kasuta vaigistust.",
+        "notification_setting_privacy": "Privaatsus",
+        "notification_setting_non_followers": "Kasutajatelt, kes sind ei jälgi",
+        "notification_setting_followers": "Kasutajatelt, kes jälgivad sind",
+        "notification_setting_non_follows": "Kasutajatelt, keda sa ei jälgi",
+        "notification_setting_follows": "Kasutajatelt, keda jälgid",
+        "notification_setting_filters": "Filtrid",
+        "greentext": "Meemi nooled",
+        "fun": "Naljad",
+        "values": {
+            "true": "jah",
+            "false": "ei"
+        },
+        "upload_a_photo": "Lae üles foto",
+        "type_domains_to_mute": "Trüki siia domeene, mida vaigistada",
+        "tooltipRadius": "Vihjed/hoiatused",
+        "theme_help_v2_1": "Te saate ka mõndade komponentide värvust ning läbipaistvust üle kirjutada vajutades ruudule. Kasuta \"Tühista kõik\" nuppu, et need tühistada.",
+        "theme_help": "Kasuta hex värvikoode (#rrggbb) oma kujunduse isikupärastamiseks.",
+        "text": "Tekst",
+        "useStreamingApiWarning": "(Pole soovituslik, eksperimentaalne, on teada, et jätab postitusi vahele)",
+        "useStreamingApi": "Saa postitusi ning teateid reaalajas",
+        "user_mutes": "Kasutajad",
+        "streaming": "Luba uute postituste automaatvoog kui oled lehekülje alguses",
+        "stop_gifs": "Mängi GIFid hiirega ületades",
+        "post_status_content_type": "Postituse sisutüüp"
     },
     "timeline": {
         "conversation": "Vestlus",

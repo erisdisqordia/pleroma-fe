@@ -192,7 +192,9 @@
                     "fe_downgraded": "L'interfaccia è stata portata ad una versione precedente.",
                     "fe_upgraded": "Lo schema dei temi è stato aggiornato insieme all'interfaccia.",
                     "snapshot_missing": "Il tema non è provvisto di anteprima, quindi potrebbe essere diverso da come appare.",
-                    "snapshot_present": "Tutti i valori sono sostituiti dall'anteprima del tema. Puoi invece caricare i suoi contenuti."
+                    "snapshot_present": "Tutti i valori sono sostituiti dall'anteprima del tema. Puoi invece caricare i suoi contenuti.",
+                    "snapshot_source_mismatch": "Conflitto di versione: probabilmente l'interfaccia è stata portata ad una versione precedente e poi aggiornata di nuovo. Se hai modificato il tema con una versione precedente dell'interfaccia, usa la vecchia versione del tema, altrimenti puoi usare la nuova.",
+                    "migration_napshot_gone": "Anteprima del tema non trovata, non tutto potrebbe essere come ricordi."
                 },
                 "use_source": "Nuova versione",
                 "use_snapshot": "Versione precedente",
@@ -207,6 +209,10 @@
                 "keep_opacity": "Mantieni opacità",
                 "keep_shadows": "Mantieni ombre",
                 "keep_color": "Mantieni colori"
+            },
+            "common": {
+                "opacity": "Opacità",
+                "color": "Colore"
             }
         },
         "enable_web_push_notifications": "Abilita notifiche web push",

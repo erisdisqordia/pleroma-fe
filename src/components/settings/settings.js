@@ -30,7 +30,8 @@ const settings = {
         Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'audioTracks'),
 
       backendVersion: instance.backendVersion,
-      frontendVersion: instance.frontendVersion
+      frontendVersion: instance.frontendVersion,
+      muteWordsStringLocal: this.$store.getters.mergedConfig.muteWords.join('\n')
     }
   },
   components: {
@@ -86,8 +87,11 @@ const settings = {
       .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}),
     // Special cases (need to transform values or perform actions first)
     muteWordsString: {
-      get () { return this.$store.getters.mergedConfig.muteWords.join('\n') },
+      get () {
+        return this.muteWordsStringLocal
+      },
       set (value) {
+        this.muteWordsStringLocal = value
         this.$store.dispatch('setOption', {
           name: 'muteWords',
           value: filter(value.split('\n'), (word) => trim(word).length > 0)

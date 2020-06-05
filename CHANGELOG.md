@@ -13,9 +13,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Registration page no longer requires email if the server is configured not to require it
+- Change heart to thumbs up in reaction picker
+- Close the media modal on navigation events
+- Add colons to the emoji alt text, to make them copyable
 
 ### Fixed
 - Status ellipsis menu closes properly when selecting certain options
+- Cropped images look correct in Chrome
+- Newlines in the muted words settings work again
+- Clicking on non-latin hashtags won't open a new window
 
 ## [2.0.3] - 2020-05-02
 ### Fixed

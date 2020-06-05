@@ -23,12 +23,21 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
+.contain-fit {
+  .still-image {
+    img {
+      height: 100%;
+    }
+  }
+}
+
 .still-image {
   position: relative;
   line-height: 0;
   overflow: hidden;
   width: 100%;
   height: 100%;
+  display: flex;
 
   &:hover canvas {
     display: none;
@@ -36,8 +45,8 @@
 
   img {
     width: 100%;
-    height: 100%;
     object-fit: contain;
+    align-self: center;
   }
 
   &.animated {

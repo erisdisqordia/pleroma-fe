@@ -31,7 +31,7 @@ const settings = {
 
       backendVersion: instance.backendVersion,
       frontendVersion: instance.frontendVersion,
-      muteWordsStringLocal: this.$store.getters.mergedConfig.muteWords.join('\n') 
+      muteWordsStringLocal: this.$store.getters.mergedConfig.muteWords.join('\n')
     }
   },
   components: {
@@ -87,7 +87,7 @@ const settings = {
       .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}),
     // Special cases (need to transform values or perform actions first)
     muteWordsString: {
-      get () { 
+      get () {
         return this.muteWordsStringLocal
       },
       set (value) {

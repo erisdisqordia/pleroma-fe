@@ -621,7 +621,9 @@
     "mute_conversation": "Mute conversation",
     "unmute_conversation": "Unmute conversation",
     "status_unavailable": "Status unavailable",
-    "copy_link": "Copy link to status"
+    "copy_link": "Copy link to status",
+    "thread_muted": "Thread muted",
+    "thread_muted_and_words": ", has words:"
   },
   "user_card": {
     "approve": "Approve",

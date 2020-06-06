@@ -144,7 +144,6 @@
 }
 .mfa-settings {
   .mfa-heading, .method-item {
-    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

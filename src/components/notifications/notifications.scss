@@ -36,6 +36,8 @@
   border-bottom: 1px solid;
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
+  word-wrap: break-word;
+  word-break: break-word;
 
   &:hover .animated.avatar {
     canvas {
@@ -44,10 +46,6 @@
     img {
       visibility: visible;
     }
-  }
-
-  .muted {
-    padding: .25em .6em;
   }
 
   .non-mention {

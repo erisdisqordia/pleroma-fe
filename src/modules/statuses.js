@@ -15,7 +15,7 @@ import {
 import { set } from 'vue'
 import { isStatusNotification } from '../services/notification_utils/notification_utils.js'
 import apiService from '../services/api/api.service.js'
-// import parse from '../services/status_parser/status_parser.js'
+import { muteWordHits } from '../services/status_parser/status_parser.js'
 
 const emptyTl = (userId = 0) => ({
   statuses: [],
@@ -381,7 +381,18 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
           notifObj.image = status.attachments[0].url
         }
 
-        if (!notification.seen && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.type)) {
+        const reasonsToMuteNotif = (
+          notification.seen ||
+            state.notifications.desktopNotificationSilence ||
+            !visibleNotificationTypes.includes(notification.type) ||
+            (
+              notification.type === 'mention' && status && (
+                status.muted ||
+                  muteWordHits(status, rootGetters.mergedConfig.muteWords).length === 0
+              )
+            )
+        )
+        if (!reasonsToMuteNotif) {
           let desktopNotification = new window.Notification(title, notifObj)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.

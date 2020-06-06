@@ -1,4 +1,3 @@
-import { filter, trim } from 'lodash'
 import {
   instanceDefaultProperties,
   multiChoiceProperties,
@@ -38,15 +37,6 @@ const SharedComputedObject = () => ({
     }])
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}),
   // Special cases (need to transform values or perform actions first)
-  muteWordsString: {
-    get () { return this.$store.getters.mergedConfig.muteWords.join('\n') },
-    set (value) {
-      this.$store.dispatch('setOption', {
-        name: 'muteWords',
-        value: filter(value.split('\n'), (word) => trim(word).length > 0)
-      })
-    }
-  },
   useStreamingApi: {
     get () { return this.$store.getters.mergedConfig.useStreamingApi },
     set (value) {

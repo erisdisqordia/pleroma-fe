@@ -24,7 +24,7 @@ const ReactButton = {
   },
   computed: {
     commonEmojis () {
-      return ['❤️', '😠', '👀', '😂', '🔥']
+      return ['👍', '😠', '👀', '😂', '🔥']
     },
     emojis () {
       if (this.filterWord !== '') {

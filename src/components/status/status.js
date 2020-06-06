@@ -12,7 +12,8 @@ import StatusPopover from '../status_popover/status_popover.vue'
 import EmojiReactions from '../emoji_reactions/emoji_reactions.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
-import { filter, unescape, uniqBy } from 'lodash'
+import { muteWordHits } from '../../services/status_parser/status_parser.js'
+import { unescape, uniqBy } from 'lodash'
 import { mapGetters, mapState } from 'vuex'
 
 const Status = {
@@ -43,6 +44,12 @@ const Status = {
   computed: {
     muteWords () {
       return this.mergedConfig.muteWords
+    },
+    showReasonMutedThread () {
+      return (
+        this.status.thread_muted ||
+          (this.status.reblog && this.status.reblog.thread_muted)
+      ) && !this.inConversation
     },
     repeaterClass () {
       const user = this.statusoid.user
@@ -93,20 +100,42 @@ const Status = {
       return !!this.currentUser
     },
     muteWordHits () {
-      const statusText = this.status.text.toLowerCase()
-      const statusSummary = this.status.summary.toLowerCase()
-      const hits = filter(this.muteWords, (muteWord) => {
-        return statusText.includes(muteWord.toLowerCase()) || statusSummary.includes(muteWord.toLowerCase())
-      })
-
-      return hits
+      return muteWordHits(this.status, this.muteWords)
     },
     muted () {
-      const relationship = this.$store.getters.relationship(this.status.user.id)
-      return !this.unmuted && (
-        (!(this.inProfile && this.status.user.id === this.profileUserId) && relationship.muting) ||
-        (!this.inConversation && this.status.thread_muted) ||
-        this.muteWordHits.length > 0)
+      const { status } = this
+      const { reblog } = status
+      const relationship = this.$store.getters.relationship(status.user.id)
+      const relationshipReblog = reblog && this.$store.getters.relationship(reblog.user.id)
+      const reasonsToMute = (
+        // Post is muted according to BE
+        status.muted ||
+        // Reprööt of a muted post according to BE
+        (reblog && reblog.muted) ||
+        // Muted user
+        relationship.muting ||
+        // Muted user of a reprööt
+        (relationshipReblog && relationshipReblog.muting) ||
+        // Thread is muted
+        status.thread_muted ||
+        // Wordfiltered
+        this.muteWordHits.length > 0
+      )
+      const excusesNotToMute = (
+        (
+          this.inProfile && (
+            // Don't mute user's posts on user timeline (except reblogs)
+            (!reblog && status.user.id === this.profileUserId) ||
+            // Same as above but also allow self-reblogs
+            (reblog && reblog.user.id === this.profileUserId)
+          )
+        ) ||
+        // Don't mute statuses in muted conversation when said conversation is opened
+        (this.inConversation && status.thread_muted)
+        // No excuses if post has muted words
+      ) && !this.muteWordHits.length > 0
+
+      return !this.unmuted && !excusesNotToMute && reasonsToMute
     },
     hideFilteredStatuses () {
       return this.mergedConfig.hideFilteredStatuses

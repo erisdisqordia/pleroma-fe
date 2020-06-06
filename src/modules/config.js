@@ -3,6 +3,16 @@ import { setPreset, applyTheme } from '../services/style_setter/style_setter.js'
 
 const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
+/* TODO this is a bit messy.
+ * We need to declare settings with their types and also deal with
+ * instance-default settings in some way, hopefully try to avoid copy-pasta
+ * in general.
+ */
+export const multiChoiceProperties = [
+  'postContentType',
+  'subjectLineBehavior'
+]
+
 export const defaultState = {
   colors: {},
   theme: undefined,

@@ -1,0 +1,44 @@
+@import 'src/_variables.scss';
+.settings-modal {
+  overflow: hidden;
+
+  &.peek {
+    .settings-modal-panel {
+      /* Explanation:
+       * Modal is positioned vertically centered.
+       * 100vh - 100% = Distance between modal's top+bottom boundaries and screen
+       * (100vh - 100%) / 2 = Distance between bottom (or top) boundary and screen
+       * + 100% - we move modal completely off-screen, it's top boundary touches
+       *   bottom of the screen
+       * - 50px - leaving tiny amount of space so that titlebar + tiny amount of modal is visible
+       */
+      transform: translateY(calc(((100vh - 100%) / 2 + 100%) - 50px));
+    }
+  }
+
+  .settings-modal-panel {
+    overflow: hidden;
+    transition: transform;
+    transition-timing-function: ease-in-out;
+    transition-duration: 300ms;
+    width: 1000px;
+    max-width: 90vw;
+    height: 90vh;
+
+    @media all and (max-width: 800px) {
+      max-width: 100vw;
+      height: 100vh;
+    }
+
+    .panel-body {
+      height: 100%;
+      overflow-y: hidden;
+
+      .btn {
+        min-height: 28px;
+        min-width: 10em;
+        padding: 0 2em;
+      }
+    }
+  }
+}

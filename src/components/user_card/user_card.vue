@@ -50,15 +50,6 @@
               >
                 {{ user.name }}
               </div>
-              <router-link
-                v-if="!isOtherUser"
-                :to="{ name: 'user-settings' }"
-              >
-                <i
-                  class="button-icon icon-wrench usersettings"
-                  :title="$t('tool_tip.user_settings')"
-                />
-              </router-link>
               <a
                 v-if="isOtherUser && !user.is_local"
                 :href="user.statusnet_profile_url"
@@ -118,7 +109,7 @@
               type="color"
             >
             <label
-              for="style-switcher"
+              for="theme_tab"
               class="userHighlightSel select"
             >
               <select

@@ -59,7 +59,10 @@
     "apply": "Apply",
     "submit": "Submit",
     "more": "More",
+    "loading": "Loading…",
     "generic_error": "An error occured",
+    "error_retry": "Please try again",
+    "retry": "Try again",
     "optional": "optional",
     "show_more": "Show more",
     "show_less": "Show less",
@@ -68,7 +71,9 @@
     "disable": "Disable",
     "enable": "Enable",
     "confirm": "Confirm",
-    "verify": "Verify"
+    "verify": "Verify",
+    "close": "Close",
+    "peek": "Peek"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",
@@ -278,6 +283,7 @@
     "current_avatar": "Your current avatar",
     "current_password": "Current password",
     "current_profile_banner": "Your current profile banner",
+    "mutes_and_blocks": "Mutes and Blocks",
     "data_import_export_tab": "Data Import / Export",
     "default_vis": "Default visibility scope",
     "delete_account": "Delete Account",

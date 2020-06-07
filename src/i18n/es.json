@@ -57,12 +57,12 @@
     "enter_recovery_code": "Inserta el código de recuperación",
     "enter_two_factor_code": "Inserta el código de dos factores",
     "recovery_code": "Código de recuperación",
-    "heading" : {
-      "totp" : "Autenticación de dos factores",
-      "recovery" : "Recuperación de dos factores"
+    "heading": {
+      "totp": "Autenticación de dos factores",
+      "recovery": "Recuperación de dos factores"
     }
   },
-   "media_modal": {
+  "media_modal": {
     "previous": "Anterior",
     "next": "Siguiente"
   },
@@ -103,7 +103,7 @@
     "single_choice": "Elección única",
     "multiple_choices": "Elección múltiple",
     "expiry": "Tiempo de vida de la encuesta",
-    "expires_in": "La encuensta termina en {0}",
+    "expires_in": "La encuesta termina en {0}",
     "expired": "La encuesta terminó hace {0}",
     "not_enough_options": "Muy pocas opciones únicas en la encuesta"
   },
@@ -137,7 +137,7 @@
     },
     "content_warning": "Tema (opcional)",
     "default": "Acabo de aterrizar en L.A.",
-    "direct_warning_to_all": "Esta publicación será visible para todos los usarios mencionados.",
+    "direct_warning_to_all": "Esta publicación será visible para todos los usuarios mencionados.",
     "direct_warning_to_first_only": "Esta publicación solo será visible para los usuarios mencionados al comienzo del mensaje.",
     "posting": "Publicando",
     "scope_notice": {
@@ -146,7 +146,7 @@
       "unlisted": "Esta publicación no será visible en la Línea Temporal Pública ni en Toda La Red Conocida"
     },
     "scope": {
-      "direct": "Directo - Solo para los usuarios mencionados.",
+      "direct": "Directo - Solo para los usuarios mencionados",
       "private": "Solo-seguidores - Solo tus seguidores leerán la publicación",
       "public": "Público - Entradas visibles en las Líneas Temporales Públicas",
       "unlisted": "Sin listar - Entradas no visibles en las Líneas Temporales Públicas"
@@ -173,7 +173,7 @@
       "password_confirmation_match": "la contraseña no coincide"
     }
   },
-   "selectable_list": {
+  "selectable_list": {
     "select_all": "Seleccionar todo"
   },
   "settings": {
@@ -181,17 +181,17 @@
     "security": "Seguridad",
     "enter_current_password_to_confirm": "Introduce la contraseña actual para confirmar tu identidad",
     "mfa": {
-      "otp" : "OTP",
-      "setup_otp" : "Configurar OTP",
-      "wait_pre_setup_otp" : "preconfiguración OTP",
-      "confirm_and_enable" : "Confirmar y habilitar OTP",
+      "otp": "OTP",
+      "setup_otp": "Configurar OTP",
+      "wait_pre_setup_otp": "preconfiguración OTP",
+      "confirm_and_enable": "Confirmar y habilitar OTP",
       "title": "Autentificación de dos factores",
-      "generate_new_recovery_codes" : "Generar códigos de recuperación nuevos",
-      "warning_of_generate_new_codes" : "Cuando generas nuevos códigos de recuperación, los antiguos dejarán de funcionar.",
-      "recovery_codes" : "Códigos de recuperación.",
+      "generate_new_recovery_codes": "Generar códigos de recuperación nuevos",
+      "warning_of_generate_new_codes": "Cuando generas nuevos códigos de recuperación, los antiguos dejarán de funcionar.",
+      "recovery_codes": "Códigos de recuperación.",
       "waiting_a_recovery_codes": "Recibiendo códigos de respaldo",
-      "recovery_codes_warning" : "Anote los códigos o guárdelos en un lugar seguro, de lo contrario no los volverá a ver. Si pierde el acceso a su aplicación 2FA y los códigos de recuperación, su cuenta quedará bloqueada.",
-      "authentication_methods" : "Métodos de autentificación",
+      "recovery_codes_warning": "Anote los códigos o guárdelos en un lugar seguro, de lo contrario no los volverá a ver. Si pierde el acceso a su aplicación 2FA y los códigos de recuperación, su cuenta quedará bloqueada.",
+      "authentication_methods": "Métodos de autentificación",
       "scan": {
         "title": "Escanear",
         "desc": "Usando su aplicación de dos factores, escanee este código QR o ingrese la clave de texto:",
@@ -210,7 +210,7 @@
     "background": "Fondo",
     "bio": "Biografía",
     "block_export": "Exportar usuarios bloqueados",
-    "block_export_button": "Exporta la lista de tus usarios bloqueados a un archivo csv",
+    "block_export_button": "Exporta la lista de tus usuarios bloqueados a un archivo csv",
     "block_import": "Importar usuarios bloqueados",
     "block_import_error": "Error importando la lista de usuarios bloqueados",
     "blocks_imported": "¡Lista de usuarios bloqueados importada! El procesado puede tardar un poco.",
@@ -222,7 +222,7 @@
     "cRed": "Rojo (Cancelar)",
     "change_password": "Cambiar contraseña",
     "change_password_error": "Hubo un problema cambiando la contraseña.",
-    "changed_password": "Contraseña cambiada correctamente!",
+    "changed_password": "¡Contraseña cambiada correctamente!",
     "collapse_subject": "Colapsar entradas con tema",
     "composing": "Redactando",
     "confirm_new_password": "Confirmar la nueva contraseña",
@@ -286,7 +286,7 @@
     "notification_visibility_repeats": "Repeticiones (Repeats)",
     "no_rich_text_description": "Eliminar el formato de texto enriquecido de todas las entradas",
     "no_blocks": "No hay usuarios bloqueados",
-    "no_mutes": "No hay usuarios sinlenciados",
+    "no_mutes": "No hay usuarios silenciados",
     "hide_follows_description": "No mostrar a quién sigo",
     "hide_followers_description": "No mostrar quién me sigue",
     "hide_follows_count_description": "No mostrar el número de cuentas que sigo",
@@ -305,7 +305,7 @@
     "profile_background": "Fondo del Perfil",
     "profile_banner": "Cabecera del Perfil",
     "profile_tab": "Perfil",
-    "radii_help": "Estable el redondeo de las esquinas de la interfaz (en píxeles)",
+    "radii_help": "Establezca el redondeo de las esquinas de la interfaz (en píxeles)",
     "replies_in_timeline": "Réplicas en la línea temporal",
     "reply_link_preview": "Activar la previsualización del enlace de responder al pasar el ratón por encima",
     "reply_visibility_all": "Mostrar todas las réplicas",
@@ -337,7 +337,7 @@
     "theme_help_v2_1": "También puede invalidar los colores y la opacidad de ciertos componentes si activa la casilla de verificación. Use el botón \"Borrar todo\" para deshacer los cambios.",
     "theme_help_v2_2": "Los iconos debajo de algunas entradas son indicadores de contraste de fondo/texto, desplace el ratón por encima para obtener información más detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
     "tooltipRadius": "Información/alertas",
-     "upload_a_photo": "Subir una foto",
+    "upload_a_photo": "Subir una foto",
     "user_settings": "Ajustes del Usuario",
     "values": {
       "false": "no",
@@ -583,7 +583,7 @@
     "profile_does_not_exist": "Lo sentimos, este perfil no existe.",
     "profile_loading_error": "Lo sentimos, hubo un error al cargar este perfil."
   },
-   "user_reporting": {
+  "user_reporting": {
     "title": "Reportando a {0}",
     "add_comment_description": "El informe será enviado a los moderadores de su instancia. Puedes proporcionar una explicación de por qué estás reportando esta cuenta a continuación:",
     "additional_comments": "Comentarios adicionales",
@@ -603,7 +603,7 @@
     "favorite": "Favorito",
     "user_settings": "Ajustes de usuario"
   },
-  "upload":{
+  "upload": {
     "error": {
       "base": "Subida fallida.",
       "file_too_big": "Archivo demasiado grande [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",

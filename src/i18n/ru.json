@@ -456,9 +456,9 @@
   },
   "domain_mute_card": {
     "mute": "Игнорировать",
-    "mute_progress": "В процессе...",
+    "mute_progress": "В процессе…",
     "unmute": "Прекратить игнорирование",
-    "unmute_progress": "В процессе..."
+    "unmute_progress": "В процессе…"
   },
   "exporter": {
     "export": "Экспорт",

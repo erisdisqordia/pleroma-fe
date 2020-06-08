@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Cropped images look correct in Chrome
 - Newlines in the muted words settings work again
 - Clicking on non-latin hashtags won't open a new window
+- Uploading and drag-dropping files works correctly now.
 
 ## [2.0.3] - 2020-05-02
 ### Fixed

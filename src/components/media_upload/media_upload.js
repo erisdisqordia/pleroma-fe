@@ -37,7 +37,9 @@ const mediaUpload = {
     fileDrop (e) {
       if (e.dataTransfer.files.length > 0) {
         e.preventDefault() // allow dropping text like before
-        this.uploadFile(e.dataTransfer.files[0])
+        for (const file of e.dataTransfer.files) {
+          this.uploadFile(file)
+        }
       }
     },
     fileDrag (e) {

@@ -39,7 +39,7 @@ const mediaUpload = {
           self.decreaseUploadCount()
         })
     },
-    decreaseUploadCount() {
+    decreaseUploadCount () {
       this.uploadCount--
       if (this.uploadCount === 0) {
         this.$emit('all-uploaded')

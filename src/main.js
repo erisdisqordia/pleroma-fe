@@ -46,10 +46,12 @@ Vue.use(VBodyScrollLock)
 
 const i18n = new VueI18n({
   // By default, use the browser locale, we will update it if neccessary
-  locale: currentLocale,
+  locale: 'en',
   fallbackLocale: 'en',
-  messages
+  messages: messages.default
 })
+
+messages.setLanguage(i18n, currentLocale)
 
 const persistedStateOptions = {
   paths: [

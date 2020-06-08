@@ -218,7 +218,6 @@ const PostStatusForm = {
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
-      this.enableSubmit()
     },
     removeMediaFile (fileInfo) {
       let index = this.newStatus.files.indexOf(fileInfo)
@@ -227,7 +226,6 @@ const PostStatusForm = {
     uploadFailed (errString, templateArgs) {
       templateArgs = templateArgs || {}
       this.error = this.$t('upload.error.base') + ' ' + this.$t('upload.error.' + errString, templateArgs)
-      this.enableSubmit()
     },
     disableSubmit () {
       this.submitDisabled = true

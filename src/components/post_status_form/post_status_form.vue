@@ -172,6 +172,7 @@
             @uploading="disableSubmit"
             @uploaded="addMediaFile"
             @upload-failed="uploadFailed"
+            @all-uploaded="enableSubmit"
           />
           <div
             class="emoji-icon"

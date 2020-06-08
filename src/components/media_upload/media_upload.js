@@ -5,8 +5,13 @@ import fileSizeFormatService from '../../services/file_size_format/file_size_for
 const mediaUpload = {
   data () {
     return {
-      uploading: false,
+      uploadCount: 0,
       uploadReady: true
+    }
+  },
+  computed: {
+    uploading () {
+      return this.uploadCount > 0
     }
   },
   methods: {
@@ -23,23 +28,27 @@ const mediaUpload = {
       formData.append('file', file)
 
       self.$emit('uploading')
-      self.uploading = true
+      self.uploadCount++
 
       statusPosterService.uploadMedia({ store, formData })
         .then((fileData) => {
           self.$emit('uploaded', fileData)
-          self.uploading = false
+          self.decreaseUploadCount()
         }, (error) => { // eslint-disable-line handle-callback-err
           self.$emit('upload-failed', 'default')
-          self.uploading = false
+          self.decreaseUploadCount()
         })
+    },
+    decreaseUploadCount() {
+      this.uploadCount--
+      if (this.uploadCount === 0) {
+        this.$emit('all-uploaded')
+      }
     },
     fileDrop (e) {
       if (e.dataTransfer.files.length > 0) {
         e.preventDefault() // allow dropping text like before
-        for (const file of e.dataTransfer.files) {
-          this.uploadFile(file)
-        }
+        this.multiUpload(e.dataTransfer.files)
       }
     },
     fileDrag (e) {
@@ -56,11 +65,13 @@ const mediaUpload = {
         this.uploadReady = true
       })
     },
-    change ({ target }) {
-      for (var i = 0; i < target.files.length; i++) {
-        let file = target.files[i]
+    multiUpload (files) {
+      for (const file of files) {
         this.uploadFile(file)
       }
+    },
+    change ({ target }) {
+      this.multiUpload(target.files)
     }
   },
   props: [
@@ -69,7 +80,7 @@ const mediaUpload = {
   watch: {
     'dropFiles': function (fileInfos) {
       if (!this.uploading) {
-        this.uploadFile(fileInfos[0])
+        this.multiUpload(fileInfos)
       }
     }
   }

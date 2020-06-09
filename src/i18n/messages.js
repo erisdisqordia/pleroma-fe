@@ -37,35 +37,7 @@ const loaders = {
 }
 
 const messages = {
-  languages: [
-    'ar',
-    'ca',
-    'cs',
-    'de',
-    'en',
-    'eo',
-    'es',
-    'et',
-    'eu',
-    'fi',
-    'fr',
-    'ga',
-    'he',
-    'hu',
-    'it',
-    'ja',
-    'ja_easy',
-    'ko',
-    'nb',
-    'nl',
-    'oc',
-    'pl',
-    'pt',
-    'ro',
-    'ru',
-    'te',
-    'zh'
-  ],
+  languages: ['en', ...Object.keys(loaders)],
   default: {
     en: require('./en.json')
   },

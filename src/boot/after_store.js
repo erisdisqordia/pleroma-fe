@@ -207,6 +207,8 @@ const getNodeInfo = async ({ store }) => {
       store.dispatch('setInstanceOption', { name: 'pollLimits', value: metadata.pollLimits })
       store.dispatch('setInstanceOption', { name: 'mailerEnabled', value: metadata.mailerEnabled })
 
+      store.dispatch('setInstanceOption', { name: 'fieldsLimits', value: metadata.fieldsLimits })
+
       store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
       store.dispatch('setInstanceOption', { name: 'postFormats', value: metadata.postFormats })
 

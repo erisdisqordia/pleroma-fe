@@ -47,7 +47,8 @@ export default {
   }),
   created () {
     // Load the locale from the storage
-    this.$i18n.locale = this.$store.getters.mergedConfig.interfaceLanguage
+    const val = this.$store.getters.mergedConfig.interfaceLanguage
+    this.$store.dispatch('setOption', { name: 'interfaceLanguage', value: val })
     window.addEventListener('resize', this.updateMobileState)
   },
   destroyed () {

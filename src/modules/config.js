@@ -1,5 +1,6 @@
 import { set, delete as del } from 'vue'
 import { setPreset, applyTheme } from '../services/style_setter/style_setter.js'
+import messages from '../i18n/messages'
 
 const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
@@ -115,6 +116,10 @@ const config = {
         case 'customTheme':
         case 'customThemeSource':
           applyTheme(value)
+          break
+        case 'interfaceLanguage':
+          messages.setLanguage(this.getters.i18n, value)
+          break
       }
     }
   }

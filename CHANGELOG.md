@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Change heart to thumbs up in reaction picker
 - Close the media modal on navigation events
 - Add colons to the emoji alt text, to make them copyable
+- Add better visual indication for drag-and-drop for files
 
 ### Fixed
 - Status ellipsis menu closes properly when selecting certain options

@@ -6,12 +6,12 @@
     <form
       autocomplete="off"
       @submit.prevent="postStatus(newStatus)"
-      @dragover.prevent.capture="fileDrag"
+      @dragover.prevent="fileDrag"
     >
       <div
         v-show="showDropIcon"
         class="drop-indicator icon-upload"
-        @dragleave.capture="fileDragStop"
+        @dragleave="fileDragStop"
         @drop.stop="fileDrop"
       />
       <div class="form-group">

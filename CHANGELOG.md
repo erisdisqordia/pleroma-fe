@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Add
 - Added private notifications option for push notifications
 - 'Copy link' button for statuses (in the ellipsis menu)
+- Autocomplete domains from list of known instances
 
 ### Changed
 - Registration page no longer requires email if the server is configured not to require it

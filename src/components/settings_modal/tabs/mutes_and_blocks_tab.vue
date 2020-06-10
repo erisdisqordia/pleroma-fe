@@ -119,21 +119,16 @@
 
         <div :label="$t('settings.domain_mutes')">
           <div class="domain-mute-form">
-            <input
-              v-model="newDomainToMute"
+            <Autosuggest
+              :filter="filterUnMutedDomains"
+              :query="queryKnownDomains"
               :placeholder="$t('settings.type_domains_to_mute')"
-              type="text"
-              @keyup.enter="muteDomain"
             >
-            <ProgressButton
-              class="btn btn-default domain-mute-button"
-              :click="muteDomain"
-            >
-              {{ $t('domain_mute_card.mute') }}
-              <template slot="progress">
-                {{ $t('domain_mute_card.mute_progress') }}
-              </template>
-            </ProgressButton>
+              <DomainMuteCard
+                slot-scope="row"
+                :domain="row.item"
+              />
+            </Autosuggest>
           </div>
           <DomainMuteList
             :refresh="true"

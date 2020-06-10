@@ -4,12 +4,23 @@
       {{ domain }}
     </div>
     <ProgressButton
+      v-if="muted"
       :click="unmuteDomain"
       class="btn btn-default"
     >
       {{ $t('domain_mute_card.unmute') }}
       <template slot="progress">
         {{ $t('domain_mute_card.unmute_progress') }}
+      </template>
+    </ProgressButton>
+    <ProgressButton
+      v-else
+      :click="muteDomain"
+      class="btn btn-default"
+    >
+      {{ $t('domain_mute_card.mute') }}
+      <template slot="progress">
+        {{ $t('domain_mute_card.mute_progress') }}
       </template>
     </ProgressButton>
   </div>
@@ -33,6 +44,10 @@
 
   button {
     width: 10em;
+  }
+
+  .autosuggest-results & {
+    padding-left: 1em;
   }
 }
 </style>

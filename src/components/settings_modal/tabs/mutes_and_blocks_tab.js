@@ -32,12 +32,12 @@ const DomainMuteList = withSubscription({
 const MutesAndBlocks = {
   data () {
     return {
-      activeTab: 'profile',
-      newDomainToMute: ''
+      activeTab: 'profile'
     }
   },
   created () {
     this.$store.dispatch('fetchTokens')
+    this.$store.dispatch('getKnownDomains')
   },
   components: {
     TabSwitcher,
@@ -50,6 +50,14 @@ const MutesAndBlocks = {
     ProgressButton,
     Autosuggest,
     Checkbox
+  },
+  computed: {
+    knownDomains () {
+      return this.$store.state.instance.knownDomains
+    },
+    user () {
+      return this.$store.state.users.currentUser
+    }
   },
   methods: {
     importFollows (file) {
@@ -86,13 +94,13 @@ const MutesAndBlocks = {
     filterUnblockedUsers (userIds) {
       return reject(userIds, (userId) => {
         const relationship = this.$store.getters.relationship(this.userId)
-        return relationship.blocking || userId === this.$store.state.users.currentUser.id
+        return relationship.blocking || userId === this.user.id
       })
     },
     filterUnMutedUsers (userIds) {
       return reject(userIds, (userId) => {
         const relationship = this.$store.getters.relationship(this.userId)
-        return relationship.muting || userId === this.$store.state.users.currentUser.id
+        return relationship.muting || userId === this.user.id
       })
     },
     queryUserIds (query) {
@@ -111,12 +119,16 @@ const MutesAndBlocks = {
     unmuteUsers (ids) {
       return this.$store.dispatch('unmuteUsers', ids)
     },
+    filterUnMutedDomains (urls) {
+      return urls.filter(url => !this.user.domainMutes.includes(url))
+    },
+    queryKnownDomains (query) {
+      return new Promise((resolve, reject) => {
+        resolve(this.knownDomains.filter(url => url.toLowerCase().includes(query)))
+      })
+    },
     unmuteDomains (domains) {
       return this.$store.dispatch('unmuteDomains', domains)
-    },
-    muteDomain () {
-      return this.$store.dispatch('muteDomain', this.newDomainToMute)
-        .then(() => { this.newDomainToMute = '' })
     }
   }
 }

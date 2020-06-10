@@ -82,7 +82,9 @@ const PostStatusForm = {
         contentType
       },
       caret: 0,
-      pollFormVisible: false
+      pollFormVisible: false,
+      showDropIcon: false,
+      dropStopTimeout: null
     }
   },
   computed: {
@@ -248,13 +250,26 @@ const PostStatusForm = {
       }
     },
     fileDrop (e) {
-      if (e.dataTransfer.files.length > 0) {
+      if (e.dataTransfer && e.dataTransfer.types.includes('Files')) {
         e.preventDefault() // allow dropping text like before
         this.dropFiles = e.dataTransfer.files
+        clearTimeout(this.dropStopTimeout)
+        this.showDropIcon = false
       }
+    },
+    fileDragStop (e) {
+      // The false-setting is done with delay because just using leave-events
+      // directly caused unwanted flickering, this is not perfect either but
+      // much less noticable.
+      clearTimeout(this.dropStopTimeout)
+      this.dropStopTimeout = setTimeout(() => (this.showDropIcon = false), 100)
     },
     fileDrag (e) {
       e.dataTransfer.dropEffect = 'copy'
+      if (e.dataTransfer && e.dataTransfer.types.includes('Files')) {
+        clearTimeout(this.dropStopTimeout)
+        this.showDropIcon = true
+      }
     },
     onEmojiInputInput (e) {
       this.$nextTick(() => {

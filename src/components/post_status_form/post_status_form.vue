@@ -6,7 +6,14 @@
     <form
       autocomplete="off"
       @submit.prevent="postStatus(newStatus)"
+      @dragover.prevent.capture="fileDrag"
     >
+      <div
+        v-show="showDropIcon"
+        class="drop-indicator icon-upload"
+        @dragleave.capture="fileDragStop"
+        @drop.stop="fileDrop"
+      />
       <div class="form-group">
         <i18n
           v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
@@ -97,8 +104,6 @@
             class="form-post-body"
             @keydown.meta.enter="postStatus(newStatus)"
             @keyup.ctrl.enter="postStatus(newStatus)"
-            @drop="fileDrop"
-            @dragover.prevent="fileDrag"
             @input="resize"
             @compositionupdate="resize"
             @paste="paste"
@@ -447,7 +452,8 @@
   form {
     display: flex;
     flex-direction: column;
-    padding: 0.6em;
+    margin: 0.6em;
+    position: relative;
   }
 
   .form-group {
@@ -504,6 +510,26 @@
   .icon-cancel {
     cursor: pointer;
     z-index: 4;
+  }
+
+  .drop-indicator {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    font-size: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
+    opacity: 0.6;
+    background-color: $fallback--bg;
+    background-color: var(--bg, $fallback--bg);
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    border: 2px dashed $fallback--text;
+    border: 2px dashed var(--text, $fallback--text);
   }
 }
 </style>

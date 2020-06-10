@@ -83,7 +83,7 @@ const PostStatusForm = {
       },
       caret: 0,
       pollFormVisible: false,
-      showDropIcon: false,
+      showDropIcon: 'hide',
       dropStopTimeout: null
     }
   },
@@ -254,7 +254,7 @@ const PostStatusForm = {
         e.preventDefault() // allow dropping text like before
         this.dropFiles = e.dataTransfer.files
         clearTimeout(this.dropStopTimeout)
-        this.showDropIcon = false
+        this.showDropIcon = 'hide'
       }
     },
     fileDragStop (e) {
@@ -262,13 +262,14 @@ const PostStatusForm = {
       // directly caused unwanted flickering, this is not perfect either but
       // much less noticable.
       clearTimeout(this.dropStopTimeout)
-      this.dropStopTimeout = setTimeout(() => (this.showDropIcon = false), 100)
+      this.showDropIcon = 'fade'
+      this.dropStopTimeout = setTimeout(() => (this.showDropIcon = 'hide'), 500)
     },
     fileDrag (e) {
       e.dataTransfer.dropEffect = 'copy'
       if (e.dataTransfer && e.dataTransfer.types.includes('Files')) {
         clearTimeout(this.dropStopTimeout)
-        this.showDropIcon = true
+        this.showDropIcon = 'show'
       }
     },
     onEmojiInputInput (e) {

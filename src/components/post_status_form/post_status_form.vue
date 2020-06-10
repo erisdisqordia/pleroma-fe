@@ -9,7 +9,8 @@
       @dragover.prevent="fileDrag"
     >
       <div
-        v-show="showDropIcon"
+        v-show="showDropIcon !== 'hide'"
+        :style="{ animation: showDropIcon === 'show' ? 'fade-in 0.25s' : 'fade-out 0.5s' }"
         class="drop-indicator icon-upload"
         @dragleave="fileDragStop"
         @drop.stop="fileDrop"
@@ -512,6 +513,16 @@
     z-index: 4;
   }
 
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 0.6; }
+  }
+
+  @keyframes fade-out {
+    from { opacity: 0.6; }
+    to   { opacity: 0; }
+  }
+
   .drop-indicator {
     position: absolute;
     z-index: 1;
@@ -521,9 +532,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0.6;
     color: $fallback--text;
     color: var(--text, $fallback--text);
-    opacity: 0.6;
     background-color: $fallback--bg;
     background-color: var(--bg, $fallback--bg);
     border-radius: $fallback--tooltipRadius;

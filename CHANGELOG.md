@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Removed the use of with_move parameters when fetching notifications
 
 ### Fixed
+- Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)
 - Multiple issues with muted statuses/notifications
 
 ## [Unreleased patch]

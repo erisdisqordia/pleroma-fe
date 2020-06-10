@@ -96,7 +96,7 @@
             :disabled="posting"
             class="form-post-body"
             @keydown.meta.enter="postStatus(newStatus)"
-            @keyup.ctrl.enter="postStatus(newStatus)"
+            @keydown.ctrl.enter="postStatus(newStatus)"
             @drop="fileDrop"
             @dragover.prevent="fileDrag"
             @input="resize"

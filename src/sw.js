@@ -64,7 +64,7 @@ const maybeShowNotification = async (event) => {
   const enabled = await isEnabled()
   const activeClients = await getWindowClients()
   await setLocale()
-  if (enabled && activeClients) {
+  if (enabled && (activeClients.length === 0)) {
     const data = event.data.json()
 
     const url = `${self.registration.scope}api/v1/notifications/${data.notification_id}`

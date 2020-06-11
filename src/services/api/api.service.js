@@ -1,6 +1,5 @@
 import { each, map, concat, last, get } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
-import 'whatwg-fetch'
 import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */

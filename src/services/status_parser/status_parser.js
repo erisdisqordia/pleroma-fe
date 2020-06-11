@@ -1,17 +1,4 @@
 import { filter } from 'lodash'
-import sanitize from 'sanitize-html'
-
-export const removeAttachmentLinks = (html) => {
-  return sanitize(html, {
-    allowedTags: false,
-    allowedAttributes: false,
-    exclusiveFilter: ({ tag, attribs }) => tag === 'a' && typeof attribs.class === 'string' && attribs.class.match(/attachment/)
-  })
-}
-
-export const parse = (html) => {
-  return removeAttachmentLinks(html)
-}
 
 export const muteWordHits = (status, muteWords) => {
   const statusText = status.text.toLowerCase()
@@ -22,5 +9,3 @@ export const muteWordHits = (status, muteWords) => {
 
   return hits
 }
-
-export default parse

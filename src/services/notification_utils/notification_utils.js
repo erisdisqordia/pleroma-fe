@@ -45,7 +45,9 @@ export const unseenNotificationsFromStore = store =>
   filter(filteredNotificationsFromStore(store), ({ seen }) => !seen)
 
 export const prepareNotificationObject = (notification, i18n) => {
-  const notifObj = {}
+  const notifObj = {
+    tag: notification.id
+  }
   const status = notification.status
   const title = notification.from_profile.name
   notifObj.title = title

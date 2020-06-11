@@ -23,7 +23,6 @@
     "diff": "^3.0.1",
     "escape-html": "^1.0.3",
     "localforage": "^1.5.0",
-    "object-path": "^0.11.3",
     "phoenix": "^1.3.0",
     "portal-vue": "^2.1.4",
     "v-click-outside": "^2.1.1",

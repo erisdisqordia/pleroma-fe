@@ -1,7 +1,7 @@
 import * as NotificationUtils from 'src/services/notification_utils/notification_utils.js'
 
 describe('NotificationUtils', () => {
-  describe('visibleNotificationsFromStore', () => {
+  describe('filteredNotificationsFromStore', () => {
     it('should return sorted notifications with configured types', () => {
       const store = {
         state: {
@@ -47,7 +47,7 @@ describe('NotificationUtils', () => {
           type: 'like'
         }
       ]
-      expect(NotificationUtils.visibleNotificationsFromStore(store)).to.eql(expected)
+      expect(NotificationUtils.filteredNotificationsFromStore(store)).to.eql(expected)
     })
   })
 

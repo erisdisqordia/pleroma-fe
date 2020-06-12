@@ -6,7 +6,15 @@
     <form
       autocomplete="off"
       @submit.prevent="postStatus(newStatus)"
+      @dragover.prevent="fileDrag"
     >
+      <div
+        v-show="showDropIcon !== 'hide'"
+        :style="{ animation: showDropIcon === 'show' ? 'fade-in 0.25s' : 'fade-out 0.5s' }"
+        class="drop-indicator icon-upload"
+        @dragleave="fileDragStop"
+        @drop.stop="fileDrop"
+      />
       <div class="form-group">
         <i18n
           v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
@@ -96,9 +104,7 @@
             :disabled="posting"
             class="form-post-body"
             @keydown.meta.enter="postStatus(newStatus)"
-            @keyup.ctrl.enter="postStatus(newStatus)"
-            @drop="fileDrop"
-            @dragover.prevent="fileDrag"
+            @keydown.ctrl.enter="postStatus(newStatus)"
             @input="resize"
             @compositionupdate="resize"
             @paste="paste"
@@ -172,6 +178,7 @@
             @uploading="disableSubmit"
             @uploaded="addMediaFile"
             @upload-failed="uploadFailed"
+            @all-uploaded="enableSubmit"
           />
           <div
             class="emoji-icon"
@@ -339,11 +346,6 @@
     font-size: 26px;
     flex: 1;
 
-    i {
-      display: block;
-      width: 100%;
-    }
-
     &.selected, &:hover {
       // needs to be specific to override icon default color
       i, label {
@@ -451,7 +453,8 @@
   form {
     display: flex;
     flex-direction: column;
-    padding: 0.6em;
+    margin: 0.6em;
+    position: relative;
   }
 
   .form-group {
@@ -508,6 +511,36 @@
   .icon-cancel {
     cursor: pointer;
     z-index: 4;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 0.6; }
+  }
+
+  @keyframes fade-out {
+    from { opacity: 0.6; }
+    to   { opacity: 0; }
+  }
+
+  .drop-indicator {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    font-size: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    color: $fallback--text;
+    color: var(--text, $fallback--text);
+    background-color: $fallback--bg;
+    background-color: var(--bg, $fallback--bg);
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    border: 2px dashed $fallback--text;
+    border: 2px dashed var(--text, $fallback--text);
   }
 }
 </style>

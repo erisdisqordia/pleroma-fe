@@ -1,6 +1,42 @@
 {
+  "about": {
+    "mrf": {
+      "federation": "Federation",
+      "keyword": {
+        "keyword_policies": "Keyword Policies",
+        "ftl_removal": "Removal from \"The Whole Known Network\" Timeline",
+        "reject": "Reject",
+        "replace": "Replace",
+        "is_replaced_by": "→"
+      },
+      "mrf_policies": "Enabled MRF Policies",
+      "mrf_policies_desc": "MRF policies manipulate the federation behaviour of the instance.  The following policies are enabled:",
+      "simple": {
+        "simple_policies": "Instance-specific Policies",
+        "accept": "Accept",
+        "accept_desc": "This instance only accepts messages from the following instances:",
+        "reject": "Reject",
+        "reject_desc": "This instance will not accept messages from the following instances:",
+        "quarantine": "Quarantine",
+        "quarantine_desc": "This instance will send only public posts to the following instances:",
+        "ftl_removal": "Removal from \"The Whole Known Network\" Timeline",
+        "ftl_removal_desc": "This instance removes these instances from \"The Whole Known Network\" timeline:",
+        "media_removal": "Media Removal",
+        "media_removal_desc": "This instance removes media from posts on the following instances:",
+        "media_nsfw": "Media Force-set As Sensitive",
+        "media_nsfw_desc": "This instance forces media to be set sensitive in posts on the following instances:"
+      }
+    },
+    "staff": "Staff"
+  },
   "chat": {
     "title": "Chat"
+  },
+  "domain_mute_card": {
+    "mute": "Mute",
+    "mute_progress": "Muting…",
+    "unmute": "Unmute",
+    "unmute_progress": "Unmuting…"
   },
   "exporter": {
     "export": "Export",
@@ -23,15 +59,21 @@
     "apply": "Apply",
     "submit": "Submit",
     "more": "More",
+    "loading": "Loading…",
     "generic_error": "An error occured",
+    "error_retry": "Please try again",
+    "retry": "Try again",
     "optional": "optional",
     "show_more": "Show more",
     "show_less": "Show less",
+    "dismiss": "Dismiss",
     "cancel": "Cancel",
     "disable": "Disable",
     "enable": "Enable",
     "confirm": "Confirm",
-    "verify": "Verify"
+    "verify": "Verify",
+    "close": "Close",
+    "peek": "Peek"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",
@@ -57,9 +99,9 @@
     "enter_recovery_code": "Enter a recovery code",
     "enter_two_factor_code": "Enter a two-factor code",
     "recovery_code": "Recovery code",
-    "heading" : {
-      "totp" : "Two-factor authentication",
-      "recovery" : "Two-factor recovery"
+    "heading": {
+      "totp": "Two-factor authentication",
+      "recovery": "Two-factor recovery"
     }
   },
   "media_modal": {
@@ -84,14 +126,17 @@
     "preferences": "Preferences"
   },
   "notifications": {
-    "broken_favorite": "Unknown status, searching for it...",
+    "broken_favorite": "Unknown status, searching for it…",
     "favorited_you": "favorited your status",
     "followed_you": "followed you",
+    "follow_request": "wants to follow you",
     "load_older": "Load older notifications",
     "notifications": "Notifications",
     "read": "Read!",
     "repeated_you": "repeated your status",
-    "no_more_notifications": "No more notifications"
+    "no_more_notifications": "No more notifications",
+    "migrated_to": "migrated to",
+    "reacted_with": "reacted with {0}"
   },
   "polls": {
     "add_poll": "Add Poll",
@@ -121,6 +166,7 @@
   "interactions": {
     "favs_repeats": "Repeats and Favorites",
     "follows": "New follows",
+    "moves": "User migrates",
     "load_older": "Load older interactions"
   },
   "post_status": {
@@ -185,17 +231,17 @@
     "security": "Security",
     "enter_current_password_to_confirm": "Enter your current password to confirm your identity",
     "mfa": {
-      "otp" : "OTP",
-      "setup_otp" : "Setup OTP",
-      "wait_pre_setup_otp" : "presetting OTP",
-      "confirm_and_enable" : "Confirm & enable OTP",
+      "otp": "OTP",
+      "setup_otp": "Setup OTP",
+      "wait_pre_setup_otp": "presetting OTP",
+      "confirm_and_enable": "Confirm & enable OTP",
       "title": "Two-factor Authentication",
-      "generate_new_recovery_codes" : "Generate new recovery codes",
-      "warning_of_generate_new_codes" : "When you generate new recovery codes, your old codes won’t work anymore.",
-      "recovery_codes" : "Recovery codes.",
-      "waiting_a_recovery_codes": "Receiving backup codes...",
-      "recovery_codes_warning" : "Write the codes down or save them somewhere secure - otherwise you won't see them again. If you lose access to your 2FA app and recovery codes you'll be locked out of your account.",
-      "authentication_methods" : "Authentication methods",
+      "generate_new_recovery_codes": "Generate new recovery codes",
+      "warning_of_generate_new_codes": "When you generate new recovery codes, your old codes won’t work anymore.",
+      "recovery_codes": "Recovery codes.",
+      "waiting_a_recovery_codes": "Receiving backup codes…",
+      "recovery_codes_warning": "Write the codes down or save them somewhere secure - otherwise you won't see them again. If you lose access to your 2FA app and recovery codes you'll be locked out of your account.",
+      "authentication_methods": "Authentication methods",
       "scan": {
         "title": "Scan",
         "desc": "Using your two-factor app, scan this QR code or enter text key:",
@@ -205,6 +251,7 @@
         "desc": "To enable two-factor authentication, enter the code from your two-factor app:"
       }
     },
+    "allow_following_move": "Allow auto-follow when following account moves",
     "attachmentRadius": "Attachments",
     "attachments": "Attachments",
     "autoload": "Enable automatic loading when scrolled to the bottom",
@@ -236,15 +283,18 @@
     "current_avatar": "Your current avatar",
     "current_password": "Current password",
     "current_profile_banner": "Your current profile banner",
+    "mutes_and_blocks": "Mutes and Blocks",
     "data_import_export_tab": "Data Import / Export",
     "default_vis": "Default visibility scope",
     "delete_account": "Delete Account",
-    "delete_account_description": "Permanently delete your account and all your messages.",
+    "delete_account_description": "Permanently delete your data and deactivate your account.",
     "delete_account_error": "There was an issue deleting your account. If this persists please contact your instance administrator.",
     "delete_account_instructions": "Type your password in the input below to confirm account deletion.",
     "discoverable": "Allow discovery of this account in search results and other services",
+    "domain_mutes": "Domains",
     "avatar_size_instruction": "The recommended minimum size for avatar images is 150x150 pixels.",
     "pad_emoji": "Pad emoji with spaces when adding from picker",
+    "emoji_reactions_on_timeline": "Show emoji reactions on timeline",
     "export_theme": "Save preset",
     "filtering": "Filtering",
     "filtering_explanation": "All statuses containing these words will be muted, one per line",
@@ -253,6 +303,7 @@
     "follow_import": "Follow import",
     "follow_import_error": "Error importing followers",
     "follows_imported": "Follows imported! Processing them will take a while.",
+    "accent": "Accent",
     "foreground": "Foreground",
     "general": "General",
     "hide_attachments_in_convo": "Hide attachments in conversations",
@@ -292,6 +343,8 @@
     "notification_visibility_likes": "Likes",
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
+    "notification_visibility_moves": "User Migrates",
+    "notification_visibility_emoji_reactions": "Reactions",
     "no_rich_text_description": "Strip rich text formatting from all posts",
     "no_blocks": "No blocks",
     "no_mutes": "No mutes",
@@ -339,24 +392,33 @@
     "post_status_content_type": "Post status content type",
     "stop_gifs": "Play-on-hover GIFs",
     "streaming": "Enable automatic streaming of new posts when scrolled to the top",
+    "user_mutes": "Users",
+    "useStreamingApi": "Receive posts and notifications real-time",
+    "useStreamingApiWarning": "(Not recommended, experimental, known to skip posts)",
     "text": "Text",
     "theme": "Theme",
     "theme_help": "Use hex color codes (#rrggbb) to customize your color theme.",
     "theme_help_v2_1": "You can also override certain component's colors and opacity by toggling the checkbox, use \"Clear all\" button to clear all overrides.",
     "theme_help_v2_2": "Icons underneath some entries are background/text contrast indicators, hover over for detailed info. Please keep in mind that when using transparency contrast indicators show the worst possible case.",
     "tooltipRadius": "Tooltips/alerts",
+    "type_domains_to_mute": "Search domains to mute",
     "upload_a_photo": "Upload a photo",
     "user_settings": "User Settings",
     "values": {
       "false": "no",
       "true": "yes"
     },
+    "fun": "Fun",
+    "greentext": "Meme arrows",
     "notifications": "Notifications",
+    "notification_setting_filters": "Filters",
     "notification_setting": "Receive notifications from:",
     "notification_setting_follows": "Users you follow",
     "notification_setting_non_follows": "Users you do not follow",
     "notification_setting_followers": "Users who follow you",
     "notification_setting_non_followers": "Users who do not follow you",
+    "notification_setting_privacy": "Privacy",
+    "notification_setting_privacy_option": "Hide the sender and contents of push notifications",
     "notification_mutes": "To stop receiving notifications from a specific user, use a mute.",
     "notification_blocks": "Blocking a user stops all notifications as well as unsubscribes them.",
     "enable_web_push_notifications": "Enable web push notifications",
@@ -370,7 +432,24 @@
         "save_load_hint": "\"Keep\" options preserve currently set options when selecting or loading themes, it also stores said options when exporting a theme. When all checkboxes unset, exporting theme will save everything.",
         "reset": "Reset",
         "clear_all": "Clear all",
-        "clear_opacity": "Clear opacity"
+        "clear_opacity": "Clear opacity",
+        "load_theme": "Load theme",
+        "keep_as_is": "Keep as is",
+        "use_snapshot": "Old version",
+        "use_source": "New version",
+        "help": {
+          "upgraded_from_v2": "PleromaFE has been upgraded, theme could look a little bit different than you remember.",
+          "v2_imported": "File you imported was made for older FE. We try to maximize compatibility but there still could be inconsistencies.",
+          "future_version_imported": "File you imported was made in newer version of FE.",
+          "older_version_imported": "File you imported was made in older version of FE.",
+          "snapshot_present": "Theme snapshot is loaded, so all values are overriden. You can load theme's actual data instead.",
+          "snapshot_missing": "No theme snapshot was in the file so it could look different than originally envisioned.",
+          "fe_upgraded": "PleromaFE's theme engine upgraded after version update.",
+          "fe_downgraded": "PleromaFE's version rolled back.",
+          "migration_snapshot_ok": "Just to be safe, theme snapshot loaded. You can try loading theme data.",
+          "migration_napshot_gone": "For whatever reason snapshot was missing, some stuff could look different than you remember.",
+          "snapshot_source_mismatch": "Versions conflict: most likely FE was rolled back and updated again, if you changed theme using older version of FE you most likely want to use old version, otherwise use new version."
+        }
       },
       "common": {
         "color": "Color",
@@ -399,14 +478,27 @@
         "alert": "Alert background",
         "alert_error": "Error",
         "alert_warning": "Warning",
+        "alert_neutral": "Neutral",
+        "post": "Posts/User bios",
         "badge": "Badge background",
+        "popover": "Tooltips, menus, popovers",
         "badge_notification": "Notification",
         "panel_header": "Panel header",
         "top_bar": "Top bar",
         "borders": "Borders",
         "buttons": "Buttons",
         "inputs": "Input fields",
-        "faint_text": "Faded text"
+        "faint_text": "Faded text",
+        "underlay": "Underlay",
+        "poll": "Poll graph",
+        "icons": "Icons",
+        "highlight": "Highlighted elements",
+        "pressed": "Pressed",
+        "selectedPost": "Selected post",
+        "selectedMenu": "Selected menu item",
+        "disabled": "Disabled",
+        "toggled": "Toggled",
+        "tabs": "Tabs"
       },
       "radii": {
         "_tab_label": "Roundness"
@@ -419,7 +511,7 @@
         "blur": "Blur",
         "spread": "Spread",
         "inset": "Inset",
-        "hint": "For shadows you can also use --variable as a color value to use CSS3 variables. Please note that setting opacity won't work in this case.",
+        "hintV3": "For shadows you can also use the {0} notation to use other color slot.",
         "filter_hint": {
           "always_drop_shadow": "Warning, this shadow always uses {0} when browser supports it.",
           "drop_shadow_syntax": "{0} does not support {1} parameter and {2} keyword.",
@@ -533,7 +625,11 @@
     "reply_to": "Reply to",
     "replies_list": "Replies:",
     "mute_conversation": "Mute conversation",
-    "unmute_conversation": "Unmute conversation"
+    "unmute_conversation": "Unmute conversation",
+    "status_unavailable": "Status unavailable",
+    "copy_link": "Copy link to status",
+    "thread_muted": "Thread muted",
+    "thread_muted_and_words": ", has words:"
   },
   "user_card": {
     "approve": "Approve",
@@ -550,6 +646,7 @@
     "followers": "Followers",
     "following": "Following!",
     "follows_you": "Follows you!",
+    "hidden": "Hidden",
     "its_you": "It's you!",
     "media": "Media",
     "mention": "Mention",
@@ -562,11 +659,11 @@
     "subscribe": "Subscribe",
     "unsubscribe": "Unsubscribe",
     "unblock": "Unblock",
-    "unblock_progress": "Unblocking...",
-    "block_progress": "Blocking...",
+    "unblock_progress": "Unblocking…",
+    "block_progress": "Blocking…",
     "unmute": "Unmute",
-    "unmute_progress": "Unmuting...",
-    "mute_progress": "Muting...",
+    "unmute_progress": "Unmuting…",
+    "mute_progress": "Muting…",
     "hide_repeats": "Hide repeats",
     "show_repeats": "Show repeats",
     "admin_menu": {
@@ -612,9 +709,12 @@
     "repeat": "Repeat",
     "reply": "Reply",
     "favorite": "Favorite",
-    "user_settings": "User Settings"
+    "add_reaction": "Add Reaction",
+    "user_settings": "User Settings",
+    "accept_follow_request": "Accept follow request",
+    "reject_follow_request": "Reject follow request"
   },
-  "upload":{
+  "upload": {
     "error": {
       "base": "Upload failed.",
       "file_too_big": "File too big [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",

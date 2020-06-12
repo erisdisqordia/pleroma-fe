@@ -9,7 +9,7 @@ const oauthTokens = {
       })
     },
     revokeToken ({ rootState, commit, state }, id) {
-      rootState.api.backendInteractor.revokeOAuthToken(id).then((response) => {
+      rootState.api.backendInteractor.revokeOAuthToken({ id }).then((response) => {
         if (response.status === 201) {
           commit('swapTokens', state.tokens.filter(token => token.id !== id))
         }

@@ -2,9 +2,11 @@ import Notification from '../notification/notification.vue'
 import notificationsFetcher from '../../services/notifications_fetcher/notifications_fetcher.service.js'
 import {
   notificationsFromStore,
-  visibleNotificationsFromStore,
+  filteredNotificationsFromStore,
   unseenNotificationsFromStore
 } from '../../services/notification_utils/notification_utils.js'
+
+const DEFAULT_SEEN_TO_DISPLAY_COUNT = 30
 
 const Notifications = {
   props: {
@@ -18,7 +20,11 @@ const Notifications = {
   },
   data () {
     return {
-      bottomedOut: false
+      bottomedOut: false,
+      // How many seen notifications to display in the list. The more there are,
+      // the heavier the page becomes. This count is increased when loading
+      // older notifications, and cut back to default whenever hitting "Read!".
+      seenToDisplayCount: DEFAULT_SEEN_TO_DISPLAY_COUNT
     }
   },
   computed: {
@@ -34,18 +40,26 @@ const Notifications = {
     unseenNotifications () {
       return unseenNotificationsFromStore(this.$store)
     },
-    visibleNotifications () {
-      return visibleNotificationsFromStore(this.$store, this.filterMode)
+    filteredNotifications () {
+      return filteredNotificationsFromStore(this.$store, this.filterMode)
     },
     unseenCount () {
       return this.unseenNotifications.length
     },
     loading () {
       return this.$store.state.statuses.notifications.loading
+    },
+    notificationsToDisplay () {
+      return this.filteredNotifications.slice(0, this.unseenCount + this.seenToDisplayCount)
     }
   },
   components: {
     Notification
+  },
+  created () {
+    const { dispatch } = this.$store
+
+    dispatch('fetchAndUpdateNotifications')
   },
   watch: {
     unseenCount (count) {
@@ -59,10 +73,19 @@ const Notifications = {
   methods: {
     markAsSeen () {
       this.$store.dispatch('markNotificationsAsSeen')
+      this.seenToDisplayCount = DEFAULT_SEEN_TO_DISPLAY_COUNT
     },
     fetchOlderNotifications () {
       if (this.loading) {
         return
+      }
+
+      const seenCount = this.filteredNotifications.length - this.unseenCount
+      if (this.seenToDisplayCount < seenCount) {
+        this.seenToDisplayCount = Math.min(this.seenToDisplayCount + 20, seenCount)
+        return
+      } else if (this.seenToDisplayCount > seenCount) {
+        this.seenToDisplayCount = seenCount
       }
 
       const store = this.$store
@@ -77,6 +100,7 @@ const Notifications = {
         if (notifs.length === 0) {
           this.bottomedOut = true
         }
+        this.seenToDisplayCount += notifs.length
       })
     }
   }

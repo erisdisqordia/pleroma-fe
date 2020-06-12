@@ -19,6 +19,7 @@ const actions = {
 
 const testGetters = {
   findUser: state => getters.findUser(state.users),
+  relationship: state => getters.relationship(state.users),
   mergedConfig: state => ({
     colors: '',
     highlight: {},
@@ -96,7 +97,8 @@ const externalProfileStore = new Vuex.Store({
         credentials: ''
       },
       usersObject: { 100: extUser },
-      users: [extUser]
+      users: [extUser],
+      relationships: {}
     }
   }
 })
@@ -164,7 +166,8 @@ const localProfileStore = new Vuex.Store({
         credentials: ''
       },
       usersObject: { 100: localUser, 'testuser': localUser },
-      users: [localUser]
+      users: [localUser],
+      relationships: {}
     }
   }
 })

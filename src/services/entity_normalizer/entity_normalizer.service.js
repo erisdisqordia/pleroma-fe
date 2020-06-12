@@ -1,3 +1,6 @@
+import escape from 'escape-html'
+import { isStatusNotification } from '../notification_utils/notification_utils.js'
+
 const qvitterStatusType = (status) => {
   if (status.is_post_verb) {
     return 'status'
@@ -41,10 +44,18 @@ export const parseUser = (data) => {
     }
 
     output.name = data.display_name
-    output.name_html = addEmojis(data.display_name, data.emojis)
+    output.name_html = addEmojis(escape(data.display_name), data.emojis)
 
     output.description = data.note
     output.description_html = addEmojis(data.note, data.emojis)
+
+    output.fields = data.fields
+    output.fields_html = data.fields.map(field => {
+      return {
+        name: addEmojis(field.name, data.emojis),
+        value: addEmojis(field.value, data.emojis)
+      }
+    })
 
     // Utilize avatar_static for gif avatars?
     output.profile_image_url = data.avatar
@@ -64,14 +75,10 @@ export const parseUser = (data) => {
       output.token = data.pleroma.chat_token
 
       if (relationship) {
-        output.follows_you = relationship.followed_by
-        output.requested = relationship.requested
-        output.following = relationship.following
-        output.statusnet_blocking = relationship.blocking
-        output.muted = relationship.muting
-        output.showing_reblogs = relationship.showing_reblogs
-        output.subscribed = relationship.subscribing
+        output.relationship = relationship
       }
+
+      output.allow_following_move = data.pleroma.allow_following_move
 
       output.hide_follows = data.pleroma.hide_follows
       output.hide_followers = data.pleroma.hide_followers
@@ -95,6 +102,7 @@ export const parseUser = (data) => {
     if (data.source) {
       output.description = data.source.note
       output.default_scope = data.source.privacy
+      output.fields = data.source.fields
       if (data.source.pleroma) {
         output.no_rich_text = data.source.pleroma.no_rich_text
         output.show_role = data.source.pleroma.show_role
@@ -124,15 +132,9 @@ export const parseUser = (data) => {
 
     output.statusnet_profile_url = data.statusnet_profile_url
 
-    output.statusnet_blocking = data.statusnet_blocking
-
     output.is_local = data.is_local
     output.role = data.role
     output.show_role = data.show_role
-
-    output.follows_you = data.follows_you
-
-    output.muted = data.muted
 
     if (data.rights) {
       output.rights = {
@@ -147,10 +149,16 @@ export const parseUser = (data) => {
     output.hide_follows_count = data.hide_follows_count
     output.hide_followers_count = data.hide_followers_count
     output.background_image = data.background_image
-    // on mastoapi this info is contained in a "relationship"
-    output.following = data.following
     // Websocket token
     output.token = data.token
+
+    // Convert relationsip data to expected format
+    output.relationship = {
+      muting: data.muted,
+      blocking: data.statusnet_blocking,
+      followed_by: data.follows_you,
+      following: data.following
+    }
   }
 
   output.created_at = new Date(data.created_at)
@@ -202,7 +210,7 @@ export const addEmojis = (string, emojis) => {
     const regexSafeShortCode = emoji.shortcode.replace(matchOperatorsRegex, '\\$&')
     return acc.replace(
       new RegExp(`:${regexSafeShortCode}:`, 'g'),
-      `<img src='${emoji.url}' alt='${emoji.shortcode}' title='${emoji.shortcode}' class='emoji' />`
+      `<img src='${emoji.url}' alt=':${emoji.shortcode}:' title=':${emoji.shortcode}:' class='emoji' />`
     )
   }, string)
 }
@@ -233,6 +241,7 @@ export const parseStatus = (data) => {
       output.is_local = pleroma.local
       output.in_reply_to_screen_name = data.pleroma.in_reply_to_account_acct
       output.thread_muted = pleroma.thread_muted
+      output.emoji_reactions = pleroma.emoji_reactions
     } else {
       output.text = data.content
       output.summary = data.spoiler_text
@@ -246,7 +255,7 @@ export const parseStatus = (data) => {
       output.retweeted_status = parseStatus(data.reblog)
     }
 
-    output.summary_html = addEmojis(data.spoiler_text, data.emojis)
+    output.summary_html = addEmojis(escape(data.spoiler_text), data.emojis)
     output.external_url = data.url
     output.poll = data.poll
     output.pinned = data.pinned
@@ -332,11 +341,13 @@ export const parseNotification = (data) => {
   if (masto) {
     output.type = mastoDict[data.type] || data.type
     output.seen = data.pleroma.is_seen
-    output.status = output.type === 'follow'
-      ? null
-      : parseStatus(data.status)
+    output.status = isStatusNotification(output.type) ? parseStatus(data.status) : null
     output.action = output.status // TODO: Refactor, this is unneeded
+    output.target = output.type !== 'move'
+      ? null
+      : parseUser(data.target)
     output.from_profile = parseUser(data.account)
+    output.emoji = data.emoji
   } else {
     const parsedNotice = parseStatus(data.notice)
     output.type = data.ntype

@@ -32,7 +32,7 @@ import _ from 'lodash'
 export default {
   computed: {
     languageCodes () {
-      return Object.keys(languagesObject)
+      return languagesObject.languages
     },
 
     languageNames () {
@@ -43,7 +43,6 @@ export default {
       get: function () { return this.$store.getters.mergedConfig.interfaceLanguage },
       set: function (val) {
         this.$store.dispatch('setOption', { name: 'interfaceLanguage', value: val })
-        this.$i18n.locale = val
       }
     }
   },
@@ -51,8 +50,8 @@ export default {
   methods: {
     getLanguageName (code) {
       const specialLanguageNames = {
-        'ja': 'Japanese (やさしいにほんご)',
-        'ja_pedantic': 'Japanese (日本語)',
+        'ja': 'Japanese (日本語)',
+        'ja_easy': 'Japanese (やさしいにほんご)',
         'zh': 'Chinese (简体中文)'
       }
       return specialLanguageNames[code] || ISO6391.getName(code)

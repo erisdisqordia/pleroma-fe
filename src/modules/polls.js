@@ -40,7 +40,7 @@ const polls = {
       commit('mergeOrAddPoll', poll)
     },
     updateTrackedPoll ({ rootState, dispatch, commit }, pollId) {
-      rootState.api.backendInteractor.fetchPoll(pollId).then(poll => {
+      rootState.api.backendInteractor.fetchPoll({ pollId }).then(poll => {
         setTimeout(() => {
           if (rootState.polls.trackedPolls[pollId]) {
             dispatch('updateTrackedPoll', pollId)
@@ -59,7 +59,7 @@ const polls = {
       commit('untrackPoll', pollId)
     },
     votePoll ({ rootState, commit }, { id, pollId, choices }) {
-      return rootState.api.backendInteractor.vote(pollId, choices).then(poll => {
+      return rootState.api.backendInteractor.vote({ pollId, choices }).then(poll => {
         commit('mergeOrAddPoll', poll)
         return poll
       })

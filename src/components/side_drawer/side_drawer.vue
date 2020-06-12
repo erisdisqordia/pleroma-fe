@@ -19,7 +19,7 @@
       >
         <UserCard
           v-if="currentUser"
-          :user="currentUser"
+          :user-id="currentUser.id"
           :hide-bio="true"
         />
         <div
@@ -27,7 +27,7 @@
           class="side-drawer-logo-wrapper"
         >
           <img :src="logo">
-          <span>{{ sitename }}</span>
+          <span v-if="!hideSitename">{{ sitename }}</span>
         </div>
       </div>
       <ul>
@@ -36,7 +36,7 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'login' }">
-            {{ $t("login.login") }}
+            <i class="button-icon icon-login" /> {{ $t("login.login") }}
           </router-link>
         </li>
         <li
@@ -44,7 +44,7 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
-            {{ $t("nav.dms") }}
+            <i class="button-icon icon-mail-alt" /> {{ $t("nav.dms") }}
           </router-link>
         </li>
         <li
@@ -52,7 +52,7 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
-            {{ $t("nav.interactions") }}
+            <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
           </router-link>
         </li>
       </ul>
@@ -62,7 +62,7 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'friends' }">
-            {{ $t("nav.timeline") }}
+            <i class="button-icon icon-home-2" /> {{ $t("nav.timeline") }}
           </router-link>
         </li>
         <li
@@ -70,7 +70,7 @@
           @click="toggleDrawer"
         >
           <router-link to="/friend-requests">
-            {{ $t("nav.friend_requests") }}
+            <i class="button-icon icon-user-plus" /> {{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
               class="badge follow-request-count"
@@ -79,14 +79,20 @@
             </span>
           </router-link>
         </li>
-        <li @click="toggleDrawer">
+        <li
+          v-if="currentUser || !privateMode"
+          @click="toggleDrawer"
+        >
           <router-link to="/main/public">
-            {{ $t("nav.public_tl") }}
+            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
           </router-link>
         </li>
-        <li @click="toggleDrawer">
+        <li
+          v-if="federating && (currentUser || !privateMode)"
+          @click="toggleDrawer"
+        >
           <router-link to="/main/all">
-            {{ $t("nav.twkn") }}
+            <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
           </router-link>
         </li>
         <li
@@ -94,14 +100,17 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'chat' }">
-            {{ $t("nav.chat") }}
+            <i class="button-icon icon-chat" /> {{ $t("nav.chat") }}
           </router-link>
         </li>
       </ul>
       <ul>
-        <li @click="toggleDrawer">
+        <li
+          v-if="currentUser || !privateMode"
+          @click="toggleDrawer"
+        >
           <router-link :to="{ name: 'search' }">
-            {{ $t("nav.search") }}
+            <i class="button-icon icon-search" /> {{ $t("nav.search") }}
           </router-link>
         </li>
         <li
@@ -109,17 +118,20 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'who-to-follow' }">
-            {{ $t("nav.who_to_follow") }}
+            <i class="button-icon icon-user-plus" /> {{ $t("nav.who_to_follow") }}
           </router-link>
         </li>
         <li @click="toggleDrawer">
-          <router-link :to="{ name: 'settings' }">
-            {{ $t("settings.settings") }}
-          </router-link>
+          <a
+            href="#"
+            @click="openSettingsModal"
+          >
+            <i class="button-icon icon-cog" /> {{ $t("settings.settings") }}
+          </a>
         </li>
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'about'}">
-            {{ $t("nav.about") }}
+            <i class="button-icon icon-info-circled" /> {{ $t("nav.about") }}
           </router-link>
         </li>
         <li
@@ -130,7 +142,7 @@
             href="/pleroma/admin/#/login-pleroma"
             target="_blank"
           >
-            {{ $t("nav.administration") }}
+            <i class="button-icon icon-gauge" /> {{ $t("nav.administration") }}
           </a>
         </li>
         <li
@@ -141,7 +153,7 @@
             href="#"
             @click="doLogout"
           >
-            {{ $t("login.logout") }}
+            <i class="button-icon icon-logout" /> {{ $t("login.logout") }}
           </a>
         </li>
       </ul>
@@ -214,7 +226,17 @@
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
   box-shadow: var(--panelShadow);
   background-color: $fallback--bg;
-  background-color: var(--bg, $fallback--bg);
+  background-color: var(--popover, $fallback--bg);
+  color: $fallback--link;
+  color: var(--popoverText, $fallback--link);
+  --faint: var(--popoverFaintText, $fallback--faint);
+  --faintLink: var(--popoverFaintLink, $fallback--faint);
+  --lightText: var(--popoverLightText, $fallback--lightText);
+  --icon: var(--popoverIcon, $fallback--icon);
+
+  .button-icon:before {
+    width: 1.1em;
+  }
 }
 
 .side-drawer-logo-wrapper {
@@ -276,7 +298,13 @@
 
     &:hover {
       background-color: $fallback--lightBg;
-      background-color: var(--lightBg, $fallback--lightBg);
+      background-color: var(--selectedMenuPopover, $fallback--lightBg);
+      color: $fallback--text;
+      color: var(--selectedMenuPopoverText, $fallback--text);
+      --faint: var(--selectedMenuPopoverFaintText, $fallback--faint);
+      --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
+      --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
+      --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
     }
   }
 }

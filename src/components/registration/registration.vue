@@ -170,9 +170,9 @@
               <label
                 class="form--label"
                 for="captcha-label"
-              >{{ $t('captcha') }}</label>
+              >{{ $t('registration.captcha') }}</label>
 
-              <template v-if="captcha.type == 'kocaptcha'">
+              <template v-if="['kocaptcha', 'native'].includes(captcha.type)">
                 <img
                   :src="captcha.url"
                   @click="setCaptcha"
@@ -187,6 +187,9 @@
                   class="form-control"
                   type="text"
                   autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
                 >
               </template>
             </div>

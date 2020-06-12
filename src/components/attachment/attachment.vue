@@ -130,6 +130,8 @@
   .placeholder {
     margin-right: 8px;
     margin-bottom: 4px;
+    color: $fallback--link;
+    color: var(--postLink, $fallback--link);
   }
 
   .nsfw-placeholder {

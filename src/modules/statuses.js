@@ -1,7 +1,21 @@
-import { remove, slice, each, findIndex, find, maxBy, minBy, merge, first, last, isArray, omitBy } from 'lodash'
+import {
+  remove,
+  slice,
+  each,
+  findIndex,
+  find,
+  maxBy,
+  minBy,
+  merge,
+  first,
+  last,
+  isArray,
+  omitBy
+} from 'lodash'
 import { set } from 'vue'
+import { isStatusNotification } from '../services/notification_utils/notification_utils.js'
 import apiService from '../services/api/api.service.js'
-// import parse from '../services/status_parser/status_parser.js'
+import { muteWordHits } from '../services/status_parser/status_parser.js'
 
 const emptyTl = (userId = 0) => ({
   statuses: [],
@@ -38,6 +52,7 @@ export const defaultState = () => ({
   notifications: emptyNotifications(),
   favorites: new Set(),
   error: false,
+  errorData: null,
   timelines: {
     mentions: emptyTl(),
     public: emptyTl(),
@@ -66,7 +81,9 @@ const visibleNotificationTypes = (rootState) => {
     rootState.config.notificationVisibility.likes && 'like',
     rootState.config.notificationVisibility.mentions && 'mention',
     rootState.config.notificationVisibility.repeats && 'repeat',
-    rootState.config.notificationVisibility.follows && 'follow'
+    rootState.config.notificationVisibility.follows && 'follow',
+    rootState.config.notificationVisibility.moves && 'move',
+    rootState.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reactions'
   ].filter(_ => _)
 }
 
@@ -305,9 +322,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
 const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters }) => {
   each(notifications, (notification) => {
-    if (notification.type !== 'follow') {
+    if (isStatusNotification(notification.type)) {
       notification.action = addStatusToGlobalStorage(state, notification.action).item
       notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
+    }
+
+    if (notification.type === 'pleroma:emoji_reaction') {
+      dispatch('fetchEmojiReactionsBy', notification.status.id)
     }
 
     // Only add a new notification if we don't have one for the same action
@@ -338,11 +359,19 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
           case 'follow':
             i18nString = 'followed_you'
             break
+          case 'move':
+            i18nString = 'migrated_to'
+            break
+          case 'follow_request':
+            i18nString = 'follow_request'
+            break
         }
 
-        if (i18nString) {
+        if (notification.type === 'pleroma:emoji_reaction') {
+          notifObj.body = rootGetters.i18n.t('notifications.reacted_with', [notification.emoji])
+        } else if (i18nString) {
           notifObj.body = rootGetters.i18n.t('notifications.' + i18nString)
-        } else {
+        } else if (isStatusNotification(notification.type)) {
           notifObj.body = notification.status.text
         }
 
@@ -352,11 +381,22 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
           notifObj.image = status.attachments[0].url
         }
 
-        if (!notification.seen && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.type)) {
-          let notification = new window.Notification(title, notifObj)
+        const reasonsToMuteNotif = (
+          notification.seen ||
+            state.notifications.desktopNotificationSilence ||
+            !visibleNotificationTypes.includes(notification.type) ||
+            (
+              notification.type === 'mention' && status && (
+                status.muted ||
+                  muteWordHits(status, rootGetters.mergedConfig.muteWords).length === 0
+              )
+            )
+        )
+        if (!reasonsToMuteNotif) {
+          let desktopNotification = new window.Notification(title, notifObj)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.
-          setTimeout(notification.close.bind(notification), 5000)
+          setTimeout(desktopNotification.close.bind(desktopNotification), 5000)
         }
       }
     } else if (notification.seen) {
@@ -479,6 +519,9 @@ export const mutations = {
   setError (state, { value }) {
     state.error = value
   },
+  setErrorData (state, { value }) {
+    state.errorData = value
+  },
   setNotificationsLoading (state, { value }) {
     state.notifications.loading = value
   },
@@ -492,6 +535,17 @@ export const mutations = {
     each(state.notifications.data, (notification) => {
       notification.seen = true
     })
+  },
+  markSingleNotificationAsSeen (state, { id }) {
+    const notification = find(state.notifications.data, n => n.id === id)
+    if (notification) notification.seen = true
+  },
+  dismissNotification (state, { id }) {
+    state.notifications.data = state.notifications.data.filter(n => n.id !== id)
+  },
+  updateNotification (state, { id, updater }) {
+    const notification = find(state.notifications.data, n => n.id === id)
+    notification && updater(notification)
   },
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
@@ -509,6 +563,53 @@ export const mutations = {
     // favorites stats can be incorrect based on polling condition, let's update them using the most recent data
     newStatus.fave_num = newStatus.favoritedBy.length
     newStatus.favorited = !!newStatus.favoritedBy.find(({ id }) => currentUser.id === id)
+  },
+  addEmojiReactionsBy (state, { id, emojiReactions, currentUser }) {
+    const status = state.allStatusesObject[id]
+    set(status, 'emoji_reactions', emojiReactions)
+  },
+  addOwnReaction (state, { id, emoji, currentUser }) {
+    const status = state.allStatusesObject[id]
+    const reactionIndex = findIndex(status.emoji_reactions, { name: emoji })
+    const reaction = status.emoji_reactions[reactionIndex] || { name: emoji, count: 0, accounts: [] }
+
+    const newReaction = {
+      ...reaction,
+      count: reaction.count + 1,
+      me: true,
+      accounts: [
+        ...reaction.accounts,
+        currentUser
+      ]
+    }
+
+    // Update count of existing reaction if it exists, otherwise append at the end
+    if (reactionIndex >= 0) {
+      set(status.emoji_reactions, reactionIndex, newReaction)
+    } else {
+      set(status, 'emoji_reactions', [...status.emoji_reactions, newReaction])
+    }
+  },
+  removeOwnReaction (state, { id, emoji, currentUser }) {
+    const status = state.allStatusesObject[id]
+    const reactionIndex = findIndex(status.emoji_reactions, { name: emoji })
+    if (reactionIndex < 0) return
+
+    const reaction = status.emoji_reactions[reactionIndex]
+    const accounts = reaction.accounts || []
+
+    const newReaction = {
+      ...reaction,
+      count: reaction.count - 1,
+      me: false,
+      accounts: accounts.filter(acc => acc.id !== currentUser.id)
+    }
+
+    if (newReaction.count > 0) {
+      set(status.emoji_reactions, reactionIndex, newReaction)
+    } else {
+      set(status, 'emoji_reactions', status.emoji_reactions.filter(r => r.name !== emoji))
+    }
   },
   updateStatusWithPoll (state, { id, poll }) {
     const status = state.allStatusesObject[id]
@@ -528,6 +629,9 @@ const statuses = {
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })
     },
+    setErrorData ({ rootState, commit }, { value }) {
+      commit('setErrorData', { value })
+    },
     setNotificationsLoading ({ rootState, commit }, { value }) {
       commit('setNotificationsLoading', { value })
     },
@@ -538,7 +642,7 @@ const statuses = {
       commit('setNotificationsSilence', { value })
     },
     fetchStatus ({ rootState, dispatch }, id) {
-      rootState.api.backendInteractor.fetchStatus({ id })
+      return rootState.api.backendInteractor.fetchStatus({ id })
         .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
     },
     deleteStatus ({ rootState, commit }, status) {
@@ -551,45 +655,45 @@ const statuses = {
     favorite ({ rootState, commit }, status) {
       // Optimistic favoriting...
       commit('setFavorited', { status, value: true })
-      rootState.api.backendInteractor.favorite(status.id)
+      rootState.api.backendInteractor.favorite({ id: status.id })
         .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
     unfavorite ({ rootState, commit }, status) {
       // Optimistic unfavoriting...
       commit('setFavorited', { status, value: false })
-      rootState.api.backendInteractor.unfavorite(status.id)
+      rootState.api.backendInteractor.unfavorite({ id: status.id })
         .then(status => commit('setFavoritedConfirm', { status, user: rootState.users.currentUser }))
     },
     fetchPinnedStatuses ({ rootState, dispatch }, userId) {
-      rootState.api.backendInteractor.fetchPinnedStatuses(userId)
+      rootState.api.backendInteractor.fetchPinnedStatuses({ id: userId })
         .then(statuses => dispatch('addNewStatuses', { statuses, timeline: 'user', userId, showImmediately: true, noIdUpdate: true }))
     },
     pinStatus ({ rootState, dispatch }, statusId) {
-      return rootState.api.backendInteractor.pinOwnStatus(statusId)
+      return rootState.api.backendInteractor.pinOwnStatus({ id: statusId })
         .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
     },
     unpinStatus ({ rootState, dispatch }, statusId) {
-      rootState.api.backendInteractor.unpinOwnStatus(statusId)
+      rootState.api.backendInteractor.unpinOwnStatus({ id: statusId })
         .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
     },
     muteConversation ({ rootState, commit }, statusId) {
-      return rootState.api.backendInteractor.muteConversation(statusId)
+      return rootState.api.backendInteractor.muteConversation({ id: statusId })
         .then((status) => commit('setMutedStatus', status))
     },
     unmuteConversation ({ rootState, commit }, statusId) {
-      return rootState.api.backendInteractor.unmuteConversation(statusId)
+      return rootState.api.backendInteractor.unmuteConversation({ id: statusId })
         .then((status) => commit('setMutedStatus', status))
     },
     retweet ({ rootState, commit }, status) {
       // Optimistic retweeting...
       commit('setRetweeted', { status, value: true })
-      rootState.api.backendInteractor.retweet(status.id)
+      rootState.api.backendInteractor.retweet({ id: status.id })
         .then(status => commit('setRetweetedConfirm', { status: status.retweeted_status, user: rootState.users.currentUser }))
     },
     unretweet ({ rootState, commit }, status) {
       // Optimistic unretweeting...
       commit('setRetweeted', { status, value: false })
-      rootState.api.backendInteractor.unretweet(status.id)
+      rootState.api.backendInteractor.unretweet({ id: status.id })
         .then(status => commit('setRetweetedConfirm', { status, user: rootState.users.currentUser }))
     },
     queueFlush ({ rootState, commit }, { timeline, id }) {
@@ -602,21 +706,68 @@ const statuses = {
         credentials: rootState.users.currentUser.credentials
       })
     },
+    markSingleNotificationAsSeen ({ rootState, commit }, { id }) {
+      commit('markSingleNotificationAsSeen', { id })
+      apiService.markNotificationsAsSeen({
+        single: true,
+        id,
+        credentials: rootState.users.currentUser.credentials
+      })
+    },
+    dismissNotificationLocal ({ rootState, commit }, { id }) {
+      commit('dismissNotification', { id })
+    },
+    dismissNotification ({ rootState, commit }, { id }) {
+      commit('dismissNotification', { id })
+      rootState.api.backendInteractor.dismissNotification({ id })
+    },
+    updateNotification ({ rootState, commit }, { id, updater }) {
+      commit('updateNotification', { id, updater })
+    },
     fetchFavsAndRepeats ({ rootState, commit }, id) {
       Promise.all([
-        rootState.api.backendInteractor.fetchFavoritedByUsers(id),
-        rootState.api.backendInteractor.fetchRebloggedByUsers(id)
+        rootState.api.backendInteractor.fetchFavoritedByUsers({ id }),
+        rootState.api.backendInteractor.fetchRebloggedByUsers({ id })
       ]).then(([favoritedByUsers, rebloggedByUsers]) => {
         commit('addFavs', { id, favoritedByUsers, currentUser: rootState.users.currentUser })
         commit('addRepeats', { id, rebloggedByUsers, currentUser: rootState.users.currentUser })
       })
     },
+    reactWithEmoji ({ rootState, dispatch, commit }, { id, emoji }) {
+      const currentUser = rootState.users.currentUser
+      if (!currentUser) return
+
+      commit('addOwnReaction', { id, emoji, currentUser })
+      rootState.api.backendInteractor.reactWithEmoji({ id, emoji }).then(
+        ok => {
+          dispatch('fetchEmojiReactionsBy', id)
+        }
+      )
+    },
+    unreactWithEmoji ({ rootState, dispatch, commit }, { id, emoji }) {
+      const currentUser = rootState.users.currentUser
+      if (!currentUser) return
+
+      commit('removeOwnReaction', { id, emoji, currentUser })
+      rootState.api.backendInteractor.unreactWithEmoji({ id, emoji }).then(
+        ok => {
+          dispatch('fetchEmojiReactionsBy', id)
+        }
+      )
+    },
+    fetchEmojiReactionsBy ({ rootState, commit }, id) {
+      rootState.api.backendInteractor.fetchEmojiReactions({ id }).then(
+        emojiReactions => {
+          commit('addEmojiReactionsBy', { id, emojiReactions, currentUser: rootState.users.currentUser })
+        }
+      )
+    },
     fetchFavs ({ rootState, commit }, id) {
-      rootState.api.backendInteractor.fetchFavoritedByUsers(id)
+      rootState.api.backendInteractor.fetchFavoritedByUsers({ id })
         .then(favoritedByUsers => commit('addFavs', { id, favoritedByUsers, currentUser: rootState.users.currentUser }))
     },
     fetchRepeats ({ rootState, commit }, id) {
-      rootState.api.backendInteractor.fetchRebloggedByUsers(id)
+      rootState.api.backendInteractor.fetchRebloggedByUsers({ id })
         .then(rebloggedByUsers => commit('addRepeats', { id, rebloggedByUsers, currentUser: rootState.users.currentUser }))
     },
     search (store, { q, resolve, limit, offset, following }) {

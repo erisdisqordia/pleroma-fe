@@ -3,12 +3,14 @@ import Notifications from '../notifications/notifications.vue'
 const tabModeDict = {
   mentions: ['mention'],
   'likes+repeats': ['repeat', 'like'],
-  follows: ['follow']
+  follows: ['follow'],
+  moves: ['move']
 }
 
 const Interactions = {
   data () {
     return {
+      allowFollowingMove: this.$store.state.users.currentUser.allow_following_move,
       filterMode: tabModeDict['mentions']
     }
   },

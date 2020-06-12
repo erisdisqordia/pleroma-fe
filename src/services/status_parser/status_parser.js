@@ -1,15 +1,11 @@
-import sanitize from 'sanitize-html'
+import { filter } from 'lodash'
 
-export const removeAttachmentLinks = (html) => {
-  return sanitize(html, {
-    allowedTags: false,
-    allowedAttributes: false,
-    exclusiveFilter: ({ tag, attribs }) => tag === 'a' && typeof attribs.class === 'string' && attribs.class.match(/attachment/)
+export const muteWordHits = (status, muteWords) => {
+  const statusText = status.text.toLowerCase()
+  const statusSummary = status.summary.toLowerCase()
+  const hits = filter(muteWords, (muteWord) => {
+    return statusText.includes(muteWord.toLowerCase()) || statusSummary.includes(muteWord.toLowerCase())
   })
-}
 
-export const parse = (html) => {
-  return removeAttachmentLinks(html)
+  return hits
 }
-
-export default parse

@@ -256,6 +256,13 @@
               :label="$t('settings.links')"
             />
             <ContrastRatio :contrast="previewContrast.postLink" />
+            <ColorInput
+              v-model="postGreentextColorLocal"
+              name="postGreentextColor"
+              :fallback="previewTheme.colors.cGreen"
+              :label="$t('settings.greentext')"
+            />
+            <ContrastRatio :contrast="previewContrast.postGreentext" />
             <h4>{{ $t('settings.style.advanced_colors.alert') }}</h4>
             <ColorInput
               v-model="alertErrorColorLocal"

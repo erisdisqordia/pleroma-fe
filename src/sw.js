@@ -1,4 +1,5 @@
 /* eslint-env serviceworker */
+/* eslint-disable import/no-webpack-loader-syntax */
 
 import localForage from 'localforage'
 import { parseNotification } from './services/entity_normalizer/entity_normalizer.service.js'
@@ -7,33 +8,33 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
 const messages = {
-  ar: require('./i18n/ar.json'),
-  ca: require('./i18n/ca.json'),
-  cs: require('./i18n/cs.json'),
-  de: require('./i18n/de.json'),
-  eo: require('./i18n/eo.json'),
-  es: require('./i18n/es.json'),
-  et: require('./i18n/et.json'),
-  eu: require('./i18n/eu.json'),
-  fi: require('./i18n/fi.json'),
-  fr: require('./i18n/fr.json'),
-  ga: require('./i18n/ga.json'),
-  he: require('./i18n/he.json'),
-  hu: require('./i18n/hu.json'),
-  it: require('./i18n/it.json'),
-  ja: require('./i18n/ja_pedantic.json'),
-  ja_easy: require('./i18n/ja_easy.json'),
-  ko: require('./i18n/ko.json'),
-  nb: require('./i18n/nb.json'),
-  nl: require('./i18n/nl.json'),
-  oc: require('./i18n/oc.json'),
-  pl: require('./i18n/pl.json'),
-  pt: require('./i18n/pt.json'),
-  ro: require('./i18n/ro.json'),
-  ru: require('./i18n/ru.json'),
-  te: require('./i18n/te.json'),
-  zh: require('./i18n/zh.json'),
-  en: require('./i18n/en.json')
+  ar: require('./lib/notification-i18n-loader.js!./i18n/ar.json'),
+  ca: require('./lib/notification-i18n-loader.js!./i18n/ca.json'),
+  cs: require('./lib/notification-i18n-loader.js!./i18n/cs.json'),
+  de: require('./lib/notification-i18n-loader.js!./i18n/de.json'),
+  eo: require('./lib/notification-i18n-loader.js!./i18n/eo.json'),
+  es: require('./lib/notification-i18n-loader.js!./i18n/es.json'),
+  et: require('./lib/notification-i18n-loader.js!./i18n/et.json'),
+  eu: require('./lib/notification-i18n-loader.js!./i18n/eu.json'),
+  fi: require('./lib/notification-i18n-loader.js!./i18n/fi.json'),
+  fr: require('./lib/notification-i18n-loader.js!./i18n/fr.json'),
+  ga: require('./lib/notification-i18n-loader.js!./i18n/ga.json'),
+  he: require('./lib/notification-i18n-loader.js!./i18n/he.json'),
+  hu: require('./lib/notification-i18n-loader.js!./i18n/hu.json'),
+  it: require('./lib/notification-i18n-loader.js!./i18n/it.json'),
+  ja: require('./lib/notification-i18n-loader.js!./i18n/ja_pedantic.json'),
+  ja_easy: require('./lib/notification-i18n-loader.js!./i18n/ja_easy.json'),
+  ko: require('./lib/notification-i18n-loader.js!./i18n/ko.json'),
+  nb: require('./lib/notification-i18n-loader.js!./i18n/nb.json'),
+  nl: require('./lib/notification-i18n-loader.js!./i18n/nl.json'),
+  oc: require('./lib/notification-i18n-loader.js!./i18n/oc.json'),
+  pl: require('./lib/notification-i18n-loader.js!./i18n/pl.json'),
+  pt: require('./lib/notification-i18n-loader.js!./i18n/pt.json'),
+  ro: require('./lib/notification-i18n-loader.js!./i18n/ro.json'),
+  ru: require('./lib/notification-i18n-loader.js!./i18n/ru.json'),
+  te: require('./lib/notification-i18n-loader.js!./i18n/te.json'),
+  zh: require('./lib/notification-i18n-loader.js!./i18n/zh.json'),
+  en: require('./lib/notification-i18n-loader.js!./i18n/en.json')
 }
 
 Vue.use(VueI18n)

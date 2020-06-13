@@ -54,25 +54,20 @@
     flex-wrap: nowrap;
     padding: 0.6em;
     min-width: 0;
+
     .avatar-container {
       width: 32px;
       height: 32px;
     }
-    .status-el {
-      .status {
-        padding: 0.25em 0;
-        color: $fallback--faint;
-        color: var(--faint, $fallback--faint);
-        a {
-          color: var(--faintLink);
-        }
-        .status-content a {
-          color: var(--postFaintLink);
-        }
+
+    .status-body {
+      color: $fallback--faint;
+      color: var(--faint, $fallback--faint);
+      a {
+        color: var(--faintLink);
       }
-      padding: 0;
-      .media-body {
-        margin: 0;
+      .status-content a {
+        color: var(--postFaintLink);
       }
     }
   }

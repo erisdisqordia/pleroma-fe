@@ -259,10 +259,10 @@ export const parseStatus = (data) => {
     output.external_url = data.url
     output.poll = data.poll
     if (output.poll) {
-      output.poll.options = (output.poll.options || []).map(field => {
-        field.title_html = addEmojis(field.title, data.emojis)
-        return field
-      })
+      output.poll.options = (output.poll.options || []).map(field => ({
+        ...field,
+        title_html: addEmojis(field.title, data.emojis)
+      }))
     }
     output.pinned = data.pinned
     output.muted = data.muted

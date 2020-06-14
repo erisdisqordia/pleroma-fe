@@ -226,7 +226,7 @@ $status-margin: 0.75em;
 
 .greentext {
   color: $fallback--cGreen;
-  color: var(--cGreen, $fallback--cGreen);
+  color: var(--postGreentext, $fallback--cGreen);
 }
 
 .timeline :not(.panel-disabled) > {

@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 ### Changed
+- Greentext now has separate color slot for it
 - Removed the use of with_move parameters when fetching notifications
 
 ### Fixed

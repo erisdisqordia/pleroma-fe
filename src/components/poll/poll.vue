@@ -17,7 +17,7 @@
           <span class="result-percentage">
             {{ percentageForOption(option.votes_count) }}%
           </span>
-          <span>{{ option.title }}</span>
+          <span v-html="option.title_html"></span>
         </div>
         <div
           class="result-fill"
@@ -75,6 +75,12 @@
 @import '../../_variables.scss';
 
 .poll {
+  img.emoji {
+    vertical-align: middle;
+    object-fit: contain;
+    width: 32px;
+    height: 32px;
+  }
   .votes {
     display: flex;
     flex-direction: column;

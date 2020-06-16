@@ -32,7 +32,6 @@ const Popover = {
   methods: {
     containerBoundingClientRect () {
       const container = this.boundToSelector ? document.querySelector(this.boundToSelector) : this.$el.offsetParent
-      console.log('test', container)
       return container.getBoundingClientRect()
     },
     updateStyles () {

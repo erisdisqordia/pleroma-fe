@@ -1,4 +1,3 @@
-
 const Popover = {
   name: 'Popover',
   props: {
@@ -31,7 +30,7 @@ const Popover = {
   },
   methods: {
     containerBoundingClientRect () {
-      const container = this.boundToSelector ? document.querySelector(this.boundToSelector) : this.$el.offsetParent
+      const container = this.boundToSelector ? this.$el.closest(this.boundToSelector) : this.$el.offsetParent
       return container.getBoundingClientRect()
     },
     updateStyles () {

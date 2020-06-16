@@ -81,6 +81,7 @@
             v-model="newStatus.spoilerText"
             type="text"
             :placeholder="$t('post_status.content_warning')"
+            :disabled="posting"
             class="form-post-subject"
           >
         </EmojiInput>

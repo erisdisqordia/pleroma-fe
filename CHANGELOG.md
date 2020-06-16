@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Newlines in the muted words settings work again
 - Clicking on non-latin hashtags won't open a new window
 - Uploading and drag-dropping multiple files works correctly now.
+- Fix status ellipsis menu being cut off in notifications column.
 
 ## [2.0.3] - 2020-05-02
 ### Fixed

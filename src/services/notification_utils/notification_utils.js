@@ -1,4 +1,4 @@
-import { filter, sortBy } from 'lodash'
+import { filter, sortBy, includes } from 'lodash'
 
 export const notificationsFromStore = store => store.state.statuses.notifications.data
 
@@ -6,8 +6,15 @@ export const visibleTypes = store => ([
   store.state.config.notificationVisibility.likes && 'like',
   store.state.config.notificationVisibility.mentions && 'mention',
   store.state.config.notificationVisibility.repeats && 'repeat',
-  store.state.config.notificationVisibility.follows && 'follow'
+  store.state.config.notificationVisibility.follows && 'follow',
+  store.state.config.notificationVisibility.followRequest && 'follow_request',
+  store.state.config.notificationVisibility.moves && 'move',
+  store.state.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reaction'
 ].filter(_ => _))
+
+const statusNotifications = ['like', 'mention', 'repeat', 'pleroma:emoji_reaction']
+
+export const isStatusNotification = (type) => includes(statusNotifications, type)
 
 const sortById = (a, b) => {
   const seqA = Number(a.id)
@@ -25,7 +32,7 @@ const sortById = (a, b) => {
   }
 }
 
-export const visibleNotificationsFromStore = (store, types) => {
+export const filteredNotificationsFromStore = (store, types) => {
   // map is just to clone the array since sort mutates it and it causes some issues
   let sortedNotifications = notificationsFromStore(store).map(_ => _).sort(sortById)
   sortedNotifications = sortBy(sortedNotifications, 'seen')
@@ -35,4 +42,4 @@ export const visibleNotificationsFromStore = (store, types) => {
 }
 
 export const unseenNotificationsFromStore = store =>
-  filter(visibleNotificationsFromStore(store), ({ seen }) => !seen)
+  filter(filteredNotificationsFromStore(store), ({ seen }) => !seen)

@@ -36,7 +36,12 @@ const Timeline = {
     }
   },
   computed: {
-    timelineError () { return this.$store.state.statuses.error },
+    timelineError () {
+      return this.$store.state.statuses.error
+    },
+    errorData () {
+      return this.$store.state.statuses.errorData
+    },
     newStatusCount () {
       return this.timeline.newStatusCount
     },

@@ -5,6 +5,7 @@
 
 // var path = require('path')
 var merge = require('webpack-merge')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 var baseConfig = require('../../build/webpack.base.conf')
 var utils = require('../../build/utils')
 var webpack = require('webpack')
@@ -24,6 +25,11 @@ var webpackConfig = merge(baseConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../../config/test.env')
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true
     })
   ]
 })

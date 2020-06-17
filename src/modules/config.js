@@ -1,10 +1,24 @@
 import { set, delete as del } from 'vue'
 import { setPreset, applyTheme } from '../services/style_setter/style_setter.js'
+import messages from '../i18n/messages'
 
 const browserLocale = (window.navigator.language || 'en').split('-')[0]
 
+/* TODO this is a bit messy.
+ * We need to declare settings with their types and also deal with
+ * instance-default settings in some way, hopefully try to avoid copy-pasta
+ * in general.
+ */
+export const multiChoiceProperties = [
+  'postContentType',
+  'subjectLineBehavior'
+]
+
 export const defaultState = {
   colors: {},
+  theme: undefined,
+  customTheme: undefined,
+  customThemeSource: undefined,
   hideISP: false,
   // bad name: actually hides posts of muted USERS
   hideMutedPosts: undefined, // instance default
@@ -20,6 +34,7 @@ export const defaultState = {
   autoLoad: true,
   streaming: false,
   hoverPreview: true,
+  emojiReactionsOnTimeline: true,
   autohideFloatingPostButton: false,
   pauseOnUnfocused: true,
   stopGifs: false,
@@ -28,13 +43,17 @@ export const defaultState = {
     follows: true,
     mentions: true,
     likes: true,
-    repeats: true
+    repeats: true,
+    moves: true,
+    emojiReactions: false,
+    followRequest: true
   },
   webPushNotifications: false,
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale,
   hideScopeNotice: false,
+  useStreamingApi: false,
   scopeCopy: undefined, // instance default
   subjectLineBehavior: undefined, // instance default
   alwaysShowSubjectInput: undefined, // instance default
@@ -92,10 +111,15 @@ const config = {
       commit('setOption', { name, value })
       switch (name) {
         case 'theme':
-          setPreset(value, commit)
+          setPreset(value)
           break
         case 'customTheme':
-          applyTheme(value, commit)
+        case 'customThemeSource':
+          applyTheme(value)
+          break
+        case 'interfaceLanguage':
+          messages.setLanguage(this.getters.i18n, value)
+          break
       }
     }
   }

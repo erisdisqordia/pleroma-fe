@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     exportData () {
-      const stringified = JSON.stringify(this.exportObject) // Pretty-print and indent with 2 spaces
+      const stringified = JSON.stringify(this.exportObject, null, 2) // Pretty-print and indent with 2 spaces
 
       // Create an invisible link with a data url and simulate a click
       const e = document.createElement('a')

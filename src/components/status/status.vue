@@ -17,12 +17,33 @@
     </div>
     <template v-if="muted && !isPreview">
       <div class="media status container muted">
-        <small>
+        <small class="username">
+          <i
+            v-if="muted && retweet"
+            class="button-icon icon-retweet"
+          />
           <router-link :to="userProfileLink">
             {{ status.user.screen_name }}
           </router-link>
         </small>
-        <small class="muteWords">{{ muteWordHits.join(', ') }}</small>
+        <small
+          v-if="showReasonMutedThread"
+          class="mute-thread"
+        >
+          {{ $t('status.thread_muted') }}
+        </small>
+        <small
+          v-if="showReasonMutedThread && muteWordHits.length > 0"
+          class="mute-thread"
+        >
+          {{ $t('status.thread_muted_and_words') }}
+        </small>
+        <small
+          class="mute-words"
+          :title="muteWordHits.join(', ')"
+        >
+          {{ muteWordHits.join(', ') }}
+        </small>
         <a
           href="#"
           class="unmute"
@@ -94,7 +115,7 @@
         <div class="status-body">
           <UserCard
             v-if="userExpanded"
-            :user="status.user"
+            :user-id="status.user.id"
             :rounded="true"
             :bordered="true"
             class="status-usercard"
@@ -177,6 +198,8 @@
                 <StatusPopover
                   v-if="!isPreview"
                   :status-id="status.in_reply_to_status_id"
+                  class="reply-to-popover"
+                  style="min-width: 0"
                 >
                   <a
                     class="reply-to"
@@ -224,104 +247,12 @@
             </div>
           </div>
 
-          <div
-            v-if="longSubject"
-            class="status-content-wrapper"
-            :class="{ 'tall-status': !showingLongSubject }"
-          >
-            <a
-              v-if="!showingLongSubject"
-              class="tall-status-hider"
-              :class="{ 'tall-status-hider_focused': isFocused }"
-              href="#"
-              @click.prevent="showingLongSubject=true"
-            >{{ $t("general.show_more") }}</a>
-            <div
-              class="status-content media-body"
-              @click.prevent="linkClicked"
-              v-html="contentHtml"
-            />
-            <a
-              v-if="showingLongSubject"
-              href="#"
-              class="status-unhider"
-              @click.prevent="showingLongSubject=false"
-            >{{ $t("general.show_less") }}</a>
-          </div>
-          <div
-            v-else
-            :class="{'tall-status': hideTallStatus}"
-            class="status-content-wrapper"
-          >
-            <a
-              v-if="hideTallStatus"
-              class="tall-status-hider"
-              :class="{ 'tall-status-hider_focused': isFocused }"
-              href="#"
-              @click.prevent="toggleShowMore"
-            >{{ $t("general.show_more") }}</a>
-            <div
-              v-if="!hideSubjectStatus"
-              class="status-content media-body"
-              @click.prevent="linkClicked"
-              v-html="contentHtml"
-            />
-            <div
-              v-else
-              class="status-content media-body"
-              @click.prevent="linkClicked"
-              v-html="status.summary_html"
-            />
-            <a
-              v-if="hideSubjectStatus"
-              href="#"
-              class="cw-status-hider"
-              @click.prevent="toggleShowMore"
-            >{{ $t("general.show_more") }}</a>
-            <a
-              v-if="showingMore"
-              href="#"
-              class="status-unhider"
-              @click.prevent="toggleShowMore"
-            >{{ $t("general.show_less") }}</a>
-          </div>
-
-          <div v-if="status.poll && status.poll.options">
-            <poll :base-poll="status.poll" />
-          </div>
-
-          <div
-            v-if="status.attachments && (!hideSubjectStatus || showingLongSubject)"
-            class="attachments media-body"
-          >
-            <attachment
-              v-for="attachment in nonGalleryAttachments"
-              :key="attachment.id"
-              class="non-gallery"
-              :size="attachmentSize"
-              :nsfw="nsfwClickthrough"
-              :attachment="attachment"
-              :allow-play="true"
-              :set-media="setMedia()"
-            />
-            <gallery
-              v-if="galleryAttachments.length > 0"
-              :nsfw="nsfwClickthrough"
-              :attachments="galleryAttachments"
-              :set-media="setMedia()"
-            />
-          </div>
-
-          <div
-            v-if="status.card && !hideSubjectStatus && !noHeading"
-            class="link-preview media-body"
-          >
-            <link-preview
-              :card="status.card"
-              :size="attachmentSize"
-              :nsfw="nsfwClickthrough"
-            />
-          </div>
+          <StatusContent
+            :status="status"
+            :no-heading="noHeading"
+            :highlight="highlight"
+            :focused="isFocused"
+          />
 
           <transition name="fade">
             <div
@@ -354,6 +285,11 @@
             </div>
           </transition>
 
+          <EmojiReactions
+            v-if="(mergedConfig.emojiReactionsOnTimeline || isFocused) && (!noHeading && !isPreview)"
+            :status="status"
+          />
+
           <div
             v-if="!noHeading && !isPreview"
             class="status-actions media-body"
@@ -380,6 +316,10 @@
             />
             <favorite-button
               :logged-in="loggedIn"
+              :status="status"
+            />
+            <ReactButton
+              v-if="loggedIn"
               :status="status"
             />
             <extra-buttons
@@ -445,7 +385,15 @@ $status-margin: 0.75em;
 
   &_focused {
     background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
+    background-color: var(--selectedPost, $fallback--lightBg);
+    color: $fallback--text;
+    color: var(--selectedPostText, $fallback--text);
+    --lightText: var(--selectedPostLightText, $fallback--light);
+    --faint: var(--selectedPostFaintText, $fallback--faint);
+    --faintLink: var(--selectedPostFaintLink, $fallback--faint);
+    --postLink: var(--selectedPostPostLink, $fallback--faint);
+    --postFaintLink: var(--selectedPostFaintPostLink, $fallback--faint);
+    --icon: var(--selectedPostIcon, $fallback--icon);
   }
 
   .timeline & {
@@ -541,11 +489,10 @@ $status-margin: 0.75em;
       align-items: stretch;
 
       > .reply-to-and-accountname > a {
+        overflow: hidden;
         max-width: 100%;
         text-overflow: ellipsis;
-        overflow: hidden;
         white-space: nowrap;
-        display: inline-block;
         word-break: break-all;
       }
     }
@@ -554,7 +501,6 @@ $status-margin: 0.75em;
       display: flex;
       height: 18px;
       margin-right: 0.5em;
-      overflow: hidden;
       max-width: 100%;
       .icon-reply {
         transform: scaleX(-1);
@@ -565,6 +511,10 @@ $status-margin: 0.75em;
       display: flex;
     }
 
+    .reply-to-popover {
+      min-width: 0;
+    }
+
     .reply-to {
       display: flex;
     }
@@ -572,9 +522,8 @@ $status-margin: 0.75em;
     .reply-to-text {
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
       margin: 0 0.4em 0 0.2em;
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
     }
 
     .replies-separator {
@@ -593,100 +542,6 @@ $status-margin: 0.75em;
 
     .reply-link {
       height: 17px;
-    }
-  }
-
-  .tall-status {
-    position: relative;
-    height: 220px;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    z-index: 1;
-    .status-content {
-      height: 100%;
-      mask: linear-gradient(to top, white, transparent) bottom/100% 70px no-repeat,
-            linear-gradient(to top, white, white);
-      /* Autoprefixed seem to ignore this one, and also syntax is different */
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-    }
-  }
-
-  .tall-status-hider {
-    display: inline-block;
-    word-break: break-all;
-    position: absolute;
-    height: 70px;
-    margin-top: 150px;
-    width: 100%;
-    text-align: center;
-    line-height: 110px;
-    z-index: 2;
-  }
-
-  .status-unhider, .cw-status-hider {
-    width: 100%;
-    text-align: center;
-    display: inline-block;
-    word-break: break-all;
-  }
-
-  .status-content {
-    font-family: var(--postFont, sans-serif);
-    line-height: 1.4em;
-    white-space: pre-wrap;
-
-    img, video {
-      max-width: 100%;
-      max-height: 400px;
-      vertical-align: middle;
-      object-fit: contain;
-
-      &.emoji {
-        width: 32px;
-        height: 32px;
-      }
-    }
-
-    blockquote {
-      margin: 0.2em 0 0.2em 2em;
-      font-style: italic;
-    }
-
-    pre {
-      overflow: auto;
-    }
-
-    code, samp, kbd, var, pre {
-      font-family: var(--postCodeFont, monospace);
-    }
-
-    p {
-      margin: 0 0 1em 0;
-    }
-
-    p:last-child {
-      margin: 0 0 0 0;
-    }
-
-    h1 {
-      font-size: 1.1em;
-      line-height: 1.2em;
-      margin: 1.4em 0;
-    }
-
-    h2 {
-      font-size: 1.1em;
-      margin: 1.0em 0;
-    }
-
-    h3 {
-      font-size: 1em;
-      margin: 1.2em 0;
-    }
-
-    h4 {
-      margin: 1.1em 0;
     }
   }
 
@@ -751,11 +606,6 @@ $status-margin: 0.75em;
   }
 }
 
-.greentext {
-  color: $fallback--cGreen;
-  color: var(--cGreen, $fallback--cGreen);
-}
-
 .status-conversation {
   border-left-style: solid;
 }
@@ -808,31 +658,52 @@ $status-margin: 0.75em;
 }
 
 .muted {
-  padding: 0.25em 0.5em;
-  button {
+  padding: .25em .6em;
+  height: 1.2em;
+  line-height: 1.2em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
+
+  .username, .mute-thread, .mute-words {
+    word-wrap: normal;
+    word-break: normal;
+    white-space: nowrap;
+  }
+
+  .username, .mute-words {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .username {
+    flex: 0 1 auto;
+    margin-right: .2em;
+  }
+
+  .mute-thread {
+    flex: 0 0 auto;
+  }
+
+  .mute-words {
+    flex: 1 0 5em;
+    margin-left: .2em;
+    &::before {
+      content: ' '
+    }
+  }
+
+  .unmute {
+    flex: 0 0 auto;
+    margin-left: auto;
+    display: block;
     margin-left: auto;
   }
-
-  .muteWords {
-    margin-left: 10px;
-  }
-}
-
-a.unmute {
-  display: block;
-  margin-left: auto;
 }
 
 .reply-body {
   flex: 1;
-}
-
-.timeline :not(.panel-disabled) > {
-  .status-el:last-child {
-    border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
-    border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
-    border-bottom: none;
-  }
 }
 
 .favs-repeated-users {

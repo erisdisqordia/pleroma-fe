@@ -12,7 +12,7 @@ const SideDrawer = {
     this.closeGesture = GestureService.swipeGesture(GestureService.DIRECTION_LEFT, this.toggleDrawer)
 
     if (this.currentUser && this.currentUser.locked) {
-      this.$store.dispatch('startFetchingFollowRequest')
+      this.$store.dispatch('startFetchingFollowRequests')
     }
   },
   components: { UserCard },
@@ -33,11 +33,20 @@ const SideDrawer = {
     logo () {
       return this.$store.state.instance.logo
     },
+    hideSitename () {
+      return this.$store.state.instance.hideSitename
+    },
     sitename () {
       return this.$store.state.instance.name
     },
     followRequestCount () {
       return this.$store.state.api.followRequests.length
+    },
+    privateMode () {
+      return this.$store.state.instance.private
+    },
+    federating () {
+      return this.$store.state.instance.federating
     }
   },
   methods: {
@@ -53,6 +62,9 @@ const SideDrawer = {
     },
     touchMove (e) {
       GestureService.updateSwipe(e, this.closeGesture)
+    },
+    openSettingsModal () {
+      this.$store.dispatch('openSettingsModal')
     }
   }
 }

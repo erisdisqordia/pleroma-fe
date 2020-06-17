@@ -6,6 +6,7 @@ import InstanceSpecificPanel from './components/instance_specific_panel/instance
 import FeaturesPanel from './components/features_panel/features_panel.vue'
 import WhoToFollowPanel from './components/who_to_follow_panel/who_to_follow_panel.vue'
 import ChatPanel from './components/chat_panel/chat_panel.vue'
+import SettingsModal from './components/settings_modal/settings_modal.vue'
 import MediaModal from './components/media_modal/media_modal.vue'
 import SideDrawer from './components/side_drawer/side_drawer.vue'
 import MobilePostStatusButton from './components/mobile_post_status_button/mobile_post_status_button.vue'
@@ -29,6 +30,7 @@ export default {
     SideDrawer,
     MobilePostStatusButton,
     MobileNav,
+    SettingsModal,
     UserReportingModal,
     PostStatusModal
   },
@@ -45,7 +47,8 @@ export default {
   }),
   created () {
     // Load the locale from the storage
-    this.$i18n.locale = this.$store.getters.mergedConfig.interfaceLanguage
+    const val = this.$store.getters.mergedConfig.interfaceLanguage
+    this.$store.dispatch('setOption', { name: 'interfaceLanguage', value: val })
     window.addEventListener('resize', this.updateMobileState)
   },
   destroyed () {
@@ -90,6 +93,7 @@ export default {
     },
     sitename () { return this.$store.state.instance.name },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
+    hideSitename () { return this.$store.state.instance.hideSitename },
     suggestionsEnabled () { return this.$store.state.instance.suggestionsEnabled },
     showInstanceSpecificPanel () {
       return this.$store.state.instance.showInstanceSpecificPanel &&
@@ -97,7 +101,13 @@ export default {
         this.$store.state.instance.instanceSpecificPanelContent
     },
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
-    isMobileLayout () { return this.$store.state.interface.mobileLayout }
+    isMobileLayout () { return this.$store.state.interface.mobileLayout },
+    privateMode () { return this.$store.state.instance.private },
+    sidebarAlign () {
+      return {
+        'order': this.$store.state.instance.sidebarRight ? 99 : 0
+      }
+    }
   },
   methods: {
     scrollToTop () {
@@ -109,6 +119,9 @@ export default {
     },
     onSearchBarToggled (hidden) {
       this.searchBarHidden = hidden
+    },
+    openSettingsModal () {
+      this.$store.dispatch('openSettingsModal')
     },
     updateMobileState () {
       const mobileLayout = windowWidth() <= 800

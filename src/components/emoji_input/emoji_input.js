@@ -147,7 +147,7 @@ const EmojiInput = {
     input.elm.addEventListener('keydown', this.onKeyDown)
     input.elm.addEventListener('click', this.onClickInput)
     input.elm.addEventListener('transitionend', this.onTransition)
-    input.elm.addEventListener('compositionupdate', this.onCompositionUpdate)
+    input.elm.addEventListener('input', this.onInput)
   },
   unmounted () {
     const { input } = this
@@ -159,7 +159,7 @@ const EmojiInput = {
       input.elm.removeEventListener('keydown', this.onKeyDown)
       input.elm.removeEventListener('click', this.onClickInput)
       input.elm.removeEventListener('transitionend', this.onTransition)
-      input.elm.removeEventListener('compositionupdate', this.onCompositionUpdate)
+      input.elm.removeEventListener('input', this.onInput)
     }
   },
   methods: {
@@ -401,12 +401,6 @@ const EmojiInput = {
       this.resize()
     },
     onInput (e) {
-      this.showPicker = false
-      this.setCaret(e)
-      this.resize()
-      this.$emit('input', e.target.value)
-    },
-    onCompositionUpdate (e) {
       this.showPicker = false
       this.setCaret(e)
       this.resize()

@@ -1,14 +1,16 @@
 import ProgressButton from '../progress_button/progress_button.vue'
+import Popover from '../popover/popover.vue'
 
 const AccountActions = {
   props: [
-    'user'
+    'user', 'relationship'
   ],
   data () {
     return { }
   },
   components: {
-    ProgressButton
+    ProgressButton,
+    Popover
   },
   methods: {
     showRepeats () {
@@ -25,9 +27,6 @@ const AccountActions = {
     },
     reportUser () {
       this.$store.dispatch('openUserReportingModal', this.user.id)
-    },
-    mentionUser () {
-      this.$store.dispatch('openPostStatusModal', { replyTo: true, repliedUser: this.user })
     }
   }
 }

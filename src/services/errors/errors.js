@@ -32,12 +32,18 @@ export class RegistrationError extends Error {
       }
 
       if (typeof error === 'object') {
+        const errorContents = JSON.parse(error.error)
+        // keys will have the property that has the error, for example 'ap_id',
+        // 'email' or 'captcha', the value will be an array of its error
+        // like "ap_id": ["has been taken"] or "captcha": ["Invalid CAPTCHA"]
+
         // replace ap_id with username
-        if (error.ap_id) {
-          error.username = error.ap_id
-          delete error.ap_id
+        if (errorContents.ap_id) {
+          errorContents.username = errorContents.ap_id
+          delete errorContents.ap_id
         }
-        this.message = humanizeErrors(error)
+
+        this.message = humanizeErrors(errorContents)
       } else {
         this.message = error
       }

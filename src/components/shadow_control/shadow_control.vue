@@ -191,15 +191,20 @@
         v-model="selected.color"
         :disabled="!present"
         :label="$t('settings.style.common.color')"
+        :fallback="currentFallback.color"
+        :show-optional-tickbox="false"
         name="shadow"
       />
       <OpacityInput
         v-model="selected.alpha"
         :disabled="!present"
       />
-      <p>
-        {{ $t('settings.style.shadows.hint') }}
-      </p>
+      <i18n
+        path="settings.style.shadows.hintV3"
+        tag="p"
+      >
+        <code>--variable,mod</code>
+      </i18n>
     </div>
   </div>
 </template>

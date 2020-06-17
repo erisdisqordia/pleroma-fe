@@ -4,22 +4,22 @@
       <ul>
         <li v-if="currentUser">
           <router-link :to="{ name: 'friends' }">
-            {{ $t("nav.timeline") }}
+            <i class="button-icon icon-home-2" /> {{ $t("nav.timeline") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
-            {{ $t("nav.interactions") }}
+            <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
-            {{ $t("nav.dms") }}
+            <i class="button-icon icon-mail-alt" /> {{ $t("nav.dms") }}
           </router-link>
         </li>
         <li v-if="currentUser && currentUser.locked">
           <router-link :to="{ name: 'friend-requests' }">
-            {{ $t("nav.friend_requests") }}
+            <i class="button-icon icon-user-plus" /> {{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
               class="badge follow-request-count"
@@ -28,19 +28,19 @@
             </span>
           </router-link>
         </li>
-        <li>
+        <li v-if="currentUser || !privateMode">
           <router-link :to="{ name: 'public-timeline' }">
-            {{ $t("nav.public_tl") }}
+            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
           </router-link>
         </li>
-        <li>
+        <li v-if="federating && (currentUser || !privateMode)">
           <router-link :to="{ name: 'public-external-timeline' }">
-            {{ $t("nav.twkn") }}
+            <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
           </router-link>
         </li>
         <li>
           <router-link :to="{ name: 'about' }">
-            {{ $t("nav.about") }}
+            <i class="button-icon icon-info-circled" /> {{ $t("nav.about") }}
           </router-link>
         </li>
       </ul>
@@ -100,17 +100,33 @@
 
   &:hover {
     background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
+    background-color: var(--selectedMenu, $fallback--lightBg);
+    color: $fallback--link;
+    color: var(--selectedMenuText, $fallback--link);
+    --faint: var(--selectedMenuFaintText, $fallback--faint);
+    --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
+    --lightText: var(--selectedMenuLightText, $fallback--lightText);
+    --icon: var(--selectedMenuIcon, $fallback--icon);
   }
 
   &.router-link-active {
     font-weight: bolder;
     background-color: $fallback--lightBg;
-    background-color: var(--lightBg, $fallback--lightBg);
+    background-color: var(--selectedMenu, $fallback--lightBg);
+    color: $fallback--text;
+    color: var(--selectedMenuText, $fallback--text);
+    --faint: var(--selectedMenuFaintText, $fallback--faint);
+    --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
+    --lightText: var(--selectedMenuLightText, $fallback--lightText);
+    --icon: var(--selectedMenuIcon, $fallback--icon);
 
     &:hover {
       text-decoration: underline;
     }
   }
+}
+
+.nav-panel .button-icon:before {
+  width: 1.1em;
 }
 </style>

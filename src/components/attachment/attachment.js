@@ -2,6 +2,7 @@ import StillImage from '../still-image/still-image.vue'
 import VideoAttachment from '../video_attachment/video_attachment.vue'
 import nsfwImage from '../../assets/nsfw.png'
 import fileTypeService from '../../services/file_type/file_type.service.js'
+import { mapGetters } from 'vuex'
 
 const Attachment = {
   props: [
@@ -49,7 +50,8 @@ const Attachment = {
     },
     fullwidth () {
       return this.type === 'html' || this.type === 'audio'
-    }
+    },
+    ...mapGetters(['mergedConfig'])
   },
   methods: {
     linkClicked ({ target }) {
@@ -58,7 +60,7 @@ const Attachment = {
       }
     },
     openModal (event) {
-      const modalTypes = this.$store.getters.mergedConfig.playVideosInModal
+      const modalTypes = this.mergedConfig.playVideosInModal
         ? ['image', 'video']
         : ['image']
       if (fileTypeService.fileMatchesSomeType(modalTypes, this.attachment) ||
@@ -71,7 +73,10 @@ const Attachment = {
       }
     },
     toggleHidden (event) {
-      if (this.$store.getters.mergedConfig.useOneClickNsfw && !this.showHidden) {
+      if (
+        (this.mergedConfig.useOneClickNsfw && !this.showHidden) &&
+        (this.type !== 'video' || this.mergedConfig.playVideosInModal)
+      ) {
         this.openModal(event)
         return
       }

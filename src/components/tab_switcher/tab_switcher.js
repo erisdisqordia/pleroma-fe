@@ -24,6 +24,11 @@ export default Vue.component('tab-switcher', {
       required: false,
       type: Boolean,
       default: false
+    },
+    sideTabBar: {
+      required: false,
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -55,6 +60,9 @@ export default Vue.component('tab-switcher', {
           this.onSwitch.call(null, this.$slots.default[index].key)
         }
         this.active = index
+        if (this.scrollableTabs) {
+          this.$refs.contents.scrollTop = 0
+        }
       }
     }
   },
@@ -64,7 +72,6 @@ export default Vue.component('tab-switcher', {
         if (!slot.tag) return
         const classesTab = ['tab']
         const classesWrapper = ['tab-wrapper']
-
         if (this.activeIndex === index) {
           classesTab.push('active')
           classesWrapper.push('active')
@@ -87,8 +94,14 @@ export default Vue.component('tab-switcher', {
             <button
               disabled={slot.data.attrs.disabled}
               onClick={this.activateTab(index)}
-              class={classesTab.join(' ')}>
-              {slot.data.attrs.label}</button>
+              class={classesTab.join(' ')}
+              type="button"
+            >
+              {!slot.data.attrs.icon ? '' : (<i class={'tab-icon icon-' + slot.data.attrs.icon}/>)}
+              <span class="text">
+                {slot.data.attrs.label}
+              </span>
+            </button>
           </div>
         )
       })
@@ -96,20 +109,32 @@ export default Vue.component('tab-switcher', {
     const contents = this.$slots.default.map((slot, index) => {
       if (!slot.tag) return
       const active = this.activeIndex === index
-      if (this.renderOnlyFocused) {
-        return active
-          ? <div class="active">{slot}</div>
-          : <div class="hidden"></div>
+      const classes = [ active ? 'active' : 'hidden' ]
+      if (slot.data.attrs.fullHeight) {
+        classes.push('full-height')
       }
-      return <div class={active ? 'active' : 'hidden' }>{slot}</div>
+      const renderSlot = (!this.renderOnlyFocused || active)
+        ? slot
+        : ''
+
+      return (
+        <div class={classes}>
+          {
+            this.sideTabBar
+              ? <h1 class="mobile-label">{slot.data.attrs.label}</h1>
+              : ''
+          }
+          {renderSlot}
+        </div>
+      )
     })
 
     return (
-      <div class="tab-switcher">
+      <div class={'tab-switcher ' + (this.sideTabBar ? 'side-tabs' : 'top-tabs')}>
         <div class="tabs">
           {tabs}
         </div>
-        <div class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')}>
+        <div ref="contents" class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')}>
           {contents}
         </div>
       </div>

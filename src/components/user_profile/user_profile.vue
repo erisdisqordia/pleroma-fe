@@ -133,12 +133,14 @@
 <script src="./user_profile.js"></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
 
 .user-profile {
   flex: 2;
   flex-basis: 500px;
 
   .user-profile-fields {
+    margin: 0 0.5em;
     img {
       object-fit: contain;
       vertical-align: middle;
@@ -146,28 +148,28 @@
       max-height: 400px;
 
       &.emoji {
-        width: 18px;
-        height: 18px;
+        width: 24px;
+        height: 24px;
       }
     }
 
     .user-profile-field {
       display: flex;
-      margin: 1em 1.5em;
+      margin: 0.25em auto;
+      max-width: 32em;
 
       .user-profile-field-name {
-        flex: 0 0 auto;
+        flex: 0 1 30%;
         font-weight: 500;
         text-align: right;
         color: var(--lightText);
-        width: 30%;
         min-width: 120px;
       }
 
       .user-profile-field-value {
         flex: 1 1 auto;
         color: var(--text);
-        margin-left: 10px;
+        margin: 0 0 0 0.25em;
       }
 
       .user-profile-field-name, .user-profile-field-value {
@@ -175,6 +177,14 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+        padding: 0.5em 1.5em;
+        box-sizing: border-box;
+
+        border: var(--border, $fallback--border);
+        border-radius: $fallback--inputRadius;
+        border-radius: var(--inputRadius, $fallback--inputRadius);
+        border-style: solid;
+        border-width: 1px;
       }
     }
   }

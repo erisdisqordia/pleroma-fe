@@ -148,8 +148,8 @@
       max-height: 400px;
 
       &.emoji {
-        width: 24px;
-        height: 24px;
+        width: 18px;
+        height: 18px;
       }
     }
 

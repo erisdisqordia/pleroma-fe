@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Uploading and drag-dropping multiple files works correctly now.
 - Subject field now appears disabled when posting
 - Fix status ellipsis menu being cut off in notifications column
+- Fixed autocomplete sometimes not returning the right user when there's already some results
 
 ## [2.0.3] - 2020-05-02
 ### Fixed

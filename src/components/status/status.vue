@@ -142,12 +142,12 @@
                   :to="userProfileLink"
                 >
                   {{ status.user.screen_name }}
-                  <img
-                    height="18px"
-                    v-if="!!(status.user && status.user.favicon)"
-                    :src="status.user.favicon"
-                  >
                 </router-link>
+                <img
+                  class="status-favicon"
+                  v-if="!!(status.user && status.user.favicon)"
+                  :src="status.user.favicon"
+                >
               </div>
 
               <span class="heading-right">
@@ -176,18 +176,8 @@
                   class="source_url"
                   title="Source"
                 >
-                  <img
-                    height="18px"
-                    v-if="!!(status.user && status.user.favicon)"
-                    :src="status.user.favicon"
-                  >
-                  <i v-else class="button-icon icon-link-ext-alt" />
+                  <i class="button-icon icon-link-ext-alt" />
                 </a>
-                <img
-                  v-else-if="!!(status.user && status.user.favicon)"
-                  height="18px"
-                  :src="status.user.favicon"
-                >
                 <template v-if="expandable && !isPreview">
                   <a
                     href="#"
@@ -439,6 +429,12 @@ $status-margin: 0.75em;
       vertical-align: middle;
       object-fit: contain
     }
+  }
+
+  .status-favicon {
+    height: 18px;
+    width: 18px;
+    margin-right: 0.4em;
   }
 
   .media-heading {

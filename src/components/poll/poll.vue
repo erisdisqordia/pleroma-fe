@@ -75,12 +75,6 @@
 @import '../../_variables.scss';
 
 .poll {
-  img.emoji {
-    vertical-align: middle;
-    object-fit: contain;
-    width: 32px;
-    height: 32px;
-  }
   .votes {
     display: flex;
     flex-direction: column;

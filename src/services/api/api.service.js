@@ -1,10 +1,8 @@
 import { each, map, concat, last, get } from 'lodash'
 import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
-import 'whatwg-fetch'
 import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */
-const QVITTER_USER_NOTIFICATIONS_READ_URL = '/api/qvitter/statuses/notifications/read.json'
 const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
@@ -17,6 +15,7 @@ const DEACTIVATE_USER_URL = '/api/pleroma/admin/users/deactivate'
 const ADMIN_USERS_URL = '/api/pleroma/admin/users'
 const SUGGESTIONS_URL = '/api/v1/suggestions'
 const NOTIFICATION_SETTINGS_URL = '/api/pleroma/notification_settings'
+const NOTIFICATION_READ_URL = '/api/v1/pleroma/notifications/read'
 
 const MFA_SETTINGS_URL = '/api/pleroma/accounts/mfa'
 const MFA_BACKUP_CODES_URL = '/api/pleroma/accounts/mfa/backup_codes'
@@ -29,6 +28,7 @@ const MASTODON_LOGIN_URL = '/api/v1/accounts/verify_credentials'
 const MASTODON_REGISTRATION_URL = '/api/v1/accounts'
 const MASTODON_USER_FAVORITES_TIMELINE_URL = '/api/v1/favourites'
 const MASTODON_USER_NOTIFICATIONS_URL = '/api/v1/notifications'
+const MASTODON_DISMISS_NOTIFICATION_URL = id => `/api/v1/notifications/${id}/dismiss`
 const MASTODON_FAVORITE_URL = id => `/api/v1/statuses/${id}/favourite`
 const MASTODON_UNFAVORITE_URL = id => `/api/v1/statuses/${id}/unfavourite`
 const MASTODON_RETWEET_URL = id => `/api/v1/statuses/${id}/reblog`
@@ -74,6 +74,7 @@ const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
 const MASTODON_DOMAIN_BLOCKS_URL = '/api/v1/domain_blocks'
 const MASTODON_STREAMING = '/api/v1/streaming'
+const MASTODON_KNOWN_DOMAIN_LIST_URL = '/api/v1/instance/peers'
 const PLEROMA_EMOJI_REACTIONS_URL = id => `/api/v1/pleroma/statuses/${id}/reactions`
 const PLEROMA_EMOJI_REACT_URL = (id, emoji) => `/api/v1/pleroma/statuses/${id}/reactions/${emoji}`
 const PLEROMA_EMOJI_UNREACT_URL = (id, emoji) => `/api/v1/pleroma/statuses/${id}/reactions/${emoji}`
@@ -323,7 +324,8 @@ const fetchFriends = ({ id, maxId, sinceId, limit = 20, credentials }) => {
   const args = [
     maxId && `max_id=${maxId}`,
     sinceId && `since_id=${sinceId}`,
-    limit && `limit=${limit}`
+    limit && `limit=${limit}`,
+    `with_relationships=true`
   ].filter(_ => _).join('&')
 
   url = url + (args ? '?' + args : '')
@@ -357,7 +359,8 @@ const fetchFollowers = ({ id, maxId, sinceId, limit = 20, credentials }) => {
   const args = [
     maxId && `max_id=${maxId}`,
     sinceId && `since_id=${sinceId}`,
-    limit && `limit=${limit}`
+    limit && `limit=${limit}`,
+    `with_relationships=true`
   ].filter(_ => _).join('&')
 
   url += args ? '?' + args : ''
@@ -402,8 +405,8 @@ const fetchStatus = ({ id, credentials }) => {
     .then((data) => parseStatus(data))
 }
 
-const tagUser = ({ tag, credentials, ...options }) => {
-  const screenName = options.screen_name
+const tagUser = ({ tag, credentials, user }) => {
+  const screenName = user.screen_name
   const form = {
     nicknames: [screenName],
     tags: [tag]
@@ -419,8 +422,8 @@ const tagUser = ({ tag, credentials, ...options }) => {
   })
 }
 
-const untagUser = ({ tag, credentials, ...options }) => {
-  const screenName = options.screen_name
+const untagUser = ({ tag, credentials, user }) => {
+  const screenName = user.screen_name
   const body = {
     nicknames: [screenName],
     tags: [tag]
@@ -436,7 +439,7 @@ const untagUser = ({ tag, credentials, ...options }) => {
   })
 }
 
-const addRight = ({ right, credentials, ...user }) => {
+const addRight = ({ right, credentials, user }) => {
   const screenName = user.screen_name
 
   return fetch(PERMISSION_GROUP_URL(screenName, right), {
@@ -446,7 +449,7 @@ const addRight = ({ right, credentials, ...user }) => {
   })
 }
 
-const deleteRight = ({ right, credentials, ...user }) => {
+const deleteRight = ({ right, credentials, user }) => {
   const screenName = user.screen_name
 
   return fetch(PERMISSION_GROUP_URL(screenName, right), {
@@ -478,7 +481,7 @@ const deactivateUser = ({ credentials, user: { screen_name: nickname } }) => {
   }).then(response => get(response, 'users.0'))
 }
 
-const deleteUser = ({ credentials, ...user }) => {
+const deleteUser = ({ credentials, user }) => {
   const screenName = user.screen_name
   const headers = authHeaders(credentials)
 
@@ -495,8 +498,7 @@ const fetchTimeline = ({
   until = false,
   userId = false,
   tag = false,
-  withMuted = false,
-  withMove = false
+  withMuted = false
 }) => {
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
@@ -536,12 +538,11 @@ const fetchTimeline = ({
   if (timeline === 'public' || timeline === 'publicAndExternal') {
     params.push(['only_media', false])
   }
-  if (timeline === 'notifications') {
-    params.push(['with_move', withMove])
+  if (timeline !== 'favorites') {
+    params.push(['with_muted', withMuted])
   }
 
-  params.push(['count', 20])
-  params.push(['with_muted', withMuted])
+  params.push(['limit', 20])
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`
@@ -844,12 +845,16 @@ const suggestions = ({ credentials }) => {
   }).then((data) => data.json())
 }
 
-const markNotificationsAsSeen = ({ id, credentials }) => {
+const markNotificationsAsSeen = ({ id, credentials, single = false }) => {
   const body = new FormData()
 
-  body.append('latest_id', id)
+  if (single) {
+    body.append('id', id)
+  } else {
+    body.append('max_id', id)
+  }
 
-  return fetch(QVITTER_USER_NOTIFICATIONS_READ_URL, {
+  return fetch(NOTIFICATION_READ_URL, {
     body,
     headers: authHeaders(credentials),
     method: 'POST'
@@ -880,12 +885,20 @@ const fetchPoll = ({ pollId, credentials }) => {
   )
 }
 
-const fetchFavoritedByUsers = ({ id }) => {
-  return promisedRequest({ url: MASTODON_STATUS_FAVORITEDBY_URL(id) }).then((users) => users.map(parseUser))
+const fetchFavoritedByUsers = ({ id, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_STATUS_FAVORITEDBY_URL(id),
+    method: 'GET',
+    credentials
+  }).then((users) => users.map(parseUser))
 }
 
-const fetchRebloggedByUsers = ({ id }) => {
-  return promisedRequest({ url: MASTODON_STATUS_REBLOGGEDBY_URL(id) }).then((users) => users.map(parseUser))
+const fetchRebloggedByUsers = ({ id, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_STATUS_REBLOGGEDBY_URL(id),
+    method: 'GET',
+    credentials
+  }).then((users) => users.map(parseUser))
 }
 
 const fetchEmojiReactions = ({ id, credentials }) => {
@@ -962,6 +975,8 @@ const search2 = ({ credentials, q, resolve, limit, offset, following }) => {
     params.push(['following', true])
   }
 
+  params.push(['with_relationships', true])
+
   let queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`
 
@@ -978,6 +993,10 @@ const search2 = ({ credentials, q, resolve, limit, offset, following }) => {
       data.statuses = data.statuses.slice(0, limit).map(s => parseStatus(s))
       return data
     })
+}
+
+const fetchKnownDomains = ({ credentials }) => {
+  return promisedRequest({ url: MASTODON_KNOWN_DOMAIN_LIST_URL, credentials })
 }
 
 const fetchDomainMutes = ({ credentials }) => {
@@ -998,6 +1017,15 @@ const unmuteDomain = ({ domain, credentials }) => {
     url: MASTODON_DOMAIN_BLOCKS_URL,
     method: 'DELETE',
     payload: { domain },
+    credentials
+  })
+}
+
+const dismissNotification = ({ credentials, id }) => {
+  return promisedRequest({
+    url: MASTODON_DISMISS_NOTIFICATION_URL(id),
+    method: 'POST',
+    payload: { id },
     credentials
   })
 }
@@ -1157,6 +1185,7 @@ const apiService = {
   denyUser,
   suggestions,
   markNotificationsAsSeen,
+  dismissNotification,
   vote,
   fetchPoll,
   fetchFavoritedByUsers,
@@ -1168,6 +1197,7 @@ const apiService = {
   updateNotificationSettings,
   search2,
   searchUsers,
+  fetchKnownDomains,
   fetchDomainMutes,
   muteDomain,
   unmuteDomain

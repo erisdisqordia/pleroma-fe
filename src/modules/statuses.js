@@ -13,8 +13,9 @@ import {
   omitBy
 } from 'lodash'
 import { set } from 'vue'
+import { isStatusNotification } from '../services/notification_utils/notification_utils.js'
 import apiService from '../services/api/api.service.js'
-// import parse from '../services/status_parser/status_parser.js'
+import { muteWordHits } from '../services/status_parser/status_parser.js'
 
 const emptyTl = (userId = 0) => ({
   statuses: [],
@@ -321,7 +322,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
 const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters }) => {
   each(notifications, (notification) => {
-    if (notification.type !== 'follow' && notification.type !== 'move') {
+    if (isStatusNotification(notification.type)) {
       notification.action = addStatusToGlobalStorage(state, notification.action).item
       notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
     }
@@ -361,13 +362,16 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
           case 'move':
             i18nString = 'migrated_to'
             break
+          case 'follow_request':
+            i18nString = 'follow_request'
+            break
         }
 
         if (notification.type === 'pleroma:emoji_reaction') {
           notifObj.body = rootGetters.i18n.t('notifications.reacted_with', [notification.emoji])
         } else if (i18nString) {
           notifObj.body = rootGetters.i18n.t('notifications.' + i18nString)
-        } else {
+        } else if (isStatusNotification(notification.type)) {
           notifObj.body = notification.status.text
         }
 
@@ -377,7 +381,18 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
           notifObj.image = status.attachments[0].url
         }
 
-        if (!notification.seen && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.type)) {
+        const reasonsToMuteNotif = (
+          notification.seen ||
+            state.notifications.desktopNotificationSilence ||
+            !visibleNotificationTypes.includes(notification.type) ||
+            (
+              notification.type === 'mention' && status && (
+                status.muted ||
+                  muteWordHits(status, rootGetters.mergedConfig.muteWords).length === 0
+              )
+            )
+        )
+        if (!reasonsToMuteNotif) {
           let desktopNotification = new window.Notification(title, notifObj)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.
@@ -521,6 +536,17 @@ export const mutations = {
       notification.seen = true
     })
   },
+  markSingleNotificationAsSeen (state, { id }) {
+    const notification = find(state.notifications.data, n => n.id === id)
+    if (notification) notification.seen = true
+  },
+  dismissNotification (state, { id }) {
+    state.notifications.data = state.notifications.data.filter(n => n.id !== id)
+  },
+  updateNotification (state, { id, updater }) {
+    const notification = find(state.notifications.data, n => n.id === id)
+    notification && updater(notification)
+  },
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
   },
@@ -616,7 +642,7 @@ const statuses = {
       commit('setNotificationsSilence', { value })
     },
     fetchStatus ({ rootState, dispatch }, id) {
-      rootState.api.backendInteractor.fetchStatus({ id })
+      return rootState.api.backendInteractor.fetchStatus({ id })
         .then((status) => dispatch('addNewStatuses', { statuses: [status] }))
     },
     deleteStatus ({ rootState, commit }, status) {
@@ -679,6 +705,24 @@ const statuses = {
         id: rootState.statuses.notifications.maxId,
         credentials: rootState.users.currentUser.credentials
       })
+    },
+    markSingleNotificationAsSeen ({ rootState, commit }, { id }) {
+      commit('markSingleNotificationAsSeen', { id })
+      apiService.markNotificationsAsSeen({
+        single: true,
+        id,
+        credentials: rootState.users.currentUser.credentials
+      })
+    },
+    dismissNotificationLocal ({ rootState, commit }, { id }) {
+      commit('dismissNotification', { id })
+    },
+    dismissNotification ({ rootState, commit }, { id }) {
+      commit('dismissNotification', { id })
+      rootState.api.backendInteractor.dismissNotification({ id })
+    },
+    updateNotification ({ rootState, commit }, { id, updater }) {
+      commit('updateNotification', { id, updater })
     },
     fetchFavsAndRepeats ({ rootState, commit }, id) {
       Promise.all([

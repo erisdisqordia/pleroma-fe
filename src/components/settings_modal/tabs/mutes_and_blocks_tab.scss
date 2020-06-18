@@ -1,0 +1,29 @@
+.mutes-and-blocks-tab {
+    height: 100%;
+
+    .usersearch-wrapper {
+        padding: 1em;
+    }
+
+    .bulk-actions {
+        text-align: right;
+        padding: 0 1em;
+        min-height: 28px;
+    }
+
+    .bulk-action-button {
+        width: 10em
+    }
+
+    .domain-mute-form {
+        padding: 1em;
+        display: flex;
+        flex-direction: column
+    }
+
+    .domain-mute-button {
+        align-self: flex-end;
+        margin-top: 1em;
+        width: 10em
+    }
+}

@@ -4,13 +4,12 @@ import ProgressButton from '../progress_button/progress_button.vue'
 import FollowButton from '../follow_button/follow_button.vue'
 import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import AccountActions from '../account_actions/account_actions.vue'
-import { hex2rgb } from '../../services/color_convert/color_convert.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import { mapGetters } from 'vuex'
 
 export default {
   props: [
-    'user', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar'
+    'userId', 'switcher', 'selected', 'hideBio', 'rounded', 'bordered', 'allowZoomingAvatar'
   ],
   data () {
     return {
@@ -22,6 +21,12 @@ export default {
     this.$store.dispatch('fetchUserRelationship', this.user.id)
   },
   computed: {
+    user () {
+      return this.$store.getters.findUser(this.userId)
+    },
+    relationship () {
+      return this.$store.getters.relationship(this.userId)
+    },
     classes () {
       return [{
         'user-card-rounded-t': this.rounded === 'top', // set border-top-left-radius and border-top-right-radius
@@ -30,21 +35,11 @@ export default {
       }]
     },
     style () {
-      const color = this.$store.getters.mergedConfig.customTheme.colors
-        ? this.$store.getters.mergedConfig.customTheme.colors.bg // v2
-        : this.$store.getters.mergedConfig.colors.bg // v1
-
-      if (color) {
-        const rgb = (typeof color === 'string') ? hex2rgb(color) : color
-        const tintColor = `rgba(${Math.floor(rgb.r)}, ${Math.floor(rgb.g)}, ${Math.floor(rgb.b)}, .5)`
-
-        return {
-          backgroundColor: `rgb(${Math.floor(rgb.r * 0.53)}, ${Math.floor(rgb.g * 0.56)}, ${Math.floor(rgb.b * 0.59)})`,
-          backgroundImage: [
-            `linear-gradient(to bottom, ${tintColor}, ${tintColor})`,
-            `url(${this.user.cover_photo})`
-          ].join(', ')
-        }
+      return {
+        backgroundImage: [
+          `linear-gradient(to bottom, var(--profileTint), var(--profileTint))`,
+          `url(${this.user.cover_photo})`
+        ].join(', ')
       }
     },
     isOtherUser () {

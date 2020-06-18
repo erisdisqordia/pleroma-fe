@@ -6,13 +6,13 @@
     <div class="panel panel-default base01-background">
       <div class="panel-heading timeline-heading base02-background">
         <div class="title">
-          {{ $t("about.federation") }}
+          {{ $t("about.mrf.federation") }}
         </div>
       </div>
       <div class="panel-body">
         <div class="mrf-section">
-          <h2>{{ $t("about.mrf_policies") }}</h2>
-          <p>{{ $t("about.mrf_policies_desc") }}</p>
+          <h2>{{ $t("about.mrf.mrf_policies") }}</h2>
+          <p>{{ $t("about.mrf.mrf_policies_desc") }}</p>
 
           <ul>
             <li
@@ -23,13 +23,13 @@
           </ul>
 
           <h2 v-if="hasInstanceSpecificPolicies">
-            {{ $t("about.mrf_policy_simple") }}
+            {{ $t("about.mrf.simple.simple_policies") }}
           </h2>
 
           <div v-if="acceptInstances.length">
-            <h4>{{ $t("about.mrf_policy_simple_accept") }}</h4>
+            <h4>{{ $t("about.mrf.simple.accept") }}</h4>
 
-            <p>{{ $t("about.mrf_policy_simple_accept_desc") }}</p>
+            <p>{{ $t("about.mrf.simple.accept_desc") }}</p>
 
             <ul>
               <li
@@ -41,9 +41,9 @@
           </div>
 
           <div v-if="rejectInstances.length">
-            <h4>{{ $t("about.mrf_policy_simple_reject") }}</h4>
+            <h4>{{ $t("about.mrf.simple.reject") }}</h4>
 
-            <p>{{ $t("about.mrf_policy_simple_reject_desc") }}</p>
+            <p>{{ $t("about.mrf.simple.reject_desc") }}</p>
 
             <ul>
               <li
@@ -55,9 +55,9 @@
           </div>
 
           <div v-if="quarantineInstances.length">
-            <h4>{{ $t("about.mrf_policy_simple_quarantine") }}</h4>
+            <h4>{{ $t("about.mrf.simple.quarantine") }}</h4>
 
-            <p>{{ $t("about.mrf_policy_simple_quarantine_desc") }}</p>
+            <p>{{ $t("about.mrf.simple.quarantine_desc") }}</p>
 
             <ul>
               <li
@@ -69,9 +69,9 @@
           </div>
 
           <div v-if="ftlRemovalInstances.length">
-            <h4>{{ $t("about.mrf_policy_simple_ftl_removal") }}</h4>
+            <h4>{{ $t("about.mrf.simple.ftl_removal") }}</h4>
 
-            <p>{{ $t("about.mrf_policy_simple_ftl_removal_desc") }}</p>
+            <p>{{ $t("about.mrf.simple.ftl_removal_desc") }}</p>
 
             <ul>
               <li
@@ -83,9 +83,9 @@
           </div>
 
           <div v-if="mediaNsfwInstances.length">
-            <h4>{{ $t("about.mrf_policy_simple_media_nsfw") }}</h4>
+            <h4>{{ $t("about.mrf.simple.media_nsfw") }}</h4>
 
-            <p>{{ $t("about.mrf_policy_simple_media_nsfw_desc") }}</p>
+            <p>{{ $t("about.mrf.simple.media_nsfw_desc") }}</p>
 
             <ul>
               <li
@@ -97,9 +97,9 @@
           </div>
 
           <div v-if="mediaRemovalInstances.length">
-            <h4>{{ $t("about.mrf_policy_simple_media_removal") }}</h4>
+            <h4>{{ $t("about.mrf.simple.media_removal") }}</h4>
 
-            <p>{{ $t("about.mrf_policy_simple_media_removal_desc") }}</p>
+            <p>{{ $t("about.mrf.simple.media_removal_desc") }}</p>
 
             <ul>
               <li

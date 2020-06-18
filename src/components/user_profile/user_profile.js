@@ -3,6 +3,7 @@ import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
 import Conversation from '../conversation/conversation.vue'
+import TabSwitcher from 'src/components/tab_switcher/tab_switcher.js'
 import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
 
@@ -146,6 +147,7 @@ const UserProfile = {
     FollowerList,
     FriendList,
     FollowCard,
+    TabSwitcher,
     Conversation
   }
 }

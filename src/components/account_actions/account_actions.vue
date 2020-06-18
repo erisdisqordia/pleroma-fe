@@ -1,24 +1,24 @@
 <template>
   <div class="account-actions">
-    <v-popover
+    <Popover
       trigger="click"
-      class="account-tools-popover"
-      :container="false"
-      placement="bottom-end"
-      :offset="5"
+      placement="bottom"
     >
-      <div slot="popover">
+      <div
+        slot="content"
+        class="account-tools-popover"
+      >
         <div class="dropdown-menu">
-          <template v-if="user.following">
+          <template v-if="relationship.following">
             <button
-              v-if="user.showing_reblogs"
+              v-if="relationship.showing_reblogs"
               class="btn btn-default dropdown-item"
               @click="hideRepeats"
             >
               {{ $t('user_card.hide_repeats') }}
             </button>
             <button
-              v-if="!user.showing_reblogs"
+              v-if="!relationship.showing_reblogs"
               class="btn btn-default dropdown-item"
               @click="showRepeats"
             >
@@ -30,7 +30,7 @@
             />
           </template>
           <button
-            v-if="user.statusnet_blocking"
+            v-if="relationship.blocking"
             class="btn btn-default btn-block dropdown-item"
             @click="unblockUser"
           >
@@ -51,10 +51,13 @@
           </button>
         </div>
       </div>
-      <div class="btn btn-default ellipsis-button">
+      <div
+        slot="trigger"
+        class="btn btn-default ellipsis-button"
+      >
         <i class="icon-ellipsis trigger-button" />
       </div>
-    </v-popover>
+    </Popover>
   </div>
 </template>
 
@@ -62,7 +65,6 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
-@import '../popper/popper.scss';
 .account-actions {
   margin: 0 .8em;
 }
@@ -70,6 +72,7 @@
 .account-actions button.dropdown-item {
   margin-left: 0;
 }
+
 .account-actions .trigger-button {
   color: $fallback--lightText;
   color: var(--lightText, $fallback--lightText);

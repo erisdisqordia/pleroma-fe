@@ -31,7 +31,6 @@ import VueChatScroll from 'vue-chat-scroll'
 import VueClickOutside from 'v-click-outside'
 import PortalVue from 'portal-vue'
 import VBodyScrollLock from './directives/body_scroll_lock'
-import VTooltip from 'v-tooltip'
 
 import afterStoreSetup from './boot/after_store.js'
 
@@ -44,20 +43,15 @@ Vue.use(VueChatScroll)
 Vue.use(VueClickOutside)
 Vue.use(PortalVue)
 Vue.use(VBodyScrollLock)
-Vue.use(VTooltip, {
-  popover: {
-    defaultTrigger: 'hover click',
-    defaultContainer: false,
-    defaultOffset: 5
-  }
-})
 
 const i18n = new VueI18n({
   // By default, use the browser locale, we will update it if neccessary
-  locale: currentLocale,
+  locale: 'en',
   fallbackLocale: 'en',
-  messages
+  messages: messages.default
 })
+
+messages.setLanguage(i18n, currentLocale)
 
 const persistedStateOptions = {
   paths: [

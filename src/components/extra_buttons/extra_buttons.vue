@@ -1,11 +1,13 @@
 <template>
-  <v-popover
-    v-if="canDelete || canMute || canPin"
+  <Popover
     trigger="click"
     placement="top"
     class="extra-button-popover"
   >
-    <div slot="popover">
+    <div
+      slot="content"
+      slot-scope="{close}"
+    >
       <div class="dropdown-menu">
         <button
           v-if="canMute && !status.thread_muted"
@@ -23,41 +25,48 @@
         </button>
         <button
           v-if="!status.pinned && canPin"
-          v-close-popover
           class="dropdown-item dropdown-item-icon"
           @click.prevent="pinStatus"
+          @click="close"
         >
           <i class="icon-pin" /><span>{{ $t("status.pin") }}</span>
         </button>
         <button
           v-if="status.pinned && canPin"
-          v-close-popover
           class="dropdown-item dropdown-item-icon"
           @click.prevent="unpinStatus"
+          @click="close"
         >
           <i class="icon-pin" /><span>{{ $t("status.unpin") }}</span>
         </button>
         <button
           v-if="canDelete"
-          v-close-popover
           class="dropdown-item dropdown-item-icon"
           @click.prevent="deleteStatus"
+          @click="close"
         >
           <i class="icon-cancel" /><span>{{ $t("status.delete") }}</span>
         </button>
+        <button
+          class="dropdown-item dropdown-item-icon"
+          @click.prevent="copyLink"
+          @click="close"
+        >
+          <i class="icon-share" /><span>{{ $t("status.copy_link") }}</span>
+        </button>
       </div>
     </div>
-    <div class="button-icon">
-      <i class="icon-ellipsis" />
-    </div>
-  </v-popover>
+    <i
+      slot="trigger"
+      class="icon-ellipsis button-icon"
+    />
+  </Popover>
 </template>
 
 <script src="./extra_buttons.js" ></script>
 
 <style lang="scss">
 @import '../../_variables.scss';
-@import '../popper/popper.scss';
 
 .icon-ellipsis {
   cursor: pointer;

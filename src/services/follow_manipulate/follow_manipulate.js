@@ -1,24 +1,27 @@
-const fetchUser = (attempt, user, store) => new Promise((resolve, reject) => {
+const fetchRelationship = (attempt, userId, store) => new Promise((resolve, reject) => {
   setTimeout(() => {
-    store.state.api.backendInteractor.fetchUser({ id: user.id })
-      .then((user) => store.commit('addNewUsers', [user]))
-      .then(() => resolve([user.following, user.requested, user.locked, attempt]))
+    store.state.api.backendInteractor.fetchUserRelationship({ id: userId })
+      .then((relationship) => {
+        store.commit('updateUserRelationship', [relationship])
+        return relationship
+      })
+      .then((relationship) => resolve([relationship.following, relationship.requested, relationship.locked, attempt]))
       .catch((e) => reject(e))
   }, 500)
 }).then(([following, sent, locked, attempt]) => {
   if (!following && !(locked && sent) && attempt <= 3) {
     // If we BE reports that we still not following that user - retry,
     // increment attempts by one
-    fetchUser(++attempt, user, store)
+    fetchRelationship(++attempt, userId, store)
   }
 })
 
-export const requestFollow = (user, store) => new Promise((resolve, reject) => {
-  store.state.api.backendInteractor.followUser({ id: user.id })
+export const requestFollow = (userId, store) => new Promise((resolve, reject) => {
+  store.state.api.backendInteractor.followUser({ id: userId })
     .then((updated) => {
       store.commit('updateUserRelationship', [updated])
 
-      if (updated.following || (user.locked && user.requested)) {
+      if (updated.following || (updated.locked && updated.requested)) {
         // If we get result immediately or the account is locked, just stop.
         resolve()
         return
@@ -31,15 +34,15 @@ export const requestFollow = (user, store) => new Promise((resolve, reject) => {
       // don't know that yet.
       // Recursive Promise, it will call itself up to 3 times.
 
-      return fetchUser(1, user, store)
+      return fetchRelationship(1, updated, store)
         .then(() => {
           resolve()
         })
     })
 })
 
-export const requestUnfollow = (user, store) => new Promise((resolve, reject) => {
-  store.state.api.backendInteractor.unfollowUser({ id: user.id })
+export const requestUnfollow = (userId, store) => new Promise((resolve, reject) => {
+  store.state.api.backendInteractor.unfollowUser({ id: userId })
     .then((updated) => {
       store.commit('updateUserRelationship', [updated])
       resolve({

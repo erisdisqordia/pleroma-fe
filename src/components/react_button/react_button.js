@@ -1,39 +1,30 @@
+import Popover from '../popover/popover.vue'
 import { mapGetters } from 'vuex'
 
 const ReactButton = {
-  props: ['status', 'loggedIn'],
+  props: ['status'],
   data () {
     return {
-      showTooltip: false,
-      filterWord: '',
-      popperOptions: {
-        modifiers: {
-          preventOverflow: { padding: { top: 50 }, boundariesElement: 'viewport' }
-        }
-      }
+      filterWord: ''
     }
   },
+  components: {
+    Popover
+  },
   methods: {
-    openReactionSelect () {
-      this.showTooltip = true
-      this.filterWord = ''
-    },
-    closeReactionSelect () {
-      this.showTooltip = false
-    },
-    addReaction (event, emoji) {
+    addReaction (event, emoji, close) {
       const existingReaction = this.status.emoji_reactions.find(r => r.name === emoji)
       if (existingReaction && existingReaction.me) {
         this.$store.dispatch('unreactWithEmoji', { id: this.status.id, emoji })
       } else {
         this.$store.dispatch('reactWithEmoji', { id: this.status.id, emoji })
       }
-      this.closeReactionSelect()
+      close()
     }
   },
   computed: {
     commonEmojis () {
-      return ['❤️', '😠', '👀', '😂', '🔥']
+      return ['👍', '😠', '👀', '😂', '🔥']
     },
     emojis () {
       if (this.filterWord !== '') {

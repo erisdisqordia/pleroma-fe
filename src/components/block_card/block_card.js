@@ -11,8 +11,11 @@ const BlockCard = {
     user () {
       return this.$store.getters.findUser(this.userId)
     },
+    relationship () {
+      return this.$store.getters.relationship(this.userId)
+    },
     blocked () {
-      return this.user.statusnet_blocking
+      return this.relationship.blocking
     }
   },
   components: {

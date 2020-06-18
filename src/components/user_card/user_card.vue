@@ -50,15 +50,6 @@
               >
                 {{ user.name }}
               </div>
-              <router-link
-                v-if="!isOtherUser"
-                :to="{ name: 'user-settings' }"
-              >
-                <i
-                  class="button-icon icon-wrench usersettings"
-                  :title="$t('tool_tip.user_settings')"
-                />
-              </router-link>
               <a
                 v-if="isOtherUser && !user.is_local"
                 :href="user.statusnet_profile_url"
@@ -69,6 +60,7 @@
               <AccountActions
                 v-if="isOtherUser && loggedIn"
                 :user="user"
+                :relationship="relationship"
               />
             </div>
             <div class="bottom-line">
@@ -92,7 +84,7 @@
         </div>
         <div class="user-meta">
           <div
-            v-if="user.follows_you && loggedIn && isOtherUser"
+            v-if="relationship.followed_by && loggedIn && isOtherUser"
             class="following"
           >
             {{ $t('user_card.follows_you') }}
@@ -117,7 +109,7 @@
               type="color"
             >
             <label
-              for="style-switcher"
+              for="theme_tab"
               class="userHighlightSel select"
             >
               <select
@@ -139,10 +131,10 @@
           class="user-interactions"
         >
           <div class="btn-group">
-            <FollowButton :user="user" />
-            <template v-if="user.following">
+            <FollowButton :relationship="relationship" />
+            <template v-if="relationship.following">
               <ProgressButton
-                v-if="!user.subscribed"
+                v-if="!relationship.subscribing"
                 class="btn btn-default"
                 :click="subscribeUser"
                 :title="$t('user_card.subscribe')"
@@ -151,7 +143,7 @@
               </ProgressButton>
               <ProgressButton
                 v-else
-                class="btn btn-default pressed"
+                class="btn btn-default toggled"
                 :click="unsubscribeUser"
                 :title="$t('user_card.unsubscribe')"
               >
@@ -161,8 +153,8 @@
           </div>
           <div>
             <button
-              v-if="user.muted"
-              class="btn btn-default btn-block pressed"
+              v-if="relationship.muting"
+              class="btn btn-default btn-block toggled"
               @click="unmuteUser"
             >
               {{ $t('user_card.muted') }}
@@ -286,6 +278,7 @@
     mask-size: 100% 60%;
     border-top-left-radius: calc(var(--panelRadius) - 1px);
     border-top-right-radius: calc(var(--panelRadius) - 1px);
+    background-color: var(--profileBg);
 
     &.hide-bio {
       mask-size: 100% 40px;
@@ -298,6 +291,11 @@
 
   &-bio {
     text-align: center;
+
+    a {
+      color: $fallback--link;
+      color: var(--postLink, $fallback--link);
+    }
 
     img {
       object-fit: contain;
@@ -460,14 +458,13 @@
       color: var(--text, $fallback--text);
     }
 
-    // TODO use proper colors
     .staff {
       flex: none;
       text-transform: capitalize;
       color: $fallback--text;
-      color: var(--btnText, $fallback--text);
+      color: var(--alertNeutralText, $fallback--text);
       background-color: $fallback--fg;
-      background-color: var(--btn, $fallback--fg);
+      background-color: var(--alertNeutral, $fallback--fg);
     }
   }
 
@@ -538,12 +535,6 @@
 
     button {
       margin: 0;
-
-      &.pressed {
-        // TODO: This should be themed.
-        border-bottom-color: rgba(255, 255, 255, 0.2);
-        border-top-color: rgba(0, 0, 0, 0.2);
-      }
     }
   }
 }

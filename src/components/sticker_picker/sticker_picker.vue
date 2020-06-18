@@ -51,7 +51,7 @@
         img {
           height: 100%;
           &:hover {
-            filter: drop-shadow(0 0 5px var(--link, $fallback--link));
+            filter: drop-shadow(0 0 5px var(--accent, $fallback--link));
           }
         }
       }

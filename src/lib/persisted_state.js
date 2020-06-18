@@ -1,13 +1,12 @@
 import merge from 'lodash.merge'
-import objectPath from 'object-path'
 import localforage from 'localforage'
-import { each } from 'lodash'
+import { each, get, set } from 'lodash'
 
 let loaded = false
 
 const defaultReducer = (state, paths) => (
   paths.length === 0 ? state : paths.reduce((substate, path) => {
-    objectPath.set(substate, path, objectPath.get(state, path))
+    set(substate, path, get(state, path))
     return substate
   }, {})
 )

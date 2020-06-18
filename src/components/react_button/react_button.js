@@ -2,7 +2,7 @@ import Popover from '../popover/popover.vue'
 import { mapGetters } from 'vuex'
 
 const ReactButton = {
-  props: ['status', 'loggedIn'],
+  props: ['status'],
   data () {
     return {
       filterWord: ''
@@ -24,7 +24,7 @@ const ReactButton = {
   },
   computed: {
     commonEmojis () {
-      return ['❤️', '😠', '👀', '😂', '🔥']
+      return ['👍', '😠', '👀', '😂', '🔥']
     },
     emojis () {
       if (this.filterWord !== '') {

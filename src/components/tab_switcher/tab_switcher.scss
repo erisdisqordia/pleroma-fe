@@ -2,7 +2,144 @@
 
 .tab-switcher {
   display: flex;
-  flex-direction: column;
+
+  .tab-icon {
+    font-size: 2em;
+    display: block;
+  }
+
+  &.top-tabs {
+    flex-direction: column;
+
+    > .tabs {
+      width: 100%;
+      overflow-y: hidden;
+      overflow-x: auto;
+      padding-top: 5px;
+      flex-direction: row;
+
+      &::after, &::before {
+        content: '';
+        flex: 1 1 auto;
+        border-bottom: 1px solid;
+        border-bottom-color: $fallback--border;
+        border-bottom-color: var(--border, $fallback--border);
+      }
+      .tab-wrapper {
+        height: 28px;
+
+        &:not(.active)::after {
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-bottom: 1px solid;
+          border-bottom-color: $fallback--border;
+          border-bottom-color: var(--border, $fallback--border);
+        }
+      }
+      .tab {
+        width: 100%;
+        min-width: 1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding-bottom: 99px;
+        margin-bottom: 6px - 99px;
+      }
+    }
+    .contents.scrollable-tabs {
+      flex-basis: 0;
+    }
+  }
+
+  &.side-tabs {
+    flex-direction: row;
+
+    @media all and (max-width: 800px) {
+      overflow-x: auto;
+    }
+
+    > .contents {
+      flex: 1 1 auto;
+    }
+
+    > .tabs {
+      flex: 0 0 auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      flex-direction: column;
+
+      &::after, &::before {
+        flex-shrink: 0;
+        flex-basis: .5em;
+        content: '';
+        border-right: 1px solid;
+        border-right-color: $fallback--border;
+        border-right-color: var(--border, $fallback--border);
+      }
+
+      &::after {
+        flex-grow: 1;
+      }
+
+      &::before {
+        flex-grow: 0;
+      }
+
+      .tab-wrapper {
+        min-width: 10em;
+        display: flex;
+        flex-direction: column;
+
+        @media all and (max-width: 800px) {
+          min-width: 1em;
+        }
+
+        &:not(.active)::after {
+          top: 0;
+          right: 0;
+          bottom: 0;
+          border-right: 1px solid;
+          border-right-color: $fallback--border;
+          border-right-color: var(--border, $fallback--border);
+        }
+
+        &::before {
+          flex: 0 0 6px;
+          content: '';
+          border-right: 1px solid;
+          border-right-color: $fallback--border;
+          border-right-color: var(--border, $fallback--border);
+        }
+
+        &:last-child .tab {
+          margin-bottom: 0;
+        }
+      }
+
+      .tab {
+        flex: 1;
+        box-sizing: content-box;
+        min-width: 10em;
+        min-width: 1px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        padding-left: 1em;
+        padding-right: calc(1em + 200px);
+        margin-right: -200px;
+        margin-left: 1em;
+
+        @media all and (max-width: 800px) {
+          padding-left: .25em;
+          padding-right: calc(.25em + 200px);
+          margin-right: calc(.25em - 200px);
+          margin-left: .25em;
+          .text {
+            display: none
+          }
+        }
+      }
+    }
+  }
 
   .contents {
     flex: 1 0 auto;
@@ -11,88 +148,89 @@
     .hidden {
       display: none;
     }
+    .full-height:not(.hidden) {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      > *:not(.mobile-label) {
+        flex: 1;
+      }
+    }
 
     &.scrollable-tabs {
-      flex-basis: 0;
       overflow-y: auto;
     }
   }
+
+  .tab {
+    position: relative;
+    white-space: nowrap;
+    padding: 6px 1em;
+    background-color: $fallback--fg;
+    background-color: var(--tab, $fallback--fg);
+
+    &, &:active .tab-icon {
+      color: $fallback--text;
+      color: var(--tabText, $fallback--text);
+    }
+
+    &:not(.active) {
+      z-index: 4;
+
+      &:hover {
+        z-index: 6;
+      }
+    }
+
+    &.active {
+      background: transparent;
+      z-index: 5;
+      color: $fallback--text;
+      color: var(--tabActiveText, $fallback--text);
+    }
+
+    img {
+      max-height: 26px;
+      vertical-align: top;
+      margin-top: -5px;
+    }
+  }
+
   .tabs {
     display: flex;
     position: relative;
-    width: 100%;
-    overflow-y: hidden;
-    overflow-x: auto;
-    padding-top: 5px;
     box-sizing: border-box;
 
     &::after, &::before {
       display: block;
-      content: '';
       flex: 1 1 auto;
-      border-bottom: 1px solid;
-      border-bottom-color: $fallback--border;
-      border-bottom-color: var(--border, $fallback--border);
     }
+  }
 
-    .tab-wrapper {
-      height: 28px;
-      position: relative;
-      display: flex;
-      flex: 0 0 auto;
+  .tab-wrapper {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
 
-      .tab {
-        width: 100%;
-        min-width: 1px;
-        position: relative;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        padding: 6px 1em;
-        padding-bottom: 99px;
-        margin-bottom: 6px - 99px;
-        white-space: nowrap;
-
-        color: $fallback--text;
-        color: var(--tabText, $fallback--text);
-        background-color: $fallback--fg;
-        background-color: var(--tab, $fallback--fg);
-
-        &:not(.active) {
-          z-index: 4;
-
-          &:hover {
-            z-index: 6;
-          }
-        }
-
-        &.active {
-          background: transparent;
-          z-index: 5;
-          color: $fallback--text;
-          color: var(--tabActiveText, $fallback--text);
-        }
-
-        img {
-          max-height: 26px;
-          vertical-align: top;
-          margin-top: -5px;
-        }
-      }
-
-      &:not(.active) {
-        &::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 7;
-          border-bottom: 1px solid;
-          border-bottom-color: $fallback--border;
-          border-bottom-color: var(--border, $fallback--border);
-        }
+    &:not(.active) {
+      &::after {
+        content: '';
+        position: absolute;
+        z-index: 7;
       }
     }
+  }
 
+  .mobile-label {
+    padding-left: .3em;
+    padding-bottom: .25em;
+    margin-top: .5em;
+    margin-left: .2em;
+    margin-bottom: .25em;
+    border-bottom: 1px solid var(--border, $fallback--border);
+
+    @media all and (min-width: 800px) {
+      display: none;
+    }
   }
 }

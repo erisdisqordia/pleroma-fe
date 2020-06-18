@@ -1,0 +1,82 @@
+@import '../../../_variables.scss';
+.profile-tab {
+  .bio {
+    margin: 0;
+  }
+
+  .visibility-tray {
+    padding-top: 5px;
+  }
+
+  input[type=file] {
+    padding: 5px;
+    height: auto;
+  }
+
+  .banner {
+    max-width: 100%;
+  }
+
+  .uploading {
+    font-size: 1.5em;
+    margin: 0.25em;
+  }
+
+  .name-changer {
+    width: 100%;
+  }
+
+  .bg {
+    max-width: 100%;
+  }
+
+  .current-avatar {
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: $fallback--avatarRadius;
+    border-radius: var(--avatarRadius, $fallback--avatarRadius);
+  }
+
+  .oauth-tokens {
+    width: 100%;
+
+    th {
+      text-align: left;
+    }
+
+    .actions {
+      text-align: right;
+    }
+  }
+
+  &-usersearch-wrapper {
+    padding: 1em;
+  }
+
+  &-bulk-actions {
+    text-align: right;
+    padding: 0 1em;
+    min-height: 28px;
+
+    button {
+      width: 10em;
+    }
+  }
+
+  &-domain-mute-form {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      align-self: flex-end;
+      margin-top: 1em;
+      width: 10em;
+    }
+  }
+
+  .setting-subitem {
+    margin-left: 1.75em;
+  }
+}

@@ -18,6 +18,9 @@ const FollowCard = {
     },
     loggedIn () {
       return this.$store.state.users.currentUser
+    },
+    relationship () {
+      return this.$store.getters.relationship(this.user.id)
     }
   }
 }

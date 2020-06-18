@@ -187,6 +187,9 @@
                   class="form-control"
                   type="text"
                   autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
                 >
               </template>
             </div>

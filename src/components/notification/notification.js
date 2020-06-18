@@ -1,7 +1,9 @@
+import StatusContent from '../status_content/status_content.vue'
 import Status from '../status/status.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import UserCard from '../user_card/user_card.vue'
 import Timeago from '../timeago/timeago.vue'
+import { isStatusNotification } from '../../services/notification_utils/notification_utils.js'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 
@@ -15,10 +17,11 @@ const Notification = {
   },
   props: [ 'notification' ],
   components: {
-    Status,
+    StatusContent,
     UserAvatar,
     UserCard,
-    Timeago
+    Timeago,
+    Status
   },
   methods: {
     toggleUserExpanded () {
@@ -32,6 +35,24 @@ const Notification = {
     },
     toggleMute () {
       this.unmuted = !this.unmuted
+    },
+    approveUser () {
+      this.$store.state.api.backendInteractor.approveUser({ id: this.user.id })
+      this.$store.dispatch('removeFollowRequest', this.user)
+      this.$store.dispatch('markSingleNotificationAsSeen', { id: this.notification.id })
+      this.$store.dispatch('updateNotification', {
+        id: this.notification.id,
+        updater: notification => {
+          notification.type = 'follow'
+        }
+      })
+    },
+    denyUser () {
+      this.$store.state.api.backendInteractor.denyUser({ id: this.user.id })
+        .then(() => {
+          this.$store.dispatch('dismissNotificationLocal', { id: this.notification.id })
+          this.$store.dispatch('removeFollowRequest', this.user)
+        })
     }
   },
   computed: {
@@ -56,7 +77,10 @@ const Notification = {
       return this.generateUserProfileLink(this.targetUser)
     },
     needMute () {
-      return this.user.muted
+      return this.$store.getters.relationship(this.user.id).muting
+    },
+    isStatusNotification () {
+      return isStatusNotification(this.notification.type)
     }
   }
 }

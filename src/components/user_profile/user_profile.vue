@@ -171,7 +171,7 @@
       }
 
       .user-profile-field-value {
-        flex: 1 1 auto;
+        flex: 1 1 70%;
         color: var(--text);
         margin: 0 0 0 0.25em;
       }

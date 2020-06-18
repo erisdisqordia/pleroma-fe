@@ -438,7 +438,7 @@ const users = {
     searchUsers ({ rootState, commit }, { query }) {
       // Don't fetch if this query was already done recently
       if (rootState.users.recentQueries.includes(query)) {
-        return []
+        return Promise.resolve([])
       }
       return rootState.api.backendInteractor.searchUsers({ query })
         .then((users) => {

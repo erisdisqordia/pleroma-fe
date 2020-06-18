@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Add better visual indication for drag-and-drop for files
 
 ### Fixed
+- Custom Emoji will display in poll options now.
 - Status ellipsis menu closes properly when selecting certain options
 - Cropped images look correct in Chrome
 - Newlines in the muted words settings work again

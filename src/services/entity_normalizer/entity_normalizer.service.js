@@ -258,6 +258,12 @@ export const parseStatus = (data) => {
     output.summary_html = addEmojis(escape(data.spoiler_text), data.emojis)
     output.external_url = data.url
     output.poll = data.poll
+    if (output.poll) {
+      output.poll.options = (output.poll.options || []).map(field => ({
+        ...field,
+        title_html: addEmojis(field.title, data.emojis)
+      }))
+    }
     output.pinned = data.pinned
     output.muted = data.muted
   } else {

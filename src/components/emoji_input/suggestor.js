@@ -1,4 +1,4 @@
-import debounce from 'lodash/debounce'
+import { debounce } from 'lodash'
 /**
  * suggest - generates a suggestor function to be used by emoji-input
  * data: object providing source information for specific types of suggestions:

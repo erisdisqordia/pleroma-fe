@@ -225,6 +225,12 @@ export const mutations = {
   signUpFailure (state, errors) {
     state.signUpPending = false
     state.signUpErrors = errors
+  },
+  addRecentQuery (state, query) {
+    state.recentQueries = state.recentQueries.concat(query)
+    if (state.recentQueries.length > 10) {
+      state.recentQueries = state.recentQueries.slice(1)
+    }
   }
 }
 
@@ -251,7 +257,8 @@ export const defaultState = {
   usersObject: {},
   signUpPending: false,
   signUpErrors: [],
-  relationships: {}
+  relationships: {},
+  recentQueries: []
 }
 
 const users = {
@@ -428,10 +435,15 @@ const users = {
         store.commit('setUserForNotification', notification)
       })
     },
-    searchUsers (store, { query }) {
-      return store.rootState.api.backendInteractor.searchUsers({ query })
+    searchUsers ({ rootState, commit }, { query }) {
+      // Don't fetch if this query was already done recently
+      if (rootState.users.recentQueries.includes(query)) {
+        return []
+      }
+      return rootState.api.backendInteractor.searchUsers({ query })
         .then((users) => {
-          store.commit('addNewUsers', users)
+          commit('addRecentQuery', query)
+          commit('addNewUsers', users)
           return users
         })
     },

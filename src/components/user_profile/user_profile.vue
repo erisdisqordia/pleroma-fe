@@ -157,6 +157,9 @@
       display: flex;
       margin: 0.25em auto;
       max-width: 32em;
+      border: 1px solid var(--border, $fallback--border);
+      border-radius: $fallback--inputRadius;
+      border-radius: var(--inputRadius, $fallback--inputRadius);
 
       .user-profile-field-name {
         flex: 0 1 30%;
@@ -164,6 +167,7 @@
         text-align: right;
         color: var(--lightText);
         min-width: 120px;
+        border-right: 1px solid var(--border, $fallback--border);
       }
 
       .user-profile-field-value {
@@ -179,12 +183,6 @@
         overflow: hidden;
         padding: 0.5em 1.5em;
         box-sizing: border-box;
-
-        border: var(--border, $fallback--border);
-        border-radius: $fallback--inputRadius;
-        border-radius: var(--inputRadius, $fallback--inputRadius);
-        border-style: solid;
-        border-width: 1px;
       }
     }
   }

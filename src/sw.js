@@ -40,10 +40,10 @@ const maybeShowNotification = async (event) => {
 
     const url = `${self.registration.scope}api/v1/notifications/${data.notification_id}`
     const notification = await fetch(url, { headers: { Authorization: 'Bearer ' + data.access_token } })
-    let nj = await notification.json()
-    nj = parseNotification(nj)
+    const notificationJson = await notification.json()
+    const parsedNotification = parseNotification(notificationJson)
 
-    const res = prepareNotificationObject(nj, i18n)
+    const res = prepareNotificationObject(parsedNotification, i18n)
 
     self.registration.showNotification(res.title, res)
   }

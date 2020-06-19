@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Greentext now has separate color slot for it
 - Removed the use of with_move parameters when fetching notifications
+- Push notifications now are the same as normal notfication, and are localized.
 
 ### Fixed
 - Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)

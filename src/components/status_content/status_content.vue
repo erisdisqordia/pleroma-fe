@@ -31,7 +31,7 @@
       <div
         class="status-content media-body"
         @click.prevent="linkClicked"
-        v-html="contentHtml"
+        v-html="postBodyHtml"
       />
       <a
         v-if="showingLongSubject"
@@ -53,16 +53,16 @@
         @click.prevent="toggleShowMore"
       >{{ $t("general.show_more") }}</a>
       <div
+        v-if="status.summary_html"
+        class="status-content media-body summary"
+        @click.prevent="linkClicked"
+        v-html="status.summary_html"
+      />
+      <div
         v-if="!hideSubjectStatus"
         class="status-content media-body"
         @click.prevent="linkClicked"
-        v-html="contentHtml"
-      />
-      <div
-        v-else
-        class="status-content media-body"
-        @click.prevent="linkClicked"
-        v-html="status.summary_html"
+        v-html="postBodyHtml"
       />
       <a
         v-if="hideSubjectStatus"
@@ -181,6 +181,10 @@ $status-margin: 0.75em;
     line-height: 1.4em;
     white-space: pre-wrap;
 
+    &.summary {
+      font-weight: bold;
+    }
+
     blockquote {
       margin: 0.2em 0 0.2em 2em;
       font-style: italic;
@@ -226,7 +230,7 @@ $status-margin: 0.75em;
 
 .greentext {
   color: $fallback--cGreen;
-  color: var(--postGreentext, $fallback--cGreen);
+  color: var(--cGreen, $fallback--cGreen);
 }
 
 .timeline :not(.panel-disabled) > {

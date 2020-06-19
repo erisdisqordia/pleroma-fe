@@ -142,12 +142,6 @@ const StatusContent = {
         return html
       }
     },
-    contentHtml () {
-      if (!this.status.summary_html) {
-        return this.postBodyHtml
-      }
-      return this.status.summary_html + '<br />' + this.postBodyHtml
-    },
     ...mapGetters(['mergedConfig']),
     ...mapState({
       betterShadow: state => state.interface.browserSupport.cssFilter,

@@ -104,8 +104,9 @@
         >
           <EmojiInput
             v-model="newFields[i].name"
-            :suggest="emojiSuggestor"
+            enable-emoji-picker
             hide-emoji-button
+            :suggest="userSuggestor"
           >
             <input
               v-model="newFields[i].name"
@@ -114,8 +115,9 @@
           </EmojiInput>
           <EmojiInput
             v-model="newFields[i].value"
-            :suggest="emojiSuggestor"
+            enable-emoji-picker
             hide-emoji-button
+            :suggest="userSuggestor"
           >
             <input
               v-model="newFields[i].value"

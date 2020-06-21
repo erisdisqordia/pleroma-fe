@@ -95,6 +95,11 @@
           {{ $t('settings.discoverable') }}
         </Checkbox>
       </p>
+      <p>
+        <Checkbox v-model="bot">
+          {{ $t('settings.bot') }}
+        </Checkbox>
+      </p>
       <button
         :disabled="newName && newName.length === 0"
         class="btn btn-default"

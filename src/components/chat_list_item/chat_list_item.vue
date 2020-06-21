@@ -4,7 +4,7 @@
     @click.capture.prevent="openChat"
   >
     <div class="chat-list-item-left">
-      <ChatAvatar
+      <UserAvatar
         :user="chat.account"
         height="48px"
         width="48px"

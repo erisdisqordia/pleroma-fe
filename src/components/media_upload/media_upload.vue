@@ -33,19 +33,6 @@
 @import '../../_variables.scss';
 
 .media-upload {
-  &.disabled {
-    .new-icon {
-      cursor: not-allowed;
-    }
-
-    &:hover {
-      i, label {
-        color: $fallback--faint;
-        color: var(--faint, $fallback--faint);
-      }
-    }
-  }
-
   .label {
     display: inline-block;
   }

@@ -43,7 +43,7 @@ const PostStatusForm = {
     'disableSubmit',
     'placeholder',
     'maxHeight',
-    'request',
+    'postHandler',
     'preserveFocus',
     'autoFocus',
     'fileLimit',
@@ -221,10 +221,6 @@ const PostStatusForm = {
         event.stopPropagation()
         event.preventDefault()
       }
-      if (opts.control && this.submitOnEnter) {
-        newStatus.status = `${newStatus.status}\n`
-        return
-      }
 
       if (this.emptyStatus) {
         this.error = this.$t('post_status.empty_status_error')
@@ -259,9 +255,9 @@ const PostStatusForm = {
         poll
       }
 
-      const request = this.request ? this.request : statusPoster.postStatus
+      const postHandler = this.postHandler ? this.postHandler : statusPoster.postStatus
 
-      request(postingOptions).then((data) => {
+      postHandler(postingOptions).then((data) => {
         if (!data.error) {
           this.newStatus = {
             status: '',
@@ -345,11 +341,7 @@ const PostStatusForm = {
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
-
-      // TODO: use fixed dimensions instead so relying on timeout
-      setTimeout(() => {
-        this.$emit('resize')
-      }, 150)
+      this.$emit('resize', { delayed: true })
     },
     removeMediaFile (fileInfo) {
       let index = this.newStatus.files.indexOf(fileInfo)
@@ -364,6 +356,7 @@ const PostStatusForm = {
       this.uploadingFiles = true
     },
     finishedUploadingFiles () {
+      this.$emit('resize')
       this.uploadingFiles = false
     },
     type (fileInfo) {
@@ -417,7 +410,7 @@ const PostStatusForm = {
       // Reset to default height for empty form, nothing else to do here.
       if (target.value === '') {
         target.style.height = null
-        this.$emit('resize', null)
+        this.$emit('resize')
         this.$refs['emoji-input'].resize()
         return
       }

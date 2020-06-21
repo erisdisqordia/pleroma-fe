@@ -4,16 +4,16 @@
     class="chat-title"
     :title="title"
   >
-    <ChatAvatar
-      v-if="withAvatar"
-      :user="user"
-      width="23px"
-      height="23px"
-    />
-    <span
-      v-if="withAvatar"
-      style="margin-right: 0.5em"
-    />
+    <router-link
+      v-if="withAvatar && user"
+      :to="getUserProfileLink(user)"
+    >
+      <UserAvatar
+        :user="user"
+        width="23px"
+        height="23px"
+      />
+    </router-link>
     <span
       class="username"
       v-html="htmlTitle"
@@ -32,11 +32,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  a {
-    display: flex;
-    align-items: center;
-  }
+  align-items: center;
 
   .username {
     max-width: 100%;
@@ -50,6 +46,19 @@
       height: 14px;
       vertical-align: middle;
       object-fit: contain
+    }
+  }
+
+  .still-image.avatar {
+    width: 23px;
+    height: 23px;
+    margin-right: 0.5em;
+
+    border-radius: $fallback--avatarAltRadius;
+    border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+
+    &.animated::before {
+      display: none;
     }
   }
 }

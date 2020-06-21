@@ -1,17 +1,8 @@
 .chat-list-item {
-  &:hover .animated.avatar {
-    canvas {
-      display: none;
-    }
-    img {
-      visibility: visible;
-    }
-  }
-
   display: flex;
   flex-direction: row;
   padding: 0.75em;
-  height: 4.85em;
+  height: 5em;
   overflow: hidden;
   box-sizing: border-box;
   cursor: pointer;
@@ -22,7 +13,7 @@
 
   &:hover {
     background-color: var(--selectedPost, $fallback--lightBg);
-    box-shadow: 0 0px 3px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
   }
 
   .chat-list-item-left {
@@ -47,12 +38,6 @@
     white-space: nowrap;
   }
 
-  .member-count {
-    color: $fallback--text;
-    color: var(--faintText, $fallback--text);
-    margin-right: 2px;
-  }
-
   .name-and-account-name {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -65,7 +50,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    margin: 0.35rem 0;
+    margin: 0.35em 0;
     height: 1.2em;
     line-height: 1.2em;
     color: $fallback--text;
@@ -78,17 +63,24 @@
     pointer-events: none;
   }
 
-  .unread-indicator-wrapper {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
+  &:hover .animated.avatar {
+    canvas {
+      display: none;
+    }
+    img {
+      visibility: visible;
+    }
   }
 
-  .unread-indicator {
-    border-radius: 100%;
-    height: 8px;
-    width: 8px;
-    background-color: $fallback--link;
-    background-color: var(--link, $fallback--link);
+  .avatar.still-image {
+    border-radius: $fallback--avatarAltRadius;
+    border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+  }
+
+  .status-body {
+    img.emoji {
+      width: 1.4em;
+      height: 1.4em;
+    }
   }
 }

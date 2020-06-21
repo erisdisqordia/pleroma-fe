@@ -66,9 +66,9 @@ const ChatMessage = {
       }
 
       if (this.isCurrentUser) {
-        res.right = '5px'
+        res.right = '0.4rem'
       } else {
-        res.left = '5px'
+        res.left = '0.4rem'
       }
 
       return res

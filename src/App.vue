@@ -113,9 +113,7 @@
             {{ $t("login.hint") }}
           </router-link>
         </div>
-        <transition :name="transitionName">
-          <router-view />
-        </transition>
+        <router-view />
       </div>
       <media-modal />
     </div>

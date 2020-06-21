@@ -1,7 +1,7 @@
 import { mapState } from 'vuex'
 import StatusContent from '../status_content/status_content.vue'
 import fileType from 'src/services/file_type/file_type.service'
-import ChatAvatar from '../chat_avatar/chat_avatar.vue'
+import UserAvatar from '../user_avatar/user_avatar.vue'
 import AvatarList from '../avatar_list/avatar_list.vue'
 import Timeago from '../timeago/timeago.vue'
 import ChatTitle from '../chat_title/chat_title.vue'
@@ -12,7 +12,7 @@ const ChatListItem = {
     'chat'
   ],
   components: {
-    ChatAvatar,
+    UserAvatar,
     AvatarList,
     Timeago,
     ChatTitle,

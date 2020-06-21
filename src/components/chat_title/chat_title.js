@@ -1,10 +1,11 @@
 import Vue from 'vue'
-import ChatAvatar from '../chat_avatar/chat_avatar.vue'
+import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+import UserAvatar from '../user_avatar/user_avatar.vue'
 
 export default Vue.component('chat-title', {
   name: 'ChatTitle',
   components: {
-    ChatAvatar
+    UserAvatar
   },
   props: [
     'user', 'withAvatar'
@@ -15,6 +16,11 @@ export default Vue.component('chat-title', {
     },
     htmlTitle () {
       return this.user ? this.user.name_html : ''
+    }
+  },
+  methods: {
+    getUserProfileLink (user) {
+      return generateProfileLink(user.id, user.screen_name)
     }
   }
 })

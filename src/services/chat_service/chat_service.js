@@ -31,7 +31,8 @@ const deleteMessage = (storage, messageId) => {
   }
 
   if (storage.minId === messageId) {
-    storage.minId = _.minBy(storage.messages, 'id')
+    const firstMessage = _.minBy(storage.messages, 'id')
+    storage.minId = firstMessage.id
   }
 }
 
@@ -73,12 +74,12 @@ const getView = (storage) => {
 
   const result = []
   const messages = _.sortBy(storage.messages, ['id', 'desc'])
-  const firstMessages = messages[0]
-  let prev = messages[messages.length - 1]
+  const firstMessage = messages[0]
+  let previousMessage = messages[messages.length - 1]
   let currentMessageChainId
 
-  if (firstMessages) {
-    const date = new Date(firstMessages.created_at)
+  if (firstMessage) {
+    const date = new Date(firstMessage.created_at)
     date.setHours(0, 0, 0, 0)
     result.push({
       type: 'date',
@@ -97,14 +98,14 @@ const getView = (storage) => {
     date.setHours(0, 0, 0, 0)
 
     // insert date separator and start a new message chain
-    if (prev && prev.date < date) {
+    if (previousMessage && previousMessage.date < date) {
       result.push({
         type: 'date',
         date,
         id: date.getTime().toString()
       })
 
-      prev['isTail'] = true
+      previousMessage['isTail'] = true
       currentMessageChainId = undefined
       afterDate = true
     }
@@ -124,14 +125,14 @@ const getView = (storage) => {
     }
 
     // start a new message chain
-    if ((prev && prev.data && prev.data.account_id) !== message.account_id || afterDate) {
+    if ((previousMessage && previousMessage.data && previousMessage.data.account_id) !== message.account_id || afterDate) {
       currentMessageChainId = _.uniqueId()
       object['isHead'] = true
       object['messageChainId'] = currentMessageChainId
     }
 
     result.push(object)
-    prev = object
+    previousMessage = object
     afterDate = false
   }
 

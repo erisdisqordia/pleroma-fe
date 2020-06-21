@@ -131,6 +131,7 @@
           class="form-control main-input"
           enable-emoji-picker
           hide-emoji-button
+          :newline-on-ctrl-enter="submitOnEnter"
           enable-sticker-picker
           @input="onEmojiInputInput"
           @sticker-uploaded="addMediaFile"
@@ -146,8 +147,8 @@
             class="form-post-body"
             :class="{ 'scrollable-form': !!maxHeight }"
             @keydown.exact.enter="submitOnEnter && postStatus($event, newStatus)"
-            @keydown.meta.enter="postStatus($event, newStatus, { control: true })"
-            @keydown.ctrl.enter="postStatus($event, newStatus)"
+            @keydown.meta.enter="postStatus($event, newStatus)"
+            @keydown.ctrl.enter="!submitOnEnter && postStatus($event, newStatus)"
             @input="resize"
             @compositionupdate="resize"
             @paste="paste"
@@ -435,6 +436,19 @@
         color: var(--lightText, $fallback--lightText);
       }
     }
+
+    &.disabled {
+      i {
+        cursor: not-allowed;
+        color: $fallback--icon;
+        color: var(--btnDisabledText, $fallback--icon);
+
+        &:hover {
+          color: $fallback--icon;
+          color: var(--btnDisabledText, $fallback--icon);
+        }
+      }
+    }
   }
 
   // Order is not necessary but a good indicator
@@ -628,7 +642,7 @@
 }
 
 // todo: unify with attachment.vue (otherwise the uploaded images are not minified unless a status with an attachment was displayed before)
-img.media-upload {
+img.media-upload, .media-upload-container > video {
   line-height: 0;
   max-height: 200px;
   max-width: 100%;

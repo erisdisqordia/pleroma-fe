@@ -1,4 +1,3 @@
-import { throttle } from 'lodash'
 import { mapState, mapGetters } from 'vuex'
 import BasicUserCard from '../basic_user_card/basic_user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
@@ -54,7 +53,7 @@ const chatNew = {
     removeUser (userId) {
       this.selectedUserIds = this.selectedUserIds.filter(id => id !== userId)
     },
-    search: throttle(function (query) {
+    search (query) {
       if (!query) {
         this.loading = false
         return
@@ -67,7 +66,7 @@ const chatNew = {
           this.loading = false
           this.userIds = data.accounts.map(a => a.id)
         })
-    })
+    }
   }
 }
 

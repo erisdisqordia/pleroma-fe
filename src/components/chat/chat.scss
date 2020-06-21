@@ -3,14 +3,17 @@
   height: calc(100vh - 60px);
   width: 100%;
 
+  .chat-title {
+    // prevents chat header jumping on when the user avatar loads
+    height: 28px;
+  }
+
   .chat-view-inner {
     height: auto;
     width: 100%;
     overflow: visible;
     display: flex;
-    margin-top: 0.5em;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+    margin: 0.5em 0.5em 0 0.5em;
   }
 
   .chat-view-body {
@@ -19,23 +22,18 @@
     flex-direction: column;
     width: 100%;
     overflow: visible;
-    border-radius: none;
     min-height: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 0em;
-    margin-top: 0em;
+    margin: 0 0 0 0;
     border-radius: 10px 10px 0 0;
     border-radius: var(--panelRadius, 10px) var(--panelRadius, 10px) 0 0 ;
 
     &::after {
-      border-radius: none;
-      box-shadow: none;
+      border-radius: 0;
     }
   }
 
   .scrollable-message-list {
-    padding: 0 10px;
+    padding: 0 0.8em;
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -45,7 +43,7 @@
 
   .footer {
     position: sticky;
-    bottom: 0px;
+    bottom: 0;
   }
 
   .chat-view-heading {
@@ -54,15 +52,19 @@
     top: 50px;
     display: flex;
     z-index: 2;
-    border-radius: none;
     position: sticky;
     display: flex;
     overflow: hidden;
   }
 
   .go-back-button {
-    margin-right: 1.2em;
     cursor: pointer;
+    margin-right: 1.4em;
+
+    i {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .jump-to-bottom-button {
@@ -135,7 +137,7 @@
       overflow: hidden;
       height: 100%;
       margin: 0;
-      border-radius: 0 !important;
+      border-radius: 0;
     }
 
     .chat-view-heading {

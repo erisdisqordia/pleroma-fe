@@ -2,29 +2,26 @@ import _ from 'lodash'
 import { WSConnectionStatus } from '../../services/api/api.service.js'
 import { mapGetters, mapState } from 'vuex'
 import ChatMessage from '../chat_message/chat_message.vue'
-import ChatAvatar from '../chat_avatar/chat_avatar.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import ChatTitle from '../chat_title/chat_title.vue'
 import chatService from '../../services/chat_service/chat_service.js'
-import ChatLayout from './chat_layout.js'
 import { getScrollPosition, getNewTopPosition, isBottomedOut, scrollableContainerHeight } from './chat_layout_utils.js'
 
 const BOTTOMED_OUT_OFFSET = 10
 const JUMP_TO_BOTTOM_BUTTON_VISIBILITY_OFFSET = 150
+const SAFE_RESIZE_TIME_OFFSET = 100
 
 const Chat = {
   components: {
     ChatMessage,
     ChatTitle,
-    ChatAvatar,
     PostStatusForm
   },
-  mixins: [ChatLayout],
   data () {
     return {
       jumpToBottomButtonVisible: false,
       hoveredMessageChainId: undefined,
-      scrollPositionBeforeResize: {},
+      lastScrollPosition: {},
       scrollableContainerHeight: '100%',
       errorLoadingChat: false
     }
@@ -119,6 +116,7 @@ const Chat = {
     },
     onFilesDropped () {
       this.$nextTick(() => {
+        this.handleResize()
         this.updateScrollableContainerHeight()
       })
     },
@@ -129,13 +127,30 @@ const Chat = {
         }
       })
     },
-    handleLayoutChange () {
-      this.updateScrollableContainerHeight()
-      if (this.mobileLayout) {
-        this.setMobileChatLayout()
-      } else {
-        this.unsetMobileChatLayout()
+    setChatLayout () {
+      //   This is a hacky way to adjust the global layout to the mobile chat (without modifying the rest of the app).
+      //   This layout prevents empty spaces from being visible at the bottom
+      //   of the chat on iOS Safari (`safe-area-inset`) when
+      //   - the on-screen keyboard appears and the user starts typing
+      //   - the user selects the text inside the input area
+      //   - the user selects and deletes the text that is multiple lines long
+      //   TODO: unify the chat layout with the global layout.
+      let html = document.querySelector('html')
+      if (html) {
+        html.classList.add('chat-layout')
       }
+
+      this.$nextTick(() => {
+        this.updateScrollableContainerHeight()
+      })
+    },
+    unsetChatLayout () {
+      let html = document.querySelector('html')
+      if (html) {
+        html.classList.remove('chat-layout')
+      }
+    },
+    handleLayoutChange () {
       this.$nextTick(() => {
         this.updateScrollableContainerHeight()
         this.scrollDown()
@@ -149,15 +164,24 @@ const Chat = {
       this.scrollableContainerHeight = scrollableContainerHeight(inner, header, footer) + 'px'
     },
     // Preserves the scroll position when OSK appears or the posting form changes its height.
-    handleResize (opts) {
+    handleResize (opts = {}) {
+      const { expand = false, delayed = false } = opts
+
+      if (delayed) {
+        setTimeout(() => {
+          this.handleResize({ ...opts, delayed: false })
+        }, SAFE_RESIZE_TIME_OFFSET)
+        return
+      }
+
       this.$nextTick(() => {
         this.updateScrollableContainerHeight()
 
-        const { offsetHeight = undefined } = this.scrollPositionBeforeResize
-        this.scrollPositionBeforeResize = getScrollPosition(this.$refs.scrollable)
+        const { offsetHeight = undefined } = this.lastScrollPosition
+        this.lastScrollPosition = getScrollPosition(this.$refs.scrollable)
 
-        const diff = this.scrollPositionBeforeResize.offsetHeight - offsetHeight
-        if (diff < 0 || (!this.bottomedOut() && opts && opts.expand)) {
+        const diff = this.lastScrollPosition.offsetHeight - offsetHeight
+        if (diff < 0 || (!this.bottomedOut() && expand)) {
           this.$nextTick(() => {
             this.updateScrollableContainerHeight()
             this.$refs.scrollable.scrollTo({
@@ -281,7 +305,12 @@ const Chat = {
         .then(data => {
           this.$store.dispatch('addChatMessages', { chatId: this.currentChat.id, messages: [data] }).then(() => {
             this.$nextTick(() => {
-              this.updateScrollableContainerHeight()
+              this.handleResize()
+              // When the posting form size changes because of a media attachment, we need an extra resize
+              // to account for the potential delay in the DOM update.
+              setTimeout(() => {
+                this.updateScrollableContainerHeight()
+              }, SAFE_RESIZE_TIME_OFFSET)
               this.scrollDown({ forceRead: true })
             })
           })

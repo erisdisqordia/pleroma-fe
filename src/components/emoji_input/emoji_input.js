@@ -88,6 +88,11 @@ const EmojiInput = {
       required: false,
       type: String, // 'auto', 'top', 'bottom'
       default: 'auto'
+    },
+    newlineOnCtrlEnter: {
+      required: false,
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -204,7 +209,7 @@ const EmojiInput = {
       this.$emit('input', newValue)
       this.caret = 0
     },
-    insert ({ insertion, keepOpen }) {
+    insert ({ insertion, keepOpen, surroundingSpace = true }) {
       const before = this.value.substring(0, this.caret) || ''
       const after = this.value.substring(this.caret) || ''
 
@@ -223,8 +228,8 @@ const EmojiInput = {
        * them, masto seem to be rendering :emoji::emoji: correctly now so why not
        */
       const isSpaceRegex = /\s/
-      const spaceBefore = !isSpaceRegex.exec(before.slice(-1)) && before.length && this.padEmoji > 0 ? ' ' : ''
-      const spaceAfter = !isSpaceRegex.exec(after[0]) && this.padEmoji ? ' ' : ''
+      const spaceBefore = (surroundingSpace && !isSpaceRegex.exec(before.slice(-1)) && before.length && this.padEmoji > 0) ? ' ' : ''
+      const spaceAfter = (surroundingSpace && !isSpaceRegex.exec(after[0]) && this.padEmoji) ? ' ' : ''
 
       const newValue = [
         before,
@@ -381,6 +386,18 @@ const EmojiInput = {
     },
     onKeyDown (e) {
       const { ctrlKey, shiftKey, key } = e
+      if (this.newlineOnCtrlEnter && ctrlKey && key === 'Enter') {
+        this.insert({ insertion: '\n', surroundingSpace: false })
+        // Ensure only one new line is added on macos
+        e.stopPropagation()
+        e.preventDefault()
+
+        // Scroll the input element to the position of the cursor
+        this.$nextTick(() => {
+          this.input.elm.blur()
+          this.input.elm.focus()
+        })
+      }
       // Disable suggestions hotkeys if suggestions are hidden
       if (!this.temporarilyHideSuggestions) {
         if (key === 'Tab') {

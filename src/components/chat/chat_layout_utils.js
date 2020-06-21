@@ -22,6 +22,5 @@ export const isBottomedOut = (el, offset = 0) => {
 
 // Height of the scrollable container. The dynamic height is needed to ensure the mobile browser panel doesn't overlap or hide the posting form.
 export const scrollableContainerHeight = (inner, header, footer) => {
-  const height = parseFloat(getComputedStyle(inner, null).height.replace('px', ''))
-  return height - header.clientHeight - footer.clientHeight
+  return inner.offsetHeight - header.clientHeight - footer.clientHeight
 }

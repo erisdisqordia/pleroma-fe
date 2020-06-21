@@ -47,6 +47,7 @@ html {
 }
 
 body {
+  overscroll-behavior-y: none;
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
   margin: 0;
@@ -56,7 +57,6 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overscroll-behavior: none;
 
   &.hidden {
     display: none;
@@ -320,7 +320,7 @@ option {
 
 i[class*=icon-] {
   color: $fallback--icon;
-  color: var(--icon, $fallback--icon)
+  color: var(--icon, $fallback--icon);
 }
 
 .btn-block {
@@ -941,4 +941,39 @@ nav {
   min-height: 1.3rem;
   max-height: 1.3rem;
   line-height: 1.3rem;
+}
+
+.chat-layout {
+  // Needed for smoother chat navigation in the desktop Safari (otherwise the chat layout "jumps" as the chat opens).
+  overflow: hidden;
+  height: 100%;
+
+  // Ensures the fixed position of the mobile browser bars on scroll up / down events.
+  // Prevents the mobile browser bars from overlapping or hiding the message posting form.
+  @media all and (max-width: 800px) {
+    body {
+      height: 100%;
+    }
+
+    #app {
+      height: 100%;
+      overflow: hidden;
+      min-height: auto;
+    }
+
+    #app_bg_wrapper {
+      overflow: hidden;
+    }
+
+    .main {
+      overflow: hidden;
+      height: 100%;
+    }
+
+    #content {
+      padding-top: 0;
+      height: 100%;
+      overflow: visible;
+    }
+  }
 }

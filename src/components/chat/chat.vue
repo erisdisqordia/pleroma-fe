@@ -75,7 +75,7 @@
               :disable-polls="true"
               :disable-sensitivity-checkbox="true"
               :disable-submit="errorLoadingChat || !currentChat"
-              :request="sendMessage"
+              :post-handler="sendMessage"
               :submit-on-enter="!mobileLayout"
               :preserve-focus="!mobileLayout"
               :auto-focus="!mobileLayout"

@@ -73,13 +73,13 @@
               <template v-if="!hideBio">
                 <span
                   v-if="!!visibleRole"
-                  class="alert staff"
+                  class="alert user-role"
                 >
                   {{ visibleRole }}
                 </span>
                 <span
                   v-if="user.bot"
-                  class="alert staff"
+                  class="alert user-role"
                 >
                   bot
                 </span>
@@ -468,7 +468,7 @@
       color: var(--text, $fallback--text);
     }
 
-    .staff {
+    .user-role {
       flex: none;
       text-transform: capitalize;
       color: $fallback--text;

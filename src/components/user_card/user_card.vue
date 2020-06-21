@@ -70,10 +70,20 @@
               >
                 @{{ user.screen_name }}
               </router-link>
-              <span
-                v-if="!hideBio && !!visibleRole"
-                class="alert staff"
-              >{{ visibleRole }}</span>
+              <template v-if="!hideBio">
+                <span
+                  v-if="!!visibleRole"
+                  class="alert staff"
+                >
+                  {{ visibleRole }}
+                </span>
+                <span
+                  v-if="user.bot"
+                  class="alert staff"
+                >
+                  bot
+                </span>
+              </template>
               <span v-if="user.locked"><i class="icon icon-lock" /></span>
               <span
                 v-if="!mergedConfig.hideUserStats && !hideBio"

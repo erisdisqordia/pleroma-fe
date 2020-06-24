@@ -7,10 +7,8 @@ import Interactions from 'components/interactions/interactions.vue'
 import DMs from 'components/dm_timeline/dm_timeline.vue'
 import UserProfile from 'components/user_profile/user_profile.vue'
 import Search from 'components/search/search.vue'
-import Settings from 'components/settings/settings.vue'
 import Registration from 'components/registration/registration.vue'
 import PasswordReset from 'components/password_reset/password_reset.vue'
-import UserSettings from 'components/user_settings/user_settings.vue'
 import FollowRequests from 'components/follow_requests/follow_requests.vue'
 import OAuthCallback from 'components/oauth_callback/oauth_callback.vue'
 import Notifications from 'components/notifications/notifications.vue'
@@ -56,12 +54,10 @@ export default (store) => {
     { name: 'external-user-profile', path: '/users/:id', component: UserProfile },
     { name: 'interactions', path: '/users/:username/interactions', component: Interactions, beforeEnter: validateAuthenticatedRoute },
     { name: 'dms', path: '/users/:username/dms', component: DMs, beforeEnter: validateAuthenticatedRoute },
-    { name: 'settings', path: '/settings', component: Settings },
     { name: 'registration', path: '/registration', component: Registration },
     { name: 'password-reset', path: '/password-reset', component: PasswordReset, props: true },
     { name: 'registration-token', path: '/registration/:token', component: Registration },
     { name: 'friend-requests', path: '/friend-requests', component: FollowRequests, beforeEnter: validateAuthenticatedRoute },
-    { name: 'user-settings', path: '/user-settings', component: UserSettings, beforeEnter: validateAuthenticatedRoute },
     { name: 'notifications', path: '/:username/notifications', component: Notifications, beforeEnter: validateAuthenticatedRoute },
     { name: 'login', path: '/login', component: AuthForm },
     { name: 'chat', path: '/chat', component: ChatPanel, props: () => ({ floating: false }) },

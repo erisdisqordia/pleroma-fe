@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="media-upload"
-    @drop.prevent
-    @dragover.prevent="fileDrag"
-    @drop="fileDrop"
-  >
+  <div class="media-upload">
     <label
       class="label"
       :title="$t('tool_tip.media_upload')"

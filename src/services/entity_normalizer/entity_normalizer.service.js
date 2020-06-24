@@ -1,4 +1,5 @@
 import escape from 'escape-html'
+import { isStatusNotification } from '../notification_utils/notification_utils.js'
 
 const qvitterStatusType = (status) => {
   if (status.is_post_verb) {
@@ -55,6 +56,12 @@ export const parseUser = (data) => {
         value: addEmojis(field.value, data.emojis)
       }
     })
+    output.fields_text = data.fields.map(field => {
+      return {
+        name: unescape(field.name.replace(/<[^>]*>/g, '')),
+        value: unescape(field.value.replace(/<[^>]*>/g, ''))
+      }
+    })
 
     // Utilize avatar_static for gif avatars?
     output.profile_image_url = data.avatar
@@ -74,13 +81,7 @@ export const parseUser = (data) => {
       output.token = data.pleroma.chat_token
 
       if (relationship) {
-        output.follows_you = relationship.followed_by
-        output.requested = relationship.requested
-        output.following = relationship.following
-        output.statusnet_blocking = relationship.blocking
-        output.muted = relationship.muting
-        output.showing_reblogs = relationship.showing_reblogs
-        output.subscribed = relationship.subscribing
+        output.relationship = relationship
       }
 
       output.allow_following_move = data.pleroma.allow_following_move
@@ -137,15 +138,9 @@ export const parseUser = (data) => {
 
     output.statusnet_profile_url = data.statusnet_profile_url
 
-    output.statusnet_blocking = data.statusnet_blocking
-
     output.is_local = data.is_local
     output.role = data.role
     output.show_role = data.show_role
-
-    output.follows_you = data.follows_you
-
-    output.muted = data.muted
 
     if (data.rights) {
       output.rights = {
@@ -160,10 +155,16 @@ export const parseUser = (data) => {
     output.hide_follows_count = data.hide_follows_count
     output.hide_followers_count = data.hide_followers_count
     output.background_image = data.background_image
-    // on mastoapi this info is contained in a "relationship"
-    output.following = data.following
     // Websocket token
     output.token = data.token
+
+    // Convert relationsip data to expected format
+    output.relationship = {
+      muting: data.muted,
+      blocking: data.statusnet_blocking,
+      followed_by: data.follows_you,
+      following: data.following
+    }
   }
 
   output.created_at = new Date(data.created_at)
@@ -215,7 +216,7 @@ export const addEmojis = (string, emojis) => {
     const regexSafeShortCode = emoji.shortcode.replace(matchOperatorsRegex, '\\$&')
     return acc.replace(
       new RegExp(`:${regexSafeShortCode}:`, 'g'),
-      `<img src='${emoji.url}' alt='${emoji.shortcode}' title='${emoji.shortcode}' class='emoji' />`
+      `<img src='${emoji.url}' alt=':${emoji.shortcode}:' title=':${emoji.shortcode}:' class='emoji' />`
     )
   }, string)
 }
@@ -263,6 +264,12 @@ export const parseStatus = (data) => {
     output.summary_html = addEmojis(escape(data.spoiler_text), data.emojis)
     output.external_url = data.url
     output.poll = data.poll
+    if (output.poll) {
+      output.poll.options = (output.poll.options || []).map(field => ({
+        ...field,
+        title_html: addEmojis(field.title, data.emojis)
+      }))
+    }
     output.pinned = data.pinned
     output.muted = data.muted
   } else {
@@ -346,9 +353,7 @@ export const parseNotification = (data) => {
   if (masto) {
     output.type = mastoDict[data.type] || data.type
     output.seen = data.pleroma.is_seen
-    output.status = output.type === 'follow' || output.type === 'move'
-      ? null
-      : parseStatus(data.status)
+    output.status = isStatusNotification(output.type) ? parseStatus(data.status) : null
     output.action = output.status // TODO: Refactor, this is unneeded
     output.target = output.type !== 'move'
       ? null

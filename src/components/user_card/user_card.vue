@@ -50,15 +50,6 @@
               >
                 {{ user.name }}
               </div>
-              <router-link
-                v-if="!isOtherUser"
-                :to="{ name: 'user-settings' }"
-              >
-                <i
-                  class="button-icon icon-wrench usersettings"
-                  :title="$t('tool_tip.user_settings')"
-                />
-              </router-link>
               <a
                 v-if="isOtherUser && !user.is_local"
                 :href="user.statusnet_profile_url"
@@ -69,6 +60,7 @@
               <AccountActions
                 v-if="isOtherUser && loggedIn"
                 :user="user"
+                :relationship="relationship"
               />
             </div>
             <div class="bottom-line">
@@ -78,10 +70,20 @@
               >
                 @{{ user.screen_name }}
               </router-link>
-              <span
-                v-if="!hideBio && !!visibleRole"
-                class="alert staff"
-              >{{ visibleRole }}</span>
+              <template v-if="!hideBio">
+                <span
+                  v-if="!!visibleRole"
+                  class="alert user-role"
+                >
+                  {{ visibleRole }}
+                </span>
+                <span
+                  v-if="user.bot"
+                  class="alert user-role"
+                >
+                  bot
+                </span>
+              </template>
               <span v-if="user.locked"><i class="icon icon-lock" /></span>
               <span
                 v-if="!mergedConfig.hideUserStats && !hideBio"
@@ -92,7 +94,7 @@
         </div>
         <div class="user-meta">
           <div
-            v-if="user.follows_you && loggedIn && isOtherUser"
+            v-if="relationship.followed_by && loggedIn && isOtherUser"
             class="following"
           >
             {{ $t('user_card.follows_you') }}
@@ -117,7 +119,7 @@
               type="color"
             >
             <label
-              for="style-switcher"
+              for="theme_tab"
               class="userHighlightSel select"
             >
               <select
@@ -139,10 +141,10 @@
           class="user-interactions"
         >
           <div class="btn-group">
-            <FollowButton :user="user" />
-            <template v-if="user.following">
+            <FollowButton :relationship="relationship" />
+            <template v-if="relationship.following">
               <ProgressButton
-                v-if="!user.subscribed"
+                v-if="!relationship.subscribing"
                 class="btn btn-default"
                 :click="subscribeUser"
                 :title="$t('user_card.subscribe')"
@@ -161,7 +163,7 @@
           </div>
           <div>
             <button
-              v-if="user.muted"
+              v-if="relationship.muting"
               class="btn btn-default btn-block toggled"
               @click="unmuteUser"
             >
@@ -466,7 +468,7 @@
       color: var(--text, $fallback--text);
     }
 
-    .staff {
+    .user-role {
       flex: none;
       text-transform: capitalize;
       color: $fallback--text;

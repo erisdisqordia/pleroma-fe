@@ -1,5 +1,6 @@
-@import '../../_variables.scss';
-.style-switcher {
+@import 'src/_variables.scss';
+.theme-tab {
+  padding-bottom: 2em;
   .theme-warning {
     display: flex;
     align-items: baseline;
@@ -54,10 +55,6 @@
     }
   }
 
-  .tab-switcher {
-    margin: 0 -1em;
-  }
-
   .reset-container {
     flex-wrap: wrap;
   }
@@ -98,20 +95,25 @@
     align-items: baseline;
     width: 100%;
     min-height: 30px;
-
-    .btn {
-      min-width: 1px;
-      flex: 0 auto;
-      padding: 0 1em;
-    }
+    margin-bottom: 1em;
 
     p {
       flex: 1;
       margin: 0;
       margin-right: .5em;
     }
+  }
 
-    margin-bottom: 1em;
+  .tab-header-buttons {
+    display: flex;
+    flex-direction: column;
+
+    .btn {
+      min-width: 1px;
+      flex: 0 auto;
+      padding: 0 1em;
+      margin-bottom: .5em;
+    }
   }
 
   .shadow-selector {
@@ -161,7 +163,7 @@
     border-bottom: 1px dashed;
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
-    margin: 1em -1em 0;
+    margin: 1em 0;
     padding: 1em;
     background: var(--body-background-image);
     background-size: cover;
@@ -326,6 +328,14 @@
 
   .theme-preview-content {
     padding: 20px;
+  }
+
+  .apply-container {
+    .btn {
+      min-height: 28px;
+      min-width: 10em;
+      padding: 0 2em;
+    }
   }
 
   .btn {

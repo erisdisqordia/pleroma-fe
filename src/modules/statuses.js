@@ -13,8 +13,9 @@ import {
   omitBy
 } from 'lodash'
 import { set } from 'vue'
+import { isStatusNotification, prepareNotificationObject } from '../services/notification_utils/notification_utils.js'
 import apiService from '../services/api/api.service.js'
-// import parse from '../services/status_parser/status_parser.js'
+import { muteWordHits } from '../services/status_parser/status_parser.js'
 
 const emptyTl = (userId = 0) => ({
   statuses: [],
@@ -321,7 +322,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
 
 const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters }) => {
   each(notifications, (notification) => {
-    if (notification.type !== 'follow' && notification.type !== 'move') {
+    if (isStatusNotification(notification.type)) {
       notification.action = addStatusToGlobalStorage(state, notification.action).item
       notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
     }
@@ -343,42 +344,21 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       state.notifications.idStore[notification.id] = notification
 
       if ('Notification' in window && window.Notification.permission === 'granted') {
-        const notifObj = {}
-        const status = notification.status
-        const title = notification.from_profile.name
-        notifObj.icon = notification.from_profile.profile_image_url
-        let i18nString
-        switch (notification.type) {
-          case 'like':
-            i18nString = 'favorited_you'
-            break
-          case 'repeat':
-            i18nString = 'repeated_you'
-            break
-          case 'follow':
-            i18nString = 'followed_you'
-            break
-          case 'move':
-            i18nString = 'migrated_to'
-            break
-        }
+        const notifObj = prepareNotificationObject(notification, rootGetters.i18n)
 
-        if (notification.type === 'pleroma:emoji_reaction') {
-          notifObj.body = rootGetters.i18n.t('notifications.reacted_with', [notification.emoji])
-        } else if (i18nString) {
-          notifObj.body = rootGetters.i18n.t('notifications.' + i18nString)
-        } else {
-          notifObj.body = notification.status.text
-        }
-
-        // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
-        if (status && status.attachments && status.attachments.length > 0 && !status.nsfw &&
-          status.attachments[0].mimetype.startsWith('image/')) {
-          notifObj.image = status.attachments[0].url
-        }
-
-        if (!notification.seen && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.type)) {
-          let desktopNotification = new window.Notification(title, notifObj)
+        const reasonsToMuteNotif = (
+          notification.seen ||
+            state.notifications.desktopNotificationSilence ||
+            !visibleNotificationTypes.includes(notification.type) ||
+            (
+              notification.type === 'mention' && status && (
+                status.muted ||
+                  muteWordHits(status, rootGetters.mergedConfig.muteWords).length === 0
+              )
+            )
+        )
+        if (!reasonsToMuteNotif) {
+          let desktopNotification = new window.Notification(notifObj.title, notifObj)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.
           setTimeout(desktopNotification.close.bind(desktopNotification), 5000)
@@ -520,6 +500,17 @@ export const mutations = {
     each(state.notifications.data, (notification) => {
       notification.seen = true
     })
+  },
+  markSingleNotificationAsSeen (state, { id }) {
+    const notification = find(state.notifications.data, n => n.id === id)
+    if (notification) notification.seen = true
+  },
+  dismissNotification (state, { id }) {
+    state.notifications.data = state.notifications.data.filter(n => n.id !== id)
+  },
+  updateNotification (state, { id, updater }) {
+    const notification = find(state.notifications.data, n => n.id === id)
+    notification && updater(notification)
   },
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
@@ -679,6 +670,24 @@ const statuses = {
         id: rootState.statuses.notifications.maxId,
         credentials: rootState.users.currentUser.credentials
       })
+    },
+    markSingleNotificationAsSeen ({ rootState, commit }, { id }) {
+      commit('markSingleNotificationAsSeen', { id })
+      apiService.markNotificationsAsSeen({
+        single: true,
+        id,
+        credentials: rootState.users.currentUser.credentials
+      })
+    },
+    dismissNotificationLocal ({ rootState, commit }, { id }) {
+      commit('dismissNotification', { id })
+    },
+    dismissNotification ({ rootState, commit }, { id }) {
+      commit('dismissNotification', { id })
+      rootState.api.backendInteractor.dismissNotification({ id })
+    },
+    updateNotification ({ rootState, commit }, { id, updater }) {
+      commit('updateNotification', { id, updater })
     },
     fetchFavsAndRepeats ({ rootState, commit }, id) {
       Promise.all([

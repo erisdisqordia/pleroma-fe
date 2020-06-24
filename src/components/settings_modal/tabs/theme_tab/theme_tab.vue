@@ -1,5 +1,5 @@
 <template>
-  <div class="style-switcher">
+  <div class="theme-tab">
     <div class="presets-container">
       <div class="save-load">
         <div
@@ -126,18 +126,20 @@
         >
           <div class="tab-header">
             <p>{{ $t('settings.theme_help') }}</p>
-            <button
-              class="btn"
-              @click="clearOpacity"
-            >
-              {{ $t('settings.style.switcher.clear_opacity') }}
-            </button>
-            <button
-              class="btn"
-              @click="clearV1"
-            >
-              {{ $t('settings.style.switcher.clear_all') }}
-            </button>
+            <div class="tab-header-buttons">
+              <button
+                class="btn"
+                @click="clearOpacity"
+              >
+                {{ $t('settings.style.switcher.clear_opacity') }}
+              </button>
+              <button
+                class="btn"
+                @click="clearV1"
+              >
+                {{ $t('settings.style.switcher.clear_all') }}
+              </button>
+            </div>
           </div>
           <p>{{ $t('settings.theme_help_v2_1') }}</p>
           <h4>{{ $t('settings.style.common_colors.main') }}</h4>
@@ -254,6 +256,13 @@
               :label="$t('settings.links')"
             />
             <ContrastRatio :contrast="previewContrast.postLink" />
+            <ColorInput
+              v-model="postGreentextColorLocal"
+              name="postGreentextColor"
+              :fallback="previewTheme.colors.cGreen"
+              :label="$t('settings.greentext')"
+            />
+            <ContrastRatio :contrast="previewContrast.postGreentext" />
             <h4>{{ $t('settings.style.advanced_colors.alert') }}</h4>
             <ColorInput
               v-model="alertErrorColorLocal"
@@ -951,6 +960,6 @@
   </div>
 </template>
 
-<script src="./style_switcher.js"></script>
+<script src="./theme_tab.js"></script>
 
-<style src="./style_switcher.scss" lang="scss"></style>
+<style src="./theme_tab.scss" lang="scss"></style>

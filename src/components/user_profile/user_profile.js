@@ -3,6 +3,7 @@ import UserCard from '../user_card/user_card.vue'
 import FollowCard from '../follow_card/follow_card.vue'
 import Timeline from '../timeline/timeline.vue'
 import Conversation from '../conversation/conversation.vue'
+import TabSwitcher from 'src/components/tab_switcher/tab_switcher.js'
 import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
 
@@ -123,6 +124,14 @@ const UserProfile = {
     onTabSwitch (tab) {
       this.tab = tab
       this.$router.replace({ query: { tab } })
+    },
+    linkClicked ({ target }) {
+      if (target.tagName === 'SPAN') {
+        target = target.parentNode
+      }
+      if (target.tagName === 'A') {
+        window.open(target.href, '_blank')
+      }
     }
   },
   watch: {
@@ -146,6 +155,7 @@ const UserProfile = {
     FollowerList,
     FriendList,
     FollowCard,
+    TabSwitcher,
     Conversation
   }
 }

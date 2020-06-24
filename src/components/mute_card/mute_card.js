@@ -11,8 +11,11 @@ const MuteCard = {
     user () {
       return this.$store.getters.findUser(this.userId)
     },
+    relationship () {
+      return this.$store.getters.relationship(this.userId)
+    },
     muted () {
-      return this.user.muted
+      return this.relationship.muting
     }
   },
   components: {
@@ -21,13 +24,13 @@ const MuteCard = {
   methods: {
     unmuteUser () {
       this.progress = true
-      this.$store.dispatch('unmuteUser', this.user.id).then(() => {
+      this.$store.dispatch('unmuteUser', this.userId).then(() => {
         this.progress = false
       })
     },
     muteUser () {
       this.progress = true
-      this.$store.dispatch('muteUser', this.user.id).then(() => {
+      this.$store.dispatch('muteUser', this.userId).then(() => {
         this.progress = false
       })
     }

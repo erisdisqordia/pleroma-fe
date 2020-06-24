@@ -34,9 +34,9 @@
   },
   "domain_mute_card": {
     "mute": "Mute",
-    "mute_progress": "Muting...",
+    "mute_progress": "Muting…",
     "unmute": "Unmute",
-    "unmute_progress": "Unmuting..."
+    "unmute_progress": "Unmuting…"
   },
   "exporter": {
     "export": "Export",
@@ -59,7 +59,10 @@
     "apply": "Apply",
     "submit": "Submit",
     "more": "More",
+    "loading": "Loading…",
     "generic_error": "An error occured",
+    "error_retry": "Please try again",
+    "retry": "Try again",
     "optional": "optional",
     "show_more": "Show more",
     "show_less": "Show less",
@@ -68,7 +71,9 @@
     "disable": "Disable",
     "enable": "Enable",
     "confirm": "Confirm",
-    "verify": "Verify"
+    "verify": "Verify",
+    "close": "Close",
+    "peek": "Peek"
   },
   "image_cropper": {
     "crop_picture": "Crop picture",
@@ -94,9 +99,9 @@
     "enter_recovery_code": "Enter a recovery code",
     "enter_two_factor_code": "Enter a two-factor code",
     "recovery_code": "Recovery code",
-    "heading" : {
-      "totp" : "Two-factor authentication",
-      "recovery" : "Two-factor recovery"
+    "heading": {
+      "totp": "Two-factor authentication",
+      "recovery": "Two-factor recovery"
     }
   },
   "media_modal": {
@@ -121,9 +126,10 @@
     "preferences": "Preferences"
   },
   "notifications": {
-    "broken_favorite": "Unknown status, searching for it...",
+    "broken_favorite": "Unknown status, searching for it…",
     "favorited_you": "favorited your status",
     "followed_you": "followed you",
+    "follow_request": "wants to follow you",
     "load_older": "Load older notifications",
     "notifications": "Notifications",
     "read": "Read!",
@@ -225,17 +231,17 @@
     "security": "Security",
     "enter_current_password_to_confirm": "Enter your current password to confirm your identity",
     "mfa": {
-      "otp" : "OTP",
-      "setup_otp" : "Setup OTP",
-      "wait_pre_setup_otp" : "presetting OTP",
-      "confirm_and_enable" : "Confirm & enable OTP",
+      "otp": "OTP",
+      "setup_otp": "Setup OTP",
+      "wait_pre_setup_otp": "presetting OTP",
+      "confirm_and_enable": "Confirm & enable OTP",
       "title": "Two-factor Authentication",
-      "generate_new_recovery_codes" : "Generate new recovery codes",
-      "warning_of_generate_new_codes" : "When you generate new recovery codes, your old codes won’t work anymore.",
-      "recovery_codes" : "Recovery codes.",
-      "waiting_a_recovery_codes": "Receiving backup codes...",
-      "recovery_codes_warning" : "Write the codes down or save them somewhere secure - otherwise you won't see them again. If you lose access to your 2FA app and recovery codes you'll be locked out of your account.",
-      "authentication_methods" : "Authentication methods",
+      "generate_new_recovery_codes": "Generate new recovery codes",
+      "warning_of_generate_new_codes": "When you generate new recovery codes, your old codes won’t work anymore.",
+      "recovery_codes": "Recovery codes.",
+      "waiting_a_recovery_codes": "Receiving backup codes…",
+      "recovery_codes_warning": "Write the codes down or save them somewhere secure - otherwise you won't see them again. If you lose access to your 2FA app and recovery codes you'll be locked out of your account.",
+      "authentication_methods": "Authentication methods",
       "scan": {
         "title": "Scan",
         "desc": "Using your two-factor app, scan this QR code or enter text key:",
@@ -260,6 +266,7 @@
     "block_import_error": "Error importing blocks",
     "blocks_imported": "Blocks imported! Processing them will take a while.",
     "blocks_tab": "Blocks",
+    "bot": "This is a bot account",
     "btnRadius": "Buttons",
     "cBlue": "Blue (Reply, follow)",
     "cGreen": "Green (Retweet)",
@@ -277,10 +284,11 @@
     "current_avatar": "Your current avatar",
     "current_password": "Current password",
     "current_profile_banner": "Your current profile banner",
+    "mutes_and_blocks": "Mutes and Blocks",
     "data_import_export_tab": "Data Import / Export",
     "default_vis": "Default visibility scope",
     "delete_account": "Delete Account",
-    "delete_account_description": "Permanently delete your account and all your messages.",
+    "delete_account_description": "Permanently delete your data and deactivate your account.",
     "delete_account_error": "There was an issue deleting your account. If this persists please contact your instance administrator.",
     "delete_account_instructions": "Type your password in the input below to confirm account deletion.",
     "discoverable": "Allow discovery of this account in search results and other services",
@@ -394,7 +402,7 @@
     "theme_help_v2_1": "You can also override certain component's colors and opacity by toggling the checkbox, use \"Clear all\" button to clear all overrides.",
     "theme_help_v2_2": "Icons underneath some entries are background/text contrast indicators, hover over for detailed info. Please keep in mind that when using transparency contrast indicators show the worst possible case.",
     "tooltipRadius": "Tooltips/alerts",
-    "type_domains_to_mute": "Type in domains to mute",
+    "type_domains_to_mute": "Search domains to mute",
     "upload_a_photo": "Upload a photo",
     "user_settings": "User Settings",
     "values": {
@@ -404,11 +412,14 @@
     "fun": "Fun",
     "greentext": "Meme arrows",
     "notifications": "Notifications",
+    "notification_setting_filters": "Filters",
     "notification_setting": "Receive notifications from:",
     "notification_setting_follows": "Users you follow",
     "notification_setting_non_follows": "Users you do not follow",
     "notification_setting_followers": "Users who follow you",
     "notification_setting_non_followers": "Users who do not follow you",
+    "notification_setting_privacy": "Privacy",
+    "notification_setting_privacy_option": "Hide the sender and contents of push notifications",
     "notification_mutes": "To stop receiving notifications from a specific user, use a mute.",
     "notification_blocks": "Blocking a user stops all notifications as well as unsubscribes them.",
     "enable_web_push_notifications": "Enable web push notifications",
@@ -429,7 +440,7 @@
         "use_source": "New version",
         "help": {
           "upgraded_from_v2": "PleromaFE has been upgraded, theme could look a little bit different than you remember.",
-          "v2_imported": "File you imported was made for older FE. We try to maximize compatibility but there still could be inconsitencies.",
+          "v2_imported": "File you imported was made for older FE. We try to maximize compatibility but there still could be inconsistencies.",
           "future_version_imported": "File you imported was made in newer version of FE.",
           "older_version_imported": "File you imported was made in older version of FE.",
           "snapshot_present": "Theme snapshot is loaded, so all values are overriden. You can load theme's actual data instead.",
@@ -616,7 +627,10 @@
     "replies_list": "Replies:",
     "mute_conversation": "Mute conversation",
     "unmute_conversation": "Unmute conversation",
-    "status_unavailable": "Status unavailable"
+    "status_unavailable": "Status unavailable",
+    "copy_link": "Copy link to status",
+    "thread_muted": "Thread muted",
+    "thread_muted_and_words": ", has words:"
   },
   "user_card": {
     "approve": "Approve",
@@ -646,11 +660,11 @@
     "subscribe": "Subscribe",
     "unsubscribe": "Unsubscribe",
     "unblock": "Unblock",
-    "unblock_progress": "Unblocking...",
-    "block_progress": "Blocking...",
+    "unblock_progress": "Unblocking…",
+    "block_progress": "Blocking…",
     "unmute": "Unmute",
-    "unmute_progress": "Unmuting...",
-    "mute_progress": "Muting...",
+    "unmute_progress": "Unmuting…",
+    "mute_progress": "Muting…",
     "hide_repeats": "Hide repeats",
     "show_repeats": "Show repeats",
     "admin_menu": {
@@ -697,9 +711,11 @@
     "reply": "Reply",
     "favorite": "Favorite",
     "add_reaction": "Add Reaction",
-    "user_settings": "User Settings"
+    "user_settings": "User Settings",
+    "accept_follow_request": "Accept follow request",
+    "reject_follow_request": "Reject follow request"
   },
-  "upload":{
+  "upload": {
     "error": {
       "base": "Upload failed.",
       "file_too_big": "File too big [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",

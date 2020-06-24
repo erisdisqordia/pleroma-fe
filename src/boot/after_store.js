@@ -8,14 +8,15 @@ import backendInteractorService from '../services/backend_interactor_service/bac
 import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { applyTheme } from '../services/style_setter/style_setter.js'
 
-const getStatusnetConfig = async ({ store }) => {
+const getInstanceConfig = async ({ store }) => {
   try {
-    const res = await window.fetch('/api/statusnet/config.json')
+    const res = await window.fetch('/api/v1/instance')
     if (res.ok) {
       const data = await res.json()
-      const { textlimit, vapidPublicKey } = data.site
+      const textlimit = data.max_toot_chars
+      const vapidPublicKey = data.pleroma.vapid_public_key
 
-      store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
+      store.dispatch('setInstanceOption', { name: 'textlimit', value: textlimit })
 
       if (vapidPublicKey) {
         store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })
@@ -24,7 +25,7 @@ const getStatusnetConfig = async ({ store }) => {
       throw (res)
     }
   } catch (error) {
-    console.error('Could not load statusnet config, potentially fatal')
+    console.error('Could not load instance config, potentially fatal')
     console.error(error)
   }
 }
@@ -319,7 +320,7 @@ const afterStoreSetup = async ({ store, i18n }) => {
     getInstancePanel({ store }),
     getStickers({ store }),
     getNodeInfo({ store }),
-    getStatusnetConfig({ store })
+    getInstanceConfig({ store })
   ])
 
   // Start fetching things that don't need to block the UI

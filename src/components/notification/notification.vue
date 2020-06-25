@@ -157,11 +157,9 @@
           </router-link>
         </div>
         <template v-else>
-          <status
+          <status-content
             class="faint"
-            :compact="true"
-            :statusoid="notification.action"
-            :no-heading="true"
+            :status="notification.action"
           />
         </template>
       </div>

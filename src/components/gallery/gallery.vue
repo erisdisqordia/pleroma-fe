@@ -78,6 +78,7 @@
     video,
     canvas {
       object-fit: contain;
+      height: 100%;
     }
   }
 

@@ -56,6 +56,12 @@ export const parseUser = (data) => {
         value: addEmojis(field.value, data.emojis)
       }
     })
+    output.fields_text = data.fields.map(field => {
+      return {
+        name: unescape(field.name.replace(/<[^>]*>/g, '')),
+        value: unescape(field.value.replace(/<[^>]*>/g, ''))
+      }
+    })
 
     // Utilize avatar_static for gif avatars?
     output.profile_image_url = data.avatar
@@ -210,7 +216,7 @@ export const addEmojis = (string, emojis) => {
     const regexSafeShortCode = emoji.shortcode.replace(matchOperatorsRegex, '\\$&')
     return acc.replace(
       new RegExp(`:${regexSafeShortCode}:`, 'g'),
-      `<img src='${emoji.url}' alt='${emoji.shortcode}' title='${emoji.shortcode}' class='emoji' />`
+      `<img src='${emoji.url}' alt=':${emoji.shortcode}:' title=':${emoji.shortcode}:' class='emoji' />`
     )
   }, string)
 }
@@ -258,6 +264,12 @@ export const parseStatus = (data) => {
     output.summary_html = addEmojis(escape(data.spoiler_text), data.emojis)
     output.external_url = data.url
     output.poll = data.poll
+    if (output.poll) {
+      output.poll.options = (output.poll.options || []).map(field => ({
+        ...field,
+        title_html: addEmojis(field.title, data.emojis)
+      }))
+    }
     output.pinned = data.pinned
     output.muted = data.muted
   } else {

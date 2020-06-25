@@ -356,6 +356,12 @@ export const SLOT_INHERITANCE = {
     textColor: 'preserve'
   },
 
+  postGreentext: {
+    depends: ['cGreen'],
+    layer: 'bg',
+    textColor: 'preserve'
+  },
+
   border: {
     depends: ['fg'],
     opacity: 'border',

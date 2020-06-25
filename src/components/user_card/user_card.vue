@@ -50,15 +50,6 @@
               >
                 {{ user.name }}
               </div>
-              <router-link
-                v-if="!isOtherUser"
-                :to="{ name: 'user-settings' }"
-              >
-                <i
-                  class="button-icon icon-wrench usersettings"
-                  :title="$t('tool_tip.user_settings')"
-                />
-              </router-link>
               <a
                 v-if="isOtherUser && !user.is_local"
                 :href="user.statusnet_profile_url"
@@ -79,10 +70,20 @@
               >
                 @{{ user.screen_name }}
               </router-link>
-              <span
-                v-if="!hideBio && !!visibleRole"
-                class="alert staff"
-              >{{ visibleRole }}</span>
+              <template v-if="!hideBio">
+                <span
+                  v-if="!!visibleRole"
+                  class="alert user-role"
+                >
+                  {{ visibleRole }}
+                </span>
+                <span
+                  v-if="user.bot"
+                  class="alert user-role"
+                >
+                  bot
+                </span>
+              </template>
               <span v-if="user.locked"><i class="icon icon-lock" /></span>
               <span
                 v-if="!mergedConfig.hideUserStats && !hideBio"
@@ -118,7 +119,7 @@
               type="color"
             >
             <label
-              for="style-switcher"
+              for="theme_tab"
               class="userHighlightSel select"
             >
               <select
@@ -467,7 +468,7 @@
       color: var(--text, $fallback--text);
     }
 
-    .staff {
+    .user-role {
       flex: none;
       text-transform: capitalize;
       color: $fallback--text;

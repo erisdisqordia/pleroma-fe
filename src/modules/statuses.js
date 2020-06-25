@@ -13,9 +13,9 @@ import {
   omitBy
 } from 'lodash'
 import { set } from 'vue'
-import { isStatusNotification } from '../services/notification_utils/notification_utils.js'
+import { isStatusNotification, prepareNotificationObject } from '../services/notification_utils/notification_utils.js'
 import apiService from '../services/api/api.service.js'
-// import parse from '../services/status_parser/status_parser.js'
+import { muteWordHits } from '../services/status_parser/status_parser.js'
 
 const emptyTl = (userId = 0) => ({
   statuses: [],
@@ -344,45 +344,21 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       state.notifications.idStore[notification.id] = notification
 
       if ('Notification' in window && window.Notification.permission === 'granted') {
-        const notifObj = {}
-        const status = notification.status
-        const title = notification.from_profile.name
-        notifObj.icon = notification.from_profile.profile_image_url
-        let i18nString
-        switch (notification.type) {
-          case 'like':
-            i18nString = 'favorited_you'
-            break
-          case 'repeat':
-            i18nString = 'repeated_you'
-            break
-          case 'follow':
-            i18nString = 'followed_you'
-            break
-          case 'move':
-            i18nString = 'migrated_to'
-            break
-          case 'follow_request':
-            i18nString = 'follow_request'
-            break
-        }
+        const notifObj = prepareNotificationObject(notification, rootGetters.i18n)
 
-        if (notification.type === 'pleroma:emoji_reaction') {
-          notifObj.body = rootGetters.i18n.t('notifications.reacted_with', [notification.emoji])
-        } else if (i18nString) {
-          notifObj.body = rootGetters.i18n.t('notifications.' + i18nString)
-        } else if (isStatusNotification(notification.type)) {
-          notifObj.body = notification.status.text
-        }
-
-        // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
-        if (status && status.attachments && status.attachments.length > 0 && !status.nsfw &&
-          status.attachments[0].mimetype.startsWith('image/')) {
-          notifObj.image = status.attachments[0].url
-        }
-
-        if (!notification.seen && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.type)) {
-          let desktopNotification = new window.Notification(title, notifObj)
+        const reasonsToMuteNotif = (
+          notification.seen ||
+            state.notifications.desktopNotificationSilence ||
+            !visibleNotificationTypes.includes(notification.type) ||
+            (
+              notification.type === 'mention' && status && (
+                status.muted ||
+                  muteWordHits(status, rootGetters.mergedConfig.muteWords).length === 0
+              )
+            )
+        )
+        if (!reasonsToMuteNotif) {
+          let desktopNotification = new window.Notification(notifObj.title, notifObj)
           // Chrome is known for not closing notifications automatically
           // according to MDN, anyway.
           setTimeout(desktopNotification.close.bind(desktopNotification), 5000)

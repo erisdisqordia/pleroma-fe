@@ -176,8 +176,8 @@ const StatusContent = {
           }
         }
         if (target.rel.match(/(?:^|\s)tag(?:$|\s)/) || target.className.match(/hashtag/)) {
-          // Extract tag name from link url
-          const tag = extractTagFromUrl(target.href)
+          // Extract tag name from dataset or link url
+          const tag = target.dataset.tag || extractTagFromUrl(target.href)
           if (tag) {
             const link = this.generateTagLink(tag)
             this.$router.push(link)

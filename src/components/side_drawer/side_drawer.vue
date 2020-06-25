@@ -122,9 +122,12 @@
           </router-link>
         </li>
         <li @click="toggleDrawer">
-          <router-link :to="{ name: 'settings' }">
+          <a
+            href="#"
+            @click="openSettingsModal"
+          >
             <i class="button-icon icon-cog" /> {{ $t("settings.settings") }}
-          </router-link>
+          </a>
         </li>
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'about'}">

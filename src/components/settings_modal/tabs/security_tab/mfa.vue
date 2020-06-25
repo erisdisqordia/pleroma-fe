@@ -137,18 +137,18 @@
 
 <script src="./mfa.js"></script>
 <style lang="scss">
-@import '../../_variables.scss';
-.warning {
-  color: $fallback--cOrange;
-  color: var(--cOrange, $fallback--cOrange);
-}
+@import '../../../../_variables.scss';
 .mfa-settings {
   .mfa-heading, .method-item {
-    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
+  }
+
+  .warning {
+    color: $fallback--cOrange;
+    color: var(--cOrange, $fallback--cOrange);
   }
 
   .setup-otp {

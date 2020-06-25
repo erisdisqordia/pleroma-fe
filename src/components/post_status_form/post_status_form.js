@@ -82,7 +82,9 @@ const PostStatusForm = {
         contentType
       },
       caret: 0,
-      pollFormVisible: false
+      pollFormVisible: false,
+      showDropIcon: 'hide',
+      dropStopTimeout: null
     }
   },
   computed: {
@@ -218,7 +220,6 @@ const PostStatusForm = {
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
-      this.enableSubmit()
     },
     removeMediaFile (fileInfo) {
       let index = this.newStatus.files.indexOf(fileInfo)
@@ -227,7 +228,6 @@ const PostStatusForm = {
     uploadFailed (errString, templateArgs) {
       templateArgs = templateArgs || {}
       this.error = this.$t('upload.error.base') + ' ' + this.$t('upload.error.' + errString, templateArgs)
-      this.enableSubmit()
     },
     disableSubmit () {
       this.submitDisabled = true
@@ -250,13 +250,27 @@ const PostStatusForm = {
       }
     },
     fileDrop (e) {
-      if (e.dataTransfer.files.length > 0) {
+      if (e.dataTransfer && e.dataTransfer.types.includes('Files')) {
         e.preventDefault() // allow dropping text like before
         this.dropFiles = e.dataTransfer.files
+        clearTimeout(this.dropStopTimeout)
+        this.showDropIcon = 'hide'
       }
+    },
+    fileDragStop (e) {
+      // The false-setting is done with delay because just using leave-events
+      // directly caused unwanted flickering, this is not perfect either but
+      // much less noticable.
+      clearTimeout(this.dropStopTimeout)
+      this.showDropIcon = 'fade'
+      this.dropStopTimeout = setTimeout(() => (this.showDropIcon = 'hide'), 500)
     },
     fileDrag (e) {
       e.dataTransfer.dropEffect = 'copy'
+      if (e.dataTransfer && e.dataTransfer.types.includes('Files')) {
+        clearTimeout(this.dropStopTimeout)
+        this.showDropIcon = 'show'
+      }
     },
     onEmojiInputInput (e) {
       this.$nextTick(() => {

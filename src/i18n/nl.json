@@ -385,8 +385,9 @@
         "link": "een leuke kleine link"
       }
     },
-    "notification_setting_from_following": "Gebruikers die je volgt",
-    "notification_setting_from_followers": "Gebruikers die je volgen",
+    "notification_setting_follows": "Gebruikers die je volgt",
+    "notification_setting_non_follows": "Gebruikers die je niet volgt",
+    "notification_setting_followers": "Gebruikers die je volgen",
     "notification_setting_privacy": "Privacy",
     "notification_setting_privacy_option": "Verberg de afzender en inhoud van push meldingen",
     "notification_mutes": "Om niet langer meldingen te ontvangen van een specifieke gebruiker, kun je deze negeren.",
@@ -463,7 +464,7 @@
     "hide_follows_description": "Niet tonen wie ik volg",
     "show_moderator_badge": "Moderators badge tonen in mijn profiel",
     "notification_setting_filters": "Filters",
-    "notification_setting_from_strangers": "Gebruikers die je niet volgen",
+    "notification_setting_non_followers": "Gebruikers die je niet volgen",
     "notification_blocks": "Door een gebruiker te blokkeren, ontvang je geen meldingen meer van de gebruiker en wordt je abonnement op de gebruiker opgeheven.",
     "version": {
       "frontend_version": "Frontend Versie",

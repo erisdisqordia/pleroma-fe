@@ -3,16 +3,55 @@
   <div class="status-body">
     <slot name="header" />
     <div
-      v-if="longSubject"
+      v-if="status.summary_html"
+      class="summary-wrapper"
+      :class="{ 'tall-subject': (longSubject && !showingLongSubject) }"
+    >
+      <div
+        class="media-body summary"
+        @click.prevent="linkClicked"
+        v-html="status.summary_html"
+      />
+      <a
+        v-if="longSubject && showingLongSubject"
+        href="#"
+        class="tall-subject-hider"
+        @click.prevent="showingLongSubject=false"
+      >{{ $t("general.show_less") }}</a>
+      <a
+        v-else-if="longSubject"
+        class="tall-subject-hider"
+        :class="{ 'tall-subject-hider_focused': focused }"
+        href="#"
+        @click.prevent="showingLongSubject=true"
+      >
+        {{ $t("general.show_more") }}
+      </a>
+    </div>
+    <div
+      :class="{'tall-status': hideTallStatus}"
       class="status-content-wrapper"
-      :class="{ 'tall-status': !showingLongSubject }"
     >
       <a
-        v-if="!showingLongSubject"
+        v-if="hideTallStatus"
         class="tall-status-hider"
         :class="{ 'tall-status-hider_focused': focused }"
         href="#"
-        @click.prevent="showingLongSubject=true"
+        @click.prevent="toggleShowMore"
+      >
+        {{ $t("general.show_more") }}
+      </a>
+      <div
+        v-if="!hideSubjectStatus"
+        class="status-content media-body"
+        @click.prevent="linkClicked"
+        v-html="postBodyHtml"
+      />
+      <a
+        v-if="hideSubjectStatus"
+        href="#"
+        class="cw-status-hider"
+        @click.prevent="toggleShowMore"
       >
         {{ $t("general.show_more") }}
         <span
@@ -28,48 +67,6 @@
           class="icon-link"
         />
       </a>
-      <div
-        class="status-content media-body"
-        @click.prevent="linkClicked"
-        v-html="postBodyHtml"
-      />
-      <a
-        v-if="showingLongSubject"
-        href="#"
-        class="status-unhider"
-        @click.prevent="showingLongSubject=false"
-      >{{ $t("general.show_less") }}</a>
-    </div>
-    <div
-      v-else
-      :class="{'tall-status': hideTallStatus}"
-      class="status-content-wrapper"
-    >
-      <a
-        v-if="hideTallStatus"
-        class="tall-status-hider"
-        :class="{ 'tall-status-hider_focused': focused }"
-        href="#"
-        @click.prevent="toggleShowMore"
-      >{{ $t("general.show_more") }}</a>
-      <div
-        v-if="status.summary_html"
-        class="status-content media-body summary"
-        @click.prevent="linkClicked"
-        v-html="status.summary_html"
-      />
-      <div
-        v-if="!hideSubjectStatus"
-        class="status-content media-body"
-        @click.prevent="linkClicked"
-        v-html="postBodyHtml"
-      />
-      <a
-        v-if="hideSubjectStatus"
-        href="#"
-        class="cw-status-hider"
-        @click.prevent="toggleShowMore"
-      >{{ $t("general.show_more") }}</a>
       <a
         v-if="showingMore"
         href="#"
@@ -129,6 +126,12 @@ $status-margin: 0.75em;
   flex: 1;
   min-width: 0;
 
+  .status-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
   .tall-status {
     position: relative;
     height: 220px;
@@ -136,7 +139,7 @@ $status-margin: 0.75em;
     overflow-y: hidden;
     z-index: 1;
     .status-content {
-      height: 100%;
+      min-height: 0;
       mask: linear-gradient(to top, white, transparent) bottom/100% 70px no-repeat,
             linear-gradient(to top, white, white);
       /* Autoprefixed seem to ignore this one, and also syntax is different */
@@ -176,14 +179,42 @@ $status-margin: 0.75em;
     }
   }
 
+  .summary-wrapper {
+    margin-bottom: 0.5em;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: var(--border, $fallback--border);
+    flex-grow: 0;
+  }
+
+  .summary {
+    font-style: italic;
+    padding-bottom: 0.5em;
+  }
+
+  .tall-subject {
+    position: relative;
+    .summary {
+      max-height: 2em;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .tall-subject-hider {
+    display: inline-block;
+    word-break: break-all;
+    // position: absolute;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 0.5em;
+  }
+
   .status-content {
     font-family: var(--postFont, sans-serif);
     line-height: 1.4em;
     white-space: pre-wrap;
-
-    &.summary {
-      font-weight: bold;
-    }
 
     blockquote {
       margin: 0.2em 0 0.2em 2em;

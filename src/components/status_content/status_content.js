@@ -44,7 +44,7 @@ const StatusContent = {
       return lengthScore > 20
     },
     longSubject () {
-      return this.status.summary.length > 900
+      return this.status.summary.length > 240
     },
     // When a status has a subject and is also tall, we should only have one show more/less button. If the default is to collapse statuses with subjects, we just treat it like a status with a subject; otherwise, we just treat it like a tall status.
     mightHideBecauseSubject () {

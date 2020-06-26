@@ -6,8 +6,8 @@
         <span class="label">{{ $t('settings.notification_setting') }}</span>
         <ul class="option-list">
           <li>
-            <Checkbox v-model="notificationSettings.from_strangers">
-              {{ $t('settings.notification_setting_from_strangers') }}
+            <Checkbox v-model="notificationSettings.block_from_strangers">
+              {{ $t('settings.notification_setting_block_from_strangers') }}
             </Checkbox>
           </li>
         </ul>

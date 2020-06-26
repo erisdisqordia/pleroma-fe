@@ -17,7 +17,7 @@
         href="#"
         class="tall-subject-hider"
         @click.prevent="showingLongSubject=false"
-      >{{ $t("general.show_less") }}</a>
+      >{{ $t("status.hide_full_subject") }}</a>
       <a
         v-else-if="longSubject"
         class="tall-subject-hider"
@@ -25,7 +25,7 @@
         href="#"
         @click.prevent="showingLongSubject=true"
       >
-        {{ $t("general.show_more") }}
+        {{ $t("status.show_full_subject") }}
       </a>
     </div>
     <div
@@ -53,7 +53,7 @@
         class="cw-status-hider"
         @click.prevent="toggleShowMore"
       >
-        {{ $t("general.show_more") }}
+        {{ $t("status.show_content") }}
         <span
           v-if="hasImageAttachments"
           class="icon-picture"
@@ -72,7 +72,9 @@
         href="#"
         class="status-unhider"
         @click.prevent="toggleShowMore"
-      >{{ $t("general.show_less") }}</a>
+      >
+        {{ tallStatus ? $t("general.show_less") : $t("status.hide_content") }}
+      </a>
     </div>
 
     <div v-if="status.poll && status.poll.options">

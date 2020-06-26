@@ -629,7 +629,11 @@
     "status_unavailable": "Status unavailable",
     "copy_link": "Copy link to status",
     "thread_muted": "Thread muted",
-    "thread_muted_and_words": ", has words:"
+    "thread_muted_and_words": ", has words:",
+    "show_full_subject": "Show full subject",
+    "hide_full_subject": "Hide full subject",
+    "show_content": "Show content",
+    "hide_content": "Hide content"
   },
   "user_card": {
     "approve": "Approve",

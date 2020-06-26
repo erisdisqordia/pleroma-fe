@@ -48,10 +48,10 @@ const StatusContent = {
     },
     // When a status has a subject and is also tall, we should only have one show more/less button. If the default is to collapse statuses with subjects, we just treat it like a status with a subject; otherwise, we just treat it like a tall status.
     mightHideBecauseSubject () {
-      return this.status.summary && (!this.tallStatus || this.localCollapseSubjectDefault)
+      return !!this.status.summary && this.localCollapseSubjectDefault
     },
     mightHideBecauseTall () {
-      return this.tallStatus && (!this.status.summary || !this.localCollapseSubjectDefault)
+      return this.tallStatus && !(this.status.summary && this.localCollapseSubjectDefault)
     },
     hideSubjectStatus () {
       return this.mightHideBecauseSubject && !this.expandingSubject

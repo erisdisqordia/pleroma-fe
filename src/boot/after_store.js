@@ -8,9 +8,34 @@ import backendInteractorService from '../services/backend_interactor_service/bac
 import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { applyTheme } from '../services/style_setter/style_setter.js'
 
+let staticInitialResults = null
+
+const parsedInitialResults = () => {
+  if (!document.getElementById('initial-results')) {
+    return null
+  }
+  if (!staticInitialResults) {
+    staticInitialResults = JSON.parse(document.getElementById('initial-results').textContent)
+  }
+  return staticInitialResults
+}
+
+const preloadFetch = async (request) => {
+  const data = parsedInitialResults()
+  if (!data || !data[request]) {
+    return window.fetch(request)
+  }
+  const requestJson = atob(data[request])
+  return {
+    ok: true,
+    json: () => JSON.parse(requestJson),
+    text: () => requestJson
+  }
+}
+
 const getStatusnetConfig = async ({ store }) => {
   try {
-    const res = await window.fetch('/api/statusnet/config.json')
+    const res = await preloadFetch('/api/statusnet/config.json')
     if (res.ok) {
       const data = await res.json()
       const { name, closed: registrationClosed, textlimit, uploadlimit, server, vapidPublicKey, safeDMMentionsEnabled } = data.site
@@ -132,7 +157,7 @@ const getTOS = async ({ store }) => {
 
 const getInstancePanel = async ({ store }) => {
   try {
-    const res = await window.fetch('/instance/panel.html')
+    const res = await preloadFetch('/instance/panel.html')
     if (res.ok) {
       const html = await res.text()
       store.dispatch('setInstanceOption', { name: 'instanceSpecificPanelContent', value: html })
@@ -195,7 +220,7 @@ const resolveStaffAccounts = ({ store, accounts }) => {
 
 const getNodeInfo = async ({ store }) => {
   try {
-    const res = await window.fetch('/nodeinfo/2.0.json')
+    const res = await preloadFetch('/nodeinfo/2.0.json')
     if (res.ok) {
       const data = await res.json()
       const metadata = data.metadata

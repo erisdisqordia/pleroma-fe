@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - 'Copy link' button for statuses (in the ellipsis menu)
 - Autocomplete domains from list of known instances
 - 'Bot' settings option and badge
+- Added profile meta data fields that can be set in profile settings
 
 ### Changed
 - Registration page no longer requires email if the server is configured not to require it

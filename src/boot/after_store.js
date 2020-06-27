@@ -8,9 +8,34 @@ import backendInteractorService from '../services/backend_interactor_service/bac
 import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { applyTheme } from '../services/style_setter/style_setter.js'
 
+let staticInitialResults = null
+
+const parsedInitialResults = () => {
+  if (!document.getElementById('initial-results')) {
+    return null
+  }
+  if (!staticInitialResults) {
+    staticInitialResults = JSON.parse(document.getElementById('initial-results').textContent)
+  }
+  return staticInitialResults
+}
+
+const preloadFetch = async (request) => {
+  const data = parsedInitialResults()
+  if (!data || !data[request]) {
+    return window.fetch(request)
+  }
+  const requestData = atob(data[request])
+  return {
+    ok: true,
+    json: () => JSON.parse(requestData),
+    text: () => requestData
+  }
+}
+
 const getInstanceConfig = async ({ store }) => {
   try {
-    const res = await window.fetch('/api/v1/instance')
+    const res = await preloadFetch('/api/v1/instance')
     if (res.ok) {
       const data = await res.json()
       const textlimit = data.max_toot_chars
@@ -133,7 +158,7 @@ const getTOS = async ({ store }) => {
 
 const getInstancePanel = async ({ store }) => {
   try {
-    const res = await window.fetch('/instance/panel.html')
+    const res = await preloadFetch('/instance/panel.html')
     if (res.ok) {
       const html = await res.text()
       store.dispatch('setInstanceOption', { name: 'instanceSpecificPanelContent', value: html })
@@ -196,7 +221,7 @@ const resolveStaffAccounts = ({ store, accounts }) => {
 
 const getNodeInfo = async ({ store }) => {
   try {
-    const res = await window.fetch('/nodeinfo/2.0.json')
+    const res = await preloadFetch('/nodeinfo/2.0.json')
     if (res.ok) {
       const data = await res.json()
       const metadata = data.metadata
@@ -315,17 +340,18 @@ const afterStoreSetup = async ({ store, i18n }) => {
   }
 
   // Now we can try getting the server settings and logging in
+  // Most of these are preloaded into the index.html so blocking is minimized
   await Promise.all([
     checkOAuthToken({ store }),
-    getTOS({ store }),
     getInstancePanel({ store }),
-    getStickers({ store }),
     getNodeInfo({ store }),
     getInstanceConfig({ store })
   ])
 
   // Start fetching things that don't need to block the UI
   store.dispatch('fetchMutes')
+  getTOS({ store })
+  getStickers({ store })
 
   const router = new VueRouter({
     mode: 'history',

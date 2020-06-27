@@ -12,7 +12,12 @@
     "disable": "Disabilita",
     "enable": "Abilita",
     "confirm": "Conferma",
-    "verify": "Verifica"
+    "verify": "Verifica",
+    "peek": "Anteprima",
+    "close": "Chiudi",
+    "retry": "Riprova",
+    "error_retry": "Per favore, riprova",
+    "loading": "Carico…"
   },
   "nav": {
     "mentions": "Menzioni",
@@ -212,7 +217,63 @@
       },
       "common": {
         "opacity": "Opacità",
-        "color": "Colore"
+        "color": "Colore",
+        "contrast": {
+          "context": {
+            "text": "per il testo",
+            "18pt": "per il testo grande (oltre 17pt)"
+          },
+          "level": {
+            "bad": "non soddisfa le linee guida di alcun livello",
+            "aaa": "soddisfa le linee guida di livello AAA (ottimo)",
+            "aa": "soddisfa le linee guida di livello AA (sufficiente)"
+          },
+          "hint": "Il rapporto di contrasto è {ratio}, e {level} {context}"
+        }
+      },
+      "advanced_colors": {
+        "badge": "Sfondo medaglie",
+        "post": "Messaggi / Biografie",
+        "alert_neutral": "Neutro",
+        "alert_warning": "Attenzione",
+        "alert_error": "Errore",
+        "alert": "Sfondo degli avvertimenti",
+        "_tab_label": "Avanzate",
+        "tabs": "Etichette",
+        "disabled": "Disabilitato",
+        "selectedMenu": "Voce menù selezionata",
+        "selectedPost": "Messaggio selezionato",
+        "pressed": "Premuto",
+        "highlight": "Elementi evidenziati",
+        "icons": "Icone",
+        "poll": "Grafico sondaggi",
+        "underlay": "Sottostante",
+        "faint_text": "Testo sbiadito",
+        "inputs": "Campi d'immissione",
+        "buttons": "Pulsanti",
+        "borders": "Bordi",
+        "top_bar": "Barra superiore",
+        "panel_header": "Titolo pannello",
+        "badge_notification": "Notifica",
+        "popover": "Suggerimenti, menù, sbalzi"
+      },
+      "common_colors": {
+        "rgbo": "Icone, accenti, medaglie",
+        "foreground_hint": "Seleziona l'etichetta \"Avanzate\" per controlli più fini",
+        "main": "Colori comuni",
+        "_tab_label": "Comuni"
+      },
+      "shadows": {
+        "inset": "Includi",
+        "spread": "Spandi",
+        "blur": "Sfoca",
+        "shadow_id": "Ombra numero {value}",
+        "override": "Sostituisci",
+        "component": "Componente",
+        "_tab_label": "Luci ed ombre"
+      },
+      "radii": {
+        "_tab_label": "Raggio"
       }
     },
     "enable_web_push_notifications": "Abilita notifiche web push",
@@ -229,7 +290,7 @@
     "notifications": "Notifiche",
     "greentext": "Frecce da meme",
     "upload_a_photo": "Carica un'immagine",
-    "type_domains_to_mute": "Inserisci domini da zittire",
+    "type_domains_to_mute": "Cerca domini da zittire",
     "theme_help_v2_2": "Le icone dietro alcuni elementi sono indicatori del contrasto fra testo e sfondo, passaci sopra col puntatore per ulteriori informazioni. Se si usano delle trasparenze, questi indicatori mostrano il peggior caso possibile.",
     "theme_help_v2_1": "Puoi anche forzare colore ed opacità di alcuni elementi selezionando la casella. Usa il pulsante \"Azzera\" per azzerare tutte le forzature.",
     "useStreamingApiWarning": "(Sconsigliato, sperimentale, può saltare messaggi)",
@@ -273,7 +334,8 @@
     "accent": "Accento",
     "emoji_reactions_on_timeline": "Mostra emoji di reazione sulle sequenze",
     "pad_emoji": "Affianca spazi agli emoji inseriti tramite selettore",
-    "notification_blocks": "Bloccando un utente non riceverai più le sue notifiche né lo seguirai più."
+    "notification_blocks": "Bloccando un utente non riceverai più le sue notifiche né lo seguirai più.",
+    "mutes_and_blocks": "Zittiti e bloccati"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",

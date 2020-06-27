@@ -5,9 +5,20 @@ const DomainMuteCard = {
   components: {
     ProgressButton
   },
+  computed: {
+    user () {
+      return this.$store.state.users.currentUser
+    },
+    muted () {
+      return this.user.domainMutes.includes(this.domain)
+    }
+  },
   methods: {
     unmuteDomain () {
       return this.$store.dispatch('unmuteDomain', this.domain)
+    },
+    muteDomain () {
+      return this.$store.dispatch('muteDomain', this.domain)
     }
   }
 }

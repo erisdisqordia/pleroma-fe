@@ -3,6 +3,7 @@
     trigger="click"
     placement="top"
     class="extra-button-popover"
+    :bound-to="{ x: 'container' }"
   >
     <div
       slot="content"

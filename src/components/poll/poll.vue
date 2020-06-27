@@ -17,7 +17,7 @@
           <span class="result-percentage">
             {{ percentageForOption(option.votes_count) }}%
           </span>
-          <span>{{ option.title }}</span>
+          <span v-html="option.title_html"></span>
         </div>
         <div
           class="result-fill"

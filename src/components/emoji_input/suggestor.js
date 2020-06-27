@@ -13,7 +13,7 @@ import { debounce } from 'lodash'
 
 const debounceUserSearch = debounce((data, input) => {
   data.updateUsersList(input)
-}, 500, { leading: true, trailing: false })
+}, 500)
 
 export default data => input => {
   const firstChar = input[0]
@@ -97,8 +97,8 @@ export const suggestUsers = data => input => {
     replacement: '@' + screen_name + ' '
   }))
 
-  // BE search users if there are no matches
-  if (newUsers.length === 0 && data.updateUsersList) {
+  // BE search users to get more comprehensive results
+  if (data.updateUsersList) {
     debounceUserSearch(data, noPrefix)
   }
   return newUsers

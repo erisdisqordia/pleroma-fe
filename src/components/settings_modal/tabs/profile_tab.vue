@@ -143,6 +143,11 @@
           {{ $t("settings.profile_fields.add_field") }}
         </a>
       </div>
+      <p>
+        <Checkbox v-model="bot">
+          {{ $t('settings.bot') }}
+        </Checkbox>
+      </p>
       <button
         :disabled="newName && newName.length === 0"
         class="btn btn-default"

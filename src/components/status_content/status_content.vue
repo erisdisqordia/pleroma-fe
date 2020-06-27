@@ -164,22 +164,22 @@ $status-margin: 0.75em;
     word-break: break-all;
   }
 
+  img, video {
+    max-width: 100%;
+    max-height: 400px;
+    vertical-align: middle;
+    object-fit: contain;
+
+    &.emoji {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
   .status-content {
     font-family: var(--postFont, sans-serif);
     line-height: 1.4em;
     white-space: pre-wrap;
-
-    img, video {
-      max-width: 100%;
-      max-height: 400px;
-      vertical-align: middle;
-      object-fit: contain;
-
-      &.emoji {
-        width: 32px;
-        height: 32px;
-      }
-    }
 
     blockquote {
       margin: 0.2em 0 0.2em 2em;
@@ -226,7 +226,7 @@ $status-margin: 0.75em;
 
 .greentext {
   color: $fallback--cGreen;
-  color: var(--cGreen, $fallback--cGreen);
+  color: var(--postGreentext, $fallback--cGreen);
 }
 
 .timeline :not(.panel-disabled) > {

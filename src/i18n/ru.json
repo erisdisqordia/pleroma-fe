@@ -130,6 +130,7 @@
     "background": "Фон",
     "bio": "Описание",
     "btnRadius": "Кнопки",
+    "bot": "Это аккаунт бота",
     "cBlue": "Ответить, читать",
     "cGreen": "Повторить",
     "cOrange": "Нравится",
@@ -456,9 +457,9 @@
   },
   "domain_mute_card": {
     "mute": "Игнорировать",
-    "mute_progress": "В процессе...",
+    "mute_progress": "В процессе…",
     "unmute": "Прекратить игнорирование",
-    "unmute_progress": "В процессе..."
+    "unmute_progress": "В процессе…"
   },
   "exporter": {
     "export": "Экспорт",

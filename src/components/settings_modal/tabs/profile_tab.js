@@ -1,4 +1,5 @@
 import unescape from 'lodash/unescape'
+import merge from 'lodash/merge'
 import ImageCropper from 'src/components/image_cropper/image_cropper.vue'
 import ScopeSelector from 'src/components/scope_selector/scope_selector.vue'
 import fileSizeFormatService from 'src/components/../services/file_size_format/file_size_format.js'
@@ -16,6 +17,7 @@ const ProfileTab = {
       newLocked: this.$store.state.users.currentUser.locked,
       newNoRichText: this.$store.state.users.currentUser.no_rich_text,
       newDefaultScope: this.$store.state.users.currentUser.default_scope,
+      newFields: this.$store.state.users.currentUser.fields.map(field => ({ name: field.name, value: field.value })),
       hideFollows: this.$store.state.users.currentUser.hide_follows,
       hideFollowers: this.$store.state.users.currentUser.hide_followers,
       hideFollowsCount: this.$store.state.users.currentUser.hide_follows_count,
@@ -63,6 +65,18 @@ const ProfileTab = {
         ...this.$store.state.instance.emoji,
         ...this.$store.state.instance.customEmoji
       ] })
+    },
+    userSuggestor () {
+      return suggestor({
+        users: this.$store.state.users.users,
+        updateUsersList: (query) => this.$store.dispatch('searchUsers', { query })
+      })
+    },
+    fieldsLimits () {
+      return this.$store.state.instance.fieldsLimits
+    },
+    maxFields () {
+      return this.fieldsLimits ? this.fieldsLimits.maxFields : 0
     }
   },
   methods: {
@@ -75,6 +89,7 @@ const ProfileTab = {
             // Backend notation.
             /* eslint-disable camelcase */
             display_name: this.newName,
+            fields_attributes: this.newFields.filter(el => el != null),
             default_scope: this.newDefaultScope,
             no_rich_text: this.newNoRichText,
             hide_follows: this.hideFollows,
@@ -87,12 +102,24 @@ const ProfileTab = {
             show_role: this.showRole
             /* eslint-enable camelcase */
           } }).then((user) => {
+          this.newFields.splice(user.fields.length)
+          merge(this.newFields, user.fields)
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
         })
     },
     changeVis (visibility) {
       this.newDefaultScope = visibility
+    },
+    addField () {
+      if (this.newFields.length < this.maxFields) {
+        this.newFields.push({ name: '', value: '' })
+        return true
+      }
+      return false
+    },
+    deleteField (index, event) {
+      this.$delete(this.newFields, index)
     },
     uploadFile (slot, e) {
       const file = e.target.files[0]

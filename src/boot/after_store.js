@@ -25,11 +25,11 @@ const preloadFetch = async (request) => {
   if (!data || !data[request]) {
     return window.fetch(request)
   }
-  const requestJson = atob(data[request])
+  const requestData = atob(data[request])
   return {
     ok: true,
-    json: () => JSON.parse(requestJson),
-    text: () => requestJson
+    json: () => JSON.parse(requestData),
+    text: () => requestData
   }
 }
 

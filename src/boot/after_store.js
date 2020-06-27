@@ -340,17 +340,18 @@ const afterStoreSetup = async ({ store, i18n }) => {
   }
 
   // Now we can try getting the server settings and logging in
+  // Most of these are preloaded into the index.html so blocking is minimized
   await Promise.all([
     checkOAuthToken({ store }),
-    getTOS({ store }),
     getInstancePanel({ store }),
-    getStickers({ store }),
     getNodeInfo({ store }),
     getInstanceConfig({ store })
   ])
 
   // Start fetching things that don't need to block the UI
   store.dispatch('fetchMutes')
+  getTOS({ store })
+  getStickers({ store })
 
   const router = new VueRouter({
     mode: 'history',

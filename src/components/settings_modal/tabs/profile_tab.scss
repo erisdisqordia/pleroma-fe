@@ -79,4 +79,21 @@
   .setting-subitem {
     margin-left: 1.75em;
   }
+
+  .profile-fields {
+    display: flex;
+
+    &>.emoji-input {
+      flex: 1 1 auto;
+      margin: 0 .2em .5em;
+    }
+
+    &>.icon-container {
+      width: 20px;
+
+      &>.icon-cancel {
+        vertical-align: sub;
+      }
+    }
+  }
 }

@@ -255,7 +255,8 @@
         "top_bar": "Barra superiore",
         "panel_header": "Titolo pannello",
         "badge_notification": "Notifica",
-        "popover": "Suggerimenti, menù, sbalzi"
+        "popover": "Suggerimenti, menù, sbalzi",
+        "toggled": "Scambiato"
       },
       "common_colors": {
         "rgbo": "Icone, accenti, medaglie",

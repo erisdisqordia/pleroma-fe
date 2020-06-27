@@ -216,6 +216,7 @@ const getNodeInfo = async ({ store }) => {
       store.dispatch('setInstanceOption', { name: 'avatarlimit', value: parseInt(uploadLimits.avatar) })
       store.dispatch('setInstanceOption', { name: 'backgroundlimit', value: parseInt(uploadLimits.background) })
       store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadLimits.banner) })
+      store.dispatch('setInstanceOption', { name: 'fieldsLimits', value: metadata.fieldsLimits })
 
       store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
       store.dispatch('setInstanceOption', { name: 'postFormats', value: metadata.postFormats })

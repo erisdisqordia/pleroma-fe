@@ -95,6 +95,54 @@
           {{ $t('settings.discoverable') }}
         </Checkbox>
       </p>
+      <div v-if="maxFields > 0">
+        <p>{{ $t('settings.profile_fields.label') }}</p>
+        <div
+          v-for="(_, i) in newFields"
+          :key="i"
+          class="profile-fields"
+        >
+          <EmojiInput
+            v-model="newFields[i].name"
+            enable-emoji-picker
+            hide-emoji-button
+            :suggest="userSuggestor"
+          >
+            <input
+              v-model="newFields[i].name"
+              :placeholder="$t('settings.profile_fields.name')"
+            >
+          </EmojiInput>
+          <EmojiInput
+            v-model="newFields[i].value"
+            enable-emoji-picker
+            hide-emoji-button
+            :suggest="userSuggestor"
+          >
+            <input
+              v-model="newFields[i].value"
+              :placeholder="$t('settings.profile_fields.value')"
+            >
+          </EmojiInput>
+          <div
+            class="icon-container"
+          >
+            <i
+              v-show="newFields.length > 1"
+              class="icon-cancel"
+              @click="deleteField(i)"
+            />
+          </div>
+        </div>
+        <a
+          v-if="newFields.length < maxFields"
+          class="add-field faint"
+          @click="addField"
+        >
+          <i class="icon-plus" />
+          {{ $t("settings.profile_fields.add_field") }}
+        </a>
+      </div>
       <p>
         <Checkbox v-model="bot">
           {{ $t('settings.bot') }}

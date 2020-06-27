@@ -8,38 +8,39 @@ import backendInteractorService from '../services/backend_interactor_service/bac
 import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { applyTheme } from '../services/style_setter/style_setter.js'
 
-const getStatusnetConfig = async ({ store }) => {
+const getInstanceConfig = async ({ store }) => {
   try {
-    const res = await window.fetch('/api/statusnet/config.json')
+    const res = await window.fetch('/api/v1/instance')
     if (res.ok) {
       const data = await res.json()
-      const { name, closed: registrationClosed, textlimit, uploadlimit, server, vapidPublicKey, safeDMMentionsEnabled } = data.site
+      const textlimit = data.max_toot_chars
+      const vapidPublicKey = data.pleroma.vapid_public_key
 
-      store.dispatch('setInstanceOption', { name: 'name', value: name })
-      store.dispatch('setInstanceOption', { name: 'registrationOpen', value: (registrationClosed === '0') })
-      store.dispatch('setInstanceOption', { name: 'textlimit', value: parseInt(textlimit) })
-      store.dispatch('setInstanceOption', { name: 'server', value: server })
-      store.dispatch('setInstanceOption', { name: 'safeDM', value: safeDMMentionsEnabled !== '0' })
-
-      // TODO: default values for this stuff, added if to not make it break on
-      // my dev config out of the box.
-      if (uploadlimit) {
-        store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadlimit.uploadlimit) })
-        store.dispatch('setInstanceOption', { name: 'avatarlimit', value: parseInt(uploadlimit.avatarlimit) })
-        store.dispatch('setInstanceOption', { name: 'backgroundlimit', value: parseInt(uploadlimit.backgroundlimit) })
-        store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadlimit.bannerlimit) })
-      }
+      store.dispatch('setInstanceOption', { name: 'textlimit', value: textlimit })
 
       if (vapidPublicKey) {
         store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })
       }
-
-      return data.site.pleromafe
     } else {
       throw (res)
     }
   } catch (error) {
-    console.error('Could not load statusnet config, potentially fatal')
+    console.error('Could not load instance config, potentially fatal')
+    console.error(error)
+  }
+}
+
+const getBackendProvidedConfig = async ({ store }) => {
+  try {
+    const res = await window.fetch('/api/pleroma/frontend_configurations')
+    if (res.ok) {
+      const data = await res.json()
+      return data.pleroma_fe
+    } else {
+      throw (res)
+    }
+  } catch (error) {
+    console.error('Could not load backend-provided frontend config, potentially fatal')
     console.error(error)
   }
 }
@@ -200,13 +201,21 @@ const getNodeInfo = async ({ store }) => {
       const data = await res.json()
       const metadata = data.metadata
       const features = metadata.features
+      store.dispatch('setInstanceOption', { name: 'name', value: metadata.nodeName })
+      store.dispatch('setInstanceOption', { name: 'registrationOpen', value: data.openRegistrations })
       store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: features.includes('media_proxy') })
+      store.dispatch('setInstanceOption', { name: 'safeDM', value: features.includes('safe_dm_mentions') })
       store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
       store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
       store.dispatch('setInstanceOption', { name: 'pollsAvailable', value: features.includes('polls') })
       store.dispatch('setInstanceOption', { name: 'pollLimits', value: metadata.pollLimits })
       store.dispatch('setInstanceOption', { name: 'mailerEnabled', value: metadata.mailerEnabled })
 
+      const uploadLimits = metadata.uploadLimits
+      store.dispatch('setInstanceOption', { name: 'uploadlimit', value: parseInt(uploadLimits.general) })
+      store.dispatch('setInstanceOption', { name: 'avatarlimit', value: parseInt(uploadLimits.avatar) })
+      store.dispatch('setInstanceOption', { name: 'backgroundlimit', value: parseInt(uploadLimits.background) })
+      store.dispatch('setInstanceOption', { name: 'bannerlimit', value: parseInt(uploadLimits.banner) })
       store.dispatch('setInstanceOption', { name: 'fieldsLimits', value: metadata.fieldsLimits })
 
       store.dispatch('setInstanceOption', { name: 'restrictedNicknames', value: metadata.restrictedNicknames })
@@ -259,7 +268,7 @@ const getNodeInfo = async ({ store }) => {
 
 const setConfig = async ({ store }) => {
   // apiConfig, staticConfig
-  const configInfos = await Promise.all([getStatusnetConfig({ store }), getStaticConfig()])
+  const configInfos = await Promise.all([getBackendProvidedConfig({ store }), getStaticConfig()])
   const apiConfig = configInfos[0]
   const staticConfig = configInfos[1]
 
@@ -282,6 +291,11 @@ const checkOAuthToken = async ({ store }) => {
 const afterStoreSetup = async ({ store, i18n }) => {
   const width = windowWidth()
   store.dispatch('setMobileLayout', width <= 800)
+
+  const overrides = window.___pleromafe_dev_overrides || {}
+  const server = (typeof overrides.target !== 'undefined') ? overrides.target : window.location.origin
+  store.dispatch('setInstanceOption', { name: 'server', value: server })
+
   await setConfig({ store })
 
   const { customTheme, customThemeSource } = store.state.config
@@ -306,7 +320,8 @@ const afterStoreSetup = async ({ store, i18n }) => {
     getTOS({ store }),
     getInstancePanel({ store }),
     getStickers({ store }),
-    getNodeInfo({ store })
+    getNodeInfo({ store }),
+    getInstanceConfig({ store })
   ])
 
   // Start fetching things that don't need to block the UI

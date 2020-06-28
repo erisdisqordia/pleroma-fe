@@ -16,30 +16,26 @@
         @drop.stop="fileDrop"
       />
       <div class="form-group">
-        <a
-          v-if="!showPreview"
-          class="preview-start"
-          @click.stop.prevent="previewStatus(newStatus)"
-        >
-          {{ $t('status.preview') }}
-        </a>
+        <div class="preview-heading faint">
+          <a
+            class="preview-toggle faint"
+            @click.stop.prevent="togglePreview"
+          >
+            {{ $t('status.preview') }}
+            <i
+              class="icon-down-open"
+              :style="{ transform: showPreview ? 'rotate(0deg)' : 'rotate(-90deg)' }"
+            />
+          </a>
+          <i
+            v-show="previewLoading"
+            class="icon-spin3 animate-spin"
+          />
+        </div>
         <div
-          v-else
+          v-if="showPreview"
           class="preview-container"
         >
-          <span class="preview-heading">
-            <span class="preview-title">
-              {{ $t('status.status_preview') }}
-            </span>
-            <i
-              v-if="previewLoading"
-              class="icon-spin3 animate-spin"
-            />
-            <i
-              class="preview-close icon-cancel"
-              @click.stop.prevent="closePreview"
-            />
-          </span>
           <div
             v-if="!preview"
             class="preview-status"
@@ -369,28 +365,30 @@
     max-width: 10em;
   }
 
-  .preview-start {
-    margin-left: auto;
+  .preview-heading {
+    display: flex;
+    width: 100%;
+
+    .icon-spin3 {
+      margin-left: auto;
+    }
+  }
+
+  .preview-toggle {
+    display: flex;
     cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .icon-down-open {
+    transition: transform 0.1s;
   }
 
   .preview-container {
     margin-bottom: 1em;
-  }
-
-  .preview-heading {
-    display: flex;
-    width: 100%;
-    color: $fallback--faint;
-    color: var(--faint, $fallback--faint);
-  }
-
-  .preview-title {
-    flex-grow: 1;
-  }
-
-  .preview-close {
-    padding-left: 0.5em;
   }
 
   .preview-error {

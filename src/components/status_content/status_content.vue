@@ -180,6 +180,9 @@ $status-margin: 0.75em;
     font-family: var(--postFont, sans-serif);
     line-height: 1.4em;
     white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 
     blockquote {
       margin: 0.2em 0 0.2em 2em;

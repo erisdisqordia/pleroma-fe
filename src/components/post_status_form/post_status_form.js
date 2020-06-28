@@ -235,13 +235,13 @@ const PostStatusForm = {
         this.posting = false
       })
     },
-    previewStatus (newStatus) {
+    previewStatus () {
       if (this.emptyStatus) {
         this.preview = { error: this.$t('status.preview_empty') }
         this.previewLoading = false
         return
       }
-
+      const newStatus = this.newStatus
       this.previewLoading = true
       statusPoster.postStatus({
         status: newStatus.status,
@@ -269,17 +269,22 @@ const PostStatusForm = {
         this.previewLoading = false
       })
     },
-    debouncePreviewStatus: debounce(function (newStatus) {
-      this.previewStatus(newStatus)
-    }, 750),
+    debouncePreviewStatus: debounce(function () { this.previewStatus() }, 750),
     autoPreview () {
       if (!this.preview) return
       this.previewLoading = true
-      this.debouncePreviewStatus(this.newStatus)
+      this.debouncePreviewStatus()
     },
     closePreview () {
       this.preview = null
       this.previewLoading = false
+    },
+    togglePreview () {
+      if (this.showPreview) {
+        this.closePreview()
+      } else {
+        this.previewStatus()
+      }
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)

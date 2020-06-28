@@ -36,13 +36,6 @@
               class="icon-spin3 animate-spin"
             />
             <a
-              v-else
-              class="preview-update"
-              @click.stop.prevent="previewStatus(newStatus)"
-            >
-              {{ $t('status.preview_update') }}
-            </a>
-            <a
               class="preview-close"
               @click.stop.prevent="closePreview"
             >

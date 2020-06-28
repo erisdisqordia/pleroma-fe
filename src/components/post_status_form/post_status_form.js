@@ -6,7 +6,7 @@ import PollForm from '../poll/poll_form.vue'
 import StatusContent from '../status_content/status_content.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
-import { reject, map, uniqBy } from 'lodash'
+import { reject, map, uniqBy, debounce } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
 import { mapGetters } from 'vuex'
 import Checkbox from '../checkbox/checkbox.vue'
@@ -228,6 +228,7 @@ const PostStatusForm = {
           el.style.height = 'auto'
           el.style.height = undefined
           this.error = null
+          this.closePreview()
         } else {
           this.error = data.error
         }
@@ -262,16 +263,25 @@ const PostStatusForm = {
         this.previewLoading = false
       })
     },
+    debouncePreviewStatus: debounce(function (newStatus) {
+      this.previewStatus(newStatus)
+    }, 750),
+    autoPreview () {
+      this.previewLoading = true
+      this.debouncePreviewStatus(this.newStatus)
+    },
     closePreview () {
       this.preview = null
       this.previewLoading = false
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
+      this.autoPreview()
     },
     removeMediaFile (fileInfo) {
       let index = this.newStatus.files.indexOf(fileInfo)
       this.newStatus.files.splice(index, 1)
+      this.autoPreview()
     },
     uploadFailed (errString, templateArgs) {
       templateArgs = templateArgs || {}
@@ -287,6 +297,7 @@ const PostStatusForm = {
       return fileTypeService.fileType(fileInfo.mimetype)
     },
     paste (e) {
+      this.autoPreview()
       this.resize(e)
       if (e.clipboardData.files.length > 0) {
         // prevent pasting of file as text
@@ -321,6 +332,7 @@ const PostStatusForm = {
       }
     },
     onEmojiInputInput (e) {
+      this.autoPreview()
       this.$nextTick(() => {
         this.resize(this.$refs['textarea'])
       })

@@ -639,7 +639,7 @@
     "thread_muted_and_words": ", has words:",
     "preview": "Preview",
     "status_preview": "Status preview",
-    "preview_update": "Update"
+    "preview_empty": "Empty"
   },
   "user_card": {
     "approve": "Approve",

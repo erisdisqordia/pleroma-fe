@@ -170,6 +170,9 @@ const PostStatusForm = {
     showPreview () {
       return !!this.preview || this.previewLoading
     },
+    emptyStatus () {
+      return this.newStatus.status === '' && this.newStatus.files.length === 0
+    },
     ...mapGetters(['mergedConfig'])
   },
   watch: {
@@ -185,12 +188,9 @@ const PostStatusForm = {
     postStatus (newStatus) {
       if (this.posting) { return }
       if (this.submitDisabled) { return }
-
-      if (this.newStatus.status === '') {
-        if (this.newStatus.files.length === 0) {
-          this.error = 'Cannot post an empty status with no files'
-          return
-        }
+      if (this.emptyStatus) {
+        this.error = 'Cannot post an empty status with no files'
+        return
       }
 
       const poll = this.pollFormVisible ? this.newStatus.poll : {}
@@ -236,13 +236,19 @@ const PostStatusForm = {
       })
     },
     previewStatus (newStatus) {
+      if (this.emptyStatus) {
+        this.preview = { error: this.$t('status.preview_empty') }
+        this.previewLoading = false
+        return
+      }
+
       this.previewLoading = true
       statusPoster.postStatus({
         status: newStatus.status,
         spoilerText: newStatus.spoilerText || null,
         visibility: newStatus.visibility,
         sensitive: newStatus.nsfw,
-        media: newStatus.files,
+        media: [],
         store: this.$store,
         inReplyToStatusId: this.replyTo,
         contentType: newStatus.contentType,
@@ -267,6 +273,7 @@ const PostStatusForm = {
       this.previewStatus(newStatus)
     }, 750),
     autoPreview () {
+      if (!this.preview) return
       this.previewLoading = true
       this.debouncePreviewStatus(this.newStatus)
     },
@@ -276,12 +283,10 @@ const PostStatusForm = {
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
-      this.autoPreview()
     },
     removeMediaFile (fileInfo) {
       let index = this.newStatus.files.indexOf(fileInfo)
       this.newStatus.files.splice(index, 1)
-      this.autoPreview()
     },
     uploadFailed (errString, templateArgs) {
       templateArgs = templateArgs || {}

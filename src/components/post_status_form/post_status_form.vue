@@ -35,12 +35,10 @@
               v-if="previewLoading"
               class="icon-spin3 animate-spin"
             />
-            <a
-              class="preview-close"
+            <i
+              class="preview-close icon-cancel"
               @click.stop.prevent="closePreview"
-            >
-              <i class="icon-cancel" />
-            </a>
+            />
           </span>
           <div
             v-if="!preview"
@@ -392,11 +390,7 @@
   }
 
   .preview-close {
-    margin-left: 0.5em;
-  }
-
-  .preview-update {
-    cursor: pointer;
+    padding-left: 0.5em;
   }
 
   .preview-error {
@@ -411,6 +405,8 @@
     border-radius: $fallback--tooltipRadius;
     border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
     padding: 0.5em;
+    margin: 0;
+    line-height: 1.4em;
   }
 
   .text-format {

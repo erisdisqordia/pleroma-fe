@@ -266,7 +266,11 @@
               :href="file.url"
             >{{ file.url }}</a>
           </div>
-          <input type="text" :placeholder="$t('post_status.media_description')" v-model="newStatus.mediaDescriptions[file.id]">
+          <input
+            v-model="newStatus.mediaDescriptions[file.id]"
+            type="text"
+            :placeholder="$t('post_status.media_description')"
+          >
         </div>
       </div>
       <div

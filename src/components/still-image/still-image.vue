@@ -10,9 +10,9 @@
     <!-- NOTE: key is required to force to re-render img tag when src is changed -->
     <img
       ref="src"
+      :key="src"
       :alt="alt"
       :title="alt"
-      :key="src"
       :src="src"
       :referrerpolicy="referrerpolicy"
       @load="onLoad"

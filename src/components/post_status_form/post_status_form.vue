@@ -270,6 +270,7 @@
             v-model="newStatus.mediaDescriptions[file.id]"
             type="text"
             :placeholder="$t('post_status.media_description')"
+            @keydown.enter.prevent=""
           >
         </div>
       </div>

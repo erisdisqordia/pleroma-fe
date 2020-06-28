@@ -18,7 +18,7 @@
       <div class="form-group">
         <a
           v-if="newStatus.contentType !== 'text/plain' && !showPreview"
-          class="preview-start faint"
+          class="preview-start"
           type="button"
           @click.stop.prevent="previewStatus(newStatus)"
         >
@@ -29,7 +29,7 @@
           class="preview-container"
         >
           <span class="preview-heading">
-            <span class="faint preview-title">
+            <span class="preview-title">
               {{ $t('status.status_preview') }}
             </span>
             <i
@@ -38,7 +38,7 @@
             />
             <a
               v-else
-              class="faint preview-update"
+              class="preview-update"
               @click.stop.prevent="previewStatus(newStatus)"
             >
               {{ $t('status.preview_update') }}
@@ -382,9 +382,6 @@
   .preview-start {
     margin-left: auto;
     cursor: pointer;
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   .preview-container {
@@ -394,6 +391,8 @@
   .preview-heading {
     display: flex;
     width: 100%;
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
   }
 
   .preview-title {
@@ -406,15 +405,12 @@
 
   .preview-update {
     cursor: pointer;
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   .preview-error {
+    font-style: italic;
     color: $fallback--faint;
     color: var(--faint, $fallback--faint);
-    font-style: italic;
   }
 
   .preview-status {

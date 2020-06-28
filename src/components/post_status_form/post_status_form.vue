@@ -16,6 +16,58 @@
         @drop.stop="fileDrop"
       />
       <div class="form-group">
+        <a
+          v-if="newStatus.contentType !== 'text/plain' && !showPreview"
+          class="preview-start faint"
+          type="button"
+          @click.stop.prevent="previewStatus(newStatus)"
+        >
+          {{ $t('status.preview') }}
+        </a>
+        <div
+          v-if="showPreview && newStatus.contentType !== 'text/plain'"
+          class="preview-container"
+        >
+          <span class="preview-heading">
+            <span class="faint preview-title">
+              {{ $t('status.status_preview') }}
+            </span>
+            <i
+              v-if="previewLoading"
+              class="icon-spin3 animate-spin"
+            />
+            <a
+              v-else
+              class="faint preview-update"
+              @click.stop.prevent="previewStatus(newStatus)"
+            >
+              {{ $t('status.preview_update') }}
+            </a>
+            <a
+              class="preview-close"
+              @click.stop.prevent="closePreview"
+            >
+              <i class="icon-cancel" />
+            </a>
+          </span>
+          <div
+            v-if="!preview"
+            class="preview-status"
+          >
+            {{ $t('general.loading') }}
+          </div>
+          <div
+            v-else-if="preview.error"
+            class="preview-status preview-error"
+          >
+            {{ preview.error }}
+          </div>
+          <StatusContent
+            v-else
+            :status="preview"
+            class="preview-status"
+          />
+        </div>
         <i18n
           v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
           path="post_status.account_not_locked_warning"
@@ -77,7 +129,6 @@
           class="form-control"
         >
           <input
-
             v-model="newStatus.spoilerText"
             type="text"
             :placeholder="$t('post_status.content_warning')"
@@ -303,14 +354,6 @@
 }
 
 .post-status-form {
-  .visibility-tray {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 5px;
-  }
-}
-
-.post-status-form {
   .form-bottom {
     display: flex;
     justify-content: space-between;
@@ -336,11 +379,63 @@
     max-width: 10em;
   }
 
+  .preview-start {
+    margin-left: auto;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .preview-container {
+    margin-bottom: 1em;
+  }
+
+  .preview-heading {
+    display: flex;
+    width: 100%;
+  }
+
+  .preview-title {
+    flex-grow: 1;
+  }
+
+  .preview-close {
+    margin-left: 0.5em;
+  }
+
+  .preview-update {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .preview-error {
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+    font-style: italic;
+  }
+
+  .preview-status {
+    border: 1px solid $fallback--border;
+    border: 1px solid var(--border, $fallback--border);
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    padding: 0.5em;
+  }
+
   .text-format {
     .only-format {
       color: $fallback--faint;
       color: var(--faint, $fallback--faint);
     }
+  }
+
+  .visibility-tray {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
   }
 
   .media-upload-icon, .poll-icon, .emoji-icon {

@@ -3,6 +3,7 @@ import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji_input/emoji_input.vue'
 import PollForm from '../poll/poll_form.vue'
+import StatusContent from '../status_content/status_content.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
 import { reject, map, uniqBy } from 'lodash'
@@ -38,7 +39,8 @@ const PostStatusForm = {
     EmojiInput,
     PollForm,
     ScopeSelector,
-    Checkbox
+    Checkbox,
+    StatusContent
   },
   mounted () {
     this.resize(this.$refs.textarea)
@@ -84,7 +86,9 @@ const PostStatusForm = {
       caret: 0,
       pollFormVisible: false,
       showDropIcon: 'hide',
-      dropStopTimeout: null
+      dropStopTimeout: null,
+      preview: null,
+      previewLoading: false
     }
   },
   computed: {
@@ -163,7 +167,19 @@ const PostStatusForm = {
         this.newStatus.poll &&
         this.newStatus.poll.error
     },
+    showPreview () {
+      return !!this.preview || this.previewLoading
+    },
     ...mapGetters(['mergedConfig'])
+  },
+  watch: {
+    'newStatus.contentType': function (newType) {
+      if (newType === 'text/plain') {
+        this.closePreview()
+      } else if (this.preview) {
+        this.previewStatus(this.newStatus)
+      }
+    }
   },
   methods: {
     postStatus (newStatus) {
@@ -217,6 +233,38 @@ const PostStatusForm = {
         }
         this.posting = false
       })
+    },
+    previewStatus (newStatus) {
+      this.previewLoading = true
+      statusPoster.postStatus({
+        status: newStatus.status,
+        spoilerText: newStatus.spoilerText || null,
+        visibility: newStatus.visibility,
+        sensitive: newStatus.nsfw,
+        media: newStatus.files,
+        store: this.$store,
+        inReplyToStatusId: this.replyTo,
+        contentType: newStatus.contentType,
+        poll: {},
+        preview: true
+      }).then((data) => {
+        // Don't apply preview if not loading, because it means
+        // user has closed the preview manually.
+        if (!this.previewLoading) return
+        if (!data.error) {
+          this.preview = data
+        } else {
+          this.preview = { error: data.error }
+        }
+      }).catch((error) => {
+        this.preview = { error }
+      }).finally(() => {
+        this.previewLoading = false
+      })
+    },
+    closePreview () {
+      this.preview = null
+      this.previewLoading = false
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)

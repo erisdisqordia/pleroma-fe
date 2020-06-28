@@ -636,7 +636,10 @@
     "status_unavailable": "Status unavailable",
     "copy_link": "Copy link to status",
     "thread_muted": "Thread muted",
-    "thread_muted_and_words": ", has words:"
+    "thread_muted_and_words": ", has words:",
+    "preview": "Preview",
+    "status_preview": "Status preview",
+    "preview_update": "Update"
   },
   "user_card": {
     "approve": "Approve",

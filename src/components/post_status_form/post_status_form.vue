@@ -499,7 +499,7 @@
     flex-direction: column;
   }
 
-  .attachments {
+  .media-upload-wrapper .attachments {
     padding: 0 0.5em;
 
     .attachment {

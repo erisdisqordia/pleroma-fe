@@ -17,14 +17,14 @@
       />
       <div class="form-group">
         <a
-          v-if="newStatus.contentType !== 'text/plain' && !showPreview"
+          v-if="!showPreview"
           class="preview-start"
           @click.stop.prevent="previewStatus(newStatus)"
         >
           {{ $t('status.preview') }}
         </a>
         <div
-          v-if="showPreview && newStatus.contentType !== 'text/plain'"
+          v-else
           class="preview-container"
         >
           <span class="preview-heading">

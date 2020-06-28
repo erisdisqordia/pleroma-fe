@@ -19,7 +19,6 @@
         <a
           v-if="newStatus.contentType !== 'text/plain' && !showPreview"
           class="preview-start"
-          type="button"
           @click.stop.prevent="previewStatus(newStatus)"
         >
           {{ $t('status.preview') }}

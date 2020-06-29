@@ -638,7 +638,11 @@
     "thread_muted": "Thread muted",
     "thread_muted_and_words": ", has words:",
     "preview": "Preview",
-    "preview_empty": "Empty"
+    "preview_empty": "Empty",
+    "show_full_subject": "Show full subject",
+    "hide_full_subject": "Hide full subject",
+    "show_content": "Show content",
+    "hide_content": "Hide content"
   },
   "user_card": {
     "approve": "Approve",

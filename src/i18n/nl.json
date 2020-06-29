@@ -476,7 +476,14 @@
       "backend_version": "Backend Versie",
       "title": "Versie"
     },
-    "mutes_and_blocks": "Negeringen en Blokkades"
+    "mutes_and_blocks": "Negeringen en Blokkades",
+    "profile_fields": {
+      "value": "Inhoud",
+      "name": "Label",
+      "add_field": "Veld Toevoegen",
+      "label": "Profiel metadata"
+    },
+    "bot": "Dit is een bot account"
   },
   "timeline": {
     "collapse": "Inklappen",

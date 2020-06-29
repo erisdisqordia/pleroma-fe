@@ -3,6 +3,7 @@
     <Popover
       trigger="click"
       placement="bottom"
+      :bound-to="{ x: 'container' }"
     >
       <div
         slot="content"

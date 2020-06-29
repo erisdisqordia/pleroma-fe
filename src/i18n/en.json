@@ -266,6 +266,7 @@
     "block_import_error": "Error importing blocks",
     "blocks_imported": "Blocks imported! Processing them will take a while.",
     "blocks_tab": "Blocks",
+    "bot": "This is a bot account",
     "btnRadius": "Buttons",
     "cBlue": "Blue (Reply, follow)",
     "cGreen": "Green (Retweet)",
@@ -333,6 +334,12 @@
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
     "mutes_tab": "Mutes",
     "play_videos_in_modal": "Play videos in a popup frame",
+    "profile_fields": {
+      "label": "Profile metadata",
+      "add_field": "Add Field",
+      "name": "Label",
+      "value": "Content"
+    },
     "use_contain_fit": "Don't crop the attachment in thumbnails",
     "name": "Name",
     "name_bio": "Name & Bio",

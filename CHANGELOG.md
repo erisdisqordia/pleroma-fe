@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Greentext now has separate color slot for it
 - Removed the use of with_move parameters when fetching notifications
+- Push notifications now are the same as normal notfication, and are localized.
 
 ### Fixed
 - Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)
@@ -16,6 +17,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added private notifications option for push notifications
 - 'Copy link' button for statuses (in the ellipsis menu)
 - Autocomplete domains from list of known instances
+- 'Bot' settings option and badge
+- Added profile meta data fields that can be set in profile settings
 
 ### Changed
 - Registration page no longer requires email if the server is configured not to require it
@@ -25,12 +28,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Add better visual indication for drag-and-drop for files
 
 ### Fixed
+- Custom Emoji will display in poll options now.
 - Status ellipsis menu closes properly when selecting certain options
 - Cropped images look correct in Chrome
 - Newlines in the muted words settings work again
 - Clicking on non-latin hashtags won't open a new window
 - Uploading and drag-dropping multiple files works correctly now.
 - Subject field now appears disabled when posting
+- Fix status ellipsis menu being cut off in notifications column
+- Fixed autocomplete sometimes not returning the right user when there's already some results
 
 ## [2.0.3] - 2020-05-02
 ### Fixed

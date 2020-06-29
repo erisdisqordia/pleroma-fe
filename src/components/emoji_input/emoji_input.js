@@ -431,6 +431,7 @@ const EmojiInput = {
       const offsetBottom = offsetTop + offsetHeight
 
       panel.style.top = offsetBottom + 'px'
+      if (!picker) return
       picker.$el.style.top = offsetBottom + 'px'
       picker.$el.style.bottom = 'auto'
     }

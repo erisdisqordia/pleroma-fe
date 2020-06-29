@@ -418,7 +418,7 @@ $status-margin: 0.75em;
     max-width: 85%;
     font-weight: bold;
 
-    img {
+    img.emoji {
       width: 14px;
       height: 14px;
       vertical-align: middle;

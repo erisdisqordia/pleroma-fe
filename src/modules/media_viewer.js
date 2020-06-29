@@ -22,7 +22,7 @@ const mediaViewer = {
     setMedia ({ commit }, attachments) {
       const media = attachments.filter(attachment => {
         const type = fileTypeService.fileType(attachment.mimetype)
-        return type === 'image' || type === 'video'
+        return type === 'image' || type === 'video' || type === 'audio'
       })
       commit('setMedia', media)
     },

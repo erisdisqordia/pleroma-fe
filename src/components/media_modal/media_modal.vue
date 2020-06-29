@@ -20,6 +20,14 @@
       :attachment="currentMedia"
       :controls="true"
     />
+    <audio
+      v-if="type === 'audio'"
+      class="modal-image"
+      :src="currentMedia.url"
+      :alt="currentMedia.description"
+      :title="currentMedia.description"
+      controls
+    />
     <button
       v-if="canNavigate"
       :title="$t('media_modal.previous')"

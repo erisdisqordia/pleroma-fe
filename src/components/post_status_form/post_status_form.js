@@ -3,6 +3,7 @@ import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji_input/emoji_input.vue'
 import PollForm from '../poll/poll_form.vue'
+import Attachment from '../attachment/attachment.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
 import { reject, map, uniqBy } from 'lodash'
@@ -38,7 +39,8 @@ const PostStatusForm = {
     EmojiInput,
     PollForm,
     ScopeSelector,
-    Checkbox
+    Checkbox,
+    Attachment
   },
   mounted () {
     this.resize(this.$refs.textarea)

@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="usePlaceHolder"
+    v-if="usePlaceholder"
     @click="openModal"
   >
     <a
@@ -8,8 +8,11 @@
       class="placeholder"
       target="_blank"
       :href="attachment.url"
+      :alt="attachment.description"
+      :title="attachment.description"
     >
-      [{{ nsfw ? "NSFW/" : "" }}{{ type.toUpperCase() }}]
+      <span :class="placeholderIconClass" />
+      <b>{{ nsfw ? "NSFW / " : "" }}</b>{{ placeholderName }}
     </a>
   </div>
   <div
@@ -22,6 +25,8 @@
       v-if="hidden"
       class="image-attachment"
       :href="attachment.url"
+      :alt="attachment.description"
+      :title="attachment.description"
       @click.prevent="toggleHidden"
     >
       <img
@@ -83,6 +88,8 @@
     <audio
       v-if="type === 'audio'"
       :src="attachment.url"
+      :alt="attachment.description"
+      :title="attachment.description"
       controls
     />
 
@@ -116,22 +123,19 @@
   display: flex;
   flex-wrap: wrap;
 
-  .attachment.media-upload-container {
-    flex: 0 0 auto;
-    max-height: 200px;
+  .non-gallery {
     max-width: 100%;
-    display: flex;
-    align-items: center;
-    video {
-      max-width: 100%;
-    }
   }
 
   .placeholder {
-    margin-right: 8px;
-    margin-bottom: 4px;
+    display: inline-block;
+    padding: 0.3em 1em 0.3em 0;
     color: $fallback--link;
     color: var(--postLink, $fallback--link);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   .nsfw-placeholder {

@@ -375,6 +375,12 @@
       "css": "download",
       "code": 59429,
       "src": "fontawesome"
+    },
+    {
+      "uid": "9ea0a737ccc45d6c510dcbae56058849",
+      "css": "music",
+      "code": 59430,
+      "src": "fontawesome"
     }
   ]
 }

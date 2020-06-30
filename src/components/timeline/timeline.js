@@ -49,11 +49,11 @@ const Timeline = {
       if (this.timelineError || this.errorData) return false
       return this.timeline.newStatusCount > 0 || this.timeline.flushMarker !== 0
     },
-    newStatusCountStr () {
+    loadButtonString () {
       if (this.timeline.flushMarker !== 0) {
-        return ''
+        return this.$t('timeline.reload')
       } else {
-        return ` (${this.newStatusCount})`
+        return `${this.$t('timeline.show_new')} (${this.newStatusCount})`
       }
     },
     classes () {

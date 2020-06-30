@@ -23,7 +23,7 @@
         class="loadmore-button"
         @click.prevent="showNewStatuses"
       >
-        {{ $t('timeline.show_new') }}{{ newStatusCountStr }}
+        {{ loadButtonString }}
       </button>
       <div
         v-else

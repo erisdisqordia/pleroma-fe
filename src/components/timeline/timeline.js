@@ -45,6 +45,10 @@ const Timeline = {
     newStatusCount () {
       return this.timeline.newStatusCount
     },
+    showLoadButton () {
+      if (this.timelineError || this.errorData) return false
+      return this.timeline.newStatusCount > 0 || this.timeline.flushMarker !== 0
+    },
     newStatusCountStr () {
       if (this.timeline.flushMarker !== 0) {
         return ''
@@ -112,8 +116,6 @@ const Timeline = {
       if (e.key === '.') this.showNewStatuses()
     },
     showNewStatuses () {
-      if (this.newStatusCount === 0) return
-
       if (this.timeline.flushMarker !== 0) {
         this.$store.commit('clearTimeline', { timeline: this.timelineName, excludeUserId: true })
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })

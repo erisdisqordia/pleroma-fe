@@ -208,7 +208,12 @@
                     @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
                   >
                     <i class="button-icon icon-reply" />
-                    <span class="faint-link reply-to-text">{{ $t('status.reply_to') }}</span>
+                    <span
+                      class="faint-link reply-to-text"
+                      :class="{ 'strikethrough': !status.parent_visible }"
+                    >
+                      {{ $t('status.reply_to') }}
+                    </span>
                   </a>
                 </StatusPopover>
                 <span
@@ -524,6 +529,10 @@ $status-margin: 0.75em;
       text-overflow: ellipsis;
       white-space: nowrap;
       margin: 0 0.4em 0 0.2em;
+    }
+
+    .strikethrough {
+      text-decoration: line-through;
     }
 
     .replies-separator {

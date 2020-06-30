@@ -197,7 +197,7 @@
               >
                 <StatusPopover
                   v-if="!isPreview"
-                  :status-id="status.in_reply_to_status_id"
+                  :status-id="status.parent_visible && status.in_reply_to_status_id"
                   class="reply-to-popover"
                   style="min-width: 0"
                 >

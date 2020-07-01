@@ -8,7 +8,7 @@ const defaultState = {
   // Stuff from apiConfig
   name: 'Pleroma FE',
   registrationOpen: true,
-  server: 'http://localhost:4040/',
+  server: 'http://lain.com:4040',
   textlimit: 5000,
   themeData: undefined,
   vapidPublicKey: undefined,

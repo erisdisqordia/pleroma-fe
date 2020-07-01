@@ -107,6 +107,9 @@ export default {
       return {
         'order': this.$store.state.instance.sidebarRight ? 99 : 0
       }
+    },
+    showStorageError () {
+      return this.$store.state.interface.storageError === 'show'
     }
   },
   methods: {
@@ -129,6 +132,9 @@ export default {
       if (changed) {
         this.$store.dispatch('setMobileLayout', mobileLayout)
       }
+    },
+    hideStorageError () {
+      this.$store.dispatch('setStorageError', 'hide')
     }
   }
 }

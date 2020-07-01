@@ -62,7 +62,16 @@ const persistedStateOptions = {
 };
 
 (async () => {
-  const persistedState = await createPersistedState(persistedStateOptions)
+  console.log('before perse state')
+  let persistedState
+  let storageError = 'none'
+  try {
+    persistedState = await createPersistedState(persistedStateOptions)
+  } catch (e) {
+    console.error(e)
+    storageError = 'show'
+    persistedState = _ => _
+  }
   const store = new Vuex.Store({
     modules: {
       i18n: {
@@ -89,7 +98,7 @@ const persistedStateOptions = {
     strict: false // Socket modifies itself, let's ignore this for now.
     // strict: process.env.NODE_ENV !== 'production'
   })
-
+  store.dispatch('setStorageError', storageError)
   afterStoreSetup({ store, i18n })
 })()
 

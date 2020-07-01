@@ -163,6 +163,9 @@
     "load_all_hint": "Loaded first {saneAmount} emoji, loading all emoji may cause performance issues.",
     "load_all": "Loading all {emojiAmount} emoji"
   },
+  "errors": {
+    "storage_unavailable": "Pleroma could not access browser storage. You may encounter issues and your login or your local settings won't be saved. Try enabling cookies."
+  },
   "interactions": {
     "favs_repeats": "Repeats and Favorites",
     "follows": "New follows",

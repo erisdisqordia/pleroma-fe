@@ -8,6 +8,7 @@ const defaultState = {
     noticeClearTimeout: null,
     notificationPermission: null
   },
+  storageError: 'none',
   browserSupport: {
     cssFilter: window.CSS && window.CSS.supports && (
       window.CSS.supports('filter', 'drop-shadow(0 0)') ||
@@ -58,6 +59,9 @@ const interfaceMod = {
       if (!state.settingsModalLoaded) {
         state.settingsModalLoaded = true
       }
+    },
+    setStorageError (state, value) {
+      state.storageError = value
     }
   },
   actions: {
@@ -81,6 +85,9 @@ const interfaceMod = {
     },
     togglePeekSettingsModal ({ commit }) {
       commit('togglePeekSettingsModal')
+    },
+    setStorageError ({ commit }, value) {
+      commit('setStorageError', value)
     }
   }
 }

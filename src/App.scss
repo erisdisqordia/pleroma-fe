@@ -806,6 +806,15 @@ nav {
   }
 }
 
+.storage-error-notice {
+  text-align: center;
+  i {
+    cursor: pointer;
+    color: $fallback--text;
+    color: var(--alertErrorText, $fallback--text);
+  }
+}
+
 .button-icon {
   font-size: 1.2em;
 }

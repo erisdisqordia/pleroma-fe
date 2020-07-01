@@ -31,8 +31,11 @@ const fetchAndUpdate = ({ store, credentials, older = false }) => {
     const notifications = timelineData.data
     const readNotifsIds = notifications.filter(n => n.seen).map(n => n.id)
     if (readNotifsIds.length) {
-      args['since'] = Math.max(...readNotifsIds)
-      fetchNotifications({ store, args, older })
+      const possibleMax = Math.max(...readNotifsIds)
+      if (possibleMax !== timelineData.maxId) {
+        args['since'] = possibleMax
+        fetchNotifications({ store, args, older })
+      }
     }
 
     return result

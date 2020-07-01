@@ -62,7 +62,6 @@ const persistedStateOptions = {
 };
 
 (async () => {
-  console.log('before perse state')
   let persistedState
   let storageError = 'none'
   try {

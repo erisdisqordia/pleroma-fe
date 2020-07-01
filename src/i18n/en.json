@@ -617,6 +617,7 @@
     "no_retweet_hint": "Post is marked as followers-only or direct and cannot be repeated",
     "repeated": "repeated",
     "show_new": "Show new",
+    "reload": "Reload",
     "up_to_date": "Up-to-date",
     "no_more_statuses": "No more statuses",
     "no_statuses": "No statuses"

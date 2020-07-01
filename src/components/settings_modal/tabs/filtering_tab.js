@@ -37,6 +37,9 @@ const FilteringTab = {
         })
       },
       deep: true
+    },
+    replyVisibility () {
+      this.$store.dispatch('queueFlushAll')
     }
   }
 }

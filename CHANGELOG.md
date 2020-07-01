@@ -38,6 +38,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fix status ellipsis menu being cut off in notifications column
 - Fixed autocomplete sometimes not returning the right user when there's already some results
 - Reply filtering options in Settings -> Filtering now work again using filtering on server
+- Don't show just blank-screen when cookies are disabled
 
 ## [2.0.3] - 2020-05-02
 ### Fixed

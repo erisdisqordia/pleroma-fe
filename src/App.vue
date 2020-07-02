@@ -102,16 +102,6 @@
       </div>
       <div class="main">
         <div
-          v-if="showStorageError"
-          class="alert error storage-error-notice"
-        >
-          {{ $t("errors.storage_unavailable") }}
-          <i
-            class="icon-cancel"
-            @click="hideStorageError"
-          />
-        </div>
-        <div
           v-if="!currentUser"
           class="login-hint panel panel-default"
         >
@@ -138,6 +128,7 @@
     <PostStatusModal />
     <SettingsModal />
     <portal-target name="modal" />
+    <GlobalNoticeList />
   </div>
 </template>
 

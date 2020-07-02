@@ -13,6 +13,7 @@ import MobilePostStatusButton from './components/mobile_post_status_button/mobil
 import MobileNav from './components/mobile_nav/mobile_nav.vue'
 import UserReportingModal from './components/user_reporting_modal/user_reporting_modal.vue'
 import PostStatusModal from './components/post_status_modal/post_status_modal.vue'
+import GlobalNoticeList from './components/global_notice_list/global_notice_list.vue'
 import { windowWidth } from './services/window_utils/window_utils'
 
 export default {
@@ -32,7 +33,8 @@ export default {
     MobileNav,
     SettingsModal,
     UserReportingModal,
-    PostStatusModal
+    PostStatusModal,
+    GlobalNoticeList
   },
   data: () => ({
     mobileActivePanel: 'timeline',
@@ -107,9 +109,6 @@ export default {
       return {
         'order': this.$store.state.instance.sidebarRight ? 99 : 0
       }
-    },
-    showStorageError () {
-      return this.$store.state.interface.storageError === 'show'
     }
   },
   methods: {
@@ -132,9 +131,6 @@ export default {
       if (changed) {
         this.$store.dispatch('setMobileLayout', mobileLayout)
       }
-    },
-    hideStorageError () {
-      this.$store.dispatch('setStorageError', 'hide')
     }
   }
 }

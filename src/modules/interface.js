@@ -8,14 +8,14 @@ const defaultState = {
     noticeClearTimeout: null,
     notificationPermission: null
   },
-  storageError: 'none',
   browserSupport: {
     cssFilter: window.CSS && window.CSS.supports && (
       window.CSS.supports('filter', 'drop-shadow(0 0)') ||
       window.CSS.supports('-webkit-filter', 'drop-shadow(0 0)')
     )
   },
-  mobileLayout: false
+  mobileLayout: false,
+  globalNotices: []
 }
 
 const interfaceMod = {
@@ -60,8 +60,11 @@ const interfaceMod = {
         state.settingsModalLoaded = true
       }
     },
-    setStorageError (state, value) {
-      state.storageError = value
+    pushGlobalNotice (state, notice) {
+      state.globalNotices.push(notice)
+    },
+    removeGlobalNotice (state, notice) {
+      state.globalNotices = state.globalNotices.filter(n => n !== notice)
     }
   },
   actions: {
@@ -86,8 +89,26 @@ const interfaceMod = {
     togglePeekSettingsModal ({ commit }) {
       commit('togglePeekSettingsModal')
     },
-    setStorageError ({ commit }, value) {
-      commit('setStorageError', value)
+    pushGlobalNotice (
+      { commit, dispatch },
+      {
+        messageKey,
+        messageArgs = {},
+        level = 'error',
+        timeout = 0
+      }) {
+      const notice = {
+        messageKey,
+        messageArgs,
+        level
+      }
+      if (timeout) {
+        setTimeout(() => dispatch('removeGlobalNotice', notice), timeout)
+      }
+      commit('pushGlobalNotice', notice)
+    },
+    removeGlobalNotice ({ commit }, notice) {
+      commit('removeGlobalNotice', notice)
     }
   }
 }

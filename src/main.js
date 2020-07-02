@@ -62,14 +62,14 @@ const persistedStateOptions = {
 };
 
 (async () => {
-  let persistedState
-  let storageError = 'none'
+  let storageError = false
+  const plugins = [pushNotifications]
   try {
-    persistedState = await createPersistedState(persistedStateOptions)
+    const persistedState = await createPersistedState(persistedStateOptions)
+    plugins.push(persistedState)
   } catch (e) {
     console.error(e)
-    storageError = 'show'
-    persistedState = _ => _
+    storageError = true
   }
   const store = new Vuex.Store({
     modules: {
@@ -93,11 +93,13 @@ const persistedStateOptions = {
       polls: pollsModule,
       postStatus: postStatusModule
     },
-    plugins: [persistedState, pushNotifications],
+    plugins,
     strict: false // Socket modifies itself, let's ignore this for now.
     // strict: process.env.NODE_ENV !== 'production'
   })
-  store.dispatch('setStorageError', storageError)
+  if (storageError) {
+    store.dispatch('pushGlobalNotice', { messageKey: 'errors.storage_unavailable', level: 'error' })
+  }
   afterStoreSetup({ store, i18n })
 })()
 

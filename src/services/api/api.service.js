@@ -498,7 +498,8 @@ const fetchTimeline = ({
   until = false,
   userId = false,
   tag = false,
-  withMuted = false
+  withMuted = false,
+  replyVisibility = 'all'
 }) => {
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
@@ -540,6 +541,9 @@ const fetchTimeline = ({
   }
   if (timeline !== 'favorites') {
     params.push(['with_muted', withMuted])
+  }
+  if (replyVisibility !== 'all') {
+    params.push(['reply_visibility', replyVisibility])
   }
 
   params.push(['limit', 20])

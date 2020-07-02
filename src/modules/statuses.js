@@ -515,6 +515,11 @@ export const mutations = {
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
   },
+  queueFlushAll (state) {
+    Object.keys(state.timelines).forEach((timeline) => {
+      state.timelines[timeline].flushMarker = state.timelines[timeline].maxId
+    })
+  },
   addRepeats (state, { id, rebloggedByUsers, currentUser }) {
     const newStatus = state.allStatusesObject[id]
     newStatus.rebloggedBy = rebloggedByUsers.filter(_ => _)
@@ -663,6 +668,9 @@ const statuses = {
     },
     queueFlush ({ rootState, commit }, { timeline, id }) {
       commit('queueFlush', { timeline, id })
+    },
+    queueFlushAll ({ rootState, commit }) {
+      commit('queueFlushAll')
     },
     markNotificationsAsSeen ({ rootState, commit }) {
       commit('markNotificationsAsSeen')

@@ -35,7 +35,7 @@ export const DEFAULT_OPACITY = {
   input: 0.5,
   faint: 0.5,
   underlay: 0.15,
-  alertPopup: 0.85
+  alertPopup: 0.95
 }
 
 /**  SUBJECT TO CHANGE IN THE FUTURE, this is all beta

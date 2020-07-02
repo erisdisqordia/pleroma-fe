@@ -106,6 +106,7 @@ const interfaceMod = {
         setTimeout(() => dispatch('removeGlobalNotice', notice), timeout)
       }
       commit('pushGlobalNotice', notice)
+      return notice
     },
     removeGlobalNotice ({ commit }, notice) {
       commit('removeGlobalNotice', notice)

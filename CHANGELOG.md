@@ -43,6 +43,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Clicking on non-image/video files no longer opens an empty modal
 - Audio files can now be played back in the frontend with hidden attachments
 - Videos are not cropped awkwardly in the uploads section anymore
+- Reply filtering options in Settings -> Filtering now work again using filtering on server
 
 ## [2.0.3] - 2020-05-02
 ### Fixed

@@ -1,9 +1,7 @@
 <template>
   <div :class="classes.root">
     <div :class="classes.header">
-      <div class="title">
-        {{ title }}
-      </div>
+      <TimelineMenu />
       <div
         v-if="timelineError"
         class="loadmore-error alert error"

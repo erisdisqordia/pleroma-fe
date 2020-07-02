@@ -1,6 +1,7 @@
 import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import Conversation from '../conversation/conversation.vue'
+import TimelineMenu from '../timeline_menu/timeline_menu.vue'
 import { throttle, keyBy } from 'lodash'
 
 export const getExcludedStatusIdsByPinning = (statuses, pinnedStatusIds) => {
@@ -34,6 +35,11 @@ const Timeline = {
       unfocused: false,
       bottomedOut: false
     }
+  },
+  components: {
+    Status,
+    Conversation,
+    TimelineMenu
   },
   computed: {
     timelineError () {
@@ -73,10 +79,6 @@ const Timeline = {
     pinnedStatusIdsObject () {
       return keyBy(this.pinnedStatusIds)
     }
-  },
-  components: {
-    Status,
-    Conversation
   },
   created () {
     const store = this.$store

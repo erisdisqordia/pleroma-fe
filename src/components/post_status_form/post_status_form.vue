@@ -374,7 +374,7 @@
   .media-upload-wrapper {
     margin-right: .2em;
     margin-bottom: .5em;
-    width: 260px;
+    width: 18em;
 
     .icon-cancel {
       display: inline-block;
@@ -391,11 +391,11 @@
 
     img, video {
       object-fit: contain;
-      max-height: 140px;
+      max-height: 10em;
     }
 
     .video {
-      max-height: 140px;
+      max-height: 10em;
     }
 
     input {

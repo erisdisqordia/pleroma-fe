@@ -137,7 +137,7 @@ const Timeline = {
         showImmediately: true,
         userId: this.userId,
         tag: this.tag
-      }).then(statuses => {
+      }).then(({ statuses }) => {
         store.commit('setLoading', { timeline: this.timelineName, value: false })
         if (statuses && statuses.length === 0) {
           this.bottomedOut = true

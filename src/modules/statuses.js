@@ -62,7 +62,8 @@ export const defaultState = () => ({
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
     tag: emptyTl(),
-    dms: emptyTl()
+    dms: emptyTl(),
+    bookmarks: emptyTl()
   }
 })
 
@@ -163,8 +164,7 @@ const removeStatusFromGlobalStorage = (state, status) => {
   }
 }
 
-const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {},
-  noIdUpdate = false, userId }) => {
+const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false, userId, pagination = {} }) => {
   // Sanity check
   if (!isArray(statuses)) {
     return false
@@ -173,8 +173,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const allStatuses = state.allStatuses
   const timelineObject = state.timelines[timeline]
 
-  const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
-  const minNew = statuses.length > 0 ? minBy(statuses, 'id').id : 0
+  // Mismatch between API pagination and our internal minId/maxId tracking systems:
+  // pagination.maxId is the oldest of the returned statuses when fetching older,
+  // and pagination.minId is the newest when fetching newer. The names come directly
+  // from the arguments they're supposed to be passed as for the next fetch.
+  const minNew = pagination.maxId || (statuses.length > 0 ? minBy(statuses, 'id').id : 0)
+  const maxNew = pagination.minId || (statuses.length > 0 ? maxBy(statuses, 'id').id : 0)
+
   const newer = timeline && (maxNew > timelineObject.maxId || timelineObject.maxId === 0) && statuses.length > 0
   const older = timeline && (minNew < timelineObject.minId || timelineObject.minId === 0) && statuses.length > 0
 
@@ -315,7 +320,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   })
 
   // Keep the visible statuses sorted
-  if (timeline) {
+  if (timeline && !(timeline === 'bookmarks')) {
     sortTimeline(timelineObject)
   }
 }
@@ -463,6 +468,14 @@ export const mutations = {
       newStatus.rebloggedBy.push(user)
     }
   },
+  setBookmarked (state, { status, value }) {
+    const newStatus = state.allStatusesObject[status.id]
+    newStatus.bookmarked = value
+  },
+  setBookmarkedConfirm (state, { status }) {
+    const newStatus = state.allStatusesObject[status.id]
+    newStatus.bookmarked = status.bookmarked
+  },
   setDeleted (state, { status }) {
     const newStatus = state.allStatusesObject[status.id]
     newStatus.deleted = true
@@ -590,8 +603,8 @@ export const mutations = {
 const statuses = {
   state: defaultState(),
   actions: {
-    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
-      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })
+    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId, pagination }) {
+      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId, pagination })
     },
     addNewNotifications ({ rootState, commit, dispatch, rootGetters }, { notifications, older }) {
       commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older, rootGetters })
@@ -665,6 +678,20 @@ const statuses = {
       commit('setRetweeted', { status, value: false })
       rootState.api.backendInteractor.unretweet({ id: status.id })
         .then(status => commit('setRetweetedConfirm', { status, user: rootState.users.currentUser }))
+    },
+    bookmark ({ rootState, commit }, status) {
+      commit('setBookmarked', { status, value: true })
+      rootState.api.backendInteractor.bookmarkStatus({ id: status.id })
+        .then(status => {
+          commit('setBookmarkedConfirm', { status })
+        })
+    },
+    unbookmark ({ rootState, commit }, status) {
+      commit('setBookmarked', { status, value: false })
+      rootState.api.backendInteractor.unbookmarkStatus({ id: status.id })
+        .then(status => {
+          commit('setBookmarkedConfirm', { status })
+        })
     },
     queueFlush ({ rootState, commit }, { timeline, id }) {
       commit('queueFlush', { timeline, id })

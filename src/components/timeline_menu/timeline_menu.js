@@ -5,9 +5,23 @@ const TimelineMenu = {
   components: {
     Popover
   },
+  data () {
+    return {
+      isOpen: false
+    }
+  },
   created () {
     if (this.currentUser && this.currentUser.locked) {
       this.$store.dispatch('startFetchingFollowRequests')
+    }
+  },
+  methods: {
+    openMenu () {
+      // Tried using $nextTick, but the animation wouldn't
+      // play, I assume it played too quickly
+      setTimeout(() => {
+        this.isOpen = true
+      }, 1)
     }
   },
   computed: {

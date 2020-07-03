@@ -1,7 +1,7 @@
 <template>
   <Popover
     trigger="hover"
-    popover-class="status-popover"
+    popover-class="popover-default status-popover"
     :bound-to="{ x: 'container' }"
     @show="enter"
   >

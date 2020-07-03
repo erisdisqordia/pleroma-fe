@@ -112,7 +112,7 @@
             {{ $t("login.hint") }}
           </router-link>
         </div>
-        <transition name="fade">
+        <transition>
           <router-view />
         </transition>
       </div>

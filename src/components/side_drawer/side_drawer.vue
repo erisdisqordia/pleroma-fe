@@ -43,30 +43,27 @@
           v-if="currentUser"
           @click="toggleDrawer"
         >
-          <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
-            <i class="button-icon icon-mail-alt" /> {{ $t("nav.dms") }}
-          </router-link>
-        </li>
-        <li
-          v-if="currentUser"
-          @click="toggleDrawer"
-        >
-          <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
-            <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
-          </router-link>
-        </li>
-      </ul>
-      <ul>
-        <li
-          v-if="currentUser"
-          @click="toggleDrawer"
-        >
           <router-link :to="{ name: 'friends' }">
             <i class="button-icon icon-home-2" /> {{ $t("nav.timeline") }}
           </router-link>
         </li>
         <li
-          v-if="currentUser && currentUser.locked"
+          v-else
+          @click="toggleDrawer"
+        >
+          <router-link :to="{ name: 'public-timeline' }">
+            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
+          </router-link>
+        </li>
+      </ul>
+      <ul v-if="currentUser">
+        <li @click="toggleDrawer">
+          <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
+            <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
+          </router-link>
+        </li>
+        <li
+          v-if="currentUser.locked"
           @click="toggleDrawer"
         >
           <router-link to="/friend-requests">
@@ -80,23 +77,7 @@
           </router-link>
         </li>
         <li
-          v-if="currentUser || !privateMode"
-          @click="toggleDrawer"
-        >
-          <router-link to="/main/public">
-            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
-          </router-link>
-        </li>
-        <li
-          v-if="federating && (currentUser || !privateMode)"
-          @click="toggleDrawer"
-        >
-          <router-link to="/main/all">
-            <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
-          </router-link>
-        </li>
-        <li
-          v-if="currentUser && chat"
+          v-if="chat"
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'chat' }">

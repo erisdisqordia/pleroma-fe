@@ -104,4 +104,15 @@
     opacity: 1;
   }
 }
+
+.timeline-heading {
+  max-width: 100%;
+  flex-wrap: nowrap;
+  .loadmore-button {
+    flex-shrink: 0;
+  }
+  .loadmore-text {
+    flex-shrink: 0;
+  }
+}
 </style>

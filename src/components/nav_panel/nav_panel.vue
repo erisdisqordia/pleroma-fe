@@ -3,7 +3,10 @@
     <div class="panel panel-default">
       <ul>
         <li v-if="currentUser">
-          <router-link :to="{ name: 'friends' }">
+          <router-link
+            :to="{ name: 'friends' }"
+            :class="onTimelineRoute && 'router-link-active'"
+          >
             <i class="button-icon icon-home-2" /> {{ $t("nav.timeline") }}
           </router-link>
         </li>

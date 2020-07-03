@@ -120,6 +120,7 @@
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
     "twkn": "The Whole Known Network",
+    "bookmarks": "Bookmarks",
     "user_search": "User Search",
     "search": "Search",
     "who_to_follow": "Who to follow",
@@ -629,6 +630,8 @@
     "pin": "Pin on profile",
     "unpin": "Unpin from profile",
     "pinned": "Pinned",
+    "bookmark": "Bookmark",
+    "unbookmark": "Unbookmark",
     "delete_confirm": "Do you really want to delete this status?",
     "reply_to": "Reply to",
     "replies_list": "Replies:",
@@ -724,7 +727,8 @@
     "add_reaction": "Add Reaction",
     "user_settings": "User Settings",
     "accept_follow_request": "Accept follow request",
-    "reject_follow_request": "Reject follow request"
+    "reject_follow_request": "Reject follow request",
+    "bookmark": "Bookmark"
   },
   "upload": {
     "error": {

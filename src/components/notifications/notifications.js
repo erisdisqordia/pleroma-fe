@@ -30,7 +30,7 @@ const Notifications = {
   created () {
     const store = this.$store
     const credentials = store.state.users.currentUser.credentials
-    notificationsFetcher.fetchAndUpdate({ store: this.$store, credentials })
+    notificationsFetcher.fetchAndUpdate({ store, credentials })
   },
   computed: {
     mainClass () {

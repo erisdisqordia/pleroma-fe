@@ -21,7 +21,7 @@
             class="preview-toggle faint"
             @click.stop.prevent="togglePreview"
           >
-            {{ $t('status.preview') }}
+            {{ $t('post_status.preview') }}
             <i
               class="icon-down-open"
               :style="{ transform: showPreview ? 'rotate(0deg)' : 'rotate(-90deg)' }"

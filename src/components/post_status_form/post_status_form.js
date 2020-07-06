@@ -192,7 +192,7 @@ const PostStatusForm = {
       if (this.posting) { return }
       if (this.submitDisabled) { return }
       if (this.emptyStatus) {
-        this.error = 'Cannot post an empty status with no files'
+        this.error = this.$t('post_status.empty_status_error')
         return
       }
 
@@ -240,7 +240,7 @@ const PostStatusForm = {
     },
     previewStatus () {
       if (this.emptyStatus && this.newStatus.spoilerText.trim() === '') {
-        this.preview = { error: this.$t('status.preview_empty') }
+        this.preview = { error: this.$t('post_status.preview_empty') }
         this.previewLoading = false
         return
       }

@@ -176,12 +176,8 @@ const PostStatusForm = {
     ...mapGetters(['mergedConfig'])
   },
   watch: {
-    'newStatus.contentType': function (newType) {
-      if (newType === 'text/plain') {
-        this.closePreview()
-      } else if (this.preview) {
-        this.previewStatus(this.newStatus)
-      }
+    'newStatus.contentType': function () {
+      this.autoPreview()
     },
     'newStatus.spoilerText': function () {
       this.autoPreview()

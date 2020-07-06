@@ -1,6 +1,7 @@
 <template>
   <div
     v-if="usePlaceholder"
+    :class="{ 'fullwidth': fullwidth }"
     @click="openModal"
   >
     <a

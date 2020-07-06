@@ -60,7 +60,8 @@ const Attachment = {
       return this.size === 'small'
     },
     fullwidth () {
-      return this.type === 'html' || this.type === 'audio'
+      if (this.size === 'hide') return false
+      return this.type === 'html' || this.type === 'audio' || this.type === 'unknown'
     },
     useModal () {
       const modalTypes = this.size === 'hide' ? ['image', 'video', 'audio']

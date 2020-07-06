@@ -2,6 +2,7 @@ import PublicTimeline from 'components/public_timeline/public_timeline.vue'
 import PublicAndExternalTimeline from 'components/public_and_external_timeline/public_and_external_timeline.vue'
 import FriendsTimeline from 'components/friends_timeline/friends_timeline.vue'
 import TagTimeline from 'components/tag_timeline/tag_timeline.vue'
+import BookmarkTimeline from 'components/bookmark_timeline/bookmark_timeline.vue'
 import ConversationPage from 'components/conversation-page/conversation-page.vue'
 import Interactions from 'components/interactions/interactions.vue'
 import DMs from 'components/dm_timeline/dm_timeline.vue'
@@ -40,6 +41,7 @@ export default (store) => {
     { name: 'public-timeline', path: '/main/public', component: PublicTimeline },
     { name: 'friends', path: '/main/friends', component: FriendsTimeline, beforeEnter: validateAuthenticatedRoute },
     { name: 'tag-timeline', path: '/tag/:tag', component: TagTimeline },
+    { name: 'bookmarks', path: '/bookmarks', component: BookmarkTimeline },
     { name: 'conversation', path: '/notice/:id', component: ConversationPage, meta: { dontScroll: true } },
     { name: 'remote-user-profile-acct',
       path: '/remote-users/(@?):username([^/@]+)@:hostname([^/@]+)',

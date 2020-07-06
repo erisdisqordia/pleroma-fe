@@ -41,6 +41,22 @@
           <i class="icon-pin" /><span>{{ $t("status.unpin") }}</span>
         </button>
         <button
+          v-if="!status.bookmarked"
+          class="dropdown-item dropdown-item-icon"
+          @click.prevent="bookmarkStatus"
+          @click="close"
+        >
+          <i class="icon-bookmark-empty" /><span>{{ $t("status.bookmark") }}</span>
+        </button>
+        <button
+          v-if="status.bookmarked"
+          class="dropdown-item dropdown-item-icon"
+          @click.prevent="unbookmarkStatus"
+          @click="close"
+        >
+          <i class="icon-bookmark" /><span>{{ $t("status.unbookmark") }}</span>
+        </button>
+        <button
           v-if="canDelete"
           class="dropdown-item dropdown-item-icon"
           @click.prevent="deleteStatus"

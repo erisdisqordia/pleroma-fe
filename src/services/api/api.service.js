@@ -1,5 +1,5 @@
 import { each, map, concat, last, get } from 'lodash'
-import { parseStatus, parseUser, parseNotification, parseAttachment } from '../entity_normalizer/entity_normalizer.service.js'
+import { parseStatus, parseUser, parseNotification, parseAttachment, parseLinkHeaderPagination } from '../entity_normalizer/entity_normalizer.service.js'
 import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */
@@ -50,6 +50,7 @@ const MASTODON_USER_URL = '/api/v1/accounts'
 const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
 const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
 const MASTODON_TAG_TIMELINE_URL = tag => `/api/v1/timelines/tag/${tag}`
+const MASTODON_BOOKMARK_TIMELINE_URL = '/api/v1/bookmarks'
 const MASTODON_USER_BLOCKS_URL = '/api/v1/blocks/'
 const MASTODON_USER_MUTES_URL = '/api/v1/mutes/'
 const MASTODON_BLOCK_USER_URL = id => `/api/v1/accounts/${id}/block`
@@ -58,6 +59,8 @@ const MASTODON_MUTE_USER_URL = id => `/api/v1/accounts/${id}/mute`
 const MASTODON_UNMUTE_USER_URL = id => `/api/v1/accounts/${id}/unmute`
 const MASTODON_SUBSCRIBE_USER = id => `/api/v1/pleroma/accounts/${id}/subscribe`
 const MASTODON_UNSUBSCRIBE_USER = id => `/api/v1/pleroma/accounts/${id}/unsubscribe`
+const MASTODON_BOOKMARK_STATUS_URL = id => `/api/v1/statuses/${id}/bookmark`
+const MASTODON_UNBOOKMARK_STATUS_URL = id => `/api/v1/statuses/${id}/unbookmark`
 const MASTODON_POST_STATUS_URL = '/api/v1/statuses'
 const MASTODON_MEDIA_UPLOAD_URL = '/api/v1/media'
 const MASTODON_VOTE_URL = id => `/api/v1/polls/${id}/votes`
@@ -498,7 +501,8 @@ const fetchTimeline = ({
   until = false,
   userId = false,
   tag = false,
-  withMuted = false
+  withMuted = false,
+  replyVisibility = 'all'
 }) => {
   const timelineUrls = {
     public: MASTODON_PUBLIC_TIMELINE,
@@ -509,7 +513,8 @@ const fetchTimeline = ({
     user: MASTODON_USER_TIMELINE_URL,
     media: MASTODON_USER_TIMELINE_URL,
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
-    tag: MASTODON_TAG_TIMELINE_URL
+    tag: MASTODON_TAG_TIMELINE_URL,
+    bookmarks: MASTODON_BOOKMARK_TIMELINE_URL
   }
   const isNotifications = timeline === 'notifications'
   const params = []
@@ -538,8 +543,11 @@ const fetchTimeline = ({
   if (timeline === 'public' || timeline === 'publicAndExternal') {
     params.push(['only_media', false])
   }
-  if (timeline !== 'favorites') {
+  if (timeline !== 'favorites' && timeline !== 'bookmarks') {
     params.push(['with_muted', withMuted])
+  }
+  if (replyVisibility !== 'all') {
+    params.push(['reply_visibility', replyVisibility])
   }
 
   params.push(['limit', 20])
@@ -548,16 +556,20 @@ const fetchTimeline = ({
   url += `?${queryString}`
   let status = ''
   let statusText = ''
+  let pagination = {}
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => {
       status = data.status
       statusText = data.statusText
+      pagination = parseLinkHeaderPagination(data.headers.get('Link'), {
+        flakeId: timeline !== 'bookmarks' && timeline !== 'notifications'
+      })
       return data
     })
     .then((data) => data.json())
     .then((data) => {
       if (!data.error) {
-        return data.map(isNotifications ? parseNotification : parseStatus)
+        return { data: data.map(isNotifications ? parseNotification : parseStatus), pagination }
       } else {
         data.status = status
         data.statusText = statusText
@@ -606,6 +618,22 @@ const retweet = ({ id, credentials }) => {
 const unretweet = ({ id, credentials }) => {
   return promisedRequest({ url: MASTODON_UNRETWEET_URL(id), method: 'POST', credentials })
     .then((data) => parseStatus(data))
+}
+
+const bookmarkStatus = ({ id, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_BOOKMARK_STATUS_URL(id),
+    headers: authHeaders(credentials),
+    method: 'POST'
+  })
+}
+
+const unbookmarkStatus = ({ id, credentials }) => {
+  return promisedRequest({
+    url: MASTODON_UNBOOKMARK_STATUS_URL(id),
+    headers: authHeaders(credentials),
+    method: 'POST'
+  })
 }
 
 const postStatus = ({
@@ -1144,6 +1172,8 @@ const apiService = {
   unfavorite,
   retweet,
   unretweet,
+  bookmarkStatus,
+  unbookmarkStatus,
   postStatus,
   deleteStatus,
   uploadMedia,

@@ -138,9 +138,6 @@ const api = {
       if (!fetcher) return
       store.commit('removeFetcher', { fetcherName: 'notifications', fetcher })
     },
-    fetchAndUpdateNotifications (store) {
-      store.state.backendInteractor.fetchAndUpdateNotifications({ store })
-    },
 
     // Follow requests
     startFetchingFollowRequests (store) {

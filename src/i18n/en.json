@@ -120,6 +120,7 @@
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
     "twkn": "The Whole Known Network",
+    "bookmarks": "Bookmarks",
     "user_search": "User Search",
     "search": "Search",
     "who_to_follow": "Who to follow",
@@ -162,6 +163,9 @@
     "unicode": "Unicode emoji",
     "load_all_hint": "Loaded first {saneAmount} emoji, loading all emoji may cause performance issues.",
     "load_all": "Loading all {emojiAmount} emoji"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma could not access browser storage. Your login or your local settings won't be saved and you might encounter unexpected issues. Try enabling cookies."
   },
   "interactions": {
     "favs_repeats": "Repeats and Favorites",
@@ -617,6 +621,7 @@
     "no_retweet_hint": "Post is marked as followers-only or direct and cannot be repeated",
     "repeated": "repeated",
     "show_new": "Show new",
+    "reload": "Reload",
     "up_to_date": "Up-to-date",
     "no_more_statuses": "No more statuses",
     "no_statuses": "No statuses"
@@ -628,6 +633,8 @@
     "pin": "Pin on profile",
     "unpin": "Unpin from profile",
     "pinned": "Pinned",
+    "bookmark": "Bookmark",
+    "unbookmark": "Unbookmark",
     "delete_confirm": "Do you really want to delete this status?",
     "reply_to": "Reply to",
     "replies_list": "Replies:",
@@ -638,7 +645,11 @@
     "thread_muted": "Thread muted",
     "thread_muted_and_words": ", has words:",
     "preview": "Preview",
-    "preview_empty": "Empty"
+    "preview_empty": "Empty",
+    "show_full_subject": "Show full subject",
+    "hide_full_subject": "Hide full subject",
+    "show_content": "Show content",
+    "hide_content": "Hide content"
   },
   "user_card": {
     "approve": "Approve",
@@ -721,7 +732,8 @@
     "add_reaction": "Add Reaction",
     "user_settings": "User Settings",
     "accept_follow_request": "Accept follow request",
-    "reject_follow_request": "Reject follow request"
+    "reject_follow_request": "Reject follow request",
+    "bookmark": "Bookmark"
   },
   "upload": {
     "error": {

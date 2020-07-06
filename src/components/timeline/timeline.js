@@ -45,11 +45,15 @@ const Timeline = {
     newStatusCount () {
       return this.timeline.newStatusCount
     },
-    newStatusCountStr () {
+    showLoadButton () {
+      if (this.timelineError || this.errorData) return false
+      return this.timeline.newStatusCount > 0 || this.timeline.flushMarker !== 0
+    },
+    loadButtonString () {
       if (this.timeline.flushMarker !== 0) {
-        return ''
+        return this.$t('timeline.reload')
       } else {
-        return ` (${this.newStatusCount})`
+        return `${this.$t('timeline.show_new')} (${this.newStatusCount})`
       }
     },
     classes () {
@@ -112,8 +116,6 @@ const Timeline = {
       if (e.key === '.') this.showNewStatuses()
     },
     showNewStatuses () {
-      if (this.newStatusCount === 0) return
-
       if (this.timeline.flushMarker !== 0) {
         this.$store.commit('clearTimeline', { timeline: this.timelineName, excludeUserId: true })
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
@@ -135,7 +137,7 @@ const Timeline = {
         showImmediately: true,
         userId: this.userId,
         tag: this.tag
-      }).then(statuses => {
+      }).then(({ statuses }) => {
         store.commit('setLoading', { timeline: this.timelineName, value: false })
         if (statuses && statuses.length === 0) {
           this.bottomedOut = true

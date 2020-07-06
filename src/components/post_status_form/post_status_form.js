@@ -171,7 +171,7 @@ const PostStatusForm = {
       return !!this.preview || this.previewLoading
     },
     emptyStatus () {
-      return this.newStatus.status === '' && this.newStatus.files.length === 0
+      return this.newStatus.status.trim() === '' && this.newStatus.files.length === 0
     },
     ...mapGetters(['mergedConfig'])
   },
@@ -182,6 +182,9 @@ const PostStatusForm = {
       } else if (this.preview) {
         this.previewStatus(this.newStatus)
       }
+    },
+    'newStatus.spoilerText': function () {
+      this.autoPreview()
     }
   },
   methods: {
@@ -236,7 +239,7 @@ const PostStatusForm = {
       })
     },
     previewStatus () {
-      if (this.emptyStatus) {
+      if (this.emptyStatus && this.newStatus.spoilerText.trim() === '') {
         this.preview = { error: this.$t('status.preview_empty') }
         this.previewLoading = false
         return
@@ -269,7 +272,7 @@ const PostStatusForm = {
         this.previewLoading = false
       })
     },
-    debouncePreviewStatus: debounce(function () { this.previewStatus() }, 750),
+    debouncePreviewStatus: debounce(function () { this.previewStatus() }, 500),
     autoPreview () {
       if (!this.preview) return
       this.previewLoading = true

@@ -63,10 +63,11 @@ const Attachment = {
       return this.type === 'html' || this.type === 'audio'
     },
     useModal () {
-      return this.size === 'hide' ? ['image', 'video', 'audio']
+      const modalTypes = this.size === 'hide' ? ['image', 'video', 'audio']
         : this.mergedConfig.playVideosInModal
           ? ['image', 'video']
           : ['image']
+      return modalTypes.includes(this.type)
     },
     ...mapGetters(['mergedConfig'])
   },

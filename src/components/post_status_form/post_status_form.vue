@@ -69,6 +69,44 @@
           <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
           <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
         </p>
+        <div class="preview-heading faint">
+          <a
+            class="preview-toggle faint"
+            @click.stop.prevent="togglePreview"
+          >
+            {{ $t('post_status.preview') }}
+            <i
+              class="icon-down-open"
+              :style="{ transform: showPreview ? 'rotate(0deg)' : 'rotate(-90deg)' }"
+            />
+          </a>
+          <i
+            v-show="previewLoading"
+            class="icon-spin3 animate-spin"
+          />
+        </div>
+        <div
+          v-if="showPreview"
+          class="preview-container"
+        >
+          <div
+            v-if="!preview"
+            class="preview-status"
+          >
+            {{ $t('general.loading') }}
+          </div>
+          <div
+            v-else-if="preview.error"
+            class="preview-status preview-error"
+          >
+            {{ preview.error }}
+          </div>
+          <StatusContent
+            v-else
+            :status="preview"
+            class="preview-status"
+          />
+        </div>
         <EmojiInput
           v-if="newStatus.spoilerText || alwaysShowSubject"
           v-model="newStatus.spoilerText"
@@ -77,7 +115,6 @@
           class="form-control"
         >
           <input
-
             v-model="newStatus.spoilerText"
             type="text"
             :placeholder="$t('post_status.content_warning')"
@@ -303,14 +340,6 @@
 }
 
 .post-status-form {
-  .visibility-tray {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 5px;
-  }
-}
-
-.post-status-form {
   .form-bottom {
     display: flex;
     justify-content: space-between;
@@ -336,11 +365,59 @@
     max-width: 10em;
   }
 
+  .preview-heading {
+    display: flex;
+    width: 100%;
+
+    .icon-spin3 {
+      margin-left: auto;
+    }
+  }
+
+  .preview-toggle {
+    display: flex;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .icon-down-open {
+    transition: transform 0.1s;
+  }
+
+  .preview-container {
+    margin-bottom: 1em;
+  }
+
+  .preview-error {
+    font-style: italic;
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+  }
+
+  .preview-status {
+    border: 1px solid $fallback--border;
+    border: 1px solid var(--border, $fallback--border);
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    padding: 0.5em;
+    margin: 0;
+    line-height: 1.4em;
+  }
+
   .text-format {
     .only-format {
       color: $fallback--faint;
       color: var(--faint, $fallback--faint);
     }
+  }
+
+  .visibility-tray {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
   }
 
   .media-upload-icon, .poll-icon, .emoji-icon {
@@ -408,7 +485,7 @@
     flex-direction: column;
   }
 
-  .attachments {
+  .media-upload-wrapper .attachments {
     padding: 0 0.5em;
 
     .attachment {

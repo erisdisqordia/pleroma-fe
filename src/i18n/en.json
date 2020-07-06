@@ -189,6 +189,9 @@
     "direct_warning_to_all": "This post will be visible to all the mentioned users.",
     "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
+    "preview": "Preview",
+    "preview_empty": "Empty",
+    "empty_status_error": "Can't post an empty status with no files",
     "scope_notice": {
       "public": "This post will be visible to everyone",
       "private": "This post will be visible to your followers only",

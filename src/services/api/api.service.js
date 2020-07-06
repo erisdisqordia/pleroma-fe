@@ -645,7 +645,8 @@ const postStatus = ({
   poll,
   mediaIds = [],
   inReplyToStatusId,
-  contentType
+  contentType,
+  preview
 }) => {
   const form = new FormData()
   const pollOptions = poll.options || []
@@ -675,6 +676,9 @@ const postStatus = ({
   if (inReplyToStatusId) {
     form.append('in_reply_to_id', inReplyToStatusId)
   }
+  if (preview) {
+    form.append('preview', 'true')
+  }
 
   return fetch(MASTODON_POST_STATUS_URL, {
     body: form,
@@ -682,13 +686,7 @@ const postStatus = ({
     headers: authHeaders(credentials)
   })
     .then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        return {
-          error: response
-        }
-      }
+      return response.json()
     })
     .then((data) => data.error ? data : parseStatus(data))
 }

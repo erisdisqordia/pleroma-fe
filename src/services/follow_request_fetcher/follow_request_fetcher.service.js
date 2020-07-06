@@ -4,6 +4,7 @@ const fetchAndUpdate = ({ store, credentials }) => {
   return apiService.fetchFollowRequests({ credentials })
     .then((requests) => {
       store.commit('setFollowRequests', requests)
+      store.commit('addNewUsers', requests)
     }, () => {})
     .catch(() => {})
 }

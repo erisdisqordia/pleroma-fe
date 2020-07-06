@@ -45,7 +45,8 @@
     "timeline": "Лента",
     "twkn": "Федеративная лента",
     "search": "Поиск",
-    "friend_requests": "Запросы на чтение"
+    "friend_requests": "Запросы на чтение",
+    "bookmarks": "Закладки"
   },
   "notifications": {
     "broken_favorite": "Неизвестный статус, ищем...",
@@ -365,6 +366,10 @@
     "repeated": "повторил(а)",
     "show_new": "Показать новые",
     "up_to_date": "Обновлено"
+  },
+  "status": {
+    "bookmark": "В закладки",
+    "unbookmark": "Удалить из закладок"
   },
   "user_card": {
     "block": "Заблокировать",

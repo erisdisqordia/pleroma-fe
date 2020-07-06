@@ -42,7 +42,7 @@ const Attachment = {
       if (this.type === 'image') return 'icon-picture'
       if (this.type === 'video') return 'icon-video'
       if (this.type === 'audio') return 'icon-music'
-      return 'icon-link'
+      return 'icon-doc'
     },
     referrerpolicy () {
       return this.$store.state.instance.mediaProxyAvailable ? '' : 'no-referrer'

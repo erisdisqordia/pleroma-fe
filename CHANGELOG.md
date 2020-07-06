@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - 'Bot' settings option and badge
 - Added profile meta data fields that can be set in profile settings
 - Descriptions can be set on uploaded files before posting
+- When a post is a reply to an unavailable post, the 'Reply to'-text has a strike-through style
 
 ### Changed
 - Registration page no longer requires email if the server is configured not to require it
@@ -44,6 +45,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Audio files can now be played back in the frontend with hidden attachments
 - Videos are not cropped awkwardly in the uploads section anymore
 - Reply filtering options in Settings -> Filtering now work again using filtering on server
+- Don't show just blank-screen when cookies are disabled
 
 ## [2.0.3] - 2020-05-02
 ### Fixed
@@ -105,6 +107,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Ability to change user's email
 - About page
 - Added remote user redirect
+- Bookmarks
 ### Changed
 - changed the way fading effects for user profile/long statuses works, now uses css-mask instead of gradient background hacks which weren't exactly compatible with semi-transparent themes
 ### Fixed

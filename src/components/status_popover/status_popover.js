@@ -22,6 +22,10 @@ const StatusPopover = {
   methods: {
     enter () {
       if (!this.status) {
+        if (!this.statusId) {
+          this.error = true
+          return
+        }
         this.$store.dispatch('fetchStatus', this.statusId)
           .then(data => (this.error = false))
           .catch(e => (this.error = true))

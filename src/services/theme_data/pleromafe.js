@@ -34,7 +34,8 @@ export const DEFAULT_OPACITY = {
   alert: 0.5,
   input: 0.5,
   faint: 0.5,
-  underlay: 0.15
+  underlay: 0.15,
+  alertPopup: 0.95
 }
 
 /**  SUBJECT TO CHANGE IN THE FUTURE, this is all beta
@@ -624,6 +625,39 @@ export const SLOT_INHERITANCE = {
     depends: ['panelText'],
     layer: 'alertPanel',
     variant: 'alertNeutral',
+    textColor: true
+  },
+
+  alertPopupError: {
+    depends: ['alertError'],
+    opacity: 'alertPopup'
+  },
+  alertPopupErrorText: {
+    depends: ['alertErrorText'],
+    layer: 'popover',
+    variant: 'alertPopupError',
+    textColor: true
+  },
+
+  alertPopupWarning: {
+    depends: ['alertWarning'],
+    opacity: 'alertPopup'
+  },
+  alertPopupWarningText: {
+    depends: ['alertWarningText'],
+    layer: 'popover',
+    variant: 'alertPopupWarning',
+    textColor: true
+  },
+
+  alertPopupNeutral: {
+    depends: ['alertNeutral'],
+    opacity: 'alertPopup'
+  },
+  alertPopupNeutralText: {
+    depends: ['alertNeutralText'],
+    layer: 'popover',
+    variant: 'alertPopupNeutral',
     textColor: true
   },
 

@@ -55,12 +55,20 @@
       >
         {{ $t("status.show_content") }}
         <span
-          v-if="hasImageAttachments"
+          v-if="attachmentTypes.includes('image')"
           class="icon-picture"
         />
         <span
-          v-if="hasVideoAttachments"
+          v-if="attachmentTypes.includes('video')"
           class="icon-video"
+        />
+        <span
+          v-if="attachmentTypes.includes('audio')"
+          class="icon-music"
+        />
+        <span
+          v-if="attachmentTypes.includes('unknown')"
+          class="icon-doc"
         />
         <span
           v-if="status.card"

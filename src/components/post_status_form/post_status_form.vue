@@ -16,44 +16,6 @@
         @drop.stop="fileDrop"
       />
       <div class="form-group">
-        <div class="preview-heading faint">
-          <a
-            class="preview-toggle faint"
-            @click.stop.prevent="togglePreview"
-          >
-            {{ $t('post_status.preview') }}
-            <i
-              class="icon-down-open"
-              :style="{ transform: showPreview ? 'rotate(0deg)' : 'rotate(-90deg)' }"
-            />
-          </a>
-          <i
-            v-show="previewLoading"
-            class="icon-spin3 animate-spin"
-          />
-        </div>
-        <div
-          v-if="showPreview"
-          class="preview-container"
-        >
-          <div
-            v-if="!preview"
-            class="preview-status"
-          >
-            {{ $t('general.loading') }}
-          </div>
-          <div
-            v-else-if="preview.error"
-            class="preview-status preview-error"
-          >
-            {{ preview.error }}
-          </div>
-          <StatusContent
-            v-else
-            :status="preview"
-            class="preview-status"
-          />
-        </div>
         <i18n
           v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
           path="post_status.account_not_locked_warning"
@@ -107,6 +69,44 @@
           <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
           <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
         </p>
+        <div class="preview-heading faint">
+          <a
+            class="preview-toggle faint"
+            @click.stop.prevent="togglePreview"
+          >
+            {{ $t('post_status.preview') }}
+            <i
+              class="icon-down-open"
+              :style="{ transform: showPreview ? 'rotate(0deg)' : 'rotate(-90deg)' }"
+            />
+          </a>
+          <i
+            v-show="previewLoading"
+            class="icon-spin3 animate-spin"
+          />
+        </div>
+        <div
+          v-if="showPreview"
+          class="preview-container"
+        >
+          <div
+            v-if="!preview"
+            class="preview-status"
+          >
+            {{ $t('general.loading') }}
+          </div>
+          <div
+            v-else-if="preview.error"
+            class="preview-status preview-error"
+          >
+            {{ preview.error }}
+          </div>
+          <StatusContent
+            v-else
+            :status="preview"
+            class="preview-status"
+          />
+        </div>
         <EmojiInput
           v-if="newStatus.spoilerText || alwaysShowSubject"
           v-model="newStatus.spoilerText"

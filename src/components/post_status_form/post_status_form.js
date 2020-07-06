@@ -227,7 +227,7 @@ const PostStatusForm = {
           el.style.height = 'auto'
           el.style.height = undefined
           this.error = null
-          this.closePreview()
+          this.previewStatus()
         } else {
           this.error = data.error
         }

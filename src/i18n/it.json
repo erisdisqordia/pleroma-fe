@@ -34,7 +34,8 @@
     "user_search": "Ricerca utenti",
     "search": "Ricerca",
     "who_to_follow": "Chi seguire",
-    "preferences": "Preferenze"
+    "preferences": "Preferenze",
+    "bookmarks": "Segnalibri"
   },
   "notifications": {
     "followed_you": "ti segue",
@@ -271,10 +272,34 @@
         "shadow_id": "Ombra numero {value}",
         "override": "Sostituisci",
         "component": "Componente",
-        "_tab_label": "Luci ed ombre"
+        "_tab_label": "Luci ed ombre",
+        "components": {
+          "avatarStatus": "Icona utente (vista messaggio)",
+          "avatar": "Icona utente (vista profilo)",
+          "topBar": "Barra superiore",
+          "panelHeader": "Intestazione pannello",
+          "panel": "Pannello",
+          "input": "Campo d'immissione",
+          "buttonPressedHover": "Pulsante (puntato e premuto)",
+          "buttonPressed": "Pulsante (premuto)",
+          "buttonHover": "Pulsante (puntato)",
+          "button": "Pulsante",
+          "popup": "Sbalzi e suggerimenti"
+        },
+        "filter_hint": {
+          "inset_classic": "Le ombre incluse usano {0}",
+          "spread_zero": "Lo spandimento maggiore di zero si azzera sulle ombre",
+          "avatar_inset": "Tieni presente che combinare ombre (sia incluse che non) sulle icone utente potrebbe dare risultati strani con quelle trasparenti.",
+          "drop_shadow_syntax": "{0} non supporta il parametro {1} né la keyword {2}.",
+          "always_drop_shadow": "Attenzione: quest'ombra usa sempre {0} se il tuo browser lo supporta."
+        },
+        "hintV3": "Per le ombre puoi anche usare la sintassi {0} per sfruttare il secondo colore."
       },
       "radii": {
         "_tab_label": "Raggio"
+      },
+      "fonts": {
+        "_tab_label": "Font"
       }
     },
     "enable_web_push_notifications": "Abilita notifiche web push",
@@ -336,7 +361,14 @@
     "emoji_reactions_on_timeline": "Mostra emoji di reazione sulle sequenze",
     "pad_emoji": "Affianca spazi agli emoji inseriti tramite selettore",
     "notification_blocks": "Bloccando un utente non riceverai più le sue notifiche né lo seguirai più.",
-    "mutes_and_blocks": "Zittiti e bloccati"
+    "mutes_and_blocks": "Zittiti e bloccati",
+    "profile_fields": {
+      "value": "Contenuto",
+      "name": "Etichetta",
+      "add_field": "Aggiungi campo",
+      "label": "Metadati profilo"
+    },
+    "bot": "Questo profilo è di un robot"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",
@@ -425,7 +457,10 @@
     },
     "direct_warning_to_first_only": "Questo messaggio sarà visibile solo agli utenti menzionati all'inizio.",
     "direct_warning_to_all": "Questo messaggio sarà visibile a tutti i menzionati.",
-    "new_status": "Nuovo messaggio"
+    "new_status": "Nuovo messaggio",
+    "empty_status_error": "Non puoi pubblicare messaggi vuoti senza allegati",
+    "preview_empty": "Vuoto",
+    "preview": "Anteprima"
   },
   "registration": {
     "bio": "Introduzione",
@@ -548,5 +583,8 @@
     "error": "Non trovato.",
     "searching_for": "Cerco",
     "remote_user_resolver": "Cerca utenti remoti"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma non ha potuto accedere ai dati del tuo browser. Le tue credenziali o le tue impostazioni locali non potranno essere salvate e potresti incontrare strani errori. Prova ad abilitare i cookie."
   }
 }

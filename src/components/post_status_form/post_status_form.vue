@@ -70,7 +70,10 @@
           <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
           <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
         </p>
-        <div class="preview-heading faint">
+        <div
+          v-if="!disablePreview"
+          class="preview-heading faint"
+        >
           <a
             class="preview-toggle faint"
             @click.stop.prevent="togglePreview"

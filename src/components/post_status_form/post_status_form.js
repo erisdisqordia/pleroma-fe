@@ -41,6 +41,7 @@ const PostStatusForm = {
     'disablePolls',
     'disableSensitivityCheckbox',
     'disableSubmit',
+    'disablePreview',
     'placeholder',
     'maxHeight',
     'postHandler',

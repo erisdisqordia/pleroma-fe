@@ -427,7 +427,46 @@
     "block": "Blocca",
     "blocked": "Bloccato!",
     "deny": "Nega",
-    "remote_follow": "Segui da remoto"
+    "remote_follow": "Segui da remoto",
+    "admin_menu": {
+      "delete_user_confirmation": "Ne sei completamente sicuro? Quest'azione non può essere annullata.",
+      "delete_user": "Elimina utente",
+      "quarantine": "I messaggi non arriveranno alle altre stanze",
+      "disable_any_subscription": "Rendi utente non seguibile",
+      "disable_remote_subscription": "Blocca i tentativi di seguirlo da altre stanze",
+      "sandbox": "Rendi tutti i messaggi solo per seguaci",
+      "force_unlisted": "Rendi tutti i messaggi invisibili",
+      "strip_media": "Rimuovi ogni allegato ai messaggi",
+      "force_nsfw": "Oscura tutti i messaggi",
+      "delete_account": "Elimina profilo",
+      "deactivate_account": "Disattiva profilo",
+      "activate_account": "Attiva profilo",
+      "revoke_moderator": "Divesti Moderatore",
+      "grant_moderator": "Crea Moderatore",
+      "revoke_admin": "Divesti Amministratore",
+      "grant_admin": "Crea Amministratore",
+      "moderation": "Moderazione"
+    },
+    "show_repeats": "Mostra condivisioni",
+    "hide_repeats": "Nascondi condivisioni",
+    "mute_progress": "Zittisco…",
+    "unmute_progress": "Riabilito…",
+    "unmute": "Riabilita",
+    "block_progress": "Blocco…",
+    "unblock_progress": "Sblocco…",
+    "unblock": "Sblocca",
+    "unsubscribe": "Disdici",
+    "subscribe": "Abbònati",
+    "report": "Segnala",
+    "mention": "Menzioni",
+    "media": "Media",
+    "its_you": "Sei tu!",
+    "hidden": "Nascosto",
+    "follow_unfollow": "Disconosci",
+    "follow_again": "Reinvio richiesta?",
+    "follow_progress": "Richiedo…",
+    "follow_sent": "Richiesta inviata!",
+    "favorites": "Preferiti"
   },
   "chat": {
     "title": "Chat"
@@ -493,7 +532,9 @@
     "new_status": "Nuovo messaggio",
     "empty_status_error": "Non puoi pubblicare messaggi vuoti senza allegati",
     "preview_empty": "Vuoto",
-    "preview": "Anteprima"
+    "preview": "Anteprima",
+    "media_description_error": "Allegati non caricati, riprova",
+    "media_description": "Descrizione allegati"
   },
   "registration": {
     "bio": "Introduzione",
@@ -517,7 +558,9 @@
     "captcha": "CAPTCHA"
   },
   "user_profile": {
-    "timeline_title": "Sequenza dell'Utente"
+    "timeline_title": "Sequenza dell'Utente",
+    "profile_loading_error": "Spiacente, c'è stato un errore nel caricamento del profilo.",
+    "profile_does_not_exist": "Spiacente, questo profilo non esiste."
   },
   "who_to_follow": {
     "more": "Altro",
@@ -626,7 +669,22 @@
     "pin": "Intesta al profilo",
     "delete": "Elimina messaggio",
     "repeats": "Condivisi",
-    "favorites": "Preferiti"
+    "favorites": "Preferiti",
+    "hide_content": "Nascondi contenuti",
+    "show_content": "Mostra contenuti",
+    "hide_full_subject": "Nascondi intero oggetto",
+    "show_full_subject": "Mostra intero oggetto",
+    "thread_muted_and_words": ", contiene:",
+    "thread_muted": "Discussione zittita",
+    "copy_link": "Copia collegamento",
+    "status_unavailable": "Messaggio non disponibile",
+    "unmute_conversation": "Riabilita conversazione",
+    "mute_conversation": "Zittisci conversazione",
+    "replies_list": "Risposte:",
+    "reply_to": "Rispondi a",
+    "delete_confirm": "Vuoi veramente eliminare questo messaggio?",
+    "unbookmark": "Rimuovi segnalibro",
+    "bookmark": "Aggiungi segnalibro"
   },
   "time": {
     "years_short": "{0}a",
@@ -661,5 +719,8 @@
     "day_short": "{0}g",
     "days": "{0} giorni",
     "day": "{0} giorno"
+  },
+  "user_reporting": {
+    "title": "Segnalo {0}"
   }
 }

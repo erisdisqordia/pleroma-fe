@@ -27,21 +27,25 @@ const fetchAndUpdate = ({ store, credentials, older = false }) => {
     }
     const result = fetchNotifications({ store, args, older })
 
-    // load unread notifications repeatedly to provide consistency between browser tabs
+    // If there's any unread notifications, try fetch notifications since
+    // the newest read notification to check if any of the unread notifs
+    // have changed their 'seen' state (marked as read in another session), so
+    // we can update the state in this session to mark them as read as well.
+    // The normal maxId-check does not tell if older notifications have changed
     const notifications = timelineData.data
     const readNotifsIds = notifications.filter(n => n.seen).map(n => n.id)
-    if (readNotifsIds.length) {
+    const numUnseenNotifs = notifications.length - readNotifsIds.length
+    if (numUnseenNotifs > 0) {
       args['since'] = Math.max(...readNotifsIds)
       fetchNotifications({ store, args, older })
     }
-
     return result
   }
 }
 
 const fetchNotifications = ({ store, args, older }) => {
   return apiService.fetchTimeline(args)
-    .then((notifications) => {
+    .then(({ data: notifications }) => {
       update({ store, notifications, older })
       return notifications
     }, () => store.dispatch('setNotificationsError', { value: true }))

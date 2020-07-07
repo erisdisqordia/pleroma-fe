@@ -20,6 +20,11 @@
           </router-link>
         </li>
         <li v-if="currentUser">
+          <router-link :to="{ name: 'bookmarks'}">
+            <i class="button-icon icon-bookmark" />{{ $t("nav.bookmarks") }}
+          </router-link>
+        </li>
+        <li v-if="currentUser">
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
             <i class="button-icon icon-mail-alt" />{{ $t("nav.dms") }}
           </router-link>
@@ -40,7 +45,7 @@
       slot="trigger"
       class="title timeline-menu-title"
     >
-      <span>{{ timelineNamesForRoute[$route.name] }}</span>
+      <span>{{ $t(timelineNames[$route.name]) }}</span>
       <i class="icon-down-open" />
     </div>
   </Popover>

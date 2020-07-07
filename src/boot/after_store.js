@@ -25,10 +25,10 @@ const preloadFetch = async (request) => {
   if (!data || !data[request]) {
     return window.fetch(request)
   }
-  const requestData = atob(data[request])
+  const requestData = JSON.parse(atob(data[request]))
   return {
     ok: true,
-    json: () => JSON.parse(requestData),
+    json: () => requestData,
     text: () => requestData
   }
 }
@@ -215,7 +215,6 @@ const getAppSecret = async ({ store }) => {
 
 const resolveStaffAccounts = ({ store, accounts }) => {
   const nicknames = accounts.map(uri => uri.split('/').pop())
-  nicknames.map(nickname => store.dispatch('fetchUser', nickname))
   store.dispatch('setInstanceOption', { name: 'staffAccounts', value: nicknames })
 }
 

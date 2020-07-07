@@ -69,6 +69,44 @@
           <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
           <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
         </p>
+        <div class="preview-heading faint">
+          <a
+            class="preview-toggle faint"
+            @click.stop.prevent="togglePreview"
+          >
+            {{ $t('post_status.preview') }}
+            <i
+              class="icon-down-open"
+              :style="{ transform: showPreview ? 'rotate(0deg)' : 'rotate(-90deg)' }"
+            />
+          </a>
+          <i
+            v-show="previewLoading"
+            class="icon-spin3 animate-spin"
+          />
+        </div>
+        <div
+          v-if="showPreview"
+          class="preview-container"
+        >
+          <div
+            v-if="!preview"
+            class="preview-status"
+          >
+            {{ $t('general.loading') }}
+          </div>
+          <div
+            v-else-if="preview.error"
+            class="preview-status preview-error"
+          >
+            {{ preview.error }}
+          </div>
+          <StatusContent
+            v-else
+            :status="preview"
+            class="preview-status"
+          />
+        </div>
         <EmojiInput
           v-if="newStatus.spoilerText || alwaysShowSubject"
           v-model="newStatus.spoilerText"
@@ -77,7 +115,6 @@
           class="form-control"
         >
           <input
-
             v-model="newStatus.spoilerText"
             type="text"
             :placeholder="$t('post_status.content_warning')"
@@ -245,27 +282,18 @@
             class="fa button-icon icon-cancel"
             @click="removeMediaFile(file)"
           />
-          <div class="media-upload-container attachment">
-            <img
-              v-if="type(file) === 'image'"
-              class="thumbnail media-upload"
-              :src="file.url"
-            >
-            <video
-              v-if="type(file) === 'video'"
-              :src="file.url"
-              controls
-            />
-            <audio
-              v-if="type(file) === 'audio'"
-              :src="file.url"
-              controls
-            />
-            <a
-              v-if="type(file) === 'unknown'"
-              :href="file.url"
-            >{{ file.url }}</a>
-          </div>
+          <attachment
+            :attachment="file"
+            :set-media="() => $store.dispatch('setMedia', newStatus.files)"
+            size="small"
+            allow-play="false"
+          />
+          <input
+            v-model="newStatus.mediaDescriptions[file.id]"
+            type="text"
+            :placeholder="$t('post_status.media_description')"
+            @keydown.enter.prevent=""
+          >
         </div>
       </div>
       <div
@@ -303,14 +331,6 @@
 }
 
 .post-status-form {
-  .visibility-tray {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 5px;
-  }
-}
-
-.post-status-form {
   .form-bottom {
     display: flex;
     justify-content: space-between;
@@ -336,11 +356,59 @@
     max-width: 10em;
   }
 
+  .preview-heading {
+    display: flex;
+    width: 100%;
+
+    .icon-spin3 {
+      margin-left: auto;
+    }
+  }
+
+  .preview-toggle {
+    display: flex;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .icon-down-open {
+    transition: transform 0.1s;
+  }
+
+  .preview-container {
+    margin-bottom: 1em;
+  }
+
+  .preview-error {
+    font-style: italic;
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+  }
+
+  .preview-status {
+    border: 1px solid $fallback--border;
+    border: 1px solid var(--border, $fallback--border);
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    padding: 0.5em;
+    margin: 0;
+    line-height: 1.4em;
+  }
+
   .text-format {
     .only-format {
       color: $fallback--faint;
       color: var(--faint, $fallback--faint);
     }
+  }
+
+  .visibility-tray {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
   }
 
   .media-upload-icon, .poll-icon, .emoji-icon {
@@ -381,11 +449,9 @@
   }
 
   .media-upload-wrapper {
-    flex: 0 0 auto;
-    max-width: 100%;
-    min-width: 50px;
     margin-right: .2em;
     margin-bottom: .5em;
+    width: 18em;
 
     .icon-cancel {
       display: inline-block;
@@ -399,6 +465,20 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+
+    img, video {
+      object-fit: contain;
+      max-height: 10em;
+    }
+
+    .video {
+      max-height: 10em;
+    }
+
+    input {
+      flex: 1;
+      width: 100%;
+    }
   }
 
   .status-input-wrapper {
@@ -408,28 +488,13 @@
     flex-direction: column;
   }
 
-  .attachments {
+  .media-upload-wrapper .attachments {
     padding: 0 0.5em;
 
     .attachment {
       margin: 0;
+      padding: 0;
       position: relative;
-      flex: 0 0 auto;
-      border: 1px solid $fallback--border;
-      border: 1px solid var(--border, $fallback--border);
-      text-align: center;
-
-      audio {
-        min-width: 300px;
-        flex: 1 0 auto;
-      }
-
-      a {
-        display: block;
-        text-align: left;
-        line-height: 1.2;
-        padding: .5em;
-      }
     }
 
     i {

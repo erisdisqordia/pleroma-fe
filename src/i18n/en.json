@@ -120,10 +120,12 @@
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
     "twkn": "Known Network",
+    "bookmarks": "Bookmarks",
     "user_search": "User Search",
     "search": "Search",
     "who_to_follow": "Who to follow",
-    "preferences": "Preferences"
+    "preferences": "Preferences",
+    "timelines": "Timelines"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
@@ -163,6 +165,9 @@
     "load_all_hint": "Loaded first {saneAmount} emoji, loading all emoji may cause performance issues.",
     "load_all": "Loading all {emojiAmount} emoji"
   },
+  "errors": {
+    "storage_unavailable": "Pleroma could not access browser storage. Your login or your local settings won't be saved and you might encounter unexpected issues. Try enabling cookies."
+  },
   "interactions": {
     "favs_repeats": "Repeats and Favorites",
     "follows": "New follows",
@@ -174,6 +179,7 @@
     "account_not_locked_warning": "Your account is not {0}. Anyone can follow you to view your follower-only posts.",
     "account_not_locked_warning_link": "locked",
     "attachments_sensitive": "Mark attachments as sensitive",
+    "media_description": "Media description",
     "content_type": {
       "text/plain": "Plain text",
       "text/html": "HTML",
@@ -185,6 +191,10 @@
     "direct_warning_to_all": "This post will be visible to all the mentioned users.",
     "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
+    "preview": "Preview",
+    "preview_empty": "Empty",
+    "empty_status_error": "Can't post an empty status with no files",
+    "media_description_error": "Failed to update media, try again",
     "scope_notice": {
       "public": "This post will be visible to everyone",
       "private": "This post will be visible to your followers only",
@@ -629,6 +639,8 @@
     "pin": "Pin on profile",
     "unpin": "Unpin from profile",
     "pinned": "Pinned",
+    "bookmark": "Bookmark",
+    "unbookmark": "Unbookmark",
     "delete_confirm": "Do you really want to delete this status?",
     "reply_to": "Reply to",
     "replies_list": "Replies:",
@@ -724,7 +736,8 @@
     "add_reaction": "Add Reaction",
     "user_settings": "User Settings",
     "accept_follow_request": "Accept follow request",
-    "reject_follow_request": "Reject follow request"
+    "reject_follow_request": "Reject follow request",
+    "bookmark": "Bookmark"
   },
   "upload": {
     "error": {

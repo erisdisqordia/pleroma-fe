@@ -1,6 +1,18 @@
 import Popover from '../popover/popover.vue'
 import { mapState } from 'vuex'
 
+// Route -> i18n key mapping, exported andnot in the computed
+// because nav panel benefits from the same information.
+export const timelineNames = () => {
+  return {
+    'friends': 'nav.timeline',
+    'bookmarks': 'nav.bookmarks',
+    'dms': 'nav.dms',
+    'public-timeline': 'nav.public_tl',
+    'public-external-timeline': 'nav.twkn'
+  }
+}
+
 const TimelineMenu = {
   components: {
     Popover
@@ -17,11 +29,14 @@ const TimelineMenu = {
   },
   methods: {
     openMenu () {
-      // Tried using $nextTick, but the animation wouldn't
-      // play, I assume it played too quickly
+      // $nextTick is too fast, animation won't play back but
+      // instead starts in fully open position. Low values
+      // like 1-5 work on fast machines but not on mobile, 25
+      // seems like a good compromise that plays without significant
+      // added lag.
       setTimeout(() => {
         this.isOpen = true
-      }, 1)
+      }, 25)
     }
   },
   computed: {
@@ -30,13 +45,8 @@ const TimelineMenu = {
       privateMode: state => state.instance.private,
       federating: state => state.instance.federating
     }),
-    timelineNamesForRoute () {
-      return {
-        'friends': this.$t('nav.timeline'),
-        'dms': this.$t('nav.dms'),
-        'public-timeline': this.$t('nav.public_tl'),
-        'public-external-timeline': this.$t('nav.twkn')
-      }
+    timelineNames () {
+      return timelineNames()
     }
   }
 }

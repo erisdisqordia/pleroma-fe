@@ -3,9 +3,11 @@ import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji_input/emoji_input.vue'
 import PollForm from '../poll/poll_form.vue'
+import Attachment from '../attachment/attachment.vue'
+import StatusContent from '../status_content/status_content.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
-import { reject, map, uniqBy } from 'lodash'
+import { reject, map, uniqBy, debounce } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
 import { mapGetters } from 'vuex'
 import Checkbox from '../checkbox/checkbox.vue'
@@ -38,7 +40,9 @@ const PostStatusForm = {
     EmojiInput,
     PollForm,
     ScopeSelector,
-    Checkbox
+    Checkbox,
+    Attachment,
+    StatusContent
   },
   mounted () {
     this.resize(this.$refs.textarea)
@@ -78,13 +82,16 @@ const PostStatusForm = {
         nsfw: false,
         files: [],
         poll: {},
+        mediaDescriptions: {},
         visibility: scope,
         contentType
       },
       caret: 0,
       pollFormVisible: false,
       showDropIcon: 'hide',
-      dropStopTimeout: null
+      dropStopTimeout: null,
+      preview: null,
+      previewLoading: false
     }
   },
   computed: {
@@ -163,18 +170,29 @@ const PostStatusForm = {
         this.newStatus.poll &&
         this.newStatus.poll.error
     },
+    showPreview () {
+      return !!this.preview || this.previewLoading
+    },
+    emptyStatus () {
+      return this.newStatus.status.trim() === '' && this.newStatus.files.length === 0
+    },
     ...mapGetters(['mergedConfig'])
   },
+  watch: {
+    'newStatus.contentType': function () {
+      this.autoPreview()
+    },
+    'newStatus.spoilerText': function () {
+      this.autoPreview()
+    }
+  },
   methods: {
-    postStatus (newStatus) {
+    async postStatus (newStatus) {
       if (this.posting) { return }
       if (this.submitDisabled) { return }
-
-      if (this.newStatus.status === '') {
-        if (this.newStatus.files.length === 0) {
-          this.error = 'Cannot post an empty status with no files'
-          return
-        }
+      if (this.emptyStatus) {
+        this.error = this.$t('post_status.empty_status_error')
+        return
       }
 
       const poll = this.pollFormVisible ? this.newStatus.poll : {}
@@ -184,7 +202,16 @@ const PostStatusForm = {
       }
 
       this.posting = true
-      statusPoster.postStatus({
+
+      try {
+        await this.setAllMediaDescriptions()
+      } catch (e) {
+        this.error = this.$t('post_status.media_description_error')
+        this.posting = false
+        return
+      }
+
+      const data = await statusPoster.postStatus({
         status: newStatus.status,
         spoilerText: newStatus.spoilerText || null,
         visibility: newStatus.visibility,
@@ -194,29 +221,83 @@ const PostStatusForm = {
         inReplyToStatusId: this.replyTo,
         contentType: newStatus.contentType,
         poll
-      }).then((data) => {
-        if (!data.error) {
-          this.newStatus = {
-            status: '',
-            spoilerText: '',
-            files: [],
-            visibility: newStatus.visibility,
-            contentType: newStatus.contentType,
-            poll: {}
-          }
-          this.pollFormVisible = false
-          this.$refs.mediaUpload.clearFile()
-          this.clearPollForm()
-          this.$emit('posted')
-          let el = this.$el.querySelector('textarea')
-          el.style.height = 'auto'
-          el.style.height = undefined
-          this.error = null
-        } else {
-          this.error = data.error
-        }
-        this.posting = false
       })
+
+      if (!data.error) {
+        this.newStatus = {
+          status: '',
+          spoilerText: '',
+          files: [],
+          visibility: newStatus.visibility,
+          contentType: newStatus.contentType,
+          poll: {},
+          mediaDescriptions: {}
+        }
+        this.pollFormVisible = false
+        this.$refs.mediaUpload.clearFile()
+        this.clearPollForm()
+        this.$emit('posted')
+        let el = this.$el.querySelector('textarea')
+        el.style.height = 'auto'
+        el.style.height = undefined
+        this.error = null
+        if (this.preview) this.previewStatus()
+      } else {
+        this.error = data.error
+      }
+
+      this.posting = false
+    },
+    previewStatus () {
+      if (this.emptyStatus && this.newStatus.spoilerText.trim() === '') {
+        this.preview = { error: this.$t('post_status.preview_empty') }
+        this.previewLoading = false
+        return
+      }
+      const newStatus = this.newStatus
+      this.previewLoading = true
+      statusPoster.postStatus({
+        status: newStatus.status,
+        spoilerText: newStatus.spoilerText || null,
+        visibility: newStatus.visibility,
+        sensitive: newStatus.nsfw,
+        media: [],
+        store: this.$store,
+        inReplyToStatusId: this.replyTo,
+        contentType: newStatus.contentType,
+        poll: {},
+        preview: true
+      }).then((data) => {
+        // Don't apply preview if not loading, because it means
+        // user has closed the preview manually.
+        if (!this.previewLoading) return
+        if (!data.error) {
+          this.preview = data
+        } else {
+          this.preview = { error: data.error }
+        }
+      }).catch((error) => {
+        this.preview = { error }
+      }).finally(() => {
+        this.previewLoading = false
+      })
+    },
+    debouncePreviewStatus: debounce(function () { this.previewStatus() }, 500),
+    autoPreview () {
+      if (!this.preview) return
+      this.previewLoading = true
+      this.debouncePreviewStatus()
+    },
+    closePreview () {
+      this.preview = null
+      this.previewLoading = false
+    },
+    togglePreview () {
+      if (this.showPreview) {
+        this.closePreview()
+      } else {
+        this.previewStatus()
+      }
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
@@ -239,6 +320,7 @@ const PostStatusForm = {
       return fileTypeService.fileType(fileInfo.mimetype)
     },
     paste (e) {
+      this.autoPreview()
       this.resize(e)
       if (e.clipboardData.files.length > 0) {
         // prevent pasting of file as text
@@ -273,6 +355,7 @@ const PostStatusForm = {
       }
     },
     onEmojiInputInput (e) {
+      this.autoPreview()
       this.$nextTick(() => {
         this.resize(this.$refs['textarea'])
       })
@@ -388,6 +471,15 @@ const PostStatusForm = {
     },
     dismissScopeNotice () {
       this.$store.dispatch('setOption', { name: 'hideScopeNotice', value: true })
+    },
+    setMediaDescription (id) {
+      const description = this.newStatus.mediaDescriptions[id]
+      if (!description || description.trim() === '') return
+      return statusPoster.setMediaDescription({ store: this.$store, id, description })
+    },
+    setAllMediaDescriptions () {
+      const ids = this.newStatus.files.map(file => file.id)
+      return Promise.all(ids.map(id => this.setMediaDescription(id)))
     }
   }
 }

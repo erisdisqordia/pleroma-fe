@@ -62,6 +62,11 @@
             <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
           </router-link>
         </li>
+        <li @click="toggleDrawer">
+          <router-link :to="{ name: 'bookmarks'}">
+            <i class="button-icon icon-bookmark" /> {{ $t("nav.bookmarks") }}
+          </router-link>
+        </li>
         <li
           v-if="currentUser.locked"
           @click="toggleDrawer"

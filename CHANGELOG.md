@@ -19,6 +19,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Autocomplete domains from list of known instances
 - 'Bot' settings option and badge
 - Added profile meta data fields that can be set in profile settings
+- Descriptions can be set on uploaded files before posting
+- Added status preview option to preview your statuses before posting
+- When a post is a reply to an unavailable post, the 'Reply to'-text has a strike-through style
 
 ### Changed
 - Registration page no longer requires email if the server is configured not to require it
@@ -26,6 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Close the media modal on navigation events
 - Add colons to the emoji alt text, to make them copyable
 - Add better visual indication for drag-and-drop for files
+- When disabling attachments, the placeholder links now show an icon and the description instead of just IMAGE or VIDEO etc
 
 ### Fixed
 - Custom Emoji will display in poll options now.
@@ -37,7 +41,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Subject field now appears disabled when posting
 - Fix status ellipsis menu being cut off in notifications column
 - Fixed autocomplete sometimes not returning the right user when there's already some results
+- Videos and audio and misc files show description as alt/title properly now
+- Clicking on non-image/video files no longer opens an empty modal
+- Audio files can now be played back in the frontend with hidden attachments
+- Videos are not cropped awkwardly in the uploads section anymore
 - Reply filtering options in Settings -> Filtering now work again using filtering on server
+- Don't show just blank-screen when cookies are disabled
 
 ## [2.0.3] - 2020-05-02
 ### Fixed
@@ -99,6 +108,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Ability to change user's email
 - About page
 - Added remote user redirect
+- Bookmarks
 ### Changed
 - changed the way fading effects for user profile/long statuses works, now uses css-mask instead of gradient background hacks which weren't exactly compatible with semi-transparent themes
 ### Fixed

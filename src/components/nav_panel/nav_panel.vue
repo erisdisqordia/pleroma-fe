@@ -7,7 +7,7 @@
             :to="{ name: 'friends' }"
             :class="onTimelineRoute && 'router-link-active'"
           >
-            <i class="button-icon icon-home-2" /> {{ $t("nav.timeline") }}
+            <i class="button-icon icon-home-2" /> {{ $t("nav.timelines") }}
           </router-link>
         </li>
         <li v-else-if="!privateMode">

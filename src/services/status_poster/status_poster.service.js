@@ -1,7 +1,18 @@
 import { map } from 'lodash'
 import apiService from '../api/api.service.js'
 
-const postStatus = ({ store, status, spoilerText, visibility, sensitive, poll, media = [], inReplyToStatusId = undefined, contentType = 'text/plain' }) => {
+const postStatus = ({
+  store,
+  status,
+  spoilerText,
+  visibility,
+  sensitive,
+  poll,
+  media = [],
+  inReplyToStatusId = undefined,
+  contentType = 'text/plain',
+  preview = false
+}) => {
   const mediaIds = map(media, 'id')
 
   return apiService.postStatus({
@@ -13,9 +24,11 @@ const postStatus = ({ store, status, spoilerText, visibility, sensitive, poll, m
     mediaIds,
     inReplyToStatusId,
     contentType,
-    poll })
+    poll,
+    preview
+  })
     .then((data) => {
-      if (!data.error) {
+      if (!data.error && !preview) {
         store.dispatch('addNewStatuses', {
           statuses: [data],
           timeline: 'friends',
@@ -34,13 +47,18 @@ const postStatus = ({ store, status, spoilerText, visibility, sensitive, poll, m
 
 const uploadMedia = ({ store, formData }) => {
   const credentials = store.state.users.currentUser.credentials
-
   return apiService.uploadMedia({ credentials, formData })
+}
+
+const setMediaDescription = ({ store, id, description }) => {
+  const credentials = store.state.users.currentUser.credentials
+  return apiService.setMediaDescription({ credentials, id, description })
 }
 
 const statusPosterService = {
   postStatus,
-  uploadMedia
+  uploadMedia,
+  setMediaDescription
 }
 
 export default statusPosterService

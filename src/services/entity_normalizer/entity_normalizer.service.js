@@ -1,4 +1,5 @@
 import escape from 'escape-html'
+import parseLinkHeader from 'parse-link-header'
 import { isStatusNotification } from '../notification_utils/notification_utils.js'
 
 const qvitterStatusType = (status) => {
@@ -232,6 +233,8 @@ export const parseStatus = (data) => {
     output.repeated = data.reblogged
     output.repeat_num = data.reblogs_count
 
+    output.bookmarked = data.bookmarked
+
     output.type = data.reblog ? 'retweet' : 'status'
     output.nsfw = data.sensitive
 
@@ -248,6 +251,7 @@ export const parseStatus = (data) => {
       output.in_reply_to_screen_name = data.pleroma.in_reply_to_account_acct
       output.thread_muted = pleroma.thread_muted
       output.emoji_reactions = pleroma.emoji_reactions
+      output.parent_visible = pleroma.parent_visible === undefined ? true : pleroma.parent_visible
     } else {
       output.text = data.content
       output.summary = data.spoiler_text
@@ -380,4 +384,17 @@ export const parseNotification = (data) => {
 const isNsfw = (status) => {
   const nsfwRegex = /#nsfw/i
   return (status.tags || []).includes('nsfw') || !!(status.text || '').match(nsfwRegex)
+}
+
+export const parseLinkHeaderPagination = (linkHeader, opts = {}) => {
+  const flakeId = opts.flakeId
+  const parsedLinkHeader = parseLinkHeader(linkHeader)
+  if (!parsedLinkHeader) return
+  const maxId = parsedLinkHeader.next.max_id
+  const minId = parsedLinkHeader.prev.min_id
+
+  return {
+    maxId: flakeId ? maxId : parseInt(maxId, 10),
+    minId: flakeId ? minId : parseInt(minId, 10)
+  }
 }

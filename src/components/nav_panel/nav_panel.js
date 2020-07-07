@@ -1,11 +1,5 @@
 import { mapState } from 'vuex'
-
-const timelineRoutes = [
-  'friends',
-  'dms',
-  'public-timeline',
-  'public-external-timeline'
-]
+import { timelineNames } from '../timeline_menu/timeline_menu.js'
 
 const NavPanel = {
   created () {
@@ -15,7 +9,7 @@ const NavPanel = {
   },
   computed: {
     onTimelineRoute () {
-      return timelineRoutes.includes(this.$route.name)
+      return !!timelineNames()[this.$route.name]
     },
     ...mapState({
       currentUser: state => state.users.currentUser,

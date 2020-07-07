@@ -8,8 +8,6 @@
 >
 > --Catbag
 
-Pleroma-FE user interface is modeled after Qvitter which is modeled after older Twitter design. It provides a simple 2-column interface for microblogging. While being simple by default it also provides many powerful customization options.
-
 ## Posting, reading, basic functions.
 
 After registering and logging in you're presented with your timeline in right column and new post form with timeline list and notifications in the left column.

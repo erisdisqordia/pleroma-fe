@@ -99,15 +99,8 @@ const StatusContent = {
         file => !fileType.fileMatchesSomeType(this.galleryTypes, file)
       )
     },
-    hasImageAttachments () {
-      return this.status.attachments.some(
-        file => fileType.fileType(file.mimetype) === 'image'
-      )
-    },
-    hasVideoAttachments () {
-      return this.status.attachments.some(
-        file => fileType.fileType(file.mimetype) === 'video'
-      )
+    attachmentTypes () {
+      return this.status.attachments.map(file => fileType.fileType(file.mimetype))
     },
     maxThumbnails () {
       return this.mergedConfig.maxThumbnails

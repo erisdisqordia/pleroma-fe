@@ -128,6 +128,7 @@
     <PostStatusModal />
     <SettingsModal />
     <portal-target name="modal" />
+    <GlobalNoticeList />
   </div>
 </template>
 

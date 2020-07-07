@@ -215,7 +215,6 @@ const getAppSecret = async ({ store }) => {
 
 const resolveStaffAccounts = ({ store, accounts }) => {
   const nicknames = accounts.map(uri => uri.split('/').pop())
-  nicknames.map(nickname => store.dispatch('fetchUser', nickname))
   store.dispatch('setInstanceOption', { name: 'staffAccounts', value: nicknames })
 }
 

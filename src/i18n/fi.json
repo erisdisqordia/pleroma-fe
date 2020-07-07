@@ -66,7 +66,7 @@
     "search": "Haku"
   },
   "notifications": {
-    "broken_favorite": "Viestiä ei löydetty...",
+    "broken_favorite": "Viestiä ei löydetty…",
     "favorited_you": "tykkäsi viestistäsi",
     "followed_you": "seuraa sinua",
     "load_older": "Lataa vanhempia ilmoituksia",
@@ -101,7 +101,7 @@
   },
   "post_status": {
     "new_status": "Uusi viesti",
-    "account_not_locked_warning": "Tilisi ei ole {0}. Kuka vain voi seurata sinua nähdäksesi 'vain-seuraajille' -viestisi",
+    "account_not_locked_warning": "Tilisi ei ole {0}. Kuka vain voi seurata sinua nähdäksesi 'vain-seuraajille' -viestisi.",
     "account_not_locked_warning_link": "lukittu",
     "attachments_sensitive": "Merkkaa liitteet arkaluonteisiksi",
     "content_type": {
@@ -288,7 +288,7 @@
       "authentication_methods": "Todennus",
       "warning_of_generate_new_codes": "Luodessasi uudet palautuskoodit, vanhat koodisi lakkaavat toimimasta.",
       "recovery_codes": "Palautuskoodit.",
-      "waiting_a_recovery_codes": "Odotetaan palautuskoodeja...",
+      "waiting_a_recovery_codes": "Odotetaan palautuskoodeja…",
       "recovery_codes_warning": "Kirjoita koodit ylös tai tallenna ne turvallisesti, muuten et näe niitä uudestaan. Jos et voi käyttää monivaihetodennusta ja sinulla ei ole palautuskoodeja, et voi enää kirjautua sisään tilillesi.",
       "scan": {
         "title": "Skannaa",
@@ -575,7 +575,7 @@
     "statuses": "Viestit",
     "hidden": "Piilotettu",
     "media": "Media",
-    "block_progress": "Estetään...",
+    "block_progress": "Estetään…",
     "admin_menu": {
       "grant_admin": "Anna Ylläpitöoikeudet",
       "force_nsfw": "Merkitse kaikki viestit NSFW:nä",
@@ -601,10 +601,10 @@
     "subscribe": "Tilaa",
     "unsubscribe": "Poista tilaus",
     "unblock": "Poista esto",
-    "unblock_progress": "Postetaan estoa...",
+    "unblock_progress": "Postetaan estoa…",
     "unmute": "Poista mykistys",
-    "unmute_progress": "Poistetaan mykistystä...",
-    "mute_progress": "Mykistetään...",
+    "unmute_progress": "Poistetaan mykistystä…",
+    "mute_progress": "Mykistetään…",
     "hide_repeats": "Piilota toistot",
     "show_repeats": "Näytä toistot"
   },
@@ -674,8 +674,8 @@
   "domain_mute_card": {
     "mute": "Mykistä",
     "unmute": "Poista mykistys",
-    "mute_progress": "Mykistetään...",
-    "unmute_progress": "Poistetaan mykistyst..."
+    "mute_progress": "Mykistetään…",
+    "unmute_progress": "Poistetaan mykistyst…"
   },
   "exporter": {
     "export": "Vie",

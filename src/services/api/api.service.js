@@ -645,8 +645,7 @@ const postStatus = ({
   poll,
   mediaIds = [],
   inReplyToStatusId,
-  contentType,
-  mediaDescriptions
+  contentType
 }) => {
   const form = new FormData()
   const pollOptions = poll.options || []
@@ -673,7 +672,6 @@ const postStatus = ({
       form.append('poll[options][]', option)
     })
   }
-  form.append('descriptions', JSON.stringify(mediaDescriptions))
   if (inReplyToStatusId) {
     form.append('in_reply_to_id', inReplyToStatusId)
   }
@@ -710,6 +708,17 @@ const uploadMedia = ({ formData, credentials }) => {
   })
     .then((data) => data.json())
     .then((data) => parseAttachment(data))
+}
+
+const setMediaDescription = ({ id, description, credentials }) => {
+  return promisedRequest({
+    url: `${MASTODON_MEDIA_UPLOAD_URL}/${id}`,
+    method: 'PUT',
+    headers: authHeaders(credentials),
+    payload: {
+      description
+    }
+  }).then((data) => parseAttachment(data))
 }
 
 const importBlocks = ({ file, credentials }) => {
@@ -1181,6 +1190,7 @@ const apiService = {
   postStatus,
   deleteStatus,
   uploadMedia,
+  setMediaDescription,
   fetchMutes,
   muteUser,
   unmuteUser,

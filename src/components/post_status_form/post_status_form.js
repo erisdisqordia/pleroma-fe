@@ -6,7 +6,7 @@ import PollForm from '../poll/poll_form.vue'
 import Attachment from '../attachment/attachment.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
-import { reject, map, uniqBy } from 'lodash'
+import { reject, map, uniqBy, debounce } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
 import { mapGetters } from 'vuex'
 import Checkbox from '../checkbox/checkbox.vue'
@@ -169,7 +169,7 @@ const PostStatusForm = {
     ...mapGetters(['mergedConfig'])
   },
   methods: {
-    postStatus (newStatus) {
+    async postStatus (newStatus) {
       if (this.posting) { return }
       if (this.submitDisabled) { return }
 
@@ -187,41 +187,43 @@ const PostStatusForm = {
       }
 
       this.posting = true
-      statusPoster.postStatus({
+
+      await this.setAllMediaDescriptions()
+
+      const data = await statusPoster.postStatus({
         status: newStatus.status,
         spoilerText: newStatus.spoilerText || null,
         visibility: newStatus.visibility,
         sensitive: newStatus.nsfw,
         media: newStatus.files,
-        mediaDescriptions: newStatus.mediaDescriptions || {},
         store: this.$store,
         inReplyToStatusId: this.replyTo,
         contentType: newStatus.contentType,
         poll
-      }).then((data) => {
-        if (!data.error) {
-          this.newStatus = {
-            status: '',
-            spoilerText: '',
-            files: [],
-            mediaDescriptions: {},
-            visibility: newStatus.visibility,
-            contentType: newStatus.contentType,
-            poll: {}
-          }
-          this.pollFormVisible = false
-          this.$refs.mediaUpload.clearFile()
-          this.clearPollForm()
-          this.$emit('posted')
-          let el = this.$el.querySelector('textarea')
-          el.style.height = 'auto'
-          el.style.height = undefined
-          this.error = null
-        } else {
-          this.error = data.error
-        }
-        this.posting = false
       })
+
+      if (!data.error) {
+        this.newStatus = {
+          status: '',
+          spoilerText: '',
+          files: [],
+          visibility: newStatus.visibility,
+          contentType: newStatus.contentType,
+          poll: {}
+        }
+        this.pollFormVisible = false
+        this.$refs.mediaUpload.clearFile()
+        this.clearPollForm()
+        this.$emit('posted')
+        let el = this.$el.querySelector('textarea')
+        el.style.height = 'auto'
+        el.style.height = undefined
+        this.error = null
+      } else {
+        this.error = data.error
+      }
+
+      this.posting = false
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
@@ -393,6 +395,23 @@ const PostStatusForm = {
     },
     dismissScopeNotice () {
       this.$store.dispatch('setOption', { name: 'hideScopeNotice', value: true })
+    },
+    debounceSendDescription: debounce(function (id, description) {
+      statusPoster.setMediaDescription({ store: this.$store, id, description })
+    }, 500),
+    updateMediaDescription (fileId, e) {
+      const description = e.target.value
+      this.newStatus.mediaDescriptions[fileId] = description
+      this.debounceSendDescription(fileId, description)
+    },
+    setMediaDescription (id) {
+      const description = this.newStatus.mediaDescriptions[id]
+      if (!description || description.trim() === '') return
+      return statusPoster.setMediaDescription({ store: this.$store, id, description })
+    },
+    setAllMediaDescriptions () {
+      const ids = this.newStatus.files.map(file => file.id)
+      return Promise.all(ids.map(id => this.setMediaDescription(id)))
     }
   }
 }

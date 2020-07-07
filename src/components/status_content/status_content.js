@@ -100,7 +100,6 @@ const StatusContent = {
       )
     },
     attachmentTypes () {
-      console.log(this.status.attachments)
       return this.status.attachments.map(file => fileType.fileType(file.mimetype))
     },
     maxThumbnails () {

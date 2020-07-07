@@ -29,7 +29,7 @@ const preloadFetch = async (request) => {
   return {
     ok: true,
     json: () => JSON.parse(requestData),
-    text: () => requestData
+    text: () => JSON.parse(requestData)
   }
 }
 

@@ -6,7 +6,7 @@ import PollForm from '../poll/poll_form.vue'
 import Attachment from '../attachment/attachment.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
-import { reject, map, uniqBy, debounce } from 'lodash'
+import { reject, map, uniqBy } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
 import { mapGetters } from 'vuex'
 import Checkbox from '../checkbox/checkbox.vue'
@@ -395,14 +395,6 @@ const PostStatusForm = {
     },
     dismissScopeNotice () {
       this.$store.dispatch('setOption', { name: 'hideScopeNotice', value: true })
-    },
-    debounceSendDescription: debounce(function (id, description) {
-      statusPoster.setMediaDescription({ store: this.$store, id, description })
-    }, 500),
-    updateMediaDescription (fileId, e) {
-      const description = e.target.value
-      this.newStatus.mediaDescriptions[fileId] = description
-      this.debounceSendDescription(fileId, description)
     },
     setMediaDescription (id) {
       const description = this.newStatus.mediaDescriptions[id]

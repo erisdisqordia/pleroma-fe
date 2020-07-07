@@ -47,13 +47,18 @@ const postStatus = ({
 
 const uploadMedia = ({ store, formData }) => {
   const credentials = store.state.users.currentUser.credentials
-
   return apiService.uploadMedia({ credentials, formData })
+}
+
+const setMediaDescription = ({ store, id, description }) => {
+  const credentials = store.state.users.currentUser.credentials
+  return apiService.setMediaDescription({ credentials, id, description })
 }
 
 const statusPosterService = {
   postStatus,
-  uploadMedia
+  uploadMedia,
+  setMediaDescription
 }
 
 export default statusPosterService

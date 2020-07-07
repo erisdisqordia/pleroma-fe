@@ -282,27 +282,18 @@
             class="fa button-icon icon-cancel"
             @click="removeMediaFile(file)"
           />
-          <div class="media-upload-container attachment">
-            <img
-              v-if="type(file) === 'image'"
-              class="thumbnail media-upload"
-              :src="file.url"
-            >
-            <video
-              v-if="type(file) === 'video'"
-              :src="file.url"
-              controls
-            />
-            <audio
-              v-if="type(file) === 'audio'"
-              :src="file.url"
-              controls
-            />
-            <a
-              v-if="type(file) === 'unknown'"
-              :href="file.url"
-            >{{ file.url }}</a>
-          </div>
+          <attachment
+            :attachment="file"
+            :set-media="() => $store.dispatch('setMedia', newStatus.files)"
+            size="small"
+            allow-play="false"
+          />
+          <input
+            v-model="newStatus.mediaDescriptions[file.id]"
+            type="text"
+            :placeholder="$t('post_status.media_description')"
+            @keydown.enter.prevent=""
+          >
         </div>
       </div>
       <div
@@ -458,11 +449,9 @@
   }
 
   .media-upload-wrapper {
-    flex: 0 0 auto;
-    max-width: 100%;
-    min-width: 50px;
     margin-right: .2em;
     margin-bottom: .5em;
+    width: 18em;
 
     .icon-cancel {
       display: inline-block;
@@ -475,6 +464,20 @@
       background-color: var(--btn, $fallback--fg);
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+    }
+
+    img, video {
+      object-fit: contain;
+      max-height: 10em;
+    }
+
+    .video {
+      max-height: 10em;
+    }
+
+    input {
+      flex: 1;
+      width: 100%;
     }
   }
 
@@ -490,23 +493,8 @@
 
     .attachment {
       margin: 0;
+      padding: 0;
       position: relative;
-      flex: 0 0 auto;
-      border: 1px solid $fallback--border;
-      border: 1px solid var(--border, $fallback--border);
-      text-align: center;
-
-      audio {
-        min-width: 300px;
-        flex: 1 0 auto;
-      }
-
-      a {
-        display: block;
-        text-align: left;
-        line-height: 1.2;
-        padding: .5em;
-      }
     }
 
     i {

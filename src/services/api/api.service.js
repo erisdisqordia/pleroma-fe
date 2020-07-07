@@ -708,6 +708,17 @@ const uploadMedia = ({ formData, credentials }) => {
     .then((data) => parseAttachment(data))
 }
 
+const setMediaDescription = ({ id, description, credentials }) => {
+  return promisedRequest({
+    url: `${MASTODON_MEDIA_UPLOAD_URL}/${id}`,
+    method: 'PUT',
+    headers: authHeaders(credentials),
+    payload: {
+      description
+    }
+  }).then((data) => parseAttachment(data))
+}
+
 const importBlocks = ({ file, credentials }) => {
   const formData = new FormData()
   formData.append('list', file)
@@ -1177,6 +1188,7 @@ const apiService = {
   postStatus,
   deleteStatus,
   uploadMedia,
+  setMediaDescription,
   fetchMutes,
   muteUser,
   unmuteUser,

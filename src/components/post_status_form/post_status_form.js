@@ -3,6 +3,7 @@ import MediaUpload from '../media_upload/media_upload.vue'
 import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji_input/emoji_input.vue'
 import PollForm from '../poll/poll_form.vue'
+import Attachment from '../attachment/attachment.vue'
 import StatusContent from '../status_content/status_content.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
@@ -40,6 +41,7 @@ const PostStatusForm = {
     PollForm,
     ScopeSelector,
     Checkbox,
+    Attachment,
     StatusContent
   },
   mounted () {
@@ -80,6 +82,7 @@ const PostStatusForm = {
         nsfw: false,
         files: [],
         poll: {},
+        mediaDescriptions: {},
         visibility: scope,
         contentType
       },
@@ -184,7 +187,7 @@ const PostStatusForm = {
     }
   },
   methods: {
-    postStatus (newStatus) {
+    async postStatus (newStatus) {
       if (this.posting) { return }
       if (this.submitDisabled) { return }
       if (this.emptyStatus) {
@@ -199,7 +202,16 @@ const PostStatusForm = {
       }
 
       this.posting = true
-      statusPoster.postStatus({
+
+      try {
+        await this.setAllMediaDescriptions()
+      } catch (e) {
+        this.error = this.$t('post_status.media_description_error')
+        this.posting = false
+        return
+      }
+
+      const data = await statusPoster.postStatus({
         status: newStatus.status,
         spoilerText: newStatus.spoilerText || null,
         visibility: newStatus.visibility,
@@ -209,30 +221,32 @@ const PostStatusForm = {
         inReplyToStatusId: this.replyTo,
         contentType: newStatus.contentType,
         poll
-      }).then((data) => {
-        if (!data.error) {
-          this.newStatus = {
-            status: '',
-            spoilerText: '',
-            files: [],
-            visibility: newStatus.visibility,
-            contentType: newStatus.contentType,
-            poll: {}
-          }
-          this.pollFormVisible = false
-          this.$refs.mediaUpload.clearFile()
-          this.clearPollForm()
-          this.$emit('posted')
-          let el = this.$el.querySelector('textarea')
-          el.style.height = 'auto'
-          el.style.height = undefined
-          this.error = null
-          if (this.preview) this.previewStatus()
-        } else {
-          this.error = data.error
-        }
-        this.posting = false
       })
+
+      if (!data.error) {
+        this.newStatus = {
+          status: '',
+          spoilerText: '',
+          files: [],
+          visibility: newStatus.visibility,
+          contentType: newStatus.contentType,
+          poll: {},
+          mediaDescriptions: {}
+        }
+        this.pollFormVisible = false
+        this.$refs.mediaUpload.clearFile()
+        this.clearPollForm()
+        this.$emit('posted')
+        let el = this.$el.querySelector('textarea')
+        el.style.height = 'auto'
+        el.style.height = undefined
+        this.error = null
+        if (this.preview) this.previewStatus()
+      } else {
+        this.error = data.error
+      }
+
+      this.posting = false
     },
     previewStatus () {
       if (this.emptyStatus && this.newStatus.spoilerText.trim() === '') {
@@ -457,6 +471,15 @@ const PostStatusForm = {
     },
     dismissScopeNotice () {
       this.$store.dispatch('setOption', { name: 'hideScopeNotice', value: true })
+    },
+    setMediaDescription (id) {
+      const description = this.newStatus.mediaDescriptions[id]
+      if (!description || description.trim() === '') return
+      return statusPoster.setMediaDescription({ store: this.$store, id, description })
+    },
+    setAllMediaDescriptions () {
+      const ids = this.newStatus.files.map(file => file.id)
+      return Promise.all(ids.map(id => this.setMediaDescription(id)))
     }
   }
 }

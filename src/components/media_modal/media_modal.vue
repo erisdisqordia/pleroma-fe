@@ -8,6 +8,8 @@
       v-if="type === 'image'"
       class="modal-image"
       :src="currentMedia.url"
+      :alt="currentMedia.description"
+      :title="currentMedia.description"
       @touchstart.stop="mediaTouchStart"
       @touchmove.stop="mediaTouchMove"
       @click="hide"
@@ -17,6 +19,14 @@
       class="modal-image"
       :attachment="currentMedia"
       :controls="true"
+    />
+    <audio
+      v-if="type === 'audio'"
+      class="modal-image"
+      :src="currentMedia.url"
+      :alt="currentMedia.description"
+      :title="currentMedia.description"
+      controls
     />
     <button
       v-if="canNavigate"

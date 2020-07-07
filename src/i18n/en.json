@@ -178,6 +178,7 @@
     "account_not_locked_warning": "Your account is not {0}. Anyone can follow you to view your follower-only posts.",
     "account_not_locked_warning_link": "locked",
     "attachments_sensitive": "Mark attachments as sensitive",
+    "media_description": "Media description",
     "content_type": {
       "text/plain": "Plain text",
       "text/html": "HTML",
@@ -192,6 +193,7 @@
     "preview": "Preview",
     "preview_empty": "Empty",
     "empty_status_error": "Can't post an empty status with no files",
+    "media_description_error": "Failed to update media, try again",
     "scope_notice": {
       "public": "This post will be visible to everyone",
       "private": "This post will be visible to your followers only",

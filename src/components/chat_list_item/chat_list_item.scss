@@ -43,6 +43,7 @@
     white-space: nowrap;
     overflow: hidden;
     flex-shrink: 1;
+    line-height: 1.4em;
   }
 
   .chat-preview {
@@ -51,10 +52,9 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     margin: 0.35em 0;
-    height: 1.2em;
-    line-height: 1.2em;
     color: $fallback--text;
     color: var(--faint, $fallback--text);
+    width: 100%;
   }
 
   a {
@@ -82,5 +82,13 @@
       width: 1.4em;
       height: 1.4em;
     }
+  }
+
+  .time-wrapper {
+    line-height: 1.4em;
+  }
+
+  .single-line {
+    padding-right: 1em;
   }
 }

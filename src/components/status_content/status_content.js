@@ -14,7 +14,8 @@ const StatusContent = {
     'status',
     'focused',
     'noHeading',
-    'fullContent'
+    'fullContent',
+    'singleLine'
   ],
   data () {
     return {

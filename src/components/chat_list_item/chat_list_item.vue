@@ -23,7 +23,10 @@
         <span class="heading-right" />
       </div>
       <div class="chat-preview">
-        <StatusContent :status="messageForStatusContent" />
+        <StatusContent
+          :status="messageForStatusContent"
+          :single-line="true"
+        />
         <div
           v-if="chat.unread > 0"
           class="badge badge-notification unread-chat-count"
@@ -32,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div>
+    <div class="time-wrapper">
       <Timeago
         :time="chat.updated_at"
         :auto-update="60"

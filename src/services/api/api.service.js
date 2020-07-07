@@ -122,18 +122,13 @@ const promisedRequest = ({ method, url, params, payload, credentials, headers = 
   }
   return fetch(url, options)
     .then((response) => {
-      return new Promise((resolve, reject) => {
-        response.json()
-          .then((json) => {
-            if (!response.ok) {
-              return reject(new StatusCodeError(response.status, json, { url, options }, response))
-            }
-            return resolve(json)
-          })
-          .catch((error) => {
-            return reject(new StatusCodeError(response.status, error.message, { url, options }, response))
-          })
-      })
+      return new Promise((resolve, reject) => response.json()
+        .then((json) => {
+          if (!response.ok) {
+            return reject(new StatusCodeError(response.status, json, { url, options }, response))
+          }
+          return resolve(json)
+        }))
     })
 }
 

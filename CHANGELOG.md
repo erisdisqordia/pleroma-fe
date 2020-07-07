@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - 'Bot' settings option and badge
 - Added profile meta data fields that can be set in profile settings
 - Descriptions can be set on uploaded files before posting
+- Added status preview option to preview your statuses before posting
 - When a post is a reply to an unavailable post, the 'Reply to'-text has a strike-through style
 
 ### Changed

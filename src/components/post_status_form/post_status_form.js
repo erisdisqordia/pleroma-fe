@@ -4,9 +4,10 @@ import ScopeSelector from '../scope_selector/scope_selector.vue'
 import EmojiInput from '../emoji_input/emoji_input.vue'
 import PollForm from '../poll/poll_form.vue'
 import Attachment from '../attachment/attachment.vue'
+import StatusContent from '../status_content/status_content.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
-import { reject, map, uniqBy } from 'lodash'
+import { reject, map, uniqBy, debounce } from 'lodash'
 import suggestor from '../emoji_input/suggestor.js'
 import { mapGetters } from 'vuex'
 import Checkbox from '../checkbox/checkbox.vue'
@@ -40,7 +41,8 @@ const PostStatusForm = {
     PollForm,
     ScopeSelector,
     Checkbox,
-    Attachment
+    Attachment,
+    StatusContent
   },
   mounted () {
     this.resize(this.$refs.textarea)
@@ -87,7 +89,9 @@ const PostStatusForm = {
       caret: 0,
       pollFormVisible: false,
       showDropIcon: 'hide',
-      dropStopTimeout: null
+      dropStopTimeout: null,
+      preview: null,
+      previewLoading: false
     }
   },
   computed: {
@@ -166,18 +170,29 @@ const PostStatusForm = {
         this.newStatus.poll &&
         this.newStatus.poll.error
     },
+    showPreview () {
+      return !!this.preview || this.previewLoading
+    },
+    emptyStatus () {
+      return this.newStatus.status.trim() === '' && this.newStatus.files.length === 0
+    },
     ...mapGetters(['mergedConfig'])
+  },
+  watch: {
+    'newStatus.contentType': function () {
+      this.autoPreview()
+    },
+    'newStatus.spoilerText': function () {
+      this.autoPreview()
+    }
   },
   methods: {
     async postStatus (newStatus) {
       if (this.posting) { return }
       if (this.submitDisabled) { return }
-
-      if (this.newStatus.status === '') {
-        if (this.newStatus.files.length === 0) {
-          this.error = 'Cannot post an empty status with no files'
-          return
-        }
+      if (this.emptyStatus) {
+        this.error = this.$t('post_status.empty_status_error')
+        return
       }
 
       const poll = this.pollFormVisible ? this.newStatus.poll : {}
@@ -188,7 +203,13 @@ const PostStatusForm = {
 
       this.posting = true
 
-      await this.setAllMediaDescriptions()
+      try {
+        await this.setAllMediaDescriptions()
+      } catch (e) {
+        this.error = this.$t('post_status.media_description_error')
+        this.posting = false
+        return
+      }
 
       const data = await statusPoster.postStatus({
         status: newStatus.status,
@@ -219,11 +240,63 @@ const PostStatusForm = {
         el.style.height = 'auto'
         el.style.height = undefined
         this.error = null
+        this.previewStatus()
       } else {
         this.error = data.error
       }
 
       this.posting = false
+    },
+    previewStatus () {
+      if (this.emptyStatus && this.newStatus.spoilerText.trim() === '') {
+        this.preview = { error: this.$t('post_status.preview_empty') }
+        this.previewLoading = false
+        return
+      }
+      const newStatus = this.newStatus
+      this.previewLoading = true
+      statusPoster.postStatus({
+        status: newStatus.status,
+        spoilerText: newStatus.spoilerText || null,
+        visibility: newStatus.visibility,
+        sensitive: newStatus.nsfw,
+        media: [],
+        store: this.$store,
+        inReplyToStatusId: this.replyTo,
+        contentType: newStatus.contentType,
+        poll: {},
+        preview: true
+      }).then((data) => {
+        // Don't apply preview if not loading, because it means
+        // user has closed the preview manually.
+        if (!this.previewLoading) return
+        if (!data.error) {
+          this.preview = data
+        } else {
+          this.preview = { error: data.error }
+        }
+      }).catch((error) => {
+        this.preview = { error }
+      }).finally(() => {
+        this.previewLoading = false
+      })
+    },
+    debouncePreviewStatus: debounce(function () { this.previewStatus() }, 500),
+    autoPreview () {
+      if (!this.preview) return
+      this.previewLoading = true
+      this.debouncePreviewStatus()
+    },
+    closePreview () {
+      this.preview = null
+      this.previewLoading = false
+    },
+    togglePreview () {
+      if (this.showPreview) {
+        this.closePreview()
+      } else {
+        this.previewStatus()
+      }
     },
     addMediaFile (fileInfo) {
       this.newStatus.files.push(fileInfo)
@@ -246,6 +319,7 @@ const PostStatusForm = {
       return fileTypeService.fileType(fileInfo.mimetype)
     },
     paste (e) {
+      this.autoPreview()
       this.resize(e)
       if (e.clipboardData.files.length > 0) {
         // prevent pasting of file as text
@@ -280,6 +354,7 @@ const PostStatusForm = {
       }
     },
     onEmojiInputInput (e) {
+      this.autoPreview()
       this.$nextTick(() => {
         this.resize(this.$refs['textarea'])
       })

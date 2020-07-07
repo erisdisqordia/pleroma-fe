@@ -377,9 +377,6 @@ $status-margin: 0.75em;
 }
 
 .status-el {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
   border-left-width: 0px;
   min-width: 0;
   border-color: $fallback--border;

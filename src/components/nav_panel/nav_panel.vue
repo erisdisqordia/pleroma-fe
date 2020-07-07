@@ -2,17 +2,12 @@
   <div class="nav-panel">
     <div class="panel panel-default">
       <ul>
-        <li v-if="currentUser">
+        <li v-if="currentUser || !privateMode">
           <router-link
-            :to="{ name: 'friends' }"
+            :to="{ name: timelinesRoute }"
             :class="onTimelineRoute && 'router-link-active'"
           >
             <i class="button-icon icon-home-2" /> {{ $t("nav.timelines") }}
-          </router-link>
-        </li>
-        <li v-else-if="!privateMode">
-          <router-link :to="{ name: 'public-timeline' }">
-            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
           </router-link>
         </li>
         <li v-if="currentUser">

@@ -40,19 +40,11 @@
           </router-link>
         </li>
         <li
-          v-if="currentUser"
+          v-if="currentUser || !privateMode"
           @click="toggleDrawer"
         >
-          <router-link :to="{ name: 'friends' }">
-            <i class="button-icon icon-home-2" /> {{ $t("nav.timeline") }}
-          </router-link>
-        </li>
-        <li
-          v-else
-          @click="toggleDrawer"
-        >
-          <router-link :to="{ name: 'public-timeline' }">
-            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
+          <router-link :to="{ name: timelinesRoute }">
+            <i class="button-icon icon-home-2" /> {{ $t("nav.timelines") }}
           </router-link>
         </li>
       </ul>
@@ -60,11 +52,6 @@
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
             <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
-          </router-link>
-        </li>
-        <li @click="toggleDrawer">
-          <router-link :to="{ name: 'bookmarks'}">
-            <i class="button-icon icon-bookmark" /> {{ $t("nav.bookmarks") }}
           </router-link>
         </li>
         <li

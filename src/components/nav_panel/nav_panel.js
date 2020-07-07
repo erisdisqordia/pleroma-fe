@@ -11,6 +11,9 @@ const NavPanel = {
     onTimelineRoute () {
       return !!timelineNames()[this.$route.name]
     },
+    timelinesRoute () {
+      return this.currentUser ? 'friends' : 'public-timeline'
+    },
     ...mapState({
       currentUser: state => state.users.currentUser,
       followRequestCount: state => state.api.followRequests.length,

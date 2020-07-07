@@ -47,6 +47,9 @@ const SideDrawer = {
     },
     federating () {
       return this.$store.state.instance.federating
+    },
+    timelinesRoute () {
+      return this.currentUser ? 'friends' : 'public-timeline'
     }
   },
   methods: {

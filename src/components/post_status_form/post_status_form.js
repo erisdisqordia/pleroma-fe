@@ -230,7 +230,8 @@ const PostStatusForm = {
           files: [],
           visibility: newStatus.visibility,
           contentType: newStatus.contentType,
-          poll: {}
+          poll: {},
+          mediaDescriptions: {}
         }
         this.pollFormVisible = false
         this.$refs.mediaUpload.clearFile()
@@ -240,7 +241,7 @@ const PostStatusForm = {
         el.style.height = 'auto'
         el.style.height = undefined
         this.error = null
-        this.previewStatus()
+        if (this.preview) this.previewStatus()
       } else {
         this.error = data.error
       }

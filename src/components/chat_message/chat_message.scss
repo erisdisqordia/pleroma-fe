@@ -117,6 +117,10 @@
         color: var(--chatMessageIncomingText, $fallback--text);
       }
     }
+
+    .chat-message-menu {
+      left: 0.4rem;
+    }
   }
 
   .outgoing {
@@ -139,6 +143,14 @@
     .chat-message-inner {
       align-items: flex-end;
     }
+
+    .chat-message-menu {
+      right: 0.4rem;
+    }
+  }
+
+  .visible {
+    opacity: 1;
   }
 }
 

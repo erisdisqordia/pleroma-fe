@@ -60,19 +60,6 @@ const ChatMessage = {
       currentUser: state => state.users.currentUser,
       restrictedNicknames: state => state.instance.restrictedNicknames
     }),
-    ellipsisButtonWrapperStyle () {
-      let res = {
-        'opacity': this.hovered || this.menuOpened ? '1' : '0'
-      }
-
-      if (this.isCurrentUser) {
-        res.right = '0.4rem'
-      } else {
-        res.left = '0.4rem'
-      }
-
-      return res
-    },
     popoverMarginStyle () {
       if (this.isCurrentUser) {
         return {}

@@ -31,8 +31,8 @@ const MobileNav = {
     },
     hideSitename () { return this.$store.state.instance.hideSitename },
     sitename () { return this.$store.state.instance.name },
-    navBarStyle () {
-      return { 'visibility': this.$route.name === 'chat' ? 'hidden' : 'visible' }
+    isChat () {
+      return this.$route.name === 'chat'
     }
   },
   methods: {

@@ -39,7 +39,7 @@
           >
             <div
               class="chat-message-menu"
-              :style="ellipsisButtonWrapperStyle"
+              :class="{ 'visible': hovered || menuOpened }"
             >
               <Popover
                 trigger="click"

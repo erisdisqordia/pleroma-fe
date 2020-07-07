@@ -3,7 +3,7 @@
     <nav
       id="nav"
       class="nav-bar container"
-      :style="navBarStyle"
+      :class="{ 'mobile-hidden': isChat }"
     >
       <div
         class="mobile-inner-nav"

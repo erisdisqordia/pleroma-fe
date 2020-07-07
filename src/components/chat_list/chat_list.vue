@@ -15,7 +15,10 @@
       </button>
     </div>
     <div class="panel-body">
-      <div class="timeline">
+      <div
+        v-if="sortedChatList.length > 0"
+        class="timeline"
+      >
         <List :items="sortedChatList">
           <template
             slot="item"
@@ -29,6 +32,12 @@
           </template>
         </List>
       </div>
+      <div
+        v-else
+        class="emtpy-chat-list-alert"
+      >
+        <span>{{ $t('chats.empty_chat_list_placeholder') }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -39,10 +48,24 @@
 @import '../../_variables.scss';
 
 .chat-list {
-  min-height: calc(100vh - 67px);
+  min-height: 25em;
   margin-bottom: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+
+  &::after {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.emtpy-chat-list-alert {
+  padding: 3em;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  color: $fallback--text;
+  color: var(--faint, $fallback--text);
 }
 
 </style>

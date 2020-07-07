@@ -192,7 +192,7 @@ const PostStatusForm = {
         this.newStatus.poll.error
     },
     showPreview () {
-      return !!this.preview || this.previewLoading
+      return !this.disablePreview && (!!this.preview || this.previewLoading)
     },
     emptyStatus () {
       return this.newStatus.status.trim() === '' && this.newStatus.files.length === 0

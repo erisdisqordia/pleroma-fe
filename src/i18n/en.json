@@ -794,7 +794,8 @@
     "more": "More",
     "delete_confirm": "Do you really want to delete this message?",
     "error_loading_chat": "Something went wrong when loading the chat.",
-    "error_sending_message": "Something went wrong when sending the message."
+    "error_sending_message": "Something went wrong when sending the message.",
+    "empty_chat_list_placeholder": "You don't have any chats yet. Start a new chat!"
   },
   "file_type": {
     "audio": "Audio",

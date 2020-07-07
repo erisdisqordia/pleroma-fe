@@ -83,9 +83,6 @@ const chats = {
     resetChatNewMessageCount ({ commit }, value) {
       commit('resetChatNewMessageCount', value)
     },
-    removeFromCurrentChatStatuses ({ commit }, { id }) {
-      commit('removeFromCurrentChatStatuses', id)
-    },
     clearCurrentChat ({ rootState, commit, dispatch }, value) {
       commit('setCurrentChatId', { chatId: undefined })
       commit('setCurrentChatFetcher', { fetcher: undefined })

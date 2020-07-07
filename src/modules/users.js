@@ -266,6 +266,11 @@ const users = {
   mutations,
   getters,
   actions: {
+    fetchUserIfMissing (store, id) {
+      if (!store.getters.findUser(id)) {
+        store.dispatch('fetchUser', id)
+      }
+    },
     fetchUser (store, id) {
       return store.rootState.api.backendInteractor.fetchUser({ id })
         .then((user) => {

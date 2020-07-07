@@ -721,6 +721,57 @@
     "day": "{0} giorno"
   },
   "user_reporting": {
-    "title": "Segnalo {0}"
+    "title": "Segnalo {0}",
+    "additional_comments": "Osservazioni accessorie",
+    "generic_error": "C'è stato un errore nell'elaborazione della tua richiesta.",
+    "submit": "Invia",
+    "forward_to": "Inoltra a {0}",
+    "forward_description": "Il profilo appartiene ad un'altra stanza. Inviare la segnalazione anche a quella?",
+    "add_comment_description": "La segnalazione sarà inviata ai moderatori della tua stanza. Puoi motivarla qui sotto:"
+  },
+  "password_reset": {
+    "password_reset_required_but_mailer_is_disabled": "Devi reimpostare la tua parola d'ordine, ma non puoi farlo. Contatta il tuo amministratore.",
+    "password_reset_required": "Devi reimpostare la tua parola d'ordine per poter continuare.",
+    "password_reset_disabled": "Non puoi azzerare la tua parola d'ordine. Contatta il tuo amministratore.",
+    "too_many_requests": "Hai raggiunto il numero massimo di tentativi, riprova più tardi.",
+    "not_found": "Non ho trovato questa email o nome utente.",
+    "return_home": "Torna alla pagina principale",
+    "check_email": "Controlla la tua posta elettronica.",
+    "placeholder": "La tua email o nome utente",
+    "instruction": "Inserisci il tuo indirizzo email o il tuo nome utente. Ti invieremo un collegamento per reimpostare la tua parola d'ordine.",
+    "password_reset": "Azzera parola d'ordine",
+    "forgot_password": "Parola d'ordine dimenticata?"
+  },
+  "search": {
+    "no_results": "Nessun risultato",
+    "people_talking": "{count} partecipanti",
+    "person_talking": "{count} partecipante",
+    "hashtags": "Etichette",
+    "people": "Utenti"
+  },
+  "upload": {
+    "file_size_units": {
+      "TiB": "TiB",
+      "GiB": "GiB",
+      "MiB": "MiB",
+      "KiB": "KiB",
+      "B": "B"
+    },
+    "error": {
+      "default": "Riprova in seguito",
+      "file_too_big": "File troppo pesante [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+      "base": "Caricamento fallito."
+    }
+  },
+  "tool_tip": {
+    "bookmark": "Aggiungi segnalibro",
+    "reject_follow_request": "Rifiuta seguace",
+    "accept_follow_request": "Accetta seguace",
+    "user_settings": "Impostazioni utente",
+    "add_reaction": "Reagisci",
+    "favorite": "Gradisci",
+    "reply": "Rispondi",
+    "repeat": "Ripeti",
+    "media_upload": "Carica allegati"
   }
 }

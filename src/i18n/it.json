@@ -398,7 +398,13 @@
       "frontend_version": "Versione interfaccia",
       "backend_version": "Versione backend",
       "title": "Versione"
-    }
+    },
+    "reset_avatar": "Azzera icona",
+    "reset_profile_background": "Azzera sfondo profilo",
+    "reset_profile_banner": "Azzera stendardo profilo",
+    "reset_avatar_confirm": "Vuoi veramente azzerare l'icona?",
+    "reset_banner_confirm": "Vuoi veramente azzerare lo stendardo?",
+    "reset_background_confirm": "Vuoi veramente azzerare lo sfondo?"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",

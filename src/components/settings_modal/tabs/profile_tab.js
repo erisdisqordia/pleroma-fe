@@ -77,6 +77,33 @@ const ProfileTab = {
     },
     maxFields () {
       return this.fieldsLimits ? this.fieldsLimits.maxFields : 0
+    },
+    defaultAvatar () {
+      return this.$store.state.instance.server + this.$store.state.instance.defaultAvatar
+    },
+    defaultBanner () {
+      return this.$store.state.instance.server + this.$store.state.instance.defaultBanner
+    },
+    isDefaultAvatar () {
+      const baseAvatar = this.$store.state.instance.defaultAvatar
+      return !(this.$store.state.users.currentUser.profile_image_url) ||
+      this.$store.state.users.currentUser.profile_image_url.includes(baseAvatar)
+    },
+    isDefaultBanner () {
+      const baseBanner = this.$store.state.instance.defaultBanner
+      return !(this.$store.state.users.currentUser.cover_photo) ||
+      this.$store.state.users.currentUser.cover_photo.includes(baseBanner)
+    },
+    isDefaultBackground () {
+      return !(this.$store.state.users.currentUser.background_image)
+    },
+    avatarImgSrc () {
+      const src = this.$store.state.users.currentUser.profile_image_url_original
+      return (!src) ? this.defaultAvatar : src
+    },
+    bannerImgSrc () {
+      const src = this.$store.state.users.currentUser.cover_photo
+      return (!src) ? this.defaultBanner : src
     }
   },
   methods: {
@@ -150,11 +177,29 @@ const ProfileTab = {
       }
       reader.readAsDataURL(file)
     },
+    resetAvatar () {
+      const confirmed = window.confirm(this.$t('settings.reset_avatar_confirm'))
+      if (confirmed) {
+        this.submitAvatar(undefined, '')
+      }
+    },
+    resetBanner () {
+      const confirmed = window.confirm(this.$t('settings.reset_banner_confirm'))
+      if (confirmed) {
+        this.submitBanner('')
+      }
+    },
+    resetBackground () {
+      const confirmed = window.confirm(this.$t('settings.reset_background_confirm'))
+      if (confirmed) {
+        this.submitBackground('')
+      }
+    },
     submitAvatar (cropper, file) {
       const that = this
       return new Promise((resolve, reject) => {
         function updateAvatar (avatar) {
-          that.$store.state.api.backendInteractor.updateAvatar({ avatar })
+          that.$store.state.api.backendInteractor.updateProfileImages({ avatar })
             .then((user) => {
               that.$store.commit('addNewUsers', [user])
               that.$store.commit('setCurrentUser', user)
@@ -172,11 +217,11 @@ const ProfileTab = {
         }
       })
     },
-    submitBanner () {
-      if (!this.bannerPreview) { return }
+    submitBanner (banner) {
+      if (!this.bannerPreview && banner !== '') { return }
 
       this.bannerUploading = true
-      this.$store.state.api.backendInteractor.updateBanner({ banner: this.banner })
+      this.$store.state.api.backendInteractor.updateProfileImages({ banner })
         .then((user) => {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
@@ -187,11 +232,11 @@ const ProfileTab = {
         })
         .then(() => { this.bannerUploading = false })
     },
-    submitBg () {
-      if (!this.backgroundPreview) { return }
-      let background = this.background
+    submitBackground (background) {
+      if (!this.backgroundPreview && background !== '') { return }
+
       this.backgroundUploading = true
-      this.$store.state.api.backendInteractor.updateBg({ background }).then((data) => {
+      this.$store.state.api.backendInteractor.updateProfileImages({ background }).then((data) => {
         if (!data.error) {
           this.$store.commit('addNewUsers', [data])
           this.$store.commit('setCurrentUser', data)

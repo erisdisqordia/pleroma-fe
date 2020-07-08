@@ -8,25 +8,19 @@ const UserAvatar = {
   ],
   data () {
     return {
-      showPlaceholder: false
+      showPlaceholder: false,
+      defaultAvatar: `${this.$store.state.instance.server + this.$store.state.instance.defaultAvatar}`
     }
   },
   components: {
     StillImage
   },
-  computed: {
-    imgSrc () {
-      return this.showPlaceholder ? '/images/avi.png' : this.user.profile_image_url_original
-    }
-  },
   methods: {
+    imgSrc (src) {
+      return (!src || this.showPlaceholder) ? this.defaultAvatar : src
+    },
     imageLoadError () {
       this.showPlaceholder = true
-    }
-  },
-  watch: {
-    src () {
-      this.showPlaceholder = false
     }
   }
 }

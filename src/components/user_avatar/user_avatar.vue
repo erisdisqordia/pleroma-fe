@@ -3,7 +3,7 @@
     class="avatar"
     :alt="user.screen_name"
     :title="user.screen_name"
-    :src="imgSrc"
+    :src="imgSrc(user.profile_image_url_original)"
     :class="{ 'avatar-compact': compact, 'better-shadow': betterShadow }"
     :image-load-error="imageLoadError"
   />

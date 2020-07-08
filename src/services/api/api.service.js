@@ -141,37 +141,17 @@ const updateNotificationSettings = ({ credentials, settings }) => {
   }).then((data) => data.json())
 }
 
-const updateAvatar = ({ credentials, avatar }) => {
+const updateProfileImages = ({ credentials, avatar = null, banner = null, background = null }) => {
   const form = new FormData()
-  form.append('avatar', avatar)
-  return fetch(MASTODON_PROFILE_UPDATE_URL, {
-    headers: authHeaders(credentials),
-    method: 'PATCH',
-    body: form
-  }).then((data) => data.json())
-    .then((data) => parseUser(data))
-}
-
-const updateBg = ({ credentials, background }) => {
-  const form = new FormData()
-  form.append('pleroma_background_image', background)
+  if (avatar !== null) form.append('avatar', avatar)
+  if (banner !== null) form.append('header', banner)
+  if (background !== null) form.append('pleroma_background_image', background)
   return fetch(MASTODON_PROFILE_UPDATE_URL, {
     headers: authHeaders(credentials),
     method: 'PATCH',
     body: form
   })
     .then((data) => data.json())
-    .then((data) => parseUser(data))
-}
-
-const updateBanner = ({ credentials, banner }) => {
-  const form = new FormData()
-  form.append('header', banner)
-  return fetch(MASTODON_PROFILE_UPDATE_URL, {
-    headers: authHeaders(credentials),
-    method: 'PATCH',
-    body: form
-  }).then((data) => data.json())
     .then((data) => parseUser(data))
 }
 
@@ -1206,10 +1186,8 @@ const apiService = {
   deactivateUser,
   register,
   getCaptcha,
-  updateAvatar,
-  updateBg,
+  updateProfileImages,
   updateProfile,
-  updateBanner,
   importBlocks,
   importFollows,
   deleteAccount,

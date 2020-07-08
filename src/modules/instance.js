@@ -15,6 +15,8 @@ const defaultState = {
 
   // Stuff from static/config.json
   alwaysShowSubjectInput: true,
+  defaultAvatar: '/images/avi.png',
+  defaultBanner: '/images/banner.png',
   background: '/static/aurora_borealis.jpg',
   collapseMessageWithSubject: false,
   disableChat: false,

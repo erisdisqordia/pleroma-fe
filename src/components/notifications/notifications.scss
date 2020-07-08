@@ -118,6 +118,11 @@
     flex: 1;
     padding-left: 0.8em;
     min-width: 0;
+
+    .timeago {
+      min-width: 3em;
+      text-align: right;
+    }
   }
 
   .emoji-reaction-emoji {

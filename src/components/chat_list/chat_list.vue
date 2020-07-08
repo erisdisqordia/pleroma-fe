@@ -50,13 +50,6 @@
 .chat-list {
   min-height: 25em;
   margin-bottom: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-
-  &::after {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
 }
 
 .emtpy-chat-list-alert {

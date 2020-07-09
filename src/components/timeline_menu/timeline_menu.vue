@@ -63,11 +63,8 @@
   width: 24rem;
   .timeline-menu-popover-wrap {
     overflow: hidden;
-    // Hack: timeline heading padding is 0.6em with 14px font font-size
-    // in theory 0.6rem should match that exactly, but in reality it doesn't
-    // for seemingly rounding errors in both major browsers. This looks
-    // correct in firefox in chromium.
-    margin-top: calc(0.6rem + 1.5px);
+    // Match panel heading padding to line up menu with bottom of heading
+    margin-top: 0.6rem;
     padding: 0 15px 15px 15px;
   }
   .timeline-menu-popover {

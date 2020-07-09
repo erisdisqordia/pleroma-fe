@@ -113,6 +113,7 @@
   }
   .loadmore-text {
     flex-shrink: 0;
+    line-height: 1em;
   }
 }
 </style>

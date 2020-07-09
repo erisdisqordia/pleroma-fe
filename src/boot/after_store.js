@@ -20,12 +20,20 @@ const parsedInitialResults = () => {
   return staticInitialResults
 }
 
+const decodeUTF8Base64 = (data) => {
+  const rawData = atob(data)
+  const array = Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)))
+  const text = new TextDecoder().decode(array)
+  return text
+}
+
 const preloadFetch = async (request) => {
   const data = parsedInitialResults()
   if (!data || !data[request]) {
     return window.fetch(request)
   }
-  const requestData = JSON.parse(atob(data[request]))
+  const decoded = decodeUTF8Base64(data[request])
+  const requestData = JSON.parse(decoded)
   return {
     ok: true,
     json: () => requestData,

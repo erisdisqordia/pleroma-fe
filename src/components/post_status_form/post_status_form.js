@@ -216,7 +216,7 @@ const PostStatusForm = {
   methods: {
     async postStatus (event, newStatus, opts = {}) {
       if (this.posting) { return }
-      if (this.submitDisabled) { return }
+      if (this.disableSubmit) { return }
       if (this.emojiInputShown) { return }
       if (this.submitOnEnter) {
         event.stopPropagation()

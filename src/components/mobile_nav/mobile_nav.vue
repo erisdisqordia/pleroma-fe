@@ -16,6 +16,10 @@
             @click.stop.prevent="toggleMobileSidebar()"
           >
             <i class="button-icon icon-menu" />
+            <div
+              v-if="unreadChatCount"
+              class="alert-dot"
+            />
           </a>
           <router-link
             v-if="!hideSitename"

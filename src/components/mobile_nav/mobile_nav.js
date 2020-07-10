@@ -30,7 +30,10 @@ const MobileNav = {
       return this.unseenNotifications.length
     },
     hideSitename () { return this.$store.state.instance.hideSitename },
-    sitename () { return this.$store.state.instance.name }
+    sitename () { return this.$store.state.instance.name },
+    isChat () {
+      return this.$route.name === 'chat'
+    }
   },
   methods: {
     toggleMobileSidebar () {

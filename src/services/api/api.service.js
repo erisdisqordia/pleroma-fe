@@ -1,5 +1,5 @@
 import { each, map, concat, last, get } from 'lodash'
-import { parseStatus, parseUser, parseNotification, parseAttachment, parseLinkHeaderPagination } from '../entity_normalizer/entity_normalizer.service.js'
+import { parseStatus, parseUser, parseNotification, parseAttachment, parseChat, parseLinkHeaderPagination } from '../entity_normalizer/entity_normalizer.service.js'
 import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */
@@ -81,6 +81,11 @@ const MASTODON_KNOWN_DOMAIN_LIST_URL = '/api/v1/instance/peers'
 const PLEROMA_EMOJI_REACTIONS_URL = id => `/api/v1/pleroma/statuses/${id}/reactions`
 const PLEROMA_EMOJI_REACT_URL = (id, emoji) => `/api/v1/pleroma/statuses/${id}/reactions/${emoji}`
 const PLEROMA_EMOJI_UNREACT_URL = (id, emoji) => `/api/v1/pleroma/statuses/${id}/reactions/${emoji}`
+const PLEROMA_CHATS_URL = `/api/v1/pleroma/chats`
+const PLEROMA_CHAT_URL = id => `/api/v1/pleroma/chats/by-account-id/${id}`
+const PLEROMA_CHAT_MESSAGES_URL = id => `/api/v1/pleroma/chats/${id}/messages`
+const PLEROMA_CHAT_READ_URL = id => `/api/v1/pleroma/chats/${id}/read`
+const PLEROMA_DELETE_CHAT_MESSAGE_URL = (chatId, messageId) => `/api/v1/pleroma/chats/${chatId}/messages/${messageId}`
 
 const oldfetch = window.fetch
 
@@ -1067,6 +1072,10 @@ const MASTODON_STREAMING_EVENTS = new Set([
   'filters_changed'
 ])
 
+const PLEROMA_STREAMING_EVENTS = new Set([
+  'pleroma:chat_update'
+])
+
 // A thin wrapper around WebSocket API that allows adding a pre-processor to it
 // Uses EventTarget and a CustomEvent to proxy events
 export const ProcessedWS = ({
@@ -1123,7 +1132,7 @@ export const handleMastoWS = (wsEvent) => {
   if (!data) return
   const parsedEvent = JSON.parse(data)
   const { event, payload } = parsedEvent
-  if (MASTODON_STREAMING_EVENTS.has(event)) {
+  if (MASTODON_STREAMING_EVENTS.has(event) || PLEROMA_STREAMING_EVENTS.has(event)) {
     // MastoBE and PleromaBE both send payload for delete as a PLAIN string
     if (event === 'delete') {
       return { event, id: payload }
@@ -1133,11 +1142,88 @@ export const handleMastoWS = (wsEvent) => {
       return { event, status: parseStatus(data) }
     } else if (event === 'notification') {
       return { event, notification: parseNotification(data) }
+    } else if (event === 'pleroma:chat_update') {
+      return { event, chatUpdate: parseChat(data) }
     }
   } else {
     console.warn('Unknown event', wsEvent)
     return null
   }
+}
+
+export const WSConnectionStatus = Object.freeze({
+  'JOINED': 1,
+  'CLOSED': 2,
+  'ERROR': 3
+})
+
+const chats = ({ credentials }) => {
+  return fetch(PLEROMA_CHATS_URL, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
+    .then((data) => {
+      return { chats: data.map(parseChat).filter(c => c) }
+    })
+}
+
+const getOrCreateChat = ({ accountId, credentials }) => {
+  return promisedRequest({
+    url: PLEROMA_CHAT_URL(accountId),
+    method: 'POST',
+    credentials
+  })
+}
+
+const chatMessages = ({ id, credentials, maxId, sinceId, limit = 20 }) => {
+  let url = PLEROMA_CHAT_MESSAGES_URL(id)
+  const args = [
+    maxId && `max_id=${maxId}`,
+    sinceId && `since_id=${sinceId}`,
+    limit && `limit=${limit}`
+  ].filter(_ => _).join('&')
+
+  url = url + (args ? '?' + args : '')
+
+  return promisedRequest({
+    url,
+    method: 'GET',
+    credentials
+  })
+}
+
+const sendChatMessage = ({ id, content, mediaId = null, credentials }) => {
+  const payload = {
+    'content': content
+  }
+
+  if (mediaId) {
+    payload['media_id'] = mediaId
+  }
+
+  return promisedRequest({
+    url: PLEROMA_CHAT_MESSAGES_URL(id),
+    method: 'POST',
+    payload: payload,
+    credentials
+  })
+}
+
+const readChat = ({ id, lastReadId, credentials }) => {
+  return promisedRequest({
+    url: PLEROMA_CHAT_READ_URL(id),
+    method: 'POST',
+    payload: {
+      'last_read_id': lastReadId
+    },
+    credentials
+  })
+}
+
+const deleteChatMessage = ({ chatId, messageId, credentials }) => {
+  return promisedRequest({
+    url: PLEROMA_DELETE_CHAT_MESSAGE_URL(chatId, messageId),
+    method: 'DELETE',
+    credentials
+  })
 }
 
 const apiService = {
@@ -1218,7 +1304,13 @@ const apiService = {
   fetchKnownDomains,
   fetchDomainMutes,
   muteDomain,
-  unmuteDomain
+  unmuteDomain,
+  chats,
+  getOrCreateChat,
+  chatMessages,
+  sendChatMessage,
+  readChat,
+  deleteChatMessage
 }
 
 export default apiService

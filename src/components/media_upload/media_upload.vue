@@ -1,5 +1,8 @@
 <template>
-  <div class="media-upload">
+  <div
+    class="media-upload"
+    :class="{ disabled: disabled }"
+  >
     <label
       class="label"
       :title="$t('tool_tip.media_upload')"
@@ -14,6 +17,7 @@
       />
       <input
         v-if="uploadReady"
+        :disabled="disabled"
         type="file"
         style="position: fixed; top: -100em"
         multiple="true"
@@ -26,6 +30,8 @@
 <script src="./media_upload.js" ></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
+
 .media-upload {
   .label {
     display: inline-block;

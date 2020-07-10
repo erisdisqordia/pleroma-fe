@@ -1,3 +1,4 @@
+import { mapState, mapGetters } from 'vuex'
 import UserCard from '../user_card/user_card.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 import GestureService from '../../services/gesture_service/gesture_service'
@@ -47,7 +48,11 @@ const SideDrawer = {
     },
     federating () {
       return this.$store.state.instance.federating
-    }
+    },
+    ...mapState({
+      pleromaChatMessagesAvailable: state => state.instance.pleromaChatMessagesAvailable
+    }),
+    ...mapGetters(['unreadChatCount'])
   },
   methods: {
     toggleDrawer () {

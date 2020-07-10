@@ -15,7 +15,8 @@ const defaultState = {
     )
   },
   mobileLayout: false,
-  globalNotices: []
+  globalNotices: [],
+  layoutHeight: 0
 }
 
 const interfaceMod = {
@@ -65,6 +66,9 @@ const interfaceMod = {
     },
     removeGlobalNotice (state, notice) {
       state.globalNotices = state.globalNotices.filter(n => n !== notice)
+    },
+    setLayoutHeight (state, value) {
+      state.layoutHeight = value
     }
   },
   actions: {
@@ -110,6 +114,9 @@ const interfaceMod = {
     },
     removeGlobalNotice ({ commit }, notice) {
       commit('removeGlobalNotice', notice)
+    },
+    setLayoutHeight ({ commit }, value) {
+      commit('setLayoutHeight', value)
     }
   }
 }

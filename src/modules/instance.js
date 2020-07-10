@@ -55,6 +55,7 @@ const defaultState = {
 
   // Feature-set, apparently, not everything here is reported...
   chatAvailable: false,
+  pleromaChatMessagesAvailable: false,
   gopherAvailable: false,
   mediaProxyAvailable: false,
   suggestionsEnabled: false,

@@ -1,0 +1,94 @@
+.chat-list-item {
+  display: flex;
+  flex-direction: row;
+  padding: 0.75em;
+  height: 5em;
+  overflow: hidden;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  :focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: var(--selectedPost, $fallback--lightBg);
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  .chat-list-item-left {
+    margin-right: 1em;
+  }
+
+  .chat-list-item-center {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+
+  .heading {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    line-height: 1em;
+  }
+
+  .heading-right {
+    white-space: nowrap;
+  }
+
+  .name-and-account-name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    flex-shrink: 1;
+    line-height: 1.4em;
+  }
+
+  .chat-preview {
+    display: inline-flex;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0.35em 0;
+    color: $fallback--text;
+    color: var(--faint, $fallback--text);
+    width: 100%;
+  }
+
+  a {
+    color: var(--faintLink, $fallback--link);
+    text-decoration: none;
+    pointer-events: none;
+  }
+
+  &:hover .animated.avatar {
+    canvas {
+      display: none;
+    }
+    img {
+      visibility: visible;
+    }
+  }
+
+  .avatar.still-image {
+    border-radius: $fallback--avatarAltRadius;
+    border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+  }
+
+  .status-body {
+    img.emoji {
+      width: 1.4em;
+      height: 1.4em;
+    }
+  }
+
+  .time-wrapper {
+    line-height: 1.4em;
+  }
+
+  .single-line {
+    padding-right: 1em;
+  }
+}

@@ -44,6 +44,7 @@
   },
   "features_panel": {
     "chat": "Chat",
+    "pleroma_chat_messages": "Pleroma Chat",
     "gopher": "Gopher",
     "media_proxy": "Media proxy",
     "scope_options": "Scope options",
@@ -124,7 +125,8 @@
     "user_search": "User Search",
     "search": "Search",
     "who_to_follow": "Who to follow",
-    "preferences": "Preferences"
+    "preferences": "Preferences",
+    "chats": "Chats"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
@@ -287,6 +289,7 @@
     "change_password": "Change Password",
     "change_password_error": "There was an issue changing your password.",
     "changed_password": "Password changed successfully!",
+    "chatMessageRadius": "Chat message",
     "collapse_subject": "Collapse posts with subjects",
     "composing": "Composing",
     "confirm_new_password": "Confirm new password",
@@ -518,7 +521,12 @@
         "selectedMenu": "Selected menu item",
         "disabled": "Disabled",
         "toggled": "Toggled",
-        "tabs": "Tabs"
+        "tabs": "Tabs",
+        "chat": {
+          "incoming": "Incoming",
+          "outgoing": "Outgoing",
+          "border": "Border"
+        }
       },
       "radii": {
         "_tab_label": "Roundness"
@@ -677,6 +685,7 @@
     "its_you": "It's you!",
     "media": "Media",
     "mention": "Mention",
+    "message": "Message",
     "mute": "Mute",
     "muted": "Muted",
     "per_day": "per day",
@@ -775,5 +784,26 @@
     "password_reset_disabled": "Password reset is disabled. Please contact your instance administrator.",
     "password_reset_required": "You must reset your password to log in.",
     "password_reset_required_but_mailer_is_disabled": "You must reset your password, but password reset is disabled. Please contact your instance administrator."
+  },
+  "chats": {
+    "message_user": "Message {nickname}",
+    "delete": "Delete",
+    "chats": "Chats",
+    "new": "New Chat",
+    "empty_message_error": "Cannot post empty message",
+    "more": "More",
+    "delete_confirm": "Do you really want to delete this message?",
+    "error_loading_chat": "Something went wrong when loading the chat.",
+    "error_sending_message": "Something went wrong when sending the message.",
+    "empty_chat_list_placeholder": "You don't have any chats yet. Start a new chat!"
+  },
+  "file_type": {
+    "audio": "Audio",
+    "video": "Video",
+    "image": "Image",
+    "file": "File"
+  },
+  "display_date": {
+    "today": "Today"
   }
 }

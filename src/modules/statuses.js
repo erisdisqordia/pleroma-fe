@@ -478,7 +478,7 @@ export const mutations = {
   },
   setDeleted (state, { status }) {
     const newStatus = state.allStatusesObject[status.id]
-    newStatus.deleted = true
+    if (newStatus) newStatus.deleted = true
   },
   setManyDeleted (state, condition) {
     Object.values(state.allStatusesObject).forEach(status => {
@@ -520,6 +520,9 @@ export const mutations = {
   },
   dismissNotification (state, { id }) {
     state.notifications.data = state.notifications.data.filter(n => n.id !== id)
+  },
+  dismissNotifications (state, { finder }) {
+    state.notifications.data = state.notifications.data.filter(n => finder)
   },
   updateNotification (state, { id, updater }) {
     const notification = find(state.notifications.data, n => n.id === id)

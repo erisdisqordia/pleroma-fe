@@ -40,11 +40,23 @@
           </router-link>
         </li>
         <li
-          v-if="currentUser"
+          v-if="currentUser && pleromaChatMessagesAvailable"
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
             <i class="button-icon icon-mail-alt" /> {{ $t("nav.dms") }}
+          </router-link>
+          <router-link
+            :to="{ name: 'chats', params: { username: currentUser.screen_name } }"
+            style="position: relative"
+          >
+            <i class="button-icon icon-chat" /> {{ $t("nav.chats") }}
+            <span
+              v-if="unreadChatCount"
+              class="badge badge-notification unread-chat-count"
+            >
+              {{ unreadChatCount }}
+            </span>
           </router-link>
         </li>
         <li
@@ -101,14 +113,6 @@
         >
           <router-link to="/main/all">
             <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
-          </router-link>
-        </li>
-        <li
-          v-if="currentUser && chat"
-          @click="toggleDrawer"
-        >
-          <router-link :to="{ name: 'chat' }">
-            <i class="button-icon icon-chat" /> {{ $t("nav.chat") }}
           </router-link>
         </li>
       </ul>

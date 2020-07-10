@@ -28,7 +28,12 @@
     "disable": "Poista käytöstä",
     "confirm": "Hyväksy",
     "verify": "Varmenna",
-    "enable": "Ota käyttöön"
+    "enable": "Ota käyttöön",
+    "loading": "Ladataan…",
+    "error_retry": "Yritä uudelleen",
+    "retry": "Yritä uudelleen",
+    "close": "Sulje",
+    "peek": "Kurkkaa"
   },
   "login": {
     "login": "Kirjaudu sisään",
@@ -63,7 +68,8 @@
     "who_to_follow": "Seurausehdotukset",
     "preferences": "Asetukset",
     "administration": "Ylläpito",
-    "search": "Haku"
+    "search": "Haku",
+    "bookmarks": "Kirjanmerkit"
   },
   "notifications": {
     "broken_favorite": "Viestiä ei löydetty…",
@@ -126,7 +132,12 @@
       "public": "Tämä viesti näkyy kaikille",
       "private": "Tämä viesti näkyy vain sinun seuraajillesi",
       "unlisted": "Tämä viesti ei näy Julkisella Aikajanalla tai Koko Tunnettu Verkosto -aikajanalla"
-    }
+    },
+    "preview": "Esikatselu",
+    "preview_empty": "Tyhjä",
+    "empty_status_error": "Tyhjää viestiä ilman tiedostoja ei voi lähettää",
+    "media_description": "Tiedoston kuvaus",
+    "media_description_error": "Tiedostojen päivitys epäonnistui, yritä uudelleen"
   },
   "registration": {
     "bio": "Kuvaus",
@@ -175,7 +186,7 @@
     "data_import_export_tab": "Tietojen tuonti / vienti",
     "default_vis": "Oletusnäkyvyysrajaus",
     "delete_account": "Poista tili",
-    "delete_account_description": "Poista tilisi ja viestisi pysyvästi.",
+    "delete_account_description": "Poista tietosi ja lukitse tili pysyvästi.",
     "delete_account_error": "Virhe poistaessa tiliäsi. Jos virhe jatkuu, ota yhteyttä palvelimesi ylläpitoon.",
     "delete_account_instructions": "Syötä salasanasi vahvistaaksesi tilin poiston.",
     "emoji_reactions_on_timeline": "Näytä emojireaktiot aikajanalla",
@@ -329,7 +340,7 @@
     "post_status_content_type": "Uuden viestin sisällön muoto",
     "user_mutes": "Käyttäjät",
     "useStreamingApiWarning": "(Kokeellinen)",
-    "type_domains_to_mute": "Syötä mykistettäviä sivustoja",
+    "type_domains_to_mute": "Etsi mykistettäviä sivustoja",
     "upload_a_photo": "Lataa kuva",
     "fun": "Hupi",
     "greentext": "Meeminuolet",
@@ -490,7 +501,21 @@
       "title": "Versio",
       "backend_version": "Palvelimen versio",
       "frontend_version": "Käyttöliittymän versio"
-    }
+    },
+    "reset_profile_background": "Nollaa taustakuva",
+    "reset_background_confirm": "Haluatko todella nollata taustakuvan?",
+    "mutes_and_blocks": "Mykistykset ja Estot",
+    "bot": "Tämä on bottitili",
+    "profile_fields": {
+      "label": "Profiilin metatiedot",
+      "add_field": "Lisää kenttä",
+      "name": "Nimi",
+      "value": "Sisältö"
+    },
+    "reset_avatar": "Nollaa profiilikuva",
+    "reset_profile_banner": "Nollaa profiilin tausta",
+    "reset_avatar_confirm": "Haluatko todella nollata profiilikuvan?",
+    "reset_banner_confirm": "Haluatko todella nollata profiilin taustan?"
   },
   "time": {
     "day": "{0} päivä",
@@ -536,7 +561,8 @@
     "show_new": "Näytä uudet",
     "up_to_date": "Ajantasalla",
     "no_more_statuses": "Ei enempää viestejä",
-    "no_statuses": "Ei viestejä"
+    "no_statuses": "Ei viestejä",
+    "reload": "Päivitä"
   },
   "status": {
     "favorites": "Tykkäykset",
@@ -551,7 +577,15 @@
     "mute_conversation": "Mykistä keskustelu",
     "unmute_conversation": "Poista mykistys",
     "status_unavailable": "Viesti ei saatavissa",
-    "copy_link": "Kopioi linkki"
+    "copy_link": "Kopioi linkki",
+    "bookmark": "Lisää kirjanmerkkeihin",
+    "unbookmark": "Poista kirjanmerkeistä",
+    "thread_muted": "Keskustelu mykistetty",
+    "thread_muted_and_words": ", sisältää sanat:",
+    "show_full_subject": "Näytä koko otsikko",
+    "hide_full_subject": "Piilota koko otsikko",
+    "show_content": "Näytä sisältö",
+    "hide_content": "Piilota sisältö"
   },
   "user_card": {
     "approve": "Hyväksy",
@@ -561,7 +595,7 @@
     "follow": "Seuraa",
     "follow_sent": "Pyyntö lähetetty!",
     "follow_progress": "Pyydetään…",
-    "follow_again": "Lähetä pyyntö uudestaan",
+    "follow_again": "Lähetä pyyntö uudestaan?",
     "follow_unfollow": "Älä seuraa",
     "followees": "Seuraa",
     "followers": "Seuraajat",
@@ -601,7 +635,7 @@
     "subscribe": "Tilaa",
     "unsubscribe": "Poista tilaus",
     "unblock": "Poista esto",
-    "unblock_progress": "Postetaan estoa…",
+    "unblock_progress": "Poistetaan estoa…",
     "unmute": "Poista mykistys",
     "unmute_progress": "Poistetaan mykistystä…",
     "mute_progress": "Mykistetään…",
@@ -625,7 +659,8 @@
     "user_settings": "Käyttäjäasetukset",
     "add_reaction": "Lisää Reaktio",
     "accept_follow_request": "Hyväksy seurauspyyntö",
-    "reject_follow_request": "Hylkää seurauspyyntö"
+    "reject_follow_request": "Hylkää seurauspyyntö",
+    "bookmark": "Kirjanmerkki"
   },
   "upload": {
     "error": {
@@ -675,7 +710,7 @@
     "mute": "Mykistä",
     "unmute": "Poista mykistys",
     "mute_progress": "Mykistetään…",
-    "unmute_progress": "Poistetaan mykistyst…"
+    "unmute_progress": "Poistetaan mykistystä…"
   },
   "exporter": {
     "export": "Vie",
@@ -743,5 +778,8 @@
     "people_talking": "{0} käyttäjää puhuvat",
     "person_talking": "{0} käyttäjä puhuu",
     "no_results": "Ei tuloksia"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma ei voinut käyttää selaimen muistia. Kirjautumisesi ja paikalliset asetukset eivät tallennu ja saatat kohdata odottamattomia ongelmia. Yritä sallia evästeet."
   }
 }

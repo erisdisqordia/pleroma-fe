@@ -37,12 +37,14 @@ const ChatListItem = {
       }
     },
     messageForStatusContent () {
-      const content = this.chat.lastMessage ? (this.attachmentInfo || this.chat.lastMessage.content) : ''
-
+      const message = this.chat.lastMessage
+      const isYou = message && message.account_id === this.currentUser.id
+      const content = message ? (this.attachmentInfo || message.content) : ''
+      const messagePreview = isYou ? `<i>${this.$t('chats.you')}</i> ${content}` : content
       return {
         summary: '',
-        statusnet_html: content,
-        text: content,
+        statusnet_html: messagePreview,
+        text: messagePreview,
         attachments: []
       }
     }

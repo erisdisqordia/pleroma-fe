@@ -13,9 +13,8 @@ import {
   omitBy
 } from 'lodash'
 import { set } from 'vue'
-import { isStatusNotification, prepareNotificationObject } from '../services/notification_utils/notification_utils.js'
+import { isStatusNotification, maybeShowNotification } from '../services/notification_utils/notification_utils.js'
 import apiService from '../services/api/api.service.js'
-import { muteWordHits } from '../services/status_parser/status_parser.js'
 
 const emptyTl = (userId = 0) => ({
   statuses: [],
@@ -75,17 +74,6 @@ export const prepareStatus = (status) => {
   status.attachments = status.attachments || []
 
   return status
-}
-
-const visibleNotificationTypes = (rootState) => {
-  return [
-    rootState.config.notificationVisibility.likes && 'like',
-    rootState.config.notificationVisibility.mentions && 'mention',
-    rootState.config.notificationVisibility.repeats && 'repeat',
-    rootState.config.notificationVisibility.follows && 'follow',
-    rootState.config.notificationVisibility.moves && 'move',
-    rootState.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reactions'
-  ].filter(_ => _)
 }
 
 const mergeOrAdd = (arr, obj, item) => {
@@ -325,7 +313,7 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   }
 }
 
-const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters }) => {
+const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters, newNotificationSideEffects }) => {
   each(notifications, (notification) => {
     if (isStatusNotification(notification.type)) {
       notification.action = addStatusToGlobalStorage(state, notification.action).item
@@ -348,27 +336,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       state.notifications.data.push(notification)
       state.notifications.idStore[notification.id] = notification
 
-      if ('Notification' in window && window.Notification.permission === 'granted') {
-        const notifObj = prepareNotificationObject(notification, rootGetters.i18n)
-
-        const reasonsToMuteNotif = (
-          notification.seen ||
-            state.notifications.desktopNotificationSilence ||
-            !visibleNotificationTypes.includes(notification.type) ||
-            (
-              notification.type === 'mention' && status && (
-                status.muted ||
-                  muteWordHits(status, rootGetters.mergedConfig.muteWords).length === 0
-              )
-            )
-        )
-        if (!reasonsToMuteNotif) {
-          let desktopNotification = new window.Notification(notifObj.title, notifObj)
-          // Chrome is known for not closing notifications automatically
-          // according to MDN, anyway.
-          setTimeout(desktopNotification.close.bind(desktopNotification), 5000)
-        }
-      }
+      newNotificationSideEffects(notification)
     } else if (notification.seen) {
       state.notifications.idStore[notification.id].seen = true
     }
@@ -609,8 +577,13 @@ const statuses = {
     addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId, pagination }) {
       commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId, pagination })
     },
-    addNewNotifications ({ rootState, commit, dispatch, rootGetters }, { notifications, older }) {
-      commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older, rootGetters })
+    addNewNotifications (store, { notifications, older }) {
+      const { commit, dispatch, rootGetters } = store
+
+      const newNotificationSideEffects = (notification) => {
+        maybeShowNotification(store, notification)
+      }
+      commit('addNewNotifications', { dispatch, notifications, older, rootGetters, newNotificationSideEffects })
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })

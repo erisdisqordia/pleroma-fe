@@ -786,6 +786,7 @@
     "password_reset_required_but_mailer_is_disabled": "You must reset your password, but password reset is disabled. Please contact your instance administrator."
   },
   "chats": {
+    "you": "You:",
     "message_user": "Message {nickname}",
     "delete": "Delete",
     "chats": "Chats",

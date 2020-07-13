@@ -345,11 +345,6 @@
       "true": "はい"
     },
     "notifications": "通知",
-    "notification_setting": "通知を受け取る:",
-    "notification_setting_follows": "あなたがフォローしているユーザーから",
-    "notification_setting_non_follows": "あなたがフォローしていないユーザーから",
-    "notification_setting_followers": "あなたをフォローしているユーザーから",
-    "notification_setting_non_followers": "あなたをフォローしていないユーザーから",
     "notification_mutes": "特定のユーザーからの通知を止めるには、ミュートしてください。",
     "notification_blocks": "ブロックしているユーザーからの通知は、すべて止まります。",
     "enable_web_push_notifications": "ウェブプッシュ通知を許可する",

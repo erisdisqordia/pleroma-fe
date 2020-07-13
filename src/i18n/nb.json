@@ -330,11 +330,6 @@
       "true": "ja"
     },
     "notifications": "Varsler",
-    "notification_setting": "Motta varsler i fra:",
-    "notification_setting_follows": "Brukere du følger",
-    "notification_setting_non_follows": "Brukere du ikke følger",
-    "notification_setting_followers": "Brukere som følger deg",
-    "notification_setting_non_followers": "Brukere som ikke følger deg",
     "notification_mutes": "For å stoppe å motta varsler i fra en spesifikk bruker, kan du dempe dem.",
     "notification_blocks": "Hvis du blokkerer en bruker vil det stoppe alle varsler og i tilleg få dem til å slutte å følge deg",
     "enable_web_push_notifications": "Skru på pushnotifikasjoner i nettlesere",

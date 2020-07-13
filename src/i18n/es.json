@@ -344,11 +344,6 @@
       "true": "sí"
     },
     "notifications": "Notificaciones",
-    "notification_setting": "Recibir notificaciones de:",
-    "notification_setting_follows": "Usuarios que sigues",
-    "notification_setting_non_follows": "Usuarios que no sigues",
-    "notification_setting_followers": "Usuarios que te siguen",
-    "notification_setting_non_followers": "Usuarios que no te siguen",
     "notification_mutes": "Para dejar de recibir notificaciones de un usuario específico, siléncialo.",
     "notification_blocks": "El bloqueo de un usuario detiene todas las notificaciones y también las cancela.",
     "enable_web_push_notifications": "Habilitar las notificiaciones en el navegador",

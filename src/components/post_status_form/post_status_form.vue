@@ -5,19 +5,20 @@
   >
     <form
       autocomplete="off"
-      @submit.prevent="postStatus(newStatus)"
+      @submit.prevent
       @dragover.prevent="fileDrag"
     >
       <div
         v-show="showDropIcon !== 'hide'"
         :style="{ animation: showDropIcon === 'show' ? 'fade-in 0.25s' : 'fade-out 0.5s' }"
-        class="drop-indicator icon-upload"
+        class="drop-indicator"
+        :class="[uploadFileLimitReached ? 'icon-block' : 'icon-upload']"
         @dragleave="fileDragStop"
         @drop.stop="fileDrop"
       />
       <div class="form-group">
         <i18n
-          v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private'"
+          v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private' && !disableLockWarning"
           path="post_status.account_not_locked_warning"
           tag="p"
           class="visibility-notice"
@@ -69,15 +70,55 @@
           <span v-if="safeDMEnabled">{{ $t('post_status.direct_warning_to_first_only') }}</span>
           <span v-else>{{ $t('post_status.direct_warning_to_all') }}</span>
         </p>
+        <div
+          v-if="!disablePreview"
+          class="preview-heading faint"
+        >
+          <a
+            class="preview-toggle faint"
+            @click.stop.prevent="togglePreview"
+          >
+            {{ $t('post_status.preview') }}
+            <i
+              class="icon-down-open"
+              :style="{ transform: showPreview ? 'rotate(0deg)' : 'rotate(-90deg)' }"
+            />
+          </a>
+          <i
+            v-show="previewLoading"
+            class="icon-spin3 animate-spin"
+          />
+        </div>
+        <div
+          v-if="showPreview"
+          class="preview-container"
+        >
+          <div
+            v-if="!preview"
+            class="preview-status"
+          >
+            {{ $t('general.loading') }}
+          </div>
+          <div
+            v-else-if="preview.error"
+            class="preview-status preview-error"
+          >
+            {{ preview.error }}
+          </div>
+          <StatusContent
+            v-else
+            :status="preview"
+            class="preview-status"
+          />
+        </div>
         <EmojiInput
-          v-if="newStatus.spoilerText || alwaysShowSubject"
+          v-if="!disableSubject && (newStatus.spoilerText || alwaysShowSubject)"
           v-model="newStatus.spoilerText"
           enable-emoji-picker
           :suggest="emojiSuggestor"
           class="form-control"
         >
           <input
-
             v-model="newStatus.spoilerText"
             type="text"
             :placeholder="$t('post_status.content_warning')"
@@ -89,23 +130,28 @@
           ref="emoji-input"
           v-model="newStatus.status"
           :suggest="emojiUserSuggestor"
+          :placement="emojiPickerPlacement"
           class="form-control main-input"
           enable-emoji-picker
           hide-emoji-button
+          :newline-on-ctrl-enter="submitOnEnter"
           enable-sticker-picker
           @input="onEmojiInputInput"
           @sticker-uploaded="addMediaFile"
           @sticker-upload-failed="uploadFailed"
+          @shown="handleEmojiInputShow"
         >
           <textarea
             ref="textarea"
             v-model="newStatus.status"
-            :placeholder="$t('post_status.default')"
+            :placeholder="placeholder || $t('post_status.default')"
             rows="1"
             :disabled="posting"
             class="form-post-body"
-            @keydown.meta.enter="postStatus(newStatus)"
-            @keydown.ctrl.enter="postStatus(newStatus)"
+            :class="{ 'scrollable-form': !!maxHeight }"
+            @keydown.exact.enter="submitOnEnter && postStatus($event, newStatus)"
+            @keydown.meta.enter="postStatus($event, newStatus)"
+            @keydown.ctrl.enter="!submitOnEnter && postStatus($event, newStatus)"
             @input="resize"
             @compositionupdate="resize"
             @paste="paste"
@@ -118,7 +164,10 @@
             {{ charactersLeft }}
           </p>
         </EmojiInput>
-        <div class="visibility-tray">
+        <div
+          v-if="!disableScopeSelector"
+          class="visibility-tray"
+        >
           <scope-selector
             :show-all="showAllScopes"
             :user-default="userDefaultScope"
@@ -176,10 +225,11 @@
             ref="mediaUpload"
             class="media-upload-icon"
             :drop-files="dropFiles"
-            @uploading="disableSubmit"
+            :disabled="uploadFileLimitReached"
+            @uploading="startedUploadingFiles"
             @uploaded="addMediaFile"
             @upload-failed="uploadFailed"
-            @all-uploaded="enableSubmit"
+            @all-uploaded="finishedUploadingFiles"
           />
           <div
             class="emoji-icon"
@@ -216,11 +266,13 @@
         >
           {{ $t('general.submit') }}
         </button>
+        <!-- touchstart is used to keep the OSK at the same position after a message send -->
         <button
           v-else
-          :disabled="submitDisabled"
-          type="submit"
+          :disabled="uploadingFiles || disableSubmit"
           class="btn btn-default"
+          @touchstart.stop.prevent="postStatus($event, newStatus)"
+          @click.stop.prevent="postStatus($event, newStatus)"
         >
           {{ $t('general.submit') }}
         </button>
@@ -245,31 +297,22 @@
             class="fa button-icon icon-cancel"
             @click="removeMediaFile(file)"
           />
-          <div class="media-upload-container attachment">
-            <img
-              v-if="type(file) === 'image'"
-              class="thumbnail media-upload"
-              :src="file.url"
-            >
-            <video
-              v-if="type(file) === 'video'"
-              :src="file.url"
-              controls
-            />
-            <audio
-              v-if="type(file) === 'audio'"
-              :src="file.url"
-              controls
-            />
-            <a
-              v-if="type(file) === 'unknown'"
-              :href="file.url"
-            >{{ file.url }}</a>
-          </div>
+          <attachment
+            :attachment="file"
+            :set-media="() => $store.dispatch('setMedia', newStatus.files)"
+            size="small"
+            allow-play="false"
+          />
+          <input
+            v-model="newStatus.mediaDescriptions[file.id]"
+            type="text"
+            :placeholder="$t('post_status.media_description')"
+            @keydown.enter.prevent=""
+          >
         </div>
       </div>
       <div
-        v-if="newStatus.files.length > 0"
+        v-if="newStatus.files.length > 0 && !disableSensitivityCheckbox"
         class="upload_settings"
       >
         <Checkbox v-model="newStatus.nsfw">
@@ -303,14 +346,8 @@
 }
 
 .post-status-form {
-  .visibility-tray {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 5px;
-  }
-}
+  position: relative;
 
-.post-status-form {
   .form-bottom {
     display: flex;
     justify-content: space-between;
@@ -336,11 +373,59 @@
     max-width: 10em;
   }
 
+  .preview-heading {
+    display: flex;
+    width: 100%;
+
+    .icon-spin3 {
+      margin-left: auto;
+    }
+  }
+
+  .preview-toggle {
+    display: flex;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .icon-down-open {
+    transition: transform 0.1s;
+  }
+
+  .preview-container {
+    margin-bottom: 1em;
+  }
+
+  .preview-error {
+    font-style: italic;
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+  }
+
+  .preview-status {
+    border: 1px solid $fallback--border;
+    border: 1px solid var(--border, $fallback--border);
+    border-radius: $fallback--tooltipRadius;
+    border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    padding: 0.5em;
+    margin: 0;
+    line-height: 1.4em;
+  }
+
   .text-format {
     .only-format {
       color: $fallback--faint;
       color: var(--faint, $fallback--faint);
     }
+  }
+
+  .visibility-tray {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
   }
 
   .media-upload-icon, .poll-icon, .emoji-icon {
@@ -352,6 +437,19 @@
       i, label {
         color: $fallback--lightText;
         color: var(--lightText, $fallback--lightText);
+      }
+    }
+
+    &.disabled {
+      i {
+        cursor: not-allowed;
+        color: $fallback--icon;
+        color: var(--btnDisabledText, $fallback--icon);
+
+        &:hover {
+          color: $fallback--icon;
+          color: var(--btnDisabledText, $fallback--icon);
+        }
       }
     }
   }
@@ -381,11 +479,9 @@
   }
 
   .media-upload-wrapper {
-    flex: 0 0 auto;
-    max-width: 100%;
-    min-width: 50px;
     margin-right: .2em;
     margin-bottom: .5em;
+    width: 18em;
 
     .icon-cancel {
       display: inline-block;
@@ -399,6 +495,20 @@
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+
+    img, video {
+      object-fit: contain;
+      max-height: 10em;
+    }
+
+    .video {
+      max-height: 10em;
+    }
+
+    input {
+      flex: 1;
+      width: 100%;
+    }
   }
 
   .status-input-wrapper {
@@ -408,28 +518,13 @@
     flex-direction: column;
   }
 
-  .attachments {
+  .media-upload-wrapper .attachments {
     padding: 0 0.5em;
 
     .attachment {
       margin: 0;
+      padding: 0;
       position: relative;
-      flex: 0 0 auto;
-      border: 1px solid $fallback--border;
-      border: 1px solid var(--border, $fallback--border);
-      text-align: center;
-
-      audio {
-        min-width: 300px;
-        flex: 1 0 auto;
-      }
-
-      a {
-        display: block;
-        text-align: left;
-        line-height: 1.2;
-        padding: .5em;
-      }
     }
 
     i {
@@ -482,6 +577,10 @@
     padding-bottom: 1.75em;
     min-height: 1px;
     box-sizing: content-box;
+
+    &.scrollable-form {
+      overflow-y: auto;
+    }
   }
 
   .main-input {
@@ -543,5 +642,12 @@
     border: 2px dashed $fallback--text;
     border: 2px dashed var(--text, $fallback--text);
   }
+}
+
+// todo: unify with attachment.vue (otherwise the uploaded images are not minified unless a status with an attachment was displayed before)
+img.media-upload, .media-upload-container > video {
+  line-height: 0;
+  max-height: 200px;
+  max-width: 100%;
 }
 </style>

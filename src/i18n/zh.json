@@ -85,7 +85,7 @@
     "administration": "管理员"
   },
   "notifications": {
-    "broken_favorite": "未知的状态，正在搜索中...",
+    "broken_favorite": "未知的状态，正在搜索中…",
     "favorited_you": "收藏了你的状态",
     "followed_you": "关注了你",
     "load_older": "加载更早的通知",
@@ -185,7 +185,7 @@
       "generate_new_recovery_codes": "生成新的恢复码",
       "warning_of_generate_new_codes": "当你生成新的恢复码时，你的旧恢复码就失效了。",
       "recovery_codes": "恢复码。",
-      "waiting_a_recovery_codes": "正在接收备份码……",
+      "waiting_a_recovery_codes": "正在接收备份码…",
       "recovery_codes_warning": "抄写这些号码，或者保存在安全的地方。这些号码不会再次显示。如果你无法访问你的 2FA app，也丢失了你的恢复码，你的账号就再也无法登录了。",
       "authentication_methods": "身份验证方法",
       "scan": {
@@ -564,11 +564,11 @@
     "subscribe": "订阅",
     "unsubscribe": "退订",
     "unblock": "取消拉黑",
-    "unblock_progress": "取消拉黑中...",
-    "block_progress": "拉黑中...",
+    "unblock_progress": "取消拉黑中…",
+    "block_progress": "拉黑中…",
     "unmute": "取消隐藏",
-    "unmute_progress": "取消隐藏中...",
-    "mute_progress": "隐藏中...",
+    "unmute_progress": "取消隐藏中…",
+    "mute_progress": "隐藏中…",
     "admin_menu": {
       "moderation": "权限",
       "grant_admin": "赋予管理权限",
@@ -690,9 +690,9 @@
     }
   },
   "domain_mute_card": {
-    "unmute_progress": "正在取消隐藏……",
+    "unmute_progress": "正在取消隐藏…",
     "unmute": "取消隐藏",
-    "mute_progress": "隐藏中……",
+    "mute_progress": "隐藏中…",
     "mute": "隐藏"
   }
 }

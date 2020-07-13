@@ -46,7 +46,8 @@ export const defaultState = {
     repeats: true,
     moves: true,
     emojiReactions: false,
-    followRequest: true
+    followRequest: true,
+    chatMention: true
   },
   webPushNotifications: false,
   muteWords: [],

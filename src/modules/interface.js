@@ -14,7 +14,9 @@ const defaultState = {
       window.CSS.supports('-webkit-filter', 'drop-shadow(0 0)')
     )
   },
-  mobileLayout: false
+  mobileLayout: false,
+  globalNotices: [],
+  layoutHeight: 0
 }
 
 const interfaceMod = {
@@ -58,6 +60,15 @@ const interfaceMod = {
       if (!state.settingsModalLoaded) {
         state.settingsModalLoaded = true
       }
+    },
+    pushGlobalNotice (state, notice) {
+      state.globalNotices.push(notice)
+    },
+    removeGlobalNotice (state, notice) {
+      state.globalNotices = state.globalNotices.filter(n => n !== notice)
+    },
+    setLayoutHeight (state, value) {
+      state.layoutHeight = value
     }
   },
   actions: {
@@ -81,6 +92,31 @@ const interfaceMod = {
     },
     togglePeekSettingsModal ({ commit }) {
       commit('togglePeekSettingsModal')
+    },
+    pushGlobalNotice (
+      { commit, dispatch },
+      {
+        messageKey,
+        messageArgs = {},
+        level = 'error',
+        timeout = 0
+      }) {
+      const notice = {
+        messageKey,
+        messageArgs,
+        level
+      }
+      if (timeout) {
+        setTimeout(() => dispatch('removeGlobalNotice', notice), timeout)
+      }
+      commit('pushGlobalNotice', notice)
+      return notice
+    },
+    removeGlobalNotice ({ commit }, notice) {
+      commit('removeGlobalNotice', notice)
+    },
+    setLayoutHeight ({ commit }, value) {
+      commit('setLayoutHeight', value)
     }
   }
 }

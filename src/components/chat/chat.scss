@@ -1,0 +1,162 @@
+.chat-view {
+  display: flex;
+  height: calc(100vh - 60px);
+  width: 100%;
+
+  .chat-title {
+    // prevents chat header jumping on when the user avatar loads
+    height: 28px;
+  }
+
+  .chat-view-inner {
+    height: auto;
+    width: 100%;
+    overflow: visible;
+    display: flex;
+    margin: 0.5em 0.5em 0 0.5em;
+  }
+
+  .chat-view-body {
+    background-color: var(--chatBg, $fallback--bg);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: visible;
+    min-height: 100%;
+    margin: 0 0 0 0;
+    border-radius: 10px 10px 0 0;
+    border-radius: var(--panelRadius, 10px) var(--panelRadius, 10px) 0 0 ;
+
+    &::after {
+      border-radius: 0;
+    }
+  }
+
+  .scrollable-message-list {
+    padding: 0 0.8em;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer {
+    position: sticky;
+    bottom: 0;
+  }
+
+  .chat-view-heading {
+    align-items: center;
+    justify-content: space-between;
+    top: 50px;
+    display: flex;
+    z-index: 2;
+    position: sticky;
+    overflow: hidden;
+  }
+
+  .go-back-button {
+    cursor: pointer;
+    margin-right: 1.4em;
+
+    i {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .jump-to-bottom-button {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 100%;
+    position: absolute;
+    right: 1.3em;
+    top: -3.2em;
+    background-color: $fallback--fg;
+    background-color: var(--btn, $fallback--fg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3), 0px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    transition: 0.35s all;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    opacity: 0;
+    visibility: hidden;
+    cursor: pointer;
+
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    i {
+      font-size: 1em;
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
+
+    .unread-message-count {
+      font-size: 0.8em;
+      left: 50%;
+      transform: translate(-50%, 0);
+      border-radius: 100%;
+      margin-top: -1rem;
+      padding: 0;
+    }
+
+    .chat-loading-error {
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      height: 100%;
+
+      .error {
+        width: 100%;
+      }
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    height: 100%;
+    overflow: hidden;
+
+    .chat-view-inner {
+      overflow: hidden;
+      height: 100%;
+      margin-top: 0;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .chat-view-body {
+      display: flex;
+      min-height: auto;
+      overflow: hidden;
+      height: 100%;
+      margin: 0;
+      border-radius: 0;
+    }
+
+    .chat-view-heading {
+      position: static;
+      z-index: 9999;
+      top: 0;
+      margin-top: 0;
+      border-radius: 0;
+    }
+
+    .scrollable-message-list {
+      display: unset;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .footer {
+      position: sticky;
+      bottom: auto;
+    }
+  }
+}

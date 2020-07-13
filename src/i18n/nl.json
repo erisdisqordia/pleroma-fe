@@ -28,7 +28,12 @@
     "enable": "Inschakelen",
     "confirm": "Bevestigen",
     "verify": "Verifiëren",
-    "generic_error": "Er is een fout opgetreden"
+    "generic_error": "Er is een fout opgetreden",
+    "peek": "Spiek",
+    "close": "Sluiten",
+    "retry": "Opnieuw proberen",
+    "error_retry": "Probeer het opnieuw",
+    "loading": "Laden…"
   },
   "login": {
     "login": "Log in",
@@ -90,7 +95,7 @@
       "text/bbcode": "BBCode"
     },
     "content_warning": "Onderwerp (optioneel)",
-    "default": "Zojuist geland in L.A.",
+    "default": "Tijd voor anime!",
     "direct_warning": "Deze post zal enkel zichtbaar zijn voor de personen die genoemd zijn.",
     "posting": "Plaatsen",
     "scope": {
@@ -377,7 +382,7 @@
         "button": "Knop",
         "text": "Nog een boel andere {0} en {1}",
         "mono": "inhoud",
-        "input": "Zojuist geland in L.A.",
+        "input": "Tijd voor anime!",
         "faint_link": "handige gebruikershandleiding",
         "fine_print": "Lees onze {0} om niets nuttig te leren!",
         "header_faint": "Alles komt goed",
@@ -451,7 +456,7 @@
     "user_mutes": "Gebruikers",
     "useStreamingApi": "Berichten en meldingen in real-time ontvangen",
     "useStreamingApiWarning": "(Afgeraden, experimenteel, kan berichten overslaan)",
-    "type_domains_to_mute": "Voer domeinen in om te negeren",
+    "type_domains_to_mute": "Zoek domeinen om te negeren",
     "upload_a_photo": "Upload een foto",
     "fun": "Plezier",
     "greentext": "Meme pijlen",
@@ -470,7 +475,15 @@
       "frontend_version": "Frontend Versie",
       "backend_version": "Backend Versie",
       "title": "Versie"
-    }
+    },
+    "mutes_and_blocks": "Negeringen en Blokkades",
+    "profile_fields": {
+      "value": "Inhoud",
+      "name": "Label",
+      "add_field": "Veld Toevoegen",
+      "label": "Profiel metadata"
+    },
+    "bot": "Dit is een bot account"
   },
   "timeline": {
     "collapse": "Inklappen",
@@ -708,7 +721,9 @@
     "unpin": "Van profiel losmaken",
     "delete": "Status verwijderen",
     "repeats": "Herhalingen",
-    "favorites": "Favorieten"
+    "favorites": "Favorieten",
+    "thread_muted_and_words": ", heeft woorden:",
+    "thread_muted": "Thread genegeerd"
   },
   "time": {
     "years_short": "{0}j",

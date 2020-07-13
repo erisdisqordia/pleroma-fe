@@ -1,0 +1,29 @@
+.chat-new {
+  .input-wrap {
+    display: flex;
+    margin: 0.7em 0.5em 0.7em 0.5em;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .icon-search {
+    font-size: 1.5em;
+    float: right;
+    margin-right: 0.3em;
+  }
+
+  .member-list {
+    padding-bottom: 0.7rem;
+  }
+
+  .basic-user-card:hover {
+    cursor: pointer;
+    background-color: var(--selectedPost, $fallback--lightBg);
+  }
+
+  .go-back-button {
+    cursor: pointer;
+  }
+}

@@ -11,6 +11,8 @@
     <img
       ref="src"
       :key="src"
+      :alt="alt"
+      :title="alt"
       :src="src"
       :referrerpolicy="referrerpolicy"
       @load="onLoad"

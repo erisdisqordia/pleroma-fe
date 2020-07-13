@@ -19,14 +19,14 @@
         {{ errorData.statusText }}
       </div>
       <button
-        v-if="timeline.newStatusCount > 0 && !timelineError && !errorData"
+        v-else-if="showLoadButton"
         class="loadmore-button"
         @click.prevent="showNewStatuses"
       >
-        {{ $t('timeline.show_new') }}{{ newStatusCountStr }}
+        {{ loadButtonString }}
       </button>
       <div
-        v-if="!timeline.newStatusCount > 0 && !timelineError && !errorData"
+        v-else
         class="loadmore-text faint"
         @click.prevent
       >

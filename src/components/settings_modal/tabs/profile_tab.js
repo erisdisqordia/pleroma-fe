@@ -1,4 +1,5 @@
 import unescape from 'lodash/unescape'
+import merge from 'lodash/merge'
 import ImageCropper from 'src/components/image_cropper/image_cropper.vue'
 import ScopeSelector from 'src/components/scope_selector/scope_selector.vue'
 import fileSizeFormatService from 'src/components/../services/file_size_format/file_size_format.js'
@@ -16,6 +17,7 @@ const ProfileTab = {
       newLocked: this.$store.state.users.currentUser.locked,
       newNoRichText: this.$store.state.users.currentUser.no_rich_text,
       newDefaultScope: this.$store.state.users.currentUser.default_scope,
+      newFields: this.$store.state.users.currentUser.fields.map(field => ({ name: field.name, value: field.value })),
       hideFollows: this.$store.state.users.currentUser.hide_follows,
       hideFollowers: this.$store.state.users.currentUser.hide_followers,
       hideFollowsCount: this.$store.state.users.currentUser.hide_follows_count,
@@ -63,6 +65,45 @@ const ProfileTab = {
         ...this.$store.state.instance.emoji,
         ...this.$store.state.instance.customEmoji
       ] })
+    },
+    userSuggestor () {
+      return suggestor({
+        users: this.$store.state.users.users,
+        updateUsersList: (query) => this.$store.dispatch('searchUsers', { query })
+      })
+    },
+    fieldsLimits () {
+      return this.$store.state.instance.fieldsLimits
+    },
+    maxFields () {
+      return this.fieldsLimits ? this.fieldsLimits.maxFields : 0
+    },
+    defaultAvatar () {
+      return this.$store.state.instance.server + this.$store.state.instance.defaultAvatar
+    },
+    defaultBanner () {
+      return this.$store.state.instance.server + this.$store.state.instance.defaultBanner
+    },
+    isDefaultAvatar () {
+      const baseAvatar = this.$store.state.instance.defaultAvatar
+      return !(this.$store.state.users.currentUser.profile_image_url) ||
+      this.$store.state.users.currentUser.profile_image_url.includes(baseAvatar)
+    },
+    isDefaultBanner () {
+      const baseBanner = this.$store.state.instance.defaultBanner
+      return !(this.$store.state.users.currentUser.cover_photo) ||
+      this.$store.state.users.currentUser.cover_photo.includes(baseBanner)
+    },
+    isDefaultBackground () {
+      return !(this.$store.state.users.currentUser.background_image)
+    },
+    avatarImgSrc () {
+      const src = this.$store.state.users.currentUser.profile_image_url_original
+      return (!src) ? this.defaultAvatar : src
+    },
+    bannerImgSrc () {
+      const src = this.$store.state.users.currentUser.cover_photo
+      return (!src) ? this.defaultBanner : src
     }
   },
   methods: {
@@ -75,6 +116,7 @@ const ProfileTab = {
             // Backend notation.
             /* eslint-disable camelcase */
             display_name: this.newName,
+            fields_attributes: this.newFields.filter(el => el != null),
             default_scope: this.newDefaultScope,
             no_rich_text: this.newNoRichText,
             hide_follows: this.hideFollows,
@@ -87,12 +129,24 @@ const ProfileTab = {
             show_role: this.showRole
             /* eslint-enable camelcase */
           } }).then((user) => {
+          this.newFields.splice(user.fields.length)
+          merge(this.newFields, user.fields)
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
         })
     },
     changeVis (visibility) {
       this.newDefaultScope = visibility
+    },
+    addField () {
+      if (this.newFields.length < this.maxFields) {
+        this.newFields.push({ name: '', value: '' })
+        return true
+      }
+      return false
+    },
+    deleteField (index, event) {
+      this.$delete(this.newFields, index)
     },
     uploadFile (slot, e) {
       const file = e.target.files[0]
@@ -123,11 +177,29 @@ const ProfileTab = {
       }
       reader.readAsDataURL(file)
     },
+    resetAvatar () {
+      const confirmed = window.confirm(this.$t('settings.reset_avatar_confirm'))
+      if (confirmed) {
+        this.submitAvatar(undefined, '')
+      }
+    },
+    resetBanner () {
+      const confirmed = window.confirm(this.$t('settings.reset_banner_confirm'))
+      if (confirmed) {
+        this.submitBanner('')
+      }
+    },
+    resetBackground () {
+      const confirmed = window.confirm(this.$t('settings.reset_background_confirm'))
+      if (confirmed) {
+        this.submitBackground('')
+      }
+    },
     submitAvatar (cropper, file) {
       const that = this
       return new Promise((resolve, reject) => {
         function updateAvatar (avatar) {
-          that.$store.state.api.backendInteractor.updateAvatar({ avatar })
+          that.$store.state.api.backendInteractor.updateProfileImages({ avatar })
             .then((user) => {
               that.$store.commit('addNewUsers', [user])
               that.$store.commit('setCurrentUser', user)
@@ -145,11 +217,11 @@ const ProfileTab = {
         }
       })
     },
-    submitBanner () {
-      if (!this.bannerPreview) { return }
+    submitBanner (banner) {
+      if (!this.bannerPreview && banner !== '') { return }
 
       this.bannerUploading = true
-      this.$store.state.api.backendInteractor.updateBanner({ banner: this.banner })
+      this.$store.state.api.backendInteractor.updateProfileImages({ banner })
         .then((user) => {
           this.$store.commit('addNewUsers', [user])
           this.$store.commit('setCurrentUser', user)
@@ -160,11 +232,11 @@ const ProfileTab = {
         })
         .then(() => { this.bannerUploading = false })
     },
-    submitBg () {
-      if (!this.backgroundPreview) { return }
-      let background = this.background
+    submitBackground (background) {
+      if (!this.backgroundPreview && background !== '') { return }
+
       this.backgroundUploading = true
-      this.$store.state.api.backendInteractor.updateBg({ background }).then((data) => {
+      this.$store.state.api.backendInteractor.updateProfileImages({ background }).then((data) => {
         if (!data.error) {
           this.$store.commit('addNewUsers', [data])
           this.$store.commit('setCurrentUser', data)

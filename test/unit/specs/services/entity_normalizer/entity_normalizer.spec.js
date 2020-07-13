@@ -1,4 +1,4 @@
-import { parseStatus, parseUser, parseNotification, addEmojis } from '../../../../../src/services/entity_normalizer/entity_normalizer.service.js'
+import { parseStatus, parseUser, parseNotification, addEmojis, parseLinkHeaderPagination } from '../../../../../src/services/entity_normalizer/entity_normalizer.service.js'
 import mastoapidata from '../../../../fixtures/mastoapi.json'
 import qvitterapidata from '../../../../fixtures/statuses.json'
 
@@ -381,6 +381,26 @@ describe('API Entities normalizer', () => {
       const result = addEmojis('This post has :c++: emoji and :[a-z] {|}*: emoji', emojis)
       expect(result).to.include('title=\':c++:\'')
       expect(result).to.include('title=\':[a-z] {|}*:\'')
+    })
+  })
+
+  describe('Link header pagination', () => {
+    it('Parses min and max ids as integers', () => {
+      const linkHeader = '<https://example.com/api/v1/notifications?max_id=861676>; rel="next", <https://example.com/api/v1/notifications?min_id=861741>; rel="prev"'
+      const result = parseLinkHeaderPagination(linkHeader)
+      expect(result).to.eql({
+        'maxId': 861676,
+        'minId': 861741
+      })
+    })
+
+    it('Parses min and max ids as flakes', () => {
+      const linkHeader = '<http://example.com/api/v1/timelines/home?max_id=9waQx5IIS48qVue2Ai>; rel="next", <http://example.com/api/v1/timelines/home?min_id=9wi61nIPnfn674xgie>; rel="prev"'
+      const result = parseLinkHeaderPagination(linkHeader, { flakeId: true })
+      expect(result).to.eql({
+        'maxId': '9waQx5IIS48qVue2Ai',
+        'minId': '9wi61nIPnfn674xgie'
+      })
     })
   })
 })

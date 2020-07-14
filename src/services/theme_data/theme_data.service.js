@@ -132,7 +132,6 @@ export const topoSort = (
   // The index thing is to make sorting stable on browsers
   // where Array.sort() isn't stable
   return output.map((data, index) => ({ data, index })).sort(({ data: a, index: ai }, { data: b, index: bi }) => {
-    console.log(a, b, ai, bi)
     const depsA = getDeps(a, inheritance).length
     const depsB = getDeps(b, inheritance).length
 

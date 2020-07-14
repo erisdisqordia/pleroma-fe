@@ -28,7 +28,10 @@ const ReactButton = {
     },
     emojis () {
       if (this.filterWord !== '') {
-        return this.$store.state.instance.emoji.filter(emoji => emoji.displayText.includes(this.filterWord))
+        const filterWordLowercase = this.filterWord.toLowerCase()
+        return this.$store.state.instance.emoji.filter(emoji =>
+          emoji.displayText.toLowerCase().includes(filterWordLowercase)
+        )
       }
       return this.$store.state.instance.emoji || []
     },

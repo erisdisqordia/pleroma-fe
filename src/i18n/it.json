@@ -53,7 +53,6 @@
   },
   "settings": {
     "attachments": "Allegati",
-    "autoload": "Abilita caricamento automatico quando raggiungi il fondo pagina",
     "avatar": "Icona utente",
     "bio": "Introduzione",
     "current_avatar": "La tua icona attuale",
@@ -67,7 +66,6 @@
     "nsfw_clickthrough": "Fai click per visualizzare gli allegati offuscati",
     "profile_background": "Sfondo della tua pagina",
     "profile_banner": "Stendardo del tuo profilo",
-    "reply_link_preview": "Visualizza le risposte al passaggio del cursore",
     "set_new_avatar": "Scegli una nuova icona",
     "set_new_profile_background": "Scegli un nuovo sfondo per la tua pagina",
     "set_new_profile_banner": "Scegli un nuovo stendardo per il tuo profilo",

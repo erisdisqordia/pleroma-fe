@@ -86,27 +86,11 @@
           </router-link>
         </li>
         <li
-<<<<<<< HEAD
           v-if="chat"
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'chat' }">
             <i class="button-icon icon-chat" /> {{ $t("nav.chat") }}
-=======
-          v-if="currentUser || !privateMode"
-          @click="toggleDrawer"
-        >
-          <router-link to="/main/public">
-            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
-          </router-link>
-        </li>
-        <li
-          v-if="federating && (currentUser || !privateMode)"
-          @click="toggleDrawer"
-        >
-          <router-link to="/main/all">
-            <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
->>>>>>> develop
           </router-link>
         </li>
       </ul>

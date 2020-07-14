@@ -299,7 +299,6 @@
     "profile_tab": "个人资料",
     "radii_help": "设置界面边缘的圆角 (单位：像素)",
     "replies_in_timeline": "时间线中的回复",
-    "reply_link_preview": "启用鼠标悬停时预览回复链接",
     "reply_visibility_all": "显示所有回复",
     "reply_visibility_following": "只显示发送给我的回复/发送给我关注的用户的回复",
     "reply_visibility_self": "只显示发送给我的回复",

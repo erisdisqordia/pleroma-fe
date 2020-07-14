@@ -178,7 +178,6 @@
   "settings.profile_tab": "Profile",
   "settings.radii_help": "Set up interface edge rounding (in pixels)",
   "settings.replies_in_timeline": "Replies in timeline",
-  "settings.reply_link_preview": "Enable reply-link preview on mouse hover",
   "settings.reply_visibility_all": "Show all replies",
   "settings.reply_visibility_following": "Only show replies directed at me or users I'm following",
   "settings.reply_visibility_self": "Only show replies directed at me",

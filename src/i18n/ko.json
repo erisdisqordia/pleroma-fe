@@ -90,7 +90,6 @@
   "settings": {
     "attachmentRadius": "첨부물",
     "attachments": "첨부물",
-    "autoload": "최하단에 도착하면 자동으로 로드 활성화",
     "avatar": "아바타",
     "avatarAltRadius": "아바타 (알림)",
     "avatarRadius": "아바타",

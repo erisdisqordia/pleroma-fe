@@ -163,7 +163,6 @@
   "settings": {
     "attachmentRadius": "Liitteet",
     "attachments": "Liitteet",
-    "autoload": "Lataa vanhempia viestejä automaattisesti ruudun pohjalla",
     "avatar": "Profiilikuva",
     "avatarAltRadius": "Profiilikuvat (ilmoitukset)",
     "avatarRadius": "Profiilikuvat",

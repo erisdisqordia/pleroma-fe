@@ -1,0 +1,164 @@
+@import '../../_variables.scss';
+
+.chat-message-wrapper {
+  &.hovered-message-chain {
+    .animated.avatar {
+      canvas {
+        display: none;
+      }
+      img {
+        visibility: visible;
+      }
+    }
+  }
+
+  .chat-message-menu {
+    transition: opacity 0.1s;
+    opacity: 0;
+    position: absolute;
+    top: -0.8em;
+
+    button {
+      padding-top: 0.2em;
+      padding-bottom: 0.2em;
+    }
+  }
+
+  .icon-ellipsis {
+    cursor: pointer;
+
+    &:hover, .extra-button-popover.open & {
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
+
+    border-radius: $fallback--chatMessageRadius;
+    border-radius: var(--chatMessageRadius, $fallback--chatMessageRadius);
+  }
+
+  .popover {
+    width: 12em;
+  }
+
+  .chat-message {
+    display: flex;
+    padding-bottom: 0.5em;
+  }
+
+  .avatar-wrapper {
+    margin-right: 0.72em;
+    width: 32px;
+  }
+
+  .link-preview, .attachments {
+    margin-bottom: 1em;
+  }
+
+  .chat-message-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 80%;
+    min-width: 10em;
+    width: 100%;
+
+    &.with-media {
+      width: 100%;
+
+      .gallery-row {
+        overflow: hidden;
+      }
+
+      .status {
+        width: 100%;
+      }
+    }
+  }
+
+  .status {
+    border-radius: $fallback--chatMessageRadius;
+    border-radius: var(--chatMessageRadius, $fallback--chatMessageRadius);
+    display: flex;
+    padding: 0.75em;
+  }
+
+  .created-at {
+    position: relative;
+    float: right;
+    font-size: 0.8em;
+    margin: -1em 0 -0.5em 0;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  .without-attachment {
+    .status-content {
+      &::after {
+        margin-right: 5.4em;
+        content: " ";
+        display: inline-block;
+      }
+    }
+  }
+
+  .incoming {
+    a {
+      color: var(--chatMessageIncomingLink, $fallback--link);
+    }
+
+    .status {
+      color: var(--chatMessageIncomingText, $fallback--text);
+      background-color: var(--chatMessageIncomingBg, $fallback--bg);
+      border: 1px solid var(--chatMessageIncomingBorder, --border);
+    }
+
+    .created-at {
+      a {
+        color: var(--chatMessageIncomingText, $fallback--text);
+      }
+    }
+
+    .chat-message-menu {
+      left: 0.4rem;
+    }
+  }
+
+  .outgoing {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: end;
+    justify-content: flex-end;
+
+    a {
+      color: var(--chatMessageOutgoingLink, $fallback--link);
+    }
+
+    .status {
+      color: var(--chatMessageOutgoingText, $fallback--text);
+      background-color: var(--chatMessageOutgoingBg, $fallback--lightBg);
+      border: 1px solid var(--chatMessageOutgoingBorder, --lightBg);
+    }
+
+    .chat-message-inner {
+      align-items: flex-end;
+    }
+
+    .chat-message-menu {
+      right: 0.4rem;
+    }
+  }
+
+  .visible {
+    opacity: 1;
+  }
+}
+
+.chat-message-date-separator {
+  text-align: center;
+  margin: 1.4em 0;
+  font-size: 0.9em;
+  user-select: none;
+  color: $fallback--text;
+  color: var(--faintedText, $fallback--text);
+}

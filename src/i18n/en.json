@@ -44,6 +44,7 @@
   },
   "features_panel": {
     "chat": "Chat",
+    "pleroma_chat_messages": "Pleroma Chat",
     "gopher": "Gopher",
     "media_proxy": "Media proxy",
     "scope_options": "Scope options",
@@ -125,7 +126,8 @@
     "search": "Search",
     "who_to_follow": "Who to follow",
     "preferences": "Preferences",
-    "timelines": "Timelines"
+    "timelines": "Timelines",
+    "chats": "Chats"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
@@ -288,12 +290,11 @@
     "change_password": "Change Password",
     "change_password_error": "There was an issue changing your password.",
     "changed_password": "Password changed successfully!",
+    "chatMessageRadius": "Chat message",
     "collapse_subject": "Collapse posts with subjects",
     "composing": "Composing",
     "confirm_new_password": "Confirm new password",
-    "current_avatar": "Your current avatar",
     "current_password": "Current password",
-    "current_profile_banner": "Your current profile banner",
     "mutes_and_blocks": "Mutes and Blocks",
     "data_import_export_tab": "Data Import / Export",
     "default_vis": "Default visibility scope",
@@ -400,6 +401,12 @@
     "set_new_avatar": "Set new avatar",
     "set_new_profile_background": "Set new profile background",
     "set_new_profile_banner": "Set new profile banner",
+    "reset_avatar": "Reset avatar",
+    "reset_profile_background": "Reset profile background",
+    "reset_profile_banner": "Reset profile banner",
+    "reset_avatar_confirm": "Do you really want to reset the avatar?",
+    "reset_banner_confirm": "Do you really want to reset the banner?",
+    "reset_background_confirm": "Do you really want to reset the background?",
     "settings": "Settings",
     "subject_input_always_show": "Always show subject field",
     "subject_line_behavior": "Copy subject when replying",
@@ -515,7 +522,12 @@
         "selectedMenu": "Selected menu item",
         "disabled": "Disabled",
         "toggled": "Toggled",
-        "tabs": "Tabs"
+        "tabs": "Tabs",
+        "chat": {
+          "incoming": "Incoming",
+          "outgoing": "Outgoing",
+          "border": "Border"
+        }
       },
       "radii": {
         "_tab_label": "Roundness"
@@ -674,6 +686,7 @@
     "its_you": "It's you!",
     "media": "Media",
     "mention": "Mention",
+    "message": "Message",
     "mute": "Mute",
     "muted": "Muted",
     "per_day": "per day",
@@ -772,5 +785,27 @@
     "password_reset_disabled": "Password reset is disabled. Please contact your instance administrator.",
     "password_reset_required": "You must reset your password to log in.",
     "password_reset_required_but_mailer_is_disabled": "You must reset your password, but password reset is disabled. Please contact your instance administrator."
+  },
+  "chats": {
+    "you": "You:",
+    "message_user": "Message {nickname}",
+    "delete": "Delete",
+    "chats": "Chats",
+    "new": "New Chat",
+    "empty_message_error": "Cannot post empty message",
+    "more": "More",
+    "delete_confirm": "Do you really want to delete this message?",
+    "error_loading_chat": "Something went wrong when loading the chat.",
+    "error_sending_message": "Something went wrong when sending the message.",
+    "empty_chat_list_placeholder": "You don't have any chats yet. Start a new chat!"
+  },
+  "file_type": {
+    "audio": "Audio",
+    "video": "Video",
+    "image": "Image",
+    "file": "File"
+  },
+  "display_date": {
+    "today": "Today"
   }
 }

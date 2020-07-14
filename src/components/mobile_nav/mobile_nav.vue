@@ -3,6 +3,7 @@
     <nav
       id="nav"
       class="nav-bar container"
+      :class="{ 'mobile-hidden': isChat }"
     >
       <div
         class="mobile-inner-nav"
@@ -15,6 +16,10 @@
             @click.stop.prevent="toggleMobileSidebar()"
           >
             <i class="button-icon icon-menu" />
+            <div
+              v-if="unreadChatCount"
+              class="alert-dot"
+            />
           </a>
           <router-link
             v-if="!hideSitename"

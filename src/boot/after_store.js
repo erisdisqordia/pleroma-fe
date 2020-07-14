@@ -20,12 +20,20 @@ const parsedInitialResults = () => {
   return staticInitialResults
 }
 
+const decodeUTF8Base64 = (data) => {
+  const rawData = atob(data)
+  const array = Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)))
+  const text = new TextDecoder().decode(array)
+  return text
+}
+
 const preloadFetch = async (request) => {
   const data = parsedInitialResults()
   if (!data || !data[request]) {
     return window.fetch(request)
   }
-  const requestData = JSON.parse(atob(data[request]))
+  const decoded = decodeUTF8Base64(data[request])
+  const requestData = JSON.parse(decoded)
   return {
     ok: true,
     json: () => requestData,
@@ -230,6 +238,7 @@ const getNodeInfo = async ({ store }) => {
       store.dispatch('setInstanceOption', { name: 'mediaProxyAvailable', value: features.includes('media_proxy') })
       store.dispatch('setInstanceOption', { name: 'safeDM', value: features.includes('safe_dm_mentions') })
       store.dispatch('setInstanceOption', { name: 'chatAvailable', value: features.includes('chat') })
+      store.dispatch('setInstanceOption', { name: 'pleromaChatMessagesAvailable', value: features.includes('pleroma_chat_messages') })
       store.dispatch('setInstanceOption', { name: 'gopherAvailable', value: features.includes('gopher') })
       store.dispatch('setInstanceOption', { name: 'pollsAvailable', value: features.includes('polls') })
       store.dispatch('setInstanceOption', { name: 'pollLimits', value: metadata.pollLimits })

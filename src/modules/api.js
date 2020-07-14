@@ -1,4 +1,5 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
+import { WSConnectionStatus } from '../services/api/api.service.js'
 import { Socket } from 'phoenix'
 
 const api = {
@@ -7,6 +8,7 @@ const api = {
     fetchers: {},
     socket: null,
     mastoUserSocket: null,
+    mastoUserSocketStatus: null,
     followRequests: []
   },
   mutations: {
@@ -28,6 +30,9 @@ const api = {
     },
     setFollowRequests (state, value) {
       state.followRequests = value
+    },
+    setMastoUserSocketStatus (state, value) {
+      state.mastoUserSocketStatus = value
     }
   },
   actions: {
@@ -47,7 +52,7 @@ const api = {
     startMastoUserSocket (store) {
       return new Promise((resolve, reject) => {
         try {
-          const { state, dispatch, rootState } = store
+          const { state, commit, dispatch, rootState } = store
           const timelineData = rootState.statuses.timelines.friends
           state.mastoUserSocket = state.backendInteractor.startUserSocket({ store })
           state.mastoUserSocket.addEventListener(
@@ -66,11 +71,22 @@ const api = {
                   showImmediately: timelineData.visibleStatuses.length === 0,
                   timeline: 'friends'
                 })
+              } else if (message.event === 'pleroma:chat_update') {
+                dispatch('addChatMessages', {
+                  chatId: message.chatUpdate.id,
+                  messages: [message.chatUpdate.lastMessage]
+                })
+                dispatch('updateChat', { chat: message.chatUpdate })
               }
             }
           )
+          state.mastoUserSocket.addEventListener('open', () => {
+            commit('setMastoUserSocketStatus', WSConnectionStatus.JOINED)
+          })
           state.mastoUserSocket.addEventListener('error', ({ detail: error }) => {
             console.error('Error in MastoAPI websocket:', error)
+            commit('setMastoUserSocketStatus', WSConnectionStatus.ERROR)
+            dispatch('clearOpenedChats')
           })
           state.mastoUserSocket.addEventListener('close', ({ detail: closeEvent }) => {
             const ignoreCodes = new Set([
@@ -84,8 +100,11 @@ const api = {
               console.warn(`MastoAPI websocket disconnected, restarting. CloseEvent code: ${code}`)
               dispatch('startFetchingTimeline', { timeline: 'friends' })
               dispatch('startFetchingNotifications')
+              dispatch('startFetchingChats')
               dispatch('restartMastoUserSocket')
             }
+            commit('setMastoUserSocketStatus', WSConnectionStatus.CLOSED)
+            dispatch('clearOpenedChats')
           })
           resolve()
         } catch (e) {
@@ -99,12 +118,13 @@ const api = {
       return dispatch('startMastoUserSocket').then(() => {
         dispatch('stopFetchingTimeline', { timeline: 'friends' })
         dispatch('stopFetchingNotifications')
+        dispatch('stopFetchingChats')
       })
     },
     stopMastoUserSocket ({ state, dispatch }) {
       dispatch('startFetchingTimeline', { timeline: 'friends' })
       dispatch('startFetchingNotifications')
-      console.log(state.mastoUserSocket)
+      dispatch('startFetchingChats')
       state.mastoUserSocket.close()
     },
 

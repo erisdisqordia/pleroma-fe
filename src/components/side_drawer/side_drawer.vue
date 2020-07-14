@@ -47,6 +47,23 @@
             <i class="button-icon icon-home-2" /> {{ $t("nav.timelines") }}
           </router-link>
         </li>
+        <li
+          v-if="currentUser && pleromaChatMessagesAvailable"
+          @click="toggleDrawer"
+        >
+          <router-link
+            :to="{ name: 'chats', params: { username: currentUser.screen_name } }"
+            style="position: relative"
+          >
+            <i class="button-icon icon-chat" /> {{ $t("nav.chats") }}
+            <span
+              v-if="unreadChatCount"
+              class="badge badge-notification unread-chat-count"
+            >
+              {{ unreadChatCount }}
+            </span>
+          </router-link>
+        </li>
       </ul>
       <ul v-if="currentUser">
         <li @click="toggleDrawer">
@@ -69,11 +86,27 @@
           </router-link>
         </li>
         <li
+<<<<<<< HEAD
           v-if="chat"
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'chat' }">
             <i class="button-icon icon-chat" /> {{ $t("nav.chat") }}
+=======
+          v-if="currentUser || !privateMode"
+          @click="toggleDrawer"
+        >
+          <router-link to="/main/public">
+            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
+          </router-link>
+        </li>
+        <li
+          v-if="federating && (currentUser || !privateMode)"
+          @click="toggleDrawer"
+        >
+          <router-link to="/main/all">
+            <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
+>>>>>>> develop
           </router-link>
         </li>
       </ul>

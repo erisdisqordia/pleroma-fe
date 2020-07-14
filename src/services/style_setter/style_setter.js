@@ -106,7 +106,8 @@ export const generateRadii = (input) => {
     avatar: 5,
     avatarAlt: 50,
     tooltip: 2,
-    attachment: 5
+    attachment: 5,
+    chatMessage: inputRadii.panel
   })
 
   return {

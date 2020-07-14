@@ -43,6 +43,7 @@
       </a>
       <div
         v-if="!hideSubjectStatus"
+        :class="{ 'single-line': singleLine }"
         class="status-content media-body"
         @click.prevent="linkClicked"
         v-html="postBodyHtml"
@@ -76,7 +77,7 @@
         />
       </a>
       <a
-        v-if="showingMore"
+        v-if="showingMore && !fullContent"
         href="#"
         class="status-unhider"
         @click.prevent="toggleShowMore"
@@ -268,6 +269,12 @@ $status-margin: 0.75em;
 
     h4 {
       margin: 1.1em 0;
+    }
+
+    &.single-line {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
 }

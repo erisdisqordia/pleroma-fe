@@ -1,14 +1,22 @@
+import Vuex from 'vuex'
 import routes from 'src/boot/routes'
 import { createLocalVue } from '@vue/test-utils'
 import VueRouter from 'vue-router'
 
 const localVue = createLocalVue()
+localVue.use(Vuex)
 localVue.use(VueRouter)
+
+const store = new Vuex.Store({
+  state: {
+    instance: {}
+  }
+})
 
 describe('routes', () => {
   const router = new VueRouter({
     mode: 'abstract',
-    routes: routes({})
+    routes: routes(store)
   })
 
   it('root path', () => {

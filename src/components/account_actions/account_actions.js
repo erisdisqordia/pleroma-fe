@@ -1,3 +1,4 @@
+import { mapState } from 'vuex'
 import ProgressButton from '../progress_button/progress_button.vue'
 import Popover from '../popover/popover.vue'
 
@@ -27,7 +28,18 @@ const AccountActions = {
     },
     reportUser () {
       this.$store.dispatch('openUserReportingModal', this.user.id)
+    },
+    openChat () {
+      this.$router.push({
+        name: 'chat',
+        params: { recipient_id: this.user.id }
+      })
     }
+  },
+  computed: {
+    ...mapState({
+      pleromaChatMessagesAvailable: state => state.instance.pleromaChatMessagesAvailable
+    })
   }
 }
 

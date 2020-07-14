@@ -1,5 +1,5 @@
-import { mapState } from 'vuex'
 import { timelineNames } from '../timeline_menu/timeline_menu.js'
+import { mapState, mapGetters } from 'vuex'
 
 const NavPanel = {
   created () {
@@ -18,8 +18,10 @@ const NavPanel = {
       currentUser: state => state.users.currentUser,
       followRequestCount: state => state.api.followRequests.length,
       privateMode: state => state.instance.private,
-      federating: state => state.instance.federating
-    })
+      federating: state => state.instance.federating,
+      pleromaChatMessagesAvailable: state => state.instance.pleromaChatMessagesAvailable
+    }),
+    ...mapGetters(['unreadChatCount'])
   }
 }
 

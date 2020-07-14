@@ -14,11 +14,12 @@ const StatusContent = {
     'status',
     'focused',
     'noHeading',
-    'fullContent'
+    'fullContent',
+    'singleLine'
   ],
   data () {
     return {
-      showingTall: this.inConversation && this.focused,
+      showingTall: this.fullContent || (this.inConversation && this.focused),
       showingLongSubject: false,
       // not as computed because it sets the initial state which will be changed later
       expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject

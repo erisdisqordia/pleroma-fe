@@ -35,7 +35,8 @@
     "search": "Ricerca",
     "who_to_follow": "Chi seguire",
     "preferences": "Preferenze",
-    "bookmarks": "Segnalibri"
+    "bookmarks": "Segnalibri",
+    "chats": "Conversazioni"
   },
   "notifications": {
     "followed_you": "ti segue",
@@ -85,7 +86,7 @@
     "change_password": "Cambia password",
     "change_password_error": "C'è stato un problema durante il cambiamento della password.",
     "changed_password": "Password cambiata correttamente!",
-    "collapse_subject": "Ripiega messaggi con Oggetto",
+    "collapse_subject": "Ripiega messaggi con oggetto",
     "confirm_new_password": "Conferma la nuova password",
     "current_password": "La tua password attuale",
     "data_import_export_tab": "Importa o esporta dati",
@@ -257,7 +258,12 @@
         "panel_header": "Titolo pannello",
         "badge_notification": "Notifica",
         "popover": "Suggerimenti, menù, sbalzi",
-        "toggled": "Scambiato"
+        "toggled": "Scambiato",
+        "chat": {
+          "border": "Bordo",
+          "outgoing": "Inviati",
+          "incoming": "Ricevuti"
+        }
       },
       "common_colors": {
         "rgbo": "Icone, accenti, medaglie",
@@ -398,7 +404,14 @@
       "frontend_version": "Versione interfaccia",
       "backend_version": "Versione backend",
       "title": "Versione"
-    }
+    },
+    "reset_avatar": "Azzera icona",
+    "reset_profile_background": "Azzera sfondo profilo",
+    "reset_profile_banner": "Azzera stendardo profilo",
+    "reset_avatar_confirm": "Vuoi veramente azzerare l'icona?",
+    "reset_banner_confirm": "Vuoi veramente azzerare lo stendardo?",
+    "reset_background_confirm": "Vuoi veramente azzerare lo sfondo?",
+    "chatMessageRadius": "Messaggi istantanei"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",
@@ -427,7 +440,47 @@
     "block": "Blocca",
     "blocked": "Bloccato!",
     "deny": "Nega",
-    "remote_follow": "Segui da remoto"
+    "remote_follow": "Segui da remoto",
+    "admin_menu": {
+      "delete_user_confirmation": "Ne sei completamente sicuro? Quest'azione non può essere annullata.",
+      "delete_user": "Elimina utente",
+      "quarantine": "I messaggi non arriveranno alle altre stanze",
+      "disable_any_subscription": "Rendi utente non seguibile",
+      "disable_remote_subscription": "Blocca i tentativi di seguirlo da altre stanze",
+      "sandbox": "Rendi tutti i messaggi solo per seguaci",
+      "force_unlisted": "Rendi tutti i messaggi invisibili",
+      "strip_media": "Rimuovi ogni allegato ai messaggi",
+      "force_nsfw": "Oscura tutti i messaggi",
+      "delete_account": "Elimina profilo",
+      "deactivate_account": "Disattiva profilo",
+      "activate_account": "Attiva profilo",
+      "revoke_moderator": "Divesti Moderatore",
+      "grant_moderator": "Crea Moderatore",
+      "revoke_admin": "Divesti Amministratore",
+      "grant_admin": "Crea Amministratore",
+      "moderation": "Moderazione"
+    },
+    "show_repeats": "Mostra condivisioni",
+    "hide_repeats": "Nascondi condivisioni",
+    "mute_progress": "Zittisco…",
+    "unmute_progress": "Riabilito…",
+    "unmute": "Riabilita",
+    "block_progress": "Blocco…",
+    "unblock_progress": "Sblocco…",
+    "unblock": "Sblocca",
+    "unsubscribe": "Disdici",
+    "subscribe": "Abbònati",
+    "report": "Segnala",
+    "mention": "Menzioni",
+    "media": "Media",
+    "its_you": "Sei tu!",
+    "hidden": "Nascosto",
+    "follow_unfollow": "Disconosci",
+    "follow_again": "Reinvio richiesta?",
+    "follow_progress": "Richiedo…",
+    "follow_sent": "Richiesta inviata!",
+    "favorites": "Preferiti",
+    "message": "Contatta"
   },
   "chat": {
     "title": "Chat"
@@ -439,7 +492,8 @@
     "scope_options": "Opzioni visibilità",
     "text_limit": "Lunghezza massima",
     "title": "Caratteristiche",
-    "who_to_follow": "Chi seguire"
+    "who_to_follow": "Chi seguire",
+    "pleroma_chat_messages": "Chiacchiere"
   },
   "finder": {
     "error_fetching_user": "Errore nel recupero dell'utente",
@@ -493,7 +547,9 @@
     "new_status": "Nuovo messaggio",
     "empty_status_error": "Non puoi pubblicare messaggi vuoti senza allegati",
     "preview_empty": "Vuoto",
-    "preview": "Anteprima"
+    "preview": "Anteprima",
+    "media_description_error": "Allegati non caricati, riprova",
+    "media_description": "Descrizione allegati"
   },
   "registration": {
     "bio": "Introduzione",
@@ -517,7 +573,9 @@
     "captcha": "CAPTCHA"
   },
   "user_profile": {
-    "timeline_title": "Sequenza dell'Utente"
+    "timeline_title": "Sequenza dell'Utente",
+    "profile_loading_error": "Spiacente, c'è stato un errore nel caricamento del profilo.",
+    "profile_does_not_exist": "Spiacente, questo profilo non esiste."
   },
   "who_to_follow": {
     "more": "Altro",
@@ -626,7 +684,22 @@
     "pin": "Intesta al profilo",
     "delete": "Elimina messaggio",
     "repeats": "Condivisi",
-    "favorites": "Preferiti"
+    "favorites": "Preferiti",
+    "hide_content": "Nascondi contenuti",
+    "show_content": "Mostra contenuti",
+    "hide_full_subject": "Nascondi intero oggetto",
+    "show_full_subject": "Mostra intero oggetto",
+    "thread_muted_and_words": ", contiene:",
+    "thread_muted": "Discussione zittita",
+    "copy_link": "Copia collegamento",
+    "status_unavailable": "Messaggio non disponibile",
+    "unmute_conversation": "Riabilita conversazione",
+    "mute_conversation": "Zittisci conversazione",
+    "replies_list": "Risposte:",
+    "reply_to": "Rispondi a",
+    "delete_confirm": "Vuoi veramente eliminare questo messaggio?",
+    "unbookmark": "Rimuovi segnalibro",
+    "bookmark": "Aggiungi segnalibro"
   },
   "time": {
     "years_short": "{0}a",
@@ -661,5 +734,80 @@
     "day_short": "{0}g",
     "days": "{0} giorni",
     "day": "{0} giorno"
+  },
+  "user_reporting": {
+    "title": "Segnalo {0}",
+    "additional_comments": "Osservazioni accessorie",
+    "generic_error": "C'è stato un errore nell'elaborazione della tua richiesta.",
+    "submit": "Invia",
+    "forward_to": "Inoltra a {0}",
+    "forward_description": "Il profilo appartiene ad un'altra stanza. Inviare la segnalazione anche a quella?",
+    "add_comment_description": "La segnalazione sarà inviata ai moderatori della tua stanza. Puoi motivarla qui sotto:"
+  },
+  "password_reset": {
+    "password_reset_required_but_mailer_is_disabled": "Devi reimpostare la tua password, ma non puoi farlo. Contatta il tuo amministratore.",
+    "password_reset_required": "Devi reimpostare la tua password per poter continuare.",
+    "password_reset_disabled": "Non puoi azzerare la tua password. Contatta il tuo amministratore.",
+    "too_many_requests": "Hai raggiunto il numero massimo di tentativi, riprova più tardi.",
+    "not_found": "Non ho trovato questa email o nome utente.",
+    "return_home": "Torna alla pagina principale",
+    "check_email": "Controlla la tua posta elettronica.",
+    "placeholder": "La tua email o nome utente",
+    "instruction": "Inserisci il tuo indirizzo email o il tuo nome utente. Ti invieremo un collegamento per reimpostare la tua password.",
+    "password_reset": "Azzera password",
+    "forgot_password": "Password dimenticata?"
+  },
+  "search": {
+    "no_results": "Nessun risultato",
+    "people_talking": "{count} partecipanti",
+    "person_talking": "{count} partecipante",
+    "hashtags": "Etichette",
+    "people": "Utenti"
+  },
+  "upload": {
+    "file_size_units": {
+      "TiB": "TiB",
+      "GiB": "GiB",
+      "MiB": "MiB",
+      "KiB": "KiB",
+      "B": "B"
+    },
+    "error": {
+      "default": "Riprova in seguito",
+      "file_too_big": "File troppo pesante [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+      "base": "Caricamento fallito."
+    }
+  },
+  "tool_tip": {
+    "bookmark": "Aggiungi segnalibro",
+    "reject_follow_request": "Rifiuta seguace",
+    "accept_follow_request": "Accetta seguace",
+    "user_settings": "Impostazioni utente",
+    "add_reaction": "Reagisci",
+    "favorite": "Gradisci",
+    "reply": "Rispondi",
+    "repeat": "Ripeti",
+    "media_upload": "Carica allegati"
+  },
+  "display_date": {
+    "today": "Oggi"
+  },
+  "file_type": {
+    "file": "File",
+    "image": "Immagine",
+    "video": "Video",
+    "audio": "Audio"
+  },
+  "chats": {
+    "empty_chat_list_placeholder": "Non hai conversazioni. Contatta qualcuno!",
+    "error_sending_message": "Errore. Il messaggio non è stato inviato.",
+    "error_loading_chat": "Errore. La conversazione non è stata caricata.",
+    "delete_confirm": "Vuoi veramente eliminare questo messaggio?",
+    "more": "Altro",
+    "empty_message_error": "Non puoi inviare messaggi vuoti",
+    "new": "Nuova conversazione",
+    "chats": "Conversazioni",
+    "delete": "Elimina",
+    "message_user": "Contatta {nickname}"
   }
 }

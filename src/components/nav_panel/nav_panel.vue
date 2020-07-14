@@ -15,6 +15,17 @@
             <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
           </router-link>
         </li>
+        <li v-if="currentUser && pleromaChatMessagesAvailable">
+          <router-link :to="{ name: 'chats', params: { username: currentUser.screen_name } }">
+            <div
+              v-if="unreadChatCount"
+              class="badge badge-notification unread-chat-count"
+            >
+              {{ unreadChatCount }}
+            </div>
+            <i class="button-icon icon-chat" /> {{ $t("nav.chats") }}
+          </router-link>
+        </li>
         <li v-if="currentUser && currentUser.locked">
           <router-link :to="{ name: 'friend-requests' }">
             <i class="button-icon icon-user-plus" /> {{ $t("nav.friend_requests") }}

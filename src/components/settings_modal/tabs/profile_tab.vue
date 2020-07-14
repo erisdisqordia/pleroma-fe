@@ -161,11 +161,19 @@
       <p class="visibility-notice">
         {{ $t('settings.avatar_size_instruction') }}
       </p>
-      <p>{{ $t('settings.current_avatar') }}</p>
-      <img
-        :src="user.profile_image_url_original"
-        class="current-avatar"
-      >
+      <div class="current-avatar-container">
+        <img
+          :src="user.profile_image_url_original"
+          class="current-avatar"
+        >
+        <i
+          v-if="!isDefaultAvatar && pickAvatarBtnVisible"
+          :title="$t('settings.reset_avatar')"
+          class="reset-button icon-cancel"
+          type="button"
+          @click="resetAvatar"
+        />
+      </div>
       <p>{{ $t('settings.set_new_avatar') }}</p>
       <button
         v-show="pickAvatarBtnVisible"
@@ -184,15 +192,20 @@
     </div>
     <div class="setting-item">
       <h2>{{ $t('settings.profile_banner') }}</h2>
-      <p>{{ $t('settings.current_profile_banner') }}</p>
-      <img
-        :src="user.cover_photo"
-        class="banner"
-      >
+      <div class="banner-background-preview">
+        <img :src="user.cover_photo">
+        <i
+          v-if="!isDefaultBanner"
+          :title="$t('settings.reset_profile_banner')"
+          class="reset-button icon-cancel"
+          type="button"
+          @click="resetBanner"
+        />
+      </div>
       <p>{{ $t('settings.set_new_profile_banner') }}</p>
       <img
         v-if="bannerPreview"
-        class="banner"
+        class="banner-background-preview"
         :src="bannerPreview"
       >
       <div>
@@ -208,7 +221,7 @@
       <button
         v-else-if="bannerPreview"
         class="btn btn-default"
-        @click="submitBanner"
+        @click="submitBanner(banner)"
       >
         {{ $t('general.submit') }}
       </button>
@@ -225,10 +238,20 @@
     </div>
     <div class="setting-item">
       <h2>{{ $t('settings.profile_background') }}</h2>
+      <div class="banner-background-preview">
+        <img :src="user.background_image">
+        <i
+          v-if="!isDefaultBackground"
+          :title="$t('settings.reset_profile_background')"
+          class="reset-button icon-cancel"
+          type="button"
+          @click="resetBackground"
+        />
+      </div>
       <p>{{ $t('settings.set_new_profile_background') }}</p>
       <img
         v-if="backgroundPreview"
-        class="bg"
+        class="banner-background-preview"
         :src="backgroundPreview"
       >
       <div>
@@ -244,7 +267,7 @@
       <button
         v-else-if="backgroundPreview"
         class="btn btn-default"
-        @click="submitBg"
+        @click="submitBackground(background)"
       >
         {{ $t('general.submit') }}
       </button>

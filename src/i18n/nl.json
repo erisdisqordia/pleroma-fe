@@ -136,7 +136,6 @@
   "settings": {
     "attachmentRadius": "Bijlages",
     "attachments": "Bijlages",
-    "autoload": "Automatisch laden inschakelen wanneer tot de bodem gescrold wordt",
     "avatar": "Avatar",
     "avatarAltRadius": "Avatars (Meldingen)",
     "avatarRadius": "Avatars",
@@ -217,7 +216,6 @@
     "profile_tab": "Profiel",
     "radii_help": "Stel afronding van hoeken in de interface in (in pixels)",
     "replies_in_timeline": "Antwoorden in tijdlijn",
-    "reply_link_preview": "Antwoord-link weergave inschakelen bij aanwijzen met muisaanwijzer",
     "reply_visibility_all": "Alle antwoorden tonen",
     "reply_visibility_following": "Enkel antwoorden tonen die aan mij of gevolgde gebruikers gericht zijn",
     "reply_visibility_self": "Enkel antwoorden tonen die aan mij gericht zijn",

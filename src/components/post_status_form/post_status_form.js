@@ -27,6 +27,11 @@ const buildMentionsString = ({ user, attentions = [] }, currentUser) => {
   return mentions.length > 0 ? mentions.join(' ') + ' ' : ''
 }
 
+// Converts a string with px to a number like '2px' -> 2
+const pxStringToNumber = (str) => {
+  return Number(str.substring(0, str.length - 2))
+}
+
 const PostStatusForm = {
   props: [
     'replyTo',
@@ -423,7 +428,7 @@ const PostStatusForm = {
        * scroll is different for `Window` and `Element`s
        */
       const bottomBottomPaddingStr = window.getComputedStyle(bottomRef)['padding-bottom']
-      const bottomBottomPadding = Number(bottomBottomPaddingStr.substring(0, bottomBottomPaddingStr.length - 2))
+      const bottomBottomPadding = pxStringToNumber(bottomBottomPaddingStr)
 
       const scrollerRef = this.$el.closest('.sidebar-scroller') ||
             this.$el.closest('.post-form-modal-view') ||
@@ -432,9 +437,11 @@ const PostStatusForm = {
       // Getting info about padding we have to account for, removing 'px' part
       const topPaddingStr = window.getComputedStyle(target)['padding-top']
       const bottomPaddingStr = window.getComputedStyle(target)['padding-bottom']
-      const topPadding = Number(topPaddingStr.substring(0, topPaddingStr.length - 2))
-      const bottomPadding = Number(bottomPaddingStr.substring(0, bottomPaddingStr.length - 2))
+      const topPadding = pxStringToNumber(topPaddingStr)
+      const bottomPadding = pxStringToNumber(bottomPaddingStr)
       const vertPadding = topPadding + bottomPadding
+
+      const oldHeight = pxStringToNumber(target.style.height)
 
       /* Explanation:
        *
@@ -464,8 +471,13 @@ const PostStatusForm = {
 
       // BEGIN content size update
       target.style.height = 'auto'
-      const heightWithoutPadding = target.scrollHeight - vertPadding
-      const newHeight = this.maxHeight ? Math.min(heightWithoutPadding, this.maxHeight) : heightWithoutPadding
+      const heightWithoutPadding = Math.floor(target.scrollHeight - vertPadding)
+      let newHeight = this.maxHeight ? Math.min(heightWithoutPadding, this.maxHeight) : heightWithoutPadding
+      // This is a bit of a hack to combat target.scrollHeight being different on every other input
+      // on some browsers for whatever reason. Don't change the height if difference is 1px or less.
+      if (Math.abs(newHeight - oldHeight) <= 1) {
+        newHeight = oldHeight
+      }
       target.style.height = `${newHeight}px`
       this.$emit('resize', newHeight)
       // END content size update

@@ -399,8 +399,6 @@
     "changed_email": "Email Adresse erfolgreich geändert!",
     "change_email_error": "Es trat ein Problem auf beim Versuch, deine Email Adresse zu ändern.",
     "change_email": "Ändere Email",
-    "notification_setting_non_followers": "Nutzer, die dir nicht folgen",
-    "notification_setting_followers": "Nutzer, die dir folgen",
     "import_blocks_from_a_csv_file": "Importiere Blocks von einer CSV Datei",
     "accent": "Akzent"
   },

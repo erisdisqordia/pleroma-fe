@@ -80,7 +80,8 @@
           >
             {{ $t('post_status.preview') }}
             <i
-              :class="showPreview ? 'icon-up-open' : 'icon-down-open'"
+              class="icon-left-open"
+              :style="{ 'transform': showPreview ? 'rotate(90deg)' : 'rotate(-90deg)' }"
             />
           </a>
           <i
@@ -385,11 +386,13 @@
   .preview-toggle {
     display: flex;
     cursor: pointer;
+    user-select: none;
 
     &:hover {
       text-decoration: underline;
     }
     i {
+      margin-left: 0.2em;
       font-size: 0.9em;
     }
   }

@@ -2,16 +2,11 @@
   <div :label="$t('settings.notifications')">
     <div class="setting-item">
       <h2>{{ $t('settings.notification_setting_filters') }}</h2>
-      <div class="select-multiple">
-        <span class="label">{{ $t('settings.notification_setting') }}</span>
-        <ul class="option-list">
-          <li>
-            <Checkbox v-model="notificationSettings.block_from_strangers">
-              {{ $t('settings.notification_setting_block_from_strangers') }}
-            </Checkbox>
-          </li>
-        </ul>
-      </div>
+      <p>
+        <Checkbox v-model="notificationSettings.block_from_strangers">
+          {{ $t('settings.notification_setting_block_from_strangers') }}
+        </Checkbox>
+      </p>
     </div>
 
     <div class="setting-item">

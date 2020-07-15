@@ -128,14 +128,17 @@ export const topoSort = (
   while (unprocessed.length > 0) {
     step(unprocessed.pop())
   }
-  return output.sort((a, b) => {
+
+  // The index thing is to make sorting stable on browsers
+  // where Array.sort() isn't stable
+  return output.map((data, index) => ({ data, index })).sort(({ data: a, index: ai }, { data: b, index: bi }) => {
     const depsA = getDeps(a, inheritance).length
     const depsB = getDeps(b, inheritance).length
 
-    if (depsA === depsB || (depsB !== 0 && depsA !== 0)) return 0
+    if (depsA === depsB || (depsB !== 0 && depsA !== 0)) return ai - bi
     if (depsA === 0 && depsB !== 0) return -1
     if (depsB === 0 && depsA !== 0) return 1
-  })
+  }).map(({ data }) => data)
 }
 
 const expandSlotValue = (value) => {

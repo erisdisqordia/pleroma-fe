@@ -675,23 +675,22 @@ export const SLOT_INHERITANCE = {
     depends: ['bg']
   },
 
-  chatMessage: {
-    depends: ['chatBg']
-  },
-
   chatMessageIncomingBg: {
-    depends: ['chatMessage'],
-    layer: 'chatMessage'
+    depends: ['chatBg']
   },
 
   chatMessageIncomingText: {
     depends: ['text'],
-    layer: 'text'
+    layer: 'chatMessage',
+    variant: 'chatMessageIncomingBg',
+    textColor: true
   },
 
   chatMessageIncomingLink: {
     depends: ['link'],
-    layer: 'link'
+    layer: 'chatMessage',
+    variant: 'chatMessageIncomingBg',
+    textColor: 'preserve'
   },
 
   chatMessageIncomingBorder: {
@@ -701,22 +700,27 @@ export const SLOT_INHERITANCE = {
   },
 
   chatMessageOutgoingBg: {
-    depends: ['chatMessage'],
+    depends: ['chatMessageIncomingBg'],
     color: (mod, chatMessage) => brightness(5 * mod, chatMessage).rgb
   },
 
   chatMessageOutgoingText: {
     depends: ['text'],
-    layer: 'text'
+    layer: 'chatMessage',
+    variant: 'chatMessageOutgoingBg',
+    textColor: true
   },
 
   chatMessageOutgoingLink: {
     depends: ['link'],
-    layer: 'link'
+    layer: 'chatMessage',
+    variant: 'chatMessageOutgoingBg',
+    textColor: 'preserve'
   },
 
   chatMessageOutgoingBorder: {
-    depends: ['chatMessage'],
-    opacity: 'chatMessage'
+    depends: ['chatMessageOutgoingBg'],
+    opacity: 'border',
+    color: (mod, border) => brightness(2 * mod, border).rgb
   }
 }

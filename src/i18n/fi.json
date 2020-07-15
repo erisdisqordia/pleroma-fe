@@ -163,7 +163,6 @@
   "settings": {
     "attachmentRadius": "Liitteet",
     "attachments": "Liitteet",
-    "autoload": "Lataa vanhempia viestejä automaattisesti ruudun pohjalla",
     "avatar": "Profiilikuva",
     "avatarAltRadius": "Profiilikuvat (ilmoitukset)",
     "avatarRadius": "Profiilikuvat",
@@ -250,7 +249,6 @@
     "profile_tab": "Profiili",
     "radii_help": "Aseta reunojen pyöristys (pikseleinä)",
     "replies_in_timeline": "Keskustelut aikajanalla",
-    "reply_link_preview": "Keskusteluiden vastauslinkkien esikatselu",
     "reply_visibility_all": "Näytä kaikki vastaukset",
     "reply_visibility_following": "Näytä vain vastaukset minulle tai seuraamilleni käyttäjille",
     "reply_visibility_self": "Näytä vain vastaukset minulle",

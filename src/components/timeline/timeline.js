@@ -148,7 +148,6 @@ const Timeline = {
       const bodyBRect = document.body.getBoundingClientRect()
       const height = Math.max(bodyBRect.height, -(bodyBRect.y))
       if (this.timeline.loading === false &&
-          this.$store.getters.mergedConfig.autoLoad &&
           this.$el.offsetHeight > 0 &&
           (window.innerHeight + window.pageYOffset) >= (height - 750)) {
         this.fetchOlderStatuses()

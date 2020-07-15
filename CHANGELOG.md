@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Add colons to the emoji alt text, to make them copyable
 - Add better visual indication for drag-and-drop for files
 - When disabling attachments, the placeholder links now show an icon and the description instead of just IMAGE or VIDEO etc
+- Remove unnecessary options for 'automatic loading when loading older' and 'reply previews'
 
 ### Fixed
 - Custom Emoji will display in poll options now.

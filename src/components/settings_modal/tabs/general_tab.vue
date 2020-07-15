@@ -54,16 +54,6 @@
           </Checkbox>
         </li>
         <li>
-          <Checkbox v-model="autoLoad">
-            {{ $t('settings.autoload') }}
-          </Checkbox>
-        </li>
-        <li>
-          <Checkbox v-model="hoverPreview">
-            {{ $t('settings.reply_link_preview') }}
-          </Checkbox>
-        </li>
-        <li>
           <Checkbox v-model="emojiReactionsOnTimeline">
             {{ $t('settings.emoji_reactions_on_timeline') }}
           </Checkbox>

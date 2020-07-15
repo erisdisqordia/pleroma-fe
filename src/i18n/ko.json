@@ -90,7 +90,6 @@
   "settings": {
     "attachmentRadius": "첨부물",
     "attachments": "첨부물",
-    "autoload": "최하단에 도착하면 자동으로 로드 활성화",
     "avatar": "아바타",
     "avatarAltRadius": "아바타 (알림)",
     "avatarRadius": "아바타",
@@ -172,7 +171,6 @@
     "profile_tab": "프로필",
     "radii_help": "인터페이스 모서리 둥글기 (픽셀 단위)",
     "replies_in_timeline": "답글을 타임라인에",
-    "reply_link_preview": "마우스를 올려서 답글 링크 미리보기 활성화",
     "reply_visibility_all": "모든 답글 보기",
     "reply_visibility_following": "나에게 직접 오는 답글이나 내가 팔로우 중인 사람에게서 오는 답글만 표시",
     "reply_visibility_self": "나에게 직접 전송 된 답글만 보이기",

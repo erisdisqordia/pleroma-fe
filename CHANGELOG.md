@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Descriptions can be set on uploaded files before posting
 - Added status preview option to preview your statuses before posting
 - When a post is a reply to an unavailable post, the 'Reply to'-text has a strike-through style
+- Added ability to see all favoriting or repeating users when hovering the number on highlighted statuses
 
 ### Changed
 - Registration page no longer requires email if the server is configured not to require it

@@ -208,14 +208,18 @@ const PostStatusForm = {
     })
   },
   watch: {
-    'newStatus.contentType': function () {
-      this.autoPreview()
-    },
-    'newStatus.spoilerText': function () {
-      this.autoPreview()
+    'newStatus': {
+      deep: true,
+      handler () {
+        this.statusChanged()
+      }
     }
   },
   methods: {
+    statusChanged () {
+      this.autoPreview()
+      this.updateIdempotencyKey()
+    },
     clearStatus () {
       const newStatus = this.newStatus
       this.newStatus = {
@@ -239,7 +243,6 @@ const PostStatusForm = {
       el.style.height = 'auto'
       el.style.height = undefined
       this.error = null
-      this.updateIdempotencyKey()
       if (this.preview) this.previewStatus()
     },
     async postStatus (event, newStatus, opts = {}) {
@@ -407,7 +410,6 @@ const PostStatusForm = {
       }
     },
     onEmojiInputInput (e) {
-      this.autoPreview()
       this.$nextTick(() => {
         this.resize(this.$refs['textarea'])
       })

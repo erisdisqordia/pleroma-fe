@@ -30,10 +30,6 @@ const postStatus = ({
     idempotencyKey
   })
     .then((data) => {
-      return {
-        error: 'test'
-      }
-      /*
       if (!data.error && !preview) {
         store.dispatch('addNewStatuses', {
           statuses: [data],
@@ -43,7 +39,6 @@ const postStatus = ({
         })
       }
       return data
-      */
     })
     .catch((err) => {
       return {

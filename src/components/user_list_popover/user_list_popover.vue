@@ -13,7 +13,7 @@
     >
       <div v-if="users.length">
         <div
-          v-for="(user) in users"
+          v-for="(user) in usersCapped"
           :key="user.id"
           class="user-list-row"
         >

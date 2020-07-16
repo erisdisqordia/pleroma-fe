@@ -66,6 +66,7 @@
             <div class="bottom-line">
               <router-link
                 class="user-screen-name"
+                :title="user.screen_name"
                 :to="userProfileLink(user)"
               >
                 @{{ user.screen_name }}

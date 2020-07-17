@@ -43,7 +43,9 @@ const fetchAndUpdate = ({
   args['userId'] = userId
   args['tag'] = tag
   args['withMuted'] = !hideMutedPosts
-  if (loggedIn) args['replyVisibility'] = replyVisibility
+  if (loggedIn && ['friends', 'public', 'publicAndExternal'].includes(timeline)) {
+    args['replyVisibility'] = replyVisibility
+  }
 
   const numStatusesBeforeFetch = timelineData.statuses.length
 

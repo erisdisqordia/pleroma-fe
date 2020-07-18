@@ -256,7 +256,7 @@
         "contrast": {
           "hint": "Poměr kontrastu je {ratio}, {level} {context}",
           "level": {
-            "aa": "splňuje směrnici úrovně AA  (minimální)",
+            "aa": "splňuje směrnici úrovně AA (minimální)",
             "aaa": "splňuje směrnici úrovně AAA (doporučováno)",
             "bad": "nesplňuje žádné směrnice přístupnosti"
           },
@@ -398,7 +398,6 @@
     "reply_to": "Odpověď uživateli",
     "replies_list": "Odpovědi:"
   },
-
   "user_card": {
     "approve": "Schválit",
     "block": "Blokovat",
@@ -444,7 +443,7 @@
     "favorite": "Oblíbit",
     "user_settings": "Uživatelské nastavení"
   },
-  "upload":{
+  "upload": {
     "error": {
       "base": "Nahrávání selhalo.",
       "file_too_big": "Soubor je příliš velký [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",

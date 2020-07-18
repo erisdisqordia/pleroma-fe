@@ -317,7 +317,7 @@
       },
       "fonts": {
         "_tab_label": "Tiparoj",
-        "help": "Elektu tiparon uzotan por eroj de la fasado. Por \"propra\" vi devas enigi la precizan nomon de tiparo tiel, kiel ĝi aperas en la sistemo",
+        "help": "Elektu tiparon uzotan por eroj de la fasado. Por \"propra\" vi devas enigi la precizan nomon de tiparo tiel, kiel ĝi aperas en la sistemo.",
         "components": {
           "interface": "Fasado",
           "input": "Enigaj kampoj",
@@ -402,7 +402,7 @@
     "favorite": "Ŝati",
     "user_settings": "Agordoj de uzanto"
   },
-  "upload":{
+  "upload": {
     "error": {
       "base": "Alŝuto malsukcesis.",
       "file_too_big": "Dosiero estas tro granda [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",

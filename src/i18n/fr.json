@@ -343,7 +343,8 @@
           "migration_snapshot_ok": "Pour être sûr un instantanée du thème à été chargé. Vos pouvez essayer de charger ses données.",
           "fe_downgraded": "Retour en arrière de la version de PleromaFE.",
           "fe_upgraded": "Le moteur de thème PleromaFE à été mis à jour après un changement de version.",
-          "snapshot_missing": "Aucun instantané du thème à été trouvé dans le fichier, il peut y avoir un rendu différent à la vision originelle."
+          "snapshot_missing": "Aucun instantané du thème à été trouvé dans le fichier, il peut y avoir un rendu différent à la vision originelle.",
+          "snapshot_present": "Un instantané du thème à été chargé, toutes les valeurs sont dont écrasées. Vous pouvez autrement charger le thème complètement."
         },
         "keep_as_is": "Garder tel-quel",
         "use_source": "Nouvelle version"
@@ -619,7 +620,7 @@
         "reject": "Rejeté",
         "replace": "Remplacer",
         "keyword_policies": "Politiques par mot-clés",
-        "ftl_removal": "Suppression du flux \"Ensemble du réseau connu\"",
+        "ftl_removal": "Suppression du flux fédéré",
         "is_replaced_by": "→"
       },
       "simple": {

@@ -1,5 +1,6 @@
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { WSConnectionStatus } from '../services/api/api.service.js'
+import { maybeShowChatNotification } from '../services/chat_utils/chat_utils.js'
 import { Socket } from 'phoenix'
 
 const api = {
@@ -77,6 +78,7 @@ const api = {
                   messages: [message.chatUpdate.lastMessage]
                 })
                 dispatch('updateChat', { chat: message.chatUpdate })
+                maybeShowChatNotification(store, message.chatUpdate)
               }
             }
           )

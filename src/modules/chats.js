@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { find, omitBy, orderBy, sumBy } from 'lodash'
 import chatService from '../services/chat_service/chat_service.js'
 import { parseChat, parseChatMessage } from '../services/entity_normalizer/entity_normalizer.service.js'
+import { maybeShowChatNotification } from '../services/chat_utils/chat_utils.js'
 
 const emptyChatList = () => ({
   data: [],
@@ -59,8 +60,12 @@ const chats = {
           return chats
         })
     },
-    addNewChats ({ rootState, commit, dispatch, rootGetters }, { chats }) {
-      commit('addNewChats', { dispatch, chats, rootGetters })
+    addNewChats (store, { chats }) {
+      const { commit, dispatch, rootGetters } = store
+      const newChatMessageSideEffects = (chat) => {
+        maybeShowChatNotification(store, chat)
+      }
+      commit('addNewChats', { dispatch, chats, rootGetters, newChatMessageSideEffects })
     },
     updateChat ({ commit }, { chat }) {
       commit('updateChat', { chat })
@@ -130,13 +135,17 @@ const chats = {
     setCurrentChatId (state, { chatId }) {
       state.currentChatId = chatId
     },
-    addNewChats (state, { _dispatch, chats, _rootGetters }) {
+    addNewChats (state, { chats, newChatMessageSideEffects }) {
       chats.forEach((updatedChat) => {
         const chat = getChatById(state, updatedChat.id)
 
         if (chat) {
+          const isNewMessage = (chat.lastMessage && chat.lastMessage.id) !== (updatedChat.lastMessage && updatedChat.lastMessage.id)
           chat.lastMessage = updatedChat.lastMessage
           chat.unread = updatedChat.unread
+          if (isNewMessage && chat.unread) {
+            newChatMessageSideEffects(updatedChat)
+          }
         } else {
           state.chatList.data.push(updatedChat)
           Vue.set(state.chatList.idStore, updatedChat.id, updatedChat)

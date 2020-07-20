@@ -240,7 +240,7 @@
       "generate_new_recovery_codes": "Wygeneruj nowe kody zapasowe",
       "warning_of_generate_new_codes": "Po tym gdy wygenerujesz nowe kody zapasowe, stare przestaną działać.",
       "recovery_codes": "Kody zapasowe.",
-      "waiting_a_recovery_codes": "Otrzymuję kody zapasowe...",
+      "waiting_a_recovery_codes": "Otrzymuję kody zapasowe…",
       "recovery_codes_warning": "Spisz kody na kartce papieru, albo zapisz je w bezpiecznym miejscu - inaczej nie zobaczysz ich już nigdy. Jeśli stracisz dostęp do twojej aplikacji 2FA i kodów zapasowych, nie będziesz miał(-a) dostępu do swojego konta.",
       "authentication_methods": "Metody weryfikacji",
       "scan": {

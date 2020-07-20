@@ -7,12 +7,13 @@
     "gopher": "Gopher",
     "media_proxy": "Aŭdvidaĵa prokurilo",
     "scope_options": "Agordoj de amplekso",
-    "text_limit": "Teksta limo",
+    "text_limit": "Limo de teksto",
     "title": "Funkcioj",
-    "who_to_follow": "Kiun aboni"
+    "who_to_follow": "Kiun aboni",
+    "pleroma_chat_messages": "Babilejo de Pleroma"
   },
   "finder": {
-    "error_fetching_user": "Eraro alportante uzanton",
+    "error_fetching_user": "Eraris alporto de uzanto",
     "find_user": "Trovi uzanton"
   },
   "general": {
@@ -20,12 +21,25 @@
     "submit": "Sendi",
     "more": "Pli",
     "generic_error": "Eraro okazis",
-    "optional": "Malnepra"
+    "optional": "malnepra",
+    "close": "Fermi",
+    "verify": "Kontroli",
+    "confirm": "Konfirmi",
+    "enable": "Ŝalti",
+    "disable": "Malŝalti",
+    "cancel": "Nuligi",
+    "dismiss": "Forlasi",
+    "show_less": "Montri malplion",
+    "show_more": "Montri plion",
+    "retry": "Reprovi",
+    "error_retry": "Bonvolu reprovi",
+    "loading": "Enlegante…"
   },
   "image_cropper": {
     "crop_picture": "Tondi bildon",
     "save": "Konservi",
-    "cancel": "Nuligi"
+    "cancel": "Nuligi",
+    "save_without_cropping": "Konservi sen tondado"
   },
   "login": {
     "login": "Saluti",
@@ -34,8 +48,16 @@
     "password": "Pasvorto",
     "placeholder": "ekz. lain",
     "register": "Registriĝi",
-    "username": "Salutnomo",
-    "hint": "Salutu por partopreni la diskutadon"
+    "username": "Uzantonomo",
+    "hint": "Salutu por partopreni la diskutadon",
+    "heading": {
+      "recovery": "Rehavo de duobla aŭtentikigo",
+      "totp": "Duobla aŭtentikigo"
+    },
+    "recovery_code": "Rehava kodo",
+    "enter_two_factor_code": "Enigu kodon de duobla aŭtentikigo",
+    "enter_recovery_code": "Enigu rehavan kodon",
+    "authentication_code": "Aŭtentikiga kodo"
   },
   "media_modal": {
     "previous": "Antaŭa",
@@ -45,7 +67,7 @@
     "about": "Pri",
     "back": "Reen",
     "chat": "Loka babilejo",
-    "friend_requests": "Abonaj petoj",
+    "friend_requests": "Petoj pri abono",
     "mentions": "Mencioj",
     "dms": "Rektaj mesaĝoj",
     "public_tl": "Publika tempolinio",
@@ -53,7 +75,11 @@
     "twkn": "La tuta konata reto",
     "user_search": "Serĉi uzantojn",
     "who_to_follow": "Kiun aboni",
-    "preferences": "Agordoj"
+    "preferences": "Agordoj",
+    "chats": "Babiloj",
+    "search": "Serĉi",
+    "interactions": "Interagoj",
+    "administration": "Administrado"
   },
   "notifications": {
     "broken_favorite": "Nekonata stato, serĉante ĝin…",
@@ -63,7 +89,10 @@
     "notifications": "Sciigoj",
     "read": "Legite!",
     "repeated_you": "ripetis vian staton",
-    "no_more_notifications": "Neniuj pliaj sciigoj"
+    "no_more_notifications": "Neniuj pliaj sciigoj",
+    "reacted_with": "reagis per {0}",
+    "migrated_to": "migris al",
+    "follow_request": "volas vin aboni"
   },
   "post_status": {
     "new_status": "Afiŝi novan staton",
@@ -414,6 +443,69 @@
       "MiB": "MiB",
       "GiB": "GiB",
       "TiB": "TiB"
+    }
+  },
+  "emoji": {
+    "search_emoji": "Serĉi bildosignon",
+    "keep_open": "Teni elektilon malfermita",
+    "emoji": "Bildsignoj",
+    "stickers": "Glumarkoj"
+  },
+  "polls": {
+    "not_enough_options": "Tro malmultaj unikaj elektebloj en la enketo",
+    "expired": "Enketo finiĝis antaŭ {0}",
+    "expires_in": "Enketo finiĝas je {0}",
+    "expiry": "Aĝo de enketo",
+    "multiple_choices": "Pluraj elektoj",
+    "single_choice": "Unu elekto",
+    "type": "Speco de enketo",
+    "vote": "Voĉi",
+    "votes": "voĉoj",
+    "option": "Elekteblo",
+    "add_option": "Aldoni elekteblon",
+    "add_poll": "Aldoni enketon"
+  },
+  "importer": {
+    "error": "Eraris enporto de ĉi tiu dosiero.",
+    "success": "Enportita sukcese.",
+    "submit": "Sendi"
+  },
+  "exporter": {
+    "processing": "Traktante; baldaŭ vi ricevos peton elŝuti vian dosieron",
+    "export": "Elporti"
+  },
+  "domain_mute_card": {
+    "unmute_progress": "Malsilentigante…",
+    "unmute": "Malsilentigi",
+    "mute_progress": "Silentigante…",
+    "mute": "Silentigi"
+  },
+  "about": {
+    "staff": "Skipo",
+    "mrf": {
+      "simple": {
+        "media_nsfw_desc": "Ĉi tiu nodo devigas vidaŭdaĵojn esti markitaj kiel konsternaj en afiŝoj el la jenaj nodoj:",
+        "media_nsfw": "Devige marki vidaŭdaĵojn konsternaj",
+        "media_removal_desc": "Ĉi tiu nodo forigas vidaŭdaĵojn de afiŝoj el la jenaj nodoj:",
+        "media_removal": "Forigo de vidaŭdaĵoj",
+        "ftl_removal": "Forigo de la historio de «La tuta konata reto»",
+        "quarantine_desc": "Ĉi tiu nodo sendos nur publikajn aﬁŝojn al la jenaj nodoj:",
+        "quarantine": "Kvaranteno",
+        "reject_desc": "Ĉi tiu nodo ne akceptos mesaĝojn de la jenaj nodoj:",
+        "reject": "Rifuzi",
+        "accept_desc": "Ĉi tiu nodo nur akceptas mesaĝojn de la jenaj nodoj:",
+        "accept": "Akcepti",
+        "simple_policies": "Specialaj politikoj de la nodo"
+      },
+      "mrf_policies": "Ŝaltis politikon de MRF",
+      "keyword": {
+        "is_replaced_by": "→",
+        "replace": "Anstataŭigi",
+        "reject": "Rifuzi",
+        "ftl_removal": "Forigo de la historio de «La tuta konata reto»",
+        "keyword_policies": "Politiko pri ŝlosilvortoj"
+      },
+      "federation": "Federado"
     }
   }
 }

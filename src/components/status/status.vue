@@ -143,6 +143,11 @@
                 >
                   {{ status.user.screen_name }}
                 </router-link>
+                <img
+                  class="status-favicon"
+                  v-if="!!(status.user && status.user.favicon)"
+                  :src="status.user.favicon"
+                >
               </div>
 
               <span class="heading-right">
@@ -426,6 +431,12 @@ $status-margin: 0.75em;
       vertical-align: middle;
       object-fit: contain
     }
+  }
+
+  .status-favicon {
+    height: 18px;
+    width: 18px;
+    margin-right: 0.4em;
   }
 
   .media-heading {

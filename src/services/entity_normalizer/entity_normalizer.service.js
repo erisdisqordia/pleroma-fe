@@ -79,6 +79,7 @@ export const parseUser = (data) => {
       const relationship = data.pleroma.relationship
 
       output.background_image = data.pleroma.background_image
+      output.favicon = data.pleroma.favicon
       output.token = data.pleroma.chat_token
 
       if (relationship) {

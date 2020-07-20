@@ -96,11 +96,14 @@
   },
   "post_status": {
     "new_status": "Afiŝi novan staton",
-    "account_not_locked_warning": "Via konto ne estas {0}. Iu ajn povas vin aboni por vidi viajn afiŝoj nur por abonantoj.",
+    "account_not_locked_warning": "Via konto ne estas {0}. Iu ajn povas vin aboni por vidi eĉ viajn afiŝoj nur por abonantoj.",
     "account_not_locked_warning_link": "ŝlosita",
-    "attachments_sensitive": "Marki kunsendaĵojn kiel konsternajn",
+    "attachments_sensitive": "Marki kunsendaĵojn konsternaj",
     "content_type": {
-      "text/plain": "Plata teksto"
+      "text/plain": "Plata teksto",
+      "text/bbcode": "BBCode",
+      "text/markdown": "Markdown",
+      "text/html": "HTML"
     },
     "content_warning": "Temo (malnepra)",
     "default": "Ĵus alvenis al la Universala Kongreso!",
@@ -111,7 +114,19 @@
       "private": "Nur abonantoj – Afiŝi nur al abonantoj",
       "public": "Publika – Afiŝi al publikaj tempolinioj",
       "unlisted": "Nelistigita – Ne afiŝi al publikaj tempolinioj"
-    }
+    },
+    "scope_notice": {
+      "unlisted": "Ĉi tiu afiŝo ne estos videbla en la Publika historio kaj La tuta konata reto",
+      "private": "Ĉi tiu afiŝo estos videbla nur al viaj abonantoj",
+      "public": "Ĉi tiu afiŝo estos videbla al ĉiuj"
+    },
+    "media_description_error": "Malsukcesis afiŝo de vidaŭdaĵoj; reprovu",
+    "empty_status_error": "Ne povas afiŝi malplenan staton sen dosieroj",
+    "preview_empty": "Malplena",
+    "preview": "Antaŭrigardo",
+    "direct_warning_to_first_only": "Ĉi tiu afiŝo estas nur videbla al uzantoj menciitaj je la komenco de la mesaĝo.",
+    "direct_warning_to_all": "Ĉi tiu afiŝo estos videbla al ĉiuj menciitaj uzantoj.",
+    "media_description": "Priskribo de vidaŭdaĵo"
   },
   "registration": {
     "bio": "Priskribo",
@@ -121,10 +136,10 @@
     "registration": "Registriĝo",
     "token": "Invita ĵetono",
     "captcha": "TESTO DE HOMECO",
-    "new_captcha": "Alklaku la bildon por akiri novan teston",
+    "new_captcha": "Klaku la bildon por akiri novan teston",
     "username_placeholder": "ekz. lain",
     "fullname_placeholder": "ekz. Lain Iwakura",
-    "bio_placeholder": "ekz.\nSaluton, mi estas Lain\nMi estas animea knabino vivante en Japanujo. Eble vi konas min de la retejo « Wired ».",
+    "bio_placeholder": "ekz.\nSaluton, mi estas Lain.\nMi estas animea knabino vivanta en Japanujo. Eble vi konas min pro la retejo « Wired ».",
     "validations": {
       "username_required": "ne povas resti malplena",
       "fullname_required": "ne povas resti malplena",
@@ -143,26 +158,26 @@
     "avatarRadius": "Profilbildoj",
     "background": "Fono",
     "bio": "Priskribo",
-    "blocks_tab": "Baroj",
+    "blocks_tab": "Blokitoj",
     "btnRadius": "Butonoj",
-    "cBlue": "Blua (Respondo, abono)",
-    "cGreen": "Verda (Kunhavigo)",
-    "cOrange": "Oranĝa (Ŝato)",
-    "cRed": "Ruĝa (Nuligo)",
+    "cBlue": "Blua (respondi, aboni)",
+    "cGreen": "Verda (kunhavigi)",
+    "cOrange": "Oranĝa (ŝati)",
+    "cRed": "Ruĝa (nuligi)",
     "change_password": "Ŝanĝi pasvorton",
-    "change_password_error": "Okazis eraro dum ŝanĝo de via pasvorto.",
+    "change_password_error": "Eraris ŝanĝo de via pasvorto.",
     "changed_password": "Pasvorto sukcese ŝanĝiĝis!",
     "collapse_subject": "Maletendi afiŝojn kun temoj",
-    "composing": "Verkante",
+    "composing": "Verkado",
     "confirm_new_password": "Konfirmu novan pasvorton",
     "current_avatar": "Via nuna profilbildo",
     "current_password": "Nuna pasvorto",
     "current_profile_banner": "Via nuna profila rubando",
-    "data_import_export_tab": "Enporto / Elporto de datenoj",
-    "default_vis": "Implicita videbleca amplekso",
+    "data_import_export_tab": "Enporto / Elporto de datumoj",
+    "default_vis": "Implicita amplekso de vidibleco",
     "delete_account": "Forigi konton",
-    "delete_account_description": "Por ĉiam forigi vian konton kaj ĉiujn viajn mesaĝojn",
-    "delete_account_error": "Okazis eraro dum forigo de via kanto. Se tio daŭre okazados, bonvolu kontakti la administranton de via nodo.",
+    "delete_account_description": "Por ĉiam forigi viajn datumojn kaj malaktivigi vian konton.",
+    "delete_account_error": "Eraris forigo de via kanto. Se tio daŭre ripetiĝos, bonvolu kontakti la administranton de via nodo.",
     "delete_account_instructions": "Entajpu sube vian pasvorton por konfirmi forigon de konto.",
     "avatar_size_instruction": "La rekomendata malpleja grando de profilbildoj estas 150×150 bilderoj.",
     "export_theme": "Konservi antaŭagordon",
@@ -372,7 +387,39 @@
         "checkbox": "Mi legetis la kondiĉojn de uzado",
         "link": "bela eta ligil’"
       }
-    }
+    },
+    "discoverable": "Permesi trovon de ĉi tiu konto en serĉrezultoj kaj aliaj servoj",
+    "mutes_and_blocks": "Silentigitoj kaj blokitoj",
+    "chatMessageRadius": "Babileja mesaĝo",
+    "changed_email": "Retpoŝtadreso sukcese ŝanĝiĝis!",
+    "change_email_error": "Eraris ŝanĝo de via retpoŝtadreso.",
+    "change_email": "Ŝanĝi retpoŝtadreson",
+    "bot": "Ĉi tio estas robota konto",
+    "blocks_imported": "Blokitoj enportiĝis! Traktado daŭros iom da tempo.",
+    "block_import_error": "Eraris enporto de blokitoj",
+    "block_export": "Elporto de blokitoj",
+    "block_import": "Enporto de blokitoj",
+    "block_export_button": "Elporti viajn blokitojn al CSV-dosiero",
+    "allow_following_move": "Permesi memagan abonadon kiam abonata konto migras",
+    "mfa": {
+      "verify": {
+        "desc": "Por ŝalti duoblan aŭtentikigon, enigu la kodon el via aplikaĵo por duobla aŭtentikigo:"
+      },
+      "scan": {
+        "secret_code": "Ŝlosilo",
+        "desc": "Uzante vian aplikaĵon por duobla aŭtentikigo, skanu ĉi tiun rapidrespondan kodon aŭ enigu tekstan ŝlosilon:",
+        "title": "Skani"
+      },
+      "authentication_methods": "Metodoj de aŭtentikigo",
+      "recovery_codes_warning": "Notu la kodojn aŭ konservu ilin en sekura loko – alie vi ne revidos ilin. Se vi perdos aliron al via aplikaĵo por duobla aŭtentikigo kaj al la rehavaj kodoj, vi ne povos aliri vian konton.",
+      "waiting_a_recovery_codes": "Ricevante savkopiajn kodojn…",
+      "recovery_codes": "Rehavaj kodoj.",
+      "warning_of_generate_new_codes": "Kiam vi estigos novajn rehavajn kodojn, viaj malnovaj ne plu funkcios.",
+      "generate_new_recovery_codes": "Estigi novajn rehavajn kodojn",
+      "title": "Duobla aŭtentikigo"
+    },
+    "enter_current_password_to_confirm": "Enigu vian pasvorton por konfirmi vian identecon",
+    "security": "Sekureco"
   },
   "timeline": {
     "collapse": "Maletendi",
@@ -450,7 +497,11 @@
     "keep_open": "Teni elektilon malfermita",
     "emoji": "Bildsignoj",
     "stickers": "Glumarkoj",
-    "add_emoji": "Enigi bildosignon"
+    "add_emoji": "Enigi bildosignon",
+    "load_all": "Enlegante ĉiujn {emojiAmount} bildosignojn",
+    "load_all_hint": "Enlegis la {saneAmount} unuajn bildosignojn; enlego de ĉiuj povus kaŭzi problemojn pri efikeco.",
+    "unicode": "Unikoda bildosigno",
+    "custom": "Propra bildosigno"
   },
   "polls": {
     "not_enough_options": "Tro malmultaj unikaj elektebloj en la enketo",
@@ -508,5 +559,22 @@
       },
       "federation": "Federado"
     }
+  },
+  "selectable_list": {
+    "select_all": "Elekti ĉion"
+  },
+  "remote_user_resolver": {
+    "error": "Netrovinte.",
+    "searching_for": "Serĉante",
+    "remote_user_resolver": "Trovilo de foraj uzantoj"
+  },
+  "interactions": {
+    "load_older": "Enlegi pli malnovajn interagojn",
+    "moves": "Migrado de uzantoj",
+    "follows": "Novaj abonoj",
+    "favs_repeats": "Ripetoj kaj ŝatoj"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma ne povis aliri deponejon de la foliumilo. Via saluto kaj viaj lokaj agordoj ne estos konservitaj, kaj vi eble renkontos neatenditajn problemojn. Provu permesi kuketojn."
   }
 }

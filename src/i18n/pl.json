@@ -34,9 +34,9 @@
   },
   "domain_mute_card": {
     "mute": "Wycisz",
-    "mute_progress": "Wyciszam...",
+    "mute_progress": "Wyciszam…",
     "unmute": "Odcisz",
-    "unmute_progress": "Odciszam..."
+    "unmute_progress": "Odciszam…"
   },
   "exporter": {
     "export": "Eksportuj",
@@ -70,7 +70,8 @@
     "confirm": "Potwierdź",
     "verify": "Zweryfikuj",
     "close": "Zamknij",
-    "loading": "Ładowanie…"
+    "loading": "Ładowanie…",
+    "retry": "Spróbuj ponownie"
   },
   "image_cropper": {
     "crop_picture": "Przytnij obrazek",
@@ -563,7 +564,8 @@
     "profile_fields": {
       "value": "Zawartość",
       "label": "Metadane profilu"
-    }
+    },
+    "bot": "To konto jest prowadzone przez bota"
   },
   "time": {
     "day": "{0} dzień",

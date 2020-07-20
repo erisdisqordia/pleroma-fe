@@ -72,7 +72,10 @@
           :user="statusoid.user"
         />
         <div class="media-body faint">
-          <span class="user-name">
+          <span
+            class="user-name"
+            :title="retweeter"
+          >
             <router-link
               v-if="retweeterHtml"
               :to="retweeterProfileLink"
@@ -129,16 +132,19 @@
                 <h4
                   v-if="status.user.name_html"
                   class="user-name"
+                  :title="status.user.name"
                   v-html="status.user.name_html"
                 />
                 <h4
                   v-else
                   class="user-name"
+                  :title="status.user.name"
                 >
                   {{ status.user.name }}
                 </h4>
                 <router-link
                   class="account-name"
+                  :title="status.user.screen_name"
                   :to="userProfileLink"
                 >
                   {{ status.user.screen_name }}
@@ -227,7 +233,10 @@
                 >
                   <span class="reply-to-text">{{ $t('status.reply_to') }}</span>
                 </span>
-                <router-link :to="replyProfileLink">
+                <router-link
+                  :title="replyToName"
+                  :to="replyProfileLink"
+                >
                   {{ replyToName }}
                 </router-link>
                 <span

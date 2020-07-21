@@ -279,24 +279,30 @@
               class="favs-repeated-users"
             >
               <div class="stats">
-                <div
+                <UserListPopover
                   v-if="statusFromGlobalRepository.rebloggedBy && statusFromGlobalRepository.rebloggedBy.length > 0"
-                  class="stat-count"
+                  :users="statusFromGlobalRepository.rebloggedBy"
                 >
-                  <a class="stat-title">{{ $t('status.repeats') }}</a>
-                  <div class="stat-number">
-                    {{ statusFromGlobalRepository.rebloggedBy.length }}
+                  <div class="stat-count">
+                    <a class="stat-title">{{ $t('status.repeats') }}</a>
+                    <div class="stat-number">
+                      {{ statusFromGlobalRepository.rebloggedBy.length }}
+                    </div>
                   </div>
-                </div>
-                <div
+                </UserListPopover>
+                <UserListPopover
                   v-if="statusFromGlobalRepository.favoritedBy && statusFromGlobalRepository.favoritedBy.length > 0"
-                  class="stat-count"
+                  :users="statusFromGlobalRepository.favoritedBy"
                 >
-                  <a class="stat-title">{{ $t('status.favorites') }}</a>
-                  <div class="stat-number">
-                    {{ statusFromGlobalRepository.favoritedBy.length }}
+                  <div
+                    class="stat-count"
+                  >
+                    <a class="stat-title">{{ $t('status.favorites') }}</a>
+                    <div class="stat-number">
+                      {{ statusFromGlobalRepository.favoritedBy.length }}
+                    </div>
                   </div>
-                </div>
+                </UserListPopover>
                 <div class="avatar-row">
                   <AvatarList :users="combinedFavsAndRepeatsUsers" />
                 </div>
@@ -742,6 +748,11 @@ $status-margin: 0.75em;
 
     .stat-count {
       margin-right: $status-margin;
+      user-select: none;
+
+      &:hover .stat-title {
+        text-decoration: underline;
+      }
 
       .stat-title {
         color: var(--faint, $fallback--faint);

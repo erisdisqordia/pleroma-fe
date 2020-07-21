@@ -1,5 +1,5 @@
 import UserAvatar from '../user_avatar/user_avatar.vue'
-import Popover from '../popover/popover.vue'
+import UserListPopover from '../user_list_popover/user_list_popover.vue'
 
 const EMOJI_REACTION_COUNT_CUTOFF = 12
 
@@ -7,7 +7,7 @@ const EmojiReactions = {
   name: 'EmojiReactions',
   components: {
     UserAvatar,
-    Popover
+    UserListPopover
   },
   props: ['status'],
   data: () => ({

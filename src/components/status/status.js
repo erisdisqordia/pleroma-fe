@@ -9,6 +9,7 @@ import AvatarList from '../avatar_list/avatar_list.vue'
 import Timeago from '../timeago/timeago.vue'
 import StatusContent from '../status_content/status_content.vue'
 import StatusPopover from '../status_popover/status_popover.vue'
+import UserListPopover from '../user_list_popover/user_list_popover.vue'
 import EmojiReactions from '../emoji_reactions/emoji_reactions.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
@@ -18,6 +19,21 @@ import { mapGetters, mapState } from 'vuex'
 
 const Status = {
   name: 'Status',
+  components: {
+    FavoriteButton,
+    ReactButton,
+    RetweetButton,
+    ExtraButtons,
+    PostStatusForm,
+    UserCard,
+    UserAvatar,
+    AvatarList,
+    Timeago,
+    StatusPopover,
+    UserListPopover,
+    EmojiReactions,
+    StatusContent
+  },
   props: [
     'statusoid',
     'expandable',
@@ -196,20 +212,6 @@ const Status = {
       betterShadow: state => state.interface.browserSupport.cssFilter,
       currentUser: state => state.users.currentUser
     })
-  },
-  components: {
-    FavoriteButton,
-    ReactButton,
-    RetweetButton,
-    ExtraButtons,
-    PostStatusForm,
-    UserCard,
-    UserAvatar,
-    AvatarList,
-    Timeago,
-    StatusPopover,
-    EmojiReactions,
-    StatusContent
   },
   methods: {
     visibilityIcon (visibility) {

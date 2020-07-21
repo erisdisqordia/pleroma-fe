@@ -943,6 +943,22 @@ nav {
   line-height: 1.3rem;
 }
 
+.settings-modal-layout {
+  @media all and (max-width: 800px) {
+    height: 100%;
+
+    body {
+      height: 100vh;
+      overflow-y: hidden;
+      position: fixed;
+    }
+
+    #app {
+      height: 100%;
+    }
+  }
+}
+
 .chat-layout {
   // Needed for smoother chat navigation in the desktop Safari (otherwise the chat layout "jumps" as the chat opens).
   overflow: hidden;

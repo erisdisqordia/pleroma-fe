@@ -36,6 +36,21 @@ const SettingsModal = {
     modalPeeked () {
       return this.$store.state.interface.settingsModalState === 'minimized'
     }
+  },
+  watch: {
+    modalActivated (newValue) {
+      if (newValue) {
+        let html = document.querySelector('html')
+        if (html) {
+          html.classList.add('settings-modal-layout')
+        }
+      } else {
+        let html = document.querySelector('html')
+        if (html) {
+          html.classList.remove('settings-modal-layout')
+        }
+      }
+    }
   }
 }
 

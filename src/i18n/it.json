@@ -404,7 +404,9 @@
     "reset_avatar_confirm": "Vuoi veramente azzerare l'icona?",
     "reset_banner_confirm": "Vuoi veramente azzerare lo stendardo?",
     "reset_background_confirm": "Vuoi veramente azzerare lo sfondo?",
-    "chatMessageRadius": "Messaggi istantanei"
+    "chatMessageRadius": "Messaggi istantanei",
+    "notification_setting_hide_notification_contents": "Nascondi mittente e contenuti delle notifiche push",
+    "notification_setting_block_from_strangers": "Blocca notifiche da utenti che non segui"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",
@@ -801,6 +803,7 @@
     "new": "Nuova conversazione",
     "chats": "Conversazioni",
     "delete": "Elimina",
-    "message_user": "Contatta {nickname}"
+    "message_user": "Contatta {nickname}",
+    "you": "Tu:"
   }
 }

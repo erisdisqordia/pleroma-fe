@@ -34,9 +34,9 @@
   },
   "domain_mute_card": {
     "mute": "Wycisz",
-    "mute_progress": "Wyciszam...",
+    "mute_progress": "Wyciszam…",
     "unmute": "Odcisz",
-    "unmute_progress": "Odciszam..."
+    "unmute_progress": "Odciszam…"
   },
   "exporter": {
     "export": "Eksportuj",
@@ -68,7 +68,10 @@
     "disable": "Wyłącz",
     "enable": "Włącz",
     "confirm": "Potwierdź",
-    "verify": "Zweryfikuj"
+    "verify": "Zweryfikuj",
+    "close": "Zamknij",
+    "loading": "Ładowanie…",
+    "retry": "Spróbuj ponownie"
   },
   "image_cropper": {
     "crop_picture": "Przytnij obrazek",
@@ -118,7 +121,8 @@
     "user_search": "Wyszukiwanie użytkowników",
     "search": "Wyszukiwanie",
     "who_to_follow": "Sugestie obserwacji",
-    "preferences": "Preferencje"
+    "preferences": "Preferencje",
+    "bookmarks": "Zakładki"
   },
   "notifications": {
     "broken_favorite": "Nieznany status, szukam go…",
@@ -190,7 +194,9 @@
       "private": "Tylko dla obserwujących – Umieść dla osób, które cię obserwują",
       "public": "Publiczny – Umieść na publicznych osiach czasu",
       "unlisted": "Niewidoczny – Nie umieszczaj na publicznych osiach czasu"
-    }
+    },
+    "preview_empty": "Pusty",
+    "preview": "Podgląd"
   },
   "registration": {
     "bio": "Bio",
@@ -234,7 +240,7 @@
       "generate_new_recovery_codes": "Wygeneruj nowe kody zapasowe",
       "warning_of_generate_new_codes": "Po tym gdy wygenerujesz nowe kody zapasowe, stare przestaną działać.",
       "recovery_codes": "Kody zapasowe.",
-      "waiting_a_recovery_codes": "Otrzymuję kody zapasowe...",
+      "waiting_a_recovery_codes": "Otrzymuję kody zapasowe…",
       "recovery_codes_warning": "Spisz kody na kartce papieru, albo zapisz je w bezpiecznym miejscu - inaczej nie zobaczysz ich już nigdy. Jeśli stracisz dostęp do twojej aplikacji 2FA i kodów zapasowych, nie będziesz miał(-a) dostępu do swojego konta.",
       "authentication_methods": "Metody weryfikacji",
       "scan": {
@@ -553,7 +559,13 @@
     },
     "notification_setting_privacy": "Prywatność",
     "notification_setting_filters": "Filtry",
-    "notification_setting_privacy_option": "Ukryj nadawcę i zawartość powiadomień push"
+    "notification_setting_privacy_option": "Ukryj nadawcę i zawartość powiadomień push",
+    "reset_avatar": "Zresetuj awatar",
+    "profile_fields": {
+      "value": "Zawartość",
+      "label": "Metadane profilu"
+    },
+    "bot": "To konto jest prowadzone przez bota"
   },
   "time": {
     "day": "{0} dzień",
@@ -599,7 +611,8 @@
     "show_new": "Pokaż nowe",
     "up_to_date": "Na bieżąco",
     "no_more_statuses": "Brak kolejnych statusów",
-    "no_statuses": "Brak statusów"
+    "no_statuses": "Brak statusów",
+    "reload": "Odśwież"
   },
   "status": {
     "favorites": "Ulubione",
@@ -732,5 +745,16 @@
     "password_reset_disabled": "Resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji.",
     "password_reset_required": "Musisz zresetować hasło, by się zalogować.",
     "password_reset_required_but_mailer_is_disabled": "Musisz zresetować hasło, ale resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji."
+  },
+  "file_type": {
+    "file": "Plik"
+  },
+  "chats": {
+    "more": "Więcej",
+    "delete": "Usuń",
+    "you": "Ty:"
+  },
+  "display_date": {
+    "today": "Dzisiaj"
   }
 }

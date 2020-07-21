@@ -36,7 +36,7 @@
     "twkn": "An Líonra Iomlán"
   },
   "notifications": {
-    "broken_favorite": "Post anaithnid. Cuardach dó...",
+    "broken_favorite": "Post anaithnid. Cuardach dó…",
     "favorited_you": "toghadh le do phost",
     "followed_you": "lean tú",
     "load_older": "Luchtaigh fógraí aosta",
@@ -84,7 +84,7 @@
     "cOrange": "Oráiste (Cosúil)",
     "cRed": "Dearg (Cealaigh)",
     "change_password": "Athraigh do pasfhocal",
-    "change_password_error": "Bhí fadhb ann ag athrú do pasfhocail",
+    "change_password_error": "Bhí fadhb ann ag athrú do pasfhocail.",
     "changed_password": "Athraigh an pasfhocal go rathúil!",
     "collapse_subject": "Poist a chosc le teidil",
     "confirm_new_password": "Deimhnigh do pasfhocal nua",
@@ -160,7 +160,7 @@
     "streaming": "Cumasaigh post nua a shruthú uathoibríoch nuair a scrollaítear go barr an leathanaigh",
     "text": "Téacs",
     "theme": "Téama",
-    "theme_help": "Úsáid cód daith hex (#rrggbb) chun do schéim a saincheapadh",
+    "theme_help": "Úsáid cód daith hex (#rrggbb) chun do schéim a saincheapadh.",
     "tooltipRadius": "Bileoga eolais",
     "user_settings": "Socruithe úsáideora",
     "values": {

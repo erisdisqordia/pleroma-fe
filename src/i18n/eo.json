@@ -278,7 +278,7 @@
       "true": "jes"
     },
     "notifications": "Sciigoj",
-    "enable_web_push_notifications": "Ŝalti retajn puŝajn sciigojn",
+    "enable_web_push_notifications": "Ŝalti retajn pasivajn sciigojn",
     "style": {
       "switcher": {
         "keep_color": "Konservi kolorojn",
@@ -286,10 +286,22 @@
         "keep_opacity": "Konservi maltravideblecon",
         "keep_roundness": "Konservi rondecon",
         "keep_fonts": "Konservi tiparojn",
-        "save_load_hint": "Elektebloj de \"konservi\" konservas la nuntempajn agordojn dum elektado aŭ enlegado de haŭtoj. Ĝi ankaŭ konservas tiujn agordojn dum elportado de haŭto. Kun ĉiuj markbutonoj nemarkitaj, elporto de la haŭto ĉion konservos.",
+        "save_load_hint": "Elektebloj de «konservi» konservas la nuntempajn agordojn dum elektado aŭ enlegado de haŭtoj. Ĝi ankaŭ konservas tiujn agordojn dum elportado de haŭto. Kun ĉiuj markbutonoj nemarkitaj, elporto de la haŭto ĉion konservos.",
         "reset": "Restarigi",
         "clear_all": "Vakigi ĉion",
-        "clear_opacity": "Vakigi maltravideblecon"
+        "clear_opacity": "Vakigi maltravideblecon",
+        "help": {
+          "fe_downgraded": "Versio de PleromaFE reen iris.",
+          "fe_upgraded": "La motoro de haŭtoj de la Fasado de Pleroma ĝisdatiĝis post ĝisdatigo de la versio.",
+          "older_version_imported": "La enportita dosiero estis farita per pli malnova versio de Fasado.",
+          "future_version_imported": "La enportita dosiero estis farita per pli nova versio de la fasado.",
+          "v2_imported": "La dosiero, kiun vi enportis, estis farita por malnova fasado. Ni provas maksimumigi interkonformecon, sed tamen eble montriĝos misoj.",
+          "upgraded_from_v2": "PleromaFE estis ĝisdatigita; la haŭto eble aspektos malsame ol kiel vi ĝin memoras."
+        },
+        "use_source": "Nova versio",
+        "use_snapshot": "Malnova versio",
+        "keep_as_is": "Teni senŝanĝa",
+        "load_theme": "Enlegi haŭton"
       },
       "common": {
         "color": "Koloro",
@@ -297,7 +309,7 @@
         "contrast": {
           "hint": "Proporcio de kontrasto estas {ratio}, ĝi {level} {context}",
           "level": {
-            "aa": "plenumas la gvidilon je nivelo AA (malpleja)",
+            "aa": "plenumas la gvidilon je nivelo AA (minimuma)",
             "aaa": "plenumas la gvidilon je nivela AAA (rekomendita)",
             "bad": "plenumas neniujn faciluzajn gvidilojn"
           },
@@ -310,21 +322,39 @@
       "common_colors": {
         "_tab_label": "Komunaj",
         "main": "Komunaj koloroj",
-        "foreground_hint": "Vidu langeton \"Specialaj\" por pli detalaj agordoj",
+        "foreground_hint": "Vidu langeton «Specialaj» por pli detalaj agordoj",
         "rgbo": "Bildsimboloj, emfazoj, insignoj"
       },
       "advanced_colors": {
         "_tab_label": "Specialaj",
-        "alert": "Averta fono",
+        "alert": "Fono de averto",
         "alert_error": "Eraro",
-        "badge": "Insigna fono",
+        "badge": "Fono de insigno",
         "badge_notification": "Sciigo",
         "panel_header": "Kapo de breto",
         "top_bar": "Supra breto",
         "borders": "Limoj",
         "buttons": "Butonoj",
         "inputs": "Enigaj kampoj",
-        "faint_text": "Malvigla teksto"
+        "faint_text": "Malvigla teksto",
+        "chat": {
+          "border": "Limo",
+          "outgoing": "Eliraj",
+          "incoming": "Envenaj"
+        },
+        "tabs": "Langetoj",
+        "disabled": "Malŝaltita",
+        "selectedMenu": "Elektita menuero",
+        "selectedPost": "Elektita afiŝo",
+        "pressed": "Premita",
+        "highlight": "Emfazitaj eroj",
+        "icons": "Bildsimboloj",
+        "poll": "Grafo de enketo",
+        "underlay": "Subtavolo",
+        "popover": "Ŝpruchelpiloj, menuoj",
+        "post": "Afiŝoj/Priskriboj de uzantoj",
+        "alert_neutral": "Neŭtrala",
+        "alert_warning": "Averto"
       },
       "radii": {
         "_tab_label": "Rondeco"
@@ -339,7 +369,7 @@
         "inset": "Internigo",
         "hint": "Por ombroj vi ankaŭ povas uzi --variable kiel koloran valoron, por uzi variantojn de CSS3. Bonvolu rimarki, ke tiuokaze agordoj de maltravidebleco ne funkcios.",
         "filter_hint": {
-          "always_drop_shadow": "Averto: ĉi tiu ombro ĉiam uzas {0} kiam la foliumilo ĝin subtenas.",
+          "always_drop_shadow": "Averto: ĉi tiu ombro ĉiam uzas {0} kiam la foliumilo tion subtenas.",
           "drop_shadow_syntax": "{0} ne subtenas parametron {1} kaj ŝlosilvorton {2}.",
           "avatar_inset": "Bonvolu rimarki, ke agordi ambaŭ internajn kaj eksterajn ombrojn por profilbildoj povas redoni neatenditajn rezultojn ĉe profilbildoj travideblaj.",
           "spread_zero": "Ombroj kun vastigo > 0 aperos kvazaŭ ĝi estus fakte nulo",
@@ -355,7 +385,7 @@
           "button": "Butono",
           "buttonHover": "Butono (je ŝvebo)",
           "buttonPressed": "Butono (premita)",
-          "buttonPressedHover": "Butono (premita je ŝvebo)",
+          "buttonPressedHover": "Butono (premita kaj je ŝvebo)",
           "input": "Eniga kampo"
         }
       },
@@ -450,7 +480,14 @@
     "hide_muted_posts": "Kaŝi afiŝojn de silentigitaj uzantoj",
     "emoji_reactions_on_timeline": "Montri bildosignajn reagojn en la tempolinio",
     "pad_emoji": "Meti spacetojn ĉirkaŭ bildosigno post ties elekto",
-    "domain_mutes": "Retnomoj"
+    "domain_mutes": "Retnomoj",
+    "notification_blocks": "Blokinte uzanton vi malabonos ĝin kaj haltigos ĉiujn sciigojn.",
+    "notification_mutes": "Por ne plu ricevi sciigojn de certa uzanto, silentigu.",
+    "notification_setting_hide_notification_contents": "Kaŝi la sendinton kaj la enhavojn de pasivaj sciigoj",
+    "notification_setting_privacy": "Privateco",
+    "notification_setting_block_from_strangers": "Bloki sciigojn de uzantoj, kiujn vi ne abonas",
+    "notification_setting_filters": "Filtriloj",
+    "greentext": "Memecitaĵoj"
   },
   "timeline": {
     "collapse": "Maletendi",

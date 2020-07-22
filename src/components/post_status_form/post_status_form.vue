@@ -79,10 +79,7 @@
             @click.stop.prevent="togglePreview"
           >
             {{ $t('post_status.preview') }}
-            <i
-              class="icon-left-open"
-              :style="{ 'transform': showPreview ? 'rotate(90deg)' : 'rotate(-90deg)' }"
-            />
+            <i :class="showPreview ? 'icon-left-open' : 'icon-right-open'" />
           </a>
           <i
             v-show="previewLoading"
@@ -393,7 +390,8 @@
     }
     i {
       margin-left: 0.2em;
-      font-size: 0.9em;
+      font-size: 0.8em;
+      transform: rotate(90deg);
     }
   }
 

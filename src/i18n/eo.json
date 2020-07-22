@@ -5,7 +5,7 @@
   "features_panel": {
     "chat": "Babilejo",
     "gopher": "Gopher",
-    "media_proxy": "Aŭdvidaĵa prokurilo",
+    "media_proxy": "Vidaŭdaĵa prokurilo",
     "scope_options": "Agordoj de amplekso",
     "text_limit": "Limo de teksto",
     "title": "Funkcioj",
@@ -79,7 +79,8 @@
     "chats": "Babiloj",
     "search": "Serĉi",
     "interactions": "Interagoj",
-    "administration": "Administrado"
+    "administration": "Administrado",
+    "bookmarks": "Legosignoj"
   },
   "notifications": {
     "broken_favorite": "Nekonata stato, serĉante ĝin…",
@@ -292,10 +293,10 @@
         "clear_opacity": "Vakigi maltravideblecon",
         "help": {
           "fe_downgraded": "Versio de PleromaFE reen iris.",
-          "fe_upgraded": "La motoro de haŭtoj de la Fasado de Pleroma ĝisdatiĝis post ĝisdatigo de la versio.",
-          "older_version_imported": "La enportita dosiero estis farita per pli malnova versio de Fasado.",
-          "future_version_imported": "La enportita dosiero estis farita per pli nova versio de la fasado.",
-          "v2_imported": "La dosiero, kiun vi enportis, estis farita por malnova fasado. Ni provas maksimumigi interkonformecon, sed tamen eble montriĝos misoj.",
+          "fe_upgraded": "La motoro de haŭtoj de PleromaFE ĝisdatiĝis post ĝisdatigo de la versio.",
+          "older_version_imported": "La enportita dosiero estis farita per pli malnova versio de PleromaFE.",
+          "future_version_imported": "La enportita dosiero estis farita per pli nova versio de PleromaFE.",
+          "v2_imported": "La dosiero, kiun vi enportis, estis farita por malnova versio de PleromaFE. Ni provas maksimumigi interkonformecon, sed tamen eble montriĝos misoj.",
           "upgraded_from_v2": "PleromaFE estis ĝisdatigita; la haŭto eble aspektos malsame ol kiel vi ĝin memoras."
         },
         "use_source": "Nova versio",
@@ -446,7 +447,8 @@
       "recovery_codes": "Rehavaj kodoj.",
       "warning_of_generate_new_codes": "Kiam vi estigos novajn rehavajn kodojn, viaj malnovaj ne plu funkcios.",
       "generate_new_recovery_codes": "Estigi novajn rehavajn kodojn",
-      "title": "Duobla aŭtentikigo"
+      "title": "Duobla aŭtentikigo",
+      "otp": "OTP"
     },
     "enter_current_password_to_confirm": "Enigu vian pasvorton por konfirmi vian identecon",
     "security": "Sekureco",
@@ -492,7 +494,8 @@
       "frontend_version": "Versio de fasado",
       "backend_version": "Versio de internaĵo",
       "title": "Versio"
-    }
+    },
+    "accent": "Emfazo"
   },
   "timeline": {
     "collapse": "Maletendi",
@@ -529,32 +532,59 @@
     "per_day": "tage",
     "remote_follow": "Fore aboni",
     "statuses": "Statoj",
-    "unblock": "Malbari",
-    "unblock_progress": "Malbaranta…",
-    "block_progress": "Baranta…",
+    "unblock": "Malbloki",
+    "unblock_progress": "Malblokante…",
+    "block_progress": "Blokante…",
     "unmute": "Malsilentigi",
-    "unmute_progress": "Malsilentiganta…",
-    "mute_progress": "Silentiganta…",
+    "unmute_progress": "Malsilentigante…",
+    "mute_progress": "Silentigante…",
     "report": "Raporti",
     "message": "Mesaĝo",
     "mention": "Mencio",
-    "hidden": "Kaŝita"
+    "hidden": "Kaŝita",
+    "admin_menu": {
+      "delete_user_confirmation": "Ĉu vi tute certas? Ĉi tiu ago ne estas malfarebla.",
+      "delete_user": "Forigi uzanton",
+      "quarantine": "Malpermesi federadon de afiŝoj de uzanto",
+      "disable_any_subscription": "Malpermesi ĉian abonadon al uzanto",
+      "disable_remote_subscription": "Malpermesi abonadon al uzanto el foraj nodoj",
+      "sandbox": "Devigi afiŝojn esti nur por abonantoj",
+      "force_unlisted": "Devigi afiŝojn nelistiĝi",
+      "strip_media": "Forigi vidaŭdaĵojn de afiŝoj",
+      "force_nsfw": "Marki ĉiujn afiŝojn konsternaj",
+      "delete_account": "Forigi konton",
+      "deactivate_account": "Malaktivigi konton",
+      "activate_account": "Aktivigi konton",
+      "revoke_moderator": "Malnomumi reguligiston",
+      "grant_moderator": "Nomumi reguligiston",
+      "revoke_admin": "Malnomumi administranton",
+      "grant_admin": "Nomumi administranton",
+      "moderation": "Reguligado"
+    },
+    "show_repeats": "Montri ripetojn",
+    "hide_repeats": "Kaŝi ripetojn",
+    "unsubscribe": "Ne ricevi sciigojn",
+    "subscribe": "Ricevi sciigojn"
   },
   "user_profile": {
-    "timeline_title": "Uzanta tempolinio",
+    "timeline_title": "Historio de uzanto",
     "profile_does_not_exist": "Pardonu, ĉi tiu profilo ne ekzistas.",
-    "profile_loading_error": "Pardonu, eraro okazis dum enlegado de ĉi tiu profilo."
+    "profile_loading_error": "Pardonu, eraris enlego de ĉi tiu profilo."
   },
   "who_to_follow": {
     "more": "Pli",
     "who_to_follow": "Kiun aboni"
   },
   "tool_tip": {
-    "media_upload": "Alŝuti aŭdvidaĵon",
+    "media_upload": "Alŝuti vidaŭdaĵon",
     "repeat": "Ripeti",
     "reply": "Respondi",
     "favorite": "Ŝati",
-    "user_settings": "Agordoj de uzanto"
+    "user_settings": "Agordoj de uzanto",
+    "bookmark": "Legosigno",
+    "reject_follow_request": "Rifuzi abonpeton",
+    "accept_follow_request": "Akcepti abonpeton",
+    "add_reaction": "Aldoni reagon"
   },
   "upload": {
     "error": {
@@ -627,7 +657,7 @@
         "accept": "Akcepti",
         "simple_policies": "Specialaj politikoj de la nodo"
       },
-      "mrf_policies": "Ŝaltis politikon de MRF",
+      "mrf_policies": "Ŝaltis politikon de Mesaĝa ŝanĝilaro (MRF)",
       "keyword": {
         "is_replaced_by": "→",
         "replace": "Anstataŭigi",
@@ -635,7 +665,8 @@
         "ftl_removal": "Forigo de la historio de «La tuta konata reto»",
         "keyword_policies": "Politiko pri ŝlosilvortoj"
       },
-      "federation": "Federado"
+      "federation": "Federado",
+      "mrf_policies_desc": "Politikoj de Mesaĝa ŝanĝilaro (MRF) efikas sur federa konduto de la nodo.  La sekvaj politikoj estas ŝaltitaj:"
     }
   },
   "selectable_list": {
@@ -711,5 +742,55 @@
     "day_short": "{0}t",
     "days": "{0} tagoj",
     "day": "{0} tago"
+  },
+  "search": {
+    "people": "Personoj",
+    "no_results": "Neniuj rezultoj",
+    "people_talking": "{count} personoj parolas",
+    "person_talking": "{count} persono parolas",
+    "hashtags": "Kradvortoj"
+  },
+  "display_date": {
+    "today": "Hodiaŭ"
+  },
+  "file_type": {
+    "file": "Dosiero",
+    "image": "Bildo",
+    "video": "Filmo",
+    "audio": "Sono"
+  },
+  "chats": {
+    "empty_chat_list_placeholder": "Vi ankoraŭ havas neniun babilon. Komencu novan babilon!",
+    "error_sending_message": "Io misokazis dum sendado de la mesaĝo.",
+    "error_loading_chat": "Io misokazis dum enlego de la babilo.",
+    "delete_confirm": "Ĉu vi certe volas forigi ĉi tiun mesaĝon?",
+    "more": "Pli",
+    "empty_message_error": "Ne povas sendi malplenan mesaĝon",
+    "new": "Nova babilo",
+    "chats": "Babiloj",
+    "delete": "Forigi",
+    "you": "Vi:"
+  },
+  "password_reset": {
+    "password_reset_required_but_mailer_is_disabled": "Vi devas restarigi vian pasvorton, sed restarigado de pasvortoj estas malŝaltita. Bonvolu kontakti la administranton de via nodo.",
+    "password_reset_required": "Vi devas restarigi vian pasvorton por saluti.",
+    "password_reset_disabled": "Restarigado de pasvortoj estas malŝaltita. Bonvolu kontakti la administranton de via nodo.",
+    "too_many_requests": "Vi atingis la limon de provoj, reprovu pli poste.",
+    "not_found": "Ni ne trovis tiun retpoŝtadreson aŭ uzantonomon.",
+    "return_home": "Reiri al la hejmpaĝo",
+    "check_email": "Kontrolu vian retpoŝton pro ligilo por restarigi vian pasvorton.",
+    "placeholder": "Via retpoŝtadreso aŭ uzantonomo",
+    "instruction": "Enigu vian retpoŝtadreson aŭ uzantonomon. Ni sendos al vi ligilon por restarigi vian pasvorton.",
+    "password_reset": "Restarigi pasvorton",
+    "forgot_password": "Ĉu vi forgesis pasvorton?"
+  },
+  "user_reporting": {
+    "generic_error": "Eraris traktado de via peto.",
+    "submit": "Sendi",
+    "forward_to": "Plusendi al {0}",
+    "forward_description": "La konto venas de alia servilo. Ĉu kopio de la raporto sendiĝu ankaŭ tien?",
+    "additional_comments": "Aldonaj komentoj",
+    "add_comment_description": "Ĉi tiu raporto sendiĝos al reguligistoj de via nodo. Vi povas komprenigi kial vi raportas ĉi tiun konton sube:",
+    "title": "Raportante {0}"
   }
 }

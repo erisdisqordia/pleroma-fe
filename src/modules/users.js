@@ -499,6 +499,7 @@ const users = {
           store.commit('clearNotifications')
           store.commit('resetStatuses')
           store.dispatch('resetChats')
+          store.dispatch('setLastTimeline', 'public-timeline')
         })
     },
     loginUser (store, accessToken) {

@@ -16,7 +16,8 @@ const defaultState = {
   },
   mobileLayout: false,
   globalNotices: [],
-  layoutHeight: 0
+  layoutHeight: 0,
+  lastTimeline: null
 }
 
 const interfaceMod = {
@@ -69,6 +70,9 @@ const interfaceMod = {
     },
     setLayoutHeight (state, value) {
       state.layoutHeight = value
+    },
+    setLastTimeline (state, value) {
+      state.lastTimeline = value
     }
   },
   actions: {
@@ -117,6 +121,9 @@ const interfaceMod = {
     },
     setLayoutHeight ({ commit }, value) {
       commit('setLayoutHeight', value)
+    },
+    setLastTimeline ({ commit }, value) {
+      commit('setLastTimeline', value)
     }
   }
 }

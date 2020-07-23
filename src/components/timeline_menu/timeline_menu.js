@@ -26,6 +26,7 @@ const TimelineMenu = {
     if (this.currentUser && this.currentUser.locked) {
       this.$store.dispatch('startFetchingFollowRequests')
     }
+    this.$store.dispatch('setLastTimeline', this.$route.name)
   },
   methods: {
     openMenu () {

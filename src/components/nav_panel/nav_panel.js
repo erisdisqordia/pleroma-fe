@@ -12,6 +12,9 @@ const NavPanel = {
       return !!timelineNames()[this.$route.name]
     },
     timelinesRoute () {
+      if (this.$store.state.interface.lastTimeline) {
+        return this.$store.state.interface.lastTimeline
+      }
       return this.currentUser ? 'friends' : 'public-timeline'
     },
     ...mapState({

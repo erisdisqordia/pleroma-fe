@@ -38,17 +38,14 @@ const SettingsModal = {
     }
   },
   watch: {
+    // This is the only way to access the <html> element.
     modalActivated (newValue) {
+      let html = document.querySelector('html')
+      if (!html) return
       if (newValue) {
-        let html = document.querySelector('html')
-        if (html) {
-          html.classList.add('settings-modal-layout')
-        }
+        html.classList.add('settings-modal-layout')
       } else {
-        let html = document.querySelector('html')
-        if (html) {
-          html.classList.remove('settings-modal-layout')
-        }
+        html.classList.remove('settings-modal-layout')
       }
     }
   }

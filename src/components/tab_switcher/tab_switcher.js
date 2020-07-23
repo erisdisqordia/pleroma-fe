@@ -134,7 +134,7 @@ export default Vue.component('tab-switcher', {
         <div class="tabs">
           {tabs}
         </div>
-        <div ref="contents" class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')}>
+        <div ref="contents" class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')} v-body-scroll-lock>
           {contents}
         </div>
       </div>

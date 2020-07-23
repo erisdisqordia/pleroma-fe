@@ -1,7 +1,6 @@
 @import 'src/_variables.scss';
 .settings-modal {
   overflow: hidden;
-  height: 100%;
 
   &.peek {
     .settings-modal-panel {
@@ -16,7 +15,7 @@
       transform: translateY(calc(((100vh - 100%) / 2 + 100%) - 50px));
 
       @media all and (max-width: 800px) {
-        transform: translateY(calc(((100vh - 100%) / 2 + 100%) - 100px));
+        transform: translateY(calc(100% - 50px));
       }
     }
   }

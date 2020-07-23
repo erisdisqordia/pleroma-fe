@@ -36,18 +36,6 @@ const SettingsModal = {
     modalPeeked () {
       return this.$store.state.interface.settingsModalState === 'minimized'
     }
-  },
-  watch: {
-    // This is the only way to access the <html> element.
-    modalActivated (newValue) {
-      let html = document.querySelector('html')
-      if (!html) return
-      if (newValue) {
-        html.classList.add('settings-modal-layout')
-      } else {
-        html.classList.remove('settings-modal-layout')
-      }
-    }
   }
 }
 

@@ -29,8 +29,8 @@
     },
     "staff": "Staff"
   },
-  "chat": {
-    "title": "Chat"
+  "shoutbox": {
+    "title": "Shoutbox"
   },
   "domain_mute_card": {
     "mute": "Mute",

@@ -805,5 +805,8 @@
     "delete": "Elimina",
     "message_user": "Contatta {nickname}",
     "you": "Tu:"
+  },
+  "shoutbox": {
+    "title": "Graffiti"
   }
 }

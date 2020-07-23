@@ -46,7 +46,7 @@ export default Vue.component('tab-switcher', {
         return this.active
       }
     },
-    bodyLocked () {
+    settingsModalVisible () {
       return this.settingsModalState === 'visible'
     },
     ...mapState({
@@ -141,7 +141,7 @@ export default Vue.component('tab-switcher', {
         <div class="tabs">
           {tabs}
         </div>
-        <div ref="contents" class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')} v-body-scroll-lock={this.bodyLocked}>
+        <div ref="contents" class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')} v-body-scroll-lock={this.settingsModalVisible}>
           {contents}
         </div>
       </div>

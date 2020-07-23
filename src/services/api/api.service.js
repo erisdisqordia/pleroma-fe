@@ -631,7 +631,8 @@ const postStatus = ({
   mediaIds = [],
   inReplyToStatusId,
   contentType,
-  preview
+  preview,
+  idempotencyKey
 }) => {
   const form = new FormData()
   const pollOptions = poll.options || []
@@ -665,10 +666,15 @@ const postStatus = ({
     form.append('preview', 'true')
   }
 
+  let postHeaders = authHeaders(credentials)
+  if (idempotencyKey) {
+    postHeaders['idempotency-key'] = idempotencyKey
+  }
+
   return fetch(MASTODON_POST_STATUS_URL, {
     body: form,
     method: 'POST',
-    headers: authHeaders(credentials)
+    headers: postHeaders
   })
     .then((response) => {
       return response.json()

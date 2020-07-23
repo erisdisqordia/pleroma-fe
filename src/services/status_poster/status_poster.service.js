@@ -11,7 +11,8 @@ const postStatus = ({
   media = [],
   inReplyToStatusId = undefined,
   contentType = 'text/plain',
-  preview = false
+  preview = false,
+  idempotencyKey = ''
 }) => {
   const mediaIds = map(media, 'id')
 
@@ -25,7 +26,8 @@ const postStatus = ({
     inReplyToStatusId,
     contentType,
     poll,
-    preview
+    preview,
+    idempotencyKey
   })
     .then((data) => {
       if (!data.error && !preview) {

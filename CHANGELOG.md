@@ -51,6 +51,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Videos are not cropped awkwardly in the uploads section anymore
 - Reply filtering options in Settings -> Filtering now work again using filtering on server
 - Don't show just blank-screen when cookies are disabled
+- Add status idempotency to prevent accidental double posting when posting returns an error
 
 ## [2.0.3] - 2020-05-02
 ### Fixed

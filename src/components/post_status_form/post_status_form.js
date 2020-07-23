@@ -66,6 +66,7 @@ const PostStatusForm = {
     StatusContent
   },
   mounted () {
+    this.updateIdempotencyKey()
     this.resize(this.$refs.textarea)
 
     if (this.replyTo) {
@@ -116,7 +117,8 @@ const PostStatusForm = {
       dropStopTimeout: null,
       preview: null,
       previewLoading: false,
-      emojiInputShown: false
+      emojiInputShown: false,
+      idempotencyKey: ''
     }
   },
   computed: {
@@ -211,14 +213,43 @@ const PostStatusForm = {
     })
   },
   watch: {
-    'newStatus.contentType': function () {
-      this.autoPreview()
-    },
-    'newStatus.spoilerText': function () {
-      this.autoPreview()
+    'newStatus': {
+      deep: true,
+      handler () {
+        this.statusChanged()
+      }
     }
   },
   methods: {
+    statusChanged () {
+      this.autoPreview()
+      this.updateIdempotencyKey()
+    },
+    clearStatus () {
+      const newStatus = this.newStatus
+      this.newStatus = {
+        status: '',
+        spoilerText: '',
+        files: [],
+        visibility: newStatus.visibility,
+        contentType: newStatus.contentType,
+        poll: {},
+        mediaDescriptions: {}
+      }
+      this.pollFormVisible = false
+      this.$refs.mediaUpload && this.$refs.mediaUpload.clearFile()
+      this.clearPollForm()
+      if (this.preserveFocus) {
+        this.$nextTick(() => {
+          this.$refs.textarea.focus()
+        })
+      }
+      let el = this.$el.querySelector('textarea')
+      el.style.height = 'auto'
+      el.style.height = undefined
+      this.error = null
+      if (this.preview) this.previewStatus()
+    },
     async postStatus (event, newStatus, opts = {}) {
       if (this.posting) { return }
       if (this.disableSubmit) { return }
@@ -258,36 +289,16 @@ const PostStatusForm = {
         store: this.$store,
         inReplyToStatusId: this.replyTo,
         contentType: newStatus.contentType,
-        poll
+        poll,
+        idempotencyKey: this.idempotencyKey
       }
 
       const postHandler = this.postHandler ? this.postHandler : statusPoster.postStatus
 
       postHandler(postingOptions).then((data) => {
         if (!data.error) {
-          this.newStatus = {
-            status: '',
-            spoilerText: '',
-            files: [],
-            visibility: newStatus.visibility,
-            contentType: newStatus.contentType,
-            poll: {},
-            mediaDescriptions: {}
-          }
-          this.pollFormVisible = false
-          this.$refs.mediaUpload && this.$refs.mediaUpload.clearFile()
-          this.clearPollForm()
+          this.clearStatus()
           this.$emit('posted', data)
-          if (this.preserveFocus) {
-            this.$nextTick(() => {
-              this.$refs.textarea.focus()
-            })
-          }
-          let el = this.$el.querySelector('textarea')
-          el.style.height = 'auto'
-          el.style.height = undefined
-          this.error = null
-          if (this.preview) this.previewStatus()
         } else {
           this.error = data.error
         }
@@ -404,7 +415,6 @@ const PostStatusForm = {
       }
     },
     onEmojiInputInput (e) {
-      this.autoPreview()
       this.$nextTick(() => {
         this.resize(this.$refs['textarea'])
       })
@@ -542,6 +552,9 @@ const PostStatusForm = {
     },
     handleEmojiInputShow (value) {
       this.emojiInputShown = value
+    },
+    updateIdempotencyKey () {
+      this.idempotencyKey = Date.now().toString()
     }
   }
 }

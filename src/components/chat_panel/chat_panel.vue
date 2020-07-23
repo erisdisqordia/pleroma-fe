@@ -10,7 +10,7 @@
         @click.stop.prevent="togglePanel"
       >
         <div class="title">
-          <span>{{ $t('chat.title') }}</span>
+          <span>{{ $t('shoutbox.title') }}</span>
           <i
             v-if="floating"
             class="icon-cancel"
@@ -64,7 +64,7 @@
       >
         <div class="title">
           <i class="icon-comment-empty" />
-          {{ $t('chat.title') }}
+          {{ $t('shoutbox.title') }}
         </div>
       </div>
     </div>

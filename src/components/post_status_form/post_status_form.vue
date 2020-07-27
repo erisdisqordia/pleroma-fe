@@ -79,10 +79,7 @@
             @click.stop.prevent="togglePreview"
           >
             {{ $t('post_status.preview') }}
-            <i
-              class="icon-down-open"
-              :style="{ transform: showPreview ? 'rotate(0deg)' : 'rotate(-90deg)' }"
-            />
+            <i :class="showPreview ? 'icon-left-open' : 'icon-right-open'" />
           </a>
           <i
             v-show="previewLoading"
@@ -374,6 +371,7 @@
   }
 
   .preview-heading {
+    padding-left: 0.5em;
     display: flex;
     width: 100%;
 
@@ -385,14 +383,16 @@
   .preview-toggle {
     display: flex;
     cursor: pointer;
+    user-select: none;
 
     &:hover {
       text-decoration: underline;
     }
-  }
-
-  .icon-down-open {
-    transition: transform 0.1s;
+    i {
+      margin-left: 0.2em;
+      font-size: 0.8em;
+      transform: rotate(90deg);
+    }
   }
 
   .preview-container {

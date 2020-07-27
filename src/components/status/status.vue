@@ -2,8 +2,8 @@
   <!-- eslint-disable vue/no-v-html -->
   <div
     v-if="!hideStatus"
-    class="status-el"
-    :class="[{ 'status-el_focused': isFocused }, { 'status-conversation': inlineExpanded }]"
+    class="Status"
+    :class="[{ '-focused': isFocused }, { '-conversation': inlineExpanded }]"
   >
     <div
       v-if="error"
@@ -16,8 +16,8 @@
       />
     </div>
     <template v-if="muted && !isPreview">
-      <div class="media status container muted">
-        <small class="username">
+      <div class="status-csontainer muted">
+        <small class="user-name">
           <i
             v-if="muted && retweet"
             class="button-icon icon-retweet"
@@ -54,7 +54,7 @@
     <template v-else>
       <div
         v-if="showPinned"
-        class="status-pin"
+        class="pin"
       >
         <i class="fa icon-pin faint" />
         <span class="faint">{{ $t('status.pinned') }}</span>
@@ -63,17 +63,17 @@
         v-if="retweet && !noHeading && !inConversation"
         :class="[repeaterClass, { highlighted: repeaterStyle }]"
         :style="[repeaterStyle]"
-        class="media container retweet-info"
+        class="status-container repeat-info"
       >
         <UserAvatar
           v-if="retweet"
-          class="media-left"
+          class="left-side repeater-avatar"
           :better-shadow="betterShadow"
           :user="statusoid.user"
         />
-        <div class="media-body faint">
+        <div class="right-side faint">
           <span
-            class="user-name"
+            class="user-name repeater-name"
             :title="retweeter"
           >
             <router-link
@@ -95,14 +95,14 @@
       </div>
 
       <div
-        :class="[userClass, { highlighted: userStyle, 'is-retweet': retweet && !inConversation }]"
+        :class="[userClass, { highlighted: userStyle, '-repeat': retweet && !inConversation }]"
         :style="[ userStyle ]"
-        class="media status"
+        class="status-container"
         :data-tags="tags"
       >
         <div
           v-if="!noHeading"
-          class="media-left"
+          class="left-side"
         >
           <router-link
             :to="userProfileLink"
@@ -115,20 +115,20 @@
             />
           </router-link>
         </div>
-        <div class="status-body">
+        <div class="right-side">
           <UserCard
             v-if="userExpanded"
             :user-id="status.user.id"
             :rounded="true"
             :bordered="true"
-            class="status-usercard"
+            class="usercard"
           />
           <div
             v-if="!noHeading"
-            class="media-heading"
+            class="status-heading"
           >
             <div class="heading-name-row">
-              <div class="name-and-account-name">
+              <div class="heading-left">
                 <h4
                   v-if="status.user.name_html"
                   class="user-name"
@@ -218,10 +218,10 @@
                     :aria-label="$t('tool_tip.reply')"
                     @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
                   >
-                    <i class="button-icon icon-reply" />
+                    <i class="button-icon reply-button icon-reply" />
                     <span
                       class="faint-link reply-to-text"
-                      :class="{ 'strikethrough': !status.parent_visible }"
+                      :class="{ '-strikethrough': !status.parent_visible }"
                     >
                       {{ $t('status.reply_to') }}
                     </span>
@@ -317,19 +317,19 @@
 
           <div
             v-if="!noHeading && !isPreview"
-            class="status-actions media-body"
+            class="status-actions"
           >
             <div>
               <i
                 v-if="loggedIn"
-                class="button-icon icon-reply"
+                class="button-icon button-reply icon-reply"
                 :title="$t('tool_tip.reply')"
-                :class="{'button-icon-active': replying}"
+                :class="{'-active': replying}"
                 @click.prevent="toggleReplying"
               />
               <i
                 v-else
-                class="button-icon button-icon-disabled icon-reply"
+                class="button-icon button-reply -disabled icon-reply"
                 :title="$t('tool_tip.reply')"
               />
               <span v-if="status.replies_count > 0">{{ status.replies_count }}</span>
@@ -357,7 +357,7 @@
       </div>
       <div
         v-if="replying"
-        class="container"
+        class="status-container"
       >
         <PostStatusForm
           class="reply-body"
@@ -375,4 +375,4 @@
 </template>
 
 <script src="./status.js" ></script>
-<style src="./status.css" lang="scss"></style>
+<style src="./status.scss" lang="scss"></style>

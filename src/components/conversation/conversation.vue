@@ -1,7 +1,7 @@
 <template>
   <div
-    class="timeline panel-default"
-    :class="[isExpanded ? 'panel' : 'panel-disabled']"
+    class="Conversation"
+    :class="{ '-expanded' : isExpanded, 'panel' : isExpanded }"
   >
     <div
       v-if="isExpanded"
@@ -28,7 +28,7 @@
       :replies="getReplies(status.id)"
       :in-profile="inProfile"
       :profile-user-id="profileUserId"
-      class="status-fadein panel-body"
+      class="conversation-status status-fadein panel-body"
       @goto="setHighlight"
       @toggleExpanded="toggleExpanded"
     />
@@ -40,14 +40,25 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.timeline {
-  .panel-disabled {
-    .status-el {
-      border-left: none;
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
-      border-color: var(--border, $fallback--border);
-      border-radius: 0;
+.Conversation {
+  .conversation-status {
+    border-left: none;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: var(--border, $fallback--border);
+    border-radius: 0;
+  }
+
+  &.-expanded {
+    .conversation-status:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &:not(.-expanded) > {
+    .conversation-status:last-child {
+      border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
+      border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
     }
   }
 }

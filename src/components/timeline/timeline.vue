@@ -1,5 +1,5 @@
 <template>
-  <div :class="classes.root">
+  <div :class="[classes.root, 'timeline']">
     <div :class="classes.header">
       <div class="title">
         {{ title }}

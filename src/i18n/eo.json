@@ -5,7 +5,7 @@
   "features_panel": {
     "chat": "Babilejo",
     "gopher": "Gopher",
-    "media_proxy": "Aŭdvidaĵa prokurilo",
+    "media_proxy": "Vidaŭdaĵa prokurilo",
     "scope_options": "Agordoj de amplekso",
     "text_limit": "Limo de teksto",
     "title": "Funkcioj",
@@ -79,7 +79,8 @@
     "chats": "Babiloj",
     "search": "Serĉi",
     "interactions": "Interagoj",
-    "administration": "Administrado"
+    "administration": "Administrado",
+    "bookmarks": "Legosignoj"
   },
   "notifications": {
     "broken_favorite": "Nekonata stato, serĉante ĝin…",
@@ -278,7 +279,7 @@
       "true": "jes"
     },
     "notifications": "Sciigoj",
-    "enable_web_push_notifications": "Ŝalti retajn puŝajn sciigojn",
+    "enable_web_push_notifications": "Ŝalti retajn pasivajn sciigojn",
     "style": {
       "switcher": {
         "keep_color": "Konservi kolorojn",
@@ -286,10 +287,22 @@
         "keep_opacity": "Konservi maltravideblecon",
         "keep_roundness": "Konservi rondecon",
         "keep_fonts": "Konservi tiparojn",
-        "save_load_hint": "Elektebloj de \"konservi\" konservas la nuntempajn agordojn dum elektado aŭ enlegado de haŭtoj. Ĝi ankaŭ konservas tiujn agordojn dum elportado de haŭto. Kun ĉiuj markbutonoj nemarkitaj, elporto de la haŭto ĉion konservos.",
+        "save_load_hint": "Elektebloj de «konservi» konservas la nuntempajn agordojn dum elektado aŭ enlegado de haŭtoj. Ĝi ankaŭ konservas tiujn agordojn dum elportado de haŭto. Kun ĉiuj markbutonoj nemarkitaj, elporto de la haŭto ĉion konservos.",
         "reset": "Restarigi",
         "clear_all": "Vakigi ĉion",
-        "clear_opacity": "Vakigi maltravideblecon"
+        "clear_opacity": "Vakigi maltravideblecon",
+        "help": {
+          "fe_downgraded": "Versio de PleromaFE reen iris.",
+          "fe_upgraded": "La motoro de haŭtoj de PleromaFE ĝisdatiĝis post ĝisdatigo de la versio.",
+          "older_version_imported": "La enportita dosiero estis farita per pli malnova versio de PleromaFE.",
+          "future_version_imported": "La enportita dosiero estis farita per pli nova versio de PleromaFE.",
+          "v2_imported": "La dosiero, kiun vi enportis, estis farita por malnova versio de PleromaFE. Ni provas maksimumigi interkonformecon, sed tamen eble montriĝos misoj.",
+          "upgraded_from_v2": "PleromaFE estis ĝisdatigita; la haŭto eble aspektos malsame ol kiel vi ĝin memoras."
+        },
+        "use_source": "Nova versio",
+        "use_snapshot": "Malnova versio",
+        "keep_as_is": "Teni senŝanĝa",
+        "load_theme": "Enlegi haŭton"
       },
       "common": {
         "color": "Koloro",
@@ -297,7 +310,7 @@
         "contrast": {
           "hint": "Proporcio de kontrasto estas {ratio}, ĝi {level} {context}",
           "level": {
-            "aa": "plenumas la gvidilon je nivelo AA (malpleja)",
+            "aa": "plenumas la gvidilon je nivelo AA (minimuma)",
             "aaa": "plenumas la gvidilon je nivela AAA (rekomendita)",
             "bad": "plenumas neniujn faciluzajn gvidilojn"
           },
@@ -310,21 +323,39 @@
       "common_colors": {
         "_tab_label": "Komunaj",
         "main": "Komunaj koloroj",
-        "foreground_hint": "Vidu langeton \"Specialaj\" por pli detalaj agordoj",
+        "foreground_hint": "Vidu langeton «Specialaj» por pli detalaj agordoj",
         "rgbo": "Bildsimboloj, emfazoj, insignoj"
       },
       "advanced_colors": {
         "_tab_label": "Specialaj",
-        "alert": "Averta fono",
+        "alert": "Fono de averto",
         "alert_error": "Eraro",
-        "badge": "Insigna fono",
+        "badge": "Fono de insigno",
         "badge_notification": "Sciigo",
         "panel_header": "Kapo de breto",
         "top_bar": "Supra breto",
         "borders": "Limoj",
         "buttons": "Butonoj",
         "inputs": "Enigaj kampoj",
-        "faint_text": "Malvigla teksto"
+        "faint_text": "Malvigla teksto",
+        "chat": {
+          "border": "Limo",
+          "outgoing": "Eliraj",
+          "incoming": "Envenaj"
+        },
+        "tabs": "Langetoj",
+        "disabled": "Malŝaltita",
+        "selectedMenu": "Elektita menuero",
+        "selectedPost": "Elektita afiŝo",
+        "pressed": "Premita",
+        "highlight": "Emfazitaj eroj",
+        "icons": "Bildsimboloj",
+        "poll": "Grafo de enketo",
+        "underlay": "Subtavolo",
+        "popover": "Ŝpruchelpiloj, menuoj",
+        "post": "Afiŝoj/Priskriboj de uzantoj",
+        "alert_neutral": "Neŭtrala",
+        "alert_warning": "Averto"
       },
       "radii": {
         "_tab_label": "Rondeco"
@@ -339,7 +370,7 @@
         "inset": "Internigo",
         "hint": "Por ombroj vi ankaŭ povas uzi --variable kiel koloran valoron, por uzi variantojn de CSS3. Bonvolu rimarki, ke tiuokaze agordoj de maltravidebleco ne funkcios.",
         "filter_hint": {
-          "always_drop_shadow": "Averto: ĉi tiu ombro ĉiam uzas {0} kiam la foliumilo ĝin subtenas.",
+          "always_drop_shadow": "Averto: ĉi tiu ombro ĉiam uzas {0} kiam la foliumilo tion subtenas.",
           "drop_shadow_syntax": "{0} ne subtenas parametron {1} kaj ŝlosilvorton {2}.",
           "avatar_inset": "Bonvolu rimarki, ke agordi ambaŭ internajn kaj eksterajn ombrojn por profilbildoj povas redoni neatenditajn rezultojn ĉe profilbildoj travideblaj.",
           "spread_zero": "Ombroj kun vastigo > 0 aperos kvazaŭ ĝi estus fakte nulo",
@@ -355,13 +386,13 @@
           "button": "Butono",
           "buttonHover": "Butono (je ŝvebo)",
           "buttonPressed": "Butono (premita)",
-          "buttonPressedHover": "Butono (premita je ŝvebo)",
+          "buttonPressedHover": "Butono (premita kaj je ŝvebo)",
           "input": "Eniga kampo"
         }
       },
       "fonts": {
         "_tab_label": "Tiparoj",
-        "help": "Elektu tiparon uzotan por eroj de la fasado. Por \"propra\" vi devas enigi la precizan nomon de tiparo tiel, kiel ĝi aperas en la sistemo.",
+        "help": "Elektu tiparon uzotan por eroj de la fasado. Por «propra» vi devas enigi la precizan nomon de tiparo tiel, kiel ĝi aperas en la sistemo.",
         "components": {
           "interface": "Fasado",
           "input": "Enigaj kampoj",
@@ -416,7 +447,8 @@
       "recovery_codes": "Rehavaj kodoj.",
       "warning_of_generate_new_codes": "Kiam vi estigos novajn rehavajn kodojn, viaj malnovaj ne plu funkcios.",
       "generate_new_recovery_codes": "Estigi novajn rehavajn kodojn",
-      "title": "Duobla aŭtentikigo"
+      "title": "Duobla aŭtentikigo",
+      "otp": "OTP"
     },
     "enter_current_password_to_confirm": "Enigu vian pasvorton por konfirmi vian identecon",
     "security": "Sekureco",
@@ -450,64 +482,109 @@
     "hide_muted_posts": "Kaŝi afiŝojn de silentigitaj uzantoj",
     "emoji_reactions_on_timeline": "Montri bildosignajn reagojn en la tempolinio",
     "pad_emoji": "Meti spacetojn ĉirkaŭ bildosigno post ties elekto",
-    "domain_mutes": "Retnomoj"
+    "domain_mutes": "Retnomoj",
+    "notification_blocks": "Blokinte uzanton vi malabonos ĝin kaj haltigos ĉiujn sciigojn.",
+    "notification_mutes": "Por ne plu ricevi sciigojn de certa uzanto, silentigu.",
+    "notification_setting_hide_notification_contents": "Kaŝi la sendinton kaj la enhavojn de pasivaj sciigoj",
+    "notification_setting_privacy": "Privateco",
+    "notification_setting_block_from_strangers": "Bloki sciigojn de uzantoj, kiujn vi ne abonas",
+    "notification_setting_filters": "Filtriloj",
+    "greentext": "Memecitaĵoj",
+    "version": {
+      "frontend_version": "Versio de fasado",
+      "backend_version": "Versio de internaĵo",
+      "title": "Versio"
+    },
+    "accent": "Emfazo"
   },
   "timeline": {
     "collapse": "Maletendi",
     "conversation": "Interparolo",
-    "error_fetching": "Eraro dum ĝisdatigo",
+    "error_fetching": "Eraris ĝisdatigo",
     "load_older": "Montri pli malnovajn statojn",
     "no_retweet_hint": "Afiŝo estas markita kiel rekta aŭ nur por abonantoj, kaj ne eblas ĝin ripeti",
     "repeated": "ripetita",
     "show_new": "Montri novajn",
     "up_to_date": "Ĝisdata",
     "no_more_statuses": "Neniuj pliaj statoj",
-    "no_statuses": "Neniuj statoj"
+    "no_statuses": "Neniuj statoj",
+    "reload": "Enlegi ree"
   },
   "user_card": {
     "approve": "Aprobi",
-    "block": "Bari",
-    "blocked": "Barita!",
+    "block": "Bloki",
+    "blocked": "Blokita!",
     "deny": "Rifuzi",
     "favorites": "Ŝatataj",
     "follow": "Aboni",
     "follow_sent": "Peto sendiĝis!",
-    "follow_progress": "Petanta…",
-    "follow_again": "Ĉu sendi peton denove?",
+    "follow_progress": "Petante…",
+    "follow_again": "Ĉu sendi peton ree?",
     "follow_unfollow": "Malaboni",
     "followees": "Abonatoj",
     "followers": "Abonantoj",
-    "following": "Abonanta!",
+    "following": "Abonata!",
     "follows_you": "Abonas vin!",
     "its_you": "Tio estas vi!",
-    "media": "Aŭdvidaĵoj",
+    "media": "Vidaŭdaĵoj",
     "mute": "Silentigi",
-    "muted": "Silentigitaj",
+    "muted": "Silentigita",
     "per_day": "tage",
     "remote_follow": "Fore aboni",
     "statuses": "Statoj",
-    "unblock": "Malbari",
-    "unblock_progress": "Malbaranta…",
-    "block_progress": "Baranta…",
+    "unblock": "Malbloki",
+    "unblock_progress": "Malblokante…",
+    "block_progress": "Blokante…",
     "unmute": "Malsilentigi",
-    "unmute_progress": "Malsilentiganta…",
-    "mute_progress": "Silentiganta…"
+    "unmute_progress": "Malsilentigante…",
+    "mute_progress": "Silentigante…",
+    "report": "Raporti",
+    "message": "Mesaĝo",
+    "mention": "Mencio",
+    "hidden": "Kaŝita",
+    "admin_menu": {
+      "delete_user_confirmation": "Ĉu vi tute certas? Ĉi tiu ago ne estas malfarebla.",
+      "delete_user": "Forigi uzanton",
+      "quarantine": "Malpermesi federadon de afiŝoj de uzanto",
+      "disable_any_subscription": "Malpermesi ĉian abonadon al uzanto",
+      "disable_remote_subscription": "Malpermesi abonadon al uzanto el foraj nodoj",
+      "sandbox": "Devigi afiŝojn esti nur por abonantoj",
+      "force_unlisted": "Devigi afiŝojn nelistiĝi",
+      "strip_media": "Forigi vidaŭdaĵojn de afiŝoj",
+      "force_nsfw": "Marki ĉiujn afiŝojn konsternaj",
+      "delete_account": "Forigi konton",
+      "deactivate_account": "Malaktivigi konton",
+      "activate_account": "Aktivigi konton",
+      "revoke_moderator": "Malnomumi reguligiston",
+      "grant_moderator": "Nomumi reguligiston",
+      "revoke_admin": "Malnomumi administranton",
+      "grant_admin": "Nomumi administranton",
+      "moderation": "Reguligado"
+    },
+    "show_repeats": "Montri ripetojn",
+    "hide_repeats": "Kaŝi ripetojn",
+    "unsubscribe": "Ne ricevi sciigojn",
+    "subscribe": "Ricevi sciigojn"
   },
   "user_profile": {
-    "timeline_title": "Uzanta tempolinio",
+    "timeline_title": "Historio de uzanto",
     "profile_does_not_exist": "Pardonu, ĉi tiu profilo ne ekzistas.",
-    "profile_loading_error": "Pardonu, eraro okazis dum enlegado de ĉi tiu profilo."
+    "profile_loading_error": "Pardonu, eraris enlego de ĉi tiu profilo."
   },
   "who_to_follow": {
     "more": "Pli",
     "who_to_follow": "Kiun aboni"
   },
   "tool_tip": {
-    "media_upload": "Alŝuti aŭdvidaĵon",
+    "media_upload": "Alŝuti vidaŭdaĵon",
     "repeat": "Ripeti",
     "reply": "Respondi",
     "favorite": "Ŝati",
-    "user_settings": "Agordoj de uzanto"
+    "user_settings": "Agordoj de uzanto",
+    "bookmark": "Legosigno",
+    "reject_follow_request": "Rifuzi abonpeton",
+    "accept_follow_request": "Akcepti abonpeton",
+    "add_reaction": "Aldoni reagon"
   },
   "upload": {
     "error": {
@@ -580,7 +657,7 @@
         "accept": "Akcepti",
         "simple_policies": "Specialaj politikoj de la nodo"
       },
-      "mrf_policies": "Ŝaltis politikon de MRF",
+      "mrf_policies": "Ŝaltis politikon de Mesaĝa ŝanĝilaro (MRF)",
       "keyword": {
         "is_replaced_by": "→",
         "replace": "Anstataŭigi",
@@ -588,7 +665,8 @@
         "ftl_removal": "Forigo de la historio de «La tuta konata reto»",
         "keyword_policies": "Politiko pri ŝlosilvortoj"
       },
-      "federation": "Federado"
+      "federation": "Federado",
+      "mrf_policies_desc": "Politikoj de Mesaĝa ŝanĝilaro (MRF) efikas sur federa konduto de la nodo.  La sekvaj politikoj estas ŝaltitaj:"
     }
   },
   "selectable_list": {
@@ -607,5 +685,112 @@
   },
   "errors": {
     "storage_unavailable": "Pleroma ne povis aliri deponejon de la foliumilo. Via saluto kaj viaj lokaj agordoj ne estos konservitaj, kaj vi eble renkontos neatenditajn problemojn. Provu permesi kuketojn."
+  },
+  "status": {
+    "hide_content": "Kaŝi enhavon",
+    "show_content": "Montri enhavon",
+    "hide_full_subject": "Kaŝi plenan temon",
+    "show_full_subject": "Montri plenan temon",
+    "thread_muted_and_words": ", enhavas vortojn:",
+    "thread_muted": "Fadeno silentigita",
+    "copy_link": "Kopii ligilon al stato",
+    "status_unavailable": "Stato ne estas disponebla",
+    "unmute_conversation": "Malsilentigi interparolon",
+    "mute_conversation": "Silentigi interparolon",
+    "replies_list": "Respondoj:",
+    "reply_to": "Responde al",
+    "delete_confirm": "Ĉu vi certe volas forigi ĉi tiun staton?",
+    "unbookmark": "Senlegosigni",
+    "bookmark": "Legosigni",
+    "pinned": "Fiksita",
+    "unpin": "Malfiksi de profilo",
+    "pin": "Fiksi al profilo",
+    "delete": "Forigi staton",
+    "repeats": "Ripetoj",
+    "favorites": "Ŝatataj"
+  },
+  "time": {
+    "years_short": "{0}j",
+    "year_short": "{0}j",
+    "years": "{0} jaroj",
+    "year": "{0} jaro",
+    "weeks_short": "{0}s",
+    "week_short": "{0}s",
+    "weeks": "{0} semajnoj",
+    "week": "{0} semajno",
+    "seconds_short": "{0}s",
+    "second_short": "{0}s",
+    "seconds": "{0} sekundoj",
+    "second": "{0} sekundo",
+    "now_short": "nun",
+    "now": "ĵus",
+    "months_short": "{0}m",
+    "month_short": "{0}m",
+    "months": "{0} monatoj",
+    "month": "{0} monato",
+    "minutes_short": "{0}m",
+    "minute_short": "{0}m",
+    "minutes": "{0} minutoj",
+    "minute": "{0} minuto",
+    "in_past": "antaŭ {0}",
+    "in_future": "post {0}",
+    "hours_short": "{0}h",
+    "hour_short": "{0}h",
+    "hours": "{0} horoj",
+    "hour": "{0} horo",
+    "days_short": "{0}t",
+    "day_short": "{0}t",
+    "days": "{0} tagoj",
+    "day": "{0} tago"
+  },
+  "search": {
+    "people": "Personoj",
+    "no_results": "Neniuj rezultoj",
+    "people_talking": "{count} personoj parolas",
+    "person_talking": "{count} persono parolas",
+    "hashtags": "Kradvortoj"
+  },
+  "display_date": {
+    "today": "Hodiaŭ"
+  },
+  "file_type": {
+    "file": "Dosiero",
+    "image": "Bildo",
+    "video": "Filmo",
+    "audio": "Sono"
+  },
+  "chats": {
+    "empty_chat_list_placeholder": "Vi ankoraŭ havas neniun babilon. Komencu novan babilon!",
+    "error_sending_message": "Io misokazis dum sendado de la mesaĝo.",
+    "error_loading_chat": "Io misokazis dum enlego de la babilo.",
+    "delete_confirm": "Ĉu vi certe volas forigi ĉi tiun mesaĝon?",
+    "more": "Pli",
+    "empty_message_error": "Ne povas sendi malplenan mesaĝon",
+    "new": "Nova babilo",
+    "chats": "Babiloj",
+    "delete": "Forigi",
+    "you": "Vi:"
+  },
+  "password_reset": {
+    "password_reset_required_but_mailer_is_disabled": "Vi devas restarigi vian pasvorton, sed restarigado de pasvortoj estas malŝaltita. Bonvolu kontakti la administranton de via nodo.",
+    "password_reset_required": "Vi devas restarigi vian pasvorton por saluti.",
+    "password_reset_disabled": "Restarigado de pasvortoj estas malŝaltita. Bonvolu kontakti la administranton de via nodo.",
+    "too_many_requests": "Vi atingis la limon de provoj, reprovu pli poste.",
+    "not_found": "Ni ne trovis tiun retpoŝtadreson aŭ uzantonomon.",
+    "return_home": "Reiri al la hejmpaĝo",
+    "check_email": "Kontrolu vian retpoŝton pro ligilo por restarigi vian pasvorton.",
+    "placeholder": "Via retpoŝtadreso aŭ uzantonomo",
+    "instruction": "Enigu vian retpoŝtadreson aŭ uzantonomon. Ni sendos al vi ligilon por restarigi vian pasvorton.",
+    "password_reset": "Restarigi pasvorton",
+    "forgot_password": "Ĉu vi forgesis pasvorton?"
+  },
+  "user_reporting": {
+    "generic_error": "Eraris traktado de via peto.",
+    "submit": "Sendi",
+    "forward_to": "Plusendi al {0}",
+    "forward_description": "La konto venas de alia servilo. Ĉu kopio de la raporto sendiĝu ankaŭ tien?",
+    "additional_comments": "Aldonaj komentoj",
+    "add_comment_description": "Ĉi tiu raporto sendiĝos al reguligistoj de via nodo. Vi povas komprenigi kial vi raportas ĉi tiun konton sube:",
+    "title": "Raportante {0}"
   }
 }

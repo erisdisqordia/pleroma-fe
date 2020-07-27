@@ -196,7 +196,8 @@
       "unlisted": "Niewidoczny – Nie umieszczaj na publicznych osiach czasu"
     },
     "preview_empty": "Pusty",
-    "preview": "Podgląd"
+    "preview": "Podgląd",
+    "empty_status_error": "Nie można wysłać pustego wpisu bez plików"
   },
   "registration": {
     "bio": "Bio",
@@ -345,8 +346,8 @@
     "notification_visibility_moves": "Użytkownik migruje",
     "notification_visibility_emoji_reactions": "Reakcje",
     "no_rich_text_description": "Usuwaj formatowanie ze wszystkich postów",
-    "no_blocks": "Bez blokad",
-    "no_mutes": "Bez wyciszeń",
+    "no_blocks": "Brak blokad",
+    "no_mutes": "Brak wyciszeń",
     "hide_follows_description": "Nie pokazuj kogo obserwuję",
     "hide_followers_description": "Nie pokazuj kto mnie obserwuje",
     "hide_follows_count_description": "Nie pokazuj licznika obserwowanych",
@@ -488,7 +489,11 @@
         "selectedMenu": "Wybrany element menu",
         "disabled": "Wyłączone",
         "toggled": "Przełączone",
-        "tabs": "Karty"
+        "tabs": "Karty",
+        "chat": {
+          "outgoing": "Wiadomości wychodzące",
+          "incoming": "Wiadomości przychodzące"
+        }
       },
       "radii": {
         "_tab_label": "Zaokrąglenie"
@@ -563,9 +568,12 @@
     "reset_avatar": "Zresetuj awatar",
     "profile_fields": {
       "value": "Zawartość",
-      "label": "Metadane profilu"
+      "label": "Metadane profilu",
+      "name": "Nazwa",
+      "add_field": "Dodaj pole"
     },
-    "bot": "To konto jest prowadzone przez bota"
+    "bot": "To konto jest prowadzone przez bota",
+    "notification_setting_hide_notification_contents": "Ukryj nadawcę i zawartość powiadomień push"
   },
   "time": {
     "day": "{0} dzień",
@@ -627,7 +635,11 @@
     "mute_conversation": "Wycisz konwersację",
     "unmute_conversation": "Odcisz konwersację",
     "status_unavailable": "Status niedostępny",
-    "copy_link": "Kopiuj link do statusu"
+    "copy_link": "Kopiuj link do statusu",
+    "unbookmark": "Usuń z zakładek",
+    "bookmark": "Dodaj do zakładek",
+    "hide_content": "Ukryj zawartość",
+    "show_content": "Pokaż zawartość"
   },
   "user_card": {
     "approve": "Przyjmij",
@@ -682,7 +694,8 @@
       "quarantine": "Zakaż federowania postów od tego użytkownika",
       "delete_user": "Usuń użytkownika",
       "delete_user_confirmation": "Czy jesteś absolutnie pewny(-a)? Ta operacja nie może być cofnięta."
-    }
+    },
+    "message": "Napisz"
   },
   "user_profile": {
     "timeline_title": "Oś czasu użytkownika",
@@ -747,12 +760,21 @@
     "password_reset_required_but_mailer_is_disabled": "Musisz zresetować hasło, ale resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji."
   },
   "file_type": {
-    "file": "Plik"
+    "file": "Plik",
+    "image": "Zdjęcie",
+    "video": "Wideo",
+    "audio": "Audio"
   },
   "chats": {
     "more": "Więcej",
     "delete": "Usuń",
-    "you": "Ty:"
+    "you": "Ty:",
+    "delete_confirm": "Czy na pewno chcesz usunąć tą wiadomość?",
+    "message_user": "Napisz do {nickname}",
+    "error_sending_message": "Coś poszło nie tak podczas wysyłania wiadomości.",
+    "error_loading_chat": "Coś poszło nie tak podczas ładowania czatu.",
+    "empty_message_error": "Nie można wysłać pustej wiadomości",
+    "new": "Nowy czat"
   },
   "display_date": {
     "today": "Dzisiaj"

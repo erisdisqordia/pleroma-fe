@@ -10,16 +10,9 @@ $status-margin: 0.75em;
   border-left: 4px $fallback--cRed;
   border-left: 4px var(--cRed, $fallback--cRed);
 
-  // TODO find a way to do this in a cleaner way without JS
-  // stylelint-disable rscss/class-format
-  &:hover .avatar.animated {
-    canvas {
-      display: none;
-    }
-
-    img {
-      visibility: visible;
-    }
+  &:hover .avatar {
+    --still-image-img: visible;
+    --still-image-canvas: hidden;
   }
 
   &.-focused {

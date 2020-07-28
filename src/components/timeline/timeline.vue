@@ -1,7 +1,7 @@
 <template>
   <div :class="classes.root">
     <div :class="classes.header">
-      <TimelineMenu />
+      <TimelineMenu v-if="!embedded" />
       <div
         v-if="timelineError"
         class="loadmore-error alert error"

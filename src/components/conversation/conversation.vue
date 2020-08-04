@@ -56,6 +56,7 @@
       border-left: 4px solid $fallback--cRed;
       border-left: 4px solid var(--cRed, $fallback--cRed);
     }
+
     .conversation-status:last-child {
       border-bottom: none;
       border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;

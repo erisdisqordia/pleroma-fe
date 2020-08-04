@@ -211,6 +211,7 @@
                   :status-id="status.parent_visible && status.in_reply_to_status_id"
                   class="reply-to-popover"
                   style="min-width: 0"
+                  :class="{ '-strikethrough': !status.parent_visible }"
                 >
                   <a
                     class="reply-to"
@@ -221,7 +222,6 @@
                     <i class="button-icon reply-button icon-reply" />
                     <span
                       class="faint-link reply-to-text"
-                      :class="{ '-strikethrough': !status.parent_visible }"
                     >
                       {{ $t('status.reply_to') }}
                     </span>

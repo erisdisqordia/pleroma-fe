@@ -54,12 +54,5 @@
       border-bottom: none;
     }
   }
-
-  &:not(.-expanded) > {
-    .conversation-status:last-child {
-      border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
-      border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
-    }
-  }
 }
 </style>

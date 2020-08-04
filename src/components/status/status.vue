@@ -17,7 +17,7 @@
     </div>
     <template v-if="muted && !isPreview">
       <div class="status-csontainer muted">
-        <small class="user-name">
+        <small class="status-username">
           <i
             v-if="muted && retweet"
             class="button-icon icon-retweet"
@@ -73,7 +73,7 @@
         />
         <div class="right-side faint">
           <span
-            class="user-name repeater-name"
+            class="status-username repeater-name"
             :title="retweeter"
           >
             <router-link
@@ -131,13 +131,13 @@
               <div class="heading-left">
                 <h4
                   v-if="status.user.name_html"
-                  class="user-name"
+                  class="status-username"
                   :title="status.user.name"
                   v-html="status.user.name_html"
                 />
                 <h4
                   v-else
-                  class="user-name"
+                  class="status-username"
                   :title="status.user.name"
                 >
                   {{ status.user.name }}
@@ -229,7 +229,7 @@
                 </StatusPopover>
                 <span
                   v-else
-                  class="reply-to"
+                  class="reply-to-no-popover"
                 >
                   <span class="reply-to-text">{{ $t('status.reply_to') }}</span>
                 </span>
@@ -357,7 +357,7 @@
       </div>
       <div
         v-if="replying"
-        class="status-container"
+        class="status-container reply-form"
       >
         <PostStatusForm
           class="reply-body"

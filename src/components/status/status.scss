@@ -58,7 +58,7 @@ $status-margin: 0.75em;
     margin-bottom: $status-margin;
   }
 
-  .user-name {
+  .status-username {
     white-space: nowrap;
     font-size: 14px;
     overflow: hidden;
@@ -143,10 +143,13 @@ $status-margin: 0.75em;
     }
   }
 
-  .reply-to-popover {
+  & .reply-to-popover,
+  & .reply-to-no-popover {
     min-width: 0;
     margin-right: 0.4em;
+  }
 
+  .reply-to-popover {
     &:hover {
       border-bottom: 1px solid var(--faint);
     }
@@ -273,7 +276,7 @@ $status-margin: 0.75em;
     display: flex;
     flex-wrap: nowrap;
 
-    & .user-name,
+    & .status-username,
     & .mute-thread,
     & .mute-words {
       word-wrap: normal;
@@ -281,16 +284,17 @@ $status-margin: 0.75em;
       white-space: nowrap;
     }
 
-    & .user-name,
+    & .status-username,
     & .mute-words {
       text-overflow: ellipsis;
       overflow: hidden;
     }
 
-    .user-name {
+    .status-username {
       font-weight: normal;
       flex: 0 1 auto;
       margin-right: 0.2em;
+      font-size: smaller;
     }
 
     .mute-thread {
@@ -311,6 +315,11 @@ $status-margin: 0.75em;
       margin-left: auto;
       display: block;
     }
+  }
+
+  .reply-form {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .reply-body {

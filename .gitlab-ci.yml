@@ -14,6 +14,7 @@ lint:
   script:
     - yarn
     - npm run lint
+    - npm run stylelint
 
 test:
   stage: test

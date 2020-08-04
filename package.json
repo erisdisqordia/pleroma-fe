@@ -11,6 +11,7 @@
     "unit:watch": "karma start test/unit/karma.conf.js --single-run=false",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
+    "stylelint": "npx stylelint src/components/status/status.scss",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "lint-fix": "eslint --fix --ext .js,.vue src test/unit/specs test/e2e/specs"
   },

@@ -150,8 +150,8 @@
                   {{ status.user.screen_name }}
                 </router-link>
                 <img
-                  class="status-favicon"
                   v-if="!!(status.user && status.user.favicon)"
+                  class="status-favicon"
                   :src="status.user.favicon"
                 >
               </div>

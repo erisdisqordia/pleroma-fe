@@ -5,10 +5,6 @@ $status-margin: 0.75em;
 
 .Status {
   min-width: 0;
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
-  border-left: 4px $fallback--cRed;
-  border-left: 4px var(--cRed, $fallback--cRed);
 
   &:hover .avatar {
     --still-image-img: visible;

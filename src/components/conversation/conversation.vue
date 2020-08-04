@@ -45,13 +45,21 @@
     border-left: none;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-color: var(--border, $fallback--border);
+    border-bottom-color: var(--border, $fallback--border);
     border-radius: 0;
   }
 
   &.-expanded {
+    .conversation-status {
+      border-color: $fallback--border;
+      border-color: var(--border, $fallback--border);
+      border-left: 4px solid $fallback--cRed;
+      border-left: 4px solid var(--cRed, $fallback--cRed);
+    }
     .conversation-status:last-child {
       border-bottom: none;
+      border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
+      border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
     }
   }
 }

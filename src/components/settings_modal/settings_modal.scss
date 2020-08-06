@@ -13,6 +13,13 @@
        * - 50px - leaving tiny amount of space so that titlebar + tiny amount of modal is visible
        */
       transform: translateY(calc(((100vh - 100%) / 2 + 100%) - 50px));
+
+      @media all and (max-width: 800px) {
+        /* For mobile, the modal takes 100% of the available screen.
+           This ensures the minimized modal is always 50px above the browser bottom bar regardless of whether or not it is visible.
+        */
+        transform: translateY(calc(100% - 50px));
+      }
     }
   }
 
@@ -27,7 +34,7 @@
 
     @media all and (max-width: 800px) {
       max-width: 100vw;
-      height: 100vh;
+      height: 100%;
     }
 
     >.panel-body {

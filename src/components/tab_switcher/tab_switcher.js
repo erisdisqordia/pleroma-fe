@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { mapState } from 'vuex'
 
 import './tab_switcher.scss'
 
@@ -44,7 +45,13 @@ export default Vue.component('tab-switcher', {
       } else {
         return this.active
       }
-    }
+    },
+    settingsModalVisible () {
+      return this.settingsModalState === 'visible'
+    },
+    ...mapState({
+      settingsModalState: state => state.interface.settingsModalState
+    })
   },
   beforeUpdate () {
     const currentSlot = this.$slots.default[this.active]
@@ -134,7 +141,7 @@ export default Vue.component('tab-switcher', {
         <div class="tabs">
           {tabs}
         </div>
-        <div ref="contents" class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')}>
+        <div ref="contents" class={'contents' + (this.scrollableTabs ? ' scrollable-tabs' : '')} v-body-scroll-lock={this.settingsModalVisible}>
           {contents}
         </div>
       </div>

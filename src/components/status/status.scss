@@ -1,0 +1,400 @@
+
+@import '../../_variables.scss';
+
+$status-margin: 0.75em;
+
+.Status {
+  min-width: 0;
+
+  &:hover .avatar {
+    --still-image-img: visible;
+    --still-image-canvas: hidden;
+  }
+
+  &.-focused {
+    background-color: $fallback--lightBg;
+    background-color: var(--selectedPost, $fallback--lightBg);
+    color: $fallback--text;
+    color: var(--selectedPostText, $fallback--text);
+
+    --lightText: var(--selectedPostLightText, $fallback--light);
+    --faint: var(--selectedPostFaintText, $fallback--faint);
+    --faintLink: var(--selectedPostFaintLink, $fallback--faint);
+    --postLink: var(--selectedPostPostLink, $fallback--faint);
+    --postFaintLink: var(--selectedPostFaintPostLink, $fallback--faint);
+    --icon: var(--selectedPostIcon, $fallback--icon);
+  }
+
+  .status-container {
+    display: flex;
+    padding: $status-margin;
+
+    &.-repeat {
+      padding-top: 0;
+    }
+  }
+
+  .pin {
+    padding: $status-margin $status-margin 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .left-side {
+    margin-right: $status-margin;
+  }
+
+  .right-side {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .usercard {
+    margin-bottom: $status-margin;
+  }
+
+  .status-username {
+    white-space: nowrap;
+    font-size: 14px;
+    overflow: hidden;
+    max-width: 85%;
+    font-weight: bold;
+    flex-shrink: 1;
+    margin-right: 0.4em;
+    text-overflow: ellipsis;
+
+    .emoji {
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      object-fit: contain;
+    }
+  }
+
+  .status-favicon {
+    height: 18px;
+    width: 18px;
+    margin-right: 0.4em;
+  }
+
+  .status-heading {
+    margin-bottom: 0.5em;
+  }
+
+  .heading-name-row {
+    display: flex;
+    justify-content: space-between;
+    line-height: 18px;
+
+    a {
+      display: inline-block;
+      word-break: break-all;
+    }
+  }
+
+  .account-name {
+    min-width: 1.6em;
+    margin-right: 0.4em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1 1 0;
+  }
+
+  .heading-left {
+    display: flex;
+    min-width: 0;
+  }
+
+  .heading-right {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .timeago {
+    margin-right: 0.2em;
+  }
+
+  .heading-reply-row {
+    position: relative;
+    align-content: baseline;
+    font-size: 12px;
+    line-height: 18px;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  .reply-to-and-accountname {
+    display: flex;
+    height: 18px;
+    margin-right: 0.5em;
+    max-width: 100%;
+
+    .icon-reply {
+      // mirror the icon
+      transform: scaleX(-1);
+    }
+  }
+
+  & .reply-to-popover,
+  & .reply-to-no-popover {
+    min-width: 0;
+    margin-right: 0.4em;
+  }
+
+  .reply-to-popover {
+    &:hover {
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .faint-link:hover {
+      // override default
+      text-decoration: none;
+    }
+
+    &.-strikethrough {
+      position: relative;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        border-bottom: 1px solid var(--faint);
+      }
+    }
+  }
+
+  .reply-to {
+    display: flex;
+  }
+
+  .reply-to-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 0.2em;
+  }
+
+  .replies-separator {
+    margin-left: 0.4em;
+  }
+
+  .replies {
+    line-height: 18px;
+    font-size: 12px;
+    display: flex;
+    flex-wrap: wrap;
+
+    & > * {
+      margin-right: 0.4em;
+    }
+  }
+
+  .reply-link {
+    height: 17px;
+  }
+
+  .repeat-info {
+    padding: 0.4em $status-margin;
+    line-height: 22px;
+
+    .right-side {
+      display: flex;
+      align-content: center;
+      flex-wrap: wrap;
+    }
+
+    i {
+      padding: 0 0.2em;
+    }
+  }
+
+  .repeater-avatar {
+    border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+    margin-left: 28px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .repeater-name {
+    text-overflow: ellipsis;
+    margin-right: 0;
+
+    .emoji {
+      width: 14px;
+      height: 14px;
+      vertical-align: middle;
+      object-fit: contain;
+    }
+  }
+
+  .status-fadein {
+    animation-duration: 0.4s;
+    animation-name: fadein;
+  }
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .status-actions {
+    position: relative;
+    width: 100%;
+    display: flex;
+    margin-top: $status-margin;
+
+    > * {
+      max-width: 4em;
+      flex: 1;
+    }
+  }
+
+  .button-reply {
+    &:not(.-disabled) {
+      cursor: pointer;
+    }
+
+    &:not(.-disabled):hover,
+    &.-active {
+      color: $fallback--cBlue;
+      color: var(--cBlue, $fallback--cBlue);
+    }
+  }
+
+  .muted {
+    padding: 0.25em 0.6em;
+    height: 1.2em;
+    line-height: 1.2em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+
+    & .status-username,
+    & .mute-thread,
+    & .mute-words {
+      word-wrap: normal;
+      word-break: normal;
+      white-space: nowrap;
+    }
+
+    & .status-username,
+    & .mute-words {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .status-username {
+      font-weight: normal;
+      flex: 0 1 auto;
+      margin-right: 0.2em;
+      font-size: smaller;
+    }
+
+    .mute-thread {
+      flex: 0 0 auto;
+    }
+
+    .mute-words {
+      flex: 1 0 5em;
+      margin-left: 0.2em;
+
+      &::before {
+        content: ' ';
+      }
+    }
+
+    .unmute {
+      flex: 0 0 auto;
+      margin-left: auto;
+      display: block;
+    }
+  }
+
+  .reply-form {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .reply-body {
+    flex: 1;
+  }
+
+  .favs-repeated-users {
+    margin-top: $status-margin;
+  }
+
+  .stats {
+    width: 100%;
+    display: flex;
+    line-height: 1em;
+  }
+
+  .avatar-row {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 1px;
+      left: 0;
+      background-color: var(--faint, $fallback--faint);
+    }
+  }
+
+  .stat-count {
+    margin-right: $status-margin;
+    user-select: none;
+
+    .stat-title {
+      color: var(--faint, $fallback--faint);
+      font-size: 12px;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .stat-number {
+      font-weight: bolder;
+      font-size: 16px;
+      line-height: 1em;
+    }
+
+    &:hover .stat-title {
+      text-decoration: underline;
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    .repeater-avatar {
+      margin-left: 20px;
+    }
+
+    .avatar:not(.repeater-avatar) {
+      width: 40px;
+      height: 40px;
+
+      // TODO define those other way somehow?
+      // stylelint-disable rscss/class-format
+      &.avatar-compact {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <template>
   <!-- eslint-disable vue/no-v-html -->
-  <div class="status-body">
+  <div class="StatusContent">
     <slot name="header" />
     <div
       v-if="status.summary_html"
@@ -133,7 +133,7 @@
 
 $status-margin: 0.75em;
 
-.status-body {
+.StatusContent {
   flex: 1;
   min-width: 0;
 
@@ -284,13 +284,4 @@ $status-margin: 0.75em;
   color: $fallback--cGreen;
   color: var(--postGreentext, $fallback--cGreen);
 }
-
-.timeline :not(.panel-disabled) > {
-  .status-el:last-child {
-    border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
-    border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
-    border-bottom: none;
-  }
-}
-
 </style>

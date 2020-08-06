@@ -60,16 +60,8 @@
       height: 32px;
     }
 
-    .status-body {
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
-      a {
-        color: var(--faintLink);
-      }
-      .status-content a {
-        color: var(--postFaintLink);
-      }
-    }
+    --link: var(--faintLink);
+    --text: var(--faint);
   }
 
   .follow-request-accept {
@@ -106,7 +98,8 @@
     }
   }
 
-  .status-el {
+  /* TODO cleanup this */
+  .Status {
     flex: 1;
   }
 

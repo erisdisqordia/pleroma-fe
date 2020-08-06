@@ -275,6 +275,7 @@ $status-margin: 0.75em;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+      height: 1.4em;
     }
   }
 }

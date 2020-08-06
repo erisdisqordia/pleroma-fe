@@ -14,7 +14,7 @@
       ref="content"
       :style="styles"
       class="popover"
-      :class="popoverClass"
+      :class="popoverClass || 'popover-default'"
     >
       <slot
         name="content"
@@ -34,6 +34,9 @@
   z-index: 8;
   position: absolute;
   min-width: 0;
+}
+
+.popover-default {
   transition: opacity 0.3s;
 
   box-shadow: 1px 1px 4px rgba(0,0,0,.6);

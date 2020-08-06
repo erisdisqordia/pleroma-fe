@@ -2,24 +2,17 @@
   <div class="nav-panel">
     <div class="panel panel-default">
       <ul>
-        <li v-if="currentUser">
-          <router-link :to="{ name: 'friends' }">
-            <i class="button-icon icon-home-2" /> {{ $t("nav.timeline") }}
+        <li v-if="currentUser || !privateMode">
+          <router-link
+            :to="{ name: timelinesRoute }"
+            :class="onTimelineRoute && 'router-link-active'"
+          >
+            <i class="button-icon icon-home-2" /> {{ $t("nav.timelines") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
             <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
-          </router-link>
-        </li>
-        <li v-if="currentUser">
-          <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
-            <i class="button-icon icon-mail-alt" /> {{ $t("nav.dms") }}
-          </router-link>
-        </li>
-        <li v-if="currentUser">
-          <router-link :to="{ name: 'bookmarks'}">
-            <i class="button-icon icon-bookmark" /> {{ $t("nav.bookmarks") }}
           </router-link>
         </li>
         <li v-if="currentUser && pleromaChatMessagesAvailable">
@@ -42,16 +35,6 @@
             >
               {{ followRequestCount }}
             </span>
-          </router-link>
-        </li>
-        <li v-if="currentUser || !privateMode">
-          <router-link :to="{ name: 'public-timeline' }">
-            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
-          </router-link>
-        </li>
-        <li v-if="federating && (currentUser || !privateMode)">
-          <router-link :to="{ name: 'public-external-timeline' }">
-            <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
           </router-link>
         </li>
         <li>

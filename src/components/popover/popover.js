@@ -18,7 +18,9 @@ const Popover = {
     // Takes a x/y object and tells how many pixels to offset from
     // anchor point on either axis
     offset: Object,
-    // Additional styles you may want for the popover container
+    // Replaces the classes you may want for the popover container.
+    // Use 'popover-default' in addition to get the default popover
+    // styles with your custom class.
     popoverClass: String
   },
   data () {
@@ -106,7 +108,7 @@ const Popover = {
       // single translate or translate3d resulted in blurry text.
       this.styles = {
         opacity: 1,
-        transform: `translateX(${Math.floor(translateX)}px) translateY(${Math.floor(translateY)}px)`
+        transform: `translateX(${Math.round(translateX)}px) translateY(${Math.round(translateY)}px)`
       }
     },
     showPopover () {

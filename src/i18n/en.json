@@ -120,12 +120,13 @@
     "dms": "Direct Messages",
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
-    "twkn": "The Whole Known Network",
+    "twkn": "Known Network",
     "bookmarks": "Bookmarks",
     "user_search": "User Search",
     "search": "Search",
     "who_to_follow": "Who to follow",
     "preferences": "Preferences",
+    "timelines": "Timelines",
     "chats": "Chats"
   },
   "notifications": {

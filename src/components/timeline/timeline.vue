@@ -1,9 +1,7 @@
 <template>
   <div :class="classes.root">
     <div :class="classes.header">
-      <div class="title">
-        {{ title }}
-      </div>
+      <TimelineMenu v-if="!embedded" />
       <div
         v-if="timelineError"
         class="loadmore-error alert error"
@@ -104,6 +102,18 @@
 .timeline {
   .loadmore-text {
     opacity: 1;
+  }
+}
+
+.timeline-heading {
+  max-width: 100%;
+  flex-wrap: nowrap;
+  .loadmore-button {
+    flex-shrink: 0;
+  }
+  .loadmore-text {
+    flex-shrink: 0;
+    line-height: 1em;
   }
 }
 </style>

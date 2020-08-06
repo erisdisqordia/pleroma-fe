@@ -40,12 +40,17 @@
           </router-link>
         </li>
         <li
+          v-if="currentUser || !privateMode"
+          @click="toggleDrawer"
+        >
+          <router-link :to="{ name: timelinesRoute }">
+            <i class="button-icon icon-home-2" /> {{ $t("nav.timelines") }}
+          </router-link>
+        </li>
+        <li
           v-if="currentUser && pleromaChatMessagesAvailable"
           @click="toggleDrawer"
         >
-          <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
-            <i class="button-icon icon-mail-alt" /> {{ $t("nav.dms") }}
-          </router-link>
           <router-link
             :to="{ name: 'chats', params: { username: currentUser.screen_name } }"
             style="position: relative"
@@ -59,34 +64,15 @@
             </span>
           </router-link>
         </li>
-        <li
-          v-if="currentUser"
-          @click="toggleDrawer"
-        >
+      </ul>
+      <ul v-if="currentUser">
+        <li @click="toggleDrawer">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
             <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
           </router-link>
         </li>
-      </ul>
-      <ul>
         <li
-          v-if="currentUser"
-          @click="toggleDrawer"
-        >
-          <router-link :to="{ name: 'friends' }">
-            <i class="button-icon icon-home-2" /> {{ $t("nav.timeline") }}
-          </router-link>
-        </li>
-        <li
-          v-if="currentUser"
-          @click="toggleDrawer"
-        >
-          <router-link :to="{ name: 'bookmarks'}">
-            <i class="button-icon icon-bookmark" /> {{ $t("nav.bookmarks") }}
-          </router-link>
-        </li>
-        <li
-          v-if="currentUser && currentUser.locked"
+          v-if="currentUser.locked"
           @click="toggleDrawer"
         >
           <router-link to="/friend-requests">
@@ -100,19 +86,11 @@
           </router-link>
         </li>
         <li
-          v-if="currentUser || !privateMode"
+          v-if="chat"
           @click="toggleDrawer"
         >
-          <router-link to="/main/public">
-            <i class="button-icon icon-users" /> {{ $t("nav.public_tl") }}
-          </router-link>
-        </li>
-        <li
-          v-if="federating && (currentUser || !privateMode)"
-          @click="toggleDrawer"
-        >
-          <router-link to="/main/all">
-            <i class="button-icon icon-globe" /> {{ $t("nav.twkn") }}
+          <router-link :to="{ name: 'chat' }">
+            <i class="button-icon icon-chat" /> {{ $t("nav.chat") }}
           </router-link>
         </li>
       </ul>

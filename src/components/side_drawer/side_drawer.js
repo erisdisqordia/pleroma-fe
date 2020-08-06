@@ -49,6 +49,12 @@ const SideDrawer = {
     federating () {
       return this.$store.state.instance.federating
     },
+    timelinesRoute () {
+      if (this.$store.state.interface.lastTimeline) {
+        return this.$store.state.interface.lastTimeline
+      }
+      return this.currentUser ? 'friends' : 'public-timeline'
+    },
     ...mapState({
       pleromaChatMessagesAvailable: state => state.instance.pleromaChatMessagesAvailable
     }),

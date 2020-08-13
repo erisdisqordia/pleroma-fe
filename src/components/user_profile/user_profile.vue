@@ -20,13 +20,14 @@
           :key="index"
           class="user-profile-field"
         >
-          <!-- eslint-disable vue/no-v-html -->
           <dt
             :title="user.fields_text[index].name"
             class="user-profile-field-name"
             @click.prevent="linkClicked"
-            v-html="field.name"
-          />
+          >
+            {{ field.name }}
+          </dt>
+          <!-- eslint-disable vue/no-v-html -->
           <dd
             :title="user.fields_text[index].value"
             class="user-profile-field-value"

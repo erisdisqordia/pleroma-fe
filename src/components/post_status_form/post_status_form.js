@@ -481,7 +481,7 @@ const PostStatusForm = {
 
       // BEGIN content size update
       target.style.height = 'auto'
-      const heightWithoutPadding = Math.floor(target.scrollHeight - vertPadding)
+      const heightWithoutPadding = Math.ceil(target.scrollHeight - vertPadding) + 1
       let newHeight = this.maxHeight ? Math.min(heightWithoutPadding, this.maxHeight) : heightWithoutPadding
       // This is a bit of a hack to combat target.scrollHeight being different on every other input
       // on some browsers for whatever reason. Don't change the height if difference is 1px or less.

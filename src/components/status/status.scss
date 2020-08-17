@@ -133,6 +133,13 @@ $status-margin: 0.75em;
     margin-right: 0.5em;
     max-width: 100%;
 
+    .reply-to-link {
+      white-space: nowrap;
+      word-break: break-word;
+      text-overflow: ellipsis;
+      overflow-x: hidden;
+    }
+
     .icon-reply {
       // mirror the icon
       transform: scaleX(-1);
@@ -143,11 +150,20 @@ $status-margin: 0.75em;
   & .reply-to-no-popover {
     min-width: 0;
     margin-right: 0.4em;
+    flex-shrink: 0;
   }
 
   .reply-to-popover {
-    &:hover {
+    position: relative;
+
+    .reply-to:hover::before {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
       border-bottom: 1px solid var(--faint);
+      pointer-events: none;
     }
 
     .faint-link:hover {
@@ -156,8 +172,6 @@ $status-margin: 0.75em;
     }
 
     &.-strikethrough {
-      position: relative;
-
       &::after {
         content: '';
         display: block;
@@ -165,6 +179,7 @@ $status-margin: 0.75em;
         top: 50%;
         width: 100%;
         border-bottom: 1px solid var(--faint);
+        pointer-events: none;
       }
     }
   }

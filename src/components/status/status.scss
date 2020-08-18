@@ -154,10 +154,6 @@ $status-margin: 0.75em;
   }
 
   .reply-to-popover {
-    .reply-to {
-      position: relative;
-    }
-
     .reply-to:hover::before {
       content: '';
       display: block;
@@ -188,6 +184,7 @@ $status-margin: 0.75em;
 
   .reply-to {
     display: flex;
+    position: relative;
   }
 
   .reply-to-text {

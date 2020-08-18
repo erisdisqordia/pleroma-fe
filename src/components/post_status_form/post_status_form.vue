@@ -143,6 +143,7 @@
             v-model="newStatus.status"
             :placeholder="placeholder || $t('post_status.default')"
             rows="1"
+            cols="1"
             :disabled="posting"
             class="form-post-body"
             :class="{ 'scrollable-form': !!maxHeight }"

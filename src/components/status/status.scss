@@ -154,7 +154,9 @@ $status-margin: 0.75em;
   }
 
   .reply-to-popover {
-    position: relative;
+    .reply-to {
+      position: relative;
+    }
 
     .reply-to:hover::before {
       content: '';

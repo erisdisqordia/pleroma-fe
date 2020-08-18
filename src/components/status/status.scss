@@ -6,7 +6,7 @@ $status-margin: 0.75em;
 .Status {
   min-width: 0;
 
-  &:hover .avatar {
+  &:hover {
     --still-image-img: visible;
     --still-image-canvas: hidden;
   }

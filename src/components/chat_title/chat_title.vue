@@ -51,7 +51,7 @@
     }
   }
 
-  .still-image.avatar {
+  .Avatar {
     width: 23px;
     height: 23px;
     margin-right: 0.5em;

@@ -60,6 +60,7 @@
       @click="openModal"
     >
       <StillImage
+        class="image"
         :referrerpolicy="referrerpolicy"
         :mimetype="attachment.mimetype"
         :src="attachment.large_thumb_url || attachment.url"
@@ -281,8 +282,11 @@
   }
 
   .image-attachment {
-    width: 100%;
-    height: 100%;
+    &,
+    & .image {
+      width: 100%;
+      height: 100%;
+    }
 
     &.hidden {
       display: none;

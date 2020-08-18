@@ -72,7 +72,7 @@
     }
   }
 
-  .avatar.still-image {
+  .Avatar {
     border-radius: $fallback--avatarAltRadius;
     border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
   }

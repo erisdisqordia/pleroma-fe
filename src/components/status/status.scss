@@ -170,7 +170,7 @@ $status-margin: 0.75em;
     }
 
     &.-strikethrough {
-      &::after {
+      .reply-to::after {
         content: '';
         display: block;
         position: absolute;

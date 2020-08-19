@@ -330,7 +330,7 @@ describe('Statuses module', () => {
       const deletion = makeMockStatus({ id: '4', type: 'deletion' })
       deletion.text = 'Dolus deleted notice {{tag:gs.smuglo.li,2016-11-18:noticeId=1038007:objectType=note}}.'
       deletion.uri = 'xxx'
-
+      const newNotificationSideEffects = () => {}
       mutations.addNewStatuses(state, { statuses: [status, otherStatus], user })
       mutations.addNewNotifications(
         state,
@@ -342,7 +342,8 @@ describe('Statuses module', () => {
             status: otherStatus,
             action: otherStatus,
             seen: false
-          }]
+          }],
+          newNotificationSideEffects
         })
 
       expect(state.notifications.data.length).to.eql(1)
@@ -356,7 +357,8 @@ describe('Statuses module', () => {
             status: mentionedStatus,
             action: mentionedStatus,
             seen: false
-          }]
+          }],
+          newNotificationSideEffects
         })
 
       mutations.addNewStatuses(state, { statuses: [mentionedStatus], user })

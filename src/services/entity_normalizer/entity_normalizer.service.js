@@ -209,6 +209,7 @@ export const parseAttachment = (data) => {
   }
 
   output.url = data.url
+  output.large_thumb_url = data.preview_url
   output.description = data.description
 
   return output

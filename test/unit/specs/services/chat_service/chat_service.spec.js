@@ -17,8 +17,7 @@ const message3 = {
   created_at: (new Date('2020-07-22T18:45:59.000Z'))
 }
 
-// TODO: only
-describe.only('chatService', () => {
+describe('chatService', () => {
   describe('.add', () => {
     it("Doesn't add duplicates", () => {
       const chat = chatService.empty()

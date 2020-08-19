@@ -9,7 +9,8 @@ export const timelineNames = () => {
     'bookmarks': 'nav.bookmarks',
     'dms': 'nav.dms',
     'public-timeline': 'nav.public_tl',
-    'public-external-timeline': 'nav.twkn'
+    'public-external-timeline': 'nav.twkn',
+    'tag-timeline': 'tag'
   }
 }
 
@@ -40,6 +41,14 @@ const TimelineMenu = {
       setTimeout(() => {
         this.isOpen = true
       }, 25)
+    },
+    timelineName () {
+      const route = this.$route.name
+      if (route === 'tag-timeline') {
+        return '#' + this.$route.params.tag
+      }
+      const i18nkey = timelineNames()[this.$route.name]
+      return i18nkey ? this.$t(i18nkey) : route
     }
   },
   computed: {
@@ -47,10 +56,7 @@ const TimelineMenu = {
       currentUser: state => state.users.currentUser,
       privateMode: state => state.instance.private,
       federating: state => state.instance.federating
-    }),
-    timelineNames () {
-      return timelineNames()
-    }
+    })
   }
 }
 

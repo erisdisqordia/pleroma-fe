@@ -45,7 +45,7 @@
       slot="trigger"
       class="title timeline-menu-title"
     >
-      <span>{{ $t(timelineNames[$route.name]) }}</span>
+      <span>{{ timelineName() }}</span>
       <i class="icon-down-open" />
     </div>
   </Popover>

@@ -30,8 +30,6 @@
   position: relative;
   line-height: 0;
   overflow: hidden;
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
 
@@ -68,6 +66,7 @@
       border-radius: $fallback--tooltipRadius;
       border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
       z-index: 2;
+      visibility: var(--still-image-label-visibility, visible);
     }
 
     &:hover canvas {

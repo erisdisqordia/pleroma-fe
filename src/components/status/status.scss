@@ -6,7 +6,7 @@ $status-margin: 0.75em;
 .Status {
   min-width: 0;
 
-  &:hover .avatar {
+  &:hover {
     --still-image-img: visible;
     --still-image-canvas: hidden;
   }
@@ -133,6 +133,13 @@ $status-margin: 0.75em;
     margin-right: 0.5em;
     max-width: 100%;
 
+    .reply-to-link {
+      white-space: nowrap;
+      word-break: break-word;
+      text-overflow: ellipsis;
+      overflow-x: hidden;
+    }
+
     .icon-reply {
       // mirror the icon
       transform: scaleX(-1);
@@ -143,11 +150,18 @@ $status-margin: 0.75em;
   & .reply-to-no-popover {
     min-width: 0;
     margin-right: 0.4em;
+    flex-shrink: 0;
   }
 
   .reply-to-popover {
-    &:hover {
+    .reply-to:hover::before {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
       border-bottom: 1px solid var(--faint);
+      pointer-events: none;
     }
 
     .faint-link:hover {
@@ -156,21 +170,21 @@ $status-margin: 0.75em;
     }
 
     &.-strikethrough {
-      position: relative;
-
-      &::after {
+      .reply-to::after {
         content: '';
         display: block;
         position: absolute;
         top: 50%;
         width: 100%;
         border-bottom: 1px solid var(--faint);
+        pointer-events: none;
       }
     }
   }
 
   .reply-to {
     display: flex;
+    position: relative;
   }
 
   .reply-to-text {

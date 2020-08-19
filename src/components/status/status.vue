@@ -234,6 +234,7 @@
                   <span class="reply-to-text">{{ $t('status.reply_to') }}</span>
                 </span>
                 <router-link
+                  class="reply-to-link"
                   :title="replyToName"
                   :to="replyProfileLink"
                 >

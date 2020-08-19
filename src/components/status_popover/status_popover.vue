@@ -38,7 +38,8 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.status-popover {
+/* popover styles load on-demand, so we need to override */
+.status-popover.popover {
   font-size: 1rem;
   min-width: 15em;
   max-width: 95%;

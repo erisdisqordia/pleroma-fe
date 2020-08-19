@@ -364,13 +364,9 @@
     }
   }
 
-  &:hover .animated.avatar {
-    canvas {
-      display: none;
-    }
-    img {
-      visibility: visible;
-    }
+  &:hover .avatar {
+    --still-image-img: visible;
+    --still-image-canvas: hidden;
   }
 
   &-avatar-link {

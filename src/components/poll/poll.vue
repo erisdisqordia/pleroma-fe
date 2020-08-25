@@ -96,6 +96,7 @@
     align-items: center;
     padding: 0.1em 0.25em;
     z-index: 1;
+    word-break: break-word;
   }
   .result-percentage {
     width: 3.5em;

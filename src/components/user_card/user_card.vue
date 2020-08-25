@@ -354,7 +354,7 @@
     align-items: flex-start;
     max-height: 56px;
 
-    .avatar {
+    .Avatar {
       flex: 1 0 100%;
       width: 56px;
       height: 56px;
@@ -364,7 +364,7 @@
     }
   }
 
-  &:hover .avatar {
+  &:hover .Avatar {
     --still-image-img: visible;
     --still-image-canvas: hidden;
   }

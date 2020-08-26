@@ -3,17 +3,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
-### Changed
-- Greentext now has separate color slot for it
-- Removed the use of with_move parameters when fetching notifications
-- Push notifications now are the same as normal notfication, and are localized.
-- Updated Notification Settings to match new BE API
-
-### Fixed
-- Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)
-- Multiple issues with muted statuses/notifications
-
 ## [Unreleased patch]
+
+## [2.1.0-rc0] - 2020-08-26
 ### Add
 - Added private notifications option for push notifications
 - 'Copy link' button for statuses (in the ellipsis menu)
@@ -34,6 +26,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Add better visual indication for drag-and-drop for files
 - When disabling attachments, the placeholder links now show an icon and the description instead of just IMAGE or VIDEO etc
 - Remove unnecessary options for 'automatic loading when loading older' and 'reply previews'
+- Greentext now has separate color slot for it
+- Removed the use of with_move parameters when fetching notifications
+- Push notifications now are the same as normal notfication, and are localized.
+- Updated Notification Settings to match new BE API
 
 ### Fixed
 - Custom Emoji will display in poll options now.
@@ -52,6 +48,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Reply filtering options in Settings -> Filtering now work again using filtering on server
 - Don't show just blank-screen when cookies are disabled
 - Add status idempotency to prevent accidental double posting when posting returns an error
+- Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)
+- Multiple issues with muted statuses/notifications
 
 ## [2.0.3] - 2020-05-02
 ### Fixed

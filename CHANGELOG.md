@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added status preview option to preview your statuses before posting
 - When a post is a reply to an unavailable post, the 'Reply to'-text has a strike-through style
 - Added ability to see all favoriting or repeating users when hovering the number on highlighted statuses
+- Bookmarks
 
 ### Changed
 - Change heart to thumbs up in reaction picker
@@ -48,7 +49,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Add status idempotency to prevent accidental double posting when posting returns an error
 - Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)
 - Multiple issues with muted statuses/notifications
-
 
 ## [2.0.5] - 2020-05-12
 ### Add
@@ -121,8 +121,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Ability to change user's email
 - About page
 - Added remote user redirect
-- Bookmarks
+
 ### Changed
 - changed the way fading effects for user profile/long statuses works, now uses css-mask instead of gradient background hacks which weren't exactly compatible with semi-transparent themes
+
 ### Fixed
 - improved hotkey behavior on autocomplete popup

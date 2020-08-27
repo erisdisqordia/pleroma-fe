@@ -8,8 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [2.1.0] - 2020-08-28
 ### Add
-- Added private notifications option for push notifications
-- 'Copy link' button for statuses (in the ellipsis menu)
 - Autocomplete domains from list of known instances
 - 'Bot' settings option and badge
 - Added profile meta data fields that can be set in profile settings
@@ -20,7 +18,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added ability to see all favoriting or repeating users when hovering the number on highlighted statuses
 
 ### Changed
-- Registration page no longer requires email if the server is configured not to require it
 - Change heart to thumbs up in reaction picker
 - Close the media modal on navigation events
 - Add colons to the emoji alt text, to make them copyable
@@ -51,6 +48,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Add status idempotency to prevent accidental double posting when posting returns an error
 - Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)
 - Multiple issues with muted statuses/notifications
+
+
+## [2.0.5] - 2020-05-12
+### Add
+- Added private notifications option for push notifications
+- 'Copy link' button for statuses (in the ellipsis menu)
+
+### Changed
+- Registration page no longer requires email if the server is configured not to require it
+
+### Fixed
+- Status ellipsis menu closes properly when selecting certain options
 
 ## [2.0.3] - 2020-05-02
 ### Fixed

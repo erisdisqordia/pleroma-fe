@@ -1,4 +1,5 @@
 import escape from 'escape-html'
+import parseLinkHeader from 'parse-link-header'
 import { isStatusNotification } from '../notification_utils/notification_utils.js'
 
 const qvitterStatusType = (status) => {
@@ -56,6 +57,12 @@ export const parseUser = (data) => {
         value: addEmojis(field.value, data.emojis)
       }
     })
+    output.fields_text = data.fields.map(field => {
+      return {
+        name: unescape(field.name.replace(/<[^>]*>/g, '')),
+        value: unescape(field.value.replace(/<[^>]*>/g, ''))
+      }
+    })
 
     // Utilize avatar_static for gif avatars?
     output.profile_image_url = data.avatar
@@ -72,6 +79,7 @@ export const parseUser = (data) => {
       const relationship = data.pleroma.relationship
 
       output.background_image = data.pleroma.background_image
+      output.favicon = data.pleroma.favicon
       output.token = data.pleroma.chat_token
 
       if (relationship) {
@@ -176,6 +184,7 @@ export const parseUser = (data) => {
     output.deactivated = data.pleroma.deactivated
 
     output.notification_settings = data.pleroma.notification_settings
+    output.unread_chat_count = data.pleroma.unread_chat_count
   }
 
   output.tags = output.tags || []
@@ -200,6 +209,7 @@ export const parseAttachment = (data) => {
   }
 
   output.url = data.url
+  output.large_thumb_url = data.preview_url
   output.description = data.description
 
   return output
@@ -210,7 +220,7 @@ export const addEmojis = (string, emojis) => {
     const regexSafeShortCode = emoji.shortcode.replace(matchOperatorsRegex, '\\$&')
     return acc.replace(
       new RegExp(`:${regexSafeShortCode}:`, 'g'),
-      `<img src='${emoji.url}' alt='${emoji.shortcode}' title='${emoji.shortcode}' class='emoji' />`
+      `<img src='${emoji.url}' alt=':${emoji.shortcode}:' title=':${emoji.shortcode}:' class='emoji' />`
     )
   }, string)
 }
@@ -225,6 +235,8 @@ export const parseStatus = (data) => {
 
     output.repeated = data.reblogged
     output.repeat_num = data.reblogs_count
+
+    output.bookmarked = data.bookmarked
 
     output.type = data.reblog ? 'retweet' : 'status'
     output.nsfw = data.sensitive
@@ -242,6 +254,7 @@ export const parseStatus = (data) => {
       output.in_reply_to_screen_name = data.pleroma.in_reply_to_account_acct
       output.thread_muted = pleroma.thread_muted
       output.emoji_reactions = pleroma.emoji_reactions
+      output.parent_visible = pleroma.parent_visible === undefined ? true : pleroma.parent_visible
     } else {
       output.text = data.content
       output.summary = data.spoiler_text
@@ -258,6 +271,12 @@ export const parseStatus = (data) => {
     output.summary_html = addEmojis(escape(data.spoiler_text), data.emojis)
     output.external_url = data.url
     output.poll = data.poll
+    if (output.poll) {
+      output.poll.options = (output.poll.options || []).map(field => ({
+        ...field,
+        title_html: addEmojis(field.title, data.emojis)
+      }))
+    }
     output.pinned = data.pinned
     output.muted = data.muted
   } else {
@@ -356,7 +375,7 @@ export const parseNotification = (data) => {
       ? parseStatus(data.notice.favorited_status)
       : parsedNotice
     output.action = parsedNotice
-    output.from_profile = parseUser(data.from_profile)
+    output.from_profile = output.type === 'pleroma:chat_mention' ? parseUser(data.account) : parseUser(data.from_profile)
   }
 
   output.created_at = new Date(data.created_at)
@@ -368,4 +387,48 @@ export const parseNotification = (data) => {
 const isNsfw = (status) => {
   const nsfwRegex = /#nsfw/i
   return (status.tags || []).includes('nsfw') || !!(status.text || '').match(nsfwRegex)
+}
+
+export const parseLinkHeaderPagination = (linkHeader, opts = {}) => {
+  const flakeId = opts.flakeId
+  const parsedLinkHeader = parseLinkHeader(linkHeader)
+  if (!parsedLinkHeader) return
+  const maxId = parsedLinkHeader.next.max_id
+  const minId = parsedLinkHeader.prev.min_id
+
+  return {
+    maxId: flakeId ? maxId : parseInt(maxId, 10),
+    minId: flakeId ? minId : parseInt(minId, 10)
+  }
+}
+
+export const parseChat = (chat) => {
+  const output = {}
+  output.id = chat.id
+  output.account = parseUser(chat.account)
+  output.unread = chat.unread
+  output.lastMessage = parseChatMessage(chat.last_message)
+  output.updated_at = new Date(chat.updated_at)
+  return output
+}
+
+export const parseChatMessage = (message) => {
+  if (!message) { return }
+  if (message.isNormalized) { return message }
+  const output = message
+  output.id = message.id
+  output.created_at = new Date(message.created_at)
+  output.chat_id = message.chat_id
+  if (message.content) {
+    output.content = addEmojis(message.content, message.emojis)
+  } else {
+    output.content = ''
+  }
+  if (message.attachment) {
+    output.attachments = [parseAttachment(message.attachment)]
+  } else {
+    output.attachments = []
+  }
+  output.isNormalized = true
+  return output
 }

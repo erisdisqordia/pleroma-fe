@@ -11,6 +11,8 @@
     <img
       ref="src"
       :key="src"
+      :alt="alt"
+      :title="alt"
       :src="src"
       :referrerpolicy="referrerpolicy"
       @load="onLoad"
@@ -23,49 +25,13 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
+
 .still-image {
   position: relative;
   line-height: 0;
   overflow: hidden;
-  width: 100%;
-  height: 100%;
-
-  &:hover canvas {
-    display: none;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  &.animated {
-    &:hover::before,
-    img {
-      visibility: hidden;
-    }
-
-    &:hover img {
-      visibility: visible
-    }
-
-    &::before {
-      content: 'gif';
-      position: absolute;
-      line-height: 10px;
-      font-size: 10px;
-      top: 5px;
-      left: 5px;
-      background: rgba(127,127,127,.5);
-      color: #FFF;
-      display: block;
-      padding: 2px 4px;
-      border-radius: $fallback--tooltipRadius;
-      border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
-      z-index: 2;
-    }
-  }
+  display: flex;
+  align-items: center;
 
   canvas {
     position: absolute;
@@ -76,6 +42,45 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+    visibility: var(--still-image-canvas, visible);
+  }
+
+  img {
+    width: 100%;
+    min-height: 100%;
+    object-fit: contain;
+  }
+
+  &.animated {
+    &::before {
+      content: 'gif';
+      position: absolute;
+      line-height: 10px;
+      font-size: 10px;
+      top: 5px;
+      left: 5px;
+      background: rgba(127, 127, 127, 0.5);
+      color: #fff;
+      display: block;
+      padding: 2px 4px;
+      border-radius: $fallback--tooltipRadius;
+      border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+      z-index: 2;
+      visibility: var(--still-image-label-visibility, visible);
+    }
+
+    &:hover canvas {
+      display: none;
+    }
+
+    &:hover::before,
+    img {
+      visibility: var(--still-image-img, hidden);
+    }
+
+    &:hover img {
+      visibility: visible;
+    }
   }
 }
 </style>

@@ -7,7 +7,7 @@
   <div v-else>
     <div
       v-if="needMute && !unmuted"
-      class="container muted"
+      class="Notification container -muted"
     >
       <small>
         <router-link :to="userProfileLink">
@@ -157,11 +157,9 @@
           </router-link>
         </div>
         <template v-else>
-          <status
+          <status-content
             class="faint"
-            :compact="true"
-            :statusoid="notification.action"
-            :no-heading="true"
+            :status="notification.action"
           />
         </template>
       </div>
@@ -170,3 +168,4 @@
 </template>
 
 <script src="./notification.js"></script>
+<style src="./notification.scss" lang="scss"></style>

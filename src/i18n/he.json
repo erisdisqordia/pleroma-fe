@@ -70,9 +70,9 @@
     "preferences": "העדפות"
   },
   "notifications": {
-    "broken_favorite": "סטאטוס לא ידוע, מחפש...",
+    "broken_favorite": "סטאטוס לא ידוע, מחפש…",
     "favorited_you": "אהב את הסטטוס שלך",
-    "followed_you": "עקב אחריך!",
+    "followed_you": "עקב אחריך",
     "load_older": "טען התראות ישנות",
     "notifications": "התראות",
     "read": "קרא!",
@@ -140,7 +140,6 @@
     "app_name": "שם האפליקציה",
     "attachmentRadius": "צירופים",
     "attachments": "צירופים",
-    "autoload": "החל טעינה אוטומטית בגלילה לתחתית הדף",
     "avatar": "תמונת פרופיל",
     "avatarAltRadius": "תמונות פרופיל (התראות)",
     "avatarRadius": "תמונות פרופיל",
@@ -179,7 +178,7 @@
     "follow_export": "יצוא עקיבות",
     "follow_export_button": "ייצא את הנעקבים שלך לקובץ csv",
     "follow_import": "יבוא עקיבות",
-    "follow_import_error": "שגיאה בייבוא נעקבים.",
+    "follow_import_error": "שגיאה בייבוא נעקבים",
     "follows_imported": "נעקבים יובאו! ייקח זמן מה לעבד אותם.",
     "foreground": "חזית",
     "general": "כללי",
@@ -240,7 +239,6 @@
     "profile_tab": "פרופיל",
     "radii_help": "קבע מראש עיגול פינות לממשק (בפיקסלים)",
     "replies_in_timeline": "תגובות בציר הזמן",
-    "reply_link_preview": "החל תצוגה מקדימה של לינק-תגובה בעת ריחוף עם העכבר",
     "reply_visibility_all": "הראה את כל התגובות",
     "reply_visibility_following": "הראה תגובות שמופנות אליי או לעקובים שלי בלבד",
     "reply_visibility_self": "הראה תגובות שמופנות אליי בלבד",
@@ -313,7 +311,7 @@
     "favorites": "מועדפים",
     "follow": "עקוב",
     "follow_sent": "בקשה נשלחה!",
-    "follow_progress": "מבקש...",
+    "follow_progress": "מבקש…",
     "follow_again": "שלח בקשה שוב?",
     "follow_unfollow": "בטל עקיבה",
     "followees": "נעקבים",
@@ -329,11 +327,11 @@
     "report": "דווח",
     "statuses": "סטטוסים",
     "unblock": "הסר חסימה",
-    "unblock_progress": "מסיר חסימה...",
-    "block_progress": "חוסם...",
+    "unblock_progress": "מסיר חסימה…",
+    "block_progress": "חוסם…",
     "unmute": "הסר השתקה",
-    "unmute_progress": "מסיר השתקה...",
-    "mute_progress": "משתיק...",
+    "unmute_progress": "מסיר השתקה…",
+    "mute_progress": "משתיק…",
     "admin_menu": {
       "moderation": "ניהול (צוות)",
       "grant_admin": "הפוך למנהל",
@@ -379,7 +377,7 @@
     "favorite": "מועדף",
     "user_settings": "הגדרות משתמש"
   },
-  "upload":{
+  "upload": {
     "error": {
       "base": "העלאה נכשלה.",
       "file_too_big": "קובץ גדול מדי [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",

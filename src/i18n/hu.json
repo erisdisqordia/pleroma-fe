@@ -38,7 +38,6 @@
   },
   "settings": {
     "attachments": "Csatolmányok",
-    "autoload": "Autoatikus betöltés engedélyezése lap aljára görgetéskor",
     "avatar": "Avatár",
     "bio": "Bio",
     "current_avatar": "Jelenlegi avatár",
@@ -52,7 +51,6 @@
     "nsfw_clickthrough": "NSFW átkattintási tartalom elrejtésének engedélyezése",
     "profile_background": "Profil háttérkép",
     "profile_banner": "Profil Banner",
-    "reply_link_preview": "Válasz-link előzetes mutatása egér rátételkor",
     "set_new_avatar": "Új avatár",
     "set_new_profile_background": "Új profil háttér beállítása",
     "set_new_profile_banner": "Új profil banner",

@@ -50,9 +50,7 @@
     align-content: stretch;
   }
 
-  // FIXME: specificity problem with this and .attachments.attachment
-  // we shouldn't have the need for .image here
-  .attachment.image {
+  .gallery-row-inner .attachment {
     margin: 0 0.5em 0 0;
     flex-grow: 1;
     height: 100%;
@@ -78,6 +76,7 @@
     video,
     canvas {
       object-fit: contain;
+      height: 100%;
     }
   }
 

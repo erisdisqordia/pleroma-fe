@@ -13,9 +13,8 @@ import {
   omitBy
 } from 'lodash'
 import { set } from 'vue'
-import { isStatusNotification } from '../services/notification_utils/notification_utils.js'
+import { isStatusNotification, maybeShowNotification } from '../services/notification_utils/notification_utils.js'
 import apiService from '../services/api/api.service.js'
-// import parse from '../services/status_parser/status_parser.js'
 
 const emptyTl = (userId = 0) => ({
   statuses: [],
@@ -62,7 +61,8 @@ export const defaultState = () => ({
     publicAndExternal: emptyTl(),
     friends: emptyTl(),
     tag: emptyTl(),
-    dms: emptyTl()
+    dms: emptyTl(),
+    bookmarks: emptyTl()
   }
 })
 
@@ -74,17 +74,6 @@ export const prepareStatus = (status) => {
   status.attachments = status.attachments || []
 
   return status
-}
-
-const visibleNotificationTypes = (rootState) => {
-  return [
-    rootState.config.notificationVisibility.likes && 'like',
-    rootState.config.notificationVisibility.mentions && 'mention',
-    rootState.config.notificationVisibility.repeats && 'repeat',
-    rootState.config.notificationVisibility.follows && 'follow',
-    rootState.config.notificationVisibility.moves && 'move',
-    rootState.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reactions'
-  ].filter(_ => _)
 }
 
 const mergeOrAdd = (arr, obj, item) => {
@@ -163,8 +152,7 @@ const removeStatusFromGlobalStorage = (state, status) => {
   }
 }
 
-const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {},
-  noIdUpdate = false, userId }) => {
+const addNewStatuses = (state, { statuses, showImmediately = false, timeline, user = {}, noIdUpdate = false, userId, pagination = {} }) => {
   // Sanity check
   if (!isArray(statuses)) {
     return false
@@ -173,8 +161,13 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   const allStatuses = state.allStatuses
   const timelineObject = state.timelines[timeline]
 
-  const maxNew = statuses.length > 0 ? maxBy(statuses, 'id').id : 0
-  const minNew = statuses.length > 0 ? minBy(statuses, 'id').id : 0
+  // Mismatch between API pagination and our internal minId/maxId tracking systems:
+  // pagination.maxId is the oldest of the returned statuses when fetching older,
+  // and pagination.minId is the newest when fetching newer. The names come directly
+  // from the arguments they're supposed to be passed as for the next fetch.
+  const minNew = pagination.maxId || (statuses.length > 0 ? minBy(statuses, 'id').id : 0)
+  const maxNew = pagination.minId || (statuses.length > 0 ? maxBy(statuses, 'id').id : 0)
+
   const newer = timeline && (maxNew > timelineObject.maxId || timelineObject.maxId === 0) && statuses.length > 0
   const older = timeline && (minNew < timelineObject.minId || timelineObject.minId === 0) && statuses.length > 0
 
@@ -315,12 +308,12 @@ const addNewStatuses = (state, { statuses, showImmediately = false, timeline, us
   })
 
   // Keep the visible statuses sorted
-  if (timeline) {
+  if (timeline && !(timeline === 'bookmarks')) {
     sortTimeline(timelineObject)
   }
 }
 
-const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters }) => {
+const addNewNotifications = (state, { dispatch, notifications, older, visibleNotificationTypes, rootGetters, newNotificationSideEffects }) => {
   each(notifications, (notification) => {
     if (isStatusNotification(notification.type)) {
       notification.action = addStatusToGlobalStorage(state, notification.action).item
@@ -343,51 +336,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       state.notifications.data.push(notification)
       state.notifications.idStore[notification.id] = notification
 
-      if ('Notification' in window && window.Notification.permission === 'granted') {
-        const notifObj = {}
-        const status = notification.status
-        const title = notification.from_profile.name
-        notifObj.icon = notification.from_profile.profile_image_url
-        let i18nString
-        switch (notification.type) {
-          case 'like':
-            i18nString = 'favorited_you'
-            break
-          case 'repeat':
-            i18nString = 'repeated_you'
-            break
-          case 'follow':
-            i18nString = 'followed_you'
-            break
-          case 'move':
-            i18nString = 'migrated_to'
-            break
-          case 'follow_request':
-            i18nString = 'follow_request'
-            break
-        }
-
-        if (notification.type === 'pleroma:emoji_reaction') {
-          notifObj.body = rootGetters.i18n.t('notifications.reacted_with', [notification.emoji])
-        } else if (i18nString) {
-          notifObj.body = rootGetters.i18n.t('notifications.' + i18nString)
-        } else if (isStatusNotification(notification.type)) {
-          notifObj.body = notification.status.text
-        }
-
-        // Shows first attached non-nsfw image, if any. Should add configuration for this somehow...
-        if (status && status.attachments && status.attachments.length > 0 && !status.nsfw &&
-          status.attachments[0].mimetype.startsWith('image/')) {
-          notifObj.image = status.attachments[0].url
-        }
-
-        if (!notification.seen && !state.notifications.desktopNotificationSilence && visibleNotificationTypes.includes(notification.type)) {
-          let desktopNotification = new window.Notification(title, notifObj)
-          // Chrome is known for not closing notifications automatically
-          // according to MDN, anyway.
-          setTimeout(desktopNotification.close.bind(desktopNotification), 5000)
-        }
-      }
+      newNotificationSideEffects(notification)
     } else if (notification.seen) {
       state.notifications.idStore[notification.id].seen = true
     }
@@ -487,9 +436,17 @@ export const mutations = {
       newStatus.rebloggedBy.push(user)
     }
   },
+  setBookmarked (state, { status, value }) {
+    const newStatus = state.allStatusesObject[status.id]
+    newStatus.bookmarked = value
+  },
+  setBookmarkedConfirm (state, { status }) {
+    const newStatus = state.allStatusesObject[status.id]
+    newStatus.bookmarked = status.bookmarked
+  },
   setDeleted (state, { status }) {
     const newStatus = state.allStatusesObject[status.id]
-    newStatus.deleted = true
+    if (newStatus) newStatus.deleted = true
   },
   setManyDeleted (state, condition) {
     Object.values(state.allStatusesObject).forEach(status => {
@@ -532,12 +489,20 @@ export const mutations = {
   dismissNotification (state, { id }) {
     state.notifications.data = state.notifications.data.filter(n => n.id !== id)
   },
+  dismissNotifications (state, { finder }) {
+    state.notifications.data = state.notifications.data.filter(n => finder)
+  },
   updateNotification (state, { id, updater }) {
     const notification = find(state.notifications.data, n => n.id === id)
     notification && updater(notification)
   },
   queueFlush (state, { timeline, id }) {
     state.timelines[timeline].flushMarker = id
+  },
+  queueFlushAll (state) {
+    Object.keys(state.timelines).forEach((timeline) => {
+      state.timelines[timeline].flushMarker = state.timelines[timeline].maxId
+    })
   },
   addRepeats (state, { id, rebloggedByUsers, currentUser }) {
     const newStatus = state.allStatusesObject[id]
@@ -609,11 +574,16 @@ export const mutations = {
 const statuses = {
   state: defaultState(),
   actions: {
-    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId }) {
-      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId })
+    addNewStatuses ({ rootState, commit }, { statuses, showImmediately = false, timeline = false, noIdUpdate = false, userId, pagination }) {
+      commit('addNewStatuses', { statuses, showImmediately, timeline, noIdUpdate, user: rootState.users.currentUser, userId, pagination })
     },
-    addNewNotifications ({ rootState, commit, dispatch, rootGetters }, { notifications, older }) {
-      commit('addNewNotifications', { visibleNotificationTypes: visibleNotificationTypes(rootState), dispatch, notifications, older, rootGetters })
+    addNewNotifications (store, { notifications, older }) {
+      const { commit, dispatch, rootGetters } = store
+
+      const newNotificationSideEffects = (notification) => {
+        maybeShowNotification(store, notification)
+      }
+      commit('addNewNotifications', { dispatch, notifications, older, rootGetters, newNotificationSideEffects })
     },
     setError ({ rootState, commit }, { value }) {
       commit('setError', { value })
@@ -685,8 +655,25 @@ const statuses = {
       rootState.api.backendInteractor.unretweet({ id: status.id })
         .then(status => commit('setRetweetedConfirm', { status, user: rootState.users.currentUser }))
     },
+    bookmark ({ rootState, commit }, status) {
+      commit('setBookmarked', { status, value: true })
+      rootState.api.backendInteractor.bookmarkStatus({ id: status.id })
+        .then(status => {
+          commit('setBookmarkedConfirm', { status })
+        })
+    },
+    unbookmark ({ rootState, commit }, status) {
+      commit('setBookmarked', { status, value: false })
+      rootState.api.backendInteractor.unbookmarkStatus({ id: status.id })
+        .then(status => {
+          commit('setBookmarkedConfirm', { status })
+        })
+    },
     queueFlush ({ rootState, commit }, { timeline, id }) {
       commit('queueFlush', { timeline, id })
+    },
+    queueFlushAll ({ rootState, commit }) {
+      commit('queueFlushAll')
     },
     markNotificationsAsSeen ({ rootState, commit }) {
       commit('markNotificationsAsSeen')

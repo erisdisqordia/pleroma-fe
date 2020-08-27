@@ -36,7 +36,7 @@
     "twkn": "An Líonra Iomlán"
   },
   "notifications": {
-    "broken_favorite": "Post anaithnid. Cuardach dó...",
+    "broken_favorite": "Post anaithnid. Cuardach dó…",
     "favorited_you": "toghadh le do phost",
     "followed_you": "lean tú",
     "load_older": "Luchtaigh fógraí aosta",
@@ -73,7 +73,6 @@
   "settings": {
     "attachmentRadius": "Ceangaltáin",
     "attachments": "Ceangaltáin",
-    "autoload": "Cumasaigh luchtú uathoibríoch nuair a scrollaítear go bun",
     "avatar": "Phictúir phrófíle",
     "avatarAltRadius": "Phictúirí phrófíle (Fograí)",
     "avatarRadius": "Phictúirí phrófíle",
@@ -85,7 +84,7 @@
     "cOrange": "Oráiste (Cosúil)",
     "cRed": "Dearg (Cealaigh)",
     "change_password": "Athraigh do pasfhocal",
-    "change_password_error": "Bhí fadhb ann ag athrú do pasfhocail",
+    "change_password_error": "Bhí fadhb ann ag athrú do pasfhocail.",
     "changed_password": "Athraigh an pasfhocal go rathúil!",
     "collapse_subject": "Poist a chosc le teidil",
     "confirm_new_password": "Deimhnigh do pasfhocal nua",
@@ -147,7 +146,6 @@
     "profile_tab": "Próifíl",
     "radii_help": "Cruinniú imeall comhéadan a chumrú (i bpicteilíní)",
     "replies_in_timeline": "Freagraí sa amlíne",
-    "reply_link_preview": "Cumasaigh réamhamharc nasc freagartha ar chlár na luiche",
     "reply_visibility_all": "Taispeáin gach freagra",
     "reply_visibility_following": "Taispeáin freagraí amháin atá dírithe ar mise nó ar úsáideoirí atá mé ag leanúint",
     "reply_visibility_self": "Taispeáin freagraí amháin atá dírithe ar mise",
@@ -162,7 +160,7 @@
     "streaming": "Cumasaigh post nua a shruthú uathoibríoch nuair a scrollaítear go barr an leathanaigh",
     "text": "Téacs",
     "theme": "Téama",
-    "theme_help": "Úsáid cód daith hex (#rrggbb) chun do schéim a saincheapadh",
+    "theme_help": "Úsáid cód daith hex (#rrggbb) chun do schéim a saincheapadh.",
     "tooltipRadius": "Bileoga eolais",
     "user_settings": "Socruithe úsáideora",
     "values": {

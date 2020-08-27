@@ -27,7 +27,7 @@
   },
   "exporter": {
     "export": "エクスポート",
-    "processing": "おまちください。しばらくすると、あなたのファイルをダウンロードするように、メッセージがでます。"
+    "processing": "おまちください。しばらくすると、あなたのファイルをダウンロードするように、メッセージがでます"
   },
   "features_panel": {
     "chat": "チャット",
@@ -39,7 +39,7 @@
     "who_to_follow": "おすすめユーザー"
   },
   "finder": {
-    "error_fetching_user": "ユーザーけんさくがエラーになりました。",
+    "error_fetching_user": "ユーザーけんさくがエラーになりました",
     "find_user": "ユーザーをさがす"
   },
   "general": {
@@ -80,9 +80,9 @@
     "enter_recovery_code": "リカバリーコードをいれてください",
     "enter_two_factor_code": "2-ファクターコードをいれてください",
     "recovery_code": "リカバリーコード",
-    "heading" : {
-      "totp" : "2-ファクターにんしょう",
-      "recovery" : "2-ファクターリカバリー"
+    "heading": {
+      "totp": "2-ファクターにんしょう",
+      "recovery": "2-ファクターリカバリー"
     }
   },
   "media_modal": {
@@ -107,7 +107,7 @@
     "preferences": "せってい"
   },
   "notifications": {
-    "broken_favorite": "ステータスがみつかりません。さがしています...",
+    "broken_favorite": "ステータスがみつかりません。さがしています…",
     "favorited_you": "あなたのステータスがおきにいりされました",
     "followed_you": "フォローされました",
     "load_older": "ふるいつうちをみる",
@@ -172,10 +172,10 @@
       "unlisted": "このとうこうは、パブリックタイムラインと、つながっているすべてのネットワークでは、みることができません"
     },
     "scope": {
-      "direct": "ダイレクト: メンションされたユーザーのみにとどきます。",
-      "private": "フォロワーげんてい: フォロワーのみにとどきます。",
-      "public": "パブリック: パブリックタイムラインにとどきます。",
-      "unlisted": "アンリステッド: パブリックタイムラインにとどきません。"
+      "direct": "ダイレクト: メンションされたユーザーのみにとどきます",
+      "private": "フォロワーげんてい: フォロワーのみにとどきます",
+      "public": "パブリック: パブリックタイムラインにとどきます",
+      "unlisted": "アンリステッド: パブリックタイムラインにとどきません"
     }
   },
   "registration": {
@@ -212,17 +212,17 @@
     "security": "セキュリティ",
     "enter_current_password_to_confirm": "あなたのアイデンティティをたしかめるため、あなたのいまのパスワードをかいてください",
     "mfa": {
-      "otp" : "OTP",
-      "setup_otp" : "OTPをつくる",
-      "wait_pre_setup_otp" : "OTPをよういしています",
-      "confirm_and_enable" : "OTPをたしかめて、ゆうこうにする",
+      "otp": "OTP",
+      "setup_otp": "OTPをつくる",
+      "wait_pre_setup_otp": "OTPをよういしています",
+      "confirm_and_enable": "OTPをたしかめて、ゆうこうにする",
       "title": "2-ファクターにんしょう",
-      "generate_new_recovery_codes" : "あたらしいリカバリーコードをつくる",
-      "warning_of_generate_new_codes" : "あたらしいリカバリーコードをつくったら、ふるいコードはつかえなくなります。",
-      "recovery_codes" : "リカバリーコード。",
-      "waiting_a_recovery_codes": "バックアップコードをうけとっています...",
-      "recovery_codes_warning" : "コードをかきうつすか、ひとにみられないところにセーブしてください。そうでなければ、あなたはこのコードをふたたびみることはできません。もしあなたが、2FAアプリのアクセスをうしなって、なおかつ、リカバリーコードもおもいだせないならば、あなたはあなたのアカウントから、しめだされます。",
-      "authentication_methods" : "にんしょうメソッド",
+      "generate_new_recovery_codes": "あたらしいリカバリーコードをつくる",
+      "warning_of_generate_new_codes": "あたらしいリカバリーコードをつくったら、ふるいコードはつかえなくなります。",
+      "recovery_codes": "リカバリーコード。",
+      "waiting_a_recovery_codes": "バックアップコードをうけとっています…",
+      "recovery_codes_warning": "コードをかきうつすか、ひとにみられないところにセーブしてください。そうでなければ、あなたはこのコードをふたたびみることはできません。もしあなたが、2FAアプリのアクセスをうしなって、なおかつ、リカバリーコードもおもいだせないならば、あなたはあなたのアカウントから、しめだされます。",
+      "authentication_methods": "にんしょうメソッド",
       "scan": {
         "title": "スキャン",
         "desc": "あなたの2-ファクターアプリをつかって、このQRコードをスキャンするか、テキストキーをうちこんでください:",
@@ -234,7 +234,6 @@
     },
     "attachmentRadius": "ファイル",
     "attachments": "ファイル",
-    "autoload": "したにスクロールしたとき、じどうてきによみこむ。",
     "avatar": "アバター",
     "avatarAltRadius": "つうちのアバター",
     "avatarRadius": "アバター",
@@ -274,12 +273,12 @@
     "pad_emoji": "えもじをピッカーでえらんだとき、えもじのまわりにスペースをいれる",
     "export_theme": "セーブ",
     "filtering": "フィルタリング",
-    "filtering_explanation": "これらのことばをふくむすべてのものがミュートされます。1ぎょうに1つのことばをかいてください。",
+    "filtering_explanation": "これらのことばをふくむすべてのものがミュートされます。1ぎょうに1つのことばをかいてください",
     "follow_export": "フォローのエクスポート",
     "follow_export_button": "エクスポート",
     "follow_export_processing": "おまちください。まもなくファイルをダウンロードできます。",
     "follow_import": "フォローインポート",
-    "follow_import_error": "フォローのインポートがエラーになりました。",
+    "follow_import_error": "フォローのインポートがエラーになりました",
     "follows_imported": "フォローがインポートされました！ すこしじかんがかかるかもしれません。",
     "foreground": "フォアグラウンド",
     "general": "ぜんぱん",
@@ -341,9 +340,8 @@
     "profile_background": "プロフィールのバックグラウンド",
     "profile_banner": "プロフィールバナー",
     "profile_tab": "プロフィール",
-    "radii_help": "インターフェースのまるさをせっていする。",
+    "radii_help": "インターフェースのまるさをせっていする",
     "replies_in_timeline": "タイムラインのリプライ",
-    "reply_link_preview": "カーソルをかさねたとき、リプライのプレビューをみる",
     "reply_visibility_all": "すべてのリプライをみる",
     "reply_visibility_following": "わたしにあてられたリプライと、フォローしているひとからのリプライをみる",
     "reply_visibility_self": "わたしにあてられたリプライをみる",
@@ -369,7 +367,7 @@
     "streaming": "うえまでスクロールしたとき、じどうてきにストリーミングする",
     "text": "もじ",
     "theme": "テーマ",
-    "theme_help": "カラーテーマをカスタマイズできます",
+    "theme_help": "カラーテーマをカスタマイズできます。",
     "theme_help_v2_1": "チェックボックスをONにすると、コンポーネントごとに、いろと、とうめいどを、オーバーライドできます。「すべてクリア」ボタンをおすと、すべてのオーバーライドを、やめます。",
     "theme_help_v2_2": "バックグラウンドとテキストのコントラストをあらわすアイコンがあります。マウスをホバーすると、くわしいせつめいがでます。とうめいないろをつかっているときは、もっともわるいばあいのコントラストがしめされます。",
     "upload_a_photo": "がぞうをアップロード",
@@ -382,11 +380,6 @@
     "fun": "おたのしみ",
     "greentext": "ミームやじるし",
     "notifications": "つうち",
-    "notification_setting": "つうちをうけとる:",
-    "notification_setting_follows": "あなたがフォローしているひとから",
-    "notification_setting_non_follows": "あなたがフォローしていないひとから",
-    "notification_setting_followers": "あなたをフォローしているひとから",
-    "notification_setting_non_followers": "あなたをフォローしていないひとから",
     "notification_mutes": "あるユーザーからのつうちをとめるには、ミュートしてください。",
     "notification_blocks": "ブロックしているユーザーからのつうちは、すべてとまります。",
     "enable_web_push_notifications": "ウェブプッシュつうちをゆるす",
@@ -409,8 +402,8 @@
           "hint": "コントラストは {ratio} です。{level}。({context})",
           "level": {
             "aa": "AAレベルガイドライン (ミニマル) をみたします",
-            "aaa": "AAAレベルガイドライン (レコメンデッド) をみたします。",
-            "bad": "ガイドラインをみたしません。"
+            "aaa": "AAAレベルガイドライン (レコメンデッド) をみたします",
+            "bad": "ガイドラインをみたしません"
           },
           "context": {
             "18pt": "おおきい (18ポイントいじょう) テキスト",
@@ -454,8 +447,8 @@
           "always_drop_shadow": "ブラウザーがサポートしていれば、つねに {0} がつかわれます。",
           "drop_shadow_syntax": "{0} は、{1} パラメーターと {2} キーワードをサポートしていません。",
           "avatar_inset": "うちがわのかげと、そとがわのかげを、いっしょにつかうと、とうめいなアバターが、へんなみためになります。",
-          "spread_zero": "ひろがりが 0 よりもおおきなかげは、0 とおなじです。",
-          "inset_classic": "うちがわのかげは {0} をつかいます。"
+          "spread_zero": "ひろがりが 0 よりもおおきなかげは、0 とおなじです",
+          "inset_classic": "うちがわのかげは {0} をつかいます"
         },
         "components": {
           "panel": "パネル",
@@ -490,7 +483,7 @@
         "content": "ほんぶん",
         "error": "エラーのれい",
         "button": "ボタン",
-        "text": "これは{0}と{1}のれいです。",
+        "text": "これは{0}と{1}のれいです",
         "mono": "monospace",
         "input": "はねだくうこうに、つきました。",
         "faint_link": "とてもたすけになるマニュアル",
@@ -593,11 +586,11 @@
     "subscribe": "サブスクライブ",
     "unsubscribe": "サブスクライブをやめる",
     "unblock": "ブロックをやめる",
-    "unblock_progress": "ブロックをとりけしています...",
-    "block_progress": "ブロックしています...",
+    "unblock_progress": "ブロックをとりけしています…",
+    "block_progress": "ブロックしています…",
     "unmute": "ミュートをやめる",
-    "unmute_progress": "ミュートをとりけしています...",
-    "mute_progress": "ミュートしています...",
+    "unmute_progress": "ミュートをとりけしています…",
+    "mute_progress": "ミュートしています…",
     "hide_repeats": "リピートをかくす",
     "show_repeats": "リピートをみる",
     "admin_menu": {
@@ -645,11 +638,11 @@
     "favorite": "おきにいり",
     "user_settings": "ユーザーせってい"
   },
-  "upload":{
+  "upload": {
     "error": {
-    "base": "アップロードにしっぱいしました。",
-    "file_too_big": "ファイルがおおきすぎます [{filesize} {filesizeunit} / {allowedsize} {allowedsizeunit}]",
-    "default": "しばらくしてから、ためしてください"
+      "base": "アップロードにしっぱいしました。",
+      "file_too_big": "ファイルがおおきすぎます [{filesize} {filesizeunit} / {allowedsize} {allowedsizeunit}]",
+      "default": "しばらくしてから、ためしてください"
     },
     "file_size_units": {
       "B": "B",

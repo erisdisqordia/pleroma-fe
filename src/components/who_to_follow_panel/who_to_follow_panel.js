@@ -7,7 +7,7 @@ function showWhoToFollow (panel, reply) {
 
   panel.usersToFollow.forEach((toFollow, index) => {
     let user = shuffled[index]
-    let img = user.avatar || '/images/avi.png'
+    let img = user.avatar || this.$store.state.instance.defaultAvatar
     let name = user.acct
 
     toFollow.img = img
@@ -38,13 +38,7 @@ function getWhoToFollow (panel) {
 
 const WhoToFollowPanel = {
   data: () => ({
-    usersToFollow: new Array(3).fill().map(x => (
-      {
-        img: '/images/avi.png',
-        name: '',
-        id: 0
-      }
-    ))
+    usersToFollow: []
   }),
   computed: {
     user: function () {
@@ -68,6 +62,13 @@ const WhoToFollowPanel = {
   },
   mounted:
     function () {
+      this.usersToFollow = new Array(3).fill().map(x => (
+        {
+          img: this.$store.state.instance.defaultAvatar,
+          name: '',
+          id: 0
+        }
+      ))
       if (this.suggestionsEnabled) {
         getWhoToFollow(this)
       }

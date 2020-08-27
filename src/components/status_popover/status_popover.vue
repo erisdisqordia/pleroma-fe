@@ -1,7 +1,7 @@
 <template>
   <Popover
     trigger="hover"
-    popover-class="status-popover"
+    popover-class="popover-default status-popover"
     :bound-to="{ x: 'container' }"
     @show="enter"
   >
@@ -38,7 +38,8 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.status-popover {
+/* popover styles load on-demand, so we need to override */
+.status-popover.popover {
   font-size: 1rem;
   min-width: 15em;
   max-width: 95%;
@@ -52,7 +53,8 @@
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
   box-shadow: var(--popupShadow);
 
-  .status-el.status-el {
+  /* TODO cleanup this */
+  .Status.Status {
     border: none;
   }
 

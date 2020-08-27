@@ -34,6 +34,16 @@ const ExtraButtons = {
       navigator.clipboard.writeText(this.statusLink)
         .then(() => this.$emit('onSuccess'))
         .catch(err => this.$emit('onError', err.error.error))
+    },
+    bookmarkStatus () {
+      this.$store.dispatch('bookmark', { id: this.status.id })
+        .then(() => this.$emit('onSuccess'))
+        .catch(err => this.$emit('onError', err.error.error))
+    },
+    unbookmarkStatus () {
+      this.$store.dispatch('unbookmark', { id: this.status.id })
+        .then(() => this.$emit('onSuccess'))
+        .catch(err => this.$emit('onError', err.error.error))
     }
   },
   computed: {

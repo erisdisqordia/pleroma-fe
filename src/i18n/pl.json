@@ -20,27 +20,27 @@
         "quarantine": "Kwarantanna",
         "quarantine_desc": "Ta instancja wysyła tylko publiczne posty do wymienionych instancji:",
         "ftl_removal": "Usunięcie z \"Całej znanej sieci\"",
-        "ftl_removal_desc": "Ta instancja usuwa te instancje z \"Całej znanej sieci\"",
+        "ftl_removal_desc": "Ta instancja usuwa wymienionych instancje z \"Całej znanej sieci\":",
         "media_removal": "Usuwanie multimediów",
         "media_removal_desc": "Ta instancja usuwa multimedia z postów od wymienionych instancji:",
         "media_nsfw": "Multimedia ustawione jako wrażliwe",
         "media_nsfw_desc": "Ta instancja wymusza, by multimedia z wymienionych instancji były ustawione jako wrażliwe:"
       }
     },
-    "staff": "Obsługa"
+    "staff": "Administracja"
   },
   "chat": {
     "title": "Czat"
   },
   "domain_mute_card": {
     "mute": "Wycisz",
-    "mute_progress": "Wyciszam...",
+    "mute_progress": "Wyciszam…",
     "unmute": "Odcisz",
-    "unmute_progress": "Odciszam..."
+    "unmute_progress": "Odciszam…"
   },
   "exporter": {
     "export": "Eksportuj",
-    "processing": "Przetwarzam, za chwilę zostaniesz zapytany o ściągnięcie pliku"
+    "processing": "Przetwarzam, za chwilę zostaniesz zapytany(-na) o ściągnięcie pliku"
   },
   "features_panel": {
     "chat": "Czat",
@@ -68,7 +68,10 @@
     "disable": "Wyłącz",
     "enable": "Włącz",
     "confirm": "Potwierdź",
-    "verify": "Zweryfikuj"
+    "verify": "Zweryfikuj",
+    "close": "Zamknij",
+    "loading": "Ładowanie…",
+    "retry": "Spróbuj ponownie"
   },
   "image_cropper": {
     "crop_picture": "Przytnij obrazek",
@@ -78,7 +81,7 @@
   },
   "importer": {
     "submit": "Wyślij",
-    "success": "Zaimportowano pomyślnie",
+    "success": "Zaimportowano pomyślnie.",
     "error": "Wystąpił błąd podczas importowania pliku."
   },
   "login": {
@@ -94,9 +97,9 @@
     "enter_recovery_code": "Wprowadź kod zapasowy",
     "enter_two_factor_code": "Wprowadź kod weryfikacyjny",
     "recovery_code": "Kod zapasowy",
-    "heading" : {
-      "totp" : "Weryfikacja dwuetapowa",
-      "recovery" : "Zapasowa weryfikacja dwuetapowa"
+    "heading": {
+      "totp": "Weryfikacja dwuetapowa",
+      "recovery": "Zapasowa weryfikacja dwuetapowa"
     }
   },
   "media_modal": {
@@ -118,7 +121,8 @@
     "user_search": "Wyszukiwanie użytkowników",
     "search": "Wyszukiwanie",
     "who_to_follow": "Sugestie obserwacji",
-    "preferences": "Preferencje"
+    "preferences": "Preferencje",
+    "bookmarks": "Zakładki"
   },
   "notifications": {
     "broken_favorite": "Nieznany status, szukam go…",
@@ -130,7 +134,8 @@
     "repeated_you": "powtórzył(-a) twój status",
     "no_more_notifications": "Nie masz więcej powiadomień",
     "migrated_to": "wyemigrował do",
-    "reacted_with": "zareagował z {0}"
+    "reacted_with": "zareagował z {0}",
+    "follow_request": "chce ciebie obserwować"
   },
   "polls": {
     "add_poll": "Dodaj ankietę",
@@ -142,7 +147,7 @@
     "single_choice": "jednokrotnego wyboru",
     "multiple_choices": "wielokrotnego wyboru",
     "expiry": "Czas trwania ankiety",
-    "expires_in": "Ankieta kończy się za{0}",
+    "expires_in": "Ankieta kończy się za {0}",
     "expired": "Ankieta skończyła się {0} temu",
     "not_enough_options": "Zbyt mało unikalnych opcji w ankiecie"
   },
@@ -189,7 +194,10 @@
       "private": "Tylko dla obserwujących – Umieść dla osób, które cię obserwują",
       "public": "Publiczny – Umieść na publicznych osiach czasu",
       "unlisted": "Niewidoczny – Nie umieszczaj na publicznych osiach czasu"
-    }
+    },
+    "preview_empty": "Pusty",
+    "preview": "Podgląd",
+    "empty_status_error": "Nie można wysłać pustego wpisu bez plików"
   },
   "registration": {
     "bio": "Bio",
@@ -225,17 +233,17 @@
     "security": "Bezpieczeństwo",
     "enter_current_password_to_confirm": "Wprowadź obecne hasło, by potwierdzić twoją tożsamość",
     "mfa": {
-      "otp" : "OTP",
-      "setup_otp" : "Ustaw OTP",
-      "wait_pre_setup_otp" : "początkowe ustawianie OTP",
-      "confirm_and_enable" : "Potwierdź i włącz OTP",
+      "otp": "OTP",
+      "setup_otp": "Ustaw OTP",
+      "wait_pre_setup_otp": "początkowe ustawianie OTP",
+      "confirm_and_enable": "Potwierdź i włącz OTP",
       "title": "Weryfikacja dwuetapowa",
-      "generate_new_recovery_codes" : "Wygeneruj nowe kody zapasowe",
-      "warning_of_generate_new_codes" : "Po tym gdy generujesz nowe kody zapasowe, stare przestaną działać.",
-      "recovery_codes" : "Kody zapasowe.",
-      "waiting_a_recovery_codes": "Otrzymuję kody zapasowe...",
-      "recovery_codes_warning" : "Spisz kody na kartce papieru, albo zapisz je w bezpiecznym miejscu - inaczej nie zobaczysz ich już nigdy. Jeśli stracisz dostęp do twojej aplikacji 2FA i kodów zapasowych, nie będziesz miał dostępu do swojego konta.",
-      "authentication_methods" : "Metody weryfikacji",
+      "generate_new_recovery_codes": "Wygeneruj nowe kody zapasowe",
+      "warning_of_generate_new_codes": "Po tym gdy wygenerujesz nowe kody zapasowe, stare przestaną działać.",
+      "recovery_codes": "Kody zapasowe.",
+      "waiting_a_recovery_codes": "Otrzymuję kody zapasowe…",
+      "recovery_codes_warning": "Spisz kody na kartce papieru, albo zapisz je w bezpiecznym miejscu - inaczej nie zobaczysz ich już nigdy. Jeśli stracisz dostęp do twojej aplikacji 2FA i kodów zapasowych, nie będziesz miał(-a) dostępu do swojego konta.",
+      "authentication_methods": "Metody weryfikacji",
       "scan": {
         "title": "Skanuj",
         "desc": "Zeskanuj ten kod QR używając twojej aplikacji 2FA albo wpisz ten klucz:",
@@ -248,7 +256,6 @@
     "allow_following_move": "Zezwalaj na automatyczną obserwację gdy obserwowane konto migruje",
     "attachmentRadius": "Załączniki",
     "attachments": "Załączniki",
-    "autoload": "Włącz automatyczne ładowanie po przewinięciu do końca strony",
     "avatar": "Awatar",
     "avatarAltRadius": "Awatary (powiadomienia)",
     "avatarRadius": "Awatary",
@@ -280,10 +287,10 @@
     "data_import_export_tab": "Import/eksport danych",
     "default_vis": "Domyślny zakres widoczności",
     "delete_account": "Usuń konto",
-    "delete_account_description": "Trwale usuń konto i wszystkie posty.",
+    "delete_account_description": "Trwale usuń dane i zdezaktywuj konto.",
     "delete_account_error": "Wystąpił problem z usuwaniem twojego konta. Jeżeli problem powtarza się, poinformuj administratora swojej instancji.",
     "delete_account_instructions": "Wprowadź swoje hasło w poniższe pole aby potwierdzić usunięcie konta.",
-    "discoverable": "Zezwól na odkrywanie tego konta w wynikach wyszukiwania i innych usługa.",
+    "discoverable": "Zezwól na odkrywanie tego konta w wynikach wyszukiwania i innych usługach",
     "domain_mutes": "Domeny",
     "avatar_size_instruction": "Zalecany minimalny rozmiar awatarów to 150x150 pikseli.",
     "pad_emoji": "Dodaj odstęp z obu stron emoji podczas dodawania selektorem",
@@ -314,14 +321,14 @@
     "import_theme": "Załaduj motyw",
     "inputRadius": "Pola tekstowe",
     "checkboxRadius": "Pola wyboru",
-    "instance_default": "(domyślny: {value})",
-    "instance_default_simple": "(domyślny)",
+    "instance_default": "(domyślnie: {value})",
+    "instance_default_simple": "(domyślne)",
     "interface": "Interfejs",
     "interfaceLanguage": "Język interfejsu",
     "invalid_theme_imported": "Wybrany plik nie jest obsługiwanym motywem Pleromy. Nie dokonano zmian w twoim motywie.",
     "limited_availability": "Niedostępne w twojej przeglądarce",
     "links": "Łącza",
-    "lock_account_description": "Ogranicz swoje konto dla zatwierdzonych obserwowanych",
+    "lock_account_description": "Spraw, by konto mogli wyświetlać tylko zatwierdzeni obserwujący",
     "loop_video": "Zapętlaj filmy",
     "loop_video_silent_only": "Zapętlaj tylko filmy bez dźwięku (np. mastodonowe „gify”)",
     "mutes_tab": "Wyciszenia",
@@ -339,8 +346,8 @@
     "notification_visibility_moves": "Użytkownik migruje",
     "notification_visibility_emoji_reactions": "Reakcje",
     "no_rich_text_description": "Usuwaj formatowanie ze wszystkich postów",
-    "no_blocks": "Bez blokad",
-    "no_mutes": "Bez wyciszeń",
+    "no_blocks": "Brak blokad",
+    "no_mutes": "Brak wyciszeń",
     "hide_follows_description": "Nie pokazuj kogo obserwuję",
     "hide_followers_description": "Nie pokazuj kto mnie obserwuje",
     "hide_follows_count_description": "Nie pokazuj licznika obserwowanych",
@@ -361,7 +368,6 @@
     "profile_tab": "Profil",
     "radii_help": "Ustaw zaokrąglenie krawędzi interfejsu (w pikselach)",
     "replies_in_timeline": "Odpowiedzi na osi czasu",
-    "reply_link_preview": "Włącz dymek z podglądem postu po najechaniu na znak odpowiedzi",
     "reply_visibility_all": "Pokazuj wszystkie odpowiedzi",
     "reply_visibility_following": "Pokazuj tylko odpowiedzi skierowane do mnie i osób które obserwuję",
     "reply_visibility_self": "Pokazuj tylko odpowiedzi skierowane do mnie",
@@ -385,7 +391,7 @@
     "post_status_content_type": "Post status content type",
     "stop_gifs": "Odtwarzaj GIFy po najechaniu kursorem",
     "streaming": "Włącz automatycznie strumieniowanie nowych postów gdy jesteś na początku strony",
-    "user_mutes": "Users",
+    "user_mutes": "Użytkownicy",
     "useStreamingApi": "Otrzymuj posty i powiadomienia w czasie rzeczywistym",
     "useStreamingApiWarning": "(Niezalecane, eksperymentalne, pomija posty)",
     "text": "Tekst",
@@ -404,12 +410,7 @@
     "fun": "Zabawa",
     "greentext": "Memiczne strzałki",
     "notifications": "Powiadomienia",
-    "notification_setting": "Otrzymuj powiadomienia od:",
-    "notification_setting_follows": "Ludzi których obserwujesz",
-    "notification_setting_non_follows": "Ludzi których nie obserwujesz",
-    "notification_setting_followers": "Ludzi którzy obserwują ciebie",
-    "notification_setting_non_followers": "Ludzi którzy nie obserwują ciebie",
-    "notification_mutes": "By przestać otrzymywać powiadomienia od jednego użytkownika, wycisz go",
+    "notification_mutes": "By przestać otrzymywać powiadomienia od jednego użytkownika, wycisz go.",
     "notification_blocks": "Blokowanie uzytkownika zatrzymuje wszystkie powiadomienia i odsubskrybowuje go.",
     "enable_web_push_notifications": "Włącz powiadomienia push",
     "style": {
@@ -419,7 +420,7 @@
         "keep_opacity": "Zachowaj widoczność",
         "keep_roundness": "Zachowaj zaokrąglenie",
         "keep_fonts": "Zachowaj czcionki",
-        "save_load_hint": "Opcje „zachowaj” pozwalają na pozostanie przy obecnych opcjach po wybraniu lub załadowaniu motywu, jak i przechowywanie ich podczas eksportowania motywu. Jeżeli wszystkie są odznaczone, eksportowanie motywu spowoduje zapisanie wszystkiego.",
+        "save_load_hint": "Opcje „zachowaj” pozwalają na pozostanie przy obecnych opcjach po wybraniu lub załadowaniu motywu, jak i przechowywanie ich podczas eksportowania motywu. Jeżeli wszystkie opcje są odznaczone, eksportowanie motywu spowoduje zapisanie wszystkiego.",
         "reset": "Wyzeruj",
         "clear_all": "Wyczyść wszystko",
         "clear_opacity": "Wyczyść widoczność",
@@ -428,17 +429,17 @@
         "use_snapshot": "Stara wersja",
         "use_source": "Nowa wersja",
         "help": {
-          "upgraded_from_v2": "PleromaFE zostało zaaktualizowane, motyw może wyglądać nieco inaczej niż sobie zapamiętałeś.",
-          "v2_imported": "Plik który zaimportowałeś został stworzony dla starszego FE. Próbujemy zwiększyć kompatybiliność, lecz wciąż mogą występować rozbieżności.",
-          "future_version_imported": "Plik który zaimportowałeś został stworzony w nowszej wersji FE.",
-          "older_version_imported": "Plik który zaimportowałeś został stworzony w starszej wersji FE.",
-          "snapshot_present": "Migawka motywu jest załadowana, więc wszystkie wartości zostały nadpisane. Zamiast tego, możesz załadować właściwe dane motywu",
+          "upgraded_from_v2": "PleromaFE zostało zaaktualizowane, motyw może wyglądać nieco inaczej niż zapamiętałeś(-aś).",
+          "v2_imported": "Plik który zaimportowałeś(-aś) został stworzony dla starszego FE. Próbujemy zwiększyć kompatybilność, lecz wciąż mogą występować rozbieżności.",
+          "future_version_imported": "Plik który zaimportowałeś(-aś) został stworzony w nowszej wersji FE.",
+          "older_version_imported": "Plik który zaimportowałeś(-aś) został stworzony w starszej wersji FE.",
+          "snapshot_present": "Migawka motywu jest załadowana, więc wszystkie wartości zostały nadpisane. Zamiast tego możesz załadować właściwe dane motywu.",
           "snapshot_missing": "Nie znaleziono migawki motywu w pliku, więc motyw może wyglądać inaczej niż pierwotnie zaplanowano.",
           "fe_upgraded": "Silnik motywów PleromaFE został zaaktualizowany.",
           "fe_downgraded": "Wersja PleromaFE została cofnięta.",
           "migration_snapshot_ok": "Żeby być bezpiecznym, migawka motywu została załadowana. Możesz spróbować załadować dane motywu.",
-          "migration_napshot_gone": "Z jakiegoś powodu migawka zniknęła, niektóre rzeczy mogą wyglądać inaczej niż sobie zapamiętałeś.",
-          "snapshot_source_mismatch": "Konflikt wersji: najprawdopodobniej FE zostało cofnięte do poprzedniej wersji i zaaktualizowane ponownie, jeśli zmieniłeś motyw używając starszej wersji FE, najprawdopodobniej chcesz używać starszej wersji, w przeciwnym razie użyj nowej wersji."
+          "migration_napshot_gone": "Z jakiegoś powodu migawka zniknęła, niektóre rzeczy mogą wyglądać inaczej niż zapamiętałeś(-aś).",
+          "snapshot_source_mismatch": "Konflikt wersji: najprawdopodobniej FE zostało cofnięte do poprzedniej wersji i zaktualizowane ponownie, jeśli zmieniłeś(-aś) motyw używając starszej wersji FE, najprawdopodobniej chcesz używać starszej wersji, w przeciwnym razie użyj nowej wersji."
         }
       },
       "common": {
@@ -488,7 +489,11 @@
         "selectedMenu": "Wybrany element menu",
         "disabled": "Wyłączone",
         "toggled": "Przełączone",
-        "tabs": "Karty"
+        "tabs": "Karty",
+        "chat": {
+          "outgoing": "Wiadomości wychodzące",
+          "incoming": "Wiadomości przychodzące"
+        }
       },
       "radii": {
         "_tab_label": "Zaokrąglenie"
@@ -505,7 +510,7 @@
         "filter_hint": {
           "always_drop_shadow": "Ostrzeżenie, ten cień zawsze używa {0} jeżeli to obsługiwane przez przeglądarkę.",
           "drop_shadow_syntax": "{0} nie obsługuje parametru {1} i słowa kluczowego {2}.",
-          "avatar_inset": "Pamiętaj że użycie jednocześnie cieni inset i nie inset na awatarach może daćnieoczekiwane wyniki z przezroczystymi awatarami.",
+          "avatar_inset": "Pamiętaj że użycie jednocześnie cieni inset i nie inset na awatarach może dać nieoczekiwane wyniki z przezroczystymi awatarami.",
           "spread_zero": "Cienie o ujemnej szerokości będą widoczne tak, jakby wynosiła ona zero",
           "inset_classic": "Cienie inset będą używały {0}"
         },
@@ -548,7 +553,7 @@
         "faint_link": "pomocny podręcznik",
         "fine_print": "Przeczytaj nasz {0}, aby nie nauczyć się niczego przydatnego!",
         "header_faint": "W porządku",
-        "checkbox": "Przeleciałem przez zasady użytkowania",
+        "checkbox": "Przeleciałem(-am) przez zasady użytkowania",
         "link": "i fajny mały odnośnik"
       }
     },
@@ -556,13 +561,25 @@
       "title": "Wersja",
       "backend_version": "Wersja back-endu",
       "frontend_version": "Wersja front-endu"
-    }
+    },
+    "notification_setting_privacy": "Prywatność",
+    "notification_setting_filters": "Filtry",
+    "notification_setting_privacy_option": "Ukryj nadawcę i zawartość powiadomień push",
+    "reset_avatar": "Zresetuj awatar",
+    "profile_fields": {
+      "value": "Zawartość",
+      "label": "Metadane profilu",
+      "name": "Nazwa",
+      "add_field": "Dodaj pole"
+    },
+    "bot": "To konto jest prowadzone przez bota",
+    "notification_setting_hide_notification_contents": "Ukryj nadawcę i zawartość powiadomień push"
   },
   "time": {
     "day": "{0} dzień",
     "days": "{0} dni",
-    "day_short": "{0}d",
-    "days_short": "{0}d",
+    "day_short": "{0} d",
+    "days_short": "{0} d",
     "hour": "{0} godzina",
     "hours": "{0} godzin",
     "hour_short": "{0} godz.",
@@ -571,8 +588,8 @@
     "in_past": "{0} temu",
     "minute": "{0} minuta",
     "minutes": "{0} minut",
-    "minute_short": "{0}min",
-    "minutes_short": "{0}min",
+    "minute_short": "{0} min",
+    "minutes_short": "{0} min",
     "month": "{0} miesiąc",
     "months": "{0} miesięcy",
     "month_short": "{0} mies.",
@@ -581,8 +598,8 @@
     "now_short": "teraz",
     "second": "{0} sekunda",
     "seconds": "{0} sekund",
-    "second_short": "{0}s",
-    "seconds_short": "{0}s",
+    "second_short": "{0} s",
+    "seconds_short": "{0} s",
     "week": "{0} tydzień",
     "weeks": "{0} tygodni",
     "week_short": "{0} tydz.",
@@ -602,7 +619,8 @@
     "show_new": "Pokaż nowe",
     "up_to_date": "Na bieżąco",
     "no_more_statuses": "Brak kolejnych statusów",
-    "no_statuses": "Brak statusów"
+    "no_statuses": "Brak statusów",
+    "reload": "Odśwież"
   },
   "status": {
     "favorites": "Ulubione",
@@ -615,7 +633,13 @@
     "reply_to": "Odpowiedź dla",
     "replies_list": "Odpowiedzi:",
     "mute_conversation": "Wycisz konwersację",
-    "unmute_conversation": "Odcisz konwersację"
+    "unmute_conversation": "Odcisz konwersację",
+    "status_unavailable": "Status niedostępny",
+    "copy_link": "Kopiuj link do statusu",
+    "unbookmark": "Usuń z zakładek",
+    "bookmark": "Dodaj do zakładek",
+    "hide_content": "Ukryj zawartość",
+    "show_content": "Pokaż zawartość"
   },
   "user_card": {
     "approve": "Przyjmij",
@@ -640,7 +664,7 @@
     "muted": "Wyciszony(-a)",
     "per_day": "dziennie",
     "remote_follow": "Zdalna obserwacja",
-    "report": "Raportuj",
+    "report": "Zgłoś",
     "statuses": "Statusy",
     "subscribe": "Subskrybuj",
     "unsubscribe": "Odsubskrybuj",
@@ -669,8 +693,9 @@
       "disable_any_subscription": "Zakaż całkowicie obserwowania użytkownika",
       "quarantine": "Zakaż federowania postów od tego użytkownika",
       "delete_user": "Usuń użytkownika",
-      "delete_user_confirmation": "Czy jesteś absolutnie pewny? Ta operacja nie może być cofnięta."
-    }
+      "delete_user_confirmation": "Czy jesteś absolutnie pewny(-a)? Ta operacja nie może być cofnięta."
+    },
+    "message": "Napisz"
   },
   "user_profile": {
     "timeline_title": "Oś czasu użytkownika",
@@ -679,10 +704,10 @@
   },
   "user_reporting": {
     "title": "Raportowanie {0}",
-    "add_comment_description": "Raport zostanie wysłany do moderatorów instancji. Możesz dodać powód dlaczego raportujesz to konto poniżej:",
+    "add_comment_description": "Zgłoszenie zostanie wysłane do moderatorów instancji. Możesz dodać powód dlaczego zgłaszasz owe konto poniżej:",
     "additional_comments": "Dodatkowe komentarze",
-    "forward_description": "To konto jest z innego serwera. Wysłać również tam kopię raportu?",
-    "forward_to": "Przekaż do{0}",
+    "forward_description": "To konto jest z innego serwera. Wysłać również tam kopię zgłoszenia?",
+    "forward_to": "Przekaż do {0}",
     "submit": "Wyślij",
     "generic_error": "Wystąpił błąd podczas przetwarzania twojej prośby."
   },
@@ -696,9 +721,11 @@
     "reply": "Odpowiedz",
     "favorite": "Dodaj do ulubionych",
     "add_reaction": "Dodaj reakcję",
-    "user_settings": "Ustawienia użytkownika"
+    "user_settings": "Ustawienia użytkownika",
+    "accept_follow_request": "Akceptuj prośbę o możliwość obserwacji",
+    "reject_follow_request": "Odrzuć prośbę o możliwość obserwacji"
   },
-  "upload":{
+  "upload": {
     "error": {
       "base": "Wysyłanie nie powiodło się.",
       "file_too_big": "Zbyt duży plik [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
@@ -720,16 +747,36 @@
     "no_results": "Brak wyników"
   },
   "password_reset": {
-    "forgot_password": "Zapomniałeś hasła?",
+    "forgot_password": "Zapomniałeś(-aś) hasła?",
     "password_reset": "Reset hasła",
     "instruction": "Wprowadź swój adres email lub nazwę użytkownika. Wyślemy ci link z którym możesz zresetować hasło.",
     "placeholder": "Twój email lub nazwa użytkownika",
     "check_email": "Sprawdź pocztę, aby uzyskać link do zresetowania hasła.",
     "return_home": "Wróć do strony głównej",
     "not_found": "Nie mogliśmy znaleźć tego emaila lub nazwy użytkownika.",
-    "too_many_requests": "Przekroczyłeś limit prób, spróbuj ponownie później.",
+    "too_many_requests": "Przekroczyłeś(-aś) limit prób, spróbuj ponownie później.",
     "password_reset_disabled": "Resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji.",
     "password_reset_required": "Musisz zresetować hasło, by się zalogować.",
     "password_reset_required_but_mailer_is_disabled": "Musisz zresetować hasło, ale resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji."
+  },
+  "file_type": {
+    "file": "Plik",
+    "image": "Zdjęcie",
+    "video": "Wideo",
+    "audio": "Audio"
+  },
+  "chats": {
+    "more": "Więcej",
+    "delete": "Usuń",
+    "you": "Ty:",
+    "delete_confirm": "Czy na pewno chcesz usunąć tą wiadomość?",
+    "message_user": "Napisz do {nickname}",
+    "error_sending_message": "Coś poszło nie tak podczas wysyłania wiadomości.",
+    "error_loading_chat": "Coś poszło nie tak podczas ładowania czatu.",
+    "empty_message_error": "Nie można wysłać pustej wiadomości",
+    "new": "Nowy czat"
+  },
+  "display_date": {
+    "today": "Dzisiaj"
   }
 }

@@ -84,10 +84,12 @@ const MediaModal = {
     }
   },
   mounted () {
+    window.addEventListener('popstate', this.hide)
     document.addEventListener('keyup', this.handleKeyupEvent)
     document.addEventListener('keydown', this.handleKeydownEvent)
   },
   destroyed () {
+    window.removeEventListener('popstate', this.hide)
     document.removeEventListener('keyup', this.handleKeyupEvent)
     document.removeEventListener('keydown', this.handleKeydownEvent)
   }

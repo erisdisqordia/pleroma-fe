@@ -11,6 +11,9 @@
           <li v-if="chat">
             {{ $t('features_panel.chat') }}
           </li>
+          <li v-if="pleromaChatMessages">
+            {{ $t('features_panel.pleroma_chat_messages') }}
+          </li>
           <li v-if="gopher">
             {{ $t('features_panel.gopher') }}
           </li>

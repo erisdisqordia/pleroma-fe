@@ -1,6 +1,7 @@
 import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import Conversation from '../conversation/conversation.vue'
+import TimelineMenu from '../timeline_menu/timeline_menu.vue'
 import { throttle, keyBy } from 'lodash'
 
 export const getExcludedStatusIdsByPinning = (statuses, pinnedStatusIds) => {
@@ -35,6 +36,11 @@ const Timeline = {
       bottomedOut: false
     }
   },
+  components: {
+    Status,
+    Conversation,
+    TimelineMenu
+  },
   computed: {
     timelineError () {
       return this.$store.state.statuses.error
@@ -45,11 +51,15 @@ const Timeline = {
     newStatusCount () {
       return this.timeline.newStatusCount
     },
-    newStatusCountStr () {
+    showLoadButton () {
+      if (this.timelineError || this.errorData) return false
+      return this.timeline.newStatusCount > 0 || this.timeline.flushMarker !== 0
+    },
+    loadButtonString () {
       if (this.timeline.flushMarker !== 0) {
-        return ''
+        return this.$t('timeline.reload')
       } else {
-        return ` (${this.newStatusCount})`
+        return `${this.$t('timeline.show_new')} (${this.newStatusCount})`
       }
     },
     classes () {
@@ -69,10 +79,6 @@ const Timeline = {
     pinnedStatusIdsObject () {
       return keyBy(this.pinnedStatusIds)
     }
-  },
-  components: {
-    Status,
-    Conversation
   },
   created () {
     const store = this.$store
@@ -112,8 +118,6 @@ const Timeline = {
       if (e.key === '.') this.showNewStatuses()
     },
     showNewStatuses () {
-      if (this.newStatusCount === 0) return
-
       if (this.timeline.flushMarker !== 0) {
         this.$store.commit('clearTimeline', { timeline: this.timelineName, excludeUserId: true })
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
@@ -135,7 +139,7 @@ const Timeline = {
         showImmediately: true,
         userId: this.userId,
         tag: this.tag
-      }).then(statuses => {
+      }).then(({ statuses }) => {
         store.commit('setLoading', { timeline: this.timelineName, value: false })
         if (statuses && statuses.length === 0) {
           this.bottomedOut = true
@@ -146,7 +150,6 @@ const Timeline = {
       const bodyBRect = document.body.getBoundingClientRect()
       const height = Math.max(bodyBRect.height, -(bodyBRect.y))
       if (this.timeline.loading === false &&
-          this.$store.getters.mergedConfig.autoLoad &&
           this.$el.offsetHeight > 0 &&
           (window.innerHeight + window.pageYOffset) >= (height - 750)) {
         this.fetchOlderStatuses()

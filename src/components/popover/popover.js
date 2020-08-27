@@ -1,4 +1,3 @@
-
 const Popover = {
   name: 'Popover',
   props: {
@@ -10,13 +9,18 @@ const Popover = {
     // 'container' for using offsetParent as boundaries for either axis
     // or 'viewport'
     boundTo: Object,
+    // Takes a selector to use as a replacement for the parent container
+    // for getting boundaries for x an y axis
+    boundToSelector: String,
     // Takes a top/bottom/left/right object, how much space to leave
     // between boundary and popover element
     margin: Object,
     // Takes a x/y object and tells how many pixels to offset from
     // anchor point on either axis
     offset: Object,
-    // Additional styles you may want for the popover container
+    // Replaces the classes you may want for the popover container.
+    // Use 'popover-default' in addition to get the default popover
+    // styles with your custom class.
     popoverClass: String
   },
   data () {
@@ -27,6 +31,10 @@ const Popover = {
     }
   },
   methods: {
+    containerBoundingClientRect () {
+      const container = this.boundToSelector ? this.$el.closest(this.boundToSelector) : this.$el.offsetParent
+      return container.getBoundingClientRect()
+    },
     updateStyles () {
       if (this.hidden) {
         this.styles = {
@@ -45,7 +53,8 @@ const Popover = {
       // Minor optimization, don't call a slow reflow call if we don't have to
       const parentBounds = this.boundTo &&
         (this.boundTo.x === 'container' || this.boundTo.y === 'container') &&
-        this.$el.offsetParent.getBoundingClientRect()
+        this.containerBoundingClientRect()
+
       const margin = this.margin || {}
 
       // What are the screen bounds for the popover? Viewport vs container
@@ -99,7 +108,7 @@ const Popover = {
       // single translate or translate3d resulted in blurry text.
       this.styles = {
         opacity: 1,
-        transform: `translateX(${Math.floor(translateX)}px) translateY(${Math.floor(translateY)}px)`
+        transform: `translateX(${Math.round(translateX)}px) translateY(${Math.round(translateY)}px)`
       }
     },
     showPopover () {

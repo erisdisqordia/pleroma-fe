@@ -14,11 +14,12 @@ const StatusContent = {
     'status',
     'focused',
     'noHeading',
-    'fullContent'
+    'fullContent',
+    'singleLine'
   ],
   data () {
     return {
-      showingTall: this.inConversation && this.focused,
+      showingTall: this.fullContent || (this.inConversation && this.focused),
       showingLongSubject: false,
       // not as computed because it sets the initial state which will be changed later
       expandingSubject: !this.$store.getters.mergedConfig.collapseMessageWithSubject
@@ -44,14 +45,14 @@ const StatusContent = {
       return lengthScore > 20
     },
     longSubject () {
-      return this.status.summary.length > 900
+      return this.status.summary.length > 240
     },
     // When a status has a subject and is also tall, we should only have one show more/less button. If the default is to collapse statuses with subjects, we just treat it like a status with a subject; otherwise, we just treat it like a tall status.
     mightHideBecauseSubject () {
-      return this.status.summary && (!this.tallStatus || this.localCollapseSubjectDefault)
+      return !!this.status.summary && this.localCollapseSubjectDefault
     },
     mightHideBecauseTall () {
-      return this.tallStatus && (!this.status.summary || !this.localCollapseSubjectDefault)
+      return this.tallStatus && !(this.status.summary && this.localCollapseSubjectDefault)
     },
     hideSubjectStatus () {
       return this.mightHideBecauseSubject && !this.expandingSubject
@@ -99,15 +100,8 @@ const StatusContent = {
         file => !fileType.fileMatchesSomeType(this.galleryTypes, file)
       )
     },
-    hasImageAttachments () {
-      return this.status.attachments.some(
-        file => fileType.fileType(file.mimetype) === 'image'
-      )
-    },
-    hasVideoAttachments () {
-      return this.status.attachments.some(
-        file => fileType.fileType(file.mimetype) === 'video'
-      )
+    attachmentTypes () {
+      return this.status.attachments.map(file => fileType.fileType(file.mimetype))
     },
     maxThumbnails () {
       return this.mergedConfig.maxThumbnails
@@ -142,12 +136,6 @@ const StatusContent = {
         return html
       }
     },
-    contentHtml () {
-      if (!this.status.summary_html) {
-        return this.postBodyHtml
-      }
-      return this.status.summary_html + '<br />' + this.postBodyHtml
-    },
     ...mapGetters(['mergedConfig']),
     ...mapState({
       betterShadow: state => state.interface.browserSupport.cssFilter,
@@ -176,8 +164,8 @@ const StatusContent = {
           }
         }
         if (target.rel.match(/(?:^|\s)tag(?:$|\s)/) || target.className.match(/hashtag/)) {
-          // Extract tag name from link url
-          const tag = extractTagFromUrl(target.href)
+          // Extract tag name from dataset or link url
+          const tag = target.dataset.tag || extractTagFromUrl(target.href)
           if (tag) {
             const link = this.generateTagLink(tag)
             this.$router.push(link)

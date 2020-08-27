@@ -1,8 +1,8 @@
-# pleroma_fe
+# Pleroma-FE 
 
-> A single column frontend for both Pleroma and GS servers.
+> A single column frontend designed for Pleroma.
 
-![screenshot](https://i.imgur.com/DJVqSJ0.png)
+![screenshot](/uploads/796c5ecf985ed1e2b0943ee0df131ed0/DJVqSJ0.png)
 
 # For Translators
 
@@ -11,7 +11,6 @@ To translate Pleroma-FE, add your language to [src/i18n/messages.js](https://git
 # FOR ADMINS
 
 You don't need to build Pleroma-FE yourself. Those using the Pleroma backend will be able to use it out of the box.
-For the GNU social backend, check out https://git.pleroma.social/pleroma/pleroma-fe/wikis/dual-boot-with-qvitter to see how to run Pleroma-FE and Qvitter at the same time.
 
 ## Build Setup
 

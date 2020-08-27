@@ -9,14 +9,31 @@ import AvatarList from '../avatar_list/avatar_list.vue'
 import Timeago from '../timeago/timeago.vue'
 import StatusContent from '../status_content/status_content.vue'
 import StatusPopover from '../status_popover/status_popover.vue'
+import UserListPopover from '../user_list_popover/user_list_popover.vue'
 import EmojiReactions from '../emoji_reactions/emoji_reactions.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
-import { filter, unescape, uniqBy } from 'lodash'
+import { muteWordHits } from '../../services/status_parser/status_parser.js'
+import { unescape, uniqBy } from 'lodash'
 import { mapGetters, mapState } from 'vuex'
 
 const Status = {
   name: 'Status',
+  components: {
+    FavoriteButton,
+    ReactButton,
+    RetweetButton,
+    ExtraButtons,
+    PostStatusForm,
+    UserCard,
+    UserAvatar,
+    AvatarList,
+    Timeago,
+    StatusPopover,
+    UserListPopover,
+    EmojiReactions,
+    StatusContent
+  },
   props: [
     'statusoid',
     'expandable',
@@ -43,6 +60,12 @@ const Status = {
   computed: {
     muteWords () {
       return this.mergedConfig.muteWords
+    },
+    showReasonMutedThread () {
+      return (
+        this.status.thread_muted ||
+          (this.status.reblog && this.status.reblog.thread_muted)
+      ) && !this.inConversation
     },
     repeaterClass () {
       const user = this.statusoid.user
@@ -93,26 +116,48 @@ const Status = {
       return !!this.currentUser
     },
     muteWordHits () {
-      const statusText = this.status.text.toLowerCase()
-      const statusSummary = this.status.summary.toLowerCase()
-      const hits = filter(this.muteWords, (muteWord) => {
-        return statusText.includes(muteWord.toLowerCase()) || statusSummary.includes(muteWord.toLowerCase())
-      })
-
-      return hits
+      return muteWordHits(this.status, this.muteWords)
     },
     muted () {
-      const relationship = this.$store.getters.relationship(this.status.user.id)
-      return !this.unmuted && (
-        (!(this.inProfile && this.status.user.id === this.profileUserId) && relationship.muting) ||
-        (!this.inConversation && this.status.thread_muted) ||
-        this.muteWordHits.length > 0)
+      const { status } = this
+      const { reblog } = status
+      const relationship = this.$store.getters.relationship(status.user.id)
+      const relationshipReblog = reblog && this.$store.getters.relationship(reblog.user.id)
+      const reasonsToMute = (
+        // Post is muted according to BE
+        status.muted ||
+        // Reprööt of a muted post according to BE
+        (reblog && reblog.muted) ||
+        // Muted user
+        relationship.muting ||
+        // Muted user of a reprööt
+        (relationshipReblog && relationshipReblog.muting) ||
+        // Thread is muted
+        status.thread_muted ||
+        // Wordfiltered
+        this.muteWordHits.length > 0
+      )
+      const excusesNotToMute = (
+        (
+          this.inProfile && (
+            // Don't mute user's posts on user timeline (except reblogs)
+            (!reblog && status.user.id === this.profileUserId) ||
+            // Same as above but also allow self-reblogs
+            (reblog && reblog.user.id === this.profileUserId)
+          )
+        ) ||
+        // Don't mute statuses in muted conversation when said conversation is opened
+        (this.inConversation && status.thread_muted)
+        // No excuses if post has muted words
+      ) && !this.muteWordHits.length > 0
+
+      return !this.unmuted && !excusesNotToMute && reasonsToMute
     },
     hideFilteredStatuses () {
       return this.mergedConfig.hideFilteredStatuses
     },
     hideStatus () {
-      return (this.hideReply || this.deleted) || (this.muted && this.hideFilteredStatuses)
+      return this.deleted || (this.muted && this.hideFilteredStatuses)
     },
     isFocused () {
       // retweet or root of an expanded conversation
@@ -134,37 +179,6 @@ const Status = {
         const user = this.$store.getters.findUser(this.status.in_reply_to_user_id)
         return user && user.screen_name
       }
-    },
-    hideReply () {
-      if (this.mergedConfig.replyVisibility === 'all') {
-        return false
-      }
-      if (this.inConversation || !this.isReply) {
-        return false
-      }
-      if (this.status.user.id === this.currentUser.id) {
-        return false
-      }
-      if (this.status.type === 'retweet') {
-        return false
-      }
-      const checkFollowing = this.mergedConfig.replyVisibility === 'following'
-      for (var i = 0; i < this.status.attentions.length; ++i) {
-        if (this.status.user.id === this.status.attentions[i].id) {
-          continue
-        }
-        // There's zero guarantee of this working. If we happen to have that user and their
-        // relationship in store then it will work, but there's kinda little chance of having
-        // them for people you're not following.
-        const relationship = this.$store.state.users.relationships[this.status.attentions[i].id]
-        if (checkFollowing && relationship && relationship.following) {
-          return false
-        }
-        if (this.status.attentions[i].id === this.currentUser.id) {
-          return false
-        }
-      }
-      return this.status.attentions.length > 0
     },
     replySubject () {
       if (!this.status.summary) return ''
@@ -198,20 +212,6 @@ const Status = {
       betterShadow: state => state.interface.browserSupport.cssFilter,
       currentUser: state => state.users.currentUser
     })
-  },
-  components: {
-    FavoriteButton,
-    ReactButton,
-    RetweetButton,
-    ExtraButtons,
-    PostStatusForm,
-    UserCard,
-    UserAvatar,
-    AvatarList,
-    Timeago,
-    StatusPopover,
-    EmojiReactions,
-    StatusContent
   },
   methods: {
     visibilityIcon (visibility) {

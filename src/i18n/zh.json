@@ -25,13 +25,14 @@
     "more": "更多",
     "generic_error": "发生一个错误",
     "optional": "可选项",
-    "show_more": "显示更多",
-    "show_less": "显示更少",
+    "show_more": "展开",
+    "show_less": "收起",
     "cancel": "取消",
     "disable": "禁用",
     "enable": "启用",
     "confirm": "确认",
-    "verify": "验证"
+    "verify": "验证",
+    "dismiss": "忽略"
   },
   "image_cropper": {
     "crop_picture": "裁剪图片",
@@ -57,9 +58,9 @@
     "enter_recovery_code": "输入一个恢复码",
     "enter_two_factor_code": "输入一个双重因素验证码",
     "recovery_code": "恢复码",
-    "heading" : {
-      "totp" : "双重因素验证",
-      "recovery" : "双重因素恢复"
+    "heading": {
+      "totp": "双重因素验证",
+      "recovery": "双重因素恢复"
     }
   },
   "media_modal": {
@@ -68,8 +69,8 @@
   },
   "nav": {
     "about": "关于",
-    "back": "Back",
-    "chat": "本地聊天",
+    "back": "后退",
+    "chat": "本站聊天",
     "friend_requests": "关注请求",
     "mentions": "提及",
     "interactions": "互动",
@@ -80,17 +81,21 @@
     "user_search": "用户搜索",
     "search": "搜索",
     "who_to_follow": "推荐关注",
-    "preferences": "偏好设置"
+    "preferences": "偏好设置",
+    "administration": "管理员"
   },
   "notifications": {
-    "broken_favorite": "未知的状态，正在搜索中...",
+    "broken_favorite": "未知的状态，正在搜索中…",
     "favorited_you": "收藏了你的状态",
     "followed_you": "关注了你",
     "load_older": "加载更早的通知",
     "notifications": "通知",
     "read": "阅读！",
     "repeated_you": "转发了你的状态",
-    "no_more_notifications": "没有更多的通知"
+    "no_more_notifications": "没有更多的通知",
+    "reacted_with": "和 {0} 互动过",
+    "migrated_to": "迁移到",
+    "follow_request": "想要关注你"
   },
   "polls": {
     "add_poll": "增加问卷调查",
@@ -112,7 +117,8 @@
   "interactions": {
     "favs_repeats": "转发和收藏",
     "follows": "新的关注者",
-    "load_older": "加载更早的互动"
+    "load_older": "加载更早的互动",
+    "moves": "用户迁移"
   },
   "post_status": {
     "new_status": "发布新状态",
@@ -151,9 +157,9 @@
     "token": "邀请码",
     "captcha": "CAPTCHA",
     "new_captcha": "点击图片获取新的验证码",
-    "username_placeholder": "例如： lain",
-    "fullname_placeholder": "例如： Lain Iwakura",
-    "bio_placeholder": "例如：\n你好， 我是 Lain.\n我是一个住在上海的宅男。你可能在某处见过我。",
+    "username_placeholder": "例如：lain",
+    "fullname_placeholder": "例如：岩仓玲音",
+    "bio_placeholder": "例如：\n你好，我是玲音。\n我是一个住在日本郊区的动画少女。你可能在 Wired 见过我。",
     "validations": {
       "username_required": "不能留空",
       "fullname_required": "不能留空",
@@ -171,17 +177,17 @@
     "security": "安全",
     "enter_current_password_to_confirm": "输入你当前密码来确认你的身份",
     "mfa": {
-      "otp" : "OTP",
-      "setup_otp" : "设置 OTP",
-      "wait_pre_setup_otp" : "预设 OTP",
-      "confirm_and_enable" : "确认并启用 OTP",
+      "otp": "OTP",
+      "setup_otp": "设置 OTP",
+      "wait_pre_setup_otp": "预设 OTP",
+      "confirm_and_enable": "确认并启用 OTP",
       "title": "双因素验证",
-      "generate_new_recovery_codes" : "生成新的恢复码",
-      "warning_of_generate_new_codes" : "当你生成新的恢复码时，你的就恢复码就失效了。",
-      "recovery_codes" : "恢复码。",
-      "waiting_a_recovery_codes": "接受备份码。。。",
-      "recovery_codes_warning" : "抄写这些号码，或者保存在安全的地方。这些号码不会再次显示。如果你无法访问你的 2FA app，也丢失了你的恢复码，你的账号就再也无法登录了。",
-      "authentication_methods" : "身份验证方法",
+      "generate_new_recovery_codes": "生成新的恢复码",
+      "warning_of_generate_new_codes": "当你生成新的恢复码时，你的旧恢复码就失效了。",
+      "recovery_codes": "恢复码。",
+      "waiting_a_recovery_codes": "正在接收备份码…",
+      "recovery_codes_warning": "抄写这些号码，或者保存在安全的地方。这些号码不会再次显示。如果你无法访问你的 2FA app，也丢失了你的恢复码，你的账号就再也无法登录了。",
+      "authentication_methods": "身份验证方法",
       "scan": {
         "title": "扫一下",
         "desc": "使用你的双因素验证 app，扫描这个二维码，或者输入这些文字密钥：",
@@ -193,7 +199,6 @@
     },
     "attachmentRadius": "附件",
     "attachments": "附件",
-    "autoload": "启用滚动到底部时的自动加载",
     "avatar": "头像",
     "avatarAltRadius": "头像（通知）",
     "avatarRadius": "头像",
@@ -222,7 +227,7 @@
     "data_import_export_tab": "数据导入/导出",
     "default_vis": "默认可见范围",
     "delete_account": "删除账户",
-    "delete_account_description": "永久删除你的帐号和所有消息。",
+    "delete_account_description": "永久删除你的帐号和所有数据。",
     "delete_account_error": "删除账户时发生错误，如果一直删除不了，请联系实例管理员。",
     "delete_account_instructions": "在下面输入你的密码来确认删除账户",
     "avatar_size_instruction": "推荐的头像图片最小的尺寸是 150x150 像素。",
@@ -263,7 +268,7 @@
     "loop_video_silent_only": "只循环没有声音的视频（例如：Mastodon 里的“GIF”）",
     "mutes_tab": "隐藏",
     "play_videos_in_modal": "在弹出框内播放视频",
-    "use_contain_fit": "生成缩略图时不要裁剪附件。",
+    "use_contain_fit": "生成缩略图时不要裁剪附件",
     "name": "名字",
     "name_bio": "名字及简介",
     "new_password": "新密码",
@@ -293,7 +298,6 @@
     "profile_tab": "个人资料",
     "radii_help": "设置界面边缘的圆角 (单位：像素)",
     "replies_in_timeline": "时间线中的回复",
-    "reply_link_preview": "启用鼠标悬停时预览回复链接",
     "reply_visibility_all": "显示所有回复",
     "reply_visibility_following": "只显示发送给我的回复/发送给我关注的用户的回复",
     "reply_visibility_self": "只显示发送给我的回复",
@@ -330,11 +334,6 @@
       "true": "是"
     },
     "notifications": "通知",
-    "notification_setting": "通知来源：",
-    "notification_setting_follows": "你所关注的用户",
-    "notification_setting_non_follows": "你没有关注的用户",
-    "notification_setting_followers": "关注你的用户",
-    "notification_setting_non_followers": "没有关注你的用户",
     "notification_mutes": "要停止收到某个指定的用户的通知，请使用隐藏功能。",
     "notification_blocks": "拉黑一个用户会停掉所有他的通知，等同于取消关注。",
     "enable_web_push_notifications": "启用 web 推送通知",
@@ -348,7 +347,14 @@
         "save_load_hint": "\"保留\" 选项在选择或加载主题时保留当前设置的选项，在导出主题时还会存储上述选项。当所有复选框未设置时，导出主题将保存所有内容。",
         "reset": "重置",
         "clear_all": "清除全部",
-        "clear_opacity": "清除透明度"
+        "clear_opacity": "清除透明度",
+        "load_theme": "加载主题",
+        "help": {
+          "upgraded_from_v2": "PleromaFE 已升级，主题会和你记忆中的不太一样。"
+        },
+        "use_source": "新版本",
+        "use_snapshot": "老版本",
+        "keep_as_is": "保持原状"
       },
       "common": {
         "color": "颜色",
@@ -441,7 +447,7 @@
         "mono": "内容",
         "input": "刚刚抵达上海",
         "faint_link": "帮助菜单",
-        "fine_print": "阅读我们的 {0} 学不到什么东东！",
+        "fine_print": "阅读我们的 {0} ，然而什么也学不到！",
         "header_faint": "这很正常",
         "checkbox": "我已经浏览了 TOC",
         "link": "一个很棒的摇滚链接"
@@ -451,7 +457,20 @@
       "title": "版本",
       "backend_version": "后端版本",
       "frontend_version": "前端版本"
-    }
+    },
+    "notification_setting_filters": "过滤器",
+    "domain_mutes": "域名",
+    "changed_email": "邮箱修改成功！",
+    "change_email_error": "修改你的电子邮箱时发生错误",
+    "change_email": "修改电子邮箱",
+    "allow_following_move": "正在关注的账号迁移时自动重新关注",
+    "notification_setting_privacy_option": "在通知推送中隐藏发送者和内容",
+    "notification_setting_privacy": "隐私",
+    "hide_follows_count_description": "不显示关注数",
+    "notification_visibility_emoji_reactions": "互动",
+    "notification_visibility_moves": "用户迁移",
+    "new_email": "新邮箱",
+    "emoji_reactions_on_timeline": "在时间线上显示表情符号互动"
   },
   "time": {
     "day": "{0} 天",
@@ -533,16 +552,16 @@
     "muted": "已隐藏",
     "per_day": "每天",
     "remote_follow": "跨站关注",
-    "report": "报告", 
+    "report": "报告",
     "statuses": "状态",
     "subscribe": "订阅",
     "unsubscribe": "退订",
     "unblock": "取消拉黑",
-    "unblock_progress": "取消拉黑中...",
-    "block_progress": "拉黑中...",
+    "unblock_progress": "取消拉黑中…",
+    "block_progress": "拉黑中…",
     "unmute": "取消隐藏",
-    "unmute_progress": "取消隐藏中...",
-    "mute_progress": "隐藏中...",
+    "unmute_progress": "取消隐藏中…",
+    "mute_progress": "隐藏中…",
     "admin_menu": {
       "moderation": "权限",
       "grant_admin": "赋予管理权限",
@@ -561,7 +580,10 @@
       "quarantine": "从联合实例中禁止用户帖子",
       "delete_user": "删除用户",
       "delete_user_confirmation": "你确认吗？此操作无法撤销。"
-    }
+    },
+    "hidden": "已隐藏",
+    "show_repeats": "显示转发",
+    "hide_repeats": "隐藏转发"
   },
   "user_profile": {
     "timeline_title": "用户时间线",
@@ -586,9 +608,11 @@
     "repeat": "转发",
     "reply": "回复",
     "favorite": "收藏",
-    "user_settings": "用户设置"
+    "user_settings": "用户设置",
+    "reject_follow_request": "拒绝关注请求",
+    "add_reaction": "添加互动"
   },
-  "upload":{
+  "upload": {
     "error": {
       "base": "上传不成功。",
       "file_too_big": "文件太大了 [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
@@ -605,8 +629,8 @@
   "search": {
     "people": "人",
     "hashtags": "Hashtags",
-    "person_talking": "{count} 人谈论",
-    "people_talking": "{count} 人谈论",
+    "person_talking": "{count} 人正在讨论",
+    "people_talking": "{count} 人正在讨论",
     "no_results": "没有搜索结果"
   },
   "password_reset": {
@@ -619,5 +643,49 @@
     "not_found": "我们无法找到匹配的邮箱地址或者用户名。",
     "too_many_requests": "你触发了尝试的限制，请稍后再试。",
     "password_reset_disabled": "密码重置已经被禁用。请联系你的实例管理员。"
+  },
+  "remote_user_resolver": {
+    "error": "未找到。",
+    "searching_for": "搜索",
+    "remote_user_resolver": "远程用户解析器"
+  },
+  "emoji": {
+    "keep_open": "选择器保持打开",
+    "stickers": "贴图",
+    "unicode": "Unicode 表情符号",
+    "custom": "自定义表情符号",
+    "add_emoji": "插入表情符号",
+    "search_emoji": "搜索表情符号",
+    "emoji": "表情符号"
+  },
+  "about": {
+    "mrf": {
+      "simple": {
+        "quarantine_desc": "本实例只会把公开状态发送非下列实例：",
+        "quarantine": "隔离",
+        "reject_desc": "本实例不会接收来自下列实例的消息：",
+        "reject": "拒绝",
+        "accept_desc": "本实例只接收来自下列实例的消息：",
+        "simple_policies": "站规",
+        "accept": "接受",
+        "media_removal": "移除媒体"
+      },
+      "mrf_policies_desc": "MRF 策略会影响本实例的互通行为。以下策略已启用：",
+      "mrf_policies": "已启动 MRF 策略",
+      "keyword": {
+        "ftl_removal": "从“全部已知网络”时间线上移除",
+        "keyword_policies": "关键词策略",
+        "is_replaced_by": "→",
+        "replace": "替换",
+        "reject": "拒绝"
+      },
+      "federation": "联邦"
+    }
+  },
+  "domain_mute_card": {
+    "unmute_progress": "正在取消隐藏…",
+    "unmute": "取消隐藏",
+    "mute_progress": "隐藏中…",
+    "mute": "隐藏"
   }
 }

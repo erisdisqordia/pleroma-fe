@@ -1,3 +1,5 @@
+import StatusContent from '../status_content/status_content.vue'
+import { mapState } from 'vuex'
 import Status from '../status/status.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import UserCard from '../user_card/user_card.vue'
@@ -16,10 +18,11 @@ const Notification = {
   },
   props: [ 'notification' ],
   components: {
-    Status,
+    StatusContent,
     UserAvatar,
     UserCard,
-    Timeago
+    Timeago,
+    Status
   },
   methods: {
     toggleUserExpanded () {
@@ -79,7 +82,10 @@ const Notification = {
     },
     isStatusNotification () {
       return isStatusNotification(this.notification.type)
-    }
+    },
+    ...mapState({
+      currentUser: state => state.users.currentUser
+    })
   }
 }
 

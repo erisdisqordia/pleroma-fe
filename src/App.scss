@@ -47,6 +47,7 @@ html {
 }
 
 body {
+  overscroll-behavior-y: none;
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
   margin: 0;
@@ -319,7 +320,7 @@ option {
 
 i[class*=icon-] {
   color: $fallback--icon;
-  color: var(--icon, $fallback--icon)
+  color: var(--icon, $fallback--icon);
 }
 
 .btn-block {
@@ -566,7 +567,7 @@ main-router {
     min-height: 0;
     box-sizing: border-box;
     margin: 0;
-    margin-left: .25em;
+    margin-left: .5em;
     min-width: 1px;
     align-self: stretch;
   }
@@ -858,53 +859,12 @@ nav {
     display: block;
     margin-right: 0.8em;
   }
-}
 
-.setting-item {
-  border-bottom: 2px solid var(--fg, $fallback--fg);
-  margin: 1em 1em 1.4em;
-  padding-bottom: 1.4em;
-
-  > div {
-    margin-bottom: .5em;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  &:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-    margin-bottom: 1em;
-  }
-
-  select {
-    min-width: 10em;
-  }
-
-
-  textarea {
-    width: 100%;
-    max-width: 100%;
-    height: 100px;
-  }
-
-  .unavailable,
-  .unavailable i {
-    color: var(--cRed, $fallback--cRed);
-    color: $fallback--cRed;
-  }
-
-  .btn {
-    min-height: 28px;
-    min-width: 10em;
-    padding: 0 2em;
-  }
-
-  .number-input {
-    max-width: 6em;
+  .main {
+    margin-bottom: 7em;
   }
 }
+
 .select-multiple {
   display: flex;
   .option-list {
@@ -968,4 +928,52 @@ nav {
   z-index: 1;
   background-color: $fallback--fg;
   background-color: var(--panel, $fallback--fg);
+}
+
+.unread-chat-count {
+  font-size: 0.9em;
+  font-weight: bolder;
+  font-style: normal;
+  position: absolute;
+  right: 0.6rem;
+  padding: 0 0.3em;
+  min-width: 1.3rem;
+  min-height: 1.3rem;
+  max-height: 1.3rem;
+  line-height: 1.3rem;
+}
+
+.chat-layout {
+  // Needed for smoother chat navigation in the desktop Safari (otherwise the chat layout "jumps" as the chat opens).
+  overflow: hidden;
+  height: 100%;
+
+  // Ensures the fixed position of the mobile browser bars on scroll up / down events.
+  // Prevents the mobile browser bars from overlapping or hiding the message posting form.
+  @media all and (max-width: 800px) {
+    body {
+      height: 100%;
+    }
+
+    #app {
+      height: 100%;
+      overflow: hidden;
+      min-height: auto;
+    }
+
+    #app_bg_wrapper {
+      overflow: hidden;
+    }
+
+    .main {
+      overflow: hidden;
+      height: 100%;
+    }
+
+    #content {
+      padding-top: 0;
+      height: 100%;
+      overflow: visible;
+    }
+  }
 }

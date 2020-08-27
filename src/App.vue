@@ -46,15 +46,16 @@
             @toggled="onSearchBarToggled"
             @click.stop.native
           />
-          <router-link
+          <a
+            href="#"
             class="mobile-hidden"
-            :to="{ name: 'settings'}"
+            @click.stop="openSettingsModal"
           >
             <i
               class="button-icon icon-cog nav-icon"
               :title="$t('nav.preferences')"
             />
-          </router-link>
+          </a>
           <a
             v-if="currentUser && currentUser.role === 'admin'"
             href="/pleroma/admin/#/login-pleroma"
@@ -76,11 +77,15 @@
         </div>
       </div>
     </nav>
+    <div class="app-bg-wrapper app-container-wrapper" />
     <div
       id="content"
       class="container underlay"
     >
-      <div class="sidebar-flexer mobile-hidden">
+      <div
+        class="sidebar-flexer mobile-hidden"
+        :style="sidebarAlign"
+      >
         <div class="sidebar-bounds">
           <div class="sidebar-scroller">
             <div class="sidebar">
@@ -108,9 +113,7 @@
             {{ $t("login.hint") }}
           </router-link>
         </div>
-        <transition name="fade">
-          <router-view />
-        </transition>
+        <router-view />
       </div>
       <media-modal />
     </div>
@@ -122,7 +125,9 @@
     <MobilePostStatusButton />
     <UserReportingModal />
     <PostStatusModal />
+    <SettingsModal />
     <portal-target name="modal" />
+    <GlobalNoticeList />
   </div>
 </template>
 

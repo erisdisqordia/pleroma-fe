@@ -1,7 +1,18 @@
 import { set, delete as del } from 'vue'
 import { setPreset, applyTheme } from '../services/style_setter/style_setter.js'
+import messages from '../i18n/messages'
 
 const browserLocale = (window.navigator.language || 'en').split('-')[0]
+
+/* TODO this is a bit messy.
+ * We need to declare settings with their types and also deal with
+ * instance-default settings in some way, hopefully try to avoid copy-pasta
+ * in general.
+ */
+export const multiChoiceProperties = [
+  'postContentType',
+  'subjectLineBehavior'
+]
 
 export const defaultState = {
   colors: {},
@@ -20,9 +31,7 @@ export const defaultState = {
   preloadImage: true,
   loopVideo: true,
   loopVideoSilentOnly: true,
-  autoLoad: true,
   streaming: false,
-  hoverPreview: true,
   emojiReactionsOnTimeline: true,
   autohideFloatingPostButton: false,
   pauseOnUnfocused: true,
@@ -35,7 +44,8 @@ export const defaultState = {
     repeats: true,
     moves: true,
     emojiReactions: false,
-    followRequest: true
+    followRequest: true,
+    chatMention: true
   },
   webPushNotifications: false,
   muteWords: [],
@@ -105,6 +115,10 @@ const config = {
         case 'customTheme':
         case 'customThemeSource':
           applyTheme(value)
+          break
+        case 'interfaceLanguage':
+          messages.setLanguage(this.getters.i18n, value)
+          break
       }
     }
   }

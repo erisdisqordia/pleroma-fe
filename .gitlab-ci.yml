@@ -1,7 +1,7 @@
 # This file is a template, and might need editing before it works on your project.
 # Official framework image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/node/tags/
-image: node:8
+image: node:10
 
 stages:
   - lint
@@ -14,6 +14,7 @@ lint:
   script:
     - yarn
     - npm run lint
+    - npm run stylelint
 
 test:
   stage: test

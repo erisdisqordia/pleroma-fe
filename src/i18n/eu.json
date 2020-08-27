@@ -84,7 +84,7 @@
     "preferences": "Hobespenak"
   },
   "notifications": {
-    "broken_favorite": "Egoera ezezaguna, bilatzen...",
+    "broken_favorite": "Egoera ezezaguna, bilatzen…",
     "favorited_you": "zure mezua gogoko du",
     "followed_you": "Zu jarraitzen zaitu",
     "load_older": "Kargatu jakinarazpen zaharragoak",
@@ -128,7 +128,7 @@
     "new_status": "Mezu berri bat idatzi",
     "account_not_locked_warning": "Zure kontua ez dago {0}. Edozeinek jarraitzen hastearekin, zure mezuak irakur ditzake.",
     "account_not_locked_warning_link": "Blokeatuta",
-    "attachments_sensitive": "Nabarmendu eranskinak hunkigarri gisa ",
+    "attachments_sensitive": "Nabarmendu eranskinak hunkigarri gisa",
     "content_type": {
       "text/plain": "Testu arrunta",
       "text/html": "HTML",
@@ -187,9 +187,9 @@
       "confirm_and_enable": "Baieztatu eta gaitu OTP",
       "title": "Bi-faktore autentifikazioa",
       "generate_new_recovery_codes": "Sortu berreskuratze kode berriak",
-      "warning_of_generate_new_codes": "Berreskuratze kode berriak sortzean, zure berreskuratze kode zaharrak ez dute balioko",
+      "warning_of_generate_new_codes": "Berreskuratze kode berriak sortzean, zure berreskuratze kode zaharrak ez dute balioko.",
       "recovery_codes": "Berreskuratze kodea",
-      "waiting_a_recovery_codes": "Babes-kopia kodeak jasotzen...",
+      "waiting_a_recovery_codes": "Babes-kopia kodeak jasotzen…",
       "recovery_codes_warning": "Idatzi edo gorde kodeak leku seguruan - bestela ez dituzu berriro ikusiko. Zure 2FA aplikaziorako sarbidea eta berreskuratze kodeak galduz gero, zure kontutik blokeatuta egongo zara.",
       "authentication_methods": "Autentifikazio metodoa",
       "scan": {
@@ -198,12 +198,11 @@
         "secret_code": "Giltza"
       },
       "verify": {
-        "desc": "Bi-faktore autentifikazioa gaitzeko, sar ezazu bi-faktore kodea zure app-tik"
+        "desc": "Bi-faktore autentifikazioa gaitzeko, sar ezazu bi-faktore kodea zure app-tik:"
       }
     },
     "attachmentRadius": "Eranskinak",
     "attachments": "Eranskinak",
-    "autoload": "Gaitu karga automatikoa beheraino mugitzean",
     "avatar": "Avatarra",
     "avatarAltRadius": "Avatarra (Aipamenak)",
     "avatarRadius": "Avatarrak",
@@ -221,7 +220,7 @@
     "cOrange": "Laranja (Gogokoa)",
     "cRed": "Gorria (ezeztatu)",
     "change_password": "Pasahitza aldatu",
-    "change_password_error": "Arazao bat egon da zure pasahitza aldatzean",
+    "change_password_error": "Arazao bat egon da zure pasahitza aldatzean.",
     "changed_password": "Pasahitza ondo aldatu da!",
     "collapse_subject": "Bildu gaia daukaten mezuak",
     "composing": "Idazten",
@@ -248,7 +247,7 @@
     "follows_imported": "Jarraitzaileak inportatuta! Prozesatzeak denbora pixka bat iraungo du.",
     "foreground": "Aurreko planoa",
     "general": "Orokorra",
-    "hide_attachments_in_convo": "Ezkutatu eranskinak elkarrizketatan ",
+    "hide_attachments_in_convo": "Ezkutatu eranskinak elkarrizketatan",
     "hide_attachments_in_tl": "Ezkutatu eranskinak donbora-lerroan",
     "hide_muted_posts": "Ezkutatu mutututako erabiltzaileen mezuak",
     "max_thumbnails": "Mezu bakoitzeko argazki-miniatura kopuru maximoa",
@@ -307,7 +306,6 @@
     "profile_tab": "Profila",
     "radii_help": "Konfiguratu interfazearen ertzen biribiltzea (pixeletan)",
     "replies_in_timeline": "Denbora-lerroko erantzunak",
-    "reply_link_preview": "Gaitu erantzun-estekaren aurrebista arratoiarekin",
     "reply_visibility_all": "Erakutsi erantzun guztiak",
     "reply_visibility_following": "Erakutsi bakarrik niri zuzendutako edo nik jarraitutako erabiltzaileen erantzunak",
     "reply_visibility_self": "Erakutsi bakarrik niri zuzendutako erantzunak",
@@ -344,11 +342,6 @@
       "true": "bai"
     },
     "notifications": "Jakinarazpenak",
-    "notification_setting": "Jaso pertsona honen jakinarazpenak:",
-    "notification_setting_follows": "Jarraitutako erabiltzaileak",
-    "notification_setting_non_follows": "Jarraitzen ez dituzun erabiltzaileak",
-    "notification_setting_followers": "Zu jarraitzen zaituzten erabiltzaileak",
-    "notification_setting_non_followers": "Zu jarraitzen ez zaituzten erabiltzaileak",
     "notification_mutes": "Erabiltzaile jakin baten jakinarazpenak jasotzeari uzteko, isilarazi ezazu.",
     "notification_blocks": "Erabiltzaile bat blokeatzeak jakinarazpen guztiak gelditzen ditu eta harpidetza ezeztatu.",
     "enable_web_push_notifications": "Gaitu web jakinarazpenak",
@@ -434,7 +427,7 @@
       },
       "fonts": {
         "_tab_label": "Letra-tipoak",
-        "help": "Aukeratu letra-tipoak erabiltzailearen interfazean erabiltzeko. \"Pertsonalizatua\" letra-tipoan, sisteman agertzen den  izen berdinarekin idatzi behar duzu.",
+        "help": "Aukeratu letra-tipoak erabiltzailearen interfazean erabiltzeko. \"Pertsonalizatua\" letra-tipoan, sisteman agertzen den izen berdinarekin idatzi behar duzu.",
         "components": {
           "interface": "Interfazea",
           "input": "Sarrera eremuak",
@@ -534,7 +527,7 @@
     "favorites": "Gogokoak",
     "follow": "Jarraitu",
     "follow_sent": "Eskaera bidalita!",
-    "follow_progress": "Eskatzen...",
+    "follow_progress": "Eskatzen…",
     "follow_again": "Eskaera berriro bidali?",
     "follow_unfollow": "Jarraitzeari utzi",
     "followees": "Jarraitzen",
@@ -553,11 +546,11 @@
     "subscribe": "Harpidetu",
     "unsubscribe": "Harpidetza ezeztatu",
     "unblock": "Blokeoa kendu",
-    "unblock_progress": "Blokeoa ezeztatzen...",
-    "block_progress": "Blokeatzen...",
+    "unblock_progress": "Blokeoa ezeztatzen…",
+    "block_progress": "Blokeatzen…",
     "unmute": "Isiltasuna kendu",
-    "unmute_progress": "Isiltasuna kentzen...",
-    "mute_progress": "Isiltzen...",
+    "unmute_progress": "Isiltasuna kentzen…",
+    "mute_progress": "Isiltzen…",
     "hide_repeats": "Ezkutatu errepikapenak",
     "show_repeats": "Erakutsi errpekiapenak",
     "admin_menu": {

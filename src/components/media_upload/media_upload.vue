@@ -1,9 +1,7 @@
 <template>
   <div
     class="media-upload"
-    @drop.prevent
-    @dragover.prevent="fileDrag"
-    @drop="fileDrop"
+    :class="{ disabled: disabled }"
   >
     <label
       class="label"
@@ -19,6 +17,7 @@
       />
       <input
         v-if="uploadReady"
+        :disabled="disabled"
         type="file"
         style="position: fixed; top: -100em"
         multiple="true"
@@ -31,6 +30,8 @@
 <script src="./media_upload.js" ></script>
 
 <style lang="scss">
+@import '../../_variables.scss';
+
 .media-upload {
   .label {
     display: inline-block;

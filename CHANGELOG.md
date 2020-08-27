@@ -2,9 +2,53 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
 ## [Unreleased]
+## [Unreleased patch]
+
+## [2.1.0] - 2020-08-28
+### Add
+- Autocomplete domains from list of known instances
+- 'Bot' settings option and badge
+- Added profile meta data fields that can be set in profile settings
+- Added option to reset avatar/banner in profile settings
+- Descriptions can be set on uploaded files before posting
+- Added status preview option to preview your statuses before posting
+- When a post is a reply to an unavailable post, the 'Reply to'-text has a strike-through style
+- Added ability to see all favoriting or repeating users when hovering the number on highlighted statuses
+- Bookmarks
+
 ### Changed
+- Change heart to thumbs up in reaction picker
+- Close the media modal on navigation events
+- Add colons to the emoji alt text, to make them copyable
+- Add better visual indication for drag-and-drop for files
+- When disabling attachments, the placeholder links now show an icon and the description instead of just IMAGE or VIDEO etc
+- Remove unnecessary options for 'automatic loading when loading older' and 'reply previews'
+- Greentext now has separate color slot for it
 - Removed the use of with_move parameters when fetching notifications
+- Push notifications now are the same as normal notfication, and are localized.
+- Updated Notification Settings to match new BE API
+
+### Fixed
+- Custom Emoji will display in poll options now.
+- Status ellipsis menu closes properly when selecting certain options
+- Cropped images look correct in Chrome
+- Newlines in the muted words settings work again
+- Clicking on non-latin hashtags won't open a new window
+- Uploading and drag-dropping multiple files works correctly now.
+- Subject field now appears disabled when posting
+- Fix status ellipsis menu being cut off in notifications column
+- Fixed autocomplete sometimes not returning the right user when there's already some results
+- Videos and audio and misc files show description as alt/title properly now
+- Clicking on non-image/video files no longer opens an empty modal
+- Audio files can now be played back in the frontend with hidden attachments
+- Videos are not cropped awkwardly in the uploads section anymore
+- Reply filtering options in Settings -> Filtering now work again using filtering on server
+- Don't show just blank-screen when cookies are disabled
+- Add status idempotency to prevent accidental double posting when posting returns an error
+- Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)
+- Multiple issues with muted statuses/notifications
 
 ## [2.0.5] - 2020-05-12
 ### Add
@@ -77,7 +121,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Ability to change user's email
 - About page
 - Added remote user redirect
+
 ### Changed
 - changed the way fading effects for user profile/long statuses works, now uses css-mask instead of gradient background hacks which weren't exactly compatible with semi-transparent themes
+
 ### Fixed
 - improved hotkey behavior on autocomplete popup

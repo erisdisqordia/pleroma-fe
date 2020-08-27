@@ -146,7 +146,8 @@
     display: flex;
     justify-content: space-between;
 
-    > .status-el {
+    /* TODO cleanup this */
+    > .Status {
       flex: 1;
     }
 

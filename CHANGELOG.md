@@ -49,7 +49,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)
 - Multiple issues with muted statuses/notifications
 
-
 ## [2.0.5] - 2020-05-12
 ### Add
 - Added private notifications option for push notifications

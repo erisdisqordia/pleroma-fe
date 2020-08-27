@@ -4,6 +4,7 @@ export const replaceWord = (str, toReplace, replacement) => {
   return str.slice(0, toReplace.start) + replacement + str.slice(toReplace.end)
 }
 
+// This seems to work fine
 export const wordAtPosition = (str, pos) => {
   const words = splitIntoWords(str)
   const wordsWithPosition = addPositionToWords(words)
@@ -11,6 +12,7 @@ export const wordAtPosition = (str, pos) => {
   return find(wordsWithPosition, ({ start, end }) => start <= pos && end > pos)
 }
 
+// This works fine
 export const addPositionToWords = (words) => {
   return reduce(words, (result, word) => {
     const data = {
@@ -34,6 +36,7 @@ export const addPositionToWords = (words) => {
   }, [])
 }
 
+// This needs to be altered, split words at space
 export const splitIntoWords = (str) => {
   // Split at word boundaries
   const regex = /\b/

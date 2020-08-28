@@ -2,21 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
 ## [Unreleased]
-### Changed
-- Greentext now has separate color slot for it
-- Removed the use of with_move parameters when fetching notifications
-- Push notifications now are the same as normal notfication, and are localized.
-- Updated Notification Settings to match new BE API
-
-### Fixed
-- Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)
-- Multiple issues with muted statuses/notifications
-
 ## [Unreleased patch]
-### Add
-- Added private notifications option for push notifications
-- 'Copy link' button for statuses (in the ellipsis menu)
+
+## [2.1.0] - 2020-08-28
+### Added
 - Autocomplete domains from list of known instances
 - 'Bot' settings option and badge
 - Added profile meta data fields that can be set in profile settings
@@ -25,15 +16,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added status preview option to preview your statuses before posting
 - When a post is a reply to an unavailable post, the 'Reply to'-text has a strike-through style
 - Added ability to see all favoriting or repeating users when hovering the number on highlighted statuses
+- Bookmarks
 
 ### Changed
-- Registration page no longer requires email if the server is configured not to require it
 - Change heart to thumbs up in reaction picker
 - Close the media modal on navigation events
 - Add colons to the emoji alt text, to make them copyable
 - Add better visual indication for drag-and-drop for files
 - When disabling attachments, the placeholder links now show an icon and the description instead of just IMAGE or VIDEO etc
 - Remove unnecessary options for 'automatic loading when loading older' and 'reply previews'
+- Greentext now has separate color slot for it
+- Removed the use of with_move parameters when fetching notifications
+- Push notifications now are the same as normal notfication, and are localized.
+- Updated Notification Settings to match new BE API
 
 ### Fixed
 - Custom Emoji will display in poll options now.
@@ -52,6 +47,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Reply filtering options in Settings -> Filtering now work again using filtering on server
 - Don't show just blank-screen when cookies are disabled
 - Add status idempotency to prevent accidental double posting when posting returns an error
+- Weird bug related to post being sent seemingly after pasting with keyboard (hopefully)
+- Multiple issues with muted statuses/notifications
+
+## [2.0.5] - 2020-05-12
+### Added
+- Added private notifications option for push notifications
+- 'Copy link' button for statuses (in the ellipsis menu)
+
+### Changed
+- Registration page no longer requires email if the server is configured not to require it
+
+### Fixed
+- Status ellipsis menu closes properly when selecting certain options
 
 ## [2.0.3] - 2020-05-02
 ### Fixed
@@ -61,7 +69,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Emoji autocomplete will match any part of the word and not just start, for example :drool will now helpfully suggest :blobcatdrool: and :blobcatdroolreach:
 
-### Add
+### Added
 - Follow request notification support
 
 ## [2.0.2] - 2020-04-08

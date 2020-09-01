@@ -677,7 +677,6 @@
     "password_reset_required": "Je dient je wachtwoord opnieuw in te stellen om in te kunnen loggen.",
     "password_reset_disabled": "Wachtwoord reset is uitgeschakeld. Neem contact op met de beheerder van deze instantie.",
     "too_many_requests": "Je hebt het maximaal aantal pogingen bereikt, probeer het later opnieuw.",
-    "not_found": "We kunnen die email of gebruikersnaam niet vinden.",
     "return_home": "Terugkeren naar de home pagina",
     "check_email": "Controleer je email inbox voor een link om je wachtwoord opnieuw in te stellen.",
     "placeholder": "Je email of gebruikersnaam",

@@ -478,7 +478,6 @@
     "placeholder": "Dein Benutzername oder die zugehörige E-Mail-Adresse",
     "check_email": "Im E-Mail-Posteingang des angebenen Kontos müsste sich jetzt (oder zumindest in Kürze) die E-Mail mit dem Link zum Passwortzurücksetzen befinden.",
     "return_home": "Zurück zur Heimseite",
-    "not_found": "Benutzername/E-Mail-Adresse nicht gefunden. Vertippt?",
     "too_many_requests": "Kurze Pause. Zu viele Versuche. Bitte, später nochmal probieren.",
     "password_reset_disabled": "Passwortzurücksetzen deaktiviert. Bitte Administrator kontaktieren.",
     "password_reset_required": "Passwortzurücksetzen erforderlich.",

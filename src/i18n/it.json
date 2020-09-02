@@ -745,7 +745,6 @@
     "password_reset_required": "Devi reimpostare la tua password per poter continuare.",
     "password_reset_disabled": "Non puoi azzerare la tua password. Contatta il tuo amministratore.",
     "too_many_requests": "Hai raggiunto il numero massimo di tentativi, riprova più tardi.",
-    "not_found": "Non ho trovato questa email o nome utente.",
     "return_home": "Torna alla pagina principale",
     "check_email": "Controlla la tua posta elettronica.",
     "placeholder": "La tua email o nome utente",

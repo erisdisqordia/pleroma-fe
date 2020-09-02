@@ -47,11 +47,6 @@ const passwordReset = {
         if (status === 204) {
           this.success = true
           this.error = null
-        } else if (status === 404 || status === 400) {
-          this.error = this.$t('password_reset.not_found')
-          this.$nextTick(() => {
-            this.$refs.email.focus()
-          })
         } else if (status === 429) {
           this.throttled = true
           this.error = this.$t('password_reset.too_many_requests')

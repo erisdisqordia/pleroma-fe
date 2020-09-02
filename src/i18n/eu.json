@@ -626,7 +626,6 @@
     "placeholder": "Zure e-posta edo erabiltzaile izena",
     "check_email": "Begiratu zure posta elektronikoa pasahitza berrezarri ahal izateko.",
     "return_home": "Itzuli hasierara",
-    "not_found": "Ezin izan dugu helbide elektroniko edo erabiltzaile hori aurkitu.",
     "too_many_requests": "Saiakera gehiegi burutu ditzu, saiatu berriro geroxeago.",
     "password_reset_disabled": "Pasahitza berrezartzea debekatuta dago. Mesedez, jarri harremanetan instantzia administratzailearekin.",
     "password_reset_required": "Pasahitza berrezarri behar duzu saioa hasteko.",

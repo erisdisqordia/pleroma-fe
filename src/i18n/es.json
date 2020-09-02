@@ -624,7 +624,6 @@
     "placeholder": "Su correo electrónico o nombre de usuario",
     "check_email": "Revise su correo electrónico para obtener un enlace para restablecer su contraseña.",
     "return_home": "Volver a la página de inicio",
-    "not_found": "No pudimos encontrar ese correo electrónico o nombre de usuario.",
     "too_many_requests": "Has alcanzado el límite de intentos, vuelve a intentarlo más tarde.",
     "password_reset_disabled": "El restablecimiento de contraseñas está deshabilitado. Póngase en contacto con el administrador de su instancia."
   }

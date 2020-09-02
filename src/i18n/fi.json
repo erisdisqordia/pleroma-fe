@@ -752,7 +752,6 @@
     "password_reset": "Salasanan nollaus",
     "placeholder": "Sähköpostiosoite tai käyttäjänimi",
     "return_home": "Palaa etusivulle",
-    "not_found": "Sähköpostiosoitetta tai käyttäjänimeä ei löytynyt.",
     "too_many_requests": "Olet käyttänyt kaikki yritykset, yritä uudelleen myöhemmin.",
     "password_reset_required": "Sinun täytyy vaihtaa salasana kirjautuaksesi."
   },

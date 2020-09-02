@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Polls will be hidden with status content if "Collapse posts with subjects" is enabled and the post is collapsed.
 
+### Fixed
+- Network fetches don't pile up anymore but wait for previous ones to finish to reduce throttling.
+
 ## [2.1.0] - 2020-08-28
 ### Added
 - Autocomplete domains from list of known instances

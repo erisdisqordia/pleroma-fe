@@ -59,7 +59,8 @@ const startFetching = ({ credentials, store }) => {
   // that there won't spam of them when user just opened up the FE we
   // reset that flag after a while to show new notifications once again.
   setTimeout(() => store.dispatch('setNotificationsSilence', false), 10000)
-  const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store, refetch: true })
+  const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store })
+  boundFetchAndUpdate()
   return makeFetcher(boundFetchAndUpdate, 10000)
 }
 

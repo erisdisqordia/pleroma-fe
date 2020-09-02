@@ -12,6 +12,7 @@ const fetchAndUpdate = ({ store, credentials }) => {
 
 const startFetching = ({ credentials, store }) => {
   const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store })
+  boundFetchAndUpdate()
   return makeFetcher(boundFetchAndUpdate, 10000)
 }
 

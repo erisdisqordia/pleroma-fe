@@ -71,8 +71,9 @@ const startFetching = ({ timeline = 'friends', credentials, store, userId = fals
   const timelineData = rootState.statuses.timelines[camelCase(timeline)]
   const showImmediately = timelineData.visibleStatuses.length === 0
   timelineData.userId = userId
+  fetchAndUpdate({ timeline, credentials, store, showImmediately, userId, tag })
   const boundFetchAndUpdate = () =>
-    fetchAndUpdate({ timeline, credentials, store, showImmediately, userId, tag })
+    fetchAndUpdate({ timeline, credentials, store, userId, tag })
   return makeFetcher(boundFetchAndUpdate, 10000)
 }
 const timelineFetcher = {

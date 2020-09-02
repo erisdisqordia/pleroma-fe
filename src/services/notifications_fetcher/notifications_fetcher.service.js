@@ -1,5 +1,5 @@
 import apiService from '../api/api.service.js'
-import makeFetcher from '../fetcher/fetcher.js'
+import { makeFetcher } from '../fetcher/fetcher.js'
 
 const update = ({ store, notifications, older }) => {
   store.dispatch('setNotificationsError', { value: false })

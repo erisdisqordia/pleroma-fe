@@ -6,7 +6,6 @@ export const makeFetcher = (call, interval) => {
 
   func = () => {
     call().finally(() => {
-      console.log('callbacks')
       if (stopped) return
       timeout = window.setTimeout(func, interval)
     })
@@ -14,7 +13,7 @@ export const makeFetcher = (call, interval) => {
 
   const stopFetcher = () => {
     stopped = true
-    window.cancelTimeout(timeout)
+    window.clearTimeout(timeout)
   }
 
   func()

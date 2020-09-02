@@ -1,4 +1,5 @@
 import apiService from '../api/api.service.js'
+import { makeFetcher } from '../fetcher/fetcher.js'
 
 const fetchAndUpdate = ({ store, credentials }) => {
   return apiService.fetchFollowRequests({ credentials })
@@ -10,9 +11,8 @@ const fetchAndUpdate = ({ store, credentials }) => {
 }
 
 const startFetching = ({ credentials, store }) => {
-  fetchAndUpdate({ credentials, store })
   const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store })
-  return setInterval(boundFetchAndUpdate, 10000)
+  return makeFetcher(boundFetchAndUpdate, 10000)
 }
 
 const followRequestFetcher = {

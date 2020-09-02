@@ -1,6 +1,7 @@
 import { camelCase } from 'lodash'
 
 import apiService from '../api/api.service.js'
+import { makeFetcher } from '../fetcher/fetcher.js'
 
 const update = ({ store, statuses, timeline, showImmediately, userId, pagination }) => {
   const ccTimeline = camelCase(timeline)
@@ -70,9 +71,9 @@ const startFetching = ({ timeline = 'friends', credentials, store, userId = fals
   const timelineData = rootState.statuses.timelines[camelCase(timeline)]
   const showImmediately = timelineData.visibleStatuses.length === 0
   timelineData.userId = userId
-  fetchAndUpdate({ timeline, credentials, store, showImmediately, userId, tag })
-  const boundFetchAndUpdate = () => fetchAndUpdate({ timeline, credentials, store, userId, tag })
-  return setInterval(boundFetchAndUpdate, 10000)
+  const boundFetchAndUpdate = () =>
+    fetchAndUpdate({ timeline, credentials, store, showImmediately, userId, tag })
+  return makeFetcher(boundFetchAndUpdate, 10000)
 }
 const timelineFetcher = {
   fetchAndUpdate,

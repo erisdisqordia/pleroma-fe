@@ -23,9 +23,12 @@
           tag="p"
           class="visibility-notice"
         >
-          <router-link :to="{ name: 'user-settings' }">
+          <a
+            href="#"
+            @click="openProfileTab"
+          >
             {{ $t('post_status.account_not_locked_warning_link') }}
-          </router-link>
+          </a>
         </i18n>
         <p
           v-if="!hideScopeNotice && newStatus.visibility === 'public'"

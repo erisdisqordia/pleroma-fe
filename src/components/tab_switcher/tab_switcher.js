@@ -60,16 +60,19 @@ export default Vue.component('tab-switcher', {
     }
   },
   methods: {
-    activateTab (index) {
+    clickTab (index) {
       return (e) => {
         e.preventDefault()
-        if (typeof this.onSwitch === 'function') {
-          this.onSwitch.call(null, this.$slots.default[index].key)
-        }
-        this.active = index
-        if (this.scrollableTabs) {
-          this.$refs.contents.scrollTop = 0
-        }
+        this.setTab(index)
+      }
+    },
+    setTab (index) {
+      if (typeof this.onSwitch === 'function') {
+        this.onSwitch.call(null, this.$slots.default[index].key)
+      }
+      this.active = index
+      if (this.scrollableTabs) {
+        this.$refs.contents.scrollTop = 0
       }
     }
   },
@@ -88,7 +91,7 @@ export default Vue.component('tab-switcher', {
             <div class={classesWrapper.join(' ')}>
               <button
                 disabled={slot.data.attrs.disabled}
-                onClick={this.activateTab(index)}
+                onClick={this.clickTab(index)}
                 class={classesTab.join(' ')}>
                 <img src={slot.data.attrs.image} title={slot.data.attrs['image-tooltip']}/>
                 {slot.data.attrs.label ? '' : slot.data.attrs.label}
@@ -100,7 +103,7 @@ export default Vue.component('tab-switcher', {
           <div class={classesWrapper.join(' ')}>
             <button
               disabled={slot.data.attrs.disabled}
-              onClick={this.activateTab(index)}
+              onClick={this.clickTab(index)}
               class={classesTab.join(' ')}
               type="button"
             >

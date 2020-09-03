@@ -3,6 +3,7 @@ import { set, delete as del } from 'vue'
 const defaultState = {
   settingsModalState: 'hidden',
   settingsModalLoaded: false,
+  settingsModalTargetTab: null,
   settings: {
     currentSaveStateNotice: null,
     noticeClearTimeout: null,
@@ -62,6 +63,9 @@ const interfaceMod = {
         state.settingsModalLoaded = true
       }
     },
+    setSettingsModalTargetTab (state, value) {
+      state.settingsModalTargetTab = value
+    },
     pushGlobalNotice (state, notice) {
       state.globalNotices.push(notice)
     },
@@ -96,6 +100,13 @@ const interfaceMod = {
     },
     togglePeekSettingsModal ({ commit }) {
       commit('togglePeekSettingsModal')
+    },
+    clearSettingsModalTargetTab ({ commit }) {
+      commit('setSettingsModalTargetTab', null)
+    },
+    openSettingsModalTab ({ commit }, value) {
+      commit('setSettingsModalTargetTab', value)
+      commit('openSettingsModal')
     },
     pushGlobalNotice (
       { commit, dispatch },

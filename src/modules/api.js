@@ -20,7 +20,7 @@ const api = {
       state.fetchers[fetcherName] = fetcher
     },
     removeFetcher (state, { fetcherName, fetcher }) {
-      state.fetchers[fetcherName]()
+      state.fetchers[fetcherName].stop()
       delete state.fetchers[fetcherName]
     },
     setWsToken (state, token) {

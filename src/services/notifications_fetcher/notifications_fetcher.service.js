@@ -1,5 +1,5 @@
 import apiService from '../api/api.service.js'
-import { makeFetcher } from '../fetcher/fetcher.js'
+import { promiseInterval } from '../promise_interval/promise_interval.js'
 
 const update = ({ store, notifications, older }) => {
   store.dispatch('setNotificationsError', { value: false })
@@ -61,7 +61,7 @@ const startFetching = ({ credentials, store }) => {
   setTimeout(() => store.dispatch('setNotificationsSilence', false), 10000)
   const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store })
   boundFetchAndUpdate()
-  return makeFetcher(boundFetchAndUpdate, 10000)
+  return promiseInterval(boundFetchAndUpdate, 10000)
 }
 
 const notificationsFetcher = {

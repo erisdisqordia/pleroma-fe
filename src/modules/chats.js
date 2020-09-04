@@ -3,7 +3,7 @@ import { find, omitBy, orderBy, sumBy } from 'lodash'
 import chatService from '../services/chat_service/chat_service.js'
 import { parseChat, parseChatMessage } from '../services/entity_normalizer/entity_normalizer.service.js'
 import { maybeShowChatNotification } from '../services/chat_utils/chat_utils.js'
-import { makeFetcher } from '../services/fetcher/fetcher.js'
+import { promiseInterval } from '../services/promise_interval/promise_interval.js'
 
 const emptyChatList = () => ({
   data: [],
@@ -46,7 +46,7 @@ const chats = {
       const fetcher = () => dispatch('fetchChats', { latest: true })
       fetcher()
       commit('setChatListFetcher', {
-        fetcher: () => makeFetcher(fetcher, 5000)
+        fetcher: () => promiseInterval(fetcher, 5000)
       })
     },
     stopFetchingChats ({ commit }) {

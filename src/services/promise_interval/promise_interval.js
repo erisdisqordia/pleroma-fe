@@ -1,11 +1,11 @@
 
-// makeFetcher - replacement for setInterval for fetching, starts counting
-// the interval only after a request is done instead of immediately.
+// promiseInterval - replacement for setInterval for promises, starts counting
+// the interval only after a promise is done instead of immediately.
 // - promiseCall is a function that returns a promise, it's called the first
 // time after the first interval.
 // - interval is the interval delay in ms.
 
-export const makeFetcher = (promiseCall, interval) => {
+export const promiseInterval = (promiseCall, interval) => {
   let stopped = false
   let timeout = null
   let func = () => {}
@@ -24,5 +24,5 @@ export const makeFetcher = (promiseCall, interval) => {
 
   timeout = window.setTimeout(func, interval)
 
-  return stopFetcher
+  return { stop: stopFetcher }
 }

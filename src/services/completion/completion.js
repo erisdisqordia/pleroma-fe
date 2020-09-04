@@ -5,7 +5,7 @@ export const replaceWord = (str, toReplace, replacement) => {
 }
 
 export const wordAtPosition = (str, pos) => {
-  const words = splitIntoWords(str)
+  const words = splitByWhitespaceBoundary(str)
   const wordsWithPosition = addPositionToWords(words)
 
   return find(wordsWithPosition, ({ start, end }) => start <= pos && end > pos)
@@ -34,36 +34,36 @@ export const addPositionToWords = (words) => {
   }, [])
 }
 
-export const splitIntoWords = (str) => {
-  // Split at word boundaries
-  const regex = /\b/
-  const triggers = /[@#:]+$/
-
-  let split = str.split(regex)
-
-  // Add trailing @ and # to the following word.
-  const words = reduce(split, (result, word) => {
-    if (result.length > 0) {
-      let previous = result.pop()
-      const matches = previous.match(triggers)
-      if (matches) {
-        previous = previous.replace(triggers, '')
-        word = matches[0] + word
-      }
-      result.push(previous)
+export const splitByWhitespaceBoundary = (str) => {
+  let result = []
+  let currentWord = ''
+  for (let i = 0; i < str.length; i++) {
+    const currentChar = str[i]
+    // Starting a new word
+    if (!currentWord) {
+      currentWord = currentChar
+      continue
     }
-    result.push(word)
-
-    return result
-  }, [])
-
-  return words
+    // current character is whitespace while word isn't, or vice versa:
+    // add our current word to results, start over the current word.
+    if (!!currentChar.trim() !== !!currentWord.trim()) {
+      result.push(currentWord)
+      currentWord = currentChar
+      continue
+    }
+    currentWord += currentChar
+  }
+  // Add the last word we were working on
+  if (currentWord) {
+    result.push(currentWord)
+  }
+  return result
 }
 
 const completion = {
   wordAtPosition,
   addPositionToWords,
-  splitIntoWords,
+  splitByWhitespaceBoundary,
   replaceWord
 }
 

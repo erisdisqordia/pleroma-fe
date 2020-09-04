@@ -640,7 +640,6 @@
     "placeholder": "你的电邮地址或者用户名",
     "check_email": "检查你的邮箱，会有一个链接用于重置密码。",
     "return_home": "回到首页",
-    "not_found": "我们无法找到匹配的邮箱地址或者用户名。",
     "too_many_requests": "你触发了尝试的限制，请稍后再试。",
     "password_reset_disabled": "密码重置已经被禁用。请联系你的实例管理员。"
   },

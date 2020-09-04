@@ -5,11 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ## [Unreleased patch]
+
 ### Changed
 - Polls will be hidden with status content if "Collapse posts with subjects" is enabled and the post is collapsed.
 
 ### Fixed
 - Network fetches don't pile up anymore but wait for previous ones to finish to reduce throttling.
+- Autocomplete won't stop at the second @, so it'll still work with "@lain@l" and not start over.
+- Fixed weird autocomplete behavior when you write ":custom_emoji: ?"
 
 ## [2.1.0] - 2020-08-28
 ### Added

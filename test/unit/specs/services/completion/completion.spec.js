@@ -1,8 +1,8 @@
-import { replaceWord, addPositionToWords, wordAtPosition, splitIntoWords } from '../../../../../src/services/completion/completion.js'
+import { replaceWord, addPositionToWords, wordAtPosition, splitByWhitespaceBoundary } from '../../../../../src/services/completion/completion.js'
 
 describe('addPositiontoWords', () => {
   it('adds the position to a word list', () => {
-    const words = ['hey', 'this', 'is', 'fun']
+    const words = ['hey', ' ', 'this', ' ', 'is', ' ', 'fun']
 
     const expected = [
       {
@@ -11,19 +11,34 @@ describe('addPositiontoWords', () => {
         end: 3
       },
       {
-        word: 'this',
+        word: ' ',
         start: 3,
-        end: 7
+        end: 4
       },
       {
-        word: 'is',
-        start: 7,
+        word: 'this',
+        start: 4,
+        end: 8
+      },
+      {
+        word: ' ',
+        start: 8,
         end: 9
       },
       {
-        word: 'fun',
+        word: 'is',
         start: 9,
+        end: 11
+      },
+      {
+        word: ' ',
+        start: 11,
         end: 12
+      },
+      {
+        word: 'fun',
+        start: 12,
+        end: 15
       }
     ]
 
@@ -33,11 +48,11 @@ describe('addPositiontoWords', () => {
   })
 })
 
-describe('splitIntoWords', () => {
+describe('splitByWhitespaceBoundary', () => {
   it('splits at whitespace boundaries', () => {
-    const str = 'This is a #nice @test for you, @idiot.'
-    const expected = ['This', ' ', 'is', ' ', 'a', ' ', '#nice', ' ', '@test', ' ', 'for', ' ', 'you', ', ', '@idiot', '.']
-    const res = splitIntoWords(str)
+    const str = 'This is a #nice @test for you,    @idiot@idiot.com'
+    const expected = ['This', ' ', 'is', ' ', 'a', ' ', '#nice', ' ', '@test', ' ', 'for', ' ', 'you,', '    ', '@idiot@idiot.com']
+    const res = splitByWhitespaceBoundary(str)
 
     expect(res).to.eql(expected)
   })
@@ -57,13 +72,13 @@ describe('wordAtPosition', () => {
 
 describe('replaceWord', () => {
   it('replaces a word (with start and end) with another word in a given string', () => {
-    const str = 'hey @take, how are you'
-    const wordsWithPosition = addPositionToWords(splitIntoWords(str))
+    const str = 'hey @take , how are you'
+    const wordsWithPosition = addPositionToWords(splitByWhitespaceBoundary(str))
     const toReplace = wordsWithPosition[2]
 
     expect(toReplace.word).to.eql('@take')
 
-    const expected = 'hey @takeshitakenji, how are you'
+    const expected = 'hey @takeshitakenji , how are you'
     const res = replaceWord(str, toReplace, '@takeshitakenji')
     expect(res).to.eql(expected)
   })

@@ -776,7 +776,6 @@
     "password_reset_required": "Vi devas restarigi vian pasvorton por saluti.",
     "password_reset_disabled": "Restarigado de pasvortoj estas malŝaltita. Bonvolu kontakti la administranton de via nodo.",
     "too_many_requests": "Vi atingis la limon de provoj, reprovu pli poste.",
-    "not_found": "Ni ne trovis tiun retpoŝtadreson aŭ uzantonomon.",
     "return_home": "Reiri al la hejmpaĝo",
     "check_email": "Kontrolu vian retpoŝton pro ligilo por restarigi vian pasvorton.",
     "placeholder": "Via retpoŝtadreso aŭ uzantonomo",

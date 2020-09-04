@@ -112,14 +112,14 @@ const chats = {
     setChatListFetcher (state, { commit, fetcher }) {
       const prevFetcher = state.chatListFetcher
       if (prevFetcher) {
-        prevFetcher()
+        prevFetcher.stop()
       }
       state.chatListFetcher = fetcher && fetcher()
     },
     setCurrentChatFetcher (state, { fetcher }) {
       const prevFetcher = state.fetcher
       if (prevFetcher) {
-        prevFetcher()
+        prevFetcher.stop()
       }
       state.fetcher = fetcher && fetcher()
     },

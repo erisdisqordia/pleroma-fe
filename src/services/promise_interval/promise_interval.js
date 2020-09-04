@@ -8,9 +8,8 @@
 export const promiseInterval = (promiseCall, interval) => {
   let stopped = false
   let timeout = null
-  let func = () => {}
 
-  func = () => {
+  const func = () => {
     promiseCall().finally(() => {
       if (stopped) return
       timeout = window.setTimeout(func, interval)

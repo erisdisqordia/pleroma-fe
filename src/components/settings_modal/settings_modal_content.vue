@@ -8,6 +8,7 @@
     <div
       :label="$t('settings.general')"
       icon="wrench"
+      data-tab-name="general"
     >
       <GeneralTab />
     </div>
@@ -15,6 +16,7 @@
       v-if="isLoggedIn"
       :label="$t('settings.profile_tab')"
       icon="user"
+      data-tab-name="profile"
     >
       <ProfileTab />
     </div>
@@ -22,18 +24,21 @@
       v-if="isLoggedIn"
       :label="$t('settings.security_tab')"
       icon="lock"
+      data-tab-name="security"
     >
       <SecurityTab />
     </div>
     <div
       :label="$t('settings.filtering')"
       icon="filter"
+      data-tab-name="filtering"
     >
       <FilteringTab />
     </div>
     <div
       :label="$t('settings.theme')"
       icon="brush"
+      data-tab-name="theme"
     >
       <ThemeTab />
     </div>
@@ -41,6 +46,7 @@
       v-if="isLoggedIn"
       :label="$t('settings.notifications')"
       icon="bell-ringing-o"
+      data-tab-name="notifications"
     >
       <NotificationsTab />
     </div>
@@ -48,6 +54,7 @@
       v-if="isLoggedIn"
       :label="$t('settings.data_import_export_tab')"
       icon="download"
+      data-tab-name="dataImportExport"
     >
       <DataImportExportTab />
     </div>
@@ -56,12 +63,14 @@
       :label="$t('settings.mutes_and_blocks')"
       :fullHeight="true"
       icon="eye-off"
+      data-tab-name="mutesAndBlocks"
     >
       <MutesAndBlocksTab />
     </div>
     <div
       :label="$t('settings.version.title')"
       icon="info-circled"
+      data-tab-name="version"
     >
       <VersionTab />
     </div>

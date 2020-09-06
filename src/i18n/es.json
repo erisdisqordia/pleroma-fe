@@ -665,13 +665,19 @@
         "ftl_removal_desc": "Esta instancia elimina las siguientes instancias de la línea de tiempo \"Toda la red conocida\":",
         "ftl_removal": "Eliminar de la línea de tiempo \"Toda La Red Conocida\"",
         "quarantine_desc": "Esta instancia enviará solo publicaciones públicas a las siguientes instancias:",
-        "simple_policies": "Políticas sobre instancias específicas"
+        "simple_policies": "Políticas sobre instancias específicas",
+        "reject_desc": "Esta instancia no aceptará mensajes de las siguientes instancias:",
+        "reject": "Rechazar",
+        "accept": "Aceptar"
       },
       "mrf_policies_desc": "Las políticas MRF manipulan la federación de esta instancia con el resto del fediverso. Las siguientes políticas están habilitadas:",
       "mrf_policies": "Habilitar políticas MRF",
       "keyword": {
         "ftl_removal": "Eliminar de la línea de tiempo \"Toda La Red Conocida\"",
-        "keyword_policies": "Política de Palabras Clave"
+        "keyword_policies": "Política de Palabras Clave",
+        "is_replaced_by": "→",
+        "replace": "Reemplazar",
+        "reject": "Rechazar"
       },
       "federation": "Federación"
     },

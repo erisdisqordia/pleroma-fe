@@ -72,6 +72,8 @@ const api = {
                   showImmediately: timelineData.visibleStatuses.length === 0,
                   timeline: 'friends'
                 })
+              } else if (message.event === 'delete') {
+                dispatch('deleteStatusById', message.id)
               } else if (message.event === 'pleroma:chat_update') {
                 dispatch('addChatMessages', {
                   chatId: message.chatUpdate.id,

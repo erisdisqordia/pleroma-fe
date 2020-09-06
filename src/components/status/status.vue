@@ -95,6 +95,7 @@
       </div>
 
       <div
+        v-if="!deleted"
         :class="[userClass, { highlighted: userStyle, '-repeat': retweet && !inConversation }]"
         :style="[ userStyle ]"
         class="status-container"
@@ -352,6 +353,31 @@
               :status="status"
               @onError="showError"
               @onSuccess="clearError"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        v-else
+        class="deleted"
+      >
+        <div class="left-side">
+          <UserAvatar :compact="compact" />
+        </div>
+        <div class="right-side">
+          <div class="deleted-text">
+            {{ $t('status.status_deleted') }}
+          </div>
+          <div
+            v-if="replying"
+            class="status-actions"
+          >
+            <i
+              v-if="loggedIn"
+              class="button-icon button-reply icon-reply"
+              :title="$t('tool_tip.reply')"
+              :class="{'-active': replying}"
+              @click.prevent="toggleReplying"
             />
           </div>
         </div>

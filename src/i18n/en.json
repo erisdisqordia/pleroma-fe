@@ -659,7 +659,8 @@
     "show_full_subject": "Show full subject",
     "hide_full_subject": "Hide full subject",
     "show_content": "Show content",
-    "hide_content": "Hide content"
+    "hide_content": "Hide content",
+    "status_deleted": "The post was deleted"
   },
   "user_card": {
     "approve": "Approve",

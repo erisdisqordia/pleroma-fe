@@ -25,6 +25,17 @@ $status-margin: 0.75em;
     --icon: var(--selectedPostIcon, $fallback--icon);
   }
 
+  .deleted {
+    padding: $status-margin;
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+    display: flex;
+    .deleted-text {
+      margin: 0.5em 0;
+      align-items: center;
+    }
+  }
+
   .status-container {
     display: flex;
     padding: $status-margin;

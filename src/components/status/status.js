@@ -157,7 +157,7 @@ const Status = {
       return this.mergedConfig.hideFilteredStatuses
     },
     hideStatus () {
-      return this.deleted || (this.muted && this.hideFilteredStatuses)
+      return (this.muted && this.hideFilteredStatuses)
     },
     isFocused () {
       // retweet or root of an expanded conversation

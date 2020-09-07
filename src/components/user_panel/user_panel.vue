@@ -10,9 +10,7 @@
         :hide-bio="true"
         rounded="top"
       />
-      <div class="panel-footer">
-        <PostStatusForm />
-      </div>
+      <PostStatusForm />
     </div>
     <auth-form
       v-else

@@ -182,7 +182,6 @@
     },
     "attachmentRadius": "Pièces jointes",
     "attachments": "Pièces jointes",
-    "autoload": "Charger la suite automatiquement une fois le bas de la page atteint",
     "avatar": "Avatar",
     "avatarAltRadius": "Avatars (Notifications)",
     "avatarRadius": "Avatars",
@@ -282,7 +281,6 @@
     "profile_tab": "Profil",
     "radii_help": "Vous pouvez ici choisir le niveau d'arrondi des angles de l'interface (en pixels)",
     "replies_in_timeline": "Réponses au journal",
-    "reply_link_preview": "Afficher un aperçu lors du survol de liens vers une réponse",
     "reply_visibility_all": "Montrer toutes les réponses",
     "reply_visibility_following": "Afficher uniquement les réponses adressées à moi ou aux personnes que je suis",
     "reply_visibility_self": "Afficher uniquement les réponses adressées à moi",
@@ -319,11 +317,6 @@
       "true": "oui"
     },
     "notifications": "Notifications",
-    "notification_setting": "Reçevoir les notifications de :",
-    "notification_setting_follows": "Utilisateurs que vous suivez",
-    "notification_setting_non_follows": "Utilisateurs que vous ne suivez pas",
-    "notification_setting_followers": "Utilisateurs qui vous suivent",
-    "notification_setting_non_followers": "Utilisateurs qui ne vous suivent pas",
     "notification_mutes": "Pour stopper la récéption de notifications d'un utilisateur particulier, utilisez un masquage.",
     "notification_blocks": "Bloquer un utilisateur stoppe toute notification et se désabonne de lui.",
     "enable_web_push_notifications": "Activer les notifications de push web",
@@ -350,7 +343,8 @@
           "migration_snapshot_ok": "Pour être sûr un instantanée du thème à été chargé. Vos pouvez essayer de charger ses données.",
           "fe_downgraded": "Retour en arrière de la version de PleromaFE.",
           "fe_upgraded": "Le moteur de thème PleromaFE à été mis à jour après un changement de version.",
-          "snapshot_missing": "Aucun instantané du thème à été trouvé dans le fichier, il peut y avoir un rendu différent à la vision originelle."
+          "snapshot_missing": "Aucun instantané du thème à été trouvé dans le fichier, il peut y avoir un rendu différent à la vision originelle.",
+          "snapshot_present": "Un instantané du thème à été chargé, toutes les valeurs sont dont écrasées. Vous pouvez autrement charger le thème complètement."
         },
         "keep_as_is": "Garder tel-quel",
         "use_source": "Nouvelle version"
@@ -626,7 +620,7 @@
         "reject": "Rejeté",
         "replace": "Remplacer",
         "keyword_policies": "Politiques par mot-clés",
-        "ftl_removal": "Suppression du flux \"Ensemble du réseau connu\"",
+        "ftl_removal": "Suppression du flux fédéré",
         "is_replaced_by": "→"
       },
       "simple": {
@@ -736,7 +730,6 @@
     "instruction": "Entrer votre address de courriel ou votre nom utilisateur. Nous enverrons un lien pour changer votre mot de passe.",
     "placeholder": "Votre email ou nom d'utilisateur",
     "return_home": "Retourner à la page d'accueil",
-    "not_found": "Email ou nom d'utilisateur inconnu.",
     "too_many_requests": "Vos avez atteint la limite d'essais, essayez plus tard.",
     "password_reset_required": "Vous devez changer votre mot de passe pour vous authentifier."
   }

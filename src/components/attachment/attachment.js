@@ -8,7 +8,6 @@ const Attachment = {
   props: [
     'attachment',
     'nsfw',
-    'statusId',
     'size',
     'allowPlay',
     'setMedia',
@@ -30,8 +29,20 @@ const Attachment = {
     VideoAttachment
   },
   computed: {
-    usePlaceHolder () {
+    usePlaceholder () {
       return this.size === 'hide' || this.type === 'unknown'
+    },
+    placeholderName () {
+      if (this.attachment.description === '' || !this.attachment.description) {
+        return this.type.toUpperCase()
+      }
+      return this.attachment.description
+    },
+    placeholderIconClass () {
+      if (this.type === 'image') return 'icon-picture'
+      if (this.type === 'video') return 'icon-video'
+      if (this.type === 'audio') return 'icon-music'
+      return 'icon-doc'
     },
     referrerpolicy () {
       return this.$store.state.instance.mediaProxyAvailable ? '' : 'no-referrer'
@@ -49,7 +60,15 @@ const Attachment = {
       return this.size === 'small'
     },
     fullwidth () {
-      return this.type === 'html' || this.type === 'audio'
+      if (this.size === 'hide') return false
+      return this.type === 'html' || this.type === 'audio' || this.type === 'unknown'
+    },
+    useModal () {
+      const modalTypes = this.size === 'hide' ? ['image', 'video', 'audio']
+        : this.mergedConfig.playVideosInModal
+          ? ['image', 'video']
+          : ['image']
+      return modalTypes.includes(this.type)
     },
     ...mapGetters(['mergedConfig'])
   },
@@ -60,12 +79,7 @@ const Attachment = {
       }
     },
     openModal (event) {
-      const modalTypes = this.mergedConfig.playVideosInModal
-        ? ['image', 'video']
-        : ['image']
-      if (fileTypeService.fileMatchesSomeType(modalTypes, this.attachment) ||
-        this.usePlaceHolder
-      ) {
+      if (this.useModal) {
         event.stopPropagation()
         event.preventDefault()
         this.setMedia()

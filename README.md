@@ -2,7 +2,7 @@
 
 > A single column frontend designed for Pleroma.
 
-![screenshot](https://i.imgur.com/DJVqSJ0.png)
+![screenshot](/uploads/796c5ecf985ed1e2b0943ee0df131ed0/DJVqSJ0.png)
 
 # For Translators
 

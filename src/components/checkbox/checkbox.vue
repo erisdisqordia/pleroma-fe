@@ -52,7 +52,7 @@ export default {
     right: 0;
     top: 0;
     display: block;
-    content: '✔';
+    content: '✓';
     transition: color 200ms;
     width: 1.1em;
     height: 1.1em;

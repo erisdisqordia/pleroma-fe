@@ -1,3 +1,4 @@
+import { mapGetters } from 'vuex'
 import Notification from '../notification/notification.vue'
 import notificationsFetcher from '../../services/notifications_fetcher/notifications_fetcher.service.js'
 import {
@@ -27,6 +28,11 @@ const Notifications = {
       seenToDisplayCount: DEFAULT_SEEN_TO_DISPLAY_COUNT
     }
   },
+  created () {
+    const store = this.$store
+    const credentials = store.state.users.currentUser.credentials
+    notificationsFetcher.fetchAndUpdate({ store, credentials })
+  },
   computed: {
     mainClass () {
       return this.minimalMode ? '' : 'panel panel-default'
@@ -46,23 +52,22 @@ const Notifications = {
     unseenCount () {
       return this.unseenNotifications.length
     },
+    unseenCountTitle () {
+      return this.unseenCount + (this.unreadChatCount)
+    },
     loading () {
       return this.$store.state.statuses.notifications.loading
     },
     notificationsToDisplay () {
       return this.filteredNotifications.slice(0, this.unseenCount + this.seenToDisplayCount)
-    }
+    },
+    ...mapGetters(['unreadChatCount'])
   },
   components: {
     Notification
   },
-  created () {
-    const { dispatch } = this.$store
-
-    dispatch('fetchAndUpdateNotifications')
-  },
   watch: {
-    unseenCount (count) {
+    unseenCountTitle (count) {
       if (count > 0) {
         this.$store.dispatch('setPageTitle', `(${count})`)
       } else {

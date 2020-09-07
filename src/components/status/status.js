@@ -9,6 +9,7 @@ import AvatarList from '../avatar_list/avatar_list.vue'
 import Timeago from '../timeago/timeago.vue'
 import StatusContent from '../status_content/status_content.vue'
 import StatusPopover from '../status_popover/status_popover.vue'
+import UserListPopover from '../user_list_popover/user_list_popover.vue'
 import EmojiReactions from '../emoji_reactions/emoji_reactions.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
@@ -18,6 +19,21 @@ import { mapGetters, mapState } from 'vuex'
 
 const Status = {
   name: 'Status',
+  components: {
+    FavoriteButton,
+    ReactButton,
+    RetweetButton,
+    ExtraButtons,
+    PostStatusForm,
+    UserCard,
+    UserAvatar,
+    AvatarList,
+    Timeago,
+    StatusPopover,
+    UserListPopover,
+    EmojiReactions,
+    StatusContent
+  },
   props: [
     'statusoid',
     'expandable',
@@ -141,7 +157,7 @@ const Status = {
       return this.mergedConfig.hideFilteredStatuses
     },
     hideStatus () {
-      return (this.hideReply || this.deleted) || (this.muted && this.hideFilteredStatuses)
+      return this.deleted || (this.muted && this.hideFilteredStatuses)
     },
     isFocused () {
       // retweet or root of an expanded conversation
@@ -163,37 +179,6 @@ const Status = {
         const user = this.$store.getters.findUser(this.status.in_reply_to_user_id)
         return user && user.screen_name
       }
-    },
-    hideReply () {
-      if (this.mergedConfig.replyVisibility === 'all') {
-        return false
-      }
-      if (this.inConversation || !this.isReply) {
-        return false
-      }
-      if (this.status.user.id === this.currentUser.id) {
-        return false
-      }
-      if (this.status.type === 'retweet') {
-        return false
-      }
-      const checkFollowing = this.mergedConfig.replyVisibility === 'following'
-      for (var i = 0; i < this.status.attentions.length; ++i) {
-        if (this.status.user.id === this.status.attentions[i].id) {
-          continue
-        }
-        // There's zero guarantee of this working. If we happen to have that user and their
-        // relationship in store then it will work, but there's kinda little chance of having
-        // them for people you're not following.
-        const relationship = this.$store.state.users.relationships[this.status.attentions[i].id]
-        if (checkFollowing && relationship && relationship.following) {
-          return false
-        }
-        if (this.status.attentions[i].id === this.currentUser.id) {
-          return false
-        }
-      }
-      return this.status.attentions.length > 0
     },
     replySubject () {
       if (!this.status.summary) return ''
@@ -227,20 +212,6 @@ const Status = {
       betterShadow: state => state.interface.browserSupport.cssFilter,
       currentUser: state => state.users.currentUser
     })
-  },
-  components: {
-    FavoriteButton,
-    ReactButton,
-    RetweetButton,
-    ExtraButtons,
-    PostStatusForm,
-    UserCard,
-    UserAvatar,
-    AvatarList,
-    Timeago,
-    StatusPopover,
-    EmojiReactions,
-    StatusContent
   },
   methods: {
     visibilityIcon (visibility) {

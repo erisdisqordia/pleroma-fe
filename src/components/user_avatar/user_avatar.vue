@@ -1,9 +1,9 @@
 <template>
   <StillImage
-    class="avatar"
+    class="Avatar"
     :alt="user.screen_name"
     :title="user.screen_name"
-    :src="imgSrc"
+    :src="imgSrc(user.profile_image_url_original)"
     :class="{ 'avatar-compact': compact, 'better-shadow': betterShadow }"
     :image-load-error="imageLoadError"
   />
@@ -13,7 +13,9 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.avatar.still-image {
+.Avatar {
+  --still-image-label-visibility: hidden;
+
   width: 48px;
   height: 48px;
   box-shadow: var(--avatarStatusShadow);

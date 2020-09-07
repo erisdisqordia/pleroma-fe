@@ -75,6 +75,7 @@ export default {
     deleteOption (index, event) {
       if (this.options.length > 2) {
         this.options.splice(index, 1)
+        this.updatePollToParent()
       }
     },
     convertExpiryToUnit (unit, amount) {

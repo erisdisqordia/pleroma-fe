@@ -17,7 +17,7 @@
           <span class="result-percentage">
             {{ percentageForOption(option.votes_count) }}%
           </span>
-          <span v-html="option.title_html"></span>
+          <span v-html="option.title_html" />
         </div>
         <div
           class="result-fill"
@@ -96,6 +96,7 @@
     align-items: center;
     padding: 0.1em 0.25em;
     z-index: 1;
+    word-break: break-word;
   }
   .result-percentage {
     width: 3.5em;

@@ -1,9 +1,7 @@
 <template>
-  <div :class="classes.root">
+  <div :class="[classes.root, 'timeline']">
     <div :class="classes.header">
-      <div class="title">
-        {{ title }}
-      </div>
+      <TimelineMenu v-if="!embedded" />
       <div
         v-if="timelineError"
         class="loadmore-error alert error"
@@ -19,14 +17,14 @@
         {{ errorData.statusText }}
       </div>
       <button
-        v-if="timeline.newStatusCount > 0 && !timelineError && !errorData"
+        v-else-if="showLoadButton"
         class="loadmore-button"
         @click.prevent="showNewStatuses"
       >
-        {{ $t('timeline.show_new') }}{{ newStatusCountStr }}
+        {{ loadButtonString }}
       </button>
       <div
-        v-if="!timeline.newStatusCount > 0 && !timelineError && !errorData"
+        v-else
         class="loadmore-text faint"
         @click.prevent
       >
@@ -104,6 +102,18 @@
 .timeline {
   .loadmore-text {
     opacity: 1;
+  }
+}
+
+.timeline-heading {
+  max-width: 100%;
+  flex-wrap: nowrap;
+  .loadmore-button {
+    flex-shrink: 0;
+  }
+  .loadmore-text {
+    flex-shrink: 0;
+    line-height: 1em;
   }
 }
 </style>

@@ -136,7 +136,6 @@
   "settings": {
     "attachmentRadius": "Bijlages",
     "attachments": "Bijlages",
-    "autoload": "Automatisch laden inschakelen wanneer tot de bodem gescrold wordt",
     "avatar": "Avatar",
     "avatarAltRadius": "Avatars (Meldingen)",
     "avatarRadius": "Avatars",
@@ -217,7 +216,6 @@
     "profile_tab": "Profiel",
     "radii_help": "Stel afronding van hoeken in de interface in (in pixels)",
     "replies_in_timeline": "Antwoorden in tijdlijn",
-    "reply_link_preview": "Antwoord-link weergave inschakelen bij aanwijzen met muisaanwijzer",
     "reply_visibility_all": "Alle antwoorden tonen",
     "reply_visibility_following": "Enkel antwoorden tonen die aan mij of gevolgde gebruikers gericht zijn",
     "reply_visibility_self": "Enkel antwoorden tonen die aan mij gericht zijn",
@@ -390,9 +388,6 @@
         "link": "een leuke kleine link"
       }
     },
-    "notification_setting_follows": "Gebruikers die je volgt",
-    "notification_setting_non_follows": "Gebruikers die je niet volgt",
-    "notification_setting_followers": "Gebruikers die je volgen",
     "notification_setting_privacy": "Privacy",
     "notification_setting_privacy_option": "Verberg de afzender en inhoud van push meldingen",
     "notification_mutes": "Om niet langer meldingen te ontvangen van een specifieke gebruiker, kun je deze negeren.",
@@ -460,7 +455,6 @@
     "upload_a_photo": "Upload een foto",
     "fun": "Plezier",
     "greentext": "Meme pijlen",
-    "notification_setting": "Ontvang meldingen van:",
     "block_export_button": "Exporteer je geblokkeerde gebruikers naar een csv bestand",
     "block_import_error": "Fout bij importeren blokkades",
     "discoverable": "Sta toe dat dit account ontdekt kan worden in zoekresultaten en andere diensten",
@@ -469,7 +463,6 @@
     "hide_follows_description": "Niet tonen wie ik volg",
     "show_moderator_badge": "Moderators badge tonen in mijn profiel",
     "notification_setting_filters": "Filters",
-    "notification_setting_non_followers": "Gebruikers die je niet volgen",
     "notification_blocks": "Door een gebruiker te blokkeren, ontvang je geen meldingen meer van de gebruiker en wordt je abonnement op de gebruiker opgeheven.",
     "version": {
       "frontend_version": "Frontend Versie",
@@ -684,7 +677,6 @@
     "password_reset_required": "Je dient je wachtwoord opnieuw in te stellen om in te kunnen loggen.",
     "password_reset_disabled": "Wachtwoord reset is uitgeschakeld. Neem contact op met de beheerder van deze instantie.",
     "too_many_requests": "Je hebt het maximaal aantal pogingen bereikt, probeer het later opnieuw.",
-    "not_found": "We kunnen die email of gebruikersnaam niet vinden.",
     "return_home": "Terugkeren naar de home pagina",
     "check_email": "Controleer je email inbox voor een link om je wachtwoord opnieuw in te stellen.",
     "placeholder": "Je email of gebruikersnaam",

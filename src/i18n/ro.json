@@ -38,7 +38,6 @@
   },
   "settings": {
     "attachments": "Atașamente",
-    "autoload": "Permite încărcarea automată când scrolat la capăt",
     "avatar": "Avatar",
     "bio": "Bio",
     "current_avatar": "Avatarul curent",
@@ -52,7 +51,6 @@
     "nsfw_clickthrough": "Permite ascunderea al atașamentelor NSFW",
     "profile_background": "Fundalul de profil",
     "profile_banner": "Banner de profil",
-    "reply_link_preview": "Permite previzualizarea linkului de răspuns la planarea de mouse",
     "set_new_avatar": "Setează avatar nou",
     "set_new_profile_background": "Setează fundal nou",
     "set_new_profile_banner": "Setează banner nou la profil",

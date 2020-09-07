@@ -112,7 +112,6 @@
     "app_name": "Název aplikace",
     "attachmentRadius": "Přílohy",
     "attachments": "Přílohy",
-    "autoload": "Povolit automatické načítání při rolování dolů",
     "avatar": "Avatar",
     "avatarAltRadius": "Avatary (oznámení)",
     "avatarRadius": "Avatary",
@@ -206,7 +205,6 @@
     "profile_tab": "Profil",
     "radii_help": "Nastavit zakulacení rohů rozhraní (v pixelech)",
     "replies_in_timeline": "Odpovědi v časové ose",
-    "reply_link_preview": "Povolit náhledy odkazu pro odpověď při přejetí myši",
     "reply_visibility_all": "Zobrazit všechny odpovědi",
     "reply_visibility_following": "Zobrazit pouze odpovědi směřované na mě nebo uživatele, které sleduji",
     "reply_visibility_self": "Zobrazit pouze odpovědi směřované na mě",
@@ -258,7 +256,7 @@
         "contrast": {
           "hint": "Poměr kontrastu je {ratio}, {level} {context}",
           "level": {
-            "aa": "splňuje směrnici úrovně AA  (minimální)",
+            "aa": "splňuje směrnici úrovně AA (minimální)",
             "aaa": "splňuje směrnici úrovně AAA (doporučováno)",
             "bad": "nesplňuje žádné směrnice přístupnosti"
           },
@@ -400,7 +398,6 @@
     "reply_to": "Odpověď uživateli",
     "replies_list": "Odpovědi:"
   },
-
   "user_card": {
     "approve": "Schválit",
     "block": "Blokovat",
@@ -446,7 +443,7 @@
     "favorite": "Oblíbit",
     "user_settings": "Uživatelské nastavení"
   },
-  "upload":{
+  "upload": {
     "error": {
       "base": "Nahrávání selhalo.",
       "file_too_big": "Soubor je příliš velký [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",

@@ -203,7 +203,6 @@
     },
     "attachmentRadius": "Adjuntos",
     "attachments": "Adjuntos",
-    "autoload": "Habilitar carga automática al llegar al final de la página",
     "avatar": "Avatar",
     "avatarAltRadius": "Avatares (Notificaciones)",
     "avatarRadius": "Avatares",
@@ -307,7 +306,6 @@
     "profile_tab": "Perfil",
     "radii_help": "Establezca el redondeo de las esquinas de la interfaz (en píxeles)",
     "replies_in_timeline": "Réplicas en la línea temporal",
-    "reply_link_preview": "Activar la previsualización del enlace de responder al pasar el ratón por encima",
     "reply_visibility_all": "Mostrar todas las réplicas",
     "reply_visibility_following": "Solo mostrar réplicas para mí o usuarios a los que sigo",
     "reply_visibility_self": "Solo mostrar réplicas para mí",
@@ -344,11 +342,6 @@
       "true": "sí"
     },
     "notifications": "Notificaciones",
-    "notification_setting": "Recibir notificaciones de:",
-    "notification_setting_follows": "Usuarios que sigues",
-    "notification_setting_non_follows": "Usuarios que no sigues",
-    "notification_setting_followers": "Usuarios que te siguen",
-    "notification_setting_non_followers": "Usuarios que no te siguen",
     "notification_mutes": "Para dejar de recibir notificaciones de un usuario específico, siléncialo.",
     "notification_blocks": "El bloqueo de un usuario detiene todas las notificaciones y también las cancela.",
     "enable_web_push_notifications": "Habilitar las notificiaciones en el navegador",
@@ -631,7 +624,6 @@
     "placeholder": "Su correo electrónico o nombre de usuario",
     "check_email": "Revise su correo electrónico para obtener un enlace para restablecer su contraseña.",
     "return_home": "Volver a la página de inicio",
-    "not_found": "No pudimos encontrar ese correo electrónico o nombre de usuario.",
     "too_many_requests": "Has alcanzado el límite de intentos, vuelve a intentarlo más tarde.",
     "password_reset_disabled": "El restablecimiento de contraseñas está deshabilitado. Póngase en contacto con el administrador de su instancia."
   }

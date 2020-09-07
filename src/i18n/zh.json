@@ -85,7 +85,7 @@
     "administration": "管理员"
   },
   "notifications": {
-    "broken_favorite": "未知的状态，正在搜索中...",
+    "broken_favorite": "未知的状态，正在搜索中…",
     "favorited_you": "收藏了你的状态",
     "followed_you": "关注了你",
     "load_older": "加载更早的通知",
@@ -185,7 +185,7 @@
       "generate_new_recovery_codes": "生成新的恢复码",
       "warning_of_generate_new_codes": "当你生成新的恢复码时，你的旧恢复码就失效了。",
       "recovery_codes": "恢复码。",
-      "waiting_a_recovery_codes": "正在接收备份码……",
+      "waiting_a_recovery_codes": "正在接收备份码…",
       "recovery_codes_warning": "抄写这些号码，或者保存在安全的地方。这些号码不会再次显示。如果你无法访问你的 2FA app，也丢失了你的恢复码，你的账号就再也无法登录了。",
       "authentication_methods": "身份验证方法",
       "scan": {
@@ -199,7 +199,6 @@
     },
     "attachmentRadius": "附件",
     "attachments": "附件",
-    "autoload": "启用滚动到底部时的自动加载",
     "avatar": "头像",
     "avatarAltRadius": "头像（通知）",
     "avatarRadius": "头像",
@@ -299,7 +298,6 @@
     "profile_tab": "个人资料",
     "radii_help": "设置界面边缘的圆角 (单位：像素)",
     "replies_in_timeline": "时间线中的回复",
-    "reply_link_preview": "启用鼠标悬停时预览回复链接",
     "reply_visibility_all": "显示所有回复",
     "reply_visibility_following": "只显示发送给我的回复/发送给我关注的用户的回复",
     "reply_visibility_self": "只显示发送给我的回复",
@@ -336,11 +334,6 @@
       "true": "是"
     },
     "notifications": "通知",
-    "notification_setting": "通知来源：",
-    "notification_setting_follows": "你所关注的用户",
-    "notification_setting_non_follows": "你没有关注的用户",
-    "notification_setting_followers": "关注你的用户",
-    "notification_setting_non_followers": "没有关注你的用户",
     "notification_mutes": "要停止收到某个指定的用户的通知，请使用隐藏功能。",
     "notification_blocks": "拉黑一个用户会停掉所有他的通知，等同于取消关注。",
     "enable_web_push_notifications": "启用 web 推送通知",
@@ -564,11 +557,11 @@
     "subscribe": "订阅",
     "unsubscribe": "退订",
     "unblock": "取消拉黑",
-    "unblock_progress": "取消拉黑中...",
-    "block_progress": "拉黑中...",
+    "unblock_progress": "取消拉黑中…",
+    "block_progress": "拉黑中…",
     "unmute": "取消隐藏",
-    "unmute_progress": "取消隐藏中...",
-    "mute_progress": "隐藏中...",
+    "unmute_progress": "取消隐藏中…",
+    "mute_progress": "隐藏中…",
     "admin_menu": {
       "moderation": "权限",
       "grant_admin": "赋予管理权限",
@@ -647,7 +640,6 @@
     "placeholder": "你的电邮地址或者用户名",
     "check_email": "检查你的邮箱，会有一个链接用于重置密码。",
     "return_home": "回到首页",
-    "not_found": "我们无法找到匹配的邮箱地址或者用户名。",
     "too_many_requests": "你触发了尝试的限制，请稍后再试。",
     "password_reset_disabled": "密码重置已经被禁用。请联系你的实例管理员。"
   },
@@ -690,9 +682,9 @@
     }
   },
   "domain_mute_card": {
-    "unmute_progress": "正在取消隐藏……",
+    "unmute_progress": "正在取消隐藏…",
     "unmute": "取消隐藏",
-    "mute_progress": "隐藏中……",
+    "mute_progress": "隐藏中…",
     "mute": "隐藏"
   }
 }

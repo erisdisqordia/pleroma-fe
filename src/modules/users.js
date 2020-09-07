@@ -266,6 +266,11 @@ const users = {
   mutations,
   getters,
   actions: {
+    fetchUserIfMissing (store, id) {
+      if (!store.getters.findUser(id)) {
+        store.dispatch('fetchUser', id)
+      }
+    },
     fetchUser (store, id) {
       return store.rootState.api.backendInteractor.fetchUser({ id })
         .then((user) => {
@@ -493,6 +498,8 @@ const users = {
           store.dispatch('stopFetchingFollowRequests')
           store.commit('clearNotifications')
           store.commit('resetStatuses')
+          store.dispatch('resetChats')
+          store.dispatch('setLastTimeline', 'public-timeline')
         })
     },
     loginUser (store, accessToken) {
@@ -532,6 +539,9 @@ const users = {
 
                 // Start fetching notifications
                 store.dispatch('startFetchingNotifications')
+
+                // Start fetching chats
+                store.dispatch('startFetchingChats')
               }
 
               if (store.getters.mergedConfig.useStreamingApi) {
@@ -539,6 +549,7 @@ const users = {
                   console.error('Failed initializing MastoAPI Streaming socket', error)
                   startPolling()
                 }).then(() => {
+                  store.dispatch('fetchChats', { latest: true })
                   setTimeout(() => store.dispatch('setNotificationsSilence', false), 10000)
                 })
               } else {

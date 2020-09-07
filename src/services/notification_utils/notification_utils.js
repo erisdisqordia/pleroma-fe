@@ -1,16 +1,22 @@
 import { filter, sortBy, includes } from 'lodash'
+import { muteWordHits } from '../status_parser/status_parser.js'
+import { showDesktopNotification } from '../desktop_notification_utils/desktop_notification_utils.js'
 
 export const notificationsFromStore = store => store.state.statuses.notifications.data
 
-export const visibleTypes = store => ([
-  store.state.config.notificationVisibility.likes && 'like',
-  store.state.config.notificationVisibility.mentions && 'mention',
-  store.state.config.notificationVisibility.repeats && 'repeat',
-  store.state.config.notificationVisibility.follows && 'follow',
-  store.state.config.notificationVisibility.followRequest && 'follow_request',
-  store.state.config.notificationVisibility.moves && 'move',
-  store.state.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reaction'
-].filter(_ => _))
+export const visibleTypes = store => {
+  const rootState = store.rootState || store.state
+
+  return ([
+    rootState.config.notificationVisibility.likes && 'like',
+    rootState.config.notificationVisibility.mentions && 'mention',
+    rootState.config.notificationVisibility.repeats && 'repeat',
+    rootState.config.notificationVisibility.follows && 'follow',
+    rootState.config.notificationVisibility.followRequest && 'follow_request',
+    rootState.config.notificationVisibility.moves && 'move',
+    rootState.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reaction'
+  ].filter(_ => _))
+}
 
 const statusNotifications = ['like', 'mention', 'repeat', 'pleroma:emoji_reaction']
 
@@ -30,6 +36,22 @@ const sortById = (a, b) => {
   } else {
     return a.id > b.id ? -1 : 1
   }
+}
+
+const isMutedNotification = (store, notification) => {
+  if (!notification.status) return
+  return notification.status.muted || muteWordHits(notification.status, store.rootGetters.mergedConfig.muteWords).length > 0
+}
+
+export const maybeShowNotification = (store, notification) => {
+  const rootState = store.rootState || store.state
+
+  if (notification.seen) return
+  if (!visibleTypes(store).includes(notification.type)) return
+  if (notification.type === 'mention' && isMutedNotification(store, notification)) return
+
+  const notificationObject = prepareNotificationObject(notification, store.rootGetters.i18n)
+  showDesktopNotification(rootState, notificationObject)
 }
 
 export const filteredNotificationsFromStore = (store, types) => {

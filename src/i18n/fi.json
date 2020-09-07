@@ -28,7 +28,12 @@
     "disable": "Poista käytöstä",
     "confirm": "Hyväksy",
     "verify": "Varmenna",
-    "enable": "Ota käyttöön"
+    "enable": "Ota käyttöön",
+    "loading": "Ladataan…",
+    "error_retry": "Yritä uudelleen",
+    "retry": "Yritä uudelleen",
+    "close": "Sulje",
+    "peek": "Kurkkaa"
   },
   "login": {
     "login": "Kirjaudu sisään",
@@ -58,15 +63,16 @@
     "dms": "Yksityisviestit",
     "public_tl": "Julkinen Aikajana",
     "timeline": "Aikajana",
-    "twkn": "Koko Tunnettu Verkosto",
+    "twkn": "Tunnettu Verkosto",
     "user_search": "Käyttäjähaku",
     "who_to_follow": "Seurausehdotukset",
     "preferences": "Asetukset",
     "administration": "Ylläpito",
-    "search": "Haku"
+    "search": "Haku",
+    "bookmarks": "Kirjanmerkit"
   },
   "notifications": {
-    "broken_favorite": "Viestiä ei löydetty...",
+    "broken_favorite": "Viestiä ei löydetty…",
     "favorited_you": "tykkäsi viestistäsi",
     "followed_you": "seuraa sinua",
     "load_older": "Lataa vanhempia ilmoituksia",
@@ -101,7 +107,7 @@
   },
   "post_status": {
     "new_status": "Uusi viesti",
-    "account_not_locked_warning": "Tilisi ei ole {0}. Kuka vain voi seurata sinua nähdäksesi 'vain-seuraajille' -viestisi",
+    "account_not_locked_warning": "Tilisi ei ole {0}. Kuka vain voi seurata sinua nähdäksesi 'vain-seuraajille' -viestisi.",
     "account_not_locked_warning_link": "lukittu",
     "attachments_sensitive": "Merkkaa liitteet arkaluonteisiksi",
     "content_type": {
@@ -126,7 +132,12 @@
       "public": "Tämä viesti näkyy kaikille",
       "private": "Tämä viesti näkyy vain sinun seuraajillesi",
       "unlisted": "Tämä viesti ei näy Julkisella Aikajanalla tai Koko Tunnettu Verkosto -aikajanalla"
-    }
+    },
+    "preview": "Esikatselu",
+    "preview_empty": "Tyhjä",
+    "empty_status_error": "Tyhjää viestiä ilman tiedostoja ei voi lähettää",
+    "media_description": "Tiedoston kuvaus",
+    "media_description_error": "Tiedostojen päivitys epäonnistui, yritä uudelleen"
   },
   "registration": {
     "bio": "Kuvaus",
@@ -152,7 +163,6 @@
   "settings": {
     "attachmentRadius": "Liitteet",
     "attachments": "Liitteet",
-    "autoload": "Lataa vanhempia viestejä automaattisesti ruudun pohjalla",
     "avatar": "Profiilikuva",
     "avatarAltRadius": "Profiilikuvat (ilmoitukset)",
     "avatarRadius": "Profiilikuvat",
@@ -175,7 +185,7 @@
     "data_import_export_tab": "Tietojen tuonti / vienti",
     "default_vis": "Oletusnäkyvyysrajaus",
     "delete_account": "Poista tili",
-    "delete_account_description": "Poista tilisi ja viestisi pysyvästi.",
+    "delete_account_description": "Poista tietosi ja lukitse tili pysyvästi.",
     "delete_account_error": "Virhe poistaessa tiliäsi. Jos virhe jatkuu, ota yhteyttä palvelimesi ylläpitoon.",
     "delete_account_instructions": "Syötä salasanasi vahvistaaksesi tilin poiston.",
     "emoji_reactions_on_timeline": "Näytä emojireaktiot aikajanalla",
@@ -239,7 +249,6 @@
     "profile_tab": "Profiili",
     "radii_help": "Aseta reunojen pyöristys (pikseleinä)",
     "replies_in_timeline": "Keskustelut aikajanalla",
-    "reply_link_preview": "Keskusteluiden vastauslinkkien esikatselu",
     "reply_visibility_all": "Näytä kaikki vastaukset",
     "reply_visibility_following": "Näytä vain vastaukset minulle tai seuraamilleni käyttäjille",
     "reply_visibility_self": "Näytä vain vastaukset minulle",
@@ -273,7 +282,6 @@
     "show_moderator_badge": "Näytä Moderaattori-merkki profiilissani",
     "useStreamingApi": "Vastaanota viestiejä ja ilmoituksia reaaliajassa",
     "notification_setting_filters": "Suodattimet",
-    "notification_setting": "Vastaanota ilmoituksia seuraavista:",
     "notification_setting_privacy_option": "Piilota lähettäjä ja sisältö sovelluksen ulkopuolisista ilmoituksista",
     "enable_web_push_notifications": "Ota käyttöön sovelluksen ulkopuoliset ilmoitukset",
     "app_name": "Sovelluksen nimi",
@@ -288,7 +296,7 @@
       "authentication_methods": "Todennus",
       "warning_of_generate_new_codes": "Luodessasi uudet palautuskoodit, vanhat koodisi lakkaavat toimimasta.",
       "recovery_codes": "Palautuskoodit.",
-      "waiting_a_recovery_codes": "Odotetaan palautuskoodeja...",
+      "waiting_a_recovery_codes": "Odotetaan palautuskoodeja…",
       "recovery_codes_warning": "Kirjoita koodit ylös tai tallenna ne turvallisesti, muuten et näe niitä uudestaan. Jos et voi käyttää monivaihetodennusta ja sinulla ei ole palautuskoodeja, et voi enää kirjautua sisään tilillesi.",
       "scan": {
         "title": "Skannaa",
@@ -329,7 +337,7 @@
     "post_status_content_type": "Uuden viestin sisällön muoto",
     "user_mutes": "Käyttäjät",
     "useStreamingApiWarning": "(Kokeellinen)",
-    "type_domains_to_mute": "Syötä mykistettäviä sivustoja",
+    "type_domains_to_mute": "Etsi mykistettäviä sivustoja",
     "upload_a_photo": "Lataa kuva",
     "fun": "Hupi",
     "greentext": "Meeminuolet",
@@ -479,10 +487,6 @@
     "pad_emoji": "Välistä emojit välilyönneillä lisätessäsi niitä valitsimesta",
     "mutes_tab": "Mykistykset",
     "new_email": "Uusi sähköpostiosoite",
-    "notification_setting_follows": "Käyttäjät joita seuraat",
-    "notification_setting_non_follows": "Käyttäjät joita et seuraa",
-    "notification_setting_followers": "Käyttäjät jotka seuraavat sinua",
-    "notification_setting_non_followers": "Käyttäjät jotka eivät seuraa sinua",
     "notification_setting_privacy": "Yksityisyys",
     "notification_mutes": "Jos et halua ilmoituksia joltain käyttäjältä, käytä mykistystä.",
     "notification_blocks": "Estäminen pysäyttää kaikki ilmoitukset käyttäjältä ja poistaa seurauksen.",
@@ -490,7 +494,21 @@
       "title": "Versio",
       "backend_version": "Palvelimen versio",
       "frontend_version": "Käyttöliittymän versio"
-    }
+    },
+    "reset_profile_background": "Nollaa taustakuva",
+    "reset_background_confirm": "Haluatko todella nollata taustakuvan?",
+    "mutes_and_blocks": "Mykistykset ja Estot",
+    "bot": "Tämä on bottitili",
+    "profile_fields": {
+      "label": "Profiilin metatiedot",
+      "add_field": "Lisää kenttä",
+      "name": "Nimi",
+      "value": "Sisältö"
+    },
+    "reset_avatar": "Nollaa profiilikuva",
+    "reset_profile_banner": "Nollaa profiilin tausta",
+    "reset_avatar_confirm": "Haluatko todella nollata profiilikuvan?",
+    "reset_banner_confirm": "Haluatko todella nollata profiilin taustan?"
   },
   "time": {
     "day": "{0} päivä",
@@ -536,7 +554,8 @@
     "show_new": "Näytä uudet",
     "up_to_date": "Ajantasalla",
     "no_more_statuses": "Ei enempää viestejä",
-    "no_statuses": "Ei viestejä"
+    "no_statuses": "Ei viestejä",
+    "reload": "Päivitä"
   },
   "status": {
     "favorites": "Tykkäykset",
@@ -551,7 +570,15 @@
     "mute_conversation": "Mykistä keskustelu",
     "unmute_conversation": "Poista mykistys",
     "status_unavailable": "Viesti ei saatavissa",
-    "copy_link": "Kopioi linkki"
+    "copy_link": "Kopioi linkki",
+    "bookmark": "Lisää kirjanmerkkeihin",
+    "unbookmark": "Poista kirjanmerkeistä",
+    "thread_muted": "Keskustelu mykistetty",
+    "thread_muted_and_words": ", sisältää sanat:",
+    "show_full_subject": "Näytä koko otsikko",
+    "hide_full_subject": "Piilota koko otsikko",
+    "show_content": "Näytä sisältö",
+    "hide_content": "Piilota sisältö"
   },
   "user_card": {
     "approve": "Hyväksy",
@@ -561,7 +588,7 @@
     "follow": "Seuraa",
     "follow_sent": "Pyyntö lähetetty!",
     "follow_progress": "Pyydetään…",
-    "follow_again": "Lähetä pyyntö uudestaan",
+    "follow_again": "Lähetä pyyntö uudestaan?",
     "follow_unfollow": "Älä seuraa",
     "followees": "Seuraa",
     "followers": "Seuraajat",
@@ -575,7 +602,7 @@
     "statuses": "Viestit",
     "hidden": "Piilotettu",
     "media": "Media",
-    "block_progress": "Estetään...",
+    "block_progress": "Estetään…",
     "admin_menu": {
       "grant_admin": "Anna Ylläpitöoikeudet",
       "force_nsfw": "Merkitse kaikki viestit NSFW:nä",
@@ -601,10 +628,10 @@
     "subscribe": "Tilaa",
     "unsubscribe": "Poista tilaus",
     "unblock": "Poista esto",
-    "unblock_progress": "Postetaan estoa...",
+    "unblock_progress": "Poistetaan estoa…",
     "unmute": "Poista mykistys",
-    "unmute_progress": "Poistetaan mykistystä...",
-    "mute_progress": "Mykistetään...",
+    "unmute_progress": "Poistetaan mykistystä…",
+    "mute_progress": "Mykistetään…",
     "hide_repeats": "Piilota toistot",
     "show_repeats": "Näytä toistot"
   },
@@ -625,7 +652,8 @@
     "user_settings": "Käyttäjäasetukset",
     "add_reaction": "Lisää Reaktio",
     "accept_follow_request": "Hyväksy seurauspyyntö",
-    "reject_follow_request": "Hylkää seurauspyyntö"
+    "reject_follow_request": "Hylkää seurauspyyntö",
+    "bookmark": "Kirjanmerkki"
   },
   "upload": {
     "error": {
@@ -674,8 +702,8 @@
   "domain_mute_card": {
     "mute": "Mykistä",
     "unmute": "Poista mykistys",
-    "mute_progress": "Mykistetään...",
-    "unmute_progress": "Poistetaan mykistyst..."
+    "mute_progress": "Mykistetään…",
+    "unmute_progress": "Poistetaan mykistystä…"
   },
   "exporter": {
     "export": "Vie",
@@ -724,7 +752,6 @@
     "password_reset": "Salasanan nollaus",
     "placeholder": "Sähköpostiosoite tai käyttäjänimi",
     "return_home": "Palaa etusivulle",
-    "not_found": "Sähköpostiosoitetta tai käyttäjänimeä ei löytynyt.",
     "too_many_requests": "Olet käyttänyt kaikki yritykset, yritä uudelleen myöhemmin.",
     "password_reset_required": "Sinun täytyy vaihtaa salasana kirjautuaksesi."
   },
@@ -743,5 +770,8 @@
     "people_talking": "{0} käyttäjää puhuvat",
     "person_talking": "{0} käyttäjä puhuu",
     "no_results": "Ei tuloksia"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma ei voinut käyttää selaimen muistia. Kirjautumisesi ja paikalliset asetukset eivät tallennu ja saatat kohdata odottamattomia ongelmia. Yritä sallia evästeet."
   }
 }

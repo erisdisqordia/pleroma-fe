@@ -19,6 +19,7 @@ import oauthTokensModule from './modules/oauth_tokens.js'
 import reportsModule from './modules/reports.js'
 import pollsModule from './modules/polls.js'
 import postStatusModule from './modules/postStatus.js'
+import chatsModule from './modules/chats.js'
 
 import VueI18n from 'vue-i18n'
 
@@ -62,7 +63,15 @@ const persistedStateOptions = {
 };
 
 (async () => {
-  const persistedState = await createPersistedState(persistedStateOptions)
+  let storageError = false
+  const plugins = [pushNotifications]
+  try {
+    const persistedState = await createPersistedState(persistedStateOptions)
+    plugins.push(persistedState)
+  } catch (e) {
+    console.error(e)
+    storageError = true
+  }
   const store = new Vuex.Store({
     modules: {
       i18n: {
@@ -83,13 +92,16 @@ const persistedStateOptions = {
       oauthTokens: oauthTokensModule,
       reports: reportsModule,
       polls: pollsModule,
-      postStatus: postStatusModule
+      postStatus: postStatusModule,
+      chats: chatsModule
     },
-    plugins: [persistedState, pushNotifications],
+    plugins,
     strict: false // Socket modifies itself, let's ignore this for now.
     // strict: process.env.NODE_ENV !== 'production'
   })
-
+  if (storageError) {
+    store.dispatch('pushGlobalNotice', { messageKey: 'errors.storage_unavailable', level: 'error' })
+  }
   afterStoreSetup({ store, i18n })
 })()
 

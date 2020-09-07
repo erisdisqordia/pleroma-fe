@@ -1,44 +1,11 @@
 <template>
   <div class="emoji-reactions">
-    <Popover
+    <UserListPopover
       v-for="(reaction) in emojiReactions"
       :key="reaction.name"
-      trigger="hover"
-      placement="top"
-      :offset="{ y: 5 }"
+      :users="accountsForEmoji[reaction.name]"
     >
-      <div
-        slot="content"
-        class="reacted-users"
-      >
-        <div v-if="accountsForEmoji[reaction.name].length">
-          <div
-            v-for="(account) in accountsForEmoji[reaction.name]"
-            :key="account.id"
-            class="reacted-user"
-          >
-            <UserAvatar
-              :user="account"
-              class="avatar-small"
-              :compact="true"
-            />
-            <div class="reacted-user-names">
-              <!-- eslint-disable vue/no-v-html -->
-              <span
-                class="reacted-user-name"
-                v-html="account.name_html"
-              />
-              <!-- eslint-enable vue/no-v-html -->
-              <span class="reacted-user-screen-name">{{ account.screen_name }}</span>
-            </div>
-          </div>
-        </div>
-        <div v-else>
-          <i class="icon-spin4 animate-spin" />
-        </div>
-      </div>
       <button
-        slot="trigger"
         class="emoji-reaction btn btn-default"
         :class="{ 'picked-reaction': reactedWith(reaction.name), 'not-clickable': !loggedIn }"
         @click="emojiOnClick(reaction.name, $event)"
@@ -47,7 +14,7 @@
         <span class="reaction-emoji">{{ reaction.name }}</span>
         <span>{{ reaction.count }}</span>
       </button>
-    </Popover>
+    </UserListPopover>
     <a
       v-if="tooManyReactions"
       class="emoji-reaction-expand faint"
@@ -67,32 +34,6 @@
   display: flex;
   margin-top: 0.25em;
   flex-wrap: wrap;
-}
-
-.reacted-users {
-  padding: 0.5em;
-}
-
-.reacted-user {
-  padding: 0.25em;
-  display: flex;
-  flex-direction: row;
-
-  .reacted-user-names {
-    display: flex;
-    flex-direction: column;
-    margin-left: 0.5em;
-    min-width: 5em;
-
-    img {
-      width: 1em;
-      height: 1em;
-    }
-  }
-
-  .reacted-user-screen-name {
-    font-size: 9px;
-  }
 }
 
 .emoji-reaction {

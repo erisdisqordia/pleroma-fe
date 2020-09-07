@@ -23,7 +23,9 @@ export const LAYERS = {
   inputTopBar: 'topBar',
   alert: 'bg',
   alertPanel: 'panel',
-  poll: 'bg'
+  poll: 'bg',
+  chatBg: 'underlay',
+  chatMessage: 'chatBg'
 }
 
 /* By default opacity slots have 1 as default opacity
@@ -34,7 +36,8 @@ export const DEFAULT_OPACITY = {
   alert: 0.5,
   input: 0.5,
   faint: 0.5,
-  underlay: 0.15
+  underlay: 0.15,
+  alertPopup: 0.95
 }
 
 /**  SUBJECT TO CHANGE IN THE FUTURE, this is all beta
@@ -627,11 +630,97 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
 
+  alertPopupError: {
+    depends: ['alertError'],
+    opacity: 'alertPopup'
+  },
+  alertPopupErrorText: {
+    depends: ['alertErrorText'],
+    layer: 'popover',
+    variant: 'alertPopupError',
+    textColor: true
+  },
+
+  alertPopupWarning: {
+    depends: ['alertWarning'],
+    opacity: 'alertPopup'
+  },
+  alertPopupWarningText: {
+    depends: ['alertWarningText'],
+    layer: 'popover',
+    variant: 'alertPopupWarning',
+    textColor: true
+  },
+
+  alertPopupNeutral: {
+    depends: ['alertNeutral'],
+    opacity: 'alertPopup'
+  },
+  alertPopupNeutralText: {
+    depends: ['alertNeutralText'],
+    layer: 'popover',
+    variant: 'alertPopupNeutral',
+    textColor: true
+  },
+
   badgeNotification: '--cRed',
   badgeNotificationText: {
     depends: ['text', 'badgeNotification'],
     layer: 'badge',
     variant: 'badgeNotification',
     textColor: 'bw'
+  },
+
+  chatBg: {
+    depends: ['bg']
+  },
+
+  chatMessageIncomingBg: {
+    depends: ['chatBg']
+  },
+
+  chatMessageIncomingText: {
+    depends: ['text'],
+    layer: 'chatMessage',
+    variant: 'chatMessageIncomingBg',
+    textColor: true
+  },
+
+  chatMessageIncomingLink: {
+    depends: ['link'],
+    layer: 'chatMessage',
+    variant: 'chatMessageIncomingBg',
+    textColor: 'preserve'
+  },
+
+  chatMessageIncomingBorder: {
+    depends: ['border'],
+    opacity: 'border',
+    color: (mod, border) => brightness(2 * mod, border).rgb
+  },
+
+  chatMessageOutgoingBg: {
+    depends: ['chatMessageIncomingBg'],
+    color: (mod, chatMessage) => brightness(5 * mod, chatMessage).rgb
+  },
+
+  chatMessageOutgoingText: {
+    depends: ['text'],
+    layer: 'chatMessage',
+    variant: 'chatMessageOutgoingBg',
+    textColor: true
+  },
+
+  chatMessageOutgoingLink: {
+    depends: ['link'],
+    layer: 'chatMessage',
+    variant: 'chatMessageOutgoingBg',
+    textColor: 'preserve'
+  },
+
+  chatMessageOutgoingBorder: {
+    depends: ['chatMessageOutgoingBg'],
+    opacity: 'border',
+    color: (mod, border) => brightness(2 * mod, border).rgb
   }
 }

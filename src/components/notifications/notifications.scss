@@ -39,7 +39,7 @@
   word-wrap: break-word;
   word-break: break-word;
 
-  &:hover .animated.avatar {
+  &:hover .animated.Avatar {
     canvas {
       display: none;
     }
@@ -60,16 +60,8 @@
       height: 32px;
     }
 
-    .status-body {
-      color: $fallback--faint;
-      color: var(--faint, $fallback--faint);
-      a {
-        color: var(--faintLink);
-      }
-      .status-content a {
-        color: var(--postFaintLink);
-      }
-    }
+    --link: var(--faintLink);
+    --text: var(--faint);
   }
 
   .follow-request-accept {
@@ -106,7 +98,8 @@
     }
   }
 
-  .status-el {
+  /* TODO cleanup this */
+  .Status {
     flex: 1;
   }
 
@@ -118,6 +111,11 @@
     flex: 1;
     padding-left: 0.8em;
     min-width: 0;
+
+    .timeago {
+      min-width: 3em;
+      text-align: right;
+    }
   }
 
   .emoji-reaction-emoji {

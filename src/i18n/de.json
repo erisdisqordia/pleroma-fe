@@ -58,7 +58,7 @@
     "dms": "Direktnachrichten",
     "public_tl": "Öffentliche Zeitleiste",
     "timeline": "Zeitleiste",
-    "twkn": "Das gesamte bekannte Netzwerk",
+    "twkn": "Bekannte Netzwerk",
     "user_search": "Benutzersuche",
     "search": "Suche",
     "preferences": "Voreinstellungen",
@@ -66,7 +66,7 @@
     "who_to_follow": "Wem folgen"
   },
   "notifications": {
-    "broken_favorite": "Unbekannte Nachricht, suche danach...",
+    "broken_favorite": "Unbekannte Nachricht, suche danach…",
     "favorited_you": "favorisierte deine Nachricht",
     "followed_you": "folgt dir",
     "load_older": "Ältere Benachrichtigungen laden",
@@ -115,7 +115,7 @@
     "registration": "Registrierung",
     "token": "Einladungsschlüssel",
     "captcha": "CAPTCHA",
-    "new_captcha": "Zum Erstellen eines neuen Captcha auf das Bild klicken.",
+    "new_captcha": "Zum Erstellen eines neuen Captcha auf das Bild klicken",
     "validations": {
       "username_required": "darf nicht leer sein",
       "fullname_required": "darf nicht leer sein",
@@ -131,7 +131,6 @@
   "settings": {
     "attachmentRadius": "Anhänge",
     "attachments": "Anhänge",
-    "autoload": "Aktiviere automatisches Laden von älteren Beiträgen beim scrollen",
     "avatar": "Avatar",
     "avatarAltRadius": "Avatare (Benachrichtigungen)",
     "avatarRadius": "Avatare",
@@ -162,7 +161,7 @@
     "pad_emoji": "Emojis mit Leerzeichen umrahmen",
     "export_theme": "Farbschema speichern",
     "filtering": "Filtern",
-    "filtering_explanation": "Alle Beiträge, welche diese Wörter enthalten, werden ausgeblendet. Ein Wort pro Zeile.",
+    "filtering_explanation": "Alle Beiträge, welche diese Wörter enthalten, werden ausgeblendet. Ein Wort pro Zeile",
     "follow_export": "Follower exportieren",
     "follow_export_button": "Exportiere deine Follows in eine csv-Datei",
     "follow_export_processing": "In Bearbeitung. Die Liste steht gleich zum herunterladen bereit.",
@@ -225,7 +224,6 @@
     "profile_tab": "Profil",
     "radii_help": "Kantenrundung (in Pixel) der Oberfläche anpassen",
     "replies_in_timeline": "Antworten in der Zeitleiste",
-    "reply_link_preview": "Antwortlink-Vorschau beim Überfahren mit der Maus aktivieren",
     "reply_visibility_all": "Alle Antworten zeigen",
     "reply_visibility_following": "Zeige nur Antworten an mich oder an Benutzer, denen ich folge",
     "reply_visibility_self": "Nur Antworten an mich anzeigen",
@@ -249,7 +247,7 @@
     "streaming": "Aktiviere automatisches Laden (Streaming) von neuen Beiträgen",
     "text": "Text",
     "theme": "Farbschema",
-    "theme_help": "Benutze HTML-Farbcodes (#rrggbb) um dein Farbschema anzupassen",
+    "theme_help": "Benutze HTML-Farbcodes (#rrggbb) um dein Farbschema anzupassen.",
     "theme_help_v2_1": "Du kannst auch die Farben und die Deckkraft bestimmter Komponenten überschreiben, indem du das Kontrollkästchen umschaltest. Verwende die Schaltfläche \"Alle löschen\", um alle Überschreibungen zurückzusetzen.",
     "theme_help_v2_2": "Unter einigen Einträgen befinden sich Symbole für Hintergrund-/Textkontrastindikatoren, für detaillierte Informationen fahre mit der Maus darüber. Bitte beachte, dass bei der Verwendung von Transparenz Kontrastindikatoren den schlechtest möglichen Fall darstellen.",
     "tooltipRadius": "Tooltips/Warnungen",
@@ -323,7 +321,7 @@
           "always_drop_shadow": "Achtung, dieser Schatten verwendet immer {0}, wenn der Browser dies unterstützt.",
           "drop_shadow_syntax": "{0} unterstützt Parameter {1} und Schlüsselwort {2} nicht.",
           "avatar_inset": "Bitte beachte, dass die Kombination von eingesetzten und nicht eingesetzten Schatten auf Avataren zu unerwarteten Ergebnissen bei transparenten Avataren führen kann.",
-          "spread_zero": "Schatten mit einer Streuung > 0 erscheinen so, als ob sie auf Null gesetzt wären.",
+          "spread_zero": "Schatten mit einer Streuung > 0 erscheinen so, als ob sie auf Null gesetzt wären",
           "inset_classic": "Eingesetzte Schatten werden mit {0} verwendet"
         },
         "components": {
@@ -377,7 +375,7 @@
       "warning_of_generate_new_codes": "Wenn du neue Wiederherstellungs-Codes generierst, werden die alten Codes nicht mehr funktionieren.",
       "generate_new_recovery_codes": "Generiere neue Wiederherstellungs-Codes",
       "title": "Zwei-Faktor Authentifizierung",
-      "waiting_a_recovery_codes": "Erhalte Wiederherstellungscodes...",
+      "waiting_a_recovery_codes": "Erhalte Wiederherstellungscodes…",
       "authentication_methods": "Authentifizierungsmethoden",
       "scan": {
         "title": "Scan",
@@ -401,8 +399,6 @@
     "changed_email": "Email Adresse erfolgreich geändert!",
     "change_email_error": "Es trat ein Problem auf beim Versuch, deine Email Adresse zu ändern.",
     "change_email": "Ändere Email",
-    "notification_setting_non_followers": "Nutzer, die dir nicht folgen",
-    "notification_setting_followers": "Nutzer, die dir folgen",
     "import_blocks_from_a_csv_file": "Importiere Blocks von einer CSV Datei",
     "accent": "Akzent"
   },
@@ -411,7 +407,7 @@
     "conversation": "Unterhaltung",
     "error_fetching": "Fehler beim Laden",
     "load_older": "Lade ältere Beiträge",
-    "no_retweet_hint": "Der Beitrag ist als nur-für-Follower oder als Direktnachricht markiert und kann nicht wiederholt werden.",
+    "no_retweet_hint": "Der Beitrag ist als nur-für-Follower oder als Direktnachricht markiert und kann nicht wiederholt werden",
     "repeated": "wiederholte",
     "show_new": "Zeige Neuere",
     "up_to_date": "Aktuell"
@@ -482,10 +478,9 @@
     "placeholder": "Dein Benutzername oder die zugehörige E-Mail-Adresse",
     "check_email": "Im E-Mail-Posteingang des angebenen Kontos müsste sich jetzt (oder zumindest in Kürze) die E-Mail mit dem Link zum Passwortzurücksetzen befinden.",
     "return_home": "Zurück zur Heimseite",
-    "not_found": "Benutzername/E-Mail-Adresse nicht gefunden. Vertippt?",
     "too_many_requests": "Kurze Pause. Zu viele Versuche. Bitte, später nochmal probieren.",
     "password_reset_disabled": "Passwortzurücksetzen deaktiviert. Bitte Administrator kontaktieren.",
-    "password_reset_required": "Passwortzurücksetzen erforderlich",
+    "password_reset_required": "Passwortzurücksetzen erforderlich.",
     "password_reset_required_but_mailer_is_disabled": "Passwortzurücksetzen wäre erforderlich, ist aber deaktiviert. Bitte Administrator kontaktieren."
   },
   "about": {
@@ -520,9 +515,9 @@
   },
   "domain_mute_card": {
     "mute": "Stummschalten",
-    "mute_progress": "Wird stummgeschaltet..",
+    "mute_progress": "Wird stummgeschaltet…",
     "unmute": "Stummschaltung aufheben",
-    "unmute_progress": "Stummschaltung wird aufgehoben.."
+    "unmute_progress": "Stummschaltung wird aufgehoben…"
   },
   "exporter": {
     "export": "Exportieren",

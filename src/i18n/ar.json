@@ -73,7 +73,6 @@
   "settings": {
     "attachmentRadius": "المُرفَقات",
     "attachments": "المُرفَقات",
-    "autoload": "",
     "avatar": "الصورة الرمزية",
     "avatarAltRadius": "الصور الرمزية (الإشعارات)",
     "avatarRadius": "الصور الرمزية",
@@ -147,7 +146,6 @@
     "profile_tab": "الملف الشخصي",
     "radii_help": "",
     "replies_in_timeline": "الردود على الخيط الزمني",
-    "reply_link_preview": "",
     "reply_visibility_all": "عرض كافة الردود",
     "reply_visibility_following": "",
     "reply_visibility_self": "",

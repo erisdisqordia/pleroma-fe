@@ -15,6 +15,8 @@ const defaultState = {
 
   // Stuff from static/config.json
   alwaysShowSubjectInput: true,
+  defaultAvatar: '/images/avi.png',
+  defaultBanner: '/images/banner.png',
   background: '/static/aurora_borealis.jpg',
   collapseMessageWithSubject: false,
   disableChat: false,
@@ -53,6 +55,7 @@ const defaultState = {
 
   // Feature-set, apparently, not everything here is reported...
   chatAvailable: false,
+  pleromaChatMessagesAvailable: false,
   gopherAvailable: false,
   mediaProxyAvailable: false,
   suggestionsEnabled: false,

@@ -2,38 +2,18 @@
   <div :label="$t('settings.notifications')">
     <div class="setting-item">
       <h2>{{ $t('settings.notification_setting_filters') }}</h2>
-      <div class="select-multiple">
-        <span class="label">{{ $t('settings.notification_setting') }}</span>
-        <ul class="option-list">
-          <li>
-            <Checkbox v-model="notificationSettings.follows">
-              {{ $t('settings.notification_setting_follows') }}
-            </Checkbox>
-          </li>
-          <li>
-            <Checkbox v-model="notificationSettings.followers">
-              {{ $t('settings.notification_setting_followers') }}
-            </Checkbox>
-          </li>
-          <li>
-            <Checkbox v-model="notificationSettings.non_follows">
-              {{ $t('settings.notification_setting_non_follows') }}
-            </Checkbox>
-          </li>
-          <li>
-            <Checkbox v-model="notificationSettings.non_followers">
-              {{ $t('settings.notification_setting_non_followers') }}
-            </Checkbox>
-          </li>
-        </ul>
-      </div>
+      <p>
+        <Checkbox v-model="notificationSettings.block_from_strangers">
+          {{ $t('settings.notification_setting_block_from_strangers') }}
+        </Checkbox>
+      </p>
     </div>
 
     <div class="setting-item">
       <h2>{{ $t('settings.notification_setting_privacy') }}</h2>
       <p>
-        <Checkbox v-model="notificationSettings.privacy_option">
-          {{ $t('settings.notification_setting_privacy_option') }}
+        <Checkbox v-model="notificationSettings.hide_notification_contents">
+          {{ $t('settings.notification_setting_hide_notification_contents') }}
         </Checkbox>
       </p>
     </div>

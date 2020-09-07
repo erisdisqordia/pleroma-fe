@@ -79,6 +79,20 @@ const EmojiInput = {
       required: false,
       type: Boolean,
       default: false
+    },
+    placement: {
+      /**
+       * Forces the panel to take a specific position relative to the input element.
+       * The 'auto' placement chooses either bottom or top depending on which has the available space (when both have available space, bottom is preferred).
+       */
+      required: false,
+      type: String, // 'auto', 'top', 'bottom'
+      default: 'auto'
+    },
+    newlineOnCtrlEnter: {
+      required: false,
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -162,6 +176,11 @@ const EmojiInput = {
       input.elm.removeEventListener('input', this.onInput)
     }
   },
+  watch: {
+    showSuggestions: function (newValue) {
+      this.$emit('shown', newValue)
+    }
+  },
   methods: {
     triggerShowPicker () {
       this.showPicker = true
@@ -190,7 +209,7 @@ const EmojiInput = {
       this.$emit('input', newValue)
       this.caret = 0
     },
-    insert ({ insertion, keepOpen }) {
+    insert ({ insertion, keepOpen, surroundingSpace = true }) {
       const before = this.value.substring(0, this.caret) || ''
       const after = this.value.substring(this.caret) || ''
 
@@ -209,8 +228,8 @@ const EmojiInput = {
        * them, masto seem to be rendering :emoji::emoji: correctly now so why not
        */
       const isSpaceRegex = /\s/
-      const spaceBefore = !isSpaceRegex.exec(before.slice(-1)) && before.length && this.padEmoji > 0 ? ' ' : ''
-      const spaceAfter = !isSpaceRegex.exec(after[0]) && this.padEmoji ? ' ' : ''
+      const spaceBefore = (surroundingSpace && !isSpaceRegex.exec(before.slice(-1)) && before.length && this.padEmoji > 0) ? ' ' : ''
+      const spaceAfter = (surroundingSpace && !isSpaceRegex.exec(after[0]) && this.padEmoji) ? ' ' : ''
 
       const newValue = [
         before,
@@ -367,6 +386,18 @@ const EmojiInput = {
     },
     onKeyDown (e) {
       const { ctrlKey, shiftKey, key } = e
+      if (this.newlineOnCtrlEnter && ctrlKey && key === 'Enter') {
+        this.insert({ insertion: '\n', surroundingSpace: false })
+        // Ensure only one new line is added on macos
+        e.stopPropagation()
+        e.preventDefault()
+
+        // Scroll the input element to the position of the cursor
+        this.$nextTick(() => {
+          this.input.elm.blur()
+          this.input.elm.focus()
+        })
+      }
       // Disable suggestions hotkeys if suggestions are hidden
       if (!this.temporarilyHideSuggestions) {
         if (key === 'Tab') {
@@ -425,15 +456,29 @@ const EmojiInput = {
       this.caret = selectionStart
     },
     resize () {
-      const { panel, picker } = this.$refs
+      const panel = this.$refs.panel
       if (!panel) return
+      const picker = this.$refs.picker.$el
+      const panelBody = this.$refs['panel-body']
       const { offsetHeight, offsetTop } = this.input.elm
       const offsetBottom = offsetTop + offsetHeight
 
-      panel.style.top = offsetBottom + 'px'
-      if (!picker) return
-      picker.$el.style.top = offsetBottom + 'px'
-      picker.$el.style.bottom = 'auto'
+      this.setPlacement(panelBody, panel, offsetBottom)
+      this.setPlacement(picker, picker, offsetBottom)
+    },
+    setPlacement (container, target, offsetBottom) {
+      if (!container || !target) return
+
+      target.style.top = offsetBottom + 'px'
+      target.style.bottom = 'auto'
+
+      if (this.placement === 'top' || (this.placement === 'auto' && this.overflowsBottom(container))) {
+        target.style.top = 'auto'
+        target.style.bottom = this.input.elm.offsetHeight + 'px'
+      }
+    },
+    overflowsBottom (el) {
+      return el.getBoundingClientRect().bottom > window.innerHeight
     }
   }
 }

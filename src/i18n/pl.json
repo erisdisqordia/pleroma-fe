@@ -34,9 +34,9 @@
   },
   "domain_mute_card": {
     "mute": "Wycisz",
-    "mute_progress": "Wyciszam...",
+    "mute_progress": "Wyciszam…",
     "unmute": "Odcisz",
-    "unmute_progress": "Odciszam..."
+    "unmute_progress": "Odciszam…"
   },
   "exporter": {
     "export": "Eksportuj",
@@ -68,7 +68,10 @@
     "disable": "Wyłącz",
     "enable": "Włącz",
     "confirm": "Potwierdź",
-    "verify": "Zweryfikuj"
+    "verify": "Zweryfikuj",
+    "close": "Zamknij",
+    "loading": "Ładowanie…",
+    "retry": "Spróbuj ponownie"
   },
   "image_cropper": {
     "crop_picture": "Przytnij obrazek",
@@ -118,7 +121,8 @@
     "user_search": "Wyszukiwanie użytkowników",
     "search": "Wyszukiwanie",
     "who_to_follow": "Sugestie obserwacji",
-    "preferences": "Preferencje"
+    "preferences": "Preferencje",
+    "bookmarks": "Zakładki"
   },
   "notifications": {
     "broken_favorite": "Nieznany status, szukam go…",
@@ -190,7 +194,10 @@
       "private": "Tylko dla obserwujących – Umieść dla osób, które cię obserwują",
       "public": "Publiczny – Umieść na publicznych osiach czasu",
       "unlisted": "Niewidoczny – Nie umieszczaj na publicznych osiach czasu"
-    }
+    },
+    "preview_empty": "Pusty",
+    "preview": "Podgląd",
+    "empty_status_error": "Nie można wysłać pustego wpisu bez plików"
   },
   "registration": {
     "bio": "Bio",
@@ -234,7 +241,7 @@
       "generate_new_recovery_codes": "Wygeneruj nowe kody zapasowe",
       "warning_of_generate_new_codes": "Po tym gdy wygenerujesz nowe kody zapasowe, stare przestaną działać.",
       "recovery_codes": "Kody zapasowe.",
-      "waiting_a_recovery_codes": "Otrzymuję kody zapasowe...",
+      "waiting_a_recovery_codes": "Otrzymuję kody zapasowe…",
       "recovery_codes_warning": "Spisz kody na kartce papieru, albo zapisz je w bezpiecznym miejscu - inaczej nie zobaczysz ich już nigdy. Jeśli stracisz dostęp do twojej aplikacji 2FA i kodów zapasowych, nie będziesz miał(-a) dostępu do swojego konta.",
       "authentication_methods": "Metody weryfikacji",
       "scan": {
@@ -249,7 +256,6 @@
     "allow_following_move": "Zezwalaj na automatyczną obserwację gdy obserwowane konto migruje",
     "attachmentRadius": "Załączniki",
     "attachments": "Załączniki",
-    "autoload": "Włącz automatyczne ładowanie po przewinięciu do końca strony",
     "avatar": "Awatar",
     "avatarAltRadius": "Awatary (powiadomienia)",
     "avatarRadius": "Awatary",
@@ -340,8 +346,8 @@
     "notification_visibility_moves": "Użytkownik migruje",
     "notification_visibility_emoji_reactions": "Reakcje",
     "no_rich_text_description": "Usuwaj formatowanie ze wszystkich postów",
-    "no_blocks": "Bez blokad",
-    "no_mutes": "Bez wyciszeń",
+    "no_blocks": "Brak blokad",
+    "no_mutes": "Brak wyciszeń",
     "hide_follows_description": "Nie pokazuj kogo obserwuję",
     "hide_followers_description": "Nie pokazuj kto mnie obserwuje",
     "hide_follows_count_description": "Nie pokazuj licznika obserwowanych",
@@ -362,7 +368,6 @@
     "profile_tab": "Profil",
     "radii_help": "Ustaw zaokrąglenie krawędzi interfejsu (w pikselach)",
     "replies_in_timeline": "Odpowiedzi na osi czasu",
-    "reply_link_preview": "Włącz dymek z podglądem postu po najechaniu na znak odpowiedzi",
     "reply_visibility_all": "Pokazuj wszystkie odpowiedzi",
     "reply_visibility_following": "Pokazuj tylko odpowiedzi skierowane do mnie i osób które obserwuję",
     "reply_visibility_self": "Pokazuj tylko odpowiedzi skierowane do mnie",
@@ -405,11 +410,6 @@
     "fun": "Zabawa",
     "greentext": "Memiczne strzałki",
     "notifications": "Powiadomienia",
-    "notification_setting": "Otrzymuj powiadomienia od:",
-    "notification_setting_follows": "Ludzi których obserwujesz",
-    "notification_setting_non_follows": "Ludzi których nie obserwujesz",
-    "notification_setting_followers": "Ludzi którzy obserwują ciebie",
-    "notification_setting_non_followers": "Ludzi którzy nie obserwują ciebie",
     "notification_mutes": "By przestać otrzymywać powiadomienia od jednego użytkownika, wycisz go.",
     "notification_blocks": "Blokowanie uzytkownika zatrzymuje wszystkie powiadomienia i odsubskrybowuje go.",
     "enable_web_push_notifications": "Włącz powiadomienia push",
@@ -489,7 +489,11 @@
         "selectedMenu": "Wybrany element menu",
         "disabled": "Wyłączone",
         "toggled": "Przełączone",
-        "tabs": "Karty"
+        "tabs": "Karty",
+        "chat": {
+          "outgoing": "Wiadomości wychodzące",
+          "incoming": "Wiadomości przychodzące"
+        }
       },
       "radii": {
         "_tab_label": "Zaokrąglenie"
@@ -560,7 +564,16 @@
     },
     "notification_setting_privacy": "Prywatność",
     "notification_setting_filters": "Filtry",
-    "notification_setting_privacy_option": "Ukryj nadawcę i zawartość powiadomień push"
+    "notification_setting_privacy_option": "Ukryj nadawcę i zawartość powiadomień push",
+    "reset_avatar": "Zresetuj awatar",
+    "profile_fields": {
+      "value": "Zawartość",
+      "label": "Metadane profilu",
+      "name": "Nazwa",
+      "add_field": "Dodaj pole"
+    },
+    "bot": "To konto jest prowadzone przez bota",
+    "notification_setting_hide_notification_contents": "Ukryj nadawcę i zawartość powiadomień push"
   },
   "time": {
     "day": "{0} dzień",
@@ -606,7 +619,8 @@
     "show_new": "Pokaż nowe",
     "up_to_date": "Na bieżąco",
     "no_more_statuses": "Brak kolejnych statusów",
-    "no_statuses": "Brak statusów"
+    "no_statuses": "Brak statusów",
+    "reload": "Odśwież"
   },
   "status": {
     "favorites": "Ulubione",
@@ -621,7 +635,11 @@
     "mute_conversation": "Wycisz konwersację",
     "unmute_conversation": "Odcisz konwersację",
     "status_unavailable": "Status niedostępny",
-    "copy_link": "Kopiuj link do statusu"
+    "copy_link": "Kopiuj link do statusu",
+    "unbookmark": "Usuń z zakładek",
+    "bookmark": "Dodaj do zakładek",
+    "hide_content": "Ukryj zawartość",
+    "show_content": "Pokaż zawartość"
   },
   "user_card": {
     "approve": "Przyjmij",
@@ -676,7 +694,8 @@
       "quarantine": "Zakaż federowania postów od tego użytkownika",
       "delete_user": "Usuń użytkownika",
       "delete_user_confirmation": "Czy jesteś absolutnie pewny(-a)? Ta operacja nie może być cofnięta."
-    }
+    },
+    "message": "Napisz"
   },
   "user_profile": {
     "timeline_title": "Oś czasu użytkownika",
@@ -734,10 +753,29 @@
     "placeholder": "Twój email lub nazwa użytkownika",
     "check_email": "Sprawdź pocztę, aby uzyskać link do zresetowania hasła.",
     "return_home": "Wróć do strony głównej",
-    "not_found": "Nie mogliśmy znaleźć tego emaila lub nazwy użytkownika.",
     "too_many_requests": "Przekroczyłeś(-aś) limit prób, spróbuj ponownie później.",
     "password_reset_disabled": "Resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji.",
     "password_reset_required": "Musisz zresetować hasło, by się zalogować.",
     "password_reset_required_but_mailer_is_disabled": "Musisz zresetować hasło, ale resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji."
+  },
+  "file_type": {
+    "file": "Plik",
+    "image": "Zdjęcie",
+    "video": "Wideo",
+    "audio": "Audio"
+  },
+  "chats": {
+    "more": "Więcej",
+    "delete": "Usuń",
+    "you": "Ty:",
+    "delete_confirm": "Czy na pewno chcesz usunąć tą wiadomość?",
+    "message_user": "Napisz do {nickname}",
+    "error_sending_message": "Coś poszło nie tak podczas wysyłania wiadomości.",
+    "error_loading_chat": "Coś poszło nie tak podczas ładowania czatu.",
+    "empty_message_error": "Nie można wysłać pustej wiadomości",
+    "new": "Nowy czat"
+  },
+  "display_date": {
+    "today": "Dzisiaj"
   }
 }

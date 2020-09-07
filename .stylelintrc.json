@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "stylelint-rscss/config",
+    "stylelint-config-recommended",
+    "stylelint-config-standard"
+  ],
+  "rules": {
+    "declaration-no-important": true,
+    "rscss/no-descendant-combinator": false,
+    "rscss/class-format": [
+      true,
+      {
+        "component": "pascal-case",
+        "variant": "^-[a-z]\\w+",
+        "element": "^[a-z]\\w+"
+      }
+    ]
+  }
+}

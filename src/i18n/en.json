@@ -29,8 +29,8 @@
     },
     "staff": "Staff"
   },
-  "chat": {
-    "title": "Chat"
+  "shoutbox": {
+    "title": "Shoutbox"
   },
   "domain_mute_card": {
     "mute": "Mute",
@@ -44,6 +44,7 @@
   },
   "features_panel": {
     "chat": "Chat",
+    "pleroma_chat_messages": "Pleroma Chat",
     "gopher": "Gopher",
     "media_proxy": "Media proxy",
     "scope_options": "Scope options",
@@ -119,11 +120,14 @@
     "dms": "Direct Messages",
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
-    "twkn": "The Whole Known Network",
+    "twkn": "Known Network",
+    "bookmarks": "Bookmarks",
     "user_search": "User Search",
     "search": "Search",
     "who_to_follow": "Who to follow",
-    "preferences": "Preferences"
+    "preferences": "Preferences",
+    "timelines": "Timelines",
+    "chats": "Chats"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
@@ -163,6 +167,9 @@
     "load_all_hint": "Loaded first {saneAmount} emoji, loading all emoji may cause performance issues.",
     "load_all": "Loading all {emojiAmount} emoji"
   },
+  "errors": {
+    "storage_unavailable": "Pleroma could not access browser storage. Your login or your local settings won't be saved and you might encounter unexpected issues. Try enabling cookies."
+  },
   "interactions": {
     "favs_repeats": "Repeats and Favorites",
     "follows": "New follows",
@@ -174,6 +181,7 @@
     "account_not_locked_warning": "Your account is not {0}. Anyone can follow you to view your follower-only posts.",
     "account_not_locked_warning_link": "locked",
     "attachments_sensitive": "Mark attachments as sensitive",
+    "media_description": "Media description",
     "content_type": {
       "text/plain": "Plain text",
       "text/html": "HTML",
@@ -185,6 +193,10 @@
     "direct_warning_to_all": "This post will be visible to all the mentioned users.",
     "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
+    "preview": "Preview",
+    "preview_empty": "Empty",
+    "empty_status_error": "Can't post an empty status with no files",
+    "media_description_error": "Failed to update media, try again",
     "scope_notice": {
       "public": "This post will be visible to everyone",
       "private": "This post will be visible to your followers only",
@@ -254,7 +266,6 @@
     "allow_following_move": "Allow auto-follow when following account moves",
     "attachmentRadius": "Attachments",
     "attachments": "Attachments",
-    "autoload": "Enable automatic loading when scrolled to the bottom",
     "avatar": "Avatar",
     "avatarAltRadius": "Avatars (Notifications)",
     "avatarRadius": "Avatars",
@@ -278,12 +289,11 @@
     "change_password": "Change Password",
     "change_password_error": "There was an issue changing your password.",
     "changed_password": "Password changed successfully!",
+    "chatMessageRadius": "Chat message",
     "collapse_subject": "Collapse posts with subjects",
     "composing": "Composing",
     "confirm_new_password": "Confirm new password",
-    "current_avatar": "Your current avatar",
     "current_password": "Current password",
-    "current_profile_banner": "Your current profile banner",
     "mutes_and_blocks": "Mutes and Blocks",
     "data_import_export_tab": "Data Import / Export",
     "default_vis": "Default visibility scope",
@@ -375,7 +385,6 @@
     "profile_tab": "Profile",
     "radii_help": "Set up interface edge rounding (in pixels)",
     "replies_in_timeline": "Replies in timeline",
-    "reply_link_preview": "Enable reply-link preview on mouse hover",
     "reply_visibility_all": "Show all replies",
     "reply_visibility_following": "Only show replies directed at me or users I'm following",
     "reply_visibility_self": "Only show replies directed at me",
@@ -390,6 +399,12 @@
     "set_new_avatar": "Set new avatar",
     "set_new_profile_background": "Set new profile background",
     "set_new_profile_banner": "Set new profile banner",
+    "reset_avatar": "Reset avatar",
+    "reset_profile_background": "Reset profile background",
+    "reset_profile_banner": "Reset profile banner",
+    "reset_avatar_confirm": "Do you really want to reset the avatar?",
+    "reset_banner_confirm": "Do you really want to reset the banner?",
+    "reset_background_confirm": "Do you really want to reset the background?",
     "settings": "Settings",
     "subject_input_always_show": "Always show subject field",
     "subject_line_behavior": "Copy subject when replying",
@@ -419,13 +434,9 @@
     "greentext": "Meme arrows",
     "notifications": "Notifications",
     "notification_setting_filters": "Filters",
-    "notification_setting": "Receive notifications from:",
-    "notification_setting_follows": "Users you follow",
-    "notification_setting_non_follows": "Users you do not follow",
-    "notification_setting_followers": "Users who follow you",
-    "notification_setting_non_followers": "Users who do not follow you",
+    "notification_setting_block_from_strangers": "Block notifications from users who you do not follow",
     "notification_setting_privacy": "Privacy",
-    "notification_setting_privacy_option": "Hide the sender and contents of push notifications",
+    "notification_setting_hide_notification_contents": "Hide the sender and contents of push notifications",
     "notification_mutes": "To stop receiving notifications from a specific user, use a mute.",
     "notification_blocks": "Blocking a user stops all notifications as well as unsubscribes them.",
     "enable_web_push_notifications": "Enable web push notifications",
@@ -505,7 +516,12 @@
         "selectedMenu": "Selected menu item",
         "disabled": "Disabled",
         "toggled": "Toggled",
-        "tabs": "Tabs"
+        "tabs": "Tabs",
+        "chat": {
+          "incoming": "Incoming",
+          "outgoing": "Outgoing",
+          "border": "Border"
+        }
       },
       "radii": {
         "_tab_label": "Roundness"
@@ -617,6 +633,7 @@
     "no_retweet_hint": "Post is marked as followers-only or direct and cannot be repeated",
     "repeated": "repeated",
     "show_new": "Show new",
+    "reload": "Reload",
     "up_to_date": "Up-to-date",
     "no_more_statuses": "No more statuses",
     "no_statuses": "No statuses"
@@ -628,6 +645,8 @@
     "pin": "Pin on profile",
     "unpin": "Unpin from profile",
     "pinned": "Pinned",
+    "bookmark": "Bookmark",
+    "unbookmark": "Unbookmark",
     "delete_confirm": "Do you really want to delete this status?",
     "reply_to": "Reply to",
     "replies_list": "Replies:",
@@ -636,7 +655,11 @@
     "status_unavailable": "Status unavailable",
     "copy_link": "Copy link to status",
     "thread_muted": "Thread muted",
-    "thread_muted_and_words": ", has words:"
+    "thread_muted_and_words": ", has words:",
+    "show_full_subject": "Show full subject",
+    "hide_full_subject": "Hide full subject",
+    "show_content": "Show content",
+    "hide_content": "Hide content"
   },
   "user_card": {
     "approve": "Approve",
@@ -657,6 +680,7 @@
     "its_you": "It's you!",
     "media": "Media",
     "mention": "Mention",
+    "message": "Message",
     "mute": "Mute",
     "muted": "Muted",
     "per_day": "per day",
@@ -719,7 +743,8 @@
     "add_reaction": "Add Reaction",
     "user_settings": "User Settings",
     "accept_follow_request": "Accept follow request",
-    "reject_follow_request": "Reject follow request"
+    "reject_follow_request": "Reject follow request",
+    "bookmark": "Bookmark"
   },
   "upload": {
     "error": {
@@ -749,10 +774,31 @@
     "placeholder": "Your email or username",
     "check_email": "Check your email for a link to reset your password.",
     "return_home": "Return to the home page",
-    "not_found": "We couldn't find that email or username.",
     "too_many_requests": "You have reached the limit of attempts, try again later.",
     "password_reset_disabled": "Password reset is disabled. Please contact your instance administrator.",
     "password_reset_required": "You must reset your password to log in.",
     "password_reset_required_but_mailer_is_disabled": "You must reset your password, but password reset is disabled. Please contact your instance administrator."
+  },
+  "chats": {
+    "you": "You:",
+    "message_user": "Message {nickname}",
+    "delete": "Delete",
+    "chats": "Chats",
+    "new": "New Chat",
+    "empty_message_error": "Cannot post empty message",
+    "more": "More",
+    "delete_confirm": "Do you really want to delete this message?",
+    "error_loading_chat": "Something went wrong when loading the chat.",
+    "error_sending_message": "Something went wrong when sending the message.",
+    "empty_chat_list_placeholder": "You don't have any chats yet. Start a new chat!"
+  },
+  "file_type": {
+    "audio": "Audio",
+    "video": "Video",
+    "image": "Image",
+    "file": "File"
+  },
+  "display_date": {
+    "today": "Today"
   }
 }

@@ -2,6 +2,7 @@ import SideDrawer from '../side_drawer/side_drawer.vue'
 import Notifications from '../notifications/notifications.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 import GestureService from '../../services/gesture_service/gesture_service'
+import { mapGetters } from 'vuex'
 
 const MobileNav = {
   components: {
@@ -30,7 +31,11 @@ const MobileNav = {
       return this.unseenNotifications.length
     },
     hideSitename () { return this.$store.state.instance.hideSitename },
-    sitename () { return this.$store.state.instance.name }
+    sitename () { return this.$store.state.instance.name },
+    isChat () {
+      return this.$route.name === 'chat'
+    },
+    ...mapGetters(['unreadChatCount'])
   },
   methods: {
     toggleMobileSidebar () {
@@ -64,7 +69,7 @@ const MobileNav = {
       this.$refs.notifications.markAsSeen()
     },
     onScroll ({ target: { scrollTop, clientHeight, scrollHeight } }) {
-      if (this.$store.getters.mergedConfig.autoLoad && scrollTop + clientHeight >= scrollHeight) {
+      if (scrollTop + clientHeight >= scrollHeight) {
         this.$refs.notifications.fetchOlderNotifications()
       }
     }

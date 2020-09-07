@@ -12,10 +12,6 @@ const backendInteractorService = credentials => ({
     return notificationsFetcher.startFetching({ store, credentials })
   },
 
-  fetchAndUpdateNotifications ({ store }) {
-    return notificationsFetcher.fetchAndUpdate({ store, credentials })
-  },
-
   startFetchingFollowRequests ({ store }) {
     return followRequestFetcher.startFetching({ store, credentials })
   },

@@ -10,7 +10,7 @@
         @click.stop.prevent="togglePanel"
       >
         <div class="title">
-          <span>{{ $t('chat.title') }}</span>
+          <span>{{ $t('shoutbox.title') }}</span>
           <i
             v-if="floating"
             class="icon-cancel"
@@ -64,7 +64,7 @@
       >
         <div class="title">
           <i class="icon-comment-empty" />
-          {{ $t('chat.title') }}
+          {{ $t('shoutbox.title') }}
         </div>
       </div>
     </div>
@@ -84,54 +84,56 @@
   max-width: 25em;
 }
 
-.chat-heading {
-  cursor: pointer;
-  .icon-comment-empty {
-    color: $fallback--text;
-    color: var(--text, $fallback--text);
-  }
-}
-
-.chat-window {
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 20em;
-}
-
-.chat-window-container {
-  height: 100%;
-}
-
-.chat-message {
-  display: flex;
-  padding: 0.2em 0.5em
-}
-
-.chat-avatar {
-  img {
-    height: 24px;
-    width: 24px;
-    border-radius: $fallback--avatarRadius;
-    border-radius: var(--avatarRadius, $fallback--avatarRadius);
-    margin-right: 0.5em;
-    margin-top: 0.25em;
-  }
-}
-
-.chat-input {
-  display: flex;
-  textarea {
-    flex: 1;
-    margin: 0.6em;
-    min-height: 3.5em;
-    resize: none;
-  }
-}
-
 .chat-panel {
-  .title {
+  .chat-heading {
+    cursor: pointer;
+    .icon-comment-empty {
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
+  }
+
+  .chat-window {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 20em;
+  }
+
+  .chat-window-container {
+    height: 100%;
+  }
+
+  .chat-message {
     display: flex;
-    justify-content: space-between;
+    padding: 0.2em 0.5em
+  }
+
+  .chat-avatar {
+    img {
+      height: 24px;
+      width: 24px;
+      border-radius: $fallback--avatarRadius;
+      border-radius: var(--avatarRadius, $fallback--avatarRadius);
+      margin-right: 0.5em;
+      margin-top: 0.25em;
+    }
+  }
+
+  .chat-input {
+    display: flex;
+    textarea {
+      flex: 1;
+      margin: 0.6em;
+      min-height: 3.5em;
+      resize: none;
+    }
+  }
+
+  .chat-panel {
+    .title {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 </style>

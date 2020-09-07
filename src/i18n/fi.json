@@ -578,7 +578,8 @@
     "show_full_subject": "Näytä koko otsikko",
     "hide_full_subject": "Piilota koko otsikko",
     "show_content": "Näytä sisältö",
-    "hide_content": "Piilota sisältö"
+    "hide_content": "Piilota sisältö",
+    "status_deleted": "Poistettu viesti"
   },
   "user_card": {
     "approve": "Hyväksy",

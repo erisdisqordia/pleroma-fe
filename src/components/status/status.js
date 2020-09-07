@@ -1,3 +1,4 @@
+import ReplyButton from '../reply_button/reply_button.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
 import ReactButton from '../react_button/react_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
@@ -20,6 +21,7 @@ import { mapGetters, mapState } from 'vuex'
 const Status = {
   name: 'Status',
   components: {
+    ReplyButton,
     FavoriteButton,
     ReactButton,
     RetweetButton,

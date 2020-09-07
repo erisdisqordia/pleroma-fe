@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 ## [Unreleased patch]
 
+### Added
+- Proper handling of deletes when using websocket streaming
+
 ### Changed
 - Polls will be hidden with status content if "Collapse posts with subjects" is enabled and the post is collapsed.
 

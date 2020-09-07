@@ -321,21 +321,11 @@
             v-if="!noHeading && !isPreview"
             class="status-actions"
           >
-            <div>
-              <i
-                v-if="loggedIn"
-                class="button-icon button-reply icon-reply"
-                :title="$t('tool_tip.reply')"
-                :class="{'-active': replying}"
-                @click.prevent="toggleReplying"
-              />
-              <i
-                v-else
-                class="button-icon button-reply -disabled icon-reply"
-                :title="$t('tool_tip.reply')"
-              />
-              <span v-if="status.replies_count > 0">{{ status.replies_count }}</span>
-            </div>
+            <reply-button
+              :replying="replying"
+              :status="status"
+              @toggle="toggleReplying"
+            />
             <retweet-button
               :visibility="status.visibility"
               :logged-in="loggedIn"
@@ -368,18 +358,11 @@
           <div class="deleted-text">
             {{ $t('status.status_deleted') }}
           </div>
-          <div
-            v-if="replying"
-            class="status-actions"
-          >
-            <i
-              v-if="loggedIn"
-              class="button-icon button-reply icon-reply"
-              :title="$t('tool_tip.reply')"
-              :class="{'-active': replying}"
-              @click.prevent="toggleReplying"
-            />
-          </div>
+          <reply-button
+            :replying="replying"
+            :status="status"
+            @toggle="toggleReplying"
+          />
         </div>
       </div>
       <div

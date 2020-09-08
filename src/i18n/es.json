@@ -13,7 +13,8 @@
     "scope_options": "Opciones del alcance de la visibilidad",
     "text_limit": "Límite de caracteres",
     "title": "Características",
-    "who_to_follow": "A quién seguir"
+    "who_to_follow": "A quién seguir",
+    "pleroma_chat_messages": "Chat de Pleroma"
   },
   "finder": {
     "error_fetching_user": "Error al buscar usuario",
@@ -31,7 +32,13 @@
     "disable": "Inhabilitar",
     "enable": "Habilitar",
     "confirm": "Confirmar",
-    "verify": "Verificar"
+    "verify": "Verificar",
+    "peek": "Ojear",
+    "close": "Cerrar",
+    "dismiss": "Descartar",
+    "retry": "Inténtalo de nuevo",
+    "error_retry": "Por favor, inténtalo de nuevo",
+    "loading": "Cargando…"
   },
   "image_cropper": {
     "crop_picture": "Recortar la foto",
@@ -41,7 +48,7 @@
   },
   "importer": {
     "submit": "Enviar",
-    "success": "Importado con éxito",
+    "success": "Importado con éxito.",
     "error": "Se ha producido un error al importar el archivo."
   },
   "login": {
@@ -77,21 +84,27 @@
     "dms": "Mensajes Directos",
     "public_tl": "Línea Temporal Pública",
     "timeline": "Línea Temporal",
-    "twkn": "Toda La Red Conocida",
+    "twkn": "Red Conocida",
     "user_search": "Búsqueda de Usuarios",
     "search": "Buscar",
     "who_to_follow": "A quién seguir",
-    "preferences": "Preferencias"
+    "preferences": "Preferencias",
+    "chats": "Chats",
+    "timelines": "Líneas de Tiempo",
+    "bookmarks": "Marcadores"
   },
   "notifications": {
-    "broken_favorite": "Estado desconocido, buscándolo...",
+    "broken_favorite": "Estado desconocido, buscándolo…",
     "favorited_you": "le gusta tu estado",
     "followed_you": "empezó a seguirte",
     "load_older": "Cargar notificaciones antiguas",
     "notifications": "Notificaciones",
     "read": "¡Leído!",
     "repeated_you": "repitió tu estado",
-    "no_more_notifications": "No hay más notificaciones"
+    "no_more_notifications": "No hay más notificaciones",
+    "reacted_with": "reaccionó con {0}",
+    "migrated_to": "migrado a",
+    "follow_request": "quiere seguirte"
   },
   "polls": {
     "add_poll": "Añadir encuesta",
@@ -114,7 +127,9 @@
     "search_emoji": "Buscar un emoji",
     "add_emoji": "Insertar un emoji",
     "custom": "Emojis personalizados",
-    "unicode": "Emojis unicode"
+    "unicode": "Emojis unicode",
+    "load_all": "Cargando todos los {emojiAmount} emoji",
+    "load_all_hint": "Cargado el primer emoji {saneAmount}, cargar todos los emoji puede causar problemas de rendimiento."
   },
   "stickers": {
     "add_sticker": "Añadir Pegatina"
@@ -122,7 +137,8 @@
   "interactions": {
     "favs_repeats": "Favoritos y Repetidos",
     "follows": "Nuevos seguidores",
-    "load_older": "Cargar interacciones más antiguas"
+    "load_older": "Cargar interacciones más antiguas",
+    "moves": "Usuario Migrado"
   },
   "post_status": {
     "new_status": "Publicar un nuevo estado",
@@ -142,7 +158,7 @@
     "posting": "Publicando",
     "scope_notice": {
       "public": "Esta publicación será visible para todo el mundo",
-      "private": "Esta publicación solo será visible para tus seguidores.",
+      "private": "Esta publicación solo será visible para tus seguidores",
       "unlisted": "Esta publicación no será visible en la Línea Temporal Pública ni en Toda La Red Conocida"
     },
     "scope": {
@@ -150,7 +166,12 @@
       "private": "Solo-seguidores - Solo tus seguidores leerán la publicación",
       "public": "Público - Entradas visibles en las Líneas Temporales Públicas",
       "unlisted": "Sin listar - Entradas no visibles en las Líneas Temporales Públicas"
-    }
+    },
+    "media_description_error": "Error al actualizar el archivo, inténtalo de nuevo",
+    "empty_status_error": "No se puede publicar un estado vacío y sin archivos adjuntos",
+    "preview_empty": "Vacío",
+    "preview": "Vista previa",
+    "media_description": "Descripción multimedia"
   },
   "registration": {
     "bio": "Biografía",
@@ -189,7 +210,7 @@
       "generate_new_recovery_codes": "Generar códigos de recuperación nuevos",
       "warning_of_generate_new_codes": "Cuando generas nuevos códigos de recuperación, los antiguos dejarán de funcionar.",
       "recovery_codes": "Códigos de recuperación.",
-      "waiting_a_recovery_codes": "Recibiendo códigos de respaldo",
+      "waiting_a_recovery_codes": "Recibiendo códigos de respaldo…",
       "recovery_codes_warning": "Anote los códigos o guárdelos en un lugar seguro, de lo contrario no los volverá a ver. Si pierde el acceso a su aplicación 2FA y los códigos de recuperación, su cuenta quedará bloqueada.",
       "authentication_methods": "Métodos de autentificación",
       "scan": {
@@ -232,7 +253,7 @@
     "default_vis": "Alcance de visibilidad por defecto",
     "delete_account": "Eliminar la cuenta",
     "discoverable": "Permitir la aparición de esta cuenta en los resultados de búsqueda y otros servicios",
-    "delete_account_description": "Eliminar para siempre la cuenta y todos los mensajes.",
+    "delete_account_description": "Eliminar para siempre los datos y desactivar la cuenta.",
     "pad_emoji": "Rellenar con espacios al agregar emojis desde el selector",
     "delete_account_error": "Hubo un error al eliminar tu cuenta. Si el fallo persiste, ponte en contacto con el administrador de tu instancia.",
     "delete_account_instructions": "Escribe tu contraseña para confirmar la eliminación de tu cuenta.",
@@ -253,7 +274,7 @@
     "max_thumbnails": "Cantidad máxima de miniaturas por publicación",
     "hide_isp": "Ocultar el panel específico de la instancia",
     "preload_images": "Precargar las imágenes",
-    "use_one_click_nsfw": "Abrir los adjuntos NSFW con un solo click.",
+    "use_one_click_nsfw": "Abrir los adjuntos NSFW con un solo click",
     "hide_post_stats": "Ocultar las estadísticas de las entradas (p.ej. el número de favoritos)",
     "hide_user_stats": "Ocultar las estadísticas del usuario (p.ej. el número de seguidores)",
     "hide_filtered_statuses": "Ocultar estados filtrados",
@@ -299,7 +320,7 @@
     "valid_until": "Válido hasta",
     "revoke_token": "Revocar",
     "panelRadius": "Paneles",
-    "pause_on_unfocused": "Parar la transmisión cuando no estés en foco.",
+    "pause_on_unfocused": "Parar la transmisión cuando no estés en foco",
     "presets": "Por defecto",
     "profile_background": "Fondo del Perfil",
     "profile_banner": "Cabecera del Perfil",
@@ -355,7 +376,24 @@
         "save_load_hint": "Las opciones \"Mantener\" conservan las opciones configuradas actualmente al seleccionar o cargar temas, también almacena dichas opciones al exportar un tema. Cuando se desactiven todas las casillas de verificación, el tema de exportación lo guardará todo.",
         "reset": "Reiniciar",
         "clear_all": "Limpiar todo",
-        "clear_opacity": "Limpiar opacidad"
+        "clear_opacity": "Limpiar opacidad",
+        "help": {
+          "snapshot_source_mismatch": "Conflicto de versiones: lo más probable es que el frontend se haya revertido y actualizado nuevamente, si cambió el tema con una versión anterior del frontend, lo más probable es que desee usar la versión anterior; de lo contrario, use la nueva versión.",
+          "migration_napshot_gone": "Por alguna razón, faltaba la instantánea, algunas cosas podrían verse diferentes de lo que recuerdas.",
+          "migration_snapshot_ok": "Solo para estar seguro, se cargó la instantánea del tema. Puede intentar cargar los datos del tema.",
+          "fe_downgraded": "Versión de PleromaFE revertida.",
+          "fe_upgraded": "El creador de temas de PleromaFE se actualizó después de la actualización de la versión.",
+          "snapshot_missing": "No había ninguna instantánea del tema en el archivo, por lo que podría verse diferente de lo previsto originalmente.",
+          "snapshot_present": "Se ha cargado una instantánea del tema, por lo que todos los valores se sobrescriben. De lo contrario, puede cargar el tema por completo.",
+          "older_version_imported": "El archivo que ha importado se creó en una versión anterior del frontend actual.",
+          "v2_imported": "El archivo que ha importado fue creado para un frontend más antiguo. Intentamos maximizar la compatibilidad, pero aún podría haber inconsistencias.",
+          "future_version_imported": "El archivo que ha importado se creó para una versión más reciente del frontend.",
+          "upgraded_from_v2": "PleromaFE se ha actualizado, el tema podría verse un poco diferente de lo que recuerdas."
+        },
+        "use_source": "Nueva versión",
+        "use_snapshot": "Versión antigua",
+        "keep_as_is": "Mantener como está",
+        "load_theme": "Cargar tema"
       },
       "common": {
         "color": "Color",
@@ -390,7 +428,26 @@
         "borders": "Bordes",
         "buttons": "Botones",
         "inputs": "Campos de entrada",
-        "faint_text": "Texto desvanecido"
+        "faint_text": "Texto desvanecido",
+        "alert_neutral": "Neutral",
+        "chat": {
+          "border": "Borde",
+          "outgoing": "Salientes",
+          "incoming": "Entrantes"
+        },
+        "tabs": "Pestañas",
+        "toggled": "Intercambiado",
+        "disabled": "Deshabilitado",
+        "selectedMenu": "Elemento del menú seleccionado",
+        "selectedPost": "Publicación seleccionada",
+        "pressed": "Presionado",
+        "highlight": "Elementos destacados",
+        "icons": "Iconos",
+        "poll": "Gráfico de la encuesta",
+        "underlay": "Subrayado",
+        "popover": "Sugerencias, menús, superposiciones",
+        "post": "Publicaciones/Biografías de Usuarios",
+        "alert_warning": "Precaución"
       },
       "radii": {
         "_tab_label": "Redondez"
@@ -423,7 +480,8 @@
           "buttonPressed": "Botón (presionado)",
           "buttonPressedHover": "Botón (presionado+encima)",
           "input": "Campo de entrada"
-        }
+        },
+        "hintV3": "Para las sombras, también puede usar la notación {0} para usar otro espacio de color."
       },
       "fonts": {
         "_tab_label": "Fuentes",
@@ -458,7 +516,42 @@
       "title": "Versión",
       "backend_version": "Versión del Backend",
       "frontend_version": "Versión del Frontend"
-    }
+    },
+    "notification_visibility_moves": "Usuario Migrado",
+    "greentext": "Texto verde (meme arrows)",
+    "notification_setting_hide_notification_contents": "Ocultar el remitente y el contenido de las notificaciones push",
+    "notification_setting_privacy": "Privacidad",
+    "notification_setting_block_from_strangers": "Bloquea las notificaciones de los usuarios que no sigues",
+    "notification_setting_filters": "Filtros",
+    "fun": "Divertido",
+    "type_domains_to_mute": "Buscar dominios para silenciar",
+    "useStreamingApiWarning": "(no recomendado, experimental, puede omitir publicaciones)",
+    "useStreamingApi": "Recibir entradas y notificaciones en tiempo real",
+    "user_mutes": "Usuarios",
+    "reset_profile_background": "Restablecer el fondo de pantalla",
+    "reset_background_confirm": "¿Estás seguro de restablecer el fondo de pantalla?",
+    "reset_banner_confirm": "¿Estás seguro de restablecer la imagen del banner?",
+    "reset_avatar_confirm": "¿Estás seguro de restablecer la imagen de avatar?",
+    "reset_profile_banner": "Restabler imagen del banner del perfil",
+    "reset_avatar": "Restablecer avatar",
+    "notification_visibility_emoji_reactions": "Reacciones",
+    "new_email": "Nuevo correo electrónico",
+    "profile_fields": {
+      "value": "Contenido",
+      "name": "Etiqueta",
+      "add_field": "Añadir un campo",
+      "label": "Metadatos del perfil"
+    },
+    "accent": "Acento",
+    "emoji_reactions_on_timeline": "Mostrar las reacciones de emoji en la línea de tiempo",
+    "domain_mutes": "Dominios",
+    "mutes_and_blocks": "Silenciado y Bloqueados",
+    "chatMessageRadius": "Mensaje de chat",
+    "changed_email": "¡Correo electrónico modificado correctamente!",
+    "change_email_error": "Ha ocurrido un error al intentar modificar tu correo electrónico.",
+    "change_email": "Modificar el correo electrónico",
+    "bot": "Esta cuenta es un bot",
+    "allow_following_move": "Permitir el seguimiento automático, cuando la cuenta que sigues se traslada a otra instancia"
   },
   "time": {
     "day": "{0} día",
@@ -504,7 +597,8 @@
     "show_new": "Mostrar lo nuevo",
     "up_to_date": "Actualizado",
     "no_more_statuses": "No hay más estados",
-    "no_statuses": "Sin estados"
+    "no_statuses": "Sin estados",
+    "reload": "Recargar"
   },
   "status": {
     "favorites": "Favoritos",
@@ -517,7 +611,17 @@
     "reply_to": "Respondiendo a",
     "replies_list": "Respuestas:",
     "mute_conversation": "Silenciar la conversación",
-    "unmute_conversation": "Mostrar la conversación"
+    "unmute_conversation": "Mostrar la conversación",
+    "hide_content": "Ocultar el contenido",
+    "show_content": "Mostrar el contenido",
+    "hide_full_subject": "Ocultar el tema completo",
+    "show_full_subject": "Mostrar el tema completo",
+    "thread_muted_and_words": ", contiene:",
+    "thread_muted": "Conversación silenciada",
+    "copy_link": "Copiar el enlace al estado",
+    "status_unavailable": "Estado no disponible",
+    "bookmark": "Marcar",
+    "unbookmark": "Desmarcar"
   },
   "user_card": {
     "approve": "Aprobar",
@@ -546,11 +650,11 @@
     "subscribe": "Suscribirse",
     "unsubscribe": "Desuscribirse",
     "unblock": "Desbloquear",
-    "unblock_progress": "Desbloqueando...",
-    "block_progress": "Bloqueando...",
-    "unmute": "Quitar silencio",
-    "unmute_progress": "Quitando silencio...",
-    "mute_progress": "Silenciando...",
+    "unblock_progress": "Desbloqueando…",
+    "block_progress": "Bloqueando…",
+    "unmute": "Dejar de silenciar",
+    "unmute_progress": "Quitando silencio…",
+    "mute_progress": "Silenciando…",
     "admin_menu": {
       "moderation": "Moderación",
       "grant_admin": "Conceder permisos de Administrador",
@@ -564,12 +668,16 @@
       "strip_media": "Eliminar archivos multimedia de las publicaciones",
       "force_unlisted": "Forzar que se publique en el modo -Sin Listar-",
       "sandbox": "Forzar que se publique solo para tus seguidores",
-      "disable_remote_subscription": "No permitir que usuarios de instancias remotas te siga.",
+      "disable_remote_subscription": "No permitir que usuarios de instancias remotas te siga",
       "disable_any_subscription": "No permitir que ningún usuario te siga",
       "quarantine": "No permitir publicaciones de usuarios de instancias remotas",
       "delete_user": "Eliminar usuario",
       "delete_user_confirmation": "¿Estás completamente seguro? Esta acción no se puede deshacer."
-    }
+    },
+    "show_repeats": "Mostrar repetidos",
+    "hide_repeats": "Ocultar repetidos",
+    "message": "Mensaje",
+    "hidden": "Oculto"
   },
   "user_profile": {
     "timeline_title": "Linea Temporal del Usuario",
@@ -594,7 +702,11 @@
     "repeat": "Repetir",
     "reply": "Contestar",
     "favorite": "Favorito",
-    "user_settings": "Ajustes de usuario"
+    "user_settings": "Ajustes de usuario",
+    "bookmark": "Marcador",
+    "reject_follow_request": "Rechazar la solicitud de seguimiento",
+    "accept_follow_request": "Aceptar la solicitud de seguimiento",
+    "add_reaction": "Añadir Reacción"
   },
   "upload": {
     "error": {
@@ -624,8 +736,78 @@
     "placeholder": "Su correo electrónico o nombre de usuario",
     "check_email": "Revise su correo electrónico para obtener un enlace para restablecer su contraseña.",
     "return_home": "Volver a la página de inicio",
-    "not_found": "No pudimos encontrar ese correo electrónico o nombre de usuario.",
     "too_many_requests": "Has alcanzado el límite de intentos, vuelve a intentarlo más tarde.",
-    "password_reset_disabled": "El restablecimiento de contraseñas está deshabilitado. Póngase en contacto con el administrador de su instancia."
+    "password_reset_disabled": "El restablecimiento de contraseñas está deshabilitado. Póngase en contacto con el administrador de su instancia.",
+    "password_reset_required_but_mailer_is_disabled": "Debes restablecer la contraseña, pero el restablecimiento de contraseñas está deshabilitado. Por favor contacta con el administrador de la instancia.",
+    "password_reset_required": "Debes restablecer la contraseña para iniciar sesión."
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma no pudo acceder al almacenamiento del navegador. Su inicio de sesión o su configuración local no se guardarán y puede encontrar problemas inesperados. Intente habilitar las cookies."
+  },
+  "domain_mute_card": {
+    "unmute_progress": "Quitando silencio…",
+    "unmute": "Dejar de silenciar",
+    "mute_progress": "Silenciando…",
+    "mute": "Silenciar"
+  },
+  "about": {
+    "mrf": {
+      "simple": {
+        "accept_desc": "Esta instancia solo acepta mensajes de las siguientes instancias:",
+        "media_nsfw_desc": "Esta instancia obliga a que los archivos multimedia se establezcan como sensibles en las publicaciones de las siguientes instancias:",
+        "media_nsfw": "Forzar Multimedia Como Sensible",
+        "media_removal_desc": "Esta instancia elimina los archivos multimedia de las publicaciones de las siguientes instancias:",
+        "media_removal": "Eliminar Multimedia",
+        "quarantine": "Cuarentena",
+        "ftl_removal_desc": "Esta instancia elimina las siguientes instancias de la línea de tiempo \"Toda la red conocida\":",
+        "ftl_removal": "Eliminar de la línea de tiempo \"Toda La Red Conocida\"",
+        "quarantine_desc": "Esta instancia enviará solo publicaciones públicas a las siguientes instancias:",
+        "simple_policies": "Políticas sobre instancias específicas",
+        "reject_desc": "Esta instancia no aceptará mensajes de las siguientes instancias:",
+        "reject": "Rechazar",
+        "accept": "Aceptar"
+      },
+      "mrf_policies_desc": "Las políticas MRF manipulan la federación de esta instancia con el resto del fediverso. Las siguientes políticas están habilitadas:",
+      "mrf_policies": "Habilitar políticas MRF",
+      "keyword": {
+        "ftl_removal": "Eliminar de la línea de tiempo \"Toda La Red Conocida\"",
+        "keyword_policies": "Política de Palabras Clave",
+        "is_replaced_by": "→",
+        "replace": "Reemplazar",
+        "reject": "Rechazar"
+      },
+      "federation": "Federación"
+    },
+    "staff": "Equipo"
+  },
+  "shoutbox": {
+    "title": "Jaula de Grillos"
+  },
+  "remote_user_resolver": {
+    "remote_user_resolver": "Resolución de usuario remoto",
+    "error": "No encontrado.",
+    "searching_for": "Buscando"
+  },
+  "chats": {
+    "chats": "Chats",
+    "empty_chat_list_placeholder": "Aún no tienes ninguna conversación. ¡Inicia una nueva conversación!",
+    "error_sending_message": "Algo salió mal al enviar el mensaje.",
+    "error_loading_chat": "Algo salió mal al cargar el chat.",
+    "delete_confirm": "¿Realmente quieres borrar este mensaje?",
+    "more": "Más",
+    "empty_message_error": "No puedes publicar un mensaje vacío",
+    "new": "Nueva conversación",
+    "delete": "Borrar",
+    "message_user": "Mensaje de {nickname}",
+    "you": "Tú:"
+  },
+  "display_date": {
+    "today": "Hoy"
+  },
+  "file_type": {
+    "file": "Archivo",
+    "image": "Imagen",
+    "video": "Vídeo",
+    "audio": "Audio"
   }
 }

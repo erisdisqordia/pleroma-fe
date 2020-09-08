@@ -730,7 +730,6 @@
     "instruction": "Entrer votre address de courriel ou votre nom utilisateur. Nous enverrons un lien pour changer votre mot de passe.",
     "placeholder": "Votre email ou nom d'utilisateur",
     "return_home": "Retourner à la page d'accueil",
-    "not_found": "Email ou nom d'utilisateur inconnu.",
     "too_many_requests": "Vos avez atteint la limite d'essais, essayez plus tard.",
     "password_reset_required": "Vous devez changer votre mot de passe pour vous authentifier."
   }

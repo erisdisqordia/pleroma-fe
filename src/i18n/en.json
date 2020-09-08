@@ -774,7 +774,6 @@
     "placeholder": "Your email or username",
     "check_email": "Check your email for a link to reset your password.",
     "return_home": "Return to the home page",
-    "not_found": "We couldn't find that email or username.",
     "too_many_requests": "You have reached the limit of attempts, try again later.",
     "password_reset_disabled": "Password reset is disabled. Please contact your instance administrator.",
     "password_reset_required": "You must reset your password to log in.",

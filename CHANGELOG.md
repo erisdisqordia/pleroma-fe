@@ -4,10 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
-## [Unreleased patch]
+
+## [2.1.1] - 2020-09-08
+### Changed
+- Polls will be hidden with status content if "Collapse posts with subjects" is enabled and the post is collapsed.
+
+### Fixed
+- Autocomplete won't stop at the second @, so it'll still work with "@lain@l" and not start over.
+- Fixed weird autocomplete behavior when you write ":custom_emoji: ?"
 
 ## [2.1.0] - 2020-08-28
-### Add
+### Added
 - Autocomplete domains from list of known instances
 - 'Bot' settings option and badge
 - Added profile meta data fields that can be set in profile settings
@@ -51,7 +58,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Multiple issues with muted statuses/notifications
 
 ## [2.0.5] - 2020-05-12
-### Add
+### Added
 - Added private notifications option for push notifications
 - 'Copy link' button for statuses (in the ellipsis menu)
 
@@ -69,7 +76,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Emoji autocomplete will match any part of the word and not just start, for example :drool will now helpfully suggest :blobcatdrool: and :blobcatdroolreach:
 
-### Add
+### Added
 - Follow request notification support
 
 ## [2.0.2] - 2020-04-08

@@ -753,7 +753,6 @@
     "placeholder": "Twój email lub nazwa użytkownika",
     "check_email": "Sprawdź pocztę, aby uzyskać link do zresetowania hasła.",
     "return_home": "Wróć do strony głównej",
-    "not_found": "Nie mogliśmy znaleźć tego emaila lub nazwy użytkownika.",
     "too_many_requests": "Przekroczyłeś(-aś) limit prób, spróbuj ponownie później.",
     "password_reset_disabled": "Resetowanie hasła jest wyłączone. Proszę skontaktuj się z administratorem tej instancji.",
     "password_reset_required": "Musisz zresetować hasło, by się zalogować.",

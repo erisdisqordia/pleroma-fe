@@ -232,7 +232,7 @@
     "default_vis": "Lehenetsitako ikusgaitasunak",
     "delete_account": "Ezabatu kontua",
     "discoverable": "Baimendu zure kontua kanpo bilaketa-emaitzetan eta bestelako zerbitzuetan agertzea",
-    "delete_account_description": "Betirako ezabatu zure kontua eta zure mezu guztiak",
+    "delete_account_description": "Betirako ezabatu zure datuak eta desaktibatu kontua.",
     "pad_emoji": "Zuriuneak gehitu emoji bat aukeratzen denean",
     "delete_account_error": "Arazo bat gertatu da zure kontua ezabatzerakoan. Arazoa jarraitu eskero, administratzailearekin harremanetan jarri.",
     "delete_account_instructions": "Idatzi zure pasahitza kontua ezabatzeko.",
@@ -626,10 +626,17 @@
     "placeholder": "Zure e-posta edo erabiltzaile izena",
     "check_email": "Begiratu zure posta elektronikoa pasahitza berrezarri ahal izateko.",
     "return_home": "Itzuli hasierara",
-    "not_found": "Ezin izan dugu helbide elektroniko edo erabiltzaile hori aurkitu.",
     "too_many_requests": "Saiakera gehiegi burutu ditzu, saiatu berriro geroxeago.",
     "password_reset_disabled": "Pasahitza berrezartzea debekatuta dago. Mesedez, jarri harremanetan instantzia administratzailearekin.",
     "password_reset_required": "Pasahitza berrezarri behar duzu saioa hasteko.",
     "password_reset_required_but_mailer_is_disabled": "Pasahitza berrezarri behar duzu, baina pasahitza berrezartzeko aukera desgaituta dago. Mesedez, jarri harremanetan instantziaren administratzailearekin."
+  },
+  "about": {
+    "mrf": {
+      "keyword": {
+        "keyword_policies": "Gako-hitz politika"
+      },
+      "federation": "Federazioa"
+    }
   }
 }

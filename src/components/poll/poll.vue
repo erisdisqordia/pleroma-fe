@@ -17,9 +17,8 @@
           <span class="result-percentage">
             {{ percentageForOption(option.votes_count) }}%
           </span>
-          <!-- eslint-disable vue/no-v-html -->
+          <!-- eslint-disable-next-line vue/no-v-html -->
           <span v-html="option.title_html" />
-          <!-- eslint-enable vue/no-v-html -->
         </div>
         <div
           class="result-fill"

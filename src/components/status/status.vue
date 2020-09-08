@@ -349,7 +349,7 @@
       </div>
       <div
         v-else
-        class="deleted"
+        class="gravestone"
       >
         <div class="left-side">
           <UserAvatar :compact="compact" />
@@ -359,6 +359,7 @@
             {{ $t('status.status_deleted') }}
           </div>
           <reply-button
+            v-if="replying"
             :replying="replying"
             :status="status"
             @toggle="toggleReplying"

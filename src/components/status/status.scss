@@ -25,7 +25,7 @@ $status-margin: 0.75em;
     --icon: var(--selectedPostIcon, $fallback--icon);
   }
 
-  .deleted {
+  .gravestone {
     padding: $status-margin;
     color: $fallback--faint;
     color: var(--faint, $fallback--faint);

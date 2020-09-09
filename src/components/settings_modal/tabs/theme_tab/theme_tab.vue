@@ -278,7 +278,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.alertErrorText"
-              large="true"
+              large
             />
             <ColorInput
               v-model="alertWarningColorLocal"
@@ -294,7 +294,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.alertWarningText"
-              large="true"
+              large
             />
             <ColorInput
               v-model="alertNeutralColorLocal"
@@ -310,7 +310,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.alertNeutralText"
-              large="true"
+              large
             />
             <OpacityInput
               v-model="alertOpacityLocal"
@@ -334,7 +334,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.badgeNotificationText"
-              large="true"
+              large
             />
           </div>
           <div class="color-item">
@@ -359,7 +359,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.panelText"
-              large="true"
+              large
             />
             <ColorInput
               v-model="panelLinkColorLocal"
@@ -369,7 +369,7 @@
             />
             <ContrastRatio
               :contrast="previewContrast.panelLink"
-              large="true"
+              large
             />
           </div>
           <div class="color-item">
@@ -740,57 +740,57 @@
             <ColorInput
               v-model="chatBgColorLocal"
               name="chatBgColor"
-              :fallback="previewTheme.colors.bg || 1"
+              :fallback="previewTheme.colors.bg"
               :label="$t('settings.background')"
             />
             <h5>{{ $t('settings.style.advanced_colors.chat.incoming') }}</h5>
             <ColorInput
               v-model="chatMessageIncomingBgColorLocal"
               name="chatMessageIncomingBgColor"
-              :fallback="previewTheme.colors.bg || 1"
+              :fallback="previewTheme.colors.bg"
               :label="$t('settings.background')"
             />
             <ColorInput
               v-model="chatMessageIncomingTextColorLocal"
               name="chatMessageIncomingTextColor"
-              :fallback="previewTheme.colors.text || 1"
+              :fallback="previewTheme.colors.text"
               :label="$t('settings.text')"
             />
             <ColorInput
               v-model="chatMessageIncomingLinkColorLocal"
               name="chatMessageIncomingLinkColor"
-              :fallback="previewTheme.colors.link || 1"
+              :fallback="previewTheme.colors.link"
               :label="$t('settings.links')"
             />
             <ColorInput
               v-model="chatMessageIncomingBorderColorLocal"
               name="chatMessageIncomingBorderLinkColor"
-              :fallback="previewTheme.colors.fg || 1"
+              :fallback="previewTheme.colors.fg"
               :label="$t('settings.style.advanced_colors.chat.border')"
             />
             <h5>{{ $t('settings.style.advanced_colors.chat.outgoing') }}</h5>
             <ColorInput
               v-model="chatMessageOutgoingBgColorLocal"
               name="chatMessageOutgoingBgColor"
-              :fallback="previewTheme.colors.bg || 1"
+              :fallback="previewTheme.colors.bg"
               :label="$t('settings.background')"
             />
             <ColorInput
               v-model="chatMessageOutgoingTextColorLocal"
               name="chatMessageOutgoingTextColor"
-              :fallback="previewTheme.colors.text || 1"
+              :fallback="previewTheme.colors.text"
               :label="$t('settings.text')"
             />
             <ColorInput
               v-model="chatMessageOutgoingLinkColorLocal"
               name="chatMessageOutgoingLinkColor"
-              :fallback="previewTheme.colors.link || 1"
+              :fallback="previewTheme.colors.link"
               :label="$t('settings.links')"
             />
             <ColorInput
               v-model="chatMessageOutgoingBorderColorLocal"
               name="chatMessageOutgoingBorderLinkColor"
-              :fallback="previewTheme.colors.bg || 1"
+              :fallback="previewTheme.colors.bg"
               :label="$t('settings.style.advanced_colors.chat.border')"
             />
           </div>

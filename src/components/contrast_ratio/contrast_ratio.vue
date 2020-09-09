@@ -39,13 +39,16 @@
 export default {
   props: {
     large: {
-      required: false
+      required: false,
+      type: Boolean,
+      default: false
     },
     // TODO: Make theme switcher compute theme initially so that contrast
     // component won't be called without contrast data
     contrast: {
       required: false,
-      type: Object
+      type: Object,
+      default: () => ({})
     }
   },
   computed: {

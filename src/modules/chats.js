@@ -181,30 +181,16 @@ const chats = {
     setChatsLoading (state, { value }) {
       state.chats.loading = value
     },
-    addChatMessages (state, { commit, chatId, messages }) {
+    addChatMessages (state, { chatId, messages, updateMaxId }) {
       const chatMessageService = state.openedChatMessageServices[chatId]
       if (chatMessageService) {
-        chatService.add(chatMessageService, { messages: messages.map(parseChatMessage) })
-        commit('refreshLastMessage', { chatId })
+        chatService.add(chatMessageService, { messages: messages.map(parseChatMessage), updateMaxId })
       }
     },
-    refreshLastMessage (state, { chatId }) {
-      const chatMessageService = state.openedChatMessageServices[chatId]
-      if (chatMessageService) {
-        const chat = getChatById(state, chatId)
-        if (chat) {
-          chat.lastMessage = chatMessageService.lastMessage
-          if (chatMessageService.lastMessage) {
-            chat.updated_at = chatMessageService.lastMessage.created_at
-          }
-        }
-      }
-    },
-    deleteChatMessage (state, { commit, chatId, messageId }) {
+    deleteChatMessage (state, { chatId, messageId }) {
       const chatMessageService = state.openedChatMessageServices[chatId]
       if (chatMessageService) {
         chatService.deleteMessage(chatMessageService, messageId)
-        commit('refreshLastMessage', { chatId })
       }
     },
     resetChatNewMessageCount (state, _value) {

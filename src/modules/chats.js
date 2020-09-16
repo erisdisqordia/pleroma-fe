@@ -143,6 +143,7 @@ const chats = {
           const isNewMessage = (chat.lastMessage && chat.lastMessage.id) !== (updatedChat.lastMessage && updatedChat.lastMessage.id)
           chat.lastMessage = updatedChat.lastMessage
           chat.unread = updatedChat.unread
+          chat.updated_at = updatedChat.updated_at
           if (isNewMessage && chat.unread) {
             newChatMessageSideEffects(updatedChat)
           }

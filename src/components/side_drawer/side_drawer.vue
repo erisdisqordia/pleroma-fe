@@ -90,7 +90,7 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'chat' }">
-            <i class="button-icon icon-chat" /> {{ $t("shoutbox.title") }}
+            <i class="button-icon icon-megaphone" /> {{ $t("shoutbox.title") }}
           </router-link>
         </li>
       </ul>

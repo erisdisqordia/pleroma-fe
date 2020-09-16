@@ -63,7 +63,7 @@
         @click.stop.prevent="togglePanel"
       >
         <div class="title">
-          <i class="icon-comment-empty" />
+          <i class="icon-megaphone" />
           {{ $t('shoutbox.title') }}
         </div>
       </div>

@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 ## [Unreleased patch]
 
+## [2.1.2] - 2020-09-17
 ### Fixed
 - Fixed chats list not updating its order when new messages come in
 - Fixed chat messages sometimes getting lost when you receive a message at the same time 

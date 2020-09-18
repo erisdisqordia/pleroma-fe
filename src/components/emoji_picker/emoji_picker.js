@@ -8,7 +8,10 @@ const LOAD_EMOJI_BY = 60
 const LOAD_EMOJI_MARGIN = 64
 
 const filterByKeyword = (list, keyword = '') => {
-  return list.filter(x => x.displayText.includes(keyword))
+  const keywordLowercase = keyword.toLowerCase()
+  return list.filter(emoji =>
+    emoji.displayText.toLowerCase().includes(keywordLowercase)
+  )
 }
 
 const EmojiPicker = {

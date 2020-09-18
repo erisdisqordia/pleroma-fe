@@ -33,12 +33,12 @@ describe('chatService', () => {
       const chat = chatService.empty()
 
       chatService.add(chat, { messages: [ message1 ] })
-      expect(chat.lastMessage.id).to.eql(message1.id)
+      expect(chat.maxId).to.eql(message1.id)
       expect(chat.minId).to.eql(message1.id)
       expect(chat.newMessageCount).to.eql(1)
 
       chatService.add(chat, { messages: [ message2 ] })
-      expect(chat.lastMessage.id).to.eql(message2.id)
+      expect(chat.maxId).to.eql(message2.id)
       expect(chat.minId).to.eql(message1.id)
       expect(chat.newMessageCount).to.eql(2)
 
@@ -60,15 +60,15 @@ describe('chatService', () => {
       chatService.add(chat, { messages: [ message2 ] })
       chatService.add(chat, { messages: [ message3 ] })
 
-      expect(chat.lastMessage.id).to.eql(message3.id)
+      expect(chat.maxId).to.eql(message3.id)
       expect(chat.minId).to.eql(message1.id)
 
       chatService.deleteMessage(chat, message3.id)
-      expect(chat.lastMessage.id).to.eql(message2.id)
+      expect(chat.maxId).to.eql(message2.id)
       expect(chat.minId).to.eql(message1.id)
 
       chatService.deleteMessage(chat, message1.id)
-      expect(chat.lastMessage.id).to.eql(message2.id)
+      expect(chat.maxId).to.eql(message2.id)
       expect(chat.minId).to.eql(message2.id)
     })
   })

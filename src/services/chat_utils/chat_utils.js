@@ -3,6 +3,7 @@ import { showDesktopNotification } from '../desktop_notification_utils/desktop_n
 export const maybeShowChatNotification = (store, chat) => {
   if (!chat.lastMessage) return
   if (store.rootState.chats.currentChatId === chat.id && !document.hidden) return
+  if (store.rootState.users.currentUser.id === chat.lastMessage.account.id) return
 
   const opts = {
     tag: chat.lastMessage.id,

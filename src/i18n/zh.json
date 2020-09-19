@@ -11,7 +11,7 @@
     "gopher": "Gopher",
     "media_proxy": "媒体代理",
     "scope_options": "可见范围设置",
-    "text_limit": "文本长度限制",
+    "text_limit": "文字數量限制",
     "title": "功能",
     "who_to_follow": "推荐关注"
   },

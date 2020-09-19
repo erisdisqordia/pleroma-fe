@@ -1,1 +1,166 @@
-{}
+{
+  "emoji": {
+    "unicode": "統一碼繪文字",
+    "custom": "自定義繪文字",
+    "add_emoji": "插入繪文字",
+    "search_emoji": "搜索繪文字",
+    "keep_open": "選擇器保持打開",
+    "emoji": "繪文字",
+    "stickers": "貼紙"
+  },
+  "polls": {
+    "not_enough_options": "投票的選項太少",
+    "expired": "投票 {0} 前已結束",
+    "expires_in": "投票於 {0} 內結束",
+    "expiry": "投票期限",
+    "multiple_choices": "多選",
+    "single_choice": "單選",
+    "type": "問卷類型",
+    "vote": "投票",
+    "votes": "票",
+    "option": "選項",
+    "add_option": "增加選項",
+    "add_poll": "增加投票"
+  },
+  "notifications": {
+    "reacted_with": "和 {0} 互動過",
+    "migrated_to": "遷移到",
+    "no_more_notifications": "沒有更多的通知",
+    "repeated_you": "轉發了你的狀態",
+    "read": "已閱！",
+    "notifications": "通知",
+    "load_older": "載入更早的通知",
+    "follow_request": "想要關注你",
+    "followed_you": "關注了你",
+    "favorited_you": "喜歡了你的狀態",
+    "broken_favorite": "未知的狀態，正在搜索中…"
+  },
+  "nav": {
+    "chats": "聊天",
+    "timelines": "時間線",
+    "preferences": "偏好設置",
+    "who_to_follow": "推薦關注",
+    "search": "搜索",
+    "user_search": "用戶搜索",
+    "bookmarks": "書籤",
+    "twkn": "已知網絡",
+    "timeline": "時間線",
+    "public_tl": "公共時間線",
+    "dms": "私信",
+    "interactions": "互動",
+    "mentions": "提及",
+    "friend_requests": "關注請求",
+    "back": "後退",
+    "administration": "管理",
+    "about": "關於"
+  },
+  "media_modal": {
+    "next": "往後",
+    "previous": "往前"
+  },
+  "login": {
+    "heading": {
+      "recovery": "雙重因素恢復",
+      "totp": "雙重因素驗證"
+    },
+    "recovery_code": "恢復碼",
+    "enter_two_factor_code": "輸入一個雙重因素驗證碼",
+    "enter_recovery_code": "輸入一個恢復碼",
+    "authentication_code": "驗證碼",
+    "hint": "登錄後加入討論",
+    "username": "用戶名",
+    "register": "註冊",
+    "placeholder": "例：鈴音",
+    "password": "密碼",
+    "logout": "登出",
+    "description": "用 OAuth 登入",
+    "login": "登入"
+  },
+  "importer": {
+    "error": "導入此文件時出現一個錯誤。",
+    "success": "導入成功。",
+    "submit": "提交"
+  },
+  "image_cropper": {
+    "cancel": "取消",
+    "save_without_cropping": "保存不裁剪",
+    "save": "保存",
+    "crop_picture": "裁剪圖片"
+  },
+  "general": {
+    "peek": "窺視",
+    "close": "關閉",
+    "verify": "驗證",
+    "confirm": "確認",
+    "enable": "啟用",
+    "disable": "禁用",
+    "cancel": "取消",
+    "dismiss": "忽略",
+    "show_less": "收起",
+    "show_more": "展開",
+    "optional": "可選",
+    "retry": "再試",
+    "error_retry": "請再試",
+    "generic_error": "發生一個錯誤",
+    "loading": "載入中…",
+    "more": "更多",
+    "submit": "提交",
+    "apply": "應用"
+  },
+  "finder": {
+    "find_user": "尋找用戶",
+    "error_fetching_user": "獲取用戶時發生錯誤"
+  },
+  "features_panel": {
+    "who_to_follow": "推薦關注",
+    "title": "特色",
+    "text_limit": "文字數量限制",
+    "scope_options": "可見範圍設置",
+    "media_proxy": "媒體代理",
+    "pleroma_chat_messages": "Pleroma 聊天",
+    "chat": "聊天"
+  },
+  "exporter": {
+    "processing": "正在處理，稍後會提示您下載文件",
+    "export": "導出"
+  },
+  "domain_mute_card": {
+    "unmute_progress": "取消靜音中…",
+    "unmute": "取消靜音",
+    "mute_progress": "靜音中…",
+    "mute": "靜音"
+  },
+  "shoutbox": {
+    "title": "留言板"
+  },
+  "about": {
+    "staff": "職員",
+    "mrf": {
+      "simple": {
+        "media_nsfw_desc": "這個實例強迫以下實例的帖子媒體設定為敏感：",
+        "media_nsfw": "媒體強制設定為敏感",
+        "media_removal_desc": "這個實例移除以下實例的帖子媒體：",
+        "media_removal": "移除媒體",
+        "ftl_removal_desc": "這個實例在所有已知網絡中移除下列實例：",
+        "ftl_removal": "從所有已知網路中移除",
+        "quarantine_desc": "本實例只會把公開帖子發送到下列實例：",
+        "quarantine": "隔離",
+        "reject_desc": "本實例不會接收來自下列實例的消息：",
+        "reject": "拒絕",
+        "accept_desc": "本實例只接收來自下列實例的消息：",
+        "simple_policies": "站規",
+        "accept": "接受"
+      },
+      "mrf_policies_desc": "MRF 策略會影響本實例的互通行為。以下策略已啟用：",
+      "keyword": {
+        "ftl_removal": "從“所有已知網絡”時間軸中刪除",
+        "replace": "取代",
+        "reject": "拒絕",
+        "is_replaced_by": "→",
+        "keyword_policies": "關鍵字政策"
+      },
+      "mrf_policies": "已啟用的MRF政策",
+      "federation": "聯邦"
+    }
+  }
+}

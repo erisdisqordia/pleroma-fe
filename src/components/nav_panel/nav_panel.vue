@@ -7,12 +7,12 @@
             :to="{ name: timelinesRoute }"
             :class="onTimelineRoute && 'router-link-active'"
           >
-            <i class="button-icon icon-home-2" /> {{ $t("nav.timelines") }}
+            <i class="button-icon icon-home-2" />{{ $t("nav.timelines") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
-            <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
+            <i class="button-icon icon-bell-alt" />{{ $t("nav.interactions") }}
           </router-link>
         </li>
         <li v-if="currentUser && pleromaChatMessagesAvailable">
@@ -23,12 +23,12 @@
             >
               {{ unreadChatCount }}
             </div>
-            <i class="button-icon icon-chat" /> {{ $t("nav.chats") }}
+            <i class="button-icon icon-chat" />{{ $t("nav.chats") }}
           </router-link>
         </li>
         <li v-if="currentUser && currentUser.locked">
           <router-link :to="{ name: 'friend-requests' }">
-            <i class="button-icon icon-user-plus" /> {{ $t("nav.friend_requests") }}
+            <i class="button-icon icon-user-plus" />{{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
               class="badge follow-request-count"
@@ -39,7 +39,7 @@
         </li>
         <li>
           <router-link :to="{ name: 'about' }">
-            <i class="button-icon icon-info-circled" /> {{ $t("nav.about") }}
+            <i class="button-icon icon-info-circled" />{{ $t("nav.about") }}
           </router-link>
         </li>
       </ul>

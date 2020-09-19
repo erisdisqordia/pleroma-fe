@@ -64,7 +64,7 @@
   .timeline-menu-popover-wrap {
     overflow: hidden;
     // Match panel heading padding to line up menu with bottom of heading
-    margin-top: 0.6rem;
+    margin-top: 0.6rem 0.65em;
     padding: 0 15px 15px 15px;
   }
   .timeline-menu-popover {
@@ -137,10 +137,6 @@
 
     &:last-child {
       border: none;
-    }
-
-    i {
-      margin: 0 0.5em;
     }
   }
 

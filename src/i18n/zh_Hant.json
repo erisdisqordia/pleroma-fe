@@ -6,7 +6,9 @@
     "search_emoji": "搜索繪文字",
     "keep_open": "選擇器保持打開",
     "emoji": "繪文字",
-    "stickers": "貼紙"
+    "stickers": "貼紙",
+    "load_all": "加載所有繪文字（共 {emojiAmount} 個）",
+    "load_all_hint": "最先加載的 {saneAmount} ，加載全部繪文字可能會帶來性能問題。"
   },
   "polls": {
     "not_enough_options": "投票的選項太少",
@@ -118,7 +120,8 @@
     "scope_options": "可見範圍設置",
     "media_proxy": "媒體代理",
     "pleroma_chat_messages": "Pleroma 聊天",
-    "chat": "聊天"
+    "chat": "聊天",
+    "gopher": "Gopher"
   },
   "exporter": {
     "processing": "正在處理，稍後會提示您下載文件",
@@ -153,7 +156,7 @@
       },
       "mrf_policies_desc": "MRF 策略會影響本實例的互通行為。以下策略已啟用：",
       "keyword": {
-        "ftl_removal": "從“所有已知網絡”時間軸中刪除",
+        "ftl_removal": "從“全部已知網絡”時間線上移除",
         "replace": "取代",
         "reject": "拒絕",
         "is_replaced_by": "→",
@@ -162,5 +165,408 @@
       "mrf_policies": "已啟用的MRF政策",
       "federation": "聯邦"
     }
+  },
+  "settings": {
+    "style": {
+      "common": {
+        "color": "顏色",
+        "contrast": {
+          "context": {
+            "18pt": "大字文本 (18pt+)"
+          },
+          "level": {
+            "aaa": "符合 AAA 等級準則（推薦）",
+            "aa": "符合 AA 等級準則（最低）"
+          },
+          "hint": "對比度是 {ratio}， 它 {level} {context}"
+        },
+        "opacity": "透明度"
+      },
+      "advanced_colors": {
+        "faint_text": "灰度文字",
+        "alert_error": "錯誤"
+      },
+      "preview": {
+        "header_faint": "這很正常"
+      },
+      "shadows": {
+        "override": "覆寫"
+      },
+      "switcher": {
+        "use_snapshot": "舊版",
+        "load_theme": "載入主題",
+        "keep_color": "保留顏色",
+        "keep_shadows": "保留陰影",
+        "keep_opacity": "保留透明度",
+        "keep_roundness": "保留圓角"
+      },
+      "fonts": {
+        "components": {
+          "interface": "界面"
+        }
+      }
+    },
+    "notification_setting_block_from_strangers": "屏蔽來自你沒有關注的用戶的通知",
+    "user_mutes": "用户",
+    "hide_followers_count_description": "不顯示關注者數量",
+    "no_rich_text_description": "不顯示富文本格式",
+    "notification_visibility_moves": "用戶遷移",
+    "notification_visibility_repeats": "轉發",
+    "notification_visibility_mentions": "提及",
+    "notification_visibility_likes": "點贊",
+    "interfaceLanguage": "界面語言",
+    "instance_default": "(默認：{value})",
+    "inputRadius": "輸入框",
+    "import_theme": "導入預置主題",
+    "import_followers_from_a_csv_file": "從 csv 文件中導入關注",
+    "import_blocks_from_a_csv_file": "從 csv 文件中導入封鎖黑名單名單",
+    "hide_filtered_statuses": "隱藏過濾的狀態",
+    "lock_account_description": "你需要手動審核關注請求",
+    "loop_video": "循環視頻",
+    "loop_video_silent_only": "只循環沒有聲音的視頻（例如：Mastodon 裡的“GIF”）",
+    "mutes_tab": "靜音",
+    "play_videos_in_modal": "在彈出框內播放視頻",
+    "profile_fields": {
+      "add_field": "添加字段",
+      "name": "標籤",
+      "value": "內容"
+    },
+    "use_contain_fit": "生成縮略圖時不要裁剪附件",
+    "notification_visibility": "要顯示的通知類型",
+    "notification_visibility_follows": "關注",
+    "new_email": "新電郵",
+    "subject_line_mastodon": "比如mastodon: copy as is",
+    "reset_background_confirm": "您確定要重置個人資料背景圖嗎？",
+    "reset_banner_confirm": "您確定要重置橫幅圖片嗎？",
+    "reset_avatar_confirm": "您確定要重置頭像嗎？",
+    "reset_profile_banner": "重置橫幅圖片",
+    "reset_profile_background": "重置個人資料背景圖",
+    "reset_avatar": "重置頭像",
+    "discoverable": "允許通過搜索檢索等服務找到此賬號",
+    "delete_account_error": "刪除賬戶時發生錯誤，如果一直刪除不了，請聯繫實例管理員。",
+    "composing": "正在書寫",
+    "chatMessageRadius": "聊天訊息",
+    "mfa": {
+      "confirm_and_enable": "確認並啟用OTP",
+      "setup_otp": "設置OTP",
+      "otp": "OTP",
+      "wait_pre_setup_otp": "預設OTP",
+      "verify": {
+        "desc": "要啟用雙因素驗證，請把你的雙因素驗證 app 裡的數字輸入："
+      },
+      "scan": {
+        "secret_code": "密鑰",
+        "desc": "使用你的雙因素驗證 app，掃瞄這個二維碼，或者輸入這些文字密鑰：",
+        "title": "掃瞄"
+      },
+      "authentication_methods": "身份驗證方法",
+      "recovery_codes_warning": "抄寫這些號碼，或者保存在安全的地方。這些號碼不會再次顯示。如果你無法訪問你的 2FA app，也丟失了你的恢復碼，你的賬號就再也無法登錄了。",
+      "waiting_a_recovery_codes": "正在接收備份碼…",
+      "recovery_codes": "恢復碼。",
+      "warning_of_generate_new_codes": "當你生成新的恢復碼時，你的舊恢復碼就失效了。",
+      "generate_new_recovery_codes": "生成新的恢復碼",
+      "title": "雙因素驗證"
+    },
+    "new_password": "新密碼",
+    "name_bio": "名字及簡介",
+    "name": "名字",
+    "domain_mutes": "域名",
+    "delete_account_instructions": "在下面輸入密碼，以確認刪除帳戶。",
+    "delete_account_description": "永久刪除你的帳號和所有數據。",
+    "delete_account": "刪除帳戶",
+    "default_vis": "默認可見性範圍",
+    "data_import_export_tab": "數據導入/導出",
+    "mutes_and_blocks": "靜音與封鎖",
+    "current_password": "當前密碼",
+    "confirm_new_password": "確認新密碼",
+    "collapse_subject": "摺疊帶標題的內容",
+    "checkboxRadius": "複選框",
+    "instance_default_simple": "(默認)",
+    "interface": "界面",
+    "invalid_theme_imported": "您所選擇的主題文件不被 Pleroma 支持，因此主題未被修改。",
+    "limited_availability": "在您的瀏覽器中無法使用",
+    "links": "鏈接",
+    "changed_password": "成功修改了密碼！",
+    "change_password_error": "修改密碼的時候出了點問題。",
+    "change_password": "修改密碼",
+    "changed_email": "郵箱修改成功！",
+    "bot": "這是一個機器人賬號",
+    "change_email": "修改電子郵箱",
+    "cRed": "紅色（取消）",
+    "cOrange": "橙色（收藏）",
+    "cGreen": "綠色（轉發）",
+    "cBlue": "藍色（回覆，關注）",
+    "btnRadius": "按鈕",
+    "notification_visibility_emoji_reactions": "互動",
+    "no_blocks": "沒有封鎖",
+    "no_mutes": "沒有靜音",
+    "hide_follows_description": "不要顯示我所關注的人",
+    "hide_followers_description": "不要顯示關注我的人",
+    "hide_follows_count_description": "不顯示關注數",
+    "nsfw_clickthrough": "將敏感附件隱藏，點擊才能打開",
+    "valid_until": "有效期至",
+    "panelRadius": "面板",
+    "pause_on_unfocused": "在離開頁面時暫停時間線推送",
+    "notifications": "通知",
+    "notification_setting_filters": "過濾器",
+    "notification_setting_privacy": "隱私",
+    "notification_mutes": "要停止收到某個指定的用戶的通知，請使用靜音功能。",
+    "notification_blocks": "封鎖一個用戶會停掉所有他的通知，等同於取消關注。",
+    "enable_web_push_notifications": "啟用 web 推送通知",
+    "presets": "預置",
+    "profile_background": "個人背景圖",
+    "profile_banner": "橫幅圖片",
+    "profile_tab": "個人資料",
+    "radii_help": "設置界面邊緣的圓角 (單位：像素)",
+    "reply_visibility_all": "顯示所有回覆",
+    "autohide_floating_post_button": "自動隱藏新帖子的按鈕（移動設備）",
+    "saving_err": "保存設置時發生錯誤",
+    "saving_ok": "設置已保存",
+    "search_user_to_block": "搜索你想屏蔽的用戶",
+    "search_user_to_mute": "搜索你想要隱藏的用戶",
+    "security_tab": "安全",
+    "set_new_avatar": "設置新頭像",
+    "set_new_profile_background": "設置新的個人背景",
+    "set_new_profile_banner": "設置新的個人橫幅",
+    "settings": "設置",
+    "subject_input_always_show": "總是顯示主題框",
+    "subject_line_behavior": "回覆時複製主題",
+    "subject_line_email": "比如電郵： \"re: 主題\"",
+    "subject_line_noop": "不要複製",
+    "post_status_content_type": "發帖內容類型",
+    "stop_gifs": "鼠標懸停時播放GIF",
+    "streaming": "開啟滾動到頂部時的自動推送",
+    "text": "文本",
+    "theme": "主題",
+    "theme_help": "使用十六進制代碼（#rrggbb）來設置主題顏色。",
+    "theme_help_v2_1": "你也可以通過切換複選框來覆蓋某些組件的顏色和透明。使用“清除所有”來清楚所有覆蓋設置。",
+    "theme_help_v2_2": "某些條目下的圖標是背景或文本對比指示器，鼠標懸停可以獲取詳細信息。請記住，使用透明度來顯示最差的情況。",
+    "tooltipRadius": "提醒",
+    "upload_a_photo": "上傳照片",
+    "user_settings": "用戶設置",
+    "values": {
+      "false": "否",
+      "true": "是"
+    },
+    "avatar_size_instruction": "推薦的頭像圖片最小的尺寸是 150x150 像素。",
+    "emoji_reactions_on_timeline": "在時間線上顯示繪文字互動",
+    "export_theme": "導出預置主題",
+    "filtering": "過濾",
+    "filtering_explanation": "所有包含以下詞彙的內容都會被隱藏，一行一個",
+    "follow_export": "導出關注",
+    "follow_export_button": "將關注導出成 csv 文件",
+    "follow_import": "導入關注",
+    "follow_import_error": "導入關注時錯誤",
+    "follows_imported": "關注已導入！尚需要一些時間來處理。",
+    "hide_attachments_in_convo": "在對話中隱藏附件",
+    "hide_attachments_in_tl": "在時間線上隱藏附件",
+    "hide_muted_posts": "不顯示被靜音的用戶的帖子",
+    "max_thumbnails": "最多每個帖子所能顯示的縮略圖數量",
+    "hide_isp": "隱藏指定實例的面板",
+    "preload_images": "預載圖片",
+    "use_one_click_nsfw": "點擊一次以打開工作場所不適宜的附件",
+    "hide_post_stats": "隱藏帖子的統計數據(例如：收藏的次數)",
+    "hide_user_stats": "隱藏用戶的統計數據（例如：關注者的數量）",
+    "general": "通用",
+    "foreground": "前景",
+    "blocks_tab": "封鎖",
+    "blocks_imported": "封鎖黑名單導入成功！需要一點時間來處理。",
+    "block_import_error": "導入封鎖黑名單出錯",
+    "block_import": "封鎖黑名單導入",
+    "block_export_button": "導出你的封鎖黑名單到一個 csv 文件",
+    "block_export": "封鎖黑名單導出",
+    "bio": "簡介",
+    "background": "背景",
+    "avatarRadius": "頭像",
+    "avatarAltRadius": "頭像（通知）",
+    "avatar": "頭像",
+    "attachments": "附件",
+    "attachmentRadius": "附件",
+    "allow_following_move": "正在關注的賬號遷移時自動重新關注",
+    "enter_current_password_to_confirm": "輸入你當前密碼來確認你的身份",
+    "security": "安全",
+    "app_name": "App 名稱",
+    "change_email_error": "修改你的電子郵箱時發生錯誤。",
+    "type_domains_to_mute": "搜索需要隱藏的域名"
+  },
+  "chats": {
+    "more": "更多",
+    "delete_confirm": "您確實要刪除此消息嗎？",
+    "error_loading_chat": "加載聊天時出了點問題。",
+    "error_sending_message": "發送消息時出了點問題。",
+    "empty_chat_list_placeholder": "您還沒有任何聊天記錄。 開始新的聊天！",
+    "new": "新聊天",
+    "empty_message_error": "無法發布空消息"
+  },
+  "file_type": {
+    "audio": "音頻",
+    "video": "視頻",
+    "image": "图片",
+    "file": "檔案"
+  },
+  "display_date": {
+    "today": "今天"
+  },
+  "status": {
+    "mute_conversation": "靜音對話",
+    "replies_list": "回覆：",
+    "reply_to": "回覆",
+    "pin": "在個人資料置頂",
+    "unpin": "取消在個人資料置頂"
+  },
+  "time": {
+    "hours": "{0} 小時",
+    "days_short": "{0}天",
+    "day_short": "{0}天",
+    "days": "{0} 天",
+    "hour": "{0} 小时",
+    "hour_short": "{0}h",
+    "hours_short": "{0}h",
+    "years_short": "{0} y",
+    "now": "剛剛"
+  },
+  "post_status": {
+    "media_description_error": "無法更新媒體，請重試",
+    "media_description": "媒體描述",
+    "scope": {
+      "unlisted": "不公開 - 不會發送到公共時間軸",
+      "public": "公共 - 發送到公共時間軸",
+      "private": "僅關注者 - 只有關注了你的人能看到",
+      "direct": "私信 - 只發送給被提及的用戶"
+    },
+    "scope_notice": {
+      "unlisted": "本條內容既不在公共時間線，也不會在所有已知網絡上可見",
+      "private": "關注你的人才能看到本條內容",
+      "public": "本條帖子可以被所有人看到"
+    },
+    "preview_empty": "空的",
+    "preview": "預覽",
+    "posting": "正在發送",
+    "direct_warning_to_first_only": "本條內容只有被在消息開始處提及的用戶能夠看到。",
+    "direct_warning_to_all": "本條內容只有被提及的用戶能夠看到。",
+    "account_not_locked_warning": "你的帳號沒有 {0}。任何人都可以關注你並瀏覽你的上鎖內容。",
+    "new_status": "發佈新狀態",
+    "content_warning": "主題（可選）",
+    "content_type": {
+      "text/bbcode": "BBCode",
+      "text/markdown": "Markdown",
+      "text/html": "HTML",
+      "text/plain": "純文本"
+    },
+    "attachments_sensitive": "標記附件為敏感內容",
+    "account_not_locked_warning_link": "上鎖",
+    "default": "剛剛抵達洛杉磯。"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma無法訪問瀏覽器存儲。您的登錄名或本地設置將不會保存，您可能會遇到意外問題。嘗試啟用Cookie。"
+  },
+  "timeline": {
+    "error_fetching": "獲取更新時發生錯誤",
+    "conversation": "對話"
+  },
+  "interactions": {
+    "load_older": "載入更早的互動",
+    "moves": "用戶遷移",
+    "follows": "新的關注者",
+    "favs_repeats": "轉發和收藏"
+  },
+  "selectable_list": {
+    "select_all": "選擇全部"
+  },
+  "remote_user_resolver": {
+    "error": "未找到。",
+    "searching_for": "搜索",
+    "remote_user_resolver": "遠程用戶解析器"
+  },
+  "registration": {
+    "validations": {
+      "password_confirmation_match": "不能和密碼一樣",
+      "password_confirmation_required": "不能留空",
+      "password_required": "不能留空",
+      "email_required": "不能留空",
+      "fullname_required": "不能留空",
+      "username_required": "不能留空"
+    },
+    "fullname": "顯示名稱",
+    "bio_placeholder": "例如：\n你好，我是玲音。\n我是一個住在日本郊區的動畫少女。你可能在 Wired 見過我。",
+    "fullname_placeholder": "例如：岩倉玲音",
+    "username_placeholder": "例如：玲音",
+    "new_captcha": "點擊圖片獲取新的驗證碼",
+    "captcha": "CAPTCHA",
+    "token": "邀請碼",
+    "registration": "註冊",
+    "password_confirm": "確認密碼",
+    "email": "電子郵箱",
+    "bio": "簡介"
+  },
+  "user_card": {
+    "its_you": "就是你！!",
+    "media": "媒體",
+    "per_day": "每天",
+    "remote_follow": "跨站關注",
+    "subscribe": "訂閱",
+    "mute_progress": "靜音中…",
+    "admin_menu": {
+      "delete_account": "刪除賬號",
+      "delete_user": "刪除用戶",
+      "delete_user_confirmation": "你確認嗎？此操作無法撤銷。"
+    }
+  },
+  "user_profile": {
+    "timeline_title": "用戶時間線",
+    "profile_does_not_exist": "抱歉，此個人資料不存在。",
+    "profile_loading_error": "抱歉，載入個人資料時出錯。"
+  },
+  "user_reporting": {
+    "title": "報告 {0}",
+    "add_comment_description": "此報告會發送給你的實例管理員。你可以在下面提供更多詳細信息解釋報告的緣由：",
+    "forward_to": "轉發 {0}",
+    "submit": "提交",
+    "generic_error": "當處理你的請求時，發生了一個錯誤。"
+  },
+  "who_to_follow": {
+    "more": "更多",
+    "who_to_follow": "推薦關注"
+  },
+  "tool_tip": {
+    "media_upload": "上傳多媒體",
+    "repeat": "轉發",
+    "favorite": "喜歡",
+    "add_reaction": "添加互動",
+    "reply": "回覆",
+    "user_settings": "用戶設置",
+    "accept_follow_request": "接受關注請求",
+    "reject_follow_request": "拒絕關注請求"
+  },
+  "upload": {
+    "file_size_units": {
+      "B": "B",
+      "KiB": "KiB",
+      "TiB": "TiB",
+      "MiB": "MiB",
+      "GiB": "GiB"
+    },
+    "error": {
+      "base": "上傳失敗。",
+      "file_too_big": "文件太大[{filesize} {filesizeunit} / {allowedsize} {allowedsizeunit}]",
+      "default": "稍後再試"
+    }
+  },
+  "search": {
+    "people": "人",
+    "hashtags": "標籤",
+    "person_talking": "{count} 人正在討論",
+    "people_talking": "{count} 人正在討論",
+    "no_results": "沒有搜索結果"
+  },
+  "password_reset": {
+    "forgot_password": "忘記密碼了？",
+    "password_reset": "重置密碼",
+    "instruction": "輸入你的電郵地址或者用戶名，我們將發送一個鏈接到你的郵箱，用於重置密碼。",
+    "placeholder": "你的電郵地址或者用戶名",
+    "check_email": "檢查你的郵箱，會有一個鏈接用於重置密碼。",
+    "return_home": "回到首頁",
+    "too_many_requests": "你觸發了嘗試的限制，請稍後再試。",
+    "password_reset_disabled": "密碼重置已經被禁用。請聯繫你的實例管理員。"
   }
 }

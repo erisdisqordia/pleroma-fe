@@ -13,7 +13,8 @@
     "scope_options": "可见范围设置",
     "text_limit": "文字數量限制",
     "title": "功能",
-    "who_to_follow": "推荐关注"
+    "who_to_follow": "推荐关注",
+    "pleroma_chat_messages": "Pleroma 聊天"
   },
   "finder": {
     "error_fetching_user": "获取用户时发生错误",
@@ -32,7 +33,12 @@
     "enable": "启用",
     "confirm": "确认",
     "verify": "验证",
-    "dismiss": "忽略"
+    "dismiss": "忽略",
+    "peek": "窥探",
+    "close": "关闭",
+    "retry": "重试",
+    "error_retry": "请重试",
+    "loading": "载入中…"
   },
   "image_cropper": {
     "crop_picture": "裁剪图片",
@@ -77,12 +83,15 @@
     "dms": "私信",
     "public_tl": "公共时间线",
     "timeline": "时间线",
-    "twkn": "所有已知网络",
+    "twkn": "已知网络",
     "user_search": "用户搜索",
     "search": "搜索",
     "who_to_follow": "推荐关注",
     "preferences": "偏好设置",
-    "administration": "管理员"
+    "administration": "管理员",
+    "chats": "聊天",
+    "timelines": "时间线",
+    "bookmarks": "书签"
   },
   "notifications": {
     "broken_favorite": "未知的状态，正在搜索中…",
@@ -146,7 +155,10 @@
       "private": "仅关注者 - 只有关注了你的人能看到",
       "public": "公共 - 发送到公共时间轴",
       "unlisted": "不公开 - 不会发送到公共时间轴"
-    }
+    },
+    "preview_empty": "空的",
+    "preview": "预览",
+    "media_description": "媒体描述"
   },
   "registration": {
     "bio": "简介",
@@ -350,7 +362,10 @@
         "clear_opacity": "清除透明度",
         "load_theme": "加载主题",
         "help": {
-          "upgraded_from_v2": "PleromaFE 已升级，主题会和你记忆中的不太一样。"
+          "upgraded_from_v2": "PleromaFE 已升级，主题会和你记忆中的不太一样。",
+          "older_version_imported": "您导入的文件来自旧版本的 FE。",
+          "future_version_imported": "您导入的文件来自更高版本的 FE。",
+          "v2_imported": "您导入的文件是旧版 FE 的。我们尽可能保持兼容性，但还是可能出现不一致的情况。"
         },
         "use_source": "新版本",
         "use_snapshot": "老版本",
@@ -470,7 +485,29 @@
     "notification_visibility_emoji_reactions": "互动",
     "notification_visibility_moves": "用户迁移",
     "new_email": "新邮箱",
-    "emoji_reactions_on_timeline": "在时间线上显示表情符号互动"
+    "emoji_reactions_on_timeline": "在时间线上显示表情符号互动",
+    "notification_setting_hide_notification_contents": "隐藏推送通知中的发送者与内容信息",
+    "notification_setting_block_from_strangers": "屏蔽来自你没有关注的用户的通知",
+    "type_domains_to_mute": "搜索需要隐藏的域名",
+    "useStreamingApi": "实时接收发布以及通知",
+    "user_mutes": "用户",
+    "reset_background_confirm": "您确定要重置个人资料背景图吗？",
+    "reset_banner_confirm": "您确定要重置横幅图片吗？",
+    "reset_avatar_confirm": "您确定要重置头像吗？",
+    "reset_profile_banner": "重置横幅图片",
+    "reset_profile_background": "重置个人资料背景图",
+    "reset_avatar": "重置头像",
+    "hide_followers_count_description": "不显示关注者数量",
+    "profile_fields": {
+      "value": "内容",
+      "name": "标签",
+      "add_field": "添加字段"
+    },
+    "accent": "强调色",
+    "pad_emoji": "从表情符号选择器插入表情符号时，在表情两侧插入空格",
+    "discoverable": "允许通过搜索检索等服务找到此账号",
+    "mutes_and_blocks": "隐藏与屏蔽",
+    "bot": "这是一个机器人账号"
   },
   "time": {
     "day": "{0} 天",
@@ -628,7 +665,7 @@
   },
   "search": {
     "people": "人",
-    "hashtags": "Hashtags",
+    "hashtags": "话题标签",
     "person_talking": "{count} 人正在讨论",
     "people_talking": "{count} 人正在讨论",
     "no_results": "没有搜索结果"
@@ -655,7 +692,9 @@
     "custom": "自定义表情符号",
     "add_emoji": "插入表情符号",
     "search_emoji": "搜索表情符号",
-    "emoji": "表情符号"
+    "emoji": "表情符号",
+    "load_all": "加载所有表情符号（共 {emojiAmount} 个）",
+    "load_all_hint": "最先加载的 {saneAmount} 表情符号，加载全部表情符号可能会带来性能问题。"
   },
   "about": {
     "mrf": {
@@ -667,7 +706,12 @@
         "accept_desc": "本实例只接收来自下列实例的消息：",
         "simple_policies": "站规",
         "accept": "接受",
-        "media_removal": "移除媒体"
+        "media_removal": "移除媒体",
+        "media_nsfw_desc": "本实例将来自以下实例的媒体强制设置为敏感内容：",
+        "media_nsfw": "强制设置媒体为敏感内容",
+        "media_removal_desc": "本实例移除了来自以下实例的媒体内容：",
+        "ftl_removal_desc": "该实例在从“全部已知网络”时间线上移除了：",
+        "ftl_removal": "从“全部已知网络”时间线上移除"
       },
       "mrf_policies_desc": "MRF 策略会影响本实例的互通行为。以下策略已启用：",
       "mrf_policies": "已启动 MRF 策略",
@@ -679,12 +723,19 @@
         "reject": "拒绝"
       },
       "federation": "联邦"
-    }
+    },
+    "staff": "管理人员"
   },
   "domain_mute_card": {
     "unmute_progress": "正在取消隐藏…",
     "unmute": "取消隐藏",
     "mute_progress": "隐藏中…",
     "mute": "隐藏"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma 无法访问浏览器储存。您的登陆以及本地设置将不会被保存，您也可能遇到未知问题。请尝试启用 cookies。"
+  },
+  "shoutbox": {
+    "title": "留言板"
   }
 }

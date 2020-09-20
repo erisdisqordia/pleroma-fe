@@ -158,7 +158,9 @@
     },
     "preview_empty": "空的",
     "preview": "预览",
-    "media_description": "媒体描述"
+    "media_description": "媒体描述",
+    "media_description_error": "更新媒体失败，请重试",
+    "empty_status_error": "不能发布没有内容、没有附件的状态"
   },
   "registration": {
     "bio": "简介",
@@ -501,13 +503,17 @@
     "profile_fields": {
       "value": "内容",
       "name": "标签",
-      "add_field": "添加字段"
+      "add_field": "添加字段",
+      "label": "个人资料元数据"
     },
     "accent": "强调色",
     "pad_emoji": "从表情符号选择器插入表情符号时，在表情两侧插入空格",
     "discoverable": "允许通过搜索检索等服务找到此账号",
     "mutes_and_blocks": "隐藏与屏蔽",
-    "bot": "这是一个机器人账号"
+    "bot": "这是一个机器人账号",
+    "fun": "幽默",
+    "useStreamingApiWarning": "（不推荐，试验性，已知会跳过消息）",
+    "chatMessageRadius": "聊天消息"
   },
   "time": {
     "day": "{0} 天",
@@ -733,7 +739,7 @@
     "mute": "隐藏"
   },
   "errors": {
-    "storage_unavailable": "Pleroma 无法访问浏览器储存。您的登陆以及本地设置将不会被保存，您也可能遇到未知问题。请尝试启用 cookies。"
+    "storage_unavailable": "Pleroma 无法访问浏览器储存。您的登陆名以及本地设置将不会被保存，您可能遇到意外问题。请尝试启用 cookies。"
   },
   "shoutbox": {
     "title": "留言板"

@@ -29,14 +29,17 @@ const ReactButton = {
     emojis () {
       if (this.filterWord !== '') {
         const filterWordLowercase = this.filterWord.toLowerCase()
-        const orderedEmojiList = []
+        let orderedEmojiList = []
         for (const emoji of this.$store.state.instance.emoji) {
           const indexOfFilterWord = emoji.displayText.toLowerCase().indexOf(filterWordLowercase)
           if (indexOfFilterWord > -1) {
-            orderedEmojiList.splice(indexOfFilterWord, 0, emoji)
+            if (!Array.isArray(orderedEmojiList[indexOfFilterWord])) {
+              orderedEmojiList[indexOfFilterWord] = []
+            }
+            orderedEmojiList[indexOfFilterWord].push(emoji)
           }
         }
-        return orderedEmojiList
+        return orderedEmojiList.flat()
       }
       return this.$store.state.instance.emoji || []
     },

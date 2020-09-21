@@ -11,14 +11,17 @@ const filterByKeyword = (list, keyword = '') => {
   if (keyword === '') return list
 
   const keywordLowercase = keyword.toLowerCase()
-  const orderedEmojiList = []
+  let orderedEmojiList = []
   for (const emoji of list) {
     const indexOfKeyword = emoji.displayText.toLowerCase().indexOf(keywordLowercase)
     if (indexOfKeyword > -1) {
-      orderedEmojiList.splice(indexOfKeyword, 0, emoji)
+      if (!Array.isArray(orderedEmojiList[keywordLowercase])) {
+        orderedEmojiList[keywordLowercase] = []
+      }
+      orderedEmojiList[keywordLowercase].push(emoji)
     }
   }
-  return orderedEmojiList
+  return orderedEmojiList.flat()
 }
 
 const EmojiPicker = {

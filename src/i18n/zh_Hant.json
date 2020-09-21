@@ -172,11 +172,13 @@
         "color": "顏色",
         "contrast": {
           "context": {
-            "18pt": "大字文本 (18pt+)"
+            "18pt": "大字文本 (18pt+)",
+            "text": "文本"
           },
           "level": {
             "aaa": "符合 AAA 等級準則（推薦）",
-            "aa": "符合 AA 等級準則（最低）"
+            "aa": "符合 AA 等級準則（最低）",
+            "bad": "不符合任何輔助功能指南"
           },
           "hint": "對比度是 {ratio}， 它 {level} {context}"
         },
@@ -184,7 +186,11 @@
       },
       "advanced_colors": {
         "faint_text": "灰度文字",
-        "alert_error": "錯誤"
+        "alert_error": "錯誤",
+        "badge_notification": "通知",
+        "alert": "提醒或警告背景色",
+        "_tab_label": "高级",
+        "alert_warning": "警告"
       },
       "preview": {
         "header_faint": "這很正常"
@@ -198,12 +204,33 @@
         "keep_color": "保留顏色",
         "keep_shadows": "保留陰影",
         "keep_opacity": "保留透明度",
-        "keep_roundness": "保留圓角"
+        "keep_roundness": "保留圓角",
+        "help": {
+          "migration_napshot_gone": "不知出於何種原因，主題快照缺失了，一些地方可能與您印象中的不符。",
+          "snapshot_source_mismatch": "版本衝突：很有可能是 FE 版本回滾後再次升級了，如果您使用舊版本的 FE 更改了主題那麼您可能需要使用舊版本，否則請使用新版本。",
+          "future_version_imported": "您導入的文件來自更高版本的 FE。",
+          "older_version_imported": "您導入的文件來自舊版本的 FE。",
+          "snapshot_missing": "在文件中沒有主題快照，所以網站外觀可能會與原來預想的不同。",
+          "fe_upgraded": "PleromaFE 的主題引擎隨著版本更新升級了。",
+          "fe_downgraded": "PleromaFE 的版本回滾了。",
+          "upgraded_from_v2": "PleromaFE 已升級，主題會和你記憶中的不太一樣。"
+        },
+        "use_source": "新版本",
+        "keep_as_is": "保持原狀",
+        "clear_opacity": "清除透明度",
+        "clear_all": "清除全部",
+        "reset": "重置",
+        "keep_fonts": "保留字體"
       },
       "fonts": {
         "components": {
           "interface": "界面"
         }
+      },
+      "common_colors": {
+        "foreground_hint": "點擊”高級“ 標籤進行細緻的控制",
+        "main": "常用顏色",
+        "_tab_label": "共同"
       }
     },
     "notification_setting_block_from_strangers": "屏蔽來自你沒有關注的用戶的通知",
@@ -387,7 +414,17 @@
     "security": "安全",
     "app_name": "App 名稱",
     "change_email_error": "修改你的電子郵箱時發生錯誤。",
-    "type_domains_to_mute": "搜索需要隱藏的域名"
+    "type_domains_to_mute": "搜索需要隱藏的域名",
+    "pad_emoji": "從表情符號選擇器插入表情符號時，在表情兩側插入空格",
+    "useStreamingApi": "實時接收發佈以及通知",
+    "minimal_scopes_mode": "最小發文範圍",
+    "scope_copy": "回覆時的複製範圍（私信是總是複製的）",
+    "reply_visibility_self": "只顯示發送給我的回覆",
+    "reply_visibility_following": "只顯示發送給我的回覆/發送給我關注的用戶的回覆",
+    "replies_in_timeline": "時間線中的回覆",
+    "revoke_token": "撤消",
+    "show_admin_badge": "顯示管理徽章",
+    "accent": "強調色"
   },
   "chats": {
     "more": "更多",

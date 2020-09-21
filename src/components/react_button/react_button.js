@@ -31,8 +31,8 @@ const ReactButton = {
         const filterWordLowercase = this.filterWord.toLowerCase()
         const orderedEmojiList = []
         for (const emoji of this.$store.state.instance.emoji) {
-          const indexOfFilterWord = emoji.displayText.toLowerCase().indexOf( filterWordLowercase )
-          if ( indexOfFilterWord > -1 ) {
+          const indexOfFilterWord = emoji.displayText.toLowerCase().indexOf(filterWordLowercase)
+          if (indexOfFilterWord > -1) {
             orderedEmojiList.splice(indexOfFilterWord, 0, emoji)
           }
         }

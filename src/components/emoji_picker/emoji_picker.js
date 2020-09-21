@@ -13,8 +13,8 @@ const filterByKeyword = (list, keyword = '') => {
   const keywordLowercase = keyword.toLowerCase()
   const orderedEmojiList = []
   for (const emoji of list) {
-    const indexOfKeyword = emoji.displayText.toLowerCase().indexOf( keywordLowercase )
-    if ( indexOfKeyword > -1 ) {
+    const indexOfKeyword = emoji.displayText.toLowerCase().indexOf(keywordLowercase)
+    if (indexOfKeyword > -1) {
       orderedEmojiList.splice(indexOfKeyword, 0, emoji)
     }
   }

@@ -15,10 +15,10 @@ const filterByKeyword = (list, keyword = '') => {
   for (const emoji of list) {
     const indexOfKeyword = emoji.displayText.toLowerCase().indexOf(keywordLowercase)
     if (indexOfKeyword > -1) {
-      if (!Array.isArray(orderedEmojiList[keywordLowercase])) {
-        orderedEmojiList[keywordLowercase] = []
+      if (!Array.isArray(orderedEmojiList[indexOfKeyword])) {
+        orderedEmojiList[indexOfKeyword] = []
       }
-      orderedEmojiList[keywordLowercase].push(emoji)
+      orderedEmojiList[indexOfKeyword].push(emoji)
     }
   }
   return orderedEmojiList.flat()

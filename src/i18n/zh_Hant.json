@@ -28,13 +28,13 @@
     "reacted_with": "和 {0} 互動過",
     "migrated_to": "遷移到",
     "no_more_notifications": "沒有更多的通知",
-    "repeated_you": "轉發了你的狀態",
+    "repeated_you": "轉發了你的發文",
     "read": "已閱！",
     "notifications": "通知",
     "load_older": "載入更早的通知",
     "follow_request": "想要關注你",
     "followed_you": "關注了你",
-    "favorited_you": "喜歡了你的狀態",
+    "favorited_you": "喜歡了你的發文",
     "broken_favorite": "未知的狀態，正在搜索中…"
   },
   "nav": {
@@ -146,7 +146,7 @@
         "media_removal": "移除媒體",
         "ftl_removal_desc": "這個實例在所有已知網絡中移除下列實例：",
         "ftl_removal": "從所有已知網路中移除",
-        "quarantine_desc": "本實例只會把公開帖子發送到下列實例：",
+        "quarantine_desc": "本實例只會把公開發文發送到下列實例：",
         "quarantine": "隔離",
         "reject_desc": "本實例不會接收來自下列實例的消息：",
         "reject": "拒絕",
@@ -190,13 +190,75 @@
         "badge_notification": "通知",
         "alert": "提醒或警告背景色",
         "_tab_label": "高级",
-        "alert_warning": "警告"
+        "alert_warning": "警告",
+        "alert_neutral": "中性",
+        "post": "帖子/用戶簡介",
+        "badge": "徽章背景",
+        "popover": "提示框，菜單，彈出框",
+        "panel_header": "面板標題",
+        "top_bar": "頂欄",
+        "borders": "邊框",
+        "buttons": "按鈕",
+        "inputs": "輸入框",
+        "underlay": "底襯",
+        "poll": "投票統計圖",
+        "icons": "圖標",
+        "highlight": "強調元素",
+        "pressed": "按下",
+        "selectedPost": "選中的帖子",
+        "selectedMenu": "選中的菜單項",
+        "disabled": "關閉",
+        "toggled": "切換",
+        "tabs": "標籤",
+        "chat": {
+          "incoming": "收到",
+          "outgoing": "發出",
+          "border": "邊框"
+        }
       },
       "preview": {
-        "header_faint": "這很正常"
+        "header_faint": "這很正常",
+        "header": "預覽",
+        "content": "內容",
+        "error": "例子錯誤",
+        "button": "按鈕",
+        "text": "有堆 {0} 和 {1}",
+        "mono": "內容",
+        "input": "剛剛抵達洛杉磯.",
+        "faint_link": "有用的手冊",
+        "fine_print": "閱讀我們的 {0} ，然而什麼有用的也學不到！",
+        "checkbox": "我已經瀏覽了條款及細則",
+        "link": "一個很好的小鏈接"
       },
       "shadows": {
-        "override": "覆寫"
+        "override": "覆寫",
+        "_tab_label": "陰影和燈光",
+        "component": "組件",
+        "shadow_id": "陰影 #{value}",
+        "blur": "模糊",
+        "spread": "擴散",
+        "inset": "插圖",
+        "hintV3": "對於陰影，您還可以使用{0}表示法來使用其他顏色插槽。",
+        "filter_hint": {
+          "always_drop_shadow": "警告，此陰影設置會總是使用 {0} ，如果瀏覽器支持的話。",
+          "drop_shadow_syntax": "{0} 不支持參數 {1} 和關鍵詞 {2} 。",
+          "avatar_inset": "請注意組合兩個內部和非內部的陰影到頭像上，在透明頭像上可能會有意料之外的效果。",
+          "spread_zero": "陰影的擴散 > 0 會同設置成零一樣",
+          "inset_classic": "插入內部的陰影會使用 {0}"
+        },
+        "components": {
+          "panel": "面板",
+          "panelHeader": "面板標題",
+          "topBar": "頂欄",
+          "avatar": "用戶頭像（在個人資料欄）",
+          "avatarStatus": "用戶頭像（在帖子顯示欄）",
+          "popup": "彈窗和工具提示",
+          "button": "按鈕",
+          "buttonHover": "按鈕（懸停）",
+          "buttonPressed": "按鈕（按下）",
+          "buttonPressedHover": "按鈕（按下和懸停）",
+          "input": "輸入框"
+        }
       },
       "switcher": {
         "use_snapshot": "舊版",
@@ -213,24 +275,41 @@
           "snapshot_missing": "在文件中沒有主題快照，所以網站外觀可能會與原來預想的不同。",
           "fe_upgraded": "PleromaFE 的主題引擎隨著版本更新升級了。",
           "fe_downgraded": "PleromaFE 的版本回滾了。",
-          "upgraded_from_v2": "PleromaFE 已升級，主題會和你記憶中的不太一樣。"
+          "upgraded_from_v2": "PleromaFE 已升級，主題會和你記憶中的不太一樣。",
+          "v2_imported": "您導入的文件是舊版 FE 的。我們儘可能保持兼容性，但還是可能出現不一致的情況。",
+          "snapshot_present": "載入快照已加載，因此所有值均被覆蓋。 您可以改為載入主題實際數據。",
+          "migration_snapshot_ok": "為保萬無一失，載入了主題快照。您可以試著載入主題數據。"
         },
         "use_source": "新版本",
         "keep_as_is": "保持原狀",
         "clear_opacity": "清除透明度",
         "clear_all": "清除全部",
         "reset": "重置",
-        "keep_fonts": "保留字體"
+        "keep_fonts": "保留字體",
+        "save_load_hint": "\"保留\" 選項在選擇或載入主題時保留當前設置的選項，在導出主題時還會存儲上述選項。當所有複選框未設置時，導出主題將保存所有內容。"
       },
       "fonts": {
         "components": {
-          "interface": "界面"
-        }
+          "interface": "界面",
+          "input": "輸入框",
+          "post": "發帖文字",
+          "postCode": "帖子中使用等間距文字（富文本）"
+        },
+        "_tab_label": "字體",
+        "help": "給用戶界面的元素選擇字體。選擇 “自選”的你必須輸入確切的字體名稱。",
+        "family": "字體名稱",
+        "size": "大小 (像素)",
+        "weight": "字重 （粗體）)",
+        "custom": "自選"
       },
       "common_colors": {
         "foreground_hint": "點擊”高級“ 標籤進行細緻的控制",
         "main": "常用顏色",
-        "_tab_label": "共同"
+        "_tab_label": "共同",
+        "rgbo": "圖標，強調，徽章"
+      },
+      "radii": {
+        "_tab_label": "圓角"
       }
     },
     "notification_setting_block_from_strangers": "屏蔽來自你沒有關注的用戶的通知",
@@ -247,7 +326,7 @@
     "import_theme": "導入預置主題",
     "import_followers_from_a_csv_file": "從 csv 文件中導入關注",
     "import_blocks_from_a_csv_file": "從 csv 文件中導入封鎖黑名單名單",
-    "hide_filtered_statuses": "隱藏過濾的狀態",
+    "hide_filtered_statuses": "隱藏過濾的發文",
     "lock_account_description": "你需要手動審核關注請求",
     "loop_video": "循環視頻",
     "loop_video_silent_only": "只循環沒有聲音的視頻（例如：Mastodon 裡的“GIF”）",
@@ -256,7 +335,8 @@
     "profile_fields": {
       "add_field": "添加字段",
       "name": "標籤",
-      "value": "內容"
+      "value": "內容",
+      "label": "個人資料元數據"
     },
     "use_contain_fit": "生成縮略圖時不要裁剪附件",
     "notification_visibility": "要顯示的通知類型",
@@ -360,7 +440,7 @@
     "subject_line_behavior": "回覆時複製主題",
     "subject_line_email": "比如電郵： \"re: 主題\"",
     "subject_line_noop": "不要複製",
-    "post_status_content_type": "發帖內容類型",
+    "post_status_content_type": "發文內容類型",
     "stop_gifs": "鼠標懸停時播放GIF",
     "streaming": "開啟滾動到頂部時的自動推送",
     "text": "文本",
@@ -415,7 +495,7 @@
     "app_name": "App 名稱",
     "change_email_error": "修改你的電子郵箱時發生錯誤。",
     "type_domains_to_mute": "搜索需要隱藏的域名",
-    "pad_emoji": "從表情符號選擇器插入表情符號時，在表情兩側插入空格",
+    "pad_emoji": "從繪文字選擇器插入繪文字時，在繪文字兩側插入空格",
     "useStreamingApi": "實時接收發佈以及通知",
     "minimal_scopes_mode": "最小發文範圍",
     "scope_copy": "回覆時的複製範圍（私信是總是複製的）",
@@ -424,7 +504,20 @@
     "replies_in_timeline": "時間線中的回覆",
     "revoke_token": "撤消",
     "show_admin_badge": "顯示管理徽章",
-    "accent": "強調色"
+    "accent": "強調色",
+    "greentext": "前文箭頭",
+    "show_moderator_badge": "顯示主持人徽章",
+    "oauth_tokens": "OAuth代幣",
+    "token": "代幣",
+    "refresh_token": "刷新代幣",
+    "useStreamingApiWarning": "（不推薦使用，實驗性的，已知跳過文章）",
+    "fun": "有趣",
+    "notification_setting_hide_notification_contents": "隱藏推送通知中的發送者與內容信息",
+    "version": {
+      "title": "版本",
+      "backend_version": "後端版本",
+      "frontend_version": "前端版本"
+    }
   },
   "chats": {
     "more": "更多",
@@ -433,7 +526,11 @@
     "error_sending_message": "發送消息時出了點問題。",
     "empty_chat_list_placeholder": "您還沒有任何聊天記錄。 開始新的聊天！",
     "new": "新聊天",
-    "empty_message_error": "無法發布空消息"
+    "empty_message_error": "無法發布空消息",
+    "you": "你：",
+    "message_user": "發消息給 {nickname}",
+    "delete": "刪除",
+    "chats": "聊天"
   },
   "file_type": {
     "audio": "音頻",
@@ -449,7 +546,23 @@
     "replies_list": "回覆：",
     "reply_to": "回覆",
     "pin": "在個人資料置頂",
-    "unpin": "取消在個人資料置頂"
+    "unpin": "取消在個人資料置頂",
+    "favorites": "喜歡",
+    "repeats": "轉發",
+    "delete": "刪除發文",
+    "pinned": "置頂",
+    "bookmark": "書籤",
+    "unbookmark": "取消書籤",
+    "delete_confirm": "你真的想要刪除這條發文嗎？",
+    "unmute_conversation": "對話取消靜音",
+    "status_unavailable": "發文不可取得",
+    "copy_link": "複製發文鏈接",
+    "thread_muted": "静音線程",
+    "show_full_subject": "顯示完整標題",
+    "thread_muted_and_words": ",有这些字:",
+    "hide_full_subject": "隱藏完整標題",
+    "show_content": "顯示內容",
+    "hide_content": "隱藏內容"
   },
   "time": {
     "hours": "{0} 小時",
@@ -460,7 +573,30 @@
     "hour_short": "{0}h",
     "hours_short": "{0}h",
     "years_short": "{0} y",
-    "now": "剛剛"
+    "now": "剛剛",
+    "day": "{0} 天",
+    "in_future": "還有 {0}",
+    "in_past": "{0} 之前",
+    "minute": "{0} 分鐘",
+    "minute_short": "{0} 分",
+    "minutes_short": "{0} 分",
+    "minutes": "{0} 分鐘",
+    "month": "{0} 月",
+    "months": "{0} 月",
+    "month_short": "{0} 月",
+    "months_short": "{0} 月",
+    "now_short": "剛剛",
+    "second": "{0} 秒",
+    "seconds": "{0} 秒",
+    "second_short": "{0} 秒",
+    "seconds_short": "{0} 秒",
+    "week": "{0}周",
+    "weeks": "{0}周",
+    "week_short": "{0}周",
+    "weeks_short": "{0}周",
+    "year": "{0} 年",
+    "years": "{0} 年",
+    "year_short": "{0}年"
   },
   "post_status": {
     "media_description_error": "無法更新媒體，請重試",
@@ -482,7 +618,7 @@
     "direct_warning_to_first_only": "本條內容只有被在消息開始處提及的用戶能夠看到。",
     "direct_warning_to_all": "本條內容只有被提及的用戶能夠看到。",
     "account_not_locked_warning": "你的帳號沒有 {0}。任何人都可以關注你並瀏覽你的上鎖內容。",
-    "new_status": "發佈新狀態",
+    "new_status": "發佈新發文",
     "content_warning": "主題（可選）",
     "content_type": {
       "text/bbcode": "BBCode",
@@ -492,14 +628,24 @@
     },
     "attachments_sensitive": "標記附件為敏感內容",
     "account_not_locked_warning_link": "上鎖",
-    "default": "剛剛抵達洛杉磯。"
+    "default": "剛剛抵達洛杉磯。",
+    "empty_status_error": "無法發佈沒有附件的空發文"
   },
   "errors": {
     "storage_unavailable": "Pleroma無法訪問瀏覽器存儲。您的登錄名或本地設置將不會保存，您可能會遇到意外問題。嘗試啟用Cookie。"
   },
   "timeline": {
     "error_fetching": "獲取更新時發生錯誤",
-    "conversation": "對話"
+    "conversation": "對話",
+    "no_retweet_hint": "這條內容僅關注者可見，或者是私信，因此不能轉發",
+    "collapse": "摺疊",
+    "load_older": "載入更早的發文",
+    "repeated": "已轉發",
+    "show_new": "顯示新內容",
+    "reload": "重新載入",
+    "up_to_date": "已是最新",
+    "no_more_statuses": "没有更多發文",
+    "no_statuses": "没有發文"
   },
   "interactions": {
     "load_older": "載入更早的互動",
@@ -546,8 +692,51 @@
     "admin_menu": {
       "delete_account": "刪除賬號",
       "delete_user": "刪除用戶",
-      "delete_user_confirmation": "你確認嗎？此操作無法撤銷。"
-    }
+      "delete_user_confirmation": "你確認嗎？此操作無法撤銷。",
+      "moderation": "調停",
+      "grant_admin": "賦予管理權限",
+      "revoke_admin": "撤銷管理權限",
+      "grant_moderator": "賦予主持人權限",
+      "revoke_moderator": "撤銷主持人權限",
+      "activate_account": "啟用賬號",
+      "deactivate_account": "關閉賬號",
+      "force_nsfw": "標記所有的帖子都是工作場合不適",
+      "strip_media": "從帖子裡刪除媒體文件",
+      "force_unlisted": "強制帖子為不公開",
+      "sandbox": "強制帖子為只有關注者可看",
+      "disable_remote_subscription": "禁止從遠程實例關注用戶",
+      "disable_any_subscription": "完全禁止關注用戶",
+      "quarantine": "從聯合實例中禁止用戶帖子"
+    },
+    "approve": "批准",
+    "block": "封鎖",
+    "blocked": "已封鎖!",
+    "deny": "拒絕",
+    "favorites": "喜歡",
+    "follow": "關注",
+    "follow_sent": "請求已發送！",
+    "follow_progress": "請求中…",
+    "follow_again": "再次發送請求？",
+    "follow_unfollow": "取消關注",
+    "followees": "正在關注",
+    "followers": "關注者",
+    "following": "正在關注！",
+    "follows_you": "關注了你！",
+    "hidden": "已隱藏",
+    "mention": "提及",
+    "message": "消息",
+    "mute": "靜音",
+    "muted": "已靜音",
+    "report": "報告",
+    "statuses": "發文",
+    "unsubscribe": "退訂",
+    "unblock": "取消封鎖",
+    "unblock_progress": "取消封鎖中…",
+    "block_progress": "封鎖中…",
+    "unmute": "取消靜音",
+    "unmute_progress": "取消靜音中…",
+    "hide_repeats": "隱藏轉發",
+    "show_repeats": "顯示轉發"
   },
   "user_profile": {
     "timeline_title": "用戶時間線",
@@ -559,7 +748,9 @@
     "add_comment_description": "此報告會發送給你的實例管理員。你可以在下面提供更多詳細信息解釋報告的緣由：",
     "forward_to": "轉發 {0}",
     "submit": "提交",
-    "generic_error": "當處理你的請求時，發生了一個錯誤。"
+    "generic_error": "當處理你的請求時，發生了一個錯誤。",
+    "additional_comments": "其它評論",
+    "forward_description": "這個賬號是從另外一個服務器。同時發送一個報告到那裡？"
   },
   "who_to_follow": {
     "more": "更多",
@@ -573,7 +764,8 @@
     "reply": "回覆",
     "user_settings": "用戶設置",
     "accept_follow_request": "接受關注請求",
-    "reject_follow_request": "拒絕關注請求"
+    "reject_follow_request": "拒絕關注請求",
+    "bookmark": "書籤"
   },
   "upload": {
     "file_size_units": {
@@ -604,6 +796,8 @@
     "check_email": "檢查你的郵箱，會有一個鏈接用於重置密碼。",
     "return_home": "回到首頁",
     "too_many_requests": "你觸發了嘗試的限制，請稍後再試。",
-    "password_reset_disabled": "密碼重置已經被禁用。請聯繫你的實例管理員。"
+    "password_reset_disabled": "密碼重置已經被禁用。請聯繫你的實例管理員。",
+    "password_reset_required": "您必須重置密碼才能登陸。",
+    "password_reset_required_but_mailer_is_disabled": "您必須重置密碼，但是密碼重置被禁用了。請聯繫您所在實例的管理員。"
   }
 }

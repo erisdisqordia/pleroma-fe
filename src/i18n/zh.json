@@ -160,7 +160,7 @@
     "preview": "预览",
     "media_description": "媒体描述",
     "media_description_error": "更新媒体失败，请重试",
-    "empty_status_error": "不能发布没有内容、没有附件的状态"
+    "empty_status_error": "不能发布没有内容、没有附件的发文"
   },
   "registration": {
     "bio": "简介",
@@ -374,7 +374,7 @@
           "fe_downgraded": "PleromaFE 的版本回滚了。",
           "fe_upgraded": "PleromaFE 的主题引擎随着版本更新升级了。",
           "snapshot_missing": "在文件中没有主题快照，所以网站外观可能会与原来预想的不同。",
-          "snapshot_present": "已加载了主题快照，因此所有的值被覆盖了。你可以改为加载主题的实际数据。"
+          "snapshot_present": "主题快照已加载，因此所有的值均被覆盖。您可以改为加载主题的实际数据。"
         },
         "use_source": "新版本",
         "use_snapshot": "老版本",
@@ -429,7 +429,9 @@
         "popover": "提示框，菜单，弹出框",
         "post": "发布内容/用户简介",
         "alert_neutral": "中性",
-        "alert_warning": "警告"
+        "alert_warning": "警告",
+        "tabs": "标签页",
+        "underlay": "底衬"
       },
       "radii": {
         "_tab_label": "圆角"
@@ -534,10 +536,10 @@
     "discoverable": "允许通过搜索检索等服务找到此账号",
     "mutes_and_blocks": "隐藏与屏蔽",
     "bot": "这是一个机器人账号",
-    "fun": "幽默",
-    "useStreamingApiWarning": "（不推荐，试验性，已知会跳过消息）",
+    "fun": "趣味",
+    "useStreamingApiWarning": "（不推荐使用，试验性，已知会跳过一些消息）",
     "chatMessageRadius": "聊天消息",
-    "greentext": "玩梗箭头"
+    "greentext": "玩梗（meme）箭头"
   },
   "time": {
     "day": "{0} 天",
@@ -583,7 +585,8 @@
     "show_new": "显示新内容",
     "up_to_date": "已是最新",
     "no_more_statuses": "没有更多的状态",
-    "no_statuses": "没有状态更新"
+    "no_statuses": "没有状态更新",
+    "reload": "重新载入"
   },
   "status": {
     "favorites": "收藏",
@@ -605,7 +608,8 @@
     "copy_link": "复制状态链接",
     "status_unavailable": "状态不可取得",
     "unbookmark": "取消书签",
-    "bookmark": "书签"
+    "bookmark": "书签",
+    "thread_muted_and_words": "，含有过滤词："
   },
   "user_card": {
     "approve": "允许",

@@ -226,7 +226,7 @@
     "composing": "Idazten",
     "confirm_new_password": "Baieztatu pasahitz berria",
     "current_avatar": "Zure uneko avatarra",
-    "current_password": "Indarrean den pasahitza",
+    "current_password": "Indarrean dagoen pasahitza",
     "current_profile_banner": "Zure profilaren banner-a",
     "data_import_export_tab": "Datuak Inportatu / Esportatu",
     "default_vis": "Lehenetsitako ikusgaitasunak",
@@ -634,7 +634,8 @@
   "about": {
     "mrf": {
       "keyword": {
-        "keyword_policies": "Gako-hitz politika"
+        "keyword_policies": "Gako-hitz politika",
+        "ftl_removal": "\"Ezagutzen den Sarea\" denbora-lerrotik ezabatu"
       },
       "federation": "Federazioa"
     }

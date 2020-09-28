@@ -92,7 +92,7 @@
     "description": "Log in with OAuth",
     "logout": "Log out",
     "password": "Password",
-    "placeholder": "e.g. lain",
+    "placeholder": "e.g.  Lain",
     "register": "Register",
     "username": "Username",
     "hint": "Log in to join the discussion",

@@ -1,5 +1,4 @@
 import Popover from '../popover/popover.vue'
-import { mapGetters } from 'vuex'
 
 const ReactButton = {
   props: ['status'],
@@ -35,7 +34,9 @@ const ReactButton = {
       }
       return this.$store.state.instance.emoji || []
     },
-    ...mapGetters(['mergedConfig'])
+    mergedConfig () {
+      return this.$store.getters.mergedConfig
+    }
   }
 }
 

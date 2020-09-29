@@ -41,6 +41,7 @@ const defaultState = {
   sidebarRight: false,
   subjectLineBehavior: 'email',
   theme: 'pleroma-dark',
+  virtualScrolling: true,
 
   // Nasty stuff
   customEmoji: [],

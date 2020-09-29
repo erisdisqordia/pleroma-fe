@@ -430,6 +430,7 @@
       "false": "no",
       "true": "yes"
     },
+    "virtual_scrolling": "Optimize timeline rendering",
     "fun": "Fun",
     "greentext": "Meme arrows",
     "notifications": "Notifications",

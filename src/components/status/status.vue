@@ -16,7 +16,7 @@
       />
     </div>
     <template v-if="muted && !isPreview">
-      <div class="status-csontainer muted">
+      <div class="status-container muted">
         <small class="status-username">
           <i
             v-if="muted && retweet"
@@ -227,6 +227,7 @@
                     </span>
                   </a>
                 </StatusPopover>
+
                 <span
                   v-else
                   class="reply-to-no-popover"
@@ -272,6 +273,8 @@
             :no-heading="noHeading"
             :highlight="highlight"
             :focused="isFocused"
+            @mediaplay="addMediaPlaying($event)"
+            @mediapause="removeMediaPlaying($event)"
           />
 
           <transition name="fade">
@@ -354,6 +357,7 @@
               @onSuccess="clearError"
             />
           </div>
+
         </div>
       </div>
       <div
@@ -376,4 +380,5 @@
 </template>
 
 <script src="./status.js" ></script>
+
 <style src="./status.scss" lang="scss"></style>

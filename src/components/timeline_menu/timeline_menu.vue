@@ -170,6 +170,10 @@
         text-decoration: underline;
       }
     }
+
+    i {
+      margin: 0 0.5em;
+    }
   }
 }
 

@@ -125,6 +125,10 @@
   }
 }
 
+.nav-panel .button-icon {
+  margin-right: 0.5em;
+}
+
 .nav-panel .button-icon:before {
   width: 1.1em;
 }

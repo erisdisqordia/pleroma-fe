@@ -3,6 +3,7 @@ import { parseStatus, parseUser, parseNotification, parseAttachment, parseChat, 
 import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */
+const MUTES_IMPORT_URL = '/api/pleroma/mutes_import'
 const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
@@ -710,6 +711,17 @@ const setMediaDescription = ({ id, description, credentials }) => {
   }).then((data) => parseAttachment(data))
 }
 
+const importMutes = ({ file, credentials }) => {
+  const formData = new FormData()
+  formData.append('list', file)
+  return fetch(MUTES_IMPORT_URL, {
+    body: formData,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.ok)
+}
+
 const importBlocks = ({ file, credentials }) => {
   const formData = new FormData()
   formData.append('list', file)
@@ -1280,6 +1292,7 @@ const apiService = {
   getCaptcha,
   updateProfileImages,
   updateProfile,
+  importMutes,
   importBlocks,
   importFollows,
   deleteAccount,

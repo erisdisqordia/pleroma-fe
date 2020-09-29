@@ -1,5 +1,7 @@
 <template>
   <div
+    v-if="!hideStatus"
+    :style="hiddenStyle"
     class="Conversation"
     :class="{ '-expanded' : isExpanded, 'panel' : isExpanded }"
   >
@@ -18,6 +20,7 @@
     <status
       v-for="status in conversation"
       :key="status.id"
+      ref="statusComponent"
       :inline-expanded="collapsable && isExpanded"
       :statusoid="status"
       :expandable="!isExpanded"
@@ -33,6 +36,10 @@
       @toggleExpanded="toggleExpanded"
     />
   </div>
+  <div
+    v-else
+    :style="hiddenStyle"
+  />
 </template>
 
 <script src="./conversation.js"></script>
@@ -53,8 +60,8 @@
     .conversation-status {
       border-color: $fallback--border;
       border-color: var(--border, $fallback--border);
-      border-left: 4px solid $fallback--cRed;
-      border-left: 4px solid var(--cRed, $fallback--cRed);
+      border-left-color: $fallback--cRed;
+      border-left-color: var(--cRed, $fallback--cRed);
     }
 
     .conversation-status:last-child {

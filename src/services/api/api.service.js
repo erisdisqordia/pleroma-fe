@@ -540,8 +540,10 @@ const fetchTimeline = ({
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`
+
   let status = ''
   let statusText = ''
+
   let pagination = {}
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => {

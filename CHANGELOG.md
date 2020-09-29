@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Added
+- New option to optimize timeline rendering to make the site more responsive (enabled by default)
+
 ## [Unreleased patch]
 
 ### Fixed

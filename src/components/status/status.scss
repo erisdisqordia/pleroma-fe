@@ -25,6 +25,11 @@ $status-margin: 0.75em;
     --icon: var(--selectedPostIcon, $fallback--icon);
   }
 
+  &.-conversation {
+    border-left-width: 4px;
+    border-left-style: solid;
+  }
+
   .status-container {
     display: flex;
     padding: $status-margin;

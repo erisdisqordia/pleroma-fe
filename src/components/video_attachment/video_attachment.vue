@@ -7,7 +7,8 @@
     :alt="attachment.description"
     :title="attachment.description"
     playsinline
-    @loadeddata="onVideoDataLoad"
+    @playing="onPlaying"
+    @pause="onPaused"
   />
 </template>
 

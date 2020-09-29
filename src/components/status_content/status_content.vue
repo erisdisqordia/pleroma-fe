@@ -107,6 +107,8 @@
         :attachment="attachment"
         :allow-play="true"
         :set-media="setMedia()"
+        @play="$emit('mediaplay', attachment.id)"
+        @pause="$emit('mediapause', attachment.id)"
       />
       <gallery
         v-if="galleryAttachments.length > 0"

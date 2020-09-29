@@ -568,6 +568,9 @@ export const mutations = {
   updateStatusWithPoll (state, { id, poll }) {
     const status = state.allStatusesObject[id]
     status.poll = poll
+  },
+  setVirtualHeight (state, { statusId, height }) {
+    state.allStatusesObject[statusId].virtualHeight = height
   }
 }
 
@@ -753,6 +756,9 @@ const statuses = {
           store.commit('addNewStatuses', { statuses: data.statuses })
           return data
         })
+    },
+    setVirtualHeight ({ commit }, { statusId, height }) {
+      commit('setVirtualHeight', { statusId, height })
     }
   },
   mutations

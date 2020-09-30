@@ -1,5 +1,5 @@
 import { filter, trim } from 'lodash'
-import Checkbox from 'src/components/checkbox/checkbox.vue'
+import BooleanSetting from '../helpers/boolean_setting.vue'
 
 import SharedComputedObject from '../helpers/shared_computed_object.js'
 
@@ -10,7 +10,7 @@ const FilteringTab = {
     }
   },
   components: {
-    Checkbox
+    BooleanSetting
   },
   computed: {
     ...SharedComputedObject(),

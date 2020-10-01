@@ -4,17 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Added
+- New option to optimize timeline rendering to make the site more responsive (enabled by default)
+
 ## [Unreleased patch]
+### Fixed
+- Fixed chats list not updating its order when new messages come in
+- Fixed chat messages sometimes getting lost when you receive a message at the same time
 
 ### Added
+- Import/export a muted users
 - Proper handling of deletes when using websocket streaming
 
+## [2.1.1] - 2020-09-08
 ### Changed
 - Polls will be hidden with status content if "Collapse posts with subjects" is enabled and the post is collapsed.
 
 ### Fixed
 - Autocomplete won't stop at the second @, so it'll still work with "@lain@l" and not start over.
 - Fixed weird autocomplete behavior when you write ":custom_emoji: ?"
+
 
 ## [2.1.0] - 2020-08-28
 ### Added

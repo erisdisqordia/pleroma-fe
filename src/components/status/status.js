@@ -16,7 +16,6 @@ import generateProfileLink from 'src/services/user_profile_link_generator/user_p
 import { highlightClass, highlightStyle } from '../../services/user_highlighter/user_highlighter.js'
 import { muteWordHits } from '../../services/status_parser/status_parser.js'
 import { unescape, uniqBy } from 'lodash'
-import { mapGetters, mapState } from 'vuex'
 
 const Status = {
   name: 'Status',
@@ -56,6 +55,8 @@ const Status = {
       replying: false,
       unmuted: false,
       userExpanded: false,
+      mediaPlaying: [],
+      suspendable: true,
       error: null
     }
   },
@@ -159,7 +160,7 @@ const Status = {
       return this.mergedConfig.hideFilteredStatuses
     },
     hideStatus () {
-      return (this.muted && this.hideFilteredStatuses)
+      return (this.muted && this.hideFilteredStatuses) || this.virtualHidden
     },
     isFocused () {
       // retweet or root of an expanded conversation
@@ -209,11 +210,18 @@ const Status = {
     hidePostStats () {
       return this.mergedConfig.hidePostStats
     },
-    ...mapGetters(['mergedConfig']),
-    ...mapState({
-      betterShadow: state => state.interface.browserSupport.cssFilter,
-      currentUser: state => state.users.currentUser
-    })
+    currentUser () {
+      return this.$store.state.users.currentUser
+    },
+    betterShadow () {
+      return this.$store.state.interface.browserSupport.cssFilter
+    },
+    mergedConfig () {
+      return this.$store.getters.mergedConfig
+    },
+    isSuspendable () {
+      return !this.replying && this.mediaPlaying.length === 0
+    }
   },
   methods: {
     visibilityIcon (visibility) {
@@ -253,6 +261,12 @@ const Status = {
     },
     generateUserProfileLink (id, name) {
       return generateProfileLink(id, name, this.$store.state.instance.restrictedNicknames)
+    },
+    addMediaPlaying (id) {
+      this.mediaPlaying.push(id)
+    },
+    removeMediaPlaying (id) {
+      this.mediaPlaying = this.mediaPlaying.filter(mediaId => mediaId !== id)
     }
   },
   watch: {
@@ -282,6 +296,9 @@ const Status = {
       if (this.isFocused && this.statusFromGlobalRepository.favoritedBy && this.statusFromGlobalRepository.favoritedBy.length !== num) {
         this.$store.dispatch('fetchFavs', this.status.id)
       }
+    },
+    'isSuspendable': function (val) {
+      this.suspendable = val
     }
   },
   filters: {

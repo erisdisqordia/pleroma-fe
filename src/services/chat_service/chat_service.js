@@ -8,7 +8,7 @@ const empty = (chatId) => {
     lastSeenTimestamp: 0,
     chatId: chatId,
     minId: undefined,
-    lastMessage: undefined
+    maxId: undefined
   }
 }
 
@@ -18,7 +18,7 @@ const clear = (storage) => {
   storage.newMessageCount = 0
   storage.lastSeenTimestamp = 0
   storage.minId = undefined
-  storage.lastMessage = undefined
+  storage.maxId = undefined
 }
 
 const deleteMessage = (storage, messageId) => {
@@ -26,8 +26,9 @@ const deleteMessage = (storage, messageId) => {
   storage.messages = storage.messages.filter(m => m.id !== messageId)
   delete storage.idIndex[messageId]
 
-  if (storage.lastMessage && (storage.lastMessage.id === messageId)) {
-    storage.lastMessage = _.maxBy(storage.messages, 'id')
+  if (storage.maxId === messageId) {
+    const lastMessage = _.maxBy(storage.messages, 'id')
+    storage.maxId = lastMessage.id
   }
 
   if (storage.minId === messageId) {
@@ -36,7 +37,7 @@ const deleteMessage = (storage, messageId) => {
   }
 }
 
-const add = (storage, { messages: newMessages }) => {
+const add = (storage, { messages: newMessages, updateMaxId = true }) => {
   if (!storage) { return }
   for (let i = 0; i < newMessages.length; i++) {
     const message = newMessages[i]
@@ -48,8 +49,10 @@ const add = (storage, { messages: newMessages }) => {
       storage.minId = message.id
     }
 
-    if (!storage.lastMessage || message.id > storage.lastMessage.id) {
-      storage.lastMessage = message
+    if (!storage.maxId || message.id > storage.maxId) {
+      if (updateMaxId) {
+        storage.maxId = message.id
+      }
     }
 
     if (!storage.idIndex[message.id]) {

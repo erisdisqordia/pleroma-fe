@@ -36,6 +36,23 @@
         :export-button-label="$t('settings.block_export_button')"
       />
     </div>
+    <div class="setting-item">
+      <h2>{{ $t('settings.mute_import') }}</h2>
+      <p>{{ $t('settings.import_mutes_from_a_csv_file') }}</p>
+      <Importer
+        :submit-handler="importMutes"
+        :success-message="$t('settings.mutes_imported')"
+        :error-message="$t('settings.mute_import_error')"
+      />
+    </div>
+    <div class="setting-item">
+      <h2>{{ $t('settings.mute_export') }}</h2>
+      <Exporter
+        :get-content="getMutesContent"
+        filename="mutes.csv"
+        :export-button-label="$t('settings.mute_export_button')"
+      />
+    </div>
   </div>
 </template>
 

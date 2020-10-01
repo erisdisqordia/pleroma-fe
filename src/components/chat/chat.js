@@ -204,9 +204,9 @@ const Chat = {
       }
     },
     readChat () {
-      if (!(this.currentChatMessageService && this.currentChatMessageService.lastMessage)) { return }
+      if (!(this.currentChatMessageService && this.currentChatMessageService.maxId)) { return }
       if (document.hidden) { return }
-      const lastReadId = this.currentChatMessageService.lastMessage.id
+      const lastReadId = this.currentChatMessageService.maxId
       this.$store.dispatch('readChat', { id: this.currentChat.id, lastReadId })
     },
     bottomedOut (offset) {
@@ -244,7 +244,7 @@ const Chat = {
 
       const chatId = chatMessageService.chatId
       const fetchOlderMessages = !!maxId
-      const sinceId = fetchLatest && chatMessageService.lastMessage && chatMessageService.lastMessage.id
+      const sinceId = fetchLatest && chatMessageService.maxId
 
       this.backendInteractor.chatMessages({ id: chatId, maxId, sinceId })
         .then((messages) => {
@@ -303,7 +303,11 @@ const Chat = {
 
       return this.backendInteractor.sendChatMessage(params)
         .then(data => {
-          this.$store.dispatch('addChatMessages', { chatId: this.currentChat.id, messages: [data] }).then(() => {
+          this.$store.dispatch('addChatMessages', {
+            chatId: this.currentChat.id,
+            messages: [data],
+            updateMaxId: false
+          }).then(() => {
             this.$nextTick(() => {
               this.handleResize()
               // When the posting form size changes because of a media attachment, we need an extra resize

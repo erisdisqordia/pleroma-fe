@@ -36,6 +36,11 @@ $status-margin: 0.75em;
       align-items: center;
     }
   }
+  
+  &.-conversation {
+    border-left-width: 4px;
+    border-left-style: solid;
+  }
 
   .status-container {
     display: flex;

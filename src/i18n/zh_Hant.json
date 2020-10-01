@@ -517,7 +517,14 @@
       "title": "版本",
       "backend_version": "後端版本",
       "frontend_version": "前端版本"
-    }
+    },
+    "virtual_scrolling": "優化時間線渲染",
+    "import_mutes_from_a_csv_file": "從CSV文件導入靜音",
+    "mutes_imported": "靜音導入了！處理它們將需要一段時間。",
+    "mute_import": "靜音導入",
+    "mute_import_error": "導入靜音時出錯",
+    "mute_export_button": "將靜音導出到csv文件",
+    "mute_export": "靜音導出"
   },
   "chats": {
     "more": "更多",

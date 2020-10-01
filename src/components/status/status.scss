@@ -25,6 +25,11 @@ $status-margin: 0.75em;
     --icon: var(--selectedPostIcon, $fallback--icon);
   }
 
+  &.-conversation {
+    border-left-width: 4px;
+    border-left-style: solid;
+  }
+
   .gravestone {
     padding: $status-margin;
     color: $fallback--faint;
@@ -35,11 +40,6 @@ $status-margin: 0.75em;
       margin: 0.5em 0;
       align-items: center;
     }
-  }
-  
-  &.-conversation {
-    border-left-width: 4px;
-    border-left-style: solid;
   }
 
   .status-container {

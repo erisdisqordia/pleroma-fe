@@ -1,6 +1,6 @@
 <template>
   <div class="settings panel panel-default">
-    <div class="panel-heading title">
+    <div class="panel-heading">
       <div class="title">
         {{ $t('nav.friend_requests') }}
       </div>

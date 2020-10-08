@@ -11,9 +11,10 @@
     "gopher": "Gopher",
     "media_proxy": "媒体代理",
     "scope_options": "可见范围设置",
-    "text_limit": "文本长度限制",
+    "text_limit": "文字數量限制",
     "title": "功能",
-    "who_to_follow": "推荐关注"
+    "who_to_follow": "推荐关注",
+    "pleroma_chat_messages": "Pleroma 聊天"
   },
   "finder": {
     "error_fetching_user": "获取用户时发生错误",
@@ -32,7 +33,12 @@
     "enable": "启用",
     "confirm": "确认",
     "verify": "验证",
-    "dismiss": "忽略"
+    "dismiss": "忽略",
+    "peek": "窥探",
+    "close": "关闭",
+    "retry": "重试",
+    "error_retry": "请重试",
+    "loading": "载入中…"
   },
   "image_cropper": {
     "crop_picture": "裁剪图片",
@@ -77,12 +83,15 @@
     "dms": "私信",
     "public_tl": "公共时间线",
     "timeline": "时间线",
-    "twkn": "所有已知网络",
+    "twkn": "已知网络",
     "user_search": "用户搜索",
     "search": "搜索",
     "who_to_follow": "推荐关注",
     "preferences": "偏好设置",
-    "administration": "管理员"
+    "administration": "管理员",
+    "chats": "聊天",
+    "timelines": "时间线",
+    "bookmarks": "书签"
   },
   "notifications": {
     "broken_favorite": "未知的状态，正在搜索中…",
@@ -132,7 +141,7 @@
       "text/bbcode": "BBCode"
     },
     "content_warning": "主题（可选）",
-    "default": "刚刚抵达上海",
+    "default": "刚刚抵达洛杉矶",
     "direct_warning_to_all": "本条内容只有被提及的用户能够看到。",
     "direct_warning_to_first_only": "本条内容只有被在消息开始处提及的用户能够看到。",
     "posting": "发送",
@@ -146,7 +155,12 @@
       "private": "仅关注者 - 只有关注了你的人能看到",
       "public": "公共 - 发送到公共时间轴",
       "unlisted": "不公开 - 不会发送到公共时间轴"
-    }
+    },
+    "preview_empty": "空的",
+    "preview": "预览",
+    "media_description": "媒体描述",
+    "media_description_error": "更新媒体失败，请重试",
+    "empty_status_error": "不能发布没有内容、没有附件的发文"
   },
   "registration": {
     "bio": "简介",
@@ -350,7 +364,17 @@
         "clear_opacity": "清除透明度",
         "load_theme": "加载主题",
         "help": {
-          "upgraded_from_v2": "PleromaFE 已升级，主题会和你记忆中的不太一样。"
+          "upgraded_from_v2": "PleromaFE 已升级，主题会和你记忆中的不太一样。",
+          "older_version_imported": "您导入的文件来自旧版本的 FE。",
+          "future_version_imported": "您导入的文件来自更高版本的 FE。",
+          "v2_imported": "您导入的文件是旧版 FE 的。我们尽可能保持兼容性，但还是可能出现不一致的情况。",
+          "snapshot_source_mismatch": "版本冲突：很有可能是 FE 版本回滚后再次升级了，如果您使用旧版本的 FE 更改了主题那么您可能需要使用旧版本，否则请使用新版本。",
+          "migration_napshot_gone": "不知出于何种原因，主题快照缺失了，一些地方可能与您印象中的不符。",
+          "migration_snapshot_ok": "为保万无一失，加载了主题快照。您可以试着加载主题数据。",
+          "fe_downgraded": "PleromaFE 的版本回滚了。",
+          "fe_upgraded": "PleromaFE 的主题引擎随着版本更新升级了。",
+          "snapshot_missing": "在文件中没有主题快照，所以网站外观可能会与原来预想的不同。",
+          "snapshot_present": "主题快照已加载，因此所有的值均被覆盖。您可以改为加载主题的实际数据。"
         },
         "use_source": "新版本",
         "use_snapshot": "老版本",
@@ -389,7 +413,25 @@
         "borders": "边框",
         "buttons": "按钮",
         "inputs": "输入框",
-        "faint_text": "灰度文字"
+        "faint_text": "灰度文字",
+        "chat": {
+          "border": "边框",
+          "outgoing": "发出的",
+          "incoming": "收到的"
+        },
+        "disabled": "禁用的",
+        "pressed": "按下的",
+        "highlight": "强调元素",
+        "selectedMenu": "选中的菜单项",
+        "selectedPost": "选中的发布内容",
+        "icons": "图标",
+        "poll": "投票统计图",
+        "popover": "提示框，菜单，弹出框",
+        "post": "发布内容/用户简介",
+        "alert_neutral": "中性",
+        "alert_warning": "警告",
+        "tabs": "标签页",
+        "underlay": "底衬"
       },
       "radii": {
         "_tab_label": "圆角"
@@ -470,7 +512,34 @@
     "notification_visibility_emoji_reactions": "互动",
     "notification_visibility_moves": "用户迁移",
     "new_email": "新邮箱",
-    "emoji_reactions_on_timeline": "在时间线上显示表情符号互动"
+    "emoji_reactions_on_timeline": "在时间线上显示表情符号互动",
+    "notification_setting_hide_notification_contents": "隐藏推送通知中的发送者与内容信息",
+    "notification_setting_block_from_strangers": "屏蔽来自你没有关注的用户的通知",
+    "type_domains_to_mute": "搜索需要隐藏的域名",
+    "useStreamingApi": "实时接收发布以及通知",
+    "user_mutes": "用户",
+    "reset_background_confirm": "您确定要重置个人资料背景图吗？",
+    "reset_banner_confirm": "您确定要重置横幅图片吗？",
+    "reset_avatar_confirm": "您确定要重置头像吗？",
+    "reset_profile_banner": "重置横幅图片",
+    "reset_profile_background": "重置个人资料背景图",
+    "reset_avatar": "重置头像",
+    "hide_followers_count_description": "不显示关注者数量",
+    "profile_fields": {
+      "value": "内容",
+      "name": "标签",
+      "add_field": "添加字段",
+      "label": "个人资料元数据"
+    },
+    "accent": "强调色",
+    "pad_emoji": "从表情符号选择器插入表情符号时，在表情两侧插入空格",
+    "discoverable": "允许通过搜索检索等服务找到此账号",
+    "mutes_and_blocks": "隐藏与屏蔽",
+    "bot": "这是一个机器人账号",
+    "fun": "趣味",
+    "useStreamingApiWarning": "（不推荐使用，试验性，已知会跳过一些消息）",
+    "chatMessageRadius": "聊天消息",
+    "greentext": "Meme 箭头"
   },
   "time": {
     "day": "{0} 天",
@@ -516,7 +585,8 @@
     "show_new": "显示新内容",
     "up_to_date": "已是最新",
     "no_more_statuses": "没有更多的状态",
-    "no_statuses": "没有状态更新"
+    "no_statuses": "没有状态更新",
+    "reload": "重新载入"
   },
   "status": {
     "favorites": "收藏",
@@ -529,7 +599,17 @@
     "reply_to": "回复",
     "replies_list": "回复：",
     "mute_conversation": "隐藏对话",
-    "unmute_conversation": "对话取消隐藏"
+    "unmute_conversation": "对话取消隐藏",
+    "hide_content": "隐藏内容",
+    "show_content": "显示内容",
+    "hide_full_subject": "隐藏此部分标题",
+    "show_full_subject": "显示全部标题",
+    "thread_muted": "此系列消息已被隐藏",
+    "copy_link": "复制状态链接",
+    "status_unavailable": "状态不可取得",
+    "unbookmark": "取消书签",
+    "bookmark": "书签",
+    "thread_muted_and_words": "，含有过滤词："
   },
   "user_card": {
     "approve": "允许",
@@ -583,7 +663,9 @@
     },
     "hidden": "已隐藏",
     "show_repeats": "显示转发",
-    "hide_repeats": "隐藏转发"
+    "hide_repeats": "隐藏转发",
+    "message": "消息",
+    "mention": "提及"
   },
   "user_profile": {
     "timeline_title": "用户时间线",
@@ -610,7 +692,9 @@
     "favorite": "收藏",
     "user_settings": "用户设置",
     "reject_follow_request": "拒绝关注请求",
-    "add_reaction": "添加互动"
+    "add_reaction": "添加互动",
+    "bookmark": "书签",
+    "accept_follow_request": "接受关注请求"
   },
   "upload": {
     "error": {
@@ -628,7 +712,7 @@
   },
   "search": {
     "people": "人",
-    "hashtags": "Hashtags",
+    "hashtags": "话题标签",
     "person_talking": "{count} 人正在讨论",
     "people_talking": "{count} 人正在讨论",
     "no_results": "没有搜索结果"
@@ -641,7 +725,9 @@
     "check_email": "检查你的邮箱，会有一个链接用于重置密码。",
     "return_home": "回到首页",
     "too_many_requests": "你触发了尝试的限制，请稍后再试。",
-    "password_reset_disabled": "密码重置已经被禁用。请联系你的实例管理员。"
+    "password_reset_disabled": "密码重置已经被禁用。请联系你的实例管理员。",
+    "password_reset_required_but_mailer_is_disabled": "您必须重置密码，但是密码重置被禁用了。请联系您所在实例的管理员。",
+    "password_reset_required": "您必须重置密码才能登陆。"
   },
   "remote_user_resolver": {
     "error": "未找到。",
@@ -655,7 +741,9 @@
     "custom": "自定义表情符号",
     "add_emoji": "插入表情符号",
     "search_emoji": "搜索表情符号",
-    "emoji": "表情符号"
+    "emoji": "表情符号",
+    "load_all": "加载所有表情符号（共 {emojiAmount} 个）",
+    "load_all_hint": "最先加载的 {saneAmount} 表情符号，加载全部表情符号可能会带来性能问题。"
   },
   "about": {
     "mrf": {
@@ -667,7 +755,12 @@
         "accept_desc": "本实例只接收来自下列实例的消息：",
         "simple_policies": "站规",
         "accept": "接受",
-        "media_removal": "移除媒体"
+        "media_removal": "移除媒体",
+        "media_nsfw_desc": "本实例将来自以下实例的媒体强制设置为敏感内容：",
+        "media_nsfw": "强制设置媒体为敏感内容",
+        "media_removal_desc": "本实例移除了来自以下实例的媒体内容：",
+        "ftl_removal_desc": "该实例在从“全部已知网络”时间线上移除了：",
+        "ftl_removal": "从“全部已知网络”时间线上移除"
       },
       "mrf_policies_desc": "MRF 策略会影响本实例的互通行为。以下策略已启用：",
       "mrf_policies": "已启动 MRF 策略",
@@ -679,12 +772,41 @@
         "reject": "拒绝"
       },
       "federation": "联邦"
-    }
+    },
+    "staff": "管理人员"
   },
   "domain_mute_card": {
     "unmute_progress": "正在取消隐藏…",
     "unmute": "取消隐藏",
     "mute_progress": "隐藏中…",
     "mute": "隐藏"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma 无法访问浏览器储存。您的登陆名以及本地设置将不会被保存，您可能遇到意外问题。请尝试启用 cookies。"
+  },
+  "shoutbox": {
+    "title": "留言板"
+  },
+  "display_date": {
+    "today": "今天"
+  },
+  "file_type": {
+    "file": "文件",
+    "image": "图片",
+    "video": "视频",
+    "audio": "音频"
+  },
+  "chats": {
+    "empty_chat_list_placeholder": "您还没有任何聊天记录。开始聊天吧！",
+    "error_sending_message": "发送消息时出了点问题。",
+    "error_loading_chat": "加载聊天时出了点问题。",
+    "delete_confirm": "您确实要删除此消息吗？",
+    "more": "更多",
+    "empty_message_error": "无法发布空消息",
+    "new": "新聊天",
+    "chats": "聊天",
+    "delete": "删除",
+    "message_user": "发消息给 {nickname}",
+    "you": "你："
   }
 }

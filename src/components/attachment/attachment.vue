@@ -28,7 +28,7 @@
       :href="attachment.url"
       :alt="attachment.description"
       :title="attachment.description"
-      @click.prevent="toggleHidden"
+      @click.prevent.stop="toggleHidden"
     >
       <img
         :key="nsfwImage"

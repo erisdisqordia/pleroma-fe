@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 - Fixed chats list not updating its order when new messages come in
 - Fixed chat messages sometimes getting lost when you receive a message at the same time
+- Fixed clicking NSFW hider through status popover
 
 ### Added
 - Import/export a muted users

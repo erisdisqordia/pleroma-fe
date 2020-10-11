@@ -178,7 +178,7 @@
   box-shadow: var(--inputShadow);
 
   &.menu-checkbox-checked::after {
-    content: '✔';
+    content: '✓';
   }
 }
 

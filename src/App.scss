@@ -279,7 +279,7 @@ input, textarea, .select, .input {
     + label::before {
       flex-shrink: 0;
       display: inline-block;
-      content: '✔';
+      content: '✓';
       transition: color 200ms;
       width: 1.1em;
       height: 1.1em;

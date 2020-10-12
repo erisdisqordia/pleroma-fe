@@ -611,6 +611,10 @@ const statuses = {
       commit('setDeleted', { status })
       apiService.deleteStatus({ id: status.id, credentials: rootState.users.currentUser.credentials })
     },
+    deleteStatusById ({ rootState, commit }, id) {
+      const status = rootState.statuses.allStatusesObject[id]
+      commit('setDeleted', { status })
+    },
     markStatusesAsDeleted ({ commit }, condition) {
       commit('setManyDeleted', condition)
     },

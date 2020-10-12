@@ -8,7 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - New option to optimize timeline rendering to make the site more responsive (enabled by default)
 
 ## [Unreleased patch]
-
 ### Fixed
 - Fixed chats list not updating its order when new messages come in
 - Fixed chat messages sometimes getting lost when you receive a message at the same time
@@ -16,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Import/export a muted users
+- Proper handling of deletes when using websocket streaming
 
 ## [2.1.1] - 2020-09-08
 ### Changed

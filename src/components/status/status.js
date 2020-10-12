@@ -1,3 +1,4 @@
+import ReplyButton from '../reply_button/reply_button.vue'
 import FavoriteButton from '../favorite_button/favorite_button.vue'
 import ReactButton from '../react_button/react_button.vue'
 import RetweetButton from '../retweet_button/retweet_button.vue'
@@ -19,6 +20,7 @@ import { unescape, uniqBy } from 'lodash'
 const Status = {
   name: 'Status',
   components: {
+    ReplyButton,
     FavoriteButton,
     ReactButton,
     RetweetButton,
@@ -158,7 +160,7 @@ const Status = {
       return this.mergedConfig.hideFilteredStatuses
     },
     hideStatus () {
-      return this.deleted || (this.muted && this.hideFilteredStatuses) || this.virtualHidden
+      return (this.muted && this.hideFilteredStatuses) || this.virtualHidden
     },
     isFocused () {
       // retweet or root of an expanded conversation

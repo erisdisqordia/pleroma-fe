@@ -8,10 +8,20 @@ const LOAD_EMOJI_BY = 60
 const LOAD_EMOJI_MARGIN = 64
 
 const filterByKeyword = (list, keyword = '') => {
+  if (keyword === '') return list
+
   const keywordLowercase = keyword.toLowerCase()
-  return list.filter(emoji =>
-    emoji.displayText.toLowerCase().includes(keywordLowercase)
-  )
+  let orderedEmojiList = []
+  for (const emoji of list) {
+    const indexOfKeyword = emoji.displayText.toLowerCase().indexOf(keywordLowercase)
+    if (indexOfKeyword > -1) {
+      if (!Array.isArray(orderedEmojiList[indexOfKeyword])) {
+        orderedEmojiList[indexOfKeyword] = []
+      }
+      orderedEmojiList[indexOfKeyword].push(emoji)
+    }
+  }
+  return orderedEmojiList.flat()
 }
 
 const EmojiPicker = {

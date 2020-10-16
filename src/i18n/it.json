@@ -702,7 +702,8 @@
     "reply_to": "Rispondi a",
     "delete_confirm": "Vuoi veramente eliminare questo messaggio?",
     "unbookmark": "Rimuovi segnalibro",
-    "bookmark": "Aggiungi segnalibro"
+    "bookmark": "Aggiungi segnalibro",
+    "status_deleted": "Questo messagio è stato cancellato"
   },
   "time": {
     "years_short": "{0}a",

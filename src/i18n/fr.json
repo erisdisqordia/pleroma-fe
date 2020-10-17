@@ -13,7 +13,8 @@
     "scope_options": "Options de visibilité",
     "text_limit": "Limite de texte",
     "title": "Caractéristiques",
-    "who_to_follow": "Personnes à suivre"
+    "who_to_follow": "Personnes à suivre",
+    "pleroma_chat_messages": "Chat Pleroma"
   },
   "finder": {
     "error_fetching_user": "Erreur lors de la recherche de l'utilisateur·ice",
@@ -32,7 +33,12 @@
     "enable": "Activer",
     "confirm": "Confirmer",
     "verify": "Vérifier",
-    "dismiss": "Rejeter"
+    "dismiss": "Rejeter",
+    "peek": "Jeter un coup d'œil",
+    "close": "Fermer",
+    "retry": "Réessayez",
+    "error_retry": "Veuillez réessayer",
+    "loading": "Chargement…"
   },
   "image_cropper": {
     "crop_picture": "Rogner l'image",
@@ -77,15 +83,17 @@
     "dms": "Messages directs",
     "public_tl": "Fil d'actualité public",
     "timeline": "Fil d'actualité",
-    "twkn": "Ensemble du réseau connu",
+    "twkn": "Réseau connu",
     "user_search": "Recherche d'utilisateur·ice",
     "who_to_follow": "Qui suivre",
     "preferences": "Préférences",
     "search": "Recherche",
-    "administration": "Administration"
+    "administration": "Administration",
+    "chats": "Chats",
+    "bookmarks": "Marques-Pages"
   },
   "notifications": {
-    "broken_favorite": "Chargement d'un message inconnu…",
+    "broken_favorite": "Message inconnu, chargement…",
     "favorited_you": "a aimé votre statut",
     "followed_you": "a commencé à vous suivre",
     "load_older": "Charger les notifications précédentes",
@@ -115,7 +123,7 @@
       "text/bbcode": "BBCode"
     },
     "content_warning": "Sujet (optionnel)",
-    "default": "Écrivez ici votre prochain statut.",
+    "default": "Je viens d'atterrir en Tchéquie.",
     "direct_warning_to_all": "Ce message sera visible pour toutes les personnes mentionnées.",
     "direct_warning_to_first_only": "Ce message sera visible uniquement pour personnes mentionnées au début du message.",
     "posting": "Envoi en cours",
@@ -129,7 +137,12 @@
       "private": "Abonné·e·s uniquement - Seul·e·s vos abonné·e·s verront vos billets",
       "public": "Publique - Afficher dans les fils publics",
       "unlisted": "Non-Listé - Ne pas afficher dans les fils publics"
-    }
+    },
+    "media_description_error": "Échec de téléversement du media, essayez encore",
+    "empty_status_error": "Impossible de poster un statut vide sans attachements",
+    "preview_empty": "Vide",
+    "preview": "Prévisualisation",
+    "media_description": "Description de l'attachement"
   },
   "registration": {
     "bio": "Biographie",
@@ -488,7 +501,15 @@
     "notification_setting_privacy_option": "Masquer l'expéditeur et le contenu des notifications push",
     "notification_setting_privacy": "Intimité",
     "hide_followers_count_description": "Masquer le nombre d'abonnés",
-    "accent": "Accent"
+    "accent": "Accent",
+    "chatMessageRadius": "Message de chat",
+    "bot": "Ce compte est un robot",
+    "import_mutes_from_a_csv_file": "Importer les masquages depuis un fichier CSV",
+    "mutes_imported": "Masquages importés ! Leur application peut prendre du temps.",
+    "mute_import_error": "Erreur à l'import des masquages",
+    "mute_import": "Import des masquages",
+    "mute_export_button": "Exporter vos masquages dans un fichier CSV",
+    "mute_export": "Export des masquages"
   },
   "timeline": {
     "collapse": "Fermer",
@@ -732,5 +753,11 @@
     "return_home": "Retourner à la page d'accueil",
     "too_many_requests": "Vos avez atteint la limite d'essais, essayez plus tard.",
     "password_reset_required": "Vous devez changer votre mot de passe pour vous authentifier."
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma n'a pas pu accéder au stockage du navigateur. Votre identifiant ou vos mots de passes ne seront sauvegardés et des problèmes pourront être rencontrés. Essayez d'activer les cookies."
+  },
+  "shoutbox": {
+    "title": "Shoutbox"
   }
 }

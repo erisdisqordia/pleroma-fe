@@ -5,6 +5,7 @@ import ChatMessage from '../chat_message/chat_message.vue'
 import PostStatusForm from '../post_status_form/post_status_form.vue'
 import ChatTitle from '../chat_title/chat_title.vue'
 import chatService from '../../services/chat_service/chat_service.js'
+import { promiseInterval } from '../../services/promise_interval/promise_interval.js'
 import { getScrollPosition, getNewTopPosition, isBottomedOut, scrollableContainerHeight } from './chat_layout_utils.js'
 
 const BOTTOMED_OUT_OFFSET = 10
@@ -246,7 +247,7 @@ const Chat = {
       const fetchOlderMessages = !!maxId
       const sinceId = fetchLatest && chatMessageService.maxId
 
-      this.backendInteractor.chatMessages({ id: chatId, maxId, sinceId })
+      return this.backendInteractor.chatMessages({ id: chatId, maxId, sinceId })
         .then((messages) => {
           // Clear the current chat in case we're recovering from a ws connection loss.
           if (isFirstFetch) {
@@ -287,7 +288,7 @@ const Chat = {
     },
     doStartFetching () {
       this.$store.dispatch('startFetchingCurrentChat', {
-        fetcher: () => setInterval(() => this.fetchChat({ fetchLatest: true }), 5000)
+        fetcher: () => promiseInterval(() => this.fetchChat({ fetchLatest: true }), 5000)
       })
       this.fetchChat({ isFirstFetch: true })
     },

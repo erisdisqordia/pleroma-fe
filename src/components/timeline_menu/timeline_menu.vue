@@ -138,15 +138,11 @@
     &:last-child {
       border: none;
     }
-
-    i {
-      margin: 0 0.5em;
-    }
   }
 
   a {
     display: block;
-    padding: 0.6em 0;
+    padding: 0.6em 0.65em;
 
     &:hover {
       background-color: $fallback--lightBg;
@@ -173,6 +169,10 @@
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    i {
+      margin-right: 0.5em;
     }
   }
 }

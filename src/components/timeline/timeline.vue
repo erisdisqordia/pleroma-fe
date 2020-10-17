@@ -32,7 +32,10 @@
       </div>
     </div>
     <div :class="classes.body">
-      <div class="timeline">
+      <div
+        ref="timeline"
+        class="timeline"
+      >
         <template v-for="statusId in pinnedStatusIds">
           <conversation
             v-if="timeline.statusesObject[statusId]"
@@ -54,6 +57,7 @@
             :collapsable="true"
             :in-profile="inProfile"
             :profile-user-id="userId"
+            :virtual-hidden="virtualScrollingEnabled && !statusesToDisplay.includes(status.id)"
           />
         </template>
       </div>

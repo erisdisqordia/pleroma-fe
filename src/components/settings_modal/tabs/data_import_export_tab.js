@@ -1,6 +1,7 @@
 import Importer from 'src/components/importer/importer.vue'
 import Exporter from 'src/components/exporter/exporter.vue'
 import Checkbox from 'src/components/checkbox/checkbox.vue'
+import { mapState } from 'vuex'
 
 const DataImportExportTab = {
   data () {
@@ -18,21 +19,26 @@ const DataImportExportTab = {
     Checkbox
   },
   computed: {
-    user () {
-      return this.$store.state.users.currentUser
-    }
+    ...mapState({
+      backendInteractor: (state) => state.api.backendInteractor,
+      user: (state) => state.users.currentUser
+    })
   },
   methods: {
     getFollowsContent () {
-      return this.$store.state.api.backendInteractor.exportFriends({ id: this.$store.state.users.currentUser.id })
+      return this.backendInteractor.exportFriends({ id: this.user.id })
         .then(this.generateExportableUsersContent)
     },
     getBlocksContent () {
-      return this.$store.state.api.backendInteractor.fetchBlocks()
+      return this.backendInteractor.fetchBlocks()
+        .then(this.generateExportableUsersContent)
+    },
+    getMutesContent () {
+      return this.backendInteractor.fetchMutes()
         .then(this.generateExportableUsersContent)
     },
     importFollows (file) {
-      return this.$store.state.api.backendInteractor.importFollows({ file })
+      return this.backendInteractor.importFollows({ file })
         .then((status) => {
           if (!status) {
             throw new Error('failed')
@@ -40,7 +46,15 @@ const DataImportExportTab = {
         })
     },
     importBlocks (file) {
-      return this.$store.state.api.backendInteractor.importBlocks({ file })
+      return this.backendInteractor.importBlocks({ file })
+        .then((status) => {
+          if (!status) {
+            throw new Error('failed')
+          }
+        })
+    },
+    importMutes (file) {
+      return this.backendInteractor.importMutes({ file })
         .then((status) => {
           if (!status) {
             throw new Error('failed')

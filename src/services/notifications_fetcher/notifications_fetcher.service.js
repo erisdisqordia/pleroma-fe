@@ -1,4 +1,5 @@
 import apiService from '../api/api.service.js'
+import { promiseInterval } from '../promise_interval/promise_interval.js'
 
 const update = ({ store, notifications, older }) => {
   store.dispatch('setNotificationsError', { value: false })
@@ -39,6 +40,7 @@ const fetchAndUpdate = ({ store, credentials, older = false }) => {
       args['since'] = Math.max(...readNotifsIds)
       fetchNotifications({ store, args, older })
     }
+
     return result
   }
 }
@@ -53,13 +55,13 @@ const fetchNotifications = ({ store, args, older }) => {
 }
 
 const startFetching = ({ credentials, store }) => {
-  fetchAndUpdate({ credentials, store })
-  const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store })
   // Initially there's set flag to silence all desktop notifications so
   // that there won't spam of them when user just opened up the FE we
   // reset that flag after a while to show new notifications once again.
   setTimeout(() => store.dispatch('setNotificationsSilence', false), 10000)
-  return setInterval(boundFetchAndUpdate, 10000)
+  const boundFetchAndUpdate = () => fetchAndUpdate({ credentials, store })
+  boundFetchAndUpdate()
+  return promiseInterval(boundFetchAndUpdate, 10000)
 }
 
 const notificationsFetcher = {

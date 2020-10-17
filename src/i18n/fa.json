@@ -1,0 +1,155 @@
+{
+  "about": {
+    "mrf": {
+      "simple": {
+        "media_removal_desc": "این نمونه رسانه‌ی پیغام‌های نمونه‌های ذکر شده را حذف می‌کند:",
+        "ftl_removal_desc": "این نمونه،‌ نمونه‌های ذکر شده را از تایم‌لاین «تمام شبکه‌ شناخته شده» حذف می‌کند:",
+        "media_removal": "حذف رسانه",
+        "ftl_removal": "حذف از تایم‌لاین «تمام شبکه شناخته شده»",
+        "quarantine_desc": "این نمونه تنها پیغام‌های عمومی را به نمونه‌های ذکر شده پیغام ارسال می‌کند:",
+        "quarantine": "قرنطینه شده",
+        "reject_desc": "این نمونه از نمونه‌های ذکر شده پیغامی دریافت نمی‌کند:",
+        "reject": "رد کننده",
+        "accept_desc": "این نمونه تنها از نمونه‌های ذکر شده پیغام دریافت می‌کند:",
+        "simple_policies": "سیاست‌های مخصوص نمونه",
+        "accept": "دریافت کننده",
+        "media_nsfw_desc": "این نمونه،‌ رسانه نمونه‌های ذکر شده را به اجبار حساس می‌کند:",
+        "media_nsfw": "به اجبار حساس کردن رسانه"
+      },
+      "federation": "فدراسیون",
+      "mrf_policies_desc": "سیاست‌های MRF رفتار فدراسیون این نمونه را تغییر می‌دهد. سیاست‌هایی که در ادامه آمده اعمال شده است:",
+      "keyword": {
+        "reject": "رد کننده",
+        "replace": "جایگزین کننده",
+        "keyword_policies": "سیاست‌های واژگان کلیدی",
+        "is_replaced_by": "→",
+        "ftl_removal": "حذف از تایم‌لاین «تمام شبکه شناخته شده»"
+      },
+      "mrf_policies": "سیاست‌های MRF(وسیله بازنویسی پیغام) فعال شده"
+    },
+    "staff": "کارکنان"
+  },
+  "image_cropper": {
+    "crop_picture": "برش تصویر",
+    "cancel": "لغو",
+    "save_without_cropping": "ذخیره بدون برش",
+    "save": "ذخیره"
+  },
+  "notifications": {
+    "followed_you": "پیگیر شما شد",
+    "favorited_you": "پیغام شما را پسندید",
+    "broken_favorite": "پیغام ناشناخته، در حال جستجو…"
+  },
+  "nav": {
+    "chats": "گپ‌ها",
+    "timelines": "تایم‌لاین‌ها",
+    "preferences": "ترجیحات",
+    "who_to_follow": "چه کسانی را پیگیری کنیم",
+    "search": "جستجو",
+    "user_search": "جستجوی کاربر",
+    "bookmarks": "نشانک‌ها",
+    "twkn": "شبکه شناخته شده",
+    "timeline": "تایم‌لاین",
+    "public_tl": "تایم‌لاین عمومی",
+    "dms": "پیغام‌های مستقیم",
+    "interactions": "تعاملات",
+    "mentions": "نام بردن‌ها",
+    "friend_requests": "درخواست پیگیری",
+    "back": "قبلی",
+    "administration": "مدیریت",
+    "about": "درباره"
+  },
+  "features_panel": {
+    "who_to_follow": "چه کسانی را پیگیری کنیم",
+    "title": "ویژگی‌ها",
+    "text_limit": "محدودیت متن",
+    "scope_options": "تنظیمات حوزه",
+    "media_proxy": "پروکسی رسانه",
+    "gopher": "گوفر",
+    "pleroma_chat_messages": "گپ پلروما",
+    "chat": "گپ"
+  },
+  "media_modal": {
+    "next": "بعدی",
+    "previous": "قبلی"
+  },
+  "login": {
+    "heading": {
+      "recovery": "بازیابی دو مرحله‌ای",
+      "totp": "احراز هویت دو مرحله‌ای"
+    },
+    "enter_two_factor_code": "کد احراز هویت دو مرحله‌ای را وارد کنید",
+    "recovery_code": "کد بازیابی",
+    "enter_recovery_code": "کد بازیابی را وارد کنید",
+    "authentication_code": "کد احراز هویت",
+    "hint": "برای شرکت در گفتگو، وارد سامانه شوید",
+    "username": "نام کاربری",
+    "register": "ثبت نام",
+    "description": "ورود به سامانه از طریق OAuth",
+    "placeholder": "به عنوان مثال: lain",
+    "password": "رمز عبور",
+    "logout": "خروج از سامانه",
+    "login": "ورود به سامانه"
+  },
+  "importer": {
+    "error": "در حین بارگذاری فایل خطایی رخ داد.",
+    "success": "با موفقیت بارگذاری شد.",
+    "submit": "ارسال"
+  },
+  "general": {
+    "peek": "نگاه سریع",
+    "close": "بستن",
+    "verify": "تأیید",
+    "confirm": "تأیید",
+    "enable": "فعال",
+    "disable": "غیر فعال",
+    "cancel": "لغو",
+    "show_less": "کمتر نشان بده",
+    "show_more": "بیشتر نشان بده",
+    "optional": "اختیاری",
+    "retry": "دوباره امتحان کنید",
+    "error_retry": "لطفاً دوباره امتحان کنید",
+    "generic_error": "خطایی رخ داد",
+    "loading": "در حال بارگذاری…",
+    "more": "بیشتر",
+    "submit": "ارسال",
+    "apply": "اعمال"
+  },
+  "finder": {
+    "find_user": "جستجوی ‌ کاربر",
+    "error_fetching_user": "دریافت کاربر با خطا مواجه شد"
+  },
+  "exporter": {
+    "processing": "در حال پردازش، شما به زودی قادر به دانلود فایل خواهید بود",
+    "export": "صادر کردن"
+  },
+  "domain_mute_card": {
+    "unmute": "صدا دار",
+    "unmute_progress": "در حال صدا دار کردن …",
+    "mute_progress": "در حال بی صدا کردن…",
+    "mute": "بی صدا"
+  },
+  "shoutbox": {
+    "title": "چت باکس"
+  },
+  "display_date": {
+    "today": "امروز"
+  },
+  "file_type": {
+    "file": "فایل",
+    "image": "تصویر",
+    "video": "ویدئو",
+    "audio": "صدا"
+  },
+  "chats": {
+    "empty_chat_list_placeholder": "شما هنوز هیچ گپی ندارید، گپ جدیدی را آغاز کنید!",
+    "delete": "حذف",
+    "error_sending_message": "در حین ارسال پیغام خطایی رخ داد.",
+    "error_loading_chat": "در هنگام بارگذاری گپ خطایی رخ داد.",
+    "delete_confirm": "آیا از حذف این پیغام اطمینان دارید؟",
+    "more": "بیشتر",
+    "empty_message_error": "نمی‌توان پیغام خالی فرستاد",
+    "new": "گپ جدید",
+    "chats": "گپ‌ها"
+  }
+}

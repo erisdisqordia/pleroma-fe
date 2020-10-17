@@ -1,7 +1,9 @@
 <template>
   <div class="settings panel panel-default">
     <div class="panel-heading">
-      {{ $t('nav.friend_requests') }}
+      <div class="title">
+        {{ $t('nav.friend_requests') }}
+      </div>
     </div>
     <div class="panel-body">
       <FollowRequestCard

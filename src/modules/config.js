@@ -65,7 +65,8 @@ export const defaultState = {
   useContainFit: false,
   greentext: undefined, // instance default
   hidePostStats: undefined, // instance default
-  hideUserStats: undefined // instance default
+  hideUserStats: undefined, // instance default
+  virtualScrolling: undefined // instance default
 }
 
 // caching the instance default properties

@@ -28,7 +28,7 @@
       :href="attachment.url"
       :alt="attachment.description"
       :title="attachment.description"
-      @click.prevent="toggleHidden"
+      @click.prevent.stop="toggleHidden"
     >
       <img
         :key="nsfwImage"
@@ -80,6 +80,8 @@
         class="video"
         :attachment="attachment"
         :controls="allowPlay"
+        @play="$emit('play')"
+        @pause="$emit('pause')"
       />
       <i
         v-if="!allowPlay"
@@ -93,6 +95,8 @@
       :alt="attachment.description"
       :title="attachment.description"
       controls
+      @play="$emit('play')"
+      @pause="$emit('pause')"
     />
 
     <div

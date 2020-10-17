@@ -44,7 +44,8 @@ const conversation = {
     'isPage',
     'pinnedStatusIdsObject',
     'inProfile',
-    'profileUserId'
+    'profileUserId',
+    'virtualHidden'
   ],
   created () {
     if (this.isPage) {
@@ -52,6 +53,13 @@ const conversation = {
     }
   },
   computed: {
+    hideStatus () {
+      if (this.$refs.statusComponent && this.$refs.statusComponent[0]) {
+        return this.virtualHidden && this.$refs.statusComponent[0].suspendable
+      } else {
+        return this.virtualHidden
+      }
+    },
     status () {
       return this.$store.state.statuses.allStatusesObject[this.statusId]
     },
@@ -102,6 +110,10 @@ const conversation = {
     },
     isExpanded () {
       return this.expanded || this.isPage
+    },
+    hiddenStyle () {
+      const height = (this.status && this.status.virtualHeight) || '120px'
+      return this.virtualHidden ? { height } : {}
     }
   },
   components: {
@@ -121,6 +133,12 @@ const conversation = {
       if (value) {
         this.fetchConversation()
       }
+    },
+    virtualHidden (value) {
+      this.$store.dispatch(
+        'setVirtualHeight',
+        { statusId: this.statusId, height: `${this.$el.clientHeight}px` }
+      )
     }
   },
   methods: {

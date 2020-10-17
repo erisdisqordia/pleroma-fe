@@ -1,4 +1,3 @@
-import { mapGetters } from 'vuex'
 
 const RetweetButton = {
   props: ['status', 'loggedIn', 'visibility'],
@@ -28,7 +27,9 @@ const RetweetButton = {
         'animate-spin': this.animated
       }
     },
-    ...mapGetters(['mergedConfig'])
+    mergedConfig () {
+      return this.$store.getters.mergedConfig
+    }
   }
 }
 

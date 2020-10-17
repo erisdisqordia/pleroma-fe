@@ -6,30 +6,30 @@
       :checked="state"
       @change="update"
       :disabled="disabled"
-      >
+    >
       <span
         v-if="!!$slots.default"
         class="label"
         >
         <slot />
       </span>
+      <ModifiedIcon :changed="isChanged" />
     </Checkbox>
-    <span v-if="isChanged">
-      <strong>CHANGED</strong>
-    </span>
   </label>
 </template>
 
 <script>
 import { get, set } from 'lodash'
 import Checkbox from 'src/components/checkbox/checkbox.vue'
+import ModifiedIcon from './modified_icon.vue'
 export default {
   props: [
     'path',
     'disabled'
   ],
   components: {
-    Checkbox
+    Checkbox,
+    ModifiedIcon
   },
   computed: {
     pathDefault () {

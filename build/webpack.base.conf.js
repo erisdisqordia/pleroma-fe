@@ -97,6 +97,7 @@ module.exports = {
     }),
     new FontelloPlugin({
       config: require('../static/fontello.json'),
+      host: 'https://fontello.com',
       name: 'fontello',
       output: {
         css: 'static/[name].' + now + '.css',  // [hash] is not supported. Use the current timestamp instead for versioning.

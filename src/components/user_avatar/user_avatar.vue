@@ -1,11 +1,17 @@
 <template>
   <StillImage
+    v-if="user"
     class="Avatar"
     :alt="user.screen_name"
     :title="user.screen_name"
     :src="imgSrc(user.profile_image_url_original)"
     :class="{ 'avatar-compact': compact, 'better-shadow': betterShadow }"
     :image-load-error="imageLoadError"
+  />
+  <div
+    v-else
+    class="Avatar -placeholder"
+    :class="{ 'avatar-compact': compact }"
   />
 </template>
 
@@ -41,6 +47,11 @@
     height: 32px;
     border-radius: $fallback--avatarAltRadius;
     border-radius: var(--avatarAltRadius, $fallback--avatarAltRadius);
+  }
+
+  &.-placeholder {
+    background-color: $fallback--fg;
+    background-color: var(--fg, $fallback--fg);
   }
 }
 </style>

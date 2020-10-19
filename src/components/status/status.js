@@ -21,7 +21,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faEnvelope,
   faLock,
-  faLockOpen,
+  faUnlock,
   faGlobeEurope,
   faTimes,
   faRetweet,
@@ -35,22 +35,18 @@ import {
   faEye,
   faThumbtack
 } from '@fortawesome/free-solid-svg-icons'
-import {
-  faStar as faStarRegular
-} from '@fortawesome/free-regular-svg-icons'
 
 library.add(
   faEnvelope,
   faGlobeEurope,
   faLock,
-  faLockOpen,
+  faUnlock,
   faTimes,
   faRetweet,
   faReply,
   faExternalLinkSquareAlt,
   faPlusSquare,
   faStar,
-  faStarRegular,
   faSmileBeam,
   faEllipsisH,
   faEyeSlash,
@@ -270,7 +266,7 @@ const Status = {
         case 'private':
           return 'lock'
         case 'unlisted':
-          return 'lock-open'
+          return 'unlock'
         case 'direct':
           return 'envelope'
         default:

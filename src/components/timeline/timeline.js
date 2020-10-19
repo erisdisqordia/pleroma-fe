@@ -3,6 +3,12 @@ import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.se
 import Conversation from '../conversation/conversation.vue'
 import TimelineMenu from '../timeline_menu/timeline_menu.vue'
 import { throttle, keyBy } from 'lodash'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faCircleNotch
+)
 
 export const getExcludedStatusIdsByPinning = (statuses, pinnedStatusIds) => {
   const ids = []

@@ -21,7 +21,7 @@
               :user="user"
             />
             <div class="user-info-avatar-link-overlay">
-              <i class="button-icon icon-zoom-in" />
+              <FAIcon class="button-icon" icon="search-plus" size="lg" />
             </div>
           </a>
           <router-link
@@ -55,7 +55,7 @@
                 :href="user.statusnet_profile_url"
                 target="_blank"
               >
-                <i class="icon-link-ext usersettings" />
+                <FAIcon class="usersettings" icon="external-link-alt" />
               </a>
               <AccountActions
                 v-if="isOtherUser && loggedIn"
@@ -85,7 +85,9 @@
                   bot
                 </span>
               </template>
-              <span v-if="user.locked"><i class="icon icon-lock" /></span>
+              <span v-if="user.locked">
+               <FAIcon class="lock-icon" icon="lock" size="sm"/>
+              </span>
               <span
                 v-if="!mergedConfig.hideUserStats && !hideBio"
                 class="dailyAvg"
@@ -133,7 +135,7 @@
                 <option value="striped">Striped bg</option>
                 <option value="side">Side stripe</option>
               </select>
-              <i class="icon-down-open" />
+              <FAIcon class="icon-down-open" icon="chevron-down" />
             </label>
           </div>
         </div>
@@ -150,7 +152,7 @@
                 :click="subscribeUser"
                 :title="$t('user_card.subscribe')"
               >
-                <i class="icon-bell-alt" />
+                <FAIcon icon="bell" />
               </ProgressButton>
               <ProgressButton
                 v-else
@@ -158,7 +160,11 @@
                 :click="unsubscribeUser"
                 :title="$t('user_card.unsubscribe')"
               >
-                <i class="icon-bell-ringing-o" />
+                <FALayers>
+                  <FAIcon icon="rss" transform="left-5 shrink-6 up-3 rotate-20" flip="horizontal"/>
+                  <FAIcon icon="rss" transform="right-5 shrink-6 up-3 rotate-20"/>
+                  <FAIcon icon="bell" />
+                </FALayers>
               </ProgressButton>
             </template>
           </div>
@@ -388,7 +394,7 @@
       opacity: 0;
       transition: opacity .2s ease;
 
-      i {
+      svg {
         color: #FFF;
       }
     }
@@ -446,6 +452,10 @@
     display: flex;
     font-weight: light;
     font-size: 15px;
+
+    .lock-icon {
+      margin-left: 0.5em;
+    }
 
     .user-screen-name {
       min-width: 1px;
@@ -508,7 +518,7 @@
         padding-bottom: 0;
         flex: 1 0 auto;
       }
-      .userHighlightSel.select i {
+      .userHighlightSel.select svg {
         line-height: 22px;
       }
 

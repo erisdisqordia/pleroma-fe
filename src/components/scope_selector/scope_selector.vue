@@ -28,7 +28,7 @@
       :title="$t('post_status.scope.unlisted')"
       @click="changeVis('unlisted')"
       >
-      <FAIcon icon="lock-open" class="button-icon" size="lg" />
+      <FAIcon icon="unlock" class="button-icon" size="lg" />
     </span>
     <span
       v-if="showPublic"

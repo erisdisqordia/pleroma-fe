@@ -24,7 +24,7 @@
       v-if="loading"
       class="text-center loading-icon"
     >
-      <i class="icon-spin3 animate-spin" />
+      <FAIcon icon="circle-notch" spin size="lg"/>
     </div>
     <div v-else-if="loaded">
       <div class="search-nav-heading">

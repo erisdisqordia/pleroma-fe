@@ -9,8 +9,9 @@
     >
       <FAIcon
         v-if="uploading"
-        class="progress-icon animate-spin"
+        class="progress-icon"
         icon="circle-notch"
+        spin
       />
       <FAIcon
         v-if="!uploading"

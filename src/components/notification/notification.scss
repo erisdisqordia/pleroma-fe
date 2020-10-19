@@ -1,3 +1,5 @@
+@import '../../_variables.scss';
+
 // TODO Copypaste from Status, should unify it somehow
 .Notification {
   &.-muted {
@@ -48,5 +50,35 @@
       margin-left: auto;
       display: block;
     }
+  }
+
+  .type-icon {
+    margin: 0 0.1em;
+  }
+
+  &.-type--repeat .type-icon {
+    color: $fallback--cGreen;
+    color: var(--cGreen, $fallback--cGreen);
+  }
+
+  &.-type--follow .type-icon {
+    color: $fallback--cBlue;
+    color: var(--cBlue, $fallback--cBlue);
+  }
+
+  &.-type--follow-request .type-icon {
+    color: $fallback--cBlue;
+    color: var(--cBlue, $fallback--cBlue);
+  }
+
+  &.-type--like .type-icon {
+    color: orange;
+    color: $fallback--cOrange;
+    color: var(--cOrange, $fallback--cOrange);
+  }
+
+  &.-type--move .type-icon {
+    color: $fallback--cBlue;
+    color: var(--cBlue, $fallback--cBlue);
   }
 }

@@ -17,6 +17,47 @@ import { highlightClass, highlightStyle } from '../../services/user_highlighter/
 import { muteWordHits } from '../../services/status_parser/status_parser.js'
 import { unescape, uniqBy } from 'lodash'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faEnvelope,
+  faLock,
+  faLockOpen,
+  faGlobeEurope,
+  faTimes,
+  faRetweet,
+  faReply,
+  faExternalLinkSquareAlt,
+  faPlusSquare,
+  faSmileBeam,
+  faEllipsisH,
+  faStar,
+  faEyeSlash,
+  faEye,
+  faThumbtack
+} from '@fortawesome/free-solid-svg-icons'
+import {
+  faStar as faStarRegular
+} from '@fortawesome/free-regular-svg-icons'
+
+library.add(
+  faEnvelope,
+  faGlobeEurope,
+  faLock,
+  faLockOpen,
+  faTimes,
+  faRetweet,
+  faReply,
+  faExternalLinkSquareAlt,
+  faPlusSquare,
+  faStar,
+  faStarRegular,
+  faSmileBeam,
+  faEllipsisH,
+  faEyeSlash,
+  faEye,
+  faThumbtack
+)
+
 const Status = {
   name: 'Status',
   components: {
@@ -227,13 +268,13 @@ const Status = {
     visibilityIcon (visibility) {
       switch (visibility) {
         case 'private':
-          return 'icon-lock'
+          return 'lock'
         case 'unlisted':
-          return 'icon-lock-open-alt'
+          return 'lock-open'
         case 'direct':
-          return 'icon-mail-alt'
+          return 'envelope'
         default:
-          return 'icon-globe'
+          return 'globe-europe'
       }
     },
     showError (error) {

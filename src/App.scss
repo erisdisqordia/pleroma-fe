@@ -318,7 +318,7 @@ option {
   }
 }
 
-i[class*=icon-] {
+i[class*=icon-], .svg-inline--fa  {
   color: $fallback--icon;
   color: var(--icon, $fallback--icon);
 }
@@ -808,7 +808,12 @@ nav {
 }
 
 .button-icon {
-  font-size: 1.2em;
+  &i,
+  &.svg-inline--fa.fa-lg {
+    display: inline-block;
+    padding: 0 0.3em;
+    font-size: 1.1em;
+  }
 }
 
 @keyframes shakeError {

@@ -1,15 +1,19 @@
 <template>
   <div>
-    <i
+    <FAIcon
       v-if="loggedIn"
-      class="button-icon button-reply icon-reply"
+      class="ReplyButton button-icon -interactive"
+      icon="reply"
+      size="lg"
       :title="$t('tool_tip.reply')"
       :class="{'-active': replying}"
       @click.prevent="$emit('toggle')"
     />
-    <i
+    <FAIcon
       v-else
-      class="button-icon button-reply -disabled icon-reply"
+      icon="reply"
+      size="lg"
+      class="ReplyButton button-icon"
       :title="$t('tool_tip.reply')"
     />
     <span v-if="status.replies_count > 0">
@@ -19,3 +23,19 @@
 </template>
 
 <script src="./reply_button.js"></script>
+
+<style lang="scss">
+@import '../../_variables.scss';
+
+.ReplyButton {
+  &.-interactive {
+    cursor: pointer;
+
+    &:hover,
+    &.-active {
+      color: $fallback--cBlue;
+      color: var(--cBlue, $fallback--cBlue);
+    }
+  }
+}
+</style>

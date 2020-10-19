@@ -24,8 +24,8 @@
         v-if="options.length > 2"
         class="icon-container"
       >
-        <i
-          class="icon-cancel"
+        <FAIcon
+          icon="times"
           @click="deleteOption(index)"
         />
       </div>
@@ -35,7 +35,8 @@
       class="add-option faint"
       @click="addOption"
     >
-      <i class="icon-plus" />
+      <FAIcon icon="plus" size="sm"/>
+
       {{ $t("polls.add_option") }}
     </a>
     <div class="poll-type-expiry">
@@ -55,7 +56,7 @@
             <option value="single">{{ $t('polls.single_choice') }}</option>
             <option value="multiple">{{ $t('polls.multiple_choices') }}</option>
           </select>
-          <i class="icon-down-open" />
+          <FAIcon class="icon-down-open" icon="chevron-down"/>
         </label>
       </div>
       <div
@@ -83,7 +84,7 @@
               {{ $t(`time.${unit}_short`, ['']) }}
             </option>
           </select>
-          <i class="icon-down-open" />
+          <FAIcon class="icon-down-open" icon="chevron-down"/>
         </label>
       </div>
     </div>
@@ -103,6 +104,7 @@
   .add-option {
     align-self: flex-start;
     padding-top: 0.25em;
+    padding-left: 0.1em;
     cursor: pointer;
   }
 
@@ -124,8 +126,8 @@
 
   .icon-container {
     // Hack: Move the icon over the input box
-    width: 2em;
-    margin-left: -2em;
+    width: 1.5em;
+    margin-left: -1.5em;
     z-index: 1;
   }
 

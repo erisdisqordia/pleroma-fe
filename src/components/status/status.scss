@@ -200,7 +200,6 @@ $status-margin: 0.75em;
   }
 
   .reply-to {
-    display: flex;
     position: relative;
   }
 
@@ -208,7 +207,6 @@ $status-margin: 0.75em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-left: 0.2em;
   }
 
   .replies-separator {
@@ -232,16 +230,10 @@ $status-margin: 0.75em;
 
   .repeat-info {
     padding: 0.4em $status-margin;
-    line-height: 22px;
 
-    .right-side {
-      display: flex;
-      align-content: center;
-      flex-wrap: wrap;
-    }
-
-    i {
-      padding: 0 0.2em;
+    .repeat-icon {
+      color: $fallback--cGreen;
+      color: var(--cGreen, $fallback--cGreen);
     }
   }
 
@@ -288,18 +280,6 @@ $status-margin: 0.75em;
     > * {
       max-width: 4em;
       flex: 1;
-    }
-  }
-
-  .button-reply {
-    &:not(.-disabled) {
-      cursor: pointer;
-    }
-
-    &:not(.-disabled):hover,
-    &.-active {
-      color: $fallback--cBlue;
-      color: var(--cBlue, $fallback--cBlue);
     }
   }
 

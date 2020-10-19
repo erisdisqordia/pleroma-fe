@@ -36,9 +36,11 @@
         <div class="reaction-bottom-fader" />
       </div>
     </div>
-    <i
+    <FAIcon
       slot="trigger"
-      class="icon-smile button-icon add-reaction-button"
+      class="button-icon add-reaction-button"
+      :icon="['far', 'smile-beam']"
+      size="lg"
       :title="$t('tool_tip.add_reaction')"
     />
   </Popover>

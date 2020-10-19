@@ -73,9 +73,11 @@
         </button>
       </div>
     </div>
-    <i
+    <FAIcon
       slot="trigger"
-      class="icon-ellipsis button-icon"
+      class="button-icon"
+      icon="ellipsis-h"
+      size="lg"
     />
   </Popover>
 </template>

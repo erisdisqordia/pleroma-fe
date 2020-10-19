@@ -7,13 +7,15 @@
       class="label"
       :title="$t('tool_tip.media_upload')"
     >
-      <i
+      <FAIcon
         v-if="uploading"
-        class="progress-icon icon-spin4 animate-spin"
+        class="progress-icon animate-spin"
+        icon="circle-notch"
       />
-      <i
+      <FAIcon
         v-if="!uploading"
-        class="new-icon icon-upload"
+        class="new-icon"
+        icon="upload"
       />
       <input
         v-if="uploadReady"

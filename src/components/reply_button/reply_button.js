@@ -1,3 +1,7 @@
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faReply } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faReply)
 
 const ReplyButton = {
   name: 'ReplyButton',

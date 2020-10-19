@@ -12,6 +12,23 @@ import suggestor from '../emoji_input/suggestor.js'
 import { mapGetters, mapState } from 'vuex'
 import Checkbox from '../checkbox/checkbox.vue'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faChevronDown,
+  faSmileBeam,
+  faPollH,
+  faUpload,
+  faBan
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faChevronDown,
+  faSmileBeam,
+  faPollH,
+  faUpload,
+  faBan
+)
+
 const buildMentionsString = ({ user, attentions = [] }, currentUser) => {
   let allAttentions = [...attentions]
 

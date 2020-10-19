@@ -12,10 +12,11 @@
         v-show="showDropIcon !== 'hide'"
         :style="{ animation: showDropIcon === 'show' ? 'fade-in 0.25s' : 'fade-out 0.5s' }"
         class="drop-indicator"
-        :class="[uploadFileLimitReached ? 'icon-block' : 'icon-upload']"
         @dragleave="fileDragStop"
         @drop.stop="fileDrop"
-      />
+      >
+        <FAIcon :icon="uploadFileLimitReached ? 'ban' : 'upload'"/>
+      </div>
       <div class="form-group">
         <i18n
           v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private' && !disableLockWarning"
@@ -198,7 +199,7 @@
                   {{ $t(`post_status.content_type["${postFormat}"]`) }}
                 </option>
               </select>
-              <i class="icon-down-open" />
+              <FAIcon class="icon-down-open" icon="chevron-down"/>
             </label>
           </div>
           <div
@@ -235,22 +236,22 @@
           <div
             class="emoji-icon"
           >
-            <i
+            <div
               :title="$t('emoji.add_emoji')"
-              class="icon-smile btn btn-default"
+              class="btn btn-default"
               @click="showEmojiPicker"
-            />
+            >
+              <FAIcon icon="smile-beam"/>
+            </div>
           </div>
           <div
             v-if="pollsAvailable"
             class="poll-icon"
             :class="{ selected: pollFormVisible }"
+            :title="$t('polls.add_poll')"
+            @click="togglePollForm"
           >
-            <i
-              :title="$t('polls.add_poll')"
-              class="icon-chart-bar btn btn-default"
-              @click="togglePollForm"
-            />
+            <FAIcon icon="poll-h" />
           </div>
         </div>
         <button
@@ -392,7 +393,7 @@
     &:hover {
       text-decoration: underline;
     }
-    i {
+    svg, i {
       margin-left: 0.2em;
       font-size: 0.8em;
       transform: rotate(90deg);
@@ -434,18 +435,20 @@
 
   .media-upload-icon, .poll-icon, .emoji-icon {
     font-size: 26px;
+    line-height: 1.1;
     flex: 1;
+    padding: 0 0.1em;
 
     &.selected, &:hover {
       // needs to be specific to override icon default color
-      i, label {
+      svg, i, label {
         color: $fallback--lightText;
         color: var(--lightText, $fallback--lightText);
       }
     }
 
     &.disabled {
-      i {
+      svg, i {
         cursor: not-allowed;
         color: $fallback--icon;
         color: var(--btnDisabledText, $fallback--icon);

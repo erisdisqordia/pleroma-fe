@@ -1,3 +1,18 @@
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faEnvelope,
+  faLock,
+  faLockOpen,
+  faGlobeEurope
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faEnvelope,
+  faGlobeEurope,
+  faLock,
+  faLockOpen
+)
+
 const ScopeSelector = {
   props: [
     'showAll',

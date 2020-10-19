@@ -1,36 +1,44 @@
 <template>
   <div
     v-if="!showNothing"
-    class="scope-selector"
-  >
-    <i
+    class="ScopeSelector"
+    >
+    <span
       v-if="showDirect"
-      class="icon-mail-alt"
+      class="scope"
       :class="css.direct"
       :title="$t('post_status.scope.direct')"
       @click="changeVis('direct')"
-    />
-    <i
+      >
+      <FAIcon icon="envelope" class="button-icon" size="lg" />
+    </span>
+    <span
+      class="scope"
       v-if="showPrivate"
-      class="icon-lock"
       :class="css.private"
       :title="$t('post_status.scope.private')"
       @click="changeVis('private')"
-    />
-    <i
+      >
+      <FAIcon icon="lock" class="button-icon" size="lg" />
+    </span>
+    <span
       v-if="showUnlisted"
-      class="icon-lock-open-alt"
+      class="scope"
       :class="css.unlisted"
       :title="$t('post_status.scope.unlisted')"
       @click="changeVis('unlisted')"
-    />
-    <i
+      >
+      <FAIcon icon="lock-open" class="button-icon" size="lg" />
+    </span>
+    <span
       v-if="showPublic"
-      class="icon-globe"
+      class="scope"
       :class="css.public"
       :title="$t('post_status.scope.public')"
       @click="changeVis('public')"
-    />
+      >
+      <FAIcon icon="globe-europe" class="button-icon" size="lg" />
+    </span>
   </div>
 </template>
 
@@ -39,12 +47,16 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.scope-selector {
-  i {
-    font-size: 1.2em;
-    cursor: pointer;
+.ScopeSelector {
 
-    &.selected {
+  .scope {
+    display: inline-block;
+    cursor: pointer;
+    min-width: 1.3em;
+    min-height: 1.3em;
+    text-align: center;
+
+    &.selected svg {
       color: $fallback--lightText;
       color: var(--lightText, $fallback--lightText);
     }

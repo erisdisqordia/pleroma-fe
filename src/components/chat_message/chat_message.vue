@@ -62,9 +62,10 @@
                 </div>
                 <button
                   slot="trigger"
+                  class="menu-icon"
                   :title="$t('chats.more')"
                 >
-                  <i class="icon-ellipsis" />
+                  <FAIcon icon="ellipsis-h" />
                 </button>
               </Popover>
             </div>

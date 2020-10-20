@@ -54,8 +54,9 @@
                 v-if="isOtherUser && !user.is_local"
                 :href="user.statusnet_profile_url"
                 target="_blank"
+                class="external-link-button"
               >
-                <FAIcon class="usersettings" icon="external-link-alt" />
+                <FAIcon class="icon" icon="external-link-alt" />
               </a>
               <AccountActions
                 v-if="isOtherUser && loggedIn"
@@ -289,7 +290,7 @@
     mask: linear-gradient(to top, white, transparent) bottom no-repeat,
           linear-gradient(to top, white, white);
     // Autoprefixed seem to ignore this one, and also syntax is different
-    -webkit-mask-composite: xor;
+                                                 -webkit-mask-composite: xor;
     mask-composite: exclude;
     background-size: cover;
     mask-size: 100% 60%;
@@ -404,10 +405,17 @@
     }
   }
 
-  .usersettings {
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-    opacity: .8;
+  .external-link-button {
+    cursor: pointer;
+    width: 2.5em;
+    text-align: center;
+    margin: -0.5em 0;
+    padding: 0.5em 0;
+
+    &:not(:hover) .icon {
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
   }
 
   .user-summary {

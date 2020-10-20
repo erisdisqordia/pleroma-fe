@@ -139,7 +139,7 @@
           class="add-field faint"
           @click="addField"
         >
-          <i class="icon-plus" />
+          <FAIcon icon="plus" />
           {{ $t("settings.profile_fields.add_field") }}
         </a>
       </div>

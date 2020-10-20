@@ -3,10 +3,14 @@ import Conversation from '../conversation/conversation.vue'
 import Status from '../status/status.vue'
 import map from 'lodash/map'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCircleNotch,
+  faSearch
+} from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faCircleNotch
+  faCircleNotch,
+  faSearch
 )
 
 const Search = {

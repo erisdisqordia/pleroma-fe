@@ -10,11 +10,13 @@ import Autosuggest from 'src/components/autosuggest/autosuggest.vue'
 import Checkbox from 'src/components/checkbox/checkbox.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faTimes
+  faTimes,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faTimes
+  faTimes,
+  faPlus
 )
 
 const ProfileTab = {

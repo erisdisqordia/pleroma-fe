@@ -4,11 +4,13 @@ import InterfaceLanguageSwitcher from 'src/components/interface_language_switche
 import SharedComputedObject from '../helpers/shared_computed_object.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faChevronDown
+  faChevronDown,
+  faGlobe
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faChevronDown
+  faChevronDown,
+  faGlobe
 )
 
 const GeneralTab = {

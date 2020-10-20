@@ -27,7 +27,7 @@
           class="btn search-button"
           @click="find(searchTerm)"
         >
-          <i class="icon-search" />
+          <FAIcon icon="search" />
         </button>
         <FAIcon
           class="button-icon" icon="times"

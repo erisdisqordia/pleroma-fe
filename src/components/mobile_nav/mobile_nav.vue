@@ -15,7 +15,7 @@
             class="mobile-nav-button"
             @click.stop.prevent="toggleMobileSidebar()"
           >
-            <i class="button-icon icon-menu" />
+            <FAIcon size="lg" class="button-icon" icon="bars" />
             <div
               v-if="unreadChatCount"
               class="alert-dot"
@@ -37,7 +37,7 @@
             href="#"
             @click.stop.prevent="openMobileNotifications()"
           >
-            <i class="button-icon icon-bell-alt" />
+            <FAIcon size="lg" class="button-icon" icon="bell" />
             <div
               v-if="unseenNotificationsCount"
               class="alert-dot"
@@ -59,7 +59,7 @@
           class="mobile-nav-button"
           @click.stop.prevent="closeMobileNotifications()"
         >
-          <FAIcon class="button-icon" icon="times" />
+          <FAIcon size="lg" class="button-icon" icon="times" />
         </a>
       </div>
       <div
@@ -91,9 +91,8 @@
 }
 
 .mobile-nav-button {
-  display: flex;
-  justify-content: center;
-  width: 50px;
+  text-align: center;
+  margin: 0 1em;
   position: relative;
   cursor: pointer;
 }

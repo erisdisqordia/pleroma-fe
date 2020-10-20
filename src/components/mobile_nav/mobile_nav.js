@@ -5,11 +5,15 @@ import GestureService from '../../services/gesture_service/gesture_service'
 import { mapGetters } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faTimes
+  faTimes,
+  faBell,
+  faBars
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faTimes
+  faTimes,
+  faBell,
+  faBars
 )
 
 const MobileNav = {

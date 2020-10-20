@@ -9,11 +9,13 @@ import ChatMessageDate from '../chat_message_date/chat_message_date.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faTimes
+  faTimes,
+  faEllipsisH
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faTimes
+  faTimes,
+  faEllipsisH
 )
 
 const ChatMessage = {

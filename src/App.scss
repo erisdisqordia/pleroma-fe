@@ -85,7 +85,7 @@ button {
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
 
-  i[class*=icon-] {
+  i[class*=icon-], .svg-inline--fa {
     color: $fallback--text;
     color: var(--btnText, $fallback--text);
   }
@@ -389,7 +389,7 @@ i[class*=icon-], .svg-inline--fa  {
   box-sizing: border-box;
 
   button {
-    &, i[class*=icon-] {
+    &, i[class*=icon-], svg {
       color: $fallback--text;
       color: var(--btnTopBarText, $fallback--text);
     }
@@ -463,7 +463,7 @@ i[class*=icon-], .svg-inline--fa  {
     flex-basis: 970px;
     height: 50px;
 
-    a, a i {
+    a, a i, a svg {
       color: $fallback--link;
       color: var(--topBarLink, $fallback--link);
     }

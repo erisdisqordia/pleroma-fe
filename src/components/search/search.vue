@@ -17,7 +17,7 @@
         class="btn search-button"
         @click="newQuery(searchTerm)"
       >
-        <i class="icon-search" />
+        <FAIcon icon="search" />
       </button>
     </div>
     <div

@@ -9,11 +9,13 @@ import { promiseInterval } from '../../services/promise_interval/promise_interva
 import { getScrollPosition, getNewTopPosition, isBottomedOut, scrollableContainerHeight } from './chat_layout_utils.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faChevronDown
+  faChevronDown,
+  faChevronLeft
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faChevronDown
+  faChevronDown,
+  faChevronLeft
 )
 
 const BOTTOMED_OUT_OFFSET = 10

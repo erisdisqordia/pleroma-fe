@@ -122,7 +122,7 @@
     padding-right: 2rem;
   }
 
-  .icon-cancel {
+  .dismiss {
     cursor: pointer;
   }
 }

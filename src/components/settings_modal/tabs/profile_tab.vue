@@ -127,7 +127,7 @@
           <div
             class="icon-container"
           >
-            <i
+            <FAIcon
               v-show="newFields.length > 1"
               icon="times"
               @click="deleteField(i)"
@@ -166,7 +166,7 @@
           :src="user.profile_image_url_original"
           class="current-avatar"
         >
-        <i
+        <FAIcon
           v-if="!isDefaultAvatar && pickAvatarBtnVisible"
           :title="$t('settings.reset_avatar')"
           class="reset-button" icon="times"
@@ -194,7 +194,7 @@
       <h2>{{ $t('settings.profile_banner') }}</h2>
       <div class="banner-background-preview">
         <img :src="user.cover_photo">
-        <i
+        <FAIcon
           v-if="!isDefaultBanner"
           :title="$t('settings.reset_profile_banner')"
           class="reset-button" icon="times"
@@ -214,9 +214,11 @@
           @change="uploadFile('banner', $event)"
         >
       </div>
-      <i
+      <FAIcon
         v-if="bannerUploading"
-        class=" icon-spin4 animate-spin uploading"
+        class="uploading"
+        spin
+        icon="circle-notch"
       />
       <button
         v-else-if="bannerPreview"
@@ -230,7 +232,7 @@
         class="alert error"
       >
         Error: {{ bannerUploadError }}
-        <i
+        <FAIcon
           class="button-icon" icon="times"
           @click="clearUploadError('banner')"
         />
@@ -240,7 +242,7 @@
       <h2>{{ $t('settings.profile_background') }}</h2>
       <div class="banner-background-preview">
         <img :src="user.background_image">
-        <i
+        <FAIcon
           v-if="!isDefaultBackground"
           :title="$t('settings.reset_profile_background')"
           class="reset-button" icon="times"
@@ -260,9 +262,11 @@
           @change="uploadFile('background', $event)"
         >
       </div>
-      <i
+      <FAIcon
         v-if="backgroundUploading"
-        class=" icon-spin4 animate-spin uploading"
+        class="uploading"
+        spin
+        icon="circle-notch"
       />
       <button
         v-else-if="backgroundPreview"
@@ -276,8 +280,10 @@
         class="alert error"
       >
         Error: {{ backgroundUploadError }}
-        <i
-          class="button-icon" icon="times"
+        <FAIcon
+          size="lg"
+          class="button-icon"
+          icon="times"
           @click="clearUploadError('background')"
         />
       </div>

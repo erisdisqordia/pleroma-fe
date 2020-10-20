@@ -9,7 +9,7 @@
       <div class="notice-message">
         {{ $t(notice.messageKey, notice.messageArgs) }}
       </div>
-      <i
+      <FAIcon
         class="button-icon" icon="times"
         @click="closeNotice(notice)"
       />

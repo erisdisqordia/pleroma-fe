@@ -85,9 +85,10 @@
             {{ $t('post_status.preview') }}
             <i :class="showPreview ? 'icon-left-open' : 'icon-right-open'" />
           </a>
-          <i
+          <FAIcon
             v-show="previewLoading"
-            class="icon-spin3 animate-spin"
+            spin
+            icon="circle-notch"
           />
         </div>
         <div
@@ -284,8 +285,10 @@
         class="alert error"
       >
         Error: {{ error }}
-        <i
-          class="button-icon" icon="times"
+        <FAIcon
+          class="button-icon"
+          size="lg"
+          icon="times"
           @click="clearError"
         />
       </div>
@@ -295,7 +298,7 @@
           :key="file.url"
           class="media-upload-wrapper"
         >
-          <i
+          <FAIcon
             class="button-icon" icon="times"
             @click="removeMediaFile(file)"
           />
@@ -379,10 +382,6 @@
     padding-left: 0.5em;
     display: flex;
     width: 100%;
-
-    .icon-spin3 {
-      margin-left: auto;
-    }
   }
 
   .preview-toggle {
@@ -477,7 +476,7 @@
     text-align: right;
   }
 
-  .icon-chart-bar {
+  .poll-icon {
     cursor: pointer;
   }
 
@@ -489,19 +488,6 @@
     margin-right: .2em;
     margin-bottom: .5em;
     width: 18em;
-
-    .icon-cancel {
-      display: inline-block;
-      position: static;
-      margin: 0;
-      padding-bottom: 0;
-      margin-left: $fallback--attachmentRadius;
-      margin-left: var(--attachmentRadius, $fallback--attachmentRadius);
-      background-color: $fallback--fg;
-      background-color: var(--btn, $fallback--fg);
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
 
     img, video {
       object-fit: contain;
@@ -525,7 +511,7 @@
     flex-direction: column;
   }
 
-  .media-upload-wrapper .attachments {
+   .attachments .media-upload-wrapper{
     padding: 0 0.5em;
 
     .attachment {
@@ -534,11 +520,14 @@
       position: relative;
     }
 
-    i {
+    .button-icon {
       position: absolute;
       margin: 10px;
-      padding: 5px;
+      margin: .75em;
+      padding: .5em;
       background: rgba(230,230,230,0.6);
+      z-index: 2;
+      color: black;
       border-radius: $fallback--attachmentRadius;
       border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
       font-weight: bold;
@@ -613,11 +602,6 @@
 
   .btn[disabled] {
     cursor: not-allowed;
-  }
-
-  .icon-cancel {
-    cursor: pointer;
-    z-index: 4;
   }
 
   @keyframes fade-in {

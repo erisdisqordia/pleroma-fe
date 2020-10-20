@@ -31,9 +31,10 @@
           @click="submit(false)"
           v-text="saveWithoutCroppingText"
         />
-        <i
+        <FAIcon
           v-if="submitting"
-          class="icon-spin4 animate-spin"
+          spin
+          icon="circle-notch"
         />
       </div>
       <div

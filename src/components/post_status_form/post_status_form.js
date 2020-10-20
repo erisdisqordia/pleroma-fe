@@ -19,7 +19,8 @@ import {
   faPollH,
   faUpload,
   faBan,
-  faTimes
+  faTimes,
+  faCircleNotch
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -28,7 +29,8 @@ library.add(
   faPollH,
   faUpload,
   faBan,
-  faTimes
+  faTimes,
+  faCircleNotch
 )
 
 const buildMentionsString = ({ user, attentions = [] }, currentUser) => {

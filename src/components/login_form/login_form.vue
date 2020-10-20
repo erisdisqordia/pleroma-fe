@@ -76,7 +76,7 @@
     >
       <div class="alert error">
         {{ error }}
-        <i
+        <FAIcon
           class="button-icon" icon="times"
           @click="clearError"
         />

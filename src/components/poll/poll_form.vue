@@ -26,6 +26,7 @@
       >
         <FAIcon
           icon="times"
+          class="delete"
           @click="deleteOption(index)"
         />
       </div>
@@ -129,6 +130,14 @@
     width: 1.5em;
     margin-left: -1.5em;
     z-index: 1;
+
+    .delete {
+      cursor: pointer;
+
+      &:hover {
+        color: inherit;
+      }
+    }
   }
 
   .poll-type-expiry {

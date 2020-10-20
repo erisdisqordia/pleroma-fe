@@ -2,11 +2,13 @@ import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faTimes
+  faTimes,
+  faCircleNotch
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faTimes
+  faTimes,
+  faCircleNotch
 )
 
 const ImageCropper = {

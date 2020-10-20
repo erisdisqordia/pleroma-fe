@@ -11,12 +11,14 @@ import Checkbox from 'src/components/checkbox/checkbox.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faTimes,
-  faPlus
+  faPlus,
+  faCircleNotch
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faTimes,
-  faPlus
+  faPlus,
+  faCircleNotch
 )
 
 const ProfileTab = {

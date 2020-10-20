@@ -41,8 +41,8 @@
         class="alert error"
       >
         {{ submitErrorMsg }}
-        <i
-          class="button-icon icon-cancel"
+        <FAIcon
+          class="button-icon" icon="times"
           @click="clearError"
         />
       </div>

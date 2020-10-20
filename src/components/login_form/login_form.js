@@ -1,5 +1,13 @@
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import oauthApi from '../../services/new_api/oauth.js'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faTimes
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faTimes
+)
 
 const LoginForm = {
   data: () => ({

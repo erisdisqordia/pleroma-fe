@@ -53,7 +53,7 @@
               />
               <i
                 style="color: var(--cRed)"
-                class="button-icon icon-cancel"
+                class="button-icon" icon="times"
               />
             </div>
           </div>
@@ -102,6 +102,17 @@
     </div>
   </div>
 </template>
+
+<script>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faTimes
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faTimes
+)
+</script>
 
 <style lang="scss">
 .preview-container {

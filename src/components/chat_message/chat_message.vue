@@ -56,7 +56,7 @@
                       class="dropdown-item dropdown-item-icon"
                       @click="deleteMessage"
                     >
-                      <i class="icon-cancel" /> {{ $t("chats.delete") }}
+                      <FAIcon icon="times" /> {{ $t("chats.delete") }}
                     </button>
                   </div>
                 </div>

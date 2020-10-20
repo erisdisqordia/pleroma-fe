@@ -18,7 +18,8 @@ import {
   faSmileBeam,
   faPollH,
   faUpload,
-  faBan
+  faBan,
+  faTimes
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -26,7 +27,8 @@ library.add(
   faSmileBeam,
   faPollH,
   faUpload,
-  faBan
+  faBan,
+  faTimes
 )
 
 const buildMentionsString = ({ user, attentions = [] }, currentUser) => {

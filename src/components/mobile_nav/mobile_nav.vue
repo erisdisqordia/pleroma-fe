@@ -59,7 +59,7 @@
           class="mobile-nav-button"
           @click.stop.prevent="closeMobileNotifications()"
         >
-          <i class="button-icon icon-cancel" />
+          <FAIcon class="button-icon" icon="times" />
         </a>
       </div>
       <div

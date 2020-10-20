@@ -129,7 +129,7 @@
           >
             <i
               v-show="newFields.length > 1"
-              class="icon-cancel"
+              icon="times"
               @click="deleteField(i)"
             />
           </div>
@@ -169,7 +169,7 @@
         <i
           v-if="!isDefaultAvatar && pickAvatarBtnVisible"
           :title="$t('settings.reset_avatar')"
-          class="reset-button icon-cancel"
+          class="reset-button" icon="times"
           type="button"
           @click="resetAvatar"
         />
@@ -197,7 +197,7 @@
         <i
           v-if="!isDefaultBanner"
           :title="$t('settings.reset_profile_banner')"
-          class="reset-button icon-cancel"
+          class="reset-button" icon="times"
           type="button"
           @click="resetBanner"
         />
@@ -231,7 +231,7 @@
       >
         Error: {{ bannerUploadError }}
         <i
-          class="button-icon icon-cancel"
+          class="button-icon" icon="times"
           @click="clearUploadError('banner')"
         />
       </div>
@@ -243,7 +243,7 @@
         <i
           v-if="!isDefaultBackground"
           :title="$t('settings.reset_profile_background')"
-          class="reset-button icon-cancel"
+          class="reset-button" icon="times"
           type="button"
           @click="resetBackground"
         />
@@ -277,7 +277,7 @@
       >
         Error: {{ backgroundUploadError }}
         <i
-          class="button-icon icon-cancel"
+          class="button-icon" icon="times"
           @click="clearUploadError('background')"
         />
       </div>

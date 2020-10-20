@@ -55,7 +55,7 @@
       <div class="alert error">
         {{ error }}
         <i
-          class="button-icon icon-cancel"
+          class="button-icon" icon="times"
           @click="clearError"
         />
       </div>

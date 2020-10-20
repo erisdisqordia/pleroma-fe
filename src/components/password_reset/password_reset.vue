@@ -66,7 +66,7 @@
               class="button-icon dismiss"
               @click.prevent="dismissError()"
             >
-              <i class="icon-cancel" />
+              <FAIcon icon="times" />
             </a>
           </p>
         </div>

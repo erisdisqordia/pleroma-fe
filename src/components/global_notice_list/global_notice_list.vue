@@ -10,7 +10,7 @@
         {{ $t(notice.messageKey, notice.messageArgs) }}
       </div>
       <i
-        class="button-icon icon-cancel"
+        class="button-icon" icon="times"
         @click="closeNotice(notice)"
       />
     </div>

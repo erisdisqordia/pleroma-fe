@@ -13,7 +13,7 @@
           <span>{{ $t('shoutbox.title') }}</span>
           <i
             v-if="floating"
-            class="icon-cancel"
+            icon="times"
           />
         </div>
       </div>

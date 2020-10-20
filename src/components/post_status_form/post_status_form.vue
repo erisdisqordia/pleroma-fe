@@ -40,7 +40,7 @@
             class="button-icon dismiss"
             @click.prevent="dismissScopeNotice()"
           >
-            <i class="icon-cancel" />
+            <FAIcon icon="times" />
           </a>
         </p>
         <p
@@ -52,7 +52,7 @@
             class="button-icon dismiss"
             @click.prevent="dismissScopeNotice()"
           >
-            <i class="icon-cancel" />
+            <FAIcon icon="times" />
           </a>
         </p>
         <p
@@ -64,7 +64,7 @@
             class="button-icon dismiss"
             @click.prevent="dismissScopeNotice()"
           >
-            <i class="icon-cancel" />
+            <FAIcon icon="times" />
           </a>
         </p>
         <p
@@ -285,7 +285,7 @@
       >
         Error: {{ error }}
         <i
-          class="button-icon icon-cancel"
+          class="button-icon" icon="times"
           @click="clearError"
         />
       </div>
@@ -296,7 +296,7 @@
           class="media-upload-wrapper"
         >
           <i
-            class="fa button-icon icon-cancel"
+            class="button-icon" icon="times"
             @click="removeMediaFile(file)"
           />
           <attachment

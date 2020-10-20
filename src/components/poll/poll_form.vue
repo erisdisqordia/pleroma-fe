@@ -12,6 +12,7 @@
         <input
           :id="`poll-${index}`"
           v-model="options[index]"
+          size="1"
           class="poll-option-input"
           type="text"
           :placeholder="$t('polls.option')"

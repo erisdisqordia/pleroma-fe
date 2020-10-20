@@ -14,7 +14,10 @@
             class="go-back-button"
             @click="goBack"
           >
-            <FAIcon size="lg" icon="chevron-left" />
+            <FAIcon
+              size="lg"
+              icon="chevron-left"
+            />
           </a>
           <div class="title text-center">
             <ChatTitle

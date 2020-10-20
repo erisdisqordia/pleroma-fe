@@ -36,7 +36,12 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'login' }">
-            <FAIcon size="lg" fixed-width class="button-icon" icon="sign-in-alt" /> {{ $t("login.login") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="sign-in-alt"
+            /> {{ $t("login.login") }}
           </router-link>
         </li>
         <li
@@ -44,7 +49,12 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: timelinesRoute }">
-            <FAIcon size="lg" fixed-width class="button-icon" icon="home" /> {{ $t("nav.timelines") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="home"
+            /> {{ $t("nav.timelines") }}
           </router-link>
         </li>
         <li
@@ -55,7 +65,12 @@
             :to="{ name: 'chats', params: { username: currentUser.screen_name } }"
             style="position: relative"
           >
-            <FAIcon size="lg" fixed-width class="button-icon" icon="comments" /> {{ $t("nav.chats") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="comments"
+            /> {{ $t("nav.chats") }}
             <span
               v-if="unreadChatCount"
               class="badge badge-notification unread-chat-count"
@@ -68,7 +83,12 @@
       <ul v-if="currentUser">
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
-            <FAIcon size="lg" fixed-width class="button-icon" icon="bell" /> {{ $t("nav.interactions") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="bell"
+            /> {{ $t("nav.interactions") }}
           </router-link>
         </li>
         <li
@@ -76,7 +96,12 @@
           @click="toggleDrawer"
         >
           <router-link to="/friend-requests">
-            <FAIcon size="lg" fixed-width class="button-icon" icon="user-plus" /> {{ $t("nav.friend_requests") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="user-plus"
+            /> {{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
               class="badge follow-request-count"
@@ -90,7 +115,12 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'chat' }">
-            <FAIcon size="lg" fixed-width class="button-icon" icon="bullhorn" /> {{ $t("shoutbox.title") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="bullhorn"
+            /> {{ $t("shoutbox.title") }}
           </router-link>
         </li>
       </ul>
@@ -100,7 +130,12 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'search' }">
-            <FAIcon size="lg" fixed-width class="button-icon" icon="search" /> {{ $t("nav.search") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="search"
+            /> {{ $t("nav.search") }}
           </router-link>
         </li>
         <li
@@ -108,7 +143,12 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'who-to-follow' }">
-            <FAIcon size="lg" fixed-width class="button-icon" icon="user-plus" /> {{ $t("nav.who_to_follow") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="user-plus"
+            /> {{ $t("nav.who_to_follow") }}
           </router-link>
         </li>
         <li @click="toggleDrawer">
@@ -116,12 +156,22 @@
             href="#"
             @click="openSettingsModal"
           >
-            <FAIcon size="lg" fixed-width class="button-icon" icon="cog" /> {{ $t("settings.settings") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="cog"
+            /> {{ $t("settings.settings") }}
           </a>
         </li>
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'about'}">
-            <FAIcon size="lg" fixed-width class="button-icon" icon="info-circle" /> {{ $t("nav.about") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="info-circle"
+            /> {{ $t("nav.about") }}
           </router-link>
         </li>
         <li
@@ -132,7 +182,12 @@
             href="/pleroma/admin/#/login-pleroma"
             target="_blank"
           >
-            <FAIcon size="lg" fixed-width class="button-icon" icon="tachometer-alt" /> {{ $t("nav.administration") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="tachometer-alt"
+            /> {{ $t("nav.administration") }}
           </a>
         </li>
         <li
@@ -143,7 +198,12 @@
             href="#"
             @click="doLogout"
           >
-            <FAIcon size="lg" fixed-width class="button-icon" icon="sign-out-alt" /> {{ $t("login.logout") }}
+            <FAIcon
+              size="lg"
+              fixed-width
+              class="button-icon"
+              icon="sign-out-alt"
+            /> {{ $t("login.logout") }}
           </a>
         </li>
       </ul>

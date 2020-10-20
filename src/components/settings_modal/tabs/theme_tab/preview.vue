@@ -42,22 +42,26 @@
               <FAIcon
                 fixed-width
                 style="color: var(--cBlue)"
-                class="button-icon" icon="reply"
+                class="button-icon"
+                icon="reply"
               />
               <FAIcon
                 fixed-width
                 style="color: var(--cGreen)"
-                class="button-icon" icon="retweet"
+                class="button-icon"
+                icon="retweet"
               />
               <FAIcon
                 fixed-width
                 style="color: var(--cOrange)"
-                class="button-icon" icon="star"
+                class="button-icon"
+                icon="star"
               />
               <FAIcon
                 fixed-width
                 style="color: var(--cRed)"
-                class="button-icon" icon="times"
+                class="button-icon"
+                icon="times"
               />
             </div>
           </div>

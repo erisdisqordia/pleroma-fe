@@ -13,7 +13,10 @@
           :title="group.text"
           @click.prevent="highlight(group.id)"
         >
-          <FAIcon :icon="group.icon" fixed-width/>
+          <FAIcon
+            :icon="group.icon"
+            fixed-width
+          />
         </span>
       </span>
       <span
@@ -26,7 +29,10 @@
           :title="$t('emoji.stickers')"
           @click.prevent="toggleStickers"
         >
-          <FAIcon icon="sticky-note" fixed-width/>
+          <FAIcon
+            icon="sticky-note"
+            fixed-width
+          />
         </span>
       </span>
     </div>

@@ -27,7 +27,11 @@
         v-else
         class="status-preview-no-content"
       >
-        <FAIcon icon="circle-notch" spin size="2x"/>
+        <FAIcon
+          icon="circle-notch"
+          spin
+          size="2x"
+        />
       </div>
     </div>
   </Popover>

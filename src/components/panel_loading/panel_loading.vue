@@ -1,7 +1,11 @@
 <template>
   <div class="panel-loading">
     <span class="loading-text">
-      <FAIcon icon="circle-notch" spin size="3x"/>
+      <FAIcon
+        icon="circle-notch"
+        spin
+        size="3x"
+      />
       {{ $t('general.loading') }}
     </span>
   </div>

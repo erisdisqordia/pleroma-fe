@@ -1,15 +1,15 @@
 <template>
   <div v-if="loggedIn">
     <template v-if="visibility !== 'private' && visibility !== 'direct'">
-    <FAIcon
-      :class="classes"
-      class="RetweetButton button-icon -interactive"
-      icon="retweet"
-      size="lg"
-      :spin="animated"
-      :title="$t('tool_tip.repeat')"
-      @click.prevent="retweet()"
-    />
+      <FAIcon
+        :class="classes"
+        class="RetweetButton button-icon -interactive"
+        icon="retweet"
+        size="lg"
+        :spin="animated"
+        :title="$t('tool_tip.repeat')"
+        @click.prevent="retweet()"
+      />
       <span v-if="!mergedConfig.hidePostStats && status.repeat_num > 0">{{ status.repeat_num }}</span>
     </template>
     <template v-else>

@@ -78,35 +78,50 @@
               {{ $t('settings.style.shadows.shadow_id', { value: index }) }}
             </option>
           </select>
-          <FAIcon icon="chevron-down" class="select-down-icon" />
+          <FAIcon
+            icon="chevron-down"
+            class="select-down-icon"
+          />
         </label>
         <button
           class="btn btn-default"
           :disabled="!ready || !present"
           @click="del"
         >
-          <FAIcon fixed-width icon="times" />
+          <FAIcon
+            fixed-width
+            icon="times"
+          />
         </button>
         <button
           class="btn btn-default"
           :disabled="!moveUpValid"
           @click="moveUp"
         >
-          <FAIcon fixed-width icon="chevron-up" />
+          <FAIcon
+            fixed-width
+            icon="chevron-up"
+          />
         </button>
         <button
           class="btn btn-default"
           :disabled="!moveDnValid"
           @click="moveDn"
         >
-          <FAIcon fixed-width icon="chevron-down" />
+          <FAIcon
+            fixed-width
+            icon="chevron-down"
+          />
         </button>
         <button
           class="btn btn-default"
           :disabled="usingFallback"
           @click="add"
         >
-          <FAIcon fixed-width icon="plus" />
+          <FAIcon
+            fixed-width
+            icon="plus"
+          />
         </button>
       </div>
       <div

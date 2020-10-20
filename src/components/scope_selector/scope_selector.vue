@@ -2,24 +2,32 @@
   <div
     v-if="!showNothing"
     class="ScopeSelector"
-    >
+  >
     <span
       v-if="showDirect"
       class="scope"
       :class="css.direct"
       :title="$t('post_status.scope.direct')"
       @click="changeVis('direct')"
-      >
-      <FAIcon icon="envelope" class="button-icon" size="lg" />
+    >
+      <FAIcon
+        icon="envelope"
+        class="button-icon"
+        size="lg"
+      />
     </span>
     <span
-      class="scope"
       v-if="showPrivate"
+      class="scope"
       :class="css.private"
       :title="$t('post_status.scope.private')"
       @click="changeVis('private')"
-      >
-      <FAIcon icon="lock" class="button-icon" size="lg" />
+    >
+      <FAIcon
+        icon="lock"
+        class="button-icon"
+        size="lg"
+      />
     </span>
     <span
       v-if="showUnlisted"
@@ -27,8 +35,12 @@
       :class="css.unlisted"
       :title="$t('post_status.scope.unlisted')"
       @click="changeVis('unlisted')"
-      >
-      <FAIcon icon="lock-open" class="button-icon" size="lg" />
+    >
+      <FAIcon
+        icon="lock-open"
+        class="button-icon"
+        size="lg"
+      />
     </span>
     <span
       v-if="showPublic"
@@ -36,8 +48,12 @@
       :class="css.public"
       :title="$t('post_status.scope.public')"
       @click="changeVis('public')"
-      >
-      <FAIcon icon="globe" class="button-icon" size="lg" />
+    >
+      <FAIcon
+        icon="globe"
+        class="button-icon"
+        size="lg"
+      />
     </span>
   </div>
 </template>

@@ -7,11 +7,11 @@
         class="nav-icon"
         :title="$t('nav.search')"
       ><FAIcon
-         fixed-width
-         size="lg"
-         class="button-icon"
-         icon="search"
-         @click.prevent.stop="toggleHidden"
+        fixed-width
+        size="lg"
+        class="button-icon"
+        icon="search"
+        @click.prevent.stop="toggleHidden"
       /></a>
       <template v-else>
         <input
@@ -30,7 +30,7 @@
           <FAIcon
             fixed-width
             icon="search"
-            />
+          />
         </button>
         <span>
           <FAIcon

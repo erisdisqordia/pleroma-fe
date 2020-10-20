@@ -13,7 +13,7 @@
       <span
         class="button-icon"
         @click="clearError"
-        >
+      >
         <FAIcon icon="times" />
       </span>
     </div>
@@ -51,8 +51,12 @@
           href="#"
           class="unmute button-icon"
           @click.prevent="toggleMute"
-          >
-          <FAIcon icon="eye-slash" class="button-icon" size="lg" />
+        >
+          <FAIcon
+            icon="eye-slash"
+            class="button-icon"
+            size="lg"
+          />
         </a>
       </div>
     </template>
@@ -61,7 +65,10 @@
         v-if="showPinned"
         class="pin"
       >
-        <FAIcon icon="thumbtack" class="faint" />
+        <FAIcon
+          icon="thumbtack"
+          class="faint"
+        />
         <span class="faint">{{ $t('status.pinned') }}</span>
       </div>
       <div
@@ -177,8 +184,12 @@
                   v-if="status.visibility"
                   class="visibility-icon"
                   :title="status.visibility | capitalize"
-                  >
-                  <FAIcon class="button-icon" :icon="visibilityIcon(status.visibility)" size="lg" />
+                >
+                  <FAIcon
+                    class="button-icon"
+                    :icon="visibilityIcon(status.visibility)"
+                    size="lg"
+                  />
                 </span>
                 <a
                   v-if="!status.is_local && !isPreview"
@@ -187,7 +198,11 @@
                   class="source_url"
                   title="Source"
                 >
-                  <FAIcon class="button-icon" icon="external-link-square-alt" size="lg" />
+                  <FAIcon
+                    class="button-icon"
+                    icon="external-link-square-alt"
+                    size="lg"
+                  />
                 </a>
                 <a
                   v-if="expandable && !isPreview"
@@ -195,14 +210,22 @@
                   title="Expand"
                   @click.prevent="toggleExpanded"
                 >
-                  <FAIcon class="button-icon" icon="plus-square" size="lg" />
+                  <FAIcon
+                    class="button-icon"
+                    icon="plus-square"
+                    size="lg"
+                  />
                 </a>
                 <a
                   v-if="unmuted"
                   href="#"
                   @click.prevent="toggleMute"
                 >
-                  <FAIcon icon="eye-slash" class="button-icon" size="lg" />
+                  <FAIcon
+                    icon="eye-slash"
+                    class="button-icon"
+                    size="lg"
+                  />
                 </a>
               </span>
             </div>
@@ -230,7 +253,7 @@
                       icon="reply"
                       size="lg"
                       flip="horizontal"
-                      />
+                    />
                     <span
                       class="faint-link reply-to-text"
                     >
@@ -358,7 +381,6 @@
               @onSuccess="clearError"
             />
           </div>
-
         </div>
       </div>
       <div

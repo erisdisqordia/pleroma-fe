@@ -63,7 +63,10 @@
         @click.stop.prevent="togglePanel"
       >
         <div class="title">
-          <FAIcon class="icon" icon="bullhorn" />
+          <FAIcon
+            class="icon"
+            icon="bullhorn"
+          />
           {{ $t('shoutbox.title') }}
         </div>
       </div>

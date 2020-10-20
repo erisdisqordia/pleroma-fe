@@ -8,7 +8,7 @@ import {
   faShareAlt
 } from '@fortawesome/free-solid-svg-icons'
 import {
-  faBookmark as faBookmarkReg,
+  faBookmark as faBookmarkReg
 } from '@fortawesome/free-regular-svg-icons'
 
 library.add(

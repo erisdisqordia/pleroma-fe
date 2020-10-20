@@ -18,7 +18,10 @@
         href="#"
         class="unmute"
         @click.prevent="toggleMute"
-      ><FAIcon class="button-icon" icon="eye-slash" /></a>
+      ><FAIcon
+        class="button-icon"
+        icon="eye-slash"
+      /></a>
     </div>
     <div
       v-else
@@ -60,26 +63,39 @@
               :title="'@'+notification.from_profile.screen_name"
             >{{ notification.from_profile.name }}</span>
             <span v-if="notification.type === 'like'">
-              <FAIcon class="type-icon" icon="star" />
+              <FAIcon
+                class="type-icon"
+                icon="star"
+              />
               <small>{{ $t('notifications.favorited_you') }}</small>
             </span>
             <span v-if="notification.type === 'repeat'">
               <FAIcon
-                class="type-icon" icon="retweet"
+                class="type-icon"
+                icon="retweet"
                 :title="$t('tool_tip.repeat')"
               />
               <small>{{ $t('notifications.repeated_you') }}</small>
             </span>
             <span v-if="notification.type === 'follow'">
-              <FAIcon class="type-icon" icon="user-plus" />
+              <FAIcon
+                class="type-icon"
+                icon="user-plus"
+              />
               <small>{{ $t('notifications.followed_you') }}</small>
             </span>
             <span v-if="notification.type === 'follow_request'">
-              <FAIcon class="type-icon" icon="user" />
+              <FAIcon
+                class="type-icon"
+                icon="user"
+              />
               <small>{{ $t('notifications.follow_request') }}</small>
             </span>
             <span v-if="notification.type === 'move'">
-              <FAIcon class="type-icon" icon="suitcase-rolling" />
+              <FAIcon
+                class="type-icon"
+                icon="suitcase-rolling"
+              />
               <small>{{ $t('notifications.migrated_to') }}</small>
             </span>
             <span v-if="notification.type === 'pleroma:emoji_reaction'">
@@ -120,7 +136,10 @@
             v-if="needMute"
             href="#"
             @click.prevent="toggleMute"
-          ><FAIcon class="button-icon" icon="eye-slash" /></a>
+          ><FAIcon
+            class="button-icon"
+            icon="eye-slash"
+          /></a>
         </span>
         <div
           v-if="notification.type === 'follow' || notification.type === 'follow_request'"

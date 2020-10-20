@@ -10,7 +10,8 @@
         {{ $t(notice.messageKey, notice.messageArgs) }}
       </div>
       <FAIcon
-        class="button-icon" icon="times"
+        class="button-icon"
+        icon="times"
         @click="closeNotice(notice)"
       />
     </div>

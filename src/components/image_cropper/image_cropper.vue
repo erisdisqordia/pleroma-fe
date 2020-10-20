@@ -43,7 +43,8 @@
       >
         {{ submitErrorMsg }}
         <FAIcon
-          class="button-icon" icon="times"
+          class="button-icon"
+          icon="times"
           @click="clearError"
         />
       </div>

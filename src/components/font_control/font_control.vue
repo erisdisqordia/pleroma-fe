@@ -41,7 +41,10 @@
           {{ option === 'custom' ? $t('settings.style.fonts.custom') : option }}
         </option>
       </select>
-      <FAIcon class="select-down-icon" icon="chevron-down" />
+      <FAIcon
+        class="select-down-icon"
+        icon="chevron-down"
+      />
     </label>
     <input
       v-if="isCustom"

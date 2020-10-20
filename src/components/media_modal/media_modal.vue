@@ -34,7 +34,10 @@
       class="modal-view-button-arrow modal-view-button-arrow--prev"
       @click.stop.prevent="goPrev"
     >
-      <FAIcon class="arrow-icon" icon="chevron-left" />
+      <FAIcon
+        class="arrow-icon"
+        icon="chevron-left"
+      />
     </button>
     <button
       v-if="canNavigate"
@@ -42,7 +45,10 @@
       class="modal-view-button-arrow modal-view-button-arrow--next"
       @click.stop.prevent="goNext"
     >
-      <FAIcon class="arrow-icon" icon="chevron-right" />
+      <FAIcon
+        class="arrow-icon"
+        icon="chevron-right"
+      />
     </button>
   </Modal>
 </template>

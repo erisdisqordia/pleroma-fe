@@ -54,7 +54,8 @@
             <FAIcon
               fixed-width
               size="lg"
-              class="button-icon" icon="cog"
+              class="button-icon"
+              icon="cog"
               :title="$t('nav.preferences')"
             />
           </a>
@@ -64,9 +65,10 @@
             class="mobile-hidden nav-icon"
             target="_blank"
           ><FAIcon
-             fixed-width
-              size="lg"
-             class="button-icon" icon="tachometer-alt"
+            fixed-width
+            size="lg"
+            class="button-icon"
+            icon="tachometer-alt"
             :title="$t('nav.administration')"
           /></a>
           <a
@@ -75,9 +77,10 @@
             class="mobile-hidden nav-icon"
             @click.prevent="logout"
           ><FAIcon
-             fixed-width
-              size="lg"
-             class="button-icon" icon="sign-out-alt"
+            fixed-width
+            size="lg"
+            class="button-icon"
+            icon="sign-out-alt"
             :title="$t('login.logout')"
           /></a>
         </div>

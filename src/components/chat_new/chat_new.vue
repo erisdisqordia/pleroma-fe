@@ -11,12 +11,19 @@
         class="go-back-button"
         @click="goBack"
       >
-        <FAIcon size="lg" icon="chevron-left" />
+        <FAIcon
+          size="lg"
+          icon="chevron-left"
+        />
       </a>
     </div>
     <div class="input-wrap">
       <div class="input-search">
-        <FAIcon size="lg" class="search-icon button-icon" icon="search" />
+        <FAIcon
+          size="lg"
+          class="search-icon button-icon"
+          icon="search"
+        />
       </div>
       <input
         ref="search"

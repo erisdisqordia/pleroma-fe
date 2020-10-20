@@ -7,13 +7,23 @@
             :to="{ name: timelinesRoute }"
             :class="onTimelineRoute && 'router-link-active'"
           >
-            <FAIcon fixed-width size="lg" class="button-icon" icon="home" />
+            <FAIcon
+              fixed-width
+              size="lg"
+              class="button-icon"
+              icon="home"
+            />
             {{ $t("nav.timelines") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
-            <FAIcon fixed-width size="lg" class="button-icon" icon="bell" />
+            <FAIcon
+              fixed-width
+              size="lg"
+              class="button-icon"
+              icon="bell"
+            />
             {{ $t("nav.interactions") }}
           </router-link>
         </li>
@@ -25,13 +35,23 @@
             >
               {{ unreadChatCount }}
             </div>
-            <FAIcon fixed-width size="lg" class="button-icon" icon="comments" />
+            <FAIcon
+              fixed-width
+              size="lg"
+              class="button-icon"
+              icon="comments"
+            />
             {{ $t("nav.chats") }}
           </router-link>
         </li>
         <li v-if="currentUser && currentUser.locked">
           <router-link :to="{ name: 'friend-requests' }">
-            <FAIcon fixed-width size="lg" class="button-icon" icon="user-plus" />
+            <FAIcon
+              fixed-width
+              size="lg"
+              class="button-icon"
+              icon="user-plus"
+            />
             {{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
@@ -43,7 +63,12 @@
         </li>
         <li>
           <router-link :to="{ name: 'about' }">
-            <FAIcon fixed-width size="lg" class="button-icon" icon="info-circle" />{{ $t("nav.about") }}
+            <FAIcon
+              fixed-width
+              size="lg"
+              class="button-icon"
+              icon="info-circle"
+            />{{ $t("nav.about") }}
           </router-link>
         </li>
       </ul>

@@ -15,7 +15,7 @@
         @dragleave="fileDragStop"
         @drop.stop="fileDrop"
       >
-        <FAIcon :icon="uploadFileLimitReached ? 'ban' : 'upload'"/>
+        <FAIcon :icon="uploadFileLimitReached ? 'ban' : 'upload'" />
       </div>
       <div class="form-group">
         <i18n
@@ -200,7 +200,10 @@
                   {{ $t(`post_status.content_type["${postFormat}"]`) }}
                 </option>
               </select>
-              <FAIcon class="select-down-icon" icon="chevron-down"/>
+              <FAIcon
+                class="select-down-icon"
+                icon="chevron-down"
+              />
             </label>
           </div>
           <div
@@ -242,7 +245,7 @@
               class="btn btn-default"
               @click="showEmojiPicker"
             >
-              <FAIcon icon="smile-beam"/>
+              <FAIcon icon="smile-beam" />
             </div>
           </div>
           <div
@@ -299,7 +302,8 @@
           class="media-upload-wrapper"
         >
           <FAIcon
-            class="button-icon" icon="times"
+            class="button-icon"
+            icon="times"
             @click="removeMediaFile(file)"
           />
           <attachment

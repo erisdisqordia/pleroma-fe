@@ -61,7 +61,11 @@
           v-else
           class="new-status-notification text-center panel-footer"
         >
-          <FAIcon icon="circle-notch" spin size="lg"/>
+          <FAIcon
+            icon="circle-notch"
+            spin
+            size="lg"
+          />
         </div>
       </div>
     </div>

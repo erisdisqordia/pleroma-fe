@@ -38,7 +38,8 @@
       >
       <FAIcon
         v-if="type === 'video'"
-        class="play-icon" icon="play-circle"
+        class="play-icon"
+        icon="play-circle"
       />
     </a>
     <div
@@ -85,7 +86,8 @@
       />
       <FAIcon
         v-if="!allowPlay"
-        class="play-icon" icon="play-circle"
+        class="play-icon"
+        icon="play-circle"
       />
     </a>
 

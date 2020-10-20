@@ -1,7 +1,11 @@
 <template>
   <div class="exporter">
     <div v-if="processing">
-      <FAIcon icon="circle-notch" size="lg" spin />
+      <FAIcon
+        icon="circle-notch"
+        size="lg"
+        spin
+      />
 
       <span>{{ processingMessage }}</span>
     </div>

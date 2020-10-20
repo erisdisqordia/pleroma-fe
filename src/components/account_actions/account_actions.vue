@@ -63,7 +63,10 @@
         slot="trigger"
         class="btn btn-default ellipsis-button"
       >
-        <FAIcon class="icon" icon="ellipsis-v" />
+        <FAIcon
+          class="icon"
+          icon="ellipsis-v"
+        />
       </div>
     </Popover>
   </div>

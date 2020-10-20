@@ -21,7 +21,11 @@
               :user="user"
             />
             <div class="user-info-avatar-link-overlay">
-              <FAIcon class="button-icon" icon="search-plus" size="lg" />
+              <FAIcon
+                class="button-icon"
+                icon="search-plus"
+                size="lg"
+              />
             </div>
           </a>
           <router-link
@@ -56,7 +60,10 @@
                 target="_blank"
                 class="external-link-button"
               >
-                <FAIcon class="icon" icon="external-link-alt" />
+                <FAIcon
+                  class="icon"
+                  icon="external-link-alt"
+                />
               </a>
               <AccountActions
                 v-if="isOtherUser && loggedIn"
@@ -87,7 +94,11 @@
                 </span>
               </template>
               <span v-if="user.locked">
-               <FAIcon class="lock-icon" icon="lock" size="sm"/>
+                <FAIcon
+                  class="lock-icon"
+                  icon="lock"
+                  size="sm"
+                />
               </span>
               <span
                 v-if="!mergedConfig.hideUserStats && !hideBio"
@@ -136,7 +147,10 @@
                 <option value="striped">Striped bg</option>
                 <option value="side">Side stripe</option>
               </select>
-              <FAIcon class="select-down-icon" icon="chevron-down" />
+              <FAIcon
+                class="select-down-icon"
+                icon="chevron-down"
+              />
             </label>
           </div>
         </div>
@@ -162,8 +176,15 @@
                 :title="$t('user_card.unsubscribe')"
               >
                 <FALayers>
-                  <FAIcon icon="rss" transform="left-5 shrink-6 up-3 rotate-20" flip="horizontal"/>
-                  <FAIcon icon="rss" transform="right-5 shrink-6 up-3 rotate-20"/>
+                  <FAIcon
+                    icon="rss"
+                    transform="left-5 shrink-6 up-3 rotate-20"
+                    flip="horizontal"
+                  />
+                  <FAIcon
+                    icon="rss"
+                    transform="right-5 shrink-6 up-3 rotate-20"
+                  />
                   <FAIcon icon="bell" />
                 </FALayers>
               </ProgressButton>

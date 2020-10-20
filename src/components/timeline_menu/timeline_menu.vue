@@ -16,27 +16,52 @@
       <ul>
         <li v-if="currentUser">
           <router-link :to="{ name: 'friends' }">
-            <FAIcon fixed-width size="lg" class="button-icon " icon="home" />{{ $t("nav.timeline") }}
+            <FAIcon
+              fixed-width
+              size="lg"
+              class="button-icon "
+              icon="home"
+            />{{ $t("nav.timeline") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'bookmarks'}">
-            <FAIcon fixed-width size="lg" class="button-icon " icon="bookmark" />{{ $t("nav.bookmarks") }}
+            <FAIcon
+              fixed-width
+              size="lg"
+              class="button-icon "
+              icon="bookmark"
+            />{{ $t("nav.bookmarks") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
-            <FAIcon fixed-width size="lg" class="button-icon " icon="envelope" />{{ $t("nav.dms") }}
+            <FAIcon
+              fixed-width
+              size="lg"
+              class="button-icon "
+              icon="envelope"
+            />{{ $t("nav.dms") }}
           </router-link>
         </li>
         <li v-if="currentUser || !privateMode">
           <router-link :to="{ name: 'public-timeline' }">
-            <FAIcon fixed-width size="lg" class="button-icon " icon="users" />{{ $t("nav.public_tl") }}
+            <FAIcon
+              fixed-width
+              size="lg"
+              class="button-icon "
+              icon="users"
+            />{{ $t("nav.public_tl") }}
           </router-link>
         </li>
         <li v-if="federating && (currentUser || !privateMode)">
           <router-link :to="{ name: 'public-external-timeline' }">
-            <FAIcon fixed-width size="lg" class="button-icon " icon="globe" />{{ $t("nav.twkn") }}
+            <FAIcon
+              fixed-width
+              size="lg"
+              class="button-icon "
+              icon="globe"
+            />{{ $t("nav.twkn") }}
           </router-link>
         </li>
       </ul>
@@ -46,7 +71,10 @@
       class="title timeline-menu-title"
     >
       <span>{{ timelineName() }}</span>
-      <FAIcon size="sm" icon="chevron-down" />
+      <FAIcon
+        size="sm"
+        icon="chevron-down"
+      />
     </div>
   </Popover>
 </template>

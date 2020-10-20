@@ -169,7 +169,8 @@
         <FAIcon
           v-if="!isDefaultAvatar && pickAvatarBtnVisible"
           :title="$t('settings.reset_avatar')"
-          class="reset-button" icon="times"
+          class="reset-button"
+          icon="times"
           type="button"
           @click="resetAvatar"
         />
@@ -197,7 +198,8 @@
         <FAIcon
           v-if="!isDefaultBanner"
           :title="$t('settings.reset_profile_banner')"
-          class="reset-button" icon="times"
+          class="reset-button"
+          icon="times"
           type="button"
           @click="resetBanner"
         />
@@ -233,7 +235,8 @@
       >
         Error: {{ bannerUploadError }}
         <FAIcon
-          class="button-icon" icon="times"
+          class="button-icon"
+          icon="times"
           @click="clearUploadError('banner')"
         />
       </div>
@@ -245,7 +248,8 @@
         <FAIcon
           v-if="!isDefaultBackground"
           :title="$t('settings.reset_profile_background')"
-          class="reset-button" icon="times"
+          class="reset-button"
+          icon="times"
           type="button"
           @click="resetBackground"
         />

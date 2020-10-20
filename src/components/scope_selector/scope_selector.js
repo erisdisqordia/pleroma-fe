@@ -2,7 +2,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faEnvelope,
   faLock,
-  faUnlock,
+  faLockOpen,
   faGlobe
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -10,7 +10,7 @@ library.add(
   faEnvelope,
   faGlobe,
   faLock,
-  faUnlock
+  faLockOpen
 )
 
 const ScopeSelector = {

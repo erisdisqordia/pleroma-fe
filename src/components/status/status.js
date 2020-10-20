@@ -21,7 +21,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faEnvelope,
   faLock,
-  faUnlock,
+  faLockOpen,
   faGlobe,
   faTimes,
   faRetweet,
@@ -40,7 +40,7 @@ library.add(
   faEnvelope,
   faGlobe,
   faLock,
-  faUnlock,
+  faLockOpen,
   faTimes,
   faRetweet,
   faReply,
@@ -266,7 +266,7 @@ const Status = {
         case 'private':
           return 'lock'
         case 'unlisted':
-          return 'unlock'
+          return 'lock-open'
         case 'direct':
           return 'envelope'
         default:

@@ -11,7 +11,7 @@
     "gopher": "Gopher",
     "media_proxy": "媒体代理",
     "scope_options": "可见范围设置",
-    "text_limit": "文字數量限制",
+    "text_limit": "文字数量限制",
     "title": "功能",
     "who_to_follow": "推荐关注",
     "pleroma_chat_messages": "Pleroma 聊天"
@@ -24,8 +24,8 @@
     "apply": "应用",
     "submit": "提交",
     "more": "更多",
-    "generic_error": "发生一个错误",
-    "optional": "可选项",
+    "generic_error": "发生了一个错误",
+    "optional": "可选",
     "show_more": "展开",
     "show_less": "收起",
     "cancel": "取消",
@@ -95,28 +95,28 @@
   },
   "notifications": {
     "broken_favorite": "未知的状态，正在搜索中…",
-    "favorited_you": "收藏了你的状态",
+    "favorited_you": "喜欢了你的状态",
     "followed_you": "关注了你",
     "load_older": "加载更早的通知",
     "notifications": "通知",
-    "read": "阅读！",
+    "read": "已阅！",
     "repeated_you": "转发了你的状态",
     "no_more_notifications": "没有更多的通知",
-    "reacted_with": "和 {0} 互动过",
+    "reacted_with": "作出了 {0} 的反应",
     "migrated_to": "迁移到",
     "follow_request": "想要关注你"
   },
   "polls": {
-    "add_poll": "增加问卷调查",
+    "add_poll": "增加投票",
     "add_option": "增加选项",
     "option": "选项",
     "votes": "投票",
     "vote": "投票",
-    "type": "问卷类型",
-    "single_choice": "单选项",
-    "multiple_choices": "多选项",
-    "expiry": "问卷的时间",
-    "expires_in": "投票于 {0} 内结束",
+    "type": "投票类型",
+    "single_choice": "单选",
+    "multiple_choices": "多选",
+    "expiry": "投票期限",
+    "expires_in": "投票于 {0} 后结束",
     "expired": "投票 {0} 前已结束",
     "not_enough_options": "投票的选项太少"
   },
@@ -189,7 +189,7 @@
   "settings": {
     "app_name": "App 名称",
     "security": "安全",
-    "enter_current_password_to_confirm": "输入你当前密码来确认你的身份",
+    "enter_current_password_to_confirm": "输入您当前的密码来确认您的身份",
     "mfa": {
       "otp": "OTP",
       "setup_otp": "设置 OTP",
@@ -197,18 +197,18 @@
       "confirm_and_enable": "确认并启用 OTP",
       "title": "双因素验证",
       "generate_new_recovery_codes": "生成新的恢复码",
-      "warning_of_generate_new_codes": "当你生成新的恢复码时，你的旧恢复码就失效了。",
+      "warning_of_generate_new_codes": "当您生成新的恢复码时，您旧的恢复码将会失效。",
       "recovery_codes": "恢复码。",
       "waiting_a_recovery_codes": "正在接收备份码…",
-      "recovery_codes_warning": "抄写这些号码，或者保存在安全的地方。这些号码不会再次显示。如果你无法访问你的 2FA app，也丢失了你的恢复码，你的账号就再也无法登录了。",
+      "recovery_codes_warning": "抄写这些号码，或者将其保存在安全的地方。这些号码不会再次显示。如果您无法访问您的 2FA app，也丢失了您的恢复码，您就再也无法登录您的账号了。",
       "authentication_methods": "身份验证方法",
       "scan": {
         "title": "扫一下",
-        "desc": "使用你的双因素验证 app，扫描这个二维码，或者输入这些文字密钥：",
+        "desc": "使用您的双因素验证 app，扫描这个二维码，或者输入这些文字密钥：",
         "secret_code": "密钥"
       },
       "verify": {
-        "desc": "要启用双因素验证，请把你的双因素验证 app 里的数字输入："
+        "desc": "要启用双因素验证，请输入您的双因素验证 app 里的数字："
       }
     },
     "attachmentRadius": "附件",
@@ -218,12 +218,12 @@
     "avatarRadius": "头像",
     "background": "背景",
     "bio": "简介",
-    "block_export": "拉黑名单导出",
-    "block_export_button": "导出你的拉黑名单到一个 csv 文件",
-    "block_import": "拉黑名单导入",
-    "block_import_error": "导入拉黑名单出错",
-    "blocks_imported": "拉黑名单导入成功！需要一点时间来处理。",
-    "blocks_tab": "块",
+    "block_export": "屏蔽名单导出",
+    "block_export_button": "导出你的屏蔽名单到一个 csv 文件",
+    "block_import": "屏蔽名单导入",
+    "block_import_error": "导入屏蔽名单出错",
+    "blocks_imported": "屏蔽名单导入成功！需要一点时间来处理。",
+    "blocks_tab": "屏蔽",
     "btnRadius": "按钮",
     "cBlue": "蓝色（回复，关注）",
     "cGreen": "绿色（转发）",
@@ -243,7 +243,7 @@
     "delete_account": "删除账户",
     "delete_account_description": "永久删除你的帐号和所有数据。",
     "delete_account_error": "删除账户时发生错误，如果一直删除不了，请联系实例管理员。",
-    "delete_account_instructions": "在下面输入你的密码来确认删除账户",
+    "delete_account_instructions": "在下面输入您的密码来确认删除账户。",
     "avatar_size_instruction": "推荐的头像图片最小的尺寸是 150x150 像素。",
     "export_theme": "导出预置主题",
     "filtering": "过滤器",
@@ -277,7 +277,7 @@
     "invalid_theme_imported": "您所选择的主题文件不被 Pleroma 支持，因此主题未被修改。",
     "limited_availability": "在您的浏览器中无法使用",
     "links": "链接",
-    "lock_account_description": "你需要手动审核关注请求",
+    "lock_account_description": "您需要手动审核关注请求",
     "loop_video": "循环视频",
     "loop_video_silent_only": "只循环没有声音的视频（例如：Mastodon 里的“GIF”）",
     "mutes_tab": "隐藏",
@@ -292,7 +292,7 @@
     "notification_visibility_mentions": "提及",
     "notification_visibility_repeats": "转发",
     "no_rich_text_description": "不显示富文本格式",
-    "no_blocks": "没有拉黑的",
+    "no_blocks": "没有屏蔽",
     "no_mutes": "没有隐藏",
     "hide_follows_description": "不要显示我所关注的人",
     "hide_followers_description": "不要显示关注我的人",
@@ -338,7 +338,7 @@
     "text": "文本",
     "theme": "主题",
     "theme_help": "使用十六进制代码（#rrggbb）来设置主题颜色。",
-    "theme_help_v2_1": "你也可以通过切换复选框来覆盖某些组件的颜色和透明。使用“清除所有”来清楚所有覆盖设置。",
+    "theme_help_v2_1": "您也可以通过选中复选框来覆盖某些组件的颜色和透明度。使用“清除所有”按钮来清除所有覆盖设置。",
     "theme_help_v2_2": "某些条目下的图标是背景或文本对比指示器，鼠标悬停可以获取详细信息。请记住，使用透明度来显示最差的情况。",
     "tooltipRadius": "提醒",
     "upload_a_photo": "上传照片",
@@ -349,7 +349,7 @@
     },
     "notifications": "通知",
     "notification_mutes": "要停止收到某个指定的用户的通知，请使用隐藏功能。",
-    "notification_blocks": "拉黑一个用户会停掉所有他的通知，等同于取消关注。",
+    "notification_blocks": "屏蔽一个用户会停止接收来自该用户的所有通知，并且会取消对该用户的关注。",
     "enable_web_push_notifications": "启用 web 推送通知",
     "style": {
       "switcher": {
@@ -364,7 +364,7 @@
         "clear_opacity": "清除透明度",
         "load_theme": "加载主题",
         "help": {
-          "upgraded_from_v2": "PleromaFE 已升级，主题会和你记忆中的不太一样。",
+          "upgraded_from_v2": "PleromaFE 已升级，主题会与您记忆中的不太一样。",
           "older_version_imported": "您导入的文件来自旧版本的 FE。",
           "future_version_imported": "您导入的文件来自更高版本的 FE。",
           "v2_imported": "您导入的文件是旧版 FE 的。我们尽可能保持兼容性，但还是可能出现不一致的情况。",
@@ -468,7 +468,7 @@
       },
       "fonts": {
         "_tab_label": "字体",
-        "help": "给用户界面的元素选择字体。选择 “自选”的你必须输入确切的字体名称。",
+        "help": "为用户界面的元素选择字体。若选择 “自选”，您必须输入与系统显示完全一致的字体名称。",
         "components": {
           "interface": "界面",
           "input": "输入框",
@@ -503,7 +503,7 @@
     "notification_setting_filters": "过滤器",
     "domain_mutes": "域名",
     "changed_email": "邮箱修改成功！",
-    "change_email_error": "修改你的电子邮箱时发生错误",
+    "change_email_error": "修改您的电子邮箱时发生错误。",
     "change_email": "修改电子邮箱",
     "allow_following_move": "正在关注的账号迁移时自动重新关注",
     "notification_setting_privacy_option": "在通知推送中隐藏发送者和内容",
@@ -539,7 +539,14 @@
     "fun": "趣味",
     "useStreamingApiWarning": "（不推荐使用，试验性，已知会跳过一些消息）",
     "chatMessageRadius": "聊天消息",
-    "greentext": "Meme 箭头"
+    "greentext": "Meme 箭头",
+    "virtual_scrolling": "优化时间线渲染",
+    "import_mutes_from_a_csv_file": "从 csv 文件导入隐藏名单",
+    "mutes_imported": "隐藏名单导入成功！处理它们将需要一段时间。",
+    "mute_import_error": "导入隐藏名单出错",
+    "mute_import": "隐藏名单导入",
+    "mute_export_button": "导出你的隐藏名单到一个 csv 文件",
+    "mute_export": "隐藏名单导出"
   },
   "time": {
     "day": "{0} 天",
@@ -609,7 +616,8 @@
     "status_unavailable": "状态不可取得",
     "unbookmark": "取消书签",
     "bookmark": "书签",
-    "thread_muted_and_words": "，含有过滤词："
+    "thread_muted_and_words": "，含有过滤词：",
+    "status_deleted": "该状态已被删除"
   },
   "user_card": {
     "approve": "允许",
@@ -636,9 +644,9 @@
     "statuses": "状态",
     "subscribe": "订阅",
     "unsubscribe": "退订",
-    "unblock": "取消拉黑",
-    "unblock_progress": "取消拉黑中…",
-    "block_progress": "拉黑中…",
+    "unblock": "取消屏蔽",
+    "unblock_progress": "正在取消屏蔽…",
+    "block_progress": "正在屏蔽…",
     "unmute": "取消隐藏",
     "unmute_progress": "取消隐藏中…",
     "mute_progress": "隐藏中…",
@@ -659,7 +667,7 @@
       "disable_any_subscription": "完全禁止关注用户",
       "quarantine": "从联合实例中禁止用户帖子",
       "delete_user": "删除用户",
-      "delete_user_confirmation": "你确认吗？此操作无法撤销。"
+      "delete_user_confirmation": "你确定吗？此操作无法撤销。"
     },
     "hidden": "已隐藏",
     "show_repeats": "显示转发",
@@ -674,12 +682,12 @@
   },
   "user_reporting": {
     "title": "报告 {0}",
-    "add_comment_description": "此报告会发送给你的实例管理员。你可以在下面提供更多详细信息解释报告的缘由：",
+    "add_comment_description": "此报告会发送给您的实例管理员。您可以在下面提供更多详细信息解释报告的缘由：",
     "additional_comments": "其它信息",
     "forward_description": "这个账号是从另外一个服务器。同时发送一个副本到那里？",
     "forward_to": "转发 {0}",
     "submit": "提交",
-    "generic_error": "当处理你的请求时，发生了一个错误。"
+    "generic_error": "当处理您的请求时，发生了一个错误。"
   },
   "who_to_follow": {
     "more": "更多",
@@ -720,12 +728,12 @@
   "password_reset": {
     "forgot_password": "忘记密码了？",
     "password_reset": "重置密码",
-    "instruction": "输入你的电邮地址或者用户名，我们将发送一个链接到你的邮箱，用于重置密码。",
-    "placeholder": "你的电邮地址或者用户名",
-    "check_email": "检查你的邮箱，会有一个链接用于重置密码。",
+    "instruction": "输入您的电邮地址或者用户名，我们将发送一个链接到您的邮箱，用于重置密码。",
+    "placeholder": "您的电邮地址或者用户名",
+    "check_email": "检查您的邮箱，会有一个链接用于重置密码。",
     "return_home": "回到首页",
-    "too_many_requests": "你触发了尝试的限制，请稍后再试。",
-    "password_reset_disabled": "密码重置已经被禁用。请联系你的实例管理员。",
+    "too_many_requests": "您达到了尝试次数的上限，请稍后再试。",
+    "password_reset_disabled": "密码重置已被禁用。请联系您的实例管理员。",
     "password_reset_required_but_mailer_is_disabled": "您必须重置密码，但是密码重置被禁用了。请联系您所在实例的管理员。",
     "password_reset_required": "您必须重置密码才能登陆。"
   },
@@ -736,7 +744,7 @@
   },
   "emoji": {
     "keep_open": "选择器保持打开",
-    "stickers": "贴图",
+    "stickers": "贴纸",
     "unicode": "Unicode 表情符号",
     "custom": "自定义表情符号",
     "add_emoji": "插入表情符号",
@@ -748,22 +756,22 @@
   "about": {
     "mrf": {
       "simple": {
-        "quarantine_desc": "本实例只会把公开状态发送非下列实例：",
+        "quarantine_desc": "对于下列实例，本实例只发送公开的状态，不发送其它状态：",
         "quarantine": "隔离",
         "reject_desc": "本实例不会接收来自下列实例的消息：",
         "reject": "拒绝",
         "accept_desc": "本实例只接收来自下列实例的消息：",
-        "simple_policies": "站规",
+        "simple_policies": "对于特定实例的策略",
         "accept": "接受",
         "media_removal": "移除媒体",
         "media_nsfw_desc": "本实例将来自以下实例的媒体强制设置为敏感内容：",
         "media_nsfw": "强制设置媒体为敏感内容",
         "media_removal_desc": "本实例移除了来自以下实例的媒体内容：",
-        "ftl_removal_desc": "该实例在从“全部已知网络”时间线上移除了：",
+        "ftl_removal_desc": "该实例在从“全部已知网络”时间线上移除了下列实例：",
         "ftl_removal": "从“全部已知网络”时间线上移除"
       },
       "mrf_policies_desc": "MRF 策略会影响本实例的互通行为。以下策略已启用：",
-      "mrf_policies": "已启动 MRF 策略",
+      "mrf_policies": "已启动的 MRF 策略",
       "keyword": {
         "ftl_removal": "从“全部已知网络”时间线上移除",
         "keyword_policies": "关键词策略",
@@ -771,7 +779,7 @@
         "replace": "替换",
         "reject": "拒绝"
       },
-      "federation": "联邦"
+      "federation": "联邦互通"
     },
     "staff": "管理人员"
   },

@@ -3,7 +3,7 @@ import { mapState } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faUsers,
-  faGlobeEurope,
+  faGlobe,
   faBookmark,
   faEnvelope,
   faHome,
@@ -12,7 +12,7 @@ import {
 
 library.add(
   faUsers,
-  faGlobeEurope,
+  faGlobe,
   faBookmark,
   faEnvelope,
   faHome,

@@ -36,7 +36,7 @@
         </li>
         <li v-if="federating && (currentUser || !privateMode)">
           <router-link :to="{ name: 'public-external-timeline' }">
-            <FAIcon fixed-width size="lg" class="button-icon " icon="globe-europe" />{{ $t("nav.twkn") }}
+            <FAIcon fixed-width size="lg" class="button-icon " icon="globe" />{{ $t("nav.twkn") }}
           </router-link>
         </li>
       </ul>

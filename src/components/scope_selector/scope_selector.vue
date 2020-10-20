@@ -37,7 +37,7 @@
       :title="$t('post_status.scope.public')"
       @click="changeVis('public')"
       >
-      <FAIcon icon="globe-europe" class="button-icon" size="lg" />
+      <FAIcon icon="globe" class="button-icon" size="lg" />
     </span>
   </div>
 </template>

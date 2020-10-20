@@ -3,12 +3,12 @@ import {
   faEnvelope,
   faLock,
   faUnlock,
-  faGlobeEurope
+  faGlobe
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faEnvelope,
-  faGlobeEurope,
+  faGlobe,
   faLock,
   faUnlock
 )

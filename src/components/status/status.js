@@ -22,7 +22,7 @@ import {
   faEnvelope,
   faLock,
   faUnlock,
-  faGlobeEurope,
+  faGlobe,
   faTimes,
   faRetweet,
   faReply,
@@ -38,7 +38,7 @@ import {
 
 library.add(
   faEnvelope,
-  faGlobeEurope,
+  faGlobe,
   faLock,
   faUnlock,
   faTimes,
@@ -270,7 +270,7 @@ const Status = {
         case 'direct':
           return 'envelope'
         default:
-          return 'globe-europe'
+          return 'globe'
       }
     },
     showError (error) {

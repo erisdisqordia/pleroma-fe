@@ -53,7 +53,7 @@
             <option value="following">{{ $t('settings.reply_visibility_following') }}</option>
             <option value="self">{{ $t('settings.reply_visibility_self') }}</option>
           </select>
-          <i class="icon-down-open" />
+          <FAIcon class="icon-down-open" icon="chevron-down" />
         </label>
       </div>
       <div>

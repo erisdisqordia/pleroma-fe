@@ -58,14 +58,15 @@
               :class="{ 'visible': jumpToBottomButtonVisible }"
               @click="scrollDown({ behavior: 'smooth' })"
             >
-              <i class="icon-down-open">
+              <span>
+                <FAIcon icon="chevron-down" />
                 <div
                   v-if="newMessageCount"
                   class="badge badge-notification unread-chat-count unread-message-count"
                 >
                   {{ newMessageCount }}
                 </div>
-              </i>
+              </span>
             </div>
             <PostStatusForm
               :disable-subject="true"

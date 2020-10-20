@@ -19,7 +19,7 @@
           {{ languageNames[i] }}
         </option>
       </select>
-      <i class="icon-down-open" />
+      <FAIcon class="icon-down-open" icon="chevron-down" />
     </label>
   </div>
 </template>
@@ -28,6 +28,14 @@
 import languagesObject from '../../i18n/messages'
 import ISO6391 from 'iso-639-1'
 import _ from 'lodash'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faChevronDown
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faChevronDown
+)
 
 export default {
   computed: {

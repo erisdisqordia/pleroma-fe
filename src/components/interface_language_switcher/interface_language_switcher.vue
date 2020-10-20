@@ -19,7 +19,7 @@
           {{ languageNames[i] }}
         </option>
       </select>
-      <FAIcon class="icon-down-open" icon="chevron-down" />
+      <FAIcon class="select-down-icon" icon="chevron-down" />
     </label>
   </div>
 </template>

@@ -39,19 +39,23 @@
             </i18n>
 
             <div class="icons">
-              <i
+              <FAIcon
+                fixed-width
                 style="color: var(--cBlue)"
-                class="button-icon icon-reply"
+                class="button-icon" icon="reply"
               />
-              <i
+              <FAIcon
+                fixed-width
                 style="color: var(--cGreen)"
-                class="button-icon icon-retweet"
+                class="button-icon" icon="retweet"
               />
-              <i
+              <FAIcon
+                fixed-width
                 style="color: var(--cOrange)"
-                class="button-icon icon-star"
+                class="button-icon" icon="star"
               />
-              <i
+              <FAIcon
+                fixed-width
                 style="color: var(--cRed)"
                 class="button-icon" icon="times"
               />
@@ -106,11 +110,17 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faTimes
+  faTimes,
+  faStar,
+  faRetweet,
+  faReply
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faTimes
+  faTimes,
+  faStar,
+  faRetweet,
+  faReply
 )
 </script>
 

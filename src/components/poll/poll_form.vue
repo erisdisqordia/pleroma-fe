@@ -56,7 +56,7 @@
             <option value="single">{{ $t('polls.single_choice') }}</option>
             <option value="multiple">{{ $t('polls.multiple_choices') }}</option>
           </select>
-          <FAIcon class="icon-down-open" icon="chevron-down"/>
+          <FAIcon class="select-down-icon" icon="chevron-down"/>
         </label>
       </div>
       <div
@@ -84,7 +84,7 @@
               {{ $t(`time.${unit}_short`, ['']) }}
             </option>
           </select>
-          <FAIcon class="icon-down-open" icon="chevron-down"/>
+          <FAIcon class="select-down-icon" icon="chevron-down"/>
         </label>
       </div>
     </div>

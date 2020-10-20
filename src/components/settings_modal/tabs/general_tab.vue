@@ -103,7 +103,7 @@
                   {{ subjectLineBehaviorDefaultValue == 'noop' ? $t('settings.instance_default_simple') : '' }}
                 </option>
               </select>
-              <FAIcon class="icon-down-open" icon="chevron-down" />
+              <FAIcon class="select-down-icon" icon="chevron-down" />
             </label>
           </div>
         </li>
@@ -127,7 +127,7 @@
                   {{ postContentTypeDefaultValue === postFormat ? $t('settings.instance_default_simple') : '' }}
                 </option>
               </select>
-              <FAIcon class="icon-down-open" icon="chevron-down" />
+              <FAIcon class="select-down-icon" icon="chevron-down" />
             </label>
           </div>
         </li>

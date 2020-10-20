@@ -80,7 +80,7 @@
                     {{ style[0] || style.name }}
                   </option>
                 </select>
-                <FAIcon class="icon-down-open" icon="chevron-down" />
+                <FAIcon class="select-down-icon" icon="chevron-down" />
               </label>
             </div>
           </template>
@@ -907,7 +907,7 @@
                     {{ $t('settings.style.shadows.components.' + shadow) }}
                   </option>
                 </select>
-                <FAIcon class="icon-down-open" icon="chevron-down" />
+                <FAIcon class="select-down-icon" icon="chevron-down" />
               </label>
             </div>
             <div class="override">

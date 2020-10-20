@@ -13,8 +13,7 @@ const SearchBar = {
   data: () => ({
     searchTerm: undefined,
     hidden: true,
-    error: false,
-    loading: false
+    error: false
   }),
   watch: {
     '$route': function (route) {

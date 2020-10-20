@@ -78,7 +78,7 @@
               {{ $t('settings.style.shadows.shadow_id', { value: index }) }}
             </option>
           </select>
-          <FAIcon icon="chevron-down" class="icon-down-open" />
+          <FAIcon icon="chevron-down" class="select-down-icon" />
         </label>
         <button
           class="btn btn-default"

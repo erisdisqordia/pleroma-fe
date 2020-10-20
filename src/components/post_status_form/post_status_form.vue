@@ -511,7 +511,7 @@
     flex-direction: column;
   }
 
-   .attachments .media-upload-wrapper{
+   .attachments .media-upload-wrapper {
     padding: 0 0.5em;
 
     .attachment {
@@ -531,6 +531,7 @@
       border-radius: $fallback--attachmentRadius;
       border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
       font-weight: bold;
+      cursor: pointer;
     }
   }
 

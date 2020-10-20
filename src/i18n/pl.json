@@ -666,7 +666,8 @@
     "hide_full_subject": "Ukryj cały temat",
     "show_full_subject": "Pokaż cały temat",
     "thread_muted_and_words": ", ma słowa:",
-    "thread_muted": "Wątek wyciszony"
+    "thread_muted": "Wątek wyciszony",
+    "status_deleted": "Ten wpis został usunięty"
   },
   "user_card": {
     "approve": "Przyjmij",

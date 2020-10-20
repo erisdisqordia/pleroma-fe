@@ -43,15 +43,5 @@
   .new-icon {
     cursor: pointer;
   }
-
-  .progress-icon {
-    display: inline-block;
-    line-height: 0;
-    &::before {
-      /* Overriding fontello to achieve the perfect speeeen */
-      margin: 0;
-      line-height: 0;
-    }
-  }
 }
  </style>

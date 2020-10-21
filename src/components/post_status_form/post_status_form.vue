@@ -123,6 +123,7 @@
             type="text"
             :placeholder="$t('post_status.content_warning')"
             :disabled="posting"
+            size="1"
             class="form-post-subject"
           >
         </EmojiInput>

@@ -259,7 +259,7 @@
     "hide_attachments_in_tl": "在时间线上隐藏附件",
     "hide_muted_posts": "不显示被隐藏的用户的帖子",
     "max_thumbnails": "最多再每个帖子所能显示的缩略图数量",
-    "hide_isp": "隐藏指定实例的面板H",
+    "hide_isp": "隐藏实例独有的面板",
     "preload_images": "预载图片",
     "use_one_click_nsfw": "点击一次以打开工作场所不适宜的附件",
     "hide_post_stats": "隐藏推文相关的统计数据(例如：收藏的次数)",
@@ -431,7 +431,8 @@
         "alert_neutral": "中性",
         "alert_warning": "警告",
         "tabs": "标签页",
-        "underlay": "底衬"
+        "underlay": "底衬",
+        "toggled": "勾选的"
       },
       "radii": {
         "_tab_label": "圆角"
@@ -516,7 +517,7 @@
     "notification_setting_hide_notification_contents": "隐藏推送通知中的发送者与内容信息",
     "notification_setting_block_from_strangers": "屏蔽来自你没有关注的用户的通知",
     "type_domains_to_mute": "搜索需要隐藏的域名",
-    "useStreamingApi": "实时接收发布以及通知",
+    "useStreamingApi": "实时接收帖子和通知",
     "user_mutes": "用户",
     "reset_background_confirm": "您确定要重置个人资料背景图吗？",
     "reset_banner_confirm": "您确定要重置横幅图片吗？",
@@ -537,7 +538,7 @@
     "mutes_and_blocks": "隐藏与屏蔽",
     "bot": "这是一个机器人账号",
     "fun": "趣味",
-    "useStreamingApiWarning": "（不推荐使用，试验性，已知会跳过一些消息）",
+    "useStreamingApiWarning": "（不推荐使用，试验性，已知会跳过一些帖子）",
     "chatMessageRadius": "聊天消息",
     "greentext": "Meme 箭头",
     "virtual_scrolling": "优化时间线渲染",
@@ -756,7 +757,7 @@
   "about": {
     "mrf": {
       "simple": {
-        "quarantine_desc": "对于下列实例，本实例只发送公开的状态，不发送其它状态：",
+        "quarantine_desc": "本实例向以下实例仅发送公开的帖子：",
         "quarantine": "隔离",
         "reject_desc": "本实例不会接收来自下列实例的消息：",
         "reject": "拒绝",
@@ -764,9 +765,9 @@
         "simple_policies": "对于特定实例的策略",
         "accept": "接受",
         "media_removal": "移除媒体",
-        "media_nsfw_desc": "本实例将来自以下实例的媒体强制设置为敏感内容：",
+        "media_nsfw_desc": "本实例将来自以下实例的媒体内容强制设置为敏感内容：",
         "media_nsfw": "强制设置媒体为敏感内容",
-        "media_removal_desc": "本实例移除了来自以下实例的媒体内容：",
+        "media_removal_desc": "本实例移除来自以下实例的媒体内容：",
         "ftl_removal_desc": "该实例在从“全部已知网络”时间线上移除了下列实例：",
         "ftl_removal": "从“全部已知网络”时间线上移除"
       },

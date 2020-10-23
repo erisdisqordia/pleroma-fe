@@ -33,7 +33,8 @@
     "show_more": "Montri plion",
     "retry": "Reprovi",
     "error_retry": "Bonvolu reprovi",
-    "loading": "Enlegante…"
+    "loading": "Enlegante…",
+    "peek": "Antaŭmontri"
   },
   "image_cropper": {
     "crop_picture": "Tondi bildon",
@@ -297,7 +298,9 @@
           "older_version_imported": "La enportita dosiero estis farita per pli malnova versio de PleromaFE.",
           "future_version_imported": "La enportita dosiero estis farita per pli nova versio de PleromaFE.",
           "v2_imported": "La dosiero, kiun vi enportis, estis farita por malnova versio de PleromaFE. Ni provas maksimumigi interkonformecon, sed tamen eble montriĝos misoj.",
-          "upgraded_from_v2": "PleromaFE estis ĝisdatigita; la haŭto eble aspektos malsame ol kiel vi ĝin memoras."
+          "upgraded_from_v2": "PleromaFE estis ĝisdatigita; la haŭto eble aspektos malsame ol kiel vi ĝin memoras.",
+          "snapshot_missing": "Neniu momentokopio de haŭto estis en la dosiero, ĝi povas aspekti iom malsame ol oni intencis.",
+          "snapshot_present": "Ĉiuj valoroj estas transpasataj, ĉar momentokopio de haŭto estas enlegita. Vi povas enlegi anstataŭe la aktualajn datumojn de haŭto."
         },
         "use_source": "Nova versio",
         "use_snapshot": "Malnova versio",
@@ -495,7 +498,14 @@
       "backend_version": "Versio de internaĵo",
       "title": "Versio"
     },
-    "accent": "Emfazo"
+    "accent": "Emfazo",
+    "virtual_scrolling": "Optimumigi bildigon de tempolinio",
+    "import_mutes_from_a_csv_file": "Enporti silentigojn el CSV-dosiero",
+    "mutes_imported": "Silentigoj enportiĝis! Traktado daŭros iom da tempo.",
+    "mute_import_error": "Eraris enporto de silentigoj",
+    "mute_import": "Enporto de silentigoj",
+    "mute_export_button": "Elportu viajn silentigojn al CSV-dosiero",
+    "mute_export": "Elporto de silentigoj"
   },
   "timeline": {
     "collapse": "Maletendi",
@@ -791,5 +801,8 @@
     "additional_comments": "Aldonaj komentoj",
     "add_comment_description": "Ĉi tiu raporto sendiĝos al reguligistoj de via nodo. Vi povas komprenigi kial vi raportas ĉi tiun konton sube:",
     "title": "Raportante {0}"
+  },
+  "shoutbox": {
+    "title": "Kriujo"
   }
 }

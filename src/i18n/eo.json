@@ -300,7 +300,8 @@
           "v2_imported": "La dosiero, kiun vi enportis, estis farita por malnova versio de PleromaFE. Ni provas maksimumigi interkonformecon, sed tamen eble montriĝos misoj.",
           "upgraded_from_v2": "PleromaFE estis ĝisdatigita; la haŭto eble aspektos malsame ol kiel vi ĝin memoras.",
           "snapshot_missing": "Neniu momentokopio de haŭto estis en la dosiero, ĝi povas aspekti iom malsame ol oni intencis.",
-          "snapshot_present": "Ĉiuj valoroj estas transpasataj, ĉar momentokopio de haŭto estas enlegita. Vi povas enlegi anstataŭe la aktualajn datumojn de haŭto."
+          "snapshot_present": "Ĉiuj valoroj estas transpasataj, ĉar momentokopio de haŭto estas enlegita. Vi povas enlegi anstataŭe la aktualajn datumojn de haŭto.",
+          "snapshot_source_mismatch": "Versioj konfliktas: plej probable la fasado estis reirigita kaj ree ĝisdatigita; se vi ŝanĝis la haŭton per pli malnova versio de la fasado, vi probable volas uzi la malnovan version. Alie uzu la novan."
         },
         "use_source": "Nova versio",
         "use_snapshot": "Malnova versio",
@@ -717,7 +718,8 @@
     "pin": "Fiksi al profilo",
     "delete": "Forigi staton",
     "repeats": "Ripetoj",
-    "favorites": "Ŝatataj"
+    "favorites": "Ŝatataj",
+    "status_deleted": "Ĉi tiu afiŝo foriĝis"
   },
   "time": {
     "years_short": "{0}j",
@@ -779,7 +781,8 @@
     "new": "Nova babilo",
     "chats": "Babiloj",
     "delete": "Forigi",
-    "you": "Vi:"
+    "you": "Vi:",
+    "message_user": "Mesaĝi al {nickname}"
   },
   "password_reset": {
     "password_reset_required_but_mailer_is_disabled": "Vi devas restarigi vian pasvorton, sed restarigado de pasvortoj estas malŝaltita. Bonvolu kontakti la administranton de via nodo.",

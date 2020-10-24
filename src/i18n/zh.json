@@ -165,7 +165,7 @@
   "registration": {
     "bio": "简介",
     "email": "电子邮箱",
-    "fullname": "全名",
+    "fullname": "显示名称",
     "password_confirm": "确认密码",
     "registration": "注册",
     "token": "邀请码",

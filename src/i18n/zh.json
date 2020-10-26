@@ -322,7 +322,7 @@
     "search_user_to_mute": "搜索你想要隐藏的用户",
     "security_tab": "安全",
     "scope_copy": "回复时的复制范围（私信是总是复制的）",
-    "minimal_scopes_mode": "最小发文范围",
+    "minimal_scopes_mode": "使发文可见范围的选项最少化",
     "set_new_avatar": "设置新头像",
     "set_new_profile_background": "设置新的个人资料背景",
     "set_new_profile_banner": "设置新的横幅图片",

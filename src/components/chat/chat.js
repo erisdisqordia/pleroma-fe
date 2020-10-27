@@ -11,6 +11,7 @@ import { getScrollPosition, getNewTopPosition, isBottomedOut, scrollableContaine
 const BOTTOMED_OUT_OFFSET = 10
 const JUMP_TO_BOTTOM_BUTTON_VISIBILITY_OFFSET = 150
 const SAFE_RESIZE_TIME_OFFSET = 100
+const MARK_AS_READ_DELAY = 1500
 
 const Chat = {
   components: {
@@ -94,7 +95,7 @@ const Chat = {
       const bottomedOutBeforeUpdate = this.bottomedOut(BOTTOMED_OUT_OFFSET)
       this.$nextTick(() => {
         if (bottomedOutBeforeUpdate) {
-          this.scrollDown({ forceRead: !document.hidden })
+          this.scrollDown()
         }
       })
     },
@@ -200,7 +201,7 @@ const Chat = {
       this.$nextTick(() => {
         scrollable.scrollTo({ top: scrollable.scrollHeight, left: 0, behavior })
       })
-      if (forceRead || this.newMessageCount > 0) {
+      if (forceRead) {
         this.readChat()
       }
     },
@@ -225,12 +226,17 @@ const Chat = {
       } else if (this.bottomedOut(JUMP_TO_BOTTOM_BUTTON_VISIBILITY_OFFSET)) {
         this.jumpToBottomButtonVisible = false
         if (this.newMessageCount > 0) {
-          this.readChat()
+          // Use a delay before marking as read to prevent situation where new messages
+          // arrive just as you're leaving the view and messages that you didn't actually
+          // get to see get marked as read.
+          window.setTimeout(() => {
+            if (this.$el) this.readChat()
+          }, MARK_AS_READ_DELAY)
         }
       } else {
         this.jumpToBottomButtonVisible = true
       }
-    }, 100),
+    }, 200),
     handleScrollUp (positionBeforeLoading) {
       const positionAfterLoading = getScrollPosition(this.$refs.scrollable)
       this.$refs.scrollable.scrollTo({

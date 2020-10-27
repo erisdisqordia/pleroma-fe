@@ -13,6 +13,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed chat messages sometimes getting lost when you receive a message at the same time
 - Fixed clicking NSFW hider through status popover
 
+### Changed
+- Clicking immediately when timeline shifts is now blocked to prevent misclicks
+
 ### Added
 - Import/export a muted users
 - Proper handling of deletes when using websocket streaming

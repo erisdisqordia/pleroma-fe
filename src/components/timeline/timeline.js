@@ -2,7 +2,7 @@ import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import Conversation from '../conversation/conversation.vue'
 import TimelineMenu from '../timeline_menu/timeline_menu.vue'
-import { throttle, keyBy } from 'lodash'
+import { debounce, throttle, keyBy } from 'lodash'
 
 export const getExcludedStatusIdsByPinning = (statuses, pinnedStatusIds) => {
   const ids = []
@@ -34,7 +34,8 @@ const Timeline = {
       paused: false,
       unfocused: false,
       bottomedOut: false,
-      virtualScrollIndex: 0
+      virtualScrollIndex: 0,
+      blockingClicks: false
     }
   },
   components: {
@@ -124,6 +125,21 @@ const Timeline = {
     this.$store.commit('setLoading', { timeline: this.timelineName, value: false })
   },
   methods: {
+    blockClickEvent (e) {
+      e.stopPropagation()
+      e.preventDefault()
+    },
+    stopBlockingClicks: debounce(function () {
+      this.blockingClicks = false
+      this.$el && this.$el.removeEventListener('click', this.blockClickEvent, true)
+    }, 1000),
+    blockClicksTemporarily () {
+      if (!this.blockingClicks) {
+        this.$el.addEventListener('click', this.blockClickEvent, true)
+        this.blockingClicks = true
+      }
+      this.stopBlockingClicks()
+    },
     handleShortKey (e) {
       // Ignore when input fields are focused
       if (['textarea', 'input'].includes(e.target.tagName.toLowerCase())) return
@@ -135,6 +151,7 @@ const Timeline = {
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
         this.fetchOlderStatuses()
       } else {
+        this.blockClicksTemporarily()
         this.$store.commit('showNewStatuses', { timeline: this.timelineName })
         this.paused = false
       }

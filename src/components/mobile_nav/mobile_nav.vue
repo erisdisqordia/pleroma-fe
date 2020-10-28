@@ -16,8 +16,7 @@
             @click.stop.prevent="toggleMobileSidebar()"
           >
             <FAIcon
-              size="lg"
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="bars"
             />
             <div
@@ -42,8 +41,7 @@
             @click.stop.prevent="openMobileNotifications()"
           >
             <FAIcon
-              size="lg"
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="bell"
             />
             <div
@@ -68,8 +66,7 @@
           @click.stop.prevent="closeMobileNotifications()"
         >
           <FAIcon
-            size="lg"
-            class="button-icon"
+            class="fa-scale-110 fa-old-padding"
             icon="times"
           />
         </a>

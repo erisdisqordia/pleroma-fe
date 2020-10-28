@@ -12,8 +12,7 @@
     >
       <FAIcon
         icon="envelope"
-        class="button-icon"
-        size="lg"
+        class="fa-scale-110 fa-old-padding"
       />
     </span>
     <span
@@ -25,8 +24,7 @@
     >
       <FAIcon
         icon="lock"
-        class="button-icon"
-        size="lg"
+        class="fa-scale-110 fa-old-padding"
       />
     </span>
     <span
@@ -38,8 +36,7 @@
     >
       <FAIcon
         icon="lock-open"
-        class="button-icon"
-        size="lg"
+        class="fa-scale-110 fa-old-padding"
       />
     </span>
     <span
@@ -51,8 +48,7 @@
     >
       <FAIcon
         icon="globe"
-        class="button-icon"
-        size="lg"
+        class="fa-scale-110 fa-old-padding"
       />
     </span>
   </div>

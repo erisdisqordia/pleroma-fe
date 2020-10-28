@@ -22,9 +22,8 @@
             />
             <div class="user-info-avatar-link-overlay">
               <FAIcon
-                class="button-icon"
+                class="fa-scale-110 fa-old-padding"
                 icon="search-plus"
-                size="lg"
               />
             </div>
           </a>

@@ -53,8 +53,7 @@
           >
             <FAIcon
               fixed-width
-              size="lg"
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="cog"
               :title="$t('nav.preferences')"
             />
@@ -66,8 +65,7 @@
             target="_blank"
           ><FAIcon
             fixed-width
-            size="lg"
-            class="button-icon"
+            class="fa-scale-110 fa-old-padding"
             icon="tachometer-alt"
             :title="$t('nav.administration')"
           /></a>
@@ -78,8 +76,7 @@
             @click.prevent="logout"
           ><FAIcon
             fixed-width
-            size="lg"
-            class="button-icon"
+            class="fa-scale-110 fa-old-padding"
             icon="sign-out-alt"
             :title="$t('login.logout')"
           /></a>

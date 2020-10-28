@@ -8,8 +8,7 @@
         :title="$t('nav.search')"
       ><FAIcon
         fixed-width
-        size="lg"
-        class="button-icon"
+        class="fa-scale-110 fa-old-padding"
         icon="search"
         @click.prevent.stop="toggleHidden"
       /></a>
@@ -34,10 +33,9 @@
         </button>
         <span>
           <FAIcon
-            size="lg"
             fixed-width
             icon="times"
-            class="cancel-icon"
+            class="cancel-icon fa-scale-110 fa-old-padding"
             @click.prevent.stop="toggleHidden"
           />
         </span>

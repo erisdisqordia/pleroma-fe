@@ -2,9 +2,8 @@
   <div>
     <FAIcon
       v-if="loggedIn"
-      class="ReplyButton button-icon -interactive"
+      class="ReplyButton fa-scale-110 fa-old-padding -interactive"
       icon="reply"
-      size="lg"
       :title="$t('tool_tip.reply')"
       :class="{'-active': replying}"
       @click.prevent="$emit('toggle')"
@@ -12,8 +11,7 @@
     <FAIcon
       v-else
       icon="reply"
-      size="lg"
-      class="ReplyButton button-icon"
+      class="ReplyButton fa-scale-110 fa-old-padding"
       :title="$t('tool_tip.reply')"
     />
     <span v-if="status.replies_count > 0">

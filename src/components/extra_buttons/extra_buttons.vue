@@ -107,7 +107,7 @@
     </div>
     <span slot="trigger">
       <FAIcon
-        class="ExtraButtons button-icon"
+        class="ExtraButtons fa-scale-110 fa-old-padding"
         icon="ellipsis-h"
         size="md"
       />

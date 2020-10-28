@@ -19,7 +19,7 @@
         class="unmute"
         @click.prevent="toggleMute"
       ><FAIcon
-        class="button-icon"
+        class="fa-scale-110 fa-old-padding"
         icon="eye-slash"
       /></a>
     </div>
@@ -137,7 +137,7 @@
             href="#"
             @click.prevent="toggleMute"
           ><FAIcon
-            class="button-icon"
+            class="fa-scale-110 fa-old-padding"
             icon="eye-slash"
           /></a>
         </span>
@@ -157,13 +157,13 @@
           >
             <FAIcon
               icon="check"
-              class="button-icon follow-request-accept"
+              class="fa-scale-110 fa-old-padding follow-request-accept"
               :title="$t('tool_tip.accept_follow_request')"
               @click="approveUser()"
             />
             <FAIcon
               icon="times"
-              class="button-icon follow-request-reject"
+              class="fa-scale-110 fa-old-padding follow-request-reject"
               :title="$t('tool_tip.reject_follow_request')"
               @click="denyUser()"
             />

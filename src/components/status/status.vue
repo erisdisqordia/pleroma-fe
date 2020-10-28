@@ -11,7 +11,7 @@
     >
       {{ error }}
       <span
-        class="button-icon"
+        class="fa-scale-110 fa-old-padding"
         @click="clearError"
       >
         <FAIcon icon="times" />
@@ -22,7 +22,7 @@
         <small class="status-username">
           <FAIcon
             v-if="muted && retweet"
-            class="button-icon repeat-icon"
+            class="fa-scale-110 fa-old-padding repeat-icon"
             icon="retweet"
           />
           <router-link :to="userProfileLink">
@@ -49,13 +49,12 @@
         </small>
         <a
           href="#"
-          class="unmute button-icon"
+          class="unmute fa-scale-110 fa-old-padding"
           @click.prevent="toggleMute"
         >
           <FAIcon
             icon="eye-slash"
-            class="button-icon"
-            size="lg"
+            class="fa-scale-110 fa-old-padding"
           />
         </a>
       </div>
@@ -186,9 +185,8 @@
                   :title="status.visibility | capitalize"
                 >
                   <FAIcon
-                    class="button-icon"
+                    class="fa-scale-110 fa-old-padding"
                     :icon="visibilityIcon(status.visibility)"
-                    size="lg"
                   />
                 </span>
                 <a
@@ -199,9 +197,8 @@
                   title="Source"
                 >
                   <FAIcon
-                    class="button-icon"
+                    class="fa-scale-110 fa-old-padding"
                     icon="external-link-square-alt"
-                    size="lg"
                   />
                 </a>
                 <a
@@ -211,9 +208,8 @@
                   @click.prevent="toggleExpanded"
                 >
                   <FAIcon
-                    class="button-icon"
+                    class="fa-scale-110 fa-old-padding"
                     icon="plus-square"
-                    size="lg"
                   />
                 </a>
                 <a
@@ -223,8 +219,7 @@
                 >
                   <FAIcon
                     icon="eye-slash"
-                    class="button-icon"
-                    size="lg"
+                    class="fa-scale-110 fa-old-padding"
                   />
                 </a>
               </span>
@@ -249,9 +244,8 @@
                     @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
                   >
                     <FAIcon
-                      class="button-icon"
+                      class="fa-scale-110 fa-old-padding"
                       icon="reply"
-                      size="lg"
                       flip="horizontal"
                     />
                     <span

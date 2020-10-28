@@ -63,7 +63,7 @@
           >
             <span>{{ error }}</span>
             <a
-              class="button-icon dismiss"
+              class="fa-scale-110 fa-old-padding dismiss"
               @click.prevent="dismissError()"
             >
               <FAIcon icon="times" />

@@ -3,9 +3,8 @@
     <template v-if="visibility !== 'private' && visibility !== 'direct'">
       <FAIcon
         :class="classes"
-        class="RetweetButton button-icon -interactive"
+        class="RetweetButton fa-scale-110 fa-old-padding -interactive"
         icon="retweet"
-        size="lg"
         :spin="animated"
         :title="$t('tool_tip.repeat')"
         @click.prevent="retweet()"
@@ -15,9 +14,8 @@
     <template v-else>
       <FAIcon
         :class="classes"
-        class="RetweetButton button-icon"
+        class="RetweetButton fa-scale-110 fa-old-padding"
         icon="lock"
-        size="lg"
         :title="$t('timeline.no_retweet_hint')"
       />
     </template>
@@ -25,9 +23,8 @@
   <div v-else-if="!loggedIn">
     <FAIcon
       :class="classes"
-      class="button-icon"
+      class="fa-scale-110 fa-old-padding"
       icon="retweet"
-      size="lg"
       :title="$t('tool_tip.repeat')"
     />
     <span v-if="!mergedConfig.hidePostStats && status.repeat_num > 0">{{ status.repeat_num }}</span>

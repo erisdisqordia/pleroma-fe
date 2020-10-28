@@ -37,9 +37,8 @@
         >
           <router-link :to="{ name: 'login' }">
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="sign-in-alt"
             /> {{ $t("login.login") }}
           </router-link>
@@ -50,9 +49,8 @@
         >
           <router-link :to="{ name: timelinesRoute }">
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="home"
             /> {{ $t("nav.timelines") }}
           </router-link>
@@ -66,9 +64,8 @@
             style="position: relative"
           >
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="comments"
             /> {{ $t("nav.chats") }}
             <span
@@ -84,9 +81,8 @@
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="bell"
             /> {{ $t("nav.interactions") }}
           </router-link>
@@ -97,9 +93,8 @@
         >
           <router-link to="/friend-requests">
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="user-plus"
             /> {{ $t("nav.friend_requests") }}
             <span
@@ -116,9 +111,8 @@
         >
           <router-link :to="{ name: 'chat' }">
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="bullhorn"
             /> {{ $t("shoutbox.title") }}
           </router-link>
@@ -131,9 +125,8 @@
         >
           <router-link :to="{ name: 'search' }">
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="search"
             /> {{ $t("nav.search") }}
           </router-link>
@@ -144,9 +137,8 @@
         >
           <router-link :to="{ name: 'who-to-follow' }">
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="user-plus"
             /> {{ $t("nav.who_to_follow") }}
           </router-link>
@@ -157,9 +149,8 @@
             @click="openSettingsModal"
           >
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="cog"
             /> {{ $t("settings.settings") }}
           </a>
@@ -167,9 +158,8 @@
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'about'}">
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="info-circle"
             /> {{ $t("nav.about") }}
           </router-link>
@@ -183,9 +173,8 @@
             target="_blank"
           >
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="tachometer-alt"
             /> {{ $t("nav.administration") }}
           </a>
@@ -199,9 +188,8 @@
             @click="doLogout"
           >
             <FAIcon
-              size="lg"
               fixed-width
-              class="button-icon"
+              class="fa-scale-110 fa-old-padding"
               icon="sign-out-alt"
             /> {{ $t("login.logout") }}
           </a>
@@ -284,7 +272,7 @@
   --lightText: var(--popoverLightText, $fallback--lightText);
   --icon: var(--popoverIcon, $fallback--icon);
 
-  .button-icon:before {
+  .fa-scale-110 fa-old-padding:before {
     width: 1.1em;
   }
 }

@@ -2,11 +2,10 @@
   <div v-if="loggedIn">
     <FAIcon
       :class="classes"
-      class="FavoriteButton button-icon -interactive"
+      class="FavoriteButton fa-scale-110 fa-old-padding -interactive"
       :title="$t('tool_tip.favorite')"
       :icon="[status.favorited ? 'fas' : 'far', 'star']"
       :spin="animated"
-      size="lg"
       @click.prevent="favorite()"
     />
     <span v-if="!mergedConfig.hidePostStats && status.fave_num > 0">{{ status.fave_num }}</span>
@@ -14,10 +13,9 @@
   <div v-else>
     <FAIcon
       :class="classes"
-      class="FavoriteButton button-icon"
+      class="FavoriteButton fa-scale-110 fa-old-padding"
       :title="$t('tool_tip.favorite')"
       :icon="['far', 'star']"
-      size="lg"
     />
     <span v-if="!mergedConfig.hidePostStats && status.fave_num > 0">{{ status.fave_num }}</span>
   </div>

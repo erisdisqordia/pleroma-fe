@@ -58,7 +58,7 @@
         {{ error }}
         <FAIcon
           size="lg"
-          class="button-icon"
+          class="fa-scale-110 fa-old-padding"
           icon="times"
           @click="clearError"
         />

@@ -38,9 +38,8 @@
     </div>
     <FAIcon
       slot="trigger"
-      class="button-icon add-reaction-button"
+      class="fa-scale-110 fa-old-padding add-reaction-button"
       :icon="['far', 'smile-beam']"
-      size="lg"
       :title="$t('tool_tip.add_reaction')"
     />
   </Popover>

@@ -37,7 +37,7 @@
         >
           <span>{{ $t('post_status.scope_notice.public') }}</span>
           <a
-            class="button-icon dismiss"
+            class="fa-scale-110 fa-old-padding dismiss"
             @click.prevent="dismissScopeNotice()"
           >
             <FAIcon icon="times" />
@@ -49,7 +49,7 @@
         >
           <span>{{ $t('post_status.scope_notice.unlisted') }}</span>
           <a
-            class="button-icon dismiss"
+            class="fa-scale-110 fa-old-padding dismiss"
             @click.prevent="dismissScopeNotice()"
           >
             <FAIcon icon="times" />
@@ -61,7 +61,7 @@
         >
           <span>{{ $t('post_status.scope_notice.private') }}</span>
           <a
-            class="button-icon dismiss"
+            class="fa-scale-110 fa-old-padding dismiss"
             @click.prevent="dismissScopeNotice()"
           >
             <FAIcon icon="times" />
@@ -83,7 +83,7 @@
             @click.stop.prevent="togglePreview"
           >
             {{ $t('post_status.preview') }}
-            <i :class="showPreview ? 'icon-left-open' : 'icon-right-open'" />
+            <FAIcon :icon="showPreview ? 'chevron-left' : 'chevron-right'" />
           </a>
           <FAIcon
             v-show="previewLoading"
@@ -289,8 +289,7 @@
       >
         Error: {{ error }}
         <FAIcon
-          class="button-icon"
-          size="lg"
+          class="fa-scale-110 fa-old-padding"
           icon="times"
           @click="clearError"
         />
@@ -302,7 +301,7 @@
           class="media-upload-wrapper"
         >
           <FAIcon
-            class="button-icon"
+            class="fa-scale-110 fa-old-padding"
             icon="times"
             @click="removeMediaFile(file)"
           />
@@ -389,7 +388,6 @@
   }
 
   .preview-toggle {
-    display: flex;
     cursor: pointer;
     user-select: none;
 
@@ -524,7 +522,7 @@
       position: relative;
     }
 
-    .button-icon {
+    .fa-scale-110 fa-old-padding {
       position: absolute;
       margin: 10px;
       margin: .75em;

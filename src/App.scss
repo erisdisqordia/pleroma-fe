@@ -812,11 +812,15 @@ nav {
   }
 }
 
-.button-icon {
-  &.svg-inline--fa.fa-lg {
-    display: inline-block;
-    padding: 0 0.3em;
+.fa-scale-110 {
+  &.svg-inline--fa {
     font-size: 1.1em;
+  }
+}
+
+.fa-old-padding {
+  &.svg-inline--fa {
+    padding: 0 0.3em;
   }
 }
 

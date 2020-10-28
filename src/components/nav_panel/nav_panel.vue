@@ -9,22 +9,18 @@
           >
             <FAIcon
               fixed-width
-              size="lg"
-              class="button-icon"
+              class="fa-scale-110"
               icon="home"
-            />
-            {{ $t("nav.timelines") }}
+            />{{ $t("nav.timelines") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
             <FAIcon
               fixed-width
-              size="lg"
-              class="button-icon"
+              class="fa-scale-110"
               icon="bell"
-            />
-            {{ $t("nav.interactions") }}
+            />{{ $t("nav.interactions") }}
           </router-link>
         </li>
         <li v-if="currentUser && pleromaChatMessagesAvailable">
@@ -37,22 +33,18 @@
             </div>
             <FAIcon
               fixed-width
-              size="lg"
-              class="button-icon"
+              class="fa-scale-110"
               icon="comments"
-            />
-            {{ $t("nav.chats") }}
+            />{{ $t("nav.chats") }}
           </router-link>
         </li>
         <li v-if="currentUser && currentUser.locked">
           <router-link :to="{ name: 'friend-requests' }">
             <FAIcon
               fixed-width
-              size="lg"
-              class="button-icon"
+              class="fa-scale-110"
               icon="user-plus"
-            />
-            {{ $t("nav.friend_requests") }}
+            />{{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
               class="badge follow-request-count"
@@ -65,8 +57,7 @@
           <router-link :to="{ name: 'about' }">
             <FAIcon
               fixed-width
-              size="lg"
-              class="button-icon"
+              class="fa-scale-110"
               icon="info-circle"
             />{{ $t("nav.about") }}
           </router-link>
@@ -94,7 +85,7 @@
   }
 
   .follow-request-count {
-    margin: -6px 10px;
+    vertical-align: bottom;
     background-color: $fallback--bg;
     background-color: var(--input, $fallback--faint);
   }
@@ -126,7 +117,8 @@
 
   a {
     display: block;
-    padding: 0.8em 0.85em;
+    align-items: stretch;
+    padding: 0.9em 1em;
 
     &:hover {
       background-color: $fallback--lightBg;
@@ -156,13 +148,8 @@
     }
   }
 
-  .button-icon {
-    margin-left: -0.1em;
-    margin-right: 0.2em;
-  }
-
-  .button-icon:before {
-    width: 1.1em;
+  .fa-scale-110 {
+    margin-right: 0.8em;
   }
 }
 </style>

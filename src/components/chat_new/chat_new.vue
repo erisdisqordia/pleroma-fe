@@ -20,8 +20,7 @@
     <div class="input-wrap">
       <div class="input-search">
         <FAIcon
-          size="lg"
-          class="search-icon button-icon"
+          class="search-icon fa-scale-110 fa-old-padding"
           icon="search"
         />
       </div>

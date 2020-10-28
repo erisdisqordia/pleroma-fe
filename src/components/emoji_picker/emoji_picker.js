@@ -1,13 +1,13 @@
 import Checkbox from '../checkbox/checkbox.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faIcons,
+  faBoxOpen,
   faStickyNote,
   faSmileBeam
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faIcons,
+  faBoxOpen,
   faStickyNote,
   faSmileBeam
 )
@@ -195,7 +195,7 @@ const EmojiPicker = {
         {
           id: 'standard',
           text: this.$t('emoji.unicode'),
-          icon: 'icons',
+          icon: 'box-open',
           emojis: filterByKeyword(standardEmojis, this.keyword)
         }
       ]

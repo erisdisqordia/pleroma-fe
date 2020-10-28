@@ -272,9 +272,12 @@
   --lightText: var(--popoverLightText, $fallback--lightText);
   --icon: var(--popoverIcon, $fallback--icon);
 
-  .fa-scale-110 fa-old-padding:before {
-    width: 1.1em;
+  .follow-request-count {
+    vertical-align: baseline;
+    background-color: $fallback--bg;
+    background-color: var(--input, $fallback--faint);
   }
+
 }
 
 .side-drawer-logo-wrapper {

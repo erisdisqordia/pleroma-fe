@@ -85,7 +85,7 @@
   }
 
   .follow-request-count {
-    vertical-align: bottom;
+    vertical-align: baseline;
     background-color: $fallback--bg;
     background-color: var(--input, $fallback--faint);
   }

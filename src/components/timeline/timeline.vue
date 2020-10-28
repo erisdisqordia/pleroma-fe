@@ -1,5 +1,5 @@
 <template>
-  <div :class="[classes.root, 'timeline']">
+  <div :class="[classes.root, 'Timeline']">
     <div :class="classes.header">
       <TimelineMenu v-if="!embedded" />
       <div
@@ -103,9 +103,14 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.timeline {
+.Timeline {
   .loadmore-text {
     opacity: 1;
+  }
+
+  &.-blocked {
+    pointer-events: none;
+    cursor: wait;
   }
 }
 

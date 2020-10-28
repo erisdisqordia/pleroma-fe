@@ -65,8 +65,10 @@ const Timeline = {
       }
     },
     classes () {
+      let rootClasses = !this.embedded ? ['panel', 'panel-default'] : []
+      if (this.blockingClicks) rootClasses = rootClasses.concat(['-blocked'])
       return {
-        root: ['timeline'].concat(!this.embedded ? ['panel', 'panel-default'] : []),
+        root: rootClasses,
         header: ['timeline-heading'].concat(!this.embedded ? ['panel-heading'] : []),
         body: ['timeline-body'].concat(!this.embedded ? ['panel-body'] : []),
         footer: ['timeline-footer'].concat(!this.embedded ? ['panel-footer'] : [])
@@ -125,17 +127,11 @@ const Timeline = {
     this.$store.commit('setLoading', { timeline: this.timelineName, value: false })
   },
   methods: {
-    blockClickEvent (e) {
-      e.stopPropagation()
-      e.preventDefault()
-    },
     stopBlockingClicks: debounce(function () {
       this.blockingClicks = false
-      this.$el && this.$el.removeEventListener('click', this.blockClickEvent, true)
     }, 1000),
     blockClicksTemporarily () {
       if (!this.blockingClicks) {
-        this.$el.addEventListener('click', this.blockClickEvent, true)
         this.blockingClicks = true
       }
       this.stopBlockingClicks()

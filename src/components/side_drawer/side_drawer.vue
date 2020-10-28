@@ -333,8 +333,8 @@
     box-sizing: border-box;
     display: block;
     height: 3em;
-    line-height: 2em;
-    padding: 0.5em 0.7em;
+    line-height: 3em;
+    padding: 0 0.7em;
 
     &:hover {
       background-color: $fallback--lightBg;

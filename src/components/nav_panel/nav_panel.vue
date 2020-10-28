@@ -117,8 +117,11 @@
 
   a {
     display: block;
+    box-sizing: border-box;
     align-items: stretch;
-    padding: 0.9em 1em;
+    height: 3.5em;
+    line-height: 3.5em;
+    padding: 0 1em;
 
     &:hover {
       background-color: $fallback--lightBg;

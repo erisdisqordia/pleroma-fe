@@ -31,7 +31,7 @@
     }
 
     .unavailable,
-    .unavailable i {
+    .unavailable svg {
       color: var(--cRed, $fallback--cRed);
       color: $fallback--cRed;
     }

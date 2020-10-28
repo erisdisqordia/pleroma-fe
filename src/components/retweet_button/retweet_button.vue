@@ -1,26 +1,30 @@
 <template>
   <div v-if="loggedIn">
     <template v-if="visibility !== 'private' && visibility !== 'direct'">
-      <i
+      <FAIcon
         :class="classes"
-        class="button-icon retweet-button icon-retweet rt-active"
+        class="RetweetButton fa-scale-110 fa-old-padding -interactive"
+        icon="retweet"
+        :spin="animated"
         :title="$t('tool_tip.repeat')"
         @click.prevent="retweet()"
       />
       <span v-if="!mergedConfig.hidePostStats && status.repeat_num > 0">{{ status.repeat_num }}</span>
     </template>
     <template v-else>
-      <i
+      <FAIcon
         :class="classes"
-        class="button-icon icon-lock"
+        class="RetweetButton fa-scale-110 fa-old-padding"
+        icon="lock"
         :title="$t('timeline.no_retweet_hint')"
       />
     </template>
   </div>
   <div v-else-if="!loggedIn">
-    <i
+    <FAIcon
       :class="classes"
-      class="button-icon icon-retweet"
+      class="fa-scale-110 fa-old-padding"
+      icon="retweet"
       :title="$t('tool_tip.repeat')"
     />
     <span v-if="!mergedConfig.hidePostStats && status.repeat_num > 0">{{ status.repeat_num }}</span>
@@ -31,16 +35,21 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
-.rt-active {
-  cursor: pointer;
-  animation-duration: 0.6s;
-  &:hover {
+
+.RetweetButton {
+  &.-interactive {
+    cursor: pointer;
+    animation-duration: 0.6s;
+
+    &:hover {
+      color: $fallback--cGreen;
+      color: var(--cGreen, $fallback--cGreen);
+    }
+  }
+
+  &.-repeated {
     color: $fallback--cGreen;
     color: var(--cGreen, $fallback--cGreen);
   }
-}
-.icon-retweet.retweeted {
-  color: $fallback--cGreen;
-  color: var(--cGreen, $fallback--cGreen);
 }
 </style>

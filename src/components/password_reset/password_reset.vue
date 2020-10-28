@@ -63,10 +63,10 @@
           >
             <span>{{ error }}</span>
             <a
-              class="button-icon dismiss"
+              class="fa-scale-110 fa-old-padding dismiss"
               @click.prevent="dismissError()"
             >
-              <i class="icon-cancel" />
+              <FAIcon icon="times" />
             </a>
           </p>
         </div>
@@ -122,7 +122,7 @@
     padding-right: 2rem;
   }
 
-  .icon-cancel {
+  .dismiss {
     cursor: pointer;
   }
 }

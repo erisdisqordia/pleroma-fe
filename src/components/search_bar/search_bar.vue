@@ -1,16 +1,15 @@
 <template>
   <div>
     <div class="search-bar-container">
-      <i
-        v-if="loading"
-        class="icon-spin4 finder-icon animate-spin-slow"
-      />
       <a
         v-if="hidden"
         href="#"
+        class="nav-icon"
         :title="$t('nav.search')"
-      ><i
-        class="button-icon icon-search"
+      ><FAIcon
+        fixed-width
+        class="fa-scale-110 fa-old-padding"
+        icon="search"
         @click.prevent.stop="toggleHidden"
       /></a>
       <template v-else>
@@ -27,12 +26,19 @@
           class="btn search-button"
           @click="find(searchTerm)"
         >
-          <i class="icon-search" />
+          <FAIcon
+            fixed-width
+            icon="search"
+          />
         </button>
-        <i
-          class="button-icon icon-cancel"
-          @click.prevent.stop="toggleHidden"
-        />
+        <span>
+          <FAIcon
+            fixed-width
+            icon="times"
+            class="cancel-icon fa-scale-110 fa-old-padding"
+            @click.prevent.stop="toggleHidden"
+          />
+        </span>
       </template>
     </div>
   </div>
@@ -60,13 +66,10 @@
     max-width: calc(100% - 30px - 30px - 20px);
   }
 
-  .search-button {
-    margin-left: .5em;
-    margin-right: .5em;
-  }
-
-  .icon-cancel {
+  .cancel-icon {
     cursor: pointer;
+    color: $fallback--text;
+    color: var(--btnTopBarText, $fallback--text);
   }
 }
 

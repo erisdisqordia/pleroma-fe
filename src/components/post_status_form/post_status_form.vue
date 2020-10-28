@@ -12,10 +12,11 @@
         v-show="showDropIcon !== 'hide'"
         :style="{ animation: showDropIcon === 'show' ? 'fade-in 0.25s' : 'fade-out 0.5s' }"
         class="drop-indicator"
-        :class="[uploadFileLimitReached ? 'icon-block' : 'icon-upload']"
         @dragleave="fileDragStop"
         @drop.stop="fileDrop"
-      />
+      >
+        <FAIcon :icon="uploadFileLimitReached ? 'ban' : 'upload'" />
+      </div>
       <div class="form-group">
         <i18n
           v-if="!$store.state.users.currentUser.locked && newStatus.visibility == 'private' && !disableLockWarning"
@@ -36,10 +37,10 @@
         >
           <span>{{ $t('post_status.scope_notice.public') }}</span>
           <a
-            class="button-icon dismiss"
+            class="fa-scale-110 fa-old-padding dismiss"
             @click.prevent="dismissScopeNotice()"
           >
-            <i class="icon-cancel" />
+            <FAIcon icon="times" />
           </a>
         </p>
         <p
@@ -48,10 +49,10 @@
         >
           <span>{{ $t('post_status.scope_notice.unlisted') }}</span>
           <a
-            class="button-icon dismiss"
+            class="fa-scale-110 fa-old-padding dismiss"
             @click.prevent="dismissScopeNotice()"
           >
-            <i class="icon-cancel" />
+            <FAIcon icon="times" />
           </a>
         </p>
         <p
@@ -60,10 +61,10 @@
         >
           <span>{{ $t('post_status.scope_notice.private') }}</span>
           <a
-            class="button-icon dismiss"
+            class="fa-scale-110 fa-old-padding dismiss"
             @click.prevent="dismissScopeNotice()"
           >
-            <i class="icon-cancel" />
+            <FAIcon icon="times" />
           </a>
         </p>
         <p
@@ -82,11 +83,12 @@
             @click.stop.prevent="togglePreview"
           >
             {{ $t('post_status.preview') }}
-            <i :class="showPreview ? 'icon-left-open' : 'icon-right-open'" />
+            <FAIcon :icon="showPreview ? 'chevron-left' : 'chevron-right'" />
           </a>
-          <i
+          <FAIcon
             v-show="previewLoading"
-            class="icon-spin3 animate-spin"
+            spin
+            icon="circle-notch"
           />
         </div>
         <div
@@ -199,7 +201,10 @@
                   {{ $t(`post_status.content_type["${postFormat}"]`) }}
                 </option>
               </select>
-              <i class="icon-down-open" />
+              <FAIcon
+                class="select-down-icon"
+                icon="chevron-down"
+              />
             </label>
           </div>
           <div
@@ -236,22 +241,22 @@
           <div
             class="emoji-icon"
           >
-            <i
+            <div
               :title="$t('emoji.add_emoji')"
-              class="icon-smile btn btn-default"
+              class="btn btn-default"
               @click="showEmojiPicker"
-            />
+            >
+              <FAIcon icon="smile-beam" />
+            </div>
           </div>
           <div
             v-if="pollsAvailable"
             class="poll-icon"
             :class="{ selected: pollFormVisible }"
+            :title="$t('polls.add_poll')"
+            @click="togglePollForm"
           >
-            <i
-              :title="$t('polls.add_poll')"
-              class="icon-chart-bar btn btn-default"
-              @click="togglePollForm"
-            />
+            <FAIcon icon="poll-h" />
           </div>
         </div>
         <button
@@ -284,8 +289,9 @@
         class="alert error"
       >
         Error: {{ error }}
-        <i
-          class="button-icon icon-cancel"
+        <FAIcon
+          class="fa-scale-110 fa-old-padding"
+          icon="times"
           @click="clearError"
         />
       </div>
@@ -295,8 +301,9 @@
           :key="file.url"
           class="media-upload-wrapper"
         >
-          <i
-            class="fa button-icon icon-cancel"
+          <FAIcon
+            class="fa-scale-110 fa-old-padding"
+            icon="times"
             @click="removeMediaFile(file)"
           />
           <attachment
@@ -379,21 +386,16 @@
     padding-left: 0.5em;
     display: flex;
     width: 100%;
-
-    .icon-spin3 {
-      margin-left: auto;
-    }
   }
 
   .preview-toggle {
-    display: flex;
     cursor: pointer;
     user-select: none;
 
     &:hover {
       text-decoration: underline;
     }
-    i {
+    svg, i {
       margin-left: 0.2em;
       font-size: 0.8em;
       transform: rotate(90deg);
@@ -435,18 +437,20 @@
 
   .media-upload-icon, .poll-icon, .emoji-icon {
     font-size: 26px;
+    line-height: 1.1;
     flex: 1;
+    padding: 0 0.1em;
 
     &.selected, &:hover {
       // needs to be specific to override icon default color
-      i, label {
+      svg, i, label {
         color: $fallback--lightText;
         color: var(--lightText, $fallback--lightText);
       }
     }
 
     &.disabled {
-      i {
+      svg, i {
         cursor: not-allowed;
         color: $fallback--icon;
         color: var(--btnDisabledText, $fallback--icon);
@@ -475,7 +479,7 @@
     text-align: right;
   }
 
-  .icon-chart-bar {
+  .poll-icon {
     cursor: pointer;
   }
 
@@ -487,19 +491,6 @@
     margin-right: .2em;
     margin-bottom: .5em;
     width: 18em;
-
-    .icon-cancel {
-      display: inline-block;
-      position: static;
-      margin: 0;
-      padding-bottom: 0;
-      margin-left: $fallback--attachmentRadius;
-      margin-left: var(--attachmentRadius, $fallback--attachmentRadius);
-      background-color: $fallback--fg;
-      background-color: var(--btn, $fallback--fg);
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
 
     img, video {
       object-fit: contain;
@@ -523,7 +514,7 @@
     flex-direction: column;
   }
 
-  .media-upload-wrapper .attachments {
+   .attachments .media-upload-wrapper {
     padding: 0 0.5em;
 
     .attachment {
@@ -532,14 +523,18 @@
       position: relative;
     }
 
-    i {
+    .fa-scale-110 fa-old-padding {
       position: absolute;
       margin: 10px;
-      padding: 5px;
+      margin: .75em;
+      padding: .5em;
       background: rgba(230,230,230,0.6);
+      z-index: 2;
+      color: black;
       border-radius: $fallback--attachmentRadius;
       border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
       font-weight: bold;
+      cursor: pointer;
     }
   }
 
@@ -611,11 +606,6 @@
 
   .btn[disabled] {
     cursor: not-allowed;
-  }
-
-  .icon-cancel {
-    cursor: pointer;
-    z-index: 4;
   }
 
   @keyframes fade-in {

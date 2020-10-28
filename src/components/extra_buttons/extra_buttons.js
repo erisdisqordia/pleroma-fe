@@ -1,4 +1,24 @@
 import Popover from '../popover/popover.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faEllipsisH,
+  faBookmark,
+  faEyeSlash,
+  faThumbtack,
+  faShareAlt
+} from '@fortawesome/free-solid-svg-icons'
+import {
+  faBookmark as faBookmarkReg
+} from '@fortawesome/free-regular-svg-icons'
+
+library.add(
+  faEllipsisH,
+  faBookmark,
+  faBookmarkReg,
+  faEyeSlash,
+  faThumbtack,
+  faShareAlt
+)
 
 const ExtraButtons = {
   props: [ 'status' ],

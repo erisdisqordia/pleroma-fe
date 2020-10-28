@@ -1,11 +1,24 @@
 <template>
   <div class="panel-loading">
     <span class="loading-text">
-      <i class="icon-spin4 animate-spin" />
+      <FAIcon
+        icon="circle-notch"
+        spin
+        size="3x"
+      />
       {{ $t('general.loading') }}
     </span>
   </div>
 </template>
+
+<script>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faCircleNotch
+)
+</script>
 
 <style lang="scss">
 @import 'src/_variables.scss';
@@ -18,8 +31,7 @@
   font-size: 2em;
   color: $fallback--text;
   color: var(--text, $fallback--text);
-  .loading-text i {
-    font-size: 3em;
+  .loading-text svg {
     line-height: 0;
     vertical-align: middle;
     color: $fallback--text;

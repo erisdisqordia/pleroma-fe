@@ -42,36 +42,42 @@
         <div class="item right">
           <search-bar
             v-if="currentUser || !privateMode"
-            class="nav-icon mobile-hidden"
+            class="mobile-hidden"
             @toggled="onSearchBarToggled"
             @click.stop.native
           />
           <a
             href="#"
-            class="mobile-hidden"
+            class="mobile-hidden nav-icon"
             @click.stop="openSettingsModal"
           >
-            <i
-              class="button-icon icon-cog nav-icon"
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="cog"
               :title="$t('nav.preferences')"
             />
           </a>
           <a
             v-if="currentUser && currentUser.role === 'admin'"
             href="/pleroma/admin/#/login-pleroma"
-            class="mobile-hidden"
+            class="mobile-hidden nav-icon"
             target="_blank"
-          ><i
-            class="button-icon icon-gauge nav-icon"
+          ><FAIcon
+            fixed-width
+            class="fa-scale-110 fa-old-padding"
+            icon="tachometer-alt"
             :title="$t('nav.administration')"
           /></a>
           <a
             v-if="currentUser"
             href="#"
-            class="mobile-hidden"
+            class="mobile-hidden nav-icon"
             @click.prevent="logout"
-          ><i
-            class="button-icon icon-logout nav-icon"
+          ><FAIcon
+            fixed-width
+            class="fa-scale-110 fa-old-padding"
+            icon="sign-out-alt"
             :title="$t('login.logout')"
           /></a>
         </div>

@@ -320,7 +320,6 @@
   border-bottom: 1px solid;
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
-  margin: 0.2em 0;
 }
 
 .side-drawer ul:last-child {
@@ -331,8 +330,11 @@
   padding: 0;
 
   a {
+    box-sizing: border-box;
     display: block;
-    padding: 0.5em 0.85em;
+    height: 3em;
+    line-height: 2em;
+    padding: 0.5em 0.7em;
 
     &:hover {
       background-color: $fallback--lightBg;

@@ -114,7 +114,6 @@
 
   &.-blocked {
     pointer-events: none;
-    cursor: wait;
   }
 }
 

@@ -7,8 +7,9 @@ $status-margin: 0.75em;
   min-width: 0;
 
   &:hover {
-    --still-image-img: visible;
-    --still-image-canvas: hidden;
+    --_still-image-img-visibility: visible;
+    --_still-image-canvas-visibility: hidden;
+    --_still-image-label-visibility: hidden;
   }
 
   &.-focused {

@@ -282,6 +282,11 @@
 .user-card {
   position: relative;
 
+  &:hover .Avatar {
+    --_still-image-img-visibility: visible;
+    --_still-image-canvas-visibility: hidden;
+  }
+
   .panel-heading {
     padding: .5em 0;
     text-align: center;
@@ -391,11 +396,6 @@
       height: 56px;
       object-fit: cover;
     }
-  }
-
-  &:hover .Avatar {
-    --still-image-img: visible;
-    --still-image-canvas: hidden;
   }
 
   &-avatar-link {

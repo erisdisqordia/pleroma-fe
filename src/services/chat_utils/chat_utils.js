@@ -18,3 +18,24 @@ export const maybeShowChatNotification = (store, chat) => {
 
   showDesktopNotification(store.rootState, opts)
 }
+
+export const buildFakeMessage = ({ content, chatId, attachments, userId, idempotencyKey }) => {
+  const fakeMessage = {
+    content,
+    chat_id: chatId,
+    created_at: new Date(),
+    id: `${new Date().getTime()}`,
+    attachments: attachments,
+    account_id: userId,
+    idempotency_key: idempotencyKey,
+    emojis: [],
+    pending: true,
+    isNormalized: true
+  }
+
+  if (attachments[0]) {
+    fakeMessage.attachment = attachments[0]
+  }
+
+  return fakeMessage
+}

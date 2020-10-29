@@ -75,7 +75,8 @@ const PostStatusForm = {
     'autoFocus',
     'fileLimit',
     'submitOnEnter',
-    'emojiPickerPlacement'
+    'emojiPickerPlacement',
+    'optimisticPosting'
   ],
   components: {
     MediaUpload,
@@ -272,13 +273,15 @@ const PostStatusForm = {
       if (this.preview) this.previewStatus()
     },
     async postStatus (event, newStatus, opts = {}) {
-      if (this.posting) { return }
+      if (this.posting && !this.optimisticPosting) { return }
       if (this.disableSubmit) { return }
       if (this.emojiInputShown) { return }
       if (this.submitOnEnter) {
         event.stopPropagation()
         event.preventDefault()
       }
+
+      if (this.optimisticPosting && (this.emptyStatus || this.isOverLengthLimit)) { return }
 
       if (this.emptyStatus) {
         this.error = this.$t('post_status.empty_status_error')

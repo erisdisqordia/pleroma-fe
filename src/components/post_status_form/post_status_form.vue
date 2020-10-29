@@ -124,7 +124,7 @@
             v-model="newStatus.spoilerText"
             type="text"
             :placeholder="$t('post_status.content_warning')"
-            :disabled="posting"
+            :disabled="posting && !optimisticPosting"
             size="1"
             class="form-post-subject"
           >
@@ -150,7 +150,7 @@
             :placeholder="placeholder || $t('post_status.default')"
             rows="1"
             cols="1"
-            :disabled="posting"
+            :disabled="posting && !optimisticPosting"
             class="form-post-body"
             :class="{ 'scrollable-form': !!maxHeight }"
             @keydown.exact.enter="submitOnEnter && postStatus($event, newStatus)"

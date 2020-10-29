@@ -129,7 +129,11 @@ const promisedRequest = ({ method, url, params, payload, credentials, headers = 
             return reject(new StatusCodeError(response.status, json, { url, options }, response))
           }
           return resolve(json)
-        }))
+        })
+        .catch((error) => {
+          return reject(new StatusCodeError(response.status, error, { url, options }, response))
+        })
+      )
     })
 }
 
@@ -1210,7 +1214,7 @@ const chatMessages = ({ id, credentials, maxId, sinceId, limit = 20 }) => {
   })
 }
 
-const sendChatMessage = ({ id, content, mediaId = null, credentials }) => {
+const sendChatMessage = ({ id, content, mediaId = null, idempotencyKey, credentials }) => {
   const payload = {
     'content': content
   }
@@ -1219,11 +1223,18 @@ const sendChatMessage = ({ id, content, mediaId = null, credentials }) => {
     payload['media_id'] = mediaId
   }
 
+  const headers = {}
+
+  if (idempotencyKey) {
+    headers['idempotency-key'] = idempotencyKey
+  }
+
   return promisedRequest({
     url: PLEROMA_CHAT_MESSAGES_URL(id),
     method: 'POST',
     payload: payload,
-    credentials
+    credentials,
+    headers
   })
 }
 

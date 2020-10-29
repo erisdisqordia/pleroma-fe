@@ -32,7 +32,7 @@
         >
           <div
             class="media status"
-            :class="{ 'without-attachment': !hasAttachment }"
+            :class="{ 'without-attachment': !hasAttachment, 'pending': chatViewItem.data.pending, 'error': chatViewItem.data.error }"
             style="position: relative"
             @mouseenter="hovered = true"
             @mouseleave="hovered = false"

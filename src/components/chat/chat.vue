@@ -80,6 +80,7 @@
               :disable-sensitivity-checkbox="true"
               :disable-submit="errorLoadingChat || !currentChat"
               :disable-preview="true"
+              :optimistic-posting="true"
               :post-handler="sendMessage"
               :submit-on-enter="!mobileLayout"
               :preserve-focus="!mobileLayout"

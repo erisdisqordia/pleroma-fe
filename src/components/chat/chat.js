@@ -12,6 +12,7 @@ import {
   faChevronDown,
   faChevronLeft
 } from '@fortawesome/free-solid-svg-icons'
+import { buildFakeMessage } from '../../services/chat_utils/chat_utils.js'
 
 library.add(
   faChevronDown,
@@ -22,6 +23,7 @@ const BOTTOMED_OUT_OFFSET = 10
 const JUMP_TO_BOTTOM_BUTTON_VISIBILITY_OFFSET = 150
 const SAFE_RESIZE_TIME_OFFSET = 100
 const MARK_AS_READ_DELAY = 1500
+const MAX_RETRIES = 10
 
 const Chat = {
   components: {
@@ -35,7 +37,8 @@ const Chat = {
       hoveredMessageChainId: undefined,
       lastScrollPosition: {},
       scrollableContainerHeight: '100%',
-      errorLoadingChat: false
+      errorLoadingChat: false,
+      messageRetriers: {}
     }
   },
   created () {
@@ -219,7 +222,10 @@ const Chat = {
       if (!(this.currentChatMessageService && this.currentChatMessageService.maxId)) { return }
       if (document.hidden) { return }
       const lastReadId = this.currentChatMessageService.maxId
-      this.$store.dispatch('readChat', { id: this.currentChat.id, lastReadId })
+      this.$store.dispatch('readChat', {
+        id: this.currentChat.id,
+        lastReadId
+      })
     },
     bottomedOut (offset) {
       return isBottomedOut(this.$refs.scrollable, offset)
@@ -309,42 +315,74 @@ const Chat = {
       })
       this.fetchChat({ isFirstFetch: true })
     },
-    sendMessage ({ status, media }) {
+    handleAttachmentPosting () {
+      this.$nextTick(() => {
+        this.handleResize()
+        // When the posting form size changes because of a media attachment, we need an extra resize
+        // to account for the potential delay in the DOM update.
+        setTimeout(() => {
+          this.updateScrollableContainerHeight()
+        }, SAFE_RESIZE_TIME_OFFSET)
+        this.scrollDown({ forceRead: true })
+      })
+    },
+    sendMessage ({ status, media, idempotencyKey }) {
       const params = {
         id: this.currentChat.id,
-        content: status
+        content: status,
+        idempotencyKey
       }
 
       if (media[0]) {
         params.mediaId = media[0].id
       }
 
-      return this.backendInteractor.sendChatMessage(params)
+      const fakeMessage = buildFakeMessage({
+        attachments: media,
+        chatId: this.currentChat.id,
+        content: status,
+        userId: this.currentUser.id,
+        idempotencyKey
+      })
+
+      this.$store.dispatch('addChatMessages', {
+        chatId: this.currentChat.id,
+        messages: [fakeMessage]
+      }).then(() => {
+        this.handleAttachmentPosting()
+      })
+
+      return this.doSendMessage({ params, fakeMessage, retriesLeft: MAX_RETRIES })
+    },
+    doSendMessage ({ params, fakeMessage, retriesLeft = MAX_RETRIES }) {
+      if (retriesLeft <= 0) return
+
+      this.backendInteractor.sendChatMessage(params)
         .then(data => {
           this.$store.dispatch('addChatMessages', {
             chatId: this.currentChat.id,
-            messages: [data],
-            updateMaxId: false
-          }).then(() => {
-            this.$nextTick(() => {
-              this.handleResize()
-              // When the posting form size changes because of a media attachment, we need an extra resize
-              // to account for the potential delay in the DOM update.
-              setTimeout(() => {
-                this.updateScrollableContainerHeight()
-              }, SAFE_RESIZE_TIME_OFFSET)
-              this.scrollDown({ forceRead: true })
-            })
+            updateMaxId: false,
+            messages: [{ ...data, fakeId: fakeMessage.id }]
           })
 
           return data
         })
         .catch(error => {
           console.error('Error sending message', error)
-          return {
-            error: this.$t('chats.error_sending_message')
+          this.$store.dispatch('handleMessageError', {
+            chatId: this.currentChat.id,
+            fakeId: fakeMessage.id,
+            isRetry: retriesLeft !== MAX_RETRIES
+          })
+          if ((error.statusCode >= 500 && error.statusCode < 600) || error.message === 'Failed to fetch') {
+            this.messageRetriers[fakeMessage.id] = setTimeout(() => {
+              this.doSendMessage({ params, fakeMessage, retriesLeft: retriesLeft - 1 })
+            }, 1000 * (2 ** (MAX_RETRIES - retriesLeft)))
           }
+          return {}
         })
+
+      return Promise.resolve(fakeMessage)
     },
     goBack () {
       this.$router.push({ name: 'chats', params: { username: this.currentUser.screen_name } })

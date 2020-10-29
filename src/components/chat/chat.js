@@ -240,6 +240,7 @@ const Chat = {
           // arrive just as you're leaving the view and messages that you didn't actually
           // get to see get marked as read.
           window.setTimeout(() => {
+            // Don't mark as read if the element doesn't exist, user has left chat view
             if (this.$el) this.readChat()
           }, MARK_AS_READ_DELAY)
         }

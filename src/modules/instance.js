@@ -30,6 +30,7 @@ const defaultState = {
   logo: '/static/logo.png',
   logoMargin: '.2em',
   logoMask: true,
+  logoLeft: false,
   minimalScopesMode: false,
   nsfwCensorImage: undefined,
   postContentType: 'text/plain',

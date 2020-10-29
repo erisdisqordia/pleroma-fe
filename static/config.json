@@ -13,6 +13,7 @@
   "logo": "/static/logo.png",
   "logoMargin": ".1em",
   "logoMask": true,
+  "logoLeft": false,
   "minimalScopesMode": false,
   "nsfwCensorImage": "",
   "postContentType": "text/plain",

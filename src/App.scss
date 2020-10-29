@@ -359,117 +359,8 @@ i[class*=icon-], .svg-inline--fa  {
   padding: 0 10px 0 10px;
 }
 
-.item {
-  flex: 1;
-  line-height: 50px;
-  height: 50px;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-
-  .nav-icon {
-    margin-left: 0.2em;
-    width: 2em;
-    text-align: center;
-  }
-
-  &.right {
-    justify-content: flex-end;
-  }
-}
-
 .auto-size {
   flex: 1
-}
-
-.nav-bar {
-  padding: 0;
-  width: 100%;
-  align-items: center;
-  position: fixed;
-  height: 50px;
-  box-sizing: border-box;
-
-  button {
-    &, i[class*=icon-], svg {
-      color: $fallback--text;
-      color: var(--btnTopBarText, $fallback--text);
-    }
-
-    &:active {
-      background-color: $fallback--fg;
-      background-color: var(--btnPressedTopBar, $fallback--fg);
-      color: $fallback--text;
-      color: var(--btnPressedTopBarText, $fallback--text);
-    }
-
-    &:disabled {
-      color: $fallback--text;
-      color: var(--btnDisabledTopBarText, $fallback--text);
-    }
-
-    &.toggled {
-      color: $fallback--text;
-      color: var(--btnToggledTopBarText, $fallback--text);
-      background-color: $fallback--fg;
-      background-color: var(--btnToggledTopBar, $fallback--fg)
-    }
-  }
-
-
-  .logo {
-    display: flex;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    align-items: stretch;
-    justify-content: center;
-    flex: 0 0 auto;
-    z-index: -1;
-    transition: opacity;
-    transition-timing-function: ease-out;
-    transition-duration: 100ms;
-
-    .mask {
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: contain;
-      background-color: $fallback--fg;
-      background-color: var(--topBarText, $fallback--fg);
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-
-    img {
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      flex: 0;
-    }
-  }
-
-  .inner-nav {
-    position: relative;
-    margin: auto;
-    box-sizing: border-box;
-    padding-left: 10px;
-    padding-right: 10px;
-    display: flex;
-    align-items: center;
-    flex-basis: 970px;
-    height: 50px;
-
-    a, a i, a svg {
-      color: $fallback--link;
-      color: var(--topBarLink, $fallback--link);
-    }
-  }
 }
 
 main-router {
@@ -779,16 +670,6 @@ nav {
   &:hover {
     text-decoration: underline;
   }
-}
-
-@media all and (min-width: 800px) {
-  .logo {
-    opacity: 1 !important;
-  }
-}
-
-.item.right {
-  text-align: right;
 }
 
 .visibility-notice {

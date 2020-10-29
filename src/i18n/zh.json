@@ -103,7 +103,7 @@
     "repeated_you": "转发了你的状态",
     "no_more_notifications": "没有更多的通知",
     "reacted_with": "作出了 {0} 的反应",
-    "migrated_to": "迁移到",
+    "migrated_to": "迁移到了",
     "follow_request": "想要关注你"
   },
   "polls": {

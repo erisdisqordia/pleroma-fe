@@ -11,6 +11,7 @@
     >
       <div class="reaction-picker-filter">
         <input
+          size="1"
           v-model="filterWord"
           :placeholder="$t('emoji.search_emoji')"
         >

@@ -1,5 +1,17 @@
 import * as DateUtils from 'src/services/date_utils/date_utils.js'
 import { uniq } from 'lodash'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faTimes,
+  faChevronDown,
+  faPlus
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faTimes,
+  faChevronDown,
+  faPlus
+)
 
 export default {
   name: 'PollForm',

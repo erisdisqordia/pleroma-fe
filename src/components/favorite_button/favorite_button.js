@@ -1,4 +1,14 @@
 import { mapGetters } from 'vuex'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import {
+  faStar as faStarRegular
+} from '@fortawesome/free-regular-svg-icons'
+
+library.add(
+  faStar,
+  faStarRegular
+)
 
 const FavoriteButton = {
   props: ['status', 'loggedIn'],
@@ -23,9 +33,7 @@ const FavoriteButton = {
   computed: {
     classes () {
       return {
-        'icon-star-empty': !this.status.favorited,
-        'icon-star': this.status.favorited,
-        'animate-spin': this.animated
+        '-favorited': this.status.favorited
       }
     },
     ...mapGetters(['mergedConfig'])

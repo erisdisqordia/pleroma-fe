@@ -9,8 +9,9 @@
       <div class="notice-message">
         {{ $t(notice.messageKey, notice.messageArgs) }}
       </div>
-      <i
-        class="button-icon icon-cancel"
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        icon="times"
         @click="closeNotice(notice)"
       />
     </div>

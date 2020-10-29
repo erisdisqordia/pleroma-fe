@@ -1,4 +1,16 @@
 import Checkbox from '../checkbox/checkbox.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faBoxOpen,
+  faStickyNote,
+  faSmileBeam
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faBoxOpen,
+  faStickyNote,
+  faSmileBeam
+)
 
 // At widest, approximately 20 emoji are visible in a row,
 // loading 3 rows, could be overkill for narrow picker
@@ -177,13 +189,13 @@ const EmojiPicker = {
         {
           id: 'custom',
           text: this.$t('emoji.custom'),
-          icon: 'icon-smile',
+          icon: 'smile-beam',
           emojis: customEmojis
         },
         {
           id: 'standard',
           text: this.$t('emoji.unicode'),
-          icon: 'icon-picture',
+          icon: 'box-open',
           emojis: filterByKeyword(standardEmojis, this.keyword)
         }
       ]

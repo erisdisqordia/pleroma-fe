@@ -85,7 +85,7 @@ button {
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
 
-  i[class*=icon-] {
+  i[class*=icon-], .svg-inline--fa {
     color: $fallback--text;
     color: var(--btnText, $fallback--text);
   }
@@ -106,7 +106,8 @@ button {
     color: var(--btnPressedText, $fallback--text);
     background-color: $fallback--fg;
     background-color: var(--btnPressed, $fallback--fg);
-    i {
+
+    svg, i {
       color: $fallback--text;
       color: var(--btnPressedText, $fallback--text);
     }
@@ -118,7 +119,8 @@ button {
     color: var(--btnDisabledText, $fallback--text);
     background-color: $fallback--fg;
     background-color: var(--btnDisabled, $fallback--fg);
-    i {
+
+    svg, i {
       color: $fallback--text;
       color: var(--btnDisabledText, $fallback--text);
     }
@@ -131,7 +133,8 @@ button {
     background-color: var(--btnToggled, $fallback--fg);
     box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.3), 0px 1px 0px 0px rgba(0, 0, 0, 0.2) inset, 0px -1px 0px 0px rgba(255, 255, 255, 0.2) inset;
     box-shadow: var(--buttonPressedShadow);
-    i {
+
+    svg, i {
       color: $fallback--text;
       color: var(--btnToggledText, $fallback--text);
     }
@@ -185,7 +188,7 @@ input, textarea, .select, .input {
     opacity: 0.5;
   }
 
-  .icon-down-open {
+  .select-down-icon {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -318,7 +321,7 @@ option {
   }
 }
 
-i[class*=icon-] {
+i[class*=icon-], .svg-inline--fa  {
   color: $fallback--icon;
   color: var(--icon, $fallback--icon);
 }
@@ -365,7 +368,9 @@ i[class*=icon-] {
   flex-wrap: wrap;
 
   .nav-icon {
-    margin-left: 0.4em;
+    margin-left: 0.2em;
+    width: 2em;
+    text-align: center;
   }
 
   &.right {
@@ -386,7 +391,7 @@ i[class*=icon-] {
   box-sizing: border-box;
 
   button {
-    &, i[class*=icon-] {
+    &, i[class*=icon-], svg {
       color: $fallback--text;
       color: var(--btnTopBarText, $fallback--text);
     }
@@ -460,7 +465,7 @@ i[class*=icon-] {
     flex-basis: 970px;
     height: 50px;
 
-    a, a i {
+    a, a i, a svg {
       color: $fallback--link;
       color: var(--topBarLink, $fallback--link);
     }
@@ -807,8 +812,16 @@ nav {
   }
 }
 
-.button-icon {
-  font-size: 1.2em;
+.fa-scale-110 {
+  &.svg-inline--fa {
+    font-size: 1.1em;
+  }
+}
+
+.fa-old-padding {
+  &.svg-inline--fa {
+    padding: 0 0.3em;
+  }
 }
 
 @keyframes shakeError {

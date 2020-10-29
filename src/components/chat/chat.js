@@ -7,6 +7,16 @@ import ChatTitle from '../chat_title/chat_title.vue'
 import chatService from '../../services/chat_service/chat_service.js'
 import { promiseInterval } from '../../services/promise_interval/promise_interval.js'
 import { getScrollPosition, getNewTopPosition, isBottomedOut, scrollableContainerHeight } from './chat_layout_utils.js'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faChevronDown,
+  faChevronLeft
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faChevronDown,
+  faChevronLeft
+)
 
 const BOTTOMED_OUT_OFFSET = 10
 const JUMP_TO_BOTTOM_BUTTON_VISIBILITY_OFFSET = 150

@@ -1,6 +1,29 @@
 import { timelineNames } from '../timeline_menu/timeline_menu.js'
 import { mapState, mapGetters } from 'vuex'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faUsers,
+  faGlobe,
+  faBookmark,
+  faEnvelope,
+  faHome,
+  faComments,
+  faBell,
+  faInfoCircle
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faUsers,
+  faGlobe,
+  faBookmark,
+  faEnvelope,
+  faHome,
+  faComments,
+  faBell,
+  faInfoCircle
+)
+
 const NavPanel = {
   created () {
     if (this.currentUser && this.currentUser.locked) {

@@ -31,7 +31,11 @@
         </div>
       </div>
       <div v-else>
-        <i class="icon-spin4 animate-spin" />
+        <FAIcon
+          icon="circle-notch"
+          spin
+          size="3x"
+        />
       </div>
     </div>
   </Popover>

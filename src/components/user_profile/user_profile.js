@@ -6,6 +6,14 @@ import Conversation from '../conversation/conversation.vue'
 import TabSwitcher from 'src/components/tab_switcher/tab_switcher.js'
 import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faCircleNotch
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faCircleNotch
+)
 
 const FollowerList = withLoadMore({
   fetch: (props, $store) => $store.dispatch('fetchFollowers', props.userId),

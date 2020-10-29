@@ -14,7 +14,10 @@
             class="go-back-button"
             @click="goBack"
           >
-            <i class="button-icon icon-left-open" />
+            <FAIcon
+              size="lg"
+              icon="chevron-left"
+            />
           </a>
           <div class="title text-center">
             <ChatTitle
@@ -58,14 +61,15 @@
               :class="{ 'visible': jumpToBottomButtonVisible }"
               @click="scrollDown({ behavior: 'smooth' })"
             >
-              <i class="icon-down-open">
+              <span>
+                <FAIcon icon="chevron-down" />
                 <div
                   v-if="newMessageCount"
                   class="badge badge-notification unread-chat-count unread-message-count"
                 >
                   {{ newMessageCount }}
                 </div>
-              </i>
+              </span>
             </div>
             <PostStatusForm
               :disable-subject="true"

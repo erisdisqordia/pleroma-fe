@@ -2,6 +2,14 @@ import { filter, trim } from 'lodash'
 import Checkbox from 'src/components/checkbox/checkbox.vue'
 
 import SharedComputedObject from '../helpers/shared_computed_object.js'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faChevronDown
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faChevronDown
+)
 
 const FilteringTab = {
   data () {

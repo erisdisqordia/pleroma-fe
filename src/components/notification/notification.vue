@@ -1,5 +1,5 @@
 <template>
-  <status
+  <Status
     v-if="notification.type === 'mention'"
     :compact="true"
     :statusoid="notification.status"
@@ -18,12 +18,15 @@
         href="#"
         class="unmute"
         @click.prevent="toggleMute"
-      ><i class="button-icon icon-eye-off" /></a>
+      ><FAIcon
+        class="fa-scale-110 fa-old-padding"
+        icon="eye-slash"
+      /></a>
     </div>
     <div
       v-else
-      class="non-mention"
-      :class="[userClass, { highlighted: userStyle }]"
+      class="Notification non-mention"
+      :class="[userClass, { highlighted: userStyle }, '-type--' + notification.type]"
       :style="[ userStyle ]"
     >
       <a
@@ -60,26 +63,39 @@
               :title="'@'+notification.from_profile.screen_name"
             >{{ notification.from_profile.name }}</span>
             <span v-if="notification.type === 'like'">
-              <i class="fa icon-star lit" />
+              <FAIcon
+                class="type-icon"
+                icon="star"
+              />
               <small>{{ $t('notifications.favorited_you') }}</small>
             </span>
             <span v-if="notification.type === 'repeat'">
-              <i
-                class="fa icon-retweet lit"
+              <FAIcon
+                class="type-icon"
+                icon="retweet"
                 :title="$t('tool_tip.repeat')"
               />
               <small>{{ $t('notifications.repeated_you') }}</small>
             </span>
             <span v-if="notification.type === 'follow'">
-              <i class="fa icon-user-plus lit" />
+              <FAIcon
+                class="type-icon"
+                icon="user-plus"
+              />
               <small>{{ $t('notifications.followed_you') }}</small>
             </span>
             <span v-if="notification.type === 'follow_request'">
-              <i class="fa icon-user lit" />
+              <FAIcon
+                class="type-icon"
+                icon="user"
+              />
               <small>{{ $t('notifications.follow_request') }}</small>
             </span>
             <span v-if="notification.type === 'move'">
-              <i class="fa icon-arrow-curved lit" />
+              <FAIcon
+                class="type-icon"
+                icon="suitcase-rolling"
+              />
               <small>{{ $t('notifications.migrated_to') }}</small>
             </span>
             <span v-if="notification.type === 'pleroma:emoji_reaction'">
@@ -120,7 +136,10 @@
             v-if="needMute"
             href="#"
             @click.prevent="toggleMute"
-          ><i class="button-icon icon-eye-off" /></a>
+          ><FAIcon
+            class="fa-scale-110 fa-old-padding"
+            icon="eye-slash"
+          /></a>
         </span>
         <div
           v-if="notification.type === 'follow' || notification.type === 'follow_request'"
@@ -136,13 +155,15 @@
             v-if="notification.type === 'follow_request'"
             style="white-space: nowrap;"
           >
-            <i
-              class="icon-ok button-icon follow-request-accept"
+            <FAIcon
+              icon="check"
+              class="fa-scale-110 fa-old-padding follow-request-accept"
               :title="$t('tool_tip.accept_follow_request')"
               @click="approveUser()"
             />
-            <i
-              class="icon-cancel button-icon follow-request-reject"
+            <FAIcon
+              icon="times"
+              class="fa-scale-110 fa-old-padding follow-request-reject"
               :title="$t('tool_tip.reject_follow_request')"
               @click="denyUser()"
             />

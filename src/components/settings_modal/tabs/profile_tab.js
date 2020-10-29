@@ -8,6 +8,18 @@ import EmojiInput from 'src/components/emoji_input/emoji_input.vue'
 import suggestor from 'src/components/emoji_input/suggestor.js'
 import Autosuggest from 'src/components/autosuggest/autosuggest.vue'
 import Checkbox from 'src/components/checkbox/checkbox.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faTimes,
+  faPlus,
+  faCircleNotch
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faTimes,
+  faPlus,
+  faCircleNotch
+)
 
 const ProfileTab = {
   data () {

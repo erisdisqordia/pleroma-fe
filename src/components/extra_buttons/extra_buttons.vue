@@ -15,14 +15,22 @@
           class="dropdown-item dropdown-item-icon"
           @click.prevent="muteConversation"
         >
-          <i class="icon-eye-off" /><span>{{ $t("status.mute_conversation") }}</span>
+          <FAIcon
+            size="md"
+            fixed-width
+            icon="eye-slash"
+          /><span>{{ $t("status.mute_conversation") }}</span>
         </button>
         <button
           v-if="canMute && status.thread_muted"
           class="dropdown-item dropdown-item-icon"
           @click.prevent="unmuteConversation"
         >
-          <i class="icon-eye-off" /><span>{{ $t("status.unmute_conversation") }}</span>
+          <FAIcon
+            size="md"
+            fixed-width
+            icon="eye-slash"
+          /><span>{{ $t("status.unmute_conversation") }}</span>
         </button>
         <button
           v-if="!status.pinned && canPin"
@@ -30,7 +38,11 @@
           @click.prevent="pinStatus"
           @click="close"
         >
-          <i class="icon-pin" /><span>{{ $t("status.pin") }}</span>
+          <FAIcon
+            size="md"
+            fixed-width
+            icon="thumbtack"
+          /><span>{{ $t("status.pin") }}</span>
         </button>
         <button
           v-if="status.pinned && canPin"
@@ -38,7 +50,11 @@
           @click.prevent="unpinStatus"
           @click="close"
         >
-          <i class="icon-pin" /><span>{{ $t("status.unpin") }}</span>
+          <FAIcon
+            size="md"
+            fixed-width
+            icon="thumbtack"
+          /><span>{{ $t("status.unpin") }}</span>
         </button>
         <button
           v-if="!status.bookmarked"
@@ -46,7 +62,11 @@
           @click.prevent="bookmarkStatus"
           @click="close"
         >
-          <i class="icon-bookmark-empty" /><span>{{ $t("status.bookmark") }}</span>
+          <FAIcon
+            size="md"
+            fixed-width
+            :icon="['far', 'bookmark']"
+          /><span>{{ $t("status.bookmark") }}</span>
         </button>
         <button
           v-if="status.bookmarked"
@@ -54,7 +74,11 @@
           @click.prevent="unbookmarkStatus"
           @click="close"
         >
-          <i class="icon-bookmark" /><span>{{ $t("status.unbookmark") }}</span>
+          <FAIcon
+            size="md"
+            fixed-width
+            icon="bookmark"
+          /><span>{{ $t("status.unbookmark") }}</span>
         </button>
         <button
           v-if="canDelete"
@@ -62,21 +86,32 @@
           @click.prevent="deleteStatus"
           @click="close"
         >
-          <i class="icon-cancel" /><span>{{ $t("status.delete") }}</span>
+          <FAIcon
+            size="md"
+            fixed-width
+            icon="times"
+          /><span>{{ $t("status.delete") }}</span>
         </button>
         <button
           class="dropdown-item dropdown-item-icon"
           @click.prevent="copyLink"
           @click="close"
         >
-          <i class="icon-share" /><span>{{ $t("status.copy_link") }}</span>
+          <FAIcon
+            size="md"
+            fixed-width
+            icon="share-alt"
+          /><span>{{ $t("status.copy_link") }}</span>
         </button>
       </div>
     </div>
-    <i
-      slot="trigger"
-      class="icon-ellipsis button-icon"
-    />
+    <span slot="trigger">
+      <FAIcon
+        class="ExtraButtons fa-scale-110 fa-old-padding"
+        icon="ellipsis-h"
+        size="md"
+      />
+    </span>
   </Popover>
 </template>
 
@@ -85,8 +120,9 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.icon-ellipsis {
+.ExtraButtons {
   cursor: pointer;
+  position: static;
 
   &:hover,
   .extra-button-popover.open & {

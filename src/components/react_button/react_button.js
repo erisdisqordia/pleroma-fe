@@ -1,4 +1,8 @@
 import Popover from '../popover/popover.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSmileBeam } from '@fortawesome/free-regular-svg-icons'
+
+library.add(faSmileBeam)
 
 const ReactButton = {
   props: ['status'],

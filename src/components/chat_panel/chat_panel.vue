@@ -11,9 +11,9 @@
       >
         <div class="title">
           <span>{{ $t('shoutbox.title') }}</span>
-          <i
+          <FAIcon
             v-if="floating"
-            class="icon-cancel"
+            icon="times"
           />
         </div>
       </div>
@@ -63,7 +63,10 @@
         @click.stop.prevent="togglePanel"
       >
         <div class="title">
-          <i class="icon-megaphone" />
+          <FAIcon
+            class="icon"
+            icon="bullhorn"
+          />
           {{ $t('shoutbox.title') }}
         </div>
       </div>
@@ -87,7 +90,8 @@
 .chat-panel {
   .chat-heading {
     cursor: pointer;
-    .icon-comment-empty {
+
+    .icon {
       color: $fallback--text;
       color: var(--text, $fallback--text);
     }

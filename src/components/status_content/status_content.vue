@@ -55,29 +55,29 @@
         @click.prevent="toggleShowMore"
       >
         {{ $t("status.show_content") }}
-        <span
+        <FAIcon
           v-if="attachmentTypes.includes('image')"
-          class="icon-picture"
+          icon="image"
         />
-        <span
+        <FAIcon
           v-if="attachmentTypes.includes('video')"
-          class="icon-video"
+          icon="video"
         />
-        <span
+        <FAIcon
           v-if="attachmentTypes.includes('audio')"
-          class="icon-music"
+          icon="music"
         />
-        <span
+        <FAIcon
           v-if="attachmentTypes.includes('unknown')"
-          class="icon-doc"
+          icon="file"
         />
-        <span
+        <FAIcon
           v-if="status.poll && status.poll.options"
-          class="icon-chart-bar"
+          icon="poll-h"
         />
-        <span
+        <FAIcon
           v-if="status.card"
-          class="icon-link"
+          icon="link"
         />
       </a>
       <a
@@ -182,6 +182,10 @@ $status-margin: 0.75em;
     text-align: center;
     display: inline-block;
     word-break: break-all;
+
+    svg {
+      color: inherit;
+    }
   }
 
   img, video {

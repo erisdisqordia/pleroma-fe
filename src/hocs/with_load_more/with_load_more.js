@@ -3,6 +3,16 @@ import isEmpty from 'lodash/isEmpty'
 import { getComponentProps } from '../../services/component_utils/component_utils'
 import './with_load_more.scss'
 
+import { FontAwesomeIcon as FAIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faCircleNotch
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faCircleNotch
+)
+
 const withLoadMore = ({
   fetch, // function to fetch entries and return a promise
   select, // function to select data from store
@@ -82,7 +92,7 @@ const withLoadMore = ({
           </WrappedComponent>
           <div class="with-load-more-footer">
             {this.error && <a onClick={this.fetchEntries} class="alert error">{this.$t('general.generic_error')}</a>}
-            {!this.error && this.loading && <i class="icon-spin3 animate-spin"/>}
+            {!this.error && this.loading && <FAIcon spin icon="circle-notch"/>}
             {!this.error && !this.loading && !this.bottomedOut && <a onClick={this.fetchEntries}>{this.$t('general.more')}</a>}
           </div>
         </div>

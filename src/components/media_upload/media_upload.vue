@@ -7,13 +7,16 @@
       class="label"
       :title="$t('tool_tip.media_upload')"
     >
-      <i
+      <FAIcon
         v-if="uploading"
-        class="progress-icon icon-spin4 animate-spin"
+        class="progress-icon"
+        icon="circle-notch"
+        spin
       />
-      <i
+      <FAIcon
         v-if="!uploading"
-        class="new-icon icon-upload"
+        class="new-icon"
+        icon="upload"
       />
       <input
         v-if="uploadReady"
@@ -39,16 +42,6 @@
 
   .new-icon {
     cursor: pointer;
-  }
-
-  .progress-icon {
-    display: inline-block;
-    line-height: 0;
-    &::before {
-      /* Overriding fontello to achieve the perfect speeeen */
-      margin: 0;
-      line-height: 0;
-    }
   }
 }
  </style>

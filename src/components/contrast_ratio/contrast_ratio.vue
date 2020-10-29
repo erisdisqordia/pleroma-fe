@@ -8,13 +8,13 @@
       class="rating"
     >
       <span v-if="contrast.aaa">
-        <i class="icon-thumbs-up-alt" />
+        <FAIcon icon="thumbs-up" />
       </span>
       <span v-if="!contrast.aaa && contrast.aa">
-        <i class="icon-adjust" />
+        <FAIcon icon="adjust" />
       </span>
       <span v-if="!contrast.aaa && !contrast.aa">
-        <i class="icon-attention" />
+        <FAIcon icon="exclamation-triangle" />
       </span>
     </span>
     <span
@@ -23,19 +23,32 @@
       :title="hint_18pt"
     >
       <span v-if="contrast.laaa">
-        <i class="icon-thumbs-up-alt" />
+        <FAIcon icon="thumbs-up" />
       </span>
       <span v-if="!contrast.laaa && contrast.laa">
-        <i class="icon-adjust" />
+        <FAIcon icon="adjust" />
       </span>
       <span v-if="!contrast.laaa && !contrast.laa">
-        <i class="icon-attention" />
+        <FAIcon icon="exclamation-triangle" />
       </span>
     </span>
   </span>
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faAdjust,
+  faExclamationTriangle,
+  faThumbsUp
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faAdjust,
+  faExclamationTriangle,
+  faThumbsUp
+)
+
 export default {
   props: {
     large: {
@@ -85,6 +98,7 @@ export default {
   .rating {
     display: inline-block;
     text-align: center;
+    margin-left: 0.5em;
   }
 }
 </style>

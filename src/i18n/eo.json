@@ -73,7 +73,7 @@
     "dms": "Rektaj mesaĝoj",
     "public_tl": "Publika tempolinio",
     "timeline": "Tempolinio",
-    "twkn": "La tuta konata reto",
+    "twkn": "Konata reto",
     "user_search": "Serĉi uzantojn",
     "who_to_follow": "Kiun aboni",
     "preferences": "Agordoj",
@@ -81,7 +81,8 @@
     "search": "Serĉi",
     "interactions": "Interagoj",
     "administration": "Administrado",
-    "bookmarks": "Legosignoj"
+    "bookmarks": "Legosignoj",
+    "timelines": "Historioj"
   },
   "notifications": {
     "broken_favorite": "Nekonata stato, serĉante ĝin…",
@@ -452,7 +453,9 @@
       "warning_of_generate_new_codes": "Kiam vi estigos novajn rehavajn kodojn, viaj malnovaj ne plu funkcios.",
       "generate_new_recovery_codes": "Estigi novajn rehavajn kodojn",
       "title": "Duobla aŭtentikigo",
-      "otp": "OTP"
+      "otp": "OTP",
+      "wait_pre_setup_otp": "antaŭagordante OTP",
+      "setup_otp": "Agordi OTP"
     },
     "enter_current_password_to_confirm": "Enigu vian pasvorton por konfirmi vian identecon",
     "security": "Sekureco",

@@ -455,7 +455,8 @@
       "title": "Duobla aŭtentikigo",
       "otp": "OTP",
       "wait_pre_setup_otp": "antaŭagordante OTP",
-      "setup_otp": "Agordi OTP"
+      "setup_otp": "Agordi OTP",
+      "confirm_and_enable": "Konfirmi kaj ŝalti OTP"
     },
     "enter_current_password_to_confirm": "Enigu vian pasvorton por konfirmi vian identecon",
     "security": "Sekureco",

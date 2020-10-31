@@ -824,22 +824,6 @@ nav {
   background-color: var(--panel, $fallback--fg);
 }
 
-.unread-chat-count {
-  font-size: 0.9em;
-  font-weight: bolder;
-  font-style: normal;
-  position: absolute;
-  right: 0.6rem;
-  padding: 0 0.3em;
-  min-width: 1.3rem;
-  min-height: 1.3rem;
-  max-height: 1.3rem;
-  line-height: 1.3rem;
-  max-width: 10em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .chat-layout {
   // Needed for smoother chat navigation in the desktop Safari (otherwise the chat layout "jumps" as the chat opens).
   overflow: hidden;

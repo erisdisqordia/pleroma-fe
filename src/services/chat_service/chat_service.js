@@ -78,6 +78,12 @@ const add = (storage, { messages: newMessages, updateMaxId = true }) => {
     if (message.fakeId) {
       const fakeMessage = storage.idIndex[message.fakeId]
       if (fakeMessage) {
+        // In case the same id exists (chat update before POST response)
+        // make sure to remove the older duplicate message.
+        if (storage.idIndex[message.id]) {
+          delete storage.idIndex[message.id]
+          storage.messages = storage.messages.filter(msg => msg.id !== message.id)
+        }
         Object.assign(fakeMessage, message, { error: false })
         delete fakeMessage['fakeId']
         storage.idIndex[fakeMessage.id] = fakeMessage

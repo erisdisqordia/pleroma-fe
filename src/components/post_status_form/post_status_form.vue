@@ -87,7 +87,8 @@
           </a>
           <div
             v-show="previewLoading"
-            class="preview-spinner">
+            class="preview-spinner"
+          >
             <FAIcon
               class="fa-old-padding"
               spin

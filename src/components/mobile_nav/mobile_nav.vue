@@ -1,7 +1,7 @@
 <template>
   <div
     class="MobileNav"
-    >
+  >
     <nav
       id="nav"
       class="mobile-nav"

@@ -37,7 +37,7 @@ export default {
     GlobalNoticeList
   },
   data: () => ({
-    mobileActivePanel: 'timeline',
+    mobileActivePanel: 'timeline'
   }),
   created () {
     // Load the locale from the storage

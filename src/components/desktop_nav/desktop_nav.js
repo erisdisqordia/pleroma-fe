@@ -69,7 +69,7 @@ export default {
     hideSitename () { return this.$store.state.instance.hideSitename },
     logoLeft () { return this.$store.state.instance.logoLeft },
     currentUser () { return this.$store.state.users.currentUser },
-    privateMode () { return this.$store.state.instance.private },
+    privateMode () { return this.$store.state.instance.private }
   },
   methods: {
     scrollToTop () {
@@ -84,6 +84,6 @@ export default {
     },
     openSettingsModal () {
       this.$store.dispatch('openSettingsModal')
-    },
+    }
   }
 }

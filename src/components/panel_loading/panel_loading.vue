@@ -18,6 +18,8 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 library.add(
   faCircleNotch
 )
+
+export default {}
 </script>
 
 <style lang="scss">

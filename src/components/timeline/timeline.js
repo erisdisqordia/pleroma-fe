@@ -2,7 +2,7 @@ import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import Conversation from '../conversation/conversation.vue'
 import TimelineMenu from '../timeline_menu/timeline_menu.vue'
-import { throttle, keyBy } from 'lodash'
+import { debounce, throttle, keyBy } from 'lodash'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
@@ -40,7 +40,8 @@ const Timeline = {
       paused: false,
       unfocused: false,
       bottomedOut: false,
-      virtualScrollIndex: 0
+      virtualScrollIndex: 0,
+      blockingClicks: false
     }
   },
   components: {
@@ -70,8 +71,10 @@ const Timeline = {
       }
     },
     classes () {
+      let rootClasses = !this.embedded ? ['panel', 'panel-default'] : []
+      if (this.blockingClicks) rootClasses = rootClasses.concat(['-blocked'])
       return {
-        root: ['timeline'].concat(!this.embedded ? ['panel', 'panel-default'] : []),
+        root: rootClasses,
         header: ['timeline-heading'].concat(!this.embedded ? ['panel-heading'] : []),
         body: ['timeline-body'].concat(!this.embedded ? ['panel-body'] : []),
         footer: ['timeline-footer'].concat(!this.embedded ? ['panel-footer'] : [])
@@ -130,6 +133,15 @@ const Timeline = {
     this.$store.commit('setLoading', { timeline: this.timelineName, value: false })
   },
   methods: {
+    stopBlockingClicks: debounce(function () {
+      this.blockingClicks = false
+    }, 1000),
+    blockClicksTemporarily () {
+      if (!this.blockingClicks) {
+        this.blockingClicks = true
+      }
+      this.stopBlockingClicks()
+    },
     handleShortKey (e) {
       // Ignore when input fields are focused
       if (['textarea', 'input'].includes(e.target.tagName.toLowerCase())) return
@@ -141,6 +153,7 @@ const Timeline = {
         this.$store.commit('queueFlush', { timeline: this.timelineName, id: 0 })
         this.fetchOlderStatuses()
       } else {
+        this.blockClicksTemporarily()
         this.$store.commit('showNewStatuses', { timeline: this.timelineName })
         this.paused = false
       }

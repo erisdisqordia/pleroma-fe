@@ -16,7 +16,6 @@
           @click.prevent="muteConversation"
         >
           <FAIcon
-            size="md"
             fixed-width
             icon="eye-slash"
           /><span>{{ $t("status.mute_conversation") }}</span>
@@ -27,7 +26,6 @@
           @click.prevent="unmuteConversation"
         >
           <FAIcon
-            size="md"
             fixed-width
             icon="eye-slash"
           /><span>{{ $t("status.unmute_conversation") }}</span>
@@ -39,7 +37,6 @@
           @click="close"
         >
           <FAIcon
-            size="md"
             fixed-width
             icon="thumbtack"
           /><span>{{ $t("status.pin") }}</span>
@@ -51,7 +48,6 @@
           @click="close"
         >
           <FAIcon
-            size="md"
             fixed-width
             icon="thumbtack"
           /><span>{{ $t("status.unpin") }}</span>
@@ -63,7 +59,6 @@
           @click="close"
         >
           <FAIcon
-            size="md"
             fixed-width
             :icon="['far', 'bookmark']"
           /><span>{{ $t("status.bookmark") }}</span>
@@ -75,7 +70,6 @@
           @click="close"
         >
           <FAIcon
-            size="md"
             fixed-width
             icon="bookmark"
           /><span>{{ $t("status.unbookmark") }}</span>
@@ -87,7 +81,6 @@
           @click="close"
         >
           <FAIcon
-            size="md"
             fixed-width
             icon="times"
           /><span>{{ $t("status.delete") }}</span>
@@ -98,7 +91,6 @@
           @click="close"
         >
           <FAIcon
-            size="md"
             fixed-width
             icon="share-alt"
           /><span>{{ $t("status.copy_link") }}</span>
@@ -109,7 +101,6 @@
       <FAIcon
         class="ExtraButtons fa-scale-110 fa-old-padding"
         icon="ellipsis-h"
-        size="md"
       />
     </span>
   </Popover>

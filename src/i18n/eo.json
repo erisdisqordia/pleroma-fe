@@ -5,7 +5,7 @@
   "features_panel": {
     "chat": "Babilejo",
     "gopher": "Gopher",
-    "media_proxy": "Vidaŭdaĵa prokurilo",
+    "media_proxy": "Vidaŭdaĵa retperilo",
     "scope_options": "Agordoj de amplekso",
     "text_limit": "Limo de teksto",
     "title": "Funkcioj",
@@ -33,7 +33,8 @@
     "show_more": "Montri plion",
     "retry": "Reprovi",
     "error_retry": "Bonvolu reprovi",
-    "loading": "Enlegante…"
+    "loading": "Enlegante…",
+    "peek": "Antaŭmontri"
   },
   "image_cropper": {
     "crop_picture": "Tondi bildon",
@@ -70,9 +71,9 @@
     "friend_requests": "Petoj pri abono",
     "mentions": "Mencioj",
     "dms": "Rektaj mesaĝoj",
-    "public_tl": "Publika tempolinio",
-    "timeline": "Tempolinio",
-    "twkn": "La tuta konata reto",
+    "public_tl": "Publika historio",
+    "timeline": "Historio",
+    "twkn": "Konata reto",
     "user_search": "Serĉi uzantojn",
     "who_to_follow": "Kiun aboni",
     "preferences": "Agordoj",
@@ -80,7 +81,8 @@
     "search": "Serĉi",
     "interactions": "Interagoj",
     "administration": "Administrado",
-    "bookmarks": "Legosignoj"
+    "bookmarks": "Legosignoj",
+    "timelines": "Historioj"
   },
   "notifications": {
     "broken_favorite": "Nekonata stato, serĉante ĝin…",
@@ -107,14 +109,14 @@
       "text/html": "HTML"
     },
     "content_warning": "Temo (malnepra)",
-    "default": "Ĵus alvenis al la Universala Kongreso!",
+    "default": "Ĵus alvenis Esperantujon!",
     "direct_warning": "Ĉi tiu afiŝo estos videbla nur por ĉiuj menciitaj uzantoj.",
     "posting": "Afiŝante",
     "scope": {
       "direct": "Rekta – Afiŝi nur al menciitaj uzantoj",
       "private": "Nur abonantoj – Afiŝi nur al abonantoj",
-      "public": "Publika – Afiŝi al publikaj tempolinioj",
-      "unlisted": "Nelistigita – Ne afiŝi al publikaj tempolinioj"
+      "public": "Publika – Afiŝi al publikaj historioj",
+      "unlisted": "Nelistigita – Ne afiŝi al publikaj historioj"
     },
     "scope_notice": {
       "unlisted": "Ĉi tiu afiŝo ne estos videbla en la Publika historio kaj La tuta konata reto",
@@ -193,7 +195,7 @@
     "foreground": "Malfono",
     "general": "Ĝenerala",
     "hide_attachments_in_convo": "Kaŝi kunsendaĵojn en interparoloj",
-    "hide_attachments_in_tl": "Kaŝi kunsendaĵojn en tempolinio",
+    "hide_attachments_in_tl": "Kaŝi kunsendaĵojn en historioj",
     "max_thumbnails": "Maksimuma nombro da bildetoj en afiŝo",
     "hide_isp": "Kaŝi breton propran al nodo",
     "preload_images": "Antaŭ-enlegi bildojn",
@@ -246,7 +248,7 @@
     "profile_banner": "Rubando de profilo",
     "profile_tab": "Profilo",
     "radii_help": "Agordi fasadan rondigon de randoj (bildere)",
-    "replies_in_timeline": "Respondoj en tempolinio",
+    "replies_in_timeline": "Respondoj en historioj",
     "reply_visibility_all": "Montri ĉiujn respondojn",
     "reply_visibility_following": "Montri nur respondojn por mi aŭ miaj abonatoj",
     "reply_visibility_self": "Montri nur respondojn por mi",
@@ -297,7 +299,12 @@
           "older_version_imported": "La enportita dosiero estis farita per pli malnova versio de PleromaFE.",
           "future_version_imported": "La enportita dosiero estis farita per pli nova versio de PleromaFE.",
           "v2_imported": "La dosiero, kiun vi enportis, estis farita por malnova versio de PleromaFE. Ni provas maksimumigi interkonformecon, sed tamen eble montriĝos misoj.",
-          "upgraded_from_v2": "PleromaFE estis ĝisdatigita; la haŭto eble aspektos malsame ol kiel vi ĝin memoras."
+          "upgraded_from_v2": "PleromaFE estis ĝisdatigita; la haŭto eble aspektos malsame ol kiel vi ĝin memoras.",
+          "snapshot_missing": "Neniu momentokopio de haŭto estis en la dosiero, ĝi povas aspekti iom malsame ol oni intencis.",
+          "snapshot_present": "Ĉiuj valoroj estas transpasataj, ĉar momentokopio de haŭto estas enlegita. Vi povas enlegi anstataŭe la aktualajn datumojn de haŭto.",
+          "snapshot_source_mismatch": "Versioj konfliktas: plej probable la fasado estis reirigita kaj ree ĝisdatigita; se vi ŝanĝis la haŭton per pli malnova versio de la fasado, vi probable volas uzi la malnovan version. Alie uzu la novan.",
+          "migration_napshot_gone": "Ial mankis momentokopio; io povus aspekti malsame ol en via memoro.",
+          "migration_snapshot_ok": "Certige, momentokopio de la haŭto enlegiĝis. Vi povas provi enlegi datumojn de la haŭto."
         },
         "use_source": "Nova versio",
         "use_snapshot": "Malnova versio",
@@ -352,10 +359,11 @@
         "icons": "Bildsimboloj",
         "poll": "Grafo de enketo",
         "underlay": "Subtavolo",
-        "popover": "Ŝpruchelpiloj, menuoj",
+        "popover": "Ŝprucaĵoj, menuoj",
         "post": "Afiŝoj/Priskriboj de uzantoj",
         "alert_neutral": "Neŭtrala",
-        "alert_warning": "Averto"
+        "alert_warning": "Averto",
+        "toggled": "Ŝaltita"
       },
       "radii": {
         "_tab_label": "Rondeco"
@@ -388,7 +396,8 @@
           "buttonPressed": "Butono (premita)",
           "buttonPressedHover": "Butono (premita kaj je ŝvebo)",
           "input": "Eniga kampo"
-        }
+        },
+        "hintV3": "Kolorojn de ombroj vi ankaŭ povas skribi per la sistemo {0}."
       },
       "fonts": {
         "_tab_label": "Tiparoj",
@@ -411,7 +420,7 @@
         "button": "Butono",
         "text": "Kelko da pliaj {0} kaj {1}",
         "mono": "enhavo",
-        "input": "Ĵus alvenis al la Universala Kongreso!",
+        "input": "Ĵus alvenis Esperantujon!",
         "faint_link": "helpan manlibron",
         "fine_print": "Legu nian {0} por nenion utilan ekscii!",
         "header_faint": "Tio estas en ordo",
@@ -420,7 +429,7 @@
       }
     },
     "discoverable": "Permesi trovon de ĉi tiu konto en serĉrezultoj kaj aliaj servoj",
-    "mutes_and_blocks": "Silentigitoj kaj blokitoj",
+    "mutes_and_blocks": "Blokado kaj silentigoj",
     "chatMessageRadius": "Babileja mesaĝo",
     "changed_email": "Retpoŝtadreso sukcese ŝanĝiĝis!",
     "change_email_error": "Eraris ŝanĝo de via retpoŝtadreso.",
@@ -448,7 +457,10 @@
       "warning_of_generate_new_codes": "Kiam vi estigos novajn rehavajn kodojn, viaj malnovaj ne plu funkcios.",
       "generate_new_recovery_codes": "Estigi novajn rehavajn kodojn",
       "title": "Duobla aŭtentikigo",
-      "otp": "OTP"
+      "otp": "OTP",
+      "wait_pre_setup_otp": "antaŭagordante OTP",
+      "setup_otp": "Agordi OTP",
+      "confirm_and_enable": "Konfirmi kaj ŝalti OTP"
     },
     "enter_current_password_to_confirm": "Enigu vian pasvorton por konfirmi vian identecon",
     "security": "Sekureco",
@@ -480,11 +492,11 @@
     },
     "import_blocks_from_a_csv_file": "Enporti blokitojn el CSV-dosiero",
     "hide_muted_posts": "Kaŝi afiŝojn de silentigitaj uzantoj",
-    "emoji_reactions_on_timeline": "Montri bildosignajn reagojn en la tempolinio",
+    "emoji_reactions_on_timeline": "Montri bildosignajn reagojn en historioj",
     "pad_emoji": "Meti spacetojn ĉirkaŭ bildosigno post ties elekto",
     "domain_mutes": "Retnomoj",
     "notification_blocks": "Blokinte uzanton vi malabonos ĝin kaj haltigos ĉiujn sciigojn.",
-    "notification_mutes": "Por ne plu ricevi sciigojn de certa uzanto, silentigu.",
+    "notification_mutes": "Por ne plu ricevi sciigojn de certa uzanto, silentigu ĝin.",
     "notification_setting_hide_notification_contents": "Kaŝi la sendinton kaj la enhavojn de pasivaj sciigoj",
     "notification_setting_privacy": "Privateco",
     "notification_setting_block_from_strangers": "Bloki sciigojn de uzantoj, kiujn vi ne abonas",
@@ -495,7 +507,14 @@
       "backend_version": "Versio de internaĵo",
       "title": "Versio"
     },
-    "accent": "Emfazo"
+    "accent": "Emfazo",
+    "virtual_scrolling": "Optimumigi bildigon de historioj",
+    "import_mutes_from_a_csv_file": "Enporti silentigojn el CSV-dosiero",
+    "mutes_imported": "Silentigoj enportiĝis! Traktado daŭros iom da tempo.",
+    "mute_import_error": "Eraris enporto de silentigoj",
+    "mute_import": "Enporto de silentigoj",
+    "mute_export_button": "Elportu viajn silentigojn al CSV-dosiero",
+    "mute_export": "Elporto de silentigoj"
   },
   "timeline": {
     "collapse": "Maletendi",
@@ -503,7 +522,7 @@
     "error_fetching": "Eraris ĝisdatigo",
     "load_older": "Montri pli malnovajn statojn",
     "no_retweet_hint": "Afiŝo estas markita kiel rekta aŭ nur por abonantoj, kaj ne eblas ĝin ripeti",
-    "repeated": "ripetita",
+    "repeated": "ripetis",
     "show_new": "Montri novajn",
     "up_to_date": "Ĝisdata",
     "no_more_statuses": "Neniuj pliaj statoj",
@@ -648,21 +667,22 @@
         "media_nsfw": "Devige marki vidaŭdaĵojn konsternaj",
         "media_removal_desc": "Ĉi tiu nodo forigas vidaŭdaĵojn de afiŝoj el la jenaj nodoj:",
         "media_removal": "Forigo de vidaŭdaĵoj",
-        "ftl_removal": "Forigo de la historio de «La tuta konata reto»",
+        "ftl_removal": "Forigo el la historio de «La tuta konata reto»",
         "quarantine_desc": "Ĉi tiu nodo sendos nur publikajn aﬁŝojn al la jenaj nodoj:",
         "quarantine": "Kvaranteno",
         "reject_desc": "Ĉi tiu nodo ne akceptos mesaĝojn de la jenaj nodoj:",
         "reject": "Rifuzi",
         "accept_desc": "Ĉi tiu nodo nur akceptas mesaĝojn de la jenaj nodoj:",
         "accept": "Akcepti",
-        "simple_policies": "Specialaj politikoj de la nodo"
+        "simple_policies": "Specialaj politikoj de la nodo",
+        "ftl_removal_desc": "Ĉi tiu nodo forigas la jenajn nodojn el la historio de «La tuta konata reto»:"
       },
       "mrf_policies": "Ŝaltis politikon de Mesaĝa ŝanĝilaro (MRF)",
       "keyword": {
         "is_replaced_by": "→",
         "replace": "Anstataŭigi",
         "reject": "Rifuzi",
-        "ftl_removal": "Forigo de la historio de «La tuta konata reto»",
+        "ftl_removal": "Forigo el la historio de «La tuta konata reto»",
         "keyword_policies": "Politiko pri ŝlosilvortoj"
       },
       "federation": "Federado",
@@ -707,7 +727,8 @@
     "pin": "Fiksi al profilo",
     "delete": "Forigi staton",
     "repeats": "Ripetoj",
-    "favorites": "Ŝatataj"
+    "favorites": "Ŝatoj",
+    "status_deleted": "Ĉi tiu afiŝo foriĝis"
   },
   "time": {
     "years_short": "{0}j",
@@ -769,7 +790,8 @@
     "new": "Nova babilo",
     "chats": "Babiloj",
     "delete": "Forigi",
-    "you": "Vi:"
+    "you": "Vi:",
+    "message_user": "Mesaĝi al {nickname}"
   },
   "password_reset": {
     "password_reset_required_but_mailer_is_disabled": "Vi devas restarigi vian pasvorton, sed restarigado de pasvortoj estas malŝaltita. Bonvolu kontakti la administranton de via nodo.",
@@ -791,5 +813,8 @@
     "additional_comments": "Aldonaj komentoj",
     "add_comment_description": "Ĉi tiu raporto sendiĝos al reguligistoj de via nodo. Vi povas komprenigi kial vi raportas ĉi tiun konton sube:",
     "title": "Raportante {0}"
+  },
+  "shoutbox": {
+    "title": "Kriujo"
   }
 }

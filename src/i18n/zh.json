@@ -103,7 +103,7 @@
     "repeated_you": "转发了你的状态",
     "no_more_notifications": "没有更多的通知",
     "reacted_with": "作出了 {0} 的反应",
-    "migrated_to": "迁移到",
+    "migrated_to": "迁移到了",
     "follow_request": "想要关注你"
   },
   "polls": {
@@ -165,7 +165,7 @@
   "registration": {
     "bio": "简介",
     "email": "电子邮箱",
-    "fullname": "全名",
+    "fullname": "显示名称",
     "password_confirm": "确认密码",
     "registration": "注册",
     "token": "邀请码",
@@ -322,7 +322,7 @@
     "search_user_to_mute": "搜索你想要隐藏的用户",
     "security_tab": "安全",
     "scope_copy": "回复时的复制范围（私信是总是复制的）",
-    "minimal_scopes_mode": "最小发文范围",
+    "minimal_scopes_mode": "使发文可见范围的选项最少化",
     "set_new_avatar": "设置新头像",
     "set_new_profile_background": "设置新的个人资料背景",
     "set_new_profile_banner": "设置新的横幅图片",

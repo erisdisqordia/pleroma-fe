@@ -10,7 +10,14 @@ export const promiseInterval = (promiseCall, interval) => {
   let timeout = null
 
   const func = () => {
-    promiseCall().finally(() => {
+    const promise = promiseCall()
+    // something unexpected happened and promiseCall did not
+    // return a promise, abort the loop.
+    if (!(promise && promise.finally)) {
+      console.warn('promiseInterval: promise call did not return a promise, stopping interval.')
+      return
+    }
+    promise.finally(() => {
       if (stopped) return
       timeout = window.setTimeout(func, interval)
     })

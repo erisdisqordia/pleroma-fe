@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed chats list not updating its order when new messages come in
 - Fixed chat messages sometimes getting lost when you receive a message at the same time
 - Fixed clicking NSFW hider through status popover
+- Fixed chat-view back button being hard to click
+- Fixed fresh chat notifications being cleared immediately while leaving the chat view and not having time to actually see the messages
 
 ### Changed
 - Clicking immediately when timeline shifts is now blocked to prevent misclicks

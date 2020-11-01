@@ -91,6 +91,7 @@
   }
 
   li {
+    position: relative;
     border-bottom: 1px solid;
     border-color: $fallback--border;
     border-color: var(--border, $fallback--border);
@@ -153,6 +154,23 @@
 
   .fa-scale-110 {
     margin-right: 0.8em;
+  }
+
+  .unread-chat-count {
+    font-size: 0.9em;
+    font-weight: bolder;
+    font-style: normal;
+    position: absolute;
+    right: 0.6rem;
+    top: 1.25em;
+    padding: 0 0.3em;
+    min-width: 1.3rem;
+    min-height: 1.3rem;
+    max-height: 1.3rem;
+    line-height: 1.3rem;
+    max-width: 10em;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 </style>

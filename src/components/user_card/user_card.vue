@@ -282,6 +282,11 @@
 .user-card {
   position: relative;
 
+  &:hover .Avatar {
+    --_still-image-img-visibility: visible;
+    --_still-image-canvas-visibility: hidden;
+  }
+
   .panel-heading {
     padding: .5em 0;
     text-align: center;
@@ -382,18 +387,15 @@
     max-height: 56px;
 
     .Avatar {
+      --_avatarShadowBox: var(--avatarShadow);
+      --_avatarShadowFilter: var(--avatarShadowFilter);
+      --_avatarShadowInset: var(--avatarShadowInset);
+
       flex: 1 0 100%;
       width: 56px;
       height: 56px;
-      box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
-      box-shadow: var(--avatarShadow);
       object-fit: cover;
     }
-  }
-
-  &:hover .Avatar {
-    --still-image-img: visible;
-    --still-image-canvas: hidden;
   }
 
   &-avatar-link {

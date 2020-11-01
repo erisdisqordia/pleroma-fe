@@ -85,11 +85,16 @@
             {{ $t('post_status.preview') }}
             <FAIcon :icon="showPreview ? 'chevron-left' : 'chevron-right'" />
           </a>
-          <FAIcon
+          <div
             v-show="previewLoading"
-            spin
-            icon="circle-notch"
-          />
+            class="preview-spinner"
+          >
+            <FAIcon
+              class="fa-old-padding"
+              spin
+              icon="circle-notch"
+            />
+          </div>
         </div>
         <div
           v-if="showPreview"
@@ -383,12 +388,12 @@
   }
 
   .preview-heading {
-    padding-left: 0.5em;
     display: flex;
-    width: 100%;
+    padding-left: 0.5em;
   }
 
   .preview-toggle {
+    flex: 1;
     cursor: pointer;
     user-select: none;
 

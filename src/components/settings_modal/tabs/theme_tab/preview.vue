@@ -126,6 +126,8 @@ library.add(
   faRetweet,
   faReply
 )
+
+export default {}
 </script>
 
 <style lang="scss">

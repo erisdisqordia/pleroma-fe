@@ -628,7 +628,8 @@
     "copy_link": "Copiar el enlace al estado",
     "status_unavailable": "Estado no disponible",
     "bookmark": "Marcar",
-    "unbookmark": "Desmarcar"
+    "unbookmark": "Desmarcar",
+    "status_deleted": "Esta entrada ha sido eliminada"
   },
   "user_card": {
     "approve": "Aprobar",

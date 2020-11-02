@@ -47,10 +47,10 @@ describe('chatService', () => {
 
       chatService.resetNewMessageCount(chat)
       expect(chat.newMessageCount).to.eql(0)
+      expect(chat.lastSeenMessageId).to.eql(message2.id)
 
-      const createdAt = new Date()
-      createdAt.setSeconds(createdAt.getSeconds() + 10)
-      chatService.add(chat, { messages: [ { message3, created_at: createdAt } ] })
+      // Add message with higher id
+      chatService.add(chat, { messages: [ message3 ] })
       expect(chat.newMessageCount).to.eql(1)
     })
   })

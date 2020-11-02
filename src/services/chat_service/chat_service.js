@@ -6,7 +6,7 @@ const empty = (chatId) => {
     idempotencyKeyIndex: {},
     messages: [],
     newMessageCount: 0,
-    lastSeenTimestamp: 0,
+    lastSeenMessageId: '0',
     chatId: chatId,
     minId: undefined,
     maxId: undefined
@@ -27,7 +27,7 @@ const clear = (storage) => {
 
   storage.messages = storage.messages.filter(m => failedMessageIds.includes(m.id))
   storage.newMessageCount = 0
-  storage.lastSeenTimestamp = 0
+  storage.lastSeenMessageId = '0'
   storage.minId = undefined
   storage.maxId = undefined
 }
@@ -104,7 +104,7 @@ const add = (storage, { messages: newMessages, updateMaxId = true }) => {
     }
 
     if (!storage.idIndex[message.id] && !isConfirmation(storage, message)) {
-      if (storage.lastSeenTimestamp < message.created_at) {
+      if (storage.lastSeenMessageId < message.id) {
         storage.newMessageCount++
       }
       storage.idIndex[message.id] = message
@@ -122,7 +122,7 @@ const isConfirmation = (storage, message) => {
 const resetNewMessageCount = (storage) => {
   if (!storage) { return }
   storage.newMessageCount = 0
-  storage.lastSeenTimestamp = new Date()
+  storage.lastSeenMessageId = storage.maxId
 }
 
 // Inserts date separators and marks the head and tail if it's the chain of messages made by the same user

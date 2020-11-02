@@ -101,6 +101,19 @@
     }
   }
 
+  .pending {
+    .status-content.media-body, .created-at {
+      color: var(--faint);
+    }
+  }
+
+  .error {
+    .status-content.media-body, .created-at {
+      color: $fallback--cRed;
+      color: var(--badgeNotification, $fallback--cRed);
+    }
+  }
+
   .incoming {
     a {
       color: var(--chatMessageIncomingLink, $fallback--link);

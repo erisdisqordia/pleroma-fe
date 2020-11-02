@@ -35,6 +35,10 @@
       color: $fallback--cOrange;
       color: var(--cOrange, $fallback--cOrange);
     }
+
+    ._misclick-prevention & {
+      pointer-events: none !important;
+    }
   }
 
   &.-favorited {

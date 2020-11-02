@@ -45,6 +45,10 @@
       color: $fallback--cGreen;
       color: var(--cGreen, $fallback--cGreen);
     }
+
+    ._misclick-prevention & {
+      pointer-events: none !important;
+    }
   }
 
   &.-repeated {

@@ -282,6 +282,10 @@
 .user-card {
   position: relative;
 
+  ._misclick-prevention & {
+    pointer-events: none !important;
+  }
+
   &:hover .Avatar {
     --_still-image-img-visibility: visible;
     --_still-image-canvas-visibility: hidden;

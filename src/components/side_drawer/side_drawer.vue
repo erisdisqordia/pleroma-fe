@@ -271,6 +271,12 @@
   --faintLink: var(--popoverFaintLink, $fallback--faint);
   --lightText: var(--popoverLightText, $fallback--lightText);
   --icon: var(--popoverIcon, $fallback--icon);
+
+  .badge {
+    position: absolute;
+    right: 0.7rem;
+    top: 1em;
+  }
 }
 
 .side-drawer-logo-wrapper {

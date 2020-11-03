@@ -119,7 +119,6 @@
         >
           <router-link
             :to="userProfileLink"
-            class="user-avatar"
             @click.stop.prevent.capture.native="toggleUserExpanded"
           >
             <UserAvatar

@@ -59,9 +59,12 @@ $status-margin: 0.75em;
     justify-content: flex-end;
   }
 
-  .user-avatar {
-    ._misclick-prevention & {
-      pointer-events: none !important;
+  ._misclick-prevention & {
+    pointer-events: none;
+
+    .attachments {
+      pointer-events: initial;
+      cursor: initial;
     }
   }
 
@@ -114,10 +117,6 @@ $status-margin: 0.75em;
     a {
       display: inline-block;
       word-break: break-all;
-
-      ._misclick-prevention & {
-        pointer-events: none !important;
-      }
     }
   }
 
@@ -259,10 +258,6 @@ $status-margin: 0.75em;
       height: 14px;
       vertical-align: middle;
       object-fit: contain;
-    }
-
-    ._misclick-prevention & a {
-      pointer-events: none !important;
     }
   }
 

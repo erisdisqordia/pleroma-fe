@@ -34,10 +34,6 @@
       color: $fallback--cBlue;
       color: var(--cBlue, $fallback--cBlue);
     }
-
-    ._misclick-prevention & {
-      pointer-events: none !important;
-    }
   }
 }
 </style>

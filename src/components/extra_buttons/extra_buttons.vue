@@ -120,9 +120,5 @@
     color: $fallback--text;
     color: var(--text, $fallback--text);
   }
-
-  ._misclick-prevention & {
-    pointer-events: none !important;
-  }
 }
 </style>

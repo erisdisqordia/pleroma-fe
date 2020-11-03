@@ -240,10 +240,6 @@ $status-margin: 0.75em;
     word-wrap: break-word;
     word-break: break-word;
 
-    ._misclick-prevention & :not(.attachments) a {
-      pointer-events: none !important;
-    }
-
     blockquote {
       margin: 0.2em 0 0.2em 2em;
       font-style: italic;

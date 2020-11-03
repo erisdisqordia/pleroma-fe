@@ -2,9 +2,9 @@ import { find } from 'lodash'
 
 const createFaviconService = () => {
   let favimg, favcanvas, favcontext, favicon
-  const faviconWidth = 48
-  const faviconHeight = 48
-  const badgeRadius = 14
+  const faviconWidth = 128
+  const faviconHeight = 128
+  const badgeRadius = 32
 
   const initFaviconService = () => {
     const nodes = document.getElementsByTagName('link')
@@ -19,11 +19,15 @@ const createFaviconService = () => {
     }
   }
 
+  const isImageLoaded = (img) => img.complete && img.naturalHeight !== 0
+
   const clearFaviconBadge = () => {
     if (!favimg || !favcontext || !favicon) return
 
     favcontext.clearRect(0, 0, faviconWidth, faviconHeight)
-    favcontext.drawImage(favimg, 0, 0, favimg.width, favimg.height, 0, 0, faviconWidth, faviconHeight)
+    if (isImageLoaded(favimg)) {
+      favcontext.drawImage(favimg, 0, 0, favimg.width, favimg.height, 0, 0, faviconWidth, faviconHeight)
+    }
     favicon.href = favcanvas.toDataURL('image/png')
   }
 
@@ -35,7 +39,9 @@ const createFaviconService = () => {
     const style = getComputedStyle(document.body)
     const badgeColor = `${style.getPropertyValue('--badgeNotification') || 'rgb(240, 100, 100)'}`
 
-    favcontext.drawImage(favimg, 0, 0, favimg.width, favimg.height, 0, 0, faviconWidth, faviconHeight)
+    if (isImageLoaded(favimg)) {
+      favcontext.drawImage(favimg, 0, 0, favimg.width, favimg.height, 0, 0, faviconWidth, faviconHeight)
+    }
     favcontext.fillStyle = badgeColor
     favcontext.beginPath()
     favcontext.arc(faviconWidth - badgeRadius, badgeRadius, badgeRadius, 0, 2 * Math.PI, false)

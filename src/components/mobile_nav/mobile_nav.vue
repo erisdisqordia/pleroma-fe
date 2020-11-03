@@ -110,10 +110,21 @@
   }
 
   .mobile-nav-button {
+    display: inline-block;
     text-align: center;
-    margin: 0 1em;
+    padding: 0 1em;
     position: relative;
     cursor: pointer;
+  }
+
+  .site-name {
+    padding: 0 .3em;
+    display: inline-block;
+  }
+
+  .item {
+    /* moslty just to get rid of extra whitespaces */
+    display: flex;
   }
 
   .alert-dot {

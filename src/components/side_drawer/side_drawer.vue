@@ -70,7 +70,7 @@
             /> {{ $t("nav.chats") }}
             <span
               v-if="unreadChatCount"
-              class="badge badge-notification unread-chat-count"
+              class="badge badge-notification"
             >
               {{ unreadChatCount }}
             </span>
@@ -99,7 +99,7 @@
             /> {{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
-              class="badge follow-request-count"
+              class="badge badge-notification"
             >
               {{ followRequestCount }}
             </span>
@@ -272,12 +272,11 @@
   --lightText: var(--popoverLightText, $fallback--lightText);
   --icon: var(--popoverIcon, $fallback--icon);
 
-  .follow-request-count {
-    vertical-align: baseline;
-    background-color: $fallback--bg;
-    background-color: var(--input, $fallback--faint);
+  .badge {
+    position: absolute;
+    right: 0.7rem;
+    top: 1em;
   }
-
 }
 
 .side-drawer-logo-wrapper {

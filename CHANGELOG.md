@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Icons changed from fontello (FontAwesome 4 + others) to FontAwesome 5 due to problems with fontello.
 - Some icons changed for better accessibility (lock, globe)
 - Logo is now clickable
+- Changed default logo to SVG version
 
 ## [2.1.1] - 2020-09-08
 ### Changed

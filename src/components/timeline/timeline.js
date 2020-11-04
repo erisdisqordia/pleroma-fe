@@ -72,7 +72,7 @@ const Timeline = {
     },
     classes () {
       let rootClasses = !this.embedded ? ['panel', 'panel-default'] : []
-      if (this.blockingClicks) rootClasses = rootClasses.concat(['-blocked'])
+      if (this.blockingClicks) rootClasses = rootClasses.concat(['-blocked', '_misclick-prevention'])
       return {
         root: rootClasses,
         header: ['timeline-heading'].concat(!this.embedded ? ['panel-heading'] : []),

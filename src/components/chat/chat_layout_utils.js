@@ -24,3 +24,10 @@ export const isBottomedOut = (el, offset = 0) => {
 export const scrollableContainerHeight = (inner, header, footer) => {
   return inner.offsetHeight - header.clientHeight - footer.clientHeight
 }
+
+// Returns whether or not the scrollbar is visible.
+export const isScrollable = (el) => {
+  if (!el) return
+
+  return el.scrollHeight > el.clientHeight
+}

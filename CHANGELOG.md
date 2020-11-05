@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed multiple regressions in CSS styles
 - Fixed multiple issues with input fields when using CJK font as default
 - Fixed search field in navbar infringing into logo in some cases
+- Fixed not being able to load the chat history in vertical screens when the message list doesn't take the full height of the scrollable container on the first fetch.
 
 ### Changed
 - Clicking immediately when timeline shifts is now blocked to prevent misclicks

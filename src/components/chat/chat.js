@@ -6,7 +6,7 @@ import PostStatusForm from '../post_status_form/post_status_form.vue'
 import ChatTitle from '../chat_title/chat_title.vue'
 import chatService from '../../services/chat_service/chat_service.js'
 import { promiseInterval } from '../../services/promise_interval/promise_interval.js'
-import { getScrollPosition, getNewTopPosition, isBottomedOut, scrollableContainerHeight } from './chat_layout_utils.js'
+import { getScrollPosition, getNewTopPosition, isBottomedOut, scrollableContainerHeight, isScrollable } from './chat_layout_utils.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faChevronDown,
@@ -286,6 +286,14 @@ const Chat = {
 
               if (isFirstFetch) {
                 this.updateScrollableContainerHeight()
+              }
+
+              // In vertical screens, the first batch of fetched messages may not always take the
+              // full height of the scrollable container.
+              // If this is the case, we want to fetch the messages until the scrollable container
+              // is fully populated so that the user has the ability to scroll up and load the history.
+              if (!isScrollable(this.$refs.scrollable) && messages.length > 0) {
+                this.fetchChat({ maxId: this.currentChatMessageService.minId })
               }
             })
           })

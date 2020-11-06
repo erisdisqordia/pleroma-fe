@@ -603,19 +603,24 @@ nav {
     flex-grow: 0;
   }
 }
+
 .badge {
+  box-sizing: border-box;
   display: inline-block;
   border-radius: 99px;
-  min-width: 22px;
-  max-width: 22px;
-  min-height: 22px;
-  max-height: 22px;
-  font-size: 15px;
-  line-height: 22px;
-  text-align: center;
+  max-width: 10em;
+  min-width: 1.7em;
+  height: 1.3em;
+  padding: 0.15em 0.15em;
   vertical-align: middle;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 0.9em;
+  line-height: 1;
+  text-align: center;
   white-space: nowrap;
-  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &.badge-notification {
     background-color: $fallback--cRed;

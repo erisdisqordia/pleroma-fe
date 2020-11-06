@@ -27,7 +27,7 @@
           <router-link :to="{ name: 'chats', params: { username: currentUser.screen_name } }">
             <div
               v-if="unreadChatCount"
-              class="badge badge-notification unread-chat-count"
+              class="badge badge-notification"
             >
               {{ unreadChatCount }}
             </div>
@@ -47,7 +47,7 @@
             />{{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
-              class="badge follow-request-count"
+              class="badge badge-notification"
             >
               {{ followRequestCount }}
             </span>
@@ -82,12 +82,6 @@
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-
-  .follow-request-count {
-    vertical-align: baseline;
-    background-color: $fallback--bg;
-    background-color: var(--input, $fallback--faint);
   }
 
   li {
@@ -156,21 +150,10 @@
     margin-right: 0.8em;
   }
 
-  .unread-chat-count {
-    font-size: 0.9em;
-    font-weight: bolder;
-    font-style: normal;
+  .badge {
     position: absolute;
     right: 0.6rem;
     top: 1.25em;
-    padding: 0 0.3em;
-    min-width: 1.3rem;
-    min-height: 1.3rem;
-    max-height: 1.3rem;
-    line-height: 1.3rem;
-    max-width: 10em;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
 </style>

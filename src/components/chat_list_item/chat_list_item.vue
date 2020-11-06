@@ -21,6 +21,12 @@
           />
         </span>
         <span class="heading-right" />
+        <div class="time-wrapper">
+          <Timeago
+            :time="chat.updated_at"
+            :auto-update="60"
+          />
+        </div>
       </div>
       <div class="chat-preview">
         <StatusContent
@@ -34,12 +40,6 @@
           {{ chat.unread }}
         </div>
       </div>
-    </div>
-    <div class="time-wrapper">
-      <Timeago
-        :time="chat.updated_at"
-        :auto-update="60"
-      />
     </div>
   </div>
 </template>

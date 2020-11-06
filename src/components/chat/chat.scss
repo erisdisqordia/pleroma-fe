@@ -138,11 +138,21 @@
     }
 
     .chat-view-heading {
+      box-sizing: border-box;
       position: static;
       z-index: 9999;
       top: 0;
       margin-top: 0;
       border-radius: 0;
+
+      /* This practically overlays the panel heading color over panel background
+       * color. This is needed because we allow transparent panel background and
+       * it doesn't work well in this "disjointed panel header" case
+       */
+      background:
+        linear-gradient(to top, var(--panel), var(--panel)),
+        linear-gradient(to top, var(--bg), var(--bg));
+      height: 50px;
     }
 
     .scrollable-message-list {

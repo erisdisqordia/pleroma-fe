@@ -113,7 +113,7 @@
   }
 
   &.-blocked {
-    pointer-events: none;
+    cursor: progress;
   }
 }
 

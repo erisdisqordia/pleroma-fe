@@ -59,6 +59,15 @@ $status-margin: 0.75em;
     justify-content: flex-end;
   }
 
+  ._misclick-prevention & {
+    pointer-events: none;
+
+    .attachments {
+      pointer-events: initial;
+      cursor: initial;
+    }
+  }
+
   .left-side {
     margin-right: $status-margin;
   }

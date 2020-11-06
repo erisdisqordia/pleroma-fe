@@ -32,7 +32,7 @@
         >
           <div
             class="media status"
-            :class="{ 'without-attachment': !hasAttachment }"
+            :class="{ 'without-attachment': !hasAttachment, 'pending': chatViewItem.data.pending, 'error': chatViewItem.data.error }"
             style="position: relative"
             @mouseenter="hovered = true"
             @mouseleave="hovered = false"
@@ -56,15 +56,16 @@
                       class="dropdown-item dropdown-item-icon"
                       @click="deleteMessage"
                     >
-                      <i class="icon-cancel" /> {{ $t("chats.delete") }}
+                      <FAIcon icon="times" /> {{ $t("chats.delete") }}
                     </button>
                   </div>
                 </div>
                 <button
                   slot="trigger"
+                  class="menu-icon"
                   :title="$t('chats.more')"
                 >
-                  <i class="icon-ellipsis" />
+                  <FAIcon icon="ellipsis-h" />
                 </button>
               </Popover>
             </div>

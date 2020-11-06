@@ -6,6 +6,22 @@ import ModerationTools from '../moderation_tools/moderation_tools.vue'
 import AccountActions from '../account_actions/account_actions.vue'
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import { mapGetters } from 'vuex'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faBell,
+  faRss,
+  faChevronDown,
+  faSearchPlus,
+  faExternalLinkAlt
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faRss,
+  faBell,
+  faChevronDown,
+  faSearchPlus,
+  faExternalLinkAlt
+)
 
 export default {
   props: [

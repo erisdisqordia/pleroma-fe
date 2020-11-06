@@ -1,4 +1,7 @@
-import { mapGetters } from 'vuex'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faRetweet } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faRetweet)
 
 const RetweetButton = {
   props: ['status', 'loggedIn', 'visibility'],
@@ -23,12 +26,12 @@ const RetweetButton = {
   computed: {
     classes () {
       return {
-        'retweeted': this.status.repeated,
-        'retweeted-empty': !this.status.repeated,
-        'animate-spin': this.animated
+        '-repeated': this.status.repeated
       }
     },
-    ...mapGetters(['mergedConfig'])
+    mergedConfig () {
+      return this.$store.getters.mergedConfig
+    }
   }
 }
 

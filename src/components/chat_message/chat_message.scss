@@ -24,7 +24,7 @@
     }
   }
 
-  .icon-ellipsis {
+  .menu-icon {
     cursor: pointer;
 
     &:hover, .extra-button-popover.open & {
@@ -98,6 +98,19 @@
         content: " ";
         display: inline-block;
       }
+    }
+  }
+
+  .pending {
+    .status-content.media-body, .created-at {
+      color: var(--faint);
+    }
+  }
+
+  .error {
+    .status-content.media-body, .created-at {
+      color: $fallback--cRed;
+      color: var(--badgeNotification, $fallback--cRed);
     }
   }
 

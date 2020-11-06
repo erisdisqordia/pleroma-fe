@@ -429,6 +429,9 @@ export const parseChatMessage = (message) => {
   } else {
     output.attachments = []
   }
+  output.pending = !!message.pending
+  output.error = false
+  output.idempotency_key = message.idempotency_key
   output.isNormalized = true
   return output
 }

@@ -1,7 +1,7 @@
 <template>
   <Popover
     trigger="click"
-    class="timeline-menu"
+    class="TimelineMenu"
     :class="{ 'open': isOpen }"
     :margin="{ left: -15, right: -200 }"
     :bound-to="{ x: 'container' }"
@@ -16,27 +16,47 @@
       <ul>
         <li v-if="currentUser">
           <router-link :to="{ name: 'friends' }">
-            <i class="button-icon icon-home-2" />{{ $t("nav.timeline") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding "
+              icon="home"
+            />{{ $t("nav.timeline") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'bookmarks'}">
-            <i class="button-icon icon-bookmark" />{{ $t("nav.bookmarks") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding "
+              icon="bookmark"
+            />{{ $t("nav.bookmarks") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'dms', params: { username: currentUser.screen_name } }">
-            <i class="button-icon icon-mail-alt" />{{ $t("nav.dms") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding "
+              icon="envelope"
+            />{{ $t("nav.dms") }}
           </router-link>
         </li>
         <li v-if="currentUser || !privateMode">
           <router-link :to="{ name: 'public-timeline' }">
-            <i class="button-icon icon-users" />{{ $t("nav.public_tl") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding "
+              icon="users"
+            />{{ $t("nav.public_tl") }}
           </router-link>
         </li>
         <li v-if="federating && (currentUser || !privateMode)">
           <router-link :to="{ name: 'public-external-timeline' }">
-            <i class="button-icon icon-globe" />{{ $t("nav.twkn") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding "
+              icon="globe"
+            />{{ $t("nav.twkn") }}
           </router-link>
         </li>
       </ul>
@@ -46,7 +66,10 @@
       class="title timeline-menu-title"
     >
       <span>{{ timelineName() }}</span>
-      <i class="icon-down-open" />
+      <FAIcon
+        size="sm"
+        icon="chevron-down"
+      />
     </div>
   </Popover>
 </template>
@@ -56,17 +79,19 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.timeline-menu {
+.TimelineMenu {
   flex-shrink: 1;
   margin-right: auto;
   min-width: 0;
   width: 24rem;
+
   .timeline-menu-popover-wrap {
     overflow: hidden;
     // Match panel heading padding to line up menu with bottom of heading
     margin-top: 0.6rem;
     padding: 0 15px 15px 15px;
   }
+
   .timeline-menu-popover {
     width: 24rem;
     max-width: 100vw;
@@ -77,10 +102,12 @@
     transform: translateY(-100%);
     transition: transform 100ms;
   }
+
   .panel::after {
     border-top-right-radius: 0;
     border-top-left-radius: 0;
   }
+
   &.open .timeline-menu-popover {
     transform: translateY(0);
   }
@@ -88,7 +115,6 @@
   .timeline-menu-title {
     margin: 0;
     cursor: pointer;
-    display: flex;
     user-select: none;
     width: 100%;
 
@@ -98,15 +124,13 @@
       white-space: nowrap;
     }
 
-    i {
+    svg {
       margin-left: 0.6em;
-      flex-shrink: 0;
-      font-size: 1rem;
       transition: transform 100ms;
     }
   }
 
-  &.open .timeline-menu-title i {
+  &.open .timeline-menu-title svg {
     color: $fallback--text;
     color: var(--panelText, $fallback--text);
     transform: rotate(180deg);
@@ -138,15 +162,11 @@
     &:last-child {
       border: none;
     }
-
-    i {
-      margin: 0 0.5em;
-    }
   }
 
   a {
     display: block;
-    padding: 0.6em 0;
+    padding: 0.6em 0.65em;
 
     &:hover {
       background-color: $fallback--lightBg;
@@ -173,6 +193,11 @@
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    svg {
+      margin-right: 0.4em;
+      margin-left: -0.2em;
     }
   }
 }

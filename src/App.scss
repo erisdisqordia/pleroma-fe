@@ -85,7 +85,7 @@ button {
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
 
-  i[class*=icon-] {
+  i[class*=icon-], .svg-inline--fa {
     color: $fallback--text;
     color: var(--btnText, $fallback--text);
   }
@@ -106,7 +106,8 @@ button {
     color: var(--btnPressedText, $fallback--text);
     background-color: $fallback--fg;
     background-color: var(--btnPressed, $fallback--fg);
-    i {
+
+    svg, i {
       color: $fallback--text;
       color: var(--btnPressedText, $fallback--text);
     }
@@ -118,7 +119,8 @@ button {
     color: var(--btnDisabledText, $fallback--text);
     background-color: $fallback--fg;
     background-color: var(--btnDisabled, $fallback--fg);
-    i {
+
+    svg, i {
       color: $fallback--text;
       color: var(--btnDisabledText, $fallback--text);
     }
@@ -131,7 +133,8 @@ button {
     background-color: var(--btnToggled, $fallback--fg);
     box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.3), 0px 1px 0px 0px rgba(0, 0, 0, 0.2) inset, 0px -1px 0px 0px rgba(255, 255, 255, 0.2) inset;
     box-shadow: var(--buttonPressedShadow);
-    i {
+
+    svg, i {
       color: $fallback--text;
       color: var(--btnToggledText, $fallback--text);
     }
@@ -185,7 +188,7 @@ input, textarea, .select, .input {
     opacity: 0.5;
   }
 
-  .icon-down-open {
+  .select-down-icon {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -279,7 +282,7 @@ input, textarea, .select, .input {
     + label::before {
       flex-shrink: 0;
       display: inline-block;
-      content: '✔';
+      content: '✓';
       transition: color 200ms;
       width: 1.1em;
       height: 1.1em;
@@ -318,7 +321,7 @@ option {
   }
 }
 
-i[class*=icon-] {
+i[class*=icon-], .svg-inline--fa  {
   color: $fallback--icon;
   color: var(--icon, $fallback--icon);
 }
@@ -356,115 +359,8 @@ i[class*=icon-] {
   padding: 0 10px 0 10px;
 }
 
-.item {
-  flex: 1;
-  line-height: 50px;
-  height: 50px;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-
-  .nav-icon {
-    margin-left: 0.4em;
-  }
-
-  &.right {
-    justify-content: flex-end;
-  }
-}
-
 .auto-size {
   flex: 1
-}
-
-.nav-bar {
-  padding: 0;
-  width: 100%;
-  align-items: center;
-  position: fixed;
-  height: 50px;
-  box-sizing: border-box;
-
-  button {
-    &, i[class*=icon-] {
-      color: $fallback--text;
-      color: var(--btnTopBarText, $fallback--text);
-    }
-
-    &:active {
-      background-color: $fallback--fg;
-      background-color: var(--btnPressedTopBar, $fallback--fg);
-      color: $fallback--text;
-      color: var(--btnPressedTopBarText, $fallback--text);
-    }
-
-    &:disabled {
-      color: $fallback--text;
-      color: var(--btnDisabledTopBarText, $fallback--text);
-    }
-
-    &.toggled {
-      color: $fallback--text;
-      color: var(--btnToggledTopBarText, $fallback--text);
-      background-color: $fallback--fg;
-      background-color: var(--btnToggledTopBar, $fallback--fg)
-    }
-  }
-
-
-  .logo {
-    display: flex;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    align-items: stretch;
-    justify-content: center;
-    flex: 0 0 auto;
-    z-index: -1;
-    transition: opacity;
-    transition-timing-function: ease-out;
-    transition-duration: 100ms;
-
-    .mask {
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: contain;
-      background-color: $fallback--fg;
-      background-color: var(--topBarText, $fallback--fg);
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-
-    img {
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      flex: 0;
-    }
-  }
-
-  .inner-nav {
-    position: relative;
-    margin: auto;
-    box-sizing: border-box;
-    padding-left: 10px;
-    padding-right: 10px;
-    display: flex;
-    align-items: center;
-    flex-basis: 970px;
-    height: 50px;
-
-    a, a i {
-      color: $fallback--link;
-      color: var(--topBarLink, $fallback--link);
-    }
-  }
 }
 
 main-router {
@@ -707,19 +603,24 @@ nav {
     flex-grow: 0;
   }
 }
+
 .badge {
+  box-sizing: border-box;
   display: inline-block;
   border-radius: 99px;
-  min-width: 22px;
-  max-width: 22px;
-  min-height: 22px;
-  max-height: 22px;
-  font-size: 15px;
-  line-height: 22px;
-  text-align: center;
+  max-width: 10em;
+  min-width: 1.7em;
+  height: 1.3em;
+  padding: 0.15em 0.15em;
   vertical-align: middle;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 0.9em;
+  line-height: 1;
+  text-align: center;
   white-space: nowrap;
-  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &.badge-notification {
     background-color: $fallback--cRed;
@@ -776,16 +677,6 @@ nav {
   }
 }
 
-@media all and (min-width: 800px) {
-  .logo {
-    opacity: 1 !important;
-  }
-}
-
-.item.right {
-  text-align: right;
-}
-
 .visibility-notice {
   padding: .5em;
   border: 1px solid $fallback--faint;
@@ -807,8 +698,16 @@ nav {
   }
 }
 
-.button-icon {
-  font-size: 1.2em;
+.fa-scale-110 {
+  &.svg-inline--fa {
+    font-size: 1.1em;
+  }
+}
+
+.fa-old-padding {
+  &.svg-inline--fa {
+    padding: 0 0.3em;
+  }
 }
 
 @keyframes shakeError {
@@ -928,19 +827,6 @@ nav {
   z-index: 1;
   background-color: $fallback--fg;
   background-color: var(--panel, $fallback--fg);
-}
-
-.unread-chat-count {
-  font-size: 0.9em;
-  font-weight: bolder;
-  font-style: normal;
-  position: absolute;
-  right: 0.6rem;
-  padding: 0 0.3em;
-  min-width: 1.3rem;
-  min-height: 1.3rem;
-  max-height: 1.3rem;
-  line-height: 1.3rem;
 }
 
 .chat-layout {

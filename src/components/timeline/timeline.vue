@@ -1,5 +1,5 @@
 <template>
-  <div :class="[classes.root, 'timeline']">
+  <div :class="[classes.root, 'Timeline']">
     <div :class="classes.header">
       <TimelineMenu v-if="!embedded" />
       <div
@@ -32,7 +32,10 @@
       </div>
     </div>
     <div :class="classes.body">
-      <div class="timeline">
+      <div
+        ref="timeline"
+        class="timeline"
+      >
         <template v-for="statusId in pinnedStatusIds">
           <conversation
             v-if="timeline.statusesObject[statusId]"
@@ -54,6 +57,7 @@
             :collapsable="true"
             :in-profile="inProfile"
             :profile-user-id="userId"
+            :virtual-hidden="virtualScrollingEnabled && !statusesToDisplay.includes(status.id)"
           />
         </template>
       </div>
@@ -88,7 +92,11 @@
         v-else
         class="new-status-notification text-center panel-footer"
       >
-        <i class="icon-spin3 animate-spin" />
+        <FAIcon
+          icon="circle-notch"
+          spin
+          size="lg"
+        />
       </div>
     </div>
   </div>
@@ -99,9 +107,13 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.timeline {
+.Timeline {
   .loadmore-text {
     opacity: 1;
+  }
+
+  &.-blocked {
+    cursor: progress;
   }
 }
 

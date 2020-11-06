@@ -568,6 +568,9 @@ export const mutations = {
   updateStatusWithPoll (state, { id, poll }) {
     const status = state.allStatusesObject[id]
     status.poll = poll
+  },
+  setVirtualHeight (state, { statusId, height }) {
+    state.allStatusesObject[statusId].virtualHeight = height
   }
 }
 
@@ -607,6 +610,10 @@ const statuses = {
     deleteStatus ({ rootState, commit }, status) {
       commit('setDeleted', { status })
       apiService.deleteStatus({ id: status.id, credentials: rootState.users.currentUser.credentials })
+    },
+    deleteStatusById ({ rootState, commit }, id) {
+      const status = rootState.statuses.allStatusesObject[id]
+      commit('setDeleted', { status })
     },
     markStatusesAsDeleted ({ commit }, condition) {
       commit('setManyDeleted', condition)
@@ -753,6 +760,9 @@ const statuses = {
           store.commit('addNewStatuses', { statuses: data.statuses })
           return data
         })
+    },
+    setVirtualHeight ({ commit }, { statusId, height }) {
+      commit('setVirtualHeight', { statusId, height })
     }
   },
   mutations

@@ -27,9 +27,10 @@ const defaultState = {
   hideSitename: false,
   hideUserStats: false,
   loginMethod: 'password',
-  logo: '/static/logo.png',
+  logo: '/static/logo.svg',
   logoMargin: '.2em',
   logoMask: true,
+  logoLeft: false,
   minimalScopesMode: false,
   nsfwCensorImage: undefined,
   postContentType: 'text/plain',
@@ -41,6 +42,7 @@ const defaultState = {
   sidebarRight: false,
   subjectLineBehavior: 'email',
   theme: 'pleroma-dark',
+  virtualScrolling: true,
 
   // Nasty stuff
   customEmoji: [],

@@ -12,6 +12,7 @@
       <div class="reaction-picker-filter">
         <input
           v-model="filterWord"
+          size="1"
           :placeholder="$t('emoji.search_emoji')"
         >
       </div>
@@ -36,9 +37,10 @@
         <div class="reaction-bottom-fader" />
       </div>
     </div>
-    <i
+    <FAIcon
       slot="trigger"
-      class="icon-smile button-icon add-reaction-button"
+      class="fa-scale-110 fa-old-padding add-reaction-button"
+      :icon="['far', 'smile-beam']"
       :title="$t('tool_tip.add_reaction')"
     />
   </Popover>

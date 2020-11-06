@@ -13,7 +13,8 @@
     "scope_options": "Ikusgaitasun aukerak",
     "text_limit": "Testu limitea",
     "title": "Ezaugarriak",
-    "who_to_follow": "Nori jarraitu"
+    "who_to_follow": "Nori jarraitu",
+    "pleroma_chat_messages": "Pleroma Txata"
   },
   "finder": {
     "error_fetching_user": "Errorea erabiltzailea eskuratzen",
@@ -31,7 +32,13 @@
     "disable": "Ezgaitu",
     "enable": "Gaitu",
     "confirm": "Baieztatu",
-    "verify": "Egiaztatu"
+    "verify": "Egiaztatu",
+    "peek": "Begiratu",
+    "close": "Itxi",
+    "dismiss": "Baztertu",
+    "retry": "Saiatu berriro",
+    "error_retry": "Saiatu berriro mesedez",
+    "loading": "Kargatzen…"
   },
   "image_cropper": {
     "crop_picture": "Moztu argazkia",
@@ -81,7 +88,10 @@
     "user_search": "Erabiltzailea Bilatu",
     "search": "Bilatu",
     "who_to_follow": "Nori jarraitu",
-    "preferences": "Hobespenak"
+    "preferences": "Hobespenak",
+    "chats": "Txatak",
+    "timelines": "Denbora-lerroak",
+    "bookmarks": "Laster-markak"
   },
   "notifications": {
     "broken_favorite": "Egoera ezezaguna, bilatzen…",
@@ -91,7 +101,10 @@
     "notifications": "Jakinarazpenak",
     "read": "Irakurrita!",
     "repeated_you": "zure mezua errepikatu du",
-    "no_more_notifications": "Ez dago jakinarazpen gehiago"
+    "no_more_notifications": "Ez dago jakinarazpen gehiago",
+    "reacted_with": "{0}kin erreakzionatu zuen",
+    "migrated_to": "hona migratua:",
+    "follow_request": "jarraitu nahi zaitu"
   },
   "polls": {
     "add_poll": "Inkesta gehitu",
@@ -114,7 +127,8 @@
     "search_emoji": "Bilatu emoji bat",
     "add_emoji": "Emoji bat gehitu",
     "custom": "Ohiko emojiak",
-    "unicode": "Unicode emojiak"
+    "unicode": "Unicode emojiak",
+    "load_all": "{emojiAmount} emoji guztiak kargatzen"
   },
   "stickers": {
     "add_sticker": "Pegatina gehitu"
@@ -226,7 +240,7 @@
     "composing": "Idazten",
     "confirm_new_password": "Baieztatu pasahitz berria",
     "current_avatar": "Zure uneko avatarra",
-    "current_password": "Indarrean den pasahitza",
+    "current_password": "Indarrean dagoen pasahitza",
     "current_profile_banner": "Zure profilaren banner-a",
     "data_import_export_tab": "Datuak Inportatu / Esportatu",
     "default_vis": "Lehenetsitako ikusgaitasunak",
@@ -634,9 +648,40 @@
   "about": {
     "mrf": {
       "keyword": {
-        "keyword_policies": "Gako-hitz politika"
+        "keyword_policies": "Gako-hitz politika",
+        "ftl_removal": "\"Ezagutzen den Sarea\" denbora-lerrotik ezabatu",
+        "is_replaced_by": "→",
+        "replace": "Ordezkatuak",
+        "reject": "Ukatuak"
       },
-      "federation": "Federazioa"
-    }
+      "federation": "Federazioa",
+      "simple": {
+        "media_nsfw_desc": "Instantzia honek hurrengo instantzien multimediak sentikorrak izatera behartzen ditu:",
+        "media_nsfw": "Behartu Multimedia Sentikor",
+        "media_removal_desc": "Instantzia honek atxikitutako multimedia hurrengo instantzietatik ezabatzen ditu:",
+        "media_removal": "Multimedia Ezabatu",
+        "ftl_removal_desc": "Instantzia honek hurrengo instantziak ezabatzen ditu \"Ezagutzen den Sarea\" denbora-lerrotik:",
+        "ftl_removal": "\"Ezagutzen den Sarea\" denbora-lerrotik ezabatu",
+        "quarantine_desc": "Instantzia honek soilik mezu publikoak bidaliko ditu instantzia hauetara:",
+        "quarantine": "Koarentena",
+        "reject_desc": "Instantzia honek ez ditu hurrengo instantzien mezuak onartuko:",
+        "reject": "Ukatuak",
+        "accept_desc": "Instantzia honek hurrengo instantzietako mezuak soilik onartzen ditu:",
+        "accept": "Onartu",
+        "simple_policies": "Gure instantziaren politika zehatzak"
+      },
+      "mrf_policies_desc": "MRF politikek instantzia honen federazioa manipulatzen dute gainerako instantziekin. Honako politika hauek daude gaituta:",
+      "mrf_policies": "Gaitutako MRF politikak"
+    },
+    "staff": "Arduradunak"
+  },
+  "domain_mute_card": {
+    "unmute_progress": "Isiltasuna kentzen…",
+    "unmute": "Isiltasuna kendu",
+    "mute_progress": "Isiltzen…",
+    "mute": "Isilarazi"
+  },
+  "shoutbox": {
+    "title": "Oihu-kutxa"
   }
 }

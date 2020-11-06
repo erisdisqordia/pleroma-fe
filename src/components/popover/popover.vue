@@ -27,7 +27,7 @@
 
 <script src="./popover.js" />
 
-<style lang=scss>
+<style lang="scss">
 @import '../../_variables.scss';
 
 .popover {
@@ -96,7 +96,7 @@
     &-icon {
       padding-left: 0.5rem;
 
-      i {
+      svg {
         margin-right: 0.25rem;
         color: var(--menuPopoverIcon, $fallback--icon)
       }
@@ -111,7 +111,7 @@
       --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
       --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
       --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
-      i {
+      svg {
         color: var(--selectedMenuPopoverIcon, $fallback--icon);
       }
     }

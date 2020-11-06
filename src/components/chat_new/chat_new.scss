@@ -8,9 +8,7 @@
     }
   }
 
-  .icon-search {
-    font-size: 1.5em;
-    float: right;
+  .search-icon {
     margin-right: 0.3em;
   }
 
@@ -25,5 +23,9 @@
 
   .go-back-button {
     cursor: pointer;
+    width: 28px;
+    text-align: center;
+    padding: 0.6em;
+    margin: -0.6em 0.6em -0.6em -0.6em;
   }
 }

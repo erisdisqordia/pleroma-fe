@@ -3,6 +3,7 @@ import { parseStatus, parseUser, parseNotification, parseAttachment, parseChat, 
 import { RegistrationError, StatusCodeError } from '../errors/errors'
 
 /* eslint-env browser */
+const MUTES_IMPORT_URL = '/api/pleroma/mutes_import'
 const BLOCKS_IMPORT_URL = '/api/pleroma/blocks_import'
 const FOLLOW_IMPORT_URL = '/api/pleroma/follow_import'
 const DELETE_ACCOUNT_URL = '/api/pleroma/delete_account'
@@ -128,7 +129,11 @@ const promisedRequest = ({ method, url, params, payload, credentials, headers = 
             return reject(new StatusCodeError(response.status, json, { url, options }, response))
           }
           return resolve(json)
-        }))
+        })
+        .catch((error) => {
+          return reject(new StatusCodeError(response.status, error, { url, options }, response))
+        })
+      )
     })
 }
 
@@ -539,8 +544,10 @@ const fetchTimeline = ({
 
   const queryString = map(params, (param) => `${param[0]}=${param[1]}`).join('&')
   url += `?${queryString}`
+
   let status = ''
   let statusText = ''
+
   let pagination = {}
   return fetch(url, { headers: authHeaders(credentials) })
     .then((data) => {
@@ -708,6 +715,17 @@ const setMediaDescription = ({ id, description, credentials }) => {
       description
     }
   }).then((data) => parseAttachment(data))
+}
+
+const importMutes = ({ file, credentials }) => {
+  const formData = new FormData()
+  formData.append('list', file)
+  return fetch(MUTES_IMPORT_URL, {
+    body: formData,
+    method: 'POST',
+    headers: authHeaders(credentials)
+  })
+    .then((response) => response.ok)
 }
 
 const importBlocks = ({ file, credentials }) => {
@@ -1196,7 +1214,7 @@ const chatMessages = ({ id, credentials, maxId, sinceId, limit = 20 }) => {
   })
 }
 
-const sendChatMessage = ({ id, content, mediaId = null, credentials }) => {
+const sendChatMessage = ({ id, content, mediaId = null, idempotencyKey, credentials }) => {
   const payload = {
     'content': content
   }
@@ -1205,11 +1223,18 @@ const sendChatMessage = ({ id, content, mediaId = null, credentials }) => {
     payload['media_id'] = mediaId
   }
 
+  const headers = {}
+
+  if (idempotencyKey) {
+    headers['idempotency-key'] = idempotencyKey
+  }
+
   return promisedRequest({
     url: PLEROMA_CHAT_MESSAGES_URL(id),
     method: 'POST',
     payload: payload,
-    credentials
+    credentials,
+    headers
   })
 }
 
@@ -1280,6 +1305,7 @@ const apiService = {
   getCaptcha,
   updateProfileImages,
   updateProfile,
+  importMutes,
   importBlocks,
   importFollows,
   deleteAccount,

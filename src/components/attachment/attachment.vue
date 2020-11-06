@@ -12,7 +12,7 @@
       :alt="attachment.description"
       :title="attachment.description"
     >
-      <span :class="placeholderIconClass" />
+      <FAIcon :icon="placeholderIconClass" />
       <b>{{ nsfw ? "NSFW / " : "" }}</b>{{ placeholderName }}
     </a>
   </div>
@@ -28,7 +28,7 @@
       :href="attachment.url"
       :alt="attachment.description"
       :title="attachment.description"
-      @click.prevent="toggleHidden"
+      @click.prevent.stop="toggleHidden"
     >
       <img
         :key="nsfwImage"
@@ -36,9 +36,10 @@
         :src="nsfwImage"
         :class="{'small': isSmall}"
       >
-      <i
+      <FAIcon
         v-if="type === 'video'"
-        class="play-icon icon-play-circled"
+        class="play-icon"
+        icon="play-circle"
       />
     </a>
     <div
@@ -80,10 +81,13 @@
         class="video"
         :attachment="attachment"
         :controls="allowPlay"
+        @play="$emit('play')"
+        @pause="$emit('pause')"
       />
-      <i
+      <FAIcon
         v-if="!allowPlay"
-        class="play-icon icon-play-circled"
+        class="play-icon"
+        icon="play-circle"
       />
     </a>
 
@@ -93,6 +97,8 @@
       :alt="attachment.description"
       :title="attachment.description"
       controls
+      @play="$emit('play')"
+      @pause="$emit('pause')"
     />
 
     <div
@@ -138,6 +144,10 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 100%;
+
+    svg {
+      color: inherit;
+    }
   }
 
   .nsfw-placeholder {

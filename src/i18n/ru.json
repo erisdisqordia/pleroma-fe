@@ -473,5 +473,10 @@
   "tool_tip": {
     "accept_follow_request": "Принять запрос на чтение",
     "reject_follow_request": "Отклонить запрос на чтение"
+  },
+  "image_cropper": {
+    "save_without_cropping": "Сохранить не обрезая",
+    "save": "Сохранить",
+    "crop_picture": "Обрезать картинку"
   }
 }

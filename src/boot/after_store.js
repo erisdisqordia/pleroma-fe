@@ -130,6 +130,7 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
       ? 0
       : config.logoMargin
   })
+  copyInstanceOption('logoLeft')
   store.commit('authFlow/setInitialStrategy', config.loginMethod)
 
   copyInstanceOption('redirectRootNoLogin')

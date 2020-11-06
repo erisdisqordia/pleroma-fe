@@ -20,7 +20,7 @@ const api = {
       state.fetchers[fetcherName] = fetcher
     },
     removeFetcher (state, { fetcherName, fetcher }) {
-      window.clearInterval(fetcher)
+      state.fetchers[fetcherName].stop()
       delete state.fetchers[fetcherName]
     },
     setWsToken (state, token) {
@@ -72,13 +72,21 @@ const api = {
                   showImmediately: timelineData.visibleStatuses.length === 0,
                   timeline: 'friends'
                 })
+              } else if (message.event === 'delete') {
+                dispatch('deleteStatusById', message.id)
               } else if (message.event === 'pleroma:chat_update') {
-                dispatch('addChatMessages', {
-                  chatId: message.chatUpdate.id,
-                  messages: [message.chatUpdate.lastMessage]
-                })
-                dispatch('updateChat', { chat: message.chatUpdate })
-                maybeShowChatNotification(store, message.chatUpdate)
+                // The setTimeout wrapper is a temporary band-aid to avoid duplicates for the user's own messages when doing optimistic sending.
+                // The cause of the duplicates is the WS event arriving earlier than the HTTP response.
+                // This setTimeout wrapper can be removed once the commit `8e41baff` is in the stable Pleroma release.
+                // (`8e41baff` adds the idempotency key to the chat message entity, which PleromaFE uses when it's available, and it makes this artificial delay unnecessary).
+                setTimeout(() => {
+                  dispatch('addChatMessages', {
+                    chatId: message.chatUpdate.id,
+                    messages: [message.chatUpdate.lastMessage]
+                  })
+                  dispatch('updateChat', { chat: message.chatUpdate })
+                  maybeShowChatNotification(store, message.chatUpdate)
+                }, 100)
               }
             }
           )

@@ -122,9 +122,10 @@
       </div>
       <div class="panel-body">
         <span v-if="error">{{ error }}</span>
-        <i
+        <FAIcon
           v-else
-          class="icon-spin3 animate-spin"
+          spin
+          icon="circle-notch"
         />
       </div>
     </div>
@@ -142,6 +143,7 @@
 
   .user-profile-fields {
     margin: 0 0.5em;
+
     img {
       object-fit: contain;
       vertical-align: middle;
@@ -156,8 +158,7 @@
 
     .user-profile-field {
       display: flex;
-      margin: 0.25em auto;
-      max-width: 32em;
+      margin: 0.25em;
       border: 1px solid var(--border, $fallback--border);
       border-radius: $fallback--inputRadius;
       border-radius: var(--inputRadius, $fallback--inputRadius);

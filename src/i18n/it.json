@@ -407,7 +407,14 @@
     "reset_background_confirm": "Vuoi veramente azzerare lo sfondo?",
     "chatMessageRadius": "Messaggi istantanei",
     "notification_setting_hide_notification_contents": "Nascondi mittente e contenuti delle notifiche push",
-    "notification_setting_block_from_strangers": "Blocca notifiche da utenti che non segui"
+    "notification_setting_block_from_strangers": "Blocca notifiche da utenti che non segui",
+    "virtual_scrolling": "Velocizza l'elaborazione delle sequenze",
+    "import_mutes_from_a_csv_file": "Importa silenziati da un file CSV",
+    "mutes_imported": "Silenziati importati! Saranno elaborati a breve.",
+    "mute_import_error": "Errore nell'importazione",
+    "mute_import": "Importa silenziati",
+    "mute_export_button": "Esporta la tua lista di silenziati in un file CSV",
+    "mute_export": "Esporta silenziati"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",
@@ -591,12 +598,12 @@
         "reject": "Rifiuta",
         "accept": "Accetta",
         "simple_policies": "Regole specifiche alla stanza",
-        "accept_desc": "Questa stanza accetta messaggi solo dalle seguenti stanze:",
-        "reject_desc": "Questa stanza non accetterà messaggi dalle stanze seguenti:",
+        "accept_desc": "Questa stanza accetta messaggi solo dalle seguenti altre:",
+        "reject_desc": "Questa stanza rifiuterà i messaggi provenienti dalle seguenti:",
         "quarantine": "Quarantena",
-        "quarantine_desc": "Questa stanza inoltrerà solo messaggi pubblici alle seguenti stanze:",
+        "quarantine_desc": "Questa stanza inoltrerà solo messaggi pubblici alle seguenti:",
         "ftl_removal": "Rimozione dalla sequenza globale",
-        "ftl_removal_desc": "Questa stanza rimuove le seguenti stanze dalla sequenza globale:",
+        "ftl_removal_desc": "Questa stanza rimuove le seguenti dalla sequenza globale:",
         "media_removal": "Rimozione multimedia",
         "media_removal_desc": "Questa istanza rimuove gli allegati dalle seguenti stanze:",
         "media_nsfw": "Allegati oscurati forzatamente",
@@ -695,7 +702,8 @@
     "reply_to": "Rispondi a",
     "delete_confirm": "Vuoi veramente eliminare questo messaggio?",
     "unbookmark": "Rimuovi segnalibro",
-    "bookmark": "Aggiungi segnalibro"
+    "bookmark": "Aggiungi segnalibro",
+    "status_deleted": "Questo messagio è stato cancellato"
   },
   "time": {
     "years_short": "{0}a",

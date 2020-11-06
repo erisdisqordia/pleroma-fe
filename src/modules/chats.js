@@ -3,6 +3,7 @@ import { find, omitBy, orderBy, sumBy } from 'lodash'
 import chatService from '../services/chat_service/chat_service.js'
 import { parseChat, parseChatMessage } from '../services/entity_normalizer/entity_normalizer.service.js'
 import { maybeShowChatNotification } from '../services/chat_utils/chat_utils.js'
+import { promiseInterval } from '../services/promise_interval/promise_interval.js'
 
 const emptyChatList = () => ({
   data: [],
@@ -15,7 +16,8 @@ const defaultState = {
   openedChats: {},
   openedChatMessageServices: {},
   fetcher: undefined,
-  currentChatId: null
+  currentChatId: null,
+  lastReadMessageId: null
 }
 
 const getChatById = (state, id) => {
@@ -42,12 +44,10 @@ const chats = {
   actions: {
     // Chat list
     startFetchingChats ({ dispatch, commit }) {
-      const fetcher = () => {
-        dispatch('fetchChats', { latest: true })
-      }
+      const fetcher = () => dispatch('fetchChats', { latest: true })
       fetcher()
       commit('setChatListFetcher', {
-        fetcher: () => setInterval(() => { fetcher() }, 5000)
+        fetcher: () => promiseInterval(fetcher, 5000)
       })
     },
     stopFetchingChats ({ commit }) {
@@ -93,9 +93,14 @@ const chats = {
       commit('setCurrentChatFetcher', { fetcher: undefined })
     },
     readChat ({ rootState, commit, dispatch }, { id, lastReadId }) {
+      const isNewMessage = rootState.chats.lastReadMessageId !== lastReadId
+
       dispatch('resetChatNewMessageCount')
-      commit('readChat', { id })
-      rootState.api.backendInteractor.readChat({ id, lastReadId })
+      commit('readChat', { id, lastReadId })
+
+      if (isNewMessage) {
+        rootState.api.backendInteractor.readChat({ id, lastReadId })
+      }
     },
     deleteChatMessage ({ rootState, commit }, value) {
       rootState.api.backendInteractor.deleteChatMessage(value)
@@ -107,20 +112,23 @@ const chats = {
     },
     clearOpenedChats ({ rootState, commit, dispatch, rootGetters }) {
       commit('clearOpenedChats', { commit })
+    },
+    handleMessageError ({ commit }, value) {
+      commit('handleMessageError', { commit, ...value })
     }
   },
   mutations: {
     setChatListFetcher (state, { commit, fetcher }) {
       const prevFetcher = state.chatListFetcher
       if (prevFetcher) {
-        clearInterval(prevFetcher)
+        prevFetcher.stop()
       }
       state.chatListFetcher = fetcher && fetcher()
     },
     setCurrentChatFetcher (state, { fetcher }) {
       const prevFetcher = state.fetcher
       if (prevFetcher) {
-        clearInterval(prevFetcher)
+        prevFetcher.stop()
       }
       state.fetcher = fetcher && fetcher()
     },
@@ -209,11 +217,16 @@ const chats = {
         }
       }
     },
-    readChat (state, { id }) {
+    readChat (state, { id, lastReadId }) {
+      state.lastReadMessageId = lastReadId
       const chat = getChatById(state, id)
       if (chat) {
         chat.unread = 0
       }
+    },
+    handleMessageError (state, { chatId, fakeId, isRetry }) {
+      const chatMessageService = state.openedChatMessageServices[chatId]
+      chatService.handleMessageError(chatMessageService, fakeId, isRetry)
     }
   }
 }

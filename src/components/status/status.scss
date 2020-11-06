@@ -7,8 +7,9 @@ $status-margin: 0.75em;
   min-width: 0;
 
   &:hover {
-    --still-image-img: visible;
-    --still-image-canvas: hidden;
+    --_still-image-img-visibility: visible;
+    --_still-image-canvas-visibility: hidden;
+    --_still-image-label-visibility: hidden;
   }
 
   &.-focused {
@@ -25,6 +26,23 @@ $status-margin: 0.75em;
     --icon: var(--selectedPostIcon, $fallback--icon);
   }
 
+  &.-conversation {
+    border-left-width: 4px;
+    border-left-style: solid;
+  }
+
+  .gravestone {
+    padding: $status-margin;
+    color: $fallback--faint;
+    color: var(--faint, $fallback--faint);
+    display: flex;
+
+    .deleted-text {
+      margin: 0.5em 0;
+      align-items: center;
+    }
+  }
+
   .status-container {
     display: flex;
     padding: $status-margin;
@@ -39,6 +57,15 @@ $status-margin: 0.75em;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+  }
+
+  ._misclick-prevention & {
+    pointer-events: none;
+
+    .attachments {
+      pointer-events: initial;
+      cursor: initial;
+    }
   }
 
   .left-side {
@@ -139,11 +166,6 @@ $status-margin: 0.75em;
       text-overflow: ellipsis;
       overflow-x: hidden;
     }
-
-    .icon-reply {
-      // mirror the icon
-      transform: scaleX(-1);
-    }
   }
 
   & .reply-to-popover,
@@ -183,7 +205,6 @@ $status-margin: 0.75em;
   }
 
   .reply-to {
-    display: flex;
     position: relative;
   }
 
@@ -191,7 +212,6 @@ $status-margin: 0.75em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-left: 0.2em;
   }
 
   .replies-separator {
@@ -215,16 +235,10 @@ $status-margin: 0.75em;
 
   .repeat-info {
     padding: 0.4em $status-margin;
-    line-height: 22px;
 
-    .right-side {
-      display: flex;
-      align-content: center;
-      flex-wrap: wrap;
-    }
-
-    i {
-      padding: 0 0.2em;
+    .repeat-icon {
+      color: $fallback--cGreen;
+      color: var(--cGreen, $fallback--cGreen);
     }
   }
 
@@ -271,18 +285,6 @@ $status-margin: 0.75em;
     > * {
       max-width: 4em;
       flex: 1;
-    }
-  }
-
-  .button-reply {
-    &:not(.-disabled) {
-      cursor: pointer;
-    }
-
-    &:not(.-disabled):hover,
-    &.-active {
-      color: $fallback--cBlue;
-      color: var(--cBlue, $fallback--cBlue);
     }
   }
 

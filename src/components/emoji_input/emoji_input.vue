@@ -11,7 +11,7 @@
         class="emoji-picker-icon"
         @click.prevent="togglePicker"
       >
-        <i class="icon-smile" />
+        <FAIcon :icon="['far', 'smile-beam']" />
       </div>
       <EmojiPicker
         v-if="enableEmojiPicker"

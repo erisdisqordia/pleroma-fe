@@ -3,6 +3,15 @@ import EmojiPicker from '../emoji_picker/emoji_picker.vue'
 import { take } from 'lodash'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faSmileBeam
+} from '@fortawesome/free-regular-svg-icons'
+
+library.add(
+  faSmileBeam
+)
+
 /**
  * EmojiInput - augmented inputs for emoji and autocomplete support in inputs
  * without having to give up the comfort of <input/> and <textarea/> elements

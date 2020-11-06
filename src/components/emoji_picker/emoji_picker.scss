@@ -82,7 +82,7 @@
       &.active {
         border-bottom: 4px solid;
 
-        i {
+        svg {
           color: $fallback--lightText;
           color: var(--lightText, $fallback--lightText);
         }

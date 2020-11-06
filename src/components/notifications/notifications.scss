@@ -158,37 +158,6 @@
       margin-right: .2em;
     }
 
-    .icon-retweet.lit {
-      color: $fallback--cGreen;
-      color: var(--cGreen, $fallback--cGreen);
-    }
-
-    .icon-user.lit {
-      color: $fallback--cBlue;
-      color: var(--cBlue, $fallback--cBlue);
-    }
-
-    .icon-user-plus.lit {
-      color: $fallback--cBlue;
-      color: var(--cBlue, $fallback--cBlue);
-    }
-
-    .icon-reply.lit {
-      color: $fallback--cBlue;
-      color: var(--cBlue, $fallback--cBlue);
-    }
-
-    .icon-star.lit {
-      color: orange;
-      color: $fallback--cOrange;
-      color: var(--cOrange, $fallback--cOrange);
-    }
-
-    .icon-arrow-curved.lit {
-      color: $fallback--cBlue;
-      color: var(--cBlue, $fallback--cBlue);
-    }
-
     .status-content {
       margin: 0;
       max-height: 300px;

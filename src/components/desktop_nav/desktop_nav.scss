@@ -1,0 +1,112 @@
+@import '../../_variables.scss';
+
+.DesktopNav {
+  height: 50px;
+  width: 100%;
+  position: fixed;
+
+  .inner-nav {
+    display: grid;
+    grid-template-rows: 50px;
+    grid-template-columns: 2fr auto 2fr;
+    grid-template-areas: "sitename logo actions";
+    box-sizing: border-box;
+    padding: 0 1.2em;
+    margin: auto;
+    max-width: 980px;
+  }
+
+  &.-logoLeft {
+    grid-template-columns: auto 2fr 2fr;
+    grid-template-areas: "logo sitename actions";
+  }
+
+  button {
+    &, svg {
+      color: $fallback--text;
+      color: var(--btnTopBarText, $fallback--text);
+    }
+
+    &:active {
+      background-color: $fallback--fg;
+      background-color: var(--btnPressedTopBar, $fallback--fg);
+      color: $fallback--text;
+      color: var(--btnPressedTopBarText, $fallback--text);
+    }
+
+    &:disabled {
+      color: $fallback--text;
+      color: var(--btnDisabledTopBarText, $fallback--text);
+    }
+
+    &.toggled {
+      color: $fallback--text;
+      color: var(--btnToggledTopBarText, $fallback--text);
+      background-color: $fallback--fg;
+      background-color: var(--btnToggledTopBar, $fallback--fg)
+    }
+  }
+
+  .logo {
+    grid-area: logo;
+    position: relative;
+    transition: opacity;
+    transition-timing-function: ease-out;
+    transition-duration: 100ms;
+
+    @media all and (min-width: 800px) {
+      opacity: 1 !important;
+    }
+
+    .mask {
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+      background-color: $fallback--fg;
+      background-color: var(--topBarText, $fallback--fg);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    img {
+      display: inline-block;
+      height: 50px;
+    }
+  }
+
+  .nav-icon {
+    margin-left: 0.2em;
+    width: 2em;
+    text-align: center;
+  }
+
+  a, a svg {
+    color: $fallback--link;
+    color: var(--topBarLink, $fallback--link);
+  }
+
+  .sitename {
+    grid-area: sitename;
+  }
+
+  .actions {
+    grid-area: actions;
+  }
+
+  .item {
+    flex: 1;
+    line-height: 50px;
+    height: 50px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+
+    &.right {
+      justify-content: flex-end;
+      text-align: right;
+    }
+  }
+}

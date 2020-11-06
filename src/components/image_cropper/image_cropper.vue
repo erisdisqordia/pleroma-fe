@@ -31,9 +31,10 @@
           @click="submit(false)"
           v-text="saveWithoutCroppingText"
         />
-        <i
+        <FAIcon
           v-if="submitting"
-          class="icon-spin4 animate-spin"
+          spin
+          icon="circle-notch"
         />
       </div>
       <div
@@ -41,8 +42,9 @@
         class="alert error"
       >
         {{ submitErrorMsg }}
-        <i
-          class="button-icon icon-cancel"
+        <FAIcon
+          class="fa-scale-110 fa-old-padding"
+          icon="times"
           @click="clearError"
         />
       </div>

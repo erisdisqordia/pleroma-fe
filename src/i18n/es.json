@@ -551,7 +551,14 @@
     "change_email_error": "Ha ocurrido un error al intentar modificar tu correo electrónico.",
     "change_email": "Modificar el correo electrónico",
     "bot": "Esta cuenta es un bot",
-    "allow_following_move": "Permitir el seguimiento automático, cuando la cuenta que sigues se traslada a otra instancia"
+    "allow_following_move": "Permitir el seguimiento automático, cuando la cuenta que sigues se traslada a otra instancia",
+    "virtual_scrolling": "Optimizar la representación de la linea temporal",
+    "import_mutes_from_a_csv_file": "Importar silenciados desde un archivo csv",
+    "mutes_imported": "¡Silenciados importados! Procesarlos llevará un tiempo.",
+    "mute_import_error": "Error al importar los silenciados",
+    "mute_import": "Importar silenciados",
+    "mute_export_button": "Exportar los silenciados a un archivo csv",
+    "mute_export": "Exportar silenciados"
   },
   "time": {
     "day": "{0} día",
@@ -762,7 +769,7 @@
         "ftl_removal_desc": "Esta instancia elimina las siguientes instancias de la línea de tiempo \"Toda la red conocida\":",
         "ftl_removal": "Eliminar de la línea de tiempo \"Toda La Red Conocida\"",
         "quarantine_desc": "Esta instancia enviará solo publicaciones públicas a las siguientes instancias:",
-        "simple_policies": "Políticas sobre instancias específicas",
+        "simple_policies": "Políticas específicas de la instancia",
         "reject_desc": "Esta instancia no aceptará mensajes de las siguientes instancias:",
         "reject": "Rechazar",
         "accept": "Aceptar"

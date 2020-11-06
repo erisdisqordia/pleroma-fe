@@ -49,7 +49,8 @@
     "scope_options": "Ustawienia zakresu",
     "text_limit": "Limit tekstu",
     "title": "Funkcje",
-    "who_to_follow": "Propozycje obserwacji"
+    "who_to_follow": "Propozycje obserwacji",
+    "pleroma_chat_messages": "Czat Pleromy"
   },
   "finder": {
     "error_fetching_user": "Błąd przy pobieraniu profilu",
@@ -71,7 +72,9 @@
     "verify": "Zweryfikuj",
     "close": "Zamknij",
     "loading": "Ładowanie…",
-    "retry": "Spróbuj ponownie"
+    "retry": "Spróbuj ponownie",
+    "peek": "Spójrz",
+    "error_retry": "Spróbuj ponownie"
   },
   "image_cropper": {
     "crop_picture": "Przytnij obrazek",
@@ -117,12 +120,14 @@
     "dms": "Wiadomości prywatne",
     "public_tl": "Publiczna oś czasu",
     "timeline": "Oś czasu",
-    "twkn": "Cała znana sieć",
+    "twkn": "Znana sieć",
     "user_search": "Wyszukiwanie użytkowników",
     "search": "Wyszukiwanie",
     "who_to_follow": "Sugestie obserwacji",
     "preferences": "Preferencje",
-    "bookmarks": "Zakładki"
+    "bookmarks": "Zakładki",
+    "chats": "Czaty",
+    "timelines": "Osie czasu"
   },
   "notifications": {
     "broken_favorite": "Nieznany status, szukam go…",
@@ -197,7 +202,9 @@
     },
     "preview_empty": "Pusty",
     "preview": "Podgląd",
-    "empty_status_error": "Nie można wysłać pustego wpisu bez plików"
+    "empty_status_error": "Nie można wysłać pustego wpisu bez plików",
+    "media_description_error": "Nie udało się zaktualizować mediów, spróbuj ponownie",
+    "media_description": "Opis mediów"
   },
   "registration": {
     "bio": "Bio",
@@ -400,7 +407,7 @@
     "theme_help_v2_1": "Możesz też zastąpić kolory i widoczność poszczególnych komponentów przełączając pola wyboru, użyj „Wyczyść wszystko” aby usunąć wszystkie zastąpienia.",
     "theme_help_v2_2": "Ikony pod niektórych wpisami są wskaźnikami kontrastu pomiędzy tłem a tekstem, po najechaniu na nie otrzymasz szczegółowe informacje. Zapamiętaj, że jeżeli używasz przezroczystości, wskaźniki pokazują najgorszy możliwy przypadek.",
     "tooltipRadius": "Etykiety/alerty",
-    "type_domains_to_mute": "Wpisz domeny, które chcesz wyciszyć",
+    "type_domains_to_mute": "Wyszukaj domeny, które chcesz wyciszyć",
     "upload_a_photo": "Wyślij zdjęcie",
     "user_settings": "Ustawienia użytkownika",
     "values": {
@@ -492,7 +499,8 @@
         "tabs": "Karty",
         "chat": {
           "outgoing": "Wiadomości wychodzące",
-          "incoming": "Wiadomości przychodzące"
+          "incoming": "Wiadomości przychodzące",
+          "border": "Granica"
         }
       },
       "radii": {
@@ -573,7 +581,22 @@
       "add_field": "Dodaj pole"
     },
     "bot": "To konto jest prowadzone przez bota",
-    "notification_setting_hide_notification_contents": "Ukryj nadawcę i zawartość powiadomień push"
+    "notification_setting_hide_notification_contents": "Ukryj nadawcę i zawartość powiadomień push",
+    "notification_setting_block_from_strangers": "Zablokuj powiadomienia od użytkowników których nie obserwujesz",
+    "virtual_scrolling": "Optymalizuj renderowanie osi czasu",
+    "reset_background_confirm": "Czy naprawdę chcesz zresetować tło?",
+    "reset_banner_confirm": "Czy naprawdę chcesz zresetować banner?",
+    "reset_avatar_confirm": "Czy naprawdę chcesz zresetować awatar?",
+    "reset_profile_banner": "Zresetuj banner profilowy",
+    "reset_profile_background": "Zresetuj tło profilowe",
+    "mutes_and_blocks": "Wyciszenia i blokady",
+    "chatMessageRadius": "Wiadomość czatu",
+    "import_mutes_from_a_csv_file": "Zaimportuj wyciszenia z pliku .csv",
+    "mutes_imported": "Zaimportowano wyciszenia! Przetwarzanie zajmie chwilę.",
+    "mute_import_error": "Wystąpił błąd podczas importowania wyciszeń",
+    "mute_import": "Import wyciszeń",
+    "mute_export_button": "Wyeksportuj swoje wyciszenia do pliku .csv",
+    "mute_export": "Eksport wyciszeń"
   },
   "time": {
     "day": "{0} dzień",
@@ -639,7 +662,12 @@
     "unbookmark": "Usuń z zakładek",
     "bookmark": "Dodaj do zakładek",
     "hide_content": "Ukryj zawartość",
-    "show_content": "Pokaż zawartość"
+    "show_content": "Pokaż zawartość",
+    "hide_full_subject": "Ukryj cały temat",
+    "show_full_subject": "Pokaż cały temat",
+    "thread_muted_and_words": ", ma słowa:",
+    "thread_muted": "Wątek wyciszony",
+    "status_deleted": "Ten wpis został usunięty"
   },
   "user_card": {
     "approve": "Przyjmij",
@@ -723,7 +751,8 @@
     "add_reaction": "Dodaj reakcję",
     "user_settings": "Ustawienia użytkownika",
     "accept_follow_request": "Akceptuj prośbę o możliwość obserwacji",
-    "reject_follow_request": "Odrzuć prośbę o możliwość obserwacji"
+    "reject_follow_request": "Odrzuć prośbę o możliwość obserwacji",
+    "bookmark": "Zakładka"
   },
   "upload": {
     "error": {
@@ -773,9 +802,17 @@
     "error_sending_message": "Coś poszło nie tak podczas wysyłania wiadomości.",
     "error_loading_chat": "Coś poszło nie tak podczas ładowania czatu.",
     "empty_message_error": "Nie można wysłać pustej wiadomości",
-    "new": "Nowy czat"
+    "new": "Nowy czat",
+    "empty_chat_list_placeholder": "Nie masz jeszcze żadnych czatów. Zacznij nowy czat!",
+    "chats": "Czaty"
   },
   "display_date": {
     "today": "Dzisiaj"
+  },
+  "shoutbox": {
+    "title": "Shoutbox"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma nie mogła uzyskać dostępu do pamięci masowej przeglądarki. Twój login lub lokalne ustawienia nie zostaną zapisane i możesz napotkać problemy. Spróbuj włączyć ciasteczka."
   }
 }

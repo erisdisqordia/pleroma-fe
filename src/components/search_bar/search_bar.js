@@ -1,9 +1,19 @@
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faTimes,
+  faSearch
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faTimes,
+  faSearch
+)
+
 const SearchBar = {
   data: () => ({
     searchTerm: undefined,
     hidden: true,
-    error: false,
-    loading: false
+    error: false
   }),
   watch: {
     '$route': function (route) {

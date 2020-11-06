@@ -3,6 +3,20 @@ import VideoAttachment from '../video_attachment/video_attachment.vue'
 import nsfwImage from '../../assets/nsfw.png'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import { mapGetters } from 'vuex'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faFile,
+  faMusic,
+  faImage,
+  faVideo
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faFile,
+  faMusic,
+  faImage,
+  faVideo
+)
 
 const Attachment = {
   props: [
@@ -39,10 +53,10 @@ const Attachment = {
       return this.attachment.description
     },
     placeholderIconClass () {
-      if (this.type === 'image') return 'icon-picture'
-      if (this.type === 'video') return 'icon-video'
-      if (this.type === 'audio') return 'icon-music'
-      return 'icon-doc'
+      if (this.type === 'image') return 'image'
+      if (this.type === 'video') return 'video'
+      if (this.type === 'audio') return 'music'
+      return 'file'
     },
     referrerpolicy () {
       return this.$store.state.instance.mediaProxyAvailable ? '' : 'no-referrer'

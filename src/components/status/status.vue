@@ -10,17 +10,20 @@
       class="alert error"
     >
       {{ error }}
-      <i
-        class="button-icon icon-cancel"
+      <span
+        class="fa-scale-110 fa-old-padding"
         @click="clearError"
-      />
+      >
+        <FAIcon icon="times" />
+      </span>
     </div>
     <template v-if="muted && !isPreview">
-      <div class="status-csontainer muted">
+      <div class="status-container muted">
         <small class="status-username">
-          <i
+          <FAIcon
             v-if="muted && retweet"
-            class="button-icon icon-retweet"
+            class="fa-scale-110 fa-old-padding repeat-icon"
+            icon="retweet"
           />
           <router-link :to="userProfileLink">
             {{ status.user.screen_name }}
@@ -46,9 +49,14 @@
         </small>
         <a
           href="#"
-          class="unmute"
+          class="unmute fa-scale-110 fa-old-padding"
           @click.prevent="toggleMute"
-        ><i class="button-icon icon-eye-off" /></a>
+        >
+          <FAIcon
+            icon="eye-slash"
+            class="fa-scale-110 fa-old-padding"
+          />
+        </a>
       </div>
     </template>
     <template v-else>
@@ -56,7 +64,10 @@
         v-if="showPinned"
         class="pin"
       >
-        <i class="fa icon-pin faint" />
+        <FAIcon
+          icon="thumbtack"
+          class="faint"
+        />
         <span class="faint">{{ $t('status.pinned') }}</span>
       </div>
       <div
@@ -86,8 +97,9 @@
               :to="retweeterProfileLink"
             >{{ retweeter }}</router-link>
           </span>
-          <i
-            class="fa icon-retweet retweeted"
+          <FAIcon
+            icon="retweet"
+            class="repeat-icon"
             :title="$t('tool_tip.repeat')"
           />
           {{ $t('timeline.repeated') }}
@@ -95,6 +107,7 @@
       </div>
 
       <div
+        v-if="!deleted"
         :class="[userClass, { highlighted: userStyle, '-repeat': retweet && !inConversation }]"
         :style="[ userStyle ]"
         class="status-container"
@@ -166,15 +179,16 @@
                     :auto-update="60"
                   />
                 </router-link>
-                <div
+                <span
                   v-if="status.visibility"
-                  class="button-icon visibility-icon"
+                  class="visibility-icon"
+                  :title="status.visibility | capitalize"
                 >
-                  <i
-                    :class="visibilityIcon(status.visibility)"
-                    :title="status.visibility | capitalize"
+                  <FAIcon
+                    class="fa-scale-110 fa-old-padding"
+                    :icon="visibilityIcon(status.visibility)"
                   />
-                </div>
+                </span>
                 <a
                   v-if="!status.is_local && !isPreview"
                   :href="status.external_url"
@@ -182,22 +196,32 @@
                   class="source_url"
                   title="Source"
                 >
-                  <i class="button-icon icon-link-ext-alt" />
+                  <FAIcon
+                    class="fa-scale-110 fa-old-padding"
+                    icon="external-link-square-alt"
+                  />
                 </a>
-                <template v-if="expandable && !isPreview">
-                  <a
-                    href="#"
-                    title="Expand"
-                    @click.prevent="toggleExpanded"
-                  >
-                    <i class="button-icon icon-plus-squared" />
-                  </a>
-                </template>
+                <a
+                  v-if="expandable && !isPreview"
+                  href="#"
+                  title="Expand"
+                  @click.prevent="toggleExpanded"
+                >
+                  <FAIcon
+                    class="fa-scale-110 fa-old-padding"
+                    icon="plus-square"
+                  />
+                </a>
                 <a
                   v-if="unmuted"
                   href="#"
                   @click.prevent="toggleMute"
-                ><i class="button-icon icon-eye-off" /></a>
+                >
+                  <FAIcon
+                    icon="eye-slash"
+                    class="fa-scale-110 fa-old-padding"
+                  />
+                </a>
               </span>
             </div>
 
@@ -219,7 +243,11 @@
                     :aria-label="$t('tool_tip.reply')"
                     @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
                   >
-                    <i class="button-icon reply-button icon-reply" />
+                    <FAIcon
+                      class="fa-scale-110 fa-old-padding"
+                      icon="reply"
+                      flip="horizontal"
+                    />
                     <span
                       class="faint-link reply-to-text"
                     >
@@ -227,6 +255,7 @@
                     </span>
                   </a>
                 </StatusPopover>
+
                 <span
                   v-else
                   class="reply-to-no-popover"
@@ -272,6 +301,8 @@
             :no-heading="noHeading"
             :highlight="highlight"
             :focused="isFocused"
+            @mediaplay="addMediaPlaying($event)"
+            @mediapause="removeMediaPlaying($event)"
           />
 
           <transition name="fade">
@@ -320,21 +351,11 @@
             v-if="!noHeading && !isPreview"
             class="status-actions"
           >
-            <div>
-              <i
-                v-if="loggedIn"
-                class="button-icon button-reply icon-reply"
-                :title="$t('tool_tip.reply')"
-                :class="{'-active': replying}"
-                @click.prevent="toggleReplying"
-              />
-              <i
-                v-else
-                class="button-icon button-reply -disabled icon-reply"
-                :title="$t('tool_tip.reply')"
-              />
-              <span v-if="status.replies_count > 0">{{ status.replies_count }}</span>
-            </div>
+            <reply-button
+              :replying="replying"
+              :status="status"
+              @toggle="toggleReplying"
+            />
             <retweet-button
               :visibility="status.visibility"
               :logged-in="loggedIn"
@@ -357,6 +378,25 @@
         </div>
       </div>
       <div
+        v-else
+        class="gravestone"
+      >
+        <div class="left-side">
+          <UserAvatar :compact="compact" />
+        </div>
+        <div class="right-side">
+          <div class="deleted-text">
+            {{ $t('status.status_deleted') }}
+          </div>
+          <reply-button
+            v-if="replying"
+            :replying="replying"
+            :status="status"
+            @toggle="toggleReplying"
+          />
+        </div>
+      </div>
+      <div
         v-if="replying"
         class="status-container reply-form"
       >
@@ -376,4 +416,5 @@
 </template>
 
 <script src="./status.js" ></script>
+
 <style src="./status.scss" lang="scss"></style>

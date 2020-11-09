@@ -4,6 +4,7 @@
     placement="top"
     :offset="{ y: 5 }"
     class="react-button-popover"
+    :bound-to="{ x: 'container' }"
   >
     <div
       slot="content"
@@ -37,12 +38,13 @@
         <div class="reaction-bottom-fader" />
       </div>
     </div>
-    <FAIcon
-      slot="trigger"
-      class="fa-scale-110 fa-old-padding add-reaction-button"
-      :icon="['far', 'smile-beam']"
-      :title="$t('tool_tip.add_reaction')"
-    />
+    <span slot="trigger">
+      <FAIcon
+        class="fa-scale-110 fa-old-padding add-reaction-button"
+        :icon="['far', 'smile-beam']"
+        :title="$t('tool_tip.add_reaction')"
+      />
+    </span>
   </Popover>
 </template>
 

@@ -533,10 +533,12 @@ const PostStatusForm = {
       const totalDelta = shouldScrollToBottom ? bottomChangeDelta : 0
       const targetScroll = currentScroll + totalDelta
 
-      if (scrollerRef === window) {
-        scrollerRef.scroll(0, targetScroll)
-      } else {
-        scrollerRef.scrollTop = targetScroll
+      if (totalDelta >= 1) {
+        if (scrollerRef === window) {
+          scrollerRef.scroll(0, targetScroll)
+        } else {
+          scrollerRef.scrollTop = targetScroll
+        }
       }
 
       this.$refs['emoji-input'].resize()

@@ -531,14 +531,12 @@ const PostStatusForm = {
             !(isFormBiggerThanScroller &&
               this.$refs.textarea.selectionStart !== this.$refs.textarea.value.length)
       const totalDelta = shouldScrollToBottom ? bottomChangeDelta : 0
-      const targetScroll = currentScroll + totalDelta
+      const targetScroll = Math.round(currentScroll + totalDelta)
 
-      if (totalDelta >= 1) {
-        if (scrollerRef === window) {
-          scrollerRef.scroll(0, targetScroll)
-        } else {
-          scrollerRef.scrollTop = targetScroll
-        }
+      if (scrollerRef === window) {
+        scrollerRef.scroll(0, targetScroll)
+      } else {
+        scrollerRef.scrollTop = targetScroll
       }
 
       this.$refs['emoji-input'].resize()

@@ -390,5 +390,13 @@
       "GiB": "GiB",
       "TiB": "TiB"
     }
+  },
+  "about": {
+    "mrf": {
+      "keyword": {
+        "keyword_policies": "פוליסת מילות מפתח"
+      },
+      "federation": "פדרציה"
+    }
   }
 }

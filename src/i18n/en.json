@@ -130,6 +130,7 @@
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
+    "error": "Error fetching notifications: {0}",
     "favorited_you": "favorited your status",
     "followed_you": "followed you",
     "follow_request": "wants to follow you",

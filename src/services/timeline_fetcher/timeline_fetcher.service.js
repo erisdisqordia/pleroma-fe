@@ -6,9 +6,6 @@ import { promiseInterval } from '../promise_interval/promise_interval.js'
 const update = ({ store, statuses, timeline, showImmediately, userId, pagination }) => {
   const ccTimeline = camelCase(timeline)
 
-  store.dispatch('setError', { value: false })
-  store.dispatch('setErrorData', { value: null })
-
   store.dispatch('addNewStatuses', {
     timeline: ccTimeline,
     userId,

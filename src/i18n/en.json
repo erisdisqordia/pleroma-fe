@@ -634,7 +634,7 @@
   "timeline": {
     "collapse": "Collapse",
     "conversation": "Conversation",
-    "error_fetching": "Error fetching updates",
+    "error": "Error fetching timeline: {0}",
     "load_older": "Load older statuses",
     "no_retweet_hint": "Post is marked as followers-only or direct and cannot be repeated",
     "repeated": "repeated",

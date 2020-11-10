@@ -50,8 +50,6 @@ export const defaultState = () => ({
   maxId: 0,
   notifications: emptyNotifications(),
   favorites: new Set(),
-  error: false,
-  errorData: null,
   timelines: {
     mentions: emptyTl(),
     public: emptyTl(),

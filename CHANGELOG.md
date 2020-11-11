@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 - Fixed regression in react popup alignment and overflowing
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form
+- Fixed custom emoji not working in profile field names
 
 
 ## [2.2.0] - 2020-11-06

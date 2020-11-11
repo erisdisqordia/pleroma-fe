@@ -53,7 +53,7 @@ export const parseUser = (data) => {
     output.fields = data.fields
     output.fields_html = data.fields.map(field => {
       return {
-        name: addEmojis(field.name, data.emojis),
+        name: addEmojis(escape(field.name), data.emojis),
         value: addEmojis(field.value, data.emojis)
       }
     })

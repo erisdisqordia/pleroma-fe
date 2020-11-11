@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Errors when fetching are now shown with popup errors instead of "Error fetching updates" in panel headers
+- Fixed custom emoji not working in profile field names
 
 
 ## [2.2.0] - 2020-11-06

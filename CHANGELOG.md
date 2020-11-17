@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Import/export a muted users
 - Proper handling of deletes when using websocket streaming
 - Added optimistic chat message sending, so you can start writing next message before the previous one has been sent
+- Added a small red badge to the favicon when there's unread notifications
 
 ### Fixed
 - Fixed clicking NSFW hider through status popover

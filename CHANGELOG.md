@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form
 - Fixed custom emoji not working in profile field names
+- Fixed pinned statuses not appearing in user profiles
 
 
 ## [2.2.1] - 2020-11-11

@@ -137,11 +137,11 @@ export const mutations = {
   },
   saveFriendIds (state, { id, friendIds }) {
     const user = state.usersObject[id]
-    user.friendIds = uniq(concat(user.friendIds, friendIds))
+    user.friendIds = uniq(concat(user.friendIds || [], friendIds))
   },
   saveFollowerIds (state, { id, followerIds }) {
     const user = state.usersObject[id]
-    user.followerIds = uniq(concat(user.followerIds, followerIds))
+    user.followerIds = uniq(concat(user.followerIds || [], followerIds))
   },
   // Because frontend doesn't have a reason to keep these stuff in memory
   // outside of viewing someones user profile.
@@ -202,7 +202,9 @@ export const mutations = {
   },
   setPinnedToUser (state, status) {
     const user = state.usersObject[status.user.id]
+    user.pinnedStatusIds = user.pinnedStatusIds || []
     const index = user.pinnedStatusIds.indexOf(status.id)
+
     if (status.pinned && index === -1) {
       user.pinnedStatusIds.push(status.id)
     } else if (!status.pinned && index !== -1) {

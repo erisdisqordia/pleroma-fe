@@ -1,4 +1,3 @@
-import { debounce } from 'lodash'
 /**
  * suggest - generates a suggestor function to be used by emoji-input
  * data: object providing source information for specific types of suggestions:
@@ -11,19 +10,19 @@ import { debounce } from 'lodash'
  * doesn't support user linking you can just provide only emoji.
  */
 
-const debounceUserSearch = debounce((data, input) => {
-  data.updateUsersList(input)
-}, 500)
-
-export default data => input => {
-  const firstChar = input[0]
-  if (firstChar === ':' && data.emoji) {
-    return suggestEmoji(data.emoji)(input)
+export default data => {
+  const emojiCurry = suggestEmoji(data.emoji)
+  const usersCurry = suggestUsers(data.dispatch)
+  return input => {
+    const firstChar = input[0]
+    if (firstChar === ':' && data.emoji) {
+      return emojiCurry(input)
+    }
+    if (firstChar === '@' && data.dispatch) {
+      return usersCurry(input)
+    }
+    return []
   }
-  if (firstChar === '@' && data.users) {
-    return suggestUsers(data)(input)
-  }
-  return []
 }
 
 export const suggestEmoji = emojis => input => {
@@ -57,50 +56,67 @@ export const suggestEmoji = emojis => input => {
     })
 }
 
-export const suggestUsers = data => input => {
-  const noPrefix = input.toLowerCase().substr(1)
-  const users = data.users
+export const suggestUsers = (dispatch) => {
+  let suggestions = []
+  let previousQuery = ''
+  let timeout = null
 
-  const newUsers = users.filter(
-    user =>
-      user.screen_name.toLowerCase().startsWith(noPrefix) ||
-      user.name.toLowerCase().startsWith(noPrefix)
-
-    /* taking only 20 results so that sorting is a bit cheaper, we display
-     * only 5 anyway. could be inaccurate, but we ideally we should query
-     * backend anyway
-     */
-  ).slice(0, 20).sort((a, b) => {
-    let aScore = 0
-    let bScore = 0
-
-    // Matches on screen name (i.e. user@instance) makes a priority
-    aScore += a.screen_name.toLowerCase().startsWith(noPrefix) ? 2 : 0
-    bScore += b.screen_name.toLowerCase().startsWith(noPrefix) ? 2 : 0
-
-    // Matches on name takes second priority
-    aScore += a.name.toLowerCase().startsWith(noPrefix) ? 1 : 0
-    bScore += b.name.toLowerCase().startsWith(noPrefix) ? 1 : 0
-
-    const diff = (bScore - aScore) * 10
-
-    // Then sort alphabetically
-    const nameAlphabetically = a.name > b.name ? 1 : -1
-    const screenNameAlphabetically = a.screen_name > b.screen_name ? 1 : -1
-
-    return diff + nameAlphabetically + screenNameAlphabetically
-    /* eslint-disable camelcase */
-  }).map(({ screen_name, name, profile_image_url_original }) => ({
-    displayText: screen_name,
-    detailText: name,
-    imageUrl: profile_image_url_original,
-    replacement: '@' + screen_name + ' '
-  }))
-
-  // BE search users to get more comprehensive results
-  if (data.updateUsersList) {
-    debounceUserSearch(data, noPrefix)
+  const userSearch = (query) => dispatch('searchUsers', { query, saveUsers: false })
+  const debounceUserSearch = (query) => {
+    return new Promise((resolve, reject) => {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        userSearch(query).then(resolve).catch(reject)
+      }, 300)
+    })
   }
-  return newUsers
-  /* eslint-enable camelcase */
+
+  return async input => {
+    const noPrefix = input.toLowerCase().substr(1)
+    if (previousQuery === noPrefix) return suggestions
+
+    suggestions = []
+    previousQuery = noPrefix
+    const users = await debounceUserSearch(noPrefix)
+
+    const newUsers = users.filter(
+      user =>
+        user.screen_name.toLowerCase().startsWith(noPrefix) ||
+        user.name.toLowerCase().startsWith(noPrefix)
+
+      /* taking only 20 results so that sorting is a bit cheaper, we display
+       * only 5 anyway. could be inaccurate, but we ideally we should query
+       * backend anyway
+       */
+    ).slice(0, 20).sort((a, b) => {
+      let aScore = 0
+      let bScore = 0
+
+      // Matches on screen name (i.e. user@instance) makes a priority
+      aScore += a.screen_name.toLowerCase().startsWith(noPrefix) ? 2 : 0
+      bScore += b.screen_name.toLowerCase().startsWith(noPrefix) ? 2 : 0
+
+      // Matches on name takes second priority
+      aScore += a.name.toLowerCase().startsWith(noPrefix) ? 1 : 0
+      bScore += b.name.toLowerCase().startsWith(noPrefix) ? 1 : 0
+
+      const diff = (bScore - aScore) * 10
+
+      // Then sort alphabetically
+      const nameAlphabetically = a.name > b.name ? 1 : -1
+      const screenNameAlphabetically = a.screen_name > b.screen_name ? 1 : -1
+
+      return diff + nameAlphabetically + screenNameAlphabetically
+      /* eslint-disable camelcase */
+    }).map(({ screen_name, name, profile_image_url_original }) => ({
+      displayText: screen_name,
+      detailText: name,
+      imageUrl: profile_image_url_original,
+      replacement: '@' + screen_name + ' '
+    }))
+
+    suggestions = newUsers || []
+    return suggestions
+    /* eslint-enable camelcase */
+  }
 }

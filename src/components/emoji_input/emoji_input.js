@@ -114,7 +114,8 @@ const EmojiInput = {
       showPicker: false,
       temporarilyHideSuggestions: false,
       keepOpen: false,
-      disableClickOutside: false
+      disableClickOutside: false,
+      suggestions: []
     }
   },
   components: {
@@ -123,21 +124,6 @@ const EmojiInput = {
   computed: {
     padEmoji () {
       return this.$store.getters.mergedConfig.padEmoji
-    },
-    suggestions () {
-      const firstchar = this.textAtCaret.charAt(0)
-      if (this.textAtCaret === firstchar) { return [] }
-      const matchedSuggestions = this.suggest(this.textAtCaret)
-      if (matchedSuggestions.length <= 0) {
-        return []
-      }
-      return take(matchedSuggestions, 5)
-        .map(({ imageUrl, ...rest }, index) => ({
-          ...rest,
-          // eslint-disable-next-line camelcase
-          img: imageUrl || '',
-          highlighted: index === this.highlighted
-        }))
     },
     showSuggestions () {
       return this.focused &&
@@ -187,7 +173,25 @@ const EmojiInput = {
   },
   watch: {
     showSuggestions: function (newValue) {
+      console.log('showSuggestions watch', newValue, this.suggestions)
       this.$emit('shown', newValue)
+    },
+    textAtCaret: async function (textAtCaret) {
+      const firstchar = textAtCaret.charAt(0)
+      this.suggestions = []
+      if (textAtCaret === firstchar) return
+      const matchedSuggestions = await this.suggest(textAtCaret)
+      // Async, cancel if textAtCaret has been updated while waiting
+      if (this.textAtCaret !== textAtCaret) return
+      if (matchedSuggestions.length <= 0) return
+      this.suggestions = take(matchedSuggestions, 10)
+        .map(({ imageUrl, ...rest }, index) => ({
+          ...rest,
+          // eslint-disable-next-line camelcase
+          img: imageUrl || '',
+          highlighted: index === this.highlighted
+        }))
+      this.scrollIntoView()
     }
   },
   methods: {
@@ -341,6 +345,7 @@ const EmojiInput = {
         const { offsetHeight } = this.input.elm
         const { picker } = this.$refs
         const pickerBottom = picker.$el.getBoundingClientRect().bottom
+        console.log('setting bottom', pickerBottom > window.innerHeight)
         if (pickerBottom > window.innerHeight) {
           picker.$el.style.top = 'auto'
           picker.$el.style.bottom = offsetHeight + 'px'

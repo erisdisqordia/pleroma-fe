@@ -2,7 +2,6 @@ import apiService from '../api/api.service.js'
 import { promiseInterval } from '../promise_interval/promise_interval.js'
 
 const update = ({ store, notifications, older }) => {
-  store.dispatch('setNotificationsError', { value: false })
   store.dispatch('addNewNotifications', { notifications, older })
 }
 
@@ -47,11 +46,22 @@ const fetchAndUpdate = ({ store, credentials, older = false }) => {
 
 const fetchNotifications = ({ store, args, older }) => {
   return apiService.fetchTimeline(args)
-    .then(({ data: notifications }) => {
+    .then((response) => {
+      if (response.errors) {
+        throw new Error(`${response.status} ${response.statusText}`)
+      }
+      const notifications = response.data
       update({ store, notifications, older })
       return notifications
-    }, () => store.dispatch('setNotificationsError', { value: true }))
-    .catch(() => store.dispatch('setNotificationsError', { value: true }))
+    })
+    .catch((error) => {
+      store.dispatch('pushGlobalNotice', {
+        level: 'error',
+        messageKey: 'notifications.error',
+        messageArgs: [error.message],
+        timeout: 5000
+      })
+    })
 }
 
 const startFetching = ({ credentials, store }) => {

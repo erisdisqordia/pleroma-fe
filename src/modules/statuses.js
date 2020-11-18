@@ -39,8 +39,7 @@ const emptyNotifications = () => ({
   minId: Number.POSITIVE_INFINITY,
   data: [],
   idStore: {},
-  loading: false,
-  error: false
+  loading: false
 })
 
 export const defaultState = () => ({
@@ -50,8 +49,6 @@ export const defaultState = () => ({
   maxId: 0,
   notifications: emptyNotifications(),
   favorites: new Set(),
-  error: false,
-  errorData: null,
   timelines: {
     mentions: emptyTl(),
     public: emptyTl(),
@@ -462,17 +459,8 @@ export const mutations = {
     const newStatus = state.allStatusesObject[id]
     newStatus.nsfw = nsfw
   },
-  setError (state, { value }) {
-    state.error = value
-  },
-  setErrorData (state, { value }) {
-    state.errorData = value
-  },
   setNotificationsLoading (state, { value }) {
     state.notifications.loading = value
-  },
-  setNotificationsError (state, { value }) {
-    state.notifications.error = value
   },
   setNotificationsSilence (state, { value }) {
     state.notifications.desktopNotificationSilence = value
@@ -588,17 +576,8 @@ const statuses = {
       }
       commit('addNewNotifications', { dispatch, notifications, older, rootGetters, newNotificationSideEffects })
     },
-    setError ({ rootState, commit }, { value }) {
-      commit('setError', { value })
-    },
-    setErrorData ({ rootState, commit }, { value }) {
-      commit('setErrorData', { value })
-    },
     setNotificationsLoading ({ rootState, commit }, { value }) {
       commit('setNotificationsLoading', { value })
-    },
-    setNotificationsError ({ rootState, commit }, { value }) {
-      commit('setNotificationsError', { value })
     },
     setNotificationsSilence ({ rootState, commit }, { value }) {
       commit('setNotificationsSilence', { value })

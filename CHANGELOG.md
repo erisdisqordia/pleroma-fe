@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form
+- Fixed timeline errors locking timelines
+
+### Changed
+- Errors when fetching are now shown with popup errors instead of "Error fetching updates" in panel headers
 - Fixed custom emoji not working in profile field names
 - Fixed pinned statuses not appearing in user profiles
 

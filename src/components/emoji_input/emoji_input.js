@@ -173,7 +173,6 @@ const EmojiInput = {
   },
   watch: {
     showSuggestions: function (newValue) {
-      console.log('showSuggestions watch', newValue, this.suggestions)
       this.$emit('shown', newValue)
     },
     textAtCaret: async function (textAtCaret) {
@@ -184,14 +183,16 @@ const EmojiInput = {
       // Async, cancel if textAtCaret has been updated while waiting
       if (this.textAtCaret !== textAtCaret) return
       if (matchedSuggestions.length <= 0) return
-      this.suggestions = take(matchedSuggestions, 10)
+      this.suggestions = take(matchedSuggestions, 5)
         .map(({ imageUrl, ...rest }, index) => ({
           ...rest,
           // eslint-disable-next-line camelcase
           img: imageUrl || '',
           highlighted: index === this.highlighted
         }))
-      this.scrollIntoView()
+    },
+    suggestions (newValue) {
+      this.$nextTick(this.resize)
     }
   },
   methods: {
@@ -345,7 +346,6 @@ const EmojiInput = {
         const { offsetHeight } = this.input.elm
         const { picker } = this.$refs
         const pickerBottom = picker.$el.getBoundingClientRect().bottom
-        console.log('setting bottom', pickerBottom > window.innerHeight)
         if (pickerBottom > window.innerHeight) {
           picker.$el.style.top = 'auto'
           picker.$el.style.bottom = offsetHeight + 'px'

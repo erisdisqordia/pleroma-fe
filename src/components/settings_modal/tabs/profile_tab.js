@@ -68,8 +68,7 @@ const ProfileTab = {
           ...this.$store.state.instance.emoji,
           ...this.$store.state.instance.customEmoji
         ],
-        users: this.$store.state.users.users,
-        updateUsersList: (query) => this.$store.dispatch('searchUsers', { query })
+        store: this.$store
       })
     },
     emojiSuggestor () {
@@ -79,10 +78,7 @@ const ProfileTab = {
       ] })
     },
     userSuggestor () {
-      return suggestor({
-        users: this.$store.state.users.users,
-        updateUsersList: (query) => this.$store.dispatch('searchUsers', { query })
-      })
+      return suggestor({ store: this.$store })
     },
     fieldsLimits () {
       return this.$store.state.instance.fieldsLimits

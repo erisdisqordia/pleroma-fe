@@ -12,13 +12,13 @@
 
 export default data => {
   const emojiCurry = suggestEmoji(data.emoji)
-  const usersCurry = suggestUsers(data.dispatch)
+  const usersCurry = data.store && suggestUsers(data.store)
   return input => {
     const firstChar = input[0]
     if (firstChar === ':' && data.emoji) {
       return emojiCurry(input)
     }
-    if (firstChar === '@' && data.dispatch) {
+    if (firstChar === '@' && usersCurry) {
       return usersCurry(input)
     }
     return []
@@ -56,18 +56,24 @@ export const suggestEmoji = emojis => input => {
     })
 }
 
-export const suggestUsers = (dispatch) => {
+export const suggestUsers = ({ dispatch, state }) => {
   let suggestions = []
   let previousQuery = ''
   let timeout = null
+  let cancelUserSearch = null
 
-  const userSearch = (query) => dispatch('searchUsers', { query, saveUsers: false })
+  const userSearch = (query) => dispatch('searchUsers', { query })
   const debounceUserSearch = (query) => {
+    cancelUserSearch && cancelUserSearch()
     return new Promise((resolve, reject) => {
       clearTimeout(timeout)
       timeout = setTimeout(() => {
         userSearch(query).then(resolve).catch(reject)
       }, 300)
+      cancelUserSearch = () => {
+        clearTimeout(timeout)
+        resolve([])
+      }
     })
   }
 
@@ -77,9 +83,15 @@ export const suggestUsers = (dispatch) => {
 
     suggestions = []
     previousQuery = noPrefix
-    const users = await debounceUserSearch(noPrefix)
+    // Fetch more and wait, don't fetch if there's the 2nd @ because
+    // the backend user search can't deal with it.
+    // Reference semantics make it so that we get the updated data after
+    // the await.
+    if (!noPrefix.includes('@')) {
+      await debounceUserSearch(noPrefix)
+    }
 
-    const newUsers = users.filter(
+    const newSuggestions = state.users.users.filter(
       user =>
         user.screen_name.toLowerCase().startsWith(noPrefix) ||
         user.name.toLowerCase().startsWith(noPrefix)
@@ -114,9 +126,9 @@ export const suggestUsers = (dispatch) => {
       imageUrl: profile_image_url_original,
       replacement: '@' + screen_name + ' '
     }))
-
-    suggestions = newUsers || []
-    return suggestions
     /* eslint-enable camelcase */
+
+    suggestions = newSuggestions || []
+    return suggestions
   }
 }

@@ -159,7 +159,7 @@ const PostStatusForm = {
           ...this.$store.state.instance.emoji,
           ...this.$store.state.instance.customEmoji
         ],
-        dispatch: this.$store.dispatch
+        store: this.$store
       })
     },
     emojiSuggestor () {

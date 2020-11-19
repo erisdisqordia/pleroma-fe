@@ -184,11 +184,10 @@ const EmojiInput = {
       if (this.textAtCaret !== textAtCaret) return
       if (matchedSuggestions.length <= 0) return
       this.suggestions = take(matchedSuggestions, 5)
-        .map(({ imageUrl, ...rest }, index) => ({
+        .map(({ imageUrl, ...rest }) => ({
           ...rest,
           // eslint-disable-next-line camelcase
-          img: imageUrl || '',
-          highlighted: index === this.highlighted
+          img: imageUrl || ''
         }))
     },
     suggestions (newValue) {

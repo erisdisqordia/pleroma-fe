@@ -1,6 +1,7 @@
 <template>
   <video
     class="video"
+    preload="metadata"
     :src="attachment.url"
     :loop="loopVideo"
     :controls="controls"

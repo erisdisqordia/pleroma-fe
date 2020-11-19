@@ -57,6 +57,8 @@ export const suggestEmoji = emojis => input => {
 }
 
 export const suggestUsers = ({ dispatch, state }) => {
+  // Keep some persistent values in closure, most importantly for the
+  // custom debounce to work. Lodash debounce does not return a promise.
   let suggestions = []
   let previousQuery = ''
   let timeout = null
@@ -66,7 +68,6 @@ export const suggestUsers = ({ dispatch, state }) => {
   const debounceUserSearch = (query) => {
     cancelUserSearch && cancelUserSearch()
     return new Promise((resolve, reject) => {
-      clearTimeout(timeout)
       timeout = setTimeout(() => {
         userSearch(query).then(resolve).catch(reject)
       }, 300)
@@ -95,11 +96,6 @@ export const suggestUsers = ({ dispatch, state }) => {
       user =>
         user.screen_name.toLowerCase().startsWith(noPrefix) ||
         user.name.toLowerCase().startsWith(noPrefix)
-
-      /* taking only 20 results so that sorting is a bit cheaper, we display
-       * only 5 anyway. could be inaccurate, but we ideally we should query
-       * backend anyway
-       */
     ).slice(0, 20).sort((a, b) => {
       let aScore = 0
       let bScore = 0

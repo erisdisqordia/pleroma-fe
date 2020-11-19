@@ -175,13 +175,13 @@ const EmojiInput = {
     showSuggestions: function (newValue) {
       this.$emit('shown', newValue)
     },
-    textAtCaret: async function (textAtCaret) {
-      const firstchar = textAtCaret.charAt(0)
+    textAtCaret: async function (newWord) {
+      const firstchar = newWord.charAt(0)
       this.suggestions = []
-      if (textAtCaret === firstchar) return
-      const matchedSuggestions = await this.suggest(textAtCaret)
-      // Async, cancel if textAtCaret has been updated while waiting
-      if (this.textAtCaret !== textAtCaret) return
+      if (newWord === firstchar) return
+      const matchedSuggestions = await this.suggest(newWord)
+      // Async: cancel if textAtCaret has changed during wait
+      if (this.textAtCaret !== newWord) return
       if (matchedSuggestions.length <= 0) return
       this.suggestions = take(matchedSuggestions, 5)
         .map(({ imageUrl, ...rest }) => ({

@@ -15,13 +15,6 @@
             class="badge badge-notification unseen-count"
           >{{ unseenCount }}</span>
         </div>
-        <div
-          v-if="error"
-          class="loadmore-error alert error"
-          @click.prevent
-        >
-          {{ $t('timeline.error_fetching') }}
-        </div>
         <button
           v-if="unseenCount"
           class="read-button"

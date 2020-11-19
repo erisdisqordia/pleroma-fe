@@ -2,22 +2,8 @@
   <div :class="[classes.root, 'Timeline']">
     <div :class="classes.header">
       <TimelineMenu v-if="!embedded" />
-      <div
-        v-if="timelineError"
-        class="loadmore-error alert error"
-        @click.prevent
-      >
-        {{ $t('timeline.error_fetching') }}
-      </div>
-      <div
-        v-else-if="errorData"
-        class="loadmore-error alert error"
-        @click.prevent
-      >
-        {{ errorData.statusText }}
-      </div>
       <button
-        v-else-if="showLoadButton"
+        v-if="showLoadButton"
         class="loadmore-button"
         @click.prevent="showNewStatuses"
       >
@@ -76,17 +62,11 @@
         {{ $t('timeline.no_more_statuses') }}
       </div>
       <a
-        v-else-if="!timeline.loading && !errorData"
+        v-else-if="!timeline.loading"
         href="#"
         @click.prevent="fetchOlderStatuses()"
       >
         <div class="new-status-notification text-center panel-footer">{{ $t('timeline.load_older') }}</div>
-      </a>
-      <a
-        v-else-if="errorData"
-        href="#"
-      >
-        <div class="new-status-notification text-center panel-footer">{{ errorData.error }}</div>
       </a>
       <div
         v-else

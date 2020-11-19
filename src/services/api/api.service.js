@@ -560,7 +560,7 @@ const fetchTimeline = ({
     })
     .then((data) => data.json())
     .then((data) => {
-      if (!data.error) {
+      if (!data.errors) {
         return { data: data.map(isNotifications ? parseNotification : parseStatus), pagination }
       } else {
         data.status = status

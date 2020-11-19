@@ -6,9 +6,6 @@ import { promiseInterval } from '../promise_interval/promise_interval.js'
 const update = ({ store, statuses, timeline, showImmediately, userId, pagination }) => {
   const ccTimeline = camelCase(timeline)
 
-  store.dispatch('setError', { value: false })
-  store.dispatch('setErrorData', { value: null })
-
   store.dispatch('addNewStatuses', {
     timeline: ccTimeline,
     userId,
@@ -52,9 +49,8 @@ const fetchAndUpdate = ({
 
   return apiService.fetchTimeline(args)
     .then(response => {
-      if (response.error) {
-        store.dispatch('setErrorData', { value: response })
-        return
+      if (response.errors) {
+        throw new Error(`${response.status} ${response.statusText}`)
       }
 
       const { data: statuses, pagination } = response
@@ -63,7 +59,15 @@ const fetchAndUpdate = ({
       }
       update({ store, statuses, timeline, showImmediately, userId, pagination })
       return { statuses, pagination }
-    }, () => store.dispatch('setError', { value: true }))
+    })
+    .catch((error) => {
+      store.dispatch('pushGlobalNotice', {
+        level: 'error',
+        messageKey: 'timeline.error',
+        messageArgs: [error.message],
+        timeout: 5000
+      })
+    })
 }
 
 const startFetching = ({ timeline = 'friends', credentials, store, userId = false, tag = false }) => {

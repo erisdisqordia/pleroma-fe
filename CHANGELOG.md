@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Proper handling of deletes when using websocket streaming
 - Added optimistic chat message sending, so you can start writing next message before the previous one has been sent
 - Added a small red badge to the favicon when there's unread notifications
+- Added the NSFW alert to link previews
 
 ### Fixed
 - Fixed clicking NSFW hider through status popover
@@ -49,7 +50,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [2.1.2] - 2020-09-17
 ### Fixed
 - Fixed chats list not updating its order when new messages come in
-- Fixed chat messages sometimes getting lost when you receive a message at the same time 
+- Fixed chat messages sometimes getting lost when you receive a message at the same time
 
 
 ## [2.1.1] - 2020-09-08

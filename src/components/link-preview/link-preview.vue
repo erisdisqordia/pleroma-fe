@@ -9,12 +9,17 @@
       <div
         v-if="useImage && imageLoaded"
         class="card-image"
-        :class="{ 'small-image': size === 'small' }"
       >
         <img :src="card.image">
       </div>
       <div class="card-content">
-        <span class="card-host faint">{{ card.provider_name }}</span>
+        <span class="card-host faint">
+          <span
+            v-if="censored"
+            class="nsfw-alert alert warning"
+          >{{ $t('status.nsfw') }}</span>
+          {{ card.provider_name }}
+        </span>
         <h4 class="card-title">{{ card.title }}</h4>
         <p
           v-if="useDescription"
@@ -50,10 +55,6 @@
     }
   }
 
-  .small-image {
-    width: 80px;
-  }
-
   .card-content {
     max-height: 100%;
     margin: 0.5em;
@@ -74,6 +75,10 @@
     // cap description at 3 lines, the 1px is to clean up some stray pixels
     // TODO: fancier fade-out at the bottom to show off that it's too long?
     max-height: calc(1.2em * 3 - 1px);
+  }
+
+  .nsfw-alert {
+    margin: 2em 0;
   }
 
   color: $fallback--text;

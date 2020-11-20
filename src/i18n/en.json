@@ -377,7 +377,7 @@
     "hide_followers_count_description": "Don't show follower count",
     "show_admin_badge": "Show Admin badge in my profile",
     "show_moderator_badge": "Show Moderator badge in my profile",
-    "nsfw_clickthrough": "Enable clickthrough NSFW attachment hiding",
+    "nsfw_clickthrough": "Enable clickthrough attachment and link preview image hiding for NSFW statuses",
     "oauth_tokens": "OAuth tokens",
     "token": "Token",
     "refresh_token": "Refresh Token",
@@ -667,7 +667,8 @@
     "hide_full_subject": "Hide full subject",
     "show_content": "Show content",
     "hide_content": "Hide content",
-    "status_deleted": "This post was deleted"
+    "status_deleted": "This post was deleted",
+    "nsfw": "NSFW"
   },
   "user_card": {
     "approve": "Approve",

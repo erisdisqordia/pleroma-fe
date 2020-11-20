@@ -104,7 +104,8 @@
     "no_more_notifications": "No hay más notificaciones",
     "reacted_with": "reaccionó con {0}",
     "migrated_to": "migrado a",
-    "follow_request": "quiere seguirte"
+    "follow_request": "quiere seguirte",
+    "error": "Error obteniendo notificaciones:{0}"
   },
   "polls": {
     "add_poll": "Añadir encuesta",
@@ -313,7 +314,7 @@
     "hide_followers_count_description": "No mostrar el número de cuentas que me siguen",
     "show_admin_badge": "Mostrar la insignia de Administrador en mi perfil",
     "show_moderator_badge": "Mostrar la insignia de Moderador en mi perfil",
-    "nsfw_clickthrough": "Activar el clic para ocultar los adjuntos NSFW",
+    "nsfw_clickthrough": "Habilitar la ocultación de la imagen de vista previa del enlace y el adjunto para los estados NSFW por defecto",
     "oauth_tokens": "Tokens de OAuth",
     "token": "Token",
     "refresh_token": "Actualizar el token",
@@ -605,7 +606,8 @@
     "up_to_date": "Actualizado",
     "no_more_statuses": "No hay más estados",
     "no_statuses": "Sin estados",
-    "reload": "Recargar"
+    "reload": "Recargar",
+    "error": "Error obteniendo la linea de tiempo:{0}"
   },
   "status": {
     "favorites": "Favoritos",
@@ -629,7 +631,8 @@
     "status_unavailable": "Estado no disponible",
     "bookmark": "Marcar",
     "unbookmark": "Desmarcar",
-    "status_deleted": "Esta entrada ha sido eliminada"
+    "status_deleted": "Esta entrada ha sido eliminada",
+    "nsfw": "NSFW (No apropiado para el trabajo)"
   },
   "user_card": {
     "approve": "Aprobar",

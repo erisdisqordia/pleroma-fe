@@ -58,6 +58,8 @@
 
   &.-expanded {
     .conversation-status {
+      border-left-style: solid;
+      border-left-width: 4px;
       border-color: $fallback--border;
       border-color: var(--border, $fallback--border);
       border-left-color: $fallback--cRed;

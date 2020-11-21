@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form
 - Fixed timeline errors locking timelines
+- Fixed missing highlighted border in expanded conversations
 
 ### Changed
 - Errors when fetching are now shown with popup errors instead of "Error fetching updates" in panel headers

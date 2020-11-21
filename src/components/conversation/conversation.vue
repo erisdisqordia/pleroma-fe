@@ -57,13 +57,6 @@
   }
 
   &.-expanded {
-    .conversation-status {
-      border-color: $fallback--border;
-      border-color: var(--border, $fallback--border);
-      border-left-color: $fallback--cRed;
-      border-left-color: var(--cRed, $fallback--cRed);
-    }
-
     .conversation-status:last-child {
       border-bottom: none;
       border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;

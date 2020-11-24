@@ -71,7 +71,6 @@ a {
 }
 
 .button-default {
-  user-select: none;
   color: $fallback--text;
   color: var(--btnText, $fallback--text);
   background-color: $fallback--fg;
@@ -85,6 +84,7 @@ a {
   font-size: 14px;
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
+  user-select: none;
 
   i[class*=icon-],
   :not(&.-icon),

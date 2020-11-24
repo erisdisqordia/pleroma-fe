@@ -135,10 +135,12 @@
             v-if="needMute"
             class="button-unstyled"
             @click.prevent="toggleMute"
-          ><FAIcon
-            class="fa-scale-110 fa-old-padding"
-            icon="eye-slash"
-          /></button>
+          >
+            <FAIcon
+              class="fa-scale-110 fa-old-padding"
+              icon="eye-slash"
+            />
+          </button>
         </span>
         <div
           v-if="notification.type === 'follow' || notification.type === 'follow_request'"

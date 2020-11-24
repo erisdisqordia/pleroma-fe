@@ -66,7 +66,9 @@
         class="button-unstyled -link -fullwidth"
         @click.prevent="fetchOlderStatuses()"
       >
-        <div class="new-status-notification text-center panel-footer">{{ $t('timeline.load_older') }}</div>
+        <div class="new-status-notification text-center panel-footer">
+          {{ $t('timeline.load_older') }}
+        </div>
       </button>
       <div
         v-else

@@ -29,7 +29,7 @@
           </div>
           <div>
             <button
-              class="btn btn-default"
+              class="btn button-default"
               :disabled="processing"
               @click="reportUser"
             >

@@ -84,7 +84,7 @@
           />
         </label>
         <button
-          class="btn btn-default"
+          class="btn button-default"
           :disabled="!ready || !present"
           @click="del"
         >
@@ -94,7 +94,7 @@
           />
         </button>
         <button
-          class="btn btn-default"
+          class="btn button-default"
           :disabled="!moveUpValid"
           @click="moveUp"
         >
@@ -104,7 +104,7 @@
           />
         </button>
         <button
-          class="btn btn-default"
+          class="btn button-default"
           :disabled="!moveDnValid"
           @click="moveDn"
         >
@@ -114,7 +114,7 @@
           />
         </button>
         <button
-          class="btn btn-default"
+          class="btn button-default"
           :disabled="usingFallback"
           @click="add"
         >

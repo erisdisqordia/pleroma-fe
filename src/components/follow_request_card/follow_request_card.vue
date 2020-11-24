@@ -2,13 +2,13 @@
   <basic-user-card :user="user">
     <div class="follow-request-card-content-container">
       <button
-        class="btn btn-default"
+        class="btn button-default"
         @click="approveUser"
       >
         {{ $t('user_card.approve') }}
       </button>
       <button
-        class="btn btn-default"
+        class="btn button-default"
         @click="denyUser"
       >
         {{ $t('user_card.deny') }}

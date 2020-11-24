@@ -4,7 +4,7 @@
       <strong>{{ $t('settings.mfa.otp') }}</strong>
       <button
         v-if="!isActivated"
-        class="btn btn-default"
+        class="btn button-default"
         @click="doActivate"
       >
         {{ $t('general.enable') }}
@@ -12,7 +12,7 @@
 
       <button
         v-if="isActivated"
-        class="btn btn-default"
+        class="btn button-default"
         :disabled="deactivate"
         @click="doDeactivate"
       >

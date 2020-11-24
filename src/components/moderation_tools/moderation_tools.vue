@@ -124,7 +124,7 @@
       </div>
       <button
         slot="trigger"
-        class="btn btn-default btn-block"
+        class="btn button-default btn-block"
         :class="{ toggled }"
       >
         {{ $t('user_card.admin_menu.moderation') }}
@@ -141,13 +141,13 @@
         <p>{{ $t('user_card.admin_menu.delete_user_confirmation') }}</p>
         <template slot="footer">
           <button
-            class="btn btn-default"
+            class="btn button-default"
             @click="deleteUserDialog(false)"
           >
             {{ $t('general.cancel') }}
           </button>
           <button
-            class="btn btn-default danger"
+            class="btn button-default danger"
             @click="deleteUser()"
           >
             {{ $t('user_card.admin_menu.delete_user') }}

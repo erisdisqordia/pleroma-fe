@@ -1,6 +1,6 @@
 <template>
   <button
-    class="btn btn-default follow-button"
+    class="btn button-default follow-button"
     :class="{ toggled: isPressed }"
     :disabled="inProgress"
     :title="title"

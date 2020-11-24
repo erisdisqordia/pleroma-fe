@@ -2,14 +2,14 @@
   <div>
     <slot />
     <button
-      class="btn btn-default"
+      class="btn button-default"
       :disabled="disabled"
       @click="confirm"
     >
       {{ $t('general.confirm') }}
     </button>
     <button
-      class="btn btn-default"
+      class="btn button-default"
       :disabled="disabled"
       @click="cancel"
     >

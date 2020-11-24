@@ -21,7 +21,7 @@
       <p>{{ $t('settings.notification_mutes') }}</p>
       <p>{{ $t('settings.notification_blocks') }}</p>
       <button
-        class="btn btn-default"
+        class="btn button-default"
         @click="updateNotificationSettings"
       >
         {{ $t('general.submit') }}

@@ -6,7 +6,7 @@
     <ProgressButton
       v-if="muted"
       :click="unmuteDomain"
-      class="btn btn-default"
+      class="btn button-default"
     >
       {{ $t('domain_mute_card.unmute') }}
       <template slot="progress">
@@ -16,7 +16,7 @@
     <ProgressButton
       v-else
       :click="muteDomain"
-      class="btn btn-default"
+      class="btn button-default"
     >
       {{ $t('domain_mute_card.mute') }}
       <template slot="progress">

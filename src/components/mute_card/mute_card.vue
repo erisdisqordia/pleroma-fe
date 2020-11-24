@@ -3,7 +3,7 @@
     <div class="mute-card-content-container">
       <button
         v-if="muted"
-        class="btn btn-default"
+        class="btn button-default"
         :disabled="progress"
         @click="unmuteUser"
       >
@@ -16,7 +16,7 @@
       </button>
       <button
         v-else
-        class="btn btn-default"
+        class="btn button-default"
         :disabled="progress"
         @click="muteUser"
       >

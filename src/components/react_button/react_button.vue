@@ -38,13 +38,16 @@
         <div class="reaction-bottom-fader" />
       </div>
     </div>
-    <span slot="trigger">
+    <button
+      slot="trigger"
+      class="add-reaction-button button-unstyled -padded"
+      :title="$t('tool_tip.add_reaction')"
+    >
       <FAIcon
-        class="fa-scale-110 fa-old-padding add-reaction-button"
+        class="fa-scale-110 fa-old-padding"
         :icon="['far', 'smile-beam']"
-        :title="$t('tool_tip.add_reaction')"
       />
-    </span>
+    </button>
   </Popover>
 </template>
 
@@ -105,7 +108,7 @@
 .add-reaction-button {
   cursor: pointer;
 
-  &:hover {
+  &:hover .svg-inline--fa {
     color: $fallback--text;
     color: var(--text, $fallback--text);
   }

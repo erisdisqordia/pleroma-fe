@@ -10,12 +10,13 @@
       class="panel-heading conversation-heading"
     >
       <span class="title"> {{ $t('timeline.conversation') }} </span>
-      <span v-if="collapsable">
-        <a
-          href="#"
-          @click.prevent="toggleExpanded"
-        >{{ $t('timeline.collapse') }}</a>
-      </span>
+      <button
+        v-if="collapsable"
+        class="button-unstyled -link"
+        @click.prevent="toggleExpanded"
+      >
+        {{ $t('timeline.collapse') }}
+      </button>
     </div>
     <status
       v-for="status in conversation"

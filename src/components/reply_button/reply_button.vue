@@ -1,13 +1,17 @@
 <template>
   <div>
-    <FAIcon
+    <button
       v-if="loggedIn"
-      class="ReplyButton fa-scale-110 fa-old-padding -interactive"
-      icon="reply"
-      :title="$t('tool_tip.reply')"
+      class="button-unstyled ReplyButton -padded -interactive"
       :class="{'-active': replying}"
+      :title="$t('tool_tip.reply')"
       @click.prevent="$emit('toggle')"
-    />
+    >
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        icon="reply"
+      />
+    </button>
     <FAIcon
       v-else
       icon="reply"
@@ -27,10 +31,9 @@
 
 .ReplyButton {
   &.-interactive {
-    cursor: pointer;
 
-    &:hover,
-    &.-active {
+    &:hover .svg-inline--fa,
+    &.-active .svg-inline--fa {
       color: $fallback--cBlue;
       color: var(--cBlue, $fallback--cBlue);
     }

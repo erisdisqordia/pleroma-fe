@@ -81,7 +81,7 @@ export default Vue.component('tab-switcher', {
     const tabs = this.$slots.default
       .map((slot, index) => {
         if (!slot.tag) return
-        const classesTab = ['tab']
+        const classesTab = ['tab', 'button-default']
         const classesWrapper = ['tab-wrapper']
         if (this.activeIndex === index) {
           classesTab.push('active')

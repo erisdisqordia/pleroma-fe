@@ -211,7 +211,7 @@
               <button
                 :disabled="isPending"
                 type="submit"
-                class="btn btn-default"
+                class="btn button-default"
               >
                 {{ $t('general.submit') }}
               </button>

@@ -19,7 +19,7 @@
         >
       </div>
       <button
-        class="btn btn-default"
+        class="btn button-default"
         @click="changeEmail"
       >
         {{ $t('general.submit') }}
@@ -57,7 +57,7 @@
         >
       </div>
       <button
-        class="btn btn-default"
+        class="btn button-default"
         @click="changePassword"
       >
         {{ $t('general.submit') }}
@@ -92,7 +92,7 @@
             <td>{{ oauthToken.validUntil }}</td>
             <td class="actions">
               <button
-                class="btn btn-default"
+                class="btn button-default"
                 @click="revokeToken(oauthToken.id)"
               >
                 {{ $t('settings.revoke_token') }}
@@ -116,7 +116,7 @@
           type="password"
         >
         <button
-          class="btn btn-default"
+          class="btn button-default"
           @click="deleteAccount"
         >
           {{ $t('settings.delete_account') }}
@@ -130,7 +130,7 @@
       </p>
       <button
         v-if="!deletingAccount"
-        class="btn btn-default"
+        class="btn button-default"
         @click="confirmDelete"
       >
         {{ $t('general.submit') }}

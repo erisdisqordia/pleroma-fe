@@ -31,11 +31,6 @@ const FavoriteButton = {
     }
   },
   computed: {
-    classes () {
-      return {
-        '-favorited': this.status.favorited
-      }
-    },
     ...mapGetters(['mergedConfig'])
   }
 }

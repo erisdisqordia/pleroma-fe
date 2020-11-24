@@ -14,14 +14,13 @@
           {{ notification.from_profile.screen_name }}
         </router-link>
       </small>
-      <a
-        href="#"
-        class="unmute"
+      <button
+        class="button-unstyled unmute"
         @click.prevent="toggleMute"
       ><FAIcon
         class="fa-scale-110 fa-old-padding"
         icon="eye-slash"
-      /></a>
+      /></button>
     </div>
     <div
       v-else
@@ -132,14 +131,14 @@
               />
             </span>
           </div>
-          <a
+          <button
             v-if="needMute"
-            href="#"
+            class="button-unstyled"
             @click.prevent="toggleMute"
           ><FAIcon
             class="fa-scale-110 fa-old-padding"
             icon="eye-slash"
-          /></a>
+          /></button>
         </span>
         <div
           v-if="notification.type === 'follow' || notification.type === 'follow_request'"

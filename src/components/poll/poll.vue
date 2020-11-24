@@ -49,7 +49,7 @@
     <div class="footer faint">
       <button
         v-if="!showResults"
-        class="btn btn-default poll-vote-button"
+        class="btn button-default poll-vote-button"
         type="button"
         :disabled="isDisabled"
         @click="vote"

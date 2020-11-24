@@ -53,7 +53,7 @@
                 <div slot="content">
                   <div class="dropdown-menu">
                     <button
-                      class="dropdown-item dropdown-item-icon"
+                      class="button-default dropdown-item dropdown-item-icon"
                       @click="deleteMessage"
                     >
                       <FAIcon icon="times" /> {{ $t("chats.delete") }}
@@ -62,7 +62,7 @@
                 </div>
                 <button
                   slot="trigger"
-                  class="menu-icon"
+                  class="button-default menu-icon"
                   :title="$t('chats.more')"
                 >
                   <FAIcon icon="ellipsis-h" />

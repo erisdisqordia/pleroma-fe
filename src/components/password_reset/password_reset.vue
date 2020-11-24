@@ -51,7 +51,7 @@
               <button
                 :disabled="isPending"
                 type="submit"
-                class="btn btn-default btn-block"
+                class="btn button-default btn-block"
               >
                 {{ $t('general.submit') }}
               </button>

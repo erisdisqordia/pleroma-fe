@@ -8,7 +8,7 @@
         {{ $t('general.error_retry') }}
       </p>
       <button
-        class="btn"
+        class="btn button-default"
         @click="retry"
       >
         {{ $t('general.retry') }}

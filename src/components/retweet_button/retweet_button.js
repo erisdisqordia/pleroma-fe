@@ -24,11 +24,6 @@ const RetweetButton = {
     }
   },
   computed: {
-    classes () {
-      return {
-        '-repeated': this.status.repeated
-      }
-    },
     mergedConfig () {
       return this.$store.getters.mergedConfig
     }

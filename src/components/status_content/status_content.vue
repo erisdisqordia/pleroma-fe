@@ -12,35 +12,34 @@
         @click.prevent="linkClicked"
         v-html="status.summary_html"
       />
-      <a
+      <button
         v-if="longSubject && showingLongSubject"
-        href="#"
-        class="tall-subject-hider"
+        class="button-unstyled -link tall-subject-hider"
         @click.prevent="showingLongSubject=false"
-      >{{ $t("status.hide_full_subject") }}</a>
-      <a
+      >
+        {{ $t("status.hide_full_subject") }}
+      </button>
+      <button
         v-else-if="longSubject"
-        class="tall-subject-hider"
+        class="button-unstyled -link tall-subject-hider"
         :class="{ 'tall-subject-hider_focused': focused }"
-        href="#"
         @click.prevent="showingLongSubject=true"
       >
         {{ $t("status.show_full_subject") }}
-      </a>
+      </button>
     </div>
     <div
       :class="{'tall-status': hideTallStatus}"
       class="status-content-wrapper"
     >
-      <a
+      <button
         v-if="hideTallStatus"
-        class="tall-status-hider"
+        class="button-unstyled -link tall-status-hider"
         :class="{ 'tall-status-hider_focused': focused }"
-        href="#"
         @click.prevent="toggleShowMore"
       >
         {{ $t("general.show_more") }}
-      </a>
+      </button>
       <div
         v-if="!hideSubjectStatus"
         :class="{ 'single-line': singleLine }"
@@ -48,10 +47,9 @@
         @click.prevent="linkClicked"
         v-html="postBodyHtml"
       />
-      <a
+      <button
         v-if="hideSubjectStatus"
-        href="#"
-        class="cw-status-hider"
+        class="button-unstyled -link cw-status-hider"
         @click.prevent="toggleShowMore"
       >
         {{ $t("status.show_content") }}
@@ -79,15 +77,14 @@
           v-if="status.card"
           icon="link"
         />
-      </a>
-      <a
+      </button>
+      <button
         v-if="showingMore && !fullContent"
-        href="#"
-        class="status-unhider"
+        class="button-unstyled -link status-unhider"
         @click.prevent="toggleShowMore"
       >
         {{ tallStatus ? $t("general.show_less") : $t("status.hide_content") }}
-      </a>
+      </button>
     </div>
 
     <div v-if="status.poll && status.poll.options && !hideSubjectStatus">

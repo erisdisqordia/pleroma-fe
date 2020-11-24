@@ -71,6 +71,7 @@ a {
 }
 
 .button-default {
+  user-select: none;
   color: $fallback--text;
   color: var(--btnText, $fallback--text);
   background-color: $fallback--fg;
@@ -84,10 +85,8 @@ a {
   font-size: 14px;
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
-  user-select: none;
 
   i[class*=icon-],
-  :not(&.-icon),
   .svg-inline--fa {
     color: $fallback--text;
     color: var(--btnText, $fallback--text);
@@ -110,7 +109,8 @@ a {
     background-color: $fallback--fg;
     background-color: var(--btnPressed, $fallback--fg);
 
-    svg, i {
+    svg,
+    i {
       color: $fallback--text;
       color: var(--btnPressedText, $fallback--text);
     }
@@ -123,7 +123,8 @@ a {
     background-color: $fallback--fg;
     background-color: var(--btnDisabled, $fallback--fg);
 
-    svg, i {
+    svg,
+    i {
       color: $fallback--text;
       color: var(--btnDisabledText, $fallback--text);
     }
@@ -137,7 +138,8 @@ a {
     box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.3), 0px 1px 0px 0px rgba(0, 0, 0, 0.2) inset, 0px -1px 0px 0px rgba(255, 255, 255, 0.2) inset;
     box-shadow: var(--buttonPressedShadow);
 
-    svg, i {
+    svg,
+    i {
       color: $fallback--text;
       color: var(--btnToggledText, $fallback--text);
     }

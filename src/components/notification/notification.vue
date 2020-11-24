@@ -17,10 +17,12 @@
       <button
         class="button-unstyled unmute"
         @click.prevent="toggleMute"
-      ><FAIcon
-        class="fa-scale-110 fa-old-padding"
-        icon="eye-slash"
-      /></button>
+      >
+        <FAIcon
+          class="fa-scale-110 fa-old-padding"
+          icon="eye-slash"
+        />
+      </button>
     </div>
     <div
       v-else

@@ -39,7 +39,7 @@
     </div>
     <span
       slot="trigger"
-      class="AddReaction"
+      class="ReactButton"
       :title="$t('tool_tip.add_reaction')"
     >
       <FAIcon
@@ -104,8 +104,7 @@
   }
 }
 
-.AddReaction {
-  cursor: pointer;
+.ReactButton {
   padding: 10px;
   margin: -10px;
 

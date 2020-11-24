@@ -115,7 +115,6 @@
 @import '../../_variables.scss';
 
 .ExtraButtons {
-  cursor: pointer;
   position: static;
   padding: 10px;
   margin: -10px;

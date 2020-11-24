@@ -145,7 +145,7 @@
         </li>
         <li @click="toggleDrawer">
           <button
-            class="button-unstyled -link"
+            class="button-unstyled -link -fullwidth"
             @click="openSettingsModal"
           >
             <FAIcon
@@ -184,7 +184,7 @@
           @click="toggleDrawer"
         >
           <button
-            class="button-unstyled -link"
+            class="button-unstyled -link -fullwidth"
             @click="doLogout"
           >
             <FAIcon
@@ -337,7 +337,6 @@
     height: 3em;
     line-height: 3em;
     padding: 0 0.7em;
-    width: 100%;
 
     &:hover {
       background-color: $fallback--lightBg;

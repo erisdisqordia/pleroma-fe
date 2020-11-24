@@ -84,6 +84,7 @@
   margin-right: auto;
   min-width: 0;
   width: 24rem;
+  height: 28px;
 
   .timeline-menu-popover-wrap {
     overflow: hidden;

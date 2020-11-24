@@ -6,13 +6,13 @@
   >
     <slot />
     <template v-if="enableEmojiPicker">
-      <div
+      <button
         v-if="!hideEmojiButton"
-        class="emoji-picker-icon"
+        class="button-unstyled emoji-picker-icon"
         @click.prevent="togglePicker"
       >
         <FAIcon :icon="['far', 'smile-beam']" />
-      </div>
+      </button>
       <EmojiPicker
         v-if="enableEmojiPicker"
         ref="picker"

@@ -91,7 +91,11 @@ const withLoadMore = ({
             {children}
           </WrappedComponent>
           <div class="with-load-more-footer">
-            {this.error && <a onClick={this.fetchEntries} class="alert error">{this.$t('general.generic_error')}</a>}
+            {this.error &&
+              <button onClick={this.fetchEntries} class="button-unstyled -link -fullwidth alert error">
+                {this.$t('general.generic_error')}
+              </button>
+            }
             {!this.error && this.loading && <FAIcon spin icon="circle-notch"/>}
             {!this.error && !this.loading && !this.bottomedOut && <a onClick={this.fetchEntries}>{this.$t('general.more')}</a>}
           </div>

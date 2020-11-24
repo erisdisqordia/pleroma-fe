@@ -2,8 +2,7 @@
   <Popover
     trigger="click"
     placement="top"
-    :offset="{ y: 5 }"
-    class="react-button-popover"
+    :offset="{ y: -5 }"
     :bound-to="{ x: 'container' }"
   >
     <div
@@ -38,16 +37,16 @@
         <div class="reaction-bottom-fader" />
       </div>
     </div>
-    <button
+    <span
       slot="trigger"
-      class="add-reaction-button button-unstyled -padded"
+      class="AddReaction"
       :title="$t('tool_tip.add_reaction')"
     >
       <FAIcon
         class="fa-scale-110 fa-old-padding"
         :icon="['far', 'smile-beam']"
       />
-    </button>
+    </span>
   </Popover>
 </template>
 
@@ -105,8 +104,10 @@
   }
 }
 
-.add-reaction-button {
+.AddReaction {
   cursor: pointer;
+  padding: 10px;
+  margin: -10px;
 
   &:hover .svg-inline--fa {
     color: $fallback--text;

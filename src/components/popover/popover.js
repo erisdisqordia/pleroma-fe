@@ -99,7 +99,7 @@ const Popover = {
       const yOffset = (this.offset && this.offset.y) || 0
       const translateY = usingTop
         ? -anchorEl.offsetHeight - yOffset - content.offsetHeight
-        : yOffset
+        : -yOffset
 
       const xOffset = (this.offset && this.offset.x) || 0
       const translateX = (anchorEl.offsetWidth * 0.5) - content.offsetWidth * 0.5 + horizOffset + xOffset

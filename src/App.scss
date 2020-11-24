@@ -163,6 +163,8 @@ a {
   padding: 0;
   line-height: unset;
   cursor: pointer;
+  box-sizing: content-box;
+  color: inherit;
 
   &.-link {
     color: $fallback--link;
@@ -170,8 +172,12 @@ a {
   }
 
   &.-padded {
-    padding: 5px;
-    margin: -5px;
+    padding: 10px;
+    margin: -10px;
+  }
+
+  &.-fullwidth {
+    width: 100%;
   }
 }
 
@@ -468,6 +474,7 @@ main-router {
     color: $fallback--faint;
     color: var(--panelFaint, $fallback--faint);
   }
+
   .faint-link {
     color: $fallback--faint;
     color: var(--faintLink, $fallback--faint);
@@ -479,11 +486,8 @@ main-router {
     overflow-x: hidden;
   }
 
-  button {
-    flex-shrink: 0;
-  }
-
-  button, .alert {
+  .button-default,
+  .alert {
     // height: 100%;
     line-height: 21px;
     min-height: 0;
@@ -494,8 +498,11 @@ main-router {
     align-self: stretch;
   }
 
-  button {
-    &, i[class*=icon-] {
+  .button-default {
+    flex-shrink: 0;
+
+    &,
+    i[class*=icon-] {
       color: $fallback--text;
       color: var(--btnPanelText, $fallback--text);
     }
@@ -518,7 +525,8 @@ main-router {
     }
   }
 
-  a {
+  a,
+  .-link {
     color: $fallback--link;
     color: var(--panelLink, $fallback--link)
   }
@@ -533,15 +541,15 @@ main-router {
   border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
   border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
 
-
   .faint {
     color: $fallback--faint;
     color: var(--panelFaint, $fallback--faint);
   }
 
-  a {
+  a,
+  .-link {
     color: $fallback--link;
-    color: var(--panelLink, $fallback--link)
+    color: var(--panelLink, $fallback--link);
   }
 }
 

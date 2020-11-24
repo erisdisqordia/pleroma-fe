@@ -3,12 +3,13 @@
     @mouseenter="onMouseenter"
     @mouseleave="onMouseleave"
   >
-    <div
+    <button
       ref="trigger"
+      class="button-unstyled -fullwidth"
       @click="onClick"
     >
       <slot name="trigger" />
-    </div>
+    </button>
     <div
       v-if="!hidden"
       ref="content"

@@ -2,7 +2,7 @@
   <Popover
     trigger="click"
     placement="top"
-    class="extra-button-popover"
+    :offset="{ y: -5 }"
     :bound-to="{ x: 'container' }"
   >
     <div
@@ -97,15 +97,15 @@
         </button>
       </div>
     </div>
-    <button
+    <span
       slot="trigger"
-      class="ExtraButtons button-unstyled -padded"
+      class="ExtraButtons"
     >
       <FAIcon
         class="fa-scale-110 fa-old-padding"
         icon="ellipsis-h"
       />
-    </button>
+    </span>
   </Popover>
 </template>
 
@@ -117,6 +117,8 @@
 .ExtraButtons {
   cursor: pointer;
   position: static;
+  padding: 10px;
+  margin: -10px;
 
   &:hover .svg-inline--fa {
     color: $fallback--text;

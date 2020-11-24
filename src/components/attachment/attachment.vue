@@ -44,7 +44,7 @@
     </a>
     <button
       v-if="nsfw && hideNsfwLocal && !hidden"
-      class="button-unstyled -padded hider"
+      class="button-unstyled hider"
       @click.prevent="toggleHidden"
     >
       <FAIcon icon="times" />
@@ -233,7 +233,7 @@
     position: absolute;
     right: 0;
     margin: 10px;
-    padding: 5px;
+    padding: 0;
     z-index: 4;
     border-radius: $fallback--tooltipRadius;
     border-radius: var(--tooltipRadius, $fallback--tooltipRadius);

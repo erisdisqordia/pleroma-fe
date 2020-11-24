@@ -5,7 +5,7 @@
   >
     <button
       ref="trigger"
-      class="button-unstyled -fullwidth"
+      class="button-unstyled -fullwidth popover-trigger-button"
       @click="onClick"
     >
       <slot name="trigger" />
@@ -30,6 +30,10 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
+
+.popover-trigger-button {
+  display: block;
+}
 
 .popover {
   z-index: 8;

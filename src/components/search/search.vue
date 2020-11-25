@@ -14,7 +14,7 @@
         @keyup.enter="newQuery(searchTerm)"
       >
       <button
-        class="btn search-button"
+        class="btn button-default search-button"
         @click="newQuery(searchTerm)"
       >
         <FAIcon icon="search" />

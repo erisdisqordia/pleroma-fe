@@ -2,8 +2,9 @@
   <Popover
     trigger="click"
     placement="top"
-    :offset="{ y: -5 }"
+    :offset="{ y: 5 }"
     :bound-to="{ x: 'container' }"
+    remove-padding
   >
     <div
       slot="content"

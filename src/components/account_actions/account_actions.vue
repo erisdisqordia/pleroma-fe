@@ -4,6 +4,7 @@
       trigger="click"
       placement="bottom"
       :bound-to="{ x: 'container' }"
+      remove-padding
     >
       <div
         slot="content"

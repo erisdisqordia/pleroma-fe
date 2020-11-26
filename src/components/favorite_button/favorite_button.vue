@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="FavoriteButton">
     <button
       v-if="loggedIn"
-      class="FavoriteButton -interactive button-unstyled -padded"
+      class="button-unstyled interactive"
       :class="status.favorited && '-favorited'"
       :title="$t('tool_tip.favorite')"
       @click.prevent="favorite()"
@@ -19,7 +19,12 @@
       :title="$t('tool_tip.favorite')"
       :icon="['far', 'star']"
     />
-    <span v-if="!mergedConfig.hidePostStats && status.fave_num > 0">{{ status.fave_num }}</span>
+    <span
+      v-if="!mergedConfig.hidePostStats && status.fave_num > 0"
+      class="action-counter"
+    >
+      {{ status.fave_num }}
+    </span>
   </div>
 </template>
 
@@ -29,8 +34,19 @@
 @import '../../_variables.scss';
 
 .FavoriteButton {
-  &.-interactive {
+  display: flex;
 
+  > :first-child {
+    padding: 10px;
+    margin: -10px -5px -10px -10px;
+  }
+
+  .action-counter {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .interactive {
     .svg-inline--fa {
       animation-duration: 0.6s;
     }

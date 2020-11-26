@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="ReplyButton">
     <button
       v-if="loggedIn"
-      class="button-unstyled ReplyButton -padded -interactive"
+      class="button-unstyled interactive"
       :class="{'-active': replying}"
       :title="$t('tool_tip.reply')"
       @click.prevent="$emit('toggle')"
@@ -15,10 +15,13 @@
     <FAIcon
       v-else
       icon="reply"
-      class="ReplyButton fa-scale-110 fa-old-padding"
+      class="fa-scale-110 fa-old-padding"
       :title="$t('tool_tip.reply')"
     />
-    <span v-if="status.replies_count > 0">
+    <span
+      v-if="status.replies_count > 0"
+      class="action-counter"
+    >
       {{ status.replies_count }}
     </span>
   </div>
@@ -30,13 +33,25 @@
 @import '../../_variables.scss';
 
 .ReplyButton {
-  &.-interactive {
+  display: flex;
 
+  > :first-child {
+    padding: 10px;
+    margin: -10px -5px -10px -10px;
+  }
+
+  .action-counter {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .interactive {
     &:hover .svg-inline--fa,
     &.-active .svg-inline--fa {
       color: $fallback--cBlue;
       color: var(--cBlue, $fallback--cBlue);
     }
   }
+
 }
 </style>

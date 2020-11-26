@@ -43,7 +43,7 @@
         </div>
         <button
           v-else-if="!loading"
-          class="button-unstyled -link -fullwidth"
+          class="button-unstyled -link -block"
           @click.prevent="fetchOlderNotifications()"
         >
           <div class="new-status-notification text-center panel-footer">

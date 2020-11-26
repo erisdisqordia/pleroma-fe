@@ -173,11 +173,6 @@ a {
     color: var(--link, $fallback--link);
   }
 
-  &.-padded {
-    padding: 10px;
-    margin: -10px;
-  }
-
   &.-fullwidth {
     width: 100%;
   }

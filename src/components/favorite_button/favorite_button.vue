@@ -13,12 +13,13 @@
         :spin="animated"
       />
     </button>
-    <FAIcon
-      v-else
-      class="FavoriteButton fa-scale-110 fa-old-padding"
-      :title="$t('tool_tip.favorite')"
-      :icon="['far', 'star']"
-    />
+    <span v-else>
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        :title="$t('tool_tip.favorite')"
+        :icon="['far', 'star']"
+      />
+    </span>
     <span
       v-if="!mergedConfig.hidePostStats && status.fave_num > 0"
       class="action-counter"
@@ -38,7 +39,7 @@
 
   > :first-child {
     padding: 10px;
-    margin: -10px -5px -10px -10px;
+    margin: -10px -8px -10px -10px;
   }
 
   .action-counter {

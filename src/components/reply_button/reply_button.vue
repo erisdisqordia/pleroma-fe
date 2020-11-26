@@ -12,12 +12,13 @@
         icon="reply"
       />
     </button>
-    <FAIcon
-      v-else
-      icon="reply"
-      class="fa-scale-110 fa-old-padding"
-      :title="$t('tool_tip.reply')"
-    />
+    <span v-else>
+      <FAIcon
+        icon="reply"
+        class="fa-scale-110 fa-old-padding"
+        :title="$t('tool_tip.reply')"
+      />
+    </span>
     <span
       v-if="status.replies_count > 0"
       class="action-counter"
@@ -37,7 +38,7 @@
 
   > :first-child {
     padding: 10px;
-    margin: -10px -5px -10px -10px;
+    margin: -10px -8px -10px -10px;
   }
 
   .action-counter {

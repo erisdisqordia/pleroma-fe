@@ -13,18 +13,20 @@
         :spin="animated"
       />
     </button>
-    <FAIcon
-      v-else-if="loggedIn"
-      class="fa-scale-110 fa-old-padding"
-      icon="lock"
-      :title="$t('timeline.no_retweet_hint')"
-    />
-    <FAIcon
-      v-else
-      class="fa-scale-110 fa-old-padding"
-      icon="retweet"
-      :title="$t('tool_tip.repeat')"
-    />
+    <span v-else-if="loggedIn">
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        icon="lock"
+        :title="$t('timeline.no_retweet_hint')"
+      />
+    </span>
+    <span v-else>
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        icon="retweet"
+        :title="$t('tool_tip.repeat')"
+      />
+    </span>
     <span
       v-if="!mergedConfig.hidePostStats && status.repeat_num > 0"
       class="no-event"
@@ -44,7 +46,7 @@
 
   > :first-child {
     padding: 10px;
-    margin: -10px -5px -10px -10px;
+    margin: -10px -8px -10px -10px;
   }
 
   .action-counter {

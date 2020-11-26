@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Errors when fetching are now shown with popup errors instead of "Error fetching updates" in panel headers
 - Fixed custom emoji not working in profile field names
 - Fixed pinned statuses not appearing in user profiles
+- Made reply/fav/repeat etc buttons easier to hit
 
 
 ## [2.2.1] - 2020-11-11

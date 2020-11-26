@@ -21,7 +21,7 @@
     grid-template-areas: "logo sitename actions";
   }
 
-  button {
+  .button-default {
     &, svg {
       color: $fallback--text;
       color: var(--btnTopBarText, $fallback--text);

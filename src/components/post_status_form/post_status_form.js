@@ -159,8 +159,7 @@ const PostStatusForm = {
           ...this.$store.state.instance.emoji,
           ...this.$store.state.instance.customEmoji
         ],
-        users: this.$store.state.users.users,
-        updateUsersList: (query) => this.$store.dispatch('searchUsers', { query })
+        store: this.$store
       })
     },
     emojiSuggestor () {

@@ -186,7 +186,6 @@ const EmojiInput = {
       this.suggestions = take(matchedSuggestions, 5)
         .map(({ imageUrl, ...rest }) => ({
           ...rest,
-          // eslint-disable-next-line camelcase
           img: imageUrl || ''
         }))
     },

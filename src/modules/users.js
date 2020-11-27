@@ -442,10 +442,10 @@ const users = {
         store.commit('setUserForNotification', notification)
       })
     },
-    searchUsers ({ rootState, commit }, { query, saveUsers = true }) {
+    searchUsers ({ rootState, commit }, { query }) {
       return rootState.api.backendInteractor.searchUsers({ query })
         .then((users) => {
-          if (saveUsers) commit('addNewUsers', users)
+          commit('addNewUsers', users)
           return users
         })
     },

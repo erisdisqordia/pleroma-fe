@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 ## [Unreleased]
+### Added
+- Mouseover titles for emojis in reaction picker
+- Support to input emoji into the search box in reaction picker
+
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form
 - Fixed timeline errors locking timelines

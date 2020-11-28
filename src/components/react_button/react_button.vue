@@ -22,15 +22,17 @@
           v-for="emoji in commonEmojis"
           :key="emoji"
           class="emoji-button"
+          :title="emoji.displayText"
           @click="addReaction($event, emoji, close)"
         >
-          {{ emoji }}
+          {{ emoji.replacement }}
         </span>
         <div class="reaction-picker-divider" />
         <span
           v-for="(emoji, key) in emojis"
           :key="key"
           class="emoji-button"
+          :title="emoji.displayText"
           @click="addReaction($event, emoji.replacement, close)"
         >
           {{ emoji.replacement }}

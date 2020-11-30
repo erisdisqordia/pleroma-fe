@@ -197,5 +197,17 @@
   },
   "emoji": {
     "stickers": "Стікери"
+  },
+  "post_status": {
+    "content_type": {
+      "text/bbcode": "BBCode",
+      "text/markdown": "Markdown",
+      "text/html": "HTML",
+      "text/plain": "Простий текст"
+    },
+    "attachments_sensitive": "Позначити вкладення як чутливі",
+    "account_not_locked_warning_link": "замкнена",
+    "account_not_locked_warning": "Ваша обліковка не {0}. Будь-хто може відстежувати вас для перегляду дописів тільки для відстежувачів.",
+    "new_status": "Створити допис"
   }
 }

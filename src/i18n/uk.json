@@ -83,7 +83,10 @@
     "password": "Пароль",
     "logout": "Вийти",
     "description": "Увійти за допомогою OAuth",
-    "login": "Увійти"
+    "login": "Увійти",
+    "recovery_code": "Код відновлення",
+    "enter_recovery_code": "Введіть код відновлення",
+    "authentication_code": "Код автентифікації"
   },
   "importer": {
     "error": "Під час імпортування файлу сталася помилка.",

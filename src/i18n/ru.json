@@ -18,7 +18,13 @@
     "generic_error": "Произошла ошибка",
     "optional": "не обязательно",
     "show_less": "Показать меньше",
-    "show_more": "Показать больше"
+    "show_more": "Показать больше",
+    "peek": "Взглянуть",
+    "dismiss": "Закрыть",
+    "retry": "Попробуйте еще раз",
+    "error_retry": "Пожалуйста попробуйте еще раз",
+    "close": "Закрыть",
+    "loading": "Загрузка…"
   },
   "login": {
     "login": "Войти",
@@ -468,7 +474,9 @@
     "media_proxy": "Прокси для внешних вложений",
     "text_limit": "Лимит символов",
     "title": "Особенности",
-    "gopher": "Gopher"
+    "gopher": "Gopher",
+    "who_to_follow": "Предложения кого читать",
+    "pleroma_chat_messages": "Pleroma Чат"
   },
   "tool_tip": {
     "accept_follow_request": "Принять запрос на чтение",
@@ -477,6 +485,7 @@
   "image_cropper": {
     "save_without_cropping": "Сохранить не обрезая",
     "save": "Сохранить",
-    "crop_picture": "Обрезать картинку"
+    "crop_picture": "Обрезать картинку",
+    "cancel": "Отмена"
   }
 }

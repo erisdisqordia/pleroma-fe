@@ -50,7 +50,8 @@
     "follow_request": "vuole seguirti",
     "no_more_notifications": "Fine delle notifiche",
     "migrated_to": "è migrato verso",
-    "reacted_with": "ha reagito con {0}"
+    "reacted_with": "ha reagito con {0}",
+    "error": "Errore nel caricare le notifiche: {0}"
   },
   "settings": {
     "attachments": "Allegati",
@@ -427,7 +428,8 @@
     "repeated": "condiviso",
     "no_statuses": "Nessun messaggio",
     "no_more_statuses": "Fine dei messaggi",
-    "reload": "Ricarica"
+    "reload": "Ricarica",
+    "error": "Errore nel caricare la sequenza: {0}"
   },
   "user_card": {
     "follow": "Segui",
@@ -703,7 +705,8 @@
     "delete_confirm": "Vuoi veramente eliminare questo messaggio?",
     "unbookmark": "Rimuovi segnalibro",
     "bookmark": "Aggiungi segnalibro",
-    "status_deleted": "Questo messagio è stato cancellato"
+    "status_deleted": "Questo messagio è stato cancellato",
+    "nsfw": "Pruriginoso"
   },
   "time": {
     "years_short": "{0}a",

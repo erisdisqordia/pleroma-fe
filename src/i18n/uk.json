@@ -1,14 +1,36 @@
 {
   "general": {
-    "dismiss": "Закрити"
+    "dismiss": "Закрити",
+    "close": "Закрити",
+    "verify": "Перевірити",
+    "confirm": "Підтвердити",
+    "enable": "Увімкнути",
+    "disable": "Вимкнути",
+    "cancel": "Скасувати",
+    "show_less": "Показати менше",
+    "show_more": "Показати більше",
+    "optional": "необов'язково",
+    "retry": "Спробуйте ще раз",
+    "error_retry": "Будь ласка, спробуйте ще раз",
+    "generic_error": "Виникла помилка",
+    "loading": "Завантаження…",
+    "more": "Більше",
+    "submit": "Відправити",
+    "apply": "Застосувати"
   },
   "finder": {
-    "error_fetching_user": "Користувача не знайдено"
+    "error_fetching_user": "Користувача не знайдено",
+    "find_user": "Знайти користувача"
   },
   "features_panel": {
     "gopher": "Gopher",
     "pleroma_chat_messages": "Чат Pleroma",
-    "chat": "Чат"
+    "chat": "Чат",
+    "who_to_follow": "Кого відстежувати",
+    "title": "Особливості",
+    "scope_options": "Параметри осягу",
+    "media_proxy": "Посередник медіа-даних",
+    "text_limit": "Ліміт символів"
   },
   "exporter": {
     "processing": "Опрацьовую, скоро ви зможете завантажити файл",

@@ -2,8 +2,9 @@
   <Popover
     trigger="click"
     placement="top"
-    class="extra-button-popover"
+    :offset="{ y: 5 }"
     :bound-to="{ x: 'container' }"
+    remove-padding
   >
     <div
       slot="content"
@@ -12,7 +13,7 @@
       <div class="dropdown-menu">
         <button
           v-if="canMute && !status.thread_muted"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="muteConversation"
         >
           <FAIcon
@@ -22,7 +23,7 @@
         </button>
         <button
           v-if="canMute && status.thread_muted"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="unmuteConversation"
         >
           <FAIcon
@@ -32,7 +33,7 @@
         </button>
         <button
           v-if="!status.pinned && canPin"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="pinStatus"
           @click="close"
         >
@@ -43,7 +44,7 @@
         </button>
         <button
           v-if="status.pinned && canPin"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="unpinStatus"
           @click="close"
         >
@@ -54,7 +55,7 @@
         </button>
         <button
           v-if="!status.bookmarked"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="bookmarkStatus"
           @click="close"
         >
@@ -65,7 +66,7 @@
         </button>
         <button
           v-if="status.bookmarked"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="unbookmarkStatus"
           @click="close"
         >
@@ -76,7 +77,7 @@
         </button>
         <button
           v-if="canDelete"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="deleteStatus"
           @click="close"
         >
@@ -86,7 +87,7 @@
           /><span>{{ $t("status.delete") }}</span>
         </button>
         <button
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="copyLink"
           @click="close"
         >
@@ -97,9 +98,12 @@
         </button>
       </div>
     </div>
-    <span slot="trigger">
+    <span
+      slot="trigger"
+      class="ExtraButtons"
+    >
       <FAIcon
-        class="ExtraButtons fa-scale-110 fa-old-padding"
+        class="fa-scale-110 fa-old-padding"
         icon="ellipsis-h"
       />
     </span>
@@ -112,11 +116,11 @@
 @import '../../_variables.scss';
 
 .ExtraButtons {
-  cursor: pointer;
   position: static;
+  padding: 10px;
+  margin: -10px;
 
-  &:hover,
-  .extra-button-popover.open & {
+  &:hover .svg-inline--fa {
     color: $fallback--text;
     color: var(--text, $fallback--text);
   }

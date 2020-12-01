@@ -150,7 +150,7 @@
       </p>
       <button
         :disabled="newName && newName.length === 0"
-        class="btn btn-default"
+        class="btn button-default"
         @click="updateProfile"
       >
         {{ $t('general.submit') }}
@@ -179,7 +179,7 @@
       <button
         v-show="pickAvatarBtnVisible"
         id="pick-avatar"
-        class="btn"
+        class="button-default btn"
         type="button"
       >
         {{ $t('settings.upload_a_photo') }}
@@ -224,7 +224,7 @@
       />
       <button
         v-else-if="bannerPreview"
-        class="btn btn-default"
+        class="btn button-default"
         @click="submitBanner(banner)"
       >
         {{ $t('general.submit') }}
@@ -274,7 +274,7 @@
       />
       <button
         v-else-if="backgroundPreview"
-        class="btn btn-default"
+        class="btn button-default"
         @click="submitBackground(background)"
       >
         {{ $t('general.submit') }}

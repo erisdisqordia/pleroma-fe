@@ -9,9 +9,8 @@
       @click="scrollToTop()"
     >
       <div class="item">
-        <a
-          href="#"
-          class="mobile-nav-button"
+        <button
+          class="button-unstyled mobile-nav-button"
           @click.stop.prevent="toggleMobileSidebar()"
         >
           <FAIcon
@@ -22,7 +21,7 @@
             v-if="unreadChatCount"
             class="alert-dot"
           />
-        </a>
+        </button>
         <router-link
           v-if="!hideSitename"
           class="site-name"
@@ -33,10 +32,9 @@
         </router-link>
       </div>
       <div class="item right">
-        <a
+        <button
           v-if="currentUser"
-          class="mobile-nav-button"
-          href="#"
+          class="button-unstyled mobile-nav-button"
           @click.stop.prevent="openMobileNotifications()"
         >
           <FAIcon
@@ -47,7 +45,7 @@
             v-if="unseenNotificationsCount"
             class="alert-dot"
           />
-        </a>
+        </button>
       </div>
     </nav>
     <div

@@ -10,7 +10,10 @@
       <span class="title">
         {{ $t("chats.chats") }}
       </span>
-      <button @click="newChat">
+      <button
+        class="button-default"
+        @click="newChat"
+      >
         {{ $t("chats.new") }}
       </button>
     </div>

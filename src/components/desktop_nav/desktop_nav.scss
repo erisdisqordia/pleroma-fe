@@ -21,7 +21,7 @@
     grid-template-areas: "logo sitename actions";
   }
 
-  button {
+  .button-default {
     &, svg {
       color: $fallback--text;
       color: var(--btnTopBarText, $fallback--text);
@@ -80,12 +80,13 @@
   .nav-icon {
     margin-left: 0.2em;
     width: 2em;
+    height: 100%;
     text-align: center;
-  }
 
-  a, a svg {
-    color: $fallback--link;
-    color: var(--topBarLink, $fallback--link);
+    .svg-inline--fa {
+      color: $fallback--link;
+      color: var(--topBarLink, $fallback--link);
+    }
   }
 
   .sitename {

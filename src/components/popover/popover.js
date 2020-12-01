@@ -21,7 +21,10 @@ const Popover = {
     // Replaces the classes you may want for the popover container.
     // Use 'popover-default' in addition to get the default popover
     // styles with your custom class.
-    popoverClass: String
+    popoverClass: String,
+    // If true, subtract padding when calculating position for the popover,
+    // use it when popover offset looks to be different on top vs bottom.
+    removePadding: Boolean
   },
   data () {
     return {
@@ -96,9 +99,15 @@ const Popover = {
       if (origin.y + content.offsetHeight > yBounds.max) usingTop = true
       if (origin.y - content.offsetHeight < yBounds.min) usingTop = false
 
+      let vPadding = 0
+      if (this.removePadding && usingTop) {
+        const anchorStyle = getComputedStyle(anchorEl)
+        vPadding = parseFloat(anchorStyle.paddingTop) + parseFloat(anchorStyle.paddingBottom)
+      }
+
       const yOffset = (this.offset && this.offset.y) || 0
       const translateY = usingTop
-        ? -anchorEl.offsetHeight - yOffset - content.offsetHeight
+        ? -anchorEl.offsetHeight + vPadding - yOffset - content.offsetHeight
         : yOffset
 
       const xOffset = (this.offset && this.offset.x) || 0

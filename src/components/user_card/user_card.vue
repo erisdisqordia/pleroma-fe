@@ -162,7 +162,7 @@
             <template v-if="relationship.following">
               <ProgressButton
                 v-if="!relationship.subscribing"
-                class="btn btn-default"
+                class="btn button-default"
                 :click="subscribeUser"
                 :title="$t('user_card.subscribe')"
               >
@@ -170,7 +170,7 @@
               </ProgressButton>
               <ProgressButton
                 v-else
-                class="btn btn-default toggled"
+                class="btn button-default toggled"
                 :click="unsubscribeUser"
                 :title="$t('user_card.unsubscribe')"
               >
@@ -192,14 +192,14 @@
           <div>
             <button
               v-if="relationship.muting"
-              class="btn btn-default btn-block toggled"
+              class="btn button-default btn-block toggled"
               @click="unmuteUser"
             >
               {{ $t('user_card.muted') }}
             </button>
             <button
               v-else
-              class="btn btn-default btn-block"
+              class="btn button-default btn-block"
               @click="muteUser"
             >
               {{ $t('user_card.mute') }}
@@ -207,7 +207,7 @@
           </div>
           <div>
             <button
-              class="btn btn-default btn-block"
+              class="btn button-default btn-block"
               @click="mentionUser"
             >
               {{ $t('user_card.mention') }}

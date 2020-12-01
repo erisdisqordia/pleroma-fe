@@ -3,8 +3,8 @@
     trigger="click"
     placement="top"
     :offset="{ y: 5 }"
-    class="react-button-popover"
     :bound-to="{ x: 'container' }"
+    remove-padding
   >
     <div
       slot="content"
@@ -40,11 +40,14 @@
         <div class="reaction-bottom-fader" />
       </div>
     </div>
-    <span slot="trigger">
+    <span
+      slot="trigger"
+      class="ReactButton"
+      :title="$t('tool_tip.add_reaction')"
+    >
       <FAIcon
-        class="fa-scale-110 fa-old-padding add-reaction-button"
+        class="fa-scale-110 fa-old-padding"
         :icon="['far', 'smile-beam']"
-        :title="$t('tool_tip.add_reaction')"
       />
     </span>
   </Popover>
@@ -104,10 +107,11 @@
   }
 }
 
-.add-reaction-button {
-  cursor: pointer;
+.ReactButton {
+  padding: 10px;
+  margin: -10px;
 
-  &:hover {
+  &:hover .svg-inline--fa {
     color: $fallback--text;
     color: var(--text, $fallback--text);
   }

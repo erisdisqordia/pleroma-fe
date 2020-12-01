@@ -36,9 +36,8 @@
           @toggled="onSearchBarToggled"
           @click.stop.native
         />
-        <a
-          href="#"
-          class="nav-icon"
+        <button
+          class="button-unstyled nav-icon"
           @click.stop="openSettingsModal"
         >
           <FAIcon
@@ -47,29 +46,32 @@
             icon="cog"
             :title="$t('nav.preferences')"
           />
-        </a>
+        </button>
         <a
           v-if="currentUser && currentUser.role === 'admin'"
           href="/pleroma/admin/#/login-pleroma"
           class="nav-icon"
           target="_blank"
-        ><FAIcon
-          fixed-width
-          class="fa-scale-110 fa-old-padding"
-          icon="tachometer-alt"
-          :title="$t('nav.administration')"
-        /></a>
-        <a
+        >
+          <FAIcon
+            fixed-width
+            class="fa-scale-110 fa-old-padding"
+            icon="tachometer-alt"
+            :title="$t('nav.administration')"
+          />
+        </a>
+        <button
           v-if="currentUser"
-          href="#"
-          class="nav-icon"
+          class="button-unstyled nav-icon"
           @click.prevent="logout"
-        ><FAIcon
-          fixed-width
-          class="fa-scale-110 fa-old-padding"
-          icon="sign-out-alt"
-          :title="$t('login.logout')"
-        /></a>
+        >
+          <FAIcon
+            fixed-width
+            class="fa-scale-110 fa-old-padding"
+            icon="sign-out-alt"
+            :title="$t('login.logout')"
+          />
+        </button>
       </div>
     </div>
   </nav>

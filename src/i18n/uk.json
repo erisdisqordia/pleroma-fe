@@ -346,7 +346,27 @@
     "mute_export_button": "Експорт ігнорувань у файл CSV",
     "mute_import_error": "Під час імпорту ігнорувань сталася помилка",
     "mute_import": "Імпорт ігнорувань",
-    "mute_export": "Експорт ігнорувань"
+    "mute_export": "Експорт ігнорувань",
+    "new_password": "Новий пароль",
+    "new_email": "Нова ел. пошта",
+    "name_bio": "Особисті дані",
+    "set_new_profile_banner": "Встановити нову обкладинку",
+    "set_new_avatar": "Встановити новий аватар",
+    "security_tab": "Безпека",
+    "saving_ok": "Налаштування збережені",
+    "saving_err": "Помилка при збереженні налаштувань",
+    "reply_visibility_self": "Показувати лише адресовані мені відповіді",
+    "reply_visibility_following": "Показувати відповіді адресовані лише мені або користувачам, яких я читаю",
+    "reply_visibility_all": "Показати всі відповіді",
+    "replies_in_timeline": "Відповіді в стрічці",
+    "profile_tab": "Профіль",
+    "profile_banner": "Банер профілю",
+    "profile_background": "Обкладинка профілю",
+    "revoke_token": "Відкликати",
+    "oauth_tokens": "OAuth ключі",
+    "token": "Ключ",
+    "refresh_token": "Оновити ключ",
+    "valid_until": "Діє до"
   },
   "selectable_list": {
     "select_all": "Вибрати все"
@@ -374,5 +394,21 @@
     "email": "Ел. пошта",
     "bio": "Про себе",
     "captcha": "CAPTCHA"
+  },
+  "who_to_follow": {
+    "who_to_follow": "На кого підписатися"
+  },
+  "tool_tip": {
+    "repeat": "Поширити",
+    "reply": "Відповісти",
+    "add_reaction": "Додати реакцію",
+    "user_settings": "Налаштування користувача"
+  },
+  "upload": {
+    "error": {
+      "base": "Збій при завантаженні.",
+      "file_too_big": "Файл завеликий [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+      "default": "Спробуйте ще раз пізніше"
+    }
   }
 }

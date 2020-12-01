@@ -271,7 +271,13 @@
     "avatarAltRadius": "Аватарки у сповіщеннях",
     "avatar": "Аватар",
     "attachments": "Вкладення",
-    "attachmentRadius": "Вкладення"
+    "attachmentRadius": "Вкладення",
+    "general": "Загальні",
+    "foreground": "Передній план",
+    "follows_imported": "Відстежуваних імпортовано! Їхня обробка потребує часу.",
+    "follow_import_error": "Помилка імпортування відстежуваних",
+    "follow_import": "Імпортувати відстежуваних",
+    "follow_export_button": "Експортувати відстежуваних до csv файлу"
   },
   "selectable_list": {
     "select_all": "Вибрати все"

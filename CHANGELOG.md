@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 ## [Unreleased]
+### Added
+- Added some missing unicode emoji
+
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form
 - Fixed timeline errors locking timelines

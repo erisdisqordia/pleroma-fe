@@ -37,7 +37,7 @@
           v-for="(suggestion, index) in suggestions"
           :key="index"
           class="autocomplete-item"
-          :class="{ highlighted: suggestion.highlighted }"
+          :class="{ highlighted: index === highlighted }"
           @click.stop.prevent="onClick($event, suggestion)"
         >
           <span class="image">

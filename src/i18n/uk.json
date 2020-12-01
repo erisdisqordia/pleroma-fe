@@ -297,7 +297,7 @@
     "inputRadius": "Поля вводу",
     "import_theme": "Завантажити переднабір",
     "import_followers_from_a_csv_file": "Імпортувати відстежуваних з csv файлу",
-    "import_blocks_from_a_csv_file": "Імпортувати блокувань з csv файлу",
+    "import_blocks_from_a_csv_file": "Імпортувати заблокованих з csv файлу",
     "hide_filtered_statuses": "Сховати відфільтровані статуси",
     "hide_user_stats": "Приховувати статистику користувачів (напр. кількість відстежувачів)",
     "hide_post_stats": "Приховувати статистику дописів (напр. кількість улюблених)",
@@ -336,15 +336,15 @@
     "security": "Безпека",
     "domain_mutes": "Домени",
     "discoverable": "Дозволити виявлення цього облікового запису в результатах пошуку та інших службах",
-    "mutes_and_blocks": "Ігнорування та блокування",
+    "mutes_and_blocks": "Заглушені та блоковані",
     "changed_email": "Email успішно змінено!",
     "change_email_error": "Сталася помилка під час зміни email.",
     "change_email": "Змінити email",
     "bot": "Це обліковий запис бота",
-    "import_mutes_from_a_csv_file": "Імпорт ігнорувань з файлу CSV",
-    "mutes_imported": "Ігнорування імпортовані! Їх обробка триватиме певний час.",
-    "mute_export_button": "Експорт ігнорувань у файл CSV",
-    "mute_import_error": "Під час імпорту ігнорувань сталася помилка",
+    "import_mutes_from_a_csv_file": "Імпорт заглушених з csv файлу",
+    "mutes_imported": "Заглушені імпортовані! Їх обробка триватиме певний час.",
+    "mute_export_button": "Експорт заглушених у csv файл",
+    "mute_import_error": "Під час імпорту заглушених сталася помилка",
     "mute_import": "Імпорт ігнорувань",
     "mute_export": "Експорт ігнорувань",
     "new_password": "Новий пароль",
@@ -366,13 +366,32 @@
     "oauth_tokens": "OAuth ключі",
     "token": "Ключ",
     "refresh_token": "Оновити ключ",
-    "valid_until": "Діє до"
+    "valid_until": "Діє до",
+    "use_contain_fit": "Не обрізати краї мініатюр",
+    "name": "Ім'я",
+    "profile_fields": {
+      "value": "Зміст",
+      "name": "Назва",
+      "add_field": "Додати поле",
+      "label": "Метадані профілю"
+    },
+    "play_videos_in_modal": "Відтворювати відео у спливаючій рамці",
+    "accent": "Акцент",
+    "chatMessageRadius": "Повідомлення в бесіді",
+    "notification_mutes": "Щоб перестати отримувати сповіщення від певного користувача, заглушіть його.",
+    "user_mutes": "Користувачі",
+    "no_mutes": "Нема заглушених",
+    "emoji_reactions_on_timeline": "Показувати реакції емоджі на стрічці",
+    "pad_emoji": "Додавати простір з обидвох сторін емоджі, при додаванні з панелі",
+    "allow_following_move": "Дозволити автостеження при переміщенні на інший інстанс"
   },
   "selectable_list": {
     "select_all": "Вибрати все"
   },
   "remote_user_resolver": {
-    "error": "Не знайдено."
+    "error": "Не знайдено.",
+    "searching_for": "Шукаю",
+    "remote_user_resolver": "Пошукова система для віддалених користувачів"
   },
   "registration": {
     "validations": {

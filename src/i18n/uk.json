@@ -191,7 +191,7 @@
   "interactions": {
     "load_older": "Завантажити давніші взаємодії",
     "follows": "Нові підписки",
-    "favs_repeats": "Повтори і улюблене",
+    "favs_repeats": "Повтори та вподобайки",
     "moves": "Міграції користувачів"
   },
   "errors": {
@@ -270,7 +270,7 @@
     "change_password": "Змінити пароль",
     "cRed": "Червоний (Скасувати)",
     "cGreen": "Зелений (Поширити)",
-    "cOrange": "Жовтогарячий (Улюблене)",
+    "cOrange": "Жовтогарячий (Вподобайки)",
     "cBlue": "Блакитний (Відповісти, читати)",
     "btnRadius": "Кнопки",
     "blocks_tab": "Блокування",
@@ -300,7 +300,7 @@
     "import_blocks_from_a_csv_file": "Імпортувати заблокованих з csv файлу",
     "hide_filtered_statuses": "Сховати відфільтровані статуси",
     "hide_user_stats": "Приховувати статистику користувачів (напр. кількість відстежувачів)",
-    "hide_post_stats": "Приховувати статистику дописів (напр. кількість улюблених)",
+    "hide_post_stats": "Приховувати статистику дописів (напр. кількість вподобаних)",
     "use_one_click_nsfw": "Відкривати NSFW вкладення одним кліком миші",
     "preload_images": "Передзавантажувати світлини",
     "hide_isp": "Сховати панель з особливостями сервера",
@@ -350,7 +350,7 @@
     "new_password": "Новий пароль",
     "new_email": "Нова ел. пошта",
     "name_bio": "Особисті дані",
-    "set_new_profile_banner": "Встановити нову обкладинку",
+    "set_new_profile_banner": "Встановити новий банер",
     "set_new_avatar": "Встановити новий аватар",
     "security_tab": "Безпека",
     "saving_ok": "Налаштування збережені",
@@ -383,7 +383,22 @@
     "no_mutes": "Нема заглушених",
     "emoji_reactions_on_timeline": "Показувати реакції емоджі на стрічці",
     "pad_emoji": "Додавати простір з обидвох сторін емоджі, при додаванні з панелі",
-    "allow_following_move": "Дозволити автостеження при переміщенні на інший інстанс"
+    "allow_following_move": "Дозволити автостеження при переміщенні на інший інстанс",
+    "set_new_profile_background": "Встановити нову обкладинку профілю",
+    "radii_help": "Радіус заокруглення кутів інтерфейсу (в пікселях)",
+    "presets": "Переднабір",
+    "show_moderator_badge": "Показувати значок модератора в моєму профілі",
+    "show_admin_badge": "Показувати значок адміністратора в моєму профілі",
+    "hide_followers_description": "Не показувати хто підписаний на мене",
+    "hide_follows_description": "Не показувати на кого я підписаний",
+    "no_rich_text_description": "Видалення всього форматування тексту з усіх дописів",
+    "notification_visibility_emoji_reactions": "Реакції",
+    "notification_visibility_moves": "Міграція користувача",
+    "notification_visibility_repeats": "Поширення допису",
+    "notification_visibility_mentions": "Згадування",
+    "notification_visibility_likes": "Вподобайки",
+    "notification_visibility_follows": "Нові підписки",
+    "notification_visibility": "Отримувати сповіщення про наступні події"
   },
   "selectable_list": {
     "select_all": "Вибрати все"
@@ -429,5 +444,38 @@
       "file_too_big": "Файл завеликий [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
       "default": "Спробуйте ще раз пізніше"
     }
+  },
+  "time": {
+    "weeks_short": "{0}тижд.",
+    "week_short": "{0}тижд.",
+    "years_short": "{0}р",
+    "year_short": "{0}р",
+    "years": "{0} роки",
+    "year": "{0} рік",
+    "weeks": "{0} тижднів",
+    "week": "{0} тиждень",
+    "second_short": "{0}с",
+    "second": "{0} секунда",
+    "now_short": "щойно",
+    "now": "щойно",
+    "months_short": "{0}міс.",
+    "month_short": "{0}міс.",
+    "months": "{0} місяці",
+    "month": "{0} місяць",
+    "minutes_short": "{0}хв",
+    "hours_short": "{0}год",
+    "hour_short": "{0}год",
+    "day_short": "{0}д",
+    "minute_short": "{0}хв",
+    "minutes": "{0} хвилини",
+    "minute": "{0} хвилина",
+    "in_past": "{0} тому",
+    "hours": "{0} години",
+    "hour": "{0} година",
+    "days_short": "{0}д",
+    "days": "{0} дні",
+    "day": "{0} день",
+    "seconds_short": "{0}с",
+    "seconds": "{0} секунди"
   }
 }

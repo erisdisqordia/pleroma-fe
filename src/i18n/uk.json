@@ -429,7 +429,8 @@
     "notifications": "Сповіщення",
     "fun": "Розваги",
     "notification_setting_privacy": "Приватність",
-    "notification_setting_filters": "Фільтри"
+    "notification_setting_filters": "Фільтри",
+    "reset_avatar": "Скинути аватар "
   },
   "selectable_list": {
     "select_all": "Вибрати все"

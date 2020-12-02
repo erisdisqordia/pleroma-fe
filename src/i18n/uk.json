@@ -430,7 +430,8 @@
     "fun": "Розваги",
     "notification_setting_privacy": "Приватність",
     "notification_setting_filters": "Фільтри",
-    "reset_avatar": "Скинути аватар "
+    "reset_avatar": "Скинути аватар",
+    "reset_profile_background": "Скинути обкладинку профілю"
   },
   "selectable_list": {
     "select_all": "Вибрати все"

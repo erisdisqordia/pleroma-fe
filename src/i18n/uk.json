@@ -419,7 +419,10 @@
         "keep_color": "Залишити кольори",
         "use_source": "Нова версія",
         "use_snapshot": "Стара версія",
-        "load_theme": "Завантажити тему "
+        "load_theme": "Завантажити тему"
+      },
+      "common": {
+        "color": "Колір"
       }
     },
     "enable_web_push_notifications": "Увімкнути web push-сповіщення",

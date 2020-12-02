@@ -408,8 +408,20 @@
       "false": "ні"
     },
     "user_settings": "Користувацькі налаштування",
-    "upload_a_photo": "Завантажити фото ",
-    "theme": "Тема"
+    "upload_a_photo": "Завантажити фото",
+    "theme": "Тема",
+    "style": {
+      "switcher": {
+        "keep_fonts": "Залишити шрифти",
+        "keep_roundness": "Залишити скруглення",
+        "keep_opacity": "Залишити прозорості",
+        "keep_shadows": "Залишити тіні",
+        "keep_color": "Залишити кольори"
+      }
+    },
+    "enable_web_push_notifications": "Увімкнути web push-сповіщення",
+    "notifications": "Сповіщення",
+    "fun": "Розваги"
   },
   "selectable_list": {
     "select_all": "Вибрати все"

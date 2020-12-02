@@ -402,7 +402,14 @@
     "settings": "Налаштування",
     "panelRadius": "Панелі",
     "text": "Текст",
-    "tooltipRadius": "Підказки/попередження"
+    "tooltipRadius": "Підказки/попередження",
+    "values": {
+      "true": "так",
+      "false": "ні"
+    },
+    "user_settings": "Користувацькі налаштування",
+    "upload_a_photo": "Завантажити фото ",
+    "theme": "Тема"
   },
   "selectable_list": {
     "select_all": "Вибрати все"

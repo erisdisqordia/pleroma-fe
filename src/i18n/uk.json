@@ -496,7 +496,8 @@
         "alert_neutral": "Нейтральний",
         "alert_error": "Помилки",
         "alert": "Фон сповіщень",
-        "_tab_label": "Додатково"
+        "_tab_label": "Додатково",
+        "selectedPost": "Вибраний допис"
       },
       "common_colors": {
         "rgbo": "Піктограми, акценти, значки",

@@ -398,7 +398,9 @@
     "notification_visibility_mentions": "Згадування",
     "notification_visibility_likes": "Вподобайки",
     "notification_visibility_follows": "Нові підписки",
-    "notification_visibility": "Отримувати сповіщення про наступні події"
+    "notification_visibility": "Отримувати сповіщення про наступні події",
+    "settings": "Налаштування",
+    "panelRadius": "Панелі"
   },
   "selectable_list": {
     "select_all": "Вибрати все"

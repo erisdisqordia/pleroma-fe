@@ -421,10 +421,35 @@
         "use_snapshot": "Стара версія",
         "load_theme": "Завантажити тему",
         "reset": "Скинути",
-        "clear_all": "Очистити все "
+        "clear_all": "Очистити все"
       },
       "common": {
         "color": "Колір"
+      },
+      "preview": {
+        "mono": "змісту",
+        "text": "Трохи більше {0} та {1}",
+        "button": "Кнопка",
+        "error": "Приклад помилки",
+        "content": "Зміст",
+        "header": "Попередній перегляд"
+      },
+      "shadows": {
+        "components": {
+          "button": "Кнопка",
+          "input": "Поле вводу"
+        },
+        "component": "Компонент"
+      },
+      "fonts": {
+        "components": {
+          "input": "Поля вводу",
+          "interface": "Інтерфейс"
+        },
+        "_tab_label": "Шрифти"
+      },
+      "advanced_colors": {
+        "alert_warning": "Попередження"
       }
     },
     "enable_web_push_notifications": "Увімкнути web push-сповіщення",

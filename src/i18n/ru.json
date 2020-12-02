@@ -424,7 +424,9 @@
     "bookmark": "В закладки",
     "unbookmark": "Удалить из закладок",
     "status_deleted": "Пост удален",
-    "reply_to": "Ответ"
+    "reply_to": "Ответ",
+    "repeats": "Повторы",
+    "favorites": "Понравилось"
   },
   "user_card": {
     "block": "Заблокировать",
@@ -464,7 +466,9 @@
       "delete_user_confirmation": "Вы уверены? Это действие нельзя отменить."
     },
     "media": "С вложениями",
-    "mention": "Упомянуть"
+    "mention": "Упомянуть",
+    "show_repeats": "Показывать повторы",
+    "hide_repeats": "Скрыть повторы"
   },
   "user_profile": {
     "timeline_title": "Лента пользователя"
@@ -552,7 +556,7 @@
   "polls": {
     "not_enough_options": "Недостаточно уникальных вариантов в опросе",
     "expired": "Опрос закончился {0} назад",
-    "expires_in": "Опрос заканчивается через",
+    "expires_in": "Опрос заканчивается через {0}",
     "expiry": "Срок опроса",
     "multiple_choices": "Несколько вариантов",
     "single_choice": "Один вариант",
@@ -588,5 +592,27 @@
   },
   "shoutbox": {
     "title": "Болтовня"
+  },
+  "time": {
+    "days_short": "{0}дн",
+    "years_short": "{0}г",
+    "year_short": "{0}г",
+    "weeks_short": "{0}нед",
+    "week_short": "{0}нед",
+    "seconds_short": "{0}с",
+    "second_short": "{0}с",
+    "now_short": "только что",
+    "now": "только что",
+    "months_short": "{0}мес",
+    "month_short": "{0}мес",
+    "minutes_short": "{0}мин",
+    "minute_short": "{0}мин",
+    "in_past": "{0} назад",
+    "in_future": "через {0}",
+    "hours_short": "{0}ч",
+    "hour_short": "{0}ч",
+    "hour": "{0} час",
+    "day_short": "{0}д",
+    "days": "{0} дней"
   }
 }

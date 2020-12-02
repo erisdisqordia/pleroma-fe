@@ -2,12 +2,10 @@ import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faTimes,
   faCircleNotch
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faTimes,
   faCircleNotch
 )
 
@@ -53,8 +51,7 @@ const ImageCropper = {
       cropper: undefined,
       dataUrl: undefined,
       filename: undefined,
-      submitting: false,
-      submitError: null
+      submitting: false
     }
   },
   computed: {
@@ -66,9 +63,6 @@ const ImageCropper = {
     },
     cancelText () {
       return this.cancelButtonLabel || this.$t('image_cropper.cancel')
-    },
-    submitErrorMsg () {
-      return this.submitError && this.submitError instanceof Error ? this.submitError.toString() : this.submitError
     }
   },
   methods: {
@@ -82,12 +76,8 @@ const ImageCropper = {
     },
     submit (cropping = true) {
       this.submitting = true
-      this.avatarUploadError = null
       this.submitHandler(cropping && this.cropper, this.file)
         .then(() => this.destroy())
-        .catch((err) => {
-          this.submitError = err
-        })
         .finally(() => {
           this.submitting = false
         })
@@ -113,9 +103,6 @@ const ImageCropper = {
         reader.readAsDataURL(this.file)
         this.$emit('changed', this.file, reader)
       }
-    },
-    clearError () {
-      this.submitError = null
     }
   },
   mounted () {

@@ -9,11 +9,15 @@
       <div class="notice-message">
         {{ $t(notice.messageKey, notice.messageArgs) }}
       </div>
-      <FAIcon
-        class="fa-scale-110 fa-old-padding"
-        icon="times"
+      <button
+        class="button-unstyled"
         @click="closeNotice(notice)"
-      />
+      >
+        <FAIcon
+          class="fa-scale-110 fa-old-padding"
+          icon="times"
+        />
+      </button>
     </div>
   </div>
 </template>

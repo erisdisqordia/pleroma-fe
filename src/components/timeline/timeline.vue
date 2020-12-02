@@ -4,7 +4,7 @@
       <TimelineMenu v-if="!embedded" />
       <button
         v-if="showLoadButton"
-        class="loadmore-button"
+        class="button-default loadmore-button"
         @click.prevent="showNewStatuses"
       >
         {{ loadButtonString }}
@@ -61,13 +61,15 @@
       >
         {{ $t('timeline.no_more_statuses') }}
       </div>
-      <a
+      <button
         v-else-if="!timeline.loading"
-        href="#"
+        class="button-unstyled -link -fullwidth"
         @click.prevent="fetchOlderStatuses()"
       >
-        <div class="new-status-notification text-center panel-footer">{{ $t('timeline.load_older') }}</div>
-      </a>
+        <div class="new-status-notification text-center panel-footer">
+          {{ $t('timeline.load_older') }}
+        </div>
+      </button>
       <div
         v-else
         class="new-status-notification text-center panel-footer"

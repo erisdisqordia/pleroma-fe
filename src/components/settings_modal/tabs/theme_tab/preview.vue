@@ -15,7 +15,7 @@
         <span class="alert error">
           {{ $t('settings.style.preview.error') }}
         </span>
-        <button class="btn">
+        <button class="btn button-default">
           {{ $t('settings.style.preview.button') }}
         </button>
       </div>
@@ -102,7 +102,7 @@
             >
             <label for="preview_checkbox">{{ $t('settings.style.preview.checkbox') }}</label>
           </span>
-          <button class="btn">
+          <button class="btn button-default">
             {{ $t('settings.style.preview.button') }}
           </button>
         </div>

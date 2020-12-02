@@ -33,6 +33,7 @@ h4 {
   max-width: 980px;
   align-content: flex-start;
 }
+
 .underlay {
   background-color: rgba(0,0,0,0.15);
   background-color: var(--underlay, rgba(0,0,0,0.15));
@@ -69,7 +70,7 @@ a {
   color: var(--link, $fallback--link);
 }
 
-button {
+.button-default {
   user-select: none;
   color: $fallback--text;
   color: var(--btnText, $fallback--text);
@@ -85,7 +86,8 @@ button {
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
 
-  i[class*=icon-], .svg-inline--fa {
+  i[class*=icon-],
+  .svg-inline--fa {
     color: $fallback--text;
     color: var(--btnText, $fallback--text);
   }
@@ -107,7 +109,8 @@ button {
     background-color: $fallback--fg;
     background-color: var(--btnPressed, $fallback--fg);
 
-    svg, i {
+    svg,
+    i {
       color: $fallback--text;
       color: var(--btnPressedText, $fallback--text);
     }
@@ -120,7 +123,8 @@ button {
     background-color: $fallback--fg;
     background-color: var(--btnDisabled, $fallback--fg);
 
-    svg, i {
+    svg,
+    i {
       color: $fallback--text;
       color: var(--btnDisabledText, $fallback--text);
     }
@@ -134,7 +138,8 @@ button {
     box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.3), 0px 1px 0px 0px rgba(0, 0, 0, 0.2) inset, 0px -1px 0px 0px rgba(255, 255, 255, 0.2) inset;
     box-shadow: var(--buttonPressedShadow);
 
-    svg, i {
+    svg,
+    i {
       color: $fallback--text;
       color: var(--btnToggledText, $fallback--text);
     }
@@ -146,6 +151,30 @@ button {
     color: var(--alertErrorPanelText, $fallback--text);
     background-color: $fallback--alertError;
     background-color: var(--alertError, $fallback--alertError);
+  }
+}
+
+.button-unstyled {
+  background: none;
+  border: none;
+  outline: none;
+  display: inline;
+  text-align: initial;
+  font-size: 100%;
+  font-family: inherit;
+  padding: 0;
+  line-height: unset;
+  cursor: pointer;
+  box-sizing: content-box;
+  color: inherit;
+
+  &.-link {
+    color: $fallback--link;
+    color: var(--link, $fallback--link);
+  }
+
+  &.-fullwidth {
+    width: 100%;
   }
 }
 
@@ -442,6 +471,7 @@ main-router {
     color: $fallback--faint;
     color: var(--panelFaint, $fallback--faint);
   }
+
   .faint-link {
     color: $fallback--faint;
     color: var(--faintLink, $fallback--faint);
@@ -453,11 +483,8 @@ main-router {
     overflow-x: hidden;
   }
 
-  button {
-    flex-shrink: 0;
-  }
-
-  button, .alert {
+  .button-default,
+  .alert {
     // height: 100%;
     line-height: 21px;
     min-height: 0;
@@ -468,8 +495,11 @@ main-router {
     align-self: stretch;
   }
 
-  button {
-    &, i[class*=icon-] {
+  .button-default {
+    flex-shrink: 0;
+
+    &,
+    i[class*=icon-] {
       color: $fallback--text;
       color: var(--btnPanelText, $fallback--text);
     }
@@ -492,7 +522,8 @@ main-router {
     }
   }
 
-  a {
+  a,
+  .-link {
     color: $fallback--link;
     color: var(--panelLink, $fallback--link)
   }
@@ -507,15 +538,15 @@ main-router {
   border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
   border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
 
-
   .faint {
     color: $fallback--faint;
     color: var(--panelFaint, $fallback--faint);
   }
 
-  a {
+  a,
+  .-link {
     color: $fallback--link;
-    color: var(--panelLink, $fallback--link)
+    color: var(--panelLink, $fallback--link);
   }
 }
 
@@ -797,7 +828,7 @@ nav {
   }
 }
 
-.btn.btn-default {
+.btn.button-default {
   min-height: 28px;
 }
 

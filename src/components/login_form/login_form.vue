@@ -61,7 +61,7 @@
             <button
               :disabled="loggingIn"
               type="submit"
-              class="btn btn-default"
+              class="btn button-default"
             >
               {{ $t('login.login') }}
             </button>

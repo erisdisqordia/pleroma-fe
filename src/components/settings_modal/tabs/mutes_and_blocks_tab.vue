@@ -27,7 +27,7 @@
           <div class="bulk-actions">
             <ProgressButton
               v-if="selected.length > 0"
-              class="btn btn-default bulk-action-button"
+              class="btn button-default bulk-action-button"
               :click="() => blockUsers(selected)"
             >
               {{ $t('user_card.block') }}
@@ -37,7 +37,7 @@
             </ProgressButton>
             <ProgressButton
               v-if="selected.length > 0"
-              class="btn btn-default"
+              class="btn button-default"
               :click="() => unblockUsers(selected)"
             >
               {{ $t('user_card.unblock') }}
@@ -85,7 +85,7 @@
               <div class="bulk-actions">
                 <ProgressButton
                   v-if="selected.length > 0"
-                  class="btn btn-default"
+                  class="btn button-default"
                   :click="() => muteUsers(selected)"
                 >
                   {{ $t('user_card.mute') }}
@@ -95,7 +95,7 @@
                 </ProgressButton>
                 <ProgressButton
                   v-if="selected.length > 0"
-                  class="btn btn-default"
+                  class="btn button-default"
                   :click="() => unmuteUsers(selected)"
                 >
                   {{ $t('user_card.unmute') }}
@@ -141,7 +141,7 @@
               <div class="bulk-actions">
                 <ProgressButton
                   v-if="selected.length > 0"
-                  class="btn btn-default"
+                  class="btn button-default"
                   :click="() => unmuteDomains(selected)"
                 >
                   {{ $t('domain_mute_card.unmute') }}

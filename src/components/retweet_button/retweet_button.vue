@@ -1,33 +1,38 @@
 <template>
-  <div v-if="loggedIn">
-    <template v-if="visibility !== 'private' && visibility !== 'direct'">
+  <div class="RetweetButton">
+    <button
+      v-if="visibility !== 'private' && visibility !== 'direct' && loggedIn"
+      class="button-unstyled interactive"
+      :class="status.repeated && '-repeated'"
+      :title="$t('tool_tip.repeat')"
+      @click.prevent="retweet()"
+    >
       <FAIcon
-        :class="classes"
-        class="RetweetButton fa-scale-110 fa-old-padding -interactive"
+        class="fa-scale-110 fa-old-padding"
         icon="retweet"
         :spin="animated"
-        :title="$t('tool_tip.repeat')"
-        @click.prevent="retweet()"
       />
-      <span v-if="!mergedConfig.hidePostStats && status.repeat_num > 0">{{ status.repeat_num }}</span>
-    </template>
-    <template v-else>
+    </button>
+    <span v-else-if="loggedIn">
       <FAIcon
-        :class="classes"
-        class="RetweetButton fa-scale-110 fa-old-padding"
+        class="fa-scale-110 fa-old-padding"
         icon="lock"
         :title="$t('timeline.no_retweet_hint')"
       />
-    </template>
-  </div>
-  <div v-else-if="!loggedIn">
-    <FAIcon
-      :class="classes"
-      class="fa-scale-110 fa-old-padding"
-      icon="retweet"
-      :title="$t('tool_tip.repeat')"
-    />
-    <span v-if="!mergedConfig.hidePostStats && status.repeat_num > 0">{{ status.repeat_num }}</span>
+    </span>
+    <span v-else>
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        icon="retweet"
+        :title="$t('tool_tip.repeat')"
+      />
+    </span>
+    <span
+      v-if="!mergedConfig.hidePostStats && status.repeat_num > 0"
+      class="no-event"
+    >
+      {{ status.repeat_num }}
+    </span>
   </div>
 </template>
 
@@ -37,19 +42,28 @@
 @import '../../_variables.scss';
 
 .RetweetButton {
-  &.-interactive {
-    cursor: pointer;
-    animation-duration: 0.6s;
+  display: flex;
 
-    &:hover {
+  > :first-child {
+    padding: 10px;
+    margin: -10px -8px -10px -10px;
+  }
+
+  .action-counter {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .interactive {
+    .svg-inline--fa {
+      animation-duration: 0.6s;
+    }
+
+    &:hover .svg-inline--fa,
+    &.-repeated .svg-inline--fa {
       color: $fallback--cGreen;
       color: var(--cGreen, $fallback--cGreen);
     }
-  }
-
-  &.-repeated {
-    color: $fallback--cGreen;
-    color: var(--cGreen, $fallback--cGreen);
   }
 }
 </style>

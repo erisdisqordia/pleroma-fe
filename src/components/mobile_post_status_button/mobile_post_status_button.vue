@@ -1,7 +1,7 @@
 <template>
   <div v-if="isLoggedIn">
     <button
-      class="new-status-button"
+      class="button-default new-status-button"
       :class="{ 'hidden': isHidden }"
       @click="openPostForm"
     >

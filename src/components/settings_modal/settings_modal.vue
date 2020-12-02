@@ -30,13 +30,13 @@
           </template>
         </transition>
         <button
-          class="btn"
+          class="btn button-default"
           @click="peekModal"
         >
           {{ $t('general.peek') }}
         </button>
         <button
-          class="btn"
+          class="btn button-default"
           @click="closeModal"
         >
           {{ $t('general.close') }}

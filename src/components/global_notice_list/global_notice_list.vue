@@ -81,7 +81,6 @@
 
   .close-notice {
     padding-right: 0.2em;
-    vertical-align: bottom;
     .svg-inline--fa:hover {
       opacity: 0.6;
     }

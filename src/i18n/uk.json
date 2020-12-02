@@ -164,7 +164,9 @@
     "too_many_requests": "Ви досягли ліміту спроб, спробуйте ще раз пізніше.",
     "password_reset_required_but_mailer_is_disabled": "Ви повинні скинути свій пароль, але скидання пароля вимкнено. Зверніться до адміністратора інстансу.",
     "password_reset_disabled": "Скидання пароля вимкнено. Зверніться до адміністратора інстансу.",
-    "password_reset_required": "Для входу потрібно скинути пароль."
+    "password_reset_required": "Для входу потрібно скинути пароль.",
+    "password_reset": "Відновити пароль",
+    "forgot_password": "Забули пароль?"
   },
   "chats": {
     "you": "Ви:",
@@ -441,7 +443,10 @@
         "button": "Кнопка",
         "error": "Приклад помилки",
         "content": "Зміст",
-        "header": "Попередній перегляд"
+        "header": "Попередній перегляд",
+        "link": "невеличке посилання",
+        "header_faint": "Це нормально",
+        "input": "Що нового?"
       },
       "shadows": {
         "components": {
@@ -500,7 +505,12 @@
     "streaming": "Ввімкнути автоматичне завантаження нових повідомлень при прокручуванні вгору",
     "stop_gifs": "Відтворювати GIF анімації тільки при наведенні",
     "post_status_content_type": "Тип вмісту допису",
-    "subject_line_noop": "Не копіювати"
+    "subject_line_noop": "Не копіювати",
+    "version": {
+      "frontend_version": "Версія фронтенду",
+      "backend_version": "Версія бекенду",
+      "title": "Версія"
+    }
   },
   "selectable_list": {
     "select_all": "Вибрати все"
@@ -579,5 +589,34 @@
     "day": "{0} день",
     "seconds_short": "{0}с",
     "seconds": "{0} секунди"
+  },
+  "search": {
+    "no_results": "Немає результатів",
+    "hashtags": "Хештеги",
+    "people": "Люди"
+  },
+  "user_card": {
+    "statuses": "Дописи",
+    "message": "Повідомлення",
+    "follow": "Підписатись",
+    "follow_unfollow": "Відписатись",
+    "follow_again": "Відправити запит знову?",
+    "follow_sent": "Запит відправлено!"
+  },
+  "status": {
+    "copy_link": "Скопіювати посилання на допис",
+    "status_unavailable": "Допис недоступний",
+    "replies_list": "Відповіді:",
+    "delete_confirm": "Ви дійсно хочете видалити цей допис?",
+    "delete": "Видалити допис"
+  },
+  "timeline": {
+    "no_more_statuses": "Більше немає дописів",
+    "up_to_date": "Оновлено",
+    "reload": "Оновити",
+    "show_new": "Показати нові",
+    "load_older": "Завантажити давніші дописи",
+    "error": "Помилка завантаження стрічки: {0}",
+    "collapse": "Згорнути"
   }
 }

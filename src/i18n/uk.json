@@ -400,7 +400,8 @@
     "notification_visibility_follows": "Нові підписки",
     "notification_visibility": "Отримувати сповіщення про наступні події",
     "settings": "Налаштування",
-    "panelRadius": "Панелі"
+    "panelRadius": "Панелі",
+    "text": "Текст "
   },
   "selectable_list": {
     "select_all": "Вибрати все"

@@ -435,7 +435,8 @@
     "reset_avatar_confirm": "Ви дійсно хочете скинути аватар?",
     "reset_profile_banner": "Скинули банер профілю",
     "hide_follows_count_description": "Не показувати кількість підписників",
-    "reset_banner_confirm": "Ви дійсно хочете скинути банер? "
+    "reset_banner_confirm": "Ви дійсно хочете скинути банер?",
+    "reset_background_confirm": "Ви дійсно хочете скинути обкладинку?"
   },
   "selectable_list": {
     "select_all": "Вибрати все"

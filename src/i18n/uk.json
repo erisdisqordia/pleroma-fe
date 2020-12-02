@@ -401,7 +401,8 @@
     "notification_visibility": "Отримувати сповіщення про наступні події",
     "settings": "Налаштування",
     "panelRadius": "Панелі",
-    "text": "Текст "
+    "text": "Текст",
+    "tooltipRadius": "Підказки/попередження"
   },
   "selectable_list": {
     "select_all": "Вибрати все"

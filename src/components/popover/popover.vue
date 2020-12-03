@@ -95,6 +95,7 @@
     box-shadow: none;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
 
     --btnText: var(--popoverText, $fallback--text);
 

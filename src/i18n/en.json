@@ -661,6 +661,7 @@
     "unmute_conversation": "Unmute conversation",
     "status_unavailable": "Status unavailable",
     "copy_link": "Copy link to status",
+    "external_source": "External source",
     "thread_muted": "Thread muted",
     "thread_muted_and_words": ", has words:",
     "show_full_subject": "Show full subject",
@@ -668,7 +669,8 @@
     "show_content": "Show content",
     "hide_content": "Hide content",
     "status_deleted": "This post was deleted",
-    "nsfw": "NSFW"
+    "nsfw": "NSFW",
+    "expand": "Expand"
   },
   "user_card": {
     "approve": "Approve",

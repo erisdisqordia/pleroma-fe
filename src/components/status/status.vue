@@ -184,30 +184,20 @@
                   :title="status.visibility | capitalize"
                 >
                   <FAIcon
-                    class="fa-scale-110 fa-old-padding"
+                    fixed-width
+                    class="fa-scale-110"
                     :icon="visibilityIcon(status.visibility)"
                   />
                 </span>
-                <a
-                  v-if="!status.is_local && !isPreview"
-                  :href="status.external_url"
-                  target="_blank"
-                  class="source_url"
-                  title="Source"
-                >
-                  <FAIcon
-                    class="fa-scale-110 fa-old-padding"
-                    icon="external-link-square-alt"
-                  />
-                </a>
                 <button
                   v-if="expandable && !isPreview"
                   class="button-unstyled"
-                  title="Expand"
+                  :title="$t('status.expand')"
                   @click.prevent="toggleExpanded"
                 >
                   <FAIcon
-                    class="fa-scale-110 fa-old-padding"
+                    fixed-width
+                    class="fa-scale-110"
                     icon="plus-square"
                   />
                 </button>
@@ -217,8 +207,9 @@
                   @click.prevent="toggleMute"
                 >
                   <FAIcon
+                    fixed-width
                     icon="eye-slash"
-                    class="fa-scale-110 fa-old-padding"
+                    class="fa-scale-110"
                   />
                 </button>
               </span>

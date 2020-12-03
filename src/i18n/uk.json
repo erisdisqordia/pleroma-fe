@@ -642,7 +642,10 @@
     "follow_unfollow": "Відписатись",
     "follow_again": "Відправити запит знову?",
     "follow_sent": "Запит відправлено!",
-    "blocked": "Заблоковано!"
+    "blocked": "Заблоковано!",
+    "admin_menu": {
+      "activate_account": "Активувати аккаунт"
+    }
   },
   "status": {
     "copy_link": "Скопіювати посилання на допис",

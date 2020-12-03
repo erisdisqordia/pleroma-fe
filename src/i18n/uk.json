@@ -647,7 +647,9 @@
     "blocked": "Заблоковано!",
     "admin_menu": {
       "activate_account": "Активувати обліковий запис",
-      "deactivate_account": "Деактивувати обліковий запис"
+      "deactivate_account": "Деактивувати аккаунт",
+      "delete_account": "Видалити аккаунт",
+      "moderation": "Модерація "
     }
   },
   "status": {

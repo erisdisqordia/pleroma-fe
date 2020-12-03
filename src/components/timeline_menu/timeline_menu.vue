@@ -72,7 +72,10 @@
           icon="chevron-down"
         />
       </span>
-      <span class="click-blocker" />
+      <span
+        class="click-blocker"
+        @click="blockOpen"
+      />
     </div>
   </Popover>
 </template>
@@ -135,7 +138,6 @@
 
     .click-blocker {
       cursor: default;
-      pointer-events: none;
       flex-grow: 1;
     }
   }

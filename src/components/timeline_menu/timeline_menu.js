@@ -59,6 +59,14 @@ const TimelineMenu = {
         this.isOpen = true
       }, 25)
     },
+    blockOpen (event) {
+      // For the blank area inside the button element.
+      // Just setting @click.stop="" makes unintuitive behavior when
+      // menu is open and clicking on the blank area doesn't close it.
+      if (!this.isOpen) {
+        event.stopPropagation()
+      }
+    },
     timelineName () {
       const route = this.$route.name
       if (route === 'tag-timeline') {

@@ -631,20 +631,31 @@
     "captcha": "CAPTCHA"
   },
   "who_to_follow": {
-    "who_to_follow": "На кого підписатися"
+    "who_to_follow": "На кого підписатися",
+    "more": "Більше"
   },
   "tool_tip": {
     "repeat": "Поширити",
     "reply": "Відповісти",
     "add_reaction": "Додати реакцію",
     "user_settings": "Налаштування користувача",
-    "favorite": "Подобається"
+    "favorite": "Подобається",
+    "reject_follow_request": "Відхилити запит на підписку",
+    "accept_follow_request": "Прийняти запит на підписку",
+    "media_upload": "Завантажити медіа"
   },
   "upload": {
     "error": {
       "base": "Збій при завантаженні.",
       "file_too_big": "Файл завеликий [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
       "default": "Спробуйте ще раз пізніше"
+    },
+    "file_size_units": {
+      "TiB": "ТіБ",
+      "GiB": "ГіБ",
+      "MiB": "МіБ",
+      "KiB": "КіБ",
+      "B": "Б"
     }
   },
   "time": {
@@ -696,14 +707,21 @@
     "blocked": "Заблоковано!",
     "admin_menu": {
       "activate_account": "Активувати обліковий запис",
-      "deactivate_account": "Деактивувати аккаунт",
+      "deactivate_account": "Деактивувати обліковий запис",
       "delete_account": "Видалити аккаунт",
-      "moderation": "Модерація"
+      "moderation": "Модерація",
+      "delete_user_confirmation": "Ви абсолютно впевнені? Цю дію неможливо буде скасовувати.",
+      "delete_user": "Видалити обліковий запис"
     },
     "deny": "Відмовити",
     "block": "Заблокувати",
     "approve": "Схвалити",
-    "mention": "Згадати"
+    "mention": "Згадати",
+    "unsubscribe": "Відписатись",
+    "subscribe": "Підписатись",
+    "report": "Поскаржитись",
+    "per_day": "на день",
+    "favorites": "Вподобання"
   },
   "status": {
     "copy_link": "Скопіювати посилання на допис",
@@ -739,5 +757,13 @@
     "no_statuses": "Ніяких статусів",
     "repeated": "поширив(-ла)",
     "no_retweet_hint": "Запис, позначено як \"тільки для відстежувачів\" або \"особисте\" і тому не може бути повторений"
+  },
+  "user_reporting": {
+    "submit": "Відправити",
+    "forward_to": "Переслати до {0}",
+    "forward_description": "Цей обліковий запис належить іншому інстансу. Відправити їм копію скарги?",
+    "additional_comments": "Додаткове пояснення",
+    "add_comment_description": "Скарга буде надіслана модераторам вашого інстансу. Нижче Ви можете додати пояснення чому ви вирішили поскаржитись на цей обліковий запис:",
+    "title": "Поскаржитись на {0}"
   }
 }

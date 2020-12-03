@@ -644,7 +644,8 @@
     "follow_sent": "Запит відправлено!",
     "blocked": "Заблоковано!",
     "admin_menu": {
-      "activate_account": "Активувати аккаунт"
+      "activate_account": "Активувати обліковий запис",
+      "deactivate_account": "Деактивувати обліковий запис"
     }
   },
   "status": {

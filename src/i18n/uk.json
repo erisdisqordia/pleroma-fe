@@ -713,7 +713,7 @@
     "admin_menu": {
       "activate_account": "Активувати обліковий запис",
       "deactivate_account": "Деактивувати обліковий запис",
-      "delete_account": "Видалити аккаунт",
+      "delete_account": "Видалити обліковий запис",
       "moderation": "Модерація",
       "delete_user_confirmation": "Ви абсолютно впевнені? Цю дію неможливо буде скасовувати.",
       "delete_user": "Видалити обліковий запис",
@@ -743,7 +743,7 @@
     "hide_repeats": "Приховати поширення",
     "its_you": "Це ти!",
     "follows_you": "Підписаний на вас!",
-    "followers": "Підписника",
+    "followers": "Підписники",
     "followees": "Підписаний(-а)",
     "follow_progress": "Запитую…",
     "mute_progress": "Глушимо…",

@@ -437,7 +437,12 @@
     "preload_images": "Предварительно загружать изображения",
     "max_thumbnails": "Максимальное число миниатюр показываемых в статусе",
     "emoji_reactions_on_timeline": "Показывать эмодзи реакции в ленте",
-    "domain_mutes": "Узлы"
+    "domain_mutes": "Узлы",
+    "notification_setting_privacy": "Приватность",
+    "notification_setting_block_from_strangers": "Не показывать уведомления от пользователей которых вы не читаете",
+    "notification_setting_filters": "Фильтрация",
+    "notifications": "Уведомления",
+    "virtual_scrolling": "Оптимизировать рендеринг ленты"
   },
   "timeline": {
     "collapse": "Свернуть",

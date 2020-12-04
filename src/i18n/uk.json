@@ -644,7 +644,8 @@
     "favorite": "Подобається",
     "reject_follow_request": "Відхилити запит на підписку",
     "accept_follow_request": "Прийняти запит на підписку",
-    "media_upload": "Завантажити медіа"
+    "media_upload": "Завантажити медіа",
+    "bookmark": "Додати до закладок"
   },
   "upload": {
     "error": {
@@ -725,7 +726,8 @@
       "revoke_moderator": "Позбавити прав модератора",
       "grant_moderator": "Надати права модератора",
       "revoke_admin": "Позбавити прав адміністратора",
-      "grant_admin": "Надати права адміністратора"
+      "grant_admin": "Надати права адміністратора",
+      "quarantine": "Не розповсюджувати дописи на інших інстансах"
     },
     "deny": "Відмовити",
     "block": "Заблокувати",
@@ -743,7 +745,18 @@
     "follows_you": "Підписаний на вас!",
     "followers": "Підписника",
     "followees": "Підписаний(-а)",
-    "follow_progress": "Запитую…"
+    "follow_progress": "Запитую…",
+    "mute_progress": "Глушимо…",
+    "unmute_progress": "Знімаємо глушення…",
+    "unmute": "Зняти глушення",
+    "hidden": "Приховано",
+    "following": "Підписаний!",
+    "block_progress": "Блокуємо…",
+    "unblock_progress": "Розблоковуємо…",
+    "unblock": "Розблокувати",
+    "remote_follow": "Підписатись",
+    "muted": "Заглушений",
+    "mute": "Заглушити"
   },
   "status": {
     "copy_link": "Скопіювати посилання на допис",

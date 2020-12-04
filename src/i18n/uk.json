@@ -25,8 +25,8 @@
   },
   "features_panel": {
     "gopher": "Gopher",
-    "pleroma_chat_messages": "Чат Pleroma",
-    "chat": "Чат",
+    "pleroma_chat_messages": "Локальні балачки",
+    "chat": "Міні-чат",
     "who_to_follow": "Кого відстежувати",
     "title": "Особливості",
     "scope_options": "Параметри осягу",

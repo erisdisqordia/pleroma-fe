@@ -460,7 +460,10 @@
     "status_deleted": "Пост удален",
     "reply_to": "Ответ",
     "repeats": "Повторы",
-    "favorites": "Понравилось"
+    "favorites": "Понравилось",
+    "unmute_conversation": "Прекратить игнорировать разговор",
+    "mute_conversation": "Игнорировать разговор",
+    "thread_muted": "Разговор игнорируется"
   },
   "user_card": {
     "block": "Заблокировать",

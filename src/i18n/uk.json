@@ -742,7 +742,8 @@
     "its_you": "Це ти!",
     "follows_you": "Підписаний на вас!",
     "followers": "Підписника",
-    "followees": "Підписаний(-а)"
+    "followees": "Підписаний(-а)",
+    "follow_progress": "Запитую…"
   },
   "status": {
     "copy_link": "Скопіювати посилання на допис",

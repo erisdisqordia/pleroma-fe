@@ -338,7 +338,7 @@
     "security": "Безпека",
     "domain_mutes": "Домени",
     "discoverable": "Дозволити виявлення цього облікового запису в результатах пошуку та інших службах",
-    "mutes_and_blocks": "Заглушені та блоковані",
+    "mutes_and_blocks": "Заглушення та блокування",
     "changed_email": "Email успішно змінено!",
     "change_email_error": "Сталася помилка під час зміни email.",
     "change_email": "Змінити email",
@@ -384,7 +384,7 @@
     "user_mutes": "Користувачі",
     "no_mutes": "Заглушені відсутні",
     "emoji_reactions_on_timeline": "Показувати реакції емоджі на стрічці",
-    "pad_emoji": "Додавати простір з обидвох сторін емоджі, при додаванні з панелі",
+    "pad_emoji": "Автоматично додавати простір з обидвох сторін емоджі",
     "allow_following_move": "Дозволити автостеження при переміщенні на інший інстанс",
     "set_new_profile_background": "Встановити нову обкладинку профілю",
     "radii_help": "Радіус заокруглення кутів інтерфейсу (в пікселях)",
@@ -554,7 +554,7 @@
         "_tab_label": "Загальні"
       },
       "radii": {
-        "_tab_label": "Округлість"
+        "_tab_label": "Скруглення"
       }
     },
     "enable_web_push_notifications": "Увімкнути web push-сповіщення",
@@ -566,7 +566,7 @@
     "reset_profile_background": "Скинути обкладинку профілю",
     "reset_avatar_confirm": "Ви дійсно хочете скинути аватар?",
     "reset_profile_banner": "Скинули банер профілю",
-    "hide_follows_count_description": "Не показувати на кого я підписаний",
+    "hide_follows_count_description": "Не показувати кількість підписників",
     "reset_banner_confirm": "Ви дійсно хочете скинути банер?",
     "reset_background_confirm": "Ви дійсно хочете скинути обкладинку?",
     "subject_line_behavior": "Вигляд теми при відповіді",
@@ -577,7 +577,7 @@
     "search_user_to_block": "Шукайте кого ви хочете заблокувати",
     "autohide_floating_post_button": "Автоматично ховати кнопку \"Новий допис\" (в мобільній версії)",
     "pause_on_unfocused": "Призупинити трансляцію, коли вкладка неактивна",
-    "hide_followers_count_description": "Не показувати кількість читачів",
+    "hide_followers_count_description": "Не показувати кількість моїх підписників",
     "notification_blocks": "Блокування користувача зупиняє всі сповіщення від нього, а також скасовує його відстеження.",
     "notification_setting_hide_notification_contents": "Ховати відправника та вміст push-сповіщень",
     "notification_setting_block_from_strangers": "Блокувати сповіщення від користувачів за якими ви не слідкуєте",

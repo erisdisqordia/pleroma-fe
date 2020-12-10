@@ -34,7 +34,7 @@
     "confirm": "确认",
     "verify": "验证",
     "dismiss": "忽略",
-    "peek": "窥探",
+    "peek": "预览",
     "close": "关闭",
     "retry": "重试",
     "error_retry": "请重试",
@@ -104,7 +104,8 @@
     "no_more_notifications": "没有更多的通知",
     "reacted_with": "作出了 {0} 的反应",
     "migrated_to": "迁移到了",
-    "follow_request": "想要关注你"
+    "follow_request": "想要关注你",
+    "error": "取得通知时发生错误：{0}"
   },
   "polls": {
     "add_poll": "增加投票",
@@ -465,7 +466,8 @@
           "buttonPressed": "按钮（按下）",
           "buttonPressedHover": "按钮（按下和悬停）",
           "input": "输入框"
-        }
+        },
+        "hintV3": "对于阴影，您还可以使用 {0} 表示法来使用其它颜色插槽。"
       },
       "fonts": {
         "_tab_label": "字体",
@@ -594,7 +596,8 @@
     "up_to_date": "已是最新",
     "no_more_statuses": "没有更多的状态",
     "no_statuses": "没有状态更新",
-    "reload": "重新载入"
+    "reload": "重新载入",
+    "error": "取得时间轴时发生错误：{0}"
   },
   "status": {
     "favorites": "收藏",
@@ -618,7 +621,8 @@
     "unbookmark": "取消书签",
     "bookmark": "书签",
     "thread_muted_and_words": "，含有过滤词：",
-    "status_deleted": "该状态已被删除"
+    "status_deleted": "该状态已被删除",
+    "nsfw": "NSFW"
   },
   "user_card": {
     "approve": "允许",
@@ -772,7 +776,7 @@
         "ftl_removal": "从“全部已知网络”时间线上移除"
       },
       "mrf_policies_desc": "MRF 策略会影响本实例的互通行为。以下策略已启用：",
-      "mrf_policies": "已启动的 MRF 策略",
+      "mrf_policies": "已启用的 MRF 策略",
       "keyword": {
         "ftl_removal": "从“全部已知网络”时间线上移除",
         "keyword_policies": "关键词策略",

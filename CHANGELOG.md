@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Mouseover titles for emojis in reaction picker
 - Support to input emoji into the search box in reaction picker
 - Added some missing unicode emoji
+- Added the upload limit to the Features panel in the About page
 
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form

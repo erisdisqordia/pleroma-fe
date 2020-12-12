@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added some missing unicode emoji
 - Added the upload limit to the Features panel in the About page
 - Support for solid color wallpaper, instance doesn't have to define a wallpaper anymore
+- Group staff members by role in the About page
 
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form

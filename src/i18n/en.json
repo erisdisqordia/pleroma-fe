@@ -75,7 +75,11 @@
     "confirm": "Confirm",
     "verify": "Verify",
     "close": "Close",
-    "peek": "Peek"
+    "peek": "Peek",
+    "role": {
+      "admin": "Admin",
+      "moderator": "Moderator"
+    }
   },
   "image_cropper": {
     "crop_picture": "Crop picture",

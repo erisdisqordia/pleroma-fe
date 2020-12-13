@@ -300,7 +300,7 @@
     "hide_followers_description": "不要显示关注我的人",
     "show_admin_badge": "在我的个人资料中显示管理员徽章",
     "show_moderator_badge": "在我的个人资料中显示监察员徽章",
-    "nsfw_clickthrough": "将不和谐附件隐藏，点击才能打开",
+    "nsfw_clickthrough": "将不和谐附件和链接预览隐藏，点击才会显示",
     "oauth_tokens": "OAuth令牌",
     "token": "令牌",
     "refresh_token": "刷新令牌",

@@ -652,5 +652,15 @@
     "hour": "{0} час",
     "day_short": "{0}д",
     "days": "{0} дней"
+  },
+  "chats": {
+    "empty_chat_list_placeholder": "У вас пока нет бесед. Начните одну!",
+    "delete_confirm": "Вы точно хотите удалить сообщение?",
+    "empty_message_error": "Нельзя отправить пустое сообщение",
+    "new": "Новая беседа",
+    "chats": "Беседы",
+    "delete": "Удалить",
+    "message_user": "Напишите {nickname}",
+    "you": "Вы:"
   }
 }

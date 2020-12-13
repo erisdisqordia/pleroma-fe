@@ -143,7 +143,7 @@
       "text/bbcode": "BBCode"
     },
     "content_warning": "主题（可选）",
-    "default": "刚刚抵达洛杉矶",
+    "default": "刚刚抵达上海。",
     "direct_warning_to_all": "本条内容只有被提及的用户能够看到。",
     "direct_warning_to_first_only": "本条内容只有被在消息开始处提及的用户能够看到。",
     "posting": "发送",
@@ -592,7 +592,7 @@
     "error_fetching": "获取更新时发生错误",
     "load_older": "加载更早的状态",
     "no_retweet_hint": "这条内容仅关注者可见，或者是私信，因此不能转发",
-    "repeated": "已转发",
+    "repeated": "转发了",
     "show_new": "显示新内容",
     "up_to_date": "已是最新",
     "no_more_statuses": "没有更多的状态",

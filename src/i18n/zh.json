@@ -461,7 +461,7 @@
           "topBar": "顶栏",
           "avatar": "用户头像（在个人资料栏）",
           "avatarStatus": "用户头像（在帖子显示栏）",
-          "popup": "弹窗和工具提示",
+          "popup": "弹窗与工具提示",
           "button": "按钮",
           "buttonHover": "按钮（悬停）",
           "buttonPressed": "按钮（压下）",

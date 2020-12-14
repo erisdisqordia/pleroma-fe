@@ -498,7 +498,8 @@
     "text_limit": "Lunghezza massima",
     "title": "Caratteristiche",
     "who_to_follow": "Chi seguire",
-    "pleroma_chat_messages": "Chiacchiere"
+    "pleroma_chat_messages": "Chiacchiere",
+    "upload_limit": "Limite allegati"
   },
   "finder": {
     "error_fetching_user": "Errore nel recupero dell'utente",

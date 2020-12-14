@@ -33,6 +33,7 @@ const loaders = {
   ro: () => import('./ro.json'),
   ru: () => import('./ru.json'),
   te: () => import('./te.json'),
+  uk: () => import('./uk.json'),
   zh: () => import('./zh.json')
 }
 

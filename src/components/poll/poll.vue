@@ -42,7 +42,8 @@
           :value="index"
         >
         <label class="option-vote">
-          <div>{{ option.title }}</div>
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <div v-html="option.title_html" />
         </label>
       </div>
     </div>

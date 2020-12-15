@@ -50,7 +50,8 @@
     "scope_options": "Scope options",
     "text_limit": "Text limit",
     "title": "Features",
-    "who_to_follow": "Who to follow"
+    "who_to_follow": "Who to follow",
+    "upload_limit": "Upload limit"
   },
   "finder": {
     "error_fetching_user": "Error fetching user",

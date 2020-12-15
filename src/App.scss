@@ -332,6 +332,10 @@ input, textarea, .select, .input {
       box-sizing: border-box;
     }
   }
+
+  &.resize-height {
+    resize: vertical;
+  }
 }
 
 option {

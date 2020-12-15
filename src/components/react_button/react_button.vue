@@ -20,10 +20,10 @@
       <div class="reaction-picker">
         <span
           v-for="emoji in commonEmojis"
-          :key="emoji"
+          :key="emoji.replacement"
           class="emoji-button"
           :title="emoji.displayText"
-          @click="addReaction($event, emoji, close)"
+          @click="addReaction($event, emoji.replacement, close)"
         >
           {{ emoji.replacement }}
         </span>

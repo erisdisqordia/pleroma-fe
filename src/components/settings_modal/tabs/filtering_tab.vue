@@ -75,6 +75,7 @@
         <p>{{ $t('settings.filtering_explanation') }}</p>
         <textarea
           id="muteWords"
+          class="resize-height"
           v-model="muteWordsString"
         />
       </div>

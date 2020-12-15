@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Errors when fetching are now shown with popup errors instead of "Error fetching updates" in panel headers
 - Made reply/fav/repeat etc buttons easier to hit
+- Disabled horizontal textarea resize
 
 
 ## [2.2.1] - 2020-11-11

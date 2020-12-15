@@ -19,7 +19,7 @@
     "optional": "не обязательно",
     "show_less": "Показать меньше",
     "show_more": "Показать больше",
-    "peek": "Взглянуть",
+    "peek": "Свернуть",
     "dismiss": "Закрыть",
     "retry": "Попробуйте еще раз",
     "error_retry": "Пожалуйста попробуйте еще раз",
@@ -39,8 +39,11 @@
     "recovery_code": "Код восстановления",
     "heading": {
       "TotpForm": "Двухфакторная аутентификация",
-      "RecoveryForm": "Two-factor recovery"
-    }
+      "RecoveryForm": "Two-factor recovery",
+      "totp": "Двухфакторная аутентификация"
+    },
+    "hint": "Войдите чтобы присоединиться к дискуссии",
+    "description": "Войти с помощью OAuth"
   },
   "nav": {
     "back": "Назад",
@@ -52,7 +55,14 @@
     "twkn": "Федеративная лента",
     "search": "Поиск",
     "friend_requests": "Запросы на чтение",
-    "bookmarks": "Закладки"
+    "bookmarks": "Закладки",
+    "chats": "Беседы",
+    "timelines": "Ленты",
+    "preferences": "Настройки",
+    "who_to_follow": "Кого читать",
+    "dms": "Личные Сообщения",
+    "administration": "Панель администратора",
+    "about": "О сервере"
   },
   "notifications": {
     "broken_favorite": "Неизвестный статус, ищем...",
@@ -62,12 +72,17 @@
     "notifications": "Уведомления",
     "read": "Прочесть",
     "repeated_you": "повторил(а) ваш статус",
-    "follow_request": "хочет читать вас"
+    "follow_request": "хочет читать вас",
+    "reacted_with": "добавил реакцию: {0}",
+    "migrated_to": "мигрировал на",
+    "no_more_notifications": "Нет дальнейших уведомлений",
+    "error": "Ошибка при обновлении уведомлений: {0}"
   },
   "interactions": {
     "favs_repeats": "Повторы и фавориты",
-    "follows": "Новые подписки",
-    "load_older": "Загрузить старые взаимодействия"
+    "follows": "Новые читатели",
+    "load_older": "Загрузить старые взаимодействия",
+    "moves": "Миграции пользователей"
   },
   "post_status": {
     "account_not_locked_warning": "Ваш аккаунт не {0}. Кто угодно может начать читать вас чтобы видеть посты только для подписчиков.",
@@ -87,7 +102,21 @@
       "private": "Для подписчиков - этот пост видят только подписчики",
       "public": "Публичный - этот пост виден всем",
       "unlisted": "Непубличный - этот пост не виден на публичных лентах"
-    }
+    },
+    "preview_empty": "Пустой предпросмотр",
+    "media_description_error": "Не удалось обновить вложение, попробуйте еще раз",
+    "empty_status_error": "Нельзя отправить пустой статус без вложений",
+    "preview": "Предпросмотр",
+    "direct_warning_to_first_only": "Это сообщение увидят только пользователи упомянутые в его начале.",
+    "direct_warning_to_all": "Это сообщение увидят все упомянутые пользователи.",
+    "content_type": {
+      "text/bbcode": "BBCode",
+      "text/html": "HTML",
+      "text/markdown": "Markdown",
+      "text/plain": "Простой текст"
+    },
+    "media_description": "Описание вложения",
+    "new_status": "Написать новый статус"
   },
   "registration": {
     "bio": "Описание",
@@ -103,7 +132,12 @@
       "password_required": "не должен быть пустым",
       "password_confirmation_required": "не должно быть пустым",
       "password_confirmation_match": "должно совпадать с паролем"
-    }
+    },
+    "bio_placeholder": "например:\nПривет, я Игорь Печкин.\nРаботаю почтальоном в деревне Простоквашино. С недавних пор велосипедист.",
+    "fullname_placeholder": "например: Почтальон Печкин",
+    "username_placeholder": "например: pechkin",
+    "captcha": "Код подтверждения",
+    "new_captcha": "Нажмите на изображение чтобы получить новый код"
   },
   "settings": {
     "enter_current_password_to_confirm": "Введите свой текущий пароль",
@@ -202,7 +236,7 @@
     "hide_followers_count_description": "Не показывать число моих подписчиков",
     "show_admin_badge": "Показывать значок администратора в моем профиле",
     "show_moderator_badge": "Показывать значок модератора в моем профиле",
-    "nsfw_clickthrough": "Включить скрытие NSFW вложений",
+    "nsfw_clickthrough": "Включить скрытие NSFW вложений и не показывать изображения в предпросмотре ссылок для NSFW статусов",
     "oauth_tokens": "OAuth токены",
     "token": "Токен",
     "refresh_token": "Рефреш токен",
@@ -355,7 +389,60 @@
       }
     },
     "allow_following_move": "Разрешить автоматически читать новый аккаунт при перемещении на другой сервер",
-    "hide_user_stats": "Не показывать статистику пользователей (например количество читателей)"
+    "hide_user_stats": "Не показывать статистику пользователей (например количество читателей)",
+    "discoverable": "Разрешить показ аккаунта в поисковиках и других сервисах",
+    "default_vis": "Видимость постов по умолчанию",
+    "mutes_and_blocks": "Блокировки и игнорируемые",
+    "composing": "Составление постов",
+    "chatMessageRadius": "Сообщения в беседе",
+    "blocks_tab": "Блокировки",
+    "import_mutes_from_a_csv_file": "Импортировать игнорируемых из CSV файла",
+    "mutes_imported": "Игнорируемые импортированы! Обработка может занять некоторое время.",
+    "mute_import_error": "Произошла ошибка при импорте игнорируемых",
+    "mute_import": "Импорт игнорируемых",
+    "block_export_button": "Экспортирует блокировки в CSV файл",
+    "mute_export_button": "Экспортирует игнорируемых пользователей в CSV файл",
+    "mute_export": "Экспорт игнорируемых",
+    "blocks_imported": "Блокировки импортированы! Обработка может занять некоторое время.",
+    "block_import_error": "Произошла ошибка при импорте блокировок",
+    "block_import": "Импорт блокировок",
+    "block_export": "Экспортировать блокировки",
+    "security": "Безопасность",
+    "app_name": "Приложение",
+    "user_mutes": "Пользователи",
+    "post_status_content_type": "Формат составляемых статусов по умолчанию",
+    "subject_line_noop": "Не копировать",
+    "subject_line_mastodon": "Как в Mastodon: скопировать как есть",
+    "subject_line_email": "Как в e-mail: \"re: тема\"",
+    "subject_line_behavior": "Копировать тему в ответах",
+    "no_mutes": "Нет игнорируемых",
+    "no_blocks": "Нет блокировок",
+    "notification_visibility_emoji_reactions": "Реакции",
+    "notification_visibility_moves": "Миграции пользователей",
+    "use_contain_fit": "Не обрезать вложения в миниатюрах",
+    "profile_fields": {
+      "value": "Значение",
+      "name": "Пункт",
+      "add_field": "Добавить поле",
+      "label": "Таблица метаданных профиля"
+    },
+    "play_videos_in_modal": "Проигрывать видео во всплывающей рамке",
+    "mutes_tab": "Игнорируемые",
+    "invalid_theme_imported": "Выбраный файл не является темой Pleroma. Изменений в тему не было внесено.",
+    "import_blocks_from_a_csv_file": "Импортировать блокировки из CSV файла",
+    "hide_filtered_statuses": "Не показывать отфильтрованные статусы",
+    "hide_muted_posts": "Не показывать статусы игнорируемых пользователей",
+    "hide_post_stats": "Не показывать статистику статусов (например количество отметок «Нравится»)",
+    "use_one_click_nsfw": "Открывать NSFW вложения одним кликом",
+    "preload_images": "Предварительно загружать изображения",
+    "max_thumbnails": "Максимальное число миниатюр показываемых в статусе",
+    "emoji_reactions_on_timeline": "Показывать эмодзи реакции в ленте",
+    "domain_mutes": "Узлы",
+    "notification_setting_privacy": "Приватность",
+    "notification_setting_block_from_strangers": "Не показывать уведомления от пользователей которых вы не читаете",
+    "notification_setting_filters": "Фильтрация",
+    "notifications": "Уведомления",
+    "virtual_scrolling": "Оптимизировать рендеринг ленты"
   },
   "timeline": {
     "collapse": "Свернуть",
@@ -369,7 +456,11 @@
   },
   "status": {
     "bookmark": "В закладки",
-    "unbookmark": "Удалить из закладок"
+    "unbookmark": "Удалить из закладок",
+    "status_deleted": "Пост удален",
+    "reply_to": "Ответ",
+    "repeats": "Повторы",
+    "favorites": "Понравилось"
   },
   "user_card": {
     "block": "Заблокировать",
@@ -407,7 +498,11 @@
       "quarantine": "Не федерировать посты пользователя",
       "delete_user": "Удалить пользователя",
       "delete_user_confirmation": "Вы уверены? Это действие нельзя отменить."
-    }
+    },
+    "media": "С вложениями",
+    "mention": "Упомянуть",
+    "show_repeats": "Показывать повторы",
+    "hide_repeats": "Скрыть повторы"
   },
   "user_profile": {
     "timeline_title": "Лента пользователя"
@@ -480,12 +575,78 @@
   },
   "tool_tip": {
     "accept_follow_request": "Принять запрос на чтение",
-    "reject_follow_request": "Отклонить запрос на чтение"
+    "reject_follow_request": "Отклонить запрос на чтение",
+    "media_upload": "Прикрепить вложение"
   },
   "image_cropper": {
     "save_without_cropping": "Сохранить не обрезая",
     "save": "Сохранить",
     "crop_picture": "Обрезать картинку",
-    "cancel": "Отмена"
+    "cancel": "Отменить"
+  },
+  "errors": {
+    "storage_unavailable": "Pleroma не смогла получить доступ к хранилищу браузера. Ваша сессия и настройки не будут сохранены, и вы можете столкнуться с непредвиденными проблемами. Попробуйте включить файлы cookie."
+  },
+  "polls": {
+    "not_enough_options": "Недостаточно уникальных вариантов в опросе",
+    "expired": "Опрос закончился {0} назад",
+    "expires_in": "Опрос заканчивается через {0}",
+    "expiry": "Срок опроса",
+    "multiple_choices": "Несколько вариантов",
+    "single_choice": "Один вариант",
+    "type": "Тип опроса",
+    "vote": "Проголосовать",
+    "votes": "голосов",
+    "option": "Вариант",
+    "add_option": "Добавить вариант",
+    "add_poll": "Прикрепить опрос"
+  },
+  "media_modal": {
+    "next": "Следующая",
+    "previous": "Предыдущая"
+  },
+  "importer": {
+    "error": "Произошла ошибка при импорте файла.",
+    "success": "Импорт прошел успешно.",
+    "submit": "Отправить"
+  },
+  "selectable_list": {
+    "select_all": "Выбрать все"
+  },
+  "emoji": {
+    "load_all": "Все {emojiAmount} эмодзи загружаются",
+    "load_all_hint": "Загружены первые {saneAmount} эмодзи, загрузка всех эмодзи может привести к проблемам с производительностью.",
+    "unicode": "Стандартные эмодзи",
+    "custom": "Пользовательские эмодзи",
+    "add_emoji": "Добавить эмодзи",
+    "search_emoji": "Поиск эмодзи",
+    "keep_open": "Оставить окно выбора открытым",
+    "emoji": "Эмодзи",
+    "stickers": "Стикеры"
+  },
+  "shoutbox": {
+    "title": "Болтовня"
+  },
+  "time": {
+    "days_short": "{0}дн",
+    "years_short": "{0}г",
+    "year_short": "{0}г",
+    "weeks_short": "{0}нед",
+    "week_short": "{0}нед",
+    "seconds_short": "{0}сек",
+    "second_short": "{0}с",
+    "now_short": "только что",
+    "now": "только что",
+    "months_short": "{0}мес",
+    "month_short": "{0}мес",
+    "minutes_short": "{0}мин",
+    "minute_short": "{0}мин",
+    "in_past": "{0} назад",
+    "in_future": "через {0}",
+    "hours_short": "{0}ч",
+    "hour_short": "{0}ч",
+    "hour": "{0} час",
+    "day_short": "{0}д",
+    "days": "{0} дней"
   }
 }

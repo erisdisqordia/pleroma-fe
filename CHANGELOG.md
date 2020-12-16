@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Mouseover titles for emojis in reaction picker
 - Support to input emoji into the search box in reaction picker
 - Added some missing unicode emoji
+- Support for solid color wallpaper, instance doesn't have to define a wallpaper anymore
 
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form
@@ -18,10 +19,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed pinned statuses not appearing in user profiles
 - Fixed some elements not being keyboard navigation friendly
 - Fixed your latest chat messages disappearing when closing chat view and opening it again during the same session
+- Fixed link color not applied to instance name in topbar
 
 ### Changed
 - Errors when fetching are now shown with popup errors instead of "Error fetching updates" in panel headers
 - Made reply/fav/repeat etc buttons easier to hit
+- Wallpaper is now top-aligned, horizontally centered.
 
 
 ## [2.2.1] - 2020-11-11

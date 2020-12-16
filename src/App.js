@@ -54,13 +54,16 @@ export default {
       return this.currentUser.background_image || this.$store.state.instance.background
     },
     bgStyle () {
-      return {
-        'background-image': `url(${this.background})`
-      }
-    },
-    bgAppStyle () {
-      return {
-        '--body-background-image': `url(${this.background})`
+      if (
+        this.currentUser.background_image ||
+          (
+            this.$store.state.instance.background &&
+              !this.$store.getters.mergedConfig.hideInstanceWallpaper
+          )
+      ) {
+        return {
+          '--body-background-image': `url(${this.background})`
+        }
       }
     },
     chat () { return this.$store.state.chat.channel.state === 'joined' },

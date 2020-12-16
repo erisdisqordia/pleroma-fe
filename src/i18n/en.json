@@ -328,6 +328,7 @@
     "hide_muted_posts": "Hide posts of muted users",
     "max_thumbnails": "Maximum amount of thumbnails per post",
     "hide_isp": "Hide instance-specific panel",
+    "hide_wallpaper": "Hide instance wallpaper",
     "preload_images": "Preload images",
     "use_one_click_nsfw": "Open NSFW attachments with just one click",
     "hide_post_stats": "Hide post statistics (e.g. the number of favorites)",

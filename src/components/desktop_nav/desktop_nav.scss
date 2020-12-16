@@ -5,6 +5,10 @@
   width: 100%;
   position: fixed;
 
+  a {
+    color: var(--topBarLink, $fallback--link);
+  }
+
   .inner-nav {
     display: grid;
     grid-template-rows: 50px;

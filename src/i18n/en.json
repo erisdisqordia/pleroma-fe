@@ -759,6 +759,7 @@
   "upload": {
     "error": {
       "base": "Upload failed.",
+      "message": "Upload failed: {0}",
       "file_too_big": "File too big [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
       "default": "Try again later"
     },

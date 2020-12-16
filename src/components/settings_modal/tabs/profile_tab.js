@@ -45,9 +45,7 @@ const ProfileTab = {
       banner: null,
       bannerPreview: null,
       background: null,
-      backgroundPreview: null,
-      bannerUploadError: null,
-      backgroundUploadError: null
+      backgroundPreview: null
     }
   },
   components: {
@@ -162,18 +160,18 @@ const ProfileTab = {
       if (file.size > this.$store.state.instance[slot + 'limit']) {
         const filesize = fileSizeFormatService.fileSizeFormat(file.size)
         const allowedsize = fileSizeFormatService.fileSizeFormat(this.$store.state.instance[slot + 'limit'])
-        this[slot + 'UploadError'] = [
-          this.$t('upload.error.base'),
-          this.$t(
-            'upload.error.file_too_big',
-            {
+        this.$store.dispatch('pushGlobalNotice', {
+          messageKey: 'upload.error.message',
+          messageArgs: [
+            this.$t('upload.error.file_too_big', {
               filesize: filesize.num,
               filesizeunit: filesize.unit,
               allowedsize: allowedsize.num,
               allowedsizeunit: allowedsize.unit
-            }
-          )
-        ].join(' ')
+            })
+          ],
+          level: 'error'
+        })
         return
       }
       // eslint-disable-next-line no-undef
@@ -213,8 +211,9 @@ const ProfileTab = {
               that.$store.commit('setCurrentUser', user)
               resolve()
             })
-            .catch((err) => {
-              reject(new Error(that.$t('upload.error.base') + ' ' + err.message))
+            .catch((error) => {
+              that.displayUploadError(error)
+              reject(error)
             })
         }
 
@@ -235,24 +234,27 @@ const ProfileTab = {
           this.$store.commit('setCurrentUser', user)
           this.bannerPreview = null
         })
-        .catch((err) => {
-          this.bannerUploadError = this.$t('upload.error.base') + ' ' + err.message
-        })
-        .then(() => { this.bannerUploading = false })
+        .catch(this.displayUploadError)
+        .finally(() => { this.bannerUploading = false })
     },
     submitBackground (background) {
       if (!this.backgroundPreview && background !== '') { return }
 
       this.backgroundUploading = true
-      this.$store.state.api.backendInteractor.updateProfileImages({ background }).then((data) => {
-        if (!data.error) {
+      this.$store.state.api.backendInteractor.updateProfileImages({ background })
+        .then((data) => {
           this.$store.commit('addNewUsers', [data])
           this.$store.commit('setCurrentUser', data)
           this.backgroundPreview = null
-        } else {
-          this.backgroundUploadError = this.$t('upload.error.base') + data.error
-        }
-        this.backgroundUploading = false
+        })
+        .catch(this.displayUploadError)
+        .finally(() => { this.backgroundUploading = false })
+    },
+    displayUploadError (error) {
+      this.$store.dispatch('pushGlobalNotice', {
+        messageKey: 'upload.error.message',
+        messageArgs: [error.message],
+        level: 'error'
       })
     }
   }

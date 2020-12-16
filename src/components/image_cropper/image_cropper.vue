@@ -37,17 +37,6 @@
           icon="circle-notch"
         />
       </div>
-      <div
-        v-if="submitError"
-        class="alert error"
-      >
-        {{ submitErrorMsg }}
-        <FAIcon
-          class="fa-scale-110 fa-old-padding"
-          icon="times"
-          @click="clearError"
-        />
-      </div>
     </div>
     <input
       ref="input"

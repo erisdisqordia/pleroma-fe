@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed custom emoji not working in profile field names
 - Fixed pinned statuses not appearing in user profiles
 - Fixed some elements not being keyboard navigation friendly
+- Fixed error handling when updating various profile images
 - Fixed your latest chat messages disappearing when closing chat view and opening it again during the same session
 - Fixed custom emoji not showing in poll options before voting
 
@@ -25,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Errors when fetching are now shown with popup errors instead of "Error fetching updates" in panel headers
 - Made reply/fav/repeat etc buttons easier to hit
 - Adjusted timeline menu clickable area to match the visible button
+- Moved external source link from status heading to the ellipsis menu
 - Disabled horizontal textarea resize
 
 

@@ -229,17 +229,6 @@
       >
         {{ $t('general.submit') }}
       </button>
-      <div
-        v-if="bannerUploadError"
-        class="alert error"
-      >
-        Error: {{ bannerUploadError }}
-        <FAIcon
-          class="fa-scale-110 fa-old-padding"
-          icon="times"
-          @click="clearUploadError('banner')"
-        />
-      </div>
     </div>
     <div class="setting-item">
       <h2>{{ $t('settings.profile_background') }}</h2>
@@ -279,18 +268,6 @@
       >
         {{ $t('general.submit') }}
       </button>
-      <div
-        v-if="backgroundUploadError"
-        class="alert error"
-      >
-        Error: {{ backgroundUploadError }}
-        <FAIcon
-          size="lg"
-          class="fa-scale-110 fa-old-padding"
-          icon="times"
-          @click="clearUploadError('background')"
-        />
-      </div>
     </div>
   </div>
 </template>

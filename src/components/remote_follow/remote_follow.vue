@@ -16,7 +16,7 @@
       >
       <button
         click="submit"
-        class="remote-button"
+        class="button-default remote-button"
       >
         {{ $t('user_card.remote_follow') }}
       </button>

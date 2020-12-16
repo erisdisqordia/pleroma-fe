@@ -5,7 +5,8 @@ import {
   faBookmark,
   faEyeSlash,
   faThumbtack,
-  faShareAlt
+  faShareAlt,
+  faExternalLinkAlt
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faBookmark as faBookmarkReg
@@ -17,7 +18,8 @@ library.add(
   faBookmarkReg,
   faEyeSlash,
   faThumbtack,
-  faShareAlt
+  faShareAlt,
+  faExternalLinkAlt
 )
 
 const ExtraButtons = {

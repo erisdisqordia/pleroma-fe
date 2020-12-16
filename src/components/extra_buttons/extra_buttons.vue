@@ -1,5 +1,6 @@
 <template>
   <Popover
+    class="ExtraButtons"
     trigger="click"
     placement="top"
     :offset="{ y: 5 }"
@@ -96,11 +97,23 @@
             icon="share-alt"
           /><span>{{ $t("status.copy_link") }}</span>
         </button>
+        <a
+          v-if="!status.is_local"
+          class="button-default dropdown-item dropdown-item-icon"
+          title="Source"
+          :href="status.external_url"
+          target="_blank"
+        >
+          <FAIcon
+            fixed-width
+            icon="external-link-alt"
+          /><span>{{ $t("status.external_source") }}</span>
+        </a>
       </div>
     </div>
     <span
       slot="trigger"
-      class="ExtraButtons"
+      class="popover-trigger"
     >
       <FAIcon
         class="fa-scale-110 fa-old-padding"
@@ -116,13 +129,15 @@
 @import '../../_variables.scss';
 
 .ExtraButtons {
-  position: static;
-  padding: 10px;
-  margin: -10px;
+  .popover-trigger {
+    position: static;
+    padding: 10px;
+    margin: -10px;
 
-  &:hover .svg-inline--fa {
-    color: $fallback--text;
-    color: var(--text, $fallback--text);
+    &:hover .svg-inline--fa {
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
   }
 }
 </style>

@@ -102,6 +102,7 @@
 .timeline-heading {
   max-width: 100%;
   flex-wrap: nowrap;
+  align-items: center;
   .loadmore-button {
     flex-shrink: 0;
   }

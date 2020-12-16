@@ -617,6 +617,15 @@
             />
           </div>
           <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.wallpaper') }}</h4>
+            <ColorInput
+              v-model="wallpaperColorLocal"
+              name="wallpaper"
+              :label="$t('settings.style.advanced_colors.wallpaper')"
+              :fallback="previewTheme.colors.wallpaper"
+            />
+          </div>
+          <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.poll') }}</h4>
             <ColorInput
               v-model="pollColorLocal"

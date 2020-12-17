@@ -353,7 +353,7 @@
     "reset_avatar": "重置頭像",
     "discoverable": "允許通過搜索檢索等服務找到此賬號",
     "delete_account_error": "刪除賬戶時發生錯誤，如果一直刪除不了，請聯繫實例管理員。",
-    "composing": "正在書寫",
+    "composing": "寫作設置",
     "chatMessageRadius": "聊天訊息",
     "mfa": {
       "confirm_and_enable": "確認並啟用OTP",

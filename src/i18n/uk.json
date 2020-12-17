@@ -31,7 +31,8 @@
     "title": "Особливості",
     "scope_options": "Параметри осягу",
     "media_proxy": "Посередник медіа-даних",
-    "text_limit": "Ліміт символів"
+    "text_limit": "Ліміт символів",
+    "upload_limit": "Обмеження завантажень"
   },
   "exporter": {
     "processing": "Опрацьовую, скоро ви зможете завантажити файл",
@@ -651,7 +652,8 @@
     "error": {
       "base": "Збій при завантаженні.",
       "file_too_big": "Файл завеликий [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-      "default": "Спробуйте ще раз пізніше"
+      "default": "Спробуйте ще раз пізніше",
+      "message": "Помилка завантаження: {0}"
     },
     "file_size_units": {
       "TiB": "ТіБ",
@@ -781,7 +783,9 @@
     "repeats": "Поширення",
     "nsfw": "Дратівливий вміст",
     "thread_muted": "Нитка заглушена",
-    "unmute_conversation": "Припинити глушити розмову"
+    "unmute_conversation": "Припинити глушити розмову",
+    "external_source": "Зовнішнє джерело",
+    "expand": "Розгорнути"
   },
   "timeline": {
     "no_more_statuses": "Більше немає дописів",

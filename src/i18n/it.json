@@ -382,7 +382,7 @@
     "preload_images": "Precarica immagini",
     "hide_isp": "Nascondi pannello della stanza",
     "max_thumbnails": "Numero massimo di anteprime per messaggio",
-    "hide_muted_posts": "Nascondi messaggi degli utenti zittiti",
+    "hide_muted_posts": "Nascondi messaggi degli utenti zilenziati",
     "accent": "Accento",
     "emoji_reactions_on_timeline": "Mostra emoji di reazione sulle sequenze",
     "pad_emoji": "Affianca spazi agli emoji inseriti tramite selettore",
@@ -696,18 +696,20 @@
     "hide_full_subject": "Nascondi intero oggetto",
     "show_full_subject": "Mostra intero oggetto",
     "thread_muted_and_words": ", contiene:",
-    "thread_muted": "Discussione zittita",
+    "thread_muted": "Discussione silenziata",
     "copy_link": "Copia collegamento",
     "status_unavailable": "Messaggio non disponibile",
     "unmute_conversation": "Riabilita conversazione",
-    "mute_conversation": "Zittisci conversazione",
+    "mute_conversation": "Silenzia conversazione",
     "replies_list": "Risposte:",
     "reply_to": "Rispondi a",
     "delete_confirm": "Vuoi veramente eliminare questo messaggio?",
     "unbookmark": "Rimuovi segnalibro",
     "bookmark": "Aggiungi segnalibro",
     "status_deleted": "Questo messagio è stato cancellato",
-    "nsfw": "Pruriginoso"
+    "nsfw": "Pruriginoso",
+    "external_source": "Vai al sito",
+    "expand": "Espandi"
   },
   "time": {
     "years_short": "{0}a",
@@ -782,7 +784,8 @@
     "error": {
       "default": "Riprova in seguito",
       "file_too_big": "File troppo pesante [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-      "base": "Caricamento fallito."
+      "base": "Caricamento fallito.",
+      "message": "Caricamento fallito: {0}"
     }
   },
   "tool_tip": {

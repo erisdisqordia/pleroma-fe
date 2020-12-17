@@ -23,7 +23,7 @@
   },
   "general": {
     "apply": "应用",
-    "submit": "发送",
+    "submit": "提交",
     "more": "更多",
     "generic_error": "发生了一个错误",
     "optional": "可选",
@@ -146,7 +146,7 @@
     "default": "刚刚抵达上海。",
     "direct_warning_to_all": "本条内容只有被提及的用户能够看到。",
     "direct_warning_to_first_only": "本条内容只有被在消息开始处提及的用户能够看到。",
-    "posting": "发送",
+    "posting": "发送中",
     "scope_notice": {
       "public": "本条内容可以被所有人看到",
       "private": "关注你的人才能看到本条内容",
@@ -235,7 +235,7 @@
     "change_password_error": "修改密码的时候出了点问题。",
     "changed_password": "成功修改了密码！",
     "collapse_subject": "折叠带主题的内容",
-    "composing": "正在书写",
+    "composing": "写作",
     "confirm_new_password": "确认新密码",
     "current_avatar": "当前头像",
     "current_password": "当前密码",
@@ -323,7 +323,7 @@
     "search_user_to_block": "搜索你想屏蔽的用户",
     "search_user_to_mute": "搜索你想要隐藏的用户",
     "security_tab": "安全",
-    "scope_copy": "回复时的复制范围（私信是总是复制的）",
+    "scope_copy": "回复时复制可见范围（私信中永远会复制）",
     "minimal_scopes_mode": "使发文可见范围的选项最少化",
     "set_new_avatar": "设置新头像",
     "set_new_profile_background": "设置新的个人资料背景",
@@ -331,12 +331,12 @@
     "settings": "设置",
     "subject_input_always_show": "总是显示主题框",
     "subject_line_behavior": "回复时复制主题",
-    "subject_line_email": "比如电邮： \"re: 主题\"",
-    "subject_line_mastodon": "比如 mastodon: copy as is",
+    "subject_line_email": "类似电子邮件： \"re: 主题\"",
+    "subject_line_mastodon": "类似 mastodon: 与原主题相同",
     "subject_line_noop": "不要复制",
     "post_status_content_type": "发文状态内容类型",
     "stop_gifs": "鼠标悬停时播放GIF",
-    "streaming": "开启滚动到顶部时的自动推送",
+    "streaming": "滚动到顶部时自动推送新内容",
     "text": "文本",
     "theme": "主题",
     "theme_help": "使用十六进制代码（#rrggbb）来设置主题颜色。",
@@ -623,7 +623,9 @@
     "bookmark": "书签",
     "thread_muted_and_words": "，含有过滤词：",
     "status_deleted": "该状态已被删除",
-    "nsfw": "NSFW"
+    "nsfw": "NSFW",
+    "external_source": "外部来源",
+    "expand": "展开"
   },
   "user_card": {
     "approve": "核准",
@@ -690,7 +692,7 @@
     "title": "报告 {0}",
     "add_comment_description": "此报告会发送给您的实例监察员。您可以在下面提供更多详细信息解释报告的缘由：",
     "additional_comments": "其它信息",
-    "forward_description": "这个账号是从另外一个服务器。同时发送一个副本到那里？",
+    "forward_description": "这个账号来自另一个服务器。是否同时发送一份报告副本到那里？",
     "forward_to": "转发 {0}",
     "submit": "提交",
     "generic_error": "当处理您的请求时，发生了一个错误。"
@@ -700,7 +702,7 @@
     "who_to_follow": "推荐关注"
   },
   "tool_tip": {
-    "media_upload": "上传多媒体",
+    "media_upload": "上传媒体",
     "repeat": "转发",
     "reply": "回复",
     "favorite": "喜欢",
@@ -714,7 +716,8 @@
     "error": {
       "base": "上传不成功。",
       "file_too_big": "文件太大了 [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-      "default": "迟些再试"
+      "default": "迟些再试",
+      "message": "上传错误：{0}"
     },
     "file_size_units": {
       "B": "B",

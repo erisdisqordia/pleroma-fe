@@ -15,6 +15,7 @@ import UserReportingModal from './components/user_reporting_modal/user_reporting
 import PostStatusModal from './components/post_status_modal/post_status_modal.vue'
 import GlobalNoticeList from './components/global_notice_list/global_notice_list.vue'
 import { windowWidth, windowHeight } from './services/window_utils/window_utils'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'app',
@@ -50,17 +51,18 @@ export default {
   },
   computed: {
     currentUser () { return this.$store.state.users.currentUser },
-    background () {
-      return this.currentUser.background_image || this.$store.state.instance.background
+    userBackground () { return this.currentUser.background_image },
+    instanceBackground () {
+      return this.mergedConfig.hideInstanceWallpaper
+        ? null
+        : this.$store.state.instance.background
     },
+    background () { return this.userBackground || this.instanceBackground },
     bgStyle () {
-      return {
-        'background-image': `url(${this.background})`
-      }
-    },
-    bgAppStyle () {
-      return {
-        '--body-background-image': `url(${this.background})`
+      if (this.background) {
+        return {
+          '--body-background-image': `url(${this.background})`
+        }
       }
     },
     chat () { return this.$store.state.chat.channel.state === 'joined' },
@@ -77,7 +79,8 @@ export default {
       return {
         'order': this.$store.state.instance.sidebarRight ? 99 : 0
       }
-    }
+    },
+    ...mapGetters(['mergedConfig'])
   },
   methods: {
     updateMobileState () {

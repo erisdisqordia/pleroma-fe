@@ -34,6 +34,10 @@ const GeneralTab = {
       return this.$store.state.instance.postFormats || []
     },
     instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel },
+    instanceWallpaperUsed () {
+      return this.$store.state.instance.background &&
+        !this.$store.state.users.currentUser.background_image
+    },
     ...SharedComputedObject()
   }
 }

@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Support to input emoji into the search box in reaction picker
 - Added some missing unicode emoji
 - Added the upload limit to the Features panel in the About page
+- Support for solid color wallpaper, instance doesn't have to define a wallpaper anymore
 
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form
@@ -21,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed error handling when updating various profile images
 - Fixed your latest chat messages disappearing when closing chat view and opening it again during the same session
 - Fixed custom emoji not showing in poll options before voting
+- Fixed link color not applied to instance name in topbar
 
 ### Changed
 - Errors when fetching are now shown with popup errors instead of "Error fetching updates" in panel headers
@@ -28,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Adjusted timeline menu clickable area to match the visible button
 - Moved external source link from status heading to the ellipsis menu
 - Disabled horizontal textarea resize
+- Wallpaper is now top-aligned, horizontally centered.
 
 
 ## [2.2.1] - 2020-11-11

@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
-## [Unreleased]
+## [2.2.2] - 2020-12-22
 ### Added
 - Mouseover titles for emojis in reaction picker
 - Support to input emoji into the search box in reaction picker

@@ -4,6 +4,7 @@
       trigger="click"
       placement="bottom"
       :bound-to="{ x: 'container' }"
+      remove-padding
     >
       <div
         slot="content"
@@ -13,14 +14,14 @@
           <template v-if="relationship.following">
             <button
               v-if="relationship.showing_reblogs"
-              class="btn btn-default dropdown-item"
+              class="btn button-default dropdown-item"
               @click="hideRepeats"
             >
               {{ $t('user_card.hide_repeats') }}
             </button>
             <button
               v-if="!relationship.showing_reblogs"
-              class="btn btn-default dropdown-item"
+              class="btn button-default dropdown-item"
               @click="showRepeats"
             >
               {{ $t('user_card.show_repeats') }}
@@ -32,27 +33,27 @@
           </template>
           <button
             v-if="relationship.blocking"
-            class="btn btn-default btn-block dropdown-item"
+            class="btn button-default btn-block dropdown-item"
             @click="unblockUser"
           >
             {{ $t('user_card.unblock') }}
           </button>
           <button
             v-else
-            class="btn btn-default btn-block dropdown-item"
+            class="btn button-default btn-block dropdown-item"
             @click="blockUser"
           >
             {{ $t('user_card.block') }}
           </button>
           <button
-            class="btn btn-default btn-block dropdown-item"
+            class="btn button-default btn-block dropdown-item"
             @click="reportUser"
           >
             {{ $t('user_card.report') }}
           </button>
           <button
             v-if="pleromaChatMessagesAvailable"
-            class="btn btn-default btn-block dropdown-item"
+            class="btn button-default btn-block dropdown-item"
             @click="openChat"
           >
             {{ $t('user_card.message') }}
@@ -61,7 +62,7 @@
       </div>
       <div
         slot="trigger"
-        class="btn btn-default ellipsis-button"
+        class="ellipsis-button"
       >
         <FAIcon
           class="icon"

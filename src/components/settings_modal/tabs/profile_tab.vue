@@ -11,7 +11,7 @@
         <input
           id="username"
           v-model="newName"
-          classname="name-changer"
+          class="name-changer"
         >
       </EmojiInput>
       <p>{{ $t('settings.bio') }}</p>
@@ -22,7 +22,7 @@
       >
         <textarea
           v-model="newBio"
-          classname="bio"
+          class="bio resize-height"
         />
       </EmojiInput>
       <p>
@@ -150,7 +150,7 @@
       </p>
       <button
         :disabled="newName && newName.length === 0"
-        class="btn btn-default"
+        class="btn button-default"
         @click="updateProfile"
       >
         {{ $t('general.submit') }}
@@ -179,7 +179,7 @@
       <button
         v-show="pickAvatarBtnVisible"
         id="pick-avatar"
-        class="btn"
+        class="button-default btn"
         type="button"
       >
         {{ $t('settings.upload_a_photo') }}
@@ -224,22 +224,11 @@
       />
       <button
         v-else-if="bannerPreview"
-        class="btn btn-default"
+        class="btn button-default"
         @click="submitBanner(banner)"
       >
         {{ $t('general.submit') }}
       </button>
-      <div
-        v-if="bannerUploadError"
-        class="alert error"
-      >
-        Error: {{ bannerUploadError }}
-        <FAIcon
-          class="fa-scale-110 fa-old-padding"
-          icon="times"
-          @click="clearUploadError('banner')"
-        />
-      </div>
     </div>
     <div class="setting-item">
       <h2>{{ $t('settings.profile_background') }}</h2>
@@ -274,23 +263,11 @@
       />
       <button
         v-else-if="backgroundPreview"
-        class="btn btn-default"
+        class="btn button-default"
         @click="submitBackground(background)"
       >
         {{ $t('general.submit') }}
       </button>
-      <div
-        v-if="backgroundUploadError"
-        class="alert error"
-      >
-        Error: {{ backgroundUploadError }}
-        <FAIcon
-          size="lg"
-          class="fa-scale-110 fa-old-padding"
-          icon="times"
-          @click="clearUploadError('background')"
-        />
-      </div>
     </div>
   </div>
 </template>

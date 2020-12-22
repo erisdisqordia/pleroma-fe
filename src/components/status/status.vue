@@ -47,16 +47,15 @@
         >
           {{ muteWordHits.join(', ') }}
         </small>
-        <a
-          href="#"
-          class="unmute fa-scale-110 fa-old-padding"
+        <button
+          class="unmute button-unstyled"
           @click.prevent="toggleMute"
         >
           <FAIcon
             icon="eye-slash"
             class="fa-scale-110 fa-old-padding"
           />
-        </a>
+        </button>
       </div>
     </template>
     <template v-else>
@@ -185,43 +184,34 @@
                   :title="status.visibility | capitalize"
                 >
                   <FAIcon
-                    class="fa-scale-110 fa-old-padding"
+                    fixed-width
+                    class="fa-scale-110"
                     :icon="visibilityIcon(status.visibility)"
                   />
                 </span>
-                <a
-                  v-if="!status.is_local && !isPreview"
-                  :href="status.external_url"
-                  target="_blank"
-                  class="source_url"
-                  title="Source"
-                >
-                  <FAIcon
-                    class="fa-scale-110 fa-old-padding"
-                    icon="external-link-square-alt"
-                  />
-                </a>
-                <a
+                <button
                   v-if="expandable && !isPreview"
-                  href="#"
-                  title="Expand"
+                  class="button-unstyled"
+                  :title="$t('status.expand')"
                   @click.prevent="toggleExpanded"
                 >
                   <FAIcon
-                    class="fa-scale-110 fa-old-padding"
+                    fixed-width
+                    class="fa-scale-110"
                     icon="plus-square"
                   />
-                </a>
-                <a
+                </button>
+                <button
                   v-if="unmuted"
-                  href="#"
+                  class="button-unstyled"
                   @click.prevent="toggleMute"
                 >
                   <FAIcon
+                    fixed-width
                     icon="eye-slash"
-                    class="fa-scale-110 fa-old-padding"
+                    class="fa-scale-110"
                   />
-                </a>
+                </button>
               </span>
             </div>
 
@@ -237,9 +227,8 @@
                   style="min-width: 0"
                   :class="{ '-strikethrough': !status.parent_visible }"
                 >
-                  <a
-                    class="reply-to"
-                    href="#"
+                  <button
+                    class="button-unstyled reply-to"
                     :aria-label="$t('tool_tip.reply')"
                     @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
                   >
@@ -253,7 +242,7 @@
                     >
                       {{ $t('status.reply_to') }}
                     </span>
-                  </a>
+                  </button>
                 </StatusPopover>
 
                 <span
@@ -286,11 +275,12 @@
                   :key="reply.id"
                   :status-id="reply.id"
                 >
-                  <a
-                    href="#"
-                    class="reply-link"
+                  <button
+                    class="button-unstyled -link reply-link"
                     @click.prevent="gotoOriginal(reply.id)"
-                  >{{ reply.name }}</a>
+                  >
+                    {{ reply.name }}
+                  </button>
                 </StatusPopover>
               </div>
             </div>

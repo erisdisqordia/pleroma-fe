@@ -12,13 +12,13 @@
           <div class="buttons">
             <template v-if="themeWarning.type === 'snapshot_source_mismatch'">
               <button
-                class="btn"
+                class="btn button-default"
                 @click="forceLoad"
               >
                 {{ $t('settings.style.switcher.use_source') }}
               </button>
               <button
-                class="btn"
+                class="btn button-default"
                 @click="forceSnapshot"
               >
                 {{ $t('settings.style.switcher.use_snapshot') }}
@@ -26,7 +26,7 @@
             </template>
             <template v-else-if="themeWarning.noActionsPossible">
               <button
-                class="btn"
+                class="btn button-default"
                 @click="dismissWarning"
               >
                 {{ $t('general.dismiss') }}
@@ -34,13 +34,13 @@
             </template>
             <template v-else>
               <button
-                class="btn"
+                class="btn button-default"
                 @click="forceLoad"
               >
                 {{ $t('settings.style.switcher.load_theme') }}
               </button>
               <button
-                class="btn"
+                class="btn button-default"
                 @click="dismissWarning"
               >
                 {{ $t('settings.style.switcher.keep_as_is') }}
@@ -131,13 +131,13 @@
             <p>{{ $t('settings.theme_help') }}</p>
             <div class="tab-header-buttons">
               <button
-                class="btn"
+                class="btn button-default"
                 @click="clearOpacity"
               >
                 {{ $t('settings.style.switcher.clear_opacity') }}
               </button>
               <button
-                class="btn"
+                class="btn button-default"
                 @click="clearV1"
               >
                 {{ $t('settings.style.switcher.clear_all') }}
@@ -238,13 +238,13 @@
           <div class="tab-header">
             <p>{{ $t('settings.theme_help') }}</p>
             <button
-              class="btn"
+              class="btn button-default"
               @click="clearOpacity"
             >
               {{ $t('settings.style.switcher.clear_opacity') }}
             </button>
             <button
-              class="btn"
+              class="btn button-default"
               @click="clearV1"
             >
               {{ $t('settings.style.switcher.clear_all') }}
@@ -617,6 +617,15 @@
             />
           </div>
           <div class="color-item">
+            <h4>{{ $t('settings.style.advanced_colors.wallpaper') }}</h4>
+            <ColorInput
+              v-model="wallpaperColorLocal"
+              name="wallpaper"
+              :label="$t('settings.style.advanced_colors.wallpaper')"
+              :fallback="previewTheme.colors.wallpaper"
+            />
+          </div>
+          <div class="color-item">
             <h4>{{ $t('settings.style.advanced_colors.poll') }}</h4>
             <ColorInput
               v-model="pollColorLocal"
@@ -806,7 +815,7 @@
           <div class="tab-header">
             <p>{{ $t('settings.radii_help') }}</p>
             <button
-              class="btn"
+              class="btn button-default"
               @click="clearRoundness"
             >
               {{ $t('settings.style.switcher.clear_all') }}
@@ -936,7 +945,7 @@
               />
             </div>
             <button
-              class="btn"
+              class="btn button-default"
               @click="clearShadows"
             >
               {{ $t('settings.style.switcher.clear_all') }}
@@ -980,7 +989,7 @@
           <div class="tab-header">
             <p>{{ $t('settings.style.fonts.help') }}</p>
             <button
-              class="btn"
+              class="btn button-default"
               @click="clearFonts"
             >
               {{ $t('settings.style.switcher.clear_all') }}
@@ -1017,14 +1026,14 @@
 
     <div class="apply-container">
       <button
-        class="btn submit"
+        class="btn button-default submit"
         :disabled="!themeValid"
         @click="setCustomTheme"
       >
         {{ $t('general.apply') }}
       </button>
       <button
-        class="btn"
+        class="btn button-default"
         @click="clearAll"
       >
         {{ $t('settings.style.switcher.reset') }}

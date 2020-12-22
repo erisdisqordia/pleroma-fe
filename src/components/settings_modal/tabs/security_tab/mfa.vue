@@ -29,7 +29,7 @@
           />
           <button
             v-if="!confirmNewBackupCodes"
-            class="btn btn-default"
+            class="btn button-default"
             @click="getBackupCodes"
           >
             {{ $t('settings.mfa.generate_new_recovery_codes') }}
@@ -61,7 +61,7 @@
 
         <button
           v-if="canSetupOTP"
-          class="btn btn-default"
+          class="btn button-default"
           @click="cancelSetup"
         >
           {{ $t('general.cancel') }}
@@ -69,7 +69,7 @@
 
         <button
           v-if="canSetupOTP"
-          class="btn btn-default"
+          class="btn button-default"
           @click="setupOTP"
         >
           {{ $t('settings.mfa.setup_otp') }}
@@ -108,13 +108,13 @@
                 >
                 <div class="confirm-otp-actions">
                   <button
-                    class="btn btn-default"
+                    class="btn button-default"
                     @click="doConfirmOTP"
                   >
                     {{ $t('settings.mfa.confirm_and_enable') }}
                   </button>
                   <button
-                    class="btn btn-default"
+                    class="btn button-default"
                     @click="cancelSetup"
                   >
                     {{ $t('general.cancel') }}

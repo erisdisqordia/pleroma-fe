@@ -84,6 +84,10 @@ export const SLOT_INHERITANCE = {
     opacity: 'bg',
     priority: 1
   },
+  wallpaper: {
+    depends: ['bg'],
+    color: (mod, bg) => brightness(-2 * mod, bg).rgb
+  },
   fg: {
     depends: [],
     priority: 1

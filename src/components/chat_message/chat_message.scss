@@ -31,9 +31,6 @@
       color: $fallback--text;
       color: var(--text, $fallback--text);
     }
-
-    border-radius: $fallback--chatMessageRadius;
-    border-radius: var(--chatMessageRadius, $fallback--chatMessageRadius);
   }
 
   .popover {

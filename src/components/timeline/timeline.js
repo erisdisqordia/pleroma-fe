@@ -50,17 +50,10 @@ const Timeline = {
     TimelineMenu
   },
   computed: {
-    timelineError () {
-      return this.$store.state.statuses.error
-    },
-    errorData () {
-      return this.$store.state.statuses.errorData
-    },
     newStatusCount () {
       return this.timeline.newStatusCount
     },
     showLoadButton () {
-      if (this.timelineError || this.errorData) return false
       return this.timeline.newStatusCount > 0 || this.timeline.flushMarker !== 0
     },
     loadButtonString () {
@@ -171,11 +164,12 @@ const Timeline = {
         userId: this.userId,
         tag: this.tag
       }).then(({ statuses }) => {
-        store.commit('setLoading', { timeline: this.timelineName, value: false })
         if (statuses && statuses.length === 0) {
           this.bottomedOut = true
         }
-      })
+      }).finally(() =>
+        store.commit('setLoading', { timeline: this.timelineName, value: false })
+      )
     }, 1000, this),
     determineVisibleStatuses () {
       if (!this.$refs.timeline) return

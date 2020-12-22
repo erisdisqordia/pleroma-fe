@@ -2,6 +2,15 @@ import escape from 'escape-html'
 import parseLinkHeader from 'parse-link-header'
 import { isStatusNotification } from '../notification_utils/notification_utils.js'
 
+/** NOTICE! **
+ * Do not initialize UI-generated data here.
+ * It will override existing data.
+ *
+ * i.e. user.pinnedStatusIds was set to [] here
+ * UI code would update it with data but upon next user fetch
+ * it would be reverted back to []
+ */
+
 const qvitterStatusType = (status) => {
   if (status.is_post_verb) {
     return 'status'
@@ -53,7 +62,7 @@ export const parseUser = (data) => {
     output.fields = data.fields
     output.fields_html = data.fields.map(field => {
       return {
-        name: addEmojis(field.name, data.emojis),
+        name: addEmojis(escape(field.name), data.emojis),
         value: addEmojis(field.value, data.emojis)
       }
     })
@@ -173,9 +182,6 @@ export const parseUser = (data) => {
   output.locked = data.locked
   output.followers_count = data.followers_count
   output.statuses_count = data.statuses_count
-  output.friendIds = []
-  output.followerIds = []
-  output.pinnedStatusIds = []
 
   if (data.pleroma) {
     output.follow_request_count = data.pleroma.follow_request_count
@@ -274,7 +280,7 @@ export const parseStatus = (data) => {
     if (output.poll) {
       output.poll.options = (output.poll.options || []).map(field => ({
         ...field,
-        title_html: addEmojis(field.title, data.emojis)
+        title_html: addEmojis(escape(field.title), data.emojis)
       }))
     }
     output.pinned = data.pinned

@@ -50,7 +50,8 @@
     "scope_options": "Scope options",
     "text_limit": "Text limit",
     "title": "Features",
-    "who_to_follow": "Who to follow"
+    "who_to_follow": "Who to follow",
+    "upload_limit": "Upload limit"
   },
   "finder": {
     "error_fetching_user": "Error fetching user",
@@ -130,6 +131,7 @@
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
+    "error": "Error fetching notifications: {0}",
     "favorited_you": "favorited your status",
     "followed_you": "followed you",
     "follow_request": "wants to follow you",
@@ -327,6 +329,7 @@
     "hide_muted_posts": "Hide posts of muted users",
     "max_thumbnails": "Maximum amount of thumbnails per post",
     "hide_isp": "Hide instance-specific panel",
+    "hide_wallpaper": "Hide instance wallpaper",
     "preload_images": "Preload images",
     "use_one_click_nsfw": "Open NSFW attachments with just one click",
     "hide_post_stats": "Hide post statistics (e.g. the number of favorites)",
@@ -376,7 +379,7 @@
     "hide_followers_count_description": "Don't show follower count",
     "show_admin_badge": "Show Admin badge in my profile",
     "show_moderator_badge": "Show Moderator badge in my profile",
-    "nsfw_clickthrough": "Enable clickthrough NSFW attachment hiding",
+    "nsfw_clickthrough": "Enable clickthrough attachment and link preview image hiding for NSFW statuses",
     "oauth_tokens": "OAuth tokens",
     "token": "Token",
     "refresh_token": "Refresh Token",
@@ -514,6 +517,7 @@
         "inputs": "Input fields",
         "faint_text": "Faded text",
         "underlay": "Underlay",
+        "wallpaper": "Wallpaper",
         "poll": "Poll graph",
         "icons": "Icons",
         "highlight": "Highlighted elements",
@@ -634,7 +638,7 @@
   "timeline": {
     "collapse": "Collapse",
     "conversation": "Conversation",
-    "error_fetching": "Error fetching updates",
+    "error": "Error fetching timeline: {0}",
     "load_older": "Load older statuses",
     "no_retweet_hint": "Post is marked as followers-only or direct and cannot be repeated",
     "repeated": "repeated",
@@ -660,13 +664,16 @@
     "unmute_conversation": "Unmute conversation",
     "status_unavailable": "Status unavailable",
     "copy_link": "Copy link to status",
+    "external_source": "External source",
     "thread_muted": "Thread muted",
     "thread_muted_and_words": ", has words:",
     "show_full_subject": "Show full subject",
     "hide_full_subject": "Hide full subject",
     "show_content": "Show content",
     "hide_content": "Hide content",
-    "status_deleted": "This post was deleted"
+    "status_deleted": "This post was deleted",
+    "nsfw": "NSFW",
+    "expand": "Expand"
   },
   "user_card": {
     "approve": "Approve",
@@ -756,6 +763,7 @@
   "upload": {
     "error": {
       "base": "Upload failed.",
+      "message": "Upload failed: {0}",
       "file_too_big": "File too big [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
       "default": "Try again later"
     },

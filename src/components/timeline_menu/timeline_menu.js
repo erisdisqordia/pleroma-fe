@@ -19,7 +19,7 @@ library.add(
   faChevronDown
 )
 
-// Route -> i18n key mapping, exported andnot in the computed
+// Route -> i18n key mapping, exported and not in the computed
 // because nav panel benefits from the same information.
 export const timelineNames = () => {
   return {
@@ -27,8 +27,7 @@ export const timelineNames = () => {
     'bookmarks': 'nav.bookmarks',
     'dms': 'nav.dms',
     'public-timeline': 'nav.public_tl',
-    'public-external-timeline': 'nav.twkn',
-    'tag-timeline': 'tag'
+    'public-external-timeline': 'nav.twkn'
   }
 }
 
@@ -59,6 +58,14 @@ const TimelineMenu = {
       setTimeout(() => {
         this.isOpen = true
       }, 25)
+    },
+    blockOpen (event) {
+      // For the blank area inside the button element.
+      // Just setting @click.stop="" makes unintuitive behavior when
+      // menu is open and clicking on the blank area doesn't close it.
+      if (!this.isOpen) {
+        event.stopPropagation()
+      }
     },
     timelineName () {
       const route = this.$route.name

@@ -8,8 +8,7 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 
 const mutations = {
-  clearTimeline: () => {},
-  setError: () => {}
+  clearTimeline: () => {}
 }
 
 const actions = {

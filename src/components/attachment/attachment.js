@@ -8,14 +8,18 @@ import {
   faFile,
   faMusic,
   faImage,
-  faVideo
+  faVideo,
+  faPlayCircle,
+  faTimes
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faFile,
   faMusic,
   faImage,
-  faVideo
+  faVideo,
+  faPlayCircle,
+  faTimes
 )
 
 const Attachment = {

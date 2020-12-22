@@ -144,8 +144,8 @@
           </router-link>
         </li>
         <li @click="toggleDrawer">
-          <a
-            href="#"
+          <button
+            class="button-unstyled -link -fullwidth"
             @click="openSettingsModal"
           >
             <FAIcon
@@ -153,7 +153,7 @@
               class="fa-scale-110 fa-old-padding"
               icon="cog"
             /> {{ $t("settings.settings") }}
-          </a>
+          </button>
         </li>
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'about'}">
@@ -183,8 +183,8 @@
           v-if="currentUser"
           @click="toggleDrawer"
         >
-          <a
-            href="#"
+          <button
+            class="button-unstyled -link -fullwidth"
             @click="doLogout"
           >
             <FAIcon
@@ -192,7 +192,7 @@
               class="fa-scale-110 fa-old-padding"
               icon="sign-out-alt"
             /> {{ $t("login.logout") }}
-          </a>
+          </button>
         </li>
       </ul>
     </div>
@@ -331,7 +331,7 @@
 .side-drawer li {
   padding: 0;
 
-  a {
+  a, button {
     box-sizing: border-box;
     display: block;
     height: 3em;

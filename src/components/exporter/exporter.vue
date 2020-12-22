@@ -11,7 +11,7 @@
     </div>
     <button
       v-else
-      class="btn btn-default"
+      class="btn button-default"
       @click="process"
     >
       {{ exportButtonLabel }}

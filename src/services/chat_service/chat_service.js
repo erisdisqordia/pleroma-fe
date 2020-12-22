@@ -21,7 +21,7 @@ const clear = (storage) => {
       failedMessageIds.push(message.id)
     } else {
       delete storage.idIndex[message.id]
-      delete storage.idempotencyKeyIndex[message.id]
+      delete storage.idempotencyKeyIndex[message.idempotency_key]
     }
   }
 

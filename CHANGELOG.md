@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
+## [2.2.2] - 2020-12-22
+### Added
+- Mouseover titles for emojis in reaction picker
+- Support to input emoji into the search box in reaction picker
+- Added some missing unicode emoji
+- Added the upload limit to the Features panel in the About page
+- Support for solid color wallpaper, instance doesn't have to define a wallpaper anymore
+
+### Fixed
+- Fixed the occasional bug where screen would scroll 1px when typing into a reply form
+- Fixed timeline errors locking timelines
+- Fixed missing highlighted border in expanded conversations
+- Fixed custom emoji not working in profile field names
+- Fixed pinned statuses not appearing in user profiles
+- Fixed some elements not being keyboard navigation friendly
+- Fixed error handling when updating various profile images
+- Fixed your latest chat messages disappearing when closing chat view and opening it again during the same session
+- Fixed custom emoji not showing in poll options before voting
+- Fixed link color not applied to instance name in topbar
+
+### Changed
+- Errors when fetching are now shown with popup errors instead of "Error fetching updates" in panel headers
+- Made reply/fav/repeat etc buttons easier to hit
+- Adjusted timeline menu clickable area to match the visible button
+- Moved external source link from status heading to the ellipsis menu
+- Disabled horizontal textarea resize
+- Wallpaper is now top-aligned, horizontally centered.
+
+
 ## [2.2.1] - 2020-11-11
 ### Fixed
 - Fixed regression in react popup alignment and overflowing
@@ -16,6 +45,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Import/export a muted users
 - Proper handling of deletes when using websocket streaming
 - Added optimistic chat message sending, so you can start writing next message before the previous one has been sent
+- Added a small red badge to the favicon when there's unread notifications
+- Added the NSFW alert to link previews
 
 ### Fixed
 - Fixed clicking NSFW hider through status popover
@@ -37,7 +68,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [2.1.2] - 2020-09-17
 ### Fixed
 - Fixed chats list not updating its order when new messages come in
-- Fixed chat messages sometimes getting lost when you receive a message at the same time 
+- Fixed chat messages sometimes getting lost when you receive a message at the same time
 
 
 ## [2.1.1] - 2020-09-08

@@ -40,7 +40,8 @@
     "heading": {
       "TotpForm": "Двухфакторная аутентификация",
       "RecoveryForm": "Two-factor recovery",
-      "totp": "Двухфакторная аутентификация"
+      "totp": "Двухфакторная аутентификация",
+      "recovery": "Двухфакторное возвращение аккаунта"
     },
     "hint": "Войдите чтобы присоединиться к дискуссии",
     "description": "Войти с помощью OAuth"
@@ -62,10 +63,11 @@
     "who_to_follow": "Кого читать",
     "dms": "Личные Сообщения",
     "administration": "Панель администратора",
-    "about": "О сервере"
+    "about": "О сервере",
+    "user_search": "Поиск пользователей"
   },
   "notifications": {
-    "broken_favorite": "Неизвестный статус, ищем...",
+    "broken_favorite": "Неизвестный статус, ищем…",
     "favorited_you": "нравится ваш статус",
     "followed_you": "начал(а) читать вас",
     "load_older": "Загрузить старые уведомления",
@@ -150,7 +152,7 @@
       "generate_new_recovery_codes": "Получить новые коды востановления",
       "warning_of_generate_new_codes": "После получения новых кодов восстановления, старые больше не будут работать.",
       "recovery_codes": "Коды восстановления.",
-      "waiting_a_recovery_codes": "Получение кодов восстановления ...",
+      "waiting_a_recovery_codes": "Получение кодов восстановления…",
       "recovery_codes_warning": "Запишите эти коды и держите в безопасном месте - иначе вы их больше не увидите. Если вы потеряете доступ к OTP приложению - без резервных кодов вы больше не сможете залогиниться.",
       "authentication_methods": "Методы аутентификации",
       "scan": {
@@ -442,7 +444,9 @@
     "notification_setting_block_from_strangers": "Не показывать уведомления от пользователей которых вы не читаете",
     "notification_setting_filters": "Фильтрация",
     "notifications": "Уведомления",
-    "virtual_scrolling": "Оптимизировать рендеринг ленты"
+    "virtual_scrolling": "Оптимизировать рендеринг ленты",
+    "hide_wallpaper": "Скрыть обои узла",
+    "accent": "Акцент"
   },
   "timeline": {
     "collapse": "Свернуть",
@@ -662,5 +666,8 @@
     "delete": "Удалить",
     "message_user": "Напишите {nickname}",
     "you": "Вы:"
+  },
+  "remote_user_resolver": {
+    "error": "Не найдено."
   }
 }

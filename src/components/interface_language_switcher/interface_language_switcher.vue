@@ -63,7 +63,8 @@ export default {
       const specialLanguageNames = {
         'ja': 'Japanese (日本語)',
         'ja_easy': 'Japanese (やさしいにほんご)',
-        'zh': 'Chinese (简体中文)'
+        'zh': 'Simplified Chinese (简体中文)',
+        'zh_Hant': 'Traditional Chinese (繁體中文)'
       }
       return specialLanguageNames[code] || ISO6391.getName(code)
     }

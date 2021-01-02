@@ -309,7 +309,7 @@
     "panelRadius": "面板",
     "pause_on_unfocused": "在离开页面时暂停时间线推送",
     "presets": "预置",
-    "profile_background": "个人资料背景图",
+    "profile_background": "个人背景图",
     "profile_banner": "横幅图片",
     "profile_tab": "个人资料",
     "radii_help": "设置界面边缘的圆角 (单位：像素)",
@@ -434,7 +434,8 @@
         "alert_warning": "警告",
         "tabs": "标签页",
         "underlay": "底衬",
-        "toggled": "按下的"
+        "toggled": "按下的",
+        "wallpaper": "壁纸"
       },
       "radii": {
         "_tab_label": "圆角"
@@ -522,11 +523,11 @@
     "type_domains_to_mute": "搜索需要隐藏的域名",
     "useStreamingApi": "实时接收帖子和通知",
     "user_mutes": "用户",
-    "reset_background_confirm": "您确定要重置个人资料背景图吗？",
+    "reset_background_confirm": "您确定要重置背景图吗？",
     "reset_banner_confirm": "您确定要重置横幅图片吗？",
     "reset_avatar_confirm": "您确定要重置头像吗？",
     "reset_profile_banner": "重置横幅图片",
-    "reset_profile_background": "重置个人资料背景图",
+    "reset_profile_background": "重置个人背景图",
     "reset_avatar": "重置头像",
     "hide_followers_count_description": "不显示关注者数量",
     "profile_fields": {
@@ -550,7 +551,8 @@
     "mute_import_error": "导入隐藏名单出错",
     "mute_import": "隐藏名单导入",
     "mute_export_button": "导出你的隐藏名单到一个 csv 文件",
-    "mute_export": "隐藏名单导出"
+    "mute_export": "隐藏名单导出",
+    "hide_wallpaper": "隐藏实例壁纸"
   },
   "time": {
     "day": "{0} 天",

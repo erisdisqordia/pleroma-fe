@@ -157,6 +157,7 @@ const Status = {
       return muteWordHits(this.status, this.muteWords)
     },
     muted () {
+      if (this.statusoid.user.id === this.currentUser.id) return false
       const { status } = this
       const { reblog } = status
       const relationship = this.$store.getters.relationship(status.user.id)

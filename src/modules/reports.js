@@ -4,7 +4,7 @@ const reports = {
   state: {
     userId: null,
     statuses: [],
-    preTicked: [],
+    preTickedIds: [],
     modalActivated: false
   },
   mutations: {

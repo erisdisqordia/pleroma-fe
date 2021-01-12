@@ -35,7 +35,7 @@ const AccountActions = {
       this.$store.dispatch('unblockUser', this.user.id)
     },
     reportUser () {
-      this.$store.dispatch('openUserReportingModal', this.user.id)
+      this.$store.dispatch('openUserReportingModal', { userId: this.user.id })
     },
     openChat () {
       this.$router.push({

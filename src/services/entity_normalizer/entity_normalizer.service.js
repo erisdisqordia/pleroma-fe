@@ -201,7 +201,6 @@ export const parseUser = (data) => {
   // Convert punycode to unicode
   if (output.screen_name.includes('@')) {
     const parts = output.screen_name.split('@')
-    console.log(parts)
     let unicodeDomain = punycode.toUnicode(parts[1])
     if (unicodeDomain !== parts[1]) {
       // Add some identifier so users can potentially spot spoofing attempts:

@@ -109,6 +109,16 @@
             icon="external-link-alt"
           /><span>{{ $t("status.external_source") }}</span>
         </a>
+        <button
+          class="button-default dropdown-item dropdown-item-icon"
+          @click.prevent="reportStatus"
+          @click="close"
+        >
+          <FAIcon
+            fixed-width
+            :icon="['far', 'flag']"
+          /><span>{{ $t("user_card.report") }}</span>
+        </button>
       </div>
     </div>
     <span

@@ -4,12 +4,14 @@ const reports = {
   state: {
     userId: null,
     statuses: [],
+    preTicked: [],
     modalActivated: false
   },
   mutations: {
-    openUserReportingModal (state, { userId, statuses }) {
+    openUserReportingModal (state, { userId, statuses, preTickedIds }) {
       state.userId = userId
       state.statuses = statuses
+      state.preTickedIds = preTickedIds
       state.modalActivated = true
     },
     closeUserReportingModal (state) {
@@ -17,9 +19,15 @@ const reports = {
     }
   },
   actions: {
-    openUserReportingModal ({ rootState, commit }, userId) {
-      const statuses = filter(rootState.statuses.allStatuses, status => status.user.id === userId)
-      commit('openUserReportingModal', { userId, statuses })
+    openUserReportingModal ({ rootState, commit }, { userId, statusIds = [] }) {
+      const preTickedStatuses = statusIds.map(id => rootState.statuses.allStatusesObject[id])
+      const preTickedIds = statusIds
+      const statuses = preTickedStatuses.concat(
+        filter(rootState.statuses.allStatuses,
+          status => status.user.id === userId && !preTickedIds.includes(status.id)
+        )
+      )
+      commit('openUserReportingModal', { userId, statuses, preTickedIds })
     },
     closeUserReportingModal ({ commit }) {
       commit('closeUserReportingModal')

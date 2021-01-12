@@ -48,7 +48,7 @@ const UserReportingModal = {
       // Reset state
       this.comment = ''
       this.forward = false
-      this.statusIdsToReport = []
+      this.statusIdsToReport = this.$store.state.reports.preTickedIds
       this.processing = false
       this.error = false
     },

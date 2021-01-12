@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 ## [Unreleased]
+### Added
+- Added Report button to status ellipsis menu for easier reporting
+
 ### Fixed
 - Follows/Followers tabs on user profiles now display the content properly.
 - Handle punycode in screen names

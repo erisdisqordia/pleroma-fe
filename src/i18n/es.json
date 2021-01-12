@@ -14,7 +14,8 @@
     "text_limit": "Límite de caracteres",
     "title": "Características",
     "who_to_follow": "A quién seguir",
-    "pleroma_chat_messages": "Chat de Pleroma"
+    "pleroma_chat_messages": "Chat de Pleroma",
+    "upload_limit": "Límite de subida"
   },
   "finder": {
     "error_fetching_user": "Error al buscar usuario",
@@ -448,7 +449,8 @@
         "underlay": "Subrayado",
         "popover": "Sugerencias, menús, superposiciones",
         "post": "Publicaciones/Biografías de Usuarios",
-        "alert_warning": "Precaución"
+        "alert_warning": "Precaución",
+        "wallpaper": "Fondo de pantalla"
       },
       "radii": {
         "_tab_label": "Redondez"
@@ -559,7 +561,8 @@
     "mute_import_error": "Error al importar los silenciados",
     "mute_import": "Importar silenciados",
     "mute_export_button": "Exportar los silenciados a un archivo csv",
-    "mute_export": "Exportar silenciados"
+    "mute_export": "Exportar silenciados",
+    "hide_wallpaper": "Ocultar el fondo de pantalla de la instancia"
   },
   "time": {
     "day": "{0} día",
@@ -632,7 +635,9 @@
     "bookmark": "Marcar",
     "unbookmark": "Desmarcar",
     "status_deleted": "Esta entrada ha sido eliminada",
-    "nsfw": "NSFW (No apropiado para el trabajo)"
+    "nsfw": "NSFW (No apropiado para el trabajo)",
+    "expand": "Expandir",
+    "external_source": "Fuente externa"
   },
   "user_card": {
     "approve": "Aprobar",
@@ -723,7 +728,8 @@
     "error": {
       "base": "Subida fallida.",
       "file_too_big": "Archivo demasiado grande [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-      "default": "Inténtalo más tarde"
+      "default": "Inténtalo más tarde",
+      "message": "Error de subida: {0}"
     },
     "file_size_units": {
       "B": "B",

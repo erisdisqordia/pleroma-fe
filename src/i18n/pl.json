@@ -50,7 +50,8 @@
     "text_limit": "Limit tekstu",
     "title": "Funkcje",
     "who_to_follow": "Propozycje obserwacji",
-    "pleroma_chat_messages": "Czat Pleromy"
+    "pleroma_chat_messages": "Czat Pleromy",
+    "upload_limit": "Limit wysyłania"
   },
   "finder": {
     "error_fetching_user": "Błąd przy pobieraniu profilu",
@@ -140,7 +141,8 @@
     "no_more_notifications": "Nie masz więcej powiadomień",
     "migrated_to": "wyemigrował do",
     "reacted_with": "zareagował z {0}",
-    "follow_request": "chce ciebie obserwować"
+    "follow_request": "chce ciebie obserwować",
+    "error": "Błąd pobierania powiadomień: {0}"
   },
   "polls": {
     "add_poll": "Dodaj ankietę",
@@ -501,7 +503,8 @@
           "outgoing": "Wiadomości wychodzące",
           "incoming": "Wiadomości przychodzące",
           "border": "Granica"
-        }
+        },
+        "wallpaper": "Tło"
       },
       "radii": {
         "_tab_label": "Zaokrąglenie"
@@ -596,7 +599,8 @@
     "mute_import_error": "Wystąpił błąd podczas importowania wyciszeń",
     "mute_import": "Import wyciszeń",
     "mute_export_button": "Wyeksportuj swoje wyciszenia do pliku .csv",
-    "mute_export": "Eksport wyciszeń"
+    "mute_export": "Eksport wyciszeń",
+    "hide_wallpaper": "Ukryj tło instancji"
   },
   "time": {
     "day": "{0} dzień",
@@ -643,7 +647,8 @@
     "up_to_date": "Na bieżąco",
     "no_more_statuses": "Brak kolejnych statusów",
     "no_statuses": "Brak statusów",
-    "reload": "Odśwież"
+    "reload": "Odśwież",
+    "error": "Błąd pobierania osi czasu: {0}"
   },
   "status": {
     "favorites": "Ulubione",
@@ -667,7 +672,10 @@
     "show_full_subject": "Pokaż cały temat",
     "thread_muted_and_words": ", ma słowa:",
     "thread_muted": "Wątek wyciszony",
-    "status_deleted": "Ten wpis został usunięty"
+    "status_deleted": "Ten wpis został usunięty",
+    "expand": "Rozwiń",
+    "nsfw": "NSFW",
+    "external_source": "Zewnętrzne źródło"
   },
   "user_card": {
     "approve": "Przyjmij",
@@ -758,7 +766,8 @@
     "error": {
       "base": "Wysyłanie nie powiodło się.",
       "file_too_big": "Zbyt duży plik [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-      "default": "Spróbuj ponownie później"
+      "default": "Spróbuj ponownie później",
+      "message": "Błąd wysyłania: {0}"
     },
     "file_size_units": {
       "B": "B",

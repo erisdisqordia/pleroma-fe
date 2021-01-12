@@ -10,7 +10,8 @@
     "text_limit": "Limo de teksto",
     "title": "Funkcioj",
     "who_to_follow": "Kiun aboni",
-    "pleroma_chat_messages": "Babilejo de Pleroma"
+    "pleroma_chat_messages": "Babilejo de Pleroma",
+    "upload_limit": "Limo de alŝutoj"
   },
   "finder": {
     "error_fetching_user": "Eraris alporto de uzanto",
@@ -95,7 +96,8 @@
     "no_more_notifications": "Neniuj pliaj sciigoj",
     "reacted_with": "reagis per {0}",
     "migrated_to": "migris al",
-    "follow_request": "volas vin aboni"
+    "follow_request": "volas vin aboni",
+    "error": "Eraris akirado de sciigoj: {0}"
   },
   "post_status": {
     "new_status": "Afiŝi novan staton",
@@ -235,7 +237,7 @@
     "hide_followers_description": "Ne montri kiu min sekvas",
     "show_admin_badge": "Montri la insignon de administranto en mia profilo",
     "show_moderator_badge": "Montri la insignon de reguligisto en mia profilo",
-    "nsfw_clickthrough": "Ŝalti traklakan kaŝadon de konsternaj kunsendaĵoj",
+    "nsfw_clickthrough": "Ŝalti traklakan kaŝadon de kunsendaĵoj kaj antaŭmontroj de ligiloj por konsternaj statoj",
     "oauth_tokens": "Ĵetonoj de OAuth",
     "token": "Ĵetono",
     "refresh_token": "Ĵetono de aktualigo",
@@ -527,7 +529,8 @@
     "up_to_date": "Ĝisdata",
     "no_more_statuses": "Neniuj pliaj statoj",
     "no_statuses": "Neniuj statoj",
-    "reload": "Enlegi ree"
+    "reload": "Enlegi ree",
+    "error": "Eraris akirado de historio: {0}"
   },
   "user_card": {
     "approve": "Aprobi",
@@ -728,7 +731,8 @@
     "delete": "Forigi staton",
     "repeats": "Ripetoj",
     "favorites": "Ŝatoj",
-    "status_deleted": "Ĉi tiu afiŝo foriĝis"
+    "status_deleted": "Ĉi tiu afiŝo foriĝis",
+    "nsfw": "Konsterna"
   },
   "time": {
     "years_short": "{0}j",

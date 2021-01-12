@@ -35,7 +35,8 @@
     "follow_request": "想要關注你",
     "followed_you": "關注了你",
     "favorited_you": "喜歡了你的發文",
-    "broken_favorite": "未知的狀態，正在搜索中…"
+    "broken_favorite": "未知的狀態，正在搜索中…",
+    "error": "獲取通知錯誤：{0}"
   },
   "nav": {
     "chats": "聊天",
@@ -121,7 +122,8 @@
     "media_proxy": "媒體代理",
     "pleroma_chat_messages": "Pleroma 聊天",
     "chat": "聊天",
-    "gopher": "Gopher"
+    "gopher": "Gopher",
+    "upload_limit": "上傳限制"
   },
   "exporter": {
     "processing": "正在處理，稍後會提示您下載文件",
@@ -351,7 +353,7 @@
     "reset_avatar": "重置頭像",
     "discoverable": "允許通過搜索檢索等服務找到此賬號",
     "delete_account_error": "刪除賬戶時發生錯誤，如果一直刪除不了，請聯繫實例管理員。",
-    "composing": "正在書寫",
+    "composing": "寫作設置",
     "chatMessageRadius": "聊天訊息",
     "mfa": {
       "confirm_and_enable": "確認並啟用OTP",

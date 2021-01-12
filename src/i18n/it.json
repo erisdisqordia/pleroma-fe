@@ -495,7 +495,7 @@
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
-    "media_proxy": "Proxy multimedia",
+    "media_proxy": "Proxy allegati",
     "scope_options": "Opzioni visibilità",
     "text_limit": "Lunghezza massima",
     "title": "Caratteristiche",
@@ -505,7 +505,7 @@
   },
   "finder": {
     "error_fetching_user": "Errore nel recupero dell'utente",
-    "find_user": "Trova utente"
+    "find_user": "Cerca utente"
   },
   "login": {
     "login": "Accedi",
@@ -611,13 +611,13 @@
         "ftl_removal_desc": "Questa stanza rimuove le seguenti dalla sequenza globale:",
         "media_removal": "Rimozione multimedia",
         "media_removal_desc": "Questa istanza rimuove gli allegati dalle seguenti stanze:",
-        "media_nsfw": "Allegati oscurati forzatamente",
+        "media_nsfw": "Allegati oscurati d'ufficio",
         "media_nsfw_desc": "Questa stanza oscura gli allegati dei messaggi provenienti da queste stanze:"
       },
       "mrf_policies": "Regole RM abilitate",
       "mrf_policies_desc": "Le regole RM cambiano il comportamento federativo della stanza. Vigono le seguenti regole:"
     },
-    "staff": "Equipaggio"
+    "staff": "Responsabili"
   },
   "domain_mute_card": {
     "mute": "Zittisci",

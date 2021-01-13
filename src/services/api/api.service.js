@@ -1152,6 +1152,7 @@ export const ProcessedWS = ({
 
   // 1000 = Normal Closure
   eventTarget.close = () => { socket.close(1000, 'Shutting down socket') }
+  eventTarget.getState = () => socket.readyState
 
   return eventTarget
 }

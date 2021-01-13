@@ -40,7 +40,16 @@ const api = {
     // Global MastoAPI socket control, in future should disable ALL sockets/(re)start relevant sockets
     enableMastoSockets (store) {
       const { state, dispatch } = store
-      if (state.mastoUserSocket) return
+      // Do not initialize unless nonexistent or closed
+      if (
+        state.mastoUserSocket &&
+          ![
+            WebSocket.CLOSED,
+            WebSocket.CLOSING
+          ].includes(state.mastoUserSocket.getState())
+      ) {
+        return
+      }
       return dispatch('startMastoUserSocket')
     },
     disableMastoSockets (store) {

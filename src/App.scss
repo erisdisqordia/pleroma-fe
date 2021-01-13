@@ -698,6 +698,15 @@ nav {
       color: var(--alertWarningPanelText, $fallback--text);
     }
   }
+
+  &.success {
+    background-color: var(--alertSuccess, $fallback--alertWarning);
+    color: var(--alertSuccessText, $fallback--text);
+
+    .panel-heading & {
+      color: var(--alertSuccessPanelText, $fallback--text);
+    }
+  }
 }
 
 .faint {

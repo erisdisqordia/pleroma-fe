@@ -616,6 +616,23 @@ export const SLOT_INHERITANCE = {
     textColor: true
   },
 
+  alertSuccess: {
+    depends: ['cGreen'],
+    opacity: 'alert'
+  },
+  alertSuccessText: {
+    depends: ['text'],
+    layer: 'alert',
+    variant: 'alertSuccess',
+    textColor: true
+  },
+  alertSuccessPanelText: {
+    depends: ['panelText'],
+    layer: 'alertPanel',
+    variant: 'alertSuccess',
+    textColor: true
+  },
+
   alertNeutral: {
     depends: ['text'],
     opacity: 'alert'
@@ -653,6 +670,17 @@ export const SLOT_INHERITANCE = {
     depends: ['alertWarningText'],
     layer: 'popover',
     variant: 'alertPopupWarning',
+    textColor: true
+  },
+
+  alertPopupSuccess: {
+    depends: ['alertSuccess'],
+    opacity: 'alertPopup'
+  },
+  alertPopupSuccessText: {
+    depends: ['alertSuccessText'],
+    layer: 'popover',
+    variant: 'alertPopupSuccess',
     textColor: true
   },
 

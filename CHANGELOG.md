@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed local dev mode having non-functional websockets in some cases
 - Show notices for websocket events (errors, abnormal closures, reconnections)
 - Fix not being able to re-enable websocket until page refresh
+- Fix annoying issue where timeline might have few posts when streaming is enabled
 
 ## [2.2.2] - 2020-12-22
 ### Added

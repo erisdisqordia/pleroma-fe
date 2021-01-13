@@ -1,15 +1,23 @@
 import apiService, { getMastodonSocketURI, ProcessedWS } from '../api/api.service.js'
-import timelineFetcherService from '../timeline_fetcher/timeline_fetcher.service.js'
+import timelineFetcher from '../timeline_fetcher/timeline_fetcher.service.js'
 import notificationsFetcher from '../notifications_fetcher/notifications_fetcher.service.js'
 import followRequestFetcher from '../../services/follow_request_fetcher/follow_request_fetcher.service'
 
 const backendInteractorService = credentials => ({
   startFetchingTimeline ({ timeline, store, userId = false, tag }) {
-    return timelineFetcherService.startFetching({ timeline, store, credentials, userId, tag })
+    return timelineFetcher.startFetching({ timeline, store, credentials, userId, tag })
+  },
+
+  fetchTimeline (args) {
+    return timelineFetcher.fetchAndUpdate({ ...args, credentials })
   },
 
   startFetchingNotifications ({ store }) {
     return notificationsFetcher.startFetching({ store, credentials })
+  },
+
+  fetchNotifications (args) {
+    return notificationsFetcher.fetchAndUpdate({ ...args, credentials })
   },
 
   startFetchingFollowRequests ({ store }) {

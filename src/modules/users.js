@@ -547,6 +547,8 @@ const users = {
               }
 
               if (store.getters.mergedConfig.useStreamingApi) {
+                store.dispatch('fetchTimeline', 'friends', { since: null })
+                store.dispatch('fetchNotifications', { since: null })
                 store.dispatch('enableMastoSockets').catch((error) => {
                   console.error('Failed initializing MastoAPI Streaming socket', error)
                   startPolling()

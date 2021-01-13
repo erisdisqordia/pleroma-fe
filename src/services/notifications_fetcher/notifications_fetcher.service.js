@@ -5,7 +5,7 @@ const update = ({ store, notifications, older }) => {
   store.dispatch('addNewNotifications', { notifications, older })
 }
 
-const fetchAndUpdate = ({ store, credentials, older = false }) => {
+const fetchAndUpdate = ({ store, credentials, older = false, since }) => {
   const args = { credentials }
   const { getters } = store
   const rootState = store.rootState || store.state
@@ -22,8 +22,10 @@ const fetchAndUpdate = ({ store, credentials, older = false }) => {
     return fetchNotifications({ store, args, older })
   } else {
     // fetch new notifications
-    if (timelineData.maxId !== Number.POSITIVE_INFINITY) {
+    if (since === undefined && timelineData.maxId !== Number.POSITIVE_INFINITY) {
       args['since'] = timelineData.maxId
+    } else if (since !== null) {
+      args['since'] = since
     }
     const result = fetchNotifications({ store, args, older })
 

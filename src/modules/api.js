@@ -188,6 +188,13 @@ const api = {
       if (!fetcher) return
       store.commit('removeFetcher', { fetcherName: timeline, fetcher })
     },
+    fetchTimeline (store, timeline, { ...rest }) {
+      store.state.backendInteractor.fetchTimeline({
+        store,
+        timeline,
+        ...rest
+      })
+    },
 
     // Notifications
     startFetchingNotifications (store) {
@@ -199,6 +206,12 @@ const api = {
       const fetcher = store.state.fetchers.notifications
       if (!fetcher) return
       store.commit('removeFetcher', { fetcherName: 'notifications', fetcher })
+    },
+    fetchNotifications (store, { ...rest }) {
+      store.state.backendInteractor.fetchNotifications({
+        store,
+        ...rest
+      })
     },
 
     // Follow requests

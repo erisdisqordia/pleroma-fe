@@ -646,7 +646,10 @@
     "reload": "Reload",
     "up_to_date": "Up-to-date",
     "no_more_statuses": "No more statuses",
-    "no_statuses": "No statuses"
+    "no_statuses": "No statuses",
+    "socket_reconnected": "Realtime connection established",
+    "socket_broke": "Realtime connection lost: CloseEvent code {0}",
+    "socket_closed": "No realtime connection, updates can arrive with a delaye until connection is re-established"
   },
   "status": {
     "favorites": "Favorites",

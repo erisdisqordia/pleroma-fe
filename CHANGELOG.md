@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Follows/Followers tabs on user profiles now display the content properly.
 - Handle punycode in screen names
 - Fixed local dev mode having non-functional websockets in some cases
+- Show notices for websocket events (errors, abnormal closures, reconnections)
 
 ## [2.2.2] - 2020-12-22
 ### Added

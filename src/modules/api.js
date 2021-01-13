@@ -91,12 +91,29 @@ const api = {
             }
           )
           state.mastoUserSocket.addEventListener('open', () => {
+            // Do not show notification when we just opened up the page
+            if (state.mastoUserSocketStatus !== null) {
+              dispatch('pushGlobalNotice', {
+                level: 'success',
+                messageKey: 'timeline.socket_reconnected',
+                timeout: 5000
+              })
+            }
             commit('setMastoUserSocketStatus', WSConnectionStatus.JOINED)
           })
           state.mastoUserSocket.addEventListener('error', ({ detail: error }) => {
             console.error('Error in MastoAPI websocket:', error)
             commit('setMastoUserSocketStatus', WSConnectionStatus.ERROR)
             dispatch('clearOpenedChats')
+            /* Since data in WS event for error is useless it's better to show
+             * generic warning instead of in "close" which actually has some
+             * useful data
+             */
+            dispatch('pushGlobalNotice', {
+              level: 'error',
+              messageKey: 'timeline.socket_closed',
+              timeout: 5000
+            })
           })
           state.mastoUserSocket.addEventListener('close', ({ detail: closeEvent }) => {
             const ignoreCodes = new Set([
@@ -112,6 +129,12 @@ const api = {
               dispatch('startFetchingNotifications')
               dispatch('startFetchingChats')
               dispatch('restartMastoUserSocket')
+              dispatch('pushGlobalNotice', {
+                level: 'error',
+                messageKey: 'timeline.socket_broke',
+                messageArgs: [code],
+                timeout: 5000
+              })
             }
             commit('setMastoUserSocketStatus', WSConnectionStatus.CLOSED)
             dispatch('clearOpenedChats')

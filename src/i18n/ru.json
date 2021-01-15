@@ -190,7 +190,7 @@
     "current_profile_banner": "Текущий баннер профиля",
     "data_import_export_tab": "Импорт / Экспорт данных",
     "delete_account": "Удалить аккаунт",
-    "delete_account_description": "Удалить ваш аккаунт и все ваши сообщения.",
+    "delete_account_description": "Удалить вашу учётную запись и все ваши сообщения.",
     "delete_account_error": "Возникла ошибка в процессе удаления вашего аккаунта. Если это повторяется, свяжитесь с администратором вашего сервера.",
     "delete_account_instructions": "Введите ваш пароль в поле ниже для подтверждения удаления.",
     "export_theme": "Сохранить Тему",
@@ -238,7 +238,7 @@
     "hide_followers_count_description": "Не показывать число моих подписчиков",
     "show_admin_badge": "Показывать значок администратора в моем профиле",
     "show_moderator_badge": "Показывать значок модератора в моем профиле",
-    "nsfw_clickthrough": "Включить скрытие NSFW вложений и не показывать изображения в предпросмотре ссылок для NSFW статусов",
+    "nsfw_clickthrough": "Включить скрытие вложений и предпросмотра ссылок для NSFW статусов",
     "oauth_tokens": "OAuth токены",
     "token": "Токен",
     "refresh_token": "Рефреш токен",
@@ -330,7 +330,8 @@
         "borders": "Границы",
         "buttons": "Кнопки",
         "inputs": "Поля ввода",
-        "faint_text": "Маловажный текст"
+        "faint_text": "Маловажный текст",
+        "post": "Сообщения и описание пользователя"
       },
       "radii": {
         "_tab_label": "Скругление"
@@ -451,7 +452,16 @@
     "virtual_scrolling": "Оптимизировать рендеринг ленты",
     "hide_wallpaper": "Скрыть обои узла",
     "accent": "Акцент",
-    "upload_a_photo": "Загрузить фото"
+    "upload_a_photo": "Загрузить фото",
+    "notification_mutes": "Чтобы не получать уведомления от определённого пользователя, заглушите его.",
+    "reset_avatar_confirm": "Вы действительно хотите сбросить личный образ?",
+    "reset_profile_banner": "Сбросить личный баннер",
+    "reset_profile_background": "Сбросить личные обои",
+    "reset_avatar": "Сбросить личный образ",
+    "search_user_to_mute": "Искать, кого вы хотите заглушить",
+    "search_user_to_block": "Искать, кого вы хотите заблокировать",
+    "pad_emoji": "Выделять эмодзи пробелами при добавлении из панели",
+    "avatar_size_instruction": "Желательный наименьший размер личного образа 150 на 150 пикселей."
   },
   "timeline": {
     "collapse": "Свернуть",
@@ -584,7 +594,8 @@
     "title": "Особенности",
     "gopher": "Gopher",
     "who_to_follow": "Предложения кого читать",
-    "pleroma_chat_messages": "Pleroma Чат"
+    "pleroma_chat_messages": "Pleroma Чат",
+    "upload_limit": "Наибольший размер загружаемого файла"
   },
   "tool_tip": {
     "accept_follow_request": "Принять запрос на чтение",
@@ -673,6 +684,7 @@
     "you": "Вы:"
   },
   "remote_user_resolver": {
-    "error": "Не найдено."
+    "error": "Не найдено.",
+    "searching_for": "Ищем"
   }
 }

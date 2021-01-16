@@ -429,7 +429,9 @@
       },
       "keyword": {
         "replace": "Repor",
-        "reject": "Rejeitar"
+        "reject": "Rejeitar",
+        "is_replaced_by": "→",
+        "keyword_policies": "Políticas de palavras-chave"
       },
       "federation": "Federação"
     }

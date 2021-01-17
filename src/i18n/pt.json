@@ -9,7 +9,8 @@
     "scope_options": "Opções de privacidade",
     "text_limit": "Limite de caracteres",
     "title": "Funções",
-    "who_to_follow": "Quem seguir"
+    "who_to_follow": "Quem seguir",
+    "upload_limit": "Limite de carregamento"
   },
   "finder": {
     "error_fetching_user": "Erro ao procurar usuário",
@@ -20,7 +21,19 @@
     "submit": "Enviar",
     "more": "Mais",
     "generic_error": "Houve um erro",
-    "optional": "opcional"
+    "optional": "opcional",
+    "peek": "Espreitar",
+    "close": "Fechar",
+    "verify": "Verificar",
+    "confirm": "Confirmar",
+    "enable": "Ativar",
+    "disable": "Desativar",
+    "cancel": "Cancelar",
+    "show_less": "Mostrar menos",
+    "show_more": "Mostrar mais",
+    "retry": "Tenta novamente",
+    "error_retry": "Por favor tente novamente",
+    "loading": "Carregando…"
   },
   "image_cropper": {
     "crop_picture": "Cortar imagem",
@@ -35,7 +48,12 @@
     "placeholder": "p.e. lain",
     "register": "Registrar",
     "username": "Usuário",
-    "hint": "Entre para participar da discussão"
+    "hint": "Entre para participar da discussão",
+    "heading": {
+      "totp": "Autenticação de dois fatores"
+    },
+    "recovery_code": "Código de recuperação",
+    "authentication_code": "Código de autenticação"
   },
   "media_modal": {
     "previous": "Anterior",
@@ -50,10 +68,13 @@
     "dms": "Mensagens diretas",
     "public_tl": "Linha do tempo pública",
     "timeline": "Linha do tempo",
-    "twkn": "Toda a rede conhecida",
+    "twkn": "Rede conhecida",
     "user_search": "Buscar usuários",
     "who_to_follow": "Quem seguir",
-    "preferences": "Preferências"
+    "preferences": "Preferências",
+    "search": "Pesquisar",
+    "interactions": "Interações",
+    "administration": "Administração"
   },
   "notifications": {
     "broken_favorite": "Status desconhecido, buscando...",
@@ -63,7 +84,10 @@
     "notifications": "Notificações",
     "read": "Lido!",
     "repeated_you": "repetiu sua postagem",
-    "no_more_notifications": "Mais nenhuma notificação"
+    "no_more_notifications": "Mais nenhuma notificação",
+    "reacted_with": "reagiu com {0}",
+    "migrated_to": "migrou para",
+    "follow_request": "quer te seguir"
   },
   "post_status": {
     "new_status": "Postar novo status",
@@ -71,7 +95,9 @@
     "account_not_locked_warning_link": "restrita",
     "attachments_sensitive": "Marcar anexos como sensíveis",
     "content_type": {
-      "text/plain": "Texto puro"
+      "text/plain": "Texto puro",
+      "text/bbcode": "BBCode",
+      "text/html": "HTML"
     },
     "content_warning": "Assunto (opcional)",
     "default": "Acabei de chegar no Rio!",
@@ -82,7 +108,16 @@
       "private": "Apenas para seguidores - Enviar apenas para seguidores",
       "public": "Público - Enviar a linhas do tempo públicas",
       "unlisted": "Não listado - Não enviar a linhas do tempo públicas"
-    }
+    },
+    "scope_notice": {
+      "unlisted": "Esta publicação não será visível na Public Timeline e na Rede conhecida por todos",
+      "private": "Esta publicação será visível apenas para os teus seguidores",
+      "public": "Esta publicação será visível para todos"
+    },
+    "empty_status_error": "Não consegues publicar um estado vazio sem ficheiros",
+    "preview_empty": "Vazio",
+    "preview": "Pre-visualização",
+    "media_description": "Descrição da mídia"
   },
   "registration": {
     "bio": "Biografia",
@@ -343,7 +378,19 @@
         "checkbox": "Li os termos e condições",
         "link": "um belo link"
       }
-    }
+    },
+    "mfa": {
+      "scan": {
+        "secret_code": "Chave",
+        "title": "Scan"
+      },
+      "authentication_methods": "Métodos de autenticação",
+      "recovery_codes": "Códigos de recuperação.",
+      "generate_new_recovery_codes": "Gerar novos códigos de recuperação",
+      "confirm_and_enable": "Confirmar e ativar a senha de uso único",
+      "otp": "Senha de uso único"
+    },
+    "security": "Segurança"
   },
   "timeline": {
     "collapse": "Esconder",
@@ -425,15 +472,56 @@
       "simple": {
         "quarantine": "Quarentena",
         "reject": "Rejeitar",
-        "accept": "Aceitar"
+        "accept": "Aceitar",
+        "media_removal_desc": "Este domínio remove mídia das publicações dos seguintes domínios:",
+        "media_removal": "Remoção de mídia",
+        "ftl_removal_desc": "Este domínio remove os seguintes domínios da cronologia \"Rede conhecida por todos\":",
+        "quarantine_desc": "Este domínio apenas irá publicar nos seguintes domínios:",
+        "reject_desc": "Este domínio não aceitara mensagens dos seguintes domínios:",
+        "accept_desc": "Este domínio aceita apenas mensagens dos seguintes domínios:",
+        "simple_policies": "Política especifica ao domínio"
       },
       "keyword": {
         "replace": "Repor",
         "reject": "Rejeitar",
         "is_replaced_by": "→",
-        "keyword_policies": "Políticas de palavras-chave"
+        "keyword_policies": "Políticas Chave",
+        "ftl_removal": "Remoção da cronologia \"Rede conhecida por todos\""
       },
-      "federation": "Federação"
-    }
+      "federation": "Federação",
+      "mrf_policies": "Políticas MRF ativadas",
+      "mrf_policies_desc": "Políticas MRF manipulam o comportamento da federação na domínios.  As seguintes políticas estão ativadas:"
+    },
+    "staff": "Staff"
+  },
+  "remote_user_resolver": {
+    "searching_for": "Pesquisando por"
+  },
+  "emoji": {
+    "unicode": "Emoji Unicode",
+    "custom": "Emoji customizado",
+    "add_emoji": "Inserir emoji",
+    "search_emoji": "Pesquisar por um emoji",
+    "emoji": "Emoji"
+  },
+  "polls": {
+    "single_choice": "Única escolha",
+    "vote": "Vota",
+    "votes": "votos",
+    "option": "Opção",
+    "add_option": "Adicionar opção"
+  },
+  "importer": {
+    "error": "Um erro ocorreu enquanto importavas este ficheiro.",
+    "success": "Importado com sucesso",
+    "submit": "Enviar"
+  },
+  "exporter": {
+    "processing": "Processando, breviamente será pedido para tu descarregar o teu ficheiro",
+    "export": "Exportar"
+  },
+  "domain_mute_card": {
+    "mute_progress": "Silenciando…",
+    "mute": "Silenciar"
   }
 }

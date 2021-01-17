@@ -77,7 +77,7 @@
     "administration": "Administração"
   },
   "notifications": {
-    "broken_favorite": "Status desconhecido, buscando...",
+    "broken_favorite": "Estado desconhecido, a procurar…",
     "favorited_you": "favoritou sua postagem",
     "followed_you": "seguiu você",
     "load_older": "Carregar notificações antigas",
@@ -431,7 +431,7 @@
     "remote_follow": "Seguir remotamente",
     "statuses": "Postagens",
     "unblock": "Desbloquear",
-    "unblock_progress": "Desbloqueando...",
+    "unblock_progress": "Desbloqueando…",
     "block_progress": "Bloqueando...",
     "unmute": "Retirar silêncio",
     "unmute_progress": "Retirando silêncio...",

@@ -445,7 +445,8 @@
     "profile_fields": {
       "value": "Conteúdo",
       "add_field": "Adicionar campo",
-      "label": "Metadados do perfil"
+      "label": "Metadados do perfil",
+      "name": "Etiqueta"
     },
     "import_blocks_from_a_csv_file": "Importar bloqueados a partir de um arquivo CSV",
     "hide_wallpaper": "Esconder papel de parede da instância",

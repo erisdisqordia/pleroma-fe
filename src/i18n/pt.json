@@ -48,7 +48,7 @@
     "description": "Iniciar sessão com OAuth",
     "logout": "Terminar sessão",
     "password": "Palavra-passe",
-    "placeholder": "p.e. lain",
+    "placeholder": "p.ex. lain",
     "register": "Registrar",
     "username": "Nome de Utilizador",
     "hint": "Entra para participar na discussão",

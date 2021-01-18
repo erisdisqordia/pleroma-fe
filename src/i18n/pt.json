@@ -294,7 +294,14 @@
         "save_load_hint": "Manter as opções preserva as opções atuais ao selecionar ou carregar temas; também salva as opções ao exportar um tempo. Quanto todos os campos estiverem desmarcados, tudo será salvo ao exportar o tema.",
         "reset": "Restaurar o padrão",
         "clear_all": "Limpar tudo",
-        "clear_opacity": "Limpar opacidade"
+        "clear_opacity": "Limpar opacidade",
+        "help": {
+          "upgraded_from_v2": "O PleromaFE foi atualizado, a aparência do tema poderá ser um pouco diferente."
+        },
+        "use_source": "Nova versão",
+        "use_snapshot": "Versão antiga",
+        "keep_as_is": "Manter como está",
+        "load_theme": "Carregar tema"
       },
       "common": {
         "color": "Cor",
@@ -459,7 +466,8 @@
     "useStreamingApi": "Receber publicações e notificações em tempo real",
     "minimal_scopes_mode": "Minimizar as opções de publicação",
     "search_user_to_mute": "Pesquisa quais os utilizadores deseja silenciar",
-    "search_user_to_block": "Pesquisa quais utilizadores deseja bloquear"
+    "search_user_to_block": "Pesquisa quais utilizadores deseja bloquear",
+    "notification_setting_hide_notification_contents": "Ocultar o remetente e o conteúdo das notificações push"
   },
   "timeline": {
     "collapse": "Esconder",

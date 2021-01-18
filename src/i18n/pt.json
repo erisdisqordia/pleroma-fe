@@ -47,11 +47,11 @@
     "login": "Iniciar Sessão",
     "description": "Iniciar sessão com OAuth",
     "logout": "Terminar sessão",
-    "password": "Senha",
+    "password": "Palavra-passe",
     "placeholder": "p.e. lain",
     "register": "Registrar",
     "username": "Nome de Utilizador",
-    "hint": "Entre para participar na discussão",
+    "hint": "Entra para participar na discussão",
     "heading": {
       "totp": "Autenticação de dois fatores",
       "recovery": "Recuperação de dois fatores"
@@ -72,7 +72,7 @@
     "friend_requests": "Pedidos de seguidores",
     "mentions": "Menções",
     "dms": "Mensagens Diretas",
-    "public_tl": "Cronologia pública",
+    "public_tl": "Cronologia Pública",
     "timeline": "Cronologia",
     "twkn": "Rede conhecida",
     "user_search": "Buscar usuários",
@@ -83,7 +83,7 @@
     "administration": "Administração",
     "chats": "Salas de Chat",
     "timelines": "Cronologias",
-    "bookmarks": "Favoritos"
+    "bookmarks": "Items Guardados"
   },
   "notifications": {
     "broken_favorite": "Estado desconhecido, a procurar…",
@@ -452,7 +452,13 @@
     "notification_setting_privacy": "Privacidade",
     "notification_setting_filters": "Filtros",
     "fun": "Divertido",
-    "user_mutes": "Utilizadores"
+    "user_mutes": "Utilizadores",
+    "type_domains_to_mute": "Pesquisar domínios para silenciar",
+    "useStreamingApiWarning": "(não recomendado, experimental, pode omitir publicações)",
+    "useStreamingApi": "Receber publicações e notificações em tempo real",
+    "minimal_scopes_mode": "Minimizar as opções de publicação",
+    "search_user_to_mute": "Pesquisa quais os utilizadores deseja silenciar",
+    "search_user_to_block": "Pesquisa quais utilizadores deseja bloquear"
   },
   "timeline": {
     "collapse": "Esconder",
@@ -544,7 +550,7 @@
         "simple_policies": "Política especifica ao domínio",
         "media_nsfw": "Forçar definição de Mídia como Sensível",
         "ftl_removal": "Remoção da cronologia da \"Rede conhecida por todos\"",
-        "media_nsfw_desc": "Este domínio força a midia a ser marcada como Sensível nos seguintes domínios:"
+        "media_nsfw_desc": "Esta instância força a multimédia a ser marcada como sensível nas seguintes instâncias:"
       },
       "keyword": {
         "replace": "Substituir",
@@ -585,9 +591,9 @@
     "expired": "A votação terminou há {0}",
     "expires_in": "A votação termina em {0}",
     "expiry": "Tempo para finalizar votação",
-    "multiple_choices": "Escolha Múltipla",
-    "type": "Tipo de questionário",
-    "add_poll": "Adicionar Questionário"
+    "multiple_choices": "Escolha múltipla",
+    "type": "Tipo de votação",
+    "add_poll": "Adicionar Votação"
   },
   "importer": {
     "error": "Ocorreu um erro ao importar este ficheiro.",
@@ -610,7 +616,8 @@
   "interactions": {
     "load_older": "Carregar interações mais antigas",
     "follows": "Novos seguidores",
-    "favs_repeats": "Favoritos e Repetidos"
+    "favs_repeats": "Favoritos e Repetidos",
+    "moves": "Utilizador migrado"
   },
   "errors": {
     "storage_unavailable": "Pleroma não conseguiu aceder ao armazenamento do navegador. A sua sessão ou definições locais não serão armazenadas e poderá encontrar problemas inesperados. Tente ativar as cookies."

@@ -436,7 +436,7 @@
     "allow_following_move": "Permitir auto-follow quando a conta migrar",
     "domain_mutes": "Domínios",
     "discoverable": "Permitir a descoberta desta conta em resultados de busca e outros serviços",
-    "emoji_reactions_on_timeline": "Mostrar reações com emoji na cronografia"
+    "emoji_reactions_on_timeline": "Mostrar reações de emoji na timeline"
   },
   "timeline": {
     "collapse": "Esconder",

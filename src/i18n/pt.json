@@ -433,7 +433,9 @@
     "bot": "Esta uma conta bot",
     "import_mutes_from_a_csv_file": "Importar silenciados de um ficheiro csv",
     "mutes_imported": "Silenciados importados! Processá-los pode demorar alguns instantes.",
-    "allow_following_move": "Permitir auto-follow quando a conta migrar"
+    "allow_following_move": "Permitir auto-follow quando a conta migrar",
+    "domain_mutes": "Domínios",
+    "discoverable": "Permitir a descoberta desta conta em resultados de busca e outros serviços"
   },
   "timeline": {
     "collapse": "Esconder",

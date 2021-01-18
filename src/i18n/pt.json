@@ -678,7 +678,7 @@
       },
       "federation": "Federação",
       "mrf_policies": "Ativar Políticas MRF",
-      "mrf_policies_desc": "Políticas MRF manipulam o comportamento da federação na domínios.  As seguintes políticas estão ativadas:"
+      "mrf_policies_desc": "Políticas MRF manipulam o comportamento da federação nos domínios.  As seguintes políticas estão ativadas:"
     },
     "staff": "Staff"
   },

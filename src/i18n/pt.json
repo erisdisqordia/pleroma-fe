@@ -48,7 +48,7 @@
     "description": "Iniciar sessão com OAuth",
     "logout": "Terminar sessão",
     "password": "Palavra-passe",
-    "placeholder": "p.ex. lain",
+    "placeholder": "ex. lain",
     "register": "Registar",
     "username": "Nome de Utilizador",
     "hint": "Entra para participar na discussão",
@@ -83,16 +83,16 @@
     "administration": "Administração",
     "chats": "Salas de Chat",
     "timelines": "Cronologias",
-    "bookmarks": "Items Guardados"
+    "bookmarks": "Itens Guardados"
   },
   "notifications": {
     "broken_favorite": "Estado desconhecido, a procurar…",
-    "favorited_you": "favoritou o teu post",
+    "favorited_you": "gostou do teu post",
     "followed_you": "seguiu-te",
     "load_older": "Carregar notificações antigas",
     "notifications": "Notificações",
     "read": "Lido!",
-    "repeated_you": "repetiu sua postagem",
+    "repeated_you": "repetiu o teu post",
     "no_more_notifications": "Sem mais notificações",
     "reacted_with": "reagiu com {0}",
     "migrated_to": "migrou para",
@@ -101,14 +101,14 @@
   },
   "post_status": {
     "new_status": "Publicar novo estado",
-    "account_not_locked_warning": "A sua conta não é {0}. Qualquer pessoa pode te seguir e ver os seus posts privados (só para seguidores).",
-    "account_not_locked_warning_link": "restrita",
+    "account_not_locked_warning": "A sua conta não é {0}. Qualquer pessoa pode seguir-te e ver os seus posts privados (só para seguidores).",
+    "account_not_locked_warning_link": "restrito",
     "attachments_sensitive": "Marcar anexos como sensíveis",
     "content_type": {
       "text/plain": "Texto puro",
       "text/bbcode": "BBCode",
       "text/html": "HTML",
-      "text/markdown": "Markdown"
+      "text/markdown": "Remarcação"
     },
     "content_warning": "Assunto (opcional)",
     "default": "Acabei de chegar a Lisboa.",
@@ -117,8 +117,8 @@
     "scope": {
       "direct": "Direto - Enviar somente aos usuários mencionados",
       "private": "Apenas para seguidores - Enviar apenas para seguidores",
-      "public": "Público - Publicar publicamente na cronologia",
-      "unlisted": "Não listado - Não exibir publicamente na cronologia"
+      "public": "Público - Publicar em cronologias públicas",
+      "unlisted": "Não listado - Não exibir em cronologias públicas"
     },
     "scope_notice": {
       "unlisted": "Esta publicação não será visível na Cronologia pública e na Rede conhecida por todos",
@@ -142,9 +142,9 @@
     "token": "Código do convite",
     "captcha": "CAPTCHA",
     "new_captcha": "Clique na imagem para carregar um novo captcha",
-    "username_placeholder": "p. ex. lain",
-    "fullname_placeholder": "p. ex. Lain Iwakura",
-    "bio_placeholder": "p. ex.\nOlá, sou um exemplo\nAqui podes colocar algo representativo da tua parte... ou não.",
+    "username_placeholder": "ex. lain",
+    "fullname_placeholder": "ex. Lain Iwakura",
+    "bio_placeholder": "ex.\nOlá, sou a Lain\nSou uma menina de anime que vive no Japão suburbano. Devem conhecer-me do \"the Wired\".",
     "validations": {
       "username_required": "não pode ser deixado em branco",
       "fullname_required": "não pode ser deixado em branco",
@@ -161,7 +161,7 @@
     "avatar": "Avatar",
     "avatarAltRadius": "Avatares (Notificações)",
     "avatarRadius": "Avatares",
-    "background": "Pano de Fundo",
+    "background": "Imagem de Fundo",
     "bio": "Biografia",
     "blocks_tab": "Bloqueios",
     "btnRadius": "Botões",
@@ -445,7 +445,7 @@
       "verify": {
         "desc": "Para ativar a autenticação de dois fatores, introduza o código da sua aplicação de dois fatores:"
       },
-      "recovery_codes_warning": "Anote os códigos ou armazene-os num lugar seguro, caso contrário, não os voltará a ver. Se perder acesso à sua aplicação de dois fatores e aos códigos de recuperação, a sua conta ficará bloqueada.",
+      "recovery_codes_warning": "Anote os códigos ou armazene-os num lugar seguro - caso contrário, não os voltará a ver. Se perder acesso à sua aplicação de dois fatores e aos códigos de recuperação, a sua conta ficará bloqueada.",
       "waiting_a_recovery_codes": "A receber códigos de recuperação…",
       "warning_of_generate_new_codes": "Quando gera novos códigos de recuperação, os antigos deixam de funcionar.",
       "title": "Autenticação de Dois Fatores",
@@ -704,7 +704,7 @@
     "votes": "votos",
     "option": "Opção",
     "add_option": "Adicionar Opção",
-    "not_enough_options": "Existem poucas opções únicas na sondagem",
+    "not_enough_options": "Demasiado poucas opções únicas na sondagem",
     "expired": "A sondagem terminou há {0}",
     "expires_in": "A sondagem termina em {0}",
     "expiry": "Tempo para finalizar sondagem",
@@ -733,8 +733,8 @@
   "interactions": {
     "load_older": "Carregar interações mais antigas",
     "follows": "Novos seguidores",
-    "favs_repeats": "Favoritos e Repetidos",
-    "moves": "Utilizador migrado"
+    "favs_repeats": "Gostos e Repetidos",
+    "moves": "O utilizador migra"
   },
   "errors": {
     "storage_unavailable": "O Pleroma não conseguiu aceder ao armazenamento do navegador. A sua sessão ou definições locais não serão armazenadas e poderá encontrar problemas inesperados. Tente ativar as cookies."

@@ -448,7 +448,11 @@
       "label": "Metadados do perfil"
     },
     "import_blocks_from_a_csv_file": "Importar bloqueados a partir de um arquivo CSV",
-    "hide_wallpaper": "Esconder papel de parede da instância"
+    "hide_wallpaper": "Esconder papel de parede da instância",
+    "notification_setting_privacy": "Privacidade",
+    "notification_setting_filters": "Filtros",
+    "fun": "Divertido",
+    "user_mutes": "Utilizadores"
   },
   "timeline": {
     "collapse": "Esconder",

@@ -437,7 +437,18 @@
     "domain_mutes": "Domínios",
     "discoverable": "Permitir a descoberta desta conta em resultados de busca e outros serviços",
     "emoji_reactions_on_timeline": "Mostrar reações de emoji na timeline",
-    "hide_muted_posts": "Esconder posts de utilizadores silenciados"
+    "hide_muted_posts": "Esconder posts de utilizadores silenciados",
+    "hide_follows_count_description": "Não mostrar o número de contas seguidas",
+    "hide_followers_count_description": "Não mostrar o número de seguidores",
+    "notification_visibility_emoji_reactions": "Reações",
+    "new_email": "Novo email",
+    "profile_fields": {
+      "value": "Conteúdo",
+      "add_field": "Adicionar campo",
+      "label": "Metadados do perfil"
+    },
+    "import_blocks_from_a_csv_file": "Importar bloqueados a partir de um arquivo CSV",
+    "hide_wallpaper": "Esconder papel de parede da instância"
   },
   "timeline": {
     "collapse": "Esconder",

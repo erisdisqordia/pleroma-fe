@@ -34,7 +34,8 @@
     "show_more": "Mostrar mais",
     "retry": "Tenta novamente",
     "error_retry": "Por favor, tente novamente",
-    "loading": "A carregar…"
+    "loading": "A carregar…",
+    "dismiss": "Ignorar"
   },
   "image_cropper": {
     "crop_picture": "Cortar imagem",
@@ -80,7 +81,9 @@
     "search": "Pesquisar",
     "interactions": "Interações",
     "administration": "Administração",
-    "chats": "Salas de Chat"
+    "chats": "Salas de Chat",
+    "timelines": "Cronologias",
+    "bookmarks": "Favoritos"
   },
   "notifications": {
     "broken_favorite": "Estado desconhecido, a procurar…",
@@ -421,7 +424,16 @@
     "block_import": "Importar utilizadores bloqueados",
     "block_export_button": "Exporta a tua lista de utilizadores bloqueados para um ficheiro csv",
     "block_export": "Exportar utilizadores bloqueados",
-    "enter_current_password_to_confirm": "Introduza a sua palavra-passe atual para confirmar a sua identidade"
+    "enter_current_password_to_confirm": "Introduza a sua palavra-passe atual para confirmar a sua identidade",
+    "mutes_and_blocks": "Silenciados e bloqueados",
+    "chatMessageRadius": "Mensagem de texto",
+    "changed_email": "Email modificado com sucesso!",
+    "change_email_error": "Houve um erro ao modificar o seu email.",
+    "change_email": "Mudar Email",
+    "bot": "Esta uma conta bot",
+    "import_mutes_from_a_csv_file": "Importar silenciados de um ficheiro csv",
+    "mutes_imported": "Silenciados importados! Processá-los pode demorar alguns instantes.",
+    "allow_following_move": "Permitir auto-follow quando a conta migrar"
   },
   "timeline": {
     "collapse": "Esconder",
@@ -512,7 +524,8 @@
         "accept_desc": "Este domínio aceita apenas mensagens dos seguintes domínios:",
         "simple_policies": "Política especifica ao domínio",
         "media_nsfw": "Forçar definição de Mídia como Sensível",
-        "ftl_removal": "Remoção da cronologia da \"Rede conhecida por todos\""
+        "ftl_removal": "Remoção da cronologia da \"Rede conhecida por todos\"",
+        "media_nsfw_desc": "Este domínio força a midia a ser marcada como Sensível nos seguintes domínios:"
       },
       "keyword": {
         "replace": "Substituir",
@@ -552,7 +565,10 @@
     "not_enough_options": "Existem poucas opções únicas na votação",
     "expired": "A votação terminou há {0}",
     "expires_in": "A votação termina em {0}",
-    "expiry": "Tempo para finalizar votação"
+    "expiry": "Tempo para finalizar votação",
+    "multiple_choices": "Escolha Múltipla",
+    "type": "Tipo de questionário",
+    "add_poll": "Adicionar Questionário"
   },
   "importer": {
     "error": "Ocorreu um erro ao importar este ficheiro.",

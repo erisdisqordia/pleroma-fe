@@ -658,16 +658,16 @@
         "quarantine": "Quarentena",
         "reject": "Rejeitar",
         "accept": "Aceitar",
-        "media_removal_desc": "Esta instância remove multimédia das publicações das seguintes instâncias:",
+        "media_removal_desc": "Este domínio remove multimédia das publicações dos seguintes domínios:",
         "media_removal": "Remoção de multimédia",
-        "ftl_removal_desc": "Esta instância remove as seguintes instâncias da cronologia \"Rede conhecida por todos\":",
-        "quarantine_desc": "Esta instância apenas irá publicar nas seguintes instâncias:",
-        "reject_desc": "Esta instância não aceitará mensagens das seguintes instâncias:",
-        "accept_desc": "Esta instância aceita apenas mensagens das seguintes instâncias:",
-        "simple_policies": "Políticas especificas da instância",
+        "ftl_removal_desc": "Este domínio remove os seguintes domínios da cronologia \"Rede conhecida por todos\":",
+        "quarantine_desc": "Este domínio apenas irá publicar nos seguintes domínios:",
+        "reject_desc": "Este domínio não aceitará mensagens dos seguintes domínios:",
+        "accept_desc": "Este domínio aceita apenas mensagens dos seguintes domínios:",
+        "simple_policies": "Políticas especificas do domínio",
         "media_nsfw": "Forçar definição de multimédia como Sensível",
         "ftl_removal": "Remoção da cronologia da \"Rede conhecida por todos\"",
-        "media_nsfw_desc": "Esta instância força a multimédia a ser marcada como sensível nas seguintes instâncias:"
+        "media_nsfw_desc": "Este domínio força a multimédia a ser marcada como sensível nos seguintes domínios:"
       },
       "keyword": {
         "replace": "Substituir",
@@ -718,7 +718,7 @@
     "submit": "Enviar"
   },
   "exporter": {
-    "processing": "A processar, brevemente será pedido que descarregues o ficheiro",
+    "processing": "A processar, brevemente ser-te-á pedido que descarregues o ficheiro",
     "export": "Exportar"
   },
   "domain_mute_card": {

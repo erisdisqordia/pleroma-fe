@@ -311,6 +311,12 @@ describe('API Entities normalizer', () => {
       expect(parseUser(user)).to.have.property('hide_followers_count', false)
       expect(parseUser(user)).to.have.property('hide_follows_count', true)
     })
+
+    it('converts IDN to unicode and marks it as internatonal', () => {
+      const user = makeMockUserMasto({ acct: 'lain@xn--lin-6cd.com' })
+
+      expect(parseUser(user)).to.have.property('screen_name').that.equal('lain@🌏lаin.com')
+    })
   })
 
   // We currently use QvitterAPI notifications only, and especially due to MastoAPI lacking is_seen, support for MastoAPI

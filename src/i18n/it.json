@@ -263,7 +263,8 @@
           "border": "Bordo",
           "outgoing": "Inviati",
           "incoming": "Ricevuti"
-        }
+        },
+        "wallpaper": "Sfondo"
       },
       "common_colors": {
         "rgbo": "Icone, accenti, medaglie",
@@ -382,7 +383,7 @@
     "preload_images": "Precarica immagini",
     "hide_isp": "Nascondi pannello della stanza",
     "max_thumbnails": "Numero massimo di anteprime per messaggio",
-    "hide_muted_posts": "Nascondi messaggi degli utenti zittiti",
+    "hide_muted_posts": "Nascondi messaggi degli utenti zilenziati",
     "accent": "Accento",
     "emoji_reactions_on_timeline": "Mostra emoji di reazione sulle sequenze",
     "pad_emoji": "Affianca spazi agli emoji inseriti tramite selettore",
@@ -415,7 +416,8 @@
     "mute_import_error": "Errore nell'importazione",
     "mute_import": "Importa silenziati",
     "mute_export_button": "Esporta la tua lista di silenziati in un file CSV",
-    "mute_export": "Esporta silenziati"
+    "mute_export": "Esporta silenziati",
+    "hide_wallpaper": "Nascondi sfondo della stanza"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",
@@ -493,16 +495,17 @@
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
-    "media_proxy": "Proxy multimedia",
+    "media_proxy": "Proxy allegati",
     "scope_options": "Opzioni visibilità",
     "text_limit": "Lunghezza massima",
     "title": "Caratteristiche",
     "who_to_follow": "Chi seguire",
-    "pleroma_chat_messages": "Chiacchiere"
+    "pleroma_chat_messages": "Chiacchiere",
+    "upload_limit": "Limite allegati"
   },
   "finder": {
     "error_fetching_user": "Errore nel recupero dell'utente",
-    "find_user": "Trova utente"
+    "find_user": "Cerca utente"
   },
   "login": {
     "login": "Accedi",
@@ -608,13 +611,13 @@
         "ftl_removal_desc": "Questa stanza rimuove le seguenti dalla sequenza globale:",
         "media_removal": "Rimozione multimedia",
         "media_removal_desc": "Questa istanza rimuove gli allegati dalle seguenti stanze:",
-        "media_nsfw": "Allegati oscurati forzatamente",
+        "media_nsfw": "Allegati oscurati d'ufficio",
         "media_nsfw_desc": "Questa stanza oscura gli allegati dei messaggi provenienti da queste stanze:"
       },
       "mrf_policies": "Regole RM abilitate",
       "mrf_policies_desc": "Le regole RM cambiano il comportamento federativo della stanza. Vigono le seguenti regole:"
     },
-    "staff": "Equipaggio"
+    "staff": "Responsabili"
   },
   "domain_mute_card": {
     "mute": "Zittisci",
@@ -695,18 +698,20 @@
     "hide_full_subject": "Nascondi intero oggetto",
     "show_full_subject": "Mostra intero oggetto",
     "thread_muted_and_words": ", contiene:",
-    "thread_muted": "Discussione zittita",
+    "thread_muted": "Discussione silenziata",
     "copy_link": "Copia collegamento",
     "status_unavailable": "Messaggio non disponibile",
     "unmute_conversation": "Riabilita conversazione",
-    "mute_conversation": "Zittisci conversazione",
+    "mute_conversation": "Silenzia conversazione",
     "replies_list": "Risposte:",
     "reply_to": "Rispondi a",
     "delete_confirm": "Vuoi veramente eliminare questo messaggio?",
     "unbookmark": "Rimuovi segnalibro",
     "bookmark": "Aggiungi segnalibro",
     "status_deleted": "Questo messagio è stato cancellato",
-    "nsfw": "Pruriginoso"
+    "nsfw": "Pruriginoso",
+    "external_source": "Vai al sito",
+    "expand": "Espandi"
   },
   "time": {
     "years_short": "{0}a",
@@ -781,7 +786,8 @@
     "error": {
       "default": "Riprova in seguito",
       "file_too_big": "File troppo pesante [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-      "base": "Caricamento fallito."
+      "base": "Caricamento fallito.",
+      "message": "Caricamento fallito: {0}"
     }
   },
   "tool_tip": {

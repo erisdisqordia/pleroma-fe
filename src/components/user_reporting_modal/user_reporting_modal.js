@@ -38,17 +38,23 @@ const UserReportingModal = {
     },
     statuses () {
       return this.$store.state.reports.statuses
+    },
+    preTickedIds () {
+      return this.$store.state.reports.preTickedIds
     }
   },
   watch: {
-    userId: 'resetState'
+    userId: 'resetState',
+    preTickedIds (newValue) {
+      this.statusIdsToReport = newValue
+    }
   },
   methods: {
     resetState () {
       // Reset state
       this.comment = ''
       this.forward = false
-      this.statusIdsToReport = []
+      this.statusIdsToReport = this.preTickedIds
       this.processing = false
       this.error = false
     },

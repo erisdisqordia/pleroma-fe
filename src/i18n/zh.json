@@ -14,7 +14,8 @@
     "text_limit": "文字数量限制",
     "title": "功能",
     "who_to_follow": "推荐关注",
-    "pleroma_chat_messages": "Pleroma 聊天"
+    "pleroma_chat_messages": "Pleroma 聊天",
+    "upload_limit": "上传限制"
   },
   "finder": {
     "error_fetching_user": "获取用户时发生错误",
@@ -22,7 +23,7 @@
   },
   "general": {
     "apply": "应用",
-    "submit": "发送",
+    "submit": "提交",
     "more": "更多",
     "generic_error": "发生了一个错误",
     "optional": "可选",
@@ -34,7 +35,7 @@
     "confirm": "确认",
     "verify": "验证",
     "dismiss": "忽略",
-    "peek": "窥探",
+    "peek": "预览",
     "close": "关闭",
     "retry": "重试",
     "error_retry": "请重试",
@@ -104,7 +105,8 @@
     "no_more_notifications": "没有更多的通知",
     "reacted_with": "作出了 {0} 的反应",
     "migrated_to": "迁移到了",
-    "follow_request": "想要关注你"
+    "follow_request": "想要关注你",
+    "error": "取得通知时发生错误：{0}"
   },
   "polls": {
     "add_poll": "增加投票",
@@ -124,7 +126,7 @@
     "add_sticker": "添加贴纸"
   },
   "interactions": {
-    "favs_repeats": "转发和收藏",
+    "favs_repeats": "转发和喜欢",
     "follows": "新的关注者",
     "load_older": "加载更早的互动",
     "moves": "用户迁移"
@@ -141,10 +143,10 @@
       "text/bbcode": "BBCode"
     },
     "content_warning": "主题（可选）",
-    "default": "刚刚抵达洛杉矶",
+    "default": "刚刚抵达上海。",
     "direct_warning_to_all": "本条内容只有被提及的用户能够看到。",
     "direct_warning_to_first_only": "本条内容只有被在消息开始处提及的用户能够看到。",
-    "posting": "发送",
+    "posting": "发送中",
     "scope_notice": {
       "public": "本条内容可以被所有人看到",
       "private": "关注你的人才能看到本条内容",
@@ -227,13 +229,13 @@
     "btnRadius": "按钮",
     "cBlue": "蓝色（回复，关注）",
     "cGreen": "绿色（转发）",
-    "cOrange": "橙色（收藏）",
+    "cOrange": "橙色（喜欢）",
     "cRed": "红色（取消）",
     "change_password": "修改密码",
     "change_password_error": "修改密码的时候出了点问题。",
     "changed_password": "成功修改了密码！",
     "collapse_subject": "折叠带主题的内容",
-    "composing": "正在书写",
+    "composing": "写作",
     "confirm_new_password": "确认新密码",
     "current_avatar": "当前头像",
     "current_password": "当前密码",
@@ -244,7 +246,7 @@
     "delete_account_description": "永久删除你的帐号和所有数据。",
     "delete_account_error": "删除账户时发生错误，如果一直删除不了，请联系实例管理员。",
     "delete_account_instructions": "在下面输入您的密码来确认删除账户。",
-    "avatar_size_instruction": "推荐的头像图片最小的尺寸是 150x150 像素。",
+    "avatar_size_instruction": "推荐的头像图片最小尺寸为 150x150 像素。",
     "export_theme": "导出预置主题",
     "filtering": "过滤器",
     "filtering_explanation": "所有包含以下词汇的内容都会被隐藏，一行一个",
@@ -258,11 +260,11 @@
     "hide_attachments_in_convo": "在对话中隐藏附件",
     "hide_attachments_in_tl": "在时间线上隐藏附件",
     "hide_muted_posts": "不显示被隐藏的用户的帖子",
-    "max_thumbnails": "最多再每个帖子所能显示的缩略图数量",
+    "max_thumbnails": "每个帖子最多能显示的缩略图数量",
     "hide_isp": "隐藏实例独有的面板",
     "preload_images": "预载图片",
-    "use_one_click_nsfw": "点击一次以打开工作场所不适宜的附件",
-    "hide_post_stats": "隐藏推文相关的统计数据(例如：收藏的次数)",
+    "use_one_click_nsfw": "点击一次以打开工作场所不适宜（NSFW）的附件",
+    "hide_post_stats": "隐藏帖子的统计数据(例如：喜欢的次数)",
     "hide_user_stats": "隐藏用户的统计数据（例如：关注者的数量）",
     "hide_filtered_statuses": "隐藏过滤的状态",
     "import_blocks_from_a_csv_file": "从 csv 文件中导入拉黑名单",
@@ -296,9 +298,9 @@
     "no_mutes": "没有隐藏",
     "hide_follows_description": "不要显示我所关注的人",
     "hide_followers_description": "不要显示关注我的人",
-    "show_admin_badge": "显示管理徽章",
-    "show_moderator_badge": "在我的个人资料中显示监察员标志",
-    "nsfw_clickthrough": "将不和谐附件隐藏，点击才能打开",
+    "show_admin_badge": "在我的个人资料中显示管理员徽章",
+    "show_moderator_badge": "在我的个人资料中显示监察员徽章",
+    "nsfw_clickthrough": "将不和谐附件和链接预览隐藏，点击才会显示",
     "oauth_tokens": "OAuth令牌",
     "token": "令牌",
     "refresh_token": "刷新令牌",
@@ -307,7 +309,7 @@
     "panelRadius": "面板",
     "pause_on_unfocused": "在离开页面时暂停时间线推送",
     "presets": "预置",
-    "profile_background": "个人资料背景图",
+    "profile_background": "个人背景图",
     "profile_banner": "横幅图片",
     "profile_tab": "个人资料",
     "radii_help": "设置界面边缘的圆角 (单位：像素)",
@@ -321,7 +323,7 @@
     "search_user_to_block": "搜索你想屏蔽的用户",
     "search_user_to_mute": "搜索你想要隐藏的用户",
     "security_tab": "安全",
-    "scope_copy": "回复时的复制范围（私信是总是复制的）",
+    "scope_copy": "回复时复制可见范围（私信中永远会复制）",
     "minimal_scopes_mode": "使发文可见范围的选项最少化",
     "set_new_avatar": "设置新头像",
     "set_new_profile_background": "设置新的个人资料背景",
@@ -329,12 +331,12 @@
     "settings": "设置",
     "subject_input_always_show": "总是显示主题框",
     "subject_line_behavior": "回复时复制主题",
-    "subject_line_email": "比如电邮： \"re: 主题\"",
-    "subject_line_mastodon": "比如 mastodon: copy as is",
+    "subject_line_email": "类似电子邮件： \"re: 主题\"",
+    "subject_line_mastodon": "类似 mastodon: 与原主题相同",
     "subject_line_noop": "不要复制",
     "post_status_content_type": "发文状态内容类型",
     "stop_gifs": "鼠标悬停时播放GIF",
-    "streaming": "开启滚动到顶部时的自动推送",
+    "streaming": "滚动到顶部时自动推送新内容",
     "text": "文本",
     "theme": "主题",
     "theme_help": "使用十六进制代码（#rrggbb）来设置主题颜色。",
@@ -400,7 +402,7 @@
         "_tab_label": "常规",
         "main": "常用颜色",
         "foreground_hint": "点击”高级“ 标签进行细致的控制",
-        "rgbo": "图标，口音，徽章"
+        "rgbo": "图标，强调，徽章"
       },
       "advanced_colors": {
         "_tab_label": "高级",
@@ -420,7 +422,7 @@
           "incoming": "收到的"
         },
         "disabled": "禁用的",
-        "pressed": "按下的",
+        "pressed": "压下的",
         "highlight": "强调元素",
         "selectedMenu": "选中的菜单项",
         "selectedPost": "选中的发布内容",
@@ -432,7 +434,8 @@
         "alert_warning": "警告",
         "tabs": "标签页",
         "underlay": "底衬",
-        "toggled": "勾选的"
+        "toggled": "按下的",
+        "wallpaper": "壁纸"
       },
       "radii": {
         "_tab_label": "圆角"
@@ -444,14 +447,14 @@
         "shadow_id": "阴影 #{value}",
         "blur": "模糊",
         "spread": "扩散",
-        "inset": "插入内部",
+        "inset": "内阴影",
         "hint": "对于阴影你还可以使用 --variable 作为颜色值来使用 CSS3 变量。请注意，这种情况下，透明设置将不起作用。",
         "filter_hint": {
           "always_drop_shadow": "警告，此阴影设置会总是使用 {0} ，如果浏览器支持的话。",
           "drop_shadow_syntax": "{0} 不支持参数 {1} 和关键词 {2} 。",
           "avatar_inset": "请注意组合两个内部和非内部的阴影到头像上，在透明头像上可能会有意料之外的效果。",
           "spread_zero": "阴影的扩散 > 0 会同设置成零一样",
-          "inset_classic": "插入内部的阴影会使用 {0}"
+          "inset_classic": "内阴影会使用 {0}"
         },
         "components": {
           "panel": "面板",
@@ -459,13 +462,14 @@
           "topBar": "顶栏",
           "avatar": "用户头像（在个人资料栏）",
           "avatarStatus": "用户头像（在帖子显示栏）",
-          "popup": "弹窗和工具提示",
+          "popup": "弹窗与工具提示",
           "button": "按钮",
           "buttonHover": "按钮（悬停）",
-          "buttonPressed": "按钮（按下）",
-          "buttonPressedHover": "按钮（按下和悬停）",
+          "buttonPressed": "按钮（压下）",
+          "buttonPressedHover": "按钮（压下和悬停）",
           "input": "输入框"
-        }
+        },
+        "hintV3": "对于阴影，您还可以使用 {0} 表示法来使用其它颜色插槽。"
       },
       "fonts": {
         "_tab_label": "字体",
@@ -478,22 +482,22 @@
         },
         "family": "字体名称",
         "size": "大小 (in px)",
-        "weight": "字重 （粗体）)",
+        "weight": "字重 （粗体）",
         "custom": "自选"
       },
       "preview": {
         "header": "预览",
         "content": "内容",
-        "error": "例子错误",
+        "error": "错误示例",
         "button": "按钮",
         "text": "有堆 {0} 和 {1}",
-        "mono": "内容",
-        "input": "刚刚抵达上海",
-        "faint_link": "帮助菜单",
+        "mono": "monospace 内容",
+        "input": "刚刚抵达上海。",
+        "faint_link": "帮助手册",
         "fine_print": "阅读我们的 {0} ，然而什么也学不到！",
         "header_faint": "这很正常",
-        "checkbox": "我已经浏览了 TOC",
-        "link": "一个很棒的摇滚链接"
+        "checkbox": "我已经浏览了条款及细则",
+        "link": "一个棒棒的小小链接"
       }
     },
     "version": {
@@ -519,11 +523,11 @@
     "type_domains_to_mute": "搜索需要隐藏的域名",
     "useStreamingApi": "实时接收帖子和通知",
     "user_mutes": "用户",
-    "reset_background_confirm": "您确定要重置个人资料背景图吗？",
+    "reset_background_confirm": "您确定要重置背景图吗？",
     "reset_banner_confirm": "您确定要重置横幅图片吗？",
     "reset_avatar_confirm": "您确定要重置头像吗？",
     "reset_profile_banner": "重置横幅图片",
-    "reset_profile_background": "重置个人资料背景图",
+    "reset_profile_background": "重置个人背景图",
     "reset_avatar": "重置头像",
     "hide_followers_count_description": "不显示关注者数量",
     "profile_fields": {
@@ -547,7 +551,8 @@
     "mute_import_error": "导入隐藏名单出错",
     "mute_import": "隐藏名单导入",
     "mute_export_button": "导出你的隐藏名单到一个 csv 文件",
-    "mute_export": "隐藏名单导出"
+    "mute_export": "隐藏名单导出",
+    "hide_wallpaper": "隐藏实例壁纸"
   },
   "time": {
     "day": "{0} 天",
@@ -588,16 +593,17 @@
     "conversation": "对话",
     "error_fetching": "获取更新时发生错误",
     "load_older": "加载更早的状态",
-    "no_retweet_hint": "这条内容仅关注者可见，或者是私信，因此不能转发。",
-    "repeated": "已转发",
+    "no_retweet_hint": "这条内容仅关注者可见，或者是私信，因此不能转发",
+    "repeated": "转发了",
     "show_new": "显示新内容",
     "up_to_date": "已是最新",
     "no_more_statuses": "没有更多的状态",
     "no_statuses": "没有状态更新",
-    "reload": "重新载入"
+    "reload": "重新载入",
+    "error": "取得时间轴时发生错误：{0}"
   },
   "status": {
-    "favorites": "收藏",
+    "favorites": "喜欢",
     "repeats": "转发",
     "delete": "删除状态",
     "pin": "在个人资料置顶",
@@ -618,24 +624,27 @@
     "unbookmark": "取消书签",
     "bookmark": "书签",
     "thread_muted_and_words": "，含有过滤词：",
-    "status_deleted": "该状态已被删除"
+    "status_deleted": "该状态已被删除",
+    "nsfw": "NSFW",
+    "external_source": "外部来源",
+    "expand": "展开"
   },
   "user_card": {
-    "approve": "允许",
+    "approve": "核准",
     "block": "屏蔽",
     "blocked": "已屏蔽！",
     "deny": "拒绝",
-    "favorites": "收藏",
+    "favorites": "喜欢",
     "follow": "关注",
     "follow_sent": "请求已发送！",
-    "follow_progress": "请求中",
+    "follow_progress": "请求中…",
     "follow_again": "再次发送请求？",
     "follow_unfollow": "取消关注",
     "followees": "正在关注",
     "followers": "关注者",
     "following": "正在关注！",
     "follows_you": "关注了你！",
-    "its_you": "就是你！!",
+    "its_you": "就是你！",
     "media": "媒体",
     "mute": "隐藏",
     "muted": "已隐藏",
@@ -652,7 +661,7 @@
     "unmute_progress": "取消隐藏中…",
     "mute_progress": "隐藏中…",
     "admin_menu": {
-      "moderation": "权限",
+      "moderation": "仲裁",
       "grant_admin": "赋予管理权限",
       "revoke_admin": "撤销管理权限",
       "grant_moderator": "赋予监察员权限",
@@ -685,7 +694,7 @@
     "title": "报告 {0}",
     "add_comment_description": "此报告会发送给您的实例监察员。您可以在下面提供更多详细信息解释报告的缘由：",
     "additional_comments": "其它信息",
-    "forward_description": "这个账号是从另外一个服务器。同时发送一个副本到那里？",
+    "forward_description": "这个账号来自另一个服务器。是否同时发送一份报告副本到那里？",
     "forward_to": "转发 {0}",
     "submit": "提交",
     "generic_error": "当处理您的请求时，发生了一个错误。"
@@ -695,10 +704,10 @@
     "who_to_follow": "推荐关注"
   },
   "tool_tip": {
-    "media_upload": "上传多媒体",
+    "media_upload": "上传媒体",
     "repeat": "转发",
     "reply": "回复",
-    "favorite": "收藏",
+    "favorite": "喜欢",
     "user_settings": "用户设置",
     "reject_follow_request": "拒绝关注请求",
     "add_reaction": "添加互动",
@@ -709,7 +718,8 @@
     "error": {
       "base": "上传不成功。",
       "file_too_big": "文件太大了 [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-      "default": "迟些再试"
+      "default": "迟些再试",
+      "message": "上传错误：{0}"
     },
     "file_size_units": {
       "B": "B",
@@ -772,7 +782,7 @@
         "ftl_removal": "从“全部已知网络”时间线上移除"
       },
       "mrf_policies_desc": "MRF 策略会影响本实例的互通行为。以下策略已启用：",
-      "mrf_policies": "已启动的 MRF 策略",
+      "mrf_policies": "已启用的 MRF 策略",
       "keyword": {
         "ftl_removal": "从“全部已知网络”时间线上移除",
         "keyword_policies": "关键词策略",

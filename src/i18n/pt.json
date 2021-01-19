@@ -92,7 +92,7 @@
     "load_older": "Carregar notificações antigas",
     "notifications": "Notificações",
     "read": "Lido!",
-    "repeated_you": "repetiu o teu post",
+    "repeated_you": "partilhou o teu post",
     "no_more_notifications": "Sem mais notificações",
     "reacted_with": "reagiu com {0}",
     "migrated_to": "migrou para",
@@ -166,7 +166,7 @@
     "blocks_tab": "Bloqueios",
     "btnRadius": "Botões",
     "cBlue": "Azul (Responder, seguir)",
-    "cGreen": "Verde (Repetir)",
+    "cGreen": "Verde (Partilhar)",
     "cOrange": "Laranja (Favoritar)",
     "cRed": "Vermelho (Cancelar)",
     "change_password": "Mudar palavra-passe",
@@ -229,7 +229,7 @@
     "notification_visibility_follows": "Seguidas",
     "notification_visibility_likes": "Favoritos",
     "notification_visibility_mentions": "Menções",
-    "notification_visibility_repeats": "Repetições",
+    "notification_visibility_repeats": "Partilhas",
     "no_rich_text_description": "Remover formatação de todos os posts",
     "no_blocks": "Sem bloqueios",
     "no_mutes": "Sem silenciados",
@@ -525,8 +525,8 @@
     "conversation": "Conversa",
     "error_fetching": "Erro ao buscar atualizações",
     "load_older": "Carregar postagens antigas",
-    "no_retweet_hint": "Posts apenas para seguidores ou diretos não podem ser repetidos",
-    "repeated": "Repetido",
+    "no_retweet_hint": "Posts apenas para seguidores ou diretos não podem ser partilhados",
+    "repeated": "partilhado",
     "show_new": "Mostrar novas",
     "up_to_date": "Atualizado",
     "no_more_statuses": "Sem mais posts",
@@ -558,7 +558,7 @@
     "pinned": "Afixado",
     "unpin": "Desafixar do perfil",
     "delete": "Eliminar publicação",
-    "repeats": "Repetidos",
+    "repeats": "Partilhados",
     "favorites": "Favoritos"
   },
   "user_card": {
@@ -608,8 +608,8 @@
       "grant_admin": "Conceder permissões de Admin",
       "moderation": "Moderação"
     },
-    "show_repeats": "Mostrar repetidos",
-    "hide_repeats": "Ocultar repetidos",
+    "show_repeats": "Mostrar partilhas",
+    "hide_repeats": "Ocultar partilhas",
     "unsubscribe": "Retirar subscrição",
     "subscribe": "Subscrever",
     "report": "Denunciar",
@@ -628,7 +628,7 @@
   },
   "tool_tip": {
     "media_upload": "Envio de multimédia",
-    "repeat": "Repetir",
+    "repeat": "Partilhar",
     "reply": "Responder",
     "favorite": "Favoritar",
     "user_settings": "Configurações do usuário",
@@ -733,7 +733,7 @@
   "interactions": {
     "load_older": "Carregar interações mais antigas",
     "follows": "Novos seguidores",
-    "favs_repeats": "Gostos e Repetidos",
+    "favs_repeats": "Gostos e Partilhas",
     "moves": "O utilizador migra"
   },
   "errors": {

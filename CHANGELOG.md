@@ -3,8 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-
 ## [Unreleased]
+
+
+## [2.2.3] - 2021-01-18
 ### Added
 - Added Report button to status ellipsis menu for easier reporting
 
@@ -14,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Don't filter own posts when they hit your wordfilter
+
 
 ## [2.2.2] - 2020-12-22
 ### Added

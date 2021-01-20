@@ -541,7 +541,11 @@
     "mention": "Упомянуть",
     "show_repeats": "Показывать повторы",
     "hide_repeats": "Скрыть повторы",
-    "report": "Пожаловаться"
+    "report": "Пожаловаться",
+    "roles": {
+      "moderator": "Модератор",
+      "admin": "Администратор"
+    }
   },
   "user_profile": {
     "timeline_title": "Лента пользователя"

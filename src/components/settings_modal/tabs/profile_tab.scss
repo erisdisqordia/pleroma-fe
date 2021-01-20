@@ -111,16 +111,17 @@
   .profile-fields {
     display: flex;
 
-    &>.emoji-input {
+    & > .emoji-input {
       flex: 1 1 auto;
-      margin: 0 .2em .5em;
+      margin: 0 0.2em 0.5em;
       min-width: 0;
     }
 
-    &>.icon-container {
+    & > .button-unstyled {
       width: 20px;
       align-self: center;
-      margin: 0 .2em .5em;
+      margin: 0 0.2em 0.5em;
+      padding: 0 0.5em;
     }
   }
 }

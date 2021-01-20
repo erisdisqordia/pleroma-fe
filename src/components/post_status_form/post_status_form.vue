@@ -302,11 +302,12 @@
           :key="file.url"
           class="media-upload-wrapper"
         >
-          <FAIcon
-            class="fa-scale-110 fa-old-padding"
-            icon="times"
+          <button
+            class="button-unstyled hider"
             @click="removeMediaFile(file)"
-          />
+          >
+            <FAIcon icon="times" />
+          </button>
           <attachment
             :attachment="file"
             :set-media="() => $store.dispatch('setMedia', newStatus.files)"
@@ -516,26 +517,11 @@
   }
 
    .attachments .media-upload-wrapper {
-    padding: 0 0.5em;
+    position: relative;
 
     .attachment {
       margin: 0;
       padding: 0;
-      position: relative;
-    }
-
-    .fa-scale-110 fa-old-padding {
-      position: absolute;
-      margin: 10px;
-      margin: .75em;
-      padding: .5em;
-      background: rgba(230,230,230,0.6);
-      z-index: 2;
-      color: black;
-      border-radius: $fallback--attachmentRadius;
-      border-radius: var(--attachmentRadius, $fallback--attachmentRadius);
-      font-weight: bold;
-      cursor: pointer;
     }
   }
 

@@ -124,24 +124,24 @@
               :placeholder="$t('settings.profile_fields.value')"
             >
           </EmojiInput>
-          <div
-            class="icon-container"
+          <button
+            class="button-unstyled"
+            @click="deleteField(i)"
           >
             <FAIcon
               v-show="newFields.length > 1"
               icon="times"
-              @click="deleteField(i)"
             />
-          </div>
+          </button>
         </div>
-        <a
+        <button
           v-if="newFields.length < maxFields"
-          class="add-field faint"
+          class="add-field faint button-unstyled"
           @click="addField"
         >
           <FAIcon icon="plus" />
           {{ $t("settings.profile_fields.add_field") }}
-        </a>
+        </button>
       </div>
       <p>
         <Checkbox v-model="bot">

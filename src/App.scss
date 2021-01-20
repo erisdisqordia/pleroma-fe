@@ -178,6 +178,13 @@ a {
   &.-fullwidth {
     width: 100%;
   }
+
+  &.-hover-highlight {
+    &:hover svg {
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
+  }
 }
 
 input, textarea, .select, .input {

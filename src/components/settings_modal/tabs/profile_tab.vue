@@ -125,7 +125,7 @@
             >
           </EmojiInput>
           <button
-            class="button-unstyled"
+            class="button-unstyled -hover-highlight"
             @click="deleteField(i)"
           >
             <FAIcon
@@ -136,7 +136,7 @@
         </div>
         <button
           v-if="newFields.length < maxFields"
-          class="add-field faint button-unstyled"
+          class="add-field faint button-unstyled -hover-highlight"
           @click="addField"
         >
           <FAIcon icon="plus" />

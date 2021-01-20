@@ -83,7 +83,7 @@
                   v-if="!!visibleRole"
                   class="alert user-role"
                 >
-                  {{ visibleRole }}
+                  {{ $t(`user_card.roles.${visibleRole}`) }}
                 </span>
                 <span
                   v-if="user.bot"
@@ -507,7 +507,6 @@
 
     .user-role {
       flex: none;
-      text-transform: capitalize;
       color: $fallback--text;
       color: var(--alertNeutralText, $fallback--text);
       background-color: $fallback--fg;

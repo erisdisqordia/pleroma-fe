@@ -729,6 +729,10 @@
       "quarantine": "Disallow user posts from federating",
       "delete_user": "Delete user",
       "delete_user_confirmation": "Are you absolutely sure? This action cannot be undone."
+    },
+    "roles": {
+      "admin": "Admin",
+      "moderator": "Moderator"
     }
   },
   "user_profile": {

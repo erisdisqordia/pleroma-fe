@@ -191,7 +191,7 @@ export const parseUser = (data) => {
 
     // deactivated was changed to is_active in Pleroma 2.3.0
     // so check if is_active is present
-    output.deactivated = typeof data.pleroma.is_active !== undefined
+    output.deactivated = typeof data.pleroma.is_active !== 'undefined'
       ? !data.pleroma.is_active // new backend
       : data.pleroma.deactivated // old backend
 

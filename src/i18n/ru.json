@@ -183,7 +183,7 @@
     "change_password": "Сменить пароль",
     "change_password_error": "Произошла ошибка при попытке изменить пароль.",
     "changed_password": "Пароль изменён успешно!",
-    "collapse_subject": "Сворачивать посты с темой",
+    "collapse_subject": "Сворачивать статусы с темой",
     "confirm_new_password": "Подтверждение нового пароля",
     "current_avatar": "Текущий аватар",
     "current_password": "Текущий пароль",
@@ -486,7 +486,7 @@
     "error": "Ошибка при обновлении ленты: {0}"
   },
   "status": {
-    "bookmark": "В закладки",
+    "bookmark": "Добавить в закладки",
     "unbookmark": "Удалить из закладок",
     "status_deleted": "Пост удален",
     "reply_to": "Ответ",
@@ -494,7 +494,11 @@
     "favorites": "Понравилось",
     "unmute_conversation": "Прекратить игнорировать разговор",
     "mute_conversation": "Игнорировать разговор",
-    "thread_muted": "Разговор игнорируется"
+    "thread_muted": "Разговор игнорируется",
+    "external_source": "Перейти к источнику",
+    "delete_confirm": "Вы действительно хотите удалить данный статус?",
+    "delete": "Удалить",
+    "copy_link": "Скопировать ссылку"
   },
   "user_card": {
     "block": "Заблокировать",
@@ -536,7 +540,8 @@
     "media": "С вложениями",
     "mention": "Упомянуть",
     "show_repeats": "Показывать повторы",
-    "hide_repeats": "Скрыть повторы"
+    "hide_repeats": "Скрыть повторы",
+    "report": "Пожаловаться"
   },
   "user_profile": {
     "timeline_title": "Лента пользователя"

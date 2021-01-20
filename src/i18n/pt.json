@@ -615,7 +615,11 @@
     "report": "Denunciar",
     "message": "Mensagem",
     "mention": "Mencionar",
-    "hidden": "Ocultar"
+    "hidden": "Ocultar",
+    "roles": {
+      "moderator": "Moderador",
+      "admin": "Admin"
+    }
   },
   "user_profile": {
     "timeline_title": "Cronologia do Utilizador",

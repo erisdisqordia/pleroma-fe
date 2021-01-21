@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Don't filter own posts when they hit your wordfilter
+- Language picker now uses native language names
 
 
 ## [2.2.2] - 2020-12-22

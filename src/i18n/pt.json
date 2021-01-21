@@ -86,7 +86,7 @@
     "bookmarks": "Itens Guardados"
   },
   "notifications": {
-    "broken_favorite": "Estado desconhecido, a procurar…",
+    "broken_favorite": "Publicação desconhecida, a procurar…",
     "favorited_you": "gostou do teu post",
     "followed_you": "seguiu-te",
     "load_older": "Carregar notificações antigas",
@@ -100,7 +100,7 @@
     "error": "Erro ao obter notificações: {0}"
   },
   "post_status": {
-    "new_status": "Publicar novo estado",
+    "new_status": "Publicar nova publicação",
     "account_not_locked_warning": "A sua conta não é {0}. Qualquer pessoa pode seguir-te e ver os seus posts privados (só para seguidores).",
     "account_not_locked_warning_link": "restrito",
     "attachments_sensitive": "Marcar anexos como sensíveis",
@@ -125,7 +125,7 @@
       "private": "Esta publicação será apenas visível para os teus seguidores",
       "public": "Esta publicação será visível para todos"
     },
-    "empty_status_error": "Não consegues publicar um estado vazio e sem ficheiros",
+    "empty_status_error": "Não consegues publicar um post vazio e sem ficheiros",
     "preview_empty": "Vazio",
     "preview": "Pré-visualização",
     "media_description": "Descrição da multimédia",
@@ -548,8 +548,8 @@
     "thread_muted_and_words": ", contém:",
     "thread_muted": "Conversação silenciada",
     "external_source": "Fonte externa",
-    "copy_link": "Copiar o link do estado",
-    "status_unavailable": "Estado indisponível",
+    "copy_link": "Copiar o link do post",
+    "status_unavailable": "Publicação indisponível",
     "unmute_conversation": "Mostrar a conversação",
     "mute_conversation": "Silenciar a conversação",
     "delete_confirm": "Tens a certeza que desejas apagar a publicação?",

@@ -125,7 +125,7 @@
             >
           </EmojiInput>
           <button
-            class="button-unstyled -hover-highlight"
+            class="delete-field button-unstyled -hover-highlight"
             @click="deleteField(i)"
           >
             <FAIcon

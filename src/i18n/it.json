@@ -30,7 +30,7 @@
     "administration": "Amministrazione",
     "back": "Indietro",
     "interactions": "Interazioni",
-    "dms": "Messaggi diretti",
+    "dms": "Messaggi privati",
     "user_search": "Ricerca utenti",
     "search": "Ricerca",
     "who_to_follow": "Chi seguire",
@@ -44,7 +44,7 @@
     "notifications": "Notifiche",
     "read": "Letto!",
     "broken_favorite": "Stato sconosciuto, lo sto cercando…",
-    "favorited_you": "ha gradito il tuo messaggio",
+    "favorited_you": "gradisce il tuo messaggio",
     "load_older": "Carica notifiche precedenti",
     "repeated_you": "ha condiviso il tuo messaggio",
     "follow_request": "vuole seguirti",
@@ -519,18 +519,18 @@
     "register": "Registrati",
     "username": "Nome utente",
     "description": "Accedi con OAuth",
-    "hint": "Accedi per partecipare alla discussione",
+    "hint": "Accedi per conversare",
     "authentication_code": "Codice di autenticazione",
     "enter_recovery_code": "Inserisci un codice di recupero",
-    "enter_two_factor_code": "Inserisci un codice two-factor",
+    "enter_two_factor_code": "Inserisci un codice 2FA",
     "recovery_code": "Codice di recupero",
     "heading": {
-      "totp": "Autenticazione two-factor",
-      "recovery": "Recupero two-factor"
+      "totp": "Autenticazione 2FA",
+      "recovery": "Recupero 2FA"
     }
   },
   "post_status": {
-    "account_not_locked_warning": "Il tuo profilo non è {0}. Chiunque può seguirti e vedere i tuoi messaggi riservati ai tuoi seguaci.",
+    "account_not_locked_warning": "Il tuo profilo non è {0}. Chiunque può seguirti e vedere i tuoi messaggi per seguaci.",
     "account_not_locked_warning_link": "protetto",
     "attachments_sensitive": "Nascondi gli allegati",
     "content_type": {
@@ -540,7 +540,7 @@
       "text/html": "HTML"
     },
     "content_warning": "Oggetto (facoltativo)",
-    "default": "Sono appena atterrato a Fiumicino.",
+    "default": "Sono appena atterrato a Città Laggiù.",
     "direct_warning": "Questo post sarà visibile solo dagli utenti menzionati.",
     "posting": "Sto pubblicando",
     "scope": {
@@ -650,20 +650,20 @@
   },
   "polls": {
     "add_poll": "Sondaggio",
-    "add_option": "Alternativa",
+    "add_option": "Aggiungi opzione",
     "option": "Opzione",
     "votes": "voti",
     "vote": "Vota",
     "type": "Tipo di sondaggio",
     "single_choice": "Scelta singola",
     "multiple_choices": "Scelta multipla",
-    "expiry": "Scadenza",
-    "expires_in": "Scade fra {0}",
-    "expired": "Scaduto {0} fa",
+    "expiry": "Età",
+    "expires_in": "Chiude fra {0}",
+    "expired": "Chiuso {0} fa",
     "not_enough_options": "Aggiungi altre risposte"
   },
   "interactions": {
-    "favs_repeats": "Condivisi e preferiti",
+    "favs_repeats": "Condivisi e Graditi",
     "load_older": "Carica vecchie interazioni",
     "moves": "Utenti migrati",
     "follows": "Nuovi seguìti"
@@ -672,8 +672,8 @@
     "load_all": "Carico tutti i {emojiAmount} emoji",
     "load_all_hint": "Primi {saneAmount} emoji caricati, caricarli tutti potrebbe causare rallentamenti.",
     "unicode": "Emoji Unicode",
-    "custom": "Emoji personale",
-    "add_emoji": "Inserisci Emoji",
+    "custom": "Emoji della stanza",
+    "add_emoji": "Inserisci emoji",
     "search_emoji": "Cerca un emoji",
     "keep_open": "Tieni aperto il menù",
     "emoji": "Emoji",
@@ -688,7 +688,7 @@
     "remote_user_resolver": "Cerca utenti remoti"
   },
   "errors": {
-    "storage_unavailable": "Pleroma non ha potuto accedere ai dati del tuo browser. Le tue credenziali o le tue impostazioni locali non potranno essere salvate e potresti incontrare strani errori. Prova ad abilitare i cookie."
+    "storage_unavailable": "Pleroma non può accedere ai dati del tuo browser. Il tuo accesso o le tue impostazioni non saranno salvate e potresti incontrare strani errori. Prova ad abilitare i cookie."
   },
   "status": {
     "pinned": "Intestato",

@@ -487,7 +487,11 @@
     "follow_progress": "Richiedo…",
     "follow_sent": "Richiesta inviata!",
     "favorites": "Preferiti",
-    "message": "Contatta"
+    "message": "Contatta",
+    "roles": {
+      "moderator": "Moderatore",
+      "admin": "Amministratore"
+    }
   },
   "chat": {
     "title": "Chat"

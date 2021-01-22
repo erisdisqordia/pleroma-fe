@@ -188,7 +188,12 @@ export const parseUser = (data) => {
     output.follow_request_count = data.pleroma.follow_request_count
 
     output.tags = data.pleroma.tags
-    output.deactivated = data.pleroma.deactivated
+
+    // deactivated was changed to is_active in Pleroma 2.3.0
+    // so check if is_active is present
+    output.deactivated = typeof data.pleroma.is_active !== 'undefined'
+      ? !data.pleroma.is_active // new backend
+      : data.pleroma.deactivated // old backend
 
     output.notification_settings = data.pleroma.notification_settings
     output.unread_chat_count = data.pleroma.unread_chat_count

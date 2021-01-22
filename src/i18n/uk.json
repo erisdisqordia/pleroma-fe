@@ -25,7 +25,7 @@
   },
   "features_panel": {
     "gopher": "Gopher",
-    "pleroma_chat_messages": "Локальні балачки",
+    "pleroma_chat_messages": "Чати",
     "chat": "Міні-чат",
     "who_to_follow": "Кого відстежувати",
     "title": "Особливості",
@@ -135,7 +135,7 @@
     "error": "Помилка при оновленні сповіщень: {0}"
   },
   "nav": {
-    "chats": "Локальні балачки",
+    "chats": "Чати",
     "timelines": "Стрічки",
     "twkn": "Уся відома мережа",
     "about": "Інформація",

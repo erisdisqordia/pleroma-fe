@@ -109,7 +109,7 @@
           v-if="chat"
           @click="toggleDrawer"
         >
-          <router-link :to="{ name: 'chat' }">
+          <router-link :to="{ name: 'chat-panel' }">
             <FAIcon
               fixed-width
               class="fa-scale-110 fa-old-padding"

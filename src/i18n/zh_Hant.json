@@ -526,7 +526,8 @@
     "mute_import": "靜音導入",
     "mute_import_error": "導入靜音時出錯",
     "mute_export_button": "將靜音導出到csv文件",
-    "mute_export": "靜音導出"
+    "mute_export": "靜音導出",
+    "hide_wallpaper": "隱藏實例桌布"
   },
   "chats": {
     "more": "更多",

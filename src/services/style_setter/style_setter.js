@@ -244,7 +244,7 @@ export const generateShadows = (input, colors) => {
   }
 
   const cleanInputShadows = Object.fromEntries(
-    Object.entries(input.shadows)
+    Object.entries(input.shadows || {})
       .map(([name, shadowSlot]) => [
         name,
         // defaulting color to black to avoid potential problems

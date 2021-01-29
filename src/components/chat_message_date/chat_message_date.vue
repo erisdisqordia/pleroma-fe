@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import localeService from 'src/services/locale/locale.service.js'
+
 export default {
   name: 'Timeago',
   props: ['date'],
@@ -16,7 +18,7 @@ export default {
       if (this.date.getTime() === today.getTime()) {
         return this.$t('display_date.today')
       } else {
-        return this.date.toLocaleDateString('en', { day: 'numeric', month: 'long' })
+        return this.date.toLocaleDateString(localeService.internalToBrowserLocale(this.$i18n.locale), { day: 'numeric', month: 'long' })
       }
     }
   }

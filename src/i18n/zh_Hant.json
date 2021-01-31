@@ -25,7 +25,7 @@
     "add_poll": "增加投票"
   },
   "notifications": {
-    "reacted_with": "和 {0} 互動過",
+    "reacted_with": "作出了 {0} 的反應",
     "migrated_to": "遷移到",
     "no_more_notifications": "沒有更多的通知",
     "repeated_you": "轉發了你的發文",

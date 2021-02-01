@@ -23,23 +23,23 @@
         <div class="form-group">
           <div class="login-bottom">
             <div>
-              <a
-                href="#"
+              <button
+                class="button-unstyled -link"
                 @click.prevent="requireTOTP"
               >
                 {{ $t('login.enter_two_factor_code') }}
-              </a>
+              </button>
               <br>
-              <a
-                href="#"
+              <button
+                class="button-unstyled -link"
                 @click.prevent="abortMFA"
               >
                 {{ $t('general.cancel') }}
-              </a>
+              </button>
             </div>
             <button
               type="submit"
-              class="btn btn-default"
+              class="btn button-default"
             >
               {{ $t('general.verify') }}
             </button>
@@ -54,8 +54,9 @@
     >
       <div class="alert error">
         {{ error }}
-        <i
-          class="button-icon icon-cancel"
+        <FAIcon
+          class="fa-scale-110 fa-old-padding"
+          icon="times"
           @click="clearError"
         />
       </div>

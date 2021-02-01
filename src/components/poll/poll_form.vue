@@ -12,6 +12,7 @@
         <input
           :id="`poll-${index}`"
           v-model="options[index]"
+          size="1"
           class="poll-option-input"
           type="text"
           :placeholder="$t('polls.option')"
@@ -20,24 +21,26 @@
           @keydown.enter.stop.prevent="nextOption(index)"
         >
       </div>
-      <div
+      <button
         v-if="options.length > 2"
-        class="icon-container"
+        class="delete-option button-unstyled -hover-highlight"
+        @click="deleteOption(index)"
       >
-        <i
-          class="icon-cancel"
-          @click="deleteOption(index)"
-        />
-      </div>
+        <FAIcon icon="times" />
+      </button>
     </div>
-    <a
+    <button
       v-if="options.length < maxOptions"
-      class="add-option faint"
+      class="add-option faint button-unstyled -hover-highlight"
       @click="addOption"
     >
-      <i class="icon-plus" />
+      <FAIcon
+        icon="plus"
+        size="sm"
+      />
+
       {{ $t("polls.add_option") }}
-    </a>
+    </button>
     <div class="poll-type-expiry">
       <div
         class="poll-type"
@@ -55,7 +58,10 @@
             <option value="single">{{ $t('polls.single_choice') }}</option>
             <option value="multiple">{{ $t('polls.multiple_choices') }}</option>
           </select>
-          <i class="icon-down-open" />
+          <FAIcon
+            class="select-down-icon"
+            icon="chevron-down"
+          />
         </label>
       </div>
       <div
@@ -83,7 +89,10 @@
               {{ $t(`time.${unit}_short`, ['']) }}
             </option>
           </select>
-          <i class="icon-down-open" />
+          <FAIcon
+            class="select-down-icon"
+            icon="chevron-down"
+          />
         </label>
       </div>
     </div>
@@ -103,7 +112,7 @@
   .add-option {
     align-self: flex-start;
     padding-top: 0.25em;
-    cursor: pointer;
+    padding-left: 0.1em;
   }
 
   .poll-option {
@@ -122,10 +131,10 @@
     }
   }
 
-  .icon-container {
+  .delete-option {
     // Hack: Move the icon over the input box
-    width: 2em;
-    margin-left: -2em;
+    width: 1.5em;
+    margin-left: -1.5em;
     z-index: 1;
   }
 

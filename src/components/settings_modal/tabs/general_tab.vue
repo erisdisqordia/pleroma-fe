@@ -11,6 +11,11 @@
             {{ $t('settings.hide_isp') }}
           </BooleanSetting>
         </li>
+        <li v-if="instanceWallpaperUsed">
+          <Checkbox v-model="hideInstanceWallpaper">
+            {{ $t('settings.hide_wallpaper') }}
+          </Checkbox>
+        </li>
       </ul>
     </div>
     <div class="setting-item">
@@ -103,7 +108,10 @@
                   {{ subjectLineBehaviorDefaultValue == 'noop' ? $t('settings.instance_default_simple') : '' }}
                 </option>
               </select>
-              <i class="icon-down-open" />
+              <FAIcon
+                class="select-down-icon"
+                icon="chevron-down"
+              />
             </label>
           </div>
         </li>
@@ -127,7 +135,10 @@
                   {{ postContentTypeDefaultValue === postFormat ? $t('settings.instance_default_simple') : '' }}
                 </option>
               </select>
-              <i class="icon-down-open" />
+              <FAIcon
+                class="select-down-icon"
+                icon="chevron-down"
+              />
             </label>
           </div>
         </li>
@@ -222,7 +233,7 @@
                 v-if="!loopSilentAvailable"
                 class="unavailable"
               >
-                <i class="icon-globe" />! {{ $t('settings.limited_availability') }}
+                <FAIcon icon="globe" />! {{ $t('settings.limited_availability') }}
               </div>
             </li>
           </ul>

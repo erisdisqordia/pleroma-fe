@@ -17,6 +17,41 @@ import { highlightClass, highlightStyle } from '../../services/user_highlighter/
 import { muteWordHits } from '../../services/status_parser/status_parser.js'
 import { unescape, uniqBy } from 'lodash'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faEnvelope,
+  faLock,
+  faLockOpen,
+  faGlobe,
+  faTimes,
+  faRetweet,
+  faReply,
+  faPlusSquare,
+  faSmileBeam,
+  faEllipsisH,
+  faStar,
+  faEyeSlash,
+  faEye,
+  faThumbtack
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faEnvelope,
+  faGlobe,
+  faLock,
+  faLockOpen,
+  faTimes,
+  faRetweet,
+  faReply,
+  faPlusSquare,
+  faStar,
+  faSmileBeam,
+  faEllipsisH,
+  faEyeSlash,
+  faEye,
+  faThumbtack
+)
+
 const Status = {
   name: 'Status',
   components: {
@@ -122,6 +157,7 @@ const Status = {
       return muteWordHits(this.status, this.muteWords)
     },
     muted () {
+      if (this.statusoid.user.id === this.currentUser.id) return false
       const { status } = this
       const { reblog } = status
       const relationship = this.$store.getters.relationship(status.user.id)
@@ -227,13 +263,13 @@ const Status = {
     visibilityIcon (visibility) {
       switch (visibility) {
         case 'private':
-          return 'icon-lock'
+          return 'lock'
         case 'unlisted':
-          return 'icon-lock-open-alt'
+          return 'lock-open'
         case 'direct':
-          return 'icon-mail-alt'
+          return 'envelope'
         default:
-          return 'icon-globe'
+          return 'globe'
       }
     },
     showError (error) {

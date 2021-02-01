@@ -3,6 +3,18 @@ import Notifications from '../notifications/notifications.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 import GestureService from '../../services/gesture_service/gesture_service'
 import { mapGetters } from 'vuex'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faTimes,
+  faBell,
+  faBars
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faTimes,
+  faBell,
+  faBars
+)
 
 const MobileNav = {
   components: {

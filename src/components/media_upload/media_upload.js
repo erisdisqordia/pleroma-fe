@@ -2,6 +2,14 @@
 import statusPosterService from '../../services/status_poster/status_poster.service.js'
 import fileSizeFormatService from '../../services/file_size_format/file_size_format.js'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUpload, faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faUpload,
+  faCircleNotch
+)
+
 const mediaUpload = {
   data () {
     return {

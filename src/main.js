@@ -33,6 +33,8 @@ import VueClickOutside from 'v-click-outside'
 import PortalVue from 'portal-vue'
 import VBodyScrollLock from './directives/body_scroll_lock'
 
+import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
+
 import afterStoreSetup from './boot/after_store.js'
 
 const currentLocale = (window.navigator.language || 'en').split('-')[0]
@@ -44,6 +46,9 @@ Vue.use(VueChatScroll)
 Vue.use(VueClickOutside)
 Vue.use(PortalVue)
 Vue.use(VBodyScrollLock)
+
+Vue.component('FAIcon', FontAwesomeIcon)
+Vue.component('FALayers', FontAwesomeLayers)
 
 const i18n = new VueI18n({
   // By default, use the browser locale, we will update it if neccessary

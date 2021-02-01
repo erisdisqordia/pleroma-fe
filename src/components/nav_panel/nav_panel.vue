@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-panel">
+  <div class="NavPanel">
     <div class="panel panel-default">
       <ul>
         <li v-if="currentUser || !privateMode">
@@ -7,31 +7,47 @@
             :to="{ name: timelinesRoute }"
             :class="onTimelineRoute && 'router-link-active'"
           >
-            <i class="button-icon icon-home-2" />{{ $t("nav.timelines") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110"
+              icon="home"
+            />{{ $t("nav.timelines") }}
           </router-link>
         </li>
         <li v-if="currentUser">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
-            <i class="button-icon icon-bell-alt" />{{ $t("nav.interactions") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110"
+              icon="bell"
+            />{{ $t("nav.interactions") }}
           </router-link>
         </li>
         <li v-if="currentUser && pleromaChatMessagesAvailable">
           <router-link :to="{ name: 'chats', params: { username: currentUser.screen_name } }">
             <div
               v-if="unreadChatCount"
-              class="badge badge-notification unread-chat-count"
+              class="badge badge-notification"
             >
               {{ unreadChatCount }}
             </div>
-            <i class="button-icon icon-chat" />{{ $t("nav.chats") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110"
+              icon="comments"
+            />{{ $t("nav.chats") }}
           </router-link>
         </li>
         <li v-if="currentUser && currentUser.locked">
           <router-link :to="{ name: 'friend-requests' }">
-            <i class="button-icon icon-user-plus" />{{ $t("nav.friend_requests") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110"
+              icon="user-plus"
+            />{{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
-              class="badge follow-request-count"
+              class="badge badge-notification"
             >
               {{ followRequestCount }}
             </span>
@@ -39,7 +55,11 @@
         </li>
         <li>
           <router-link :to="{ name: 'about' }">
-            <i class="button-icon icon-info-circled" />{{ $t("nav.about") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110"
+              icon="info-circle"
+            />{{ $t("nav.about") }}
           </router-link>
         </li>
       </ul>
@@ -52,84 +72,88 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.nav-panel .panel {
-  overflow: hidden;
-  box-shadow: var(--panelShadow);
-}
-.nav-panel ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.follow-request-count {
-  margin: -6px 10px;
-  background-color: $fallback--bg;
-  background-color: var(--input, $fallback--faint);
-}
-
-.nav-panel li {
-  border-bottom: 1px solid;
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
-  padding: 0;
-
-  &:first-child a {
-    border-top-right-radius: $fallback--panelRadius;
-    border-top-right-radius: var(--panelRadius, $fallback--panelRadius);
-    border-top-left-radius: $fallback--panelRadius;
-    border-top-left-radius: var(--panelRadius, $fallback--panelRadius);
+.NavPanel {
+  .panel {
+    overflow: hidden;
+    box-shadow: var(--panelShadow);
   }
 
-  &:last-child a {
-    border-bottom-right-radius: $fallback--panelRadius;
-    border-bottom-right-radius: var(--panelRadius, $fallback--panelRadius);
-    border-bottom-left-radius: $fallback--panelRadius;
-    border-bottom-left-radius: var(--panelRadius, $fallback--panelRadius);
-  }
-}
-
-.nav-panel li:last-child {
-  border: none;
-}
-
-.nav-panel a {
-  display: block;
-  padding: 0.8em 0.85em;
-
-  &:hover {
-    background-color: $fallback--lightBg;
-    background-color: var(--selectedMenu, $fallback--lightBg);
-    color: $fallback--link;
-    color: var(--selectedMenuText, $fallback--link);
-    --faint: var(--selectedMenuFaintText, $fallback--faint);
-    --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
-    --lightText: var(--selectedMenuLightText, $fallback--lightText);
-    --icon: var(--selectedMenuIcon, $fallback--icon);
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  &.router-link-active {
-    font-weight: bolder;
-    background-color: $fallback--lightBg;
-    background-color: var(--selectedMenu, $fallback--lightBg);
-    color: $fallback--text;
-    color: var(--selectedMenuText, $fallback--text);
-    --faint: var(--selectedMenuFaintText, $fallback--faint);
-    --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
-    --lightText: var(--selectedMenuLightText, $fallback--lightText);
-    --icon: var(--selectedMenuIcon, $fallback--icon);
+  li {
+    position: relative;
+    border-bottom: 1px solid;
+    border-color: $fallback--border;
+    border-color: var(--border, $fallback--border);
+    padding: 0;
 
-    &:hover {
-      text-decoration: underline;
+    &:first-child a {
+      border-top-right-radius: $fallback--panelRadius;
+      border-top-right-radius: var(--panelRadius, $fallback--panelRadius);
+      border-top-left-radius: $fallback--panelRadius;
+      border-top-left-radius: var(--panelRadius, $fallback--panelRadius);
+    }
+
+    &:last-child a {
+      border-bottom-right-radius: $fallback--panelRadius;
+      border-bottom-right-radius: var(--panelRadius, $fallback--panelRadius);
+      border-bottom-left-radius: $fallback--panelRadius;
+      border-bottom-left-radius: var(--panelRadius, $fallback--panelRadius);
     }
   }
-}
 
-.nav-panel .button-icon {
-  margin-right: 0.5em;
-}
+  li:last-child {
+    border: none;
+  }
 
-.nav-panel .button-icon:before {
-  width: 1.1em;
+  a {
+    display: block;
+    box-sizing: border-box;
+    align-items: stretch;
+    height: 3.5em;
+    line-height: 3.5em;
+    padding: 0 1em;
+
+    &:hover {
+      background-color: $fallback--lightBg;
+      background-color: var(--selectedMenu, $fallback--lightBg);
+      color: $fallback--link;
+      color: var(--selectedMenuText, $fallback--link);
+      --faint: var(--selectedMenuFaintText, $fallback--faint);
+      --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
+      --lightText: var(--selectedMenuLightText, $fallback--lightText);
+      --icon: var(--selectedMenuIcon, $fallback--icon);
+    }
+
+    &.router-link-active {
+      font-weight: bolder;
+      background-color: $fallback--lightBg;
+      background-color: var(--selectedMenu, $fallback--lightBg);
+      color: $fallback--text;
+      color: var(--selectedMenuText, $fallback--text);
+      --faint: var(--selectedMenuFaintText, $fallback--faint);
+      --faintLink: var(--selectedMenuFaintLink, $fallback--faint);
+      --lightText: var(--selectedMenuLightText, $fallback--lightText);
+      --icon: var(--selectedMenuIcon, $fallback--icon);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .fa-scale-110 {
+    margin-right: 0.8em;
+  }
+
+  .badge {
+    position: absolute;
+    right: 0.6rem;
+    top: 1.25em;
+  }
 }
 </style>

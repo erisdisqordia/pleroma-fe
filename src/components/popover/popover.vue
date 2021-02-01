@@ -3,12 +3,13 @@
     @mouseenter="onMouseenter"
     @mouseleave="onMouseleave"
   >
-    <div
+    <button
       ref="trigger"
+      class="button-unstyled -fullwidth popover-trigger-button"
       @click="onClick"
     >
       <slot name="trigger" />
-    </div>
+    </button>
     <div
       v-if="!hidden"
       ref="content"
@@ -27,8 +28,12 @@
 
 <script src="./popover.js" />
 
-<style lang=scss>
+<style lang="scss">
 @import '../../_variables.scss';
+
+.popover-trigger-button {
+  display: block;
+}
 
 .popover {
   z-index: 8;
@@ -90,13 +95,14 @@
     box-shadow: none;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
 
     --btnText: var(--popoverText, $fallback--text);
 
     &-icon {
       padding-left: 0.5rem;
 
-      i {
+      svg {
         margin-right: 0.25rem;
         color: var(--menuPopoverIcon, $fallback--icon)
       }
@@ -111,7 +117,7 @@
       --faintLink: var(--selectedMenuPopoverFaintLink, $fallback--faint);
       --lightText: var(--selectedMenuPopoverLightText, $fallback--lightText);
       --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
-      i {
+      svg {
         color: var(--selectedMenuPopoverIcon, $fallback--icon);
       }
     }

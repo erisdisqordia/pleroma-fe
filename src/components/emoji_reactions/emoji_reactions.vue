@@ -6,7 +6,7 @@
       :users="accountsForEmoji[reaction.name]"
     >
       <button
-        class="emoji-reaction btn btn-default"
+        class="emoji-reaction btn button-default"
         :class="{ 'picked-reaction': reactedWith(reaction.name), 'not-clickable': !loggedIn }"
         @click="emojiOnClick(reaction.name, $event)"
         @mouseenter="fetchEmojiReactionsByIfMissing()"

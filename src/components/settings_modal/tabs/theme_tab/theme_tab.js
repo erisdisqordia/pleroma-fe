@@ -35,6 +35,14 @@ import ExportImport from 'src/components/export_import/export_import.vue'
 import Checkbox from 'src/components/checkbox/checkbox.vue'
 
 import Preview from './preview.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faChevronDown
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faChevronDown
+)
 
 // List of color values used in v1
 const v1OnlyNames = [

@@ -10,17 +10,20 @@
       class="alert error"
     >
       {{ error }}
-      <i
-        class="button-icon icon-cancel"
+      <span
+        class="fa-scale-110 fa-old-padding"
         @click="clearError"
-      />
+      >
+        <FAIcon icon="times" />
+      </span>
     </div>
     <template v-if="muted && !isPreview">
       <div class="status-container muted">
         <small class="status-username">
-          <i
+          <FAIcon
             v-if="muted && retweet"
-            class="button-icon icon-retweet"
+            class="fa-scale-110 fa-old-padding repeat-icon"
+            icon="retweet"
           />
           <router-link :to="userProfileLink">
             {{ status.user.screen_name }}
@@ -44,11 +47,15 @@
         >
           {{ muteWordHits.join(', ') }}
         </small>
-        <a
-          href="#"
-          class="unmute"
+        <button
+          class="unmute button-unstyled"
           @click.prevent="toggleMute"
-        ><i class="button-icon icon-eye-off" /></a>
+        >
+          <FAIcon
+            icon="eye-slash"
+            class="fa-scale-110 fa-old-padding"
+          />
+        </button>
       </div>
     </template>
     <template v-else>
@@ -56,7 +63,10 @@
         v-if="showPinned"
         class="pin"
       >
-        <i class="fa icon-pin faint" />
+        <FAIcon
+          icon="thumbtack"
+          class="faint"
+        />
         <span class="faint">{{ $t('status.pinned') }}</span>
       </div>
       <div
@@ -86,8 +96,9 @@
               :to="retweeterProfileLink"
             >{{ retweeter }}</router-link>
           </span>
-          <i
-            class="fa icon-retweet retweeted"
+          <FAIcon
+            icon="retweet"
+            class="repeat-icon"
             :title="$t('tool_tip.repeat')"
           />
           {{ $t('timeline.repeated') }}
@@ -167,38 +178,40 @@
                     :auto-update="60"
                   />
                 </router-link>
-                <div
+                <span
                   v-if="status.visibility"
-                  class="button-icon visibility-icon"
+                  class="visibility-icon"
+                  :title="status.visibility | capitalize"
                 >
-                  <i
-                    :class="visibilityIcon(status.visibility)"
-                    :title="status.visibility | capitalize"
+                  <FAIcon
+                    fixed-width
+                    class="fa-scale-110"
+                    :icon="visibilityIcon(status.visibility)"
                   />
-                </div>
-                <a
-                  v-if="!status.is_local && !isPreview"
-                  :href="status.external_url"
-                  target="_blank"
-                  class="source_url"
-                  title="Source"
+                </span>
+                <button
+                  v-if="expandable && !isPreview"
+                  class="button-unstyled"
+                  :title="$t('status.expand')"
+                  @click.prevent="toggleExpanded"
                 >
-                  <i class="button-icon icon-link-ext-alt" />
-                </a>
-                <template v-if="expandable && !isPreview">
-                  <a
-                    href="#"
-                    title="Expand"
-                    @click.prevent="toggleExpanded"
-                  >
-                    <i class="button-icon icon-plus-squared" />
-                  </a>
-                </template>
-                <a
+                  <FAIcon
+                    fixed-width
+                    class="fa-scale-110"
+                    icon="plus-square"
+                  />
+                </button>
+                <button
                   v-if="unmuted"
-                  href="#"
+                  class="button-unstyled"
                   @click.prevent="toggleMute"
-                ><i class="button-icon icon-eye-off" /></a>
+                >
+                  <FAIcon
+                    fixed-width
+                    icon="eye-slash"
+                    class="fa-scale-110"
+                  />
+                </button>
               </span>
             </div>
 
@@ -214,19 +227,22 @@
                   style="min-width: 0"
                   :class="{ '-strikethrough': !status.parent_visible }"
                 >
-                  <a
-                    class="reply-to"
-                    href="#"
+                  <button
+                    class="button-unstyled reply-to"
                     :aria-label="$t('tool_tip.reply')"
                     @click.prevent="gotoOriginal(status.in_reply_to_status_id)"
                   >
-                    <i class="button-icon reply-button icon-reply" />
+                    <FAIcon
+                      class="fa-scale-110 fa-old-padding"
+                      icon="reply"
+                      flip="horizontal"
+                    />
                     <span
                       class="faint-link reply-to-text"
                     >
                       {{ $t('status.reply_to') }}
                     </span>
-                  </a>
+                  </button>
                 </StatusPopover>
 
                 <span
@@ -259,11 +275,12 @@
                   :key="reply.id"
                   :status-id="reply.id"
                 >
-                  <a
-                    href="#"
-                    class="reply-link"
+                  <button
+                    class="button-unstyled -link reply-link"
                     @click.prevent="gotoOriginal(reply.id)"
-                  >{{ reply.name }}</a>
+                  >
+                    {{ reply.name }}
+                  </button>
                 </StatusPopover>
               </div>
             </div>
@@ -348,7 +365,6 @@
               @onSuccess="clearError"
             />
           </div>
-
         </div>
       </div>
       <div

@@ -61,7 +61,7 @@
             <button
               :disabled="loggingIn"
               type="submit"
-              class="btn btn-default"
+              class="btn button-default"
             >
               {{ $t('login.login') }}
             </button>
@@ -76,8 +76,9 @@
     >
       <div class="alert error">
         {{ error }}
-        <i
-          class="button-icon icon-cancel"
+        <FAIcon
+          class="fa-scale-110 fa-old-padding"
+          icon="times"
           @click="clearError"
         />
       </div>

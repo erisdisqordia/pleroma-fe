@@ -33,7 +33,9 @@ const loaders = {
   ro: () => import('./ro.json'),
   ru: () => import('./ru.json'),
   te: () => import('./te.json'),
-  zh: () => import('./zh.json')
+  uk: () => import('./uk.json'),
+  zh: () => import('./zh.json'),
+  zh_Hant: () => import('./zh_Hant.json')
 }
 
 const messages = {

@@ -1,6 +1,14 @@
 import { mapState } from 'vuex'
 import ProgressButton from '../progress_button/progress_button.vue'
 import Popover from '../popover/popover.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faEllipsisV
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faEllipsisV
+)
 
 const AccountActions = {
   props: [
@@ -27,7 +35,7 @@ const AccountActions = {
       this.$store.dispatch('unblockUser', this.user.id)
     },
     reportUser () {
-      this.$store.dispatch('openUserReportingModal', this.user.id)
+      this.$store.dispatch('openUserReportingModal', { userId: this.user.id })
     },
     openChat () {
       this.$router.push({

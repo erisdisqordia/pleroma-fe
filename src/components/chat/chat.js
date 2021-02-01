@@ -6,11 +6,24 @@ import PostStatusForm from '../post_status_form/post_status_form.vue'
 import ChatTitle from '../chat_title/chat_title.vue'
 import chatService from '../../services/chat_service/chat_service.js'
 import { promiseInterval } from '../../services/promise_interval/promise_interval.js'
-import { getScrollPosition, getNewTopPosition, isBottomedOut, scrollableContainerHeight } from './chat_layout_utils.js'
+import { getScrollPosition, getNewTopPosition, isBottomedOut, scrollableContainerHeight, isScrollable } from './chat_layout_utils.js'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faChevronDown,
+  faChevronLeft
+} from '@fortawesome/free-solid-svg-icons'
+import { buildFakeMessage } from '../../services/chat_utils/chat_utils.js'
+
+library.add(
+  faChevronDown,
+  faChevronLeft
+)
 
 const BOTTOMED_OUT_OFFSET = 10
 const JUMP_TO_BOTTOM_BUTTON_VISIBILITY_OFFSET = 150
 const SAFE_RESIZE_TIME_OFFSET = 100
+const MARK_AS_READ_DELAY = 1500
+const MAX_RETRIES = 10
 
 const Chat = {
   components: {
@@ -24,7 +37,8 @@ const Chat = {
       hoveredMessageChainId: undefined,
       lastScrollPosition: {},
       scrollableContainerHeight: '100%',
-      errorLoadingChat: false
+      errorLoadingChat: false,
+      messageRetriers: {}
     }
   },
   created () {
@@ -94,7 +108,7 @@ const Chat = {
       const bottomedOutBeforeUpdate = this.bottomedOut(BOTTOMED_OUT_OFFSET)
       this.$nextTick(() => {
         if (bottomedOutBeforeUpdate) {
-          this.scrollDown({ forceRead: !document.hidden })
+          this.scrollDown()
         }
       })
     },
@@ -200,7 +214,7 @@ const Chat = {
       this.$nextTick(() => {
         scrollable.scrollTo({ top: scrollable.scrollHeight, left: 0, behavior })
       })
-      if (forceRead || this.newMessageCount > 0) {
+      if (forceRead) {
         this.readChat()
       }
     },
@@ -208,7 +222,10 @@ const Chat = {
       if (!(this.currentChatMessageService && this.currentChatMessageService.maxId)) { return }
       if (document.hidden) { return }
       const lastReadId = this.currentChatMessageService.maxId
-      this.$store.dispatch('readChat', { id: this.currentChat.id, lastReadId })
+      this.$store.dispatch('readChat', {
+        id: this.currentChat.id,
+        lastReadId
+      })
     },
     bottomedOut (offset) {
       return isBottomedOut(this.$refs.scrollable, offset)
@@ -225,12 +242,18 @@ const Chat = {
       } else if (this.bottomedOut(JUMP_TO_BOTTOM_BUTTON_VISIBILITY_OFFSET)) {
         this.jumpToBottomButtonVisible = false
         if (this.newMessageCount > 0) {
-          this.readChat()
+          // Use a delay before marking as read to prevent situation where new messages
+          // arrive just as you're leaving the view and messages that you didn't actually
+          // get to see get marked as read.
+          window.setTimeout(() => {
+            // Don't mark as read if the element doesn't exist, user has left chat view
+            if (this.$el) this.readChat()
+          }, MARK_AS_READ_DELAY)
         }
       } else {
         this.jumpToBottomButtonVisible = true
       }
-    }, 100),
+    }, 200),
     handleScrollUp (positionBeforeLoading) {
       const positionAfterLoading = getScrollPosition(this.$refs.scrollable)
       this.$refs.scrollable.scrollTo({
@@ -264,6 +287,14 @@ const Chat = {
               if (isFirstFetch) {
                 this.updateScrollableContainerHeight()
               }
+
+              // In vertical screens, the first batch of fetched messages may not always take the
+              // full height of the scrollable container.
+              // If this is the case, we want to fetch the messages until the scrollable container
+              // is fully populated so that the user has the ability to scroll up and load the history.
+              if (!isScrollable(this.$refs.scrollable) && messages.length > 0) {
+                this.fetchChat({ maxId: this.currentChatMessageService.minId })
+              }
             })
           })
         })
@@ -292,42 +323,74 @@ const Chat = {
       })
       this.fetchChat({ isFirstFetch: true })
     },
-    sendMessage ({ status, media }) {
+    handleAttachmentPosting () {
+      this.$nextTick(() => {
+        this.handleResize()
+        // When the posting form size changes because of a media attachment, we need an extra resize
+        // to account for the potential delay in the DOM update.
+        setTimeout(() => {
+          this.updateScrollableContainerHeight()
+        }, SAFE_RESIZE_TIME_OFFSET)
+        this.scrollDown({ forceRead: true })
+      })
+    },
+    sendMessage ({ status, media, idempotencyKey }) {
       const params = {
         id: this.currentChat.id,
-        content: status
+        content: status,
+        idempotencyKey
       }
 
       if (media[0]) {
         params.mediaId = media[0].id
       }
 
-      return this.backendInteractor.sendChatMessage(params)
+      const fakeMessage = buildFakeMessage({
+        attachments: media,
+        chatId: this.currentChat.id,
+        content: status,
+        userId: this.currentUser.id,
+        idempotencyKey
+      })
+
+      this.$store.dispatch('addChatMessages', {
+        chatId: this.currentChat.id,
+        messages: [fakeMessage]
+      }).then(() => {
+        this.handleAttachmentPosting()
+      })
+
+      return this.doSendMessage({ params, fakeMessage, retriesLeft: MAX_RETRIES })
+    },
+    doSendMessage ({ params, fakeMessage, retriesLeft = MAX_RETRIES }) {
+      if (retriesLeft <= 0) return
+
+      this.backendInteractor.sendChatMessage(params)
         .then(data => {
           this.$store.dispatch('addChatMessages', {
             chatId: this.currentChat.id,
-            messages: [data],
-            updateMaxId: false
-          }).then(() => {
-            this.$nextTick(() => {
-              this.handleResize()
-              // When the posting form size changes because of a media attachment, we need an extra resize
-              // to account for the potential delay in the DOM update.
-              setTimeout(() => {
-                this.updateScrollableContainerHeight()
-              }, SAFE_RESIZE_TIME_OFFSET)
-              this.scrollDown({ forceRead: true })
-            })
+            updateMaxId: false,
+            messages: [{ ...data, fakeId: fakeMessage.id }]
           })
 
           return data
         })
         .catch(error => {
           console.error('Error sending message', error)
-          return {
-            error: this.$t('chats.error_sending_message')
+          this.$store.dispatch('handleMessageError', {
+            chatId: this.currentChat.id,
+            fakeId: fakeMessage.id,
+            isRetry: retriesLeft !== MAX_RETRIES
+          })
+          if ((error.statusCode >= 500 && error.statusCode < 600) || error.message === 'Failed to fetch') {
+            this.messageRetriers[fakeMessage.id] = setTimeout(() => {
+              this.doSendMessage({ params, fakeMessage, retriesLeft: retriesLeft - 1 })
+            }, 1000 * (2 ** (MAX_RETRIES - retriesLeft)))
           }
+          return {}
         })
+
+      return Promise.resolve(fakeMessage)
     },
     goBack () {
       this.$router.push({ name: 'chats', params: { username: this.currentUser.screen_name } })

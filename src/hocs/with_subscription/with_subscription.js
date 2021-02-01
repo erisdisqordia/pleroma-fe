@@ -3,6 +3,16 @@ import isEmpty from 'lodash/isEmpty'
 import { getComponentProps } from '../../services/component_utils/component_utils'
 import './with_subscription.scss'
 
+import { FontAwesomeIcon as FAIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faCircleNotch
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faCircleNotch
+)
+
 const withSubscription = ({
   fetch, // function to fetch entries and return a promise
   select, // function to select data from store
@@ -72,7 +82,7 @@ const withSubscription = ({
           <div class="with-subscription-loading">
             {this.error
               ? <a onClick={this.fetchData} class="alert error">{this.$t('general.generic_error')}</a>
-              : <i class="icon-spin3 animate-spin"/>
+              : <FAIcon spin icon="circle-notch"/>
             }
           </div>
         )

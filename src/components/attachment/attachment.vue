@@ -12,7 +12,7 @@
       :alt="attachment.description"
       :title="attachment.description"
     >
-      <span :class="placeholderIconClass" />
+      <FAIcon :icon="placeholderIconClass" />
       <b>{{ nsfw ? "NSFW / " : "" }}</b>{{ placeholderName }}
     </a>
   </div>
@@ -36,20 +36,19 @@
         :src="nsfwImage"
         :class="{'small': isSmall}"
       >
-      <i
+      <FAIcon
         v-if="type === 'video'"
-        class="play-icon icon-play-circled"
+        class="play-icon"
+        icon="play-circle"
       />
     </a>
-    <div
+    <button
       v-if="nsfw && hideNsfwLocal && !hidden"
-      class="hider"
+      class="button-unstyled hider"
+      @click.prevent="toggleHidden"
     >
-      <a
-        href="#"
-        @click.prevent="toggleHidden"
-      >Hide</a>
-    </div>
+      <FAIcon icon="times" />
+    </button>
 
     <a
       v-if="type === 'image' && (!hidden || preloadImage)"
@@ -83,9 +82,10 @@
         @play="$emit('play')"
         @pause="$emit('pause')"
       />
-      <i
+      <FAIcon
         v-if="!allowPlay"
-        class="play-icon icon-play-circled"
+        class="play-icon"
+        icon="play-circle"
       />
     </a>
 
@@ -142,6 +142,10 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 100%;
+
+    svg {
+      color: inherit;
+    }
   }
 
   .nsfw-placeholder {
@@ -228,15 +232,23 @@
   .hider {
     position: absolute;
     right: 0;
-    white-space: nowrap;
     margin: 10px;
-    padding: 5px;
-    background: rgba(230,230,230,0.6);
-    font-weight: bold;
+    padding: 0;
     z-index: 4;
-    line-height: 1;
     border-radius: $fallback--tooltipRadius;
     border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
+    text-align: center;
+    width: 2em;
+    height: 2em;
+    font-size: 1.25em;
+    // TODO: theming? hard to theme with unknown background image color
+    background: rgba(230, 230, 230, 0.7);
+    .svg-inline--fa {
+      color: rgba(0, 0, 0, 0.6);
+    }
+    &:hover .svg-inline--fa {
+      color: rgba(0, 0, 0, 0.9);
+    }
   }
 
   video {

@@ -2,6 +2,16 @@ import BooleanSetting from '../helpers/boolean_setting.vue'
 import InterfaceLanguageSwitcher from 'src/components/interface_language_switcher/interface_language_switcher.vue'
 
 import SharedComputedObject from '../helpers/shared_computed_object.js'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faChevronDown,
+  faGlobe
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faChevronDown,
+  faGlobe
+)
 
 const GeneralTab = {
   data () {
@@ -24,6 +34,10 @@ const GeneralTab = {
       return this.$store.state.instance.postFormats || []
     },
     instanceSpecificPanelPresent () { return this.$store.state.instance.showInstanceSpecificPanel },
+    instanceWallpaperUsed () {
+      return this.$store.state.instance.background &&
+        !this.$store.state.users.currentUser.background_image
+    },
     ...SharedComputedObject()
   }
 }

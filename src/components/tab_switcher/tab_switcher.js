@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { mapState } from 'vuex'
+import { FontAwesomeIcon as FAIcon } from '@fortawesome/vue-fontawesome'
 
 import './tab_switcher.scss'
 
@@ -80,7 +81,7 @@ export default Vue.component('tab-switcher', {
     const tabs = this.$slots.default
       .map((slot, index) => {
         if (!slot.tag) return
-        const classesTab = ['tab']
+        const classesTab = ['tab', 'button-default']
         const classesWrapper = ['tab-wrapper']
         if (this.activeIndex === index) {
           classesTab.push('active')
@@ -107,7 +108,7 @@ export default Vue.component('tab-switcher', {
               class={classesTab.join(' ')}
               type="button"
             >
-              {!slot.data.attrs.icon ? '' : (<i class={'tab-icon icon-' + slot.data.attrs.icon}/>)}
+              {!slot.data.attrs.icon ? '' : (<FAIcon class="tab-icon" size="2x" fixed-width icon={slot.data.attrs.icon}/>)}
               <span class="text">
                 {slot.data.attrs.label}
               </span>

@@ -4,7 +4,7 @@
   display: flex;
 
   .tab-icon {
-    font-size: 2em;
+    margin: 0.2em auto;
     display: block;
   }
 
@@ -91,7 +91,7 @@
         flex-direction: column;
 
         @media all and (max-width: 800px) {
-          min-width: 1em;
+          min-width: 4em;
         }
 
         &:not(.active)::after {

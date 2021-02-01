@@ -1,29 +1,38 @@
 <template>
-  <div v-if="loggedIn">
-    <template v-if="visibility !== 'private' && visibility !== 'direct'">
-      <i
-        :class="classes"
-        class="button-icon retweet-button icon-retweet rt-active"
-        :title="$t('tool_tip.repeat')"
-        @click.prevent="retweet()"
+  <div class="RetweetButton">
+    <button
+      v-if="visibility !== 'private' && visibility !== 'direct' && loggedIn"
+      class="button-unstyled interactive"
+      :class="status.repeated && '-repeated'"
+      :title="$t('tool_tip.repeat')"
+      @click.prevent="retweet()"
+    >
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        icon="retweet"
+        :spin="animated"
       />
-      <span v-if="!mergedConfig.hidePostStats && status.repeat_num > 0">{{ status.repeat_num }}</span>
-    </template>
-    <template v-else>
-      <i
-        :class="classes"
-        class="button-icon icon-lock"
+    </button>
+    <span v-else-if="loggedIn">
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        icon="lock"
         :title="$t('timeline.no_retweet_hint')"
       />
-    </template>
-  </div>
-  <div v-else-if="!loggedIn">
-    <i
-      :class="classes"
-      class="button-icon icon-retweet"
-      :title="$t('tool_tip.repeat')"
-    />
-    <span v-if="!mergedConfig.hidePostStats && status.repeat_num > 0">{{ status.repeat_num }}</span>
+    </span>
+    <span v-else>
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        icon="retweet"
+        :title="$t('tool_tip.repeat')"
+      />
+    </span>
+    <span
+      v-if="!mergedConfig.hidePostStats && status.repeat_num > 0"
+      class="no-event"
+    >
+      {{ status.repeat_num }}
+    </span>
   </div>
 </template>
 
@@ -31,16 +40,30 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
-.rt-active {
-  cursor: pointer;
-  animation-duration: 0.6s;
-  &:hover {
-    color: $fallback--cGreen;
-    color: var(--cGreen, $fallback--cGreen);
+
+.RetweetButton {
+  display: flex;
+
+  > :first-child {
+    padding: 10px;
+    margin: -10px -8px -10px -10px;
   }
-}
-.icon-retweet.retweeted {
-  color: $fallback--cGreen;
-  color: var(--cGreen, $fallback--cGreen);
+
+  .action-counter {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .interactive {
+    .svg-inline--fa {
+      animation-duration: 0.6s;
+    }
+
+    &:hover .svg-inline--fa,
+    &.-repeated .svg-inline--fa {
+      color: $fallback--cGreen;
+      color: var(--cGreen, $fallback--cGreen);
+    }
+  }
 }
 </style>

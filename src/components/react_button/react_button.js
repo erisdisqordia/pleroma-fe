@@ -1,4 +1,8 @@
 import Popover from '../popover/popover.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSmileBeam } from '@fortawesome/free-regular-svg-icons'
+
+library.add(faSmileBeam)
 
 const ReactButton = {
   props: ['status'],
@@ -23,13 +27,21 @@ const ReactButton = {
   },
   computed: {
     commonEmojis () {
-      return ['👍', '😠', '👀', '😂', '🔥']
+      return [
+        { displayText: 'thumbsup', replacement: '👍' },
+        { displayText: 'angry', replacement: '😠' },
+        { displayText: 'eyes', replacement: '👀' },
+        { displayText: 'joy', replacement: '😂' },
+        { displayText: 'fire', replacement: '🔥' }
+      ]
     },
     emojis () {
       if (this.filterWord !== '') {
         const filterWordLowercase = this.filterWord.toLowerCase()
         let orderedEmojiList = []
         for (const emoji of this.$store.state.instance.emoji) {
+          if (emoji.replacement === this.filterWord) return [emoji]
+
           const indexOfFilterWord = emoji.displayText.toLowerCase().indexOf(filterWordLowercase)
           if (indexOfFilterWord > -1) {
             if (!Array.isArray(orderedEmojiList[indexOfFilterWord])) {

@@ -21,7 +21,10 @@
               :user="user"
             />
             <div class="user-info-avatar-link-overlay">
-              <i class="button-icon icon-zoom-in" />
+              <FAIcon
+                class="fa-scale-110 fa-old-padding"
+                icon="search-plus"
+              />
             </div>
           </a>
           <router-link
@@ -54,8 +57,12 @@
                 v-if="isOtherUser && !user.is_local"
                 :href="user.statusnet_profile_url"
                 target="_blank"
+                class="external-link-button"
               >
-                <i class="icon-link-ext usersettings" />
+                <FAIcon
+                  class="icon"
+                  icon="external-link-alt"
+                />
               </a>
               <AccountActions
                 v-if="isOtherUser && loggedIn"
@@ -76,7 +83,7 @@
                   v-if="!!visibleRole"
                   class="alert user-role"
                 >
-                  {{ visibleRole }}
+                  {{ $t(`user_card.roles.${visibleRole}`) }}
                 </span>
                 <span
                   v-if="user.bot"
@@ -85,7 +92,13 @@
                   bot
                 </span>
               </template>
-              <span v-if="user.locked"><i class="icon icon-lock" /></span>
+              <span v-if="user.locked">
+                <FAIcon
+                  class="lock-icon"
+                  icon="lock"
+                  size="sm"
+                />
+              </span>
               <span
                 v-if="!mergedConfig.hideUserStats && !hideBio"
                 class="dailyAvg"
@@ -133,7 +146,10 @@
                 <option value="striped">Striped bg</option>
                 <option value="side">Side stripe</option>
               </select>
-              <i class="icon-down-open" />
+              <FAIcon
+                class="select-down-icon"
+                icon="chevron-down"
+              />
             </label>
           </div>
         </div>
@@ -146,33 +162,44 @@
             <template v-if="relationship.following">
               <ProgressButton
                 v-if="!relationship.subscribing"
-                class="btn btn-default"
+                class="btn button-default"
                 :click="subscribeUser"
                 :title="$t('user_card.subscribe')"
               >
-                <i class="icon-bell-alt" />
+                <FAIcon icon="bell" />
               </ProgressButton>
               <ProgressButton
                 v-else
-                class="btn btn-default toggled"
+                class="btn button-default toggled"
                 :click="unsubscribeUser"
                 :title="$t('user_card.unsubscribe')"
               >
-                <i class="icon-bell-ringing-o" />
+                <FALayers>
+                  <FAIcon
+                    icon="rss"
+                    transform="left-5 shrink-6 up-3 rotate-20"
+                    flip="horizontal"
+                  />
+                  <FAIcon
+                    icon="rss"
+                    transform="right-5 shrink-6 up-3 rotate-20"
+                  />
+                  <FAIcon icon="bell" />
+                </FALayers>
               </ProgressButton>
             </template>
           </div>
           <div>
             <button
               v-if="relationship.muting"
-              class="btn btn-default btn-block toggled"
+              class="btn button-default btn-block toggled"
               @click="unmuteUser"
             >
               {{ $t('user_card.muted') }}
             </button>
             <button
               v-else
-              class="btn btn-default btn-block"
+              class="btn button-default btn-block"
               @click="muteUser"
             >
               {{ $t('user_card.mute') }}
@@ -180,7 +207,7 @@
           </div>
           <div>
             <button
-              class="btn btn-default btn-block"
+              class="btn button-default btn-block"
               @click="mentionUser"
             >
               {{ $t('user_card.mention') }}
@@ -255,6 +282,11 @@
 .user-card {
   position: relative;
 
+  &:hover .Avatar {
+    --_still-image-img-visibility: visible;
+    --_still-image-canvas-visibility: hidden;
+  }
+
   .panel-heading {
     padding: .5em 0;
     text-align: center;
@@ -283,7 +315,7 @@
     mask: linear-gradient(to top, white, transparent) bottom no-repeat,
           linear-gradient(to top, white, white);
     // Autoprefixed seem to ignore this one, and also syntax is different
-    -webkit-mask-composite: xor;
+                                                 -webkit-mask-composite: xor;
     mask-composite: exclude;
     background-size: cover;
     mask-size: 100% 60%;
@@ -355,18 +387,15 @@
     max-height: 56px;
 
     .Avatar {
+      --_avatarShadowBox: var(--avatarShadow);
+      --_avatarShadowFilter: var(--avatarShadowFilter);
+      --_avatarShadowInset: var(--avatarShadowInset);
+
       flex: 1 0 100%;
       width: 56px;
       height: 56px;
-      box-shadow: 0px 1px 8px rgba(0,0,0,0.75);
-      box-shadow: var(--avatarShadow);
       object-fit: cover;
     }
-  }
-
-  &:hover .Avatar {
-    --still-image-img: visible;
-    --still-image-canvas: hidden;
   }
 
   &-avatar-link {
@@ -388,7 +417,7 @@
       opacity: 0;
       transition: opacity .2s ease;
 
-      i {
+      svg {
         color: #FFF;
       }
     }
@@ -398,10 +427,17 @@
     }
   }
 
-  .usersettings {
-    color: $fallback--lightText;
-    color: var(--lightText, $fallback--lightText);
-    opacity: .8;
+  .external-link-button {
+    cursor: pointer;
+    width: 2.5em;
+    text-align: center;
+    margin: -0.5em 0;
+    padding: 0.5em 0;
+
+    &:not(:hover) .icon {
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
   }
 
   .user-summary {
@@ -447,6 +483,10 @@
     font-weight: light;
     font-size: 15px;
 
+    .lock-icon {
+      margin-left: 0.5em;
+    }
+
     .user-screen-name {
       min-width: 1px;
       flex: 0 1 auto;
@@ -467,7 +507,6 @@
 
     .user-role {
       flex: none;
-      text-transform: capitalize;
       color: $fallback--text;
       color: var(--alertNeutralText, $fallback--text);
       background-color: $fallback--fg;
@@ -508,7 +547,7 @@
         padding-bottom: 0;
         flex: 1 0 auto;
       }
-      .userHighlightSel.select i {
+      .userHighlightSel.select svg {
         line-height: 22px;
       }
 

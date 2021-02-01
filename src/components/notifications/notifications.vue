@@ -15,16 +15,9 @@
             class="badge badge-notification unseen-count"
           >{{ unseenCount }}</span>
         </div>
-        <div
-          v-if="error"
-          class="loadmore-error alert error"
-          @click.prevent
-        >
-          {{ $t('timeline.error_fetching') }}
-        </div>
         <button
           v-if="unseenCount"
-          class="read-button"
+          class="button-default read-button"
           @click.prevent="markAsSeen"
         >
           {{ $t('notifications.read') }}
@@ -48,20 +41,24 @@
         >
           {{ $t('notifications.no_more_notifications') }}
         </div>
-        <a
+        <button
           v-else-if="!loading"
-          href="#"
+          class="button-unstyled -link -fullwidth"
           @click.prevent="fetchOlderNotifications()"
         >
           <div class="new-status-notification text-center panel-footer">
             {{ minimalMode ? $t('interactions.load_older') : $t('notifications.load_older') }}
           </div>
-        </a>
+        </button>
         <div
           v-else
           class="new-status-notification text-center panel-footer"
         >
-          <i class="icon-spin3 animate-spin" />
+          <FAIcon
+            icon="circle-notch"
+            spin
+            size="lg"
+          />
         </div>
       </div>
     </div>

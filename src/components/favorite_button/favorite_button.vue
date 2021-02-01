@@ -1,20 +1,31 @@
 <template>
-  <div v-if="loggedIn">
-    <i
-      :class="classes"
-      class="button-icon favorite-button fav-active"
+  <div class="FavoriteButton">
+    <button
+      v-if="loggedIn"
+      class="button-unstyled interactive"
+      :class="status.favorited && '-favorited'"
       :title="$t('tool_tip.favorite')"
       @click.prevent="favorite()"
-    />
-    <span v-if="!mergedConfig.hidePostStats && status.fave_num > 0">{{ status.fave_num }}</span>
-  </div>
-  <div v-else>
-    <i
-      :class="classes"
-      class="button-icon favorite-button"
-      :title="$t('tool_tip.favorite')"
-    />
-    <span v-if="!mergedConfig.hidePostStats && status.fave_num > 0">{{ status.fave_num }}</span>
+    >
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        :icon="[status.favorited ? 'fas' : 'far', 'star']"
+        :spin="animated"
+      />
+    </button>
+    <span v-else>
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        :title="$t('tool_tip.favorite')"
+        :icon="['far', 'star']"
+      />
+    </span>
+    <span
+      v-if="!mergedConfig.hidePostStats && status.fave_num > 0"
+      class="action-counter"
+    >
+      {{ status.fave_num }}
+    </span>
   </div>
 </template>
 
@@ -23,18 +34,29 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.fav-active {
-  cursor: pointer;
-  animation-duration: 0.6s;
+.FavoriteButton {
+  display: flex;
 
-  &:hover {
-    color: $fallback--cOrange;
-    color: var(--cOrange, $fallback--cOrange);
+  > :first-child {
+    padding: 10px;
+    margin: -10px -8px -10px -10px;
   }
-}
 
-.favorite-button.icon-star {
-  color: $fallback--cOrange;
-  color: var(--cOrange, $fallback--cOrange);
+  .action-counter {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .interactive {
+    .svg-inline--fa {
+      animation-duration: 0.6s;
+    }
+
+    &:hover .svg-inline--fa,
+    &.-favorited .svg-inline--fa {
+      color: $fallback--cOrange;
+      color: var(--cOrange, $fallback--cOrange);
+    }
+  }
 }
 </style>

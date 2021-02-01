@@ -2,6 +2,34 @@ import { mapState, mapGetters } from 'vuex'
 import UserCard from '../user_card/user_card.vue'
 import { unseenNotificationsFromStore } from '../../services/notification_utils/notification_utils'
 import GestureService from '../../services/gesture_service/gesture_service'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faSignInAlt,
+  faSignOutAlt,
+  faHome,
+  faComments,
+  faBell,
+  faUserPlus,
+  faBullhorn,
+  faSearch,
+  faTachometerAlt,
+  faCog,
+  faInfoCircle
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faSignInAlt,
+  faSignOutAlt,
+  faHome,
+  faComments,
+  faBell,
+  faUserPlus,
+  faBullhorn,
+  faSearch,
+  faTachometerAlt,
+  faCog,
+  faInfoCircle
+)
 
 const SideDrawer = {
   props: [ 'logout' ],

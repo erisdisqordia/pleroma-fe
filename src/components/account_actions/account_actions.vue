@@ -1,9 +1,10 @@
 <template>
-  <div class="account-actions">
+  <div class="AccountActions">
     <Popover
       trigger="click"
       placement="bottom"
       :bound-to="{ x: 'container' }"
+      remove-padding
     >
       <div
         slot="content"
@@ -13,14 +14,14 @@
           <template v-if="relationship.following">
             <button
               v-if="relationship.showing_reblogs"
-              class="btn btn-default dropdown-item"
+              class="btn button-default dropdown-item"
               @click="hideRepeats"
             >
               {{ $t('user_card.hide_repeats') }}
             </button>
             <button
               v-if="!relationship.showing_reblogs"
-              class="btn btn-default dropdown-item"
+              class="btn button-default dropdown-item"
               @click="showRepeats"
             >
               {{ $t('user_card.show_repeats') }}
@@ -32,27 +33,27 @@
           </template>
           <button
             v-if="relationship.blocking"
-            class="btn btn-default btn-block dropdown-item"
+            class="btn button-default btn-block dropdown-item"
             @click="unblockUser"
           >
             {{ $t('user_card.unblock') }}
           </button>
           <button
             v-else
-            class="btn btn-default btn-block dropdown-item"
+            class="btn button-default btn-block dropdown-item"
             @click="blockUser"
           >
             {{ $t('user_card.block') }}
           </button>
           <button
-            class="btn btn-default btn-block dropdown-item"
+            class="btn button-default btn-block dropdown-item"
             @click="reportUser"
           >
             {{ $t('user_card.report') }}
           </button>
           <button
             v-if="pleromaChatMessagesAvailable"
-            class="btn btn-default btn-block dropdown-item"
+            class="btn button-default btn-block dropdown-item"
             @click="openChat"
           >
             {{ $t('user_card.message') }}
@@ -61,9 +62,12 @@
       </div>
       <div
         slot="trigger"
-        class="btn btn-default ellipsis-button"
+        class="ellipsis-button"
       >
-        <i class="icon-ellipsis trigger-button" />
+        <FAIcon
+          class="icon"
+          icon="ellipsis-v"
+        />
       </div>
     </Popover>
   </div>
@@ -73,22 +77,22 @@
 
 <style lang="scss">
 @import '../../_variables.scss';
-.account-actions {
-  margin: 0 .8em;
-}
+.AccountActions {
+  button.dropdown-item {
+    margin-left: 0;
+  }
 
-.account-actions button.dropdown-item {
-  margin-left: 0;
-}
+  .ellipsis-button {
+    cursor: pointer;
+    width: 2.5em;
+    margin: -0.5em 0;
+    padding: 0.5em 0;
+    text-align: center;
 
-.account-actions .trigger-button {
-  color: $fallback--lightText;
-  color: var(--lightText, $fallback--lightText);
-  opacity: .8;
-  cursor: pointer;
-  &:hover {
-    color: $fallback--text;
-    color: var(--text, $fallback--text);
+    &:not(:hover) .icon {
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
   }
 }
 </style>

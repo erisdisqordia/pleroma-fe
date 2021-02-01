@@ -1,9 +1,11 @@
 <template>
   <Popover
+    class="ExtraButtons"
     trigger="click"
     placement="top"
-    class="extra-button-popover"
+    :offset="{ y: 5 }"
     :bound-to="{ x: 'container' }"
+    remove-padding
   >
     <div
       slot="content"
@@ -12,71 +14,122 @@
       <div class="dropdown-menu">
         <button
           v-if="canMute && !status.thread_muted"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="muteConversation"
         >
-          <i class="icon-eye-off" /><span>{{ $t("status.mute_conversation") }}</span>
+          <FAIcon
+            fixed-width
+            icon="eye-slash"
+          /><span>{{ $t("status.mute_conversation") }}</span>
         </button>
         <button
           v-if="canMute && status.thread_muted"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="unmuteConversation"
         >
-          <i class="icon-eye-off" /><span>{{ $t("status.unmute_conversation") }}</span>
+          <FAIcon
+            fixed-width
+            icon="eye-slash"
+          /><span>{{ $t("status.unmute_conversation") }}</span>
         </button>
         <button
           v-if="!status.pinned && canPin"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="pinStatus"
           @click="close"
         >
-          <i class="icon-pin" /><span>{{ $t("status.pin") }}</span>
+          <FAIcon
+            fixed-width
+            icon="thumbtack"
+          /><span>{{ $t("status.pin") }}</span>
         </button>
         <button
           v-if="status.pinned && canPin"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="unpinStatus"
           @click="close"
         >
-          <i class="icon-pin" /><span>{{ $t("status.unpin") }}</span>
+          <FAIcon
+            fixed-width
+            icon="thumbtack"
+          /><span>{{ $t("status.unpin") }}</span>
         </button>
         <button
           v-if="!status.bookmarked"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="bookmarkStatus"
           @click="close"
         >
-          <i class="icon-bookmark-empty" /><span>{{ $t("status.bookmark") }}</span>
+          <FAIcon
+            fixed-width
+            :icon="['far', 'bookmark']"
+          /><span>{{ $t("status.bookmark") }}</span>
         </button>
         <button
           v-if="status.bookmarked"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="unbookmarkStatus"
           @click="close"
         >
-          <i class="icon-bookmark" /><span>{{ $t("status.unbookmark") }}</span>
+          <FAIcon
+            fixed-width
+            icon="bookmark"
+          /><span>{{ $t("status.unbookmark") }}</span>
         </button>
         <button
           v-if="canDelete"
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="deleteStatus"
           @click="close"
         >
-          <i class="icon-cancel" /><span>{{ $t("status.delete") }}</span>
+          <FAIcon
+            fixed-width
+            icon="times"
+          /><span>{{ $t("status.delete") }}</span>
         </button>
         <button
-          class="dropdown-item dropdown-item-icon"
+          class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="copyLink"
           @click="close"
         >
-          <i class="icon-share" /><span>{{ $t("status.copy_link") }}</span>
+          <FAIcon
+            fixed-width
+            icon="share-alt"
+          /><span>{{ $t("status.copy_link") }}</span>
+        </button>
+        <a
+          v-if="!status.is_local"
+          class="button-default dropdown-item dropdown-item-icon"
+          title="Source"
+          :href="status.external_url"
+          target="_blank"
+        >
+          <FAIcon
+            fixed-width
+            icon="external-link-alt"
+          /><span>{{ $t("status.external_source") }}</span>
+        </a>
+        <button
+          class="button-default dropdown-item dropdown-item-icon"
+          @click.prevent="reportStatus"
+          @click="close"
+        >
+          <FAIcon
+            fixed-width
+            :icon="['far', 'flag']"
+          /><span>{{ $t("user_card.report") }}</span>
         </button>
       </div>
     </div>
-    <i
+    <span
       slot="trigger"
-      class="icon-ellipsis button-icon"
-    />
+      class="popover-trigger"
+    >
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        icon="ellipsis-h"
+      />
+    </span>
   </Popover>
 </template>
 
@@ -85,13 +138,16 @@
 <style lang="scss">
 @import '../../_variables.scss';
 
-.icon-ellipsis {
-  cursor: pointer;
+.ExtraButtons {
+  .popover-trigger {
+    position: static;
+    padding: 10px;
+    margin: -10px;
 
-  &:hover,
-  .extra-button-popover.open & {
-    color: $fallback--text;
-    color: var(--text, $fallback--text);
+    &:hover .svg-inline--fa {
+      color: $fallback--text;
+      color: var(--text, $fallback--text);
+    }
   }
 }
 </style>

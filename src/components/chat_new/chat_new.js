@@ -1,6 +1,16 @@
 import { mapState, mapGetters } from 'vuex'
 import BasicUserCard from '../basic_user_card/basic_user_card.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faSearch,
+  faChevronLeft
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faSearch,
+  faChevronLeft
+)
 
 const chatNew = {
   components: {

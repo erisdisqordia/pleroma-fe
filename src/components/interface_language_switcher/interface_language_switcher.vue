@@ -12,31 +12,39 @@
         v-model="language"
       >
         <option
-          v-for="(langCode, i) in languageCodes"
-          :key="langCode"
-          :value="langCode"
+          v-for="lang in languages"
+          :key="lang.code"
+          :value="lang.code"
         >
-          {{ languageNames[i] }}
+          {{ lang.name }}
         </option>
       </select>
-      <i class="icon-down-open" />
+      <FAIcon
+        class="select-down-icon"
+        icon="chevron-down"
+      />
     </label>
   </div>
 </template>
 
 <script>
 import languagesObject from '../../i18n/messages'
+import localeService from '../../services/locale/locale.service.js'
 import ISO6391 from 'iso-639-1'
 import _ from 'lodash'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faChevronDown
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faChevronDown
+)
 
 export default {
   computed: {
-    languageCodes () {
-      return languagesObject.languages
-    },
-
-    languageNames () {
-      return _.map(this.languageCodes, this.getLanguageName)
+    languages () {
+      return _.map(languagesObject.languages, (code) => ({ code: code, name: this.getLanguageName(code) })).sort((a, b) => a.name.localeCompare(b.name))
     },
 
     language: {
@@ -50,11 +58,13 @@ export default {
   methods: {
     getLanguageName (code) {
       const specialLanguageNames = {
-        'ja': 'Japanese (日本語)',
-        'ja_easy': 'Japanese (やさしいにほんご)',
-        'zh': 'Chinese (简体中文)'
+        'ja_easy': 'やさしいにほんご',
+        'zh': '简体中文',
+        'zh_Hant': '繁體中文'
       }
-      return specialLanguageNames[code] || ISO6391.getName(code)
+      const languageName = specialLanguageNames[code] || ISO6391.getNativeName(code)
+      const browserLocale = localeService.internalToBrowserLocale(code)
+      return languageName.charAt(0).toLocaleUpperCase(browserLocale) + languageName.slice(1)
     }
   }
 }

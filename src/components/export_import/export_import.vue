@@ -2,13 +2,13 @@
   <div class="import-export-container">
     <slot name="before" />
     <button
-      class="btn"
+      class="btn button-default"
       @click="exportData"
     >
       {{ exportLabel }}
     </button>
     <button
-      class="btn"
+      class="btn button-default"
       @click="importData"
     >
       {{ importLabel }}

@@ -20,14 +20,13 @@
           :key="index"
           class="user-profile-field"
         >
+          <!-- eslint-disable vue/no-v-html -->
           <dt
             :title="user.fields_text[index].name"
             class="user-profile-field-name"
             @click.prevent="linkClicked"
-          >
-            {{ field.name }}
-          </dt>
-          <!-- eslint-disable vue/no-v-html -->
+            v-html="field.name"
+          />
           <dd
             :title="user.fields_text[index].value"
             class="user-profile-field-value"
@@ -122,9 +121,10 @@
       </div>
       <div class="panel-body">
         <span v-if="error">{{ error }}</span>
-        <i
+        <FAIcon
           v-else
-          class="icon-spin3 animate-spin"
+          spin
+          icon="circle-notch"
         />
       </div>
     </div>
@@ -142,6 +142,7 @@
 
   .user-profile-fields {
     margin: 0 0.5em;
+
     img {
       object-fit: contain;
       vertical-align: middle;

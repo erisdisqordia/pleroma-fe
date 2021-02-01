@@ -6,13 +6,13 @@
   >
     <slot />
     <template v-if="enableEmojiPicker">
-      <div
+      <button
         v-if="!hideEmojiButton"
-        class="emoji-picker-icon"
+        class="button-unstyled emoji-picker-icon"
         @click.prevent="togglePicker"
       >
-        <i class="icon-smile" />
-      </div>
+        <FAIcon :icon="['far', 'smile-beam']" />
+      </button>
       <EmojiPicker
         v-if="enableEmojiPicker"
         ref="picker"
@@ -37,7 +37,7 @@
           v-for="(suggestion, index) in suggestions"
           :key="index"
           class="autocomplete-item"
-          :class="{ highlighted: suggestion.highlighted }"
+          :class="{ highlighted: index === highlighted }"
           @click.stop.prevent="onClick($event, suggestion)"
         >
           <span class="image">

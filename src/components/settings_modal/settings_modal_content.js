@@ -10,6 +10,29 @@ import GeneralTab from './tabs/general_tab.vue'
 import VersionTab from './tabs/version_tab.vue'
 import ThemeTab from './tabs/theme_tab/theme_tab.vue'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faWrench,
+  faUser,
+  faFilter,
+  faPaintBrush,
+  faBell,
+  faDownload,
+  faEyeSlash,
+  faInfo
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faWrench,
+  faUser,
+  faFilter,
+  faPaintBrush,
+  faBell,
+  faDownload,
+  faEyeSlash,
+  faInfo
+)
+
 const SettingsModalContent = {
   components: {
     TabSwitcher,

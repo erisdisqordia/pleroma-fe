@@ -12,6 +12,27 @@ import suggestor from '../emoji_input/suggestor.js'
 import { mapGetters, mapState } from 'vuex'
 import Checkbox from '../checkbox/checkbox.vue'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faChevronDown,
+  faSmileBeam,
+  faPollH,
+  faUpload,
+  faBan,
+  faTimes,
+  faCircleNotch
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faChevronDown,
+  faSmileBeam,
+  faPollH,
+  faUpload,
+  faBan,
+  faTimes,
+  faCircleNotch
+)
+
 const buildMentionsString = ({ user, attentions = [] }, currentUser) => {
   let allAttentions = [...attentions]
 
@@ -54,7 +75,8 @@ const PostStatusForm = {
     'autoFocus',
     'fileLimit',
     'submitOnEnter',
-    'emojiPickerPlacement'
+    'emojiPickerPlacement',
+    'optimisticPosting'
   ],
   components: {
     MediaUpload,
@@ -137,8 +159,7 @@ const PostStatusForm = {
           ...this.$store.state.instance.emoji,
           ...this.$store.state.instance.customEmoji
         ],
-        users: this.$store.state.users.users,
-        updateUsersList: (query) => this.$store.dispatch('searchUsers', { query })
+        store: this.$store
       })
     },
     emojiSuggestor () {
@@ -251,13 +272,15 @@ const PostStatusForm = {
       if (this.preview) this.previewStatus()
     },
     async postStatus (event, newStatus, opts = {}) {
-      if (this.posting) { return }
+      if (this.posting && !this.optimisticPosting) { return }
       if (this.disableSubmit) { return }
       if (this.emojiInputShown) { return }
       if (this.submitOnEnter) {
         event.stopPropagation()
         event.preventDefault()
       }
+
+      if (this.optimisticPosting && (this.emptyStatus || this.isOverLengthLimit)) { return }
 
       if (this.emptyStatus) {
         this.error = this.$t('post_status.empty_status_error')
@@ -507,7 +530,7 @@ const PostStatusForm = {
             !(isFormBiggerThanScroller &&
               this.$refs.textarea.selectionStart !== this.$refs.textarea.value.length)
       const totalDelta = shouldScrollToBottom ? bottomChangeDelta : 0
-      const targetScroll = currentScroll + totalDelta
+      const targetScroll = Math.round(currentScroll + totalDelta)
 
       if (scrollerRef === window) {
         scrollerRef.scroll(0, targetScroll)

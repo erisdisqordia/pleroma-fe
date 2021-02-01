@@ -15,7 +15,7 @@
         <span class="alert error">
           {{ $t('settings.style.preview.error') }}
         </span>
-        <button class="btn">
+        <button class="btn button-default">
           {{ $t('settings.style.preview.button') }}
         </button>
       </div>
@@ -39,21 +39,29 @@
             </i18n>
 
             <div class="icons">
-              <i
+              <FAIcon
+                fixed-width
                 style="color: var(--cBlue)"
-                class="button-icon icon-reply"
+                class="fa-scale-110 fa-old-padding"
+                icon="reply"
               />
-              <i
+              <FAIcon
+                fixed-width
                 style="color: var(--cGreen)"
-                class="button-icon icon-retweet"
+                class="fa-scale-110 fa-old-padding"
+                icon="retweet"
               />
-              <i
+              <FAIcon
+                fixed-width
                 style="color: var(--cOrange)"
-                class="button-icon icon-star"
+                class="fa-scale-110 fa-old-padding"
+                icon="star"
               />
-              <i
+              <FAIcon
+                fixed-width
                 style="color: var(--cRed)"
-                class="button-icon icon-cancel"
+                class="fa-scale-110 fa-old-padding"
+                icon="times"
               />
             </div>
           </div>
@@ -94,7 +102,7 @@
             >
             <label for="preview_checkbox">{{ $t('settings.style.preview.checkbox') }}</label>
           </span>
-          <button class="btn">
+          <button class="btn button-default">
             {{ $t('settings.style.preview.button') }}
           </button>
         </div>
@@ -102,6 +110,25 @@
     </div>
   </div>
 </template>
+
+<script>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faTimes,
+  faStar,
+  faRetweet,
+  faReply
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faTimes,
+  faStar,
+  faRetweet,
+  faReply
+)
+
+export default {}
+</script>
 
 <style lang="scss">
 .preview-container {

@@ -37,7 +37,7 @@
     </div>
     <div
       :label="$t('settings.theme')"
-      icon="brush"
+      icon="paint-brush"
       data-tab-name="theme"
     >
       <ThemeTab />
@@ -45,7 +45,7 @@
     <div
       v-if="isLoggedIn"
       :label="$t('settings.notifications')"
-      icon="bell-ringing-o"
+      icon="bell"
       data-tab-name="notifications"
     >
       <NotificationsTab />
@@ -62,14 +62,14 @@
       v-if="isLoggedIn"
       :label="$t('settings.mutes_and_blocks')"
       :fullHeight="true"
-      icon="eye-off"
+      icon="eye-slash"
       data-tab-name="mutesAndBlocks"
     >
       <MutesAndBlocksTab />
     </div>
     <div
       :label="$t('settings.version.title')"
-      icon="info-circled"
+      icon="info"
       data-tab-name="version"
     >
       <VersionTab />

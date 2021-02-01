@@ -1,12 +1,17 @@
 <template>
   <div class="exporter">
     <div v-if="processing">
-      <i class="icon-spin4 animate-spin exporter-processing" />
+      <FAIcon
+        icon="circle-notch"
+        size="lg"
+        spin
+      />
+
       <span>{{ processingMessage }}</span>
     </div>
     <button
       v-else
-      class="btn btn-default"
+      class="btn button-default"
       @click="process"
     >
       {{ exportButtonLabel }}
@@ -19,7 +24,6 @@
 <style lang="scss">
 .exporter {
   &-processing {
-    font-size: 1.5em;
     margin: 0.25em;
   }
 }

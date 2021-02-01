@@ -1,4 +1,28 @@
 import Popover from '../popover/popover.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faEllipsisH,
+  faBookmark,
+  faEyeSlash,
+  faThumbtack,
+  faShareAlt,
+  faExternalLinkAlt
+} from '@fortawesome/free-solid-svg-icons'
+import {
+  faBookmark as faBookmarkReg,
+  faFlag
+} from '@fortawesome/free-regular-svg-icons'
+
+library.add(
+  faEllipsisH,
+  faBookmark,
+  faBookmarkReg,
+  faEyeSlash,
+  faThumbtack,
+  faShareAlt,
+  faExternalLinkAlt,
+  faFlag
+)
 
 const ExtraButtons = {
   props: [ 'status' ],
@@ -44,6 +68,9 @@ const ExtraButtons = {
       this.$store.dispatch('unbookmark', { id: this.status.id })
         .then(() => this.$emit('onSuccess'))
         .catch(err => this.$emit('onError', err.error.error))
+    },
+    reportStatus () {
+      this.$store.dispatch('openUserReportingModal', { userId: this.status.user.id, statusIds: [this.status.id] })
     }
   },
   computed: {

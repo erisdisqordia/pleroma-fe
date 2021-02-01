@@ -242,9 +242,18 @@ export const generateShadows = (input, colors) => {
     panelHeader: 'panel',
     input: 'input'
   }
-  const inputShadows = input.shadows && !input.themeEngineVersion
-    ? shadows2to3(input.shadows, input.opacity)
-    : input.shadows || {}
+
+  const cleanInputShadows = Object.fromEntries(
+    Object.entries(input.shadows || {})
+      .map(([name, shadowSlot]) => [
+        name,
+        // defaulting color to black to avoid potential problems
+        shadowSlot.map(shadowDef => ({ color: '#000000', ...shadowDef }))
+      ])
+  )
+  const inputShadows = cleanInputShadows && !input.themeEngineVersion
+    ? shadows2to3(cleanInputShadows, input.opacity)
+    : cleanInputShadows || {}
   const shadows = Object.entries({
     ...DEFAULT_SHADOWS,
     ...inputShadows

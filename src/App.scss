@@ -14,7 +14,9 @@
   right: -20px;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 0 50%;
+  background-color: var(--wallpaper);
+  background-image: var(--body-background-image);
+  background-position: 50% 50px;
 }
 
 i[class^='icon-'] {
@@ -33,6 +35,7 @@ h4 {
   max-width: 980px;
   align-content: flex-start;
 }
+
 .underlay {
   background-color: rgba(0,0,0,0.15);
   background-color: var(--underlay, rgba(0,0,0,0.15));
@@ -69,7 +72,7 @@ a {
   color: var(--link, $fallback--link);
 }
 
-button {
+.button-default {
   user-select: none;
   color: $fallback--text;
   color: var(--btnText, $fallback--text);
@@ -85,7 +88,8 @@ button {
   font-family: sans-serif;
   font-family: var(--interfaceFont, sans-serif);
 
-  i[class*=icon-] {
+  i[class*=icon-],
+  .svg-inline--fa {
     color: $fallback--text;
     color: var(--btnText, $fallback--text);
   }
@@ -106,6 +110,8 @@ button {
     color: var(--btnPressedText, $fallback--text);
     background-color: $fallback--fg;
     background-color: var(--btnPressed, $fallback--fg);
+
+    svg,
     i {
       color: $fallback--text;
       color: var(--btnPressedText, $fallback--text);
@@ -118,6 +124,8 @@ button {
     color: var(--btnDisabledText, $fallback--text);
     background-color: $fallback--fg;
     background-color: var(--btnDisabled, $fallback--fg);
+
+    svg,
     i {
       color: $fallback--text;
       color: var(--btnDisabledText, $fallback--text);
@@ -131,6 +139,8 @@ button {
     background-color: var(--btnToggled, $fallback--fg);
     box-shadow: 0px 0px 4px 0px rgba(255, 255, 255, 0.3), 0px 1px 0px 0px rgba(0, 0, 0, 0.2) inset, 0px -1px 0px 0px rgba(255, 255, 255, 0.2) inset;
     box-shadow: var(--buttonPressedShadow);
+
+    svg,
     i {
       color: $fallback--text;
       color: var(--btnToggledText, $fallback--text);
@@ -143,6 +153,37 @@ button {
     color: var(--alertErrorPanelText, $fallback--text);
     background-color: $fallback--alertError;
     background-color: var(--alertError, $fallback--alertError);
+  }
+}
+
+.button-unstyled {
+  background: none;
+  border: none;
+  outline: none;
+  display: inline;
+  text-align: initial;
+  font-size: 100%;
+  font-family: inherit;
+  padding: 0;
+  line-height: unset;
+  cursor: pointer;
+  box-sizing: content-box;
+  color: inherit;
+
+  &.-link {
+    color: $fallback--link;
+    color: var(--link, $fallback--link);
+  }
+
+  &.-fullwidth {
+    width: 100%;
+  }
+
+  &.-hover-highlight {
+    &:hover svg {
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
   }
 }
 
@@ -185,7 +226,7 @@ input, textarea, .select, .input {
     opacity: 0.5;
   }
 
-  .icon-down-open {
+  .select-down-icon {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -300,6 +341,10 @@ input, textarea, .select, .input {
       box-sizing: border-box;
     }
   }
+
+  &.resize-height {
+    resize: vertical;
+  }
 }
 
 option {
@@ -318,7 +363,7 @@ option {
   }
 }
 
-i[class*=icon-] {
+i[class*=icon-], .svg-inline--fa  {
   color: $fallback--icon;
   color: var(--icon, $fallback--icon);
 }
@@ -356,115 +401,8 @@ i[class*=icon-] {
   padding: 0 10px 0 10px;
 }
 
-.item {
-  flex: 1;
-  line-height: 50px;
-  height: 50px;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-
-  .nav-icon {
-    margin-left: 0.4em;
-  }
-
-  &.right {
-    justify-content: flex-end;
-  }
-}
-
 .auto-size {
   flex: 1
-}
-
-.nav-bar {
-  padding: 0;
-  width: 100%;
-  align-items: center;
-  position: fixed;
-  height: 50px;
-  box-sizing: border-box;
-
-  button {
-    &, i[class*=icon-] {
-      color: $fallback--text;
-      color: var(--btnTopBarText, $fallback--text);
-    }
-
-    &:active {
-      background-color: $fallback--fg;
-      background-color: var(--btnPressedTopBar, $fallback--fg);
-      color: $fallback--text;
-      color: var(--btnPressedTopBarText, $fallback--text);
-    }
-
-    &:disabled {
-      color: $fallback--text;
-      color: var(--btnDisabledTopBarText, $fallback--text);
-    }
-
-    &.toggled {
-      color: $fallback--text;
-      color: var(--btnToggledTopBarText, $fallback--text);
-      background-color: $fallback--fg;
-      background-color: var(--btnToggledTopBar, $fallback--fg)
-    }
-  }
-
-
-  .logo {
-    display: flex;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    align-items: stretch;
-    justify-content: center;
-    flex: 0 0 auto;
-    z-index: -1;
-    transition: opacity;
-    transition-timing-function: ease-out;
-    transition-duration: 100ms;
-
-    .mask {
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: contain;
-      background-color: $fallback--fg;
-      background-color: var(--topBarText, $fallback--fg);
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-
-    img {
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      flex: 0;
-    }
-  }
-
-  .inner-nav {
-    position: relative;
-    margin: auto;
-    box-sizing: border-box;
-    padding-left: 10px;
-    padding-right: 10px;
-    display: flex;
-    align-items: center;
-    flex-basis: 970px;
-    height: 50px;
-
-    a, a i {
-      color: $fallback--link;
-      color: var(--topBarLink, $fallback--link);
-    }
-  }
 }
 
 main-router {
@@ -546,6 +484,7 @@ main-router {
     color: $fallback--faint;
     color: var(--panelFaint, $fallback--faint);
   }
+
   .faint-link {
     color: $fallback--faint;
     color: var(--faintLink, $fallback--faint);
@@ -557,11 +496,8 @@ main-router {
     overflow-x: hidden;
   }
 
-  button {
-    flex-shrink: 0;
-  }
-
-  button, .alert {
+  .button-default,
+  .alert {
     // height: 100%;
     line-height: 21px;
     min-height: 0;
@@ -572,8 +508,11 @@ main-router {
     align-self: stretch;
   }
 
-  button {
-    &, i[class*=icon-] {
+  .button-default {
+    flex-shrink: 0;
+
+    &,
+    i[class*=icon-] {
       color: $fallback--text;
       color: var(--btnPanelText, $fallback--text);
     }
@@ -596,7 +535,8 @@ main-router {
     }
   }
 
-  a {
+  a,
+  .-link {
     color: $fallback--link;
     color: var(--panelLink, $fallback--link)
   }
@@ -611,15 +551,15 @@ main-router {
   border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
   border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
 
-
   .faint {
     color: $fallback--faint;
     color: var(--panelFaint, $fallback--faint);
   }
 
-  a {
+  a,
+  .-link {
     color: $fallback--link;
-    color: var(--panelLink, $fallback--link)
+    color: var(--panelLink, $fallback--link);
   }
 }
 
@@ -707,19 +647,24 @@ nav {
     flex-grow: 0;
   }
 }
+
 .badge {
+  box-sizing: border-box;
   display: inline-block;
   border-radius: 99px;
-  min-width: 22px;
-  max-width: 22px;
-  min-height: 22px;
-  max-height: 22px;
-  font-size: 15px;
-  line-height: 22px;
-  text-align: center;
+  max-width: 10em;
+  min-width: 1.7em;
+  height: 1.3em;
+  padding: 0.15em 0.15em;
   vertical-align: middle;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 0.9em;
+  line-height: 1;
+  text-align: center;
   white-space: nowrap;
-  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &.badge-notification {
     background-color: $fallback--cRed;
@@ -776,16 +721,6 @@ nav {
   }
 }
 
-@media all and (min-width: 800px) {
-  .logo {
-    opacity: 1 !important;
-  }
-}
-
-.item.right {
-  text-align: right;
-}
-
 .visibility-notice {
   padding: .5em;
   border: 1px solid $fallback--faint;
@@ -807,8 +742,16 @@ nav {
   }
 }
 
-.button-icon {
-  font-size: 1.2em;
+.fa-scale-110 {
+  &.svg-inline--fa {
+    font-size: 1.1em;
+  }
+}
+
+.fa-old-padding {
+  &.svg-inline--fa {
+    padding: 0 0.3em;
+  }
 }
 
 @keyframes shakeError {
@@ -898,7 +841,7 @@ nav {
   }
 }
 
-.btn.btn-default {
+.btn.button-default {
   min-height: 28px;
 }
 
@@ -928,22 +871,6 @@ nav {
   z-index: 1;
   background-color: $fallback--fg;
   background-color: var(--panel, $fallback--fg);
-}
-
-.unread-chat-count {
-  font-size: 0.9em;
-  font-weight: bolder;
-  font-style: normal;
-  position: absolute;
-  right: 0.6rem;
-  padding: 0 0.3em;
-  min-width: 1.3rem;
-  min-height: 1.3rem;
-  max-height: 1.3rem;
-  line-height: 1.3rem;
-  max-width: 10em;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .chat-layout {

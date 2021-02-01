@@ -1,5 +1,13 @@
 import mfaApi from '../../services/new_api/mfa.js'
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faTimes
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faTimes
+)
 
 export default {
   data: () => ({

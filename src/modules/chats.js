@@ -16,7 +16,8 @@ const defaultState = {
   openedChats: {},
   openedChatMessageServices: {},
   fetcher: undefined,
-  currentChatId: null
+  currentChatId: null,
+  lastReadMessageId: null
 }
 
 const getChatById = (state, id) => {
@@ -92,9 +93,14 @@ const chats = {
       commit('setCurrentChatFetcher', { fetcher: undefined })
     },
     readChat ({ rootState, commit, dispatch }, { id, lastReadId }) {
+      const isNewMessage = rootState.chats.lastReadMessageId !== lastReadId
+
       dispatch('resetChatNewMessageCount')
-      commit('readChat', { id })
-      rootState.api.backendInteractor.readChat({ id, lastReadId })
+      commit('readChat', { id, lastReadId })
+
+      if (isNewMessage) {
+        rootState.api.backendInteractor.readChat({ id, lastReadId })
+      }
     },
     deleteChatMessage ({ rootState, commit }, value) {
       rootState.api.backendInteractor.deleteChatMessage(value)
@@ -106,6 +112,9 @@ const chats = {
     },
     clearOpenedChats ({ rootState, commit, dispatch, rootGetters }) {
       commit('clearOpenedChats', { commit })
+    },
+    handleMessageError ({ commit }, value) {
+      commit('handleMessageError', { commit, ...value })
     }
   },
   mutations: {
@@ -208,11 +217,16 @@ const chats = {
         }
       }
     },
-    readChat (state, { id }) {
+    readChat (state, { id, lastReadId }) {
+      state.lastReadMessageId = lastReadId
       const chat = getChatById(state, id)
       if (chat) {
         chat.unread = 0
       }
+    },
+    handleMessageError (state, { chatId, fakeId, isRetry }) {
+      const chatMessageService = state.openedChatMessageServices[chatId]
+      chatService.handleMessageError(chatMessageService, fakeId, isRetry)
     }
   }
 }

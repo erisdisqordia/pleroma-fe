@@ -20,11 +20,14 @@
 @import '../../_variables.scss';
 
 .Avatar {
-  --still-image-label-visibility: hidden;
+  --_avatarShadowBox: var(--avatarStatusShadow);
+  --_avatarShadowFilter: var(--avatarStatusShadowFilter);
+  --_avatarShadowInset: var(--avatarStatusShadowInset);
+  --_still-image-label-visibility: hidden;
 
   width: 48px;
   height: 48px;
-  box-shadow: var(--avatarStatusShadow);
+  box-shadow: var(--_avatarShadowBox);
   border-radius: $fallback--avatarRadius;
   border-radius: var(--avatarRadius, $fallback--avatarRadius);
 
@@ -34,8 +37,8 @@
   }
 
   &.better-shadow {
-    box-shadow: var(--avatarStatusShadowInset);
-    filter: var(--avatarStatusShadowFilter)
+    box-shadow: var(--_avatarShadowInset);
+    filter: var(--_avatarShadowFilter);
   }
 
   &.animated::before {

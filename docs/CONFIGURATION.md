@@ -1,13 +1,13 @@
 # Pleroma-FE configuration and customization for instance administrators
 
-* *For user configuration, see [Pleroma-FE user guide](USER_GUIDE.md)*
+* *For user configuration, see [Pleroma-FE user guide](../user_guide)*
 * *For local development server configuration, see [Hacking, tweaking, contributing](HACKING.md)*
 
 ## Where configuration is stored
 
 PleromaFE gets its configuration from several sources, in order of preference (the one above overrides ones below it)
 
-1. `/api/statusnet/config.json` - this is generated on Backend and contains multiple things including instance name, char limit etc. It also contains FE/Client-specific data, PleromaFE uses `pleromafe` field of it. For more info on changing config on BE, look [here](https://docs-develop.pleroma.social/config.html#frontend_configurations)
+1. `/api/statusnet/config.json` - this is generated on Backend and contains multiple things including instance name, char limit etc. It also contains FE/Client-specific data, PleromaFE uses `pleromafe` field of it. For more info on changing config on BE, look [here](../backend/configuration/cheatsheet.md#frontend_configurations)
 2. `/static/config.json` - this is a static FE-provided file, containing only FE specific configuration. This file is completely optional and could be removed but is useful as a fallback if some configuration JSON property isn't present in BE-provided config. It's also a reference point to check what default configuration are and what JSON properties even exist. In local dev mode it could be used to override BE configuration, more about that in HACKING.md. File is located [here](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/static/config.json).
 3. Built-in defaults. Those are hard-coded defaults that are used when `/static/config.json` is not available and BE-provided configuration JSON is missing some JSON properties. ( [Code](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/src/modules/instance.js) )
 

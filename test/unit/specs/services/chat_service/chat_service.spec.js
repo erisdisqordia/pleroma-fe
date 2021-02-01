@@ -2,17 +2,20 @@ import chatService from '../../../../../src/services/chat_service/chat_service.j
 
 const message1 = {
   id: '9wLkdcmQXD21Oy8lEX',
+  idempotency_key: '1',
   created_at: (new Date('2020-06-22T18:45:53.000Z'))
 }
 
 const message2 = {
   id: '9wLkdp6ihaOVdNj8Wu',
+  idempotency_key: '2',
   account_id: '9vmRb29zLQReckr5ay',
   created_at: (new Date('2020-06-22T18:45:56.000Z'))
 }
 
 const message3 = {
   id: '9wLke9zL4Dy4OZR2RM',
+  idempotency_key: '3',
   account_id: '9vmRb29zLQReckr5ay',
   created_at: (new Date('2020-07-22T18:45:59.000Z'))
 }
@@ -44,10 +47,10 @@ describe('chatService', () => {
 
       chatService.resetNewMessageCount(chat)
       expect(chat.newMessageCount).to.eql(0)
+      expect(chat.lastSeenMessageId).to.eql(message2.id)
 
-      const createdAt = new Date()
-      createdAt.setSeconds(createdAt.getSeconds() + 10)
-      chatService.add(chat, { messages: [ { message3, created_at: createdAt } ] })
+      // Add message with higher id
+      chatService.add(chat, { messages: [ message3 ] })
       expect(chat.newMessageCount).to.eql(1)
     })
   })

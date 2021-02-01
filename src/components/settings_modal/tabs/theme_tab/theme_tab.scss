@@ -165,7 +165,8 @@
     border-color: var(--border, $fallback--border);
     margin: 1em 0;
     padding: 1em;
-    background: var(--body-background-image);
+    background-color: var(--wallpaper);
+    background-image: var(--body-background-image);
     background-size: cover;
     background-position: 50% 50%;
 

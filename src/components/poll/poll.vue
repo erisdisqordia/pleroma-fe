@@ -42,14 +42,15 @@
           :value="index"
         >
         <label class="option-vote">
-          <div>{{ option.title }}</div>
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <div v-html="option.title_html" />
         </label>
       </div>
     </div>
     <div class="footer faint">
       <button
         v-if="!showResults"
-        class="btn btn-default poll-vote-button"
+        class="btn button-default poll-vote-button"
         type="button"
         :disabled="isDisabled"
         @click="vote"

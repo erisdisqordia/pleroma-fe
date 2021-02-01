@@ -9,10 +9,15 @@
       <div class="notice-message">
         {{ $t(notice.messageKey, notice.messageArgs) }}
       </div>
-      <i
-        class="button-icon icon-cancel"
+      <button
+        class="button-unstyled close-notice"
         @click="closeNotice(notice)"
-      />
+      >
+        <FAIcon
+          class="fa-scale-110 fa-old-padding"
+          icon="times"
+        />
+      </button>
     </div>
   </div>
 </template>
@@ -53,7 +58,7 @@
   .global-error {
     background-color: var(--alertPopupError, $fallback--cRed);
     color: var(--alertPopupErrorText, $fallback--text);
-    i {
+    .svg-inline--fa {
       color: var(--alertPopupErrorText, $fallback--text);
     }
   }
@@ -61,7 +66,7 @@
   .global-warning {
     background-color: var(--alertPopupWarning, $fallback--cOrange);
     color: var(--alertPopupWarningText, $fallback--text);
-    i {
+    .svg-inline--fa {
       color: var(--alertPopupWarningText, $fallback--text);
     }
   }
@@ -69,8 +74,15 @@
   .global-info {
     background-color: var(--alertPopupNeutral, $fallback--fg);
     color: var(--alertPopupNeutralText, $fallback--text);
-    i {
+    .svg-inline--fa {
       color: var(--alertPopupNeutralText, $fallback--text);
+    }
+  }
+
+  .close-notice {
+    padding-right: 0.2em;
+    .svg-inline--fa:hover {
+      opacity: 0.6;
     }
   }
 }

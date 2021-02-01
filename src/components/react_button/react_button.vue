@@ -3,7 +3,8 @@
     trigger="click"
     placement="top"
     :offset="{ y: 5 }"
-    class="react-button-popover"
+    :bound-to="{ x: 'container' }"
+    remove-padding
   >
     <div
       slot="content"
@@ -12,23 +13,26 @@
       <div class="reaction-picker-filter">
         <input
           v-model="filterWord"
+          size="1"
           :placeholder="$t('emoji.search_emoji')"
         >
       </div>
       <div class="reaction-picker">
         <span
           v-for="emoji in commonEmojis"
-          :key="emoji"
+          :key="emoji.replacement"
           class="emoji-button"
-          @click="addReaction($event, emoji, close)"
+          :title="emoji.displayText"
+          @click="addReaction($event, emoji.replacement, close)"
         >
-          {{ emoji }}
+          {{ emoji.replacement }}
         </span>
         <div class="reaction-picker-divider" />
         <span
           v-for="(emoji, key) in emojis"
           :key="key"
           class="emoji-button"
+          :title="emoji.displayText"
           @click="addReaction($event, emoji.replacement, close)"
         >
           {{ emoji.replacement }}
@@ -36,11 +40,16 @@
         <div class="reaction-bottom-fader" />
       </div>
     </div>
-    <i
+    <span
       slot="trigger"
-      class="icon-smile button-icon add-reaction-button"
+      class="ReactButton"
       :title="$t('tool_tip.add_reaction')"
-    />
+    >
+      <FAIcon
+        class="fa-scale-110 fa-old-padding"
+        :icon="['far', 'smile-beam']"
+      />
+    </span>
   </Popover>
 </template>
 
@@ -98,10 +107,11 @@
   }
 }
 
-.add-reaction-button {
-  cursor: pointer;
+.ReactButton {
+  padding: 10px;
+  margin: -10px;
 
-  &:hover {
+  &:hover .svg-inline--fa {
     color: $fallback--text;
     color: var(--text, $fallback--text);
   }

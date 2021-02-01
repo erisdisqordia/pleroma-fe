@@ -1,3 +1,14 @@
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faCircleNotch,
+  faTimes
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faCircleNotch,
+  faTimes
+)
+
 const Importer = {
   props: {
     submitHandler: {

@@ -1,7 +1,25 @@
 import Popover from '../popover/popover.vue'
 import { mapState } from 'vuex'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faUsers,
+  faGlobe,
+  faBookmark,
+  faEnvelope,
+  faHome,
+  faChevronDown
+} from '@fortawesome/free-solid-svg-icons'
 
-// Route -> i18n key mapping, exported andnot in the computed
+library.add(
+  faUsers,
+  faGlobe,
+  faBookmark,
+  faEnvelope,
+  faHome,
+  faChevronDown
+)
+
+// Route -> i18n key mapping, exported and not in the computed
 // because nav panel benefits from the same information.
 export const timelineNames = () => {
   return {
@@ -9,8 +27,7 @@ export const timelineNames = () => {
     'bookmarks': 'nav.bookmarks',
     'dms': 'nav.dms',
     'public-timeline': 'nav.public_tl',
-    'public-external-timeline': 'nav.twkn',
-    'tag-timeline': 'tag'
+    'public-external-timeline': 'nav.twkn'
   }
 }
 
@@ -41,6 +58,14 @@ const TimelineMenu = {
       setTimeout(() => {
         this.isOpen = true
       }, 25)
+    },
+    blockOpen (event) {
+      // For the blank area inside the button element.
+      // Just setting @click.stop="" makes unintuitive behavior when
+      // menu is open and clicking on the blank area doesn't close it.
+      if (!this.isOpen) {
+        event.stopPropagation()
+      }
     },
     timelineName () {
       const route = this.$route.name

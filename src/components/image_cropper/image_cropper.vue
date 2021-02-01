@@ -11,39 +11,30 @@
       </div>
       <div class="image-cropper-buttons-wrapper">
         <button
-          class="btn"
+          class="button-default btn"
           type="button"
           :disabled="submitting"
           @click="submit()"
           v-text="saveText"
         />
         <button
-          class="btn"
+          class="button-default btn"
           type="button"
           :disabled="submitting"
           @click="destroy"
           v-text="cancelText"
         />
         <button
-          class="btn"
+          class="button-default btn"
           type="button"
           :disabled="submitting"
           @click="submit(false)"
           v-text="saveWithoutCroppingText"
         />
-        <i
+        <FAIcon
           v-if="submitting"
-          class="icon-spin4 animate-spin"
-        />
-      </div>
-      <div
-        v-if="submitError"
-        class="alert error"
-      >
-        {{ submitErrorMsg }}
-        <i
-          class="button-icon icon-cancel"
-          @click="clearError"
+          spin
+          icon="circle-notch"
         />
       </div>
     </div>

@@ -24,16 +24,13 @@
     }
   }
 
-  .icon-ellipsis {
+  .menu-icon {
     cursor: pointer;
 
     &:hover, .extra-button-popover.open & {
       color: $fallback--text;
       color: var(--text, $fallback--text);
     }
-
-    border-radius: $fallback--chatMessageRadius;
-    border-radius: var(--chatMessageRadius, $fallback--chatMessageRadius);
   }
 
   .popover {
@@ -98,6 +95,19 @@
         content: " ";
         display: inline-block;
       }
+    }
+  }
+
+  .pending {
+    .status-content.media-body, .created-at {
+      color: var(--faint);
+    }
+  }
+
+  .error {
+    .status-content.media-body, .created-at {
+      color: $fallback--cRed;
+      color: var(--badgeNotification, $fallback--cRed);
     }
   }
 

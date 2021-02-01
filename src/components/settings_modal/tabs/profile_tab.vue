@@ -11,7 +11,7 @@
         <input
           id="username"
           v-model="newName"
-          classname="name-changer"
+          class="name-changer"
         >
       </EmojiInput>
       <p>{{ $t('settings.bio') }}</p>
@@ -22,7 +22,7 @@
       >
         <textarea
           v-model="newBio"
-          classname="bio"
+          class="bio resize-height"
         />
       </EmojiInput>
       <p>
@@ -124,24 +124,24 @@
               :placeholder="$t('settings.profile_fields.value')"
             >
           </EmojiInput>
-          <div
-            class="icon-container"
+          <button
+            class="delete-field button-unstyled -hover-highlight"
+            @click="deleteField(i)"
           >
-            <i
+            <FAIcon
               v-show="newFields.length > 1"
-              class="icon-cancel"
-              @click="deleteField(i)"
+              icon="times"
             />
-          </div>
+          </button>
         </div>
-        <a
+        <button
           v-if="newFields.length < maxFields"
-          class="add-field faint"
+          class="add-field faint button-unstyled -hover-highlight"
           @click="addField"
         >
-          <i class="icon-plus" />
+          <FAIcon icon="plus" />
           {{ $t("settings.profile_fields.add_field") }}
-        </a>
+        </button>
       </div>
       <p>
         <Checkbox v-model="bot">
@@ -150,7 +150,7 @@
       </p>
       <button
         :disabled="newName && newName.length === 0"
-        class="btn btn-default"
+        class="btn button-default"
         @click="updateProfile"
       >
         {{ $t('general.submit') }}
@@ -166,10 +166,11 @@
           :src="user.profile_image_url_original"
           class="current-avatar"
         >
-        <i
+        <FAIcon
           v-if="!isDefaultAvatar && pickAvatarBtnVisible"
           :title="$t('settings.reset_avatar')"
-          class="reset-button icon-cancel"
+          class="reset-button"
+          icon="times"
           type="button"
           @click="resetAvatar"
         />
@@ -178,7 +179,7 @@
       <button
         v-show="pickAvatarBtnVisible"
         id="pick-avatar"
-        class="btn"
+        class="button-default btn"
         type="button"
       >
         {{ $t('settings.upload_a_photo') }}
@@ -194,10 +195,11 @@
       <h2>{{ $t('settings.profile_banner') }}</h2>
       <div class="banner-background-preview">
         <img :src="user.cover_photo">
-        <i
+        <FAIcon
           v-if="!isDefaultBanner"
           :title="$t('settings.reset_profile_banner')"
-          class="reset-button icon-cancel"
+          class="reset-button"
+          icon="times"
           type="button"
           @click="resetBanner"
         />
@@ -214,36 +216,29 @@
           @change="uploadFile('banner', $event)"
         >
       </div>
-      <i
+      <FAIcon
         v-if="bannerUploading"
-        class=" icon-spin4 animate-spin uploading"
+        class="uploading"
+        spin
+        icon="circle-notch"
       />
       <button
         v-else-if="bannerPreview"
-        class="btn btn-default"
+        class="btn button-default"
         @click="submitBanner(banner)"
       >
         {{ $t('general.submit') }}
       </button>
-      <div
-        v-if="bannerUploadError"
-        class="alert error"
-      >
-        Error: {{ bannerUploadError }}
-        <i
-          class="button-icon icon-cancel"
-          @click="clearUploadError('banner')"
-        />
-      </div>
     </div>
     <div class="setting-item">
       <h2>{{ $t('settings.profile_background') }}</h2>
       <div class="banner-background-preview">
         <img :src="user.background_image">
-        <i
+        <FAIcon
           v-if="!isDefaultBackground"
           :title="$t('settings.reset_profile_background')"
-          class="reset-button icon-cancel"
+          class="reset-button"
+          icon="times"
           type="button"
           @click="resetBackground"
         />
@@ -260,27 +255,19 @@
           @change="uploadFile('background', $event)"
         >
       </div>
-      <i
+      <FAIcon
         v-if="backgroundUploading"
-        class=" icon-spin4 animate-spin uploading"
+        class="uploading"
+        spin
+        icon="circle-notch"
       />
       <button
         v-else-if="backgroundPreview"
-        class="btn btn-default"
+        class="btn button-default"
         @click="submitBackground(background)"
       >
         {{ $t('general.submit') }}
       </button>
-      <div
-        v-if="backgroundUploadError"
-        class="alert error"
-      >
-        Error: {{ backgroundUploadError }}
-        <i
-          class="button-icon icon-cancel"
-          @click="clearUploadError('background')"
-        />
-      </div>
     </div>
   </div>
 </template>

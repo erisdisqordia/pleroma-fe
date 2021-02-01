@@ -7,8 +7,9 @@ $status-margin: 0.75em;
   min-width: 0;
 
   &:hover {
-    --still-image-img: visible;
-    --still-image-canvas: hidden;
+    --_still-image-img-visibility: visible;
+    --_still-image-canvas-visibility: hidden;
+    --_still-image-label-visibility: hidden;
   }
 
   &.-focused {
@@ -28,6 +29,8 @@ $status-margin: 0.75em;
   &.-conversation {
     border-left-width: 4px;
     border-left-style: solid;
+    border-left-color: $fallback--cRed;
+    border-left-color: var(--cRed, $fallback--cRed);
   }
 
   .gravestone {
@@ -56,6 +59,15 @@ $status-margin: 0.75em;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+  }
+
+  ._misclick-prevention & {
+    pointer-events: none;
+
+    .attachments {
+      pointer-events: initial;
+      cursor: initial;
+    }
   }
 
   .left-side {
@@ -127,6 +139,20 @@ $status-margin: 0.75em;
   .heading-right {
     display: flex;
     flex-shrink: 0;
+
+    .button-unstyled {
+      padding: 5px;
+      margin: -5px;
+
+      &:hover svg {
+        color: $fallback--lightText;
+        color: var(--lightText, $fallback--lightText);
+      }
+    }
+
+    .svg-inline--fa {
+      margin-left: 0.25em;
+    }
   }
 
   .timeago {
@@ -155,11 +181,6 @@ $status-margin: 0.75em;
       word-break: break-word;
       text-overflow: ellipsis;
       overflow-x: hidden;
-    }
-
-    .icon-reply {
-      // mirror the icon
-      transform: scaleX(-1);
     }
   }
 
@@ -200,7 +221,6 @@ $status-margin: 0.75em;
   }
 
   .reply-to {
-    display: flex;
     position: relative;
   }
 
@@ -208,7 +228,6 @@ $status-margin: 0.75em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-left: 0.2em;
   }
 
   .replies-separator {
@@ -232,16 +251,10 @@ $status-margin: 0.75em;
 
   .repeat-info {
     padding: 0.4em $status-margin;
-    line-height: 22px;
 
-    .right-side {
-      display: flex;
-      align-content: center;
-      flex-wrap: wrap;
-    }
-
-    i {
-      padding: 0 0.2em;
+    .repeat-icon {
+      color: $fallback--cGreen;
+      color: var(--cGreen, $fallback--cGreen);
     }
   }
 
@@ -288,18 +301,6 @@ $status-margin: 0.75em;
     > * {
       max-width: 4em;
       flex: 1;
-    }
-  }
-
-  .button-reply {
-    &:not(.-disabled) {
-      cursor: pointer;
-    }
-
-    &:not(.-disabled):hover,
-    &.-active {
-      color: $fallback--cBlue;
-      color: var(--cBlue, $fallback--cBlue);
     }
   }
 

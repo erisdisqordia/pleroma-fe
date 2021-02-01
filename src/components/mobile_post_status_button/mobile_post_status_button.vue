@@ -1,11 +1,11 @@
 <template>
   <div v-if="isLoggedIn">
     <button
-      class="new-status-button"
+      class="button-default new-status-button"
       :class="{ 'hidden': isHidden }"
       @click="openPostForm"
     >
-      <i class="icon-edit" />
+      <FAIcon icon="pen" />
     </button>
   </div>
 </template>
@@ -39,7 +39,7 @@
     transform: translateY(150%);
   }
 
-  i {
+  svg {
     font-size: 1.5em;
     color: $fallback--text;
     color: var(--text, $fallback--text);

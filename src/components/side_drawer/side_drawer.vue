@@ -36,7 +36,11 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'login' }">
-            <i class="button-icon icon-login" /> {{ $t("login.login") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="sign-in-alt"
+            /> {{ $t("login.login") }}
           </router-link>
         </li>
         <li
@@ -44,7 +48,11 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: timelinesRoute }">
-            <i class="button-icon icon-home-2" /> {{ $t("nav.timelines") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="home"
+            /> {{ $t("nav.timelines") }}
           </router-link>
         </li>
         <li
@@ -55,10 +63,14 @@
             :to="{ name: 'chats', params: { username: currentUser.screen_name } }"
             style="position: relative"
           >
-            <i class="button-icon icon-chat" /> {{ $t("nav.chats") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="comments"
+            /> {{ $t("nav.chats") }}
             <span
               v-if="unreadChatCount"
-              class="badge badge-notification unread-chat-count"
+              class="badge badge-notification"
             >
               {{ unreadChatCount }}
             </span>
@@ -68,7 +80,11 @@
       <ul v-if="currentUser">
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'interactions', params: { username: currentUser.screen_name } }">
-            <i class="button-icon icon-bell-alt" /> {{ $t("nav.interactions") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="bell"
+            /> {{ $t("nav.interactions") }}
           </router-link>
         </li>
         <li
@@ -76,10 +92,14 @@
           @click="toggleDrawer"
         >
           <router-link to="/friend-requests">
-            <i class="button-icon icon-user-plus" /> {{ $t("nav.friend_requests") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="user-plus"
+            /> {{ $t("nav.friend_requests") }}
             <span
               v-if="followRequestCount > 0"
-              class="badge follow-request-count"
+              class="badge badge-notification"
             >
               {{ followRequestCount }}
             </span>
@@ -89,8 +109,12 @@
           v-if="chat"
           @click="toggleDrawer"
         >
-          <router-link :to="{ name: 'chat' }">
-            <i class="button-icon icon-megaphone" /> {{ $t("shoutbox.title") }}
+          <router-link :to="{ name: 'chat-panel' }">
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="bullhorn"
+            /> {{ $t("shoutbox.title") }}
           </router-link>
         </li>
       </ul>
@@ -100,7 +124,11 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'search' }">
-            <i class="button-icon icon-search" /> {{ $t("nav.search") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="search"
+            /> {{ $t("nav.search") }}
           </router-link>
         </li>
         <li
@@ -108,20 +136,32 @@
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'who-to-follow' }">
-            <i class="button-icon icon-user-plus" /> {{ $t("nav.who_to_follow") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="user-plus"
+            /> {{ $t("nav.who_to_follow") }}
           </router-link>
         </li>
         <li @click="toggleDrawer">
-          <a
-            href="#"
+          <button
+            class="button-unstyled -link -fullwidth"
             @click="openSettingsModal"
           >
-            <i class="button-icon icon-cog" /> {{ $t("settings.settings") }}
-          </a>
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="cog"
+            /> {{ $t("settings.settings") }}
+          </button>
         </li>
         <li @click="toggleDrawer">
           <router-link :to="{ name: 'about'}">
-            <i class="button-icon icon-info-circled" /> {{ $t("nav.about") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="info-circle"
+            /> {{ $t("nav.about") }}
           </router-link>
         </li>
         <li
@@ -132,19 +172,27 @@
             href="/pleroma/admin/#/login-pleroma"
             target="_blank"
           >
-            <i class="button-icon icon-gauge" /> {{ $t("nav.administration") }}
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="tachometer-alt"
+            /> {{ $t("nav.administration") }}
           </a>
         </li>
         <li
           v-if="currentUser"
           @click="toggleDrawer"
         >
-          <a
-            href="#"
+          <button
+            class="button-unstyled -link -fullwidth"
             @click="doLogout"
           >
-            <i class="button-icon icon-logout" /> {{ $t("login.logout") }}
-          </a>
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="sign-out-alt"
+            /> {{ $t("login.logout") }}
+          </button>
         </li>
       </ul>
     </div>
@@ -224,8 +272,10 @@
   --lightText: var(--popoverLightText, $fallback--lightText);
   --icon: var(--popoverIcon, $fallback--icon);
 
-  .button-icon:before {
-    width: 1.1em;
+  .badge {
+    position: absolute;
+    right: 0.7rem;
+    top: 1em;
   }
 }
 
@@ -272,7 +322,6 @@
   border-bottom: 1px solid;
   border-color: $fallback--border;
   border-color: var(--border, $fallback--border);
-  margin: 0.2em 0;
 }
 
 .side-drawer ul:last-child {
@@ -282,9 +331,12 @@
 .side-drawer li {
   padding: 0;
 
-  a {
+  a, button {
+    box-sizing: border-box;
     display: block;
-    padding: 0.5em 0.85em;
+    height: 3em;
+    line-height: 3em;
+    padding: 0 0.7em;
 
     &:hover {
       background-color: $fallback--lightBg;

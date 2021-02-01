@@ -7,27 +7,29 @@
         @change="change"
       >
     </form>
-    <i
+    <FAIcon
       v-if="submitting"
-      class="icon-spin4 animate-spin importer-uploading"
+      class="importer-uploading"
+      spin
+      icon="circle-notch"
     />
     <button
       v-else
-      class="btn btn-default"
+      class="btn button-default"
       @click="submit"
     >
       {{ submitButtonLabel }}
     </button>
     <div v-if="success">
-      <i
-        class="icon-cross"
+      <FAIcon
+        icon="times"
         @click="dismiss"
       />
       <p>{{ successMessage }}</p>
     </div>
     <div v-else-if="error">
-      <i
-        class="icon-cross"
+      <FAIcon
+        icon="times"
         @click="dismiss"
       />
       <p>{{ errorMessage }}</p>

@@ -7,6 +7,24 @@ import fileType from 'src/services/file_type/file_type.service'
 import { processHtml } from 'src/services/tiny_post_html_processor/tiny_post_html_processor.service.js'
 import { mentionMatchesUrl, extractTagFromUrl } from 'src/services/matcher/matcher.service.js'
 import { mapGetters, mapState } from 'vuex'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faCircleNotch,
+  faFile,
+  faMusic,
+  faImage,
+  faLink,
+  faPollH
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faCircleNotch,
+  faFile,
+  faMusic,
+  faImage,
+  faLink,
+  faPollH
+)
 
 const StatusContent = {
   name: 'StatusContent',

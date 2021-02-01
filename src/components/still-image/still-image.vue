@@ -42,7 +42,7 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    visibility: var(--still-image-canvas, visible);
+    visibility: var(--_still-image-canvas-visibility, visible);
   }
 
   img {
@@ -66,16 +66,19 @@
       border-radius: $fallback--tooltipRadius;
       border-radius: var(--tooltipRadius, $fallback--tooltipRadius);
       z-index: 2;
-      visibility: var(--still-image-label-visibility, visible);
+      visibility: var(--_still-image-label-visibility, visible);
     }
 
     &:hover canvas {
       display: none;
     }
 
-    &:hover::before,
+    &:hover::before {
+      visibility: var(--_still-image-label-visibility, hidden);
+    }
+
     img {
-      visibility: var(--still-image-img, hidden);
+      visibility: var(--_still-image-img-visibility, hidden);
     }
 
     &:hover img {

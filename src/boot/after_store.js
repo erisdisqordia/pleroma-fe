@@ -7,6 +7,7 @@ import { getOrCreateApp, getClientToken } from '../services/new_api/oauth.js'
 import backendInteractorService from '../services/backend_interactor_service/backend_interactor_service.js'
 import { CURRENT_VERSION } from '../services/theme_data/theme_data.service.js'
 import { applyTheme } from '../services/style_setter/style_setter.js'
+import FaviconService from '../services/favicon_service/favicon_service.js'
 
 let staticInitialResults = null
 
@@ -130,6 +131,7 @@ const setSettings = async ({ apiConfig, staticConfig, store }) => {
       ? 0
       : config.logoMargin
   })
+  copyInstanceOption('logoLeft')
   store.commit('authFlow/setInitialStrategy', config.loginMethod)
 
   copyInstanceOption('redirectRootNoLogin')
@@ -324,6 +326,8 @@ const checkOAuthToken = async ({ store }) => {
 const afterStoreSetup = async ({ store, i18n }) => {
   const width = windowWidth()
   store.dispatch('setMobileLayout', width <= 800)
+
+  FaviconService.initFaviconService()
 
   const overrides = window.___pleromafe_dev_overrides || {}
   const server = (typeof overrides.target !== 'undefined') ? overrides.target : window.location.origin

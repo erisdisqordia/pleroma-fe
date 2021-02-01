@@ -3,6 +3,15 @@ import EmojiPicker from '../emoji_picker/emoji_picker.vue'
 import { take } from 'lodash'
 import { findOffset } from '../../services/offset_finder/offset_finder.service.js'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faSmileBeam
+} from '@fortawesome/free-regular-svg-icons'
+
+library.add(
+  faSmileBeam
+)
+
 /**
  * EmojiInput - augmented inputs for emoji and autocomplete support in inputs
  * without having to give up the comfort of <input/> and <textarea/> elements
@@ -105,7 +114,8 @@ const EmojiInput = {
       showPicker: false,
       temporarilyHideSuggestions: false,
       keepOpen: false,
-      disableClickOutside: false
+      disableClickOutside: false,
+      suggestions: []
     }
   },
   components: {
@@ -114,21 +124,6 @@ const EmojiInput = {
   computed: {
     padEmoji () {
       return this.$store.getters.mergedConfig.padEmoji
-    },
-    suggestions () {
-      const firstchar = this.textAtCaret.charAt(0)
-      if (this.textAtCaret === firstchar) { return [] }
-      const matchedSuggestions = this.suggest(this.textAtCaret)
-      if (matchedSuggestions.length <= 0) {
-        return []
-      }
-      return take(matchedSuggestions, 5)
-        .map(({ imageUrl, ...rest }, index) => ({
-          ...rest,
-          // eslint-disable-next-line camelcase
-          img: imageUrl || '',
-          highlighted: index === this.highlighted
-        }))
     },
     showSuggestions () {
       return this.focused &&
@@ -179,6 +174,23 @@ const EmojiInput = {
   watch: {
     showSuggestions: function (newValue) {
       this.$emit('shown', newValue)
+    },
+    textAtCaret: async function (newWord) {
+      const firstchar = newWord.charAt(0)
+      this.suggestions = []
+      if (newWord === firstchar) return
+      const matchedSuggestions = await this.suggest(newWord)
+      // Async: cancel if textAtCaret has changed during wait
+      if (this.textAtCaret !== newWord) return
+      if (matchedSuggestions.length <= 0) return
+      this.suggestions = take(matchedSuggestions, 5)
+        .map(({ imageUrl, ...rest }) => ({
+          ...rest,
+          img: imageUrl || ''
+        }))
+    },
+    suggestions (newValue) {
+      this.$nextTick(this.resize)
     }
   },
   methods: {

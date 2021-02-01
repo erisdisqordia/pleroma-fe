@@ -3,6 +3,16 @@ import VideoAttachment from '../video_attachment/video_attachment.vue'
 import Modal from '../modal/modal.vue'
 import fileTypeService from '../../services/file_type/file_type.service.js'
 import GestureService from '../../services/gesture_service/gesture_service'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faChevronLeft,
+  faChevronRight
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faChevronLeft,
+  faChevronRight
+)
 
 const MediaModal = {
   components: {

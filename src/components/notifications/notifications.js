@@ -6,6 +6,13 @@ import {
   filteredNotificationsFromStore,
   unseenNotificationsFromStore
 } from '../../services/notification_utils/notification_utils.js'
+import FaviconService from '../../services/favicon_service/favicon_service.js'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faCircleNotch
+)
 
 const DEFAULT_SEEN_TO_DISPLAY_COUNT = 30
 
@@ -69,8 +76,10 @@ const Notifications = {
   watch: {
     unseenCountTitle (count) {
       if (count > 0) {
+        FaviconService.drawFaviconBadge()
         this.$store.dispatch('setPageTitle', `(${count})`)
       } else {
+        FaviconService.clearFaviconBadge()
         this.$store.dispatch('setPageTitle', '')
       }
     }

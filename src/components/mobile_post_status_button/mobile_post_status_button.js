@@ -1,4 +1,12 @@
 import { debounce } from 'lodash'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faPen
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faPen
+)
 
 const HIDDEN_FOR_PAGES = new Set([
   'chats',

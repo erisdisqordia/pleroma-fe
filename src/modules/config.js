@@ -80,7 +80,6 @@ const config = {
   getters: {
     defaultConfig (state, getters, rootState, rootGetters) {
       const { instance } = rootState
-      console.log('DC', instance.minimalScopesMode)
       return {
         ...defaultState,
         ...Object.fromEntries(
@@ -90,7 +89,6 @@ const config = {
     },
     mergedConfig (state, getters, rootState, rootGetters) {
       const { defaultConfig } = rootGetters
-      console.log('DC2', defaultConfig.hideISP)
       return {
         ...defaultConfig,
         ...state

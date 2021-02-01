@@ -13,7 +13,7 @@
         >
         <slot />
       </span>
-      <ModifiedIcon :changed="isChanged" />
+      <ModifiedIndicator :changed="isChanged" />
     </Checkbox>
   </label>
 </template>
@@ -21,7 +21,7 @@
 <script>
 import { get, set } from 'lodash'
 import Checkbox from 'src/components/checkbox/checkbox.vue'
-import ModifiedIcon from './modified_icon.vue'
+import ModifiedIndicator from './modified_indicator.vue'
 export default {
   props: [
     'path',
@@ -29,7 +29,7 @@ export default {
   ],
   components: {
     Checkbox,
-    ModifiedIcon
+    ModifiedIndicator
   },
   computed: {
     pathDefault () {

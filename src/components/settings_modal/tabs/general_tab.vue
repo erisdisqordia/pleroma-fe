@@ -12,9 +12,9 @@
           </BooleanSetting>
         </li>
         <li v-if="instanceWallpaperUsed">
-          <Checkbox v-model="hideInstanceWallpaper">
+          <BooleanSetting path="hideInstanceWallpaper">
             {{ $t('settings.hide_wallpaper') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
       </ul>
     </div>
@@ -64,9 +64,9 @@
           </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="virtualScrolling">
+          <BooleanSetting path="virtualScrolling">
             {{ $t('settings.virtual_scrolling') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
       </ul>
     </div>

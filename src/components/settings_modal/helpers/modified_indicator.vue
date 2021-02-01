@@ -1,15 +1,17 @@
 <template>
   <span
     v-if="changed"
-    class="ModifiedIcon"
+    class="ModifiedIndicator"
     >
     <Popover
       trigger="hover"
       >
-      <i
-        slot="trigger"
-        class="icon icon-wrench"
-        />
+      <span slot="trigger">
+        &nbsp;
+          <FAIcon
+            icon="wrench"
+          />
+      </span>
       <div
         class="modified-tooltip"
         slot="content"
@@ -22,6 +24,13 @@
 
 <script>
 import Popover from 'src/components/popover/popover.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faWrench } from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faWrench
+)
+
 export default {
   props: ['changed'],
   components: { Popover }
@@ -29,13 +38,9 @@ export default {
 </script>
 
 <style lang="scss">
-.ModifiedIcon {
+.ModifiedIndicator {
   display: inline-block;
   position: relative;
-
-  .icon {
-    display: inline-block;
-  }
 
   .modified-tooltip {
     margin: 0.5em 1em;

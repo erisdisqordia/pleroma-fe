@@ -9,7 +9,6 @@ const SharedComputedObject = () => ({
     .map(key => [
       key + 'DefaultValue',
       function () {
-        console.log(this.$store.getters.defaultConfig)
         return this.$store.getters.defaultConfig[key]
       }
     ])

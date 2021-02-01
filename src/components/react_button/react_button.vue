@@ -1,6 +1,7 @@
 <template>
   <Popover
     trigger="click"
+    class="ReactButton"
     placement="top"
     :offset="{ y: 5 }"
     :bound-to="{ x: 'container' }"
@@ -42,7 +43,7 @@
     </div>
     <span
       slot="trigger"
-      class="ReactButton"
+      class="popover-trigger"
       :title="$t('tool_tip.add_reaction')"
     >
       <FAIcon

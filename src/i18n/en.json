@@ -242,6 +242,7 @@
   "settings": {
     "app_name": "App name",
     "security": "Security",
+    "setting_changed": "Setting is different from default",
     "enter_current_password_to_confirm": "Enter your current password to confirm your identity",
     "mfa": {
       "otp": "OTP",

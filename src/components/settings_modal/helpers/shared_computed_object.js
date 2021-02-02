@@ -1,29 +1,15 @@
-import {
-  instanceDefaultProperties,
-  multiChoiceProperties,
-  defaultState as configDefaultState
-} from 'src/modules/config.js'
+import { defaultState as configDefaultState } from 'src/modules/config.js'
 
 const SharedComputedObject = () => ({
   user () {
     return this.$store.state.users.currentUser
   },
-  // Getting localized values for instance-default properties
-  ...instanceDefaultProperties
-    .filter(key => multiChoiceProperties.includes(key))
+  // Getting values for default properties
+  ...Object.keys(configDefaultState)
     .map(key => [
       key + 'DefaultValue',
       function () {
-        return this.$store.getters.instanceDefaultConfig[key]
-      }
-    ])
-    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}),
-  ...instanceDefaultProperties
-    .filter(key => !multiChoiceProperties.includes(key))
-    .map(key => [
-      key + 'LocalizedValue',
-      function () {
-        return this.$t('settings.values.' + this.$store.getters.instanceDefaultConfig[key])
+        return this.$store.getters.defaultConfig[key]
       }
     ])
     .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}),

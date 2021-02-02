@@ -5,34 +5,34 @@
         <span class="label">{{ $t('settings.notification_visibility') }}</span>
         <ul class="option-list">
           <li>
-            <Checkbox v-model="notificationVisibility.likes">
+            <BooleanSetting path="notificationVisibility.likes">
               {{ $t('settings.notification_visibility_likes') }}
-            </Checkbox>
+            </BooleanSetting>
           </li>
           <li>
-            <Checkbox v-model="notificationVisibility.repeats">
+            <BooleanSetting path="notificationVisibility.repeats">
               {{ $t('settings.notification_visibility_repeats') }}
-            </Checkbox>
+            </BooleanSetting>
           </li>
           <li>
-            <Checkbox v-model="notificationVisibility.follows">
+            <BooleanSetting path="notificationVisibility.follows">
               {{ $t('settings.notification_visibility_follows') }}
-            </Checkbox>
+            </BooleanSetting>
           </li>
           <li>
-            <Checkbox v-model="notificationVisibility.mentions">
+            <BooleanSetting path="notificationVisibility.mentions">
               {{ $t('settings.notification_visibility_mentions') }}
-            </Checkbox>
+            </BooleanSetting>
           </li>
           <li>
-            <Checkbox v-model="notificationVisibility.moves">
+            <BooleanSetting path="notificationVisibility.moves">
               {{ $t('settings.notification_visibility_moves') }}
-            </Checkbox>
+            </BooleanSetting>
           </li>
           <li>
-            <Checkbox v-model="notificationVisibility.emojiReactions">
+            <BooleanSetting path="notificationVisibility.emojiReactions">
               {{ $t('settings.notification_visibility_emoji_reactions') }}
-            </Checkbox>
+            </BooleanSetting>
           </li>
         </ul>
       </div>
@@ -60,14 +60,14 @@
         </label>
       </div>
       <div>
-        <Checkbox v-model="hidePostStats">
-          {{ $t('settings.hide_post_stats') }} {{ $t('settings.instance_default', { value: hidePostStatsLocalizedValue }) }}
-        </Checkbox>
+        <BooleanSetting path="hidePostStats">
+          {{ $t('settings.hide_post_stats') }}
+        </BooleanSetting>
       </div>
       <div>
-        <Checkbox v-model="hideUserStats">
-          {{ $t('settings.hide_user_stats') }} {{ $t('settings.instance_default', { value: hideUserStatsLocalizedValue }) }}
-        </Checkbox>
+        <BooleanSetting path="hideUserStats">
+          {{ $t('settings.hide_user_stats') }}
+        </BooleanSetting>
       </div>
     </div>
     <div class="setting-item">
@@ -80,9 +80,9 @@
         />
       </div>
       <div>
-        <Checkbox v-model="hideFilteredStatuses">
-          {{ $t('settings.hide_filtered_statuses') }} {{ $t('settings.instance_default', { value: hideFilteredStatusesLocalizedValue }) }}
-        </Checkbox>
+        <BooleanSetting path="hideFilteredStatuses">
+          {{ $t('settings.hide_filtered_statuses') }}
+        </BooleanSetting>
       </div>
     </div>
   </div>

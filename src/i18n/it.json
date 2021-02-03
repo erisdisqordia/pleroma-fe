@@ -417,7 +417,8 @@
     "mute_import": "Importa silenziati",
     "mute_export_button": "Esporta la tua lista di silenziati in un file CSV",
     "mute_export": "Esporta silenziati",
-    "hide_wallpaper": "Nascondi sfondo della stanza"
+    "hide_wallpaper": "Nascondi sfondo della stanza",
+    "setting_changed": "Valore personalizzato"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",

@@ -28,6 +28,7 @@
               <button
                 class="button-unstyled -link"
                 @click.prevent="requireRecovery"
+                type="button"
               >
                 {{ $t('login.enter_recovery_code') }}
               </button>
@@ -35,6 +36,7 @@
               <button
                 class="button-unstyled -link"
                 @click.prevent="abortMFA"
+                type="button"
               >
                 {{ $t('general.cancel') }}
               </button>

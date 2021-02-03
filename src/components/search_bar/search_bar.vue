@@ -8,6 +8,7 @@
       class="button-unstyled nav-icon"
       :title="$t('nav.search')"
       @click.prevent.stop="toggleHidden"
+      type="button"
     >
       <FAIcon
         fixed-width
@@ -28,6 +29,7 @@
       <button
         class="button-default search-button"
         @click="find(searchTerm)"
+        type="submit"
       >
         <FAIcon
           fixed-width
@@ -37,6 +39,7 @@
       <button
         class="button-unstyled cancel-search"
         @click.prevent.stop="toggleHidden"
+        type="button"
       >
         <FAIcon
           fixed-width

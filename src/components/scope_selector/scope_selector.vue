@@ -9,6 +9,7 @@
       :class="css.direct"
       :title="$t('post_status.scope.direct')"
       @click="changeVis('direct')"
+      type="button"
     >
       <FAIcon
         icon="envelope"
@@ -21,6 +22,7 @@
       :class="css.private"
       :title="$t('post_status.scope.private')"
       @click="changeVis('private')"
+      type="button"
     >
       <FAIcon
         icon="lock"
@@ -33,6 +35,7 @@
       :class="css.unlisted"
       :title="$t('post_status.scope.unlisted')"
       @click="changeVis('unlisted')"
+      type="button"
     >
       <FAIcon
         icon="lock-open"
@@ -45,6 +48,7 @@
       :class="css.public"
       :title="$t('post_status.scope.public')"
       @click="changeVis('public')"
+      type="button"
     >
       <FAIcon
         icon="globe"

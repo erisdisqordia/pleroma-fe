@@ -105,7 +105,7 @@
     "no_more_notifications": "通知はありません",
     "reacted_with": "{0} でリアクションしました",
     "migrated_to": "インスタンスを引っ越しました",
-    "follow_request": "フォローを申請しました",
+    "follow_request": "あなたをフォローしたいです",
     "error": "通知の取得に失敗しました: {0}"
   },
   "polls": {

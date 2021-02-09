@@ -18,7 +18,7 @@
     "pleroma_chat_messages": "Pleroma チャット"
   },
   "finder": {
-    "error_fetching_user": "ユーザー検索がエラーになりました。",
+    "error_fetching_user": "ユーザー検索がエラーになりました",
     "find_user": "ユーザーを探す"
   },
   "general": {
@@ -95,7 +95,7 @@
     "chats": "チャット"
   },
   "notifications": {
-    "broken_favorite": "ステータスが見つかりません。探しています...",
+    "broken_favorite": "ステータスが見つかりません。探しています…",
     "favorited_you": "あなたのステータスがお気に入りされました",
     "followed_you": "フォローされました",
     "load_older": "古い通知をみる",
@@ -268,7 +268,7 @@
     "follow_export_button": "エクスポート",
     "follow_export_processing": "お待ちください。まもなくファイルをダウンロードできます。",
     "follow_import": "フォローのインポート",
-    "follow_import_error": "フォローのインポートがエラーになりました。",
+    "follow_import_error": "フォローのインポートがエラーになりました",
     "follows_imported": "フォローがインポートされました！ 少し時間がかかるかもしれません。",
     "foreground": "フォアグラウンド",
     "general": "全般",
@@ -356,7 +356,7 @@
     "streaming": "上までスクロールしたとき、自動的にストリーミングする",
     "text": "文字",
     "theme": "テーマ",
-    "theme_help": "カラーテーマをカスタマイズできます",
+    "theme_help": "カラーテーマをカスタマイズできます。",
     "theme_help_v2_1": "チェックボックスをONにすると、コンポーネントごとに、色と透明度をオーバーライドできます。「すべてクリア」ボタンを押すと、すべてのオーバーライドをやめます。",
     "theme_help_v2_2": "バックグラウンドとテキストのコントラストを表すアイコンがあります。マウスをホバーすると、詳しい説明が出ます。透明な色を使っているときは、最悪の場合のコントラストが示されます。",
     "tooltipRadius": "ツールチップとアラート",
@@ -402,8 +402,8 @@
           "hint": "コントラストは {ratio} です。{level}。({context})",
           "level": {
             "aa": "AAレベルガイドライン (ミニマル) を満たします",
-            "aaa": "AAAレベルガイドライン (レコメンデッド) を満たします。",
-            "bad": "ガイドラインを満たしません。"
+            "aaa": "AAAレベルガイドライン (レコメンデッド) を満たします",
+            "bad": "ガイドラインを満たしません"
           },
           "context": {
             "18pt": "大きい (18ポイント以上) テキスト",
@@ -467,7 +467,7 @@
           "drop_shadow_syntax": "{0} は、{1} パラメーターと {2} キーワードをサポートしていません。",
           "avatar_inset": "内側の影と外側の影を同時に使うと、透明なアバターの表示が乱れます。",
           "spread_zero": "広がりが 0 よりも大きな影は、0 と同じです。",
-          "inset_classic": "内側の影は {0} を使います。"
+          "inset_classic": "内側の影は {0} を使います"
         },
         "components": {
           "panel": "パネル",
@@ -502,7 +502,7 @@
         "content": "本文",
         "error": "エラーの例",
         "button": "ボタン",
-        "text": "これは{0}と{1}の例です。",
+        "text": "これは{0}と{1}の例です",
         "mono": "monospace",
         "input": "羽田空港に着きました。",
         "faint_link": "とても助けになるマニュアル",
@@ -655,7 +655,7 @@
     "media": "メディア",
     "mention": "メンション",
     "mute": "ミュート",
-    "muted": "ミュートしています！",
+    "muted": "ミュートしています",
     "per_day": "/日",
     "remote_follow": "リモートフォロー",
     "report": "通報",
@@ -663,11 +663,11 @@
     "subscribe": "購読",
     "unsubscribe": "購読を解除",
     "unblock": "ブロック解除",
-    "unblock_progress": "ブロックを解除しています...",
-    "block_progress": "ブロックしています...",
+    "unblock_progress": "ブロックを解除しています…",
+    "block_progress": "ブロックしています…",
     "unmute": "ミュート解除",
-    "unmute_progress": "ミュートを解除しています...",
-    "mute_progress": "ミュートしています...",
+    "unmute_progress": "ミュートを解除しています…",
+    "mute_progress": "ミュートしています…",
     "admin_menu": {
       "moderation": "モデレーション",
       "grant_admin": "管理者権限を付与",

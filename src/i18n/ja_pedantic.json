@@ -91,7 +91,8 @@
     "preferences": "設定",
     "administration": "管理",
     "bookmarks": "ブックマーク",
-    "timelines": "タイムライン"
+    "timelines": "タイムライン",
+    "chats": "チャット"
   },
   "notifications": {
     "broken_favorite": "ステータスが見つかりません。探しています...",
@@ -774,15 +775,19 @@
         "reject_desc": "このインスタンスでは、以下のインスタンスからのメッセージを受け付けません:",
         "accept_desc": "このインスタンスでは、以下のインスタンスからのメッセージのみを受け付けます:",
         "accept": "許可",
-        "simple_policies": "インスタンス固有のポリシー"
+        "simple_policies": "インスタンス固有のポリシー",
+        "reject": "拒否"
       },
       "mrf_policies": "有効なMRFポリシー",
       "keyword": {
         "replace": "置き換え",
         "ftl_removal": "「接続しているすべてのネットワーク」タイムラインから除外",
-        "keyword_policies": "キーワードポリシー"
+        "keyword_policies": "キーワードポリシー",
+        "is_replaced_by": "→",
+        "reject": "拒否"
       }
-    }
+    },
+    "staff": "スタッフ"
   },
   "display_date": {
     "today": "今日"
@@ -814,5 +819,11 @@
     "delete": "削除",
     "message_user": "{nickname} にメッセージ",
     "you": "あなた:"
+  },
+  "domain_mute_card": {
+    "unmute_progress": "ミュート解除中…",
+    "unmute": "ミュート解除",
+    "mute_progress": "ミュート中…",
+    "mute": "ミュート"
   }
 }

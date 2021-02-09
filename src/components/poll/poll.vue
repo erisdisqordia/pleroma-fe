@@ -58,7 +58,12 @@
         {{ $t('polls.vote') }}
       </button>
       <div class="total">
-        {{ totalVotesCount }} {{ $t("polls.votes") }}&nbsp;·&nbsp;
+        <template v-if="poll.multiple">
+          {{ $tc("polls.people_voted_count", poll.voters_count, { count: poll.voters_count }) }}&nbsp;·&nbsp;
+        </template>
+        <template v-else>
+          {{ $tc("polls.votes_count", poll.votes_count, { count: poll.votes_count }) }}&nbsp;·&nbsp;
+        </template>
       </div>
       <i18n :path="expired ? 'polls.expired' : 'polls.expires_in'">
         <Timeago

@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Button to remove uploaded media in post status form is now properly placed and sized.
 - Fixed shoutbox not working in mobile layout
 
+### Changed
+- Display 'people voted' instead of 'votes' for multi-choice polls
 
 ## [2.2.3] - 2021-01-18
 ### Added

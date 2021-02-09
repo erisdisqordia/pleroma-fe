@@ -139,6 +139,11 @@
 @import '../../_variables.scss';
 
 .ExtraButtons {
+  /* override of popover internal stuff */
+  .popover-trigger-button {
+    width: auto;
+  }
+
   .popover-trigger {
     position: static;
     padding: 10px;

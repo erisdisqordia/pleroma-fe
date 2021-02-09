@@ -7,6 +7,7 @@
       ref="trigger"
       class="button-unstyled -fullwidth popover-trigger-button"
       @click="onClick"
+      type="button"
     >
       <slot name="trigger" />
     </button>

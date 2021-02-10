@@ -58,7 +58,7 @@
         {{ $t('polls.vote') }}
       </button>
       <div class="total">
-        <template v-if="poll.multiple">
+        <template v-if="poll.voters_count">
           {{ $tc("polls.people_voted_count", poll.voters_count, { count: poll.voters_count }) }}&nbsp;·&nbsp;
         </template>
         <template v-else>

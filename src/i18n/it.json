@@ -17,7 +17,11 @@
     "close": "Chiudi",
     "retry": "Riprova",
     "error_retry": "Per favore, riprova",
-    "loading": "Carico…"
+    "loading": "Carico…",
+    "role": {
+      "moderator": "Moderatore",
+      "admin": "Amministratore"
+    }
   },
   "nav": {
     "mentions": "Menzioni",

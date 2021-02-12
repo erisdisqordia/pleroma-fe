@@ -716,6 +716,7 @@
     "mute_progress": "Muting…",
     "hide_repeats": "Hide repeats",
     "show_repeats": "Show repeats",
+    "bot": "Bot",
     "admin_menu": {
       "moderation": "Moderation",
       "grant_admin": "Grant Admin",

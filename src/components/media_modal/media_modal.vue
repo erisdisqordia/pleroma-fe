@@ -87,7 +87,6 @@
   max-height: 90%;
   box-shadow: 0px 5px 15px 0 rgba(0, 0, 0, 0.5);
   image-orientation: from-image; // NOTE: only FF supports this
-  opacity: 1;
   animation: 0.1s cubic-bezier(0.7, 0, 1, 0.6) media-fadein;
 }
 

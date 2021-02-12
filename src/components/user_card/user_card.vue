@@ -89,7 +89,7 @@
                   v-if="user.bot"
                   class="alert user-role"
                 >
-                  bot
+                  {{ $t('user_card.bot') }}
                 </span>
               </template>
               <span v-if="user.locked">

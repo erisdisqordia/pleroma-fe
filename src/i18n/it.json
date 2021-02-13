@@ -17,7 +17,11 @@
     "close": "Chiudi",
     "retry": "Riprova",
     "error_retry": "Per favore, riprova",
-    "loading": "Carico…"
+    "loading": "Carico…",
+    "role": {
+      "moderator": "Moderatore",
+      "admin": "Amministratore"
+    }
   },
   "nav": {
     "mentions": "Menzioni",
@@ -487,11 +491,7 @@
     "follow_progress": "Richiedo…",
     "follow_sent": "Richiesta inviata!",
     "favorites": "Preferiti",
-    "message": "Contatta",
-    "roles": {
-      "moderator": "Moderatore",
-      "admin": "Amministratore"
-    }
+    "message": "Contatta"
   },
   "chat": {
     "title": "Chat"

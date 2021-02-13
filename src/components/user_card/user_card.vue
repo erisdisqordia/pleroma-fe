@@ -83,7 +83,7 @@
                   v-if="!!visibleRole"
                   class="alert user-role"
                 >
-                  {{ $t(`user_card.roles.${visibleRole}`) }}
+                  {{ $t(`general.role.${visibleRole}`) }}
                 </span>
                 <span
                   v-if="user.bot"

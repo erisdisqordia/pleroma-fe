@@ -4,7 +4,7 @@
   },
   "exporter": {
     "export": "エクスポート",
-    "processing": "処理中です。処理が完了すると、ファイルをダウンロードするよう指示があります。"
+    "processing": "処理中です。処理が完了すると、ファイルをダウンロードするよう指示があります"
   },
   "features_panel": {
     "chat": "チャット",
@@ -39,7 +39,11 @@
     "dismiss": "無視",
     "retry": "もう一度お試し下さい",
     "error_retry": "もう一度お試し下さい",
-    "loading": "読み込み中…"
+    "loading": "読み込み中…",
+    "role": {
+      "moderator": "モデレーター",
+      "admin": "管理者"
+    }
   },
   "image_cropper": {
     "crop_picture": "画像を切り抜く",
@@ -120,7 +124,9 @@
     "expiry": "投票期間",
     "expires_in": "投票は {0} で終了します",
     "expired": "投票は {0} 前に終了しました",
-    "not_enough_options": "相異なる選択肢が不足しています"
+    "not_enough_options": "相異なる選択肢が不足しています",
+    "votes_count": "{count} 票 | {count} 票",
+    "people_voted_count": "{count} 人投票 | {count} 人投票"
   },
   "emoji": {
     "stickers": "ステッカー",
@@ -161,14 +167,14 @@
     "posting": "投稿",
     "scope_notice": {
       "public": "この投稿は、誰でも見ることができます",
-      "private": "この投稿は、あなたのフォロワーだけが、見ることができます。",
-      "unlisted": "この投稿は、パブリックタイムラインと、接続しているすべてのネットワークには、表示されません。"
+      "private": "この投稿は、あなたのフォロワーだけが、見ることができます",
+      "unlisted": "この投稿は、パブリックタイムラインと、接続しているすべてのネットワークには、表示されません"
     },
     "scope": {
-      "direct": "ダイレクト: メンションされたユーザーのみに届きます。",
-      "private": "フォロワー限定: フォロワーのみに届きます。",
-      "public": "パブリック: パブリックタイムラインに届きます。",
-      "unlisted": "アンリステッド: パブリックタイムラインに届きません。"
+      "direct": "ダイレクト: メンションされたユーザーのみに届きます",
+      "private": "フォロワー限定: フォロワーのみに届きます",
+      "public": "パブリック: パブリックタイムラインに届きます",
+      "unlisted": "アンリステッド: パブリックタイムラインに届きません"
     },
     "media_description_error": "メディアのアップロードに失敗しました。もう一度お試しください",
     "empty_status_error": "投稿内容を入力してください",
@@ -263,7 +269,7 @@
     "pad_emoji": "ピッカーから絵文字を挿入するとき、絵文字の両側にスペースを入れる",
     "export_theme": "保存",
     "filtering": "フィルタリング",
-    "filtering_explanation": "これらの言葉を含むすべてのものがミュートされます。1行に1つの言葉を書いてください。",
+    "filtering_explanation": "これらの言葉を含むすべてのものがミュートされます。1行に1つの言葉を書いてください",
     "follow_export": "フォローのエクスポート",
     "follow_export_button": "エクスポート",
     "follow_export_processing": "お待ちください。まもなくファイルをダウンロードできます。",
@@ -389,11 +395,15 @@
           "older_version_imported": "古いフロントエンドで作られたファイルをインポートしました。",
           "future_version_imported": "新しいフロントエンドで作られたファイルをインポートしました。",
           "v2_imported": "古いフロントエンドのためのファイルをインポートしました。設定した通りにならないかもしれません。",
-          "upgraded_from_v2": "フロントエンドが新しくなったので、今までの見た目と少し違うかもしれません。"
+          "upgraded_from_v2": "フロントエンドが新しくなったので、今までの見た目と少し違うかもしれません。",
+          "snapshot_source_mismatch": "フロントエンドがロールバックと更新を繰り返したため、バージョンが競合しています。",
+          "migration_napshot_gone": "スナップショットがありません、覚えているものと見た目が違うかもしれません。",
+          "snapshot_present": "テーマのスナップショットが読み込まれました。設定は上書きされました。代わりとして実データを読み込むことができます。"
         },
         "use_source": "新しいバージョン",
         "use_snapshot": "古いバージョン",
-        "load_theme": "テーマの読み込み"
+        "load_theme": "テーマの読み込み",
+        "keep_as_is": "変更しない"
       },
       "common": {
         "color": "色",
@@ -466,7 +476,7 @@
           "always_drop_shadow": "ブラウザーがサポートしていれば、常に {0} が使われます。",
           "drop_shadow_syntax": "{0} は、{1} パラメーターと {2} キーワードをサポートしていません。",
           "avatar_inset": "内側の影と外側の影を同時に使うと、透明なアバターの表示が乱れます。",
-          "spread_zero": "広がりが 0 よりも大きな影は、0 と同じです。",
+          "spread_zero": "広がりが 0 よりも大きな影は、0 と同じです",
           "inset_classic": "内側の影は {0} を使います"
         },
         "components": {
@@ -481,7 +491,8 @@
           "buttonPressed": "ボタン (押されているとき)",
           "buttonPressedHover": "ボタン (ホバー、かつ、押されているとき)",
           "input": "インプットフィールド"
-        }
+        },
+        "hintV3": "影の場合は、 {0} 表記を使って他の色スロットを使うこともできます。"
       },
       "fonts": {
         "_tab_label": "フォント",
@@ -559,7 +570,8 @@
     "mute_import": "ミュートのインポート",
     "mute_export": "ミュートのエクスポート",
     "allow_following_move": "フォロー中のアカウントが引っ越したとき、自動フォローを許可する",
-    "setting_changed": "規定の設定と異なっています"
+    "setting_changed": "規定の設定と異なっています",
+    "greentext": "引用を緑色で表示"
   },
   "time": {
     "day": "{0}日",
@@ -694,7 +706,8 @@
     "show_repeats": "リピートを見る",
     "hide_repeats": "リピートを隠す",
     "message": "メッセージ",
-    "hidden": "隠す"
+    "hidden": "隠す",
+    "bot": "bot"
   },
   "user_profile": {
     "timeline_title": "ユーザータイムライン",
@@ -799,7 +812,9 @@
     "audio": "オーディオ"
   },
   "remote_user_resolver": {
-    "error": "見つかりませんでした。"
+    "error": "見つかりませんでした。",
+    "searching_for": "検索中",
+    "remote_user_resolver": "リモートユーザーリゾルバ"
   },
   "errors": {
     "storage_unavailable": "ブラウザのストレージに接続できなかったため、ログインや設定情報は保存されません。Cookieを有効にしてください。"

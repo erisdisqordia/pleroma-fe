@@ -562,7 +562,8 @@
     "mute_import": "Importar silenciados",
     "mute_export_button": "Exportar los silenciados a un archivo csv",
     "mute_export": "Exportar silenciados",
-    "hide_wallpaper": "Ocultar el fondo de pantalla de la instancia"
+    "hide_wallpaper": "Ocultar el fondo de pantalla de la instancia",
+    "setting_changed": "La configuración es diferente a la predeterminada"
   },
   "time": {
     "day": "{0} día",
@@ -693,7 +694,11 @@
     "show_repeats": "Mostrar repetidos",
     "hide_repeats": "Ocultar repetidos",
     "message": "Mensaje",
-    "hidden": "Oculto"
+    "hidden": "Oculto",
+    "roles": {
+      "moderator": "Moderador",
+      "admin": "Administrador"
+    }
   },
   "user_profile": {
     "timeline_title": "Linea Temporal del Usuario",

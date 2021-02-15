@@ -57,9 +57,9 @@
     "enter_recovery_code": "Skriv inn en gjenopprettingskode",
     "enter_two_factor_code": "Skriv inn en to-faktors kode",
     "recovery_code": "Gjenopprettingskode",
-    "heading" : {
-      "totp" : "To-faktors autentisering",
-      "recovery" : "To-faktors gjenoppretting"
+    "heading": {
+      "totp": "To-faktors autentisering",
+      "recovery": "To-faktors gjenoppretting"
     }
   },
   "media_modal": {
@@ -72,7 +72,7 @@
     "chat": "Lokal nettprat",
     "friend_requests": "Følgeforespørsler",
     "mentions": "Nevnt",
-    "interactions": "Interaksjooner",
+    "interactions": "Interaksjoner",
     "dms": "Direktemeldinger",
     "public_tl": "Offentlig Tidslinje",
     "timeline": "Tidslinje",
@@ -80,7 +80,9 @@
     "user_search": "Søk etter brukere",
     "search": "Søk",
     "who_to_follow": "Kontoer å følge",
-    "preferences": "Innstillinger"
+    "preferences": "Innstillinger",
+    "timelines": "Tidslinjer",
+    "bookmarks": "Bokmerker"
   },
   "notifications": {
     "broken_favorite": "Ukjent status, leter etter den...",
@@ -90,7 +92,8 @@
     "notifications": "Varslinger",
     "read": "Les!",
     "repeated_you": "Gjentok din status",
-    "no_more_notifications": "Ingen gjenstående varsler"
+    "no_more_notifications": "Ingen gjenstående varsler",
+    "follow_request": "ønsker å følge deg"
   },
   "polls": {
     "add_poll": "Legg til undersøkelse",
@@ -134,7 +137,7 @@
       "public": "Denne statusen vil være synlig for alle",
       "private": "Denne statusen vil være synlig for dine følgere",
       "unlisted": "Denne statusen vil ikke være synlig i Offentlig Tidslinje eller Det Hele Kjente Nettverket"
-      },
+    },
     "scope": {
       "direct": "Direkte, publiser bare til nevnte brukere",
       "private": "Bare følgere, publiser bare til brukere som følger deg",
@@ -171,17 +174,17 @@
     "security": "Sikkerhet",
     "enter_current_password_to_confirm": "Skriv inn ditt nåverende passord for å bekrefte din identitet",
     "mfa": {
-      "otp" : "OTP",
-      "setup_otp" : "Set opp OTP",
-      "wait_pre_setup_otp" : "forhåndsstiller OTP",
-      "confirm_and_enable" : "Bekreft og slå på OTP",
+      "otp": "OTP",
+      "setup_otp": "Set opp OTP",
+      "wait_pre_setup_otp": "forhåndsstiller OTP",
+      "confirm_and_enable": "Bekreft og slå på OTP",
       "title": "To-faktors autentisering",
-      "generate_new_recovery_codes" : "Generer nye gjenopprettingskoder",
-      "warning_of_generate_new_codes" : "Når du genererer nye gjenopprettingskoder, vil de gamle slutte å fungere.",
-      "recovery_codes" : "Gjenopprettingskoder.",
+      "generate_new_recovery_codes": "Generer nye gjenopprettingskoder",
+      "warning_of_generate_new_codes": "Når du genererer nye gjenopprettingskoder, vil de gamle slutte å fungere.",
+      "recovery_codes": "Gjenopprettingskoder.",
       "waiting_a_recovery_codes": "Mottar gjenopprettingskoder...",
-      "recovery_codes_warning" : "Skriv disse kodene ned eller plasser dem ett sikkert sted - ellers så vil du ikke se dem igjen. Dersom du mister tilgang til din to-faktors app og dine gjenopprettingskoder, vil du bli stengt ute av kontoen din.",
-      "authentication_methods" : "Autentiseringsmetoder",
+      "recovery_codes_warning": "Skriv disse kodene ned eller plasser dem ett sikkert sted - ellers så vil du ikke se dem igjen. Dersom du mister tilgang til din to-faktors app og dine gjenopprettingskoder, vil du bli stengt ute av kontoen din.",
+      "authentication_methods": "Autentiseringsmetoder",
       "scan": {
         "title": "Skann",
         "desc": "Ved hjelp av din to-faktors applikasjon, skann denne QR-koden eller skriv inn tekstnøkkelen",
@@ -579,7 +582,7 @@
     "favorite": "Lik",
     "user_settings": "Brukerinnstillinger"
   },
-  "upload":{
+  "upload": {
     "error": {
       "base": "Det oppsto en feil under opplastning.",
       "file_too_big": "Fil for stor [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",

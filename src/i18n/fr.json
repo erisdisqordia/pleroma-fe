@@ -280,7 +280,7 @@
     "hide_followers_description": "Ne pas afficher qui est abonné à moi",
     "show_admin_badge": "Afficher le badge d'Administrateur⋅ice sur mon profil",
     "show_moderator_badge": "Afficher le badge de Modérateur⋅ice sur mon profil",
-    "nsfw_clickthrough": "Masquer les images marquées comme contenu adulte ou sensible",
+    "nsfw_clickthrough": "Activer le clic pour dévoiler les pièces jointes et cacher l'aperçu des liens pour les statuts marqués comme sensibles",
     "oauth_tokens": "Jetons OAuth",
     "token": "Jeton",
     "refresh_token": "Rafraichir le jeton",
@@ -409,7 +409,13 @@
         "tabs": "Onglets",
         "toggled": "(Dés)activé",
         "highlight": "Éléments mis en valeur",
-        "popover": "Infobulles, menus"
+        "popover": "Infobulles, menus",
+        "chat": {
+          "border": "Bordure",
+          "outgoing": "Sortant(s)",
+          "incoming": "Entrant(s)"
+        },
+        "wallpaper": "Fond d'écran"
       },
       "radii": {
         "_tab_label": "Rondeur"
@@ -485,7 +491,7 @@
     "notification_visibility_emoji_reactions": "Réactions",
     "hide_follows_count_description": "Masquer le nombre de suivis",
     "useStreamingApiWarning": "(Non recommandé, expérimental, connu pour rater des messages)",
-    "type_domains_to_mute": "Écrire les domaines à masquer",
+    "type_domains_to_mute": "Chercher les domaines à masquer",
     "fun": "Rigolo",
     "greentext": "greentexting",
     "allow_following_move": "Suivre automatiquement quand ce compte migre",
@@ -509,7 +515,21 @@
     "mute_import_error": "Erreur à l'import des masquages",
     "mute_import": "Import des masquages",
     "mute_export_button": "Exporter vos masquages dans un fichier CSV",
-    "mute_export": "Export des masquages"
+    "mute_export": "Export des masquages",
+    "notification_setting_hide_notification_contents": "Cacher l'expéditeur et le contenu des notifications push",
+    "notification_setting_block_from_strangers": "Bloquer les notifications des utilisateur⋅ice⋅s que vous ne suivez pas",
+    "virtual_scrolling": "Optimiser le rendu du fil d'actualité",
+    "reset_background_confirm": "Voulez-vraiment réinitialiser l'arrière-plan ?",
+    "reset_banner_confirm": "Voulez-vraiment réinitialiser la bannière ?",
+    "reset_avatar_confirm": "Voulez-vraiment réinitialiser l'avatar ?",
+    "reset_profile_banner": "Réinitialiser la bannière du profil",
+    "reset_profile_background": "Réinitialiser l'arrière-plan du profil",
+    "reset_avatar": "Réinitialiser l'avatar",
+    "profile_fields": {
+      "value": "Contenu",
+      "name": "Étiquette",
+      "add_field": "Ajouter un champ"
+    }
   },
   "timeline": {
     "collapse": "Fermer",
@@ -521,7 +541,9 @@
     "show_new": "Afficher plus",
     "up_to_date": "À jour",
     "no_more_statuses": "Pas plus de statuts",
-    "no_statuses": "Aucun statuts"
+    "no_statuses": "Aucun statuts",
+    "reload": "Recharger",
+    "error": "Erreur lors de l'affichage du fil d'actualité : {0}"
   },
   "status": {
     "favorites": "Favoris",
@@ -536,7 +558,19 @@
     "mute_conversation": "Masquer la conversation",
     "unmute_conversation": "Démasquer la conversation",
     "status_unavailable": "Status indisponible",
-    "copy_link": "Copier le lien au status"
+    "copy_link": "Copier le lien au status",
+    "expand": "Développer",
+    "nsfw": "Contenu sensible",
+    "status_deleted": "Ce post a été effacé",
+    "hide_content": "Cacher le contenu",
+    "show_content": "Montrer le contenu",
+    "hide_full_subject": "Cacher le sujet",
+    "show_full_subject": "Montrer le sujet en entier",
+    "thread_muted_and_words": ", contient les mots :",
+    "thread_muted": "Fil de discussion masqué",
+    "external_source": "Source externe",
+    "unbookmark": "Supprimer des favoris",
+    "bookmark": "Ajouter aux favoris"
   },
   "user_card": {
     "approve": "Accepter",
@@ -591,7 +625,12 @@
     "subscribe": "Abonner",
     "unsubscribe": "Désabonner",
     "hide_repeats": "Cacher les partages",
-    "show_repeats": "Montrer les partages"
+    "show_repeats": "Montrer les partages",
+    "roles": {
+      "moderator": "Modérateur⋅ice",
+      "admin": "Administrateur⋅ice"
+    },
+    "message": "Message"
   },
   "user_profile": {
     "timeline_title": "Journal de l'utilisateur⋅ice",
@@ -619,13 +658,15 @@
     "user_settings": "Paramètres utilisateur",
     "add_reaction": "Ajouter une réaction",
     "accept_follow_request": "Accepter la demande de suivit",
-    "reject_follow_request": "Rejeter la demande de suivit"
+    "reject_follow_request": "Rejeter la demande de suivit",
+    "bookmark": "Favori"
   },
   "upload": {
     "error": {
       "base": "L'envoi a échoué.",
       "file_too_big": "Fichier trop gros [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-      "default": "Réessayez plus tard"
+      "default": "Réessayez plus tard",
+      "message": "Envoi échoué : {0}"
     },
     "file_size_units": {
       "B": "O",
@@ -759,5 +800,27 @@
   },
   "shoutbox": {
     "title": "Shoutbox"
+  },
+  "display_date": {
+    "today": "Aujourd'hui"
+  },
+  "file_type": {
+    "file": "Fichier",
+    "image": "Image",
+    "video": "Vidéo",
+    "audio": "Audio"
+  },
+  "chats": {
+    "empty_chat_list_placeholder": "Vous n'avez pas encore de discussions. Démarrez-en une nouvelle !",
+    "error_sending_message": "Quelque chose s'est mal passé pendant l'envoi du message.",
+    "error_loading_chat": "Quelque chose s'est mal passé au chargement de la discussion.",
+    "delete_confirm": "Voulez-vous vraiment effacer ce message ?",
+    "more": "Plus",
+    "empty_message_error": "Impossible d'envoyer un message vide",
+    "new": "Nouvelle discussion",
+    "chats": "Discussions",
+    "delete": "Effacer",
+    "message_user": "Message à {nickname}",
+    "you": "Vous :"
   }
 }

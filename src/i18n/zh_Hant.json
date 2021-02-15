@@ -25,7 +25,7 @@
     "add_poll": "增加投票"
   },
   "notifications": {
-    "reacted_with": "和 {0} 互動過",
+    "reacted_with": "作出了 {0} 的反應",
     "migrated_to": "遷移到",
     "no_more_notifications": "沒有更多的通知",
     "repeated_you": "轉發了你的發文",
@@ -54,7 +54,7 @@
     "mentions": "提及",
     "friend_requests": "關注請求",
     "back": "後退",
-    "administration": "管理",
+    "administration": "管理員",
     "about": "關於"
   },
   "media_modal": {
@@ -216,7 +216,8 @@
           "incoming": "收到",
           "outgoing": "發出",
           "border": "邊框"
-        }
+        },
+        "wallpaper": "桌布"
       },
       "preview": {
         "header_faint": "這很正常",
@@ -412,7 +413,7 @@
     "hide_follows_description": "不要顯示我所關注的人",
     "hide_followers_description": "不要顯示關注我的人",
     "hide_follows_count_description": "不顯示關注數",
-    "nsfw_clickthrough": "將敏感附件隱藏，點擊才能打開",
+    "nsfw_clickthrough": "將敏感附件和鏈接隱藏，點擊才能打開",
     "valid_until": "有效期至",
     "panelRadius": "面板",
     "pause_on_unfocused": "在離開頁面時暫停時間線推送",
@@ -572,16 +573,20 @@
     "thread_muted_and_words": ",有这些字:",
     "hide_full_subject": "隱藏完整標題",
     "show_content": "顯示內容",
-    "hide_content": "隱藏內容"
+    "hide_content": "隱藏內容",
+    "status_deleted": "該帖已被刪除",
+    "expand": "展开",
+    "external_source": "外部來源",
+    "nsfw": "工作不安全"
   },
   "time": {
-    "hours": "{0} 小時",
+    "hours": "{0} 時",
     "days_short": "{0}天",
     "day_short": "{0}天",
     "days": "{0} 天",
-    "hour": "{0} 小时",
-    "hour_short": "{0}h",
-    "hours_short": "{0}h",
+    "hour": "{0} 時",
+    "hour_short": "{0}時",
+    "hours_short": "{0}時",
     "years_short": "{0} y",
     "now": "剛剛",
     "day": "{0} 天",
@@ -655,7 +660,8 @@
     "reload": "重新載入",
     "up_to_date": "已是最新",
     "no_more_statuses": "没有更多發文",
-    "no_statuses": "没有發文"
+    "no_statuses": "没有發文",
+    "error": "取得時間線時發生錯誤：{0}"
   },
   "interactions": {
     "load_older": "載入更早的互動",
@@ -746,7 +752,11 @@
     "unmute": "取消靜音",
     "unmute_progress": "取消靜音中…",
     "hide_repeats": "隱藏轉發",
-    "show_repeats": "顯示轉發"
+    "show_repeats": "顯示轉發",
+    "roles": {
+      "moderator": "主持人",
+      "admin": "管理員"
+    }
   },
   "user_profile": {
     "timeline_title": "用戶時間線",
@@ -788,7 +798,8 @@
     "error": {
       "base": "上傳失敗。",
       "file_too_big": "文件太大[{filesize} {filesizeunit} / {allowedsize} {allowedsizeunit}]",
-      "default": "稍後再試"
+      "default": "稍後再試",
+      "message": "上傳錯誤：{0}"
     }
   },
   "search": {

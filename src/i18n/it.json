@@ -421,7 +421,8 @@
     "mute_import": "Importa silenziati",
     "mute_export_button": "Esporta la tua lista di silenziati in un file CSV",
     "mute_export": "Esporta silenziati",
-    "hide_wallpaper": "Nascondi sfondo della stanza"
+    "hide_wallpaper": "Nascondi sfondo della stanza",
+    "setting_changed": "Valore personalizzato"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",
@@ -491,7 +492,8 @@
     "follow_progress": "Richiedo…",
     "follow_sent": "Richiesta inviata!",
     "favorites": "Preferiti",
-    "message": "Contatta"
+    "message": "Contatta",
+    "bot": "Bot"
   },
   "chat": {
     "title": "Chat"
@@ -660,7 +662,9 @@
     "expiry": "Età",
     "expires_in": "Chiude fra {0}",
     "expired": "Chiuso {0} fa",
-    "not_enough_options": "Aggiungi altre risposte"
+    "not_enough_options": "Aggiungi altre risposte",
+    "votes_count": "{count} voto | {count} voti",
+    "people_voted_count": "{count} votante | {count} votanti"
   },
   "interactions": {
     "favs_repeats": "Condivisi e Graditi",

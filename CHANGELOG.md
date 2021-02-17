@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Display 'people voted' instead of 'votes' for multi-choice polls
+- Optimized chat to not get horrible performance after keeping the same chat open for a long time
 
 ## [2.2.3] - 2021-01-18
 ### Added

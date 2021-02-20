@@ -584,7 +584,9 @@
     "fullname_placeholder": "es. Lupo Lucio",
     "username_placeholder": "es. mister_wolf",
     "new_captcha": "Clicca l'immagine per avere un altro captcha",
-    "captcha": "CAPTCHA"
+    "captcha": "CAPTCHA",
+    "reason_placeholder": "L'amministratore esamina ciascuna richiesta.\nFornisci il motivo della tua iscrizione.",
+    "reason": "Motivo dell'iscrizione"
   },
   "user_profile": {
     "timeline_title": "Sequenza dell'Utente",

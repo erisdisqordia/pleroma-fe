@@ -11,6 +11,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 - Display 'people voted' instead of 'votes' for multi-choice polls
 
+### Added
+- Added reason field for registration when approval is required
+
 ## [2.2.3] - 2021-01-18
 ### Added
 - Added Report button to status ellipsis menu for easier reporting

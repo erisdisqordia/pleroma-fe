@@ -404,7 +404,8 @@
     "chatMessageRadius": "챗 메시지",
     "change_email": "전자메일 주소 바꾸기",
     "changed_email": "메일주소가 갱신되었습니다!",
-    "bot": "이 계정은 bot입니다"
+    "bot": "이 계정은 bot입니다",
+    "mutes_tab": "침묵"
   },
   "timeline": {
     "collapse": "접기",

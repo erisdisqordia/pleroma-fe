@@ -7,11 +7,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 - Button to remove uploaded media in post status form is now properly placed and sized.
 - Fixed shoutbox not working in mobile layout
+- Fixed some UI jumpiness when opening images particularly in chat view
 
 ### Changed
 - Display 'people voted' instead of 'votes' for multi-choice polls
 - Changed the "Timelines" link in side panel to toggle show all timeline options inside the panel
 - Renamed "Timeline" to "Home Timeline" to be more clear
+- Optimized chat to not get horrible performance after keeping the same chat open for a long time
+
+### Added
+- Added reason field for registration when approval is required
+>>>>>>> develop
 
 ## [2.2.3] - 2021-01-18
 ### Added

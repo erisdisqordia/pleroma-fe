@@ -229,6 +229,8 @@
     "username_placeholder": "e.g. lain",
     "fullname_placeholder": "e.g. Lain Iwakura",
     "bio_placeholder": "e.g.\nHi, I'm Lain.\nI’m an anime girl living in suburban Japan. You may know me from the Wired.",
+    "reason": "Reason to register",
+    "reason_placeholder": "This instance approves registrations manually.\nLet the administration know why you want to register.",
     "validations": {
       "username_required": "cannot be left blank",
       "fullname_required": "cannot be left blank",

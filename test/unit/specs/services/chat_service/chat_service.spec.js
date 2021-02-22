@@ -88,4 +88,21 @@ describe('chatService', () => {
       expect(view.map(i => i.type)).to.eql(['date', 'message', 'message', 'date', 'message'])
     })
   })
+
+  describe('.cullOlderMessages', () => {
+    it('keeps 50 newest messages and idIndex matches', () => {
+      const chat = chatService.empty()
+
+      for (let i = 100; i > 0; i--) {
+        // Use decimal values with toFixed to hack together constant length predictable strings
+        chatService.add(chat, { messages: [{ ...message1, id: 'a' + (i / 1000).toFixed(3), idempotency_key: i }] })
+      }
+      chatService.cullOlderMessages(chat)
+      expect(chat.messages.length).to.eql(50)
+      expect(chat.messages[0].id).to.eql('a0.051')
+      expect(chat.minId).to.eql('a0.051')
+      expect(chat.messages[49].id).to.eql('a0.100')
+      expect(Object.keys(chat.idIndex).length).to.eql(50)
+    })
+  })
 })

@@ -51,6 +51,7 @@ const getInstanceConfig = async ({ store }) => {
       const vapidPublicKey = data.pleroma.vapid_public_key
 
       store.dispatch('setInstanceOption', { name: 'textlimit', value: textlimit })
+      store.dispatch('setInstanceOption', { name: 'accountApprovalRequired', value: data.approval_required })
 
       if (vapidPublicKey) {
         store.dispatch('setInstanceOption', { name: 'vapidPublicKey', value: vapidPublicKey })

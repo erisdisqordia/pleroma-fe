@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Display 'people voted' instead of 'votes' for multi-choice polls
+- Changed the "Timelines" link in side panel to toggle show all timeline options inside the panel
+- Renamed "Timeline" to "Home Timeline" to be more clear
 
 ## [2.2.3] - 2021-01-18
 ### Added

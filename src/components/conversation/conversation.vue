@@ -50,7 +50,6 @@
 
 .Conversation {
   .conversation-status {
-    border-left: none;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: var(--border, $fallback--border);

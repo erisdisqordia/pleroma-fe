@@ -18,11 +18,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Optimized chat to not get horrible performance after keeping the same chat open for a long time
 - When opening emoji picker or react picker, it automatically focuses the search field
 - Language picker now uses native language names
+- Changed the "Timelines" link in side panel to toggle show all timeline options inside the panel
+- Renamed "Timeline" to "Home Timeline" to be more clear
 
 ### Added
 - Added reason field for registration when approval is required
 - Group staff members by role in the About page
-
 
 ## [2.2.3] - 2021-01-18
 ### Added

@@ -1,4 +1,4 @@
-import { timelineNames } from '../timeline_menu/timeline_menu.js'
+import TimelineMenuContent from '../timeline_menu/timeline_menu_content.vue'
 import { mapState, mapGetters } from 'vuex'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -7,6 +7,8 @@ import {
   faGlobe,
   faBookmark,
   faEnvelope,
+  faChevronDown,
+  faChevronUp,
   faSatellite,
   faComments,
   faBolt,
@@ -18,6 +20,8 @@ library.add(
   faGlobe,
   faBookmark,
   faEnvelope,
+  faChevronDown,
+  faChevronUp,
   faSatellite,
   faComments,
   faBolt,
@@ -30,16 +34,20 @@ const NavPanel = {
       this.$store.dispatch('startFetchingFollowRequests')
     }
   },
+  components: {
+    TimelineMenuContent
+  },
+  data () {
+    return {
+      showTimelines: false
+    }
+  },
+  methods: {
+    toggleTimelines () {
+      this.showTimelines = !this.showTimelines
+    }
+  },
   computed: {
-    onTimelineRoute () {
-      return !!timelineNames()[this.$route.name]
-    },
-    timelinesRoute () {
-      if (this.$store.state.interface.lastTimeline) {
-        return this.$store.state.interface.lastTimeline
-      }
-      return this.currentUser ? 'friends' : 'public-timeline'
-    },
     ...mapState({
       currentUser: state => state.users.currentUser,
       followRequestCount: state => state.api.followRequests.length,

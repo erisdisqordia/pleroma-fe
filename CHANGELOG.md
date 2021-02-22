@@ -8,9 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Button to remove uploaded media in post status form is now properly placed and sized.
 - Fixed shoutbox not working in mobile layout
 - Fixed missing highlighted border in expanded conversations again
+- Fixed some UI jumpiness when opening images particularly in chat view
 
 ### Changed
 - Display 'people voted' instead of 'votes' for multi-choice polls
+- Optimized chat to not get horrible performance after keeping the same chat open for a long time
+
+### Added
+- Added reason field for registration when approval is required
 
 ## [2.2.3] - 2021-01-18
 ### Added

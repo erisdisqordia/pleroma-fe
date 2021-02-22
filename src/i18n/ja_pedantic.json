@@ -201,7 +201,9 @@
       "password_required": "必須",
       "password_confirmation_required": "必須",
       "password_confirmation_match": "パスワードが違います"
-    }
+    },
+    "reason_placeholder": "このインスタンスは、新規登録を手動で受け付けています。\n登録したい理由を、インスタンスの管理者に教えてください。",
+    "reason": "登録するための目的"
   },
   "selectable_list": {
     "select_all": "すべて選択"

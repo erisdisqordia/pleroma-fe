@@ -73,11 +73,21 @@
   }
 }
 
+@keyframes media-fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .modal-image {
   max-width: 90%;
   max-height: 90%;
   box-shadow: 0px 5px 15px 0 rgba(0, 0, 0, 0.5);
   image-orientation: from-image; // NOTE: only FF supports this
+  animation: 0.1s cubic-bezier(0.7, 0, 1, 0.6) media-fadein;
 }
 
 .modal-view-button-arrow {

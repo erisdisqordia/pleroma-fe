@@ -151,6 +151,7 @@
       border: none;
       box-shadow: none;
       background-color: transparent;
+      padding-right: 0.75em;
     }
   }
 

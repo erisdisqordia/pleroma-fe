@@ -35,7 +35,11 @@
     "retry": "Reprovi",
     "error_retry": "Bonvolu reprovi",
     "loading": "Enlegante…",
-    "peek": "Antaŭmontri"
+    "peek": "Antaŭmontri",
+    "role": {
+      "moderator": "Reguligisto",
+      "admin": "Administranto"
+    }
   },
   "image_cropper": {
     "crop_picture": "Tondi bildon",
@@ -365,7 +369,8 @@
         "post": "Afiŝoj/Priskriboj de uzantoj",
         "alert_neutral": "Neŭtrala",
         "alert_warning": "Averto",
-        "toggled": "Ŝaltita"
+        "toggled": "Ŝaltita",
+        "wallpaper": "Fonbildo"
       },
       "radii": {
         "_tab_label": "Rondeco"
@@ -516,7 +521,9 @@
     "mute_import_error": "Eraris enporto de silentigoj",
     "mute_import": "Enporto de silentigoj",
     "mute_export_button": "Elportu viajn silentigojn al CSV-dosiero",
-    "mute_export": "Elporto de silentigoj"
+    "mute_export": "Elporto de silentigoj",
+    "hide_wallpaper": "Kaŝi fonbildon de nodo",
+    "setting_changed": "Agordo malsamas de la implicita"
   },
   "timeline": {
     "collapse": "Maletendi",
@@ -586,7 +593,8 @@
     "show_repeats": "Montri ripetojn",
     "hide_repeats": "Kaŝi ripetojn",
     "unsubscribe": "Ne ricevi sciigojn",
-    "subscribe": "Ricevi sciigojn"
+    "subscribe": "Ricevi sciigojn",
+    "bot": "Roboto"
   },
   "user_profile": {
     "timeline_title": "Historio de uzanto",
@@ -612,7 +620,8 @@
     "error": {
       "base": "Alŝuto malsukcesis.",
       "file_too_big": "Dosiero estas tro granda [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-      "default": "Reprovu pli poste"
+      "default": "Reprovu pli poste",
+      "message": "Malsukcesis alŝuto: {0}"
     },
     "file_size_units": {
       "B": "B",
@@ -645,7 +654,9 @@
     "votes": "voĉoj",
     "option": "Elekteblo",
     "add_option": "Aldoni elekteblon",
-    "add_poll": "Aldoni enketon"
+    "add_poll": "Aldoni enketon",
+    "votes_count": "{count} voĉdono | {count} voĉdonoj",
+    "people_voted_count": "{count} persono voĉdonis | {count} personoj voĉdonis"
   },
   "importer": {
     "error": "Eraris enporto de ĉi tiu dosiero.",
@@ -732,7 +743,9 @@
     "repeats": "Ripetoj",
     "favorites": "Ŝatoj",
     "status_deleted": "Ĉi tiu afiŝo foriĝis",
-    "nsfw": "Konsterna"
+    "nsfw": "Konsterna",
+    "expand": "Etendi",
+    "external_source": "Ekstera fonto"
   },
   "time": {
     "years_short": "{0}j",

@@ -35,7 +35,11 @@
     "retry": "다시 시도하십시오",
     "error_retry": "다시 시도하십시오",
     "generic_error": "잘못되었습니다",
-    "more": "더 보기"
+    "more": "더 보기",
+    "role": {
+      "moderator": "중재자",
+      "admin": "관리자"
+    }
   },
   "login": {
     "login": "로그인",
@@ -85,7 +89,8 @@
     "repeated_you": "당신의 게시물을 리핏",
     "no_more_notifications": "알림이 없습니다",
     "migrated_to": "이사했습니다",
-    "reacted_with": "{0} 로 반응했습니다"
+    "reacted_with": "{0} 로 반응했습니다",
+    "error": "알림 불러오기 실패: {0}"
   },
   "post_status": {
     "new_status": "새 게시물 게시",
@@ -93,7 +98,10 @@
     "account_not_locked_warning_link": "잠김",
     "attachments_sensitive": "첨부물을 민감함으로 설정",
     "content_type": {
-      "text/plain": "평문"
+      "text/plain": "평문",
+      "text/bbcode": "BBCode",
+      "text/markdown": "Markdown",
+      "text/html": "HTML"
     },
     "content_warning": "주제 (필수 아님)",
     "default": "인천공항에 도착했습니다.",
@@ -106,7 +114,13 @@
       "unlisted": "비공개 - 공개 타임라인에 게시 안 함"
     },
     "preview_empty": "아무것도 없습니다",
-    "preview": "미리보기"
+    "preview": "미리보기",
+    "scope_notice": {
+      "public": "이 글은 누구나 볼 수 있습니다"
+    },
+    "media_description_error": "파일을 올리지 못하였습니다. 다시한번 시도하여 주십시오",
+    "empty_status_error": "글을 입력하십시오",
+    "media_description": "첨부파일 설명"
   },
   "registration": {
     "bio": "소개",
@@ -288,7 +302,16 @@
         "borders": "테두리",
         "buttons": "버튼",
         "inputs": "입력칸",
-        "faint_text": "흐려진 텍스트"
+        "faint_text": "흐려진 텍스트",
+        "chat": {
+          "border": "경계선",
+          "outgoing": "송신",
+          "incoming": "수신"
+        },
+        "selectedMenu": "선택된 메뉴 요소",
+        "selectedPost": "선택된 글",
+        "icons": "아이콘",
+        "alert_warning": "경고"
       },
       "radii": {
         "_tab_label": "둥글기"
@@ -364,9 +387,25 @@
       "generate_new_recovery_codes": "새로운 복구 코드를 작성",
       "title": "2단계인증",
       "confirm_and_enable": "OTP 확인과 활성화",
-      "setup_otp": "OTP 설치"
+      "setup_otp": "OTP 설치",
+      "otp": "OTP"
     },
-    "security": "보안"
+    "security": "보안",
+    "emoji_reactions_on_timeline": "이모지 반응을 타임라인으로 표시",
+    "avatar_size_instruction": "크기를 150x150 이상으로 설정할 것을 추장합니다.",
+    "blocks_tab": "차단",
+    "notification_setting_privacy": "보안",
+    "user_mutes": "사용자",
+    "notification_visibility_emoji_reactions": "반응",
+    "profile_fields": {
+      "value": "내용"
+    },
+    "mutes_and_blocks": "침묵과 차단",
+    "chatMessageRadius": "챗 메시지",
+    "change_email": "전자메일 주소 바꾸기",
+    "changed_email": "메일주소가 갱신되었습니다!",
+    "bot": "이 계정은 bot입니다",
+    "mutes_tab": "침묵"
   },
   "timeline": {
     "collapse": "접기",
@@ -445,7 +484,11 @@
     "votes": "표",
     "vote": "투표",
     "type": "투표 형식",
-    "expiry": "투표 기간"
+    "expiry": "투표 기간",
+    "votes_count": "{count} 표 | {count} 표",
+    "people_voted_count": "{count} 명 투표 | {count} 명 투표",
+    "option": "선택지",
+    "add_option": "선택지 추가"
   },
   "media_modal": {
     "next": "다음",
@@ -500,5 +543,44 @@
       },
       "federation": "연합"
     }
+  },
+  "shoutbox": {
+    "title": "Shoutbox"
+  },
+  "time": {
+    "years_short": "{0} 년",
+    "year_short": "{0} 년",
+    "years": "{0} 년",
+    "year": "{0} 년",
+    "weeks_short": "{0} 주일",
+    "week_short": "{0} 주일",
+    "weeks": "{0} 주일",
+    "week": "{0} 주일",
+    "seconds_short": "{0} 초",
+    "second_short": "{0} 초",
+    "seconds": "{0} 초",
+    "second": "{0} 초",
+    "now_short": "방금",
+    "now": "방끔",
+    "months_short": "{0} 달 전",
+    "month_short": "{0} 달 전",
+    "months": "{0} 달 전",
+    "month": "{0} 달 전",
+    "minutes_short": "{0} 분",
+    "minute_short": "{0} 분",
+    "minutes": "{0} 분",
+    "minute": "{0} 분",
+    "in_past": "{0} 전",
+    "hours_short": "{0} 시간",
+    "hour_short": "{0} 시간",
+    "hours": "{0} 시간",
+    "hour": "{0} 시간",
+    "days_short": "{0} 일",
+    "day_short": "{0} 일",
+    "days": "{0} 일",
+    "day": "{0} 일"
+  },
+  "remote_user_resolver": {
+    "error": "찾을 수 없습니다."
   }
 }

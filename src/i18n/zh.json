@@ -189,7 +189,9 @@
       "password_required": "不能留空",
       "password_confirmation_required": "不能留空",
       "password_confirmation_match": "密码不一致"
-    }
+    },
+    "reason_placeholder": "此实例的注册需要手动批准。\n请让管理员知道您为什么想要注册。",
+    "reason": "注册理由"
   },
   "selectable_list": {
     "select_all": "选择全部"

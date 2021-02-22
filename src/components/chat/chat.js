@@ -234,6 +234,13 @@ const Chat = {
       const scrollable = this.$refs.scrollable
       return scrollable && scrollable.scrollTop <= 0
     },
+    cullOlderCheck () {
+      window.setTimeout(() => {
+        if (this.bottomedOut(JUMP_TO_BOTTOM_BUTTON_VISIBILITY_OFFSET)) {
+          this.$store.dispatch('cullOlderMessages', this.currentChatMessageService.chatId)
+        }
+      }, 5000)
+    },
     handleScroll: _.throttle(function () {
       if (!this.currentChat) { return }
 
@@ -241,6 +248,7 @@ const Chat = {
         this.fetchChat({ maxId: this.currentChatMessageService.minId })
       } else if (this.bottomedOut(JUMP_TO_BOTTOM_BUTTON_VISIBILITY_OFFSET)) {
         this.jumpToBottomButtonVisible = false
+        this.cullOlderCheck()
         if (this.newMessageCount > 0) {
           // Use a delay before marking as read to prevent situation where new messages
           // arrive just as you're leaving the view and messages that you didn't actually

@@ -43,6 +43,7 @@ const defaultState = {
   subjectLineBehavior: 'email',
   theme: 'pleroma-dark',
   virtualScrolling: true,
+  sensitiveByDefault: false,
 
   // Nasty stuff
   customEmoji: [],

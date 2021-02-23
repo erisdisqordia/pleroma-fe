@@ -144,7 +144,12 @@
         </li>
         <li>
           <BooleanSetting path="minimalScopesMode">
-            {{ $t('settings.minimal_scopes_mode') }} {{ minimalScopesModeDefaultValue }}
+            {{ $t('settings.minimal_scopes_mode') }}
+          </BooleanSetting>
+        </li>
+        <li>
+          <BooleanSetting path="sensitiveByDefault">
+            {{ $t('settings.sensitive_by_default') }}
           </BooleanSetting>
         </li>
         <li>

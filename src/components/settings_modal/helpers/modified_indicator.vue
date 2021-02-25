@@ -2,21 +2,21 @@
   <span
     v-if="changed"
     class="ModifiedIndicator"
-    >
+  >
     <Popover
       trigger="hover"
-      >
+    >
       <span slot="trigger">
         &nbsp;
-          <FAIcon
-            icon="wrench"
-          />
+        <FAIcon
+          icon="wrench"
+        />
       </span>
       <div
-        class="modified-tooltip"
         slot="content"
-        >
-      {{ $t('settings.setting_changed') }}
+        class="modified-tooltip"
+      >
+        {{ $t('settings.setting_changed') }}
       </div>
     </Popover>
   </span>
@@ -32,8 +32,8 @@ library.add(
 )
 
 export default {
-  props: ['changed'],
-  components: { Popover }
+  components: { Popover },
+  props: ['changed']
 }
 </script>
 

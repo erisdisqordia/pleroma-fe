@@ -194,11 +194,18 @@ const EmojiInput = {
     }
   },
   methods: {
+    focusPickerInput () {
+      const pickerEl = this.$refs.picker.$el
+      if (!pickerEl) return
+      const pickerInput = pickerEl.querySelector('input')
+      if (pickerInput) pickerInput.focus()
+    },
     triggerShowPicker () {
       this.showPicker = true
       this.$refs.picker.startEmojiLoad()
       this.$nextTick(() => {
         this.scrollIntoView()
+        this.focusPickerInput()
       })
       // This temporarily disables "click outside" handler
       // since external trigger also means click originates
@@ -214,6 +221,7 @@ const EmojiInput = {
       if (this.showPicker) {
         this.scrollIntoView()
         this.$refs.picker.startEmojiLoad()
+        this.$nextTick(() => this.focusPickerInput())
       }
     },
     replace (replacement) {

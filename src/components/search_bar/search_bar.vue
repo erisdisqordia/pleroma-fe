@@ -7,8 +7,8 @@
       v-if="hidden"
       class="button-unstyled nav-icon"
       :title="$t('nav.search')"
-      @click.prevent.stop="toggleHidden"
       type="button"
+      @click.prevent.stop="toggleHidden"
     >
       <FAIcon
         fixed-width
@@ -28,8 +28,8 @@
       >
       <button
         class="button-default search-button"
-        @click="find(searchTerm)"
         type="submit"
+        @click="find(searchTerm)"
       >
         <FAIcon
           fixed-width
@@ -38,8 +38,8 @@
       </button>
       <button
         class="button-unstyled cancel-search"
-        @click.prevent.stop="toggleHidden"
         type="button"
+        @click.prevent.stop="toggleHidden"
       >
         <FAIcon
           fixed-width

@@ -15,8 +15,8 @@
       >
       <button
         class="btn button-default search-button"
-        @click="newQuery(searchTerm)"
         type="submit"
+        @click="newQuery(searchTerm)"
       >
         <FAIcon icon="search" />
       </button>

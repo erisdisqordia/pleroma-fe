@@ -27,16 +27,16 @@
             <div>
               <button
                 class="button-unstyled -link"
-                @click.prevent="requireRecovery"
                 type="button"
+                @click.prevent="requireRecovery"
               >
                 {{ $t('login.enter_recovery_code') }}
               </button>
               <br>
               <button
                 class="button-unstyled -link"
-                @click.prevent="abortMFA"
                 type="button"
+                @click.prevent="abortMFA"
               >
                 {{ $t('general.cancel') }}
               </button>

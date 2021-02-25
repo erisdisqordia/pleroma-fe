@@ -4,13 +4,13 @@
   >
     <Checkbox
       :checked="state"
-      @change="update"
       :disabled="disabled"
+      @change="update"
     >
       <span
         v-if="!!$slots.default"
         class="label"
-        >
+      >
         <slot />
       </span>
       <ModifiedIndicator :changed="isChanged" />
@@ -23,14 +23,14 @@ import { get, set } from 'lodash'
 import Checkbox from 'src/components/checkbox/checkbox.vue'
 import ModifiedIndicator from './modified_indicator.vue'
 export default {
-  props: [
-    'path',
-    'disabled'
-  ],
   components: {
     Checkbox,
     ModifiedIndicator
   },
+  props: [
+    'path',
+    'disabled'
+  ],
   computed: {
     pathDefault () {
       const [firstSegment, ...rest] = this.path.split('.')

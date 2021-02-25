@@ -409,7 +409,7 @@
     "reply_visibility_following": "Only show replies directed at me or users I'm following",
     "reply_visibility_self": "Only show replies directed at me",
     "reply_visibility_following_short": "Show replies to my follows",
-    "reply_visibility_self_short": "Show replies to self",
+    "reply_visibility_self_short": "Show replies to self only",
     "autohide_floating_post_button": "Automatically hide New Post button (mobile)",
     "saving_err": "Error saving settings",
     "saving_ok": "Settings saved",

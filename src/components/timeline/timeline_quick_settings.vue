@@ -8,37 +8,39 @@
       slot="content"
       class="timeline-settings-menu dropdown-menu"
     >
-      <button
-        class="button-default dropdown-item"
-        @click="replyVisibilityAll = true"
-      >
-        <span
-          class="menu-checkbox"
-          :class="{ 'menu-checkbox-radio': replyVisibilityAll }"
-        />{{ $t('settings.reply_visibility_all') }}
-      </button>
-      <button
-        class="button-default dropdown-item"
-        @click="replyVisibilityFollowing = true"
-      >
-        <span
-          class="menu-checkbox"
-          :class="{ 'menu-checkbox-radio': replyVisibilityFollowing }"
-        />{{ $t('settings.reply_visibility_following_short') }}
-      </button>
-      <button
-        class="button-default dropdown-item"
-        @click="replyVisibilitySelf = true"
-      >
-        <span
-          class="menu-checkbox"
-          :class="{ 'menu-checkbox-radio': replyVisibilitySelf }"
-        />{{ $t('settings.reply_visibility_self_short') }}
-      </button>
-      <div
-        role="separator"
-        class="dropdown-divider"
-      />
+      <div v-if="loggedIn">
+        <button
+          class="button-default dropdown-item"
+          @click="replyVisibilityAll = true"
+        >
+          <span
+            class="menu-checkbox"
+            :class="{ 'menu-checkbox-radio': replyVisibilityAll }"
+          />{{ $t('settings.reply_visibility_all') }}
+        </button>
+        <button
+          class="button-default dropdown-item"
+          @click="replyVisibilityFollowing = true"
+        >
+          <span
+            class="menu-checkbox"
+            :class="{ 'menu-checkbox-radio': replyVisibilityFollowing }"
+          />{{ $t('settings.reply_visibility_following_short') }}
+        </button>
+        <button
+          class="button-default dropdown-item"
+          @click="replyVisibilitySelf = true"
+        >
+          <span
+            class="menu-checkbox"
+            :class="{ 'menu-checkbox-radio': replyVisibilitySelf }"
+          />{{ $t('settings.reply_visibility_self_short') }}
+        </button>
+        <div
+          role="separator"
+          class="dropdown-divider"
+        />
+      </div>
       <button
         class="button-default dropdown-item"
         @click="hideMedia = !hideMedia"

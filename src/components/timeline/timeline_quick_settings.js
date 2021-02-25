@@ -26,6 +26,9 @@ const TimelineQuickSettings = {
   },
   computed: {
     ...mapGetters(['mergedConfig']),
+    loggedIn () {
+      return !!this.$store.state.users.currentUser
+    },
     replyVisibilitySelf: {
       get () { return this.mergedConfig.replyVisibility === 'self' },
       set () { this.setReplyVisibility('self') }

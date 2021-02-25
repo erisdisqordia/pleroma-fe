@@ -221,7 +221,7 @@ const EmojiInput = {
       if (this.showPicker) {
         this.scrollIntoView()
         this.$refs.picker.startEmojiLoad()
-        this.$nextTick(() => this.focusPickerInput())
+        this.$nextTick(this.focusPickerInput)
       }
     },
     replace (replacement) {

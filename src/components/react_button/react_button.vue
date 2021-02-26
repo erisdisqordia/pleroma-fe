@@ -6,6 +6,7 @@
     :offset="{ y: 5 }"
     :bound-to="{ x: 'container' }"
     remove-padding
+    @show="focusInput"
   >
     <div
       slot="content"

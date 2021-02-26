@@ -23,6 +23,12 @@ const ReactButton = {
         this.$store.dispatch('reactWithEmoji', { id: this.status.id, emoji })
       }
       close()
+    },
+    focusInput () {
+      this.$nextTick(() => {
+        const input = this.$el.querySelector('input')
+        if (input) input.focus()
+      })
     }
   },
   computed: {

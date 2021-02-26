@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed missing highlighted border in expanded conversations again
 - Fixed some UI jumpiness when opening images particularly in chat view
 - Fixed chat unread badge looking weird
+- Fixed notifications crashing on an invalid notificaiton
 
 ### Changed
 - Display 'people voted' instead of 'votes' for multi-choice polls

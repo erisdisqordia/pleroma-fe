@@ -6,7 +6,7 @@
     <div class="user-reporting-panel panel">
       <div class="panel-heading">
         <div class="title">
-          {{ $t('user_reporting.title', [user.screen_name]) }}
+          {{ $t('user_reporting.title', [user.screen_name_ui]) }}
         </div>
       </div>
       <div class="panel-body">

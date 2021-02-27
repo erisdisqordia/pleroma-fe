@@ -73,7 +73,7 @@ const Chat = {
     },
     formPlaceholder () {
       if (this.recipient) {
-        return this.$t('chats.message_user', { nickname: this.recipient.screen_name })
+        return this.$t('chats.message_user', { nickname: this.recipient.screen_name_ui })
       } else {
         return ''
       }

@@ -203,7 +203,8 @@ export const parseUser = (data) => {
   output.rights = output.rights || {}
   output.notification_settings = output.notification_settings || {}
 
-  // Convert punycode to unicode
+  // Convert punycode to unicode for UI
+  output.screen_name_ui = output.screen_name
   if (output.screen_name.includes('@')) {
     const parts = output.screen_name.split('@')
     let unicodeDomain = punycode.toUnicode(parts[1])
@@ -211,7 +212,7 @@ export const parseUser = (data) => {
       // Add some identifier so users can potentially spot spoofing attempts:
       // lain.com and xn--lin-6cd.com would appear identical otherwise.
       unicodeDomain = '🌏' + unicodeDomain
-      output.screen_name = [parts[0], unicodeDomain].join('@')
+      output.screen_name_ui = [parts[0], unicodeDomain].join('@')
     }
   }
 

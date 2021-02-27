@@ -116,8 +116,8 @@ export const suggestUsers = ({ dispatch, state }) => {
 
       return diff + nameAlphabetically + screenNameAlphabetically
       /* eslint-disable camelcase */
-    }).map(({ screen_name, name, profile_image_url_original }) => ({
-      displayText: screen_name,
+    }).map(({ screen_name, screen_name_ui, name, profile_image_url_original }) => ({
+      displayText: screen_name_ui,
       detailText: name,
       imageUrl: profile_image_url_original,
       replacement: '@' + screen_name + ' '

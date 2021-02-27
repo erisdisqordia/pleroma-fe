@@ -26,7 +26,7 @@
             icon="retweet"
           />
           <router-link :to="userProfileLink">
-            {{ status.user.screen_name }}
+            {{ status.user.screen_name_ui }}
           </router-link>
         </small>
         <small
@@ -156,10 +156,10 @@
                 </h4>
                 <router-link
                   class="account-name"
-                  :title="status.user.screen_name"
+                  :title="status.user.screen_name_ui"
                   :to="userProfileLink"
                 >
-                  {{ status.user.screen_name }}
+                  {{ status.user.screen_name_ui }}
                 </router-link>
                 <img
                   v-if="!!(status.user && status.user.favicon)"

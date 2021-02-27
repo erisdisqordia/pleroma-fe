@@ -2,8 +2,8 @@
   <StillImage
     v-if="user"
     class="Avatar"
-    :alt="user.screen_name"
-    :title="user.screen_name"
+    :alt="user.screen_name_ui"
+    :title="user.screen_name_ui"
     :src="imgSrc(user.profile_image_url_original)"
     :class="{ 'avatar-compact': compact, 'better-shadow': betterShadow }"
     :image-load-error="imageLoadError"

@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed missing highlighted border in expanded conversations again
 - Fixed some UI jumpiness when opening images particularly in chat view
 - Fixed chat unread badge looking weird
+- Fixed punycode names not working properly
 - Fixed notifications crashing on an invalid notification
 
 ### Changed

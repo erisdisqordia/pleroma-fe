@@ -22,6 +22,13 @@ const statusNotifications = ['like', 'mention', 'repeat', 'pleroma:emoji_reactio
 
 export const isStatusNotification = (type) => includes(statusNotifications, type)
 
+export const isValidNotification = (notification) => {
+  if (isStatusNotification(notification.type) && !notification.status) {
+    return false
+  }
+  return true
+}
+
 const sortById = (a, b) => {
   const seqA = Number(a.id)
   const seqB = Number(b.id)

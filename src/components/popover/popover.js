@@ -128,9 +128,12 @@ const Popover = {
       }
     },
     showPopover () {
-      if (this.hidden) this.$emit('show')
+      const wasHidden = this.hidden
       this.hidden = false
-      this.$nextTick(this.updateStyles)
+      this.$nextTick(() => {
+        if (wasHidden) this.$emit('show')
+        this.updateStyles()
+      })
     },
     hidePopover () {
       if (!this.hidden) this.$emit('close')

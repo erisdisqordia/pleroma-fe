@@ -42,7 +42,7 @@
           class="basic-user-card-screen-name"
           :to="userProfileLink(user)"
         >
-          @{{ user.screen_name }}
+          @{{ user.screen_name_ui }}
         </router-link>
       </div>
       <slot />

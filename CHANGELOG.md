@@ -9,14 +9,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Fixed shoutbox not working in mobile layout
 - Fixed missing highlighted border in expanded conversations again
 - Fixed some UI jumpiness when opening images particularly in chat view
+- Fixed chat unread badge looking weird
+- Fixed punycode names not working properly
+- Fixed notifications crashing on an invalid notification
 
 ### Changed
 - Display 'people voted' instead of 'votes' for multi-choice polls
 - Optimized chat to not get horrible performance after keeping the same chat open for a long time
+- When opening emoji picker or react picker, it automatically focuses the search field
 
 ### Added
 - Added reason field for registration when approval is required
 - Added a quick settings to timeline header for easier access
+- Added option to mark posts as sensitive by default
 
 ## [2.2.3] - 2021-01-18
 ### Added

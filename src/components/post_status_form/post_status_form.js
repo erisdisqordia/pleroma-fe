@@ -115,7 +115,7 @@ const PostStatusForm = {
       ? this.copyMessageScope
       : this.$store.state.users.currentUser.default_scope
 
-    const { postContentType: contentType } = this.$store.getters.mergedConfig
+    const { postContentType: contentType, sensitiveByDefault } = this.$store.getters.mergedConfig
 
     return {
       dropFiles: [],
@@ -126,7 +126,7 @@ const PostStatusForm = {
       newStatus: {
         spoilerText: this.subject || '',
         status: statusText,
-        nsfw: false,
+        nsfw: !!sensitiveByDefault,
         files: [],
         poll: {},
         mediaDescriptions: {},

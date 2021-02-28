@@ -16,7 +16,6 @@ const TimelineQuickSettings = {
   },
   methods: {
     setReplyVisibility (visibility) {
-      console.log('set reply visibility', visibility)
       this.$store.dispatch('setOption', { name: 'replyVisibility', value: visibility })
       this.$store.dispatch('queueFlushAll')
     },

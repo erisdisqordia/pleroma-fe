@@ -22,6 +22,7 @@
         >
           {{ $t('notifications.read') }}
         </button>
+        <NotificationFilters />
       </div>
       <div class="panel-body">
         <div

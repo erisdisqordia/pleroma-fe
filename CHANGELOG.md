@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added reason field for registration when approval is required
 - Added a quick settings to timeline header for easier access
 - Added option to mark posts as sensitive by default
+- Added quick filters for notifications
 
 ## [2.2.3] - 2021-01-18
 ### Added

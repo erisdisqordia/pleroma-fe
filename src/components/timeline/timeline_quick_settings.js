@@ -2,10 +2,11 @@ import Popover from '../popover/popover.vue'
 import BooleanSetting from '../settings_modal/helpers/boolean_setting.vue'
 import { mapGetters } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faFilter, faWrench } from '@fortawesome/free-solid-svg-icons'
+import { faFilter, faFont, faWrench } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faFilter,
+  faFont,
   faWrench
 )
 

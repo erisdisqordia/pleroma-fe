@@ -63,7 +63,7 @@
         class="button-default dropdown-item dropdown-item-icon"
         @click="openTab('filtering')"
       >
-        <FAIcon icon="filter" />{{ $t('settings.word_filter') }}
+        <FAIcon icon="font" />{{ $t('settings.word_filter') }}
       </button>
       <button
         class="button-default dropdown-item dropdown-item-icon"
@@ -73,7 +73,7 @@
       </button>
     </div>
     <div slot="trigger">
-      <FAIcon icon="cog" />
+      <FAIcon icon="filter" />
     </div>
   </Popover>
 </template>

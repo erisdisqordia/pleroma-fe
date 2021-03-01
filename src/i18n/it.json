@@ -422,7 +422,14 @@
     "mute_export_button": "Esporta la tua lista di silenziati in un file CSV",
     "mute_export": "Esporta silenziati",
     "hide_wallpaper": "Nascondi sfondo della stanza",
-    "setting_changed": "Valore personalizzato"
+    "setting_changed": "Valore personalizzato",
+    "more_settings": "Altre impostazioni",
+    "sensitive_by_default": "Tutti i miei messaggi sono scabrosi",
+    "reply_visibility_self_short": "Vedi solo risposte a te",
+    "reply_visibility_following_short": "Vedi risposte a messaggi di altri",
+    "hide_all_muted_posts": "Nascondi messaggi silenziati",
+    "hide_media_previews": "Nascondi anteprime",
+    "word_filter": "Parole filtrate"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",

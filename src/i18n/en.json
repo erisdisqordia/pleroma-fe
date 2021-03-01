@@ -377,7 +377,7 @@
     "new_password": "New password",
     "notification_visibility": "Types of notifications to show",
     "notification_visibility_follows": "Follows",
-    "notification_visibility_likes": "Likes",
+    "notification_visibility_likes": "Favorites",
     "notification_visibility_mentions": "Mentions",
     "notification_visibility_repeats": "Repeats",
     "notification_visibility_moves": "User Migrates",

@@ -3,25 +3,32 @@ const Popover = {
   props: {
     // Action to trigger popover: either 'hover' or 'click'
     trigger: String,
+
     // Either 'top' or 'bottom'
     placement: String,
+
     // Takes object with properties 'x' and 'y', values of these can be
     // 'container' for using offsetParent as boundaries for either axis
     // or 'viewport'
     boundTo: Object,
+
     // Takes a selector to use as a replacement for the parent container
     // for getting boundaries for x an y axis
     boundToSelector: String,
+
     // Takes a top/bottom/left/right object, how much space to leave
     // between boundary and popover element
     margin: Object,
+
     // Takes a x/y object and tells how many pixels to offset from
     // anchor point on either axis
     offset: Object,
+
     // Replaces the classes you may want for the popover container.
     // Use 'popover-default' in addition to get the default popover
     // styles with your custom class.
     popoverClass: String,
+
     // If true, subtract padding when calculating position for the popover,
     // use it when popover offset looks to be different on top vs bottom.
     removePadding: Boolean

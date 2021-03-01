@@ -82,10 +82,9 @@
 
   .dropdown-item {
     line-height: 21px;
-    margin-right: 5px;
     overflow: auto;
     display: block;
-    padding: .25rem 1.0rem .25rem 1.5rem;
+    padding: .5em 0.75em;
     clear: both;
     font-weight: 400;
     text-align: inherit;
@@ -101,10 +100,9 @@
     --btnText: var(--popoverText, $fallback--text);
 
     &-icon {
-      padding-left: 0.5rem;
-
       svg {
-        margin-right: 0.25rem;
+        width: 22px;
+        margin-right: 0.75rem;
         color: var(--menuPopoverIcon, $fallback--icon)
       }
     }
@@ -120,6 +118,33 @@
       --icon: var(--selectedMenuPopoverIcon, $fallback--icon);
       svg {
         color: var(--selectedMenuPopoverIcon, $fallback--icon);
+      }
+    }
+
+    .menu-checkbox {
+      display: inline-block;
+      vertical-align: middle;
+      min-width: 22px;
+      max-width: 22px;
+      min-height: 22px;
+      max-height: 22px;
+      line-height: 22px;
+      text-align: center;
+      border-radius: 0px;
+      background-color: $fallback--fg;
+      background-color: var(--input, $fallback--fg);
+      box-shadow: 0px 0px 2px black inset;
+      box-shadow: var(--inputShadow);
+      margin-right: 0.75em;
+
+      &.menu-checkbox-checked::after {
+        font-size: 1.25em;
+        content: '✓';
+      }
+
+      &.menu-checkbox-radio::after {
+        font-size: 2em;
+        content: '•';
       }
     }
 

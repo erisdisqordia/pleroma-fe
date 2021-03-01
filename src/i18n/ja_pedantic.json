@@ -574,7 +574,13 @@
     "allow_following_move": "フォロー中のアカウントが引っ越したとき、自動フォローを許可する",
     "setting_changed": "規定の設定と異なっています",
     "greentext": "引用を緑色で表示",
-    "sensitive_by_default": "はじめから投稿をセンシティブとして設定"
+    "sensitive_by_default": "はじめから投稿をセンシティブとして設定",
+    "more_settings": "その他の設定",
+    "reply_visibility_self_short": "自分宛のリプライを見る",
+    "reply_visibility_following_short": "フォローしている人に宛てられたリプライを見る",
+    "hide_all_muted_posts": "ミュートした投稿を隠す",
+    "hide_media_previews": "メディアのプレビューを隠す",
+    "word_filter": "単語フィルタ"
   },
   "time": {
     "day": "{0}日",

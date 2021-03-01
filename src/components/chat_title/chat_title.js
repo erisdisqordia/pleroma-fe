@@ -12,7 +12,7 @@ export default Vue.component('chat-title', {
   ],
   computed: {
     title () {
-      return this.user ? this.user.screen_name : ''
+      return this.user ? this.user.screen_name_ui : ''
     },
     htmlTitle () {
       return this.user ? this.user.name_html : ''

@@ -73,10 +73,10 @@
             <div class="bottom-line">
               <router-link
                 class="user-screen-name"
-                :title="user.screen_name"
+                :title="user.screen_name_ui"
                 :to="userProfileLink(user)"
               >
-                @{{ user.screen_name }}
+                @{{ user.screen_name_ui }}
               </router-link>
               <template v-if="!hideBio">
                 <span

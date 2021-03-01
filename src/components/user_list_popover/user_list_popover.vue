@@ -26,7 +26,7 @@
             <!-- eslint-disable vue/no-v-html -->
             <span v-html="user.name_html" />
             <!-- eslint-enable vue/no-v-html -->
-            <span class="user-list-screen-name">{{ user.screen_name }}</span>
+            <span class="user-list-screen-name">{{ user.screen_name_ui }}</span>
           </div>
         </div>
       </div>

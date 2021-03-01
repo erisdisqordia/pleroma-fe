@@ -17,9 +17,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Display 'people voted' instead of 'votes' for multi-choice polls
 - Optimized chat to not get horrible performance after keeping the same chat open for a long time
 - When opening emoji picker or react picker, it automatically focuses the search field
+- Language picker now uses native language names
 
 ### Added
 - Added reason field for registration when approval is required
+- Group staff members by role in the About page
 
 ## [2.2.3] - 2021-01-18
 ### Added
@@ -31,7 +33,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Don't filter own posts when they hit your wordfilter
-- Language picker now uses native language names
 
 
 ## [2.2.2] - 2020-12-22
@@ -41,7 +42,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added some missing unicode emoji
 - Added the upload limit to the Features panel in the About page
 - Support for solid color wallpaper, instance doesn't have to define a wallpaper anymore
-- Group staff members by role in the About page
 
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form

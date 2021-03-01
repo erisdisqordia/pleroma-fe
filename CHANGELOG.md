@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added reason field for registration when approval is required
 - Group staff members by role in the About page
 
+
 ## [2.2.3] - 2021-01-18
 ### Added
 - Added Report button to status ellipsis menu for easier reporting

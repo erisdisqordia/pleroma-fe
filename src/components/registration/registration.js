@@ -10,7 +10,8 @@ const registration = {
       fullname: '',
       username: '',
       password: '',
-      confirm: ''
+      confirm: '',
+      reason: ''
     },
     captcha: {}
   }),
@@ -24,7 +25,8 @@ const registration = {
         confirm: {
           required,
           sameAsPassword: sameAs('password')
-        }
+        },
+        reason: { required: requiredIf(() => this.accountApprovalRequired) }
       }
     }
   },
@@ -38,7 +40,10 @@ const registration = {
   computed: {
     token () { return this.$route.params.token },
     bioPlaceholder () {
-      return this.$t('registration.bio_placeholder').replace(/\s*\n\s*/g, ' \n')
+      return this.replaceNewlines(this.$t('registration.bio_placeholder'))
+    },
+    reasonPlaceholder () {
+      return this.replaceNewlines(this.$t('registration.reason_placeholder'))
     },
     ...mapState({
       registrationOpen: (state) => state.instance.registrationOpen,
@@ -46,7 +51,8 @@ const registration = {
       isPending: (state) => state.users.signUpPending,
       serverValidationErrors: (state) => state.users.signUpErrors,
       termsOfService: (state) => state.instance.tos,
-      accountActivationRequired: (state) => state.instance.accountActivationRequired
+      accountActivationRequired: (state) => state.instance.accountActivationRequired,
+      accountApprovalRequired: (state) => state.instance.accountApprovalRequired
     })
   },
   methods: {
@@ -73,6 +79,9 @@ const registration = {
     },
     setCaptcha () {
       this.getCaptcha().then(cpt => { this.captcha = cpt })
+    },
+    replaceNewlines (str) {
+      return str.replace(/\s*\n\s*/g, ' \n')
     }
   }
 }

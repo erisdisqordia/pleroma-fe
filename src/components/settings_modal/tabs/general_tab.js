@@ -1,4 +1,4 @@
-import Checkbox from 'src/components/checkbox/checkbox.vue'
+import BooleanSetting from '../helpers/boolean_setting.vue'
 import InterfaceLanguageSwitcher from 'src/components/interface_language_switcher/interface_language_switcher.vue'
 
 import SharedComputedObject from '../helpers/shared_computed_object.js'
@@ -26,7 +26,7 @@ const GeneralTab = {
     }
   },
   components: {
-    Checkbox,
+    BooleanSetting,
     InterfaceLanguageSwitcher
   },
   computed: {

@@ -136,7 +136,7 @@ const Status = {
       }
     },
     retweet () { return !!this.statusoid.retweeted_status },
-    retweeter () { return this.statusoid.user.name || this.statusoid.user.screen_name },
+    retweeter () { return this.statusoid.user.name || this.statusoid.user.screen_name_ui },
     retweeterHtml () { return this.statusoid.user.name_html },
     retweeterProfileLink () { return this.generateUserProfileLink(this.statusoid.user.id, this.statusoid.user.screen_name) },
     status () {
@@ -216,7 +216,7 @@ const Status = {
         return this.status.in_reply_to_screen_name
       } else {
         const user = this.$store.getters.findUser(this.status.in_reply_to_user_id)
-        return user && user.screen_name
+        return user && user.screen_name_ui
       }
     },
     replySubject () {

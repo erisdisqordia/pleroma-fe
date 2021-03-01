@@ -39,7 +39,11 @@
     "close": "关闭",
     "retry": "重试",
     "error_retry": "请重试",
-    "loading": "载入中…"
+    "loading": "载入中…",
+    "role": {
+      "moderator": "监察员",
+      "admin": "管理员"
+    }
   },
   "image_cropper": {
     "crop_picture": "裁剪图片",
@@ -120,7 +124,9 @@
     "expiry": "投票期限",
     "expires_in": "投票于 {0} 后结束",
     "expired": "投票 {0} 前已结束",
-    "not_enough_options": "投票的选项太少"
+    "not_enough_options": "投票的选项太少",
+    "votes_count": "{count} 票 | {count} 票",
+    "people_voted_count": "{count} 人已投票 | {count} 人已投票"
   },
   "stickers": {
     "add_sticker": "添加贴纸"
@@ -183,7 +189,9 @@
       "password_required": "不能留空",
       "password_confirmation_required": "不能留空",
       "password_confirmation_match": "密码不一致"
-    }
+    },
+    "reason_placeholder": "此实例的注册需要手动批准。\n请让管理员知道您为什么想要注册。",
+    "reason": "注册理由"
   },
   "selectable_list": {
     "select_all": "选择全部"
@@ -552,7 +560,8 @@
     "mute_import": "隐藏名单导入",
     "mute_export_button": "导出你的隐藏名单到一个 csv 文件",
     "mute_export": "隐藏名单导出",
-    "hide_wallpaper": "隐藏实例壁纸"
+    "hide_wallpaper": "隐藏实例壁纸",
+    "setting_changed": "与默认设置不同"
   },
   "time": {
     "day": "{0} 天",
@@ -683,7 +692,8 @@
     "show_repeats": "显示转发",
     "hide_repeats": "隐藏转发",
     "message": "消息",
-    "mention": "提及"
+    "mention": "提及",
+    "bot": "机器人"
   },
   "user_profile": {
     "timeline_title": "用户时间线",

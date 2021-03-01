@@ -21,20 +21,17 @@
           @keydown.enter.stop.prevent="nextOption(index)"
         >
       </div>
-      <div
+      <button
         v-if="options.length > 2"
-        class="icon-container"
+        class="delete-option button-unstyled -hover-highlight"
+        @click="deleteOption(index)"
       >
-        <FAIcon
-          icon="times"
-          class="delete"
-          @click="deleteOption(index)"
-        />
-      </div>
+        <FAIcon icon="times" />
+      </button>
     </div>
-    <a
+    <button
       v-if="options.length < maxOptions"
-      class="add-option faint"
+      class="add-option faint button-unstyled -hover-highlight"
       @click="addOption"
     >
       <FAIcon
@@ -43,7 +40,7 @@
       />
 
       {{ $t("polls.add_option") }}
-    </a>
+    </button>
     <div class="poll-type-expiry">
       <div
         class="poll-type"
@@ -116,7 +113,6 @@
     align-self: flex-start;
     padding-top: 0.25em;
     padding-left: 0.1em;
-    cursor: pointer;
   }
 
   .poll-option {
@@ -135,19 +131,11 @@
     }
   }
 
-  .icon-container {
+  .delete-option {
     // Hack: Move the icon over the input box
     width: 1.5em;
     margin-left: -1.5em;
     z-index: 1;
-
-    .delete {
-      cursor: pointer;
-
-      &:hover {
-        color: inherit;
-      }
-    }
   }
 
   .poll-type-expiry {
@@ -163,6 +151,7 @@
       border: none;
       box-shadow: none;
       background-color: transparent;
+      padding-right: 0.75em;
     }
   }
 

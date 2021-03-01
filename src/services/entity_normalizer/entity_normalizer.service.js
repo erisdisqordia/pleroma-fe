@@ -188,7 +188,12 @@ export const parseUser = (data) => {
     output.follow_request_count = data.pleroma.follow_request_count
 
     output.tags = data.pleroma.tags
-    output.deactivated = data.pleroma.deactivated
+
+    // deactivated was changed to is_active in Pleroma 2.3.0
+    // so check if is_active is present
+    output.deactivated = typeof data.pleroma.is_active !== 'undefined'
+      ? !data.pleroma.is_active // new backend
+      : data.pleroma.deactivated // old backend
 
     output.notification_settings = data.pleroma.notification_settings
     output.unread_chat_count = data.pleroma.unread_chat_count
@@ -198,7 +203,8 @@ export const parseUser = (data) => {
   output.rights = output.rights || {}
   output.notification_settings = output.notification_settings || {}
 
-  // Convert punycode to unicode
+  // Convert punycode to unicode for UI
+  output.screen_name_ui = output.screen_name
   if (output.screen_name.includes('@')) {
     const parts = output.screen_name.split('@')
     let unicodeDomain = punycode.toUnicode(parts[1])
@@ -206,7 +212,7 @@ export const parseUser = (data) => {
       // Add some identifier so users can potentially spot spoofing attempts:
       // lain.com and xn--lin-6cd.com would appear identical otherwise.
       unicodeDomain = '🌏' + unicodeDomain
-      output.screen_name = [parts[0], unicodeDomain].join('@')
+      output.screen_name_ui = [parts[0], unicodeDomain].join('@')
     }
   }
 

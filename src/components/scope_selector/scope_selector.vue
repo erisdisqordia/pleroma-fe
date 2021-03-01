@@ -8,6 +8,7 @@
       class="button-unstyled scope"
       :class="css.direct"
       :title="$t('post_status.scope.direct')"
+      type="button"
       @click="changeVis('direct')"
     >
       <FAIcon
@@ -20,6 +21,7 @@
       class="button-unstyled scope"
       :class="css.private"
       :title="$t('post_status.scope.private')"
+      type="button"
       @click="changeVis('private')"
     >
       <FAIcon
@@ -32,6 +34,7 @@
       class="button-unstyled scope"
       :class="css.unlisted"
       :title="$t('post_status.scope.unlisted')"
+      type="button"
       @click="changeVis('unlisted')"
     >
       <FAIcon
@@ -44,6 +47,7 @@
       class="button-unstyled scope"
       :class="css.public"
       :title="$t('post_status.scope.public')"
+      type="button"
       @click="changeVis('public')"
     >
       <FAIcon

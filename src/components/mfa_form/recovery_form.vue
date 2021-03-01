@@ -25,6 +25,7 @@
             <div>
               <button
                 class="button-unstyled -link"
+                type="button"
                 @click.prevent="requireTOTP"
               >
                 {{ $t('login.enter_two_factor_code') }}
@@ -32,6 +33,7 @@
               <br>
               <button
                 class="button-unstyled -link"
+                type="button"
                 @click.prevent="abortMFA"
               >
                 {{ $t('general.cancel') }}

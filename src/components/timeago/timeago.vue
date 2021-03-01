@@ -9,6 +9,7 @@
 
 <script>
 import * as DateUtils from 'src/services/date_utils/date_utils.js'
+import localeService from 'src/services/locale/locale.service.js'
 
 export default {
   name: 'Timeago',
@@ -21,9 +22,10 @@ export default {
   },
   computed: {
     localeDateString () {
+      const browserLocale = localeService.internalToBrowserLocale(this.$i18n.locale)
       return typeof this.time === 'string'
-        ? new Date(Date.parse(this.time)).toLocaleString()
-        : this.time.toLocaleString()
+        ? new Date(Date.parse(this.time)).toLocaleString(browserLocale)
+        : this.time.toLocaleString(browserLocale)
     }
   },
   created () {

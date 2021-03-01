@@ -7,6 +7,7 @@
       v-if="hidden"
       class="button-unstyled nav-icon"
       :title="$t('nav.search')"
+      type="button"
       @click.prevent.stop="toggleHidden"
     >
       <FAIcon
@@ -27,6 +28,7 @@
       >
       <button
         class="button-default search-button"
+        type="submit"
         @click="find(searchTerm)"
       >
         <FAIcon
@@ -36,6 +38,7 @@
       </button>
       <button
         class="button-unstyled cancel-search"
+        type="button"
         @click.prevent.stop="toggleHidden"
       >
         <FAIcon

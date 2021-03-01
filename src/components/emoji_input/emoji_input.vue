@@ -9,6 +9,7 @@
       <button
         v-if="!hideEmojiButton"
         class="button-unstyled emoji-picker-icon"
+        type="button"
         @click.prevent="togglePicker"
       >
         <FAIcon :icon="['far', 'smile-beam']" />

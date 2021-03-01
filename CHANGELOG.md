@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
+## [2.3.0] - 2021-03-01
+### Fixed
+- Button to remove uploaded media in post status form is now properly placed and sized.
+- Fixed shoutbox not working in mobile layout
+- Fixed missing highlighted border in expanded conversations again
+- Fixed some UI jumpiness when opening images particularly in chat view
+- Fixed chat unread badge looking weird
+- Fixed punycode names not working properly
+
+### Changed
+- Display 'people voted' instead of 'votes' for multi-choice polls
+- Optimized chat to not get horrible performance after keeping the same chat open for a long time
+- When opening emoji picker or react picker, it automatically focuses the search field
+- Language picker now uses native language names
+
+### Added
+- Added reason field for registration when approval is required
+- Group staff members by role in the About page
+
+
 ## [2.2.3] - 2021-01-18
 ### Added
 - Added Report button to status ellipsis menu for easier reporting

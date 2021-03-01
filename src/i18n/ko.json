@@ -9,7 +9,9 @@
     "scope_options": "범위 옵션",
     "text_limit": "텍스트 제한",
     "title": "기능",
-    "who_to_follow": "팔로우 추천"
+    "who_to_follow": "팔로우 추천",
+    "upload_limit": "최대 파일용량",
+    "pleroma_chat_messages": "Pleroma 채트"
   },
   "finder": {
     "error_fetching_user": "사용자 정보 불러오기 실패",
@@ -17,7 +19,27 @@
   },
   "general": {
     "apply": "적용",
-    "submit": "보내기"
+    "submit": "보내기",
+    "loading": "로딩중…",
+    "peek": "숨기기",
+    "close": "닫기",
+    "verify": "검사",
+    "confirm": "확인",
+    "enable": "유효",
+    "disable": "무효",
+    "cancel": "취소",
+    "dismiss": "무시",
+    "show_less": "접기",
+    "show_more": "더 보기",
+    "optional": "필수 아님",
+    "retry": "다시 시도하십시오",
+    "error_retry": "다시 시도하십시오",
+    "generic_error": "잘못되었습니다",
+    "more": "더 보기",
+    "role": {
+      "moderator": "중재자",
+      "admin": "관리자"
+    }
   },
   "login": {
     "login": "로그인",
@@ -26,10 +48,19 @@
     "password": "암호",
     "placeholder": "예시: lain",
     "register": "가입",
-    "username": "사용자 이름"
+    "username": "사용자 이름",
+    "heading": {
+      "recovery": "2단계 복구",
+      "totp": "2단계인증"
+    },
+    "recovery_code": "복구 코드",
+    "enter_two_factor_code": "2단계인증 코드를 입력하십시오",
+    "enter_recovery_code": "복구 코드를 입력하십시오",
+    "authentication_code": "인증 코드",
+    "hint": "로그인하여 대화에 참가합시다"
   },
   "nav": {
-    "about": "About",
+    "about": "인스턴스 소개",
     "back": "뒤로",
     "chat": "로컬 챗",
     "friend_requests": "팔로우 요청",
@@ -37,18 +68,29 @@
     "dms": "다이렉트 메시지",
     "public_tl": "공개 타임라인",
     "timeline": "타임라인",
-    "twkn": "모든 알려진 네트워크",
+    "twkn": "알려진 네트워크",
     "user_search": "사용자 검색",
-    "preferences": "환경설정"
+    "preferences": "환경설정",
+    "chats": "채트",
+    "timelines": "타임라인",
+    "who_to_follow": "추천된 사용자",
+    "search": "검색",
+    "bookmarks": "북마크",
+    "interactions": "대화",
+    "administration": "관리"
   },
   "notifications": {
-    "broken_favorite": "알 수 없는 게시물입니다, 검색 합니다...",
+    "broken_favorite": "알 수 없는 게시물입니다, 검색합니다…",
     "favorited_you": "당신의 게시물을 즐겨찾기",
     "followed_you": "당신을 팔로우",
     "load_older": "오래 된 알림 불러오기",
     "notifications": "알림",
     "read": "읽음!",
-    "repeated_you": "당신의 게시물을 리핏"
+    "repeated_you": "당신의 게시물을 리핏",
+    "no_more_notifications": "알림이 없습니다",
+    "migrated_to": "이사했습니다",
+    "reacted_with": "{0} 로 반응했습니다",
+    "error": "알림 불러오기 실패: {0}"
   },
   "post_status": {
     "new_status": "새 게시물 게시",
@@ -56,10 +98,13 @@
     "account_not_locked_warning_link": "잠김",
     "attachments_sensitive": "첨부물을 민감함으로 설정",
     "content_type": {
-      "text/plain": "평문"
+      "text/plain": "평문",
+      "text/bbcode": "BBCode",
+      "text/markdown": "Markdown",
+      "text/html": "HTML"
     },
     "content_warning": "주제 (필수 아님)",
-    "default": "LA에 도착!",
+    "default": "인천공항에 도착했습니다.",
     "direct_warning": "이 게시물을 멘션 된 사용자들에게만 보여집니다",
     "posting": "게시",
     "scope": {
@@ -67,7 +112,15 @@
       "private": "팔로워 전용 - 팔로워들에게만",
       "public": "공개 - 공개 타임라인으로",
       "unlisted": "비공개 - 공개 타임라인에 게시 안 함"
-    }
+    },
+    "preview_empty": "아무것도 없습니다",
+    "preview": "미리보기",
+    "scope_notice": {
+      "public": "이 글은 누구나 볼 수 있습니다"
+    },
+    "media_description_error": "파일을 올리지 못하였습니다. 다시한번 시도하여 주십시오",
+    "empty_status_error": "글을 입력하십시오",
+    "media_description": "첨부파일 설명"
   },
   "registration": {
     "bio": "소개",
@@ -85,7 +138,9 @@
       "password_required": "공백으로 둘 수 없습니다",
       "password_confirmation_required": "공백으로 둘 수 없습니다",
       "password_confirmation_match": "패스워드와 일치해야 합니다"
-    }
+    },
+    "fullname_placeholder": "예: 김례인",
+    "username_placeholder": "예: lain"
   },
   "settings": {
     "attachmentRadius": "첨부물",
@@ -112,7 +167,7 @@
     "data_import_export_tab": "데이터 불러오기 / 내보내기",
     "default_vis": "기본 공개 범위",
     "delete_account": "계정 삭제",
-    "delete_account_description": "계정과 메시지를 영구히 삭제.",
+    "delete_account_description": "데이터가 영구히 삭제되고 계정이 불활성화됩니다.",
     "delete_account_error": "계정을 삭제하는데 문제가 있습니다. 계속 발생한다면 인스턴스 관리자에게 문의하세요.",
     "delete_account_instructions": "계정 삭제를 확인하기 위해 아래에 패스워드 입력.",
     "export_theme": "프리셋 저장",
@@ -156,7 +211,7 @@
     "notification_visibility_repeats": "반복",
     "no_rich_text_description": "모든 게시물의 서식을 지우기",
     "hide_follows_description": "내가 팔로우하는 사람을 표시하지 않음",
-    "hide_followers_description": "나를 따르는 사람을 보여주지 마라.",
+    "hide_followers_description": "나를 따르는 사람을 숨기기",
     "nsfw_clickthrough": "NSFW 이미지 \"클릭해서 보이기\"를 활성화",
     "oauth_tokens": "OAuth 토큰",
     "token": "토큰",
@@ -247,7 +302,16 @@
         "borders": "테두리",
         "buttons": "버튼",
         "inputs": "입력칸",
-        "faint_text": "흐려진 텍스트"
+        "faint_text": "흐려진 텍스트",
+        "chat": {
+          "border": "경계선",
+          "outgoing": "송신",
+          "incoming": "수신"
+        },
+        "selectedMenu": "선택된 메뉴 요소",
+        "selectedPost": "선택된 글",
+        "icons": "아이콘",
+        "alert_warning": "경고"
       },
       "radii": {
         "_tab_label": "둥글기"
@@ -303,14 +367,45 @@
         "button": "버튼",
         "text": "더 많은 {0} 그리고 {1}",
         "mono": "내용",
-        "input": "LA에 막 도착!",
+        "input": "인천공항에 도착했습니다.",
         "faint_link": "도움 되는 설명서",
         "fine_print": "우리의 {0} 를 읽고 도움 되지 않는 것들을 배우자!",
         "header_faint": "이건 괜찮아",
         "checkbox": "나는 약관을 대충 훑어보았습니다",
         "link": "작고 귀여운 링크"
       }
-    }
+    },
+    "block_export": "차단 목록 내보내기",
+    "mfa": {
+      "scan": {
+        "secret_code": "키",
+        "title": "스캔"
+      },
+      "authentication_methods": "인증 방법",
+      "waiting_a_recovery_codes": "예비 코드를 수신하고 있습니다…",
+      "recovery_codes": "복구 코드.",
+      "generate_new_recovery_codes": "새로운 복구 코드를 작성",
+      "title": "2단계인증",
+      "confirm_and_enable": "OTP 확인과 활성화",
+      "setup_otp": "OTP 설치",
+      "otp": "OTP"
+    },
+    "security": "보안",
+    "emoji_reactions_on_timeline": "이모지 반응을 타임라인으로 표시",
+    "avatar_size_instruction": "크기를 150x150 이상으로 설정할 것을 추장합니다.",
+    "blocks_tab": "차단",
+    "notification_setting_privacy": "보안",
+    "user_mutes": "사용자",
+    "notification_visibility_emoji_reactions": "반응",
+    "profile_fields": {
+      "value": "내용"
+    },
+    "mutes_and_blocks": "침묵과 차단",
+    "chatMessageRadius": "챗 메시지",
+    "change_email": "전자메일 주소 바꾸기",
+    "changed_email": "메일주소가 갱신되었습니다!",
+    "bot": "이 계정은 bot입니다",
+    "mutes_tab": "침묵"
   },
   "timeline": {
     "collapse": "접기",
@@ -339,7 +434,7 @@
     "its_you": "당신입니다!",
     "mute": "침묵",
     "muted": "침묵 됨",
-    "per_day": " / 하루",
+    "per_day": "/ 하루",
     "remote_follow": "원격 팔로우",
     "statuses": "게시물"
   },
@@ -357,11 +452,11 @@
     "favorite": "즐겨찾기",
     "user_settings": "사용자 설정"
   },
-  "upload":{
+  "upload": {
     "error": {
-    "base": "업로드 실패.",
-    "file_too_big": "파일이 너무 커요 [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
-    "default": "잠시 후에 다시 시도해 보세요"
+      "base": "업로드 실패.",
+      "file_too_big": "파일이 너무 커요 [{filesize}{filesizeunit} / {allowedsize}{allowedsizeunit}]",
+      "default": "잠시 후에 다시 시도해 보세요"
     },
     "file_size_units": {
       "B": "바이트",
@@ -370,5 +465,122 @@
       "GiB": "기비바이트",
       "TiB": "테비바이트"
     }
+  },
+  "interactions": {
+    "follows": "새 팔로워",
+    "favs_repeats": "반복과 즐겨찾기"
+  },
+  "emoji": {
+    "load_all": "전체 {emojiAmount} 이모지 불러오기",
+    "unicode": "Unicode 이모지",
+    "custom": "전용 이모지",
+    "add_emoji": "이모지 넣기",
+    "search_emoji": "이모지 검색",
+    "emoji": "이모지",
+    "stickers": "스티커"
+  },
+  "polls": {
+    "add_poll": "투표를 추가",
+    "votes": "표",
+    "vote": "투표",
+    "type": "투표 형식",
+    "expiry": "투표 기간",
+    "votes_count": "{count} 표 | {count} 표",
+    "people_voted_count": "{count} 명 투표 | {count} 명 투표",
+    "option": "선택지",
+    "add_option": "선택지 추가"
+  },
+  "media_modal": {
+    "next": "다음",
+    "previous": "이전"
+  },
+  "importer": {
+    "error": "이 파일을 가져올 때 오류가 발생하였습니다.",
+    "success": "정상히 불러왔습니다.",
+    "submit": "보내기"
+  },
+  "image_cropper": {
+    "cancel": "취소",
+    "save_without_cropping": "그대로 저장",
+    "save": "저장",
+    "crop_picture": "사진 자르기"
+  },
+  "exporter": {
+    "processing": "처리중입니다, 처리가 끝나면 파일을 다운로드하라는 지시가 있겠습니다",
+    "export": "내보내기"
+  },
+  "domain_mute_card": {
+    "unmute_progress": "침묵을 해제중…",
+    "unmute": "침묵 해제",
+    "mute_progress": "침묵으로 설정중…",
+    "mute": "침묵"
+  },
+  "about": {
+    "staff": "운영자",
+    "mrf": {
+      "simple": {
+        "media_nsfw_desc": "이 인스턴스에서는 아래의 인스턴스로부터 보내온 투고에 붙혀 있는 매체는 민감함으로 설정됩니다:",
+        "media_nsfw": "매체를 민감함으로 설정",
+        "media_removal_desc": "이 인스턴스에서는 아래의 인스턴스로부터 보내온 투고에 붙혀 있는 매체는 제거됩니다:",
+        "media_removal": "매체 제거",
+        "ftl_removal_desc": "이 인스턴스에서 아래의 인스턴스들은 \"알려진 모든 네트워크\" 타임라인에서 제외됩니다:",
+        "ftl_removal": "\"알려진 모든 네트워크\" 타임라인에서 제외",
+        "quarantine_desc": "이 인스턴스는 아래의 인스턴스에게 공개투고만을 보냅니다:",
+        "quarantine": "검역",
+        "reject_desc": "이 인스턴스에서는 아래의 인스턴스로부터 보내온 투고를 받아들이지 않습니다:",
+        "accept_desc": "이 인스턴스에서는 아래의 인스턴스로부터 보내온 투고만이 접수됩니다:",
+        "reject": "거부",
+        "accept": "허가",
+        "simple_policies": "인스턴스 특유의 폴리시"
+      },
+      "mrf_policies": "사용되는 MRF 폴리시",
+      "keyword": {
+        "is_replaced_by": "→",
+        "replace": "바꾸기",
+        "reject": "거부",
+        "ftl_removal": "\"알려진 모든 네트워크\" 타임라인에서 제외",
+        "keyword_policies": "단어 폴리시"
+      },
+      "federation": "연합"
+    }
+  },
+  "shoutbox": {
+    "title": "Shoutbox"
+  },
+  "time": {
+    "years_short": "{0} 년",
+    "year_short": "{0} 년",
+    "years": "{0} 년",
+    "year": "{0} 년",
+    "weeks_short": "{0} 주일",
+    "week_short": "{0} 주일",
+    "weeks": "{0} 주일",
+    "week": "{0} 주일",
+    "seconds_short": "{0} 초",
+    "second_short": "{0} 초",
+    "seconds": "{0} 초",
+    "second": "{0} 초",
+    "now_short": "방금",
+    "now": "방끔",
+    "months_short": "{0} 달 전",
+    "month_short": "{0} 달 전",
+    "months": "{0} 달 전",
+    "month": "{0} 달 전",
+    "minutes_short": "{0} 분",
+    "minute_short": "{0} 분",
+    "minutes": "{0} 분",
+    "minute": "{0} 분",
+    "in_past": "{0} 전",
+    "hours_short": "{0} 시간",
+    "hour_short": "{0} 시간",
+    "hours": "{0} 시간",
+    "hour": "{0} 시간",
+    "days_short": "{0} 일",
+    "day_short": "{0} 일",
+    "days": "{0} 일",
+    "day": "{0} 일"
+  },
+  "remote_user_resolver": {
+    "error": "찾을 수 없습니다."
   }
 }

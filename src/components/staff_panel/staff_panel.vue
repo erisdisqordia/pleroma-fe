@@ -7,11 +7,18 @@
         </div>
       </div>
       <div class="panel-body">
-        <basic-user-card
-          v-for="user in staffAccounts"
-          :key="user.screen_name"
-          :user="user"
-        />
+        <div
+          v-for="group in groupedStaffAccounts"
+          :key="group.role"
+          class="staff-group"
+        >
+          <h4>{{ $t('general.role.' + group.role) }}</h4>
+          <basic-user-card
+            v-for="user in group.users"
+            :key="user.screen_name"
+            :user="user"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -20,4 +27,14 @@
 <script src="./staff_panel.js" ></script>
 
 <style lang="scss">
+
+.staff-group {
+  padding-left: 1em;
+  padding-top: 1em;
+
+  .basic-user-card {
+    padding-left: 0;
+  }
+}
+
 </style>

@@ -93,7 +93,9 @@ export default Vue.component('tab-switcher', {
               <button
                 disabled={slot.data.attrs.disabled}
                 onClick={this.clickTab(index)}
-                class={classesTab.join(' ')}>
+                class={classesTab.join(' ')}
+                type="button"
+              >
                 <img src={slot.data.attrs.image} title={slot.data.attrs['image-tooltip']}/>
                 {slot.data.attrs.label ? '' : slot.data.attrs.label}
               </button>

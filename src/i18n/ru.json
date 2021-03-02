@@ -490,7 +490,9 @@
     "reply_visibility_following_short": "Показывать ответы тем кого вы читаете",
     "hide_all_muted_posts": "Не показывать игнорируемые статусы",
     "hide_media_previews": "Не показывать вложения в ленте",
-    "setting_changed": "Отличается от значения по умолчанию"
+    "setting_changed": "Отличается от значения по умолчанию",
+    "reset_background_confirm": "Вы точно хотите сбросить фон?",
+    "reset_banner_confirm": "Вы точно хотите сбросить баннер?"
   },
   "timeline": {
     "collapse": "Свернуть",

@@ -18,6 +18,7 @@ const chat = {
   actions: {
     initializeChat (store, socket) {
       const channel = socket.channel('chat:public')
+
       channel.on('new_msg', (msg) => {
         store.commit('addMessage', msg)
       })

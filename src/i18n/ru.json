@@ -469,11 +469,11 @@
     "upload_a_photo": "Загрузить фото",
     "notification_mutes": "Чтобы не получать уведомления от определённого пользователя, заглушите его.",
     "reset_avatar_confirm": "Вы точно хотите сбросить аватар?",
-    "reset_profile_banner": "Сбросить личный баннер",
-    "reset_profile_background": "Сбросить личные обои",
+    "reset_profile_banner": "Сбросить баннер профиля",
+    "reset_profile_background": "Сбросить фон профиля",
     "reset_avatar": "Сбросить аватар",
-    "search_user_to_mute": "Искать, кого вы хотите заглушить",
-    "search_user_to_block": "Искать, кого вы хотите заблокировать",
+    "search_user_to_mute": "Поиск того, кого вы хотите заглушить",
+    "search_user_to_block": "Поиск того, кого вы хотите заблокировать",
     "pad_emoji": "Разделять эмодзи пробелами, когда они добавляются из меню",
     "avatar_size_instruction": "Рекомендуется использовать изображение больше чем 150 на 150 пикселей в качестве аватара.",
     "enable_web_push_notifications": "Включить web push-уведомления",
@@ -492,7 +492,8 @@
     "hide_media_previews": "Не показывать вложения в ленте",
     "setting_changed": "Отличается от значения по умолчанию",
     "reset_background_confirm": "Вы точно хотите сбросить фон?",
-    "reset_banner_confirm": "Вы точно хотите сбросить баннер?"
+    "reset_banner_confirm": "Вы точно хотите сбросить баннер?",
+    "type_domains_to_mute": "Поиск доменов, которые вы хотите заглушить"
   },
   "timeline": {
     "collapse": "Свернуть",

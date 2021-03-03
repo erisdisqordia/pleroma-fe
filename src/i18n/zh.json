@@ -561,7 +561,14 @@
     "mute_export_button": "导出你的隐藏名单到一个 csv 文件",
     "mute_export": "隐藏名单导出",
     "hide_wallpaper": "隐藏实例壁纸",
-    "setting_changed": "与默认设置不同"
+    "setting_changed": "与默认设置不同",
+    "more_settings": "更多设置",
+    "sensitive_by_default": "默认标记发文为敏感内容",
+    "reply_visibility_self_short": "只显示对我本人的回复",
+    "reply_visibility_following_short": "显示对我关注的人的回复",
+    "hide_all_muted_posts": "不显示已隐藏的发文",
+    "hide_media_previews": "隐藏媒体预览",
+    "word_filter": "词语过滤"
   },
   "time": {
     "day": "{0} 天",

@@ -353,7 +353,16 @@
         "highlight": "Выделенные элементы",
         "icons": "Иконки",
         "poll": "График результатов опроса",
-        "wallpaper": "Фон"
+        "wallpaper": "Фон",
+        "chat": {
+          "border": "Границы",
+          "outgoing": "Исходящие",
+          "incoming": "Входящие"
+        },
+        "tabs": "Вкладки",
+        "toggled": "Включено",
+        "disabled": "Отключено",
+        "selectedMenu": "Выбранный пункт меню"
       },
       "radii": {
         "_tab_label": "Скругление"
@@ -489,8 +498,8 @@
     "notification_setting_hide_notification_contents": "Скрыть отправителя и содержимое push-уведомлений",
     "version": {
       "title": "Версия",
-      "frontend_version": "Версия фронтенда",
-      "backend_version": "Версия бекенда"
+      "frontend_version": "Версия фронт-энда",
+      "backend_version": "Версия бэк-энда"
     },
     "word_filter": "Фильтр слов",
     "sensitive_by_default": "Помечать статусы как имеющие щекотливый характер по умолчанию",

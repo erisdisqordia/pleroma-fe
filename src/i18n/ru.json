@@ -493,7 +493,7 @@
     "setting_changed": "Отличается от значения по умолчанию",
     "reset_background_confirm": "Вы точно хотите сбросить фон?",
     "reset_banner_confirm": "Вы точно хотите сбросить баннер?",
-    "type_domains_to_mute": "Поиск доменов, которые вы хотите заглушить"
+    "type_domains_to_mute": "Поиск узлов, которые вы хотите заглушить"
   },
   "timeline": {
     "collapse": "Свернуть",

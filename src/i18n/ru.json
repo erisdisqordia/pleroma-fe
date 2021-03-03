@@ -55,8 +55,8 @@
     "chat": "Локальный чат",
     "mentions": "Упоминания",
     "interactions": "Взаимодействия",
-    "public_tl": "Публичная лента",
-    "timeline": "Лента",
+    "public_tl": "Локальная лента",
+    "timeline": "Главная",
     "twkn": "Федеративная лента",
     "search": "Поиск",
     "friend_requests": "Запросы на чтение",
@@ -79,8 +79,8 @@
     "read": "Прочесть",
     "repeated_you": "повторил(а) ваш статус",
     "follow_request": "хочет читать вас",
-    "reacted_with": "добавил реакцию: {0}",
-    "migrated_to": "мигрировал на",
+    "reacted_with": "добавил(а) реакцию: {0}",
+    "migrated_to": "перехал на",
     "no_more_notifications": "Нет дальнейших уведомлений",
     "error": "Ошибка при обновлении уведомлений: {0}"
   },
@@ -88,11 +88,11 @@
     "favs_repeats": "Повторы и фавориты",
     "follows": "Новые читатели",
     "load_older": "Загрузить старые взаимодействия",
-    "moves": "Миграции пользователей"
+    "moves": "Переезды"
   },
   "post_status": {
     "account_not_locked_warning": "Ваш аккаунт не {0}. Кто угодно может начать читать вас чтобы видеть статусы только для читателей.",
-    "account_not_locked_warning_link": "залочен",
+    "account_not_locked_warning_link": "закрыт",
     "attachments_sensitive": "Вложения имеют щекотливый характер",
     "content_warning": "Тема (не обязательно)",
     "default": "Что нового?",
@@ -340,7 +340,7 @@
         "badge": "Фон значков",
         "badge_notification": "Уведомления",
         "panel_header": "Заголовок панели",
-        "top_bar": "Верняя полоска",
+        "top_bar": "Верхняя полоска",
         "borders": "Границы",
         "buttons": "Кнопки",
         "inputs": "Поля ввода",
@@ -456,7 +456,7 @@
     "no_mutes": "Нет игнорируемых",
     "no_blocks": "Нет блокировок",
     "notification_visibility_emoji_reactions": "Реакции",
-    "notification_visibility_moves": "Миграции пользователей",
+    "notification_visibility_moves": "Переезды",
     "use_contain_fit": "Не обрезать вложения в миниатюрах",
     "profile_fields": {
       "value": "Значение",
@@ -740,7 +740,8 @@
     "chats": "Беседы",
     "delete": "Удалить",
     "message_user": "Напишите {nickname}",
-    "you": "Вы:"
+    "you": "Вы:",
+    "error_sending_message": "Произошла ошибка при отправке сообщения."
   },
   "remote_user_resolver": {
     "error": "Не найдено.",

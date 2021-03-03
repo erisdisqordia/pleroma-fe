@@ -18,24 +18,6 @@ const chat = {
   actions: {
     initializeChat (store, socket) {
       const channel = socket.channel('chat:public')
-      let id = 0
-      const createmsg = () => {
-        id += 1
-        return {
-          text: 'test' + id,
-          author: {
-            username: 'test',
-            avatar: '',
-            id
-          }
-        }
-      }
-
-      const loop = () => {
-        store.commit('addMessage', createmsg())
-        setTimeout(loop, 3000)
-      }
-      loop()
 
       channel.on('new_msg', (msg) => {
         store.commit('addMessage', msg)

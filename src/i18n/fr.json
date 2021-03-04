@@ -14,7 +14,8 @@
     "text_limit": "Limite de texte",
     "title": "Caractéristiques",
     "who_to_follow": "Personnes à suivre",
-    "pleroma_chat_messages": "Chat Pleroma"
+    "pleroma_chat_messages": "Chat Pleroma",
+    "upload_limit": "Limite de téléversement"
   },
   "finder": {
     "error_fetching_user": "Erreur lors de la recherche de l'utilisateur·ice",
@@ -38,7 +39,11 @@
     "close": "Fermer",
     "retry": "Réessayez",
     "error_retry": "Veuillez réessayer",
-    "loading": "Chargement…"
+    "loading": "Chargement…",
+    "role": {
+      "moderator": "Modo'",
+      "admin": "Admin"
+    }
   },
   "image_cropper": {
     "crop_picture": "Rogner l'image",
@@ -103,7 +108,8 @@
     "no_more_notifications": "Aucune notification supplémentaire",
     "migrated_to": "a migré à",
     "reacted_with": "a réagi avec {0}",
-    "follow_request": "veut vous suivre"
+    "follow_request": "veut vous suivre",
+    "error": "Erreur de chargement des notifications : {0}"
   },
   "interactions": {
     "favs_repeats": "Partages et favoris",
@@ -724,7 +730,9 @@
     "expires_in": "Fin du sondage dans {0}",
     "not_enough_options": "Trop peu d'options unique au sondage",
     "vote": "Voter",
-    "expired": "Sondage terminé il y a {0}"
+    "expired": "Sondage terminé il y a {0}",
+    "people_voted_count": "{count} voteur | {count} voteurs",
+    "votes_count": "{count} vote | {count} votes"
   },
   "emoji": {
     "emoji": "Émoji",

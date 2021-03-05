@@ -41,8 +41,8 @@
   },
   "importer": {
     "submit": "Send",
-    "success": "Importering fullført",
-    "error": "Det oppsto en feil under importering av denne filen"
+    "success": "Importering fullført.",
+    "error": "Det oppsto en feil under importering av denne filen."
   },
   "login": {
     "login": "Logg inn",
@@ -85,7 +85,7 @@
     "bookmarks": "Bokmerker"
   },
   "notifications": {
-    "broken_favorite": "Ukjent status, leter etter den...",
+    "broken_favorite": "Ukjent status, leter etter den…",
     "favorited_you": "likte din status",
     "followed_you": "fulgte deg",
     "load_older": "Last eldre varsler",
@@ -447,7 +447,8 @@
       "title": "Versjon",
       "backend_version": "Backend Versjon",
       "frontend_version": "Frontend Versjon"
-    }
+    },
+    "hide_wallpaper": "Skjul instansens bakgrunnsbilde"
   },
   "time": {
     "day": "{0} dag",
@@ -602,5 +603,22 @@
     "person_talking": "{count} person snakker om dette",
     "people_talking": "{count} personer snakker om dette",
     "no_results": "Ingen resultater"
+  },
+  "about": {
+    "mrf": {
+      "simple": {
+        "quarantine": "Karantene",
+        "reject_desc": "Denne instansen vil ikke godta meldinger fra følgende instanser:",
+        "reject": "Avvis",
+        "accept_desc": "Denne instansen godtar kun meldinger fra følgende instanser:",
+        "accept": "Aksepter"
+      },
+      "keyword": {
+        "is_replaced_by": "→",
+        "replace": "Erstatt",
+        "reject": "Avvis",
+        "ftl_removal": "Fjerning fra \"Det hele kjente nettverket\" Tidslinjen"
+      }
+    }
   }
 }

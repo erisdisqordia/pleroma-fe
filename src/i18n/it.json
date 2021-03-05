@@ -83,7 +83,7 @@
     "avatarRadius": "Icone utente",
     "background": "Sfondo",
     "btnRadius": "Pulsanti",
-    "cBlue": "Blu (risposte, seguire)",
+    "cBlue": "Blu (rispondi, segui)",
     "cGreen": "Verde (ripeti)",
     "cOrange": "Arancione (gradire)",
     "cRed": "Rosso (annulla)",
@@ -167,18 +167,18 @@
     "block_import": "Importa blocchi",
     "block_export_button": "Esporta i tuoi blocchi in un file CSV",
     "block_export": "Esporta blocchi",
-    "allow_following_move": "Consenti",
+    "allow_following_move": "Consenti l'iscrizione automatica ai profili traslocati",
     "mfa": {
       "verify": {
         "desc": "Per abilitare l'autenticazione bifattoriale, inserisci il codice fornito dalla tua applicazione:"
       },
       "scan": {
         "secret_code": "Codice",
-        "desc": "Con la tua applicazione bifattoriale, acquisisci questo QR o inserisci il codice manualmente:",
+        "desc": "Con la tua applicazione bifattoriale, acquisisci il QR o inserisci il codice:",
         "title": "Acquisisci"
       },
       "authentication_methods": "Metodi di accesso",
-      "recovery_codes_warning": "Appuntati i codici o salvali in un posto sicuro, altrimenti rischi di non rivederli mai più. Se perderai l'accesso sia alla tua applicazione bifattoriale che ai codici di recupero non potrai più accedere al tuo profilo.",
+      "recovery_codes_warning": "Metti i codici al sicuro, perché non potrai più visualizzarli. Se perderai l'accesso sia alla tua applicazione bifattoriale che ai codici di recupero non potrai più accedere al tuo profilo.",
       "waiting_a_recovery_codes": "Ricevo codici di recupero…",
       "recovery_codes": "Codici di recupero.",
       "warning_of_generate_new_codes": "Alla generazione di nuovi codici di recupero, quelli vecchi saranno disattivati.",
@@ -250,7 +250,7 @@
         "selectedMenu": "Voce menù selezionata",
         "selectedPost": "Messaggio selezionato",
         "pressed": "Premuto",
-        "highlight": "Elementi evidenziati",
+        "highlight": "Elementi in risalto",
         "icons": "Icone",
         "poll": "Grafico sondaggi",
         "underlay": "Sottostante",
@@ -399,7 +399,7 @@
       "add_field": "Aggiungi campo",
       "label": "Metadati profilo"
     },
-    "bot": "Questo profilo è di un robot",
+    "bot": "Questo è un robot",
     "version": {
       "frontend_version": "Versione interfaccia",
       "backend_version": "Versione backend",
@@ -416,10 +416,10 @@
     "notification_setting_block_from_strangers": "Blocca notifiche da utenti che non segui",
     "virtual_scrolling": "Velocizza l'elaborazione delle sequenze",
     "import_mutes_from_a_csv_file": "Importa silenziati da un file CSV",
-    "mutes_imported": "Silenziati importati! Saranno elaborati a breve.",
+    "mutes_imported": "Silenziati importati! Elaborazione in corso.",
     "mute_import_error": "Errore nell'importazione",
-    "mute_import": "Importa silenziati",
-    "mute_export_button": "Esporta la tua lista di silenziati in un file CSV",
+    "mute_import": "Carica silenziati",
+    "mute_export_button": "Esporta i silenziati in un file CSV",
     "mute_export": "Esporta silenziati",
     "hide_wallpaper": "Nascondi sfondo della stanza",
     "setting_changed": "Valore personalizzato",
@@ -500,7 +500,13 @@
     "follow_sent": "Richiesta inviata!",
     "favorites": "Preferiti",
     "message": "Contatta",
-    "bot": "Bot"
+    "bot": "Bot",
+    "highlight": {
+      "side": "Nastro a lato",
+      "striped": "A righe",
+      "solid": "Un colore",
+      "disabled": "Nessun risalto"
+    }
   },
   "chat": {
     "title": "Chat"

@@ -111,7 +111,16 @@ const config = {
   },
   actions: {
     loadSettings ({ dispatch }, data) {
-      Object.keys(this.state.config).forEach(
+      const knownKeys = new Set(Object.keys(this.state.config))
+      const presentKeys = new Set(Object.keys(data))
+      const intersection = new Set()
+      for (let elem of presentKeys) {
+        if (knownKeys.has(elem)) {
+          intersection.add(elem)
+        }
+      }
+
+      Object.keys(intersection).forEach(
         name => dispatch('setOption', { name, value: data[name] })
       )
     },

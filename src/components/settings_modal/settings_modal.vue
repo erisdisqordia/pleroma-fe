@@ -67,7 +67,7 @@
             class="btn button-default"
             :title="$t('general.close')"
             >
-            <span>{{ $t("settings.backup_restore") }}</span>
+            <span>{{ $t("settings.file_export_import.backup_restore") }}</span>
             <FAIcon
               icon="chevron-down"
             />
@@ -85,7 +85,7 @@
                 <FAIcon
                   icon="file-download"
                   fixed-width
-                /><span>{{ $t("settings.backup_settings") }}</span>
+                /><span>{{ $t("settings.file_export_import.backup_settings") }}</span>
               </button>
               <button
                 class="button-default dropdown-item dropdown-item-icon"
@@ -95,7 +95,7 @@
                 <FAIcon
                   icon="file-download"
                   fixed-width
-                /><span>{{ $t("settings.backup_settings_theme") }}</span>
+                /><span>{{ $t("settings.file_export_import.backup_settings_theme") }}</span>
               </button>
               <button
                 class="button-default dropdown-item dropdown-item-icon"
@@ -105,7 +105,7 @@
                 <FAIcon
                   icon="file-upload"
                   fixed-width
-                /><span>{{ $t("settings.restore_settings") }}</span>
+                /><span>{{ $t("settings.file_export_import.restore_settings") }}</span>
               </button>
             </div>
           </div>

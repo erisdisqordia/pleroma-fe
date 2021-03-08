@@ -19,6 +19,9 @@ import {
   faWindowMinimize
 } from '@fortawesome/free-regular-svg-icons'
 
+const PLEROMAFE_SETTINGS_MAJOR_VERSION = 1
+const PLEROMAFE_SETTINGS_MINOR_VERSION = 0
+
 library.add(
   faTimes,
   faWindowMinimize,
@@ -65,12 +68,52 @@ const SettingsModal = {
       this.$store.dispatch('togglePeekSettingsModal')
     },
     importValidator (data) {
-      return data._pleroma_settings_version[0] === 1
+      if (!Array.isArray(data._pleroma_settings_version)) {
+        return {
+          messageKey: 'settings.file_import_export.invalid_file'
+        }
+      }
+
+      const [major, minor] = data._pleroma_settings_version
+
+      if (major > PLEROMAFE_SETTINGS_MAJOR_VERSION) {
+        return {
+          messageKey: 'settings.file_export_import.errors.file_too_new',
+          messageArgs: {
+            fileMajor: major,
+            feMajor: PLEROMAFE_SETTINGS_MAJOR_VERSION
+          }
+        }
+      }
+
+      if (major < PLEROMAFE_SETTINGS_MAJOR_VERSION) {
+        return {
+          messageKey: 'settings.file_export_import.errors.file_too_old',
+          messageArgs: {
+            fileMajor: major,
+            feMajor: PLEROMAFE_SETTINGS_MAJOR_VERSION
+          }
+        }
+      }
+
+      if (minor > PLEROMAFE_SETTINGS_MINOR_VERSION) {
+        this.$store.dispatch('pushGlobalNotice', {
+          level: 'warning',
+          messageKey: 'settings.file_export_import.errors.file_slightly_new',
+        })
+      }
+
+      return true
     },
-    onImportFailure () {
-      this.$store.dispatch('pushGlobalNotice', { messageKey: 'settings.invalid_settings_imported', level: 'error' })
+    onImportFailure (result) {
+      if (result.error) {
+        this.$store.dispatch('pushGlobalNotice', { messageKey: 'settings.invalid_settings_imported', level: 'error' })
+      } else {
+        this.$store.dispatch('pushGlobalNotice', { ...result.validationResult, level: 'error' })
+      }
     },
     onImport (data) {
+      if (data)
       this.$store.dispatch('loadSettings', data)
     },
     restore () {
@@ -99,7 +142,10 @@ const SettingsModal = {
         )
       }
       const clone = cloneDeep(sample)
-      clone._pleroma_settings_version = [1, 0]
+      clone._pleroma_settings_version = [
+        PLEROMAFE_SETTINGS_MAJOR_VERSION,
+        PLEROMAFE_SETTINGS_MINOR_VERSION
+      ]
       return clone
     }
   },

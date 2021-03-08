@@ -99,7 +99,7 @@ const SettingsModal = {
       if (minor > PLEROMAFE_SETTINGS_MINOR_VERSION) {
         this.$store.dispatch('pushGlobalNotice', {
           level: 'warning',
-          messageKey: 'settings.file_export_import.errors.file_slightly_new',
+          messageKey: 'settings.file_export_import.errors.file_slightly_new'
         })
       }
 
@@ -113,8 +113,7 @@ const SettingsModal = {
       }
     },
     onImport (data) {
-      if (data)
-      this.$store.dispatch('loadSettings', data)
+      if (data) { this.$store.dispatch('loadSettings', data) }
     },
     restore () {
       console.log(this.dataImporter)

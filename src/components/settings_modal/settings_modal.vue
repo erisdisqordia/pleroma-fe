@@ -31,8 +31,8 @@
         </transition>
         <button
           class="btn button-default"
-          @click="peekModal"
           :title="$t('general.peek')"
+          @click="peekModal"
         >
           <FAIcon
             :icon="['far', 'window-minimize']"
@@ -41,8 +41,8 @@
         </button>
         <button
           class="btn button-default"
-          @click="closeModal"
           :title="$t('general.close')"
+          @click="closeModal"
         >
           <FAIcon
             icon="times"
@@ -61,12 +61,12 @@
           :offset="{ y: 5, x: 5 }"
           :bound-to="{ x: 'container' }"
           remove-padding
-          >
+        >
           <button
             slot="trigger"
             class="btn button-default"
             :title="$t('general.close')"
-            >
+          >
             <span>{{ $t("settings.file_export_import.backup_restore") }}</span>
             <FAIcon
               icon="chevron-down"

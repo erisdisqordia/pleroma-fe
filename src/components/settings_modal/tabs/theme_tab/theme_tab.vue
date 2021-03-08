@@ -79,10 +79,16 @@
             </label>
           </div>
           <div class="export-import">
-            <button class="btn button-default" @click="importTheme">
+            <button
+              class="btn button-default"
+              @click="importTheme"
+            >
               {{ $t(&quot;settings.import_theme&quot;) }}
             </button>
-            <button class="btn button-default" @click="exportTheme">
+            <button
+              class="btn button-default"
+              @click="exportTheme"
+            >
               {{ $t(&quot;settings.export_theme&quot;) }}
             </button>
           </div>

@@ -116,7 +116,6 @@ const SettingsModal = {
       if (data) { this.$store.dispatch('loadSettings', data) }
     },
     restore () {
-      console.log(this.dataImporter)
       this.dataImporter.importData()
     },
     backup () {

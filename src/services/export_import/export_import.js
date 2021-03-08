@@ -26,7 +26,6 @@ export const newImporter = ({
     const filePicker = document.createElement('input')
     filePicker.setAttribute('type', 'file')
     filePicker.setAttribute('accept', '.json')
-    console.log(1)
 
     filePicker.addEventListener('change', event => {
       if (event.target.files[0]) {
@@ -45,7 +44,6 @@ export const newImporter = ({
             onImportFailure({ error })
           }
         }
-        console.log(2)
         reader.readAsText(event.target.files[0])
       }
     })

@@ -57,12 +57,14 @@ const fetchNotifications = ({ store, args, older }) => {
       return notifications
     })
     .catch((error) => {
-      store.dispatch('pushGlobalNotice', {
-        level: 'error',
-        messageKey: 'notifications.error',
-        messageArgs: [error.message],
-        timeout: 5000
-      })
+      if (!store.rootState.api.connectionBroken) {
+        store.dispatch('pushGlobalNotice', {
+          level: 'error',
+          messageKey: 'notifications.error',
+          messageArgs: [error.message],
+          timeout: 5000
+        })
+      }
     })
 }
 

@@ -5,6 +5,8 @@ import { Socket } from 'phoenix'
 
 const api = {
   state: {
+    connectionBroken: false,
+    retryMultiplier: 1,
     backendInteractor: backendInteractorService(),
     fetchers: {},
     socket: null,
@@ -34,12 +36,18 @@ const api = {
     },
     setMastoUserSocketStatus (state, value) {
       state.mastoUserSocketStatus = value
+    },
+    recoverConnection (state) {
+      state.connectionBroken = false
+    },
+    breakConnection (state) {
+      state.connectionBroken = true
     }
   },
   actions: {
     // Global MastoAPI socket control, in future should disable ALL sockets/(re)start relevant sockets
     enableMastoSockets (store) {
-      const { state, dispatch } = store
+      const { state, dispatch, commit } = store
       // Do not initialize unless nonexistent or closed
       if (
         state.mastoUserSocket &&
@@ -50,11 +58,13 @@ const api = {
       ) {
         return
       }
+      commit('recoverConnection')
       return dispatch('startMastoUserSocket')
     },
     disableMastoSockets (store) {
-      const { state, dispatch } = store
+      const { state, dispatch, commit } = store
       if (!state.mastoUserSocket) return
+      commit('recoverConnection')
       return dispatch('stopMastoUserSocket')
     },
 
@@ -102,6 +112,7 @@ const api = {
           state.mastoUserSocket.addEventListener('open', () => {
             // Do not show notification when we just opened up the page
             if (state.mastoUserSocketStatus !== null) {
+              commit('recoverConnection')
               dispatch('pushGlobalNotice', {
                 level: 'success',
                 messageKey: 'timeline.socket_reconnected',
@@ -114,15 +125,6 @@ const api = {
             console.error('Error in MastoAPI websocket:', error)
             commit('setMastoUserSocketStatus', WSConnectionStatus.ERROR)
             dispatch('clearOpenedChats')
-            /* Since data in WS event for error is useless it's better to show
-             * generic warning instead of in "close" which actually has some
-             * useful data
-             */
-            dispatch('pushGlobalNotice', {
-              level: 'error',
-              messageKey: 'timeline.socket_closed',
-              timeout: 5000
-            })
           })
           state.mastoUserSocket.addEventListener('close', ({ detail: closeEvent }) => {
             const ignoreCodes = new Set([
@@ -137,13 +139,19 @@ const api = {
               dispatch('startFetchingTimeline', { timeline: 'friends' })
               dispatch('startFetchingNotifications')
               dispatch('startFetchingChats')
-              dispatch('restartMastoUserSocket')
-              dispatch('pushGlobalNotice', {
-                level: 'error',
-                messageKey: 'timeline.socket_broke',
-                messageArgs: [code],
-                timeout: 5000
-              })
+              setTimeout(() => {
+                console.log('TEST')
+                dispatch('restartMastoUserSocket')
+              }, 1000)
+              if (!state.connectionBroken) {
+                dispatch('pushGlobalNotice', {
+                  level: 'error',
+                  messageKey: 'timeline.socket_broke',
+                  messageArgs: [code],
+                  timeout: 5000
+                })
+              }
+              commit('breakConnection')
             }
             commit('setMastoUserSocketStatus', WSConnectionStatus.CLOSED)
             dispatch('clearOpenedChats')

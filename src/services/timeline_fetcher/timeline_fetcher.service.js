@@ -66,12 +66,14 @@ const fetchAndUpdate = ({
       return { statuses, pagination }
     })
     .catch((error) => {
-      store.dispatch('pushGlobalNotice', {
-        level: 'error',
-        messageKey: 'timeline.error',
-        messageArgs: [error.message],
-        timeout: 5000
-      })
+      if (!store.rootState.api.connectionBroken) {
+        store.dispatch('pushGlobalNotice', {
+          level: 'error',
+          messageKey: 'timeline.error',
+          messageArgs: [error.message],
+          timeout: 5000
+        })
+      }
     })
 }
 

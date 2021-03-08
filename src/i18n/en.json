@@ -357,6 +357,7 @@
     "interface": "Interface",
     "interfaceLanguage": "Interface language",
     "invalid_theme_imported": "The selected file is not a supported Pleroma theme. No changes to your theme were made.",
+    "invalid_settings_imported": "The selected file is not a supported Pleroma settings backup. No changes were made.",
     "limited_availability": "Unavailable in your browser",
     "links": "Links",
     "lock_account_description": "Restrict your account to approved followers only",
@@ -364,6 +365,10 @@
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
     "mutes_tab": "Mutes",
     "play_videos_in_modal": "Play videos in a popup frame",
+    "backup_restore": "Settings backup",
+    "backup_settings": "Backup settings to file",
+    "backup_settings_theme": "Backup settings and theme to file",
+    "restore_settings": "Restore settings from file",
     "profile_fields": {
       "label": "Profile metadata",
       "add_field": "Add Field",

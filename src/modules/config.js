@@ -110,6 +110,11 @@ const config = {
     }
   },
   actions: {
+    loadSettings ({ dispatch }, data) {
+      Object.keys(this.state.config).forEach(
+        name => dispatch('setOption', { name, value: data[name] })
+      )
+    },
     setHighlight ({ commit, dispatch }, { user, color, type }) {
       commit('setHighlight', { user, color, type })
     },

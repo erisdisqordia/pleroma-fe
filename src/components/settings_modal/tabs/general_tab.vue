@@ -7,14 +7,14 @@
           <interface-language-switcher />
         </li>
         <li v-if="instanceSpecificPanelPresent">
-          <Checkbox v-model="hideISP">
+          <BooleanSetting path="hideISP">
             {{ $t('settings.hide_isp') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
         <li v-if="instanceWallpaperUsed">
-          <Checkbox v-model="hideInstanceWallpaper">
+          <BooleanSetting path="hideInstanceWallpaper">
             {{ $t('settings.hide_wallpaper') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
       </ul>
     </div>
@@ -22,51 +22,51 @@
       <h2>{{ $t('nav.timeline') }}</h2>
       <ul class="setting-list">
         <li>
-          <Checkbox v-model="hideMutedPosts">
-            {{ $t('settings.hide_muted_posts') }} {{ $t('settings.instance_default', { value: hideMutedPostsLocalizedValue }) }}
-          </Checkbox>
+          <BooleanSetting path="hideMutedPosts">
+            {{ $t('settings.hide_muted_posts') }}
+          </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="collapseMessageWithSubject">
-            {{ $t('settings.collapse_subject') }} {{ $t('settings.instance_default', { value: collapseMessageWithSubjectLocalizedValue }) }}
-          </Checkbox>
+          <BooleanSetting path="collapseMessageWithSubject">
+            {{ $t('settings.collapse_subject') }}
+          </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="streaming">
+          <BooleanSetting path="streaming">
             {{ $t('settings.streaming') }}
-          </Checkbox>
+          </BooleanSetting>
           <ul
             class="setting-list suboptions"
             :class="[{disabled: !streaming}]"
           >
             <li>
-              <Checkbox
-                v-model="pauseOnUnfocused"
+              <BooleanSetting
+                path="pauseOnUnfocused"
                 :disabled="!streaming"
               >
                 {{ $t('settings.pause_on_unfocused') }}
-              </Checkbox>
+              </BooleanSetting>
             </li>
           </ul>
         </li>
         <li>
-          <Checkbox v-model="useStreamingApi">
+          <BooleanSetting path="useStreamingApi">
             {{ $t('settings.useStreamingApi') }}
             <br>
             <small>
               {{ $t('settings.useStreamingApiWarning') }}
             </small>
-          </Checkbox>
+          </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="emojiReactionsOnTimeline">
+          <BooleanSetting path="emojiReactionsOnTimeline">
             {{ $t('settings.emoji_reactions_on_timeline') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="virtualScrolling">
+          <BooleanSetting path="virtualScrolling">
             {{ $t('settings.virtual_scrolling') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
       </ul>
     </div>
@@ -75,14 +75,14 @@
       <h2>{{ $t('settings.composing') }}</h2>
       <ul class="setting-list">
         <li>
-          <Checkbox v-model="scopeCopy">
-            {{ $t('settings.scope_copy') }} {{ $t('settings.instance_default', { value: scopeCopyLocalizedValue }) }}
-          </Checkbox>
+          <BooleanSetting path="scopeCopy">
+            {{ $t('settings.scope_copy') }}
+          </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="alwaysShowSubjectInput">
-            {{ $t('settings.subject_input_always_show') }} {{ $t('settings.instance_default', { value: alwaysShowSubjectInputLocalizedValue }) }}
-          </Checkbox>
+          <BooleanSetting path="alwaysShowSubjectInput">
+            {{ $t('settings.subject_input_always_show') }}
+          </BooleanSetting>
         </li>
         <li>
           <div>
@@ -143,19 +143,24 @@
           </div>
         </li>
         <li>
-          <Checkbox v-model="minimalScopesMode">
-            {{ $t('settings.minimal_scopes_mode') }} {{ $t('settings.instance_default', { value: minimalScopesModeLocalizedValue }) }}
-          </Checkbox>
+          <BooleanSetting path="minimalScopesMode">
+            {{ $t('settings.minimal_scopes_mode') }}
+          </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="autohideFloatingPostButton">
+          <BooleanSetting path="sensitiveByDefault">
+            {{ $t('settings.sensitive_by_default') }}
+          </BooleanSetting>
+        </li>
+        <li>
+          <BooleanSetting path="autohideFloatingPostButton">
             {{ $t('settings.autohide_floating_post_button') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="padEmoji">
+          <BooleanSetting path="padEmoji">
             {{ $t('settings.pad_emoji') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
       </ul>
     </div>
@@ -164,14 +169,14 @@
       <h2>{{ $t('settings.attachments') }}</h2>
       <ul class="setting-list">
         <li>
-          <Checkbox v-model="hideAttachments">
+          <BooleanSetting path="hideAttachments">
             {{ $t('settings.hide_attachments_in_tl') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="hideAttachmentsInConv">
+          <BooleanSetting path="hideAttachmentsInConv">
             {{ $t('settings.hide_attachments_in_convo') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
         <li>
           <label for="maxThumbnails">
@@ -179,7 +184,7 @@
           </label>
           <input
             id="maxThumbnails"
-            v-model.number="maxThumbnails"
+            path.number="maxThumbnails"
             class="number-input"
             type="number"
             min="0"
@@ -187,48 +192,48 @@
           >
         </li>
         <li>
-          <Checkbox v-model="hideNsfw">
+          <BooleanSetting path="hideNsfw">
             {{ $t('settings.nsfw_clickthrough') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
         <ul class="setting-list suboptions">
           <li>
-            <Checkbox
-              v-model="preloadImage"
+            <BooleanSetting
+              path="preloadImage"
               :disabled="!hideNsfw"
             >
               {{ $t('settings.preload_images') }}
-            </Checkbox>
+            </BooleanSetting>
           </li>
           <li>
-            <Checkbox
-              v-model="useOneClickNsfw"
+            <BooleanSetting
+              path="useOneClickNsfw"
               :disabled="!hideNsfw"
             >
               {{ $t('settings.use_one_click_nsfw') }}
-            </Checkbox>
+            </BooleanSetting>
           </li>
         </ul>
         <li>
-          <Checkbox v-model="stopGifs">
+          <BooleanSetting path="stopGifs">
             {{ $t('settings.stop_gifs') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="loopVideo">
+          <BooleanSetting path="loopVideo">
             {{ $t('settings.loop_video') }}
-          </Checkbox>
+          </BooleanSetting>
           <ul
             class="setting-list suboptions"
             :class="[{disabled: !streaming}]"
           >
             <li>
-              <Checkbox
-                v-model="loopVideoSilentOnly"
+              <BooleanSetting
+                path="loopVideoSilentOnly"
                 :disabled="!loopVideo || !loopSilentAvailable"
               >
                 {{ $t('settings.loop_video_silent_only') }}
-              </Checkbox>
+              </BooleanSetting>
               <div
                 v-if="!loopSilentAvailable"
                 class="unavailable"
@@ -239,14 +244,14 @@
           </ul>
         </li>
         <li>
-          <Checkbox v-model="playVideosInModal">
+          <BooleanSetting path="playVideosInModal">
             {{ $t('settings.play_videos_in_modal') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
         <li>
-          <Checkbox v-model="useContainFit">
+          <BooleanSetting path="useContainFit">
             {{ $t('settings.use_contain_fit') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
       </ul>
     </div>
@@ -255,9 +260,9 @@
       <h2>{{ $t('settings.notifications') }}</h2>
       <ul class="setting-list">
         <li>
-          <Checkbox v-model="webPushNotifications">
+          <BooleanSetting path="webPushNotifications">
             {{ $t('settings.enable_web_push_notifications') }}
-          </Checkbox>
+          </BooleanSetting>
         </li>
       </ul>
     </div>
@@ -266,9 +271,9 @@
       <h2>{{ $t('settings.fun') }}</h2>
       <ul class="setting-list">
         <li>
-          <Checkbox v-model="greentext">
-            {{ $t('settings.greentext') }} {{ $t('settings.instance_default', { value: greentextLocalizedValue }) }}
-          </Checkbox>
+          <BooleanSetting path="greentext">
+            {{ $t('settings.greentext') }}
+          </BooleanSetting>
         </li>
       </ul>
     </div>

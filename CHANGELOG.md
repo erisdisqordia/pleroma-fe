@@ -3,8 +3,32 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-
 ## [Unreleased]
+### Added
+- Added a quick settings to timeline header for easier access
+- Added option to mark posts as sensitive by default
+
+## [2.3.0] - 2021-03-01
+### Fixed
+- Button to remove uploaded media in post status form is now properly placed and sized.
+- Fixed shoutbox not working in mobile layout
+- Fixed missing highlighted border in expanded conversations again
+- Fixed some UI jumpiness when opening images particularly in chat view
+- Fixed chat unread badge looking weird
+- Fixed punycode names not working properly
+- Fixed notifications crashing on an invalid notification
+
+### Changed
+- Display 'people voted' instead of 'votes' for multi-choice polls
+- Optimized chat to not get horrible performance after keeping the same chat open for a long time
+- When opening emoji picker or react picker, it automatically focuses the search field
+- Language picker now uses native language names
+
+### Added
+- Added reason field for registration when approval is required
+- Group staff members by role in the About page
+
+## [2.2.3] - 2021-01-18
 ### Added
 - Added Report button to status ellipsis menu for easier reporting
 
@@ -15,6 +39,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Show notices for websocket events (errors, abnormal closures, reconnections)
 - Fix not being able to re-enable websocket until page refresh
 - Fix annoying issue where timeline might have few posts when streaming is enabled
+
+### Changed
+- Don't filter own posts when they hit your wordfilter
+
 
 ## [2.2.2] - 2020-12-22
 ### Added

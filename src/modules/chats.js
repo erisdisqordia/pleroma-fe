@@ -115,6 +115,9 @@ const chats = {
     },
     handleMessageError ({ commit }, value) {
       commit('handleMessageError', { commit, ...value })
+    },
+    cullOlderMessages ({ commit }, chatId) {
+      commit('cullOlderMessages', chatId)
     }
   },
   mutations: {
@@ -227,6 +230,9 @@ const chats = {
     handleMessageError (state, { chatId, fakeId, isRetry }) {
       const chatMessageService = state.openedChatMessageServices[chatId]
       chatService.handleMessageError(chatMessageService, fakeId, isRetry)
+    },
+    cullOlderMessages (state, chatId) {
+      chatService.cullOlderMessages(state.openedChatMessageServices[chatId])
     }
   }
 }

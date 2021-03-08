@@ -67,7 +67,8 @@ export const defaultState = {
   greentext: undefined, // instance default
   hidePostStats: undefined, // instance default
   hideUserStats: undefined, // instance default
-  virtualScrolling: undefined // instance default
+  virtualScrolling: undefined, // instance default
+  sensitiveByDefault: undefined // instance default
 }
 
 // caching the instance default properties
@@ -76,18 +77,22 @@ export const instanceDefaultProperties = Object.entries(defaultState)
   .map(([key, value]) => key)
 
 const config = {
-  state: defaultState,
+  state: { ...defaultState },
   getters: {
-    mergedConfig (state, getters, rootState, rootGetters) {
+    defaultConfig (state, getters, rootState, rootGetters) {
       const { instance } = rootState
       return {
-        ...state,
-        ...instanceDefaultProperties
-          .map(key => [key, state[key] === undefined
-            ? instance[key]
-            : state[key]
-          ])
-          .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
+        ...defaultState,
+        ...Object.fromEntries(
+          instanceDefaultProperties.map(key => [key, instance[key]])
+        )
+      }
+    },
+    mergedConfig (state, getters, rootState, rootGetters) {
+      const { defaultConfig } = rootGetters
+      return {
+        ...defaultConfig,
+        ...state
       }
     }
   },

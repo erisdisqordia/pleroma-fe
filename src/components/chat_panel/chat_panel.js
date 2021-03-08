@@ -35,6 +35,18 @@ const chatPanel = {
     userProfileLink (user) {
       return generateProfileLink(user.id, user.username, this.$store.state.instance.restrictedNicknames)
     }
+  },
+  watch: {
+    messages (newVal) {
+      const scrollEl = this.$el.querySelector('.chat-window')
+      if (!scrollEl) return
+      if (scrollEl.scrollTop + scrollEl.offsetHeight + 20 > scrollEl.scrollHeight) {
+        this.$nextTick(() => {
+          if (!scrollEl) return
+          scrollEl.scrollTop = scrollEl.scrollHeight - scrollEl.offsetHeight
+        })
+      }
+    }
   }
 }
 

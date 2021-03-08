@@ -178,6 +178,13 @@ a {
   &.-fullwidth {
     width: 100%;
   }
+
+  &.-hover-highlight {
+    &:hover svg {
+      color: $fallback--lightText;
+      color: var(--lightText, $fallback--lightText);
+    }
+  }
 }
 
 input, textarea, .select, .input {
@@ -579,6 +586,7 @@ nav {
   color: var(--faint, $fallback--faint);
   box-shadow: 0px 0px 4px rgba(0,0,0,.6);
   box-shadow: var(--topBarShadow);
+  box-sizing: border-box;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -879,6 +887,11 @@ nav {
   // Needed for smoother chat navigation in the desktop Safari (otherwise the chat layout "jumps" as the chat opens).
   overflow: hidden;
   height: 100%;
+
+  // Get rid of scrollbar on body as scrolling happens on different element
+  body {
+    overflow: hidden;
+  }
 
   // Ensures the fixed position of the mobile browser bars on scroll up / down events.
   // Prevents the mobile browser bars from overlapping or hiding the message posting form.

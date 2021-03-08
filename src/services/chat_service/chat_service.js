@@ -48,6 +48,22 @@ const deleteMessage = (storage, messageId) => {
   }
 }
 
+const cullOlderMessages = (storage) => {
+  const maxIndex = storage.messages.length
+  const minIndex = maxIndex - 50
+  if (maxIndex <= 50) return
+
+  storage.messages = _.sortBy(storage.messages, ['id'])
+  storage.minId = storage.messages[minIndex].id
+  for (const message of storage.messages) {
+    if (message.id < storage.minId) {
+      delete storage.idIndex[message.id]
+      delete storage.idempotencyKeyIndex[message.idempotency_key]
+    }
+  }
+  storage.messages = storage.messages.slice(minIndex, maxIndex)
+}
+
 const handleMessageError = (storage, fakeId, isRetry) => {
   if (!storage) { return }
   const fakeMessage = storage.idIndex[fakeId]
@@ -201,6 +217,7 @@ const ChatService = {
   empty,
   getView,
   deleteMessage,
+  cullOlderMessages,
   resetNewMessageCount,
   clear,
   handleMessageError

@@ -37,7 +37,7 @@
       <div class="panel-footer">
         <div
           v-if="bottomedOut"
-          class="new-status-notification text-center panel-footer faint"
+          class="new-status-notification text-center faint"
         >
           {{ $t('notifications.no_more_notifications') }}
         </div>
@@ -46,7 +46,7 @@
           class="button-unstyled -link -fullwidth"
           @click.prevent="fetchOlderNotifications()"
         >
-          <div class="new-status-notification text-center panel-footer">
+          <div class="new-status-notification text-center">
             {{ minimalMode ? $t('interactions.load_older') : $t('notifications.load_older') }}
           </div>
         </button>

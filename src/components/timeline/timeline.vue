@@ -52,13 +52,13 @@
     <div :class="classes.footer">
       <div
         v-if="count===0"
-        class="new-status-notification text-center panel-footer faint"
+        class="new-status-notification text-center faint"
       >
         {{ $t('timeline.no_statuses') }}
       </div>
       <div
         v-else-if="bottomedOut"
-        class="new-status-notification text-center panel-footer faint"
+        class="new-status-notification text-center faint"
       >
         {{ $t('timeline.no_more_statuses') }}
       </div>
@@ -67,13 +67,13 @@
         class="button-unstyled -link -fullwidth"
         @click.prevent="fetchOlderStatuses()"
       >
-        <div class="new-status-notification text-center panel-footer">
+        <div class="new-status-notification text-center">
           {{ $t('timeline.load_older') }}
         </div>
       </button>
       <div
         v-else
-        class="new-status-notification text-center panel-footer"
+        class="new-status-notification text-center"
       >
         <FAIcon
           icon="circle-notch"

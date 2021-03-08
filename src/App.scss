@@ -548,8 +548,17 @@ main-router {
 }
 
 .panel-footer {
+  display: flex;
   border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
   border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);
+  flex: none;
+  padding: 0.6em 0.6em;
+  text-align: left;
+  line-height: 28px;
+  align-items: baseline;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-color: var(--border, $fallback--border);
 
   .faint {
     color: $fallback--faint;
@@ -862,16 +871,10 @@ nav {
 }
 
 .new-status-notification {
-  position:relative;
-  margin-top: -1px;
+  position: relative;
   font-size: 1.1em;
-  border-width: 1px 0 0 0;
-  border-style: solid;
-  border-color: var(--border, $fallback--border);
-  padding: 10px;
   z-index: 1;
-  background-color: $fallback--fg;
-  background-color: var(--panel, $fallback--fg);
+  flex: 1;
 }
 
 .chat-layout {

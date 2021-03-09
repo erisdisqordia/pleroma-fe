@@ -3,9 +3,10 @@ import { WSConnectionStatus } from '../services/api/api.service.js'
 import { maybeShowChatNotification } from '../services/chat_utils/chat_utils.js'
 import { Socket } from 'phoenix'
 
+const retryTimeout = (multiplier) => 1000 * multiplier
+
 const api = {
   state: {
-    connectionBroken: false,
     retryMultiplier: 1,
     backendInteractor: backendInteractorService(),
     fetchers: {},
@@ -37,16 +38,20 @@ const api = {
     setMastoUserSocketStatus (state, value) {
       state.mastoUserSocketStatus = value
     },
-    recoverConnection (state) {
-      state.connectionBroken = false
+    incrementRetryMultiplier (state) {
+      state.retryMultiplier = Math.max(++state.retryMultiplier, 3)
     },
-    breakConnection (state) {
-      state.connectionBroken = true
+    resetRetryMultiplier (state) {
+      state.retryMultiplier = 1
     }
   },
   actions: {
-    // Global MastoAPI socket control, in future should disable ALL sockets/(re)start relevant sockets
-    enableMastoSockets (store) {
+    /**
+     * Global MastoAPI socket control, in future should disable ALL sockets/(re)start relevant sockets
+     *
+     * @param {Boolean} [initial] - whether this enabling happened at boot time or not
+     */
+    enableMastoSockets (store, initial) {
       const { state, dispatch, commit } = store
       // Do not initialize unless nonexistent or closed
       if (
@@ -58,13 +63,17 @@ const api = {
       ) {
         return
       }
-      commit('recoverConnection')
+      if (initial) {
+        commit('setMastoUserSocketStatus', WSConnectionStatus.STARTING_INITIAL)
+      } else {
+        commit('setMastoUserSocketStatus', WSConnectionStatus.STARTING)
+      }
       return dispatch('startMastoUserSocket')
     },
     disableMastoSockets (store) {
       const { state, dispatch, commit } = store
       if (!state.mastoUserSocket) return
-      commit('recoverConnection')
+      commit('setMastoUserSocketStatus', WSConnectionStatus.DISABLED)
       return dispatch('stopMastoUserSocket')
     },
 
@@ -111,19 +120,28 @@ const api = {
           )
           state.mastoUserSocket.addEventListener('open', () => {
             // Do not show notification when we just opened up the page
-            if (state.mastoUserSocketStatus !== null) {
-              commit('recoverConnection')
+            if (state.mastoUserSocketStatus !== WSConnectionStatus.STARTING_INITIAL) {
               dispatch('pushGlobalNotice', {
                 level: 'success',
                 messageKey: 'timeline.socket_reconnected',
                 timeout: 5000
               })
             }
+            // Stop polling if we were errored or disabled
+            if (new Set([
+              WSConnectionStatus.ERROR,
+              WSConnectionStatus.DISABLED
+            ]).has(state.mastoUserSocketStatus)) {
+              dispatch('stopFetchingTimeline', { timeline: 'friends' })
+              dispatch('stopFetchingNotifications')
+              dispatch('stopFetchingChats')
+            }
+            commit('resetRetryMultiplier')
             commit('setMastoUserSocketStatus', WSConnectionStatus.JOINED)
           })
           state.mastoUserSocket.addEventListener('error', ({ detail: error }) => {
             console.error('Error in MastoAPI websocket:', error)
-            commit('setMastoUserSocketStatus', WSConnectionStatus.ERROR)
+            // TODO is this needed?
             dispatch('clearOpenedChats')
           })
           state.mastoUserSocket.addEventListener('close', ({ detail: closeEvent }) => {
@@ -134,16 +152,17 @@ const api = {
             const { code } = closeEvent
             if (ignoreCodes.has(code)) {
               console.debug(`Not restarting socket becasue of closure code ${code} is in ignore list`)
+              commit('setMastoUserSocketStatus', WSConnectionStatus.CLOSED)
             } else {
               console.warn(`MastoAPI websocket disconnected, restarting. CloseEvent code: ${code}`)
-              dispatch('startFetchingTimeline', { timeline: 'friends' })
-              dispatch('startFetchingNotifications')
-              dispatch('startFetchingChats')
               setTimeout(() => {
-                console.log('TEST')
-                dispatch('restartMastoUserSocket')
-              }, 1000)
-              if (!state.connectionBroken) {
+                dispatch('startMastoUserSocket')
+              }, retryTimeout(state.retryMultiplier))
+              commit('incrementRetryMultiplier')
+              if (state.mastoUserSocketStatus !== WSConnectionStatus.ERROR) {
+                dispatch('startFetchingTimeline', { timeline: 'friends' })
+                dispatch('startFetchingNotifications')
+                dispatch('startFetchingChats')
                 dispatch('pushGlobalNotice', {
                   level: 'error',
                   messageKey: 'timeline.socket_broke',
@@ -151,24 +170,14 @@ const api = {
                   timeout: 5000
                 })
               }
-              commit('breakConnection')
+              commit('setMastoUserSocketStatus', WSConnectionStatus.ERROR)
             }
-            commit('setMastoUserSocketStatus', WSConnectionStatus.CLOSED)
             dispatch('clearOpenedChats')
           })
           resolve()
         } catch (e) {
           reject(e)
         }
-      })
-    },
-    restartMastoUserSocket ({ dispatch }) {
-      // This basically starts MastoAPI user socket and stops conventional
-      // fetchers when connection reestablished
-      return dispatch('startMastoUserSocket').then(() => {
-        dispatch('stopFetchingTimeline', { timeline: 'friends' })
-        dispatch('stopFetchingNotifications')
-        dispatch('stopFetchingChats')
       })
     },
     stopMastoUserSocket ({ state, dispatch }) {

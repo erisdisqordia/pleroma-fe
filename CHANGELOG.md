@@ -7,7 +7,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - Added a quick settings to timeline header for easier access
 - Added option to mark posts as sensitive by default
-- Added option to mark posts as sensitive by default
 - Added quick filters for notifications
 
 ## [2.3.0] - 2021-03-01

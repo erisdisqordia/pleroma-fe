@@ -700,7 +700,13 @@
     "hide_repeats": "隐藏转发",
     "message": "消息",
     "mention": "提及",
-    "bot": "机器人"
+    "bot": "机器人",
+    "highlight": {
+      "side": "侧边条纹",
+      "striped": "条纹背景",
+      "solid": "单一颜色背景",
+      "disabled": "不突出显示"
+    }
   },
   "user_profile": {
     "timeline_title": "用户时间线",

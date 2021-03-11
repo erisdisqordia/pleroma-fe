@@ -87,32 +87,4 @@
 
 <script src="./timeline.js"></script>
 
-<style lang="scss">
-@import '../../_variables.scss';
-
-.Timeline {
-  .loadmore-text {
-    opacity: 1;
-  }
-
-  &.-blocked {
-    cursor: progress;
-  }
-}
-
-.timeline-heading {
-  max-width: 100%;
-  flex-wrap: nowrap;
-  align-items: center;
-  position: relative;
-
-  .loadmore-button {
-    flex-shrink: 0;
-  }
-
-  .loadmore-text {
-    flex-shrink: 0;
-    line-height: 1em;
-  }
-}
-</style>
+<style src="./timeline.scss" lang="scss"> </style>

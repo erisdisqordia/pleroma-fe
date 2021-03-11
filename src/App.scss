@@ -547,7 +547,10 @@ main-router {
   border-radius: var(--panelRadius, $fallback--panelRadius);
 }
 
-.panel-footer {
+/* TODO Should remove timeline-footer from here when we refactor panels into
+ * separate component and utilize slots
+ */
+.panel-footer, .timeline-footer {
   display: flex;
   border-radius: 0 0 $fallback--panelRadius $fallback--panelRadius;
   border-radius: 0 0 var(--panelRadius, $fallback--panelRadius) var(--panelRadius, $fallback--panelRadius);

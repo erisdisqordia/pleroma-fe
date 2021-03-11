@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{ minimal: minimalMode }"
-    class="notifications"
+    class="Notifications"
   >
     <div :class="mainClass">
       <div
@@ -34,7 +34,7 @@
           <notification :notification="notification" />
         </div>
       </div>
-      <div class="panel-footer">
+      <div class="panel-footer notifications-footer">
         <div
           v-if="bottomedOut"
           class="new-status-notification text-center faint"
@@ -52,7 +52,7 @@
         </button>
         <div
           v-else
-          class="new-status-notification text-center panel-footer"
+          class="new-status-notification text-center"
         >
           <FAIcon
             icon="circle-notch"

@@ -528,10 +528,11 @@
     "setting_changed": "Agordo malsamas de la implicita",
     "more_settings": "Pliaj agordoj",
     "sensitive_by_default": "Implicite marki afiŝojn konsternaj",
-    "reply_visibility_following_short": "Montri respondojn al miaj abonatoj",
+    "reply_visibility_following_short": "Montri respondojn por miaj abonatoj",
     "hide_all_muted_posts": "Kaŝi silentigitajn afiŝojn",
     "hide_media_previews": "Kaŝi antaŭrigardojn al vidaŭdaĵoj",
-    "word_filter": "Vortofiltro"
+    "word_filter": "Vortofiltro",
+    "reply_visibility_self_short": "Montri nur respondojn por mi"
   },
   "timeline": {
     "collapse": "Maletendi",
@@ -602,7 +603,13 @@
     "hide_repeats": "Kaŝi ripetojn",
     "unsubscribe": "Ne ricevi sciigojn",
     "subscribe": "Ricevi sciigojn",
-    "bot": "Roboto"
+    "bot": "Roboto",
+    "highlight": {
+      "side": "Flanka strio",
+      "striped": "Stria fono",
+      "solid": "Unueca fono",
+      "disabled": "Senemfaze"
+    }
   },
   "user_profile": {
     "timeline_title": "Historio de uzanto",

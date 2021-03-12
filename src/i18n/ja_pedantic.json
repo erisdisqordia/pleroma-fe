@@ -716,7 +716,13 @@
     "hide_repeats": "リピートを隠す",
     "message": "メッセージ",
     "hidden": "隠す",
-    "bot": "bot"
+    "bot": "bot",
+    "highlight": {
+      "solid": "背景を単色にする",
+      "striped": "背景を縞模様にする",
+      "side": "端に線を付ける",
+      "disabled": "強調しない"
+    }
   },
   "user_profile": {
     "timeline_title": "ユーザータイムライン",

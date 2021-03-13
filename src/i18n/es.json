@@ -39,7 +39,11 @@
     "dismiss": "Descartar",
     "retry": "Inténtalo de nuevo",
     "error_retry": "Por favor, inténtalo de nuevo",
-    "loading": "Cargando…"
+    "loading": "Cargando…",
+    "role": {
+      "admin": "Admin",
+      "moderator": "Moderador/a"
+    }
   },
   "image_cropper": {
     "crop_picture": "Recortar la foto",
@@ -120,7 +124,9 @@
     "expiry": "Tiempo de vida de la encuesta",
     "expires_in": "La encuesta termina en {0}",
     "expired": "La encuesta terminó hace {0}",
-    "not_enough_options": "Muy pocas opciones únicas en la encuesta"
+    "not_enough_options": "Muy pocas opciones únicas en la encuesta",
+    "people_voted_count": "{count} persona votó | {count} personas votaron",
+    "votes_count": "{count} voto | {count} votos"
   },
   "emoji": {
     "stickers": "Pegatinas",
@@ -144,7 +150,7 @@
   },
   "post_status": {
     "new_status": "Publicar un nuevo estado",
-    "account_not_locked_warning": "Tu cuenta no está {0}. Cualquiera puede seguirte y leer las entradas para Solo-Seguidores.",
+    "account_not_locked_warning": "Tu cuenta no está {0}. Cualquiera puede seguirte y leer las publicaciones para Solo-Seguidores.",
     "account_not_locked_warning_link": "bloqueada",
     "attachments_sensitive": "Contenido sensible",
     "content_type": {
@@ -166,8 +172,8 @@
     "scope": {
       "direct": "Directo - Solo para los usuarios mencionados",
       "private": "Solo-seguidores - Solo tus seguidores leerán la publicación",
-      "public": "Público - Entradas visibles en las Líneas Temporales Públicas",
-      "unlisted": "Sin listar - Entradas no visibles en las Líneas Temporales Públicas"
+      "public": "Público - Publicaciones visibles en las Líneas Temporales Públicas",
+      "unlisted": "Sin listar - Publicaciones no visibles en las Líneas Temporales Públicas"
     },
     "media_description_error": "Error al actualizar el archivo, inténtalo de nuevo",
     "empty_status_error": "No se puede publicar un estado vacío y sin archivos adjuntos",
@@ -194,7 +200,9 @@
       "password_required": "no puede estar vacío",
       "password_confirmation_required": "no puede estar vacío",
       "password_confirmation_match": "la contraseña no coincide"
-    }
+    },
+    "reason_placeholder": "Los registros de esta instancia son aprobados manualmente.\nComéntanos por qué quieres registrarte aquí.",
+    "reason": "Razón para registrarse"
   },
   "selectable_list": {
     "select_all": "Seleccionar todo"
@@ -245,7 +253,7 @@
     "change_password": "Cambiar contraseña",
     "change_password_error": "Hubo un problema cambiando la contraseña.",
     "changed_password": "¡Contraseña cambiada correctamente!",
-    "collapse_subject": "Colapsar entradas con tema",
+    "collapse_subject": "Colapsar publicaciones con tema",
     "composing": "Redactando",
     "confirm_new_password": "Confirmar la nueva contraseña",
     "current_avatar": "Tu avatar actual",
@@ -277,7 +285,7 @@
     "hide_isp": "Ocultar el panel específico de la instancia",
     "preload_images": "Precargar las imágenes",
     "use_one_click_nsfw": "Abrir los adjuntos NSFW con un solo click",
-    "hide_post_stats": "Ocultar las estadísticas de las entradas (p.ej. el número de favoritos)",
+    "hide_post_stats": "Ocultar las estadísticas de las publicaciones (p.ej. el número de favoritos)",
     "hide_user_stats": "Ocultar las estadísticas del usuario (p.ej. el número de seguidores)",
     "hide_filtered_statuses": "Ocultar estados filtrados",
     "import_blocks_from_a_csv_file": "Importar lista de usuarios bloqueados dese un archivo csv",
@@ -306,7 +314,7 @@
     "notification_visibility_likes": "Me gustan (Likes)",
     "notification_visibility_mentions": "Menciones",
     "notification_visibility_repeats": "Repeticiones (Repeats)",
-    "no_rich_text_description": "Eliminar el formato de texto enriquecido de todas las entradas",
+    "no_rich_text_description": "Eliminar el formato de texto enriquecido de todas las publicaciones",
     "no_blocks": "No hay usuarios bloqueados",
     "no_mutes": "No hay usuarios silenciados",
     "hide_follows_description": "No mostrar a quién sigo",
@@ -356,7 +364,7 @@
     "theme": "Tema",
     "theme_help": "Use códigos de color hexadecimales (#rrggbb) para personalizar su tema de colores.",
     "theme_help_v2_1": "También puede invalidar los colores y la opacidad de ciertos componentes si activa la casilla de verificación. Use el botón \"Borrar todo\" para deshacer los cambios.",
-    "theme_help_v2_2": "Los iconos debajo de algunas entradas son indicadores de contraste de fondo/texto, desplace el ratón por encima para obtener información más detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
+    "theme_help_v2_2": "Los iconos debajo de algunas publicaciones son indicadores de contraste de fondo/texto, desplace el ratón por encima para obtener información más detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
     "tooltipRadius": "Información/alertas",
     "upload_a_photo": "Subir una foto",
     "user_settings": "Ajustes del Usuario",
@@ -476,7 +484,7 @@
           "panelHeader": "Cabecera del panel",
           "topBar": "Barra superior",
           "avatar": "Avatar del usuario (en la vista del perfil)",
-          "avatarStatus": "Avatar del usuario (en la vista de la entrada)",
+          "avatarStatus": "Avatar del usuario (en la vista de la publicación)",
           "popup": "Ventanas y textos emergentes (popups & tooltips)",
           "button": "Botones",
           "buttonHover": "Botón (encima)",
@@ -529,7 +537,7 @@
     "fun": "Divertido",
     "type_domains_to_mute": "Buscar dominios para silenciar",
     "useStreamingApiWarning": "(no recomendado, experimental, puede omitir publicaciones)",
-    "useStreamingApi": "Recibir entradas y notificaciones en tiempo real",
+    "useStreamingApi": "Recibir publicaciones y notificaciones en tiempo real",
     "user_mutes": "Usuarios",
     "reset_profile_background": "Restablecer el fondo de pantalla",
     "reset_background_confirm": "¿Estás seguro de restablecer el fondo de pantalla?",
@@ -563,7 +571,14 @@
     "mute_export_button": "Exportar los silenciados a un archivo csv",
     "mute_export": "Exportar silenciados",
     "hide_wallpaper": "Ocultar el fondo de pantalla de la instancia",
-    "setting_changed": "La configuración es diferente a la predeterminada"
+    "setting_changed": "La configuración es diferente a la predeterminada",
+    "hide_all_muted_posts": "Ocultar las publicaciones silenciadas",
+    "more_settings": "Más opciones",
+    "sensitive_by_default": "Identificar las publicaciones como sensibles de forma predeterminada",
+    "reply_visibility_self_short": "Mostrar respuestas solo a uno mismo",
+    "reply_visibility_following_short": "Mostrar las réplicas a mis seguidores",
+    "hide_media_previews": "Ocultar la vista previa multimedia",
+    "word_filter": "Filtro de palabras"
   },
   "time": {
     "day": "{0} día",
@@ -635,7 +650,7 @@
     "status_unavailable": "Estado no disponible",
     "bookmark": "Marcar",
     "unbookmark": "Desmarcar",
-    "status_deleted": "Esta entrada ha sido eliminada",
+    "status_deleted": "Esta publicación ha sido eliminada",
     "nsfw": "NSFW (No apropiado para el trabajo)",
     "expand": "Expandir",
     "external_source": "Fuente externa"
@@ -698,7 +713,14 @@
     "roles": {
       "moderator": "Moderador",
       "admin": "Administrador"
-    }
+    },
+    "highlight": {
+      "striped": "Fondo rayado",
+      "side": "Raya lateral",
+      "solid": "Fondo sólido",
+      "disabled": "Sin resaltado"
+    },
+    "bot": "Bot"
   },
   "user_profile": {
     "timeline_title": "Linea Temporal del Usuario",

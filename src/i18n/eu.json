@@ -14,7 +14,8 @@
     "text_limit": "Testu limitea",
     "title": "Ezaugarriak",
     "who_to_follow": "Nori jarraitu",
-    "pleroma_chat_messages": "Pleroma Txata"
+    "pleroma_chat_messages": "Pleroma Txata",
+    "upload_limit": "Kargatzeko muga"
   },
   "finder": {
     "error_fetching_user": "Errorea erabiltzailea eskuratzen",
@@ -38,7 +39,11 @@
     "dismiss": "Baztertu",
     "retry": "Saiatu berriro",
     "error_retry": "Saiatu berriro mesedez",
-    "loading": "Kargatzen…"
+    "loading": "Kargatzen…",
+    "role": {
+      "moderator": "Moderatzailea",
+      "admin": "Administratzailea"
+    }
   },
   "image_cropper": {
     "crop_picture": "Moztu argazkia",
@@ -104,7 +109,8 @@
     "no_more_notifications": "Ez dago jakinarazpen gehiago",
     "reacted_with": "{0}kin erreakzionatu zuen",
     "migrated_to": "hona migratua:",
-    "follow_request": "jarraitu nahi zaitu"
+    "follow_request": "jarraitu nahi zaitu",
+    "error": "Errorea jakinarazpenak eskuratzean: {0}"
   },
   "polls": {
     "add_poll": "Inkesta gehitu",
@@ -118,7 +124,9 @@
     "expiry": "Inkestaren iraupena",
     "expires_in": "Inkesta {0} bukatzen da",
     "expired": "Inkesta {0} bukatu zen",
-    "not_enough_options": "Aukera gutxiegi inkestan"
+    "not_enough_options": "Aukera gutxiegi inkestan",
+    "votes_count": "{count} boto| {count} boto",
+    "people_voted_count": "Pertsona batek bozkatu du | {count} pertsonak bozkatu dute"
   },
   "emoji": {
     "stickers": "Pegatinak",

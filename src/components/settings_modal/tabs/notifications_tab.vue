@@ -24,7 +24,7 @@
         class="btn button-default"
         @click="updateNotificationSettings"
       >
-        {{ $t('general.submit') }}
+        {{ $t('settings.save') }}
       </button>
     </div>
   </div>

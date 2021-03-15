@@ -53,7 +53,7 @@
                 type="submit"
                 class="btn button-default btn-block"
               >
-                {{ $t('general.submit') }}
+                {{ $t('settings.save') }}
               </button>
             </div>
           </div>

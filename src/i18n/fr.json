@@ -9,7 +9,7 @@
   "features_panel": {
     "chat": "Chat",
     "gopher": "Gopher",
-    "media_proxy": "Proxy attachements",
+    "media_proxy": "Proxy pièce-jointes",
     "scope_options": "Options de visibilité",
     "text_limit": "Limite du texte",
     "title": "Fonctionnalités",
@@ -123,7 +123,7 @@
     "new_status": "Poster un nouveau statut",
     "account_not_locked_warning": "Votre compte n'est pas {0}. N'importe qui peut vous suivre pour voir vos billets en Abonné·e·s uniquement.",
     "account_not_locked_warning_link": "verrouillé",
-    "attachments_sensitive": "Marquer les attachements comme sensible",
+    "attachments_sensitive": "Marquer les pièce-jointes comme sensible",
     "content_type": {
       "text/plain": "Texte brut",
       "text/html": "HTML",
@@ -150,7 +150,8 @@
     "empty_status_error": "Impossible de poster un statut vide sans pièces-jointes",
     "preview_empty": "Vide",
     "preview": "Prévisualisation",
-    "media_description": "Description de l'attachement"
+    "media_description": "Description de la pièce-jointe",
+    "post": "Post"
   },
   "registration": {
     "bio": "Biographie",
@@ -173,7 +174,8 @@
       "password_confirmation_match": "doit être identique au mot de passe"
     },
     "reason_placeholder": "Cette instance modère les inscriptions manuellement.\nExpliquer ce qui motive votre inscription à l'administration.",
-    "reason": "Motivation d'inscription"
+    "reason": "Motivation d'inscription",
+    "register": "Enregistrer"
   },
   "selectable_list": {
     "select_all": "Tout selectionner"
@@ -550,7 +552,8 @@
     "reply_visibility_following_short": "Montrer les réponses à mes suivis",
     "hide_wallpaper": "Cacher le fond d'écran",
     "hide_all_muted_posts": "Cacher les messages masqués",
-    "word_filter": "Filtrage par mots"
+    "word_filter": "Filtrage par mots",
+    "save": "Enregistrer les changements"
   },
   "timeline": {
     "collapse": "Fermer",
@@ -564,7 +567,9 @@
     "no_more_statuses": "Pas plus de statuts",
     "no_statuses": "Aucun statuts",
     "reload": "Recharger",
-    "error": "Erreur lors de l'affichage du flux : {0}"
+    "error": "Erreur lors de l'affichage du flux : {0}",
+    "socket_broke": "Connexion temps-réel perdue : CloseEvent code {0}",
+    "socket_reconnected": "Connexion temps-réel établie"
   },
   "status": {
     "favorites": "Favoris",
@@ -707,8 +712,8 @@
   "about": {
     "mrf": {
       "keyword": {
-        "reject": "Rejeté",
-        "replace": "Remplacer",
+        "reject": "Rejette",
+        "replace": "Remplace",
         "keyword_policies": "Filtrage par mots-clés",
         "ftl_removal": "Suppression du flux fédéré",
         "is_replaced_by": "→"
@@ -722,14 +727,14 @@
         "quarantine": "Quarantaine",
         "quarantine_desc": "Cette instance enverra seulement des messages publics à ces instances :",
         "ftl_removal_desc": "Cette instance supprime les instance suivantes du flux fédéré :",
-        "media_removal": "Suppression des attachements",
+        "media_removal": "Suppression des pièce-jointes",
         "media_removal_desc": "Cette instance supprime le contenu multimédia des instances suivantes :",
         "media_nsfw": "Force le contenu multimédia comme sensible",
         "ftl_removal": "Supprimées du flux fédéré",
-        "media_nsfw_desc": "Cette instance force les attachements comme sensible pour les messages des instances suivantes :"
+        "media_nsfw_desc": "Cette instance force les pièce-jointes comme sensible pour les messages des instances suivantes :"
       },
       "federation": "Fédération",
-      "mrf_policies": "Politiques MRF activées",
+      "mrf_policies": "Politiques MRF actives",
       "mrf_policies_desc": "Les politiques MRF modifient la fédération entre les instances. Les politiques suivantes sont activées :"
     },
     "staff": "Staff"
@@ -765,7 +770,7 @@
     "load_all": "Charger tout les {emojiAmount} émojis",
     "load_all_hint": "{saneAmount} émojis chargé, charger tout les émojis peuvent causer des problèmes de performances.",
     "stickers": "Stickers",
-    "keep_open": "Garder le sélecteur ouvert"
+    "keep_open": "Garder ouvert"
   },
   "remote_user_resolver": {
     "error": "Non trouvé.",

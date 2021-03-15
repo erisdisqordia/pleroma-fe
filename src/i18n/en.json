@@ -201,6 +201,7 @@
     "direct_warning_to_all": "This post will be visible to all the mentioned users.",
     "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
+    "post": "Post",
     "preview": "Preview",
     "preview_empty": "Empty",
     "empty_status_error": "Can't post an empty status with no files",
@@ -231,6 +232,7 @@
     "bio_placeholder": "e.g.\nHi, I'm Lain.\nI’m an anime girl living in suburban Japan. You may know me from the Wired.",
     "reason": "Reason to register",
     "reason_placeholder": "This instance approves registrations manually.\nLet the administration know why you want to register.",
+    "register": "Register",
     "validations": {
       "username_required": "cannot be left blank",
       "fullname_required": "cannot be left blank",
@@ -250,6 +252,7 @@
   },
   "settings": {
     "app_name": "App name",
+    "save": "Save changes",
     "security": "Security",
     "setting_changed": "Setting is different from default",
     "enter_current_password_to_confirm": "Enter your current password to confirm your identity",

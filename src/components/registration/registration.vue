@@ -230,7 +230,7 @@
                 type="submit"
                 class="btn button-default"
               >
-                {{ $t('general.submit') }}
+                {{ $t('registration.register') }}
               </button>
             </div>
           </div>

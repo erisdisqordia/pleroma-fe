@@ -22,7 +22,7 @@
         class="btn button-default"
         @click="changeEmail"
       >
-        {{ $t('general.submit') }}
+        {{ $t('settings.save') }}
       </button>
       <p v-if="changedEmail">
         {{ $t('settings.changed_email') }}
@@ -60,7 +60,7 @@
         class="btn button-default"
         @click="changePassword"
       >
-        {{ $t('general.submit') }}
+        {{ $t('settings.save') }}
       </button>
       <p v-if="changedPassword">
         {{ $t('settings.changed_password') }}
@@ -133,7 +133,7 @@
         class="btn button-default"
         @click="confirmDelete"
       >
-        {{ $t('general.submit') }}
+        {{ $t('settings.save') }}
       </button>
     </div>
   </div>

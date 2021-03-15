@@ -153,7 +153,7 @@
         class="btn button-default"
         @click="updateProfile"
       >
-        {{ $t('general.submit') }}
+        {{ $t('settings.save') }}
       </button>
     </div>
     <div class="setting-item">
@@ -227,7 +227,7 @@
         class="btn button-default"
         @click="submitBanner(banner)"
       >
-        {{ $t('general.submit') }}
+        {{ $t('settings.save') }}
       </button>
     </div>
     <div class="setting-item">
@@ -266,7 +266,7 @@
         class="btn button-default"
         @click="submitBackground(background)"
       >
-        {{ $t('general.submit') }}
+        {{ $t('settings.save') }}
       </button>
     </div>
   </div>

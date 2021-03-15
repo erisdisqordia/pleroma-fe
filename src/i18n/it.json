@@ -41,7 +41,8 @@
     "preferences": "Preferenze",
     "bookmarks": "Segnalibri",
     "chats": "Conversazioni",
-    "timelines": "Sequenze"
+    "timelines": "Sequenze",
+    "home_timeline": "Sequenza personale"
   },
   "notifications": {
     "followed_you": "ti segue",

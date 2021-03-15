@@ -124,10 +124,11 @@
       </div>
       <button
         slot="trigger"
-        class="btn button-default btn-block"
+        class="btn button-default btn-block moderation-tools-button"
         :class="{ toggled }"
       >
         {{ $t('user_card.admin_menu.moderation') }}
+        <FAIcon icon="chevron-down" />
       </button>
     </Popover>
     <portal to="modal">
@@ -168,6 +169,12 @@
   .trigger {
     display: flex !important;
     height: 100%;
+  }
+}
+
+.moderation-tools-button {
+  svg,i {
+    font-size: 0.8em;
   }
 }
 </style>

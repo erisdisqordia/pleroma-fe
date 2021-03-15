@@ -1,5 +1,10 @@
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+
 import DialogModal from '../dialog_modal/dialog_modal.vue'
 import Popover from '../popover/popover.vue'
+
+library.add(faChevronDown)
 
 const FORCE_NSFW = 'mrf_tag:media-force-nsfw'
 const STRIP_MEDIA = 'mrf_tag:media-strip'

@@ -430,7 +430,8 @@
     "reply_visibility_following_short": "Vedi risposte a messaggi di altri",
     "hide_all_muted_posts": "Nascondi messaggi silenziati",
     "hide_media_previews": "Nascondi anteprime",
-    "word_filter": "Parole filtrate"
+    "word_filter": "Parole filtrate",
+    "save": "Salva modifiche"
   },
   "timeline": {
     "error_fetching": "Errore nell'aggiornamento",
@@ -444,7 +445,9 @@
     "no_statuses": "Nessun messaggio",
     "no_more_statuses": "Fine dei messaggi",
     "reload": "Ricarica",
-    "error": "Errore nel caricare la sequenza: {0}"
+    "error": "Errore nel caricare la sequenza: {0}",
+    "socket_broke": "Connessione tempo reale interrotta: codice {0}",
+    "socket_reconnected": "Connesso in tempo reale"
   },
   "user_card": {
     "follow": "Segui",
@@ -577,7 +580,8 @@
     "preview_empty": "Vuoto",
     "preview": "Anteprima",
     "media_description_error": "Allegati non caricati, riprova",
-    "media_description": "Descrizione allegati"
+    "media_description": "Descrizione allegati",
+    "post": "Pubblica"
   },
   "registration": {
     "bio": "Introduzione",
@@ -600,7 +604,8 @@
     "new_captcha": "Clicca il captcha per averne uno nuovo",
     "captcha": "CAPTCHA",
     "reason_placeholder": "L'amministratore esamina ciascuna richiesta.\nFornisci il motivo della tua iscrizione.",
-    "reason": "Motivo dell'iscrizione"
+    "reason": "Motivo dell'iscrizione",
+    "register": "Registrati"
   },
   "user_profile": {
     "timeline_title": "Sequenza dell'utente",

@@ -56,6 +56,9 @@ const Popover = {
       // Popover will be anchored around this element, trigger ref is the container, so
       // its children are what are inside the slot. Expect only one slot="trigger".
       const anchorEl = (this.$refs.trigger && this.$refs.trigger.children[0]) || this.$el
+      // SVGs don't have offsetWidth/Height, use fallback
+      const anchorWidth = anchorEl.offsetWidth || anchorEl.clientWidth
+      const anchorHeight = anchorEl.offsetHeight || anchorEl.clientHeight
       const screenBox = anchorEl.getBoundingClientRect()
       // Screen position of the origin point for popover
       const origin = { x: screenBox.left + screenBox.width * 0.5, y: screenBox.top }
@@ -114,11 +117,11 @@ const Popover = {
 
       const yOffset = (this.offset && this.offset.y) || 0
       const translateY = usingTop
-        ? -anchorEl.offsetHeight + vPadding - yOffset - content.offsetHeight
+        ? -anchorHeight + vPadding - yOffset - content.offsetHeight
         : yOffset
 
       const xOffset = (this.offset && this.offset.x) || 0
-      const translateX = (anchorEl.offsetWidth * 0.5) - content.offsetWidth * 0.5 + horizOffset + xOffset
+      const translateX = anchorWidth * 0.5 - content.offsetWidth * 0.5 + horizOffset + xOffset
 
       // Note, separate translateX and translateY avoids blurry text on chromium,
       // single translate or translate3d resulted in blurry text.

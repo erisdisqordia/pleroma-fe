@@ -64,9 +64,9 @@
         />{{ $t('settings.notification_visibility_moves') }}
       </button>
     </div>
-    <div slot="trigger">
+    <template v-slot:trigger>
       <FAIcon icon="filter" />
-    </div>
+    </template>
   </Popover>
 </template>
 

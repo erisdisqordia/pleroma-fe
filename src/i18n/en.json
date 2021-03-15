@@ -124,6 +124,7 @@
     "dms": "Direct Messages",
     "public_tl": "Public Timeline",
     "timeline": "Timeline",
+    "home_timeline": "Home Timeline",
     "twkn": "Known Network",
     "bookmarks": "Bookmarks",
     "user_search": "User Search",
@@ -746,6 +747,12 @@
       "quarantine": "Disallow user posts from federating",
       "delete_user": "Delete user",
       "delete_user_confirmation": "Are you absolutely sure? This action cannot be undone."
+    },
+    "highlight": {
+      "disabled": "No highlight",
+      "solid": "Solid bg",
+      "striped": "Striped bg",
+      "side": "Side stripe"
     }
   },
   "user_profile": {

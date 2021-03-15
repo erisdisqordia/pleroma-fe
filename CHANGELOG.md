@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Added
+- Added a quick settings to timeline header for easier access
+- Added option to mark posts as sensitive by default
+- Added quick filters for notifications
+
+
+## [2.3.0] - 2021-03-01
 ### Fixed
 - Button to remove uploaded media in post status form is now properly placed and sized.
 - Fixed shoutbox not working in mobile layout
@@ -15,14 +22,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Display 'people voted' instead of 'votes' for multi-choice polls
+- Changed the "Timelines" link in side panel to toggle show all timeline options inside the panel
+- Renamed "Timeline" to "Home Timeline" to be more clear
 - Optimized chat to not get horrible performance after keeping the same chat open for a long time
 - When opening emoji picker or react picker, it automatically focuses the search field
+- Language picker now uses native language names
 
 ### Added
 - Added reason field for registration when approval is required
-- Added a quick settings to timeline header for easier access
-- Added option to mark posts as sensitive by default
-- Added quick filters for notifications
+
 
 ## [2.2.3] - 2021-01-18
 ### Added
@@ -34,7 +42,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Don't filter own posts when they hit your wordfilter
-- Language picker now uses native language names
 
 
 ## [2.2.2] - 2020-12-22
@@ -44,7 +51,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added some missing unicode emoji
 - Added the upload limit to the Features panel in the About page
 - Support for solid color wallpaper, instance doesn't have to define a wallpaper anymore
-- Group staff members by role in the About page
 
 ### Fixed
 - Fixed the occasional bug where screen would scroll 1px when typing into a reply form

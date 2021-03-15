@@ -10,17 +10,15 @@
         @click.stop.prevent="togglePanel"
       >
         <div class="title">
-          <span>{{ $t('shoutbox.title') }}</span>
+          {{ $t('shoutbox.title') }}
           <FAIcon
             v-if="floating"
             icon="times"
+            class="close-icon"
           />
         </div>
       </div>
-      <div
-        v-chat-scroll
-        class="chat-window"
-      >
+      <div class="chat-window">
         <div
           v-for="message in messages"
           :key="message.id"
@@ -94,6 +92,13 @@
     .icon {
       color: $fallback--text;
       color: var(--text, $fallback--text);
+      margin-right: 0.5em;
+    }
+
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 

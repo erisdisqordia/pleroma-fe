@@ -96,7 +96,8 @@
     "administration": "Administration",
     "chats": "Chats",
     "bookmarks": "Marques-Pages",
-    "timelines": "Flux"
+    "timelines": "Flux",
+    "home_timeline": "Flux personnel"
   },
   "notifications": {
     "broken_favorite": "Message inconnu, recherche en cours…",

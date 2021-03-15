@@ -3,27 +3,27 @@
     "mrf": {
       "federation": "Federation",
       "keyword": {
-        "keyword_policies": "Keyword Policies",
+        "keyword_policies": "Keyword policies",
         "ftl_removal": "Removal from \"The Whole Known Network\" Timeline",
         "reject": "Reject",
         "replace": "Replace",
         "is_replaced_by": "→"
       },
-      "mrf_policies": "Enabled MRF Policies",
+      "mrf_policies": "Enabled MRF policies",
       "mrf_policies_desc": "MRF policies manipulate the federation behaviour of the instance.  The following policies are enabled:",
       "simple": {
-        "simple_policies": "Instance-specific Policies",
+        "simple_policies": "Instance-specific policies",
         "accept": "Accept",
         "accept_desc": "This instance only accepts messages from the following instances:",
         "reject": "Reject",
         "reject_desc": "This instance will not accept messages from the following instances:",
         "quarantine": "Quarantine",
         "quarantine_desc": "This instance will send only public posts to the following instances:",
-        "ftl_removal": "Removal from \"The Whole Known Network\" Timeline",
-        "ftl_removal_desc": "This instance removes these instances from \"The Whole Known Network\" timeline:",
+        "ftl_removal": "Removal from \"Known Network\" Timeline",
+        "ftl_removal_desc": "This instance removes these instances from \"Known Network\" timeline:",
         "media_removal": "Media Removal",
         "media_removal_desc": "This instance removes media from posts on the following instances:",
-        "media_nsfw": "Media Force-set As Sensitive",
+        "media_nsfw": "Media force-set as sensitive",
         "media_nsfw_desc": "This instance forces media to be set sensitive in posts on the following instances:"
       }
     },
@@ -118,13 +118,13 @@
     "about": "About",
     "administration": "Administration",
     "back": "Back",
-    "friend_requests": "Follow Requests",
+    "friend_requests": "Follow requests",
     "mentions": "Mentions",
     "interactions": "Interactions",
-    "dms": "Direct Messages",
-    "public_tl": "Public Timeline",
+    "dms": "Direct messages",
+    "public_tl": "Public timeline",
     "timeline": "Timeline",
-    "home_timeline": "Home Timeline",
+    "home_timeline": "Home timeline",
     "twkn": "Known Network",
     "bookmarks": "Bookmarks",
     "user_search": "User Search",
@@ -149,8 +149,8 @@
     "reacted_with": "reacted with {0}"
   },
   "polls": {
-    "add_poll": "Add Poll",
-    "add_option": "Add Option",
+    "add_poll": "Add poll",
+    "add_option": "Add option",
     "option": "Option",
     "votes": "votes",
     "people_voted_count": "{count} person voted | {count} people voted",
@@ -179,7 +179,7 @@
     "storage_unavailable": "Pleroma could not access browser storage. Your login or your local settings won't be saved and you might encounter unexpected issues. Try enabling cookies."
   },
   "interactions": {
-    "favs_repeats": "Repeats and Favorites",
+    "favs_repeats": "Repeats and favorites",
     "follows": "New follows",
     "moves": "User migrates",
     "load_older": "Load older interactions"
@@ -212,10 +212,10 @@
       "unlisted": "This post will not be visible in Public Timeline and The Whole Known Network"
     },
     "scope": {
-      "direct": "Direct - Post to mentioned users only",
-      "private": "Followers-only - Post to followers only",
-      "public": "Public - Post to public timelines",
-      "unlisted": "Unlisted - Do not post to public timelines"
+      "direct": "Direct - post to mentioned users only",
+      "private": "Followers-only - post to followers only",
+      "public": "Public - post to public timelines",
+      "unlisted": "Unlisted - do not post to public timelines"
     }
   },
   "registration": {
@@ -281,7 +281,7 @@
     "attachmentRadius": "Attachments",
     "attachments": "Attachments",
     "avatar": "Avatar",
-    "avatarAltRadius": "Avatars (Notifications)",
+    "avatarAltRadius": "Avatars (notifications)",
     "avatarRadius": "Avatars",
     "background": "Background",
     "bio": "Bio",
@@ -303,10 +303,10 @@
     "cGreen": "Green (Retweet)",
     "cOrange": "Orange (Favorite)",
     "cRed": "Red (Cancel)",
-    "change_email": "Change Email",
+    "change_email": "Change email",
     "change_email_error": "There was an issue changing your email.",
     "changed_email": "Email changed successfully!",
-    "change_password": "Change Password",
+    "change_password": "Change password",
     "change_password_error": "There was an issue changing your password.",
     "changed_password": "Password changed successfully!",
     "chatMessageRadius": "Chat message",
@@ -315,9 +315,9 @@
     "confirm_new_password": "Confirm new password",
     "current_password": "Current password",
     "mutes_and_blocks": "Mutes and Blocks",
-    "data_import_export_tab": "Data Import / Export",
+    "data_import_export_tab": "Data import / export",
     "default_vis": "Default visibility scope",
-    "delete_account": "Delete Account",
+    "delete_account": "Delete account",
     "delete_account_description": "Permanently delete your data and deactivate your account.",
     "delete_account_error": "There was an issue deleting your account. If this persists please contact your instance administrator.",
     "delete_account_instructions": "Type your password in the input below to confirm account deletion.",
@@ -370,14 +370,14 @@
     "play_videos_in_modal": "Play videos in a popup frame",
     "profile_fields": {
       "label": "Profile metadata",
-      "add_field": "Add Field",
+      "add_field": "Add field",
       "name": "Label",
       "value": "Content"
     },
     "use_contain_fit": "Don't crop the attachment in thumbnails",
     "name": "Name",
-    "name_bio": "Name & Bio",
-    "new_email": "New Email",
+    "name_bio": "Name & bio",
+    "new_email": "New email",
     "new_password": "New password",
     "notification_visibility": "Types of notifications to show",
     "notification_visibility_follows": "Follows",
@@ -393,19 +393,19 @@
     "hide_followers_description": "Don't show who's following me",
     "hide_follows_count_description": "Don't show follow count",
     "hide_followers_count_description": "Don't show follower count",
-    "show_admin_badge": "Show Admin badge in my profile",
-    "show_moderator_badge": "Show Moderator badge in my profile",
+    "show_admin_badge": "Show \"Admin\" badge in my profile",
+    "show_moderator_badge": "Show \"Moderator\" badge in my profile",
     "nsfw_clickthrough": "Enable clickthrough attachment and link preview image hiding for NSFW statuses",
     "oauth_tokens": "OAuth tokens",
     "token": "Token",
-    "refresh_token": "Refresh Token",
-    "valid_until": "Valid Until",
+    "refresh_token": "Refresh token",
+    "valid_until": "Valid until",
     "revoke_token": "Revoke",
     "panelRadius": "Panels",
     "pause_on_unfocused": "Pause streaming when tab is not focused",
     "presets": "Presets",
-    "profile_background": "Profile Background",
-    "profile_banner": "Profile Banner",
+    "profile_background": "Profile background",
+    "profile_banner": "Profile banner",
     "profile_tab": "Profile",
     "radii_help": "Set up interface edge rounding (in pixels)",
     "replies_in_timeline": "Replies in timeline",
@@ -617,8 +617,8 @@
     },
     "version": {
       "title": "Version",
-      "backend_version": "Backend Version",
-      "frontend_version": "Frontend Version"
+      "backend_version": "Backend version",
+      "frontend_version": "Frontend version"
     }
   },
   "time": {
@@ -761,7 +761,7 @@
     }
   },
   "user_profile": {
-    "timeline_title": "User Timeline",
+    "timeline_title": "User timeline",
     "profile_does_not_exist": "Sorry, this profile does not exist.",
     "profile_loading_error": "Sorry, there was an error loading this profile."
   },
@@ -779,7 +779,7 @@
     "who_to_follow": "Who to follow"
   },
   "tool_tip": {
-    "media_upload": "Upload Media",
+    "media_upload": "Upload media",
     "repeat": "Repeat",
     "reply": "Reply",
     "favorite": "Favorite",

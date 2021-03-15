@@ -3,6 +3,11 @@ const path = require('path')
 let settings = {}
 try {
   settings = require('./local.json')
+  if (settings.target && settings.target.endsWith('/')) {
+    // replacing trailing slash since it can conflict with some apis
+    // and that's how actual BE reports its url
+    settings.target = settings.target.replace(/\/$/, '')
+  }
   console.log('Using local dev server settings (/config/local.json):')
   console.log(JSON.stringify(settings, null, 2))
 } catch (e) {

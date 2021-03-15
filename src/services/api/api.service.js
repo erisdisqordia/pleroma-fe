@@ -1152,6 +1152,7 @@ export const ProcessedWS = ({
 
   // 1000 = Normal Closure
   eventTarget.close = () => { socket.close(1000, 'Shutting down socket') }
+  eventTarget.getState = () => socket.readyState
 
   return eventTarget
 }
@@ -1183,7 +1184,10 @@ export const handleMastoWS = (wsEvent) => {
 export const WSConnectionStatus = Object.freeze({
   'JOINED': 1,
   'CLOSED': 2,
-  'ERROR': 3
+  'ERROR': 3,
+  'DISABLED': 4,
+  'STARTING': 5,
+  'STARTING_INITIAL': 6
 })
 
 const chats = ({ credentials }) => {

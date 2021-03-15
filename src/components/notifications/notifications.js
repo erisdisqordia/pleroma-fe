@@ -35,11 +35,6 @@ const Notifications = {
       seenToDisplayCount: DEFAULT_SEEN_TO_DISPLAY_COUNT
     }
   },
-  created () {
-    const store = this.$store
-    const credentials = store.state.users.currentUser.credentials
-    notificationsFetcher.fetchAndUpdate({ store, credentials })
-  },
   computed: {
     mainClass () {
       return this.minimalMode ? '' : 'panel panel-default'

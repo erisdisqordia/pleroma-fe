@@ -663,7 +663,9 @@
     "reload": "Reload",
     "up_to_date": "Up-to-date",
     "no_more_statuses": "No more statuses",
-    "no_statuses": "No statuses"
+    "no_statuses": "No statuses",
+    "socket_reconnected": "Realtime connection established",
+    "socket_broke": "Realtime connection lost: CloseEvent code {0}"
   },
   "status": {
     "favorites": "Favorites",

@@ -71,6 +71,14 @@
     }
   }
 
+  .global-success {
+    background-color: var(--alertPopupSuccess, $fallback--cGreen);
+    color: var(--alertPopupSuccessText, $fallback--text);
+    .svg-inline--fa {
+      color: var(--alertPopupSuccessText, $fallback--text);
+    }
+  }
+
   .global-info {
     background-color: var(--alertPopupNeutral, $fallback--fg);
     color: var(--alertPopupNeutralText, $fallback--text);

@@ -23,7 +23,8 @@ const fetchAndUpdate = ({
   showImmediately = false,
   userId = false,
   tag = false,
-  until
+  until,
+  since
 }) => {
   const args = { timeline, credentials }
   const rootState = store.rootState || store.state
@@ -35,7 +36,11 @@ const fetchAndUpdate = ({
   if (older) {
     args['until'] = until || timelineData.minId
   } else {
-    args['since'] = timelineData.maxId
+    if (since === undefined) {
+      args['since'] = timelineData.maxId
+    } else if (since !== null) {
+      args['since'] = since
+    }
   }
 
   args['userId'] = userId

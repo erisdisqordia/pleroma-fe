@@ -27,7 +27,7 @@
     "mentions": "Menzioni",
     "public_tl": "Sequenza pubblica",
     "timeline": "Sequenza personale",
-    "twkn": "Sequenza globale",
+    "twkn": "Sequenza federale",
     "chat": "Chat della stanza",
     "friend_requests": "Vogliono seguirti",
     "about": "Informazioni",
@@ -624,7 +624,7 @@
         "replace": "Sostituisci",
         "is_replaced_by": "→",
         "keyword_policies": "Regole per parole chiave",
-        "ftl_removal": "Rimozione dalla sequenza globale"
+        "ftl_removal": "Rimozione dalla sequenza federale"
       },
       "simple": {
         "reject": "Rifiuta",
@@ -634,8 +634,8 @@
         "reject_desc": "Questa stanza rifiuterà i messaggi provenienti dalle seguenti:",
         "quarantine": "Quarantena",
         "quarantine_desc": "Questa stanza inoltrerà solo messaggi pubblici alle seguenti:",
-        "ftl_removal": "Rimozione dalla sequenza globale",
-        "ftl_removal_desc": "Questa stanza rimuove le seguenti dalla sequenza globale:",
+        "ftl_removal": "Rimozione dalla sequenza federale",
+        "ftl_removal_desc": "Questa stanza rimuove le seguenti dalla sequenza federale:",
         "media_removal": "Rimozione multimedia",
         "media_removal_desc": "Questa istanza rimuove gli allegati dalle seguenti stanze:",
         "media_nsfw": "Allegati oscurati d'ufficio",

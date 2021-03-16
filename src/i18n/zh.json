@@ -168,7 +168,8 @@
     "preview": "预览",
     "media_description": "媒体描述",
     "media_description_error": "更新媒体失败，请重试",
-    "empty_status_error": "不能发布没有内容、没有附件的发文"
+    "empty_status_error": "不能发布没有内容、没有附件的发文",
+    "post": "发送"
   },
   "registration": {
     "bio": "简介",
@@ -191,7 +192,8 @@
       "password_confirmation_match": "密码不一致"
     },
     "reason_placeholder": "此实例的注册需要手动批准。\n请让管理员知道您为什么想要注册。",
-    "reason": "注册理由"
+    "reason": "注册理由",
+    "register": "注册"
   },
   "selectable_list": {
     "select_all": "选择全部"
@@ -306,8 +308,8 @@
     "no_mutes": "没有隐藏",
     "hide_follows_description": "不要显示我所关注的人",
     "hide_followers_description": "不要显示关注我的人",
-    "show_admin_badge": "在我的个人资料中显示管理员徽章",
-    "show_moderator_badge": "在我的个人资料中显示监察员徽章",
+    "show_admin_badge": "在我的个人资料中显示“管理员”徽章",
+    "show_moderator_badge": "在我的个人资料中显示“监察员”徽章",
     "nsfw_clickthrough": "将不和谐附件和链接预览隐藏，点击才会显示",
     "oauth_tokens": "OAuth令牌",
     "token": "令牌",
@@ -568,7 +570,8 @@
     "reply_visibility_following_short": "显示对我关注的人的回复",
     "hide_all_muted_posts": "不显示已隐藏的发文",
     "hide_media_previews": "隐藏媒体预览",
-    "word_filter": "词语过滤"
+    "word_filter": "词语过滤",
+    "save": "保存更改"
   },
   "time": {
     "day": "{0} 天",
@@ -616,7 +619,9 @@
     "no_more_statuses": "没有更多的状态",
     "no_statuses": "没有状态更新",
     "reload": "重新载入",
-    "error": "取得时间轴时发生错误：{0}"
+    "error": "取得时间轴时发生错误：{0}",
+    "socket_broke": "丢失实时连接：CloseEvent code {0}",
+    "socket_reconnected": "已建立实时连接"
   },
   "status": {
     "favorites": "喜欢",
@@ -801,8 +806,8 @@
         "media_nsfw_desc": "本实例将来自以下实例的媒体内容强制设置为敏感内容：",
         "media_nsfw": "强制设置媒体为敏感内容",
         "media_removal_desc": "本实例移除来自以下实例的媒体内容：",
-        "ftl_removal_desc": "该实例在从“全部已知网络”时间线上移除了下列实例：",
-        "ftl_removal": "从“全部已知网络”时间线上移除"
+        "ftl_removal_desc": "该实例在从“已知网络”时间线上移除了下列实例：",
+        "ftl_removal": "从“已知网络”时间线上移除"
       },
       "mrf_policies_desc": "MRF 策略会影响本实例的互通行为。以下策略已启用：",
       "mrf_policies": "已启用的 MRF 策略",

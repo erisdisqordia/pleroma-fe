@@ -86,8 +86,8 @@
     "friend_requests": "Jarraitzeko eskaerak",
     "mentions": "Aipamenak",
     "interactions": "Interakzioak",
-    "dms": "Zuzeneko Mezuak",
-    "public_tl": "Denbora-lerro Publikoa",
+    "dms": "Zuzeneko mezuak",
+    "public_tl": "Denbora-lerro publikoa",
     "timeline": "Denbora-lerroa",
     "twkn": "Ezagutzen den Sarea",
     "user_search": "Erabiltzailea Bilatu",
@@ -168,9 +168,9 @@
       "unlisted": "Mezu hau ez da argitaratuko Denbora-lerro Publikoan ezta Ezagutzen den Sarean"
     },
     "scope": {
-      "direct": "Zuzena: Bidali aipatutako erabiltzaileei besterik ez",
-      "private": "Jarraitzaileentzako bakarrik: Bidali jarraitzaileentzat bakarrik",
-      "public": "Publikoa: Bistaratu denbora-lerro publikoetan",
+      "direct": "Zuzena: bidali aipatutako erabiltzaileei besterik ez",
+      "private": "Jarraitzaileentzako bakarrik: bidali jarraitzaileentzat bakarrik",
+      "public": "Publikoa: bistaratu denbora-lerro publikoetan",
       "unlisted": "Zerrendatu gabea: ez bidali denbora-lerro publikoetara"
     }
   },
@@ -226,7 +226,7 @@
     "attachmentRadius": "Eranskinak",
     "attachments": "Eranskinak",
     "avatar": "Avatarra",
-    "avatarAltRadius": "Avatarra (Aipamenak)",
+    "avatarAltRadius": "Abatarra (aipamenak)",
     "avatarRadius": "Avatarrak",
     "background": "Atzeko planoa",
     "bio": "Biografia",
@@ -250,7 +250,7 @@
     "current_avatar": "Zure uneko avatarra",
     "current_password": "Indarrean dagoen pasahitza",
     "current_profile_banner": "Zure profilaren banner-a",
-    "data_import_export_tab": "Datuak Inportatu / Esportatu",
+    "data_import_export_tab": "Datuak inportatu / esportatu",
     "default_vis": "Lehenetsitako ikusgaitasunak",
     "delete_account": "Ezabatu kontua",
     "discoverable": "Baimendu zure kontua kanpo bilaketa-emaitzetan eta bestelako zerbitzuetan agertzea",
@@ -312,19 +312,19 @@
     "hide_followers_description": "Ez erakutsi nor ari den ni jarraitzen",
     "hide_follows_count_description": "Ez erakutsi jarraitzen ari naizen kontuen kopurua",
     "hide_followers_count_description": "Ez erakutsi nire jarraitzaileen kontuen kopurua",
-    "show_admin_badge": "Erakutsi Administratzaile etiketa nire profilan",
-    "show_moderator_badge": "Erakutsi Moderatzaile etiketa nire profilan",
+    "show_admin_badge": "Erakutsi \"Administratzaile\" etiketa nire profilan",
+    "show_moderator_badge": "Erakutsi \"Moderatzaile\" etiketa nire profilan",
     "nsfw_clickthrough": "Gaitu klika hunkigarri eranskinak ezkutatzeko",
     "oauth_tokens": "OAuth tokenak",
     "token": "Tokena",
-    "refresh_token": "Berrgin Tokena",
-    "valid_until": "Baliozkoa Arte",
+    "refresh_token": "Berrgin tokena",
+    "valid_until": "Baliozkoa arte",
     "revoke_token": "Ezeztatu",
     "panelRadius": "Panelak",
     "pause_on_unfocused": "Eguneraketa automatikoa gelditu fitxatik kanpo",
     "presets": "Aurrezarpenak",
     "profile_background": "Profilaren atzeko planoa",
-    "profile_banner": "Profilaren Banner-a",
+    "profile_banner": "Profilaren banner-a",
     "profile_tab": "Profila",
     "radii_help": "Konfiguratu interfazearen ertzen biribiltzea (pixeletan)",
     "replies_in_timeline": "Denbora-lerroko erantzunak",
@@ -478,8 +478,8 @@
     },
     "version": {
       "title": "Bertsioa",
-      "backend_version": "Backend Bertsioa",
-      "frontend_version": "Frontend Bertsioa"
+      "backend_version": "Backend bertsioa",
+      "frontend_version": "Frontend bertsioa"
     }
   },
   "time": {
@@ -665,7 +665,7 @@
       "federation": "Federazioa",
       "simple": {
         "media_nsfw_desc": "Instantzia honek hurrengo instantzien multimediak sentikorrak izatera behartzen ditu:",
-        "media_nsfw": "Behartu Multimedia Sentikor",
+        "media_nsfw": "Behartu multimedia sentikor moduan",
         "media_removal_desc": "Instantzia honek atxikitutako multimedia hurrengo instantzietatik ezabatzen ditu:",
         "media_removal": "Multimedia Ezabatu",
         "ftl_removal_desc": "Instantzia honek hurrengo instantziak ezabatzen ditu \"Ezagutzen den Sarea\" denbora-lerrotik:",

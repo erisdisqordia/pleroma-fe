@@ -6,7 +6,7 @@
   >
     <div
       slot="content"
-      class="timeline-settings-menu dropdown-menu"
+      class="dropdown-menu"
     >
       <div v-if="loggedIn">
         <button
@@ -95,12 +95,6 @@
 
   .dropdown-item {
     margin: 0;
-  }
-
-  .timeline-settings-menu {
-    display: flex;
-    min-width: 12em;
-    flex-direction: column;
   }
 }
 

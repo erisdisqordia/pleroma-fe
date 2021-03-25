@@ -39,7 +39,11 @@
     "dismiss": "Descartar",
     "retry": "Inténtalo de nuevo",
     "error_retry": "Por favor, inténtalo de nuevo",
-    "loading": "Cargando…"
+    "loading": "Cargando…",
+    "role": {
+      "admin": "Administrador/a",
+      "moderator": "Moderador/a"
+    }
   },
   "image_cropper": {
     "crop_picture": "Recortar la foto",
@@ -82,8 +86,8 @@
     "friend_requests": "Solicitudes de seguimiento",
     "mentions": "Menciones",
     "interactions": "Interacciones",
-    "dms": "Mensajes Directos",
-    "public_tl": "Línea Temporal Pública",
+    "dms": "Mensajes directos",
+    "public_tl": "Línea temporal pública",
     "timeline": "Línea Temporal",
     "twkn": "Red Conocida",
     "user_search": "Búsqueda de Usuarios",
@@ -92,7 +96,8 @@
     "preferences": "Preferencias",
     "chats": "Chats",
     "timelines": "Líneas de Tiempo",
-    "bookmarks": "Marcadores"
+    "bookmarks": "Marcadores",
+    "home_timeline": "Línea temporal personal"
   },
   "notifications": {
     "broken_favorite": "Estado desconocido, buscándolo…",
@@ -120,7 +125,9 @@
     "expiry": "Tiempo de vida de la encuesta",
     "expires_in": "La encuesta termina en {0}",
     "expired": "La encuesta terminó hace {0}",
-    "not_enough_options": "Muy pocas opciones únicas en la encuesta"
+    "not_enough_options": "Muy pocas opciones únicas en la encuesta",
+    "people_voted_count": "{count} persona votó | {count} personas votaron",
+    "votes_count": "{count} voto | {count} votos"
   },
   "emoji": {
     "stickers": "Pegatinas",
@@ -137,14 +144,14 @@
     "add_sticker": "Añadir Pegatina"
   },
   "interactions": {
-    "favs_repeats": "Favoritos y Repetidos",
+    "favs_repeats": "Favoritos y repetidos",
     "follows": "Nuevos seguidores",
     "load_older": "Cargar interacciones más antiguas",
     "moves": "Usuario Migrado"
   },
   "post_status": {
     "new_status": "Publicar un nuevo estado",
-    "account_not_locked_warning": "Tu cuenta no está {0}. Cualquiera puede seguirte y leer las entradas para Solo-Seguidores.",
+    "account_not_locked_warning": "Tu cuenta no está {0}. Cualquiera puede seguirte y leer las publicaciones para Solo-Seguidores.",
     "account_not_locked_warning_link": "bloqueada",
     "attachments_sensitive": "Contenido sensible",
     "content_type": {
@@ -164,16 +171,17 @@
       "unlisted": "Esta publicación no será visible en la Línea Temporal Pública ni en Toda La Red Conocida"
     },
     "scope": {
-      "direct": "Directo - Solo para los usuarios mencionados",
-      "private": "Solo-seguidores - Solo tus seguidores leerán la publicación",
-      "public": "Público - Entradas visibles en las Líneas Temporales Públicas",
-      "unlisted": "Sin listar - Entradas no visibles en las Líneas Temporales Públicas"
+      "direct": "Directo - solo para los usuarios mencionados",
+      "private": "Solo-seguidores - solo tus seguidores leerán la publicación",
+      "public": "Público - publicaciones visibles en las líneas temporales públicas",
+      "unlisted": "Sin listar -publicaciones no visibles en las líneas temporales públicas"
     },
     "media_description_error": "Error al actualizar el archivo, inténtalo de nuevo",
     "empty_status_error": "No se puede publicar un estado vacío y sin archivos adjuntos",
     "preview_empty": "Vacío",
     "preview": "Vista previa",
-    "media_description": "Descripción multimedia"
+    "media_description": "Descripción multimedia",
+    "post": "Publicación"
   },
   "registration": {
     "bio": "Biografía",
@@ -194,7 +202,10 @@
       "password_required": "no puede estar vacío",
       "password_confirmation_required": "no puede estar vacío",
       "password_confirmation_match": "la contraseña no coincide"
-    }
+    },
+    "reason_placeholder": "Los registros de esta instancia son aprobados manualmente.\nComéntanos por qué quieres registrarte aquí.",
+    "reason": "Razón para registrarse",
+    "register": "Registrarse"
   },
   "selectable_list": {
     "select_all": "Seleccionar todo"
@@ -227,7 +238,7 @@
     "attachmentRadius": "Adjuntos",
     "attachments": "Adjuntos",
     "avatar": "Avatar",
-    "avatarAltRadius": "Avatares (Notificaciones)",
+    "avatarAltRadius": "Avatares (notificaciones)",
     "avatarRadius": "Avatares",
     "background": "Fondo",
     "bio": "Biografía",
@@ -245,19 +256,19 @@
     "change_password": "Cambiar contraseña",
     "change_password_error": "Hubo un problema cambiando la contraseña.",
     "changed_password": "¡Contraseña cambiada correctamente!",
-    "collapse_subject": "Colapsar entradas con tema",
+    "collapse_subject": "Colapsar publicaciones con tema",
     "composing": "Redactando",
     "confirm_new_password": "Confirmar la nueva contraseña",
     "current_avatar": "Tu avatar actual",
     "current_password": "Contraseña actual",
     "current_profile_banner": "Tu cabecera actual",
-    "data_import_export_tab": "Importar / Exportar Datos",
+    "data_import_export_tab": "Importar / Exportar datos",
     "default_vis": "Alcance de visibilidad por defecto",
     "delete_account": "Eliminar la cuenta",
     "discoverable": "Permitir la aparición de esta cuenta en los resultados de búsqueda y otros servicios",
     "delete_account_description": "Eliminar para siempre los datos y desactivar la cuenta.",
     "pad_emoji": "Rellenar con espacios al agregar emojis desde el selector",
-    "delete_account_error": "Hubo un error al eliminar tu cuenta. Si el fallo persiste, ponte en contacto con el administrador de tu instancia.",
+    "delete_account_error": "Hubo un error al eliminar tu cuenta. Si el fallo persiste, ponte en contacto con el/la administrador/a de tu instancia.",
     "delete_account_instructions": "Escribe tu contraseña para confirmar la eliminación de tu cuenta.",
     "avatar_size_instruction": "El tamaño mínimo recomendado para el avatar es de 150X150 píxeles.",
     "export_theme": "Exportar tema",
@@ -277,7 +288,7 @@
     "hide_isp": "Ocultar el panel específico de la instancia",
     "preload_images": "Precargar las imágenes",
     "use_one_click_nsfw": "Abrir los adjuntos NSFW con un solo click",
-    "hide_post_stats": "Ocultar las estadísticas de las entradas (p.ej. el número de favoritos)",
+    "hide_post_stats": "Ocultar las estadísticas de las publicaciones (p.ej. el número de favoritos)",
     "hide_user_stats": "Ocultar las estadísticas del usuario (p.ej. el número de seguidores)",
     "hide_filtered_statuses": "Ocultar estados filtrados",
     "import_blocks_from_a_csv_file": "Importar lista de usuarios bloqueados dese un archivo csv",
@@ -299,22 +310,22 @@
     "play_videos_in_modal": "Reproducir los vídeos en un marco emergente",
     "use_contain_fit": "No recortar los adjuntos en miniaturas",
     "name": "Nombre",
-    "name_bio": "Nombre y Biografía",
+    "name_bio": "Nombre y biografía",
     "new_password": "Nueva contraseña",
     "notification_visibility": "Tipos de notificaciones a mostrar",
     "notification_visibility_follows": "Nuevos seguidores",
-    "notification_visibility_likes": "Me gustan (Likes)",
+    "notification_visibility_likes": "Favoritos",
     "notification_visibility_mentions": "Menciones",
     "notification_visibility_repeats": "Repeticiones (Repeats)",
-    "no_rich_text_description": "Eliminar el formato de texto enriquecido de todas las entradas",
+    "no_rich_text_description": "Eliminar el formato de texto enriquecido de todas las publicaciones",
     "no_blocks": "No hay usuarios bloqueados",
     "no_mutes": "No hay usuarios silenciados",
     "hide_follows_description": "No mostrar a quién sigo",
     "hide_followers_description": "No mostrar quién me sigue",
     "hide_follows_count_description": "No mostrar el número de cuentas que sigo",
     "hide_followers_count_description": "No mostrar el número de cuentas que me siguen",
-    "show_admin_badge": "Mostrar la insignia de Administrador en mi perfil",
-    "show_moderator_badge": "Mostrar la insignia de Moderador en mi perfil",
+    "show_admin_badge": "Mostrar la insignia de \"Administrador/a\" en mi perfil",
+    "show_moderator_badge": "Mostrar la insignia de \"Moderador/a\" en mi perfil",
     "nsfw_clickthrough": "Habilitar la ocultación de la imagen de vista previa del enlace y el adjunto para los estados NSFW por defecto",
     "oauth_tokens": "Tokens de OAuth",
     "token": "Token",
@@ -324,8 +335,8 @@
     "panelRadius": "Paneles",
     "pause_on_unfocused": "Parar la transmisión cuando no estés en foco",
     "presets": "Por defecto",
-    "profile_background": "Fondo del Perfil",
-    "profile_banner": "Cabecera del Perfil",
+    "profile_background": "Imagen de fondo del perfil",
+    "profile_banner": "Imagen de cabecera del perfil",
     "profile_tab": "Perfil",
     "radii_help": "Establezca el redondeo de las esquinas de la interfaz (en píxeles)",
     "replies_in_timeline": "Réplicas en la línea temporal",
@@ -356,7 +367,7 @@
     "theme": "Tema",
     "theme_help": "Use códigos de color hexadecimales (#rrggbb) para personalizar su tema de colores.",
     "theme_help_v2_1": "También puede invalidar los colores y la opacidad de ciertos componentes si activa la casilla de verificación. Use el botón \"Borrar todo\" para deshacer los cambios.",
-    "theme_help_v2_2": "Los iconos debajo de algunas entradas son indicadores de contraste de fondo/texto, desplace el ratón por encima para obtener información más detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
+    "theme_help_v2_2": "Los iconos debajo de algunas publicaciones son indicadores de contraste de fondo/texto, desplace el ratón por encima para obtener información más detallada. Tenga en cuenta que cuando se utilizan indicadores de contraste de transparencia se muestra el peor caso posible.",
     "tooltipRadius": "Información/alertas",
     "upload_a_photo": "Subir una foto",
     "user_settings": "Ajustes del Usuario",
@@ -476,7 +487,7 @@
           "panelHeader": "Cabecera del panel",
           "topBar": "Barra superior",
           "avatar": "Avatar del usuario (en la vista del perfil)",
-          "avatarStatus": "Avatar del usuario (en la vista de la entrada)",
+          "avatarStatus": "Avatar del usuario (en la vista de la publicación)",
           "popup": "Ventanas y textos emergentes (popups & tooltips)",
           "button": "Botones",
           "buttonHover": "Botón (encima)",
@@ -517,8 +528,8 @@
     },
     "version": {
       "title": "Versión",
-      "backend_version": "Versión del Backend",
-      "frontend_version": "Versión del Frontend"
+      "backend_version": "Versión del backend",
+      "frontend_version": "Versión del frontend"
     },
     "notification_visibility_moves": "Usuario Migrado",
     "greentext": "Texto verde (meme arrows)",
@@ -529,7 +540,7 @@
     "fun": "Divertido",
     "type_domains_to_mute": "Buscar dominios para silenciar",
     "useStreamingApiWarning": "(no recomendado, experimental, puede omitir publicaciones)",
-    "useStreamingApi": "Recibir entradas y notificaciones en tiempo real",
+    "useStreamingApi": "Recibir publicaciones y notificaciones en tiempo real",
     "user_mutes": "Usuarios",
     "reset_profile_background": "Restablecer el fondo de pantalla",
     "reset_background_confirm": "¿Estás seguro de restablecer el fondo de pantalla?",
@@ -563,7 +574,15 @@
     "mute_export_button": "Exportar los silenciados a un archivo csv",
     "mute_export": "Exportar silenciados",
     "hide_wallpaper": "Ocultar el fondo de pantalla de la instancia",
-    "setting_changed": "La configuración es diferente a la predeterminada"
+    "setting_changed": "La configuración es diferente a la predeterminada",
+    "hide_all_muted_posts": "Ocultar las publicaciones silenciadas",
+    "more_settings": "Más opciones",
+    "sensitive_by_default": "Identificar las publicaciones como sensibles de forma predeterminada",
+    "reply_visibility_self_short": "Mostrar respuestas solo a uno mismo",
+    "reply_visibility_following_short": "Mostrar las réplicas a mis seguidores",
+    "hide_media_previews": "Ocultar la vista previa multimedia",
+    "word_filter": "Filtro de palabras",
+    "save": "Guardar los cambios"
   },
   "time": {
     "day": "{0} día",
@@ -611,7 +630,9 @@
     "no_more_statuses": "No hay más estados",
     "no_statuses": "Sin estados",
     "reload": "Recargar",
-    "error": "Error obteniendo la linea de tiempo:{0}"
+    "error": "Error obteniendo la linea de tiempo:{0}",
+    "socket_broke": "Conexión en timpo real perdida: código del motivo {0}",
+    "socket_reconnected": "Establecida la conexión en tiempo real"
   },
   "status": {
     "favorites": "Favoritos",
@@ -635,7 +656,7 @@
     "status_unavailable": "Estado no disponible",
     "bookmark": "Marcar",
     "unbookmark": "Desmarcar",
-    "status_deleted": "Esta entrada ha sido eliminada",
+    "status_deleted": "Esta publicación ha sido eliminada",
     "nsfw": "NSFW (No apropiado para el trabajo)",
     "expand": "Expandir",
     "external_source": "Fuente externa"
@@ -674,10 +695,10 @@
     "mute_progress": "Silenciando…",
     "admin_menu": {
       "moderation": "Moderación",
-      "grant_admin": "Conceder permisos de Administrador",
-      "revoke_admin": "Revocar permisos de Administrador",
-      "grant_moderator": "Conceder permisos de Moderador",
-      "revoke_moderator": "Revocar permisos de Moderador",
+      "grant_admin": "Conceder permisos de Administrador/a",
+      "revoke_admin": "Revocar permisos de Administrador/a",
+      "grant_moderator": "Conceder permisos de Moderador/a",
+      "revoke_moderator": "Revocar permisos de Moderador/a",
       "activate_account": "Activar cuenta",
       "deactivate_account": "Desactivar cuenta",
       "delete_account": "Eliminar cuenta",
@@ -698,16 +719,23 @@
     "roles": {
       "moderator": "Moderador",
       "admin": "Administrador"
-    }
+    },
+    "highlight": {
+      "striped": "Fondo rayado",
+      "side": "Raya lateral",
+      "solid": "Fondo sólido",
+      "disabled": "Sin resaltado"
+    },
+    "bot": "Bot"
   },
   "user_profile": {
-    "timeline_title": "Linea Temporal del Usuario",
+    "timeline_title": "Línea temporal del usuario",
     "profile_does_not_exist": "Lo sentimos, este perfil no existe.",
     "profile_loading_error": "Lo sentimos, hubo un error al cargar este perfil."
   },
   "user_reporting": {
     "title": "Reportando a {0}",
-    "add_comment_description": "El informe será enviado a los moderadores de su instancia. Puedes proporcionar una explicación de por qué estás reportando esta cuenta a continuación:",
+    "add_comment_description": "El informe será enviado a los/las moderadores/as de su instancia. Puedes proporcionar una explicación de por qué estás reportando esta cuenta a continuación:",
     "additional_comments": "Comentarios adicionales",
     "forward_description": "La cuenta es de otro servidor. ¿Enviar una copia del informe allí también?",
     "forward_to": "Reenviar a {0}",
@@ -719,7 +747,7 @@
     "who_to_follow": "A quién seguir"
   },
   "tool_tip": {
-    "media_upload": "Subir Medios",
+    "media_upload": "Subir multimedia",
     "repeat": "Repetir",
     "reply": "Contestar",
     "favorite": "Favorito",
@@ -777,12 +805,12 @@
       "simple": {
         "accept_desc": "Esta instancia solo acepta mensajes de las siguientes instancias:",
         "media_nsfw_desc": "Esta instancia obliga a que los archivos multimedia se establezcan como sensibles en las publicaciones de las siguientes instancias:",
-        "media_nsfw": "Forzar Multimedia Como Sensible",
+        "media_nsfw": "Forzar contenido multimedia como sensible",
         "media_removal_desc": "Esta instancia elimina los archivos multimedia de las publicaciones de las siguientes instancias:",
         "media_removal": "Eliminar Multimedia",
         "quarantine": "Cuarentena",
-        "ftl_removal_desc": "Esta instancia elimina las siguientes instancias de la línea de tiempo \"Toda la red conocida\":",
-        "ftl_removal": "Eliminar de la línea de tiempo \"Toda La Red Conocida\"",
+        "ftl_removal_desc": "Esta instancia elimina las siguientes instancias de la línea de tiempo \"Red Conocida\":",
+        "ftl_removal": "Eliminar de la línea de tiempo \"Red Conocida\"",
         "quarantine_desc": "Esta instancia enviará solo publicaciones públicas a las siguientes instancias:",
         "simple_policies": "Políticas específicas de la instancia",
         "reject_desc": "Esta instancia no aceptará mensajes de las siguientes instancias:",

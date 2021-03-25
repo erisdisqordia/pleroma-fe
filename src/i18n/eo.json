@@ -156,7 +156,9 @@
       "password_required": "ne povas resti malplena",
       "password_confirmation_required": "ne povas resti malplena",
       "password_confirmation_match": "samu la pasvorton"
-    }
+    },
+    "reason_placeholder": "Ĉi-node oni aprobas registriĝojn permane.\nSciigu la administrantojn kial vi volas registriĝi.",
+    "reason": "Kialo registriĝi"
   },
   "settings": {
     "app_name": "Nomo de aplikaĵo",
@@ -523,7 +525,14 @@
     "mute_export_button": "Elportu viajn silentigojn al CSV-dosiero",
     "mute_export": "Elporto de silentigoj",
     "hide_wallpaper": "Kaŝi fonbildon de nodo",
-    "setting_changed": "Agordo malsamas de la implicita"
+    "setting_changed": "Agordo malsamas de la implicita",
+    "more_settings": "Pliaj agordoj",
+    "sensitive_by_default": "Implicite marki afiŝojn konsternaj",
+    "reply_visibility_following_short": "Montri respondojn por miaj abonatoj",
+    "hide_all_muted_posts": "Kaŝi silentigitajn afiŝojn",
+    "hide_media_previews": "Kaŝi antaŭrigardojn al vidaŭdaĵoj",
+    "word_filter": "Vortofiltro",
+    "reply_visibility_self_short": "Montri nur respondojn por mi"
   },
   "timeline": {
     "collapse": "Maletendi",
@@ -594,7 +603,13 @@
     "hide_repeats": "Kaŝi ripetojn",
     "unsubscribe": "Ne ricevi sciigojn",
     "subscribe": "Ricevi sciigojn",
-    "bot": "Roboto"
+    "bot": "Roboto",
+    "highlight": {
+      "side": "Flanka strio",
+      "striped": "Stria fono",
+      "solid": "Unueca fono",
+      "disabled": "Senemfaze"
+    }
   },
   "user_profile": {
     "timeline_title": "Historio de uzanto",

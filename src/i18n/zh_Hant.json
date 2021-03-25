@@ -22,7 +22,9 @@
     "votes": "票",
     "option": "選項",
     "add_option": "增加選項",
-    "add_poll": "增加投票"
+    "add_poll": "增加投票",
+    "votes_count": "{count} 票 | {count} 票",
+    "people_voted_count": "{count} 人已投票 | {count} 人已投票"
   },
   "notifications": {
     "reacted_with": "作出了 {0} 的反應",
@@ -108,7 +110,11 @@
     "loading": "載入中…",
     "more": "更多",
     "submit": "提交",
-    "apply": "應用"
+    "apply": "應用",
+    "role": {
+      "moderator": "主持人",
+      "admin": "管理員"
+    }
   },
   "finder": {
     "find_user": "尋找用戶",
@@ -424,7 +430,7 @@
     "notification_blocks": "封鎖一個用戶會停掉所有他的通知，等同於取消關注。",
     "enable_web_push_notifications": "啟用 web 推送通知",
     "presets": "預置",
-    "profile_background": "個人背景圖",
+    "profile_background": "配置文件背景圖",
     "profile_banner": "橫幅圖片",
     "profile_tab": "個人資料",
     "radii_help": "設置界面邊緣的圓角 (單位：像素)",
@@ -512,7 +518,7 @@
     "show_moderator_badge": "顯示主持人徽章",
     "oauth_tokens": "OAuth代幣",
     "token": "代幣",
-    "refresh_token": "刷新代幣",
+    "refresh_token": "刷新token",
     "useStreamingApiWarning": "（不推薦使用，實驗性的，已知跳過文章）",
     "fun": "有趣",
     "notification_setting_hide_notification_contents": "隱藏推送通知中的發送者與內容信息",
@@ -528,7 +534,14 @@
     "mute_import_error": "導入靜音時出錯",
     "mute_export_button": "將靜音導出到csv文件",
     "mute_export": "靜音導出",
-    "hide_wallpaper": "隱藏實例桌布"
+    "hide_wallpaper": "隱藏實例桌布",
+    "reply_visibility_self_short": "只顯示對我本人的回复",
+    "reply_visibility_following_short": "顯示對我關注的人的回复",
+    "hide_all_muted_posts": "不顯示已隱藏的帖子",
+    "hide_media_previews": "隱藏媒體預覽",
+    "word_filter": "詞過濾",
+    "setting_changed": "與默認設置不同",
+    "more_settings": "更多設置"
   },
   "chats": {
     "more": "更多",
@@ -667,7 +680,7 @@
     "load_older": "載入更早的互動",
     "moves": "用戶遷移",
     "follows": "新的關注者",
-    "favs_repeats": "轉發和收藏"
+    "favs_repeats": "轉發和喜歡"
   },
   "selectable_list": {
     "select_all": "選擇全部"
@@ -696,7 +709,9 @@
     "registration": "註冊",
     "password_confirm": "確認密碼",
     "email": "電子郵箱",
-    "bio": "簡介"
+    "bio": "簡介",
+    "reason_placeholder": "此實例的註冊需要手動批准。\n請讓管理知道您為什麼想要註冊。",
+    "reason": "註冊理由"
   },
   "user_card": {
     "its_you": "就是你！!",
@@ -756,7 +771,14 @@
     "roles": {
       "moderator": "主持人",
       "admin": "管理員"
-    }
+    },
+    "highlight": {
+      "disabled": "無突出顯示",
+      "solid": "單色背景",
+      "striped": "條紋背景",
+      "side": "彩條"
+    },
+    "bot": "機器人"
   },
   "user_profile": {
     "timeline_title": "用戶時間線",

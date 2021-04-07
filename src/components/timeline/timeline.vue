@@ -52,13 +52,13 @@
     <div :class="classes.footer">
       <div
         v-if="count===0"
-        class="new-status-notification text-center panel-footer faint"
+        class="new-status-notification text-center faint"
       >
         {{ $t('timeline.no_statuses') }}
       </div>
       <div
         v-else-if="bottomedOut"
-        class="new-status-notification text-center panel-footer faint"
+        class="new-status-notification text-center faint"
       >
         {{ $t('timeline.no_more_statuses') }}
       </div>
@@ -67,13 +67,13 @@
         class="button-unstyled -link -fullwidth"
         @click.prevent="fetchOlderStatuses()"
       >
-        <div class="new-status-notification text-center panel-footer">
+        <div class="new-status-notification text-center">
           {{ $t('timeline.load_older') }}
         </div>
       </button>
       <div
         v-else
-        class="new-status-notification text-center panel-footer"
+        class="new-status-notification text-center"
       >
         <FAIcon
           icon="circle-notch"
@@ -87,32 +87,4 @@
 
 <script src="./timeline.js"></script>
 
-<style lang="scss">
-@import '../../_variables.scss';
-
-.Timeline {
-  .loadmore-text {
-    opacity: 1;
-  }
-
-  &.-blocked {
-    cursor: progress;
-  }
-}
-
-.timeline-heading {
-  max-width: 100%;
-  flex-wrap: nowrap;
-  align-items: center;
-  position: relative;
-
-  .loadmore-button {
-    flex-shrink: 0;
-  }
-
-  .loadmore-text {
-    flex-shrink: 0;
-    line-height: 1em;
-  }
-}
-</style>
+<style src="./timeline.scss" lang="scss"> </style>

@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{ minimal: minimalMode }"
-    class="notifications"
+    class="Notifications"
   >
     <div :class="mainClass">
       <div
@@ -35,10 +35,10 @@
           <notification :notification="notification" />
         </div>
       </div>
-      <div class="panel-footer">
+      <div class="panel-footer notifications-footer">
         <div
           v-if="bottomedOut"
-          class="new-status-notification text-center panel-footer faint"
+          class="new-status-notification text-center faint"
         >
           {{ $t('notifications.no_more_notifications') }}
         </div>
@@ -47,13 +47,13 @@
           class="button-unstyled -link -fullwidth"
           @click.prevent="fetchOlderNotifications()"
         >
-          <div class="new-status-notification text-center panel-footer">
+          <div class="new-status-notification text-center">
             {{ minimalMode ? $t('interactions.load_older') : $t('notifications.load_older') }}
           </div>
         </button>
         <div
           v-else
-          class="new-status-notification text-center panel-footer"
+          class="new-status-notification text-center"
         >
           <FAIcon
             icon="circle-notch"

@@ -110,6 +110,20 @@ const config = {
     }
   },
   actions: {
+    loadSettings ({ dispatch }, data) {
+      const knownKeys = new Set(Object.keys(defaultState))
+      const presentKeys = new Set(Object.keys(data))
+      const intersection = new Set()
+      for (let elem of presentKeys) {
+        if (knownKeys.has(elem)) {
+          intersection.add(elem)
+        }
+      }
+
+      intersection.forEach(
+        name => dispatch('setOption', { name, value: data[name] })
+      )
+    },
     setHighlight ({ commit, dispatch }, { user, color, type }) {
       commit('setHighlight', { user, color, type })
     },

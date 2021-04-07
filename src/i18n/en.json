@@ -368,6 +368,18 @@
     "loop_video_silent_only": "Loop only videos without sound (i.e. Mastodon's \"gifs\")",
     "mutes_tab": "Mutes",
     "play_videos_in_modal": "Play videos in a popup frame",
+    "file_export_import": {
+      "backup_restore": "Settings backup",
+      "backup_settings": "Backup settings to file",
+      "backup_settings_theme": "Backup settings and theme to file",
+      "restore_settings": "Restore settings from file",
+      "errors": {
+        "invalid_file": "The selected file is not a supported Pleroma settings backup. No changes were made.",
+        "file_too_new": "Incompatile major version: {fileMajor}, this PleromaFE (settings ver {feMajor}) is too old to handle it",
+        "file_too_old": "Incompatile major version: {fileMajor}, file version is too old and not supported (min. set. ver. {feMajor})",
+        "file_slightly_new": "File minor version is different, some settings might not load"
+      }
+    },
     "profile_fields": {
       "label": "Profile metadata",
       "add_field": "Add field",

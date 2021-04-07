@@ -380,7 +380,7 @@ export const colors2to3 = (colors) => {
  */
 export const shadows2to3 = (shadows, opacity) => {
   return Object.entries(shadows).reduce((shadowsAcc, [slotName, shadowDefs]) => {
-    const isDynamic = ({ color }) => color.startsWith('--')
+    const isDynamic = ({ color = '#000000' }) => color.startsWith('--')
     const getOpacity = ({ color }) => opacity[getOpacitySlot(color.substring(2).split(',')[0])]
     const newShadow = shadowDefs.reduce((shadowAcc, def) => [
       ...shadowAcc,

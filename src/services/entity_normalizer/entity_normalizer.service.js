@@ -205,7 +205,7 @@ export const parseUser = (data) => {
 
   // Convert punycode to unicode for UI
   output.screen_name_ui = output.screen_name
-  if (output.screen_name.includes('@')) {
+  if (output.screen_name && output.screen_name.includes('@')) {
     const parts = output.screen_name.split('@')
     let unicodeDomain = punycode.toUnicode(parts[1])
     if (unicodeDomain !== parts[1]) {

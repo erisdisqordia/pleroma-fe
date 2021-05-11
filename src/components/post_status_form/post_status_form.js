@@ -15,7 +15,7 @@ import Checkbox from '../checkbox/checkbox.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faChevronDown,
-  faSmileBeam,
+  faGhost,
   faPollH,
   faUpload,
   faBan,
@@ -25,7 +25,7 @@ import {
 
 library.add(
   faChevronDown,
-  faSmileBeam,
+  faGhost,
   faPollH,
   faUpload,
   faBan,

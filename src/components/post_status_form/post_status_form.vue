@@ -248,7 +248,7 @@
             :title="$t('emoji.add_emoji')"
             @click="showEmojiPicker"
           >
-            <FAIcon icon="smile-beam" />
+            <FAIcon icon="ghost" />
           </button>
           <button
             v-if="pollsAvailable"

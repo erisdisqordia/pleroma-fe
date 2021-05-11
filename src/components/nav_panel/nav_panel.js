@@ -9,8 +9,8 @@ import {
   faEnvelope,
   faHome,
   faComments,
-  faBell,
-  faInfoCircle
+  faBolt,
+  faTransgenderAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -20,8 +20,8 @@ library.add(
   faEnvelope,
   faHome,
   faComments,
-  faBell,
-  faInfoCircle
+  faBolt,
+  faTransgenderAlt
 )
 
 const NavPanel = {

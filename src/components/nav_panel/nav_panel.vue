@@ -10,7 +10,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110"
-              icon="home"
+              icon="satellite"
             />{{ $t("nav.timelines") }}
           </router-link>
         </li>
@@ -19,7 +19,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110"
-              icon="bell"
+              icon="bolt"
             />{{ $t("nav.interactions") }}
           </router-link>
         </li>
@@ -58,7 +58,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110"
-              icon="info-circle"
+              icon="transgender-alt"
             />{{ $t("nav.about") }}
           </router-link>
         </li>

@@ -5,7 +5,7 @@
       :class="{ 'hidden': isHidden }"
       @click="openPostForm"
     >
-      <FAIcon icon="pen" />
+      <FAIcon icon="pencil-alt" />
     </button>
   </div>
 </template>

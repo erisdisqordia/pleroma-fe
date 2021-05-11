@@ -6,29 +6,29 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faSignInAlt,
   faSignOutAlt,
-  faHome,
+  faSatellite,
   faComments,
-  faBell,
+  faBolt,
   faUserPlus,
-  faBullhorn,
+  faBath,
   faSearch,
   faTachometerAlt,
   faCog,
-  faInfoCircle
+  faTransgenderAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faSignInAlt,
   faSignOutAlt,
-  faHome,
+  faSatellite,
   faComments,
-  faBell,
+  faBolt,
   faUserPlus,
-  faBullhorn,
+  faBath,
   faSearch,
   faTachometerAlt,
   faCog,
-  faInfoCircle
+  faTransgenderAlt
 )
 
 const SideDrawer = {

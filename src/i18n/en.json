@@ -30,7 +30,7 @@
     "staff": "Staff"
   },
   "shoutbox": {
-    "title": "Shoutbox"
+    "title": "Cumtub"
   },
   "domain_mute_card": {
     "mute": "Mute",
@@ -77,8 +77,8 @@
     "close": "Close",
     "peek": "Peek",
     "role": {
-      "admin": "Admin",
-      "moderator": "Moderator"
+      "admin": "Fateweaver",
+      "moderator": "Eldar"
     }
   },
   "image_cropper": {
@@ -115,34 +115,34 @@
     "next": "Next"
   },
   "nav": {
-    "about": "About",
+    "about": "Principia Disqordia",
     "administration": "Administration",
     "back": "Back",
-    "friend_requests": "Follow Requests",
+    "friend_requests": "Disciple Requests",
     "mentions": "Mentions",
     "interactions": "Interactions",
     "dms": "Direct Messages",
-    "public_tl": "Public Timeline",
-    "timeline": "Timeline",
-    "twkn": "Known Network",
+    "public_tl": "Local Timeline",
+    "timeline": "Home Timeline",
+    "twkn": "Federated Timeline",
     "bookmarks": "Bookmarks",
     "user_search": "User Search",
     "search": "Search",
     "who_to_follow": "Who to follow",
     "preferences": "Preferences",
-    "timelines": "Timelines",
+    "timelines": "The Fediverse",
     "chats": "Chats"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
     "error": "Error fetching notifications: {0}",
-    "favorited_you": "favorited your status",
-    "followed_you": "followed you",
-    "follow_request": "wants to follow you",
+    "favorited_you": "liked your post",
+    "followed_you": "is now your disciple",
+    "follow_request": "wants to become your disciple",
     "load_older": "Load older notifications",
     "notifications": "Notifications",
     "read": "Read!",
-    "repeated_you": "repeated your status",
+    "repeated_you": "boosted your post",
     "no_more_notifications": "No more notifications",
     "migrated_to": "migrated to",
     "reacted_with": "reacted with {0}"
@@ -178,7 +178,7 @@
     "storage_unavailable": "Pleroma could not access browser storage. Your login or your local settings won't be saved and you might encounter unexpected issues. Try enabling cookies."
   },
   "interactions": {
-    "favs_repeats": "Repeats and Favorites",
+    "favs_repeats": "Boosts and Favorites",
     "follows": "New follows",
     "moves": "User migrates",
     "load_older": "Load older interactions"
@@ -195,8 +195,8 @@
       "text/markdown": "Markdown",
       "text/bbcode": "BBCode"
     },
-    "content_warning": "Subject (optional)",
-    "default": "Just landed in L.A.",
+    "content_warning": "Subject / CW (optional)",
+    "default": "Just landed on Neptune",
     "direct_warning_to_all": "This post will be visible to all the mentioned users.",
     "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
@@ -376,7 +376,7 @@
     "notification_visibility_follows": "Follows",
     "notification_visibility_likes": "Likes",
     "notification_visibility_mentions": "Mentions",
-    "notification_visibility_repeats": "Repeats",
+    "notification_visibility_repeats": "Boosts",
     "notification_visibility_moves": "User Migrates",
     "notification_visibility_emoji_reactions": "Reactions",
     "no_rich_text_description": "Strip rich text formatting from all posts",
@@ -659,7 +659,7 @@
   },
   "status": {
     "favorites": "Favorites",
-    "repeats": "Repeats",
+    "repeats": "Boosts",
     "delete": "Delete status",
     "pin": "Pin on profile",
     "unpin": "Unpin from profile",
@@ -718,8 +718,8 @@
     "unmute": "Unmute",
     "unmute_progress": "Unmuting…",
     "mute_progress": "Muting…",
-    "hide_repeats": "Hide repeats",
-    "show_repeats": "Show repeats",
+    "hide_repeats": "Hide boosts",
+    "show_repeats": "Show boosts",
     "bot": "Bot",
     "admin_menu": {
       "moderation": "Moderation",
@@ -761,9 +761,9 @@
   },
   "tool_tip": {
     "media_upload": "Upload Media",
-    "repeat": "Repeat",
+    "repeat": "Boost this post",
     "reply": "Reply",
-    "favorite": "Favorite",
+    "favorite": "Dote upon this post",
     "add_reaction": "Add Reaction",
     "user_settings": "User Settings",
     "accept_follow_request": "Accept follow request",

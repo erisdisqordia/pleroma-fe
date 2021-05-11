@@ -7,7 +7,7 @@ import {
   faGlobe,
   faBookmark,
   faEnvelope,
-  faHome,
+  faSatellite,
   faComments,
   faBolt,
   faTransgenderAlt
@@ -18,7 +18,7 @@ library.add(
   faGlobe,
   faBookmark,
   faEnvelope,
-  faHome,
+  faSatellite,
   faComments,
   faBolt,
   faTransgenderAlt

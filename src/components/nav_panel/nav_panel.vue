@@ -177,7 +177,6 @@
   }
 
   .timelines-background {
-    padding: 0 0 0 0.6em;
     background-color: $fallback--lightBg;
     background-color: var(--selectedMenu, $fallback--lightBg);
     border-top: 1px solid;

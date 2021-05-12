@@ -210,7 +210,7 @@
                 >
               </template>
             </div>
-
+            <span>TIP: After registering, you'll need to confirm your email address to activate your account. Be sure to check your spam folder!</span>
             <div
               v-if="token"
               class="form-group"

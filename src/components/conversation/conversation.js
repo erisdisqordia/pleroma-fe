@@ -1,5 +1,13 @@
 import { reduce, filter, findIndex, clone, get } from 'lodash'
 import Status from '../status/status.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faCodeBranch
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faCodeBranch
+)
 
 const sortById = (a, b) => {
   const idA = a.type === 'retweet' ? a.retweeted_status.id : a.id

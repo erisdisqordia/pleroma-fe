@@ -2,6 +2,14 @@ import map from 'lodash/map'
 import groupBy from 'lodash/groupBy'
 import { mapGetters, mapState } from 'vuex'
 import BasicUserCard from '../basic_user_card/basic_user_card.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faPastafarianism
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faPastafarianism
+)
 
 const StaffPanel = {
   created () {

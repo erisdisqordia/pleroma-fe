@@ -3,6 +3,9 @@
     <div class="panel panel-default base01-background">
       <div class="panel-heading timeline-heading base02-background">
         <div class="title">
+          <FAIcon
+            icon="pastafarianism"
+          />
           {{ $t("about.staff") }}
         </div>
       </div>

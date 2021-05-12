@@ -9,7 +9,12 @@
       v-if="isExpanded"
       class="panel-heading conversation-heading"
     >
-      <span class="title"> {{ $t('timeline.conversation') }} </span>
+      <span class="title">
+        <FAIcon
+          class="fa-scale-110 threadicon"
+          icon="code-branch"
+        />
+        {{ $t('timeline.conversation') }} </span>
       <button
         v-if="collapsable"
         class="button-unstyled -link"
@@ -55,7 +60,9 @@
     border-bottom-color: var(--border, $fallback--border);
     border-radius: 0;
   }
-
+  .threadicon {
+    height: 0.85em !important;
+  }
   &.-expanded {
     .conversation-status:last-child {
       border-bottom: none;

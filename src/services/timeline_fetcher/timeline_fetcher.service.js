@@ -60,14 +60,14 @@ const fetchAndUpdate = ({
       update({ store, statuses, timeline, showImmediately, userId, pagination })
       return { statuses, pagination }
     })
-    .catch((error) => {
-      store.dispatch('pushGlobalNotice', {
-        level: 'error',
-        messageKey: 'timeline.error',
-        messageArgs: [error.message],
-        timeout: 5000
-      })
-    })
+  // .catch((error) => {
+  // store.dispatch('pushGlobalNotice', {
+  // level: 'error',
+  // messageKey: 'timeline.error',
+  // messageArgs: [error.message],
+  // timeout: 5000
+  // })
+  // })
 }
 
 const startFetching = ({ timeline = 'friends', credentials, store, userId = false, tag = false }) => {

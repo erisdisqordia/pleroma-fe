@@ -137,13 +137,13 @@
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
     "error": "Error fetching notifications: {0}",
-    "favorited_you": "liked your post",
+    "favorited_you": "favorited your status",
     "followed_you": "is now your disciple",
     "follow_request": "wants to become your disciple",
     "load_older": "Load older notifications",
     "notifications": "Notifications",
     "read": "Read!",
-    "repeated_you": "boosted your post",
+    "repeated_you": "repeated your status",
     "no_more_notifications": "No more notifications",
     "migrated_to": "migrated to",
     "reacted_with": "reacted with {0}"
@@ -648,11 +648,11 @@
   "timeline": {
     "collapse": "Collapse",
     "conversation": "Conversation",
-    "error": "Error fetching timeline: {0}",
     "load_older": "Load older statuses",
     "no_retweet_hint": "Post is marked as followers-only or direct and cannot be repeated",
     "repeated": "repeated",
     "show_new": "Show new",
+    "error": "Error loading status",
     "reload": "Reload",
     "up_to_date": "Up-to-date",
     "no_more_statuses": "No more statuses",

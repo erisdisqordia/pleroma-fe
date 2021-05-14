@@ -6,6 +6,7 @@ import Conversation from '../conversation/conversation.vue'
 import TabSwitcher from 'src/components/tab_switcher/tab_switcher.js'
 import List from '../list/list.vue'
 import withLoadMore from '../../hocs/with_load_more/with_load_more'
+import { mapState, mapGetters } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faCircleNotch
@@ -74,7 +75,12 @@ const UserProfile = {
     },
     followersTabVisible () {
       return this.isUs || !this.user.hide_followers
-    }
+    },
+    ...mapState({
+      currentUser: state => state.users.currentUser,
+      privateMode: state => state.instance.private
+    }),
+    ...mapGetters(['unreadChatCount'])
   },
   methods: {
     load (userNameOrId) {

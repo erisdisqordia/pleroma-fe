@@ -87,6 +87,7 @@
           </FollowerList>
         </div>
         <Timeline
+          v-if="currentUser || !privateMode"
           key="media"
           :label="$t('user_card.media')"
           :disabled="!media.visibleStatuses.length"

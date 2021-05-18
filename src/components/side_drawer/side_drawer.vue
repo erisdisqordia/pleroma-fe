@@ -106,7 +106,7 @@
           </router-link>
         </li>
         <li
-          v-if="chat"
+          v-if="chat && !hideSB"
           @click="toggleDrawer"
         >
           <router-link :to="{ name: 'chat-panel' }">

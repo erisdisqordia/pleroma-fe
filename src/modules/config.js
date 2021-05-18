@@ -20,6 +20,7 @@ export const defaultState = {
   customTheme: undefined,
   customThemeSource: undefined,
   hideISP: false,
+  hideShoutbox: false,
   sidebarRight: true,
   showThirdColumn: false,
   hideInstanceWallpaper: false,

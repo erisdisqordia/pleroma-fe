@@ -65,6 +65,9 @@ const SideDrawer = {
     hideSitename () {
       return this.$store.state.instance.hideSitename
     },
+    hideSB () {
+      return this.$store.getters.mergedConfig.hideShoutbox
+    },
     sitename () {
       return this.$store.state.instance.name
     },
@@ -86,7 +89,7 @@ const SideDrawer = {
     ...mapState({
       pleromaChatMessagesAvailable: state => state.instance.pleromaChatMessagesAvailable
     }),
-    ...mapGetters(['unreadChatCount'])
+    ...mapGetters(['unreadChatCount', 'mergedConfig'])
   },
   methods: {
     toggleDrawer () {

@@ -1,4 +1,5 @@
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
+import { mapGetters } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faBath,
@@ -22,7 +23,11 @@ const chatPanel = {
   computed: {
     messages () {
       return this.$store.state.chat.messages
-    }
+    },
+    hideSB () {
+      return this.$store.getters.mergedConfig.hideShoutbox
+    },
+    ...mapGetters(['mergedConfig'])
   },
   methods: {
     submit (message) {

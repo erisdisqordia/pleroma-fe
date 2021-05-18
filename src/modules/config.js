@@ -21,6 +21,7 @@ export const defaultState = {
   customThemeSource: undefined,
   hideISP: false,
   sidebarRight: true,
+  showThirdColumn: false,
   hideInstanceWallpaper: false,
   // bad name: actually hides posts of muted USERS
   hideMutedPosts: undefined, // instance default

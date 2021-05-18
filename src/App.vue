@@ -12,6 +12,7 @@
     <div class="app-bg-wrapper app-container-wrapper" />
     <div
       id="content"
+      :style="thirdColumnLayout"
       class="container underlay"
     >
       <div
@@ -27,13 +28,15 @@
                 <instance-specific-panel v-if="showInstanceSpecificPanel" />
                 <features-panel v-if="!currentUser && showFeaturesPanel" />
                 <who-to-follow-panel v-if="currentUser && suggestionsEnabled" />
-                <notifications v-if="currentUser" />
+                <notifications v-if="currentUser && !thirdColumnEnabled" />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="main">
+      <div
+        class="main"
+      >
         <div
           v-if="!currentUser"
           class="login-hint panel panel-default"
@@ -47,6 +50,23 @@
         </div>
         <router-view />
       </div>
+      <div
+        v-if="thirdColumnEnabled"
+        class="sidebar-flexer mobile-hidden"
+        :style="notifsAlign"
+      >
+        <div class="sidebar-bounds">
+          <div class="sidebar-scroller">
+            <div class="sidebar">
+              <div v-if="!isMobileLayout">
+                <notifications v-if="currentUser" />
+                <features-panel v-if="!currentUser && showFeaturesPanel" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <media-modal />
     </div>
     <chat-panel

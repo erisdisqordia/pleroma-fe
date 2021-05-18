@@ -425,6 +425,7 @@
     "reset_banner_confirm": "Do you really want to reset the banner?",
     "reset_background_confirm": "Do you really want to reset the background?",
     "settings": "Settings",
+    "show_third_column": "Show separate notifications column",
     "subject_input_always_show": "Always show subject field",
     "subject_line_behavior": "Copy subject when replying",
     "subject_line_email": "Like email: \"re: subject\"",

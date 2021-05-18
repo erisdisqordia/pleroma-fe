@@ -16,6 +16,11 @@
             {{ $t('settings.right_sidebar') }}
           </BooleanSetting>
         </li>
+        <li>
+          <BooleanSetting path="showThirdColumn">
+            {{ $t('settings.show_third_column') }}
+          </BooleanSetting>
+        </li>
         <li v-if="instanceWallpaperUsed">
           <BooleanSetting path="hideInstanceWallpaper">
             {{ $t('settings.hide_wallpaper') }}

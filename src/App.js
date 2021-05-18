@@ -77,7 +77,7 @@ export default {
     privateMode () { return this.$store.state.instance.private },
     sidebarAlign () {
       return {
-        'order': this.$store.state.instance.sidebarRight ? 99 : 0
+        'order': this.$store.getters.mergedConfig.sidebarRight ? 99 : 0
       }
     },
     ...mapGetters(['mergedConfig'])

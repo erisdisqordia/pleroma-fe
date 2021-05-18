@@ -407,6 +407,7 @@
     "reply_visibility_following": "Only show replies directed at me or users I'm following",
     "reply_visibility_self": "Only show replies directed at me",
     "autohide_floating_post_button": "Automatically hide New Post button (mobile)",
+    "right_sidebar": "Show sidebar on the right side",
     "saving_err": "Error saving settings",
     "saving_ok": "Settings saved",
     "search_user_to_block": "Search whom you want to block",

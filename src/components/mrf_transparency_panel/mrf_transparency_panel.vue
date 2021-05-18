@@ -164,4 +164,7 @@
 .mrf-section {
   margin: 1em;
 }
+.mrf-transparency-panel {
+  padding-bottom: 20px;
+}
 </style>

@@ -38,6 +38,7 @@
   width: 100%;
   .contents {
     min-height: 250px;
+    overflow-x: hidden;
     .sticker-picker-content {
       display: flex;
       flex-wrap: wrap;
@@ -45,9 +46,9 @@
       .sticker {
         display: flex;
         flex: 1 1 auto;
-        margin: 4px;
-        width: 56px;
-        height: 56px;
+        padding-right: 65px;
+        width: 66px;
+        height: 116px;
         img {
           height: 100%;
           &:hover {

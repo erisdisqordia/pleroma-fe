@@ -5,6 +5,7 @@ import TimelineMenu from '../timeline_menu/timeline_menu.vue'
 import { debounce, throttle, keyBy } from 'lodash'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import { mapState } from 'vuex'
 
 library.add(
   faCircleNotch
@@ -97,7 +98,10 @@ const Timeline = {
     },
     virtualScrollingEnabled () {
       return this.$store.getters.mergedConfig.virtualScrolling
-    }
+    },
+    ...mapState({
+      privateMode: state => state.instance.private
+    })
   },
   created () {
     const store = this.$store

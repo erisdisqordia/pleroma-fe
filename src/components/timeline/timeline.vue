@@ -71,7 +71,7 @@
         </div>
       </button>
       <div
-        v-else-if="loggedIn"
+        v-else-if="loggedIn || !privateMode"
         class="new-status-notification text-center panel-footer"
       >
         <FAIcon
@@ -81,7 +81,7 @@
         />
       </div>
       <div
-        v-if="!currentUser && !loggedIn"
+        v-if="!loggedIn && privateMode"
         class="new-status-notification text-center panel-footer"
       >
         <span><a href="https://disqordia.space/login">Log in</a> to view more

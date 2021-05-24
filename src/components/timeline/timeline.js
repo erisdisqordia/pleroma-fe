@@ -50,6 +50,12 @@ const Timeline = {
     TimelineMenu
   },
   computed: {
+    loggedIn () {
+      return !!this.currentUser
+    },
+    currentUser () {
+      return this.$store.state.users.currentUser
+    },
     newStatusCount () {
       return this.timeline.newStatusCount
     },

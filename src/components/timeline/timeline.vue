@@ -62,7 +62,7 @@
         {{ $t('timeline.no_more_statuses') }}
       </div>
       <button
-        v-else-if="!timeline.loading"
+        v-else-if="!timeline.loading && loggedIn"
         class="button-unstyled -link -fullwidth"
         @click.prevent="fetchOlderStatuses()"
       >
@@ -71,7 +71,7 @@
         </div>
       </button>
       <div
-        v-else
+        v-else-if="loggedIn"
         class="new-status-notification text-center panel-footer"
       >
         <FAIcon
@@ -79,6 +79,13 @@
           spin
           size="lg"
         />
+      </div>
+      <div
+        v-if="!currentUser && !loggedIn"
+        class="new-status-notification text-center panel-footer"
+      >
+        <span><a href="https://disqordia.space/login">Log in</a> to view more
+        </span>
       </div>
     </div>
   </div>

@@ -21,7 +21,7 @@ export const defaultState = {
   customThemeSource: undefined,
   hideISP: false,
   hideShoutbox: false,
-  sidebarRight: true,
+  sidebarRight: false,
   showThirdColumn: false,
   hideInstanceWallpaper: false,
   // bad name: actually hides posts of muted USERS
@@ -67,7 +67,7 @@ export const defaultState = {
   playVideosInModal: false,
   useOneClickNsfw: false,
   useContainFit: false,
-  greentext: undefined, // instance default
+  greentext: true, // set to "undefined" if disabling greentext through admin-fe
   hidePostStats: undefined, // instance default
   hideUserStats: undefined, // instance default
   virtualScrolling: undefined, // instance default

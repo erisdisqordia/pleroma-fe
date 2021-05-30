@@ -79,6 +79,7 @@
         <li v-if="currentUser">
           <a
             href="https://write.disqordia.space"
+            target="_blank"
           >
             <FAIcon
               fixed-width

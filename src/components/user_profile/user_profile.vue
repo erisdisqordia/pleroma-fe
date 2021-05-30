@@ -142,7 +142,7 @@
   flex-basis: 500px;
 
   .user-profile-fields {
-    margin: 0 0.5em;
+    margin-left: 0.5em;
 
     img {
       object-fit: contain;

@@ -59,6 +59,7 @@
           <a
             class="menu-item"
             href="https://write.disqordia.space"
+            target="_blank"
           >
             <FAIcon
               fixed-width

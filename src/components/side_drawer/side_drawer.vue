@@ -76,6 +76,17 @@
             </span>
           </router-link>
         </li>
+        <li v-if="currentUser">
+          <a
+            href="https://write.disqordia.space"
+          >
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="book"
+            /> Blogs
+          </a>
+        </li>
       </ul>
       <ul v-if="currentUser">
         <li @click="toggleDrawer">

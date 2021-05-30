@@ -73,6 +73,18 @@
             </span>
           </router-link>
         </li>
+        <li v-if="currentUser">
+          <a
+            class="menu-item"
+            href="https://write.disqordia.space"
+          >
+            <FAIcon
+              fixed-width
+              class="fa-scale-110"
+              icon="book"
+            />Blogs
+          </a>
+        </li>
         <li>
           <router-link
             class="menu-item"

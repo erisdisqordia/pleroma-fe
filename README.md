@@ -19,6 +19,8 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 - [ ] Add "Persistent floating post button" option
 - [ ] Add "Toggle media-only post viewing" in nav bar (similar to dashboard-fe or 4chan X)
 - [ ] Add link to edit profile if viewing your own profile
+- [ ] Add option for smaller navbar in desktop view
+- [ ] Add an option for silent notifications (notifications without unread indicators that you have to click away)
 ### Fixes 
 - [x] Fixed Pleroma looking as if it's continuously loading on private instances, replaces loading circle with "Log in to view more" 
   - [ ] send merge request

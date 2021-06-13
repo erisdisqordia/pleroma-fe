@@ -8,7 +8,7 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 
 ## To-do list 
 - [ ] Create list of all changes
-- [ ] Create and maintain branch that is ready to be used by other instance admins
+- [ ] Create and maintain branch without disqordia specific changes, to be used by other instance admins
 ### Features 
 - [x] **Add sidebar position option (merged upstream)**
 - [x] Add disable instance shoutbox option
@@ -16,12 +16,20 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 - [x] Add separate notifications column option
 - [ ] Add "Persistent floating post button" option
 - [ ] Add "Toggle media-only post viewing" in nav bar (similar to dashboard-fe or 4chan X)
+- [ ] Add link to edit profile if viewing your own profile
 ### Fixes 
 - [x] Fixed Pleroma looking as if it's continuously loading on private instances, replaces loading circle with "Log in to view more" 
   - [ ] send merge request
 ### Tweaks
 - [x] Add "Apply" buttons at the top of Theme settings
   - [ ] send merge request
+### Long-term goals
+- [ ] Add an admin dashboard within pleroma-fe (similar to soapbox-fe)
+- [ ] Implementation of lists
+- [ ] Menu link to mute a user's domain
+- [ ] Allow a user to set if their individual profile is private (similar to how "locked" works on Twitter)
+- [ ] Add option for site layout similar to 4chan userscript OneeChan or AppChan X
+- [ ] Add draggable resizable post form
 
 ## Build Setup
 

@@ -9,6 +9,8 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 ## To-do list 
 - [ ] Create list of all changes
 - [ ] Create and maintain branch without disqordia specific changes, to be used by other instance admins
+- [ ] Update changelog properly
+- [ ] Set a unique version scheme for this fork 
 ### Features 
 - [x] **Add sidebar position option (merged upstream)**
 - [x] Add disable instance shoutbox option

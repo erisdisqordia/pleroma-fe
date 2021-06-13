@@ -1,16 +1,26 @@
-# Pleroma-FE 
+# Disqordia.space fork of pleroma-fe 
 
-> A single column frontend designed for Pleroma.
+Note: This contains many changes specific to Disqordia.space, such as changes to appearance, language, icons, etc.
 
-![screenshot](/uploads/796c5ecf985ed1e2b0943ee0df131ed0/DJVqSJ0.png)
+I plan to set up a branch for use on any instance for other pleroma admins (see to-do list)
 
-# For Translators
+![Screenshot_20210613_014229](https://user-images.githubusercontent.com/84041118/121800817-d4ebb380-cbe8-11eb-82fc-4840b8e6f489.png)
 
-To translate Pleroma-FE, add your language to [src/i18n/messages.js](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/src/i18n/messages.js). Pleroma-FE will set your language by your browser locale, but you can temporarily force it in the code by changing the locale in main.js.
-
-# FOR ADMINS
-
-You don't need to build Pleroma-FE yourself. Those using the Pleroma backend will be able to use it out of the box.
+## To-do list 
+- [ ] Create list of all changes
+- [ ] Create and maintain branch that is ready to be used by other instance admins
+### Features 
+- [x] Add sidebar position option
+- [x] **Add disable instance shoutbox option (merged upstream)**
+- [x] Add separate notifications column option
+- [ ] Add "Persistent floating post button" option
+- [ ] Add "Toggle media-only post viewing" in nav bar (similar to dashboard-fe or 4chan X)
+### Fixes 
+- [x] Fixed Pleroma looking as if it's continuously loading on private instances, replaces loading circle with "Log in to view more" 
+  - [ ] send merge request
+### Tweaks
+- [x] Add "Apply" buttons at the top of Theme settings
+  - [ ] send merge request
 
 ## Build Setup
 
@@ -37,13 +47,3 @@ You can create file `/config/local.json` (see [example](https://git.pleroma.soci
 * `staticConfigPreference`: makes FE's `/static/config.json` take preference of BE-served `/api/statusnet/config.json`. Only works in dev mode.
 
 FE Build process also leaves current commit hash in global variable `___pleromafe_commit_hash` so that you can easily see which pleroma-fe commit instance is running, also helps pinpointing which commit was used when FE was bundled into BE.
-
-# Configuration
-
-Edit config.json for configuration.
-
-## Options
-
-### Login methods
-
-```loginMethod``` can be set to either ```password``` (the default) or ```token```, which will use the full oauth redirection flow, which is useful for SSO situations.

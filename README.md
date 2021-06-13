@@ -30,6 +30,7 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 - [ ] Allow a user to set if their individual profile is private (similar to how "locked" works on Twitter)
 - [ ] Add option for site layout similar to 4chan userscript OneeChan or AppChan X
 - [ ] Add draggable resizable post form
+- [ ] Add customizable sidebar links (like soapbox-fe)
 
 ## Build Setup
 

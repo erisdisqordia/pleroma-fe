@@ -10,8 +10,9 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 - [ ] Create list of all changes
 - [ ] Create and maintain branch that is ready to be used by other instance admins
 ### Features 
-- [x] Add sidebar position option
-- [x] **Add disable instance shoutbox option (merged upstream)**
+- [x] **Add sidebar position option (merged upstream)**
+- [x] Add disable instance shoutbox option
+  - [ ] send merge request
 - [x] Add separate notifications column option
 - [ ] Add "Persistent floating post button" option
 - [ ] Add "Toggle media-only post viewing" in nav bar (similar to dashboard-fe or 4chan X)

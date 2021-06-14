@@ -73,6 +73,7 @@
       v-if="currentUser && chat"
       :floating="true"
       class="floating-chat mobile-hidden"
+      :class="{ 'left': shoutboxPosition }"
     />
     <MobilePostStatusButton />
     <UserReportingModal />

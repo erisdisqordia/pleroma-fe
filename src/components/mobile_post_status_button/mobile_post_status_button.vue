@@ -2,7 +2,7 @@
   <div v-if="isLoggedIn">
     <button
       class="button-default new-status-button"
-      :class="{ 'hidden': isHidden }"
+      :class="{ 'hidden': isHidden, 'always-show': isPersistent }"
       @click="openPostForm"
     >
       <FAIcon icon="pencil-alt" />
@@ -47,9 +47,8 @@
 }
 
 @media all and (min-width: 801px) {
-  .new-status-button {
+  .new-status-button:not(.always-show) {
     display: none;
   }
 }
-
 </style>

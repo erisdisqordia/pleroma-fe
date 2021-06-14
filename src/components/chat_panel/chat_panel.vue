@@ -83,10 +83,17 @@
 
 .floating-chat {
   position: fixed;
-  right: 0px;
   bottom: 0px;
   z-index: 1000;
   max-width: 25em;
+}
+
+.floating-chat.left {
+  left: 0px;
+}
+
+.floating-chat:not(.left) {
+  right: 0px;
 }
 
 .chat-panel {

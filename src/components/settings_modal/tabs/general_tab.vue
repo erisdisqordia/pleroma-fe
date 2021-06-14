@@ -31,6 +31,11 @@
             {{ $t('settings.hide_shoutbox') }}
           </BooleanSetting>
         </li>
+        <li>
+          <BooleanSetting path="showNewPostButton">
+            {{ $t('settings.showPostButton') }}
+          </BooleanSetting>
+        </li>
       </ul>
     </div>
     <div class="setting-item">

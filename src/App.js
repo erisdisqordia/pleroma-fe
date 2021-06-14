@@ -78,6 +78,9 @@ export default {
     shoutboxPosition () {
       return this.$store.getters.mergedConfig.showNewPostButton || false
     },
+    hideSB () {
+      return this.$store.getters.mergedConfig.hideShoutbox
+    },
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
     isMobileLayout () { return this.$store.state.interface.mobileLayout },
     privateMode () { return this.$store.state.instance.private },

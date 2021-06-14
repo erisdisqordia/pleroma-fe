@@ -14,10 +14,10 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 ### Features 
 - [x] **Add sidebar position option (merged upstream)**
 - [x] Add disable instance shoutbox option
-  - [ ] send merge request
+  - [x] send merge request
 - [x] Add separate notifications column option
 - [x] Add "Persistent floating post button" option
-  - [ ] send merge request upstream
+  - [x] send merge request upstream
 - [ ] Add "Toggle media-only post viewing" in nav bar (similar to dashboard-fe or 4chan X)
 - [ ] Add link to edit profile if viewing your own profile
 - [ ] Add option for smaller navbar in desktop view
@@ -28,7 +28,7 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
   - [ ] send merge request
 ### Tweaks
 - [x] Add "Apply" buttons at the top of Theme settings
-  - [ ] send merge request
+  - [x] send merge request
 ### Long-term goals
 - [ ] Add an admin dashboard within pleroma-fe (similar to soapbox-fe)
 - [ ] Implementation of lists

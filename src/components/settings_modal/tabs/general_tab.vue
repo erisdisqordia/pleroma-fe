@@ -28,7 +28,7 @@
         </li>
         <li>
           <BooleanSetting path="hideShoutbox">
-            {{ $t('settings.hide_shoutbox') }}
+            {{ $t('settings.hide_shoutbox') }} {{ $t('shoutbox.title') }}
           </BooleanSetting>
         </li>
         <li>

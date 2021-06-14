@@ -340,7 +340,7 @@
     "max_thumbnails": "Maximum amount of thumbnails per post",
     "hide_isp": "Hide instance-specific panel",
     "hide_wallpaper": "Hide instance wallpaper",
-    "hide_shoutbox": "Hide shoutbox feature",
+    "hide_shoutbox": "Hide ", // adds shoutbox title name after this
     "showPostButton": "Always show floating new post button",
     "preload_images": "Preload images",
     "use_one_click_nsfw": "Open NSFW attachments with just one click",

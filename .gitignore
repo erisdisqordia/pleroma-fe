@@ -7,3 +7,6 @@ test/e2e/reports
 selenium-debug.log
 .idea/
 config/local.json
+.gitignore
+src/App.js.save
+yarn-error.log

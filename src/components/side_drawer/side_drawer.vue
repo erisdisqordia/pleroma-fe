@@ -125,7 +125,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110 fa-old-padding"
-              icon="bath"
+              icon="cat"
             /> {{ $t("shoutbox.title") }}
           </router-link>
         </li>

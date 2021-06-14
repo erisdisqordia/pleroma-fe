@@ -2,12 +2,12 @@ import generateProfileLink from 'src/services/user_profile_link_generator/user_p
 import { mapGetters } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faBath,
+  faCat,
   faTimes
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faBath,
+  faCat,
   faTimes
 )
 

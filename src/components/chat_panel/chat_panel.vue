@@ -66,7 +66,7 @@
           <div class="title">
             <FAIcon
               class="icon"
-              icon="bath"
+              icon="cat"
             />
             {{ $t('shoutbox.title') }}
           </div>

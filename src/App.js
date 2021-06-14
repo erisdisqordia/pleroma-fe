@@ -75,6 +75,9 @@ export default {
     thirdColumnEnabled () {
       return this.$store.getters.mergedConfig.showThirdColumn || false
     },
+    shoutboxPosition () {
+      return this.$store.getters.mergedConfig.showNewPostButton || false
+    },
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
     isMobileLayout () { return this.$store.state.interface.mobileLayout },
     privateMode () { return this.$store.state.instance.private },

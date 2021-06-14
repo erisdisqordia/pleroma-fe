@@ -23,6 +23,9 @@
 <style lang="scss">
 .modal-view.post-form-modal-view {
   align-items: flex-start;
+  textarea {
+    min-height: 80px;
+  }
 }
 
 .post-form-modal-panel {

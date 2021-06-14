@@ -44,6 +44,9 @@ const MobilePostStatusButton = {
 
       return this.autohideFloatingPostButton && (this.hidden || this.inputActive)
     },
+    isPersistent () {
+      return !!this.$store.getters.mergedConfig.showNewPostButton
+    },
     autohideFloatingPostButton () {
       return !!this.$store.getters.mergedConfig.autohideFloatingPostButton
     }

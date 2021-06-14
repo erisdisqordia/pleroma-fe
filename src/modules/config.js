@@ -32,6 +32,7 @@ export const defaultState = {
   hideAttachmentsInConv: false,
   maxThumbnails: 16,
   hideNsfw: true,
+  showNewPostButton: true,
   preloadImage: true,
   loopVideo: true,
   loopVideoSilentOnly: true,

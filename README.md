@@ -22,6 +22,7 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 - [ ] Add link to edit profile if viewing your own profile
 - [ ] Add option for smaller navbar in desktop view
 - [ ] Add an option for silent notifications (notifications without unread indicators that you have to click away)
+- [ ] Option to move shoutbox to top nav icon to save space
 ### Fixes 
 - [x] Fixed Pleroma looking as if it's continuously loading on private instances, replaces loading circle with "Log in to view more" 
   - [ ] send merge request

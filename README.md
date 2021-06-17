@@ -69,6 +69,17 @@ cp dist/index.html /var/lib/pleroma/static/index.html
 # Refresh your instance and it should now be running this fork!
 ```
 
+## Removing this fork for the built in pleroma-fe
+
+Removing is easy as the fork shouldn't touch the default pleroma-fe, so just remove what we installed:
+
+``` bash
+cd /var/lib/pleroma/static/static
+rm -rf js css 
+cd /var/lib/pleroma/static
+rm index.html
+```
+
 # For Contributors:
 
 You can create file `/config/local.json` (see [example](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/config/local.example.json)) to enable some convenience dev options:

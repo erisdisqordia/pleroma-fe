@@ -53,6 +53,18 @@
               >
                 {{ user.name }}
               </div>
+              <button
+                v-if="!isOtherUser && user.is_local"
+                class="button-unstyled edit-profile-button"
+                @click.stop="openProfileTab"
+              >
+                <FAIcon
+                  fixed-width
+                  class="icon"
+                  icon="edit"
+                  :title="$t('user_card.edit_profile')"
+                />
+              </button>
               <a
                 v-if="isOtherUser && !user.is_local"
                 :href="user.statusnet_profile_url"
@@ -427,7 +439,7 @@
     }
   }
 
-  .external-link-button {
+  .external-link-button, .edit-profile-button {
     cursor: pointer;
     width: 2.5em;
     text-align: center;

@@ -12,6 +12,7 @@ import {
   faRss,
   faChevronDown,
   faSearchPlus,
+  faEdit,
   faExternalLinkAlt
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -20,6 +21,7 @@ library.add(
   faBell,
   faChevronDown,
   faSearchPlus,
+  faEdit,
   faExternalLinkAlt
 )
 
@@ -138,6 +140,9 @@ export default {
         const store = this.$store
         store.commit('setProfileView', { v })
       }
+    },
+    openProfileTab () {
+      this.$store.dispatch('openSettingsModalTab', 'profile')
     },
     linkClicked ({ target }) {
       if (target.tagName === 'SPAN') {

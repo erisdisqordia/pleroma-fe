@@ -38,21 +38,33 @@
 - [ ] Add draggable resizable post form
 - [ ] Add customizable sidebar links (like soapbox-fe)
 
-## Build Setup
+## Installing this fork on your instance
 
 ``` bash
+# clone the repo 
+git clone https://github.com/erisdisqordia/pleroma-fe.git
+
 # install dependencies
 npm install -g yarn
 yarn
 
-# serve with hot reload at localhost:8080
+# test that it works at localhost:8080
 npm run dev
 
-# build for production with minification
+# build for production with minification into /dist/ folder
 npm run build
 
-# run unit tests
-npm run unit
+# backup current static directory if needed
+mv /var/lib/pleroma/static/static/js jsbackup
+mv /var/lib/pleroma/static/static/css cssbackup
+mv /var/lib/pleroma/static/index.html index.html.orig
+
+# install files
+cp -r dist/static/js /var/lib/pleroma/static/static/js
+cp -r dist/static/css /var/lib/pleroma/static/static/css
+cp dist/index.html /var/lib/pleroma/static/index.html
+
+# Refresh your instance and it should now be running this fork!
 ```
 
 # For Contributors:

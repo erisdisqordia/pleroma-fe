@@ -40,17 +40,20 @@
 
 ## Installing this fork on your instance
 
-Download the current zip file [here](https://github.com/erisdisqordia/pleroma-fe/raw/master/release.zip)
+Installing and removing this fork is easy, and you can revert back to regular pleroma-fe at any time.
+Pleroma lets us override the defaults risk-free using your static folder in `/var/lib/pleroma/static/`
 
-Back up your static folder, usually `/var/lib/pleroma/static/`: `cp -r /var/lib/pleroma/static ~/pleroma-backup`
+### To install:
 
-Extract the contents to your static folder, usually `/var/lib/pleroma/static/`
-
-This means `index.html` should be in `/var/lib/pleroma/static/index.html` and the `js` and `css` folders should be in `/var/lib/pleroma/static/static/(js/css)`
+- Download the current zip file [here](https://github.com/erisdisqordia/pleroma-fe/raw/master/release.zip)
+- Back up your static folder
+  - `cp -r /var/lib/pleroma/static ~/pleroma-backup`
+- Extract the contents to your static folder
+- This means `index.html` should be in `/var/lib/pleroma/static/index.html` and the `js` and `css` folders should be in `/var/lib/pleroma/static/static/(js/css)`
 
 That's it!
 
-## Removing this fork for the built in pleroma-fe
+### Removing this fork for the built in pleroma-fe
 
 Removing is easy as the fork shouldn't touch the default pleroma-fe, so just remove what we installed:
 

@@ -61,6 +61,39 @@ cd /var/lib/pleroma/static
 rm index.html
 ```
 
+## Building yourself to make your own changes
+
+``` bash
+# clone the repo 
+git clone https://github.com/erisdisqordia/pleroma-fe.git
+cd pleroma-fe
+git checkout master
+
+# install dependencies
+npm install -g yarn
+yarn
+
+# make your changes
+# languages options are in src/i18n/en.json
+# most features have their own folder in src/components/
+
+# once you're happy, test that it works at localhost:8080 (see "For Contributors" section below to load your instance backend with it
+npm run dev
+
+# Back up your static folder, usually /var/lib/pleroma/static/
+cp -r /var/lib/pleroma/static ~/pleroma-backup
+
+# build for production with minifications with output into the /dist/ folder 
+npm run build
+
+# install files
+cp -r dist/static/js /var/lib/pleroma/static/static/js
+cp -r dist/static/css /var/lib/pleroma/static/static/css
+cp dist/index.html /var/lib/pleroma/static/index.html
+
+# Refresh your instance and you should see your changes!
+```
+
 # For Contributors:
 
 You can create file `/config/local.json` (see [example](https://git.pleroma.social/pleroma/pleroma-fe/blob/develop/config/local.example.json)) to enable some convenience dev options:

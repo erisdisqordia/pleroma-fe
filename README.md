@@ -49,9 +49,9 @@ Pleroma lets us override the defaults risk-free using your static folder in `/va
 - Back up your static folder
   - `cp -r /var/lib/pleroma/static ~/pleroma-backup`
 - Extract the contents to your static folder
-- This means `index.html` should be in `/var/lib/pleroma/static/index.html` and the `js` and `css` folders should be in `/var/lib/pleroma/static/static/(js/css)`
+  - This means `index.html` should be in `/var/lib/pleroma/static/index.html` and the `js` and `css` folders should be in `/var/lib/pleroma/static/static/(js/css)`
 
-That's it!
+That's it! When you refresh the page it should load this fork.
 
 ### Removing this fork for the built in pleroma-fe
 

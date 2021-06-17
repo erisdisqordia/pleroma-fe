@@ -597,6 +597,10 @@
   }
 }
 
+.sidebar .edit-profile-button {
+  display: none;
+}
+
 .user-counts {
   display: flex;
   line-height:16px;

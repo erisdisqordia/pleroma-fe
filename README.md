@@ -1,14 +1,14 @@
 # Disqordia.space fork of pleroma-fe 
 
-Note: This contains many changes specific to Disqordia.space, such as changes to appearance, language, icons, etc.
+**Master** branch is the official branch, this does not contain many Disqordia.space-specific changes (icon and name changes) unless I feel its warranted
 
-I plan to set up a branch for use on any instance for other pleroma admins (see to-do list)
+**Disqordia** branch is what you see on Disqordia.space
 
 ![Screenshot_20210613_014229](https://user-images.githubusercontent.com/84041118/121800817-d4ebb380-cbe8-11eb-82fc-4840b8e6f489.png)
 
 ## To-do list 
 - [ ] Create list of all changes
-- [ ] Create and maintain branch without disqordia specific changes, to be used by other instance admins
+- [x] Create and maintain branch without disqordia specific changes, to be used by other instance admins
 - [ ] Update changelog properly
 - [ ] Set a unique version scheme for this fork 
 ### Features 
@@ -19,7 +19,7 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 - [x] Add "Persistent floating post button" option
   - [x] send merge request upstream
 - [ ] Add "Toggle media-only post viewing" in nav bar (similar to dashboard-fe or 4chan X)
-- [ ] Add link to edit profile if viewing your own profile
+- [x] Add link to edit profile if viewing your own profile
 - [ ] Add option for smaller navbar in desktop view
 - [ ] Add an option for silent notifications (notifications without unread indicators that you have to click away)
 - [ ] Option to move shoutbox to top nav icon to save space

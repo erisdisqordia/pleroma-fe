@@ -40,34 +40,15 @@
 
 ## Installing this fork on your instance
 
-``` bash
-# clone the repo 
-git clone https://github.com/erisdisqordia/pleroma-fe.git
-cd pleroma-fe
-git checkout master
+Download the current zip file [here](https://github.com/erisdisqordia/pleroma-fe/raw/master/release.zip)
 
-# install dependencies
-npm install -g yarn
-yarn
+Back up your static folder, usually `/var/lib/pleroma/static/`: `cp -r /var/lib/pleroma/static ~/pleroma-backup`
 
-# test that it works at localhost:8080
-npm run dev
+Extract the contents to your static folder, usually `/var/lib/pleroma/static/`
 
-# build for production with minification into /dist/ folder
-npm run build
+This means `index.html` should be in `/var/lib/pleroma/static/index.html` and the `js` and `css` folders should be in `/var/lib/pleroma/static/static/(js/css)`
 
-# backup current static directory if needed
-mv /var/lib/pleroma/static/static/js jsbackup
-mv /var/lib/pleroma/static/static/css cssbackup
-mv /var/lib/pleroma/static/index.html index.html.orig
-
-# install files
-cp -r dist/static/js /var/lib/pleroma/static/static/js
-cp -r dist/static/css /var/lib/pleroma/static/static/css
-cp dist/index.html /var/lib/pleroma/static/index.html
-
-# Refresh your instance and it should now be running this fork!
-```
+That's it!
 
 ## Removing this fork for the built in pleroma-fe
 

@@ -43,6 +43,8 @@
 ``` bash
 # clone the repo 
 git clone https://github.com/erisdisqordia/pleroma-fe.git
+cd pleroma-fe
+git checkout master
 
 # install dependencies
 npm install -g yarn

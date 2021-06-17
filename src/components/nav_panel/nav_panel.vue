@@ -10,7 +10,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110"
-              icon="satellite"
+              icon="stream"
             />{{ $t("nav.timelines") }}
             <FAIcon
               class="timelines-chevron"
@@ -55,19 +55,6 @@
             />{{ $t("nav.chats") }}
           </router-link>
         </li>
-        <li v-if="currentUser">
-          <a
-            class="menu-item"
-            href="https://write.disqordia.space"
-            target="_blank"
-          >
-            <FAIcon
-              fixed-width
-              class="fa-scale-110"
-              icon="book"
-            />Blogs
-          </a>
-        </li>
         <li v-if="currentUser && currentUser.locked">
           <router-link
             class="menu-item"
@@ -94,7 +81,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110"
-              icon="transgender-alt"
+              icon="info-circle"
             />{{ $t("nav.about") }}
           </router-link>
         </li>

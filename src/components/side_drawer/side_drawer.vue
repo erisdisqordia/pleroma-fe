@@ -51,7 +51,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110 fa-old-padding"
-              icon="satellite"
+              icon="home"
             /> {{ $t("nav.timelines") }}
           </router-link>
         </li>
@@ -75,18 +75,6 @@
               {{ unreadChatCount }}
             </span>
           </router-link>
-        </li>
-        <li v-if="currentUser">
-          <a
-            href="https://write.disqordia.space"
-            target="_blank"
-          >
-            <FAIcon
-              fixed-width
-              class="fa-scale-110 fa-old-padding"
-              icon="book"
-            /> Blogs
-          </a>
         </li>
       </ul>
       <ul v-if="currentUser">
@@ -125,7 +113,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110 fa-old-padding"
-              icon="cat"
+              icon="bullhorn"
             /> {{ $t("shoutbox.title") }}
           </router-link>
         </li>
@@ -172,7 +160,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110 fa-old-padding"
-              icon="transgender-alt"
+              icon="info-circle"
             /> {{ $t("nav.about") }}
           </router-link>
         </li>

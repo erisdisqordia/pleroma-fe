@@ -4,11 +4,11 @@ import { mapGetters, mapState } from 'vuex'
 import BasicUserCard from '../basic_user_card/basic_user_card.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
-  faPastafarianism
+  faUsers
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
-  faPastafarianism
+  faUsers
 )
 
 const StaffPanel = {

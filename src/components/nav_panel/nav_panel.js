@@ -9,7 +9,7 @@ import {
   faEnvelope,
   faChevronDown,
   faChevronUp,
-  faStream,
+  faProjectDiagram,
   faComments,
   faBolt,
   faInfoCircle
@@ -22,7 +22,7 @@ library.add(
   faEnvelope,
   faChevronDown,
   faChevronUp,
-  faStream,
+  faProjectDiagram,
   faComments,
   faBolt,
   faInfoCircle

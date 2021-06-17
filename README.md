@@ -1,14 +1,14 @@
 # Disqordia.space fork of pleroma-fe 
 
-Note: This contains many changes specific to Disqordia.space, such as changes to appearance, language, icons, etc.
+**Master** branch is the official branch, this does not contain many Disqordia.space-specific changes (icon and name changes) unless I feel its warranted
 
-I plan to set up a branch for use on any instance for other pleroma admins (see to-do list)
+**Disqordia** branch is what you see on Disqordia.space
 
 ![Screenshot_20210613_014229](https://user-images.githubusercontent.com/84041118/121800817-d4ebb380-cbe8-11eb-82fc-4840b8e6f489.png)
 
 ## To-do list 
 - [ ] Create list of all changes
-- [ ] Create and maintain branch without disqordia specific changes, to be used by other instance admins
+- [x] Create and maintain branch without disqordia specific changes, to be used by other instance admins
 - [ ] Update changelog properly
 - [ ] Set a unique version scheme for this fork 
 ### Features 
@@ -19,7 +19,7 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 - [x] Add "Persistent floating post button" option
   - [x] send merge request upstream
 - [ ] Add "Toggle media-only post viewing" in nav bar (similar to dashboard-fe or 4chan X)
-- [ ] Add link to edit profile if viewing your own profile
+- [x] Add link to edit profile if viewing your own profile
 - [ ] Add option for smaller navbar in desktop view
 - [ ] Add an option for silent notifications (notifications without unread indicators that you have to click away)
 - [ ] Option to move shoutbox to top nav icon to save space
@@ -38,21 +38,46 @@ I plan to set up a branch for use on any instance for other pleroma admins (see 
 - [ ] Add draggable resizable post form
 - [ ] Add customizable sidebar links (like soapbox-fe)
 
-## Build Setup
+## Installing this fork on your instance
 
 ``` bash
+# clone the repo 
+git clone https://github.com/erisdisqordia/pleroma-fe.git
+cd pleroma-fe
+git checkout master
+
 # install dependencies
 npm install -g yarn
 yarn
 
-# serve with hot reload at localhost:8080
+# test that it works at localhost:8080
 npm run dev
 
-# build for production with minification
+# build for production with minification into /dist/ folder
 npm run build
 
-# run unit tests
-npm run unit
+# backup current static directory if needed
+mv /var/lib/pleroma/static/static/js jsbackup
+mv /var/lib/pleroma/static/static/css cssbackup
+mv /var/lib/pleroma/static/index.html index.html.orig
+
+# install files
+cp -r dist/static/js /var/lib/pleroma/static/static/js
+cp -r dist/static/css /var/lib/pleroma/static/static/css
+cp dist/index.html /var/lib/pleroma/static/index.html
+
+# Refresh your instance and it should now be running this fork!
+```
+
+## Removing this fork for the built in pleroma-fe
+
+Removing is easy as the fork shouldn't touch the default pleroma-fe, so just remove what we installed:
+
+``` bash
+cd /var/lib/pleroma/static/static
+rm -rf js css 
+cd /var/lib/pleroma/static
+rm index.html
 ```
 
 # For Contributors:

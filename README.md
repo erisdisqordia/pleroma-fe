@@ -40,6 +40,32 @@
 
 ## Installing this fork on your instance
 
+Installing and removing this fork is easy, and you can revert back to regular pleroma-fe at any time.
+Pleroma lets us override the defaults risk-free using your static folder in `/var/lib/pleroma/static/`
+
+### To install:
+
+- Download the current zip file [here](https://github.com/erisdisqordia/pleroma-fe/raw/master/release.zip)
+- Back up your static folder
+  - `cp -r /var/lib/pleroma/static ~/pleroma-backup`
+- Extract the contents to your static folder
+  - This means `index.html` should be in `/var/lib/pleroma/static/index.html` and the `js` and `css` folders should be in `/var/lib/pleroma/static/static/(js/css)`
+
+That's it! When you refresh the page it should load this fork.
+
+### Removing this fork for the built in pleroma-fe
+
+Removing is easy as the fork shouldn't touch the default pleroma-fe, so just remove what we installed:
+
+``` bash
+cd /var/lib/pleroma/static/static
+rm -rf js css 
+cd /var/lib/pleroma/static
+rm index.html
+```
+
+## Building yourself to make your own changes
+
 ``` bash
 # clone the repo 
 git clone https://github.com/erisdisqordia/pleroma-fe.git
@@ -50,34 +76,25 @@ git checkout master
 npm install -g yarn
 yarn
 
-# test that it works at localhost:8080
+# make your changes
+# languages options are in src/i18n/en.json
+# most features have their own folder in src/components/
+
+# once you're happy, test that it works at localhost:8080 (see "For Contributors" section below to load your instance backend with it
 npm run dev
 
-# build for production with minification into /dist/ folder
-npm run build
+# Back up your static folder, usually /var/lib/pleroma/static/
+cp -r /var/lib/pleroma/static ~/pleroma-backup
 
-# backup current static directory if needed
-mv /var/lib/pleroma/static/static/js jsbackup
-mv /var/lib/pleroma/static/static/css cssbackup
-mv /var/lib/pleroma/static/index.html index.html.orig
+# build for production with minifications with output into the /dist/ folder 
+npm run build
 
 # install files
 cp -r dist/static/js /var/lib/pleroma/static/static/js
 cp -r dist/static/css /var/lib/pleroma/static/static/css
 cp dist/index.html /var/lib/pleroma/static/index.html
 
-# Refresh your instance and it should now be running this fork!
-```
-
-## Removing this fork for the built in pleroma-fe
-
-Removing is easy as the fork shouldn't touch the default pleroma-fe, so just remove what we installed:
-
-``` bash
-cd /var/lib/pleroma/static/static
-rm -rf js css 
-cd /var/lib/pleroma/static
-rm index.html
+# Refresh your instance and you should see your changes!
 ```
 
 # For Contributors:

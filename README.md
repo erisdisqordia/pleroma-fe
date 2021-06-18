@@ -4,13 +4,15 @@
 
 **Disqordia** branch is what you see on Disqordia.space
 
+All Disqordia fork changes are listed in the [Changelog](https://github.com/erisdisqordia/pleroma-fe/blob/master/CHANGELOG.md#disqordia-fork-changes)
+
 ![Screenshot_20210613_014229](https://user-images.githubusercontent.com/84041118/121800817-d4ebb380-cbe8-11eb-82fc-4840b8e6f489.png)
 
 ## To-do list 
-- [ ] Create list of all changes
+- [x] Create list of all changes
 - [x] Create and maintain branch without disqordia specific changes, to be used by other instance admins
-- [ ] Update changelog properly
-- [ ] Set a unique version scheme for this fork 
+- [x] Update changelog properly
+
 ### Features 
 - [x] **Add sidebar position option (merged upstream)**
 - [x] Add disable instance shoutbox option

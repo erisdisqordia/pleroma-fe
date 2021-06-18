@@ -3,6 +3,30 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## Disqordia fork changes
+All fork changes by eris@disqordia.space unless indicated otherwise 
+### Fixed 
+- Fixed timelines appearing to constantly load when logged out if instance is set to private 
+- Fixed media tab showing when logged out if instance is set to private
+### Added
+- Option to change sidebar position 
+- Option to hide shoutbox 
+- Option for persistent new post button (normally mobile only) 
+- Option to show seperate notifications column (based on [puniko's fork](https://git.pleroma.social/absturztaube/pleroma-fe))
+- "Edit Profile" button when viewing your own profile
+- Added icons for "Conversations" and "Staff" 
+- Added Apply/Reset buttons to top of theme tab for easier theme selection
+
+### Changed
+- Standardize naming of timelines in line with Mastodon/Tusky (Public -> Local, The Whole Known Network -> Public)
+- Changed naming of color variable descriptions in theme tab to be more clear
+- Changed icon of emoji selector to be a cute spooky ghost
+- Changed icon of Interactions link to a thunderbolt (like Tumblr's activity icon), as this is separate from Notifications
+
+# Upstream
+## [Merged but unreleased]
+- Added option to mark posts as sensitive by default
+- Collapsable timeline menu in sidebar
 
 ## [2.3.0] - 2021-03-01
 ### Fixed

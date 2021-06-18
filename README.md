@@ -1,5 +1,7 @@
 # Disqordia.space fork of pleroma-fe 
 
+This fork includes several new options and tweaks, some of which have been merged upstream 
+
 **Master** branch is the official branch, intended for use on any instance 
 
 **Disqordia** branch is for modifications intended for only Disqordia.space (such as name changes and icon tweaks) 

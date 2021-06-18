@@ -1,8 +1,8 @@
 # Disqordia.space fork of pleroma-fe 
 
-**Master** branch is the official branch, this does not contain many Disqordia.space-specific changes (icon and name changes) unless I feel its warranted
+**Master** branch is the official branch, intended for use on any instance 
 
-**Disqordia** branch is what you see on Disqordia.space
+**Disqordia** branch is for modifications intended for only Disqordia.space (such as name changes and icon tweaks) 
 
 All Disqordia fork changes are listed in the [Changelog](https://github.com/erisdisqordia/pleroma-fe/blob/master/CHANGELOG.md#disqordia-fork-changes)
 

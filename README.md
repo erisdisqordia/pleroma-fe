@@ -1,12 +1,14 @@
 # Disqordia.space fork of pleroma-fe 
 
-This fork includes several new options and tweaks, some of which have been merged upstream 
+This fork includes several new options and tweaks, some of which have been merged upstream. View all changes in the [Changelog](https://github.com/erisdisqordia/pleroma-fe/blob/master/CHANGELOG.md#disqordia-fork-changes)
 
 **Master** branch is the official branch, intended for use on any instance 
 
 **Disqordia** branch is for modifications intended for only Disqordia.space (such as name changes and icon tweaks) 
 
-All Disqordia fork changes are listed in the [Changelog](https://github.com/erisdisqordia/pleroma-fe/blob/master/CHANGELOG.md#disqordia-fork-changes)
+[Install instructions](#installing-this-fork-on-your-instance)  
+[Build instructions](#building-yourself-to-make-your-own-changes)  
+[Alternate frontends](https://erisdisqordia.github.io/disqordia.space/pleroma/frontends.html)  
 
 ![Screenshot_20210613_014229](https://user-images.githubusercontent.com/84041118/121800817-d4ebb380-cbe8-11eb-82fc-4840b8e6f489.png)
 

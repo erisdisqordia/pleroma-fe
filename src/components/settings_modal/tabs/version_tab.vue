@@ -20,7 +20,7 @@
               <a
                 :href="frontendVersionLink"
                 target="_blank"
-              >{{ frontendVersion }}</a>
+              >{{ frontendVersion }}</a> (Disqordia fork)
             </li>
           </ul>
         </li>

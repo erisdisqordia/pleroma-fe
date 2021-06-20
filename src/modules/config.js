@@ -33,6 +33,7 @@ export const defaultState = {
   maxThumbnails: 16,
   hideNsfw: true,
   showNewPostButton: true,
+  hideFollowRequestCount: false,
   preloadImage: true,
   loopVideo: true,
   loopVideoSilentOnly: true,

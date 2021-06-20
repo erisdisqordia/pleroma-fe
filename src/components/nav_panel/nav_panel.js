@@ -55,7 +55,10 @@ const NavPanel = {
       federating: state => state.instance.federating,
       pleromaChatMessagesAvailable: state => state.instance.pleromaChatMessagesAvailable
     }),
-    ...mapGetters(['unreadChatCount'])
+    hideFollowRequestCount () {
+      return this.$store.getters.mergedConfig.hideFollowRequestCount
+    },
+    ...mapGetters(['unreadChatCount', 'mergedConfig'])
   }
 }
 

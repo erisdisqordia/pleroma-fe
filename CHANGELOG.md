@@ -16,6 +16,7 @@ All fork changes by eris@disqordia.space unless indicated otherwise
 - "Edit Profile" button when viewing your own profile
 - Added icons for "Conversations" and "Staff" 
 - Added Apply/Reset buttons to top of theme tab for easier theme selection
+- Added option to hide follow request count in sidebar, for when you need to just make that little number go away
 
 ### Changed
 - Standardize naming of timelines in line with Mastodon/Tusky (Public -> Local, The Whole Known Network -> Public)

@@ -66,7 +66,7 @@
               icon="user-plus"
             />{{ $t("nav.friend_requests") }}
             <span
-              v-if="followRequestCount > 0"
+              v-if="followRequestCount > 0 && !hideFollowRequestCount"
               class="badge badge-notification"
             >
               {{ followRequestCount }}

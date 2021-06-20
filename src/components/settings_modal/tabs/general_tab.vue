@@ -27,6 +27,11 @@
           </BooleanSetting>
         </li>
         <li>
+          <BooleanSetting path="hideFollowRequestCount">
+            {{ $t('settings.hide_follow_request_count') }}
+          </BooleanSetting>
+        </li>
+        <li>
           <BooleanSetting path="hideShoutbox">
             {{ $t('settings.hide_shoutbox') }} {{ $t('shoutbox.title') }}
           </BooleanSetting>

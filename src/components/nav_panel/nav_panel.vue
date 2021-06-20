@@ -10,7 +10,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110"
-              icon="project-diagram"
+              icon="moon"
             />{{ $t("nav.timelines") }}
             <FAIcon
               class="timelines-chevron"

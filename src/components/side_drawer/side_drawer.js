@@ -6,7 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faSignInAlt,
   faSignOutAlt,
-  faProjectDiagram,
+  faMoon,
   faComments,
   faBolt,
   faUserPlus,
@@ -21,7 +21,7 @@ import {
 library.add(
   faSignInAlt,
   faSignOutAlt,
-  faProjectDiagram,
+  faMoon,
   faComments,
   faBolt,
   faUserPlus,

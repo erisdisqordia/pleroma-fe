@@ -68,6 +68,9 @@ const SideDrawer = {
     hideSB () {
       return this.$store.getters.mergedConfig.hideShoutbox
     },
+    hideFollowRequestCount () {
+      return this.$store.getters.mergedConfig.hideFollowRequestCount
+    },
     sitename () {
       return this.$store.state.instance.name
     },

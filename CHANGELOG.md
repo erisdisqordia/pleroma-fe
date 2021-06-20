@@ -8,6 +8,7 @@ All fork changes by eris@disqordia.space unless indicated otherwise
 ### Fixed 
 - Fixed timelines appearing to constantly load when logged out if instance is set to private 
 - Fixed media tab showing when logged out if instance is set to private
+- Fixed follow request count on mobile showing in wrong location
 ### Added
 - Option to change sidebar position 
 - Option to hide shoutbox 

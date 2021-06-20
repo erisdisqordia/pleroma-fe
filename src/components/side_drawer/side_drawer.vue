@@ -98,7 +98,7 @@
               icon="user-plus"
             /> {{ $t("nav.friend_requests") }}
             <span
-              v-if="followRequestCount > 0"
+              v-if="followRequestCount > 0 && !hideFollowRequestCount"
               class="badge badge-notification"
             >
               {{ followRequestCount }}
@@ -273,9 +273,7 @@
   --icon: var(--popoverIcon, $fallback--icon);
 
   .badge {
-    position: absolute;
-    right: 0.7rem;
-    top: 1em;
+    margin-left: 75px;
   }
 }
 

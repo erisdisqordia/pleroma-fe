@@ -10,3 +10,4 @@ config/local.json
 .gitignore
 src/App.js.save
 yarn-error.log
+release.zip

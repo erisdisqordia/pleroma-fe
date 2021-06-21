@@ -359,6 +359,10 @@
               v-if="loggedIn"
               :status="status"
             />
+            <BookmarkButton
+              v-if="loggedIn"
+              :status="status"
+            />
             <extra-buttons
               :status="status"
               @onError="showError"

@@ -99,7 +99,7 @@
     "postcss-loader": "^3.0.0",
     "raw-loader": "^0.5.1",
     "sass": "^1.17.3",
-    "sass-loader": "git://github.com/webpack-contrib/sass-loader",
+    "sass-loader": "^10",
     "selenium-server": "2.53.1",
     "semver": "^5.3.0",
     "serviceworker-webpack-plugin": "^1.0.0",
@@ -112,7 +112,7 @@
     "url-loader": "^1.1.2",
     "vue-loader": "^14.0.0",
     "vue-style-loader": "^4.0.0",
-    "webpack": "^4.0.0",
+    "webpack": "^4.44.0",
     "webpack-dev-middleware": "^3.6.0",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1"

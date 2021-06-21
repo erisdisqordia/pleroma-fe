@@ -128,4 +128,12 @@
   }
 }
 
+.notifications {
+  .ReactButton {
+    .popover-trigger {
+      margin: -8px;
+    }
+  }
+}
+
 </style>

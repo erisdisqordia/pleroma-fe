@@ -46,4 +46,8 @@
     }
   }
 }
+
+.notifications .BookmarkButton>button {
+  margin: -10px -8px -10px -14px;
+}
 </style>

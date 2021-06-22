@@ -34,6 +34,7 @@ h4 {
   min-height: 100vh;
   max-width: 1250px;
   align-content: flex-start;
+  padding-left: 20px;
 }
 
 .underlay {
@@ -649,6 +650,7 @@ nav {
     max-height: 96vh;
     flex-shrink: 0;
     flex-grow: 0;
+    margin-right: -2px
   }
 }
 
@@ -809,6 +811,12 @@ nav {
 
   .main {
     margin-bottom: 7em;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #content {
+    padding-top: 55px;
+    padding-left: 0px;
   }
 }
 
@@ -910,7 +918,7 @@ nav {
     }
 
     #content {
-      padding-top: 0;
+      padding-top: 0px;
       height: 100%;
       overflow: visible;
     }

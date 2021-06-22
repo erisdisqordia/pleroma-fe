@@ -61,6 +61,7 @@
               fixed-width
               class="fa-scale-110 fa-old-padding"
               icon="comments"
+              :title="$t('chats.chats')"
             />
           </router-link>
         </div>

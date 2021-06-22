@@ -96,7 +96,7 @@ export default {
     },
     thirdColumnLayout () {
       return {
-        'max-width': this.$store.getters.mergedConfig.showThirdColumn ? '1400px' : '980px'
+        'max-width': this.$store.getters.mergedConfig.showThirdColumn ? '1650px' : '1250px'
       }
     },
     ...mapGetters(['mergedConfig'])

@@ -25,6 +25,7 @@ All fork changes by eris@disqordia.space unless indicated otherwise
 - Changed naming of color variable descriptions in theme tab to be more clear
 - Changed icon of emoji selector to be a cute spooky ghost
 - Changed icon of Interactions link to a thunderbolt (like Tumblr's activity icon), as this is separate from Notifications
+- Redid top nav to include extra icons for easier navigation
 
 # Upstream
 ## [Merged but unreleased]

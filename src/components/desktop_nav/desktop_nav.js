@@ -1,14 +1,21 @@
+import chatPanel from '../chat_panel/chat_panel.vue'
+import { mapGetters } from 'vuex'
 import SearchBar from 'components/search_bar/search_bar.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faSignInAlt,
   faSignOutAlt,
   faHome,
+  faGlobe,
   faComments,
   faBell,
+  faBolt,
   faUserPlus,
   faBullhorn,
   faSearch,
+  faUsers,
+  faEnvelope,
+  faBookmark,
   faTachometerAlt,
   faCog,
   faInfoCircle
@@ -18,11 +25,16 @@ library.add(
   faSignInAlt,
   faSignOutAlt,
   faHome,
+  faGlobe,
   faComments,
   faBell,
+  faBolt,
   faUserPlus,
   faBullhorn,
   faSearch,
+  faEnvelope,
+  faBookmark,
+  faUsers,
   faTachometerAlt,
   faCog,
   faInfoCircle
@@ -69,7 +81,9 @@ export default {
     hideSitename () { return this.$store.state.instance.hideSitename },
     logoLeft () { return this.$store.state.instance.logoLeft },
     currentUser () { return this.$store.state.users.currentUser },
-    privateMode () { return this.$store.state.instance.private }
+    privateMode () { return this.$store.state.instance.private },
+    pleromaChatMessagesAvailable () { return this$store.state.instance.pleromaChatMessagesAvailable },
+    ...mapGetters(['unreadChatCount'])
   },
   methods: {
     scrollToTop () {

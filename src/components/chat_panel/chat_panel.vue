@@ -1,64 +1,8 @@
 <template>
-  <div
+  <chat-list
     v-if="!collapsed || !floating"
     class="chat-panel"
-  >
-    <div class="panel panel-default">
-      <div
-        class="panel-heading timeline-heading"
-        :class="{ 'chat-heading': floating }"
-        @click.stop.prevent="togglePanel"
-      >
-        <div class="title">
-          <span>{{ $t('shoutbox.title') }}</span>
-          <FAIcon
-            v-if="floating"
-            icon="times"
-          />
-        </div>
-      </div>
-      <div
-        v-chat-scroll
-        class="chat-window"
-      >
-        <div
-          v-for="message in messages"
-          :key="message.id"
-          class="chat-message"
-        >
-          <span class="chat-avatar">
-            <img :src="message.author.avatar">
-          </span>
-          <div class="chat-content">
-            <router-link
-              class="chat-name"
-              :to="userProfileLink(message.author)"
-            >
-              {{ message.author.username }}
-            </router-link>
-            <br>
-            <span class="chat-text">
-              {{ message.text }}
-            </span>
-          </div>
-        </div>
-      </div>
-      <EmojiInput
-        v-model="currentMessage"
-        class="chat-input"
-        enable-emoji-picker
-        hide-emoji-button
-        :suggest="emojiSuggestor"
-      >
-        <textarea
-          v-model="currentMessage"
-          class="chat-input-textarea"
-          rows="1"
-          @keyup.enter="submit(currentMessage)"
-        />
-      </EmojiInput>
-    </div>
-  </div>
+  />
   <div
     v-else
     class="chat-panel"
@@ -73,7 +17,7 @@
             class="icon"
             icon="cat"
           />
-          {{ $t('shoutbox.title') }}
+          {{ $t('chats.chats') }}
         </div>
       </div>
     </div>
@@ -90,6 +34,14 @@
   bottom: 0px;
   z-index: 1000;
   max-width: 25em;
+  overflow-y: hidden;
+
+  .panel-body, .member-list {
+    overflow-y: auto;
+  }
+  .panel-body {
+    height: 400px;
+  }
 }
 
 .floating-chat.left {
@@ -110,10 +62,35 @@
     }
   }
 
-  .chat-window {
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 20em;
+  .chat-list.floating-chat {
+    overflow-y: hidden;
+    max-height: 400px;
+
+    .panel.body {
+      overflow-y: auto;
+    }
+
+    .panel-heading {
+      height: 30px;
+      box-shadow: none;
+      background: none;
+
+      .title {
+        display: none;
+      }
+
+      .input-wrap {
+        position: absolute;
+        width: 85%;
+        right: 0px;
+      }
+
+      .input-search {
+        padding-top: 5px;
+      }
+
+    }
+
   }
 
   .chat-window-container {

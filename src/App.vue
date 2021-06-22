@@ -70,7 +70,7 @@
       <media-modal />
     </div>
     <chat-panel
-      v-if="currentUser && chat && !hideSB"
+      v-if="currentUser"
       :floating="true"
       class="floating-chat mobile-hidden"
       :class="{ 'left': shoutboxPosition }"

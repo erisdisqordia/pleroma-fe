@@ -1,6 +1,7 @@
 import generateProfileLink from 'src/services/user_profile_link_generator/user_profile_link_generator'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import EmojiInput from 'src/components/emoji_input/emoji_input.vue'
+import ChatList from '../chat_list_floating/chat_list.vue'
 import suggestor from '../emoji_input/suggestor.js'
 import {
   faCat,
@@ -21,7 +22,7 @@ const chatPanel = {
       collapsed: true
     }
   },
-  components: { EmojiInput },
+  components: { EmojiInput, ChatList },
   computed: {
     emojiUserSuggestor () {
       return suggestor({

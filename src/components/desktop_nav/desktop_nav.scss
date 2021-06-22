@@ -1,7 +1,7 @@
 @import '../../_variables.scss';
 
 .DesktopNav {
-  height: 50px;
+  height: 48px;
   width: 100%;
   position: fixed;
 
@@ -107,7 +107,7 @@
     grid-area: sitename;
 
     img {
-      height: 24px;
+      height: 28px;
       vertical-align: middle;
       padding-right: 5px;
     }

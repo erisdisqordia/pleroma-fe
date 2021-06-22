@@ -25,7 +25,6 @@ This fork includes several new options and tweaks, some of which have been merge
   - [x] send merge request upstream
 - [ ] Add "Toggle media-only post viewing" in nav bar (similar to dashboard-fe or 4chan X)
 - [x] Add link to edit profile if viewing your own profile
-- [ ] Add option for smaller navbar in desktop view
 - [ ] Add an option for silent notifications (notifications without unread indicators that you have to click away)
 - [ ] Option to move shoutbox to top nav icon to save space
 ### Fixes 
@@ -34,6 +33,7 @@ This fork includes several new options and tweaks, some of which have been merge
 ### Tweaks
 - [x] Add "Apply" buttons at the top of Theme settings
   - [x] send merge request
+- [ ] Redo mobile nav
 ### Long-term goals
 - [ ] Add an admin dashboard within pleroma-fe (similar to soapbox-fe)
 - [ ] Implementation of lists
@@ -42,6 +42,8 @@ This fork includes several new options and tweaks, some of which have been merge
 - [ ] Add option for site layout similar to 4chan userscript OneeChan or AppChan X
 - [ ] Add draggable resizable post form
 - [ ] Add customizable sidebar links (like soapbox-fe)
+- [ ] Popover chat menu
+- [ ] Add a second column option for split timelines 
 
 ## Installing this fork on your instance
 

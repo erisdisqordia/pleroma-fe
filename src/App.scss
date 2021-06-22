@@ -29,10 +29,10 @@ h4 {
 
 #content {
   box-sizing: border-box;
-  padding-top: 60px;
+  padding-top: 70px;
   margin: auto;
   min-height: 100vh;
-  max-width: 980px;
+  max-width: 1250px;
   align-content: flex-start;
 }
 
@@ -601,6 +601,8 @@ nav {
   flex-grow: 1;
   flex-shrink: 1;
   order: 50;
+  padding-right: 14px;
+  padding-left: 1px;
 }
 
 .sidebar-bounds {
@@ -610,8 +612,8 @@ nav {
 
 .sidebar-flexer {
   flex: 1;
-  flex-basis: 345px;
-  width: 365px;
+  flex-basis: 400px;
+  max-width: 400px;
 }
 
 .mobile-shown {
@@ -626,13 +628,13 @@ nav {
   .sidebar-bounds {
     overflow: hidden;
     max-height: 100vh;
-    width: 345px;
+    max-width: 400px;
     position: fixed;
     margin-top: -10px;
 
     .sidebar-scroller {
       height: 96vh;
-      width: 365px;
+      width: 100%;
       padding-top: 10px;
       padding-right: 50px;
       overflow-x: hidden;
@@ -640,7 +642,7 @@ nav {
     }
 
     .sidebar {
-      width: 345px;
+      width: 100%;
       padding-bottom: 50px;
     }
   }

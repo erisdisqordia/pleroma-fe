@@ -13,7 +13,7 @@
     <div
       id="content"
       :style="thirdColumnLayout"
-      class="container underlay"
+      class="container"
     >
       <div
         class="sidebar-flexer mobile-hidden"

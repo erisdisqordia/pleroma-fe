@@ -6,7 +6,7 @@ import {
   faBookmark as faBookmarkReg
 } from '@fortawesome/free-regular-svg-icons'
 
-library.add(faBookmark,faBookmarkReg)
+library.add(faBookmark, faBookmarkReg)
 
 const BookmarkButton = {
   props: ['status', 'loggedIn'],

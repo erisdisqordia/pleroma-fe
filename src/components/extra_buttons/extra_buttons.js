@@ -2,21 +2,17 @@ import Popover from '../popover/popover.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faEllipsisH,
-  faBookmark,
   faEyeSlash,
   faThumbtack,
   faShareAlt,
   faExternalLinkAlt
 } from '@fortawesome/free-solid-svg-icons'
 import {
-  faBookmark as faBookmarkReg,
   faFlag
 } from '@fortawesome/free-regular-svg-icons'
 
 library.add(
   faEllipsisH,
-  faBookmark,
-  faBookmarkReg,
   faEyeSlash,
   faThumbtack,
   faShareAlt,
@@ -56,16 +52,6 @@ const ExtraButtons = {
     },
     copyLink () {
       navigator.clipboard.writeText(this.statusLink)
-        .then(() => this.$emit('onSuccess'))
-        .catch(err => this.$emit('onError', err.error.error))
-    },
-    bookmarkStatus () {
-      this.$store.dispatch('bookmark', { id: this.status.id })
-        .then(() => this.$emit('onSuccess'))
-        .catch(err => this.$emit('onError', err.error.error))
-    },
-    unbookmarkStatus () {
-      this.$store.dispatch('unbookmark', { id: this.status.id })
         .then(() => this.$emit('onSuccess'))
         .catch(err => this.$emit('onError', err.error.error))
     },

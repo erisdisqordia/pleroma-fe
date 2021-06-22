@@ -3,7 +3,7 @@
     <button
       class="button-unstyled interactive"
       :class="status.bookmarked && '-bookmarked'"
-      :title="$t('status.bookmark')"
+      :title="[status.bookmarked ? $t('tool_tip.unbookmark') : $t('tool_tip.bookmark')]"
       @click.prevent="bookmarkStatus()"
     >
       <FAIcon
@@ -50,4 +50,5 @@
 .notifications .BookmarkButton>button {
   margin: -10px -8px -10px -14px;
 }
+
 </style>

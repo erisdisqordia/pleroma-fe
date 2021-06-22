@@ -38,8 +38,6 @@
 
   .panel-body, .member-list {
     overflow-y: auto;
-  }
-  .panel-body {
     height: 400px;
   }
 }

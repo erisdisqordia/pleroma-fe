@@ -13,7 +13,7 @@
           :to="{ name: 'root' }"
           active-class="home"
         >
-          <img src="favicon.png">
+          <img src="/favicon.png">
           {{ sitename }}
         </router-link>
         <div

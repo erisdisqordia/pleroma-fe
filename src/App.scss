@@ -630,7 +630,7 @@ nav {
     max-height: 100vh;
     max-width: 400px;
     position: fixed;
-    margin-top: -10px;
+    margin-top: -22px;
 
     .sidebar-scroller {
       height: 96vh;
@@ -644,6 +644,7 @@ nav {
     .sidebar {
       width: 100%;
       padding-bottom: 50px;
+      padding-top: 12px;
     }
   }
   .sidebar-flexer {

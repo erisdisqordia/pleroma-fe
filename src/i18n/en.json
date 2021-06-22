@@ -776,7 +776,8 @@
     "user_settings": "User Settings",
     "accept_follow_request": "Accept follow request",
     "reject_follow_request": "Reject follow request",
-    "bookmark": "Bookmark"
+    "bookmark": "Bookmark",
+    "unbookmark": "Unbookmark"
   },
   "upload": {
     "error": {

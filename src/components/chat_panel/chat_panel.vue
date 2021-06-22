@@ -43,14 +43,20 @@
           </div>
         </div>
       </div>
-      <div class="chat-input">
+      <EmojiInput
+        v-model="currentMessage"
+        class="chat-input"
+        enable-emoji-picker
+        hide-emoji-button
+        :suggest="emojiSuggestor"
+      >
         <textarea
           v-model="currentMessage"
           class="chat-input-textarea"
           rows="1"
           @keyup.enter="submit(currentMessage)"
         />
-      </div>
+      </EmojiInput>
     </div>
   </div>
   <div

@@ -612,6 +612,11 @@ nav {
 
 .sidebar-flexer {
   flex: 1;
+  flex-basis: 365px;
+  max-width: 365px;
+}
+
+.wide .sidebar-flexer {
   flex-basis: 400px;
   max-width: 400px;
 }
@@ -628,7 +633,7 @@ nav {
   .sidebar-bounds {
     overflow: hidden;
     max-height: 100vh;
-    max-width: 400px;
+    max-width: 365px;
     position: fixed;
     margin-top: -22px;
 
@@ -646,6 +651,9 @@ nav {
       padding-bottom: 50px;
       padding-top: 12px;
     }
+  }
+  .wide .sidebar-bounds {
+    max-width: 400px;
   }
   .sidebar-flexer {
     max-height: 96vh;

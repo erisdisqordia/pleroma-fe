@@ -85,6 +85,11 @@ export default {
     isMobileLayout () { return this.$store.state.interface.mobileLayout },
     privateMode () { return this.$store.state.instance.private },
     wideMode () { return this.$store.getters.mergedConfig.wideLayout },
+    wideEnabled () {
+      if (this.$store.getters.mergedConfig.wideLayout) {
+        return 'wide'
+      }
+    },
     sidebarAlign () {
       return {
         'order': this.$store.getters.mergedConfig.sidebarRight ? 99 : 0

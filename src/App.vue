@@ -53,7 +53,7 @@
       </div>
       <div
         v-if="thirdColumnEnabled"
-        class="sidebar-flexer mobile-hidden"
+        class="sidebar-flexer notifications-column mobile-hidden"
         :style="notifsAlign"
       >
         <div class="sidebar-bounds">

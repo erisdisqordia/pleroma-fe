@@ -612,11 +612,11 @@ nav {
 
 .sidebar-flexer {
   flex: 1;
-  flex-basis: 365px;
-  max-width: 365px;
+  flex-basis: 380px;
+  max-width: 380px;
 }
 
-.wide .sidebar-flexer {
+.wide .sidebar-flexer.notifications-column {
   flex-basis: 400px;
   max-width: 400px;
 }
@@ -629,11 +629,10 @@ nav {
   body {
     overflow-y: scroll;
   }
-
   .sidebar-bounds {
     overflow: hidden;
     max-height: 100vh;
-    max-width: 365px;
+    max-width: 380px;
     position: fixed;
     margin-top: -22px;
 

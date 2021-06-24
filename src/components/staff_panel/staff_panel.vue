@@ -4,7 +4,7 @@
       <div class="panel-heading timeline-heading base02-background">
         <div class="title">
           <FAIcon
-            icon="pastafarianism"
+            icon="users"
           />
           {{ $t("about.staff") }}
         </div>

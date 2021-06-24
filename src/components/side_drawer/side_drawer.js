@@ -10,12 +10,11 @@ import {
   faComments,
   faBolt,
   faUserPlus,
-  faCat,
+  faBullhorn,
   faSearch,
   faTachometerAlt,
   faCog,
-  faTransgenderAlt,
-  faBook
+  faInfoCircle
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -25,12 +24,11 @@ library.add(
   faComments,
   faBolt,
   faUserPlus,
-  faCat,
+  faBullhorn,
   faSearch,
   faTachometerAlt,
   faCog,
-  faTransgenderAlt,
-  faBook
+  faInfoCircle
 )
 
 const SideDrawer = {

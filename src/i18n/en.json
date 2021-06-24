@@ -27,10 +27,10 @@
         "media_nsfw_desc": "This instance forces media to be set sensitive in posts on the following instances:"
       }
     },
-    "staff": "Mythos"
+    "staff": "Staff"
   },
   "shoutbox": {
-    "title": "Nya~box"
+    "title": "Shoutbox"
   },
   "domain_mute_card": {
     "mute": "Mute",
@@ -77,8 +77,8 @@
     "close": "Close",
     "peek": "Peek",
     "role": {
-      "admin": "Fateweaver",
-      "moderator": "Eldar"
+      "admin": "Admin",
+      "moderator": "Mod"
     }
   },
   "image_cropper": {
@@ -115,10 +115,10 @@
     "next": "Next"
   },
   "nav": {
-    "about": "Principia Disqordia",
+    "about": "About",
     "administration": "Administration",
     "back": "Back",
-    "friend_requests": "Disciple Requests",
+    "friend_requests": "Follow Requests",
     "mentions": "Mentions",
     "interactions": "Interactions",
     "dms": "Direct Messages",
@@ -131,15 +131,15 @@
     "search": "Search",
     "who_to_follow": "Who to follow",
     "preferences": "Preferences",
-    "timelines": "The Fediverse",
+    "timelines": "Timelines",
     "chats": "Chats"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
     "error": "Error fetching notifications: {0}",
     "favorited_you": "favorited your status",
-    "followed_you": "is now your disciple",
-    "follow_request": "wants to become your disciple",
+    "followed_you": "is now following you",
+    "follow_request": "wants to follow you",
     "load_older": "Load older notifications",
     "notifications": "Notifications",
     "read": "Read!",
@@ -179,7 +179,7 @@
     "storage_unavailable": "Pleroma could not access browser storage. Your login or your local settings won't be saved and you might encounter unexpected issues. Try enabling cookies."
   },
   "interactions": {
-    "favs_repeats": "Boosts and Favorites",
+    "favs_repeats": "Repeats and Favorites",
     "follows": "New follows",
     "moves": "User migrates",
     "load_older": "Load older interactions"
@@ -197,7 +197,7 @@
       "text/bbcode": "BBCode"
     },
     "content_warning": "Subject / CW (optional)",
-    "default": "Just landed on Neptune",
+    "default": "Just landed in L.A.",
     "direct_warning_to_all": "This post will be visible to all the mentioned users.",
     "direct_warning_to_first_only": "This post will only be visible to the mentioned users at the beginning of the message.",
     "posting": "Posting",
@@ -297,7 +297,7 @@
     "bot": "This is a bot account",
     "btnRadius": "Buttons",
     "cBlue": "Reply icon",
-    "cGreen": "Boost/Repeat icon",
+    "cGreen": "Repeat icon",
     "cOrange": "Favorite status icon",
     "cRed": "Errors/Notifications",
     "change_email": "Change Email",
@@ -381,7 +381,7 @@
     "notification_visibility_follows": "Follows",
     "notification_visibility_likes": "Likes",
     "notification_visibility_mentions": "Mentions",
-    "notification_visibility_repeats": "Boosts",
+    "notification_visibility_repeats": "Repeats",
     "notification_visibility_moves": "User Migrates",
     "notification_visibility_emoji_reactions": "Reactions",
     "no_rich_text_description": "Strip rich text formatting from all posts",
@@ -667,7 +667,7 @@
   },
   "status": {
     "favorites": "Favorites",
-    "repeats": "Boosts",
+    "repeats": "Repeats",
     "delete": "Delete status",
     "pin": "Pin on profile",
     "unpin": "Unpin from profile",
@@ -727,8 +727,8 @@
     "unmute": "Unmute",
     "unmute_progress": "Unmuting…",
     "mute_progress": "Muting…",
-    "hide_repeats": "Hide boosts",
-    "show_repeats": "Show boosts",
+    "hide_repeats": "Hide repeats",
+    "show_repeats": "Show repeats",
     "bot": "Bot",
     "admin_menu": {
       "moderation": "Moderation",
@@ -770,9 +770,9 @@
   },
   "tool_tip": {
     "media_upload": "Upload Media",
-    "repeat": "Boost this post",
+    "repeat": "Repeat this status",
     "reply": "Reply",
-    "favorite": "Dote upon this post",
+    "favorite": "Favorite this status",
     "add_reaction": "Add Reaction",
     "user_settings": "User Settings",
     "accept_follow_request": "Accept follow request",

@@ -12,8 +12,7 @@ import {
   faMoon,
   faComments,
   faBolt,
-  faTransgenderAlt,
-  faBook
+  faInfoCircle
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -26,8 +25,7 @@ library.add(
   faMoon,
   faComments,
   faBolt,
-  faTransgenderAlt,
-  faBook
+  faInfoCircle
 )
 
 const NavPanel = {

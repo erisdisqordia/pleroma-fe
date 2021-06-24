@@ -9,10 +9,11 @@ import {
   faEnvelope,
   faChevronDown,
   faChevronUp,
-  faStream,
+  faMoon,
   faComments,
   faBolt,
-  faInfoCircle
+  faTransgenderAlt,
+  faBook
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -22,10 +23,11 @@ library.add(
   faEnvelope,
   faChevronDown,
   faChevronUp,
-  faStream,
+  faMoon,
   faComments,
   faBolt,
-  faInfoCircle
+  faTransgenderAlt,
+  faBook
 )
 
 const NavPanel = {

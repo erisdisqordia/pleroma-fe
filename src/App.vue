@@ -14,6 +14,7 @@
       id="content"
       :style="thirdColumnLayout"
       class="container"
+      :class="wideEnabled"
     >
       <div
         class="sidebar-flexer mobile-hidden"

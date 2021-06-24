@@ -51,7 +51,7 @@
             <FAIcon
               fixed-width
               class="fa-scale-110 fa-old-padding"
-              icon="moon"
+              icon="home"
             /> {{ $t("nav.timelines") }}
           </router-link>
         </li>

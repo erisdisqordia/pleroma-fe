@@ -29,7 +29,7 @@ h4 {
 
 #content {
   box-sizing: border-box;
-  padding-top: 70px;
+  padding-top: 60px;
   margin: auto;
   min-height: 100vh;
   max-width: 1250px;
@@ -602,7 +602,7 @@ nav {
   flex-grow: 1;
   flex-shrink: 1;
   order: 50;
-  padding-right: 10px;
+  margin-left: -8px;
 }
 
 .sidebar-bounds {
@@ -616,7 +616,7 @@ nav {
   max-width: 380px;
 }
 
-.wide .sidebar-flexer.notifications-column {
+.wide .sidebar-flexer {
   flex-basis: 400px;
   max-width: 400px;
 }
@@ -824,7 +824,7 @@ nav {
   }
   #content {
     padding-top: 55px;
-    padding-left: 0px;
+    padding-left: 8px;
   }
 }
 

@@ -21,6 +21,7 @@ All fork changes by eris@disqordia.space unless indicated otherwise
 - Added bookmark button to posts instead of hiding in menu
 - Added support for emojis (regular unicode emojis) suggestions in the shoutbox (ie :green-heart:)
 - Option to change to a wider site layout
+- Added all default themes from disqordia.space into regular fork
 
 ### Changed
 - Standardize naming of timelines in line with Mastodon/Tusky (Public -> Local, The Whole Known Network -> Public)

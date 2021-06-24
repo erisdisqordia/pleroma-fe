@@ -341,6 +341,7 @@
     "hide_isp": "Hide instance-specific panel",
     "hide_wallpaper": "Hide instance wallpaper",
     "hide_shoutbox": "Hide ",
+    "wide_layout": "Show wider instance layout",
     "hide_follow_request_count": "Hide follow request count in sidebar",
     "showPostButton": "Always show floating new post button",
     "preload_images": "Preload images",

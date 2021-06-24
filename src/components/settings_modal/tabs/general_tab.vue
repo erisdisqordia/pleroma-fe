@@ -21,6 +21,11 @@
             {{ $t('settings.show_third_column') }}
           </BooleanSetting>
         </li>
+        <li>
+          <BooleanSetting path="wideLayout">
+            {{ $t('settings.wide_layout') }}
+          </BooleanSetting>
+        </li>
         <li v-if="instanceWallpaperUsed">
           <BooleanSetting path="hideInstanceWallpaper">
             {{ $t('settings.hide_wallpaper') }}

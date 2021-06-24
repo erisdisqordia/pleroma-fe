@@ -84,6 +84,7 @@ export default {
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
     isMobileLayout () { return this.$store.state.interface.mobileLayout },
     privateMode () { return this.$store.state.instance.private },
+    wideMode () { return this.$store.getters.mergedConfig.wideLayout },
     sidebarAlign () {
       return {
         'order': this.$store.getters.mergedConfig.sidebarRight ? 99 : 0
@@ -95,8 +96,17 @@ export default {
       }
     },
     thirdColumnLayout () {
-      return {
-        'max-width': this.$store.getters.mergedConfig.showThirdColumn ? '1650px' : '1250px'
+      if (this.$store.getters.mergedConfig.wideLayout) {
+        return {
+          'max-width': this.$store.getters.mergedConfig.showThirdColumn
+             ? '1680px'
+             : '1250px'
+        }
+      }
+      else return {
+        'max-width': this.$store.getters.mergedConfig.showThirdColumn
+          ? '1400px'
+          : '980px'
       }
     },
     ...mapGetters(['mergedConfig'])

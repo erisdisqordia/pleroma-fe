@@ -19,6 +19,7 @@ All fork changes by eris@disqordia.space unless indicated otherwise
 - Added Apply/Reset buttons to top of theme tab for easier theme selection
 - Added option to hide follow request count in sidebar, for when you need to just make that little number go away
 - Added bookmark button to posts instead of hiding in menu
+- Option to change to a wider site layout
 
 ### Changed
 - Standardize naming of timelines in line with Mastodon/Tusky (Public -> Local, The Whole Known Network -> Public)

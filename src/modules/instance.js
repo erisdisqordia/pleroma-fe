@@ -67,6 +67,7 @@ const defaultState = {
   // Html stuff
   instanceSpecificPanelContent: '',
   tos: '',
+  instanceBlocks: '',
 
   // Version Information
   backendVersion: '',

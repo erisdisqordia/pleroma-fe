@@ -21,6 +21,7 @@ All fork changes by eris@disqordia.space unless indicated otherwise
 - Added bookmark button to posts instead of hiding in menu
 - Added support for emojis (regular unicode emojis) suggestions in the shoutbox (ie :green-heart:)
 - Option to change to a wider site layout
+- Ability to set a "block list" panel for custom HTML (ie creating a table with reasons for blocks), just create a `/var/lib/pleroma/static/instance.blocks.html` file and it will load onto your About page
 
 ### Changed
 - Standardize naming of timelines in line with Mastodon/Tusky (Public -> Local, The Whole Known Network -> Public)

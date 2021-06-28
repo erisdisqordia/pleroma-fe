@@ -182,6 +182,21 @@ const getInstancePanel = async ({ store }) => {
   }
 }
 
+const getBlockList = async ({ store }) => {
+  try {
+    const res = await preloadFetch('/instance/blocks.html')
+    if (res.ok) {
+      const html = await res.text()
+      store.dispatch('setInstanceOption', { name: 'instanceBlocks', value: html })
+    } else {
+      throw (res)
+    }
+  } catch (e) {
+    console.warn("Can't load instance blocks")
+    console.warn(e)
+  }
+}
+
 const getStickers = async ({ store }) => {
   try {
     const res = await window.fetch('/static/stickers.json')
@@ -357,6 +372,7 @@ const afterStoreSetup = async ({ store, i18n }) => {
   await Promise.all([
     checkOAuthToken({ store }),
     getInstancePanel({ store }),
+    getBlockList({ store }),
     getNodeInfo({ store }),
     getInstanceConfig({ store })
   ])

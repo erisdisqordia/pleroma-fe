@@ -48,7 +48,8 @@ This fork includes several new options and tweaks, some of which have been merge
 ## Installing this fork on your instance
 
 Installing and removing this fork is easy, and you can revert back to regular pleroma-fe at any time.
-Pleroma lets us override the defaults risk-free using your static folder in `/var/lib/pleroma/static/`
+Pleroma lets us override the defaults risk-free using your static folder in `/var/lib/pleroma/static/` on OTP releases and `~pleroma/static` if installed from source
+If you did install from source, please replace all instances of `/var/lib/pleroma/static` to `~pleroma/static` below 
 
 ### To install:
 

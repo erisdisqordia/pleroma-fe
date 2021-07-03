@@ -49,6 +49,19 @@
       </ul>
     </div>
     <div class="setting-item">
+      <h2>{{ $t('settings.accessibility') }}</h2>
+      <ul class="setting-list">
+        <li>
+          <BooleanSetting
+            path="dyslexiaFont"
+            style="font-family: OpenDyslexic !important"
+          >
+            {{ $t('settings.dyslexia_font') }}
+          </BooleanSetting>
+        </li>
+      </ul>
+    </div>
+    <div class="setting-item">
       <h2>{{ $t('nav.timeline') }}</h2>
       <ul class="setting-list">
         <li>

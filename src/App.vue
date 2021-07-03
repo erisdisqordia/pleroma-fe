@@ -2,6 +2,7 @@
   <div
     id="app"
     :style="bgStyle"
+    :class="dyslexiaFont"
   >
     <div
       id="app_bg_wrapper"

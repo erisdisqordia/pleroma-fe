@@ -33,6 +33,7 @@ export const defaultState = {
   hideAttachmentsInConv: false,
   maxThumbnails: 16,
   hideNsfw: true,
+  dyslexiaFont: false,
   showNewPostButton: true,
   hideFollowRequestCount: false,
   preloadImage: true,

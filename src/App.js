@@ -90,6 +90,11 @@ export default {
         return 'wide'
       }
     },
+    dyslexiaFont () {
+      if (this.$store.getters.mergedConfig.dyslexiaFont) {
+        return 'dyslexia-font'
+      }
+    },
     sidebarAlign () {
       return {
         'order': this.$store.getters.mergedConfig.sidebarRight ? 99 : 0

@@ -73,6 +73,40 @@ a {
   color: var(--link, $fallback--link);
 }
 
+
+@font-face {
+  font-family: "OpenDyslexic";
+  src: local("OpenDyslexic"), url(./fonts/OpenDyslexic/OpenDyslexic-Regular.woff2) format("woff2");
+}
+@font-face {
+  font-family: "OpenDyslexic-Italic";
+  src: local("OpenDyslexic-Italic"), url(./fonts/OpenDyslexic/OpenDyslexic-Italic.woff2) format("woff2");
+}
+@font-face {
+  font-family: "OpenDyslexic-BoldItalic";
+  src: local("OpenDyslexic-BoldItalic"), url(./fonts/OpenDyslexic/OpenDyslexic-Bold-Italic.woff2) format("woff2");
+}
+@font-face {
+  font-family: "OpenDyslexic-Bold";
+  src: local("OpenDyslexic-Bold"), url(./fonts/OpenDyslexic/OpenDyslexic-Bold.woff2) format("woff2");
+}
+
+.dyslexia-font, .dyslexia-font .button-default, .dyslexia-font .StatusContent .status-content, .dyslexia-font input, .dyslexia-font textarea, .dyslexia-font .select, .dyslexia-font .input {
+  font-family: OpenDyslexic !important;
+}
+
+.dyslexia-font strong {
+  font-family: OpenDyslexic-Bold !important;
+}
+
+.dyslexia-font em {
+  font-family: OpenDyslexic-Italic !important;
+}
+
+.dyslexia-font strong em, .dyslexia-font em strong {
+  font-family: OpenDyslexic-BoldItalic !important;
+}
+
 .button-default {
   user-select: none;
   color: $fallback--text;

@@ -274,6 +274,8 @@
         "desc": "To enable two-factor authentication, enter the code from your two-factor app:"
       }
     },
+    "accessibility": "Accessibility",
+    "dyslexia_font": "OpenDyslexic font",
     "allow_following_move": "Allow auto-follow when following account moves",
     "attachmentRadius": "Attachments",
     "attachments": "Attachments",

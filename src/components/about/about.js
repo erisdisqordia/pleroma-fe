@@ -17,6 +17,7 @@ const About = {
   computed: {
     showFeaturesPanel () { return this.$store.state.instance.showFeaturesPanel },
     showBlocks () { return this.$store.state.instance.instanceBlocks },
+    currentUser () { return this.$store.state.users.currentUser },
     showInstanceSpecificPanel () {
       return this.$store.state.instance.showInstanceSpecificPanel &&
         !this.$store.getters.mergedConfig.hideISP &&

@@ -3,8 +3,8 @@
     <!--<instance-specific-panel v-if="showInstanceSpecificPanel" />-->
     <staff-panel />
     <terms-of-service-panel />
-    <block-list-panel v-if="showBlocks" />
-    <MRFTransparencyPanel />
+    <block-list-panel v-if="showBlocks && currentUser" />
+    <!--<MRFTransparencyPanel />-->
     <features-panel v-if="showFeaturesPanel" />
   </div>
 </template>

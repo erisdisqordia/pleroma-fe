@@ -3,6 +3,9 @@
     <div class="panel panel-default base01-background">
       <div class="panel-heading timeline-heading base02-background">
         <div class="title">
+          <FAIcon
+            icon="biohazard"
+          />
           Instance Blocks
         </div>
       </div>
@@ -23,5 +26,8 @@
 <style lang="scss">
 .block-section {
   margin: 1em;
+}
+.block-list-panel {
+  margin-bottom: 20px;
 }
 </style>

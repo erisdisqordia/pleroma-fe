@@ -731,6 +731,8 @@
     "mute_progress": "Muting…",
     "hide_repeats": "Hide boosts",
     "show_repeats": "Show boosts",
+    "domain_muted": "Unblock domain",
+    "mute_domain": "Block domain",
     "bot": "Bot",
     "admin_menu": {
       "moderation": "Moderation",

@@ -219,6 +219,22 @@
           </div>
           <div>
             <button
+              v-if="relationship.domain_blocking"
+              class="btn button-default btn-block toggled"
+              @click="unmuteDomain"
+            >
+              {{ $t('user_card.domain_muted') }}
+            </button>
+            <button
+              v-else
+              class="btn button-default btn-block"
+              @click="muteDomain"
+            >
+              {{ $t('user_card.mute_domain') }}
+            </button>
+          </div>
+          <div>
+            <button
               class="btn button-default btn-block"
               @click="mentionUser"
             >

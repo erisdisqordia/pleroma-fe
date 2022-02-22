@@ -23,7 +23,7 @@ export const defaultState = {
   hideShoutbox: false,
   sidebarRight: false,
   showThirdColumn: false,
-  wideLayout: true,
+  wideLayout: false,
   hideInstanceWallpaper: false,
   // bad name: actually hides posts of muted USERS
   hideMutedPosts: undefined, // instance default

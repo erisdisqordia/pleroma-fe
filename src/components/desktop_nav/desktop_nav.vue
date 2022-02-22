@@ -17,7 +17,7 @@
           {{ sitename }}
         </router-link>
         <div
-          v-if="currentUser || !privateMode"
+          v-if="currentUser"
           class="nav-items left"
         >
           <router-link
@@ -82,12 +82,12 @@
       </router-link>
       <div class="item right actions">
         <search-bar
-          v-if="currentUser || !privateMode"
+          v-if="currentUser"
           @toggled="onSearchBarToggled"
           @click.stop.native
         />
         <div
-          v-if="currentUser || !privateMode"
+          v-if="currentUser"
           class="nav-items right"
         >
           <router-link

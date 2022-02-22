@@ -15,7 +15,7 @@
           :key="group.role"
           class="staff-group"
         >
-          <h4>{{ $t('general.role.' + group.role) }}</h4>
+          <h4>The Admin Team</h4>
           <basic-user-card
             v-for="user in group.users"
             :key="user.screen_name"
@@ -33,11 +33,23 @@
 
 .staff-group {
   padding-left: 1em;
-  padding-top: 1em;
+  padding-top: 0.2em;
+  padding-bottom: 2px;
 
   .basic-user-card {
+    padding: 0.6em 0.4em;
     padding-left: 0;
+    display: inline-block;
   }
+
+  .basic-user-card-collapsed-content {
+    display: none;
+  }
+
+  .still-image {
+    border-radius: 15px;
+  }
+
 }
 
 </style>

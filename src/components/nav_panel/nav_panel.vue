@@ -2,7 +2,7 @@
   <div class="NavPanel">
     <div class="panel panel-default">
       <ul>
-        <li v-if="currentUser || !privateMode">
+        <li v-if="currentUser">
           <button
             class="button-unstyled menu-item"
             @click="toggleTimelines"

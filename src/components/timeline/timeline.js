@@ -11,19 +11,6 @@ library.add(
   faCircleNotch
 )
 
-export const getExcludedStatusIdsByPinning = (statuses, pinnedStatusIds) => {
-  const ids = []
-  if (pinnedStatusIds && pinnedStatusIds.length > 0) {
-    for (let status of statuses) {
-      if (!pinnedStatusIds.includes(status.id)) {
-        break
-      }
-      ids.push(status.id)
-    }
-  }
-  return ids
-}
-
 const Timeline = {
   props: [
     'timeline',
@@ -81,11 +68,6 @@ const Timeline = {
       }
     },
     // id map of statuses which need to be hidden in the main list due to pinning logic
-    excludedStatusIdsObject () {
-      const ids = getExcludedStatusIdsByPinning(this.timeline.visibleStatuses, this.pinnedStatusIds)
-      // Convert id array to object
-      return keyBy(ids)
-    },
     pinnedStatusIdsObject () {
       return keyBy(this.pinnedStatusIds)
     },

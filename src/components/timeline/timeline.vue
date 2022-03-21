@@ -36,7 +36,7 @@
         </template>
         <template v-for="status in timeline.visibleStatuses">
           <conversation
-            v-if="!excludedStatusIdsObject[status.id]"
+            v-if="timelineName !== 'user' || (status.id >= timeline.minId && status.id <= timeline.maxId)"
             :key="status.id"
             class="status-fadein"
             :status-id="status.id"

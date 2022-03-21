@@ -4,7 +4,7 @@
     <staff-panel />
     <terms-of-service-panel />
     <!--<block-list-panel v-if="showBlocks && currentUser" />-->
-    <MRFTransparencyPanel />
+    <!--<MRFTransparencyPanel />-->
     <features-panel v-if="showFeaturesPanel" />
   </div>
 </template>

@@ -22,7 +22,7 @@
       </button>
     </div>
     <div
-      v-if="loading"
+      v-if="loading && statusesOffset == 0"
       class="text-center loading-icon"
     >
       <FAIcon
@@ -55,12 +55,6 @@
     </div>
     <div class="panel-body">
       <div v-if="currenResultTab === 'statuses'">
-        <div
-          v-if="visibleStatuses.length === 0 && !loading && loaded"
-          class="search-result-heading"
-        >
-          <h4>{{ $t('search.no_results') }}</h4>
-        </div>
         <Status
           v-for="status in visibleStatuses"
           :key="status.id"
@@ -71,6 +65,33 @@
           :statusoid="status"
           :no-heading="false"
         />
+        <button
+          v-if="!loading && loaded && lastStatusFetchCount > 0"
+          class="more-statuses-button button-unstyled -link -fullwidth"
+          @click.prevent="search(searchTerm, 'statuses')"
+        >
+          <div class="new-status-notification text-center">
+            {{ $t('search.load_more') }}
+          </div>
+        </button>
+        <div
+          v-else-if="loading && statusesOffset > 0"
+          class="text-center loading-icon"
+        >
+          <FAIcon
+            icon="circle-notch"
+            spin
+            size="lg"
+          />
+        </div>
+        <div
+          v-if="(visibleStatuses.length === 0 || lastStatusFetchCount === 0) && !loading && loaded"
+          class="search-result-heading"
+        >
+          <h4>
+            {{ $t('search.no_results') }}
+          </h4>
+        </div>
       </div>
       <div v-else-if="currenResultTab === 'people'">
         <div
@@ -208,6 +229,12 @@
     color: $fallback--text;
     color: var(--text, $fallback--text);
   }
+
+  .more-statuses-button {
+    height: 3.5em;
+    line-height: 3.5em;
+  }
+
 }
 
 </style>

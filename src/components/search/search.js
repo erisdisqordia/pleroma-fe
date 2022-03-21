@@ -7,6 +7,7 @@ import {
   faCircleNotch,
   faSearch
 } from '@fortawesome/free-solid-svg-icons'
+import { uniqBy } from 'lodash'
 
 library.add(
   faCircleNotch,
@@ -30,7 +31,11 @@ const Search = {
       userIds: [],
       statuses: [],
       hashtags: [],
-      currenResultTab: 'statuses'
+      currenResultTab: 'statuses',
+
+      statusesOffset: 0,
+      lastStatusFetchCount: 0,
+      lastQuery: ''
     }
   },
   computed: {
@@ -59,26 +64,42 @@ const Search = {
       this.$router.push({ name: 'search', query: { query } })
       this.$refs.searchInput.focus()
     },
-    search (query) {
+    search (query, searchType = null) {
       if (!query) {
         this.loading = false
         return
       }
 
       this.loading = true
-      this.userIds = []
-      this.statuses = []
-      this.hashtags = []
       this.$refs.searchInput.blur()
+      if (this.lastQuery !== query) {
+        this.userIds = []
+        this.hashtags = []
+        this.statuses = []
 
-      this.$store.dispatch('search', { q: query, resolve: true })
+        this.statusesOffset = 0
+        this.lastStatusFetchCount = 0
+      }
+
+      this.$store.dispatch('search', { q: query, resolve: true, offset: this.statusesOffset, 'type': searchType })
         .then(data => {
           this.loading = false
-          this.userIds = map(data.accounts, 'id')
-          this.statuses = data.statuses
-          this.hashtags = data.hashtags
+
+          let oldLength = this.statuses.length
+
+          // Always append to old results. If new results are empty, this doesn't change anything
+          this.userIds = this.userIds.concat(map(data.accounts, 'id'))
+          this.statuses = uniqBy(this.statuses.concat(data.statuses), 'id')
+          this.hashtags = this.hashtags.concat(data.hashtags)
+
           this.currenResultTab = this.getActiveTab()
           this.loaded = true
+
+          // Offset from whatever we already have
+          this.statusesOffset = this.statuses.length
+          // Because the amount of new statuses can actually be zero, compare to old lenght instead
+          this.lastStatusFetchCount = this.statuses.length - oldLength
+          this.lastQuery = query
         })
     },
     resultCount (tabName) {

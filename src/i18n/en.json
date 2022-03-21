@@ -804,7 +804,8 @@
     "hashtags": "Hashtags",
     "person_talking": "{count} person talking",
     "people_talking": "{count} people talking",
-    "no_results": "No results"
+    "no_results": "No results",
+    "load_more": "Load more results"
   },
   "password_reset": {
     "forgot_password": "Forgot password?",

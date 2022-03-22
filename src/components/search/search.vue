@@ -179,7 +179,6 @@
   border-width: 1px 0 0 0;
   border-style: solid;
   border-color: var(--border, $fallback--border);
-  padding: 10px;
   background-color: $fallback--fg;
   background-color: var(--panel, $fallback--fg);
 }

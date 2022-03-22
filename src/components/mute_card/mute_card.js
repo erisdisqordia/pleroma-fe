@@ -7,6 +7,9 @@ const MuteCard = {
       progress: false
     }
   },
+  created () {
+    this.$store.dispatch('fetchUserRelationship', this.user.id)
+  },
   computed: {
     user () {
       return this.$store.getters.findUser(this.userId)

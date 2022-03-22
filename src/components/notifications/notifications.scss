@@ -33,9 +33,6 @@
 
 .notification {
   box-sizing: border-box;
-  border-bottom: 1px solid;
-  border-color: $fallback--border;
-  border-color: var(--border, $fallback--border);
   word-wrap: break-word;
   word-break: break-word;
 
@@ -180,4 +177,11 @@
       margin-bottom: 0.3em;
     }
   }
+}
+
+.notification>div>.Notification,
+.notification>.Status>.status-container {
+  border-bottom: 1px solid;
+  border-color: $fallback--border;
+  border-color: var(--border, $fallback--border);
 }

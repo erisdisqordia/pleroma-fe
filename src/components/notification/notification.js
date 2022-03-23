@@ -1,5 +1,5 @@
 import StatusContent from '../status_content/status_content.vue'
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import Status from '../status/status.vue'
 import UserAvatar from '../user_avatar/user_avatar.vue'
 import UserCard from '../user_card/user_card.vue'
@@ -93,6 +93,9 @@ const Notification = {
     userProfileLink () {
       return this.generateUserProfileLink(this.user)
     },
+    isCollapsed () {
+      return this.mergedConfig.collapseNotifications
+    },
     targetUser () {
       return this.$store.getters.findUser(this.notification.target.id)
     },
@@ -105,6 +108,7 @@ const Notification = {
     isStatusNotification () {
       return isStatusNotification(this.notification.type)
     },
+    ...mapGetters(['mergedConfig']),
     ...mapState({
       currentUser: state => state.users.currentUser
     })

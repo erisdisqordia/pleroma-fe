@@ -56,6 +56,7 @@ export const defaultState = {
     chatMention: true
   },
   webPushNotifications: false,
+  collapseNotifications: true,
   muteWords: [],
   highlight: {},
   interfaceLanguage: browserLocale,

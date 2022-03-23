@@ -468,6 +468,7 @@
     "notification_mutes": "To stop receiving notifications from a specific user, use a mute.",
     "notification_blocks": "Blocking a user stops all notifications as well as unsubscribes them.",
     "enable_web_push_notifications": "Enable web push notifications",
+    "collapse_notifications": "Collapse non-mention notifications in notification column",
     "style": {
       "switcher": {
         "keep_color": "Keep colors",

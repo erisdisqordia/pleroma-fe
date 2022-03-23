@@ -307,6 +307,11 @@
             {{ $t('settings.enable_web_push_notifications') }}
           </BooleanSetting>
         </li>
+        <li>
+          <BooleanSetting path="collapseNotifications">
+            {{ $t('settings.collapse_notifications') }}
+          </BooleanSetting>
+        </li>
       </ul>
     </div>
 

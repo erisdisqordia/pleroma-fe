@@ -1,6 +1,17 @@
 @import '../../_variables.scss';
 
 // TODO Copypaste from Status, should unify it somehow
+.notification {
+  .non-mention.collapsed {
+    overflow: hidden;
+    max-height: 75px;
+    mask: linear-gradient(to top, white, transparent) bottom/100% 35px no-repeat,
+          linear-gradient(to top, white, white);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+}
+
 .Notification {
   &.-muted {
     padding: 0.25em 0.6em;

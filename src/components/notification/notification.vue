@@ -27,7 +27,7 @@
     <div
       v-else
       class="Notification non-mention"
-      :class="[userClass, { highlighted: userStyle }, '-type--' + notification.type]"
+      :class="[userClass, { highlighted: userStyle }, '-type--' + notification.type, { collapsed: isCollapsed}]"
       :style="[ userStyle ]"
     >
       <a

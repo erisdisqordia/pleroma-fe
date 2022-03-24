@@ -6,6 +6,7 @@
     .StatusContent {
       overflow: hidden;
       max-height: 60px;
+      min-height: 35px;
       mask: linear-gradient(to top, white, transparent) bottom/100% 35px no-repeat,
             linear-gradient(to top, white, white);
       -webkit-mask-composite: xor;

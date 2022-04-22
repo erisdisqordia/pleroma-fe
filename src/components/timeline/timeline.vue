@@ -16,6 +16,7 @@
       >
         {{ $t('timeline.up_to_date') }}
       </div>
+      <TimelineQuickSettings v-if="!embedded" />
     </div>
     <div :class="classes.body">
       <div
@@ -110,6 +111,7 @@
   max-width: 100%;
   flex-wrap: nowrap;
   align-items: center;
+  position: relative;
   .loadmore-button {
     flex-shrink: 0;
   }

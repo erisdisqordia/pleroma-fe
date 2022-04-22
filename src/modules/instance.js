@@ -26,6 +26,7 @@ const defaultState = {
   hidePostStats: false,
   hideSitename: false,
   hideUserStats: false,
+  muteBotStatuses: false,
   loginMethod: 'password',
   logo: '/static/logo.svg',
   logoMargin: '.2em',

@@ -158,6 +158,9 @@ const Status = {
     muteWordHits () {
       return muteWordHits(this.status, this.muteWords)
     },
+    botStatus () {
+      return this.status.user.bot
+    },
     muted () {
       if (this.statusoid.user.id === this.currentUser.id) return false
       const { status } = this
@@ -176,7 +179,9 @@ const Status = {
         // Thread is muted
         status.thread_muted ||
         // Wordfiltered
-        this.muteWordHits.length > 0
+        this.muteWordHits.length > 0 ||
+        // bot status
+        (this.muteBotStatuses && this.botStatus)
       )
       const excusesNotToMute = (
         (
@@ -247,6 +252,9 @@ const Status = {
     },
     hidePostStats () {
       return this.mergedConfig.hidePostStats
+    },
+    muteBotStatuses () {
+      return this.mergedConfig.muteBotStatuses
     },
     currentUser () {
       return this.$store.state.users.currentUser

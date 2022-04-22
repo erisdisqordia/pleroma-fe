@@ -27,6 +27,7 @@ export const defaultState = {
   hideInstanceWallpaper: false,
   // bad name: actually hides posts of muted USERS
   hideMutedPosts: undefined, // instance default
+  muteBotStatuses: undefined, // instance default
   collapseMessageWithSubject: undefined, // instance default
   padEmoji: true,
   hideAttachments: false,
@@ -51,7 +52,7 @@ export const defaultState = {
     likes: true,
     repeats: true,
     moves: true,
-    emojiReactions: false,
+    emojiReactions: true,
     followRequest: true,
     chatMention: true
   },

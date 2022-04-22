@@ -2,13 +2,15 @@ import Status from '../status/status.vue'
 import timelineFetcher from '../../services/timeline_fetcher/timeline_fetcher.service.js'
 import Conversation from '../conversation/conversation.vue'
 import TimelineMenu from '../timeline_menu/timeline_menu.vue'
+import TimelineQuickSettings from './timeline_quick_settings.vue'
 import { debounce, throttle, keyBy } from 'lodash'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import { faCircleNotch, faCog } from '@fortawesome/free-solid-svg-icons'
 import { mapState } from 'vuex'
 
 library.add(
-  faCircleNotch
+  faCircleNotch,
+  faCog
 )
 
 const Timeline = {
@@ -35,7 +37,8 @@ const Timeline = {
   components: {
     Status,
     Conversation,
-    TimelineMenu
+    TimelineMenu,
+    TimelineQuickSettings
   },
   computed: {
     loggedIn () {

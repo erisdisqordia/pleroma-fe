@@ -106,7 +106,7 @@ export default {
   align-self: stretch;
 
   > button {
-    font-size: 1.2em;
+    font-size: 1em;
     padding-left: 0.7em;
     padding-right: 0.2em;
     line-height: 100%;

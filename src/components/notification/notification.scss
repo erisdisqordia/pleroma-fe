@@ -3,7 +3,7 @@
 // TODO Copypaste from Status, should unify it somehow
 .notification {
   .non-mention.collapsed {
-    .StatusContent {
+    .StatusContent:not(:active) {
       overflow: hidden;
       max-height: 60px;
       min-height: 35px;

@@ -384,12 +384,12 @@
     "new_email": "New Email",
     "new_password": "New password",
     "notification_visibility": "Types of notifications to show",
-    "notification_visibility_follows": "Follows",
-    "notification_visibility_likes": "Favorites",
-    "notification_visibility_mentions": "Mentions",
-    "notification_visibility_repeats": "Boosts",
-    "notification_visibility_moves": "User Migrates",
-    "notification_visibility_emoji_reactions": "Reactions",
+    "notification_visibility_follows": "Show follows",
+    "notification_visibility_likes": "Show favorites",
+    "notification_visibility_mentions": "Show mentions",
+    "notification_visibility_repeats": "Show boosts",
+    "notification_visibility_moves": "Show migrations",
+    "notification_visibility_emoji_reactions": "Show reactions",
     "no_rich_text_description": "Strip rich text formatting from all posts",
     "no_blocks": "No blocks",
     "no_mutes": "No mutes",
@@ -476,7 +476,8 @@
     "enable_web_push_notifications": "Enable web push notifications",
     "more_settings": "More settings",
     "collapse_notifications": "Collapse non-mention notifications in notification column",
-    "style": {
+    "collapse_notifications_short": "Collapse non-mentions", 
+   "style": {
       "switcher": {
         "keep_color": "Keep colors",
         "keep_shadows": "Keep shadows",

@@ -63,6 +63,15 @@
           :class="{ 'menu-checkbox-checked': filters.moves }"
         />{{ $t('settings.notification_visibility_moves') }}
       </button>
+      <button
+        class="button-default dropdown-item"
+        @click="collapseNonMentionNotifs = !collapseNonMentionNotifs"
+      >
+        <span
+          class="menu-checkbox"
+          :class="{ 'menu-checkbox-checked': collapseNonMentionNotifs }"
+        />{{ $t('settings.collapse_notifications_short') }}
+      </button>
     </div>
     <div slot="trigger">
       <FAIcon icon="filter" />
@@ -74,6 +83,7 @@
 import Popover from '../popover/popover.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faFilter } from '@fortawesome/free-solid-svg-icons'
+import { mapGetters } from 'vuex'
 
 library.add(
   faFilter
@@ -82,8 +92,16 @@ library.add(
 export default {
   components: { Popover },
   computed: {
+    ...mapGetters(['mergedConfig']),
     filters () {
-      return this.$store.getters.mergedConfig.notificationVisibility
+      return this.mergedConfig.notificationVisibility
+    },
+    collapseNonMentionNotifs: {
+      get () { return this.mergedConfig.collapseNotifications },
+      set () {
+        const value = !this.collapseNonMentionNotifs
+        this.$store.dispatch('setOption', { name: 'collapseNotifications', value })
+      }
     }
   },
   methods: {

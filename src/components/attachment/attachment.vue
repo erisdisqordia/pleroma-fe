@@ -376,4 +376,29 @@
     }
   }
 }
+
+.notification {
+  .attachments .image-attachment {
+    .nsfw-warning {
+      font-size: unset;
+      top: 15%;
+      opacity: 0.8;
+    }
+    .nsfw-show-link {
+      display: none;
+    }
+  }
+}
+.popover {
+  .attachments .image-attachment {
+    .nsfw-warning {
+      font-size: unset;
+      top: 15%;
+      opacity: 0.8;
+    }
+    .nsfw-show-link {
+      display: none;
+    }
+  }
+}
 </style>

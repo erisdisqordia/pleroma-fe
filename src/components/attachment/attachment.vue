@@ -33,9 +33,32 @@
       <img
         :key="nsfwImage"
         class="nsfw"
-        :src="nsfwImage"
+        :src="attachment.url"
         :class="{'small': isSmall}"
       >
+      <div
+        class="nsfw-warning"
+      >
+        <FAIcon
+          class="eye-slash-icon"
+          icon="eye-slash"
+        />
+        <br>
+        <br>
+        <span
+          class="nsfw-warning-header"
+        >Content Warning: Sensitive content
+        </span>
+        <br>
+        <br>
+        <span>This image has been flagged as containing sensitive content.</span>
+        <br>
+        <br>
+        <span
+          class="nsfw-show-link"
+        >Show
+        </span>
+      </div>
       <FAIcon
         v-if="type === 'video'"
         class="play-icon"
@@ -150,6 +173,7 @@
 
   .nsfw-placeholder {
     cursor: pointer;
+    box-shadow: inset 30px 30px 30px black;
 
     &.loading {
       cursor: progress;
@@ -161,7 +185,6 @@
     margin-top: 0.5em;
     align-self: flex-start;
     line-height: 0;
-
     border-style: solid;
     border-width: 1px;
     border-radius: $fallback--attachmentRadius;
@@ -312,6 +335,40 @@
       object-fit: cover;
       width: 100%;
       height: 100%;
+      filter: blur(30px) brightness(50%);
+    }
+
+    .nsfw-warning {
+      position: absolute;
+      top: 28%;
+      left: 20px;
+      right: 0px;
+      color: white;
+      height: 20px;
+      line-height: 20px;
+      font-size: 16px;
+
+      .eye-slash-icon {
+        color: white;
+        width: 100%;
+        opacity: 0.5;
+        position: relative;
+        right: 11px;
+      }
+    }
+
+    .nsfw-warning-header {
+      font-weight: bold;
+    }
+
+    .nsfw-show-link {
+      position: absolute;
+      right: 80px;
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 20px;
+      padding: 8px 15px;
+      font-weight: bold;
+      font-size: 14px;
     }
 
     img {

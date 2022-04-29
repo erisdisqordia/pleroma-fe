@@ -401,4 +401,14 @@
     }
   }
 }
+@media (max-width: 800px) {
+  .attachments .image-attachment .nsfw-warning {
+    top: 15%;
+  }
+}
+@media (min-width: 800px) and (max-width: 870px) {
+  .attachments .image-attachment .nsfw-warning {
+    top: 10%;
+  }
+}
 </style>

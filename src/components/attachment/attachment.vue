@@ -175,6 +175,10 @@
     cursor: pointer;
     box-shadow: inset 30px 30px 30px black;
 
+    .play-icon {
+      opacity: 0.2;
+    }
+
     &.loading {
       cursor: progress;
     }

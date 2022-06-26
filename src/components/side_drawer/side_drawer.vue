@@ -56,6 +56,18 @@
           </router-link>
         </li>
         <li
+          v-if="currentUser"
+          @click="toggleDrawer"
+        >
+          <router-link :to="{ name: 'lists' }">
+            <FAIcon
+              fixed-width
+              class="fa-scale-110 fa-old-padding"
+              icon="list"
+            /> {{ $t("nav.lists") }}
+          </router-link>
+        </li>
+        <li
           v-if="currentUser && pleromaChatMessagesAvailable"
           @click="toggleDrawer"
         >

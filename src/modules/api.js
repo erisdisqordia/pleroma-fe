@@ -142,12 +142,13 @@ const api = {
     startFetchingTimeline (store, {
       timeline = 'friends',
       tag = false,
-      userId = false
+      userId = false,
+      listId = false
     }) {
       if (store.state.fetchers[timeline]) return
 
       const fetcher = store.state.backendInteractor.startFetchingTimeline({
-        timeline, store, userId, tag
+        timeline, store, userId, listId, tag
       })
       store.commit('addFetcher', { fetcherName: timeline, fetcher })
     },
@@ -184,6 +185,18 @@ const api = {
     removeFollowRequest (store, request) {
       let requests = store.state.followRequests.filter((it) => it !== request)
       store.commit('setFollowRequests', requests)
+    },
+
+    // Lists
+    startFetchingLists (store) {
+      if (store.state.fetchers['lists']) return
+      const fetcher = store.state.backendInteractor.startFetchingLists({ store })
+      store.commit('addFetcher', { fetcherName: 'lists', fetcher })
+    },
+    stopFetchingLists (store) {
+      const fetcher = store.state.fetchers.lists
+      if (!fetcher) return
+      store.commit('removeFetcher', { fetcherName: 'lists', fetcher })
     },
 
     // Pleroma websocket

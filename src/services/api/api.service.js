@@ -50,6 +50,9 @@ const MASTODON_STATUS_CONTEXT_URL = id => `/api/v1/statuses/${id}/context`
 const MASTODON_USER_URL = '/api/v1/accounts'
 const MASTODON_USER_RELATIONSHIPS_URL = '/api/v1/accounts/relationships'
 const MASTODON_USER_TIMELINE_URL = id => `/api/v1/accounts/${id}/statuses`
+const MASTODON_LIST_URL = id => `/api/v1/lists/${id}`
+const MASTODON_LIST_TIMELINE_URL = id => `/api/v1/timelines/list/${id}`
+const MASTODON_LIST_ACCOUNTS_URL = id => `/api/v1/lists/${id}/accounts`
 const MASTODON_TAG_TIMELINE_URL = tag => `/api/v1/timelines/tag/${tag}`
 const MASTODON_BOOKMARK_TIMELINE_URL = '/api/v1/bookmarks'
 const MASTODON_USER_BLOCKS_URL = '/api/v1/blocks/'
@@ -77,6 +80,7 @@ const MASTODON_UNMUTE_CONVERSATION = id => `/api/v1/statuses/${id}/unmute`
 const MASTODON_SEARCH_2 = `/api/v2/search`
 const MASTODON_USER_SEARCH_URL = '/api/v1/accounts/search'
 const MASTODON_DOMAIN_BLOCKS_URL = '/api/v1/domain_blocks'
+const MASTODON_LISTS_URL = '/api/v1/lists'
 const MASTODON_STREAMING = '/api/v1/streaming'
 const MASTODON_KNOWN_DOMAIN_LIST_URL = '/api/v1/instance/peers'
 const PLEROMA_EMOJI_REACTIONS_URL = id => `/api/v1/pleroma/statuses/${id}/reactions`
@@ -374,6 +378,81 @@ const fetchFollowRequests = ({ credentials }) => {
     .then((data) => data.map(parseUser))
 }
 
+const fetchLists = ({ credentials }) => {
+  const url = MASTODON_LISTS_URL
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
+}
+
+const createList = ({ title, credentials }) => {
+  const url = MASTODON_LISTS_URL
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({ title })
+  }).then((data) => data.json())
+}
+
+const getList = ({ id, credentials }) => {
+  const url = MASTODON_LIST_URL(id)
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
+}
+
+const updateList = ({ id, title, credentials }) => {
+  const url = MASTODON_LIST_URL(id)
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(url, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify({ title })
+  })
+}
+
+const getListAccounts = ({ id, credentials }) => {
+  const url = MASTODON_LIST_ACCOUNTS_URL(id)
+  return fetch(url, { headers: authHeaders(credentials) })
+    .then((data) => data.json())
+    .then((data) => data.map(({ id }) => id))
+}
+
+const addAccountsToList = ({ id, accountIds, credentials }) => {
+  const url = MASTODON_LIST_ACCOUNTS_URL(id)
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({ account_ids: accountIds })
+  })
+}
+
+const removeAccountsFromList = ({ id, accountIds, credentials }) => {
+  const url = MASTODON_LIST_ACCOUNTS_URL(id)
+  const headers = authHeaders(credentials)
+  headers['Content-Type'] = 'application/json'
+
+  return fetch(url, {
+    method: 'DELETE',
+    headers: headers,
+    body: JSON.stringify({ account_ids: accountIds })
+  })
+}
+
+const deleteList = ({ id, credentials }) => {
+  const url = MASTODON_LIST_URL(id)
+  return fetch(url, {
+    method: 'DELETE',
+    headers: authHeaders(credentials)
+  })
+}
+
 const fetchConversation = ({ id, credentials }) => {
   let urlContext = MASTODON_STATUS_CONTEXT_URL(id)
   return fetch(urlContext, { headers: authHeaders(credentials) })
@@ -495,6 +574,7 @@ const fetchTimeline = ({
   since = false,
   until = false,
   userId = false,
+  listId = false,
   tag = false,
   withMuted = false,
   replyVisibility = 'all'
@@ -507,6 +587,7 @@ const fetchTimeline = ({
     'publicAndExternal': MASTODON_PUBLIC_TIMELINE,
     user: MASTODON_USER_TIMELINE_URL,
     media: MASTODON_USER_TIMELINE_URL,
+    list: MASTODON_LIST_TIMELINE_URL,
     favorites: MASTODON_USER_FAVORITES_TIMELINE_URL,
     tag: MASTODON_TAG_TIMELINE_URL,
     bookmarks: MASTODON_BOOKMARK_TIMELINE_URL
@@ -518,6 +599,10 @@ const fetchTimeline = ({
 
   if (timeline === 'user' || timeline === 'media') {
     url = url(userId)
+  }
+
+  if (timeline === 'list') {
+    url = url(listId)
   }
 
   if (since) {
@@ -1322,6 +1407,14 @@ const apiService = {
   mfaSetupOTP,
   mfaConfirmOTP,
   fetchFollowRequests,
+  fetchLists,
+  createList,
+  getList,
+  updateList,
+  getListAccounts,
+  addAccountsToList,
+  removeAccountsFromList,
+  deleteList,
   approveUser,
   denyUser,
   suggestions,

@@ -8,6 +8,7 @@ import './lib/event_target_polyfill.js'
 import interfaceModule from './modules/interface.js'
 import instanceModule from './modules/instance.js'
 import statusesModule from './modules/statuses.js'
+import listsModule from './modules/lists.js'
 import usersModule from './modules/users.js'
 import apiModule from './modules/api.js'
 import configModule from './modules/config.js'
@@ -87,6 +88,7 @@ const persistedStateOptions = {
       interface: interfaceModule,
       instance: instanceModule,
       statuses: statusesModule,
+      lists: listsModule,
       users: usersModule,
       api: apiModule,
       config: configModule,

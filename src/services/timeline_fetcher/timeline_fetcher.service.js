@@ -3,12 +3,13 @@ import { camelCase } from 'lodash'
 import apiService from '../api/api.service.js'
 import { promiseInterval } from '../promise_interval/promise_interval.js'
 
-const update = ({ store, statuses, timeline, showImmediately, userId, pagination }) => {
+const update = ({ store, statuses, timeline, showImmediately, userId, listId, pagination }) => {
   const ccTimeline = camelCase(timeline)
 
   store.dispatch('addNewStatuses', {
     timeline: ccTimeline,
     userId,
+    listId,
     statuses,
     showImmediately,
     pagination
@@ -22,6 +23,7 @@ const fetchAndUpdate = ({
   older = false,
   showImmediately = false,
   userId = false,
+  listId = false,
   tag = false,
   until
 }) => {
@@ -39,6 +41,7 @@ const fetchAndUpdate = ({
   }
 
   args['userId'] = userId
+  args['listId'] = listId
   args['tag'] = tag
   args['withMuted'] = !hideMutedPosts
   if (loggedIn && ['friends', 'public', 'publicAndExternal'].includes(timeline)) {
@@ -57,7 +60,7 @@ const fetchAndUpdate = ({
       if (!older && statuses.length >= 20 && !timelineData.loading && numStatusesBeforeFetch > 0) {
         store.dispatch('queueFlush', { timeline: timeline, id: timelineData.maxId })
       }
-      update({ store, statuses, timeline, showImmediately, userId, pagination })
+      update({ store, statuses, timeline, showImmediately, userId, listId, pagination })
       return { statuses, pagination }
     })
   // .catch((error) => {
@@ -70,14 +73,15 @@ const fetchAndUpdate = ({
   // })
 }
 
-const startFetching = ({ timeline = 'friends', credentials, store, userId = false, tag = false }) => {
+const startFetching = ({ timeline = 'friends', credentials, store, userId = false, listId = false, tag = false }) => {
   const rootState = store.rootState || store.state
   const timelineData = rootState.statuses.timelines[camelCase(timeline)]
   const showImmediately = timelineData.visibleStatuses.length === 0
   timelineData.userId = userId
-  fetchAndUpdate({ timeline, credentials, store, showImmediately, userId, tag })
+  timelineData.listId = listId
+  fetchAndUpdate({ timeline, credentials, store, showImmediately, userId, listId, tag })
   const boundFetchAndUpdate = () =>
-    fetchAndUpdate({ timeline, credentials, store, userId, tag })
+    fetchAndUpdate({ timeline, credentials, store, userId, listId, tag })
   return promiseInterval(boundFetchAndUpdate, 10000)
 }
 const timelineFetcher = {

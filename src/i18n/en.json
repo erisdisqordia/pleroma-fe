@@ -132,7 +132,8 @@
     "who_to_follow": "Who to follow",
     "preferences": "Preferences",
     "timelines": "The Fediverse",
-    "chats": "Chats"
+    "chats": "Chats",
+    "lists": "Lists"
   },
   "notifications": {
     "broken_favorite": "Unknown status, searching for it…",
@@ -840,6 +841,15 @@
     "error_loading_chat": "Something went wrong when loading the chat.",
     "error_sending_message": "Something went wrong when sending the message.",
     "empty_chat_list_placeholder": "You don't have any chats yet. Start a new chat!"
+  },
+  "lists": {
+    "lists": "Lists",
+    "new": "New List",
+    "title": "List title",
+    "search": "Search users",
+    "create": "Create",
+    "save": "Save changes",
+    "delete": "Delete list"
   },
   "file_type": {
     "audio": "Audio",

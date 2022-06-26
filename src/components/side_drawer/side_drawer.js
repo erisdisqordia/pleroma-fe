@@ -15,7 +15,8 @@ import {
   faTachometerAlt,
   faCog,
   faTransgenderAlt,
-  faBook
+  faBook,
+  faList
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -30,7 +31,8 @@ library.add(
   faTachometerAlt,
   faCog,
   faTransgenderAlt,
-  faBook
+  faBook,
+  faList
 )
 
 const SideDrawer = {

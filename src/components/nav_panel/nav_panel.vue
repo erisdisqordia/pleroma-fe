@@ -28,6 +28,18 @@
         <li v-if="currentUser">
           <router-link
             class="menu-item"
+            :to="{ name: 'lists' }"
+          >
+            <FAIcon
+              fixed-width
+              class="fa-scale-110"
+              icon="list"
+            />{{ $t("nav.lists") }}
+          </router-link>
+        </li>
+        <li v-if="currentUser">
+          <router-link
+            class="menu-item"
             :to="{ name: 'interactions', params: { username: currentUser.screen_name } }"
           >
             <FAIcon

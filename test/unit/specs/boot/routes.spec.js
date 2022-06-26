@@ -42,4 +42,28 @@ describe('routes', () => {
 
     expect(matchedComponents[0].components.hasOwnProperty('UserCard')).to.eql(true)
   })
+
+  it('list view', async () => {
+    await router.push('/lists')
+
+    const matchedComponents = router.currentRoute.value.matched
+
+    expect(matchedComponents[0].components.default.components.hasOwnProperty('ListCard')).to.eql(true)
+  })
+
+  it('list timeline', async () => {
+    await router.push('/lists/1')
+
+    const matchedComponents = router.currentRoute.value.matched
+
+    expect(matchedComponents[0].components.default.components.hasOwnProperty('Timeline')).to.eql(true)
+  })
+
+  it('list edit', async () => {
+    await router.push('/lists/1/edit')
+
+    const matchedComponents = router.currentRoute.value.matched
+
+    expect(matchedComponents[0].components.default.components.hasOwnProperty('BasicUserCard')).to.eql(true)
+  })
 })

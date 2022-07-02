@@ -3,7 +3,7 @@
   <div
     v-if="!hideStatus"
     class="Status"
-    :class="[{ '-focused': isFocused }, { '-conversation': inlineExpanded }, { 'has-attachment': hasAttachment }]"
+    :class="[{ '-focused': isFocused }, { '-conversation': inlineExpanded }]"
   >
     <div
       v-if="error"

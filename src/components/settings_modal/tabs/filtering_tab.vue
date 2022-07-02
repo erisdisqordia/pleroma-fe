@@ -65,6 +65,11 @@
         </BooleanSetting>
       </div>
       <div>
+        <BooleanSetting path="muteNonMedia">
+          {{ $t('settings.mute_non_media') }}
+        </BooleanSetting>
+      </div>
+      <div>
         <BooleanSetting path="hidePostStats">
           {{ $t('settings.hide_post_stats') }}
         </BooleanSetting>

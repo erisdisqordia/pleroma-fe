@@ -343,6 +343,7 @@
     "hide_media_previews": "Hide media previews",
     "hide_muted_posts": "Hide posts of muted users",
     "mute_bot_posts": "Mute bot posts",
+    "mute_non_media": "Hide non-media posts",
     "hide_all_muted_posts": "Hide muted posts",
     "max_thumbnails": "Maximum amount of thumbnails per post",
     "hide_isp": "Hide instance-specific panel",

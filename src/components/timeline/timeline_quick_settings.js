@@ -60,6 +60,13 @@ const TimelineQuickSettings = {
         const value = !this.muteBotStatuses
         this.$store.dispatch('setOption', { name: 'muteBotStatuses', value })
       }
+    },
+    muteNonMedia: {
+      get () { return this.mergedConfig.muteNonMedia },
+      set () {
+        const value = !this.muteNonMedia
+        this.$store.dispatch('setOption', { name: 'muteNonMedia', value })
+      }
     }
   }
 }

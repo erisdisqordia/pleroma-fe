@@ -50,6 +50,15 @@
         </button>
         <button
           class="button-default dropdown-item"
+          @click="muteNonMedia = !muteNonMedia"
+        >
+          <span
+            class="menu-checkbox"
+            :class="{ 'menu-checkbox-checked': muteNonMedia }"
+          />{{ $t('settings.mute_non_media') }}
+        </button>
+        <button
+          class="button-default dropdown-item"
           @click="hideMedia = !hideMedia"
         >
           <span

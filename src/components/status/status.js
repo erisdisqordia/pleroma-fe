@@ -203,10 +203,7 @@ const Status = {
       return this.mergedConfig.hideFilteredStatuses
     },
     hideStatus () {
-      return (this.muted && this.hideFilteredStatuses) || this.virtualHidden
-    },
-    hasAttachment () {
-      return this.status.attachments.length !== 0
+      return (this.muted && this.hideFilteredStatuses) || this.virtualHidden || (this.muteNonMedia && this.status.attachments.length == 0)
     },
     isFocused () {
       // retweet or root of an expanded conversation
@@ -258,6 +255,9 @@ const Status = {
     },
     muteBotStatuses () {
       return this.mergedConfig.muteBotStatuses
+    },
+    muteNonMedia () {
+      return this.mergedConfig.muteNonMedia
     },
     currentUser () {
       return this.$store.state.users.currentUser

@@ -205,6 +205,9 @@ const Status = {
     hideStatus () {
       return (this.muted && this.hideFilteredStatuses) || this.virtualHidden
     },
+    hasAttachment () {
+      return this.status.attachments.length !== 0
+    },
     isFocused () {
       // retweet or root of an expanded conversation
       if (this.focused) {
